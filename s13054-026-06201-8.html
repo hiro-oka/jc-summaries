@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症性ショックの血行動態蘇生 25年 — 概念的展望</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症性ショックの血行動態蘇生 25年 — 概念的展望</h1>
+  <dl class="cite"><dt>出典</dt><dd>Hernandez G, Hunsicker O, De Backer D, Angus DC, Bakker J, et al. Twenty-five years of septic shock hemodynamic resuscitation trials: a conceptual perspective. Crit Care. 2026;30. https://doi.org/10.1186/s13054-026-06201-8</dd><dt>掲載誌</dt><dd>Critical Care（2026-07-21）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06201-8" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06201-8</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Twenty-five years of septic shock hemodynamic resuscitation trials: a conceptual perspective</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>聖路加ICUでの実装</p>
+<ul><li><strong>回診の型を「single target」から「observe → test → intervene → reassess」の短サイクルへ</strong>。乳酸1点・MAP1点で判断せず、CRT＋FRテスト＋基本エコーを逐次に重ねる。ANDROMEDA-SHOCK-2 の DAP低値→ノルアド、CRT持続→MAP/ドブタミンテストの流れは、既存の <span class="wl">CENSER 敗血症性ショックへの早期ノルアドレナリン投与</span>・<span class="wl">敗血症性ショックにおける早期ノルアドレナリン開始</span> と整合的で、当科の早期昇圧の運用に表現型の言語を与える。</li><li><strong>輸液は「反応性（PLR/EEO/ミニ輸液）」だけでなく「耐容性（VExUS・低アルブミン・透過性）」で二段階判断</strong>。<span class="wl">受動的下肢挙上（PLR）テストと輸液反応性の予測</span>・<span class="wl">腹腔内圧上昇を伴う人工呼吸患者における輸液反応性の評価 — 2施設前向き観察研究</span>・<span class="wl">静脈うっ血の生理学とVExUSスコア（PulmCCM 2021）</span> を「輸液前チェック」に束ねる。FENICE が示した「動的指標22%」の gap を、当科ではプロトコル化で埋められる。</li><li><strong>MAP目標は個別化</strong>。慢性高血圧例では高めのMAPでRRTが減る可能性（SEPSISPAM 亜群）。一方、灌流が保たれる例では <span class="wl">ショックにおける個別化血圧目標</span>・<span class="wl">ショック蘇生におけるpermissive hypotension（許容的低血圧）</span> に沿って低めを許容。<strong>昇圧薬テスト（短時間・可逆的にMAPを上げ灌流改善を見る）</strong>を運用に載せる価値がある。</li><li><strong>CRTを日々の蘇生シグナルに</strong>：無コスト・普遍・速い動態。標準化手技（8秒圧迫→10秒）を病棟で統一すれば評価者間変動を抑えられる。「難治性」判断の前に <span class="wl">📄 論文本文PDF</span> を挟み、持続CRT異常＋持続高乳酸を SCCM/ESICM の refractory shock の柱として扱う。</li><li><strong>バイタル自動収集・予測プロジェクトとの接続</strong>：この論文の核心は「短い判断サイクルで可逆テストを回す」こと。CRT・DAP・脈圧・乳酸トレンドの自動収集は、表現型を早期に立ち上げる基盤になる（Hotel ICU / RRS 連携の論拠に使える）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：EGDT（2001）以降の25年間、敗血症性ショック蘇生は ScvO₂・乳酸・MAP・CRT・制限輸液といった単一の生理指標を全員に固定適用するランドマークRCTを積み重ねてきた。昇圧薬・輸液・強心薬という3本柱そのものは四半世紀変わっていない。</li><li><strong>Unknown（分かっていなかったこと）</strong>：なぜ「one-size-fits-all／single target」戦略が患者中心アウトカムを再現性をもって改善できなかったのか。EGDT〜ANDROMEDA-SHOCK-2 の6試験を、バラバラの結果ではなく一本の筋道として何がどう変わったのかは整理されていなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：血行動態研究の第一線23名が、蘇生の重心が「マクロ循環（酸素供給・血圧）→組織灌流（末梢灌流・微小循環）」「固定目標→個別化・表現型駆動」へ移ったと概念整理した。進歩を牽引したのは新薬・新デバイスではなく既存の簡便ツール（CRT・エコー・輸液反応性テスト）を生理学的に使いこなす理解であり、CRTのような即応シグナルを短い判断サイクルの中で可逆的テストとして当てる個別化蘇生を次の道筋として提示した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで EGDT（2001）から ANDROMEDA-SHOCK-2（2025）まで、敗血症性ショック蘇生の25年間のRCTは一貫して同じ教訓を示した。<mark class="hl">固定した単一の生理指標を全員に当てはめる「one-size-fits-all」戦略は、患者中心アウトカムを再現性をもって改善できなかった。</mark>進むべき方向は、単一目標ではなく、CRT（毛細血管再充満時間）のような即応性の高い灌流シグナルを手がかりに、短い判断サイクルの中で「可逆的なテスト」として介入を当てていく生理学ガイド・表現型駆動の個別化蘇生である。</p>
+</div>
+<p>Hernandez・De Backer・Teboul・Monnet・Pinsky・Bakker・Angus・Ostermann ら、血行動態研究の第一線23名による概念的展望（Critical Care 誌、2026、査読済み早期版）。原著論文（RCT）ではなく、6つのランドマーク試験（EGDT / LACTATE / SEPSISPAM / ANDROMEDA-SHOCK / CLASSIC / ANDROMEDA-SHOCK-2）を軸に、この四半世紀で「蘇生の考え方」がどう変わったかを整理している。</p>
+<ul><li>蘇生ターゲットの重心が、<strong>マクロ循環（酸素供給・血圧）から組織灌流（末梢灌流・微小循環）へ</strong>移った。</li><li>古典的シグナルが<strong>再評価</strong>された：CVP は「目標」から「安全上限」へ、MAP は「固定目標」から「個別化パラメータ」へ、乏尿は「低灌流の直接指標」から「多因子（静脈うっ血を含む）」へ。</li><li>輸液は<strong>「反応性があるか」だけでなく「耐えられるか（fluid tolerance）」</strong>で判断する時代に。過剰輸液の害（静脈うっ血・浮腫・臓器障害）への警戒が主流化した。</li><li>進歩を牽引したのは<strong>新薬・新デバイスではなく、既にある簡便なツール（CRT・エコー・輸液反応性テスト）を生理学的に使いこなす理解の深化</strong>だった。昇圧薬・輸液・強心薬という3本柱は25年間変わっていない。</li></ul>
+<p>聖路加ICUにとっては、CENSER・VANISH・PLR・アルブミン蘇生・permissive hypotension・VExUS など既存の蓄積ノートを1本の物語に束ねる「地図」として使える。</p>
+<h2>📖 詳細</h2>
+<h3>まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 敗血症性ショックは、感染に対する体の反応が全身の血管をゆるめ（血管拡張）、血圧と組織への血流が保てなくなる状態。臓器に酸素が届かず、放置すれば多臓器不全に至る。治療の柱は昔から3つだけ——輸液（血管内を満たす）、昇圧薬（ノルアドレナリン等で血管を締め血圧を上げる）、強心薬（心臓の収縮を助ける）。 問題は「どこまで良くなったら十分か」を何で測るか。この25年、その指標が次々と提案されてきた。ScvO₂（中心静脈酸素飽和度＝全身の酸素の需給バランス）、乳酸（酸素不足で溜まる代謝産物で重症度の目印）、MAP（平均動脈血圧＝灌流を押し出す圧）、そしてCRT（毛細血管再充満時間＝爪や皮膚を押して色が戻るまでの秒数。末梢の微小循環を無コストで映す指標で、3秒以内が正常の目安）。 近年の考え方の中心は2つ。1つは輸液を「反応するか（増やせば血圧・血流が上がるか）」だけでなく「耐えられるか（fluid tolerance＝入れても浮腫やうっ血で害にならないか）」で判断すること。もう1つは表現型（phenotype＝血管がゆるいのか、水が足りないのか、心臓が弱いのか、という病態のタイプ分け）で患者を分け、全員一律ではなく個別に介入を当てること。本論文はこの流れを一望する地図である。</p>
+</div>
+<h3>1. 位置づけ・デザイン</h3>
+<ul><li><strong>論文タイプ</strong>：概念的展望（conceptual perspective / narrative review）。系統的レビューでもメタ解析でもない。効果量の新規プールはなく、既報RCTを解釈の枠組みで再配置している。</li><li><strong>対象</strong>：25年間の敗血症性ショック血行動態蘇生RCTのうち、著者が「概念の踏み石」と位置づける<strong>6試験</strong>（本文の中心）。図2はうち灌流・酸素指標に関わる4試験（EGDT・LACTATE・ANDROMEDA-SHOCK・ANDROMEDA-SHOCK-2）に絞る。</li><li><strong>資金</strong>：FONDECYT Grant No.1250201（チリ）。データ生成なし。</li><li><strong>利益相反</strong>：Angus（Abionyx, AM Pharma, Bayer, Chugai, Grifols ほかコンサルティング料）、Sanfilippo（AOP orphan）、De Backer ほか（記載あり）。<strong>メーカー関与のある著者が含まれる点は、推奨のトーンを読む際に留意</strong>。</li></ul>
+<p>このノートの数値は原著（早期版）の記載どおり。早期版のため「最終版で編集され得る」と冒頭に明記されている。</p>
+<h3>2. ランドマーク試験の変遷（本論の中心）</h3>
+<h4>2-1. ScvO₂ の栄枯盛衰 — EGDT（Rivers, 2001）</h4>
+<ul><li><strong>仮説と方法</strong>：単施設ER。低い ScvO₂（中心静脈酸素飽和度）を DO₂（酸素供給）操作で是正するプロトコル群 vs 通常ケア。長時間の敗血症性ショック・高度の循環血液量減少を伴う患者が主。</li><li><strong>結果</strong>：通常ケアに対し<strong>有意な生存改善</strong>。灌流関連変数を明示的にターゲットにした最初の成功試験として、Surviving Sepsis Campaign（SSC）ガイドラインに一部が取り込まれた。</li><li><strong>その後の失墜</strong>（複数要因）：</li></ul>
+<ol><li>後続の ED/ICU 研究で、EGDTが報告した<strong>極端に低いScvO₂値が再現されなかった</strong>。</li><li>ScvO₂ は<strong>非二分性</strong>の変数。<mark class="hl">低値だけでなく supranormal（超正常）値も死亡増加と関連する</mark>ため、単純な「上げれば良い」目標にできない。</li><li>アルゴリズムが<strong>疑わしい生理原則</strong>に依拠：異常に高いCVP目標、過度にリベラルな輸血閾値・輸液速度。</li><li><strong>ProCESS・ARISE・ProMISe</strong> の3つの多施設RCTがいずれも中立（生存差なし）で、外的妥当性を突き崩した。</li></ol>
+<ul><li><strong>現在地</strong>：SSCはScvO₂を蘇生目標から外した。ただしDO₂/VO₂関係を解釈する多モーダル灌流モニタリングの一員としての価値は否定されていない。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>EGDTの本質的教訓 <mark class="hl">EGDTの失敗は「灌流を狙うこと」の否定ではなく、「単一指標を全員に固定適用する枠組み」の限界を示した。</mark>この論文全体の通奏低音がここにある。</p>
+</div>
+<h4>2-2. 乳酸のパラドクス — LACTATE trial（2010）</h4>
+<ul><li><strong>背景</strong>：乳酸は組織低酸素のマーカーとして敗血症性ショック診断・リスク層別化の中心。しかし<strong>単独の治療ターゲットとしては信頼できない</strong>——「酸素負債の直接指標」と誤読されてきたため。</li><li><strong>正しい理解＝二相性の乳酸動態</strong>：</li><li><strong>早期（概ね最初の6〜12時間）</strong>：乳酸は主に<strong>フロー依存性</strong>で、DO₂・灌流圧・微小循環フローを回復する介入に反応する。この窓では初期蘇生の適否の情報になる。</li><li><strong>それ以降</strong>：決定因子が<strong>不均一化</strong>する（持続産生、クリアランス低下、アドレナリン駆動の好気的解糖、炎症性代謝リプログラミング、ミトコンドリア機能障害）。末梢灌流など他の低灌流指標が正常化した後の持続高乳酸を「global dysoxia の持続」と決めつけてはならない。</li><li><strong>試験</strong>：8時間の介入期間中、<strong>2時間ごとに乳酸を≥20%下げる</strong>ことを目標。一部の副次アウトカム（院内死亡低下、早期SOFA改善）は良好だった。</li><li><strong>しかし</strong>：介入群は<strong>より多くの輸液と血管拡張薬</strong>を受けたが乳酸動態は実質不変で、<strong>規定の乳酸低下目標は両群で同等に達成</strong>された。プロトコルが乳酸を「治療した」という前提は崩れた。</li><li><strong>含意</strong>：早期蘇生窓を過ぎると、乳酸は時間依存かつ機序的に不均一なシグナルであり、さらなる血行動態エスカレーションでは確実には動かせない。追加のエスカレーションは<strong>過剰蘇生のオッズを上げる</strong>。持続高乳酸は難治性敗血症性ショックの定義基準の1つとして最近提案されている。</li></ul>
+<h4>2-3. CRT（毛細血管再充満時間）— 「back to basics」以上のもの</h4>
+<ul><li><strong>生理</strong>：皮膚灌流はショックで容易に評価できる微小循環領域。冷たく湿った皮膚から、温かい血管拡張状態＋CRT正常化への移行は、虚血/再灌流過程を粗く反映する。CRTの背後には<strong>皮膚血流・アドレナリン誘発の局所血管収縮・微小血管反応性</strong>があり、機序は完全には解明されていない。</li><li><strong>再評価の2本柱</strong>（2010年代初頭）：</li></ul>
+<ol><li>Bakker らのパイロット研究など——<strong>末梢灌流の速やかな正常化が「輸液を安全に止めるサイン」</strong>になり得る。</li><li>Hernandez らの観察研究——<strong>CRTは急性血行動態介入に速い動態で反応</strong>する（生存者で顕著）。</li></ol>
+<ul><li><strong>ANDROMEDA-SHOCK（2019）</strong>：早期敗血症性ショックで、8時間、<strong>CRTターゲット vs 乳酸ターゲット</strong>蘇生を比較。</li><li>28日死亡差は<strong>非有意（p=0.06）</strong>だが、<strong>臓器障害では有意な改善</strong>。</li><li><strong>利点1</strong>：inter-rater variability を減らす標準化手技でCRTを測定。</li><li><strong>利点2</strong>：輸液ボーラス前の<strong>輸液反応性（FR）の系統的評価</strong>を導入し、<mark class="hl">25%の患者で潜在的に有害な輸液を回避</mark>した。</li><li><strong>利点3</strong>：昇圧薬・強心拡張薬を<strong>可逆的テスト</strong>として当て、CRT目標を達成した患者でのみ継続。</li><li>事後<strong>ベイズ解析はCRTターゲット戦略の優位を支持</strong>した。</li><li><strong>限界</strong>：段階的だが「共通アルゴリズム＝ある種のone-size-fits-all」で、早期の血行動態表現型分類や基本エコーの組み込みができず、個別化を阻んだ。CRT非反応は内皮機能障害・微小循環障害・静脈うっ血を示唆する可能性がある（＝macro-to-micro coupling の破綻）。<strong>正常CRTでも遷延性臓器障害・死亡リスクが残る患者がいる</strong>理由は未解明。</li></ul>
+<h4>2-4. 最適MAP目標のジレンマ — SEPSISPAM（2014）</h4>
+<ul><li><strong>古典的原則</strong>：MAPは全身灌流圧の最良推定で、60 mmHg が自動調節の下限閾値とされてきた。EGDTは限られた根拠で MAP≥65 mmHg を組み込み、これが事実上の標準になった。</li><li><strong>なぜ単一閾値では不十分か（機序）</strong>：</li><li>通常、臓器血流は局所代謝需要で決まり、自動調節が広い灌流圧域で一定血流を保つ。ショックでは<strong>有効入力圧の不足そのものが自動調節破綻の中心機序</strong>（単に全身血管収縮が優位だから、ではない）。</li><li>MAPは心拍出量と多数の血管特性で形づくられる<strong>複合変数</strong>。血管収縮でMAPを上げても、微小血管フローはむしろ悪化しうる。</li><li>鍵となる決定因子が <strong>Pcrit（臨界閉塞圧）</strong>——これ以下で小血管が虚脱しフローが止まる、機能的・血管運動依存性の圧境界。よって組織灌流は従来の <strong>MAP − CVP ではなく、MAP − Pcrit（組織灌流圧）</strong> としてより正確に表現される。<strong>同じMAP値でも患者・臓器・蘇生の時相で灌流状態が異なる</strong>のはこのため。</li><li><strong>試験</strong>：高目標（80–85 mmHg）vs 標準（65–70 mmHg）。実際には標準群のMAPが75 mmHgに維持された。<strong>死亡・腎機能に差なし</strong>、ただし全体で<strong>新規心房細動が高目標群で有意に増加</strong>。一方、<strong>慢性高血圧患者では高目標群でRRT（腎代替療法）が減少</strong>し、この群ではAFの害も出なかった。</li><li><strong>含意</strong>：同じMAP読み値が全く異なる血行動態状態を表す。測れない組織灌流圧の代わりに、<strong>個別化「昇圧薬テスト」（短時間・可逆的にMAPを上げる）</strong>で真に高MAPの恩恵を受ける患者を見分ける。灌流が正常な患者では、より低いMAP目標も安全に許容できる可能性。<mark class="hl">MAPは「目標」ではなく「灌流反応性を評価する道具」へ。</mark>CVP・腹腔内圧・頭蓋内圧などの後方圧（backward pressure）を実効灌流圧の決定因子として常に考慮すべき。</li></ul>
+<h4>2-5. 輸液はどこまで絞れるか — CLASSIC（2022）</h4>
+<ul><li><strong>背景の変化</strong>：この25年で輸液療法ほど劇的に変わった領域はない。2000年代は心拍出量最適化を狙う大量輸液が主流で、EGDTも6時間で<strong>約5Lの輸液・CVP 13 mmHg</strong>に達した。</li><li><strong>絞る方向への転換を駆動した知見</strong>：</li></ul>
+<ol><li>Malbrain らの<strong>二次性腹部コンパートメント症候群</strong>（2000年代）と<strong>fluid overload/accumulation</strong>（2010年代）——大量・不均衡な輸液が臓器障害・死亡増と関連。</li><li><strong>ROSE</strong>（Resuscitation, Optimization, Stabilization, Evacuation）の4相概念——時相に応じた合理的な輸液・昇圧判断の枠組み。近年は <strong>fluid stewardship</strong>（輸液・昇圧薬の合理使用と時宜を得たde-escalation）へ。</li><li><strong>FENICE study</strong>——グローバルなインセプションコホートで、FR評価がルーチンでなく、動的指標の使用はわずか<strong>22%</strong>、安全上限もほぼ考慮されず、失敗した輸液ボーラスの情報も次の判断に活かされていない実態を暴いた。</li></ol>
+<ul><li><strong>試験</strong>：初期蘇生後にさらに輸液を制限する戦略をテスト。ただし——</li><li><strong>ランダム化は相当量の輸液投与後</strong>に行われ、実質「最適化/de-escalation 相での制限」を検証した（早期蘇生の検証ではない）。</li><li>当時すでに実臨床が制限的になっており、通常ケアとの差をつけるため、制限群に<strong>極端な輸液許可基準</strong>（MAP&lt;50 mmHg・乳酸≥4 mmol/L・mottling score&gt;2）を設定せざるを得なかった。</li><li>FR・fluid tolerance・静脈うっ血は系統的に評価されなかった。</li><li><strong>解釈</strong>：CLASSICは「すでに制限的な通常ケアの上に、追加の制限方針を重ねる安全性・臨床影響」を試したものであり、多様な生理的文脈での最適輸液管理を定義したものではない。</li><li><strong>さらに先へ</strong>：FR の有無に関わらず、輸液前に<strong>害のリスク（fluid tolerance）</strong>を評価すべき。静脈うっ血・血管透過性亢進・低アルブミン血症などが耐容性を損なう。<mark class="hl">輸液耐容性・静脈うっ血は累積輸液バランスとイコールではない</mark>——早期から少量でもうっ血が起きる患者もいれば、大量でもうっ血しない患者もいる。</li></ul>
+<h4>2-6. 生理学駆動の反復アルゴリズム — ANDROMEDA-SHOCK-2（CRT-PHR, 2025）</h4>
+<ul><li><strong>設計思想</strong>：POCUS/重症エコー（CCE）、動的灌流指標、輸液前のFR系統評価、静脈うっ血・fluid tolerance の評価が普及し、より生理学志向のアルゴリズムが可能になった。これらを統合した <strong>CRT-targeted, personalized hemodynamic resuscitation（CRT-PHR）</strong> を大規模に検証。</li><li><strong>アルゴリズム</strong>：CRT・脈圧・拡張期動脈圧（DAP）・FRテスト・早期基本エコーを<strong>逐次的・多層的</strong>に統合し、<strong>表現型</strong>（主に hypovolemic / vasoplegic / cardiac dysfunction）を同定。病態の推移に応じて介入を当て、<strong>CRTが正常化したらプロトコル介入を止める</strong>。</li><li><strong>低DAP → ノルアドレナリン漸増</strong>（vasoplegic表現型を明示的に狙う）。</li><li><strong>前段後もCRT持続異常 → MAPテスト and/or ドブタミンテスト</strong>を適用（意味ある一部で有効）。</li><li><strong>主要結果</strong>：階層的複合アウトカムで<strong>stratified win ratio 1.16（95%CI 1.02–1.33, p=0.04）</strong>と統計学的に有意。</li><li>win ratio は、より重要なイベント（死亡）を優先する規定の階層で群間の患者対を比較する手法。<mark class="hl">本試験の恩恵は主に「生命維持サポート期間の短縮」で駆動され、28日死亡は両群同等（約26.6%、予想より低い）</mark>。</li><li><strong>CRT正常化は介入群86% vs 通常ケア62%</strong>。介入群で prolonged CRT で入った患者の約半数が、逐次FR評価→必要時ボーラスでCRT正常化。tier-1介入失敗後の早期CCEが相当割合で心機能障害を同定し、その1/3が特異的治療でCRT正常化。</li><li>高APACHE II層で「win」がやや多かったが、規定サブグループ解析で<strong>効果修飾の形式的証拠はなし</strong>。</li><li><strong>重要な留保</strong>：<mark class="hl">多成分バンドルのため、どの要素（CRTターゲット／FR評価／DAPガイドのノルアド／MAP・ドブタミンテスト／停止ルール）が効果を生んだかは分離できない。</mark>著者は本試験を「終着点ではなく、このプロセスの始まり」と位置づけている。</li></ul>
+<h3>3. 25年の総括 — 図で俯瞰する</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1 — 蘇生概念の進化：単一目標から個別化・生理学ガイドへ 横軸に年（2001→2025）、縦に4段の帯で対応づけた一覧表。© The Author(s) 2026, CC BY-NC-ND 4.0。</p>
+<ul><li><strong>最上段（Key trials）</strong>：赤=EGDT(2001, ScvO₂)、黄=LACTATE(2010, 乳酸)、桃=SEPSISPAM(2014, MAP)、紫=ANDROMEDA-SHOCK(2019, CRT)、青=CLASSIC(2022, 制限輸液)、橙=ANDROMEDA-SHOCK 2(2025, CRT個別化)。</li><li><strong>2段目（Physiological paradigm）</strong>：肺アイコン＝「全身酸素供給の最適化」→ 減衰曲線＝「代謝蘇生」→ 圧計＝「高い灌流圧」→ 虫眼鏡＝「再灌流のサインとしてのCRT」→ 水滴＝「輸液過剰の回避」→ 分岐ツリー＝「逐次・多層評価で病態を狙う」。</li><li><strong>3段目（Conceptual evolution）</strong>：パズル（生理情報で蘇生を導く）→ 標的（予後マーカーから治療ターゲットへ）→ 傾いた標的（MAPは文脈依存）→ ネットワーク（CRTで輸液・昇圧・強心を調整）→ 人型（個別化）。</li><li><strong>最下段（Enabling tools）</strong>：ScvO₂モニタ → 乳酸 → CRT → 輸液反応性（前負荷-SV曲線）→ 重症エコー。<strong>左から右へ「侵襲的・全身指標」から「簡便・末梢/微小循環・個別化」へ流れる</strong>のが一目で分かる。</li></ul>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2 — 蘇生ターゲット選択の概念的進化（螺旋図） 中心から外へ渦を描く図。© The Author(s) 2026, CC BY-NC-ND。</p>
+<ul><li><strong>中核＝EGDT(2001)</strong>：単一基準ではなく既に多パラメータ的だった点を強調。DO₂最適化（CO・Hct・SaO₂）＋VO₂制御＋マクロ境界（CVP・MAP・UO）を統合し、<strong>Target: ScvO₂</strong> に収束。天秤・血圧計・輸液アイコンが囲む。</li><li>上へ <strong>LACTATE(2010) → Target: 乳酸</strong>、外周へ <strong>ANDROMEDA-SHOCK(2019/2025) → Target: CRT</strong>（毛細血管を押す指アイコン）。「Systematic assessment of FR」（前負荷-SV曲線）が輪の下部に配置。</li><li><strong>周囲の補助概念</strong>：左上「CVPは安全上限へ」、左下「エコーで心機能障害を同定」、右下「急性血行動態テスト」（微小血管の矢印）、右上「個別化蘇生」（複数人型）。</li><li>読み方：<strong>中心の全身酸素指標から、外周の末梢灌流＋表現型分類＋個別化テストへと蘇生の重心が外向きに移動</strong>したことを渦で表現している。</li></ul>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3 — 進歩を駆動した4つの領域（Main drivers of progress） 中央円「Main drivers of progress」から4方向に伸びる図。© The Author(s) 2026, CC BY-NC-ND。</p>
+<ul><li><strong>左上 Resuscitation protocols</strong>：必須のSwan-Ganz → エコーガイド評価へ／固定 → 適応的プロトコルへ／生理的異質性に対応する血行動態表現型。</li><li><strong>右上 Tissue perfusion as a resuscitation endpoint</strong>：マクロ → 微小循環ターゲットへ／ScvO₂の再評価／多モーダル灌流モニタリング。</li><li><strong>左下 Reappraisal of classic hemodynamic signals</strong>：CVPは目標 → 安全上限／MAPは固定 → 個別化／乏尿は多因子（静脈うっ血含む）。</li><li><strong>右下 Fluid management</strong>：輸液反応性評価／静脈うっ血・fluid accumulation・fluid tolerance への意識／ROSE の相ベース論理。</li><li><mark class="hl">核心メッセージ：「進歩は新薬・新デバイスより、既にある道具をどう使うかの生理学的理解の深化で駆動された」。</mark></li></ul>
+</div>
+<h3>4. 各戦略の生理学的根拠・欠点・方法論的貢献（Table 1 の日本語化）</h3>
+<div class="tw"><table>
+<thead><tr><th>戦略（試験, 年）</th><th>生理学的根拠</th><th>主な欠点</th></tr></thead>
+<tbody>
+<tr><td>ScvO₂ガイド（EGDT, 2001）</td><td>ScvO₂はDO₂/VO₂バランスを反映。低値＝DO₂不足→輸液・輸血・強心薬で是正可。ER患者への早期プロトコル化</td><td>非二分性（超正常値も死亡増）／低ScvO₂がICUで再現されず／有害介入を助長（高CVP目標・リベラル輸血・過大輸液）／ProCESS・ARISE・ProMISe で再現失敗／表現型の異質性を無視</td></tr>
+<tr><td>乳酸ターゲット（LACTATE, 2010）</td><td>高乳酸＝組織低酸素の代理。強い予後シグナル。2時間毎≥20%低下は測定可能で動的な目標</td><td>早期以降は決定因子が混在（好気的解糖・クリアランス低下・ストレス代謝）／動態が遅く機序不均一で実時間フィードバックに不適／規定目標が両群同等に達成／介入群は輸液・拡張薬過多で過剰蘇生リスク</td></tr>
+<tr><td>MAPターゲット（SEPSISPAM, 2014）</td><td>MAPは臓器灌流圧の主決定因子。慢性高血圧は自動調節曲線を右方移動→高目標が保護し得る。普遍的65–70で十分かを検証</td><td>MAPはマクロ代理で同値でも微小循環は別／高目標は昇圧薬曝露増（高目標群でAF増）／固定数値は個々の自動調節閾値を無視／一次アウトカム中立</td></tr>
+<tr><td>CRTターゲット（ANDROMEDA-SHOCK, 2019）</td><td>CRTは皮膚微小循環・アドレナリン緊張・微小血管反応性を反映。急速動態で実時間フィードバック。標準化手技で評価者間変動減。正常化＝過剰輸液の停止シグナル</td><td>CRTの生理は複雑で未解明／非反応は内皮障害・微小循環障害・静脈うっ血を反映し得る／共通アルゴリズムが個別表現型・エコー統合を制限／28日死亡は非有意（p=0.06）</td></tr>
+<tr><td>制限輸液（CLASSIC, 2022）</td><td>正の輸液バランス・fluid accumulation は静脈うっ血・浮腫・臓器障害と関連。初期蘇生後の制限で害を抑え得る</td><td>相当量投与後にランダム化→最適化/de-escalation相の検証／実際の群間輸液差が小さい／FR・fluid tolerance・うっ血を系統評価せず</td></tr>
+</tbody></table></div>
+<h3>5. 概念的進歩の領域（Table 2 の要点）</h3>
+<ul><li><strong>組織灌流・微小循環を蘇生の中核に</strong>：灌流志向戦略の検証／微小循環障害と macro-to-micro uncoupling（血行動態的インコヒーレンス）の研究／各灌流指標の生理・決定因子・限界の解明／末梢灌流を「予後マーカー」から「蘇生ターゲット」へ。</li><li><strong>古典的シグナルの再評価</strong>：CVP＝目標→安全上限／MAP＝固定普遍目標→個別化／乏尿＝低灌流の専属指標→静脈うっ血の関与も。</li><li><strong>輸液管理の再構成</strong>：FR評価／静脈うっ血・fluid accumulation・fluid tolerance への意識／ROSE の相ベース論理。</li></ul>
+<h3>6. Limitation ⚠️</h3>
+<ul><li><strong>概念的展望であり系統的レビューではない</strong>：試験の選定・強調は著者の解釈。網羅性・再現可能な検索戦略・バイアス評価はない。</li><li><strong>利益相反</strong>：複数著者にメーカーからのコンサルティング料・謝金。ANDROMEDA系を著者自身が主導しており、CRT-PHR への肯定的トーンは差し引いて読む。</li><li><strong>早期版（Article in Press）</strong>：最終版で編集され得る旨が明記。数値・表現の細部は変わる可能性。</li><li><strong>ANDROMEDA-SHOCK-2 の解釈上の制約（著者自身が明記）</strong>：<mark class="hl">多成分バンドルのためどの要素が効いたか不明。死亡は不変で、恩恵は「生命維持サポート期間短縮」に依存。</mark>win ratio という複合・階層アウトカムの臨床的意味は解釈に注意。</li><li><strong>個別化の実証は未達</strong>：表現型駆動・反復テストは「第一歩」であって、外的妥当性・実装可能性・多様な医療体制での検証は今後の課題。日本のICUを含むアジア圏データは本論の中心ではない。</li></ul>
+<h2>🔗 関連</h2>
+<ul><li><span class="wl">Critical Care ウォッチャー</span></li><li><span class="wl">論文ウォッチャー設定</span></li><li><span class="wl">敗血症性ショック蘇生の現状と進化する概念（ICM2021レビュー）</span>（本論の前身にあたる同テーマの2021年版レビュー）</li><li><span class="wl">CENSER 敗血症性ショックへの早期ノルアドレナリン投与</span> / <span class="wl">敗血症性ショックにおける早期ノルアドレナリン開始</span></li><li><span class="wl">📄 論文本文PDF</span></li><li><span class="wl">受動的下肢挙上（PLR）テストと輸液反応性の予測</span> / <span class="wl">腹腔内圧上昇を伴う人工呼吸患者における輸液反応性の評価 — 2施設前向き観察研究</span></li><li><span class="wl">静脈うっ血の生理学とVExUSスコア（PulmCCM 2021）</span></li><li><span class="wl">ショックにおける個別化血圧目標</span> / <span class="wl">ショック蘇生におけるpermissive hypotension（許容的低血圧）</span></li><li><span class="wl">乳酸値（Lactate）の意義と限界</span></li><li><span class="wl">中心静脈圧（CVP）の測定と解釈</span> / <span class="wl">CVPの現在の使い方と展望（Intensive Care Medicine 2025）</span></li><li><span class="wl">RIFTS 重症敗血症・敗血症性ショックへの輸液制限</span></li><li><span class="wl">医学・論文（リファレンス）</span></li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

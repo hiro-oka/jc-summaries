@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ARDSにおける腹臥位療法</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ARDSにおける腹臥位療法</h1>
+  <dl class="cite"><dt>出典</dt><dd>Ehrmann S, Li J, Liu L, Guérin C. Intensive Care Med. 2026. DOI: 10.1007/s00134-026-08543-x</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08543-x" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08543-x</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Prone positioning in ARDS</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>聖路加ICUでの実装 <strong>① 挿管ARDS：PROSEVA の5要素をチェックリストにする</strong> Figure 2 が示すとおり、強い推奨の実体は PROSEVA の運用そのものである。既存の <span class="wl">腹臥位療法の機序と実際（聖路加プロトコル）</span> を、以下の5点が揃っているかで点検する。</p>
+<div class="tw"><table>
+<thead><tr><th>要素</th><th>具体</th></tr></thead>
+<tbody>
+<tr><td>早期</td><td>挿管後36時間以内。安定化期間の後に判定</td></tr>
+<tr><td>適応判定</td><td>PBW 6 ml/kg・PEEP≥5 cmH₂O・FIO₂≥0.60 の条件下で P/F&lt;150 mmHg</td></tr>
+<tr><td>長時間</td><td>連続16時間以上</td></tr>
+<tr><td>併用</td><td>肺保護換気。NMBA は PROSEVA では大多数に使用（ESICM と ATS で推奨が割れている点は申し送る）</td></tr>
+<tr><td>中止基準</td><td>再仰臥位から4時間後、PEEP≤10 cmH₂O・FIO₂≤0.60 で P/F≥150 mmHg。腹臥位中の値では判定しない</td></tr>
+</tbody></table></div>
+<p><strong>② 「腹臥位中に酸素化が上がらないから中止」をやめる</strong> PROSEVA 二次解析では、初回セッション後のレスポンダーと非レスポンダーで生存に差がなかった。酸素化が上がらない患者も stress/strain の均質化から利益を得ている可能性がある。<mark class="hl">生理学的反応だけで継続・中止を決める根拠は無い</mark>というのが本レビューの明確な立場である。</p>
+<p><strong>③ 覚醒下腹臥位は「時間」を管理指標にする</strong> HFNC 使用中の低酸素性呼吸不全で APP を行うなら、実施の有無ではなく <strong>1日の合計腹臥位時間</strong>を記録し、目標を 8〜10時間以上（可能なら12時間）に置く。1回2時間で終わっている運用は、陰性だったRCT群と同じ用量である。看護記録に「腹臥位 開始/終了時刻」を残し、日次で合計時間を集計する仕組みにする。 ただし <mark class="hl">本邦の非COVID症例に外挿する根拠はまだ無い</mark>（RCT3件が進行中）。適応は個別判断とし、忍容性で無理をしない。</p>
+<p><strong>④ モニタリングは非挿管と挿管で変える（Figure 3 のとおり）</strong> 非挿管：酸素化・呼吸数・<strong>ROX index</strong>・呼吸ドライブと努力・快適性・忍容性・意識レベル・皮膚。挿管：持続的な血行動態・酸素化・皮膚。</p>
+<p><strong>⑤ 褥瘡対策を「腹臥位セット」に組み込む</strong> 最頻かつ用量依存の有害事象が褥瘡である以上、長時間化を進めるなら圧再分配デバイスと除圧計画を同時に導入する。顔面・前胸部・腸骨・膝の4点を定型の観察部位にする。</p>
+<p><strong>⑥ 実装ギャップを自施設のデータで測る</strong> 本レビューの最も実務的なメッセージは「エビデンスではなく実装が律速」である。当院ICUで <strong>P/F&lt;150 を満たした症例のうち何%が16時間以上の腹臥位を受けたか</strong> を後方視で算出し、APRONET・LUNG SAFE の数字と並べる。これはそのまま質改善（QI）のテーマになり、経営会議に出せる指標にもなる。</p>
+<p><strong>⑦ Prone Team とパンデミック備え</strong> 1回の手技に3〜5名という数字は、夜間・休日の人員配置とそのままぶつかる。SOP と訓練プログラムを平時に整備しておく、という著者らの提言は、当院の急変対応（RRS）の体制整備と同じ発想で扱える。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：腹臥位は1976年に救命処置として記述されて以来、初期4試験では死亡改善を示せなかったが、2013年のPROSEVA（早期・16時間以上・P/F&lt;150 mmHg）が中等症〜重症ARDSで死亡減少を示し、ESICM 2023・ATSガイドラインで強い推奨となった。肺保護換気の構成要素という位置づけである。</li><li><strong>Unknown（分かっていなかったこと）</strong>：覚醒下腹臥位（APP）の高品質エビデンスはほぼCOVID-19由来で、後続RCTの結果が大きく割れていた。非COVIDのAHRF・ECMO中・軽症〜中等症・24時間超などでの役割、生理学的反応で継続/中止を判断できるか、そしてなぜ実施率が低いままなのかは未解決だった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：ナラティブレビューとして、APPは「実施の有無」ではなく1日あたりの実施時間の用量反応（概ね8〜10時間超で臨床的利益）で効くことを統合的に示し、酸素化反応だけで用量を決める根拠は乏しいと整理した。そして最大の律速はエビデンスではなく実装（人員配置・訓練・プロトコル化）だと明確化した点が眼目である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 50年かけて、腹臥位は「難治性低酸素血症の救命処置」から「肺保護換気の構成要素」になった。挿管患者では P/F&lt;150 mmHg で早期に16時間以上という PROSEVA 型の運用が強い推奨となり、COVID-19 で非挿管患者への覚醒下腹臥位（APP）が一気に広がった。ただし APP の効果は無条件ではなく、<strong>1日あたりの実施時間に依存する用量反応の関係</strong>にある。そして最大の問題は、これだけの推奨がありながら <strong>世界的に実施率が低いまま</strong>だという点にある。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th></th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>区分</td><td>ナラティブレビュー（*Intensive Care Medicine* 2026）。生理学・RCTの歴史・ガイドライン・実装・未解決問題を通覧</td></tr>
+<tr><td>挿管患者の推奨</td><td>ESICM 2023 は P/F&lt;150 mmHg かつ PEEP≥5 cmH₂O（換気設定最適化後）の中等症〜重症ARDSに強い推奨。ATS も従来の P/F&lt;100 での条件付き推奨から中等症〜重症での強い推奨へ格上げ</td></tr>
+<tr><td>実施方法</td><td>挿管後早期（低換気量とPEEP調整による安定化期間の後）、16時間以上の長時間セッション</td></tr>
+<tr><td>決定打</td><td>PROSEVA（2013、n=466）。28日死亡 16.0% vs 32.8%（p&lt;0.001）、90日死亡 23.6% vs 41.0%（p&lt;0.001）</td></tr>
+<tr><td>それ以前の4試験</td><td>いずれも死亡改善を示せず。ただし4試験の個別患者データメタ解析では P/F&lt;100 mmHg の最重症層で生存改善</td></tr>
+<tr><td>非挿管患者（APP）</td><td>COVID-19 で急拡大。メタトライアル（n=1,121、HFNC）で挿管または死亡が 33% vs 44%。ただし後続RCTの結果は大きく割れる</td></tr>
+<tr><td>APPの鍵</td><td>実施時間の用量反応。臨床的利益が見えるのは概ね 1日8〜10時間を超えたとき。中央値2時間台の試験はいずれも陰性</td></tr>
+<tr><td>生理学的反応の予後予測</td><td>単回セッションの酸素化改善では予後を予測しきれない。再仰臥位後も持続する改善のほうが予後価値が高そうだが、エビデンスは観察研究中心で、<mark class="hl">継続・中止の判断を生理学的反応だけで下す根拠は不十分</mark></td></tr>
+<tr><td>有害事象</td><td>挿管患者では褥瘡が最も多く用量依存。顔面浮腫、体位変換時の一過性循環不安定、計画外抜管・デバイス逸脱・末梢神経障害・眼合併症。<strong>絶対的禁忌として広く認められているのは不安定な脊椎損傷のみ</strong></td></tr>
+<tr><td>実装の現実</td><td>LUNG SAFE では重症ARDSの20%未満。パンデミック期に欧州は適応例の60〜80%まで上昇したが北米は3分の1〜2分の1。パンデミック後の北米は30〜40%で頭打ち</td></tr>
+<tr><td>未解決</td><td>非COVID の AHRF における APP、ECMO中の腹臥位、24時間を超える超長時間腹臥位、軽症〜中等症ARDSへの拡大</td></tr>
+</tbody></table></div>
+<p><strong>押さえるべき7点</strong></p>
+<ol><li>腹臥位の効果は酸素化改善だけではない。<strong>腹側の過膨張を減らし、局所の stress と strain を下げる</strong>という肺保護そのものが本体である</li><li>陰性だった初期4試験と PROSEVA を分けたのは、<strong>低換気量・長時間セッション・早期導入・明確な中止基準</strong>という運用の総体である</li><li>覚醒下腹臥位は「やったかどうか」ではなく「<strong>何時間やれたか</strong>」で効く。実施時間の中央値が2時間台の試験はすべて陰性だった</li><li>APP の高品質エビデンスはほぼ COVID-19 由来。<strong>非COVIDの急性低酸素性呼吸不全での臨床アウトカムのRCTは存在しない</strong>（3件が進行中）</li><li>単回セッションの酸素化改善に一喜一憂しない。PROSEVA の二次解析では酸素化レスポンダーと非レスポンダーで生存に差はなかった</li><li>相対的禁忌とされてきた肥満・術後・ドレーン留置は、<strong>経験あるチームなら腹臥位を思いとどまる理由にならない</strong></li><li><mark class="hl">最大の障壁はエビデンスではなく実装である。人員配置・訓練・プロトコル化というシステム要因が実施率を決めている</mark></li></ol>
+<h2>📖 詳細</h2>
+<h3>まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む ARDS（急性呼吸窮迫症候群）は、肺炎などをきっかけに肺全体に炎症とむくみが広がり、酸素が血液に取り込めなくなる病態である。重症度は P/F 比（動脈血酸素分圧 PaO₂ を吸入酸素濃度 FIO₂ で割った値。低いほど重症で、150未満が中等症〜重症の目安）で測る。 人工呼吸そのものが硬くなった肺を傷つけうるため（人工呼吸器誘発肺傷害＝VILI）、一回換気量（VT）を予測体重（PBW）あたり小さく抑える肺保護換気が標準である。PEEP（呼気終末陽圧、cmH₂O）は肺胞の虚脱を防ぐために足す圧である。 腹臥位療法（うつ伏せにする治療）は、この状況で背側肺の虚脱を開き、肺全体の圧の分布を均質にしてVILIを減らす。挿管患者では筋弛緩薬（NMBA）を併用して16時間以上続けるのが典型である。 一方、挿管していない患者を意識のあるままうつ伏せにするのが覚醒下腹臥位（APP）で、多くはHFNC（高流量鼻カニュラ酸素）併用下で行い、悪化の指標として ROX index（SpO₂/FIO₂ を呼吸数で割った値）を見る。「うつ伏せにできるか」ではなく「何時間できるか」が効果を左右するのが、このテーマの核心である。</p>
+</div>
+<h3>1. 背景 — 50年の位置づけの変化 🕰️</h3>
+<p>腹臥位（prone positioning, PP）が人工呼吸中のARDS患者に対して初めて記述されたのは <strong>1976年</strong>（Piehl &amp; Brown）である。当初は難治性低酸素血症の酸素化改善を目的とした救命処置（rescue therapy）として使われ、初期試験の結果が一貫しなかったため、その臨床的役割は数十年にわたり議論の的であり続けた。</p>
+<p>この構図が変わったのが <strong>2013年の PROSEVA 試験</strong>である。早期に、かつ長時間（16時間以上）実施したとき、中等症〜重症ARDSで有意な死亡減少が示された。</p>
+<p>COVID-19 パンデミックはさらに応用範囲を広げ、非挿管患者への腹臥位＝<strong>覚醒下腹臥位（awake prone positioning, APP）</strong> が世界的に普及した。</p>
+<p>現在、PPは肺保護戦略の構成要素と位置づけられ、<strong>2017年 ATS/ESICM/SCCM 診療ガイドライン</strong>（重症ARDS）と <strong>2023年 ESICM ガイドライン</strong>（中等症〜重症ARDS）の双方で推奨されている。</p>
+<h3>2. 生理学 — 挿管患者で何が起きているか 🫁</h3>
+<p>腹臥位の最も一貫して、かつ臨床的に明白な効果は <strong>酸素化の改善</strong>である。これは頻度の点でも大きさの点でもそうである。</p>
+<p>その本体は <strong>換気と灌流のマッチングの改善</strong>にある。とくに仰臥位では重力依存となる背側肺領域で効く。</p>
+<p>腹臥位では次のことが起こる。</p>
+<ul><li><strong>重力の再分配</strong>と、<strong>心臓・縦隔による圧迫の解除</strong></li><li>→ 従属領域にかかる superimposed pressure（重積圧）の減少</li><li>→ 肺胞リクルートメントと、より均質な含気分布</li></ul>
+<p>さらに、ガス交換を超えた効果として次が挙げられる。</p>
+<ul><li><strong>腹側の過膨張（over-distension）の減少</strong></li><li><strong>局所の stress と strain の減少</strong> ＝ 人工呼吸器誘発肺傷害（VILI）の緩和</li><li><strong>右室後負荷の減少</strong>（Vieillard-Baron ら）</li><li>前負荷依存性の患者では <strong>静脈還流の増加、ひいては心拍出量の増加</strong>（Jozwiak ら）</li></ul>
+<p><strong>■ 腹臥位中の人工呼吸器設定はまだ確立していない</strong></p>
+<p>著者らは、この領域が依然として検討途上であることを明確にしている。</p>
+<ul><li>実臨床では酸素化改善に応じて <strong>FIO₂ を下げる</strong>ことが多い</li><li>PEEP の調整は <strong>経肺圧</strong>に基づいて行いうる。腹臥位では胸壁エラスタンスが高くなるため、<strong>気道内圧が真の肺 stress を過大評価しうる</strong></li><li>あるいは <strong>電気インピーダンストモグラフィ（EIT）</strong> で局所換気を評価し、再仰臥位後もリクルートメントを保つ助けにできる</li><li>ただし著者らは「<strong>これらの生理学的考察は、まだ強い臨床エビデンスに支えられていない</strong>」と明記する</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1（Ehrmann et al. Intensive Care Med 2026 より。© The Author(s) 2026, CC BY-NC 4.0） <strong>腹臥位の生理学。</strong> 上段が SUPINE（仰臥位）、下段が PRONE（腹臥位）で、左右2ブロックに分かれる。 <strong>左ブロック（換気と灌流）</strong>：仰臥位の肺を模した2つの縦長のシルエットが並び、左が換気（V̇、青い点）、右が灌流（Q̇、赤い点）を表す。左の肺では<strong>背側（下部）に黄色い潰れた肺胞（Alveolar collapse）</strong>が並び、上部には<strong>灰色の四角＝過膨張（Hyperinflation）と黄色い両方向矢印＝不均一な肺 strain（Heterogenous lung strain）</strong>が描かれる。中央の紫のボックスに「Shunt / Poor V/Q matching」、その下にオレンジの楕円で「HYPOXEMIA」。上には脳のイラストへ矢印が伸び「Respiratory drive stimulation」、その脇にオレンジのタグで <strong>VILI</strong> と <strong>PSILI</strong>。 <strong>下段（腹臥位）</strong>では、青い点が肺全体に均等に散り「Alveolar Recruitment」「Homogenous aeration and ventilation」のラベルが付く。赤い点＝灌流はほぼ変わらず（<strong>Unaltered perfusion</strong> と明記）、その結果「Improved V/Q matching」となり、脳への矢印は「<strong>Reduced Respiratory drive</strong>」に変わる。灌流が動かず換気だけが背側に再分配される、という<strong>この非対称性が腹臥位の核</strong>である。 <strong>右ブロック（胸壁と右室）</strong>：仰臥位では<strong>心臓と腹部の重み（Heart and abdominal weight）</strong>を表す黒い太矢印が肺を押し下げ、胸骨側は「High sternal chest wall compliance」で過膨張、脊椎側は「Low spinal chest wall compliance」で肺胞虚脱。中央にオレンジのタグで「<strong>Increase RV afterload</strong>」。腹臥位に反転すると（Gravity inversion／Sternal compression と注記）、胸骨側のコンプライアンスが下がって過膨張が抑えられ、脊椎側でリクルートメントが起こり、タグは「<strong>Reduce RV afterload</strong>」に変わる。 この図の読みどころは、<strong>腹臥位の利益が「酸素化」ではなく「均質化」として描かれている</strong>点である。青い点の分布の均一さこそが stress/strain の低下であり、それが VILI・PSILI の両方に効く、という構図になっている。</p>
+</div>
+<h3>3. 生理学 — 非挿管患者ではどう違うか 🌬️</h3>
+<p>APP の全体的な生理学的効果（酸素化改善、V/Q マッチングの改善）は挿管ARDSと概ね同様である（Table S1）。しかし <strong>自発呼吸が保たれている</strong>ため、局所の換気パターンは異なりうる。</p>
+<ul><li>前向きコホート研究では、非挿管患者は APP 中に <strong>有意な局所再分配を伴わずに、より均質な換気</strong>を示した。これは挿管患者で典型的にみられる <strong>背側への再分配とは対照的</strong>である（Dos Santos ら）</li><li>従来型酸素療法または <strong>HFNC</strong> を受けている患者では、APP は V/Q マッチングの改善と、<strong>軽度の含気改善</strong>と関連していた</li><li><strong>心係数の増加</strong>などの血行動態変化も報告されており、肺灌流の改善が酸素化反応に寄与している可能性がある</li></ul>
+<div class="call tip"><span class="lab">POINT</span>
+<p>呼吸補助の種類で APP の生理学的効果が変わる これらの生理学的効果は、APP を <strong>HFNC または従来型酸素療法</strong>と組み合わせたときにより顕著であった。 一方、<strong>CPAP や NIV と組み合わせた研究では、換気分布や含気の追加変化はほとんど報告されていない</strong>。 著者らの説明：CPAP と NIV はすでに比較的高い陽圧を与えて肺胞リクルートメントを促しているため、APP による追加のリクルートメント効果が限られる。</p>
+</div>
+<p><strong>■ 呼吸努力と P-SILI 予防については未解決</strong></p>
+<p>APP が呼吸努力に及ぼす影響と、<strong>patient self-inflicted lung injury（P-SILI）を防ぐ可能性は不確実なまま</strong>である。異なる呼吸補助モダリティにまたがる研究を通じて、次のような一見矛盾する所見が報告されている。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>報告されている方向</th></tr></thead>
+<tbody>
+<tr><td>呼吸仕事量（work of breathing）</td><td>減少するか、変わらない</td></tr>
+<tr><td>食道内圧の振幅（＝1回ごとの吸気努力の指標）</td><td>増加するか、変わらない</td></tr>
+</tbody></table></div>
+<p>著者らはこの乖離を、<strong>全体としての呼吸仕事量と、1呼吸ごとの吸気努力の違い</strong>を反映しているのではないかと解釈する。すなわち、APP による酸素化と換気効率の改善が呼吸数と分時換気量の必要量を減らし、その結果、1呼吸あたりの吸気努力が不変または増加していても、全体の呼吸仕事量は下がる、という説明である。</p>
+<p>この不均一な所見は、APP・呼吸メカニクス・患者の呼吸ドライブの相互作用が複雑であることを示している。</p>
+<h3>4. 臨床試験の歴史 — 挿管患者 📜</h3>
+<p>腹臥位の初期報告から最初のRCT（2001年）まで <strong>およそ25年</strong>を要した。これは低換気量を確立した ARMA 試験（2000年）のわずか1年後にあたる。</p>
+<p>初期の臨床的関心は、酸素化改善という一貫した効果に強く牽引されていた。しかし最初の2つのRCTは生存利益を示せなかった。著者らはその理由を明示する。</p>
+<ul><li><strong>大きな一回換気量</strong>（実測体重あたり 8〜10 ml/kg）を使用していた</li><li><strong>短い腹臥位セッション</strong>（7〜8時間）だった</li><li>標準化された換気戦略がなかった</li></ul>
+<p>続く2試験は腹臥位を最長18時間まで延長し、肺保護換気を用い、より低酸素血症の強い患者を組み入れたが、それでも有意な生存利益を示せなかった（著者らは「おそらく検出力不足による」と留保する）。</p>
+<p>しかし、<strong>この4試験の個別患者データメタ解析</strong>では、ランダム化時点で <strong>P/F&lt;100 mmHg</strong> という最も重度の低酸素血症を呈する患者群で生存改善が示された。</p>
+<p><strong>■ 主要RCT一覧（Table 1 より転記）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>年</th><th>対象と例数</th><th>腹臥位時間</th><th>一回換気量</th><th>主要評価項目</th><th>主な結果</th></tr></thead>
+<tbody>
+<tr><td>Gattinoni ら</td><td>2001</td><td>ARDS 304例</td><td>約6〜7 h</td><td>実測体重 10 ml/kg</td><td>10日死亡</td><td>酸素化は改善したが死亡に差なし（10日 21.1% vs 25.0%、ICU退室時 50.7% vs 48.0%）</td></tr>
+<tr><td>Guérin ら</td><td>2004</td><td>791例（ALI 167、ARDS 246）</td><td>約8 h</td><td>実測体重 8 ml/kg</td><td>28日死亡</td><td>酸素化改善とVAP減少。死亡に有意差なし（32.4% vs 31.5%、p=0.77）</td></tr>
+<tr><td>Mancebo ら</td><td>2006</td><td>重症ARDS 136例</td><td>約20 h</td><td>実測体重 8 ml/kg</td><td>ICU死亡</td><td>減少傾向だが有意でない（43% vs 58%、p=0.12）</td></tr>
+<tr><td>Taccone ら</td><td>2009</td><td>中等症〜重症ARDS 342例</td><td>約20 h</td><td>PBW 8 ml/kg</td><td>28日死亡</td><td>全体では有意差なし（31.0% vs 32.8%、p=0.72）</td></tr>
+<tr><td>Guérin ら（PROSEVA）</td><td>2013</td><td>重症ARDS 466例（P/F&lt;150 mmHg）</td><td>16 h 以上</td><td>PBW 6 ml/kg</td><td>28日死亡</td><td>28日 16.0% vs 32.8%（p&lt;0.001）、90日 23.6% vs 41.0%（p&lt;0.001）</td></tr>
+<tr><td>Schmidt ら（PRONECMO）</td><td>2023</td><td>VV-ECMO 施行中の重症ARDS 170例</td><td>16 h</td><td>PBW 3 ml/kg</td><td>60日以内のECMO離脱成功</td><td>差なし（44% vs 44%）、90日死亡 51% vs 48%（p=0.62）</td></tr>
+</tbody></table></div>
+<p><strong>■ PROSEVA を成立させた設計要素</strong></p>
+<p>著者らは PROSEVA の特徴を列挙している。<strong>この一つ一つが運用そのもの</strong>である。</p>
+<ul><li><strong>挿管から36時間未満</strong></li><li><strong>P/F&lt;150 mmHg</strong>（PEEP≥5 cmH₂O、FIO₂≥0.60 のもとで）</li><li><strong>PBW 6 ml/kg の一回換気量</strong>、安定化期間の後に確認</li><li>肺保護換気</li><li><strong>長い腹臥位セッション（16時間以上）</strong></li><li><strong>あらかじめ決めた中止基準</strong>：再仰臥位から4時間後に PEEP≤10 cmH₂O・FIO₂≤0.60 で P/F≥150 mmHg</li><li>両群の大多数で <strong>筋弛緩薬（NMBA）</strong> を使用</li><li><strong>仰臥位群から腹臥位へのクロスオーバーを避けた</strong></li><li>改善基準に達したら <strong>まず NMBA を、次いで鎮静を中止</strong></li></ul>
+<p>著者らはこの歴史を「試験と試験者が相互に高め合い、臨床と実験の領域が密に相互作用し、最終的に対象集団を絞り込んでいった軌跡」と評する。</p>
+<p>そのうえで、Poole らの <strong>leave-out メタ解析が PROSEVA を外れ値（outlier）として明確に示した</strong>ことに触れ、これは「この研究の仮説・論理・デザインに完全に一致する」と述べている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2（Ehrmann et al. より。同ライセンス） <strong>腹臥位をめぐる試験の歴史。</strong> 上部に 1967 → 2023-2024 の紫色の年表バーが右向き矢印として伸びる。そこから3色の枝が下りる。 <strong>黄色＝ARDS のエビデンス</strong>：1967「Asbaugh 1st ARDS description」、2000「Low VT trial」、2010「Acurasys trial NMBA」、2012「Berlin ARDS definition」、2020-2022「COVID-19 pandemic」。 <strong>灰色＝VILI の概念形成</strong>：1974「Barotrauma」、1988「Volutrauma」、1994「Atelectrauma」、1997「Biotrauma」、2016「Ergotrauma」。 <strong>緑＝腹臥位のエビデンス</strong>：1975-76「Case reports of PP」、2001-2010「4 large Trials on PP」、2013「Proseva trial」、2023-2024「Meta Trial on APP」、そして右端に「<strong>Strong recommendation for PP use in moderate-to-severe ARDS</strong>」。 図の最下部には緑色の横長のバーがあり、<strong>PROSEVA から太い三角形の矢印が下りてこのバーに刺さっている</strong>。バーの中身は左から「Early」「Long session」「Low VT Low PEEP」「NMBA」「Predetermined criteria for stopping based on oxygenation resupination」。 つまりこの図は、<strong>PROSEVA という1本の試験の中身が5つの運用要素に分解され、それが強い推奨の土台になっている</strong>という構造を一目で見せている。逆に言えば、<mark class="hl">この5要素のどれかを崩した腹臥位は PROSEVA の腹臥位ではない</mark>、というメッセージでもある。</p>
+</div>
+<h3>5. 臨床試験の歴史 — 非挿管患者（APP）🦠</h3>
+<p>APP の展開は、はるかに短い時間軸で、COVID-19 パンデミックに強く牽引されて起きた。</p>
+<ul><li><strong>パンデミック以前</strong>：小規模な後ろ向き症例研究に限られ、実施可能で酸素化を改善することは示されたが、臨床的に意味のあるアウトカムへの効果は示されなかった</li><li><strong>Ding らの研究（2018〜2019年実施）</strong>：HFNC または NIV を受ける中等症〜重症ARDS患者で APP を前向きに評価し、挿管率低下の可能性を示唆した重要な一歩</li><li><strong>パンデミック期</strong>：多数の観察研究が実施可能性を確認し、酸素化改善を一貫して示し、挿管と死亡の減少を示唆するシグナルが得られた。臨床経験の広範な共有がさらに普及を加速した</li></ul>
+<p><strong>■ メタトライアルという設計</strong></p>
+<p>高品質エビデンスの緊急の必要に応えるため、国際共同グループが革新的な「<strong>メタトライアル（meta-trial）</strong>」設計を実装した。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>メタトライアルとは 独立した複数の研究にまたがってプロトコルを <strong>事前に調和（harmonize）</strong> させ、データを <strong>前向きに統合</strong>して、あらかじめ合意した有効性または無益性の境界に達するまで中間解析を繰り返す設計。 事後にデータを寄せ集めるメタ解析とは異なり、<strong>統合が計画の一部になっている</strong>。</p>
+</div>
+<p>この取り組みは6か国で HFNC を受ける COVID-19 患者 <strong>1,121例</strong> を含み、<strong>有効性のため早期中止</strong>された。治療失敗（挿管または死亡）の減少を示し、APP を支持する初の高水準エビデンスとなった。</p>
+<p><strong>■ しかし後続RCTの結果は割れた</strong></p>
+<p>著者らは、これら画期的な所見にもかかわらず、<strong>その後のRCT間の著しい異質性のため APP の臨床的有効性は議論の的であり続けている</strong>と率直に述べる。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>年</th><th>対象と例数</th><th>腹臥位時間（中央値）</th><th>呼吸補助</th><th>主要評価項目</th><th>主な結果</th></tr></thead>
+<tbody>
+<tr><td>Ehrmann ら（メタトライアル）</td><td>2021</td><td>HFNC を要する COVID-19 1,121例</td><td>5.0（1.6–8.8）h</td><td>HFNC</td><td>28日以内の挿管または死亡</td><td>挿管率減少（33% vs 44%）、害のシグナルなし</td></tr>
+<tr><td>Rampon ら</td><td>2022</td><td>酸素 6 L/分未満の COVID-19 293例</td><td>報告なし</td><td>従来型／室内気／HFNC</td><td>呼吸状態の悪化またはICU転棟</td><td>有意差なし（22.1% vs 24.7%）</td></tr>
+<tr><td>Alhazzani ら</td><td>2022</td><td>FiO₂≥0.4 の酸素療法または NIV を要する COVID-19 400例</td><td>4.8（1.8–8.0）h</td><td>従来型／HFNC／NIV</td><td>30日以内の挿管</td><td>有意差なし（34.1% vs 40.5%、p=0.20）、60日死亡 22% vs 24%（p=0.72）</td></tr>
+<tr><td>Fralick ら（COVID-PRONE）</td><td>2022</td><td>FiO₂≤0.5 の酸素療法を要する COVID-19 248例</td><td>2（0.5–4.2）h</td><td>従来型／HFNC</td><td>院内死亡・人工呼吸・呼吸不全悪化の複合</td><td>有意差なし（14% vs 14%）</td></tr>
+<tr><td>Nay ら</td><td>2023</td><td>一般病棟で酸素療法を要する COVID-19 268例</td><td>2.3（1.5–2.9）h</td><td>従来型／HFNC</td><td>28日以内のNIV・挿管・死亡の複合</td><td>有意差なし（14.1% vs 12.9%）</td></tr>
+<tr><td>Liu ら</td><td>2024</td><td>COVID-19 409例</td><td>12（12–14）h</td><td>従来型／HFNC／NIV</td><td>28日以内の挿管</td><td>挿管率減少（17% vs 27%）</td></tr>
+<tr><td>Harrois ら</td><td>2025</td><td>COVID-19 445例</td><td>6（2–8）h</td><td>従来型／HFNC／NIV</td><td>28日時点の挿管または死亡</td><td>ベイズ解析で主要評価項目減少の事後確率 93.8%（平均オッズ比 0.74、95%確信区間 0.48–1.09）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ APP は「やったかどうか」ではなく「何時間できたか」で効く <mark class="hl">上の表を腹臥位時間の順に並べ替えると構図が見える。中央値2時間台（Fralick 2、Nay 2.3）は明確に陰性、5〜6時間（Ehrmann 5.0、Harrois 6）は境界的、12時間（Liu）で明確に陽性。</mark> 著者らはこれを <strong>用量反応効果</strong>と呼び、<mark class="hl">APP の成否は治療アドヒアランスに依存する</mark>と述べる。 臨床的利益が主に観察されるのは <strong>1日あたり概ね8〜10時間を超えて維持されたとき</strong>であり、最新かつ最も包括的なデータでは死亡に対する利益も報告されている。 ただし著者ら自身が、<mark class="hl">実臨床での APP の有効性は患者のコンプライアンスに強く依存するため、これらの所見は慎重に解釈すべきだ</mark>と釘を刺している。</p>
+</div>
+<h3>6. ガイドライン — 挿管ARDS：誰に・いつ・どう 📋</h3>
+<p><strong>■ 誰に（Patient selection）</strong></p>
+<p>ESICM の専門家パネルは次のように <strong>強く推奨</strong>している。</p>
+<p>&gt; 「換気設定の最適化にもかかわらず P/F&lt;150 mmHg かつ PEEP≥5 cmH₂O である、挿管された中等症〜重症ARDS患者に対し、死亡を減らすために腹臥位を行う」</p>
+<p>この推奨は高品質のエビデンスに支えられており、その主たる駆動力は PROSEVA 試験である。同様に <strong>ATS も、従来の「P/F&lt;100 mmHg での条件付き推奨」から「中等症〜重症ARDS での強い推奨」へ格上げ</strong>した。</p>
+<p>ARDS のサブフェノタイプが腹臥位の適応判断に役立つかは <strong>不明</strong>であり、さらなる研究を要する、と著者らは述べる。</p>
+<ul><li><strong>LIVE 試験</strong>：focal ARDS の患者を腹臥位にしても死亡低下とは関連しなかった</li><li><strong>低炎症性／高炎症性フェノタイプ</strong>別の腹臥位のアウトカムへの効果については、著者らは「データを承知していない」と明記する</li><li><strong>Fosset ら</strong>：機械学習で仰臥位における呼吸メカニクス・酸素化・人口統計に基づく3つのARDSサブフェノタイプを同定したが、<strong>いずれも腹臥位による死亡の変化とは結びつかなかった</strong></li></ul>
+<p><strong>■ 腹臥位と鎮静・筋弛緩薬の併用</strong></p>
+<p>著者らはこの論点にやや踏み込む。</p>
+<ul><li>ACURASYS 試験と PROSEVA 試験のデータは、<strong>両介入が潜在的に相加的な肺保護補助療法</strong>であることを示唆する</li><li><strong>NMBA の有害性はデータに支持されていない</strong>。ACURASYS では3か月時点の四肢筋力が NMBA 群とプラセボ群で差がなかった</li><li>浅い鎮静と組み合わせた NMBA の早期使用を検討した <strong>ROSE 試験</strong>では、NMBA 群と対照群で死亡に差がなかった</li><li><mark class="hl">ESICM は「持続 NMBA のルーチン使用に反対する強い推奨」、ATS は「NMBA の条件付き使用」と、<strong>両コンセンサス会議の結論が食い違っている</strong></mark>。著者らはこれをさらなる研究の必要性の表れと位置づける</li><li>PEEP 最適化後の腹臥位と NMBA の併用の役割を検証する試験（NCT06849570）が計画されている</li></ul>
+<p><strong>■ いつ（Timing）</strong></p>
+<p>ESICM の専門家は次のように推奨している。</p>
+<p>&gt; 「挿管後早期に、低換気量を適用し PEEP を調整する安定化期間を置いたうえで、その終了時点で P/F が 150 mmHg 未満のままであれば開始する」</p>
+<p>PROSEVA の主要な前進は、<strong>腹臥位を救命処置から肺保護換気の中核要素へ移した</strong>ことであり、早期適用の強調がその要である。</p>
+<p><strong>■ どう（Implementation and Monitoring）</strong></p>
+<ul><li>ESICM：「腹臥位は死亡を減らすため、<strong>長時間（連続16時間以上）のセッション</strong>として適用すべきである」</li><li>ただし著者らは重要な但し書きを置く。<strong>中止基準についての正式なガイドラインは存在しない</strong></li><li>実務では PROSEVA のように、腹臥位中の一過性の反応に頼るのではなく、<strong>標準化された人工呼吸器設定のもとで仰臥位で評価した、あらかじめ決めた酸素化基準</strong>を用いる</li><li>COVID-19 期に採用が増えた <strong>より長いセッション</strong>については、なお検討中の領域</li><li>頭部挙上角度やベッド支持具の選択といった実務的側面は <strong>標準化されておらず</strong>、各施設のプロトコルとベストプラクティスに従う</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 著者ら自身が推奨の土台の弱さを明記している <mark class="hl">これらの推奨は大部分が PROSEVA 試験の P/F 閾値に基づいている。著者らは、それが当時の重症ARDSを定義するための「事前の作業仮説」だったという事実を超えて、</mark><strong>限界である</strong><mark class="hl">と明言している。</mark> <mark class="hl">さらに埋まっていないギャップとして「腹臥位セッション時間の個別化の欠如」を挙げ、食道内圧や EIT といったツールがこの課題に使えるかもしれない、と述べるにとどめている。</mark></p>
+</div>
+<h3>7. ガイドライン — 非挿管患者（APP）🛏️</h3>
+<p><strong>■ 誰に</strong></p>
+<p>2023年 ESICM ガイドラインは、COVID-19 関連の急性低酸素性呼吸不全（AHRF）の非挿管患者に対して APP の使用を <strong>提案（suggest）</strong> している。</p>
+<p>ただし著者らはこの推奨の強さを次のように限定する。<strong>高品質RCTデータの大半が COVID-19 コホート由来であり、APP の利益は普遍的というより条件付きにみえる</strong>。</p>
+<p>病因を超えて、患者選択では <strong>臨床的安定性、協力できる能力、反応する見込み</strong> を考慮すべきである。メタ解析が示唆する「より利益が得られそうな患者像」は次の通りである。</p>
+<ul><li>より若年</li><li><strong>高度な呼吸補助（HFNC・CPAP・NIV）を受けている</strong></li><li>BMI が中程度</li><li>軽度〜中等度の低酸素血症</li><li>中等度に上昇した呼吸数</li></ul>
+<p>成功する実装には、<strong>生理学的な適合性と、患者の忍容性・血行動態の安定性のバランス</strong>を取ることが要る。</p>
+<p><strong>■ いつ</strong></p>
+<p>現行ガイドラインは正確なタイミングを規定していない。しかし利用可能なエビデンスは早期開始を支持する。</p>
+<ul><li>事後解析とメタ解析は、<strong>HFNC 開始から24時間以内、あるいは入院早期の開始</strong>が、生存改善と挿管リスク低下に関連することを示した</li><li>ただし最適な開始ウィンドウは臨床的議論の的であり続けている</li></ul>
+<p><strong>■ どう</strong></p>
+<p>著者らはここで <strong>即時の生理学的有効性（efficacy）と持続的な臨床的効果（effectiveness）を区別することが決定的に重要</strong>だと強調する。</p>
+<p>APP はしばしば酸素化と呼吸メカニクスの急速な改善をもたらすが、<strong>これらの生理学的な獲得を実際の臨床的利益に翻訳できるかは、厳密に治療アドヒアランスに懸かっている</strong>。</p>
+<ul><li>蓄積するエビデンスは、腹臥位で過ごした時間と臨床的利益との <strong>用量反応関係</strong>を裏づける。アウトカム改善と関連するのは <strong>1日8〜10時間を超える長時間セッション</strong></li><li>この目標の達成にはしばしば <strong>多職種アプローチ</strong>が要る：看護支援、患者教育、快適性の最適化</li><li>モニタリングには、酸素化・呼吸数・<strong>ROX index（SpO₂/FIO₂ を呼吸数で割った指標）</strong> に加え、臨床的忍容性と悪化の徴候を含めるべきである</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3（Ehrmann et al. より。同ライセンス） <strong>非挿管患者と挿管患者における腹臥位のガイドラインとモニタリングの要約。</strong> 左右2枚のカード構成で、上部に淡青の見出し帯、その下にベッド上の患者イラスト、さらに下に箇条書きの要約が入る。 <strong>左カード「Prone position in non-intubated patients」</strong>：鼻カニューラ（HFNC 回路）を装着した患者が、枕を胸の下に入れて腹臥位で寝ている。ベッドサイドには HFNC 装置と加温加湿器のポールがある。要約は — 適応：COVID-19 関連の急性低酸素性呼吸不全の非挿管患者／タイミング：早期に開始／<strong>実施時間：忍容できる限り（最低8時間以上）、1日複数回</strong>／モニタリング：酸素化、呼吸数、ROX index、呼吸ドライブと努力、快適性、忍容性、意識、圧関連の皮膚合併症。 <strong>右カード「Prone position in intubated patients」</strong>：人工呼吸器につながれた挿管患者が、胸部と骨盤の下にクッションを入れた腹臥位で、顔を横に向けて寝ている。要約は — 適応：中等症〜重症ARDS（換気設定最適化後も P/F&lt;150 mmHg かつ PEEP≥5 cmH₂O と定義）／タイミング：挿管後早期、低換気量を適用し PEEP を調整する安定化期間の後、その終了時点で P/F&lt;150 mmHg のまま／<strong>実施時間：長時間セッション（連続16時間以上）</strong>／モニタリング：持続的な血行動態、酸素化、圧関連の皮膚合併症。 2枚を並べたときに効いてくるのは、<strong>モニタリング項目の非対称性</strong>である。非挿管側には「呼吸ドライブと努力」「快適性」「忍容性」「意識」が並ぶのに対し、挿管側は「血行動態」だけ。<mark class="hl">非挿管患者では、患者本人の主観と協力がそのまま治療の「用量」を決める</mark> ということが図から読み取れる。</p>
+</div>
+<h3>8. 腹臥位への生理学的反応は予後を予測できるか 🔬</h3>
+<p>腹臥位への反応は通常、中間的な生理学的変数、最も多くは <strong>PaO₂ または P/F 比の変化</strong>で評価される。腹臥位中に測るか、再仰臥位の後に測る。PaCO₂、呼吸メカニクス、EIT 由来の指標は実臨床ではあまり使われない。</p>
+<p><strong>■ 一貫しない所見</strong></p>
+<div class="tw"><table>
+<thead><tr><th>所見</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>観察研究（複数）</td><td>最初の腹臥位セッション中または直後の早期の酸素化改善は、ICU死亡の減少、ECMOなし生存の改善、人工呼吸器なし日数の増加といった良好な転帰と関連</td></tr>
+<tr><td>PROSEVA の二次解析</td><td><mark class="hl">初回セッション後の酸素化レスポンダーと非レスポンダーのあいだで生存に差を認めなかった</mark></td></tr>
+</tbody></table></div>
+<p>この不一致は重要な概念的問いを提起する、と著者らは述べる。すなわち、<strong>腹臥位への生理学的反応は主に肺のリクルータビリティを反映しているのか、それともベースラインの疾患重症度に影響されているのか</strong>。</p>
+<ul><li>酸素化の改善は、リクルートメントと V/Q マッチング改善の余地が大きい患者を同定しうる</li><li>しかし酸素化反応は、<strong>肺保護とは無関係な因子</strong>にも左右されうる：肺灌流、胸壁メカニクス、ARDS の形態</li><li>逆に、酸素化が実質的に改善しない患者でも、<strong>局所の肺 stress と strain の低減と均質化を通じて腹臥位から利益を得ている可能性がある</strong></li></ul>
+<p>したがって酸素化反応だけでは、腹臥位の複雑な生理学的・保護的効果を捉えきれない。</p>
+<p><strong>■ 持続する改善のほうが有望</strong></p>
+<p>単回セッション中の一過性の改善とは対照的に、<strong>再仰臥位の後、あるいは後続のセッションで持続する酸素化改善のほうが予後価値が高そうであり、肺のリクルータビリティをよりよく反映するかもしれない</strong>。ただし支持するエビデンスは限られている（Table S2）。</p>
+<p>酸素化以外の予後マーカーとして検討されているもの：</p>
+<ul><li><strong>腹臥位中の PaCO₂ の低下</strong>（肺胞換気の改善と死腔の減少を反映）</li><li>腹臥位中または再仰臥位後の <strong>呼吸器系コンプライアンスの改善</strong></li><li>初回腹臥位セッションから4時間以内の <strong>V/Q マッチングの改善</strong></li></ul>
+<p><strong>■ 非挿管患者では</strong></p>
+<ul><li>APP 中の酸素化改善は挿管の可能性の低下と関連するという解析があるが、所見は一貫しない</li><li>画像に基づく反応が追加情報を与えうる。たとえば <strong>初回 APP セッション後に肺エコーで評価した背側含気の増加は、挿管リスクの低下と関連</strong>していた（Ibarra-Estrada ら）</li></ul>
+<p><strong>■ 著者らの結論（原文の慎重さのまま）</strong></p>
+<p>生理学的反応、とりわけ酸素化・CO₂ クリアランス・肺メカニクス・局所含気の <strong>持続的な改善</strong>は、この介入から利益を得る可能性の高い患者の同定に役立つかもしれない。しかし利用可能なエビデンスは大部分が観察的であり、<strong>腹臥位の継続または終了の判断を導くための、検証された生理学的基準は存在しない</strong>。</p>
+<p>したがって、<strong>実臨床において腹臥位を維持すべきか中止すべきかを、生理学的反応だけで決定することを支持するエビデンスは不十分である</strong>。</p>
+<h3>9. 有害事象・業務負荷・禁忌 ⚠️</h3>
+<p>腹臥位は、挿管・非挿管のいずれで適用される場合も、<strong>訓練されたチームが実施すれば概ね安全</strong>である。ただし副作用と禁忌のプロファイルは両者で異なる。</p>
+<p><strong>■ 挿管患者</strong></p>
+<p>腹臥位に直接の物的コストは生じないが、<strong>業務負荷の面では大きな含意</strong>を伴う。合併症は比較的よくみられるが、典型的には管理可能である。</p>
+<div class="tw"><table>
+<thead><tr><th>合併症</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td>褥瘡（pressure injury）</td><td><strong>最も頻度が高く、用量依存性</strong>。とくに長時間セッションで増える</td></tr>
+<tr><td>顔面浮腫</td><td>頻度が高い</td></tr>
+<tr><td>体位変換時の一過性の血行動態不安定</td><td>頻度が高い</td></tr>
+<tr><td>計画外抜管</td><td>頻度は低いが重大になりうる</td></tr>
+<tr><td>デバイスの逸脱</td><td>同上</td></tr>
+<tr><td>末梢神経障害</td><td>同上</td></tr>
+<tr><td>眼合併症</td><td>同上</td></tr>
+</tbody></table></div>
+<p><strong>■ 禁忌の考え方</strong></p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 「相対的禁忌」で腹臥位を諦めない <mark class="hl">広く受け入れられている絶対的禁忌は、不安定な脊椎損傷ただ1つである。</mark> <mark class="hl">肥満、最近の手術、ドレーンの存在といった歴史的・理論的な相対的禁忌は、経験あるチームが患者を腹臥位にすることを思いとどまらせるべきではない、と著者らは明記している。</mark></p>
+</div>
+<p><strong>■ 人員</strong></p>
+<p>挿管患者の腹臥位は資源集約的であり、典型的には <strong>1回の手技あたり3〜5名の訓練されたスタッフ</strong>を要する。業務負荷は体位変換の時点に集中する。</p>
+<p><strong>■ 非挿管患者（APP）</strong></p>
+<p>対照的に APP は <strong>有害事象の発生率が著しく低い</strong>。主な制限因子は <strong>不耐容・不快感・疼痛</strong>であり、表層の皮膚損傷やデバイスの位置ずれといった軽微な合併症が時折生じる程度である。</p>
+<p>ただし APP は <strong>異なる種類の業務負荷</strong>を課す。セッションを通じてアドヒアランスを確保するため、<strong>継続的なモニタリング、患者のコーチング、頻回の再評価</strong>が必要になる。</p>
+<h3>10. 実装の現実 — エビデンスと診療の乖離 🏥</h3>
+<p>強いエビデンスがあるにもかかわらず、腹臥位の実装は歴史的に一貫せず、時間的・地域的に大きなばらつきがあった。著者らはこの節に相当の紙幅を割いている。</p>
+<p><strong>■ パンデミック前</strong></p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>実施率</th></tr></thead>
+<tbody>
+<tr><td>LUNG SAFE</td><td>重症ARDS患者の <strong>20%未満</strong>にしか腹臥位が適用されていなかった</td></tr>
+<tr><td>APRONET</td><td>確立した基準（P/F&lt;150 mmHg）を満たす患者のなかでも、腹臥位にされたのは少数派</td></tr>
+</tbody></table></div>
+<p>西欧では取り込みがやや高かった（PROSEVA を含む主要試験の多くが実施された地域）が、全体の利用率は低いままで、とくに北米では腹臥位が <strong>救命処置として温存される</strong>ことが多かった。</p>
+<p>著者らは興味深い指摘をしている。<strong>PROSEVA が選択されたARDS患者を組み入れたという事実は、臨床医が適用しないことを正当化しうる</strong>。しかしこの躊躇は、<strong>エビデンスの背景がパンデミック前と同様であったにもかかわらず、COVID-19 患者では観察されなかった</strong>。</p>
+<p><strong>■ パンデミック期</strong></p>
+<div class="tw"><table>
+<thead><tr><th>地域</th><th>挿管患者での腹臥位実施率</th></tr></thead>
+<tbody>
+<tr><td>欧州の複数コホート</td><td>適格例の <strong>60〜80%</strong></td></tr>
+<tr><td>北米</td><td>適格例の3分の1〜2分の1が早期腹臥位。<strong>最大47%が一度も腹臥位にされなかった</strong></td></tr>
+<tr><td>西欧以外</td><td>さらに大きなばらつきが報告されている</td></tr>
+</tbody></table></div>
+<p>非挿管患者では、APP は高品質エビデンスに先んじて広く採用されたが、実装は一貫しないままである。<strong>オランダの16のICUのコホートでは、適格な非挿管患者のうち APP を受けたのはわずか16%</strong>であった。</p>
+<p><strong>■ パンデミック後</strong></p>
+<p>北米では早期腹臥位が <strong>適格患者の約30〜40%</strong>に適用されており、パンデミック前より実質的に高いが、パンデミックのピークよりは低い水準にとどまる。</p>
+<p><strong>■ 著者らの分析</strong></p>
+<p>&gt; これらのデータは、<strong>エビデンスと診療の持続的なギャップ</strong>を浮き彫りにする。効率についての明確な臨床エビデンスがあるにもかかわらず、腹臥位は過少利用されたままであり、その実装はエビデンス単独よりも、<strong>人員配置・訓練・プロトコル化といったシステムレベルの要因</strong>に大きく左右されている。</p>
+<p>著者らは、実装の障壁を多層的に探索する必要があると述べる。</p>
+<ul><li><strong>個人レベル</strong>：臨床医の信念、時間帯による人員配置の変動、ユニットの症例構成</li><li><strong>システムレベル</strong>：国ごとの人員配置の異質性、ICU のコストと診療報酬モデル</li></ul>
+<p>そして重要な洞察を添えている。<strong>科学的エビデンスが高くても、腹臥位その他の介入に使える資源が制約されていれば、優先順位づけが起こる。逆に、資源を追加しても、臨床医の信念のような別の障壁には効かないかもしれない。</strong></p>
+<h3>11. 現在検討中の問題 🔭</h3>
+<p><strong>■ 非COVID の急性低酸素性呼吸不全における APP</strong></p>
+<p>APP は COVID-19 関連 AHRF の治療として広く採用されたが、<strong>非COVID病因での役割はほとんど定義されていない</strong>。</p>
+<ul><li>パンデミック前：5つの小規模症例集積・観察研究が酸素化改善を示唆</li><li>最近：HFNC で治療された非COVID AHRF 患者 <strong>10例</strong>の前向き生理学研究で、<strong>30分の APP が肺換気の均質性を有意に改善</strong>し、その効果は再仰臥位後も持続した</li><li>しかし <strong>挿管や死亡といった臨床アウトカムを評価したRCTは存在しない</strong></li></ul>
+<p>進行中の大規模RCT3件：</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>規模</th><th>主要評価項目</th></tr></thead>
+<tbody>
+<tr><td>PRONELIFE</td><td>世界35 ICU から650例を予定</td><td>14日以内の気管挿管</td></tr>
+<tr><td>英国42病院の多施設試験（ISRCTN63784375）</td><td>1,708例を予定</td><td>ランダム化後30日以内の挿管</td></tr>
+<tr><td>フランスの試験（NCT06966310）</td><td>HFNC を受ける非COVID市中肺炎 1,078例</td><td>28日時点の挿管</td></tr>
+</tbody></table></div>
+<p>著者らは、AHRF の病因と呼吸補助戦略の異質性を踏まえると、<strong>APP の利益の大きさは集団間で大きく異なりうる</strong>と述べる。</p>
+<p><strong>■ 軽症〜中等症の挿管ARDS への拡大</strong></p>
+<p><strong>PROMILD 試験（NCT05056090）</strong> が進行中。軽症〜中等症ARDS の人工呼吸患者への早期腹臥位を評価し、主要評価項目は人工呼吸器なし日数、追加のエンドポイントに死亡と人工呼吸期間を含む。</p>
+<p><strong>■ 超長時間の腹臥位</strong></p>
+<p>従来の16時間を超えるセッション（prolonged PP）が代替戦略として検討されている。臨床アウトカムへの効果に加え、<strong>体位変換の回数が減ることで資源負担が軽くなる</strong>ことも期待される。</p>
+<ul><li>最近のシステマティックレビュー・メタ解析（<strong>9研究、n=1,045</strong>）：90日死亡やその他の臨床アウトカムへの有意な効果を認めず。<strong>確信度は low to very low</strong></li><li>重要な制約：組み入れ研究の大半、<strong>3つのRCTすべてが COVID-19 ARDS</strong> を対象としており一般化可能性が限られる</li><li>その後の <strong>16時間 vs 24時間</strong>を比較したRCTでも臨床アウトカムに差はなかった。ただしこちらは <strong>患者の85%超が非COVID ARDS</strong> であり、COVID-19 集団を超えてエビデンスを広げた</li><li>進行中：<strong>48〜120時間</strong>というさらに長い連続腹臥位を評価する試験（NCT06854627）</li></ul>
+<p><strong>■ VV-ECMO 施行中の ARDS への腹臥位</strong></p>
+<p>2つのRCTが VV-ECMO 中の腹臥位 vs 仰臥位を評価したが、結果は一致しなかった。著者らはその理由を患者背景とベースライン重症度の差に求める。</p>
+<div class="tw"><table>
+<thead><tr><th></th><th>PRONECMO（Schmidt ら）</th><th>Tong ら</th></tr></thead>
+<tbody>
+<tr><td>ECMO 導入前に腹臥位を受けていた割合</td><td><strong>95%超</strong></td><td><strong>15%未満</strong></td></tr>
+<tr><td>COVID-19 の割合</td><td>90%超</td><td>約半数</td></tr>
+<tr><td>含意</td><td>より重症・難治性の集団</td><td>30日以内のECMO離脱成功率が高く、ECMO期間も短い</td></tr>
+</tbody></table></div>
+<p>最近のメタ解析は、<strong>ECMO 中の腹臥位の潜在的利益は非COVID の ARDS 集団でより大きい可能性</strong>を示唆している。</p>
+<p><strong>■ 中等症〜重症ARDS でもう1本試験をやるべきか</strong></p>
+<p>この問いは ESICM コンセンサス会議で提起され、<strong>この領域に equipoise（臨床的均衡）が欠けている以上、実施は考えにくい</strong>と判断された。</p>
+<p>ただし著者らは、中等症〜重症ARDS で腹臥位セッションの <strong>長さ</strong>を比較する試験は進行中であり、ベッドサイドでの肺換気分布の評価と組み合わせた仮説駆動型の試験なら、セッションの持続時間と反復をよりよく定義できるかもしれない、と述べる。</p>
+<p>そして今後の方向性を明確に示す。<strong>将来の研究は「腹臥位が有益か」を単に決めることを超えて、「どの患者が最も利益を得るか」「いつ開始すべきか」「どうすれば提供を最適化できるか」の同定に焦点を当てるべきである。</strong></p>
+<h3>12. 次のパンデミックに向けた腹臥位戦略 🌐</h3>
+<p>COVID 型のパンデミックが再来した場合、腹臥位は <strong>反応的な救命処置から、能動的な標準治療へ進化すべき</strong>である。著者らは COVID-19 からの重要な教訓を次のように要約する。</p>
+<p><strong>腹臥位は、ICU の「サージキャパシティ」を緩和しうる、高価値・低コストの介入である。</strong></p>
+<p>将来の戦略が優先すべきこと：</p>
+<ul><li><strong>早期開始</strong>と、反応に導かれた個別化された適用</li><li>非挿管患者では、<strong>挿管を防ぐために APP を標準化された臨床ケアパスに組み込む</strong></li><li>ただし普遍的な義務化ではなく、<strong>ベッドサイドの生理学的指標で反応しそうな患者を同定する</strong>方向の意思決定</li></ul>
+<p>大規模実装の成功は、<strong>チームのパフォーマンスと患者のアドヒアランスの双方の最適化</strong>に懸かっている。</p>
+<ul><li>プロトコルは「<strong>comfort-driven proning（快適性主導の腹臥位）</strong>」戦略を強調すべきである。人間工学的なポジショニング、褥瘡や神経圧迫といった合併症を防ぐための <strong>圧再分配デバイス</strong>の使用を含む</li><li>用量反応関係は、<strong>十分な1日実施時間（たとえば12〜16時間）</strong> の達成の重要性を裏づける。これは専任の多職種「<strong>Prone Team</strong>」によって促進されうる</li><li>こうしたチームは、安全なポジショニングを確保し、患者の忍容性を高め、長時間セッションを通じてアドヒアランスを維持できる</li><li>パンデミックへの備えには、<strong>標準業務手順書（SOP）の整備、構造化された訓練プログラム、拡張可能な実装モデル</strong>を、パンデミック間期のうちに開発しておくことを含めるべきである</li></ul>
+<h3>13. 結論と Limitation ⚠️</h3>
+<p><strong>■ 著者らの結論</strong></p>
+<p>腹臥位は挿管・非挿管いずれのARDS患者にも重要な生理学的・患者中心の利益をもたらす。生存利益を示した高品質RCTに支えられ、難治性低酸素血症の救命処置からエビデンスに基づく管理の中核へ進化した。COVID-19 はとくに非挿管患者での採用を加速させた。</p>
+<p>ただし <strong>APP の臨床的利益は条件付き（conditional）であり、治療アドヒアランスに駆動される用量反応関係を反映している</strong>という証拠が増えている。</p>
+<p><strong>■ 残る主要な不確実性（著者らの列挙）</strong></p>
+<ul><li>非挿管患者における <strong>非COVID-19 ARDS</strong> での有効性</li><li><strong>ECMO 中</strong>の役割</li><li><strong>長時間セッションの至適時間</strong></li><li><strong>軽症〜中等症ARDS</strong> での利益</li></ul>
+<p><strong>■ 本ノートの読者として押さえるべき制約</strong></p>
+<ul><li>本論文は <strong>ナラティブレビュー</strong>である。検索戦略・バイアスリスク評価・GRADE 格付けは行われていない</li><li>生理学的反応と予後の関係、および APP の生理学的効果の詳細は <strong>Table S1・S2（補遺）</strong> に依拠しており、本文だけでは検証できない</li><li>進行中試験の結果は当然ながら未知であり、本レビューの結論は数年内に変わりうる</li></ul>
+<h2>🧐 批判的吟味 — ジャーナルクラブでの論点</h2>
+<p><strong>1. 強い推奨が事実上1本の試験に依存している</strong></p>
+<p>ESICM・ATS の強い推奨は、著者ら自身の記述によれば「主として PROSEVA によって駆動されている」。そして著者らは、Poole らの leave-out メタ解析が <strong>PROSEVA を外れ値（outlier）として明確に示した</strong>ことを認めている。</p>
+<p>ここで解釈が分かれる。著者らはこれを「この研究の仮説・論理・デザインに完全に一致する」＝<strong>PROSEVA だけが正しい設計だったから他と違って当然</strong>、と読む。しかし同じ事実は「<strong>効果が1試験でしか再現されていない</strong>」とも読める。前回のウォッチャーで扱った <span class="wl">2026 メタ解析が食い違うとき — 統合推定値の先を読む（バイアスリスク層別でメラトニンの効果は消える・CC）</span> の論点がそのまま当てはまる。<mark class="hl">外れ値であることは、それ自体では正しさの証明にも誤りの証明にもならない。</mark></p>
+<p><strong>2. 著者構成と解釈の距離</strong></p>
+<p>Claude Guérin は PROSEVA の責任研究者であり、2004年の陰性試験の第一著者でもあり、APRONET の著者でもあり、本レビューの共著者でもある。<strong>この分野の歴史そのものを書いた人が、その歴史の評価を書いている</strong>。記述の質は高いが、PROSEVA を外れ値と指摘した meta-analysis への反論が1文で済まされている点は、JCで一度立ち止まる価値がある。</p>
+<p><strong>3. APP の用量反応は「試験間比較」から推論されている</strong></p>
+<p>腹臥位時間の中央値と結果の関係（2時間台＝陰性、12時間＝陽性）は説得的に見える。しかし <mark class="hl">これは試験間の生態学的（ecological）比較であり、ランダム化された比較ではない</mark>。実施時間が長かった試験は、患者背景・重症度・呼吸補助・実施国・時期のすべてが異なる。</p>
+<p>この弱点を唯一補うのが <strong>Liu ら 2024</strong>（prolonged vs shorter APP を直接ランダム化、n=409、挿管 17% vs 27%）である。JCで読むならこの1本を本命に据えるべきで、レビュー中の位置づけは Table 1 の1行に留まっている。</p>
+<p><strong>4. 「実施時間が長い＝アドヒアランス良好＝もともと軽症／協力的」という交絡</strong></p>
+<p>長時間の腹臥位に耐えられる患者は、そもそも呼吸困難が軽く、意識が保たれ、協力的な患者である可能性が高い。<mark class="hl">用量反応に見えるものが、実は「予後の良い患者ほど長く腹臥位でいられる」という逆向きの関係かもしれない。</mark> 著者らも「実臨床での有効性は患者のコンプライアンスに強く依存する」と述べているが、この交絡そのものには踏み込んでいない。</p>
+<p><strong>5. アウトカムの選択とオープンラベル</strong></p>
+<p>APP のRCTの主要評価項目はほぼすべて「挿管」または「挿管または死亡」の複合である。<mark class="hl">挿管の判断は非盲検の臨床医が下す。</mark> 腹臥位群であることを知っている医師が挿管を先延ばしする方向のバイアスは原理的に排除できない。死亡単独で有意差を示した試験は本レビューの表には出てこない（Harrois 2025 も 95%確信区間は 0.48–1.09 で1をまたぐ）。</p>
+<p><strong>6. ベイズ解析の提示のしかた</strong></p>
+<p>Harrois 2025 は「主要評価項目減少の事後確率 93.8%」と紹介されている。同じ結果の頻度論的な表現は「OR 0.74、95%確信区間 0.48–1.09」であり、<strong>従来の基準では有意ではない</strong>。どちらの表現も嘘ではないが、読者に与える印象は大きく違う。既存ノート <span class="wl">敗血症性ショックへのアルブミン蘇生は死亡を10%減らす（頻度論・ベイズ併用メタ解析 2026）</span> と並べると、ベイズ表現の読み方の教材になる。</p>
+<p><strong>7. 有害事象が定量化されていない</strong></p>
+<p>褥瘡が「最も頻度が高く用量依存」と書かれているが、<strong>発生率の数値が1つも示されていない</strong>。8本の文献が引用されているにもかかわらず、である。24時間・48〜120時間という超長時間化が検討されている状況で、<mark class="hl">害の大きさが数値で示されないのは、実装を判断する側にとって痛い欠落</mark>である。JCで扱うなら引用文献 [53–58] に当たりたい。</p>
+<p><strong>8. サブフェノタイプによる個別化はことごとく空振りしている</strong></p>
+<p>LIVE 試験（focal ARDS）でも、Fosset らの機械学習による3サブフェノタイプでも、腹臥位の死亡への効果の修飾は示されなかった。低炎症性／高炎症性フェノタイプに至っては「データを承知していない」と書かれている。<mark class="hl">「誰に効くか」を絞り込む試みは、現時点ですべて失敗している</mark>というのが正直な現状であり、レビューが掲げる将来の方向性（どの患者が最も利益を得るか）はまだ入口にすら立っていない。</p>
+<p><strong>9. ESICM と ATS の NMBA 推奨の食い違い</strong></p>
+<p>同じエビデンスから、ESICM は「持続 NMBA のルーチン使用に反対する強い推奨」、ATS は「条件付きで使用」と正反対に近い結論を出している。既存ノート <span class="wl">ARDS 筋弛緩薬 ROSE trialとACURASYSの比較</span> と併せると、ガイドライン間の不一致をどう扱うかの好例になる。</p>
+<p><strong>10. 利益相反の位置</strong></p>
+<p>責任著者と第2著者はいずれも <strong>Aerogen・Fisher &amp; Paykel</strong>（HFNC・エアロゾルデバイス）と関係がある。本レビューは APP の生理学的効果が「HFNC または従来型酸素療法と組み合わせたときにより顕著」と述べており、主題と無関係とは言えない。記述自体は原著データに忠実だが、開示は読んでおくべきである。</p>
+<p><strong>11. JCで投げかける問い</strong></p>
+<ul><li>当院で P/F&lt;150 の症例に腹臥位が実施されている割合はどれくらいか。LUNG SAFE の20%未満、パンデミック期欧州の60〜80%のどちらに近いか</li><li>「16時間」を24時間に延ばす動機は患者利益か、それとも体位変換の手間の削減か。後者なら、それを明示したうえで害と天秤にかけるべきではないか</li><li>非COVID の APP について、進行中の3試験の結果が出るまで当院はどう振る舞うか（やる／やらない／限定的に試す）</li></ul>
+<h2>📚 主要な引用文献</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>腹臥位の最初の記述（1976年）</td><td>Piehl MA, Brown RS. Use of extreme position changes in acute respiratory failure. Crit Care Med. 1976;4:13–14</td></tr>
+<tr><td>2</td><td>決定打となったRCT。28日死亡 16.0% vs 32.8%</td><td>Guérin C, Reignier J, Richard J-C, et al. Prone positioning in severe acute respiratory distress syndrome. N Engl J Med. 2013;368:2159–68</td></tr>
+<tr><td>5</td><td>2023年 ESICM ガイドライン（強い推奨の出どころ）</td><td>Grasselli G, Calfee CS, Camporota L, et al. ESICM guidelines on acute respiratory distress syndrome. Intensive Care Med. 2023;49:727–59</td></tr>
+<tr><td>6</td><td>前作にあたる腹臥位レビュー（why, when, how and for whom）</td><td>Guérin C, Albert RK, Beitler J, et al. Prone position in ARDS patients. Intensive Care Med. 2020;46:2385–96</td></tr>
+<tr><td>25</td><td>初期4試験の個別患者データメタ解析。P/F&lt;100 で生存改善</td><td>Gattinoni L, Carlesso E, Taccone P, et al. Minerva Anestesiol. 2010;76:448–54</td></tr>
+<tr><td>26</td><td>leave-out メタ解析。PROSEVA が外れ値であることを示した</td><td>Poole D, Pisa A, Fumagalli R. Prone position for ARDS and the hazards of meta-analysis. Pulmonology. 2024;30:529–36</td></tr>
+<tr><td>34</td><td>APP のメタトライアル。1,121例、挿管または死亡 33% vs 44%</td><td>Ehrmann S, Li J, Ibarra-Estrada M, et al. Lancet Respir Med. 2021;9:1387–95</td></tr>
+<tr><td>39</td><td>APP の実施時間を直接ランダム化した唯一のRCT。挿管 17% vs 27%</td><td>Liu L, Sun Q, Zhao H, et al. Prolonged vs shorter awake prone positioning. Intensive Care Med. 2024;50:1298–309</td></tr>
+<tr><td>41</td><td>APP の個別参加者データメタ解析（利益を得やすい患者像の根拠）</td><td>Luo J, Pavlov I, Tavernier E, et al. JAMA Intern Med. 2025;185:572–81</td></tr>
+<tr><td>42</td><td>ATS ガイドライン更新（条件付き → 強い推奨）</td><td>Qadir N, Sahetya S, Munshi L, et al. Am J Respir Crit Care Med. 2024;209:24–36</td></tr>
+<tr><td>44</td><td>機械学習によるサブフェノタイプ。腹臥位の死亡への効果修飾は認めず</td><td>Fosset M, von Wedel D, Redaelli S, et al. Crit Care. 2025;29:116</td></tr>
+<tr><td>51</td><td>腹臥位への反応の定義と予後価値のSR・メタ解析</td><td>Caccioppola A, Ippolito M, Cortegiani A, Guérin C, Grasselli G. Crit Care. 2026</td></tr>
+<tr><td>64</td><td>LUNG SAFE。重症ARDSの20%未満にしか腹臥位が実施されていなかった</td><td>Bellani G, Laffey JG, Pham T, et al. JAMA. 2016;315:788–800</td></tr>
+<tr><td>65</td><td>APRONET。適応を満たしても腹臥位にされるのは少数派</td><td>Guérin C, Beuret P, Constantin JM, et al. Intensive Care Med. 2018;44:22–37</td></tr>
+<tr><td>81</td><td>超長時間腹臥位のSR・メタ解析。9研究 n=1,045、90日死亡に効果なし</td><td>Jung C, Gillmann H-J, Stueber T. Crit Care. 2025;29:475</td></tr>
+<tr><td>83</td><td>PRONECMO。VV-ECMO 中の腹臥位でECMO離脱に差なし</td><td>Schmidt M, Hajage D, Lebreton G, et al. JAMA. 2023;330:2343</td></tr>
+</tbody></table></div>
+<h2>🔗 関連</h2>
+<ul><li><span class="wl">Critical Care ウォッチャー</span></li><li><span class="wl">論文ウォッチャー設定</span></li><li><span class="wl">ARDSに対する腹臥位療法レビュー（ICM2020 why, when, how and for whom）</span></li><li><span class="wl">腹臥位療法の機序と実際（聖路加プロトコル）</span></li><li><span class="wl">重症ARDSにおける腹臥位とVAP（PROSEVA二次解析）</span></li><li><span class="wl">ARDS 肺形態に応じた個別化呼吸管理（LIVE study）</span></li><li><span class="wl">ARDS 筋弛緩薬 ROSE trialとACURASYSの比較</span></li><li><span class="wl">早期ARDSにおける筋弛緩薬（ACURASYS試験）</span></li><li><span class="wl">ARDS人工呼吸ガイドライン2017（ATS_ESICM_SCCM）</span></li><li><span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span></li><li><span class="wl">ARDSにおける呼吸ドライブ P-SILI（ICM2020）</span></li><li><span class="wl">HFNC（ネーザルハイフロー）基礎まとめ</span></li><li><span class="wl">README</span></li></ul>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>Take home <mark class="hl">挿管ARDSの腹臥位は「P/F&lt;150 で早期・16時間以上・中止基準は仰臥位で判定」という PROSEVA の運用が本体である。5要素のどれかを崩したものは PROSEVA の腹臥位ではない。</mark> <mark class="hl">腹臥位中に酸素化が上がらないことは中止の理由にならない。生理学的反応だけで継続・中止を決める根拠は存在しない。</mark> <mark class="hl">覚醒下腹臥位は「やったか」ではなく「1日何時間できたか」で効く。中央値2時間台の試験はすべて陰性、12時間で挿管 17% vs 27%。</mark> <mark class="hl">広く認められている絶対的禁忌は不安定な脊椎損傷のみ。肥満・術後・ドレーンは腹臥位を諦める理由にならない。</mark> <mark class="hl">最大の障壁はエビデンスではなく実装。適応例のうち実際に腹臥位を受けた割合を自施設で測ることが、次の一手になる。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
