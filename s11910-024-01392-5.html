@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>頭蓋内圧クライシスをどう乗り切るか — SIBICCとCREVICEを1本の管理プロトコルに束ねる（総説・CurrNeurolNeurosciRep2025）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s11910-024-01392-5.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">頭蓋内圧クライシスをどう乗り切るか — SIBICCとCREVICEを1本の管理プロトコルに束ねる（総説・CurrNeurolNeurosciRep2025）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Viarasilpa T. Managing Intracranial Pressure Crisis. Curr Neurol Neurosci Rep. 2025;25(1):12. DOI: 10.1007/s11910-024-01392-5</dd><dt>掲載誌</dt><dd>Current Neurology and Neuroscience Reports（2025）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s11910-024-01392-5" target="_blank" rel="noopener">doi.org/10.1007/s11910-024-01392-5</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Managing Intracranial Pressure Crisis</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み（試案） <strong>■ 今日からコストゼロで始められるもの</strong></p>
+<ul><li><strong>Tier zero を「頭蓋内圧が上がる前にやること」のチェックリストにする</strong>：ベッドアップ30〜45度・頭部正中位・PaCO2 35〜38 mmHg・SpO2 94%以上（高酸素は避ける）・体温 37.5℃未満・血糖 110〜180 mg/dL・Hb 7 g/dL 超・Na補正・軽度鎮静（RASS 0〜−2）。<strong>この9項目は全部ゼロコストで、どれも外すと二次性脳損傷になる</strong>。当院のICU入室時セットに組み込む価値が最も高い</li><li><strong>輸液は 0.9% NaCl を第一選択に明文化する</strong>：本稿は急性脳損傷に対して生理食塩水を推奨し、バランス晶質液は2つのRCTのTBIサブグループ解析で90日死亡が高かったと明記している。当院の「原則バランス晶質液」の運用に、<strong>急性脳損傷だけは例外</strong>という但し書きを入れる</li><li><strong>神経学的悪化（clinical neuroworsening）の定義を共有言語にする</strong>：運動GCSが1点以上低下／対光反射の低下／瞳孔不同 2 mm 超／両側散瞳／新規の局所運動障害・異常姿位／ヘルニア徴候・Cushing三徴。<strong>「なんとなく悪い」ではなく、この6項目のどれかを言えたときにコールする</strong>と決めれば夜勤の閾値がそろう</li></ul>
+<p><strong>■ プロトコル化するもの</strong></p>
+<ul><li><strong>高浸透圧療法の用量を1枚のカードにする</strong>：20%マンニトール 0.5〜1 g/kg を5〜15分／23.4% NaCl 30〜60 mL または 3% NaCl 150 mL を10〜30分。<strong>7.5% を超える濃度は必ず中心静脈から</strong>。この3行を救急カートに貼るだけで、深夜の緊急投与の迷いが消える</li><li><strong>ICPモニタが無い時間帯の運用を決める</strong>：当院でも脳外科コールから穿頭までに時間がかかる。その空白を「何もしない」ではなく <strong>CREVICE の Tier 1（4時間ごとの高浸透圧療法定時投与）</strong> で埋める、という合意を脳外科と作っておく</li><li><strong>MAP チャレンジの手順書</strong>：MAP と CPP を10 mmHg・20分だけ上げて ICP の反応を見る。下がれば自動調節能は保たれており、その高い CPP を維持する。上がれば自動調節能が破綻しており昇圧薬を止めてベースラインに戻す。<strong>この間はマンニトール・高張食塩水・鎮静・EVD ドレナージを一切いじらない</strong>（いじると解釈できなくなる）</li><li><strong>神経学的悪化時のワークアップを定型化</strong>：ICP・MAP・CPP・SpO2・EtCO2・体温の再確認 ＋ 血糖・血算・生化学・血液ガス・敗血症検索 ＋ 緊急頭部CT。順序を固定して看護師と共有する</li></ul>
+<p><strong>■ 当院で議論の余地があるもの（投資判断）</strong></p>
+<ul><li><strong>定量的瞳孔計（NPi）</strong>：本稿の推奨の中で、当院がすぐ導入でき、かつ侵襲ゼロで反復できる唯一のモニタ。NPi 3 未満で対光反射低下、ICP 上昇で NPi が下がり高浸透圧療法で戻る。<strong>昏睡患者の「治療効果が出たか」を客観化できる</strong>点が大きい。既存ノート <span class="wl">集中治療における自動瞳孔測定（Special Issue Insight・ICM2022）</span> と合わせて費用対効果を検討したい</li><li><strong>ONSD と TCD</strong>：どちらも当院のエコーで今日から測れる。ONSD 5.3 mm 以上で ICP 20 mmHg 超と良好な相関、TCD 推定 ICP が 20.5 mmHg 未満なら頭蓋内圧亢進を除外できる（NPV 96%）。<strong>「除外」と「モニタ挿入の選別」に使う</strong>という位置づけは既存ノート <span class="wl">非侵襲的頭蓋内圧推定はどこまで使えるか — 代替にはならないが「除外」と「選別」には使える（ナラティブレビュー・ICM2026）</span> と完全に一致している</li><li><strong>PbtO2・脳マイクロダイアリシス</strong>：本稿でも第III相RCTで有効性が示せておらず、当院で先行投資する根拠は乏しい。BOOST-3 と BONANZA-GT の結果を待つ</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：重症頭蓋内圧亢進の管理指針としては、ICPモニタがある患者向けの <strong>SIBICC アルゴリズム</strong>（Seattle International Severe TBI Consensus Conference, 2019）と、Brain Trauma Foundation ガイドライン第4版（2017）が確立していた。ICPモニタが無い状況向けには、Chesnut らの ICE プロトコルを改訂した <strong>CREVICE プロトコル</strong>（2020）がある。ICP 目標は BTF 第4版と SIBICC が 22 mmHg 未満を推奨していた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：①この2つのプロトコルは「モニタの有無」で分断されており、<strong>現実の患者が時間軸の中で両方の状態を通過する</strong>（モニタ挿入待ちの数時間）ことに対応していない。②臨界ICP閾値が本当に22 mmHgでよいのかは決着していない。③ベッドサイドで使える多数の非侵襲モニタ（ICP波形解析・TCD・ONSD・瞳孔計・自動調節能・PbtO2・マイクロダイアリシス）を、どの局面でどう組み合わせるかの整理がなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：<strong>SIBICC と CREVICE を1本の時間軸に束ね</strong>、Tier zero（基礎的集中治療）→ Tier 1（ICP低下療法の開始）→ モニタの有無で分岐 → Tier 1〜3 の段階的増強、という単一のフレームワークにまとめた（Figure 1）。あわせて、<strong>臨界ICP閾値を「22 mmHg の一律運用」ではなく 18〜22 mmHg の幅として扱い、ICP波形（P2:P1比）や他のモニタで柔軟に決める</strong>という現場の実態（グローバル調査で 62% がこの運用）を追認した。ベッドサイド神経モニタリング7種を、目的と閾値のセットで1枚の表（Table 2）に整理した点も実務的な新規性である。ただし本稿は単著のナラティブレビューであり、束ねたプロトコル自体の前向き検証は行われていない。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICPクライシスの管理を、<strong>ICPモニタがある場合（SIBICC）と無い場合（CREVICE）に分けずに、ひとつの時間軸のフレームワークとして提示した</strong>単著のナラティブレビュー。要点は3つ。①ICP低下療法より先に、呼吸・循環・体温・血糖・Naといった <strong>Tier zero の基礎的集中治療をすべて整える</strong>こと。②ICP低下療法は <strong>モニタの有無にかかわらず疑った時点で開始する</strong>こと。③治療強度の上げ下げは、22 mmHg という単一の数字ではなく <strong>ICP値・トレンド・波形・非侵襲モニタを統合して決める</strong>こと。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th></th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>問い</td><td>ICPクライシスの患者を、ICPモニタの有無にかかわらずどう管理すべきか</td></tr>
+<tr><td>区分</td><td>ナラティブレビュー（*Curr Neurol Neurosci Rep* 2025、単著）。検索戦略・バイアス評価・GRADE格付けなし</td></tr>
+<tr><td>対象</td><td>重症脳損傷により脳浮腫・占拠性病変・水頭症をきたし、頭蓋内圧亢進が疑われる成人（GCS 8以下の昏睡が典型）。TBIに限らない</td></tr>
+<tr><td>統合した2つのプロトコル</td><td>SIBICC（ICPモニタあり・2019）と CREVICE（ICPモニタなし・2020）。BTFガイドライン第4版を土台にする</td></tr>
+<tr><td>Tier zero（基礎）</td><td>ICU入室・原因治療・肺保護換気（TV 6〜8 mL/kg PBW、プラトー圧 30 cmH2O未満、FiO2 60%以下、SpO2 94%以上、PaCO2 35〜38 mmHg、高酸素回避）・0.9%NaCl で正常血管内容量・MAP 80 mmHg以上・ベッドアップ30〜45度＋頭部正中・フェンタニル＋プロポフォールで軽度鎮静・TBIは1週間の痙攣予防・体温 37.5℃未満・血糖 110〜180 mg/dL・Hb 7 g/dL超・頻回の神経学的診察</td></tr>
+<tr><td>Tier 1（ICP低下療法の開始）</td><td>20%マンニトール 0.5〜1 g/kg を5〜15分／23.4%NaCl 30〜60 mL または 3%NaCl 150 mL を10〜30分／脳腫瘍・脳膿瘍にはデキサメタゾン 10〜20 mg ボーラス後 4〜24 mg/日／脳室内出血・水頭症には脳室ドレナージ／適応があれば外科的血腫除去・一次的減圧開頭</td></tr>
+<tr><td>臨界ICP閾値</td><td>BTF第4版・SIBICC は 22 mmHg 未満。旧BTFは 20 mmHg。2024年の観察研究は 18 mmHg。グローバル調査では 22 mmHg を厳守するのは 28% にとどまり、62% は 18〜22 mmHg の幅の中で波形などを見て柔軟に決めている</td></tr>
+<tr><td>神経学的悪化の定義</td><td>運動GCS 1点以上低下／対光反射低下／瞳孔不同 2 mm 超／両側散瞳／新規の局所運動障害・異常姿位／ヘルニア症候群・Cushing三徴</td></tr>
+<tr><td>モニタなし（CREVICE）</td><td>Tier 1＝4時間ごとの高張食塩水・マンニトール定時投与／Tier 2＝3%NaCl 持続投与＋PaCO2 30〜35 mmHg への過換気＋深鎮静／Tier 3＝バルビツレート昏睡・軽度低体温 35〜36℃・二次的減圧開頭</td></tr>
+<tr><td>モニタあり（SIBICC）</td><td>Tier 1＝ICP 18〜22 mmHg未満と正常波形を保つよう高浸透圧療法を増量・深鎮静・CPP 60〜70 mmHg／Tier 2＝PaCO2 32〜35 mmHg への過換気・MAPチャレンジ・筋弛緩薬の試験投与／Tier 3＝Tier 3 は CREVICE と同じ</td></tr>
+<tr><td>ベッドサイド神経モニタ</td><td>非侵襲ICP波形解析（P2:P1 1以上、TTP 0.2秒以上）／TCD（推定ICP 20.5 mmHg未満で除外、NPV 96%）／ONSD（5.3 mm以上、AUC 0.78）／定量的瞳孔計（NPi 3未満）／自動調節能（PRx）／PbtO2（20 mmHg未満で脳組織低酸素）／マイクロダイアリシス（乳酸 4 mmol/L超・LPR 25超など）</td></tr>
+<tr><td>限界</td><td>単著のナラティブレビュー。統合プロトコル自体は未検証。PbtO2 も自動調節能ガイド治療も第III相での有効性は未証明</td></tr>
+</tbody></table></div>
+<p><strong>押さえるべき7点</strong></p>
+<ol><li><strong>ICP低下療法の前に Tier zero を完成させる</strong>。呼吸・循環・体温・血糖・Na・鎮静・体位のどれか1つでも崩れていれば、それ自体が二次性脳損傷の原因になる</li><li><strong>ICPモニタが無いことは「治療を待つ理由」にならない</strong>。意識障害＋画像上の脳槽圧排・正中偏位・未除去の占拠性病変があれば、その時点で Tier 1 を開始し、同時に脳外科をコールする</li><li><strong>22 mmHg は絶対の線ではない</strong>。BTF第4版の根拠は生存と転帰を判別する閾値を探した1つの観察研究であり、2024年の別の観察研究は 18 mmHg を出している。実際の専門家の 62% は 18〜22 mmHg の幅で運用している</li><li><strong>ICP波形の P2 が P1 以上になったら頭蓋内コンプライアンスが落ちている</strong>。数値が閾値未満でも治療強度を上げる根拠になり、この早期エスカレーションは死亡率低下と関連していた</li><li><strong>MAPチャレンジは「昇圧が味方か敵か」を判別する検査</strong>。自動調節能が保たれていれば MAP を上げると ICP は下がり、破綻していれば ICP はさらに上がる</li><li><strong>非侵襲モニタは「診断」より「除外」と「選別」に強い</strong>。TCD 推定ICP 20.5 mmHg 未満の陰性的中率は 96%、陽性的中率は 23% しかない</li><li>ICPモニタと PbtO2 の併用は、318例の第III相RCTで6か月転帰を改善しなかった（不良転帰 52% 対 51%、OR 1.0、95%CI 0.6〜1.7、p=0.95）</li></ol>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>頭蓋内圧（ICP）とは何か</strong>。脳は硬い頭蓋骨という閉じた箱の中にあり、その中身は脳実質・血液・脳脊髄液（CSF）の3つだけである。箱の容積は変わらないので、どれか1つが増えれば他の2つが押し出されて逃げるしかない。これを <strong>Monro-Kellie 仮説</strong>という。逃げ場（主に CSF と静脈血）がある間は容積が増えても圧はほとんど上がらないが、逃げ場を使い切ると、わずかな容積の増加で圧が急激に跳ね上がる。この「余裕の残量」を <strong>頭蓋内コンプライアンス</strong>と呼ぶ。ICPクライシスとは、この余裕が尽きて圧が危険域に入った状態を指す。</p>
+<p><strong>なぜ圧が上がると困るのか</strong>。理由は2つある。ひとつは <strong>脳ヘルニア</strong>で、圧の高い区画から低い区画へ脳が物理的に押し出される。テント切痕ヘルニア（側頭葉鉤回が中脳を圧迫し、動眼神経麻痺として同側の散瞳が出る）、大孔ヘルニア（小脳扁桃が延髄を圧迫し、呼吸・循環中枢が止まる）、大脳鎌下ヘルニアなどの型がある。もうひとつは <strong>脳虚血</strong>である。脳への灌流を決めるのは <strong>脳灌流圧（CPP）＝平均動脈圧（MAP）− ICP</strong> であり、ICP が上がれば同じ血圧でも脳に届く圧が下がる。したがって ICP を下げることと MAP を保つことは、どちらも同じ「脳を灌流させる」という目的の両輪になる。</p>
+<p><strong>Cushing三徴</strong>は、脳が自力で CPP を確保しようとする最終手段の現れである。血圧上昇・徐脈・呼吸の緩徐化の3つで、これが出ている時点で切迫したヘルニアを疑う。</p>
+<p><strong>どう測るか</strong>。ICP は脳室内カテーテル（脳室ドレナージ＝EVD を兼ねられる）または脳実質内カテーテルで直接測る。これが侵襲的 ICP モニタリングである。しかし世界の多くの施設では常時使えるわけではなく、意識レベル・瞳孔・画像だけで管理せざるを得ない。この2つの状況に対応するのが本稿の主題であり、<strong>モニタがある場合の指針が SIBICC アルゴリズム、無い場合の指針が CREVICE プロトコル</strong>である。</p>
+<p><strong>どう治すか</strong>。段階的に強くしていく（Tier）という考え方をとる。Tier zero は「全員に必ずやる基礎」、Tier 1 は「まず打つ手」（高浸透圧療法・EVD・手術）、Tier 2 は「効かないときの次の手」（持続高張食塩水・過換気・深鎮静）、Tier 3 は「最後の手」（バルビツレート昏睡・低体温・減圧開頭）である。<mark class="hl">Tier が上がるほど副作用も大きくなるので、上げるにも下げるにも根拠が要る</mark>。</p>
+<p><strong>主な略語</strong>：GCS＝Glasgow Coma Scale、TBI＝外傷性脳損傷、SAH＝くも膜下出血、ICH＝脳内出血、EVD＝脳室ドレナージ、CPP＝脳灌流圧、PbtO2＝脳組織酸素分圧、PRx＝圧反応性指標、NPi＝Neurological Pupil index、ONSD＝視神経鞘径、TCD＝経頭蓋ドプラ、LPR＝乳酸/ピルビン酸比。</p>
+</div>
+<h3>2. 背景と目的 🩺</h3>
+<p>ICPクライシスの管理は、<strong>ICPモニタが使えるかどうかで施設ごとに大きく異なる</strong>。本稿はこの分断を出発点に置く。</p>
+<p>土台となる指針は2つある。<strong>BTF ガイドライン第4版</strong>（重症TBIの管理、2017）と、<strong>SIBICC の管理アルゴリズム</strong>（ICPモニタを留置した患者向け、2019）である。この2つは TBI 以外の重症脳損傷にも広く適用されてきた。しかし著者は、<strong>臨床的に頭蓋内圧亢進が疑われる患者の全員が、直ちに ICP モニタにアクセスできるわけではない</strong>と指摘する。実際、多くの患者が ICP モニタなしで管理されている。</p>
+<p>ここで重要な事実として、<strong>重症TBI 患者を ICP モニタあり群と なし群 に割り付けた大規模 RCT（Chesnut ら, NEJM 2012）では、機能的転帰に有意差が出なかった</strong>ことが挙げられる。ただしこの試験の非モニタ群は無治療だったのではなく、画像と臨床所見に基づく <strong>ICE プロトコル</strong>で管理されていた。この ICE プロトコルが後に改訂されたものが <strong>CREVICE プロトコル</strong>（Consensus REVised ICE, 2020）である。</p>
+<p><strong>本稿の目的</strong>は、①SIBICC と CREVICE を組み合わせること、②近年の重症患者管理とニューロモニタリングの新知見で更新すること、の2点である。</p>
+<h3>3. 方法（Methods）📐</h3>
+<p>本稿は総説であり、以下は原著の記載と構成から読み取れる範囲である。<strong>この節の位置づけを正確に把握することが、後段の推奨をどこまで信頼するかを決める</strong>。</p>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（narrative review）。*Current Neurology and Neuroscience Reports* の「Review」区分。<strong>単著</strong>（Tanuwong Viarasilpa）。著者自身が「文献レビューを行い、原稿・全ての表・図を作成した」と Author Contributions に記載</li><li><strong>文献探索の範囲</strong>：<strong>検索式・データベース・検索期間・スクリーニング基準の記載はない</strong>。系統的検索ではなく、著者の選択による文献の統合である</li><li><strong>バイアス評価</strong>：<strong>なし</strong>。各引用研究の質評価やリスク・オブ・バイアス判定は行われていない</li><li><strong>推奨の根拠レベル</strong>：<strong>GRADE などの格付けは付されていない</strong>。したがって本稿の記述はすべて「推奨の強さ・エビデンスの確実性が明示されていない提案」として読む必要がある</li><li><strong>引用文献</strong>：82件。内訳は既存ガイドライン（BTF第4版、AHA/ASA の脳梗塞・脳出血・SAH ガイドライン、ESICM の輸液・人工呼吸コンセンサス、SIBICC、PADIS）、RCT（NEJM 2012 の ICP モニタ試験、COBI 試験、TBI 輸血RCT、BOOST-2/PbtO2 第III相）、コホート研究（CENTER-TBI、SYNAPSE-ICU）、および各モニタリング手法の診断精度研究</li><li><strong>本稿が新たに生成したデータ</strong>：<strong>なし</strong>（Data Availability に「本研究で生成・解析されたデータセットはない」と明記）</li><li><strong>構成</strong>：初期管理 → 呼吸 → 循環 → 支持療法 → その他の集中治療 → ICP低下療法の開始 → 神経学的悪化 → モニタなしの調整 → モニタありの調整 → 臨界閾値 → SIBICC アルゴリズム → ベッドサイド神経モニタリング7種 → 臨床応用（Figure 1）→ 結論</li><li><strong>限界（著者の記載）</strong>：著者は結論部で「今後の研究は、<strong>侵襲的・非侵襲的ニューロモニタリングを ICP クライシス患者の管理に用いるための適切な介入プロトコルの開発</strong>に注力すべきである」と述べており、本稿が提示した統合フレームワーク自体が <strong>未検証の提案</strong>であることを示唆している</li></ul>
+<h3>4. 初期管理 — Tier zero をまず完成させる 🧱</h3>
+<p><strong>誰が対象か</strong>。重症脳損傷により、何らかの形の <strong>脳浮腫・占拠性病変・水頭症</strong>をきたした患者はすべて ICPクライシスのリスクがある。これらの患者には2つのことが直ちに必要になる。</p>
+<ol><li><strong>頭蓋内圧亢進の特異的原因そのものの治療</strong></li><li><strong>頻回の神経学的診察</strong>：意識レベル、瞳孔径と対光反射、新規の局所神経脱落症状の3点を繰り返し評価する</li></ol>
+<p>そのうえで、まず <strong>SIBICC の Tier zero（基礎的措置）</strong> に従って ICU で管理する。</p>
+<p><strong>二次性脳損傷を起こす全身性の異常</strong>として、本稿は次を列挙する。ショック・低血圧、酸素と二酸化炭素の異常、低ナトリウム血症、貧血、血糖異常、敗血症、発熱、不穏、発作性交感神経過活動（paroxysmal sympathetic hyperactivity）。さらに <strong>頭蓋内の原因としては、ICP 上昇以外に、痙攣発作とてんかん重積が重要</strong>であると強調している。</p>
+<h4>Table 1a. Tier zero — 基礎的な集中治療（原表を日本語化）</h4>
+<p><strong>対象</strong>：重大な脳浮腫・占拠性病変・水頭症を有する昏睡状態の脳損傷患者（GCS 8以下）で、頭蓋内圧亢進が疑われる者</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>具体的な目標・内容</th></tr></thead>
+<tbody>
+<tr><td>収容</td><td>集中治療室への入室</td></tr>
+<tr><td>原因治療</td><td>頭蓋内圧亢進をきたしている特異的原因の治療</td></tr>
+<tr><td>人工呼吸</td><td>肺保護換気。一回換気量 6〜8 mL/kg 予測体重、プラトー圧 30 cmH2O 未満、FiO2 60%以下、適切なPEEPで SpO2 94%以上、PaCO2 35〜38 mmHg、高酸素血症を避ける</td></tr>
+<tr><td>輸液</td><td>0.9% NaCl の静脈内投与で正常血管内容量を維持。輸液過剰を避ける</td></tr>
+<tr><td>循環</td><td>MAP 80 mmHg 以上を目標に蘇生し、全身臓器灌流を確保。昇圧薬の合併症を避ける</td></tr>
+<tr><td>体位</td><td>ベッド頭側を 30〜45度挙上、頭部は正中位</td></tr>
+<tr><td>鎮痛鎮静</td><td>フェンタニルとプロポフォールで軽度鎮静を目標</td></tr>
+<tr><td>痙攣予防</td><td>TBI 患者では1週間の痙攣予防</td></tr>
+<tr><td>体温</td><td>37.5℃ 未満に管理</td></tr>
+<tr><td>血糖</td><td>110〜180 mg/dL を目標</td></tr>
+<tr><td>ヘモグロビン</td><td>7 g/dL 超を目標</td></tr>
+<tr><td>神経学的診察</td><td>意識レベル・瞳孔径と対光反射・新規局所神経脱落症状を頻回に評価</td></tr>
+</tbody></table></div>
+<h3>5. 呼吸管理 🫁</h3>
+<p><strong>挿管の適応</strong>：気道が保てない患者、GCS 8以下の患者、呼吸不全のある患者。</p>
+<p><strong>目標</strong>：SpO2 94%以上を確保しつつ <strong>高酸素血症を避ける</strong>。PaCO2 は <strong>35〜38 mmHg</strong> に維持する。この狭い幅を守る理由は明確で、<strong>PaCO2 が下がりすぎれば脳血管が収縮して虚血に傾き、上がりすぎれば脳血管が拡張して脳血液量が増え ICP が上がる</strong>からである。</p>
+<p><strong>換気設定のエビデンス</strong>：ICP 上昇患者に対する最適な人工呼吸戦略の質の高いエビデンスは限られている。しかし先行研究からは、<strong>一回換気量 6〜8 mL/kg 予測体重・PEEP 5〜8 cmH2O の肺保護換気は急性脳損傷患者にも安全に適用しうる</strong>と示唆されている。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 肺と脳のトレードオフ 肺保護換気は許容的高炭酸ガス血症を伴いやすいが、<mark class="hl">ICPクライシスの患者では PaCO2 の上昇がそのまま ICP 上昇に直結する</mark>。本稿が示す解は「一回換気量は下げるが、PaCO2 は 35〜38 mmHg に厳密に保つ」であり、そのぶん呼吸回数で代償することになる。<strong>肺保護と脳保護のどちらかを捨てるのではなく、両方の目標値を同時に監視する</strong>という運用が必要になる。当院で ARDS を合併した脳損傷例を扱うときは、この点を明示的に申し送る。</p>
+</div>
+<h3>6. 循環管理 💉</h3>
+<p><strong>輸液の種類</strong>：等張性晶質液を静脈内投与し、血管内容量過剰の所見がない限り正常血管内容量を維持する。<strong>0.9% 塩化ナトリウムが望ましい晶質液</strong>である。</p>
+<p>その根拠として本稿が挙げるのは、<strong>2つの RCT のサブグループ解析</strong>である。重症 TBI 患者では、<strong>バランス晶質液を受けた群のほうが 90日死亡が高く、自宅退院となる可能性も低かった</strong>（0.9% NaCl 群との比較）。引用元は Lombardo ら（SMART試験の二次解析、J Neurotrauma 2022）と Zampieri ら（BaSICS試験、JAMA 2021）である。</p>
+<p><strong>血圧目標</strong>：ここは<strong>ガイドラインごとに異なる</strong>ため、本稿は並べて示す。</p>
+<div class="tw"><table>
+<thead><tr><th>出典</th><th>血圧目標</th></tr></thead>
+<tbody>
+<tr><td>BTF ガイドライン第4版</td><td>収縮期血圧 100 mmHg 以上（50〜69歳）／110 mmHg 以上（50歳未満または70歳超）。CPP 60〜70 mmHg</td></tr>
+<tr><td>SIBICC</td><td>CPP 60〜70 mmHg（BTFと同じ）</td></tr>
+<tr><td>CREVICE プロトコル（モニタなし）</td><td>初期 MAP 目標 90 mmHg 以上</td></tr>
+<tr><td>NeuroVanguard アプローチ</td><td>初期 MAP 目標 80 mmHg 超</td></tr>
+<tr><td>TBI 以外の急性脳損傷</td><td>各疾患の標準ガイドライン（脳梗塞・脳出血・SAH）に従う</td></tr>
+</tbody></table></div>
+<p><strong>蘇生の終点をどう決めるか</strong>：本稿は単一指標での判断を避け、<strong>MAP・輸液蓄積量・尿量・血中乳酸・中心静脈血酸素飽和度・毛細血管再充満時間・意識レベル・心拍出量、そして利用可能ならニューロモニタリングのデータを統合して</strong>決めるべきだとしている。</p>
+<h3>7. ICP上昇を防ぐ支持療法 🛏️</h3>
+<ul><li><strong>体位</strong>：ベッド頭側 30〜45度挙上、頭部正中位。目的は <strong>脳静脈還流の改善</strong>である（頭部を横に向けると内頸静脈が圧迫され、静脈還流が阻害されて ICP が上がる）</li><li><strong>鎮痛・鎮静</strong>：フェンタニルとプロポフォールを <strong>RASS 0 から −2 の軽度鎮静</strong>に滴定する。Tier zero の段階では深鎮静にしない点が重要である</li><li><strong>痙攣予防</strong>：TBI 患者では <strong>フェニトインまたはレベチラセタムで1週間</strong>の早期痙攣予防</li><li><strong>発熱管理</strong>：体温 <strong>37.5℃ 未満</strong>を目標</li></ul>
+<h3>8. その他の集中治療 — 血糖とヘモグロビン 🩸</h3>
+<p><strong>血糖</strong>：<strong>110〜180 mg/dL</strong> の範囲で管理する。理由は明確で、<mark class="hl"><strong>厳格血糖管理（110 mg/dL 未満）は脳の代謝クライシスのリスクを増やす</strong></mark>（Vespa ら, Crit Care Med 2012 の within-subjects RCT を引用）。全身の血糖を下げすぎると、脳細胞外液のグルコースが枯渇して脳がエネルギー基質を失う。</p>
+<p><strong>ヘモグロビン</strong>：初期目標は <strong>7 g/dL 超</strong>。根拠は近年の RCT で、TBI 患者において自由主義的輸血戦略（Hb 10 g/dL 以下で輸血）と制限的戦略（Hb 7 g/dL 以下で輸血）の間に <strong>不良転帰の差がなかった</strong>ことである。</p>
+<p><strong>数値</strong>：不良転帰は <strong>68.4% 対 73.5%</strong>、<strong>相対リスク 0.93、95%CI 0.83〜1.04</strong>（Turgeon ら, NEJM 2024）。信頼区間が 1 を跨いでおり有意差はない。</p>
+<h3>9. ICP低下療法の開始（Tier 1）💧</h3>
+<p><strong>目的</strong>：脳ヘルニアと脳虚血の予防、この2つである。</p>
+<p><strong>開始の基準</strong>：意識レベルが低下した患者で、画像上 <strong>脳槽の圧排・正中偏位・未除去の占拠性病変</strong>があるか、<strong>ヘルニア症候群</strong>を呈していれば、頭蓋内圧亢進を疑い、<strong>ICP低下療法を開始する</strong>（SIBICC の Tier 1 および CREVICE プロトコル）。同時に <strong>早期の脳神経外科コンサルト</strong>が推奨される。</p>
+<h4>9.1 高浸透圧療法 — マンニトールか高張食塩水か</h4>
+<p><strong>どちらを選ぶか</strong>：患者の状態と施設の慣行による。<strong>両者の間に転帰の差は示されていない</strong>。</p>
+<p><strong>数値</strong>（CENTER-TBI コホート研究、van Veen ら, J Neurotrauma 2023）：</p>
+<ul><li>ICU 死亡率：<strong>オッズ比 1.0、95%CI 0.4〜2.2</strong></li><li>6か月時点の拡張GOSE：<strong>オッズ比 0.9、95%CI 0.5〜1.6</strong></li></ul>
+<p>いずれも差はない。</p>
+<p><strong>マンニトールの機序と副作用</strong>：マンニトールは <strong>浸透圧利尿薬</strong>である。したがって次の副作用を持つ。</p>
+<div class="tw"><table>
+<thead><tr><th>副作用</th><th>機序</th></tr></thead>
+<tbody>
+<tr><td>低血圧</td><td>血管内容量の減少による</td></tr>
+<tr><td>低カリウム血症</td><td>利尿に伴う電解質喪失</td></tr>
+<tr><td>代謝性アルカローシス</td><td>同上</td></tr>
+<tr><td>高血糖</td><td>マンニトールが糖アルコールであるため</td></tr>
+<tr><td>急性腎障害</td><td>200 g/日 を超える投与で報告（浸透圧性ネフローシス）</td></tr>
+</tbody></table></div>
+<p><strong>用量</strong>：ICPクライシスの緊急治療における推奨初回量は <strong>20%マンニトール 0.5〜1 g/kg を5〜15分で静脈内投与</strong>。</p>
+<p><strong>高張食塩水の機序と副作用</strong>：高張食塩水は <strong>血管内容量を増やし、血清浸透圧を上げる</strong>。したがってマンニトールとは副作用の方向が逆になる。</p>
+<div class="tw"><table>
+<thead><tr><th>副作用</th><th>機序</th></tr></thead>
+<tbody>
+<tr><td>心原性肺水腫</td><td>血管内容量の増加による</td></tr>
+<tr><td>高ナトリウム血症</td><td>Na 負荷そのもの</td></tr>
+<tr><td>高クロール性代謝性アシドーシス</td><td>Cl 負荷による</td></tr>
+<tr><td>浸透圧性脱髄症候群</td><td>急激な Na 上昇による</td></tr>
+</tbody></table></div>
+<p><strong>用量</strong>：溶液の Na 濃度に応じて、以下のいずれかを <strong>10〜30分で静脈内投与</strong>する。</p>
+<div class="tw"><table>
+<thead><tr><th>濃度</th><th>投与量</th></tr></thead>
+<tbody>
+<tr><td>3% NaCl</td><td>150 mL</td></tr>
+<tr><td>5% NaCl</td><td>100 mL</td></tr>
+<tr><td>7.5% NaCl</td><td>75 mL</td></tr>
+<tr><td>23.4% NaCl</td><td>30〜60 mL</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 投与経路と用量調整 <mark class="hl"><strong>濃度 7.5% を超える高張液は必ず中心静脈カテーテルから投与する</strong></mark>。末梢から入れると血管外漏出で組織壊死をきたす。当院で 23.4% NaCl を救急カートに置くなら、この一行を必ず併記しておく。 また <strong>マンニトールと高張食塩水の用量調整は、症状・頭部画像・ICP およびニューロモニタリングのデータに基づいて行う</strong>のであって、あらかじめ決めた回数をこなすものではない。</p>
+</div>
+<h4>9.2 ステロイド</h4>
+<p><strong>適応は限定的</strong>である。<strong>脳腫瘍または脳膿瘍による病変周囲浮腫</strong>に対して補助療法として考慮できる。TBI や脳梗塞の脳浮腫には推奨されない（本稿は適応をこの2つに絞って記載している）。</p>
+<p><strong>用量</strong>：デキサメタゾンが最も一般的で、<strong>10〜20 mg の静脈内ボーラス投与に続いて 4〜24 mg/日を2〜4回に分割</strong>。ただし著者は「この病態におけるコルチコステロイドの用量と種類に関するデータは限られている」と留保している。</p>
+<h4>9.3 脳室ドレナージと手術</h4>
+<ul><li><strong>EVD（脳室ドレナージ）</strong>：<strong>脳室内出血または水頭症</strong>の患者に留置する。CSF を抜くことで直接容積を減らせる</li><li><strong>手術</strong>：頭蓋内腫瘤・血腫の外科的除去、または <strong>一次的減圧開頭</strong>を適応があれば実施する。急性硬膜外血腫・急性硬膜下血腫・外傷性脳実質病変・後頭蓋窩腫瘤病変それぞれについて外科的管理のガイドラインが引用されている</li></ul>
+<h3>10. 臨床的神経学的悪化（clinical neuroworsening）⚠️</h3>
+<p><strong>この定義がプロトコル全体のトリガーになる</strong>。ICPモニタが無い場合はエスカレーションの唯一の判断材料であり、モニタがある場合でも数値に先行して現れうる。</p>
+<h4>Table 1b. 臨床的神経学的悪化の定義（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>所見</th><th>具体的内容</th></tr></thead>
+<tbody>
+<tr><td>運動GCSの低下</td><td>1点以上の低下</td></tr>
+<tr><td>対光反射の低下</td><td>新規の対光反射低下</td></tr>
+<tr><td>瞳孔不同</td><td>2 mm を超える左右差</td></tr>
+<tr><td>両側散瞳</td><td>両側の瞳孔散大</td></tr>
+<tr><td>運動障害</td><td>新規の局所運動障害または異常姿位</td></tr>
+<tr><td>ヘルニア徴候</td><td>ヘルニア症候群、または Cushing 三徴（高血圧・徐脈・呼吸緩徐）</td></tr>
+</tbody></table></div>
+<p><strong>神経学的悪化を認めたら何をするか</strong>：頭蓋内・頭蓋外の両方の原因を再評価する。</p>
+<ul><li><strong>生理学的パラメータの再確認</strong>：ICP、MAP、CPP、SpO2、呼気終末CO2、体温</li><li><strong>血液検査</strong>：血糖、血算、生化学、動脈血ガス、敗血症検索</li><li><strong>緊急頭部CT</strong></li></ul>
+<h3>11. ICPモニタが無いときの治療強度の調整（CREVICE）🔍</h3>
+<p><strong>いつエスカレーションするか</strong>：ICPモニタが使えないとき（資源制約下、あるいは ICP モニタ挿入待ちの間）、次のいずれかで治療を強める。</p>
+<ul><li>新たな臨床的神経学的悪化が出現したとき</li><li>初期治療後に <strong>臨床所見または頭部画像の改善がないとき</strong></li></ul>
+<p><strong>フォローアップ画像のタイミング</strong>：脳損傷発症から <strong>24時間後と48時間後</strong>、および <strong>臨床的神経学的悪化があるたび</strong>に撮影することが推奨される。</p>
+<p><strong>CREVICE の3段階</strong>：</p>
+<ul><li><strong>Tier 1</strong>：<strong>高張食塩水またはマンニトール（あるいは両方）を4時間ごとに定時投与</strong>する。重症例では両者を併用してよい</li><li><strong>Tier 2</strong>：継続する神経学的悪化に対し、<strong>3% NaCl の持続投与</strong>で血清 Na を上げる、<strong>PaCO2 30〜35 mmHg を目標とする過換気</strong>、<strong>鎮静深度の増強</strong></li><li><strong>Tier 3</strong>：難治例に対し、<strong>二次的減圧開頭</strong>、<strong>チオペンタールまたはペントバルビタールの高用量投与によるバルビツレート昏睡</strong>（持続脳波でバースト・サプレッションを目標に滴定）、<strong>核心温 35〜36℃ の軽度低体温</strong></li></ul>
+<h4>高浸透圧療法の投与上限について</h4>
+<p>血清 Na <strong>155 mEq/L 以上</strong>、血清浸透圧 <strong>320 mEq/L 以上</strong>、浸透圧ギャップ <strong>20 mEq/L 以上</strong> が、高張食塩水・マンニトール投与の上限として使われることがある。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 「上限」は治療を止める理由にならない 本稿は上記の3つの上限値を挙げたうえで、<mark class="hl"><strong>これらの閾値を超えた後でも追加投与によって ICP はさらに低下しうることは明らかである</strong></mark>と明記している。つまり <strong>155 mEq/L は「ここで打ち止め」の線ではなく、副作用への警戒を強める線</strong>である。ヘルニア切迫例で「Na が 156 だから投与できません」と止めてしまうのは、この記述の読み違いになる。副作用のモニタリングを強化しながら、臨床的必要性で判断する。</p>
+</div>
+<h4>持続高張食塩水のエビデンス</h4>
+<p><strong>COBI 試験</strong>（Roquilly ら, JAMA 2021）は、中等症〜重症 TBI 患者において <strong>持続高張食塩水投与が6か月時点の機能的転帰と死亡を改善しなかった</strong>と報告した。しかし著者は、この陰性結果をそのまま受け取ることに慎重である。理由は2つ。</p>
+<ol><li>研究対象のうち <strong>頭蓋内圧亢進が記録されていたのは 35% にすぎない</strong></li><li><strong>重症TBI（GCS 8以下）は 72%</strong> であった</li></ol>
+<p>つまり「ICPクライシスの患者に対する治療」としては、対象集団がずれていた可能性がある。一方で <strong>先行するコホート研究とメタ解析では、持続高張食塩水は死亡・頭蓋内圧亢進・不良転帰のリスク低下と関連していた</strong>（Asehnoune ら, Crit Care 2017／Hourmant ら, Anaesth Crit Care Pain Med 2023）。</p>
+<h4>CREVICE の位置づけ</h4>
+<p><strong>有効性</strong>：ICPモニタなしで CREVICE プロトコルに従って治療された重症TBI 患者は、標準プロトコルなしで管理された患者より <strong>機能的転帰が良好であった</strong>（Chesnut ら, Neurosurgery 2023 のコホート研究）。</p>
+<p><strong>しかし著者の留保は明確である</strong>。CREVICE は <strong>資源制約下での ICPクライシス管理の治療指針として期待されるものであり、ICPモニタリングによる管理を置き換えることを意図していない</strong>。その理由として2点を挙げる。</p>
+<ol><li><strong>臨床所見や画像の変化は ICP の変化より遅れうる</strong>ため、ICP低下療法の調整が不正確になる</li><li><strong>CPP の計算ができない</strong></li></ol>
+<p>したがって <strong>ICPモニタリングが利用可能な施設では、ICPクライシスの治療は ICP データに基づいて導かれるべきである</strong>。</p>
+<h3>12. ICPモニタリングがあるときの治療強度の調整 📡</h3>
+<p><strong>前置き</strong>：著者は「ICP の生理とモニタリング手技については優れたレビューが最近発表されている」として Hawryluk ら（Intensive Care Med 2022）を挙げている。当Vaultの <span class="wl">頭蓋内圧 生理とモニタリングの現在の視点 レビュー（ICM2022）</span> がこれに相当する。</p>
+<p><strong>転帰改善は証明されていない、しかし</strong>：ICPモニタリングが患者転帰を改善することは明確には示されていない。それでも著者は <strong>重要な利点</strong>を挙げる。</p>
+<ol><li><strong>ICP の値とトレンド、ICP波形、CPP の計算</strong>という情報が管理を導く</li><li><strong>ICP が治療閾値を超えたとき、あるいは ICP波形の P2（tidal wave）の振幅が P1（percussion wave）以上になったとき</strong>、直ちに ICP低下療法を投入できる。P2 が P1 以上になることは <strong>頭蓋内コンプライアンスの低下</strong>を示す。これにより <strong>治療強度をより速くエスカレーションでき、それは急性脳損傷患者の死亡率低下と関連していた</strong>（SYNAPSE-ICU、Robba ら, Intensive Care Med 2023）</li><li><strong>ICP と MAP を連続記録できるため、動的脳血管自動調節能モニタリングが可能になり、CPP 目標を個別化できる</strong></li></ol>
+<h4>ICPモニタリングの適応</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>適応基準</th></tr></thead>
+<tbody>
+<tr><td>一般（TBI以外を含む）</td><td>高度の意識障害（GCS 8以下）＋ 画像上のヘルニアまたは ICP 上昇をきたしうる病態（水頭症、SAH、ICH、脳浮腫、脳腫瘍・脳膿瘍による有意な占拠性病変）</td></tr>
+<tr><td>TBI（画像異常あり）</td><td>GCS 8以下 ＋ 頭蓋内血腫、脳挫傷、脳腫脹・ヘルニア、脳底槽の圧排のいずれか</td></tr>
+<tr><td>TBI（頭部CT正常）</td><td>GCS 8以下 ＋ 次の3項目のうち2つ以上：40歳超／片側または両側の運動姿位（運動GCS 2または3）／収縮期血圧 90 mmHg 未満</td></tr>
+</tbody></table></div>
+<h3>13. 臨界ICP閾値 — 22 mmHg は絶対か 📏</h3>
+<p><strong>この節が本稿で最も論争的な部分である</strong>。著者は冒頭で「臨界ICP閾値は controversial である」と明言する。</p>
+<div class="tw"><table>
+<thead><tr><th>出典</th><th>閾値</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>旧 BTF ガイドライン</td><td>20 mmHg 未満</td><td>—</td></tr>
+<tr><td>BTF 第4版・SIBICC</td><td><strong>22 mmHg 未満</strong></td><td><strong>1つの観察研究</strong>。生存/死亡、良好/不良転帰を判別する ICP 閾値を同定する目的でデザインされたもの（Sorrentino ら, Neurocrit Care 2012）</td></tr>
+<tr><td>近年の観察研究</td><td><strong>18 mmHg 以上</strong></td><td>ICPモニタリングを受けた TBI 患者で、生存と良好転帰の両方について 18 mmHg が閾値（Riparbelli ら, Acta Neurochir 2024。表題自体が「22 mmHg は本当に答えなのか」）</td></tr>
+</tbody></table></div>
+<p><strong>現場の実態</strong>（Brasil ら, Neurocrit Care 2024 の世界の専門家調査）：</p>
+<ul><li>ICP低下療法の強度調整に <strong>22 mmHg 以上という閾値に従っていたのはわずか 28%</strong></li><li><strong>62% は、ICP 値が 18〜22 mmHg の範囲にあるとき、ICP波形やその他のニューロモニタリングの追加情報に基づいて、より柔軟な閾値を用いていた</strong></li></ul>
+<p>つまり <strong>「22 mmHg で治療を上げる」という運用は、少数派である</strong>というのが本稿の提示する事実である。この点は、当Vaultの <span class="wl">頭蓋内圧の生理・モニタリングと個別化管理 — 22mmHgの一律閾値から降りる（ICM2026）</span> が主張する「一律閾値から個別化へ」という方向と <strong>完全に整合する</strong>。ただし本稿のほうが慎重で、<strong>代わりに使うべき単一の数字を提示せず、18〜22 mmHg という幅と、波形・その他モニタによる統合判断を置く</strong>にとどめている。ICM2026 のノートが自動調節能に基づく個別化を前面に出すのに対し、本稿は <strong>「まず幅を持たせ、波形を見る」という、モニタリング資源が限られた施設でも実行できる段階まで降ろしている</strong>点が実務的である。</p>
+<h3>14. SIBICC アルゴリズム（ICPモニタ留置患者）🪜</h3>
+<h4>Tier 1</h4>
+<ul><li><strong>高浸透圧療法（マンニトールまたは高張食塩水）の用量と頻度を調整</strong>し、ICP を臨界閾値未満、かつ ICP波形を正常に保つ</li><li><strong>鎮静深度を RASS −3 から −5（覚醒しない）まで深める</strong>ことができる</li><li><strong>CPP を 60〜70 mmHg 内に維持する</strong></li></ul>
+<h4>Tier 2</h4>
+<ul><li><strong>PaCO2 32〜35 mmHg を目標とする過換気</strong>（CREVICE の Tier 2 が 30〜35 mmHg であるのに対し、SIBICC はやや高めの 32〜35 mmHg である点に注意）</li><li><strong>MAP チャレンジ</strong>による静的圧自動調節能（sPAR）の評価</li><li><strong>筋弛緩薬の試験投与</strong>を考慮してよい</li></ul>
+<p>##### MAP チャレンジの手順と解釈</p>
+<p><strong>目的</strong>：静的圧自動調節能が保たれているかを判定し、<strong>昇圧が ICP を下げるのか上げるのかを実地に確かめる</strong>。</p>
+<p><strong>手順</strong>：輸液ボーラスとノルアドレナリン持続投与により、<strong>MAP と CPP を 10 mmHg、20分間</strong>上昇させ、ICP の変化を観察する。</p>
+<div class="tw"><table>
+<thead><tr><th>自動調節能の状態</th><th>MAP を上げたときの ICP</th><th>機序</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>保たれている（intact）</td><td>低下する</td><td>灌流圧が上がると脳血管が収縮し、脳血液量が減るため</td><td>他の全身合併症がなければ、ICP が臨界閾値未満になる水準まで高い MAP と CPP を維持する</td></tr>
+<tr><td>破綻している（disrupted）</td><td>さらに上昇する</td><td>血管が収縮できず、脳血流がそのまま増えて脳血液量が増えるため</td><td>昇圧薬の投与を中止し、MAP をベースラインに戻す</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — MAPチャレンジ中は他の治療を動かさない <mark class="hl"><strong>MAPチャレンジの実施中は、マンニトール・高張食塩水・鎮静・EVDドレナージのいずれも調整してはならない</strong></mark>。同時に複数を動かすと ICP の変化がどの介入によるものか判別できず、自動調節能の解釈が成り立たなくなる。当院で実施するなら「チャレンジ開始」を宣言し、20分間は他の指示を止める、という運用上の取り決めが必要になる。</p>
+</div>
+<h4>Tier 3</h4>
+<p>CREVICE と同様で、<strong>外科的減圧開頭、バルビツレート昏睡、軽度低体温</strong>である。バルビツレートについては、<strong>ICP が臨界閾値未満になるか、脳波でバースト・サプレッションが出現するまでチオペンタールまたはペントバルビタールを増量する</strong>と具体的に記されている。</p>
+<h4>Table 1c. CREVICE と SIBICC の Tier 対応表（原表を日本語化して並置）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>CREVICE（ICPモニタなし）</th><th>SIBICC（ICPモニタあり）</th></tr></thead>
+<tbody>
+<tr><td>エスカレーションの契機</td><td>臨床的神経学的悪化の出現／初期治療後に臨床所見・画像が改善しない／非侵襲ニューロモニタリングによる誘導</td><td>臨床的神経学的悪化の出現／ICP 18〜22 mmHg 以上／ICP波形が頭蓋内コンプライアンス低下を示す／侵襲的・非侵襲的ニューロモニタリングによる誘導</td></tr>
+<tr><td>Tier 1</td><td>高張食塩水または20%マンニトール（あるいは両方）を4時間ごとに定時投与</td><td>高張食塩水または20%マンニトール（あるいは両方）の用量と頻度を増やし、ICP 18〜22 mmHg 未満と正常な ICP波形を維持。深鎮静。CPP 60〜70 mmHg を維持</td></tr>
+<tr><td>Tier 2</td><td>3% NaCl の持続投与で血清Na を上昇／PaCO2 30〜35 mmHg を目標とする過換気／深鎮静</td><td>PaCO2 32〜35 mmHg を目標とする過換気／静的圧自動調節能を評価する MAPチャレンジ／筋弛緩薬の試験投与</td></tr>
+<tr><td>Tier 3</td><td>脳波でバースト・サプレッションを目標とするバルビツレート昏睡／軽度低体温 35〜36℃／二次的減圧開頭（両プロトコル共通）</td><td>同左</td></tr>
+</tbody></table></div>
+<h3>15. ベッドサイド・ニューロモニタリングによる治療誘導 🔬</h3>
+<p><strong>7つのモダリティ</strong>が挙げられる。非侵襲ICP波形解析、経頭蓋ドプラ（TCD）、視神経鞘径（ONSD）、定量的瞳孔計、脳血管自動調節能モニタリング、脳組織酸素分圧（PbtO2）、脳マイクロダイアリシスである。</p>
+<h4>15.1 非侵襲ICP波形解析（ICPW）</h4>
+<p><strong>原理</strong>：<strong>張力ゲージセンサー</strong>を用いて、ICP の変化によって生じる <strong>頭蓋骨のナノメートル単位の変形（変位）を測定する</strong>。センサーはヘッドバンドに取り付けられ、患者の頭部に巻いて <strong>眼窩耳孔線の前1/3から3 cm 上</strong>の位置にセンサーを置く。</p>
+<p><strong>何を計算するか</strong>：ICP波形の <strong>P1（percussion wave）と P2（tidal wave）の振幅</strong>、そこから <strong>P2:P1 比</strong>、および <strong>波形の開始からピーク振幅までの時間（time-to-peak, TTP）</strong>。</p>
+<p><strong>閾値</strong>：</p>
+<ul><li><strong>正常</strong>：P2 の振幅は P1 より低い。すなわち <strong>P2:P1 比 1 未満</strong></li><li><strong>頭蓋内コンプライアンス低下</strong>：P2 の振幅が P1 を上回り、<strong>P2:P1 比 1 以上</strong>、かつ <strong>TTP が 0.2秒 より長くなる</strong></li></ul>
+<p><strong>侵襲法との一致度と診断能</strong>（de Moraes ら, Neurocrit Care 2022）：</p>
+<ul><li><strong>P2:P1 比</strong>：κ一致率 <strong>88%</strong>（強い一致）</li><li><strong>TTP 値</strong>：κ一致率 <strong>71%</strong>（中等度の一致）</li><li><strong>頭蓋内圧亢進の予測能</strong>：P2:P1 比の <strong>AUC 0.79（95%CI 0.72〜0.93）</strong>、TTP の <strong>AUC 0.69（95%CI 0.60〜0.74）</strong>。P2:P1 比のほうが優れている</li></ul>
+<p><strong>利点</strong>：<strong>脳神経外科的手技が不要</strong>であり、<strong>センサーを複数の患者で再使用できる</strong>。したがって、侵襲的 ICP モニタリングにアクセスできない状況で有用であり、<strong>ICPモニタ留置の対象患者を選別するスクリーニングツールとして使える</strong>。</p>
+<h4>15.2 経頭蓋ドプラ（TCD）</h4>
+<p><strong>原理</strong>：TCD で検出した脳血流（CBF）速度と患者の MAP を、提案されている数式に入れることで <strong>CPP と ICP を非侵襲的に推定する</strong>。最も一般的な手技は <strong>2 MHz の超音波プローブを側頭骨窓に当て、中大脳動脈（MCA）の血流を測定する</strong>ことである。</p>
+<p><strong>診断精度</strong>（IMPRESSIT-2、Rasulo ら, Crit Care 2022。多施設研究）。TCD由来ICP（ICP_TCD）の <strong>20.5 mmHg 以上</strong>という閾値で、脳室内または脳実質内デバイスによる ICP（ICP_invasive）の <strong>22 mmHg 超</strong>を予測した結果：</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>感度</td><td>70%（41〜93%）</td></tr>
+<tr><td>特異度</td><td>72%（52〜94%）</td></tr>
+<tr><td>陽性的中率</td><td>23%（16〜50%）</td></tr>
+<tr><td>陰性的中率</td><td><strong>96%（93〜99%）</strong></td></tr>
+<tr><td>正確度</td><td>72%（55〜90%）</td></tr>
+</tbody></table></div>
+<p><strong>解釈</strong>：<strong>陰性的中率が高いため、ICP_TCD が 20.5 mmHg 未満であれば頭蓋内圧亢進（ICP_invasive 22 mmHg 超）を除外できる</strong>。逆に陽性的中率は 23% しかなく、<strong>「高い」と出たことをもって頭蓋内圧亢進と断定はできない</strong>。この「除外に使う」という位置づけは、既存ノート <span class="wl">非侵襲的頭蓋内圧推定はどこまで使えるか — 代替にはならないが「除外」と「選別」には使える（ナラティブレビュー・ICM2026）</span> および <span class="wl">経頭蓋ドプラによる圧目標型の神経集中治療（MAPを個別最適化する・CritCare2026）</span> と同じ結論である。</p>
+<h4>15.3 視神経鞘径（ONSD）</h4>
+<p><strong>原理</strong>：<strong>視神経は中枢神経系の一部が眼窩内に伸びたもので、脳脊髄液に囲まれている</strong>。したがって ICP の上昇は視神経周囲の CSF 腔に伝達され、<strong>視神経鞘径が増大する</strong>。</p>
+<p><strong>測定法</strong>：<strong>7.5 MHz のリニア超音波プローブ</strong>を用い、<strong>網膜の3 mm 後方</strong>で計測する。</p>
+<p><strong>診断精度</strong>（Robba ら, Crit Care 2020）：<strong>ONSD 5.3 mm 以上</strong>は、侵襲的 ICP 20 mmHg 超の頭蓋内圧亢進と良好な相関を示し、<strong>AUC 0.78（95%CI 0.68〜0.88）</strong>であった。</p>
+<h4>15.4 定量的瞳孔計</h4>
+<p><strong>原理</strong>：<strong>赤外線カメラと、強度・持続時間が固定された較正済み光刺激</strong>を用いて、瞳孔径と反応性を精密に測定する。測定された瞳孔変数からアルゴリズムが <strong>Neurological Pupil index（NPi）</strong> を算出し、瞳孔反応性を数値化する。</p>
+<p><strong>評価法と解釈</strong>：NPi は <strong>両眼で評価</strong>する。値は <strong>0 から 5</strong> の範囲をとる。</p>
+<div class="tw"><table>
+<thead><tr><th>NPi</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>対光反射なし</td></tr>
+<tr><td>3 未満</td><td>対光反射の低下</td></tr>
+<tr><td>3〜5</td><td>正常な対光反射</td></tr>
+</tbody></table></div>
+<p><strong>ICP との関係</strong>：NPi の変化は <strong>ICP が脳機能に及ぼす影響を反映しうる</strong>。NPi と ICP の変化には良好な相関があり、<strong>ICP 上昇時に NPi は低下し、高浸透圧療法で ICP が下がると NPi は上昇する</strong>（Jahns ら, Crit Care 2019）。この所見から著者は、<strong>定量的瞳孔計は ICPクライシス患者の脳機能モニタリングに有用なツールとなりうる</strong>と述べる。</p>
+<h4>15.5 脳血管自動調節能モニタリング</h4>
+<p><strong>定義</strong>：脳血管自動調節能とは、<strong>CPP の変化に応じて脳血管抵抗を変化させ、脳血流を一定に保つ脳血管の能力</strong>である。</p>
+<p><strong>PRx（圧反応性指標）</strong>：最も一般的に用いられる自動調節能の指標で、<strong>ICP と MAP の変化の間の移動相関係数を5分窓で計算</strong>したものである。</p>
+<div class="tw"><table>
+<thead><tr><th>PRx の値</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>ゼロまたは負</td><td>自動調節能は保たれている</td></tr>
+<tr><td>正</td><td>脳血管自動調節能の障害</td></tr>
+</tbody></table></div>
+<p><strong>CPPopt の考え方</strong>：先行研究では、自動調節能障害を示す <strong>PRx 閾値は +0.05 から +0.35 の範囲</strong>で、TBI 患者の不良転帰と死亡に関連していた。この閾値を用いて、<strong>PRx を臨界閾値未満に保てる CPP の最適範囲（CPPopt）</strong> を、自動調節能の下限（LLA）と上限（ULA）の間として決定できる。</p>
+<p><strong>実行可能性</strong>（feasibility study）：重症TBI 患者における自動調節能ガイド下の最適CPP 目標について、</p>
+<ul><li><strong>CPPopt が算出可能であった時間の割合：77%</strong></li><li><strong>CPP を最適範囲内に制御できた監視時間の割合：47%</strong></li></ul>
+<p>いずれも実行可能性の基準を上回った。ただし著者は <strong>転帰への影響を評価するには第III相臨床試験が必要である</strong>と明記している。関連する当Vaultのノートは <span class="wl">PRx（圧反応性指標）による脳血管自動調節能の評価</span> と <span class="wl">脳血管自動調節能をどうモニターするか — PRxとABPチャレンジ（エディトリアル・CritCare2019）</span>。</p>
+<h4>15.6 脳組織酸素分圧（PbtO2）</h4>
+<p><strong>なぜ必要か</strong>：<strong>脳組織低酸素は、ICP が上昇していなくても、脳の酸素供給と酸素消費の不均衡によって高頻度に生じる</strong>。したがって ICP だけを見ていると見落とす。</p>
+<p><strong>手技</strong>：<strong>頭蓋を通して脳実質内に細いカテーテルを留置</strong>し、<strong>カテーテル先端周囲の脳容積 15 mm3 から PbtO2 を測定する</strong>。</p>
+<p><strong>閾値</strong>：<strong>PbtO2 20 mmHg 未満</strong>で脳組織低酸素。</p>
+<p><strong>PbtO2 が低いときの介入</strong>（酸素供給を増やす／消費を減らす）：</p>
+<div class="tw"><table>
+<thead><tr><th>方向</th><th>具体的介入</th></tr></thead>
+<tbody>
+<tr><td>脳酸素供給を増やす</td><td>血管内容量・心拍出量・CPP を最適化して脳血流を増やす／人工呼吸を調整して動脈血酸素飽和度を上げ、PaCO2 を正常に保つ／赤血球輸血で Hb を上げる</td></tr>
+<tr><td>脳酸素消費を減らす</td><td>痙攣発作・てんかん重積・発熱・不穏を同定して治療する</td></tr>
+</tbody></table></div>
+<p><strong>第III相RCT の結果</strong>（318例の重症TBI 患者、ICPモニタリング下）：</p>
+<ul><li>6か月時点の GOSE による機能的転帰に <strong>有意差なし</strong></li><li>不良転帰は <strong>ICP＋PbtO2 モニタリング群 52% 対 ICPモニタリングのみ群 51%</strong></li><li><strong>オッズ比 1.0、95%CI 0.6〜1.7、p=0.95</strong></li></ul>
+<p><strong>著者の留保</strong>：この試験の限界として、<strong>PbtO2 を上げる初期戦略に吸入酸素濃度の増加を用いた</strong>点を挙げる。これは <strong>脳血流の最適化よりも脳酸素供給の改善効果が乏しい</strong>。したがって陰性結果が PbtO2ガイド治療そのものの否定とは言えない。</p>
+<p><strong>進行中の試験</strong>：<strong>BOOST-3（NCT03754114）</strong> と <strong>BONANZA-GT（ACTRN12619001328167）</strong> の2つの大規模多施設RCT が進行中である。</p>
+<h4>15.7 脳マイクロダイアリシス</h4>
+<p><strong>手技</strong>：<strong>二重管腔チャネルと半透膜からなるプローブを脳実質内に挿入</strong>し、脳間質液中の <strong>乳酸・ピルビン酸・グルコース・グルタミン酸</strong>をモニタリングする。</p>
+<p><strong>解釈</strong>（PbtO2 と組み合わせて用いる）：</p>
+<div class="tw"><table>
+<thead><tr><th>パターン</th><th>所見</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>脳虚血</td><td>脳乳酸 4 mmol/L 超 ＋ 脳ピルビン酸 70 mmol/L 未満 ＋ LPR 25 超 ＋ PbtO2 20 mmHg 未満</td><td>酸素供給不足</td></tr>
+<tr><td>ミトコンドリア機能障害</td><td>LPR 上昇 ＋ 脳乳酸上昇 ＋ 脳ピルビン酸 高値 ＋ PbtO2 正常</td><td>酸素はあるが使えていない</td></tr>
+<tr><td>脳低血糖</td><td>脳グルコース 0.8 mmol/L 未満</td><td>インスリン療法の調整に用いる</td></tr>
+</tbody></table></div>
+<p><strong>普及していない理由</strong>：<strong>生化学的結果に基づく適切な治療プロトコルのデータが限られており、臨床研究における患者転帰への影響も不明</strong>であるため、広くは用いられていない。</p>
+<h4>Table 2. ベッドサイド神経モニタリング（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>モニタリング機器</th><th>モニタリングの目的</th><th>閾値</th></tr></thead>
+<tbody>
+<tr><td>非侵襲ICP波形解析</td><td>頭蓋内コンプライアンスの評価</td><td>P2:P1 が 1 以上、または TTP 0.2秒 以上で頭蓋内コンプライアンス低下</td></tr>
+<tr><td>経頭蓋ドプラ（TCD）</td><td>頭蓋内圧亢進の予測と除外</td><td>TCD推定ICP 20.5 mmHg 未満で頭蓋内圧亢進を除外できる</td></tr>
+<tr><td>視神経鞘径（ONSD）</td><td>頭蓋内圧亢進の予測</td><td>ONSD 5.3 mm 以上が侵襲的ICP 20 mmHg 超と良好に相関</td></tr>
+<tr><td>定量的瞳孔計</td><td>Neurological Pupil index により ICP が脳機能に与える影響を評価</td><td>NPi 3 未満で対光反射低下。NPi と ICP 変化に良好な相関</td></tr>
+<tr><td>脳血管自動調節能モニタリング</td><td>圧反応性指標に基づく CPP 目標の個別化</td><td>PRx がゼロまたは負で自動調節能は保たれている。正で障害</td></tr>
+<tr><td>脳組織酸素分圧（PbtO2）</td><td>脳酸素供給と酸素消費のバランスの監視</td><td>PbtO2 20 mmHg 未満で脳組織低酸素</td></tr>
+<tr><td>脳マイクロダイアリシス</td><td>脳代謝の監視（脳虚血・ミトコンドリア機能障害・脳低血糖）</td><td>乳酸 4 mmol/L 超・ピルビン酸 70 mmol/L 未満・LPR 25 超で脳虚血／乳酸 4 mmol/L 超・ピルビン酸 70 mmol/L 超・LPR 25 超でミトコンドリア機能障害／脳グルコース 0.8 mmol/L 未満で脳低血糖</td></tr>
+</tbody></table></div>
+<h3>16. 患者管理への臨床応用（Figure 1）🗺️</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. ICPクライシス管理のフレームワーク（原図・無改変。© The Author(s) 2024, CC BY 4.0） 白黒の箱と矢印だけで構成された、上から下へ流れる4層のフローチャート。<strong>縦の幹が3つ、そこから左右2本に分岐し、さらにそれぞれが2本に分かれて計4本の枝になる</strong>という形をしている。</p>
+<p><strong>第1層（最上段・中央の1箱）</strong>：「Patients suspicious of intracranial pressure crisis」（頭蓋内圧クライシスが疑われる患者）。下向きの矢印1本で次へ。</p>
+<p><strong>第2層（中央の1箱）</strong>：「Initial critical care management with baseline measures（Tier zero of the SIBICC algorithm）」（基礎的措置による初期集中治療管理＝SIBICCアルゴリズムの Tier zero）。2行組みで、括弧内が2行目。</p>
+<p><strong>第3層（中央の1箱）</strong>：「Initiation of the intracranial pressure lowering therapy（Tier one of the SIBICC algorithm and the CREVICE protocol）」（頭蓋内圧低下療法の開始＝SIBICCアルゴリズムと CREVICEプロトコルの Tier one）。<strong>この箱の下から矢印が下りて、水平の横棒に当たり、そこから左右2本に分かれる</strong>。ここが図の最初の分岐点である。</p>
+<p><strong>第4層（分岐した左右2箱）</strong>：左が「Intracranial pressure monitoring is available」（ICPモニタリングが利用可能）、右が「Intracranial pressure monitoring is unavailable」（利用不可）。<strong>左右の箱はほぼ同じ大きさで、左右対称に配置されている</strong>。左右それぞれの箱の下から、また横棒を介して2本ずつに分かれる。</p>
+<p><strong>第5層（4つの箱）</strong>：左から順に、①「ICP monitor only」（ICPモニタのみ）、②「ICP monitor with other neuromonitoring」（ICPモニタ＋他のニューロモニタリング）、③「Clinical and Imaging-guided treatment」（臨床所見と画像に基づく治療）、④「Noninvasive neuromonitoring」（非侵襲ニューロモニタリング）。<strong>①②は左（モニタあり）から、③④は右（モニタなし）から下りている</strong>。</p>
+<p><strong>第6層（最下段）</strong>：①の下には矢印を介して「Follow Tier 1 to Tier 3 of the SIBICC algorithm」（SIBICCアルゴリズムの Tier 1〜3 に従う）という箱。③の下には同様に「Follow Tier 1 to Tier 3 of the CREVICE protocol」（CREVICEプロトコルの Tier 1〜3 に従う）という箱。 <strong>②と④の下には箱ではなく、中黒の箇条書きが直接置かれている</strong>。②の下は「Quantitative pupillometry（定量的瞳孔計）／Cerebral autoregulation monitoring（脳血管自動調節能モニタリング）／PbtO2／Cerebral microdialysis（脳マイクロダイアリシス）」の4項目。④の下は「Quantitative pupillometry（定量的瞳孔計）／Noninvasive intracranial pressure waveform analysis（非侵襲頭蓋内圧波形解析）／TCD／ONSD」の4項目。</p>
+<p><strong>この図の読み方</strong>：図の最大のメッセージは、<strong>分岐点が「Tier 1 を開始した後」に置かれている</strong>ことである。つまり <strong>ICPモニタの有無を確認してから治療を始めるのではなく、疑った時点で Tier zero と Tier 1 を走らせ、その後にモニタの有無で経路が分かれる</strong>という時間順序を示している。また <strong>②と④に列挙された補助モニタは、いずれも定量的瞳孔計を含んでいる</strong>点にも注目したい。瞳孔計は左右どちらの経路でも使える唯一の共通項目である。</p>
+</div>
+<p><strong>理想的な状況（ICPモニタが使える場合）</strong>：</p>
+<ul><li><strong>ICP波形とトレンド値によって決めた柔軟な ICP閾値</strong>のもとで、ICP誘導下の治療を行う</li><li><strong>PbtO2</strong> を用いて脳酸素供給の最適化を補助する</li><li><strong>脳血管自動調節能モニタリング</strong>を考慮して、最適 CPP 目標を個別化する</li><li><strong>定量的瞳孔計</strong>を用いて昏睡患者の脳機能を評価する</li></ul>
+<p><strong>資源制約下（侵襲的モニタが不可能な場合）</strong>：</p>
+<ul><li><strong>ONSD 超音波</strong>で頭蓋内圧亢進を検出する</li><li><strong>TCD</strong> で ICP と CPP を推定することを考慮する</li><li><strong>非侵襲ICP波形解析デバイス</strong>で頭蓋内コンプライアンス低下を認識し、ICP低下療法のエスカレーションを導く</li><li><strong>NPi の経時的モニタリング</strong>が、昏睡患者における治療反応の評価と臨床的神経学的悪化の検出に有用である</li></ul>
+<h3>17. 結論（原著の結論）📝</h3>
+<p>著者の結論は4文である。</p>
+<ol><li><strong>適切な循環・呼吸・神経学的サポートを含む集中治療管理のあらゆる側面が、最善の患者転帰を達成するために不可欠である</strong></li><li><strong>ICP低下療法は、ICPモニタリングの有無にかかわらず、頭蓋内圧亢進が疑われる患者において開始されるべきである</strong></li><li><strong>ICPモニタリングの利点が強調される。ICP の値・トレンド・波形は、治療強度を調整するために統合して解釈されるべきである</strong></li><li><strong>種々のニューロモニタリングデバイスは、頭蓋内コンプライアンス低下と ICP 上昇の検出、脳機能の評価、脳灌流の最適化に有用である</strong></li></ol>
+<h2>🔬 批判的吟味 — ジャーナルクラブでの論点</h2>
+<p><strong>① 単著のナラティブレビューであり、方法論の透明性が欠けている</strong> 検索戦略もバイアス評価も GRADE 格付けもない。したがって本稿の「推奨」は、<strong>BTF・SIBICC・CREVICE といった原典の推奨を著者が選んで並べ替えたもの</strong>であり、本稿自体が新たなエビデンスの強さを付与しているわけではない。JCで扱うときは「これは原典への索引である」と位置づけたい。実際、Table 1 の各項目は引用文献 4, 8〜18 に紐づけられており、著者の独自判断がどこまで入っているかは読者には判別できない。</p>
+<p><strong>② 統合フレームワーク（Figure 1）そのものが未検証である</strong> SIBICC も CREVICE も、それぞれ別々に作られたコンセンサス・プロトコルである。それを1本の時間軸に束ねる、という本稿の中核的貢献は、<strong>前向きにも後ろ向きにも検証されていない</strong>。著者自身が「今後の研究は適切な介入プロトコルの開発に注力すべき」と述べており、これは本稿の提案が仮説段階にあることの自白でもある。</p>
+<p><strong>③ 臨界ICP閾値の扱いに内的な緊張がある</strong> 本稿は Table 1 で「ICP 18〜22 mmHg 以上でエスカレーション」と幅を示す一方、本文では22 mmHg の根拠が単一の観察研究であることを批判し、18 mmHg を示す別の観察研究を引き、専門家の 62% が柔軟な閾値を使っていることを紹介する。<strong>つまり「22 mmHg は弱い」と論じながら、実務としては 18〜22 mmHg の幅で運用せよという以上の解を出していない</strong>。「波形やニューロモニタリングで統合判断せよ」という提案は正しいが、<strong>具体的に P2:P1 が 1.0 のとき ICP 19 mmHg で治療を上げるのか上げないのか</strong>という現場の問いには答えていない。ここは当Vaultの <span class="wl">頭蓋内圧の生理・モニタリングと個別化管理 — 22mmHgの一律閾値から降りる（ICM2026）</span> と読み比べる価値がある。</p>
+<p><strong>④ CREVICE の有効性の根拠が弱い</strong> 「CREVICE で治療された患者は標準プロトコルなしの患者より転帰が良かった」というのはコホート研究の所見であり、<strong>プロトコル導入そのものの効果と、プロトコルを導入できる施設の質（交絡）を分離できていない</strong>。プロトコル化研究に一般的な限界である。</p>
+<p><strong>⑤ 陰性 RCT の解釈に一貫した非対称性がある</strong> 本稿は、COBI 試験（持続高張食塩水の陰性結果）に対しては「対象の35%しか頭蓋内圧亢進がなかった」と反論し、PbtO2 の第III相RCT（陰性結果）に対しては「FiO2 を上げる戦略が不適切だった」と反論する。<strong>一方で、ICPモニタリング自体の RCT（NEJM 2012、陰性）に対しては同種の踏み込んだ反論をせず、「利点がある」と主張を進める</strong>。それぞれの反論には妥当性があるが、<strong>陰性結果を系統的に割り引く方向にバイアスがかかっていないか</strong>は、JCで問う価値のある論点である。</p>
+<p><strong>⑥ 輸液の推奨（0.9% NaCl 優先）の根拠は2つのRCTのサブグループ解析である</strong> サブグループ解析は仮説生成的であり、<strong>急性脳損傷におけるバランス晶質液の害を確定したわけではない</strong>。本稿はこの点に留保を付けていない。当院で「脳損傷は生食」と決めるにしても、根拠のレベルは正確に共有すべきである。</p>
+<p><strong>⑦ 非侵襲モニタの数値が単一研究由来である</strong> ONSD 5.3 mm（AUC 0.78）は Robba ら 2020 の1研究、TCD 20.5 mmHg は IMPRESSIT-2 の1研究、P2:P1 の AUC 0.79 は de Moraes ら 2022 の1研究に依拠している。<strong>閾値はいずれもメタ解析で確立したものではなく、施設・機器・術者による変動を織り込んでいない</strong>。ONSD の測定者間再現性の問題は本稿では触れられていない。</p>
+<p><strong>⑧ 高浸透圧療法の「上限」の記述は誤読されやすい</strong> Na 155 mEq/L・浸透圧 320 mEq/L・浸透圧ギャップ 20 mEq/L という数字を挙げた直後に「これらを超えても追加投与で ICP はさらに下がりうる」と書いている。<strong>臨床現場では前半だけが独り歩きしやすい</strong>。プロトコル化するときは「上限＝副作用監視の強化点であって禁止線ではない」と明記する必要がある。</p>
+<p><strong>⑨ 資源制約下（タイのSiriraj病院）の視点が入っている点は長所でもある</strong> 著者は自身の施設のニューロクリティカルケア導入について論文を書いており（引用文献6）、<strong>ICPモニタが常に使えるわけではないという前提を持った実務家の視点</strong>が本稿の構成を決めている。この点は、モニタが潤沢な施設で書かれたレビューにはない実用性を与えている。当院の夜間・休日の実情に近い。</p>
+<p><strong>⑩ 小児・妊婦・非外傷性病態への一般化</strong> 本稿は「TBI に限らない」と述べつつ、引用エビデンスの大半は成人重症TBI 由来である。SAH・ICH・脳腫瘍・肝性脳症などの ICPクライシスに、同じ Tier 構造と閾値をそのまま当てはめてよいかは<strong>論じられていない</strong>。</p>
+<h2>📚 主要な引用文献</h2>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>BTF 重症TBI管理ガイドライン第4版。ICP 22 mmHg 未満、CPP 60〜70 mmHg、ICPモニタリングの適応</td><td>Carney N, et al. Neurosurgery. 2017;80(1):6-15</td></tr>
+<tr><td>4</td><td>SIBICC。ICPモニタ留置患者の Tier 0〜3 管理アルゴリズム。本稿の骨格</td><td>Hawryluk GWJ, et al. Intensive Care Med. 2019;45(12):1783-94</td></tr>
+<tr><td>7</td><td>ICPモニタあり群となし群（ICEプロトコル）を比較した RCT。機能的転帰に有意差なし</td><td>Chesnut RM, et al. N Engl J Med. 2012;367(26):2471-81</td></tr>
+<tr><td>8</td><td>CREVICE プロトコル。ICPモニタなしで画像と臨床所見に基づく管理</td><td>Chesnut RM, et al. J Neurotrauma. 2020;37(11):1291-9</td></tr>
+<tr><td>1</td><td>世界の専門家調査。22 mmHg 厳守は 28%、62% は 18〜22 mmHg で柔軟に判断</td><td>Brasil S, et al. Neurocrit Care. 2024</td></tr>
+<tr><td>10</td><td>NeuroVanguard アプローチ。初期 MAP 80 mmHg 超</td><td>Rodriguez EE, et al. Crit Care. 2024;28(1):104</td></tr>
+<tr><td>12</td><td>急性脳損傷患者の人工呼吸に関する ESICM コンセンサス</td><td>Robba C, et al. Intensive Care Med. 2020;46(12):2397-410</td></tr>
+<tr><td>16</td><td>神経集中治療患者の輸液療法 ESICM コンセンサス</td><td>Oddo M, et al. Intensive Care Med. 2018;44(4):449-63</td></tr>
+<tr><td>17</td><td>SMART試験の TBI 二次解析。バランス晶質液 対 生食</td><td>Lombardo S, et al. J Neurotrauma. 2022;39(17-18):1159-67</td></tr>
+<tr><td>18</td><td>BaSICS 試験。バランス晶質液 対 0.9%生食の死亡率</td><td>Zampieri FG, et al. JAMA. 2021;326(9):1-12</td></tr>
+<tr><td>28</td><td>厳格血糖管理が TBI で脳代謝ストレスを増やす within-subjects RCT</td><td>Vespa P, et al. Crit Care Med. 2012;40(6):1923-9</td></tr>
+<tr><td>29</td><td>TBI の自由主義的 対 制限的輸血戦略 RCT。不良転帰 68.4% 対 73.5%、RR 0.93（0.83-1.04）</td><td>Turgeon AF, et al. N Engl J Med. 2024</td></tr>
+<tr><td>31</td><td>ICP の生理とモニタリングの現在の視点（本稿が「優れたレビュー」と紹介）</td><td>Hawryluk GWJ, et al. Intensive Care Med. 2022;48(10):1471-81</td></tr>
+<tr><td>32</td><td>CENTER-TBI。マンニトール 対 高張食塩水。ICU死亡 OR 1.0（0.4-2.2）、6か月GOSE OR 0.9（0.5-1.6）</td><td>van Veen E, et al. J Neurotrauma. 2023;40(13-14):1352-65</td></tr>
+<tr><td>33</td><td>頭蓋内圧亢進に対する高浸透圧療法の総説</td><td>Ropper AH. N Engl J Med. 2012;367(8):746-52</td></tr>
+<tr><td>42</td><td>COBI 試験。持続高張食塩水は6か月神経学的転帰を改善せず</td><td>Roquilly A, et al. JAMA. 2021;325(20):2056-66</td></tr>
+<tr><td>43</td><td>持続高浸透圧療法と生存の関連（多施設前向きコホート＋SR）</td><td>Asehnoune K, et al. Crit Care. 2017;21(1):328</td></tr>
+<tr><td>44</td><td>持続高張食塩水の生存に対する効果（SR・メタ解析）</td><td>Hourmant Y, et al. Anaesth Crit Care Pain Med. 2023;42(2):101177</td></tr>
+<tr><td>47</td><td>プロトコル化が重症TBI の転帰を改善する（CREVICE のコホート）</td><td>Chesnut RM, et al. Neurosurgery. 2023</td></tr>
+<tr><td>48</td><td>SYNAPSE-ICU。急性脳損傷におけるICPモニタリングの国際前向き観察研究</td><td>Robba C, et al. Lancet Neurol. 2021;20(7):548-58</td></tr>
+<tr><td>50</td><td>SYNAPSE-ICU。治療の段階・タイミングと転帰の関連（早期エスカレーションと死亡率低下）</td><td>Robba C, et al. Intensive Care Med. 2023;49(1):50-61</td></tr>
+<tr><td>54</td><td>脳血管反応性の臨界閾値（BTF第4版の 22 mmHg の根拠となった観察研究）</td><td>Sorrentino E, et al. Neurocrit Care. 2012;16(2):258-66</td></tr>
+<tr><td>55</td><td>臨界ICP閾値と転帰。「22 mmHg は本当に答えなのか」。18 mmHg を提示</td><td>Riparbelli AC, et al. Acta Neurochir (Wien). 2024;166(1):63</td></tr>
+<tr><td>56</td><td>非侵襲ICP波形のポイントオブケア技術</td><td>Brasil S, et al. Neurocrit Care. 2024;40(1):170-6</td></tr>
+<tr><td>57</td><td>侵襲的 対 非侵襲的 ICP波形解析の比較。P2:P1 の AUC 0.79、κ88%</td><td>de Moraes FM, et al. Neurocrit Care. 2022;37(1):219-27</td></tr>
+<tr><td>59</td><td>IMPRESSIT-2。TCD による頭蓋内圧亢進の除外。NPV 96%</td><td>Rasulo FA, et al. Crit Care. 2022;26(1):110</td></tr>
+<tr><td>61</td><td>頭蓋内圧亢進の多モーダル非侵襲評価。ONSD 5.3 mm、AUC 0.78</td><td>Robba C, et al. Crit Care. 2020;24(1):379</td></tr>
+<tr><td>64</td><td>重症TBI における頭蓋内圧亢進モニタリングとしての定量的瞳孔計</td><td>Jahns FP, et al. Crit Care. 2019;23(1):155</td></tr>
+<tr><td>67</td><td>TBI における自動調節能モニタリングと個別化医療</td><td>Zeiler FA, et al. J Neurotrauma. 2022;39(21-22):1477-94</td></tr>
+<tr><td>68</td><td>SIBICC 第2版。脳酸素とICPの両方をモニタする患者の管理アルゴリズム</td><td>Chesnut R, et al. Intensive Care Med. 2020;46(5):919-29</td></tr>
+<tr><td>78</td><td>PbtO2 の第III相RCT（318例）。不良転帰 52% 対 51%、OR 1.0（0.6-1.7）、p=0.95</td><td>本稿引用文献78</td></tr>
+<tr><td>70</td><td>急性脳損傷における臨床脳マイクロダイアリシスの概説</td><td>Stovell MG, et al. Front Neurol. 2023;14:1085540</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>ICPクライシスでは、モニタの有無を確認する前に Tier zero と Tier 1 を走らせる</strong></mark>。呼吸・循環・体温・血糖・Na・鎮静・体位という基礎的集中治療をすべて整えたうえで、意識障害と画像所見から頭蓋内圧亢進を疑った時点で高浸透圧療法を開始する。<mark class="hl"><strong>モニタが無いことは治療を待つ理由にならない</strong></mark>。</p>
+<p>治療強度の上げ下げは、<mark class="hl"><strong>22 mmHg という単一の数字ではなく、18〜22 mmHg という幅と、ICP波形の P2:P1 比、非侵襲モニタの所見を統合して決める</strong></mark>。世界の専門家の 62% は既にそう運用している。</p>
+<p>非侵襲モニタは <mark class="hl"><strong>「診断」ではなく「除外」と「選別」に使う</strong></mark>。TCD 推定ICP 20.5 mmHg 未満の陰性的中率は 96%、陽性的中率は 23% にすぎない。当院で今日から始められる投資は、<mark class="hl"><strong>定量的瞳孔計（NPi）と ONSD エコー</strong></mark>である。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>重症脳損傷で GCS 8以下、脳浮腫・占拠性病変・水頭症のいずれかがある</td><td>Tier zero の9項目（換気・輸液・MAP・体位・鎮静・痙攣予防・体温・血糖・Hb）がすべて整っているか</td><td>整っていない項目を先に是正する。ここを飛ばして高浸透圧療法だけ打たない</td></tr>
+<tr><td>意識障害＋画像上の脳槽圧排・正中偏位・未除去の占拠性病変、またはヘルニア症候群</td><td>ICPモニタの有無は問わない</td><td>直ちに Tier 1（20%マンニトール 0.5〜1 g/kg を5〜15分、または 3%NaCl 150 mL / 23.4%NaCl 30〜60 mL を10〜30分）を開始し、同時に脳外科をコールする</td></tr>
+<tr><td>脳室内出血または水頭症がある</td><td>脳室拡大の有無、出血の脳室内進展</td><td>EVD 留置を脳外科と相談する。CSF を抜くことが最も直接的に容積を減らす</td></tr>
+<tr><td>脳腫瘍または脳膿瘍による病変周囲浮腫</td><td>腫瘍性か外傷性か</td><td>デキサメタゾン 10〜20 mg ボーラス後 4〜24 mg/日を分割。TBI や脳梗塞には使わない</td></tr>
+<tr><td>初期治療後も改善しない、または神経学的悪化（運動GCS 1点低下・瞳孔不同2 mm超・両側散瞳・新規局所徴候・Cushing三徴のいずれか）</td><td>ICP・MAP・CPP・SpO2・EtCO2・体温の再確認、血糖・血算・生化学・血ガス・敗血症検索、緊急頭部CT</td><td>頭蓋外の原因があればそれを是正。無ければ Tier を1段上げる</td></tr>
+<tr><td>ICPモニタが無く、Tier 1 で制御できない</td><td>神経学的悪化が続いているか</td><td>Tier 2 へ：3%NaCl 持続投与、PaCO2 30〜35 mmHg の過換気、鎮静深度の増強</td></tr>
+<tr><td>ICPモニタがあり、ICP が 18〜22 mmHg を超える、または P2:P1 比が 1 以上</td><td>波形のトレンド、CPP、他のモニタ所見</td><td>Tier 1 の高浸透圧療法を増量・頻回化し、RASS −3〜−5 の深鎮静、CPP 60〜70 mmHg を維持</td></tr>
+<tr><td>ICPモニタがあり、Tier 1 で制御できない</td><td>静的圧自動調節能が保たれているか</td><td>Tier 2 へ：PaCO2 32〜35 mmHg の過換気に加え、MAPチャレンジ（MAP と CPP を10 mmHg・20分上げる）を実施</td></tr>
+<tr><td>MAPチャレンジで ICP が低下した</td><td>昇圧に伴う全身合併症がないか</td><td>自動調節能は保たれている。ICP が閾値未満になる水準まで高い MAP と CPP を維持する</td></tr>
+<tr><td>MAPチャレンジで ICP が上昇した</td><td>他の ICP低下療法を動かしていないか（動かしていたら解釈不能）</td><td>自動調節能は破綻している。昇圧薬を止めて MAP をベースラインに戻す</td></tr>
+<tr><td>Tier 2 でも制御できない難治例</td><td>手術適応、脳波モニタリングの可否</td><td>Tier 3 へ：二次的減圧開頭、チオペンタール／ペントバルビタールによるバルビツレート昏睡（バースト・サプレッションまで滴定）、軽度低体温 35〜36℃</td></tr>
+<tr><td>血清Na 155 mEq/L 以上、浸透圧 320 mEq/L 以上に達した</td><td>ヘルニアの切迫があるか、副作用（肺水腫・高Cl性アシドーシス）が出ているか</td><td>上限は禁止線ではない。臨床的必要性が上回るなら副作用監視を強化して継続投与を検討する</td></tr>
+<tr><td>ICPモニタが使えず、頭蓋内圧亢進を除外したい</td><td>TCD 推定ICP が 20.5 mmHg 未満か、ONSD が 5.3 mm 未満か</td><td>20.5 mmHg 未満なら頭蓋内圧亢進は考えにくい（NPV 96%）。ただし「高い」ことをもって断定はできない（PPV 23%）</td></tr>
+<tr><td>昏睡患者で治療効果を客観的に追いたい</td><td>NPi を両眼で測定（3 未満で対光反射低下）</td><td>ICP 上昇で低下し、高浸透圧療法で上昇する。経時的に追って治療反応と悪化検出に使う</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
