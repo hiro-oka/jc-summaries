@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICUにおける喘息・COPD増悪の管理 — 気道炎症・気管支攣縮・動的過膨張への段階的アプローチ（CHEST Critical Care Review・CHESTCC2025）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="j.chstcc.2024.100107.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICUにおける喘息・COPD増悪の管理 — 気道炎症・気管支攣縮・動的過膨張への段階的アプローチ（CHEST Critical Care Review・CHESTCC2025）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Mein SA, Ferrera MC. Management of Asthma and COPD Exacerbations in Adults in the ICU. CHEST Critical Care. 2025;3(1):100107. DOI: 10.1016/j.chstcc.2024.100107</dd><dt>掲載誌</dt><dd>CHEST Critical Care（2025）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.chstcc.2024.100107" target="_blank" rel="noopener">doi.org/10.1016/j.chstcc.2024.100107</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Management of Asthma and COPD Exacerbations in Adults in the ICU</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>重症喘息・COPD増悪の管理を1枚で総ざらいできる教育用レビュー</strong>。新規のエビデンスを出す論文ではなく、当院の若手・レジデント教育と院内プロトコル点検のベースラインに最適</li><li><strong>ステロイド量の再確認</strong>：プレドニゾン40〜50 mg/d（喘息5〜7日・COPD5日）が標準。ICUだからと反射的に高用量にしない。メチルプレドニゾロン240 mg/d超は治療失敗・IMV期間・LOS・高血糖・真菌感染を増やす</li><li><strong>挿管後の急変対応</strong>：閉塞性換気の挿管患者が急に血圧低下したら「回路を外して呼気させる」が第一手。予防は呼吸数を下げること（分時換気量を下げ pH 7.25〜7.30 の permissive hypercapnia を許容）</li><li><strong>Pplat・PEEPi の定期測定</strong>をルーチン化する（吸気ホールド・呼気ホールド）。Pplat &lt; 30 cmH2O 維持。外部PEEPは 5 cmH2O（またはPEEPiの50〜80%）から開始し、total PEEP・Pplat を見ながら滴定、Pplat が上がったら中止</li><li><strong>COPDの抜管後は「待たずに」NIVまたはHFNCを即時装着</strong>。再呼吸不全が起きてからの装着は死亡増と関連。喘息では抜管後NIV/HFNCの役割は未確立</li><li><strong>酸素目標の使い分け</strong>（喘息 93〜95%・COPD 88〜92%）とCOPDネブライザーの駆動ガスは空気（酸素駆動は高CO2血症を悪化させる）を再徹底</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：喘息・COPD増悪の入院治療（SABA・SAMA・ステロイド・抗菌薬・NIV）はGINA/GOLDで確立。COPDのNIVは死亡・挿管を減らす第一選択</li><li><strong>Unknown</strong>：ICU・人工呼吸患者に限定した質の高いRCTはほぼ全領域で欠落（ステロイド用量、SAMAの上乗せ、HFNT、NIV下の鎮静、ECMO適応基準など）。喘息の抜管後NIV/HFNCの役割も未確立</li><li><strong>What's new</strong>：2021年 Rome Proposal → GOLD 2024 が採用したCOPD増悪の客観的重症度定義（バイタル＋CRP＋高CO2血症）を軸に、病態生理（時定数・動的過膨張・EFL）から薬物療法・換気設定・ECMOまでをICU医向けに1本へ統合した最新レビュー</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICUの喘息・COPD増悪管理は<strong>「気道炎症を抑え（ステロイド）・気管支攣縮を戻し（SABA+SAMA）・動的過膨張を制御しながら（低RR・長呼気の換気）改善を待つ」</strong>の3本柱で、両疾患の共通点と相違点（NIVの位置づけ・抗菌薬適応・酸素目標）を押さえることが要点。</p>
+</div>
+<ul><li>米国成人で喘息約2,000万人・COPD約1,400万人。増悪入院の10〜19%がICU管理となり、COPDのICU症例は死亡率25〜30%に達する</li><li>増悪の誘因はウイルスが40〜50%。細菌はCOPDでより重要だが、重症喘息増悪でも検出頻度が高く役割は不確定</li><li>重症度定義：喘息はバイタル基準1項目以上（RR&gt;30・HR&gt;120・SpO2&lt;90%・PEF≤50%）。COPDはRome Proposal基準5項目中3項目以上＋急性高CO2血症（PaCO2&gt;45 mmHg かつ pH&lt;7.35）</li><li>薬物療法：全例にSABA＋SAMA＋全身ステロイド（プレドニゾン40〜50 mg/d）。COPDは症状基準または換気補助（NIV/IMV）で抗菌薬5〜7日。不応例にはMg 2 g静注を考慮</li><li>NIVはCOPD急性呼吸不全の第一選択（挿管・死亡・LOS減）だが20〜30%は失敗しIMVへ。喘息へのNIVはRCTが乏しく「慎重に試行可」の位置づけ</li><li>IMVは血液ガス正常化ではなく過膨張の最小化が目標：VT 6〜8 mL/kg・RR 10〜12・I:E 1:2〜1:4・Pplat&lt;30 cmH2O・permissive hypercapnia（pH 7.25〜7.30）</li><li>難治例はVV-ECMO（特に可逆性の高い喘息）。開始後24時間のPaCO2低下は20 mmHgまたは治療前値の50%以内に留める（急速補正は頭蓋内出血・脳梗塞・脳死と関連）</li><li>COPDの抜管後はNIVまたはHFNCを<strong>即時</strong>装着で再挿管・死亡減。喘息では未確立</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 閉塞性肺疾患の増悪とICU（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 喘息もCOPDも「気道が狭くなる病気」だが、増悪時にICUで問題になる共通の敵は<strong>呼気が終わらないこと</strong>。気道炎症・気管支攣縮・粘液栓で気道抵抗が上がると、呼気時定数（＝抵抗×コンプライアンス。1回換気量の63%を吐き出すのに要する時間）が延び、次の吸気が来るまでに肺胞内圧が大気圧に戻らない。この「吐き残し」が積み重なるのが<strong>動的過膨張</strong>で、肺胞に残る陽圧を<strong>内因性PEEP（PEEPi、auto-PEEP）</strong>と呼ぶ。過膨張した肺は圧-容量曲線の頂上付近で動くためコンプライアンスが低下し、横隔膜は平坦化して長さ-張力関係が不利になり、呼吸筋仕事量が増えて疲労→呼吸不全に至る。陽圧換気はこの胸腔内圧上昇をさらに悪化させ、静脈還流を減らして<strong>血行動態虚脱</strong>を起こしうる——これがICUでの管理を規定する中心病態。 用語：SABA＝短時間作用性β2刺激薬、SAMA＝短時間作用性抗コリン薬、NIV＝非侵襲的換気、HFNT＝高流量鼻カニュラ療法（HFNC相当）、IMV＝侵襲的人工呼吸、Pplat＝プラトー圧、EFL＝呼気流量制限、heliox＝ヘリウム酸素混合ガス。</p>
+</div>
+<h3>2. 冒頭の Clinical Question（症例）</h3>
+<p>35歳男性・コントロール不良喘息。増悪でER受診、ネブライザー気管支拡張薬とステロイド静注に反応せず急性高CO2血症で挿管。従量式で VT 400 mL・RR 30回/分・FIO2 40%・PEEP 5 cmH2O。ICU到着直後に急な低酸素・低血圧・頻脈。エコーで両側肺スライディングあり・心機能正常・タンポナーデなし。<strong>回路を外して完全呼気させると血行動態が改善</strong>した。再発予防に調整すべき設定は？</p>
+<div class="tw"><table>
+<thead><tr><th>選択肢</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>A. I:E比を上げる（吸気を長く）</td><td>誤り（呼気時間がさらに短縮）</td></tr>
+<tr><td>B. 呼吸数を下げる</td><td><strong>正解</strong></td></tr>
+<tr><td>C. FIO2を上げる</td><td>誤り（病態は酸素化ではない）</td></tr>
+<tr><td>D. 腹臥位</td><td>誤り</td></tr>
+</tbody></table></div>
+<ul><li>機序：気流閉塞で呼気が延長→設定RR 30では呼気完了前に次の送気→動的過膨張とPEEPi進行→胸腔内圧上昇→静脈還流低下→心拍出量低下→低血圧・代償性頻脈</li><li>最も効果的な対策は<strong>RRを下げる</strong>こと。VT減・I:E比の低下（呼気延長）も有効。分時換気量が下がるため permissive hypercapnia（pH 7.25〜7.30）を許容する（根拠文献：Leatherman. Chest 2015）</li></ul>
+<h3>3. 背景と本レビューの範囲</h3>
+<ul><li>喘息・COPDは世界で最多の慢性呼吸器疾患（米国成人でそれぞれ約2,000万人・約1,400万人）</li><li>毎年数十万件の増悪入院があり、推定<strong>10〜19%がICU管理</strong>。ICUを要する重症増悪は高い罹病率・死亡率と関連し、COPDでは<strong>死亡率25〜30%</strong>の報告もある</li><li>別疾患だが病態生理・増悪の臨床像・重症患者管理に大きな重なりがあり、本レビューは「共通点と相違点」を軸に診断から抜管・ECMOまでを統合的に扱う</li></ul>
+<h3>4. 定義と誘因</h3>
+<ul><li><strong>喘息増悪</strong>＝症状（呼吸困難・咳・喘鳴）の増加と肺機能の進行性低下により治療変更を要するエピソード（GINA）</li><li><strong>COPD増悪</strong>＝呼吸困難・咳・喀痰増加のエピソードで、しばしば頻呼吸・頻脈を伴い、発症から2週間以内に悪化するもの（GOLD）</li><li>誘因と免疫応答の複雑な相互作用で生じる異質性の高いイベント</li><li><strong>ウイルス</strong>：喘息・COPD増悪の40〜50%に関与。ウイルス性COPD増悪は医療資源使用増・経過遷延と関連</li><li><strong>細菌</strong>：COPDでより重要な誘因と考えられるが、両疾患とも役割には不確実性が残る。重症喘息増悪ではむしろ細菌検出頻度が高いとの報告あり</li><li><strong>アレルゲン</strong>（環境・食物）は喘息増悪の誘因。<strong>大気汚染・極端な暑熱</strong>が両疾患の増悪を誘発することへの認識が近年高まっている</li></ul>
+<h3>5. 初期評価と重症度判定（Table 1）</h3>
+<ul><li>喘息・COPD増悪は<strong>臨床診断</strong>で、疾患特異的な確定検査は存在しない。増悪に見える他疾患（肺炎・肺塞栓・気胸・心不全・心筋梗塞、まれにアナフィラキシー・血管性浮腫・声帯機能不全）を必ず鑑別する</li><li>パルスオキシメトリーが酸素化評価の第一手段（濃い肌色で酸素含量を過大評価しうる点に留意）。動脈血ガスは選択的に</li></ul>
+<h4>Table 1. 初期評価と重症増悪の定義（日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>初期評価</td><td>SpO2・心拍数（パルスオキシメトリー）</td></tr>
+<tr><td></td><td>動脈血ガス：疲労・傾眠など高CO2血症を疑うとき、PEFまたはFEV1 &lt;50%予測値、その他臨床的懸念</td></tr>
+<tr><td></td><td>呼吸器ウイルス病原体検査</td></tr>
+<tr><td></td><td>喀痰細菌培養（重症喘息・COPDとも定着がありうるため解釈は慎重に）</td></tr>
+<tr><td></td><td>初回胸部X線・心電図・BNP</td></tr>
+<tr><td></td><td>肺塞栓の臨床評価（D-dimer・造影CTは個別判断）</td></tr>
+<tr><td><strong>重症喘息増悪</strong>（1項目以上）</td><td>呼吸数 &gt; 30回/分</td></tr>
+<tr><td></td><td>心拍数 &gt; 120回/分</td></tr>
+<tr><td></td><td>SpO2 &lt; 90%（室内気）</td></tr>
+<tr><td></td><td>PEF ≤ 50%（予測値または自己最良値）</td></tr>
+<tr><td><strong>重症COPD増悪</strong>（5項目中3項目以上＋急性高CO2血症）</td><td>呼吸数 ≥ 24回/分</td></tr>
+<tr><td></td><td>心拍数 ≥ 95回/分</td></tr>
+<tr><td></td><td>SpO2 &lt; 92%（室内気または在宅酸素下）または既知値から &gt;3%低下</td></tr>
+<tr><td></td><td>呼吸困難VAS ≥ 5（0〜10）</td></tr>
+<tr><td></td><td>CRP ≥ 10 mg/L</td></tr>
+<tr><td></td><td>＋動脈血ガスで PaCO2 &gt; 45 mmHg かつ pH &lt; 7.35</td></tr>
+</tbody></table></div>
+<ul><li>喘息の重症度はGINA 2024（バイタル中心。重症＝PEF/FEV1 ≤40〜50%、生命危機＝&lt;25%）、COPDは<strong>2021年 Rome Proposal</strong>をGOLD 2024が採用した客観的定義。従来のCOPD重症度は「使った治療（ER受診・入院）」で定義されており、客観データへの転換が本質的変化</li></ul>
+<h3>6. 増悪の病態生理（Figure 1）</h3>
+<ul><li>炎症細胞像：喘息はTh2細胞・肥満細胞・好酸球主体、COPDは1型細胞傷害性T細胞・マクロファージ・好中球主体。ただし重なりが大きい（好酸球優位のCOPDがあり、重症喘息増悪では好酸球・好中球混合炎症が一般的）</li><li>増悪時は数日かけて炎症が進行し、微小血管透過性亢進と気道浮腫を来す。気道抵抗は気管支攣縮（喘息でより顕著）と小気道の粘液栓で増加</li><li><strong>呼気流量制限（EFL）</strong>：弾性収縮力の低下により気道が早期閉塞する現象が抵抗増加に上乗せされる</li><li>気流閉塞の帰結：V/Qミスマッチ＋<strong>呼気時定数の延長</strong>（時定数＝抵抗×コンプライアンス。VTの63%を呼出する時間）→頻呼吸下で肺胞圧が大気圧へ戻れず、進行性ガストラッピングと<strong>動的過膨張</strong></li><li>動的過膨張の悪循環：肺コンプライアンス低下（圧-容量曲線の上端で換気）＋横隔膜平坦化（長さ-張力関係の悪化）→呼吸筋仕事量増→疲労→呼吸不全</li><li>治療目標は3つ：<strong>①気道炎症の軽減 ②気管支攣縮の解除 ③重症例では機械換気（NIV/IMV）で呼吸筋をオフロード</strong>し、炎症改善までの時間を稼ぐ</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 増悪時の生理学的変化と外部PEEPへの応答（原図・無改変） A（上段・自発呼吸）：左は健常肺——呼気終末に肺胞圧が大気圧（Patm=0）と平衡し流量が止まる（肺胞内は0、PEEPi=0）。右は喘息/COPD——気道炎症・攣縮・EFL（弾性収縮力低下による早期気道閉塞、狭窄部を黒い縁で描画）により呼気が延長し、呼気終末も肺胞圧が陽圧のまま（小さい肺胞は＋、大きい肺胞は＋＋＋）＝PEEPi発生。時定数の異なる肺胞ユニットが混在する不均一性も表現されている。 B（下段・陽圧換気で外部PEEP適用）：左は<strong>純粋なEFLあり</strong>——外部PEEPをPEEPiの80%まで上げてもtotal PEEP・過膨張は不変（PEEPi=＋＋のまま）。「滝の効果」：滝の下流の川の水位を上げても、滝の高さを超えない限り滝上の流れに影響しないのと同じで、EFLの臨界閉塞部より下流に圧を加えても上流圧・流量は変わらない。右は<strong>EFLなし</strong>——外部PEEPが肺胞へ伝わりPEEPi悪化（＋＋→＋＋＋・＋＋＋＋）、過膨張が進む。図にない第3のパターンとして、外部PEEPでtotal PEEPが逆説的に低下する応答も報告される（EFL＋肺不均一性の組み合わせと推定）。</p>
+</div>
+<h3>7. 吸入気管支拡張薬</h3>
+<ul><li><strong>第一選択はSABA</strong>。定量噴霧式吸入器（MDI）＋スペーサー、ドライパウダー、ネブライザーで効果は同等。呼吸窮迫や吸入手技が取れない重症患者ではネブライザーが好まれる</li><li><strong>重症増悪の成人重症患者にはSAMAをSABAへ追加</strong>する（GINA/GOLDとも推奨）</li><li>根拠：ERでの重症喘息増悪でSABA+SAMA併用はSABA単独よりPEF・FEV1改善が大きく入院が減少</li><li>COPD増悪やICU患者でのSAMAの質の高い研究は存在しないが、重症増悪には推奨されている</li><li>アルブテロールとレバルブテロールは転帰・安全性が同等で、アルブテロールが第一選択</li><li><strong>COPDのネブライザーは酸素駆動でなく空気駆動</strong>（過剰酸素化による高CO2血症悪化を回避）</li><li>安定したら早期にネブライザー→吸入器へ移行（手技教育と早期退院の促進）</li></ul>
+<h3>8. 全身ステロイド</h3>
+<ul><li>初期気管支拡張薬に反応しない患者に推奨。作用機序は炎症性メディエーターの遺伝子転写抑制・好酸球の気道リクルート阻止・好酸球アポトーシス誘導</li><li>COPDでの有益性は<strong>T2炎症が高く好酸球高値のサブグループが駆動</strong>しているらしく、非重症患者では好酸球ガイド下投与への関心が高まっている</li><li>急性期医療でのエビデンスは強固だが、<strong>ICU・人工呼吸中の喘息増悪を対象とした研究はごく少ない</strong>。人工呼吸（NIV/IMV）を要するCOPD増悪では、ステロイドがIMV期間短縮・NIV失敗率低下と関連した研究と、転帰差なしの研究が混在</li><li><strong>推奨レジメン</strong>：喘息＝プレドニゾン1 mg/kg/d（上限50 mg/d）または同等量を5〜7日、COPD＝プレドニゾン40 mg/d を5日。根拠は短期コース（5〜7日）が長期（10〜14日）と治療失敗・再燃同等で肺炎・死亡リスクが低いこと</li><li>ICU研究の多くは高用量を使用しているが、<strong>メチルプレドニゾロン&gt;240 mg/dは治療失敗・IMV期間・ICU/病院LOS・有害事象（インスリンを要する高血糖・真菌感染）の増加と関連</strong></li><li>著者ら推奨：<strong>プレドニゾン40〜50 mg/dを最低5日</strong>。生命を脅かす増悪や初期治療不応例に限り高用量を考慮</li><li>糖質コルチコイド作用主体の製剤（プレドニゾン・メチルプレドニゾロン）が、鉱質コルチコイド作用のある製剤（ヒドロコルチゾン・デキサメタゾン）より研究が豊富で一般に好まれる（どの製剤も使用は可能）。経口と静注の生物学的利用能は同等で、<strong>多くの患者で経口が推奨</strong>（作用発現が早く低コスト）</li></ul>
+<h3>9. 抗菌薬</h3>
+<ul><li><strong>喘息</strong>：抗菌薬追加で症状・肺機能に差なし（ICU患者を含む研究はない）。ただし喘息増悪入院例への早期抗菌薬投与が複合治療失敗（IMV導入・ICU転棟・院内死亡・再入院）を減らした大規模後ろ向き研究があり、<strong>併存肺感染症を懸念する重症患者には投与</strong>する。標準レジメンを支持するデータは乏しい（GINA推奨と整合）</li><li><strong>COPD</strong>：以下のいずれかで投与——①呼吸困難増加・喀痰量増加・喀痰膿性化の<strong>3症状すべて（膿性痰があれば2症状で可）</strong>、②<strong>NIVまたはIMVを要する患者</strong></li><li>抗菌薬は入院COPD増悪の治療失敗・死亡を減らす。効果は喀痰膿性化（細菌量のサロゲート）を示すサブグループが駆動</li><li>選択：アミノペニシリン＋クラブラン酸・マクロライド・テトラサイクリン系が主軸。<strong>緑膿菌リスク</strong>（慢性定着・FEV1&lt;50%・気管支拡張症・慢性ステロイド使用）があればキノロン等の抗緑膿菌薬を考慮</li><li>投与期間は<strong>5〜7日</strong>（延長しても転帰は不変）</li><li>CRP・プロカルシトニンなどバイオマーカーに基づく抗菌薬適応判断は、現時点でルーチン実装には証拠不十分</li></ul>
+<h3>10. その他の薬物（Mg・ケタミン・生物学的製剤ほか）</h3>
+<ul><li><strong>硫酸マグネシウム静注（2 gを20分かけて単回）</strong>：生命を脅かす喘息増悪・ER受診のCOPD増悪で入院を減らす。初期治療不応例で考慮。SABAの気管支拡張効果を増強する可能性。重症・入院患者でのデータはごく限られる</li><li><strong>ケタミン</strong>（解離性鎮痛薬・気管支拡張作用）：非挿管患者に低用量（0.2〜0.5 mg/kg を5分でボーラス→0.05〜0.25 mg/kg/h持続）が提案されるが、臨床的有益性を示す質の高いデータはない。小規模RCTはプラセボ比較で結果が混在。非挿管では呼吸抑制の監視必須。IMV中は0.5〜2 mg/kg/hの高用量も考慮可。COPDにはデータ不足で非適応</li><li><strong>生物学的製剤</strong>（IgE/IL-5阻害）：喘息増悪での使用は主に症例報告レベル。ただしERでのベンラリズマブ投与が以後12週の再増悪を減らしたRCTが1件ある。用量例：オマリズマブ150〜375 mg皮下（実体重で変動）・メポリズマブ100 mg・ベンラリズマブ30 mg。新しい製剤（デュピルマブ・テゼペルマブ）が同様に使えるかは不明。COPDにはデータ不足</li><li><strong>メチルキサンチン</strong>（テオフィリン・アミノフィリン）：吸入β2刺激薬に対する上乗せ効果なし・治療域が狭い・有害事象（悪心・嘔吐・動悸・頻脈性不整脈）増加のため<strong>喘息・COPDとも非推奨</strong></li><li><strong>テルブタリン</strong>（静注β2刺激薬）：低品質のエビデンスでSABA単独を上回らず非推奨</li></ul>
+<h3>11. 吸入ガス（揮発性麻酔薬・ヘリオックス）</h3>
+<ul><li><strong>揮発性麻酔薬</strong>（セボフルラン1.4〜2.6%・デスフルラン2.5〜8.5%・イソフルラン1.0〜3.0%）：生命を脅かす喘息増悪での使用は症例報告レベル。呼吸メカニクスは改善しうるが前向きデータ不十分で、<strong>難治性気管支攣縮に限定</strong>。COPDでは静注鎮静と比べ効果が混在し役割なし</li><li><strong>ヘリオックス</strong>（ヘリウム70〜80%＋酸素20〜30%）：低密度ガスで層流を促進し気道抵抗・呼吸仕事量を低下</li><li>喘息：肺機能改善は最重症例で最大。臨床転帰データは乏しい</li><li>COPD：NIV/IMV中の呼吸仕事量・PEEPiを改善。NIV下の2つのRCTでNIV失敗は防げなかったが、挿管率低下・NIV失敗までの時間延長の傾向あり</li><li>他治療に不応の重症例に個別判断で考慮</li></ul>
+<h3>12. 呼吸サポートの全体像（Figure 2）と酸素療法</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 呼吸サポート5段階（酸素→HFNT→NIV→IMV→VV ECMO）の適応・初期設定・合併症（原図・無改変） 5列（左から酸素投与・HFNT・NIV・IMV・VV ECMO、上部に各デバイスのイラスト）×3行（適応・初期設定・合併症）のマトリクス。<strong>適応</strong>：酸素＝喘息SpO2&lt;92%・COPD&lt;88%／HFNT＝呼吸窮迫を伴う強い呼吸困難（呼吸補助筋使用など）・酸素でも持続する低酸素血症／NIV＝同左＋PaCO2≥45 mmHgかつpH≤7.35／IMV＝心停止・血行動態不安定、NIV不忍容またはNIV下の呼吸不全悪化、意識障害、大量誤嚥・持続嘔吐／VV ECMO＝最適IMVでも pH&lt;7.25 の高CO2血症性呼吸不全、最適IMVでも低酸素血症、過膨張による血行動態障害。<strong>初期設定</strong>：酸素＝1〜15 L/min（目標：喘息93〜95%・COPD88〜92%）／HFNT＝15〜60 L/min（高流量でPEEP 3〜5 cmH2O相当）／NIV＝PSでVT 6〜8 mL/kg IBW・初期PEEP約5 cmH2O／IMV＝VT 6〜8 mL/kg・RR 10〜12・PEEP 0〜10 cmH2O・I:E 1:2〜1:4・流量60〜100 L/min・トリガー感度 −1〜−2 cmH2O（圧）または2 L/min（流量）／ECMO＝流量2〜6 L/min・FDO2をSpO2目標へ・スイープ1〜9 L/min（初日24時間のPaCO2低下は20 mmHg未満に）。<strong>合併症</strong>：酸素＝COPDでの高酸素は死亡増と関連・鼻出血／HFNT＝閉所感・嚥下障害と誤嚥リスク／NIV＝閉所感・マスク接触面の皮膚障害・胃拡張と誤嚥リスク／IMV＝圧外傷（気胸）・VAP・チューブ合併症（気管狭窄）・筋力低下／ECMO＝出血・血栓・感染・カニュレーション合併症（血管穿孔）。</p>
+</div>
+<ul><li>増悪時の低酸素血症はV/Qミスマッチによる。<strong>喘息では生命危機の増悪でも低酸素血症は通常軽度</strong>——PaO2&lt;55 mmHgや必要FIO2&gt;30〜50%なら他の原因（肺炎・無気肺など）を検索する</li><li><strong>酸素目標：喘息 SpO2 93〜95%・COPD 88〜92%</strong></li><li>過剰酸素の害：V/Qミスマッチ悪化＋Haldane効果（ヘモグロビンが酸素化されると結合CO2が放出される）で高CO2血症を助長。さらに<strong>COPD増悪では高酸素が死亡増と関連</strong></li></ul>
+<h3>13. 高流量鼻カニュラ療法（HFNT）</h3>
+<ul><li>機序：最大60 L/minの加温加湿ガスで①高FIO2の正確な供給、②上気道（解剖学的死腔）のCO2洗い出し、③低レベル陽圧による無気肺リクルートとV/Q・コンプライアンス改善</li><li><strong>喘息</strong>：呼吸不全を伴う重症増悪の小規模RCTで、通常酸素より酸素化・心拍数・呼吸数が改善（PaCO2の群間差なし）。臨床転帰（機械換気移行・死亡）のデータはごく乏しく、<strong>現時点では実験的な位置づけ</strong></li><li><strong>COPD</strong>：快適性・呼吸仕事量・肺胞換気は改善するが、通常酸素との比較でNIV/IMV移行・死亡は減らなかった</li><li>中等度高CO2血症（pH 7.25〜7.35・PaCO2≥50〜55 mmHg）でのNIVとの比較：小規模研究ではPaCO2低下・治療失敗・死亡が同等——ただし1研究では<strong>HFNT群の約3分の1が6時間以内にNIVを要した</strong></li><li>より大規模な非劣性RCTでは、HFNTは<strong>治療失敗と挿管が多く</strong>、ICU/病院LOS・死亡は差なし</li><li>結論：<strong>呼吸性アシドーシスを伴う重症COPD増悪ではNIVを先に</strong>。HFNTはNIV不忍容例やNIVとの交互使用が有益な例の代替</li></ul>
+<h3>14. 非侵襲的換気（NIV）</h3>
+<ul><li>機序：外部PEEPで肺胞リクルート＋<strong>PEEPiに打ち勝つための吸気陰圧仕事を軽減</strong>（トリガー仕事の軽減）、プレッシャーサポートでVT・分時換気量を増やし、高CO2血症・低酸素血症・呼吸仕事量を改善</li><li><strong>喘息</strong>：役割は依然不明確でGINAは推奨を出していない。小規模RCTで肺機能・ICU/病院LOSの改善、5.3万人超を含む後ろ向き研究で死亡・IMV移行の減少と関連。RCTが乏しいままNIV使用は数十年で増加し（IMVからのシフト）、死亡・LOSは不変。著者ら：<strong>ICU管理下の重症喘息増悪の多くでNIV試行は可、ただし生命を脅かす増悪では慎重に</strong></li><li><strong>COPD</strong>：<strong>急性呼吸不全の第一選択</strong>（GOLD）。挿管回避・死亡・ICU/病院LOSを減らし、院内肺炎も少ない</li><li>初期設定の原則：呼吸仕事量を改善しつつ過膨張を悪化させない範囲でPEEPを滴定し、<strong>PSはVT 6〜8 mL/kg理想体重を目標</strong>に設定。特に導入早期は身体所見と血液ガスで頻回に監視。高CO2血症が持続すればPSを上げて分時換気量を増やす</li><li>NIV中の鎮静：不快・不安にはオピオイド・ベンゾジアゼピンが慣用されるが安全性データは混在（<strong>異なるクラスの併用で害のリスク</strong>）。デクスメデトミジンは呼吸抑制がなく挿管リスク・ICU LOS減の可能性があり魅力的だが、RCTで役割が明確になるまで<strong>控えめに使う</strong></li><li><strong>NIV失敗は20〜30%</strong>。危険因子：高齢・高BMI・高APACHE II・NIV 1時間後も持続する低酸素/高CO2血症。<strong>HACORスコア</strong>（Heart rate・Acidosis・Consciousness・Oxygenation・Respiratory rateの頭字語）がCOPD増悪のNIV失敗予測に使える。横隔膜機能不全（換気中の横隔膜厚増加率&lt;20%）も失敗予測因子となりうるが研究段階</li></ul>
+<h3>15. 侵襲的人工呼吸（IMV）— 挿管、初期設定、過膨張モニタリング（Figure 3）</h3>
+<ul><li>最大限の非侵襲治療でも、喘息・COPD増悪入院の<strong>1〜2%はIMVを要する</strong></li><li>IMVの意思決定は患者または代諾者と協議する。<strong>医療者はCOPD増悪のIMV患者の生存可能性を過小評価しがち</strong>——実際には他の呼吸不全原因より転帰は良好</li></ul>
+<h4>挿管のポイント</h4>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>挿管前</td><td>動的過膨張による高胸腔内圧→陽圧開始で静脈還流低下・血圧低下のリスク</td><td>時間があれば前酸素化。輸液蘇生＋ノルアドレナリン等で血行動態を最適化してから挿管</td></tr>
+<tr><td>導入法</td><td>生理学的困難気道（周術期低酸素・心血管虚脱リスク）</td><td>RSI が一般的。前酸素化の時間を稼ぐ delayed sequence intubation も選択肢</td></tr>
+<tr><td>導入・鎮静薬</td><td>気管支拡張作用の有無</td><td>ケタミンとプロポフォールが望ましい（ケタミンは低血圧が少ない）</td></tr>
+<tr><td>チューブ</td><td>気道抵抗・ピーク圧、吸引・気管支鏡のしやすさ</td><td>体格に応じ<strong>最大径のチューブ（例：7.5〜8 mm）</strong>。死亡改善の可能性も</td></tr>
+</tbody></table></div>
+<h4>初期設定 — 目標は「血液ガス正常化」ではなく「過膨張の最小化」</h4>
+<ul><li><strong>permissive hypercapnia（pH 7.25〜7.30）を推奨</strong>。コントロール換気（従量・従圧の優劣なし）</li><li>低い分時換気量＋長い呼気時間が原則：<strong>VT 6〜8 mL/kg理想体重・RR 10〜12回/分・PEEP 0〜10 cmH2O・I:E 1:2〜1:4・吸気流量60〜100 L/min・トリガー感度 −1〜−2 cmH2O（圧）または2 L/min（流量）</strong></li><li>初期PEEPは<strong>5 cmH2O（PEEPi既知なら50〜80%）</strong>から開始し応答をみて滴定</li></ul>
+<h4>過膨張のモニタリング：Pplat と PEEPi</h4>
+<ul><li><strong>Pplat</strong>：従量式で吸気ホールド→流量停止後に回路圧が肺胞圧と平衡した値＝静的コンプライアンスの指標＝過膨張のサロゲート。<strong>Pplat &lt; 30 cmH2O を維持</strong>（圧外傷回避）。Pplat上昇時は肺実質・胸膜の他病変（肺水腫・肺炎・気胸・胸水）も検索</li><li>ピーク圧（PIP）は抵抗＋コンプライアンスの関数。吸気ホールドで測るのは静的コンプライアンスであり、動的コンプライアンス（気流抵抗と胸郭も含む）は通常それより低く、頻呼吸悪化でさらに低下する（時定数の長いユニットの吐き残しのため）</li><li><strong>PEEPi</strong>：フロー-時間波形の呼気脚が次の呼吸までにゼロへ戻らなければPEEPiのサイン→呼気終末閉塞（呼気ホールド）でtotal PEEPを測定。<strong>PEEPi＝total PEEP−設定PEEP</strong></li><li>PEEPi低減策：<strong>RR減（最も効果大</strong>。ただしRR&lt;8〜12/分では呼気流量が最初の数秒で急減するため効果が減衰<strong>）</strong>・VT減・I:E比低下。吸気流量増や矩形波フローへの変更で吸気時間短縮も可</li><li>外部PEEP滴定への3応答（Fig 1B）：①純粋なEFLあり→PEEPiの80%までtotal PEEP・Pplat不変、②EFLなし→total PEEP・Pplat増加、③逆説的にtotal PEEP低下（EFL＋肺不均一性）。<strong>Pplatが上がったらPEEP滴定は中止</strong></li><li>自発呼吸努力があるとPplat・PEEPiは偽性高値になる——正確な測定が必要なら深鎮静±筋弛緩薬ボーラスを考慮</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 人工呼吸中の肺メカニクス評価（原図・無改変） A：正常のフロー・圧波形（従量式・PEEP 5 cmH2O）。呼気フローは次の呼吸開始前に0 L/sへ戻る（赤丸）。 B：増悪時——抵抗増加と流量制限で肺の空虚化が遷延（1呼吸目）。フローが0に戻る前に次の呼吸が始まり（赤丸）、ガストラッピングが生じる（黒矢印）。2呼吸目で呼気ホールドを実施：フローが止まると回路圧が肺胞圧と平衡し total PEEP を測定できる。<strong>PEEPi＝total PEEP−設定PEEP</strong>（緑矢印）。 C：吸気ホールド——設定VTを送気後にフローを停止。最高圧がPIP（抵抗＋コンプライアンスの関数）、フロー停止後のプラトーがPplat（コンプライアンスのみの関数）。図右の括弧はPIP−Pplat差が抵抗、Pplatの高さがコンプライアンスに対応することを示す。閉塞性疾患では抵抗は上昇し、コンプライアンスは重症度と背景により低値・正常・高値のいずれもありうる。<strong>抵抗・コンプライアンスとも正常なら呼吸不全の別原因を疑う</strong>。</p>
+</div>
+<h4>非同調と筋弛緩</h4>
+<ul><li>重症増悪では動的過膨張と高い吸気流量要求から<strong>患者-人工呼吸器非同調</strong>が高頻度。呼吸仕事量増・過膨張悪化・転帰不良と関連</li><li>最多はトリガー非同調（吸気努力がトリガー閾値＋PEEPiを超えられず送気されない）→<strong>PEEPをPEEPiに近づける（PEEP応答例）かトリガー閾値を下げる</strong></li><li>筋弛緩薬のルーチン投与は<strong>ミオパチーのリスク（特にステロイド併用下）から非推奨</strong>。換気最適化と十分な鎮静でも持続する非同調に限り、非同調・圧外傷・酸素消費の軽減目的で個別に考慮</li></ul>
+<h3>16. 高度治療 — VV-ECMO と ECCO2R</h3>
+<ul><li>適応の考え方：IMV最適化でも持続する重度低酸素・高CO2血症・過膨張による血行動態障害。<strong>特に喘息は可逆性が高くVV-ECMO下の生存率が高い</strong>ため積極的に考慮</li><li>エビデンスはレジストリ・症例集積のみ（RCTなし）。ガイドライン化された導入基準は存在せず、ECMO専門医と協議して判断</li><li>相対的禁忌：高齢（明確な上限なし）・多臓器不全・高い設定のIMV（FIO2&gt;90%またはPplat≥30 cmH2O）が7日以上・出血素因や抗凝固禁忌・終末期悪性腫瘍などの併存症</li><li>カニュレーション後：フローとFDO2をSpO2目標へ滴定。<strong>スイープガスはPaCO2をゆっくり正常化</strong>——24時間で&gt;20 mmHgまたは治療前値の50%を超える急速低下は頭蓋内出血・脳梗塞・脳死と関連</li><li>換気は超肺保護設定へ（肺安静）：従圧式で<strong>Pplat ≤ 25 cmH2O・PEEP 5〜10 cmH2O・RR 4〜15回/分</strong>が目安（ARDS研究由来の設定で、閉塞性疾患では異なりうる）。気管支拡張薬・ステロイドはECMO中も継続</li><li><strong>ECCO2R</strong>（体外CO2除去）：小口径カニュラ・低流量で酸素化を伴わずCO2除去。COPDで挿管回避・早期抜管を狙う研究があるが、前向きデータ不足・高い出血リスク・死亡への効果なしから<strong>役割は限定的</strong></li></ul>
+<h3>17. 抜管と抜管後サポート</h3>
+<ul><li>抜管準備の評価は他疾患と同様：閉塞性病態の改善＋覚醒トライアル（SAT）で従命可能＋最小サポートでの自発呼吸トライアル（SBT）安定</li><li><strong>COPD</strong>：抜管後は<strong>NIV（IMV中と同じ設定）またはHFNTへ</strong>——死亡・再挿管・IMV期間を減らす。両者は概ね同等だが<strong>高リスク患者ではNIVが有利</strong>な可能性。NIVとHFNTの交互使用はHFNT単独より有効で、NIV不忍容例に有用</li><li>タイミングが重要：<strong>抜管直後に予防的に装着</strong>する。再呼吸不全が起きてからの装着（レスキュー使用）は死亡増と関連（再挿管の遅れが一因と推定）</li><li><strong>喘息</strong>：抜管後にNIV/HFNTへ移行すべきかは<strong>不明のまま</strong></li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>実装上の落とし穴</p>
+<ul><li><mark class="hl">COPDの抜管後NIV/HFNTは「悪化してから」では遅い——抜管直後の予防的装着が原則</mark></li><li><mark class="hl">高用量ステロイド（メチルプレドニゾロン&gt;240 mg/d）とルーチンの筋弛緩薬持続投与は、どちらも害が利益を上回る</mark></li><li><mark class="hl">自発呼吸努力下のPplat・PEEPiは偽性高値——数値だけ見てPEEPや鎮静を動かさない</mark></li></ul>
+</div>
+<h3>18. Key Points（原文の要点ボックス）</h3>
+<ol><li>プレドニゾン40〜50 mg/d（または同等量）を喘息は5〜7日・COPDは5日。高用量は個別判断だが、メチルプレドニゾロン&gt;240 mg/dは治療失敗・高血糖・真菌感染の増加のため避ける</li><li>NIVはCOPD増悪の機械換気の第一選択。重症喘息増悪では慎重に考慮</li><li>IMV中はPplatとPEEPiを過膨張の指標として監視し、Pplat &lt; 30 cmH2Oを維持する</li><li>抜管直後のNIVまたはHFNTはCOPD増悪の再挿管を減らす。喘息での役割は明確でない</li><li>高CO2血症性呼吸不全へのVV-ECMO開始後、初日のPaCO2低下は20 mmHgまたは治療前値の50%（小さい方）以内に留める（神経学的合併症の回避）</li></ol>
+<h3>19. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>ナラティブレビューの限界</strong>：系統的検索・バイアス評価・GRADEなしの専門家レビュー。推奨の多く（初期換気設定・PEEP滴定・ケタミン用量など）は生理学的合理性と少数の観察研究に依拠しており、推奨の強さが本文中で層別されていない</li><li><strong>ICU患者のエビデンス空白がそのまま残る</strong>：SAMA上乗せ・ステロイド用量・NIV下鎮静・ECMO適応など、核心的な問いのRCTは存在しない。本レビューの推奨は急性期病棟・ERデータの外挿が多い点は読み手が意識すべき</li><li><strong>喘息NIVの位置づけの根拠が弱い</strong>：支持データは小規模RCTと後ろ向き研究（交絡・適応バイアス大）。「使用増加でも死亡・LOS不変」という生態学的観察は有効性の傍証にも無効性の傍証にも読める</li><li><strong>Rome Proposal基準のICUでの妥当性</strong>：CRPやVASを含む新定義は外的妥当性の検証途上で、挿管間近の患者にVAS聴取は現実的でないことも多い</li><li><strong>HFNTの評価が流動的</strong>：COPDの中等度高CO2血症でのHFNT対NIVは「同等」とする小規模研究と「治療失敗・挿管増」の大規模非劣性RCTが併存し、本文の推奨（NIV優先）は妥当だが確定ではない</li><li><strong>数値レジメンの出典の異質性</strong>：Table 2の用量（ヘリオックス濃度・揮発性麻酔薬濃度・生物学的製剤）は症例報告〜小規模試験由来が混在しており、同じ表に載ることで確立度の差が見えにくい</li><li>利益相反はなしと申告されているが、単一施設（BIDMC/Harvard）の2名による執筆で、外部査読以外の視点の多様性は限られる</li></ul>
+<h3>20. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>喘息の定義・管理（GINA 2024）</td><td>Global Initiative for Asthma. 2024 GINA main report</td></tr>
+<tr><td>COPDの定義・管理（GOLD 2024）</td><td>Global Initiative for Chronic Obstructive Lung Disease. 2024 GOLD report</td></tr>
+<tr><td>COPD増悪の新しい重症度定義</td><td>Celli BR, et al. The Rome proposal. Am J Respir Crit Care Med. 2021;204:1251-1258</td></tr>
+<tr><td>重症喘息の人工呼吸（冒頭症例の根拠）</td><td>Leatherman J. Mechanical ventilation for severe asthma. Chest. 2015;147:1671-1680</td></tr>
+<tr><td>呼気流量制限（EFL）の総説</td><td>Junhasavasdikul D, Telias I, Grieco DL, et al. Expiratory flow limitation during mechanical ventilation. Chest. 2018;154:948-962</td></tr>
+<tr><td>COPD増悪の病態生理</td><td>O'Donnell DE, Parker CM. COPD exacerbations. 3: Pathophysiology. Thorax. 2006;61:354-361</td></tr>
+<tr><td>増悪時のガス交換悪化機序</td><td>Barberà JA, et al. Eur Respir J. 1997;10:1285-1291</td></tr>
+<tr><td>人工呼吸患者の国際疫学（COPDの転帰）</td><td>Esteban A, et al. JAMA. 2002;287:345-355</td></tr>
+<tr><td>COPD増悪と細菌新株獲得</td><td>Sethi S, et al. N Engl J Med. 2002;347:465-471</td></tr>
+<tr><td>喘息ICU入院・挿管の頻度</td><td>Pendergraft TB, et al. Ann Allergy Asthma Immunol. 2004;93:29-35</td></tr>
+<tr><td>COPD増悪ICU死亡率</td><td>Ai-Ping C, et al. Chest. 2005;128:518-524</td></tr>
+<tr><td>喘息増悪入院の死亡率</td><td>Krishnan V, et al. Am J Respir Crit Care Med. 2006;174:633-638</td></tr>
+<tr><td>パルスオキシメトリーの人種差</td><td>Jamali H, et al. Ann Am Thorac Soc. 2022;19:1951-1964</td></tr>
+<tr><td>喘息・COPDの免疫学</td><td>Barnes PJ. Nat Rev Immunol. 2008;8:183-192</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ICUの喘息・COPD増悪は「炎症を抑え・攣縮を戻し・過膨張を制御して待つ」が背骨。<mark class="hl">ステロイドはプレドニゾン40〜50 mg/d（高用量に逃げない）、IMVは血液ガスでなく過膨張（Pplat&lt;30・PEEPi）を管理目標にRRを下げてpH 7.25〜7.30を許容し、COPDの抜管後はNIV/HFNCを待たずに即時装着する</mark>。難治例のVV-ECMOでは<mark class="hl">初日のPaCO2低下を20 mmHg以内</mark>に。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
