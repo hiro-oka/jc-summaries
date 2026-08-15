@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="jcm15051953.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Mauriello A, Correra A, Maratea AC, Cetoretta V, Giallauria F, Esposito G, Desiderio A, Marrazzo G, Liccardo B, Russo V, Trambaiolo P, D'Andrea A. Modulation of the Vasopressin System in Distributive and Cardiogenic Shock: Theoretical Principles and Practical Applications. J Clin Med. 2026;15:1953. DOI: 10.3390/jcm15051953</dd><dt>掲載誌</dt><dd>Journal of Clinical Medicine（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.3390/jcm15051953" target="_blank" rel="noopener">doi.org/10.3390/jcm15051953</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Modulation of the Vasopressin System in Distributive and Cardiogenic Shock: Theoretical Principles and Practical Applications</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わらないこと（現行運用の追認）</strong>：ノルアドレナリン第一選択、0.25〜0.50 µg/kg/min を超えたらバソプレシン 0.03 IU/min を second-line で追加、という当院の骨格はこの総説の推奨と一致する。上限を 0.03〜0.04 IU/min に留める運用も、これ以上増やしても心筋・腸間膜虚血リスクだけが増えて追加の利益が明確でない、という根拠と整合する</li><li><strong>明日から変えられること 1：離脱の順序をプロトコル文言にする</strong>。「バソプレシンを先に切らない」は本総説が明示的に述べる数少ない実践的推奨。当院のショック離脱手順書に「ノルアドレナリンを先に漸減し、バソプレシンは最後に切る」の一文を入れる価値がある</li><li><strong>明日から変えられること 2：バソプレシン開始時の観察項目を定型化する</strong>。四肢末梢・指趾のチアノーゼ／壊死の視診（肥満・高用量ノルアドレナリン併用がリスク因子）、Na 値（V2 受容体経由の希釈性低ナトリウム血症）、水分バランス。当院の看護観察記録に「指趾色調」「Na」を昇圧薬併用時のルーチン項目として組み込めるか検討</li><li><strong>腎代替療法（RRT）を減らす目的での位置づけ</strong>：非アドレナリン系昇圧薬は RRT 必要性を RR 0.68（95%CI 0.57–0.81）で減らす。当院で AKI ハイリスク（乏尿・造影後・腎前性素因あり）の敗血症性ショック患者では、バソプレシンの追加を「遅らせない」ことを明示的な判断材料にできる</li><li><strong>重症度の軽い層で早期に入れる、という仮説の扱い</strong>：ノルアドレナリン 15 µg/min 未満、乳酸 2 mmol/L 以下の層で生存利益の示唆があるが、これは VASST の事後解析・サブグループであり VANISH では再現されていない。当院のプロトコルを「軽症で早期投与」に書き換える根拠にはならない。あくまで「重症化を待たずに second-line を検討してよい」程度に留める</li><li><strong>心原性ショックでの使い分け（当院 CCU・術後にそのまま効く整理）</strong>：血管麻痺型の心原性ショック、右室不全＋肺血管抵抗上昇が問題の症例、不整脈が起きやすい症例ではバソプレシンが有利。逆に後負荷感受性の高い重度左室不全では危険になりうる。この「使ってよい表現型／避ける表現型」の切り分けは、当院の心臓外科術後・重症心不全カンファでそのまま共有言語にできる</li><li><strong>心臓外科術後の血管麻痺</strong>：VANCS（330例）では複合エンドポイント 32% vs 49%（HR 0.55）、心房細動 63.8% vs 82.1% とバソプレシンが優位。当院の心臓外科術後で「血管麻痺＋術後心房細動を避けたい」症例ではバソプレシン優先の議論ができる</li><li><strong>導入しないこと</strong>：テルリプレシン、セレプレシンはいずれも本邦の敗血症性ショック適応で標準化されておらず、テルリプレシンは末梢虚血 OR 8.65 と危険側に振れる。当院で敗血症性ショック目的に持ち出す理由は現時点でない</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：血管拡張性ショックの第一選択はノルアドレナリンであり、バソプレシンは second-line の追加薬としてノルアドレナリン節約効果を持つ。VASST・VANISH はいずれも全体集団での死亡率改善を示せなかった一方、RRT 必要性の減少は繰り返し観察されている。高用量カテコラミンの長期曝露は心筋毒性・不整脈・免疫抑制を伴う</li><li><strong>Unknown</strong>：バソプレシン系薬剤を「いつ・誰に」開始すれば死亡率が動くのか。心原性ショックでの有効性を検証した無作為化試験は存在しない。セレプレシンのような純粋 V1a 作動薬が理論通りの利益（肺水腫・浮腫の回避）を臨床アウトカムに翻訳できるのか。相対的バソプレシン欠乏を臨床でどう同定するか</li><li><strong>What's new</strong>：本論文は新規データを出していない（ナラティブレビュー）。新しいのは統合の視点で、①「脱カテコラミン化（decatecholaminization）」を軸に、交感神経系・バソプレシン系・RAAS の3系統を同時に狙う多剤併用の理論枠組みを提示したこと、②分布性ショックだけでなく心原性ショック・血管麻痺・出血性ショックを横断的に整理し、心原性ショックでは「血管麻痺型／右室不全／不整脈傾向では有利、後負荷感受性の高い重度左室不全では危険」という表現型別の使い分けを言語化したこと、③将来像としてコペプチンによるバソプレシン軸欠乏の早期診断、高張食塩水による動的負荷試験、強化学習による開始タイミング最適化を提案したこと</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで バソプレシン系薬剤（AVP・テルリプレシン・セレプレシン）は<strong>全死亡を下げる薬ではないが、カテコラミン負荷を減らし、腎を守り（RRT を RR 0.68）、不整脈を減らす薬</strong>である、という現在地を整理したナラティブレビュー。心原性ショックでは理論的期待が大きい一方、実データは後ろ向き2研究のみで RCT がない。</p>
+</div>
+<ul><li>血管拡張性ショック（主因は敗血症）は ICU 死亡の最大要因。28日死亡は欧米で約37%、フランスで45%、難治性では90%超</li><li>ノルアドレナリンは第一選択だが、高用量・長期曝露は心筋毒性・頻脈性不整脈・免疫抑制を招く。これを避けるために非アドレナリン系薬剤を早期に併用する概念が「脱カテコラミン化」</li><li>AVP は V1a（血管収縮）・V1b（下垂体前葉・膵：ACTH／インスリン）・V2（集合管：水再吸収）に非選択的に作用。半減期 5〜15 分と極端に短い</li><li>腎では輸出細動脈を選択的に収縮させ、輸入細動脈には一酸化窒素放出を介してほとんど作用しない → 糸球体内静水圧が上がり GFR が増える。これがノルアドレナリンにない腎保護の機序</li><li>敗血症性ショックでは血中 AVP が初期に上昇したのち、下垂体後葉の枯渇と圧受容体反射の障害により最大3分の1の患者で相対的欠乏に陥る。だから外因性 AVP に対する感受性が著しく高い</li><li>心原性ショックでは敗血症性ショックより AVP 濃度は概して高い（低心拍出に対する神経内分泌応答の違い）</li><li>推奨開始点はノルアドレナリン 0.25〜0.50 µg/kg/min 超。用量は 0.03 IU/min（0.01 から漸増、上限 0.03〜0.04）</li><li>主な有害事象は虚血（末梢・指趾・皮膚・腸間膜・心筋）、左室後負荷上昇による心拍出量低下、V2 経由の希釈性低ナトリウム血症と体液貯留、von Willebrand 因子放出による凝固亢進</li><li>離脱ではバソプレシンを最初に切ってはならない（急な低血圧を招く）</li><li>将来像はコペプチン・動的浸透圧負荷試験・人工知能／強化学習による個別化</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>血管拡張性（分布性）ショック</strong>とは、血管平滑筋の緊張（血管トーヌス）が失われて末梢血管が開ききり、心拍出量が保たれていても血圧が維持できない状態を指す。敗血症性ショックがその代表で、心臓外科の人工心肺後に起こる血管麻痺症候群（vasoplegic syndrome）も同じ範疇に入る。</p>
+<p>血圧を保つ生理的な仕組みは大きく3つある。①交感神経系（カテコラミン。ノルアドレナリンが α 受容体で動静脈を収縮、β 受容体で心収縮力を上げる）、②バソプレシン系（下垂体後葉から出る抗利尿ホルモンが V1a 受容体で血管を収縮させる）、③レニン–アンジオテンシン–アルドステロン系（RAAS。アンジオテンシン II が AT1 受容体で強力に収縮させる）。ショックの薬物治療は、この3系統のどれを叩くかで整理できる。</p>
+<p><strong>バソプレシン（AVP、arginine vasopressin）</strong>は視床下部の視索上核・室傍核で前駆体（プレプロホルモン）として作られ、下垂体柄を通って下垂体後葉（神経下垂体）に運ばれて貯蔵される。血漿浸透圧の上昇や循環血液量の減少で放出されるが、刺激されても一度に出せるのは貯蔵量の 10〜20% にすぎない。ここが「相対的欠乏」の物理的な理由になる。</p>
+<p><strong>受容体の役割分担</strong>が本論文の理解の鍵になる。V1a は血管平滑筋にあり、細胞内カルシウムを上げて血管を収縮させる（＝欲しい作用）。V2 は腎集合管にあり、アクアポリン2チャネルを膜に呼び込んで水を再吸収させる（＝ショックでは浮腫・低ナトリウム血症につながる余計な作用）。V1b は下垂体前葉と膵臓にあり、インスリン分泌と副腎皮質刺激ホルモン軸を介したコルチゾール放出を担う。<strong>テルリプレシン</strong>と<strong>セレプレシン</strong>は、この V2 作用を避けて V1a だけを狙うために作られた合成類似体である。</p>
+<p><strong>脱カテコラミン化（decatecholaminization）</strong>とは、ノルアドレナリンを大量に使い続ける代わりに、作用機序の異なる薬（バソプレシン、アンジオテンシン II）を早めに少量ずつ足して、カテコラミンの総曝露量（vasopressor load）を減らすという発想。単剤大量から早期多剤併用へ、という方針転換である。</p>
+<p><strong>コペプチン（copeptin）</strong>は AVP 前駆体の C 末端断片で、AVP と等モルで分泌される。AVP 自体は半減期が短く不安定で測定しづらいため、コペプチンがバソプレシン濃度の代理マーカーとして最も信頼できるとされる。</p>
+<p><strong>ノルアドレナリン等価量（norepinephrine equivalent, NEE）</strong>は、種類の違う昇圧薬を「ノルアドレナリン何 µg/kg/min 相当か」に換算して合計する指標で、ショックの重症度比較に使われる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>血管拡張性ショックは、重症患者で最も高頻度に遭遇するショック症候群である。その主因である敗血症は成人入院の約 7% を占め、発生率は人口10万あたり約 240 例。敗血症性ショックは ICU 入室の 6.8〜10.4% を占め、さらに他の理由で ICU に入室した患者の約 8% が滞在中に敗血症性ショックを発症する。</p>
+<p>死亡の規模は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>28日死亡（欧州・北米）</td><td>約 37%</td></tr>
+<tr><td>28日死亡（フランス）</td><td>45%</td></tr>
+<tr><td>敗血症関連死（全世界・年間）</td><td>約 1,100万人</td></tr>
+<tr><td>従来治療に不応の難治性ショック</td><td>死亡率 90% 超</td></tr>
+</tbody></table></div>
+<p>ノルアドレナリンが平均動脈圧（MAP）回復のための第一選択として推奨されているが、高用量カテコラミン曝露は直接的心筋毒性、頻脈性心不整脈、免疫抑制を伴う。この文脈で登場したのが「脱カテコラミン化」であり、早期多剤併用によって高用量カテコラミン曝露を予防し臨床アウトカムを改善しようという概念である。難治性血管拡張に対抗する非アドレナリン系の主要標的がバソプレシン系である。</p>
+<p>本論文の目的は、循環性ショックの管理におけるバソプレシンとその類似体の現在の役割を、利益と有害事象の両面から定義することにある。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。著者らは「膨大で進化の速い研究領域（集中治療・血行動態管理）の統合にはナラティブレビューが特に有効」と位置づけている</li><li><strong>データベース</strong>：PubMed/MEDLINE および EMBASE</li><li><strong>検索期間</strong>：2015年1月〜2026年1月</li><li><strong>検索語（ブール演算子 AND / OR で結合）</strong>：</li><li>薬剤："Vasopressin"（AVP）、"Terlipressin"、"Selepressin"、"Non-adrenergic vasopressors"</li><li>臨床病態："Distributive shock"、"Septic shock"、"Cardiogenic shock"、"Vasoplegic syndrome"、"Refractory hypotension"</li><li>治療テーマ："Decatecholaminization"、"Catecholamine-sparing effect"、"Hemodynamic stabilization"、"V1a receptor selectivity"</li><li>診断・モニタリング："Biomarkers"、"Copeptin"、"Renal replacement therapy"（RRT）、"Ischemic adverse events"</li><li><strong>選択基準</strong>：英語論文。文献レビュー、メタアナリシス、後ろ向き・前向き研究、臨床試験のうち、これら薬剤の生理・臨床効果・安全性プロファイルのデータを提供するもの</li><li><strong>限界（著者自身の記述）</strong>：システマティックレビューの厳密な再現性は満たさない（PRISMA 声明を引用したうえで、それに従わないことを明示）。バイアスリスク評価、エビデンスの質のグレーディング、定量的統合はいずれも行っていない</li><li><strong>アウトカム</strong>：定義された主要アウトカムは存在しない（レビューのため）</li></ul>
+<h3>4. バソプレシンの生理</h3>
+<h4>4.1 合成・貯蔵・放出</h4>
+<p>視床下部の視索上核と室傍核で産生される。まずプレプロホルモンという蛋白前駆体として合成され、大細胞性ニューロンの軸索を通り下垂体柄を経て下垂体後葉に到達する。神経下垂体では主に細胞内区画に貯蔵される。血漿浸透圧の上昇や循環血液量の減少といった刺激で全身循環に放出されるが、<strong>刺激後ただちに血中へ出せるのは総貯蔵量の約 10〜20% に限られる</strong>。</p>
+<h4>4.2 3つの受容体</h4>
+<p>AVP は G 蛋白共役受容体3種を介して多面的効果（pleiotropic effects）を発揮する。</p>
+<div class="tw"><table>
+<thead><tr><th>受容体</th><th>局在</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td>V1a</td><td>血管平滑筋細胞</td><td>細胞内カルシウム上昇による血管収縮</td></tr>
+<tr><td>V1b</td><td>下垂体前葉・膵臓</td><td>インスリン分泌、コルチコトロピン軸刺激によるコルチゾール放出</td></tr>
+<tr><td>V2</td><td>主に腎集合管</td><td>アクアポリン2チャネルの動員による水再吸収</td></tr>
+</tbody></table></div>
+<p>天然のバソプレシンは血漿半減期が約 5〜15 分と極めて短く、<strong>受容体選択性を欠き、すべての経路を同時に活性化する</strong>。したがって腎機能には、体液バランスと腎血行動態の両方に作用する2つの機序で影響する。</p>
+<h4>4.3 水再吸収の調節（V2 経路）</h4>
+<p>最もよく知られた効果が抗利尿作用である。腎集合管細胞の<strong>基底外側膜</strong>上の受容体に結合し、アクアポリン2チャネルを細胞膜へ動員することで水透過性を高め、水を血流へ再吸収させる。ただしショックの状況では、この受容体活性化はしばしば問題になりうる。乏尿を悪化させたり体液貯留を増悪させたりする可能性があるためである。</p>
+<h4>4.4 糸球体濾過の改善（腎保護の核心機序）</h4>
+<p>ノルアドレナリンと異なり、バソプレシンは腎血行動態に固有の作用を持つ。</p>
+<ul><li><strong>輸出細動脈（efferent arteriole）を選択的に収縮させる</strong></li><li><strong>輸入細動脈（afferent arteriole）にはほとんど作用しない</strong>。この区域では局所的な一酸化窒素放出を引き起こし、むしろ血管拡張を誘導するため</li><li>結果として糸球体内の静水圧が上昇し、糸球体濾過量（GFR）が増える</li></ul>
+<p>この「出口を絞って入口は絞らない」構図が、ノルアドレナリンにはないバソプレシンの腎保護の理論的根拠である。</p>
+<h4>4.5 ショックにおける臨床効果と腎保護</h4>
+<p>敗血症性ショックや血管麻痺性ショックなどの分布性ショックでは、バソプレシンまたはその類似体テルリプレシンの投与が具体的な利益を示している。バソプレシンは尿量とクレアチニンクリアランスを増やし、カテコラミン単独治療と比べて血清クレアチニンを下げ、最終的に RRT の必要性を減らす。</p>
+<p>Kotani らのメタアナリシス（無作為化比較試験 51 件・計 5,715 例）では、非アドレナリン系薬剤の投与は <strong>RRT リスクの減少と関連（9 件の研究、RR 0.68、95%CI 0.57–0.81、I2 = 0%）</strong>しており、とくに急性腎障害の「リスクあり」患者で顕著であった。I2 = 0% は研究間の異質性がないことを意味し、この効果推定の頑健性を支持する。</p>
+<h4>4.6 バソプレシンの中枢作用</h4>
+<p>健常者では AVP による血管収縮は、代償性の交感神経性心拍数低下によってしばしば相殺される。興味深いことに、AVP は血管収縮薬でありながら、しばしば中枢で交感神経活動を抑制し、血圧が行き過ぎないようにする。</p>
+<ul><li>AVP は<strong>最後野（area postrema）</strong>に作用して延髄の交感神経中枢を抑制する</li><li>AVP は<strong>圧受容体反射の感受性を高める</strong></li><li>AVP が血圧を上げると、他の昇圧薬より強く交感神経流出を減らすよう脳に信号を送る</li></ul>
+<p>これが「バソプレシンでは頻脈になりにくい／むしろ徐脈になる」ことの中枢性の説明である。</p>
+<p>一方、セレプレシンやテルリプレシンといった新しい類似体は、特定受容体の純粋作動薬として設計され、V2 受容体を活性化せずに昇圧・血行動態上の有益な効果を維持し、強制的な水再吸収と浮腫のリスクを避けることを狙っている。</p>
+<h3>5. ショックの病態生理とバソプレシンの役割</h3>
+<p>ショックは組織灌流の不足によって細胞低酸素と臓器障害をきたす病態である。動脈圧を維持する主要機構は3つあり、それぞれに対応する昇圧薬がある。</p>
+<div class="tw"><table>
+<thead><tr><th>系統</th><th>主要な受容体・作用点</th><th>代表薬</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td>アドレナリン作動性交感神経系</td><td>α 受容体（動静脈収縮）、β 受容体（心収縮力）</td><td>ノルアドレナリン</td><td>敗血症性ショックの第一選択。過剰曝露で不整脈・心筋毒性・免疫抑制</td></tr>
+<tr><td>バソプレシン系</td><td>V1a・V1b・V2</td><td>AVP、テルリプレシン、セレプレシン</td><td>α 刺激と独立。アドレナリン受容体がダウンレギュレーションした状況で有用。腎の水再吸収も調節</td></tr>
+<tr><td>RAAS</td><td>AT1 受容体（血管・腎・脳・心）</td><td>アンジオテンシン II</td><td>強力な動静脈収縮。アルドステロン合成と水電解質バランスも調節</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. レニン–アンジオテンシン–アルドステロン系（RAAS）の模式図（ACE：アンジオテンシン変換酵素）。中央を横断する太い赤色の血管（血流を表す円柱）が図の骨格になっており、その内部に左から順に Angiotensinogen → Angiotensin I → Angiotensin II → Aldosterone の4つの白枠が並び、水色の太矢印で右へ順に変換されていく。血管の上側には濃紺のラベル枠が4つ吊り下がっており、左端の Angiotensinogen は肝臓（左上のレバー色の臓器イラスト）から水色矢印で血管へ下りる。中央の ACE は肺（ピンク色の左右肺のイラスト）から下りて、Angiotensin I → Angiotensin II の変換段階に注ぐ。右側の Angiotensin II と Aldosterone のラベルは副腎（腎臓上極に載る黄色の帽子状の構造）へ向かう上向き矢印と対になっており、図右上の注釈は「アンジオテンシン II は副腎に作用してアルドステロン放出を刺激する」と述べる。血管の下側では、左下の腎臓イラストから Renin が上向き矢印で血管へ供給される。中央下では Angiotensin II が下向き矢印で血管断面図（内腔の広い血管と狭い血管の2つを並べた図）へ向かい、注釈は「アンジオテンシン II はすべての血管の収縮薬であり、平滑筋に作用する」。右下では Aldosterone が下向き矢印で腎臓イラストへ向かい、注釈は「ナトリウムと水の再吸収を刺激する」。原図・無改変</p>
+</div>
+<p><strong>難治性ショックには普遍的な合意定義が存在しない</strong>。提案されている定義には、昇圧薬治療にもかかわらず血圧目標を達成できないこと、救済的昇圧薬治療を要すること、高用量の昇圧薬を要すること、が含まれる。</p>
+<p>難治性ショックの状況では、これら3つの異なる系統を同時に標的とする多剤併用療法を行うことで、個々の薬剤の毒性負荷を減らしながら血行動態の安定を回復できる。これが「脱カテコラミン化」である。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 敗血症性ショック患者における昇圧薬管理のフローチャート。図は上から下へ流れ、左端に緑色の帯ラベルが3つ（上から First-line、Second-line、Weaning）並んで段階を示す。最上段の濃紺の枠が「Patiens with septic shock（原文のまま。patients の誤植）」で、そこから下向き矢印が Norepinephrine（水色枠）へ。同じ分岐点から右向きの矢印が伸び、「If norepinephrine not available（ノルアドレナリンが使えない場合）」の注記を経て Epinephrine（水色枠）へ向かう。Norepinephrine から下向き矢印が Refractory shock（水色枠）に至り、そこで左右に分岐する。左は橙色の楕円「No impaired cardiac function（心機能障害なし）」へ、右は橙色の楕円「Impaired cardiac function（心機能障害あり）」へ。左の楕円からは下向き矢印で Add Vasopressin（水色枠）。右の楕円からは下向き矢印がさらに二又に分かれ、Add Dobutamine と Epinephrine（いずれも水色枠）の2枠に向かう。最下段は赤枠で囲まれた離脱の注意書きで、太字見出しが「No standardized weaning strategy（標準化された離脱戦略はない）」、以下2行が「血行動態目標（平均動脈圧と乳酸。原文は lattate の誤植）に応じて昇圧薬用量を漸減する」「バソプレシンから先に離脱しない（動脈性低血圧の発生が多い）」。原図・無改変</p>
+</div>
+<h4>5.1 敗血症性ショックにおけるバソプレシン系の二相性変化</h4>
+<p>敗血症性ショックその他の分布性ショックでは、バソプレシン系は<strong>二相性（biphasic）の変化</strong>をたどる。</p>
+<ol><li><strong>初期相</strong>：代償機序として血漿 AVP 濃度が著明に上昇する</li><li><strong>進行相</strong>：神経下垂体の貯蔵枯渇と圧受容体反射の障害により、<strong>最大3分の1の患者で相対的バソプレシン欠乏</strong>が観察される</li></ol>
+<p>健常者と異なり、敗血症性ショックの患者は外因性バソプレシンに対して<strong>著明な過敏性（marked hypersensitivity）</strong>を示す。これが低用量（0.03 IU/min）で足りる薬理学的理由である。</p>
+<p>対照的に、心原性ショックではバソプレシン濃度は敗血症性ショックより概して高い。低心拍出に対する神経内分泌応答が異なることを反映している。この差は「心原性ショックでは補充としての意義が敗血症性ショックほど大きくないかもしれない」という示唆を含む。</p>
+<p>AVP をこれらの病態で投与する狙いは、敗血症でしばしばダウンレギュレーションするアドレナリン受容体とは独立した経路で血管トーヌスを回復させることにある。</p>
+<h4>5.2 脱カテコラミン化の4つの根拠</h4>
+<p>脱カテコラミン化とは、いわゆる「昇圧薬負荷（vasopressor load）」を減らすために、ノルアドレナリンのようなアドレナリン作動性昇圧薬の使用を制限し、非アドレナリン系薬剤を優先する臨床概念である。敗血症性ショックで補助的昇圧薬を使う主目的のひとつとされる。理論的・実践的基盤は次の4点。</p>
+<div class="tw"><table>
+<thead><tr><th>根拠</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>毒性の低減</td><td>高用量カテコラミンへの過剰・長期曝露は、炎症と壊死の増加を介した直接的心筋毒性、頻脈性心不整脈、酸化ストレス、免疫抑制という重篤な有害事象と関連する</td></tr>
+<tr><td>受容体抵抗性の克服</td><td>重症敗血症性ショックではしばしば α アドレナリン受容体のダウンレギュレーションが起こり、ノルアドレナリンへの反応性が落ちる。独立した経路に作用する薬（バソプレシン、アンジオテンシン II）の追加でより効率的に血管トーヌスを回復できる</td></tr>
+<tr><td>節約効果（sparing effect）</td><td>バソプレシンとその類似体はノルアドレナリン必要量を一貫して減らす能力を示しており、より危険性の低いアドレナリン用量で目標血圧を維持できる</td></tr>
+<tr><td>免疫の保全</td><td>敗血症に典型的な免疫麻痺に寄与しうるノルアドレナリンと異なり、バソプレシンはサイトカイン濃度を悪化させず宿主防御を損なわないと考えられる</td></tr>
+</tbody></table></div>
+<p>要約すれば、脱カテコラミン化とは<strong>大量単剤アプローチから早期多剤併用へ</strong>の転換であり、異なる生理系を同時に標的にすることで臨床アウトカムを改善しアドレナリン性ストレス関連の合併症を減らそうとするものである。</p>
+<h3>6. AVP と類似体の薬物動態</h3>
+<p>AVP と合成類似体（テルリプレシン、セレプレシン）の薬物動態上の差異は、主として半減期、作用持続時間、代謝経路にある。</p>
+<h4>6.1 アルギニンバソプレシン（AVP）</h4>
+<ul><li>極めて速い動態プロファイル。半減期は 5〜15 分と推定されるが、資料によっては約 6 分、あるいは 10〜35 分の幅を示すものもある</li><li>生物学的効果は 30〜60 分しか持続しない</li><li>腎および肝のバソプレシナーゼによって速やかに排泄・分解される</li><li>標準用量は 0.03 IU/min。0.01 IU/min から開始して 10〜15 分ごとに増量でき、一般に 0.03〜0.04 IU/min まで</li></ul>
+<h4>6.2 テルリプレシン</h4>
+<ul><li>持続的安定性を狙って設計された合成類似体</li><li><strong>プロドラッグ</strong>であり、内皮ペプチダーゼによって徐々に活性型バソプレシンへ切断される</li><li>半減期は天然ホルモンより顕著に長く、最大 6 時間に達する</li><li>臨床効果は 2〜10 時間持続する</li><li>初期用量は 1.3 µg/kg/h、または固定用量 2 mg/24 時間、最大 4〜6 mg/24 時間</li></ul>
+<h4>6.3 セレプレシン</h4>
+<ul><li>中間的な薬物動態を示す</li><li>敗血症性ショック患者での終末半減期は約 2.5 時間、健常者では 1.5 時間。この差は重症患者でクリアランスが 30% 低下することによる（腎機能障害が原因と考えられる）</li><li>初期の分布・消失相は約 10 分と非常に速い</li><li>定常状態分布容積は 18〜31 L で、血管外への有意な分布を示す</li><li>定常状態血漿濃度到達までは約 7 時間</li><li>用量域は 0.17〜1.33 µg/kg/h</li></ul>
+<h4>Table 1. バソプレシンと類似体の薬物動態パラメータ（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>パラメータ</th><th>バソプレシン</th><th>テルリプレシン</th><th>セレプレシン</th></tr></thead>
+<tbody>
+<tr><td>半減期</td><td>5〜15 分</td><td>約 6 時間</td><td>約 2.5 時間（重症患者）</td></tr>
+<tr><td>作用持続</td><td>30〜60 分</td><td>2〜10 時間</td><td>中間</td></tr>
+<tr><td>代謝</td><td>肝・腎バソプレシナーゼ</td><td>ペプチダーゼによる切断（プロドラッグ）</td><td>ペプチダーゼ分解と腎排泄</td></tr>
+</tbody></table></div>
+<h4>Table 2. 昇圧薬のノルアドレナリン等価量への換算（原表の日本語化）</h4>
+<p>患者間で総昇圧薬用量を比較する従来法は、ノルアドレナリン等価量への換算である。</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>用量</th><th>ノルアドレナリン等価量</th></tr></thead>
+<tbody>
+<tr><td>アドレナリン</td><td>0.1 µg/kg/min</td><td>0.1 µg/kg/min</td></tr>
+<tr><td>ドパミン</td><td>15 µg/kg/min</td><td>0.1 µg/kg/min</td></tr>
+<tr><td>ノルアドレナリン</td><td>0.1 µg/kg/min</td><td>0.1 µg/kg/min</td></tr>
+<tr><td>フェニレフリン</td><td>1 µg/kg/min</td><td>0.1 µg/kg/min</td></tr>
+<tr><td>バソプレシン</td><td>0.04 U/min</td><td>0.1 µg/kg/min</td></tr>
+</tbody></table></div>
+<p>実際のところ、血管麻痺性ショックで最も使われる昇圧薬はノルアドレナリンである。他の昇圧薬と比べて、効果が高度に予測可能で強力であり、アドレナリンより不整脈リスクが低く、乳酸値を有意に上げないためである。</p>
+<h3>7. ショック病型別の使用</h3>
+<p>臨床応用はショックの成因によって大きく異なる。</p>
+<h4>7.1 敗血症性ショック</h4>
+<p>ガイドラインは、<strong>ノルアドレナリン用量が 0.25〜0.50 µg/kg/min を超えたときに second-line としてバソプレシンを追加すること</strong>を提案している。</p>
+<p>##### 7.1.1 アルギニンバソプレシン — VASST と VANISH</p>
+<p>VASST（Vasopressin and Septic Shock Trial）と VANISH（VAsopressin versus Noradrenaline as Initial therapy in Septic sHock）という大規模研究は、<strong>ノルアドレナリン節約効果は確認したが、全死亡の減少は示せなかった</strong>。ただし重症度の低いサブグループ、あるいはステロイド併用時には利益が観察されている。</p>
+<p><strong>VASST の詳細</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>対象</td><td>敗血症性ショック 778 例（MAP &lt; 65 mmHg でノルアドレナリンを要する状態。本総説は「&gt; 5 µg/kg/min のノルアドレナリンを受けている」と記載）</td></tr>
+<tr><td>割付</td><td>ノルアドレナリン単独 vs ノルアドレナリン＋低用量バソプレシン（0.01〜0.03 U/min）</td></tr>
+<tr><td>全体集団の結果</td><td>生存利益なし</td></tr>
+<tr><td>重症度の低い層（MAP &gt; 65 mmHg 維持にノルアドレナリン &lt; 15 µg/min）</td><td>28日死亡 26.5% vs 35.7%、p = 0.05（減少傾向）／90日死亡 35.8% vs 46.1%、p = 0.04（有意に低い）</td></tr>
+</tbody></table></div>
+<p>VASST の事後解析では、<strong>血中乳酸濃度 ≤ 2 mmol/L の患者</strong>において、バソプレシン投与はノルアドレナリン投与と比べ 28日・90日死亡の有意な減少を示した。</p>
+<p><strong>VANISH の詳細</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>対象</td><td>敗血症性ショック 421 例</td></tr>
+<tr><td>割付</td><td>第一選択昇圧薬としてノルアドレナリン vs バソプレシン（MAP に応じて 0.06 U/min まで漸増）</td></tr>
+<tr><td>死亡率</td><td>群間に有意差なし</td></tr>
+<tr><td>RRT 必要性</td><td>VASST の事後解析と VANISH の結果から、バソプレシンは RRT 必要性の減少と関連（25.4% vs 35.3%、p &lt; 0.007）</td></tr>
+</tbody></table></div>
+<p>さらに VANISH の事後解析では、<strong>ヒドロコルチゾンの抗サイトカイン効果がバソプレシン併用で増強される</strong>ことが見出されており、バソプレシンの免疫学的効果が示唆されている。</p>
+<p>##### 7.1.2 テルリプレシン</p>
+<p>V1a 受容体への選択性がより高く、半減期は約 6 時間と長い。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>メタアナリシスの規模</td><td>9 研究・850 例</td></tr>
+<tr><td>60歳未満での死亡</td><td>RR 0.66（0.50–0.86）、p = 0.002（減少）</td></tr>
+<tr><td>末梢虚血リスク</td><td>OR 8.65（1.48–50.59）、p = 0.02（有意に増加）</td></tr>
+<tr><td>全体の死亡（テルリプレシン vs カテコラミン）</td><td>RR 0.85（0.70–1.03）、p = 0.09（有意差なし）</td></tr>
+</tbody></table></div>
+<p>微小循環血流はショック状態における臨床アウトカムの強力な予測因子であるとされる。高齢患者ではテルリプレシンが微小循環を有効に改善できない可能性があり、この年齢層で死亡率減少が見られない理由と説明される。加えて、急性肺水腫と下痢の発生率が高いことも報告されている。</p>
+<p>##### 7.1.3 セレプレシン</p>
+<p>純粋な V1a 作動薬で、V2 を介した効果なしに肺水腫と毛細血管漏出を減らすよう設計された。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>試験名</td><td>SEPSIS-ACT（Selepressin Evaluation Programme for Sepsis-induced Shock-Adaptive Clinical Trial）</td></tr>
+<tr><td>デザイン</td><td>アダプティブ phase 2b/3</td></tr>
+<tr><td>症例数</td><td>868 例</td></tr>
+<tr><td>結果</td><td>人工呼吸器フリー日数・昇圧薬フリー日数でプラセボを上回る利益なし。<strong>無効中止（futility）で試験中止</strong></td></tr>
+<tr><td>副次</td><td>90日死亡、RRT フリー日数に有意差なし</td></tr>
+</tbody></table></div>
+<p>急性肺水腫のリスクが高い場合には考慮されうるが、死亡に関する優越性は証明されていない。</p>
+<h4>7.2 血管麻痺性ショック・心臓術後</h4>
+<p>AVP の使用は、ノルアドレナリンと比べてより良好な血行動態安定性と、術後頻脈性不整脈の低い発生率と関連する。</p>
+<p><strong>VANCS 試験</strong>（二重盲検、330 例）</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>バソプレシン群</th><th>ノルアドレナリン群</th><th>効果量</th></tr></thead>
+<tbody>
+<tr><td>主要複合エンドポイント（死亡または重篤合併症）</td><td>32%</td><td>49%</td><td>HR 0.55、95%CI 0.38–0.80、p = 0.0014</td></tr>
+<tr><td>心房細動</td><td>63.8%</td><td>82.1%</td><td>p = 0.0004</td></tr>
+</tbody></table></div>
+<p>（注：本文は VANCS を "Vasopressin Versus Norepinephrine for the Management of Septic Shock in Cancer Patients" と記しているが、引用文献 53 は Hajjar らの Anesthesiology 2017 で、対象は<strong>心臓外科術後の血管麻痺性ショック</strong>である。批判的吟味の項を参照）</p>
+<h4>7.3 出血性ショック</h4>
+<p>低用量バソプレシンの補充により、血液製剤輸血の必要性と深部静脈血栓症のリスクが有意に減少することが示されている。</p>
+<p><strong>外傷患者 100 例の無作為化試験</strong></p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>AVP 群</th><th>対照群</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>48時間の血液製剤使用量（中央値）</td><td>1.4 L</td><td>2.9 L</td><td>0.01</td></tr>
+<tr><td>深部静脈血栓症</td><td>11%</td><td>34%</td><td>0.02</td></tr>
+</tbody></table></div>
+<h4>7.4 心原性ショック — 理論的期待と実データの乖離</h4>
+<p><strong>ガイドラインの位置づけ</strong></p>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>推奨</th></tr></thead>
+<tbody>
+<tr><td>低血圧を伴う心原性ショックでの早期昇圧薬（ノルアドレナリン等）投与による重要臓器灌流の保持</td><td>欧州心臓病学会（ESC）クラス IIb/B</td></tr>
+<tr><td>強心薬との併用</td><td>米国心臓病学会（ACC）クラス I/B-NR、ESC クラス IIb</td></tr>
+</tbody></table></div>
+<p>昇圧薬による灌流増強は左室後負荷の増加を伴い、心筋収縮力に悪影響を及ぼす。だから強心薬との併用が推奨される、という論理構成である。</p>
+<p><strong>エビデンスの現状</strong>：バソプレシンを用いたカテコラミン節約戦略の有用性は、心原性ショックでは広く検討されていない。しかしアドレナリン作動性昇圧薬は頻脈、心筋酸素消費量の増加、肺血管収縮といった有害効果を伴うため、近年いくつかの研究が心原性ショックでのバソプレシンと類似体の安全性・有効性を評価している。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>デザイン・規模</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Sarma ら</td><td>後ろ向き・心原性ショック 721 例</td><td>バソプレシンは院内死亡の低下と関連（調整 OR 0.59、95%CI 0.35–0.99、p = 0.05）。ノルアドレナリン等価量 ≥ 0.3 µg/kg/min の高用量昇圧薬群でも死亡低下と関連（未調整 OR 0.54、95%CI 0.32–0.92、p = 0.02）</td></tr>
+<tr><td>Nguyen ら</td><td>後ろ向き・心原性ショック 100 例（男性 76 例、年齢中央値 64 歳）</td><td>バソプレシンは 55% の患者で MAP を上げノルアドレナリン必要量を減らすのに有効。初期の昇圧反応は 30日生存と直接の関連はなかったが、生存者では治療開始 4 時間目以降、MAP が有意に高くノルアドレナリン用量が低かった（p = 0.32 と記載）</td></tr>
+</tbody></table></div>
+<p><strong>著者らの結論的整理</strong>：バソプレシンは、腎機能と低い全身血管抵抗への影響ゆえに、<strong>乏尿を伴う心原性ショックで最も効果が大きい</strong>と考えられる。さらに、この状況ではカテコラミンと比べて、全身循環では選択的な血管収縮を、肺動脈では血管拡張をもたらし、<strong>右室後負荷を減らす</strong>可能性を示す新しいデータがある。</p>
+<p>したがって使い分けは次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>心原性ショックの表現型</th><th>バソプレシンの位置づけ</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>血管麻痺型（vasoplegic-CS）</td><td>有用</td><td>全身血管抵抗が低い病態そのものに作用</td></tr>
+<tr><td>右室不全＋肺血管収縮が懸念される症例</td><td>有用</td><td>肺動脈を拡張させ右室後負荷を下げうる</td></tr>
+<tr><td>不整脈を起こしやすい症例</td><td>有用</td><td>カテコラミンと異なり頻脈性不整脈を誘発しにくい</td></tr>
+<tr><td>乏尿を伴う症例</td><td>有用</td><td>輸出細動脈収縮による GFR 改善</td></tr>
+<tr><td>後負荷感受性の高い重度左室不全</td><td><strong>危険になりうる</strong></td><td>純粋な血管収縮薬として左室後負荷を上げ、心拍出量を落としうる</td></tr>
+</tbody></table></div>
+<p>ただし著者ら自身が「心原性ショックにおけるバソプレシンの役割を確認するには RCT などの他の研究が必要」と明記しており、この整理は理論と後ろ向きデータに基づく仮説である。</p>
+<h3>8. 有害事象</h3>
+<p>バソプレシンとその類似体の持続投与は、カテコラミン必要量の削減には有効である一方、いくつかの副作用を伴う。最も重要なのは虚血性、心臓性、代謝性の効果である。</p>
+<h4>8.1 虚血性合併症</h4>
+<ul><li>最も頻度が高く恐れられる副作用。受容体を介した強力な血管収縮作用による<strong>末梢および指趾虚血</strong>で、四肢のチアノーゼまたは壊死として現れる</li><li>指趾虚血の発生率は、ノルアドレナリンと比べてテルリプレシンなどの類似体で有意に高い（OR 8.65、1.48–50.59、p = 0.02）</li><li>皮膚レベルでも虚血が起こりうる。<strong>虚血性皮膚病変はバソプレシン曝露患者の最大3分の1に及ぶ</strong>。危険因子には<strong>過体重</strong>、<strong>高用量ノルアドレナリンの併用</strong>が含まれる</li><li>腸間膜および心筋の虚血性病変も起こりうる</li></ul>
+<h4>8.2 血行動態・心臓への効果</h4>
+<ul><li>純粋な血管収縮薬として、バソプレシンは<strong>左室後負荷を著明に増加</strong>させ、心室–動脈カップリングの破綻（ventricular-arterial uncoupling）により心拍出量の低下を招きうる。すでに収縮機能が損なわれた患者でとくに問題になる</li><li>不整脈性の効果も起こりうる。<strong>徐脈</strong>はバソプレシンとテルリプレシンのいずれでも誘発されうる一般的な効果である</li><li>心房細動などの不整脈は稀にしか起こらない（OR 0.77、0.67–0.88、p &lt; 0.001）</li></ul>
+<h4>8.3 代謝・腎への効果</h4>
+<ul><li>受容体刺激により自由水の再吸収が促進され、血中ナトリウムが希釈されて<strong>低ナトリウム血症</strong>を来しうる。あわせて<strong>体液貯留</strong>と<strong>乏尿の増悪</strong>の可能性がある</li><li><strong>下痢</strong>はテルリプレシン使用で特に報告される</li></ul>
+<h4>8.4 凝固その他</h4>
+<ul><li>バソプレシンは <strong>von Willebrand 因子の放出</strong>と<strong>血小板活性化</strong>を刺激し、凝固亢進状態を促進しうる</li><li><strong>バソプレシン投与を急に中止した場合、あるいはノルアドレナリン中止より先に止めた場合、患者は急激な血圧低下を経験しうる</strong></li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>投与中に必ず見るもの <mark class="hl">四肢末梢・指趾の色調（チアノーゼ・壊死）</mark>、<mark class="hl">血清ナトリウム（V2 経由の希釈性低ナトリウム血症）</mark>、<mark class="hl">水分バランス</mark>の3点は、バソプレシン持続投与中のルーチン観察項目にする。虚血性皮膚病変は曝露患者の最大3分の1に及び、過体重と高用量ノルアドレナリン併用がリスクを押し上げる。</p>
+</div>
+<h3>9. 臨床使用の実践的推奨（著者らの提示）</h3>
+<p>バソプレシンとその類似体を臨床実践に統合するには、高用量カテコラミン曝露のリスクを最小化しつつ「脱カテコラミン化」効果を最大化する精密な管理が必要である。</p>
+<h4>9.1 開始のタイミングと用量</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>開始基準</td><td>目標 MAP 維持のためのノルアドレナリンが 0.25〜0.50 µg/kg/min を超えたら second-line として追加</td></tr>
+<tr><td>AVP の維持用量</td><td>一般に 0.03 IU/min を維持</td></tr>
+<tr><td>漸増</td><td>0.01 IU/min から開始可。ただし一般に 0.03〜0.04 IU/min を超えるべきでない</td></tr>
+<tr><td>上限を設ける理由</td><td>それ以上の用量は明確な追加利益なしに心筋虚血・腸間膜虚血などのリスクと関連するため</td></tr>
+<tr><td>早期投与を考慮しうる層</td><td>重症度の低いショック（ノルアドレナリン &lt; 15 µg/min、または血中乳酸 ≤ 2 mmol/L）では、早期のバソプレシン投与が生存利益をもたらしうる</td></tr>
+</tbody></table></div>
+<h4>9.2 安全性のモニタリング</h4>
+<ul><li>四肢末梢灌流の持続的モニタリングが必須。とくに<strong>過体重患者</strong>、<strong>高用量ノルアドレナリンを受けている患者</strong>で、指趾のチアノーゼ・壊死の徴候を早期に検出する</li><li>敗血症性ショックでは、糸球体静水圧と GFR を上げることから、RRT の必要性を減らす目的でバソプレシンが好まれうる</li><li>V2 受容体活性化のため、希釈性低ナトリウム血症と体液貯留を監視しなければならない</li><li>セレプレシンのような純粋 V1a 作動薬は肺水腫・溢水のリスク軽減を狙って設計されたが、現時点の臨床エビデンスは死亡に関する優越性を示していない</li></ul>
+<h4>9.3 離脱戦略</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>離脱順序を間違えない ショックの回復期において、<mark class="hl">バソプレシンは最初に中止する昇圧薬にしてはならない</mark>。ノルアドレナリンより先にバソプレシンを急に止めることは、<mark class="hl">動脈性低血圧の発生率上昇</mark>と関連する。理由はショック進行中に観察される相対的バソプレシン欠乏と神経下垂体の貯蔵枯渇にあると考えられる。</p>
+</div>
+<p>Figure 2 の最下段も同じ内容を強調しており、離脱には標準化された戦略がなく、平均動脈圧と乳酸という血行動態目標に応じて漸減する、としている。</p>
+<h3>10. 将来展望</h3>
+<p>将来研究は、バソプレシン系から最も利益を得る患者を同定する精密医療の方向へ移行しつつある。</p>
+<div class="tw"><table>
+<thead><tr><th>方向性</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>バイオマーカーによる欠乏の早期診断</td><td><strong>コペプチン</strong>または動的浸透圧刺激試験。コペプチンはバソプレシン濃度評価のための最も信頼できる代理バイオマーカーとされる。天然バソプレシンは半減期が極めて短く不安定なのに対し、コペプチンは神経下垂体から<strong>等モル量</strong>で分泌されるため、臨床現場で測定しやすい</td></tr>
+<tr><td>動的負荷試験</td><td><strong>高張食塩水輸注</strong>でコペプチン放出を刺激し、バソプレシン軸の欠乏を正確に診断する手法が提案されている</td></tr>
+<tr><td>人工知能・強化学習</td><td>ノルアドレナリン用量だけでなく「昇圧薬負荷（vasopressor load）」に基づいて治療開始の正確なタイミングと離脱戦略を最適化しうる</td></tr>
+<tr><td>早期多剤併用療法</td><td>異なる昇圧薬（AVP、アンジオテンシン II、ノルアドレナリン）を低用量で組み合わせ、複数の生理系を同時に標的にする</td></tr>
+<tr><td>薬理遺伝学</td><td>バソプレシン受容体・アドレナリン受容体の遺伝的多様性を評価し、個々の患者の生物学的プロファイルに基づいて昇圧薬治療を個別化する</td></tr>
+</tbody></table></div>
+<h3>11. 結論（著者ら）</h3>
+<p>バソプレシン系の調節は分布性ショックと心原性ショックの管理における基本的な柱であり続けている。AVP とその類似体は全死亡に対する明確で普遍的な利益をまだ示していないものの、カテコラミン関連の心毒性を緩和するうえで脱カテコラミン化における役割は決定的である。腎機能の保全と不整脈の減少は臨床的に有意義な利益を表す。バソプレシンは敗血症性、血管麻痺性、乏尿または右室不全を伴う心原性、出血性という各種のショック状態において補助薬として機能し、血行動態の安定を高め、カテコラミン必要量を減らし、とくに腎保護と抗不整脈効果を通じて臓器機能を保護する。ただし臨床使用は、とくに長時間作用型類似体を用いる場合、末梢・指趾の虚血性事象のリスクと慎重に釣り合わせなければならない。</p>
+<h3>12. 批判的吟味 — ジャーナルクラブでの論点</h3>
+<p><strong>A. 方法論の限界（レビューとしての質）</strong></p>
+<ol><li><strong>ナラティブレビューであり、システマティックレビューではない</strong>。著者らは PRISMA 声明を引用したうえで、それに従わないことを明示している。バイアスリスク評価も、エビデンスの質のグレーディングも、定量的統合もない。したがって第9章の「実践的推奨」は、推奨の強さもエビデンスレベルも付与されていない著者の意見である</li><li><strong>検索期間と引用文献の不整合</strong>。検索は 2015年1月〜2026年1月と明記されているが、実際の引用には 1975年（von Willebrand 因子関連、Mannucci）、1990年（圧受容体反射、Kubo）、2003年（虚血性皮膚病変、Dünser）、2006年（肺血管への効果、Jeon）、2008年（VASST、Russell）が含まれる。検索戦略の記述が実際の文献選択を説明していない</li><li><strong>著者らの自己引用が内容と噛み合っていない箇所がある</strong>。文献37（心原性ショックでの AVP 濃度が敗血症性ショックより高いことの根拠）は Mauriello ら "Effects of Heart Failure Therapies on Atrial Fibrillation"（Antioxidants 2024）で、心不全治療と心房細動の総説であり、ショック時の神経内分泌応答の一次データではない。文献57（心原性ショックでのカテコラミン節約戦略が未検討であることの根拠）は同じ著者らの「心停止におけるエコー」の論文である。同様に、文献29（セレプレシン・テルリプレシンが純粋作動薬として設計されたことの根拠）は 2024年のステロイドガイドラインであり、7.3 節の「下痢はテルリプレシンで特に報告される」に付された文献51 はセレプレシンの SEPSIS-ACT 試験である</li></ol>
+<p><strong>B. 数値・記述の内的矛盾（原文をそのまま読むと崩れる箇所）</strong></p>
+<ol><li><strong>VASST の組み入れ基準の単位が誤っている可能性が高い</strong>。本総説は「MAP &lt; 65 mmHg で <strong>&gt; 5 µg/kg/min</strong> のノルアドレナリンを受けている」と記すが、同じ段落で重症度の低い層を「ノルアドレナリン <strong>&lt; 15 µg/min</strong>」と定義している。体重 70 kg なら 5 µg/kg/min は 350 µg/min に相当し、「15 µg/min 未満が軽症」と両立しない。VASST の実際の基準は毎分の絶対量（µg/min）である。ジャーナルクラブで「この論文をそのまま読んで基準を作ると桁を間違える」典型例</li><li><strong>心房細動の記述が引用元の意味を取り違えている</strong>。8.2 節は「心房細動などの不整脈は稀にしか起こらない（OR 0.77、0.67–0.88、p &lt; 0.001）」と書くが、この OR は文献65（McIntyre ら、JAMA 2018）による<strong>カテコラミン単独と比べた相対的減少</strong>を意味する比較指標であって、「稀である（絶対頻度が低い）」ことを示す数値ではない。実際 VANCS では心房細動が両群とも 63.8%／82.1% と高頻度である。同じ論文内で矛盾している</li><li><strong>Nguyen らの記述が統計的に成立していない</strong>。「生存者では 4 時間目以降 MAP が有意に高くノルアドレナリン用量が低かった（p = 0.32）」とあるが、p = 0.32 は有意ではない。「有意に」という語と数値が矛盾している</li><li><strong>VANCS の試験名と対象が食い違っている</strong>。本文は VANCS を「がん患者の敗血症性ショックにおけるバソプレシン対ノルアドレナリン」と展開しているが、引用文献53 は Hajjar ら（Anesthesiology 2017）で、対象は<strong>心臓外科術後の血管麻痺性ショック 330 例</strong>である。おそらく VANCS と VANCS II（がん患者の敗血症性ショック）を取り違えている。7.2 節の見出しが「血管麻痺性ショック・心臓術後」であることからも、示している数値は心臓術後試験のものと解するのが自然</li><li><strong>VANISH の RRT データの引用先が不適切</strong>。「25.4% vs 35.3%、p &lt; 0.007」に付された文献9 は Kotani らの「ノルアドレナリン等価量スコアの更新」（Crit Care 2023）であり、VANISH の試験結果を報告する論文ではない。一次文献（文献46、Gordon ら JAMA 2016）を当たるべき箇所</li><li><strong>アンジオテンシン II を「強力な合成血管収縮薬（potent synthetic vasoconstrictor）」と記述</strong>している。アンジオテンシン II は内因性ペプチドであり、合成なのは製剤である。生理の説明としては不正確</li></ol>
+<p><strong>C. エビデンスの解釈をめぐる論点（JC の本題にできる部分）</strong></p>
+<ol><li><strong>サブグループ・事後解析への依存</strong>。「軽症層で生存利益」（VASST の p = 0.05／p = 0.04）も「乳酸 ≤ 2 mmol/L で利益」も、いずれも事前規定されていない解析である。しかも VANISH は「早期にバソプレシンを第一選択として使う」戦略を前向きに検証して死亡差を示せなかった。本総説の第9章が軽症層への早期投与を推奨として提示するのは、エビデンスの階層を一段跳ばしている</li><li><strong>心原性ショックの根拠が後ろ向き2研究のみ</strong>。Sarma ら 721 例（調整 OR 0.59、95%CI 0.35–0.99、p = 0.05 — 信頼区間の上限が 0.99 でぎりぎり）と Nguyen ら 100 例。適応による交絡（indication bias）が典型的に問題になる設計で、「バソプレシンを足す余裕のある患者＝比較的安定した患者」という逆方向の選択が働きうる。著者ら自身も RCT が必要と認めている</li><li><strong>セレプレシンの推奨が結果と整合しない</strong>。SEPSIS-ACT は 868 例で無効中止され、90日死亡・RRT フリー日数に差がなかった。それでも「急性肺水腫のリスクが高い場合には考慮されうる」とするのは、機序上の期待に基づく主張であって臨床アウトカムの裏づけがない</li><li><strong>アンジオテンシン II の臨床試験（ATHOS-3）に言及がない</strong>。第5章で RAAS を3系統のひとつとして中心に据え、将来展望で「AVP＋アンジオテンシン II＋ノルアドレナリンの早期多剤併用」を提案しているにもかかわらず、アンジオテンシン II の主要無作為化試験のデータは本文中に一切提示されていない。多剤併用の議論の片肺が欠けている</li><li><strong>「バソプレシンは免疫を損なわない」の根拠が薄い</strong>。文献43 は単球由来樹状細胞で AVP 処理が抑制性免疫チェックポイント分子の発現を増やすという in vitro 研究であり、「宿主防御を損なわない」という臨床的主張とはむしろ逆方向にも読める内容である</li><li><strong>難治性ショックの定義が定まらないまま議論が進む</strong>。著者ら自身が「普遍的合意定義は存在しない」と述べているのに、Figure 2 のフローチャートでは「Refractory shock」を分岐点にしている。臨床導入時にはこの分岐が施設ごとの恣意になる</li><li><strong>日本の実臨床への外挿</strong>：本論文が扱うテルリプレシンとセレプレシンは、本邦の敗血症性ショックにおいて標準的な選択肢ではない。実務上使えるのは AVP のみであり、本総説の実践的価値は「AVP の開始点・上限・離脱順序・監視項目」に集約される</li></ol>
+<p><strong>D. それでも実践に効く点</strong></p>
+<ol><li>離脱順序（バソプレシンを先に切らない）、上限（0.03〜0.04 IU/min を超えない）、監視項目（指趾色調・Na・水分バランス）という3点は、エビデンスの強さと無関係に病棟プロトコルに落とせる形になっている</li><li>心原性ショックの「使ってよい表現型／避ける表現型」の整理（血管麻痺型・右室不全・不整脈傾向 vs 後負荷感受性の高い重度左室不全）は、RCT がない領域で臨床判断を言語化する枠組みとして有用</li></ol>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>9</td><td>ノルアドレナリン等価量スコアの更新（ショック重症度の指標）</td><td>Kotani Y, et al. Crit Care. 2023;27:29</td></tr>
+<tr><td>12</td><td>敗血症性ショックにおける最適なバソプレシン開始時期（機械学習）</td><td>Kalimouttou A, et al. JAMA. 2025;333:1688</td></tr>
+<tr><td>26</td><td>血管拡張性ショック・周術期血管麻痺への非アドレナリン系昇圧薬（RCT 51件・5,715例のメタ解析。RRT を RR 0.68 で減少）</td><td>Kotani Y, et al. Crit Care. 2024;28:439</td></tr>
+<tr><td>36</td><td>敗血症性ショック患者におけるバソプレシンとその類似体（本総説の薬物動態・用量記述の主要出典）</td><td>Lajoye Q, et al. Crit Care. 2025;29:333</td></tr>
+<tr><td>39</td><td>ショック病態を横断したバソプレシン使用の国際調査（PRESS Survey・ESICM 公認）</td><td>Jozwiak M, et al. Crit Care. 2025;29:273</td></tr>
+<tr><td>40</td><td>敗血症性ショックにおけるバソプレシン使用と開始時期の最適化</td><td>Sacha GL, Bauer SR. Chest. 2023;164:1216–1227</td></tr>
+<tr><td>44</td><td>昇圧薬用量の等価換算（スコーピングレビューと換算式）</td><td>Goradia S, et al. J Crit Care. 2021;61:233–240</td></tr>
+<tr><td>45</td><td><strong>VASST</strong> — 敗血症性ショックにおけるバソプレシン vs ノルアドレナリン輸注（778例）</td><td>Russell JA, et al. N Engl J Med. 2008;358:877–887</td></tr>
+<tr><td>46</td><td><strong>VANISH</strong> — 敗血症性ショックにおける早期バソプレシン vs ノルアドレナリンの腎不全への効果（421例）</td><td>Gordon AC, et al. JAMA. 2016;316:509–518</td></tr>
+<tr><td>47</td><td>VASST 調整センター病院での傾向スコアマッチング後ろ向きコホート（乳酸 ≤ 2 mmol/L のサブグループ解析）</td><td>Russell JA, Wellman H, Walley KR. J Intensive Care. 2018;6:73</td></tr>
+<tr><td>48</td><td>VANISH のトランスクリプトーム解析 — 敗血症のシグネチャーとステロイドへの差次的反応</td><td>Antcliffe DB, et al. Am J Respir Crit Care Med. 2019;199:980–986</td></tr>
+<tr><td>49</td><td>成人敗血症性ショックへのテルリプレシン（9研究・850例のメタ解析。60歳未満で RR 0.66、末梢虚血 OR 8.65）</td><td>Huang L, et al. BMC Anesthesiol. 2020;20:58</td></tr>
+<tr><td>51</td><td><strong>SEPSIS-ACT</strong> — セレプレシン vs プラセボの人工呼吸器・昇圧薬フリー日数（868例・無効中止）</td><td>Laterre PF, et al. JAMA. 2019;322:1476–1485</td></tr>
+<tr><td>53</td><td><strong>VANCS</strong> — 心臓外科術後血管麻痺性ショックにおけるバソプレシン vs ノルアドレナリン（330例）</td><td>Hajjar LA, et al. Anesthesiology. 2017;126:85–93</td></tr>
+<tr><td>54</td><td>外傷・出血性ショックへの低用量 AVP 補充と輸血必要性（100例 RCT）</td><td>Sims CA, et al. JAMA Surg. 2019;154:994–1003</td></tr>
+<tr><td>59</td><td>心原性ショックにおけるバソプレシン投与と死亡の関連（721例・後ろ向き）</td><td>Sarma D, et al. Am Heart J. 2025;286:88–96</td></tr>
+<tr><td>60</td><td>心原性ショック患者におけるバソプレシンの実使用（100例・後ろ向きコホート）</td><td>Nguyen M, et al. Crit Care. 2023;27:291</td></tr>
+<tr><td>61</td><td>ミルリノン誘発性低血圧後のバソプレシンとノルアドレナリンの血行動態比較（off-pump CABG。肺血管拡張の根拠）</td><td>Jeon Y, et al. Eur J Cardiothorac Surg. 2006;29:952–956</td></tr>
+<tr><td>62</td><td>敗血症性ショックにおけるバソプレシンの個別患者データメタ解析</td><td>Nagendran M, et al. Intensive Care Med. 2019;45:844–855</td></tr>
+<tr><td>63</td><td>カテコラミン抵抗性血管拡張性ショックでのバソプレシン持続投与に伴う虚血性皮膚病変（発生率と危険因子）</td><td>Dünser MW, et al. Crit Care Med. 2003;31:1394–1398</td></tr>
+<tr><td>65</td><td>分布性ショックにおけるバソプレシン＋カテコラミン vs カテコラミン単独と心房細動の関連</td><td>McIntyre WF, et al. JAMA. 2018;319:1889–1900</td></tr>
+<tr><td>66</td><td>ショック状態におけるバソプレシンとその類似体（総説）</td><td>Demiselle J, et al. Ann Intensive Care. 2020;10:9</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 バソプレシン系薬剤は「死亡を下げる薬」ではなく、<mark class="hl">カテコラミン負荷を減らし、腎（RRT を RR 0.68）と心（不整脈）を守るための薬</mark>として位置づける。当院で実際に動かせるのは AVP のみで、<mark class="hl">ノルアドレナリン 0.25〜0.50 µg/kg/min 超で 0.03 IU/min を追加し、上限 0.03〜0.04 IU/min を超えず、離脱ではノルアドレナリンを先に切ってバソプレシンを最後に残す</mark>という3点に集約される。投与中は<mark class="hl">指趾の色調と血清ナトリウムを定型的に見る</mark>（虚血性皮膚病変は曝露患者の最大3分の1、過体重と高用量ノルアドレナリン併用がリスク）。心原性ショックでは<mark class="hl">血管麻痺型・右室不全・不整脈傾向・乏尿には有利、後負荷感受性の高い重度左室不全には危険</mark>という表現型別の整理を共有言語にする。ただし本総説はナラティブレビューで、VASST の組み入れ基準の単位や VANCS の試験名など複数の誤記があり、<mark class="hl">数値は必ず一次文献で確認してから病棟プロトコルに書き写す</mark>こと。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
