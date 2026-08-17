@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICU生存高齢者の5年後 — 元気だった60〜79歳で一般人口との差が最大、90代では差が消える（ドイツ326万人・多状態モデル・ICM2025）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-025-08163-x.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICU生存高齢者の5年後 — 元気だった60〜79歳で一般人口との差が最大、90代では差が消える（ドイツ326万人・多状態モデル・ICM2025）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Jung C, Marschall U, Hennig B, Giemsa M, Heramvand N, Parco C, Kelm M, Jacobs JM, Beil M. Five-year mortality and functional trajectories in older survivors of intensive care compared to the general population. Intensive Care Med. 2025;51:2329–2340. DOI: 10.1007/s00134-025-08163-x</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2025-12）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-025-08163-x" target="_blank" rel="noopener">doi.org/10.1007/s00134-025-08163-x</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Five-year mortality and functional trajectories in older survivors of intensive care compared to the general population</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>ACPの語り口が変わる</strong>。「ICUを乗り切れば元に戻れますか」への答えを、年齢とICU前の機能の組み合わせで出せるようになった。ICU前に自立していた60代は5年後も自立して生きている確率が92%（一般人口）→56%（人工呼吸を受けた生存者）まで落ちる。数字で示せる。</li><li><strong>元気だった60〜79歳こそがPICS対策の的</strong>。当院のICU退室後フォロー（Hotel ICUの退室後訪問・早期離床）は「弱った高齢者」に資源を寄せがちだが、一般人口との差＝介入で取り戻せる余地が最も大きいのは、入室前に機能障害がなかった60〜79歳だった。退室後フォロー対象の優先順位を、重症度ではなく「入室前ADL自立×60〜79歳」で切り直す価値がある。</li><li><strong>90代では「ICUの上乗せ分」を語らない</strong>。90代は生存者と一般人口で5年死亡がほぼ同じ（機能障害なし 0.54 対 0.57〜0.58）。90代の家族面談では「ICUに入ったこと自体が将来を悪くする」という説明は本研究では支持されない。語るべきは年齢そのものが持つ限界。</li><li><strong>軽中等度の障害がある70〜80代は「機能」でなく「時間」の話に絞れる</strong>。この群ではICU生存者の機能低下確率は一般人口より低い（例 80代 0.21〜0.24 対 0.30）。飽和効果であり良い意味ではないが、面談の論点を「どこまで衰えるか」から「どれだけの時間か」に整理できる。</li><li><strong>女性の機能低下リスクを退室時説明に織り込む</strong>。障害なし→軽中等度への遷移は女性で一貫して高リスク（70歳以上でHR 1.28〜1.91）。一方で死亡は男性が高リスク。退室後支援の必要量は女性でむしろ多い可能性がある。</li><li><strong>当院で真似できる形</strong>：ICU入室時に「入室前の要介護度（介護保険の要支援・要介護区分）」を必ず記録する。本研究の層別因子はまさにこれ（ドイツの Pflegegrad ＝日本の要介護認定に相当）。JIPADに乗せられる形でベースライン機能を取れば、日本版の同じ解析が可能になる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：高齢者のICU入室は増え続けており、生存だけでなく機能的自立が本人にとっての最重要アウトカムである。ICU前のフレイル・障害が長期死亡と障害残存を予測することは Ferrante らの前向き研究（JAMA Intern Med 2015）などで示されていた。ICU生存者の5年死亡・QOL低下を報告した研究も複数ある（Cuthbertson 2010、Lone 2016、Hofhuis 2021、Hermans 2019）。</li><li><strong>Unknown</strong>：それらはいずれも(1)人口対照を持たない、(2)入室時のリクルートメントバイアスがある、(3)サンプルが小さく超高齢者のサブグループ解析ができない、(4)死亡と機能低下を競合リスクとして同時に扱っていない、という制約があった。「同年齢・同機能水準の一般人口の人と比べて、ICUを生き延びたことはどれだけの上乗せの不利益なのか」は未知だった。</li><li><strong>What's new</strong>：ドイツの公的健康保険 BARMER の全数データ（60〜99歳 326万人＝当該年齢のドイツ人口の13.9%）を使い、ICU生存者40,441人と一般人口を年齢・ベースライン機能障害グレードでマッチした12サブグループに分け、多状態モデルで「機能維持／機能低下／死亡」の3状態の時間依存確率を5年間追った。<strong>超過死亡は「ICU前に障害がなかった60〜79歳」で最大（約0.2）</strong>で、この群は機能低下リスクも一般人口より高い。年齢は差を薄める因子で、<strong>90代では生存者と一般人口の差が消える</strong>。機能評価は法定の全国統一制度（要介護認定）を使っており、脱落は年0.6%未満。</li><li>高齢ICU患者の長期予後を「人口対照つきで」「競合リスクの軌道として」示した初めての大規模研究であり、ESICMの超高齢者管理勧告（<span class="wl">80歳以上の超高齢ICU患者の管理 ESICM合意勧告48項目（デルファイ・ICM2025）</span>、責任著者 Beil は本論文の最終著者）が求めていたエビデンス空白を埋めにきた仕事。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ドイツの公的保険326万人の全数データで、ICU入室後6か月を生き延びた高齢者40,441人を同年齢・同機能水準の一般人口と5年間比べると、<strong>重症疾患の影響は5年後もなお検出でき、その差が最も大きいのは「入室前に元気だった60〜79歳」で、90代では差が消えた</strong>。</p>
+</div>
+<ul><li><strong>デザイン</strong>：BARMER健康保険（ドイツ人口の88%を占める法定健康保険の一つ）の匿名化データベースによる後ろ向きコホート。2018年1月1日時点で60〜99歳の全会員を5年追跡（2018〜2023年）。</li><li><strong>3群</strong>：2018年にICU入室なし（一般人口＝対照、3,203,630人）／ICU入室・侵襲的人工呼吸なし（ICU-MV、30,470人）／ICU入室・侵襲的人工呼吸あり（ICU+MV、9,971人）。入院はしたがICUに入らなかった人は対照群に入る。</li><li><strong>生存者の定義</strong>：ICU入室から6か月時点で生存している患者（＝6か月ランドマーク）。追跡開始点も入室6か月後に置く。</li><li><strong>機能評価</strong>：2017年から法律で全国実施されている要介護認定（Pflegegrad）。専門の医療審査員が6ドメイン（移動、日常生活活動、行動・心理、認知・コミュニケーション、生活の計画・社会的交流、疾病と治療への対処）を評価し、グレード0（有意な障害なし）〜5（最重度）に格付け。解析では0／軽中等度（1・2）／重度（3〜5）の3段階に統合。</li><li><strong>解析</strong>：R の msm パッケージによる多状態モデル。年齢4区分×曝露3群×ベースライン機能3段階のサブグループごとにモデルを当て、(i) ベースライン状態の維持（steady state）、(ii) 機能低下、(iii) 死亡 の時間依存確率を算出。機能改善は稀（一般人口&lt;0.3%、ICU生存者&lt;1.9%）なのでモデルから除外。脱落は年0.6%未満で打ち切り処理。</li><li><strong>主結果1（死亡）</strong>：5年時点でICU生存者の死亡確率は90歳未満まで一般人口より有意に高い（p&lt;0.001）。超過死亡のピークは<strong>ICU+MVで入室前に機能障害がなかった60〜79歳の約0.2</strong>（60-69歳 0.26 対 0.04＝差0.22／70-79歳 0.32 対 0.09＝差0.23）。</li><li><strong>主結果2（機能低下）</strong>：入室前に障害がなかった60代・70代のICU生存者は一般人口より機能低下確率が有意に高い（60-69歳 ICU+MV 0.18 対 対照 0.04）。逆に軽中等度の障害があった70代・80代では<strong>ICU生存者の方が機能低下確率が低い</strong>（飽和効果。次の状態が死亡になるため）。</li><li><strong>主結果3（年齢の減衰効果）</strong>：差は加齢とともに縮み、90代では死亡・機能低下・機能維持のすべてで生存者と一般人口の軌道が重なる。</li><li><strong>主結果4（人工呼吸の有無）</strong>：ICU-MVとICU+MVの軌道が持続的に違ったのは、<strong>70歳未満で入室前に障害がなかった群のみ</strong>。</li><li><strong>主結果5（性差）</strong>：障害なし→軽中等度への遷移は70歳以上の女性で一貫して高リスク（対照 HR 1.22〜1.37、ICU-MV 1.30〜1.44、ICU+MV 1.30〜1.91）。死亡は男性が高リスク（女性のHRはほぼすべて1未満）。</li><li><strong>著者の結論</strong>：60〜89歳では重症疾患の影響が5年後も検出できる。因果は言えないが、長期機能予後を改善する介入は<strong>60〜79歳で最も効果が大きい</strong>可能性がある。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>なぜ「一般人口との比較」がここまで重要なのか</strong>。高齢者では、ICUに入らなくても加齢とともに機能障害と死亡が確実に増えていく。だから「ICU生存者の5年死亡は40%でした」という数字だけでは、それがICUのせいなのか年齢のせいなのか判別できない。同じ年齢・同じ機能水準の一般人口を並べて初めて「ICUを経験したことの上乗せ分」が見える。これがこの論文の設計の核心。</p>
+<p><strong>多状態モデル（multi-state model）とは</strong>。生存解析は通常「死亡までの時間」を1つのイベントとして扱う。しかし高齢ICU生存者では「死ぬ」と「機能が落ちる」が同時に競合し、しかも機能が落ちたあとに死ぬという順序もある。多状態モデルは複数の状態（ここでは 障害なし／軽中等度障害／重度障害／死亡）とその間の遷移率を推定し、任意の時点で「各状態にいる確率」を出せる。曲線は3本（機能維持・機能低下・死亡）で、任意の時点で合計が1.0になる。R の msm パッケージ（Jackson 2011）はパネルデータ（一定間隔で観測されたスナップショット）向けの実装で、まさに本研究の半年ごとサンプリングに合う。</p>
+<p><strong>競合リスク（competing risk）</strong>。「機能低下」を観察したいのに、その前に死んでしまえば機能低下は観察されない。死亡は機能低下の競合イベントである。単純に「機能低下した人の割合」を数えると、死亡率が高い群では機能低下が過小評価される。本研究は死亡を状態としてモデルに入れることでこれを回避している。</p>
+<p><strong>Pflegegrad（要介護グレード）とは</strong>。ドイツでは長期介護保険が健康保険への加入と一体で義務化されている。6か月以上続くと見込まれる機能障害の程度に応じて現金給付・介護者支援が受けられるため、新たな障害が生じたら申請する経済的インセンティブが働く。申請すると専門の医療審査員が6ドメインを標準化された方法で評価し、グレード0〜5を付ける。<strong>日本の要介護認定にほぼ相当する制度</strong>で、「金銭的動機があるから欠測がほとんど生じない」という点が本研究のデータ品質の根拠になっている。</p>
+<p><strong>OPS 8-980 / 8-98f とは</strong>。ドイツの診療行為コード（Operationen- und Prozedurenschlüssel）で、集中治療サービスの国家標準を定義するコード。8-98f は侵襲的処置（特に人工呼吸）の程度に関する情報を含む。本研究はこれで「ICU入室したか」「侵襲的人工呼吸を受けたか」を判定している。</p>
+<p><strong>PICS（集中治療後症候群）との関係</strong>。ICU生存後に残る身体・認知・精神の障害の総称（<span class="wl">PICS 集中治療後症候群（JAMA2026）</span>）。本研究の「機能低下」は要介護度の悪化という行政指標であり、PICSの3領域を直接測ってはいない。ただし要介護認定の6ドメインは認知・コミュニケーション・行動・心理を含むため、身体機能だけの尺度より PICS に近い広さを持つ。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>高齢の重症患者に対する最適な治療経路の判断は、<strong>生存と機能予後の不確実性が大きい</strong>ため難しいままである（引用1〜4）。</li><li>多くの高齢者は、余命の長さよりも機能的自立と自己認識のQOLを重視する。ICUの短期的負担と長期的な後遺症を、生存の利益と天秤にかける必要がある（引用5、6）。とくに加齢関連の障害を持ち、ストレスへの回復力（レジリエンス）が落ちた高齢者ではその重みが大きい（引用7、8）。</li><li>利益のない・苦痛を伴う・害になりうる介入を避けることは、高齢者が尊厳をもって自己決定的に生きることを可能にする（引用8）。</li><li><strong>既存データの限界</strong>：高齢者、とくに超高齢者のICU生存後の長期生存・機能予後のデータは乏しい。既存の観察研究の多くは人口対照を持たず、入室時のリクルートメントバイアスがある（引用9〜11）。高齢者コホートでは一般人口側でも加齢に伴い障害と死亡が増えるため、適切な対照との比較が特に重要である。</li><li><strong>EBMの古典的手法が使えない</strong>：ICUを提供するか否かのランダム化は倫理的に問題がある。一方、ICUでの新規介入のRCTは、複数の慢性疾患を持つ高齢者を除外してきた（引用12）。したがってルーチン診療から生成されるデータ（リアルワールドエビデンス）が、大規模集団における現状の医療の姿を教える手段になる（引用13）。</li><li><strong>ACPへの含意</strong>：致命的になりうる重症疾患の場合の予想される転帰を、その出来事がなかった場合の生存と自立の見通しと比べて話すことが、高齢者のACPに資する（引用14）。「どれだけの期間、生きて自立していられるのか」という「時間」の問いが最も頻繁に問われるが、医療者は自分の経験か、サンプリングバイアス・不完全データに損なわれた小規模研究に頼るしかない（引用15〜18）。</li><li><strong>本研究の目的</strong>：ドイツの大規模な法定保険加入者を対象に、年齢とベースライン機能でマッチしたサブグループを用いて、ICU生存者と一般人口の<strong>時間依存の死亡確率と機能喪失確率を5年間比較</strong>すること。ACPに使える詳細情報を提供し、長期予後改善の標的群を同定する。</li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：後ろ向きコホート研究、5年追跡。ドイツ・BARMER健康保険の匿名化データベース。BARMERはドイツ人口の88%をカバーする政府規制の非営利法定健康保険の一つ。</li><li><strong>対象</strong>：2018年1月1日時点でBARMER会員だった60〜99歳の全成人。</li><li>除外1：年齢60歳未満または100歳以上（6,201,804人）</li><li>除外2：ベースラインデータの不完全・不整合（7人）</li><li>除外3：2017年中にICU入室した者（46,462人）。2017年入室の短期的後遺症が2018年のベースライン特性に影響するのを防ぐため</li><li>最終解析対象：<strong>3,261,169人</strong>（60〜99歳）。うち2018年のICU入室を6か月以上生存したのが<strong>40,441人</strong></li><li><strong>群分け</strong>（3群）：</li></ul>
+<ol><li>2018年にICU入室なし（一般人口＝対照）。<strong>入院はしたがICUに入らなかった人はこの群に入る</strong></li><li>2018年にICU入室、侵襲的人工呼吸なし（ICU-MV）</li><li>2018年にICU入室、侵襲的人工呼吸あり（ICU+MV）</li></ol>
+<ul><li><strong>曝露の定義</strong>：2018年の重症疾患によるICU入室（人工呼吸の有無つき）。病院の診療報酬請求コード OPS 8-980 および 8-98f で同定。<strong>複数回入室した場合は当該年の初回入室のみを解析対象</strong>とする。</li><li><strong>生存者の定義</strong>：重症状態での入室から6か月時点で生存している患者。追跡開始点（ベースライン）も入室6か月後に置く。</li><li><strong>主要アウトカム</strong>：死亡までの時間、および機能低下までの時間。</li><li><strong>機能低下の定義</strong>：観察期間開始時点（対照は2018年1月1日、ICU生存者は入室6か月後）に記録されていた機能障害グレードからの<strong>任意の悪化</strong>。</li><li><strong>サンプリング</strong>：一般人口は5年間（2018〜2023年）、毎年1月1日と7月1日にデータベースから機能障害グレードと生死を取得。ICU生存者は入室6か月後から開始し、以降6か月間隔。<strong>1人あたり最大11データポイント</strong>。</li><li><strong>統計解析</strong>：</li><li>R version 4.3.1。カテゴリ変数は実数と%、連続変数は平均±標準偏差。カテゴリ変数の群間比較はχ2検定。</li><li>多状態モデル（R の msm パッケージ、引用21）で機能障害グレード間および競合状態である死亡への時間依存遷移確率を推定。</li><li><strong>状態数の削減</strong>：計算効率のためグレードを6段階（0および1〜5）から3段階に統合（グレード1・2を軽中等度、3〜5を重度としてまとめる。Fig. S1）。</li><li><strong>機能改善は除外</strong>：一般人口で0.3%未満、ICU生存者で1.9%未満しか観察されなかったため、改善方向の遷移をモデルから除外し、各遷移の症例数を確保してデータ適合を最適化（Table S2）。</li><li><strong>脱落</strong>：死亡前に保険を脱退して追跡不能になった年率は0.6%未満（Fig. S2）。打ち切りとして処理。</li><li><strong>サブグループ単位でのモデル当てはめ</strong>：年齢（10歳刻み4区分）×ICU曝露（なし／MVなし／MVあり）で定義される各サブグループにモデルを当てる。さらにコホートをベースラインの機能障害グレードでも分けることで、ICU生存者と一般人口を<strong>年齢と機能ベースラインの両方でマッチ</strong>させる（＝計12の比較セル）。</li><li>各サブグループで、(i) ベースライングレードを保っている確率（steady state）、(ii) 生存中により高い障害グレードへ移った確率（機能低下）、(iii) 任意の障害グレードから死亡へ移った確率（死亡）の時間依存確率（軌道）をプロット。</li><li><strong>性差</strong>：モデルに性を単独共変量として投入し、状態間遷移についての女性のハザード比を算出。</li><li><strong>感度分析</strong>：2019年1月1日時点の同年齢会員で第2のコホートを作り、同じ解析を反復（Fig. S4）。</li><li><strong>モデル適合</strong>：全サブグループで適合は良好（Fig. S3）。</li><li><strong>倫理</strong>：ハインリヒ・ハイネ大学デュッセルドルフ医学部倫理委員会承認（No. 2024–2952）。</li></ul>
+<h4>Table（Figure 1）. 対象者フロー（原図Consort flow diagramを表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>人数</th><th>除外の理由と人数</th></tr></thead>
+<tbody>
+<tr><td>2018年1月1日にドイツで法定健康保険に加入していた者（ドイツ人口の88%）</td><td>72,781,399</td><td>—</td></tr>
+<tr><td>うちBARMER健康保険の加入者（ドイツの法定保険加入者の13%）</td><td>9,509,442</td><td>—</td></tr>
+<tr><td>2018年に60〜99歳だった者</td><td>3,307,638</td><td>60歳未満または100歳以上 6,201,804人を除外</td></tr>
+<tr><td>記録が完全な者</td><td>3,307,631</td><td>記録の不完全・不整合 7人を除外</td></tr>
+<tr><td>2017年にICU入室していなかった者（＝最終解析対象）</td><td><strong>3,261,169</strong></td><td>2017年中のICU入室 46,462人を除外</td></tr>
+</tbody></table></div>
+<ul><li>この最終3,261,169人が、対照3,203,630人＋ICU-MV生存者30,470人＋ICU+MV生存者9,971人＝3,244,071人に分かれる（差の17,098人については「批判的吟味」で扱う）。</li><li>本コホートは2018年のドイツの同年齢人口（N=2,340万人）の<strong>13.9%</strong>、すなわち約7人に1人にあたる。</li></ul>
+<h3>4. 結果 — ベースライン特性</h3>
+<h4>Table 1. 3コホートの5年追跡開始時と終了時の特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>対照 ベースライン（2018-01-01）</th><th>対照 追跡終了（2022-12-31）</th><th>ICU-MV ベースライン（入室6か月後）</th><th>ICU-MV 追跡終了（入室66か月後）</th><th>ICU+MV ベースライン（入室6か月後）</th><th>ICU+MV 追跡終了（入室66か月後）</th></tr></thead>
+<tbody>
+<tr><td>総数</td><td>3,203,630（100%）</td><td>2,682,255（100%）</td><td>30,470（100%）</td><td>17,737（100%）</td><td>9,971（100%）</td><td>5,001（100%）</td></tr>
+<tr><td>男性</td><td>1,168,131（36.5%）</td><td>954,295（35.6%）</td><td>14,435（47.4%）</td><td>8,348（47.1%）</td><td>5,033（50.5%）</td><td>2,479（49.6%）</td></tr>
+<tr><td>女性</td><td>2,035,499（63.5%）</td><td>1,727,960（64.4%）</td><td>16,035（52.6%）</td><td>9,389（52.9%）</td><td>4,938（49.5%）</td><td>2,522（50.4%）</td></tr>
+<tr><td>障害グレードなし 60–69歳</td><td>1,286,184（40.1%）</td><td>1,172,254（43.7%）</td><td>6,464（21.2%）</td><td>4,537（25.6%）</td><td>1,999（20.0%）</td><td>1,160（23.2%）</td></tr>
+<tr><td>障害グレードなし 70–79歳</td><td>1,019,833（31.8%）</td><td>760,494（28.4%）</td><td>7,591（24.9%）</td><td>4,045（22.8%）</td><td>2,021（20.3%）</td><td>924（18.5%）</td></tr>
+<tr><td>障害グレードなし 80–89歳</td><td>496,535（15.5%）</td><td>209,154（7.8%）</td><td>3,924（12.9%）</td><td>1,180（6.7%）</td><td>743（7.5%）</td><td>252（5.0%）</td></tr>
+<tr><td>障害グレードなし 90–99歳</td><td>50,707（1.6%）</td><td>5,493（0.2%）</td><td>204（0.7%）</td><td>40（0.2%）</td><td>33（0.3%）</td><td>4（0.1%）</td></tr>
+<tr><td>軽中等度障害 60–69歳</td><td>18,665（0.6%）</td><td>48,153（1.8%）</td><td>985（3.2%）</td><td>780（4.4%）</td><td>619（6.2%）</td><td>387（7.7%）</td></tr>
+<tr><td>軽中等度障害 70–79歳</td><td>41,177（1.3%）</td><td>116,970（4.4%）</td><td>2,167（7.1%）</td><td>1,704（9.6%）</td><td>1,039（10.4%）</td><td>569（11.4%）</td></tr>
+<tr><td>軽中等度障害 80–89歳</td><td>78,892（2.5%）</td><td>118,786（4.4%）</td><td>2,733（8.9%）</td><td>1,252（7.1%）</td><td>802（8.2%）</td><td>281（5.6%）</td></tr>
+<tr><td>軽中等度障害 90–99歳</td><td>36,918（1.2%）</td><td>10,225（0.4%）</td><td>408（1.3%）</td><td>61（0.3%）</td><td>59（0.6%）</td><td>7（0.1%）</td></tr>
+<tr><td>重度障害 60–69歳</td><td>14,812（0.5%）</td><td>30,409（1.1%）</td><td>775（2.5%）</td><td>737（4.1%）</td><td>619（6.2%）</td><td>408（8.3%）</td></tr>
+<tr><td>重度障害 70–79歳</td><td>35,989（1.1%）</td><td>79,927（2.9%）</td><td>1,879（6.2%）</td><td>1,589（8.9%）</td><td>1,023（10.3%）</td><td>587（11.7%）</td></tr>
+<tr><td>重度障害 80–89歳</td><td>74,062（2.3%）</td><td>108,175（4.0%）</td><td>2,623（8.6%）</td><td>1,665（9.4%）</td><td>882（8.8%）</td><td>398（8.0%）</td></tr>
+<tr><td>重度障害 90–99歳</td><td>49,856（1.6%）</td><td>22,215（0.8%）</td><td>717（2.4%）</td><td>150（0.9%）</td><td>132（1.3%）</td><td>24（0.5%）</td></tr>
+</tbody></table></div>
+<p>（%は各列の総数に対する割合。年齢区分は2018年時点の年齢）</p>
+<p>Table 1から読み取れる要点：</p>
+<div class="tw"><table>
+<thead><tr><th>読み取り</th><th>対照</th><th>ICU-MV</th><th>ICU+MV</th></tr></thead>
+<tbody>
+<tr><td>ベースラインで障害グレードなし（合計）</td><td>89.0%</td><td>59.7%</td><td>48.1%</td></tr>
+<tr><td>ベースラインで軽中等度障害（合計）</td><td>5.6%</td><td>20.5%</td><td>25.4%</td></tr>
+<tr><td>ベースラインで重度障害（合計）</td><td>5.5%</td><td>19.7%</td><td>26.6%</td></tr>
+<tr><td>女性の割合</td><td>63.5%</td><td>52.6%</td><td>49.5%</td></tr>
+<tr><td>5年で失われた人数（死亡・脱落）</td><td>521,375人（16.3%）</td><td>12,733人（41.8%）</td><td>4,970人（49.8%）</td></tr>
+</tbody></table></div>
+<ul><li>ICU生存者は一般人口より<strong>入室前から著しく障害が多い</strong>（障害あり 40.3%／51.9% 対 11.0%）。これが年齢だけでなくベースライン機能でもマッチする必要があった理由であり、この論文の設計上の要点。</li><li>ICU生存者では女性の割合が低い（52.6%／49.5% 対 63.5%）。高齢者一般人口の女性優位（＝男性の早期死亡）を反映している。</li><li>5年で失われた割合は対照16.3%に対しICU+MV 49.8%。粗の比較では約3倍だが、これは年齢構成と入室前障害の違いを含んだ数字であり、多状態モデルによる層別が必要になる。</li></ul>
+<h3>5. 結果 — 死亡の軌道</h3>
+<ul><li>加齢とベースラインの障害グレードの上昇は、ICU生存者と一般人口の<strong>両方で</strong>死亡を増やした（Fig. 2 の灰色帯、Table 2）。</li><li>5年観察期間終了時点で、ICU生存者の死亡は<strong>90歳未満まで一般人口より有意に高い</strong>（p&lt;0.001）。</li><li>超過死亡（ICU生存者と一般人口の死亡確率の差）は、<strong>ICU+MVで60〜79歳・ベースライン障害なしの群で約0.2に達してピーク</strong>。</li><li>60-69歳・障害なし：0.26（ICU+MV） − 0.04（対照） = <strong>0.22</strong></li><li>70-79歳・障害なし：0.32（ICU+MV） − 0.09（対照） = <strong>0.23</strong></li><li>90代では3群の死亡確率がほぼ重なる（障害なし 0.54／0.58／0.57、軽中等度 0.71／0.76／0.75、重度 0.88／0.90／0.91）。</li></ul>
+<h3>6. 結果 — 機能維持（steady state）の軌道</h3>
+<ul><li>「観察開始時と同じ状態にいる＝生存かつ機能低下なし」の確率は、<strong>90歳未満までICU生存者で有意に低い</strong>。例外は軽中等度障害を持つ80代（ここでは差が有意でない）（Fig. 2 の緑帯）。</li><li>最も差が大きいのは60-69歳・障害なし：対照0.92に対しICU-MV 0.70、ICU+MV 0.56。<strong>36ポイントの差</strong>。</li><li>70-79歳・障害なし：0.76 対 0.53 対 0.44。</li><li>80-89歳・障害なし：0.45 対 0.29 対 0.31。</li><li>90-99歳・障害なし：0.12 対 0.13 対 0.12（差が消失）。</li></ul>
+<h3>7. 結果 — 機能低下の軌道</h3>
+<ul><li>ベースラインで障害グレードのない人では、5年観察期間中に死亡前に新たな機能障害を獲得する確率が<strong>加齢とともに上昇</strong>した（Fig. 2 左列の赤帯、Table 2。対照：0.04 → 0.15 → 0.32 → 0.41）。</li><li>一般人口と比べて、<strong>60代・70代でベースライン障害のないICU生存者は機能低下確率が有意に高い</strong>（60-69歳：0.04 → 0.13／0.18、70-79歳：0.15 → 0.23／0.24）。</li><li>逆に、<strong>ベースラインで軽中等度の障害があった70代・80代のICU生存者は、機能低下確率が一般人口より低い</strong>（Fig. 2 中列の赤帯。70-79歳：対照0.29 対 0.23／0.20、80-89歳：対照0.30 対 0.24／0.21）。著者はこれを<strong>飽和効果</strong>と解釈している。すなわちこの群ではさらなる機能低下の次に来る最も可能性の高い状態が死亡であり、機能低下として観察される前に死亡してしまう（引用17）。</li><li>ベースラインで重度障害の群では機能低下は算出されない（n/a）。モデル上、重度障害からの次の状態は死亡のみだからである。</li></ul>
+<h3>8. 結果 — 人工呼吸の有無による違い</h3>
+<ul><li>ICU生存者2群（ICU-MV と ICU+MV）を比べると、3つの時間依存軌道が<strong>持続的に異なったのは70歳未満でベースライン障害のない群のみ</strong>。</li><li>この群では侵襲的人工呼吸を要した患者の方が死亡と機能低下の確率が高い（60-69歳・障害なし：死亡0.26 対 0.18、機能低下0.18 対 0.13、機能維持0.56 対 0.70）。</li><li>70歳以上、あるいはベースラインに障害がある群では、人工呼吸の有無で軌道が分離しない（例 80-89歳・軽中等度：死亡0.63 対 0.60、機能維持0.20 対 0.19）。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 多状態モデルで得られた、ICU生存者（侵襲的人工呼吸あり ICU+MV／なし ICU-MV）と一般人口（control）における機能低下と死亡の時間依存確率。原図・無改変。 <strong>図の構造</strong>：4行3列の12パネル。行は上から60-69歳、70-79歳、80-89歳、90-99歳。列は左からベースラインの機能障害グレードが「なし（none）」「軽中等度（mild − moderate）」「重度（severe）」。各パネルは横軸が観察開始からの年数（0〜5年）、縦軸が確率（0〜1.0、0.2刻み）。 <strong>3本の帯</strong>：どのパネルにも3系統の95%信頼帯が描かれる。<strong>緑</strong>＝観察開始時の機能障害グレードを保って生存している確率（steady state）、<strong>赤</strong>＝機能障害グレードが上がった確率（機能低下）、<strong>灰</strong>＝死亡した確率。3つの確率は任意の時点で合計1.0になる。 <strong>群の描き分け</strong>：一般人口（control）は塗りのない実線グラフ、ICU生存者2群は縞模様の帯で、ICU-MVが縦縞、ICU+MVが横縞。左上パネル内に凡例が置かれ、右上から下へ control／ICU-MV／ICU+MV の順に3本の緑線が並び、内側の小さな四角の中に steady state（緑）・functional decline（赤）・death（灰）の3本のミニチュア曲線が示されている。 <strong>有意差の印</strong>：一般人口とICU生存者の5年時点アウトカムの有意差（p&lt;0.001）は星印で示される。死亡についての差は黒の星印、機能維持についての差は緑の星印で、各パネル右端（5年時点）の該当する帯のそばに置かれる。星印は上3行にはほぼ全て付いているが、<strong>最下段の90-99歳の行には1つも付いていない</strong>（＝差が消えている）。 <strong>眼に浮かぶ形での読み方</strong>：左上（60-69歳・障害なし）のパネルでは、対照の緑線が5年間ほぼ水平のまま0.92付近に留まる一方、ICU-MVの縦縞緑帯は0.70へ、ICU+MVの横縞緑帯は0.56へ下降し、3本が扇状に開く。灰（死亡）と赤（機能低下）はいずれも右上がりで、対照はほぼ0.04付近に張り付くのに対し、ICU生存者の帯は明確に持ち上がる。行を下に降りるにつれてこの扇の開き（＝群間差）が狭まり、最下段の90-99歳では緑が急速に落ち、灰が右上がりに0.5超まで伸び、3群の帯が完全に重なり合う。信頼帯の幅も最下段で著しく広い（90代のICU生存者はn=33〜132と少数）。 <strong>右列（重度障害）の特徴</strong>：この列では機能低下（赤）の帯が存在しない。ベースラインが重度障害の場合、モデル上「機能低下の次の状態は死亡のみ」であるため。緑（重度障害を保って生存）と灰（死亡）が交差して入れ替わる2本構成になる。交差点は60-69歳では約3年、80-89歳では約2年、90-99歳では約1.5年と、加齢とともに早くなる。</p>
+</div>
+<h4>Table 2. 多状態モデルによる5年アウトカム確率（期待確率±標準偏差。原表を日本語化）</h4>
+<p><strong>ベースライン状態を5年後も保っている確率（機能維持）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>2018年の年齢とベースライン障害グレード</th><th>対照</th><th>ICU-MV</th><th>ICU+MV</th></tr></thead>
+<tbody>
+<tr><td>60–69歳・なし</td><td>0.92 ± 0.0002</td><td>0.70 ± 0.0056</td><td>0.56 ± 0.011</td></tr>
+<tr><td>60–69歳・軽中等度</td><td>0.41 ± 0.0024</td><td>0.26 ± 0.0110</td><td>0.26 ± 0.014</td></tr>
+<tr><td>60–69歳・重度</td><td>0.42 ± 0.0029</td><td>0.29 ± 0.0130</td><td>0.28 ± 0.014</td></tr>
+<tr><td>70–79歳・なし</td><td>0.76 ± 0.0004</td><td>0.53 ± 0.0061</td><td>0.44 ± 0.011</td></tr>
+<tr><td>70–79歳・軽中等度</td><td>0.30 ± 0.0012</td><td>0.25 ± 0.0066</td><td>0.23 ± 0.011</td></tr>
+<tr><td>70–79歳・重度</td><td>0.33 ± 0.0016</td><td>0.25 ± 0.0071</td><td>0.22 ± 0.010</td></tr>
+<tr><td>80–89歳・なし</td><td>0.45 ± 0.0007</td><td>0.29 ± 0.0066</td><td>0.31 ± 0.016</td></tr>
+<tr><td>80–89歳・軽中等度</td><td>0.21 ± 0.0009</td><td>0.19 ± 0.0056</td><td>0.20 ± 0.011</td></tr>
+<tr><td>80–89歳・重度</td><td>0.23 ± 0.0010</td><td>0.19 ± 0.0056</td><td>0.16 ± 0.0092</td></tr>
+<tr><td>90–99歳・なし</td><td>0.12 ± 0.0012</td><td>0.13 ± 0.0220</td><td>0.12 ± 0.051</td></tr>
+<tr><td>90–99歳・軽中等度</td><td>0.10 ± 0.0010</td><td>0.09 ± 0.0110</td><td>0.09 ± 0.024</td></tr>
+<tr><td>90–99歳・重度</td><td>0.11 ± 0.0009</td><td>0.10 ± 0.0082</td><td>0.09 ± 0.017</td></tr>
+</tbody></table></div>
+<p><strong>5年以内の機能低下確率のピーク値</strong></p>
+<div class="tw"><table>
+<thead><tr><th>2018年の年齢とベースライン障害グレード</th><th>対照</th><th>ICU-MV</th><th>ICU+MV</th></tr></thead>
+<tbody>
+<tr><td>60–69歳・なし</td><td>0.04 ± 0.0001</td><td>0.13 ± 0.0026</td><td>0.18 ± 0.0051</td></tr>
+<tr><td>60–69歳・軽中等度</td><td>0.24 ± 0.0017</td><td>0.20 ± 0.0077</td><td>0.20 ± 0.0097</td></tr>
+<tr><td>60–69歳・重度</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>70–79歳・なし</td><td>0.15 ± 0.0002</td><td>0.23 ± 0.0030</td><td>0.24 ± 0.0056</td></tr>
+<tr><td>70–79歳・軽中等度</td><td>0.29 ± 0.0010</td><td>0.23 ± 0.0050</td><td>0.20 ± 0.0077</td></tr>
+<tr><td>70–79歳・重度</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>80–89歳・なし</td><td>0.32 ± 0.0004</td><td>0.34 ± 0.0039</td><td>0.29 ± 0.0092</td></tr>
+<tr><td>80–89歳・軽中等度</td><td>0.30 ± 0.0007</td><td>0.24 ± 0.0044</td><td>0.21 ± 0.0087</td></tr>
+<tr><td>80–89歳・重度</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+<tr><td>90–99歳・なし</td><td>0.41 ± 0.0011</td><td>0.36 ± 0.017</td><td>0.39 ± 0.066</td></tr>
+<tr><td>90–99歳・軽中等度</td><td>0.29 ± 0.0013</td><td>0.24 ± 0.012</td><td>0.27 ± 0.030</td></tr>
+<tr><td>90–99歳・重度</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+</tbody></table></div>
+<p><strong>5年後の死亡確率</strong></p>
+<div class="tw"><table>
+<thead><tr><th>2018年の年齢とベースライン障害グレード</th><th>対照</th><th>ICU-MV</th><th>ICU+MV</th><th>超過死亡（ICU+MV − 対照）</th></tr></thead>
+<tbody>
+<tr><td>60–69歳・なし</td><td>0.04 ± 0.0002</td><td>0.18 ± 0.0043</td><td>0.26 ± 0.0092</td><td>+0.22</td></tr>
+<tr><td>60–69歳・軽中等度</td><td>0.34 ± 0.0020</td><td>0.54 ± 0.0120</td><td>0.54 ± 0.0150</td><td>+0.20</td></tr>
+<tr><td>60–69歳・重度</td><td>0.58 ± 0.0029</td><td>0.71 ± 0.0130</td><td>0.72 ± 0.0140</td><td>+0.14</td></tr>
+<tr><td>70–79歳・なし</td><td>0.09 ± 0.0003</td><td>0.24 ± 0.0042</td><td>0.32 ± 0.0092</td><td>+0.23</td></tr>
+<tr><td>70–79歳・軽中等度</td><td>0.42 ± 0.0012</td><td>0.53 ± 0.0072</td><td>0.58 ± 0.0120</td><td>+0.16</td></tr>
+<tr><td>70–79歳・重度</td><td>0.67 ± 0.0016</td><td>0.75 ± 0.0071</td><td>0.78 ± 0.010</td><td>+0.11</td></tr>
+<tr><td>80–89歳・なし</td><td>0.23 ± 0.0005</td><td>0.37 ± 0.0061</td><td>0.39 ± 0.015</td><td>+0.16</td></tr>
+<tr><td>80–89歳・軽中等度</td><td>0.52 ± 0.0010</td><td>0.60 ± 0.0066</td><td>0.63 ± 0.013</td><td>+0.11</td></tr>
+<tr><td>80–89歳・重度</td><td>0.77 ± 0.0010</td><td>0.81 ± 0.0056</td><td>0.84 ± 0.0092</td><td>+0.07</td></tr>
+<tr><td>90–99歳・なし</td><td>0.54 ± 0.0016</td><td>0.58 ± 0.025</td><td>0.57 ± 0.087</td><td>+0.03</td></tr>
+<tr><td>90–99歳・軽中等度</td><td>0.71 ± 0.0015</td><td>0.76 ± 0.015</td><td>0.75 ± 0.034</td><td>+0.04</td></tr>
+<tr><td>90–99歳・重度</td><td>0.88 ± 0.0009</td><td>0.90 ± 0.0082</td><td>0.91 ± 0.017</td><td>+0.03</td></tr>
+</tbody></table></div>
+<p>（超過死亡の列は原表にはなく、本ノートで対照との差を計算して追記したもの）</p>
+<ul><li>超過死亡は<strong>ベースラインの障害が重いほど小さくなり、年齢が上がるほど小さくなる</strong>という二重の勾配を示す。最大が60-79歳・障害なしの0.22〜0.23、最小が90代の0.03〜0.04。</li><li>ICU前の状態が悪いほど「ICUに入ったこと自体の上乗せ」は相対的に小さくなる。すでに高い基礎リスクに埋もれるためである。</li></ul>
+<h3>9. 結果 — 性差（Table 3）</h3>
+<p>女性のハザード比を、状態間の遷移ごとに算出（性を単独共変量としてモデルに投入）。</p>
+<h4>Table 3. 女性のハザード比（95%信頼区間）— 機能障害グレード間および死亡への遷移</h4>
+<div class="tw"><table>
+<thead><tr><th>コホート</th><th>2018年の年齢</th><th>障害なし→軽中等度</th><th>障害なし→重度</th><th>障害なし→死亡</th><th>軽中等度→重度</th><th>軽中等度→死亡</th><th>重度→死亡</th></tr></thead>
+<tbody>
+<tr><td>ICU入室なし（対照）</td><td>60–69歳</td><td>0.97（0.96–0.99）</td><td>0.66（0.64–0.69）</td><td>0.44（0.44–0.45）</td><td>0.79（0.76–0.81）</td><td>0.66（0.64–0.69）</td><td>0.82（0.79–0.84）</td></tr>
+<tr><td>対照</td><td>70–79歳</td><td>1.28（1.27–1.29）</td><td>0.70（0.68–0.71）</td><td>0.48（0.48–0.49）</td><td>0.72（0.71–0.73）</td><td>0.51（0.50–0.53）</td><td>0.71（0.70–0.73）</td></tr>
+<tr><td>対照</td><td>80–89歳</td><td>1.37（1.35–1.38）</td><td>0.78（0.76–0.80）</td><td>0.54（0.53–0.56）</td><td>0.75（0.74–0.76）</td><td>0.51（0.50–0.53）</td><td>0.69（0.68–0.70）</td></tr>
+<tr><td>対照</td><td>90–99歳</td><td>1.22（1.19–1.25）</td><td>1.04（0.98–1.10）</td><td>0.69（0.65–0.73）</td><td>0.89（0.87–0.91）</td><td>0.63（0.60–0.66）</td><td>0.74（0.73–0.76）</td></tr>
+<tr><td>ICU入室・人工呼吸なし</td><td>60–69歳</td><td>1.25（1.09–1.42）</td><td>1.39（1.07–1.79）</td><td>0.70（0.59–0.82）</td><td>0.72（0.61–0.86）</td><td>0.78（0.65–0.94）</td><td>0.99（0.87–1.14）</td></tr>
+<tr><td>ICU-MV</td><td>70–79歳</td><td>1.30（1.20–1.42）</td><td>0.84（0.68–1.04）</td><td>0.74（0.65–0.84）</td><td>0.87（0.78–0.97）</td><td>0.61（0.53–0.70）</td><td>0.83（0.76–0.90）</td></tr>
+<tr><td>ICU-MV</td><td>80–89歳</td><td>1.37（1.24–1.51）</td><td>0.73（0.58–0.93）</td><td>0.58（0.48–0.69）</td><td>0.80（0.73–0.88）</td><td>0.60（0.52–0.68）</td><td>0.69（0.65–0.74）</td></tr>
+<tr><td>ICU-MV</td><td>90–99歳</td><td>1.44（0.96–2.16）</td><td>0.99（0.45–2.19）</td><td>1.40（0.61–3.22）</td><td>0.96（0.72–1.27）</td><td>0.55（0.39–0.78）</td><td>0.75（0.64–0.87）</td></tr>
+<tr><td>ICU入室・人工呼吸あり</td><td>60–69歳</td><td>1.38（1.12–1.69）</td><td>0.93（0.63–1.37）</td><td>0.80（0.63–1.01）</td><td>0.82（0.66–1.04）</td><td>0.81（0.63–1.03）</td><td>0.88（0.75–1.03）</td></tr>
+<tr><td>ICU+MV</td><td>70–79歳</td><td>1.30（1.11–1.53）</td><td>0.92（0.63–1.34）</td><td>0.69（0.55–0.87）</td><td>0.73（0.62–0.87）</td><td>0.77（0.63–0.93）</td><td>0.83（0.74–0.94）</td></tr>
+<tr><td>ICU+MV</td><td>80–89歳</td><td>1.69（1.33–2.15）</td><td>0.69（0.40–1.21）</td><td>0.66（0.45–0.97）</td><td>0.94（0.78–1.14）</td><td>0.80（0.63–1.02）</td><td>0.67（0.60–0.76）</td></tr>
+<tr><td>ICU+MV</td><td>90–99歳</td><td>1.91（0.55–6.64）</td><td>0.32（0.01–61.8）</td><td>0.19（0.03–1.08）</td><td>1.05（0.56–1.95）</td><td>0.78（0.27–2.29）</td><td>0.82（0.58–1.16）</td></tr>
+</tbody></table></div>
+<p>読み取り：</p>
+<ul><li><strong>障害なし→軽中等度障害</strong>：ICU曝露にかかわらず、<strong>70歳以上のほぼ全群で女性が高リスク</strong>（対照 1.22〜1.37、ICU-MV 1.30〜1.44、ICU+MV 1.30〜1.91）。唯一1未満なのは対照の60-69歳（0.97、95%CI 0.96–0.99）。ICU生存者では60代でもすでに1を超える（ICU-MV 1.25、ICU+MV 1.38）。</li><li><strong>死亡への遷移</strong>：女性のHRはほぼすべて1未満で、<strong>男性が5年追跡中に死亡するリスクが高い</strong>。障害なしからの死亡で対照は0.44〜0.69、機能水準に依存せず一貫している。</li><li><strong>障害なし→重度障害</strong>：ほとんどが1未満（女性で低い）。例外はICU-MVの60-69歳（1.39、95%CI 1.07–1.79）。</li><li>90代のICU+MV群は信頼区間が極端に広い（障害なし→重度で0.32、95%CI 0.01–61.8）。この群のnは33人で、点推定を臨床解釈に用いるべきでない。</li><li>著者はこの性差を、老化の前臨床研究の知見（引用28）、女性で大きい「健康寿命と寿命のギャップ」（引用29）、女性がPICSのリスク因子であるという先行研究（引用30）と整合する所見と位置づけている。</li></ul>
+<h3>10. 考察 — 著者の論点</h3>
+<p><strong>データの強みと一般化可能性</strong></p>
+<ul><li>サンプルはドイツの当該年齢人口の約7人に1人を含む。機能能力のデータは2017年から実施されている全国的な要介護認定の枠組みで収集され、その6ドメインは「内在的能力（intrinsic capacity）」の評価に含まれるものと類似する広い範囲を持つ（引用20、23）。</li><li>完全性と正確性は金銭的インセンティブと定期監査で担保される。感度分析（2019年コホート）により主要所見が時間の小さなずれに対して不変であることが示された。</li><li>著者の主張：高齢ICU生存者と一般人口の競合アウトカムを縦断比較した<strong>初の研究</strong>。規模と、標準化された全国的な保健・社会ケア制度に埋め込まれている点から、少なくともドイツおよび類似の医療制度を持つ国での一般化可能性は妥当と考えられる。</li></ul>
+<p><strong>選択の方向が逆向きに2つ働いている</strong></p>
+<ul><li>重症疾患は生理的脆弱性を最も厳しく試すイベントであり（引用24）、最も脆弱な患者はICUを生き延びる可能性が最も低い（引用25）。したがって「6か月以上生存した」患者は、入室した重症患者のなかでも<strong>脆弱性が低い側</strong>に偏っている（＝ICU生存者側が良く見えるバイアス）。</li><li>一方、可逆的な重症疾患を持つ高齢者の一部はICUに入室せずに死亡し、一般人口側の死亡を（わずかとはいえ）押し上げている（＝対照側が悪く見えるバイアス）。</li><li><strong>この2つの選択は逆向きに働くにもかかわらず、60〜89歳では5年を通じてICU生存者の死亡が一貫して高かった</strong>。著者はこれを、重症疾患の長期にわたる影響を示唆する所見としている。</li><li>ただし観察研究であり、肥満（引用26）のような未知の交絡や、重症疾患に至る感染曝露のような予測不能・偶発的因子がある。因果は確立できず、報告された効果量は残余交絡の影響を受けうる。ICUへのアクセスをランダム化する確認的RCTは深刻な倫理的懸念に直面するため、リアルワールドデータの解析が最良の選択肢となる。</li></ul>
+<p><strong>ベースライン機能と年齢の効果</strong></p>
+<ul><li>既存の機能障害は、ICU生存者と一般人口の両方で、同年齢の障害なし群に比べて死亡を増やした。これはフレイルとともに生きる人の寿命に対する生理的脆弱性の影響と整合する（引用8）。</li><li>差は加齢とともに縮まり、90代で死亡軌道が合一した。90代のnは少なく信頼帯は広いが、著者は「非常に高齢であることが課す生物学的限界が、最終的に重症疾患の長期影響を均してしまう」と解釈する。加えて、90代でICUに入る人には生理的負荷に耐えられる人が選ばれているという選択も差を最小化しうる。より粒度の高い個人レベルデータを持つ将来の研究が必要。</li></ul>
+<p><strong>機能低下の飽和効果</strong></p>
+<ul><li>ベースライン障害のないICU生存者は79歳までは一般人口より機能喪失確率が高い。一方、既存の軽中等度障害を持つ70〜89歳のICU生存者では、機能低下確率が一般人口より持続的に低かった。</li><li>著者はこれを<strong>飽和効果</strong>とし、この群ではさらなる低下の次に来る最も可能性の高い状態が死亡であるためと説明する（引用17）。</li></ul>
+<p><strong>ACPへの応用</strong></p>
+<ul><li>機能低下と死亡のリスクについて堅牢な情報を提供することで、現実的な期待を育て、ACPの価値を高められる（引用8）。医師個人の経験に基づく長期予測は精度を欠くことが知られている（引用33）。</li><li>本研究では、既存の軽中等度障害を持つ群のように、ICU後の機能低下リスクが一般人口を上回らないサブグループがあった。この群では「ICUの良い転帰」の議論を<strong>生存期間の問題に絞れる</strong>。</li><li>対照的に、ベースライン障害のない若年側の生存者に見られた過剰な機能低下リスクは、ICU入室の自己認識上の利益について<strong>両価的な感情を生じさせうる</strong>。将来の疾病時に得られる追加情報を、生命維持治療の範囲の決定に取り込む必要があり、これには<strong>時間限定トライアル（time-limited trial）</strong>による急性状態の重症度評価が関わりうる（引用34）。</li></ul>
+<p><strong>60代・70代への介入の可能性</strong></p>
+<ul><li>60代・70代でベースライン障害のないICU生存者と一般人口の「機能維持の差」は、重症疾患後の機能喪失を予防・遅延させる方法への問いを提起する。この比較的若いコホートで障害の負担を減らせれば、長期的には医療システムに相当な節約をもたらしうる。</li><li>サバイバーシップ・プログラムの枠組みでこれらの患者に最適な支援を提供することは、集中治療医学の研究優先課題になっている。とくにプライマリケアと老年医学との協働が重要（引用5、35）。</li><li>特定の介入の有効性のエビデンスはなお乏しいが（引用8）、最近の調査では「早期の離床と、高齢患者の速やかな回復を促す介入は可能な限り早く始めるべき」という専門家の合意が得られている（引用5）。継続ケアの堅牢な計画には、利用可能な医療資源の慎重な分析と、その公平な配分についての議論が必要。</li></ul>
+<p><strong>先行研究との関係</strong></p>
+<ul><li>5年以上の機能軌道を調べた研究は他にもあり、サンプルは小さいものの、人口対照と比べて生存患者に長期の身体的障害が残ることを報告している（引用36〜38）。ただしサブグループ解析（とくに超高齢者）を行っておらず、死亡と機能低下の競合リスクの軌道を得るために多状態モデルを使ってはいなかった。</li><li>70歳以上の機能軌道の包括的研究（Ferrante ら、引用39）は既存の障害が高い死亡と持続的障害に関連することを示しており、本研究は多ドメイン評価に基づく多状態モデルでこれを確認した。加えて年齢別サブグループ解析により、ベースライン機能に依存した加齢の差別的影響を描き出せた。</li></ul>
+<p><strong>著者の挙げた限界（5点）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>観察デザイン</td><td>因果の結論は導けない</td></tr>
+<tr><td>2</td><td>後ろ向き・施設間差</td><td>ICU入室基準が、当該保険加入者を扱う多数の病院間で異なっていた可能性</td></tr>
+<tr><td>3</td><td>機能評価に申請が必要</td><td>相当な金銭的インセンティブがあるとはいえ、十分な資源を持つ人など一部の該当者は申請しなかった可能性</td></tr>
+<tr><td>4</td><td>追加変数が取れない</td><td>プライバシー規制や人口レベルでの完全データ収集の困難のため、社会経済情報など長期予後に影響しうる患者特性を解析できなかった</td></tr>
+<tr><td>5</td><td>モデルサイズの制約</td><td>計算効率のため多状態モデルを縮小した。より大きく粒度の高いモデルなら障害の動態をより詳細に見られたはず</td></tr>
+<tr><td>5補</td><td>一般化可能性</td><td>他の医療制度、とくに低・中所得国との構造的差異により一般化可能性が影響を受けうる</td></tr>
+</tbody></table></div>
+<p><strong>結論（原文）</strong></p>
+<ul><li>リアルワールドデータに基づき、ICU入室に至る重症疾患は高齢生存者において一般人口の同年代と比べて長期に影響を及ぼすことを示した。この差別的影響は年齢と既存の機能障害の程度とともに減衰する。これらの所見はACPに資し、高齢患者のICU後の長期アウトカムを改善する介入のベンチマークに使えるだろう。</li></ul>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<p><strong>(1) 6か月ランドマークの外側に「消えた17,098人」がいる</strong></p>
+<ul><li>最終解析対象3,261,169人から、対照3,203,630人とICU生存者40,441人を引くと<strong>17,098人が残る</strong>。論文の記述からは、この差は「2018年にICU入室したが6か月以内に死亡した患者」に相当すると読める。</li><li>そうであれば2018年のICU入室者は57,539人で、<strong>6か月死亡は17,098人＝29.7%</strong>になる。この29.7%は本研究のどの図表にも現れない。ICUに入るかどうかの意思決定を支える最も大きな数字が、デザイン上除外されている。</li><li>実践上の含意：ACPで本研究の数字（例「元気な60代なら5年後の死亡は26%」）を使うときは、その前に「まず入室後6か月を越えられるかどうか」という約7割の関門があることを併せて伝えないと、期待値を大きく誤らせる。</li><li>なお6か月ランドマーク自体は不死時間バイアスを避ける正しい設計であり、批判すべきは設計ではなく「解釈の際に前段の死亡が見えないこと」である。</li></ul>
+<p><strong>(2) 「機能低下」は行政上の要介護度の悪化であって、臨床的機能ではない</strong></p>
+<ul><li>アウトカムは Pflegegrad の悪化＝要介護認定の区分変更である。認定を受けるには本人・家族による申請が必要で、著者自身が限界3として認めている通り、資源が十分な人ほど申請しない可能性がある。</li><li>ICU生存者は退院時に医療・介護と接点が濃く、申請を勧められやすい。一方で一般人口は自発的に申請する必要がある。<strong>この検出のされやすさの差が、ICU生存者側の機能低下を高く見せる方向のバイアスになりうる</strong>。著者はこの方向のバイアス（検出バイアス）を限界として明示していない。</li><li>逆に、要介護認定は「6か月以上続くと見込まれる障害」を対象とするため、6か月未満で回復する軽度のPICSは丸ごと拾えない。これは差を小さくする方向に働く。</li></ul>
+<p><strong>(3) 「機能改善をモデルから除外した」ことの代償</strong></p>
+<ul><li>改善は一般人口で0.3%未満、ICU生存者で1.9%未満だったため除外された。<strong>ICU生存者は改善が6倍以上多い</strong>という事実そのものが、リハビリテーションの効果を論じるうえで重要な情報だが、モデルからは消えている。</li><li>結果として、モデル上は状態が一方向にしか進まないため、機能維持（steady state）確率は「一度も悪化しなかった人」に限定される。実際には「悪化して戻った人」がいてもモデルは戻れない。ICU生存者の機能維持確率が体系的に過小推定されている可能性がある。</li></ul>
+<p><strong>(4) 「重度障害では機能低下がn/a」というモデル構造が表の見た目を歪める</strong></p>
+<ul><li>Table 2 で60-69歳の機能維持確率が軽中等度0.41、重度0.42と、<strong>重度の方がわずかに高い</strong>。一見すると「重度の人の方が状態を保ちやすい」と読めるが、これはモデル構造による見かけの現象である。</li><li>軽中等度からは「重度へ悪化」と「死亡」の2つの出口があるが、重度からは「死亡」の1つしかない。したがって「初期状態を保つ」の定義自体が両者で違う。同じ列に並べて比較してはならない数字である。JCで最も引っかかりやすい罠。</li></ul>
+<p><strong>(5) 90代の推定は数字として使えない</strong></p>
+<ul><li>ベースライン障害なしの90-99歳はICU-MVでn=204、ICU+MVで<strong>n=33</strong>。Table 3のICU+MV 90-99歳の「障害なし→重度」HRは0.32（95%CI 0.01–61.8）で、信頼区間が4桁近くにまたがる。</li><li>「90代では差が消える」という本研究の目玉のメッセージの一端は、<strong>差が本当にないのか、検出力がないだけなのかを本研究では区別できない</strong>。Fig. 2最下段の信頼帯が広大であることがそれを示している。著者も「小さなn」を認めているが、Abstractや Take-home message では「差が消える」と断定的に書かれている。この温度差はJCで指摘すべき点。</li></ul>
+<p><strong>(6) ICU-MV群の異質性</strong></p>
+<ul><li>「ICU入室・侵襲的人工呼吸なし」は請求コードOPS 8-980ベースで、術後の一泊管理から高流量酸素・NPPVを要した患者、循環作動薬を要した患者までを一括している。日本のICU管理料と同じ問題で、この群の重症度分布は極めて広い。</li><li>逆に「ICU入室・侵襲的人工呼吸あり」も、麻酔からの覚醒待ちの数時間の人工呼吸と、2週間の人工呼吸を区別しない。<strong>人工呼吸日数・SOFA・入室理由・入室期間のいずれも解析に入っていない</strong>。「人工呼吸の有無で軌道が分かれるのは70歳未満・障害なしだけ」という所見は、この粗い曝露定義の下での結論である。</li></ul>
+<p><strong>(7) 内容の不整合と表記の細部</strong></p>
+<ul><li>本文は「超過死亡のピークは約0.2」と書くが、Table 2から計算すると60-69歳で0.22、70-79歳で0.23。丸めの方向としては控えめだが、Abstractの「peaked at approximately 0.2」は最大値そのものではない。</li><li>本文は「軽中等度障害を持つ70代と80代でICU生存者の機能低下が低い」と述べるが、Table 2を見ると60-69歳の軽中等度でも対照0.24 対 ICU 0.20と同じ向きである。飽和効果は60代から始まっているように読める。</li><li>Table 1の「追跡終了時」の%は各時点の生存者を分母にしているため、ベースラインと直接比較できない（例 対照の障害なし60-69歳が40.1%→43.7%と増えているのは、障害を持つ人が多く死亡したことによる見かけの上昇）。この列を「機能が改善した」と誤読しないこと。</li></ul>
+<p><strong>(8) 対照群に「入院したがICUに入らなかった人」が含まれる</strong></p>
+<ul><li>論文は明示的に「入院はしたがICUに入らなかった人は対照群に入る」と述べている。すなわち対照は「健康な高齢者」ではなく「2018年にICUに入らなかったすべての高齢者」であり、重い病気で入院した人も含む。</li><li>これは対照を悪く見せる方向のバイアス（＝ICUの上乗せ効果を過小評価する方向）で、結論を保守的にする。この点は本研究の結論を強める要素として評価できる。</li></ul>
+<p><strong>(9) 日本への外挿</strong></p>
+<ul><li>ドイツと日本は要介護認定制度・国民皆保険という点で構造がよく似ており、限界5（低・中所得国への一般化）の懸念は日本には当たらない。</li><li>一方で日本のICUは在室期間が欧米より短く、persistent critical illnessの発症点が観察されないほどである（<span class="wl">日本のICUではpersistent critical illnessの発症点が観察されない（JIPAD 28万例・101ICU・LancetRegHealthWP2025）</span>）。曝露の中身が違うため、超過死亡の絶対値をそのまま日本に持ってくることはできない。</li><li>日本側の対応データとしては、<span class="wl">日本のICUの高齢者 — 80代の40%・90代の53%は自宅に帰らない（JIPAD 23万例・ICM2024）</span>（退院先という短期指標）があるが、退院後の要介護度の縦断追跡は行われていない。<strong>JIPADと介護保険データを連結すれば本研究の日本版が作れる</strong>。JIPAD×DPC連結（<span class="wl">DPCデータはICU研究に使えるか — JIPADを正解基準にした14070例の検証（JIPAD-DPCプロジェクト・JEpidemiol2026）</span>）の次の一手として筋が通る。</li></ul>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>重症疾患後のアウトカム総説</td><td>Herridge MS, Azoulay É. N Engl J Med 2023;388:913–924</td></tr>
+<tr><td>4</td><td>高齢患者のICU予後予測のナラティブレビュー</td><td>Beil M, Moreno R, Fronczek J, et al. Ann Intensive Care 2024;14:97</td></tr>
+<tr><td>5</td><td>超高齢者のICU管理に関するESICM合意勧告（本研究の最終著者が第一著者）</td><td>Beil M, Alberto L, Bourne RS, et al. Intensive Care Med 2025;51:287–301</td></tr>
+<tr><td>7</td><td>RECOVERプログラム — 7日以上人工呼吸後1年の障害リスク群</td><td>Herridge MS, Chu LM, Matte A, et al. Am J Respir Crit Care Med 2016;194:831–844</td></tr>
+<tr><td>8</td><td>高齢者のフレイル総説</td><td>Kim DH, Rockwood K. N Engl J Med 2024;391:538–548</td></tr>
+<tr><td>9</td><td>FORECAST — 重症患者のフレイル・アウトカム・回復の前向き多施設研究</td><td>Muscedere J, Bagshaw SM, Kho M, et al. Intensive Care Med 2024;50:1064–1074</td></tr>
+<tr><td>10</td><td>ICU生存後5年の死亡と病院費用（スコットランド）</td><td>Lone NI, Gillies MA, Haddow C, et al. Am J Respir Crit Care Med 2016;194:198–208</td></tr>
+<tr><td>12</td><td>年齢・フレイル・多疾患併存がICU介入の効果に及ぼす影響（RCTの系統的レビュー）</td><td>Perrella A, Geen O, Ahuja M, et al. Crit Care Med 2024;52:e463–e472</td></tr>
+<tr><td>15</td><td>高齢重症患者の前向き観察研究では同意取得自体が交絡になる</td><td>Flaatten H, Guidet B, Jung C, et al. PLoS One 2022;17:e0276386</td></tr>
+<tr><td>17</td><td>英国プライマリケアのフレイル遷移と有病率（飽和効果の根拠）</td><td>Walsh B, Fogg C, Harris S, et al. Age Ageing 2023;52:afad058</td></tr>
+<tr><td>19</td><td>ドイツの要介護グレード（Pflegegrad）の公式解説</td><td>Federal Ministry of Health 2025（gesund.bund.de）</td></tr>
+<tr><td>20</td><td>要介護認定の実施方法に関する公式文書</td><td>Association of Medical Advisory Services 2025</td></tr>
+<tr><td>21</td><td>多状態モデルのRパッケージ msm（本研究の解析基盤）</td><td>Jackson C. J Stat Software 2011;38:1–28</td></tr>
+<tr><td>23</td><td>内在的能力（intrinsic capacity）と機能低下・死亡の関連（系統的レビュー・メタ解析）</td><td>Sánchez-Sánchez JL, Lu WH, Gallardo-Gómez D, et al. Lancet Healthy Longev 2024;5:e480–e492</td></tr>
+<tr><td>24</td><td>加齢生理と集中治療</td><td>Darden DB, Moore FA, Brakenridge SC, et al. Crit Care Clin 2021;37:135–150</td></tr>
+<tr><td>25</td><td>CFSによる高齢急性ICU患者の死亡予測（個別患者データのメタ解析）</td><td>Bruno RR, Wernly B, Bagshaw SM, et al. Ann Intensive Care 2023;13:37</td></tr>
+<tr><td>29</td><td>183カ国の健康寿命と寿命のギャップ（女性で大きい）</td><td>Garmany A, Terzic A. JAMA Netw Open 2024;7:e2450241</td></tr>
+<tr><td>30</td><td>集中治療医学における性差・ジェンダー差</td><td>Merdji H, Long MT, Ostermann M, et al. Intensive Care Med 2023;49:1155–1167</td></tr>
+<tr><td>33</td><td>ICU医は重症生存者の長期予後を正しく見積もれない</td><td>Soliman IW, Cremer OL, de Lange DW, et al. J Crit Care 2018;43:148–155</td></tr>
+<tr><td>34</td><td>時間限定トライアルの定義（ATS公式ワークショップ報告）</td><td>Kruser JM, Ashana DC, Courtright KR, et al. Ann Am Thorac Soc 2024;21:187–199</td></tr>
+<tr><td>35</td><td>多疾患併存の重症生存者には別のケアモデルが必要か</td><td>Stewart J, Bradley J, Smith S, et al. Crit Care 2023;27:485</td></tr>
+<tr><td>36</td><td>ICU後5年のQOL（コホート研究）</td><td>Cuthbertson BH, Roughton S, Jenkinson D, et al. Crit Care 2010;14:R6</td></tr>
+<tr><td>37</td><td>ICU生存者の健康関連QOL — 10年後</td><td>Hofhuis JGM, Schrijvers AJP, Schermer T, Spronk PE. Sci Rep 2021;11:15189</td></tr>
+<tr><td>38</td><td>長期ICU滞在 対 短期滞在の5年死亡・罹病（傾向スコアマッチ）</td><td>Hermans G, Van Aerde N, Meersseman P, et al. Thorax 2019;74:1037–1045</td></tr>
+<tr><td>39</td><td>重症疾患前後の高齢者の機能軌道（本研究が多状態モデルで確認した先行研究）</td><td>Ferrante LE, Pisani MA, Murphy TE, et al. JAMA Intern Med 2015;175:523–529</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ドイツの公的保険326万人の全数データで、ICU入室後6か月を生き延びた高齢者40,441人を同年齢・同機能水準の一般人口と5年間比べると、<mark class="hl">重症疾患の影響は5年後もなお残り、その上乗せの不利益が最大なのは「入室前に元気だった60〜79歳」（超過死亡0.22〜0.23）で、90代では差が消えた</mark>。 <mark class="hl">退室後フォローの優先順位を「重症度」ではなく「入室前ADL自立×60〜79歳」で切り直す</mark>。この群は5年後に自立して生きている確率が0.92（一般人口）→0.56（人工呼吸を受けた生存者）まで落ち、一般人口との差＝取り戻せる余地が最も大きい。 <mark class="hl">90代の家族面談では「ICUに入ったこと自体が将来を悪くする」という説明は本研究では支持されない</mark>（5年死亡 0.54 対 0.57〜0.58）。語るべきは年齢そのものの限界。 <mark class="hl">軽中等度の要介護がある70〜80代では、面談の論点を「どこまで衰えるか」から「どれだけの時間か」に絞れる</mark>（機能低下確率はICU生存者の方が低い＝飽和効果。良い意味ではない）。 <mark class="hl">入室時に「入室前の要介護度」を必ず記録する</mark>。ドイツのPflegegradは日本の要介護認定に相当し、JIPADに乗せられればこの解析の日本版が作れる。</p>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>使うときの注意 本研究の数字は<mark class="hl">「入室後6か月を越えた人」の話であり、その手前に約30%の6か月死亡（推計17,098／57,539人）が隠れている</mark>。ACPで5年死亡を語る前に、まず前段の関門を伝えること。また<mark class="hl">90代で「差が消える」のは、差がないのか検出力がないのかを本研究では区別できない</mark>（ベースライン障害なしのICU+MV群はn=33、一部のハザード比の95%CIは0.01–61.8）。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
