@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>急性呼吸不全の人工呼吸 — モード選択と設定パラメータの推奨更新（独墺瑞S3ガイドライン2025・Respiration2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="000549732.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">急性呼吸不全の人工呼吸 — モード選択と設定パラメータの推奨更新（独墺瑞S3ガイドライン2025・Respiration2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Hohmann F, Fichtner F, Becher T, Schaedler D, Putensen C, Muders T, Schroeder I, Karagiannidis C, Wrigge H, Berger D, Grupp M, Grundeis F, Buenger V, Sachkova A, Henkel S, Habicher M, Sander M, Laudi S, Weber-Carstens S, Moerer O, on behalf of the Guideline group. Respiration. 2026;105(7):782-798. DOI: 10.1159/000549732</dd><dt>掲載誌</dt><dd>Respiration（2025-12-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1159/000549732" target="_blank" rel="noopener">doi.org/10.1159/000549732</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Clinical Guideline for Treating Acute Respiratory Insufficiency with Invasive Ventilation and Extracorporeal Membrane Oxygenation: Updated Evidence-Based Recommendations for Choosing Modes and Setting Parameters of Mechanical Ventilation</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>中等症〜重症ARDSの早期筋弛緩を「原則やらない」側に振り切れる</strong>：2017年版は重症ARDSだけ早期自発呼吸の例外にしていたが、今回は ROSE 試験を根拠に「早期NMBに反対（強い推奨）」へ反転した。当院で ACURASYS 由来の「重症なら48時間シスアトラクリウム」を残しているなら、腹臥位・深鎮静・循環不安定など個別事由がある症例に限定する運用へ書き換える余地がある</li><li><strong>酸素化目標を SpO2 92–96%／PaO2 70–90 mmHg に統一できる</strong>：ICU-ROX・LOCO2 以降、当院でも「低め」と「ふつう」が混在しがち。ガイドラインが明示的に「以前より保守的でない方向へ改めた」と言っているので、指示簿のデフォルト表記を 92–96% に揃えるのが素直。SpO2 100% を放置しないという運用注意もそのまま採用できる</li><li><strong>ΔPの閾値を15→14に下げる</strong>：当院のARDSチェックリストが ΔP≤15 なら 14 に更新。Pplat≤30・VT 6 mL/kg PBW は据え置きで、ΔPが14を超えたらまずVTを下げ、分時換気量は呼吸回数で補う、という手順まで含めて明文化されている</li><li><strong>PEEP滴定は「どれでもよいが、やる」</strong>：FiO2/PEEP表・PV曲線・下降法（global／EIT）・上昇法・食道内圧・肺エコー再エアレーションスコアの6手法が同格の選択肢として表になった。当院で使えるのは表・下降法・食道内圧・肺エコー。EITが無いことは推奨からの逸脱ではない</li><li><strong>APRV/BIPAPは「使ってよいが腕がいる」</strong>：弱い推奨・CoE + にとどまり、機種ごとにBIPAPとAPRVの中身が違う点を実践上の注意として明記している。当院で使うなら「誰が設定してよいか」を決めるのが先</li><li><strong>PAV/PAV+は使わない</strong>：弱い推奨だが反対方向。42%でモード変更が必要になった多施設RCTが根拠</li><li><strong>呼吸回数には推奨が付かなかった</strong>（合意率73%で不成立）。ここは当院のローカルルールで埋めるしかない領域だと認識しておく</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：低VT（6 mL/kg PBW）・Pplat≤30 cmH2O・中等症以上のARDSでの高めPEEPという肺保護換気の骨格は、ARDS Network 以来20年以上動いていない。自発呼吸を早期に許すことが回復に不可欠だという点も広く合意がある</li><li><strong>Unknown</strong>：①中等症〜重症ARDSで自発呼吸をいつ許すか（P-SILIのリスクは予測できない）②PEEPの個別化戦略（ΔP最小化・食道内圧・EIT）が標準のFiO2/PEEP表より患者アウトカムを改善するか③適応型・自動化モードが患者中心のアウトカムを改善するか④最適な呼吸回数</li><li><strong>What's new</strong>：（1）早期NMBの推奨が「重症ARDSでは推奨」から「中等症〜重症ARDSでは反対（強い推奨・CoE +++）」へ反転（2）<strong>世界初</strong>として適応型・自動化換気モード（ASV／INTELLiVENT-ASV、NAVA、PAV）に対する明示的な推奨を発出（3）酸素化目標を SaO2/SpO2 90–94%・PaO2 60–80 mmHg から 92–96%・70–90 mmHg へ緩和（4）ΔP目標を ≤15 から ≤14 cmH2O へ厳格化（5）PEEP滴定の6手法を同格の選択肢として表形式で提示（6）ガイドライン自体を MAGICapp のデジタル形式へ移行</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ドイツ・オーストリア・スイスのS3ガイドライン（2017年初版）が2025年に改訂され、<strong>中等症〜重症ARDSの早期筋弛緩は「反対（強い推奨）」に反転</strong>、代わりに早期の自発呼吸を許すモードが弱く推奨された。加えて<strong>適応型・自動化モードに対する世界初の推奨</strong>（ASV/INTELLiVENT-ASVとNAVAは条件付きで可、PAV/PAV+は反対）が出され、設定は VT 6 mL/kg PBW・Pplat≤30・ΔP≤14・SpO2 92–96% に整理された。</p>
+</div>
+<ul><li>作成主体は D-A-CH の28学会・101名（患者代表を含む）。方法論はGRADE、AWMFが手続きを支援。両ラウンドで75%超の賛成が得られた推奨だけを採択</li><li>文献検索は2023年4月まで（MEDLINE／Embase／Cochrane／各国ガイドラインDB）、高品質文献は推奨確定の2024年6月まで追加。37,057件を同定→3,970全文を精査→最終的に280論文が推奨の根拠</li><li>エビデンスの確実性（CoE）は「高（++++）」から「専門家コンセンサス」まで5段階で報告される</li><li>モード分類（表1）は2017年版を踏襲：<strong>制御換気</strong>（VCV／PCV／PRVC）と<strong>自発呼吸を支援する換気</strong>（一回換気量支援／分時換気量支援／適応型支援）＋ハイブリッド＋特殊モード（HFOV）</li><li>PCV vs VCV は2015年のCochraneメタ解析以降に高品質研究がなく、今回も推奨を出さない。PRVCの比較研究は依然として存在しない</li><li>ARDSにおける自発呼吸の是非は ACURASYS と ROSE の不一致が争点。両試験の標準治療（PEEP水準・鎮静深度）が大きく異なるため<strong>メタ解析での統合を意図的に行わず</strong>、より現代的な ROSE を採用した</li><li>呼吸回数（RR）だけは推奨を出せなかった。「ΔP≤14・Pplat≤30・VT 4–8 mL/kg のもとで pH 7.25–7.40 を達成する最低のRR」という案は賛成73%で、75%の閾値に届かなかった</li><li>モニタリングは、SpO2・心電図・血圧の持続監視（強い推奨・専門家コンセンサス）、挿管時のカプノメトリ/カプノグラフィによるチューブ位置確認（強い推奨・CoE ++）、換気の適切性評価としての使用（弱い推奨・CoE ++）</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>急性呼吸不全（acute respiratory insufficiency, ARI）</strong>は、ガス交換が破綻して低酸素血症（hypoxemic）または高二酸化炭素血症（hypercapnic）を来す状態。ARDSはその中でも両側性の炎症性肺水腫による低酸素性呼吸不全を指す。 <strong>侵襲的人工呼吸</strong>は救命に必須だが、それ自体が肺を傷つける（<strong>VILI／VALI</strong>：ventilator-induced／associated lung injury）。VILIの主な機序は、①過膨張（overdistension）による stress と strain、②虚脱と再開通の繰り返し（cyclic opening and closing）による剪断傷害、③それらが引き起こす全身炎症。 肺保護換気の主要な設定変数は次の通り。</p>
+<ul><li><strong>VT（一回換気量）</strong>：肺にかかる機械的負荷。実体重ではなく <strong>PBW/IBW（predicted／ideal body weight、Devine式）</strong> で計算する。ARDSでは 6 mL/kg PBW 前後</li><li><strong>Pplat（プラトー圧）</strong>：吸気終末に流量ゼロで測る肺胞内圧。≤30 cmH2O</li><li><strong>PEEP（呼気終末陽圧）</strong>：肺胞をリクルートし虚脱を防ぐが、過膨張・血行動態への悪影響・頭蓋内圧上昇のリスクもある</li><li><strong>ΔP（driving pressure、駆動圧）</strong>＝ Pplat − PEEP。換気に参加している肺（baby lung）にかかる stress を近似し、ARDSの死亡と最も強く相関する変数</li><li><strong>I:E比</strong>：吸気時間と呼気時間の比。低酸素性では吸気を延ばして平均気道内圧を上げる、高二酸化炭素性では呼気を延ばして auto-PEEP を防ぐ</li></ul>
+<p><strong>モードの読み方</strong>：制御換気は患者の吸気努力に関係なく機械が全部やる。自発呼吸支援モードは患者のトリガに応じて補助する。さらに、①VT支援（PSV／A-C）、②分時換気量支援（SIMV、APRV/BIPAP）、③適応型支援（ASV、NAVA、PAV、SmartCare）に分かれる。 <strong>登場する主な略語</strong>：NMB＝神経筋遮断薬（筋弛緩）。APRV＝airway pressure release ventilation（高いCPAPを短時間解放する）。BIPAP＝2つの気道内圧レベルを時間で交代させる（どちらのレベルでも自発呼吸可）。ASV＝adaptive support ventilation（呼吸仕事量を最小化するよう機械が自動調整）。NAVA＝横隔膜の電気活動（EAdi）に比例して圧補助する。PAV／PAV+＝流量・容量に比例して補助する。EIT＝電気インピーダンス・トモグラフィ。Pes＝食道内圧。 <strong>GRADEの読み方</strong>：推奨の強さ（強い／弱い／推奨を出さない）は、エビデンスの確実性だけでなく、益害バランス・患者の価値観・資源・公平性・受容性・実行可能性まで含めて決まる。だから「CoEが低くても強い推奨」も「CoEが高くても弱い推奨」もあり得る。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>WHOのデータでは、登録された医学研究の年間数は2000年代初頭から2021年まで一貫して増え続けている。集中治療医学もこの流れの外にはなく、ベッドサイドの臨床医は方法論的な厳密さも質もばらばらな膨大な文献に向き合わされている。そこで、体系的な文献収集・選択・批判的吟味を伴う正式なガイドライン作成の役割が決定的になる。近年、急性呼吸不全に関する各国・国際ガイドラインが相次いで初版発行または改訂されているのもその表れである。</p>
+<p>D-A-CH 圏向けの「急性呼吸不全に対する侵襲的人工呼吸とECMOの診療ガイドライン」は2017年に初版が出され、2025年に改訂された。急性呼吸不全患者の治療経路全体をカバーする、エビデンスに基づく情報・意思決定の枠組みである。</p>
+<p>今回の改訂の引き金になったのは以下の新しい一次研究とメタ解析である。</p>
+<div class="tw"><table>
+<thead><tr><th>引き金となったエビデンス</th><th>内容</th><th>本文中の位置づけ</th></tr></thead>
+<tbody>
+<tr><td>ROSE試験（NEJM 2019）</td><td>中等症〜重症ARDSでのNMB vs 自発呼吸</td><td>早期NMB推奨の反転</td></tr>
+<tr><td>Pitre らのネットワークメタ解析（Chest 2023）</td><td>非侵襲的呼吸補助としてのNIV vs HFNC</td><td>本稿の対象章の外だが改訂の契機</td></tr>
+<tr><td>Dianti らのネットワークメタ解析（AJRCCM 2022）</td><td>ARDSにおける異なるPEEP戦略の比較</td><td>PEEP章の再評価</td></tr>
+<tr><td>COVID-19パンデミックのデータ</td><td>ドイツICUの治療戦略に大きなばらつき（J Clin Med 2021の全国横断オンライン調査）</td><td>実装戦略の強化</td></tr>
+</tbody></table></div>
+<p>改訂に際して、集中治療に関わる全職種の関与を強め、推奨の実装を促す明示的な戦略を作った点も新しい。さらにガイドライン自体をデジタル形式（MAGICapp）へ移行し、エビデンス評価と推奨文言のトレーサビリティを高めた。MAGICapp は各国の学術団体やWHOがガイドライン公開に用いる構造化フォーマットである。</p>
+<p>本稿（英語版ダイジェスト）が扱うのは、「換気モードの選択」と「侵襲的人工呼吸のパラメータ設定」の2章から、<strong>新規の推奨と2017年版から変更された推奨</strong>を中心に選抜したものである。ドイツ語の完全版は AWMF レジスタと MAGICapp で公開されている。なお著者らは、原ガイドラインとの密接な関係上、原文の言い回しをそのまま用いた箇所があるが逐一の引用符は付けていない、と明記している。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：S3レベル（ドイツの最上位グレード）の診療ガイドライン改訂。GRADE準拠。方法論支援は AWMF（ドイツ学術医学会連合）の代表者</li><li><strong>作成主体</strong>：ドイツ・オーストリア・スイスの<strong>28学術団体から101名</strong>。集中治療に関わる全診療科・全職種＋患者代表を含む</li><li><strong>利益相反管理</strong>：委員が申告し、事前に定めた基準で評価。関連するCOIがある者は当該推奨の投票を棄権</li><li><strong>臨床課題の定式化</strong>：PICO形式で臨床的に重要な問いを定義し、それを各データベース用の検索語に翻訳</li><li><strong>文献検索</strong>：MEDLINE、Embase、Cochrane Library、国際ガイドラインDB。<strong>2023年4月まで</strong>が体系的検索の範囲。<strong>推奨が確定する2024年6月まで</strong>は高品質文献を随時追加</li><li><strong>文献選択の階層</strong>（あらかじめ定めた組入・除外基準で多段階）</li></ul>
+<ol><li>各国・国際ガイドラインをまず内容妥当性でスクリーニングし、<strong>AGREE II</strong> で質を評価。現行かつ高品質なガイドラインの該当推奨は採用</li><li>次に現代的なメタ解析・システマティックレビューを内容と質（<strong>SIGN基準</strong>）で評価</li><li>適切な質のメタ解析が無ければRCTを解析</li><li>高品質RCTも無ければ、より低いエビデンスレベルの研究を検討</li></ol>
+<ul><li><strong>エビデンス統合</strong>：全評価をエビデンス表に記録。臨床課題ごとにエビデンスプロファイルを作り、GRADE基準で定性的に格付け。<strong>CoEは5段階</strong>（高「++++」〜専門家コンセンサス）</li><li><strong>文献量</strong>：<strong>37,057件を同定 → 3,970件の全文を解析 → 最終的に280本</strong>が推奨の根拠</li><li><strong>推奨の決定</strong>：evidence-to-decision フレームワークで、益・害・CoE を秤にかけ、「〜を強く推奨する／しない」「〜を弱く推奨する／しない」「推奨を出せない」に分類。加えて患者の選好・必要資源・公平性・受容性・実行可能性も考慮。したがって<strong>推奨の強さはエビデンスの質だけを反映しているわけではない</strong></li><li><strong>投票</strong>：複数回のコンセンサス会議で、①まず全委員個人としての投票、②次に28学会の代表としての2回目の投票。<strong>両ラウンドで75%超の賛成</strong>が得られた場合にのみ採択</li><li><strong>限界（本稿の明示）</strong>：本稿は完全版の一部（新規・変更された推奨）を選抜したダイジェストであり、網羅的な記述はドイツ語完全版にある</li></ul>
+<h3>4. 換気モードの選択</h3>
+<h4>4-1. モード分類は2017年版を踏襲し、制御換気には新しいエビデンスなし</h4>
+<p>初版でガイドラインパネルは、日常臨床で使われる換気モードの包括的な分類を導入した。狙いは用語の統一と、「技術的に客観的な基準」と「臨床的に意味のある分類」の折り合いをつけることだった。「制御換気モード」と「自発呼吸を支援する換気モード」（下位分類＝一回換気量支援・分時換気量支援・適応型支援）、およびハイブリッド／特殊モードという構造は、今回の改訂でも維持されている（下記 表1）。</p>
+<p>制御換気カテゴリには PCV・VCV・PRVC が含まれる。2015年のCochraneメタ解析は急性呼吸不全患者において PCV と VCV のいずれかが明確に優れることを示せず、初版はどちらにも推奨を出さなかった。今回の文献更新でもこの判断を覆すだけの高品質研究は同定されず、<strong>PRVCの比較研究は依然として存在しない</strong>。</p>
+<h4>Table 1. 本ガイドラインが対象とする換気モードの分類（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>大分類</th><th>下位分類</th><th>モード</th><th>略称・メーカー別呼称の例（優先順位なし）</th><th>制御・ターゲティング方式</th></tr></thead>
+<tbody>
+<tr><td>制御換気モード</td><td>—</td><td>量規定換気</td><td>VCV</td><td>セットポイント・ターゲティング：VCVを適用。ターゲットは一回換気量</td></tr>
+<tr><td>制御換気モード</td><td>—</td><td>圧規定換気</td><td>PCV</td><td>セットポイント・ターゲティング：PCVを適用。ターゲットは吸気圧</td></tr>
+<tr><td>制御換気モード</td><td>—</td><td>圧調節量制御換気</td><td>PRVC／Autoflow</td><td>セットポイント＋適応型：VCVに適応的な圧変化を加えたもの</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>一回換気量支援</td><td>補助/調節換気</td><td>A/C、VC-CMV</td><td>セットポイント・ターゲティング：設定した目標変数に基づく（患者トリガの）VCVを適用</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>一回換気量支援</td><td>圧支持換気・補助自発呼吸</td><td>PSV、ASB、PS</td><td>セットポイント・ターゲティング：設定した量の圧補助で自発呼吸を支援</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>一回換気量支援</td><td>可変圧支持</td><td>Noisy PSV、Variable pressure support</td><td>セットポイント・ターゲティング：圧補助レベルを自動的に変動させる</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>分時換気量支援</td><td>量規定同期式間欠的強制換気</td><td>VC-SIMV</td><td>目標一回換気量を確保するようピーク吸気圧を自動調整。設定分時換気量を確保する時間制御の間欠強制吸気</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>分時換気量支援</td><td>圧規定同期式間欠的強制換気</td><td>PC-SIMV</td><td>目標気道内圧を確保するよう一回換気量を自動調整。設定分時換気量を確保する時間制御の間欠強制吸気</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>分時換気量支援</td><td>吸気・呼気の両方で自発呼吸を許す圧規定換気</td><td>APRV、BIPAP、DuoPAP、BiLevel、Bi-Vent</td><td>セットポイント・ターゲティング：時間制御・圧規定で、吸気相・呼気相の双方で自発呼吸が可能</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>適応型支援</td><td>呼吸仕事量の最小化を目指す部分自動化換気</td><td>ASV、WOBOV、AVM-1／AVM-2、AMV</td><td>適応型／最適ターゲティング：肺メカニクスと呼吸仕事量に応じて圧規定または圧支持を可変させる</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>適応型支援</td><td>完全自動化換気</td><td>INTELLiVENT-ASV</td><td>適応型／インテリジェント・ターゲティング：ASVに追加の治療アプローチを組み合わせる</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>適応型支援</td><td>横隔膜電気活動で制御される圧補助換気</td><td>NAVA</td><td>適応型／サーボ・ターゲティング：横隔膜の電気活動で測った呼吸努力に比例した換気圧</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>適応型支援</td><td>圧支持の自動適応</td><td>SmartCare/PS</td><td>患者を目標のコンフォートゾーンに保つよう圧支持を自動調整</td></tr>
+<tr><td>自発呼吸を支援する換気モード</td><td>適応型支援</td><td>（自動化された）流量・容量比例補助換気</td><td>PAV、PPS、Prop. PSV、PAV+、PAPS</td><td>需要または呼吸努力に応じて補助レベルと人工呼吸器の作動を自動調整</td></tr>
+<tr><td>ハイブリッドモード</td><td>—</td><td>例：IMV＋PSV、IMV＋ATC、BIPAP＋PSV、BIPAP＋ATC、PSV＋ATC、PAV＋ATC</td><td>—</td><td>—</td></tr>
+<tr><td>特殊モード</td><td>—</td><td>高頻度振動換気</td><td>HFOV</td><td>高い気道内圧を持続的に維持しながら高頻度・定容量で換気</td></tr>
+</tbody></table></div>
+<p>（原表の注記：明確化のため、優先順位を付けない例示としてメーカー固有の呼称を併記している）</p>
+<h4>4-2. 人工呼吸中の患者に自発呼吸を許すべきか</h4>
+<p>侵襲的人工呼吸を開始した後に取り得る戦略は2つある。深鎮静（必要ならNMB併用）で完全に制御換気するか、程度を変えつつ自発呼吸を許すかである。</p>
+<p>初版では、<strong>重症ARDSを除く</strong>すべての侵襲的人工呼吸患者で早期（48時間未満）に自発呼吸を可能にすることが推奨されていた。この除外は ACURASYS 試験に由来する。同試験は重症ARDSでNMB（＝自発呼吸を排除する戦略）により死亡率が低下することを示していた。</p>
+<p>しかしこの結果は、方法論的により厳密な ROSE 試験では再現されなかった。死亡率はほぼ同一で、重篤な心血管有害事象の発生率はむしろNMB群で高かった。</p>
+<p>これらのRCTのメタ解析を用いた最近の国際ガイドラインは、異なる推奨に至っている。</p>
+<div class="tw"><table>
+<thead><tr><th>ガイドライン</th><th>早期NMBの扱い</th></tr></thead>
+<tbody>
+<tr><td>ESICM（ICM 2023）</td><td>ルーチン使用に反対</td></tr>
+<tr><td>ATS（AJRCCM 2024）</td><td>中等症〜重症ARDSでの早期使用に条件付きで賛成</td></tr>
+<tr><td>本ガイドライン（2025）</td><td>中等症〜重症ARDSでの早期NMBに反対（強い推奨・CoE +++）</td></tr>
+</tbody></table></div>
+<p>本ガイドライングループは、2試験間で標準治療の臨床的中身が大きく異なることを理由に、<strong>エビデンスの統合（メタ解析）を行わないという判断</strong>を下した。ROSE 試験の患者管理（対照群でも高めのPEEP、浅い鎮静）のほうが中等症〜重症ARDSの現代的標準に近く、D-A-CH の医療環境への一般化可能性が高いと考えたためである。ROSE のデータが有益性を示さないどころか潜在的な害を示唆したことから、推奨を変更した。</p>
+<p>自発呼吸そのものについては、近年の複数のメタ解析が、ARDSの有無にかかわらず急性呼吸不全患者で自発呼吸を可能にするモードにより死亡率低下と酸素化改善を一貫して示している（ただし全体としてCoEは極めて低い）。加えて、国際的観察研究 LUNG-SAFE の傾向スコアマッチングによるサブグループ解析では、ARDSにおける早期自発呼吸と人工呼吸期間の短縮に関連が認められた。一方で、過剰な自発呼吸努力が <strong>P-SILI（patient self-inflicted lung injury）</strong> の主要因として議論されている。</p>
+<p>2024年6月のエビデンス解析終了時点で、ARDS患者における早期自発呼吸を直接評価したRCTは同定できなかった。そこでパネルは上記を<strong>間接的エビデンス</strong>とみなし、次の推奨を出した。</p>
+<p>&gt; 急性呼吸不全のすべての患者において、自発呼吸を可能にする換気モードの適用を提案する（弱い推奨・CoE +）。</p>
+<p>ただし、<strong>頭蓋内圧上昇</strong>と<strong>右心不全</strong>の患者群では、自発呼吸の是非を引き続き個別に秤にかけるべきとしている。またP-SILIのリスクが確実には予測できない以上、重度の肺傷害（特に中等症〜重症ARDS）で自発呼吸努力を許す場合には、個々の患者の呼吸メカニクスとガス交換を<strong>綿密かつ詳細に臨床観察する</strong>ことが必要と釘を刺している。</p>
+<p><strong>実践上の考慮</strong>：NMBを避け早期自発呼吸を可能にする戦略は、より浅い鎮静を前提とする。しかし日常臨床では、自己抜管・過剰な自発呼吸努力・患者-人工呼吸器非同調といったリスクに適切に対処し、鎮静深度や換気設定をタイムリーに調整するために、<strong>人員配置の増強が必要になり得る</strong>。さらに患者側の視点として、浅い鎮静下の挿管患者が自発呼吸を受け入れやすくするには、ベッドサイドでの声かけ・傾聴（必要なら文字盤の使用）を通じて個々の選好と不安を定期的に評価し、それに応える必要がある。</p>
+<h4>4-3. 吸気・呼気の両方で自発呼吸を許す圧規定モードを使うべきか</h4>
+<p>この臨床課題が対象とするのは、人工呼吸器の制御が呼吸周期全体を通じて自発呼吸を許す<strong>二相性・分時換気量支援モード</strong>（APRV、BIPAP など）である。PSVのような純粋な一回換気量支援モードとは異なる。</p>
+<p>臨床試験のエビデンスを評価するうえで重要なのは、この問いに関する<strong>エビデンス基盤が主として「APRV vs 他のモード」のRCTとメタ解析に由来する</strong>という点である。しかも試験間でAPRVの具体的なパラメータ設定に相当の異質性がある。加えて、世界の臨床現場でAPRVの定義と典型的な設定について持続的な不確かさがある。</p>
+<ul><li><strong>APRVの原型</strong>：延長した機械的吸気相（機能的には「高いCPAP」に等価）で自発呼吸を許し、これを短時間だけ大気圧まで下げ（release phase）、再び上げる。この上げ下げが機械的補助にあたる。release phase の終了はフロー依存に設定できる（例：ピーク呼気流量の75%）。後続のRCT（推奨の基礎）では、release phase の圧レベルにしばしば最低5 mbar のPEEPが含まれるか、ARDS Network の表または下部変曲点に従って設定されていた</li><li><strong>BIPAPの原型</strong>：2つの陽性気道内圧レベルを時間制御で交代させ、機械的呼気相を長めに取る。この「低いCPAP」レベルでも自発呼吸ができる。現在は同じ基本原理に対して BiLevel・DuoPAP・Bi-Vent など多様な名称のモードが存在する。多くのメーカーはSIMVに似たBIPAPを提供しており、CPAPレベル間の機械的移行を患者トリガできる時間窓を持つ</li></ul>
+<p>APRVを検討したRCT・メタ解析が報告した効果は以下の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>効果量（95%CI）</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>死亡</td><td>RR 0.67（0.48–0.94）</td><td>Lim &amp; Litton, CCM 2019</td></tr>
+<tr><td>人工呼吸期間の短縮</td><td>MD 6.04日（2.12–9.69）</td><td>Carsetti ら, Ann Intensive Care 2019</td></tr>
+<tr><td>ICU在室期間の短縮</td><td>MD 3.94日（1.44–6.45）</td><td>Carsetti ら, Ann Intensive Care 2019</td></tr>
+<tr><td>3日目のP/F比の改善</td><td>WMD 60.4（10.3–110.5）</td><td>Lim &amp; Litton, CCM 2019</td></tr>
+</tbody></table></div>
+<p>これらの効果は、ARDSの有無を問わず複数の最近のメタ解析でおおむね一貫して再現されている。ただし<strong>相当程度、同じ一次研究に依拠している</strong>点は本文が明記している。</p>
+<p>4つのメタ解析を通じて、自発呼吸を許す圧規定モードで重篤な有害事象の有意な増加はなく、特に<strong>気圧外傷（気胸など）の増加もなかった</strong>。ただしCOPDなど慢性閉塞性気道疾患の患者では、動的過膨張（auto-PEEP）に伴う呼吸仕事量の増加・高二酸化炭素血症・血行動態破綻に警戒が必要で、特に高い圧レベルと不十分な呼気時間の組み合わせで問題になる。</p>
+<p>CoEは<strong>極めて低い</strong>と評価された。理由は、小規模・一部単施設・非盲検デザインに由来するバイアスリスク、方法論的・統計学的異質性、そして決定的なこととして<strong>データがAPRV中心であること</strong>（同カテゴリの他モード、例えばBIPAPへの一般化を制限する）。加えて、文献上および臨床現場でのこれらモードの用語的・概念的な異質性も一般化可能性を損なう。したがって推奨は意図的に慎重で、状況と患者に応じた適用を求める形になっている。</p>
+<p>&gt; 急性低酸素性呼吸不全の患者において、禁忌がなければ、吸気・呼気の双方で自発呼吸を許す圧規定換気の使用を検討することを提案する（弱い推奨・CoE +）。</p>
+<p><strong>実践上の考慮</strong>：ICUの人工呼吸器機材という点で資源上の制約はないはずだが、この推奨を安全かつ有益に実装するには、個々の患者に合わせたモードの選択・調整に<strong>呼吸管理の確かな専門性</strong>が要る。モード間の相違、人工呼吸器の機種、その機種固有の実装（BIPAP vs APRV など）の差が大きいためである。</p>
+<h4>4-4. 適応型換気モードを使うべきか（世界初の推奨）</h4>
+<p>本ガイドラインは<strong>初めて</strong>、適応型・自動化換気戦略について3つの詳細な推奨を出した。</p>
+<p><strong>（1）部分的または完全に自動化された換気（ASV／INTELLiVENT-ASV）</strong></p>
+<p>&gt; 使用を検討することを提案する（弱い推奨・CoE +）。</p>
+<p>この格付けの根拠は、異質かつ大半が単施設の研究群である。それらは人工呼吸期間および／またはウィーニング期間の短縮というシグナルを示すが、臨床的意義は不確かで、<strong>死亡率・ICU在室期間・入院期間には一貫した効果がない</strong>。さらに大きな限界として、術後人工呼吸患者を含むことによる<strong>間接性（indirectness）</strong>がある。害のシグナルは観察されなかった。ただしARDS患者では、自動設定に起因する不用意な過膨張を避けるため、<strong>VTとΔPのモニタリング</strong>に特段の注意を払うようパネルが促している。</p>
+<p><strong>（2）横隔膜活動で制御される圧補助モード（NAVA）</strong></p>
+<p>&gt; 急性呼吸不全に対して使用を検討することを提案する（弱い推奨・CoE +）。</p>
+<p>RCTは実施可能性、PSVと比較した患者-人工呼吸器同調の改善、人工呼吸期間短縮のシグナル（<strong>ventilator-free days が平均3.42日多い、95%CI 1.21–5.62日多い</strong>）を示すが、死亡率や人工呼吸期間といった患者に重要なエンドポイントでの有益性は証明されていない。<strong>盲検化の欠如</strong>が主要なバイアス源であり、特に人工呼吸期間は非盲検の担当スタッフが決めるため影響を受ける。加えて、患者-人工呼吸器相互作用のデータの大半が<strong>非侵襲的換気</strong>から得られている点で間接性によりCoEが引き下げられた。</p>
+<p><strong>（3）流量・容量比例補助モード（PAV／PAV+）</strong></p>
+<p>&gt; 使用しないことを提案する（弱い推奨・反対方向・CoE ++）。</p>
+<p>多施設RCTでは総人工呼吸期間その他の臨床アウトカムに利益がない一方、<strong>不耐容が高頻度</strong>（深鎮静の必要・過剰な呼吸努力／頻呼吸・血行動態への影響を含む）で、<strong>42%の症例でモード変更が必要</strong>になった。より古い観察研究でも同様に高い<strong>33%の中止率</strong>が観察されている。パネルは「再現性のある利益がない一方、無視できない害のリスクがある」と判断し、否定的推奨に至った。なお、ガイドラインの文献レビュー完了後に発表された PAV vs PSV のRCT（Bosma ら, NEJM 2025）でも、主要評価項目である人工呼吸期間に両群で有意差はなかった。</p>
+<p>まとめると、自動化モードと神経制御モードは、CoEが極めて低いことと技術的な利用可能性・チームの習熟に留意したうえで<strong>検討してよい</strong>。比例補助モードは急性呼吸不全の治療に<strong>使うべきでない</strong>。</p>
+<p><strong>実践上の考慮</strong>：機器の入手性の制約、調達と職員教育の必要性が推奨をさらに弱める方向に働く。<strong>NAVAは単一の人工呼吸器プラットフォームでしか利用できず、専用の食道（EAdi）カテーテルを要する</strong>のに対し、PSVは広く利用可能で導入も単純である。この差が日常診療における受容性と実行可能性を制限する。</p>
+<h3>5. 人工呼吸器の設定</h3>
+<h4>5-1. ARDSではどのPEEPレベルを選ぶべきか</h4>
+<p>PEEPは急性呼吸不全・ARDSにおける肺保護換気の要である。肺胞リクルートメントを改善し、無気肺を防ぎ、酸素化を高める一方で、過膨張と血行動態破綻のリスクとの釣り合いが必要になる。</p>
+<div class="tw"><table>
+<thead><tr><th>PEEPの利益</th><th>PEEPのリスク</th></tr></thead>
+<tbody>
+<tr><td>挿管・人工呼吸患者の機能的残気量の低下を防ぐ</td><td>換気されている肺領域の過膨張</td></tr>
+<tr><td>無気肺形成を減らす</td><td>死腔の増加</td></tr>
+<tr><td>酸素化と肺胞ガス交換を改善する</td><td>血行動態破綻（心拍出量低下、肺血管抵抗上昇）</td></tr>
+<tr><td>局所および全身の炎症を好ましい方向に修飾し得る</td><td>頭蓋内圧の上昇</td></tr>
+<tr><td>—</td><td>気圧外傷</td></tr>
+<tr><td>—</td><td>細菌トランスロケーションの可能性</td></tr>
+</tbody></table></div>
+<p><strong>リクルートメント／過膨張比は肺病変の分布に依存する。びまん性ARDSはPEEPからより多くの利益を得るが、限局性（focal）ARDSでは過膨張のリスクが高い。</strong></p>
+<p>近年のガイドラインは、臨床適用性という観点で見ると内容が異なり、時に不完全である。例えばESICMガイドラインは中等症/重症ARDSに高PEEPを推奨したが、軽症ARDSには specific な推奨を出していない。すべての国際ガイドラインが「酸素化を最適化しVILIを最小化するようPEEPを個別調整せよ」と強調する一方、具体的な戦略についての推奨は示していない。そこで本ガイドラインは、PEEPのレベルと個別化の戦略に焦点を当ててエビデンスを詳細に再評価した。</p>
+<p>複数のRCTとメタ解析がARDSのPEEP戦略を評価してきた。FiO2/PEEP表を用いた初期の研究は、低一回換気量換気と組み合わせた場合に酸素化の改善と死亡率低下の可能性を示した。高いPEEPは、特に中等症〜重症ARDSで肺胞リクルートメントの増加と関連したが、一過性の血行動態への影響という代償を伴った。</p>
+<p>PEEP滴定の方法には、FiO2/PEEP表、準静的P-V曲線、下降法PEEPトライアル（全体または EIT ベース）、食道内圧（Pes）モニタリング、肺エコーがある。<strong>これらの方法はすべて生理学的な利益をもたらすが、どれか一つが明らかに優れているとは証明されていない。</strong> 下降法PEEPトライアルと Pes ガイド滴定は酸素化とコンプライアンスを改善し得るが、小規模で異質な試験と代替エンドポイントに依るためCoEは全体として低い。メタ解析は、高めのPEEPと低VTを組み合わせると気圧外傷が減り、院内死亡が減る可能性を確認している。</p>
+<p>有害事象はまれかつ可逆的で、それはPEEP調整を血行動態モニタリング下で行う限りにおいてである。すべての方法のエビデンスの質は低〜極めて低く、主たる理由は中等度のバイアスリスク・高い間接性・非一貫性である。したがってパネルはこれらの手技を<strong>同格の選択肢</strong>として表2に列挙することにした。</p>
+<p>&gt; - 軽症ARDSでは、ARDS Network の FiO2/低PEEP表を用いた初期PEEP設定を検討することを提案する（弱い推奨・CoE ++） &gt; - 中等症または重症ARDSでは、より高いPEEPの使用を推奨する（強い推奨・CoE ++++） &gt; - 現在のエビデンスに基づき、中等症または重症ARDSではベッドサイド法によるPEEPの個別滴定を提案する（表2参照）（弱い推奨・CoE +）</p>
+<h4>Table 2. 推奨されるPEEP滴定法とその根拠（弱い推奨・CoE +）（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>方法</th><th>ターゲットとする指標</th><th>手順</th><th>根拠文献</th></tr></thead>
+<tbody>
+<tr><td>FiO2/PEEP表</td><td>酸素化（PaO2/FiO2 または SpO2/FiO2）</td><td>FiO2/低PEEP表に従って初期設定。PaO2/FiO2 &lt;200 mmHg なら高PEEP表に切り替える。臨床的改善があれば高PEEPを継続</td><td>Goligher 2014／Dianti 2022／Briel 2010</td></tr>
+<tr><td>準静的圧-容量曲線</td><td>全体コンプライアンス</td><td>準静的P-V曲線（低流量曲線）で容量依存性コンプライアンスを求め、吸気脚の下部変曲点より2 mbar 高くPEEPを設定</td><td>Amato 1998／Villar 2006／Ranieri 1999</td></tr>
+<tr><td>下降法PEEPトライアル（全体）</td><td>全体コンプライアンス</td><td>24 mbar から開始し、2〜3分ごとに2〜3 mbar ずつ段階的にPEEPを下げる。小さいVTとΔPを維持し、最良のコンプライアンスとなる値を選ぶ（コンプライアンス低下を来さない最低のPEEP）</td><td>Kacmarek 2016／Gernoth 2009</td></tr>
+<tr><td>下降法PEEPトライアル（EIT）</td><td>局所コンプライアンス</td><td>上記と同じ下降法を行い、EITに基づいて過膨張と虚脱が最小になるようPEEPを設定</td><td>Zhao 2019／Hsu 2021／He 2021</td></tr>
+<tr><td>上昇法PEEPトライアル</td><td>全体コンプライアンス</td><td>5 mbar から2 mbar 刻みでPEEPを上げ、コンプライアンスが頭打ちになるまで続ける</td><td>Pintado 2013</td></tr>
+<tr><td>食道内圧（Pes）モニタリング</td><td>呼気終末経肺圧（PTPe）</td><td>PTPe ≈ 0±2 mbar を目標にPEEPを調整。PTPe が陰性ならPEEPを上げ、陽性なら下げる</td><td>Talmor 2008／Beitler 2019／Sarge 2021</td></tr>
+<tr><td>肺エコー</td><td>再エアレーションスコア</td><td>再エアレーションスコアが最小になるようPEEPを調整（片肺6領域。Aプロファイル＝0点、分離したBライン＝1点、融合したBライン＝2点、肺コンソリデーション＝3点）</td><td>Salem 2020</td></tr>
+</tbody></table></div>
+<p><strong>実践上の考慮</strong>：PEEPは患者の酸素化反応・肺コンプライアンス・局所リクルートメントに合わせて調整する。FiO2/PEEP表は単純かつ低コストの指針で、Pes モニタリング・EIT・肺エコーといった高度な方法は、機器と専門性があれば精度を高められる。心血管系の有害な影響を同定するために持続的な血行動態モニタリングが必須である。目標は肺胞の安定性を保ち、虚脱と過膨張の双方を防ぎ、十分な酸素化を達成すること。FiO2変更・体位変換・病態の進行の後には<strong>定期的な再評価が決定的に重要</strong>である。</p>
+<h4>5-2. FiO2の目標を定義できるか</h4>
+<p>高濃度酸素の有害な影響は数十年にわたり議論されてきた。その根拠となる機序は、活性酸素種（ROS）の生成、炎症過程の促進、高FiO2下での吸収性無気肺の形成である。観察研究とレジストリのデータも高酸素血症と死亡率上昇の関連の可能性を示唆するが、これらの効果はしばしば重症度と併用介入で交絡している。</p>
+<p>初版は、急性呼吸不全の侵襲的人工呼吸患者において <strong>SaO2 90–94% または PaO2 60–80 mmHg（8.0–10.7 kPa）</strong> を達成する最低限のFiO2を提案していた。これはデータ不足のため主に専門家コンセンサスに基づいていた。その後、複数の多施設RCTが発表され、推奨の再評価と精緻化が可能になった。</p>
+<p>最新のシステマティックレビュー・メタ解析（Li ら, Ann Intensive Care 2024）は、<strong>2017〜2024年の13 RCT、n＝10,632</strong> を含む。試験開始時点で侵襲的・非侵襲的・HFNCの区別をしておらず、「保守的」対「リベラル」酸素療法を定義する絶対的なSpO2やPaO2の閾値をあらかじめ設けず、元の試験の割り付けに従って解析している。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>最長追跡時点の死亡（従来型 COT vs リベラル）</td><td>37.04% vs 37.51%、RR 1.00（95%CI 0.95–1.06）、I² 22%</td></tr>
+<tr><td>30日死亡・90日死亡</td><td>同様に差なし</td></tr>
+<tr><td>ICU在室期間（7試験）・在院期間（4試験）・昇圧薬フリー日数（4試験）</td><td>いずれも有意差なし</td></tr>
+<tr><td>Ventilator-free days</td><td>COTでわずかに有利：平均＋0.5日（95%CI ＋0.13〜＋0.86日）</td></tr>
+<tr><td>重篤な有害事象</td><td>COTでわずかに少ない：1,000人あたり22件少ない（95%CI −38〜−6/1,000）</td></tr>
+</tbody></table></div>
+<p>集計されたエビデンスはCOTによる害を示さなかった。ところが、侵襲的人工呼吸下のARDS患者205例を対象とした大規模多施設RCT（Barrot ら, NEJM 2020＝LOCO2）は、保守的目標（PaO2 55–70 mmHg、SpO2 88–92%）とリベラル目標（PaO2 90–105 mmHg、SpO2 ≥96%）を7日間比較し、<strong>安全性の理由で早期中止</strong>された。COTの有益効果が期待薄と判断されただけでなく（28日死亡 34.3% vs 26.5%）、<strong>腸間膜虚血5例が保守的群にのみ発生</strong>したためである。</p>
+<p>上記システマティックレビューの著者らは、死亡アウトカム（30日・90日・最長追跡）のCoEを、バイアスリスク（非盲検・欠測）・間接性（異質な酸素目標）・不精確さ（サンプルサイズ不足）により<strong>極めて低い</strong>と評価した。「重篤な有害事象」のCoEは低（バイアスリスク・間接性）、「ventilator-free days」は極めて低（バイアスリスク・間接性・不精確さ）。さらに含まれる試験の一部は非侵襲的換気患者を組み入れており、サブグループ解析が利用できないため適用性がさらに制限される（間接性）。</p>
+<p>Barrot らの研究は方法論的には妥当だが早期中止かつ非盲検であり、検出力が落ち、performance bias が入り得る。総じて、<strong>PaO2 70–90 mmHg／SpO2 92–96% という目標域を支持するCoEは極めて低い</strong>と判断されている。</p>
+<p>&gt; 侵襲的人工呼吸患者において、動脈血酸素飽和度（SaO2/SpO2）92–96%、または動脈血酸素分圧（PaO2）70–90 mmHg（9.3–12 kPa）を目標とすることを提案する（弱い推奨・CoE +）。</p>
+<p><strong>実践上の考慮</strong>：酸素療法下で <strong>SpO2 100% を避ける</strong>こと。臨床的悪化の発見が遅れるためである。<strong>PaO2の下限70 mmHg</strong> は深い低酸素血症による害を避けるために推奨される。望ましいモニタリング指標は SaO2 または PaO2 で、SpO2 は動脈血液ガスとの比較で精度が確認されている場合に使用してよい。</p>
+<h4>5-3. ARDSで一回換気量を制限すべきか</h4>
+<p>VTは肺にかかる機械的負荷を決め、VILIに影響する。低VT換気はARDSの肺保護戦略の要であり、術後肺合併症を減らすためARDSのない患者にも推奨されている。</p>
+<p>VTは肺に加わる機械的負荷、すなわち stress と strain を決める。ARDSでは呼気終末肺容量が減っており、VT／呼気終末肺容量比が上がるため、残存する含気領域の過膨張が助長される。<strong>VALI は肺胞の過膨張と周期的な開閉から生じ、微小損傷・全身炎症・死亡率上昇につながる。</strong> 肺保護戦略は、低VT・Pplat &lt;30 cmH2O・permissive hypercapnia・適応があれば腹臥位を組み合わせる。「標準体重」の概念は<strong>理想体重／予測体重（IBW/PBW、例えばDevine式で計算）</strong>に置き換えられている。</p>
+<ul><li>RCTとメタ解析は、<strong>VT ≤6 mL/kg IBW が死亡率と全身炎症を減らす</strong>ことを示す</li><li>低VTと高PEEPの組み合わせは、院内死亡と気圧外傷をさらに減らし得る</li><li>これらの研究において、低VT群で実際に適用されたVTは典型的には <strong>5–8 mL/kg IBW</strong> であった</li><li>ARDSのない患者では、メタ解析が <strong>VT 6–8 mL/kg IBW</strong> により術後肺合併症・人工呼吸期間・ARDS発症が減ることを示す</li><li>最近の高品質RCT（PReVENT, JAMA 2018）は安全性を確認したが、ventilator-free days・死亡率に有意差はなかった</li></ul>
+<p>&gt; - ARDS患者では、およそ <strong>6 mL/kg IBW（4–8 mL/kg IBW）</strong> のVTでの侵襲的人工呼吸を推奨する（強い推奨・CoE +++） &gt; - ARDSのない患者では、<strong>6–8 mL/kg IBW</strong> での侵襲的人工呼吸を推奨する（強い推奨・CoE +++）</p>
+<p><strong>実践上の考慮</strong>：VTは実体重ではなく <strong>IBW/PBW</strong> に基づいて計算し、VTを調整する際は <strong>Pplat &lt;30 cmH2O</strong> を目標とする。重症ARDSでは permissive hypercapnia と腹臥位を検討し、過膨張の徴候や患者-人工呼吸器非同調をモニタリングする。</p>
+<h4>5-4. 吸気圧に上限はあるか</h4>
+<p>吸気側のPplatを制限することは、ARDSおよび急性呼吸不全における肺胞過膨張と気圧外傷の予防に不可欠である。ARDSで <strong>Pplat ≤30 cmH2O</strong> を保つことは強く支持されている。高い気道内圧はVILIの主要因である。Pplatの制限は過膨張と気圧外傷を減らすが、<strong>過度な制限は高二酸化炭素血症や換気不足を招き得る</strong>。</p>
+<p>ARDSでは、個々のRCTもメタ解析も、特に人工呼吸の早期において Pplat ≤30 cmH2O を維持することが死亡率低下につながることを支持している。ARDSのないARI患者については<strong>直接的な研究が存在しない</strong>。推奨はARDSのエビデンスからの外挿であり、肺傷害が通常より軽いことから、同様の保護効果が低い有害事象リスクで得られるという仮定に基づく。</p>
+<p>&gt; - ARDS患者では、侵襲的人工呼吸中の吸気Pplatを <strong>≤30 cmH2O</strong> に保つことを提案する（強い推奨・CoE +++） &gt; - ARDSのないARI患者では、侵襲的人工呼吸中の吸気Pplatを <strong>≤30 cmH2O</strong> に保つことを提案する（弱い推奨・CoE +）</p>
+<h4>5-5. ドライビングプレッシャーに目標値を置くべきか</h4>
+<p><strong>ΔP＝Pplat − PEEP</strong> は、換気されている肺単位に加わる stress を反映し、ARDSにおける死亡の重要な予測因子である。高い吸気圧はVILIの既知の寄与因子である。したがってΔPの制限はVILIを減らし得るが、<strong>過度に低いΔPは死腔換気の増加や分時換気量不足による高二酸化炭素血症といった有害な結果を招き得る</strong>。</p>
+<p>ΔPを直接検討した高品質の前向きRCTは存在せず、エビデンスは後ろ向き解析とARDS試験のメタ解析に由来する。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>内容</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Amato ら（NEJM 2015）</td><td>9つのRCTを解析</td><td>ΔPが生存と最も強く関連する変数。ΔPの1 SD（約7 cmH2O）の上昇が死亡率上昇と関連（RR 1.41、95%CI 1.31–1.51、p &lt; 0.001）。保護的なVTとPplatのもとでも同様。VTとPEEPは、ΔPが下がった場合にのみ生存を改善した</td></tr>
+<tr><td>Aoyama ら（CCM 2018）</td><td>3,252例</td><td>高いΔPが死亡率上昇と関連することを確認（RR 1.44、95%CI 1.11–1.88、I²＝85%）。ΔP &lt;14–15 cmH2O を用いた感度分析でも有意な生存利益を示した</td></tr>
+</tbody></table></div>
+<p><strong>≤14 cmH2O という閾値は、15 cmH2O を超えると死亡が増えるというデータに基づいており、前版よりわずかに低い閾値を支持する。</strong> 他の国際ARDSガイドラインはΔPに特化した推奨を出しておらず、本推奨はこの空白を、利用可能なエビデンスと病態生理学的根拠に基づいて埋めるものである。</p>
+<p>&gt; ARDSの侵襲的人工呼吸患者において、吸気ドライビングプレッシャー（ΔP）<strong>≤14 cmH2O</strong> を目標とすることを提案する（弱い推奨・CoE +）。</p>
+<p><strong>実践上の考慮</strong>：ΔP は Pplat − PEEP で計算する。<strong>ΔP &gt;14 なら、まずVTを下げてΔPを減らす。</strong> 必要に応じて呼吸回数（RR）を調整して分時換気量を維持する。</p>
+<h4>5-6. 急性高二酸化炭素性呼吸不全でI:E比をどう調整するか</h4>
+<p>I:E比の調整は、低酸素性呼吸不全では酸素化の最適化に、高二酸化炭素性呼吸不全ではガス排出の最適化に役立つ。制御換気では、I:E比を患者の病態生理学的必要に応じて調整できる。</p>
+<ul><li><strong>低酸素性呼吸不全</strong>：吸気を延ばすと平均気道内圧が上がり、肺胞リクルートメントを支え、シャントを減らし、酸素化を改善し得る。APRVは逆比のI:Eを作り出して内因性PEEPを生じ得るが、血行動態を損ない得る</li><li><strong>高二酸化炭素性呼吸不全</strong>：呼気を延ばすと肺の排出が進み、動的過膨張が減り、呼吸仕事量が下がる。調整は個々のフロー曲線・圧曲線に基づいて行い、VTと分時換気量を保ちつつ auto-PEEP を避ける</li></ul>
+<p>最適なI:E比を定義する高品質RCTは存在せず、推奨は臨床経験と専門家コンセンサスに基づく。</p>
+<p>&gt; - 低酸素性呼吸不全（例：ARDS）では、血行動態を考慮しつつ、中等度に吸気を延長した <strong>1:1〜1:1.5</strong> の比を適用してよい。<strong>逆比I:Eのルーチン使用は推奨しない</strong> &gt; - 高二酸化炭素性呼吸不全（例：呼気フロー制限のあるCOPD）では、人工呼吸器のフロー曲線・圧曲線を指標に<strong>呼気時間を最大化</strong>するようI:E比を調整し、完全な呼出を確保して auto-PEEP を最小化する &gt; - 設定は患者のメカニクスと人工呼吸器波形に合わせ、ガス交換と肺保護のバランスを取る（弱い推奨・専門家コンセンサス）</p>
+<p><strong>実践上の考慮</strong>：フロー波形と圧波形をモニタしてI:Eの調整を導き、ガス交換・肺保護・血行動態のバランスを取る。個別評価で臨床的に適応と判断されない限り、逆比I:Eのルーチン使用は避ける。呼気フロー制限のある高二酸化炭素血症患者では呼気時間を延長して auto-PEEP を防ぐ。</p>
+<h4>5-7. 呼吸回数をどう設定すべきか（推奨は成立せず）</h4>
+<p>臨床では、RRは低VT・低ΔPのもとで十分な換気を保つために調整されるのが通例で、その際に肺に加わる過剰なメカニカルパワーを避けることが考慮される。しかし、<strong>ARDSにおける最適な換気回数に答えるRCTは存在しない</strong>。ARDS Network 試験のプロトコルがしばしば引用されるが、同試験は最適な換気回数や、臨床的に重要なアウトカム・代替パラメータへの影響を評価する情報を提供していない。</p>
+<ul><li>大規模観察研究 LUNG-SAFE（<strong>ARDS患者2,377例</strong>）では、他の因子と並んで<strong>低い換気回数が生存率の上昇と関連</strong>していた</li><li>ARDSの肺保護換気は低VTと低ΔPに依拠し、その設定下で十分なガス交換を保つためRRはしばしば上げられる。しかし<strong>高いRRはメカニカルパワーを増やすことで人工呼吸関連肺傷害に独立して寄与し得る</strong></li><li>ARDS Network 試験では、VTを12から6 mL/kg IBW に下げるにあたり pH 7.30–7.45 を保つためRRの増加が必要だった</li><li>後ろ向き解析は、ΔPとRRがともに死亡の独立した予測因子であることを示唆する</li></ul>
+<p>前版では「急性呼吸不全の人工呼吸患者におけるRR設定について推奨を出せない」と結論していた。その後も最適なRRを定義した高品質RCTはなく、現行ガイドライン群も具体的な目標を示していない。</p>
+<p>パネルは、肺保護とガス交換を考慮してRRを個別化すべきという点では合意した。しかし<strong>正確なpH目標や、VT・ΔP・Pplat・RRの理想的な組み合わせについては合意に至らなかった</strong>。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>合意率が閾値に届かなかった唯一の推奨案 「ΔP ≤14 cmH2O、Pplat ≤30 cmH2O、VT 4–8 mL/kg IBW のもとで、pH 7.25–7.40 を達成する<strong>最低のRR</strong>を選ぶことを推奨する」という提案は、<strong>賛成73%</strong>にとどまり、コンセンサスの閾値である75%に届かなかった。したがってRRについては推奨が存在しない。</p>
+</div>
+<p><strong>実践上の考慮</strong>：ガス交換と呼吸メカニクスに基づいてRRを個別化する。動脈血pH・PaCO2・呼気フロー曲線を考慮し、過剰なRRと auto-PEEP を避ける。</p>
+<h3>6. モニタリング</h3>
+<h4>6-1. 人工呼吸患者にどのモニタリングを用いるべきか</h4>
+<p>急性呼吸不全では、悪化の検出と人工呼吸器調整の指針として持続モニタリングが不可欠である。低酸素性であれ高二酸化炭素性であれ、急性呼吸不全患者は重症・高リスク集団であり、しばしば侵襲的人工呼吸を要する。人工呼吸器パラメータとその酸素化・CO2排出への影響を持続的にモニタすることは集中治療管理の基本要素である。VT・気道内圧・RRといった古典的な換気パラメータに加え、<strong>肺メカニクス・肺コンプライアンス・患者-人工呼吸器同調</strong>の評価を含めるべきである。</p>
+<p>高度な呼吸モニタリング（食道内圧測定、EIT、肺エコー、volumetric capnometry）は、人工呼吸器設定を個別化するための有用な診断情報を提供し得る。画像や呼気フローの解析、局所換気分布の評価といった手法も換気の質の評価を支援できる。重症ARDSや、既存または併存する心機能障害のある患者では、人工呼吸の血行動態への影響（特に胸腔内圧・前負荷・後負荷・心拍出量の変化）を考慮しなければならない。</p>
+<p>換気・血行動態モニタリングの臨床的重要性は高いにもかかわらず、多くの領域でエビデンスは限られている。そのため複数の推奨は専門家コンセンサスに基づき、前版から変更なく採用された。人工呼吸患者の害を避けるうえで臨床的重要性が高いことから、<strong>変更がない推奨であってもあえて報告する</strong>とパネルは述べている。</p>
+<p>&gt; 急性呼吸不全患者には、少なくとも持続的なパルスオキシメトリ・心電図・血圧測定を含むモニタリングを行うことを推奨する（強い推奨・専門家コンセンサス）。</p>
+<p><strong>実践上の考慮</strong>：人工呼吸を受ける急性呼吸不全の全患者で、SpO2・心電図・血圧の持続モニタリングは必須である。動脈血液ガス分析の頻度は、臨床状態の変化やガス交換に影響する介入（人工呼吸器設定の変更、体位変換、血行動態不安定）に応じて個別化すべきである。定期的な動脈血液ガス採取により、<strong>パルスオキシメトリ単独では同定できない</strong>ガス交換の悪化と高酸素血症を早期に検出できる。動脈ライン留置の潜在的リスク（出血・感染・血栓形成）は、呼吸・循環の悪化を正確かつタイムリーに検出できる利益に見合う。</p>
+<h4>6-2. カプノメトリ・カプノグラフィをいつ・どう使うか</h4>
+<p>カプノメトリは赤外分光法により呼気ガス中の二酸化炭素分圧を測定するもので、メインストリーム法またはサイドストリーム法で行う。この信号をグラフ表示したものがカプノグラフィである。<strong>測定精度は通常 ±5% の範囲</strong>にある。急性呼吸不全やARDSでは、換気血流比不均等により呼気終末CO2と動脈血CO2分圧の間に相当な較差が生じ得る。</p>
+<p>高品質RCTは欠いているものの、<strong>挿管時のカプノグラフィの使用は、正しいチューブ位置を確認し、認識されない食道挿管を防ぐことで患者安全を実質的に高める</strong>。手技は迅速・非侵襲的・低コストで、リスクは無視できる。米国呼吸療法学会（AARC）ガイドラインとドイツの多発外傷S3ガイドライン（GoR A）はいずれも、挿管後の気管チューブ位置確認にカプノグラフィまたはカプノメトリを推奨している。</p>
+<p>さらに、持続カプノメトリはCO2排出と換気の適切性を非侵襲的に推定でき、肺胞換気の変化・回路離断・低換気の早期検出を可能にする。高品質エビデンスは限られるものの、患者安全と人工呼吸器管理に対する期待される利益が、このモニタリング様式を支持する弱い推奨を正当化する。AARCガイドラインは人工呼吸中のカプノグラフィを、換気のモニタリングと機器・患者由来の問題の検出のために推奨している。ESICMやATSなど他の国際ガイドラインはカプノメトリを標準的モニタリングツールと認めているが、<strong>具体的な閾値や頻度の推奨は示していない</strong>。</p>
+<p>&gt; - 挿管時に、気管チューブの正しい位置を確認するためにカプノメトリまたはカプノグラフィを用いることを推奨する（強い推奨・CoE ++） &gt; - 人工呼吸器設定を導き、人工呼吸の適切性をモニタするためにカプノメトリまたはカプノグラフィを用いることを提案する（弱い推奨・CoE ++）</p>
+<p><strong>実践上の考慮</strong>：カプノグラフィは<strong>すべての気管挿管で利用できる状態にしておく</strong>。数呼吸後に持続するCO2波形があれば正しいチューブ位置が確認される。CO2信号がない場合は直ちに再評価し食道挿管を除外する。侵襲的人工呼吸中の全患者でルーチンの人工呼吸器モニタリングの一部として用い、<strong>単発の測定値ではなくトレンドを評価する</strong>。急激な変化は離断・閉塞・急性悪化を示唆し得る。カプノメトリは正確なCO2測定のための動脈血液ガス分析を<strong>補完するものであって置き換えるものではない</strong>。</p>
+<h3>7. 全推奨の一覧（強さ・エビデンスの質・合意）</h3>
+<p>推奨は<strong>両投票ラウンドで75%超の賛成</strong>が得られた場合にのみ採択されている。個々の推奨ごとの合意率（％）は本英語版ダイジェストには印字されておらず、明示されている唯一の数値は、成立しなかった呼吸回数の提案（73%）である。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>領域</th><th>推奨内容</th><th>強さ</th><th>CoE</th><th>合意</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>モード</td><td>PCV vs VCV：どちらかを支持・反対する推奨は出さない（PRVCの比較研究も無し）</td><td>推奨なし</td><td>—</td><td>2017年版から変更なし</td></tr>
+<tr><td>2</td><td>モード</td><td>中等症〜重症ARDSにおける早期NMBに反対する</td><td>強い推奨（反対）</td><td>+++</td><td>75%超で採択</td></tr>
+<tr><td>3</td><td>モード</td><td>急性呼吸不全の全患者で、自発呼吸を可能にする換気モードの適用を提案する（頭蓋内圧上昇・右心不全は個別判断）</td><td>弱い推奨</td><td>+</td><td>75%超で採択</td></tr>
+<tr><td>4</td><td>モード</td><td>急性低酸素性呼吸不全で禁忌がなければ、吸気・呼気の双方で自発呼吸を許す圧規定換気（APRV/BIPAP等）の使用を検討することを提案する</td><td>弱い推奨</td><td>+</td><td>75%超で採択</td></tr>
+<tr><td>5</td><td>モード</td><td>部分的／完全自動化換気（ASV、INTELLiVENT-ASV）の使用を検討することを提案する（ARDSではVTとΔPの監視を強調）</td><td>弱い推奨</td><td>+</td><td>新規・75%超で採択</td></tr>
+<tr><td>6</td><td>モード</td><td>横隔膜活動制御の圧補助モード（NAVA）の使用を検討することを提案する</td><td>弱い推奨</td><td>+</td><td>新規・75%超で採択</td></tr>
+<tr><td>7</td><td>モード</td><td>流量・容量比例補助モード（PAV、PAV+）を使用しないことを提案する</td><td>弱い推奨（反対）</td><td>++</td><td>新規・75%超で採択</td></tr>
+<tr><td>8</td><td>設定</td><td>軽症ARDSでは ARDS Network の FiO2/低PEEP表で初期PEEPを設定することを検討する</td><td>弱い推奨</td><td>++</td><td>75%超で採択</td></tr>
+<tr><td>9</td><td>設定</td><td>中等症・重症ARDSではより高いPEEPを使用する</td><td>強い推奨</td><td>++++</td><td>75%超で採択</td></tr>
+<tr><td>10</td><td>設定</td><td>中等症・重症ARDSではベッドサイド法（表2の6手法）でPEEPを個別滴定することを提案する</td><td>弱い推奨</td><td>+</td><td>75%超で採択</td></tr>
+<tr><td>11</td><td>設定</td><td>侵襲的人工呼吸患者で SaO2/SpO2 92–96% または PaO2 70–90 mmHg（9.3–12 kPa）を目標とする</td><td>弱い推奨</td><td>+</td><td>2017年版（90–94%／60–80 mmHg）から緩和</td></tr>
+<tr><td>12</td><td>設定</td><td>ARDSではVT 約6 mL/kg IBW（4–8 mL/kg IBW）で侵襲的人工呼吸を行う</td><td>強い推奨</td><td>+++</td><td>75%超で採択</td></tr>
+<tr><td>13</td><td>設定</td><td>ARDSのない患者ではVT 6–8 mL/kg IBW で侵襲的人工呼吸を行う</td><td>強い推奨</td><td>+++</td><td>75%超で採択</td></tr>
+<tr><td>14</td><td>設定</td><td>ARDSでは吸気Pplat ≤30 cmH2O を維持する</td><td>強い推奨</td><td>+++</td><td>75%超で採択</td></tr>
+<tr><td>15</td><td>設定</td><td>ARDSのないARIでも吸気Pplat ≤30 cmH2O を維持する（ARDSからの外挿）</td><td>弱い推奨</td><td>+</td><td>75%超で採択</td></tr>
+<tr><td>16</td><td>設定</td><td>ARDSで吸気ΔP ≤14 cmH2O を目標とする</td><td>弱い推奨</td><td>+</td><td>前版の ≤15 から厳格化</td></tr>
+<tr><td>17</td><td>設定</td><td>低酸素性ではI:E 1:1〜1:1.5（逆比のルーチン使用は非推奨）、高二酸化炭素性では波形を見ながら呼気時間を最大化する</td><td>弱い推奨</td><td>専門家コンセンサス</td><td>75%超で採択</td></tr>
+<tr><td>18</td><td>設定</td><td>呼吸回数：推奨は成立せず（ΔP≤14・Pplat≤30・VT 4–8 のもとで pH 7.25–7.40 を達成する最低RR、という案は賛成73%）</td><td>推奨なし</td><td>—</td><td>73%（閾値75%未満）</td></tr>
+<tr><td>19</td><td>モニタ</td><td>急性呼吸不全患者には少なくとも持続パルスオキシメトリ・心電図・血圧測定を行う</td><td>強い推奨</td><td>専門家コンセンサス</td><td>前版から変更なしだが再掲</td></tr>
+<tr><td>20</td><td>モニタ</td><td>挿管時に気管チューブ位置確認としてカプノメトリ／カプノグラフィを用いる</td><td>強い推奨</td><td>++</td><td>75%超で採択</td></tr>
+<tr><td>21</td><td>モニタ</td><td>人工呼吸器設定の指針と換気の適切性のモニタとしてカプノメトリ／カプノグラフィを用いることを提案する</td><td>弱い推奨</td><td>++</td><td>75%超で採択</td></tr>
+</tbody></table></div>
+<h3>8. 2017年版からの主な変更点</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>2017年版</th><th>2025年改訂</th><th>変更の駆動因</th></tr></thead>
+<tbody>
+<tr><td>早期自発呼吸</td><td>重症ARDSを除く全患者で早期（&lt;48時間）に許可</td><td>全患者で自発呼吸を可能にするモードを提案（弱い推奨）</td><td>ROSE試験、複数のメタ解析、LUNG-SAFE二次解析</td></tr>
+<tr><td>早期NMB</td><td>重症ARDSでは実質的に推奨（ACURASYS由来）</td><td>中等症〜重症ARDSでは反対（強い推奨・CoE +++）</td><td>ROSE試験（死亡ほぼ同一、重篤心血管有害事象はNMB群で多い）</td></tr>
+<tr><td>適応型・自動化モード</td><td>推奨なし</td><td>ASV/INTELLiVENT-ASV と NAVA は条件付きで可、PAV/PAV+ は反対</td><td>世界初の推奨。単施設中心の異質な研究群＋PAVの多施設RCT</td></tr>
+<tr><td>酸素化目標</td><td>SaO2 90–94%／PaO2 60–80 mmHg（専門家コンセンサス）</td><td>SaO2/SpO2 92–96%／PaO2 70–90 mmHg（弱い推奨・CoE +）</td><td>13 RCT・10,632例のメタ解析＋LOCO2の早期中止（腸間膜虚血）</td></tr>
+<tr><td>ΔP目標</td><td>≤15 cmH2O</td><td>≤14 cmH2O（弱い推奨・CoE +）</td><td>Amato 2015／Aoyama 2018 の感度分析（&lt;14–15で生存利益）</td></tr>
+<tr><td>PEEP個別化</td><td>明示的な手法リストなし</td><td>6手法を同格の選択肢として表2に列挙（弱い推奨・CoE +）</td><td>直接比較試験の不在＋施設ごとの機器・専門性の差</td></tr>
+<tr><td>VT・Pplat</td><td>低VT・Pplat ≤30</td><td>変更なし（ARDS 6 mL/kg PBW、非ARDS 6–8、Pplat ≤30）</td><td>骨格は不変</td></tr>
+<tr><td>形式</td><td>テキスト文書</td><td>MAGICapp によるデジタル版＋ドイツ語完全版</td><td>透明性・トレーサビリティ</td></tr>
+</tbody></table></div>
+<h3>9. 結論（著者らの言葉）</h3>
+<p>2020年代初頭のCOVID-19パンデミックは、集中治療における呼吸補助の中心的役割を浮き彫りにすると同時に、ドイツ語圏における急性呼吸不全管理の大きなばらつきを露呈させた。この背景と初版から7年という時間を踏まえ、新しいエビデンスを取り込み、患者ケアに関わる全職種を積極的に巻き込んで推奨を更新した。本改訂は厳密に適用され透明に報告されたGRADE方法論に立脚し、各推奨について慎重な益害評価を行っている。</p>
+<p>侵襲的人工呼吸を受ける急性呼吸不全患者の回復において、<strong>適切な自発呼吸の確立が不可欠なステップである点には広い合意がある</strong>。しかし特に中等症〜重症ARDSでは、自発呼吸を開始する最適なタイミングは依然として議論の的である。ROSE試験と換気モードの比較研究を併せて考慮し、パネルは、早期NMBを避け、可能な場合は浅い鎮静下で自発呼吸を許す早期の補助換気を開始する戦略を支持した。吸気・呼気の双方で自発呼吸を許す圧規定モードを支持するシグナルは近年強まっているが、<strong>明確に定義された介入と患者に重要なエンドポイントを備えた大規模多施設試験が出るまでは、これらの結論の確実性は低いままである</strong>。</p>
+<p>適応型換気モードについて世界で初めてエビデンスに基づく推奨が提供された。一次研究を通じて、完全／部分自動化システムと横隔膜トリガの圧補助換気（NAVA）は、代替モードと比べて人工呼吸期間・ウィーニング期間の短縮や非同調の減少といった有益な効果を示した。<strong>これらの効果がより大きなコホートで、より強い患者中心のアウトカムで再現されるかは、現時点のエビデンスでは確認できない。</strong></p>
+<p>設定については、酸素化目標を SaO2/SpO2 92–96%／PaO2 70–90 mmHg へ（より保守的な戦略に代えて）改め、ΔPの目標を ≤14 cmH2O へ（従来の ≤15 から）精緻化した。肺保護の中核要素は不変で、VT 6 mL/kg PBW（範囲4–8）、Pplat ≤30 cmH2O、そして軽症ARDSと比べて中等症〜重症ARDSでは高めの個別滴定PEEP、が推奨される。PEEP個別化の手法群を幅広く容認したのは、一方では<strong>直接比較試験の不在</strong>を、他方ではICUごとに異なるケア構造・機器の利用可能性・専門性への配慮を反映している。</p>
+<p><strong>同定されたエビデンスギャップ</strong>：</p>
+<ol><li>自発呼吸を可能にする際に、どの換気戦略（モードと設定）が臨床的に意味のある再現性の高い改善を最も確実にもたらすか</li><li>ARDSにおけるPEEP個別化 — 戦略駆動型アプローチ（ΔP最小化、食道内圧による経肺圧測定、EITによるリクルータビリティ評価）が、標準化されたFiO2/PEEP表と比べて患者に重要なアウトカムを改善するか</li></ol>
+<p>次回改訂は<strong>2030年</strong>に予定されている。</p>
+<h3>10. 批判的吟味（JCでの論点）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>内容</th><th>JCでどう扱うか</th></tr></thead>
+<tbody>
+<tr><td>メタ解析を「あえてしない」判断</td><td>ACURASYS と ROSE を統合せず ROSE を採用した。理由は標準治療（PEEP水準・鎮静深度）の相違と自国医療への一般化可能性。ATSは統合して逆の結論に到達している</td><td>方法論的に正当化可能だが、<strong>同じデータから正反対の推奨が出る</strong>という事実そのものが論点。統合するかしないかの判断がアウトカムを決めている</td></tr>
+<tr><td>「強い推奨」なのにCoEが最高でない</td><td>早期NMB反対は CoE +++（最高は++++）、VT 6 mL/kg も +++。逆に高PEEP（中等症以上）だけが ++++</td><td>GRADEでは推奨の強さがCoE以外（益害・資源・受容性）も反映するため矛盾ではない。ただし読み手が誤解しやすい</td></tr>
+<tr><td>APRV推奨の土台がAPRV1モードに偏る</td><td>推奨は「吸気・呼気で自発呼吸を許す圧規定モード」全般に向けられているが、エビデンスはほぼAPRVのRCT・メタ解析。しかもAPRVの設定自体が試験間で異質で、定義すら世界的に統一されていない</td><td><strong>BIPAPへの外挿は根拠が薄い</strong>。著者ら自身が一般化可能性の制限として明記している点を押さえる</td></tr>
+<tr><td>メタ解析の独立性</td><td>APRVの4つのメタ解析は「相当程度、同じ一次研究に依拠している」と本文が認めている</td><td>独立した4つの確認ではなく、実質的には1組のデータの4回の再解析に近い</td></tr>
+<tr><td>酸素化目標の根拠の弱さ</td><td>92–96%／70–90 mmHg を支持するCoEは著者ら自身が「極めて低い」と判断。メタ解析（Li 2024）は保守的 vs リベラルの閾値を定義せず元試験の割り付けに従い、侵襲・非侵襲・HFNCを区別していない。LOCO2 は n=205 で早期中止・非盲検</td><td><strong>推奨されている数値レンジは、そのレンジを直接検証した試験から出ていない</strong>。「その中間を取った」以上の根拠は薄い</td></tr>
+<tr><td>腸間膜虚血5例の解釈</td><td>LOCO2 の保守的群でのみ5例発生。試験は安全性で早期中止</td><td>小さいイベント数で早期中止された試験の有害事象は過大評価されやすい。それでも下限70 mmHg の根拠として重く使われている</td></tr>
+<tr><td>ΔP ≤14 の閾値</td><td>ΔPを直接検証した前向きRCTは1本もない。閾値は後ろ向き解析（Amato）と感度分析（Aoyama、I²=85%）に由来し、「15を超えると死亡が増えるデータ」から1 cmH2O 下げた</td><td>15→14 の変更が患者アウトカムを変える保証はない。<strong>I²=85% という大きな異質性</strong>も押さえる</td></tr>
+<tr><td>呼吸回数の73%</td><td>唯一、合意に至らなかった提案。内容自体（pH 7.25–7.40 を満たす最低RR）は臨床的にきわめて実用的</td><td>「推奨がない」ことと「その方針が悪い」ことは違う。当院がローカルルールとして採用する余地はある</td></tr>
+<tr><td>適応型モードのindirectness</td><td>ASVのエビデンスは術後（心臓外科・肝移植）患者を多く含み、ICUの急性呼吸不全とは母集団が違う。NAVAのデータの多くは非侵襲的換気由来</td><td>「初の推奨」という新規性の裏に、<strong>対象集団のずれ</strong>がある</td></tr>
+<tr><td>NAVAの実行可能性</td><td>単一プラットフォームのみ、専用EAdiカテーテル必須と本文が明記</td><td>推奨されても導入できない施設が多い。GRADEの「実行可能性」がここでどう働いたか</td></tr>
+<tr><td>PAV反対の根拠が中止率</td><td>42%（RCT）・33%（観察）という中止率が反対推奨の主因。有効性の否定というより忍容性の問題</td><td>設定手技に習熟すれば中止率は下がるのでは、という反論が成り立つ。ただしレビュー後のNEJM 2025 RCTでも有効性は示されなかった</td></tr>
+<tr><td>検索期限と発表時期のずれ</td><td>体系的検索は2023年4月まで、追加は2024年6月まで。英語版の発表は2025年12月</td><td>発表時点で<strong>1年半以上のラグ</strong>がある。PAVのNEJM 2025 RCTは本文で言及のみで推奨に反映されていない</td></tr>
+<tr><td>文献番号の不整合</td><td>表2の引用番号と巻末文献リストの番号が対応していない箇所がある（例：表2は「Kacmarek [50] 2016」だがリストの50はBeitler 2019、Kacmarekは59。Gernoth・Zhao・Hsu・He・Pintado・Talmor・Salem・Sargeも1つずれている）</td><td>著者名・年は正しいので原典には辿れるが、<strong>番号で追うと別文献に飛ぶ</strong>。JCで引用を確認する際は著者名で照合する</td></tr>
+<tr><td>適用範囲</td><td>D-A-CH の医療環境（人員配置・機器・研修体制）を前提に、受容性・実行可能性まで含めて推奨強度を決めている</td><td>日本のICUにそのまま移植できる保証はない。特に「浅い鎮静と早期自発呼吸には人員増強が要る」という但し書き</td></tr>
+<tr><td>英訳にLLMを使用</td><td>ChatGPT-5 を翻訳補助に使用したと開示（著者が全面的にレビュー・改訂し責任を負う）</td><td>ガイドライン文書の翻訳にLLMを使ったことを明示的に開示した早い例。文言の微妙なニュアンスを議論する際は独語完全版に当たるべき</td></tr>
+</tbody></table></div>
+<h3>11. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>5</td><td>ROSE試験：中等症〜重症ARDSでの早期NMB。死亡ほぼ同一、重篤心血管有害事象はNMB群で多い。今回の推奨反転の主因</td><td>NHLBI PETAL Network（Moss M ら）. N Engl J Med. 2019;380(21):1997–2008</td></tr>
+<tr><td>14</td><td>ACURASYS試験：重症ARDSでNMBにより死亡率低下。2017年版で重症ARDSを例外とした根拠</td><td>Papazian L ら. N Engl J Med. 2010;363(12):1107–16</td></tr>
+<tr><td>3</td><td>ESICM ARDSガイドライン：定義・フェノタイピング・呼吸補助戦略。早期NMBのルーチン使用に反対</td><td>Grasselli G ら. Intensive Care Med. 2023;49(7):727–59</td></tr>
+<tr><td>4</td><td>ATS ARDSガイドライン更新：中等症〜重症ARDSでの早期NMBに条件付きで賛成</td><td>Qadir N ら. Am J Respir Crit Care Med. 2024;209(1):24–36</td></tr>
+<tr><td>2</td><td>日本のARDS診療ガイドライン2021</td><td>Tasaka S ら. Respir Investig. 2022;60(4):446–95</td></tr>
+<tr><td>13</td><td>本ガイドラインの初版（2017年版の英語ダイジェスト）</td><td>Fichtner F ら. Respiration. 2019;98(4):357–72</td></tr>
+<tr><td>9</td><td>ドイツ語完全版 S3-Leitlinie Version 2.0（AWMF レジスタ 001-021、2025年8月）</td><td>Fichtner F. AWMF</td></tr>
+<tr><td>12</td><td>Cochrane：急性呼吸不全におけるPCV vs VCV。明確な優劣なし</td><td>Chacko B ら. Cochrane Database Syst Rev. 2015;1:CD008807</td></tr>
+<tr><td>15</td><td>APRVのメタ解析：死亡 RR 0.67（0.48–0.94）、3日目P/F WMD 60.4</td><td>Lim J, Litton E. Crit Care Med. 2019;47(12):1794–9</td></tr>
+<tr><td>18</td><td>APRVのメタ解析：人工呼吸期間 MD 6.04日、ICU在室 MD 3.94日</td><td>Carsetti A ら. Ann Intensive Care. 2019;9(1):44</td></tr>
+<tr><td>16</td><td>ARDSに対するAPRVのSR/メタ解析</td><td>Chen C ら. Ann Palliat Med. 2021;10:10349–59</td></tr>
+<tr><td>17</td><td>成人ARDSにおけるAPRVの有効性のメタ解析</td><td>Othman F ら. Ann Thorac Med. 2021;16(3):245–52</td></tr>
+<tr><td>19</td><td>LUNG-SAFE二次解析：早期ARDSでの自発呼吸と人工呼吸期間短縮の関連（傾向スコアマッチング）</td><td>van Haren F ら. Crit Care Med. 2019;47(2):229–38</td></tr>
+<tr><td>82</td><td>LUNG-SAFE本体：50か国のARDS疫学・診療パターン・死亡（2,377例の解析で低換気回数と生存の関連）</td><td>Bellani G ら. JAMA. 2016;315(8):788–800</td></tr>
+<tr><td>22</td><td>APRVの神話と誤解：定義と設定の混乱を整理</td><td>Andrews P ら. Front Physiol. 2022;13:928562</td></tr>
+<tr><td>23</td><td>APRVの原典</td><td>Downs JB, Stock MC. Crit Care Med. 1987;15(5):459–61</td></tr>
+<tr><td>24</td><td>BIPAPの原典（ドイツ語）</td><td>Baum M ら. Anaesthesist. 1989;38(9):452–8</td></tr>
+<tr><td>25</td><td>COPD患者におけるBIPAPの影響（動的過膨張への注意の根拠）</td><td>Katz-Papatheophilou E ら. Eur Respir J. 2000;15(3):498–504</td></tr>
+<tr><td>32</td><td>NAVAのSR/メタ解析：VFD 3.42日多い（1.21–5.62）</td><td>Pinto CB ら. J Crit Care. 2023;76:154287</td></tr>
+<tr><td>33</td><td>PAVの多施設RCT：42%でモード変更が必要</td><td>Delgado M ら. Minerva Anestesiol. 2019;85(8):862–70</td></tr>
+<tr><td>34</td><td>PAVのベッドサイド調整（観察研究）：33%が中止</td><td>Carteaux G ら. Crit Care Med. 2013;41(9):2125–32</td></tr>
+<tr><td>35</td><td>PAV vs PSV のRCT（レビュー完了後に発表）：人工呼吸期間に差なし</td><td>Bosma KJ ら. N Engl J Med. 2025;393(11):1088–103</td></tr>
+<tr><td>30</td><td>COPDのウィーニング短縮を示したASVのRCT</td><td>Kirakli C ら. Eur Respir J. 2011;38(4):774–80</td></tr>
+<tr><td>31</td><td>ASV vs 圧補助/調節換気の人工呼吸期間RCT（内科ICU）</td><td>Kirakli C ら. Chest. 2015;147(6):1503–9</td></tr>
+<tr><td>7</td><td>PEEP・リクルートメント戦略のネットワークメタ解析（今回の改訂の契機）</td><td>Dianti J ら. Am J Respir Crit Care Med. 2022;205(11):1300–10</td></tr>
+<tr><td>46</td><td>高PEEP vs 低PEEPのSR/メタ解析</td><td>Briel M ら. JAMA. 2010;303(9):865–73</td></tr>
+<tr><td>47</td><td>PEEPへの酸素化反応がARDSの死亡を予測（LOVS・ExPress二次解析）</td><td>Goligher EC ら. Am J Respir Crit Care Med. 2014;190(1):70–6</td></tr>
+<tr><td>48</td><td>保護的換気戦略の死亡率への効果（P-V曲線の下部変曲点）</td><td>Amato MB ら. N Engl J Med. 1998;338(6):347–54</td></tr>
+<tr><td>50</td><td>EPVent-2：食道内圧ガイドPEEP vs 経験的高PEEP-FiO2</td><td>Beitler JR ら. JAMA. 2019;321(9):846–57</td></tr>
+<tr><td>58</td><td>EPVent-2 のリスクベース・機序的再解析</td><td>Sarge T ら. Am J Respir Crit Care Med. 2021;204(10):1153–63</td></tr>
+<tr><td>56</td><td>食道内圧ガイド換気（EPVent-1）</td><td>Talmor D ら. N Engl J Med. 2008;359(20):2095–104</td></tr>
+<tr><td>59</td><td>Open lung approach のパイロットRCT（下降法PEEPの根拠）</td><td>Kacmarek RM ら. Crit Care Med. 2016;44(1):32–42</td></tr>
+<tr><td>52</td><td>EITとP-V曲線によるPEEP滴定（重症ARDS）</td><td>Zhao Z ら. Ann Intensive Care. 2019;9(1):7</td></tr>
+<tr><td>54</td><td>EITガイドの早期個別化PEEPのRCT</td><td>He H ら. Crit Care. 2021;25(1):230</td></tr>
+<tr><td>57</td><td>肺エコーガイド vs FiO2ガイドのPEEP</td><td>Salem MS ら. Egypt J Anaesth. 2020;36(1):31–7</td></tr>
+<tr><td>44</td><td>ARDSにおけるガスと組織の局所分布とPEEPの効果（びまん性 vs 限局性）</td><td>Rouby JJ ら. Intensive Care Med. 2000;26(9):1215–27</td></tr>
+<tr><td>65</td><td>保守的 vs リベラル酸素療法のメタ解析（13 RCT・n=10,632）</td><td>Li X-Y ら. Ann Intensive Care. 2024;14(1):68</td></tr>
+<tr><td>66</td><td>LOCO2：ARDSのリベラル vs 保守的酸素療法。安全性で早期中止、腸間膜虚血5例</td><td>Barrot L ら. N Engl J Med. 2020;382(11):999–1008</td></tr>
+<tr><td>67</td><td>ARDSNet：低一回換気量 vs 従来換気量</td><td>ARDS Network（Brower RG ら）. N Engl J Med. 2000;342(18):1301–8</td></tr>
+<tr><td>75</td><td>PReVENT：非ARDS患者での低VT vs 中等度VT</td><td>PReVENT Investigators（Simonis FD ら）. JAMA. 2018;320(18):1872–80</td></tr>
+<tr><td>73</td><td>ARDS/ALIの換気戦略とアウトカムのメタ解析（低VT＋高PEEP）</td><td>Putensen C ら. Ann Intern Med. 2009;151(8):566–76</td></tr>
+<tr><td>76</td><td>ARDS最初の7日間におけるPplat上限の最適値（メタ回帰）</td><td>Yasuda H ら. J Clin Med Res. 2021;13(1):48–63</td></tr>
+<tr><td>78</td><td>ΔPと生存：9 RCTの解析。1 SD（約7 cmH2O）上昇で RR 1.41</td><td>Amato MBP ら. N Engl J Med. 2015;372(8):747–55</td></tr>
+<tr><td>77</td><td>ΔPと死亡のSR/メタ解析（3,252例）：RR 1.44、I²=85%</td><td>Aoyama H ら. Crit Care Med. 2018;46(2):300–6</td></tr>
+<tr><td>83</td><td>換気変数とメカニカルパワー：ΔPとRRが独立した死亡予測因子</td><td>Costa ELV ら. Am J Respir Crit Care Med. 2021;204(3):303–11</td></tr>
+<tr><td>20</td><td>ARDSの呼吸ドライブ：病態生理・モニタリング・治療介入</td><td>Spinelli E ら. Intensive Care Med. 2020;46(4):606–18</td></tr>
+<tr><td>21</td><td>P-SILIのリスクがある患者をどう見分けるか</td><td>Pettenuzzo T ら. Expert Rev Respir Med. 2022;16(9):963–71</td></tr>
+<tr><td>86</td><td>AARC：人工呼吸中のカプノグラフィ/カプノメトリ 2011</td><td>Walsh BK ら. Respir Care. 2011;56(4):503–9</td></tr>
+<tr><td>6</td><td>急性低酸素性呼吸不全の非侵襲的酸素化戦略のネットワークメタ解析（改訂の契機）</td><td>Pitre T ら. Chest. 2023;164(4):913–28</td></tr>
+<tr><td>8</td><td>ドイツICUのCOVID-19 ARDS治療の全国横断調査：標準治療のばらつきが大きい</td><td>Dickel S ら. J Clin Med. 2021;10(15):3363</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ドイツ語圏S3ガイドラインの2025年改訂は、<mark class="hl">中等症〜重症ARDSの早期筋弛緩を「強い推奨・反対」に反転させ、代わりに浅い鎮静下で早期に自発呼吸を許す戦略を提案した</mark>。設定の骨格は VT 6 mL/kg PBW（4–8）・Pplat ≤30 cmH2O で不変だが、<mark class="hl">ΔPは ≤15 から ≤14 cmH2O へ、酸素化目標は SaO2/SpO2 90–94% から 92–96%（PaO2 70–90 mmHg）へ改められた</mark>。中等症以上のARDSでは高PEEPが唯一の CoE ++++（強い推奨）で、<mark class="hl">どのベッドサイド法で個別滴定するかは同格の6択（FiO2/PEEP表・PV曲線・下降法・EIT下降法・上昇法・食道内圧・肺エコー）として施設の事情に委ねられた</mark>。世界初となる適応型モードの推奨は、<mark class="hl">ASV/INTELLiVENT-ASVとNAVAは「検討してよい」、PAV/PAV+は「使わない」</mark>。呼吸回数だけは合意率73%で推奨が成立しなかった。 明日から変えるなら、<mark class="hl">指示簿のΔP上限を14に、SpO2目標を92–96%に書き換え、重症ARDSの「とりあえず48時間の筋弛緩」をやめる</mark>ところから。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
