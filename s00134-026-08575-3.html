@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08575-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Nakashima T, Ichinomiya T, Nakajima M, Shinozaki T, Shibata J, Goto T, Sato S, Hara T. Intensive Care Med. 2026. doi:10.1007/s00134-026-08575-3</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-08-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08575-3" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08575-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Ultra-early versus early adjunctive vasopressin initiation after norepinephrine escalation in septic shock: a target trial emulation</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「NAd 0.25γ に達したらバソプレシン（AVP）を考える」を、"考える" ではなく "3時間以内に決着させる" に変える。</strong> 本研究の比較は「AVP を使うか否か」ではなく <strong>「0.25γ 到達から3時間以内に足すか、3〜6時間まで待つか」</strong>。当院で「もう少しノルアドで粘る」を繰り返して6時間経つパターンがあるなら、そこが是正点になる。</li><li><strong>時刻0を明示的に記録する運用にする。</strong> 0.25γ に到達した時刻をフローシートに残さないと「3時間以内」を守れているか誰も検証できない。当院のバイタル自動収集・電子カルテのポンプ流量記録から、NAd が 0.25γ を超えた最初の時刻を自動で拾えるかを一度確認する価値がある。</li><li><strong>AVP の初期用量は 0.04 U/min が実態だった</strong>（両群とも中央値 0.040 U/min）。当院が <span class="wl">敗血症性ショックにおけるバソプレシンの実践 用量・タイミング・離脱（ICM2025）</span> の推奨に沿って 0.01 U/min 開始・0.005 U/min 漸増としているなら、本研究の集団はそれより高用量から入っている点を踏まえて読む。</li><li><strong>腎代替療法（RRT）の減少がいちばん大きな差だった</strong>（RRT sHR 0.68／CRRT sHR 0.61）。AKI 発症自体は変わっていないので、当院で期待できるのは「AKI を防ぐ」ではなく <strong>「透析導入まで行かせない」</strong>方向の効果である。</li><li><strong>ただし本研究だけで運用を変えるのは早い。</strong> 後述のとおり、生存差の一部は解析設計（時刻0後の死亡の扱い）で説明しうる。当面は「0.25γ 到達時に AVP の可否をカンファで言語化する」までにとどめ、RCT を待つのが妥当と考える。</li><li><strong>ノルアドレナリンの用量表記（base か tartrate か）を必ず確認する。</strong> 0.25γ という閾値は base 表記が前提である（<span class="wl">ノルアドレナリンの用量表記は塩か基剤か — 32か国の添付文書を調べた（Correspondence・ICM2023）</span>）。本論文には base/tartrate の別が書かれていない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：バソプレシンは V1a 受容体を介した非カテコラミン性の血管収縮でショックの血管緊張を回復させる。VASST（NEJM 2008）は全体の28日生存を改善せず、軽症層でのみ有益の示唆にとどまった。VANISH（JAMA 2016）は腎不全フリー日数を改善しなかったが RRT は減らした。個々患者データメタ解析（ICM 2019）もカテコラミン節減効果と腎への効果は支持したが、一貫した死亡低下は示さなかった。SSC 2021 の remarks は <strong>NAd 0.25〜0.5 µg/kg/分で AVP を足すことが多い</strong> としており、SSC 2026 も NAd を増やし続けるより AVP を足すことを提案している。</li><li><strong>Unknown（分かっていなかったこと）</strong>：「AVP を使うか否か」ではなく、<strong>閾値に達した後の "何時間以内に足すか"</strong> を直接比較した研究が無かった。先行の観察研究・target trial emulation はショック発症を起点にしたものが多く、ベッドサイドで実際に迷う「0.25γ を超えた、いま足すか もう少し粘るか」に答えていなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：時刻0を <strong>「NAd が初めて 0.25 µg/kg/分に達し、かつ AVP 未使用の時点」</strong> に固定し、<strong>0〜3時間（超早期）</strong> と <strong>3時間超〜6時間（早期）</strong> という2つの能動的 AVP 戦略のみを比較した。clone-censor-weight（クローン・人工打ち切り・重み付け）法で 3,810 例を解析し、超早期で28日死亡が <strong>48.1% 対 53.0%（リスク差 −5.0ポイント）</strong>、RRT・CRRT・不整脈も少なかった。「使うか否か」から <strong>「何時分に足すか」</strong> へ問いを移した点が新しい。著者ら自身、これを確認するには RCT が要ると結論している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症性ショックで <strong>NAd が 0.25 µg/kg/分に達した時点を起点</strong>にすると、<strong>3時間以内にバソプレシンを足した戦略は、3〜6時間まで待つ戦略より28日死亡が 4.9〜5.0ポイント低かった</strong>（48.1% 対 53.0%、HR 0.82）。ただしこれは観察データの模擬試験であり、著者ら自身が RCT による確認を求めている。</p>
+</div>
+<ul><li><strong>デザイン</strong>：MIMIC-IV（2008〜2022、Beth Israel Deaconess）と eICU-CRD（2014〜2015、米国200施設超）を Ricu パッケージで時間単位に統合した <strong>target trial emulation</strong>。STROBE と TARGET 声明に準拠。</li><li><strong>対象</strong>：18歳以上、Sepsis-3 の敗血症性ショック、<strong>NAd 投与速度が初めて 0.25 µg/kg/分以上に達し</strong>、その時点まで AVP 未使用。<strong>3,810例</strong>（MIMIC-IV 1,839／eICU-CRD 1,971）。</li><li><strong>戦略</strong>：①超早期＝時刻0から <strong>0〜3時間</strong>以内に AVP 開始、②早期＝<strong>3時間超〜6時間</strong>以内に AVP 開始。両戦略とも AVP を「使う」ことが前提で、「使う対使わない」の比較ではない。</li><li><strong>解析</strong>：各患者を2つのクローンに複製し、観察された AVP 開始時刻が割付戦略から外れた時点で人工的に打ち切り、時間依存共変量を含む1時間刻みのプールド・ロジスティック回帰で安定化 IPC 重みを推定。累積重みは99パーセンタイルで切断。</li><li><strong>主要アウトカム</strong>：28日死亡。<strong>48.1%（超早期）対 53.0%（早期）</strong>、リスク差 <strong>−5.0ポイント</strong>（95%CI −6.8〜−3.2）、RMST差 <strong>+1.58日</strong>（95%CI 1.21〜1.92）、<strong>HR 0.82</strong>（95%CI 0.78〜0.85）。</li><li><strong>副次アウトカム</strong>（Fine–Gray、死亡を競合リスク）：AKI KDIGO 2以上 1.01（0.97〜1.05）、3以上 1.00（0.96〜1.04）と <strong>AKI 発症は不変</strong>。一方 <strong>RRT 0.68</strong>（0.63〜0.74）、<strong>CRRT 0.61</strong>（0.55〜0.68）、<strong>薬物治療を要した不整脈 0.91</strong>（0.83〜0.99）と低下、<strong>正味の陰性水分バランス 1.07</strong>（1.01〜1.13）と増加。</li><li><strong>探索的安全性</strong>（診断コードベース・重み付きRR）：DVT 1.04（0.92〜1.17）、肺塞栓 0.81（0.70〜0.95）、腸間膜虚血 0.71（0.61〜0.84）、指趾・末梢虚血 0.89（0.77〜1.03）。虚血性合併症の増加は見られなかった。</li><li><strong>サブグループ</strong>：乳酸 4 mmol/L 以上で最も有利（HR 0.88）、2 mmol/L 未満（0.97）と 2〜4（1.01）はほぼ無効果。交互作用 P = 0.055。</li><li><strong>著者らの結論</strong>：0.25 µg/kg/分に達した後の <strong>0〜3時間以内の AVP 開始は 3〜6時間より低い28日死亡と関連</strong>した。プロトコル化した超早期開始が通常診療を置き換えるべきかは <strong>RCT による確認が必要</strong>。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Visual abstract（原図・無改変。© Springer Nature / Intensive Care Medicine） 原著のビジュアルアブストラクト。左に研究デザインと累積死亡曲線・主要／副次結果、右に clone-censor-weight の3段階（複製→人工打ち切り→重み付け）の模式図、下段に Findings。なお右側の模式図の「3/4 remain（×1.33）」「2/4 remain（×2.0）」は図中に "illustrative example" と明記された架空の例で、実際の遵守率は 19.5% と 7.7%、対応する重みはこれよりはるかに大きい。</p>
+</div>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 敗血症性ショックとバソプレシンの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>敗血症性ショック</strong>とは、感染に対する生体反応の破綻（敗血症）に、輸液をしても血圧が保てない循環不全が加わった状態を指す。Sepsis-3 の定義では「十分な輸液蘇生後も平均血圧（MAP）65 mmHg 以上を保つのに昇圧薬を要し、かつ乳酸が 2 mmol/L を超える」ものをいう。</p>
+<p>血圧が下がる主因は <strong>血管が開いてしまうこと（血管拡張・血管麻痺）</strong> である。そこで血管を締める薬＝<strong>昇圧薬（vasopressor）</strong> を使う。第一選択は <strong>ノルアドレナリン（NAd、norepinephrine）</strong> で、α1受容体を介して血管を締める「カテコラミン」である。</p>
+<p>ところが NAd を増やし続けると副作用が積み上がる。<strong>頻脈・心房細動などの不整脈</strong>、心筋酸素消費の増加、末梢・腸管の過度な虚血、そして受容体の脱感作（増やしても効かなくなる）である。</p>
+<p>そこで登場するのが <strong>バソプレシン（AVP、抗利尿ホルモン）</strong> である。カテコラミンとは違う <strong>V1a 受容体</strong> を介して血管平滑筋を収縮させるため、①カテコラミンが効きにくい状況でも血管を締められる、②NAd の必要量を減らせる（カテコラミン節減／catecholamine-sparing）という2つの利点がある。副作用として理論上は末梢・腸管・指趾の虚血が心配される。</p>
+<p><strong>用語の整理</strong></p>
+<ul><li><strong>µg/kg/分（＝γ）</strong>：体重あたりの薬剤投与速度。NAd 0.25 µg/kg/分は体重60 kg なら 15 µg/分。</li><li><strong>SOFA スコア</strong>：呼吸・凝固・肝・循環・中枢神経・腎の6臓器の障害度を各0〜4点で採点した合計（0〜24点）。高いほど重症。</li><li><strong>KDIGO ステージ</strong>：急性腎障害（AKI）の重症度分類。ステージ2＝クレアチニン2〜3倍または尿量低下が12時間以上、ステージ3＝3倍以上または透析導入など。</li><li><strong>RRT／CRRT</strong>：腎代替療法／持続的腎代替療法。いわゆる透析。CRRT は循環動態が不安定な患者に24時間かけてゆっくり行う方式。</li><li><strong>U/min（単位/分）</strong>：バソプレシンの投与速度の単位。敗血症性ショックでは 0.01〜0.06 U/min 程度の低用量で使うのが一般的。</li></ul>
+<p><strong>本研究が問うていること</strong>：「AVP を使うべきか」ではなく、<strong>「NAd を 0.25 µg/kg/分まで上げた、その次の3時間で AVP を足すのか、もう3時間 NAd で粘ってから足すのか」</strong>という、極めてベッドサイド寄りの問いである。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p><strong>バソプレシンの位置づけ</strong>。AVP は V1a 受容体を介した血管収縮で血管緊張を回復させ、敗血症性ショックでは NAd にこれ以上のカテコラミン増量を避ける目的で追加されるのが一般的である。</p>
+<p><strong>ガイドラインの記述</strong>。著者らによれば、<strong>2026年版 Surviving Sepsis Campaign（SSC）ガイドライン</strong>は NAd を第一選択の昇圧薬とし、NAd を増やしても動脈圧が不十分なとき <strong>NAd をさらに増やすのではなく AVP を追加する</strong>ことを提案している。さらに NAd と AVP でも MAP が不十分なら <strong>アドレナリンの追加</strong>を提案している。</p>
+<p><strong>先行研究の到達点</strong>。VASST、VANISH、および個々患者データメタ解析が、AVP を含む昇圧薬戦略の臨床的役割（カテコラミン節減効果・腎への効果・安全性プロファイル）を明らかにしてきた。より最近の観察研究と target trial emulation は、より早期の AVP 併用開始と臨床転帰の関連をさらに検討している。</p>
+<p><strong>本研究が置いた問い</strong>。著者らはこれらの上に立って、<strong>NAd がガイドラインに関連する増量域（0.25〜0.5 µg/kg/分）に達したときに生じる実務上の問い</strong>に焦点を当てた。すなわち <strong>AVP をただちに足すのか、それとも AVP を足す前に NAd の増量を続けるのか</strong>である。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">本研究の2つの戦略は「どちらも AVP を投与する」ことを前提にしている</mark>。したがって本研究の結果から「AVP を投与すべきである」とは言えない。言えるのは「AVP を投与するのであれば、0.25γ 到達から3時間以内のほうが良かった」までである。原著の Take-home message box も「本研究は AVP 使用の有無ではなく、NAd 増量後の AVP 追加の<strong>タイミング</strong>に焦点を当てている」と明記している。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 研究フロー図と clone-censor-weight の枠組み（原図・無改変。© Springer Nature / Intensive Care Medicine） 上段に3つの青いボックス（1 スクリーニング → 2 適格 → 3 クローン化）、そこから2列に分かれ、左列（4.1〜4.3）が超早期戦略、右列（5.1〜5.3）が早期戦略。各列とも「戦略へ割付（3,810クローン）」→ ピンク色のボックス「非遵守による人工打ち切り」→ 青いボックス「割付戦略を遵守」と縦に降りる。点線が各ボックスを結ぶ。</p>
+</div>
+<h4>Table F1. Figure 1 の全ボックスの文言と数値（原図を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>ボックスの文言</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>MIMIC-IV と eICU-CRD の敗血症性ショック成人</td><td>N = 21,587（MIMIC-IV 14,531／eICU-CRD 7,056）</td></tr>
+<tr><td>2</td><td>時刻0で適格（NAd 0.25 µg/kg/分以上、AVP 未使用）</td><td>N = 3,810（MIMIC-IV 1,839／eICU-CRD 1,971）</td></tr>
+<tr><td>3</td><td>クローン化された患者レコード（各患者が各戦略に1回ずつ登場）</td><td>N = 3,810 × 2 = 7,620 クローン</td></tr>
+<tr><td>4.1</td><td>超早期戦略（0〜3時間）に割付</td><td>N = 3,810 クローン</td></tr>
+<tr><td>4.2</td><td>非遵守による人工打ち切り</td><td>N = 3,066</td></tr>
+<tr><td>4.3</td><td>割付戦略を遵守（AVP を0〜3時間以内に開始）</td><td>N = 744（19.5%）</td></tr>
+<tr><td>5.1</td><td>早期戦略（3時間超〜6時間）に割付</td><td>N = 3,810 クローン</td></tr>
+<tr><td>5.2</td><td>非遵守による人工打ち切り</td><td>N = 3,517</td></tr>
+<tr><td>5.3</td><td>割付戦略を遵守（AVP を3時間超〜6時間に開始）</td><td>N = 293（7.7%）</td></tr>
+</tbody></table></div>
+<p><strong>データソース</strong>。MIMIC-IV バージョン3.1（Beth Israel Deaconess Medical Center、2008〜2022、ICU入室6万5千件超）と eICU Collaborative Research Database バージョン2.0（米国200施設超の遠隔ICUデータベース、2014〜2015、ICU入室20万件超）。両者を <strong>Ricu パッケージ</strong>で1時間刻みの共通概念構造に調和させて統合した。第一著者は所定の研修（Record ID: 54439141）を修了。いずれも匿名化データのため倫理審査委員会承認と個別同意は免除。</p>
+<p><strong>適格基準</strong>。①18歳以上、②Sepsis-3 の敗血症性ショック基準を満たす、③NAd 投与速度が初めて 0.25 µg/kg/分以上に達した、④その時点まで AVP を受けていない。</p>
+<p><strong>時刻0（time zero）</strong>。<strong>AVP 使用前に NAd 投与速度が初めて 0.25 µg/kg/分以上に達した最初の1時間</strong>。0.25 µg/kg/分を選んだ理由は「ガイドラインが推奨する範囲の下限」であり、AVP 追加が一般に検討され始める最も早い時点を捉えるため。NAd 値は一貫して体重補正した投与速度（µg/kg/分）として扱われた。</p>
+<p><strong>ノルアドレナリン等価用量（NEE）の換算式</strong>（感度分析用、ATHOS-3 の換算係数）：NAd ＋ アドレナリン ＋ ドパミン÷150 ＋ フェニレフリン÷10 ＋ バソプレシン×2.5（U/min）。<strong>ドブタミンは強心薬であるため含めない</strong>。</p>
+<p><strong>治療戦略</strong>。①<strong>超早期</strong>＝時刻0から0〜3時間以内に AVP 開始、②<strong>早期</strong>＝時刻0から3時間超〜6時間以内に AVP 開始。仮想の標的試験では、適格者は時刻0でいずれかの戦略にランダム割付されることになる。</p>
+<p><strong>アウトカム</strong>。</p>
+<ul><li><strong>主要</strong>：28日死亡。</li><li><strong>副次（28日以内）</strong>：AKI（KDIGO ステージ2以上、ステージ3以上）、RRT 導入、CRRT 導入、薬物治療を要した不整脈、正味の陰性水分バランス。</li><li><strong>治療実施の指標</strong>（観察された AVP 開始の前後）：AVP 用量、AVP 開始後の乳酸推移、AVP 開始後3時間以内の中断または恒久的中止、AVP 開始後3・6・24時間以内のドパミン／ドブタミン／アドレナリンの新規開始。</li><li><strong>探索的な安全性アウトカム（28日以内、診断コードベース）</strong>：深部静脈血栓症、肺塞栓、腸間膜虚血、指趾または末梢の虚血。<strong>発症時刻の正確な把握と臨床的判定ができないため探索的</strong>と位置づけられている。</li></ul>
+<p><strong>共変量</strong>。時刻0またはその直前に測定された変数として、年齢、性別、BMI、体重、MAP、乳酸、SOFA スコア、クレアチニン、NAd 投与速度、侵襲的人工呼吸、時刻0前24時間以内の全身ステロイド使用、時刻0前24時間と6時間の輸液量と水分バランス、基礎併存疾患。これらに加え、<strong>0〜6時間の割付ウィンドウ中の1時間刻みの時間依存値</strong>（MAP、乳酸、クレアチニン、NAd 投与速度、SOFA スコア、人工呼吸の有無、他の血管作動薬の併用、時刻0の NAd 用量からの各時点の乖離、およびその1時間変化）を打ち切り重みモデルに投入した。共変量は先行研究に基づいて事前規定。</p>
+<p><strong>欠測</strong>。各ベースライン共変量について欠測を評価。欠測割合と補完法は Online Resource 4（本PDFには含まれない）。</p>
+<p><strong>統計解析</strong>。</p>
+<ul><li>ベースライン特性は、カテゴリ変数は実数と割合、量的変数は中央値と四分位範囲で記述。</li><li><strong>clone-censor-weight 法</strong>：時刻0で各適格患者を2つの戦略別レコードに複製し、ランダム化を模倣。観察された AVP 開始時刻が割付戦略から外れた時点で各クローンを人工的に打ち切り、ベースラインと時間依存共変量を条件とする<strong>1時間刻みのプールド・ロジスティック回帰</strong>で安定化 IPC（逆確率打ち切り）重みを推定。累積重みは<strong>99パーセンタイルで切断</strong>。時間依存共変量は打ち切りモデルにのみ使用し、治療後の転帰調整には使っていない。</li><li>28日死亡の累積発生曲線は <strong>IPC 重み付き Kaplan–Meier 法</strong>で推定。リスク差と RMST（制限付き平均生存時間）差の95%CI は<strong>患者レベルのブートストラップ（500反復）</strong>から算出。</li><li>ハザード比は <strong>IPC 重み付き Cox モデル</strong>で推定し、クローン化により生じる患者内相関に対応するため<strong>患者でクラスタリングしたロバスト標準誤差</strong>を用いた。</li><li>副次アウトカムは <strong>IPC 重み付き Fine–Gray 部分分布ハザードモデル</strong>で、関心事象より前の死亡を競合リスクとして扱った。治療実施の指標は観察された開始群ごとに集計し、探索的安全性アウトカムには重み付きリスク比と95%CI を算出。</li><li><strong>サブグループ</strong>（主要アウトカム）：時刻0の乳酸（2 mmol/L 未満、2〜4 未満、4以上）、時刻0の NAd 投与速度（0.35 µg/kg/分未満、0.35以上）、侵襲的人工呼吸、SOFA スコア（14未満、14以上）、ベースラインの全身ステロイド使用。各々に交互作用 P 値を算出。</li><li><strong>感度分析</strong>：データベース別、NAd 閾値の変更、NEE 定義および NAd 単独定義での時刻0、ドブタミン投与例の除外または打ち切りモデルからのドブタミン除外、時間依存共変量をすべて除いてベースラインと時刻0の共変量のみに限定した打ち切りモデル、95パーセンタイルでの重み切断。</li><li>解析は R 4.3.2。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>方法の記述で本文に無いこと 本文には、<mark class="hl"><strong>時刻0から AVP 開始前の期間に死亡した患者を各戦略でどう扱ったか</strong>が書かれていない</mark>。Figure 1 は各戦略で「遵守（744／293）」と「非遵守による人工打ち切り（3,066／3,517）」の2区分しかなく、合計はいずれもちょうど 3,810 になるため、<strong>AVP 開始前の死亡がどちらに数えられたかが図からも読み取れない</strong>。この点は Online Resource 5 に譲られており、本PDFでは確認できない。後述するとおり、これは結果の解釈を大きく左右する。</p>
+</div>
+<h3>4. 結果① コホートの姿 📊</h3>
+<p><strong>組み入れ</strong>。MIMIC-IV と eICU-CRD の敗血症性ショック成人 21,587例のうち、時刻0の適格基準（NAd 0.25 µg/kg/分以上、AVP 先行使用なし）を満たしたのは <strong>3,810例</strong>（MIMIC-IV 1,839例、eICU-CRD 1,971例）。時刻0から AVP 開始までの時間分布は Online Resource 6（本PDFには無い）。</p>
+<p><strong>時刻0の昇圧薬</strong>。3,810例のうち <strong>2,845例（74.7%）が NAd 単剤</strong>、<strong>965例（25.3%）が NAd に AVP 以外の昇圧薬を併用</strong>していた（フェニレフリン 705例［18.5%］、ドパミン 208例［5.5%］、アドレナリン 174例［4.6%］。合計が 965 を超えるのは重複併用による）。</p>
+<p><strong>全体像</strong>。年齢中央値 66歳、男性 53.3%、SOFA 中央値 9、乳酸中央値 3.1 mmol/L、NAd 投与速度中央値 0.35 µg/kg/分。侵襲的人工呼吸は 33.7%、時刻0前のステロイド使用は 6.9%。併存疾患は慢性心疾患 37.3%、高血圧 55.5%、慢性腎臓病 18.1%。</p>
+<h4>Table 1. 時刻0（ノルアドレナリン到達時点）のベースライン特性（原表を日本語化）</h4>
+<p>中央値（第1四分位, 第3四分位）または 実数（%）。SMD は<strong>観察された</strong>超早期群と早期群の比較。「全体」には AVP を6時間超で開始した患者と AVP を全く受けなかった患者も含まれる。</p>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>全体（N=3,810）</th><th>超早期 0〜3時間（n=744）</th><th>早期 3時間超〜6時間（n=293）</th><th>SMD</th></tr></thead>
+<tbody>
+<tr><td><strong>人口統計</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>年齢（歳）</td><td>66.0（55.0, 77.0）</td><td>65.0（54.0, 75.0）</td><td>66.0（56.0, 75.0）</td><td>0.10</td></tr>
+<tr><td>男性</td><td>2,032（53.3%）</td><td>420（56.5%）</td><td>170（58.0%）</td><td>0.03</td></tr>
+<tr><td>BMI（kg/m²）</td><td>26.6（22.8, 31.5）</td><td>27.4（23.1, 32.4）</td><td>27.3（23.3, 32.3）</td><td>0.02</td></tr>
+<tr><td>体重（kg）</td><td>76.2（63.0, 91.5）</td><td>80.0（64.9, 97.7）</td><td>77.3（65.0, 93.0）</td><td>0.06</td></tr>
+<tr><td><strong>時刻0の血行動態・重症度</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>MAP（mmHg）</td><td>67.5（60.0, 76.0）</td><td>65.0（58.0, 74.0）</td><td>65.5（58.0, 74.0）</td><td>0.05</td></tr>
+<tr><td>乳酸（mmol/L）</td><td>3.1（1.8, 5.8）</td><td>4.7（2.6, 8.1）</td><td>3.4（2.1, 6.3）</td><td>0.30</td></tr>
+<tr><td>SOFA スコア</td><td>9.0（6.0, 11.0）</td><td>9.0（7.0, 12.0）</td><td>10.0（7.0, 12.0）</td><td>0.07</td></tr>
+<tr><td>クレアチニン（mg/dL）</td><td>1.60（1.00, 2.66）</td><td>1.80（1.14, 2.70）</td><td>1.82（1.20, 2.96）</td><td>0.06</td></tr>
+<tr><td>NAd 投与速度（µg/kg/分）</td><td>0.35（0.28, 0.50）</td><td>0.40（0.30, 0.55）</td><td>0.30（0.27, 0.40）</td><td>0.50</td></tr>
+<tr><td>NAd 等価用量（µg/kg/分）</td><td>0.32（0.27, 0.47）</td><td>0.35（0.29, 0.50）</td><td>0.30（0.26, 0.40）</td><td>0.37</td></tr>
+<tr><td>侵襲的人工呼吸</td><td>1,284（33.7%）</td><td>279（37.5%）</td><td>131（44.7%）</td><td>0.15</td></tr>
+<tr><td>時刻0前の全身ステロイド使用</td><td>263（6.9%）</td><td>55（7.4%）</td><td>22（7.5%）</td><td>0.00</td></tr>
+<tr><td><strong>併存疾患</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>慢性心疾患</td><td>1,422（37.3%）</td><td>248（33.3%）</td><td>101（34.5%）</td><td>0.02</td></tr>
+<tr><td>高血圧</td><td>2,114（55.5%）</td><td>378（50.8%）</td><td>152（51.9%）</td><td>0.02</td></tr>
+<tr><td>慢性腎臓病</td><td>688（18.1%）</td><td>116（15.6%）</td><td>60（20.5%）</td><td>0.13</td></tr>
+<tr><td>糖尿病</td><td>1,153（30.3%）</td><td>227（30.5%）</td><td>81（27.6%）</td><td>0.06</td></tr>
+<tr><td>悪性腫瘍</td><td>703（18.5%）</td><td>157（21.1%）</td><td>63（21.5%）</td><td>0.01</td></tr>
+<tr><td>HIV／AIDS</td><td>40（1.0%）</td><td>7（0.9%）</td><td>5（1.7%）</td><td>0.07</td></tr>
+<tr><td>認知症</td><td>156（4.1%）</td><td>20（2.7%）</td><td>9（3.1%）</td><td>0.02</td></tr>
+<tr><td><strong>時刻0前の輸液</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>時刻0前6時間の輸液量（mL）</td><td>1,129（400, 2,369）</td><td>1,236（412, 2,872）</td><td>1,478（641, 2,597）</td><td>0.03</td></tr>
+<tr><td>時刻0前24時間の輸液量（mL）</td><td>1,896（607, 4,274）</td><td>1,931（600, 4,607）</td><td>2,583（825, 5,950）</td><td>0.18</td></tr>
+<tr><td>時刻0前6時間の水分バランス（mL）</td><td>1,083（400, 2,396）</td><td>1,219（377, 2,854）</td><td>1,471（663, 2,601）</td><td>0.03</td></tr>
+<tr><td>時刻0前24時間の水分バランス（mL）</td><td>1,864（632, 4,137）</td><td>1,865（627, 4,672）</td><td>2,497（962, 5,839）</td><td>0.16</td></tr>
+</tbody></table></div>
+<p><strong>表から読み取れる非対称</strong>。超早期群のほうが <strong>NAd 用量が高く（0.40 対 0.30、SMD 0.50）、乳酸も高い（4.7 対 3.4、SMD 0.30）</strong> 一方で、<strong>人工呼吸は少なく（37.5% 対 44.7%）、時刻0前24時間の輸液量も少ない（1,931 mL 対 2,583 mL）</strong>。つまり「超早期群のほうが血管麻痺は強いが、呼吸不全と輸液負荷は軽い」という混在した像である。生存者・非生存者の比較は Online Resource 8 にあり、非生存者は高齢で乳酸・SOFA・クレアチニンが高かったと記されている。</p>
+<h3>5. 結果② 主要アウトカム — 28日死亡 💧</h3>
+<p><strong>臨床疑問</strong>：NAd 0.25 µg/kg/分に達した敗血症性ショック成人（P）で、0〜3時間以内の AVP 開始（I）は、3時間超〜6時間の AVP 開始（C）と比べて28日死亡（O）を下げるか。</p>
+<p>3,810例から 7,620 の戦略別レコードが生成され、戦略からの逸脱で人工打ち切りを行った後、<strong>超早期戦略に 744、早期戦略に 293 のクローンが遵守として残り</strong>、打ち切られなかったクローンに IPC 重みが与えられた。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 28日死亡の重み付き累積発生曲線（原図・無改変。© Springer Nature / Intensive Care Medicine） 縦軸「累積死亡発生率（%）」0〜100、横軸「時刻0からの日数」0・7・14・21・28。実線（濃紺）が 0〜3時間（超早期）、点線（薄紫）が 3時間超〜6時間（早期）。左上に凡例ボックスがあり「Day-28 mortality risk／0–3 h: 48.1% vs. &gt;3–6 h: 53.0%／Risk difference: −5.0 pp（−6.8 〜 −3.2）／RMST difference: +1.58 days（1.21〜1.92）」と記載。両曲線とも最初の数日で急峻に立ち上がり、その後なだらかになる。<strong>2本は0日目直後から離れ始め</strong>、7日目で実線約31%・点線約37%、14日目で実線約41%・点線約44%と一度接近し、その後再び開いて28日目に約48%と約53%になる。曲線は99パーセンタイル切断の安定化 IPC 重み付けで推定。</p>
+</div>
+<p><strong>結果</strong>：</p>
+<ul><li>28日死亡 <strong>48.1%（超早期）対 53.0%（早期）</strong></li><li>リスク差 <strong>−5.0 パーセンタイルポイント</strong>（95%CI −6.8 〜 −3.2）</li><li>RMST 差 <strong>+1.58 日</strong>（95%CI 1.21〜1.92）＝ 超早期のほうが28日間で平均1.58日長く生きた</li><li>ハザード比 <strong>0.82</strong>（95%CI 0.78〜0.85、99パーセンタイル切断）</li><li>95パーセンタイル切断では <strong>0.83</strong>（95%CI 0.80〜0.87）</li></ul>
+<p><strong>Figure 2 の読み方</strong>。曲線に <strong>95%信頼区間の帯が描かれておらず、リスク集合表（number at risk）も付いていない</strong>。分母がどの時点で何人分の重みを持っていたのかが図から確認できない。</p>
+<h3>6. 結果③ 副次アウトカム — 腎代替療法が最も大きく減った 🩺</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 主要および副次アウトカムの解析（原図・無改変。© Springer Nature / Intensive Care Medicine） 上下2枚のフォレストプロット。上段「Primary outcome」は2行（99パーセンタイル切断と95パーセンタイル切断の IPCW Cox）。下段「Secondary outcomes」は6行。いずれも横軸は「ハザード比（超早期 対 早期）」で目盛りは 0.6・0.8・1.0・1.1、1.0 に縦の破線。各行に濃紺の点推定と水平の95%CI バー、右端に数値。ハザード比は超早期戦略と早期戦略の比較。</p>
+</div>
+<h4>Table 3. Figure 3 の全数値（原図を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>アウトカム</th><th>推定値（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>主要</td><td>IPCW Cox（99パーセンタイル切断）</td><td>0.82（0.78〜0.85）</td></tr>
+<tr><td>主要</td><td>IPCW Cox（95パーセンタイル切断）</td><td>0.83（0.80〜0.87）</td></tr>
+<tr><td>副次</td><td>AKI、KDIGO ステージ2以上</td><td>1.01（0.97〜1.05）</td></tr>
+<tr><td>副次</td><td>AKI、KDIGO ステージ3以上</td><td>1.00（0.96〜1.04）</td></tr>
+<tr><td>副次</td><td>腎代替療法（RRT）</td><td>0.68（0.63〜0.74）</td></tr>
+<tr><td>副次</td><td>持続的腎代替療法（CRRT）</td><td>0.61（0.55〜0.68）</td></tr>
+<tr><td>副次</td><td>薬物治療を要した不整脈</td><td>0.91（0.83〜0.99）</td></tr>
+<tr><td>副次</td><td>正味の陰性水分バランス</td><td>1.07（1.01〜1.13）</td></tr>
+</tbody></table></div>
+<p><strong>要点</strong>。<strong>AKI の発症率は両群で差が無い</strong>（KDIGO 2以上 1.01、3以上 1.00）のに、<strong>RRT と CRRT の導入は明らかに少ない</strong>（0.68 と 0.61）。著者らはこれを「腎効果は AKI 発症の減少ではなく、血行動態の安定と輸液関連の腎うっ血の軽減によって媒介された可能性がある」と解釈している。<strong>正味の陰性水分バランスが超早期で多い（1.07）</strong>ことがこの解釈を支える所見として挙げられている。</p>
+<p><strong>探索的な安全性アウトカム</strong>（Online Resource 10、重み付きリスク比）：</p>
+<ul><li>深部静脈血栓症 <strong>1.04</strong>（95%CI 0.92〜1.17）</li><li>肺塞栓 <strong>0.81</strong>（95%CI 0.70〜0.95）</li><li>腸間膜虚血 <strong>0.71</strong>（95%CI 0.61〜0.84）</li><li>指趾または末梢の虚血 <strong>0.89</strong>（95%CI 0.77〜1.03）</li></ul>
+<p>著者らは「早期の AVP で虚血が増えるのではないかという一般的な懸念に答える解析だが、発症時刻が確認されていない診断・治療コードに基づくため慎重に解釈すべき」と留保している。</p>
+<h3>7. 結果④ AVP の投与実態と投与後の経過 💉</h3>
+<h4>Table 4. 観察された AVP 開始群ごとの投与量（原文の記述を表に整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>超早期 0〜3時間（n=744）</th><th>早期 3時間超〜6時間（n=293）</th></tr></thead>
+<tbody>
+<tr><td>初期用量（U/min）</td><td>0.040（IQR 0.040〜0.094）</td><td>0.040（IQR 0.032〜0.047）</td></tr>
+<tr><td>24時間以内の最大用量（U/min）</td><td>0.060</td><td>0.040</td></tr>
+<tr><td>24時間以内の累積投与量（U）</td><td>1.07</td><td>1.00</td></tr>
+</tbody></table></div>
+<p><strong>AVP 開始後の乳酸推移</strong>（遵守クローンの重み付き中央値）：</p>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>超早期</th><th>早期</th></tr></thead>
+<tbody>
+<tr><td>AVP 開始時</td><td>3.7 mmol/L</td><td>4.9 mmol/L</td></tr>
+<tr><td>開始6時間後</td><td>3.9 mmol/L</td><td>5.8 mmol/L</td></tr>
+<tr><td>開始24時間後</td><td>3.1 mmol/L</td><td>4.2 mmol/L</td></tr>
+</tbody></table></div>
+<p><strong>その他の実施指標</strong>：</p>
+<ul><li>AVP の3時間以内の中断：重み付きで超早期 1.4%、早期 0.8%</li><li>AVP の3時間以内の恒久的中止：両群とも 0.0%</li><li>3時間以内のドブタミン新規開始：両群とも 1.1%</li><li>3時間以内のドパミン新規開始：1.8% 対 0.9%</li><li>3時間以内のアドレナリン新規開始：4.6% 対 3.4%</li></ul>
+<p>著者らはこれらを「超早期開始の忍容性を支持する」と解釈している。すなわち初期用量と24時間累積曝露は両群で同程度であり、AVP 開始後の乳酸・早期中断・恒久的中止・ドブタミン新規開始のいずれも、過度の低灌流や不耐容を示唆しなかった、という論法である。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>乳酸の表を額面通りに読まない <mark class="hl">AVP 開始後の乳酸は3時点すべてで超早期のほうが 1.1〜1.9 mmol/L 低い</mark>。ところが Table 1 の<strong>時刻0</strong>の乳酸は逆に超早期のほうが高い（4.7 対 3.4）。この逆転は「重み付け後」と「重み付け前」、「時刻0」と「AVP 開始時」という2つの違いが同時にかかっているため、治療効果とも残存交絡ともどちらとも読める。<strong>著者らはこれを治療の忍容性の根拠として引いているが、両群の重症度がなお異なっていた徴候とも読める</strong>。この表だけで「超早期は組織灌流を改善する」とは言えない。</p>
+</div>
+<h3>8. 結果⑤ サブグループ解析 🔎</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 28日死亡のサブグループ解析（原図・無改変。© Springer Nature / Intensive Care Medicine） 5つの事前規定サブグループを縦に並べたフォレストプロット。各サブグループ名は太字で左端、右端に交互作用 P 値。横軸は「ハザード比（超早期 対 早期）」で目盛り 0.6・0.8・1.0・1.2、1.0 に縦の破線。P 値は治療とサブグループの交互作用項を含む重み付き Cox モデルから算出。</p>
+</div>
+<h4>Table 5. Figure 4 の全数値（原図を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>サブグループ</th><th>層</th><th>HR（95%CI）</th><th>交互作用 P</th></tr></thead>
+<tbody>
+<tr><td>時刻0の乳酸</td><td>2 mmol/L 未満</td><td>0.97（0.88〜1.07）</td><td>0.055</td></tr>
+<tr><td>時刻0の乳酸</td><td>2〜4 mmol/L 未満</td><td>1.01（0.93〜1.10）</td><td></td></tr>
+<tr><td>時刻0の乳酸</td><td>4 mmol/L 以上</td><td>0.88（0.81〜0.95）</td><td></td></tr>
+<tr><td>時刻0の NAd 用量</td><td>0.35 µg/kg/分未満</td><td>0.79（0.74〜0.84）</td><td>0.20</td></tr>
+<tr><td>時刻0の NAd 用量</td><td>0.35 µg/kg/分以上</td><td>0.84（0.78〜0.90）</td><td></td></tr>
+<tr><td>ベースラインのステロイド使用</td><td>なし</td><td>0.82（0.78〜0.86）</td><td>0.32</td></tr>
+<tr><td>ベースラインのステロイド使用</td><td>あり</td><td>0.74（0.63〜0.88）</td><td></td></tr>
+<tr><td>侵襲的人工呼吸</td><td>なし</td><td>0.82（0.78〜0.86）</td><td>0.83</td></tr>
+<tr><td>侵襲的人工呼吸</td><td>あり</td><td>0.81（0.75〜0.88）</td><td></td></tr>
+<tr><td>時刻0の SOFA スコア</td><td>14 未満</td><td>0.85（0.81〜0.89）</td><td>0.93</td></tr>
+<tr><td>時刻0の SOFA スコア</td><td>14 以上</td><td>0.86（0.77〜0.95）</td><td></td></tr>
+</tbody></table></div>
+<p><strong>著者らの記述</strong>。主要効果の方向は、時刻0の NAd 用量、侵襲的人工呼吸、SOFA スコア、ベースラインのステロイド使用で定義したサブグループを通じて一貫していた。乳酸については、2 mmol/L 未満 0.97、2〜4 未満 1.01、4以上 0.88（交互作用 P = 0.055）であった。</p>
+<p><strong>著者らの解釈</strong>。VASST の事後解析は「ショックが進みすぎる前のほうが AVP は有用かもしれない」（NAd 低用量層・低乳酸層を含む）と示唆していた。本研究の乳酸サブグループはこれと逆向きに見えるが、著者らは「生物学的効果が逆であることを意味しない」とし、<strong>本研究では全員がすでに NAd 閾値に達しており、比較は AVP の使用対非使用ではなく迅速対遅延だから</strong>と説明する。そのうえで「高乳酸は、遅延中に増悪しやすく、カテコラミン増量の数時間を回避することで最も利益を得る患者を同定しているのかもしれない」という解釈を提示している。これは<strong>著者らの解釈であって、本研究で検証された機序ではない</strong>。</p>
+<h3>9. 結果⑥ 感度分析 🧪</h3>
+<div class="tw"><table>
+<thead><tr><th>感度分析</th><th>n</th><th>HR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>MIMIC-IV のみ</td><td>記載なし</td><td>0.81（0.76〜0.86）</td></tr>
+<tr><td>eICU-CRD のみ</td><td>記載なし</td><td>0.82（0.77〜0.88）</td></tr>
+<tr><td>打ち切りモデルをベースラインと時刻0の共変量に限定（時間依存共変量をすべて除外）</td><td>3,810</td><td>0.85（0.82〜0.87）</td></tr>
+<tr><td>時刻0を NAd 等価用量 0.25 µg/kg/分以上で定義</td><td>5,215</td><td>0.80（0.76〜0.83）</td></tr>
+<tr><td>時刻0で アドレナリン・ドパミン・フェニレフリンの併用が無い NAd 単独例</td><td>2,740</td><td>0.86（0.82〜0.91）</td></tr>
+<tr><td>時刻0でドブタミンを投与されていた患者を除外</td><td>3,683</td><td>0.81（0.77〜0.85）</td></tr>
+<tr><td>打ち切りモデルからドブタミンを除外</td><td>3,810</td><td>0.81（0.78〜0.85）</td></tr>
+<tr><td>重み切断を95パーセンタイルに変更</td><td>3,810</td><td>0.83（0.80〜0.87）</td></tr>
+<tr><td>56通りの代替時刻0定義</td><td>記載なし</td><td>すべて点推定が 1.0 未満</td></tr>
+</tbody></table></div>
+<p><strong>要点</strong>。どの感度分析でも点推定は 0.80〜0.86 の範囲に収まり、方向は変わらなかった。特筆すべきは、<strong>時間依存共変量をすべて外しても HR が 0.85 とほとんど動かなかった</strong>こと。著者らはこれを頑健性の証拠として提示しているが、逆に読めば「1時間刻みの時間依存共変量による重み付けが推定値をほとんど動かしていない」＝<strong>精緻な重み付けが実質的な交絡調整をしていない</strong>とも解釈できる。</p>
+<h3>10. 著者らの考察 🧾</h3>
+<ul><li><strong>主結果の要約</strong>：3,810例の target trial emulation で、0〜3時間以内の AVP 開始は 3〜6時間より28日死亡リスクが 5.0 パーセンタイルポイント低かった（HR 0.82）。方向と大きさは重み切断の変更、データベース別解析、代替の時刻0定義、時刻0でのドブタミン投与例の除外を通じて保たれた。</li><li><strong>先行研究との関係</strong>：VASST は全体の28日生存の利益を示さなかったが、ベースライン NAd 必要量が低い軽症ショック層では利益を示唆した。VANISH は腎不全フリー日数を改善しなかったが AVP で RRT は減った。個々患者データメタ解析も同様に、一貫した全体死亡の減少なしにカテコラミン節減効果と腎効果を支持した。これらは「AVP を含む治療が広い敗血症性ショック集団で転帰を改善するか」を主に扱っていた。<strong>本研究はそれと相補的な、ベッドサイドに関連する問いを扱った</strong>——ガイドラインに関連する NAd 増量閾値にすでに達した患者において、迅速な AVP 追加と、追加前に NAd 増量を続けることの比較である。</li><li><strong>想定される機序（著者らの推論）</strong>：高いカテコラミン必要量の時期に、より早く非カテコラミン性の V1 受容体を介した血管収縮を導入すること。NAd 閾値到達後に AVP を遅らせると、アドレナリン作動性の曝露とそれに伴う不整脈リスク・水分貯留・組織低灌流が長引くかもしれない。早期追加は血管緊張を安定させカテコラミン減量を容易にするかもしれない。<strong>この機序は本研究で検証されておらず、著者らも "A plausible mechanism is..." と述べるにとどまる</strong>。</li><li><strong>強み（著者らの記述）</strong>：①AVP 開始のタイミングに焦点を当てた、②タイミングだけが異なる2つの能動的 AVP 戦略を比較した、③時刻0を敗血症性ショック発症ではなく NAd 増量に固定した、④clone-censor-weight 法により、戦略逸脱による人工打ち切りに対処しつつ動的なタイミング戦略を比較できた。</li><li><strong>限界（著者らの記述）</strong>：①ベースラインと時間依存共変量で調整しても、未測定の重症度・臨床医の判断・施設の診療パターンによる残存交絡は残りうる。②AVP は後負荷を上げて心拍出量を下げうるが、<strong>心拍出量はどちらのデータベースにも無かった</strong>。AVP 後の低灌流は乳酸推移・臓器サポートのアウトカム・早期中止・追加血管作動薬で間接的に評価した。③投薬記録はベッドサイドの意思決定と完全には同期していないため、治療タイミングが誤分類された可能性がある。④探索的安全性アウトカムは発症時刻が確認されていないコード化診断に基づくため慎重に解釈すべき。</li><li><strong>結論</strong>：NAd が 0.25 µg/kg/分以上に達した後の 0〜3時間以内の AVP 開始は、3〜6時間以内の開始より低い28日死亡と関連した。<strong>プロトコル化した超早期 AVP 開始が通常診療を置き換えるべきかどうかは、ランダム化試験による確認が必要である</strong>。</li></ul>
+<h2>🔗 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>既存ノート</th><th>主張</th><th>本論文との関係</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">敗血症性ショックでバソプレシンをいつ開始するか</span>（Guerci 2022, CritCare）</td><td>SSC の「NAd 0.25〜0.5 µg/kg/分」という<strong>閾値ルールに依存すべきではない</strong>。NAd の増え方（キネティクス）で判断せよ</td><td><strong>緊張関係にある</strong>。本論文は 0.25 µg/kg/分という閾値をまさに時刻0の定義に採用した。ただし主張の方向（早いほうが良い）は一致する。Guerci らが求めた「閾値到達前の超早期投与」の検証にはなっていない</td></tr>
+<tr><td><span class="wl">敗血症性ショックにおけるバソプレシンの実践 用量・タイミング・離脱（ICM2025）</span></td><td>0.01 U/min の固定低用量で開始し20分ごとに 0.005 U/min 漸増。ショック発症6時間以内かつ NAd 0.25 µg/kg/分未満での導入で生存が増加</td><td><strong>用量が食い違う</strong>。本研究の実際の初期用量中央値は両群とも 0.040 U/min で、ICM2025 の推奨開始用量の4倍。また ICM2025 は「NAd 0.25 未満で導入」を挙げるが、本研究は 0.25 到達<strong>後</strong>の話であり、扱う場面が異なる</td></tr>
+<tr><td><span class="wl">強化学習で導いたバソプレシン開始ルール（JAMA2025）</span>（Kalimouttou）</td><td>より早期・より低い NAd 用量での AVP 開始が生存改善と RRT 低下に関連</td><td><strong>方向は一致</strong>。本研究の RRT 低下（sHR 0.68）と整合する。本論文は Kalimouttou を引用していない（引用文献に見当たらない）</td></tr>
+<tr><td><span class="wl">敗血症性ショックに対するバソプレシン（VASST・VANISH・VANCS・NEJM2008）</span> / <span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span></td><td>VASST は全体死亡を改善せず軽症層で示唆、VANISH は腎不全フリー日数を改善せず RRT は減らした</td><td><strong>本論文の記述と一致</strong>。本論文は「使用対非使用」から「タイミング」へ問いを移した点で位置づけが異なる</td></tr>
+<tr><td><span class="wl">CLEANSE試験は「陰性」ではなく「解釈不能」— 効果量の楽観・時刻0の非対称・アウトカム選択（Matters Arising・CritCare2026）</span></td><td>両群で<strong>非対称な時刻0</strong>を置くと解釈不能な試験になる</td><td><strong>本論文の最重要の論点と直結する</strong>。本論文は時刻0を両戦略で共通（NAd 0.25 到達時）に置いた点で優れているが、<strong>戦略の定義ウィンドウが 0〜3時間と3〜6時間で非対称</strong>であり、その中で起きる死亡の扱いが両戦略で対称かどうかが本文から確認できない</td></tr>
+<tr><td><span class="wl">介入下予測モデルの性能はどう検証するか — 人工打ち切り＋逆確率重み付けで反実仮想の較正・判別・Brierを測る（方法論・Epidemiology2024）</span></td><td>人工打ち切り＋IPW の方法論的枠組み</td><td>本研究が用いた手法の理論的背景。読み合わせると理解が深まる</td></tr>
+<tr><td><span class="wl">ノルアドレナリンの用量表記は塩か基剤か — 32か国の添付文書を調べた（Correspondence・ICM2023）</span></td><td>NAd の用量は base 表記と酒石酸塩表記で2倍ずれる</td><td><strong>本論文には base か tartrate かの記載が無い</strong>。米国のデータベースでは base 表記が通例だが、0.25 という閾値の意味を左右する情報が明示されていない</td></tr>
+<tr><td><span class="wl">肝硬変合併敗血症のアルブミン投与は「いつ始めるか」で効果が変わる（MIMIC-IV 2265例・周辺構造モデル・CritCare2023）</span></td><td>MIMIC-IV で治療開始タイミングを因果推論で扱った先行例</td><td>同じデータベース・同じ問いの立て方。手法（周辺構造モデル 対 clone-censor-weight）の比較が JC の題材になる</td></tr>
+<tr><td><span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span></td><td>AVP は NAd 増量より第2選択として追加を提案（弱い推奨・確実性 moderate）。remarks で NAd base 0.25〜0.5 µg/kg/分</td><td>本論文が閾値の根拠とするガイドライン。ただし引用先が誤っている（後述）</td></tr>
+</tbody></table></div>
+<p>Vault には <strong>SSC 2026 ガイドライン（Prescott ら, CCM 2026）のノートがまだ無い</strong>。本論文が第一に引く根拠文献なので、次に取り込む候補になる。</p>
+<h2>🔍 批判的吟味（JCでの論点）</h2>
+<h3>A. 原著の内的不整合（検算で見つかったもの）</h3>
+<ol><li><strong>リスク差 −5.0 と、表示された絶対リスク 48.1% / 53.0% が合わない。</strong></li></ol>
+<p>53.0 − 48.1 = <strong>4.9</strong> ポイントであり、抄録・結果・考察・ビジュアルアブストラクトのすべてで <strong>−5.0</strong> と書かれている。95%CI（−6.8 〜 −3.2）の中点はちょうど −5.0 なので、丸め前の値から算出したものと推測されるが、<strong>同じ段落の中で 4.9 と 5.0 が両立している</strong>。重大ではないが、査読で拾われるべき箇所。</p>
+<ol><li><strong>サブグループの HR が全体の HR と整合しない（乳酸）。</strong></li></ol>
+<p>乳酸の3層は 0.97 / 1.01 / 0.88 で、<strong>3層すべてが全体の 0.82 より 1.0 寄り</strong>である。3層が相互排他かつ網羅的なら、層別 HR の（重み付き）平均は全体推定の近傍に来るはずで、全体だけが3層のいずれよりも小さくなることは通常ありえない。ハザード比の非圧縮性（non-collapsibility）は「層別のほうが 1.0 から遠くなる」向きに働くので、この方向のずれは説明できない。<strong>乳酸欠測例が独立の第4層として全体解析にのみ含まれている</strong>などの説明が必要だが、本文にも図にも記載が無い（欠測は Online Resource 4）。 SOFA も同様で、14未満 0.85／14以上 0.86 と<strong>両層とも全体の 0.82 より 1.0 寄り</strong>。一方、人工呼吸（0.82／0.81）とステロイド（0.82／0.74）は整合している。<strong>整合しないのが乳酸と SOFA という「欠測が起きやすい2変数」であること自体が、欠測の扱いを疑わせる</strong>。</p>
+<ol><li><strong>副次アウトカムを「HR」と表記しているが、実体は部分分布ハザード比（sHR）。</strong></li></ol>
+<p>Methods は Fine–Gray 部分分布ハザードモデルと明記しているのに、Figure 3 の凡例と本文はいずれも「HR hazard ratio」としている。原因別ハザード比と部分分布ハザード比は解釈が異なる（後者は累積発生の比較に対応する）。<strong>死亡率が両群で違う本研究では、この区別は些末ではない</strong>。</p>
+<ol><li><strong>引用文献[4]が主張を支えていない。</strong></li></ol>
+<p>「ガイドラインに関連する増量域 0.25〜0.5 µg/kg/分」の根拠として2回引かれる文献[4]は、Rehn ら（2022）*Acta Anaesthesiol Scand* 66:634-635 の<strong>2ページの学会エンドースメント（賛同表明）</strong>である。0.25〜0.5 µg/kg/分という記述の一次出典は SSC 2021 本体（Evans ら）であり、<strong>その SSC 2021 本体は引用文献リストに存在しない</strong>。閾値の根拠としては不適切な引用。</p>
+<ol><li><strong>引用番号の出現順が乱れている。</strong></li></ol>
+<p>Introduction 第2段落で [2] → [5] → [6] → [7–9] → [4] の順に現れ、<strong>[4] が [5]〜[9] より後に初出</strong>する。Springer 系の順次番号付けの慣行から外れる。また [20]（Matok ら、妊娠薬剤研究の immortal time bias）が「クローン化がランダム化を模倣する」根拠として引かれているが、この文献はクローン化手法そのものを扱っていない。</p>
+<ol><li><strong>水分バランスが輸液量とほぼ同値。</strong></li></ol>
+<p>全体で 時刻0前24時間の輸液量 1,896 mL に対し<strong>水分バランス 1,864 mL</strong>、6時間では 1,129 mL に対し 1,083 mL。<strong>24時間の尿量・排液がほぼ 0 でなければ成立しない値</strong>であり、これらのデータベースで水分バランスの「出」側が十分に捕捉されていない可能性を示唆する。これらは打ち切り重みモデルの共変量でもあり、副次アウトカム「正味の陰性水分バランス」の妥当性にも関わる。</p>
+<ol><li><strong>超早期群のほうが AVP 曝露は多いのに「同程度」と記述。</strong></li></ol>
+<p>24時間以内の最大用量は 0.060 対 0.040 U/min（1.5倍）、累積量は 1.07 対 1.00 U、初期用量の IQR 上限は 0.094 対 0.047（2倍）。著者らは「初期用量と24時間累積曝露は両群で同程度」とするが、<strong>中央値以外は同程度とは言いにくい</strong>。時間が長いぶん累積が増えるのは当然だが、最大用量の差は「超早期群のほうがより攻めた投与をしていた」可能性を残す。</p>
+<h3>B. 方法論上の弱点（評者の吟味）</h3>
+<ol><li><strong>報告された信頼区間が、遵守した標本サイズから期待される幅よりはるかに狭い（最重要）。</strong></li></ol>
+<p>評者の検算：HR 0.82（0.78〜0.85）から逆算すると log HR の標準誤差は約 <strong>0.022</strong>、これは <strong>8,000件超のイベント</strong>に相当する精度である。ところが遵守クローンは合計 <strong>1,037</strong>（744＋293）で、28日死亡が約50%なら<strong>イベントは約510件</strong>。この規模から期待される95%CI は概ね <strong>0.68〜0.99</strong> であり、報告値はその<strong>約4分の1の幅</strong>しかない。 リスク差も同様で、744 対 293 の二標本比較から期待される標準誤差は約 <strong>3.4 ポイント</strong>（95%CI は概ね −11.8 〜 +1.7 で 0 をまたぐ）だが、報告された CI 幅（−6.8 〜 −3.2）は標準誤差 <strong>0.92 ポイント</strong>に相当する。 患者レベルのブートストラップ500反復で CI を作ったと書かれているが、<strong>各反復で重みを再推定していない場合、標準誤差は系統的に過小になる</strong>。ロバスト標準誤差を患者でクラスタリングしても、重み付きクローン集団を「実際の観測数」として扱った分散推定は補正できない。<strong>この論文の "有意" は、この点が解決されるまで額面通りに受け取れない</strong>。</p>
+<ol><li><strong>時刻0から AVP 開始までに死亡した患者の扱いが、2つの戦略で対称でない可能性がある。</strong></li></ol>
+<p>猶予期間（grace period）を伴う clone-censor-weight 解析では、<strong>「治療前に死亡すること」がどちらの戦略と両立するかが非対称になる</strong>という既知の落とし穴がある。時刻0から4時間目に AVP 未投与のまま死亡した患者を考えると、超早期戦略では3時間目に逸脱として打ち切られており<strong>死亡はカウントされない</strong>が、早期戦略ではまだ逸脱していない（6時間まで猶予がある）ため<strong>死亡がカウントされうる</strong>。この扱いをすると、<strong>早期戦略にだけ早期死亡が上乗せされ、超早期が有利に見える</strong>。 Figure 1 の内訳は各戦略とも「遵守」＋「人工打ち切り」＝ちょうど 3,810 であり、死亡による離脱の行が存在しないため、<strong>この処理がどうなされたかは本PDFからは確認できない</strong>（Online Resource 5 に譲られている）。<strong>Figure 2 で2本の曲線が0日目直後から離れ始める</strong>ことは、この機序と整合的な所見である。JC ではここを最初に議論すべきである。</p>
+<ol><li><strong>遵守率が極端に低く、推定は少数の患者に依存している。</strong></li></ol>
+<p>超早期 19.5%、早期 <strong>7.7%</strong>。7,620 クローンのうち <strong>6,583（86.4%）が人工打ち切り</strong>を受けた。実際に AVP を6時間以内に開始した患者は 3,810例中 1,037例（27.2%）にすぎず、<strong>残りの 2,773例（72.8%）は6時間超で開始したか、そもそも AVP を受けなかった</strong>。IPC 重みは理論上この選択に対処するが、<strong>7.7% の遵守率は重みが極めて大きくなることを意味し、99パーセンタイル切断はその大きな重みを切り落とす</strong>。切断は分散を下げる代わりにバイアスを持ち込む。</p>
+<ol><li><strong>Table 1 に「AVP 6時間超開始」「AVP なし」の列が無い。</strong></li></ol>
+<p>全体 3,810例のうち 72.8% を占めるこの群の特性が主表に無く、Online Resource 7 に置かれている。<strong>打ち切りモデルの妥当性を読者が評価するために最も必要な情報が、本文から見えない</strong>。</p>
+<ol><li><strong>時間依存共変量を全部外しても HR がほとんど動かない（0.82 → 0.85）。</strong></li></ol>
+<p>著者らは頑健性の証拠としているが、<strong>精緻に組んだ1時間刻みの重み付けが推定値をほとんど動かしていない</strong>ことは、①交絡がもともと小さい、②重み付けが交絡を捉えられていない、③推定値が交絡ではない何か（設計上の非対称など）に駆動されている、のいずれとも読める。8・9の論点と合わせて考えるべき。</p>
+<ol><li><strong>28日死亡の確定方法が本文に書かれていない。</strong></li></ol>
+<p>院内死亡なのか、退院後を含む全死亡なのかの記載が無い。eICU-CRD は退院後の生死を追跡できない構造であり、MIMIC-IV も外部の死亡登録に依存する。<strong>退院後の死亡が捕捉されないと 28日死亡は過小評価され、退院の早さが群間で違えば差が生じうる</strong>。著者らの限界の項にこの点への言及は無い。</p>
+<ol><li><strong>Sepsis-3 の定義と Table 1 の乳酸分布が整合しにくい。</strong></li></ol>
+<p>Sepsis-3 の敗血症性ショックは乳酸 2 mmol/L 超を要件に含むが、Table 1 の乳酸は中央値 3.1（IQR 1.8〜5.8）で<strong>第1四分位が 1.8</strong>、しかもサブグループには「2 mmol/L 未満」の層が独立して存在する。時刻0は敗血症性ショック発症ではなく NAd 0.25 到達時点なので、その間に乳酸が下がった、という説明は成り立つ。ただし<strong>そのことは本文に書かれていない</strong>。</p>
+<ol><li><strong>心拍出量が無い（著者らも認める限界）。</strong></li></ol>
+<p>AVP は後負荷を上げて心拍出量を下げうる。両データベースにこの変数が無いため、超早期投与が一部の患者で心拍出量を落とした可能性は検証できていない。乳酸・臓器サポート・追加血管作動薬による間接評価にとどまる。</p>
+<ol><li><strong>外的妥当性</strong>：MIMIC-IV は単施設（2008〜2022）、eICU-CRD は 2014〜2015 の米国データである。<strong>2026年の SSC ガイドラインに基づく現在の診療とは10年以上の隔たりがある</strong>。日本の ICU の AVP 使用文化（保険適用・入手性・院内プロトコル）も異なる。</li></ol>
+<h3>C. COI と透明性</h3>
+<ul><li><strong>利益相反</strong>：TS（篠崎智大）は大学経由で KYOCERA からの grant／contract、TXP Medical と博報堂DYホールディングスからのコンサルティング料、MeDiCU・CMIC ホールディングス・参天製薬・SAS Institute Japan・ファイザー日本法人からの講演料を申告。JS（柴田純一郎）は TXP Medical との研究者契約を申告。SS（佐藤俊太朗）は CureApp からのコンサルティング料、日本ベーリンガーインゲルハイムからの講演料を申告。<strong>その他の著者は「提出された研究に直接関連する競合利益は無い」と申告</strong>。</li><li><strong>注意すべき点</strong>：<strong>筆頭著者 TN（中島貴哉）と TG（後藤匡啓）は、所属3として TXP Medical Co. Ltd. を掲げている</strong>。すなわち <strong>8名中3名（筆頭著者を含む）が TXP Medical に所属または契約している</strong>が、TXP Medical との関係が「競合利益」として申告されているのは JS と TS のみである。所属としての開示と競合利益としての開示が同じ扱いを受けていない。医療データ企業との関係は、データベース研究の解釈において読者が知りたい情報である。</li><li><strong>資金</strong>：公的・商業・非営利いずれの助成も受けていないと明記。</li><li><strong>登録</strong>：<strong>前向き登録なし</strong>。「標的試験のプロトコル（適格基準・治療戦略・アウトカム・解析計画）はデータ抽出前に規定した」と自己申告しているが、<strong>外部から検証する手段が無い</strong>。56通りの代替時刻0定義を試したと書かれていることを踏まえると、この点はより重い。</li><li><strong>解析コードの公開</strong>は評価できる（GitHub）。データも PhysioNet 経由で入手可能なので、<strong>第三者が再現できる形にはなっている</strong>。上記8・9の論点は、コードを読めば決着する可能性がある。</li><li><strong>AI 利用の開示</strong>あり（草稿・編集・整形）。</li></ul>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>敗血症性ショック管理に関連するバソプレシンの生理学</td><td>Holmes CL, Patel BM, Russell JA, Walley KR. *Chest* 2001;120:989-1002</td></tr>
+<tr><td>2</td><td>VASST：敗血症性ショックにおけるバソプレシン対ノルアドレナリン持続投与</td><td>Russell JA, Walley KR, Singer J, et al. *N Engl J Med* 2008;358:877-887</td></tr>
+<tr><td>3</td><td>Surviving Sepsis Campaign 国際ガイドライン 2026</td><td>Prescott HC, Antonelli M, Alhazzani W, et al. *Crit Care Med* 2026</td></tr>
+<tr><td>4</td><td>SSC 2021 に対するスカンジナビア麻酔集中治療学会のエンドースメント（本論文が 0.25〜0.5 µg/kg/分の根拠として引用）</td><td>Rehn M, Chew MS, Olkkola KT, et al. *Acta Anaesthesiol Scand* 2022;66:634-635</td></tr>
+<tr><td>5</td><td>VANISH：早期バソプレシン対ノルアドレナリンの腎不全への効果（RCT）</td><td>Gordon AC, Mason AJ, Thirunavukkarasu N, et al. *JAMA* 2016;316:509-518</td></tr>
+<tr><td>6</td><td>敗血症性ショックのバソプレシン：RCT の個々患者データメタ解析</td><td>Nagendran M, Russell JA, Walley KR, et al. *Intensive Care Med* 2019;45:844-855</td></tr>
+<tr><td>7</td><td>敗血症性ショックへの早期バソプレシン併用開始の効果（target trial emulation）</td><td>White KC, Costa-Pinto R, Blank S, et al. *Crit Care* 2025;29:188</td></tr>
+<tr><td>8</td><td>バソプレシン開始タイミングと院内死亡（大規模公開データベースの観察研究）</td><td>Sacha GL, Duggal A, Reddy AJ, et al. *Crit Care Explor* 2025;7:e1284</td></tr>
+<tr><td>9</td><td>ノルアドレナリンへのバソプレシン追加のタイミングと有効性アウトカム</td><td>Brask AL, Shemanski SM, Barnes TE, Holmes AK. *Ann Pharmacother* 2023;57:521-526</td></tr>
+<tr><td>10</td><td>STROBE 声明（観察研究の報告ガイドライン）</td><td>von Elm E, Altman DG, Egger M, et al. *Int J Surg* 2014;12:1495-1499</td></tr>
+<tr><td>11</td><td>TARGET 声明（標的試験を模擬する観察研究の透明な報告）</td><td>Cashin AG, Hansford HJ, Hernán MA, et al. *JAMA* 2025;334:1084-1093</td></tr>
+<tr><td>12</td><td>MIMIC-IV（version 3.1）</td><td>Johnson A, Bulgarelli L, Pollard T. *PhysioNet* 2024</td></tr>
+<tr><td>13</td><td>eICU Collaborative Research Database（version 2.0）</td><td>Pollard TJ, Johnson A, Raffa JD, et al. *PhysioNet* 2019</td></tr>
+<tr><td>14</td><td>ricu：集中治療データへの R インターフェース</td><td>Bennett N, Plečko D, Ukor I-F, et al. *Gigascience* 2022</td></tr>
+<tr><td>15</td><td>Sepsis-3：敗血症と敗血症性ショックの第3回国際コンセンサス定義</td><td>Singer M, Deutschman CS, Seymour CW, et al. *JAMA* 2016;315:801-810</td></tr>
+<tr><td>16</td><td>ATHOS-3：血管拡張性ショックへのアンジオテンシンII（昇圧薬等価換算係数の出典）</td><td>Khanna A, English SW, Wang XS, et al. *N Engl J Med* 2017;377:419-430</td></tr>
+<tr><td>17</td><td>ランダム化試験が無いときにビッグデータで標的試験を模擬する</td><td>Hernán MA, Robins JM. *Am J Epidemiol* 2016;183:758-764</td></tr>
+<tr><td>18</td><td>不死時間バイアス存在下の試験模擬（クローン・打ち切り・重み付けの方法論）</td><td>Maringe C, Benitez Majano S, Exarchakou A, et al. *Int J Epidemiol* 2020;49:1719-1729</td></tr>
+<tr><td>19</td><td>いつ治療を始めるか：観察データによる動的レジメンの比較</td><td>Cain LE, Robins JM, Lanoy E, et al. *Int J Biostat* 2010;6:Article 18</td></tr>
+<tr><td>20</td><td>妊娠中の薬剤効果の観察研究における不死時間バイアス</td><td>Matok I, Azoulay L, Yin H, Suissa S. *Birth Defects Res A Clin Mol Teratol* 2014;100:658-662</td></tr>
+<tr><td>21</td><td>競合リスクの部分分布に対する比例ハザードモデル（Fine–Gray）</td><td>Fine JP, Gray RJ. *J Am Stat Assoc* 1999;94:496-509</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">NAd が 0.25 µg/kg/分に達したら、バソプレシンを足すかどうかの決着を「3時間以内」につける</mark>。この観察研究では 0〜3時間の開始が 3〜6時間より <strong>28日死亡 48.1% 対 53.0%（リスク差 −5.0ポイント、HR 0.82）</strong>、<strong>RRT sHR 0.68・CRRT sHR 0.61</strong> と良好で、虚血性合併症の増加は見られなかった。<mark class="hl">ただし「AVP を使うか否か」ではなく「いつ足すか」の比較であり、AVP を使う前提の話である</mark>。</p>
+<p><mark class="hl">報告された信頼区間は遵守した 1,037例から期待される幅の約4分の1しかなく、猶予期間中の死亡の扱いが両戦略で対称かも本文から確認できない</mark>。<mark class="hl">著者ら自身が RCT による確認を求めている段階であり、この1本でプロトコルを変えるべきではない</mark>。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックで NAd を増量中</td><td>用量表記が base か酒石酸塩か（2倍ずれる）</td><td>base 換算で 0.25 µg/kg/分に達した時刻を記録する</td></tr>
+<tr><td>NAd が 0.25 µg/kg/分に到達</td><td>AVP を使う方針か、使わない方針か</td><td>使う方針なら3時間以内に開始する。使わない方針ならその理由を明示して記録する</td></tr>
+<tr><td>AVP を開始する</td><td>初期用量をいくつにするか</td><td>本研究の実態は 0.040 U/min。ICM2025 総説は 0.01 U/min 開始・0.005 U/min 漸増を推奨しており、施設の方針を先に決めておく</td></tr>
+<tr><td>AVP 開始から3時間</td><td>MAP・乳酸・NAd 用量・末梢と腸管の所見</td><td>NAd が減っているか。減らなければアドレナリン追加やステロイド、可逆的要因の再検索へ</td></tr>
+<tr><td>乳酸 4 mmol/L 以上</td><td>本研究で最も効果が大きかった層（HR 0.88）</td><td>3時間以内の開始を特に意識する。ただし交互作用 P = 0.055 で決定的ではない</td></tr>
+<tr><td>乳酸 2 mmol/L 未満</td><td>本研究では効果がほぼ無かった層（HR 0.97）</td><td>急いで足す根拠は弱い。他の要因（心機能・出血・副腎不全）の評価を優先する</td></tr>
+<tr><td>腎機能が悪化しつつある</td><td>AKI 発症は変わらないが RRT は減った</td><td>AVP を早く足すことは「AKI を防ぐ」ではなく「透析導入を減らす」方向に働きうると理解する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
