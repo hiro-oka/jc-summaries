@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SOFAとSOFA-2は同じ患者を別の重症度に振り分ける — 患者単位の再分類とスコア間のズレ（OneICU 13万4528例・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06241-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">SOFAとSOFA-2は同じ患者を別の重症度に振り分ける — 患者単位の再分類とスコア間のズレ（OneICU 13万4528例・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Ono S, Uchino S, Kumaido Y, Yawata S, Katayama S. Patient-level reclassification and discordance between SOFA and SOFA-2: a multicenter ICU study. Crit Care. 2026. DOI: 10.1186/s13054-026-06241-0</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06241-0" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06241-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Patient-level reclassification and discordance between SOFA and SOFA-2: a multicenter ICU study</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコル・データ運用への落とし込み <strong>① 明日の診療行為は変わらない。</strong> この論文は「SOFA-2に切り替えるべきか」という問いに答えていない。AUROCもNRIも較正も一切報告していない。読み方を誤って「SOFA-2の方が優れている／劣っている」と受け取らないこと。著者自身が「ベッドサイドの判断が変わるか、患者転帰が改善するかは評価していない」と明記している。 <strong>② 変わるのは「数字の意味」の管理。</strong> 当院のICU日誌・JIPAD登録・院内QIレポートでSOFAを扱う以上、SOFA-2へ移行する日には過去データとの連続性が切れる。本研究の実測では、同じ患者集団で SOFA 平均 5.64 に対し SOFA-2 平均 5.81。総和はほぼ同じでも、患者単位では ±2点以上ずれる例が相当数ある。時系列グラフを1本の線でつなぐと、改訂の段差を「重症度の変化」と読み違える。 <strong>③ 移行するなら「両方を1年並走」させる。</strong> 本研究が示したのは、片方のスコアで同じ点数の患者集団が、もう片方のスコアでは死亡率が2倍近く違うということ。並走期間があれば、当院の症例構成でどちらの方向にズレるか（当院は待機術後が多いので脳サブスコアの扱いが効く）を自前の数字で確認できる。 <strong>④ 腎サブスコアの扱いを事前に決める。</strong> SOFA-2はRRT施行中を最高点にする。当院のCRRT運用（開始が早い・離脱が早い）では、開始で4点に張り付き、離脱後の回復が点数に映らない期間が生まれる。日々のSOFA-2をトレンド指標として使うつもりなら、RRT中の症例は「スコアが動かない期間」であることをカンファで共有しておく。 <strong>⑤ 記録の欠測がスコアを歪める点は当院にも直撃する。</strong> 本研究は「測定されるまでは0点」という規則を採用した。当院でも血ガスを引かない待機術後や、GCS/RASSが鎮静下で記録されない症例は、SOFAとSOFA-2で違う方向に0点が入る。スコアを評価指標に使うなら、まず「測っていないのか、正常なのか」を区別できる記録様式にすることが先。 <strong>⑥ JIPAD文脈での位置づけ。</strong> 本研究は JIPAD ではなく OneICU を使っている。ただし日本発のSOFA-2検証が OneICU に集中している事実は、JIPAD 側で独立に同種の患者単位再分類解析をやる価値があることを意味する。JIPAD×DPC連結の作業と親和性が高いテーマ。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト <strong>Known（すでに分かっていたこと）</strong></p>
+<ul><li>SOFAは1996年に「臓器障害を記述する」道具として作られ、30年間ICUの共通言語だった（Vincent 1996）。</li><li>2025年、現代のICU診療（HFNO・ECMO・MCS・ノルアド換算・KDIGO準拠のRRT・せん妄）を反映させるため SOFA-2 が提案された（JAMA Netw Open 2025 のコンセンサス、JAMA 2025 の開発・検証）。原著では死亡識別能が AUROC 0.79 対 0.77 とわずかに改善した。</li><li>その後の外部検証も同方向。ただし差は小さい。スウェーデンの独立コホートでは「SOFA-2が勝るのはICU初日だけ、day 2以降は差が消える」。日本のOneICUでは「AUROC 0.859 対 0.853、NRIは有意でない」。</li><li>集計レベルの分布や識別能は、繰り返し比較されてきた。</li></ul>
+<p><strong>Unknown（分かっていなかったこと）</strong></p>
+<ul><li>個々の患者が、臓器サブスコアのレベルでどう振り替わるのか。既報は総和の分布しか見ていない。</li><li>SOFA総点と SOFA-2総点の「差」そのものに臨床的な意味があるのか。差が大きい患者は何者なのか。</li></ul>
+<p><strong>What's new（この論文が足したこと）</strong></p>
+<ul><li>13万4528入室・1581万データポイントで、6臓器それぞれの再分類をサンキー図で患者単位に可視化した。</li><li>「SOFAサブスコア × SOFA-2サブスコア」の全組み合わせについて実測ICU死亡率のヒートマップを作り、SOFA-2の点数を固定してもSOFAの点数が上がるほど死亡率が上がる（縦方向の勾配が残る）ことを示した。</li><li>dSOFA（SOFA-2 − SOFA）を定義し、SOFA-2で完全一致マッチング／SOFAで完全一致マッチングという2本の鏡像的な解析を実施した。片方で揃えると、もう片方のズレの方向に死亡率が並ぶ。</li><li>結論は「どちらが優れているか」ではなく「両者は重なるが同一ではない情報を持つ」。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 日本の15病院・13万4528 ICU入室で、SOFAをSOFA-2に置き換えると患者単位で系統的な振り替えが起こる。<strong>SOFA-2で同点にそろえた集団の中でも、SOFAが高い患者ほど死亡率が高く（ICU死亡 9.0% 対 5.7% 対 5.0%）、逆にSOFAでそろえるとSOFA-2が高い患者ほど死亡率が高い。</strong> 2つのスコアは重なるが同一ではない情報を測っている。</p>
+</div>
+<ul><li><strong>デザイン</strong>：OneICUデータベース（MeDiCU社、日本15病院、1分間隔の高解像度データ）を用いた後ろ向き多施設コホート。2012年4月〜2025年12月。</li><li><strong>対象</strong>：18歳以上、ICU滞在12時間以上、ICU死亡の記録があるもの。データベース上の16万4455入室から解析コホート13万4528入室（1581万4904データポイント）。</li><li><strong>主要アウトカム</strong>：ICU死亡。全体で6174人（4.6%）が死亡。院内死亡は1万0145人（7.7%）。</li><li><strong>再分類（Figure 1）</strong>：脳・心血管・呼吸のサブスコアは上向きの移動が主体。肝と止血は閾値変更どおりの単純な移動。腎だけが双方向で、上にも下にも大きく動く。</li><li><strong>同点内の異質性（Figure 2）</strong>：SOFA-2サブスコアを固定しても、SOFAサブスコアが高いほど実測死亡率が高い。呼吸（SOFA-2で2〜4点）、心血管（同2〜4点）、腎（同1〜2点）でこの縦方向の差が大きい。</li><li><strong>ズレの定義</strong>：dSOFA = SOFA-2 − SOFA。Negative（≤ −2）／Minimal（−2 &lt; dSOFA &lt; 2）／Positive（≥ 2）の3群。</li><li><strong>SOFA-2で完全一致マッチ</strong>（各群 15,898人）：SOFA-2は3群とも平均 7.41 に固定。SOFAは 10.2 対 7.40 対 4.7。ICU死亡は 9.0% 対 5.7% 対 5.0%、院内死亡は 14.6% 対 9.5% 対 8.5%。<strong>Negative dSOFA（SOFAの方が高い群）が最も死亡率が高い。</strong></li><li><strong>SOFAで完全一致マッチ</strong>（各群 13,582人）：SOFAを固定するとSOFA-2はNegativeからPositiveへ向けて上昇し、死亡率はPositive dSOFA群で最も高くなる。方向が反転する。</li><li><strong>どの臓器がズレを作るか（Figure 4）</strong>：SOFA-2でそろえた集団では、止血を除く5臓器でSOFAサブスコアが Negative &gt; Minimal &gt; Positive の順。差が最も大きいのは腎（約2.5 対 1.1 対 0.6）と心血管（約2.4 対 1.6 対 1.1）。</li><li><strong>感度分析</strong>：多項傾向スコアによるIPW（重み付け後の標準化平均差 &lt;0.1）でも、敗血症サブグループでも、SOFA-2マッチ解析と同じ方向。</li><li><strong>著者の結論</strong>：SOFA-2は患者単位で系統的な再分類を起こす。一方のスコアで同じ重症度に置かれた患者が、もう一方のスコアでは依然として異質である。両者は重なるが相補的な情報を与えうる。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>SOFAスコアとは。</strong> Sequential Organ Failure Assessment。1996年にVincentらが欧州集中治療医学会の敗血症関連問題ワーキンググループとして発表した、臓器障害の「記述」ツール。脳・呼吸・循環（心血管）・肝・腎・凝固（止血）の6臓器をそれぞれ0〜4点で採点し、合計0〜24点。もともと死亡を予測するために作られたのではなく、臓器障害の程度と経過を共通言語で書き留めるために作られた。ところが実際には死亡と強く相関するため、予後予測にも、Sepsis-3の敗血症定義（感染に伴うSOFAの2点以上の急上昇）にも、臨床試験のアウトカムにも使われるようになった。</p>
+<p><strong>SOFA-2とは。</strong> 2025年に提案された30年ぶりの改訂版。修正デルファイ法によるコンセンサス（JAMA Netw Open 2025）と、10コホート・334万例規模の開発・検証（JAMA 2025）を経ている。主な改訂は6点。①脳サブスコアにせん妄の概念を導入、②呼吸補助の定義を拡大（HFNO・NIV・V-V ECMOを含める）、③昇圧薬の採点をノルアドレナリン換算量とMCS・V-A ECMOで組み替え、④体外循環補助とRRTを最高重症度カテゴリに含める、⑤血小板の閾値を改訂、⑥慢性臓器障害を組み込む。開発時のICU死亡識別能は AUROC 0.79 対 0.77 とわずかに改善した。</p>
+<p><strong>なぜ「サブスコアが動く」ことが大事なのか。</strong> 総点の分布がほぼ同じでも、その総点の中身は入れ替わりうる。たとえば SOFA-1 では「ノルアドレナリンを使っていれば用量に関わらず3点以上」だったが、SOFA-2 は用量で刻む。すると低用量で回っている循環動態の患者は SOFA-2 で点が下がる（＝Negative dSOFA になりやすい）。逆に、動脈血ガスを引いていない患者は SOFA-1 の呼吸サブスコアが0点になりがちだが、SOFA-2 は酸素投与様式からも採点できるので点が付く（＝Positive dSOFA になりやすい）。同じ患者が、スコアの設計思想の違いだけで別の重症度カテゴリに入る。</p>
+<p><strong>本研究が使う道具立て。</strong></p>
+<ul><li><strong>dSOFA（SOFA deviation）</strong>＝ SOFA-2 − SOFA。プラスなら SOFA-2 の方が高く採点している、マイナスなら SOFA の方が高く採点している。本研究では ≤ −2 を Negative、−2 &lt; dSOFA &lt; 2 を Minimal、≥ 2 を Positive と定義した。</li><li><strong>完全一致マッチング（exact matching）</strong>：傾向スコアのような確率的な釣り合わせではなく、「SOFA-2が7点の人には7点の人を、8点の人には8点の人を」と点数値そのものを一致させて3群を組む方法。マッチした変数については分布が完全に一致するので、その変数の効果を差し引いた上で残る差を見られる。ただし、マッチしていない変数（年齢・併存症・治療内容）は釣り合わない。</li><li><strong>サンキー図</strong>：左に元の分類、右に新しい分類を並べ、患者の流れをリボンの太さで表す図。何点から何点へ何人動いたかが一目で分かる。</li><li><strong>OneICUデータベース</strong>：MeDiCU社が提供する日本の多施設ICUデータベース。バイタルを1分間隔で保持する高解像度が特徴で、時間単位のスコア計算ができる。JIPADとは別のデータベース。</li></ul>
+</div>
+<h3>2. 背景と目的</h3>
+<p>2025年、SOFA-2が「現代の集中治療の実際をよりよく反映させるため」に提案された。原著のSOFA（1996年）はICUにおける臓器障害評価の礎であり続けてきたが、いくつかの構成要素は現在の治療戦略やモニタリングの実態と合わなくなっていた。SOFA-2はいくつかの臓器サブスコアに改訂を加えることでこのずれを埋めようとしたもので、原著報告では複数の大規模ICUデータベースにわたって従来SOFAよりわずかに良い死亡識別能（AUROC 0.79 対 0.77）を示し、その後の外部検証も一貫した結果を報告している。</p>
+<p>しかし著者らは、SOFAからSOFA-2への移行について2つの重要な点が未解明だと指摘する。</p>
+<ol><li><strong>個々の患者が臓器サブスコアのレベルでどう再分類されるのかが分かっていない。</strong> これまでの報告は総点の分布という集計レベルに焦点を当てており、患者単位の遷移を見ていない。</li><li><strong>SOFA総点とSOFA-2総点の関係が系統的に評価されていない。</strong> 両者の差がどんな臨床的意味を持つのかも不明である。</li></ol>
+<p>そこで本研究は多施設ICUデータベースを用い、(1) SOFAとSOFA-2のあいだの臓器別サブスコアの患者単位の再分類とその臨床的含意、(2) SOFA総点とSOFA-2総点の差と患者死亡との関連、の2点を評価することを目的とした。仮説は「SOFA-2への移行は系統的な患者単位の再分類をもたらし、SOFAとSOFA-2の不一致はベースラインの重症度とは独立に死亡の差と関連する」というもの。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：後ろ向き多施設観察研究。OneICUデータベース（MeDiCU, Inc.、大阪）を使用。日本の15病院のICUレジストリ。バイタルサイン・検査値・治療・臨床観察を1分間隔の高解像度で記録している。自治医科大学附属さいたま医療センター倫理委員会の承認（S25-109）を受け、匿名化された日常診療データの倫理指針に従い、STROBE声明に沿って実施・報告。</li><li><strong>期間</strong>：2012年4月1日〜2025年12月31日。</li><li><strong>除外基準</strong>：18歳未満、ICU滞在12時間未満、ICU死亡の情報が欠測している入室。</li><li><strong>抽出変数</strong>：年齢、性別、BMI、ICU再入室の有無、待機手術の有無、APACHE IIIスコア、Charlson併存疾患指数（CCI）。治療・臓器補助として、経鼻高流量酸素、NPPV、侵襲的人工呼吸、V-V ECMO、V-A ECMO、腎代替療法、血管作動薬・強心薬（アドレナリン、バソプレシン、ノルアドレナリン、ドパミン、ドブタミン）、機械的循環補助（IABP、微小軸流ポンプ）。</li><li><strong>アウトカム</strong>：ICU死亡（主要）、院内死亡、ICU在室日数、在院日数。</li><li><strong>スコア計算</strong>：SOFAとSOFA-2の総点を2つの時間解像度で算出した。Day-1（ICU入室後最初の24時間）と、1時間ごと。計算規則は事前に定めて全対象に後ろ向きに適用した（詳細はSupplementary Methods）。</li><li><strong>不一致の定義</strong>：dSOFA = SOFA-2 − SOFA。Negative（≤ −2）、Minimal（−2 &lt; dSOFA &lt; 2）、Positive（≥ 2）の3カテゴリ。</li><li><strong>統計解析</strong>：</li><li>連続変数は平均（SD）、カテゴリ変数は n(%)。それぞれt検定とカイ二乗検定で比較。</li><li>再分類はサブスコア別のサンキー図で可視化。</li><li>サブスコア再分類の予後的意味づけのため、SOFAサブスコアとSOFA-2サブスコアの各組み合わせについて実測ICU死亡率（%）を示すヒートマップを作成。</li><li>SOFA-2の重症度層ごとに、dSOFAの分布とICU死亡を検討。</li><li><strong>2本の主要な完全一致マッチング解析</strong>：3つのdSOFAカテゴリにわたって、Day-1 SOFA-2総点で揃える解析と、Day-1 SOFA総点で揃える解析を別々に行った。各スコア値ごとに個別にマッチングすることで、マッチングに用いたスコアの分布が3群で完全に同一になるよう構成した。マッチ後のコホート内で、マッチに用いたスコアの層ごとにICU死亡をdSOFAカテゴリ間で比較。</li><li>マッチ解析でSOFA-2またはSOFAのどちらかを条件付けるという概念枠組みを、有向非巡回グラフ（DAG）で図示（Supplementary Figure 4）。</li><li><strong>感度分析</strong>：① dSOFAカテゴリに対する多項傾向スコアを用いた逆確率重み付け（IPW）、② SOFA-2マッチコホート内の敗血症患者に限定したサブグループ解析。</li><li>SOFA-2総点でマッチしたコホート内で、Day-1の臓器サブスコアをdSOFAカテゴリ別に要約し、どの臓器系がNegative／Positiveのズレに最も寄与するかを同定。</li><li>全ての検定は両側、有意水準 α = 0.05。データ抽出・前処理は Google BigQuery、解析は R version 4.5.2。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 「測定されていない項目は0点」という規則がこの論文の土台にある 著者らは限界の第一項目として、<mark class="hl"><strong>個々の患者で臨床的に測定されなかった構成項目については、最初の測定が記録されるまで0点を割り当てるという事前規定の規則を用いた</strong></mark>と明記している。これによって全入室でSOFAとSOFA-2の両方が計算できた一方で、<mark class="hl"><strong>「測っていない」と「正常である」が同じ0点に潰れている</strong></mark>。 ここが本研究の解釈を大きく左右する。SOFA-1の呼吸サブスコアは動脈血ガス（P/F比）が要るが、SOFA-2は酸素投与様式からも採点できる。日本の別コホート（OneICUの別解析）では <mark class="hl"><strong>SOFA-1呼吸の欠測率 32.7% に対し SOFA-2呼吸は 2.3%</strong></mark> と報告されている。つまり <mark class="hl"><strong>「Positive dSOFA」の一部は病態ではなく、採血をしなかったという記録行為の反映でありうる</strong></mark>。著者自身も「構成要素レベルの比較は慎重に解釈すべき」と書いている。</p>
+</div>
+<h3>4. 結果① — コホートの構成と患者背景（Table 1）</h3>
+<p>データベースには16万4455入室・1827万7429データポイントがあった（Supplementary Figure 1）。除外後の解析コホートは13万4528入室・1581万4904データポイント。</p>
+<p>ICU非生存者は生存者に比べて高齢（70.3 対 66.0歳）、APACHE IIIが高く（149.0 対 82.4）、ICU再入室が多く（8.4% 対 5.3%）、待機手術入室が少なく（3.2% 対 14.7%）、ベースラインの重症度が高かった。</p>
+<h4>Table 1. 患者背景とアウトカム</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>全体（n=134,528）</th><th>生存（n=128,354）</th><th>ICU死亡（n=6,174）</th><th>P値</th></tr></thead>
+<tbody>
+<tr><td>年齢, 歳, 平均(SD)</td><td>66.2 (16.8)</td><td>66.0 (16.8)</td><td>70.3 (15.2)</td><td>&lt;0.001</td></tr>
+<tr><td>女性, n(%)</td><td>53,682 (39.9)</td><td>51,413 (40.1)</td><td>2,269 (36.8)</td><td>&lt;0.001</td></tr>
+<tr><td>BMI, kg/m², 平均(SD)</td><td>22.8 (6.1)</td><td>22.8 (6.2)</td><td>22.4 (4.9)</td><td>&lt;0.001</td></tr>
+<tr><td>ICU再入室, n(%)</td><td>7,275 (5.4)</td><td>6,758 (5.3)</td><td>517 (8.4)</td><td>&lt;0.001</td></tr>
+<tr><td>待機手術, n(%)</td><td>19,001 (14.1)</td><td>18,804 (14.7)</td><td>197 (3.2)</td><td>&lt;0.001</td></tr>
+<tr><td>APACHE III, 点, 平均(SD)</td><td>85.5 (39.9)</td><td>82.4 (37.4)</td><td>149.0 (37.5)</td><td>&lt;0.001</td></tr>
+<tr><td>CCI, 点, 平均(SD)</td><td>4.0 (3.0)</td><td>4.0 (3.0)</td><td>3.9 (2.7)</td><td>0.001</td></tr>
+<tr><td>経鼻高流量酸素, n(%)</td><td>2,872 (2.1)</td><td>2,599 (2.0)</td><td>273 (4.4)</td><td>&lt;0.001</td></tr>
+<tr><td>NPPV, n(%)</td><td>3,024 (2.2)</td><td>2,786 (2.2)</td><td>238 (3.9)</td><td>&lt;0.001</td></tr>
+<tr><td>侵襲的人工呼吸, n(%)</td><td>36,680 (27.3)</td><td>32,296 (25.2)</td><td>4,384 (71.0)</td><td>&lt;0.001</td></tr>
+<tr><td>V-V ECMO, n(%)</td><td>85 (0.1)</td><td>63 (0.0)</td><td>22 (0.4)</td><td>&lt;0.001</td></tr>
+<tr><td>アドレナリン, n(%)</td><td>1,487 (1.1)</td><td>947 (0.7)</td><td>540 (8.7)</td><td>&lt;0.001</td></tr>
+<tr><td>バソプレシン, n(%)</td><td>4,284 (3.2)</td><td>3,032 (2.4)</td><td>1,252 (20.3)</td><td>&lt;0.001</td></tr>
+<tr><td>ノルアドレナリン, n(%)</td><td>21,209 (15.8)</td><td>17,784 (13.9)</td><td>3,425 (55.5)</td><td>&lt;0.001</td></tr>
+<tr><td>ドパミン, n(%)</td><td>9,207 (6.8)</td><td>8,015 (6.2)</td><td>1,192 (19.3)</td><td>&lt;0.001</td></tr>
+<tr><td>ドブタミン, n(%)</td><td>8,618 (6.4)</td><td>7,666 (6.0)</td><td>952 (15.4)</td><td>&lt;0.001</td></tr>
+<tr><td>IABP, n(%)</td><td>1,089 (0.8)</td><td>889 (0.7)</td><td>200 (3.2)</td><td>&lt;0.001</td></tr>
+<tr><td>微小軸流ポンプ, n(%)</td><td>131 (0.1)</td><td>87 (0.1)</td><td>44 (0.7)</td><td>&lt;0.001</td></tr>
+<tr><td>V-A ECMO, n(%)</td><td>924 (0.7)</td><td>517 (0.4)</td><td>407 (6.6)</td><td>&lt;0.001</td></tr>
+<tr><td>腎代替療法, n(%)</td><td>5,989 (4.5)</td><td>4,642 (3.6)</td><td>1,347 (21.8)</td><td>&lt;0.001</td></tr>
+<tr><td>SOFA, 点, 平均(SD)</td><td>5.64 (4.12)</td><td>5.35 (3.87)</td><td>11.77 (4.39)</td><td>&lt;0.001</td></tr>
+<tr><td>SOFA-2, 点, 平均(SD)</td><td>5.81 (4.00)</td><td>5.52 (3.76)</td><td>11.86 (4.04)</td><td>&lt;0.001</td></tr>
+<tr><td>院内死亡, n(%)</td><td>10,145 (7.7)</td><td>3,971 (3.2)</td><td>6,174 (100.0)</td><td>&lt;0.001</td></tr>
+<tr><td>ICU在室, 日, 平均(SD)</td><td>6.0 (10.0)</td><td>5.7 (8.8)</td><td>12.5 (22.8)</td><td>&lt;0.001</td></tr>
+<tr><td>在院, 日, 平均(SD)</td><td>27.6 (34.5)</td><td>28.1 (34.7)</td><td>17.6 (29.5)</td><td>&lt;0.001</td></tr>
+</tbody></table></div>
+<p>読み取りどころを3つ挙げる。</p>
+<ul><li><strong>ICU死亡率は4.6%（6,174/134,528）で、院内死亡率は7.7%。</strong> 日本のICUらしい低い実測死亡率で、待機手術が14.1%を占める症例構成と整合する。裏を返せば、重症例の割合が小さいコホートである。</li><li><strong>全体としてSOFA-2の方がわずかに高い（5.81 対 5.64、差 +0.17点）。</strong> ただし死亡者に限れば SOFA 11.77 対 SOFA-2 11.86 とほぼ同じで、生存者では 5.35 対 5.52。つまり平均のズレは主に軽症〜中等症側で生じている。</li><li><strong>CCIは生存者4.0、死亡者3.9で P=0.001。</strong> 数値としては実質的に同じなのに有意になっている。13万例という標本サイズでは、臨床的に意味のない差でも P値が小さくなる典型例。本論文のP値全体をこの目で見るべき。</li></ul>
+<h3>5. 結果② — 臓器サブスコアの患者単位の再分類（Figure 1）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Day-1のSOFAとSOFA-2のあいだの臓器サブスコアの再分類。6つの臓器（Brain・Respiratory・Cardiovascular・Liver・Kidney・Hemostasis）について、上段左から脳・呼吸・心血管、下段左から肝・腎・止血の6枚のサンキー図が並ぶ。各図とも左の縦棒が従来SOFAのサブスコア（0〜4点）、右の縦棒がSOFA-2のサブスコア（0〜4点）で、上から0・1・2・3・4の順に緑・橙・青紫・桃・黄緑に色分けされている。左右のノードを結ぶ灰色のリボンの太さが、その遷移をたどった患者数に比例する。脳の図では、左のSOFA 0（大きな緑のブロック）から右のSOFA-2 0へ水平に流れる太い帯に加えて、SOFA-2 1へ斜め下に降りるはっきりした帯が見える。左のSOFA 1（橙）からは右の0と1に分かれ、SOFA 4（黄緑）はほぼそのままSOFA-2 4へ水平に渡る。呼吸の図はSOFA 1（大きな橙）が主役で、右のSOFA-2 1へ流れる太い帯のほかに、SOFA-2 2・3へ上がる細い帯が複数見える。心血管の図が最も乱れており、左のSOFA 1（きわめて大きい橙のブロック）が右のSOFA-2 1・2・3・4へ扇状に分岐し、その結果、右側ではSOFA-2 2（青紫）とSOFA-2 3（桃）のノードが左側の対応ノードよりはるかに大きくなっている。肝の図はほぼ全ての帯が水平で、SOFA 0からSOFA-2 0へ、SOFA 1からSOFA-2 1へまっすぐ渡り、わずかにSOFA 2から下へ降りる細い線があるだけ。腎の図だけがリボンどうしが交差してX字を描いており、左のSOFA 0から右のSOFA-2 1・2・3・4へ上がる帯と、左のSOFA 3・4から右のSOFA-2 0・1へ下がる帯が交錯している。止血の図は肝と同様におおむね水平だが、SOFA 2・3から一段下へ流れる細い帯がある。</p>
+</div>
+<p>著者の記述をサブスコアごとに追う。</p>
+<ul><li><strong>脳</strong>：遷移の大半がSOFA-2側の高い方へ向かう。0から1へのシフトも観察された。低スコア域（0〜1）での再配分が起き、2点以上の上方移動も含まれる。</li><li><strong>呼吸</strong>：遷移は2〜4点の範囲に集中した。閾値の改訂に伴う上方への変化が含まれる。2点以上の増加も存在した。</li><li><strong>心血管</strong>：最も頻度の高い元のSOFAサブスコアは1点で、SOFA-2ではより高いサブスコア（2〜4点）の頻度が増えた。</li><li><strong>肝と止血</strong>：再分類は閾値変更に対応した動きにとどまった。</li><li><strong>腎</strong>：最も複雑なパターンを示し、実質的な双方向の再分類が起きた。SOFA-2で点が上がる患者と下がる患者の両方が相当数いる。</li></ul>
+<p><strong>なぜそうなるのか（機序）</strong>。脳サブスコアはSOFA-2でせん妄の概念が入り、GCSだけに依存しなくなった。呼吸サブスコアはHFNO・NIV・V-V ECMOという支援様式が採点に入り、また閾値が改訂された。心血管サブスコアは「昇圧薬を使っているか」から「ノルアドレナリン換算でどれだけ使っているか、MCS・V-A ECMOを使っているか」に変わったため、元の1点（低用量ドパミン・ドブタミン相当）に大量に溜まっていた患者が上下に散らばった。肝はビリルビン、止血は血小板という単一検査値で決まるため、閾値の変更分しか動きようがない。腎は事情が違い、KDIGO基準の採用（尿量基準を含む）とRRT施行中を最高点にする規則によって上向きの力が働く一方、RRT離脱後や慢性腎障害の扱いの変更で下向きの力も働き、結果として双方向になる。</p>
+<h3>6. 結果③ — 同じサブスコアの中に残る死亡率の差（Figure 2）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. Day-1のSOFAとSOFA-2のサブスコア別の再分類ヒートマップとICU死亡率。6臓器それぞれについて5×5のマス目が描かれ、縦軸（y軸）が従来SOFAのサブスコア0〜4（下から上へ）、横軸（x軸）がSOFA-2のサブスコア0〜4（左から右へ）。各セルの中の数字はその組み合わせに該当する患者の実測ICU死亡率（パーセント）で、色の濃さが死亡率の大きさを表す。白に近い淡いピンクが0〜5%、はっきりした赤が50%に向かう。灰色に塗られたセルは、コホート全体の1%未満しか該当者がいない組み合わせであることを示す。右端に「ICU Mortality, %」の凡例（0・5・10・50の目盛りが付いた白から赤へのグラデーションバー）と、「Observed &lt; 1%」を表す灰色の四角が置かれている。上段は左から脳・呼吸・心血管、下段は左から肝・腎・止血。対角線上のセル（SOFAとSOFA-2が同じ点数）が色付きで、その左右に1〜2マスだけ色付きのセルが広がるという形が基本だが、腎のパネルだけは左上（SOFA高・SOFA-2低）にも色付きのセルが並んでいる。</p>
+</div>
+<p>以下がヒートマップから読み取れる実測ICU死亡率（%）である。空欄は該当者が1%未満で灰色にされたセル。</p>
+<h4>Table A. 脳サブスコア（行＝SOFA、列＝SOFA-2、値＝ICU死亡率%）</h4>
+<div class="tw"><table>
+<thead><tr><th>SOFA \ SOFA-2</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>14.6</td></tr>
+<tr><td>3</td><td>—</td><td>5.4</td><td>7.4</td><td>8.3</td><td>—</td></tr>
+<tr><td>2</td><td>3.5</td><td>4.0</td><td>5.4</td><td>—</td><td>—</td></tr>
+<tr><td>1</td><td>1.4</td><td>1.8</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>0</td><td>1.4</td><td>2.2</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table B. 呼吸サブスコア</h4>
+<div class="tw"><table>
+<thead><tr><th>SOFA \ SOFA-2</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>—</td><td>—</td><td>—</td><td>25.9</td><td>35.0</td></tr>
+<tr><td>3</td><td>—</td><td>—</td><td>12.4</td><td>17.2</td><td>—</td></tr>
+<tr><td>2</td><td>—</td><td>4.7</td><td>6.7</td><td>10.5</td><td>—</td></tr>
+<tr><td>1</td><td>—</td><td>3.0</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>0</td><td>0.5</td><td>1.7</td><td>4.3</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table C. 心血管サブスコア</h4>
+<div class="tw"><table>
+<thead><tr><th>SOFA \ SOFA-2</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>—</td><td>—</td><td>14.0</td><td>14.7</td><td>30.3</td></tr>
+<tr><td>3</td><td>—</td><td>—</td><td>7.6</td><td>6.2</td><td>13.9</td></tr>
+<tr><td>2</td><td>—</td><td>—</td><td>2.1</td><td>—</td><td>—</td></tr>
+<tr><td>1</td><td>—</td><td>1.1</td><td>1.8</td><td>3.0</td><td>5.1</td></tr>
+<tr><td>0</td><td>0.8</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table D. 肝サブスコア</h4>
+<div class="tw"><table>
+<thead><tr><th>SOFA \ SOFA-2</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>2</td><td>—</td><td>8.0</td><td>11.5</td><td>—</td><td>—</td></tr>
+<tr><td>1</td><td>—</td><td>4.9</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>0</td><td>3.9</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table E. 腎サブスコア</h4>
+<div class="tw"><table>
+<thead><tr><th>SOFA \ SOFA-2</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>4.1</td><td>10.1</td><td>18.3</td><td>9.6</td><td>23.7</td></tr>
+<tr><td>3</td><td>2.3</td><td>7.2</td><td>12.5</td><td>7.7</td><td>—</td></tr>
+<tr><td>2</td><td>—</td><td>—</td><td>7.3</td><td>—</td><td>—</td></tr>
+<tr><td>1</td><td>—</td><td>4.4</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>0</td><td>1.8</td><td>3.6</td><td>4.1</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table F. 止血サブスコア</h4>
+<div class="tw"><table>
+<thead><tr><th>SOFA \ SOFA-2</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>3</td><td>—</td><td>—</td><td>—</td><td>—</td><td>21.1</td></tr>
+<tr><td>2</td><td>—</td><td>—</td><td>6.7</td><td>11.1</td><td>—</td></tr>
+<tr><td>1</td><td>—</td><td>4.2</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>0</td><td>2.9</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>著者の要約は次のとおり。死亡率はSOFAとSOFA-2のサブスコアがともに高い組み合わせで上昇する。<strong>SOFA-2のサブスコアを固定した上でもなお、SOFAのサブスコアが高いほど死亡率が上がる（＝縦軸方向に登ると死亡率が上がる）。</strong> これは同じSOFA-2カテゴリの中に臨床的に意味のある異質性があることを示唆する。この縦方向の勾配は、呼吸サブスコアではSOFA-2が2〜4点のとき、心血管サブスコアではSOFA-2が2〜4点のとき、腎サブスコアではSOFA-2が1〜2点のときに顕著で、SOFAカテゴリを跨いだ実測死亡率の変化が大きかった。1時間ごとの解析（Supplementary Figures 2〜3）でも同様の再分類パターンと死亡勾配が観察された。</p>
+<p>具体的に読むとこうなる。</p>
+<ul><li><strong>呼吸</strong>：SOFA-2が2点の列で、SOFAが0点なら4.3%、2点なら6.7%、3点なら12.4%。同じ「SOFA-2で2点」でも死亡率が3倍近く違う。SOFA-2が3点の列でも 10.5% → 17.2% → 25.9% と登る。</li><li><strong>心血管</strong>：SOFA-2が2点の列で、SOFAが1点なら1.8%、2点なら2.1%、3点なら7.6%、4点なら14.0%。8倍近い開きがある。</li><li><strong>腎</strong>：SOFA-2が1点の列で、SOFAが0点なら3.6%、1点なら4.4%、3点なら7.2%、4点なら10.1%。SOFA-2が2点の列では 4.1% → 7.3% → 12.5% → 18.3%。</li><li><strong>脳</strong>：SOFA-2が1点の列で 2.2% → 1.8% → 4.0% → 5.4%。SOFAが0点と1点のあいだだけ逆転しているが、2点以上では素直に登る。</li><li><strong>腎の左上</strong>：SOFAが4点なのにSOFA-2が0点という患者が1%以上存在し、その死亡率は4.1%。SOFAが3点でSOFA-2が0点なら2.3%。SOFA-1で「腎不全4点」とされていた集団の一部は、SOFA-2では正常扱いになり、実測死亡率も低い。SOFA-1の腎サブスコアが慢性透析患者を機械的に最高点にしていた問題への、SOFA-2側の解答が数字として見えている。</li><li><strong>腎の非単調性</strong>：SOFAが4点の行で、SOFA-2が2点のとき18.3%なのに3点で9.6%に下がり、4点で23.7%に戻る。SOFA-2の腎サブスコアが単調に死亡率と対応していない箇所がある。著者はこの点に触れていない。</li></ul>
+<h3>7. 結果④ — dSOFAの分布と、2本の鏡像的なマッチング（Figure 3・Table 2）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. Day-1のSOFA偏差の分布と、SOFA・SOFA-2の重症度に応じたICU死亡率。左から順にA・B・Cの3パネル。パネルAは横軸が「Day 1 SOFA Deviation」で ≤−8 から ≥8 まで1点刻み、灰色の棒が患者数（右側の第2軸、0〜60,000）、黒い折れ線と丸印がICU死亡率（左軸、0〜100%）。棒は0を頂点とする左右対称に近い山型で、0の棒が最も高く（右軸の目盛りで約3万7千人相当）、−1と+1が次に高く、±3を超えると急速に低くなって±6以遠はほとんど床に張り付く。黒い折れ線はU字型で、両端が高く中央が低い。左端の ≤−8 は10%弱、−6付近でいったん5%程度まで下がり、−3付近で8〜9%に持ち上がり、0付近で最低の3%前後になり、そこから右へ緩やかに上がって+7で15%前後、≥+8 で一気に33%前後まで跳ね上がる。パネルBは横軸が「Day 1 SOFA-2 score」（2から20まで）、縦軸がICU死亡率（0〜100%）で、3本の折れ線が描かれる。左上の凡例では点線がNegative dSOFA、破線がMinimal dSOFA、実線がPositive dSOFA。3本ともスコアとともに単調に上がるが、点線（Negative）が一貫して最も上を走り、破線と実線はほぼ重なって下を走る。スコアが小さいうちは3本がほとんど区別できないが、10点あたりから点線が離れはじめ、18点では点線が70%台に対し実線は35%前後と、開きが2倍になる。パネルCは横軸が「Day 1 SOFA score」（2から20まで）で同じ3本だが、上下関係が入れ替わり、実線（Positive）が最も上を走る。14点で実線が35%前後に対し破線・点線は20%前後、18点で実線が64%前後に対し破線・点線は33〜38%。最も右の20点付近では該当者が少ないため線が交差し、点線が最も高くなって順序が崩れる。</p>
+</div>
+<p><strong>パネルA（dSOFAの分布と死亡率）。</strong> dSOFAは0を中心に鋭く尖った分布で、大多数の患者は ±1点の範囲に収まる。しかし裾には ±8点以上ずれる患者も存在する。そしてICU死亡率はきれいなU字を描く。<strong>ズレが大きいほど、どちら向きであっても死亡率が高い。</strong> 全体のICU死亡率が4.6%であることを踏まえると、dSOFA ≥ +8 の群の33%前後という死亡率は際立って高い。</p>
+<p>ただしこの生のU字は、ズレそのものが危険であることを意味しない。ズレが大きい患者は単に重症度が高い（どちらかのスコアが高い）だけかもしれない。そこで著者は2本のマッチング解析に進む。概念枠組みはDAG（Supplementary Figure 4）で図示されている。</p>
+<p><strong>2本の完全一致マッチング。</strong> SOFA-2でマッチした解析とSOFAでマッチした解析で、それぞれ 47,676人 と 40,746人 が組まれた。</p>
+<h4>Table 2（前半）. Day-1 SOFA-2でマッチしたコホート（各群 n=15,898）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>Negative dSOFA</th><th>Minimal dSOFA</th><th>Positive dSOFA</th><th>P値</th></tr></thead>
+<tbody>
+<tr><td>年齢, 歳, 平均(SD)</td><td>68.4 (15.9)</td><td>67.5 (16.1)</td><td>66.5 (17.1)</td><td>&lt;0.001</td></tr>
+<tr><td>女性, n(%)</td><td>6,071 (38.2)</td><td>6,104 (38.4)</td><td>6,346 (39.9)</td><td>0.003</td></tr>
+<tr><td>BMI, kg/m², 平均(SD)</td><td>22.3 (4.6)</td><td>22.8 (10.3)</td><td>23.0 (4.4)</td><td>&lt;0.001</td></tr>
+<tr><td>ICU再入室, n(%)</td><td>1,250 (8.0)</td><td>941 (5.9)</td><td>873 (5.5)</td><td>&lt;0.001</td></tr>
+<tr><td>待機手術, n(%)</td><td>2,113 (13.3)</td><td>2,836 (17.8)</td><td>1,661 (10.4)</td><td>&lt;0.001</td></tr>
+<tr><td>APACHE III, 点, 平均(SD)</td><td>111.6 (39.5)</td><td>100.1 (37.8)</td><td>89.0 (36.2)</td><td>&lt;0.001</td></tr>
+<tr><td>CCI, 点, 平均(SD)</td><td>4.4 (3.2)</td><td>4.3 (3.1)</td><td>3.8 (2.9)</td><td>&lt;0.001</td></tr>
+<tr><td>経鼻高流量酸素, n(%)</td><td>434 (2.7)</td><td>435 (2.7)</td><td>520 (3.3)</td><td>0.004</td></tr>
+<tr><td>NPPV, n(%)</td><td>377 (2.4)</td><td>413 (2.6)</td><td>635 (4.0)</td><td>&lt;0.001</td></tr>
+<tr><td>侵襲的人工呼吸, n(%)</td><td>8,269 (52.0)</td><td>6,356 (40.0)</td><td>4,263 (26.8)</td><td>&lt;0.001</td></tr>
+<tr><td>V-V ECMO, n(%)</td><td>13 (0.1)</td><td>15 (0.1)</td><td>14 (0.1)</td><td>0.931</td></tr>
+<tr><td>アドレナリン, n(%)</td><td>380 (2.4)</td><td>234 (1.5)</td><td>54 (0.3)</td><td>&lt;0.001</td></tr>
+<tr><td>バソプレシン, n(%)</td><td>1,121 (7.1)</td><td>667 (4.2)</td><td>302 (1.9)</td><td>&lt;0.001</td></tr>
+<tr><td>ノルアドレナリン, n(%)</td><td>7,956 (50.0)</td><td>3,587 (22.6)</td><td>756 (4.8)</td><td>&lt;0.001</td></tr>
+<tr><td>ドパミン, n(%)</td><td>2,168 (13.6)</td><td>2,070 (13.0)</td><td>344 (2.2)</td><td>&lt;0.001</td></tr>
+<tr><td>ドブタミン, n(%)</td><td>1,827 (11.5)</td><td>1,817 (11.4)</td><td>434 (2.7)</td><td>&lt;0.001</td></tr>
+<tr><td>IABP, n(%)</td><td>140 (0.9)</td><td>167 (1.1)</td><td>220 (1.4)</td><td>&lt;0.001</td></tr>
+<tr><td>微小軸流ポンプ, n(%)</td><td>15 (0.1)</td><td>29 (0.2)</td><td>15 (0.1)</td><td>0.036</td></tr>
+<tr><td>V-A ECMO, n(%)</td><td>119 (0.7)</td><td>147 (0.9)</td><td>145 (0.9)</td><td>0.166</td></tr>
+<tr><td>腎代替療法, n(%)</td><td>581 (3.7)</td><td>875 (5.5)</td><td>1,180 (7.4)</td><td>&lt;0.001</td></tr>
+<tr><td>SOFA, 点, 平均(SD)</td><td>10.2 (3.5)</td><td>7.40 (3.5)</td><td>4.7 (3.3)</td><td>&lt;0.001</td></tr>
+<tr><td>SOFA-2, 点, 平均(SD)</td><td>7.41 (3.4)</td><td>7.41 (3.4)</td><td>7.41 (3.4)</td><td>1</td></tr>
+<tr><td>ICU死亡, n(%)</td><td>1,423 (9.0)</td><td>909 (5.7)</td><td>796 (5.0)</td><td>&lt;0.001</td></tr>
+<tr><td>院内死亡, n(%)</td><td>2,272 (14.6)</td><td>1,472 (9.5)</td><td>1,320 (8.5)</td><td>&lt;0.001</td></tr>
+<tr><td>ICU在室, 日, 平均(SD)</td><td>8.2 (11.3)</td><td>6.9 (11.9)</td><td>6.7 (10.2)</td><td>&lt;0.001</td></tr>
+<tr><td>在院, 日, 平均(SD)</td><td>33.1 (46.0)</td><td>29.2 (29.1)</td><td>27.2 (35.5)</td><td>0.064</td></tr>
+</tbody></table></div>
+<p>このコホートの設計上、SOFA-2は3群とも平均7.41点で完全に同一である。にもかかわらず、他のほぼ全ての指標が3群でまったく違う。</p>
+<ul><li><strong>SOFAは 10.2 対 7.40 対 4.7</strong>。同じSOFA-2の重症度なのに、旧SOFAでは5.5点の開きがある。</li><li><strong>APACHE IIIは 111.6 対 100.1 対 89.0</strong>。SOFA-2でそろえてもなお、独立した重症度スコアで22点の差が残っている。</li><li><strong>ノルアドレナリン使用は 50.0% 対 22.6% 対 4.8%</strong>、侵襲的人工呼吸は 52.0% 対 40.0% 対 26.8%。Negative dSOFA群は明らかに循環・呼吸のサポートを多く受けている。</li><li><strong>逆に腎代替療法は 3.7% 対 5.5% 対 7.4% とPositive群で多い。</strong> SOFA-2がRRTを最高点にする設計の直接の帰結。</li><li><strong>ICU死亡は 9.0% 対 5.7% 対 5.0%。院内死亡は 14.6% 対 9.5% 対 8.5%。</strong> Negative dSOFA群がほぼ2倍。</li></ul>
+<p>著者の記述どおり、Negative dSOFA患者は高齢でAPACHE IIIが高く、侵襲的人工呼吸と血管作動薬をより頻繁に受けており、Positive dSOFA患者はAPACHE IIIが低く血管作動薬の使用が少ない一方、腎代替療法はより頻繁だった。</p>
+<h4>Table 2（後半）. Day-1 SOFAでマッチしたコホート（各群 n=13,582）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>Negative dSOFA</th><th>Minimal dSOFA</th></tr></thead>
+<tbody>
+<tr><td>年齢, 歳, 平均(SD)</td><td>65.9 (17.4)</td><td>67.6</td></tr>
+<tr><td>女性, n(%)</td><td>5,481 (40.4)</td><td>5,088</td></tr>
+<tr><td>BMI, kg/m², 平均(SD)</td><td>22.4 (4.4)</td><td>22.6</td></tr>
+<tr><td>ICU再入室, n(%)</td><td>865 (6.4)</td><td>800</td></tr>
+<tr><td>待機手術, n(%)</td><td>1,906 (14.0)</td><td>2,379</td></tr>
+<tr><td>APACHE III, 点, 平均(SD)</td><td>85.4 (35.6)</td><td>99.3</td></tr>
+<tr><td>CCI, 点, 平均(SD)</td><td>4.0 (3.1)</td><td>4.3</td></tr>
+<tr><td>経鼻高流量酸素, n(%)</td><td>208 (1.5)</td><td>354</td></tr>
+<tr><td>NPPV, n(%)</td><td>226 (1.7)</td><td>380</td></tr>
+<tr><td>侵襲的人工呼吸, n(%)</td><td>3,887 (28.6)</td><td>5,389</td></tr>
+<tr><td>V-V ECMO, n(%)</td><td>3 (0.0)</td><td>11</td></tr>
+<tr><td>アドレナリン, n(%)</td><td>113 (0.8)</td><td>167</td></tr>
+<tr><td>バソプレシン, n(%)</td><td>337 (2.5)</td><td>487</td></tr>
+<tr><td>ノルアドレナリン, n(%)</td><td>3,536 (26.0)</td><td>2,754</td></tr>
+<tr><td>ドパミン, n(%)</td><td>994 (7.3)</td><td>1,635</td></tr>
+<tr><td>ドブタミン, n(%)</td><td>758 (5.6)</td><td>1,385</td></tr>
+<tr><td>IABP, n(%)</td><td>49 (0.4)</td><td>111</td></tr>
+<tr><td>微小軸流ポンプ, n(%)</td><td>4 (0.0)</td><td>11</td></tr>
+<tr><td>V-A ECMO, n(%)</td><td>31 (0.2)</td><td>86</td></tr>
+<tr><td>腎代替療法, n(%)</td><td>189 (1.4)</td><td>671</td></tr>
+<tr><td>SOFA, 点, 平均(SD)</td><td>7.3 (3.0)</td><td>7.3</td></tr>
+<tr><td>SOFA-2, 点, 平均(SD)</td><td>4.7 (3.0)</td><td>7.3</td></tr>
+<tr><td>ICU死亡, n(%)</td><td>462 (3.4)</td><td>683</td></tr>
+<tr><td>院内死亡, n(%)</td><td>917 (6.9)</td><td>1,185</td></tr>
+<tr><td>ICU在室, 日, 平均(SD)</td><td>5.9 (9.1)</td><td>6.6</td></tr>
+<tr><td>在院, 日, 平均(SD)</td><td>27.3 (43.2)</td><td>32.2</td></tr>
+</tbody></table></div>
+<p>この後半の表は、入手できたArticle in Press版のPDFで用紙幅を超えており、Positive dSOFA列とP値列、およびMinimal dSOFA列の括弧内パーセントが物理的に切れている。上表は読み取れた範囲のみを記載した。本文の記述で補うと、SOFAでマッチした3群はSOFAの分布が同一で、SOFA-2はNegativeからPositiveへ向けて上昇し、重症度関連の特徴と臓器補助療法の勾配はSOFA-2マッチコホートとおおむね反転していた。</p>
+<p><strong>パネルB・C（マッチ後の死亡率）。</strong> SOFA-2でマッチした後、ICU死亡はズレのカテゴリ間で差が出た。Negative dSOFA群が最も高く、Minimal dSOFA群が中間、Positive dSOFA群が最も低い。<strong>そしてこの群間の差はSOFA-2の重症度が上がるほど広がる。</strong> SOFA-2が18点付近では、Negative群の70%台に対しPositive群は35%前後で、開きは絶対値で35ポイントに達する。</p>
+<p>一方、SOFAでマッチした平行解析では、ICU死亡はPositive dSOFA群で高い傾向を示した。同じSOFA層の中でSOFA-2が高い群である。SOFA 14点付近ではPositive群が35%前後に対し他の2群は20%前後、18点付近ではPositive群64%前後に対し33〜38%。ただしSOFA 20点付近では該当者が少なく、線が交差して順序が崩れる。</p>
+<p><strong>この結果の読み方。</strong> 一方のスコアで「同じ重症度」と分類された患者が、もう一方のスコアで見ると依然として臨床的に異質であり、その異質性は死亡率に映る。ズレの向きが死亡率の向きを決めるのではなく、<strong>「揃えていない方のスコアが高い患者が死ぬ」</strong>という、当然といえば当然の関係が両方向に成り立っている。</p>
+<h3>8. 結果⑤ — どの臓器がズレを作っているか（Figure 4）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. SOFA偏差カテゴリ別の臓器別SOFAサブスコア。SOFA-2総点でマッチしたコホートにおける、Day 1の臓器別SOFAサブスコアの平均値を示す棒グラフ。上段左から脳・呼吸・心血管、下段左から肝・腎・止血の6枚。各パネルの縦軸は平均SOFAサブスコア（0〜4）、横軸はdSOFAカテゴリで、左からNegative（赤）・Minimal（緑）・Positive（青）の3本の棒が並ぶ。脳では赤が2.2強、緑が2.0強、青が1.2強と右下がり。呼吸では赤1.8強、緑1.4強、青1.0強。心血管では赤2.4強、緑1.6強、青1.1弱と、右下がりの傾斜が最も急な部類。肝はいずれも1.0を大きく下回り、赤0.5・緑0.45・青0.3と低い水準で右下がり。腎は赤が2.5弱と突出して高く、緑1.1、青0.6と、6臓器の中で最も差が大きい。止血だけが例外で、赤0.7・緑0.8・青0.6と、真ん中の緑が最も高い凸型になっている。</p>
+</div>
+<p>著者の記述：SOFA-2総点でマッチしたコホートにおいて、止血を除き、サブスコアはNegative dSOFA群で最も高く、次いでMinimal dSOFA群、Positive dSOFA群が最も低かった。この勾配は腎と心血管のサブスコアで観察された。腎サブスコアの分布はDay-1のSOFAカテゴリ間で異なっていた（Supplementary Figure 7では、各腎SOFAカテゴリの患者割合がdSOFA群間で違っていた）。</p>
+<p>図から読み取れる要点を整理する。</p>
+<ul><li><strong>腎と心血管が最大の駆動力</strong>。腎はNegative群の平均が約2.5点で、Positive群の約0.6点の4倍以上。心血管は約2.4点対約1.1点。</li><li><strong>止血だけが例外</strong>で、Minimal群が最も高い凸型になっている。止血サブスコアは血小板閾値の変更しか受けていないため、ズレの方向を決める力がほとんどない。</li><li>逆に読むと、<strong>「Negative dSOFA」とは、SOFA-1の設計で高得点になりやすい構造（低用量でも昇圧薬を使っていれば高点、Cr上昇があれば高点）に当てはまる患者</strong>であり、その多くはSOFA-2の細かい採点では点数が下がる。そしてこの群の死亡率が実際に高い。SOFA-1の粗い採点が、この集団に限っては予後をよく捉えていたことになる。</li></ul>
+<h3>9. 結果⑥ — 感度分析</h3>
+<p>感度分析は広く一貫した結果を示した。</p>
+<ul><li><strong>IPW解析</strong>：dSOFAカテゴリに対する多項傾向スコアを用いた逆確率重み付けにより、重み付け後の絶対平均差は0.1未満になった（Supplementary Figure 9）。ズレのカテゴリ間の死亡率差は、SOFA-2マッチ解析と一貫していた（Supplementary Figure 8A, B）。</li><li><strong>敗血症サブグループ</strong>：スコアの高い水準では推定値のばらつきが大きくなったが、全体のパターンはSOFA-2マッチ解析と一貫していた（Supplementary Figure 8C, D）。</li><li><strong>1時間ごとの解析</strong>：Day-1解析と同様の再分類パターンと死亡勾配が観察された（Supplementary Figures 2〜3、6）。</li></ul>
+<h3>10. 考察① — SOFA-2は「閾値の微調整」ではない</h3>
+<p>著者らの第一の主張は、SOFA-2が単なる閾値調整以上のものであり、臓器障害重症度の系統的な再分類を導入するということである。この再分類は主に神経・心血管・呼吸のサブスコアに影響し、ECMOのような機械的補助療法、バソプレシンのような血管作動薬の組み入れ、神経学的評価の修正といった現代のICU診療を反映した更新に由来する。</p>
+<p>臓器補助に高い点を与えることは、臨床的な重症度の感覚と直感的に整合する。しかし著者は同時に慎重な留保を置く。<strong>先行研究では、体外循環補助に最高点を割り当てても死亡識別能が必ずしも改善しないことが示されている</strong>（Yawata et al., Anaesthesia 2025）。そして「SOFAは死亡を予測するためではなく臓器障害を分類するために設計されている以上、識別能の改善はその妥当性の要件ではない」と述べる。</p>
+<p>サンキー解析からは、最高カテゴリへ再分類される患者は全体のごく一部であり、全体の識別能への影響は限定的である可能性が示唆される。この再分類の影響は、ECMOセンターのような高度な臓器補助が集中する施設ではより大きくなりうる。同時に、体外循環補助をスコアに組み込むことは重症度の二重計上を招き、補助中の患者状態の変化を見えなくする可能性がある。SOFAとSOFA-2の縦断的評価における性能は今後の課題として残されている。</p>
+<h3>11. 考察② — 腎サブスコアだけが双方向になる理由</h3>
+<p>腎サブスコアは他と対照的に、双方向の再分類という複雑なパターンを示した。著者はこれを「詳細な定義で腎機能障害を捉えようとする試みの反映であり、同時に未解決の限界を浮き彫りにするもの」と位置づける。</p>
+<ul><li><strong>上向きのシフト</strong>は、尿量基準の採用と腎代替療法の組み入れを反映している可能性が高い。</li><li><strong>下向きのシフト</strong>は、腎補助の中止後に生じうる。</li><li><strong>RRT施行中は最高サブスコアが割り当てられる</strong>ため、治療中は基礎的な腎機能の改善が見えなくなる（Kumaido et al., J Anesth 2026 の症例報告）。</li><li>現行の採点法は、RRT中止後の腎回復の時期と程度を十分に捉えられていない可能性がある（Uchino &amp; Katayama, AJRCCM 2026）。</li><li>クレアチニンへの依存そのものも疑問視されている（Kellum, Akcan Arikan, Ostermann, ICM 2026）。</li></ul>
+<p>本研究のヒートマップは、同一のSOFA-2カテゴリの中に予後の異質性があることを示した。さらに、より詳細な定義は識別能を改善しうる一方で、計算の複雑さも増す（Uchino &amp; Katayama, Crit Care 2026 の実装可能性の議論）。全体として腎機能障害の評価は依然として難しく、改訂されたSOFA-2の枠組みでも限界は残る。</p>
+<h3>12. 考察③ — ズレの臨床的意味</h3>
+<p>SOFA-2でマッチすると死亡率はNegative dSOFA群で高く、SOFAでマッチするとPositive dSOFA群で高い。著者はこれを「一方のスコアで同じ重症度に分類された患者が、もう一方のスコアと転帰の観点では臨床的に異質でありうる」ことの証左とする。</p>
+<p>同様の所見は外部検証研究でも報告されている。<strong>SOFA-2がSOFAより低かった患者のICU死亡率が最も高く9.8%、上方への再分類では7.8%、変化がなければ4.3%</strong>（Bai et al., J Intensive Care 2026）。本研究のSOFA-2マッチコホートでの9.0% / 5.7% / 5.0%と、順序も水準も近い。</p>
+<p>2つのマッチコホートでは、重症度・臓器補助療法・その他の臨床的特徴の分布が、マッチに用いたスコアに応じておおむね反転していた。治療の使用差、特に腎代替療法と血管作動薬が、腎および心血管サブスコアへの影響を通じてズレに寄与したと考えられる。これらの領域には重複する構成要素（腎では透析・尿量・クレアチニン、循環では血管作動薬と機械的補助）が含まれている。</p>
+<p>したがってこの所見は、<strong>どちらかのスコアが一律に情報量が多いことを示すのではなく、SOFAとSOFA-2が重なるが同一ではない臓器障害の側面を捉えていることを示唆する</strong>、というのが著者の立場である。その上で、SOFA-2には現代の臨床的に重要な変数を取り込んだこと、予測性能が改善したことという重要な利点があるとも述べている。</p>
+<p><strong>解釈と含意</strong>として、著者はさらに踏み込む。先行検証はSOFA-2の方が予後識別能が高いと報告してきたが、識別能が高いことは従来SOFAを完全に置き換えるべきことも、あらゆる臨床場面でSOFA-2を優先すべきことも意味しない。DAGが示すように、SOFAとSOFA-2に寄与するパラメータの大部分は重複しており、一方に条件付ければ他方の情報の大半は説明されるはずである。それでもなお、どちらのマッチング戦略でも、もう一方のスコア・患者特性・死亡に臨床的に意味のある差が残った。この残余の異質性は、各スコアに含まれる変数の違いだけでなく、閾値・重み付け・臓器補助療法の扱いといった採点アルゴリズムの違いからも生じている可能性がある。</p>
+<p>そして著者は自ら限界を明示する。<strong>「本研究は、SOFA-2に基づく再分類が予後の較正を改善するか、ベッドサイドの判断を変えるか、患者転帰を改善するかを評価していない。」</strong> ズレをリスク層別化や臨床判断支援に使えるかは今後の研究課題である。</p>
+<h3>13. 考察④ — 「最高点を割り当てる」という設計思想</h3>
+<p>もう一つの解釈として、著者はSOFAとSOFA-2が重症度をどう操作化するかで異なると述べる。アルゴリズム上の重要な違いは、SOFA-2が特定の高度な臓器補助様式に最高サブスコアを割り当てる点である。これは臨床的に直感的であり、報告されているSOFA-2の死亡識別能の改善に寄与した可能性がある。</p>
+<p>しかし高度な臓器補助を受けている患者に最高点を割り当てることの限界は、複数の先行研究で報告されている。</p>
+<ul><li><strong>Iwasaki らはこの限界を「天井効果（ceiling effect）」と表現した</strong>（Crit Care 2026、同じOneICUデータベースを用いた外部検証）。</li><li><strong>Kumaido らは、体外循環補助と腎補助が続いているあいだ、SOFAとSOFA-2が相補的な情報を与えていると見える症例を報告した</strong>（J Anesth 2026、敗血症性心筋症の症例）。</li></ul>
+<p>したがって各スコアの相対的な寄与は、初期蘇生・臓器補助の強化・回復といった重症病態の局面ごとに変わりうる。このばらつきが、2つのスコア間で観察された不一致を部分的に説明するかもしれない。高度な臓器補助に最高サブスコアを割り当てることが縦断的評価と臨床的解釈にどう影響するかは、さらなる研究を要する。</p>
+<h3>14. 強みと限界（著者記載）</h3>
+<p><strong>強み</strong></p>
+<ol><li>高解像度ICUデータの使用により、スコアの遷移と臨床転帰との関連を詳細に解析できた。OneICUデータベースはバイタルサインを1分間隔で記録し、治療と検査測定の詳細な記録を含むため、臓器障害の軌跡を粒度細かく評価できる。</li><li>SOFAとSOFA-2の計算に必要な全変数がデータベース上で利用可能であり、観測データと事前規定の採点規則を用いて、対象となる全入室で両スコアを割り当てられた。</li><li>単一のヘルスケアシステム内での多施設デザインにより、日本の複数のICU設定にわたる評価が可能だった。</li></ol>
+<p><strong>限界</strong></p>
+<ol><li><strong>一部の構成変数は個々の患者で臨床的に測定されていなかった。</strong> 事前規定の採点規則に従い、測定値が得られない観測には最初の測定が記録されるまで0点を割り当てた。したがって全入室でスコアは計算できたものの、構成要素レベルの比較は慎重に解釈すべきである。</li><li><strong>15の日本の病院で、COVID-19パンデミックを含む期間に実施された</strong>ため、地域と時期をまたいだ一般化可能性は限られる可能性がある。比較的高いCharlson併存疾患指数も解釈に影響しうる。慢性腎臓病を含む慢性臓器障害は、急性の臓器不全とは独立にSOFAおよびSOFA-2のサブスコアを上げうるためである。入室日が匿名化されていたため、パンデミックの影響は評価できなかった。</li><li><strong>採点の複雑化に伴う費用対効果を評価していない。</strong> 計算の負担と予測性能の改善のバランスは検討していない。重症度スコアリングがより複雑な生理学的モデルへ進むべきか、簡潔さとベッドサイドでの使いやすさを優先すべきかは今後の課題である。</li><li><strong>スコアに基づくアプローチは本質的に還元的でありうる。</strong> 要約スコアは複雑な臓器障害の状態を完全には表現できない。SOFAは臓器障害を記述するために開発されたが、死亡との関連に基づいて部分的に洗練されており、記述的役割と予後的役割のあいだに概念的な緊張がある。さらに、SOFAスコアの上昇は今や敗血症の操作的定義に広く用いられている。本研究の所見はスコアに基づく関連として解釈すべきであり、臓器障害の包括的あるいは因果的な表現とみなすべきではない。</li></ol>
+<h2>批判的吟味 — ジャーナルクラブでの論点</h2>
+<h3>論点1：主要な所見は「数学的にほぼ必然」ではないか</h3>
+<p>これが本論文の最大の論点である。2つの不完全な重症度指標AとBがあり、どちらも真の重症度と正の相関を持ち、かつ完全には一致しないとする。このとき、Aで完全に揃えた集団の中では、Bが高い患者の方が真の重症度が高く、死亡率も高い。これは統計的にほぼ必然であって、AとBが「相補的な情報」を持つことの証拠にはならない。逆向きも同様に成り立つ。</p>
+<p>本研究の2本の鏡像的マッチングは、まさにこの必然を両方向で確認したものと読める。著者は「conditioning on one score would therefore be expected to account for much of the information represented by the other」と自ら書いており、この論理構造を認識している。しかし「それでも差が残った」ことを新規性として提示している。JCでの問いは次の2つ。</p>
+<ul><li>残った差は、2つのスコアの設計思想の違いによるものか、それとも単に「どちらのスコアも真の重症度を測り損ねている」ことの反映か。</li><li>仮に前者だとして、ベッドサイドで両方を計算する労力に見合う情報量なのか。著者自身が「actionable decisions につながるかは不明」と書いている。</li></ul>
+<h3>論点2：マッチしたのはスコアだけ。年齢も併存症も治療も揃っていない</h3>
+<p>完全一致マッチングで揃えたのはSOFA-2総点（または SOFA総点）ただ一つである。その結果、SOFA-2マッチコホートでは APACHE III が 111.6 対 100.1 対 89.0 という22点の差、年齢が 68.4 対 67.5 対 66.5、ノルアドレナリン使用が 50.0% 対 22.6% 対 4.8% という圧倒的な差が残っている。</p>
+<p>つまり「同じSOFA-2重症度なのに死亡率が違う」ことの直接の説明は、<strong>dSOFAが未マッチの重症度（APACHE IIIやサポート強度）の代理変数になっている</strong>ことである。dSOFA自体に独自の情報があるという主張には、これらを調整してもなお差が残ることを示す必要がある。</p>
+<p>著者はIPW（多項傾向スコア）を感度分析として実施し、重み付け後の標準化平均差が0.1未満になったと報告している。これは有力な反論だが、本文にはどの共変量を傾向スコアモデルに入れたかの記載がなく、補遺を見なければ検証できない。<strong>この点は補遺を取り寄せてから議論すべき。</strong></p>
+<h3>論点3：「測定されていない項目は0点」が結果の一部を作っている</h3>
+<p>前述の警告ボックスのとおり。SOFA-1の呼吸サブスコアはP/F比が必須、SOFA-2は酸素投与様式からも採点できる。したがって「動脈血ガスを引かなかった患者」はSOFA-1で0点・SOFA-2で有点となり、Positive dSOFAに分類される。そして動脈血ガスを引かない患者は総じて軽症である。</p>
+<p>これは本研究の中心的所見の一つ（SOFA-2でマッチしたときPositive dSOFA群の死亡率が最も低い）を、病態ではなく記録行為で説明できてしまう。逆に脳サブスコアも同型の問題を持つ。鎮静下でGCSが記録されない待機術後患者は、両スコアで違う扱いを受けうる。</p>
+<p><strong>補遺のSupplementary Table 1に「各構成要素の未測定頻度と、事前規定の採点規則が適用された割合」がまとめられている</strong>と本文にある。この表を見ずに本論文の結論を受け取るべきではない。</p>
+<h3>論点4：数字が本文と表で合わない箇所が複数ある</h3>
+<p>Article in Press（未編集の受理原稿）であることを差し引いても、確認すべき不整合が複数ある。</p>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>本文の記述</th><th>表・図の記述</th></tr></thead>
+<tbody>
+<tr><td>コホート構成</td><td>16万4455入室から1万1563入室を除外し、解析コホートは13万4528入室</td><td>164,455 − 11,563 = 152,892 で13万4528にならない（差 29,927）</td></tr>
+<tr><td>ベースラインSOFA</td><td>「SOFA 11.83 対 5.37」</td><td>Table 1 は 11.77 対 5.35</td></tr>
+<tr><td>SOFA-2マッチのn</td><td>「47,676人」</td><td>Table 2 は各群15,898人（15,898 × 3 = 47,694）</td></tr>
+<tr><td>マッチ後のSOFA-2平均</td><td>「3群とも7.43」</td><td>Table 2 は 7.41</td></tr>
+<tr><td>マッチ後のSOFA平均</td><td>「10.18 / 7.41 / 4.75」</td><td>Table 2 は 10.2 / 7.40 / 4.7</td></tr>
+<tr><td>院内死亡の割合</td><td>—</td><td>2,272 / 15,898 = 14.29% だが表は14.6%（分母が未記載）</td></tr>
+<tr><td>Figure 3B 凡例</td><td>Negative dSOFA は ≤ −2 と定義</td><td>図の凡例は「Negative dSOFA (≤2)」と誤記</td></tr>
+<tr><td>Figure 3 の時間解像度</td><td>図の軸は「Day 1 SOFA Deviation」「Day 1 SOFA score」</td><td>キャプションは「number of hourly observations」「hourly SOFA scores」</td></tr>
+</tbody></table></div>
+<p>いずれも結論を覆すものではないが、<strong>SOFA除外フローの29,927人の行方は補遺のFigure 1で確認する必要がある</strong>。ICU滞在12時間未満とICU死亡欠測だけで3万人近くが落ちるなら、それ自体が選択バイアスの検討対象になる。</p>
+<h3>論点5：Table 2の後半が読めない</h3>
+<p>Article in Press版のPDFでは、Table 2のSOFAマッチコホート側のPositive dSOFA列とP値列が用紙幅を超えて切れている。<strong>本論文の主要な主張の半分（SOFAでマッチしたときの反転）は、本文の記述とFigure 3Cに依存しており、表で数値を確認できない。</strong> 最終版が出たら差し替えて再確認すべき。</p>
+<p>なお、読み取れた範囲では、著者が「勾配はおおむね反転していた」と述べる一方で、ノルアドレナリン使用はSOFAマッチコホートでもNegative dSOFA群（26.0%）がMinimal群（20.3%）より高く、反転していない。これは機序として説明可能である。SOFA-1は「ノルアドレナリンを使っていれば用量に関わらず高得点」だが、SOFA-2はノルアドレナリン換算量で刻む。したがって同じSOFA総点の中で、低用量昇圧薬に依存して点を稼いでいる患者がNegative dSOFAに集まる。しかし著者はこの非対称性に触れていない。</p>
+<h3>論点6：この論文はSOFA-2の是非を評価していない</h3>
+<p>AUROC、NRI、Brier score、較正プロット、決定曲線解析のいずれも報告されていない。これは意図的な設計であり、著者は「SOFAは臓器障害を分類するために設計されており、識別能の改善はその妥当性の要件ではない」と明言している。</p>
+<p>したがって本論文を「SOFA-2の方が良い／悪い」の根拠として引用するのは誤用である。識別能の議論には別の論文を使うこと。同じOneICUデータベースの <span class="wl">SOFA-2はSOFA-1と識別能がほぼ同じ — 日本のOneICU 6.7万例で外部検証（CritCare2026）</span>、スウェーデン独立コホートの <span class="wl">SOFA-2が従来SOFAを上回るのはICU初日だけ — 30日死亡に対する予測妥当性の独立検証（後ろ向きコホート・CritCare2026）</span> が適切な参照先。</p>
+<h3>論点7：既存ノート（Helleberg 2026）との突き合わせ</h3>
+<p><strong>両者は矛盾しない。だが「どちら向きにズレるか」は正反対である。</strong> スウェーデン4 ICU・29,820入室のHelleberg論文は、ICU初日でSOFA-2がSOFA-1をわずかに上回る（AUROC 0.81 対 0.80）が day 2以降その優位は消えると報告し、その過程で「day 1で60.2%の症例がSOFA-2の方が低く出る」と述べていた。つまりスウェーデンのコホートでは下方への再分類が多数派だった。一方、本研究のOneICUコホートでは、平均が SOFA 5.64 → SOFA-2 5.81 とわずかに上がり、サンキー図でも脳・心血管・呼吸で上向きの移動が主体である。</p>
+<p>この食い違いは、①症例構成（本研究は待機手術14.1%・ICU死亡4.6%と軽症寄り、スウェーデンのコホートは重症寄り）、②欠測の扱い（本研究は「測っていなければ0点」、Hellebergは carry forward を含む別の規則）、③採点の実装差（SOFA-2の運用マニュアルの解釈）のいずれか、あるいは全部で説明できる。<strong>「SOFA-2に変えると点がどちらへ動くか」は施設・データセット依存であり、他施設の報告をそのまま自院に当てはめられない</strong>、というのがこの2本を並べて読んだときの実務的な結論になる。</p>
+<p>そして両者の主張は階層が違う。Hellebergは「集計レベルの予測性能では両者はほぼ交換可能」と言い、Onoは「患者単位の割り付けでは交換可能ではない」と言う。<strong>集団として同じ精度で当たるスコアが、個々の患者を同じように分類するとは限らない。</strong> これは重症度スコアを個別患者の判断に使うときの一般的な落とし穴で、本論文の最も持ち帰る価値のあるメッセージである。</p>
+<h3>論点8：コホートの独立性</h3>
+<p>日本発のSOFA-2検証が OneICU に集中している。本研究（自治医大さいたま、13万4528例、2012-2025）と Iwasaki 論文（東北大・広島大ら、6万7116例、2013-2025）は同じデータベースで、患者集団は大きく重複しているはずである。<strong>「複数の独立した外部検証が一貫した結果を示した」と語られるとき、その独立性がどこまで担保されているかは検証すべき。</strong> JIPAD での独立解析に価値がある理由でもある。</p>
+<h3>論点9：ICU死亡を主要アウトカムにしたこと</h3>
+<p>ICU死亡は退室の判断（退室基準、後方病床の空き、看取りの場所の方針）に強く依存する。日本のICUは欧米に比べ在室が短く、看取りを一般病棟で行う施設もある。本研究のICU死亡4.6%に対し院内死亡7.7%という開き（ICU退室後に3,971人が死亡）は、その影響の大きさを示す。院内死亡でも同じ順序（14.6% / 9.5% / 8.5%）が保たれているのは安心材料だが、主要アウトカムとしては院内死亡の方が頑健だった。</p>
+<h3>論点10：ECMOの症例数が少なすぎる</h3>
+<p>「体外循環補助に最高点を与える設計」が本論文の考察の中心の一つだが、実際のコホートでは V-V ECMO が85例（0.06%）、V-A ECMO が924例（0.7%）しかない。SOFA-2マッチコホートでも V-V ECMO は3群で13/15/14例、V-A ECMO は119/147/145例で有意差なし（P=0.931、P=0.166）。<strong>本研究のデータはECMO関連の再分類の影響をほとんど検証していない。</strong> 著者も「ECMOセンターのような高度な臓器補助が集中する施設では影響がより大きくなりうる」と留保している。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ この論文の使い方を間違えないための3点 <mark class="hl"><strong>① 「SOFA-2はSOFAより優れている／劣っている」の根拠として引用しない。</strong></mark> 本論文は識別能を一切測っていない。測ったのは「同じ患者がどう振り替わるか」だけ。 <mark class="hl"><strong>② 「ズレの大きい患者はハイリスク」と単純化しない。</strong></mark> 生のdSOFA分布ではU字型に見えるが（両端で死亡率が高い）、マッチ解析が示すのは「揃えていない方のスコアが高い患者が死ぬ」という当たり前の関係であって、ズレ自体が独立したリスク指標であることは示されていない。著者自身が「actionableかは不明」と明記している。 <mark class="hl"><strong>③ 「日本のデータで検証済み」と言うときの中身に注意。</strong></mark> 本研究とIwasaki論文は同じOneICUデータベースで、患者集団は大きく重複する。独立した検証が積み上がっているわけではない。</p>
+</div>
+<h2>主要な引用文献</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>SOFA-2開発の理論的根拠と方法論（コンセンサス声明）</td><td>Moreno R, Rhodes A, Ranzani O, et al. JAMA Netw Open. 2025;8:e2545040</td></tr>
+<tr><td>2</td><td>SOFA-2の開発と検証（本論文が検証対象とする原著）</td><td>Ranzani OT, Singer M, Salluh JIF, et al. JAMA. 2025. doi:10.1001/jama.2025.20516</td></tr>
+<tr><td>3</td><td>SOFAスコアの原著（1996年）</td><td>Vincent JL, Moreno R, Takala J, et al. Intensive Care Med. 1996;22:707–10</td></tr>
+<tr><td>6</td><td>SOFA構成要素と死亡の関連</td><td>Pölkki A, Pekkarinen PT, Takala J, et al. Acta Anaesthesiol Scand. 2022;66:731–41</td></tr>
+<tr><td>7</td><td>SOFAスコアの発展・有用性・臨床試験での測定の課題</td><td>Lambden S, Laterre PF, Levy MM, Francois B. Crit Care. 2019;23:374</td></tr>
+<tr><td>8</td><td>なぜSOFAの更新が必要か</td><td>Moreno R, Singer M, Rhodes A. Crit Care Sci. 2024;36:e20240296en</td></tr>
+<tr><td>10</td><td>変数を追加してもSOFAの予測精度は改善しない（体外補助に最高点を与える設計への反証）</td><td>Yawata S, Nishiyama S, Ono S, Katayama S, Shiotsuka J. Anaesthesia. 2025;80:112–4</td></tr>
+<tr><td>12</td><td>JIPAD（日本のICU全国レジストリ）の紹介</td><td>Irie H, Okamoto H, Uchino S, et al. J Crit Care. 2020;55:86–94</td></tr>
+<tr><td>17</td><td>敗血症におけるSOFA-2の検証と免疫マーカーによる拡張</td><td>Pei F, Gu B, Liu Z, et al. J Intensive Med. 2026</td></tr>
+<tr><td>18</td><td>SOFA-2対SOFA-1の死亡予測（下方再分類群のICU死亡9.8%）</td><td>Bai S, Huang M, Chen H, et al. J Intensive Care. 2026;14</td></tr>
+<tr><td>19</td><td>STROBE声明</td><td>von Elm E, Altman DG, Egger M, et al. Ann Intern Med. 2007;147:573–7</td></tr>
+<tr><td>20</td><td>ケースコントロール研究・コホート研究におけるマッチングの入門</td><td>Iwagami M, Shinozaki T. Ann Clin Epidemiol. 2022;4:33–40</td></tr>
+<tr><td>22</td><td>SOFA循環サブスコアの精度改善</td><td>Yadav H, Harrison AM, Hanson AC, et al. Crit Care Med. 2015;43:1449–57</td></tr>
+<tr><td>23</td><td>敗血症性心筋症のECMO・CRRT中にSOFAとSOFA-2が異なる縦断パターンを示した症例</td><td>Kumaido Y, Ono S, Uchino S, Yawata S, Katayama S. J Anesth. 2026</td></tr>
+<tr><td>24</td><td>SOFA-2と「観察に基づく採点から文脈的解釈へ」の転換</td><td>Uchino S, Katayama S. Am J Respir Crit Care Med. 2026</td></tr>
+<tr><td>25</td><td>SOFA-2・Phoenix・腎機能障害</td><td>Kellum JA, Akcan Arikan A, Ostermann M. Intensive Care Med. 2026</td></tr>
+<tr><td>26</td><td>SOFA-2の簡潔さを問い直す — 実装可能性の実務的評価</td><td>Uchino S, Katayama S. Crit Care. 2026;30:82</td></tr>
+<tr><td>27</td><td>AKI分類を用いたSOFAスコアの修正</td><td>Kotani Y, Fujii T, Uchino S, Doi K, JAKID Study Group. J Crit Care. 2019;51:198–203</td></tr>
+<tr><td>28</td><td>SOFA-2スコアの明確化（JAMAへのレター）</td><td>Monard C, Schneider A. JAMA. 2026</td></tr>
+<tr><td>30</td><td>入室日のSOFA-2対SOFAの死亡識別能 — 大規模多施設ICUデータベースでの外部検証（天井効果の指摘）</td><td>Iwasaki Y, Kinoshita T, Yoshimura J, et al. Crit Care. 2026</td></tr>
+<tr><td>34</td><td>SOFA計算法の差がSepsis-3による敗血症の計測に与える影響</td><td>Alrawashdeh M, Klompas M, Rhee C. Crit Care Med. 2024;52:1380–90</td></tr>
+<tr><td>35</td><td>日本の高齢ICU患者における生命維持治療の利用と転帰（全国レジストリ研究）</td><td>Shiotsuka J, Masuyama T, Uchino S, et al. Intensive Care Med. 2025;51:115–24</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ol><li><mark class="hl"><strong>SOFA-2への切り替えは、総点の分布はほぼ変えないまま、患者単位では大規模な振り替えを起こす。</strong></mark> 日本の15病院・13万4528入室で、平均は SOFA 5.64 → SOFA-2 5.81 とわずかに上がるだけだが、脳・心血管・呼吸のサブスコアでは上向きの移動が主体、腎だけが双方向に大きく動く。</li><li><mark class="hl"><strong>SOFA-2の点数を固定しても、SOFAの点数が高い患者ほど死ぬ。</strong></mark> SOFA-2を平均7.41点に完全一致で揃えた3群（各15,898人）で、ICU死亡は 9.0% 対 5.7% 対 5.0%、院内死亡は 14.6% 対 9.5% 対 8.5%。SOFAの方が高く出ている群（Negative dSOFA）が最も高い。</li><li><mark class="hl"><strong>逆にSOFAで揃えると、今度はSOFA-2が高い群の死亡率が高くなる。</strong></mark> 鏡像的に反転する。つまり「揃えていない方のスコアが高い患者が死ぬ」という関係が両方向に成り立つ。片方のスコアだけで層別すると、その層の中に2倍近い死亡率の幅が残る。</li><li><mark class="hl"><strong>ズレを作っている主犯は腎と心血管。</strong></mark> SOFA-2で揃えたコホートで、Day-1 SOFAサブスコアの平均は腎が 約2.5 対 1.1 対 0.6、心血管が 約2.4 対 1.6 対 1.1。腎代替療法と血管作動薬の扱いの違いがそのまま出ている。止血だけが例外で勾配を作らない。</li><li><mark class="hl"><strong>この論文はSOFA-2の是非を評価していない。</strong></mark> AUROCもNRIも較正も一切報告していない。「SOFA-2が優れている／劣っている」の根拠に引用しないこと。著者自身が「ベッドサイドの判断が変わるか、転帰が改善するかは評価していない」と明記している。</li><li><mark class="hl"><strong>当院での行動：スコアを切り替える日に過去データとの連続性が切れる。</strong></mark> <mark class="hl">JIPAD登録・ICU日誌・院内QIでSOFAを使う以上、移行時は1年程度の並走期間を置き、自院の症例構成でどちらへどれだけズレるかを自前の数字で確認してから、時系列グラフを引き直す。</mark></li><li><mark class="hl"><strong>「測っていない」を「正常（0点）」に潰す記録運用が、スコアの比較を歪める。</strong></mark> 本研究は未測定項目に0点を割り当てており、Positive dSOFAの一部は病態ではなく「血ガスを引かなかった」という記録行為の反映でありうる。スコアを評価指標に使うなら、記録様式で欠測と正常を区別できるようにすることが先。</li></ol>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
