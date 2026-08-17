@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>吸入NOの薬理と病態生理 — 内皮・低酸素血症・溶血・脳から人工心肺・輸血まで（ナラティブレビュー・ICMExp2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s40635-022-00455-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">吸入NOの薬理と病態生理 — 内皮・低酸素血症・溶血・脳から人工心肺・輸血まで（ナラティブレビュー・ICMExp2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Signori D, Magliocca A, Hayashida K, Graw JA, Malhotra R, Bellani G, Berra L, Rezoagli E. Intensive Care Medicine Experimental. 2022;10(1):28. DOI: 10.1186/s40635-022-00455-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine Experimental（2022）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s40635-022-00455-6" target="_blank" rel="noopener">doi.org/10.1186/s40635-022-00455-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Inhaled nitric oxide: role in the pathophysiology of cardio-cerebrovascular and respiratory diseases</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>難治性低酸素血症の救済としての iNO の位置づけは変わらない</strong>。本稿も「ARDS で死亡率改善は示されていない／ガイドラインは推奨しないか弱く否定する」と明記している。当院で iNO を回すのは、腹臥位・筋弛緩・換気設定の最適化を尽くしたうえでの一時的な酸素化のブリッジ、および右心不全を伴う肺高血圧の橋渡しに限る、という現在の運用で妥当</li><li><strong>「効いた／効かない」の判定軸を酸素化と右心に分ける</strong>。iNO は換気のよい肺領域の血管だけを拡張する（＝シャント減少）と、PVR を下げて右室後負荷を減らす（＝右心保護）の2つの効き方がある。P/F だけを見て「無効」と切ると、右心が助かっている症例を捨てる。エコーで右室と TR 圧較差を同時に評価する</li><li><strong>中止時の反跳を必ずプロトコルに書く</strong>。羊モデルでは iNO 停止後 3〜6 分で肺高血圧が再燃した。当院でも漸減（例：20 → 10 → 5 → 1 ppm）と、中止直後30分のバイタル・酸素化の再評価をセットにする</li><li><strong>溶血は「Hb が下がる話」ではなく「NO が消える話」として扱う</strong>。人工心肺 140 分以上、セルセーバー返血、長期保存赤血球の輸血の後に説明のつかない肺・体血管抵抗上昇や乏尿が出たら、遊離Hb による NO 捕捉を鑑別に入れる。当院では血漿遊離Hb・LDH・ハプトグロビンを同時に出す運用にできる</li><li><strong>心臓外科術後 AKI の予防として iNO を回す根拠は、まだ単一 RCT レベル</strong>。ルーチン化はしない。ただし「長時間 CPB＋溶血＋術後乏尿」の症例で議論の俎上には載る</li><li><strong>当面変わらないこと</strong>：ARDS への iNO ルーチン投与、心停止後や心筋梗塞への iNO（ヒトでの転帰改善は未証明）、iNO を「肺保護薬」として使うこと</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：iNO は選択的肺血管拡張薬であり、新生児遷延性肺高血圧症（PPHN）で酸素化と死亡率を改善し、ARDS では酸素化を改善するが死亡率は改善しない。NO は 1998年ノーベル生理学・医学賞の対象となった血管作動分子である</li><li><strong>Unknown</strong>：iNO の効果が「肺血管」を超えて、脳虚血・心停止・心筋梗塞・溶血・人工心肺・輸血といった全身の虚血再灌流／内皮障害の場面で臨床転帰を変えるかどうか。ARDS でも用量・投与のタイミング・投与期間・フェノタイプ別の効果は未解明</li><li><strong>What's new</strong>：NO の内因性産生（NOS 3アイソフォーム）から、内皮機能不全（eNOS uncoupling）、遊離Hb による NO 捕捉（di-oxygenation 反応）までを1本の生化学的な筋で貫き、脳・心・腎・肺・輸血・人工血液の各論をその筋の上に並べ直したこと。さらに前臨床エビデンスと臨床エビデンスを Table 1 で明示的に分離し、「どこに証拠が無いか」（オレンジのセル＝エビデンス欠落）を研究の空白として提示した点</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで NO は血管ホメオスタシスの中心分子であり、<strong>その枯渇（内皮機能不全・遊離Hb による捕捉）が虚血再灌流・溶血・肺内シャントに共通する病態の基盤</strong>である。iNO はこの枯渇を選択的に補う手段だが、<strong>前臨床で一貫して見える臓器保護は、ヒトの臨床転帰ではまだ再現されていない</strong>。</p>
+</div>
+<ul><li>NO は NOS（nNOS / iNOS / eNOS）が L-アルギニンを L-シトルリンへ酸化する過程で産生され、可溶性グアニル酸シクラーゼ（sGC）→ cGMP → PKG 経路で血管平滑筋を弛緩させる</li><li>eNOS は補酵素 BH4 の枯渇・L-アルギニン欠乏・内因性阻害物質 ADMA の上昇で「uncoupling」を起こし、NO ではなくスーパーオキシドを作るようになる。これが内皮機能不全の分子的実体</li><li>血管内溶血では血漿中の oxy-Hb（Fe2+）が NO と di-oxygenation 反応を起こし、生物学的に不活性な硝酸イオンと met-Hb（Fe3+）に変える。結果として肺・体血管が収縮し、臓器灌流が落ちる</li><li>iNO は換気されている肺胞に隣接する肺血管だけを拡張するため、V/Q ミスマッチとシャントを減らし、体血圧を下げずに肺血管抵抗を下げる。これが PPHN と ARDS の酸素化改善の原理</li><li>前臨床では、心停止・心筋梗塞・脳梗塞・くも膜下出血・外傷性脳損傷・腸管/肝/肺の虚血再灌流・HBOC 誘発血管収縮のいずれでも iNO が保護的</li><li>ヒトでは、PPHN（死亡率改善）と心臓外科の AKI（1件の RCT）を除き、転帰改善は示されていない。STEMI（NOMI 試験）では梗塞サイズを減らせなかった</li><li>iNO の毒性は met-Hb 生成、NO2 への酸化によるサーファクタント障害、血小板凝集抑制と出血時間延長、cGMP を介した抗増殖作用、ペルオキシナイトライトによる酸化・DNA 損傷。いずれも高用量・長時間で問題になる</li><li>NO には抗微生物作用があり、SARS-CoV-1・SARS-CoV-2 に対する in vitro の複製抑制が報告されている（プロテアーゼの S-ニトロシル化が機序と提唱）</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — NO と iNO の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>NO（一酸化窒素）</strong> は無色無臭・水に溶けにくい気体で、1980年代には煙草の煙やスモッグに含まれる大気汚染物質・発がん疑い物質としか見られていなかった。1990年代に入って哺乳類の生理で必須の役割をもつことが分かり、1992年に Science 誌の「Molecule of the Year」に選ばれ、1998年には Furchgott・Ignarro・Murad の3氏が「心血管系のシグナル分子としての NO」の発見でノーベル生理学・医学賞を受賞した。 <strong>NOS（一酸化窒素合成酵素）</strong> は L-アルギニンを L-シトルリンに酸化する過程で NO を作る酵素。神経型（nNOS / NOS I）・誘導型（iNOS / NOS II）・内皮型（eNOS / NOS III）の3つがある。 <strong>iNO（吸入 NO）</strong> はこの NO をガスとして吸わせる治療。血中に入るとヘモグロビンに即座に捕まって失活するので、効果が肺血管に限局する（＝選択的肺血管拡張薬）。硝酸薬（ニトログリセリン・ニトロプルシド）は同じ NO を全身にばらまくので体血圧も下げてしまう。ここが決定的な違い。 <strong>HPV（低酸素性肺血管収縮）</strong> は、換気されていない肺胞のまわりの肺動脈が収縮して、そこへの血流を減らす生体の仕組み。V/Q マッチングの土台であり、体血管が低酸素で拡張するのと正反対の反応。 <strong>シャント</strong> は肺を通っても酸素化されずに戻ってくる血流。ARDS の低酸素血症の主因。 <strong>met-Hb（メトヘモグロビン）</strong> はヘム鉄が Fe3+ に酸化された Hb で、酸素を運べない。iNO の代表的な副作用指標。 <strong>ppm / ppb</strong> は濃度単位（百万分率／十億分率）。臨床の iNO は概ね 1〜80 ppm の範囲で語られる。</p>
+</div>
+<h3>2. 背景 — 環境中の NO と供給システム</h3>
+<h4>2-1. 環境中の NO</h4>
+<ul><li>大気中の NO 濃度は <strong>10〜500 ppb</strong></li><li>汚染の強い地域では <strong>1.7 ppm</strong> まで上昇すると推定される</li><li>煙草・燃焼・落雷は周囲の NO 濃度を有意に上げる</li><li>NO は不安定な気体で、より毒性の高い窒素酸化物（NO2、N2O4）へ酸化される</li></ul>
+<p>臨床上重要なのは、<strong>iNO の治療濃度（数〜80 ppm）が汚染大気の濃度（1.7 ppm）と桁で連続している</strong>という点。つまり治療域と環境暴露域は隔絶していない。</p>
+<h4>2-2. NO の供給システム（5方式）</h4>
+<div class="tw"><table>
+<thead><tr><th>方式</th><th>原理</th><th>実務上のポイント</th></tr></thead>
+<tbody>
+<tr><td>加圧ボンベ</td><td>最も広く使われる貯蔵法</td><td>NO と NO2 の濃度をセンサーで制御して供給する</td></tr>
+<tr><td>電気式 NO 発生器</td><td>高電圧放電で周囲の空気を電離し NO を生成</td><td>副生成物はスカベンジャーで除去する。ボンベ不要</td></tr>
+<tr><td>化学式発生器</td><td>アスコルビン酸で NO2 を還元して NO を作る</td><td></td></tr>
+<tr><td>NO 放出溶液</td><td>特定の化学条件下で NO を放出</td><td></td></tr>
+<tr><td>固体ナノ粒子</td><td>NO または不活性な NO 前駆体を安定な形で保持</td><td>制御された速度で NO を放出する</td></tr>
+</tbody></table></div>
+<p>静注の NO ドナー（ニトログリセリン、ニトロプルシド）は市販薬だが、<strong>選択性がない</strong>（血流に直接投与するため肺だけを狙えない）。本稿では機序説明のために言及するにとどめ、全身性 NO ドナーの網羅的記述は範囲外としている。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。系統的検索式・スクリーニングフロー・PRISMA 準拠の記載はない。著者の記述では DS と ER が文献検索と執筆、他の6名が知的内容について批判的に改訂した</li><li><strong>対象範囲</strong>：呼吸器系と心・脳血管系における NO の生理・病態生理、および iNO の治療的役割。健常内皮と機能不全内皮の両方を扱う</li><li><strong>明示的な除外</strong>：敗血症における NO の役割（Lambden の総説に委ねる）、全身性 NO ドナーの網羅的解説</li><li><strong>エビデンスの階層化</strong>：Table 1 で臨床条件ごとに「前臨床（小動物／大動物）」と「臨床（低いエビデンスの研究／高いエビデンスの研究）」の4列に分けて整理。<strong>「低いエビデンスの研究」＝後ろ向き研究とパイロット前向きランダム化研究</strong>、<strong>「高いエビデンスの研究」＝ランダム化比較試験とメタ解析</strong>、と定義している</li><li><strong>限界の自己申告</strong>：本文中に「臨床エビデンスは現時点で決定的ではない」「iNO の可能性を臨床試験に載せる前にやるべき仕事が多く残っている」と繰り返し記載</li></ul>
+<h3>4. NO 合成酵素（NOS）— 3つのアイソフォーム</h3>
+<p>内因性 NO は NOS によって作られる。反応は <strong>NADPH と BH4（テトラヒドロビオプテリン）依存性の L-アルギニン → L-シトルリン 酸化</strong>で、NO はその最終産物の1つ。</p>
+<p><strong>BH4 は NOS が NO を作るために必須</strong>で、これが欠乏すると NOS は二量体から単量体へ移行し「uncoupled（脱共役）」になる。ここが後述の内皮機能不全の入口になる。</p>
+<div class="tw"><table>
+<thead><tr><th>アイソフォーム</th><th>別名</th><th>発現部位</th><th>調節</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td>eNOS</td><td>NOS III</td><td>内皮細胞（構成的）</td><td>シアストレス（ずり応力）で動的に増加</td><td>生理的条件下の血管 NO の主たる供給源。NADPH 用の還元酵素ドメインと L-アルギニン用の酸化酵素ドメインをもつ2つの同一単量体からなる二量体</td></tr>
+<tr><td>nNOS</td><td>NOS I</td><td>神経細胞（最初に発見）／血管平滑筋・線維芽細胞・内皮細胞・心筋細胞</td><td>カルシウム・カルモジュリン依存。NO による負のフィードバック阻害を受ける</td><td>フィードバックにより<strong>持続的な低濃度産生ではなく拍動性の NO 産生</strong>になる。これがシナプス伝達での役割につながる。近年は血管生理での役割も示唆</td></tr>
+<tr><td>iNOS</td><td>NOS II</td><td>免疫細胞（樹状細胞・NK細胞・肥満細胞・単球・マクロファージ・ミクログリア・クッパー細胞・好酸球・好中球）／炎症刺激下の気道上皮／血管</td><td>主に遺伝子転写で調節。NO による自己阻害を受けにくく、Ca2+ 非依存性</td><td>大量の NO を長時間作れる。抗微生物作用（NO 由来ペルオキシナイトライト ONOO–）と免疫調節（リンパ球抑制・アポトーシス）の両面をもつ。血管での iNOS 活性化は NO 過剰と NO 感受性低下による重篤な血管機能障害を招く</td></tr>
+</tbody></table></div>
+<p>臨床的な含意：<strong>iNOS 由来の「多すぎる NO」と、eNOS 由来の「足りない NO」は別の病態</strong>である。敗血症で NO が過剰なのに微小循環が破綻するのは、この2つが同時に起きているため（eNOS 活性低下＋iNOS 亢進）。本稿はこの区別を全編の通奏低音にしている。</p>
+<h3>5. NO の生理 — sGC / cGMP / PKG と S-ニトロシル化</h3>
+<h4>5-1. EDRF の正体としての NO</h4>
+<p>1987年、Ignarro らと Palmer らが独立した2つの研究で、それまで <strong>EDRF（内皮由来弛緩因子）</strong> と呼ばれていた物質の正体が NO であることを同定した。ニトログリセリン・ニトロプルシドなどのニトロ血管拡張薬が平滑筋を弛緩させるのも、cGMP 合成を介した NO 放出による。</p>
+<p>健常血管の内皮細胞は <strong>NO を持続的（tonically）に分泌</strong>し、さらに<strong>ずり応力の増加に応じて動的に産生を増やす</strong>。これによって血流の変化に合わせて局所の臓器灌流を制御している。</p>
+<h4>5-2. 血管拡張以外の NO の役割</h4>
+<p>NO は血管拡張因子として発見されたが、内皮保護と血管ホメオスタシスの担い手でもある。具体的には、</p>
+<ul><li>血管平滑筋の増殖を抑える</li><li>血小板凝集を抑える</li><li>白血球の内皮への接着を抑える</li><li>ミトコンドリアの酸化的リン酸化を制限する（細胞のエネルギー代謝とアポトーシス制御に関与しうる）</li></ul>
+<h4>5-3. 古典的経路 — sGC → cGMP → PKG</h4>
+<p>心血管系における NO の効果の大半は <strong>可溶性グアニル酸シクラーゼ（sGC）</strong> の活性化を介する。sGC は GTP から二次メッセンジャーである cGMP を作り、cGMP 依存性プロテインキナーゼ G（PKG）の活性化が血管弛緩をもたらす（Fig. 1A）。</p>
+<p>sGC は α と β のサブユニットからなるヘム含有蛋白で、<strong>ヘムが存在すると NO 刺激後の酵素活性が100倍に増加する</strong>。ヘムがなければ基礎活性は低く、NO を加えても変化しない。ここは riociguat のような sGC 刺激薬・活性化薬の薬理を理解する土台でもある。</p>
+<h4>5-4. 非古典的経路 — S-ニトロシル化と SNO-Hb</h4>
+<p>NO は sGC 経路以外にも、広範な蛋白質のニトロシル化によってその生物活性を修飾する。標的には転写因子 NFκB、細胞周期制御蛋白、組織因子の生成に関わる蛋白が含まれる。</p>
+<p>問題は、<strong>NO が循環中で速やかに Hb のヘム鉄によって硝酸イオン（NO3–）へ酸化・不活性化される</strong>こと。そこで NO の生物学的利用能を保つ追加の機構が必要になる。生体内では NO が NO+ へ酸化されてチオールと反応し、<strong>S-ニトロソチオール（SNO）</strong>、とくに <strong>S-ニトロソヘモグロビン（SNO-Hb）</strong> を形成する。SNO-Hb はヘムによる不活性化に抵抗性で、血管拡張活性を保持できる。</p>
+<p>この機構は、1960年代に Guyton が観察した<strong>全身の低酸素性血管拡張</strong>をうまく説明する。すなわち、微小循環で Hb が脱酸素化する際に SNO-Hb から NO が放出され、酸素需要の高い組織へ血流を振り向ける。SNO は微小循環における NO の主要な供給源であるだけでなく、sGC/PKG とは独立した固有の生物活性ももつ。S-ニトロシル化は現在、NO 生物活性の主役級の翻訳後修飾として認識されている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. NO の生合成と eNOS uncoupling。左パネル A「Healthy endothelium（健常内皮）」は、内腔が広く開いた赤い血管の輪の中心に「Vasodilation（血管拡張）」と書かれ、輪の一点から下方へ拡大線が伸びて分子経路が展開される。黄色の「L-arginine」＋赤の「O2」が、青の「eNOS」（その上に緑の「NADPH + BH4」が乗る）の作用で、ピンクの「L-citrulline」＋濃青丸の「NO」になる。生じた NO は右へ回り込む黒い曲線矢印で下段へ渡され、下段は右から左へ、緑の「sGC」に濃青丸の「NO」が結合 → 水色の「cGMP」 → 橙の「PKG」 → 左端の「↓ Ca++」へ、太い青の矢印が連なる。右パネル B「Endothelial dysfunction（内皮機能不全）」は、同じ赤い輪が肉厚になって内腔が狭まり、中心の文字は「Vasoconstriction（血管収縮）」に変わる。拡大線の下には同じ L-arginine → L-citrulline + NO の経路が置かれるが、左肩に赤いギザギザの爆発型で「Oxidative stress（酸化ストレス）」が eNOS を叩き、その左上に「eNOS uncoupling and ROS formation」の注記。右肩には赤い長方形の「ADMA」がギザギザの矢印で eNOS を阻害し、「eNOS inhibition」と注記される。さらに右下では、赤いギザギザ球の「Oxy-Hb」が上向き矢印で濃青丸の「NO」を捕らえ、緑のギザギザ球「Met-Hb」へ変換する経路が描かれ、下に「NO scavenging」と記される。原図・無改変。</p>
+</div>
+<h3>6. NO の毒性学</h3>
+<p>NO ドナーの毒性は主に<strong>血管拡張に伴う低血圧</strong>。iNO については、薬理作用と毒性が複雑に絡む。本稿が列挙する毒性は以下。</p>
+<div class="tw"><table>
+<thead><tr><th>毒性の種類</th><th>機序</th><th>エビデンスの水準・具体的数値</th></tr></thead>
+<tbody>
+<tr><td>抗増殖作用</td><td>二次メッセンジャー cGMP が DNA 合成を修飾し細胞増殖を低下させる</td><td>血管平滑筋・ヒト気道平滑筋細胞の in vitro で証明。HPV の場面でこれが有益か有害かは未解明</td></tr>
+<tr><td>遺伝毒性</td><td>—</td><td>ラット肺細胞での染色体異常が報告。ヒトリンパ芽球様細胞の in vitro でも同様の結果</td></tr>
+<tr><td>ペルオキシナイトライト（ONOO–）生成</td><td>NO がスーパーオキシドアニオンと反応して高反応性の酸化種を作る</td><td>脂質過酸化を誘発、ミトコンドリア呼吸を阻害、DNA 塩基修飾を惹起</td></tr>
+<tr><td>NO2 生成・サーファクタント障害</td><td>iNO が肺内で酸素と急速に反応して NO2（強力な肺刺激物質）を作る</td><td><strong>仔羊 80 ppm、ラット 100 ppm</strong> の高用量暴露でサーファクタント機能不全</td></tr>
+<tr><td>肺外血管拡張</td><td>循環 Hb による急速な不活性化にもかかわらず、S-ニトロソ蛋白の形成により NO が生物学的活性を保つ</td><td>肺外循環での血管拡張が起こりうる</td></tr>
+<tr><td>血小板機能抑制</td><td>NO が血小板凝集と内皮への接着を阻害</td><td><strong>ラットで iNO 15 ppm が出血時間を延長し血小板凝集を低下</strong>させた</td></tr>
+<tr><td>met-Hb 血症</td><td>iNO が Hb と結合して met-Hb を形成</td><td><strong>毒性域の met-Hb に達するのは高用量投与時のみ</strong>。ラットとウサギでは空気呼吸に戻すと速やかにクリアされた</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>用量が上がるほど「治療」から「毒」へ滑る <mark class="hl">サーファクタント障害が出たのは仔羊 80 ppm・ラット 100 ppm</mark>、<mark class="hl">血小板機能抑制はラット 15 ppm</mark> で観察されている。つまり <mark class="hl">臨床で日常的に使う 20〜80 ppm という帯は、動物で毒性が確認された濃度と重なっている</mark>。iNO を「副作用の少ない吸入薬」として扱わず、<strong>用量と投与期間を明記した指示</strong>と met-Hb・NO2 のモニタリングを前提にすること。</p>
+</div>
+<h3>7. iNO のエビデンスの現在地（Table 1）</h3>
+<p>本稿の中核。臨床条件ごとに、前臨床（小動物・大動物）と臨床（低いエビデンス・高いエビデンス）を並べ、<strong>どこが空白か</strong>を可視化している。</p>
+<h4>Table 1. iNO の臨床応用に関する現時点で最も高いエビデンスと、試験化の前に埋めるべき研究の空白</h4>
+<div class="tw"><table>
+<thead><tr><th>臨床条件</th><th>エンドポイント</th><th>小動物</th><th>大動物</th><th>臨床（低エビデンス）</th><th>臨床（高エビデンス）</th></tr></thead>
+<tbody>
+<tr><td>PPHN</td><td>PAP、P/F比</td><td>–</td><td>–</td><td>–</td><td>iNO は PAP を下げ酸素化を改善</td></tr>
+<tr><td>PPHN</td><td>死亡率</td><td>–</td><td>–</td><td>–</td><td>iNO は死亡率を減少</td></tr>
+<tr><td>ARDS</td><td>P/F比</td><td>–</td><td>–</td><td>–</td><td>iNO は対照群に優る</td></tr>
+<tr><td>ARDS</td><td>死亡率</td><td>–</td><td>–</td><td>有意差なし</td><td>データなし</td></tr>
+<tr><td>肺動脈性肺高血圧症</td><td>PAP</td><td>–</td><td>–</td><td>–</td><td>iNO は肺循環の血行動態を改善</td></tr>
+<tr><td>心停止</td><td>脳・心機能</td><td>iNO は神経学的・心機能障害を予防</td><td>–</td><td>有意差なし</td><td>データなし</td></tr>
+<tr><td>心停止</td><td>死亡率</td><td>iNO は死亡率を低下</td><td>–</td><td>iNO は死亡率を低下</td><td>データなし</td></tr>
+<tr><td>心筋梗塞</td><td>再灌流後の梗塞サイズ</td><td>iNO は梗塞サイズを縮小</td><td>iNO は梗塞サイズを縮小</td><td>–</td><td>有意差なし</td></tr>
+<tr><td>脳梗塞</td><td>梗塞サイズ</td><td>iNO は梗塞サイズを縮小</td><td>データなし</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>くも膜下出血</td><td>脳虚血</td><td>iNO は脳浮腫形成と神経細胞脱落を減少</td><td>データなし</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>くも膜下出血</td><td>死亡率</td><td>iNO は死亡率を下げ神経学的転帰を改善</td><td>データなし</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>外傷性脳損傷</td><td>二次性脳損傷</td><td>iNO は二次性脳損傷を減少</td><td>iNO は二次性脳損傷を減少</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>溶血</td><td>血管収縮</td><td>–</td><td>iNO は溶血誘発性血管収縮を予防</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>溶血</td><td>AKI</td><td>–</td><td>iNO は溶血誘発性 AKI を予防</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>CPB 関連溶血</td><td>AKI</td><td>–</td><td>–</td><td>–</td><td>iNO は CPB 関連 AKI を減少</td></tr>
+<tr><td>輸血関連溶血</td><td>肺血管収縮</td><td>–</td><td>iNO は古い赤血球による血管収縮を予防</td><td>iNO は古い赤血球による血管収縮を予防（健常ボランティア）</td><td>データなし</td></tr>
+<tr><td>人工血液の溶血</td><td>血管収縮</td><td>–</td><td>iNO は HBOC 誘発血管収縮を予防</td><td>データなし</td><td>データなし</td></tr>
+<tr><td>臓器移植</td><td>虚血再灌流障害</td><td>ex vivo 肺灌流中の iNO が肺の wet-to-dry 比を低下</td><td>データなし</td><td>iNO は同所性肝移植で肝機能を改善</td><td>データなし</td></tr>
+</tbody></table></div>
+<p>原表の凡例：エビデンスの欠落はオレンジのセルで示され、ダッシュ「–」は「より高いエビデンスの研究があるため省略した文献」を意味する。ヒト試験の結果が前臨床データと矛盾する場合は両方を記載している。</p>
+<p><strong>この表の読み方</strong>：右2列（臨床）が埋まっているのは PPHN・ARDS（酸素化のみ）・肺動脈性肺高血圧症・CPB 関連 AKI・肝移植だけである。脳（脳梗塞・SAH・TBI）は<strong>前臨床のみで臨床は全て空白</strong>。この非対称性が本稿の最大のメッセージ。</p>
+<h3>8. 内皮機能と血管ホメオスタシス</h3>
+<p><strong>内皮機能不全</strong>とは、血管拡張性・抗有糸分裂性・抗血栓性の分子と、血管収縮性・血栓促進性・増殖性の分子の<strong>バランスが崩れた状態</strong>と定義される。NO は前者の中心にいる。</p>
+<h4>8-1. eNOS uncoupling — 内皮機能不全の分子的実体</h4>
+<p>いくつかの状況が eNOS 活性を変化させ、NO ではなくスーパーオキシドを産生させる。これが「eNOS uncoupling（eNOS 脱共役）」である。引き金は、</p>
+<ul><li><strong>補酵素 BH4 の枯渇</strong></li><li><strong>L-アルギニン欠乏</strong></li><li><strong>内因性 eNOS 阻害物質 ADMA（非対称性ジメチルアルギニン）の上昇</strong></li></ul>
+<p>この過程は概ね有害で、内皮機能不全・ROS 増加・その他の血管病理と結びついている。血漿 ADMA は<strong>高コレステロール血症・動脈硬化・高血圧・慢性腎不全・慢性心不全・インスリン抵抗性</strong>で上昇している。さらに NO の生物学的利用能は遊離 oxy-Hb によっても低下する（Fig. 1B）。</p>
+<h4>8-2. 遺伝学的な裏づけ</h4>
+<ul><li>eNOS ノックアウトマウスの研究：eNOS は<strong>基礎的な血管拡張を担い</strong>、血管新生を促進し、創傷治癒を助ける</li><li>NO 産生低下を伴う eNOS 多型：<strong>冠攣縮・高血圧・妊娠高血圧腎症・糖尿病性腎症・糖尿病性網膜症・血管性勃起不全</strong>との関連が報告されている</li></ul>
+<p>すなわち内皮機能不全は心血管疾患の発症機序に寄与し、<strong>NO 生物学的利用能の喪失が内皮機能不全の中核的な現れ</strong>であるという強い臨床的エビデンスがある。</p>
+<h4>8-3. 内皮機能をどう測るか</h4>
+<p>原理は「健常な動脈は反応性充血（flow-mediated vasodilatation）や薬理学的刺激の後に拡張する。疾患状態ではこの機構が減弱または消失する」というもの。内皮<strong>依存性</strong>と内皮<strong>非依存性</strong>の反応を区別するために、</p>
+<div class="tw"><table>
+<thead><tr><th>用いる薬剤</th><th>作用点</th><th>反応の意味</th></tr></thead>
+<tbody>
+<tr><td>外因性 NO ドナー（ニトロプルシドなど）</td><td>内皮を介さず平滑筋に直接作用</td><td>拡張すれば平滑筋の反応性は保たれている</td></tr>
+<tr><td>アセチルコリン（Ach、非 NO ドナー血管拡張薬）</td><td>内皮に作用して内因性 NO 産生を促す</td><td>拡張しなければ内皮が NO を作れていない</td></tr>
+</tbody></table></div>
+<p><strong>NO ドナー後に拡張し、Ach 後に反応がない</strong> — これが内皮機能不全の典型像。逆に内皮非依存性の反応が障害されている場合は、内皮機能の変化ではなく<strong>構造的な血管変化</strong>を示唆する。</p>
+<h4>8-4. Wessel 1993 — iNO を「診断的プローブ」として使った古典</h4>
+<p>1993年、Wessel らは、先天性心疾患の外科修復を受ける小児で <strong>人工心肺（CPB）が肺の内皮機能不全を誘発し、それが肺高血圧につながるか</strong>を検証した。iNO を内皮非依存性の平滑筋弛緩薬、Ach を内皮依存性血管拡張薬として使い分けた。</p>
+<p>結果：<strong>Ach は肺高血圧を解除できなかった</strong>。対照的に <strong>iNO は Ach の障害された内皮シグナル経路を迂回して肺圧上昇を解除した</strong>。これは、内因性 NO 放出の障害の原因が内皮機能不全であるという仮説を裏づける。さらに、<strong>血漿 cGMP 濃度は Ach 投与後は不変だったが、iNO による肺血管拡張中には3倍以上に上昇した</strong>。cGMP が有効な平滑筋弛緩の二次メッセンジャーであるという想定と整合する所見である。</p>
+<h3>9. 虚血再灌流症候群（IRS）</h3>
+<p>低酸素によって誘発される NO 放出は、微小循環血流を左右する最大の要因の1つである。この機能は <strong>Hb β鎖の Cys93 における S-ニトロシル化</strong>を介すると考えられる。</p>
+<p>裏づけとなる実験：</p>
+<ul><li>野生型マウスは短時間の虚血後に筋血流が上昇する（反応性充血）が、<strong>β鎖 Cys93 に単一点変異をもち SNO を運べない Hb を発現するマウスではこの機構が著しく障害される</strong></li><li>NO を運べない組換え Hb は、心筋梗塞の動物モデルで<strong>心筋障害と死亡率の増加</strong>と関連した</li></ul>
+<h4>9-1. iNO は本当に標的臓器に届くのか</h4>
+<p>NO ドナーの送達機序は理解しやすいが、<strong>iNO は循環中で Hb 介在性酸化により速やかに不活性化されるため、標的臓器に到達しない可能性がある</strong>。本稿はこの点を隠さず提示したうえで、<strong>長寿命の組織代謝産物が iNO の前処置効果（preconditioning）を説明しうる</strong>という仮説を置いている。</p>
+<h4>9-2. 臓器別の前臨床所見</h4>
+<div class="tw"><table>
+<thead><tr><th>臓器</th><th>モデル</th><th>iNO / NO の効果</th></tr></thead>
+<tbody>
+<tr><td>心筋</td><td>動物の心筋 IRS</td><td>虚血・再灌流後に基礎 NO 放出が非虚血対照と比べ有意に低下</td></tr>
+<tr><td>肺</td><td>ラットの肺 IRS</td><td>iNO が炎症と血管透過性を低下（血管外アルブミン蓄積の減少で確認）、肺 wet-to-dry 重量比の上昇を防いだ</td></tr>
+<tr><td>肺（移植）</td><td>げっ歯類の ex vivo 肺灌流</td><td>肺摘出の前後に iNO を投与すると、wet-to-dry 比と肺血管抵抗が低下し、酸素化が改善、肺組織 cGMP が上昇、肺組織 TNF-α と iNOS が低下</td></tr>
+<tr><td>腸管</td><td>動物の腸管 IRS</td><td><strong>80 ppm の iNO</strong> が、IRS による灌流低下、白血球のローリング・接着・遊出の増加、内皮機能不全をいずれも打ち消した</td></tr>
+<tr><td>肝</td><td>動物の肝 IRS</td><td>外因性 NO（吸入・ドナーいずれも）が再灌流後の肝組織血流を促進、好中球集積を減少、iNOS の過剰産生を防いだ</td></tr>
+</tbody></table></div>
+<h4>9-3. ヒトでの IRS</h4>
+<p>哺乳類での顕著な効果に比して、<strong>ヒトの IRS モデルで iNO の有益性を示した証拠はわずか</strong>である。</p>
+<ul><li>膝手術のターニケット装着後に iNO が炎症性サイトカインを減少させるようだ</li><li><strong>80 ppm の iNO は同所性肝移植後の入院期間を有意に短縮し、血清トランスアミナーゼと凝固時間の正常化を加速した</strong></li></ul>
+<p>著者らは、<strong>iNO 投与のタイミングが IRS の異なる病態段階との関係で鍵を握るのではないか</strong>と提案し、これが臨床研究の転帰の解釈に決定的である可能性を指摘している。</p>
+<h3>10. NO と脳</h3>
+<h4>10-1. 脳虚血と脳梗塞</h4>
+<p>脳血流（CBF）は神経活動が大量のエネルギーを要するため厳密に制御される。CBF の2大決定因子である<strong>自動調節能</strong>と<strong>神経血管カップリング</strong>は、いずれも NO の影響を受ける。</p>
+<ul><li><strong>自動調節能</strong>：脳灌流圧が変化しても CBF を一定に保つ。eNOS ノックアウトマウスで NO 合成を阻害すると、<strong>脳自動調節曲線の低血圧側が右方偏位</strong>し、低い灌流圧での CBF が障害される</li><li><strong>神経血管カップリング</strong>：神経血管ユニット（神経細胞・グリア・血管からなる機能的構造）が局所の代謝需要に応じて局所 CBF を調節する仕組み。<strong>ラットで nNOS を阻害すると体性感覚刺激に対する脳血流反応が有意に減弱</strong>し、神経血管カップリングの破綻が示唆される</li></ul>
+<p>一方、脳虚血における NO 活性は極めて複雑である。<strong>硝酸塩の毒性作用・フリーラジカルの放出・血管床ホメオスタシスへの神経保護作用</strong>が相互作用するためである。iNOS はストレス・炎症・感染で刺激されうるが、その条件下では NO が大量に産生され、<strong>血液脳関門の透過性を上げて中枢神経系に有害に働く</strong>。</p>
+<p>脳梗塞における NO の役割は論争的で、多数の動物研究が神経毒性と神経保護の<strong>両方</strong>を報告している。整理すると、</p>
+<div class="tw"><table>
+<thead><tr><th>由来</th><th>方向</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>eNOS 由来 NO</td><td>神経保護</td><td>中大脳動脈閉塞モデルでの梗塞サイズ縮小の大半はこちらに帰属する</td></tr>
+<tr><td>nNOS・iNOS 由来 NO</td><td>神経毒性</td><td>硝酸塩の産生とフリーラジカルの放出を介する</td></tr>
+</tbody></table></div>
+<p>ただし近年のエビデンスは、<strong>全体として NO は脳梗塞で有益な役割が優勢</strong>であることを示しており、<strong>iNO はげっ歯類モデルで脳梗塞サイズを縮小することが示されている</strong>（複数の独立した報告）。</p>
+<h4>10-2. くも膜下出血（SAH）</h4>
+<p>SAH 後の遅発性脳虚血（DCI）の病態に NO が関与するという仮説は興味深い。<strong>eNOS と nNOS の両方の機能不全</strong>が機序に含まれると提案されている。</p>
+<p>病態の流れ：</p>
+<ol><li>免疫学的・非免疫学的な過程により、くも膜下腔の血腫中の赤血球が溶血する</li><li>遅れて<strong>細胞外遊離 Hb が髄液中に出現</strong>する</li><li>髄液中の遊離 Hb 高濃度は、SAH 患者の<strong>遅発性虚血性神経障害と関連</strong>する</li><li><strong>遅発性脳虚血は髄液 NO 濃度の低下と関連</strong>する</li><li>遊離 Hb の NO 捕捉作用が脳動脈の内皮 NO シグナルを破綻させ、血管収縮と引き続く遅発性血管攣縮を招く</li></ol>
+<p>支持する証拠：</p>
+<ul><li><strong>全身性 NO ドナー</strong>は動物モデルで DCI の予防に役割を示した</li><li><strong>遊離 Hb を大きな Hb-ハプトグロビン複合体として隔離</strong>すると、遊離 Hb と内皮・組織 NO との相互作用が阻止され、実験系で脳血管の生理的 NO シグナルが回復した</li></ul>
+<p>さらに近年、SAH 後の<strong>早期</strong>脳虚血は<strong>軟膜細動脈の収縮</strong>によるという知見が出てきた。げっ歯類の SAH 誘発モデルで <strong>iNO は早期の微小血管攣縮を有意に減少させた</strong>（一方で大血管の攣縮への効果は限定的だった）。その結果、<strong>脳浮腫形成の減少、海馬神経細胞脱落の減少、死亡率の低下、神経学的転帰の改善</strong>が得られた。</p>
+<p><strong>臨床的な鍵</strong>：iNO の効き所が「太い血管の攣縮」ではなく「軟膜細動脈レベルの微小攣縮」だとすれば、血管造影や TCD で見ている攣縮は治療標的として外れている可能性がある。ここは JC での論点になる。</p>
+<h4>10-3. 外傷性脳損傷（TBI）</h4>
+<p>不適切な炎症反応が TBI 後の二次性脳損傷の主要な決定因子である。TBI における危険な NO 産生増加の機序は <strong>iNOS のアップレギュレーション</strong>。脳内の過剰な NO は <strong>TBI に伴うグルタミン酸細胞毒性</strong>に寄与し、神経細胞アポトーシスとミトコンドリア機能不全の発症機序に関わる。</p>
+<p>しかし動物モデルでは相反する結果も得られている。</p>
+<ul><li>TBI は<strong>アルギナーゼ活性を上げる</strong>ことがあり、アルギナーゼは L-アルギニンを eNOS と奪い合うため NO 産生を制限する</li><li><strong>iNOS 欠損マウスは対照群より酸化ストレスが増強</strong>していた（＝ iNOS が守っている側面がある）</li></ul>
+<p>それでも、<strong>iNO はマウスモデルとブタモデルの両方で、TBI 後の脳自動調節能の保持と二次性脳損傷の抑制に有意な役割を示した</strong>。ブタモデルの研究は新生仔・幼若ブタで海馬神経細胞壊死の減少も示している。</p>
+<h3>11. NO と循環器</h3>
+<h4>11-1. 心停止 — 全身性 IRS の原型</h4>
+<p>心停止（CA）は<strong>全身の虚血再灌流症候群の原型</strong>である。脳と心臓のように代謝需要の高い臓器が特に IRS に脆弱になる。</p>
+<p>前臨床の中核データ：</p>
+<ul><li><strong>カリウム誘発心停止のマウスに、蘇生後 40 ppm の NO を 23 時間吸入させると、神経学的・心機能障害が予防された</strong></li><li>iNO は蘇生24時間後の MRI で計測した<strong>脳浮腫を減弱</strong>させ、<strong>海馬神経細胞のアポトーシス</strong>と<strong>皮質での炎症性サイトカイン誘導</strong>を減少させた</li><li><strong>生存率は空気呼吸の対照群 31% に対し iNO 群 85% へ著明に改善</strong>した</li><li>機序として <strong>sGC が決定的</strong>。sGC の 1α サブユニットを欠失させると、iNO の神経機能および生存に対する保護効果が消失した</li><li>心停止後に脳で起こる <strong>S-ニトロシル化蛋白の減少を薬理学的に防ぐ</strong>と、虚血性脳損傷マウスの生存率が改善する</li></ul>
+<p>ヒトでの知見は限られる。<strong>院内心停止患者を対象としたパイロット研究では、iNO は生存率の有意な上昇と関連したが、良好な神経学的転帰には差がなかった</strong>。</p>
+<p>補足として本稿は、<strong>CPR の実施法（機械的 vs 用手胸骨圧迫）が肺水腫のために自己心拍再開後の酸素化を低下させうる</strong>という前臨床エビデンス（CRALE：CPR 関連肺水腫）に触れ、この場面で酸素化改善を狙う iNO は今後の研究領域になりうると述べている。</p>
+<h4>11-2. 心筋梗塞</h4>
+<p>NO 欠乏は再灌流後の組織障害と関連し、この現象は心筋虚血モデルで特に顕著である。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>モデル</th><th>介入</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>NO ドナー vs プラセボ</td><td>イヌの心筋 IRS</td><td>薬理学的な NO 欠乏の補正</td><td>虚血領域の縮小と好中球接着の減少（＝より良い心筋保護）</td></tr>
+<tr><td>eNOS 欠損</td><td>マウス</td><td>—</td><td>心筋 IRS が増悪</td></tr>
+<tr><td>心筋細胞特異的 eNOS 過剰発現</td><td>マウス</td><td>—</td><td>心筋が保護される</td></tr>
+<tr><td>iNO</td><td>マウスの心筋 IRS</td><td><strong>40〜80 ppm</strong></td><td>梗塞サイズを縮小し左室機能を改善</td></tr>
+<tr><td>iNO</td><td>ブタの心筋梗塞</td><td><strong>80 ppm、再灌流の10分前に開始し以後4時間継続</strong></td><td>微小血管灌流の改善、梗塞サイズの縮小、心筋への白血球浸潤の減少</td></tr>
+<tr><td><strong>NOMI 試験（ヒト）</strong></td><td>STEMI</td><td><strong>80 ppm、再灌流後4時間</strong></td><td><strong>48〜72時間後の梗塞サイズを減少させなかった</strong></td></tr>
+</tbody></table></div>
+<p>前臨床で用量・タイミングを最適化した条件（再灌流前に開始）で得られた効果が、ヒトでは再灌流「後」の投与で再現されなかった、という構図。<strong>投与タイミングが説明変数になりうる</strong>という著者の主張と整合する。</p>
+<h3>12. NO と溶血</h3>
+<h4>12-1. 遊離Hb による NO 捕捉 — di-oxygenation 反応</h4>
+<p>ヘム含有蛋白は NO と強く結合する。生理的条件では <strong>Hb が赤血球内に閉じ込められている</strong>ため NO の捕捉は緩やかである。ところが<strong>血管内溶血</strong>が起こると、血漿中の遊離Hb が血管の NO と急速に結合し、血管運動緊張と臓器灌流に影響する。</p>
+<p>化学反応としては、<strong>血漿 oxy-Hb（Fe2+）と NO の di-oxygenation 反応 → 生物学的に不活性な硝酸イオン（NO3–）＋ met-Hb（Fe3+）</strong>。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 溶血における NO 捕捉。図の左上で、青い輪郭の赤い円盤（RBCs）が崩れて小さな赤い粒に散り、「Hemolysis」の大きな見出しの下、崩れた粒の先に「Free-Hb」とラベルされたギザギザ縁の赤い塊が現れる。中段には反応式が図解される。左に「Fe++」を4つ含み、そのまわりに淡赤の四角で「O2」を4つ配した赤いギザギザ球（oxy-Hb）が置かれ、「＋」の後に濃青の丸「NO」、太い青矢印を挟んで、右には「Fe+++」を4つ含む緑のギザギザ球（met-Hb）と「＋」、黄色の丸「NO3–」が並ぶ。その直下に同じ式が文字で繰り返される — 赤字「Oxy-Hb」＋青字「Nitric Oxide」→ 緑字「Met-Hb」＋黄字「Nitrate」。図の下半分は吸光度スペクトルのグラフで、横軸が波長（nm、450〜700超）、縦軸が吸光度（L・mmol⁻¹・cm⁻¹、0〜16）。赤い曲線（Oxy-Hb）は 450 nm 付近から急降下して 500 nm 台前半で谷を作り、約 540 nm と約 575 nm に鋭い二峰性のピーク（いずれも 14〜16 付近）を立てたのち 600 nm で急落してほぼゼロになる。緑の曲線（Met-Hb）は 500 nm 付近に緩やかな肩をもち、以後なだらかに低下しながら 630 nm 付近にごく低い（3 前後の）第2の隆起を残して裾を引く。この吸光特性の差が、両者を分光学的に区別できる根拠になっている。外因性 NO は内因性 NO の捕捉を最小化することでこの現象を防ぎうる。原図・無改変。</p>
+</div>
+<h4>12-2. Minneci 2005 — 「溶血 → 血管収縮 → 臓器障害」を実験で示した仕事</h4>
+<p>2005年、Minneci らはイヌモデルで、<strong>血管内溶血が用量依存性の全身性および肺の血管収縮を生じる</strong>ことを示した。遊離Hb 存在下で血管反応性が低下する機序を確かめるため、<strong>80 ppm の iNO を投与すると、血漿 Hb による血管収縮作用が反転した</strong>。</p>
+<p>この観察から言えること：血管内溶血による急性の肺・体血管収縮は、<strong>血漿 oxy-Hb と NO の di-oxygenation 反応が加速され、不活性な硝酸イオンと met-Hb が生じることに続発する</strong>。</p>
+<p>重要な但し書き：<strong>血漿 Hb 濃度そのものが唯一の規定因子ではない</strong>。NO と結合できるのは酸化型（oxy-Hb）だけであり、met-Hb になった時点で血管作用は失われるからである。</p>
+<p>同じ論文で Minneci らは、<strong>溶血の量が受傷6時間後のクレアチニンクリアランス低下として評価される腎機能障害と関連する</strong>ことも示した。この所見は溶血の発生と臓器灌流をつなぐ環になる。すなわち、<strong>oxy-Hb が多いほど血管収縮が強く、臓器灌流の低下が大きく、クレアチニンクリアランスの低下も大きい</strong>。注目すべきは、<strong>iNO で治療した溶血群ではクレアチニンクリアランスが回復した</strong>ことで、iNO の oxy-Hb 不活性化作用（oxy-Hb を met-Hb に酸化する働き）を裏づける。</p>
+<h4>12-3. ハプトグロビンによる隔離では足りない場面がある</h4>
+<p>細胞外遊離Hb を Hb 結合蛋白であるハプトグロビンで血管内に隔離すると、血管 NO シグナルが保護されることが示された。ところが、<strong>糖尿病や高脂血症のマウスモデルのように内皮機能不全が存在すると、ハプトグロビンは血管収縮を防げなかった</strong>。</p>
+<p>含意：<strong>内皮機能不全は遊離Hb による NO 捕捉に起因する血管収縮を増強する</strong>。したがって、内皮機能不全がある状況では、Hb 結合分子による遊離Hb の隔離は（NO の補充とは対照的に）血管収縮の予防に有効でない可能性がある。</p>
+<h4>12-4. 鎌状赤血球症と肺血栓塞栓症</h4>
+<ul><li>2004年、Gladwin らは<strong>鎌状赤血球症と肺高血圧の関連</strong>を見出し、血漿 oxy-Hb による NO 捕捉がその過程に関与すると考えた。この所見はより新しい研究でも確認されている</li><li>鎌状赤血球症における外因性 NO の保護効果は仮説段階で、<strong>NO の回復・赤血球接着の減少・血管閉塞の予防</strong>を介する可能性がある</li><li>ただし <strong>鎌状赤血球症における肺高血圧の発症機序に溶血が果たす役割は依然として論争的</strong>である（著者はここを断定していない）</li><li><strong>急性肺血栓塞栓症の血行動態変化</strong>の一部も、Hb の「脱コンパートメント化」の増加とそれに続く NO 消費の増大による血管収縮で説明されうる</li></ul>
+<h4>12-5. 人工心肺（CPB）関連溶血</h4>
+<p>CPB は<strong>肺血管抵抗（PVR）と体血管抵抗（SVR）の上昇</strong>と関連し、とくに術後1時間目に顕著であることが知られている。溶血による微小循環血流の乱れとそれに続く低灌流あるいは虚血性障害は、<strong>心血管外科手術患者における臓器障害発生の重要なリスク因子</strong>として認識されるべきである。</p>
+<p>2016年（掲載2017年）、Rezoagli らの検討：</p>
+<ul><li><strong>CPB 時間が 140 分以上に延長</strong>すると、より高度の溶血、および <strong>CPB 後15分の時点で全身性と肺の両方の血管収縮</strong>と関連した</li><li><strong>NO 消費の変化と、全身および肺の血管抵抗の変化との間に、独立した線形相関</strong>が CPB 後4時間以内に認められた</li><li>手技の長さは血漿 Hb 濃度に直接関係し、その結果 NO 消費が増え、より高い肺・体血管抵抗をもたらした</li></ul>
+<p>なお CPB 中の NO 生物学的利用能の低下は遊離Hb による NO 消費の増加だけによるものではなく、<strong>内皮機能不全も内因性 NO 産生を障害する</strong>（Wessel の所見に戻る）。</p>
+<p>臓器障害との接続：CPB 後の NO 消費亢進と産生低下は <strong>AKI と腸管障害</strong>にも関与する。これは Minneci が示した血管収縮による臓器血流低下と同じ経路である。そして、<strong>CPB 中の早期の外因性 NO 投与は、oxy-Hb の met-Hb への酸化を促進して全身の血管収縮を減らすことで、AKI のリスクを低下させる</strong>。現在、<strong>内皮機能不全のある患者に CPB 中および術後24時間 80 ppm の iNO を投与して AKI リスクを減らせるかを検証する臨床試験が進行中</strong>である。</p>
+<h4>12-6. 輸血関連溶血 — 「保存血の傷（storage lesion）」</h4>
+<p>長期間保存された赤血球の輸血は、<strong>AKI・敗血症・人工呼吸期間の延長といった合併症の増加と死亡率の上昇</strong>と関連する。保存は赤血球膜の完全性に影響するため、多数の赤血球が保存中または輸血直後に溶血する（＝ storage lesion）。したがって長期保存赤血球の輸血は血漿 Hb を増やし、内因性 NO の捕捉を介して全身性および肺の血管収縮をもたらす。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>対象</th><th>介入</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Berra ら（2014）</td><td>肥満のボランティア、<strong>40日保存</strong>の自己血輸血</td><td><strong>80 ppm の NO 吸入</strong></td><td>長期保存血輸血後の<strong>肺動脈圧上昇を予防</strong>した</td></tr>
+<tr><td>Baron ら（2012）</td><td>仔羊、古い赤血球の輸注</td><td><strong>80 ppm の NO 吸入</strong></td><td>古い赤血球輸注による<strong>血管収縮反応を予防</strong>した</td></tr>
+<tr><td>Sengupta ら</td><td>赤血球の前処理</td><td>NO ドナー</td><td>保存品質が改善し、<strong>溶血の量（LDH 活性で計測）と 2,3-DPG など必須代謝物の枯渇が減少</strong></td></tr>
+<tr><td>Muenster ら</td><td>赤血球の輸血前処理</td><td>ガス状 NO または NO ドナー</td><td>同様の結果</td></tr>
+</tbody></table></div>
+<p><strong>セルセーバー（自己血回収装置）</strong> も論点。大量出血が予想される手術で広く使われるが、自己血を洗浄する際の機械的外傷による溶血が大きな懸念となる。現代のセルセーバーは洗浄中に遊離Hb の大半を除去できるが、<strong>無傷の赤血球と損傷した赤血球を選別しない</strong>。損傷赤血球は体内で<strong>遅発性の溶血</strong>を起こしやすい。外因性 NO は、セルセーバーによる自己血投与後の in vivo 遅発性溶血による内皮機能不全と血管弛緩障害を防ぐ鍵になりうる。</p>
+<h4>12-7. 人工ヘモグロビン（HBOC）</h4>
+<p>輸血は日常的な手技だが、安全確保の措置を尽くしてもなお既知のリスクがある。加えて、<strong>製剤の入手可能性・適合検査の必要性・保存と輸送の要件</strong>という技術的制約があり、さらに<strong>輸血を受け入れない人々</strong>もいる。そこで血液を確実かつ安全に代替する薬剤の開発に大きな努力が払われてきた。</p>
+<p>最も研究されている人工血液代替物の1つが <strong>HBOC（ヘモグロビンベース酸素運搬体）</strong> で、遊離の合成 Hb を用いて全身に酸素を運ぶ。しかし、<strong>高い毒性のため FDA は米国で HBOC を一切承認していない</strong>。</p>
+<p>HBOC は実質的に遊離Hb 複合体であるため、人工血液輸注による血管収縮は<strong>血漿遊離Hb モデルと同じ内因性 NO 捕捉機序</strong>で決まると考えられる。</p>
+<ul><li>2008年、Yu らは動物モデルで <strong>iNO の投与が HBOC 誘発の全身性および肺の血管収縮を反転できる</strong>ことを示した</li><li>2010年、同じ研究者らが <strong>内皮機能不全と HBOC 誘発副作用の重症度との関係</strong>を報告した</li></ul>
+<p>全体として、これらの結果は<strong>血管 NO 濃度と内皮機能不全の重症度の間に逆相関がある</strong>という仮説を支持する。</p>
+<h3>13. NO と肺</h3>
+<h4>13-1. 低酸素性肺血管収縮（HPV）とシャント</h4>
+<p>HPV は 1894年に Bradford が最初に同定し、1946年に Von Euler がさらに特徴づけた。HPV は<strong>肺胞低酸素に反応して小さな肺内動脈が収縮する現象</strong>であり、これこそが肺の換気血流マッチングを支える中心的な生理機構である。<strong>低酸素に対する血管収縮は肺血管の特徴</strong>であり、対照的に<strong>体血管は低酸素に対して拡張して組織への酸素供給を増やす</strong>。</p>
+<h4>13-2. Zapol と iNO の誕生</h4>
+<p>低酸素血症と HPV における NO の効果に関する広範な業績は Warren M. Zapol 教授によるものである。その科学的貢献の出発点は約50年前、<strong>ウェッデルアザラシの酸素代謝の生理学研究</strong>にさかのぼる。このアザラシは<strong>深さ 600 m までの潜水で1時間以上息を止められ</strong>、高度の低酸素血症・高圧・極寒に耐える。</p>
+<p>出発点の仮説は「呼吸不全を治療して低酸素を反転させ、生存を高める必要がある」というものだった。しかし<strong>全身性血管拡張薬は、肺と体の血管床を非選択的に拡張してしまうため、動脈血酸素化に対して逆の効果</strong>をもたらした。</p>
+<p>そこに Zapol の直観による突破口が開かれた。<strong>1991年、Frostell・Zapol らはトロンボキサン誘発性および低酸素誘発性の肺高血圧の羊モデルで、iNO（5〜40 ppm）が3分以内に肺高血圧を反転させることを示した</strong>。このとき<strong>体血管拡張は起こらず、NO 吸入の中止後3〜6分以内に肺高血圧が再燃した</strong>。同様の効果が慢性肺高血圧のヒトでも得られ、<strong>平均体血圧に影響を与えずに肺血管に選択的に作用する</strong>ことが確認された。</p>
+<h4>13-3. なぜ選択的なのか — iNO の作用原理</h4>
+<p>iNO は<strong>換気されている肺単位に付随する血管、すなわち肺胞・毛細血管膜を拡散して届いた吸入ガスに暴露された血管だけ</strong>に作用する。これらの血管を選択的に拡張することで換気血流マッチングが改善する。この効果は、<strong>換気されない肺胞が灌流される代表的病態である ARDS</strong> における重症低酸素血症の治療で重要性を獲得した。加えて、<strong>Hb による NO の急速なクリアランスが、体血管弛緩による全身性低血圧の不在を保証している</strong>。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. HPV における iNO による低酸素血症と肺高血圧の反転。上段は3つのパネルが横並びになり、いずれも気管支が二股に分かれて2つの肺胞につながり、その周囲を静脈血（青）と動脈血（赤）の血管が取り巻く模式図。パネル A「Physiologic condition（生理的条件）」では2つの肺胞がともに白く描かれ中に「O2」と書かれ、肺胞を巻く青い血管が右下で鮮やかな赤の血管へ移行する — 全ての血流が酸素化されている状態。パネル B「Hypoxic pulmonary vasoconstriction（低酸素性肺血管収縮）」では右側の肺胞が緑色に塗りつぶされ（＝無気肺や肺炎で換気されない肺胞）、そこへ向かう気管支も緑になる。その肺胞を巻く血管は細く描かれ（HPV による収縮）、右下へ抜ける流出血管は赤ではなく紫色に変わっている — 換気されない領域を通った血液が混ざって酸素化が不完全になったことを示す。パネル C「iNO selective vasodilation（iNO による選択的血管拡張）」では、左の換気された肺胞の中身が「O2 + NO」に変わり、その肺胞を巻く血管が太く描かれ（選択的拡張）、流出血管の色は紫よりも明るいマゼンタになる — 血流が換気された肺胞側へ振り向けられ、酸素化が部分的に回復したことを示す。下段は西部呼吸生理学の古典的な O2-CO2 ダイアグラムで、横軸が PAO2（mm Hg、目盛 100 と 150）、縦軸が PACO2（mm Hg、目盛 40 と 45）。左上に「V/Q = 0」、右に「V/Q = ∞」と記され、両者を結ぶ曲線が引かれる。曲線上の3点に太い矢印が下向きに立ち、左から順に紫の「B」、マゼンタの「C」、赤の「A」— すなわち A（生理的）が最も右（高 PAO2）、B（HPV のみ）が最も左（低 PAO2）、C（iNO 投与後）はその中間に位置し、iNO が B の状態を A の方向へ部分的に戻すことを表す。下段パネルは West JB, Luks AM. West's Respiratory Physiology: The Essentials 第10版（Wolters Kluwer, 2015）から改変。原図・無改変。</p>
+</div>
+<h4>13-4. PPHN — iNO が最も確実に効く場面</h4>
+<p>1992年、Roberts らと Kinsella らが、<strong>新生児遷延性肺高血圧症（PPHN）で iNO が酸素化を改善する</strong>ことを示した。PPHN ではサーファクタントの欠乏が肺胞虚脱と換気肺胞の減少をもたらして低酸素血症を生じる。その後、<strong>iNO 治療を受けた PPHN 患者での死亡率低下</strong>が示され、iNO 治療と PPHN の間の強固な病態生理学的な結びつきが確認された。</p>
+<h4>13-5. ARDS — 酸素化は改善するが死亡率は動かない</h4>
+<p>1993年、Rossaint らは、<strong>肺の不均一性と高度の右左シャントを伴う疾患である ARDS で、iNO が肺血管圧と右室過負荷を低下させ、酸素化された血管を特異的に拡張することで肺血流を換気肺胞へ振り向け、肺内シャントを減らして動脈血酸素化を高める</strong>ことを示した（Fig. 3）。</p>
+<p>機序の言語化（本稿の記述をそのまま追う）：</p>
+<ul><li><strong>低酸素性血管収縮</strong>は換気されない領域への血流を減らすが、その分<strong>肺血管抵抗を上げる</strong></li><li><strong>iNO</strong> はよりよく換気された領域の血管を拡張するので、<strong>肺胞から肺血管へ入る側の肺血管抵抗を下げる</strong></li><li>この2つの機序は<strong>加算的</strong>であり、肺血流をより換気された肺単位へ振り分けることで、<strong>肺内シャントの減少と動脈血酸素化の上昇</strong>を可能にする</li></ul>
+<p>iNO の換気領域への選択性は、<strong>気管内投与の NO ドナー</strong>でも模倣できる可能性がある（動物 ARDS モデルで低酸素血症への有益性が示されている）。ただし<strong>死亡率への影響は報告されていない</strong>。</p>
+<p>そして著者らは明確に限界を書く。</p>
+<ul><li><strong>iNO は ARDS で明確な死亡率の利益を示していない</strong>（Adhikari らのシステマティックレビュー・メタ解析は重症度によらず死亡率を減らさないと結論）</li><li>一部のランダム化研究は<strong>酸素化に対する持続的な利益を示せなかった</strong></li><li><strong>高用量では iNO が酸素化を悪化させうる</strong></li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>iNO の ARDS における立ち位置は「使わない側」に置かれている 現在のガイドラインは <mark class="hl">ARDS への iNO を推奨しない（ATS/ESICM/SCCM）か、使用に対する弱い推奨（FICM/ICS）を出している</mark>。理由は単純で、<mark class="hl">ARDS における iNO の大規模第III相ランダム化比較試験が存在しない</mark> から。臨床実践での iNO 使用は限られている（LUNG SAFE のデータ）。</p>
+</div>
+<h4>13-6. 何が分かっていないか — 著者が並べる未解決の変数</h4>
+<p>現時点で利用可能な ARDS の臨床研究は、iNO が以下の違いによって異なる役割を果たすかどうかを<strong>区別していない</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>未解決の軸</th><th>具体的な問い</th></tr></thead>
+<tbody>
+<tr><td>病因</td><td>肺内性か肺外性か、感染性か非感染性かで iNO の効果は違うか</td></tr>
+<tr><td>管理</td><td>換気設定・体位・併用療法との組み合わせで効果は変わるか</td></tr>
+<tr><td>併存疾患</td><td>心血管系・呼吸器系の併存疾患が iNO の反応性を規定するか</td></tr>
+<tr><td>臓器不全</td><td>右心不全・腎障害の有無で効果は違うか</td></tr>
+<tr><td>性別</td><td>男女で効果は異なるか</td></tr>
+<tr><td>治療制限</td><td>治療制限（limitation of care）の有無が転帰解析を歪めていないか</td></tr>
+<tr><td>用量</td><td>用量だけの問題ではないが、用量反応関係はどうか</td></tr>
+<tr><td>タイミング</td><td>いつ始めるか</td></tr>
+<tr><td>期間</td><td>どれだけ続けるか</td></tr>
+</tbody></table></div>
+<p>これらのために<strong>現時点の臨床エビデンスは決定的でない</strong>。著者は、<strong>ARDS のフェノタイプ層別化</strong>（同じ ARDS の定義の中に生物学的・臨床的に異なる特徴が存在するという近年の知見）が、iNO を含む多数の薬理学的治療の効果理解を助けることを期待すると述べている。</p>
+<h3>14. NO と敗血症（本稿の範囲外）</h3>
+<p>敗血症では NO 産生が<strong>調節不全（dysregulated）</strong>である。</p>
+<ul><li><strong>過剰な NO 産生</strong>は心機能・大血管・細胞レベルの機能障害の原因となりうる</li><li>一方で <strong>eNOS 活性の低下</strong>は微小循環障害の鍵となる因子である</li></ul>
+<p>この二面性の詳細は本稿の範囲外とされ、Lambden による近年の総説に委ねられている。</p>
+<h3>15. NO と COVID-19 — SARS-CoV-2 に対する抗ウイルス作用</h3>
+<p>NO は抗微生物物質である。その役割は複数のウイルス、および細菌・真菌・原虫といった他の病原体に対して示されてきた。NO の抗微生物活性は、<strong>SARS-CoV-1 に対して in vitro で、プラセボと比較して濃度依存性に細胞変性効果を減少させる</strong>という形で測定された。</p>
+<p>COVID-19 パンデミック下で SARS-CoV-2 に関する研究生産が急増するなか、NO の殺ウイルス作用の可能性が検討された。</p>
+<ul><li>in vitro 研究で、<strong>NO ドナーである S-ニトロソ-N-アセチルペニシラミン（SNAP）が SARS-CoV-2 の複製を阻害</strong>した</li><li>この効果は、<strong>NO で処理した Vero E6 細胞培養におけるウイルス性細胞変性効果の遅延および予防</strong>の両方と相関した</li><li>Akaberi らは、<strong>S-ニトロシル化による SARS-CoV-2 プロテアーゼの不活性化</strong>が NO の治療的役割の背後にある鍵となる機序であると提案した</li><li>他に提唱されている保護機序は、<strong>ウイルス複製を阻害する反応性窒素中間体の産生</strong>と、<strong>枯渇した内因性 NO の回復による COVID-19 の血栓促進性・血管合併症の緩和</strong>である</li></ul>
+<h3>16. 結論（著者の言葉）</h3>
+<ul><li>NO はヒトの生命において鍵となる分子であり、臓器灌流と臓器生存能のバランスを司る有益な作用は、その限定的な副作用を上回るように見える</li><li>iNO はまず HPV と PPHN において有効性が示された（原文は "iNOS" と誤植されているが文脈上は iNO）</li><li>しかし NOS 機能不全は、虚血・低酸素・溶血・炎症のように<strong>血管ホメオスタシスの障害に関連する多数の病的状態</strong>と結びついている</li><li>複数の実験研究が、これらの病態で NO を補充する（全身性 NO ドナーとしても iNO としても）潜在的な有益効果を示している</li><li><strong>さまざまな臓器不全における iNO の応用可能性はヒトで検討中である</strong></li><li>これらの知見は、IRS や敗血症のように特異的な分子標的が同定されていない複雑な症候群における分子病態生理の理解を大きく前進させうる</li><li>前臨床研究の有望な所見は、NO の臨床転帰への効果を探索する研究への橋渡しを支持し、臓器移植の最適化や CPB の使用といった技術的進歩を導き、赤血球および HBOC の副作用を制限することでより安全な輸血を可能にする</li></ul>
+<h3>17. 投与量・投与時間の一覧（本稿に登場した数値の集約）</h3>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>種</th><th>用量</th><th>投与時間・タイミング</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>肺高血圧の反転</td><td>羊</td><td>5〜40 ppm</td><td>3分以内に効果、中止後3〜6分で再燃</td><td>肺高血圧を反転、体血管拡張なし</td></tr>
+<tr><td>心停止後</td><td>マウス</td><td>40 ppm</td><td>蘇生後23時間</td><td>生存率 31% → 85%、脳浮腫・海馬アポトーシス・皮質サイトカインが減少</td></tr>
+<tr><td>心筋 IRS</td><td>マウス</td><td>40〜80 ppm</td><td>心筋 IRS 中</td><td>梗塞サイズ縮小、左室機能改善</td></tr>
+<tr><td>心筋梗塞</td><td>ブタ</td><td>80 ppm</td><td>再灌流の10分前に開始し4時間継続</td><td>微小血管灌流改善、梗塞サイズ縮小、白血球浸潤減少</td></tr>
+<tr><td>STEMI（NOMI）</td><td>ヒト</td><td>80 ppm</td><td>再灌流後4時間</td><td>48〜72時間の梗塞サイズは減らなかった</td></tr>
+<tr><td>溶血性血管収縮</td><td>イヌ</td><td>80 ppm</td><td>溶血負荷時</td><td>血管収縮を反転、クレアチニンクリアランスを回復</td></tr>
+<tr><td>腸管 IRS</td><td>動物</td><td>80 ppm</td><td>—</td><td>灌流低下・白血球接着・内皮機能不全を打ち消した</td></tr>
+<tr><td>肝移植</td><td>ヒト</td><td>80 ppm</td><td>同所性肝移植後</td><td>入院期間短縮、トランスアミナーゼと凝固時間の正常化を加速</td></tr>
+<tr><td>CPB 関連 AKI（進行中の試験）</td><td>ヒト</td><td>80 ppm</td><td>CPB 中および術後24時間</td><td>AKI リスク低下を検証中</td></tr>
+<tr><td>保存血輸血</td><td>ヒト（肥満ボランティア）</td><td>80 ppm</td><td>40日保存自己血の輸血時</td><td>肺動脈圧上昇を予防</td></tr>
+<tr><td>保存血輸血</td><td>仔羊</td><td>80 ppm</td><td>古い赤血球輸注時</td><td>血管収縮反応を予防</td></tr>
+<tr><td>出血傾向（毒性）</td><td>ラット</td><td>15 ppm</td><td>—</td><td>出血時間延長、血小板凝集低下</td></tr>
+<tr><td>サーファクタント障害（毒性）</td><td>仔羊 / ラット</td><td>80 ppm / 100 ppm</td><td>—</td><td>サーファクタント機能不全</td></tr>
+</tbody></table></div>
+<p><strong>読み取れる規則性</strong>：前臨床で臓器保護を示した研究の多くが <strong>80 ppm</strong> を使い、<strong>再灌流の前または直後に開始</strong>している。一方でヒトの陰性試験（NOMI）は <strong>再灌流後</strong>の投与だった。そして <strong>80 ppm は動物でサーファクタント障害が出た濃度そのもの</strong>でもある。治療域と毒性域が重なっているという事実は、この分野の臨床試験設計の中心的な制約になる。</p>
+<h3>18. 批判的吟味（JC での論点）</h3>
+<p><strong>方法論</strong></p>
+<ul><li><strong>ナラティブレビューであり系統的検索がない</strong>。検索式・データベース・期間・スクリーニング人数・除外理由がいずれも示されていない。したがって<strong>引用の選択バイアスは原理的に排除できない</strong>。同じテーマで陰性の前臨床研究が省かれていないという保証はない</li><li><strong>Table 1 の「エビデンスの水準」の定義が粗い</strong>。「低いエビデンス＝後ろ向き研究とパイロット前向きランダム化研究」「高いエビデンス＝ランダム化比較試験とメタ解析」という2分法では、<strong>サンプルサイズ・バイアスリスク・アウトカム定義の質</strong>が反映されない。実際、PPHN の「iNO は死亡率を減少」を支える引用は Eur Rev Med Pharmacol Sci の1報であり、この主張の重みに対して引用の選択が釣り合っているとは言いにくい</li><li><strong>「–（ダッシュ）」の意味づけが読者を誤導しうる</strong>。凡例では「より高いエビデンスの研究があるため省略した文献」だが、視覚的には「エビデンスなし」と区別がつきにくい</li></ul>
+<p><strong>利益相反</strong></p>
+<ul><li><strong>Funding セクションと Competing interests の記載が整合しない</strong>。Funding には共著者が <strong>iNO Therapeutics LLC から機器・技術の提供と研究費</strong>を受け、Praxair・Masimo からも機器提供を受けていると明記されている。それにもかかわらず Competing interests は「declare すべき競合利益なし」となっている。<strong>iNO を主題とする総説でこの組み合わせは、JC で必ず取り上げるべき点</strong>である。内容の科学的妥当性を否定するものではないが、<strong>「iNO の有益性が副作用を上回るように見える」という結論トーンをどう割り引くか</strong>の判断材料になる</li></ul>
+<p><strong>内容の一貫性</strong></p>
+<ul><li><strong>前臨床と臨床の落差に対する説明が仮説の域を出ない</strong>。著者は「投与タイミング」を繰り返し持ち出すが、<strong>この仮説を検証したヒトの試験は本稿の中に1本もない</strong>。NOMI（再灌流後投与で陰性）とブタ試験（再灌流前投与で陽性）の対比は示唆的だが、<strong>交絡（種差・梗塞サイズ計測法・再灌流時間）を排除できない</strong></li><li><strong>iNO が標的臓器に届くのかという根本問題を著者自身が提起しながら、結論では棚上げしている</strong>。「長寿命の組織代謝産物が preconditioning 効果を説明しうる」という記述は仮説であり、脳・腎・肝への到達を直接示すヒトのデータは提示されていない</li><li><strong>脳での NO の二面性の扱いが楽観に傾いている</strong>。本文は「eNOS 由来＝保護、nNOS/iNOS 由来＝毒性」と整理したうえで「近年のエビデンスは全体として NO が脳梗塞で有益」と結ぶが、この一文を支える引用は1報である。<strong>外因性に大量の NO を投与することが、この繊細なバランスのどちら側を押すのかは未解決のまま</strong></li><li><strong>SAH の項の含意が本文で消化されていない</strong>。iNO が効いたのは軟膜細動脈の微小攣縮であり、大血管攣縮への効果は限定的だった。これは<strong>現行の攣縮モニタリング（TCD・血管造影）が治療標的を捉えていない可能性</strong>を示すが、著者はこの含意を明示していない</li></ul>
+<p><strong>編集・書誌上の瑕疵</strong></p>
+<ul><li><strong>本文中の相互参照が未解決のまま印刷されている</strong>。「see the section 18」「reported in the section 16」のように、<strong>セクション番号のプレースホルダが残っている</strong>（本文にはセクション番号が振られていない）。読者は該当箇所を特定できない</li><li><strong>結論の冒頭で "iNOS was first demonstrated to be effective in HPV and in PPHN" と誤植</strong>されている。文脈上 iNO の誤りだが、<strong>iNOS（誘導型 NOS）と iNO（吸入 NO）を混同すると意味が真逆になる</strong>箇所であり、初学者には危険</li><li><strong>引用文献200の著者名が "Roissant R" と誤綴</strong>されている（正しくは Rossaint R、NEJM 1993 の ARDS への iNO の古典）。本文では正しく Rossaint と書かれており、<strong>引用リストと本文が食い違っている</strong></li><li>本文の「The In 1993, Rossaint et al. demonstrated…」も校正漏れ</li></ul>
+<p><strong>臨床応用にあたっての留保</strong></p>
+<ul><li><strong>本稿の 80 ppm という数字を臨床用量として読まないこと</strong>。列挙された前臨床の 80 ppm は「効果を出すための実験条件」であり、<strong>同じ 80 ppm で仔羊のサーファクタント障害が観察されている</strong>。ヒトの ARDS で日常的に使うのは 5〜20 ppm 帯で、本稿はこの臨床用量帯についての用量反応データをほとんど提示していない</li><li><strong>「NO が足りないなら足せばよい」という直線的な論理への警戒</strong>。ハプトグロビンの実験（内皮機能不全下では遊離Hb の隔離が血管収縮を防げなかった）は、<strong>同じ「NO を守る」介入でも、内皮の状態によって効かなくなる</strong>ことを示す。iNO も内皮機能不全の程度によって効果が変わりうるが、<strong>ヒトで内皮機能を層別化した iNO 試験は存在しない</strong></li></ul>
+<h3>19. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>EDRF の正体が NO であることの同定（独立2研究）</td><td>Ignarro LJ ら／Palmer RMJ ら、1987</td></tr>
+<tr><td>iNO は選択的肺血管拡張薬であり HPV を反転する（羊、5〜40 ppm）</td><td>Frostell C, Fratacci MD, Wain JC, Jones R, Zapol WM. Circulation. 1991</td></tr>
+<tr><td>PPHN に対する iNO</td><td>Roberts JD, Polaner DM, Zapol WM, Lang P. Lancet. 1992 ／ Kinsella JP, Neish SR, Shaffer E, Abman SH. Lancet. 1992;340:819-820</td></tr>
+<tr><td>新生児肺高血圧に対する NO 吸入の効果（死亡率）</td><td>Wu HW, Li ZG, Liu G, Lu GZ, Liang HY. Eur Rev Med Pharmacol Sci. 2016;20:4607-4611</td></tr>
+<tr><td>ARDS に対する iNO（原著）</td><td>Rossaint R, Falke K, Lopez F, Slama K, Pison U, Zapol WM. N Engl J Med. 1993;328:399-405</td></tr>
+<tr><td>iNO は重症度によらず ARDS の死亡率を減らさない（SR・メタ解析）</td><td>Adhikari NKJ, Dellinger RP, Lundin S ら. Crit Care Med. 2014;42:404-412</td></tr>
+<tr><td>成人における iNO 療法（高用量で酸素化が悪化しうる）</td><td>Griffiths MJD, Evans TW. N Engl J Med. 2005;353:2683-2695</td></tr>
+<tr><td>ARDS 臨床実践ガイドライン（iNO を推奨しない）</td><td>Fan E, Del Sorbo L, Goligher EC ら. ATS/ESICM/SCCM</td></tr>
+<tr><td>ARDS 管理ガイドライン（iNO 使用に対する弱い推奨）</td><td>Griffiths MJD, McAuley DF, Perkins GD ら. BMJ Open Respir Res. 2019;6:e000420</td></tr>
+<tr><td>ARDS における補助療法の使用パターン（LUNG SAFE）</td><td>Duggal A, Rezoagli E, Pham T ら. Chest. 2020;157:1497-1505</td></tr>
+<tr><td>CPB による肺内皮機能不全と iNO・Ach の対比（小児）</td><td>Wessel DL ら, 1993</td></tr>
+<tr><td>溶血に伴う内皮機能不全 — 脱コンパートメント化 oxy-Hb による NO 不活性化の加速（イヌ、80 ppm）</td><td>Minneci PC, Deans KJ, Zhi H ら. J Clin Invest. 2005</td></tr>
+<tr><td>ハプトグロビンは血管 NO シグナルを保護する</td><td>Schaer CA, Deuel JW ら, 2016</td></tr>
+<tr><td>内皮機能不全は HBOC による NO 捕捉に伴う血管収縮を増強する</td><td>Yu B, Shahid M, Egorina EM ら. Anesthesiology. 2010</td></tr>
+<tr><td>iNO は高血圧を伴わない人工血液輸血を可能にする</td><td>Yu B, Raher MJ, Volpato GP, Bloch KD, Ichinose F, Zapol WM. Circulation. 2008</td></tr>
+<tr><td>鎌状赤血球症と肺高血圧の関連</td><td>Gladwin MT, Sachdev V, Jison ML ら, 2004</td></tr>
+<tr><td>CPB 後の肺・体血管抵抗 — 溶血の役割（CPB ≥140分）</td><td>Rezoagli E, Ichinose F, Strelow S ら. J Cardiothorac Vasc Anesth. 2017</td></tr>
+<tr><td>心臓手術での溶血と NO 消費増加、周術期の腎・腸管組織障害</td><td>Vermeulen Windsant IC ら. Front Physiol. 2014</td></tr>
+<tr><td>NO は心臓手術後の AKI と stage 3 CKD を減少させる</td><td>Lei C, Berra L, Rezoagli E ら. Am J Respir Crit Care Med. 2018</td></tr>
+<tr><td>内皮機能不全のある心臓外科患者への NO ガスによる術後 AKI 予防（RCT プロトコル）</td><td>Marrazzo F, Spina S, Zadek F ら. BMJ Open. 2019</td></tr>
+<tr><td>保存赤血球の自己輸血は肺動脈圧を上昇させる（80 ppm NO で予防）</td><td>Berra L, Pinciroli R, Stowell CP ら. Am J Respir Crit Care Med. 2014</td></tr>
+<tr><td>保存血輸血の仔羊の肺高血圧は NO 吸入で予防される</td><td>Baron DM, Yu B, Lei C ら. Anesthesiology. 2012</td></tr>
+<tr><td>iNO は心肺蘇生成功後の転帰を改善する（マウス、40 ppm・23時間、生存 31→85%）</td><td>Minamishima S, Kida K, Tokuda K ら. Circulation. 2011</td></tr>
+<tr><td>S-ニトロソグルタチオン還元酵素の阻害による心停止後転帰の改善</td><td>Hayashida K, Bagchi A, Miyazaki Y ら. Circulation. 2019</td></tr>
+<tr><td>心停止後症候群における NO（総説）</td><td>Miyazaki Y, Ichinose F. J Cardiovasc Pharmacol. 2020;75:508-515</td></tr>
+<tr><td>院内心停止成人への iNO（実行可能性研究）</td><td>Patel JK, Schoenfeld E, Hou W ら. Nitric Oxide Biol Chem. 2021</td></tr>
+<tr><td>CPR 関連肺水腫（CRALE）のトランスレーショナル研究</td><td>Magliocca A, Rezoagli E, Zani D ら. Am J Respir Crit Care Med. 2021;203:447-457</td></tr>
+<tr><td>iNO は心筋虚血再灌流障害の梗塞サイズを縮小し左室機能を改善（マウス）</td><td>Hataishi R, Rodrigues AC, Neilan TG ら. Am J Physiol Heart Circ Physiol. 2006</td></tr>
+<tr><td>NO 吸入は微小血管血流を改善し梗塞サイズを縮小（ブタ、80 ppm）</td><td>Liu X, Huang Y, Pokreisz P ら. J Am Coll Cardiol. 2007</td></tr>
+<tr><td>STEMI への NO 吸入（NOMI 試験、多施設二重盲検 RCT）</td><td>Janssens SP, Bogaert J, Zalewski J ら. Eur Heart J. 2018</td></tr>
+<tr><td>iNO はマウス脳梗塞モデルで神経保護的（濃度・期間依存性）</td><td>Li YS, Shemmer B, Stone E ら. Brain Res. 2013</td></tr>
+<tr><td>iNO は新生仔脳梗塞モデルで側副血行の動員により脳損傷を減らす</td><td>Charriaut-Marlangue C, Bonnin P, Gharib A ら. Stroke. 2012</td></tr>
+<tr><td>NO 吸入は早期軟膜微小攣縮の解除により SAH 後の脳損傷・死亡を減らし神経学的転帰を改善</td><td>Terpolilli NA, Feiler S, Dienel A ら. J Cereb Blood Flow Metab. 2016</td></tr>
+<tr><td>iNO は TBI 後の二次性脳損傷を減少させる（マウス）</td><td>Terpolilli NA, Kim SW, Thal SC, Kuebler WM, Plesnila N. 2013</td></tr>
+<tr><td>iNO は TBI 後の脳自動調節能を保護し海馬神経細胞壊死を減らす（新生仔・幼若ブタ）</td><td>Hekierski H, Pastor P, Curvello V, Armstead WM. J Neurotrauma. 2019 ／ Curvello V ら. 2019</td></tr>
+<tr><td>脳損傷における NO 経路の役割 — bench to bedside</td><td>Garry PS, Ezra M, Rowland MJ ら. Exp Neurol. 2015;263:235-243</td></tr>
+<tr><td>同所性肝移植後の肝機能回復を iNO が加速する（80 ppm）</td><td>Lang JD, Teng X, Chumley P ら. J Clin Invest. 2007</td></tr>
+<tr><td>機械換気患者・非挿管患者への iNO 供給システム（総説）</td><td>Gianni S, Carroll RW, Kacmarek RM, Berra L. Respir Care. 2021;66:1021-1028</td></tr>
+<tr><td>SARS コロナウイルス感染の in vitro 阻害（SNAP、NO ドナー）</td><td>Keyaerts E, Vijgen L, Chen L ら. Int J Infect Dis. 2004;8:223-226</td></tr>
+<tr><td>NO による SARS-CoV-2 複製の抑制（プロテアーゼの S-ニトロシル化）</td><td>Akaberi D, Krambrich J, Ling J ら. Redox Biol. 2020</td></tr>
+<tr><td>重症 COPD における NO と酸素の長期外来使用の肺血行動態への効果（RCT）</td><td>Vonbank K, Ziesche R, Higenbottam TW ら. Thorax. 2003</td></tr>
+<tr><td>ARDS のフェノタイプ（潜在クラス解析）</td><td>Maddali MV, Churpek M, Pham T, Rezoagli E ら, 2022</td></tr>
+<tr><td>ARDS の解剖学的・機能的肺内シャント</td><td>Cressoni M, Caironi P, Polli F ら. Crit Care Med. 2008</td></tr>
+<tr><td>敗血症における NO（本稿が委ねた総説）</td><td>Lambden S</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 NO 欠乏は、内皮機能不全（eNOS uncoupling）と遊離Hb による NO 捕捉という2つの経路で生じ、<strong>虚血再灌流・溶血・肺内シャントに共通する土台</strong>をなす。iNO はこの欠乏を肺選択的に補える唯一の実用手段だが、<mark class="hl">前臨床で一貫して見える臓器保護（心停止マウスで生存 31%→85%、脳梗塞・SAH・TBI の縮小）は、ヒトの臨床転帰ではまだ一度も再現されていない</mark>。<mark class="hl">ベッドサイドでは、iNO を「酸素化と右室後負荷を一時的に買い戻すブリッジ」として使い、転帰を変える薬として使わない</mark>。そして <mark class="hl">前臨床で効いた 80 ppm は動物でサーファクタント障害が出た濃度そのもの</mark> であることを、指示を書くたびに思い出す。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
