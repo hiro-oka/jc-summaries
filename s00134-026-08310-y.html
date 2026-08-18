@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>EITでベッドサイドの換気血流ミスマッチを測る — 高張食塩水ボーラスと無呼吸で灌流を描き5区画で定量する（What's New・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08310-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">EITでベッドサイドの換気血流ミスマッチを測る — 高張食塩水ボーラスと無呼吸で灌流を描き5区画で定量する（What's New・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Leali M, Fujitani S, Mauri T. Ventilation/perfusion mismatch measured by electrical impedance tomography at the bedside: potentialities and challenges. Intensive Care Med. 2026;52:548-551. DOI: 10.1007/s00134-026-08310-y</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-01-26）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08310-y" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08310-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Ventilation/perfusion mismatch measured by electrical impedance tomography at the bedside: potentialities and challenges</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>今すぐ変わること</strong>：ない。この総説は「EITのV′/Q計測は臨床導入の入口に立った」と述べるにとどまり、V′/Qを測って治療を変えるプロトコルは提案していない。当院にEITが常設されていない現状では、まず「換気側EIT（従来のEIT）を何に使うか」の議論が先</li><li><strong>EIT導入を検討するなら押さえる論点</strong>：灌流計測を行うには（1）中心静脈ライン、（2）5〜10%高張食塩水 約10 mLを1〜2秒で押せる体制、（3）8秒以上の安定した無呼吸、が毎回必要になる。人工呼吸器の呼気終末閉塞（ventilator occlusion）で無呼吸を作るため、実質的に<strong>深めの鎮静下・調節換気の患者に限られる</strong>。「PSVで自発呼吸しながらV′/Qを見る」使い方はまだ研究段階</li><li><strong>腹臥位の当院プロトコルとの接点</strong>：腹臥位で換気は早期に背側へ再分布するが、灌流の再分布は最初の3時間を過ぎてから起きる（反重力方向の逆説的再分布）。「腹臥位は最低16時間」という当院の運用に生理学的な裏づけを与える所見で、<span class="wl">腹臥位療法の機序と実際（聖路加プロトコル）</span> の説明資料に一行足せる</li><li><strong>PEEP設定の考え方への示唆</strong>：高PEEPはリクルータビリティが高い患者でシャントと（意外にも）死腔の両方を減らしてV′/Qマッチングを改善するが、過膨張が優位になるとむしろ悪化する。EITの有無にかかわらず「PEEPは虚脱と過膨張の綱引きで決める」という当院の考え方（<span class="wl">ARDSの肺リクルータビリティ予測 R／I ratio（AJRCCM2020）</span>）と整合的</li><li><strong>肺塞栓の鑑別</strong>：CT搬送ができない超不安定例で、EITによる非灌流域の同定が「かなり高い特異度」で肺塞栓を支持しうる、という位置づけ。ただし単独で診断を確定させる道具ではなく、あくまで確立した検査への追加（adjunct）</li><li><strong>研修医教育での使いどころ</strong>：V′/Qという抽象概念（MIGETの図）が、EITでは1枚のカラーマップになる。ARDSの生理を教える教材として価値が高い</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：V′/Q（換気血流比）の乱れは重症患者に普遍的である。肺塞栓では非灌流領域が生じ、急性呼吸不全ではシャント優位のV′/Q不均一が前面に出る。生理学的なゴールドスタンダードは MIGET（多種不活性ガス消失法）だが、<strong>全肺の平均情報しか与えず</strong>、実施も煩雑でベッドサイド向きではない。シンチグラフィやCTは領域情報を与えるが、患者搬送と電離放射線を伴う</li><li><strong>Unknown</strong>：EITで「領域ごとのV′/Q」をベッドサイドで測れるのか。測るとして、どの指標が正しく、どこまで信頼でき、治療判断に使えるのか</li><li><strong>What's new</strong>：EITによるV′/Q計測の(1)取得手順（換気は数呼吸、灌流は無呼吸＋高張食塩水ボーラス）、(2)指標の2系統（非マッチ・ピクセル比率 対 5区画の絶対V′/Q比）、(3)限界（部分容積効果、腹側への灌流シフト、閾値依存、胸郭の半分しか見ない）、(4)臨床応用（体位・PEEP・NO吸入への反応の可視化、ARDSの予後予測、肺塞栓の補助診断）を1枚の流れ図とともに整理した。著者らの結論は「確立された手法への adjunct として、肺塞栓と呼吸不全の初期評価、および換気手技への反応のモニタリングに使える段階」という慎重なもの</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで EITは高張食塩水ボーラスと無呼吸を使えば、<strong>ベッドサイドで放射線なしに領域ごとの換気・灌流マップを描き、V′/Qを死腔／高V′/Q／正常／低V′/Q／シャントの5区画に定量できる</strong>。ただし絶対値の一致は乏しく、閾値依存・空間バイアス・胸郭の半分しか見えないという構造的な限界を抱えるため、現時点では確立した手法の補助であり、変化の追跡にこそ強みがある。</p>
+</div>
+<ul><li><strong>原理</strong>：EITは胸部に巻いた電極ベルトで微小交流を流し、組織インピーダンスの変化を断層画像として再構成する。空気が入ればインピーダンスは上がり（換気）、導電性の高い高張食塩水が肺血管を通れば下がる（灌流）</li><li><strong>取得手順</strong>：まず数呼吸ぶんの安静換気を記録 → 無呼吸を作る（挿管例は人工呼吸器の閉塞、自発呼吸例は随意の息止め）→ 数秒待って安定化とドリフト推定 → 中心静脈ラインから約10 mLの造影剤（5〜10%高張食塩水）を1〜2秒未満で急速注入。無呼吸は通常8秒以上</li><li><strong>信号分解</strong>：胸部の灌流トレースは pre-lung（右心と大血管）、lung（肺）、post-lung（左心の早期リバウンド・気管支循環・再循環）の3成分の和と考えられ、最も検証されたアルゴリズムは複数のガンマ変量をフィットして肺成分だけを取り出す。灌流はアルゴリズムによらず「指示薬信号の最大立ち上がり勾配」に比例すると仮定し、ウォッシュアウトは無視する</li><li><strong>指標の2系統</strong>：(a) 非灌流／非換気ピクセルの割合（「unmatched」）＝簡便で検証済み、分時換気量も心拍出量も不要だが患者ごとの閾値に依存し、V′/Qそのものより不均一性を反映しやすい。(b) 5区画法＝対数スケール上で等間隔に死腔・高V′/Q・正常・低V′/Q・シャントに分ける。分時換気量と心拍出量の正確な測定を要するが、単位が絶対V′/Q比になる。区画をさらに細かく（例：21区画）すれば領域版MIGETに近づき、平均・標準偏差といった記述統計も計算できる</li><li><strong>限界</strong>：換気画像と灌流画像のピクセル単位の重ね合わせは、灌流が腹側へずれる空間バイアスのために疑問視されている。ペンデルルフト（肺内気流）も像を複雑にする。ノイズ除去のため画像内最大値の5〜20%という恣意的閾値が使われ、これが死腔とシャントという両端の区画を大きく左右する。EITは変化の追跡はできるがベースラインの一致は乏しい。撮像範囲は<strong>胸郭のおよそ半分</strong>にとどまる</li><li><strong>臨床応用</strong>：体位のV′/Qへの影響を定量評価できる点は専門家の合意がある。腹臥位では換気が早期に背側へ再分布し、灌流は最初の3時間以降に反重力方向へ逆説的に再分布してマッチングが改善する。高PEEPはリクルータビリティの高い患者でシャントと死腔をともに減らす。NO吸入の酸素化改善は灌流の腹側再分布と関連。ARDSコホートでは非マッチ単位が生存低下を予測し、P/F比や換気比（ventilatory ratio）を上回るように見え、SAPS IIとは独立していた</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>V′/Q（換気血流比）とは</strong>：肺胞に届く換気量（V′）と、その肺胞を流れる血流量（Q）の比。理想は両者が釣り合った状態（比が1前後）。血流はあるのに換気されない領域が<strong>シャント</strong>（V′/Q → 0）で、低酸素血症の主因。逆に換気はされるのに血流がない領域が<strong>死腔</strong>（V′/Q → ∞）で、CO₂排出効率を落とす。ARDSでは両者が肺のあちこちに混在する。</p>
+<p><strong>MIGET とは</strong>：multiple inert gas elimination technique。溶解度の異なる6種類の不活性ガスを持続注入し、血中・呼気中の濃度から肺全体のV′/Q分布を連続曲線として推定する古典的手法。生理学的ゴールドスタンダードだが、得られるのは「肺全体の分布」であって「どこがシャントか」は分からない。実施も煩雑で臨床ルーチンには乗らない。</p>
+<p><strong>EIT（electrical impedance tomography・電気インピーダンス・トモグラフィ）とは</strong>：胸部（通常は第4〜5肋間レベル）に16〜32個の電極を並べたベルトを巻き、隣接する電極対から人体に無害な微小交流電流を流し、残りの電極で電位差を測る。電流の入力ペアを一周ぐるりと切り替えながら大量の電位データを集め、逆問題を解くアルゴリズムで「その断面のインピーダンス変化の2次元マップ」に再構成する。得られるのは絶対値ではなく<strong>基準時点からの変化量</strong>であり、単位は任意単位（a.u.）。放射線を使わず、ベッドサイドで連続的に、1秒あたり数十枚のスピードで撮れるのが最大の利点。空気は電気を通さないので、肺胞に空気が入るとインピーダンスは上がる。つまり吸気で信号が上向きに振れ、その振幅が「その画素の一回換気量」の代理になる。</p>
+<p><strong>なぜ灌流評価に高張食塩水を使うのか</strong>：血液そのものを追いかけることはできないので、「電気を通しやすい物質」を指示薬（コントラスト）として血流に乗せ、それが肺を通過するときのインピーダンス低下を追う。生理食塩水より導電率が高い5〜10%の高張食塩水は、少量（約10 mL）で十分な信号を作れるため事実上の標準になりつつある。ヨード造影剤のような腎毒性やアレルギーの問題がなく、コストも低い。ただし著者らは「すべての造影剤には固有のリスクがわずかながらある」と明記している。</p>
+<p><strong>なぜ無呼吸が必要なのか</strong>：換気に伴うインピーダンス変化は、食塩水ボーラスが作る変化よりはるかに大きい。呼吸を止めずに注入すると、灌流の信号が換気の波に埋もれて分離できない。そこで挿管患者では人工呼吸器の閉塞（呼気終末ホールド）、自発呼吸患者では随意の息止めで、数秒間の静止した「キャンバス」を作る。それでも心拍による揺れ（cardiogenic oscillation）は残るため、低域通過フィルタで除去する。</p>
+<p><strong>部分容積効果（partial volume effect・PVE）</strong>：EITの空間分解能は低く、1画素の中に肺・心臓・大血管が混ざり込む。心臓や大血管を通る食塩水の信号が肺の画素に漏れ込むと、灌流を過大評価する。この漏れ込みを後処理で取り除くことが、灌流画像の質を決める最大の技術的課題である。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>V′/Qの乱れは集中治療のあらゆる場面に遍在する。一方の極には肺塞栓の<strong>非灌流領域</strong>があり、他方には急性呼吸不全の著しいV′/Q不均一（シャントが優勢）がある。</p>
+<p>そこで測定手段が問題になる。MIGETは生理学的ゴールドスタンダードだが、与えるのは全肺の情報だけで、実施も比較的煩雑である。シンチグラフィとCTは換気／灌流の解析を提供できるが、<strong>患者搬送を要し、電離放射線を伴う</strong>。</p>
+<p>EITはベッドサイドで使える放射線のない代替手段であり、広く検証されてきた。ゆえに「ベッドサイドで、領域ごとのV′/Qを測る」という展望が大きな関心を集めている、というのが本稿の出発点である。</p>
+<h3>3. 方法（Methods）— どう測るか（測定・解析の手順）</h3>
+<p>新規データの収集を伴わない総説であるため、ここでは著者らが示した「V′/Q画像を得るための標準手順」を Methods 相当として整理する。手順そのものが本稿の中核である。</p>
+<h4>3-1. 取得の手順（Fig. 1a–d に対応）</h4>
+<div class="tw"><table>
+<thead><tr><th>順序</th><th>何をするか</th><th>具体</th><th>なぜそうするか</th></tr></thead>
+<tbody>
+<tr><td>① 換気の取得</td><td>妨げのない数呼吸ぶんを記録</td><td>標準的方法論に従って解析</td><td>画素ごとの一回換気インピーダンス変動の振幅が換気マップになる</td></tr>
+<tr><td>② 無呼吸の作成</td><td>挿管患者は人工呼吸器の閉塞、自発呼吸患者は随意の息止め</td><td>通常8秒以上。実験的にはより長い時間も用いられ、時に望ましい場合がある</td><td>換気由来の大きな信号を止めないと、食塩水の信号が埋もれる</td></tr>
+<tr><td>③ 数秒待つ</td><td>安定化と、無呼吸に伴うインピーダンスのドリフト推定</td><td>無呼吸中は下向きのドリフトが見える</td><td>ドリフトを推定して差し引かないと灌流信号が歪む</td></tr>
+<tr><td>④ 造影剤の注入</td><td>約10 mLの5〜10%高張食塩水</td><td>中心静脈ラインから1〜2秒未満で押す</td><td>ボーラスを鋭くするほど、通過のタイミング分離がしやすい</td></tr>
+<tr><td>⑤ 信号処理</td><td>生波形に低域通過フィルタをかける</td><td>心拍由来の振動を除去</td><td>灌流の立ち上がり勾配を安定して測るため</td></tr>
+</tbody></table></div>
+<h4>3-2. 灌流トレースの3成分分解（Fig. 1b）</h4>
+<p>胸部の灌流トレースには、通常3つの成分が組み合わさっていると考えられている。</p>
+<div class="tw"><table>
+<thead><tr><th>成分</th><th>解剖学的な対応（推定）</th><th>ピーク時刻</th></tr></thead>
+<tbody>
+<tr><td>pre-lung</td><td>右心と主要な肺血管</td><td>最も早い</td></tr>
+<tr><td>lung</td><td>肺（求めたい信号）</td><td>中間</td></tr>
+<tr><td>post-lung</td><td>左心の早期リバウンド、気管支循環、再循環</td><td>最も遅い</td></tr>
+</tbody></table></div>
+<p>各成分のおおよそのピーク時刻は血行動態に依存する。ブタ（swine）では報告があるが、ヒトでは生理学からの推論にとどまる、と著者らは明記している。</p>
+<p>EITの空間分解能の低さは部分容積効果（PVE）を増幅するため、後処理での対処が必須である。肺灌流画像を分離・再構成するアルゴリズムは複数使われており、<strong>PVEの扱い方が大きく異なる</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>アルゴリズム</th><th>やり方</th><th>評価</th></tr></thead>
+<tbody>
+<tr><td>ガンマ変量フィット</td><td>複数のガンマ変量をデータにフィットし、肺信号だけを残す</td><td>最も検証されている</td></tr>
+<tr><td>心臓画素クラスタの除去</td><td>心臓に相当する画素の塊を取り除く</td><td>代替手法</td></tr>
+<tr><td>時間窓の手動選択</td><td>pre-lung ピークと lung ピークの間の時間枠を手で選ぶ</td><td>代替手法</td></tr>
+</tbody></table></div>
+<p>アルゴリズムによらず、<strong>領域灌流は指示薬信号の最大立ち上がり勾配（maximum upslope）に比例すると仮定され、ウォッシュアウトは無視される</strong>（Fig. 1b, e）。</p>
+<h4>3-3. 自発呼吸患者と「肺拍動（pulmonary pulse）」</h4>
+<p>現時点では、安定した無呼吸が必要であるという事実そのものが、自発呼吸患者で指示薬ベースのV′/Qを解析する際の慎重さを求める理由になる。</p>
+<p>代替として、EITから<strong>肺拍動</strong>（pulmonary pulse＝心拍に同期したインピーダンス変動）を分離する方法がある。しかしこれは心臓から肺血管へ移動する一回拍出量に関連するとはいえ、拍動性を灌流と同一視することはできない。とくに<strong>虚脱した肺では拍動の振幅がむしろ増大する</strong>ように見えるためである。したがって灌流の代替指標というより、有望な補完（complement）と位置づけるべきである、というのが著者らの評価である。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. EITでV′/Qマッチングを得るための模式的ワークフロー。7つのパネルが3段に配置され、上段左が a、上段右が b、中段左が c、中段右に小さな2枚の画像 d・e、下段が f と g。 パネル a「Global Waveform」（左上、縦軸 Z［a.u.］0〜800、横軸 t［秒］0〜50）：前半0〜21秒に規則正しい大振幅の呼吸波が7周期並び、これを青い長方形で囲んである（＝解析に使う無擾乱の一回換気）。21秒付近から波が止まり、無呼吸に入る。無呼吸区間には点線（Raw Data）と実線（Low-Pass Filtered）の2本が重ねて描かれ、点線の細かいギザギザが心拍由来の振動、実線がそれを平滑化した波形であることを凡例で示す。無呼吸中はインピーダンスが緩やかに右下がりになり、紫の破線に「drift」とラベルが付く。無呼吸区間で信号が大きく下向きに凹む部分（30〜43秒）を赤い長方形で囲み、赤い破線でパネル b へ拡大して結ぶ。この下向きの凹みが、導電性の高い高張食塩水が肺を通過している瞬間である。 パネル b「Saline Bolus」（右上、縦軸 −Z［a.u.］0〜250、横軸 t−tA［秒］0〜16。tA はボーラス到達時刻）：符号を反転させた灌流トレース。黒い太い曲線が「measured signal」で、山なりに立ち上がって6〜7秒でピーク250付近に達し、なだらかに下降する。その下に濃いピンクから淡いピンクへ3本の分解曲線が左から順に並び、それぞれ「Pre-Lung」（最も早くピーク、約4秒）、「Lung」（中間、約6秒、ピーク約120）、「Post-Lung」（最も遅く、約9〜10秒、幅広い裾）とラベルされ、細い矢印で各曲線を指す。Lung 曲線の立ち上がり部分には赤い破線の接線が引かれ、その左上に赤い太字で「PERFUSION」と書かれた矢印が接線を指している。つまり灌流＝肺成分の最大立ち上がり勾配、という定義を1枚で示している。黒い曲線は3本の和として説明される。 パネル c「Tidal Ventilation」（中段左、縦軸 Z［a.u.］0〜600、横軸 t［秒］0〜20）：パネル a の青い長方形部分を拡大した青い実線の呼吸波で、7周期がきれいに並ぶ。右端に上下両向きの太い青矢印が振幅全体を指し示し、「この振幅が換気量に対応する」ことを表す。青い破線でパネル a と結ばれている。 パネル d「Ventilation」（中段右の左側、小さな正方形画像）：青を基調としたヒートマップ。周辺が濃紺で、中央やや右寄りに白く明るい高信号域があり、そこに小さな黒い四角（着目画素）が置かれる。パネル c から水平に伸びる太い青矢印がこの黒い四角を指す。画素ごとの一回換気インピーダンス変動の振幅が換気画像になることを示す。 パネル e「Perfusion」（中段右の右側、小さな正方形画像）：黒〜赤〜黄のホットカラーマップ。左側に縦長の明るい黄色の帯、右下にも明るい黄色の塊があり、中央は暗い。d と同じ位置に小さな黒い四角があり、パネル b の PERFUSION 矢印から伸びる太い赤矢印がこの四角を指す。画素ごとの肺成分の最大立ち上がり勾配が灌流画像になることを示す。d と e で明るい部位が食い違っていること自体が、V′/Qミスマッチの視覚的表現になっている。 d と e の下からは大きな波かっこ（中かっこ）が伸び、下段の f・g へ集約される。 パネル f「V′/Q」（下段左、正方形の枠内に肺断面）：換気マップと灌流マップを閾値処理のうえ画素ごとに重ね合わせて得た領域V′/Q比マップ。左右の肺野が横に広がった塊として描かれ、中央部の大半は水色〜緑（正常V′/Q）、右肺中央の一部が濃い青（高V′/Q寄り）、そして肺野の上縁と、下方に垂れ下がる左右2つの領域が広く暗赤色（シャント）に塗られている。右側に縦長のカラーバーがあり、上から青、水色、緑、黄、橙、赤の連続階調。目盛りは上端が 10、中ほどに 1.25 と 0.8、下端が 0.1。カラーバーの右外側に区分名が上から順に「Dead Space」「High V′/Q」「Normal V′/Q」「Low V′/Q」「Shunt」と並ぶ。つまり対数スケール上で 0.1 と 10 を両端、0.8〜1.25 を正常帯とする5区画である。 パネル g「V′ and Q distribution [MIGET-like]」（下段右、縦軸 Flow［%］0〜30超、横軸 V′/Q 対数目盛 0.1〜10）：青線が Ventilation、赤線が Perfusion。両線とも V′/Q 0.7 付近から立ち上がり、1〜2 付近に共通の山（15%前後）を作る。その後、青線は 3 付近で20%の第2のピークを作って 5 付近で急落し、赤線は 2〜4 付近で8〜9%のなだらかな肩を作ってから落ちる。さらに左端 0.1 の位置に赤い孤立点が Flow 約31%（＝シャント成分）、右端 10 の位置に青い孤立点が低い値（＝死腔成分）として打たれている。MIGET と同じ形式の分布図が得られ、しかも EIT 画像の任意の領域について描ける点が付加価値であると説明される。 略号：a.u. 任意単位、EIT 電気インピーダンス・トモグラフィ、MIGET 多種不活性ガス消失法、t 時間、tA 食塩水ボーラスの到達時刻、V′/Q 換気血流比、Z インピーダンス。原図・無改変。</p>
+</div>
+<h3>4. V′/Qミスマッチの生理学的指標</h3>
+<p>指標には大きく2系統がある。</p>
+<h4>4-1. 非マッチ・ピクセル法（unmatched pixels）</h4>
+<p>ほとんどの指標は、<strong>非灌流かつ／または非換気のピクセル（すなわち「unmatched」）の割合</strong>に依拠している。</p>
+<ul><li>長所：単純で、検証されている。<strong>分時換気量の測定も心拍出量の測定も要らない</strong></li><li>短所：患者ごとの閾値に依存する。しばしば実際のV′/Qというより不均一性（heterogeneity）を反映してしまう（Online Resource 1, Fig. S1）</li></ul>
+<h4>4-2. 5区画法（絶対V′/Q比）</h4>
+<p>V′/Qミスマッチはより精密に定量できる。典型的には<strong>5つの区画</strong>が同定され（Fig. 1f）、対数スケール上で等間隔に置かれる。全肺レベルでも領域レベルでも計算できる。</p>
+<div class="tw"><table>
+<thead><tr><th>区画</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>dead space（死腔）</td><td>換気はあるが灌流が事実上ない</td></tr>
+<tr><td>high V′/Q</td><td>換気過剰・灌流相対不足</td></tr>
+<tr><td>normal V′/Q</td><td>釣り合っている</td></tr>
+<tr><td>low V′/Q</td><td>灌流過剰・換気相対不足</td></tr>
+<tr><td>shunt（シャント）</td><td>灌流はあるが換気が事実上ない</td></tr>
+</tbody></table></div>
+<ul><li>必要なもの：<strong>分時換気量と心拍出量の正確な測定</strong>。ただし非侵襲的な代替手段が研究されつつある</li><li>得られるもの：単位が「ピクセルの割合」ではなく<strong>絶対的なV′/Q比</strong>になる</li></ul>
+<h4>4-3. さらに細かい区画と記述統計</h4>
+<p>すでに十分に高度ではあるが、区画はさらに細かくできる（例：21区画）。そうすると領域版MIGETに似た形になり（Fig. 1g）、平均や標準偏差といった記述統計を計算できる。これらは<strong>V′/Q閾値の恣意的な選択の影響を受けにくい可能性がある</strong>。</p>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>EITでV′/Qを見たいが患者が自発呼吸している</td><td>8秒以上の安定した無呼吸が作れるか（随意の息止めが可能か）</td><td>作れないなら指示薬ベースのV′/Qは解釈に慎重を要する。肺拍動は灌流の代替にはならず補完として扱う</td></tr>
+<tr><td>分時換気量・心拍出量が測れない</td><td>侵襲的な心拍出量モニタが入っているか</td><td>5区画の絶対V′/Q比は計算できない。非マッチ・ピクセル法を使うが、閾値依存で「不均一性の指標」として読む</td></tr>
+<tr><td>死腔やシャントの区画が大きく出た</td><td>ノイズ除去閾値（画像内最大値の何%か）をいくつに設定したか</td><td>5〜20%のどこを取るかで両端の区画は大きく動く。同一患者内の変化として読み、絶対値を他検査と突き合わせない</td></tr>
+<tr><td>PEEPや体位を変えた前後で比較したい</td><td>同じ電極ベルト位置・同じ閾値・同じアルゴリズムか</td><td>変化の追跡はEITの得意分野。ただし胸郭の約半分しか見ていないため、非focal（びまん性）病変ほど慎重に</td></tr>
+<tr><td>灌流マップが換気マップより腹側に寄って見える</td><td>既知の空間バイアスか、真の生理学的所見か</td><td>画素単位の重ね合わせは腹側シフトのバイアスを含むため、腹背差の解釈は割り引く</td></tr>
+</tbody></table></div>
+<h3>5. EIT由来V′/Qの限界</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>4つの構造的な限界</p>
+<ul><li><mark class="hl"><strong>画素単位の重ね合わせ（Fig. 1f）そのものが疑問視されている</strong></mark>。既知の空間バイアスにより<strong>灌流が腹側へシフト</strong>して描かれるためである。加えて<mark class="hl">ペンデルルフト（肺内の気流の行き来）</mark>も像を複雑にしうる</li><li><mark class="hl">ノイズ除去のために「画像内の最大値の5〜20%」という恣意的な閾値</mark>がしばしば用いられ、これが非灌流／非換気ピクセルを定義する。この閾値は他の手法における<mark class="hl">両端の区画（死腔とシャント）を大きく左右する</mark></li><li><mark class="hl">EITは灌流の「変化」は追えるが、従来画像との「ベースラインの一致」は乏しい</mark>。EITベースのV′/Qを<mark class="hl">カプノグラフィや血液ガスと比較した場合も同様</mark>である。ただし領域情報はEITに固有の強みである</li><li><mark class="hl">EITが撮像しているのは胸郭のおおよそ半分にすぎない</mark>。したがって<mark class="hl">PEEPや体位変換に伴う変化の解釈には慎重さが要る</mark>。とくに<strong>より不均一な非focal（非限局性）病変</strong>の患者でそうである</li></ul>
+</div>
+<p>限界の意味を補足すると、1点目と2点目は「出てくる数字が測定条件に依存する」という問題であり、3点目は「他の検査の代わりにはならない」という問題、4点目は「見えていない領域がある」という問題である。いずれも、EITのV′/Qを<strong>絶対値ではなく同一患者内の変化として読むべき</strong>という同じ結論に収束する。</p>
+<h3>6. EITベースV′/Qの臨床的意義</h3>
+<h4>6-1. 体位（とくに腹臥位）</h4>
+<p>EITが<strong>体位のV′/Qへの影響を定量的に評価できる</strong>点については、専門家の間で広く合意がある。</p>
+<p>腹臥位では次の時間経過が観察されている。</p>
+<div class="tw"><table>
+<thead><tr><th>時期</th><th>起きること</th></tr></thead>
+<tbody>
+<tr><td>早期</td><td>換気の背側再分布が起きる</td></tr>
+<tr><td>最初の3時間以降</td><td>灌流の逆説的な反重力方向の再分布が続いて起こり、V′/Qマッチングが改善する</td></tr>
+</tbody></table></div>
+<p>興味深いことに、<strong>患者のフェノタイプによってわずかに異なる動態（kinetics）が存在する</strong>。ただし著者らは「腹臥位でのEITによる灌流測定には、なお方法論的な改良が必要かもしれない」と留保を付けている。</p>
+<h4>6-2. PEEP</h4>
+<ul><li>高PEEPは一貫してV′/Qマッチングを改善した。<strong>シャントを減らし、そして意外なことに死腔も減らした</strong>。これは<strong>リクルータビリティの高い患者</strong>で見られた</li><li>他方、高PEEPで<strong>過膨張が優位になる場合はV′/Qマッチングはむしろ悪化しうる</strong></li><li>したがって、<strong>過膨張と虚脱のバランスを取るEITによる個別化PEEP</strong>が、最適なV′/Qマッチングの鍵になりうる</li></ul>
+<p>「高PEEPで死腔が減る」は直感に反する（普通は過膨張で死腔が増えると考える）。虚脱していた肺胞が開くことで血流が再分配され、もともと灌流されていた高V′/Q領域の負担が軽くなるという説明が成り立つが、著者らは機序を断定せず「surprisingly（意外にも）」と書くにとどめている。</p>
+<h4>6-3. 一酸化窒素（NO）吸入</h4>
+<p>EITは、<strong>NO吸入に対する酸素化の反応が、肺灌流の腹側再分布と関連していること</strong>を示すことができた。</p>
+<h4>6-4. 予後予測と診断</h4>
+<ul><li><strong>非マッチ単位はARDSコホートで生存低下を予測した</strong>。しかも見かけ上 <strong>P/F比と換気比（ventilatory ratio）を上回り</strong>、<strong>SAPS IIスコアとは独立</strong>していた</li><li>他のV′/Qミスマッチ指標も臨床アウトカムと関連した</li><li>ベッドサイドで <strong>focal／non-focal ARDS の判別</strong>ができた</li><li><strong>かなり高い特異度で肺塞栓の診断を支持</strong>しうる</li></ul>
+<h3>7. 結論（著者らの言葉）</h3>
+<p>EITで測るV′/Qミスマッチは、<strong>個別化された患者ケアのためのベッドサイド・ツールへと着実に発展しつつある</strong>。現在のエビデンスが支持するのは、</p>
+<ul><li><strong>肺塞栓および呼吸不全の初期評価</strong>において、確立された手法への<strong>追加（adjunct）</strong>として用いること</li><li><strong>換気手技（ventilatory maneuvers）への患者の反応をモニタリング</strong>すること</li></ul>
+<p>の2点である。この2つ以外の用法（たとえばV′/Qを目標にして治療を決める）は、本稿では支持されていない。</p>
+<h3>8. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>議論の的になりやすい点</p>
+<ul><li><mark class="hl">「灌流＝最大立ち上がり勾配」という仮定は、ウォッシュアウトを丸ごと捨てている</mark>。指示薬希釈法の常識からすれば、<mark class="hl">曲線下面積を使わずに立ち上がりだけを使う</mark>のは強い簡略化であり、心拍出量が低い状態や右心不全では成り立たない可能性がある。本稿は仮定であることを明記しているが、その妥当性の検証データは示していない</li></ul>
+</div>
+<ol><li><strong>短報型の総説であり、系統的レビューではない</strong>。文献の選択基準も検索式もなく、15本の引用は著者ら（Mauri グループ）自身の研究とデルファイ・コンセンサスに厚い。引用文献のうち少なくとも2本（Pavlovsky 2022、Leali 2024）は著者グループ由来である。「エビデンスの重み」ではなく「専門家の見取り図」として読むべき</li><li><strong>ヒトでの検証の薄さ</strong>：3成分（pre-lung / lung / post-lung）のピーク時刻はブタで報告があるだけで、ヒトでは生理学からの推論にとどまる、と著者ら自身が書いている。臨床で使うアルゴリズムの前提が、動物データと推論に支えられている</li><li><strong>アルゴリズム間の比較データが無い</strong>：ガンマ変量フィット、心臓画素クラスタ除去、手動での時間窓選択という3つの方法が併存し、PVEの扱いが「大きく異なる」と述べられているが、同一患者で3法を比べたらどれだけ結果が動くのかは示されていない。装置・施設が変われば数字が変わる可能性が高く、多施設研究の障害になる</li><li><strong>閾値の恣意性が結論を左右する</strong>：5〜20%という4倍の幅がある閾値が、死腔とシャントという「臨床的に最も知りたい2つの区画」を最も強く左右する。「非マッチ単位がP/F比より予後を予測した」という主張も、閾値の選び方に依存しうる。この点は補足資料 Fig. S1 に押し出されており、本文では深く議論されていない</li><li><strong>「P/F比・換気比を上回る」の根拠が単一コホート</strong>：Spinelli ら 2021 の1コホートの所見であり、「apparently（見かけ上）」という慎重な語が使われている。予後予測指標としての検証（外的妥当性、較正）は済んでいない</li><li><strong>測定が治療を変えるかは未検証</strong>：本稿が挙げる臨床応用はすべて「観察できる」「予測する」であって、「V′/Qを見てPEEPを変えたら転帰が良くなった」というRCTは1本も引かれていない。個別化PEEPのAJRCCM 2025（Yuan ら）はレター形式のRCTである</li><li><strong>適用可能な患者が絞られる</strong>：中心静脈ラインが必要で、8秒以上の無呼吸が必要で、5区画法を使うなら心拍出量の正確な測定も必要。この3条件を同時に満たすのは「深鎮静・調節換気・侵襲的モニタ装着中のARDS患者」であり、まさに最も動かしたくない患者層と重なる。自発呼吸下（PSV）での評価はIppolito ら 2025 が着手した段階</li><li><strong>反復測定の安全性が定量されていない</strong>：高張食塩水約10 mL のボーラスを1日に何回まで許容できるのか、ナトリウム負荷や浸透圧の観点からの上限は示されていない。「すべての造影剤には固有のわずかなリスクがある」という一文で処理されている</li><li><strong>胸郭の半分しか見ないことの帰結</strong>：EITが見るのは電極ベルトを巻いた1断面（数cm厚）である。腹臥位やPEEP変更で横隔膜が動けば「見ている肺の場所」自体が変わる。これは限界として挙げられているが、補正方法は提示されていない</li><li><strong>Fig. 1f と Fig. 1g の整合</strong>：本文は「画素単位の重ね合わせは疑問視されている」と述べながら、そのFig. 1f をV′/Q定量の中心figureとして提示している。図と限界の記述の間に緊張がある</li></ol>
+<h3>9. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ICUにおける高リスク・中間リスク肺塞栓</td><td>Millington SJ, et al. Intensive Care Med 2024;50:195–208</td></tr>
+<tr><td>2</td><td>EITで測った非マッチ換気・灌流がARDSの転帰を予測する（本稿の予後予測の根拠）</td><td>Spinelli E, Kircher M, Stender B, et al. Crit Care 2021</td></tr>
+<tr><td>3</td><td>MIGET（多種不活性ガス消失法）の解説</td><td>Wagner PD. Intensive Care Med 2008;34:994–1001</td></tr>
+<tr><td>4</td><td>造影EITは非造影EITや肺CTと比べて領域灌流を頑健に追跡する</td><td>Silva DF, Reinartz S, Muders T, et al. IEEE Trans Med Imaging 2025</td></tr>
+<tr><td>5</td><td>肺虚脱の子ブタモデルでEITにより推定した領域肺灌流（3成分分解の原典）</td><td>Borges JB, Suarez-Sipmann F, Bohm SH, et al. J Appl Physiol 2012;112:225–236</td></tr>
+<tr><td>6</td><td>重症成人における胸部EITの換気・灌流評価に関する国際エビデンスベース・エキスパートデルファイ合意（手順の標準）</td><td>He H, Zhao Z, Becher T, et al. eClinicalMedicine 2025</td></tr>
+<tr><td>7</td><td>EIT肺灌流画像のためのモデルベース信号源分離アルゴリズム</td><td>Hentze B, Muders T, Hoog Antink C, et al. Physiol Meas 2021;42:084001</td></tr>
+<tr><td>8</td><td>プレッシャーサポート換気中のV/Qミスマッチ評価（自発呼吸下の前向き生理学研究）</td><td>Ippolito M, Grasselli G, Giarratano A, et al. Intensive Care Med Exp 2025;13:125</td></tr>
+<tr><td>9</td><td>ARDSにおけるPEEPの領域換気血流ミスマッチへの効果（5区画法・高PEEPの根拠）</td><td>Pavlovsky B, Pesenti A, Spinelli E, et al. Crit Care 2022</td></tr>
+<tr><td>10</td><td>ARDS患者の領域V′/Qミスマッチの絶対値と死腔・シャント補正の役割</td><td>Leali M, Marongiu I, Spinelli E, et al. Crit Care 2024;28:241</td></tr>
+<tr><td>11</td><td>COVID-19 ARDSにおける腹臥位のV′/Qマッチングへの時間依存的効果（3時間の根拠）</td><td>Wang Y, Muhetaer Y, Zheng X, et al. Ann Intensive Care 2025;15:46</td></tr>
+<tr><td>12</td><td>臨床フェノタイプ別に見た中等症〜重症ARDSでの腹臥位のV′/Qマッチングへの効果</td><td>Yang S, Sun Q, Yuan X, et al. Respir Res 2025;26:70</td></tr>
+<tr><td>13</td><td>ARDSにおけるEITで滴定した個別化PEEPの効果</td><td>Yuan X, Chen D, Chao Y, et al. Am J Respir Crit Care Med 2025;211:418–421</td></tr>
+<tr><td>14</td><td>ARDSにおけるNO吸入のV′/Qミスマッチへの効果（前向き観察研究）</td><td>Zhang H, Gao X, Wu Y, et al. Crit Care 2025;29:328</td></tr>
+<tr><td>15</td><td>EITによる領域換気・灌流に基づく急性呼吸不全の3分類（肺塞栓の特異度の根拠）</td><td>He H, Chi Y, Long Y, et al. Ann Intensive Care 2021</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ul><li><mark class="hl">EITは高張食塩水ボーラスと無呼吸を組み合わせることで、ベッドサイドで放射線なしに領域ごとの換気・灌流マップを描き、V′/Qを死腔・高V′/Q・正常・低V′/Q・シャントの5区画に定量できる</mark></li><li><mark class="hl">灌流は「肺成分の最大立ち上がり勾配」として推定され、ウォッシュアウトは無視される</mark>。この単純化がEITのV′/Qの土台であり、同時に最大の弱点でもある</li><li><mark class="hl">測定には中心静脈ライン・8秒以上の安定した無呼吸・（5区画法なら）分時換気量と心拍出量の正確な測定が要る</mark>。適用できるのは事実上、深鎮静・調節換気の患者に限られる</li><li><mark class="hl">数値は閾値（画像内最大値の5〜20%）に強く依存し、死腔とシャントという最も知りたい両端の区画ほど動く</mark>。従来画像・カプノグラフィ・血液ガスとのベースライン一致は乏しい</li><li><mark class="hl">EITが見ているのは胸郭のおよそ半分</mark>なので、<mark class="hl">非focal病変ではPEEPや体位の変化の解釈をとくに慎重に</mark></li><li>腹臥位では<mark class="hl">換気は早期に背側へ、灌流は最初の3時間を過ぎてから反重力方向へ再分布</mark>してV′/Qが改善する。高PEEPはリクルータビリティの高い患者でシャントと死腔をともに減らすが、過膨張が優位ならマッチングは悪化する</li><li><mark class="hl">行動としては、EITのV′/Qは「絶対値を他検査と突き合わせる道具」ではなく「同一患者で介入前後の変化を見る道具」として使い、肺塞栓と呼吸不全の初期評価では確立した検査への追加にとどめる</mark></li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
