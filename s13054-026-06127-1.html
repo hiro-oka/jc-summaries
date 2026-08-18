@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LLMがICU退院サマリーから治験候補を自動抽出する — 1,342入室から133例・PPV 72%・医師レビュー時間86%削減（CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06127-1.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">LLMがICU退院サマリーから治験候補を自動抽出する — 1,342入室から133例・PPV 72%・医師レビュー時間86%削減（CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Korvin K, Loi Z, Morquin D, Jung B, Pensier J, Aarab Y, Benchabane N, Bendiab E, Colombani S, Lacampagne A, Yauy K, Matecki S. Large language models for optimizing clinical trial recruitment in ICUs: application to ventilator-induced diaphragm dysfunction. Critical Care. 2026;30:304. DOI: 10.1186/s13054-026-06127-1</dd><dt>掲載誌</dt><dd>Critical Care（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06127-1" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06127-1</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Large language models for optimizing clinical trial recruitment in ICUs: application to ventilator-induced diaphragm dysfunction</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟・研究運用への落とし込み</p>
+<ul><li><strong>すぐ変わること</strong>：ない。これは診療を変える論文ではなく、<strong>臨床研究の「入口」の作り方</strong>を変える論文。当院の診療プロトコルには一切影響しない</li><li><strong>効く場面①：治験・自主研究のフィージビリティ調査</strong>。「この組み入れ基準で、当院は年間何例入るか」を、カルテを人手で読み返さずに見積もる。本研究の核心は精度そのものより、<strong>プロトコル確定前に基準を「ストレステスト」できる</strong>という運用上の価値にある</li><li><strong>効く場面②：前向き研究のスクリーニング補助</strong>。ICU入室者を毎朝AIで絞り込み、候補だけ医師が見る。本研究の建て付け（AIは絞り込み、適格判定は必ず人）は当院でもそのまま採用できる境界線</li><li><strong>前提条件①：文書の質</strong>。本研究の入力は「フランスの大学病院ICUの退院サマリー（自由記載）」。<mark class="hl">当院の退院サマリーが同じ情報量を持っているかを先に点検しないと、この数字は再現しない</mark>。日本の短いサマリーでは「人工呼吸○日」すら書かれていないことがある</li><li><strong>前提条件②：オンプレ推論</strong>。本研究は外部ネットワークから隔離した院内サーバーでオープンウェイトモデルを動かした。患者データを外部APIに出さないこの設計は、当院で同種の仕組みを検討するときの必須要件になる</li><li><strong>前提条件③：計算資源</strong>。1基準あたり11回の推論を、12基準×1,342入室に対して回している。院内GPUの手当てとコストが実装の律速になる</li><li><strong>転用先</strong>：JIPADや自施設DBでの症例数見積もり、RRSの候補抽出、人工呼吸離脱プロトコル対象者の洗い出しなど、「基準に合う人を探す」タスクは同型</li><li><strong>変わらないこと</strong>：適格性の最終判断は人。本研究でも185例中52例（28%）が医師のレビューで不適格と判定されている</li></ul>
+</div>
+<h4>判断の流れ — 自施設でLLM事前スクリーニングを検討するとき</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>研究の候補数を見積もりたい</td><td>対象期間のICU入室者の退院サマリーが構造化DBから一括取得できるか</td><td>取得できるなら本研究と同型のパイプラインを検討。できないならまず情報システム部門とデータ取り出しの相談</td></tr>
+<tr><td>組み入れ基準を作った段階</td><td>基準が「明示的に書かれる事実」か「症候群の解釈」か</td><td>人工呼吸日数・妊娠・腹臥位のような明示的事実は自動化が効く（F1 0.9以上）。敗血症・心不全のような症候群判断は自動化の精度が落ちる（F1 0.70〜0.76）ので人手前提で設計</td></tr>
+<tr><td>モデルを選ぶ</td><td>患者データを院外に出さない構成が組めるか</td><td>オープンウェイトをオンプレで動かす。外部APIに生カルテを送る設計は個人情報保護の観点で不可</td></tr>
+<tr><td>出力の信頼性が不安</td><td>1回の推論で判定していないか</td><td>同一基準を複数回（本研究は11回）推論して多数決を取る Self-Consistency を入れる</td></tr>
+<tr><td>AIが「該当なし」と返した症例</td><td>その症例を誰も見ていないのではないか</td><td>陰性判定の一部を無作為抽出して人が読み、偽陰性率を実測する。本研究はここを実施しておらず限界として明記している</td></tr>
+<tr><td>導入後</td><td>電子カルテのテンプレートや記載習慣が変わっていないか</td><td>定期的に性能を再測定する。文書の書き方が変わると精度は静かに劣化する</td></tr>
+</tbody></table></div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：救急・集中治療領域のRCTは、その約半数が早期中止に至り、最大の理由は登録不足である（Schandelmaier ら、Crit Care Med 2016）。原因は適格患者プールの過大見積もりと、高負荷環境でのリアルタイムスクリーニングの困難さに帰せられてきた。AI登場以前、施設の登録能力を事前に評価する手段は、長期間にわたる電子カルテの手作業レビューという労力集約的な方法しかなかった</li><li><strong>Unknown</strong>：LLMが自由記載の臨床ナラティブから、実際の治験組み入れ・除外基準を、臨床運用に耐える精度で判定できるか。とくに（1）基準ごとに精度がどう違うか、（2）基準単位の精度が患者単位の適格判定にどう伝播するか、（3）医師のレビュー工数がどれだけ減るか、は定量化されていなかった</li><li><strong>What's new</strong>：オープンウェイトLLM 5種を院内オンプレで比較し、GPT-OSS:120B ＋ Self-Consistency（11回多数決）が基準単位マクロF1 0.82（95%CI 0.67–0.87）で最良と特定。これを2024年の全ICU入室1,342件に適用し、185件を候補として提示、医師レビューで133件が適格と確定（患者単位PPV 72%、95%CI 65–78）。医師のレビュー時間は推定86%削減。<strong>「プロトコル確定前に組み入れ基準をストレステストする」という新しい用途</strong>を、実データで示した点が新しい</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICU退院サマリーをオープンウェイトLLMに読ませて治験候補を事前スクリーニングしたところ、<strong>基準単位のマクロF1は0.82、患者単位のPPVは72%、医師のレビュー時間は推定86%削減</strong>された。ただしAIが弾いた症例は誰も検証しておらず、この仕組みは「候補を絞って人に渡す」用途に限られる。</p>
+</div>
+<ul><li><strong>課題</strong>：ICU研究の最大のボトルネックは登録不足。プロトコル確定前に「この基準で何例入るか」を知る手段がなかった</li><li><strong>題材</strong>：VIDD（人工呼吸器誘発横隔膜機能不全）を対象とする将来の第2相試験を想定し、その組み入れ・除外基準でシミュレーション</li><li><strong>データ</strong>：モンペリエ大学病院の臨床データウェアハウス eDOL から、2024年1月1日〜12月31日にICU入室し侵襲的人工呼吸を受けた患者の自由記載退院サマリーを抽出</li><li><strong>基準</strong>：組み入れ＝侵襲的人工呼吸が連続3日以上。除外＝11項目（心不全、ARDS、COPD、神経筋疾患、先天性心疾患、スタチン内服中、敗血症、妊娠、現喫煙、腹臥位療法、脆弱集団）</li><li><strong>モデル</strong>：追加学習・ファインチューニングなしのオープンウェイト5種。各基準を11回独立に推論し多数決（Self-Consistency Assessment）。ゼロショット分類、JSON形式で判定と根拠を出力</li><li><strong>参照基準</strong>：稀な除外基準を意図的に濃縮した50入室を、6名の医師が盲検・独立にアノテーションし多数決で正解を確定</li><li><strong>精度</strong>：最良は GPT-OSS:120B ＋ SCA。マクロF1 0.82（95%CI 0.67–0.87）、感度0.89（0.71–0.92）、特異度0.81（0.68–0.89）。5構成のF1は0.73〜0.82の幅</li><li><strong>基準別</strong>：人工呼吸3日以上 F1 0.966、妊娠 1.000、COPD 0.941、ARDS 0.909、腹臥位 0.909 と高い一方、神経筋疾患 0.500、脆弱集団 0.667、敗血症 0.698、心不全 0.759 と低い</li><li><strong>実運用適用</strong>：1,342入室 → 人工呼吸3日以上 532件 → 除外適用後 185件を提示 → 医師レビューで133件が適格。これは人工呼吸3日以上の25%、全スクリーニング入室の9.9%に相当。患者単位PPV 72%（95%CI 65–78）</li><li><strong>工数</strong>：医師のレビュー時間は推定86%削減</li><li><strong>著者の留保</strong>：フラグの立った症例しか人が見ていないため、コホートレベルの偽陰性は否定できない。多施設・前向きワークフローでの追加検証が必要</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この論文を読むための基礎 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>VIDD（ventilator-induced diaphragm dysfunction、人工呼吸器誘発横隔膜機能不全）</strong>：人工呼吸中に横隔膜が使われないこと（および重症病態そのもの）によって横隔膜が萎縮・機能低下する病態。人工呼吸患者の60〜80%に生じるとされ、離脱の遅延とICU在室日数の延長につながる。本論文ではこのVIDDを対象とする将来の第2相試験を「題材」として使っているだけで、VIDDそのものの新知見はない。 <strong>臨床データウェアハウス（CDW）</strong>：診療で発生した電子カルテデータを研究利用できる形で集約したDB。本研究のeDOLはモンペリエ大学病院のCDW。 <strong>事前スクリーニング（prescreening）</strong>：治験の適格性を「候補を絞る」段階で機械的に判定すること。最終的な適格判定（adjudication）は医師が行う前提。 <strong>オープンウェイトモデル</strong>：モデルの重みが公開され、手元のサーバーで動かせるLLM。外部APIに患者データを送らずに済むため、院内での医療データ処理に適する。 <strong>ゼロショット分類</strong>：例示（few-shot）を与えず、指示文だけで分類させる方法。本研究ではLLMに「病院のテキスト分類器として振る舞え」と指示し、各基準の判定と根拠をJSONで返させた。 <strong>Self-Consistency（自己一貫性）</strong>：同じ問いを複数回独立に推論させ、多数決で答えを決める手法。LLMの出力ゆらぎとハルシネーションのリスクを下げる。本研究では1基準あたり11回。 <strong>F1スコア</strong>：適合率（precision＝PPV）と再現率（recall＝感度）の調和平均。0〜1で、1が完璧。クラス不均衡があるデータで精度（accuracy）より実態を反映する。<strong>マクロF1</strong>は各基準のF1を単純平均したもの。 <strong>PPV（陽性的中率）</strong>：AIが「該当」と言った症例のうち、実際に該当していた割合。本研究の運用上、医師が読まされる無駄なカルテの少なさを表す指標。 <strong>Label Studio</strong>：テキストや画像に人手でラベルを付けるためのオープンソースのアノテーションツール。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p><strong>問題の所在</strong>。登録失敗は集中治療研究の決定的なボトルネックであり続けている。急性期医療のRCTのうち<strong>ほぼ半数が早期中止</strong>に至り、その主因は登録不足である。この頻発する失敗は、適格患者プールの過大見積もりと、高負荷環境におけるリアルタイムスクリーニングの複雑さに帰せられることが多い。</p>
+<p><strong>なぜ事前評価が要るのか</strong>。こうした失敗を防ぐには、試験の組み入れ・除外基準を最終確定する前に、実施施設の登録能力を正確に評価することが決定的に重要である。著者らは論理を明示している — 過度に限定的な基準は、<strong>科学的には妥当でも、必要サンプルサイズへの到達を実務上不可能にしてしまうことが多い</strong>。AI登場以前、この登録実現性の見積もりは、長期間にわたる電子カルテの労力集約的で時間のかかる後ろ向き手作業レビューに依存していた。</p>
+<p><strong>着眼点</strong>。近年LLMは複雑な医学的ナラティブの処理において高い能力を示している。著者らは、臨床試験の登録実現性を予測するために設計した<strong>自動LLM事前スクリーニング・パイプラインの開発と検証の経験を報告</strong>する、という立て付けを取っている。</p>
+<p><strong>題材の選定</strong>。このアプローチを示すため、VIDDを対象とする試験をシミュレートした。VIDDは人工呼吸患者の<strong>60〜80%</strong>に影響する病態であり、それに伴う横隔膜不全は人工呼吸からの離脱を遅らせ、ICU在室日数を増加させる。この事実が、今後の臨床試験の必要性を裏づけている。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>デザイン</h4>
+<p>単施設・後ろ向き。臨床データウェアハウス由来の自由記載テキストに対する、LLMパイプラインの診断精度評価＋実データへの適用（登録能力の推計）。介入試験ではない。</p>
+<h4>データソースと倫理</h4>
+<ul><li>モンペリエ大学病院の<strong>臨床データウェアハウス eDOL</strong> から後ろ向きに抽出</li><li>IRB承認 No. A034/2024-10-152/001。後ろ向きデザインを理由に<strong>文書によるインフォームドコンセントは免除</strong></li><li>抽出対象：<strong>2024年1月1日〜12月31日</strong>にICUに入室し、<strong>侵襲的人工呼吸</strong>を受けた患者の<strong>自由記載の退院サマリー</strong></li><li>目的：あらかじめ定めた現実的な組み入れ・除外基準に基づき、患者の適格性を自動判定すること</li></ul>
+<h4>適格基準（VIDD第2相試験を想定）</h4>
+<ul><li><strong>組み入れ基準（1項目）</strong>：侵襲的人工呼吸（MV）が<strong>連続3日以上</strong></li><li><strong>除外基準（11項目）</strong>：人工呼吸とは独立に横隔膜の完全性に影響する交絡因子を最小化し、換気そのものの影響を分離する目的で設定</li></ul>
+<ol><li>心不全</li><li>ARDS</li><li>COPD</li><li>神経筋疾患</li><li>先天性心疾患</li><li>スタチン内服中</li><li>敗血症</li><li>妊娠</li><li>現喫煙</li><li>腹臥位療法</li><li>脆弱集団（vulnerable populations）</li></ol>
+<h4>基準の操作化</h4>
+<p>自動判定のために、各基準を<strong>原子的（atomic）なサブカテゴリへ分解</strong>し、最終的な該当・非該当は<strong>あらかじめ定めた決定論的ルール</strong>で割り当てた（Supplementary Table 1）。つまりLLMに「この患者は敗血症か」と丸ごと尋ねるのではなく、細かい要素に分けて判定させ、その組み合わせをルールで集約する設計になっている。</p>
+<h4>参照基準（gold standard）</h4>
+<ul><li>AIシステムの評価における中心的な難題は、適切な参照基準をどう定義するかにあると著者らは述べている</li><li><strong>6名の医師</strong>（集中治療専門医および感染症専門医）が、<strong>独立・盲検</strong>で<strong>50入室</strong>のリファレンスセットをアノテーション</li><li>アノテーションは <strong>Label Studio</strong> で実施し、最終ラベルは<strong>多数決</strong>で確定</li><li>この50入室は<strong>稀な除外基準が濃縮されるよう意図的に選択</strong>（purposively selected）された。目的は、単純な集団レベルの有病率推定ではなく、<strong>基準単位の抽出性能を頑健に評価する</strong>ことにある</li></ul>
+<h4>評価したモデルとパイプライン</h4>
+<p>「Clinical Research Assistant」の中核は、既存のオープンウェイトモデル<strong>5種</strong>の上に構築された。<strong>追加学習・ファインチューニングは一切行っていない</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>提供元</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>openai/gpt-oss-120b</td><td>OpenAI</td><td>本研究で最良性能</td></tr>
+<tr><td>mistralai/Mistral-Large-Instruct-2407</td><td>Mistral AI</td><td>汎用大規模</td></tr>
+<tr><td>mistralai/Magistral-Small-2506</td><td>Mistral AI</td><td>小規模</td></tr>
+<tr><td>google/medgemma-4b-it</td><td>Google</td><td>医療特化・4Bと小型</td></tr>
+<tr><td>deepseek-ai/DeepSeek-R1-Distill-Llama-70B</td><td>DeepSeek</td><td>推論特化モデルの蒸留版</td></tr>
+</tbody></table></div>
+<ul><li><strong>Self-Consistency Assessment（SCA）</strong>：高い信頼性を担保しハルシネーションのリスクを緩和するため、各臨床記録について各基準を<strong>11回独立に評価</strong>し、その多数決で最終判定とした</li><li><strong>プロンプト</strong>：ゼロショット分類。LLMに「病院のテキスト分類器として振る舞う」よう指示し、各基準についての予測と根拠を<strong>標準化されたJSON形式</strong>で返させた</li><li><strong>条件の統制</strong>：全構成を通じて、プロンプトテンプレート・推論パラメータ・自己一貫性の手順は一定に保ち、<strong>変えたのは基盤モデルのみ</strong></li><li><strong>実行環境</strong>：全推論は、外部ネットワークから隔離された<strong>セキュアなオンプレミスサーバー</strong>で実施し、患者データのプライバシー規制への厳格な準拠を確保した</li><li><strong>公開</strong>：事前スクリーニングアプリは GitHub（ERIOS-project／EriosClassifier）で公開</li></ul>
+<h4>アウトカム</h4>
+<ul><li><strong>主要</strong>：基準単位（criterion-level）の性能。マクロF1スコア、感度、特異度</li><li><strong>副次</strong>：全1,342入室に適用した際の患者単位PPV、確定された適格患者数、医師レビュー時間の削減率</li></ul>
+<h4>解析上の注意点（本文の記載から読み取れる範囲）</h4>
+<ul><li>事前登録（試験登録番号）の記載はない。診断精度研究であり介入試験ではないため、CONSORT等の適用対象ではないが、STARD等の報告ガイドラインへの言及もない</li><li>サンプルサイズの事前設計に関する記述はない。参照セットの50入室は「稀な除外基準を濃縮する」という目的から選ばれた便宜的な規模</li><li>95%CIの算出方法（ブートストラップか正規近似か）は本文に記載がない</li><li>主要な数値の多くは Supplementary Table 1〜3 および Supplementary Appendix S1–S6 に置かれている。本文だけでは各モデルの個別性能や、基準の分解ルールの中身は確認できない</li></ul>
+<h3>4. 結果 — モデル比較と基準単位の精度</h3>
+<p><strong>最良構成</strong>。評価したLLM構成のうち、<strong>OpenAI GPT-OSS:120B とSCA戦略の組み合わせ</strong>が基準単位で最良の性能を示した。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値</th><th>95%CI</th></tr></thead>
+<tbody>
+<tr><td>マクロF1スコア</td><td>0.82</td><td>0.67–0.87</td></tr>
+<tr><td>感度</td><td>0.89</td><td>0.71–0.92</td></tr>
+<tr><td>特異度</td><td>0.81</td><td>0.68–0.89</td></tr>
+</tbody></table></div>
+<p>構成間の幅は、LLMベースの事前スクリーニング・パイプライン全体で基準単位F1が<strong>0.73〜0.82</strong>であった。つまり最も悪い構成でも0.73は出ており、モデル選択による差は0.09にとどまる。</p>
+<p><strong>基準ごとのばらつき</strong>。性能は適格基準によって変動し、<strong>全般に特異度は高く、感度はより不均一</strong>であった。</p>
+<div class="tw"><table>
+<thead><tr><th>基準</th><th>種別</th><th>F1</th><th>性質</th></tr></thead>
+<tbody>
+<tr><td>侵襲的人工呼吸 3日以上</td><td>組み入れ</td><td>0.966</td><td>客観的・明示的に記載される</td></tr>
+<tr><td>妊娠</td><td>除外</td><td>1.000</td><td>明示的・二値</td></tr>
+<tr><td>COPD</td><td>除外</td><td>0.941</td><td>診断名として記載される</td></tr>
+<tr><td>ARDS</td><td>除外</td><td>0.909</td><td>診断名として記載される</td></tr>
+<tr><td>腹臥位療法</td><td>除外</td><td>0.909</td><td>実施記録として明示される</td></tr>
+<tr><td>心不全</td><td>除外</td><td>0.759</td><td>症候群的・暗黙の記載</td></tr>
+<tr><td>敗血症</td><td>除外</td><td>0.698</td><td>症候群的・暗黙の記載</td></tr>
+<tr><td>脆弱集団</td><td>除外</td><td>0.667</td><td>定義自体が解釈依存</td></tr>
+<tr><td>神経筋疾患</td><td>除外</td><td>0.500</td><td>稀・記載が多様</td></tr>
+</tbody></table></div>
+<p>（他の除外基準 — 先天性心疾患、スタチン内服、現喫煙 — の個別F1は Supplementary Table 3 にあり、本文には数値の記載がない）</p>
+<h3>5. 結果 — 2024年全入室への適用と登録能力の推計</h3>
+<p>最良構成（GPT-OSS:120B）を、<strong>2024年の全1,342 ICU入室</strong>に適用した。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>件数</th><th>前段からの割合</th><th>全入室に対する割合</th></tr></thead>
+<tbody>
+<tr><td>スクリーニング対象のICU入室</td><td>1,342</td><td>—</td><td>100%</td></tr>
+<tr><td>侵襲的人工呼吸 3日以上とモデルが同定</td><td>532</td><td>39.6%</td><td>39.6%</td></tr>
+<tr><td>除外基準適用後にモデルが候補として提示</td><td>185</td><td>34.8%</td><td>13.8%</td></tr>
+<tr><td>医師の手作業レビューで適格と確定</td><td>133</td><td>71.9%</td><td>9.9%</td></tr>
+</tbody></table></div>
+<ul><li>確定した133例は、<strong>人工呼吸3日以上の入室の25%</strong>、<strong>スクリーニングした全ICU入室の9.9%</strong>に相当</li><li><strong>患者単位PPV：72%（95%CI 65–78）</strong></li><li>提示された185例のうち52例（28%）は医師レビューで不適格と判定された</li><li>データセット全体の自動スクリーニングにより、<strong>医師のレビュー時間は推定86%削減</strong>された</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この研究で測れているもの・測れていないもの</p>
+<ul><li>医師が読んだのは<strong>AIが候補として提示した185件だけ</strong>。<mark class="hl">532件から185件に絞る過程で外された347件を人が検証していないため、コホートレベルの偽陰性（本当は適格なのにAIが弾いた患者）は把握されていない</mark></li><li>したがって報告されているPPV 72%は「AIが挙げた候補の当たり率」であり、<mark class="hl">患者単位の感度（適格患者を取りこぼさない能力）は本研究では測定されていない</mark></li><li>感度0.89という数字は、稀な除外基準を意図的に濃縮した<strong>50入室のリファレンスセット上の基準単位の値</strong>であって、1,342入室の実運用における患者単位の感度ではない。この2つを混同しないこと</li><li>著者ら自身がこの限界を明記している：「フラグの立った症例のみが専門家レビューを受けたことを踏まえると、コホートレベルの偽陰性を確定的に除外することはできない」</li></ul>
+</div>
+<h4>数値の再構成 — 本文の数字から導けること</h4>
+<p>本文に直接は書かれていないが、報告値から機械的に導ける関係を整理しておく。JCで「この数字は何を意味するのか」を詰めるときの土台になる。</p>
+<div class="tw"><table>
+<thead><tr><th>導出項目</th><th>計算</th><th>値</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>人工呼吸3日以上の割合</td><td>532 ÷ 1,342</td><td>39.6%</td><td>ICU入室の約4割が3日以上の侵襲的人工呼吸を受けている</td></tr>
+<tr><td>除外基準で落ちた割合</td><td>(532 − 185) ÷ 532</td><td>65.2%</td><td>11の除外基準で候補の3分の2が脱落</td></tr>
+<tr><td>AIが提示した候補の偽陽性数</td><td>185 − 133</td><td>52件</td><td>医師が無駄に読んだカルテの数</td></tr>
+<tr><td>偽陽性率（提示された候補中）</td><td>52 ÷ 185</td><td>28.1%</td><td>1 − PPV に一致</td></tr>
+<tr><td>手作業の当たり率</td><td>133 ÷ 1,342</td><td>9.9%</td><td>AIなしで全件読む場合の効率</td></tr>
+<tr><td>AI導入による当たり率の改善</td><td>72% ÷ 9.9%</td><td>約7.3倍</td><td>実務上のインパクトの大きさ</td></tr>
+<tr><td>レビュー件数の削減率</td><td>1 − (185 ÷ 1,342)</td><td>86.2%</td><td>報告された「86%削減」とほぼ一致する</td></tr>
+<tr><td>1患者あたりの判定回数</td><td>12基準 × 11反復</td><td>132回</td><td>患者単位の誤差蓄積の源</td></tr>
+<tr><td>全体の推論回数（概算）</td><td>1,342 × 132</td><td>約17.7万回</td><td>計算資源のオーダー</td></tr>
+</tbody></table></div>
+<p>最後から3行目が重要で、報告された「86%のレビュー時間削減」は、<strong>レビュー件数の削減率（1 − 185/1342 = 86.2%）とほぼ完全に一致する</strong>。つまりこの数字は実測した工数ではなく、<strong>件数比から算術的に導かれた推定値</strong>と読むのが自然である。1件あたりのレビュー時間がAI導入前後で同じという暗黙の仮定を置いており、実際にはAIの判定根拠を読む時間が加わる一方、AIが要点を抽出してくれる分だけ短くもなりうる。</p>
+<h4>基準ごとの自動化適性 — 実装設計のための整理</h4>
+<p>報告されたF1を、基準の「記載のされ方」で分類し直すと、どこを自動化しどこを人に残すかの設計指針が見える。</p>
+<div class="tw"><table>
+<thead><tr><th>記載のされ方</th><th>該当基準（F1）</th><th>自動化の適性</th><th>実装方針</th></tr></thead>
+<tbody>
+<tr><td>客観的な数値・期間</td><td>人工呼吸3日以上（0.966）</td><td>高い</td><td>全自動でよい。むしろ構造化データ（人工呼吸器の使用記録）から直接取れるならLLMを使う必要もない</td></tr>
+<tr><td>二値の明示的事実</td><td>妊娠（1.000）、腹臥位療法（0.909）</td><td>高い</td><td>全自動。記載があれば拾える</td></tr>
+<tr><td>確立した診断名</td><td>COPD（0.941）、ARDS（0.909）</td><td>高い</td><td>自動＋抜き取り確認</td></tr>
+<tr><td>症候群的・解釈依存</td><td>心不全（0.759）、敗血症（0.698）</td><td>低い</td><td>AIは「疑い」までとし、判定は必ず人。あるいは検査値・薬剤の構造化データと組み合わせる</td></tr>
+<tr><td>稀・記載が多様</td><td>神経筋疾患（0.500）</td><td>低い</td><td>該当例が少なく学習も評価も不安定。人手前提</td></tr>
+<tr><td>定義自体が曖昧</td><td>脆弱集団（0.667）</td><td>低い</td><td>そもそも定義を先に明文化すべき対象</td></tr>
+<tr><td>本文に個別値の記載なし</td><td>先天性心疾患、スタチン内服、現喫煙</td><td>不明</td><td>Supplementary Table 3 を要確認。スタチン内服は処方データから取れるはず</td></tr>
+</tbody></table></div>
+<p>この整理から言えるのは、LLMに全基準を投げるのではなく、<strong>「構造化データで取れるもの」「LLMで取るもの」「人が判断するもの」の3層に分ける設計</strong>が現実的だということ。本研究は12基準すべてをLLMに投げた設計であり、そのぶん患者単位のPPVが72%まで落ちている。スタチン内服や人工呼吸日数を処方・デバイスの構造化データから取れば、LLMに任せる基準は減り、誤差の蓄積も減らせる可能性がある。</p>
+<h3>6. 考察 — 著者らの解釈</h3>
+<p><strong>何がうまくいったか</strong>。基準単位の結果は、選ばれたモデルが<strong>いくつかの形の否定表現（negation）とナラティブの複雑さを扱えた</strong>ことを示唆している。人工呼吸日数のような客観的パラメータで0.966という高い一致が得られたのは、この種の情報が明示的にテキストに現れるためである。</p>
+<p><strong>なぜ敗血症と心不全で落ちたか</strong>。敗血症（F1 0.698）と心不全（F1 0.759）の同定における性能低下は、<strong>これらの病態の症候群的な性質</strong>を反映していると考えられる。これらはしばしば明示的なラベル付けではなく、<strong>暗黙の記載と繊細な臨床的解釈</strong>に依存している。人工呼吸期間のような客観的パラメータと異なり、これらの基準は<strong>観察者間変動が大きく</strong>、モデルの抽出ロジックが医師の解釈的判断と食い違ったときに誤分類を起こしやすい。</p>
+<p><strong>基準単位と患者単位のギャップの機序</strong>。基準単位のPPVと患者単位のPPVの差は、<strong>複数の分類タスクにわたる誤差の蓄積</strong>によって生じる。ここは重要な指摘で、1患者の適格判定には組み入れ1＋除外11の計12の判定が必要であり、それぞれが正しくても、<strong>すべてが同時に正しい確率は各判定の精度の積に近づいて低下する</strong>。個別基準がF1 0.82でも、患者単位のPPVが72%に落ちるのはこの構造による。</p>
+<p><strong>この仕組みの役割の定義</strong>。著者らは明確に線を引いている — このワークフローは<strong>臨床レビューの優先順位づけと試験実現性の予測を目的とするものであり、自律的な適格判定（autonomous adjudication）を提供するものではない</strong>。</p>
+<p><strong>限界の自認</strong>。フラグの立った症例のみが専門家レビューを受けたことを踏まえると、コホートレベルの偽陰性を確定的に除外することはできない。</p>
+<p><strong>含意</strong>。この経験は、集中治療研究における先進的LLMの潜在力を示している。日常的な自由記載の臨床ナラティブを活用することで、自動パイプラインは<strong>試験開始前に、プロトコルの迅速かつ高精度な「ストレステスト」を提供</strong>できる。これにより試験デザイナーは、現実的な登録予測を確保するために組み入れ・除外基準を動的に調整でき、将来の試験中止のリスクを緩和できる。多施設および前向きの臨床ワークフローにわたるさらなる検証がこれらの知見の確認のために必要であるが、LLMベースのアシスタントの統合は、ICUにおけるより効率的で実行可能な臨床研究への大きな一歩を表している。</p>
+<h3>7. 批判的吟味 — ジャーナルクラブでの論点</h3>
+<h4>デザイン上の限界</h4>
+<ul><li><strong>単施設・単一言語・単一の文書種別</strong>。フランスの大学病院ICUの退院サマリー（自由記載）に対する結果である。記載文化・サマリーの長さ・診断名の書き方が違えば性能は変わる。日本のICU退院サマリーは一般に短く、「人工呼吸○日間」のような定量情報が明示されないことも多い。<strong>移植可能性は文書の情報密度に強く依存する</strong></li><li><strong>後ろ向き・退院サマリーという時点</strong>。退院サマリーは転帰が確定した後の文書であり、そこには入室中に起きたことがすべて書かれている。しかし<strong>前向きのリアルタイムスクリーニングでは、退院サマリーは存在しない</strong>。日々の経過記録から同じ精度が出るかは全く別の問題で、本研究はそれを検証していない。「試験実現性の事前見積もり」という用途に限れば後ろ向きで正しいが、実運用のスクリーニングへの外挿はできない</li><li><strong>参照セットの選択バイアス（spectrum bias）</strong>。50入室は稀な除外基準が濃縮されるよう意図的に選ばれた。著者らはこれを「基準単位の抽出性能を頑健に評価するため」と正当化しており、その意図自体は妥当。しかし結果として、<strong>報告されたF1・感度・特異度は実際の有病率下での性能ではない</strong>。読み手が「実運用でも感度0.89」と読むと誤読になる</li><li><strong>参照基準そのものの不安定さ</strong>。gold standardは6名の医師の多数決だが、<strong>観察者間一致（κ値など）が報告されていない</strong>。とくに敗血症・心不全・脆弱集団は医師間でも判断が割れる基準であり、著者らも「観察者間変動が大きい」と認めている。<strong>分母が揺れている指標で分子の精度を測っている</strong>構造は、JCで必ず議論すべき点。参考文献5に "Learning from Disagreement" のサーベイが引かれていることから、著者らもこの問題を意識している</li><li><strong>サンプルサイズが小さい</strong>。50入室での基準単位評価であり、妊娠（F1 1.000）や神経筋疾患（F1 0.500）のような稀な基準では該当例が数例しかない可能性が高い。マクロF1の95%CIが 0.67–0.87 と<strong>点推定0.82に対して下側に大きく非対称に広がっている</strong>のは、この不安定さの表れと読める</li></ul>
+<h4>数値の読み方</h4>
+<ul><li><strong>86%のレビュー時間削減は「推定（estimated）」</strong>。どう推定したか（1件あたりの想定レビュー時間×件数か、実測か）が本文に書かれていない。分母を「1,342件を全部読む場合」に取れば、185件だけ読む運用は単純計算で86%減（1 − 185/1342 = 86.2%）になる。<strong>これは実測された工数削減ではなく、算術的な帰結の可能性が高い</strong>。実際には532件から185件に絞る過程の妥当性確認や、AI出力の根拠を読む時間は勘定に入っていない</li><li><strong>PPV 72%をどう評価するか</strong>。医師は185件読んで133件の適格患者を得た。裏を返せば<strong>4件に1件強はハズレを読まされている</strong>。手作業なら1,342件読んで133件なので、当たり率は9.9%から72%へ約7倍改善したことになる。この改善幅こそが実務上の価値</li><li><strong>F1 0.73〜0.82という構成間の差は小さい</strong>。医療特化の medgemma-4b-it（4B）と汎用大規模モデルの差が意外に小さいのか大きいのかは、個別の値が本文にないため判断できない（Supplementary Table 2）。<strong>モデル選択より Self-Consistency のような推論戦略の寄与が大きい可能性</strong>があるが、SCAあり・なしの比較が本文に提示されていないため検証できない</li><li><strong>11回反復のコスト</strong>。1基準あたり11回の推論を、12基準×1,342入室に対して実行している。単純計算で17万回超の推論。GPU時間・電力・実時間のコストが一切報告されておらず、他施設が再現する際の実装障壁が見えない</li></ul>
+<h4>内的な整合性と報告</h4>
+<ul><li><strong>除外基準の厳しさ vs 残存率</strong>。心不全・ARDS・COPD・敗血症をすべて除外して、人工呼吸3日以上の患者の25%が残るという結果は、直感的にはやや高い印象を受ける。ICUで3日以上人工呼吸を要する患者で敗血症も心不全もARDSもない集団が4分の1というのは、施設の患者構成（外科系ICUの比率など）に強く依存する。<strong>1,342入室の患者背景（年齢・重症度・入室理由・外科／内科比）が一切報告されていない</strong>ため、他施設が自施設に当てはめて考えることができない</li><li><strong>報告ガイドラインへの言及がない</strong>。診断精度研究のSTARDや、LLM研究向けのTRIPOD-LLMのような報告チェックリストへの準拠が述べられていない。Research letterという形式上の制約はあるが、主要な性能数値の多くが Supplementary Table に置かれており、<strong>本文だけでは検証できない</strong></li><li><strong>利益相反の位置づけ</strong>。この点はJCで必ず触れるべき</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>利益相反の構造を読み違えない</p>
+<ul><li>責任著者 SM と AL は Occical Therapeutics の共同創業者兼株主、SC は同社CEO兼株主。<mark class="hl">同社は「VIDDを予防する生体分子」を開発中のバイオテク企業である</mark></li><li>つまり本研究は、<strong>自社が開発中の薬剤の第2相試験について、その組み入れ基準で自施設に何例入るかを見積もった</strong>ものと読める。研究の動機として自然であり隠されてもいないが、<mark class="hl">「133例入る」という結論が投資家向け・規制当局向けの資料にそのまま使われうる位置にある</mark>ことは認識しておく必要がある</li><li>一方でLLMの性能評価そのものは事前定義された参照基準に対する客観的な測定であり、この構造がただちに数値を歪めるとは言えない。<strong>バイアスの方向を具体的に指摘できるかどうか</strong>がJCでの論点</li></ul>
+</div>
+<h4>JCで投げたい問い</h4>
+<ol><li>この仕組みは「試験実現性の事前見積もり」には十分だが、「前向きのリアルタイムスクリーニング」に使うには何を追加検証すべきか（陰性症例の抽出検証、日々の記録での性能、リアルタイム性）</li><li>敗血症F1 0.698 という数字を「使えない」と切るか、「人が見る前提なら十分」と受け入れるか。<strong>基準ごとに自動化の可否を分けるハイブリッド設計</strong>が現実解ではないか</li><li>当院の退院サマリーに、この11＋1基準を判定できるだけの情報が書かれているか。書かれていないなら、AIの前に<strong>記載の標準化</strong>が課題になるのではないか</li><li>参照基準が医師6名の多数決であるとき、AIの性能の上限は「医師の一致率」で頭打ちになる。<strong>AIが医師より正しい可能性</strong>をどう評価するか</li></ol>
+<h3>8. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>救急・集中治療領域のRCTの早期中止 — 後ろ向きコホート研究。本論文の出発点となる「登録不足が主因」の根拠</td><td>Schandelmaier S, von Elm E, You JJ, Blümle A, Tomonaga Y, Lamontagne F, et al. Crit Care Med. 2016;44(1):130–7. DOI: 10.1097/CCM.0000000000001369（PMID 26468895）</td></tr>
+<tr><td>2</td><td>中止されたランダム化試験の頻度・特徴・公表状況。適格患者プールの過大見積もりと実時間スクリーニングの複雑さを論じた文献</td><td>Kasenda B, von Elm E, You J, et al. JAMA. 2014;311(10):1045–51</td></tr>
+<tr><td>3</td><td>VIDDの現象学と発症機序のレビュー。人工呼吸患者の60〜80%という有病率と、離脱遅延・ICU在室延長の根拠</td><td>Powers SK. J Physiol. 2024;602(19):4729–52. DOI: 10.1113/JP283860（PMID 39216087、レビュー）</td></tr>
+<tr><td>4</td><td>LLMの効率的推論のための最適な自己一貫性。本研究のSCA（11回反復・多数決）戦略の方法論的根拠</td><td>Feng A, Alonso M, Odonnat A. arXiv. 2025. DOI: 10.48550/ARXIV.2511.12309</td></tr>
+<tr><td>5</td><td>アノテーターの不一致から学ぶ手法のサーベイ。参照基準を医師の多数決で定義することの方法論的背景</td><td>Uma AN, Fornaciari T, Hovy D, Paun S, Plank B, Poesio M. J Artif Intell Res. 2021;72:1385–470. DOI: 10.1613/jair.1.12752</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ICU退院サマリーをオープンウェイトLLM（GPT-OSS:120B＋11回多数決）に読ませると、<mark class="hl">基準単位マクロF1 0.82、患者単位PPV 72%で治験候補を絞り込め、医師のレビュー対象を1,342件から185件へ、推定86%圧縮できた</mark>。 <mark class="hl">明示的に書かれる事実（人工呼吸日数F1 0.966、妊娠1.000、腹臥位0.909）は自動化が効き、症候群的な判断（敗血症0.698、心不全0.759、神経筋疾患0.500）は効かない</mark>。この差を前提に、<mark class="hl">自動化する基準と人が見る基準を分けて設計する</mark>のが実装の要点。 ただし<mark class="hl">AIが弾いた症例を誰も検証していないため、患者単位の感度は本研究では測られていない</mark>。<mark class="hl">この仕組みは「候補を絞って人に渡す」道具であって、適格性を自律的に判定する道具ではない</mark>。 当院での使いどころは診療ではなく研究の入口 — <mark class="hl">プロトコルを確定する前に「この基準で年間何例入るか」を測るストレステスト</mark>として使う。その前提として、<mark class="hl">自施設の退院サマリーに判定可能な情報が書かれているかの点検</mark>が先に来る。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
