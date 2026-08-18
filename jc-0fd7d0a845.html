@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🎚️ ARDSの換気設定（駆動圧・PEEP） Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="jc-0fd7d0a845.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🎚️ ARDSの換気設定（駆動圧・PEEP） Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 🎚️ ARDSの換気設定（駆動圧・PEEP） Home</p>
+<p>一回換気量・駆動圧・PEEP・リクルートメント・経肺圧・メカニカルパワー。<strong>設定を数値で決める</strong>ための束。関連60件。 体位は <span class="wl">🫁 ARDSに対する腹臥位療法 Home</span>、薬物療法は <span class="wl">🧴 ステロイドをいつ使うか Home</span>、補助換気での努力管理は <span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span>。</p>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>VT 6（4〜8）mL/kg PBW ＋ プラトー圧30未満</strong>。<mark class="hl">一回換気量は必ず予測体重（PBW）で計算し、実体重で計算しない</mark>。PBWで設定している限り性差の補正も不要（<span class="wl">PBWで一回換気量を決めれば性差は消える — ARDSNet 7試験5,367例のプール解析（二次解析・CritCare2026）</span>）</li><li><strong>肺保護の到達点は「VT 6」ではない</strong>。適切なガス交換を保ちつつ<mark class="hl">肺に与えるメカニカルパワーを最小にすること</mark>（<span class="wl">肺保護換気の歴史と考え方</span>）</li><li><strong>ΔPは「Pplat − 総PEEP」を完全受動条件で測って初めて意味を持つ</strong>。<mark class="hl">この2条件を書かないΔPの数値は信用しない</mark>（<span class="wl">ドライビングプレッシャーではなくタイダルプレッシャーと呼べ — 吸気努力で過小・auto-PEEP無視で過大（Correspondence・RespirCare2019）</span>）。自発呼吸があってもPSV中に短い吸気ホールドをかければ測れる（<span class="wl">自発呼吸下でのプラトー圧とドライビングプレッシャー（ICM2019）</span>）</li><li><strong>PEEPは「表の数値」ではなく「動かしたときのΔPとPaCO₂の反応」で決める。FiO₂は固定したまま動かす</strong>（<span class="wl">私はPEEPをこう設定する — FiO2を固定しΔPと酸素化の反応だけで滴定する（エディトリアル・CritCare2019）</span>）</li><li><strong>PEEPを上げたらP/F比だけで成功と判断しない</strong>。同じ操作の中で呼吸系コンプライアンス・PetCO₂・心拍出量（右室）を並べて読み、<mark class="hl">コンプライアンスが改善しないのに酸素化だけ良くなったら過膨張を疑う</mark>（<span class="wl">ARDSの心肺相互作用 — PEEPは酸素化だけで評価しない、右室後負荷と酸素運搬まで見る（Understanding the Disease・ICM2026）</span>）</li><li><strong>高圧リクルートメント手技をやらない</strong>。PEEP &gt; 35 cmH₂O を60秒超は<mark class="hl">ATS 2024で「強い反対」＝2017年版から方向が反転した唯一の推奨</mark>（RR 1.37・<span class="wl">成人ARDS管理のATSガイドライン更新 — ステロイド・VV-ECMO・筋弛緩・PEEP（AJRCCM2024）</span>）。害の本体は過伸展（ART 28日死亡 55.3% vs 49.3%）</li><li><strong>非ARDSに高PEEPと超低VTを持ち込まない</strong>。高PEEPは死亡も期間も改善せず（<span class="wl">非ARDSでも高PEEPは必要か メタ解析（CritCare2021）</span>）、<mark class="hl">低VTを無理に追求してもVFDも死亡も肺合併症も改善しない</mark>（<span class="wl">非ARDS患者での低換気量 vs 中換気量戦略（PReVENT試験・JAMA2018）</span>）</li><li><strong>VT 4 mL/kg まで下げない</strong>。1年死亡・QOL・PTSDは変わらないまま、<mark class="hl">認知機能（MoCA）が最小重要差ぶん下がる</mark>（<span class="wl">超低一回換気量は1年後の認知機能を下げる（VT4COVID 長期追跡・CritCare2026）</span>）</li><li><strong>肥満患者はVTをPBWで、PEEPは高めに個別化する</strong>。至適PEEPは約20〜21 cmH₂O のこともあり、<mark class="hl">胸壁が硬いからといって換気量を増やさない</mark>。気道内圧は胸壁で水増しされる（<span class="wl">肥満患者の人工呼吸管理 — 一回換気量はPBW、PEEPは高めに個別化、気道内圧は胸壁で水増しされる（ナラティブレビュー・ICM2026）</span>）</li><li><strong>「Pplat が高い＝危険」と一律に扱わず、胸壁の要素を疑う症例では経肺圧で判断する</strong>。高度肥満・腹腔内圧上昇・腹水・胸水・胸壁変形で Pplat 30 cmH₂O 超が続くとき、食道バルーンを入れれば「肺にかかる圧は安全域」と示せることがあり、逆に胸壁が柔らかい症例では Pplat 25 cmH₂O でも危険域のことがある。数値を読んでよいのは occlusion test で ΔPaw/ΔPoes が 0.8〜1.2（理想 0.9〜1.1）に入ったときだけで、設定変更・体位変換のたびに再検する。ARDS の手順は3段階（呼気終末 PL を 0±2 cmH₂O に＝PEEPで → ΔPL を 10〜12 cmH₂O 未満に＝VTで → elastance-derived の吸気終末 PL 20 cmH₂O 未満を確認）だが、著者ら自身が生理学的推論と事後解析が根拠と明記しており、全 ARDS へのルーチン適用の根拠はない（<span class="wl">食道バルーンによる呼吸モニタリング 実践ガイド（Jonkman・EurRespirRev2023）</span>）</li><li><strong>人工呼吸器の画面から読む4点</strong>：立ち上がりの段差（Pcond）・傾きの形（ストレスインデックス）・プラトーまでの高さ（ΔP）・呼気フローがゼロに戻るか（<span class="wl">人工呼吸器の画面から肺生理を読む — 伝導圧・ストレスインデックス・時定数と低流量手技（Understanding the Disease・ICM2026）</span>）</li><li><strong>高PEEPは腎うっ血を介して腎を傷めうる</strong>。人工呼吸患者のAKIリスクは約3倍（<span class="wl">人工呼吸誘発性AKI — 高PEEPは腎うっ血を介して腎を傷めるか（レビュー・CritCare2025）</span>）</li><li><strong>「COVIDだから」でPEEPの上限や一回換気量を決めない。決めるのは「この患者は開くのか」</strong>（<span class="wl">COVID-19肺炎 ARDSか否か 2つのフェノタイプ（CritCare2020）</span>）</li></ul>
+</div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：低換気量換気（PBWで6 mL/kg）と腹臥位だけが<mark class="hl">前向きに検証された介入</mark>。駆動圧は死亡と結びつくが、リクルート量そのものは結びつかない（<span class="wl">PEEPによる肺リクルートメント量とARDS予後（P-Vループ・メタ解析・ICM2020）</span>）。高圧リクルートメントは有害。</li><li><strong>まだ決着していないこと</strong>：①PEEPの個別化法（食道内圧・EIT・PV曲線のいずれも死亡改善の証拠なし）、②リクルータビリティの評価法（<mark class="hl">決定版の単一指標は無く、CTとPV曲線は相関しない</mark>）、③サブフェノタイプ駆動の個別化（<mark class="hl">どの定義も病態生理を組み込んでいない</mark>・<span class="wl">ARDSの未来 — 定義の進化・不均一性・サブフェノタイプ駆動の個別化治療（ナラティブレビュー・CritCare2025）</span>）。</li><li><strong>最近変わったこと</strong>：<strong>自動化の議論が始まった</strong>。目標がVT・圧からΔP・メカニカルパワーへ増え、<mark class="hl">設定同士が逆方向に干渉する（VTを下げるには呼吸数を上げる→MPは増える）ため、人手による多目標の同時最適化は原理的に破綻する</mark>（<span class="wl">自動化による肺保護 I-ASVの時代（ICM2022）</span>）。もう一つはEITの位置づけで、<mark class="hl">「予後を改善する道具」ではなく「意思決定の解像度を上げる道具」</mark>として整理された（<span class="wl">重症患者における電気インピーダンス・トモグラフィ（EIT） — ベッドサイド呼吸モニタリングの進歩（ClinCritCare2025）</span>）。</li></ul>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>リクルートメント手技をやるか</td><td><span class="wl">術後低酸素血症へのIntensive vs Moderate肺リクルートメント（JAMA RCT・JAMA2017）</span>（心臓術後で肺合併症が軽い）</td><td><span class="wl">肺リクルートメント手技とOpen lung strategy（CritCare2019）</span>／<span class="wl">成人ARDS管理のATSガイドライン更新 — ステロイド・VV-ECMO・筋弛緩・PEEP（AJRCCM2024）</span>（ARTで死亡増・強い反対）</td><td><strong>集団が違う</strong>。心臓術後の低酸素血症とmoderate ARDSを同じ議論に混ぜない。<mark class="hl">ARDSでは高圧リクルートメントをやらない</mark></td></tr>
+<tr><td>食道内圧ガイドPEEPは使えるか</td><td><span class="wl">食道内圧ガイドPEEPとARDS生存（EPVent-2二次解析・AJRCCM2021）</span>（低APACHE-II で HR 0.43）</td><td><span class="wl">EPVent-2（食道内圧ガイドPEEP・JAMA2019）</span>（主要評価項目は陰性）</td><td><strong>主要評価項目は陰性という前提を崩さない</strong>。<mark class="hl">重症多臓器障害ではむしろ害になりうる</mark>という異質性まで含めて読む。安全なので測ること自体は妨げない</td></tr>
+<tr><td>「PEEP 5 vs 15 で差がない」は何を否定したか</td><td>2点比較のRCT群</td><td><span class="wl">PEEP・p値・肺メカニクス（Cove 2022 Correspondence）</span>（<mark class="hl">多くのARDSで最適点はPEEP 9〜12、2点比較では山を跨いでしまう</mark>）</td><td><strong>「個別化戦略の否定」と読まない</strong>。コンプライアンスを指標にした滴定は否定されていない</td></tr>
+<tr><td>低換気量は教義か</td><td><span class="wl">低一回換気量は教義になったという主張 — ARDSNetの6 mL毎kgを問い直すパースペクティブ（単著オピニオン・JMechVent2026）</span></td><td>ARDSNet以来の標準</td><td><strong>この論文で設定は変えない</strong>。<mark class="hl">単著のオピニオンで、中心的な主張を支える数値を1つも提示していない</mark>。一方で「4 mL/kgまで下げる」も害（VT4COVID）——<mark class="hl">6（4〜8）の幅の中で運用する</mark></td></tr>
+</tbody></table></div>
+<h2>📌 まずこの8本</h2>
+<ol><li><span class="wl">肺保護換気の歴史と考え方</span> — <mark class="hl">なぜ「VT 6」で終わらないのか</mark></li><li><span class="wl">私はPEEPをこう設定する — FiO2を固定しΔPと酸素化の反応だけで滴定する（エディトリアル・CritCare2019）</span> — 明日から使える滴定法</li><li><span class="wl">ドライビングプレッシャーではなくタイダルプレッシャーと呼べ — 吸気努力で過小・auto-PEEP無視で過大（Correspondence・RespirCare2019）</span> — <mark class="hl">ΔPの測定条件</mark></li><li><span class="wl">ARDSの心肺相互作用 — PEEPは酸素化だけで評価しない、右室後負荷と酸素運搬まで見る（Understanding the Disease・ICM2026）</span></li><li><span class="wl">成人ARDS管理のATSガイドライン更新 — ステロイド・VV-ECMO・筋弛緩・PEEP（AJRCCM2024）</span> — <mark class="hl">院内プロトコルの見直し必須</mark></li><li><span class="wl">PEEPによる肺リクルートメント量とARDS予後（P-Vループ・メタ解析・ICM2020）</span> — リクルート量と死亡は結びつかない</li><li><span class="wl">人工呼吸器の画面から肺生理を読む — 伝導圧・ストレスインデックス・時定数と低流量手技（Understanding the Disease・ICM2026）</span> — 教育に使える1本</li><li><span class="wl">肥満患者の人工呼吸管理 — 一回換気量はPBW、PEEPは高めに個別化、気道内圧は胸壁で水増しされる（ナラティブレビュー・ICM2026）</span></li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🫁 ARDSに対する腹臥位療法 Home</span> — 体位という上乗せ</li><li><span class="wl">🧴 ステロイドをいつ使うか Home</span> — 薬物療法</li><li><span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> — 補助換気に移ったあと</li><li><span class="wl">😌 鎮静深度と鎮静薬の選択 Home</span> — 肺保護的鎮静</li><li><span class="wl">🌊 輸液反応性と血行動態モニタリング Home</span> — PEEPを使ったテスト</li><li><span class="wl">🔄 ECMO Home</span> — 救済療法</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
