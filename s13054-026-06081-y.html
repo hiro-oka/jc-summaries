@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>腹臥位の「反応あり」に定義がない — 酸素化基準で68%、CO2・メカニクス基準では45〜53%（SR・メタ解析・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06081-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">腹臥位の「反応あり」に定義がない — 酸素化基準で68%、CO2・メカニクス基準では45〜53%（SR・メタ解析・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Caccioppola A, Ippolito M, Cortegiani A, Guérin C, Grasselli G. Definition and prognostic value of response to prone positioning in ARDS: a systematic review and meta-analysis. Crit Care. 2026;30:360. DOI: 10.1186/s13054-026-06081-y</dd><dt>掲載誌</dt><dd>Critical Care（2026-05-15）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06081-y" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06081-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Definition and prognostic value of response to prone positioning in ARDS: a systematic review and meta-analysis</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>腹臥位を始めるかどうかの判断には、この論文は使わない</strong>。PROSEVA以降のエビデンスは「中等症〜重症ARDSなら生理学的反応にかかわらず全例に適用」であり、著者らも冒頭で「反応の分類は開始判断を導くためのものではない」と明記している。当院の適応基準（P/F&lt;150 の中等症〜重症で12時間以上）は変えなくてよい</li><li><strong>変わりうるのは「2回目以降を続けるか」の記録の仕方</strong>。当院の腹臥位チェックリストは酸素化の変化だけを見ているが、この論文が示すのは「酸素化で68%が反応者、CO2クリアランスやコンプライアンスで見ると45〜53%」という、定義次第で反応者が2割以上動く事実。<mark class="hl">単一指標で「無反応だからやめる」と判断するのは、この文献群では正当化されない</mark></li><li><strong>記録項目に PaCO2 と換気比（VR）を足す価値はある</strong>。反応の生理は2系統（灌流再分布＝PaO2だけ改善／リクルートメント＝PaCO2も低下）で、後者のほうがVILI低減に近い。P/F と PaCO2 の両方を supine→prone→re-supine の3点で残すだけで、当院の症例が Gattinoni の二分法のどちらかを事後に判定できるようになる</li><li><strong>呼吸器系コンプライアンス（Crs）の低下を「悪化」と読まない</strong>。腹臥位は胸壁を硬くするので、肺コンプライアンスが改善していても Crs は下がりうる。当院のフローシートでコンプライアンスを見ている場合、腹臥位中の値だけで判断させない注記が要る</li><li><strong>VV-ECMO 中の腹臥位に「酸素化反応」を当てはめない</strong>。ECMO自体がガス交換を規定するので P/F 反応は解釈不能。当院でECMO中に腹臥位を行う場合は、反応判定ではなく PRONECMO（JAMA2023）に沿った「適用そのものの是非」で議論する</li><li><strong>評価タイミングを院内で1つに決める</strong>。文献の33%が開始1〜4時間以内、56%がセッション終了直前、27%が仰臥位復帰後と、バラバラのまま比較されている。当院で残すなら「腹臥位終了直前」と「仰臥位復帰1時間後」の2点が最も情報量が多い（後者は構造的な改善が持続したかを見る）</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：腹臥位は中等症〜重症ARDSの死亡を減らす（PROSEVA、ESICM 2023 ガイドライン）。短期の酸素化改善・CO2クリアランス改善・より保護的な換気が得られることも知られている。一方で酸素化の改善がVILI低減や転帰改善に直結しないことも既知（ARDSNet、Catozzi ICM2025）</li><li><strong>Unknown</strong>：「腹臥位に反応した」とは何を指すのか。どの指標（酸素化／CO2／メカニクス／V/Q）を、どの閾値で、どのタイミングで測るのか。そして反応者は本当に生存率が高いのか。これらを横断的に検討したレビューはこれまで存在しなかった</li><li><strong>What's new</strong>：66研究・10,188例を統合し、(1) 反応の定義が実際にどれだけバラバラかを網羅的にマッピングし（Table 2で40近い定義を列挙）、(2) 定義ごとの反応者割合をプールし（酸素化 supine→prone で68%、仰臥位復帰後で59%、CO2 47%・メカニクス45%・V/Q 53%）、(3) 反応性と死亡の関連は交絡バイアスのため結論できないことを示した。「反応者の生存が良い」という素朴な期待は、粗データでは26研究中11研究（42%）でしか有意にならず、調整済み推定を集めると OR 0.74（0.54–1.03）で有意水準を割る</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 腹臥位への「反応あり」に標準的な定義は存在せず、<strong>採用する指標次第で反応者の割合は45%から68%まで動く</strong>。そして反応性と生存の関連は、交絡と バイアスのために現時点では結論できない。</p>
+</div>
+<ul><li><strong>検索と組み入れ</strong>：PubMed・Embase・Cochrane CENTRAL を inception〜2025年7月まで検索。2,570件＋引用検索10件から、重複576件を除いた1,994件をスクリーニング、全文170件を評価し、<strong>66研究・10,188例（うち9,120例＝93%が腹臥位を受け反応評価の対象）</strong> を組み入れ</li><li><strong>研究の質</strong>：66件中65件（98%）が非ランダム化観察研究（前向き39・後ろ向き24・混合2）、RCTは1件のみ。単施設46件（70%）。1980年代後半から2020年代まで4半世紀以上にわたる</li><li><strong>最頻の定義</strong>：62研究（94%）が酸素化を基準にし、うち53研究が「仰臥位→腹臥位の P/F 変化」を採用。閾値は37研究（70%）が「20 mmHg または20%の上昇」、残る16研究（30%）は PaO2 7〜10 mmHg上昇から ≥40〜60%上昇、P/F ≥300達成まで様々</li><li><strong>主要アウトカム（反応者割合）</strong>：酸素化（supine→prone）で <strong>68%（95%CI 63–72%）</strong>、ただし I²=91.4%と considerable な異質性。仰臥位復帰後（Post-PP）の定義では 59%（51–67%）、I²=92.2%</li><li><strong>酸素化以外の定義</strong>：21研究（32%）がCO2クリアランス・呼吸メカニクス・V/Q マッチングを使用。プール反応者割合は <strong>CO2 47%（41–52%）／メカニクス 45%（34–56%）／V/Q 53%（28–77%）</strong>、全体47%（42–52%）。サブグループ間差は有意でない（p=0.8457）</li><li><strong>副次アウトカム（死亡）</strong>：粗データを報告した26研究のうち有意な死亡低下を示したのは11研究（42%）のみ。全体のメタ解析は critical risk of bias のため実施せず。serious risk of bias にとどまる5研究に限った感度解析で <strong>OR 0.41（0.25–0.68）、I²=78%</strong>、調整済み推定を報告した3研究では <strong>OR 0.74（0.54–1.03）</strong> と信頼区間が1をまたぐ</li><li><strong>著者の結論</strong>：反応の定義には合意形成（コンセンサス）プロセスが必要で、単一指標の二値判定ではなく多次元的・個別化された生理学的評価へ移行すべき</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 腹臥位の「反応」とは何を測っているのか 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 腹臥位（prone position, PP）は、人工呼吸中のARDS患者をうつ伏せにする治療である。中等症〜重症ARDSで死亡を減らすことが PROSEVA 試験（NEJM2013）で示され、以後の標準治療となった。</p>
+<p>腹臥位が効く理由は複数ある。仰臥位では重力によって背側（dorsal）の肺が心臓・腹腔内臓器・自重で圧排され、含気を失う（圧迫性無気肺）。一方で血流は重力に従って背側に多く流れるため、「換気されないが灌流される」領域＝シャントが背側に生じる。うつ伏せにすると、この圧排が解除されて背側肺が開き、同時に腹側肺は過膨張しにくくなる（腹臥位では肺重量分布と胸郭形状の関係が変わり、含気分布が均一化する）。結果として、換気血流（V/Q）マッチが改善し、局所の応力・ひずみのばらつきが減る。</p>
+<p>ここで重要なのは、<strong>臨床で見える「反応」は3種類あり、それぞれ別の生理を反映する</strong>ということ。</p>
+<ul><li><strong>酸素化の改善（PaO2/FiO2 の上昇）</strong>：主にシャントの減少。ただし灌流が腹側へ再分布しただけでも上がる（肺が開いていなくても上がりうる）</li><li><strong>CO2クリアランスの改善（PaCO2 の低下、換気比の低下）</strong>：死腔の減少＝実際に肺胞がリクルートされ、灌流のある領域が換気されるようになったことを示す</li><li><strong>呼吸メカニクスの改善（コンプライアンス上昇、駆動圧低下）</strong>：肺全体の応力–ひずみ関係の改善で、VILI低減に最も直結する。ただし腹臥位では胸壁が硬くなるため、肺が良くなっていても<strong>呼吸器系全体のコンプライアンス（Crs）は下がりうる</strong>という落とし穴がある</li></ul>
+<p>略語：P/F＝PaO2/FiO2（動脈血酸素分圧を吸入酸素濃度で割った酸素化指標）。VR（ventilatory ratio, 換気比）＝実測分時換気量×実測PaCO2 を、予測分時換気量×37.5 で割った無次元数で、死腔の簡便な代用指標。Crs＝呼吸器系コンプライアンス（一回換気量÷駆動圧）。EIT＝電気インピーダンストモグラフィ（胸部に巻いた電極帯で局所の換気・灌流分布をベッドサイドで可視化する非侵襲モニタ）。VILI＝人工呼吸器関連肺損傷。VV-ECMO＝静脈–静脈体外式膜型人工肺。</p>
+<p>本論文が問うているのは治療効果ではなく、<strong>「反応あり」というラベルの定義そのもの</strong>である。定義が研究ごとに違えば、「反応者は生存が良い」という主張も研究間で比較できない。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>腹臥位は中等症〜重症ARDSで死亡リスクを減らす（引用1・2）。死亡低下に加え、より保護的な換気の実現、酸素化改善、CO2クリアランス改善をもたらす（引用3）</li><li>腹臥位中・直後に観察される短期の生理学的改善は、しばしば治療効果の指標と解釈される。しかしそれらは中間指標（intermediate）であり、メディエーターとして期待されてはいるが、基準（criteria）としては確立していない</li><li>「反応（response）」の標準的・普遍的定義は存在しない（引用3）。大半の研究は仰臥位→腹臥位の酸素化改善で定義するが、CO2クリアランス、呼吸メカニクス（駆動圧・コンプライアンス）、肺画像、血行動態で定義する研究もある</li><li>ここが本論文の論理の要：<strong>PROSEVA（引用2）とその後のランダム化試験（引用3）は、重症度基準を満たす患者に広く適用したときの生存改善を示したのであって、個々の生理学的反応の有無で層別してはいない</strong>。したがって反応の分類は「腹臥位を始めるか否か」の判断に使うべきではない。著者らが反応表現型（response phenotyping）に期待する用途は4つ:</li></ul>
+<ol><li>改善しない患者で腹臥位セッションを繰り返すかどうかの判断</li><li>生理学的な非反応者を特定し、代替的・追加的なレスキュー戦略の候補とすること</li><li>連続するセッションの継続時間・頻度のタイトレーション</li><li>臨床試験におけるエンリッチメント（反応者／非反応者で組み入れを絞る）</li></ol>
+<ul><li>一方で、酸素化の改善が必ずしもVILI低減や転帰改善に翻訳されないことは臨床データが示しており（引用4）、酸素化ベースの重症度分類そのものへの疑問も提起されている（Catozzi ら、引用5：酸素化障害はVILIリスクを予測できない）</li><li>さらに、これらの基準は<strong>タイミング</strong>（腹臥位早期か後期か、仰臥位復帰後か）と<strong>方法論</strong>の両面で大きく異なり、反応性と死亡低下の関連についての明確なエビデンスは存在しない</li><li>そこで本レビューは、(1) 既存の定義をマッピングし、(2) 定義ごとの反応者割合をプールし、(3) 反応性と死亡の関連を評価することを目的とした</li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ランダム化試験・非ランダム化試験のシステマティックレビューおよびメタ解析。PRISMA 2020声明（引用6）に準拠。PROSPERO に前向き登録（CRD420251104725）</li><li><strong>検索</strong>：PubMed、Embase、Cochrane Central Register of Controlled Trials を inception から2025年7月まで。キーワード、MeSH／各データベース固有の統制語彙、ブール演算子を組み合わせた検索式（Additional File 1）。さらに 'related articles' 機能とスノーボール法によるサーベイランス検索を追加</li><li><strong>組み入れ</strong>：腹臥位への反応率を評価した、および／または反応状態（反応者 vs 非反応者）別に死亡を報告した、ランダム化・非ランダム化研究</li><li><strong>除外</strong>：症例報告、全文の得られない抄録、学会録、プレプリント、英語以外の報告、関心アウトカムを報告していない研究、および<strong>反応者／非反応者を事前定義していない研究</strong></li><li><strong>スクリーニング</strong>：重複は Rayyan（引用7）で自動除去し、同プラットフォームを記録管理にも使用。タイトル・抄録は2名（A.Ca.、M.I.）が盲検下で独立にスクリーニング。全文は事前規定の組み入れ・除外基準に照らして評価。両者が適格と判断したもののみ組み入れ、不一致は第3の著者（A.Co. または C.G.）との合議で解決。適格性やデータ提示に疑問が生じた場合は2名（A.Ca.、C.G.）が原著の責任著者に照会</li></ul>
+<h4>3-1. 適格基準とアウトカム（PEO）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>主解析（反応者割合の単アーム・メタ解析）</th><th>副次解析（死亡のペアワイズ・メタ解析）</th></tr></thead>
+<tbody>
+<tr><td>P（対象）</td><td>18歳以上の成人、ARDS（COVID-19を含む）、ICUで人工呼吸中に腹臥位を受けた患者</td><td>同左</td></tr>
+<tr><td>E（曝露）</td><td>腹臥位セッションを1回以上（期間は問わない）</td><td>反応者であること</td></tr>
+<tr><td>C（比較）</td><td>なし（単アーム比率）</td><td>非反応者</td></tr>
+<tr><td>O（アウトカム）</td><td>腹臥位への反応者であること</td><td>死亡</td></tr>
+</tbody></table></div>
+<ul><li>ARDSの定義は問わず、各研究の実施時点で使用されていた同時代的定義を満たす患者を登録していれば可（Berlin定義（引用12）以前の研究も含む）</li><li><strong>反応者／非反応者の分類は、各原著の著者が事前に規定した基準に従う</strong>。酸素化（P/F変化）、呼吸メカニクス（駆動圧・コンプライアンス変化）、肺画像（EITでの改善）、CO2クリアランス（PaCO2・換気比の変化）、その他いずれでもよい</li><li>閾値（絶対変化・相対変化）も各原著のものを採用。ただし<strong>死亡の副次解析では、収集後のデータから後付けで導出された閾値（例：コホートのP/F中央値）を用いた研究は除外</strong>した</li></ul>
+<h4>3-2. データ抽出</h4>
+<ul><li>2名（A.Ca.、M.I.）が標準化した電子データ収集シートを用いて独立に抽出</li><li>抽出項目：研究デザイン、出版年、国、ARDSの病因、サンプルサイズ、腹臥位セッションの継続時間、反応の定義基準、反応評価のタイミング、補助療法（ECMO等）の使用、報告された死亡エンドポイント</li></ul>
+<h4>3-3. バイアスリスク評価</h4>
+<ul><li>2名（A.Ca.、M.I.）が独立・二重に評価し、不一致は第3著者（A.Co.）が解決</li><li><strong>主解析</strong>：Hoy ら（引用8）のツール。有病割合研究・単アーム研究に適用可能なため採用</li><li><strong>副次解析</strong>：ROBINS-I V2（引用9）。ランダム化・非ランダム化を問わず全研究に適用した。理由は、本解析が問うている条件（反応者 E か非反応者 C か）についてはランダム化が行われていないため、すべての研究が非ランダム化とみなせるから</li><li>可視化は robvis（引用10）。死亡アウトカムの出版バイアスは R（Version 2026.01.1-403）package meta の funnel 関数で視覚的に評価（引用11）</li></ul>
+<h4>3-4. 統計解析</h4>
+<ul><li>アウトカムを報告する研究が2件以上ある場合にメタ解析を実施</li><li><strong>主要アウトカム（反応者割合）</strong>：個々の研究の割合をロジット変換したうえで、変量効果の一般化線形混合モデル（GLMM）でプール推定。R package meta の metaprop 関数（引用11）。95%信頼区間を併記</li><li>主解析は「酸素化変化（仰臥位→腹臥位のP/F）」で定義した研究に限定。他の定義（仰臥位復帰後の酸素化変化、その他の定義）に限定した解析も別途実施</li><li><strong>サブグループ解析</strong>：呼吸メカニクス、V/Qマッチング、CO2クリアランスで定義した反応をグループ化してプール</li><li><strong>限定解析</strong>：COVID-19のみ、ECMO装着例のみ、Berlin定義（引用12）採用研究のみ</li><li><strong>副次アウトカム（死亡）</strong>：生データから反応者 vs 非反応者のオッズ比をペアワイズ・メタ解析。<strong>critical risk of bias の場合、および統合が適切でないと判断される場合は全体推定を報告しない</strong>（引用13、Cochrane Handbook 第24章の方針）</li><li>異質性は I² で定量化し、低（&lt;30%）・中等度（30–60%）・実質的（50–75%）・かなりの／considerable（75–100%）と解釈（引用14）</li><li>感度解析：(a) serious overall risk of bias の研究のみ（critical risk のものを除外）、(b) 調整済み死亡リスク推定を提供した研究のみ</li><li>未調整プール推定は逆分散法＋DerSimonian–Laird 変量効果（R package meta の metabin）、調整済み推定は metafor（引用15）の rma 関数</li></ul>
+<h3>4. 結果 — 研究の選択</h3>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>件数</th></tr></thead>
+<tbody>
+<tr><td>電子データベースからの検索</td><td>2,570</td></tr>
+<tr><td>引用検索・その他の情報源から追加</td><td>10</td></tr>
+<tr><td>重複除去</td><td>−576</td></tr>
+<tr><td>タイトル・抄録スクリーニング対象</td><td>1,994</td></tr>
+<tr><td>スクリーニングで除外</td><td>−1,834</td></tr>
+<tr><td>全文評価</td><td>170</td></tr>
+<tr><td>全文で除外</td><td>−104</td></tr>
+<tr><td><strong>最終的に組み入れ</strong></td><td><strong>66研究（引用16–81）</strong></td></tr>
+<tr><td>総患者数</td><td>10,188</td></tr>
+<tr><td>うち腹臥位を受け反応評価可能</td><td>9,120（93%）</td></tr>
+</tbody></table></div>
+<ul><li>PRISMA 2020フロー図は Additional File 2、全文除外104件の理由は Additional File 3。主な除外理由はアウトカム不適合、出版タイプ不適合、非英語、研究デザイン不適合、対象集団不適合、重複出版</li></ul>
+<h3>5. 結果 — 組み入れ研究の特徴（Table 1）</h3>
+<div class="tw"><table>
+<thead><tr><th>特徴</th><th>内訳</th></tr></thead>
+<tbody>
+<tr><td>単施設</td><td>46研究（70%）</td></tr>
+<tr><td>多施設</td><td>20研究（30%）</td></tr>
+<tr><td>非ランダム化観察研究</td><td>65研究（98%）</td></tr>
+<tr><td>── うち前向きコホート</td><td>39</td></tr>
+<tr><td>── うち後ろ向きコホート</td><td>24</td></tr>
+<tr><td>── うち前向き・後ろ向き混合</td><td>2</td></tr>
+<tr><td>ランダム化比較試験</td><td>1研究のみ（引用28）</td></tr>
+<tr><td>実施年代</td><td>1980年代後半〜2020年代</td></tr>
+<tr><td>地域</td><td>ヨーロッパ、北米・南米、アジア</td></tr>
+<tr><td>小規模生理学的シリーズ（20例以下）</td><td>19研究</td></tr>
+<tr><td>大規模コホート（300例超）</td><td>8研究</td></tr>
+</tbody></table></div>
+<ul><li>全研究が、その時点の同時代的定義（引用12、82）に基づく急性肺損傷またはARDSの基準を満たす成人を対象</li><li>一部はCOVID-19関連ARDSに特化したコホート。VV-ECMO 支持下の患者データを報告した研究も複数あり（COVID-19・ECMO の割合は Table 1 に記載）</li><li>腹臥位プロトコルは全体として不均一で、<strong>指標セッション（index session）の継続時間は初期の生理学的研究の1時間未満から、近年のコホートの16〜18時間まで幅がある</strong></li></ul>
+<h3>6. 結果 — バイアスリスク</h3>
+<ul><li><strong>反応者割合のアウトカム（Hoy ツール）</strong>：34研究が低リスク、32研究が中等度リスク。<mark class="hl">ただし全研究が外的妥当性への懸念を残した</mark>（単施設デザインと非代表的コホートのため）</li><li><strong>死亡のアウトカム（ROBINS-I V2）</strong>：6研究（引用16, 31, 42, 63, 76, 80）を除く<strong>すべてが critical risk of bias</strong>。理由は「交絡によるバイアス」領域</li><li>1研究（引用76）は「参加者の選択によるバイアス」で critical</li><li>残る5研究（引用16, 31, 42, 63, 80）は overall serious risk で、「交絡によるバイアス」と「報告結果の選択のバイアス」に serious な懸念</li><li>詳細は Additional Files 4・5</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>ここが本論文の急所 死亡に関しては、<mark class="hl">66研究中61研究が critical risk of bias で、統合に耐えるのは5研究だけ</mark>。この事実を踏まえずに「反応者は生存が良い」と引用するのは、著者らの慎重な留保を無視することになる。</p>
+</div>
+<h3>7. 結果 — 反応性の定義（Table 2）</h3>
+<p>定義は研究間で大きく異なった。大半が酸素化の変化で反応者を分類し、CO2クリアランス・呼吸メカニクス・V/Qマッチングを評価したものははるかに少ない。</p>
+<div class="tw"><table>
+<thead><tr><th>生理学的ドメイン</th><th>研究数（66中）</th><th>割合</th></tr></thead>
+<tbody>
+<tr><td>酸素化（引用16–48, 50–63, 65–70, 72–79, 81）</td><td>62</td><td>94%</td></tr>
+<tr><td>CO2クリアランス関連の基準を1つ以上含む（引用16, 27, 29, 31, 36, 39, 48, 51, 52, 57, 58, 74, 76, 81）</td><td>14</td><td>21%</td></tr>
+<tr><td>呼吸メカニクス（引用38, 49, 64, 71, 73）</td><td>5</td><td>8%（うち反応者割合を報告し定量解析に含めたのは4研究＝引用49, 64, 71, 73）</td></tr>
+<tr><td>V/Qマッチング（主にEIT由来、引用78, 80）</td><td>2</td><td>3%</td></tr>
+</tbody></table></div>
+<p>測定手技の内訳：</p>
+<ul><li>酸素化基準は動脈血液ガス分析または SpO2 で評価 — 94%（62/66）</li><li>死腔評価は 21%（14/66）で実施され、多くは間接的（PaCO2 の変化、または換気比 VR の計算）</li><li>呼吸メカニクスの変化はコンプライアンス変動として定義 — 6%（4/66）。EIT など代替手技の使用は稀</li></ul>
+<h4>Table 2. 組み入れ全研究で使われた「反応あり」の定義（生理学的ドメイン別）</h4>
+<p>「PP」＝腹臥位セッション中の評価、「Post-PP」＝仰臥位に戻した後の評価。数字は各定義を採用した研究数。</p>
+<p><strong>Panel A. 酸素化ベースの定義</strong></p>
+<div class="tw"><table>
+<thead><tr><th>定義</th><th>PP</th><th>Post-PP</th></tr></thead>
+<tbody>
+<tr><td>P/F 上昇 ≥20 mmHg</td><td>21</td><td>5</td></tr>
+<tr><td>P/F 上昇 ≥20%</td><td>16</td><td>4</td></tr>
+<tr><td>PaO2 上昇 ≥10 mmHg</td><td>3</td><td>0</td></tr>
+<tr><td>P/F 上昇 ≥15%</td><td>3</td><td>1</td></tr>
+<tr><td>P/F 上昇 ≥50%</td><td>2</td><td>1</td></tr>
+<tr><td>P/F 上昇 ≥30%</td><td>2</td><td>1</td></tr>
+<tr><td>PaO2 上昇 ≥20 mmHg</td><td>2</td><td>0</td></tr>
+<tr><td>P/F 上昇 ≥10%</td><td>2</td><td>0</td></tr>
+<tr><td>P/F 上昇 ≥100%</td><td>1</td><td>0</td></tr>
+<tr><td>P/F 上昇 ≥40%</td><td>1</td><td>0</td></tr>
+<tr><td>P/F 上昇 ≥40 mmHg</td><td>1</td><td>0</td></tr>
+<tr><td>FsO2（ECMOスイープガス酸素濃度）低下 &gt;20%</td><td>1</td><td>0</td></tr>
+<tr><td>SpO2/FiO2 上昇 ≥20%</td><td>1</td><td>0</td></tr>
+<tr><td>PaO2 上昇 ≥7 mmHg</td><td>1</td><td>0</td></tr>
+<tr><td>P/F 上昇 ≥1 mmHg</td><td>1</td><td>2</td></tr>
+<tr><td>P/F 上昇 &gt;0 mmHg</td><td>1</td><td>1</td></tr>
+<tr><td>P/F ≥300 mmHg 到達</td><td>0</td><td>1</td></tr>
+<tr><td>P/F 上昇 ≥60%</td><td>0</td><td>1</td></tr>
+</tbody></table></div>
+<p>（注：Article in Press 版の紙面では左列の先頭文字が版面外に切れており、「P/F」「PaO2」の別は本文記述と行の並びから復元した）</p>
+<p><strong>Panel B. CO2クリアランス／死腔ベースの定義</strong>（すべて PP 時点）</p>
+<div class="tw"><table>
+<thead><tr><th>定義</th><th>研究数</th></tr></thead>
+<tbody>
+<tr><td>PaCO2 低下 ≥1 mmHg</td><td>3</td></tr>
+<tr><td>ΔVR（換気比の変化）低下 &gt;0</td><td>2</td></tr>
+<tr><td>PaCO2 不変または低下</td><td>1</td></tr>
+<tr><td>PaCO2 低下 &gt;0.9 mmHg</td><td>1</td></tr>
+<tr><td>PaCO2 低下 ≥2 mmHg</td><td>1</td></tr>
+<tr><td>VE:PaCO2 の上昇 ≥41.7%</td><td>1</td></tr>
+<tr><td>ΔVR 低下 ≥0</td><td>1</td></tr>
+<tr><td>PaCO2 上昇 ≤3.15%</td><td>1</td></tr>
+<tr><td>PaCO2 低下 ≥2%</td><td>0</td></tr>
+</tbody></table></div>
+<p><strong>Panel C. 呼吸メカニクスの定義</strong>（すべて PP 時点）</p>
+<div class="tw"><table>
+<thead><tr><th>定義</th><th>研究数</th></tr></thead>
+<tbody>
+<tr><td>Crs 上昇 ≥3 mL/cmH2O</td><td>2</td></tr>
+<tr><td>EIT由来の肺保護指標の改善</td><td>1</td></tr>
+<tr><td>Crs 上昇 &gt;10%</td><td>1</td></tr>
+</tbody></table></div>
+<p><strong>Panel D. その他の生理学的ドメイン</strong>（すべて PP 時点）</p>
+<div class="tw"><table>
+<thead><tr><th>定義</th><th>研究数</th></tr></thead>
+<tbody>
+<tr><td>EIT による V/Q マッチングの改善</td><td>1</td></tr>
+<tr><td>EIT による V/Q マッチングの改善 ≥10%</td><td>1</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>この表の読み方 「P/F が20 mmHg または20%上がったら反応者」という最頻の基準ですら、PPで37研究・Post-PPで9研究にとどまる。残りは PaO2 が1 mmHg でも上がれば反応者とする研究から、P/F が2倍（≥100%）にならないと反応者としない研究まで並んでいる。同じ患者が、採用する研究の基準次第で反応者にも非反応者にもなる。</p>
+</div>
+<h3>8. 結果 — 反応評価のタイミング</h3>
+<div class="tw"><table>
+<thead><tr><th>タイミング</th><th>研究数</th><th>割合</th></tr></thead>
+<tbody>
+<tr><td>腹臥位セッション早期（1時間以内＝Immediate-PP、または4時間以内＝Early-PP）</td><td>22</td><td>33%</td></tr>
+<tr><td>セッション終了時、仰臥位に戻す直前（End-PP）</td><td>37</td><td>56%</td></tr>
+<tr><td>仰臥位に戻した後（Post-PP）</td><td>18</td><td>27%</td></tr>
+<tr><td>仰臥位復帰から7日後</td><td>2</td><td>3%</td></tr>
+<tr><td>複数時点で評価（重複計上）</td><td>11</td><td>—</td></tr>
+</tbody></table></div>
+<p>合計が100%を超えるのは、11研究が複数時点で評価しているため。</p>
+<h3>9. 結果 — 酸素化反応のプール割合（Figure 1）</h3>
+<ul><li>「仰臥位→腹臥位の P/F 変化」を定義に採用したのは <strong>53研究</strong></li><li>閾値の内訳：<strong>37研究（70%）が P/F の絶対または相対で「およそ20 mmHg または20%の上昇」</strong>、16研究（30%）はそれ以外（PaO2 の小さい絶対上昇 7〜10 mmHg、大きい相対変化 ≥40〜60%、あるいは P/F ≥300 mmHg 到達という遅延基準など）</li><li><strong>プール反応者割合 68%（95%CI 63–72%）</strong>。異質性は considerable（I²=91.4%、τ²=0.5354、p&lt;0.0001）</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 仰臥位→腹臥位の PaO2/FiO2 変化で定義した酸素化反応の、プール反応者割合のフォレストプロット（原図・無改変） 縦に53研究が、Langer M 1988 を最上段として発表年の古い順に並ぶ。左列に第一著者名、その右に発表年、プロット領域を挟んで右端に各研究の反応者割合と95%信頼区間が数値で並ぶ。横軸は割合で 0.2 から 1 まで目盛りが刻まれ、0.68 の位置に縦の点線（プール推定値の基準線）が走る。各研究は灰色の四角（重みに比例した大きさ）と水平の信頼区間バーで描かれる。1980〜90年代の研究は例数が少ないため四角が小さく信頼区間バーが長く伸び、2020年代の大規模コホート（Camporota L 2022、Cunha MCA 2022・2023、Sanabria-Rodríguez OO 2023、De Rosa S 2025、Wu Y 2025）は四角が大きく区間が短い。値は下端の 0.07（Jørgensen VL 2024、95%CI 0.01–0.19）から上端の 1.00（McAuley DF 2002、0.72–1.00）まで極端に散らばり、0.93（Zadek F 2024）、0.90（Johannigman JA 2000／Clarke J 2021）といった高値と、0.34（Lee HY 2020）、0.36（Rossi S 2022）、0.40（Liang H 2024）といった低値が同じ図に同居する。最下段のひし形（変量効果モデル）は 0.68（0.63–0.72）に位置し、その直下に「Heterogeneity: I2 = 91.4%, τ2 = 0.5354, p &lt; 0.0001」と印字される。ひし形は横に狭いが、上に並ぶ点の散らばりはプロット幅のほぼ全域を覆っており、<mark class="hl">平均値の精度と個々の研究の一致度がまったく別物であること</mark>が一目で分かる図になっている。</p>
+</div>
+<h3>10. 結果 — 仰臥位復帰後（Post-PP）の酸素化反応</h3>
+<ul><li>「仰臥位→腹臥位→仰臥位復帰後の P/F 変化」を定義に採用したのは <strong>17研究</strong>（引用17, 19, 20, 24, 32, 33, 39, 42, 45, 54, 56, 57, 59, 66, 68, 79, 81）</li><li><strong>プール反応者割合 59%（95%CI 51–67%）</strong>、I²=92.2%（Additional File 6）</li><li>腹臥位中に測る場合（68%）より約9ポイント低い。仰臥位に戻しても改善が保たれる患者は、腹臥位中に改善する患者より少ない</li></ul>
+<h3>11. 結果 — 酸素化以外の定義（Figure 2）</h3>
+<ul><li>66研究中 <strong>21研究（32%）</strong> が、酸素化以外の、あるいは酸素化に加えた生理学的変数で反応性を評価</li><li><strong>CO2ベースの定義</strong>（引用16, 27, 29, 31, 36, 39, 48, 51, 52, 57, 58, 74, 76, 81）：PaCO2 の低下（典型的には ≥1〜2 mmHg または相対的な%低下）、換気比の変化（ΔVR）のような死腔代用指標の改善、あるいは酸素化とPaCO2の複合基準</li><li><strong>呼吸メカニクス</strong>（引用38, 49, 64, 71, 73）：Crs の上昇（≥3 mL/cmH2O または &gt;10%）、あるいは肺の均一性改善と呼気終末肺容量（EELV）増加を示すEIT由来指標。うち反応者割合を報告し定量解析に含めたのは4研究（引用49, 64, 71, 73）</li><li><strong>V/Qマッチング</strong>（引用78, 80）：主にEIT由来のV/Q指標</li><li><strong>プール反応者割合は 45%〜53%（全体推定 47%、95%CI 42–52%）</strong>。異質性は実質的〜considerable、サブグループ効果は有意でない（p=0.84、正確には χ²=0.34, df=2, p=0.8457）</li></ul>
+<div class="tw"><table>
+<thead><tr><th>サブグループ</th><th>研究数</th><th>プール割合（95%CI）</th><th>I²</th></tr></thead>
+<tbody>
+<tr><td>CO2</td><td>14</td><td>47%（41–52%）</td><td>70.4%</td></tr>
+<tr><td>呼吸メカニクス</td><td>4</td><td>45%（34–56%）</td><td>57%</td></tr>
+<tr><td>V/Q</td><td>2</td><td>53%（28–77%）</td><td>70.1%</td></tr>
+<tr><td><strong>全体</strong></td><td><strong>20</strong></td><td><strong>47%（42–52%）</strong></td><td><strong>66.5%</strong></td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 酸素化以外の定義による腹臥位反応の、定義ドメイン別プール割合のフォレストプロット（原図・無改変） 3つのグループが上から順にブロックとして積まれる。最上段が「Group = CO2」で、Gattinoni L 2003（0.45、0.38–0.52）、Lemasson S 2006（0.51）、Protti A 2009（0.50）、Lee K 2010（0.53）、Charron C 2011（0.54）、Haddam M 2016（0.57）、Lee HY 2020（0.22、0.14–0.30）、Vollenberg R 2021（0.62）、Langer T 2021（0.47）、Boffi A 2022（0.50）、Wang Z 2022（0.58）、Zadek F 2024（0.41）、Liang H 2024（0.39）、Chang K-W 2025（0.49）の14研究が年代順に並び、ブロック末尾の白抜きひし形が 0.47（0.41–0.52）、その下に I2 = 70.4%, τ2 = 0.1166, p &lt; 0.0001 と印字される。中段が「Group = Respiratory Mechanics」で、Dalla Corte F 2020（0.62、0.35–0.85）、Petit M 2022（0.53）、Morais CCA 2023（0.27、0.11–0.50）、Jørgensen VL 2024（0.38）の4研究、ひし形は 0.45（0.34–0.56）、I2 = 57%, p = 0.0728。下段が「Group = V/Q」で、Wang R 2025（0.60、0.48–0.71）と Yang Y 2025（0.33、0.12–0.62）の2研究のみ、ひし形は 0.53（0.28–0.77）と横に大きく広がり、区間の広さがそのまま情報の乏しさを表している。I2 = 70.1%, p = 0.0675。最下段に全体の変量効果モデルのひし形 0.47（0.42–0.52）が置かれ、I2 = 66.5%, τ2 = 0.1197, p &lt; 0.0001、そして「Test for subgroup differences: χ2 = 0.34, df = 2 (p = 0.8457)」が続く。横軸は 0.2 から 0.8 まで 0.1 刻み。3グループのひし形がほぼ同じ位置（0.45〜0.53）に並び、<mark class="hl">どの生理学的ドメインで測っても「反応者はおよそ半分」という同一の像が得られる</mark>ことが視覚的に示されている。</p>
+</div>
+<ul><li>COVID-19、ECMO、Berlin定義採用研究に限定したサブ集団解析の結果は Additional Files 7・8・9</li></ul>
+<h3>12. 結果 — 反応性と死亡リスク</h3>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>研究数</th></tr></thead>
+<tbody>
+<tr><td>反応者・非反応者別の死亡の生データを報告</td><td>32</td></tr>
+<tr><td>死亡に基づく事後的（post-hoc）な反応者定義のため除外（引用39, 48, 56, 57, 66, 76）</td><td>−6</td></tr>
+<tr><td>定量評価の対象</td><td>26</td></tr>
+<tr><td>うち反応者コホートで未調整死亡リスクの有意な低下を報告</td><td>11（42%）</td></tr>
+</tbody></table></div>
+<ul><li><strong>著者らは全体のメタ解析を行わないと判断した</strong>。理由は3つ：組み入れ非ランダム化研究の critical risk of bias（引用13）、報告された推定値が未調整であること、そして considerable な異質性（Additional File 10）</li><li><strong>感度解析①（serious risk of bias の5研究のみ）</strong>：反応者コホートで有意な死亡リスク低下、<strong>OR 0.41（95%CI 0.25–0.68）、I²=78%</strong>（Additional File 11）</li><li><strong>出版バイアス</strong>：認めず（Additional File 12、Egger p=0.172）</li><li><strong>感度解析②（調整済み推定を報告した3研究）</strong>：点推定は反応者で死亡リスク低下を示唆するが、<strong>信頼区間が1をまたぐ — OR 0.74（95%CI 0.54–1.03）</strong>（Additional File 13）</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>未調整 OR 0.41 と調整済み OR 0.74 の落差 交絡を調整した瞬間に効果量が半分近くまで縮み、有意水準を割る。<mark class="hl">「反応しなかった患者の予後が悪い」のは、腹臥位に反応しなかったからではなく、もともと重症だったからである可能性が高い</mark>。この論文が最も強く伝えているのはこの点である。</p>
+</div>
+<h3>13. 考察 — 著者の解釈</h3>
+<h4>13-1. 主要な知見のまとめ</h4>
+<p>著者らが挙げる主な所見は3つ：</p>
+<ul><li>(a) 最頻の反応の定義は「仰臥位から腹臥位への酸素化変化」</li><li>(b) 反応者のプール割合は研究間で変動し、<strong>45%から68%の幅</strong>をとる</li><li>(c) 研究間の異質性は全体として considerable であり、サブグループ解析や限定解析を行っても実質的〜considerable のまま。主因は腹臥位プロトコルの臨床的異質性（継続時間、サイクル数）と反応性評価の異質性（各定義に採用された cutoff、評価のタイミング）であり、この介入の生理学的効果の解釈が複雑で多面的であることを反映している</li></ul>
+<h4>13-2. なぜ単一指標では足りないのか — Gattinoni の二分法</h4>
+<ul><li>ほとんどの研究が酸素化改善（典型的には P/F の ≥20 mmHg または ≥20% 上昇）で反応者を分類し、CO2クリアランス、呼吸メカニクス、V/Qマッチングを評価したものは少数</li><li>この異質性はARDSそのものの複雑さを映している。<strong>多次元的な生理学的反応を P/F という単一パラメータに還元することは、単純化しすぎであり、時に誤導的でさえある</strong></li><li>患者は不一致な反応（discordant response）を示しうる。酸素化は改善しないのにCO2クリアランスは改善する、あるいはその逆</li><li>Gattinoni ら（引用31）の提案：</li><li><strong>PaCO2 が下がらずに PaO2 だけ改善する場合</strong> → 灌流の再分布が主体。胸壁の障害がリクルートメントを上回っている状態</li><li><strong>PaCO2 も低下する反応者</strong> → 肺胞リクルートメントが優位。リクルートメントが胸壁の制限を上回っている状態</li><li>この理解は呼吸メカニクスの解釈困難も説明する。<strong>腹臥位は胸壁の硬さを増すため、肺コンプライアンスが改善していても呼吸器系全体のコンプライアンスは低下しうる</strong></li><li>以上から、二値的な反応性定義には限界があり、個別化された生理学的評価が必要</li></ul>
+<h4>13-3. タイミング — 早期か、腹臥位終了時か、仰臥位復帰後か</h4>
+<ul><li>異質性が大きいため、「最適な評価タイミング」「単一 vs 複合パラメータ」「転帰に照らした閾値選択」という主要な臨床的疑問に確実な答えを出せない</li><li><strong>早期の酸素化変化</strong>は、それまで無気肺だった背側肺領域への急性の灌流再分布を主に反映するものであり、長時間の腹臥位がもたらす持続的・形態学的効果（肺胞の安定化、分泌物ドレナージ、圧迫性無気肺の解消）を捉えているとは限らない</li><li><strong>仰臥位復帰後の評価</strong>は生理学的に理にかなっている。重力的に不利な仰臥位に戻しても酸素化改善が維持されるなら、それは単なる灌流再分布ではなく<strong>持続的な構造的リモデリング</strong>を示唆するから</li><li>反応は時間とともに変わりうる。酸素化やメカニクスの改善が、ある患者では最初から起こらず、別の患者では初期には起こるが数サイクル後に消える。挿管までの遅れ、挿管から初回腹臥位までの時間、肺損傷の進行といった時間依存因子が生理学的反応に影響する</li></ul>
+<h4>13-4. パラメータの選択</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>何を反映するか</th><th>弱点</th></tr></thead>
+<tbody>
+<tr><td>PaO2/FiO2</td><td>V/Qマッチングの全体的・間接的指標</td><td>FiO2設定・心拍出量・肺内シャントに強く影響される。リクルートメントと再分布を区別できない</td></tr>
+<tr><td>CO2由来指標（PaCO2・VR）</td><td>より灌流の良い領域への換気の再分布</td><td>— （著者らは独立した予後価値を持つと評価）</td></tr>
+<tr><td>呼吸器系コンプライアンス</td><td>全体的な応力–ひずみ関係の改善。酸素化より VILI 低減に直接結びつく</td><td>腹臥位による胸壁硬化の影響を受ける</td></tr>
+<tr><td>複合定義</td><td>上記ドメインを統合し、より完全な生理学的評価を提供しうる</td><td>現状ではほとんど使われていない</td></tr>
+</tbody></table></div>
+<ul><li>著者らはこうした生理学的考察と本解析の結果が、将来のコンセンサス定義と研究デザインの設計に資する背景を提供するとしている</li></ul>
+<h4>13-5. ECMO 患者での特殊性</h4>
+<ul><li>体外式呼吸補助を受けている患者では、<strong>酸素化変化に基づく反応の定義は本質的に不正確</strong>。ECMOがガス交換を直接規定するため（引用86, 87）</li><li>本解析のデータでは、ECMO患者の「反応」率は定義次第で <strong>46%から83%</strong> の範囲をとる</li><li>ただしこの推定は慎重に解釈すべきで、この領域の最新エビデンス（PRONECMO試験、JAMA2023、引用88）も踏まえる必要がある</li><li>ECMOサブグループには、代替指標と生理学的に根拠のある専用定義が必要</li></ul>
+<h4>13-6. 反応性と生存の関連について</h4>
+<ul><li>未調整・調整済みのいずれも、反応者で死亡リスクが低いことを示唆する点推定を与えた</li><li>しかし、<strong>腹臥位反応の代用生理学的マーカーと死亡やその他の臨床アウトカムとの関係は依然として不確実</strong>。バイアスリスク、残余交絡、研究間異質性、不精確さが堅牢な結論を妨げている</li><li>腹臥位は安全で広く適用可能な介入であり続け、今後も広く使われるだろう（APRONET、引用89）が、<strong>体系的な腹臥位後の評価は、セッションを繰り返すことの妥当性や代替戦略の検討を判断する助けになりうる</strong></li><li>最終的には、最も利益を得やすい患者を同定し、腹臥位戦略を個別化することが転帰改善につながりうる</li><li>著者らの結論的な提言：<strong>将来の研究デザインを均質化し臨床実践の判断を形作るために、腹臥位への反応をどう定義するかについての構造化されたコンセンサス・プロセスが必要</strong></li><li>さらに、腹臥位を行う前の段階で誰が利益を得やすいかを同定するために、患者フェノタイプの研究も有用でありうる</li></ul>
+<h3>14. 限界（著者らが挙げたもの）</h3>
+<p>著者らは限界の大半が「利用可能なエビデンスの性質そのもの」に由来するとしたうえで、7点を挙げている。</p>
+<ol><li><strong>実質的な異質性</strong>：反応者割合を報告する研究間で substantial な異質性。臨床的に意味のあるサブグループ・感度解析で緩和を図ったが、一定の異質性は残った。組み入れ研究は40年以上（1980年代後半〜2025年）にわたり、その間にARDS定義の大幅な改訂と標準治療の根本的な変化（肺保護換気、長時間腹臥位、筋弛緩薬、ECMO）があったことが異質性に寄与したと考えられる</li><li><strong>挿管から初回腹臥位までの間隔</strong>が研究間で大きく異なった</li><li><strong>多くの研究が初回腹臥位セッションへの反応しか評価していない</strong>。臨床では複数回行われるその後のセッションはほとんど考慮されていない。したがって本解析は指標セッションへの反応に焦点を当てたものであり、反復サイクルにわたる反応性の維持については結論できない（引用90：PROVENT-C19レジストリの連続サイクルにおける時間依存効果）</li><li><strong>人工呼吸設定（一回換気量、PEEP、駆動圧）や血行動態の同時変化を考慮せずに反応性が評価されている</strong>ことが一般的</li><li><strong>肺性 vs 肺外性ARDS の層別がされていない</strong>。両者はリクルータビリティのパターンと腹臥位への形態学的反応が異なるが、大半の研究が起源で層別しておらずコホートは混合。この異質性源への解析ができなかった</li><li><strong>メタ回帰を実施していない</strong>。評価タイミングと閾値カテゴリが異質性にどう寄与するかを形式的に調べようとしたが、研究内で定義が独立でない（多くの研究が複数タイミングのデータを提供している）ため、これらのデータ点を独立観測として扱えなかった</li><li><strong>調整済み死亡データを報告した研究が少ない</strong>ため、交絡を適切に制御しつつこのアウトカムとの関連を探索する能力が限られた</li></ol>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>「68%が反応者」という数字を単独で持ち歩かない</strong>。I²=91.4% の下でのプール比率は、集団の代表値というより「文献群の重心」に過ぎない。Figure 1 の実測値は 0.07 から 1.00 まで分布しており、これは臨床的な患者集団の違いではなく、定義と閾値の違いを主に反映している。プール推定に τ²=0.5354（ロジットスケール）がついている点も、予測区間を出せばほぼ全域を覆うことを示唆する</li><li><strong>主解析（比率）と副次解析（死亡）でバイアス評価ツールが異なる</strong>のは方法論的に妥当だが、その帰結として「比率は34研究が低リスク」「死亡は61研究が critical」という極端な非対称が生じている。同じ研究群を扱いながら、片方は堅牢に見え片方は使えない、という状態を読者は混同しやすい</li><li><strong>未調整 OR 0.41 が「serious risk of bias の5研究だけ」の感度解析から出ている点は注意深く読む必要がある</strong>。critical を除いた残りが serious であって、low でも moderate でもない。しかもこの5研究の I²=78% で、指す方向はそろっていない。この数字を「反応者は死亡が6割」と読み替えるのは過剰</li><li><strong>調整済み解析が3研究しかない</strong>ことは、この論文の副次アウトカムが実質的に「答えが出ない」ことを意味する。OR 0.74（0.54–1.03）は「効果がない」ではなく「情報が足りない」の表現であり、両者を混同しない</li><li><strong>「反応の定義」と「反応の閾値」と「評価タイミング」が交絡している</strong>。著者ら自身がメタ回帰を断念した理由がまさにこれで、同一研究が複数タイミングを報告するため独立性が崩れる。結果として「異質性の主因はどれか」は本論文では特定されていない。読者は「定義のせい」「タイミングのせい」と断定できない</li><li><strong>Post-PP 定義（59%）が PP 定義（68%）より低いことの解釈は、著者らの生理学的推論に依存している</strong>。両者を報告した研究は一部しかなく、同一患者内での比較ではなく研究間比較である。「持続する改善のほうが少ない」というのはもっともらしいが、この解析デザインでは因果的な裏づけはない</li><li><strong>サブグループ効果が有意でない（p=0.8457）ことを「どのドメインでも同じ」と読んでよいか</strong>。呼吸メカニクスは4研究、V/Q は2研究しかなく、サブグループ差を検出する検出力がそもそも極めて低い。「差がない」ではなく「差を検出できない」が正確</li><li><strong>Table 2 の定義リストは記述的価値が高いが、各定義が何研究の何人に適用されたかの重み付けがない</strong>。「P/F ≥1 mmHg 上昇で反応者」とする研究と「P/F 20 mmHg 上昇」の研究が同じ1行として並ぶため、実務上の分布感が掴みにくい</li><li><strong>紙面上の不備</strong>：Article in Press 版のため、Table 2 の左端がページ外に切れて印字されている。最終版で修正される見込みだが、現時点で引用する際は原著者の意図した指標名（P/F か PaO2 か）を本文記述から確認する必要がある</li><li><strong>臨床への含意は「変えない」方向に働く</strong>。本論文は反応の定義を提案していない（コンセンサス作成の必要性を主張しているだけ）。したがってJCの結論は「明日から何かを変える」ではなく「反応判定を根拠に腹臥位を中止する運用があるなら、その根拠は文献上存在しないと確認する」であるべき</li><li><strong>利益相反</strong>：責任著者の Guérin は PROSEVA の筆頭著者、Grasselli は ESICM ARDS ガイドラインの筆頭著者。腹臥位を推進してきた当事者が「反応の定義には根拠がない」と論じている構図であり、腹臥位そのものの価値を貶める方向のバイアスは考えにくい</li></ul>
+<h3>16. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>引用番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ESICM ARDSガイドライン（定義・フェノタイピング・呼吸サポート戦略）</td><td>Grasselli G, et al. Intensive Care Med. 2023;49(7):727–759</td></tr>
+<tr><td>2</td><td>PROSEVA — 重症ARDSにおける腹臥位（死亡低下を示した中心的RCT）</td><td>Guérin C, et al. N Engl J Med. 2013;368(23):2159–2168</td></tr>
+<tr><td>3</td><td>腹臥位への反応のモニタリング（本論文の直接の問題提起）</td><td>Guérin C, Grasselli G. Curr Opin Crit Care. 2025;31(3):312–318</td></tr>
+<tr><td>4</td><td>ARMA試験 — 低一回換気量換気</td><td>ARDS Network. N Engl J Med. 2000;342(18):1301–1308</td></tr>
+<tr><td>5</td><td>ARDS分類の再考 — 酸素化障害はVILIリスクを予測できない</td><td>Catozzi G, et al. Intensive Care Med. 2025;51(1):62–71</td></tr>
+<tr><td>6</td><td>PRISMA 2020 声明</td><td>Page MJ, et al. BMJ. 2021;372:n71</td></tr>
+<tr><td>7</td><td>Rayyan — SR用スクリーニングツール</td><td>Ouzzani M, et al. Syst Rev. 2016;5(1):210</td></tr>
+<tr><td>8</td><td>有病割合研究のバイアスリスク評価ツール（主解析で使用）</td><td>Hoy D, et al. J Clin Epidemiol. 2012;65(9):934–939</td></tr>
+<tr><td>9</td><td>ROBINS-I（副次解析で使用）</td><td>Sterne JAC, et al. BMJ. 2016;355:i4919</td></tr>
+<tr><td>10</td><td>robvis — バイアスリスクの可視化</td><td>McGuinness LA, Higgins JPT. Res Synth Methods. 2021;12(1):55–61</td></tr>
+<tr><td>12</td><td>ARDS Berlin定義</td><td>ARDS Definition Task Force. JAMA. 2012;307(23):2526–2533</td></tr>
+<tr><td>13</td><td>Cochrane Handbook 第24章（非ランダム化研究の統合の可否）</td><td>Reeves BC, et al. 2024</td></tr>
+<tr><td>16</td><td>低酸素性呼吸不全でガス交換反応は死亡を予測するか（serious RoB の5研究の1つ）</td><td>Lemasson S, et al. Intensive Care Med. 2006;32(12):1987–1993</td></tr>
+<tr><td>28</td><td>組み入れ66件中唯一のRCT</td><td>（Table 1 参照）</td></tr>
+<tr><td>31</td><td>酸素化反応とCO2反応の生理学的二分法の原典</td><td>Gattinoni L, et al. 2003</td></tr>
+<tr><td>48</td><td>腹臥位後の酸素化改善はARDS生存の予測因子となりうる</td><td>Lee HY, et al. Crit Care Med. 2020;48(12):1729–1736</td></tr>
+<tr><td>49</td><td>EITによる腹臥位の生理学的効果のベッドサイド動的評価</td><td>Dalla Corte F, et al. Minerva Anestesiol. 2020;86(10):1057–1064</td></tr>
+<tr><td>51</td><td>PRONA-COVID — COVID-19挿管患者1,000例超の腹臥位多施設研究</td><td>Langer T, et al. Crit Care. 2021;25(1):128</td></tr>
+<tr><td>78</td><td>腹臥位早期のV/Qマッチング（COVID-19 ARDS と他病因の比較）</td><td>Yang Y, et al. Physiol Meas. 2025</td></tr>
+<tr><td>80</td><td>初回腹臥位中のV/Qマッチング改善とICU死亡の関連（2施設前向き）</td><td>Wang R, et al. Ann Intensive Care. 2025;15(1):69</td></tr>
+<tr><td>83</td><td>腹臥位の多施設RCT（PROSEVA以前）</td><td>Fernandez R, et al. Intensive Care Med. 2008;34(8):1487–1491</td></tr>
+<tr><td>88</td><td>PRONECMO — 重症ARDSのECMO中の腹臥位RCT</td><td>Schmidt M, et al. JAMA. 2023;330(24):2343–2353</td></tr>
+<tr><td>89</td><td>APRONET — 腹臥位の国際前向き有病割合研究</td><td>Guérin C, et al. Intensive Care Med. 2018;44(1):22–37</td></tr>
+<tr><td>90</td><td>連続する腹臥位サイクルの時間依存効果（PROVENT-C19レジストリ）</td><td>Sella N, et al. J Anesth Analg Crit Care. 2026;6(1):15</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">腹臥位の「反応あり／なし」には標準定義が存在せず、酸素化で測れば68%、CO2やメカニクスで測れば45〜53%と、指標を変えるだけで反応者が2割以上入れ替わる。</mark></p>
+<ul><li><mark class="hl">反応判定を腹臥位の開始・中止の根拠に使わない</mark>。PROSEVA以降の適応基準は生理学的反応と無関係に成立しており、本論文もそれを前提に議論している</li><li><mark class="hl">「反応者は死亡が低い」ように見えるのは交絡の可能性が高い</mark>。未調整 OR 0.41（0.25–0.68）が、調整すると OR 0.74（0.54–1.03）まで縮んで有意水準を割る</li><li><mark class="hl">単一指標の二値判定をやめ、P/F と PaCO2（あるいは換気比）を最低限セットで記録する</mark>。PaO2だけの改善は灌流再分布、PaCO2も改善するならリクルートメント、という2系統の生理を区別できる</li><li><mark class="hl">腹臥位中の呼吸器系コンプライアンス低下を「悪化」と読まない</mark>。腹臥位は胸壁を硬くするため、肺が良くなっていても Crs は下がりうる</li><li><mark class="hl">VV-ECMO中の腹臥位に酸素化ベースの反応判定を持ち込まない</mark>。ECMOがガス交換を規定するため定義自体が成立せず、本文献群でも「反応率」は46〜83%と定義次第で崩れる</li><li><mark class="hl">評価タイミングを施設内で1つに固定する</mark>。文献の33%が早期、56%がセッション終了直前、27%が仰臥位復帰後で、そのまま比較されている</li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
