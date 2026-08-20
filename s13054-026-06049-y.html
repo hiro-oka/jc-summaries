@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症RCTの3分の2は併存疾患を報告していない — 多疾患併存は事実上不可視（システマティックレビュー・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06049-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症RCTの3分の2は併存疾患を報告していない — 多疾患併存は事実上不可視（システマティックレビュー・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Radulescu SM, Prizeman-Green S, Seth S, Lone NI, Docherty AB. Prevalence and representation of comorbidities and multimorbidity in randomised controlled trials in sepsis or septic shock: a systematic review. Crit Care. 2026. DOI: 10.1186/s13054-026-06049-y</dd><dt>掲載誌</dt><dd>Critical Care（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06049-y" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06049-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Prevalence and representation of comorbidities and multimorbidity in randomised controlled trials in sepsis or septic shock: a systematic review</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院の患者像とRCTの患者像はズレている前提で読む</strong>。当院ICUの敗血症患者は高齢・多疾患併存が当たり前だが、敗血症RCTで報告された高血圧有病率は39.1%、糖尿病は24.3%にすぎない。実世界の重症患者集団（高血圧52.5%、糖尿病36.7%）より明確に低い。ガイドライン推奨をベッドサイドに持ち込むとき「この推奨の根拠となったRCTには、目の前の患者のような人がどれだけ入っていたか」を一度問う癖をつける</li><li><strong>「エビデンスがない」ではなく「検証されていない」と言い分ける</strong>。多疾患併存患者で効果修飾（HTE）を検討したRCTは209本中5本、多疾患併存そのものを報告したのは4本（1.9%）。当院で「CKD＋心不全＋がんの敗血症患者にこの介入を使ってよいか」と問われたとき、答えは「サブグループで検証された形跡がない」であって、「効かない」でも「効く」でもない</li><li><strong>当院からRCT・多施設研究に参加するとき、ベースライン表に併存疾患を必ず載せる</strong>。この論文は「報告している試験ほどプロトコル公開率が高く、選択的報告のリスクが低い」ことを示した。併存疾患の報告は、試験の透明性そのものの代理指標になっている。当院が症例登録・データ提供する側に回るとき、Charlson併存疾患指数（CCI）の構成19疾患を電子カルテから拾って渡せる形にしておくと後の二次利用価値が跳ね上がる</li><li><strong>JIPADの強みが逆に浮き彫りになる</strong>。JIPADは併存疾患（APACHE II の chronic health、既往）をルーチンに収集している。本レビューは「RCTでは APACHE II の慢性健康点を分けて報告・解析した試験が1本もなかった」と指摘しており、<mark class="hl">レジストリ側が持つ併存疾患情報は、RCTの外的妥当性を後から補正するための希少資源</mark>である。JIPAD×DPC連結で併存疾患を精緻化する現在の取り組みは、この文脈で価値を主張できる</li><li><strong>除外基準を書くときの自戒</strong>。RCTの78%が「何らかの慢性疾患を持つ人」を除外していた。当院で研究計画を書くとき、除外基準に「重症肝疾患」「免疫不全」を反射的に入れる前に、その除外が安全性のためか、単に解析を楽にするためかを言語化する</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：多疾患併存（2つ以上の慢性疾患の併存）は世界的に増加しており、英国の重症患者では60%超が2つ以上の併存疾患を持つ。併存疾患は予後だけでなく治療反応性そのものを変え、複数領域の個別患者データメタ解析で治療効果修飾（HTE）と有害事象リスクの双方に影響することが示されている。一方で臨床試験は実世界のICU患者を、多疾患併存・社会経済状態・人種民族の面で過小に代表している。</li><li><strong>Unknown</strong>：敗血症RCTにおいて併存疾患が「どう定義され、どう報告され、どう解析に使われているか」を体系的に記述した研究はなかった。先行レビューは高齢者集団における年齢・フレイル・多疾患併存の効果修飾を扱ったものはあるが、敗血症集団を対象に併存疾患の報告実務そのものを地図にした研究はない。</li><li><strong>What's new</strong>：1992〜2025年の敗血症・敗血症性ショックICU RCT 591本を網羅し、<strong>ベースライン併存疾患を報告していたのは209本（35.4%）のみ</strong>であることを示した。報告していた試験は、していない試験と系統的に異なる（大規模・プロトコル公開・死亡率を主要評価項目・バイアスリスクが低い）。報告率は年8%ずつ改善している（OR 1.08/年）が、<strong>多疾患併存を明示した試験は4本（1.9%）、構造化フレームワーク（CCIなど）を使ったのは12本（5.7%）</strong>にとどまり、78%の試験が併存疾患を理由に患者を除外していた。「敗血症RCTの外的妥当性は、併存疾患の記述がないという一点で構造的に検証不能である」ことを、初めて数字で示した論文。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症ICU-RCT 591本のうち、ベースラインの併存疾患を報告していたのはわずか209本（35.4%）で、<strong>多疾患併存を明示的に報告した試験は4本（1.9%）しかなかった</strong>。しかも78%の試験が慢性疾患を理由に患者を除外しており、敗血症エビデンスの一般化可能性は「検証されていない」のではなく「検証しようがない」状態にある。</p>
+</div>
+<ul><li>検索対象は MEDLINE・Embase・CENTRAL・LILACS・Web of Science・medRxiv・臨床試験登録・学会抄録。1992年1月〜2025年8月。15,830件から591本のRCTを同定</li><li>209本（35.4%）のみがベースライン併存疾患を報告。合計48,429例（試験あたり中央値91例）</li><li>報告あり群となし群は系統的に違う：症例数が大きい（中央値91 vs 42例、p&lt;0.001）、プロトコル公開率が高い（76% vs 43%、p&lt;0.001）、死亡率を主要評価項目にすることが多い（34% vs 20%、p&lt;0.001）、複数のバイアスドメインで低リスク</li><li>報告率は年を追って上昇（Spearman ρ = 0.80、p&lt;0.001／二項GLM で OR 1.08 per year、95% CI 1.06–1.11、p&lt;0.001）。ただし<strong>1試験あたりに列挙される疾患数はむしろ減っている</strong>（1992–2000年の中央値8 → 2016–2025年の6、Kruskal–Wallis χ²(2)=6.25、p=0.040）</li><li>報告頻度の高い併存疾患は糖尿病 180/209本（86.1%）、高血圧（65.1%）、慢性腎臓病（56%）、がん（53.1%）</li><li>患者レベルの有病率は高血圧39.1%（136試験）、糖尿病24.3%（180試験）、心血管疾患17.9%（45試験）、がん17.3%（111試験）。実世界の重症患者集団（高血圧52.5%・糖尿病36.7%）より低い</li><li>多疾患併存を報告したのは4本（1.9%）、構造化フレームワーク使用は12本（5.7%、うちCCI 10本・APACHE II 慢性健康点 2本）、併存疾患を考慮したサブグループ解析は5本のみ</li><li><strong>併存疾患の情報源（診療録か自己申告か行政データか）を書いていたのは209本中3本（1.4%）だけ</strong></li><li>163/209本（78%）が併存疾患カテゴリを理由に患者を除外。除外理由として多いのは心血管疾患（70試験・33.5%）、泌尿生殖器疾患（66試験・31.6%）、消化器疾患（58試験・27.8%）、免疫系疾患（56試験・26.8%）</li><li>結論：ICU-RCTにおける併存疾患報告は依然として貧弱で、多疾患併存はほぼ不可視。ICUの文脈に合った併存疾患フレームワークの採用とデータソースの明記という「パラダイムシフト」が必要</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>敗血症（sepsis）</strong> は「感染に対する制御不能な宿主反応によって生じる、生命を脅かす臓器障害」（Sepsis-3、2016年）と定義される。ICU入室の主要因であり、蘇生バンドル・早期抗菌薬といった標準化が進んだ今も死亡率は高く、生存しても長期予後は悪い。</p>
+<p><strong>なぜ敗血症の治験は失敗し続けるのか</strong>。理論的には筋の通った介入（抗サイトカイン、活性化プロテインC、ビタミンC、免疫グロブリン…）が、RCTでは一貫した有効性を示せずに散っていった。近年のオミクス・機械学習の進展が明らかにしたのは、敗血症が単一の疾患ではなく<strong>きわめて不均一な症候群</strong>だということ。この不均一性の一部は、ICU患者が抱える併存疾患・多疾患併存プロファイルの幅の広さで駆動されている可能性がある。</p>
+<p><strong>併存疾患（comorbidity）と多疾患併存（multimorbidity）の違い</strong>。前者は「主病態に付随する個々の慢性疾患」（例：糖尿病、COPD）。後者は「2つ以上の長期的疾患が同一人に共存している状態」で、疾患の足し算ではなく<strong>負荷そのもの</strong>を見る概念。英国の重症患者では60%超が多疾患併存に該当する。</p>
+<p><strong>治療効果の不均一性（HTE: heterogeneity of treatment effects）</strong>。同じ介入でも、患者背景によって効いたり効かなかったり、害の出方が変わったりする現象。併存疾患は HTE の主要な駆動因子で、複数の治療領域の個別患者データメタ解析で、併存疾患が治療効果と有害事象リスクの両方を修飾することが示されている。集中治療は治療域の狭い（narrow therapeutic margin）複雑な介入を使う領域なので、この影響はとりわけ大きいはずである。</p>
+<p><strong>ここが本論文の問題設定</strong>：HTE を評価するには、そもそも試験集団で併存疾患が測定・報告されていなければならない。ベースライン併存疾患情報が一貫して報告されていなければ、①試験集団が実世界ICU集団を代表しているかを判断できず、②併存疾患層別に治療効果が違うかを検討することは<strong>原理的に不可能</strong>になる。</p>
+<p><strong>本論文に出てくる道具の一言定義</strong></p>
+<ul><li><strong>Charlson併存疾患指数（CCI）</strong>：19の慢性疾患に重み付けして合算し、長期予後を予測する古典的スコア（Charlson 1987）。</li><li><strong>APACHE II の chronic health points</strong>：重症度スコア APACHE II の一部で、慢性臓器不全・免疫不全に対して加点する項目。ICU研究で APACHE II 自体はよく報告されるが、この慢性健康成分だけを取り出して解析した試験は本レビューでゼロだった。</li><li><strong>Delphi合意による多疾患併存の測定枠組み</strong>（Ho ISS ら、BMJ Med 2022）：多疾患併存を測定する際に「常に含めるべき24疾患」「通常含めるべき35疾患」を合意形成で定めたリスト。本論文の疾患マッピングの物差し。</li><li><strong>PRISMA</strong>：システマティックレビューの報告ガイドライン。<strong>PROSPERO</strong>：レビュープロトコルの事前登録データベース。</li><li><strong>Cochrane RCT classifier</strong>：機械学習でRCT以外の文献を自動除外するツール。</li></ul>
+</div>
+<h3>2. 背景と目的</h3>
+<p>著者らの問題意識は3段構えである。</p>
+<p>第1に、<strong>敗血症介入の失敗の一部は集団の不均一性で説明されうる</strong>。omics・ビッグデータ・機械学習の進展が浮き彫りにしたのは、敗血症という症候群の著しい不均一性であり、それはICUで遭遇する併存疾患・多疾患併存プロファイルの幅の広さによって部分的に駆動されている可能性がある。</p>
+<p>第2に、<strong>多疾患併存は増え続けているのに、試験集団では過小代表されている</strong>。多疾患併存は世界的に増加し、集中治療にとってますます複雑な課題となっている。英国では重症患者の60%超が2つ以上の併存疾患を持つ。予後への影響を超えて、多疾患併存は治療への反応性そのものに影響する。複数領域の個別患者データメタ解析は、併存疾患が治療効果と有害事象リスクの双方を修飾し、HTEに寄与することを示してきた。にもかかわらず多疾患併存（および個々の併存疾患）は臨床試験で過小代表・過小報告のままであり、一般化可能性だけでなく、慢性疾患負荷がHTEと有害事象リスクを修飾するかを評価する能力そのものを制約している。</p>
+<p>第3に、<strong>この問題を敗血症領域で体系的に見た研究がない</strong>。先行レビューは高齢重症患者における年齢、多疾患併存・フレイル関連の脆弱性のサブグループ効果を検討したものはあるが、ICU試験全体で併存疾患が<strong>どう定義され、報告され、操作化されているか</strong>を系統的に特徴づけた研究は存在しなかった。</p>
+<p>以上から本レビューの目的は、成人ICUの敗血症・敗血症性ショック患者を対象としたRCTにおいて、多疾患併存と個々の併存疾患の有病率を調べることであり、具体的な3つの下位目的は以下。</p>
+<div class="tw"><table>
+<thead><tr><th>下位目的</th><th>問い</th></tr></thead>
+<tbody>
+<tr><td>(1) 報告頻度の定量化</td><td>敗血症試験でベースライン併存疾患情報はどのくらいの頻度で報告されているか</td></tr>
+<tr><td>(2) 種類と枠組みの特徴づけ</td><td>報告される併存疾患の種類と、それを記述するために使われている枠組みは何か</td></tr>
+<tr><td>(3) 経時変化</td><td>併存疾患の報告実務は時代とともにどう変わったか</td></tr>
+</tbody></table></div>
+<p>これらを地図化することで、試験が治療効果の不均一性を評価する能力を制約している欠落を同定し、集中治療研究における今後の報告基準に情報提供することを狙う。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>3-1. デザインと事前登録</h4>
+<ul><li>システマティックレビュー（メタ解析は行わない記述的マッピングレビュー）</li><li>プロトコルは PROSPERO に事前登録（CRD42024510506）</li><li>PRISMA 報告ガイドラインに準拠（Additional file 1）</li><li>解析はすべて R version 4.2.1（R Foundation for Statistical Computing, Vienna, Austria）</li></ul>
+<h4>3-2. 検索戦略</h4>
+<ul><li>検索データベース：MEDLINE、Embase、Cochrane Central Register of Controlled Trials（CENTRAL）、LILACS、medRxiv、Web of Science、加えて臨床試験登録および学会抄録集</li><li>期間：<strong>1992年1月〜2025年8月</strong></li><li>1992年を起点にした理由は、1991年8月の合意会議から生まれた<strong>最初の敗血症の公式定義</strong>の発表年だから</li><li>時代区分は敗血症定義会議の第1回・第2回・第3回に基づき <strong>1992–2000年／2001–2015年／2016–2025年</strong>の3期に層別</li><li>検索語は MeSH と自由語を以下の3カテゴリで組み合わせ：(1) sepsis / septic shock、(2) 設定（Critical Care / Intensive care unit）、(3) randomised controlled trials</li></ul>
+<h4>3-3. 選択基準（事前規定）</h4>
+<div class="tw"><table>
+<thead><tr><th>基準</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>敗血症・敗血症性ショック患者に対する何らかの介入の有効性・実効性を検証したRCTの一次報告</td></tr>
+<tr><td>(b)</td><td>オリジナルデータの報告（プロトコル論文・試験後追跡研究・二次解析・別個のサブグループ解析は除外）</td></tr>
+<tr><td>(c)</td><td>英語で発表</td></tr>
+<tr><td>(d)</td><td>ICUで実施</td></tr>
+<tr><td>(e)</td><td>成人（18歳超）のみを組み入れ</td></tr>
+</tbody></table></div>
+<ul><li>非RCTの一部は Cochrane RCT classifier で自動除外</li><li>2名のレビュアー（SMR、SR）が抄録と全文を独立に選定</li><li>基準を満たしたRCTはすべて「試験の全体像を特徴づける」ために保持し、その後<strong>ベースライン併存疾患情報を報告しているか否かで層別</strong></li><li>併存疾患を1つでも報告（人数または%）していれば併存疾患解析に組み入れ。報告なしの試験は試験特性の比較のために保持するが、併存疾患情報を要する解析からは除外</li></ul>
+<h4>3-4. データ抽出（2段階）</h4>
+<p><strong>第1段階（全適格RCT）</strong>：地域、発表年、試験登録、症例数、資金源、主要評価項目、介入の種類、バイアスリスク。バイアスリスクは<strong>第1版 Cochrane Risk of Bias Tool</strong> で、系列生成／割付隠蔽／参加者と実施者の盲検化／アウトカム評価の盲検化／不完全アウトカムデータ／選択的報告の6ドメインを評価。</p>
+<p><strong>第2段階（併存疾患を1つ以上報告した試験のみ）</strong>：併存疾患情報に加え、性別・年齢・人種民族。参加者特性は<strong>症例数で重み付けした加重要約</strong>を算出。</p>
+<p><strong>再現性の検証</strong>：組み入れ試験の無作為10%（21/209本）を、元の抽出を盲検化された第2レビュアー（SPG）が独立に再抽出。併存疾患報告、マッピングされた併存疾患カテゴリ、介入分類、除外基準コーディングなど主要変数で一致を評価し、<strong>実質的な不一致は認めなかった</strong>。</p>
+<h4>3-5. 併存疾患の定義とマッピング</h4>
+<ul><li>併存疾患の有無は、本文または補遺の<strong>参加者背景表</strong>を確認して評価</li><li>広い記述（例：cardiovascular disease）と特定の慢性疾患（例：hypertension）を区別</li><li><strong>多疾患併存の定義</strong>：単一の試験参加者において2つ以上の既存疾患が併存すること</li><li><mark class="hl">多疾患併存を「報告した」と見なす条件は厳格</mark>：患者レベルまたは構造化された併存疾患データにより、慢性疾患を2つ以上持つ個人を同定できる場合のみ。個々の併存疾患を列挙しただけの試験は多疾患併存を報告したとは見なさない</li><li>マッピング：3名のレビュアー（SR、NL、AMD）が反復的な合意ベースの枠組みを開発し、報告された各用語を1つの index comorbidity に、報告が不正確・非特異的な場合はより広い body system カテゴリに割り当てる。<strong>各用語は重複を避けるため単一カテゴリにのみ割り当て</strong></li><li>個々の疾患として記録されていた場合は Delphi 合意研究から翻案した26疾患にマッピング。広い用語で報告されていた場合は ICD-10 章に基づく body system にマッピング</li><li>有病率は<strong>症例数で重み付けした推定値</strong>として算出（試験が登録症例数に比例して寄与するようにする）</li><li>併存疾患が試験アウトカムの解析（サブグループ解析、併存疾患調整解析）で考慮されたかも評価</li></ul>
+<h4>3-6. 除外基準の解析（NLP）</h4>
+<ul><li>全試験の組み入れ・除外基準を確認し、慢性疾患を持つ個人の除外を評価</li><li>除外基準に記載された慢性疾患は<strong>単語トークン化（word tokenisation）</strong> という自然言語処理手法で要約</li><li>フリーテキストの除外基準をトークン化し、併存疾患関連用語の事前規定辞書でマッピング。辞書開発の過程で抽出された全フレーズを手作業で確認し分類の正しさを担保</li><li>重症度の修飾語（"severe"、"advanced"、"end-stage"）は抽出テキストには残すが、カテゴリ割り当ては基礎にある併存疾患の概念に基づく（＝修飾語では分類を変えない）</li><li>否定文（negated statements）は解析対象の除外基準に存在しなかった（肯定的除外文のみを対象としたため）</li><li>辞書の用語に一致しなかった除外基準は手作業で確認し、併存疾患関連の除外でないことを確認</li><li>年齢と罹患は強く関連するため、成人（18歳以上）以外の<strong>年齢関連除外基準</strong>の使用の有無も評価</li></ul>
+<h4>3-7. 統計解析</h4>
+<div class="tw"><table>
+<thead><tr><th>目的</th><th>手法</th></tr></thead>
+<tbody>
+<tr><td>試験特性の要約</td><td>平均・中央値・割合・頻度の記述統計</td></tr>
+<tr><td>報告あり群 vs なし群（カテゴリ変数）</td><td>Pearson の χ² 検定</td></tr>
+<tr><td>報告あり群 vs なし群（症例数）</td><td>Wilcoxon 順位和検定</td></tr>
+<tr><td>発表年と組み入れ割合の関連</td><td>Spearman の順位相関係数（ρ）</td></tr>
+<tr><td>併存疾患報告割合の経時変化</td><td>二項一般化線形モデル（binomial GLM）</td></tr>
+<tr><td>期間別の報告疾患数の差</td><td>Kruskal–Wallis 検定（併存疾患を報告した試験に限定）</td></tr>
+</tbody></table></div>
+<p>著者らは、時間傾向解析は<strong>PROSPERO 原プロトコルの事後的（post-hoc）改良</strong>であり、報告実務の経時的特徴づけを深めるために追加したものだと明記している。</p>
+<h3>4. 結果 — 試験の選定</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 試験選定のフロー図。591本の適格RCTのうち209本が併存疾患データを報告していたことを示す。縦に3つの帯（Identification／Screening／Included）が並び、左端に灰色の縦ラベル、各段階の箱が上から下へ矢印で結ばれ、除外は右側の箱へ横向き矢印で分岐する構成。原図・無改変。</p>
+</div>
+<p><strong>Figure 1（PRISMAフロー）の各ボックスの文言</strong></p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>ボックスの文言</th><th>数</th></tr></thead>
+<tbody>
+<tr><td>Identification</td><td>Studies from databases/registers</td><td>n = 15,830</td></tr>
+<tr><td>Identification（内訳）</td><td>MEDLINE</td><td>n = 5,715</td></tr>
+<tr><td>Identification（内訳）</td><td>Embase</td><td>n = 5,266</td></tr>
+<tr><td>Identification（内訳）</td><td>CENTRAL</td><td>n = 3,715</td></tr>
+<tr><td>Identification（内訳）</td><td>Web of Science</td><td>n = 846</td></tr>
+<tr><td>Identification（内訳）</td><td>MedRxiv</td><td>n = 207</td></tr>
+<tr><td>Identification（内訳）</td><td>LILACS</td><td>n = 47</td></tr>
+<tr><td>Identification（内訳）</td><td>Citation searching</td><td>n = 34</td></tr>
+<tr><td>Identification（除外）</td><td>References removed</td><td>n = 10,328</td></tr>
+<tr><td>Identification（除外内訳）</td><td>Duplicates identified manually</td><td>n = 395</td></tr>
+<tr><td>Identification（除外内訳）</td><td>Duplicates identified by Covidence</td><td>n = 5,231</td></tr>
+<tr><td>Identification（除外内訳）</td><td>Marked as ineligible by automation tools</td><td>n = 4,702</td></tr>
+<tr><td>Screening</td><td>Abstracts screened</td><td>n = 5,502</td></tr>
+<tr><td>Screening（除外）</td><td>Abstracts excluded: ineligible</td><td>n = 4,633</td></tr>
+<tr><td>Screening</td><td>Full text studies assessed for eligibility</td><td>n = 869</td></tr>
+<tr><td>Screening（除外）</td><td>Studies excluded</td><td>n = 238（表示）</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Not English</td><td>n = 15</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Ongoing study</td><td>n = 2</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Wrong setting</td><td>n = 30</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Abstract only</td><td>n = 128</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Wrong study design</td><td>n = 22</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Paediatric population</td><td>n = 4</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Wrong patient population</td><td>n = 24</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Not sepsis/not just sepsis</td><td>n = 13</td></tr>
+<tr><td>Screening（除外内訳）</td><td>Duplicates</td><td>n = 40</td></tr>
+<tr><td>Included</td><td>Randomised controlled trials meeting inclusion criteria</td><td>n = 591</td></tr>
+<tr><td>Included（分岐）</td><td>Trials not reporting baseline comorbidity information</td><td>n = 382</td></tr>
+<tr><td>Included</td><td>Trials reporting baseline comorbidity data — Included in comorbidity reporting analysis</td><td>n = 209</td></tr>
+</tbody></table></div>
+<p>本文の記述は以下の通り。検索で15,830件を同定。重複除去と Cochrane RCT classifier による非RCT自動除去の後、5,502件が残存。まず抄録をスクリーニングし、次に869件の全文論文を適格性評価。組み入れ基準(a)〜(e)を満たした591本のRCTのうち、<strong>併存疾患を1つ以上について情報（人数および／または%）を報告していたのは209本（35.4%）のみ</strong>。382本（64.6%）は併存疾患の特性を一切報告していなかったため併存疾患解析から除外された。組み入れ全試験のリスト・特性・バイアスリスクは Additional file 5 に収載。</p>
+<h3>5. 結果 — 報告あり群となし群は何が違うか（Table 1）</h3>
+<h4>Table 1. 併存疾患データ報告の有無別に見た組み入れ試験の特性（原表を日本語化）</h4>
+<p>591本のRCTを、併存疾患データを報告したか否かで層別。値は各群内の試験数（%）。カテゴリ変数は Pearson の χ²検定、症例数は Wilcoxon 順位和検定。</p>
+<div class="tw"><table>
+<thead><tr><th>特性カテゴリ</th><th>変数</th><th>併存疾患データなし（N=382）</th><th>併存疾患データあり（N=209）</th><th>合計（N=591）</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>多施設</td><td>Yes</td><td>148（39%）</td><td>88（42%）</td><td>236（39.9%）</td><td>0.5</td></tr>
+<tr><td>地域</td><td>アフリカ</td><td>24（6.3%）</td><td>9（4.3%）</td><td>33（5.6%）</td><td>0.002</td></tr>
+<tr><td>地域</td><td>アジア・太平洋</td><td>133（35%）</td><td>96（46%）</td><td>229（39%）</td><td></td></tr>
+<tr><td>地域</td><td>ヨーロッパ</td><td>150（39%）</td><td>52（25%）</td><td>202（34%）</td><td></td></tr>
+<tr><td>地域</td><td>ラテンアメリカ</td><td>12（3.1%）</td><td>15（7.2%）</td><td>27（4.6%）</td><td></td></tr>
+<tr><td>地域</td><td>複数地域</td><td>30（7.9%）</td><td>15（7.2%）</td><td>45（7.6%）</td><td></td></tr>
+<tr><td>地域</td><td>北米</td><td>33（8.6%）</td><td>22（11%）</td><td>55（9.3%）</td><td></td></tr>
+<tr><td>国際共同</td><td>Yes</td><td>65（17%）</td><td>24（11%）</td><td>89（15%）</td><td>0.093</td></tr>
+<tr><td>プロトコル公開</td><td>Yes</td><td>163（43%）</td><td>159（76%）</td><td>322（54%）</td><td>&lt;0.001</td></tr>
+<tr><td>試験登録</td><td>あり — clinicaltrials.gov</td><td>100（26%）</td><td>112（54%）</td><td>212（36%）</td><td>&lt;0.001</td></tr>
+<tr><td>試験登録</td><td>あり — その他の登録</td><td>68（18%）</td><td>49（23%）</td><td>117（20%）</td><td></td></tr>
+<tr><td>試験登録</td><td>なし</td><td>214（56%）</td><td>48（23%）</td><td>262（44%）</td><td></td></tr>
+<tr><td>資金源</td><td>企業</td><td>97（25%）</td><td>42（20%）</td><td>139（24%）</td><td>0.037</td></tr>
+<tr><td>資金源</td><td>非企業</td><td>190（50%）</td><td>127（61%）</td><td>317（54%）</td><td></td></tr>
+<tr><td>資金源</td><td>未報告</td><td>95（25%）</td><td>40（19%）</td><td>135（23%）</td><td></td></tr>
+<tr><td>主要評価項目</td><td>死亡率</td><td>75（20%）</td><td>72（34%）</td><td>147（25%）</td><td>&lt;0.001</td></tr>
+<tr><td>主要評価項目</td><td>その他</td><td>307（80%）</td><td>137（66%）</td><td>444（75%）</td><td></td></tr>
+<tr><td>陽性結果</td><td>Yes</td><td>209（55%）</td><td>97（46%）</td><td>306（52%）</td><td>0.065</td></tr>
+<tr><td>介入カテゴリ</td><td>ケアバンドル</td><td>10（2.6%）</td><td>9（4.3%）</td><td>19（3.2%）</td><td>&lt;0.001</td></tr>
+<tr><td>介入カテゴリ</td><td>モニタリングシステム</td><td>15（3.9%）</td><td>24（11%）</td><td>39（6.6%）</td><td></td></tr>
+<tr><td>介入カテゴリ</td><td>治療的介入</td><td>269（70%）</td><td>122（58%）</td><td>391（66%）</td><td></td></tr>
+<tr><td>介入カテゴリ</td><td>その他の戦略</td><td>88（23%）</td><td>54（26%）</td><td>142（24%）</td><td></td></tr>
+<tr><td>トップ10誌</td><td>Yes</td><td>173（45%）</td><td>96（46%）</td><td>269（44%）</td><td>&gt;0.9</td></tr>
+<tr><td>症例数</td><td>中央値（IQR）</td><td>42（20–100）</td><td>91（56–211）</td><td>60（29–134.5）</td><td>&lt;0.001</td></tr>
+</tbody></table></div>
+<p><strong>バイアスリスク（Cochrane RoB 第1版）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ドメイン</th><th>判定</th><th>報告なし（N=382）</th><th>報告あり（N=209）</th><th>合計（N=591）</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>系列生成</td><td>High</td><td>4（1.0%）</td><td>1（0.5%）</td><td>5（0.8%）</td><td>&lt;0.001</td></tr>
+<tr><td>系列生成</td><td>Low</td><td>281（74%）</td><td>182（87%）</td><td>473（78%）</td><td></td></tr>
+<tr><td>系列生成</td><td>Unsure</td><td>97（25%）</td><td>26（12%）</td><td>123（21%）</td><td></td></tr>
+<tr><td>割付隠蔽</td><td>High</td><td>13（3.4%）</td><td>3（1.4%）</td><td>16（2.7%）</td><td>&lt;0.001</td></tr>
+<tr><td>割付隠蔽</td><td>Low</td><td>180（49%）</td><td>136（65%）</td><td>316（53%）</td><td></td></tr>
+<tr><td>割付隠蔽</td><td>Unsure</td><td>189（49%）</td><td>70（33%）</td><td>259（44%）</td><td></td></tr>
+<tr><td>参加者・実施者の盲検化</td><td>High</td><td>204（53%）</td><td>117（56%）</td><td>321（54%）</td><td>0.6</td></tr>
+<tr><td>参加者・実施者の盲検化</td><td>Low</td><td>168（44%）</td><td>89（43%）</td><td>257（43%）</td><td></td></tr>
+<tr><td>参加者・実施者の盲検化</td><td>Unsure</td><td>10（2.6%）</td><td>3（1.4%）</td><td>13（2.2%）</td><td></td></tr>
+<tr><td>アウトカム評価の盲検化</td><td>High</td><td>92（24%）</td><td>27（13%）</td><td>119（20%）</td><td>&lt;0.001</td></tr>
+<tr><td>アウトカム評価の盲検化</td><td>Low</td><td>237（62%）</td><td>160（77%）</td><td>397（67%）</td><td></td></tr>
+<tr><td>アウトカム評価の盲検化</td><td>Unsure</td><td>54（14%）</td><td>22（11%）</td><td>73（13%）</td><td></td></tr>
+<tr><td>不完全アウトカムデータ</td><td>High</td><td>47（12%）</td><td>14（6.7%）</td><td>61（10%）</td><td>0.050</td></tr>
+<tr><td>不完全アウトカムデータ</td><td>Low</td><td>311（81%）</td><td>186（89%）</td><td>497（84%）</td><td></td></tr>
+<tr><td>不完全アウトカムデータ</td><td>Unsure</td><td>24（6.2%）</td><td>9（4.3%）</td><td>33（5.6%）</td><td></td></tr>
+<tr><td>選択的報告</td><td>High</td><td>23（6%）</td><td>2（1.0%）</td><td>25（4.2%）</td><td>&lt;0.001</td></tr>
+<tr><td>選択的報告</td><td>Low</td><td>177（46%）</td><td>158（76%）</td><td>335（57%）</td><td></td></tr>
+<tr><td>選択的報告</td><td>Unsure</td><td>182（48%）</td><td>49（23%）</td><td>231（39%）</td><td></td></tr>
+</tbody></table></div>
+<p>読みどころは3つある。</p>
+<p>第1に、<strong>地域差</strong>。併存疾患を報告した試験の46%はアジア・太平洋地域、報告しなかった試験では35%。逆にヨーロッパは報告あり25%に対し報告なし39%（p=0.002）。著者らはこれを「試験の規模ではなく報告実務そのものの差」と解釈している。実際、多施設か単施設か（39% vs 42%、p=0.5〜0.6）、国際共同か単一国か（11% vs 17%、p=0.093）では有意差がなかった。</p>
+<p>第2に、<strong>透明性との連動</strong>。プロトコル公開率は76% vs 43%（p&lt;0.001）、clinicaltrials.gov 登録は54% vs 26%、登録なしは23% vs 56%（p&lt;0.001）。併存疾患を書く試験は、そもそも「見せる」姿勢の試験である。選択的報告の低リスク判定も76% vs 46%と大差がついた。</p>
+<p>第3に、<strong>質と結果の関係</strong>。陽性結果の割合は報告あり46% vs 報告なし55%で有意差なし（p=0.065）。ただし方向としては「併存疾患を報告する試験のほうが陽性結果が少ない」傾向が読み取れる。資金源では非企業資金が報告あり群で多い（61% vs 50%、p=0.037）。介入カテゴリでは治療的介入が報告なし群に多く（70% vs 58%）、モニタリングシステムは報告あり群に多い（11% vs 3.9%、p&lt;0.001）。トップ10誌掲載率は差なし（46% vs 45%、p&gt;0.9）。</p>
+<h3>6. 結果 — 報告率の経時変化（Figure 2）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 組み入れ基準(a)〜(e)を満たした全591試験のうち、何らかの併存疾患情報を報告して組み入れられた試験（n=209、緑）の割合。赤は併存疾患報告がないために除外された試験。縦軸に発表年（1992年が最下段、2025年が最上段）、横軸に試験の割合（0〜100%）を取り、各年の帯が緑と赤に分かれ、右端にその年の試験数 n が付記されている。Spearman の順位相関は発表年と組み入れ割合の間に強い正の関係を示した（ρ = 0.80、p &lt; 0.001）。ベースライン併存疾患データを報告するオッズは経時的に有意に増加した（年あたり OR 1.08、95% CI 1.06–1.11、p &lt; 0.001）。原図・無改変。</p>
+</div>
+<p><strong>Figure 2 の年次データ（緑＝報告あり／赤＝報告なし）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>発表年</th><th>報告あり</th><th>報告なし</th><th>その年の試験数</th></tr></thead>
+<tbody>
+<tr><td>2025</td><td>48.3%</td><td>51.7%</td><td>29</td></tr>
+<tr><td>2024</td><td>45.7%</td><td>54.3%</td><td>35</td></tr>
+<tr><td>2023</td><td>57.5%</td><td>42.5%</td><td>40</td></tr>
+<tr><td>2022</td><td>51.2%</td><td>48.8%</td><td>41</td></tr>
+<tr><td>2021</td><td>45.2%</td><td>54.8%</td><td>31</td></tr>
+<tr><td>2020</td><td>42.4%</td><td>57.6%</td><td>33</td></tr>
+<tr><td>2019</td><td>47.8%</td><td>52.2%</td><td>23</td></tr>
+<tr><td>2018</td><td>21.7%</td><td>78.3%</td><td>23</td></tr>
+<tr><td>2017</td><td>48.3%</td><td>51.7%</td><td>29</td></tr>
+<tr><td>2016</td><td>57.1%</td><td>42.9%</td><td>21</td></tr>
+<tr><td>2015</td><td>40%</td><td>60%</td><td>25</td></tr>
+<tr><td>2014</td><td>39.1%</td><td>60.9%</td><td>23</td></tr>
+<tr><td>2013</td><td>44.4%</td><td>55.6%</td><td>18</td></tr>
+<tr><td>2012</td><td>35.3%</td><td>64.7%</td><td>17</td></tr>
+<tr><td>2011</td><td>36.4%</td><td>63.6%</td><td>11</td></tr>
+<tr><td>2010</td><td>7.1%</td><td>92.9%</td><td>14</td></tr>
+<tr><td>2009</td><td>0%</td><td>100%</td><td>19</td></tr>
+<tr><td>2008</td><td>33.3%</td><td>66.7%</td><td>15</td></tr>
+<tr><td>2007</td><td>28.6%</td><td>71.4%</td><td>14</td></tr>
+<tr><td>2006</td><td>23.1%</td><td>76.9%</td><td>13</td></tr>
+<tr><td>2005</td><td>0%</td><td>100%</td><td>13</td></tr>
+<tr><td>2004</td><td>15.4%</td><td>84.6%</td><td>13</td></tr>
+<tr><td>2003</td><td>27.3%</td><td>72.7%</td><td>11</td></tr>
+<tr><td>2002</td><td>13.3%</td><td>86.7%</td><td>15</td></tr>
+<tr><td>2001</td><td>6.7%</td><td>93.3%</td><td>15</td></tr>
+<tr><td>2000</td><td>0%</td><td>100%</td><td>5</td></tr>
+<tr><td>1999</td><td>0%</td><td>100%</td><td>7</td></tr>
+<tr><td>1998</td><td>22.2%</td><td>77.8%</td><td>9</td></tr>
+<tr><td>1997</td><td>0%</td><td>100%</td><td>6</td></tr>
+<tr><td>1996</td><td>30%</td><td>70%</td><td>10</td></tr>
+<tr><td>1995</td><td>0%</td><td>100%</td><td>3</td></tr>
+<tr><td>1994</td><td>33.3%</td><td>66.7%</td><td>6</td></tr>
+<tr><td>1993</td><td>0%</td><td>100%</td><td>2</td></tr>
+<tr><td>1992</td><td>0%</td><td>100%</td><td>2</td></tr>
+</tbody></table></div>
+<p>大きな流れは明白で、2000年代前半は10〜30%だった報告率が2016年以降は40〜57%に達している。ただし<strong>直近10年で頭打ち</strong>であり、最も新しい2024年（45.7%）・2025年（48.3%）はいずれも50%を割る。年次の変動も大きく、2018年は21.7%まで落ち込んでいる。試験数そのものは2020年代に増えている（2022年41本、2023年40本）。</p>
+<h3>7. 結果 — 併存疾患を報告した209試験の特性</h3>
+<ul><li>試験登録あり：157/209本（75.1%）</li><li>地域：アジア・太平洋が48.8%、次いでヨーロッパ24.4%、北米12%（Additional file 6）</li><li>症例数：中央値91例（IQR 56–211）、209試験の総症例数は<strong>48,429例</strong></li><li>年齢：全209試験で報告あり。内訳は平均±標準偏差が135試験、中央値±IQRが72試験、両方が1試験、範囲のみが1試験。平均とSDを報告した試験のプール平均年齢は<strong>61.2歳（SD 15.9）</strong></li><li>年齢制限：209試験中37本（17.7%）が成人（18歳以上）の標準閾値を超える追加の年齢制限を課していた。うち<strong>30試験が60〜90歳の上限年齢</strong>を設定し、7試験が20〜65歳の下限年齢を設定</li><li>性別：208/209試験（人数・%・両方のいずれかで）で報告あり。多くの試験で男性優位、プールで<strong>男性55%（範囲28.9〜88.7%）</strong></li><li>人種民族：報告は<strong>31試験（14.8%）のみ</strong>で、経時的にも一貫して過小報告</li></ul>
+<h3>8. 結果 — 何がどれだけ報告されているか（Table 2・Figure 3）</h3>
+<p>209試験を通じて<strong>153種類のユニークな併存疾患用語</strong>が報告されていた。うち46語はいずれの併存疾患にもマッピングできなかった。これらの未マッピング用語を検討すると、その大半は慢性の併存疾患というより、<strong>急性合併症・治療・検査値異常・原疾患そのものの症状</strong>を表していた。残りは29の特定 index 疾患（例：心不全）に、広い用語で報告されていたものは10の body system カテゴリ（例：心血管疾患）にマッピングされ、合計39のマッピング済み併存疾患となった。</p>
+<p>1試験あたりに報告された併存疾患の数は<strong>2〜21種類（中央値6、IQR 3–9）</strong>。時代別の中央値（IQR）は1992–2000年が8（5.5–8.5）、2001–2015年が7（4–8）、2016–2025年が6（4–7）で、期間間で有意差があった（Kruskal–Wallis χ²(2)=6.25、p=0.040）。つまり<strong>報告する試験は増えたが、報告する疾患の幅は狭まっている</strong>。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 組み入れ全試験にわたる特定・一般併存疾患の報告状況を示すヒートマップ。縦軸に併存疾患（報告頻度の降順で下から上へ、最下行が糖尿病・高血圧、最上部が泌尿生殖器疾患・結核・統合失調症）、横軸に試験（発表年順、左が古く右が新しい）を並べ、報告あり（Yes）を緑、報告なし（No）を赤で塗り分けている。下半分の数疾患だけが密に緑で埋まり、上側の大多数の疾患行はほぼ全面が赤で、緑は散発的な縦の細片としてしか現れない。原図・無改変。</p>
+</div>
+<h4>Table 2. 組み入れ試験（N=209）における併存疾患報告の要約（原表を日本語化）</h4>
+<p>各行について報告した試験数を示す。有病率はその併存疾患を報告した試験の参加者のみを用いて算出し、分母列はその疾患固有の参加者部分集合を示す。</p>
+<div class="tw"><table>
+<thead><tr><th>併存疾患</th><th>報告した試験数（%）</th><th>患者数（有病率 %）</th><th>分母</th></tr></thead>
+<tbody>
+<tr><td>糖尿病</td><td>180（86%）</td><td>8,638（24.3%）</td><td>35,492</td></tr>
+<tr><td>高血圧</td><td>136（65.1%）</td><td>10,838（39.1%）</td><td>27,752</td></tr>
+<tr><td>慢性腎臓病</td><td>117（56%）</td><td>2,534（9%）</td><td>28,050</td></tr>
+<tr><td>がん</td><td>111（53.1%）</td><td>5,797（17.3%）</td><td>33,583</td></tr>
+<tr><td>COPD</td><td>107（51.2%）</td><td>3,617（13.5%）</td><td>26,782</td></tr>
+<tr><td>慢性肝疾患</td><td>94（45%）</td><td>1,721（5.9%）</td><td>29,132</td></tr>
+<tr><td>心不全</td><td>87（41.6%）</td><td>3,138（11.5%）</td><td>27,231</td></tr>
+<tr><td>冠動脈疾患</td><td>91（43.5%）</td><td>2,961（13.5%）</td><td>21,966</td></tr>
+<tr><td>心血管疾患（広義）</td><td>45（21.5%）</td><td>2,209（17.9%）</td><td>12,321</td></tr>
+<tr><td>呼吸器疾患（広義）</td><td>42（20.1%）</td><td>1,977（16.1%）</td><td>12,293</td></tr>
+<tr><td>脳卒中</td><td>29（13.7%）</td><td>776（7.4%）</td><td>10,493</td></tr>
+<tr><td>薬物・アルコール乱用</td><td>21（10%）</td><td>1,032（18.5%）</td><td>5,584</td></tr>
+<tr><td>神経疾患（広義）</td><td>12（5.7%）</td><td>476（17.1%）</td><td>2,789</td></tr>
+<tr><td>不整脈</td><td>11（5.3%）</td><td>355（14.5%）</td><td>2,445</td></tr>
+<tr><td>末梢動脈疾患</td><td>8（3.8%）</td><td>51（4.8%）</td><td>1,071</td></tr>
+<tr><td>甲状腺疾患</td><td>7（3.3%）</td><td>71（6.1%）</td><td>1,155</td></tr>
+<tr><td>慢性膵炎</td><td>7（3.3%）</td><td>244（4.4%）</td><td>5,548</td></tr>
+<tr><td>喘息</td><td>5（2.4%）</td><td>40（14.2%）</td><td>282</td></tr>
+<tr><td>静脈血栓塞栓症</td><td>5（2.4%）</td><td>137（3.2%）</td><td>4,270</td></tr>
+<tr><td>認知症</td><td>5（2.4%）</td><td>75（6.4%）</td><td>1,175</td></tr>
+<tr><td>消化器疾患（広義）</td><td>5（2.4%）</td><td>128（10.5%）</td><td>1,218</td></tr>
+<tr><td>血液疾患</td><td>4（1.9%）</td><td>46（4.6%）</td><td>1,006</td></tr>
+<tr><td>HIV</td><td>4（1.9%）</td><td>16（3.2%）</td><td>499</td></tr>
+<tr><td>てんかん</td><td>3（1.4%）</td><td>16（5.9%）</td><td>269</td></tr>
+<tr><td>骨粗鬆症</td><td>2（1%）</td><td>5（1.2%）</td><td>420</td></tr>
+<tr><td>結合組織疾患</td><td>2（1%）</td><td>7（5%）</td><td>140</td></tr>
+<tr><td>代謝・内分泌疾患（広義）</td><td>2（1%）</td><td>50（48.1%）</td><td>104</td></tr>
+<tr><td>泌尿生殖器疾患（単一試験）</td><td>1（0.5%）</td><td>20（8.8%）</td><td>228</td></tr>
+<tr><td>炎症性腸疾患（単一試験）</td><td>1（0.5%）</td><td>4（2.7%）</td><td>150</td></tr>
+<tr><td>結核（単一試験）</td><td>1（0.5%）</td><td>8（6.6%）</td><td>122</td></tr>
+<tr><td>貧血（単一試験）</td><td>1（0.5%）</td><td>318（45.4%）</td><td>701</td></tr>
+<tr><td>先天性疾患・染色体異常（単一試験）</td><td>1（0.5%）</td><td>1（0.7%）</td><td>150</td></tr>
+<tr><td>変形性関節症（単一試験）</td><td>1（0.5%）</td><td>5（4.9%）</td><td>103</td></tr>
+<tr><td>感染症（単一試験）</td><td>1（0.5%）</td><td>6（9%）</td><td>67</td></tr>
+<tr><td>精神・行動障害（単一試験）</td><td>1（0.5%）</td><td>1（1.7%）</td><td>60</td></tr>
+<tr><td>統合失調症（単一試験）</td><td>1（0.5%）</td><td>1（6.2%）</td><td>16</td></tr>
+<tr><td>心臓弁膜症（単一試験）</td><td>1（0.5%）</td><td>18（36%）</td><td>50</td></tr>
+<tr><td>痛風（単一試験）</td><td>1（0.5%）</td><td>1（4.2%）</td><td>24</td></tr>
+</tbody></table></div>
+<p>（「単一試験」印は有病率推定が1試験のみに基づくことを示す。原表の脚注 † に対応）</p>
+<p>この表の読み方で重要なのは、<strong>「報告した試験の数」と「報告された有病率」は別物</strong>だということ。報告頻度が高いのは糖尿病（86.1%の試験）・高血圧（65.1%）・CKD（56%）・がん（53.1%）だが、報告された有病率が高いのはむしろ代謝・内分泌疾患（48.1%、ただし2試験のみ）、貧血（45.4%、1試験のみ）、心臓弁膜症（36%、1試験のみ）といった、<strong>ごく少数の試験からしか推定できない疾患</strong>である。少数試験に基づく有病率は、その試験の対象集団に強く引きずられるため解釈に注意がいる。</p>
+<h3>9. 結果 — 多疾患併存とフレームワークの使用状況</h3>
+<ul><li><strong>多疾患併存に関する情報を何らかの形で報告したのは4試験（1.9%）のみ</strong>。うち3試験は16〜29例という小規模コホートで、個々の患者レベルで併存疾患データ（したがって多疾患併存が含意される）を報告していた（Additional file 8）</li><li>特定の併存疾患フレームワーク、あるいはカウントベースの定義を用いたのは<strong>12/209試験（5.7%）</strong>。うち Charlson併存疾患指数（CCI）が10試験、APACHE II の chronic health points が2試験（Additional file 9）。<strong>これらの試験のいずれも、スコアに含まれる疾患の完全な内訳を提供していなかった</strong></li><li>併存疾患を考慮したサブグループ解析を行ったのは<strong>5試験のみ</strong>。うち1試験は解析に考慮した併存疾患がCKD 1つだけだった（Additional file 10）</li><li>多疾患併存がサブグループ解析で扱われたのは Tongyoo らの試験1本のみで、そこでは「3つ以上の併存疾患を持つ患者」というくくりで検討されていた</li><li><strong>併存疾患の判定に用いたデータソースを報告していたのは209試験中3試験（1.4%）だけ</strong>。3試験ともに過去の入院歴を参照しており、診療録から導出したことが示唆される</li></ul>
+<h3>10. 結果 — 除外基準における慢性疾患（NLP解析）</h3>
+<ul><li><strong>163/209試験（78%）が、少なくとも1つの併存疾患カテゴリの存在を理由に参加者を除外</strong>していた</li><li>トークン化により<strong>1,137のユニークトークン</strong>を同定し、そこから既存の併存疾患に言及する<strong>82の用語</strong>を抽出</li><li>これらの用語はしばしば index 併存疾患にマッピングするには具体的すぎた（例："severe preexisting parenchymal liver disease with clinically significant portal hypertension"＝臨床的に重要な門脈圧亢進を伴う重症の既存肝実質疾患）。そのため報告併存疾患のマッピングと同じ body system カテゴリ（例：消化器疾患）に分類し、加えて<strong>免疫系疾患</strong>という新カテゴリを設けた</li></ul>
+<div class="tw"><table>
+<thead><tr><th>除外基準として引用された併存疾患カテゴリ</th><th>試験数（209本中）</th><th>割合</th></tr></thead>
+<tbody>
+<tr><td>心血管疾患</td><td>70</td><td>33.5%</td></tr>
+<tr><td>泌尿生殖器疾患</td><td>66</td><td>31.6%</td></tr>
+<tr><td>消化器疾患</td><td>58</td><td>27.8%</td></tr>
+<tr><td>免疫系疾患</td><td>56</td><td>26.8%</td></tr>
+</tbody></table></div>
+<p>（Additional file 11 に全内訳）</p>
+<h3>11. 考察 — 著者らの解釈</h3>
+<h4>11-1. 主要所見の要約</h4>
+<p>敗血症ICU-RCTのうち併存疾患データを報告していたのは3分の1強にすぎず、多疾患併存を推し量れることは稀だった。報告は経時的に増えたが、<strong>報告する新しい試験ほど列挙する疾患の種類は少ない</strong>。591本全体の比較解析では、併存疾患を報告する試験は規模が大きく、プロトコルが公開されており、死亡率を主要評価項目とすることが多く、複数の方法論ドメインでバイアスリスクが低かった。地域差もあり、アジア・太平洋の試験はヨーロッパの試験より報告する傾向が強い。一方、多施設か単施設か、国際共同か単一国かでは報告の可能性が大きく変わらず、著者らはこれを「試験の規模だけでなく、より広い報告実務がこの差を駆動している」ことの示唆と解釈する。資金源にも軽度の差があり、非企業資金の試験で報告が多かった。これは資金構造による報告実務や透明性要件の違いを反映している可能性がある。</p>
+<h4>11-2. なぜ報告されないのか（機序の推論）</h4>
+<p>著者らは機序は不確実としつつ、以下を挙げる。</p>
+<p><strong>透明性との連関</strong>。試験設計における透明性の高さが、ベースライン患者背景のより完全な報告と関連している可能性。プロトコルが入手できない場合、<mark class="hl">二次利用者は「併存疾患データが収集されたが報告されなかった」のか「そもそも収集されなかった」のかを区別できない</mark>。この区別不能性が、試験の代表性の評価やHTEの探索をさらに制約する。</p>
+<p><strong>「二次利用者から見れば3つは等価」という指摘が本論文の核</strong>である。①併存疾患データを収集しなかった試験、②収集したが報告しなかった試験、③非構造的・低品質な併存疾患の把握しかない試験 — この3つは、<strong>多疾患併存の同定・解析をいずれも許さないという点で機能的に区別がつかない</strong>。これは複数疾患を持つ患者の臨床判断に影響し、HTEのエビデンスを通じて一般化可能性を制限する。</p>
+<p><strong>報告要件の不在</strong>。CONSORT はベースラインの人口統計学的・臨床的特性の報告を推奨し、併存疾患を外的妥当性の重要な決定因子として同定しているが、<strong>構造化された併存疾患・多疾患併存の報告を明示的に義務づけてはいない</strong>。さらに報告された併存疾患の操作的定義が示されることは稀で、その条件がどう確認・定義されたかを解釈できない。多くの試験では、併存疾患が標準診断基準・行政コーディング・病歴のどれで同定されたのか、活動性疾患と既往診断と疾患重症度が区別されたのかが不明である。</p>
+<h4>11-3. 年齢・性別・人種民族</h4>
+<p>併存疾患を報告した試験では年齢は全試験で報告されていたが、<strong>30試験（14.4%）が上限年齢の除外基準</strong>を適用していた。高齢と多疾患併存はICU集団で密接に絡み合い、ICU集団で有病率が増加しているにもかかわらず、多くのICU試験が年齢制限を適用している。人種民族の報告は14.8%にとどまり経時的にも一貫して過小報告。性別は普遍的に報告され男性55%で、ICU集団の男性優位を示す先行エビデンスと一致した。</p>
+<h4>11-4. 有病率の乖離 — 試験集団は実世界を映していない</h4>
+<p>報告された併存疾患の有病率は幅広く変動し、敗血症試験で報告された有病率が<strong>より広いICU集団で観察される真の負荷を反映していない可能性</strong>を示す。例えば高血圧（39.1%）と糖尿病（24.3%）は、重症患者の大規模集団研究における52.5%・36.7%と比べて有意に低い。</p>
+<p>著者らはこの乖離の説明として、相互排他的でない4つを挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>説明</th><th>中身</th></tr></thead>
+<tbody>
+<tr><td>選択的な組み入れ戦略</td><td>そもそも併存疾患の少ない患者を選んで入れている</td></tr>
+<tr><td>報告する併存疾患の選択</td><td>収集はしたが、目立つものだけを表に載せている</td></tr>
+<tr><td>真の差</td><td>試験集団と実世界集団は本当に違う集団である</td></tr>
+<tr><td>試験報告における過小報告</td><td>記録漏れ・集計漏れ</td></tr>
+</tbody></table></div>
+<p>そのうえで、<strong>本レビューに含まれたRCTのほぼ80%が少なくとも1つの慢性疾患を持つ個人を明示的に除外している</strong>ことが、報告される有病率に影響することを指摘する。</p>
+<h4>11-5. 多疾患併存の不可視性</h4>
+<p>多疾患併存に関する情報を報告したのは4/209試験、併存疾患を考慮したサブグループ解析は5/209試験だった。多疾患併存がサブグループ解析で正面から扱われたのは Tongyoo らの試験のみ（3つ以上の併存疾患を持つ患者という定義）。この限定的な扱いは、ICU試験における年齢・フレイル・多疾患併存による効果修飾を検討した最近のシステマティックレビューの所見（多疾患併存のサブグループデータを報告した研究は2件のみ、敗血症集団ではゼロ）と一致する。</p>
+<h4>11-6. 測定ツールをめぐる問題</h4>
+<p>多疾患併存を評価するツールは多数開発されている（単純な非加重疾患カウント、加重疾患指数、薬剤ベースの指標）。しかし敗血症RCTのうち定義されたツールを使ったのは5.7%にすぎず、最も多いCCIでも10試験（4.7%）。<strong>そのいずれもCharlsonの枠組みに含まれる19疾患の全てを報告していなかった</strong>。構成疾患・その操作的定義・確認の情報源を完全に報告すれば、Charlsonの枠組みの有用性が高まり、試験間の再現性と調和が改善するはずである。</p>
+<p>APACHE II スコアはICU試験で重症度評価として頻繁に報告されるが、<mark class="hl">そのスコアの慢性健康成分（chronic health component）を分けて記述・解析した試験は1本もなかった</mark>。ICU集団に特異的な形で併存疾患負荷を体系的に捉える手段としてのAPACHE IIの潜在能力が使われていない。</p>
+<h4>11-7. フレームワーク自体の適合性</h4>
+<p>Delphi合意研究は、多疾患併存を測定する際に<strong>常に含めるべき24疾患・通常含めるべき35疾患</strong>の中核リストを提案している。しかし本研究では、試験を通じて報告された153のユニークな併存疾患のうち、Delphi合意で同定されたものにマッピングできたのは106のみだった。この乖離は、ほとんどが慢性の既存疾患を反映せず、急性合併症（例：急性腎障害）・薬剤・検査値異常・リスク因子・敗血症エピソードに本質的に関連する状態から成ることを反映している可能性がある。これは<strong>試験報告における "comorbidity" という語の不均一で概念的に一貫しない使用</strong>を浮き彫りにし、既存の多疾患併存フレームワークの適用可能性を制限する。あるいは、Delphi合意で優先された疾患群がICU試験集団に最も関連するものと十分に整合していないことを示している可能性もある。</p>
+<h4>11-8. データソースの不透明性</h4>
+<p>併存疾患の確認に用いたデータソースを報告していたのは3/209試験（1.4%）で、いずれも過去の入院歴から導出していた。診療録は構造化され臨床的に検証された情報を提供しうるが、多疾患併存と個々の併存疾患の有病率は<strong>データソースによって大きく変わる</strong>ことが知られており、入院データへの依存は、入院を要さなかった／入院時に記録されなかった軽症の状態を取りこぼしうる。結果として大多数の敗血症RCTでは、併存疾患データが診療録・患者の自己申告・行政データベース・その他のどれに由来するのか、確認が体系的だったのか選択的だったのかを判断できない。臨床医とメタ解析者の視点からは、この欠落は解釈可能性・再現性・外的妥当性の評価、そして臨床的に意味のある併存疾患・多疾患併存層をまたいだ治療効果の不均一性を探索する能力に、きわめて大きな影響を持つ。</p>
+<h4>11-9. 強みと限界（著者らの記述）</h4>
+<p><strong>強み</strong>：敗血症試験における併存疾患の報告のされ方に特化した初のシステマティックレビュー。7つの書誌データベースに加え試験登録と学会抄録を1992〜2025年にわたり検索し、PROSPERO に事前登録したプロトコルの下で実施。15,830件超を二重にスクリーニングし、48,000例超の敗血症・敗血症性ショック患者を登録した209試験から詳細な併存疾患情報を抽出。合意フレームワーク由来の疾患リストにマッピングすることで試験横断的な一貫した比較を可能にした。</p>
+<p><strong>限界</strong>（著者らの明示）：</p>
+<div class="tw"><table>
+<thead><tr><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>発表要約への依存</td><td>試験実施者に問い合わせていないため、一次論文における過小報告がそのまま統合結果に伝播する</td></tr>
+<tr><td>言語・年齢の制限</td><td>英語論文・成人研究に限定</td></tr>
+<tr><td>定量的統合の不能</td><td>併存疾患の確認方法を記述した研究が2%未満、多疾患併存を明示的に定義・解析した試験が4本のみのため、併存疾患負荷と治療効果の量的な関連は未探索のまま</td></tr>
+<tr><td>記述にとどまる出力</td><td>本レビューの解析出力は、介入効果の統合ではなく、併存疾患・多疾患併存が「どう捕捉・報告・操作化されているか」の記述が主。これは試験文献における構造化併存疾患データの入手可能性の乏しさと著しい不均一性が定量的統合を制約したため</td></tr>
+<tr><td>フレームワークの適合性</td><td>Delphi由来の合意フレームワークはもともとICU文脈のために開発されたものではない。未マッピング用語の多くは "comorbidity" の不均一・概念的に不適切な使用を反映していたが、既存フレームワークの重症患者集団への適用可能性の限界を示している可能性もある</td></tr>
+</tbody></table></div>
+<h4>11-10. 結論（著者らの言葉）</h4>
+<p>ICU-RCTにおける併存疾患は依然として貧弱にしか報告されず、多疾患併存はほぼ不可視のままで、適格基準は慢性疾患を持つ患者を日常的に除外している — これらが相まって現在のエビデンスの外的妥当性を制限している。過去30年で報告は改善したものの、<strong>パラダイムシフトが必要</strong>である。今後の試験はICU文脈に関連する併存疾患フレームワークを採用し、そのデータソースを文書化すべきである。敗血症介入における治療効果の修飾を検証できるようにすることは、試験所見がますます多疾患併存化するICU集団に適用可能であることを保証するために不可欠である。</p>
+<h3>12. 外的妥当性の機序 — なぜ「併存疾患が書かれていない」ことが致命的なのか</h3>
+<p>この論文の含意を機序レベルで整理する。外的妥当性（一般化可能性・transportability）が成立するには、以下の3層がすべて必要である。本論文が示したのは、敗血症領域では<strong>第1層で既に崩れている</strong>ということ。</p>
+<div class="tw"><table>
+<thead><tr><th>層</th><th>必要なこと</th><th>敗血症RCTの現状</th><th>崩れると何が起きるか</th></tr></thead>
+<tbody>
+<tr><td>第1層：測定</td><td>試験集団の効果修飾因子（＝併存疾患）が測定・報告されている</td><td>209/591本（35.4%）のみ報告。データソース記載は1.4%</td><td>試験集団と対象集団の分布を比較できない。以降のすべての層が成立しない</td></tr>
+<tr><td>第2層：比較</td><td>試験集団の分布と、適用したい実世界集団の分布を突き合わせられる</td><td>高血圧39.1% vs 実世界52.5%、糖尿病24.3% vs 36.7%。ただし209本の限定的な情報から</td><td>「この結果を当院の患者に当てはめてよいか」の判断が印象論になる</td></tr>
+<tr><td>第3層：移送</td><td>効果修飾が存在するかを検証し、必要なら層別の効果を推定して外挿する</td><td>多疾患併存のサブグループ解析は実質1本</td><td>平均効果しか語れない。多疾患併存患者で効果が消える／害が上回る可能性を検出できない</td></tr>
+</tbody></table></div>
+<p><strong>なぜ第1層が崩れると第3層が救えないか</strong>。HTEの検証には、①効果修飾因子の測定、②十分な層別サンプルサイズ、③事前規定の交互作用検定が要る。①が無ければ、事後の個別患者データメタ解析でも復元できない（データが存在しないため）。著者らが「収集しなかった試験・収集したが報告しなかった試験・低品質な把握しかない試験は二次利用者から見て機能的に区別できない」と書いたのは、この意味である。</p>
+<p><strong>除外基準の効果は二重に効く</strong>。78%の試験が慢性疾患を理由に除外していた。除外は、(i) 試験集団の併存疾患有病率を実世界より低く押し下げ（測定の歪み）、(ii) その集団で得られた効果推定値を、除外された層に外挿する根拠を消す（移送の断絶）。しかも除外基準の記述は "severe preexisting parenchymal liver disease with clinically significant portal hypertension" のように具体的すぎて標準カテゴリに載らないため、<strong>どの患者が除かれたのかを事後に定量化することさえ難しい</strong>。</p>
+<p><strong>「報告する試験ほど疾患数が減っている」ことの機序的解釈</strong>。1992–2000年の中央値8疾患から2016–2025年の6疾患へと減少している。これは報告実務が「ベースライン表に載せる項目を最小限に絞る」方向へ標準化されてきた結果と読める。誌面制約・CONSORT が構造化併存疾患報告を義務づけていないこと・補遺への追いやり、いずれも寄与しうる。<mark class="hl">報告する試験の数が増えても、1試験あたりの情報密度が下がれば、多疾患併存の復元可能性は改善しない</mark>。</p>
+<h3>13. 批判的吟味（JCでの論点）</h3>
+<h4>13-1. デザイン上の限界</h4>
+<ul><li><strong>メタ解析ではなく記述的マッピング</strong>。効果推定は一切ない。「敗血症RCTの報告実務の地図」であり、臨床判断を直接変える論文ではない。読み方を間違えると「敗血症治療のエビデンスは信用できない」という過剰な結論に飛びやすい</li><li><strong>併存疾患解析の対象は209本のみ</strong>。有病率・除外基準・フレームワーク使用率などの数字はすべて「併存疾患を報告した試験」に条件づけられている。<strong>残る382本については何も分からない</strong>。したがって「敗血症RCT全体の78%が慢性疾患を除外している」とは言えない（正しくは「併存疾患を報告した209本の78%」）。抄録の "Nearly 80% of trials excluded participants" という書き方は、この条件づけを読者に伝えきれていない</li><li><strong>有病率推定の分母が疾患ごとに違う</strong>。Table 2 の分母は「その疾患を報告した試験の参加者」であり、疾患間で分母が 16 例から 35,492 例まで4桁違う。心臓弁膜症36%・貧血45.4%・代謝内分泌疾患48.1%といった高値は1〜2試験由来で、母集団の推定値として扱ってはいけない</li><li><strong>報告バイアスの方向が読めない</strong>。併存疾患を報告する試験ほど質が高いという所見は、「質の高い試験の患者像しか見えていない」ことを意味する。これが実世界とのギャップを過小評価する方向に働くのか過大評価する方向に働くのかは、この解析だけでは決まらない</li><li><strong>英語・成人限定</strong>。日本を含む非英語圏の試験報告実務は反映されていない可能性がある（ただしアジア・太平洋の試験が最多カテゴリである点は補正材料になる）</li><li><strong>試験実施者への問い合わせなし</strong>。著者ら自身が最初の限界として挙げている通り、「収集していたが載せなかった」試験を救い出す手段を取っていない。この選択が、結論を「報告実務の問題」に押しとどめている</li></ul>
+<h4>13-2. データの不整合・内的矛盾（原文を突き合わせた指摘）</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原文に複数の数値・引用の不整合がある（Article in Press＝未編集版のため要注意）</p>
+<ul><li><strong>PRISMA図の除外数が合わない</strong>。Figure 1 の "Studies excluded (n = 238)" とあるが、内訳（15+2+30+128+22+4+24+13+40）の合計は<strong>278</strong>。全文評価869本 − 278 = 591 で、内訳の合計のほうが正しい。図の見出しの238は誤植と考えられる</li><li><strong>地域の割合が本文とTable 1で食い違う</strong>。本文は209本の内訳を「アジア・太平洋48.8%、ヨーロッパ24.4%、北米12%」とするが、Table 1 は同じ209本で「96（46%）、52（25%）、22（11%）」。48.8%は209本中102本に相当し、Table 1 の96本と一致しない</li><li><strong>マッピング疾患数の記述が3か所で揺れる</strong>。Methods は「Delphi研究から翻案した26疾患にマッピング」、Results は「29の特定 index 疾患＋10の body system＝39」、Table 2 の行数は<strong>38</strong>。Figure 3 のヒートマップには Table 2 に無い "Multiple sclerosis" 行が存在し、これを加えると39になる（Table 2 側の脱落と考えられる）</li><li><strong>未マッピング数も揺れる</strong>。Results は「153のうち46がマッピング不能」（＝107がマッピング）だが、Discussion は「153のうち106がDelphi合意にマッピングできた」。1つ合わない</li><li><strong>フレームワーク使用試験の内訳が閉じない</strong>。「12試験（5.7%）が使用、うちCCI 10試験・APACHE II 慢性健康点 2試験」とあるが、引用番号を見るとCCIの10試験とAPACHE IIの2試験に<strong>同一文献が1本重複</strong>しており、さらに引用範囲に含まれる1文献がどちらのリストにも現れない。10+2=12 という単純な足し算は成立していない可能性がある</li><li><strong>比較対象の集団の性質が本文と引用文献で一致しない</strong>。「高血圧52.5%・糖尿病36.7%」の比較元を本文は "a recent large-scale population study of critically ill patients"（重症患者の大規模集団研究）と記述するが、引用されている文献は EpiChron コホートの<strong>一般集団</strong>における多疾患併存パターンの研究である。<mark class="hl">重症患者集団との比較ではなく一般集団との比較なら、乖離の解釈は大きく変わる</mark></li><li><strong>敗血症定義会議の引用が誤っている</strong>。「第1回[24]、第2回[25]、第3回[8]の定義会議に基づき層別した」とあるが、[8] は Hanlon らの臨床試験における併存疾患代表性の論文であり、Sepsis-3（Singer 2016）は [1]。body system を ICD-10 章に基づいてマッピングした根拠として挙げられている [24] も1992年の ACCP/SCCM 合意会議であり、ICD-10 とは無関係</li><li><strong>レビュアーのイニシャルが一貫しない</strong>。著者は SMR / SPG / SS / NIL / ABD だが、本文には SR、NL、AMD という別のイニシャルが混在する</li></ul>
+<p>これらは Article in Press（出版社の最終編集前）であることに起因する可能性が高い。JCで数字を引用するときは<strong>最終版が出たら再確認する</strong>のが安全。</p>
+</div>
+<h4>13-3. 解釈上の論点（議論のタネ）</h4>
+<ul><li><strong>「報告しない＝収集していない」ではない</strong>。本論文の中心的主張は「二次利用者から見れば区別できない」という点にあるが、これは倫理的・実務的には別問題を含む。多くの試験はCRFで併存疾患を集めているが、誌面の都合で補遺にも載せていないだけかもしれない。もしそうなら、解決策は「新たに集めさせる」ことではなく「既存データの公開を義務づける」ことになる。処方箋が変わる</li><li><strong>報告率の頭打ちをどう読むか</strong>。OR 1.08/年という増加傾向は統計的には明快だが、Figure 2 を年次で見ると2016年以降は40〜57%で振動しており、2024年45.7%・2025年48.3%と直近2年はむしろ50%割れ。34年間の直線的トレンドとして提示すると、<strong>直近10年の停滞が見えなくなる</strong></li><li><strong>陽性結果との関係（p=0.065）は解釈を保留すべき</strong>。報告あり46% vs 報告なし55%は有意水準に達していないが、方向としては気になる。併存疾患を報告する質の高い試験ほど陽性結果が少ないという古典的な図式と整合する</li><li><strong>「1試験あたりの疾患数が減っている」ことの評価は一義的でない</strong>。減少は「情報密度の低下」とも読めるが、「概念的に不適切な項目（急性合併症・検査値異常）を並べる悪習が減り、真の慢性疾患に絞られてきた」とも読める。著者らは前者の解釈を採るが、153語中46語が慢性疾患でなかったという自らの所見は、後者の可能性も支持する</li><li><strong>Delphi フレームワークをICUに持ち込むことの是非</strong>。著者ら自身が限界として認めている通り、Ho らの合意リストはICU文脈で作られていない。「ICU用の併存疾患フレームワークを作れ」という提言は正しいが、その中身の具体案は本論文にはない。JCでは「では何を必須項目にすべきか」を議論の焦点にできる（CCI 19疾患＋フレイル＋長期療養状態＋免疫抑制療法の有無、あたりが出発点か）</li><li><strong>APACHE II の慢性健康点をなぜ誰も分けて報告しないのか</strong>。ICU研究者にとってこれは最も低コストな解決策のはずである（既に収集している）。報告されない理由が「合計点しか記録していない」ためなら、CRF設計の問題として指摘できる</li></ul>
+<h4>13-4. この論文で当院の何が変わるか</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ガイドライン推奨を高齢・多疾患併存患者に適用しようとしている</td><td>根拠となったRCTのベースライン表に併存疾患が載っているか、除外基準に該当していないか</td><td>載っていなければ「検証されていない」と明示し、モニタリング頻度を上げる方向で運用する</td></tr>
+<tr><td>当院ICUで新しい介入の導入を検討する</td><td>その介入のRCTが当院の患者像（併存疾患プロファイル）とどれだけ重なるか</td><td>重なりが薄ければ、導入時に当院データでの評価計画をセットで作る</td></tr>
+<tr><td>当院が研究計画を書く</td><td>除外基準に慢性疾患を入れる根拠が安全性か利便性か</td><td>利便性なら外す。外せないなら除外した人数と理由をCONSORTフロー図に残す</td></tr>
+<tr><td>当院が多施設研究・レジストリにデータを出す</td><td>CCI 19疾患を電子カルテから構造化して抽出できるか、判定の情報源を記録しているか</td><td>抽出クエリを整備し、情報源（診療録／サマリ／自己申告）をフィールドとして持たせる</td></tr>
+<tr><td>JIPADのデータ利活用を議論する</td><td>APACHE II の慢性健康成分が分離して保持されているか</td><td>分離保持されているなら、それ自体をJIPADの差別化価値として提示できる</td></tr>
+</tbody></table></div>
+<h3>14. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>Sepsis-3 定義（本論文の敗血症定義の出典）</td><td>Singer M, et al. The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA. 2016;315(8):801–10.</td></tr>
+<tr><td>1992年の最初の敗血症定義（検索起点の根拠）</td><td>ACCP/SCCM Consensus Conference: definitions for sepsis and organ failure. Crit Care Med. 1992;20(6):864–74.</td></tr>
+<tr><td>2001年の第2回敗血症定義会議</td><td>Levy MM, et al. 2001 SCCM/ESICM/ACCP/ATS/SIS International sepsis definitions conference. Intensive Care Med. 2003;29(4):530–8.</td></tr>
+<tr><td>臨床試験における併存疾患・多疾患併存の代表性（IPD解析）</td><td>Hanlon P, et al. Representation of people with comorbidity and multimorbidity in clinical trials of novel drug therapies: an individual-level participant data analysis. BMC Medicine. 2019;17(1):201.</td></tr>
+<tr><td>多疾患併存の測定に関するDelphi合意（本論文のマッピングの物差し）</td><td>Ho ISS, et al. Measuring multimorbidity in research: Delphi consensus study. BMJ Med. 2022;1(1):e000247.</td></tr>
+<tr><td>英国重症患者の多疾患併存と長期予後</td><td>McPeake J, et al. Multimorbidity and Its Relationship With Long-Term Outcomes After Critical Care Discharge: A Prospective Cohort Study. Chest. 2021;160(5):1681–92.</td></tr>
+<tr><td>有病率の比較元とされた集団研究（一般集団のEpiChronコホート）</td><td>Ioakeim-Skoufa I, et al. Multimorbidity Patterns in the General Population: Results from the EpiChron Cohort Study. Int J Environ Res Public Health. 2020;17(12):4242.</td></tr>
+<tr><td>高齢者・多疾患併存とICU精密医療</td><td>Beil M, et al. The management of multi-morbidity in elderly patients: Ready yet for precision medicine in intensive care? Crit Care. 2021;25(1):330.</td></tr>
+<tr><td>多疾患併存状態と敗血症・臓器障害の死亡率（データ駆動解析）</td><td>Zador Z, et al. Multimorbidity states associated with higher mortality rates in organ dysfunction and sepsis: a data-driven analysis in critical care. Crit Care. 2019;23(1):247.</td></tr>
+<tr><td>重症疾患の再定義（敗血症の不均一性）</td><td>Maslove DM, et al. Redefining critical illness. Nat Med. 2022;28(6):1141–8.</td></tr>
+<tr><td>敗血症の治験はなぜ失敗するのか</td><td>Marshall JC. Why have clinical trials in sepsis failed? Trends Mol Med. 2014;20(4):195–203.</td></tr>
+<tr><td>急性期症候群におけるHTEの扱い方（原則と実務）</td><td>Zampieri FG, Bagshaw SM, Cavalcanti AB. Addressing heterogeneous treatment effects in acute care syndromes: principles and practical considerations. Thorax. 2025;80(10):765–74.</td></tr>
+<tr><td>ICU介入における年齢・フレイル・多疾患併存の効果修飾</td><td>Perrella A, et al. Exploring the Impact of Age, Frailty, and Multimorbidity on the Effect of ICU Interventions: A Systematic Review of Randomized Controlled Trials. Crit Care Med. 2024;52(9):e463.</td></tr>
+<tr><td>高齢重症患者の介入試験における代表性</td><td>Forget MF, et al. Critically Ill Older Adults' Representation in Intervention Trials: A Systematic Review. Crit Care Explor. 2024;6(7):e1107.</td></tr>
+<tr><td>Charlson併存疾患指数の原典</td><td>Charlson ME, et al. A new method of classifying prognostic comorbidity in longitudinal studies. J Chronic Dis. 1987;40(5):373–83.</td></tr>
+<tr><td>APACHE スコアの原典</td><td>Knaus WA, et al. APACHE—acute physiology and chronic health evaluation. Crit Care Med. 1981;9(8):591.</td></tr>
+<tr><td>CONSORT 2025 声明（報告基準）</td><td>Hopewell S, et al. CONSORT 2025 statement: updated guideline for reporting randomised trials. BMJ. 2025;389:e081123.</td></tr>
+<tr><td>Cochrane バイアスリスクツール（第1版）</td><td>Higgins JPT, et al. The Cochrane Collaboration's tool for assessing risk of bias in randomised trials. BMJ. 2011;343:d5928.</td></tr>
+<tr><td>Cochrane RCT classifier（自動スクリーニング）</td><td>Thomas J, et al. Machine learning reduced workload with minimal risk of missing studies. J Clin Epidemiol. 2021;133:140–51.</td></tr>
+<tr><td>データソースが多疾患併存の測定に与える影響（230万人）</td><td>MacRae C, et al. Impact of data source choice on multimorbidity measurement: a comparison study of 2.3 million individuals in the Welsh NHS. BMC Med. 2023;21(1):309.</td></tr>
+<tr><td>多疾患併存を扱った数少ないサブグループ解析の例</td><td>Tongyoo S, et al. Hydrocortisone treatment in early sepsis-associated acute respiratory distress syndrome. Crit Care. 2016;20(1):329.</td></tr>
+<tr><td>データソースを明記していた3試験の一例</td><td>Perner A, et al. Hydroxyethyl starch 130/0.42 versus Ringer's acetate in severe sepsis. N Engl J Med. 2012;367(2):124–34.</td></tr>
+<tr><td>データソースを明記していた3試験の一例</td><td>Hjortrup PB, et al. Restricting volumes of resuscitation fluid in adults with septic shock after initial management: CLASSIC. Intensive Care Med. 2016;42(11):1695–705.</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 敗血症ICU-RCT 591本のうち、ベースライン併存疾患を報告していたのは<strong>209本（35.4%）</strong>、多疾患併存を明示したのはわずか<strong>4本（1.9%）</strong>、構造化フレームワークを使ったのは<strong>12本（5.7%）</strong>、併存疾患の情報源を書いたのは<strong>3本（1.4%）</strong>、そして<strong>78%が慢性疾患を理由に患者を除外</strong>していた。報告率は年8%ずつ改善しているが（OR 1.08、95% CI 1.06–1.11）、1試験あたりに載る疾患の種類はむしろ減っている。 <mark class="hl">ガイドライン推奨を高齢・多疾患併存の目の前の患者に当てはめるとき、「効かない」でも「効く」でもなく「そもそも検証されていない」が正しい答えである場面が大半だと自覚し、当院が研究に参加・データ提供する側に回るときは CCI 構成疾患と判定の情報源を必ず構造化して残す。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
