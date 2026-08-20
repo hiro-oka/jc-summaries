@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>VAP・vHAPへのマルチプレックスPCR追加は24時間後の標的抗菌薬治療を増やさなかった — 培養陽性例のみ31.0%から55.3%へ（RCT・VAPERO・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08591-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">VAP・vHAPへのマルチプレックスPCR追加は24時間後の標的抗菌薬治療を増やさなかった — 培養陽性例のみ31.0%から55.3%へ（RCT・VAPERO・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Millot G, Rouzé A, Wallet F, Loiez C, Preau S, Bureau C, Dognon N, Gaudet A, Granier M, Gueguen I, Labreuche J, Mortain L, Nseir S. Intensive Care Med. 2026. DOI: 10.1007/s00134-026-08591-3</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08591-3" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08591-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Impact of a strategy using multiplex PCR on targeted antibiotic therapy for patients with suspected ventilator-associated pneumonia or hospital-acquired pneumonia requiring mechanical ventilation: a randomized, single-blind trial</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「PCRを入れれば抗菌薬が細くなる」は自動では起こらない</strong>。本試験は結果を電話で伝え、微生物学者が症例ごとに解釈まで添えたうえで、標準化アルゴリズムを敷かなかった。その結果、24時間後の標的治療は35.1%対23.6%（p = 0.13）にとどまった。<strong>検査を導入するなら、同時に「陰性なら中止／陽性なら何に絞る」を明文化したルールとASTの伴走がセット</strong>でなければ投資は回収できない。</li><li><strong>効くのは「培養が生えた患者」だけだった</strong>。培養陽性67例（45.9%）では55.3%対31.0%（絶対差24.2%、p = 0.048）と差が出た。裏を返せば、<strong>当院で「疑いは強いが培養は陰性」というケースにmPCRを回しても、主治医は抗菌薬を止めない</strong>。実際に著者も「陰性mPCRを根拠に中止することへの抵抗」を最大の説明要因に挙げている。</li><li><strong>MDRが少ない環境では旨味が薄い</strong>。本コホートのMDR肺炎は介入群7例（9.4%）・対照群1例（1.4%）と低頻度で、著者自身が「MDR高頻度のケースミックスでこそ有用」と述べる。当院ICUでの導入判断は、<strong>ESBL保菌率・カルバペネム使用量など自施設の耐性疫学を先に出してから</strong>にする。</li><li><strong>転帰は動かない前提で議論する</strong>。28日全死亡28.4%対30.6%、ICU死亡28.4%対27.8%、人工呼吸離脱日数・ICU在室日数・抗菌薬フリー日数すべて有意差なし。VAP起因死亡は5%以下という近年の推計を踏まえれば、<strong>死亡をエンドポイントにした導入根拠は現実的に立てられない</strong>。抗菌薬曝露量・広域薬使用日数といったプロセス指標で評価する設計にする。</li><li><strong>検体はETAでよい</strong>。本試験ではETAが介入群90.6%・対照群73.6%を占め、著者は環境負荷の観点からもETA依存を支持する立場を示している。当院で気管支鏡を必須にする根拠にはならない。</li><li><strong>夜間に回せない検査は評価もできない</strong>。本試験は日勤帯の中央検査室でのみmPCRを実施したため、時間外に発症した30例（スクリーニング肺炎エピソードの5.3%）が組み入れ不能になった。<strong>24時間運用できないなら、VAPという「いつ起きるか分からない」疾患には噛み合わない</strong>。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：VAPはICU内で最も頻度の高い感染症（発症率9〜27%）で、ICU滞在・人工呼吸期間・コストを増やす。ガイドラインは検体採取後ただちに経験的抗菌薬を開始し、後で調整することを推奨するが、従来培養は同定＋感受性まで72〜96時間かかる。その間、患者は不要・無効・過剰に広域な治療を受け得る。FilmArray Pneumonia plus Panel（FAPP）は6時間以内に数十種の病原体を検出でき、感度94%（パネル外病原体を勘定に入れた「実効感度」は82%）、特異度98%と報告されている。</li><li><strong>Unknown</strong>：mPCRの臨床的インパクトは一定しない。Poole ら（単施設）は48時間後の標的治療を80%対29%（p &lt; 0.0001）に増やし、Virk ら（単施設）は治療変更までの時間に差を示せず（20.4時間対25.8時間、p = 0.076）、INHALE-WP3（多施設）は標的治療を76.5%対55.9%（差21%、95%CI 13〜28%）に増やした一方でDay14の臨床的治癒が56.7%対64.5%と非劣性マージン13%を満たさなかった。<strong>「抗菌薬選択のプロセス指標は動くが、患者アウトカムは動かない（悪化の懸念すらある）」</strong>という状態が続いていた。</li><li><strong>What's new</strong>：VAPERO試験は<strong>CAPを除外してVAPとvHAPだけに絞り</strong>、免疫抑制患者も除外し、<strong>mPCRのAST情報が不確かであることを踏まえて「標的治療」の判定を従来培養の最終感受性のみに基づく厳格な定義</strong>とし、さらに<strong>盲検化された第三者が全例を判定</strong>した。加えて、感染症専門医の関与を必須にしない実地的（プラグマティック）設計で、「mPCR単体の内在的インパクト」を測りにいった。結果、<strong>全体集団では有意差なし（絶対差11.5%、95%CI -0.03〜26.2、p = 0.13）、培養陽性例に限れば有意（絶対差24.2%、p = 0.048）</strong>という、これまでの陽性報告の内実を切り分ける知見が得られた。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで VAP・vHAPが疑われる免疫正常成人146例のRCTで、<strong>FilmArray Pneumonia plus Panelを従来培養に上乗せしても24時間後に標的抗菌薬治療を受けた患者の割合は有意に増えず（35.1%対23.6%、絶対差11.5%、95%CI -0.03〜26.2、p = 0.13）、有意差が出たのは培養で起炎菌が証明された45.9%の患者に限られた（55.3%対31.0%、絶対差24.2%、p = 0.048）</strong>。28日転帰はいずれも不変だった。</p>
+</div>
+<ul><li>2020年6月〜2023年9月、フランス北部の3施設（三次・二次）で156例をランダム化、同意継続が得られなかった10例を除く146例（介入74例・対照72例）を解析。</li><li>対象は免疫正常成人の「初回」のVAPまたはvHAP疑い。新規または増悪する浸潤影＋（体温 ≥ 38.5 °Cまたは &lt; 36 °C／白血球 ≥ 10 G/Lまたは &lt; 1.5 G/L／膿性喀痰）のうち2項目以上。</li><li>介入群は呼吸器検体（ETAまたはBAL、主治医裁量）をmPCRと従来培養の両方で、対照群は従来培養のみで解析。mPCR結果は微生物学者が電話で主治医に伝え、症例ごとの解釈も添えたが、<strong>半定量的菌量の陽性閾値は設けず、標準化アルゴリズムもASTプロトコルも与えなかった</strong>。調整は「提案」であって必須ではない。</li><li>主要アウトカムは登録24時間後に標的抗菌薬治療（targeted AMT）を受けている患者割合。判定は割付を知らない2名（不一致時は3人目）が行った。</li><li>年齢中央値58歳（IQR 43〜70）、男性67.8%、VAPが84.9%、登録時SOFA 8.0 ± 3.5、CPIS中央値7（IQR 6〜8）。人工呼吸開始から発症まで中央値5日（IQR 3〜8）。</li><li>mPCR結果までの時間は中央値2.2時間（IQR 2.0〜4.0）。従来培養との一致率は菌同定81.5%、想定感受性72.2%。</li><li>24時間後の治療変更は介入群21例（28.4%）対対照群12例（16.7%）。介入群は5例エスカレーション・16例デエスカレーション、対照群は4例・8例。</li><li>副次アウトカムはすべて有意差なし。適切治療（appropriate AMT）70.3%対61.1%（RR 1.15、95%CI 0.91〜1.46、p = 0.24）、28日全死亡28.4%対30.6%、ICU死亡28.4%対27.8%、MDR定着・MDR感染・人工呼吸離脱日数・ICU在室日数・抗菌薬フリー日数いずれも不変。</li><li>事前計画では160例（各群80例）で対照群20%から20%の絶対増加を80%の検出力で検出する設計だった。事後計算では、実際の146例で<strong>20%差なら検出力77.2%、観察された11.5%差なら36%</strong>しかない。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>VAP（ventilator-associated pneumonia、人工呼吸器関連肺炎）</strong> は挿管人工呼吸を48時間以上受けた後に発症する肺炎。ICU内で最も多い獲得感染症で、発症率は9〜27%とされる。<strong>vHAP</strong> は本試験独自の呼び方ではなく近年定着した用語で、「入院48時間以上経過した患者に発症した院内肺炎（HAP）のうち、侵襲的人工呼吸を要したもの」を指す。VAPが「人工呼吸をしているうちに肺炎になった」のに対し、vHAPは「肺炎になったから人工呼吸が要る」という順序の違いがあり、菌の背景も予後もやや異なる。</p>
+<p><strong>なぜ迅速診断が問題になるか</strong>。ガイドラインは「疑ったら検体を採ってすぐ経験的抗菌薬を開始し、あとで調整する」を推奨する。しかし従来微生物学（培養→同定→薬剤感受性試験＝AST）は結果が出るまで<strong>72〜96時間</strong>かかる。この3〜4日間、患者は「不要（そもそも肺炎ではない）」「無効（耐性菌だった）」「過剰に広域（狭域で足りたのに広域を使っている）」のいずれかに置かれ得る。広域抗菌薬曝露はMDR（多剤耐性）菌の獲得と結びつくため、抗菌薬レジメンの最適化は薬剤耐性対策の根幹をなす（WHOは薬剤耐性を世界の公衆衛生上位10の脅威に挙げている）。</p>
+<p><strong>mPCR（multiplex PCR、マルチプレックスPCR）とは</strong>。1回の反応で多数の標的核酸を同時に増幅・検出する手法。本試験で使われた <strong>FilmArray Pneumonia plus Panel（FAPP、bioMérieux社）</strong> は呼吸器検体から数十種の細菌・ウイルス・主要な耐性遺伝子を<strong>6時間以内</strong>（実務上は1.5〜6時間）に検出する「シンドロミック（症候群まるごと）パネル」。メタ解析では感度94%・特異度98%だが、<strong>パネルに載っていない菌がいることを勘定に入れた「実効感度（effective sensitivity）」は82%</strong>に下がる。また細菌は半定量的な菌量（コピー数のレンジ）として報告され、<strong>培養のような本物のASTは得られない</strong>（耐性遺伝子の有無しか分からない）ことが臨床判断上の最大の弱点になる。</p>
+<p><strong>「標的治療（targeted AMT）」と「適切治療（appropriate AMT）」の違い</strong>。これは本論文を読むうえで最重要の区別。</p>
+<ul><li><strong>適切（appropriate）</strong>＝使っている抗菌薬のうち少なくとも1剤が、検出された全病原体に最終ASTで有効。「外していない」ことだけを問う。</li><li><strong>標的（targeted）</strong>＝「外していない」だけでなく<strong>無駄が削られている</strong>こと。本試験では、①抗菌薬の本数が減らされた（単回投与のアミノグリコシドは除く。例：抗MRSA薬の中止）、②βラクタムのスペクトラムが最終ASTから見て適切な範囲で最も狭いランクになっている、③培養が無菌または診断閾値未満で全抗菌薬が中止された、のいずれかを満たすもの。</li></ul>
+<p><strong>Weiss分類</strong>とは、βラクタムを抗菌スペクトルの広さで順位づけしたコンセンサス定義（デエスカレーションの判定を可能にするために作られた）。本試験ではセフタジジム・アビバクタムやセフィデロコルなど「最後の砦」のβラクタムを扱うため、<strong>7番目のランクを足して拡張</strong>している。</p>
+<p><strong>診断閾値</strong>：気管吸引液（ETA）は10⁵ CFU/mL、気管支肺胞洗浄液（BAL）は10⁴ CFU/mL。これを超えて菌が生えた場合に「培養で証明された肺炎（culture-documented pneumonia）」とみなす。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>VAPはICU獲得感染症の最頻であり、ICU滞在・人工呼吸期間・コストを増やす。ただし<strong>死亡への寄与は不確実で、近年の研究はVAPに帰属する死亡を5%以下</strong>と推計している（Steen ら, Ann Am Thorac Soc 2021）。この「帰属死亡が小さい」という事実は、本論文の主要アウトカム選択の理由そのものになっている（死亡を主要評価項目に置けば非現実的な症例数が必要になる）。</p>
+<p>観察研究は「mPCRが抗菌薬調整、とくにデエスカレーションの機会を頻繁にもたらす」と主張してきた（Monard ら, Crit Care 2020）。しかしRCTの結果は一貫しない。</p>
+<div class="tw"><table>
+<thead><tr><th>先行RCT</th><th>デザイン</th><th>主要な所見</th><th>患者アウトカム</th></tr></thead>
+<tbody>
+<tr><td>Poole ら（J Infect 2022）</td><td>単施設。HAP/VAPが57%</td><td>FAPPで48時間後の標的治療が80%対29%（p &lt; 0.0001）</td><td>改善なし</td></tr>
+<tr><td>Virk ら（Lancet Microbe 2024）</td><td>単施設・プラグマティック</td><td>何らかの治療変更までの時間に差なし（20.4時間対25.8時間、p = 0.076）。ただしエスカレーションまでの時間は介入群で短縮</td><td>改善なし</td></tr>
+<tr><td>INHALE-WP3（Enne ら, ICM 2025）</td><td>多施設・プラグマティック</td><td>検体採取24時間後の標的治療が76.5%対55.9%（差21%、95%CI 13〜28%）</td><td>Day14臨床的治癒 56.7%対64.5% で非劣性マージン13%を満たさず。死亡は介入群31.3%対28.2%と高い</td></tr>
+</tbody></table></div>
+<p><strong>VAPERO試験の目的</strong>は、VAPまたはvHAPが疑われる患者において、mPCRに基づく戦略が従来微生物学と比べて標的抗菌薬治療の割合を増やす（優越性）かを検証すること。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ランダム化比較試験、オープンラベル（判定者は盲検＝タイトルの「single-blind」はこれを指す）、多施設。フランス北部の3施設（三次・二次医療機関）。</li><li><strong>期間</strong>：2020年6月〜2023年9月。</li><li><strong>対象（組み入れ）</strong>：18歳超の成人で、<strong>初回</strong>のVAPまたはvHAP疑い。肺炎疑いの定義は、新規または進行する画像上の浸潤影に加え、次の3項目のうち<strong>2項目以上</strong>（ATS/IDSA 2005基準）。</li><li>体温 ≥ 38.5 °C または &lt; 36 °C</li><li>白血球数 ≥ 10 G/L または &lt; 1.5 G/L</li><li>膿性喀痰または膿性気管吸引液</li><li><strong>48時間超の人工呼吸後</strong>に上記を満たせばVAP疑い、<strong>入院48時間超</strong>でその後に侵襲的人工呼吸を要したものはvHAP疑い。</li><li><strong>除外基準</strong>：</li></ul>
+<ol><li><strong>高度免疫抑制</strong> — 白血球 &lt; 1 G/L または好中球 &lt; 0.5 G/L、肺炎疑い前3か月以内の抗がん化学療法、免疫抑制薬使用下の固形臓器移植、HIV感染でCD4 &lt; 0.05 G/L、プレドニゾン換算 &gt; 0.5 mg/kg/日を3か月以内に1か月以上使用。</li><li><strong>瀕死（moribund）</strong> — SAPS II &gt; 90。</li></ol>
+<ul><li><strong>同意</strong>：患者または代諾者から取得。数時間以内に取得できない場合は緊急組み入れを許容し、可能になり次第取得。</li><li><strong>割付</strong>：1対1、施設層別、独立した統計家がコンピュータ生成乱数で作成、可変ブロックサイズ4と6。中央のWeb電子症例報告システムを通じて研究者が実施。</li><li><strong>介入</strong>：呼吸器検体（ETAまたはBAL、主治医裁量）を、介入群ではmPCR（FilmArray Pneumonia plus Panel）と従来培養の両方で、対照群では従来培養のみで解析。</li><li>mPCRは<strong>日勤帯のみ</strong>、中央化された微生物検査室で実施。夜間採取分は可能な限り速やかに処理。</li><li>結果は微生物学者が主治医へ<strong>電話で伝達</strong>。半定量的菌量に<strong>陽性閾値を適用せず</strong>、症例ごとの解釈の議論を添えた。</li><li><strong>標準化アルゴリズムもASTプロトコルも提供せず</strong>、治療調整は提案にとどめ強制しない。</li><li>mPCRが陰性またはウイルスのみ検出の場合、主治医には「細菌性肺炎の検査前確率を再考し、抗菌薬を中止するか、パネル外の原因菌を検討する」よう助言。</li><li>経験的治療は国際ガイドラインに従い、各施設の疫学に合わせて調整。</li><li><strong>データ収集</strong>：診療録から前向きに収集。重症度スコアはICU入室後24時間のSAPS II、入室時SOFA、McCabeスコア。フォローアップは7日間毎日、その後Day14とDay28。MDR定着の検出のため週1回の直腸スワブ（各施設の慣行に従う）。</li><li><strong>主要アウトカム</strong>：登録24時間後に<strong>標的AMT</strong>を受けている患者の割合（定義は前掲の①②③）。判定は研究チームの2名が割付盲検下で行い、不一致時は3人目が裁定。</li><li><strong>副次アウトカム</strong>：24時間後の適切AMTの割合、および28日時点の — 人工呼吸離脱日数（AMT開始からDay28までの生存かつ人工呼吸なしの日数）、ICU在室日数、全死亡、ICU死亡、ICU獲得MDR定着または感染の発生、抗菌薬フリー日数（AMT開始からDay28までの生存かつ抗菌薬なしの日数）。</li><li><strong>統計</strong>：</li><li><strong>サンプルサイズ</strong> — 160例（各群80例）で、対照群20%に対し<strong>20%の絶対増加</strong>を両側Z検定（α = 0.05）で検出力80%。</li><li>解析対象は「割付通り」の全解析集団（full analysis set）から、継続同意のない者を除外。</li><li>二値アウトカムはカイ二乗検定、効果は絶対差と相対危険度＋95%CI。</li><li><strong>事前計画外（unplanned）のサブグループ解析</strong> — 培養で証明された肺炎の患者における標的AMT・適切AMT。</li><li><strong>事後（post hoc）サブグループ解析</strong> — ベースラインSOFA（≤ 8 対 &gt; 8）別の主要アウトカム。異質性のカイ二乗検定で比較。</li><li>ICU獲得MDR定着・感染とICU在室日数は、生存ICU退室または死亡を競合事象とする<strong>原因別Cox比例ハザードモデル</strong>。</li><li>人工呼吸離脱日数・抗菌薬フリー日数は<strong>負の二項回帰</strong>。</li><li>両側p &lt; 0.05を有意。副次アウトカムの解析は<strong>探索的</strong>と位置づけ。SAS 9.4使用。</li></ul>
+<h3>4. 患者の流れ（CONSORT）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. フローチャート。左列が症例の流れ（紫の角丸ボックス）、右上のピンク色の大きなボックスに脱落理由が3段構成（Did not meet inclusion criteria／Excluded／Screen failure）でまとめられている。左列は上から「適格性評価 n=570」→「ランダム化集団 n=156」→ 左右に分岐して「対照群 n=78」と「mPCR群 n=78」→ それぞれ下に「72例解析」「74例解析」。中央には斜体で Allocation、Follow-up、Primary efficacy analysis の段階ラベルが置かれている。略語は VAP＝人工呼吸器関連肺炎、vHAP＝人工呼吸を要する院内肺炎、SAPS II＝簡易急性生理学スコアII、mPCR＝マルチプレックスPCR。原図・無改変。</p>
+</div>
+<p>各ボックスの文言を表に起こす。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>人数</th><th>内訳</th></tr></thead>
+<tbody>
+<tr><td>適格性評価（VAPまたはvHAP疑い）</td><td>570</td><td>—</td></tr>
+<tr><td>組み入れ基準を満たさず</td><td>222</td><td>未成年（18歳未満）7／同意せず16／医療保険なし1／参加不能（成年後見下など）24／第1回目のVAP・vHAP基準を満たさず161／既に本試験に組み入れ済み13</td></tr>
+<tr><td>除外</td><td>98</td><td>免疫抑制状態71／瀕死（SAPS II &gt; 90）27</td></tr>
+<tr><td>スクリーニング失敗</td><td>94</td><td>適切な時間内に参加を提示できず37／時間外に肺炎が発症30／併行する他試験に組み入れ済み10／mPCR利用不可（保守点検・消耗品不足）17</td></tr>
+<tr><td>ランダム化</td><td>156</td><td>対照群78／mPCR群78</td></tr>
+<tr><td>対照群 n=78 の追跡</td><td>—</td><td>追跡完了53／死亡19／継続同意なしで解析除外6</td></tr>
+<tr><td>mPCR群 n=78 の追跡</td><td>—</td><td>追跡完了58／死亡18／継続同意なしで解析除外4</td></tr>
+<tr><td>主要有効性解析</td><td>146</td><td>対照群72／mPCR群74</td></tr>
+</tbody></table></div>
+<h3>5. 結果 — ベースライン</h3>
+<p>両群はよく均衡していた。年齢中央値58歳（IQR 43〜70）、男性67.8%。ICU入室時SOFAは介入群8.6 ± 3.9、対照群8.5 ± 4.1。</p>
+<h4>Table 1. ICU入室時のベースライン特性</h4>
+<p>値は 例数/総数（%）、平均 ± 標準偏差、または中央値（25〜75パーセンタイル）。</p>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>介入群（n = 74）</th><th>対照群（n = 72）</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>58（42〜73）</td><td>58（44〜68）</td></tr>
+<tr><td>男性</td><td>46/74（62.2）</td><td>53/72（73.6）</td></tr>
+<tr><td>BMI（kg/m²）</td><td>28.9（24.0〜33.7）［n = 71］</td><td>29.4（24.9〜35.4）［n = 70］</td></tr>
+<tr><td>ICU入室前の所在：自宅</td><td>44/74（59.5）</td><td>37/72（51.4）</td></tr>
+<tr><td>ICU入室前の所在：他の病棟</td><td>26/74（35.1）</td><td>27/72（37.5）</td></tr>
+<tr><td>ICU入室前の所在：他のICU</td><td>7/74（9.5）</td><td>10/72（13.9）</td></tr>
+<tr><td>入室前の在院日数（日）※</td><td>2（1〜5）</td><td>3（1〜7）</td></tr>
+<tr><td>入室前のICU滞在（日）※</td><td>0（0〜2）</td><td>0（0〜1）</td></tr>
+<tr><td>入室前3か月以内の入院歴</td><td>10/74（13.5）</td><td>11/72（15.3）</td></tr>
+<tr><td>入室前3か月以内の抗菌薬使用</td><td>16/73（21.9）</td><td>18/71（25.4）</td></tr>
+<tr><td>糖尿病</td><td>16/74（21.6）</td><td>22/72（30.6）</td></tr>
+<tr><td>慢性呼吸不全</td><td>3/74（4.1）</td><td>6/72（8.3）</td></tr>
+<tr><td>COPD</td><td>5/74（6.8）</td><td>4/72（5.6）</td></tr>
+<tr><td>うっ血性心不全</td><td>3/74（4.1）</td><td>1/72（1.4）</td></tr>
+<tr><td>肝硬変（Child-Pugh BまたはC）</td><td>5/74（6.8）</td><td>4/72（5.6）</td></tr>
+<tr><td>慢性腎臓病（GFR &lt; 30 mL/分）</td><td>6/74（8.1）</td><td>1/72（1.4）</td></tr>
+<tr><td>McCabeスコア 0</td><td>69/74（93.2）</td><td>67/72（93.1）</td></tr>
+<tr><td>McCabeスコア 1</td><td>1/74（1.4）</td><td>1/72（1.4）</td></tr>
+<tr><td>McCabeスコア 2</td><td>4/74（5.4）</td><td>4/72（5.6）</td></tr>
+<tr><td>入室区分：内科</td><td>60/74（81.1）</td><td>60/72（83.3）</td></tr>
+<tr><td>入室区分：予定外手術</td><td>12/74（16.2）</td><td>12/72（16.7）</td></tr>
+<tr><td>入室区分：予定手術</td><td>2/74（2.7）</td><td>0/72（0.0）</td></tr>
+<tr><td>入室理由：急性呼吸不全</td><td>28/74（37.8）</td><td>37/72（51.4）</td></tr>
+<tr><td>入室理由：ショック</td><td>13/74（17.6）</td><td>10/72（13.9）</td></tr>
+<tr><td>入室理由：感染・敗血症</td><td>20/74（27.0）</td><td>14/72（19.4）</td></tr>
+<tr><td>入室理由：急性神経障害</td><td>16/74（21.6）</td><td>14/72（19.4）</td></tr>
+<tr><td>入室理由：急性腎障害</td><td>5/74（6.8）</td><td>8/72（11.1）</td></tr>
+<tr><td>入室理由：急性肝不全</td><td>1/74（1.4）</td><td>4/72（5.6）</td></tr>
+<tr><td>入室理由：中毒</td><td>7/74（9.5）</td><td>7/72（9.7）</td></tr>
+<tr><td>入室理由：心停止</td><td>9/74（12.2）</td><td>7/72（9.7）</td></tr>
+<tr><td>入室理由：急性膵炎</td><td>1/74（1.4）</td><td>2/72（2.8）</td></tr>
+<tr><td>入室理由：術後合併症</td><td>8/74（10.8）</td><td>8/72（11.1）</td></tr>
+<tr><td>入室理由：COVID-19</td><td>9/74（12.2）</td><td>16/72（22.2）</td></tr>
+<tr><td>SAPS II</td><td>50.2 ± 14.9</td><td>51.4 ± 17.8</td></tr>
+<tr><td>SOFAスコア</td><td>8.6 ± 3.9</td><td>8.5 ± 4.1</td></tr>
+</tbody></table></div>
+<p>※ 入室前の滞在日数は、ICU入室前の所在が「他の病棟」または「他のICU」に分類された患者のみで集計（介入群 n = 30、対照群 n = 35）。</p>
+<h4>Table 2. 登録時（肺炎疑い時点）の患者特性</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>介入群（n = 74）</th><th>対照群（n = 72）</th></tr></thead>
+<tbody>
+<tr><td>VAP</td><td>64/74（86.5）</td><td>60/72（83.3）</td></tr>
+<tr><td>vHAP（人工呼吸を要する院内肺炎）</td><td>10/74（13.5）</td><td>12/72（16.7）</td></tr>
+<tr><td>肺炎発症までの人工呼吸期間（日）</td><td>5.0（3.0〜8.0）</td><td>5.0（2.5〜8.0）</td></tr>
+<tr><td>SOFAスコア</td><td>7.9 ± 3.2</td><td>8.1 ± 3.7</td></tr>
+<tr><td>検体：気管吸引（ETA）</td><td>67/74（90.6）</td><td>53/72（73.6）</td></tr>
+<tr><td>検体：気管支肺胞洗浄（BAL）</td><td>7/74（9.4）</td><td>19/72（26.4）</td></tr>
+<tr><td>体温 &lt; 36 °C</td><td>7/74（9.5）</td><td>8/72（11.1）</td></tr>
+<tr><td>体温 36〜38.4 °C</td><td>23/74（31.1）</td><td>13/72（18.1）</td></tr>
+<tr><td>体温 ≥ 38.5 °C</td><td>44/74（59.5）</td><td>51/72（70.8）</td></tr>
+<tr><td>白血球 &lt; 1.5 G/L</td><td>0/73（0）</td><td>0/72（0）</td></tr>
+<tr><td>白血球 1.5〜9.9 G/L</td><td>14/73（19.2）</td><td>14/72（19.4）</td></tr>
+<tr><td>白血球 ≥ 10 G/L</td><td>59/73（80.8）</td><td>58/72（80.6）</td></tr>
+<tr><td>膿性喀痰・膿性気管吸引液</td><td>69/74（93.2）</td><td>66/72（91.7）</td></tr>
+<tr><td>CPIS</td><td>7（6〜8）［n = 64］</td><td>7（6〜8）［n = 65］</td></tr>
+</tbody></table></div>
+<p>介入群の1例は、組織上の理由で検査が利用できずFAPPの結果なしで管理された。<strong>FAPP結果までの時間は中央値2.2時間（IQR 2.0〜4.0）</strong>。</p>
+<h3>6. 結果 — 主要アウトカム</h3>
+<p>24時間後に標的AMTを受けていた患者の割合は、<strong>介入群35.1%（26/74）対対照群23.6%（17/72）</strong>。</p>
+<ul><li>絶対差 <strong>11.5%（95%CI -0.03〜26.2）</strong></li><li>相対危険度 <strong>1.49（95%CI 0.89〜2.50）</strong></li><li><strong>p = 0.13</strong>（有意差なし）</li></ul>
+<p>SOFAスコアで層別した事後解析でも、介入効果と重症度の交互作用は検出されなかった（異質性のカイ二乗検定 p = 0.43）。</p>
+<div class="tw"><table>
+<thead><tr><th>SOFA層</th><th>対照群</th><th>介入群</th><th>相対危険度（95%CI）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>SOFA ≤ 8</td><td>13/38（34.2）</td><td>16/35（45.7）</td><td>1.34（0.76〜2.36）</td><td>0.32</td></tr>
+<tr><td>SOFA &gt; 8</td><td>4/34（11.8）</td><td>10/39（25.6）</td><td>2.18（0.75〜6.32）</td><td>0.133</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 24時間後の抗菌薬治療の状況を、対照群（パネルA、左）と介入群（パネルB、右）で入れ子の帯グラフとして示した図。外側の帯が全患者（対照72例・介入74例）、その内側に「Appropriate AMT（適切治療）」の帯（対照61.1%・介入70.3%）、さらにその内側に「Targeted AMT（標的治療）」の帯（対照23.6%・介入35.1%）が重なる。左は淡紫、右は青の配色で、内側にいくほど濃くなる。標的治療が適切治療の部分集合であることを視覚化した図で、新しい数値は含まない。</p>
+</div>
+<h3>7. 結果 — 副次アウトカムと事前計画外のサブグループ</h3>
+<p><strong>培養で証明された肺炎の割合</strong>は介入群51.4%（38/74）対対照群40.3%（29/72）で有意差なし（絶対差11.1%、95%CI -4.99〜27.1、RR 1.27、95%CI 0.89〜1.82、p = 0.18）。全体では<strong>67例（45.9%）</strong>が培養証明肺炎だった。</p>
+<p><strong>事前計画外のサブグループ解析（培養証明肺炎 n = 67）</strong>：</p>
+<ul><li>標的AMT 24時間後 <strong>55.3%（21/38）対 31.0%（9/29）、p = 0.048</strong></li><li>絶対差 <strong>24.2%</strong>（本文中の記載は95%CI 0.01〜47.3、抄録の記載は95%CI 1.1〜47.4）</li><li>相対危険度 <strong>1.78（95%CI 0.96〜3.29）</strong></li><li>同じ集団での適切AMTは <strong>76.3%対82.8%（RR 0.92、95%CI 0.72〜1.18）</strong> と、むしろ介入群が数値上低い。</li></ul>
+<p><strong>適切AMT（全体集団）</strong> は介入群70.3%対対照群61.1%（絶対差9.2%、95%CI -6.2〜24.5、RR 1.15、95%CI 0.91〜1.46、p = 0.24）。</p>
+<p><strong>24時間後の治療変更の内訳</strong>：介入群21例（28.4%）対対照群12例（16.7%）。介入群はエスカレーション5例・デエスカレーション16例、対照群はエスカレーション4例・デエスカレーション8例。つまり<strong>介入によって増えた変更は主にデエスカレーション（8→16例）</strong>だった。</p>
+<h4>Table 3. 主要・副次アウトカム</h4>
+<p>値は 例数（%）、中央値（25〜75パーセンタイル）［平均］。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>対照群（n = 72）</th><th>介入群（n = 74）</th><th>絶対差（95%CI）</th><th>相対危険度（95%CI）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>主要：標的AMT 24時間後</td><td>17（23.6）</td><td>26（35.1）</td><td>11.5（-0.03〜26.2）</td><td>1.49（0.89〜2.50）</td><td>0.13</td></tr>
+<tr><td>SOFA ≤ 8 の層</td><td>13/38（34.2）</td><td>16/35（45.7）</td><td>—</td><td>1.34（0.76〜2.36）</td><td>0.32</td></tr>
+<tr><td>SOFA &gt; 8 の層</td><td>4/34（11.8）</td><td>10/39（25.6）</td><td>—</td><td>2.18（0.75〜6.32）</td><td>0.133</td></tr>
+<tr><td>層別の異質性検定</td><td>—</td><td>—</td><td>—</td><td>—</td><td>0.43</td></tr>
+<tr><td>適切AMT 24時間後</td><td>44（61.1）</td><td>52（70.3）</td><td>9.2（-6.2〜24.5）</td><td>1.15（0.91〜1.46）</td><td>0.24</td></tr>
+<tr><td>培養証明肺炎</td><td>29（40.3）</td><td>38（51.4）</td><td>11.1（-4.99〜27.1）</td><td>1.27（0.89〜1.82）</td><td>0.18</td></tr>
+<tr><td>28日ICU獲得MDR定着</td><td>37/713（47.7）※</td><td>31/731（42.4）※</td><td>NA</td><td>0.90（0.55〜1.46）ハザード比</td><td>0.66</td></tr>
+<tr><td>28日ICU獲得MDR感染</td><td>20/895（22.3）※</td><td>23/846（27.2）※</td><td>NA</td><td>1.20（0.66〜1.19）ハザード比</td><td>0.55</td></tr>
+<tr><td>ICU死亡</td><td>20（27.8）</td><td>21（28.4）</td><td>0.6（-0.2〜15.12）</td><td>1.02（0.61〜1.72）</td><td>0.94</td></tr>
+<tr><td>28日全死亡</td><td>22（30.6）</td><td>21（28.4）</td><td>-2.2（-0.2〜12.7）</td><td>0.93（0.56〜1.53）</td><td>0.77</td></tr>
+<tr><td>人工呼吸離脱日数</td><td>14（0〜21）［12］</td><td>8（0〜21）［11］</td><td>NA</td><td>0.89（0.57〜1.40）率比</td><td>0.62</td></tr>
+<tr><td>ICU在室日数</td><td>38/1152（33.0）※</td><td>36/1126（32.0）※</td><td>NA</td><td>0.98（0.62〜1.55）ハザード比</td><td>0.93</td></tr>
+<tr><td>生存者</td><td>16（11〜28）［18］</td><td>16（8〜28）［17］</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>死亡者</td><td>8（5〜16）［11］</td><td>10（5〜14）［11］</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>抗菌薬フリー日数</td><td>21（14〜24）［18］</td><td>22（13〜24）［18］</td><td>NA</td><td>1.01（0.80〜1.29）率比</td><td>0.92</td></tr>
+</tbody></table></div>
+<p>※ 関心事象数（定着・感染・生存ICU退室）／曝露日数（1000患者日あたりの発生率）。MDR感染は71例で情報が得られた対照群の値。</p>
+<h3>8. 結果 — 微生物学</h3>
+<ul><li>介入群における従来培養とmPCRの<strong>一致率は、菌の同定で81.5%、想定される薬剤感受性で72.2%</strong>（不一致の詳細は補遺）。</li><li><strong>MDR菌によるVAP・vHAPは介入群7例（9.4%）対対照群1例（1.4%）</strong>。</li><li>詳細な従来培養結果は補遺の eTable S1・eFig S1、AMT調整の詳細は eTable S4 に掲載（本文には未収載）。</li></ul>
+<h3>9. 考察 — 著者の解釈</h3>
+<p><strong>先行RCTとの位置関係</strong>。著者は本試験の培養証明例での増加幅（24.2%）が、INHALE-WP3の全体集団での増加幅（21%）と「ほぼ同等」であることに注目する。両試験の差を生んだのは<strong>主要アウトカムの定義</strong>だという。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>INHALE-WP3（Enne ら）</th><th>VAPERO（本試験）</th></tr></thead>
+<tbody>
+<tr><td>判定に使う情報</td><td>従来培養と<strong>mPCRの両方</strong></td><td><strong>従来培養のASTのみ</strong></td></tr>
+<tr><td>判定基準</td><td>「appropriate and proportionate」＝検出された病原体に対して過度に広域でない。試験専用に作られた抗菌薬調整ガイドラインを参照</td><td>抗菌薬本数の減少／βラクタムの最狭ランク／培養陰性時の全中止 という厳格な操作的定義</td></tr>
+<tr><td>著者の評価</td><td>各施設の日常臨床を必ずしも反映しない</td><td>mPCRから信頼できるAST情報が得られない現実に即した保守的定義</td></tr>
+<tr><td>主要アウトカム達成率</td><td>76.5%対55.9%と高い</td><td>35.1%対23.6%と低い</td></tr>
+</tbody></table></div>
+<p><strong>全体集団で効果が出なかった理由</strong>として著者が挙げるのは3つ。</p>
+<ol><li><strong>VAP・vHAPの臨床的疑いの閾値が低かった</strong> — 疑い例の半分未満（45.9%）しか培養で確認されなかった。</li><li><strong>mPCR陰性を根拠に抗菌薬を早期中止することへの主治医の抵抗</strong> — FAPPの内在的限界（パネル外病原体の存在）への懸念による。この「ガイドラインよりmindlines（臨床医の信念）が優先される」現象は Stewart らの質的研究（AAC 2025）で繰り返し報告されている。</li><li><strong>mPCRだけが検出した微生物が、真の感染ではなく気道定着だった可能性</strong> — 不要な治療継続や変更を促し、介入の見かけ上の利益を減弱させた。</li></ol>
+<p>さらに著者は、本試験が<strong>上記の臨床データ（とくに「実効感度」の報告）が出そろう前に実施された</strong>ことを注記している。</p>
+<p><strong>メタ解析との整合</strong>。5つのRCTをプールした最近のメタ解析（De Albuquerque Pessoa Dos Santos ら, Crit Care 2025）は、死亡への影響はないものの、標的AMTを受ける確率の有意な上昇（RR 1.78、95%CI 1.23〜2.57）と、適切AMT到達までの時間の有意な短縮（-28.03時間、95%CI -47.49〜-8.58）を示している。本試験の培養証明例でのRR 1.78 は、このプール推定値と数値的に一致する。</p>
+<p><strong>強み（著者の主張）</strong>：</p>
+<ul><li>病態生理と細菌叢が異なるCAPを除外し、<strong>vHAPとVAPに限定</strong>した明確な集団定義。</li><li>免疫抑制患者を除外し、この集団特有の交絡を制御（免疫抑制患者を対象とする別試験 NCT05405491 が現在進行中）。</li><li>主要アウトカムが<strong>主治医から独立した盲検の判定者により全例厳格に検証</strong>された堅牢な指標であること。</li><li><strong>定量的呼吸器検体のみ</strong>を用い、低質検体のリスクを低減。</li><li>感染症専門医の関与を必須にしない<strong>プラグマティックな設計</strong>により、専門的助言が時間外には得られない実地の現場でのmPCRの「内在的インパクト」を評価できた（一方でこれが全体集団で有意差が出なかった理由にもなり得る、と著者自身が認めている）。</li></ul>
+<p><strong>限界（著者が挙げた8点）</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>検出力不足</td><td>最終解析集団は計画より約10%小さい。20%の絶対差を想定した設計だったが観察差は11.5%。事後計算で、対照群イベント率20%を仮定すると、74例対72例では<strong>20%差に対する検出力77.2%、観察された11.5%差に対しては36%</strong>。陰性の主要結果は慎重に解釈すべき</td></tr>
+<tr><td>2</td><td>感染症専門医の助言なし</td><td>先行研究の多くと対照的に、FAPP結果の解釈は主治医に委ねられた</td></tr>
+<tr><td>3</td><td>微生物学的確認は約半数のみ</td><td>先行研究と整合するが、mPCRの信頼性への不確実さが陰性結果に基づく中止をためらわせた可能性。<strong>両群で培養証明肺炎の割合が偏っていた（51.4%対40.3%）ことがサブグループ所見の信頼性に影響し得る</strong></td></tr>
+<tr><td>4</td><td>時間外発症例は組み入れ不能</td><td>FAPPが利用できないため。組み入れバイアスの可能性はあるが結果への影響は小さいと著者は判断</td></tr>
+<tr><td>5</td><td>主要アウトカムが患者中心でない</td><td>標的AMTは最終的に予後に影響すると期待されるが直接の患者アウトカムではない。VAP帰属死亡が5%未満という推計から、死亡をエンドポイントにすると非現実的な症例数が必要。人工呼吸期間や在室日数は肺炎以外の多因子に左右されるため主要評価項目として不適と判断</td></tr>
+<tr><td>6</td><td>検体種の偏り</td><td>BALは介入群9.4%対対照群26.4%。ただし採取法は主治医裁量で、ランダム化は採取後に実施。培養証明はむしろ介入群で多く、mPCRの診断性能への検体法の影響は限定的とする最近のデータもあり、環境負荷の観点からもETA依存が支持される</td></tr>
+<tr><td>7</td><td>MDR菌の低頻度</td><td>本集団でのMDR頻度が低いことがmPCRのASTへの寄与を小さくした可能性。高頻度のケースミックスでの有用性を示す有望なデータがある（Bay ら, Ann Intensive Care 2024）</td></tr>
+<tr><td>8</td><td>外的妥当性</td><td>検査室の稼働時間外に発症したVAP・vHAP（30例、スクリーニングした肺炎エピソードの5.3%）を組み入れられなかったこと</td></tr>
+</tbody></table></div>
+<p><strong>著者の結論</strong>：VAPまたはvHAPが疑われる患者において、FAPPを従来微生物学に上乗せしても24時間後の標的AMTの割合は全体集団では有意に増えなかったが、診断が確定した患者のサブグループでは有意差が観察された。患者アウトカムへの影響は認められなかった。</p>
+<h3>10. 批判的吟味（JCでの論点）</h3>
+<p><strong>（1）主要アウトカムの信頼区間とp値が整合していない</strong>。絶対差11.5%、95%CI -0.03〜26.2 という区間は、下限が実質的に0に接している（-0.03%）。この区間から素直に読めるp値は0.05前後であって、報告されている0.13ではない。相対危険度1.49（95%CI 0.89〜2.50）はp = 0.13と整合するので、<strong>絶対差のCIの計算法（おそらく別の近似法）とカイ二乗検定が食い違っている</strong>可能性が高い。「あと少しで有意」に見えるが、ここは慎重に扱うべき点。</p>
+<p><strong>（2）培養証明例のサブグループは、事前計画外・小標本・群間不均衡の三重苦</strong>。67例しかなく、相対危険度1.78の95%CIは0.96〜3.29と<strong>1をまたいでいる</strong>のにp = 0.048と報告されている（絶対差のCI下限は本文0.01・抄録1.1と食い違う）。さらに、培養証明肺炎の割合そのものが群間で偏っており（51.4%対40.3%）、これはランダム化で担保されない<strong>post-randomization selection（後付けの部分集団選択）</strong>である。著者自身が限界として認めている通り、<strong>このサブグループ所見は仮説生成にとどまる</strong>。</p>
+<p><strong>（3）Table 3 の信頼区間に明らかな誤記がある</strong>。MDR感染のハザード比 1.20（95%CI 0.66〜1.19）は上限が点推定値より小さく、数学的にあり得ない。ICU死亡の絶対差 0.6（-0.2〜15.12）、全死亡の絶対差 -2.2（-0.2〜12.7）も、点推定値が区間の外にある。<strong>表の数値がそのままでは検証できない</strong>ことは、JCで指摘すべき事実。</p>
+<p><strong>（4）介入は「検査」ではなく「検査＋非標準化された解釈」だった</strong>。半定量的菌量に陽性閾値を設けず、標準化アルゴリズムもASTプロトコルも与えず、調整は提案にとどめた。これは実臨床の再現という点でプラグマティックだが、<strong>「情報を与えたが行動は変えなかった」ことが陰性結果の正体</strong>である可能性が高い。介入群でも24時間後に治療を変えたのは28.4%にすぎない。この試験が否定したのは「mPCRという検査の価値」ではなく「mPCRを裸で渡す運用の価値」だと読むべき。</p>
+<p><strong>（5）主要アウトカムの定義が保守的すぎる可能性</strong>。標的AMTの判定を<strong>従来培養の最終ASTのみ</strong>に基づかせたため、mPCR情報に基づいて主治医が行った調整でも、後に培養で別の菌が出れば「標的でない」と判定され得る。著者はこれを「mPCRからは信頼できるASTが得られない」ことへの誠実な対応と説明するが、<strong>介入の効果を系統的に過小評価する方向のバイアス</strong>であることは押さえておきたい。逆にINHALE-WP3のように両方の情報で判定すれば効果は大きく見える。この差が、両試験の達成率（76.5%対55.9% と 35.1%対23.6%）の落差をほぼ説明する。</p>
+<p><strong>（6）「single-blind」というラベルの妥当性</strong>。方法にはopen-label（オープンラベル）と明記され、盲検化されていたのはアウトカム判定者だけである。患者・主治医は割付を知っており、<strong>主要アウトカムは主治医の処方行動そのもの</strong>なので、判定者盲検があっても行動バイアスは残る（介入群の主治医は「何かを変えるべき」という圧を感じ得る）。タイトルの「randomized, single-blind trial」という表記はやや寛容な自己申告といえる。</p>
+<p><strong>（7）検体種の不均衡が意味するもの</strong>。BALは対照群で26.4%、介入群で9.4%と3倍近い差がある。ランダム化は採取後だったとされるが、この規模の偏りが偶然だとすれば、<strong>146例という標本サイズでは他の未測定因子も同様に偏り得る</strong>ことを示唆する。BALの方が診断精度は高いはずなのに培養証明率は介入群の方が高い、という一見逆向きの結果になっている点も、偶然変動の大きさを物語る。</p>
+<p><strong>（8）COVID-19期に実施された試験である</strong>。2020年6月〜2023年9月の登録で、ICU入室理由のCOVID-19は対照群22.2%対介入群12.2%と偏っている。ステロイド使用・肺の背景・二次感染の様相が異なる集団が10%ポイント差で混ざっており、<strong>現在の非COVID主体のICU集団にそのまま外挿できるかは検討を要する</strong>。</p>
+<p><strong>（9）判定された「標的化」が患者利益に翻訳される保証はない</strong>。抗菌薬フリー日数は21日対22日（率比 1.01）と完全に横並びで、<strong>標的化が進んでも抗菌薬の総曝露は減っていない</strong>。「デエスカレーションが8例から16例に増えた」ことが、28日スケールでは何の差も生んでいない。プロセス指標を主要アウトカムに置く戦略の限界がここに出ている。</p>
+<p><strong>（10）「陰性なら止める」が機能しない構造的理由</strong>。FAPPの実効感度は82%であり、5〜6例に1例はパネル外の菌を見逃す。この数字を知っている臨床医が、VAP疑いの重症患者で抗菌薬を止めるのは合理的でない。<strong>mPCRの価値を引き出したいなら、「陰性で止める」ではなく「陽性で絞る」方向に運用を設計する</strong>べきで、本試験の培養証明例でのみ効果が出た事実はまさにそれを示している。</p>
+<h3>11. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>VAPのナラティブレビュー（疫学・診断・治療の総説）</td><td>Papazian L, Klompas M, Luyt CE. Intensive Care Med 2020;46(5):888-906</td></tr>
+<tr><td>3</td><td>ENIRRIs：ICU関連呼吸器感染の多国籍前向きコホート</td><td>Martin-Loeches I, Reyes LF, Nseir S ら. Intensive Care Med 2023;49(10):1212-1222</td></tr>
+<tr><td>4</td><td>VAPに帰属する死亡は5%以下 — 手法を見直した再現研究</td><td>Steen J, Vansteelandt S, De Bus L ら. Ann Am Thorac Soc 2021;18(5):830-837</td></tr>
+<tr><td>5</td><td>HAP・VAP管理のIDSA/ATS 2016ガイドライン</td><td>Kalil AC, Metersky ML, Klompas M ら. Clin Infect Dis 2016;63(5):e61-e111</td></tr>
+<tr><td>9</td><td>FilmArray Pneumonia Panelと従来法の実務比較・ASTへの潜在的影響</td><td>Buchan BW, Windham S, Balada-Llasat JM ら. J Clin Microbiol 2020;58(7):e00135-20</td></tr>
+<tr><td>10</td><td>FilmArray Pneumonia plus Panelの性能評価（SR・メタ解析）— 感度94%・実効感度82%・特異度98%、TAT 1.5〜6時間の出典</td><td>Moy AC, Kimmoun A, Merkling T ら. Anaesth Crit Care Pain Med 2023;42(6):101300</td></tr>
+<tr><td>11</td><td>成人肺炎における迅速シンドロミックmPCRの多施設評価（早期の抗菌薬適正化）</td><td>Monard C, Pehlivan J, Auger G ら. Crit Care 2020;24(1):434</td></tr>
+<tr><td>12</td><td>下気道病原体のPOCT分子検査でICU肺炎の安全なデエスカレーションが改善（RCT）— 48時間後の標的治療80%対29%</td><td>Poole S, Tanner AR, Naidu VV ら. J Infect 2022;85(6):625-633</td></tr>
+<tr><td>13</td><td>入院肺炎疑い患者への迅速mPCRパネル（単施設プラグマティックRCT）— 治療変更までの時間に差なし</td><td>Virk A, Strasburg AP, Kies KD ら. Lancet Microbe 2024</td></tr>
+<tr><td>14</td><td>INHALE WP3：HAP・VAPでの迅速ICU内シンドロミックPCRの多施設プラグマティックRCT — 標的治療76.5%対55.9%、臨床的治癒で非劣性を示せず</td><td>Enne VI, Stirling S, Barber JA ら. Intensive Care Med 2025;51(2):272-286</td></tr>
+<tr><td>15</td><td>HAP・VAP・HCAP管理のATS/IDSA 2005ガイドライン（本試験の肺炎疑い基準の出典）</td><td>American Thoracic Society, IDSA. Am J Respir Crit Care Med 2005;171(4):388-416</td></tr>
+<tr><td>19</td><td>免疫抑制とICU獲得MDR定着・感染の関係（MDR感染の定義の出典）</td><td>Kreitmann L, Vasseur M, Jermoumi S ら. Intensive Care Med 2023;49(2):154-165</td></tr>
+<tr><td>20</td><td>デエスカレーションのコンセンサス定義とβラクタムの順位づけ（本試験の標的治療判定の骨格）</td><td>Weiss E, Zahar JR, Lesprit P ら. Clin Microbiol Infect 2015;21(7):649.e1-649.e10</td></tr>
+<tr><td>23</td><td>ガイドラインよりmindlines — 迅速分子診断の適用に臨床医の信念がどう影響するかの質的研究</td><td>Stewart SJF, Pandolfo AM, Jani Y ら. Antimicrob Agents Chemother 2025;69(3):e01156-24</td></tr>
+<tr><td>24</td><td>培養陽性VAPでFilmArray Pneumonia plus Panelの標的外細菌の疫学と予測（多施設後ろ向き）</td><td>Berteau F, Kouatchet A, Le Gall Y ら. Ann Intensive Care 2025;15:57</td></tr>
+<tr><td>25</td><td>重症肺炎におけるシンドロミック分子診断の影響（RCTのSR・メタ解析）— 標的治療RR 1.78、適切治療到達まで-28.03時間</td><td>De Albuquerque Pessoa Dos Santos Y, Tomazini BM, Dos Santos MHC ら. Crit Care 2025;29(1):379</td></tr>
+<tr><td>26</td><td>免疫抑制患者を対象とした後継RCT（進行中）</td><td>University Hospital Lille. ClinicalTrials.gov NCT05405491</td></tr>
+<tr><td>27</td><td>Flagship II：グラム陰性菌リスクのある肺炎でのBAL迅速細菌PCR（多施設RCT）</td><td>Darie AM, Khanna N, Jahn K ら. Lancet Respir Med 2022;10(9):877-887</td></tr>
+<tr><td>28</td><td>重症成人のVAP診断（SR・メタ解析）— 疑い例の半分程度しか確認されない現実の裏づけ</td><td>Fernando SM, Tran A, Cheng W ら. Intensive Care Med 2020;46(6):1170-1179</td></tr>
+<tr><td>30</td><td>VAPの呼吸器検体採取法3種のカーボンフットプリント比較（ETA依存の環境的根拠）</td><td>Celier A, Correard C, de Maisoncelle I ら. Ann Intensive Care 2025;15(1):191</td></tr>
+<tr><td>31</td><td>ESBL産生腸内細菌目の直腸保菌者におけるvHAPへの迅速mPCRの性能と影響</td><td>Bay P, Fihman V, Woerther PL ら. Ann Intensive Care 2024;14(1):118</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 VAP・vHAP疑いの免疫正常成人146例のRCTで、==マルチプレックスPCRを従来培養に上乗せしても24時間後の標的抗菌薬治療は有意に増えなかった（35.1%対23.6%、絶対差11.5%、95%CI -0.03〜26.2、p = 0.13）<mark class="hl">。有意差が出たのは</mark>培養で起炎菌が証明された45.9%の患者だけ（55.3%対31.0%、絶対差24.2%、p = 0.048）==で、28日死亡・人工呼吸離脱日数・抗菌薬フリー日数はすべて不変だった。</p>
+<p><mark class="hl">この試験が否定したのは「迅速PCRという検査」ではなく「結果を渡すだけで運用ルールを与えない導入の仕方」である。</mark> 介入群でも24時間後に治療を変えたのは28.4%にとどまり、増えた変更の実体はデエスカレーション8例→16例にすぎない。<mark class="hl">当院で導入を検討するなら、①MDR保菌・耐性菌疫学が高い集団に絞る、②「陰性なら中止」ではなく「陽性なら何に絞るか」を明文化したアルゴリズムをASTと一緒に敷く、③24時間運用できるかを先に確認する — この3点が揃わない限り、抗菌薬曝露は1日も減らない。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
