@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s40560-026-00877-4.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Kotani Y, Koroki T, Hayashi Y, Russotto V. The hemodynamics of tracheal intubation in critically ill patients: a narrative review. J Intensive Care. 2026;14:42. DOI: 10.1186/s40560-026-00877-4</dd><dt>掲載誌</dt><dd>Journal of Intensive Care（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s40560-026-00877-4" target="_blank" rel="noopener">doi.org/10.1186/s40560-026-00877-4</a>（本文PDFは別途）</dd><dt>原題</dt><dd>The hemodynamics of tracheal intubation in critically ill patients: a narrative review</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>挿管を「気道の手技」ではなく「血行動態の介入」として扱う</strong>。当院の挿管チェックリストに、解剖学的困難気道（Mallampati・開口・頸部可動）だけでなく <strong>生理学的困難気道の評価欄</strong>（ショック・低酸素血症・代謝性アシドーシス・右室機能）を追加する余地がある。</li><li><strong>導入薬のデフォルトをプロポフォールから外す</strong>。INTUBE解析でプロポフォールは用量によらず循環虚脱の独立危険因子であり、しかも「唯一の修正可能な危険因子」だった。当院でも循環不安定が予想される症例ではケタミンまたはエトミデートを第一選択とし、プロポフォールを選ぶなら理由を言語化する。</li><li>ただし本総説自身が引用する最新の多施設RCT（n=2365）では、ケタミンはエトミデートより循環虚脱が<strong>多かった</strong>（22.1% vs 17.0%、リスク差5.1ポイント）。「ケタミン＝安全」と単純化しない。ケタミンかエトミデートかは病態・在庫・慣れで決めてよい、というのが現時点の落としどころ。</li><li><strong>ルーチンの輸液ボーラスはやめる</strong>。PrePARE・PREPARE II の2本のRCTで予防的ボーラスの有効性は示されていない。代わりに輸液反応性（PLR・PPV）と輸液耐容性（下大静脈径・B-line）を挿管前にエコーで一度見る運用にする。当院はベッドサイドエコーが回るので実装コストは低い。</li><li><strong>昇圧薬は「起きてから」ではなく「起きる前に」</strong>。ノルアドレナリンをつないだ状態で導入する、あるいは希釈フェニレフリン/ノルアドレナリンのボーラスを手元に用意してから導入する。PREVENTION・FLUVA の2本のRCTが進行中で、結果が出るまでは施設内の合意形成で運用する。</li><li><strong>可能なら導入前に動脈ライン</strong>。非観血の間欠測定では低血圧の暴露時間を取りこぼす。麻酔領域のAWAKE試験では持続動脈圧モニタリングが低血圧暴露を減らした。</li><li><strong>前酸素化はNIVを第一選択</strong>（特に P/F &lt; 200）。喉頭鏡操作中の無呼吸期はHFNCを併用。当院はHFNC・NIVとも常備しており、"リザーバーマスクで待つ"を既定にしない。</li><li><strong>挿管直後のPEEPは 5〜6 cmH2O から</strong>。目標PEEPへは循環が落ち着いてから段階的に上げる。挿管成功と同時に高PEEPを当てて血圧が落ちる場面は当院でも起こりうる。</li><li><strong>RRS（院内急変対応）での気管挿管にも同じ枠組みを適用する</strong>。病棟での緊急挿管こそ、循環評価もラインも不十分なまま導入薬を打ちがちで、この総説の警告がそのまま当てはまる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症患者の気管挿管は合併症が多い。INTUBE研究（29カ国）では 42.6% に循環不安定、9.3% に重度低酸素血症、3.1% に心停止が起きた。周術期挿管に伴う低血圧はICU死亡・28日死亡と独立に関連する。</li><li><strong>Unknown</strong>：周術期挿管の血行動態管理を導くランダム化エビデンスは乏しい。予防的昇圧薬・輸液の最適化・導入薬の選択いずれも決定打がなく、臨床医は生理学的推論に頼らざるを得ない。</li><li><strong>What's new</strong>：挿管を「一瞬の出来事」ではなく <strong>導入前 → 導入 → 無呼吸 → 陽圧換気開始 → 挿管後ケア</strong> という5相の軌跡として描き直し、各相で何が血行動態を壊すのかを機序レベルで整理した。その上で相ごとに対応するケアバンドル（Fig. 2）と、優先順位をつけた研究アジェンダ（Table 2）を提示した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで <strong>重症患者の挿管では、導入前の内因性カテコラミンによる「見せかけの安定」が導入薬で一瞬にして崩れ、無呼吸による低酸素・アシドーシスと陽圧換気への移行が追い打ちをかける。危険因子は累積するので、対策も相ごとに前もって積み上げるしかない。</strong></p>
+</div>
+<ul><li>挿管前の重症患者は、内因性カテコラミン（アドレナリン・ノルアドレナリン）の放出で心拍出量と血管抵抗をかろうじて維持している。血圧が保たれていること自体が安定の証拠ではなく、<strong>予備能が尽きかけているサイン</strong>である。</li><li>INTUBE研究では、挿管前の収縮期血圧が低いことと心拍数が高いことが、周術期の循環不安定の独立危険因子だった。手術室では喉頭展開時の交感神経反応を「抑えるべき害」と見るが、ICUでは同じ反応が最後の循環支持になっている。手術室で守りになるものがICUでは破滅的になりうる、という対比が本総説の核心のひとつ。</li><li>導入薬はすべて交感神経緊張を鈍らせる。迅速導入（RSI）では効果が1分未満で立ち上がるため、「低血圧を見てから対応する」では臓器灌流の低下を防げない。</li><li>プロポフォールは心筋抑制と血管拡張により低血圧を来し、INTUBE解析では<strong>用量によらず</strong>循環虚脱の独立危険因子で、逆確率重み付け（IPTW）で同定された唯一の修正可能な危険因子だった。</li><li>ケタミンとエトミデートは相対的に循環動態が安定する（ケタミンは交感神経刺激作用、エトミデートは心血管抑制が最小）。ただしエトミデートには副腎抑制という固有の欠点がある。レミマゾラムは周術期・心臓外科では良好だがICUでのデータは乏しい。</li><li>ケタミン vs エトミデートのエビデンスは割れている。ベイズ流メタ解析ではケタミンが死亡を減らす確率83.2%、別のシステマティックレビューではケタミンで血行動態不安定がむしろ増える。多施設RCT（n=2365）では28日死亡に差はなく（28.1% vs 29.1%）、循環虚脱はケタミンで多かった（22.1% vs 17.0%、リスク差5.1ポイント、95%CI 1.9〜8.3）。</li><li>無呼吸は低酸素血症・高炭酸ガス血症・アシドーシスを一気に進める。pHが 7.2 を下回ると心筋収縮力が低下し、アドレナリン反応性が鈍り、不整脈リスクが上がる。</li><li>右室は薄い壁ゆえ後負荷上昇に脆弱で、ARDSでは低酸素性肺血管攣縮（HPV）と微小血栓により肺血管抵抗が上がる。右室後負荷↑ → 左室充満↓ → 右冠動脈血流↓ → 右室虚血、という悪循環に入りうる。</li><li>陽圧換気への移行は、自発吸気による静脈還流の駆動力を消し、胸腔内圧を上げて右房への圧較差を減らす。同時に肺容量増加が肺血管を軸方向・半径方向に圧迫して肺血管抵抗を上げ、右室駆出を悪化させる。</li><li>実践バンドル：チェックリストとチーム内の役割分担 → 導入薬の個別化（プロポフォールを避ける） → 輸液は反応性と耐容性の両方を評価して個別化（ルーチンボーラスは推奨されない） → 予防的昇圧薬と動脈ライン → NIV優先の前酸素化＋HFNCによる無呼吸時酸素化 → ビデオ喉頭鏡で初回成功率を上げる → 挿管後はPEEP 5〜6 cmH2O から漸増し鎮静を丁寧に調節。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>「生理学的困難気道」という考え方</strong>：解剖学的困難気道（Mallampati分類が高い、開口制限、頸部後屈不可など、声門を「見る・通す」のが難しい状態）とは別に、<strong>声門は簡単に見えるのに挿管の過程そのものが患者を殺しかける状態</strong>がある。これが生理学的困難気道である。低血圧・低酸素血症・代謝性アシドーシス・右室不全が背景にあると、導入薬の一撃や陽圧換気の開始で循環が破綻する。両者は重なり合い、互いを悪化させる。初回挿管失敗（first-pass failure）は有害事象の増加と関連するため、解剖学的困難気道をうまくさばくことが生理学的破綻の予防にもなる。</p>
+<p><strong>INTUBE研究</strong>とは：Russotto らが29カ国のICUで行った国際観察研究（JAMA 2021）。重症患者の挿管の実態と有害事象を記述したもので、本総説の疫学的な土台になっている。</p>
+<p><strong>RSI（rapid sequence induction、迅速導入）</strong>：鎮静薬と筋弛緩薬を続けざまに静注し、マスク換気を最小限にして短時間で挿管する手順。誤嚥を減らす代わりに、無呼吸時間が生じ、交感神経遮断が一気に起こる。</p>
+<p><strong>HPV（hypoxic pulmonary vasoconstriction、低酸素性肺血管攣縮）</strong>：肺胞が低酸素になるとその領域の肺細動脈が収縮し、換気の悪い肺胞への血流を減らして換気血流比を保つ生理的反射。局所なら合目的だが、ARDSのように広範囲で起こると肺血管抵抗が全体として上がり、右室後負荷が跳ね上がる。</p>
+<p><strong>輸液反応性と輸液耐容性</strong>：輸液反応性（fluid responsiveness）は「輸液したら心拍出量が増えるか」で、下肢挙上試験（PLR）や脈圧変動（PPV）などの動的指標で評価する。輸液耐容性（fluid tolerance）は「その患者が臓器障害を起こさずに受け止められる輸液量はどれだけか」という別の概念で、下大静脈径や肺エコーのB-lineパターンなどで評価する。両方を見る必要がある。</p>
+<p><strong>PEEP（呼気終末陽圧）</strong>：呼気終末に気道内に残す陽圧。酸素化を改善する一方、平均気道内圧を上げ、胸腔内圧を通じて静脈還流を減らす。循環血液量が減っている患者では特に影響が大きい。</p>
+<p><strong>前酸素化（preoxygenation）</strong>：挿管前に肺の機能的残気量を酸素で満たしておき、無呼吸中に安全に耐えられる時間を延ばす操作。フェイスマスク、HFNC（高流量鼻カニュラ）、NIV（非侵襲的換気）の3つが主に使われる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>気管挿管は重症患者では日常的だが高リスクな手技である。対象となる患者は循環血液量減少、血管麻痺（vasoplegia）、低酸素血症、アシドーシスといった生理学的破綻を抱えていることが多く、これらが気道管理中の血行動態虚脱のリスクを大きく高める。</p>
+<p>INTUBE研究（29カ国の国際コホート）では、ICUでの挿管の <strong>42.6% が循環不安定</strong>、<strong>9.3% が重度低酸素血症</strong>、<strong>3.1% が心停止</strong> で合併された。このうち最も頻度が高い挿管関連低血圧は、ICU死亡および28日死亡の有意な上昇と関連していた。一過性であっても影響が残る点が重要である。</p>
+<p>本総説の目的は3つ。(1) 挿管中に血行動態がどう推移するかを、導入後の交感神経緊張の消失と陽圧換気への移行に焦点を当てて説明する。(2) 脆弱性が集中する時点を特定する。(3) それらに対応する段階的な周術期ケアバンドルを提案する。ランダム化エビデンスが乏しい領域なので、病態生理学的機序とベッドサイドでの実践を橋渡しする枠組みを提供する、という立て付けである。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。系統的な文献検索プロトコル、事前登録、質評価、メタ解析は行っていない。著者らが選択した文献（本文引用63件）を、生理学的な時系列に沿って統合している。</li><li><strong>対象</strong>：重症患者（成人ICU患者）の気管挿管。特に生理学的困難気道を持つ患者。小児は扱っていない。</li><li><strong>介入・比較</strong>：介入研究ではないため該当なし。導入薬（プロポフォール／ケタミン／エトミデート／ミダゾラム／レミマゾラム）、輸液戦略、予防的昇圧薬、前酸素化デバイス（フェイスマスク／HFNC／NIV）、喉頭鏡（直接 vs ビデオ）の比較が本文内で論じられる。</li><li><strong>アウトカム</strong>：循環虚脱（cardiovascular collapse）・周術期低血圧・重度低酸素血症・心停止・初回挿管成功率・死亡（7日・28日）。</li><li><strong>解析・限界</strong>：著者の選択に基づく叙述的統合であり、選択バイアスは避けられない。相反する結果を示す文献（ケタミン vs エトミデートのメタ解析2本）は両論併記のうえ、方法論の違い（組み入れ基準と統計手法）で説明を試みている。図表は概念図2点と要約表2点。</li><li><strong>著者の立ち位置</strong>：責任著者 Russotto は INTUBE 研究の中心人物であり、本総説が INTUBE の知見を土台に据えているのは自然だが、同時に自己引用が多くなる構造でもある。筆頭著者 Kotani は導入薬に関するレビュー（Crit Care Med 2025）とプロポフォールの有害機序に関する論考（J Cardiothorac Vasc Anesth 2023）の著者でもある。</li></ul>
+<h3>4. 挿管中の血行動態変化の時間経過</h3>
+<p>血行動態の不安定は単一の事象の結果ではなく、順に起こる複数の予測可能なプロセスの積み重ねである。<strong>導入前 → 導入 → 無呼吸 → 陽圧換気開始 → 挿管後ケア</strong> という時系列で捉えることで、リスクを予測し予防策を的確に当てられる。</p>
+<ul><li><strong>導入前</strong>：患者は「もろい平衡状態」で手技に入る。見かけの安定は高い交感神経駆動によって維持されており、真の心血管系の頑健さではなく、限られた生理学的予備能を反映している。</li><li><strong>導入</strong>：導入薬がこの平衡を壊し、アドレナリン作動性緊張を急速に鈍らせ、隠れていた循環の脆弱性を露呈させる。</li><li><strong>無呼吸</strong>：脱飽和、高炭酸ガス血症、そこから生じるアシドーシスが速やかに進行する。この累積負荷が悪化の下地を作る。</li><li><strong>陽圧換気開始</strong>：胸腔内圧が急に上がり、静脈還流が減り、心室の負荷条件が変わる。予備能の乏しい患者では、脆弱性が顕在化した循環虚脱に転じる。</li><li><strong>挿管後</strong>：気管チューブが固定された後もリスクは残る。人工呼吸器設定、薬剤の残存効果、進行中の病態が、患者を安定させることも二次的悪化を招くこともある。</li></ul>
+<p>これら全相を通じ、脅威（薬剤効果、無呼吸、換気圧の変化、交感神経駆動の喪失）は孤立せず<strong>累積する</strong>。挿管を一瞬の出来事ではなく軌跡として認識することが、継続的な先読みと先手の管理の重要性を裏づける。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 重症患者の気管挿管における血行動態の概念的タイムライン（原図・無改変）。横軸は時間で、下端に5つの時点が等間隔に並ぶ。左から Pre-induction（導入前）、Induction（導入）、Apnea（無呼吸）、Positive pressure ventilation initiation（陽圧換気開始）、Post-intubation care（挿管後ケア）。各時点から上方へ灰色の破線が伸び、4本の横長の帯を貫いている。図の最上部には黒枠の説明ボックスが階段状に4つ配置され、それぞれ右向きの矢印を伴って作用の及ぶ時間帯を示す。左から順に「Catecholamine surge（カテコラミン・サージ）」が導入前から導入へ、「Sympatholysis（交感神経遮断）」が導入以降ずっと右端まで、「Hypoxemia/Acidosis（低酸素血症・アシドーシス）」が無呼吸以降へ、「Increase in intrathoracic pressure（胸腔内圧上昇）」が陽圧換気開始以降へと伸びる。&lt;br&gt;本体は色分けされた4本の帯で、上から順に、青枠の Systemic vascular resistance（体血管抵抗）、赤枠の Right ventricular afterload（右室後負荷）、緑枠の Venus return（静脈還流。原文の綴りのまま。Venous return の意）、橙枠の Cardiac contractility（心筋収縮力）。各帯の中に、5つの時点それぞれの変化方向を示す丸いアイコンが並ぶ。&lt;br&gt;体血管抵抗は、導入前が上向き矢印1本（上昇）、導入と無呼吸が下向き矢印2本（強い低下）、陽圧換気開始と挿管後が下向き矢印1本（低下）。右室後負荷は、導入前・導入・無呼吸が横棒（不変）、陽圧換気開始と挿管後が上向き矢印（上昇）。静脈還流は、導入前・導入・無呼吸が横棒（不変）、陽圧換気開始と挿管後が下向き矢印（低下）。心筋収縮力は、導入前が横棒（不変）、導入以降の4時点すべてが下向き矢印（低下）。&lt;br&gt;読み取るべき点は、脅威が相ごとに入れ替わるのではなく積み重なること、そして右室後負荷の上昇と静脈還流の低下は陽圧換気を始めるまで現れない、つまり「挿管に成功した瞬間」が新しい危機の始まりでもあること。</p>
+</div>
+<h3>5. 導入時のアドレナリン作動性虚脱 — 内因性と外因性</h3>
+<h4>5-1. 導入前のカテコラミン・サージの血行動態的意味</h4>
+<p>ショック患者では、内因性カテコラミン（主にアドレナリンとノルアドレナリン）の放出が、心拍出量と体血管抵抗を維持する代償機構として働く。さらに、疼痛（外傷患者や動脈カニュレーションなどの処置中）、興奮、恐怖が、挿管を受ける重症患者のアドレナリン反応をいっそう高める。</p>
+<p>しかし、循環カテコラミンが過剰になると、心筋酸素消費量が増え、虚血が悪化し、心室性不整脈が誘発されうる。INTUBE研究では、<strong>挿管前の収縮期血圧が低いこと</strong>と<strong>心拍数が高いこと</strong>が、周術期の循環不安定リスク上昇と独立に関連していた。これは、そうした患者がすでに代償能力の限界で機能していることを示唆する。麻酔による最小限の交感神経緊張低下でさえ、この脆弱な集団では循環虚脱の引き金になりうる。</p>
+<p>臨床医はこの生理学的状態を、<strong>血行動態が十分だという安心材料ではなく、切迫した不安定の警告サインとして解釈すべき</strong>である。カテコラミン・サージを早期に認識し、適時に血行動態を最適化することが、導入時の虚脱リスクを軽減しうる。</p>
+<p>手術室と ICU の対比が重要である。手術室では、麻酔科医は喉頭展開に伴うアドレナリン・サージを有害と見なす。安定した術前患者では高血圧、頻脈性不整脈、心筋虚血を誘発しうるからで、オピオイド、β遮断薬、あるいは麻酔深度を深めることでこの交感神経反応を鈍らせるのがルーチンの目標になる。対照的に ICU では、患者はしばしばこのアドレナリンの過剰駆動に依存して灌流を保っている。この状況で反応を鈍らせること（導入薬、鎮痛薬、あるいは単に疼痛と興奮を取り除くことによってさえ）は、循環支持の最後の一枚を剥がし、虚脱を招きうる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>手術室の常識をICUに持ち込まない <mark class="hl">頻脈やストレス性高血圧を「安定している」と読んではいけない。それはアドレナリン依存のサインであり、導入で最も崩れやすい患者の姿である。</mark> 手術室で守りになるもの（交感神経反応の抑制）が、ICUでは破滅的になりうる。</p>
+</div>
+<h4>5-2. 導入薬の交感神経遮断作用</h4>
+<p>導入薬は、健忘の達成、不快と興奮の抑制、気管挿管の円滑化に不可欠な役割を果たす。しかしこれらの薬剤は<strong>例外なく</strong>交感神経緊張を鈍らせ、循環虚脱リスクを高める。重要なのは、導入前の血圧が一見正常あるいは上昇していても、鎮静が始まれば急速に血行動態が悪化しうるという点である。その正常血圧は、真の心血管的安定ではなく、ストレス誘発性のカテコラミン状態を反映しているにすぎない。</p>
+<p>RSI が適用される場合、交感神経遮断作用は突然、しばしば<strong>1分未満で</strong>発現する。この場合、明らかな低血圧に反応して行う後手の血行動態介入では、臓器の低灌流を防ぐには遅すぎる可能性がある。したがって臨床医は導入後の交感神経緊張喪失を<strong>予期</strong>すべきであり、それは典型的に血圧と心拍出量の顕著な低下を引き起こす。低血圧の発生と持続時間を最小化する予防戦略が、この決定的な時期の灌流維持に不可欠である。</p>
+<h4>5-3. 導入薬の薬理学的な血行動態への影響</h4>
+<ul><li><strong>プロポフォール</strong>：速やかな効果発現と再現性のある薬物動態から広く使われる。しかし心筋抑制と全身血管拡張により、一貫して低血圧と関連する。重症患者では循環虚脱の独立危険因子として浮かび上がっている。</li><li><strong>ケタミン</strong>：交感神経刺激作用により、相対的に血行動態が安定する。ただし心筋酸素需要が増える点は注意を要する。</li><li><strong>エトミデート</strong>：心血管抑制が最小で血行動態が安定するが、<strong>副腎抑制</strong>という固有の限界を持つ（1984年の Wagner らの報告以来知られる、副腎ステロイド合成の阻害）。</li><li><strong>レミマゾラム</strong>：新しいベンゾジアゼピン系薬。周術期および心臓外科の集団で良好な血行動態プロファイルを示しているが、ICU患者でのエビデンスはまだ乏しい。</li><li><strong>ミダゾラム</strong>：心拍出量・体血管抵抗・平均血圧・心筋収縮力をいずれも低下させ、せん妄リスクもある。院外RSIでのミダゾラム使用は用量依存的な低血圧増加と関連しうる一方、救急での挿管では過少投与も報告されている。</li></ul>
+<p>総合すると、循環不安定が予想される場面（すなわち集中治療の現場）では、<strong>プロポフォールは避け、代替薬を優先すべき</strong>であり、薬剤選択は慣れや利便性ではなく血行動態的な忍容性を優先すべきである。</p>
+<h4>Table 1. 導入薬の血行動態への影響（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>心拍出量</th><th>体血管抵抗</th><th>平均動脈圧</th><th>心拍数</th><th>心筋収縮力</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>プロポフォール</td><td>↓</td><td>↓↓</td><td>↓↓</td><td>↓ または →</td><td>↓</td><td>循環不安定の危険因子</td></tr>
+<tr><td>ケタミン</td><td>↑</td><td>→ または ↑</td><td>→ または ↑</td><td>↑</td><td>↑</td><td>心筋酸素需要が増加</td></tr>
+<tr><td>エトミデート</td><td>→</td><td>→ または ↑</td><td>→</td><td>→</td><td>↓ または →</td><td>副腎抑制</td></tr>
+<tr><td>ミダゾラム</td><td>↓</td><td>↓</td><td>↓</td><td>↓ または →</td><td>↓</td><td>せん妄リスク</td></tr>
+<tr><td>レミマゾラム</td><td>→</td><td>↓ または →</td><td>↓ または →</td><td>→</td><td>→</td><td>データが限られる</td></tr>
+</tbody></table></div>
+<p>矢印の向きは変化の方向、本数は変化の程度（2本＝より大きい変化）を示す。→ は不変。</p>
+<h4>5-4. 臨床エビデンス</h4>
+<p>薬剤選択はアウトカムに影響する。</p>
+<ul><li><strong>INTUBE研究の二次解析</strong>（Russotto、AJRCCM 2022）：プロポフォールは<strong>用量によらず</strong>循環虚脱リスクの上昇と関連し、逆確率重み付け（IPTW）によって同定された<strong>唯一の修正可能な危険因子</strong>であった。</li><li><strong>Matchett らのRCT</strong>（Intensive Care Med 2022）：エトミデート vs ケタミン。<strong>7日生存率はケタミン 85.1% vs エトミデート 77.3%</strong> とケタミンが良好だったが、<strong>28日時点では 66.8% vs 64.1% で統計学的有意差なし</strong>。</li><li><strong>ベイズ流メタ解析</strong>（Koroki、Crit Care 2024）：<strong>ケタミンが死亡を減らす確率 83.2%</strong>。</li><li><strong>別のシステマティックレビュー</strong>（Greer、Crit Care Med 2025）：ケタミンは昇圧薬使用を減らすものの血行動態不安定はむしろ増える可能性があり、生存の利益はないと示唆。</li><li>上記2つのメタ解析の食い違いは、組み入れ研究の選択と統計手法という方法論的差異を反映している可能性が高い。</li><li><strong>多施設RCT（n=2365）</strong>（Casey、N Engl J Med 2025）：RSIにおけるケタミン vs エトミデート。<strong>28日死亡は 28.1%（ケタミン） vs 29.1%（エトミデート）で有意差なし</strong>。<strong>循環虚脱はケタミン 22.1% vs エトミデート 17.0%</strong>（リスク差 5.1 パーセントポイント、95%CI 1.9〜8.3）で、ケタミンの方が多かった。その他の安全性アウトカムも同様。</li></ul>
+<p>したがって、この2剤のどちらを使うかは、臨床的文脈、患者背景、施設での入手可能性に基づいて決めるべきである、というのが著者らの結論である。</p>
+<h3>6. 低酸素血症と無呼吸の心臓への帰結</h3>
+<h4>6-1. 低酸素血症・無呼吸中の心筋虚血</h4>
+<p>心臓は酸素供給の変化に最も敏感な臓器のひとつである。低酸素血症に応じて冠動脈血流は増加し、心筋への酸素供給を保とうとするが、高度の低酸素血症では、この代償反応では虚血を防ぎきれない。<strong>短時間の低酸素血症でも心筋虚血を誘発し、収縮力を損ない、心拍出量と酸素供給をさらに低下させうる。</strong></p>
+<p>周術期の低酸素血症は重症患者の挿管では一般的で、特に肥満患者で多い（INTUBEコホートの肥満患者に関する二次解析、Crit Care 2025）。ARDS、肺塞栓症、誤嚥など、もともと酸素化障害がある患者では、重度低酸素血症を来すリスクがさらに高い。</p>
+<p>無呼吸はこのリスクを増幅する。換気が止まることで二酸化炭素（CO₂）が蓄積し、pH が低下する。当初これらの変化は、CO₂ と水素イオン（H⁺）が血管平滑筋の緊張に直接作用することにより、血管拡張と冠血流の増加をもたらす。しかし <strong>pH が臨界閾値（例えば 7.2）を下回ると、心筋収縮力が低下し、アドレナリン作動性の反応性が減弱し、不整脈リスクが上昇する。</strong> これらの変化は心拍出量と冠灌流をさらに損ない、心筋虚血を伝播させる。</p>
+<p>加えて、低酸素血症と無呼吸の間の交感神経賦活は、不整脈リスクを悪化させ血行動態不安定に寄与しうる。挿管中に投与された鎮静薬は、血管拡張と心筋抑制を通じてこれらの作用をさらに増強し、心血管系の脆弱性を積み増す。</p>
+<h4>6-2. 右室不全と低酸素血症</h4>
+<p>右室（RV）不全は、周術期挿管の血行動態不安定に対する複雑で、しばしば過小評価される寄与因子である。周術期において右心を左心から区別するいくつかの解剖学的・生理学的特徴がある。</p>
+<ol><li><strong>右冠動脈（RCA）は収縮期・拡張期の両方で血流を受ける</strong>。拡張期優位に灌流される左冠動脈と異なるこの二相性の灌流は、右室が一過性の低酸素血症にいくらか耐性がある可能性を示唆する。</li><li><strong>右室壁が薄い</strong>ため、肺動脈圧上昇のような圧負荷に特に脆弱である。</li><li><strong>HPV（低酸素性肺血管攣縮）</strong>。肺胞低酸素に応じた肺細動脈の反射性収縮であり、ARDS のように広範な肺領域が侵されると、肺血管抵抗を著明に増加させうる。</li><li>HPV に加え、<strong>ARDS における微小血栓による肺血管閉塞</strong>の認識が高まっており、これも肺高血圧と右室不全に寄与する。</li></ol>
+<p>右室後負荷が上昇するにつれ、左室の充満が減り、RCA 血流が細り、<strong>右室虚血と循環虚脱の悪循環</strong>に陥りうる。</p>
+<h3>7. 陽圧換気への移行 — 心肺相互作用</h3>
+<p>導入、挿管、侵襲的人工呼吸の開始という一連の流れは、心肺相互作用の生理学の<strong>典型例</strong>である。RSI という極めて短い時間の中で、循環系と呼吸系に並行して変化が起こる。この現象の理解が、その有害な臨床的帰結を軽減しうる。</p>
+<p><strong>なぜ陽圧に変わると循環が悪くなるのか</strong>（機序を分解する）。</p>
+<ul><li><strong>自発呼吸下</strong>：吸気努力によって胸腔内圧が陰性になり、右房への静脈還流が促進される（＝右室前負荷が増える）。呼気終末（機能的残気量、FRC）では肺胞圧が大気圧と等しくなり、この圧レベルで肺血管抵抗は最小になる。</li><li><strong>鎮静薬と筋弛緩薬の投与</strong>：自発呼吸が消失し、陰圧換気から陽圧換気へ移行する。これにより<strong>静脈還流の重要な駆動因子が失われ</strong>、同時に胸腔内圧が上昇する。</li><li><strong>その帰結</strong>：陰圧吸気の消失と陽圧の付加により、右房への静脈還流の圧較差が減少し、これが全身の低灌流を招きうる。</li><li><strong>並行して起こること</strong>：肺容量の増加は肺血管抵抗の増加と関連しうる。肺胞ユニットによる胸腔内血管の<strong>軸方向および半径方向の圧迫</strong>が原因である。これが右室の駆出能を悪化させる。</li></ul>
+<p><strong>陽圧の血行動態への影響は、平均気道内圧が上がるほど深刻になる。</strong> PEEP は平均気道内圧に大きく影響する変数のひとつであり、特に循環血液量が減少した患者では心血管系への意味のある影響を持つ。したがって、<strong>初期 PEEP を低め（例えば 5〜6 cmH2O）に設定し、導入・挿管後に患者が安定してから目標値に段階的に到達させる方が安全</strong>かもしれない。</p>
+<p>血管内容量と心機能の最適化と並行して、<strong>覚醒下挿管</strong>（表面麻酔下での軟性気管支鏡挿管）が、静脈還流に対する陰性吸気圧の利点を保ち、迅速導入と無呼吸中の脱飽和のリスクを避ける方法として提案されている。このアプローチは高度な熟練を要するが、解剖学的な困難だけでなく<strong>生理学的な困難</strong>の場合にも、RSI より安全な選択肢になりうる。</p>
+<h4>相ごとの判断フロー（本文の記述を判断表に整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>挿管前に頻脈＋ぎりぎりの血圧</td><td>アドレナリン依存の徴候か（疼痛・不安の関与、乳酸、末梢の冷感）</td><td>安定と読まない。導入前に昇圧薬をつなぎ、動脈ラインを確保する</td></tr>
+<tr><td>血圧は正常だがショックの背景がある</td><td>正常血圧がストレス性カテコラミンによるものでないか</td><td>導入薬をケタミンまたはエトミデートにし、プロポフォールを避ける</td></tr>
+<tr><td>輸液をすべきか迷う</td><td>輸液反応性（PLR・PPV）と輸液耐容性（下大静脈径・肺エコーのB-line）の両方</td><td>反応性がなければ輸液しない。反応性はあるが耐容性が低ければ利益と害を比較する。ルーチンボーラスは行わない</td></tr>
+<tr><td>低酸素血症が強い（P/F &lt; 200）</td><td>前酸素化デバイスの選択とショックの有無</td><td>NIV を第一選択にする。ただしNIVも胸腔内圧を上げるため、前負荷依存の患者では昇圧薬併用とモニタリングを強化する</td></tr>
+<tr><td>喉頭展開が長引きそう</td><td>無呼吸時間の見積もりと初回成功の見込み</td><td>HFNC で無呼吸時酸素化を行い、ビデオ喉頭鏡で初回成功率を上げる</td></tr>
+<tr><td>右室不全・肺高血圧が疑われる</td><td>心エコーでの右室径・機能、肺動脈圧</td><td>肺動脈カテーテルによる持続モニタリングを検討する。PEEP と一回換気量を抑えめに始める</td></tr>
+<tr><td>挿管直後に血圧が下がった</td><td>PEEP・平均気道内圧、鎮静薬の残存、前負荷</td><td>PEEP を 5〜6 cmH2O まで戻して漸増しなおす。昇圧薬と輸液を調整し、鎮静を再滴定する</td></tr>
+</tbody></table></div>
+<h3>8. 実践上の考慮 — 挿管前の最適化とリアルタイムの管理</h3>
+<p>重症患者の気管挿管中に起こる生理学的変化は、しばしば著明な血行動態不安定を招く。こうした悪化を防ぐには、挿管前および挿管中に心血管系の生理を最適化する<strong>先手のアプローチ</strong>が必要である。以下の実践戦略が、安全な気道管理の背骨を成す。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 重症患者における周術期挿管の血行動態ケアバンドル（原図・無改変）。5つの矢羽根状のブロックが左から右へ連なり、色は左が淡い水色、右へ行くほど濃い青になる。各ブロックの見出しは左から Pre-induction（導入前）、Induction（導入）、Apnea（無呼吸）、PPV initiation（陽圧換気開始）、Post-intubation（挿管後）。&lt;br&gt;Pre-induction：リスク層別化（前負荷・血管拡張・心機能の評価）、昇圧薬の準備と開始、個別化した前負荷の最適化（やみくもなボーラスを避ける）、NIV または HFNC による前酸素化、チームブリーフィングと役割分担。&lt;br&gt;Induction：導入薬の選択（ケタミンまたはエトミデートを優先し、プロポフォールを避ける）、交感神経遮断を予期する（昇圧薬のボーラス・持続を準備）、ビデオ喉頭鏡を使う（無呼吸時間を最小化し初回成功の戦略を確保）。&lt;br&gt;Apnea：前酸素化としての NIV、無呼吸時酸素化としての HFNC。&lt;br&gt;PPV initiation：最適な PEEP の設定（酸素化と前負荷の慎重なバランス）、昇圧薬の滴定、右室機能のモニタリング。&lt;br&gt;Post-intubation：鎮静の調整（過度の血管拡張を避ける）、人工呼吸器設定の最適化、血行動態状態の最適化（前負荷・血管拡張・心機能の再評価と調整）。&lt;br&gt;キャプション本文の注記：この図は生理学的困難気道の管理に焦点を当てているが、安全な気管挿管には解剖学的困難気道の評価も常に重要である。PPV（陽圧換気）は気管挿管成功後の侵襲的人工呼吸を指す。略語は NIV（非侵襲的換気）、HFNC（高流量鼻カニュラ）、PPV（陽圧換気）、PEEP（呼気終末陽圧）、RV（右室）。</p>
+</div>
+<h4>8-1. チェックリストとチームダイナミクスによる準備</h4>
+<p>薬剤、デバイス、人員、環境の入念な準備が、血行動態リスクの軽減に不可欠である。<strong>事前に定義されたチェックリストの使用</strong>は、この高リスク手技における構造化されたケアを促進し、エラーを減らす。ただしチェックリストの利益を高めるには、<strong>患者の生理と周術期の最適化に特化した戦略を含むべき</strong>である（チェックリストが解剖の確認だけで終わってはならない、という含意）。</p>
+<p>同様に重要なのが、役割分担と不測事態の計画を含む<strong>効果的なチーム内コミュニケーション</strong>である。構造化された準備と明確なコミュニケーションが、統制のとれた挿管の基盤を作る。</p>
+<h4>8-2. 導入薬の選択</h4>
+<p>導入薬は血行動態に深く影響しうる。プロポフォールは用量によらず循環不安定と関連する。ケタミンとエトミデートはより良い血行動態忍容性を提供するが、両者の相対的な利益は依然として不確実である。レミマゾラムは可能性を示すが、重症患者での評価が不十分である。</p>
+<p><strong>神経筋遮断薬</strong>（ロクロニウム、スキサメトニウムなど）は、重症患者の気管挿管では導入時に通常投与される。神経筋遮断薬を受ける患者では、<strong>術中覚醒（accidental awareness）を避けるために鎮静薬の持続投与が重要</strong>である。</p>
+<p>したがって薬剤選択は個別化されるべきで、リスクのある患者ではプロポフォールよりケタミンまたはエトミデートを優先する。これらの選択をしてもなお不安定が予想される場合には、<strong>容量最適化と予防的昇圧薬</strong>といった補助戦略を考慮すべきである。リスク層別化、チーム連携、挿管後の備えを統合したバンドル型の周術期アプローチが不可欠である。</p>
+<h4>8-3. 個別化した輸液療法</h4>
+<p>周術期挿管における輸液管理は、害を与えずに前負荷を最適化するよう個別化されるべきである。<strong>ルーチンの輸液ボーラスはエビデンスに支持されていない</strong>（PrePARE試験〔Janz、Lancet Respir Med 2019〕および Russell らのRCT〔JAMA 2022〕）。</p>
+<p>代わりに臨床医は次の2つをともに評価すべきである。</p>
+<ul><li><strong>輸液反応性</strong>：下肢挙上試験（PLR）や脈圧変動（PPV）などの動的指標を用いる。</li><li><strong>輸液耐容性</strong>：臓器障害を誘発せずに患者が安全に受け取れる輸液量。</li></ul>
+<p>反応性がない場合は輸液を避ける。反応性はあるが耐容性が低い場合には、リスクとベネフィットを慎重に天秤にかける。両パラメータの動的な評価が鍵である。<strong>フォーカスト超音波</strong>は、心血管系（心室径や下大静脈径）と肺エコー（B-lineパターンの有無）の両方の評価により、血管内容量の最適化の必要性と輸液耐容性を見極める助けになりうる。</p>
+<h4>8-4. 予防的昇圧薬と血行動態モニタリング</h4>
+<p>循環不安定は周術期挿管で最も頻度の高い合併症である。一過性の周術期低血圧が長期アウトカムと関連しうる可能性を踏まえると、<strong>低血圧を観察してから昇圧薬を投与する後手のアプローチではなく、低血圧への曝露そのものを避ける戦略の方が利益が大きい</strong>かもしれない。さらに、オンデマンドの昇圧薬（ノルアドレナリン、フェニレフリンなど）は低血圧を治療できても、悪化の予防には不十分な可能性がある。</p>
+<p><strong>進行中の2つのRCT</strong>が、予防的昇圧薬持続投与のアプローチの有効性と安全性を評価している。</p>
+<ul><li><strong>PREVENTION</strong>（NCT05014581）</li><li><strong>FLUVA</strong>（NCT05318066）</li></ul>
+<p><strong>動脈カニュレーションと観血的血圧モニタリング</strong>は、挿管に伴う急速な血行動態変化を予防し速やかに対応する必要性を踏まえ、すべての重症患者で導入前に考慮すべきである。非心臓手術患者を対象に持続動脈内圧 vs 間欠オシロメトリック圧測定を比較した単施設ランダム化研究（AWAKE試験、Kouz、Br J Anaesth 2022）では、<strong>持続モニタリングが低血圧エピソードへの曝露減少と関連</strong>した。重症患者では低血圧の頻度と有害性がより高いことを考えれば、実行可能なときは常に導入前の動脈ラインを考慮すべきである。</p>
+<p>加えて、<strong>繰り返しの心エコー</strong>も、輸液状態と左右両心の機能を評価するうえで重要である。右室不全や肺動脈性肺高血圧が疑われる場合には、右室機能の持続モニタリングと血行動態管理の最適化のために<strong>肺動脈カテーテル</strong>の留置を考慮してよい。</p>
+<h4>8-5. 酸素化の最適化</h4>
+<p>適切に選択した手法による前酸素化の最適化は、気管挿管中の低酸素血症由来の心合併症を軽減する決定的な要素である。前酸素化に一般的に用いられるデバイスは、<strong>NIV</strong>、<strong>HFNC</strong>、<strong>標準フェイスマスク酸素</strong>の3つ。</p>
+<ul><li><strong>NIV</strong>は PEEP と圧支持換気を提供でき、吸気努力を軽減し、肺容量を増やし、右室前負荷を下げ、左室後負荷を下げる。ただし NIV は胸腔内に陽圧を課すため、静脈還流と全身血行動態を損ないうる。ショックや前負荷依存の患者で NIV を前酸素化に用いる際は、<strong>注意深い血行動態モニタリングと個別化した昇圧薬サポートが必要</strong>である。</li><li><strong>HFNC</strong>は、高流量によって生じる軽度の PEEP 効果で酸素化を高め、上気道の死腔を洗い流すことで呼吸仕事量を減らす。加えて HFNC は<strong>無呼吸期（すなわち喉頭展開中）</strong>にも使われ、安全な無呼吸時間を延長し脱飽和リスクを減らそうとする。</li></ul>
+<p><strong>ネットワークメタ解析</strong>（Pitre、Lancet Respir Med 2025）の結果：</p>
+<ul><li><strong>NIV は HFNC およびフェイスマスク酸素と比べて低酸素血症の発生を減らす</strong>。特に <strong>PaO₂/FiO₂ &lt; 200</strong> の患者で顕著。</li><li><strong>HFNC はフェイスマスク酸素より優れる</strong>。</li><li><strong>初回試行での挿管成功率と死亡には、前酸素化法による差は認められなかった</strong>。</li></ul>
+<p>これらの結果から、<strong>忍容できる場合は NIV を第一選択の前酸素化法とすべき</strong>である。喉頭展開中の HFNC による無呼吸時酸素化は脱飽和リスクをさらに減らしうるもので、個々の患者の忍容性と施設の運用に応じて考慮できる。</p>
+<h4>8-6. 喉頭鏡の選択</h4>
+<p><strong>ビデオ喉頭鏡が ICU 挿管の第一選択として推奨されている。</strong> 大規模多施設RCT（Prekker、N Engl J Med 2023）で、直接喉頭鏡と比較してビデオ喉頭鏡が初回成功率を改善することが示され、メタ解析（Araújo、Crit Care 2024）でも確認され、さらに<strong>食道挿管と誤嚥の減少</strong>も報告された。重症患者では初回試行での挿管成功が重要であることを踏まえ、<strong>ビデオ喉頭鏡は気道関連の血行動態合併症を予防するための選択的手法</strong>である。</p>
+<h4>8-7. 挿管後の血行動態管理</h4>
+<p>陽圧換気への移行は胸腔内圧を上昇させ、静脈還流と左室前負荷を減らしうる。臨床医はこれらの効果を予期し、それに応じて昇圧薬と輸液を滴定すべきである。</p>
+<p>PEEP が平均気道内圧および胸腔内圧に及ぼす影響が大きいことを踏まえ、<strong>人工呼吸器で設定する初期 PEEP は 5〜6 cmH2O としてよく、目標値へは患者の安定化の途上ないし安定後に段階的に到達させてよい</strong>。PEEP と一回換気量の最終的な調整は、酸素化目標の達成と、さらなる血行動態の破綻の回避とのバランスを取ることを目指すべきである。</p>
+<p>鎮静薬は、<strong>血管拡張と交感神経サージの両方を防ぐよう慎重に滴定</strong>すべきである（浅すぎても深すぎても害になるという両側の警告）。前負荷、昇圧薬サポート、人工呼吸器設定への注意が、挿管後の安定維持に決定的である。</p>
+<h3>9. 知識のギャップと今後の方向性</h3>
+<p>周術期の心血管最適化は、関連する高い罹病率・死亡率を踏まえると、研究アジェンダにおいて高い優先度を持つ。</p>
+<p><strong>予防的昇圧薬持続投与</strong>については、PREVENTION（NCT05014581）と FLUVA（NCT05318066）の2つの進行中RCTがこの戦略を検証するために明示的に設計されている。その結果は、先読みの血行動態サポートがアドレナリン作動性虚脱の負担を減らせるかを明らかにすると期待される。さらに、低血圧への曝露を避けることを狙う先手のアプローチが、<strong>長期の罹病率・死亡率の低減</strong>に有益かどうかについても重要なデータをもたらしうる。</p>
+<p>もうひとつの問いは、この場面での<strong>ベンゾジアゼピンの役割</strong>である。例えば、ケタミンまたはエトミデートにベンゾジアゼピン（ミダゾラムやレミマゾラム）を併用することが、適切に投与されたケタミンまたはエトミデート単独と比べて、<strong>筋弛緩中の術中覚醒のリスクを減らすかどうかは不明</strong>である。</p>
+<h4>Table 2. 周術期挿管の血行動態管理における優先研究課題（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>研究課題</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>周術期挿管の循環不安定リスクを減らすための、予防的昇圧薬療法の有効性と安全性の評価</td></tr>
+<tr><td>2</td><td>導入後の血行動態の推移を予測するスコアリングシステムの開発と検証</td></tr>
+<tr><td>3</td><td>右室機能障害を持つ患者の早期発見と管理に関する指針の確立</td></tr>
+<tr><td>4</td><td>薬理学的・非薬理学的戦略を包含する周術期挿管血行動態ケアバンドルの有効性の評価</td></tr>
+</tbody></table></div>
+<h3>10. 結論（著者らの記述）</h3>
+<p>ICU での気管挿管は、<strong>予測可能で相ごとに異なる脆弱性を持つ血行動態的介入</strong>である。ベースラインのアドレナリン依存、突然の交感神経遮断、低酸素血症、アシドーシス、不利な心肺相互作用が累積的に作用し、特に循環血液量減少、血管麻痺、右室機能障害があるときに虚脱を引き起こす。</p>
+<p>先手の、生理に基づいたバンドル（賢明な導入薬選択、個別化した輸液・昇圧薬、エビデンスに基づく前酸素化、注意深い挿管後ケア）が灌流を維持しうる。予防戦略に関する質の高い試験が進行中である。現時点での臨床判断は、<strong>機序と病態生理の理解にプラグマティックなベッドサイドの行動を組み合わせること</strong>に基づくべきであり、これはエビデンスが進展した後も不可欠であり続ける。</p>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>ナラティブレビューであることの限界</strong>：系統的検索も事前登録もなく、引用文献の選択は著者の判断による。同じテーマで相反する結論を持つ文献（ケタミン vs エトミデートのメタ解析2本）が併記されている点は誠実だが、どちらを重く見るかの判断基準は示されていない。「方法論的差異を反映している可能性が高い」という説明は妥当だが、それ以上に踏み込んでいない。</li><li><strong>自己引用の多さ</strong>：責任著者 Russotto は INTUBE 研究の中心人物であり、本総説の疫学的主張の大半（42.6%、9.3%、3.1%、プロポフォールが唯一の修正可能危険因子）は INTUBE 由来である。筆頭著者 Kotani も導入薬に関する複数の引用文献（参考文献13・16・17・21）の著者である。主張の方向性は一貫しているが、独立した検証の層が薄い。</li><li><strong>「プロポフォールを避けよ」の根拠は観察研究</strong>：INTUBE の IPTW 解析は観察データであり、交絡（プロポフォールが選ばれる患者背景そのもの）を完全には排除できない。「用量によらず」という記述は用量反応関係がないことを示すが、これは因果の傍証としてはむしろ弱い方向にも読める。RCT でプロポフォールを比較群に置いた質の高い試験は本総説に引用されていない。</li><li><strong>最新RCTと総説の推奨の緊張関係</strong>：本総説は「ケタミンまたはエトミデートを優先」と述べつつ、引用する n=2365 の RCT ではケタミンで循環虚脱が<strong>多かった</strong>（22.1% vs 17.0%、リスク差 5.1、95%CI 1.9〜8.3）。Fig. 2 のバンドルには "prefer ketamine or etomidate" と併記のみで、この不一致の解決は読者に委ねられている。JC では「では自施設の第一選択をどちらにするか」を議論の中心に据えられる。</li><li><strong>エンドポイント定義の揺れ</strong>：「循環虚脱（cardiovascular collapse）」「循環不安定（cardiovascular instability）」「周術期低血圧」が本文で並行して使われ、それぞれの操作的定義は示されていない。INTUBE の定義（収縮期血圧の閾値、昇圧薬新規開始、心停止の複合）と RCT の定義が同一かどうかは、原著に当たらないと分からない。数字を横並びで比べる際の落とし穴になる。</li><li><strong>前酸素化の推奨と血行動態の推奨が部分的に衝突する</strong>：NIV を第一選択にせよと言いながら、NIV 自体が胸腔内圧を上げて静脈還流を損なうと同じ節で述べている。ショック＋重度低酸素血症という、まさに最も危険な患者でどちらを優先するかの指針はない。著者らは「注意深いモニタリングと個別化した昇圧薬」で橋渡ししているが、実務的には判断が難しい。</li><li><strong>PEEP 5〜6 cmH2O の根拠は弱い</strong>：この数値は生理学的推論と1つの論考（Myatra、Anaesth Crit Care Pain Med 2022）に基づくもので、比較試験の裏づけはない。ARDS で高PEEPを要する患者にどう適用するかは示されていない。</li><li><strong>覚醒下挿管の位置づけが曖昧</strong>：「RSI より安全な選択肢になりうる」と述べつつ「高度な熟練を要する」と留保する。どの患者に、どの施設条件で選ぶかの基準がない。実装の観点では最も落としにくい推奨。</li><li><strong>数値が引用されていない箇所</strong>：INTUBE の症例数、RCT のリスク比以外の効果量、メタ解析の統合推定値の信頼区間など、本総説には記載されていない数字が多い。原著に当たる必要がある。</li><li><strong>小児・院外・救急外来は対象外</strong>：ICU 成人に焦点が絞られており、救急外来や院内急変対応（RRS）での挿管にそのまま外挿できるかは論じられていない。当院の RRS 運用に落とすなら、この点を意識的に補う必要がある。</li></ul>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>Russotto V, et al.（INTUBE）</td><td>29カ国のICU挿管の実態と周術期有害事象。循環不安定 42.6%、重度低酸素血症 9.3%、心停止 3.1%</td><td>JAMA. 2021;325:1164-72</td></tr>
+<tr><td>Russotto V, et al.</td><td>INTUBE の二次解析。周術期挿管の循環虚脱。プロポフォールが唯一の修正可能危険因子</td><td>Am J Respir Crit Care Med. 2022;206:449-58</td></tr>
+<tr><td>Casey JD, et al.</td><td>重症成人のRSIにおけるケタミン vs エトミデートの多施設RCT（n=2365）</td><td>N Engl J Med. 2025. doi:10.1056/nejmoa2511420</td></tr>
+<tr><td>Matchett G, et al.</td><td>緊急気管挿管におけるエトミデート vs ケタミンのRCT。7日生存 85.1% vs 77.3%</td><td>Intensive Care Med. 2022;48:78-91</td></tr>
+<tr><td>Koroki T, et al.</td><td>ケタミン vs エトミデートのベイズ流メタ解析。ケタミンが死亡を減らす確率 83.2%</td><td>Crit Care. 2024;28:48</td></tr>
+<tr><td>Greer A, et al.</td><td>ケタミン vs エトミデートのシステマティックレビュー・メタ解析（RCTのみ）</td><td>Crit Care Med. 2025;53:e374-83</td></tr>
+<tr><td>Kotani Y, Russotto V</td><td>重症患者の気管挿管における導入薬のレビュー</td><td>Crit Care Med. 2025;53:e173-81</td></tr>
+<tr><td>Kotani Y, et al.</td><td>エトミデートのメタ解析（ランダム化試験）</td><td>J Crit Care. 2023;77:154317</td></tr>
+<tr><td>Kotani Y, et al.</td><td>プロポフォールが生存に不利に働く機序</td><td>J Cardiothorac Vasc Anesth. 2023;37:2176-80</td></tr>
+<tr><td>Karamchandani K, et al.</td><td>生理学的困難気道の管理に関する国際デルファイ研究</td><td>Intensive Care Med. 2024;50:1563-79</td></tr>
+<tr><td>Janz DR, et al.（PrePARE）</td><td>挿管前の輸液ボーラスは循環虚脱を減らさない</td><td>Lancet Respir Med. 2019;7:1039-47</td></tr>
+<tr><td>Russell DW, et al.（PREPARE II）</td><td>挿管前の輸液ボーラス投与のRCT</td><td>JAMA. 2022;328:270-9</td></tr>
+<tr><td>Pitre T, et al.</td><td>前酸素化戦略のシステマティックレビュー・ネットワークメタ解析</td><td>Lancet Respir Med. 2025. doi:10.1016/S2213-2600(25)00029-3</td></tr>
+<tr><td>Prekker ME, et al.（DEVICE）</td><td>重症成人でのビデオ喉頭鏡 vs 直接喉頭鏡のRCT</td><td>N Engl J Med. 2023;389:418-29</td></tr>
+<tr><td>Araújo B, et al.</td><td>ビデオ喉頭鏡 vs 直接喉頭鏡の更新版メタ解析</td><td>Crit Care. 2024;28:1</td></tr>
+<tr><td>Kouz K, et al.（AWAKE）</td><td>持続動脈内圧 vs 間欠オシロメトリック測定と麻酔導入時の低血圧</td><td>Br J Anaesth. 2022;129:478-86</td></tr>
+<tr><td>Jozwiak M, Teboul JL</td><td>心肺相互作用の基礎と臨床的含意</td><td>Ann Intensive Care. 2024;14:122</td></tr>
+<tr><td>Pinsky MR</td><td>心肺相互作用の生理学的基盤と臨床応用</td><td>Ann Am Thorac Soc. 2018;15:S45-8</td></tr>
+<tr><td>Russotto V, Sorbello M</td><td>重症患者の気道管理（覚醒下挿管を含む）</td><td>BJA Educ. 2025;25:375-81</td></tr>
+<tr><td>Myatra SN, et al.</td><td>挿管前の輸液ボーラスは循環虚脱を防がない。代替を考える時期</td><td>Anaesth Crit Care Pain Med. 2022;41:101158</td></tr>
+<tr><td>Schotola H, et al.</td><td>軽度の代謝性アシドーシスが不全心筋のβアドレナリン反応を損なう</td><td>Crit Care. 2012;16:R153</td></tr>
+<tr><td>Kattan E, et al.</td><td>輸液耐容性という新しい概念（ポジションペーパー）</td><td>J Crit Care. 2022;71:154070</td></tr>
+<tr><td>Hunsicker O, et al.</td><td>輸液投与の臨床判断に超音波をどう使うか</td><td>Intensive Care Med. 2025</td></tr>
+<tr><td>Sanz J, et al.</td><td>右室の解剖・機能・機能障害（JACC state-of-the-art review）</td><td>J Am Coll Cardiol. 2019;73:1463-82</td></tr>
+<tr><td>Cortes-Puentes GA, et al.</td><td>ARDSにおける生理学に基づく血行動態管理</td><td>Ann Transl Med. 2018;6:353</td></tr>
+<tr><td>Russotto V, et al.</td><td>重症肥満患者の周術期挿管合併症（INTUBE二次解析）</td><td>Crit Care. 2025;29:192</td></tr>
+<tr><td>Wagner RL, et al.</td><td>エトミデートによる副腎ステロイド合成の阻害（副腎抑制の原典）</td><td>N Engl J Med. 1984;310:1415-21</td></tr>
+<tr><td>Barbosa EC, et al.</td><td>消化器内視鏡におけるレミマゾラム vs プロポフォール</td><td>Br J Anaesth. 2024;132:1219-29</td></tr>
+<tr><td>De Jong A, et al.</td><td>ICUでの挿管をどう改善するか（知識とデバイスの更新）</td><td>Intensive Care Med. 2022;48:1287-98</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 重症患者の気管挿管は、気道の手技である前に <strong><mark class="hl">血行動態の介入</mark></strong> である。導入前の頻脈と「ぎりぎりの正常血圧」は安定ではなくアドレナリン依存のサインであり、導入薬はその最後の支えを1分足らずで奪う。低酸素・アシドーシス（pH &lt; 7.2 で心筋収縮力と昇圧薬反応性が落ちる）と、陽圧換気への移行による静脈還流の低下・右室後負荷の上昇が、これに累積して虚脱を完成させる。</p>
+<p><mark class="hl">明日から変えること：挿管前チェックリストに「生理学的困難気道」の欄（前負荷・血管拡張・心機能・右室）を追加し、循環不安定が予想される症例ではプロポフォールを使わず、昇圧薬をつないでから導入し、動脈ラインを先に取り、前酸素化はNIV（P/F &lt; 200 なら特に）＋喉頭展開中のHFNC、挿管直後のPEEPは 5〜6 cmH2O から漸増する。</mark></p>
+<p>ただしケタミンとエトミデートの優劣は決着していない（n=2365 のRCTで28日死亡は同等、循環虚脱はむしろケタミンで多かった：22.1% vs 17.0%、リスク差5.1、95%CI 1.9〜8.3）。<mark class="hl">「プロポフォールを外す」ところまでは踏み込み、その先の2択は病態と施設の慣れで決めてよい。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
