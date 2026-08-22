@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>人工呼吸器関連肺炎は病態も診断も一枚岩ではない — 臨床所見は感度66%特異度54%、胸部X線は特異度26%、CPIS6点超でも感度74%（総説・NatCommun2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s41467-024-50805-z.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">人工呼吸器関連肺炎は病態も診断も一枚岩ではない — 臨床所見は感度66%特異度54%、胸部X線は特異度26%、CPIS6点超でも感度74%（総説・NatCommun2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Howroyd F, Chacko C, MacDuff A, Gautam N, Pouchet B, Tunnicliffe B, Weblin J, Gao-Smith F, Ahmed Z, Duggal NA, Veenith T. Ventilator-associated pneumonia: pathobiological heterogeneity and diagnostic challenges. Nat Commun. 2024;15:6447. DOI: 10.1038/s41467-024-50805-z</dd><dt>掲載誌</dt><dd>Nature Communications（2024）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1038/s41467-024-50805-z" target="_blank" rel="noopener">doi.org/10.1038/s41467-024-50805-z</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Ventilator-associated pneumonia: pathobiological heterogeneity and diagnostic challenges</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>サーベイランスの分母と定義を先に固定する</strong>：本総説の最大のメッセージは「同じ患者コホートでも診断基準を変えるとVAP発生率が4%から42%まで動く」こと。当院のVAP件数を経年比較したり他施設と比べたりする前に、①どの定義（臨床＋画像＋微生物の3点セットか、CPIS 6点超か、サーベイランス定義か）を使うか、②分母は人工呼吸器日数か入室患者数か、を文書化して固定する。定義を書かないままの「VAP率が下がった」は解釈できない。</li><li><strong>臨床所見だけで抗菌薬を開始する運用を見直す</strong>：発熱・膿性痰・白血球増多の3徴は感度69%・特異度75%、身体所見全体では特異度53.9%しかない。ICUでの発熱や分泌物増加は無気肺・肺水腫・ARDS・薬剤熱・気管気管支炎でも起こる。「VAPを疑った」時点で走り出すのではなく、後述の最短チェック（下気道検体を採ってから開始、48〜72時間で必ず再評価）をセットにする。</li><li><strong>下気道検体は「抗菌薬より先に採る」を absolute rule に</strong>：ETAは感度75.7%・特異度67.9%で、BAL（感度71.1%・特異度79.6%）やPSB（感度61.4%・特異度76.5%）と死亡・在室日数・人工呼吸期間で差がない。当院で気管支鏡を24時間体制で回すのは現実的でないので、第一選択はETA（できれば定量または半定量）で十分と割り切る。むしろ重要なのは「抗菌薬開始前に採れているか」の遵守率をモニタすること。</li><li><strong>de-escalation の起点を培養結果カンファに固定する</strong>：VAPはICUの全抗菌薬使用の約半分を占め、治療失敗は3分の1から3分の2に及びその最多原因が不適切な抗菌薬。当院ですでに回している感染症カンファ／ASTラウンドの中に「人工呼吸中で48時間以上抗菌薬が入っている症例」を定型抽出し、48〜72時間時点で（a）培養で狭域化できるか、（b）そもそもVAPでない別の原因が見つかったか、（c）終了日を今決められるか、の3問を必ず通す。診断が曖昧なまま広域を続けることが耐性菌を作る一番の経路になる。</li><li><strong>画像は「胸部X線を撮ったら終わり」にしない</strong>：ポータブルCXRは感度88.9%だが特異度26.1%で、CTで見える陰影の45%未満しか写らない。CXRは除外方向には強いが確定には使えない。当院はすでに肺エコーの素地があるので、VAP疑い時に「胸膜下浸潤影・dynamic air bronchogram」を見る短時間プロトコル（前胸部・側胸部・背側の6領域）をVAP疑い時の定型手順に足す価値がある。ただしガイドラインが認めた診断ツールではないので、あくまでCXRの補助・経過追跡として位置づける。</li><li><strong>CPISは診断ではなく「トリガーと経過指標」として使う</strong>：CPIS 6点超は感度73.8%・特異度66.4%で、単独診断には使えない。一方、日々つけて上昇傾向を見る早期警告としては有用と本総説も評価する。当院で使うなら「点数で抗菌薬を開始する」のではなく「点数が上がったら下気道検体と画像を取りに行く」引き金にする。</li><li><strong>バイオマーカーは開始判断に使わない／中止判断にだけ使う</strong>：PCT・sTREM-1・CRP・IL-8・IL-1βはいずれもVAPの診断には不安定で、抗菌薬投与でも動く。ガイドラインもVAP診断への使用を推奨していない。当院でPCTを測るなら、開始の後押しではなく「終了を早める材料」に用途を限定する運用が本総説の立場と整合する。</li><li><strong>VATとVAPを分けて記録する</strong>：気管気管支炎（VAT）は臨床・検査所見がVAPとほぼ同じで、画像上の浸潤影の有無だけが違う。VATはVAPの前段階になりうるので、当院の記録上も「浸潤影なし＝VAT疑い」として区別しておくと、後から予防介入の効果を検証できる。</li><li><strong>変わらないこと</strong>：本総説は新しい治療や新しい閾値を提案していない。抗菌薬の選択や期間、予防バンドル（頭位挙上・口腔ケア・カフ圧管理・声門下吸引）の運用を今すぐ変える根拠にはならない。変わるのは「診断をどれだけ疑い深く扱うか」と「サーベイランスの定義を明示するか」の2点。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：VAPはICUで最も頻度の高い院内感染で、人工呼吸患者の20〜36%に発生し、在院日数を4〜9日、コストを1人あたり9000ポンド押し上げる。診断は臨床・画像・微生物の組み合わせで行うが、いずれの要素も精度が低いことは繰り返し指摘されてきた。</li><li><strong>Unknown</strong>：どの検体採取法・どの閾値・どのスコアが「正解」なのかは決着していない。組織学的診断が最も正確だが生検は現実的でなく剖検では遅すぎるため、参照基準そのものが定まらない。バイオマーカーは200近く報告されたが実用に足るものが同定されていない。</li><li><strong>What's new</strong>：本総説は「VAPの診断が難しいのは検査が悪いからではなく、病態そのものが不均一だからだ」という枠組みを提示する。生体防御の破綻・バイオフィルム・マイクロバイオームのdysbiosis・宿主免疫応答という4つの軸で異質性を整理したうえで、各診断法の感度・特異度をメタ解析の数値で並べ、AIによる多モーダル統合と低中所得国での格差を今後の焦点として挙げる。実務向けには、CPISを起点にして不足データを検体と画像で埋める簡便アルゴリズム（Fig. 2）を提案している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで VAPは単一の疾患ではなく、微小誤嚥・バイオフィルム・肺内細菌叢の破綻・宿主免疫応答が絡み合った不均一な病態であり、<strong>そのために臨床・画像・微生物のどの診断法も単独では感度・特異度が70%前後にとどまる</strong>。診断の不確実性がそのままICU抗菌薬使用の約半分という処方圧に直結している。</p>
+</div>
+<ul><li>VAPは挿管・人工呼吸から48時間以降に生じる肺実質の院内感染で、重症患者の20〜36%に発生する。発生率は人工呼吸器1000日あたり2〜16エピソードだが、診断基準・予防策・地域差で大きく変動する。</li><li>死亡率の報告は24〜76%と幅広い。原疾患の重症度と診断の不均一性のために、VAP単独に帰属する死亡を切り出すことは難しい。</li><li>挿管はICU肺炎の95%超に関与する最大の危険因子。意識障害・外傷・高齢・重症度もリスクを上げる。</li><li>気管チューブは上気道の防御バリアを破り、カフは大量誤嚥は防いでも微小誤嚥は防げない。人工呼吸患者の95%で気管チューブ表面にバイオフィルムが形成され、挿管後数時間で始まりVAPに先行する。</li><li>起因菌はグラム陰性菌（Klebsiella、Acinetobacter、Pseudomonas、大腸菌、その他腸内細菌科）が中心で、S. aureusやEnterococcusも見られ、しばしば複数菌性。早期発症（48〜96時間）は感受性菌が多く予後がよく、遅発性（96時間以降）はMDRが多い。ただし発症時期だけでMDRリスクは決まらない。</li><li>診断基準の違いだけで、同一コホートのVAP発生率が4%から42%まで動く。</li><li>各診断法の精度（Fernandoらのシステマティックレビュー・メタ解析）：臨床所見 感度66.4%・特異度53.9%／CXR 感度88.9%・特異度26.1%／ETA 感度75.7%・特異度67.9%／BAL 感度71.1%・特異度79.6%／PSB 感度61.4%・特異度76.5%／CPIS 6点超 感度73.8%・特異度66.4%。</li><li>バイオマーカー（PCT、sTREM-1、CRP、IL-8、IL-1β）は感染性・非感染性いずれの炎症でも上昇し、抗菌薬で修飾される。ガイドラインはVAP診断への使用を推奨せず、治療期間の指針としての可能性のみを示唆する。</li><li>AIは画像判読・フェノタイピング・発症予測で期待されるが、ICUにおけるAI研究の95%超が後ろ向きであり、前向き試験とデータプライバシーの整理が前提となる。</li><li>低中所得国ではVAP発生率が高所得国より高く、費用は他の患者の5倍。監視体制と抗菌薬スチュワードシップの不足が背景にある。</li><li>結論として著者らは、単一の決定的検査を待つのではなく、利用可能な臨床・画像・微生物情報を長所短所を理解したうえで統合する実務的アプローチを推奨し、CPISを起点とする簡便アルゴリズムを提示する。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む VAP（ventilator-associated pneumonia、人工呼吸器関連肺炎）は、気管挿管と人工呼吸の開始から48時間を超えて発症した肺実質の感染症を指す。48時間という線引きは「入室時にすでに潜伏していた肺炎」と「ICUで新たに獲得した肺炎」を分けるための便宜的なもので、生物学的な根拠があるわけではない。 押さえておくべき用語を先に定義する。 ・<strong>ETT</strong>（endotracheal tube、気管チューブ）：声門を貫通して気管に留置するチューブ。カフで気道を塞ぐが、カフ上に溜まった分泌物の微小な漏れ込み（micro-aspiration、微小誤嚥）は防げない。 ・<strong>バイオフィルム</strong>：細菌が自ら作る多糖の膜の中に住み着いた集塊。チューブ内腔に付着し、抗菌薬も免疫細胞も届きにくい。吸引やチューブの動きで剥がれて末梢気道に落ちる。 ・<strong>VAT</strong>（ventilator-associated tracheobronchitis、人工呼吸器関連気管気管支炎）：VAPと臨床像はほぼ同じだが、胸部画像に浸潤影がない。肺実質に及んでいない段階で、しばしばVAPの前段階になる。 ・<strong>ETA</strong>（endotracheal aspirate、気管吸引痰）：気管チューブから吸引カテーテルで採る検体。誰でも安全に採れるが、定着菌と起因菌を区別しにくい。 ・<strong>BAL</strong>（bronchoalveolar lavage、気管支肺胞洗浄）と<strong>PSB</strong>（protected specimen brush、保護付きブラシ）：気管支鏡で末梢に到達して採る検体。上気道の汚染を避けられるが、PEEP喪失・低酸素・気管支攣縮・計画外抜管のリスクがあり、鎮静や筋弛緩の追加が要る。 ・<strong>NBL</strong>（non-directed bronchial lavage、非気管支鏡下気管支洗浄）：気管支鏡を使わずカテーテルを盲目的に進めて洗浄する方法。安価・安全で、呼吸療法士や理学療法士も施行できる。 ・<strong>定量培養と定性培養</strong>：定量培養は菌量の閾値（例：BALで10⁴ CFU/mL、ETAで10⁵〜10⁶ CFU/mL）を設けて「感染」と「定着」を分ける。定性培養は病原体がいるかどうかだけを見る。 ・<strong>CPIS</strong>（Clinical Pulmonary Infection Score、臨床肺感染スコア）：体温・白血球数・気管分泌物・酸素化・胸部X線所見・培養結果を0〜12点に数値化するスコア。6点超で肺炎の可能性が高いとする。 ・<strong>MDR</strong>（multidrug-resistant、多剤耐性）：複数系統の抗菌薬に耐性を持つ菌。緑膿菌、Acinetobacter baumannii、MRSAなどが代表。 なぜこれが難問なのかというと、VAPの「正解」を決める参照基準が事実上存在しないからである。最も正確なのは肺組織の病理所見だが、重症患者に肺生検はできず、剖検では治療判断に間に合わない。参照基準がないところで感度・特異度を測っているという構造的な弱さが、この分野のすべての数字に付いて回る。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>VAPはICU内で最も頻度の高い院内感染であり、重症患者の20〜36%に影響する。発生率は人工呼吸器1000日あたり2〜16エピソードと報告されるが、診断基準・予防策・患者背景・地域差の影響を強く受ける。挿管はICU肺炎の95%超に関与する最大の危険因子で、意識レベルの低下、外傷、高齢、重症度の高さもリスクを上げる。</p>
+<p>報告される死亡率は24〜76%と幅がある。ただし基礎疾患の重症度とICU集団内の診断の不均一性のため、死亡をVAP単独に帰属させることは複雑である。治療が遅れたり不適切だったりすると、VAPは敗血症性ショックやARDSへ進展しうる。</p>
+<p>経済的・生態学的な負荷も大きい。VAPはICUで使用される全抗菌薬の半分を占め、この処方圧がMDR菌と死亡率の増加という悪循環を生む。治療失敗はVAP症例の3分の1から3分の2に生じ、その最多の原因は不適切な抗菌薬使用である。VAPは在院日数を平均4〜9日、医療費を1人あたり9000ポンド押し上げる。予防策が普及した現在でもMDRの有病率は上昇し、死亡率とコストは高止まりしている。</p>
+<p>こうした背景から著者らは、VAPに伴う病態生物学的な異質性と診断上の困難を整理することを本総説の目的とする。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。系統的な文献検索の方法（データベース、検索式、期間、選択基準、質評価）は記載されていない。参照文献は166件。</li><li><strong>対象</strong>：成人の人工呼吸患者におけるVAPの病態と診断。予防策と治療（抗菌薬選択・期間）は主題としていない。</li><li><strong>構成</strong>：①VAPの病態（ICU治療と細菌定着、微生物学、肺マイクロバイオーム、自然免疫、局所炎症、組織学的定義）、②診断（臨床・画像・微生物・スコア・バイオマーカー・AI）、③低中所得国における格差、④結論と提案アルゴリズム。</li><li><strong>図表</strong>：Fig. 1（VAPの機序の模式図）、Fig. 2（提案する簡便診断アルゴリズム）、Table 1（診断基準）、Table 2（各診断法の長所短所）、Table 3（CPIS）、Table 4（バイオマーカー）。国際ガイドラインの比較は補足資料（Supplementary Information File）に置かれている。</li><li><strong>限界</strong>：ナラティブレビューであるため、引用文献の選択と重み付けは著者の判断による。個々の推定値（感度・特異度）は主として1本のシステマティックレビュー・メタ解析（Fernandoら）に依拠している。</li></ul>
+<h3>4. VAPの病態 — ICU治療と細菌定着</h3>
+<p>VAPの病態は多因子性で、通常の気道防御の破綻、患者の細菌叢の変化、免疫応答の変化が絡み合う。ICU患者には複数の素因があり、その一部は治療的介入の余地を持つ。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 人工呼吸器関連肺炎の機序。図は3つの番号付きパネルで構成される。パネル1「ICU therapies」は左上で、点滴スタンドと人工呼吸器につながれ、ベッドで頭位を挙上した半座位（semi-recumbent）の患者が描かれ、「Sedation and paralysis medication（鎮静・筋弛緩薬）」「Positive pressure ventilation（陽圧換気）」「Semi-recumbent positioning（半座位）」の3つのラベルが患者を指す。パネル2「Endotracheal tube」は右上で、頭頸部の矢状断シルエットの中を気管チューブが声門を通って気管に入る様子が描かれ、そこから3本の破線矢印が右へ伸び、それぞれ「気管チューブが声門閉鎖を妨げ肺への直接の交通路をつくる」「細菌バイオフィルムの形成（円内に桿菌の集塊が拡大表示される）」「カフが虚脱・移動しカフ表面のひだに沿って貯留分泌物が漏れる」を説明する。パネル3「Immune response」は下段の大きな枠で、左に肺の全体図があり破線で肺胞へズームする。枠内は中央の縦線で左右に分かれ、左側は「Healthy Alveolus（健常肺胞）」でRBC（赤血球）を含む毛細血管、I型肺胞上皮細胞、II型肺胞上皮細胞、肺胞マクロファージ（AM）、サーファクタント層、線維芽細胞、内皮細胞がラベルされる。右側は「Pneumonia Alveolus（肺炎肺胞）」で、細菌の浸潤、AMによる細菌の貪食、サイトカインを放出する活性化好中球、遊走する好中球、フィブリン、細胞デブリ、血小板、炎症を起こした内皮細胞、内皮のギャップ形成、浮腫性に拡大した間質、病原体に結合するムチンを分泌する肺胞上皮がラベルされ、肺胞内が滲出物で満たされた像として描かれる。略語：ICU＝集中治療室、AM＝肺胞マクロファージ。原図・無改変（BioRender.comで作成、CC BY-NC-ND 4.0）。</p>
+</div>
+<p>気管チューブ（ETT）の存在自体が大きな危険因子である。上気道の自然な防御バリアを破り、気管気管支ツリーへの直接の交通路を作ってしまう。ETTの高容量低圧カフは大量誤嚥は最小化するが微小誤嚥は防げない。カフを越える漏れは、貯留分泌物の引き込み、カフ圧の低下、ETTの移動といった現象として起こる。口腔咽頭、副鼻腔、胃は貯留分泌物のリザーバーとなり、これらがカフの下へ漏れて無症候性の微小誤嚥を生む。</p>
+<p>ETTはさらに上皮を傷害し、咳・嚥下・粘液線毛クリアランスを妨げる。これらの機序は、鎮静、筋弛緩、陽圧換気、半座位に伴う重力の影響といったICU治療によってさらに損なわれる。いずれも必要な介入であるが、呼吸筋の脆弱化、粘液線毛機能不全、気道加湿の低下を招き、咳・気管粘液の移動速度・分泌物クリアランスの障害を悪化させる。</p>
+<p>VAPは細菌バイオフィルムの形成とも関連する。バイオフィルムは人工呼吸患者の95%でETT表面に見出される。バイオフィルムは感染性微生物のリザーバーとして働き、剥離して末梢気道に入りVAPに至る。気管分泌物中の病原体とETTバイオフィルム中の病原体との関連が報告されている。バイオフィルムは挿管後数時間以内に生じ、VAPに先行すると考えられている。人工呼吸期間が長いほどVAPのリスクは高くなる。</p>
+<h3>5. 微生物学 — 早期発症と遅発性、そしてその限界</h3>
+<p>VAPはしばしば複数菌性で、抗菌薬耐性菌の割合が増えている。最も頻度の高い起因菌はグラム陰性菌（主にKlebsiella、Acinetobacter、Pseudomonas、大腸菌、その他の腸内細菌科）で、グラム陽性菌ではStaphylococcus aureusとEnterococcusが挙がる。Candidaの定着も一般的で、真菌性VAPのリスクとなる。</p>
+<p>細菌学的データに基づき、VAPは早期発症型と遅発性に分類される。</p>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>発症時期</th><th>典型的な起因菌</th><th>予後</th></tr></thead>
+<tbody>
+<tr><td>早期発症</td><td>ICU入室後48〜96時間</td><td>Streptococcus pneumoniae、腸内グラム陰性桿菌、MSSA（メチシリン感受性黄色ブドウ球菌）など抗菌薬感受性菌</td><td>比較的良好</td></tr>
+<tr><td>遅発性</td><td>ICU入室後96時間以降</td><td>緑膿菌、Acinetobacter baumannii、MRSA などMDR</td><td>罹病率・死亡率が高い</td></tr>
+</tbody></table></div>
+<p>ただし著者らは、発症時期だけがMDRのリスクではないと明確に留保する。入院前からの免疫抑制、先行する抗菌薬使用、直近の入院歴がある患者もMDRや非定型感染のリスクが高く、発症時期にかかわらずMDRの有病率が同程度だったとする研究が出てきている。</p>
+<p>非好中球減少患者においても、多施設研究ではAspergillus感染の有病率が最大12%と報告されている。免疫抑制療法の使用が増えているICUでは、これは新たに立ち上がりつつある問題である可能性がある。</p>
+<p>細菌性肺炎患者を対象とした初期の研究では、サイトメガロウイルス、単純ヘルペスウイルス1型、EBウイルスの再活性化が最大48%の患者で見られ、死亡と独立した関連を示した。著者らは、こうした細菌・真菌・ウイルスの憂慮すべき動向は、診断の標準化、新たな治療機会の同定、培養結果への遵守の改善、処方習慣の改善を目的とした大規模な前向きレジストリ研究を促すべきだと述べる。</p>
+<h3>6. 肺マイクロバイオームというモジュレーター</h3>
+<p>かつて無菌と考えられていた肺は、現在では多様かつ動的なマイクロバイオームを宿し、健常時には共生的な生態系と免疫恒常性を維持していると認識されている。重症疾患の経過中には、先行する抗菌薬使用、人工呼吸、食事の変化など多くの因子がマイクロバイオームのdysbiosis（細菌叢の乱れ）を引き起こし、VAPのような合併症のリスクを高めうる。</p>
+<p>VAPに伴う肺細菌叢のdysbiosisは、変化した口腔咽頭細菌叢と結びついている。そこからETTを介した微小誤嚥または移行が起こり、加えて腸から肺への移行、抗菌薬治療などのICU関連因子が重なる。鎮静や人工呼吸といった一般的なICU治療は咳反射と分泌物クリアランスを損ない、気道からの細菌排除を減らして細菌量を増やす。VAPの発症時、肺細菌叢は圧倒されてdysbioticとなり、微生物多様性は低下し微生物負荷は高くなる。</p>
+<h3>7. 肺実質の自然免疫応答</h3>
+<p>肺炎が成立するには、微生物（典型的には細菌）がまず咳・嚥下・粘液線毛エスカレーターといった機械的バリアを乗り越えなければならない。続いて気管と肺への定着が起こり、肺が免疫的抵抗と組織のレジリエンスを維持できる容量を超えてpathobiont（状況次第で病原性を発揮する常在菌）が増殖する。</p>
+<p>肺胞マクロファージ（AM）は下気道に存在する多様な貪食細胞群である。健常時、AMは肺胞の恒常性を維持し、局所感染時には最も豊富な自然免疫細胞として、侵入する呼吸器病原体に対する第一線の防御を担う。AMは微生物の貪食とアポトーシスを担うように適応し、さらにNF-κB転写を介したサイトカイン活性の協調的な自然免疫応答を統率する。これにはインターロイキン（IL-1α、IL-1β、IL-6、IL-8）と腫瘍壊死因子（TNF-α）が含まれ、感染部位に好中球を動員する。AMは抗原提示細胞としてリンパ球を刺激し、細胞性・液性の応答を引き起こし、結果として肺実質の炎症、毛細血管の透過性亢進、滲出性のうっ血をもたらす。</p>
+<p>病原微生物が肺の局所免疫を圧倒すると、AMと上皮細胞はさらにサイトカインを放出し、好中球の肺気腔への遊走を促す。細菌培養陽性のVAPでは、肺への好中球動員が起こり、貪食、脱顆粒、活性酸素種（ROS）の放出、好中球細胞外トラップ（NETs）の形成が生じる。NETsはヒストンと抗菌ペプチドを含み、VAPに関連する侵入病原体を殺すことができる。</p>
+<p>好中球およびその由来マーカーは、区画化された炎症性の状態を示すものとして細菌性肺炎の診断に使える。しかし、綿密に標準化されたBALが必要であり、その資源と専門性は大半の施設に欠けているため、日常診療での使用は妨げられている。</p>
+<h3>8. 局所の炎症 — biotraumaという上乗せ</h3>
+<p>重症疾患は、過剰炎症と免疫抑制が同時に存在する不均一な状態である。加えて人工呼吸そのものが、肺内サイトカインの上方調節という局所炎症応答を誘導することが知られており、これをbiotrauma（生物学的損傷）と呼ぶ。biotraumaは持続的な局所炎症を生み、VAPのリスクを高めうる。</p>
+<p>炎症の因果的メディエーターと、それがVAPにどれだけ寄与しているかを判別することは臨床的にしばしば困難である。しかし近年の研究では、VAP発症時に肺内バイオマーカーであるIL-1β、IL-8、マトリックスメタロプロテアーゼ8（MMP-8）、MMP-9、ヒト好中球エラスターゼ（HNE）、および血清CRPとIL-6が有意に上昇することが示されている。</p>
+<p>好中球はVAPに対する自然免疫応答で重要な役割を果たす一方、NETsの放出は局所的で持続的な炎症にも寄与する。この持続的炎症は肺損傷を招き、死亡リスクを高めうる。</p>
+<h3>9. VAPの組織学的定義 — 「同一肺内に異なる病期が同居する」</h3>
+<p>VAPは、細気管支と肺胞への白血球集積を伴う硬化（consolidation）の存在として定義されてきた。重症度としては4段階に分類される。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>組織学的所見</th></tr></thead>
+<tbody>
+<tr><td>早期細気管支炎</td><td>細気管支内と細気管支壁に多形核白血球（PMNL）が増殖し、膿性の粘液栓を伴う</td></tr>
+<tr><td>巣状気管支肺炎</td><td>終末細気管支と肺胞に散在性の好中球浸潤</td></tr>
+<tr><td>融合性気管支肺炎</td><td>巣状浸潤が隣接する肺葉に拡大</td></tr>
+<tr><td>肺膿瘍</td><td>融合性気管支肺炎がさらに拡大し、組織壊死と周囲肺構築の破壊を伴う</td></tr>
+</tbody></table></div>
+<p>さらに組織学的研究は、VAPが不均一で、複数の病期が同一時点で共存しうることを示している。毛細血管のうっ血と肺胞腔内のPMNLを伴うフィブリン性滲出物という早期相の肺炎は、フィブリン・PMNL・少数の赤血球を含む肺胞という中間相へ進む。進行相ではPMNLが肺胞を満たす中でマクロファージが細胞デブリを貪食し、続いて単核球のマクロファージ活性が炎症性滲出物を除去する消退相に至る。</p>
+<p>全体としてVAPは非均一かつびまん性の過程であり、しばしば両肺に、主として下葉に及ぶ。この組織学的パターンは、人工呼吸が生み出す流量と換気量によって細菌が中枢気道から末梢気道へ分布することに由来する可能性がある。ただし著者らは、この複雑で動的な像こそが診断法を難しくしている理由を説明しうると述べる。</p>
+<h3>10. VAPの診断 — なぜ決着しないのか</h3>
+<p>肺炎の診断に関する多大な研究と国際ガイドラインの公表にもかかわらず、VAPの定義と診断は依然として議論の的であり、参照基準に大きなばらつきがある。この混乱により、同一の患者コホートであってもVAPの発生率が診断基準の違いによって4%から42%まで変動した。</p>
+<p>VAPの診断は感度も特異度も欠いており、臨床医は不要な抗菌薬のリスクと治療の遅れによる患者害のリスクを天秤にかけざるをえない。こうした診断上の不確実性と、国内・国際的に明確で受け入れられた実行可能なエビデンスが欠けていることが、抗菌薬使用の規律を守ろうとする動機を弱め、VAPにおける抗菌薬圧をさらに増している。死亡率を下げるには適時の抗菌薬治療が不可欠である一方、肺炎と誤って帰属されがちな他の感染症を診断し、輸液過剰やARDSといった交絡因子を同定することも同様に不可欠である。したがってVAPの診断は、感度が高く、特異度が高く、かつ迅速でなければならない。</p>
+<p>炎症と感染を起こした肺組織の病理学的検査は、VAP診断において最も正確な手段とされる。しかし肺生検は重症患者には実施可能でも適切でもなく、剖検では治療に影響を与えるには遅すぎる。そこで臨床ガイドラインは、臨床・画像・微生物の基準を統合してVAP診断を支持しようと試みている。</p>
+<h4>Table 1. VAP診断のための臨床・画像・微生物基準（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>基準</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>臨床</td><td>他に原因のない38 ℃超の発熱 かつ 白血球増多または白血球減少、かつ以下の少なくとも1つ：喀痰の新規出現または性状変化／咳・呼吸困難・頻呼吸／ガス交換の悪化</td></tr>
+<tr><td>画像</td><td>胸部X線または胸部CTで肺浸潤影 または エアブロンコグラムの所見。呼吸器疾患の既往があれば連続した画像を比較する</td></tr>
+<tr><td>微生物</td><td>汚染の少ない下気道検体からの定量培養陽性 または 喀痰培養陽性もしくは非定量の下気道培養陽性</td></tr>
+</tbody></table></div>
+<h3>11. 臨床診断の落とし穴</h3>
+<p>身体診察は不可欠だが、VAP診断における感度は66.4%（95% CI 40.7–85.0）、特異度は53.9%（95% CI 34.5–72.2）にとどまる。臨床医がVAP診断に用いる古典的な臨床所見、すなわち発熱・膿性分泌物・白血球増多は、剖検研究と前向き臨床研究において感度69%、特異度75%であった。これらの臨床所見はしばしばVAP診断の土台となり、画像・微生物検査と組み合わせて用いられる。</p>
+<p>しかし、発熱・頻脈・白血球増多といった炎症の初期徴候は、VAPに特異的ではなく、重症疾患の全身性炎症反応を伴うあらゆる過程で見られる。決定的ではなくサイトカインを放出するあらゆる病態に帰属しうるとはいえ、発熱と白血球増多はさらなる臨床的精査を促すべきである、と著者らは位置づける。</p>
+<h4>咳・喀痰・頻呼吸・低酸素</h4>
+<p>重症患者では、鎮静、陽圧換気、人工気道、原疾患の進行（外傷性脳損傷や脳卒中など）によって咳が抑制されている。膿性の気管分泌物が大量に出れば下気道感染を示唆しうるが、挿管患者では咳反射の抑制、気道デバイス上の細菌定着、粘液線毛クリアランスの障害によっても起こりうる。気管分泌物には気管気管支炎などの別の由来もあり、喫煙歴や基礎の呼吸器疾患によって増悪しうる。国際ガイドラインが示すとおり、喀痰の主観的性状（色や粘稠度）の変化はVAP診断に寄与するとされる。</p>
+<p>頻呼吸と呼吸困難のVAP診断における有用性はICUでは限定的である。これらは鎮静と呼吸補助によってマスクされるからである。自発呼吸のあるICU患者では、呼吸困難は多因子性であり、せん妄、疼痛、不穏、呼吸筋の脆弱化など、肺炎の広い症状像を模倣する他の原因によっても駆動されうる。</p>
+<p>酸素化・換気・ガス交換の変化は肺実質の炎症過程を示唆しVAPを指し示しうるが、ARDSのような非感染性病因の特徴でもありうる。VAPとARDSはいずれも低酸素血症を伴い、その診断は大きく重複し直接的な関連もある。肺炎はARDSの最多の原因であり、一方でARDSはVAPのリスクを高める。</p>
+<h3>12. 画像診断 — CT・胸部X線・肺エコー</h3>
+<p>画像検査の目的は、肺胞の炎症と分泌物の存在を同定することである。肺炎は新規または進行性の浸潤影をきたし、肺胞の含気低下と空気を含んだ気管支により、葉性・亜葉性の硬化とともにエアブロンコグラムを生じる。肺の不透過性領域、すりガラス影と呼ばれる吸収値上昇領域、エアブロンコグラムの出現は、いずれも画像上の肺炎の特徴である。</p>
+<p>画像検査はVAPと人工呼吸器関連気管気管支炎（VAT）の鑑別にも役立つ。VATはVAPと類似した臨床・検査所見を呈するが、肺実質を侵さないため画像上の肺浸潤影がないことで区別される。VATはしばしばVAPの前段階となるため両者は密接に関連する。人工呼吸器関連呼吸器感染症のサブタイプを画像で早期に認識・鑑別することは、より早期の標的介入と抗菌薬治療の機会を与える。</p>
+<h4>CT</h4>
+<p>CTは検査の gold standard であり、解剖の重なりがない三次元的な解剖学的・病理学的方向づけと、異なる組織密度の高い分解能を提供する。しかしCTは、搬送のリスク、CTを可能にするための追加の鎮静や筋弛緩の必要性、被曝の負荷のために、ICU患者のVAP診断に日常的には用いられない。著者らの四次施設では、訓練を受けたスタッフが院内搬送を行っているにもかかわらず、最大30%の患者で搬送に伴う有害事象が報告されており、これは既報と一致する。したがってCTは診断困難なVAPに限定される。</p>
+<h4>胸部X線</h4>
+<p>最近の英国の調査では、ICU専門医の75%超が、VAPを疑わせる急性の臨床症状の変化があれば胸部X線（CXR）を依頼すると回答した。CXRはポータブルでベッドサイド撮影が可能であり、CT搬送に伴うリスクを避けられる。</p>
+<p>しかし比較的安価で実務的である一方、重症ICU患者におけるCXRの読影はしばしば困難である。肺挫傷、無気肺、肺水腫、ARDSなど、浸潤影を呈する他の一般的な病態と重複するためである。CXRは複数の組織が重なり合う複雑な三次元構造を、二次元の単一画像として提供するにすぎず、読影を難しくする。CXR所見は新規または進行性の変化を確認するために過去の画像と比較すべきである。CXRの最適な撮影法は立位での後前方向と側面像を要するが、重症患者では不可能であり前後方向像を余儀なくされる。画質と読影は、体格、吸気相、病勢の進行、アーチファクトなどの因子によっても交絡される。</p>
+<p>最近のシステマティックレビューは、CXRの感度88.9%（95% CI 73.9–95.8）、特異度26.1%（95% CI 15.1–41.4）と報告し、読影に大きな不一致があり、診断の遅れや見逃しの可能性を高めるとした。CTとCXRの比較では両者の相互検証は不良で、CTで見られる不透過影のうちCXRで観察されるのは45%未満、逆方向では26.9%であった。それでもCXRはVAP診断の価値ある補助手段とみなしうる。</p>
+<h4>肺エコー</h4>
+<p>肺エコー（LUS）は、迅速でポイントオブケアの非侵襲的ベッドサイド評価を、被曝リスクなく提供する。LUSは術者依存性が小さく、訓練後は習熟度が異なっても観察者間一致が高い。ただし肥満、皮下気腫、胸壁浮腫のある患者では描出が困難になる。</p>
+<p>VAPの検出とモニタリングにおけるLUSの使用を支持するエビデンスが増えており、胸膜下の硬化像やdynamic bronchogram（動的エアブロンコグラム）によって同定される。同時に、そうした所見はあらゆる原因の肺硬化に伴うものであり、VAPに特異的ではない。臨床の徴候・症状と組み合わせた場合、LUSは重症の人工呼吸患者（VAPを含む）においてCXRより早期かつ優れた診断能を示す。</p>
+<p>小規模観察研究の結果は有望であるものの、患者アウトカムへの有益性についての応用は最小限にとどまる。CXRではなくLUSによる早期診断は人工呼吸器離脱日数（ventilator-free days）の減少と関連したものの、VAPの消退を早めることも、抗菌薬フリー日数や死亡率を改善することも示されていない。ICUでの有用性は増しているが、LUSは現時点でVAP診断の公表ガイドラインにおいて検証済みの評価ツールとして認められておらず、重症患者における費用対効果とアウトカムに関する大規模な検証研究が必要である。</p>
+<h3>13. 微生物学的診断 — ETA・BAL・PSB・NBL</h3>
+<p>責任微生物を同定する正確な診断技術は、最も適切な治療レジメンを導くために必要である。英国の調査では、すべてのICU専門医がVAPに対する抗菌薬開始前に微生物学的確認を求めていたが、技術・利用可能性・専門性には大きなばらつきがあった。微生物学的診断の最適な方法は、さらなる論争の源である。</p>
+<h4>気管吸引痰（ETA）</h4>
+<p>VAPの病因診断で最も主流なのは非侵襲的手技、とりわけ気管吸引痰（ETA）である。ETAは単純・安全・効率的で、ほとんどのICUスタッフが施行できる。口腔咽頭の汚染は避けられるものの、気道デバイス上の定着菌と区別できず、結論の出ない結果につながる。ETAは偽陽性率が高く抗菌薬使用の増加と関連するとするエビデンスがある一方、定量解析を行えば侵襲的手技の信頼できる代替となる。</p>
+<p>最近のシステマティックレビュー・メタ解析は、ETAのVAP診断における感度75.7%（95% CI 51.5–90.1）、特異度67.9%（95% CI 40.5–86.8）と結論した。それでも各国のガイドラインは、死亡・在院日数・人工呼吸期間といったアウトカムが侵襲的手技と同等であることを根拠に、非侵襲的なETA採取を推奨している。ETAの精度には議論が残るものの、単純で非侵襲的な性質ゆえにリスクは最小である。</p>
+<h4>気管支肺胞洗浄（BAL）と保護付き検体ブラシ（PSB）</h4>
+<p>末梢気道検体を得るために一般的に用いられる侵襲的手技には、気管支ファイバースコープによるBALとPSBがある。BALとPSBは上気道の汚染を迂回して下気道から検体を採取する。ただしBALとPSBは一部の病院でしか日常的に利用できず、専門的訓練を要する。またPEEPの喪失、計画外抜管、気管支攣縮、低酸素のリスクを伴い、鎮静や筋弛緩薬の追加が必要になる。</p>
+<p>気管支鏡を使わない非指向性気管支洗浄（NBL）は、気管支鏡に伴う煩雑さとリスクなしに培養検体を得ることを可能にする。NBLは安全かつ安価で、呼吸療法士や理学療法士を含む幅広い臨床職が施行でき、日常的な利用可能性を高める。NBLの診断精度はBALやPSBと同等である。</p>
+<p>VAP患者においてBALとPSBをETAと比較した場合、死亡、人工呼吸期間、ICU在室日数のいずれも減少しないというエビデンスがある。PSBは感度61.4%（95% CI 43.7–76.5）、特異度76.5%（95% CI 64.2–85.6）、BALは感度71.1%（95% CI 49.9–85.9）、特異度79.6%（95% CI 66.2–85.9）とされる。重要なのは、こうした結果の信頼性が、地域・国・国際的な参照基準の欠如によって交絡されている点である。議論の分かれるエビデンスと偽陽性・偽陰性のリスクゆえ、所見は慎重に解釈すべきである。</p>
+<h3>14. 定性か定量か、そして分子診断</h3>
+<p>BAL、PSB、ETAはいずれも定量的にも定性的にも解析できる。定量解析は細菌増殖の閾値カウントを提供し、感染と定着の区別を可能にする。一方、定性解析は病原体培養の有無を同定するにとどまる。疑いVAP患者の気道分泌物に定量培養を用いる根拠は、感染性微生物を単なる定着から区別し、抗菌薬治療を最適化することにある。</p>
+<p>分子診断については、迅速マルチプレックスPCR検査を評価した初期の研究において、成人患者での適時の意思決定、細菌耐性の検出、抗菌薬治療の適合が抗菌薬de-escalationと関連したと報告されている。著者らは、こうした所見はICU環境における抗菌薬処方圧を下げうるためVAPにおいて歓迎されるべきだと述べる。</p>
+<p>現実の実装は追いついていない。英国のICUでは、VAPに対する定量報告サービスを利用できるのは最大30%にとどまり、さらにそのうち4分の1超の施設では臨床医が手技の訓練を十分に受けていない。</p>
+<p>さらに著者らは慎重な留保を置く。VAP患者において定量培養が定性培養と比べて死亡、ICU在室日数、人工呼吸期間、抗菌薬変更の頻度を減らすという総体的なエビデンスは依然として存在しない。定量培養は低中所得国では実施が困難でもある。ガイドラインは、必要な検査室資源と専門性が少なく、定量培養より迅速に結果が得られることから、半定量培養によるVAP診断を推奨している。</p>
+<h4>Table 2. 各診断ツールの長所と短所（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>診断ツール</th><th>長所</th><th>短所</th></tr></thead>
+<tbody>
+<tr><td>ベッドサイドの臨床症状</td><td>安価／迅速なベッドサイド評価／どの職種・どの経験年数でも可能／臨床的疑いの土台</td><td>感染の原因に非特異的／多くの疾患過程と重複／ICU由来の因子で交絡／結論が出ない</td></tr>
+<tr><td>画像：CT</td><td>三次元画像／異なる密度の高分解能／正確</td><td>被曝リスク／搬送リスク／時間の遅れ／コスト</td></tr>
+<tr><td>画像：胸部X線</td><td>ポータブルでベッドサイド評価が可能／迅速／実務的／安価</td><td>二次元画像のみ／患者体位が制限される／読影が困難／多くの疾患過程と重複／比較画像がないと価値が下がる</td></tr>
+<tr><td>画像：肺エコー</td><td>ポータブルでベッドサイド評価が可能／迅速／安価／被曝がほぼない／動的な観察が可能</td><td>専門的訓練が必要／体格や皮下気腫による制限／認められた検証済みの評価ツールではない</td></tr>
+<tr><td>微生物：非侵襲的手技</td><td>単純／安全／迅速かつ効率的に検体が得られる／幅広いICUスタッフが採取可能／広範な訓練を要さない</td><td>交差汚染のリスク／下気道を分離できない</td></tr>
+<tr><td>微生物：侵襲的手技</td><td>下気道を標的とするため特異度が高い</td><td>24時間体制では日常的に利用できない／専門的訓練が必要／患者が不安定になるリスク</td></tr>
+<tr><td>微生物：定性法</td><td>単純／定量法より速く効率的</td><td>正確な菌種に特異的でない</td></tr>
+<tr><td>微生物：定量法</td><td>特異的／標的抗菌薬治療を可能にする／適時</td><td>高コスト／検査室資源／専門性が必要</td></tr>
+</tbody></table></div>
+<p>なお市中肺炎（CAP）の診断では、PSI（pneumonia severity index）、CURB-65（意識障害／尿素窒素7 mM超／呼吸数30回/分以上／収縮期血圧90 mmHg未満もしくは拡張期血圧60 mmHg以下／65歳以上）、mATS（modified American Thoracic Society rule）といった多数のスコアリングツールが存在する。いずれも肺炎に伴うICU治療の必要性と死亡の予測に有用とされるが、VAPの診断への使用は支持されていない。</p>
+<h3>15. スコアリングシステム — CPIS</h3>
+<p>これまでに述べた臨床・画像・微生物の評価ツールは、それぞれ強みと弱みを持ち、単独では確定診断を与えられない。スコアリングシステムは、個々の診断法の落とし穴と論争を克服し、複雑な臨床状況を単純化・定量化するために医療の多くの領域で用いられ、急性期・救急医療において評価・診断・リスク層別化・アウトカム予測の効率的で標準化された方法を提供しうる。</p>
+<p>CPIS（Clinical Pulmonary Infection Score、臨床肺感染スコア）はVAPに最も関連するスコアリングシステムであり、広く記録されてきた。CPISは臨床・画像・微生物の基準を組み合わせて実務的なスコアとし、単一の定量可能な結果を与える。スコアは0〜12点で、6点以上（本文では6点超という表現も併用される）がVAPの高い可能性を意味する。</p>
+<h4>Table 3. Clinical Pulmonary Infection Score（CPIS）（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>0点</th><th>1点</th><th>2点</th></tr></thead>
+<tbody>
+<tr><td>体温</td><td>36.5 ℃以上38.4 ℃以下</td><td>38.5 ℃以上38.9 ℃以下</td><td>39 ℃以上 または 36.5 ℃未満</td></tr>
+<tr><td>胸部X線の肺浸潤</td><td>浸潤なし</td><td>びまん性浸潤／限局性浸潤</td><td>—</td></tr>
+<tr><td>白血球数（顕微鏡）</td><td>4000以上11000以下</td><td>4000未満 または 11000超（桿状核球50%以上でさらに1点加算）</td><td>—</td></tr>
+<tr><td>肺浸潤の進行</td><td>画像上の進行なし</td><td>—</td><td>画像上の進行あり（心不全とARDSを除外したうえで）</td></tr>
+<tr><td>気管分泌物</td><td>分泌物なし</td><td>膿性の乏しい分泌物</td><td>大量の膿性分泌物</td></tr>
+<tr><td>気管吸引痰培養の病原菌</td><td>病原菌なしまたは少数</td><td>中等量または多量の病原菌（グラム染色で病原菌が見えればさらに1点加算）</td><td>—</td></tr>
+<tr><td>酸素化（PaO₂/FiO₂, mmHg）</td><td>240超 またはARDS（PaO₂/FiO₂ 200未満、肺動脈楔入圧18 mmHg以下、両側性の急性浸潤影）</td><td>—</td><td>240以下 かつARDSでない</td></tr>
+</tbody></table></div>
+<p>合計6点超を肺炎とみなす。</p>
+<p>原著のPuginらの報告では、CPISはVAP診断において感度93%、特異度96%とされた。しかしBALによる定量培養や組織所見と比較すると、CPISの感度・特異度は低いと考えられている。CPISの個々の構成要素は臨床因子の主観的評価に依存し、肺浸潤影の進行や膿性分泌物のように各項目の正確性そのものに疑問があるため、評価者間信頼性が低下する。</p>
+<p>主要な限界は、参照基準のばらつきとCPIS基準の改変であり、気管支鏡下BAL、非気管支鏡下BAL、剖検組織所見のいずれと比較するかで感度・特異度の見解が分かれる。CPIS 6点超をVAPとした場合の感度は73.8%（95% CI 50.6–88.5）、特異度は66.4%（95% CI 43.9–83.3）である。</p>
+<p>CPISはモニタリングと早期検出、そして早期警告システムとしての利点があるように見え、早期の抗菌薬治療を可能にしうる。しかし頻用される基準を実務的に組み合わせたものであるにもかかわらず、CPISの正確性と信頼性には議論があり、VAP診断ツールとしての広範な使用は慎重に、かつ臨床研究の文脈で採用されるべきである。</p>
+<h3>16. バイオマーカー</h3>
+<p>ICUにおけるバイオマーカーの使用は近年著しく増え、生物学的過程の客観的で定量可能な特性を提供している。バイオマーカーは正常または病的な過程、あるいは薬理学的応答を示す。WHOはバイオマーカーを、体内または体の産生物において測定可能なあらゆる物質または過程と定義する。バイオマーカーは通常、血清、気管支肺胞洗浄液、呼気凝縮液などあらゆる生体試料で検出されるタンパク質であり、VAPを含む多数の感染症の潜在的な診断法となりうる。</p>
+<p>VAPの現行の診断手順の迅速性と性能を改善するために多くの生物学的マーカーが研究されており、感染症に関連するバイオマーカーはこれまでに約200種類が報告されている。プロカルシトニン（PCT）、可溶性TREM-1（sTREM-1）、CRP、IL-8やIL-1βといった炎症性サイトカインは、非感染性・感染性いずれの炎症原因でも上昇しうるという認識が高まっている。</p>
+<h4>Table 4. 主なバイオマーカーの要約（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>バイオマーカー</th><th>要約</th></tr></thead>
+<tbody>
+<tr><td>プロカルシトニン（PCT）</td><td>細菌感染に応答して主に肝臓で産生される急性期反応物質。全身性炎症反応の一部として肺や腸の神経内分泌細胞から血清中に分泌されるプロホルモン。甲状腺C細胞と肺K細胞から分泌されるカルシトニン前駆体。健常者では通常検出されない（0.01 ng/mL未満）が、全身性の細菌誘発性炎症のある患者では検出される。エンドトキシンの刺激を受けると全身の実質組織で急速に産生される。VAPの診断に有用となりうる検査。</td></tr>
+<tr><td>可溶性TREM-1（sTREM-1）</td><td>TREM-1は微生物感染の生物学的マーカーとして研究されてきた。免疫グロブリンスーパーファミリーに属する糖タンパクで、細菌や真菌が侵入した組織に浸潤する好中球と単球に強く発現する。TREM-1はシグナル伝達経路を介して炎症性メディエーターの分泌を誘発し、炎症応答の増幅器として機能する。感染に応じて可溶型（sTREM-1）が分泌または遊離され、体液中で測定できる。非微生物性の炎症患者ではsTREM-1はほぼ検出されない。ただし非感染性の炎症でも上昇することに留意が必要。</td></tr>
+<tr><td>C反応性タンパク（CRP）</td><td>肝臓で合成される非特異的な炎症の生物学的マーカー。感染に応じて速やかに合成され、刺激が除かれると速やかに低下する。健常者では血清CRPは低値。感染・外傷・手術・悪性腫瘍に応じて急速かつ鋭く上昇しうる。血清CRPは炎症を判定する効率的な方法。</td></tr>
+<tr><td>炎症性サイトカイン</td><td>肺炎への免疫応答としての炎症性サイトカインと好中球は、BALにおけるVAPと炎症の自然免疫マーカーとなりうる。BAL中の炎症性サイトカイン、とくに肺内のIL-8とIL-1βがVAPと関連する。IL-8は損傷の初期段階でマクロファージと上皮細胞が産生し、感染・炎症部位に好中球その他の免疫細胞を動員する炎症性ケモカイン。IL-1βは感染と損傷に対する宿主防御に不可欠な炎症性サイトカイン。</td></tr>
+</tbody></table></div>
+<p>しかしこれらはVAP診断において一貫せず、抗菌薬使用によって変化し、感度・特異度も一定でない。感染の早期同定、抗菌薬治療の適時開始、治療経過や期間の速やかな評価には有用である。しかし現時点で理想的なバイオマーカーは同定されていない。したがって最近のガイドラインは、VAPの診断にバイオマーカーを用いることを推奨せず、治療期間の指針としては役立ちうると示唆するにとどまる。VAPの発症予測因子としてのバイオマーカーの有用性は、まだ示されていない。</p>
+<h3>17. 人工知能による多モーダル診断の統合</h3>
+<p>人工知能（AI）は急速に成長する概念であり、現代医療の中で多くの革新的かつ洗練された可能性を提供する。電子カルテの利用可能性が高まったことで、AIは膨大で複雑なデータを処理・解釈でき、VAPの領域における疾患同定、アウトカム予測、フェノタイピングにとって好機となる。AIは教師あり・半教師あり・教師なし機械学習を用いて、交絡変数や既往を含む複雑な情報を解釈し、診断と疾患同定を支援する。</p>
+<p>これまでの研究では、COVID-19による肺炎や外傷性脳損傷のCT解析を含め、画像判読におけるAIの有用性が示されてきた。AIは微生物検体なしでCTやCXRの判読を迅速化・高度化し、意思決定を助ける可能性があるが、臨床実践モデルにおけるさらなる検証が必要である。</p>
+<p>AIはまた、症状をクラスタリングしてフェノタイプ・エンドフェノタイプを確立し、COVID-19、ARDS、肺炎、敗血症における悪化を予測するアルゴリズムを可能にしてきた。小規模研究では、自動機械学習によるVAP予測は、挿管からわずか24時間後の高リスク患者においてCPISより優れていると判断された。</p>
+<p>一方、実装への障壁は大きい。最近のシステマティックレビューでは、ICUにおけるAI研究の95%超が後ろ向きであった。妥当性、使いやすさ、信頼性を高めるには前向き臨床試験が必要である。またデータプライバシーと情報共有の安全性についての懸念が残る。VAPの診断・予後判定・管理の指針としてAIを広く実装する前に、さらなる資源、投資、研究が求められる。</p>
+<h3>18. 医療格差 — 低所得国におけるVAP</h3>
+<p>医療関連感染は低所得国・中所得国で深刻な問題であり、入院患者の4分の1に影響する。VAPのプール発生率は、低中所得国のほうが高所得国より高い。しかし発展途上国では報告と監視の体制が大きくばらつき、予防的介入も限られている。</p>
+<p>アジアをはじめとする急成長中の低中所得地域では、医療提供の拡大により医療にアクセスする人が増えている一方、感染予防管理と抗菌薬スチュワードシップの規制と統制が不足している。発展途上国においてVAPは高い死亡率とICU在室日数の延長に関連し、乏しい資源と過剰なコストという追加の負担をもたらす。発展途上国におけるVAPの帰属コストは、他の患者の5倍に達する。著者らは、AIによる革新がこうした患者のコストを減らしうる可能性に言及する。</p>
+<h3>19. 結論と提案アルゴリズム</h3>
+<p>VAPの診断は今なお臨床上の難問である。診断方法と参照基準にばらつきがあるため、既存の文献はVAPの進行と治療反応を測る比較の材料としては限定的である。決定的なマーカーとされる組織学的診断も、ICUにおけるVAPの診断と予後判定のための検査としては実施可能ではない。</p>
+<p>臨床研究における合意が限られている以上、臨床的な専門性と経験、そして利用可能なあらゆる臨床情報を包含する実務的なアプローチが必要となる。利用可能な臨床・画像・微生物の各方法を組み合わせ、それぞれの長所と短所を理解したうえで総合的に評価すべきである。今後の臨床研究は、VAPとその診断が重症患者にもたらす抗菌薬圧を検討すべきである。臨床検査は、時間の遅れ、侵襲的手技、ICUという専門環境の外に出ることのリスクを考慮し、可能な限り害の少ないものであるべきである。感度・特異度の高い肺内サイトカインの迅速ベッドサイド検査は、抗菌薬スチュワードシップと診断の改善のためにさらなる探索の価値がある。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 単純で実務的な人工呼吸器関連肺炎（VAP）診断アルゴリズム。図は上から下へ流れるフローチャートである。最上部の濃青のボックスに「Patient mechanically ventilated（人工呼吸中の患者）」があり、そこから2本の矢印が「Respiratory deterioration（呼吸状態の悪化）」と「Signs of acute infection（急性感染の徴候）」の2つの中間色ボックスに分岐する。左端には呼吸状態の悪化の内訳として「Change in tracheal secretions（気管分泌物の変化）」「Change in ventilation or oxygen requirements（換気設定または酸素需要の変化）」「Worsening gas exchange / PaO2（ガス交換の悪化）」の3つの小ボックスが縦に並び、右端には急性感染の徴候の内訳として「Temperature 38度超 または 36度未満」「Leukopenia or Leucocytosis（白血球減少または白血球増多）」の2つの小ボックスが縦に並ぶ。両者の矢印は「Could this be VAP?（これはVAPではないか）」という濃青のボックスに合流し、そこから「Calculate CPIS（CPISを計算する）」へ進む。CPISから2方向に分岐し、左は「Scores 6超 with the data available（データが揃っていて6点超）」から「Commence antibiotic therapy（抗菌薬治療を開始する）」へ、右は「Scores 6未満 with missing CPIS data（CPISのデータが欠けていて6点未満）」から「Complete investigations（検査を完結させる）」へ向かう。Complete investigations はさらに「Sputum sample（喀痰検体）」と「Chest imaging（胸部画像）」の2つに分岐し、どちらのボックスにも斜体で「Utilising techniques available and appropriate（利用可能で適切な手技を用いる）」と付記される。両者からそれぞれ矢印が下り、「Suggestive of VAP（VAPを示唆する）」（喀痰側）、「No evidence of pneumonia（肺炎の証拠なし）」（中央・両者から矢印が入る）、「Suggestive of VAP（VAPを示唆する）」（画像側）の3つに分かれる。中央の「肺炎の証拠なし」からは「Investigate other causes. Repeat CPIS daily.（他の原因を検索する。CPISを毎日繰り返す）」へ向かい、左右の「VAPを示唆する」からは矢印が最下部の濃青のボックス「Commence antibiotic therapy（抗菌薬治療を開始する）」に合流する。原図・無改変。</p>
+</div>
+<p>このアルゴリズムを判断表に起こすと次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>人工呼吸中の患者に呼吸状態の悪化がある</td><td>気管分泌物の変化／換気設定・酸素需要の変化／ガス交換（PaO₂）の悪化</td><td>「これはVAPではないか」と明示的に問う</td></tr>
+<tr><td>人工呼吸中の患者に急性感染の徴候がある</td><td>38 ℃超または36 ℃未満の体温／白血球減少または白血球増多</td><td>「これはVAPではないか」と明示的に問う</td></tr>
+<tr><td>VAPを疑った</td><td>CPISを計算する</td><td>データが揃っていて6点超なら抗菌薬治療を開始する</td></tr>
+<tr><td>CPISのデータが欠けていて6点未満</td><td>検査を完結させる</td><td>喀痰検体（利用可能で適切な手技）と胸部画像（同）を追加する</td></tr>
+<tr><td>喀痰検体または胸部画像がVAPを示唆する</td><td>どちらか一方でも示唆的か</td><td>抗菌薬治療を開始する</td></tr>
+<tr><td>喀痰検体・胸部画像とも肺炎の証拠がない</td><td>他に説明できる原因はあるか</td><td>他の原因を検索し、CPISを毎日繰り返す</td></tr>
+</tbody></table></div>
+<p>VAP診断における新たな検査と、AIを用いた既存データの活用は、包括的で実務的なアプローチを提供しうる、というのが著者らの締めくくりである。</p>
+<h3>20. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>参照基準がないところで測った感度・特異度</strong>：本総説が並べる数値の大半は、Fernandoらのシステマティックレビュー・メタ解析に由来する。しかし著者ら自身が認めるとおり、VAPには地域・国・国際的な参照基準が存在しない。参照基準が研究ごとに異なる（気管支鏡下BAL、非気管支鏡下BAL、剖検組織）状態でプールした感度・特異度は、95% CIの幅（例：臨床所見の特異度34.5–72.2、ETAの特異度40.5–86.8）が示すとおり極めて不安定である。数値をそのまま「この検査はこの精度」と読むのは危うい。</li><li><strong>提案アルゴリズムの内部矛盾</strong>：Fig. 2はCPISを中心に据えるが、本文ではCPISの精度と信頼性を「議論があり、慎重に、臨床研究の文脈で採用されるべき」と評価している。感度73.8%・特異度66.4%のスコアを抗菌薬開始の分岐点に置くことは、本文の慎重さと整合しない。またアルゴリズムは「CPIS 6点超なら抗菌薬開始」としつつ、6点未満で検査を追加した結果「VAPを示唆する」なら同じく抗菌薬開始に合流する。実質的にどの経路を通ってもVAPを疑えば抗菌薬に至る構造で、抗菌薬圧を下げるという本総説の問題意識に応えていない。中止・de-escalationの分岐がアルゴリズムに一切ないことも弱点である。</li><li><strong>CPIS表そのものの内部不整合</strong>：Table 3の「肺浸潤」の項目は、原表の表記上「びまん性浸潤＝1点」「限局性浸潤＝1点」となっており、両者を区別する意味がない（通常のCPISではびまん性1点・限局性2点）。酸素化の項目も、ARDSの定義が0点側と2点側の双方に現れ判読しにくい。CPISには多くの改変版が流通しており、どの版を使っているかを明示しないままの感度・特異度の議論は成立しにくい。</li><li><strong>記載の粗さ</strong>：本文には「Streptococcus pneumonia」（正しくはpneumoniae）、「Acinetobacter baumanni」（正しくはbaumannii）、「pneumonis」などの誤記が散見される。CPISの閾値も「6点以上」と「6点超」が混在する。Nature Communicationsという掲載誌に期待される精度としてはやや甘い。</li><li><strong>単施設の経験値を一般化している箇所</strong>：CT搬送に伴う有害事象「最大30%」は著者らの四次施設の数値で、これを一般化してCTを避ける根拠とするのは飛躍がある。搬送体制と患者選択によって大きく変わる数値である。</li><li><strong>肺エコーの扱いが慎重すぎるか、妥当か</strong>：LUSはCXRより早期かつ優れた診断能を示すとしながら、「ガイドラインが認めた検証済みツールではない」ことを理由に位置づけを保留する。一方でCXR（特異度26.1%）は「価値ある補助手段」として残す。この非対称な扱いは、エビデンスの質ではなくガイドライン収載の有無で判断していることの表れで、JCで議論する価値がある。</li><li><strong>予防と治療が射程外</strong>：本総説は診断に焦点を絞っており、予防バンドル（頭位挙上、口腔ケア、カフ圧管理、声門下吸引、選択的消化管除菌）と治療（抗菌薬選択・投与期間）に踏み込まない。したがって「診断が難しい」という結論から実務が何を変えるべきかは、読み手が補う必要がある。</li><li><strong>分子診断の評価が薄い</strong>：マルチプレックスPCRについては「初期研究でde-escalationと関連した」という1文にとどまり、感度・特異度も、定着菌を拾ってしまう問題も論じられていない。2024年時点の総説としては物足りず、この点は後続のRCT（VAPEROなど）を併読する必要がある。</li><li><strong>異質性を語りながら、それを診断に翻訳していない</strong>：本総説の売りは「病態が不均一だから診断が難しい」という枠組みだが、では病態のどのサブタイプ（早期発症か遅発性か、dysbiosis優位か宿主炎症優位か）にどの検査を当てるべきか、という具体的な提案には至っていない。異質性の記述と診断アルゴリズムの接続が弱い。</li></ul>
+<h3>21. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>各診断法の感度・特異度のプール推定（本総説の数値の出所）</td><td>Fernando SM, et al. Diagnosis of ventilator-associated pneumonia in critically ill adult patients — a systematic review and meta-analysis. Intensive Care Med（本総説の文献8）</td></tr>
+<tr><td>HAP・VAPの国際ガイドライン</td><td>Torres A, et al. International ERS/ESICM/ESCMID/ALAT guidelines for the management of hospital-acquired pneumonia and ventilator-associated pneumonia. Eur Respir J 2017;50:1700582</td></tr>
+<tr><td>VAPとは何か・なぜ重要か</td><td>Kollef MH. What is ventilator-associated pneumonia and why is it important? Respir Care 2005;50:714–721</td></tr>
+<tr><td>気管チューブはVAPへの入口</td><td>Zolfaghari PS, Wyncoll DL. The tracheal tube: gateway to ventilator-associated pneumonia. Crit Care 2011;15:310</td></tr>
+<tr><td>VAPの臨床的・経済的帰結</td><td>Safdar N, Dezfulian C, Collard HR, Saint S. Clinical and economic consequences of ventilator-associated pneumonia: a systematic review. Crit Care Med 2005;33:2184–2193</td></tr>
+<tr><td>HAP・VAPの疫学と管理の進歩</td><td>Barbier F, Andremont A, Wolff M, Bouadma L. Curr Opin Pulm Med 2013;19:216–228</td></tr>
+<tr><td>VAPのアップデート</td><td>Timsit JF, et al. Update on ventilator-associated pneumonia. F1000Res 2017;6:2061</td></tr>
+<tr><td>CPISの原著（感度93%・特異度96%）</td><td>Pugin J, et al.（本総説の文献122）</td></tr>
+<tr><td>機械学習によるVAP予測</td><td>Giang C, et al. Predicting ventilator-associated pneumonia with machine learning. Medicine (Baltimore) 2021;100:e26246</td></tr>
+<tr><td>アジアにおけるVAPと国民所得水準</td><td>Bonell A, et al. Clin Infect Dis 2018;68:511–518</td></tr>
+<tr><td>発展途上国のVAPの系統的レビュー</td><td>Arabi Y, Al-Shirawi N, Memish Z, Anzueto A. Int J Infect Dis 2008;12:505–512</td></tr>
+<tr><td>インドの三次ICUにおけるVAPの発生率と帰属コスト</td><td>Mathai AS, Phillips A, Kaur P, Isaac R. J Infect Public Health 2015;8:127–135</td></tr>
+<tr><td>低中所得国の院内感染予防</td><td>Bardossy AC, Zervos J, Zervos M. Infect Dis Clin North Am 2016;30:805–818</td></tr>
+<tr><td>臨床予測ルールと臨床判断の比較</td><td>Sanders S, Doust J, Glasziou P. PLoS One 2015;10:e0128233</td></tr>
+<tr><td>CAPの重症度スコア（PSI）</td><td>Fine MJ, et al. Arch Intern Med 1997;157:36–44</td></tr>
+<tr><td>CAPの重症度スコア（CURB-65）</td><td>Lim WS, et al. Thorax 2003;58:377–382</td></tr>
+<tr><td>CAPの予後スコア（mATS）</td><td>Ewig S, et al. Eur Respir J 1995;8:392–397</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 VAPは微小誤嚥・バイオフィルム・肺内細菌叢の破綻・宿主免疫応答が重なった不均一な病態であり、そのために臨床所見（感度66.4%・特異度53.9%）、胸部X線（感度88.9%・特異度26.1%）、ETA（感度75.7%・特異度67.9%）、BAL（感度71.1%・特異度79.6%）、CPIS 6点超（感度73.8%・特異度66.4%）のどれも単独では確定にも除外にも足りない。<mark class="hl">「VAPを疑った」段階で抗菌薬を走らせるのをやめ、下気道検体を抗菌薬より先に採り、48〜72時間後に必ずde-escalationか中止かを判断する二段構えを標準手順にする。</mark> そして<mark class="hl">自施設のVAP率を語る前に、どの診断定義を使っているかを文書で固定する（定義次第で同じ患者集団の発生率は4%から42%まで動く）。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
