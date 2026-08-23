@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ARDS以外の低酸素性呼吸不全でも腹臥位は挿管を26%減らす — 死亡は減らない（SR・メタ解析・ClinRespirJ2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="crj.70190.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ARDS以外の低酸素性呼吸不全でも腹臥位は挿管を26%減らす — 死亡は減らない（SR・メタ解析・ClinRespirJ2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Zaki HA, Yigit Y, Shaban EE, et al. Efficacy of Prone Positioning in Non-ARDS Patients With Hypoxemic Respiratory Failure: A Systematic Review and Meta-Analysis. Clin Respir J. 2026;20:e70190. DOI: 10.1111/crj.70190</dd><dt>掲載誌</dt><dd>The Clinical Respiratory Journal（2026-05-14）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1111/crj.70190" target="_blank" rel="noopener">doi.org/10.1111/crj.70190</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Efficacy of Prone Positioning in Non-ARDS Patients With Hypoxemic Respiratory Failure: A Systematic Review and Meta-Analysis</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院の何が変わるか</strong>：「腹臥位＝中等症以上のARDS（PROSEVA 基準）」という当院の線引きの外側に、もう一段ゆるい適応が加わる。HFNC／NPPV／CPAP で管理している低酸素性呼吸不全（ARDS 診断に至らない肺炎・外傷性肺挫傷・COVID-19 様の両側性肺炎）で、挿管を避けたい局面では覚醒下腹臥位を「試してよい」レベルの根拠がある。プールされた挿管率は 28.8%（360/1250）対 37.2%（483/1299）、RR 0.74（95%CI 0.60–0.91）</li><li><strong>変わらないこと</strong>：死亡は減らない（RR 0.81、95%CI 0.64–1.01、p=0.07）。挿管回避を目的に腹臥位を続け、必要な挿管を遅らせる方向に働かせてはいけない。この点は覚醒下腹臥位全般の既知の懸念と一致する</li><li><strong>挿管中の非ARDS 患者には推せない</strong>：たった2研究・146例、酸素化の改善すら統計学的有意に届かない（MD −29.84、95%CI −77.51 to 17.83、I²=88%）。GRADE は very low。当院で挿管患者に腹臥位をかける判断は、これまで通り ARDS の重症度と PROSEVA の枠組みで行う</li><li><strong>運用として現実的な形</strong>：1回2時間以上、1日合計6〜8時間以上を目標にする研究が主流だった（Ehrmann らは「できるだけ長く・できるだけ頻回に」、Rosén らは1日16時間目標）。当院では夜間の連続セッション（Musso らの「1日1回・夜間8時間以上」）が最も回しやすい</li><li><strong>エビデンスの外挿には注意</strong>：3040例中2879例（94.7%）が COVID-19 肺炎。非 COVID-19 の低酸素性呼吸不全を扱った研究は3件だけ（Wang・Scaravilli・Venet）。ウイルス性両側性肺炎から離れるほど根拠は薄くなる</li></ul>
+</div>
+<h3>適応判断の実務（この論文をベースにした整理）</h3>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>HFNC／NPPV 装着中、P/F 150〜300、両側性浸潤影、ARDS 基準は満たさない</td><td>意識清明で体位変換に協力できるか／腹臥位の禁忌（不安定骨折・腹部開創・高度肥満での気道確保困難・血行動態不安定）がないか</td><td>覚醒下腹臥位を開始。1セッション2時間以上、1日6〜8時間を目標。SpO2・呼吸数・自覚的呼吸苦を30分後に再評価</td></tr>
+<tr><td>腹臥位開始後2時間で P/F が改善しない、または呼吸数・吸気努力が増える</td><td>ROX index の推移／自発呼吸努力（P-SILI）の徴候／腹臥位そのものの忍容性</td><td>腹臥位に固執しない。挿管の閾値を下げる。この論文は挿管を減らしたが「挿管を遅らせてよい」とは一言も言っていない</td></tr>
+<tr><td>腹臥位で酸素化が良くなったが、仰臥位に戻すと6〜8時間で元に戻る</td><td>改善が体位依存の一過性か、換気血流不均衡の恒久的是正か</td><td>Scaravilli らが報告した典型パターン。1回の反応だけで「効いた」と判断せず、腹臥位時間の総量を確保する方向へ切り替える</td></tr>
+<tr><td>挿管管理中、ARDS 基準を満たさない低酸素（肺挫傷・片側性肺炎など）</td><td>ARDS 基準を本当に満たさないのか（Berlin／Global 定義で再評価）／他の原因（無気肺・胸水・心不全）が主体でないか</td><td>本論文を根拠に腹臥位を推すのは弱い（2研究のみ・GRADE very low）。まず原因是正。腹臥位は救済的な位置づけに留める</td></tr>
+<tr><td>COVID-19 以外（膵炎・壊死性筋膜炎・敗血症・胸部外傷）の低酸素</td><td>本論文の該当研究は3件のみである点</td><td>生理学的な妥当性はあるが、エビデンスとしては個別判断。試すなら効果判定を厳密に（開始前・2時間後・仰臥位復帰後）</td></tr>
+</tbody></table></div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：中等症〜重症 ARDS（P/F &lt;150）で人工呼吸中の患者では、1日16時間以上の腹臥位が死亡を減らす（PROSEVA）。機序は背側肺の再開通、換気血流比の改善、胸壁エラスタンスの変化、肺ストレイン分布の均一化。COVID-19 パンデミック中に覚醒下腹臥位が普及し、複数のメタ解析で挿管率低下が報告された</li><li><strong>Unknown</strong>：ARDS の診断基準を満たさない低酸素性呼吸不全 — 通常の肺炎、心原性でない両側性浸潤影、胸部外傷、膵炎など — に腹臥位が効くのかは体系的に検証されていない。特に「挿管中で ARDS ではない」患者は未踏領域</li><li><strong>What's new</strong>：非 ARDS 低酸素性呼吸不全に絞って21研究3040例を統合した初のメタ解析。非挿管患者では酸素化改善（MD 51.36 mmHg）と挿管率低下（RR 0.74）が示され、死亡は有意差なし（RR 0.81、p=0.07）。挿管患者では酸素化改善が有意に届かず（2研究のみ、I²=88%）。GRADE はいずれも low〜very low で、決定打ではなく「方向性の提示」</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ARDS の基準を満たさない低酸素性呼吸不全でも、非挿管患者に腹臥位をとらせると <strong>酸素化が P/F で約51 mmHg 改善し、挿管に至るリスクが26%下がる</strong>。ただし死亡は下がらず、対象の95%が COVID-19 肺炎、エビデンスの確実性は GRADE low である。</p>
+</div>
+<ul><li>21研究3040例（RCT 7件、非ランダム化比較試験1件、観察研究13件）を統合。19研究が非挿管患者、2研究が挿管患者を対象</li><li>病因は COVID-19 肺炎が2879例（94.7%）と圧倒的。他は市中肺炎、膵炎、壊死性筋膜炎、胸部外傷、敗血症</li><li>非挿管患者の酸素化（10研究・359例の前後比較）：MD −51.36 mmHg（95%CI −70.39 to −32.32）、p&lt;0.00001、I²=77%。負号は「腹臥位前 − 腹臥位後」の向きで、腹臥位後のほうが P/F が高いことを意味する</li><li>非挿管患者の挿管率（12研究・2549例）：RR 0.74（95%CI 0.60–0.91）、p=0.004、I²=37%。イベントは腹臥位群 360/1250 対 対照群 483/1299</li><li>非挿管患者の死亡（11研究・2532例）：RR 0.81（95%CI 0.64–1.01）、p=0.07、I²=41%。イベントは 275/1241（22%）対 351/1291（27%）</li><li>挿管患者の酸素化（2研究・146例）：MD −29.84（95%CI −77.51 to 17.83）、p=0.22、I²=88%。有意差なし</li><li>異質性の源：メタ回帰で有意だったのは World Bank の国別所得水準のみ（p=0.008）。国（p=0.26）、研究デザイン（p=0.64）、実施場所（p=0.14）は有意でない</li><li>出版バイアス：Egger 検定でいずれも陰性（酸素化 p=0.61、挿管 p=0.22、死亡 p=0.33）</li><li>GRADE：非挿管患者の3アウトカムすべて low、挿管患者の酸素化は very low</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>低酸素性呼吸不全（HRF／AHRF）</strong> とは、換気（CO2 排出）ではなく酸素化が破綻した呼吸不全のこと。ICU 入室理由として最多クラスで、致死率は約30%と報告される。原因は ARDS、心原性肺水腫、肺炎が大半だが、COVID-19、COPD、心不全、喘息でも起こる。</p>
+<p><strong>ARDS</strong> は AHRF の中の一部の症候群で、Berlin 定義では ①1週間以内の急性発症、②両側性の陰影、③心不全・溢水では説明できない、④P/F ≤300（PEEP または CPAP ≥5 cmH2O 下）の4条件を満たすものを指す。つまり「AHRF ⊃ ARDS」で、本論文が扱うのはこのドーナツの外側 — 低酸素はあるが ARDS の枠に入らない患者群である。</p>
+<p><strong>P/F 比（PaO2/FiO2 ratio）</strong> は動脈血酸素分圧を吸入酸素濃度（小数）で割った酸素化の指標。室内気（FiO2 0.21）で PaO2 100 mmHg なら約476。ARDS では ≤300、重症 ARDS では ≤100。本文中の「MD −51.36 mmHg」はこの P/F 比の差である（mmHg 表記だが実体は比）。</p>
+<p><strong>SpO2/FiO2 比（S/F 比）</strong> は動脈採血なしで酸素化を推定する代用指標。本研究では S/F しか報告していない研究を、直線式で P/F に換算して統合している。</p>
+<p><strong>腹臥位療法（prone positioning, PP）</strong> はうつ伏せにする物理的治療。①背側（依存部位）の無気肺が縦隔・心臓の重みから解放されて再開通する、②胸壁エラスタンスが変わって換気分布が均一化する、③換気血流比のミスマッチとシャントが減る、という機序で酸素化が改善する。挿管中の重症 ARDS では1日16時間以上で死亡が減ることが PROSEVA で示された。</p>
+<p><strong>覚醒下腹臥位（awake prone positioning）</strong> は、挿管せずに酸素療法・HFNC・NPPV・CPAP を続けたまま自分でうつ伏せになってもらう方法。COVID-19 パンデミックで一気に広がった。</p>
+<p><strong>メタ解析用語</strong>：<strong>MD</strong>＝平均差（連続量の統合値）、<strong>RR</strong>＝リスク比（二値アウトカムの統合値）、<strong>I²</strong>＝研究間のばらつきのうち偶然では説明できない割合（50%超で異質性ありと判断）、<strong>Tau²</strong>＝ランダム効果モデルにおける真の効果量の分散、<strong>Egger 検定</strong>＝ファンネルプロットの非対称性（＝出版バイアス）を数値化する回帰検定、<strong>GRADE</strong>＝バイアスリスク・一貫性・精確性・非直接性・出版バイアスの5領域からエビデンスの確実性を high／moderate／low／very low に格付けする枠組み。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>腹臥位は40年以上前から重症低酸素の治療として使われ、ARDS での酸素化改善と死亡率低下という肯定的な結果を受けて広く採用されてきた。酸素化改善の機序として、換気血流比マッチングの改善、縦隔の重量による依存部位の圧迫解除、胸壁エラスタンスの変化が挙げられている。</p>
+<p>一方で、ARDS ではない AHRF 患者における腹臥位の有効性は確立していない。著者らは、酸素化・死亡・挿管への影響を定量的に検討することで、ARDS 基準を満たさない低酸素患者に腹臥位が利益をもたらすかを包括的に評価し、「ARDS を超えた腹臥位の役割」を明確化して日常診療と将来のパンデミックにおける意思決定に資することを目的とした。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>デザイン</h4>
+<p>Cochrane Collaboration Handbook に基づいて設計し、PRISMA 声明に沿って報告したシステマティックレビューおよびメタ解析。プロトコルは Open Science Framework に事前登録（DOI: 10.17605/OSF.IO/VBA89）。</p>
+<h4>文献検索</h4>
+<ul><li>データベース：PubMed、Cochrane Library、Web of Science、EMBASE</li><li>期間：各データベースの開始時点から2025年2月まで</li><li>検索語：「低酸素性呼吸不全」と「腹臥位」の2概念のキーワードを組み合わせ（完全な検索式は Appendix A）</li><li>補完：組み入れ研究および既存システマティックレビューの参考文献リストをハンドサーチ</li><li>言語：英語で書かれた記録に限定</li></ul>
+<h4>適格基準（PICO）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>Population</td><td>ARDS 以外の原因による低酸素性呼吸不全（HRF）と診断された患者</td></tr>
+<tr><td>Intervention</td><td>腹臥位＋任意の酸素供給デバイス（NPPV、高流量鼻カニュラ、単純酸素療法、CPAP）</td></tr>
+<tr><td>Comparison</td><td>腹臥位前後の比較、または腹臥位群と標準治療／非腹臥位群の比較</td></tr>
+<tr><td>Outcome</td><td>酸素化（主要）、死亡・挿管率（副次）</td></tr>
+<tr><td>その他</td><td>参加者10名以上の研究のみ</td></tr>
+</tbody></table></div>
+<p>除外：PICO 非適合、学会抄録・ポスター・エディトリアル・症例報告・ナラティブレビュー・レターズ・学位論文、腹臥位と側臥位を併用した研究。</p>
+<h4>データ抽出</h4>
+<p>Rayyan 上で2名が独立してタイトル・抄録および全文をスクリーニング、不一致は合議で解決。2名が独立して標準化 Excel シートに抽出。抽出項目は研究特性（筆頭著者、出版年、デザイン、地理的位置、実施部署）、患者特性（サンプルサイズ、性別分布、平均／中央値年齢、患者集団、AHRF の病因）、アウトカム（AHRF の定義、酸素供給モード、酸素化、死亡、挿管率）、介入（腹臥位の実施時間）、比較群（標準治療・通常治療）。</p>
+<h4>質評価</h4>
+<ul><li>RCT：Cochrane risk of bias tool（ROB-2）で7領域（ランダム化順列生成、割付隠蔽、参加者・実施者の盲検化、アウトカム評価者の盲検化、不完全アウトカムデータ、選択的報告、その他のバイアス）を低／高／不明で判定</li><li>観察研究：Newcastle-Ottawa Scale（NOS）。0〜3点＝poor、4〜6点＝fair、7〜9点＝high</li><li>1名が評価し、2名目が一貫性と網羅性を確認。不一致は議論または第3の評価者で解決</li></ul>
+<h4>統計解析</h4>
+<ul><li>ソフトウェア：Review Manager（RevMan 5.4.1）。メタ回帰と Egger 検定は Comprehensive Meta-Analysis（CMA 3.0）</li><li>二値アウトカム（死亡・挿管）：Mantel-Haenszel 法によるリスク比（RR）</li><li>連続アウトカム（酸素化＝腹臥位前後の P/F 変化）：平均差（MD）</li><li>モデル：すべてランダム効果モデル。95%信頼区間を併記</li><li>異質性：I² 統計量。50%超を有意な異質性とする</li><li>異質性がある場合：サブグループメタ解析とランダム効果メタ回帰（研究方法論、社会的決定要因＝国・World Bank 国別所得水準、集団タイプ＝ICU／一般病棟／HDU）</li><li>出版バイアス：ファンネルプロットの目視＋Egger 回帰検定</li><li>有意水準：両側 p&lt;0.05</li></ul>
+<h4>欠測データの扱い</h4>
+<p>アウトカム未報告の研究は著者に連絡し、関連システマティックレビューから相互確認。それでも得られなければ除外。酸素化が中央値と四分位範囲／範囲で示されている場合は Wan らの式で平均と標準偏差を推定。S/F 比で報告されている場合は SF = 57 + 0.61 PF の式で P/F 比に換算。</p>
+<h4>エビデンスの確実性</h4>
+<p>GRADE アプローチで主要・副次アウトカムを評価。バイアスリスク、効果の一貫性、非精確性、非直接性、出版バイアスの5領域。ROB-2 と NOS の結果をバイアスリスクの根拠に、ファンネルプロットと Egger 検定を出版バイアスの根拠にした。</p>
+<h3>4. 結果 — 検索とスクリーニング</h3>
+<p>データベースとレジストリから1356件を同定。重複393件を除外。タイトル・抄録スクリーニングで796件を除外。全文49件を精査し、最終的に21件の一次研究を組み入れた。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. PRISMA フローダイアグラム（研究選択の流れ） 標準的な PRISMA 2020 形式の4段構成。上から Identification（データベース・レジストリから1356件、重複393件を除去）、Screening（963件をタイトル・抄録でスクリーニングし796件除外、全文49件を精査）、Eligibility（除外理由別に振り分け）、Included（21件を定量的統合に採用）と縦に流れ、各段の右側に除外件数を示す枝が出る配置。原図・無改変。</p>
+</div>
+<h3>5. 結果 — 組み入れ研究の特性</h3>
+<p>21研究3040例。内訳は RCT 7件、非ランダム化比較試験1件、観察研究13件。病因は COVID-19 肺炎が2879例と大半を占め、他に肺炎、膵炎、壊死性筋膜炎、胸部外傷、敗血症。19研究が非挿管患者、2研究が挿管患者を対象とした。</p>
+<h4>Table 1. 組み入れ研究の特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>デザイン</th><th>国</th><th>実施場所</th><th>n</th><th>M/F</th><th>年齢</th><th>病因</th><th>集団</th><th>呼吸補助</th><th>AHRF の定義</th><th>腹臥位時間</th><th>報告アウトカム</th></tr></thead>
+<tbody>
+<tr><td>Wang 2025 [20]</td><td>前向き観察</td><td>中国</td><td>ICU</td><td>10</td><td>7/3</td><td>68.5</td><td>肺炎9・膵炎1</td><td>自発呼吸・非挿管</td><td>HFNC</td><td>P/F&lt;200 または S/F&lt;235</td><td>30分</td><td>S/F</td></tr>
+<tr><td>Rana 2021 [21]</td><td>後ろ向き観察</td><td>パキスタン</td><td>ICU or HDU</td><td>170</td><td>87/83</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>HFNC</td><td>SpO2&gt;90% 維持に6 L/分の酸素</td><td>8〜10時間/日</td><td>S/F</td></tr>
+<tr><td>Brunelle 2023 [22]</td><td>前向きクロスオーバー観察</td><td>フランス</td><td>ICU</td><td>20</td><td>16/4</td><td>60</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>NR</td><td>P/F 100〜300</td><td>2時間（washout 30分）</td><td>P/F</td></tr>
+<tr><td>Bahloul 2021 [23]</td><td>前向き観察</td><td>チュニジア</td><td>ICU</td><td>39</td><td>NR</td><td>61</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>フェイスマスクまたは HFNC</td><td>SpO2&lt;92%</td><td>2〜4時間（忍容範囲）</td><td>死亡・挿管</td></tr>
+<tr><td>Lupieri 2022 [24]</td><td>後ろ向き観察</td><td>スイス</td><td>ICU</td><td>31</td><td>23/8</td><td>60</td><td>COVID-19 肺炎</td><td>挿管・非挿管の両方</td><td>NR</td><td>P/F&lt;200</td><td>45分以上</td><td>P/F</td></tr>
+<tr><td>Gad 2021 [25]</td><td>前向き RCT</td><td>エジプト</td><td>クリティカルケア隔離室</td><td>30</td><td>17/13</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>フェイスマスクまたは NIV</td><td>P/F&lt;200</td><td>1〜2時間セッション・覚醒時に3時間おき</td><td>死亡・挿管</td></tr>
+<tr><td>Lehingue 2022 [26]</td><td>前向きクロスオーバー RCT</td><td>フランス</td><td>ICU</td><td>17</td><td>15/2</td><td>61</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>HFNC</td><td>P/F ≤300</td><td>2時間（washout 2時間）</td><td>P/F・挿管・死亡</td></tr>
+<tr><td>Syrma 2021 [27]</td><td>前向き観察</td><td>インド</td><td>NR</td><td>45</td><td>38/7</td><td>53.1</td><td>COVID-19 肺炎</td><td>非挿管</td><td>HFNC・従来型酸素療法・NIV</td><td>P/F&lt;100 または室内気 SpO2&lt;94%</td><td>1回2時間・1日8時間目標</td><td>死亡・挿管</td></tr>
+<tr><td>Fazzini 2022 [28]</td><td>前向き観察</td><td>英国</td><td>一般病棟</td><td>46</td><td>NR</td><td>56</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>HFNC・フェイスマスク・CPAP</td><td>NR</td><td>1時間以下または1時間超</td><td>P/F</td></tr>
+<tr><td>Pierucci 2021 [29]</td><td>前向き観察</td><td>イタリア</td><td>ICU</td><td>32</td><td>23/9</td><td>NR</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>HFNC・CPAP・NIV</td><td>P/F&gt;150</td><td>72時間</td><td>P/F・挿管・死亡</td></tr>
+<tr><td>Koike 2022 [30]</td><td>後ろ向き観察</td><td>日本</td><td>ICU</td><td>58</td><td>43/15</td><td>67</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>HFNC または NPPV</td><td>FiO2 ≥0.4</td><td>退院まで</td><td>死亡・挿管</td></tr>
+<tr><td>Alhazzani 2022 [31]</td><td>プラグマティック RCT</td><td>カナダ・クウェート・サウジアラビア・米国</td><td>ICU or 急性期病棟</td><td>400</td><td>283/117</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>NPPV または低／高流量酸素</td><td>NR</td><td>目標8〜10時間/日、1〜2時間の休憩を2〜3回</td><td>死亡・挿管</td></tr>
+<tr><td>Ehrmann 2021 [32]</td><td>前向き RCT</td><td>カナダ・フランス・アイルランド・メキシコ・米国・スペイン</td><td>ICU・ED・一般病棟</td><td>1121</td><td>746/375</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>HFNC</td><td>S/F&lt;315 または P/F ≤300</td><td>毎日できるだけ長く・頻回に</td><td>挿管・死亡</td></tr>
+<tr><td>Scaravilli 2015 [33]</td><td>後ろ向き観察</td><td>イタリア</td><td>ICU</td><td>15</td><td>10/5</td><td>58.3</td><td>肺炎13・壊死性筋膜炎1・敗血症1</td><td>自発呼吸・非挿管</td><td>酸素マスク・HFNC・ヘルメット CPAP・NIV</td><td>P/F ≤300</td><td>6〜8時間</td><td>P/F</td></tr>
+<tr><td>Aisa 2023 [34]</td><td>前向き観察</td><td>アイルランド</td><td>ICU</td><td>50</td><td>23/27</td><td>56.2</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>従来型酸素療法・NIV・HFNC</td><td>SpO2&lt;90% または PaO2&lt;10 kPa</td><td>平均8.5時間</td><td>P/F</td></tr>
+<tr><td>Rosén 2021 [35]</td><td>前向き RCT</td><td>スウェーデン</td><td>病棟 or ICU</td><td>75</td><td>55/20</td><td>NR</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>HFNC または NIV</td><td>P/F ≤20 kPa</td><td>目標16時間/日以上</td><td>挿管・死亡</td></tr>
+<tr><td>Musso 2022 [36]</td><td>オープンラベル非ランダム化試験</td><td>イタリア</td><td>ICU</td><td>243</td><td>178/65</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>CPAP または PSV</td><td>P/F ≤200</td><td>1日1セッション・夜間8時間以上</td><td>挿管・死亡</td></tr>
+<tr><td>Estrada 2022 [37]</td><td>RCT</td><td>メキシコ</td><td>高度急性期ユニット</td><td>430</td><td>258/172</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>HFNC</td><td>SpO2&lt;90%</td><td>1日1時間以上</td><td>挿管・死亡</td></tr>
+<tr><td>Venet 2001 [38]</td><td>前向き観察</td><td>フランス</td><td>ICU</td><td>136</td><td>NR</td><td>NR</td><td>肺炎103・胸部外傷22・両者合併11</td><td>機械換気中（挿管）</td><td>NR</td><td>P/F ≤300</td><td>1時間</td><td>P/F</td></tr>
+<tr><td>Bianchi 2023 [39]</td><td>前向き観察</td><td>イタリア</td><td>ICU</td><td>12</td><td>10/2</td><td>60</td><td>COVID-19 肺炎</td><td>自発呼吸・非挿管</td><td>CPAP・HFNC・NIV</td><td>P/F ≤200</td><td>2時間</td><td>P/F</td></tr>
+<tr><td>Jayakumar 2021 [3]</td><td>RCT</td><td>インド</td><td>ICU</td><td>60</td><td>50/10</td><td>NR</td><td>COVID-19 肺炎</td><td>非挿管</td><td>鼻カニュラ・フェイスマスク・リザーバーマスク・HFNC・NIV</td><td>P/F 100〜300</td><td>1日6時間以上</td><td>挿管・死亡</td></tr>
+</tbody></table></div>
+<p>サンプルサイズの合計は 3040 例で本文と一致する。大規模研究3件（Ehrmann 1121例、Estrada 430例、Alhazzani 400例）だけで1951例、全体の64%を占める。</p>
+<h3>6. 結果 — 非挿管患者の酸素化</h3>
+<p>10研究が非挿管の非 ARDS 低酸素性呼吸不全患者における腹臥位の酸素化への影響を報告した。統合すると腹臥位終了時の P/F 比は腹臥位前より有意に高かった（MD −51.36 mmHg、95%CI −70.39 to −32.32、p&lt;0.00001）。異質性は I²=77%、Tau²=583.90、Chi²=39.69、df=9（p&lt;0.00001）、全体効果の検定 Z=5.29。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 非挿管患者における腹臥位前後の P/F 比の変化（フォレストプロット） 左側の表に「Pre-prone（平均・SD・n）」「Post-prone（平均・SD・n）」「重み」「平均差 IV, Random, 95%CI」の列が並び、右側に −100 から +100 の横軸をとった効果量プロットが配置される。10研究が筆頭著者のアルファベット順に並び、各研究の点推定値が緑の四角、95%信頼区間が水平線で示される。ゼロ線より左（負）が腹臥位後のほうが P/F 比が高いことを意味し、軸の下に「Pre-prone｜Post-prone」のラベルが左右に付く。10研究のうち8研究の信頼区間がゼロ線を越えず腹臥位側に寄る。最下段の黒い菱形が統合値 −51.36、菱形の幅が95%信頼区間 −70.39 から −32.32 にあたる。原図・無改変。</p>
+</div>
+<p>各研究の内訳は次の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>腹臥位前 平均±SD</th><th>腹臥位後 平均±SD</th><th>n</th><th>重み</th><th>MD（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Aisa 2023</td><td>85±13.76</td><td>138±28.01</td><td>50</td><td>15.6%</td><td>−53.00（−61.65, −44.35）</td></tr>
+<tr><td>Bianchi 2023</td><td>128.7±70.4</td><td>291.3±115.7</td><td>12</td><td>4.5%</td><td>−162.60（−239.23, −85.97）</td></tr>
+<tr><td>Brunelle 2023</td><td>133±44</td><td>183±66</td><td>20</td><td>10.5%</td><td>−50.00（−84.76, −15.24）</td></tr>
+<tr><td>Fazzini 2022</td><td>115±43</td><td>148±70</td><td>46</td><td>12.9%</td><td>−33.00（−56.74, −9.26）</td></tr>
+<tr><td>Lehingue 2022</td><td>94±66.5</td><td>182.7±98</td><td>9</td><td>4.4%</td><td>−88.70（−166.07, −11.33）</td></tr>
+<tr><td>Lupieri 2022</td><td>101±25.9</td><td>165±46.1</td><td>17</td><td>12.6%</td><td>−64.00（−89.14, −38.86）</td></tr>
+<tr><td>Pierucci 2021</td><td>194.6±42.1</td><td>304.7±79.3</td><td>10</td><td>6.8%</td><td>−110.10（−165.75, −54.45）</td></tr>
+<tr><td>Rana 2021</td><td>50±87</td><td>62.3±87</td><td>170</td><td>14.0%</td><td>−12.30（−30.80, 6.20）</td></tr>
+<tr><td>Scaravilli 2015</td><td>127±49</td><td>186±72</td><td>15</td><td>8.7%</td><td>−59.00（−103.07, −14.93）</td></tr>
+<tr><td>Wang 2025</td><td>185.2±47</td><td>185.4±37</td><td>10</td><td>10.0%</td><td>−0.20（−37.27, 36.87）</td></tr>
+<tr><td><strong>統合</strong></td><td>—</td><td>—</td><td>359</td><td>100.0%</td><td><strong>−51.36（−70.39, −32.32）</strong></td></tr>
+</tbody></table></div>
+<p>効果が最も大きいのは Bianchi（−162.60）と Pierucci（−110.10）、逆に効果がほぼゼロなのが Wang（−0.20）と Rana（−12.30）。Wang は非 COVID-19 の肺炎・膵炎症例で、腹臥位開始から30分の測定という条件が異なる。Rana は S/F 比からの換算値で、標準偏差87が前後で同一という報告になっている。</p>
+<h3>7. 結果 — 非挿管患者の挿管率</h3>
+<p>腹臥位を受けた患者の挿管率は受けなかった患者より有意に低かった（RR 0.74、95%CI 0.60–0.91、p=0.004）。イベント数は腹臥位群 360/1250、非腹臥位群 483/1299。異質性は I²=37%、Tau²=0.03、Chi²=17.58、df=11（p=0.09）、Z=2.87。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 腹臥位群と非腹臥位群の挿管率（フォレストプロット） 左表は「Prone positioning（イベント数・総数）」「Non-prone positioning（イベント数・総数）」「重み」「リスク比 M-H, Random, 95%CI」の列構成。右側のプロットは対数目盛（0.01・0.1・1・10・100）で、軸の下に「Favours PP｜Favours non-PP」のラベルが左右に置かれる。12研究が並び、各研究の点推定値が青い四角（面積が重みに比例）、95%信頼区間が水平線。大規模研究の Ehrmann（重み28.1%）、Alhazzani（22.1%）、Estrada（22.1%）の3つで全体の72%の重みを占め、いずれも四角が大きく信頼区間が短い。小規模研究（Jayakumar、Koike、Syrma）は信頼区間が横に長く伸びる。最下段の黒い菱形が統合値 0.74 で、その右端が 0.91 と1.0 の間に収まる。原図・無改変。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>腹臥位群 イベント/n</th><th>非腹臥位群 イベント/n</th><th>重み</th><th>RR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Alhazzani 2022</td><td>70/205</td><td>79/195</td><td>22.1%</td><td>0.84（0.65, 1.09）</td></tr>
+<tr><td>Bahloul 2021</td><td>9/21</td><td>4/17</td><td>3.8%</td><td>1.82（0.68, 4.90）</td></tr>
+<tr><td>Ehrmann 2021</td><td>185/564</td><td>223/557</td><td>28.1%</td><td>0.82（0.70, 0.96）</td></tr>
+<tr><td>Estrada 2022</td><td>65/216</td><td>92/214</td><td>22.1%</td><td>0.70（0.54, 0.90）</td></tr>
+<tr><td>Gad 2021</td><td>3/15</td><td>3/15</td><td>1.9%</td><td>1.00（0.24, 4.18）</td></tr>
+<tr><td>Jayakumar 2021</td><td>0/30</td><td>1/30</td><td>0.4%</td><td>0.33（0.01, 7.87）</td></tr>
+<tr><td>Koike 2022</td><td>2/27</td><td>13/31</td><td>2.0%</td><td>0.18（0.04, 0.71）</td></tr>
+<tr><td>Lehingue 2022</td><td>2/9</td><td>3/8</td><td>1.7%</td><td>0.59（0.13, 2.70）</td></tr>
+<tr><td>Musso 2022</td><td>8/81</td><td>44/162</td><td>6.8%</td><td>0.36（0.18, 0.74）</td></tr>
+<tr><td>Pierucci 2021</td><td>2/16</td><td>3/16</td><td>1.5%</td><td>0.67（0.13, 3.47）</td></tr>
+<tr><td>Rosén 2021</td><td>12/36</td><td>13/39</td><td>7.9%</td><td>1.00（0.53, 1.90）</td></tr>
+<tr><td>Syrma 2021</td><td>2/30</td><td>5/15</td><td>1.7%</td><td>0.20（0.04, 0.91）</td></tr>
+<tr><td><strong>統合</strong></td><td><strong>360/1250</strong></td><td><strong>483/1299</strong></td><td>100.0%</td><td><strong>0.74（0.60, 0.91）</strong></td></tr>
+</tbody></table></div>
+<p>重みの大きい3つの RCT（Ehrmann・Alhazzani・Estrada）はいずれも点推定値が0.70〜0.84で一致し、うち2つは信頼区間が1をまたがない。効果を最も強く示すのは非ランダム化試験の Musso（0.36）と観察研究の Koike（0.18）・Syrma（0.20）で、デザインの弱い研究ほど大きな効果を示す傾向がある。</p>
+<p>絶対リスクに直すと 37.2%（483/1299）が 28.8%（360/1250）へ、8.4ポイントの低下。NNT はおよそ12となる。</p>
+<h3>8. 結果 — 非挿管患者の死亡</h3>
+<p>死亡率は腹臥位群のほうが低かった（275/1241［22%］対 351/1291［27%］）が、統計学的有意差には達しなかった（RR 0.81、95%CI 0.64–1.01、p=0.07）。異質性は I²=41%、Tau²=0.05、Chi²=17.07、df=10（p=0.07）、Z=1.83。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 腹臥位群と非腹臥位群の死亡率（フォレストプロット） Figure 3 と同じ列構成・対数目盛のレイアウトで、11研究が並ぶ。並び順は重みの小さい研究が上、大きい研究が下になっており、上部（Syrma、Rosén、Pierucci、Musso、Koike、Jayakumar、Gad）は信頼区間が横に大きく広がる小規模研究、下部（Estrada 21.9%、Ehrmann 23.7%、Bahloul 14.7%、Alhazzani 17.4%）は青い四角が大きく信頼区間の短い大規模研究。Pierucci は腹臥位群のイベントがゼロのため左端に矢印が付き、信頼区間が図の左枠外へ伸びることを示す。統合値の黒い菱形は 0.81 で、右端がわずかにゼロ効果線（1.0）を越えて 1.01 に達する。軸の下のラベルは「Favours PP｜Favours Non-PP」。原図・無改変。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>腹臥位群 イベント/n</th><th>非腹臥位群 イベント/n</th><th>重み</th><th>RR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Syrma 2021</td><td>2/30</td><td>4/15</td><td>2.0%</td><td>0.25（0.05, 1.21）</td></tr>
+<tr><td>Rosén 2021</td><td>6/36</td><td>3/39</td><td>2.8%</td><td>2.17（0.58, 8.03）</td></tr>
+<tr><td>Pierucci 2021</td><td>0/16</td><td>3/16</td><td>0.6%</td><td>0.14（0.01, 2.56）</td></tr>
+<tr><td>Musso 2022</td><td>10/81</td><td>59/162</td><td>9.6%</td><td>0.34（0.18, 0.63）</td></tr>
+<tr><td>Koike 2022</td><td>3/27</td><td>8/31</td><td>3.2%</td><td>0.43（0.13, 1.46）</td></tr>
+<tr><td>Jayakumar 2021</td><td>3/30</td><td>2/30</td><td>1.7%</td><td>1.50（0.27, 8.34）</td></tr>
+<tr><td>Gad 2021</td><td>3/15</td><td>3/15</td><td>2.4%</td><td>1.00（0.24, 4.18）</td></tr>
+<tr><td>Estrada 2022</td><td>71/216</td><td>79/214</td><td>21.9%</td><td>0.89（0.69, 1.15）</td></tr>
+<tr><td>Ehrmann 2021</td><td>117/564</td><td>132/557</td><td>23.7%</td><td>0.88（0.70, 1.09）</td></tr>
+<tr><td>Bahloul 2021</td><td>14/21</td><td>12/17</td><td>14.7%</td><td>0.94（0.61, 1.45）</td></tr>
+<tr><td>Alhazzani 2022</td><td>46/205</td><td>46/195</td><td>17.4%</td><td>0.95（0.66, 1.36）</td></tr>
+<tr><td><strong>統合</strong></td><td><strong>275/1241</strong></td><td><strong>351/1291</strong></td><td>100.0%</td><td><strong>0.81（0.64, 1.01）</strong></td></tr>
+</tbody></table></div>
+<p>重みの大きい4研究（Estrada・Ehrmann・Bahloul・Alhazzani、合計77.7%）はすべて 0.88〜0.95 に集まり、いずれも信頼区間が1をまたぐ。統合値を1未満へ引き下げているのは非ランダム化試験の Musso（RR 0.34、重み9.6%）が主である。</p>
+<h3>9. 結果 — 挿管患者の酸素化</h3>
+<p>挿管患者を対象とした研究は2件のみ。統合すると腹臥位後のほうが P/F 比は高かったが、腹臥位前との差は統計学的有意差に達しなかった（MD −29.84、95%CI −77.51 to 17.83、p=0.22）。研究間の異質性は有意かつ実質的で（I²=88%、Tau²=1055.81、Chi²=8.30、df=1、p=0.004、Z=1.23）、著者らはこれを主に Lupieri らの小規模研究によるものとしている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 5. 挿管患者における腹臥位前後の P/F 比の変化（フォレストプロット） Figure 2 と同じ列構成・同じ −100 から +100 の横軸で、2研究だけが並ぶ。Lupieri 2022（n=10、重み44.0%）は緑の四角がほぼゼロ線上に置かれ、信頼区間が左右に大きく広がる。Venet 2001（n=136、重み56.0%）は緑の四角が −51.40 の位置にあり、報告された標準偏差が極端に小さいため信頼区間の水平線がほとんど見えないほど短い。統合値の黒い菱形は −29.84 を中心に大きく広がり、右端がゼロ線を越えて +17.83 に達する。軸の下のラベルは「Pre-prone｜Post-prone」。原図・無改変。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>腹臥位前 平均±SD</th><th>腹臥位後 平均±SD</th><th>n</th><th>重み</th><th>MD（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Lupieri 2022</td><td>87.3±41.3</td><td>89.7±34.4</td><td>10</td><td>44.0%</td><td>−2.40（−35.71, 30.91）</td></tr>
+<tr><td>Venet 2001</td><td>164.3±5.5</td><td>215.7±5.9</td><td>136</td><td>56.0%</td><td>−51.40（−52.76, −50.04）</td></tr>
+<tr><td><strong>統合</strong></td><td>—</td><td>—</td><td>146</td><td>100.0%</td><td><strong>−29.84（−77.51, 17.83）</strong></td></tr>
+</tbody></table></div>
+<h3>10. 結果 — 質評価</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 6. バイアスリスクのサマリー（ROB-2） 縦軸に ROB-2 の7領域（ランダム化順列生成、割付隠蔽、参加者・実施者の盲検化、アウトカム評価者の盲検化、不完全アウトカムデータ、選択的報告、その他のバイアス）、横軸に8つの試験（左から Rosén 2021、Musso 2022、Lehingue 2022、Jayakumar 2021、Gad 2021、Estrada 2022、Ehrmann 2021、Alhazzani 2022）を配した格子表。各セルに緑丸のプラス記号（低リスク）または赤丸の感嘆符（高リスク）が入り、判定できない領域は空白。「参加者・実施者の盲検化」の行は8試験すべてが赤で埋まる。Musso はランダム化順列生成の行が赤、Lehingue は「その他のバイアス」の行が赤。「アウトカム評価者の盲検化」の行は Alhazzani だけが緑で、他7試験は空白。原図・無改変。</p>
+</div>
+<ul><li>全試験で盲検化が不可能なため、実施バイアス（performance bias）は一律に高リスク</li><li>1件（Musso）は非ランダム化試験であり、ランダム化順列の欠如による選択バイアスが高リスク</li><li>1件（Lehingue）はクロスオーバーデザインのため「その他のバイアス」が高リスク</li><li>観察研究は NOS の総合スコアで全件が fair（4〜6点）。理由は3つ — ①すべて単施設で母集団を代表しない、②介入の性質上アウトカム評価者の盲検化が不可能、③いずれも交絡因子の調整をしていない（Appendix B）</li></ul>
+<h3>11. 結果 — サブグループ解析とメタ回帰</h3>
+<p>有意な異質性は挿管・非挿管いずれも酸素化アウトカムでのみ認められた。挿管患者の酸素化は研究数が少なくサブグループ・メタ回帰が実施できなかった。非挿管患者の酸素化では、World Bank の国別所得水準が有意な異質性の源と判定された。国、研究デザイン、実施場所は有意でなかった。</p>
+<h4>Table 2. 非挿管患者の酸素化アウトカムにおける異質性の源（サブグループ解析とメタ回帰）</h4>
+<div class="tw"><table>
+<thead><tr><th>カテゴリ</th><th>サブグループ</th><th>研究数</th><th>効果量（95%CI）</th><th>メタ回帰 p</th></tr></thead>
+<tbody>
+<tr><td>国</td><td>中国</td><td>1</td><td>−0.20（−37.27, 36.87）</td><td>0.26</td></tr>
+<tr><td></td><td>フランス</td><td>2</td><td>−56.50（−88.21, −24.79）</td><td></td></tr>
+<tr><td></td><td>アイルランド</td><td>1</td><td>−53.00（−61.65, −44.35）</td><td></td></tr>
+<tr><td></td><td>イタリア</td><td>3</td><td>−103.97（−160.56, −47.38）</td><td></td></tr>
+<tr><td></td><td>パキスタン</td><td>1</td><td>−12.30（−30.80, 6.20）</td><td></td></tr>
+<tr><td></td><td>スイス</td><td>1</td><td>−64.00（−89.14, −38.86）</td><td></td></tr>
+<tr><td></td><td>英国</td><td>1</td><td>−33.00（−56.74, −9.26）</td><td></td></tr>
+<tr><td>World Bank 国別所得水準</td><td>高所得</td><td>8</td><td>−61.60（−78.67, −44.54）</td><td>0.008</td></tr>
+<tr><td></td><td>低中所得</td><td>1</td><td>−12.30（−30.80, 6.20）</td><td></td></tr>
+<tr><td></td><td>高中所得</td><td>1</td><td>−0.20（−37.27, 36.87）</td><td></td></tr>
+<tr><td>研究デザイン</td><td>RCT</td><td>1</td><td>−88.70（−166.07, −11.33）</td><td>0.64</td></tr>
+<tr><td></td><td>前向き観察研究</td><td>6</td><td>−54.75（−80.65, −28.85）</td><td></td></tr>
+<tr><td></td><td>後ろ向き観察研究</td><td>3</td><td>−43.10（−81.76, −4.43）</td><td></td></tr>
+<tr><td>実施場所</td><td>ICU</td><td>8</td><td>−61.49（−82.74, −40.24）</td><td>0.14</td></tr>
+<tr><td></td><td>ICU または HDU</td><td>1</td><td>−12.30（−30.80, 6.20）</td><td></td></tr>
+<tr><td></td><td>一般病棟</td><td>1</td><td>−33.00（−56.74, −9.26）</td><td></td></tr>
+</tbody></table></div>
+<p>高所得国の8研究では −61.60、低中所得国と高中所得国の各1研究ではそれぞれ −12.30、−0.20 と、酸素化改善がほぼ消える。ただし後2者はそれぞれ研究1件（Rana と Wang）に過ぎない。</p>
+<h3>12. 結果 — 出版バイアスとエビデンスの確実性</h3>
+<p>ファンネルプロットと Egger 回帰検定では、非挿管患者の酸素化・挿管率・死亡のいずれにも出版バイアスの証拠は認められなかった（Egger 検定 p 値はそれぞれ 0.61、0.22、0.33）。挿管患者の酸素化アウトカムでも出版バイアスは観察されなかった。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figures 7–10. ファンネルプロット（4アウトカム） いずれも縦軸に標準誤差（上ほど誤差が小さい）、横軸に効果量（平均差またはリスク比の対数）をとった散布図。各研究を1点で表し、中央の垂直線が統合効果量、そこから左右下方に伸びる2本の斜線が疑似95%信頼限界の逆三角形を描く。Figure 7 は非挿管患者の P/F 変化、Figure 8 は挿管率、Figure 9 は死亡率、Figure 10 は挿管患者の P/F 変化。Figure 10 は2点のみのため三角形の中の点がまばらで、視覚的な非対称性の判定はほとんど意味を持たない。原図・無改変。</p>
+</div>
+<p>GRADE 評価では、非挿管患者の酸素化・挿管率・死亡のいずれも確実性は low。理由は高い異質性、広い95%信頼区間による非精確性、非ランダム化研究の多さ。挿管患者の酸素化アウトカムは very low（Appendix C）。</p>
+<h3>13. 考察</h3>
+<p>著者らの解釈は次の通り。</p>
+<p><strong>酸素化の改善について</strong>：COVID-19 による AHRF の非挿管患者で覚醒下腹臥位が酸素化を有意に改善したとする最近のメタ解析と一致する。機序としては、①背側領域の無気肺を解除して肺リクルートメントを促す、②胸腔内圧の変動と胸膜腔分布のばらつきに起因する肺ストレインを減らし、換気をより均一化して換気血流比マッチングを改善しシャントを減らす、が挙げられる。一方、非 COVID-19 の AHRF を対象とした Wang らでは腹臥位後の S/F 比が有意に改善しておらず、「COVID-19 および ARDS 以外の原因による AHRF では腹臥位が酸素化を改善しない」可能性を示唆する。ただしこの研究はサンプルサイズが小さく、測定が腹臥位開始30分後である点に限界があり、より長い腹臥位時間を用いた大規模前向き研究が必要である。</p>
+<p><strong>挿管率の低下について</strong>：COVID-19 関連 AHRF の非挿管患者で覚醒下腹臥位が挿管率を有意に減らすとする3つの既発表システマティックレビューと一致する。説明としては、①多くの研究が ICU 患者を対象としており、医療者対患者比が高いために集中的なモニタリングを受けやすかった（実際、COVID-19 関連 HRF を対象とした先行メタ解析では、腹臥位は ICU 患者では挿管率を下げたが非 ICU 患者では下げなかった）、②本研究の結果どおり腹臥位が酸素化を改善し、それが挿管を遅らせるか防ぐ、③腹臥位がより重症な呼吸不全への進行を遅らせるか防ぐ。</p>
+<p><strong>死亡が減らなかったことについて</strong>：腹臥位中の酸素化改善はしばしば一過性で、仰臥位に戻すと持続しないためと考えられる。実際 Scaravilli らは腹臥位中に P/F 比の有意な改善を報告したが、仰臥位に戻して6〜8時間後には改善が有意に減衰していた。とはいえ組み入れ研究の一部では腹臥位が標準治療より低い死亡と関連しており、Musso らの多変量解析では腹臥位療法が死亡（HR 0.2329、p&lt;0.001）と気管挿管（HR 0.1938、p&lt;0.001）の独立予測因子だった。</p>
+<p><strong>挿管患者について</strong>：有意な酸素化改善は示されなかったが、これは2研究のみに基づく結果であり、両研究とも酸素化の改善そのものは報告している。有意に達しなかったのは小規模研究に駆動された実質的な異質性の影響が大きい。Venet らは非 ARDS 患者の機械換気中の腹臥位が酸素化改善と関連すると報告している。大規模前向き研究による検証が必要。</p>
+<h4>強み</h4>
+<ul><li>主要データベースを横断する包括的な文献検索により、利用可能なエビデンスの全体像を捉えた</li><li>挿管患者と非挿管患者の両方を含めたことで、幅広い臨床設定への適用可能性を高めた</li><li>臨床的・方法論的異質性が予想される中でランダム効果モデルを用いた</li><li>RCT と観察研究の両方を含め、現行エビデンス基盤の広くプラグマティックな評価を提供した</li></ul>
+<h4>限界（著者による記載）</h4>
+<ol><li>プールした酸素化アウトカムに実質的な異質性があった（サンプルサイズ、実施場所、腹臥位時間、研究デザイン、地理的位置のばらつきによる）。ランダム効果モデルで対処した</li><li>腹臥位セッションの時間、患者選択基準、併用する呼吸補助が研究間で異なり、異質性をさらに助長した</li><li>腹臥位の性質上、参加者と研究者の盲検化が不可能でバイアスが入りうる</li><li>大半の研究が腹臥位の正確な実施時間を記載しておらず、時間とアウトカムの関係を評価できなかった。今後の研究は腹臥位の開始・終了時刻を体系的かつ正確に報告すべきである</li><li>観察研究と RCT を混合してプールしており、因果推論が弱まった可能性がある</li><li>死亡の傾向は統計学的に有意でなく、慎重に解釈すべきで、死亡改善の証明とみなしてはならない</li><li>英語論文のみを組み入れたことで選択バイアスが入りうる</li><li>観察研究の潜在的交絡が選択バイアスをさらに助長し、因果推論を制限しうる</li><li>大半が COVID-19 肺炎関連 HRF を対象としており、非 COVID-19 を扱ったのは3件のみ。ARDS および COVID-19 以外の HRF に関する追加研究が必要</li></ol>
+<h4>臨床的含意（著者の記載）</h4>
+<p>非挿管の非 ARDS HRF 患者にとって腹臥位は実行可能で低リスクの戦略である。この集団では、患者の忍容性と酸素化反応を注意深くモニターすることを条件に、腹臥位は酸素化を高め気管挿管の必要性を減らしうる。一方、ARDS 以外の HRF で挿管中の患者では、腹臥位は酸素化の改善と相関したものの、統合推定値は決定的な臨床アウトカムへの統計学的に有意な影響を示さなかった。したがって挿管中の非 ARDS 患者における腹臥位の判断は個別化し、確立された ICU ガイドラインとより広い臨床文脈に基づいて行う必要がある。</p>
+<h3>14. 結論（著者）</h3>
+<p>腹臥位は特に非挿管の非 ARDS HRF 患者において酸素化を改善し挿管率を減らす。死亡には腹臥位群と非腹臥位群で統計学的に有意な差はなく、腹臥位が死亡リスクを増やしも減らしもしないことを示唆する。したがって腹臥位は、内科系 ICU・隔離室・一般病棟における非挿管の非 ARDS HRF 患者の管理として実行可能・安全・有効な非薬物的介入と考えられる。その簡便さは、重症患者数が相対的に多いパンデミック時や資源が限られた状況で、侵襲的機械換気の必要性を減らすことが重要な場面において特に価値がある。挿管患者については有意な酸素化改善は示されなかったが、なお有益であることを示唆する証拠があり、確認的試験が求められる。</p>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<h4>数値の内的不整合</h4>
+<ul><li><strong>死亡の信頼区間が抄録と本文で 0.61–1.01、フォレストプロット（Figure 4）で 0.64–1.01 と食い違う</strong>。統合値0.81・p=0.07・Z=1.83 は一致しているので、抄録側の転記ミスと考えるのが自然。JC で「95%CI 0.61–1.01」を引用するなら図の値と併記しておきたい</li><li><strong>PRISMA の数字が合わない</strong>。1356件から重複393件を引くと963件、そこから796件を除外すると167件が残るはずだが、全文精査は49件と記載されている。118件の行方が本文からは追えない（Figure 1 の除外枝で説明されている可能性はあるが、本文には記載がない）</li><li><strong>限界の箇条書きで「Fourth」が2回出てくる</strong>（腹臥位時間の未記載と、観察研究と RCT の混合プール）。査読・校正の粗さを示唆する</li><li><strong>「19研究が非挿管、2研究が挿管」で合計21になるが、Lupieri は Table 1 で「挿管・非挿管の両方」と記載され、Figure 2（非挿管 n=17）と Figure 5（挿管 n=10）の両方に登場する</strong>。同一コホートが2つの解析に分割投入されている</li></ul>
+<h4>統計手法の妥当性</h4>
+<ul><li><strong>前後比較を対応のない2群比較として統合している</strong>。Figure 2・Figure 5 の「Pre-prone」「Post-prone」は同一患者の前後測定であり、本来は対応のあるデータとして変化量とその標準偏差で統合すべきもの。RevMan の標準的な MD 計算は2群が独立している前提なので、信頼区間の幅が正しく推定されていない。この点は論文中で議論されていない</li><li><strong>Venet 2001 の標準偏差が異常に小さい</strong>。n=136 で腹臥位前 164.3±5.5、腹臥位後 215.7±5.9。P/F 比の集団ばらつきが標準偏差5前後というのは臨床的にありえず、標準誤差（SEM）を標準偏差として転記した可能性が高い。SEM とすれば SD は約64・69となり、この研究の重み56.0%は大幅に下がり、統合値と I²=88% の様相が変わる。著者らは異質性を「Lupieri の小規模研究が主因」と説明しているが、実際に統合値を引っ張っているのは Venet 側である</li><li><strong>Rana 2021 の標準偏差が腹臥位前後で同一（87と87）</strong>。S/F からの換算に由来する可能性があるが、報告としては不自然</li><li><strong>メタ回帰の説明変数が1〜8件のサブグループに乗っている</strong>。「World Bank 国別所得水準が有意（p=0.008）」といっても、低中所得は Rana 1件、高中所得は Wang 1件のみ。これは所得水準の効果というより「この2研究が他と違う」を言い換えたに過ぎない。しかもこの2研究は、片方が S/F 換算、もう片方が腹臥位30分後の測定という、測定方法の違いで説明できる</li><li><strong>10研究で Egger 検定を行っている</strong>。Cochrane は非対称性検定に10研究以上を推奨しており下限ぎりぎり。挿管患者（2研究）でファンネルプロットを描いて「出版バイアスなし」と述べているのは意味をなさない</li><li><strong>S/F → P/F 換算式 SF = 57 + 0.61 PF は直線近似</strong>で、酸素解離曲線が平坦になる SpO2 97% 超では成立しない。低酸素域に限れば妥当だが、換算値を実測値と同列にプールしている点は割り引いて読む必要がある</li></ul>
+<h4>対象集団と外的妥当性</h4>
+<ul><li><strong>3040例中2879例（94.7%）が COVID-19 肺炎</strong>。タイトルは「non-ARDS」だが、実質的には「覚醒下腹臥位 in COVID-19」のメタ解析である。非 COVID-19 は Wang（10例）、Scaravilli（15例）、Venet（136例）の3研究161例のみ</li><li><strong>「non-ARDS」の定義が研究間で揃っていない</strong>。AHRF の定義として使われた閾値は P/F &lt;200、P/F ≤300、P/F 100–300、P/F &gt;150、SpO2 &lt;92%、SpO2 &lt;90%、FiO2 ≥0.4、「SpO2 &gt;90% 維持に6 L/分」とバラバラ。P/F ≤300 かつ両側性浸潤影の COVID-19 肺炎の多くは Berlin 定義の ARDS を満たしうる。つまり「ARDS ではない」という組み入れの前提自体が揺らいでいる</li><li><strong>Venet 2001 は AECC 定義の時代の研究</strong>。当時 P/F 200–300 は ALI（acute lung injury）と分類され、現在の Berlin 定義では ARDS に含まれる。この研究を「非 ARDS」として扱うのは無理がある</li><li><strong>効果の大きさとデザインの質が逆相関している</strong>。挿管率で効果が最大なのは観察研究の Koike（0.18）・Syrma（0.20）と非ランダム化試験の Musso（0.36）。重みの大きい3つの RCT は 0.70〜0.84 に収束する。死亡でも、重みの大きい4研究はすべて 0.88〜0.95 で無効を示し、統合値を1未満へ引っ張っているのは Musso（0.34）である</li></ul>
+<h4>臨床解釈上の注意</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「挿管が減る」を「挿管を遅らせてよい」と読み替えない 挿管率の低下（RR 0.74）が死亡低下に結びついていない（RR 0.81、p=0.07）以上、<mark class="hl">挿管回避そのものを治療目標にしてはいけない</mark>。覚醒下腹臥位の最大のリスクは、酸素化が見かけ上改善することで挿管の判断が後ろにずれることである。<mark class="hl">開始前・2時間後・仰臥位復帰後の3点で評価し、改善が乏しければ腹臥位を続けずに挿管の閾値を下げる</mark> 運用にしておく。</p>
+</div>
+<ul><li><strong>腹臥位時間が「効いた量」として測定されていない</strong>。著者自身が限界として挙げている通り、大半の研究が実施時間を正確に記載していない。ARDS では PROSEVA の16時間、覚醒下腹臥位では8時間超が効果の閾値として示唆されているが、本研究は30分（Wang）から72時間（Pierucci）まで、1時間以下（Fazzini）から退院まで（Koike）までを同列にプールしている</li><li><strong>有害事象が一切解析されていない</strong>。PICO のアウトカムに「有害事象」への言及が Methods の欠測データの項にあるが、結果には出てこない。褥瘡、デバイス自己抜去、カテーテル・ラインのトラブル、嘔吐・誤嚥、腕神経叢損傷といった腹臥位に固有のリスクの記載がないまま「low-risk strategy」と結論している点は根拠が弱い</li><li><strong>GRADE が low〜very low であることを結論が十分に反映していない</strong>。結論の「feasible, safe, and effective」という3語のうち、safe は有害事象データがなく、effective は low certainty の挿管率のみに支えられている</li></ul>
+<h3>16. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>Ehrmann et al. [32]</td><td>覚醒下腹臥位の6か国メタトライアル。HFNC 使用の COVID-19 AHRF 1121例。本メタ解析で最も重みが大きい（挿管28.1%・死亡23.7%）</td><td>Lancet Respir Med 2021</td></tr>
+<tr><td>Alhazzani et al. [31]</td><td>COVI-PRONE 試験。プラグマティック RCT 400例（カナダ・クウェート・サウジ・米国）。挿管・死亡ともに有意差なし</td><td>JAMA 2022</td></tr>
+<tr><td>Estrada-Gutierrez et al. [37]</td><td>メキシコの高度急性期ユニットでの RCT 430例。HFNC 下の覚醒下腹臥位、1日1時間以上</td><td>原著（2022）</td></tr>
+<tr><td>Musso et al. [36]</td><td>イタリアのオープンラベル非ランダム化試験243例。夜間8時間以上の1日1セッション。多変量解析で腹臥位が死亡（HR 0.2329）と挿管（HR 0.1938）の独立予測因子</td><td>原著（2022）</td></tr>
+<tr><td>Rosén et al. [35]</td><td>スウェーデンの RCT 75例。1日16時間以上を目標。挿管・死亡ともに有意差なし</td><td>Crit Care 2021</td></tr>
+<tr><td>Venet et al. [38]</td><td>挿管中の非 ARDS 低酸素（肺炎・胸部外傷）136例で1時間の腹臥位。本メタ解析の挿管患者解析で重み56.0%</td><td>原著（2001）</td></tr>
+<tr><td>Scaravilli et al. [33]</td><td>非挿管・非 COVID-19（肺炎・壊死性筋膜炎・敗血症）15例。腹臥位中に P/F 改善、仰臥位復帰6〜8時間後に有意に減衰</td><td>J Crit Care 2015</td></tr>
+<tr><td>Guérin et al.（PROSEVA）</td><td>重症 ARDS で1日16時間以上の腹臥位が28日・90日死亡を減らした RCT。本論文が前提とする基礎エビデンス</td><td>NEJM 2013</td></tr>
+<tr><td>Wan et al. [17]</td><td>中央値・四分位範囲・範囲から平均と標準偏差を推定する式。本メタ解析の欠測データ処理に使用</td><td>BMC Med Res Methodol 2014</td></tr>
+<tr><td>PRISMA statement [12]</td><td>システマティックレビューの報告ガイドライン</td><td>原著</td></tr>
+<tr><td>Newcastle-Ottawa Scale [13]</td><td>観察研究の質評価尺度（0〜9点）</td><td>原著</td></tr>
+<tr><td>Cochrane ROB-2 [14]</td><td>RCT のバイアスリスク評価ツール（7領域）</td><td>原著</td></tr>
+<tr><td>GRADE [19]</td><td>エビデンスの確実性を5領域から格付けする枠組み</td><td>原著</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ARDS の基準を満たさない低酸素性呼吸不全でも、<strong>非挿管患者への腹臥位は酸素化を P/F で約51 mmHg 改善し、挿管を26%減らす（RR 0.74、95%CI 0.60–0.91、NNT 約12）</strong>。しかし ==死亡は減らない（RR 0.81、95%CI 0.64–1.01、p=0.07）== 。</p>
+<p><mark class="hl">HFNC／NPPV で管理している ARDS 未満の低酸素患者には、覚醒下腹臥位を「試す価値のある低コストの一手」として引き出しに入れてよい</mark> 。1回2時間以上・1日6〜8時間を目標にし、<mark class="hl">開始前・2時間後・仰臥位復帰後の3点で効果を判定する</mark> 。</p>
+<p>ただし <mark class="hl">対象の95%は COVID-19 肺炎であり、非 COVID-19 への外挿は3研究161例分の根拠しかない</mark> 。<mark class="hl">挿管中の非 ARDS 患者に腹臥位を推す根拠は2研究のみ・GRADE very low で、これまで通り PROSEVA の枠組みで判断する</mark> 。<mark class="hl">「挿管が減る」を「挿管を遅らせてよい」と読み替えないこと</mark> が、この論文を臨床に持ち込むときの最大の注意点である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
