@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>RRT離脱の成否を6項目スコアで予測する — UNDERSCORE 2点以上でカテーテル抜去を検討（DOORS・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08357-x.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">RRT離脱の成否を6項目スコアで予測する — UNDERSCORE 2点以上でカテーテル抜去を検討（DOORS・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Chaïbi K, Akrour Y, Louis G, Martin Lefevre L, Pons B, Moschietto S, Boulet E, Hajage D, Lebbah S, Quenot JP, Sangla F, Dreyfuss D, Gaudry S, Legouis D, on behalf of the DOORS investigators. Predictive factors of successful renal replacement therapy weaning (The DOORS study). Intensive Care Med. 2026;52:490-499. DOI: 10.1007/s00134-026-08357-x</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-03-17）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08357-x" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08357-x</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Predictive factors of successful renal replacement therapy weaning: Deciding On patients Orientations after Renal replacement therapy Stopping (The DOORS study)</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わること①：離脱の「見る日」を決める。</strong> 当院でもRRTの中止は主治医判断だが、この論文は「止めるかどうか」ではなく「止めた後どうなるか」を評価する枠組みを与える。最後のセッションから72時間空いた翌日（D4）を評価日として固定し、24時間尿量・昇圧薬の有無・人工呼吸の有無をその日に必ず確認する運用は、今日から始められる。</li><li><strong>変わること②：カテーテル抜去の判断に数字を持ち込む。</strong> UNDERSCORE 2点以上なら7日以内の再開確率が低く（導出コホートでPPV 90%）、透析用カテーテルを抜く方向で議論できる。カテーテル温存は血流感染・血栓・出血のリスクを毎日払い続けることなので、「念のため置いておく」の惰性を切る材料になる。</li><li><strong>変わること③：D4尿量1300 mL/日を共通言語にする。</strong> 尿量が唯一の 3点項目で、これが取れないとほぼ2点に届かない（他の加点は人工呼吸の 2点だけ）。「利尿薬を使っていてもよい」総24時間尿量である点も含めて、看護記録の集計をD4に合わせる。</li><li><strong>変わらないこと①：RRTをいつ止めるかの基準にはならない。</strong> スコアは既に72時間止めた後にしか計算できない。開始タイミング（AKIKI/STARRT-AKI系の保存的戦略）と同様、中止の判断そのものは臨床判断のまま。</li><li><strong>変わらないこと②：低スコアで「再開しろ」とは言えない。</strong> 外部コホートでのNPVは34%。2点未満でも実際には7割近くが離脱に成功していた。低スコアは「カテーテルを残して観察」までで、予防的な再開の根拠にはならない。</li><li><strong>当院への当てはめの注意</strong>：導出コホートは88%が人工呼吸・76%が昇圧薬という多臓器不全の集団。心臓外科術後や肝移植後の単独AKIには外挿しにくい（外部コホートはむしろそちら寄りで、性能はAUC 0.73に落ちた）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症AKIに対するRRTの「開始」タイミングは、AKIKI・IDEAL-ICU・STARRT-AKI の3大RCTでほぼ決着し、生命を脅かす合併症がなければ待つ（保存的／watchful waiting）戦略が標準となった。この戦略で重症AKIの38〜49%がRRTを回避できる。一方でRRTの遷延は腎回復の遅れとコスト増につながる。</li><li><strong>Unknown</strong>：「中止」の基準は乏しい。KDIGOガイドラインも明示的に根拠不足を認めている。既存の離脱予測研究の多く（2020年のメタ解析に含まれる研究群）は3大RCT以前のもので、そもそもRRTを要さなかったかもしれない患者を含んでおり、現代の実践には当てはめにくい。しかも評価時点が「RRT継続中」「中止直後」などバラバラで、共通の枠組みがなかった。</li><li><strong>What's new</strong>：保存的開始戦略で本当にRRTを要した患者だけを集めた均質なコホート（AKIKI＋AKIKI-2の遅延群）で、医師判断による中止の「後」（72時間RRT free の翌日＝D4）に測れる変数だけから6項目スコア UNDERSCORE を作り、症例構成が意図的に大きく異なるスイスのコホートで外部検証した。臨床上の問いを「止めるべきか」から「止めた後にカテーテルを抜いてよいか」へ置き換えた点が新しい。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 保存的戦略でRRTを受けた重症AKI 180例で、医師判断による中止から72時間後（D4）に測れる6項目（RRT期間・敗血症性ショック・基礎Cr・昇圧薬・人工呼吸・尿量）から作った <strong>UNDERSCORE は、7日以内の再開なし＝離脱成功を AUC 0.86（95% CI 0.80–0.91）で識別</strong>し、2点以上で特異度90%・PPV 90%。ただし症例構成の異なるスイス外部コホートでは AUC 0.73（95% CI 0.66–0.80）、NPV 34% まで落ちる。</p>
+</div>
+<ul><li><strong>母集団</strong>：AKIKI（31 ICU・仏・2013年9月〜2016年1月）とAKIKI-2（39 ICU・仏・2018年5月〜2019年12月）の、遅延（保存的）開始戦略でRRTを受けたKDIGO stage 3のAKI患者 554例。</li><li><strong>対象の絞り込み</strong>：モダリティを問わずRRTが3日（72時間）以上連続で中断された＝「離脱試行」があった 180例。</li><li><strong>主要アウトカム</strong>：最後のRRTセッションから7日以内に、生存かつ新たなRRTセッションがないこと（＝離脱成功）。</li><li><strong>結果</strong>：101例（56%）が離脱成功。失敗79例のうち29例は7日以内に死亡し、そのうち11例は生命維持療法の中止（WLST）後の死亡。別に3例がWLSTを受けたが生存。</li><li><strong>独立予測因子（多変量ロジスティック回帰で5つ）</strong>：D4の尿量、離脱試行前のRRT期間、D4の昇圧薬使用、D4の侵襲的人工呼吸、ICU入室時の敗血症性ショック。</li><li><strong>6項目目</strong>：外部コホートを使った事前規定の「拡張による更新（updating-by-extension）」で基礎血清クレアチニンが追加され、係数は導出コホートで再推定された（Model 4）。</li><li><strong>スコア化</strong>：オッズ比／回帰係数を整数に丸め、連続変数はYouden指数で二値化。加点は尿量&gt;1300 mL/日（+3）と人工呼吸（+2）、減点はRRT期間&gt;8日・D4昇圧薬・入室時敗血症性ショック・基礎Cr&gt;116 µmol/L（各 −1）。取り得る範囲は −4 〜 +5。</li><li><strong>閾値</strong>：最適閾値は1.6点と推定され、2点に丸められた。2点以上＝離脱成功の可能性が高くカテーテル抜去を検討、2点未満＝失敗の可能性が高くRRT再開を検討。</li><li><strong>性能（導出）</strong>：AUC 0.86（0.80–0.91）、感度73%、特異度90%、PPV 90%、NPV 72%。較正はcalibration-in-the-large 0.00、slope 1.00、Hosmer–Lemeshow p = 0.293、Brier 0.15。</li><li><strong>性能（外部テストセット・n = 291）</strong>：AUC 0.73（0.66–0.80）、感度76%、特異度55%、PPV 88%、NPV 34%。</li><li><strong>著者の位置づけ</strong>：探索的な事後解析であり、スコアの閾値は単独の判断ルールとして解釈すべきでなく、臨床運用の前に前向き検証を要する。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>AKI と RRT</strong>：急性腎障害（AKI）はICU患者に高頻度で、死亡率と結びつく。腎代替療法（RRT, renal replacement therapy）は透析・血液濾過の総称で、間欠的血液透析（IHD）と持続的RRT（CRRT）を含む。生命を救う治療だが、出血・血行動態の不安定化・カテーテル関連感染・血栓・腎回復の遅れという代償がある。 <strong>KDIGO stage 3</strong>：AKIの重症度分類の最重症段階（血清クレアチニンが基礎値の3倍以上、または4.0 mg/dL以上、または尿量が24時間0.3 mL/kg/h未満・12時間以上の無尿など）。本研究の組み入れ条件。 <strong>保存的（遅延）開始戦略</strong>：高カリウム血症・重症アシドーシス・肺水腫といった「今すぐ命に関わる合併症」がなければRRTを始めずに待つ戦略。AKIKI・IDEAL-ICU・STARRT-AKI の3つのRCTで、待っても予後は悪化せず、重症AKIの38〜49%がRRTを回避できることが示され、現在の標準となった。AKIKI-2 はさらに待つ戦略を検証した試験で、BUN 112 mg/dL超または72時間超の乏尿・無尿を満たした時点で「標準的な遅延」対「より遅い開始」に無作為化している。 <strong>「離脱（weaning）」という言葉のねじれ</strong>：人工呼吸の離脱では、早すぎる抜管が急性呼吸不全・緊急再挿管・死亡につながるため「いつ試すか」を決めるツール（SBTなど）に価値がある。RRTは止めてみて駄目なら再開できるので、早すぎる中止の即時の害は小さい。だから著者は「試すべきか」ではなく「試した後に何が起きるか」を問うている。人工呼吸のウィーニングの枠組みをそのままRRTに持ち込むのは概念的に不適切だ、というのが本研究の出発点。 <strong>本研究の時間軸の定義</strong>：D0 ＝ RRT free の期間が始まる直前の最後のRRTセッションの暦日。そこから72時間RRTが入らなければ「離脱試行」とみなす。D4 ＝ 72時間のRRT free 期間が終わった翌日（＝離脱しなければ次のセッションが入っていたはずの日の翌日）で、ここで変数を測る。D7 ＝ アウトカム判定日。 <strong>なぜ72時間か</strong>：間欠的透析は通常1日おきなどの間隔で行われ、手術やCT搬送で持続透析が一時中断されることもある。72時間という閾値は、こうした「通常の間隔・短時間の中断」と、医師が意図した本当の中止とを区別するための操作的定義。原試験には「医師が離脱を決めた」という記録が系統的に残っていないため、実際のRRTスケジュールから事後的に定義した。 <strong>AUC（AUROC）と較正</strong>：AUCは識別能（成功例と失敗例の順位づけの正しさ）で、0.5が偶然、1.0が完全。較正（calibration）は予測確率の水準の正しさで、calibration-in-the-large が0に近く、slope が1に近く、Hosmer–Lemeshow検定が有意でなければ良好とされる。Brier score は予測と実測の二乗誤差の平均で、小さいほどよい。 <strong>PPV / NPV</strong>：陽性的中率＝スコア2点以上の人が実際に離脱成功する割合。陰性的中率＝2点未満の人が実際に離脱失敗する割合。有病率（この場合は離脱成功割合）に依存して動くため、導出コホート（成功56%）と外部コホート（成功81%）では同じ感度・特異度でも大きく変わる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>AKIはICU患者に多く、罹患率・死亡率の高さと関連する。RRTはその管理の要であり、安全性は年々向上してきたが、出血、血行動態の不安定化、カテーテル関連感染、血栓、腎機能回復の遅延といった合併症は依然として残る。</li><li>開始と中止の最適なタイミングの決定は、集中治療医にとって日々の課題である。この10年で「開始」は明確化された。AKIKI、IDEAL-ICU、STARRT-AKI の3つの大規模RCTにより、直ちに生命を脅かす合併症がない限りRRT開始は安全に遅らせることができ、重症AKI患者の38〜49%がRRTを回避できることが示された。この保存的戦略は現在では標準治療とみなされている。</li><li>対照的に、中止の最適なタイミングに関する指針は乏しい。RRTの遷延は腎機能回復の遅れと医療費の増加に関連する。中止を導く堅牢なエビデンスに基づく基準の欠如は、KDIGOガイドラインでも明示的に指摘されており、RRTを止めてよいかの判断は臨床医の裁量に大きく委ねられている。</li><li>専門家の研究アジェンダも「RRT停止に関わる判断を支える構造化されたパラメータが必要」と強調するにとどまり、いったん中止を試みた後に成功の見込みをどう評価すべきかまでは示していない。日常臨床では、離脱試行が始まった後に成功の可能性を見積もる客観的ツールが医師の手元にない。</li><li>過去のRRT離脱予測研究には、そもそもRRTを必要としなかったかもしれない患者が含まれており、現代の実践への妥当性が限られる。これが、現代のRRT実践に照らした再検討を正当化する。</li><li>本研究の目的は、保存的開始アプローチに従ってRRTを受けたICU患者という均質な集団で、RRT中止成功の臨床的予測因子を同定すること。従来ほとんど検討されてこなかった「より後ろの時点」での離脱ポテンシャル評価に的を絞り、医師主導の中止試行に基づいて、持続的な中止の確率を推定する予後モデルを開発・検証し、さらに別のICUコホートで外部検証する。</li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：RRT開始戦略を評価した2つの多施設RCT（AKIKI＝Artificial Kidney Initiation for Kidney Injury、AKIKI-2）の統合データの事後解析。予測モデルの導出＋独立コホートでの外部検証。</li><li><strong>原試験①（AKIKI）</strong>：フランスの31 ICU、2013年9月〜2016年1月。KDIGO stage 3 で定義された重症AKIの重症患者で、早期開始 対 遅延開始を比較。</li><li><strong>原試験②（AKIKI-2）</strong>：フランスの39 ICU、2018年5月〜2019年12月。同様の集団を含み、観察フェーズでは全例がAKIKIと同じ遅延開始戦略で管理された。BUN 112 mg/dL超、または72時間を超える乏尿・無尿のいずれかまたは両方を満たした患者が、標準的遅延戦略 対 さらに遅い開始戦略に無作為化された。</li><li><strong>対象（組み入れ）</strong>：遅延開始戦略（現在は保存的開始アプローチと呼ばれる）に従ってRRTを受けたKDIGO stage 3のAKI成人患者。AKIKI の遅延群と、AKIKI-2 の対照群（AKIKIと同じ遅延開始戦略で管理された群）。全例が侵襲的人工呼吸および／または昇圧薬を受けている（または受けていた）。</li><li><strong>対象（離脱試行の定義）</strong>：モダリティ（IHDまたはCRRT）を問わず、RRTが少なくとも3日連続で中止されたこと。原試験に医師の明示的な離脱意思の記録がないため、実際のRRTスケジュールに基づく操作的定義として「モダリティを問わず72時間以上連続するRRTの中断」を事後的に採用。間欠透析の通常の間隔や、手術・CT搬送などの短時間の処置関連中断と区別する意図。</li><li><strong>除外</strong>：外部コホートでは、維持透析を要する慢性腎臓病の既往を除外（導出コホートと整合）。</li><li><strong>主要アウトカム</strong>：RRT中止の成功。最後のRRTセッションから7日以内に、生存しており、かつ新たなRRTセッションが一切ないこと。</li><li><strong>データ収集</strong>：AKIKI・AKIKI-2 とも、臨床・生物学的データは登録からICU滞在28日目まで毎日収集された。ベースライン変数は人口統計学的特性、併存疾患、ICU入室理由、入室時重症度スコア、入室時敗血症性ショック、基礎血清クレアチニン、推定されるAKIの原因。</li><li><strong>基礎血清クレアチニンの定義</strong>：ICU入室前12か月以内に測定された安定期の院外値。得られない場合はMDRD式で逆算（AKIKI・AKIKI-2 の原プロトコルに準拠）。</li><li><strong>D4データ</strong>：72時間のRRT free 期間が完了した翌日の暦日として定義され、離脱試行がなければ次に予定されていたセッションの翌日に相当する日の臨床・検査データを抽出。</li><li><strong>測らなかったもの</strong>：尿中尿素・尿中クレアチニン濃度は欠測が多く除外。原試験で系統的に収集されておらず、これは「日々の尿生化学は一貫して行われない」という日常ICU診療を反映している。</li><li><strong>統計（記述）</strong>：量的変数は平均±SD、質的変数は件数と割合。単変量比較は妥当性の前提を確認した上で、連続変数にStudent の t 検定、カテゴリ変数にカイ二乗検定またはFisher の正確検定。</li><li><strong>統計（モデル）</strong>：多変量ロジスティック回帰で独立予測因子を同定。変数選択は臨床的妥当性と単変量解析での統計学的有意性（p &lt; 0.05）の両方に基づく。自動的なステップワイズ選択は用いず、事前規定した限られた数の候補モデルを比較した。</li><li><strong>スコア化</strong>：ベッドサイドでの適用性を高めるため、簡略化スコア UNDERSCORE（UNplugging a Dialysis catheter in the context of an Endgame RRT process SCORE。"endgame" は医師主導の中止試行以降のRRT経過の最終段階を指す）を開発。各予測因子の重みは多変量モデルのオッズ比（効果量）から導出し、回帰係数を最も近い整数に丸めた。連続予測因子（尿量、RRT期間、基礎血清クレアチニン）はYouden指数（感度＋特異度−1 の最大化、すなわちYouden の J）で最適カットオフを定めて二値化。</li><li><strong>識別能と閾値</strong>：ROC曲線下面積（AUC）で評価。感度と特異度のバランスを取るように最適閾値を選び、その閾値で患者を「RRT中止に適する／適さない」に分類し、混同行列（Supplementary）で要約。</li><li><strong>内部検証</strong>：ブートストラップ再標本抽出（B = 2000）。各反復で、導出コホートから復元抽出により同サイズのブートストラップ標本を作成。モデル更新は、ブートストラップ標本内でスコアとアウトカムを結ぶ再較正モデルを再フィットすること。ブートストラップ標本内で識別能（AUC）と閾値ベースの分類性能（score ≥ 2 に対する感度・特異度・PPV・NPV）を計算し、そこでフィットした再較正モデルを元データに適用してテスト性能を得る。楽観度（optimism）は各指標について「見かけの性能」と「ブートストラップ由来の再較正を用いて元データで評価した性能」の差と定義し、反復全体の平均楽観度を見かけの推定値から差し引いて楽観度補正性能を得た。95%信頼区間はブートストラップ分布のパーセンタイルから算出。</li><li><strong>候補モデルの比較</strong>：Table S1 に示すベースライン（ICU入室時）とD3〜D4の変数群から出発し、まず単変量での関連をスクリーニング。その上で Table S3 に明示した少数の事前規定モデルを比較した。</li><li>Model 1：Table S1 の候補変数を意図的に全部入れたモデル。</li><li>Model 2：より「動的」な表現の探索。D4のpH、軌跡（trajectory）型の変数、D3とD4の反復クレアチニン測定値を追加。</li><li>Model 3：多変量解析で有意性を保った予測因子のみを残したモデル（Table S2 参照）。すなわち離脱試行前のRRT期間、D4尿量、D4昇圧薬使用、ICU入室時敗血症性ショック、D4人工呼吸。</li><li>Model 4：事前規定の「拡張による更新（updating-by-extension）」戦略。外部コホートの一部（更新用サブセット）で、元モデルに含まれない臨床的に妥当な候補予測因子の事前定義リストをスクリーニングし、単変量での関連と臨床的整合性から1つだけ追加予測因子を選ぶ。拡張されたモデル仕様は導出コホートのみで再フィットされ、全回帰係数を再推定した上で、独立したホールドアウト部分での外部テストの前にロックされた。</li><li><strong>欠測処理</strong>：欠測は MAR（missing at random）と仮定。各導出データセットで多重代入を用い、欠測自体が情報を持つ変数には「失敗としての代入（imputation by failure）」アプローチを適用。スイスコホートではノンパラメトリックな単一代入（missForest：ランダムフォレストを反復学習して欠測値を予測するアルゴリズム）を使用し、すべての候補予測因子を代入モデルに含め、アウトカムは除外した。</li><li><strong>外部検証コホート</strong>：ジュネーブ大学病院（スイス）のICU。2010年1月〜2025年3月に入室しAKIに対してRRTを受けた連続成人症例。電子カルテから後ろ向きに構造化データとして抽出。組み入れは72時間以上連続でRRTがない離脱試行があった患者、除外は維持透析を要するCKDの既往。離脱成功の定義は導出コホートと同じ（中止後7日以内にRRTセッションがないこと）。</li><li><strong>外部での統計</strong>：識別能はAUC、95%信頼区間はDeLong法。較正はHosmer–Lemeshow適合度検定。解析はすべて R version 4.2.0。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 離脱評価の方法論のタイムライン。左端に透析装置とベッドのアイコンが上下2つ並び、上が IHD（間欠的血液透析）、下が CRRT（持続的RRT）と示され、どちらのモダリティでも同じ枠組みが適用されることを表す。図の中央を左から右へ太い矢印が伸び、その起点に赤枠で「Last RRT session（最後のRRTセッション）」とあり、直下に D0 のラベル。矢印上の最初の灰色区間には「72h RRT interval（72時間のRRT間隔）」と書かれ、その終わりに D3 のラベルとカレンダーのアイコンが置かれ、カレンダー面には赤い大きな×印と、右下に赤い禁止マークが重ねられている。カレンダーの上には枠付きで赤字の「Weaning attempt（離脱試行）」があり、青い矢印がカレンダーを指す。D3 の右からは緑色のブロック「Variables assessment（変数の評価）」が続き、その下に D4 のラベル、上にチェックリストのアイコン。さらに右は青色のブロック「Outcome assessment（アウトカム評価）」で、下に D7 のラベル、上にグラフ付きチェックリストのアイコン。矢印は右端で先端の三角となって終わる。原図・無改変。</p>
+</div>
+<h3>4. 結果 — 患者と転帰</h3>
+<ul><li>AKIKI と AKIKI-2 で遅延開始戦略のもとRRTを受けた 554例のうち、離脱試行が行われたのは 180例で、これが主解析の対象。</li><li>180例中 101例（56%）がRRT中止に成功した。</li><li>離脱失敗 79例のうち、29例が7日以前に死亡。そのうち 11例の死亡は生命維持療法の中止（WLST）に続くものだった。さらに3例がWLSTを受けたが生存していた。</li><li>ベースライン特性は Table 1 に要約される。AKIの原因ではショックと敗血症が最も多かった。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 患者フロー図。最上段に紫の箱が2つ並び、左が「AKIKI 試験から 619例」、右が「AKIKI-2 試験から 778例」。両者は下向きに合流し、「KDIGO分類でAKI stage 3 の重症患者 1397例」の箱になる。ここから右に青い箱が分岐し、「843例を除外：早期RRT開始 311例／より遅い（more-delayed）RRT開始 141例／RRTを一度も受けなかった 391例」。本流は下へ進み「遅延RRT開始を受けた 554例」。ここから再び右に青い箱が分岐し、「RRT離脱試行を受けなかった 314例」。本流は下へ進み「RRT離脱試行を受けた 180例」。最下段で左右2つの紫の箱に分かれ、左が「離脱成功群 n = 101」、右が「離脱失敗群 n = 79」。原図・無改変。</p>
+</div>
+<h4>Table 1. ベースライン患者特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>全体 n = 180</th><th>離脱失敗群 n = 79</th><th>離脱成功群 n = 101</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>63 ± 13</td><td>63 ± 13</td><td>63 ± 13</td><td>–</td></tr>
+<tr><td>性別 — 男性</td><td>127 (71)</td><td>54 (68)</td><td>73 (72)</td><td>0.56</td></tr>
+<tr><td>性別 — 女性</td><td>63 (29)</td><td>25 (32)</td><td>28 (28)</td><td>（同上）</td></tr>
+<tr><td>ICU入室前の血清クレアチニン（mg/dL）</td><td>1.02 ± 0.33</td><td>1.02 ± 0.28</td><td>1.02 ± 0.35</td><td>–</td></tr>
+<tr><td>併存疾患 — 慢性腎臓病</td><td>24 (13)</td><td>10 (13)</td><td>14 (14)</td><td>0.81</td></tr>
+<tr><td>併存疾患 — うっ血性心不全</td><td>13 (7)</td><td>6 (8)</td><td>7 (7)</td><td>0.86</td></tr>
+<tr><td>併存疾患 — 高血圧</td><td>96 (53)</td><td>36 (46)</td><td>60 (60)</td><td>0.06</td></tr>
+<tr><td>併存疾患 — 糖尿病</td><td>45 (25)</td><td>18 (23)</td><td>27 (27)</td><td>0.54</td></tr>
+<tr><td>併存疾患 — 虚血性心疾患</td><td>20 (11)</td><td>5 (6)</td><td>15 (14)</td><td>0.07</td></tr>
+<tr><td>登録時 SAPS III</td><td>72 ± 17</td><td>74 ± 18</td><td>71 ± 17</td><td>0.39</td></tr>
+<tr><td>敗血症性ショック</td><td>104 (58)</td><td>54 (68)</td><td>50 (49)</td><td>0.01</td></tr>
+<tr><td>生理学的サポート — 侵襲的人工呼吸</td><td>159 (88)</td><td>70 (89)</td><td>89 (88)</td><td>0.81</td></tr>
+<tr><td>生理学的サポート — 昇圧薬（エピネフリンまたはノルエピネフリン）</td><td>136 (76)</td><td>59 (75)</td><td>77 (76)</td><td>（記載なし）</td></tr>
+<tr><td>AKIの原因 — ショック</td><td>141 (78)</td><td>60 (75)</td><td>81 (80)</td><td>0.49</td></tr>
+<tr><td>AKIの原因 — 敗血症</td><td>130 (72)</td><td>59 (75)</td><td>71 (70)</td><td>0.51</td></tr>
+<tr><td>AKIの原因 — 横紋筋融解症</td><td>15 (8)</td><td>5 (6)</td><td>10 (9)</td><td>0.38</td></tr>
+<tr><td>AKIの原因 — 腎毒性薬剤</td><td>70 (39)</td><td>35 (44)</td><td>35 (35)</td><td>0.19</td></tr>
+</tbody></table></div>
+<p>原表の注記：数値は平均±SD または 件数（%）。クレアチニンを µmol/L に換算するには 88.4 を掛ける。ICU入室前血清クレアチニンはICU滞在前12か月以内の測定値、または推定値。腎機能はベースラインの血清クレアチニンを用いてCockcroft式で再評価。SAPS III は 0〜146 で高いほど重症・死亡リスクが高い。SOFA は 0〜24 で高いほど臓器不全が重い（注は付されているが本表に行はない）。腎毒性薬剤は複数曝露の患者を含む。敗血症性ショックは、昇圧薬開始の前後4時間の間に30 mL/kg以上の輸液蘇生を行ってもなお続く敗血症誘発性低血圧と定義。原表では有意差のある値が太字で示されている。</p>
+<h3>5. RRT離脱成功と関連した因子</h3>
+<ul><li>年齢、併存疾患（慢性腎臓病、うっ血性心不全、高血圧、糖尿病）、ベースライン重症度スコア（SAPS と SOFA）には、離脱成功群と失敗群のあいだに意味のある差はなかった。</li><li>ICU入室時の敗血症性ショックは、成功群より失敗群で有意に多かった（68% 対 49%、p = 0.01）。</li><li>単変量解析では、離脱成功は次の因子と関連した：離脱試行前のRRT期間が短いこと、D3およびD4の血清クレアチニンが低いこと、D4の尿量が多いこと、D4の昇圧薬使用が少ないこと、D4の人工呼吸の状態（Table S1）。</li><li>多変量ロジスティック回帰では、5変数が離脱成功と独立に関連した：D4尿量、離脱試行前のRRT期間、D4昇圧薬使用、D4侵襲的人工呼吸、ICU入室時敗血症性ショック。</li></ul>
+<h3>6. 外部コホートと、独立テストセットを用いたモデル拡張</h3>
+<ul><li>スコアの移植可能性（transportability）を原試験の枠を超えて高めるため、著者は意図的に大きく異なる外部集団と診療環境を求めた。</li><li>選ばれたのはジュネーブ大学病院ICUのコホート（2010〜2025年）。ここではRRT開始はプロトコル化されておらず、主治医の判断に委ねられていた。症例構成も意図的に幅広く、心臓外科・脳神経外科患者、肝移植レシピエントを含む。</li><li>研究期間中に878例の成人ICU患者がRRTを受けた。うち415例（47%）が方法で定義した離脱試行を受け、338例（81%）が離脱に成功した。</li><li>導出コホートと比べ、外部コホートはベースライン特性と入室診断が大きく異なり、敗血症性ショックの割合が低かった（93例、22%）。より広い臨床像のスペクトラムを反映している。</li><li>全スイスコホート（C2）での性能を記述的に評価した後、事前規定の更新手順を、無作為分割によって C2-update（n = 124、30%）と C2-test（n = 291、70%）に分けて実施した。</li><li>拡張ステップで追加予測因子として選ばれたのは基礎血清クレアチニンであり、これにより Model 4 が得られた。</li></ul>
+<h3>7. スコアの導出とモデル性能</h3>
+<ul><li>導出コホートでは、連続予測因子モデルの AUC は 0.86（95% CI 0.80–0.91）。</li><li>較正は良好。calibration-in-the-large は 0.00（95% CI −0.37–0.37）とゼロで、calibration slope は 1 に近い（slope = 1.00、95% CI 0.72–1.28）。予測リスクと実測リスクの一致も良く、Hosmer–Lemeshow検定 p = 0.293。</li><li>全体の正確度も良好で、Brier score 0.15（95% CI 0.12–0.18）。</li><li>ベッドサイドで使えるように、更新モデル（Model 4）から回帰係数を整数点に丸め、連続予測因子を臨床的に使いやすいカットオフで二値化して UNDERSCORE を導出した。カットオフは尿量 &gt; 1,300 mL/日、RRT期間 ≤ 8日、基礎血清クレアチニン &gt; 116 µmol/L（≈ 1.31 mg/dL）。</li><li>判定閾値は当初 1.6点と推定され、2点に丸められた。</li><li>二値化後（基礎クレアチニンの閾値化を含む）も識別能は変わらず、AUC 0.86（95% CI 0.80–0.91）。</li><li>2点の閾値を用いると、感度 73%（95% CI 64–82）、特異度 90%（95% CI 81–96）、PPV 90%（95% CI 82–96）、NPV 72%（95% CI 63–81）。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. ICUにおけるRRT離脱成功を予測する UNDERSCORE。左側に2列の表があり、左列が Items、右列が Points。上から4行は右列が赤地で いずれも マイナス1点：「離脱試行までのRRT曝露期間が8日超」「離脱試行の翌日の昇圧薬使用」「入室時の敗血症性ショック」「基礎血清クレアチニンが116 µmol/L超」。下2行は右列が緑地で、「離脱試行の翌日の人工呼吸」が プラス2点、「離脱試行の翌日の尿量が1,300 mL/日超」が プラス3点。表の下に2行の凡例があり、緑の丸に続けて「UNDERSCORE 2点以上：離脱成功の確率が高い。RRTカテーテルの抜去を検討」、赤の丸に続けて「UNDERSCORE 2点未満：離脱失敗の確率が高い。RRTの再開を検討」。右側にはROC曲線が置かれ、表題は ROC Curve — AKIKI cohort、その下に AUC = 0.86（95% CI 0.80–0.91）。横軸は False Positive Rate（1 − 特異度）で0から1.00、縦軸は True Positive Rate（感度）で0から1.00。濃紺の曲線は左下から急峻に立ち上がり、偽陽性率0.15付近で真陽性率0.78前後に達し、以後なだらかに右上へ進んで右上隅に至る。赤い破線の対角線が参照線として引かれている。キャプション注：尿量は離脱試行の翌日（D4）の24時間総尿量で、利尿薬の使用の有無を問わない。UNDERSCORE は UNplugging a Dialysis catheter in the context of an Endgame RRT process SCORE の略。原図・無改変。</p>
+</div>
+<h4>UNDERSCORE の配点（Figure 3 を表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>評価する時点</th><th>点数</th></tr></thead>
+<tbody>
+<tr><td>離脱試行までのRRT曝露期間が8日超</td><td>離脱試行前の実績</td><td>−1</td></tr>
+<tr><td>昇圧薬の使用</td><td>離脱試行の翌日（D4）</td><td>−1</td></tr>
+<tr><td>敗血症性ショック</td><td>ICU入室時</td><td>−1</td></tr>
+<tr><td>基礎血清クレアチニン &gt; 116 µmol/L（≈ 1.31 mg/dL）</td><td>ICU入室前12か月の安定期値（不明ならMDRD逆算）</td><td>−1</td></tr>
+<tr><td>侵襲的人工呼吸</td><td>離脱試行の翌日（D4）</td><td>+2</td></tr>
+<tr><td>24時間尿量 &gt; 1,300 mL/日（利尿薬使用の有無を問わない）</td><td>離脱試行の翌日（D4）</td><td>+3</td></tr>
+</tbody></table></div>
+<p>取り得る範囲は −4 〜 +5。判定は 2点以上で離脱成功の確率が高くカテーテル抜去を検討、2点未満で失敗の確率が高くRRT再開を検討。</p>
+<h4>ベッドサイドでの使い方（判断フロー）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>最後のRRTから72時間、追加セッションを入れずに経過した</td><td>今日がD4か（次の予定セッションの翌日に相当するか）</td><td>この日を評価日として、24時間尿量・昇圧薬・人工呼吸を確定させる</td></tr>
+<tr><td>D4の24時間尿量が1,300 mL超</td><td>利尿薬使用の有無は問わないが、記録が24時間分そろっているか</td><td>+3。他の減点が2つ以内なら2点以上に届く</td></tr>
+<tr><td>D4の24時間尿量が1,300 mL以下</td><td>人工呼吸中か（+2）、減点項目がゼロか</td><td>人工呼吸中かつ減点ゼロでのみ2点に届く。それ以外は2点未満</td></tr>
+<tr><td>UNDERSCORE 2点以上</td><td>高K・アシドーシス・体液過剰など、スコア外の再開理由がないか</td><td>透析用カテーテルの抜去を検討する。抜去でカテーテル関連感染・血栓のリスクを日々減らせる</td></tr>
+<tr><td>UNDERSCORE 2点未満</td><td>予防的な再開の適応があるか（＝スコアはそれを支持しない）</td><td>カテーテルを温存して観察を続ける。低スコアだけを理由にRRTを再開しない（外部コホートのNPV 34%）</td></tr>
+<tr><td>敗血症性ショックで入室し、RRTが8日を超え、D4も昇圧薬が続いている</td><td>減点が3つ以上そろっていないか</td><td>尿量が出ていても2点に届かない組み合わせがある。カテーテル温存側に倒す</td></tr>
+</tbody></table></div>
+<h4>スコアの実際の計算例（配点から機械的に計算したもの・原著の症例ではない）</h4>
+<div class="tw"><table>
+<thead><tr><th>想定症例</th><th>該当項目と点数</th><th>合計</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックで入室、RRT 5日間、D4は抜管済み・昇圧薬off・尿量1,800 mL</td><td>敗血症性ショック −1／尿量&gt;1,300 +3</td><td>+2</td><td>2点以上。カテーテル抜去を検討</td></tr>
+<tr><td>心不全でRRT 12日間、D4は人工呼吸継続・昇圧薬off・尿量900 mL、基礎Cr 1.0 mg/dL</td><td>RRT&gt;8日 −1／人工呼吸 +2</td><td>+1</td><td>2点未満。カテーテルを温存して観察</td></tr>
+<tr><td>敗血症性ショック、RRT 10日間、D4も昇圧薬継続・人工呼吸継続・尿量1,500 mL、基礎Cr 1.5 mg/dL</td><td>敗血症性ショック −1／RRT&gt;8日 −1／昇圧薬 −1／基礎Cr&gt;116 µmol/L −1／人工呼吸 +2／尿量&gt;1,300 +3</td><td>+1</td><td>2点未満。尿量が出ていても減点4つで届かない</td></tr>
+<tr><td>腎毒性薬剤によるAKI、RRT 3日間、D4は人工呼吸継続・昇圧薬off・尿量2,200 mL、基礎Cr 0.9 mg/dL</td><td>人工呼吸 +2／尿量&gt;1,300 +3</td><td>+5</td><td>満点。抜去の方向</td></tr>
+</tbody></table></div>
+<p>計算例が示す通り、減点が3つ以上そろうと尿量が出ていても2点に届かない。逆に減点ゼロなら尿量だけで2点を超える。スコアの実質は「D4尿量が1,300 mLを超えるか」に、重症度による減点をいくつ背負っているかを重ねたものになっている。</p>
+<h3>8. 内部検証</h3>
+<ul><li>ブートストラップ内部検証（2000回の再標本抽出）はスコアの頑健性を確認した。</li><li>AUC は安定しており、見かけのAUC 0.86、ブートストラップ95% CI 0.80–0.91、楽観度補正AUC 0.86。</li><li>全体の正確度も良好なままで、Brier score 0.15（ブートストラップ95% CI 0.12–0.18、楽観度補正値 0.16）。</li></ul>
+<h3>9. 外部テストセットでの性能</h3>
+<ul><li>最終的な外部性能は、スイスのテストセット（C2-test、n = 291）でのみ評価された。</li><li>識別能は中等度で、AUC 0.73（95% CI 0.66–0.80）。</li><li>2点の閾値を用いると、感度 76%（95% CI 71–80）、特異度 55%（95% CI 43–66）、PPV 88%（95% CI 84–92）、NPV 34%（95% CI 26–43）。</li></ul>
+<h4>導出コホートと外部テストセットの性能比較</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>導出コホート（AKIKI/AKIKI-2、n = 180）</th><th>外部テストセット（Geneva C2-test、n = 291）</th></tr></thead>
+<tbody>
+<tr><td>離脱成功割合</td><td>101/180（56%）</td><td>全スイスコホートでは 338/415（81%）</td></tr>
+<tr><td>AUC</td><td>0.86（95% CI 0.80–0.91）</td><td>0.73（95% CI 0.66–0.80）</td></tr>
+<tr><td>感度（2点以上）</td><td>73%（64–82）</td><td>76%（71–80）</td></tr>
+<tr><td>特異度（2点以上）</td><td>90%（81–96）</td><td>55%（43–66）</td></tr>
+<tr><td>PPV</td><td>90%（82–96）</td><td>88%（84–92）</td></tr>
+<tr><td>NPV</td><td>72%（63–81）</td><td>34%（26–43）</td></tr>
+<tr><td>Brier score</td><td>0.15（0.12–0.18）</td><td>記載なし</td></tr>
+<tr><td>較正</td><td>in-the-large 0.00、slope 1.00、HL p = 0.293</td><td>Hosmer–Lemeshow検定で評価（数値の記載なし）</td></tr>
+</tbody></table></div>
+<h3>10. 考察（著者の論点）</h3>
+<ul><li><strong>本研究の要旨</strong>：DOORS は、重症AKIの重症患者でRRT中止に関する判断を導くための、単純で臨床的に適用可能なベッドサイドツール UNDERSCORE の開発と検証を目的とした。導出コホートで構築した多変量モデルは、尿量、離脱試行後の侵襲的人工呼吸と昇圧薬サポート、試行前のRRT期間、入室時の敗血症性ショックを有意な予測因子として同定した。基礎血清クレアチニンは、臨床的妥当性と外部検証で観察された結果を反映して最終版に追加された。導出コホートで強い予測性能、独立外部コホートで妥当（fair）な性能を示した。</li><li><strong>既存研究との違い①（時代）</strong>：RRT離脱基準を探索した過去の研究は、重症AKIに対する遅延開始戦略が支持される以前に行われた。2020年のRRT中止に関するメタ解析に含まれた研究の多くは、開始タイミングの大規模RCT（AKIKI、IDEAL-ICU、STARRT-AKI）の公表より前のもの。したがって過去のコホートには、現在の基準ではRRTを要さなかったであろう患者が含まれ、中止タイミングの議論を交絡させてきた可能性がある。</li><li><strong>既存研究との違い②（評価時点）</strong>：RRT中止を扱った研究は、成功の評価時点が「RRT継続中」から「中止直後」「その少し後」まで大きくばらついており、回復をいつ評価すべきかについてのコンセンサスの枠組みがないことを反映している。</li><li><strong>人工呼吸のウィーニングとの対比</strong>：日常臨床ではRRT中止の試行は通常のケアであり、必要なら再開できるため即時の大きな害はまれ。したがって鍵となる臨床的問いは「中止を試みるべきか」ではなく「試みた後に何が起こりそうか」である。これは人工呼吸とは対照的で、そちらでは早すぎる離脱が急性呼吸不全・緊急再挿管・死亡増加を招くため、いつ離脱試行を始めるかを決めるツールが正当化される。RRTは通常、大きな即時の害なく再開できるので、人工呼吸の離脱パラダイムをRRT中止にそのまま移すのは概念的に不適切に見える。</li><li><strong>この設計上の帰結</strong>：DOORS は医師主導の中止試行に焦点を当て、72時間のRRT free 期間の後、次に予想されるセッションの翌日（D4）に変数を収集した。72時間は通常のセッション間隔と真の中止を区別するための設定。中止成功は「7日以内に生存かつRRT再開なし」と定義され、中止試行後も透析から離れていられるという臨床的に意味のある目標を反映する。</li><li><strong>各予測因子の解釈（尿量）</strong>：尿量とRRT期間は、腎回復の主要指標として繰り返し同定されてきた。尿量は1300 mL/24h の閾値でスコアに採用された。このカットオフは導出コホートでD4という中止後の時点で、データ駆動的に導かれたもの。RRTを止めてから尿量が回復するための時間が余分にあった後の測定なので、RRT中止時点やRRT継続中に尿量を評価した他研究のカットオフとは直接比較できず、既報より高く見えることがある。</li><li><strong>各予測因子の解釈（重症度）</strong>：入室時の敗血症性ショックと昇圧薬使用が離脱失敗と関連することは、より重い病態が腎回復と負に関連するという既存のエビデンスに沿う。</li><li><strong>各予測因子の解釈（基礎腎機能）</strong>：慢性腎臓病（基礎クレアチニンと密接に関連する因子）も、RRT中止成功の可能性の低下と以前から結びつけられてきた。最近のメタ解析では、短期のRRT離脱の陰性予測因子としてCKDの統合オッズ比 0.638（95% CI 0.491–0.829）が報告されている。</li><li><strong>各予測因子の解釈（人工呼吸という逆説）</strong>：RRT中止の翌日に侵襲的人工呼吸を要していることが離脱成功と正に関連したのは予想外の所見である。人工呼吸は通常、より重い病態のマーカーとされ、腎回復の障害と関連してきたからである。ひとつの説明は、自発呼吸の患者では体液過剰による急性呼吸性代償不全のリスクを医師がより深刻に受け止めるのに対し、挿管患者ではそのリスクが人工呼吸サポートで緩和されるため、RRTを差し控えることに医師がより安心を感じるのではないか、というもの。したがってこの所見は、人工呼吸が腎回復に因果的な利益をもたらすと解釈すべきではなく、中止試行後に体液状態とその呼吸への帰結がどう認識され重みづけられるかの違いを反映していると考えられる。</li><li><strong>強み①</strong>：導出コホートが均質でよく定義されている。重症AKIに対する保存的RRT開始アプローチで管理された患者だけを含む。DOORS は、均質なRRT開始基準を持つ集団、すなわち本当にRRT開始を必要とした患者を選び出した集団で、RRT中止の予測因子を評価した最初の研究である。</li><li><strong>強み②</strong>：臨床的に意味のある時点（離脱試行の翌日）に焦点を当て、ベッドサイドで容易に得られる変数だけを選んだため、UNDERSCORE は実践的で実装しやすいツールになっている。「RRTカテーテルをいつ抜くのが安全で適切か」という、頻繁に遭遇するが標準化されていない臨床判断に新たな洞察を与える。</li><li><strong>強み③</strong>：症例構成が明確に異なる外部コホート（心臓外科・肝移植・脳神経外科を含み、RRT開始プロトコルもより不均一）で意図的に検証した。それでも UNDERSCORE は許容できる識別能（AUC 0.73）を維持し、多様なICU集団への一般化可能性を支持する。導出コホートより性能が低いのは、高度に選択された試験集団と、日常診療の非選択患者との対比を部分的に反映している可能性もある。</li><li><strong>限界①</strong>：多臓器不全のICU患者に特化していること。孤立性AKIや、急速進行性糸球体腎炎など全身疾患の腎病変といった異なる基礎病態の患者には一般化できないかもしれない。ただし外部検証コホートはショックのない患者を含む広い症例構成であり、元の集団を超えた適用可能性をある程度支持する。</li><li><strong>限界②</strong>：既存の試験と観察データの事後解析に基づくため探索的とみなすべきであり、RRT free 期間の意図性が常に正式に立証できるわけではない。したがって提案されたスコア閾値は単独の判断ルールとして解釈すべきではなく、臨床管理を導く用途に使う前に前向き検証を要する。</li><li><strong>限界③</strong>：離脱試行を「3日連続でRRTなし」と定義したことも、実務的だが本質的に恣意的な閾値として解釈されるべきである。</li><li><strong>著者の結論</strong>：DOORS は、重症患者でRRTをいつ止めるかの判断を支える構造化された枠組みを提供して重要な知識の空白に取り組む。UNDERSCORE は重症AKIの管理を最適化するための実践的でベッドサイド即応のリソースであり、患者アウトカムと資源利用の双方を改善する可能性がある。</li></ul>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>抄録と本文の食い違い（外部検証のn）</strong>：抄録は「外部スイスコホート（n = 415）で AUC 0.73」と読める書き方だが、本文の Results では「最終的な外部性能は C2-test（n = 291）でのみ評価した」と明記されている。415例のうち124例は更新（拡張予測因子の選択）に使われており、AUC 0.73 の母数は291例。抄録の書き方は読者に415例での検証と誤読させうる。</li><li><strong>6項目目は外部データから選ばれている</strong>：多変量解析で独立予測因子とされたのは5つで、基礎血清クレアチニンは外部コホートの更新サブセットでのスクリーニングを経て追加された。係数は導出コホートで再推定され、テスト前にロックされているという手続きは踏んでいるが、「外部データを見て変数を1つ選んだモデル」を「外部検証」と呼ぶことの独立性は完全ではない。少なくとも C2-update の124例は真の意味での外部テストではない。</li><li><strong>人工呼吸が加点という逆説の扱い</strong>：+2点は6項目中2番目に大きい重みなのに、著者自身が「因果的利益ではなく医師の意思決定の反映」と説明している。すなわち適応による交絡（confounding by indication）を配点に固定したことになる。挿管率が導出コホートで88%と非常に高い集団で導かれた重みであり、抜管が早い施設ではこの+2が取れず、同じ患者でもスコアが2点下がる。施設間の移植可能性が最も怪しい項目。</li><li><strong>閾値2点の構造的な意味</strong>：加点は尿量（+3）と人工呼吸（+2）だけなので、尿量が1,300 mL/日を超えなければ「人工呼吸中かつ減点ゼロ」でしか2点に届かない。実質的にはD4尿量が支配的な単一変数で、スコアの体裁を取りつつ「尿量が出ているか」を問うているに近い。JCでは「6項目のうち尿量以外がどれだけ情報を足しているか」を Table S2 のオッズ比で確認したい。</li><li><strong>1,300 mL/日というカットオフの根拠</strong>：Youden指数によるデータ駆動の最適化で、180例という規模では標本依存性が強い。著者も他研究のカットオフ（RRT中止時点や継続中の評価）と直接比較できないと断っている。前向き検証で再現するかは未知。</li><li><strong>アウトカム定義に死亡が混ざる</strong>：「7日以内に生存かつRRT再開なし」が成功なので、失敗79例のうち29例の死亡（うち11例はWLST後）は「離脱失敗」に数えられている。腎回復の失敗と、腎とは別の理由での死亡・治療中止が同じカテゴリに入っており、予測因子が「腎の回復力」なのか「全体の予後」なのかが分離できていない。敗血症性ショックや昇圧薬の減点は後者を拾っている可能性がある。</li><li><strong>離脱試行の定義が事後的</strong>：医師が離脱を意図した記録がないため、72時間の中断をもって離脱試行と定義している。長期の間欠透析でたまたま3日空いた症例や、状態悪化で透析を回せなかった症例が混入しうる。著者自身が「恣意的な閾値」と認めている。</li><li><strong>外部コホートでのNPV 34%の重み</strong>：低スコアの臨床的意味がほとんどない。離脱成功割合が81%と高い集団では、2点未満でも3人に2人は離脱に成功する。「2点未満＝RRT再開を検討」という Figure 3 の凡例は、この数字とかなり緊張関係にある。実装するなら高スコア側（カテーテル抜去の後押し）だけを使うのが安全。</li><li><strong>時代・地域の差</strong>：導出は2013〜2019年のフランス、外部は2010〜2025年のスイス単施設。15年にわたる後ろ向き電子カルテ抽出で、その間の診療変化は調整されていない。またスイスコホートでは欠測をmissForestによる単一代入で埋めており（導出側は多重代入）、代入法が2つのコホートで異なる。</li><li><strong>Table 1 の不整合</strong>：脚注に SOFA の説明があるのに表に SOFA の行がなく、本文は「SAPS と SOFA に差はなかった」と述べる。昇圧薬サポートの行にはp値の記載がない。表の脚注に "indciates" の誤植もあり、校正の粗さが残る。</li><li><strong>サンプルサイズと過適合</strong>：導出は180例・イベント101例で、多変量モデルの候補変数は Table S1 の全変数を含む Model 1 から出発している。EPV（events per variable）の観点では余裕が大きくない。ブートストラップで楽観度補正AUCが0.86と見かけと同じというのは、モデル選択の過程（変数スクリーニング・カットオフ最適化）をブートストラップの外に置いた場合に起きやすい所見で、再較正モデルのみを再フィットする設計では選択由来の楽観度を捉えきれない。</li><li><strong>前向き検証がない</strong>：著者も明言している通り、これは探索的な事後解析であり、スコアに従って抜去した群と従来判断の群を比べた研究は存在しない。カテーテル抜去による感染・血栓の減少という実利益も、この論文では測定されていない。</li></ul>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>ICU患者のAKI疫学（多国籍AKI-EPI研究）</td><td>Hoste EAJ, et al. Intensive Care Med. 2015;41:1411-1423</td></tr>
+<tr><td>AKIに対する体外式腎代替療法の総説</td><td>Gaudry S, Palevsky PM, Dreyfuss D. N Engl J Med. 2022;386:964-975</td></tr>
+<tr><td>CRRTに伴う合併症</td><td>Kovvuru K, Velez JCQ. Semin Dial. 2021;34:489-494</td></tr>
+<tr><td>CRRTの長期曝露とAKI患者の転帰</td><td>Shawwa K, et al. J Nephrol. 2022;35:585-595</td></tr>
+<tr><td>RRT開始戦略のRCT（AKIKI）</td><td>Gaudry S, et al. N Engl J Med. 2016;375:122-133</td></tr>
+<tr><td>敗血症性AKIのRRT開始タイミング（IDEAL-ICU）</td><td>Barbar SD, et al. N Engl J Med. 2018;379:1431-1442</td></tr>
+<tr><td>RRT開始タイミングのRCT（STARRT-AKI）</td><td>STARRT-AKI Investigators. N Engl J Med. 2020;383:240-251</td></tr>
+<tr><td>2つの遅延戦略の比較（AKIKI 2）</td><td>Gaudry S, et al. Lancet. 2021;397:1293-1300</td></tr>
+<tr><td>敗血症・敗血症性ショックの国際ガイドライン2021</td><td>Evans L, et al. Crit Care Med. 2021;49:e1063</td></tr>
+<tr><td>KDIGO AKI診療ガイドライン</td><td>Khwaja A. Nephron Clin Pract. 2012;120:c179-184</td></tr>
+<tr><td>AKIに関する集中治療医学のリサーチアジェンダ</td><td>Pickkers P, et al. Intensive Care Med. 2017;43:1198-1209</td></tr>
+<tr><td>RRT離脱の最適時期のシステマティックレビュー・メタ解析（DOnE RRT）</td><td>Katulka RJ, et al. Crit Care. 2020;24:50</td></tr>
+<tr><td>ICU患者のRRT管理に関する国際調査</td><td>Legrand M, Darmon M, Joannidis M, Payen D. Intensive Care Med. 2013;39:101-108</td></tr>
+<tr><td>CRRT中止の事後解析（多施設前向き観察研究）</td><td>Uchino S, et al. Crit Care Med. 2009;37:2576-2582</td></tr>
+<tr><td>CRRT中止成功を予測する因子</td><td>Katayama S, et al. Anaesth Intensive Care. 2016;44:453-457</td></tr>
+<tr><td>術後急性RRT離脱後の早期再透析のリスク因子</td><td>Wu VC, et al. Intensive Care Med. 2008;34:101-108</td></tr>
+<tr><td>CRRTからの短期離脱成功の予測因子（システマティックレビュー・メタ解析）</td><td>Li Y, et al. Ren Fail. 2023;45:2176170</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 保存的戦略で本当にRRTを要した重症AKI患者では、医師判断で止めてから72時間後（D4）に測る6項目 — <mark class="hl">D4尿量&gt;1,300 mL/日（+3）・D4人工呼吸（+2）・RRT期間&gt;8日（−1）・D4昇圧薬（−1）・入室時敗血症性ショック（−1）・基礎Cr&gt;116 µmol/L（−1）</mark> — の合計が <mark class="hl">2点以上なら7日以内の再開はまれ（PPV 90%・特異度90%、AUC 0.86）で、透析用カテーテルを抜く方向に踏み出せる</mark>。 ただし <mark class="hl">2点未満は「再開せよ」ではない</mark>。症例構成の異なる外部コホートでは <mark class="hl">AUC 0.73・NPV 34%</mark> まで落ち、低スコアでも大半が離脱に成功していた。<mark class="hl">低スコアはカテーテルを温存して観察する根拠まで</mark> とし、予防的再開の理由にはしない。 行動の変え方はひとつ。<mark class="hl">RRTを止めて72時間経った翌日を「評価日」として固定し、24時間尿量・昇圧薬・人工呼吸をその場で確認してカテーテル抜去を議論する</mark>。スコアは「いつ止めるか」ではなく「止めた後にカテーテルを抜いてよいか」に答える道具である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
