@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>重症化からICU入室までの空白を埋める emergency critical care — ICUの外で行う集中治療（総説・WienKlinWschr2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00508-024-02374-w.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">重症化からICU入室までの空白を埋める emergency critical care — ICUの外で行う集中治療（総説・WienKlinWschr2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Dünser MW, Noitz M, Tschoellitsch T, Bruckner M, Brunner M, Eichler B, Erblich R, Kalb S, Knöll M, Szasz J, Behringer W, Meier J. Emergency critical care: closing the gap between onset of critical illness and intensive care unit admission. Wien Klin Wochenschr. 2024;136:651–661. DOI: 10.1007/s00508-024-02374-w</dd><dt>掲載誌</dt><dd>Wiener klinische Wochenschrift（2024-12）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00508-024-02374-w" target="_blank" rel="noopener">doi.org/10.1007/s00508-024-02374-w</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Emergency critical care: closing the gap between onset of critical illness and intensive care unit admission</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>この総説の主張は当院の急変WG・RRS・バイタル自動収集の3本を1本の筋に束ねる</strong>。これまで「急変対応（BLS/ALS）」「RRS」「モニター標準化」「バイタル自動収集」は別テーマとして扱ってきたが、本論文の枠組みでは全部が「emergency critical care ＝ ICU入室前の時間依存フェーズにどう集中治療を届けるか」という1つの問いの部分集合になる。急変WGの継続テーマ（記録様式・モニター運用標準化・BLS再教育・役割明示・フィードバック体制）を、この上位概念の下に並べ直せる。</li><li><strong>RRS起動基準の議論に「求心路（afferent）と遠心路（efferent）」の語彙を持ち込む</strong>。Fig.4 の枠組みでは、病棟が気づく側＝求心路、駆けつける側＝遠心路。当院で「起動が少ない」問題が出たときに、気づけていないのか（求心路の失敗）、気づいても呼ばないのか（起動の心理的障壁）、呼んでも来ないのか（遠心路の容量）を分けて診断できる。系統的レビューはチーム構成と転帰の関連を見いだせなかった一方、成熟したチームと「起動を必須とする（mandatory activation）」設計が最良の結果を報告したとしている。当院で「呼ぶかどうかを現場判断に委ねる」運用が残っているなら、必須起動への移行が最も効果の期待できる一手になる。</li><li><strong>バイタル自動収集プロジェクトの目的関数を「入力の省力化」から「求心路の感度」へ置き換える</strong>。本論文が引く根拠は、病棟での急変が生理学的異常に先行されること、そして遅れて起動されたRRTはICU入室率・在院日数・死亡をいずれも悪化させること。自動収集の価値は転記工数ではなく、NEWS などのスコアが「測っていない時間帯」を埋めて起動を早めるところにある。KPI も「入力率」ではなく「NEWS高値から起動までの中央値」「起動前6時間のバイタル欠測率」に寄せたい。関連ノート <span class="wl">連続バイタル監視は間欠EWSより早く気づくが感度は同等でアラートは7倍（VSI・1529入院・JMedSyst2023）</span> が示すとおり、連続監視はアラートを7倍に増やすので、閾値設計とアラート疲労対策を同時に置くことが前提になる。</li><li><strong>救急外来でのボーディング（ICU満床待ち）を「悪」と決めつけない根拠が手に入る</strong>。本論文は、ボーディング時間そのものより「その間に適切な集中治療が届いているか」が転帰を決めると整理している。ERで適切な集中治療が提供された場合には、ER滞在時間と転帰の負の関連は観察されなかった、という報告を複数引く。当院で「ICUが空かないから救急外来で待たせている」場面が生じたとき、責めるべきは待ち時間の長さではなく、待っている間の介入密度・モニタリング密度・再評価間隔である。ICU側から出向く（コンサルト・共同管理）運用の正当化に使える。</li><li><strong>「ICU入室を避けられた例」を成果として数える指標を作る</strong>。ER・病棟での集中治療によって軽症〜中等症の重症病態が反転しICU入室が不要になったケースは、現行の指標では何にもカウントされない（むしろ「入室しなかった」だけ）。イタリアの血液疾患病棟の報告では、ヘルメットCPAPや薬理学的循環サポートを病棟で行うことで3分の1がICU入室を回避できた。当院でも、RRT介入後に病棟で完結した症例を「回避入室」として台帳化すれば、RRS の費用対効果を経営戦略会議に出せる数字になる。</li><li><strong>記録様式の議論（急変WG 第5回で決着予定）に接続する視点</strong>。本論文が繰り返す「未認識（recognition failure）」と「過少蘇生（under-resuscitation）」の2つの失敗様式は、そのまま記録テンプレの2つの欄になる。①どの時点でどの生理学的異常が出ていたか（求心路の記録）②その時点で何をしたか／しなかったか（介入の記録）。チェックリスト型に寄せるなら、この2軸を落とさない設計にしたい。</li><li><strong>一方で当院ではすぐには変わらないもの</strong>：本論文は「どのモデルが最適か」を答えていない。ED-ICU（救急外来内ICU）・救命蘇生ユニット（CCRU）・ICU側から出向くコンサルトチーム・遠隔モニタリング、どれが日本の病床区分と診療報酬の下で成り立つかは別問題である。当院で新しい物理的ユニットを作る話にはならない。実装できるのは「今ある人と場所で、介入とモニタリングを前倒しする」部分に限られる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症病態は時間依存性である。ICU入室の遅れは臓器障害の進行と死亡増加に関連する（メタ解析でプールOR 1.61）。病棟の急変は生理学的異常に先行され、RRS の導入はICU外心停止と院内死亡を減らす。病院前の高度介入は外傷・心停止で転帰を改善しうる。</li><li><strong>Unknown</strong>：これらは領域ごと（病院前／搬送／ER／病棟）にばらばらに研究されており、共通の概念で束ねられていなかった。どの実装モデルが、どの医療システムで、どれだけ効くのかは未解決。ICU外での集中治療を評価する統一アウトカムも定まっていない。</li><li><strong>What's new</strong>：ICU外で行う集中治療のすべてを「emergency critical care」という1つの概念で定義し、重症患者の chain of survival に欠けていた環として位置づけた。Peter Safar の1974年の三徴（蘇生・救急・ICU治療）と、2002年からの ICU without walls を統合する上位概念として提示している。加えて2023年の第76回世界保健総会（WHA76）決議を引き、これが世界規模の政策課題であることを示した。エビデンスは4つの現場（病院前・搬送・ER・病棟）ごとにスコーピングレビューで整理されている。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 重症病態は連続体であり、その始まりは常にICU入室より前にある。<strong>ICU入室の遅れが転帰を悪化させるのは「遅れたから」ではなく「その間に集中治療が届かなかったから」であり、届けさえすれば遅れの害は観察されない</strong>。ICUの外で提供する集中治療を emergency critical care と定義し、病院前・施設間搬送・救急外来・手術室・一般病棟の5つの現場で実装せよ、というのが本論文の主張である。</p>
+</div>
+<ul><li>重症病態（critical illness）は「可逆でありうる状態で、バイタル機能の不安定または重要臓器の機能不全を伴い、ケアが提供されなければ差し迫った死のリスクが高いもの」と定義される。全年齢に起こり、多様な急性・慢性疾患の帰結として生じる。</li><li>発症の速さは3類型に分かれる。急性の重症病態（外傷・心停止など）、急性疾患に合併する重症病態（敗血症・ARDS など）、慢性疾患の非代償として生じる重症病態（COPD増悪・急性増悪した慢性心不全など）。前者の主課題は「集中治療を間に合わせること」、後2者の主課題は「重症化に気づくこと」である。</li><li>集中治療は「ICUという物理的な場所で行う医療」として運用されてきたが、これは重症病態の時間依存性と正面から矛盾する。</li><li>ICU入室の遅れは、入室時の臓器障害の程度と院内死亡を増やす。院内一般集団では、ICU入室までの遅れが1時間増えるごとに死亡の調整オッズが3%上昇した。バイアスリスクの低い34研究のメタ解析では、遅延入室の死亡プールOR 1.61（95%CI 1.44–1.81）。術後患者に限ると OR 2.44（95%CI 1.49–4.01）と、非外科系より顕著に高い。</li><li>この関連の原因は2つ。①ICU収容能力の限界による入室遅延、②入室前に提供される医療が不十分であること。経済的制約と人材不足を考えると、①を病床増設で解決できる見込みは薄い。仮にICUが無限の容量を持っていても、発症からICU到着までの間に集中治療が必要である事実は残る。</li><li>ICU入室前の集中治療提供を妨げているのは、重症化の認識の遅れ（recognition failure）と過少蘇生（under-resuscitation）である。カナダの後ろ向きコホートでは、救急外来に長時間滞在した重症患者のうち、そこで侵襲的処置を受けた者は比較的少数だった。</li><li>emergency critical care は、発症の場所と時刻に最も近いところで集中治療介入とモニタリングを行い、ICUへの搬送中もそれを継続することを指す。5つの現場（病院前・施設間搬送前および搬送中・救急外来・手術室・一般病棟）を覆う。</li><li>原理はICU内の集中治療とほぼ同じだが、急性期に固有の重みづけがある。A・B・Cの安定化と並行して、重症化をもたらしている原疾患の診断ワークアップを進めることが決定的に重要である。原因病態を正しく同定して適切に治療して初めて、重症病態は効率よく反転する。</li><li>診断の進め方は非重症患者と本質的に同じだが、2点だけ違う。①病歴聴取・身体診察・検査の順序を、直ちに必要な蘇生に合わせて組み替える（多くの重症患者は自分で病歴を語れないため、家族・介護者・目撃者に依存する）。②時間依存性に合わせ、蘇生と並行して遅滞なく進める。ベッドサイド超音波・POCT・ポータブルX線・CTまでの待ち時間短縮が常用手段になる。</li><li>著者は釘を刺している。医学の2つの基本的診断手段（病歴聴取と丁寧な身体診察）を、検査のスクリーニングや過剰な画像検査で置き換えてはならない。画像は偽陽性を量産することがしばしばある。</li><li>概念そのものは新しくない。Peter Safar は1974年に、集中治療医学を「蘇生・生命を脅かす病態の救急対応・ICU治療」の三徴と呼び、ICUの境界を越えて病院前・生命維持を伴う搬送・救急外来・手術室を包含すべきと述べた。ICU入室前の集中治療が伴わなければ、ICU治療はしばしば不必要に高価な終末期医療になる、というのが Safar の言葉である。</li><li>2023年5月、第76回世界保健総会が救急・集中治療・手術医療の計画と提供を強化する決議を採択した。これらは重症患者への第一層のケアであり、単一の職種・専門・病態・場所に紐づかない「人中心の連続体」であるとされた。世界規模では看護師・技師・救急救命士が医師と同程度に救急・集中治療を担っている。</li><li>スコーピングレビューの結論：病院前の集中治療介入（外傷・心停止）、専門搬送チームによる施設間搬送、救急外来での集中治療提供、病棟でのRRS/MET のいずれについても、患者中心のアウトカム改善を支持する報告が積み上がっている。</li><li>期待される効果は6つに整理される。早期死亡の回避、軽症〜中等症の重症病態の反転、ICU入室の回避、臓器障害の重症度の減弱、ICU在室日数の短縮、短期および長期死亡の減少。</li><li>残された課題は実装研究である。ICU外の重症患者ケアは組織的に極めて多様であり、one-size-fits-all のテンプレートは存在しないだろう、というのが著者の見立てである。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・組織論の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む この総説を読むうえで押さえるべき用語は多くない。</p>
+<p><strong>critical illness（重症病態）</strong>：本論文の定義は「可逆でありうる不健康状態で、バイタル機能の不安定および／または重要臓器の機能不全を伴い、ケアが提供されなければ差し迫った死のリスクが高いもの」。ICUに入っているかどうかで定義されない点が重要である。</p>
+<p><strong>disease continuum（疾患の連続体）</strong>：重症病態は「ICU入室の瞬間に始まる」のではなく、それより前、多くは入院より前から始まっている、という考え方。この一文が本論文全体の出発点になっている。</p>
+<p><strong>emergency critical care（救急集中治療）</strong>：ICUの外で提供する集中治療。発症の場所と時刻に最も近いところでの介入とモニタリング、およびICU搬送中の継続を含む。著者らが提唱する上位概念。</p>
+<p><strong>ICU without walls / without borders（壁のないICU）</strong>：2002年ごろオーストラリアで生まれた概念。一般病棟で重症化しつつある患者を早く見つけて適切にケアすることに焦点を当て、MET/RRS の実装につながった。著者らは emergency critical care のほうが包括的だと述べている。</p>
+<p><strong>MET / RRT / RRS</strong>：Medical Emergency Team（医療緊急チーム）、Rapid Response Team（迅速対応チーム）、Rapid Response System（迅速対応システム）。名称は国と施設で違うが、実体は「病棟で気づく仕組み（求心路）」と「駆けつけて集中治療を提供するチーム（遠心路）」の組み合わせである。</p>
+<p><strong>NEWS（National Early Warning Score）</strong>：呼吸数・SpO2・酸素投与の有無・体温・収縮期血圧・脈拍・意識水準から算出する早期警告スコア。病棟の生理学的悪化を数値化して起動基準に使う。本論文では求心路の代表例として引かれる。</p>
+<p><strong>retrieval medicine（リトリーバル医療）</strong>：専門チームが他施設に出向いて重症患者を評価・安定化し、より高次の施設へ搬送する診療。オーストラリア発祥の用語で、日本語では施設間搬送に相当する。</p>
+<p><strong>ED boarding（ボーディング）</strong>：入院・ICU入室が決まった患者が、病床が空かないために救急外来に留め置かれること。本論文の中心的な問題設定の1つ。</p>
+<p><strong>eCPR（体外循環式心肺蘇生）</strong>：難治性心停止に対してVA-ECMOを装着する蘇生。本論文では「病院前でも選択例には実施可能」という文脈で登場する。</p>
+<p><strong>EECC（Essential Emergency and Critical Care）</strong>：資源が限られた環境でも提供すべき最低限の救急・集中治療のパッケージ。269名の国際専門家によるデルファイで、40の臨床プロセスと67の要件が特定された。</p>
+</div>
+<h3>2. 重症病態の連続性と時間依存性</h3>
+<p>重症病態は全年齢に生じ、多数の急性・慢性疾患の帰結として起こる。そして常にICU入室より前に、多くの場合は入院より前に始まっている。</p>
+<p>発症の速さには幅がある。数分あるいは数秒で成立するものもあれば、急性疾患を複雑化させる形で、あるいは慢性疾患の非代償として、より緩徐に進行するものもある。しかし発症様式によらず、すべての重症病態が1つの特徴を共有している。<strong>適時の集中治療介入を必要とすること</strong>である。</p>
+<p>著者は時間依存性を裏づける具体例を並べている。心停止（CPR・除細動・アドレナリン投与のいずれの遅れも生存を低下させる）、気道閉塞（異物による閉塞時間と転帰）、脳外傷直後の無呼吸（brain impact apnoea）、急性出血、心筋梗塞（system delay と死亡）、脳卒中（血栓溶解までの時間と長期転帰）、二次性腹膜炎（source control のタイミングと失敗が死亡のリスク因子）、敗血症（義務化された救急対応における治療までの時間と死亡）。いずれも「分〜時間」の単位で転帰が動く病態である。</p>
+<h4>Table 1. 重症病態の3類型 — 典型的な発生場所・主要な課題・具体例（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th></th><th>急性の重症病態</th><th>急性疾患に合併する重症病態</th><th>慢性疾患に合併する重症病態</th></tr></thead>
+<tbody>
+<tr><td>典型的な発生場所</td><td>病院前</td><td>病院前・救急外来・一般病棟</td><td>病院前・救急外来・一般病棟</td></tr>
+<tr><td>主要な課題</td><td>集中治療を適時に届けること</td><td>重症化を適時に認識すること</td><td>重症化を適時に認識すること</td></tr>
+<tr><td>例</td><td>重症外傷／心停止／消化管出血／急性心不全（急性冠症候群・不整脈を含む）／脳卒中／けいれん・てんかん重積／アナフィラキシー／中毒</td><td>敗血症／ARDS／急性腎障害／せん妄／急性外科疾患の合併症／薬剤性臓器毒性／代謝異常（ケトアシドーシス・高血糖・電解質異常）</td><td>COPD増悪／急性増悪した慢性心不全／acute-on-chronic 肝不全／acute-on-chronic 腎不全／腫瘍随伴性合併症／臓器移植後の拒絶</td></tr>
+</tbody></table></div>
+<p>この表の含意ははっきりしている。<strong>病院前で起こる急性の重症病態では「気づく」ことは容易で、問題は届けることである。逆に、病棟や救急外来で急性・慢性疾患から派生する重症病態では、届ける手段はあるのに気づくのが遅い</strong>。当院で言えば、前者は救急要請から到着までの体制、後者は RRS の求心路の問題ということになる。</p>
+<h3>3. 発症からICU入室までの「空白」</h3>
+<p>集中治療は「特別に設備と人員を備えた病院内の地理的区画＝ICUで提供される医療」として広く理解されている。より新しい集中治療とICUの定義は、集中治療チームの活動がしばしばICUという物理空間の壁を越えることを認めているが、多くの医療システムでは依然として集中治療の提供をICUに閉じ込める運用が一般的である。この運用は重症病態の時間依存性と際立った対照をなす、と著者は書く。</p>
+<p>ICU入室の遅れが有害であることを示す証拠は積み上がっている。</p>
+<ul><li>米国の単施設研究：病棟重症患者のICU移送が遅れると、ICU入室時点の臓器障害の程度が強くなり、院内死亡が約4倍に増えた。</li><li>救急外来でのボーディング時間の延長は、臓器障害の遷延、資源使用の増加、ICU在室日数の延長、院内死亡オッズの上昇と関連していた（複数研究）。</li><li>一般病院集団：ICU入室までの遅れが1時間増えるごとに、重症患者の死亡の調整オッズが3%上昇。</li><li>バイアスリスクの低い34研究を含む系統的レビュー・メタ解析：遅延入室は死亡率上昇と独立に関連。プールOR 1.61（95%CI 1.44–1.81）。サブグループ解析では、術後患者の遅延入室による死亡リスクが非外科系より著明に高かった（OR 2.44、95%CI 1.49–4.01）。</li></ul>
+<p>著者はこの関連の原因を2つに分解する。</p>
+<ol><li><strong>ICU収容能力の限界</strong>によるICU入室遅延（病床占有率、ICU strain、法的手続きを経た入室要求など複数の文脈で示されている）。</li><li><strong>ICU入室前に提供される医療の不十分さ</strong>。</li></ol>
+<p>そして冷静な現実認識を置く。経済的制約と人材不足を考えれば、あらゆる場面・あらゆる時刻に遅滞なく重症患者を収容できるほどICU容量を増やせるとは考えにくい。さらに、<strong>仮にICUが無限の容量を持っていたとしても、発症からICU入室までの間に集中治療を届ける必要性は残る</strong>。この2段構えの論理が、本論文の存在理由である。</p>
+<p>入室前の集中治療提供を妨げている要因は文献上2つに集約される。重症化の認識の遅れと、過少蘇生である。認識の遅れについては、一般病棟における患者悪化の認識遅延の根本原因分析で「その多くはヒト由来のモニタリング失敗」と結論した研究、救急外来における重症化認識遅延の予測因子と罹病・死亡への影響を扱った研究、重症敗血症の早期死亡の規定因子として「認識の遅れと重症度」を挙げた研究などが引かれる。過少蘇生については、カナダの後ろ向きコホートが、救急外来で相当長い時間管理されていた重症患者のうち、そこで侵襲的処置を受けた者は比較的少数だったと報告している。</p>
+<h3>4. emergency critical care という概念</h3>
+<p>emergency critical care とは、ICUの外で提供される集中治療を指す。発症の場所と時刻に最も近いところでの集中治療介入と患者モニタリングの提供、およびICUへの搬送中の継続を含む。したがって emergency critical care は重症病態の最も時間依存的な局面を覆い、重症患者の chain of survival に欠けていた1つの環を構成する。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 重症患者の chain of survival（生存の連鎖）と、そこにおける emergency critical care の位置、および回復への経路。左端の淡いピンクの楕円の中に、重症化が起こる場面のピクトグラムが4つ置かれる（胸を押さえて倒れかかる人、交通事故、けいれん様の姿勢の人、湯気の立つやかんの前に立つ人＝家庭内事故）。そこから右へ、色の違う輪が6つ鎖のように連なる。左から順に、濃赤の輪（顔を認識する枠＝early recognition＝早期認識）、赤の輪（倒れた人に胸骨圧迫をする救助者＝first medical response＝最初の医療的対応）、黄色の輪（救急バッグを持ち膝をついて処置する医療者＝EMERGENCY CRITICAL CARE。この輪だけ塗りつぶされて強調されている）、薄橙の輪（人工呼吸器とベッド＝ICU care）、濃紺の輪（ベッドサイドに立つ看護師＝post-ICU care）、緑の輪（歩行器を支えるリハビリ＝rehabilitation）。輪の下には同じ色の矢羽根型のラベル帯が並び、early recognition／first (medical) response／EMERGENCY CRITICAL CARE／ICU care／post-ICU care／rehabilitation と表示される。黄色の emergency critical care の輪と濃紺の post-ICU care の輪からは、それぞれ上向きの矢印が伸びて、淡緑の丸の中を走る人（＝回復して社会に戻る人）へつながる。右端のリハビリの輪からも同じ走る人へ矢印が伸びる。つまり、回復への出口はICU退室後だけでなく、emergency critical care の段階から既に存在するという主張が図で表現されている。原図・無改変。</p>
+</div>
+<p>emergency critical care は、重症病態が起こるあらゆる時と場所で提供される。病院前（事故現場、あるいは急性の重症病態が発生した場所）、施設間搬送の前および搬送中、救急外来、手術室、一般病棟である。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. ICU外で emergency critical care が提供される現場のスペクトラム。水色の大きな楕円の中央に、青く塗られた四角形が置かれ、その中に人工呼吸器につながれた患者のベッドとモニターのピクトグラム、下に大きく ICU と書かれている。楕円の周囲に5つの現場が配置され、それぞれから中央のICUへ矢印が向かう。左上の A は病院前診療（ドクターヘリと救急車のピクトグラム）。その右の B は救急外来（回転灯の付いた自動ドアに ER と表示）で、A から B へ矢印、B から ICU へ矢印が引かれる。下方の C は他施設からのリトリーバル・施設間搬送（病院の建物のピクトグラムから、ヘリと救急車を経由して ICU へ向かう矢印）。右の D は術中の集中治療（手術器具の列と、無影灯の下で手術台に向かう術者、麻酔器のガスボンベ）。上方の E は一般病棟におけるMET／RRTによる集中治療（ベッドが2台並ぶピクトグラム）で、B から E へ、E から ICU へ、D から E へと矢印が引かれる。すなわち救急外来から病棟へ上がった患者が病棟で重症化してICUへ入る経路、術後患者が病棟で重症化する経路まで含めて、ICUへ至る流入路がすべて描かれている。原図・無改変。</p>
+</div>
+<p>管理の空白を埋めることによって、emergency critical care は早期死亡の予防・臓器障害の減弱・早期回復の促進にとどまらず、軽症および中等症の重症病態を反転させることができる。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 早期の集中治療介入と遅延した集中治療介入が、3類型の重症病態でどのような経過の違いを生むかの模式図。横3枚のパネルからなり、左から Acute Critical Illness（急性の重症病態）、Critical Illness Complicating Acute Disease（急性疾患に合併する重症病態）、Critical Illness Complicating Chronic Disease（慢性疾患に合併する重症病態）。各パネルの上半分は折れ線グラフで、縦軸が disease severity（疾患重症度）、横軸が time（時間）。縦軸には下側に黄色の帯 non-critical illness、上側にピンクの帯 critical illness が付き、その境界に水平の破線が引かれている。黒線が自然経過、緑線が早期に集中治療介入を行った場合、赤線が遅延した場合（ICU入室後に初めて介入した場合）を表す。左パネルでは、事故のピクトグラムを起点に黒線が破線を越えて急峻に立ち上がり高値で推移する。緑線は立ち上がりが低く抑えられ、早期に破線の下へ下降する。赤線はいったん高値に達してから緩やかにしか下がらず、観察期間の終わりでようやく破線付近に戻る。中央パネルでは、肺と細菌のピクトグラム（急性疾患）から黒線が緩やかに上昇して破線を越え、以後高値を保つ。緑線は破線を越えた直後から下降して非重症域に戻り、その後わずかに再上昇してからさらに下がる。赤線は高値のプラトーを長く形成してから下降する。右パネルでは、心臓と薬剤のピクトグラム（慢性疾患）から黒線が破線のすぐ下を長く這った後に急上昇し、緑線は上昇の初期で頭打ちになって下降するが完全には非重症域まで戻らず、赤線は高いまま横ばいに近い。各パネルの下半分には対応する表があり、行は上から Risk of death（死亡リスク）／Risk of multiple organ dysfunction（多臓器障害のリスク）／Risk of prolonged ICU stay（ICU在室延長のリスク）／Risk of chronic critical illness（慢性重症病態のリスク）／Costs of care（医療費）。列は緑の Early Critical Care と赤の Delayed Critical Care。左パネルでは早期がすべてプラス1つ、遅延は死亡・多臓器障害・ICU在室延長・費用がプラス2つで慢性重症病態のみプラス1つ。中央パネルでは早期がすべてプラス1つ、遅延はすべてプラス2つ。右パネルでは早期が死亡・多臓器障害でプラス1つ、ICU在室延長・慢性重症病態・費用でプラス2つ、遅延は死亡・費用がプラス2つ、多臓器障害・ICU在室延長・慢性重症病態がプラス3つ。つまり慢性疾患を背景に持つ症例では、早期介入をしてもなお負担が残り、遅延した場合の負担は3類型の中で最大になる、という差が読み取れる。原図・無改変。</p>
+</div>
+<p>emergency critical care の原理は、ICUで提供される集中治療の原理とほぼ同じである。ただし、ICUで一般に遭遇する安定化期・回復期よりも、重症病態の急性期において相対的に重要になる要素がある。気道・呼吸・循環を安定させる早期蘇生と介入に加えて、決定的に重要なのが<strong>重症化の原因となっている基礎病態の診断ワークアップ</strong>である。原因病理が正しく同定され適切に治療されて初めて、重症病態は効率よく反転しうる。</p>
+<p>重症患者の診断ワークアップは非重症患者と同様の技法を使うが、重要な違いが2つある。</p>
+<p>第一に、病歴聴取・身体診察・検査という順序を、直ちに必要な蘇生に合わせて調整する必要がある。加えて多くの重症患者は現病歴を詳しく語ることができないため、病歴聴取は家族・介護者・目撃者に頼ることが一般的になる。ただし、<strong>診断に至る基本的なプロセス自体は重症患者と非重症患者で変わらない</strong>。ここで著者は強調する。医学の2つの基本的診断手段、すなわち病歴聴取と丁寧な身体診察を、検査によるスクリーニングや、しばしば偽陽性をもたらす過剰な画像検査で置き換えてはならない。</p>
+<p>第二に、重症病態の時間依存性に合わせて、診断ワークアップを遅滞なく、かつ蘇生と協調させて進める必要がある。診断に要する時間を最小化する常套手段として、ベッドサイド超音波、ポイントオブケア検査、移動型X線撮影、そしてCT（まれにMRI）などの画像検査までの待ち時間の短縮が挙げられている。</p>
+<h3>5. 歴史的経緯 — Safar から ICU without walls まで</h3>
+<p>emergency critical care という概念自体は新しくない。</p>
+<p>50年前、心肺蘇生の父であり蘇生医学の先駆者である Peter Safar は、集中治療医学を「蘇生」「生命を脅かす病態の救急対応」「ICU治療」の三徴として言及した。Safar は、集中治療がICUの境界を越え、重症・重傷患者が必要とするシステムのすべての構成要素、すなわち病院前医療、生命維持を伴う搬送、救急外来と手術室で提供される集中治療を包含する必要があると強調した。そして、ICU入室前に適切な集中治療が提供されなければ、ICU医療はしばしば不必要に高価な終末期医療になってしまうと述べた（1974年、Crit Care Med）。</p>
+<p>1991年、ウィーン総合病院の救急外来が開設され、救急外来内にICUを組み込んだ最初期の施設の1つとなった。この設定は「重症患者の生存の連鎖における最後の環を閉じるもの」と呼ばれた。</p>
+<p>約20年前、オーストラリアで ICU without walls（壁のないICU）あるいは ICU without borders（境界のないICU）の概念が生まれた。この概念は一般病棟で重症化しつつある患者の早期認識と適切なケアに焦点を当て、MET/RRS の実装につながった。</p>
+<p>著者らは、emergency critical care という用語のほうがより包括的で、ICU入室前の重症病態の連続体全体で必要となるケアをより適切に覆うと感じている、と述べる。Safar が提唱した概念と ICU without walls モデルの両方を包含するからである。</p>
+<h3>6. グローバルな視点 — WHA76決議と EECC</h3>
+<p>2023年5月、第76回世界保健総会（WHA）が、救急・集中治療・手術医療の計画と提供を強化するための時宜を得た取り組みを求める決議を採択した。これらは重症患者に対する第一層（first-tier）の医療を代表するシステムである。この決議は、救急・集中治療システムの拡張に対する障壁を取り除くことによって、世界規模で質の高い全人的な集中治療を確保することを目指す。</p>
+<p>保健大臣らと国際的ステークホルダーの一群は、救急・集中治療・手術医療が「人中心の連続体」を代表し、これらのサービスの提供が単一の医療専門職・専門分野・病態・場所に紐づかないことを強調した。世界規模では、看護師・技師・救急救命士が医師と同程度に救急医療と集中治療を提供しており、そのすべてが「最初の数時間のスペシャリスト」として訓練されうる。</p>
+<p>デルファイ法を用いて、269名の国際的専門家が、救急・必須集中治療を提供するパッケージには <strong>40の臨床プロセス</strong>（重症病態の同定とケア、および一般的なケアプロセスなど）と <strong>67の要件</strong>（機材、消耗品、薬剤、人的資源、訓練、ルーティン、ガイドライン、インフラなど）が含まれると結論した。</p>
+<p>別の麻酔科医・集中治療医の国際グループは、世界の大部分の地域では最先端のICU医療をすべての重症患者に提供することは非現実的であり、したがって emergency critical care こそが世界で最も広く利用可能で、費用対効果が高く、資源節約的な集中治療の提供形態として残る、と強調している。</p>
+<h3>7. 教育とトレーニング</h3>
+<p>世界集中治療医学連合（WFSICCM）は、集中治療を「重症患者の包括的ケアに専心する多職種・多専門の専門領域」と定義している。この定義に沿えば、<strong>emergency critical care は概念であって、1つの医学専門領域の一部ではない</strong>という理解が重要になる。1つの医療職種に縛られるものでもない。多くの国で病院前の集中治療は救急救命士や特別に訓練された看護師によってルーティンに提供されているからである。</p>
+<p>個々の設定によって、emergency critical care はICU、救急科、麻酔科、外科、その他の関連部門のスタッフによって提供されうる。どのチームが提供するかによらず、医師・看護師を含むすべての提供者に共通して求められるのは、<strong>重症患者をケアするための適切な訓練と経験</strong>である。いくつかの教育機関はこのニーズに応え、救急医学と集中治療医学のデュアル専門医訓練を提供している。</p>
+<h3>8. 科学的エビデンス（スコーピングレビュー）</h3>
+<p>著者らは、ICU外で集中治療を提供するモデルと、emergency critical care 介入の患者中心アウトカムへの効果に関する科学的エビデンスを同定するため、Medline（Ovid）を用いたスコーピングレビューを実施した。言語・年齢・出版年の制限は設けていない。術中の集中治療提供については、既に確立した概念であり麻酔科という専門領域の不可欠な一部であるため、意図的に検索対象から除外している。</p>
+<h4>8.1 病院前の集中治療</h4>
+<p>病院前で提供される集中治療介入のアウトカム効果は、主に重症外傷患者と突然の予期せぬ心停止患者で評価されてきた。</p>
+<p><strong>外傷</strong></p>
+<ul><li>気管挿管、胸腔減圧、ターニケット使用、輪状甲状靱帯切開、二次救命処置を含む病院前の集中治療介入を受けた重症外傷患者は、受けなかった患者より死亡率が低かった。</li><li>Head Injury Retrieval Trial（HIRT）：成人の重症鈍的頭部外傷において、病院前で提供される集中治療介入は、標準的な地上救急救命士による管理と比較して30日死亡を30%減少させた（治療必要数 NNT＝6）。単施設のランダム化比較試験。</li><li>英国の後ろ向きコホート：外傷性心停止後に自己心拍再開が持続した患者は、持続しなかった患者より現場での集中治療介入を多く受けていた。バッグバルブマスク換気、迅速導入気管挿管、血液製剤投与、胸腔切開（thoracostomy）の実施が、持続する自己心拍再開と独立に関連した。</li><li>フランスの多施設研究（鈍的外傷2703例）：移動集中治療チームによる病院前介入（静脈路確保、晶質液または膠質液の投与、マンニトール、カテコラミン、気管挿管、人工呼吸、血液製剤、胸腔ドレーン）は30日死亡を減少させた。</li><li>病院前挿管については相反するデータもあるが、重症外傷性脳損傷患者では、病院前挿管が非挿管と比較して死亡リスクの低下と6か月時点のより良好な機能的転帰に関連していた。</li><li>19研究のメタ解析：重症外傷性脳損傷における病院前気管挿管は、十分に訓練された経験豊富な提供者が現行ガイドラインに沿って行う場合には有益である、というエビデンスが増えつつある、と結論された。</li></ul>
+<p><strong>院外心停止</strong></p>
+<ul><li>英国の前向き観察多施設研究：病院前の集中治療介入は、ルーチンの二次救命処置と比較して院外心停止患者の入院到達率を高めた。ただしこれは生存退院率の上昇には転化しなかった。</li><li>二次救命処置を提供できるチームの現場到着の遅れは、成人の院外心停止における退院時の神経学的転帰を悪化させた。</li><li>病院前では VA-ECMO 治療のような複雑な処置さえ、選択された院外心停止患者に提供可能である。パリおよびドイツ・レーゲンスブルクでの最初の病院前 eCPR システムに続き、体系的に病院前 eCPR を実装したプログラムは良好な結果を報告している。退院時および3か月時点で <strong>43%</strong> の患者が神経学的に良好な生存を達成した。</li></ul>
+<h4>8.2 リトリーバルと施設間搬送</h4>
+<p>critical care retrieval あるいは retrieval medicine とは、専門チームを用いて重症の外傷・疾患患者を評価・安定化し、ある医療施設からより高次の医療へ搬送する実践を指す用語である。retrieval medicine という用語はオーストラリア大陸に由来し、そこでは長距離の重症患者搬送が一般的かつ高度に発達している。他の地域では重症患者の施設間搬送と呼ばれる。</p>
+<p>いくつかの観察研究は、専門化され適切に人員配置された集中治療搬送チームが行えば、重症患者の施設間搬送は安全に達成できることを示している。</p>
+<ul><li>英国の施設間搬送の後ろ向きレビュー：専門搬送チームの使用は、紹介元病院が用意した医師が同乗する標準的救急車搬送と比較して、重症患者の急性期生理を改善した。</li><li>専門化された移動ICU搬送チームによる施設間搬送は、標準的救急車搬送より、技術的な有害事象が少なく、肺機能の悪化が少なく、24時間死亡が低かった。</li><li>2つの研究：専門リトリーバルチームがICU移送プロトコルを遵守して施設間搬送を行った場合、施設間搬送を要した重症患者の死亡率は非搬送患者と差がなかった。</li><li>専門リトリーバルチームは、重症呼吸不全および／または循環不全のために搬送に耐えられないほど不安定な患者に対し、紹介元病院で体外生命維持システムを導入してから搬送することができる。この実践は死亡率のベネフィットと関連する可能性が高い。</li><li>特別に訓練された集中治療チームは、大陸間フライトのような長距離でも重症患者を安全に搬送できることが、民間および軍事の双方の設定で示されている。</li></ul>
+<p><strong>小児・新生児</strong></p>
+<ul><li>特別に訓練された小児集中治療搬送チームの使用は、新生児および小児の施設間搬送で特に有益である。</li><li>こうしたチームは、小児集中治療サービスを集約化する政策の前提条件と考えられている。</li><li>イングランドの前向き収集データの解析：小児ICUリトリーバルサービスは施設間搬送前に重症小児を安定化する必要がしばしばあり、そのために要する追加時間は転帰の悪化とは関連しなかった。</li></ul>
+<p>この最後の知見は当院の議論にも効く。「安定化に時間をかけると搬送が遅れて悪くなる」という直感は、少なくとも小児では支持されていない。</p>
+<h4>8.3 救急外来における集中治療</h4>
+<p>救急外来は急性疾患患者が病院に来る最初の接点である。ICUと手術室を除けば、院内で最も多くの重症患者に遭遇する区画でもある。</p>
+<p>救急外来で集中治療を提供し重症救急患者の管理を改善するモデルは複数発表されており、その内容は互いに大きく異なる。</p>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>医療緊急チーム／救急集中治療チーム</td><td>必要時にICUスタッフを救急外来に呼び込む</td></tr>
+<tr><td>ED基盤の早期介入チーム（EIT）</td><td>救急外来内に集中治療コンサルテーション機能を作る</td></tr>
+<tr><td>ICU主導の遠隔モニタリング</td><td>ICU移送待ちの重症ED患者を遠隔で監視する</td></tr>
+<tr><td>専用の救命蘇生ユニット（CCRU）</td><td>時間依存性の高い重症患者の移送を迅速化する独立ユニット</td></tr>
+<tr><td>救急医が配置されたED-ICU</td><td>救急外来内にICUを物理的に設置する</td></tr>
+</tbody></table></div>
+<p>複数の研究が、救急外来で重症患者に提供された集中治療（たとえば心原性肺水腫患者に対する短時間の非侵襲的圧支持換気）が、臓器機能を速やかに安定化させ、臓器障害の進行を止めるか反転させ、当初は重症病態として来院した救急外来患者のICU入室の必要性を回避しうることを報告している。</p>
+<p>そして本論文で最も実務的に重要な一文がここにある。<strong>適切な集中治療が救急外来で提供された場合には、重症患者がICU入室前に救急外来に滞在した時間は患者転帰と負の関連を示さなかった</strong>。ボーディング時間そのものではなく、その間の介入密度が問題だという主張である。</p>
+<h4>Table 2. 救急外来で集中治療を提供することの、エビデンスに基づく利益（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th></tr></thead>
+<tbody>
+<tr><td>救急外来の重症患者に対し、適時の集中治療介入が提供される率の上昇</td></tr>
+<tr><td>重症の救急外来患者に対するICU入室率の低下。特に軽症〜中等症の重症度の患者、すなわち持続モニタリングを要する患者・消化管出血・敗血症で顕著</td></tr>
+<tr><td>救急外来から非ICU病棟へ移った患者のICU入室率の低下</td></tr>
+<tr><td>ICU入室を要した救急外来患者のICU在室日数の短縮</td></tr>
+<tr><td>救急外来以外から来る患者のためのICU収容能力の増加</td></tr>
+<tr><td>在院日数の短縮</td></tr>
+<tr><td>重症の救急外来患者における24時間死亡、ICU退室時死亡、退院時死亡、30日死亡、60日死亡、365日死亡の減少</td></tr>
+</tbody></table></div>
+<p>集中治療介入から利益を得るには高齢すぎる・虚弱すぎる・重篤すぎる患者においては、救急外来における集中治療の提供とは、優れた人道的な緩和ケアの提供を含む。重症・非重症を問わず、ICU入室および入院の前に患者の意向を同定することも、救急外来における集中治療提供の患者中心の重要な側面である。経済分析は、救急外来における集中治療の提供が費用対効果に優れることを示している。</p>
+<p>この2点は当院の <span class="wl">ERRS（Ethics Rapid Response System）</span> の議論と正面から接続する。救急外来は「治療をどこまでやるか」を最初に問える場所でもある、というのが本論文の立場である。</p>
+<h4>8.4 病棟におけるMET／RRTによる集中治療</h4>
+<p>一般病棟の患者の臨床的悪化と心停止は、しばしば生理学的な逸脱に先行される。これらは NEWS のようなスコアで同定することができる。この観察が MET／RRS の実装につながった。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 医療緊急システム／迅速対応システムの模式図。求心路（afferent loop）と遠心路（efferent loop）から構成されることを示す。灰色の背景の中に、左から右へ4つの要素が並ぶ。左端は ward（病棟）と表示され、上に医師と看護師のピクトグラム、下にベッドと SCORE と書かれたクリップボードが置かれる。これが求心路、すなわち病棟チームが臨床的な勘と検証済みのスコアを用いて重症化を認識する部分にあたる。その右に大きなプラス記号があり、その上には電話の受話器のピクトグラムが描かれ、起動の合図が電話であることを示す。次に MET/RRT と表示された3人の医療者のピクトグラム（うち1人は聴診器を持つ）。ここが遠心路、すなわち集中治療サポートを提供するチームである。そこから右向きの矢印が伸び、2つ目の ward の表示に至る。この病棟では、ベッドの患者にバッグバルブマスクとモニターと輸液が加わっている。つまりチーム到着後に病棟で集中治療介入が行われている状態を描いている。そこから右上と右下の2本の矢印が分岐する。右上は ward で、ベッドの上に十字のマークが付き、病棟に留まって治療が続く経路を示す。右下は ICU で、人工呼吸器につながれた患者とモニターのピクトグラムが描かれ、ICU入室に至る経路を示す。すなわち病棟での介入によってICU入室を回避できる分岐が、図の中に明示されている。原図・無改変。</p>
+</div>
+<p><strong>チーム構成と起動</strong></p>
+<p>MET/RRT は典型的には集中治療医、集中治療看護師、理学療法士および／または呼吸療法士から構成される。系統的レビューはチーム構成と患者転帰の間に関連を見いださなかったが、<strong>成熟した専任チームで、起動が必須（mandatory activation）とされているものが最良の結果を報告している</strong>ことを強調した。</p>
+<p><strong>何が起動を引き起こすか</strong></p>
+<p>オーストラリアの病院におけるMET起動のトリガー頻度は以下の通りであった。</p>
+<div class="tw"><table>
+<thead><tr><th>起動トリガー</th><th>頻度</th></tr></thead>
+<tbody>
+<tr><td>低酸素血症</td><td>41%</td></tr>
+<tr><td>動脈性低血圧</td><td>28%</td></tr>
+<tr><td>意識状態の変化</td><td>23%</td></tr>
+<tr><td>頻脈</td><td>19%</td></tr>
+<tr><td>頻呼吸</td><td>14%</td></tr>
+<tr><td>乏尿</td><td>8%</td></tr>
+</tbody></table></div>
+<p><strong>チームは現場で何をしているか</strong></p>
+<p>ポルトガルの研究では、MET が病棟で提供した集中治療介入の頻度は以下の通りであった。チームの現場滞在時間の中央値は <strong>35分（IQR 20–50分）</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>介入</th><th>頻度</th></tr></thead>
+<tbody>
+<tr><td>輸液チャレンジ</td><td>40.6%</td></tr>
+<tr><td>バッグマスク換気</td><td>37.3%</td></tr>
+<tr><td>静脈路確保</td><td>29.8%</td></tr>
+<tr><td>用手換気</td><td>20.1%</td></tr>
+<tr><td>気管挿管</td><td>15.7%</td></tr>
+<tr><td>気道吸引</td><td>13.6%</td></tr>
+<tr><td>心肺蘇生</td><td>12.3%</td></tr>
+</tbody></table></div>
+<p>現場滞在35分という数字は、当院のRRT運用を設計するときの実務的な目安になる。「呼ばれて行って5分で帰る」チームではないということである。</p>
+<p><strong>ICU入室の回避と、ケアのゴールの議論</strong></p>
+<ul><li>イタリアの研究：病棟の重症血液疾患患者に提供された集中治療（ヘルメット持続陽圧呼吸、薬理学的循環サポートなど）により、<strong>3分の1</strong>の患者で安定化とICU入室回避が可能となった。</li><li>米国の後ろ向きカルテレビュー：RRS の実装は DNR 指示の記載増加と関連していた。さらに MET 起動はケアのゴールに関する議論を促し、しばしば緩和ケア戦略への移行につながった。</li></ul>
+<p><strong>アウトカム</strong></p>
+<ul><li>スイスの三次施設の後ろ向き研究：MET コール数が入院1000件あたり 5.2件から16.5件へ増加したのと並行して、心停止コールが入院1000件あたり 1.6件から0.8件へ減少した。</li><li>クラスターランダム化比較試験の事後解析：緊急チームコールの割合の増加は、心停止と予期せぬ死亡の発生率と逆相関していた。</li><li>フランスの病院：RRT の導入は予期せぬ死亡を減少させ、推定で<strong>週あたり1.5人の命が救われた</strong>。院内死亡は退院1000件あたり 39.6から34.6へ減少した。</li><li>複数の著者が、MET／RRT 実装後の予期せぬ心停止、予期せぬICU入室および再入室、短期・長期死亡の減少を報告している。</li><li>オランダにおけるRRSの全国的実装は、成人病棟患者の心停止、予定外ICU入室、院内死亡の減少と関連していた。</li><li>3つのメタ解析が、MET／RRS の実装がICU外の心停止発生率と院内死亡を減少させたと報告している。</li><li>RRT の<strong>遅い起動</strong>は、ICU入室率の上昇、在院日数の延長、死亡率の上昇と関連していた。</li><li>欧州蘇生協議会ガイドライン2021は、院内心停止を予防するための修正版「院内 chain of survival」における遠心路として、RRS を推奨した。</li></ul>
+<h3>9. 実装のステップ — 現場ごとに何を確認し、次に何をするか</h3>
+<p>本論文の主張を当院の運用に落とすと、次の対応表になる（本文の記述から筆者が整理）。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>病棟で NEWS が上昇している</td><td>直近6時間のバイタルが実際に測られているか。欠測の時間帯はどこか</td><td>欠測を埋める仕組み（自動収集）を先に置く。スコアの精緻化はその後</td></tr>
+<tr><td>NEWS高値だが起動されていない</td><td>気づいていないのか、気づいても呼ばないのか</td><td>前者なら求心路（測定・表示）、後者なら必須起動ルールと心理的安全性</td></tr>
+<tr><td>RRT が到着した</td><td>現場に何分いるか。何をしているか</td><td>滞在35分・輸液と気道介入が主という前提で人員と機材を積む</td></tr>
+<tr><td>RRT介入後に病棟で完結した</td><td>それが記録されているか</td><td>「ICU入室回避」として台帳化し、RRSの成果指標にする</td></tr>
+<tr><td>救急外来でICU待ちが発生している</td><td>待ち時間の長さではなく、その間の介入・モニタリング・再評価間隔</td><td>ICU側から出向く、または遠隔モニタリングを当てる</td></tr>
+<tr><td>術後患者が病棟で悪化している</td><td>術後という属性が起動基準に反映されているか</td><td>術後患者の遅延入室は死亡OR 2.44と最も不利。閾値を下げる根拠になる</td></tr>
+<tr><td>高齢・虚弱でICU適応が微妙</td><td>患者の意向が入院前に確認されているか</td><td>起動をケアのゴール議論の契機に位置づける（緩和も emergency critical care の一部）</td></tr>
+<tr><td>施設間搬送を要する</td><td>安定化してから送るか、急いで送るか</td><td>専門チームによる安定化に要した時間は転帰を悪化させなかった（小児データ）</td></tr>
+</tbody></table></div>
+<h3>10. 研究の機会</h3>
+<p>emergency critical care の概念は広範な研究機会を開く。emergency critical care の臨床スペクトラムが重症病態の連続体と並行することに沿って、この概念は集中治療研究をICUから重症病態のより早期の局面へと拡張する。</p>
+<p>著者はここで示唆に富む指摘をしている。<strong>研究介入の開始が遅かったこと（たとえばICU入室後にしか始めなかったこと）が、有効と推定されたいくつかの治療がランダム化比較試験で患者転帰の改善に転化しなかった理由の1つかもしれない</strong>。集中治療の大規模RCTがなぜ失敗し続けるのかという古典的な問い（Ospina-Tascón らの "doomed to fail?"）に対する、時間軸からの回答である。</p>
+<p>emergency critical care を提供する有効な戦略を同定するには、さらなる研究が必要である。ICU外の重症患者ケアには組織的な多様性が広く存在するため、one-size-fits-all のテンプレートは存在せず、異なる医療システムにおいて emergency critical care の概念を実装する複数の異なるモデルが存在する可能性が高い。</p>
+<h3>11. 結論と展望</h3>
+<p>emergency critical care とは、重症病態の発症に最も近い時刻と場所で、ICUの外で集中治療介入を提供するという概念である。病院前、施設間搬送中、救急外来、手術室、一般病棟で重症患者に集中治療介入を提供することによって、emergency critical care は重症化の発症からICU入室までの現在の管理の空白を埋める。</p>
+<p>科学的エビデンスは、emergency critical care 介入が患者安全を改善し、以下をもたらしうることを示唆する。</p>
+<ul><li>早期死亡の回避</li><li>軽症〜中等症の重症病態の反転</li><li>ICU入室の回避</li><li>臓器障害の重症度の減弱</li><li>ICU在室日数の短縮</li><li>重症患者の短期および長期死亡の減少</li></ul>
+<p>異なる医療システムで emergency critical care システムを実装する有効なモデルを同定するには、今後の研究が必要である。</p>
+<h3>12. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この総説を実装根拠として使うときの限界 <strong>エビデンスの質が現場ごとに大きく違う</strong>。病棟のRRSには3つのメタ解析と全国規模の実装研究があるのに対し、病院前の集中治療は外傷と心停止に偏り、しかも観察研究が主体である。救急外来のモデル比較に至ってはランダム化された比較がほぼ存在しない。「emergency critical care は有効である」という総括は、実際には強度の異なる4本の証拠を束ねた表現になっている。</p>
+</div>
+<ul><li><strong>スコーピングレビューの手続きが記述的にとどまる</strong>。データベースは Medline（Ovid）1本、検索式・スクリーニングのフロー・件数・除外理由が示されていない。PRISMA-ScR に沿った報告ではなく、著者の選択による引用である可能性を排除できない。したがって本論文は「網羅的な証拠の要約」ではなく「概念の提唱に証拠を添えたもの」として読むべきである。</li><li><strong>概念そのものの新規性は限定的</strong>。著者自身が認めるとおり、Safar（1974年）と ICU without walls（2002年）が実質的な内容をすでに述べている。本論文の貢献は用語の統合であって、新しい介入や新しいデータではない。</li><li><strong>中心的な主張の因果推論が弱い</strong>。「適切な集中治療が救急外来で提供されれば、ED滞在時間と転帰の負の関連は消える」という主張は、本論文の実務的な核心である。しかしこれを支える引用は観察研究であり、ED滞在が長くても転帰が良かった集団には、そもそも重症度が低い、あるいは治療反応性が良いという選択バイアスがかかっている可能性が高い。「介入したから遅れの害が消えた」のか「害が出ない患者だから遅れが許容された」のかは、この設計では分離できない。</li><li><strong>Fig.3 の効果の表は模式図であって測定値ではない</strong>。死亡リスクや費用のプラス1つ・2つ・3つという表示に、対応する数値も出典も付いていない。図の脚注は「本文のエビデンスを模式的に要約したもの」と述べるにとどまる。プレゼンで引用するときは、これがイラストレーションであることを明示しないと誤読を招く。</li><li><strong>害とコストがほぼ論じられていない</strong>。ICU外での気管挿管・NIV・カテコラミン投与には、経験の浅い術者による合併症、監視の薄い環境での増悪、アラート過多、そしてスタッフの引き抜きによる本体業務の希薄化という代償が伴う。系統的レビューが「チーム構成と転帰に関連なし」としているのは、裏を返せば「どう作れば良いか分からない」ということでもある。本論文はこの負の側面をほとんど扱っていない。</li><li><strong>病院前挿管の記述に相反データの重みづけがない</strong>。本文は「controversial data exist」と1文で触れた後、有益とする研究を4本並べる。実際には病院前挿管が外傷性脳損傷で死亡増加と関連したとする報告もあり、結論は術者の熟練度に強く依存する。この条件依存性は、日本の病院前体制（多くの地域で救急救命士の気管挿管が限定的）にそのまま持ち込めない。</li><li><strong>医療システムの違いが大きすぎる</strong>。ED-ICU、CCRU、リトリーバルサービスはいずれも、米国・オーストラリア・欧州の病床区分と支払い制度を前提に成立している。日本の特定集中治療室管理料・ハイケアユニット入院医療管理料の枠組みでは、同じ形の実装ができるとは限らない。著者自身も one-size-fits-all は無いと明言している。</li><li><strong>アウトカムの定義が揃っていない</strong>。ICU入室回避を成果として数える研究と、死亡を成果として数える研究が混在している。ICU入室回避は資源の節約であると同時に、必要な入室を遅らせた結果でもありうる。両者を区別する指標（回避後の予定外再増悪率など）が提示されていない。</li><li><strong>JCで議論したい問い</strong>：当院で emergency critical care を「新しい仕組み」として作るのか、それとも「既にある急変対応・RRS・バイタル自動収集を1つの概念で束ね直す」のか。後者なら明日から始められるが、成果を測る指標を先に決めないと、束ね直しただけで終わる。</li></ul>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症病態と集中治療の定義（概念分析）</td><td>Kayambankadzanja RK, et al. BMJ Open. 2022;12:e60972</td></tr>
+<tr><td>10</td><td>敗血症で治療までの時間と死亡（義務化された救急対応）</td><td>Seymour CW, et al. N Engl J Med. 2017;376:2235–44</td></tr>
+<tr><td>11</td><td>ICUとは何か（WFSICCM タスクフォース報告）</td><td>Marshall JC, et al. J Crit Care. 2017;37:270–6</td></tr>
+<tr><td>12</td><td>病棟からのICU移送の遅れと死亡・罹病の増加</td><td>Young MP, et al. J Gen Intern Med. 2003;18:77–83</td></tr>
+<tr><td>23</td><td>ICU移送の遅れと院内死亡（多施設）</td><td>Churpek MM, et al. J Hosp Med. 2016;11:757–62</td></tr>
+<tr><td>24</td><td>ICU遅延入室と死亡の系統的レビュー・メタ解析（OR 1.61）</td><td>Kiekkas P, et al. Biomed Res Int. 2022;2022:4083494</td></tr>
+<tr><td>27</td><td>悪化する病棟患者の迅速な集中治療入室が死亡に与える影響（操作変数法）</td><td>Harris S, et al. Intensive Care Med. 2018;44:606–15</td></tr>
+<tr><td>34</td><td>一般病棟の患者悪化の認識遅延はヒト由来のモニタリング失敗が主因</td><td>Van Galen LS, et al. PLoS ONE. 2016;11:e161393</td></tr>
+<tr><td>36</td><td>救急外来の重症患者における滞在時間と侵襲的処置の実施状況</td><td>Green RS, MacIntyre JK. Scand J Trauma Resusc Emerg Med. 2009;17:47</td></tr>
+<tr><td>39</td><td>集中治療医学はどこへ向かうのか（Safar の三徴）</td><td>Safar P. Crit Care Med. 1974;2:1–5</td></tr>
+<tr><td>41</td><td>壁のない集中治療</td><td>Hillman K. Curr Opin Crit Care. 2002;8:594–9</td></tr>
+<tr><td>42</td><td>境界のないICU</td><td>Ostermann M, Vincent JL. Crit Care. 2023;27:186</td></tr>
+<tr><td>43</td><td>WHA76 決議（救急・集中治療・手術医療の統合）</td><td>Global Acute Care Advocacy Authors. Intensive Care Med. 2023;49:1223–5</td></tr>
+<tr><td>45</td><td>必須救急・集中治療（EECC）の国際専門家合意（40プロセス・67要件）</td><td>Schell CO, et al. BMJ Glob Health. 2021;6:e6585</td></tr>
+<tr><td>51</td><td>Head Injury Retrieval Trial（30日死亡30%減・NNT 6）</td><td>Garner AA, et al. Emerg Med J. 2015;32:869–75</td></tr>
+<tr><td>53</td><td>病院前の医療管理は重症鈍的外傷の死亡を減らす（2703例）</td><td>Yeguiayan JM, et al. Crit Care. 2011;15:R34</td></tr>
+<tr><td>63</td><td>病院前 eCPR コンソーシアム（神経学的良好生存43%）</td><td>Bartos JA, et al. EClinicalMedicine. 2020;29–30:100632</td></tr>
+<tr><td>66</td><td>専門リトリーバルチームと英国の標準搬送の比較</td><td>Bellingan G, et al. Intensive Care Med. 2000;26:740–4</td></tr>
+<tr><td>68</td><td>専門化された集中治療搬送ユニットと短期死亡</td><td>Kim TH, et al. Prehosp Emerg Care. 2020;24:46–54</td></tr>
+<tr><td>79</td><td>専門リトリーバルチームと小児ICU転帰（イングランド・ウェールズ）</td><td>Ramnarayan P, et al. Lancet. 2010;376:698–704</td></tr>
+<tr><td>82</td><td>救急外来における集中治療提供モデルの整理（ICUボーダーへのケア）</td><td>Jayaprakash N, et al. Ann Emerg Med. 2020;76:709–16</td></tr>
+<tr><td>90</td><td>ED-ICU と生存・入院ICU入室の関連</td><td>Gunnerson KJ, et al. JAMA Netw Open. 2019;2:e197584</td></tr>
+<tr><td>96</td><td>心原性肺水腫への短時間NPPVはICU入室を防ぐ</td><td>Giacomini M, et al. Chest. 2003;123:2057–61</td></tr>
+<tr><td>98</td><td>ICU入室の遅れと敗血症発生・プロトコル遵守</td><td>Agustin M, et al. Crit Care Res Pract. 2017;2017:9616545</td></tr>
+<tr><td>103</td><td>ED-ICU の費用対効果</td><td>Bassin BS, et al. JAMA Netw Open. 2022;5:e2233649</td></tr>
+<tr><td>107</td><td>院内心停止に先行する NEWS と生存への影響</td><td>Roberts D, Djärv T. Am J Emerg Med. 2017;35:1601–6</td></tr>
+<tr><td>109</td><td>RRT のチーム構成と成人入院患者の転帰（系統的レビュー）</td><td>Daniele RM, et al. JBI Libr Syst Rev. 2011;9:1297–340</td></tr>
+<tr><td>110</td><td>MET 起動のトリガー（低酸素41%・低血圧28%ほか）</td><td>Jones D, et al. Crit Care. 2006;10:R30</td></tr>
+<tr><td>111</td><td>MET は現場で何をしているか（滞在35分・輸液40.6%ほか）</td><td>Silva R, et al. Scand J Trauma Resusc Emerg Med. 2016;24:33</td></tr>
+<tr><td>112</td><td>病棟での集中治療で血液疾患患者の3分の1がICU入室を回避</td><td>Vergnano B, et al. J Clin Med. 2023;12:6281</td></tr>
+<tr><td>113</td><td>MET コールはケアのゴール議論を引き起こす歩哨事象</td><td>Smith RL, et al. Crit Care Med. 2014;42:322–7</td></tr>
+<tr><td>114</td><td>壁のない集中治療（MET コール5.2→16.5、心停止1.6→0.8）</td><td>Etter R, et al. Swiss Med Wkly. 2014;144:w14027</td></tr>
+<tr><td>116</td><td>RRT と院内死亡（39.6→34.6/1000退院、週1.5人）</td><td>Jung B, et al. Intensive Care Med. 2016;42:494–504</td></tr>
+<tr><td>123</td><td>オランダ全国 RRS 導入の転帰</td><td>Ludikhuize J, et al. Crit Care Med. 2015;43:2544–51</td></tr>
+<tr><td>125</td><td>RRS の系統的レビュー・メタ解析</td><td>Maharaj R, et al. Crit Care. 2015;19:254</td></tr>
+<tr><td>127</td><td>RRT の遅い起動が転帰を悪化させる</td><td>Moreira AAS, et al. Invest Educ Enferm. 2018;36(2)</td></tr>
+<tr><td>128</td><td>ERC ガイドライン2021（RRS を院内 chain of survival の遠心路に）</td><td>Soar J, et al. Resuscitation. 2021;161:115–51</td></tr>
+<tr><td>129</td><td>集中治療の多施設RCTは失敗する運命か</td><td>Ospina-Tascón GA, et al. Crit Care Med. 2008;36:1311–22</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ul><li>重症病態は連続体であり、<mark class="hl">その始まりは常にICU入室より前、多くは入院より前にある</mark>。ICUという「場所」で集中治療を定義してきた運用が、時間依存性という病態の本質と矛盾している。</li><li>ICU入室の遅れは死亡を増やす（メタ解析でOR 1.61、術後患者ではOR 2.44）。しかし<mark class="hl">遅れの害は「その間に適切な集中治療が届いた場合」には観察されない</mark>。責めるべきは待ち時間ではなく、待っている間の介入密度である。</li><li><mark class="hl">明日から変える一手：RRS の指標を「起動件数」から「NEWS高値から起動までの中央値」と「起動前6時間のバイタル欠測率」に置き換え、バイタル自動収集の目的を省力化から求心路の感度向上へ書き換える</mark>。遅い起動はICU入室・在院日数・死亡のすべてを悪化させ、必須起動を敷いた成熟チームが最良の結果を出している。</li><li><mark class="hl">病棟・救急外来で完結した症例（ICU入室回避）を成果として台帳化する</mark>。イタリアの血液疾患病棟では3分の1がICU入室を回避できた。現行の指標では何にもカウントされないこの成果を数えない限り、emergency critical care の費用対効果は経営に示せない。</li><li>MET が現場に留まる時間は中央値35分（IQR 20–50）、行う介入は輸液40.6%・バッグマスク換気37.3%・静脈路確保29.8%。<mark class="hl">RRT は「呼ばれて5分で帰るチーム」ではない</mark>という前提で人員と機材を積む。</li><li>ただしこの総説は概念の提唱であって、<mark class="hl">どの実装モデルが日本の病床区分と診療報酬で成り立つかには答えていない</mark>。新しいユニットを作る話ではなく、今ある人と場所で介入とモニタリングを前倒しする話として読む。</li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
