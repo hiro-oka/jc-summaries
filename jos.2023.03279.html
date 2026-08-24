@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>がん関連脳梗塞 — 血栓機序・診断・予後・治療戦略（総説・JStroke2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="jos.2023.03279.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">がん関連脳梗塞 — 血栓機序・診断・予後・治療戦略（総説・JStroke2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Heo JH, Yun J, Kim KH, Jung JW, Yoo J, Kim YD, Nam HS. Cancer-associated stroke: thrombosis mechanism, diagnosis, outcome, and therapeutic strategies. J Stroke. 2024;26(2):164-178. DOI: 10.5853/jos.2023.03279</dd><dt>掲載誌</dt><dd>Journal of Stroke（2024-05-31）</dd><dt>原著</dt><dd><a href="https://doi.org/10.5853/jos.2023.03279" target="_blank" rel="noopener">doi.org/10.5853/jos.2023.03279</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Cancer-Associated Stroke: Thrombosis Mechanism, Diagnosis, Outcome, and Therapeutic Strategies</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>1. 「がん患者がICUで脳梗塞を起こした」ときに最初に立てる問い</strong></p>
+<ul><li>「がんが併存しているだけの脳梗塞」か「がんが原因の脳梗塞（cancer-associated stroke, CAS）」かを分けて考える。ここを分けないと抗血栓薬の選択がぶれる。</li><li>CASと呼べるのは原則 <strong>active cancer</strong> の患者。active cancer の定義は「6か月以内の新規診断」「6か月以内に化学療法または手術を要した」「再発・転移・切除不能」のいずれか。この定義を電子カルテの腫瘍内科記載から必ず確認する。</li><li>active cancer があっても、心房細動・症候性頸動脈狭窄・ラクナといった従来機序が説明できるならCASではない。まず従来機序を潰す（心電図モニタ・頸動脈エコー・大血管評価）。</li></ul>
+<p><strong>2. 原因不明の多発脳梗塞を見たときに疑うこと・測ること</strong></p>
+<ul><li>DWIで <strong>前方循環と後方循環にまたがる、両側性の多発小梗塞</strong> を見たら、感染性心内膜炎・心房細動・大動脈原性塞栓と並べて「非細菌性血栓性心内膜炎（NBTE）を伴うがん関連脳梗塞」を鑑別に上げる。1血管領域に収まる梗塞ではこのパターンにならない。</li><li>測るものは4つ。①<strong>D-dimer</strong>（CASでは著明高値。本総説の症例図では 3,581 ng/mL、NBTE合併例で 21,249 ng/mL）②<strong>心エコー、できれば経食道</strong>（弁の疣贅＝NBTE）③<strong>全身の転移検索</strong>（CT・PET。従来機序を除外した脳梗塞＋がんの69.2〜83.3%に転移がある）④血液培養（感染性心内膜炎との鑑別。NBTEは無菌性）。</li><li>D-dimerに「この値以上ならCAS」という確立した閾値は本総説では示されていない。単一のカットオフに頼らず、DWIパターン・転移・NBTE・従来機序の不在を合わせて総合判断する設計にする。</li><li>逆向きの推論も持っておく。CASを疑ったら転移検索を、NBTEを見つけたら転移検索を必ず走らせる（NBTE 20例は全例転移あり、転移のない患者では経食道エコーでNBTEは検出されなかった）。</li></ul>
+<p><strong>3. 血栓回収術（EVT）の現場で見るべきもの</strong></p>
+<ul><li>回収した血栓が <strong>白く、脆く、複数個に崩れる</strong> ならがんを疑う根拠になる。回収室でその場で写真を残し、病理へ回す指示を出しておく。</li><li>病理で「血小板が非常に多く赤血球が非常に少ない」ならCASはほぼ確実。当院で回収血栓の組織学的検討ルートがあるなら、がん患者では最初からルーチンに乗せる価値がある（HE染色でフィブリン／血小板比 ≥65% がAUC 0.84でCASを予測）。</li><li>転移がんではEVT後の院内死亡が高い（26% vs 14%）。適応を外す根拠にはならないが、術前の家族説明では「再開通しても予後は原疾患に規定される」ことを先に伝える。</li></ul>
+<p><strong>4. 抗血栓療法の選択（当院で今日決めるとしたら）</strong></p>
+<ul><li>現時点で「これが正解」と言える薬剤はない。2021年AHA/ASAガイドライン自身が「がんによる凝固亢進に起因する脳梗塞の最適レジメンはデータが乏しい」と明記している。</li><li>実務上は「LMWH（またはヘパリン持続・皮下）で急性期を凌ぐ」が経験的に最も広く行われている。ワルファリンよりD-dimerを下げ（3.88 vs 17.42 μg/mL）、再発も少なかった（3.4% vs 16.0%）という後ろ向きデータがある。</li><li>DOAC（特に直接Xa阻害薬）は、がん＋静脈血栓塞栓症を伴う潜因性脳梗塞ではヘパリンより30日再発が多かった（31% vs 4%）という報告があり、CASに一律に置き換えるのは早い。</li><li><strong>がんと心房細動が併存する場合は別問題</strong>。「がんは併存にすぎない」と判断できるならDOACが第一選択（AHA/ASA 2021、COR 2a・LOE B-NR）。一方「がん関連凝固亢進が主因」と判断するなら、抗血栓薬の選択はがん関連血栓症を抑える方向に振る。</li><li>皮下注のアドヒアランスは実際に壊れる。TEACH試験では enoxaparin 群10例中4例（40%）が注射の苦痛からアスピリンへ移行した。退院後の継続性を織り込んで薬剤を選ぶ。</li></ul>
+<p><strong>5. 予後の見通しを家族面談の言葉に落とす</strong></p>
+<ul><li>active cancer ＋脳梗塞の1年死亡は 71.6%、6か月死亡は 26.1〜60.1%。潜因性なら3か月死亡 56%。NBTE合併なら6か月死亡 80%・6か月脳梗塞再発 50%。</li><li>前向きコホートでは、active solid cancer ＋脳梗塞の患者の86%が追跡中に大血栓塞栓イベントまたは死亡に至り、90日時点の累積発生率は 52%（95%CI 37〜66%）。</li><li>これらの数字は「治療をやめる根拠」ではなく、<strong>ICU入室時点からACP・緩和ケア併診を並走させる根拠</strong>として使う。当院のICU意思決定支援・倫理の枠組み（多職種カンファ・ICテンプレート）に、がん患者の脳梗塞を明示的な起動条件として入れておくとよい。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：がん患者では脳梗塞リスクが高い（韓国NHISコホートで subdistribution HR 1.17）。虚血性脳卒中患者の約10人に1人ががんを併存する。がんによる凝固亢進が脳梗塞の最も多い機序であり、がん患者の脳梗塞は再発・死亡リスクが高い。</li><li><strong>Unknown</strong>：がん関連脳梗塞の再発予防に「どの抗血栓薬をどれだけの期間」使うべきかは決まっていない。LMWHの経験的使用は広く行われているが、機序に基づいた根拠がなく、比較試験もほぼ存在しない。</li><li><strong>What's new</strong>：血栓回収術で得られた新鮮血栓の組織学的解析という新しい窓から、がん関連脳梗塞の血栓が「血小板とトロンビンに富み、赤血球に乏しい」ことが実証された。この所見は、上流の抗凝固（ヘパリン・LMWH・ワルファリン・Xa阻害薬）ではなく、<strong>直接トロンビン阻害薬と抗血小板薬（特にアスピリン）を標的とする戦略</strong>を機序側から支持する。アスピリンががんの進行・転移・がん関連死を減らすという30年分の証拠と合わせると、この戦略は脳梗塞予防とがん治療の両面で利益をもたらしうる。ただし臨床試験は未実施である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで がん細胞はトロンビン産生と組織因子発現を介して血小板を活性化し、その副産物として血栓ができる。だから、がん関連脳梗塞の血栓は血小板とトロンビンに富み赤血球に乏しく、<strong>治療標的も「上流の凝固」ではなくトロンビンそのものと血小板であるべき</strong>、というのが本総説の中心命題である。</p>
+</div>
+<ul><li>がんが脳梗塞を起こす機序は4つ（腫瘍誘発性の凝固亢進、動脈への直接浸潤・圧迫、感染、放射線・化学療法の二次的影響）。このうち凝固亢進が最多で、これによる脳梗塞を cancer-associated stroke（CAS）と呼ぶ。</li><li>機序の核は「がん細胞は自分の増殖と転移のために血小板を活性化する」こと。血小板α顆粒から VEGF・TGF-β・FGF・PDGF・MMP が放出されて腫瘍増殖と血管新生が進み、腫瘍細胞誘発性血小板凝集（TCIPA）が腫瘍細胞をNK細胞と剪断応力から守って転移を助ける。血栓形成はこの過程に随伴して起こる。</li><li>トロンビンが中心にいる。がん細胞は直接トロンビンを産生し、さらに組織因子が外因系を起動してトロンビン産生を増幅する。トロンビンは血小板の最強の活性化因子であり、同時にフィブリン網を作る。</li><li>CASの臨床的特徴は6つ（複数血管領域にまたがる多発梗塞、著明なD-dimer高値、転移の存在、従来機序の不在、心エコーでの疣贅＝NBTE、肉眼的に白く顕微鏡的に血小板優位・赤血球乏少の血栓）。</li><li>予後は不良。any etiology で1か月死亡 13.0〜18.3%、6か月死亡 26.1〜60.1%、1年死亡 71.6%。脳梗塞再発は1か月 11.0%、6か月 22.4%。潜因性ではさらに悪く、NBTE合併では6か月死亡80%・再発50%。</li><li>抗血栓薬の比較研究は少数かつ小規模。LMWHはワルファリンよりD-dimerを下げるが、NOACとLMWHの比較（n=48）は差を示せず、NAVIGATE ESUSのがんサブグループ（n=543）でもリバーロキサバンはアスピリンに優らなかった（ただし大半が inactive cancer）。</li><li>著者の提案：短期的にトロンビンと血小板の両方を強く抑える戦略（直接トロンビン阻害薬±抗血小板薬、抗血小板薬としてはアスピリン）。出血リスクの個別評価が前提で、検証には臨床試験が必要。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>cancer-associated stroke（CAS、がん関連脳梗塞）</strong>：がんによる凝固亢進（hypercoagulability）が原因で起きた脳梗塞。「がん患者に起きた脳梗塞」全部ではなく、がんが原因であるものを指す。原則として active cancer の患者に限って用いる。 <strong>active cancer</strong>：①過去6か月以内の新規がん診断、②過去6か月以内に化学療法または手術を要した、③再発・転移・切除不能、のいずれか。VTE領域の CLOT試験（Lee AY, NEJM 2003）由来の定義がそのまま使われている。 <strong>TCIPA（tumor cell-induced platelet aggregation、腫瘍細胞誘発性血小板凝集）</strong>：腫瘍細胞が血小板を活性化し、活性化血小板が腫瘍細胞を取り囲んで凝集塊を作る現象。腫瘍細胞にとっては「鎧」であり、宿主にとっては血栓の種になる。 <strong>組織因子（tissue factor, TF）</strong>：外因系凝固の起点。第VIIa因子と結合して第X因子を活性化し、トロンビン産生に至る。がん細胞はこれを表面に発現している。 <strong>NBTE（nonbacterial thrombotic endocarditis、非細菌性血栓性心内膜炎）</strong>：弁・腱索・心内膜にできる無菌性の疣贅。イボ状で小さいのが典型。血小板とフィブリンの血栓からなる。感染性心内膜炎と違い血液培養は陰性で、抗菌薬では消えない。原因の大半はがん（結合組織病でも起こる）。 <strong>D-dimer</strong>：架橋フィブリンがプラスミンで分解されるときに生じる断片。産生には3つの酵素が要る — トロンビン（フィブリノゲン→フィブリン単量体）、第XIII因子（隣接単量体のDドメインとα鎖を架橋）、プラスミン（分解）。つまりD-dimerは「血管内で血栓ができ、かつ溶けている」ことの間接指標である。 <strong>ESUS（embolic stroke of undetermined source、塞栓源不明脳塞栓症）</strong>：塞栓性のパターンを持ちながら、心房細動・大血管狭窄・ラクナのいずれも同定できない脳梗塞。CASの多くはこのカテゴリに紛れ込む。 <strong>EVT（endovascular thrombectomy、血栓回収術）</strong>：主幹動脈閉塞に対するカテーテル治療。前方循環でも後方循環でも有効性が確立している。本総説の文脈では「新鮮血栓を体外に取り出して調べられる唯一の手段」という研究上の意味を持つ。 <strong>DOAC / NOAC</strong>：直接経口抗凝固薬。本総説は NOAC（non-vitamin K oral anticoagulant）の語を使う。ダビガトランは直接トロンビン阻害薬、リバーロキサバン・アピキサバン・エドキサバンは直接第Xa因子阻害薬（DiXaIs）。この「トロンビンを直接叩くか、上流のXaを叩くか」の区別が本総説の議論の核心になる。 <strong>LMWH</strong>：低分子ヘパリン（エノキサパリン、ダルテパリンなど）。がん関連血栓症では歴史的に標準とされてきた。皮下注。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>がんと脳卒中は、世界的に死亡と障害の最大の原因である。</p>
+<ul><li>米国では人口の約40%が生涯にがんを発症するリスクを持ち、そのうち50%超が65歳以上で発生する。</li><li>韓国のがん年間罹患率は約3.6%。</li><li>25歳時点からの脳卒中の生涯リスクは全世界で25%と推定される。</li><li>虚血性脳卒中患者の約10人に1人ががんを併存する。</li></ul>
+<p>がん治療の進歩に伴い、がん患者における脳卒中の発生はさらに増えると予想される。両者の有病率を考えれば併存は当然起こるが、著者が強調するのは「がんが脳卒中を<strong>直接引き起こしうる</strong>」という点である。韓国国民健康保険公団の National Sample Cohort データベースでは、がん患者は虚血性脳卒中のリスクが高く、subdistribution HR は 1.17 であった。</p>
+<p>がんが脳卒中に寄与する機序は次の4つ。</p>
+<div class="tw"><table>
+<thead><tr><th>機序</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>腫瘍誘発性の凝固亢進</td><td>がん患者の脳卒中で最も多い機序。本総説の主題</td></tr>
+<tr><td>動脈への直接浸潤・圧迫</td><td>腫瘍による血管の物理的な閉塞</td></tr>
+<tr><td>感染</td><td>免疫抑制下の感染に伴う血栓形成</td></tr>
+<tr><td>放射線療法・化学療法の二次的影響</td><td>治療関連の血管障害</td></tr>
+</tbody></table></div>
+<p>凝固亢進に起因する脳梗塞（＝CAS）の患者は再発と死亡のリスクが高いが、再発予防の戦略、とくに最適な抗血栓薬の選択については不確実性が残る。著者の論理は明快で、「がんにおける血栓形成の機序を理解すれば、最適な抗血栓治療が見えてくるはずだ」というものである。近年、脳動脈から回収された新鮮血栓の組織学的研究がこの機序に直接の手がかりを与えるようになった。</p>
+<p>本総説が扱う範囲は、①血栓形成の機序、②脳血栓の組織学的特徴、③臨床像、④予後、⑤抗血栓薬使用の現状、⑥再発予防の治療戦略に関する展望、の6点である。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブ総説（narrative review）。系統的な文献検索式・選択基準・バイアス評価の記載はなく、系統的レビューやメタ解析ではない。</li><li><strong>対象文献</strong>：機序に関する基礎・前臨床研究、血栓組織学の臨床研究、CASの臨床転帰に関する観察研究（Table 2 に12研究）、抗血栓薬の比較研究（Table 3 に7研究）、がんと心房細動を対象とした抗凝固の研究、およびアスピリンとがんに関する系統的レビュー・メタ解析。</li><li><strong>著者の立ち位置</strong>：延世大学の同一グループが自ら報告した血栓組織学研究（Park 2019, Yoo 2020/2021/2023, Heo 2022/2023 ほか）が中心的な証拠として使われている。総説というより「自グループの一連の知見を機序仮説へまとめ上げ、治療戦略を提案する」構造である。</li><li><strong>主要な図表</strong>：Figure 1（がんにおける血栓形成の機序図）、Figure 2（回収血栓の免疫組織化学）、Figure 3（回収血栓の肉眼像とDWI）、Table 1（CASの特徴）、Table 2（臨床転帰12研究）、Table 3（抗血栓薬比較7研究）。</li><li><strong>限界（総説自体の）</strong>：文献の選択が系統的でないこと、引用研究のほぼすべてが後ろ向き観察研究または小規模パイロットであること、そして最終的な治療提案（直接トロンビン阻害薬±抗血小板薬）が臨床試験による裏付けを一切持たないこと。著者自身がこれを明記している。</li></ul>
+<h3>4. がん関連脳梗塞における血栓形成の機序</h3>
+<p>本総説の中心命題は「血栓形成はがんの目的ではなく副産物である」という視点である。血小板は腫瘍の増殖と転移に不可欠な役割を果たしており、がんにおける血栓傾向の亢進はその血小板を介した過程の帰結として生じる。</p>
+<h4>4-1. 血小板α顆粒の活性化 — 腫瘍増殖と血管新生</h4>
+<p>腫瘍細胞は血小板のα顆粒を活性化し、以下を分泌させる。</p>
+<div class="tw"><table>
+<thead><tr><th>分泌物質</th><th>役割</th></tr></thead>
+<tbody>
+<tr><td>VEGF（血管内皮増殖因子）</td><td>腫瘍血管新生における最重要因子</td></tr>
+<tr><td>TGF-β（形質転換増殖因子β）</td><td>腫瘍増殖促進。加えてNK細胞活性を打ち消す</td></tr>
+<tr><td>FGF（線維芽細胞増殖因子）</td><td>血管新生に寄与</td></tr>
+<tr><td>PDGF（血小板由来増殖因子）</td><td>血管新生に寄与</td></tr>
+<tr><td>MMP（マトリックスメタロプロテアーゼ）</td><td>細胞外マトリックスのリモデリング。特にMMP-9が血管新生と腫瘍浸潤に重要</td></tr>
+</tbody></table></div>
+<p>腫瘍血管新生は栄養と酸素を供給するだけでなく、腫瘍細胞が血流に入り込む経路を作る。つまり転移の前提条件でもある。血管新生と腫瘍浸潤には細胞外マトリックスのリモデリングが必要で、そこでMMP-9が働く。</p>
+<h4>4-2. TCIPA — 腫瘍細胞の「鎧」</h4>
+<p>血小板と腫瘍細胞の相互作用は、腫瘍細胞が血流中で生き延びるために必須である。活性化血小板は腫瘍細胞と凝集塊を形成し、これを TCIPA と呼ぶ。</p>
+<p>接着の分子的な仕組みは2種類の橋渡しからなる。</p>
+<div class="tw"><table>
+<thead><tr><th>接着の種類</th><th>受容体</th><th>橋渡し分子</th></tr></thead>
+<tbody>
+<tr><td>血小板–血小板</td><td>GPIIb/IIIa 同士</td><td>フィブリノゲン</td></tr>
+<tr><td>腫瘍細胞–血小板</td><td>血小板 GPIIb/IIIa と腫瘍細胞インテグリン αvβ3</td><td>フィブロネクチン</td></tr>
+</tbody></table></div>
+<p>TCIPAで腫瘍細胞を取り囲んだ血小板は、①NK細胞による細胞傷害からの保護、②循環中の剪断応力による損傷からの保護、という2つの働きをする。さらに血小板はTGF-βを放出してNK細胞の活性そのものを抑制する。結果として腫瘍細胞は血流中で生き延び、広がる。この過程に随伴して血小板を介した血栓形成が起こる。</p>
+<h4>4-3. 内皮への接着 — なぜ弁に疣贅ができるのか</h4>
+<p>血小板は腫瘍細胞の内皮への接着・停止・血管外遊出も助ける。</p>
+<ol><li>血小板上に発現する <strong>P-セレクチン</strong> を介して、TCIPAが血管内皮上をローリングし弱く接着する。</li><li>続いて血小板の <strong>GPIb-IX-V受容体複合体</strong> がTCIPAを内皮上に強固に停止させる。</li><li>動脈血流のような<strong>高剪断応力</strong>の環境では、血小板 GPIbα が <strong>von Willebrand因子</strong> と相互作用して停止を仲介する。</li></ol>
+<p>著者はこの3番目の点をNBTEの説明に使っている。心臓弁は血流が非常に速い（＝高剪断）ため、GPIbα–vWF依存の接着機構が働きやすく、そこに血小板–フィブリン血栓、すなわち疣贅が形成される、という論理である。NBTEが「がんに特有の心内膜病変」ではなく「がんの血栓機序が最も現れやすい場所」として位置づけられる。</p>
+<h4>4-4. トロンビン — 最上流にして最強のプレイヤー</h4>
+<p>腫瘍細胞による血小板活性化の中心にトロンビンがある。</p>
+<ul><li>腫瘍細胞は<strong>直接トロンビンを産生する</strong>。</li><li>さらに腫瘍細胞表面の<strong>組織因子</strong>が第VIIa因子と結合して第X因子を活性化し、外因系経路を起動してトロンビン産生を増幅する。</li><li>トロンビンは凝固と血栓形成において最も強力な因子のひとつであり、血小板の最強の活性化因子であると同時に、可溶性フィブリノゲンを不溶性の架橋フィブリンに変換して血栓形成と収縮を進める。</li><li>トロンビンは第V・VIII・XI・XII因子も活性化し、凝固反応を増幅してトロンビン産生を永続させる（正のフィードバック）。</li></ul>
+<p>つまり、がんではトロンビン関連の血小板活性化が最大化される。腫瘍細胞は自らの増殖と生存のためにトロンビンを産生して血小板を活性化しているのであり、血栓はその代償である。マウスモデルでは特異的トロンビン阻害薬 <strong>ヒルジン</strong> が腫瘍増殖と転移を抑制したことが示されている。ただしこの過程には局所的、時に広範な血管内血栓形成が伴う。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. がんにおける血栓形成の機序。図の最上段中央に腫瘍細胞が置かれ、そこから右へ矢印が伸びて Tissue factor に至り、Tissue factor から曲がった矢印がその下の Thrombin へ戻る。腫瘍細胞からは直接下向きの矢印も Thrombin へ伸びており、「がん細胞は直接にも、組織因子経由でも、トロンビンを作る」という二重経路が一目で分かる構図になっている。Thrombin から左上へ Cross-linked fibrin formation（赤字）の矢印が出て、左端の Thrombus formation（太字）へ向かう。Thrombin から下向きの太い青矢印が、中央の大きな活性化血小板（樹状に突起を伸ばした水色の細胞）へ注ぎ、血小板膜上の PAR-1 受容体に結合する形で描かれる。血小板の中心には Platelet activation の赤字。活性化血小板の右側からは小さな粒が飛び出し、VEGF, FGF, PDGF／MMP, u-PA の2行のラベルが付き、その先に太い青矢印で Tumor growth（太字）へつながる。同じ血小板から TGF-β の四角いラベルが下へ伸び、青い阻害線（T字）で右下の NK cell の箱を抑え込む。右下には血管断面の絵があり、血管壁に沿って血小板に取り囲まれた腫瘍細胞が接着している様子が描かれ、そこから NK cell と Shear stress の2つの箱に向けて赤い矢印が跳ね返される（＝守られている）表現になっている。その先に太い青矢印で Metastasis（太字）へ至り、下部に Tumor cell-induced platelet aggregation のラベル。左下には灰色の枠で囲まれた拡大図があり、上に血小板、下に血小板と腫瘍細胞（ピンク色）が並び、Platelet-platelet adhesion は αIIbβ3 同士が fibrinogen の緑の橋で、Tumor-platelet adhesion は血小板の αIIbβ3 と腫瘍細胞の αvβ3 が fibrinectin（原図の綴りのまま）の黄色の橋でつながる形で描かれる。この枠から左上へ黒矢印が出て Platelet aggregation（赤字）を経て Thrombus formation に至り、枠の右上からは中央の活性化血小板へ黒矢印が入る。全体として「腫瘍細胞→トロンビン→血小板活性化」が幹であり、そこから右へ分岐すると腫瘍増殖と転移、左へ分岐すると血栓形成、という一本の幹と二本の枝の構造になっている。略語は VEGF＝血管内皮増殖因子、FGF＝線維芽細胞増殖因子、PDGF＝血小板由来増殖因子、MMP＝マトリックスメタロプロテアーゼ、u-PA＝ウロキナーゼ型プラスミノゲンアクチベータ、PAR-1＝プロテアーゼ活性化受容体1。原図・無改変。</p>
+</div>
+<h3>5. がん関連脳梗塞の血栓組織学</h3>
+<p>血栓は血栓形成の終着点であり、その組成は背景にある血栓形成機序と脳卒中の病因をある程度反映する。EVTの普及によって脳動脈の新鮮血栓を回収し組織学的に解析することが可能になった、というのが本章の出発点である。</p>
+<h4>5-1. 主要な組織学的知見</h4>
+<div class="tw"><table>
+<thead><tr><th>研究（引用番号）</th><th>対象・方法</th><th>主要所見</th></tr></thead>
+<tbody>
+<tr><td>Park H, et al. Ann Neurol 2019（32）</td><td>active cancer／inactive cancer／がんなし の3群で血栓組成を比較</td><td>active cancer 群は血小板分画が高く赤血球分画が低い。病因別では NBTE と「active cancer＋潜因性」が高血小板・低赤血球、従来病因は高赤血球・低血小板</td></tr>
+<tr><td>Fu CH, et al. Stroke 2020（33）</td><td>回収血栓のHE染色</td><td>active cancer 合併脳梗塞でも血小板優位の特徴を確認。<strong>フィブリン／血小板比 ≥65% がCASを正確に予測、AUC 0.84</strong></td></tr>
+<tr><td>Yoo J, et al. Stroke 2023（34）</td><td>CAS群と非がん群を傾向スコアでマッチさせ凝固因子発現を比較</td><td>CAS群で血小板分画が高く赤血球分画が低い。凝固因子ではトロンビンと組織因子が有意に高い。がん群ではトロンビンと血小板の間に正の相関</td></tr>
+<tr><td>Heo J, et al. J Stroke 2022（37）／Stroke 2023（38）</td><td>免疫組織染色した血小板スライドの機械学習モデル、多施設で開発・検証</td><td>CASの診断でAUC <strong>0.946〜0.986</strong>。さらに潜在がん（occult cancer）の予測も可能で、確率は <strong>88.5〜99.2%</strong></td></tr>
+</tbody></table></div>
+<p>これらを総合すると、CASの血栓は「血小板とトロンビンに富み、赤血球に乏しい」という一貫した像を示す。これは腫瘍細胞に特異的なトロンビンと血小板の相互作用という実験的知見を、ヒトの脳動脈血栓で確認したことになる。</p>
+<h4>5-2. 診断への応用と限界</h4>
+<ul><li><strong>肉眼所見が使える</strong>：CASの血栓は目に見えて白い。血管撮影室で血栓を回収したその場で「がんが背景にあるのではないか」と疑える。</li><li><strong>HE染色の限界</strong>：HE染色では血小板とフィブリンを正確に区別できないことが多く、しかも従来病因の血栓にもかなりの割合のフィブリンが含まれる。したがってフィブリン／血小板比 ≥65% という指標は便利だが特異度に構造的な弱点がある。</li><li><strong>免疫組織化学のほうが精度が高い</strong>：CD42b（血小板）、glycophorin A（赤血球）、フィブリノゲン（フィブリン）、抗トロンビン抗体（トロンビン）を用いた免疫染色が、より正確な情報をもたらす。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 免疫組織化学の代表的画像。上段（A）ががん関連脳梗塞の患者から回収された血栓、下段（B）ががんのない心房細動患者の血栓で、左から順に Platelet（血小板）、Erythrocyte（赤血球）、Fibrin（フィブリン）、Thrombin（トロンビン）の4列が並ぶ。上段Aの血栓はY字型ないし枝分かれした不整な形をしており、1列目の Platelet で全体が濃い褐色に強く染まり、4列目の Thrombin でも同様に濃く染まる。対照的に2列目の Erythrocyte はほとんど無色に近く、点状のわずかな褐色斑が散在するだけで、3列目の Fibrin は淡い褐色にとどまる。下段Bの血栓は3つの塊が横に連なった俵状の形で、1列目 Platelet は淡く、2列目 Erythrocyte と3列目 Fibrin が中等度から濃い褐色に染まり、4列目 Thrombin はほとんど染まらない。つまり左右で染まり方が反転して見えるのが要点で、「がんでは血小板とトロンビンが濃く、赤血球が薄い／心房細動ではその逆」という対比が一目で読み取れる。一次抗体は血小板が anti-CD42b、赤血球が anti-glycophorin A、フィブリンが anti-fibrinogen、トロンビンが anti-thrombin。陽性シグナルは 3,3'-ジアミノベンジジンで発色させ褐色で示されている。原図・無改変。</p>
+</div>
+<h3>6. がん関連脳梗塞の診断</h3>
+<h4>6-1. 誰をCASと呼ぶか</h4>
+<p>脳卒中患者ががんと診断されることは珍しくない。しかしCASという診断は原則として <strong>脳卒中＋active cancer</strong> の患者に適用される。active cancerの定義は前述のとおり（6か月以内の新規診断／6か月以内の化学療法または手術／再発・転移・切除不能）。</p>
+<p>ただし著者は重要な留保をつける。active cancer があることは、がんが実際に脳卒中の原因であることを必ずしも意味しない。がんが偶発的所見にすぎない場合もある。CAS患者はしばしば抗凝固療法を受け、かつ再発リスクが高いため、「がんに帰因する脳卒中」の正確な診断が決定的に重要である、というのが著者の立場である。</p>
+<h4>6-2. Table 1. がん関連脳梗塞の特徴的所見（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>所見</th></tr></thead>
+<tbody>
+<tr><td>拡散強調画像（DWI）</td><td>複数の動脈支配領域にまたがる多発性虚血病変</td></tr>
+<tr><td>血液検査</td><td>血中D-dimerの著明高値</td></tr>
+<tr><td>がんの病期</td><td>転移あり</td></tr>
+<tr><td>脳卒中の病因</td><td>従来の脳卒中病因が存在しない</td></tr>
+<tr><td>心エコー</td><td>心臓弁の疣贅（非細菌性血栓性心内膜炎）</td></tr>
+<tr><td>血栓の病理</td><td>肉眼：白色／顕微鏡：血小板に富み赤血球に乏しい</td></tr>
+</tbody></table></div>
+<h4>6-3. 画像所見 — 「3血管領域にまたがる多発梗塞」の意味</h4>
+<p>EVTで回収した血栓は容易に断片化する傾向がある（Figure 3A）。血栓塞栓イベントは凝固亢進状態のもと高血流の状態で起こるため、DWIで多発梗塞となる。これらの梗塞は<strong>両側性に、前方循環と後方循環の両方に</strong>認められることが多い（Figure 3B）。</p>
+<p>ここが臨床的な鑑別点になる。単一血管支配に収まる梗塞であれば、その血管の病変（大血管アテローム、ラクナ）で説明できる。しかし複数の血管領域、まして前方と後方の両方にまたがる多発梗塞は、「上流に共通の塞栓源がある」か「血液そのものが固まりやすい」かのいずれかを意味する。前者を潰した後に残るのが後者であり、がんの凝固亢進はその代表である。</p>
+<h4>6-4. D-dimer — なぜ上がるのか、どこまで診断に使えるか</h4>
+<p>D-dimerはCASで著明に上昇する。D-dimerは架橋フィブリンが線溶によって分解される過程で産生され、血管内の血栓形成と線溶の間接的マーカーとして働く。産生には3つの酵素が関与する。</p>
+<div class="tw"><table>
+<thead><tr><th>酵素</th><th>働き</th></tr></thead>
+<tbody>
+<tr><td>トロンビン</td><td>可溶性フィブリノゲンをフィブリン単量体に変換し、単量体がフィブリン重合体を形成する</td></tr>
+<tr><td>第XIII因子</td><td>隣接するフィブリン単量体のDドメイン同士と、対向するα鎖を架橋して、脆弱なフィブリン網を補強する</td></tr>
+<tr><td>プラスミン</td><td>架橋されたフィブリン網を分解し、D-dimerとフィブリン分解産物を生じる。プラスミンはプラスミノゲンから組織型・ウロキナーゼ型プラスミノゲンアクチベータによって変換される</td></tr>
+</tbody></table></div>
+<p>プラスミノゲンアクチベータは血栓形成を含む損傷に応じて内皮細胞から局所的に放出される。D-dimerは静脈血栓症をはじめ多様な病態で上昇しうるが、がんでは腫瘍細胞自身がトロンビンとウロキナーゼ型プラスミノゲンアクチベータを産生するため、とりわけ高値になる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>D-dimerの読み方に関する注意 本総説には <mark class="hl">「この値以上ならCAS」と断定できる普遍的なD-dimerのカットオフ値は示されていない</mark>。示されているのは症例レベルの数値（転移性胃がんで 3,581 ng/mL、卵巣がん＋NBTEで 21,249 ng/mL）と、治療反応の指標としての値（エノキサパリン群 3.88 μg/mL 対 ワルファリン群 17.42 μg/mL）である。<mark class="hl">D-dimer単独でCASを診断しようとせず、DWIパターン・転移の有無・NBTE・従来機序の不在と組み合わせて判断する</mark>。</p>
+</div>
+<h4>6-5. 転移の存在 — 双方向の推論</h4>
+<p>がん関連血栓症は転移と密接に関連している可能性がある。腫瘍細胞誘発性の血小板活性化とその結果としての血管内血栓形成は、典型的には転移の過程で起こるからである。</p>
+<p>実際、脳卒中＋がんの患者から従来の脳卒中病因を持つ者を除外すると、<strong>69.2〜83.3%</strong> に転移の所見が認められる。したがって、</p>
+<ul><li>転移の存在は、CASを疑う根拠になる。</li><li>逆に、CASが疑われる患者では転移の評価を行うべきである。</li></ul>
+<p>この双方向性が実務上は重要で、「脳梗塞を見てがんを探す」「がんを見て脳梗塞の機序を疑う」の両方向のスイッチが必要になる。</p>
+<h4>6-6. NBTE — 最も強い指標</h4>
+<p>心エコーで心臓の疣贅（NBTE）が検出された場合、とくに従来の脳卒中病因がない状況では、CASである可能性が極めて高い。</p>
+<ul><li>NBTEは弁・腱索・心内膜上の無菌性の疣贅で、典型的にはイボ状（wart-like）で小さい。</li><li>がんがNBTEの主たる原因であるが、結合組織病でも生じうる。</li><li>NBTE 65例の剖検研究では、<strong>51例（78.5%）にがんが併存</strong>していた。</li><li>病理学的には血小板–フィブリン血栓であり、転移過程における腫瘍細胞と血小板の循環内相互作用の結果である可能性がある。</li><li>CAS患者を対象とした先行研究では、<strong>NBTEを有した20例は全例に転移があり、転移のない患者では経食道心エコーでNBTEが検出されなかった</strong>。</li></ul>
+<p>つまりNBTEと転移はほぼ表裏一体で現れる。</p>
+<h4>6-7. EVT時の血栓所見</h4>
+<p>EVTを受け血栓が得られた患者では、血栓が主に白色である場合、とくにactive cancerが存在する場合にCASを疑う。CASは血栓の組織学的検討によって確定でき、典型的には高い血小板分画と低い赤血球分画を示す。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. がん関連脳梗塞患者の代表的な血栓と拡散強調画像。左のパネルAは、転移性胃がん患者で血栓回収術中に回収された血栓を回収皿の上に置いた写真である。暗い灰色の皿の底に、大小さまざまな真っ白い塊が十数個、まとまらずに散らばって写っている。ひとつの大きな血栓ではなく細かく砕けた破片の集合であることが視覚的に分かり、中央付近の1片にだけ赤みを帯びた細い尾が付いている以外は、赤血球を思わせる赤色成分がほとんど見当たらない。これが「白色血栓」「容易に断片化する」という記述の実物である。この患者のD-dimerは 3,581 ng/mL。右のパネルBは、卵巣がんと非細菌性血栓性心内膜炎を有する患者の拡散強調画像で、上下2段・左右5列の計10スライスが並ぶ。左端の2枚は後頭蓋窩レベルで、小脳半球に点状の高信号が左右にみられる。中央の4枚は基底核から側脳室体部レベルで、視床・被殻付近の白い点と、後頭・頭頂皮質下の高信号が両側に散在する。右端の4枚は側脳室体部から半卵円中心レベルで、前頭・頭頂の皮質下白質に米粒大の高信号が多数、やはり左右両側に散らばる。1つの動脈支配に収まる楔状の梗塞ではなく、前方循環と後方循環、左右両半球にまたがって小さな高信号が撒かれた分布であり、「複数血管領域にまたがる多発梗塞」というCASのパターンがそのまま画像になっている。この患者のD-dimerは 21,249 ng/mL。原図・無改変。</p>
+</div>
+<h4>6-8. 診断の考え方（判断の流れを表に起こす）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>がん患者に脳梗塞が発症した</td><td>active cancer の定義を満たすか（6か月以内の診断／化学療法・手術、再発・転移・切除不能）</td><td>満たさなければCASの枠組みは適用しない</td></tr>
+<tr><td>active cancer がある</td><td>従来の脳卒中病因（心房細動、大血管アテローム、ラクナ、症候性頸動脈狭窄）があるか</td><td>従来病因があれば、がんは併存と判断してその病因の標準治療へ</td></tr>
+<tr><td>従来病因が見つからない（潜因性・ESUS）</td><td>DWIが複数血管領域の両側性多発梗塞か／D-dimerが著明高値か</td><td>いずれも該当すればCASを強く疑う</td></tr>
+<tr><td>CASを疑った</td><td>心エコー（可能なら経食道）で疣贅の有無、血液培養</td><td>疣贅ありかつ培養陰性ならNBTE。CASはほぼ確定的で、転移検索を必ず行う</td></tr>
+<tr><td>EVTを行った</td><td>回収血栓の肉眼色調（白色か）、断片化の程度</td><td>白色・断片化なら病理へ。血小板高分画・赤血球低分画でCAS確定</td></tr>
+<tr><td>NBTEを検出した</td><td>転移の有無</td><td>転移検索。予後は極めて不良（6か月死亡80%）でACPを並走させる</td></tr>
+</tbody></table></div>
+<h3>7. がん関連脳梗塞の予後</h3>
+<p>CAS患者は死亡と脳梗塞再発のリスクが高い。Table 2 に集約された12研究の要点を、まず本文の統合値で示す。</p>
+<h4>7-1. 本文で統合された数値</h4>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>アウトカム</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>active cancer ＋あらゆる病因の脳梗塞</td><td>1か月死亡</td><td>13.0〜18.3%</td></tr>
+<tr><td></td><td>6か月死亡</td><td>26.1〜60.1%</td></tr>
+<tr><td></td><td>1年死亡</td><td>71.6%</td></tr>
+<tr><td></td><td>1か月の脳梗塞再発</td><td>11.0%</td></tr>
+<tr><td></td><td>6か月の脳梗塞再発</td><td>22.4%</td></tr>
+<tr><td>active cancer ＋潜因性病因</td><td>1か月死亡</td><td>12.4%</td></tr>
+<tr><td></td><td>3か月死亡</td><td>56%</td></tr>
+<tr><td></td><td>6か月死亡</td><td>54.2%</td></tr>
+<tr><td></td><td>1か月の脳梗塞再発</td><td>9.9%</td></tr>
+<tr><td></td><td>6か月の脳梗塞再発</td><td>25%</td></tr>
+<tr><td>NBTE合併</td><td>6か月死亡</td><td>80%</td></tr>
+<tr><td></td><td>6か月の脳梗塞再発</td><td>50%</td></tr>
+</tbody></table></div>
+<h4>7-2. Table 2. がん関連脳梗塞の臨床転帰（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>対象がん</th><th>対象脳卒中</th><th>デザイン</th><th>症例数</th><th>追跡</th><th>アウトカム</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Navi 2014</td><td>active cancer（全身転移69%）</td><td>あらゆる病因（心原性22%、大血管15%、小血管8%、その他5%、不明51%、NBTE 4.3%）</td><td>後ろ向き観察</td><td>263</td><td>生存期間中央値84日（IQR 24〜419日）</td><td>血栓塞栓再発／脳梗塞／DVT／肺塞栓／心筋梗塞／全身塞栓／TIA／症候性頭蓋内出血／大出血</td><td>34%／15.7%／17.4%／7.4%／5.7%／4.3%／0.4%／3%／4%</td></tr>
+<tr><td>Lee 2017</td><td>active cancer（全身転移65.7%）</td><td>あらゆる病因</td><td>後ろ向き観察</td><td>268</td><td>1年</td><td>死亡率（1か月／3か月／6か月／1年）</td><td>83.6%（総括値）、18.3%／44.4%／60.1%／71.6%</td></tr>
+<tr><td>Nam 2017（52）</td><td>active な固形がん（造血器腫瘍除く）</td><td>あらゆる病因</td><td>後ろ向き観察</td><td>210</td><td>30日</td><td>死亡</td><td>13%</td></tr>
+<tr><td>Nam 2017（43）</td><td>active な固形がん（造血器腫瘍除く）</td><td>潜因性</td><td>後ろ向き観察</td><td>48</td><td>90日</td><td>3か月mRS&gt;2／90日死亡／心血管脳血管再発／出血／早期神経学的増悪（72時間以内に運動1点以上またはNIHSS合計2点以上）／新規領域病変</td><td>71%／56%／50%／38%／42%／58%</td></tr>
+<tr><td>Fujinami 2018</td><td>active cancer（30日以内死亡を除外）</td><td>あらゆる病因</td><td>後ろ向き観察</td><td>110</td><td>30日</td><td>脳梗塞再発</td><td>11%</td></tr>
+<tr><td>Yoo 2019</td><td>あらゆるがん（造血器腫瘍除く）</td><td>あらゆる病因</td><td>後ろ向き観察</td><td>486（active 245、転移140）</td><td>6か月</td><td>死亡（転移／active非転移／非active）</td><td>26.1%（67.1%／11.4%／7.2%）</td></tr>
+<tr><td>Yoo 2020</td><td>active cancer（造血器腫瘍除く）</td><td>あらゆる病因（NBTE 8.2%、潜因性39.2%、従来52.7%）</td><td>後ろ向き観察</td><td>245</td><td>6か月</td><td>死亡（NBTE／潜因性／従来）／脳梗塞再発（NBTE／潜因性／従来）</td><td>44.9%（80%／54.2%／32.6%）／22.4%（50%／25%／16.3%）</td></tr>
+<tr><td>Yoo 2021</td><td>active cancer</td><td>再灌流療法を受けたあらゆる病因</td><td>後ろ向き観察</td><td>62</td><td>6か月</td><td>死亡（潜因性／病因確定）／3か月mRS&gt;2（潜因性／病因確定）</td><td>46.6%（85.7%／24.3%）／63.6%（90.5%／47.1%）</td></tr>
+<tr><td>Garg 2022</td><td>あらゆる悪性腫瘍</td><td>あらゆる病因</td><td>後ろ向き観察</td><td>50,553</td><td>1年</td><td>脳梗塞再発</td><td>HR 1.18（95%CI 1.11〜1.25）</td></tr>
+<tr><td>Nakajima 2022</td><td>active cancer</td><td>潜因性</td><td>後ろ向き観察</td><td>282</td><td>30日</td><td>死亡／脳梗塞再発／機能予後不良（mRS&gt;3）</td><td>12.4%／9.9%／47.9%</td></tr>
+<tr><td>Navi 2022</td><td>active な固形がん</td><td>あらゆる病因（心原性36%、大血管10%、小血管0%、その他6%、不明48%）</td><td>前向き観察</td><td>50</td><td>中央値48日（IQR 18〜312）、平均278日（SD 367）</td><td>大血栓塞栓イベントまたは死亡／脳梗塞／心筋梗塞／全身塞栓／TIA／静脈血栓塞栓症／多発血栓塞栓／死亡／大出血</td><td>86%／16%／14%／6%／4%／28%／18%／60%／34%</td></tr>
+<tr><td>Navi 2022（対照1）</td><td>がんなし</td><td>あらゆる病因（心原性16%、大血管12%、小血管22%、その他8%、不明42%）</td><td>前向き観察</td><td>50</td><td>中央値636日（IQR 63〜1,007）、平均721日（SD 505）</td><td>大血栓塞栓イベント／死亡</td><td>32%／0%</td></tr>
+<tr><td>Navi 2022（対照2）</td><td>active cancer</td><td>脳卒中なし</td><td>前向き観察</td><td>50</td><td>中央値458日（IQR 154〜809）、平均600日（SD 396）</td><td>大血栓塞栓イベント／脳梗塞／死亡</td><td>30%／2%／18%</td></tr>
+<tr><td>Verschoof 2022</td><td>active cancer</td><td>血栓回収術を受けたあらゆる病因</td><td>後ろ向き観察（MR CLEAN レジストリ サブ解析）</td><td>124</td><td>3か月</td><td>mRS 0〜2／3か月死亡／院内死亡／症候性出血／脳梗塞再発／頭蓋外出血／肺炎／心筋虚血</td><td>22.6%／52.2%／25.2%／6.5%／4%／3.2%／8.9%／1.6%</td></tr>
+<tr><td>Aboul-Nour 2023</td><td>転移がん 対 がんなし</td><td>血栓回収術を受けたあらゆる病因</td><td>後ろ向き</td><td>転移がん933／がんなし38,166</td><td>記載なし</td><td>院内死亡／自宅退院</td><td>26% 対 14%（P&lt;0.001）／36% 対 42%（P=0.05）</td></tr>
+</tbody></table></div>
+<p>（略語：CE＝心原性塞栓、LAA＝大動脈アテローム硬化、SAD＝小血管病、UD＝病因不明、NBTE＝非細菌性血栓性心内膜炎、IQR＝四分位範囲、TIA＝一過性脳虚血発作、ICH＝頭蓋内出血、END＝早期神経学的増悪、NIHSS＝米国国立衛生研究所脳卒中スケール、mRS＝修正Rankinスケール、SD＝標準偏差）</p>
+<h4>7-3. 再灌流療法を受けた患者の転帰</h4>
+<p>がんと脳卒中を持つ患者はしばしば再灌流療法を受ける。</p>
+<ul><li><strong>MR CLEAN サブ解析</strong>（オランダの急性虚血性脳卒中に対する血管内治療の多施設無作為化試験のレジストリ）：EVTを受けたあらゆる病因の患者で、3か月追跡での死亡率 52.2%、脳梗塞再発 4%。</li><li><strong>米国 National Readmission Database</strong>（主幹動脈閉塞）：EVT後の院内死亡は転移がん患者でがんのない患者より有意に高かった（<strong>26% 対 14%、P&lt;0.001</strong>）。</li><li><strong>潜因性ではさらに悪い</strong>（Yoo 2021）：再灌流療法後の6か月死亡率は、潜因性病因のほうが他の病因より有意に高く（<strong>85.7% 対 24.3%、P&lt;0.001</strong>）、3か月時点の機能的依存または死亡も潜因性で多かった（<strong>90.5% 対 47.1%、P=0.003</strong>）。</li></ul>
+<h4>7-4. 前向きコホート（Navi 2022）が示すもの</h4>
+<p>active な固形がんと虚血性脳卒中を持つ患者50例を前向きに追跡した。追跡期間中央値48日（平均278日）で、<strong>50例中42例（86%）が大血栓塞栓イベントまたは死亡に至った</strong>。</p>
+<p>累積発生率は以下のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>90日</th><th>180日</th><th>360日</th></tr></thead>
+<tbody>
+<tr><td>大血栓塞栓イベントまたは死亡</td><td>52%（95%CI 37〜66%）</td><td>62%（95%CI 47〜75%）</td><td>72%（95%CI 58〜84%）</td></tr>
+<tr><td>脳梗塞再発</td><td>18%（95%CI 9〜31%）</td><td>20%（95%CI 10〜34%）</td><td>20%（95%CI 10〜34%）</td></tr>
+</tbody></table></div>
+<p>対照群との比較が示唆に富む。active cancer はあるが脳卒中のない50例では大血栓塞栓症30%（脳梗塞2%を含む）、死亡18%。脳卒中はあるががんのない50例では大血栓塞栓症32%、死亡0%。つまり「がんだけ」でも「脳卒中だけ」でもなく、<strong>両方が揃ったときに転帰が飛躍的に悪化する</strong>。</p>
+<h4>7-5. 予後のまとめ</h4>
+<p>全体として、脳卒中＋active cancer の患者は、がんのない脳卒中患者より死亡率と脳梗塞再発率が高い。active cancer ＋潜因性の脳卒中患者はCASである可能性が高く、そうした患者ほど転帰が悪い。心エコーでNBTEが検出される場合は予後が不良で、これはしばしばTCIPAとそれに伴う転移の存在を示している。</p>
+<h3>8. がん治療における抗血小板薬</h3>
+<p>本章は一見脱線に見えるが、著者の治療提案の伏線である。「抗血小板薬はがん自体にも効くかもしれない」という蓄積がなければ、CASでアスピリンを選ぶ提案は成立しない。</p>
+<h4>8-1. アスピリン</h4>
+<p>約30年前から、大腸がん予防におけるアスピリンの有益性が後ろ向き・前向き観察研究と無作為化試験から示唆されてきた。</p>
+<div class="tw"><table>
+<thead><tr><th>研究の種類</th><th>主要な数値</th></tr></thead>
+<tbody>
+<tr><td>2012年 系統的レビュー・メタ解析</td><td>大腸がんリスク <strong>38%減少</strong>、大腸がん関連死の20年リスク <strong>42%減少</strong>。消化管がん（胃・胆道・食道）と乳がんのリスクも一貫して減少。遠隔転移 <strong>31%減少</strong></td></tr>
+<tr><td>B型・C型肝炎のアスピリン使用者</td><td>肝細胞がん罹患 <strong>31%減少</strong>、10年間の消化管出血リスク増加なし</td></tr>
+<tr><td>近年の系統的レビュー・メタ解析</td><td>がん全体のリスク <strong>21%減少</strong>、がん関連死亡 <strong>20%減少</strong></td></tr>
+<tr><td>診断後大腸がん患者 237,245例のメタ解析</td><td>大腸がん特異的生存が <strong>26%改善</strong></td></tr>
+</tbody></table></div>
+<p>その他の近年のメタ解析も、アスピリンが各種がんリスクとがん関連死を減らすことを一貫して支持している。</p>
+<h4>8-2. アスピリン以外の抗血小板薬</h4>
+<ul><li>チエノピリジン系（プラスグレル、クロピドグレル）については、TRITON–TIMI 38（プラスグレルによる血小板抑制最適化の試験）を受けて懸念が生じた。</li><li>しかし英国の集団ベースコホート研究（大腸がん・乳がん・前立腺がん患者）では、クロピドグレルでがん特異的死亡が増加する証拠は認められなかった。</li><li>台湾の国民健康保険研究データベースを用いた研究では、13年間の追跡で大腸がんリスクの調整HRは、アスピリン <strong>0.59（95%CI 0.56〜0.61）</strong>、クロピドグレル <strong>0.77（95%CI 0.68〜0.87）</strong>、抗血小板薬2剤併用 <strong>0.37（95%CI 0.33〜0.40）</strong> であった。</li><li>ネステッドケースコントロール研究でも、アスピリン17%、クロピドグレル20%のリスク減少と、2剤併用で同様の効果が示された。</li><li>前臨床では、P2Y12阻害薬（チカグレロル、クロピドグレル）が卵巣がん・メラノーマのマウスモデルで腫瘍増殖と転移を減少させた。</li></ul>
+<h4>8-3. 機序の説明</h4>
+<ul><li>血小板は腫瘍形成に関与し、腫瘍誘発性の血小板活性化が腫瘍増殖と転移を促進する。したがってアスピリンや他の抗血小板薬は腫瘍形成と転移を抑制する可能性がある。</li><li>アスピリンには抗炎症薬としての側面もあり、正常組織への反復的な炎症性傷害を軽減することでがん予防に寄与しうる。</li><li>アスピリンは血小板のCOX-1と内皮細胞のCOX-2を阻害する。両者は各種シグナル経路を介して腫瘍形成と腫瘍の拡がりに関与している。</li><li>以上からTCIPA自体ががん治療の標的として浮上しており、抗血小板薬・抗血栓薬をがんの補助療法として用いる提案がなされている。</li></ul>
+<h3>9. がん関連脳梗塞における抗血栓薬使用の現状</h3>
+<p>急性脳梗塞＋active cancer の患者で各種抗血栓薬の効果を比較した研究は少ない。Table 3 の7研究がその全てに近い。</p>
+<h4>9-1. 各研究の内容</h4>
+<p><strong>Navi 2014（後ろ向き、n=263）</strong>：抗血小板療法102例（うちアスピリン92例）、抗凝固療法90例（うちLMWH 78例）、両方20例。117例が血栓塞栓症を再発し、うち36例が脳梗塞の再発であった。血栓塞栓再発率は抗血小板群と抗凝固群で同等（HR 1.19、95%CI 0.72〜1.97）。</p>
+<p><strong>Jang 2015（後ろ向き単施設、n=79）</strong>：active cancer と、従来の脳卒中機序では説明できない急性虚血性脳卒中の患者で、エノキサパリン29例とワルファリン50例を比較。平均追跡4.9か月で、脳梗塞再発はエノキサパリン群 <strong>1/29（3.4%）</strong>、ワルファリン群 <strong>8/50（16.0%）</strong>。追跡D-dimerは初回評価から中央値8日後に測定され、初期値が同等であったにもかかわらず、エノキサパリン群 <strong>3.88 μg/mL（3.01〜8.12）</strong> に対しワルファリン群 <strong>17.42 μg/mL（3.34〜34.38）</strong>（P=0.026）。短期のD-dimer低下という点でエノキサパリンがワルファリンに優る可能性を示唆する。</p>
+<p><strong>Nam 2017（後ろ向き単施設、n=48）</strong>：従来病因を除外したactive cancer 患者で、NOAC 7例（ダビガトラン5、リバーロキサバン2）とLMWH 41例（エノキサパリン25、ダルテパリン16）を比較。心血管脳血管再発、新規領域病変、3か月mRS、3か月死亡、出血のいずれも有意差なし。</p>
+<p><strong>Navi 2018（TEACH パイロット無作為化試験、n=20）</strong>：発症4週以内の脳卒中とactive cancer の患者で、エノキサパリンとアスピリンを比較。抗凝固または抗血小板療法の明確な適応がある患者と症候性頸動脈狭窄は除外された（したがって従来病因を持つ患者は除外されている）。主要評価項目は<strong>実施可能性（feasibility）</strong>。適格49例のうち20例が登録。エノキサパリンに割り付けられた10例のうち <strong>4例（40%）が注射の不快感からアスピリンへ移行</strong>。大出血、血栓塞栓イベント、生存に差はなかった。効果を比較するにはサンプルサイズが小さすぎるが、著者は「非経口ヘパリンの代わりにアスピリンとNOACの比較を検討しうる」ことを示す研究と位置づけている。</p>
+<p><strong>Kawano 2019（後ろ向き、n=19）</strong>：59例の脳梗塞＋active cancer 患者のうち19例が皮下ヘパリン投与を受けた。長期の皮下ヘパリンを継続した <strong>10例では脳梗塞再発なし</strong>、中止した <strong>9例のうち3例が再発</strong>。ただし59例中11例は最終診断ががん以外の従来機序であり、CASの診断が不確実であるという限界がある。</p>
+<p><strong>Yamaura 2021（後ろ向き、n=59）</strong>：潜因性脳梗塞＋active cancer＋静脈血栓塞栓症の患者で、皮下未分画ヘパリン24例と経口直接第Xa因子阻害薬（DiXaIs）29例を比較。30日追跡で脳梗塞再発は <strong>ヘパリン 4%（1/24）対 DiXaIs 31%（9/29）、P=0.008</strong>。大出血の頻度は両群で同等（4% 対 10%）。</p>
+<p><strong>Martinez-Majander 2020（NAVIGATE ESUS のサブグループ解析、n=543）</strong>：がんの既往を持つ543例（リバーロキサバン254、アスピリン289）。脳梗塞再発率はリバーロキサバン 7.7% 対 アスピリン 5.4%（HR 1.43、95%CI 0.71〜2.87、P=0.31）で差なし。大出血はリバーロキサバン 2.9% 対 アスピリン 1.1%（HR 2.57、95%CI 0.67〜9.96）で有意な増加なし。全死因死亡もリバーロキサバン 3.7% 対 アスピリン 3.3%（HR 1.10、95%CI 0.44〜2.78）で同等。</p>
+<p><strong>Chung 2024（無作為化オープンラベル パイロット、n=40）</strong>：CAS患者でエドキサバンとエノキサパリンを比較。D-dimer値および経頭蓋ドプラでの微小塞栓シグナルに有意な変化を認めなかった。</p>
+<p><strong>進行中／計画中</strong>：Navi らのグループは、ESUS＋active cancer の患者でアピキサバンとアスピリンを比較する新たな試験を計画している。</p>
+<h4>9-2. Table 3. がん関連脳梗塞における抗血栓薬の比較研究（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>対象がん</th><th>対象脳卒中</th><th>デザイン</th><th>症例数</th><th>治療</th><th>主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Navi 2014</td><td>active cancer（全身転移69%）</td><td>あらゆる病因（不明51%）</td><td>後ろ向き観察</td><td>263</td><td>抗血小板102（アスピリン92）／抗凝固90（LMWH 78）／両方20</td><td>血栓塞栓再発（複合）</td><td>HR 1.19（95%CI 0.72〜1.97）</td></tr>
+<tr><td>Jang 2015</td><td>active cancer</td><td>潜因性</td><td>後ろ向き観察・単施設</td><td>79</td><td>エノキサパリン29／ワルファリン50</td><td>D-dimer</td><td>エノキサパリン 3.88 μg/mL（3.01〜8.12）／ワルファリン 17.42 μg/mL（3.34〜34.38）、P=0.026</td></tr>
+<tr><td>Nam 2017</td><td>active な固形がん（造血器腫瘍除く）</td><td>従来病因を除外</td><td>後ろ向き観察・単施設</td><td>48</td><td>NOAC 7（ダビガトラン5、リバーロキサバン2）／LMWH 41（エノキサパリン25、ダルテパリン16）</td><td>心血管脳血管再発／新規領域病変／3か月mRS不良／3か月死亡／出血合併症</td><td>LMWH 49% 対 NOAC 57%（P=0.846）／LMWH 59% 対 NOAC 57%（P=1.000）／LMWH 77% 対 NOAC 57%（P=0.355）／LMWH 49% 対 NOAC 57%（P=1.000）／LMWH 39% 対 NOAC 23%（P=0.696）</td></tr>
+<tr><td>Navi 2018</td><td>active な固形がんまたは造血器腫瘍</td><td>抗凝固・抗血小板の明確な適応、症候性頸動脈狭窄を除外</td><td>無作為化</td><td>20</td><td>エノキサパリン10／アスピリン10</td><td>実施可能性</td><td>エノキサパリン10例中4例がアスピリンへ移行。大出血・血栓塞栓イベント・生存に差なし</td></tr>
+<tr><td>Kawano 2019</td><td>active な固形がんまたは造血器腫瘍</td><td>従来病因を含む</td><td>後ろ向き観察</td><td>19</td><td>皮下ヘパリン</td><td>脳梗塞再発</td><td>継続10例中0例／中止9例中3例</td></tr>
+<tr><td>Martinez-Majander 2020</td><td>がんの既往</td><td>ESUS</td><td>NAVIGATE ESUS のサブグループ解析</td><td>543</td><td>リバーロキサバン254／アスピリン289</td><td>脳梗塞再発／大出血／全死因死亡</td><td>7.7% 対 5.4%（HR 1.43、95%CI 0.71〜2.87、P=0.31）／2.9% 対 1.1%（HR 2.57、95%CI 0.67〜9.96）／3.7% 対 3.3%（HR 1.10、95%CI 0.44〜2.78）</td></tr>
+<tr><td>Yamaura 2021</td><td>active cancer ＋静脈血栓塞栓症</td><td>潜因性</td><td>後ろ向き観察</td><td>59</td><td>皮下未分画ヘパリン24／DiXaIs 29</td><td>30日以内の脳梗塞再発</td><td>UFH 4% 対 DiXaIs 31%（P=0.008）。大出血に差なし（4% 対 10%）</td></tr>
+</tbody></table></div>
+<p>（略語：LMWH＝低分子ヘパリン、NOAC＝非ビタミンK経口抗凝固薬、UFH＝未分画ヘパリン、DiXaIs＝直接第Xa因子阻害薬、HR＝ハザード比、CI＝信頼区間、ESUS＝塞栓源不明脳塞栓症）</p>
+<h4>9-3. 著者によるNAVIGATE ESUSサブ解析への留保</h4>
+<p>NAVIGATE ESUS のがんサブグループ解析は、規模（543例）から見ればこの領域で最も大きな比較データである。しかし著者は重要な限定を加える。この研究で <strong>指標脳卒中の1年未満前にがんと診断されていたのはわずか49例（9%）</strong> であった。したがって大半は inactive cancer であった可能性が高く、がんが脳卒中の原因ではなく傍観者（bystander）であった可能性がある。CASの治療選択を論じる根拠としては使いにくい、というのが著者の評価である。</p>
+<h4>9-4. 現状のまとめとガイドライン</h4>
+<p>先行研究はCAS患者の再発予防に最適な抗血栓レジメンを決めるための指針をほとんど与えていない。これらは非対照・小規模で各種薬剤の有効性を検討したものである。LMWHの経験的使用は一般的だが、臨床的エビデンスを欠き、CASの血栓形成機序に基づいてもいない。</p>
+<p>2021年AHA/ASAガイドラインは、がんの凝固亢進に起因する脳卒中に対する最良の治療レジメンについてはデータが乏しく、脳卒中予防におけるLMWHの潜在的な有益性は未知であると述べている。</p>
+<h3>10. 脳卒中・がん・心房細動が併存する患者の抗血栓療法</h3>
+<p>がんと心房細動（AF）はしばしば併存する。</p>
+<ul><li>がん患者におけるAFの有病率は約20%。</li><li>逆にAF患者におけるがんの発生率は一般集団より30〜40%高い。</li><li>NOACの登場により、がん＋AF患者での使用が増加している。</li></ul>
+<h4>10-1. NOAC 対 ワルファリン（がん＋AF）</h4>
+<p><strong>系統的レビュー・メタ解析</strong>（無作為化試験3件と後ろ向きコホート5件）</p>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>アウトカム</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>無作為化試験（2,657例）</td><td>脳卒中／全身塞栓</td><td>OR 0.69（95%CI 0.45〜1.06、P=0.09）</td></tr>
+<tr><td></td><td>静脈血栓塞栓症</td><td>OR 0.91（95%CI 0.33〜2.52、P=0.86）</td></tr>
+<tr><td></td><td>心筋梗塞</td><td>OR 0.74（95%CI 0.44〜1.23、P=0.24）</td></tr>
+<tr><td></td><td>大出血</td><td>OR 0.81（95%CI 0.61〜1.06、P=0.12）</td></tr>
+<tr><td>観察コホート（約22,008例）</td><td>虚血性脳卒中</td><td>OR 0.51（95%CI 0.28〜0.92、P=0.02）</td></tr>
+<tr><td></td><td>静脈血栓塞栓症</td><td>OR 0.50（95%CI 0.41〜0.60、P&lt;0.00001）</td></tr>
+<tr><td></td><td>大出血</td><td>OR 0.28（95%CI 0.14〜0.55、P=0.0002）</td></tr>
+<tr><td></td><td>頭蓋内または消化管出血</td><td>OR 0.59（95%CI 0.37〜0.92、P=0.02）</td></tr>
+</tbody></table></div>
+<p>無作為化試験では差が出ず、観察研究では大きな差が出るという典型的な乖離がある。</p>
+<p><strong>台湾の全国後ろ向きコホート</strong>（NOAC 6,274例 対 ワルファリン1,681例）</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>HR（95%CI）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>主要心血管イベント（虚血性脳卒中／全身塞栓または急性心筋梗塞）</td><td>0.63（0.50〜0.80）</td><td>0.0001</td></tr>
+<tr><td>主要下肢イベント</td><td>0.41（0.24〜0.70）</td><td>0.001</td></tr>
+<tr><td>静脈血栓症</td><td>0.37（0.23〜0.61）</td><td>&lt;0.001</td></tr>
+<tr><td>大出血</td><td>0.73（0.56〜0.94）</td><td>0.017</td></tr>
+</tbody></table></div>
+<p>この効果は脳卒中既往、がんの病期、NOACの種類・用量にかかわらず一貫していた。</p>
+<h4>10-2. NOAC間の比較（active cancer＋AF 40,271例）</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>脳卒中／全身塞栓 HR（95%CI）</th><th>大出血 HR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>アピキサバン</td><td>0.59（0.45〜0.78）</td><td>0.58（0.50〜0.68）</td></tr>
+<tr><td>ダビガトラン</td><td>0.88（0.54〜1.41）</td><td>0.76（0.57〜1.01）</td></tr>
+<tr><td>リバーロキサバン</td><td>0.82（0.62〜1.08）</td><td>0.95（0.85〜1.06）</td></tr>
+</tbody></table></div>
+<p>アピキサバンが塞栓予防・出血の双方で最も良好な数値を示した。</p>
+<h4>10-3. ガイドラインと著者の留保</h4>
+<p>2021年AHA/ASAガイドラインは、AFとがんを背景とする虚血性脳卒中またはTIAの患者において、抗凝固にワルファリンよりNOACを考慮することを推奨している（<strong>推奨クラス 2a、エビデンスレベル B-NR</strong>）。</p>
+<p>しかし著者は再び留保をつける。これらの研究は主に「がん＋AF」の患者を対象としており、「脳卒中＋がん＋AF」の患者に直接当てはめられるとは限らない。したがって、脳卒中・active cancer・AFを併せ持つ患者では、<strong>その脳卒中ががん関連血栓症によるものかどうかを判断することが決定的に重要</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>判断</th><th>抗血栓薬の方針</th></tr></thead>
+<tbody>
+<tr><td>がんは偶発的併存と考えられる</td><td>NOACが第一選択</td></tr>
+<tr><td>がんに関連した脳卒中リスクが有意と考えられる</td><td>がん関連血栓症の予防に向けて抗血栓薬を選択する</td></tr>
+</tbody></table></div>
+<h3>11. がん関連脳梗塞における抗血栓薬使用の展望</h3>
+<p>ここが本総説の結論部であり、著者の主張が最も明確に出る。</p>
+<h4>11-1. 論拠の積み上げ</h4>
+<ol><li>前臨床・in vitro のエビデンスは、血小板活性化とトロンビン産生が腫瘍細胞の増殖と転移に決定的な役割を果たすことを示してきた。</li><li>臨床研究は、アスピリンおよび他の抗血小板薬ががん・転移・がん関連死のリスクを減らすことを一貫して示してきた。</li><li>近年の脳動脈血栓の組織学的研究は、CASにおける血小板とトロンビンの関与を実際のヒト検体で裏づけた。</li></ol>
+<p>したがって、血小板とトロンビンの阻害は、CASの予防とがんの進行・転移の抑制の双方に有効な戦略でありうる。</p>
+<h4>11-2. なぜ「上流の抗凝固」では足りないのか</h4>
+<p>これが本総説で最も独自性のある議論である。</p>
+<ul><li>凝固経路を標的とする薬剤はトロンビン産生を抑制できる。LMWHはCASの再発予防に経験的に使われてきたが、注射の不快感によりアドヒアランスが低いことが多い。近年はNOACも用いられている。</li><li>しかし <strong>ヘパリン、LMWH、ワルファリン、第Xa因子阻害薬といった「上流のトロンビン阻害薬」は、腫瘍誘発性のトロンビン産生を防ぐには不十分でありうる</strong>。</li><li>理由は明快で、腫瘍細胞は<strong>直接</strong>トロンビンを産生し、かつ組織因子の発現による凝固経路の活性化を通じて<strong>間接的にも</strong>トロンビンを産生するからである。上流を塞いでも、腫瘍細胞が直接作る分は残る。</li><li>したがって <strong>直接トロンビン阻害薬</strong> は、がんにおけるトロンビン産生の直接・間接の両機序を阻害できる点で、他の上流抗凝固薬より有効である可能性がある。</li></ul>
+<h4>11-3. 抗血小板薬の再評価</h4>
+<ul><li>従来、血小板阻害薬はCASの再発予防の主たる選択肢とは考えられてこなかった。</li><li>しかし、腫瘍細胞が血小板活性化に関与するというエビデンスの蓄積と、CASの血栓が血小板に富むという所見を踏まえれば、抗血小板薬はトロンビン阻害薬と並ぶ代替または追加の治療になりうる。</li><li>さらに抗血小板薬には腫瘍増殖と転移を抑制するという追加の利益がありうる。</li><li>がんにおける血小板阻害薬のエビデンスの大半がアスピリン使用者に基づくことを考えると、<strong>各種抗血小板薬のなかではアスピリンが望ましい選択</strong>かもしれない。</li></ul>
+<h4>11-4. 著者が提案する戦略</h4>
+<p>抗血栓薬の選択は、背景にある血栓形成機序に導かれるべきである。がんにおける血栓形成はトロンビンと血小板を巻き込む形でよく理解されている。CAS患者は短期の再発・死亡リスクが高く、強力な血栓抑制が必要である。</p>
+<p>したがって <strong>トロンビンと血小板の両方を標的とする短期戦略</strong> が早期の脳梗塞再発を効果的に予防しうる。ただし、がん患者の一部は出血リスクが高いため、<strong>個別の出血リスク評価が必要</strong>である。従前のエビデンスは直接トロンビン阻害薬および／または抗血小板薬の使用を支持するが、このアプローチを検証するには臨床試験が必要である。</p>
+<h3>12. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この総説をそのまま診療に落とす前に確認すべき点 <mark class="hl">本総説の治療提案（直接トロンビン阻害薬±抗血小板薬）は、ひとつも臨床試験で検証されていない仮説である</mark>。機序としての一貫性は高いが、「機序が正しいから臨床でも効く」は集中治療領域で繰り返し裏切られてきた推論である。JCでは「著者が何を示したか」と「著者が何を提案しているか」を明確に分けて議論したい。</p>
+</div>
+<p><strong>1. 総説のデザインそのものの限界</strong></p>
+<ul><li>ナラティブ総説であり、系統的な文献検索・選択基準・バイアス評価がない。引用文献の選択は著者の判断に依存する。</li><li>引用される中核的な血栓組織学研究（Park 2019、Yoo 2020/2021/2023、Heo 2022/2023）は、いずれも著者自身のグループの研究である。単一グループの一連の知見が独立に再現されているのは Fu 2020（台湾）が主で、再現性の幅は限定的である。</li></ul>
+<p><strong>2. 数値の内的不整合（原文にある食い違い）</strong></p>
+<ul><li>Navi 2014 について、本文は「230例のがん患者」と記述するが、Table 2 と Table 3 はいずれも症例数 263 としている。</li><li>Nam 2017（ref 43）について、本文は「心血管脳血管再発（57% 対 49%、P=0.096）」「新規領域病変（57% 対 57.9%、P=1.000）」と記載するが、Table 3 は同じ項目を「LMWH 49% 対 NOAC 57%（P=0.846）」「LMWH 59% 対 NOAC 57%（P=1.000）」としている。P値が P=0.096 と P=0.846 で食い違う。</li><li>Navi 2022 について、本文は「大血栓塞栓イベントには26%の脳梗塞が含まれる」とするが、Table 2 の脳梗塞は 16% である。</li><li>Lee 2017 の行では「死亡率 83.6%」という値が1年追跡の見出しの下に置かれ、その下に1か月18.3%／3か月44.4%／6か月60.1%／1年71.6%が並ぶ。83.6% が何を指すかは表からは判別できない。</li><li>こうした食い違いは結論を変えるものではないが、<mark class="hl">数値を引用して院内資料や講義に使うときは、必ず原著（Navi 2014, Nam 2017 など）に当たってから使う</mark>。</li></ul>
+<p><strong>3. 「CAS」という診断カテゴリの循環性</strong></p>
+<ul><li>CASの診断基準（Table 1）は、①多発梗塞、②D-dimer高値、③転移、④従来病因の不在、⑤NBTE、⑥血小板優位の血栓、である。しかし予後研究の多くは「active cancer ＋潜因性」を代理として使っている。つまり「原因が分からないことが診断根拠のひとつ」という構造になっている。</li><li>この設計だと、まだ同定されていない別の塞栓源（発作性心房細動、大動脈弓プラーク、卵円孔開存など）を持つ患者がCASに紛れ込む。実際 Kawano 2019 では59例中11例が最終的に従来機序と判明している。</li><li>逆に、従来病因（心房細動など）を持ちながら、がん関連凝固亢進も同時に働いている患者はCASから除外されてしまう。著者自身が第10章で「脳卒中＋がん＋AF」の判断の難しさを認めているとおり、この二分法は臨床の実態と合わない。</li></ul>
+<p><strong>4. D-dimerの閾値が示されていない</strong></p>
+<ul><li>「著明に高い」という記述はあるが、診断閾値も、治療反応を判定するための目標値も提示されていない。示される数値は個別症例（3,581 ng/mL、21,249 ng/mL）と、群間比較（3.88 対 17.42 μg/mL）にとどまり、単位も ng/mL と μg/mL が混在する。</li><li>D-dimerは感染・術後・VTE・DICなど多数の病態で上昇するため、ICU患者では特異度が低い。「CASを疑う引き金」として使うのはよいが、「CASの診断根拠」として単独で使える精度はない。</li><li>一方、Chung 2024 のパイロット試験ではエドキサバンとエノキサパリンでD-dimerに有意差が出ておらず、<mark class="hl">D-dimerを治療効果の代替エンドポイントとして使うこと自体の妥当性も確立していない</mark>。</li></ul>
+<p><strong>5. 抗血栓薬の比較データの脆弱性</strong></p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>弱点</th></tr></thead>
+<tbody>
+<tr><td>Navi 2014</td><td>後ろ向き。治療の割り付けは適応交絡（重症例ほど抗凝固を受けやすい可能性）</td></tr>
+<tr><td>Jang 2015</td><td>主要評価項目がD-dimer（代替指標）。脳梗塞再発の差は副次的観察</td></tr>
+<tr><td>Nam 2017</td><td>NOAC群がわずか7例。すべてのP値が有意でないのはサンプルサイズによる可能性が高い</td></tr>
+<tr><td>Navi 2018（TEACH）</td><td>主要評価項目は実施可能性であり有効性ではない。20例。有効性の議論には使えない</td></tr>
+<tr><td>Kawano 2019</td><td>19例。継続群と中止群の比較は交絡が大きい（中止できるほど状態が良い／悪いかが結果を規定する）</td></tr>
+<tr><td>Yamaura 2021</td><td>59例の後ろ向き。DiXaIs 31%対UFH 4%という劇的な差は、投与経路と管理密度の違い（入院か外来か）を反映している可能性がある</td></tr>
+<tr><td>Martinez-Majander 2020</td><td>543例と最大だが、指標脳卒中の1年未満前にがんと診断されたのは9%のみ。CASの集団ではない</td></tr>
+<tr><td>Chung 2024</td><td>40例のパイロット。代替エンドポイントで差なし</td></tr>
+</tbody></table></div>
+<p>つまり「LMWHが標準」という実務も「DOACでよい」という実務も、いずれも高いエビデンスに立っていない。</p>
+<p><strong>6. 提案されている戦略自体の未検証性</strong></p>
+<ul><li>直接トロンビン阻害薬（ダビガトラン）をCASに用いた比較試験は存在しない。本総説で引用されるダビガトランの使用例は Nam 2017 の5例のみである。</li><li>「トロンビン＋血小板の二重阻害」は、抗凝固薬と抗血小板薬の併用を意味する。がん患者は血小板減少・粘膜障害・肝機能障害を伴うことが多く、出血リスクは一般集団と大きく異なる。著者も個別の出血リスク評価が必要と述べるが、その評価法は示されていない。</li><li>「短期戦略」の「短期」が何週間・何か月を指すのかも定義されていない。</li><li>なお本総説は動脈血栓（脳梗塞）を扱っており、がん関連静脈血栓塞栓症の領域で行われた無作為化試験（CASSINI、CARAVAGGIO、CASTA-DIVA など）は取り上げていない。VTEの試験結果を動脈側にそのまま外挿できない点は、議論の際に確認しておきたい。</li></ul>
+<p><strong>7. アスピリンとがんの議論の位置づけ</strong></p>
+<ul><li>第8章で引用されるアスピリンのがん予防効果は、大部分が一次予防・化学予防の文脈のデータであり、「active cancer で脳梗塞を起こした患者の二次予防」とは対象も時間軸も異なる。</li><li>台湾のデータで示された「2剤併用でHR 0.37」という数字は、観察研究における健康使用者バイアス（healthy user bias）と適応交絡を強く受ける設計である。</li><li>したがって「アスピリンががんに効く」を「CASの再発予防にアスピリンを選ぶ」根拠として使うのは、論理的には飛躍が残る。</li></ul>
+<p><strong>8. 集中治療の視点から不足している論点</strong></p>
+<ul><li>血栓溶解療法（IV tPA）のがん患者における安全性・有効性は本総説でほとんど扱われていない。EVTには触れているが、静注血栓溶解の可否は臨床で頻繁に問題になる。</li><li>血小板減少（化学療法中に日常的に起こる）がある患者での抗血栓薬選択について記載がない。</li><li>抗がん治療そのものの継続・中断との相互作用（手術・生検の周術期、血管新生阻害薬との併用）についても触れられていない。</li><li>ICU管理上の具体（頭蓋内出血リスクのモニタリング、抗凝固中の穿刺手技の可否）は本総説の射程外である。</li></ul>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>がん患者の脳卒中発症に関する韓国全国コホート（subdistribution HR 1.17）</td><td>Jang HS, et al. Front Neurol 2019;10:52</td></tr>
+<tr><td>がん患者の虚血性脳卒中 — 過小評価された病態のレビュー</td><td>Navi BB, Iadecola C. Ann Neurol 2018;83:873-883</td></tr>
+<tr><td>がん関連脳卒中 — 独自の病態機序を持つ新しい亜型</td><td>Bang OY, et al. J Stroke 2020;22:1-10</td></tr>
+<tr><td>がん関連脳卒中の病態生理・検出・管理</td><td>Dardiotis E, et al. Int J Oncol 2019;54:779-796</td></tr>
+<tr><td>2021年 脳卒中・TIA患者の脳卒中予防ガイドライン（AHA/ASA）</td><td>Kleindorfer DO, et al. Stroke 2021;52:e364-e467</td></tr>
+<tr><td>がんと脳卒中 — 臨床上よく遭遇するがエビデンスは乏しい</td><td>Woock M, et al. Ther Adv Neurol Disord 2022;15:17562864221106362</td></tr>
+<tr><td>転移における血小板の寄与</td><td>Gay LJ, Felding-Habermann B. Nat Rev Cancer 2011;11:123-134</td></tr>
+<tr><td>がん治療の新たな標的としてのTCIPA</td><td>Strasenburg W, et al. Front Oncol 2022;12:909767</td></tr>
+<tr><td>内因性トロンビンの腫瘍着床・播種・自然転移における役割（ヒルジンの実験）</td><td>Hu L, et al. Blood 2004;104:2746-2751</td></tr>
+<tr><td>がん患者の頭蓋内血栓の組織学的特徴（血小板高分画・赤血球低分画）</td><td>Park H, et al. Ann Neurol 2019;86:143-149</td></tr>
+<tr><td>回収血栓のフィブリン・血小板優位組成がactive cancerを示す（AUC 0.84）</td><td>Fu CH, et al. Stroke 2020;51:3723-3727</td></tr>
+<tr><td>がん関連脳梗塞の動脈血栓における凝固因子発現と組成（トロンビン・組織因子）</td><td>Yoo J, et al. Stroke 2023;54:2981-2989</td></tr>
+<tr><td>血栓の機械学習によるがん予測 — 多施設開発・検証（AUC 0.946〜0.986）</td><td>Heo J, et al. Stroke 2023;54:2105-2113</td></tr>
+<tr><td>コンピュータビジョンによる血栓組成の自動解析</td><td>Heo J, et al. J Stroke 2022;24:433-435</td></tr>
+<tr><td>active cancer の定義の出典（CLOT試験）</td><td>Lee AY, et al. N Engl J Med 2003;349:146-153</td></tr>
+<tr><td>D-dimer検査の総説</td><td>Johnson ED, et al. Am J Hematol 2019;94:833-839／Weitz JI, et al. J Am Coll Cardiol 2017;70:2411-2420</td></tr>
+<tr><td>NBTEの剖検研究（65例中51例にがん）</td><td>Deppisch LM, Fayemi AO. Am Heart J 1976;92:723-729</td></tr>
+<tr><td>がん関連NBTE</td><td>Itzhaki Ben Zadok O, et al. Thromb Res 2022;213(Suppl 1):S127-S132</td></tr>
+<tr><td>がんとNBTEを伴う脳卒中患者の転帰（6か月死亡80%・再発50%）</td><td>Yoo J, et al. J Stroke 2020;22:245-253</td></tr>
+<tr><td>虚血性脳卒中後のがん患者における血栓塞栓再発</td><td>Navi BB, et al. Neurology 2014;83:26-33</td></tr>
+<tr><td>脳卒中とactive cancer患者の凝固亢進と死亡（OASIS-cancer study）</td><td>Lee MJ, et al. J Stroke 2017;19:77-87</td></tr>
+<tr><td>全身性悪性腫瘍を有する虚血性脳卒中患者の短期転帰</td><td>Yoo J, et al. Stroke 2019;50:507-511</td></tr>
+<tr><td>がん関連凝固亢進と早期脳卒中再発リスク</td><td>Fujinami J, et al. Cerebrovasc Dis 2018;46:46-51</td></tr>
+<tr><td>治療後D-dimer値と短期転帰</td><td>Nakajima S, et al. Front Neurol 2022;13:868137</td></tr>
+<tr><td>active cancer患者のEVT後臨床転帰（MR CLEANレジストリ サブ解析）</td><td>Verschoof MA, et al. Neurology 2022;98:e993-e1001</td></tr>
+<tr><td>転移がん患者の機械的血栓回収術 — 全国横断解析</td><td>Aboul-Nour H, et al. J Stroke 2023;25:119-125</td></tr>
+<tr><td>エノキサパリンとワルファリンの比較（がん関連脳卒中の二次予防）</td><td>Jang H, et al. J Oncol 2015;2015:502089</td></tr>
+<tr><td>潜因性脳卒中＋active cancerに対するNOAC治療</td><td>Nam KW, et al. J Stroke Cerebrovasc Dis 2017;26:2976-2980</td></tr>
+<tr><td>エノキサパリン対アスピリン — TEACHパイロット無作為化試験</td><td>Navi BB, et al. JAMA Neurol 2018;75:379-381</td></tr>
+<tr><td>がん関連脳卒中に対する皮下ヘパリン療法</td><td>Kawano H, et al. J Stroke Cerebrovasc Dis 2019;28:399-404</td></tr>
+<tr><td>がん関連潜因性脳梗塞＋VTEにおけるヘパリンと直接Xa阻害薬</td><td>Yamaura G, et al. Thromb Res 2021;206:99-103</td></tr>
+<tr><td>がん患者の二次予防 — リバーロキサバン対アスピリン（NAVIGATE ESUSサブ解析）</td><td>Martinez-Majander N, et al. Eur J Neurol 2020;27:841-848</td></tr>
+<tr><td>がん関連凝固亢進・脳血栓塞栓に対するエドキサバン（バイオマーカー標的の無作為化試験）</td><td>Chung JW, et al. Int J Stroke 2024（オンライン先行）</td></tr>
+<tr><td>脳卒中における血栓組織学に基づく病態生理・治療の展望</td><td>Heo JH, et al. J Stroke 2020;22:64-75</td></tr>
+<tr><td>虚血性脳卒中の病因解明のための血栓組成解析 — システマティックレビュー</td><td>Aliena-Valero A, et al. J Stroke 2021;23:327-342</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 がん細胞は自らの増殖と転移のためにトロンビンを産生し血小板を活性化する。脳梗塞はその副産物であり、だからこそがん関連脳梗塞の血栓は <mark class="hl">血小板とトロンビンに富み赤血球に乏しい</mark>。 臨床では <mark class="hl">「active cancer の患者に、従来機序で説明できない、複数血管領域にまたがる両側性の多発梗塞」を見たら、D-dimer・心エコー（疣贅＝NBTE）・転移検索の3点セットを即座に走らせる</mark>。この組み合わせが揃えばがん関連脳梗塞はほぼ確実で、6か月死亡は最大80%、脳梗塞再発は最大50%に達する。 抗血栓薬は <mark class="hl">LMWHが「標準」とされているだけで、実は誰も検証していない</mark>。著者はトロンビンと血小板を同時に短期間叩く戦略（直接トロンビン阻害薬±アスピリン）を提案するが、<mark class="hl">これは仮説であって臨床試験の裏づけはない</mark>。 明日から変わる行動は1つ。<mark class="hl">がん患者の原因不明の多発脳梗塞を「ESUS」で止めずに、経食道心エコーと転移検索まで進めて「がん関連脳梗塞」と名指しし、その瞬間からACP・緩和ケア併診を抗血栓療法と並走させる</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
