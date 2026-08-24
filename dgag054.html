@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>甲状腺クリーゼへのアプローチ — 診断は臨床＋スコア、治療はチオナミドの1時間後にヨウ素を重ねる（総説・JCEM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="dgag054.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">甲状腺クリーゼへのアプローチ — 診断は臨床＋スコア、治療はチオナミドの1時間後にヨウ素を重ねる（総説・JCEM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Kopp PA, Giordani I, Feldt-Rasmussen U, Forget-Renaud A. Approach to the patient with thyroid storm. J Clin Endocrinol Metab. 2026;111(5):1484-1494. DOI: 10.1210/clinem/dgag054</dd><dt>掲載誌</dt><dd>The Journal of Clinical Endocrinology and Metabolism（2026-02-08）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1210/clinem/dgag054" target="_blank" rel="noopener">doi.org/10.1210/clinem/dgag054</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Approach to the patient with thyroid storm</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「疑ったら結果を待たずに始める」を明文化する</strong>。甲状腺機能検査の結果が返る前でも、甲状腺腫＋高熱＋発熱に不釣り合いな頻脈＋誘因（感染・手術・造影剤・服薬中断）が揃えば治療開始してよい、と本総説は明言している。当院ICUで甲状腺クリーゼを疑ったときの初期セット（チオナミド → 1時間後にヨウ素 → βブロッカー → ヒドロコルチゾン）をあらかじめオーダーセット化しておく価値がある</li><li><strong>投与順序を間違えない仕組みが要る</strong>。ヨウ素をチオナミドより先に入れると、自律性結節を持つ多結節性甲状腺腫では基質を供給して増悪させうる。症例2はまさにこれで死亡している。オーダーセット上でヨウ素の投与時刻をチオナミドの1時間後に固定するのが実務的</li><li><strong>アスピリンを禁忌薬として登録する</strong>。解熱にアスピリンを使うと結合蛋白から甲状腺ホルモンが遊離して遊離ホルモンが上がる。解熱はアセトアミノフェン＋冷却が原則。これは電子カルテのアラートに乗せる価値のある「やってはいけない」</li><li><strong>経口が使えないときの代替経路をあらかじめ決めておく</strong>。嚥下困難・意識障害でも、PTUは経鼻胃管または直腸投与が可能。当院で直腸投与製剤をどう調製するかを薬剤部と事前にすり合わせておく（症例2は「飲めないから投与しなかった」で終わっている）</li><li><strong>βブロッカーは心不全併存例で「入れない」ではなく「短時間作用型で慎重に」</strong>。エスモロール（半減期約9分）なら悪化時に即座に切れる。当院ではランジオロールが使いやすく、JTA/JESガイドラインもβ1選択性を推している</li><li><strong>造影CTのタイミングに注意する</strong>。未治療の甲状腺クリーゼではヨード造影剤は禁忌。症例3では冠動脈造影を安定化まで延期している。逆に症例2では憩室炎精査の造影CTが誘因になった可能性が指摘されている。ICUで甲状腺中毒症が疑われる患者への造影検査は、内分泌コンサルトと同時に判断する</li><li><strong>内分泌科への早期コンサルトを「初日にやること」に入れる</strong>。症例2の失敗要因の1つは専門家コンサルトの遅れだった。当院は院内に内分泌代謝科があるので、疑った時点で当日中に相談する運用にできる</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：甲状腺クリーゼは稀だが致死的な高代謝状態で、多くは未治療・コントロール不良のバセドウ病を背景に、感染・手術・外傷・抗甲状腺薬の中断・ヨウ素曝露などを誘因として発症する。診断は生化学ではなく臨床であり、Burch–Wartofsky点数スケール（1993）と日本甲状腺学会／日本内分泌学会（JTA/JES）の診断基準（2012提唱・2016ガイドライン化）が補助となる。治療はチオナミド・ヨウ素・βブロッカー・ステロイドの多剤併用が骨格である</li><li><strong>Unknown</strong>：なぜ同程度のホルモン値でも一部の患者だけがクリーゼに至るのかは未解明。カテコラミン値は正常であることが多く、組織側の反応性・β受容体活性の亢進が関与すると考えられているが機序は詰められていない。発生率・死亡率の推計値そのものも診断基準の不均一と地域差（食事性ヨウ素摂取・医療システム）で大きくばらつく。PTUとMMIの優劣、プロプラノロールとβ1選択性βブロッカーの優劣も決着していない</li><li><strong>What's new</strong>：2016年以降2025年までの疫学研究（日本・米国・台湾・ドイツ・フランス）を横断的に並べ、発生率・性比・死亡率のレンジを更新した点。特に、日本の前向き多施設レジストリ（n=110）でJTA/JESガイドライン準拠治療により30日死亡が5.5%と、先行全国調査の10.7%からほぼ半減したこと、APACHE II ≥12でガイドライン非準拠の患者の死亡率が50%だったこと（準拠4.7%、P=.01）を、ガイドラインの有効性の根拠として提示している。一方で米国NISでは死亡率がむしろ2.9%（2016）→5.3%（2020）と上昇しており、対照的な傾向として並置している。また、良い管理と悪い管理の症例を対比させ、「投与順序」「解熱薬の選択」「代替投与経路」という具体的な失敗点を可視化したのがこの総説の実務的な新規性</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 甲状腺クリーゼの診断は<strong>臨床所見の組み合わせと臓器不全</strong>で行い（Burch–WartofskyとJTA/JESの2スコアが補助）、治療は検査結果を待たずに<strong>チオナミド → その1時間後にヨウ素 → βブロッカー → ステロイド</strong>の多剤同時攻撃をICUで行う。ガイドライン準拠が死亡率をほぼ半減させる。</p>
+</div>
+<ul><li><strong>疫学</strong>：一般人口で年間0.2〜1.1／10万人、入院患者では4.8〜6.3／10万人。女性が男性の2〜3倍。死亡率は概ね5〜12%だが、高齢・併存症・不適切な管理では30%に達しうる（抄録では5〜25%と表現）</li><li><strong>背景疾患</strong>：最多はバセドウ病。中毒性多結節性甲状腺腫、中毒性腺腫、アミオダロン誘発甲状腺中毒症も原因になる。ごく稀に亜急性甲状腺炎、胞状奇胎、ホルモン産生転移性甲状腺癌、チロシンキナーゼ阻害薬・免疫チェックポイント阻害薬、甲状腺ホルモン錠の服用</li><li><strong>誘因</strong>：感染・敗血症、手術、外傷、抗甲状腺薬の中断、強い精神的・身体的ストレス、ヨウ素曝露（造影剤を含む）。誘因が特定できない症例もある</li><li><strong>診断</strong>：ホルモン値では単純性甲状腺中毒症と区別できない。Burch–Wartofskyは25点未満で否定的、25〜44点で切迫クリーゼ疑い、45点以上でクリーゼの可能性が高い。JTA/JESは確実（TS1）と疑い（TS2）に分類。両スコアとも死亡・在院日数・ICU滞在日数を予測する</li><li><strong>検査所見</strong>：T4・T3は高いが必ずしも単純性中毒症より高くない。重症では末梢変換が抑制されT3が基準範囲内のこともある。FT3低値・FT3/FT4比低値のほうが重症を示唆。死亡と強く結びつくのはAPACHE IIとSOFAであり、FT4・FT3・FT3/FT4比ではない</li><li><strong>鑑別</strong>：コントロール下の甲状腺中毒症、敗血症、脳炎・髄膜炎、高血圧性脳症、熱中症、薬物中毒（コカイン・アンフェタミン）、悪性症候群</li><li><strong>支持療法</strong>：ICU管理。冷却＋アセトアミノフェン。<mark class="hl">アスピリンは禁忌</mark>（結合蛋白からホルモンを遊離させる）。興奮・発熱にクロルプロマジン。電解質・酸塩基異常の補正、低血糖の監視、チアミンを含む栄養補給</li><li><strong>薬物療法</strong>：PTU（負荷500〜1000 mg → 250 mg 4時間毎）またはMMI 60〜80 mg/日・CMZ 80〜100 mg/日 → <strong>1時間以上あけて</strong>ヨウ素（ルゴール8滴4回/日、SSKI 5滴4回/日、ヨウ化カリウム錠65 mg 3回/日） ＋ プロプラノロール60〜80 mg 4時間毎（またはβ1選択性） ＋ ヒドロコルチゾン負荷300 mg → 100 mg 8時間毎</li><li><strong>補助療法</strong>：コレスチラミン4 g 1日3回（腸肝循環遮断・適応外）、リチウム（専門家助言下）、血漿交換（従来治療無効・チオナミド禁忌・急速な術前安定化）、持続性心房細動にはCHADS2に基づく抗凝固</li><li><strong>手術</strong>：内科的にコントロールされる前の甲状腺全摘は原則推奨されない。12〜24時間で改善しない場合に主張する立場もあるが議論があり、抗甲状腺薬に重篤なアレルギーがある場合など極めて稀な状況に限られる</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>甲状腺中毒症（thyrotoxicosis）</strong> は血中甲状腺ホルモンが過剰な状態全般を指し、そのうち甲状腺自体がホルモンを作りすぎているものを <strong>甲状腺機能亢進症（hyperthyroidism）</strong> と呼ぶ。<strong>甲状腺クリーゼ（thyroid storm／thyrotoxic crisis）</strong> は、その甲状腺中毒症が代償の限界を超え、発熱・頻脈・意識障害・心不全・肝障害といった多臓器の機能破綻を伴う状態である。</p>
+<p>ここで一番の落とし穴は、<strong>血液検査では診断できない</strong>ことである。クリーゼ患者のFT4・FT3は確かに高いが、コントロール不良なだけの単純な甲状腺中毒症の患者と数値上は区別できない。だから診断は「どれだけ高いか」ではなく「どの臓器がどれだけ破綻しているか」で行う。この判断を標準化するために2つのスコアがある。米国発の <strong>Burch–Wartofsky点数スケール（BWPS）</strong> は体温・中枢神経・心拍数・心不全・心房細動・消化器症状・誘因の有無に点数を振って合計する連続スコアで、日本発の <strong>JTA/JES基準</strong> は「甲状腺中毒症があること」を前提条件にしたうえで中枢神経症状を重く扱うカテゴリ型の基準である。</p>
+<p>治療の考え方は「ホルモンの流れを4か所で同時に堰き止める」と捉えると整理しやすい。①<strong>合成を止める</strong>（チオナミド＝PTU・MMI・CMZ。甲状腺ペルオキシダーゼを阻害する）、②<strong>放出を止める</strong>（ヨウ素。高濃度のヨウ化物が甲状腺内でホルモン放出を抑える＝Plummer効果、合成も抑える＝Wolff–Chaikoff効果）、③<strong>末梢での変換を止める</strong>（PTU・ステロイド・プロプラノロールはいずれもT4→T3変換を抑える）、④<strong>組織側の作用を遮る</strong>（βブロッカー）。加えて<strong>腸肝循環を断つ</strong>（コレスチラミン）、<strong>血中から物理的に抜く</strong>（血漿交換）という手がある。</p>
+<p><mark class="hl">この4段構えのうち、順序を守らないと害になるのがヨウ素である</mark>。ヨウ素はホルモンの材料でもあるため、合成を止めていない甲状腺（特に自律性結節を持つ多結節性甲状腺腫）に先に与えると、かえって基質を供給して中毒症を悪化させる。だから必ずチオナミドを先に投与し、1時間以上あけてからヨウ素を入れる。</p>
+<p>略語の整理：<strong>PTU</strong>＝プロピルチオウラシル、<strong>MMI</strong>＝メチマゾール（チアマゾール）、<strong>CMZ</strong>＝カルビマゾール（MMIの前駆体。欧州で使われる）、<strong>SSKI</strong>＝ヨウ化カリウム飽和溶液、<strong>JTA/JES</strong>＝日本甲状腺学会／日本内分泌学会、<strong>ATA</strong>＝米国甲状腺学会、<strong>ETA</strong>＝欧州甲状腺学会、<strong>AIT</strong>＝アミオダロン誘発甲状腺中毒症、<strong>APACHE II</strong>／<strong>SOFA</strong>＝重症度スコア。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>甲状腺クリーゼは、甲状腺中毒症の重症型として現れる、生命を脅かしうる高代謝状態である。多臓器不全のリスクが高く、致死的転帰を減らすには迅速な発見と緊急治療を要する。</p>
+<p>本総説は The Journal of Clinical Endocrinology and Metabolism の "Approach to the Patient" シリーズの1本であり、3つの実際の症例（うち1例は死亡例）を冒頭に提示し、疫学・歴史・臨床像・診断・検査・鑑別・病態・治療を順に解説したうえで、最後に各症例へ戻って「何が良かったか／何が誤りだったか」を採点する構成をとる。系統的レビューではなく、著者らの臨床経験とガイドライン（2016 ATA、2016 JTA/JES、2018 ETA）を軸としたナラティブレビューである。</p>
+<p>著者らの立脚点として重要なのは、<strong>JTA/JES 2016ガイドラインが最も詳細な推奨を提供している</strong>と評価している点、および <strong>2018 ETAガイドラインはヨウ素の治療的使用について言及していない</strong>と明示している点である。つまり、ヨウ素の位置づけについては国際的に完全な合意があるわけではない。</p>
+<h3>3. 症例提示（Case presentations）</h3>
+<p>本総説は3症例から始まる。ここは単なる導入ではなく、後半の「Back to the cases」で診療の質を採点するための対照群として機能している。</p>
+<h4>Case 1（76歳男性・アミオダロン曝露歴）</h4>
+<p>2年前からのアミオダロン曝露歴を持つ76歳男性。発熱39.2°C、心拍160 bpm、せん妄、大量の下痢、黄疸、両側肺底部のcrackles（心不全と肺炎を示唆）で来院。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>所見</th></tr></thead>
+<tbody>
+<tr><td>心エコー（TTE）</td><td>HFrEF急性増悪、LVEF 20%、びまん性壁運動低下、左室拡大、中等度僧帽弁逆流</td></tr>
+<tr><td>TSH</td><td>&lt;0.005 mUI/L（基準 0.4-4）</td></tr>
+<tr><td>FT4</td><td>&gt;100 pmol/L（基準 12-21）</td></tr>
+<tr><td>T3</td><td>24 pmol/L（基準 3.5-6）</td></tr>
+<tr><td>抗TSH受容体抗体</td><td>陰性</td></tr>
+<tr><td>甲状腺エコー</td><td>約32 mLの腫大、不均一な低エコー域、結節なし、血流亢進なし</td></tr>
+<tr><td>AST</td><td>250 U/L（基準 8-33）</td></tr>
+<tr><td>ALT</td><td>180 U/L（基準 7-45）</td></tr>
+<tr><td>ビリルビン</td><td>3.2 mg/dL（基準 0.1-1.2）</td></tr>
+<tr><td>胸部X線</td><td>両側浸潤影（急性肺水腫＋多発性肺炎を示唆する斑状浸潤）</td></tr>
+</tbody></table></div>
+<p>併存症：長期のHFrEF（高血圧性・虚血性・アルコール性の混合病因、発作性心房細動）、慢性腎臓病、50 pack-yearの喫煙歴、危険な飲酒、前立腺癌（放射線治療後）。</p>
+<h4>Case 2（72歳男性・地方の医療センター・死亡例）</h4>
+<p>夕方に地方の医療センターへ搬入された72歳男性。急性の錯乱、動悸、発熱39.5°C、呼吸困難、下痢。直近に腹痛で入院し、造影腹部CTで非複雑性憩室炎と診断されていた。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>所見</th></tr></thead>
+<tbody>
+<tr><td>心拍</td><td>160 bpm・不整（心房細動＋速い心室応答）</td></tr>
+<tr><td>血圧</td><td>95/55 mmHg</td></tr>
+<tr><td>呼吸数</td><td>28回/分</td></tr>
+<tr><td>SpO2</td><td>90%</td></tr>
+<tr><td>身体所見</td><td>大きな多結節性甲状腺腫、温かく湿った皮膚、下腿浮腫</td></tr>
+<tr><td>胸部X線</td><td>肺うっ血、甲状腺腫による左方向への気管偏位</td></tr>
+<tr><td>検査</td><td>トロポニンI上昇、白血球増多、軽度のトランスアミナーゼ上昇、TSH &lt;0.01 mU/L</td></tr>
+</tbody></table></div>
+<p>初期治療：レートコントロールに静注プロプラノロール、フロセミド。解熱にアスピリン（他の冷却手段なし）。嚥下困難のため経口メチマゾールは投与されず、代わりにルゴール液10滴が開始された。三次施設への転送は翌朝の予定とされた。</p>
+<p>転帰：12時間以内に進行性の低血圧・アシドーシス・多臓器機能障害を来し、心停止。蘇生できず死亡。</p>
+<p>翌日届いた末梢ホルモン値：FT4 61.2 pmol/L（基準 10-22）、FT3 9.1 pmol/L（基準 3.5-6.5）。FT4は著明高値だがFT3の上昇は目立たず、重症病態下での末梢変換抑制が示唆される。</p>
+<h4>Case 3（30歳女性・移民・院外心停止・良好管理例）</h4>
+<p>路上で心肺停止した30歳女性の移民。1分以内にファーストレスポンダーによるCPR開始。救急隊到着時は心室細動で除細動施行。5分の蘇生で心拍は正常化。意識障害が遷延（GCS 3/15）したため挿管のうえ三次施設へ搬送。</p>
+<p>搬入時：血行動態は安定だが心房細動＋頻脈性心室応答。心電図でSTEMIの所見なし。頭部CTで頭蓋内出血を除外。胸部CTで肺塞栓なし、右室拡大・肺動脈幹拡大・肺水腫を示唆するすりガラス陰影あり。TTEで軽度右室拡大と肺高血圧の可能性。トロポニンT 11 ng/L（基準&lt;14）、CK 86 U/L（基準 25-140）、CK-MB 25 U/L（CKの6%超）で酵素動態は陰性。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>入院時</th></tr></thead>
+<tbody>
+<tr><td>TSH</td><td>&lt;0.005 mU/L（基準 0.27-4.2）</td></tr>
+<tr><td>FT4</td><td>89.1 pmol/L（基準 11.2-24.1）</td></tr>
+<tr><td>FT3</td><td>32.6 pmol/L（基準 3.1-6.8）</td></tr>
+</tbody></table></div>
+<p>治療の実際（順序が明示されている点が重要）：</p>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>薬剤・用量</th></tr></thead>
+<tbody>
+<tr><td>直ちに</td><td>PTU 200 mg 6時間毎（当初は経鼻胃管から）</td></tr>
+<tr><td>PTU開始の約1時間後</td><td>ヨウ化カリウム 65 mg 初回、以後8時間毎</td></tr>
+<tr><td>同時期</td><td>ヒドロコルチゾン 100 mg 静注 8時間毎</td></tr>
+<tr><td>同時期</td><td>ラベタロール 5 mg 静注 → 0.5 mg/分で持続</td></tr>
+<tr><td>1日目以降</td><td>プロプラノロール 60 mg 6時間毎へ切り替え</td></tr>
+<tr><td>抜管後</td><td>コレスチラミン 4 g 1日3回</td></tr>
+</tbody></table></div>
+<p>経過：FT3は3日で基準範囲内（6.8 pmol/L）、10日で両ホルモンとも基準範囲内（FT4 24 pmol/L、FT3 3.5 pmol/L）。抗凝固はヘパリン静注から開始し、のちに経口アピキサバンへ変更。待機的冠動脈造影は冠動脈疾患陰性、心臓MRIで心筋症を示唆する所見なし。</p>
+<p>後から得られた既往歴：23歳でバセドウ病と診断されカルビマゾール（CMZ）で治療されていたが、約4か月前に自己中断していた。1か月後のフォローTTEでは肺高血圧の所見なし。2か月後に外来で除細動（リズムコントロール）に成功。</p>
+<h3>4. 甲状腺クリーゼとは — 定義と原因</h3>
+<p>甲状腺クリーゼは、甲状腺中毒症の重篤な発現によって生じる、生命を脅かしうる高代謝状態である。診断は臨床所見の構成と重症度、および1つ以上の臓器系の機能的代償不全に基づき、2つのスコアリングシステムが補助する。標準的な甲状腺機能検査だけでは、大多数の患者を単純性甲状腺中毒症と区別できない。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 甲状腺クリーゼの診断と管理（原図・無改変） 診断から管理までの流れを1枚にまとめたフローチャート。βブロッカー、抗甲状腺薬、ヨウ素については、それぞれ列挙された選択肢のうち1つを選ぶ形式で示されている。図の注記には、本文で挙げた代表薬以外にも、経口のアテノロール・メトプロロール・ナドロール、静注のランジオロール・ラベタロールが成功裏に用いられてきたと補足されている。図中の略語は、CT＝コンピュータ断層撮影、JTA/JES＝日本甲状腺学会／日本内分泌学会、p.o.＝経口、i.v.＝静注、SSKI＝ヨウ化カリウム飽和溶液。詳細は本文および参考文献5・6を参照するよう指示されている。 （本ノートではPDF未取得のため図の画像は埋め込んでいない。図が示す内容は下の「治療」節の表に文章として展開した）</p>
+</div>
+<p>誘因（precipitating factors）としては、敗血症を含む感染症、外科手術、抗甲状腺薬の中断が典型である。ただし、一部の患者では明確な誘因が同定できない。</p>
+<p>基礎疾患としてはバセドウ病が最も多い。一部の患者では甲状腺クリーゼがバセドウ病の初発症状となり、抗甲状腺薬の中断が原因となることも稀ではない。バセドウ病以外では、中毒性多結節性甲状腺腫、中毒性腺腫、アミオダロン誘発甲状腺中毒症でも起こりうる。ごく稀な原因として、亜急性甲状腺炎、胞状奇胎、ホルモン産生転移性甲状腺癌、チロシンキナーゼ阻害薬または免疫チェックポイント阻害薬による治療、甲状腺ホルモン錠の服用が報告されている。</p>
+<h3>5. 発生率と死亡率（Incidence and mortality）</h3>
+<p>発生率の推計は、診断基準の不均一性、および食事性ヨウ素摂取量や医療システムに規定される地域差によってばらつく。2016年から2025年に発表された研究に基づくと、一般人口で年間0.2〜1.1／10万人、入院患者で年間4.6〜6.3／10万人である（Table 1では4.8〜6.3と記載）。自己免疫性甲状腺疾患が女性に多いことと一致して、女性対男性は2:1〜3:1である。</p>
+<p>構造化された診療により死亡率は低下してきたが、併存症を持つ高齢患者や、最適でない管理を受けた患者では、依然として最大30%に達しうる致死的転帰のリスクがある。死亡の主因は、多臓器不全、うっ血性心不全、頻脈性不整脈、呼吸不全、低酸素性脳症、播種性血管内凝固、および併存する敗血症である。甲状腺クリーゼは夏季に多い傾向がある。</p>
+<h4>Table 1. 発生率・性比・死亡率の報告レンジ（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>報告レンジ</th></tr></thead>
+<tbody>
+<tr><td>発生率（10万人・年あたり）</td><td>0.2〜1.1（一般人口） / 4.8〜6.3（入院患者）</td></tr>
+<tr><td>男女比</td><td>およそ 1:2〜1:3</td></tr>
+<tr><td>死亡率</td><td>一般に5〜12% / 高齢者・併存症を持つ患者では最大30%</td></tr>
+</tbody></table></div>
+<p>推計は2016〜2025年に発表された研究に基づく。</p>
+<h4>主要な疫学研究（本文で個別に引用されたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>国・データ源</th><th>期間・n</th><th>発生率</th><th>死亡率・主要知見</th></tr></thead>
+<tbody>
+<tr><td>日本・全国入院データベース</td><td>2011-2014、1324例</td><td>0.2／10万人・年</td><td>院内死亡10.1%。女性71.3%。死亡と有意に関連したのは高齢（60歳以上）、入院時の神経学的障害、抗甲状腺薬とβブロッカーの未投与、人工呼吸の必要、血漿交換＋血液透析の必要</td></tr>
+<tr><td>米国・全国入院データ</td><td>2004-2013、19723例</td><td>一般0.57〜0.76／10万人、入院4.8〜5.6／10万人</td><td>院内死亡1.2〜3.6%（クリーゼなし甲状腺中毒症は0.1〜0.4%）。インフレ調整後の入院費は9942ドル→12660ドルへ上昇（P&lt;.01）</td></tr>
+<tr><td>フランス・31 ICUの多施設後ろ向き</td><td>2000-2017、92例</td><td>記載なし</td><td>ICU死亡17%、入院6か月後死亡22%。多変量解析でICU死亡と関連したのは循環器成分を除くSOFA（オッズ比1.22、95%CI 1.03-1.46、P=.025）とICU入室後48時間以内の心原性ショック（オッズ比9.43、1.77-50.12、P=.008）</td></tr>
+<tr><td>台湾・全国人口ベース</td><td>1244例（クリーゼなし甲状腺中毒症83874例）</td><td>一般0.55／10万人・年、入院6.28／10万人・年</td><td>甲状腺中毒症に占めるクリーゼの割合1.48%。女性67.9%、30〜44歳が33.4%。夏季に多い。高齢・男性・既存疾患・虚血性脳卒中・心筋梗塞・心不全が死亡リスク上昇と関連</td></tr>
+<tr><td>ドイツ・保険請求データベース</td><td>2007-2017、1690例</td><td>女性1.4／10万人・年、男性0.7／10万人・年（60歳超では女性2.7、男性1.7）</td><td>女性72%、平均60歳。60歳未満の死亡率は女性1.4%・男性1.0%だが、60歳超では女性10.9%・男性16.7%へ有意に上昇</td></tr>
+<tr><td>日本・前向き多施設レジストリ</td><td>110例</td><td>—</td><td>30日死亡5.5%（先行全国調査の10.7%のほぼ半分）。APACHE II ≥12でガイドライン非準拠だった患者の死亡率50%に対し、準拠群は4.7%（P=.01）</td></tr>
+<tr><td>米国・National Inpatient Sample</td><td>2016-2020、甲状腺中毒症650974例中クリーゼ16175例（2.5%）</td><td>0.91／10万人（2016）→1.03／10万人（2020）</td><td>死亡率2.9%（2016）→5.3%（2020）へ上昇（P&lt;.001）。日本のデータと対照的</td></tr>
+<tr><td>米国・National Inpatient Database（別解析）</td><td>2016-2020、33430入院</td><td>—</td><td>甲状腺中毒症の入院は7444（2016）→5424（2020）へ減少。しかしクリーゼなしで10例0.17%（2016）→55例1.30%（2020）（傾向P&lt;.001）、クリーゼありで10例0.62%→50例4.15%（傾向P=.051）と死亡が増加。インフレ調整後費用36408ドル→49031ドル（傾向P&lt;.001）。クリーゼはMACE（主要心血管イベント）のオッズ上昇と関連</td></tr>
+</tbody></table></div>
+<p>社会経済的因子の影響も指摘されている。民間保険加入者と比べ、無保険の患者は甲状腺中毒症による入院リスクが12倍高く、そのなかでの甲状腺クリーゼの有病割合は32%と非常に高かった。逆に、より高い収入と教育は甲状腺中毒症による入院率の低下と関連していた。症例3の患者（移民・限られた資源・社会経済的統合の乏しさ・言語の壁）は、この脆弱集団のリスクを体現している。</p>
+<h3>6. 歴史的背景（Historical aspects）</h3>
+<p>ヨウ素という薬剤が「治療にも増悪にも働く」という本疾患の核心は、歴史的経緯そのものに刻まれている。</p>
+<div class="tw"><table>
+<thead><tr><th>年代</th><th>人物・出来事</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>1819年頃</td><td>スイス・ジュネーブのJean-François Coindetがヨウ化カリウムで甲状腺腫を治療</td><td>ヨウ素欠乏地域で有効だったため広く普及した</td></tr>
+<tr><td>1821年</td><td>Coindetが有害事象、特に重度の頻脈を報告</td><td>甲状腺機能亢進症の主徴の最初期の記述の1つ</td></tr>
+<tr><td>同時期</td><td>Jean-Pierre Colladonが致死例を報告</td><td>おそらく甲状腺クリーゼによる死亡の最初の報告</td></tr>
+<tr><td>1910年</td><td>Theodor Kocherが「Jod-Basedow」と命名</td><td>自律性結節を持つ多結節性甲状腺腫にヨウ素が加わって生じる甲状腺中毒症</td></tr>
+<tr><td>1862年</td><td>Trousseauが「眼球突出性甲状腺腫」でヨウ素療法により症状が改善することを観察</td><td>Plummerより早い観察</td></tr>
+<tr><td>1920年代</td><td>ボストンの外科医Frank Howard Laheyが「眼球突出性甲状腺腫のクリーゼ」と術後死亡のリスクに注意喚起</td><td>「甲状腺クリーゼは決して稀ではない」「クリーゼの状態まで進行させた患者の死亡率は極めて高い」。当時は甲状腺手術がクリーゼの一般的な誘因だった</td></tr>
+<tr><td>同時期</td><td>Henry Plummerが甲状腺摘出術予定の患者にルゴール液（ヨウ化カリウムとヨウ素の混合物）を投与</td><td>バセドウ病では逆に症状が改善し、しばしば数日で消退。Mayo Clinicの手術死亡率が約4〜5%から1%未満へ低下</td></tr>
+<tr><td>1940年代初頭</td><td>Ted Astwoodがチオウレア・チオウラシル系薬剤を導入</td><td>甲状腺中毒症、そして甲状腺クリーゼの治療を根本的に変えた</td></tr>
+<tr><td>1960年代半ば</td><td>Sir James Blackがプロプラノロールを開発（1988年ノーベル賞）</td><td>甲状腺中毒症の管理と死亡率低下に決定的な影響</td></tr>
+</tbody></table></div>
+<p>Plummerがルゴール液を用いた根拠は「バセドウ病は甲状腺が異常なホルモンないし毒素を放出する『異甲状腺症』である」という誤った仮説であった。しかし結果は良好で、この <strong>Plummer効果</strong> は、甲状腺内の高濃度ヨウ化物がバセドウ病患者のホルモン放出を抑制するという機序で説明される。甲状腺血流に対するヨウ素の効果に加え、末梢甲状腺ホルモン値の低下・正常化が転帰改善に寄与したと考えられる。これが甲状腺クリーゼ治療におけるヨウ素の使用の鍵となる機序である。</p>
+<h3>7. 臨床像と診断（Clinical presentation and diagnosis）</h3>
+<p>病歴から甲状腺クリーゼを示唆する手がかりは、甲状腺中毒症に伴う古典的症状、甲状腺機能亢進症の既往、抗甲状腺薬の中断、ヨウ素曝露、感染、最近の手術、急性疾患、重大な精神的ストレスである。</p>
+<p>大多数の患者は甲状腺中毒症の特徴的な徴候を示す。結節の有無を問わない甲状腺腫、バセドウ病患者では甲状腺眼症の徴候。症状の強度と組み合わせは多様である。主要な臨床的特徴は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>臓器系</th><th>典型的所見</th></tr></thead>
+<tbody>
+<tr><td>体温調節</td><td>高熱（しばしば38.5°C超）</td></tr>
+<tr><td>循環</td><td>発熱の程度に不釣り合いな頻脈、心房細動などの不整脈、うっ血性心不全、肺水腫</td></tr>
+<tr><td>中枢神経</td><td>興奮から錯乱・昏睡までの精神状態の変化</td></tr>
+<tr><td>消化器・肝</td><td>悪心、嘔吐、下痢、黄疸</td></tr>
+<tr><td>心筋</td><td>可逆性の拡張型心筋症（高齢者に多いが若年でも起こる）、たこつぼ型心筋症</td></tr>
+</tbody></table></div>
+<p>稀に、高齢者でより多く、甲状腺中毒症の古典的な症候が欠けることがあり、これを「無欲性（apathetic）甲状腺機能亢進症」と呼ぶ。</p>
+<p>診断は第一義的に臨床的であり、2つのスコアリングシステムが支持する。1993年に初めて発表された <strong>Burch–Wartofsky点数スケール</strong>（Fig 2）と、<strong>JTA/JES基準</strong>（Fig 3）である。日本の基準は、甲状腺クリーゼの発生率に関する全国調査の文脈で2012年に提唱され、その後、本症の管理ガイドラインとともに2016年に公表された。</p>
+<p>Burch–Wartofskyスケールは、体温、中枢神経系の関与、心拍数、消化器症状、心不全、不整脈、誘因の有無という臨床徴候に基づいて点数を割り当てる。同様にJTA/JES基準は、臨床所見と検査所見を組み合わせて診断を支持する。</p>
+<div class="tw"><table>
+<thead><tr><th>Burch–Wartofsky 合計点</th><th>解釈</th></tr></thead>
+<tbody>
+<tr><td>25点未満</td><td>甲状腺クリーゼは考えにくい</td></tr>
+<tr><td>25〜44点</td><td>切迫クリーゼ（impending crisis）の可能性を示唆</td></tr>
+<tr><td>45点超</td><td>甲状腺クリーゼの可能性が高い</td></tr>
+</tbody></table></div>
+<p>JTA/JESのスコアリングシステムは、患者を <strong>確実な甲状腺クリーゼ（TS1）</strong> または <strong>疑い甲状腺クリーゼ（TS2）</strong> に分類する。2つのシステムは、甲状腺クリーゼ患者の大半を正確に同定することが示されている。さらに、これらのスコアは死亡率、在院日数、ICU滞在日数の予測因子でもある。ただし、これらのツールが診断を助けるとはいえ、臨床的判断が依然として不可欠であると著者らは強調する。妊娠中の甲状腺クリーゼは報告されているが極めて稀である。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. Burch–Wartofskyスコアリングシステムの図解（原図・無改変） 1993年に初めて発表されたBurch–Wartofsky点数スケールを図解したもの。体温調節障害、中枢神経系（CNS）の影響、消化器・肝機能障害、頻脈、うっ血性心不全、心房細動、誘因の有無という7つのドメインごとに、重症度に応じた点数がグラフィカルに配置されている。図中の略語はCNS＝中枢神経系。 （PDF未取得のため画像は埋め込んでいない。図が示す配点は原典 Burch HB, Wartofsky L. Endocrinol Metab Clin North Am. 1993;22(2):263-277 に基づき、下の表に文章化した）</p>
+</div>
+<h4>Table（参考）. Burch–Wartofsky点数スケールの項目と配点</h4>
+<p>図2が図解している原典スケールの内容。合計点を上表の3区分に当てはめる。</p>
+<div class="tw"><table>
+<thead><tr><th>ドメイン</th><th>区分</th><th>点数</th></tr></thead>
+<tbody>
+<tr><td>体温調節障害</td><td>37.2〜37.7°C</td><td>5</td></tr>
+<tr><td>体温調節障害</td><td>37.8〜38.2°C</td><td>10</td></tr>
+<tr><td>体温調節障害</td><td>38.3〜38.8°C</td><td>15</td></tr>
+<tr><td>体温調節障害</td><td>38.9〜39.2°C</td><td>20</td></tr>
+<tr><td>体温調節障害</td><td>39.3〜39.9°C</td><td>25</td></tr>
+<tr><td>体温調節障害</td><td>40.0°C以上</td><td>30</td></tr>
+<tr><td>中枢神経症状</td><td>なし</td><td>0</td></tr>
+<tr><td>中枢神経症状</td><td>軽度（興奮）</td><td>10</td></tr>
+<tr><td>中枢神経症状</td><td>中等度（せん妄、精神病、著明な傾眠）</td><td>20</td></tr>
+<tr><td>中枢神経症状</td><td>高度（けいれん、昏睡）</td><td>30</td></tr>
+<tr><td>消化器・肝機能障害</td><td>なし</td><td>0</td></tr>
+<tr><td>消化器・肝機能障害</td><td>中等度（下痢、悪心・嘔吐、腹痛）</td><td>10</td></tr>
+<tr><td>消化器・肝機能障害</td><td>高度（原因不明の黄疸）</td><td>20</td></tr>
+<tr><td>頻脈</td><td>99〜109 bpm</td><td>5</td></tr>
+<tr><td>頻脈</td><td>110〜119 bpm</td><td>10</td></tr>
+<tr><td>頻脈</td><td>120〜129 bpm</td><td>15</td></tr>
+<tr><td>頻脈</td><td>130〜139 bpm</td><td>20</td></tr>
+<tr><td>頻脈</td><td>140 bpm以上</td><td>25</td></tr>
+<tr><td>うっ血性心不全</td><td>なし</td><td>0</td></tr>
+<tr><td>うっ血性心不全</td><td>軽度（下腿浮腫）</td><td>5</td></tr>
+<tr><td>うっ血性心不全</td><td>中等度（両側肺底部のラ音）</td><td>10</td></tr>
+<tr><td>うっ血性心不全</td><td>高度（肺水腫）</td><td>15</td></tr>
+<tr><td>心房細動</td><td>なし</td><td>0</td></tr>
+<tr><td>心房細動</td><td>あり</td><td>10</td></tr>
+<tr><td>誘因の既往</td><td>なし</td><td>0</td></tr>
+<tr><td>誘因の既往</td><td>あり</td><td>10</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. JTA/JESスコアリングシステムの図解（原図・無改変） 日本甲状腺学会／日本内分泌学会による甲状腺クリーゼ診断基準を図解したもの。この基準は2012年に発表された全国調査に基づいて開発され、2016年に正式なガイドラインとしてまとめられた。図の注記では、中枢神経症状の定義として「Japan Coma Scale 1以上またはGlasgow Coma Scale 14以下」が明示されている。図中の略語はCNS＝中枢神経系、bpm＝拍/分、FT3＝遊離トリヨードサイロニン、FT4＝遊離サイロキシン。 （PDF未取得のため画像は埋め込んでいない。図が示す基準は原典 Akamizu T, et al. Thyroid. 2012;22(7):661-679 および Satoh T, et al. Endocr J. 2016;63(12):1025-1064 に基づき、下の表に文章化した）</p>
+</div>
+<h4>Table（参考）. JTA/JES 甲状腺クリーゼ診断基準の項目と組み合わせ</h4>
+<p><strong>必須前提条件</strong>：FT3またはFT4の上昇を伴う甲状腺中毒症が存在すること。</p>
+<div class="tw"><table>
+<thead><tr><th>症状カテゴリ</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td>中枢神経症状</td><td>不穏、せん妄、精神異常・精神病、傾眠・嗜眠、昏睡（Japan Coma Scale 1以上またはGlasgow Coma Scale 14以下）</td></tr>
+<tr><td>発熱</td><td>38°C以上</td></tr>
+<tr><td>頻脈</td><td>130 bpm以上（心房細動の場合も心拍数130以上）</td></tr>
+<tr><td>心不全症状</td><td>肺水腫、肺野の半分を超える湿性ラ音、心原性ショック、NYHA分類IV度またはKillip分類III度以上</td></tr>
+<tr><td>消化器・肝症状</td><td>悪心、嘔吐、下痢、または総ビリルビン3.0 mg/dL以上</td></tr>
+</tbody></table></div>
+<div class="tw"><table>
+<thead><tr><th>判定</th><th>組み合わせ</th></tr></thead>
+<tbody>
+<tr><td>TS1（確実）</td><td>甲状腺中毒症＋中枢神経症状1項目以上＋（発熱・頻脈・心不全・消化器肝症状）のいずれか1項目以上</td></tr>
+<tr><td>TS1（確実）</td><td>甲状腺中毒症＋（発熱・頻脈・心不全・消化器肝症状）のうち3項目以上</td></tr>
+<tr><td>TS2（疑い）</td><td>甲状腺中毒症＋（発熱・頻脈・心不全・消化器肝症状）のうち2項目</td></tr>
+<tr><td>TS2（疑い）</td><td>TS1の症状の組み合わせを満たすが、FT3・FT4が測定できず、甲状腺疾患の既往・甲状腺腫・眼球突出のいずれかがある場合</td></tr>
+</tbody></table></div>
+<p>除外規定として、各症状が明らかに他の基礎疾患で説明できる場合（例：肺炎による発熱、消化管出血による意識障害）は、その症状を判定に用いない。</p>
+<h3>8. 検査所見（Laboratory findings）</h3>
+<p>血清の総T4・総T3、FT4・FT3の濃度は上昇するが、単純性甲状腺中毒症より必ずしも高いわけではない。血清T3は、重症疾患の文脈で末梢変換が低下するため、時に基準範囲内にとどまり判断を誤らせることがある（症例2がまさにこの形だった）。</p>
+<p>より重症であることを反映するAPACHE IIおよびSOFAの高値は死亡率上昇と強く関連していたが、<strong>FT4・FT3・FT3/FT4比は関連していなかった</strong>。FT3の低値およびFT3/FT4比の低値は、より重症であることと関連しており、重症患者ではT4からT3への変換が抑制されていることを示唆する。</p>
+<p>その他の一般検査所見：</p>
+<div class="tw"><table>
+<thead><tr><th>所見</th><th>頻度・意味</th></tr></thead>
+<tbody>
+<tr><td>高血糖</td><td>高頻度</td></tr>
+<tr><td>乳酸上昇</td><td>高頻度</td></tr>
+<tr><td>感染なしの白血球増多</td><td>高頻度</td></tr>
+<tr><td>軽度の高カルシウム血症</td><td>高頻度</td></tr>
+<tr><td>トランスアミナーゼ・ALPの上昇</td><td>起こりうる</td></tr>
+<tr><td>血清コルチゾール</td><td>急性疾患時には高値であるべき。低値は副腎不全または副腎予備能の低下を示唆</td></tr>
+</tbody></table></div>
+<h3>9. 鑑別診断（Differential diagnosis）</h3>
+<div class="tw"><table>
+<thead><tr><th>鑑別疾患</th><th>甲状腺クリーゼと重なる点</th></tr></thead>
+<tbody>
+<tr><td>コントロール下の甲状腺中毒症</td><td>頻脈・振戦・発汗。臓器不全の有無で分ける</td></tr>
+<tr><td>敗血症</td><td>発熱・頻脈・意識障害・多臓器不全。誘因としても併存しうる</td></tr>
+<tr><td>脳炎・髄膜炎</td><td>発熱・意識障害</td></tr>
+<tr><td>高血圧性脳症</td><td>意識障害・循環動態異常</td></tr>
+<tr><td>熱中症</td><td>高体温・意識障害・多臓器不全</td></tr>
+<tr><td>薬物中毒（コカイン、アンフェタミンなど）</td><td>高体温・頻脈・興奮</td></tr>
+<tr><td>悪性症候群</td><td>高体温・意識障害・自律神経不安定</td></tr>
+</tbody></table></div>
+<p>これらは甲状腺クリーゼと類似の症状を呈しうるため、評価の過程で考慮し除外すべきである。</p>
+<h3>10. 病態生理（Pathogenesis）</h3>
+<p>甲状腺ホルモン上昇の程度だけでは甲状腺クリーゼを説明できない。非常に高いホルモン値でも代償されたままの患者がいる一方で、より穏やかなホルモン値でクリーゼを発症する患者がいる。併存する誘因はしばしば同定できるが、常にではない。</p>
+<p>症状はカテコラミン過剰に似ているが、実際のカテコラミン値は通常正常である。このことは、組織側の反応性亢進とβアドレナリン受容体活性が鍵を握ることを示唆し、βブロッカーの臨床的有効性を説明する。</p>
+<p>なぜ同程度のホルモン値であるにもかかわらず一部の甲状腺中毒症患者のみがクリーゼに進行するのか、その機序は依然として十分に解明されていない。誘因は、以下のような機序を通じて急速なホルモンの上昇または組織感受性の亢進を引き起こすと考えられる。</p>
+<div class="tw"><table>
+<thead><tr><th>想定される機序</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>サイトカイン放出の増加</td><td>感染・手術などがトリガーとなる</td></tr>
+<tr><td>アドレナリン受容体反応性の変動</td><td>組織側の感受性が変わる</td></tr>
+<tr><td>併存症の増幅効果</td><td>心不全や感染が高代謝反応を増幅する</td></tr>
+<tr><td>細胞の代謝ストレスと酸化的リン酸化の脱共役</td><td>低酸素や感染の状況下で熱産生と全身症状を増加させうる</td></tr>
+</tbody></table></div>
+<h3>11. 治療（Treatment of thyroid storm）</h3>
+<p>未治療の甲状腺クリーゼの死亡リスクを踏まえ、甲状腺腫・高熱・著明な頻脈・誘因となる疾患といった臨床的特徴があれば、<strong>検査結果が返る前でも速やかに治療を開始することが正当化される</strong>。治療は多面的であり、甲状腺ホルモン過剰による重篤な全身作用と、（多）臓器障害・臓器不全の徴候を反転させることを目指す。</p>
+<p>治療の主要原則は2016 ATAガイドラインにまとめられており、2016 JTA/JESガイドラインが非常に詳細な推奨を提供している。2018 ETAガイドライン（バセドウ病性甲状腺機能亢進症の管理）は簡潔な概要を提供するが、<mark class="hl">ヨウ素の治療的使用については言及していない</mark>。</p>
+<h4>11-1. 支持療法（Supportive therapy）</h4>
+<p>患者は継続的なモニタリングと治療のためICUで管理されるべきである。初期治療は、循環器合併症、心拍数コントロール、呼吸不全に対応しなければならない。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>具体的な対応</th></tr></thead>
+<tbody>
+<tr><td>高体温</td><td>冷却手段と解熱療法（パラセタモール＝アセトアミノフェン）</td></tr>
+<tr><td>アスピリン</td><td><mark class="hl">禁忌</mark>。結合蛋白から甲状腺ホルモンを置換して遊離ホルモン値を上げ、甲状腺中毒症を悪化させる</td></tr>
+<tr><td>興奮・発熱</td><td>必要に応じてクロルプロマジンを使用してよい</td></tr>
+<tr><td>ステロイド</td><td>末梢での甲状腺ホルモン変換を減らし、顕性または部分的な副腎不全を緩和する目的で投与</td></tr>
+<tr><td>低ナトリウム血症</td><td>発汗・嘔吐・下痢による循環血漿量減少から生じる</td></tr>
+<tr><td>低マグネシウム血症</td><td>消化管からの喪失による</td></tr>
+<tr><td>低カリウム血症</td><td>交感神経活動亢進によりβ2刺激がNa+/K+-ATPaseを介して細胞内シフトを起こす</td></tr>
+<tr><td>高カリウム血症</td><td>アシドーシスに伴って起こりうる</td></tr>
+<tr><td>酸塩基異常</td><td>代謝性アシドーシスや呼吸性アルカリオーシス。関連する電解質異常とともに速やかに同定し補正する</td></tr>
+<tr><td>血糖</td><td>低血糖のリスクがあるため厳重に監視する</td></tr>
+<tr><td>栄養</td><td>チアミンなどのビタミン補充を含む栄養サポートが必要になりうる</td></tr>
+</tbody></table></div>
+<h4>11-2. 誘因の治療</h4>
+<p>感染症・敗血症は古典的な誘因であり、その適時の同定と管理が甲状腺クリーゼの制御に不可欠である。</p>
+<h4>11-3. βブロッカー（Beta blockade）</h4>
+<p>βブロッカーは、亢進した交感神経活動を遮断し、頻脈・不安・振戦といった症候をコントロールすることで、甲状腺クリーゼ管理に不可欠である。</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤・投与経路</th><th>用量</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>プロプラノロール 経口</td><td>60〜80 mg 4時間毎</td><td>ATA・ETAガイドラインの推奨。症候の制御に加えT4→T3変換も減らしうる</td></tr>
+<tr><td>プロプラノロール 静注</td><td>緩徐ボーラス1〜3 mg（1 mg/分を超えない速度）→ 持続2〜3 mg/時</td><td>不安定または経口不能の患者に</td></tr>
+<tr><td>ラベタロール 静注</td><td>5〜20 mgを2分かけて → 持続0.5 mg/分</td><td>同上</td></tr>
+<tr><td>エスモロール 静注</td><td>500 mcg/kgを1分かけて → 50〜100 mcg/kg/分</td><td>半減期約9分。有害事象が出れば即座に中止できるため好まれることが多い</td></tr>
+<tr><td>ランジオロール 静注</td><td>本文に用量記載なし（Fig 1で選択肢として列挙）</td><td>JTA/JESが推奨するβ1選択性薬</td></tr>
+<tr><td>ビソプロロール 経口</td><td>本文に用量記載なし</td><td>JTA/JESが推奨するβ1選択性薬</td></tr>
+<tr><td>ジルチアゼム</td><td>本文に用量記載なし</td><td>βブロッカー禁忌時（喘息、心代償不全）の代替</td></tr>
+</tbody></table></div>
+<p>JTA/JESガイドラインは、静注のランジオロールまたはエスモロール、経口のビソプロロールといったβ1選択性βブロッカーの使用を推奨し、プロプラノロールより優先する立場をとる。根拠は、心不全患者でプロプラノロール治療により死亡率が上昇することを示唆した後ろ向き解析である。しかし、その後の後ろ向きコホート研究では、プロプラノロール投与患者とβ1選択性βブロッカー投与患者の院内死亡率は同等であった（<strong>7.4% 対 6.3%</strong>）。これは急性心不全の症例でも同様であった。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>心不全併存例でのβ遮断 うっ血性心不全が疑われるまたは判明している患者では、<mark class="hl">β遮断が心血管虚脱を起こしうる</mark>ため、侵襲的モニタリングと、より低い初期用量からの慎重な使用が推奨される。半減期の短いエスモロール（約9分）が選ばれやすいのはこのためである。</p>
+</div>
+<h4>11-4. 甲状腺ホルモンの産生・分泌の抑制</h4>
+<p><strong>チオナミド（抗甲状腺薬）</strong></p>
+<p>プロピルチオウラシル（PTU）、メチマゾール（MMI）、またはその前駆体であるカルビマゾール（CMZ）が甲状腺ホルモン合成の阻害に用いられる。PTUは末梢でのT4→T3変換も阻害するため、甲状腺クリーゼではしばしば好まれる。</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>用量・投与法</th></tr></thead>
+<tbody>
+<tr><td>PTU</td><td>負荷量500〜1000 mgを経口・経鼻胃管・または直腸から → 250 mgを4時間毎</td></tr>
+<tr><td>MMI</td><td>60〜80 mg/日</td></tr>
+<tr><td>CMZ</td><td>80〜100 mg/日</td></tr>
+</tbody></table></div>
+<p>肝機能障害がある場合（ビリルビンと肝酵素が正常上限の3倍のとき）は、PTUよりMMIまたはCMZが好まれる。静注MMIは欧州の一部と日本で利用可能だが米国では利用できず、静注PTUはもはや市販されていない。MMI溶液の調製法は公表されている。用量は末梢ホルモン濃度に応じて漸減する。</p>
+<p>PTUとMMIの優劣については決着がついていない。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>n</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>多施設コホートの比較効果研究</td><td>成人1383例（PTU 656例、MMI 727例）</td><td>死亡率・有害事象に有意差なし</td></tr>
+<tr><td>日本の全国調査</td><td>356例（MMI 276例、PTU 45例）</td><td>MMIが優先的に使われ、PTUに比べて不利な点はなかった</td></tr>
+</tbody></table></div>
+<p><strong>ヨウ素</strong></p>
+<p>ヨウ素は甲状腺ホルモンの合成（Wolff–Chaikoff効果）と放出（Plummer効果）の双方を阻害する。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>投与順序 ヨウ素は <mark class="hl">抗甲状腺薬を投与してから少なくとも1時間後</mark> に投与すべきである。バセドウ病による甲状腺中毒症では薬剤未使用の患者に成功裏に用いられた経験もあるが、投与を遅らせることは、自律性結節を有する結節性甲状腺腫の患者において <mark class="hl">ホルモン合成の基質を増やして甲状腺中毒症を悪化させることを防ぐために決定的に重要</mark> である。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>製剤</th><th>用量</th><th>1滴あたりのヨウ素量</th></tr></thead>
+<tbody>
+<tr><td>ルゴール液</td><td>8滴を1日4回</td><td>5%ルゴール液は1滴（0.05 mL）あたり総ヨウ素約6.25 mg（元素ヨウ素I2 約2.5 mg＋ヨウ化カリウム3.75 mg）</td></tr>
+<tr><td>SSKI（ヨウ化カリウム飽和溶液）</td><td>5滴を1日4回</td><td>ヨウ化物として35〜50 mg／滴</td></tr>
+<tr><td>ヨウ化カリウム錠</td><td>65 mgを1日3回</td><td>—</td></tr>
+</tbody></table></div>
+<p>患者が安定したら中止する。局所刺激を最小化するため、ヨウ素溶液は経口または経鼻胃管投与の前に牛乳やジュースなどで希釈すべきである（ルゴール液による重篤な十二指腸出血の報告がある）。</p>
+<p><strong>ステロイド</strong></p>
+<p>ステロイドは末梢でのT4→T3変換を減少させることで甲状腺クリーゼの治療に重要な役割を果たす。加えて、甲状腺ホルモン過剰による高代謝状態のために生じうる顕性または相対的な副腎不全の予防・治療に役立つ。</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>用量</th></tr></thead>
+<tbody>
+<tr><td>ヒドロコルチゾン 静注</td><td>負荷量300 mg → 100 mgを8時間毎</td></tr>
+</tbody></table></div>
+<p>ステロイド療法は、甲状腺クリーゼの基礎疾患がバセドウ病である場合に特に有益である。臨床的改善が得られるまで継続し、その後漸減する。</p>
+<p><strong>その他の薬剤</strong></p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>機序</th><th>現状</th></tr></thead>
+<tbody>
+<tr><td>過塩素酸塩（perchlorate）</td><td>ナトリウム・ヨウ素シンポーターによるヨウ化物取り込みの競合的阻害</td><td>もはや容易には入手できない</td></tr>
+<tr><td>イオパノ酸（iopanoic acid）</td><td>T4→T3変換を担う5'脱ヨウ素酵素（脱ヨウ素酵素1型・2型）の阻害</td><td>もはや容易には入手できない</td></tr>
+<tr><td>コレスチラミン</td><td>腸肝循環を遮断して甲状腺ホルモンのクリアランスを増やす</td><td>4 gを1日3回。適応外使用</td></tr>
+<tr><td>リチウム</td><td>甲状腺ホルモン分泌の阻害</td><td>毒性リスクのため専門家の助言のもとで考慮</td></tr>
+</tbody></table></div>
+<h4>11-5. 補助療法（Adjunct therapies）</h4>
+<p><strong>血漿交換（Plasmapheresis）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>適応</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>従来治療が奏効しない稀な状況</td><td>循環中の甲状腺ホルモンとサイトカインを速やかに除去でき、一時的だが有意なホルモン値の低下をもたらす</td></tr>
+<tr><td>肝不全のためチオナミドが禁忌の場合</td><td>同上</td></tr>
+<tr><td>チオナミドへの重篤な有害反応（メチマゾール誘発無顆粒球症など）</td><td>同上</td></tr>
+<tr><td>急速な術前安定化が必要な場合</td><td>同上</td></tr>
+</tbody></table></div>
+<p>JTA/JESガイドラインは、血漿交換を考慮しうる状況について詳細な推奨を提供している。</p>
+<p><strong>抗凝固</strong></p>
+<p>持続性の心房細動を有する患者には、脳卒中リスクを層別化する検証済みツールであるCHADS2スコアに基づいて抗凝固が推奨される。</p>
+<h4>11-6. 手術（Surgery）</h4>
+<p>甲状腺クリーゼに対する外科的甲状腺摘出術は、甲状腺中毒症が内科的にコントロールされる前には一般に推奨されない。ただし、標準的な内科治療で12〜24時間以内に患者が改善しない場合には手術を主張する立場もある。このアプローチには議論があり、抗甲状腺薬への重篤なアレルギーや急速な改善が緊急に必要な場合など、極めて稀な状況に限るべきである。全体として、甲状腺摘出術は積極的な内科治療が不十分な場合の二次的選択肢である。</p>
+<h4>11-7. 長期治療（Long-term therapy）</h4>
+<p>安定化後は抗甲状腺薬を維持し、再発予防のために放射性ヨウ素治療または甲状腺摘出術といった甲状腺機能亢進症に対する根治的治療を受けることが一般に勧められる。</p>
+<h3>12. 症例の振り返り（Back to the cases）</h3>
+<h4>Case 1 — アミオダロン誘発甲状腺中毒症としてのクリーゼ</h4>
+<p>Burch–Wartofskyスケールで<strong>65点</strong>、日本甲状腺学会（JTA）のTS1基準も満たす甲状腺クリーゼであり、循環器・中枢神経・消化器肝・肺の多臓器不全を伴っていた。誘因は両側肺炎の可能性がある。病因はアミオダロン誘発甲状腺中毒症（AIT）に矛盾せず、破壊性甲状腺炎によるAIT type 2、および自律性の局所領域（AIT type 1）の併存が考えられる。</p>
+<p>初期ICU管理：ループ利尿薬に加えドブタミンによる強心サポート、冷却、静注抗菌薬。</p>
+<p>初期の甲状腺中毒症治療：</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>用量</th></tr></thead>
+<tbody>
+<tr><td>プロプラノロール 静注</td><td>1〜3 mgを4〜6時間毎</td></tr>
+<tr><td>PTU</td><td>200 mgを8時間毎</td></tr>
+<tr><td>ヒドロコルチゾン</td><td>100 mgを8時間毎</td></tr>
+<tr><td>コレスチラミン</td><td>（用量記載なし）</td></tr>
+</tbody></table></div>
+<p>4日後にCMZ 20 mgとプレドニゾン20 mgの経口へ切り替え。末梢ホルモンの完全な正常化は治療開始から4か月後にようやく達成された。根治治療として全身麻酔下の甲状腺全摘術を施行。選択された高リスク患者では、鎮静または催眠を併用した局所頸部麻酔下の甲状腺全摘術も代替として検討されている。</p>
+<h4>Case 2 — 管理の失敗が重なった死亡例</h4>
+<p>この症例は複数の決定的な管理の失敗を示している。甲状腺クリーゼの可能性は高いと考えられ、後に生化学的にも確認されたにもかかわらず、治療は公表された推奨に従わず、専門家へのコンサルトは速やかになされず、三次医療施設への転送も直ちには開始されなかった。</p>
+<div class="tw"><table>
+<thead><tr><th>失敗点</th><th>何が起きたか・なぜ問題か</th></tr></thead>
+<tbody>
+<tr><td>重症度の見誤り</td><td>トロポニン上昇、肺うっ血、低血圧、低酸素は多臓器の関与と心原性ショックの可能性を示し、緊急介入を要した</td></tr>
+<tr><td>モニタリング不足</td><td>この地方病院では厳密な血行動態・呼吸のモニタリングが不可能だった</td></tr>
+<tr><td>解熱薬の誤選択</td><td>発熱コントロールにアスピリンが用いられ、甲状腺ホルモン値をさらに上げた可能性がある</td></tr>
+<tr><td>代替投与経路の未使用</td><td>嚥下困難のため経口CMZが投与されなかったが、他の投与経路（経鼻胃管・直腸）が用いられなかった</td></tr>
+<tr><td><mark class="hl">ヨウ素の投与順序の誤り</mark></td><td>チオナミドの前にルゴール液が開始された。多結節性甲状腺腫を持つこの患者に対し、ホルモン合成の基質をさらに供給した。憩室炎の精査で投与された造影剤も誘因となった可能性がある</td></tr>
+<tr><td>ステロイド未投与</td><td>末梢変換の抑制と潜在的副腎不全への保護のためのグルココルチコイドが投与されなかった</td></tr>
+<tr><td>転送の遅れ</td><td>三次施設への転送が翌朝の予定とされた</td></tr>
+</tbody></table></div>
+<p>致死的転帰は、この重篤な甲状腺クリーゼ患者における、最適でない治療・不十分なモニタリング・誤った薬剤選択の組み合わせから生じたと考えられる。</p>
+<h4>Case 3 — 推奨に完全に沿った管理の例</h4>
+<p>バセドウ病でアドヒアランス不良だったこの患者は、心停止で複雑化した甲状腺クリーゼの優れた管理を例示している。同時に、循環器合併症が若年患者にも起こりうることを示している。</p>
+<div class="tw"><table>
+<thead><tr><th>良かった点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>蘇生</td><td>即座のバイスタンダーCPRと心室細動への迅速な除細動により、循環が適時に回復した</td></tr>
+<tr><td>気道</td><td>意識障害のため早期に挿管し、その後大学病院へ転送</td></tr>
+<tr><td>認識</td><td>三次施設で甲状腺クリーゼが直ちに認識された</td></tr>
+<tr><td>鑑別</td><td>STEMI・肺塞栓・頭蓋内出血という他の心停止原因を包括的な検査で除外した</td></tr>
+<tr><td>モニタリング</td><td>ICUで厳密な血行動態監視と呼吸サポート、多職種による協調的なケア</td></tr>
+<tr><td>抗凝固</td><td>心停止後の心房細動と右室機能障害に対するヘパリンとアピキサバンは適切だった</td></tr>
+<tr><td>治療の順序</td><td>経鼻胃管からPTUを速やかに開始し、その後にヨウ化カリウムを投与</td></tr>
+<tr><td>β遮断</td><td>ラベタロール静注で開始し、プロプラノロールへ移行してアドレナリン症状と頻脈性不整脈を効果的に制御</td></tr>
+<tr><td>補助療法</td><td>ヒドロコルチゾン静注に加え、腸肝循環を断つためコレスチラミンを投与</td></tr>
+<tr><td>造影の判断</td><td>未治療の甲状腺クリーゼではヨード造影剤が禁忌であることを踏まえ、冠動脈造影を集中治療による安定化まで延期した</td></tr>
+</tbody></table></div>
+<p>これらの措置により末梢ホルモンは急速に正常化した（FT3は3日、両ホルモンとも10日）。CMZへのアドヒアランス不良が甲状腺クリーゼの主要な誘因であったと考えられる。限られた資源、乏しい社会経済的統合、言語の壁を抱えるこの移民患者は、脆弱な集団が甲状腺クリーゼを発症するリスクが高いことも例示している。</p>
+<h3>13. 結論（Conclusions）</h3>
+<p>ガイドラインに沿った治療は、抗甲状腺薬、ヨウ素、βアドレナリン遮断薬、コルチコステロイド、コレスチラミンの併用によって複数の病態経路を標的とすることで、一般に甲状腺クリーゼの効果的な制御を可能にする。甲状腺クリーゼの可能性を早期に認識することが決定的に重要であり、検証されたスコアリングシステムがそれを支える。集中治療の場での多面的治療の速やかな開始と、誘因の管理が、多臓器不全のリスクを軽減し、甲状腺クリーゼに伴う高い死亡率を著明に低下させてきた。</p>
+<h3>14. 批判的吟味（JCでの論点）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>本文とTable 1で入院患者の発生率が食い違う</strong></td><td>本文は「入院患者で4.6〜6.3／10万人・年」と書き、Table 1と抄録は「4.8〜6.3」と書いている。下限が0.2ポイントずれている。どちらが正しいかは原典に当たらないと分からない。数値を引用するときは注意が必要</td></tr>
+<tr><td><strong>死亡率の表現が3通りある</strong></td><td>抄録は「5〜25%」、Table 1は「一般に5〜12%、高齢・併存症で最大30%」、本文は「最大30%に達しうる」。同じ論文の中で上限が25%と30%で揺れている。JCで数字を引くならTable 1（5〜12%／最大30%）を採るのが安全</td></tr>
+<tr><td><strong>診断基準の不均一が疫学推計の根本的な弱点</strong></td><td>著者ら自身が「診断基準の不均一性のため推計がばらつく」と述べている。BWPSとJTA/JESでは拾う患者集団が異なる可能性があり、国際比較（日本の死亡率低下 対 米国の死亡率上昇）が本当に診療の質の差なのか、コーディングと診断基準の差なのかは区別できない</td></tr>
+<tr><td><strong>JTA/JESガイドラインの有効性の根拠は前向きレジストリ1本（n=110）</strong></td><td>30日死亡5.5% 対 先行全国調査10.7%という比較は歴史的対照であり、時代効果（集中治療全般の進歩）と交絡する。APACHE II ≥12でのガイドライン非準拠50% 対 準拠4.7%（P=.01）も、非準拠群は少数例と考えられ、そもそも「治療を控えざるをえないほど重篤だった」という適応交絡（confounding by indication）を否定できない</td></tr>
+<tr><td><strong>βブロッカー選択のエビデンスが二転三転している</strong></td><td>JTA/JESがβ1選択性を推す根拠は「心不全患者でプロプラノロールが死亡率を上げる」という後ろ向き解析だが、その後の後ろ向きコホートでは7.4% 対 6.3%と差がなかった。どちらも後ろ向きであり、RCTは存在しない。実務上は「どちらでもよいが、心不全併存例では短時間作用型を少量から」が妥当な落としどころ</td></tr>
+<tr><td><strong>PTU 対 MMIも決着していない</strong></td><td>1383例の比較効果研究で死亡・有害事象に差がなく、日本の356例の調査でもMMIが不利ではなかった。「PTUは末梢変換も抑えるから優れる」という機序上の説明は、アウトカムでは裏づけられていない。むしろ肝障害時にMMI/CMZが好まれるという安全性の論点のほうが実務的に重要</td></tr>
+<tr><td><strong>ヨウ素の位置づけに国際的合意がない</strong></td><td>2018 ETAガイドラインはヨウ素の治療的使用に言及していないと著者自身が明記している。にもかかわらず本総説の治療アルゴリズムではヨウ素が中核に置かれている。エビデンスの多くはPlummerの時代の観察と少数例の報告に由来する</td></tr>
+<tr><td><strong>「1時間後」という間隔の根拠が示されていない</strong></td><td>「少なくとも1時間後」という数字は繰り返し出てくるが、その根拠となる薬理学的・臨床的データは引用されていない。症例3では実際に約1時間後に投与している。実務上は守る価値のある目安だが、厳密な閾値というより慣習に近い可能性がある</td></tr>
+<tr><td><strong>手術のタイミング「12〜24時間」の根拠は2003年の1報のみ</strong></td><td>内科治療で12〜24時間改善しない場合に手術を主張する立場は、参考文献79（Thyroid 2003）に依拠している。著者ら自身が「議論がある」「極めて稀な状況に限る」と留保している</td></tr>
+<tr><td><strong>症例は3例の逸話であって比較データではない</strong></td><td>Case 2の死亡は複数の失敗が重なった結果として提示されるが、どの失敗がどれだけ寄与したかは分からない。教育的価値は高いが、因果を主張するものではない</td></tr>
+<tr><td><strong>血漿交換の位置づけが日本のガイドライン依存</strong></td><td>「JTA/JESガイドラインが詳細な推奨を提供している」とだけ書かれ、具体的な適応基準は本総説には転記されていない。実際に使うなら原典（Endocr J. 2016;63(12):1025-1064）に当たる必要がある</td></tr>
+<tr><td><strong>費用の議論が米国データに偏る</strong></td><td>入院費の上昇（9942→12660ドル、36408→49031ドル）は米国の請求データに基づき、日本の診療報酬体系にはそのまま当てはまらない</td></tr>
+<tr><td><strong>結論部分に文章の乱れがある</strong></td><td>結論の最終文に "the fly high mortality rate" という不自然な表現がある（"the high mortality rate" の誤植と考えられる）。査読・校正の詰めの甘さを示す</td></tr>
+</tbody></table></div>
+<h3>15. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Burch–Wartofsky点数スケールの原典</td><td>Burch HB, Wartofsky L. Endocrinol Metab Clin North Am. 1993;22(2):263-277</td></tr>
+<tr><td>2</td><td>甲状腺クリーゼの日本からの視点</td><td>Akamizu T. Thyroid. 2018;28(1):32-40</td></tr>
+<tr><td>5</td><td>JTA/JES 2016 甲状腺クリーゼ管理ガイドライン（第1版）</td><td>Satoh T, Isozaki O, Suzuki A, et al. Endocr J. 2016;63(12):1025-1064</td></tr>
+<tr><td>6</td><td>2016 ATA 甲状腺機能亢進症・甲状腺中毒症ガイドライン</td><td>Ross DS, Burch HB, Cooper DS, et al. Thyroid. 2016;26(10):1343-1421</td></tr>
+<tr><td>7</td><td>全国調査に基づく診断基準・臨床像・発生率（JTA基準の原典）</td><td>Akamizu T, Satoh T, Isozaki O, et al. Thyroid. 2012;22(7):661-679</td></tr>
+<tr><td>8</td><td>点数スケールの32年</td><td>Burch HB. Thyroid. 2025;35(9):987-989</td></tr>
+<tr><td>9</td><td>ICUにおける甲状腺クリーゼ（フランス31施設・92例）</td><td>Bourcier S, Coutrot M, Kimmoun A, et al. Crit Care Med. 2020;48(1):83-90</td></tr>
+<tr><td>13</td><td>高リスク低頻度疾患としての甲状腺クリーゼ</td><td>Farooqi S, Raj S, Koyfman A, Long B. Am J Emerg Med. 2023;69:127-135</td></tr>
+<tr><td>14</td><td>前向き多施設レジストリ（日本のガイドラインは有用）</td><td>Furukawa Y, Tanaka K, Isozaki O, et al. J Clin Endocrinol Metab. 2024;110(1):e87-e96</td></tr>
+<tr><td>15</td><td>米国の発生率・死亡率・転帰の全国動向2004-2013</td><td>Galindo RJ, Hurtado CR, Pasquel FJ, et al. Thyroid. 2019;29(1):36-43</td></tr>
+<tr><td>16</td><td>台湾の疫学と死亡関連因子</td><td>Kornelius E, Chang KL, Yang YS, et al. Intern Emerg Med. 2021;16(3):601-607</td></tr>
+<tr><td>17</td><td>日本の全国入院データベースによる死亡関連因子</td><td>Ono Y, Ono S, Yasunaga H, et al. Medicine (Baltimore). 2016;95(7):e2848</td></tr>
+<tr><td>19</td><td>ドイツの請求データによる発生率・致死率2007-2017</td><td>Thiyagarajan A, Platzbecker K, Ittermann T, et al. Thyroid. 2022;32(11):1307-1315</td></tr>
+<tr><td>20</td><td>米国の入院動向と転帰2016-2020</td><td>Uwumiro F, Arji E, Okpujie V, et al. J Clin Endocrinol Metab. 2025;110(11):3084-3096</td></tr>
+<tr><td>21</td><td>甲状腺クリーゼにおける昏睡（英語症例報告の集計レビュー）</td><td>Burmeister LA. J Endocr Soc. 2019;3(7):1261-1274</td></tr>
+<tr><td>22</td><td>DICは甲状腺クリーゼの高頻度かつ重大な合併症</td><td>Hoshiyama A, Hayashi A, Taguchi T, et al. Endocr J. 2025;72(6):719-726</td></tr>
+<tr><td>24</td><td>社会経済的因子と甲状腺中毒症入院</td><td>Rivas AM, Larumbe E, Thavaraputta S, et al. Thyroid. 2019;29(1):27-35</td></tr>
+<tr><td>40</td><td>甲状腺クリーゼの臨床像と院内転帰（スコアの予後予測能）</td><td>Angell TE, Lechner MG, Nguyen CT, et al. J Clin Endocrinol Metab. 2015;100(2):451-459</td></tr>
+<tr><td>41</td><td>甲状腺機能亢進症の病因・病態・診断・管理・合併症・予後</td><td>Wiersinga WM, Poppe KG, Effraimidis G. Lancet Diabetes Endocrinol. 2023;11(4):282-298</td></tr>
+<tr><td>43</td><td>妊娠中の甲状腺クリーゼのレビュー</td><td>Vadini V, Vasistha P, Shalit A, Maraka S. Thyroid Res. 2024;17(1):2</td></tr>
+<tr><td>47</td><td>全国調査に基づく甲状腺クリーゼの治療と管理</td><td>Isozaki O, Satoh T, Wakino S, et al. Clin Endocrinol (Oxf). 2016;84(6):912-918</td></tr>
+<tr><td>48</td><td>甲状腺中毒症が副腎皮質予備能に及ぼす影響</td><td>Tsatsoulis A, Johnson EO, Kalogera CH, et al. Eur J Endocrinol. 2000;142(3):231-235</td></tr>
+<tr><td>53</td><td>サリチル酸による遊離T3上昇（アスピリン禁忌の根拠）</td><td>Larsen PR. J Clin Invest. 1972;51(5):1125-1134</td></tr>
+<tr><td>57</td><td>β1選択性βブロッカー 対 プロプラノロール（後ろ向きコホート）</td><td>Matsuo Y, Jo T, Watanabe H, et al. Crit Care Med. 2024;52(7):1077-1086</td></tr>
+<tr><td>58</td><td>β遮断に伴う心血管虚脱</td><td>Dalan R, Leow MK. Exp Clin Endocrinol Diabetes. 2007;115(6):392-396</td></tr>
+<tr><td>61</td><td>重症患者におけるPTU 対 MMI の比較</td><td>Lee SY, Modzelewski KL, Law AC, et al. JAMA Netw Open. 2023;6(4):e238655</td></tr>
+<tr><td>62-64</td><td>PTUの直腸投与（坐剤・注腸）</td><td>Jongjaroenprasert W, et al. Thyroid. 2002;12(7):627-631／Zweig SB, et al. Endocr Pract. 2006;12(1):43-47／Barnett MJL, et al. Endocrinol Diabetes Metab Case Rep. 2024;2024(3):24-0067</td></tr>
+<tr><td>65</td><td>難治性甲状腺機能亢進症への静注メチマゾール</td><td>Hodak SP, Huang C, Clarke D, et al. Thyroid. 2006;16(7):691-695</td></tr>
+<tr><td>66</td><td>Wolff–Chaikoff効果の原典</td><td>Wolff J, Chaikoff IL. J Biol Chem. 1948;174(2):555-564</td></tr>
+<tr><td>69</td><td>ヨウ素による甲状腺からのT4放出抑制</td><td>Wartofsky L, Ransil BJ, Ingbar SH. J Clin Invest. 1970;49(1):78-86</td></tr>
+<tr><td>72</td><td>ルゴール液とヨウ化物製剤の展望</td><td>Calissendorff J, Falhammar H. Endocrine. 2017;58(3):467-473</td></tr>
+<tr><td>73</td><td>ルゴール液による重篤な十二指腸出血</td><td>Kinoshita H, Yasuda M, Furumoto Y, et al. Intern Med. 2010;49(8):759-761</td></tr>
+<tr><td>75</td><td>メチマゾール誘発無顆粒球症での血漿交換</td><td>Vyas AA, Vyas P, Fillipon NL, et al. Endocr Pract. 2010;16(4):673-676</td></tr>
+<tr><td>77</td><td>甲状腺クリーゼにおける血漿交換の役割</td><td>Muller C, Perrin P, Faller B, et al. Ther Apher Dial. 2011;15(6):522-531</td></tr>
+<tr><td>79</td><td>高齢の甲状腺クリーゼ・心肺不全患者に甲状腺摘出術の余地はあるか</td><td>Scholz GH, Hagemann E, Arkenau C, et al. Thyroid. 2003;13(10):933-940</td></tr>
+<tr><td>80</td><td>2018 ETA アミオダロン関連甲状腺機能障害ガイドライン</td><td>Bartalena L, Bogazzi F, Chiovato L, et al. Eur Thyroid J. 2018;7(2):55-66</td></tr>
+<tr><td>84</td><td>2021 ETA ヨード造影剤誘発甲状腺機能障害ガイドライン</td><td>Bednarczuk T, Brix TH, Schima W, et al. Eur Thyroid J. 2021;10(4):269-284</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 甲状腺クリーゼは <mark class="hl">血液検査では診断できない</mark>。FT4・FT3の値はコントロール不良の甲状腺中毒症と区別がつかず、決め手は「発熱・不釣り合いな頻脈・意識障害・心不全・消化器肝症状」という臓器破綻の組み合わせである。Burch–Wartofskyで45点超、またはJTA/JESのTS1を満たしたら、<mark class="hl">ホルモンの結果を待たずに治療を始める</mark>。</p>
+<p>治療の順序には <mark class="hl">決して崩してはいけない一点</mark> がある。<mark class="hl">チオナミド（PTU 500〜1000 mg負荷 → 250 mg 4時間毎、またはMMI 60〜80 mg/日）を先に入れ、少なくとも1時間あけてからヨウ素（ルゴール8滴×4回/日、SSKI 5滴×4回/日、ヨウ化カリウム錠65 mg×3回/日）を重ねる</mark>。逆にすると、自律性結節を持つ甲状腺に材料を配ることになり、症例2のように12時間で死に至りうる。</p>
+<p>同時に走らせるのは、<mark class="hl">βブロッカー（プロプラノロール60〜80 mg 4時間毎。心不全併存例はエスモロール500 mcg/kg → 50〜100 mcg/kg/分など短時間作用型を少量から）</mark> と <mark class="hl">ヒドロコルチゾン300 mg負荷 → 100 mg 8時間毎</mark>、そして誘因（感染・手術・造影剤・服薬中断）の治療。<mark class="hl">解熱にアスピリンを使ってはいけない</mark>（結合蛋白からホルモンを遊離させる）。経口不能なら経鼻胃管か直腸投与に切り替える。「飲めないから投与しない」は許されない。</p>
+<p><mark class="hl">明日から変えること：ICUで甲状腺クリーゼを疑ったら、その場でオーダーセットを開き、チオナミド → 1時間後ヨウ素 → βブロッカー → ヒドロコルチゾンの4本を同時に入力し、アセトアミノフェン＋冷却を指示し、当日中に内分泌代謝科へコンサルトする</mark>。ガイドライン準拠は30日死亡を10.7%から5.5%へ、APACHE II 12以上の重症例では50%から4.7%へ下げる。順序を守るかどうかが生死を分ける疾患である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
