@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>血流感染の迅速診断・迅速ASTは何を変えるか — 治療変更は速くなるが死亡・在院日数は動かない（ナラティブレビュー・IntJGenMed2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="IJGM.S623052.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">血流感染の迅速診断・迅速ASTは何を変えるか — 治療変更は速くなるが死亡・在院日数は動かない（ナラティブレビュー・IntJGenMed2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Chen Q, Qu YG, Li JS, Yan J. Rapid diagnostics and rapid antimicrobial susceptibility testing for bloodstream infections: a narrative review and proposed clinical actionability framework. Int J Gen Med. 2026;19. DOI: 10.2147/IJGM.S623052</dd><dt>掲載誌</dt><dd>International Journal of General Medicine（2026-08-22）</dd><dt>原著</dt><dd><a href="https://doi.org/10.2147/IJGM.S623052" target="_blank" rel="noopener">doi.org/10.2147/IJGM.S623052</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Rapid Diagnostics and Rapid Antimicrobial Susceptibility Testing for Bloodstream Infections: A Narrative Review and Proposed Clinical Actionability Framework</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わらないこと</strong>：本総説は「迅速検査の機械を入れれば転帰が良くなる」を明確に否定している。当院がまず投資すべきは新規プラットフォームではなく、①血液培養の採取量・セット数・汚染率という前分析品質、②陽性ボトルが夜間・週末にどう扱われるか、③結果が出てから処方が変わるまでの時間（result-to-action interval）の3点の実測である。</li><li><strong>すぐ測れる指標</strong>：本総説の言う4区分のうち、当院が今まったく測っていないのは「actionable turnaround time（培養陽性→責任医師が解釈済み結果を手にするまで）」と「result-to-action interval（確定結果リリース→実際の処方変更まで）」。ラボの TAT だけを報告している限り、どこが律速かは永久に分からない。</li><li><strong>グラム染色の即時通知</strong>：本総説がコスト対効果の面で最初に挙げるのは、高価な機器ではなく「グラム染色の能動通知＋院内の染色所見別ガイダンスの明文化」。当院ICUで今日から着手できるのはここ。</li><li><strong>黄色ブドウ球菌菌血症</strong>：S. aureus と同定された時点で「抗菌薬の入れ替え」ではなく<strong>菌血症パスウェイの起動</strong>（再培養・感染源評価・適応があれば心エコー・MSSA ならβラクタム最適化）を自動的に走らせる、という本総説の指摘は当院の <span class="wl">MRSA血管内感染症でバンコマイシンを引退すべきか</span> 周辺の運用と直結する。</li><li><strong>de-escalation の安全条件</strong>：耐性マーカー陰性を根拠に狭域化してよいのは「患者が安定・菌種が一義的に同定・アッセイのターゲット被覆が十分・院内でパネル外機序が稀・スチュワードシップが確認」の5条件が揃うときだけ、と明示されている。ICU の不安定例・感染源制御が不十分な例では適用しない。</li><li><strong>日本の保険診療での実装可否</strong>：本総説は日本の診療報酬・薬事承認には一切触れておらず、<strong>本総説の射程外</strong>。当院で導入可否を論じるときは、この論文を根拠に使えない（引用文献22に日本の三次病院での MALDI-TOF ＋ スチュワードシップ研究が1本あるのみ）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：迅速診断はプロセスアウトカム（同定までの時間、適正治療までの時間、de-escalation）を改善する。特にスチュワードシップと組み合わせたときに効果が大きい。一方、死亡と在院日数への効果は研究間で不均一である（系統的レビュー6〜10）。</li><li><strong>Unknown</strong>：なぜ効果が不均一なのか。どの施設で・どの患者で・どの技術が費用に見合うのか。「速さ」がどの条件を満たしたときに転帰に変換されるのか。</li><li><strong>What's new</strong>：不均一性を文献の限界としてではなく<strong>実装の問題</strong>として定式化した。①検査を「解析速度」ではなく「臨床アクショナビリティ（＝結果が実際の意思決定を解き、行動に変換されること）」で評価する枠組みを提案し、②結果の種類と確実性・患者リスク・耐性の事前確率・結果→行動の実行力・スチュワードシップの質という5ドメインの相互作用として整理した。③2026年の FAST 試験（治療変更は14時間速いが30日 DOOR は非優越）を、この枠組みの実証例として位置づけた。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 血流感染の迅速診断・迅速ASTで<strong>再現性よく改善するのは「適正治療までの時間」「不活性治療の是正」「de-escalation の早期化」というプロセス指標だけ</strong>であり、死亡・在院日数・コストは一貫しない。速さが価値に変わるかどうかは検査の性能ではなく、結果が責任医師に届き解釈され行動に変わる経路（スチュワードシップ）の質で決まる。</p>
+</div>
+<ul><li>ナラティブレビュー。PubMed／Embase／Web of Science／Cochrane Library を 2010年1月〜2026年4月で検索。ガイドライン・系統的レビュー・RCT・多施設研究・実装研究を優先。<strong>定量的統合・certainty grading・risk of bias 評価は行っていない</strong>（PRISMA フロー図も作成していない）。</li><li>従来の血液培養は代替不能（生菌の回収、表現型AST、疫学、追加検査）だが、その限界は<strong>時間</strong>にある。検体搬送・陽性化までの培養・継代・同定・ASTが逐次的に進むため、完全な結果は最も重要な治療決定の後に届く。</li><li>迅速技術はこの逐次工程の<strong>別々の箇所</strong>を短縮する。グラム染色（形態）、直接 MALDI-TOF MS と多重分子パネル（菌種同定）、分子・免疫クロマト法（耐性決定因子）、迅速表現型AST（薬剤別感受性）。</li><li>4つの時間指標を区別すべき：analytical TAT（アッセイ開始→結果生成）、laboratory TAT（検体入手・培養陽性→検証済み結果リリース）、actionable TAT（培養陽性→責任決定者が解釈済み結果を手にする）、result-to-action interval（結果リリース→臨床行動の実施）。<strong>前2つはアッセイの性質、後2つは診断・スチュワードシップ経路全体の性質</strong>。</li><li>「1時間で終わるアッセイが臨床を何も変えず、やや遅い結果がリアルタイムレビューと組み合わさると即座に治療を変える」という現象は、この区別で説明できる。</li><li>ランダム化エビデンス3本：Banerjee 2015（多重PCR、617例）は同定までを22.3時間→1.3時間に短縮し広域薬曝露と汚染菌治療を減らしたが死亡・在院日数・コストは不変。RAPIDS-GN（448例）は初回抗菌薬変更までの中央値を14.9→8.6時間に短縮したが死亡・在院日数は不変。<strong>FAST（2026、850例、4か国7施設）は30日 DOOR で非優越</strong>（より望ましい転帰の確率48.8%、95%CI 45.3–52.4%）だが、エスカレーション／de-escalation までの時間は14時間速かった。</li><li>著者提案の枠組みは<strong>検証済みスコアではなく発見的ヒューリスティック</strong>。前向き検証と施設ごとの適応が必要、と繰り返し明示されている。</li><li>実装は「プラットフォーム優先」ではなく「問題優先」。自施設の律速がどこ（検体採取・菌種同定・薬剤別感受性・結果リリース・解釈・抗菌薬アクセス・治療承認）にあるかを先に決め、その律速を外す介入を選ぶ。宣伝上の実行時間が最短の機器を選ぶことではない。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・検査の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>血流感染（BSI）</strong> は、診断が確定する前に抗菌薬を始めざるを得ない症候群である。敗血症性ショックでは有効な治療の遅れが生存低下と関連する一方、不必要に広域な経験的治療は薬剤毒性・*Clostridioides difficile* 感染・マイクロバイオーム破壊・耐性菌選択をもたらす。したがって臨床上の目標は「早く治療する」ことではなく、<strong>経験的治療から、活性があり・適切に標的化され・安全な治療へ、いかに速く移るか</strong>である。</p>
+<p><strong>従来の血液培養の流れ</strong>：採血 → 搬送・装填 → 培養（陽性化まで約12〜48時間）→ 陽性ボトルのグラム染色（約15〜30分）→ 継代 → 菌種同定 → 表現型AST（分離株が得られてからさらに約16〜24時間）。この逐次性が最大の弱点。</p>
+<p><strong>主な迅速技術と、それが答える問い</strong></p>
+<ul><li><strong>グラム染色</strong>：菌の形態（ブドウ状グラム陽性球菌／連鎖状グラム陽性球菌／グラム陰性桿菌／酵母／複数菌）。最も早いが分類学的・耐性情報の特異度は低い。</li><li><strong>直接 MALDI-TOF MS</strong>（matrix-assisted laser desorption/ionization time-of-flight mass spectrometry）：陽性血液培養液を処理してタンパク質の質量スペクトルから<strong>菌種</strong>を同定する。所要は約0.5〜2時間。</li><li><strong>多重PCR／症候群パネル</strong>：あらかじめ決めた細菌・真菌・耐性遺伝子ターゲットを同時検出。約1〜2時間。BioFire FilmArray などが該当。</li><li><strong>耐性マーカー検出</strong>：*mecA*／*mecC*（メチシリン耐性）、*vanA*／*vanB*（バンコマイシン耐性）、*bla*CTX-M（多くのESBL産生腸内細菌目）、カルバペネマーゼ遺伝子（*bla*KPC、*bla*NDM、*bla*VIM、*bla*IMP、*bla*OXA-48-like）。PCR・マイクロアレイ・LAMP（loop-mediated isothermal amplification、等温増幅）で約0.5〜2時間。</li><li><strong>非分子的迅速法</strong>：PBP2a（penicillin-binding protein 2a）ラテラルフロー免疫測定（LFIA）など。操作が単純で安価。</li><li><strong>迅速表現型AST</strong>：実際に菌を薬剤に曝露して増殖抑制を見る。EUCAST RAST（陽性ボトルから直接のディスク拡散法）、自動機器（画像解析・タイムラプス顕微鏡・形態動態解析・マイクロ流体・蛍光・光散乱・代謝シグナル）、揮発性有機化合物（VOC）検出など。約2〜6時間。</li></ul>
+<p><strong>なぜ「遺伝子＝表現型」ではないのか</strong>：耐性遺伝子が1つ検出されても感受性プロファイル全体は決まらない。逆にパネルのターゲットが陰性でも感受性の証明にはならない。カルバペネム耐性はポーリン欠損・AmpC・ESBL活性の組み合わせでも生じ、アミノグリコシド・フルオロキノロン・ポリミキシンへの耐性機序は多くの血流感染パネルの外にある。</p>
+<p><strong>アクショナビリティ（clinical actionability）</strong> ：本総説の中心概念。結果が「十分に正確で・タイムリーで・解釈可能で・抗菌薬治療／感染対策／追加検査／感染源制御を変え得る意思決定経路に接続されている」とき、その結果は actionable である。<strong>検査そのものに内在する性質ではない</strong>、というのが著者の主張。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>敗血症・敗血症性ショックの現行指針は迅速な治療開始を強調し、敗血症性ショックでの有効治療の遅延は生存低下と関連づけられてきた（Surviving Sepsis Campaign 2021、Kumar 2006）。</li><li>同時に、不必要な広域治療は毒性・*C. difficile* 感染・マイクロバイオーム破壊・耐性選択を招く。</li><li>系統的レビューは概して「迅速診断はプロセスアウトカムを改善する、とくに能動的スチュワードシップと組み合わせたとき」を示すが、死亡・在院日数への効果は不均一である。</li><li>著者はこの不均一性を「文献の限界」ではなく<strong>中心的な実装問題</strong>と位置づける。解析上の速さは、その結果が実際の臨床上の問いを解き、行動に変換されたときにのみ価値をもつ。</li><li>目的は3つ：①主要な迅速技術を批判的に比較する、②臨床効果がなぜばらつくかを検討する、③施設実装のためのアクショナビリティ枠組みを提示する。枠組みは明示的に概念的であり前向き検証を要する。</li></ul>
+<h3>3. 方法（文献検索・エビデンス選択・枠組みの作り方）</h3>
+<ul><li><strong>データベース</strong>：PubMed、Embase、Web of Science、Cochrane Library。</li><li><strong>期間</strong>：2010年1月〜2026年4月。2010年より前の文献も、基礎的またはアクショナビリティに直接関係する場合は採用。</li><li><strong>検索概念</strong>：bloodstream infection／bacteremia／sepsis／positive blood culture／rapid diagnostic testing／blood culture identification／multiplex polymerase chain reaction／MALDI-TOF MS／syndromic panel／resistance marker／lateral flow immunoassay／rapid antimicrobial susceptibility testing／EUCAST RAST／rapid AST／antimicrobial stewardship／clinical outcomes／implementation。主要ガイドライン・系統的レビュー・臨床試験・方法論文書の引用文献リストも手作業でスクリーニング。</li><li><strong>選択の優先順位</strong>：系統的レビュー・メタ解析＞RCT＞多施設・準実験的実装研究＞検査医学のガイダンス・公式方法論文書。</li><li><strong>関連性が高いと判断した報告項目</strong>：有効／最適治療までの時間、エスカレーション・de-escalation、抗菌薬曝露、死亡、在院日数、コスト、推奨の受容率、result-to-action ワークフロー、解釈上のハザード（パネル外菌種、複数菌培養、汚染、遺伝型と表現型の乖離、迅速ASTのエラー率）。</li><li><strong>行わなかったこと</strong>：定量的統合、certainty grading、研究レベルの risk of bias 評価。理由は「プールされた治療効果の推定ではなく実装志向のナラティブ統合を目的としたため」。したがって PRISMA フロー図も作成していない。</li><li><strong>枠組みの作り方</strong>：臨床インパクトを規定する反復的な決定因子を5ドメインにグルーピングした。Figure 1 が診断経路と時間区分、Figure 2 が5ドメインを質的マトリクスへ翻訳したもの、Figure 3 が実装コンテクスト。<strong>いずれもナラティブ統合と著者の判断に基づき、プール効果推定・Delphi 合意・予測モデリングから導かれたものではなく、前向き検証もされていない</strong>。</li></ul>
+<h3>4. 診断のタイムライン — 採血から臨床行動まで</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 血液培養診断と臨床行動を結ぶ概念的ワークフロー（著者提案）。上段パネルAは横一列の流れ図で、左から「前分析フェーズ（青帯）＝採血 → 搬送・装填」、「検査フェーズ（緑帯）＝陽性化までの培養（約12〜48時間）→ グラム染色（約15〜30分）」と進み、グラム染色の右の黒丸から4本の分岐が縦に並ぶ。上から順に「迅速菌種同定：MALDI-TOF MS または多重PCR（約0.5〜2時間）」「耐性マーカー検出：PCR、マイクロアレイ、LAMP（約0.5〜2時間）」「迅速表現型AST：自動画像解析・マイクロ流体・電気化学法（約2〜6時間）」「従来の表現型AST：完全な感受性プロファイル（分離株が得られてからさらに約16〜24時間）」。4本は右で合流し、「後分析フェーズ（橙帯）＝結果の検証・解釈・リリース」→「能動的通知（ベルのアイコン）」→「臨床行動フェーズ（紫帯）＝治療とマネジメントの調整」へ至る。緑の破線矢印は、アクショナブルなグラム染色や迅速結果から結果検証へ飛ぶ加速経路を示す。パネルBは4本の治療経路の比較で、いずれも左端は「経験的治療」から始まり、①従来ワークフローは「従来ASTの後に最適化」、②迅速菌種同定は「より早い菌種指向の最適化の可能性」→「従来ASTの後に確定的最適化」、③耐性マーカー経路は「より早い耐性リスク層別化の可能性」→「表現型AST誘導の最適化」、④迅速表現型AST経路は「より早い薬剤別最適化の可能性」→「必要に応じ最終・完全AST」、4本とも右端の「継続的マネジメント」に収束する。パネルCは時間軸上に丸番号1〜6（培養陽性・検体入手／アッセイ開始／結果生成／検証済み結果リリース／解釈済み結果が責任決定者に到達／臨床行動の実施）を置き、その下に4本の区間バーを重ねる。analytical TAT は2から3、laboratory TAT は1から4、actionable TAT は1から5、result-to-action interval は4から6。チルダとアスタリスクは概算値でプラットフォーム・ワークフロー依存であることを示し、2〜6時間の区間は選択された自動迅速表現型システムの例示にすぎず全ての迅速AST法や検証済み読み取り時間を包含しない。明示されない限り、これらの時間は搬送・バッチ処理・検証・連絡・処方・承認・投薬の遅延を含まない。</p>
+</div>
+<h4>4-1. 迅速検査より前に決まっていること（前分析品質）</h4>
+<ul><li>診断収率は、十分な採血量、適切なセット数、無菌的採取、可能なら抗菌薬投与前の採取、迅速な搬送、遅滞ない培養開始に依存する。</li><li>充填不足のボトル、単一セットの採取、汚染、搬送遅延は菌の回収率を下げ、<strong>下流の技術の利益を消し去る</strong>。</li><li>したがって検査室は、血流感染の診断が遅い・結論が出ないことを「先進機器がないせい」に帰する前に、前分析品質を監査すべきである。</li></ul>
+<h4>4-2. 4つの時間指標</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>始点</th><th>終点</th><th>何の性質か</th></tr></thead>
+<tbody>
+<tr><td>Analytical turnaround time</td><td>アッセイ開始</td><td>結果生成</td><td>アッセイそのものの性質</td></tr>
+<tr><td>Laboratory turnaround time</td><td>検体入手／培養陽性</td><td>検証済み結果のリリース</td><td>検査室の運用</td></tr>
+<tr><td>Actionable turnaround time</td><td>培養陽性</td><td>解釈済み結果が責任決定者に到達し、管理を変え得る状態</td><td>診断・スチュワードシップ経路全体</td></tr>
+<tr><td>Result-to-action interval</td><td>検証済み結果のリリース</td><td>臨床行動の実施</td><td>通知・解釈・処方・薬剤アクセスの総合</td></tr>
+</tbody></table></div>
+<ul><li>著者の強調点：<strong>メーカーが宣伝するのは analytical TAT だけ</strong>であり、臨床効果を決めるのは actionable TAT と result-to-action interval である。</li></ul>
+<h4>4-3. アッセイが終わった後に起きる遅延</h4>
+<ul><li>陽性ボトルが夜間にフラグする。</li><li>検査がバッチ処理される。</li><li>インターフェースが暫定結果を送信しない。</li><li>アラートが非特異的で誰が何をすべきか分からない。</li><li>臨床医が部分的情報の解釈に自信をもてない。</li><li>スチュワードシップのレビューが翌営業日まで受けられない。</li></ul>
+<p>これらが、「名目1時間のアッセイがほとんど効果を持たず、やや遅い結果がリアルタイムレビューと結びつくと速やかに治療を変える」理由である。</p>
+<h4>4-4. 実務上の含意</h4>
+<ul><li>迅速技術は経路の<strong>異なる箇所</strong>に作用するが、いずれも「結果が出てから臨床行動までの長い間隔」を埋め合わせることはできない。</li><li>プログラムはまず、自施設の支配的な遅延がどこにあるかを決めるべきである：検体採取／菌種同定／薬剤別感受性／結果リリース／解釈／抗菌薬アクセス／治療承認。</li><li>最も有用な介入は通常、<strong>宣伝上の実行時間が最短のアッセイではなく、その施設の意思決定のボトルネックを外すもの</strong>である。</li></ul>
+<h3>5. 提案された臨床アクショナビリティ枠組み — 5つのドメイン</h3>
+<p>アクショナビリティは検査に内在する性質ではない。産出される情報・患者の臨床状態・その結果が治療を変える見込み・医療システムの応答能力の相互作用から創発する。5ドメインは独立したチェックリスト項目ではなく<strong>条件付き修飾子</strong>として理解すべき、と著者は述べる。</p>
+<div class="tw"><table>
+<thead><tr><th>ドメイン</th><th>中身</th><th>実務上の含意</th></tr></thead>
+<tbody>
+<tr><td>結果の種類と確実性</td><td>グラム染色・菌種同定・耐性マーカー・表現型感受性は別々の問いに答える</td><td>菌種同定は症候群パスウェイ（例：黄色ブドウ球菌菌血症の構造化評価）を起動し得る。耐性マーカー陽性は早期エスカレーションや感染対策を正当化し得るが、陰性は全ての耐性機序を否定しない。表現型ASTが最も直接的だが、早期結果は検証済みの菌種・薬剤・時点の組み合わせに限られる</td></tr>
+<tr><td>患者リスク</td><td>敗血症性ショック・好中球減少・高度免疫抑制・重症病態では不活性治療の遅れのコストが大きい</td><td>早期の是正から得るものが大きい一方、同じ高リスク状態は「不完全な分子情報に基づく狭域化」の安全域を狭める（複数菌感染や感染源制御不十分の可能性が残るとき特に）</td></tr>
+<tr><td>耐性の事前確率</td><td>地域・院内の耐性率、過去の定着・感染歴、最近の抗菌薬曝露、医療曝露、現在の経験的レジメン</td><td>カルバペネマーゼ陽性はCRE高頻度の施設では決定的だが、当該表現型が稀で経験的治療が既に活性のある施設ではほとんど上乗せがない。逆に広域経験的治療が常態の施設では「より狭い活性選択肢の迅速確認」に価値がある</td></tr>
+<tr><td>結果→行動の実行力</td><td>検査室の稼働時間、能動的通知、電子的相互運用性、明確な臨床オーナーシップ、最新の処方データへのアクセス、スチュワードシップの被覆、承認遅延なしに指示薬を入手できること</td><td>「02:00にリリースされた結果を翌日午後まで誰も見ない」なら価値は限定的</td></tr>
+<tr><td>スチュワードシップの質</td><td>解釈が特異的・タイムリー・安全性を意識したものであること</td><td>汚染菌とデバイス関連感染の識別、混合培養で耐性遺伝子を特定の菌に結びつけられないことの認識、感染源・アレルギー・腎機能・薬剤曝露・地域疫学を勘案したエスカレーション／de-escalation の選択。過小治療と不要な広域化の<strong>両方</strong>を防ぐ</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 血流感染の代表的シナリオにおける迅速診断アウトプットの期待アクショナビリティ（著者提案の質的マトリクス）。上部に「著者提案の質的マトリクス、施設ごとの適応が必要」と明記された枠。行は上から4つのアウトプット（1. グラム染色、2. 迅速菌種同定、3. 耐性マーカー検出、4. 迅速表現型AST）で、各行左端に小さなアイコン（顕微鏡・菌のコロニー・DNA・マイクロプレート）が置かれる。列は6つのシナリオ（1. 安定した一般病棟患者・好中球減少なし、2. ショックのないICU患者、3. 敗血症性ショック、4. 発熱性好中球減少、5. 多剤耐性菌の定着・感染既往、6. 複数菌感染または腹腔内感染の疑い）と、右端の「可能となり得る行動の例示」列。セルはH（緑）またはM（橙）のみで、Lのカテゴリは意図的に置かれていない。第1列（安定病棟患者）と第6列（複数菌・腹腔内）は4行すべてM、第2〜5列は4行すべてH。第3行第1列のMには星印、第3行第6列のMには剣標、第4行第6列のMには二重剣標が付く。右端の行動例は上から「経験的治療の調整、菌群の早期認識」「菌種指向のエスカレーションまたは de-escalation、症候群特異的パスウェイのレビュー」「早期の耐性リスク層別化、活性のない可能性がある治療の回避、感染対策のレビュー」「薬剤別のエスカレーションまたは de-escalation」。下部の凡例は緑のHが「より高い期待アクショナビリティ」、橙のMが「中等度の期待アクショナビリティ」。星印は安定患者では耐性マーカー検出の価値が地域有病率と「陽性が直接の治療的含意をもつか」に依存すること、剣標は複数菌培養では検出されたマーカーが最も臨床的に問題となる菌に紐づかない可能性があること、二重剣標は迅速表現型ASTが「薬剤別感受性が主要な治療上のボトルネックとして残っているとき」に最も有用であることを示す。マトリクスは Lカテゴリを持たないが、これは「いずれのアウトプットも診療に影響し得る場面を選んで描いたため」であり、Hは治療の義務づけではなく、Mは非アクショナブルの意味ではない。評点は測定された確率・プール効果推定・正式なエビデンスグレード・検証された閾値・Delphi 合意・臨床判断ルールのいずれでもない、著者の質的判断である。耐性マーカーの不在のみを根拠に、不安定または高リスク患者の治療を狭めてはならない。</p>
+</div>
+<h3>6. 迅速菌種同定と症候群分子パネル</h3>
+<p>迅速菌種同定の臨床的価値は、<strong>菌種の同定が「すでに下された決定の追認」ではなく「直近の治療パスウェイを変える」ときに最も高い</strong>。</p>
+<h4>6-1. 直接 MALDI-TOF MS と短時間継代ワークフロー</h4>
+<ul><li>処理した陽性血液培養液から多くの細菌・酵母を同定できる。<strong>単一菌培養で特に良好</strong>。</li><li>早期の MALDI-TOF 同定を能動的スチュワードシップと組み合わせた研究では、同定単独や従来ワークフローより菌種指向治療が速いと報告されている。ただし利益の大きさは24時間体制の処理、検体前処理、応答経路に依存する。</li><li>性能が落ちる状況：菌量が少ない、混合培養、一部の酵母、血液培養マトリックスからの分離が難しい菌。</li><li><strong>応用の拡張</strong>：3年間の単施設研究で、直接法または短時間継代同定に自動 MALDI-TOF サブタイピングモジュールを組み合わせ、KPC 関連スペクトルシグネチャを検出して「迅速グラム陰性菌同定＋*bla*KPC 保有プラスミドのリスク認識」を組み合わせた検査室アルゴリズムが提案された。</li><li>ただしこれは<strong>一般的な耐性ソリューションではなく標的化された補助手段</strong>とみなすべき。スペクトルマーカーはプラットフォーム・菌種・クローン・機序に依存し、<strong>陰性でもカルバペネム耐性や非KPC型カルバペネマーゼは除外できない</strong>。</li></ul>
+<h4>6-2. 多重・症候群分子パネル</h4>
+<ul><li>陽性血液培養に対して、あらかじめ定めた細菌・真菌・耐性ターゲットの標準化された検出を、しばしば<strong>約1〜2時間</strong>で提供する。</li><li>利点：ハンズオン時間が短い、再現性が高い、菌種と選択された耐性情報を同時に報告できる。</li><li><strong>Banerjee 2015 RCT</strong>（617例、陽性血液培養）：定型化された解釈コメント付きの迅速多重PCRは、不必要な広域薬使用と汚染菌治療を減らした。<strong>最速の de-escalation は結果をリアルタイムのスチュワードシップフィードバックと組み合わせたときに得られた</strong>。</li><li><strong>Comini 2026 実臨床研究</strong>（BioFire FilmArray の4パネル、955検体、うち400が陽性血液培養検体）：血流感染ターゲットの positive percent agreement は <strong>97.7%</strong>。選択された耐性マーカー（CTX-M、主要カルバペネマーゼ、*vanA*／*vanB*）は表現型所見と高い一致を示したが、<strong>ブドウ球菌の *mecA*／*mecC* の一致は低かった</strong>。</li><li>限界：後ろ向きデザイン、複数の検体種を含む、対照を置いた臨床比較がない。したがって患者転帰やコストに関する因果的結論は導けない。</li><li>位置づけ：培養と表現型ASTを残した統合アルゴリズムの中で症候群パネルを使うことを支持する所見。</li></ul>
+<h4>6-3. 菌種レベルの情報が直ちに行動につながる例</h4>
+<div class="tw"><table>
+<thead><tr><th>同定結果</th><th>直ちに検討できる行動</th></tr></thead>
+<tbody>
+<tr><td>腸内細菌目</td><td>適切な単一菌症候群であれば、不要な抗MRSA治療の見直し</td></tr>
+<tr><td>*Pseudomonas aeruginosa*／*Acinetobacter baumannii*</td><td>感受性が判明するまで抗緑膿菌カバーを維持することの正当化</td></tr>
+<tr><td>酵母</td><td>抗真菌薬の最適化とカテーテル評価の前倒し</td></tr>
+<tr><td>*Staphylococcus aureus*</td><td>単なる抗菌薬の入れ替えではなく、<strong>菌血症パスウェイの起動</strong>（再培養、感染源評価、適応があれば心エコー、MSSAならβラクタムの確定的最適化）</td></tr>
+</tbody></table></div>
+<h4>6-4. 主な限界</h4>
+<ul><li><strong>ターゲットの制限</strong>：パネル陰性は血流感染を除外しない。パネル外の菌は培養でのみ検出される。</li><li><strong>複数菌培養</strong>：分子アッセイは非生存菌の核酸を検出したり、混合感染の一部しか同定しないことがある。直接 MALDI-TOF MS は優勢な分離株のみを報告するか、同定に失敗することがある。</li><li><strong>臨床的意義の不確かさ</strong>：腹腔内敗血症、粘膜バリア障害、カテーテル関連感染など、複数菌が想定される場面でこれらの限界が特に効いてくる。</li><li>したがって迅速同定は、グラム染色の形態、培養セットの陽性状況、陽性化までの時間、宿主リスク、進行中の従来培養結果と<strong>突き合わせて解釈する</strong>必要がある。</li></ul>
+<h3>7. 耐性マーカー検出と迅速代替法</h3>
+<h4>7-1. 分子ターゲット</h4>
+<p>一般的な標的：*mecA*／*mecC*（メチシリン耐性）、*vanA*／*vanB*（バンコマイシン耐性）、*bla*CTX-M（多くのESBL産生腸内細菌目）、カルバペネマーゼ遺伝子（*bla*KPC、*bla*NDM、*bla*VIM、*bla*IMP、*bla*OXA-48-like）。</p>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>陽性マーカーが直ちに変えるもの</th></tr></thead>
+<tbody>
+<tr><td>黄色ブドウ球菌菌血症</td><td>*mecA*／*mecC* 情報により、MRSA活性治療の継続、または検証済みの菌紐づけアッセイでメチシリン感受性が確立された場合の抗ブドウ球菌βラクタムへの早期移行</td></tr>
+<tr><td>腸球菌血流感染</td><td>*vanA*／*vanB* によりVRE活性治療と感染対策レビューを前倒し</td></tr>
+<tr><td>グラム陰性菌血症</td><td>カルバペネマーゼマーカーによりエスカレーション、感染症コンサルト、隔離予防策の強化、適応があれば新規βラクタム・βラクタマーゼ阻害薬へのアクセス評価</td></tr>
+</tbody></table></div>
+<h4>7-2. ラテラルフローその他の非分子的アプローチ</h4>
+<ul><li>免疫クロマト法は、広域分子パネルより運用が単純で、耐性関連タンパクを迅速に検出できる。</li><li><strong>Boattini 2025 比較研究</strong>：黄色ブドウ球菌陽性血液培養のメチシリン耐性判定について4法を比較した。</li><li>LAMP法が<strong>最も高い診断性能</strong>を示した。</li><li>PBP2a ラテラルフロー免疫測定は、血液培養ペレットに直接適用しても4時間の短時間継代後に適用しても信頼できる性能を示した。<strong>直接ペレット法は陽性血液培養処理開始から約1時間で結果が出る</strong>一方、短時間継代ワークフローは追加の培養時間を要する。</li><li>EUCAST RAST は<strong>最低4時間</strong>を要した。</li><li>MALDI-TOF サブタイピングは<strong>精度が実質的に低かった</strong>。</li><li>ここから得られるベンチマーク原則：<strong>単一の耐性に関する問いが直近の意思決定のボトルネックであるとき、焦点を絞った安価なアッセイのほうが好ましいことがある</strong>。ただし包括的ASTの代替にはならない。</li></ul>
+<h4>7-3. 過剰解釈という主要な安全リスク</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>遺伝型は表現型ではない</p>
+<ul><li>遺伝子が1つ存在しても、感受性プロファイル全体が決まるわけではない。</li><li>パネルターゲットが陰性でも、感受性の証明にはならない。</li><li>カルバペネム耐性はポーリン欠損・AmpC・ESBL活性の組み合わせからも生じ得る。アミノグリコシド・フルオロキノロン・ポリミキシンへの耐性は、多くの血流感染パネルの外にある機序に依存することが多い。</li><li>したがってマーカーの陰性的中率は、パネルの被覆範囲と地域疫学によって変動する。<mark class="hl">マーカー陰性を「感受性の証明」として不安定・高リスク患者の治療を狭めてはならない</mark>。</li></ul>
+</div>
+<h4>7-4. 遺伝子と菌の紐づけ（gene–organism linkage）</h4>
+<ul><li>複数菌培養では、検出された耐性遺伝子が臨床症候群を駆動している菌に属するとは限らない。アッセイが明示的に紐づけを確立していなければ判断できない。</li><li>例：*S. aureus* とコアグラーゼ陰性ブドウ球菌が共存する培養で検出された *mecA* を、自動的に *S. aureus* に帰属させてはならない。</li><li>報告書は、紐づけが<strong>直接的か・推定か・未解決か</strong>を明示し、混合菌が存在する場合には注意喚起を含めるべきである。</li></ul>
+<h4>7-5. マーカー陰性を根拠に de-escalation してよい条件</h4>
+<p>以下がすべて揃うときに限り比較的安全、と著者は述べる。</p>
+<div class="tw"><table>
+<thead><tr><th>条件</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>患者の安定性</td><td>血行動態・臨床経過が安定している</td></tr>
+<tr><td>菌種同定の一義性</td><td>起因菌が曖昧なく同定されている</td></tr>
+<tr><td>アッセイのターゲット被覆</td><td>想定される機序をパネルが適切にカバーしている</td></tr>
+<tr><td>地域疫学</td><td>院内でパネル外の耐性機序が稀である</td></tr>
+<tr><td>スチュワードシップの確認</td><td>経験的治療を狭められることをレビューで確認した</td></tr>
+</tbody></table></div>
+<p>なお確定的な薬剤選択には、依然として表現型ASTが必要である。</p>
+<h3>8. 迅速表現型抗菌薬感受性検査（rapid phenotypic AST）</h3>
+<p>迅速表現型ASTが最も有用なのは、<strong>菌種同定がもはや支配的なボトルネックでなく、薬剤別の感受性が律速段階として残っているとき</strong>。グラム陰性菌血症で、菌種だけではセフトリアキソン／セフェピム／ピペラシリン・タゾバクタム／カルバペネム／新規βラクタム・βラクタマーゼ阻害薬のどれが適切かを決められない場面が典型。</p>
+<h4>8-1. EUCAST RAST</h4>
+<ul><li>陽性血液培養ボトルから直接、時点特異的な方法とブレイクポイントを用いるディスク拡散法。</li><li>利点：<strong>低コスト</strong>、方法論として馴染みがある、専用の機器がなくても実施可能。</li><li>現行の EUCAST 方法論（Version 7.0、2026）は、<strong>4時間・6時間・8時間</strong>での読み取りを認め、早期読み取りが運用上不可能な場合には<strong>16〜20時間</strong>での読み取りも認めている。</li><li>結果は<strong>時点に対応した RAST ブレイクポイント表でのみ</strong>解釈すること。通常の一晩ディスク拡散法のブレイクポイントを当ててはならない。</li><li>16〜20時間オプションは、夜間人員が限られる検査室で特に意味がある。多施設評価では、読み取りを16〜20時間まで延長しても有用なカテゴリー性能が保たれ、実務上のワークフロー柔軟性が広がることが示されている（ただし現行の検証済み菌種・薬剤基準に従う必要がある）。</li><li><strong>限界</strong>：菌種・薬剤の組み合わせが限定される、結果が報告不能となる「技術的不確定領域（area of technical uncertainty）」が存在する、正確なタイミングと読み取りの熟練を要する、多くのワークフローでMIC（最小発育阻止濃度）が得られない。</li><li>それでも臨床実装研究では、同日または次のシフトでのRASTを能動的にレビューすれば、早期のエスカレーションや狭域化を支持できることが示されている。</li></ul>
+<h4>8-2. 自動迅速表現型システム</h4>
+<ul><li>自動画像解析、タイムラプス顕微鏡、形態動態的増殖解析、マイクロ流体、蛍光、光散乱、代謝シグナルなどで、従来ASTより早く抗菌薬効果を検出する。</li><li>プラットフォーム間で<strong>菌種被覆、薬剤パネル、MIC出力の有無、no-call（判定不能）頻度、エラープロファイル、検体前処理、コスト、電子的接続性が実質的に異なる</strong>。</li><li>したがって<strong>互換性のあるものとして扱わず</strong>、自施設の菌種分布と採用薬（フォーミュラリー）に照らして評価すべきである。</li><li><strong>VOC（揮発性有機化合物）検出</strong>という新しい表現型パラダイム：2024年の VITEK REVEAL 評価で、グラム陰性菌を含む陽性血液培養128件・<strong>2220の菌種–抗菌薬組み合わせ</strong>について、全体のカテゴリー一致（CA）<strong>97.6%</strong>、essential agreement（EA）<strong>97.7%</strong>、very major error 率 <strong>1.6%</strong>、結果は<strong>8時間未満</strong>で得られた。</li><li>限界：単施設デザイン、一部菌種で症例数が少ない、全分離株に対する broth microdilution ではなく discrepancy resolution を用いた点。一般化可能性は限定的。</li><li>実臨床研究では、迅速同定とスチュワードシップと統合されたとき、選択されたグラム陰性血流感染の経路で抗菌薬最適化が短縮され得るが、結果は人員配置とベースラインのワークフローに敏感である。</li></ul>
+<h4>8-3. 迅速ASTの臨床目的を先に定義する</h4>
+<div class="tw"><table>
+<thead><tr><th>目的</th><th>具体例</th></tr></thead>
+<tbody>
+<tr><td>不活性治療の是正</td><td>セフェピム耐性・カルバペネム耐性の早期検出</td></tr>
+<tr><td>de-escalation の裏づけ</td><td>セフトリアキソン感受性の確認により、安定患者でカルバペネムを外す</td></tr>
+<tr><td>曝露の低減</td><td>より狭域の活性βラクタムを同定し、腎毒性のある薬剤や不必要な広域薬への曝露を減らす</td></tr>
+</tbody></table></div>
+<p>報告は保守的であるべき：暫定的（preliminary）であることを明示する／検証済みの組み合わせと時点のみをリリースする／最終ASTとの不一致を監査する／重症感染では臨床的に必要な選択肢を抑制ルールで隠さない。</p>
+<h3>9. 手法別まとめ — 所要時間・検出範囲・性能・コスト・限界</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本表の数値はすべて本総説の記載範囲に限る 本総説は特定の商用プラットフォームを推奨せず、解析精度のランキングも行っていない。<mark class="hl">本表に「本文に記載なし」とある欄は、本総説からは読み取れないという意味であり、他文献の数値で埋めてはならない</mark>。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>手法</th><th>所要時間（本文の記載）</th><th>検出範囲</th><th>報告された性能</th><th>コスト</th><th>主な限界</th></tr></thead>
+<tbody>
+<tr><td>グラム染色（能動レビュー付き）</td><td>陽性フラグ後 約15〜30分</td><td>菌の形態と混合増殖の認識</td><td>本文に数値記載なし</td><td>追加コストなし（既存工程）</td><td>分類学的・耐性特異度が低い</td></tr>
+<tr><td>直接 MALDI-TOF MS</td><td>約0.5〜2時間</td><td>多くの細菌・酵母の菌種同定。サブタイピングモジュールでKPC関連スペクトルシグネチャ検出も</td><td>本文に感度・特異度の数値記載なし。「ボトルからの直接法の性能は変動する」</td><td>既存の MALDI-TOF 基盤があれば有利</td><td>菌量が少ない・混合培養・一部酵母で不安定。耐性情報は限定的。スペクトルマーカーはプラットフォーム・菌種・クローン・機序依存で、陰性でも非KPC型カルバペネマーゼを除外できない</td></tr>
+<tr><td>多重・症候群分子パネル（BioFire FilmArray など）</td><td>約1〜2時間</td><td>事前定義された細菌・真菌・耐性ターゲット</td><td>血流感染ターゲットの PPA <strong>97.7%</strong>（400陽性血液培養検体）。CTX-M・主要カルバペネマーゼ・*vanA*／*vanB* は表現型と高一致、ブドウ球菌の *mecA*／*mecC* は一致が低い</td><td>本文に金額記載なし（「広域分子パネルは運用が複雑」）</td><td>パネル外菌種、複数菌培養、耐性被覆の不完全性。陰性は血流感染を除外しない</td></tr>
+<tr><td>焦点を絞った耐性マーカー／代替アッセイ（LAMP、PBP2a LFIA）</td><td>PBP2a LFIA 直接ペレット法で処理開始から約1時間、4時間短時間継代法ではその分追加。LAMP は本文に時間記載なし</td><td>MRSA・VRE・ESBL・カルバペネマーゼ機序のリスク層別化</td><td>メチシリン耐性判定の4法比較で LAMP が最高性能、PBP2a LFIA も信頼できる、MALDI-TOF サブタイピングは精度が実質的に低い（いずれも本文に数値記載なし）</td><td>「安価（inexpensive）」と明記</td><td>マーカー不在は感受性を証明しない。菌への紐づけが不確かなことがある</td></tr>
+<tr><td>EUCAST RAST（迅速ディスク拡散）</td><td>4・6・8時間で読み取り、早期読み取りが不可能なら16〜20時間</td><td>検証済みの菌種–薬剤の組み合わせのみ</td><td>16〜20時間への延長で有用なカテゴリー性能が保たれる（本文に数値記載なし）</td><td><strong>低コスト</strong>、専用機器不要と明記</td><td>組み合わせ限定、技術的不確定領域、正確なタイミングと読み取り熟練が必要、多くのワークフローでMICが得られない</td></tr>
+<tr><td>自動迅速表現型AST（VITEK REVEAL、RAPIDS-GN で用いられた Accelerate Pheno など）</td><td>約2〜6時間（Figure 1）。VITEK REVEAL は8時間未満</td><td>プラットフォームにより菌種被覆・薬剤パネルが実質的に異なる</td><td>VITEK REVEAL：2220の菌種–抗菌薬組み合わせで CA <strong>97.6%</strong>、EA <strong>97.7%</strong>、very major error <strong>1.6%</strong></td><td>「直接の検査室コストを追加する」。費用対効果は耐性有病率・ベースラインTAT・人件費・汚染率・薬価・実際に管理を変える結果の割合に依存</td><td>no-call 頻度・エラープロファイル・検体前処理・電子接続性がプラットフォーム間で異なり互換ではない。単施設評価が多い</td></tr>
+<tr><td>従来の表現型AST</td><td>分離株入手後さらに約16〜24時間</td><td>完全な感受性プロファイル</td><td>—</td><td>既存工程</td><td>逐次的で遅い。ただし代替不能</td></tr>
+<tr><td>受動的な迅速報告（結果を出すだけ）</td><td>—</td><td>—</td><td>検査室TATは短縮する</td><td>プラットフォーム費用のみ発生</td><td><strong>治療変更が一貫しない。解析の加速だけでは不完全な実装戦略</strong></td></tr>
+<tr><td>Verigene／ePlex／dRAST／次世代シーケンス・メタゲノム</td><td>—</td><td>—</td><td>—</td><td>—</td><td>本総説では扱われておらず、射程外。BioFire FilmArray、Accelerate Pheno（RAPIDS-GN 経由）、VITEK REVEAL、EUCAST RAST 以外の商用名は本文に登場しない。メタゲノム法については <span class="wl">敗血症へのメタゲノム次世代シーケンスは主要評価項目を改善しない — 検出率6倍でも治療変更は14.3%（DigiSep・RCT・ICM2026）</span> と <span class="wl">臨床メタゲノミクスをICUの一次検査へ — 6時間で全微生物を読む、細菌感度97%・RNAウイルス89%（What's New・ICM2026）</span> を参照</td></tr>
+</tbody></table></div>
+<h4>Table 1. 介入タイプ別の情報価値・最も一貫した利益・主な限界（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>介入</th><th>最も意思決定に関係する情報</th><th>最も一貫した利益</th><th>主な限界</th><th>実装上の含意</th></tr></thead>
+<tbody>
+<tr><td>グラム染色＋能動レビュー</td><td>早期の菌形態、混合増殖の認識</td><td>より早い経験的治療の調整と次の検査のトリアージ</td><td>分類学的・耐性特異度が低い</td><td>通知が即時で、院内のグラム染色所見別ガイダンスが明文化されているときに高価値</td></tr>
+<tr><td>分子同定パネル＋スチュワードシップ</td><td>パネル内菌種と選択された耐性標的の迅速同定</td><td>最適治療までの時間短縮、エスカレーション／de-escalation の前倒し、汚染菌治療の減少</td><td>パネル外菌種、混合培養、耐性被覆の不完全性</td><td>検出された菌種または陽性マーカーが<strong>あらかじめ定めた行動に対応づけられている</strong>ときに最良</td></tr>
+<tr><td>直接 MALDI-TOF MS＋スチュワードシップ</td><td>より早い菌種レベル同定、場合により標的サブタイピング</td><td>より早い菌種指向治療</td><td>ボトルからの直接性能が変動、耐性情報が限定的</td><td>MALDI-TOF 基盤と迅速な検体前処理が既にある施設で魅力的</td></tr>
+<tr><td>焦点を絞った耐性マーカー／代替アッセイ</td><td>MRSA・VRE・ESBL・カルバペネマーゼ機序の早期リスク層別化</td><td>選択された症候群での早期エスカレーション、標的化された de-escalation、感染対策の起動</td><td>マーカー不在は感受性を証明しない、菌への紐づけが不確かなことがある</td><td>単一の耐性に関する問いが直近のボトルネックであれば、焦点を絞ったLFIAやLAMPが効率的</td></tr>
+<tr><td>迅速表現型AST</td><td>より早い薬剤別感受性</td><td>より早い薬剤別のエスカレーションまたは狭域化</td><td>被覆、no-call 率、エラープロファイル、コストがプラットフォームで異なる</td><td>同定が既に得られており、感受性が律速の意思決定として残っているときに最高価値</td></tr>
+<tr><td>受動的な迅速報告</td><td>臨床応答が紐づかない結果の早期入手</td><td>検査室TATの短縮</td><td>治療変更が一貫しない</td><td>解析の加速だけでは不完全な実装戦略</td></tr>
+</tbody></table></div>
+<h3>10. 臨床インパクト — 何が改善し、何が不確かなまま残るか</h3>
+<h4>10-1. 最も強く一貫しているのはプロセスアウトカム</h4>
+<ul><li>系統的レビューと実装研究は、菌種同定までの時間、当初不活性治療を受けていた患者の活性治療までの時間、最適治療までの時間、de-escalation の短縮を示す。</li><li>これらは死亡よりも診断的介入に対して<strong>感度が高い</strong>指標であり、生存が変わらなくても抗菌薬の質という観点で直接的な意味をもつ。</li></ul>
+<h4>Table 2. 迅速血流感染診断の臨床効果と限界を示す代表的RCT（原表の日本語化＋本文の数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・対象</th><th>介入と対照</th><th>主要評価項目</th><th>主な結果</th><th>アクショナビリティ上の解釈</th></tr></thead>
+<tbody>
+<tr><td>Banerjee 2015（米国単施設、陽性血液培養617例）</td><td>標準処理 vs 定型コメント付き迅速多重PCR vs 迅速PCR＋リアルタイムのスチュワードシップ監査・フィードバック（3群）</td><td>抗菌薬治療期間</td><td>グラム染色から菌種同定までの時間は迅速PCRで<strong>1.3時間</strong>、標準処理で<strong>22.3時間</strong>。迅速PCRは広域薬曝露と汚染菌治療を減らした。de-escalation は PCR＋スチュワードシップで最速。<strong>死亡・在院日数・コストに差なし</strong></td><td>迅速な菌種情報は意思決定支援とスチュワードシップに接続されたときに最も効果的。プロセス上の利益はハードアウトカムの差がなくても生じ得る</td></tr>
+<tr><td>RAPIDS-GN 2021（米国2学術施設、解析対象448例のグラム陰性血流感染）</td><td>標準培養・AST＋スチュワードシップ vs Accelerate Pheno による迅速同定・表現型AST＋スチュワードシップ</td><td>72時間以内の初回抗菌薬変更までの時間</td><td>初回変更までの中央値 <strong>8.6時間 vs 14.9時間</strong>。グラム陰性薬の変更と耐性分離株に対するエスカレーションがより早かった。<strong>死亡・在院日数に差なし</strong></td><td>迅速な表現型情報は治療タイミングを改善する。とくに耐性がアクショナブルなミスマッチを生んでいる場面で</td></tr>
+<tr><td>FAST 2026（ギリシャ・インド・イスラエル・スペインの7施設、主要解析850例）</td><td>陽性培養から直接の迅速表現型AST＋標準AST vs 標準ASTのみ。<strong>両群ともスチュワードシップのレビューあり</strong></td><td>30日 desirability-of-outcome ranking（DOOR）</td><td>迅速検査群でより望ましい転帰となる確率は <strong>48.8%（95%CI 45.3–52.4%）</strong> で優越性基準を満たさなかった。as-randomized 集団で<strong>有効治療までの時間に差なし</strong>、一方<strong>エスカレーションまたは de-escalation までの時間は14時間速かった</strong></td><td>迅速ASTはグローバルな転帰を改善せずに抗菌薬変更を加速し得る。上乗せの利益はベースライン治療・対照群のワークフロー・薬剤アクセス・評価項目の感度に依存する</td></tr>
+</tbody></table></div>
+<ul><li><strong>FAST の重要性</strong>（著者の強調）：抗菌薬変更の高速化と、グローバルな臨床エンドポイントの中立が<strong>共存し得る</strong>ことを示した。したがって「高耐性環境でさえ、解析の加速が自動的に全体転帰を改善する」という前提は成立しない。</li></ul>
+<h4>10-2. なぜプロセスの利益が死亡・在院日数・コストに翻訳されないのか（5つの機序）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>機序</th><th>中身</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>経験的治療が既に活性</td><td>多くの患者は既に活性のある経験的治療を受けており、精度を上げる余地はあっても、早期是正で死を防ぐ余地は小さい</td></tr>
+<tr><td>2</td><td>死亡の規定因子が他にある</td><td>重症度、感染源制御、併存症、免疫状態、病原体の病原性、臓器サポート、活性薬へのアクセスが死亡を駆動する</td></tr>
+<tr><td>3</td><td>コホートの異質性による希釈</td><td>汚染菌・安定した菌血症・敗血症性ショックが混在すると、不活性治療を受けている患者での効果が薄まる</td></tr>
+<tr><td>4</td><td>対照群が強い</td><td>迅速な従来検査室と強力なスチュワードシップを持つ対照群では、新規プラットフォームの上乗せ利益が小さくなる</td></tr>
+<tr><td>5</td><td>複合エンドポイントの性質</td><td>複合エンドポイントは、プロセス評価項目とは異なる形で利益と害を捉える</td></tr>
+</tbody></table></div>
+<h4>10-3. 研究デザインが解釈に与える影響</h4>
+<ul><li><strong>前後比較研究は利益を過大評価し得る</strong>：検査の導入がスチュワードシップの拡充、敗血症イニシアチブ、電子アラートと同時に行われることが多いため。</li><li><strong>RCTは技術の価値を過小評価し得る</strong>：結果が受動的に報告される場合、検査が限られた時間帯しか稼働しない場合、選ばれたエンドポイントが期待される機序と弱くしか結びついていない場合。</li><li>したがって試験は<strong>プラットフォーム性能と経路性能を区別</strong>し、高収率のサブグループ（当初不活性治療、耐性菌、敗血症性ショック、重症病態）を事前規定すべきである。</li></ul>
+<h4>10-4. 総合</h4>
+<ul><li>迅速診断は、選択されていない血流感染集団において、<strong>生存よりも抗菌薬決定のタイミングと質を一貫して改善する</strong>。</li><li>死亡への利益が生物学的に最も妥当なのは、<strong>迅速結果が高リスク患者の不活性治療を是正し、かつ有効薬を速やかに投与できるとき</strong>。</li><li>経験的治療が既に活性である場合には、de-escalation・抗菌薬曝露・毒性・患者中心の複合アウトカムのほうが、機序に感度の高い利益指標である。</li></ul>
+<h3>11. スチュワードシップと統合した実装</h3>
+<p>抗菌薬スチュワードシップは、迅速情報が治療決定に変換される<strong>主要な機序</strong>である。能動的解釈がなければ、迅速結果は見落とされ、誤解され、あるいは一貫性なく行動される。</p>
+<h4>Table 3. 迅速結果を臨床行動に変換するための最小スチュワードシップパッケージ（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>構成要素</th><th>目的</th><th>欠けた場合の失敗様式</th></tr></thead>
+<tbody>
+<tr><td>リアルタイムアラート</td><td>結果→レビューの間隔を短縮し、責任ある受け手を特定する</td><td>結果が受動的な情報のまま残る</td></tr>
+<tr><td>解釈コメント</td><td>菌種・マーカー・パネルの限界を説明する</td><td>部分的または遺伝型のみの結果が過剰解釈され得る</td></tr>
+<tr><td>患者個別の治療推奨</td><td>情報を臨床的に適切な行動に変換する</td><td>迅速結果があっても治療変更が起きない</td></tr>
+<tr><td>記録（documentation）</td><td>説明責任を生み、行動または非行動の理由を残す</td><td>介入が監査できない</td></tr>
+<tr><td>受容率とタイミングの監査</td><td>実装の質と推奨後の遅延を測定する</td><td>プラットフォームの速さと経路の性能を切り分けられない</td></tr>
+<tr><td>フィードバックループ</td><td>アラート・コメント・フォーミュラリー経路・検査適格性を洗練する</td><td>見逃しの機会と意図しない結果が繰り返し残存する</td></tr>
+</tbody></table></div>
+<h4>11-1. 人員配置モデル</h4>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>強み</th><th>適した場面</th></tr></thead>
+<tbody>
+<tr><td>薬剤師主導</td><td>迅速な処方レビュー、投与設計の専門性、フォーミュラリーの運用</td><td>日常的な最適化全般</td></tr>
+<tr><td>感染症医のレビュー</td><td>診断的深さ</td><td>心内膜炎、持続菌血症、多剤耐性、高度免疫抑制、感染源制御が不確かな症例</td></tr>
+<tr><td>ハイブリッド</td><td>速さと深さの両立</td><td>資源のある施設</td></tr>
+<tr><td>地域病院向け</td><td>薬剤部ベースの被覆、臨床サーベイランスプラットフォーム、遠隔スチュワードシップ、院外専門家への選択的エスカレーション</td><td>24時間微生物検査や常勤感染症医がいない施設</td></tr>
+</tbody></table></div>
+<h4>11-2. 通知の設計</h4>
+<ul><li>高リスク血流感染に対して<strong>受動的な電子報告は通常不十分</strong>である。</li><li>有効なプログラムは電話連絡、ポケベルやセキュアメッセージのアラート、臨床サーベイランスソフトウェア、あるいは微生物検査結果を現在の治療と患者リスクに紐づける意思決定支援を用いる。</li><li>アラートは<strong>選択的かつ行動指向</strong>であるべき（アラート疲労を制限するため）。</li><li>施設は検査室TATだけを報告するのではなく、<strong>検証済み結果から臨床医のレビュー、推奨、オーダー入力、投薬までの間隔を測定</strong>すべきである。</li></ul>
+<h4>11-3. 時間外被覆</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>夜間・週末が実世界のインパクトを決める 血液培養はしばしば夜間や週末に陽性化する。迅速検査を平日日中しか行わないなら、<mark class="hl">名目上のアッセイの速さは臨床上の速さに翻訳されない</mark>。連続被覆のないプログラムは、高優先の例外（敗血症性ショック、ICU入室、グラム陰性桿菌、多剤耐性菌の定着既往、高度免疫不全）を定義し、リアルタイムでレビューされなかった結果に対する「次シフト救済経路」を確立すべきである。</p>
+</div>
+<h4>11-4. 経済的価値</h4>
+<ul><li>迅速プラットフォームは直接の検査室コストを増やすが、アクショナブルな結果が頻繁で応答が確実であれば、不必要な抗菌薬曝露・隔離・下流の医療資源使用を減らし得る。</li><li>費用対効果の推定は、<strong>地域の耐性有病率、ベースラインのTAT、人件費、汚染率、フォーミュラリーの薬価、実際に管理を変える結果の割合</strong>に依存する。</li></ul>
+<h3>12. 解釈上の落とし穴と、臨床での Do / Don't</h3>
+<p>主要な安全上の懸念は解析上の失敗だけではなく、<strong>不完全な情報に対して確信をもって行動すること</strong>である。</p>
+<p>高リスクエラーの例：</p>
+<ul><li>複数菌感染における早すぎる de-escalation</li><li>耐性マーカーの不在を感受性の証明として扱うこと</li><li>混合培養で耐性遺伝子を誤った菌に帰属させること</li><li>迅速AST結果を、検証済みの菌種–薬剤–時点の基準を超えて外挿すること</li></ul>
+<p>これらは不活性治療を生み、敗血症性ショック・好中球減少・高度免疫抑制・腹腔内感染やカテーテル関連感染の疑いで最も重大な結果をもたらす。</p>
+<p><strong>汚染の扱い</strong>：コアグラーゼ陰性ブドウ球菌などの皮膚常在菌は一般的な汚染菌だが、血管カテーテル、人工弁、心臓デバイス、血管内グラフト、免疫抑制のある患者では真の起因菌になり得る。迅速同定は、陽性ボトル数・セット数、陽性化までの時間、デバイスの状況、再培養、臨床症候群と併せて解釈する。<strong>汚染の評価が明示的に行われて初めて</strong>、迅速結果が不要な治療を短縮できる。</p>
+<p><strong>運用上のエラー</strong>：責任医師への通知失敗、スチュワードシップレビューの遅れ、暫定であることの不明確な表示、推奨薬が入手できないこと、不一致モニタリングの欠如。プログラムは、見逃した機会と意図しない結果を、アッセイのエラーと同じ真剣さで調査すべきである。</p>
+<p><strong>迅速ASTに固有の安全要件</strong>：ワークフロー全体の検証、現行ブレイクポイントの使用、最終ASTに対するカテゴリー一致と major／very major error の追跡、暫定結果の撤回・訂正プロセスの定義。</p>
+<h4>Table 5. 迅速血流感染診断の解釈における Do / Don't（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>すべきこと（Do）</th><th>してはならないこと（Do not）</th></tr></thead>
+<tbody>
+<tr><td>迅速結果を、グラム染色、培養セット、陽性化までの時間、症候群、デバイス、宿主リスクと突き合わせる</td><td>陰性の分子パネルを「血液培養陰性」として扱う</td></tr>
+<tr><td>耐性マーカーが特定の菌に紐づいているかを、とくに混合培養で確認する</td><td>紐づけが未解決のときに、耐性遺伝子を臨床的に優勢な菌に割り当てる</td></tr>
+<tr><td>マーカーの不在を de-escalation に使うのは、パネル被覆・地域疫学・患者の安定性・スチュワードシップのレビューが支持するときのみ</td><td>不安定または高リスク患者で、マーカー不在が表現型感受性を証明すると仮定する</td></tr>
+<tr><td>迅速ASTは検証済みの菌種–薬剤–時点の組み合わせのみ報告し、暫定であることを明示する</td><td>早期AST結果を、検証されていない薬剤・菌種・培養時間に外挿する</td></tr>
+<tr><td>責任医師に能動的に通知し、推奨と応答を記録する</td><td>高リスクのアクショナブルな結果を、受動的な電子リリースに委ねる</td></tr>
+<tr><td>従来培養と最終表現型ASTを継続し、不一致を監査する</td><td>迅速検査に、菌の回収・包括的感受性検査・感染源制御評価を代替させる</td></tr>
+<tr><td>汚染の可能性を、複数の臨床的・微生物学的所見から評価する</td><td>検出された皮膚常在菌をすべて自動的に真の血流感染として治療する、あるいは血管内デバイスのある患者でそれを一律に無視する</td></tr>
+</tbody></table></div>
+<h3>13. 高収率の臨床シナリオ</h3>
+<p>迅速診断はすべての血流感染エピソードで等しく価値があるわけではない。上乗せの利益が最大なのは、①経験的治療がしばしば不活性である、②耐性機序が臨床的に決定的である、③早期の狭域化が重要な害を減らせる、④患者の生理学的予備能が限られている、のいずれかが成り立つとき。</p>
+<h4>Table 4. 高収率シナリオと、管理を最も変えやすい迅速結果（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>シナリオ</th><th>最もアクショナブルな結果</th><th>期待される行動</th><th>主な注意点</th></tr></thead>
+<tbody>
+<tr><td>耐性グラム陰性菌血症</td><td>カルバペネマーゼマーカーおよび／または迅速表現型AST</td><td>不活性治療の是正、または確認された活性選択肢への狭域化</td><td>遺伝型はパネル外機序を見逃し得る。薬剤アクセスと感染源制御が引き続き決定的</td></tr>
+<tr><td>VRE血流感染</td><td>腸球菌の菌種同定＋*vanA*／*vanB*</td><td>VRE活性治療の開始・最適化と感染対策のレビュー</td><td>菌種と遺伝子の紐づけが明確でなければならない</td></tr>
+<tr><td>黄色ブドウ球菌菌血症</td><td>*S. aureus* 同定＋菌に紐づいた *mecA*／*mecC* または検証済み PBP2a 結果</td><td>菌血症パスウェイの起動と、MRSA／MSSA治療の最適化</td><td>合併症、持続菌血症、感染源制御の並行評価が必要</td></tr>
+<tr><td>集中治療・敗血症性ショック</td><td>不活性治療を是正するグラム染色、耐性マーカー陽性、迅速AST</td><td>活性治療をより早く届ける</td><td>混合感染や感染源制御不十分が想定されるときは早すぎる狭域化を避ける</td></tr>
+<tr><td>発熱性好中球減少・高度免疫不全</td><td>迅速同定と耐性マーカー陽性</td><td>耐性をより早く認識し、専門家レビューを優先する</td><td>パネル外・稀な病原体が依然として重要</td></tr>
+<tr><td>小児の血流感染</td><td>年齢特異的解釈を伴う小児血液培養同定</td><td>より早い菌種指向治療</td><td>採血量、投与量、年齢特異的疫学がアクショナビリティに影響する</td></tr>
+<tr><td>複数菌または腹腔内感染の疑い</td><td>優勢病原体に対するアクショナブルなマーカー陽性または迅速AST</td><td>感染源制御を進めつつ、エスカレーションの支持または活性選択肢の確認</td><td>不完全な菌検出により、迅速結果の de-escalation に対する権威が下がる</td></tr>
+</tbody></table></div>
+<p><strong>シナリオ別の補足</strong></p>
+<ul><li><strong>耐性グラム陰性菌血症</strong>：耐性マーカー検出はESBLまたはカルバペネマーゼのリスクを特定し、迅速表現型ASTは薬剤別の活性を与える。最高価値が期待されるのは敗血症性ショック、集中治療、耐性菌の定着・感染の既往、最近の医療曝露、耐性有病率の高い環境。パネル外機序が一般的な施設では、マーカー陰性を根拠とする狭域化は慎重に。</li><li><strong>VRE血流感染</strong>：悪性腫瘍、移植、腹腔内病変、中心静脈カテーテル、長期抗菌薬曝露のある患者に多い。迅速な菌種同定＋*vanA*／*vanB* はVRE活性治療と感染対策を前倒しできるが、確定的な投与設計と感染源管理は依然として不可欠。</li><li><strong>黄色ブドウ球菌菌血症</strong>：*S. aureus* とコアグラーゼ陰性ブドウ球菌の早期識別は、過小治療と不要治療の両方を減らす。結果は同時に、持続菌血症・心内膜炎・転移性感染・感染源制御の評価を起動すべきである。</li><li><strong>重症病態・敗血症性ショック</strong>：不活性治療の代償が大きく、早期エスカレーションの価値が高い。de-escalation は、感染源制御が不確か・混合感染がありうる・迅速検査のターゲット被覆が不完全なときには、より保守的に。</li><li><strong>発熱性好中球減少・高度免疫不全</strong>：迅速同定と耐性検出は不活性治療の是正を短縮し得るが、稀・パネル外の菌が重要なまま残る。<strong>不安定さや臨床的懸念が持続している患者で、パネル陰性だけを根拠に治療を狭めてはならない</strong>。</li><li><strong>小児血流感染</strong>：採血量、病原体疫学、投与量、汚染菌の解釈が成人と異なる。中心静脈カテーテル、悪性腫瘍、集中治療の小児で特に有用となり得るが、小児スチュワードシップと年齢特異的パスウェイがあることが前提。</li><li><strong>複数菌・腹腔内感染の疑い</strong>：エスカレーションの支持や主要病原体の同定には依然使えるが、<strong>de-escalation の権威は低い</strong>（検出の不完全性と遺伝子–菌の紐づけの不確かさが起きやすいため）。感染源制御と最終培養が中心のまま。</li></ul>
+<h3>14. 医療環境別の実装 — プラットフォーム優先ではなく問題優先</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 施設内のよくあるボトルネックを、是正の優先順位と測定可能な成功指標に結びつけた実装枠組み（著者提案）。上部に「著者提案の実装枠組み、施設ごとの優先順位づけが必要」と明記。行は6ドメイン（前分析の血液培養品質／検査室インフラ／報告と通知／スチュワードシップ能力／抗菌薬フォーミュラリーとアクセス／地域疫学とデータ）で、列は左から「観察される施設内のギャップ」「起こり得る帰結」「潜在的により価値の高い最初の一手」「最初に優先すべきでないこと」「測定可能な成功指標」の5列。たとえば前分析の行は、ギャップが「充填不足のボトル・単一培養セット・装填の遅れ・汚染」、帰結が「偽陰性培養・菌回収の遅れ・汚染菌に駆動された治療」、最初の一手が「採取の標準化・血液量の監査・汚染率の低減・採取から培養開始までの時間短縮」、優先すべきでないのが「採取品質が改善する前の新規プラットフォーム」、指標が「血液量遵守率・汚染率・採取から培養開始までの時間」。検査室インフラの行は「24時間検査なし・バッチ処理・手作業で分断されたワークフロー・迅速検査の被覆が限定的」に対し「高優先検査基準の定義・バッチ処理の削減・時間外経路の確立・精度管理の担保」を挙げ、指標は「陽性化から結果までの時間・夜間週末の被覆・適格検査の完了率」。報告と通知の行は「受動的な結果リリース・リアルタイムアラートなし・クローズドループのレビューなし」に対し「リアルタイム電子アラート・エスカレーションルール・確認とクローズドループのレビュー」、指標は「結果からレビューまでの時間・アラート確認率・未レビューの重要結果の割合」。スチュワードシップ能力の行は「受動的報告・前向きレビューなし・薬剤師や感染症医の被覆が限定的・フィードバック経路なし」に対し「薬剤師または感染症医のレビュー・標準行動パスウェイ・推奨の記録・監査とフィードバック」、指標は「レビューされた結果の割合・推奨受容率・抗菌薬調整までの時間」。フォーミュラリーとアクセスの行は「治療選択肢の制限・アクセス制限・複雑な承認手続き」に対し「地域の病原体と耐性に合わせたフォーミュラリー整合・承認の合理化・適応薬へのアクセス確保」、指標は「承認所要時間・適応抗菌薬までの時間・アクセス遅延の頻度」。地域疫学とデータの行は「耐性パターン不明・ベースラインのプロセス指標なし・患者転帰の追跡なし」に対し「地域サーベイランスの確立・プロセス／患者アウトカムの追跡・測定可能な目標の事前定義」、指標は「多剤耐性菌のトレンド報告・データ完全性・事前定義したプロセスと患者アウトカムの報告」。図の下部には5ステップのループが円環状に描かれ、「主要な施設内ボトルネックを特定する」→「潜在的に最も価値の高いギャップに対処する」→「診断をスチュワードシップと統合する」→「プロセスと患者アウトカムを測定する」→「継続的に洗練する」と回る。行とステップは例示であり、普遍的に検証された順位づけではなく、すべての施設が同じ順序を採用する必要もない。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>施設タイプ</th><th>実行しやすいこと</th><th>主な課題</th></tr></thead>
+<tbody>
+<tr><td>三次医療センター</td><td>連続稼働の微生物検査と確立されたスチュワードシップがあれば、広域分子パネルと迅速表現型ASTを支えられる</td><td>技術へのアクセスそのものではなく、アラート疲労、診療科間で推奨が一貫しないこと、結果から行動までの間隔を測定していないこと</td></tr>
+<tr><td>地域病院</td><td>能動的なグラム染色通知、薬剤部主導のレビュー、遠隔スチュワードシップ、人員のいる時間帯の直接 MALDI-TOF、限定的な高リスク検査アルゴリズム</td><td>24時間微生物検査、常勤感染症医、複数の専有システムへの投資が難しい。最も高価なプラットフォームの全例適用より、上記のほうが価値を生み得る</td></tr>
+<tr><td>資源制約下の施設</td><td>段階的実装：採血量と汚染率の改善、搬送遅延の削減、確実な培養開始、低コストのRAST導入、地域基幹検査室の利用、遠隔スチュワードシップの構築</td><td>活性抗菌薬へのアクセス・通知経路・訓練された解釈のいずれかを欠いたまま迅速結果だけを出すプラットフォームは、診療を改善しそうにない</td></tr>
+</tbody></table></div>
+<h4>Table 6. 施設のボトルネックと、潜在的により価値の高い最初の介入（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>支配的なボトルネック</th><th>潜在的な最初の介入</th><th>最初に優先すべきでないもの</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>前分析の血液培養品質が悪い</td><td>採取の標準化、血液量と培養セット完了率の改善、汚染低減、採取から培養開始までの時間短縮</td><td>採取品質を是正する前の先進プラットフォーム</td><td>下流の速さは、適切に採取・培養されなかった菌を回復できない</td></tr>
+<tr><td>結果レビューの遅れ</td><td>リアルタイムアラートとスチュワードシップの被覆</td><td>高価なプラットフォーム単体</td><td>誰も解釈せず行動しないなら、結果が速くても助けにならない</td></tr>
+<tr><td>菌種同定の遅れ</td><td>直接 MALDI-TOF MS または標的化された分子同定パネル</td><td>信頼できる同定経路のない迅速AST</td><td>菌種の同定が直近の臨床判断を解くことがある</td></tr>
+<tr><td>薬剤別感受性の遅れ</td><td>EUCAST RAST または検証済みの自動迅速表現型AST経路</td><td>同定のみの追加検査</td><td>律速は同定ではなく感受性</td></tr>
+<tr><td>カルバペネム耐性腸内細菌目の高有病率</td><td>カルバペネマーゼ検出＋迅速表現型AST＋活性薬へのアクセス</td><td>地域の耐性問題に対応していないパネル</td><td>緊急に必要なのは不活性治療の是正と感染対策の応答</td></tr>
+<tr><td>経験的バンコマイシンの過剰使用</td><td>菌に紐づいたメチシリン耐性解釈を伴う迅速グラム陽性菌同定</td><td>最初の投資としての広域グラム陰性迅速AST</td><td>*S. aureus*、コアグラーゼ陰性ブドウ球菌、その他の早期識別が、より安全な中止や最適化を支持し得る</td></tr>
+<tr><td>スチュワードシップ人員の不足</td><td>ルールベースのコメント、選択的な高リスクアラート、薬剤部または遠隔スチュワードシップへのエスカレーション</td><td>全例に対する複雑なアラート</td><td>専門的能力は、管理を変える可能性が最も高い結果に温存すべき</td></tr>
+<tr><td>抗菌薬フォーミュラリーの制限・承認の遅さ</td><td>フォーミュラリーの整合、主要薬の事前承認、緊急アクセスの合理化</td><td>治療アクセスのない追加診断</td><td>適応薬を届けられないなら、正しい迅速結果の価値は限定的</td></tr>
+<tr><td>地域の耐性・転帰が不明</td><td>サーベイランス、ベースラインTAT、測定可能なプロセス・臨床エンドポイントの確立</td><td>目標を定めない高コストの全例検査</td><td>正しい介入を選び、利益を判断するにはデータが要る</td></tr>
+</tbody></table></div>
+<ul><li>注記：<strong>支配的ボトルネックは実装後に移動し得る</strong>ため、この順序は導入後に再検討すべきである。</li><li>実務的な順序は、①主要なボトルネックの特定 → ②潜在的に最も価値の高いギャップへの対処 → ③診断とスチュワードシップの統合 → ④プロセスと患者アウトカムの測定 → ⑤継続的な洗練。</li></ul>
+<h3>15. 今後の研究と報告の優先事項</h3>
+<ul><li><strong>評価対象をプラットフォームから経路へ</strong>：診断・スチュワードシップ経路を評価すべき。試験は受動的報告と能動的介入を区別し、検査稼働時間、対象検体、通知方法、スチュワードシップの人員配置、レビューまでの時間、推奨の内容、受容率、薬剤の入手可能性、パネル外・不一致結果の扱いを記述すべきである。</li><li><strong>デザインを介入のレベルに合わせる</strong>：検査室や病院レベルで実装される介入には、クラスターランダム化・ステップドウェッジ・プラグマティックデザインが適する。個別ランダム化は機器の効力評価に有用だが、同じスチュワードシップチームが両群を管理すると群間コンタミネーションが起こり得る。事前規定解析としては、当初不活性治療を受けた患者、耐性菌、重症病態、ベースラインのワークフローが遅い施設を検討すべき。</li><li><strong>エンドポイントは機序感受性かつ患者中心に</strong>：死亡は重要だが異質な血流感染コホートでは鈍い。補完的アウトカムとして、当初過小治療だった患者での活性治療までの時間、最適治療までの時間、広域抗菌薬日数、抗菌薬フリー日数、毒性、*C. difficile* 感染、感染源制御の実施、感染対策の応答、推奨受容率。DOOR（desirability of outcome ranking）や RADAR（response adjusted for duration of antibiotic risk）は生存・有害事象・抗菌薬曝露を統合できるが、<strong>構成要素の階層は臨床的に正当化され透明であるべき</strong>。</li><li><strong>枠組み自体の評価</strong>：質的評点の評価者間再現性、5ドメインが独立して治療変更を予測するか、重みづけが病原体や環境で異なるか、地域・へき地・低資源病院での外的妥当性。<strong>より単純なトリガー（重症度、多剤耐性菌の既往、経験的治療が不活性であること）との比較</strong>も必要。</li><li><strong>意思決定支援</strong>：菌種、耐性マーカー、迅速AST、地域アンチバイオグラム、過去の微生物検査、抗菌薬曝露、アレルギー、腎機能、重症度を組み合わせることで解釈が改善し得る。ただしツールは透明・施設で検証済み・監査可能で、スチュワードシップに埋め込まれている必要がある。<strong>検証されていない自動化は解釈エラーを減らすどころか増幅する</strong>。</li><li><strong>公平性と一般化可能性</strong>：公表された実装研究の大半は、強固な検査室・スチュワードシップ基盤をもつ施設からのものである。今後の報告は前分析品質、ベースラインの経験的治療の妥当性、地域の耐性有病率、フォーミュラリーへのアクセス、result-to-action 指標、実装コストを含め、他施設が移転可能性を判断できるようにすべきである。</li></ul>
+<h3>16. 著者が申告した限界</h3>
+<ul><li><strong>ナラティブレビューであり系統的レビューではない</strong>。正式な risk of bias 評価、certainty grading、メタ解析を行っていない。研究の選択と解釈が著者の判断に影響され得る。関連する文献を見落としている可能性がある。</li><li>エビデンスベースが、患者構成・プラットフォーム・対照ワークフロー・スチュワードシップ強度・アウトカム定義・地域の耐性有病率において<strong>異質</strong>であり、技術間の直接比較を制限する。</li><li>迅速診断プラットフォームとブレイクポイントは急速に進化し、被覆範囲・規制上の位置づけ・性能は出版後に変わり得る。</li><li>最近の研究のいくつかは単施設または準実験的であり、多くはスチュワードシップが確立した資源豊富な病院で実施された。コストとアクショナビリティは地域病院や低資源環境で大きく異なり得る。</li><li><strong>アクショナビリティ・マトリクスは著者由来のヒューリスティック</strong>である。前向き検証も、アウトカム確率へのキャリブレーションも、評価者間信頼性の検証も行われていない。HとMは測定された閾値でも治療の義務づけでもなく質的比較にすぎない。臨床判断、最終培養、表現型AST、地域疫学、施設のガイダンスに取って代わるものではない。<strong>施設内の計画立案と仮説生成を超えて使う前に前向き検証が必要</strong>。</li></ul>
+<h3>17. 批判的吟味（JCでの論点）</h3>
+<h4>17-1. 掲載誌と査読の質をどう評価するか</h4>
+<ul><li><strong>事実として確認できること</strong>：本誌 International Journal of General Medicine は Dove Medical Press が発行するオープンアクセス誌で、本論文は CC BY-NC 4.0（非商用）で公開されている。著者が支払う論文掲載料（APC）で運営されるモデルであり、その金額は本論文からは分からない。</li><li><strong>査読期間</strong>：Received 2026-05-08 → Accepted 2026-08-04 → Published 2026-08-22。査読に約88日、受理から公開まで18日。<strong>総説として異常に速いわけではない</strong>。この点だけで査読が形骸化していたとは言えない。</li><li><strong>一方で留意すべき点</strong>：本誌の巻末には出版社自身による勧誘文があり、「非常に迅速で公正な査読システム」を売り文句にしている（Dove Press の標準文言）。誌の性格上、専門的な微生物検査・スチュワードシップ領域の査読者が確保されたかを外部から検証する手立てはない。<strong>査読者名・査読報告書は公開されていない</strong>。</li><li><strong>内容そのものから見た査読の痕跡</strong>：本論文には、査読が緩い雑誌に典型的な破綻（引用と主張の不一致、数値の内部矛盾、限界の書き落とし）は見当たらない。むしろ限界の申告は過剰なほど丁寧で、著者提案の枠組みについて「検証済みスコアではない」「Delphi 合意ではない」「前向き検証が必要」を本文・図キャプション・限界の3か所で繰り返している。<strong>引用も一次文献に正確に対応している</strong>（FAST の 48.8%／95%CI 45.3–52.4、RAPIDS-GN の 8.6 vs 14.9時間、Banerjee 2015 の 1.3 vs 22.3時間はいずれも原著の値と整合）。</li><li><strong>結論としての評価</strong>：誌のブランドではなく<strong>内容で判断すべき典型例</strong>。ただし、①同じ内容が Clinical Microbiology Reviews や Clinical Infectious Diseases に載っていれば独立した専門家査読を経たと推定できるのに対し、本誌ではその推定が働きにくい、②したがって本ノートで引いた数値は、JCで使うなら<strong>引用元の原著（FAST は JAMA 2026、RAPIDS-GN は CID 2021、Banerjee 2015 は CID）に当たって確認する</strong>のが安全、というのが実務的な結論。</li></ul>
+<h4>17-2. ナラティブレビューゆえの選択バイアス</h4>
+<ul><li>検索式は記載されているが、<strong>ヒット件数・スクリーニング件数・採用件数が一切示されていない</strong>。何を除外したかが再現できない。</li><li>著者自身が「PRISMA フロー図を作成しなかった」と明記しているため、隠蔽ではないが、<strong>同じ検索を第三者が再走行して同じ53本に至れるかは検証不能</strong>。</li><li>引用53本の内訳を見ると、<strong>Bianco G / Boattini M / Comini S を含む同一グループの論文が4本</strong>（ref 14、17、32、35）採用されている。MALDI-TOF サブタイピングによるKPC検出、BioFire パネルの実臨床評価、EUCAST RAST の16〜20時間延長、VITEK REVEAL の VOC 評価という、本総説の主要な技術セクションの多くをこの1グループの仕事が支えている。ナラティブレビューで特定グループの寄与が偏るのは自然だが、<strong>「独立した複数グループの再現」という担保が弱い部分がある</strong>ことは意識しておきたい。</li><li>「利益が最も一貫している」という結論はプロセスアウトカムに関するものであり、その根拠となる系統的レビュー（ref 6〜10）はいずれも既存のもの。本総説の付加価値は<strong>新しいエビデンスではなく、既存エビデンスの整理の仕方</strong>にある。JCで扱う際は、この論文を「一次エビデンス」として引かないこと。</li><li><strong>公表バイアスの方向</strong>：迅速診断の実装研究は前後比較が多く、導入と同時にスチュワードシップも強化されるため、利益が過大に出やすい。著者はこれを本文で正しく指摘しているが、<strong>その同じバイアスを含む文献群からアクショナビリティ枠組みを帰納している</strong>という循環は残る。</li></ul>
+<h4>17-3. 提案された枠組みそのものの弱点</h4>
+<ul><li><strong>Figure 2 のマトリクスには L（低アクショナビリティ）が存在しない</strong>。著者は「いずれのアウトプットも診療に影響し得る場面を選んで描いたため」と説明するが、これは<strong>選択された場面だけを描いた結果であり、判別能を持たないマトリクスになっている</strong>。4行×6列の24セルのうち、H が16、M が8で、しかも M が並ぶのは「安定した病棟患者」列と「複数菌・腹腔内感染」列の2列だけ。実質的に伝えているのは「安定患者と複数菌感染では慎重に」という2点であり、24セルの表を要しない。</li><li>5ドメインは相互に独立ではない。患者リスクと耐性の事前確率は臨床的に強く相関し（ICU入室歴・過去の抗菌薬曝露はどちらにも効く）、結果→行動の実行力とスチュワードシップの質も施設属性として重なる。<strong>著者自身「独立したチェックリスト項目ではなく条件付き修飾子」と述べており、重みづけも合成方法も定義されていない</strong>ため、2施設が同じ症例に別々の結論を出しても矛盾しない。</li><li>著者は今後の課題として「より単純なトリガー（重症度、多剤耐性菌の既往、経験的治療が不活性であること）との比較」を挙げているが、<strong>この3項目だけで Figure 2 の H/M 配置はほぼ再現できてしまう</strong>。5ドメインの枠組みが単純なトリガーに勝つという証拠は本論文にない。</li><li>Figure 3 の実装枠組みは6ドメイン×5列の網羅表であり、内容は妥当だが<strong>優先順位の根拠が示されていない</strong>。「何を最初に優先すべきでないか」の列は実務的に有用な発想だが、これも著者の判断であって検証されていない。</li></ul>
+<h4>17-4. 数値・記述上の整合性</h4>
+<ul><li>Figure 1 の時間表示はすべて「およそ（tilde）」と注記付きで、著者は「搬送・バッチ処理・検証・連絡・処方・承認・投薬の遅延を含まない」と明示している。<strong>この但し書きは論文の主張と一貫しており、都合の良い数字を出していない</strong>。</li><li>迅速表現型ASTの「約2〜6時間」については、著者自ら「選択された自動システムの例示にすぎず、すべての迅速AST法や検証済み読み取り時間を包含しない」と限定している。EUCAST RAST は最短4時間、VITEK REVEAL は8時間未満なので、<strong>2時間という下限がどの機器を指すのかは本文からは特定できない</strong>。ここは唯一、キャプションと本文の整合が緩い箇所。</li><li>FAST の解釈：著者は「30日 DOOR で非優越、ただしエスカレーション／de-escalation は14時間速い」と両論を併記している。<strong>48.8%（95%CI 45.3–52.4）は 50% を含む区間であり、迅速検査群がわずかに劣る点推定</strong>。これを「加速と中立が共存する」と表現するのは公正だが、JCでは「点推定が50%未満である」ことも明示的に議論したい。</li><li><strong>対照群の強さ</strong>：FAST では両群にスチュワードシップのレビューがあった。RAPIDS-GN も両群にスチュワードシップがあった。つまり2つの陰性試験はいずれも「スチュワードシップは既にある状態で、迅速検査を上乗せしたら？」を問うている。<strong>本総説の中心的主張（スチュワードシップとの組み合わせがなければ効果は出ない）は、これらの試験では検証されていない</strong>——検証されたのはその逆命題（スチュワードシップがあれば迅速検査の上乗せは小さい）である。ここが本総説の論理の最も弱い接合部。</li></ul>
+<h4>17-5. 利益相反・資金・生成AIの扱い</h4>
+<ul><li>利益相反の申告なし。診断機器メーカーとの関係が記載されていない点は、特定製品を推奨していない論調と整合する。</li><li>ただし<strong>資金源のミスマッチ</strong>が目を引く。助成金 24-214-3-159 の課題名は「脳梗塞後の enriched environment 療法が細胞死と炎症反応に及ぼす影響と制御機構」であり、血流感染の迅速診断とは無関係。著者4名のうち2名は神経内科と幹部病棟の所属で、責任著者の1人（Jing-Shu Li）は第一幹部病棟である。<strong>専門領域と著者構成の整合性は高くない</strong>。感染症科1名と検査医学科1名が実質的な専門性を担っていると推測されるが、本文からは各著者の寄与配分は分からない（貢献記載は定型文のみ）。</li><li><strong>生成AI利用の申告</strong>：DeepSeek-V3 を「言語推敲・構成提案・図レイアウトの予備検討」に使用したと明記。データ生成・解析・臨床判断・最終図版には不使用、最終図は Adobe Illustrator で著者が作成、と申告している。透明性の点では評価できる一方、<strong>「構成提案（structural suggestions）」にAIを使ったという申告は、本総説の中核である「5ドメインの枠組み」の発案経路に曖昧さを残す</strong>。著者は枠組みを「反復的な決定因子をグルーピングした」ものと説明しており、AI由来とは述べていないが、JCでは論点として挙げてよい。</li></ul>
+<h4>17-6. 日本の保険診療で実際に使えるのはどれか</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本総説からは答えられない 本総説は日本の診療報酬、薬事承認、保険適用に<strong>一切言及していない</strong>。したがって「日本で使えるのはどれか」は<mark class="hl">本総説の射程外</mark>であり、この論文を根拠に当院での導入可否を論じることはできない。本文から言えるのは、①引用文献22に日本の三次病院での MALDI-TOF ＋ スチュワードシップ介入研究が1本含まれること、②著者が繰り返す「まず前分析品質と結果→行動の経路を測れ」という提言は、機器の保険適用と無関係に今日から実行できること、の2点のみ。導入可否を検討する際は、別途 <span class="wl">敗血症の血液培養診断の体制と実践 — 24時間微生物検査は12%しかない（CritCare2025）</span> のような国内・国際の体制調査に当たること。</p>
+</div>
+<h4>17-7. JCで問いたいこと</h4>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>問い</th></tr></thead>
+<tbody>
+<tr><td>因果の向き</td><td>「迅速検査＋スチュワードシップ」で効果が出た研究は、スチュワードシップの効果を見ているのではないか。迅速検査単独の増分効果を分離した研究はあるか（Banerjee 2015 の3群デザインが唯一それに近い）</td></tr>
+<tr><td>対照群の強さ</td><td>当院のように既に一定のスチュワードシップがある施設では、FAST・RAPIDS-GN と同じく上乗せが小さい可能性が高い。それでも投資する理由は何か</td></tr>
+<tr><td>エンドポイントの選択</td><td>DOOR は「望ましさ」の階層設定次第で結論が変わる。FAST の階層設定は臨床的に妥当だったか（原著 JAMA 2026 に当たる必要あり）</td></tr>
+<tr><td>枠組みの実用性</td><td>5ドメインは、単に「重症か・耐性既往があるか・経験的治療が外れていそうか」の3問に置き換えられないか</td></tr>
+<tr><td>測定から始める</td><td>当院の actionable TAT と result-to-action interval は何時間か。誰も知らないなら、そこから始めるのが本総説の最大の実践的示唆ではないか</td></tr>
+</tbody></table></div>
+<h3>18. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>敗血症・敗血症性ショックの国際ガイドライン2021</td><td>Evans L, et al. Intensive Care Med. 2021;47(11):1181–1247</td></tr>
+<tr><td>2</td><td>敗血症性ショックで有効抗菌薬開始前の低血圧持続時間が生存の決定因子</td><td>Kumar A, et al. Crit Care Med. 2006;34(6):1589–1596</td></tr>
+<tr><td>3</td><td>迅速検査による血流感染診断のASM エビデンスに基づく検査医学実践ガイドライン（SR・MA）</td><td>Wolk DM, et al. Clin Microbiol Rev. 2025;38(3):e00137-24</td></tr>
+<tr><td>4</td><td>血流感染 — 病原体診断の標準と進歩</td><td>Lamy B, Sundqvist M, Idelevich EA. Clin Microbiol Infect. 2020;26(2):142–150</td></tr>
+<tr><td>5</td><td>血流感染入院患者への標的治療の適時性を高める実践の有効性（SR・MA）</td><td>Buehler SS, et al. Clin Microbiol Rev. 2016;29(1):59–103</td></tr>
+<tr><td>6</td><td>迅速診断とスチュワードシッププログラムの相対的寄与（ネットワークメタ解析）</td><td>Peri AM, et al. Clin Infect Dis. 2024;79(2):502–515</td></tr>
+<tr><td>7</td><td>分子迅速診断の血流感染臨床転帰への効果（SR・MA）</td><td>Timbrook TT, et al. Clin Infect Dis. 2017;64(1):15–23</td></tr>
+<tr><td>8</td><td>迅速ASTのインパクト評価 — アクショナビリティ・抗菌薬使用・患者転帰の指標</td><td>MacVane SH, Dwivedi HP. J Antimicrob Chemother. 2024;79(Suppl 1):i13–i25</td></tr>
+<tr><td>9</td><td>血液培養の迅速AST法と臨床インパクト</td><td>Banerjee R, Humphries R. Front Med. 2021;8:635831</td></tr>
+<tr><td>10</td><td>迅速AST vs 標準ASTのコクランレビュー</td><td>Anton-Vazquez V, et al. Cochrane Database Syst Rev. 2021;5(5):CD013235</td></tr>
+<tr><td>11</td><td>血流感染の3つの迅速診断をベネフィット・リスク評価枠組み（BED-FRAME）で比較</td><td>Smith RD, et al. J Clin Microbiol. 2024;62(1):e01096-23</td></tr>
+<tr><td>12</td><td>迅速診断時代のグラム陰性菌血流感染管理 — スチュワードシップの有無別インパクト</td><td>Claeys KC, et al. Open Forum Infect Dis. 2020;7(10):ofaa427</td></tr>
+<tr><td><strong>13</strong></td><td><strong>迅速多重PCRによる血液培養同定・感受性検査のRCT（617例・3群）</strong></td><td><strong>Banerjee R, et al. Clin Infect Dis. 2015;61(7):1071–1080</strong></td></tr>
+<tr><td>14</td><td>症候群分子アッセイのルーチン診断微生物検査への統合（BioFire 4パネル・955検体）</td><td>Comini S, et al. Antibiotics. 2026;15(2):182</td></tr>
+<tr><td>15</td><td>MALDI-TOF＋スチュワードシップ介入の菌血症・カンジダ血症へのインパクト</td><td>Huang AM, et al. Clin Infect Dis. 2013;57(9):1237–1245</td></tr>
+<tr><td>16</td><td>MALDI-TOF単独 vs MALDI-TOF＋リアルタイムスチュワードシップの最適治療到達時間</td><td>Beganovic M, et al. J Clin Microbiol. 2017;55(5):1437–1445</td></tr>
+<tr><td>17</td><td>MALDI-TOF によるグラム陰性菌の直接同定と blaKPC 保有プラスミド検出（3年単施設・診断アルゴリズム提案）</td><td>Bianco G, et al. Microorganisms. 2023;11(1):91</td></tr>
+<tr><td>18</td><td>黄色ブドウ球菌血流感染のメチシリン耐性迅速判定4法の比較（LAMP・MALDI-TOFサブタイピング・PBP2a LFIA・EUCAST RAST）</td><td>Boattini M, et al. Eur J Clin Microbiol Infect Dis. 2025;44(4):827–837</td></tr>
+<tr><td><strong>19</strong></td><td><strong>RAPIDS-GN — グラム陰性菌血症への迅速同定・感受性検査のRCT（448例）</strong></td><td><strong>Banerjee R, et al. Clin Infect Dis. 2021;73(1):e39–e46</strong></td></tr>
+<tr><td><strong>20</strong></td><td><strong>FAST — グラム陰性菌血症への迅速ASTのRCT（850例・4か国7施設・30日DOOR）</strong></td><td><strong>Banerjee R, et al. JAMA. 2026;335(20):1762–1773</strong></td></tr>
+<tr><td>21</td><td>MALDI-TOF vs 従来法のRCT（ベトナム・侵襲性細菌真菌感染の最適治療）</td><td>Nadjm B, et al. J Infect. 2019;78(6):454–460</td></tr>
+<tr><td>22</td><td>日本の三次病院での MALDI-TOF＋スチュワードシップ介入の臨床インパクト</td><td>Niwa T, et al. Int J Clin Pract. 2019;73(5):e13332</td></tr>
+<tr><td>23</td><td>迅速PCR（MRSA／S. aureus）とスチュワードシップの黄色ブドウ球菌菌血症へのインパクト</td><td>Bauer KA, et al. Clin Infect Dis. 2010;51(9):1074–1080</td></tr>
+<tr><td>24</td><td>黄色ブドウ球菌陽性血液培養の迅速診断導入と患者転帰</td><td>Gritte AS, et al. Diagn Microbiol Infect Dis. 2021;101(3):115474</td></tr>
+<tr><td>25</td><td>マイクロアレイ迅速アッセイ＋スチュワードシップのグラム陽性菌血症治療最適化（持続効果）</td><td>Avdic E, et al. J Antimicrob Chemother. 2017;72(11):3191–3198</td></tr>
+<tr><td>26</td><td>地域病院システムでのグラム陽性菌血症の迅速同定＋スチュワードシップ</td><td>Box MJ, et al. Pharmacotherapy. 2015;35(3):269–276</td></tr>
+<tr><td>27</td><td>分子迅速診断はVRE血流感染の有効治療到達時間と生存を改善</td><td>Bandy SM, et al. Antibiotics. 2023;12(2):210</td></tr>
+<tr><td>28</td><td>FilmArray 血液培養同定パネルへのスチュワードシップ介入の臨床・経済的インパクト</td><td>Pardo J, et al. Diagn Microbiol Infect Dis. 2016;84(2):159–164</td></tr>
+<tr><td>29</td><td>EUCAST 迅速ディスク拡散法（陽性血液培養ボトルからの直接AST）</td><td>Jonasson E, Matuschek E, Kahlmeter G. J Antimicrob Chemother. 2020;75(4):968–978</td></tr>
+<tr><td>30</td><td>EUCAST RAST のヨーロッパ55検査室での検証</td><td>Åkerlund A, et al. J Antimicrob Chemother. 2020;75(11):3230–3238</td></tr>
+<tr><td>31</td><td>EUCAST RAST 方法論 Version 7.0（2026、4・6・8時間および16〜20時間読み取り）</td><td>European Committee on Antimicrobial Susceptibility Testing. 2026</td></tr>
+<tr><td>32</td><td>EUCAST RAST の読み取り時間を16〜20時間へ延長した多施設評価</td><td>Bianco G, et al. Antibiotics. 2022;11(10):1404</td></tr>
+<tr><td>33</td><td>EUCAST RAST のグラム陰性菌血流感染管理へのインパクト</td><td>Cardot Martin E, et al. Infect Dis Now. 2022;52(8):421–425</td></tr>
+<tr><td>34</td><td>EUCAST RAST の解析性能と患者管理へのインパクト</td><td>Berinson B, et al. J Antimicrob Chemother. 2021;76(5):1332–1338</td></tr>
+<tr><td>35</td><td>VOC検出によるAST加速の新パラダイム — VITEK REVEAL の性能評価（128陽性培養・2220組み合わせ）</td><td>Bianco G, et al. J Antimicrob Chemother. 2024;79(9):2237–2245</td></tr>
+<tr><td>36</td><td>グラム陰性桿菌菌血症における迅速ASTのインパクト（準実験）</td><td>Hogan CA, et al. J Clin Microbiol. 2020;58(9):e00360-20</td></tr>
+<tr><td>37</td><td>Accelerate PhenoTest BC キットの実臨床インパクト（多施設・準実験）</td><td>Bhalodi AA, et al. Clin Infect Dis. 2022;75(2):269–277</td></tr>
+<tr><td>38</td><td>BCID2＋VITEK REVEAL の重症グラム陰性菌血流感染での抗菌薬最適化（前後比較）</td><td>Oudiane L, et al. J Antimicrob Chemother. 2025;80(10):2665–2675</td></tr>
+<tr><td>39</td><td>表現型迅速診断アッセイのグラム陰性菌血症における経験的抗菌薬期間へのインパクト</td><td>Mohayya SM, et al. Antimicrob Steward Healthc Epidemiol. 2023;3(1):e22</td></tr>
+<tr><td>40</td><td>血流感染の最近の臨床試験データのアップデート</td><td>Stewart AG, et al. Antibiotics. 2024;13(11):1035</td></tr>
+<tr><td>41</td><td>迅速診断アッセイとスチュワードシップ介入の組み合わせ（グラム陰性菌血症）</td><td>Ventres JJ, et al. Open Forum Infect Dis. 2024;11(9):ofae477</td></tr>
+<tr><td>42</td><td>迅速血液培養診断に対するスチュワードシップ介入の臨床・実装アウトカム</td><td>Abdelnour M, et al. Antimicrob Steward Healthc Epidemiol. 2025;5(1):e313</td></tr>
+<tr><td>43</td><td>リアルタイム微生物アラートによる先制的スチュワードシップ</td><td>Di Marcello A, et al. JAC Antimicrob Resist. 2025;7(5):dlaf182</td></tr>
+<tr><td>44</td><td>薬剤部スタッフと臨床サーベイランスプラットフォームによる迅速検査データの届け方（米国地域病院の事例）</td><td>Frens J, et al. J Antimicrob Chemother. 2024;79(Suppl 1):i37–i43</td></tr>
+<tr><td>45</td><td>迅速血液培養診断パネルの最適治療到達時間へのインパクト（退役軍人医療センター）</td><td>Chiasson JM, et al. J Pharm Pract. 2022;35(5):722–729</td></tr>
+<tr><td>46</td><td>小規模地域病院でのリアルタイム薬剤師介入による迅速診断の最適化</td><td>Tritle BJ, et al. Hosp Pharm. 2022;57(3):377–384</td></tr>
+<tr><td>47</td><td>2つの地域病院での迅速診断とスチュワードシップの統合</td><td>Lockwood AM, et al. Infect Control Hosp Epidemiol. 2016;37(4):425–432</td></tr>
+<tr><td>48</td><td>分子迅速診断で同定された陽性血液培養における有効・最適治療到達時間の予測因子</td><td>Beganovic M, et al. Open Forum Infect Dis. 2019;6(1):ofy350</td></tr>
+<tr><td>49</td><td>迅速診断と能動的スチュワードシップの追加コストは見合うか</td><td>McElvania TeKippe E. J Clin Microbiol. 2017;55(1):20–23</td></tr>
+<tr><td>50</td><td>血流感染に対する迅速診断の費用対効果（スチュワードシップの有無別）</td><td>Pliakos EE, et al. Clin Microbiol Rev. 2018;31(3):e00095-17</td></tr>
+<tr><td>51</td><td>発熱性好中球減少患者への迅速PCR血液培養同定パネル追加のインパクト（ペルー）</td><td>Pérez-Lazo G, et al. Antibiotics. 2023;12(4):648</td></tr>
+<tr><td>52</td><td>BioFire Blood Culture Identification 2 パネルの小児病院での臨床インパクト</td><td>Graff KE, et al. Microbiol Spectr. 2021;9(1):e00429-21</td></tr>
+<tr><td>53</td><td>DOOR-MAT による迅速診断の臨床有用性比較</td><td>Claeys KC, et al. Antimicrob Agents Chemother. 2021;65(9):e00441-21</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 血流感染の迅速診断・迅速ASTで確実に短縮できるのは「適正抗菌薬までの時間」と「エスカレーション／de-escalation までの時間」だけで、<mark class="hl">死亡・在院日数・コストは動かない</mark>（FAST 2026：30日DOORで非優越、より望ましい転帰の確率48.8%／95%CI 45.3–52.4、ただし治療変更は14時間速い。RAPIDS-GN：初回変更8.6 vs 14.9時間、死亡・在院日数に差なし）。<mark class="hl">しかもこれら2つの陰性試験は両群ともスチュワードシップがある状態で行われており、示されたのは「スチュワードシップが既にあれば迅速検査の上乗せは小さい」ということである</mark>。</p>
+<p>したがって当院で次にすべきは機器の検討ではなく、<mark class="hl">自施設の actionable turnaround time（培養陽性→責任医師が解釈済み結果を手にするまで）と result-to-action interval（結果リリース→処方変更まで）を実測すること</mark>。検査室TATだけを見ている限り、律速が採血品質にあるのか、夜間の通知にあるのか、処方変更の判断にあるのかは永久に分からない。<mark class="hl">測ってから買う</mark>。</p>
+<p>解釈上の一線：<mark class="hl">耐性マーカーの陰性は感受性の証明ではない。不安定・高リスク患者で、マーカー陰性だけを根拠に治療を狭めてはならない</mark>。混合培養で検出された耐性遺伝子は、臨床的に優勢な菌に属するとは限らない。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
