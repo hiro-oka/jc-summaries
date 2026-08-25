@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>調節換気から補助換気へいつ切り替えるか — PF比150超で切り替えるほうが250超まで待つより抜管が2.3日早い（ターゲット試験エミュレーション・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06275-4.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">調節換気から補助換気へいつ切り替えるか — PF比150超で切り替えるほうが250超まで待つより抜管が2.3日早い（ターゲット試験エミュレーション・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Reep CAT, Wils EJ, Jonkman AH, Smit JM, Gommers D, Heunks L. Switching from controlled to assisted ventilation based on oxygenation thresholds and PEEP: a target trial emulation. Crit Care. 2026. DOI: 10.1186/s13054-026-06275-4</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-20）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06275-4" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06275-4</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Switching from controlled to assisted ventilation based on oxygenation thresholds and PEEP: a target trial emulation</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「まだ酸素化が十分でないから調節換気を続ける」の閾値を下げる</strong>。48時間以上の調節換気を要した患者では、P/F 150を超えた時点で補助換気への切り替えを検討してよい。P/F 250まで待つ運用は、抜管までの時間を平均2.3日延ばす方向に働いた（死亡は変わらない）</li><li><strong>PEEPを添えて閾値を読む</strong>。48時間以上の調節換気＋PEEP 8 cmH₂O以上の患者に限っては、P/F 200をひとつの目安にするのが最も成績がよかった（探索的）。PEEP 8未満なら150で動く</li><li><strong>24時間以上・非術後の、より軽い集団では 150 一択</strong>。PEEP依存の上乗せは不要だった。当院の「1泊で抜管を狙う」層はこちらに近い</li><li><strong>切り替え失敗＝早期切り替えを否定する理由にはならない</strong>。本研究では初回切り替えの54%が72時間以内に調節換気へ戻ったが、それでも早い閾値のほうが最終的な抜管は早かった。「戻ってもよい、試すことに価値がある」という運用言語に変える</li><li><strong>切り替えの操作は3通りある</strong>。補助のみのモードへ変更する／設定呼吸回数を下げる／鎮静を浅くして自発呼吸回数を上げる。当院のプロトコルにも「モード変更」だけでなく後2者を明記しておくと、実務での切り替えの敷居が下がる</li><li><strong>日勤帯偏重の是正</strong>。本研究でも切り替えは朝8時にピークがあり日中に偏っていた（夜間も相当数はある）。P/F閾値を満たしたら時刻に関係なく評価する仕組み（ラウンドのチェック項目化）が、実際の「無駄な遅れ」を削る現実的な打ち手になる</li><li><strong>一方で、これは MIMIC-IV 単施設の後ろ向きデータに因果推論の枠組みをかぶせた仮説生成研究</strong>。プロトコル化して全例に強制する段階ではなく、「迷ったら早めに」の方向づけとして使う</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：調節換気から補助換気への切り替えはウィーニングの起点であり、遅らせると横隔膜の廃用と鎮静の遷延を招く。同一グループの先行研究（WEAN SAFE データのTTE, AJRCCM 2025）で、調節換気2日超かつ P/F 150超の患者では「1日以内に切り替える」ほうが「遅らせる」より抜管とICU退室が早かった。MIMIC-IV での検証（AJRCCM 2026）でも24・12・6時間以内の切り替えが有利だった</li><li><strong>Unknown</strong>：これらはいずれも「150 mmHg を満たした人を、早く切るか遅く切るか」の比較であり、<mark class="hl">150という閾値そのものが最適かは検証されていなかった</mark>。比較対照の「遅延群」は P/F がばらばらの寄せ集めで、非常に高いP/Fで切り替えた人の悪い成績が、200や250といったやや高めの閾値の利点を覆い隠していた可能性がある。またP/FはPEEPに依存するのに、PEEPを組み込んだ閾値は誰も評価していなかった</li><li><strong>What's new</strong>：MIMIC-IV の高頻度データと動的治療戦略（dynamic treatment regimes）を使い、150・200・250 mmHg の3閾値を直接比較。さらにPEEPを 8 cmH₂O で二分して「低PEEPならX、高PEEPならY」という9通りのPEEP依存戦略を評価した。結果は「250まで待つ戦略が最も悪い」で一貫し、48時間群では『低PEEP 150／高PEEP 200』が最良点推定、24時間群では 150 一択だった。死亡には差がない</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 48時間以上の調節換気を受けた成人1,635例のターゲット試験エミュレーションで、<strong>P/F 250超まで切り替えを待つ戦略は、150超・200超で切り替える戦略に比べて抜管成功までの時間が約2.3〜2.4日長かった</strong>。28日死亡には差がなかった。</p>
+</div>
+<ul><li><strong>デザイン</strong>：MIMIC-IV v3.1（2008–2022、Beth Israel Deaconess Medical Center）を用いたターゲット試験エミュレーション。仮想RCTの7要素（適格基準・治療戦略・割付・追跡期間・アウトカム・因果対比・解析計画）をTable 1で1対1に対応づけた</li><li><strong>対象</strong>：16歳超、調節換気（controlled IMV）48時間以上、その間に P/F &lt;300 mmHg を1回以上記録した患者。除外はICU外、DNR指示あり、外傷性脳損傷・その他の急性神経学的イベント・気道確保目的の人工呼吸。n = 1,635</li><li><strong>戦略</strong>：「PEEP &lt;8 cmH₂O なら P/F &gt; X_lowPEEP で切り替え、PEEP ≥8 cmH₂O なら P/F &gt; X_highPEEP で切り替え（筋弛緩薬非投与下）」。X はそれぞれ 150・200・250 の3値 → 9戦略。X_low = X_high の3戦略（regime 1・5・9）が従来型のPEEP非依存戦略</li><li><strong>grace period</strong>：閾値到達後 <strong>6時間以内</strong>の切り替えを「戦略に沿った」とみなす（MIMIC-IV でのモード・呼吸数の記録頻度が1日約5回であることに合わせた）</li><li><strong>主要アウトカム</strong>：28日 restricted mean time lost（RMTL）で表した抜管成功までの時間。死亡を競合イベントとして Aalen–Johansen 推定量で扱う。<strong>RMTL は高いほど良い</strong>（抜管成功が早い・多い）</li><li><strong>副次アウトカム</strong>：28日死亡（ICU退室＝生存を競合イベントとして扱う）</li><li><strong>解析</strong>：各患者を9回クローンし9戦略に割り付け、割付戦略から逸脱した時点で人工的に打ち切り。情報のある打ち切りを補正するため、6時間ごとに更新する傾向スコアから逆確率打ち切り重み（IPCW）を作り安定化。非パラメトリック・クラスターブートストラップ150反復で95%CI</li><li><strong>主要結果（PEEP非依存）</strong>：regime 1（&gt;150）19.6日（95%CI 18.6–20.9）、regime 5（&gt;200）19.8日（18.5–21.1）、regime 9（&gt;250）17.4日（15.9–18.6）。regime 9 は regime 1 より 2.3日（95%CI 0.8–4.2）、regime 5 より 2.4日（1.1–4.0）抜管が遅い</li><li><strong>PEEP依存（探索的）</strong>：最良点推定は regime 4（低PEEP 150／高PEEP 200）で 20.1日（18.8–21.3）、最低は regime 9 で 17.4日</li><li><strong>感度分析（24時間以上・非術後、n=2,866）</strong>：regime 1（&gt;150）が最良で 22.0日（21.2–22.8）。regime 5 は 0.9日遅れ（0.2–1.6）、regime 9 は 1.8日遅れ（0.8–2.8）。PEEP依存の上乗せは認められず</li><li><strong>死亡</strong>：どの戦略間にも28日死亡の差なし（累積発生率はいずれも20%前後）</li><li><strong>著者の結論</strong>：P/F &gt;150 での切り替えが &gt;250 まで待つより一般に望ましい。48時間以上・PEEP ≥8 の患者ではやや高めの &gt;200 が有益かもしれない。仮説生成的でありRCTによる確認が必要</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>調節換気（controlled ventilation）</strong> は、換気のタイミングと量をすべて人工呼吸器が決めるモード（VCV/PCVの調節モード）。患者の呼吸筋は仕事をしない。<strong>補助換気（assisted ventilation）</strong> は患者の吸気努力に呼吸器が同期して補助するモード（PSVなど）。この2つの間の「切り替え（switch）」が、ウィーニングの実質的なスタートラインになる。 切り替えを遅らせると、横隔膜の廃用性萎縮（数日で筋線維断面積が減る）、深鎮静の遷延、せん妄・ICU-AWのリスクが積み上がる。逆に早すぎると、過大な吸気努力によるP-SILI、非同調、切り替え失敗（＝調節換気への逆戻り）を招きうる。この綱引きの最適点をどこに置くか、というのが本研究の問い。 <strong>P/F 比（PaO₂/FiO₂）</strong> は酸素化の指標だが、<mark class="hl">同じ肺でもPEEPを上げると改善して見える</mark>。したがって「P/F 200」という数字だけでは、PEEP 5でのそれと PEEP 12 でのそれは意味が違う。本研究がPEEPを閾値に組み込んだ動機はここにある。 <strong>ターゲット試験エミュレーション（TTE）</strong> は、観察データを「もし理想のRCTを組むならどう設計するか」の設計図（target trial）に当てはめて解析する枠組み（Hernán, JAMA 2022）。適格基準・治療戦略・割付・time zero・アウトカム・因果対比・解析計画を先に書き切ることで、観察研究にありがちな不死時間バイアス（immortal time bias）や、追跡開始時刻の曖昧さから来る選択バイアスを構造的に潰す。 <strong>動的治療戦略（dynamic treatment regime）</strong> は「固定の1回きりの治療」ではなく「Aという状態になったらBをせよ」という条件付きルールを比較対象にする考え方。本研究の「P/Fが閾値を超えたら切り替えよ」はまさにこれ。 <strong>クローン・人工打ち切り・重み付け（clone-censor-weight）</strong> は、動的治療戦略をTTEで扱う標準手法。全員を戦略の数だけ複製（クローン）してすべての戦略に同時に割り付け、ルールから外れた瞬間にそのクローンを打ち切る。全員が time zero で全戦略に属するので不死時間は発生しない。ただし打ち切りは「戦略に従えなかった理由」と結びついている（情報のある打ち切り）ので、逆確率打ち切り重み（IPCW）で補正する。 <strong>RMTL（restricted mean time lost）</strong> は競合リスク下で使う要約量で、28日間の累積発生曲線の下の面積に相当する。名前は「失われた時間」だが、抜管成功のような望ましいイベントに使うと<strong>値が大きいほど早く・多く抜管できた</strong>ことを意味する。本論文はこの向きで使っている（Figure 3の凡例も「高いほど早期の抜管成功」）。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>人工呼吸からの離脱における決定的な一歩は、調節換気から補助換気への切り替えである。著者らの先行研究では、調節換気が2日を超え P/F &gt;150 mmHg の患者において、1日以内に補助換気へ切り替えるほうが、遅らせるより抜管とICU退室が早かった（WEAN SAFE データのTTE, AJRCCM 2025）。ただしWEAN SAFEは朝1回のみの日次データで、時間分解能が粗い。</p>
+<p>より高頻度の MIMIC-IV を用いた検証研究（AJRCCM 2026）では、同じ適格基準を1日のどの時刻でも評価できるようにしたうえで、適格基準を満たしてから24時間・12時間・6時間以内に切り替える戦略が、それぞれの時間窓を超えてから切り替えるより抜管成功が早かった。</p>
+<p>これら先行研究が問うたのは「一律に早く切り替える方針を採るべきか」だった。しかし適格基準に使われた P/F 150 mmHg という閾値そのものが、切り替えの生理学的な最適基準である保証はない。動的治療戦略を用いれば、複数の酸素化閾値を直接比較でき、切り替えの最適タイミングをより精密に定められる。</p>
+<p>そこで本研究では、あらかじめ規定した P/F 閾値に達したら直ちに切り替える、という仮想試験をエミュレートして複数閾値を比較した。さらに P/F が PEEP の影響を受けることを踏まえ、PEEP依存の戦略も組み込んだ。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>3-1. Table 1. 仮想RCTと本研究のエミュレーションの1対1対応</h4>
+<p>これが本論文の背骨。原表を日本語化する。</p>
+<div class="tw"><table>
+<thead><tr><th>プロトコル要素</th><th>仮想ランダム化比較試験</th><th>本研究のエミュレーション</th></tr></thead>
+<tbody>
+<tr><td><strong>適格基準</strong></td><td>【組み入れ】16歳超／調節換気（IMV）48時間以上／IMV開始後48時間以内に P/F &lt;300 mmHg を1回以上記録。【除外】ICU以外の場所に入室／DNR指示あり／人工呼吸の理由が外傷性脳損傷・その他の神経学的イベント・気道確保</td><td>仮想試験と同一</td></tr>
+<tr><td><strong>治療戦略</strong></td><td>9通りの動的治療戦略。各々「PEEP &lt;8 cmH₂O なら P/F &gt; X_lowPEEP で切り替え、PEEP ≥8 cmH₂O なら P/F &gt; X_highPEEP で切り替え、ただし筋弛緩薬を投与されていないこと」。X_lowPEEP・X_highPEEP は 150・200・250 mmHg。X_high = X_low の戦略がPEEP非依存戦略に相当。割り当てられた閾値に達したら6時間以内に切り替える。切り替えは次のいずれか（複数可）で実施してよい：補助のみのモードへ変更／設定呼吸回数を下げる／鎮静を減らして自発呼吸回数を上げる</td><td>仮想試験と同一。切り替えの時点は、調節モードから補助のみのモードへの移行、または調節・補助併用モードでは自発呼吸回数が10回/分を超えたこと、もしくは実測呼吸回数が設定回数を上回ったことで同定した</td></tr>
+<tr><td><strong>割付手続き</strong></td><td>適格基準を満たした時点で、9戦略のいずれかへランダムに割り付ける</td><td>適格基準を満たした時点で、患者を9戦略すべてに割り付けた（クローン）。割付戦略から逸脱した時点で人工的に打ち切り。逸脱＝割り当てられた P/F 閾値に達する前に切り替えた、または閾値到達後6時間以内に切り替えなかった</td></tr>
+<tr><td><strong>追跡期間</strong></td><td>ランダム化に始まり、抜管成功・追跡不能・ICU退室・ICU死亡・ランダム化後28日のいずれか早い時点で終了</td><td>適格基準を満たした時点に始まり、人工打ち切り・抜管成功・追跡不能・ICU退室・ICU死亡・適格化後28日のいずれか早い時点で終了</td></tr>
+<tr><td><strong>アウトカム</strong></td><td>【主要】抜管成功＝抜管後7日以内に再挿管も死亡もない、または7日以内に人工呼吸なしでICU退室、のいずれか早いほう。【副次】死亡</td><td>仮想試験と同一</td></tr>
+<tr><td><strong>関心のある因果対比</strong></td><td>per-protocol effect（プロトコル遵守効果）</td><td>仮想試験と同一</td></tr>
+<tr><td><strong>解析計画</strong></td><td>9戦略間で28日累積発生率（抜管成功・死亡）を比較。競合リスクを考慮（Aalen–Johansen推定量）。抜管成功は28日RMTL、死亡は28日累積リスクで報告</td><td>仮想試験と同一。ただし戦略を継続した患者と逸脱した患者の間の時間依存交絡を釣り合わせる重みを追加で用いる</td></tr>
+</tbody></table></div>
+<h4>3-2. time zero と、不死時間バイアス・選択バイアスをどう避けたか</h4>
+<p>TTEの肝は「追跡開始時刻（time zero）＝割付時刻＝適格判定時刻」を一致させることにある。本研究の設計は次のように整理できる。</p>
+<div class="tw"><table>
+<thead><tr><th>潜在的バイアス</th><th>素朴な観察研究で起きること</th><th>本研究での回避策</th></tr></thead>
+<tbody>
+<tr><td><strong>不死時間バイアス（immortal time bias）</strong></td><td>「早期切り替え群」を切り替えの事実で定義すると、切り替えるまで生存し人工呼吸を続けていた期間が自動的に「生存」として群に付与され、早期群が不当に有利になる</td><td>全患者を9戦略すべてに同時に割り付け（クローン）、追跡は適格化時点から始める。どの戦略でも time zero が同一で、切り替えの有無による事後的な群分けが存在しない</td></tr>
+<tr><td><strong>追跡開始時刻の恣意性</strong></td><td>「切り替え時点」を time zero にすると、切り替えなかった患者の time zero が定義できない</td><td>適格基準（調節換気48時間＋P/F &lt;300）を満たした瞬間を time zero に固定。以後は forward-looking approach で6時間ごとに戦略適合を判定</td></tr>
+<tr><td><strong>人工打ち切りに伴う選択バイアス</strong></td><td>戦略から外れた人をただ除外すると、外れやすい特徴（深鎮静・高PEEP・不安定）を持つ患者が体系的に抜け落ちる</td><td>打ち切りは情報を持つと仮定し、6時間ごとに更新する傾向スコアからIPCWを算出。戦略を継続した患者と打ち切られた患者の患者背景を釣り合わせる</td></tr>
+<tr><td><strong>適格判定の時刻依存</strong></td><td>日次データだと「朝の1点」でしか適格判定できず、実際の切り替え可能時点とずれる</td><td>MIMIC-IV のモード・呼吸数は1日約5回記録されるため、6時間の猶予（grace period）を置いて判定。この幅がモニタリング間隔を吸収する</td></tr>
+<tr><td><strong>アウトカム定義の甘さ</strong></td><td>「抜管」だけを見ると、翌日再挿管した例も成功に数えられる</td><td>抜管成功を「7日以内に再挿管も死亡もない」で定義（WIND研究の定義に準拠）。死亡は競合イベントとして明示的に扱う</td></tr>
+</tbody></table></div>
+<h4>3-3. 動的治療戦略の中身 — 9戦略はどう作られたか</h4>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. PEEP依存の治療戦略フローチャート。図の左上から「2 days controlled IMV（調節換気2日）」の箱が出発点で、そこから下の点線枠（枠の左上に「Evaluated every 6 hours ＝ 6時間ごとに評価」と注記）に入る。点線枠内の最上段は「What is the set PEEP level?（設定PEEPはいくつか）」の判断ボックス。ここから左右に矢印が分岐し、左の枝には「&lt;8 cmH₂O」、右の枝には「≥8 cmH₂O」のラベルが付く。左の枝は「Has PaO₂/FiO₂ exceeded X_lowPEEP mmHg?」の判断ボックスへ、右の枝は「Has PaO₂/FiO₂ exceeded X_highPEEP mmHg?」の判断ボックスへつながる。それぞれのボックスから「no」「yes」の2本の矢印が出て、no は楕円「Do not switch yet（まだ切り替えない）」へ、yes は楕円「Switch（切り替える）」へ向かう。no の場合は6時間後に同じ判定が繰り返される。図の右側には「Both X_lowPEEP and X_highPEEP set to 150, 200, or 250」の注記と曲がった矢印があり、その下に9戦略の一覧表（Regime／X_lowPEEP／X_highPEEP）が置かれる。表の内容は regime 1: 150・150／2: 200・150／3: 250・150／4: 150・200／5: 200・200／6: 250・200／7: 150・250／8: 200・250／9: 250・250。regime 1・5・9 が X_low = X_high、すなわち従来のPEEP非依存戦略にあたる。原図・無改変</p>
+</div>
+<p>閾値の設計は次のとおり。</p>
+<ul><li>まず PEEP を無視した3戦略（P/F &gt;150、&gt;200、&gt;250 で切り替え、いずれも筋弛緩薬非投与が条件）を比較した</li><li>次に PEEP 依存戦略を探索した。PEEP は <strong>切り替え時点の分布の中央値</strong>に基づいて 8 cmH₂O で二分した（補足Figure E1A）</li><li>低PEEP側・高PEEP側それぞれに 150／200／250 を割り当てて 3 × 3 = <strong>9戦略</strong></li><li>例：regime 4（X_low = 150、X_high = 200）では、臨床医はまず現在のPEEPを確認する。PEEP &lt;8 なら P/F &gt;150 で切り替え、PEEP ≥8 なら P/F &gt;200 で切り替える。どちらの基準も満たさなければ、以後の評価時点で同じ判断を繰り返す</li></ul>
+<p><strong>閾値は3通り</strong>（150・200・250 mmHg）。これより低い閾値（&lt;150）は、その水準で実際に切り替えた症例数が少なすぎて評価できなかった。著者は「したがって150未満での切り替えを推奨するものではない」と明記している。</p>
+<h4>3-4. 「切り替え」と「切り替え失敗」の定義、grace period</h4>
+<ul><li><strong>切り替え（switch）</strong>：①調節モードから補助のみのモードへの移行、または②調節・補助併用モードにおいて自発呼吸回数が10回/分を超える、もしくは実測呼吸回数が設定呼吸回数を上回る（SWITCH研究の方法論に準拠）</li><li><strong>切り替え失敗</strong>：72時間以内に調節換気へ戻ったもの</li><li><strong>grace period 6時間</strong>：MIMIC-IV では換気モードと呼吸回数がいずれも1日約5回しか記録されないため、閾値到達から6時間以内に起きた切り替えを「戦略に合致」とみなした。モニタリング間隔のせいで切り替えイベントを取りこぼさないための措置</li></ul>
+<h4>3-5. 欠測 P/F の扱い</h4>
+<ul><li>P/F が欠測の場合、SpO₂/FiO₂ から換算して補完した。<strong>SpO₂ ≤96% には非線形式、SpO₂ &gt;96% には対数線形式</strong>を使うハイブリッド手法（詳細は補足資料）</li><li>単純な線形換算を避けたのは、高いSpO₂では酸素解離曲線が平坦になり誤差が大きくなるため</li><li>ブートストラップの各反復のなかで欠測補完を行った（補完の不確実性をCIに反映させるため）</li></ul>
+<h4>3-6. アウトカム</h4>
+<ul><li><strong>主要</strong>：抜管成功までの時間。抜管成功＝抜管後7日以内に再挿管も死亡もない、または7日以内に人工呼吸なしでICU退室、のいずれか早いほう。<strong>死亡は競合イベント</strong>として扱う</li><li>累積発生曲線は時間とともに収束する（結局はいずれ抜管されるか死亡するため）ので、追跡終了時点の累積発生率ではなく <strong>28日RMTL</strong> で報告した</li><li>抜管成功のような望ましいイベントでは、RMTL は追跡期間内に「得られた日数」を表す。<strong>28日RMTLが高いほど、抜管成功が早い、または多い</strong></li><li><strong>副次</strong>：28日死亡。こちらは「死亡が早いか遅いか」より最終的な累積発生率のほうが臨床的に意味があるとして、RMTLではなくリスクで報告。ICU退室（＝生存）を競合イベントとして扱う</li></ul>
+<h4>3-7. 統計解析</h4>
+<p><strong>記述</strong>：まず切り替えのパターン（時刻分布、切り替え直前のPEEPとP/F）を記述した。</p>
+<p><strong>clone-censor-weight</strong>：</p>
+<ol><li>適格基準を満たした各患者を <strong>9回クローン</strong>し、それぞれのクローンを9戦略のひとつに割り当てる</li><li>クローンは適格基準を満たした瞬間から追跡（forward-looking approach）</li><li>割り当て戦略から逸脱した時点で<strong>人工的に打ち切り</strong>。逸脱＝(a) 割り当てられた P/F 閾値に達する前に切り替えた、(b) 閾値到達後6時間以内に切り替えなかった</li><li>この打ち切りは情報を持つため、<strong>6時間ごとに更新する傾向スコア</strong>を用いて逆確率打ち切り重み（IPCW）を算出</li><li>重みは<strong>安定化</strong>（stabilized）して分散を抑えた</li></ol>
+<p><strong>計算量への対処</strong>：時間区間が多すぎると計算が破綻するため、切り替えの大半が起きる時間窓（Q3 + 1.5 × IQR）を「ターゲット試験エミュレーション期間」と定義。打ち切りとIPCWの計算はこの期間内でのみ行い、最終的な重みは各クローンについてそれ以降へ持ち越した（carry forward）。</p>
+<p><strong>推定</strong>：重みを Aalen–Johansen 推定量に適用して競合イベントを考慮。95%CIは<strong>非パラメトリック・クラスターブートストラップ150反復</strong>で算出し、各反復内で欠測補完を実施。</p>
+<p><strong>推論の枠組み</strong>：PEEP非依存の3戦略（regime 1・5・9）についてのみ、ペアワイズ差のブートストラップCIに基づく推論を行い、CIがゼロを含まないことを統計学的有意とした。<strong>それ以外の戦略比較はすべて探索的</strong>と位置づけている。</p>
+<p><strong>バランス評価</strong>：打ち切りが最も多く発生する時点で、打ち切られた患者と打ち切られなかった患者を戦略ごとに比較。重み付け後の標準化平均差 ≤0.1 を均衡ありとした。</p>
+<p><strong>因果推論の前提の検証</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>前提</th><th>内容</th><th>本研究での確認</th></tr></thead>
+<tbody>
+<tr><td><strong>正値性（positivity）</strong></td><td>どの共変量パターンでもどの戦略に従う確率がゼロでない</td><td>安定化IPCWの分布に極端値がないことを確認（補足Figure E6A）。極端な重みは認めなかった</td></tr>
+<tr><td><strong>条件付き交換可能性（conditional exchangeability）</strong></td><td>測定した交絡因子で調整すれば群間が比較可能になる</td><td>関連交絡因子はすべて含まれていると仮定（検証不能な仮定であることを著者も明記）</td></tr>
+<tr><td><strong>一致性（consistency）</strong></td><td>「切り替え」という介入の版が複数あっても結果への影響が異なりすぎない</td><td>補助のみモードへの変更／設定呼吸回数の減少／自発呼吸回数の増加、の3つの版で影響の差は小さいと仮定。感度分析で検証</td></tr>
+</tbody></table></div>
+<h4>3-8. 調整した交絡因子</h4>
+<p>切り替えのタイミングとアウトカムの両方に影響しうる<strong>時間依存変数</strong>を調整した。</p>
+<div class="tw"><table>
+<thead><tr><th>交絡因子</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>PEEP</td><td>設定値</td></tr>
+<tr><td>駆動圧（driving pressure）</td><td>プラトー圧 − 設定PEEP</td></tr>
+<tr><td>設定呼吸回数</td><td></td></tr>
+<tr><td>一回換気量</td><td>mL/kg 予測体重</td></tr>
+<tr><td>pH</td><td></td></tr>
+<tr><td>PaCO₂</td><td></td></tr>
+<tr><td>P/F 比</td><td></td></tr>
+<tr><td>心血管SOFA（CV SOFA）</td><td></td></tr>
+<tr><td>切り替え前の人工呼吸期間</td><td></td></tr>
+<tr><td>鎮静深度</td><td>覚醒／中等度鎮静／深鎮静の3段階（RASS または RSAS で定義）</td></tr>
+</tbody></table></div>
+<h4>3-9. 感度分析（3つ）</h4>
+<ol><li><strong>一致性の検証</strong>：介入を「補助のみモードへの切り替え」に限定して再解析（症例数の制約で切り替えの版ごとの個別解析は不可能だった）</li><li><strong>SpO₂/FiO₂ 換算の誤分類への対処</strong>：SpO₂/FiO₂ ベースの補完を使わず、より広い共変量セットから P/F を補完して再解析</li><li><strong>より広い集団</strong>：24時間から48時間の間に切り替えたが失敗し、その後も数日ICUで人工呼吸が続いた患者を捕捉するため、<strong>調節換気24時間以上</strong>＋その間に P/F &lt;300 を1回以上、の患者全員を解析。ただし術後患者（ICD診断コードで待機・緊急手術と判定）は、日常的で問題のない術後モード切り替えの影響を除くため除外</li></ol>
+<h3>4. 結果 — 患者背景</h3>
+<p><strong>1,635例</strong>が適格基準を満たした（フローは補足Figure E3）。</p>
+<h4>Table 2. ベースライン患者背景（適格基準を満たした時点、全体 N=1,635）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>値</th><th>欠測</th></tr></thead>
+<tbody>
+<tr><td>女性、n（%）</td><td>646（39.5%）</td><td>0</td></tr>
+<tr><td>年齢、歳、中央値（IQR）</td><td>61.0（48.0–72.0）</td><td>0</td></tr>
+<tr><td>BMI、kg/m²、中央値（IQR）</td><td>28.4（24.6–34.6）</td><td>204（12.5%）</td></tr>
+<tr><td>挿管からの時間、中央値（IQR）</td><td>48.0（48.0–48.0）</td><td>0</td></tr>
+<tr><td>気管切開あり、n（%）</td><td>0（0%）</td><td>0</td></tr>
+<tr><td>ECMO施行、n（%）</td><td>47（2.9%）</td><td>0</td></tr>
+<tr><td><strong>ICU入室理由</strong>（重複あり）</td><td></td><td></td></tr>
+<tr><td>高二酸化炭素性呼吸不全</td><td>133（8.1%）</td><td>0</td></tr>
+<tr><td>低酸素性呼吸不全</td><td>462（28.3%）</td><td>0</td></tr>
+<tr><td>呼吸不全（高CO₂性または低酸素性）</td><td>611（37.4%）</td><td>0</td></tr>
+<tr><td>敗血症・敗血症性ショック</td><td>677（41.4%）</td><td>0</td></tr>
+<tr><td>心原性肺水腫</td><td>344（21.0%）</td><td>0</td></tr>
+<tr><td>心停止</td><td>214（13.1%）</td><td>0</td></tr>
+<tr><td>緊急手術</td><td>157（9.6%）</td><td>0</td></tr>
+<tr><td>待機手術</td><td>34（2.1%）</td><td>0</td></tr>
+<tr><td>ショック（敗血症性以外）</td><td>491（30.0%）</td><td>0</td></tr>
+<tr><td>外傷</td><td>528（32.3%）</td><td>0</td></tr>
+<tr><td>ICU入室理由が2つ以上</td><td>1,521（93.0%）</td><td>0</td></tr>
+<tr><td><strong>呼吸パラメータ</strong>、中央値（IQR）</td><td></td><td></td></tr>
+<tr><td>設定呼吸回数、回/分</td><td>20.0（16.0–24.0）</td><td>193（11.8%）</td></tr>
+<tr><td>実測呼吸回数、回/分</td><td>20.0（16.0–24.0）</td><td>8（0.5%）</td></tr>
+<tr><td>FiO₂、%</td><td>50.0（40.0–50.0）</td><td>78（4.8%）</td></tr>
+<tr><td>P/F 比、mmHg</td><td>215（162–257）</td><td>46（2.8%）</td></tr>
+<tr><td>PEEP、cmH₂O</td><td>8.00（5.00–12.0）</td><td>178（10.9%）</td></tr>
+<tr><td>駆動圧、cmH₂O</td><td>11.6（10.0–14.0）</td><td>363（22.2%）</td></tr>
+<tr><td>一回換気量、mL/kg PBW</td><td>6.7（6.1–7.7）</td><td>347（21.2%）</td></tr>
+<tr><td>コンプライアンス、mL/cmH₂O</td><td>36.4（27.5–48.3）</td><td>1,364（83.4%）</td></tr>
+<tr><td>ventilatory ratio</td><td>1.5（1.2–1.9）</td><td>830（50.8%）</td></tr>
+<tr><td><strong>血液ガス</strong>、中央値（IQR）</td><td></td><td></td></tr>
+<tr><td>SaO₂、%</td><td>97.0（95.0–98.0）</td><td>1,346（82.3%）</td></tr>
+<tr><td>PaO₂、mmHg</td><td>104（85.0–132）</td><td>688（42.1%）</td></tr>
+<tr><td>PaCO₂、mmHg</td><td>40.0（35.0–45.0）</td><td>686（42.0%）</td></tr>
+<tr><td>pH</td><td>7.39（7.33–7.43）</td><td>676（41.3%）</td></tr>
+<tr><td><strong>併存疾患</strong>、n（%）</td><td></td><td></td></tr>
+<tr><td>COPD</td><td>162（9.9%）</td><td>0</td></tr>
+<tr><td>喘息</td><td>178（10.9%）</td><td>0</td></tr>
+<tr><td>心不全 NYHA III–IV</td><td>495（30.3%）</td><td>0</td></tr>
+<tr><td><strong>心血管SOFA</strong>、n（%）</td><td></td><td>512（31.3%）</td></tr>
+<tr><td>&lt;1</td><td>404（24.7%）</td><td></td></tr>
+<tr><td>1–3</td><td>182（11.1%）</td><td></td></tr>
+<tr><td>&gt;3</td><td>537（32.8%）</td><td></td></tr>
+<tr><td><strong>鎮静深度</strong>、n（%）</td><td></td><td>197（12.0%）</td></tr>
+<tr><td>覚醒</td><td>214（13.1%）</td><td></td></tr>
+<tr><td>中等度鎮静</td><td>665（40.7%）</td><td></td></tr>
+<tr><td>深鎮静</td><td>559（34.2%）</td><td></td></tr>
+<tr><td><strong>鎮静薬の種類</strong>、n（%）</td><td></td><td>0</td></tr>
+<tr><td>静脈麻酔薬（プロポフォール・ケタミン）</td><td>761（46.5%）</td><td></td></tr>
+<tr><td>ベンゾジアゼピン（ミダゾラム・ロラゼパム）</td><td>458（28.0%）</td><td></td></tr>
+<tr><td>交感神経遮断薬（デクスメデトミジン）</td><td>69（4.2%）</td><td></td></tr>
+<tr><td>オピオイド（モルヒネ・ヒドロモルフォン・フェンタニル）</td><td>1,078（65.9%）</td><td></td></tr>
+</tbody></table></div>
+<p>補足：駆動圧＝プラトー圧 − PEEP、コンプライアンス＝一回換気量 ÷（プラトー圧 − PEEP）。鎮静深度は RASS（≥0 覚醒、−3〜−1 中等度、−5〜−4 深鎮静）または RSAS（≥4 覚醒、2–3 中等度、0–1 深鎮静）で定義。併存疾患は「あり」しか登録されないため、「なし」には未記載例が含まれる。P/F の欠測は SpO₂/FiO₂ からハイブリッド換算で補完した値を含む。</p>
+<p>読みどころは3つ。第一に、<strong>適格化時点の P/F 中央値が 215 mmHg（IQR 162–257）と高い</strong>こと。48時間の調節換気を経た時点で、すでに多くの患者が 150 の閾値を超えている。第二に、<strong>PEEP 中央値 8（IQR 5–12）</strong> で、二分の境界がちょうど中央にある。第三に、<strong>コンプライアンスの欠測が83.4%、血液ガス関連の欠測が40%超</strong>と、MIMIC-IV 由来データの粗さが露呈している。</p>
+<h3>5. 結果 — 実臨床での切り替えパターン</h3>
+<ul><li><strong>時刻</strong>：切り替えは日中に多く、<strong>朝8時にピーク</strong>。ただし夜間の切り替えも相当数あった（補足Figure E4）</li><li><strong>PEEP</strong>：切り替え時に最も多かったPEEPは <strong>5 cmH₂O</strong>（補足Figure E1A）</li><li><strong>P/F</strong>：切り替え時のP/Fは広い範囲に分布したが、<strong>大半は200–250 mmHg</strong>（補足Figure E1B）</li><li><strong>鎮静深度（切り替え直前）</strong>：覚醒 14%、中等度鎮静 61%、深鎮静 <strong>25%</strong></li><li><strong>切り替えまでの時間</strong>：最初の48時間の調節換気を終えてから中央値 <strong>28時間</strong>（IQR 11–61時間）。密度が最も高いのは最初の12時間</li><li><strong>切り替え失敗</strong>：初回切り替えの <strong>54%</strong> が失敗（＝72時間以内に調節換気へ復帰）。失敗までの時間は中央値 <strong>6時間</strong>（IQR 3–17時間、補足Figure E5）</li></ul>
+<p>つまり実臨床では、「P/F 200–250、PEEP 5、朝の回診時、患者の4分の1は深鎮静のまま」という条件で切り替えが行われており、しかも半数以上が72時間以内に調節換気へ戻っている。</p>
+<h3>6. 主要アウトカム — PEEP非依存の3戦略</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2A. 抜管成功の重み付け累積発生曲線（ブートストラップ95%CI付き）。横軸は「Days since time zero（time zero からの日数）」で 0・7・14・21・28 に目盛りがあり、縦軸は「Successful extubation（抜管成功）」の累積発生率で 0.0 から 1.0。3本の階段状の曲線が描かれ、凡例は右下に上から順に「P/F&gt;150」（淡いサーモン色）、「P/F&gt;200」（中間の赤茶色）、「P/F&gt;250」（濃い暗褐色）。P/F&gt;150 と P/F&gt;200 の2本はほぼ重なりながら急速に立ち上がり、7日目で0.6強、14日目で0.75前後、28日目で0.82前後に達する。P/F&gt;250 の曲線は明らかに右下方にずれて立ち上がりが遅く、7日目で0.45前後、14日目で0.63前後にとどまり、20日目付近でようやく他の2本に追いつき、28日目では0.78前後で収束する。各曲線には帯状の95%信頼区間が付され、序盤から中盤にかけて P/F&gt;250 の帯と他2本の帯は分離している。原図・無改変</p>
+</div>
+<p>PEEPを問わない3戦略の 28日RMTL（抜管成功、高いほど良い）：</p>
+<div class="tw"><table>
+<thead><tr><th>戦略</th><th>切り替え閾値</th><th>28日RMTL（日）</th><th>95%CI</th></tr></thead>
+<tbody>
+<tr><td>regime 1</td><td>P/F &gt;150 mmHg</td><td>19.6</td><td>18.6–20.9</td></tr>
+<tr><td>regime 5</td><td>P/F &gt;200 mmHg</td><td>19.8</td><td>18.5–21.1</td></tr>
+<tr><td>regime 9</td><td>P/F &gt;250 mmHg</td><td>17.4</td><td>15.9–18.6</td></tr>
+</tbody></table></div>
+<p>ペアワイズ比較（ブートストラップCIがゼロを含まない＝有意）：</p>
+<div class="tw"><table>
+<thead><tr><th>比較</th><th>抜管成功の遅れ（日）</th><th>95%CI</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>regime 9（&gt;250）対 regime 1（&gt;150）</td><td>2.3</td><td>0.8–4.2</td><td>有意に regime 9 が劣る</td></tr>
+<tr><td>regime 9（&gt;250）対 regime 5（&gt;200）</td><td>2.4</td><td>1.1–4.0</td><td>有意に regime 9 が劣る</td></tr>
+<tr><td>regime 5（&gt;200）対 regime 1（&gt;150）</td><td>差なし</td><td>ゼロを含む</td><td>有意差なし</td></tr>
+</tbody></table></div>
+<p>150 と 200 の間には差がなく、<strong>250まで待つ戦略だけが明確に劣る</strong>、という結果構造になっている。</p>
+<h3>7. 主要アウトカム — PEEP依存の9戦略（探索的）</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3A. 9戦略それぞれの抜管成功28日RMTL。左半分はフォレストプロット形式で、横軸は「Successful extubation (RMTL)」で16・18・20・22の目盛り、縦軸は「Regime」で上から1から9。各行に点推定を示す丸と水平の95%信頼区間バーが描かれる。右半分には数値表があり、列は「PEEP&lt;8」「≥8」「RMTL (95% CI)」。表の内容は上から順に、regime 1：150・150・19.6（18.6–20.9）／regime 2：200・150・19.7（18.5–21.0）／regime 3：250・150・18.7（17.5–20.1）／regime 4：150・200・20.1（18.8–21.3）／regime 5：200・200・19.8（18.5–21.1）／regime 6：250・200・18.7（17.3–20.1）／regime 7：150・250・19.1（18.0–20.3）／regime 8：200・250・18.8（17.5–20.2）／regime 9：250・250・17.4（15.9–18.6）。regime 4 の点が最も右（RMTLが最大）に位置し、regime 9 の点が最も左に離れて位置する。信頼区間は互いに広く重なっており、著者は「この信頼区間は記述目的のみで、形式的推論には用いていない」と明記している。原図・無改変</p>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3B. 9戦略のヒートマップ。横軸は「P/F threshold (PEEP≥8)」で左から 150・200・250、縦軸は「P/F threshold (PEEP&lt;8)」で上から 150・200・250。9つの正方形セルにはそれぞれ regime 番号と28日RMTLの点推定が白抜き文字で書かれる。上段（低PEEP側150）は左から regime 1: 19.6／regime 4: 20.1／regime 7: 19.1。中段（低PEEP側200）は regime 2: 19.7／regime 5: 19.8／regime 8: 18.8。下段（低PEEP側250）は regime 3: 18.7／regime 6: 18.7／regime 9: 17.4。右側に縦のカラーバーがあり、上端が明るいサーモン色で「shorter（抜管成功までが短い）」、下端が濃い暗褐色で「longer（長い）」のラベル。すなわち色が濃いほど抜管までの時間が長く、RMTLが低い。中央上の regime 4 のセルが最も明るく、右下隅の regime 9 のセルが最も濃い。低PEEP側・高PEEP側のどちらかに 250 を使うと色が濃くなり、両方に 250 を使う regime 9 で最も濃くなる、という勾配が見て取れる。原図・無改変</p>
+</div>
+<p>9戦略の一覧（探索的、CIは記述目的のみ）：</p>
+<div class="tw"><table>
+<thead><tr><th>戦略</th><th>PEEP &lt;8 の閾値</th><th>PEEP ≥8 の閾値</th><th>28日RMTL（日）</th><th>95%CI</th></tr></thead>
+<tbody>
+<tr><td>regime 1</td><td>150</td><td>150</td><td>19.6</td><td>18.6–20.9</td></tr>
+<tr><td>regime 2</td><td>200</td><td>150</td><td>19.7</td><td>18.5–21.0</td></tr>
+<tr><td>regime 3</td><td>250</td><td>150</td><td>18.7</td><td>17.5–20.1</td></tr>
+<tr><td>regime 4</td><td>150</td><td>200</td><td><strong>20.1</strong></td><td>18.8–21.3</td></tr>
+<tr><td>regime 5</td><td>200</td><td>200</td><td>19.8</td><td>18.5–21.1</td></tr>
+<tr><td>regime 6</td><td>250</td><td>200</td><td>18.7</td><td>17.3–20.1</td></tr>
+<tr><td>regime 7</td><td>150</td><td>250</td><td>19.1</td><td>18.0–20.3</td></tr>
+<tr><td>regime 8</td><td>200</td><td>250</td><td>18.8</td><td>17.5–20.2</td></tr>
+<tr><td>regime 9</td><td>250</td><td>250</td><td><strong>17.4</strong></td><td>15.9–18.6</td></tr>
+</tbody></table></div>
+<ul><li>低PEEP側・高PEEP側のいずれかに <strong>250 を使うと抜管までが延びる傾向</strong>があり、両方に250を使ったとき（regime 9）に最も延びた</li><li><strong>最良の点推定は regime 4（低PEEP 150／高PEEP 200）の 20.1日</strong></li><li>ただし9本の信頼区間は大きく重なっており、著者自身が形式的推論には用いていない</li></ul>
+<p><strong>因果推論の前提の点検</strong>：</p>
+<ul><li>極端な重みは認めず、正値性違反のリスクは低いと考えられた（補足Figure E6A）</li><li>ほとんどの戦略で重み付け後の共変量バランスは許容範囲だった（補足Figure E6B）</li><li><strong>バランスが最も悪かったのは、低い閾値（150）と高いPEEPを組み合わせた戦略</strong>（regime 1–3）</li></ul>
+<h3>8. 戦略同士の重なり（overlap）— 本研究最大の弱点</h3>
+<p>適格化時点の P/F 中央値が 215 と高いため、実際の切り替えが「複数の戦略の基準を同時に満たす」ことが起きる。著者はこれを正面から検討している。</p>
+<ul><li>補足Figure E7 は、切り替えが各戦略の基準に合致した患者の切り替え前の酸素化推移を示すが、戦略間の重なりが見て取れる</li><li>切り替え直前の P/F 中央値は、目標閾値と正確には一致しないことが多かった（補足Table E2）</li><li><strong>重なりの定量</strong>（補足Figure E8）：単一戦略にのみ合致した患者は <strong>3%</strong> のみ。2–3戦略に合致 43%、4–6戦略に合致 33%、<strong>9戦略すべてに合致 22%</strong></li></ul>
+<p>主要3戦略に絞った内訳：</p>
+<div class="tw"><table>
+<thead><tr><th>戦略</th><th>合致した患者数</th><th>うち他の2戦略には合致しない（固有）</th></tr></thead>
+<tbody>
+<tr><td>regime 1（&gt;150）</td><td>218</td><td>64</td></tr>
+<tr><td>regime 5（&gt;200）</td><td>187</td><td>22</td></tr>
+<tr><td>regime 9（&gt;250）</td><td>122</td><td>43</td></tr>
+</tbody></table></div>
+<p>（切り替えを受けた 310例中）。高い閾値の戦略ほど、切り替え判断が遅い時点に対応していた。</p>
+<p>著者は、閾値を50 mmHg超えたところで追加の打ち切りを入れて戦略を分離することを試みたが、共変量バランスが取れず結果が非情報的になったため断念した、と述べている。</p>
+<h3>9. 副次アウトカム — 28日死亡</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2B. 死亡の重み付け累積発生曲線（ブートストラップ95%CI付き）。横軸は「Days since time zero」で0・7・14・21・28、縦軸は「Mortality」で0.0から1.0。凡例は右上に「P/F&gt;150」「P/F&gt;200」「P/F&gt;250」の3本。3本とも低い位置に密集して推移し、7日目で0.13〜0.16、14日目で0.17〜0.19、28日目で0.17〜0.21程度に収束する。P/F&gt;250 の曲線がわずかに上方を走るが、95%信頼区間の帯は全期間にわたって3本とも重なっており、区別できない。原図・無改変</p>
+</div>
+<p><strong>28日死亡の累積発生率は、9戦略のいずれの間でも差を認めなかった</strong>（補足Table E2・E3、Figure 2B・E9）。切り替えを早めることによる死亡リスク増加の signal はない。</p>
+<h3>10. 感度分析</h3>
+<h4>10-1. 補助のみモードへの切り替えに限定（一致性の検証）</h4>
+<ul><li>全切り替えのうち <strong>83%</strong> が補助のみモードへの切り替えだった</li><li>これらに限定しても結果の方向性は同じ（補足Figure E10）</li><li>切り替えの版（version）の分布は戦略間で同等（補足Table E1）であり、結果が切り替え方法の違いに駆動されている可能性は低い</li></ul>
+<h4>10-2. SpO₂/FiO₂ 換算を使わない補完</h4>
+<ul><li>SpO₂/FiO₂ 換算を使わない場合、<strong>ベースラインの P/F が45%欠測</strong>になる</li><li>より広い共変量セットから P/F を補完して解析すると、全体のパターンは同じだが戦略間の差はやや不明瞭になった（補足Figure E11）</li><li><strong>regime 9（&gt;250）は依然として抜管成功が遅く、regime 5（&gt;200）に対して統計学的に劣ったまま</strong></li><li>この感度分析では、PEEP依存の regime 4 の利点が主解析より<strong>やや際立った</strong></li><li>死亡には差なし</li></ul>
+<h4>10-3. 調節換気24時間以上・非術後（n = 2,866）</h4>
+<p>主解析との違い：</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>主解析（≥48時間）</th><th>感度分析（≥24時間・非術後）</th></tr></thead>
+<tbody>
+<tr><td>n</td><td>1,635</td><td>2,866</td></tr>
+<tr><td>PEEP &lt;8 での切り替えの割合</td><td>—</td><td>相対的に多い</td></tr>
+<tr><td>切り替えまでの時間、中央値（IQR）</td><td>28時間（11–61）</td><td>20時間（7–46）</td></tr>
+<tr><td>初回切り替えの失敗率</td><td>54%</td><td>47%</td></tr>
+<tr><td>補助のみモードへの切り替え</td><td>83%</td><td>86%</td></tr>
+</tbody></table></div>
+<p>結果（PEEP非依存）：</p>
+<div class="tw"><table>
+<thead><tr><th>戦略</th><th>28日RMTL（日）</th><th>95%CI</th><th>regime 1 に対する遅れ</th><th>regime 5 に対する遅れ</th></tr></thead>
+<tbody>
+<tr><td>regime 1（&gt;150）</td><td>22.0</td><td>21.2–22.8</td><td>—</td><td>—</td></tr>
+<tr><td>regime 5（&gt;200）</td><td>—</td><td>—</td><td>0.9日（95%CI 0.2–1.6）</td><td>—</td></tr>
+<tr><td>regime 9（&gt;250）</td><td>—</td><td>—</td><td>1.8日（95%CI 0.8–2.8）</td><td>0.9日（95%CI 0.0–1.5）</td></tr>
+</tbody></table></div>
+<ul><li>PEEP依存戦略でも regime 9 が最も低いRMTL、<strong>regime 1（150／150）が9戦略中で最高のRMTL</strong>（補足Figure E15A・E16）</li><li>28日死亡に戦略間差なし</li><li>重みの分布に正値性違反の兆候なし。<strong>この集団では「低い閾値＋高PEEP」の戦略の共変量バランスが主解析より良好</strong>だった（補足Figure E17B）</li></ul>
+<p>つまり、より軽症・より早期の集団では <strong>150一択</strong>であり、PEEP依存の細工は要らなかった。</p>
+<h3>11. 考察 — 著者の解釈</h3>
+<h4>11-1. 主要所見の要約（著者の4点）</h4>
+<ol><li>調節換気48時間以上・P/F &lt;300 の患者で、<strong>P/F &gt;250 での切り替えは 150 や 200 より抜管成功までが長かった</strong></li><li>探索的なPEEP依存解析では、低PEEP・高PEEPの両方に250を用いると最も長く、「低PEEP 150／高PEEP 200」が最も短かった</li><li>調節換気24時間以上・非術後の感度分析では、<strong>PEEPによらず &gt;150 が最適</strong></li><li><strong>死亡リスクには戦略間の差の根拠なし</strong></li></ol>
+<h4>11-2. 先行研究との関係</h4>
+<ul><li>WEAN SAFE を用いた先行TTE（AJRCCM 2025）では「切替基準を満たしてから1日以内の切り替え」が「遅延」より良好で、調節換気2日・P/F &gt;150 を満たしたら一律に早く切り替える方針を支持した</li><li>しかしそこでの「遅延群」は幅広い P/F で切り替えた患者の寄せ集めであり、<strong>非常に高いP/Fで切り替えた患者の悪い成績が、150よりやや高い閾値（200・250）の利点を覆い隠していた可能性</strong>があった</li><li>MIMIC-IV の高頻度データにより、150を他の閾値と直接比較でき、さらにPEEPの影響も織り込めた</li></ul>
+<p><strong>切り替え失敗率の食い違い</strong>：WEAN SAFE では初回切り替えの失敗が約30%だったのに対し、本研究では54%。著者はこれをデータ粒度の違いに帰している。WEAN SAFE は前24時間で最も低い補助レベルのみを記録していたのに対し、<strong>MIMIC-IV は調節換気への復帰をごく短時間のものまで捉える</strong>。復帰の理由は記録されておらず、今後の研究のための重要なデータギャップだと指摘している。</p>
+<h4>11-3. 「切り替え失敗」というアウトカムの枠組みへの批判</h4>
+<p>著者の議論のなかで最も切れ味があるのがここ。</p>
+<ul><li>先行研究は切り替え失敗を主要アウトカムに据え、失敗群と成功群を比べて「失敗は予後が悪い」と示してきた。これは早期切り替えを思いとどまらせる方向に働く</li><li>しかし<strong>臨床的に意味のある問いは「失敗した患者が成功した患者より悪いか」（これは自明）ではなく、「失敗したその患者は、あの時点で切り替えを試みなかったほうが良かったのか」である</strong></li><li>しかも切り替え失敗は一般的な臨床パラメータでは予測できない（SWITCH研究）。したがって失敗のリスクがあること自体は早期切り替えを妨げる理由にならない</li><li>そこで本研究は「抜管成功までの時間」と「死亡」を用い、<strong>早期切り替え（失敗の可能性を伴う）と、不必要な遅延との間のトレードオフ</strong>を直接捉えた</li></ul>
+<h4>11-4. 臨床的含意</h4>
+<ul><li>調節換気 ≥48時間の患者では、<strong>P/F &gt;150 での切り替えが &gt;250 まで待つより一般に望ましい</strong>。ただし高PEEP（≥8 cmH₂O）の患者ではやや保守的な &gt;200 が妥当かもしれない</li><li>調節換気 ≥24時間の非術後患者では、<strong>P/F &gt;150 での即時切り替えが最適</strong>で、高PEEPでの200の利点は認められなかった。これはより単純な集団で、離脱しやすく、PEEP調整型戦略よりも早期切り替えの恩恵が大きいためと考えられる</li><li><strong>実際には多くの患者が最も劣る「&gt;250で切り替え」戦略に沿って管理されていた</strong>。したがって多くの切り替えは不必要に遅らされており、より低い閾値での早期切り替えは人工呼吸期間を短縮しうる</li><li>ただし <strong>150未満の閾値は評価していない</strong>（その水準での切り替え数が少なすぎた）ので、150未満での切り替えは推奨しない</li><li>集団レベルでは低い閾値が有利に見えても、切り替え後の忍容性を担保する個々のモニタリングは依然として不可欠</li></ul>
+<h3>12. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この研究をJCで扱うときの急所</p>
+<ul><li><mark class="hl">戦略の分離が弱い</mark>。単一戦略にのみ合致した患者はわずか3%で、22%は9戦略すべてに合致していた。適格化時点の P/F 中央値が 215 と高いため、「150で切り替える」患者と「200で切り替える」患者が事実上同じ人になっている。著者はこれを最大の限界として挙げ、閾値+50 mmHg での追加打ち切りを試みたがバランスが取れず断念している</li><li><mark class="hl">「低閾値＋高PEEP」戦略のバランス不良</mark>。regime 1–3（P/F 150 と高PEEP の組み合わせ）は重み付け後も共変量バランスが取れなかった。著者自身「これらの戦略の見かけの有効性は真の効果より過大評価されている可能性がある」と明記しており、主要結論の一角（regime 1 が良い）に直接かかる留保である</li></ul>
+</div>
+<ul><li><strong>RMTLの向きが直感に反する</strong>。restricted mean time <strong>lost</strong> という名前なのに「高いほど良い」。抄録は「lower RMTL indicates a longer time to extubation」、方法は「higher RMTL = more days gained」と書いており、読者が取り違えやすい。JCでは最初にこの向きを全員で確認してから議論に入るべき</li><li><strong>点推定の引き算が合わない箇所がある</strong>。19.6 − 17.4 = 2.2 だが本文は「2.3日」、19.8 − 17.4 = 2.4 は一致。ブートストラップ由来の差の中央値と点推定の差なので誤りではないが、数字だけ拾うと混乱する</li><li><strong>MIMIC-IV は単一施設（Beth Israel Deaconess Medical Center）の 2008–2022 データ</strong>。オランダの研究グループが米国の1施設のデータで解析しており、鎮静・ウィーニングの文化は当院とも異なる。外的妥当性は限定的で、著者も AmsterdamUMCdb での外部検証を次の一手として挙げている</li><li><strong>モード切り替えの記録の信憑性</strong>。「切り替え」の同定は、補助のみモードへの遷移、または調節・補助併用モードでの自発呼吸回数 &gt;10回/分・実測回数 &gt;設定回数、という代理定義に依存する。EHRの記録は1日約5回で、6時間の grace period はこの粗さを吸収するための便宜的措置にすぎない。実際にベッドサイドで何が起きたか（意図的な切り替えか、単なる呼吸数の揺らぎか）は判別できない</li><li><strong>調節換気への「戻り」の理由が記録されていない</strong>。失敗54%という数字は、真の切り替え失敗と、検査・処置のための一時的な調節換気復帰を区別できていない可能性がある。失敗までの中央値が6時間（IQR 3–17）という短さは、この懸念を強める</li><li><strong>P/F の欠測が大きい</strong>。SpO₂/FiO₂ 換算を使わなければベースライン P/F の45%が欠測。換算は SpO₂ &gt;96% で酸素解離曲線が平坦になるため不正確になりうる。ただし著者は「P/F が定期的に測られている患者に限ると、動脈血ガスは不安定な患者ほど頻回に取られるため選択バイアスが入る」として全例を残す判断をし、感度分析で対処している。この判断は妥当だが、誤分類は残る</li><li><strong>未測定交絡</strong>。鎮静薬の種類と用量は取得できていたが、有効持続時間とウォッシュアウトが患者の腎機能やBMIに依存するため信頼できる調整ができなかった。個々の臨床医の嗜好も捉えられていない。著者は残差交絡は残ると認めている</li><li><strong>深鎮静下での切り替えが25%</strong>。深鎮静のまま補助換気に切り替えれば、吸気努力が出ずに実質的に調節換気が続く（あるいは非同調が起きる）。「切り替え」の生理学的な中身が症例間で相当違う可能性がある</li><li><strong>PEEP 8 cmH₂O という二分点は事前規定ではなく、切り替え時点の分布の中央値から決めている</strong>。データ由来のカットオフであり、別データでは再現しない可能性がある</li><li><strong>推論は3戦略のみ、残り6戦略は探索的</strong>。にもかかわらず「低PEEP 150／高PEEP 200 が最良」という臨床メッセージが結論と抄録に入っている。regime 4 の CI（18.8–21.3）は regime 9 の CI（15.9–18.6）とも近接しており、順位付けの頑健性は弱い</li><li><strong>アウトカムに横隔膜機能・鎮静量・せん妄・ICU-AW などの中間指標がない</strong>。「早く切り替えたほうがなぜ良いのか」の機序（横隔膜廃用の回避、鎮静減量）は本研究では検証されていない</li><li><strong>ECMO 2.9%・外傷 32.3%・心停止 13.1% を含む混成集団</strong>。ARDS研究として読むと集団が違う</li></ul>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>[1]</td><td>本研究の直接の前身。WEAN SAFE データを用いたTTEで、調節換気&gt;2日・P/F &gt;150 の患者では1日以内の切り替えが遅延より抜管・ICU退室が早いと示した</td><td>Reep CAT, et al. Early vs. Delayed Switching from Controlled to Assisted Ventilation: A Target Trial Emulation. Am J Respir Crit Care Med. 2025</td></tr>
+<tr><td>[2]</td><td>WEAN SAFE 本体。50か国のICUにおける人工呼吸離脱の多施設前向き観察研究</td><td>Pham T, et al. Lancet Respir Med. 2023;11:465–76</td></tr>
+<tr><td>[3]</td><td>MIMIC-IV での検証研究。24・12・6時間以内の切り替えが、それ以降の切り替えより抜管成功が早い</td><td>Reep CAT, Wils EJ, Heunks L. Am J Respir Crit Care Med. 2026</td></tr>
+<tr><td>[4]</td><td>動的治療戦略の方法論的手本。AKIにおける透析開始タイミングを日常診療データと動的治療戦略で評価</td><td>Morzywołek P, et al. Crit Care. 2022;26</td></tr>
+<tr><td>[5]</td><td>ICUの呼吸モニタリングに関する16人のコンセンサス。P/F がPEEPに依存することの根拠</td><td>Brochard L, et al. Crit Care. 2012;16:219</td></tr>
+<tr><td>[6]</td><td>早期のPEEP/FiO₂トライアルがARDSの肺傷害の重症度を層別できることを示した古典</td><td>Villar J, et al. Am J Respir Crit Care Med. 2007;176:795–804</td></tr>
+<tr><td>[7]</td><td>MIMIC-IV データベースの原著</td><td>Johnson AEW, et al. Sci Data. 2023;10:1–9</td></tr>
+<tr><td>[8]</td><td>SWITCH研究。換気モード分類と生理学的変数処理の方法論的基盤であり、切り替え失敗が一般的臨床パラメータでは予測できないことを示した</td><td>Smit JM, et al. Intensive Care Med Exp. 2025;13</td></tr>
+<tr><td>[9]</td><td>自発覚醒トライアル後のPSVへの初回移行失敗（低酸素性呼吸不全、COVID-19の影響）</td><td>Pérez J, et al. Crit Care Explor. 2023;5:e0968</td></tr>
+<tr><td>[10]</td><td>COVID-19患者における調節換気からPSVへの移行の成功例と失敗例の比較</td><td>Friz MP, et al. Crit Care Explor. 2024;6:e1039</td></tr>
+<tr><td>[11]</td><td>WIND研究。ウィーニング転帰の新しい定義とその疫学。本研究の抜管成功の定義の根拠</td><td>Beduneau G, et al. Am J Respir Crit Care Med. 2017;195:772–83</td></tr>
+<tr><td>[12]</td><td>競合リスク評価の代替指標としてのRMTL（restricted mean time lost）の実装</td><td>Wu H, et al. Am J Epidemiol. 2022;191:163–72</td></tr>
+<tr><td>[13]</td><td>競合リスク下での動的治療戦略の推定と交差検証。IPCWの方法論的根拠</td><td>Morzywołek P, et al. Stat Med. 2022;41:5258–75</td></tr>
+<tr><td>[14]</td><td>集中治療研究におけるTTEの機会・課題・展望。forward-looking approach の説明を含む</td><td>Reep CAT, Wils EJ, Heunks L. Crit Care. 2025;29</td></tr>
+<tr><td>[15]</td><td>SpO₂/FiO₂ 比によるARDSの分類・モニタリングの限界</td><td>Erlebach R, et al. Crit Care. 2025;29:82</td></tr>
+<tr><td>[16]</td><td>TTEの標準的枠組みを定義した論文</td><td>Hernán MA, Wang W, Leaf DE. JAMA. 2022;328:2446–7</td></tr>
+<tr><td>[17]</td><td>外部検証先として著者が挙げる AmsterdamUMCdb の紹介</td><td>Thoral PJ, et al. Crit Care Med. 2021;49:e563–77</td></tr>
+<tr><td>[18]</td><td>人工呼吸中の鎮静薬が呼吸パターンに与える影響の生理学的SR・メタ解析。鎮静薬の分類の根拠</td><td>Quickfall D, et al. EClinicalMedicine. 2024;68</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 48時間以上の調節換気を要した患者で、<mark class="hl">補助換気への切り替えを P/F 250 まで待つ運用は、150 で動く運用より抜管成功が平均2.3日遅れる</mark>（死亡は変わらない）。当院のウィーニング判断では「<mark class="hl">P/F 150 を超えたら切り替えを検討する、PEEP 8 cmH₂O 以上のときだけ 200 を目安にする</mark>」を出発点にしてよい。 <mark class="hl">初回切り替えの54%が72時間以内に調節換気へ戻ったが、それでも早い閾値のほうが最終的な抜管は早かった</mark>。切り替え失敗を恐れて待つことのコストのほうが大きい、というのが本研究の実務的な含意。 ただしこれは MIMIC-IV 単施設の後ろ向きデータであり、<mark class="hl">9つの戦略のうち推論に耐えるのは3つだけ、しかも患者の22%は9戦略すべての基準を同時に満たしていた</mark>。プロトコル化ではなく「迷ったら早めに」の方向づけとして使う。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
