@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CIRCULATIONAHA.126.079463.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Bohula EA, Morrow DA. Vasoactive Agent Selection Strategies in the Management of Cardiogenic Shock. Circulation. 2026;154:775–784. DOI: 10.1161/CIRCULATIONAHA.126.079463</dd><dt>掲載誌</dt><dd>Circulation（2026-08-25）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1161/CIRCULATIONAHA.126.079463" target="_blank" rel="noopener">doi.org/10.1161/CIRCULATIONAHA.126.079463</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Vasoactive Agent Selection Strategies in the Management of Cardiogenic Shock</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わること①：ショックの「型」を口に出してから薬を選ぶ</strong>。本論文の骨格は「classic LV優位／血管拡張合併（mixed）／正常血圧CS／RV優位／動的LVOT閉塞」の5表現型で、それぞれ第一選択が違う。回診で「心原性ショックです、ノルアドで」ではなく「classic LV優位で低血圧、SVR は高そう」まで言語化してから薬を決める運用にできる。</li><li><strong>変わること②：正常血圧の心原性ショックを拾いにいく</strong>。SHARC 定義では低血圧はショックの定義に入らない。乳酸&gt;2 mmol/L・Cr 2倍・尿量&lt;0.5 mL/kg/h・ALT 3倍・四肢冷感/網状皮斑・意識変容のいずれか1つで hypoperfusion。血圧が保たれた「肝機能異常だけ」の症例を急性肝炎と誤読しないための具体的な引っかけが本文にある。</li><li><strong>変わること③：RV優位ショックの1剤目をバソプレシンにする根拠が明文化された</strong>。PVR をほぼ上げずに SVR を上げるという理由で first-line。フェニレフリンは PVR を上げるので避ける、という記述も明確。当院の RV failure（右室梗塞・重症肺高血圧・広範囲PE）の初期指示に反映できる。</li><li><strong>変わらないこと：薬剤選択のRCTエビデンスは相変わらず無い</strong>。CS を対象とした昇圧薬の頭対頭比較で「勝った」薬は1つも無い。本論文の推奨はすべて著者らの実践（"we tend to…"）であり、プロトコル化するなら「型の言語化」「反復評価」までにとどめ、特定薬の一律固定は避けるのが妥当。</li><li><strong>アドレナリン vs ノルアドレナリンについて</strong>：著者らは「CS with hypotension ではむしろアドレナリンを考慮する」と書いており、日本の一般的な感覚（ノルアド一択）とはややズレる。乳酸上昇が灌流と独立に起こりうる点（骨格筋由来）を知らないと「難治性ショック」と誤判定する。当院で乳酸トレンドを蘇生指標に使う運用（<span class="wl">心原性ショックの乳酸をどう読むか — 単発値でなく軌跡、8時間値とクリアランスで可逆性を見極める（総説・AnnIntensiveCare2026）</span>）と直結する論点。</li><li><strong>ドパミン</strong>：本論文でも「相対的徐脈が寄与しているときだけ」に限定された位置づけ。日本の実態（<span class="wl">ドパミンは日本でまだ広く使われている — 5γを超えると死亡が増える（JIPAD 14594例・PSM 570ペア・CritCare2022）</span>）との差を教育材料にできる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：心原性ショック（CS）は cardiac ICU 入室の5人に1人超を占め、院内死亡は典型的に30〜50%。侵襲的・機械的治療で有益性が示されたものは限られる（AMI-CS の早期責任血管血行再建＝CS全体の約25%にしか関係しない、早期MCS＝CS全体の5%程度の高度に選択された集団のみ）。一方で血管作動薬はほぼ全例に使われる（AMI-CS 試験で約90%が1剤以上、レジストリで&gt;90%・50%が2剤以上）。</li><li><strong>Unknown</strong>：その「ほぼ全例に使う薬」の比較有効性データが極めて乏しい。AHA の CS 科学的声明も「心原性ショックにおける最適な first-line 血管作動薬は依然として不明」と結論している。結果として施設間・医師間のばらつきが大きい。</li><li><strong>What's new</strong>：SHARC（Shock Academic Research Consortium, 2023）の標準化定義と SCAI ショック病期分類という「新しい土台」の上に、薬理プロファイル × 表現型 × 血行動態異常を統合した4ステップの実践フレームを提示した点。すなわち ①MAP を緊急に守る → ②表現型と病因を定義し並行して是正 → ③MAP を超えた血行動態目標を設定 → ④灌流と血行動態を反復評価しながら薬物療法を仕立てる、という順序を明示した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 心原性ショックの血管作動薬選択には比較有効性のエビデンスがほとんど無いため、<strong>薬理プロファイル・病態生理・表現型ごとの血行動態異常を突き合わせて選ぶ</strong>しかない。本 Clinical Primer はその手順を「MAP を守る → 表現型と病因を決める → 追加の血行動態目標を置く → 反復評価で仕立てる」の4ステップに定式化した。</p>
+</div>
+<ul><li>CS の定義は SHARC により「心疾患に起因する、臨床的かつ生化学的な持続的組織低灌流」に整理され、低血圧は定義要件から外れた。低血圧の有無で normotensive CS／hypotensive CS に層別する。</li><li>表現型は cardiac ICU での頻度順に classic LV優位（約65%）、血管拡張合併（mixed、15〜20%）、正常血圧CS（CS の15%以上）、RV優位、動的LVOT閉塞。</li><li>薬剤は機能で3分類：inopressor（収縮力↑・心拍↑・SVR↑＝ドパミン／ノルアドレナリン／アドレナリン）、inodilator（収縮力↑・心拍↑・SVR↓＝ミルリノン／ドブタミン／イソプロテレノール／レボシメンダン）、pure vasopressor（SVR↑のみ＝バソプレシン／フェニレフリン／アンジオテンシンII／メチレンブルー）。</li><li>CS 患者を含む RCT は5本しかない（SOAP II、OptimaCC、CAT、DOREMI、VANCS）。いずれも薬剤間の死亡率差を示せていない。差がついたのは不整脈（SOAP II：ドパミン24.1% vs ノルアド12.4%、P&lt;0.001）と、VANCS の複合エンドポイント（心臓術後血管麻痺、CS ではない）。</li><li>著者らの実践：低血圧を伴う classic/vasodilatory CS は inopressor から。相対的徐脈が寄与するならドパミン、頻脈性不整脈があるならノルアドレナリン、あるいはバソプレシンを足す adrenergic-sparing 戦略。CS with hypotension ではしばしばノルアドレナリンよりアドレナリンを選ぶ（β1・β2 作動で収縮力支持が強く後負荷増加が少ないという理論的根拠。ただし乳酸上昇を監視）。</li><li>正常血圧CS は inodilator または血管拡張薬（ニトロプルシド／ニトログリセリン）から。RV優位はバソプレシン first-line、追加が要ればアドレナリン、フェニレフリンは避ける。動的LVOT閉塞は輸液＋純粋な血管収縮薬＋β遮断（エスモロール）で、収縮力は上げない。</li><li>進行中の研究は CAPITAL DOREMI 2（強心薬 vs プラセボ、NCT05267886）と PACCS（心不全CS への6時間以内の早期肺動脈カテーテル、NCT05485376）。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>心原性ショック（cardiogenic shock, CS）</strong> は「心臓のポンプ機能不全のせいで重要臓器への血流が足りない状態」。血圧が低いことが多いが、必ずしも低くない。ここが最大の落とし穴で、血圧が保たれていても臓器灌流が足りなければショックである。 <strong>SCAI ショック病期分類</strong> は CS の重症度をアルファベット A〜E で表す枠組み（A=At risk、B=Beginning/pre-shock、C=Classic、D=Deteriorating、E=Extremis）。本論文はこの5段階の定義そのものは掲げていないが、B（低灌流の無い pre-shock）は対象外、C〜E に同じアルゴリズムを適用すると述べている。 <strong>SHARC（Shock Academic Research Consortium）</strong> は CS の研究用標準化定義を作った専門家パネル（Circulation 2023）。定義・低血圧の扱い・病因分類（AMI-CS／心不全CS／心臓術後／二次性）を決めた。 <strong>血行動態の言葉</strong>：RAP＝右房圧、PAWP（PCWP）＝肺動脈楔入圧、CI＝心係数（心拍出量を体表面積で割った値）、SVR＝体血管抵抗、PVR＝肺血管抵抗、MAP＝平均動脈圧、PAPI＝肺動脈拍動係数（＝[肺動脈収縮期圧−肺動脈拡張期圧]／RAP、&lt;1 が異常）。基本式は「MAP − RAP ＝ 心拍出量 × SVR」「心拍出量 ＝ 心拍数 × 一回拍出量」。この2式が本論文の議論のすべての土台になる。 <strong>薬の3分類</strong>：心筋収縮力を上げるか（inotropy）、血管を締めるか緩めるか（vasoconstriction / vasodilation）の組み合わせで、inopressor（両方上げる）／inodilator（収縮力を上げて血管は緩める）／pure vasopressor（血管だけ締める）に分ける。 <strong>MCS（mechanical circulatory support）</strong> は IABP・Impella などの一時的機械的補助循環。tMCS は temporary MCS の略。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>CS は cardiac ICU 入室の5人に1人超を占める高頻度の病態で、院内死亡率は病因・血行動態プロファイル・初期重症度によって幅があるが典型的には30〜50%。</p>
+<p>重要なのは、侵襲的・機械的治療のうち「ショックの帰結（多臓器不全と死亡）を防ぐ」ことが示されたものが極めて少ないという事実である。</p>
+<ul><li><strong>急性心筋梗塞に伴うCS（AMI-CS）の早期責任血管血行再建</strong> は有益だが、CS 患者全体の約25%にしか関係しない。</li><li><strong>早期MCS</strong> は AMI 患者の高度に選択されたサブセットで有益性が証明されたが、これは CS 全体の5%を占めるにすぎない。</li></ul>
+<p>一方、血管作動薬による内科的管理は事実上ほぼ全例で初期戦略となり、大多数の患者では主たる治療そのものである。数字で見ると：</p>
+<div class="tw"><table>
+<thead><tr><th>母集団</th><th>血管作動薬の使用率</th><th>出典の性質</th></tr></thead>
+<tbody>
+<tr><td>AMI-CS＋低血圧の臨床試験</td><td>約90%が1剤以上の昇圧薬</td><td>臨床試験</td></tr>
+<tr><td>より広い病因を含むCSレジストリ</td><td>&gt;90%が血管作動薬、50%が2剤以上</td><td>レジストリ</td></tr>
+</tbody></table></div>
+<p>この「ほぼ全例に使うのに比較データが無い」というギャップを埋めるため、本 primer は ①CS の主要な表現型の病態生理、②各薬剤の薬理プロファイルと（あれば）比較有効性データ、③CS の内科的管理の戦略的枠組み、の3点を提示する。表現型分類と重症度分類の成熟が、この枠組みの新しい土台になったと著者らは述べている。</p>
+<h3>3. 方法（Methods）</h3>
+<p>本論文は RCT でも系統的レビューでもなく Clinical Primer（教育的総説）であるため、通常の Methods セクションを持たない。</p>
+<ul><li><strong>デザイン</strong>：ナラティブな臨床解説。既存の定義文書（SHARC、SCAI）、AHA 科学的声明、レジストリ、および CS 患者を含む少数の RCT を統合し、著者らの practice-based approach を提示する。</li><li><strong>対象</strong>：組み入れ・除外基準の設定なし。検索戦略・文献選択基準の記載は本論文には記載なし。</li><li><strong>介入・比較</strong>：なし。</li><li><strong>アウトカム</strong>：なし。</li><li><strong>解析</strong>：なし。統計解析・サンプルサイズ設計・事前登録はいずれも該当しない。</li><li><strong>著者らが明示した限界</strong>：「比較有効性データが極めて限られているため、以下は我々の practice-based approach である」と本文中で繰り返し断っている。推奨の多くは "we tend to…" "we often…" "we prefer…" という一人称の表現で書かれており、ガイドライン的な推奨クラス・エビデンスレベルは付されていない。</li><li><strong>本 primer が扱わない範囲（著者が明記）</strong>：二次性CS（心タンポナーデ、重症弁膜症、広範囲肺塞栓など。機械的病態を反転させる決定的治療が主眼になるため）と、低灌流を伴わない患者（SHARC のショック定義を満たさない SCAI stage B など）。</li></ul>
+<h3>4. CS の定義と分類</h3>
+<h4>4-1. 歴史的な定義に含まれてきた4要素</h4>
+<p>歴史的な CS の定義は以下を一定しない形で含んできた。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>要素</th><th>具体的な閾値</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>低血圧</td><td>（数値の統一なし）</td></tr>
+<tr><td>2</td><td>臓器低灌流の所見</td><td>—</td></tr>
+<tr><td>3</td><td>心係数の不足</td><td>CI &lt; 2.2 L/min/m²</td></tr>
+<tr><td>4</td><td>拡張末期圧の上昇</td><td>右心 &gt;10〜15 mmHg／左心 &gt;18 mmHg</td></tr>
+</tbody></table></div>
+<h4>4-2. SHARC による定義（2023）</h4>
+<p>SHARC 専門家パネルは CS を「臨床的かつ生化学的な、持続的な組織低灌流の両方をもたらす、あらゆる心疾患」と定義した。低血圧は定義から外れている。</p>
+<p><strong>臓器低灌流の定義</strong> — 以下のうち少なくとも1つ：</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>閾値</th></tr></thead>
+<tbody>
+<tr><td>動脈血乳酸の上昇</td><td>&gt;2 mmol/L</td></tr>
+<tr><td>急性腎障害</td><td>クレアチニン ≥ 施設基準上限の2倍</td></tr>
+<tr><td>乏尿</td><td>尿量 &lt;0.5 mL/kg/h</td></tr>
+<tr><td>急性肝障害</td><td>ALT &gt; 基準上限の3倍</td></tr>
+<tr><td>末梢所見</td><td>四肢の冷感または網状皮斑</td></tr>
+<tr><td>意識</td><td>他の原因で説明できない意識変容</td></tr>
+</tbody></table></div>
+<p><strong>低血圧による層別</strong> — SHARC はさらに2つに分ける。</p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td>正常血圧CS（normotensive CS）</td><td>血管作動薬もMCSも使わない状態で収縮期血圧 ≥90 mmHg</td></tr>
+<tr><td>低血圧CS（hypotensive CS）</td><td>収縮期血圧 &lt;90 mmHg が30分以上持続、または収縮期血圧 ≥90 mmHg を保つのに血管作動薬もしくはMCSを要する</td></tr>
+</tbody></table></div>
+<p>この区別が決定的に重要な理由は2つ、と著者らは述べる。(1) 低血圧はショックを定義しない（ショックを定義するのは低灌流である）ことを明確にする、(2) 正常血圧CS と低血圧CS で内科的管理の戦略が違うことを示す。</p>
+<p><strong>病因による下位分類</strong> — SHARC は予後および病因指向治療の選択肢が異なることを強調して、以下に分ける。</p>
+<div class="tw"><table>
+<thead><tr><th>病因区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>AMI-CS</td><td>急性心筋梗塞に伴うCS</td></tr>
+<tr><td>心不全CS</td><td>急性MIを伴わない一次性心室機能障害による心不全</td></tr>
+<tr><td>心臓術後（postcardiotomy）</td><td>—</td></tr>
+<tr><td>二次性</td><td>弁膜症、持続する不整脈、タンポナーデなど</td></tr>
+</tbody></table></div>
+<h3>5. 選択された表現型（Selected Shock Phenotypes）</h3>
+<p>比較有効性データが極端に乏しいため、薬剤選択は病態生理の原則で決まる。すなわち「各薬剤の薬理プロファイル」を「表現型とその血行動態異常のパターン」に合わせ、異常を正常化することを狙う。著者らはパターン認識を助けるため以下の表現型に絞って論じる。</p>
+<h4>5-1. classic LV優位CS（低血圧あり）— cardiac ICU で最も多い（約65%）</h4>
+<ul><li>低灌流＋低心係数（CI &lt;2.2 L/min/m²）</li><li>SVR 上昇（しばしば &gt;2200 dyn·s/cm⁵。正常は約800〜1200 dyn·s/cm⁵）。これは MAP を保つための代償機転</li><li>しばしば LV 拡張末期圧の上昇を伴う</li><li>基本式：MAP − RAP ＝ 心拍出量 × SVR、心拍出量 ＝ 心拍数 × 一回拍出量</li></ul>
+<h4>5-2. 正常血圧CS — CS の15%以上</h4>
+<p>classic CS の多くは低血圧だが、強力な血管収縮によって十分な MAP を維持できる患者が15%以上いる。ここで重要なのは、低血圧が無いために「全身性の低灌流パターン」が個々の臓器障害と誤読されやすいこと。著者らが挙げる具体例は、急性肝障害を見て「感染性肝炎を疑う」という誤りである。</p>
+<h4>5-3. 血管拡張合併CS（mixed shock）— 2番目に多い（15〜20%）</h4>
+<p>classic CS と区別されるのは「不適切に低い SVR」。2通りに分類される。</p>
+<div class="tw"><table>
+<thead><tr><th>型</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>一次性CS＋血管麻痺の重畳</td><td>別個の血管麻痺性の病態が上乗せ（例：心停止後、敗血症）、または遷延・重篤な classic CS が全身性炎症反応症候群を惹起して血管拡張を招く</td></tr>
+<tr><td>一次性血管拡張性ショック＋心筋機能障害</td><td>心筋機能障害のため代償が不十分</td></tr>
+</tbody></table></div>
+<h4>5-4. 動的LV流出路（LVOT）閉塞 — 稀だが管理が全く異なる</h4>
+<p>LV の駆出に対する動的・物理的閉塞が心拍出量を損なう。病因として挙げられるのは：</p>
+<ul><li>閉塞性肥大型心筋症</li><li>"nutcracker" ないし "suicide LV"（大動脈弁狭窄の是正後に急性の過収縮LVと心腔内閉塞が生じる）</li><li>たこつぼ型（ストレス）心筋症で基部LVの過収縮による機能的閉塞</li></ul>
+<h4>5-5. RV優位CS</h4>
+<p>右心系の血行動態指標が優位に異常なときに考える。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>閾値</th></tr></thead>
+<tbody>
+<tr><td>RAP</td><td>&gt;10 mmHg</td></tr>
+<tr><td>RAP／PAWP 比</td><td>&gt;0.86</td></tr>
+<tr><td>PAPI（肺動脈拍動係数）</td><td>&lt;1.0</td></tr>
+</tbody></table></div>
+<p>病因は3つに分けて考える：RV 心筋機能障害（例：虚血）、RV 流出路閉塞（例：重症肺高血圧、とくに肺動脈性肺高血圧、広範囲肺塞栓）、静脈還流の不足（例：緊張性気胸）。</p>
+<h4>5-6. 両室性ショック</h4>
+<p>孤立性 RV 優位と LV 優位の管理原則を組み合わせて釣り合わせる。すなわち、(1) 全身性低血圧を治療しつつ全身後負荷と RV 後負荷の悪化を避ける、(2) 両室の収縮力を支持する、(3) 両室の一回拍出量を最大化しつつ RV が LV 充満を圧迫することを最小化するよう慎重に容量を管理する。</p>
+<h4>Table 1. ショック表現型と典型的な血行動態プロファイル（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>ショック亜型</th><th>要約的定義</th><th>RAP</th><th>PAWP</th><th>CI</th><th>SVR</th><th>MAP</th><th>PAPI</th></tr></thead>
+<tbody>
+<tr><td><strong>心原性ショック</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>classic 心原性・左心系</td><td>CI 低下＋SVR 上昇による低灌流（低血圧の有無は問わない）</td><td>正常または↑</td><td>↑</td><td>↓</td><td>↑</td><td>↓（低血圧CS）／正常または↑（正常血圧CS）</td><td>正常</td></tr>
+<tr><td>classic 心原性・右心系</td><td>同上</td><td>↑</td><td>正常または↓</td><td>↓</td><td>↑</td><td>同上</td><td>↓</td></tr>
+<tr><td>classic 心原性・両室性</td><td>同上</td><td>↑</td><td>↑</td><td>↓</td><td>↑</td><td>同上</td><td>↓</td></tr>
+<tr><td>血管拡張性心原性（mixed）</td><td>不十分な CI と不適切に低い SVR による低灌流</td><td>正常または↑</td><td>↑</td><td>正常または↓（注）</td><td>↓</td><td>↓</td><td>正常または↓</td></tr>
+<tr><td><strong>閉塞性・機械的</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>静脈還流障害（例：緊張性気胸）</td><td>機械的・閉塞性機序による CI 低下と低灌流</td><td>↓</td><td>↓</td><td>↓</td><td>↑</td><td>通常↓</td><td>↓</td></tr>
+<tr><td>RV 流出路（例：PE、肺高血圧）</td><td>同上</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>通常↓</td><td>↓</td></tr>
+<tr><td>タンポナーデ</td><td>同上</td><td>↑</td><td>↑</td><td>↓</td><td>↑</td><td>通常↓</td><td>正常または↓</td></tr>
+<tr><td>重症左心系弁膜症</td><td>同上</td><td>正常または↑</td><td>↑</td><td>↓</td><td>↑</td><td>通常↓</td><td>正常</td></tr>
+<tr><td><strong>非心原性ショック</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>循環血液量減少性</td><td>容量不足による CI 低下と低灌流</td><td>↓</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td><td>正常</td></tr>
+<tr><td>分布性</td><td>SVR 低下による低灌流</td><td>正常または↓</td><td>正常または↓</td><td>↑</td><td>↓</td><td>↓</td><td>正常</td></tr>
+</tbody></table></div>
+<p>注：血管拡張性心原性の CI は「血管麻痺を代償するのに不十分な上昇」という意味。</p>
+<p><strong>非侵襲的な代用指標</strong>（原表脚注）：頸静脈圧または下大静脈径で RAP を推定。画像や身体所見での肺水腫は PAWP 上昇を示唆。灌流指標（乏尿性 AKI でない限りの尿量、乳酸、意識状態）が CI を近似。毛細血管再充満遅延（&gt;2〜3秒）や四肢の冷感・網状皮斑は SVR 上昇を示唆。PAPI ＝（肺動脈収縮期圧 − 肺動脈拡張期圧）／RAP、異常閾値は &lt;1。</p>
+<h3>6. 血管作動薬 — クラス・個々の薬剤・比較有効性</h3>
+<p>薬剤を心筋収縮力と動脈平滑筋への機能的影響で分類するのが有用である。</p>
+<div class="tw"><table>
+<thead><tr><th>クラス</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td>inopressor</td><td>変力・変時作用（心拍出量↑・心拍数↑）＋血管収縮による昇圧作用</td></tr>
+<tr><td>inodilator</td><td>変力・変時作用はあるが、逆に血管拡張を促す</td></tr>
+<tr><td>pure vasopressor</td><td>血管収縮を起こすが心筋収縮力への直接作用は無い</td></tr>
+</tbody></table></div>
+<h4>Table 2. 血管作動薬：CS における適応・受容体結合・血行動態効果・主な副作用（原表を日本語化）</h4>
+<p>受容体結合の表記は <code>+</code> ～ <code>+++++</code> が最小～最大の相対的受容体親和性、<code>0</code> は有意な親和性なし、<code>N/A</code> は該当なし。</p>
+<p><strong>Inopressors（CO↑・HR↑・SVR↑）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>クラス</th><th>臨床適応</th><th>α1</th><th>β1</th><th>β2</th><th>DA</th><th>その他の受容体・作用機序</th><th>血行動態効果</th><th>主な副作用</th></tr></thead>
+<tbody>
+<tr><td>ドパミン</td><td>カテコラミン</td><td>ショック（低血圧を伴う classic または血管拡張性CS）／アトロピン不応の症候性徐脈</td><td>+++</td><td>++++</td><td>++</td><td>+++++</td><td>N/A</td><td>CO↑（全用量）、HR↑↑（全用量）、SVR↑（中〜高用量）、PVR↑の可能性</td><td>心房性・心室性不整脈／血管収縮による末梢・内臓虚血</td></tr>
+<tr><td>ノルアドレナリン</td><td>カテコラミン</td><td>ショック（低血圧を伴う classic または血管拡張性CS）</td><td>+++++</td><td>+++</td><td>+</td><td>N/A</td><td>N/A</td><td>CO↑、HR↑、SVR↑↑、PVR↑の可能性</td><td>心房性・心室性不整脈／血管収縮による末梢・内臓虚血</td></tr>
+<tr><td>アドレナリン</td><td>カテコラミン</td><td>ショック（低血圧を伴う classic または血管拡張性CS）／心停止／アナフィラキシー</td><td>+++++</td><td>++++</td><td>+++</td><td>N/A</td><td>N/A</td><td>CO↑↑、HR↑↑、SVR↑、PVR↑の可能性</td><td>心房性・心室性不整脈／乳酸アシドーシスを惹起しうる／血管収縮による末梢・内臓虚血</td></tr>
+</tbody></table></div>
+<p><strong>Inodilators（CO↑・HR↑・SVR↓）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>クラス</th><th>臨床適応</th><th>α1</th><th>β1</th><th>β2</th><th>DA</th><th>その他の受容体・作用機序</th><th>血行動態効果</th><th>主な副作用</th></tr></thead>
+<tbody>
+<tr><td>ミルリノン</td><td>ホスホジエステラーゼ阻害薬</td><td>低CI（正常血圧CS、MAP が十分な他のCS、RV優位CS）</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>PDE 阻害</td><td>CO↑、HR↑、SVR↓、PVR↓</td><td>心室性不整脈／低血圧</td></tr>
+<tr><td>ドブタミン</td><td>カテコラミン</td><td>低CI（正常血圧CS、MAP が十分な他のCS、RV優位CS）</td><td>+</td><td>+++++</td><td>+++</td><td>N/A</td><td>N/A</td><td>CO↑、HR↑、SVR↓、PVR↓</td><td>心房性・心室性不整脈／低血圧</td></tr>
+<tr><td>イソプロテレノール</td><td>カテコラミン</td><td>徐脈性不整脈（とくに torsade de pointes）／Brugada症候群</td><td>0</td><td>+++++</td><td>+++++</td><td>N/A</td><td>N/A</td><td>HR↑↑、CO↑、SVR↓</td><td>心房性・心室性不整脈／乳酸アシドーシスを惹起しうる</td></tr>
+<tr><td>レボシメンダン</td><td>カルシウム感受性増強薬</td><td>非代償性心不全</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>ミオフィラメントの Ca²⁺ 感受性増強、PDE-3 阻害</td><td>CO↑、HR↑、SVR↓</td><td>頻脈、房室伝導の亢進／低血圧</td></tr>
+</tbody></table></div>
+<p><strong>Vasopressors（SVR↑）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>クラス</th><th>臨床適応</th><th>α1</th><th>β1</th><th>β2</th><th>DA</th><th>その他の受容体・作用機序</th><th>血行動態効果</th><th>主な副作用</th></tr></thead>
+<tbody>
+<tr><td>バソプレシン</td><td>合成抗利尿ホルモン（ADH）</td><td>ショック（低血圧を伴う血管拡張性CS または RV優位CS）／心停止</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>V1 受容体（血管平滑筋）、V2 受容体（腎集合管系）</td><td>SVR↑、PVR は不変</td><td>低ナトリウム血症／血管収縮による末梢・内臓虚血</td></tr>
+<tr><td>フェニレフリン</td><td>カテコラミン</td><td>動的LVOT閉塞の軽減／難治性血管拡張（血管拡張性CS）への救済／大動脈弁狭窄＋低血圧での MAP 上昇</td><td>+++++</td><td>0</td><td>0</td><td>N/A</td><td>N/A</td><td>SVR↑、PVR↑</td><td>反射性徐脈／血管収縮による末梢・内臓虚血／血管外漏出による組織壊死</td></tr>
+<tr><td>アンジオテンシンII</td><td>ペプチドホルモン</td><td>難治性・カテコラミン抵抗性の血管拡張（血管拡張性CS）への救済</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>AT II 1型受容体（血管平滑筋）に結合、アルドステロン放出↑</td><td>SVR↑</td><td>動脈より静脈系の血栓・血栓塞栓イベント／ACE阻害薬併用で効果増強／ARB併用で効果減弱</td></tr>
+<tr><td>メチレンブルー</td><td>酸化還元剤</td><td>難治性血管拡張（血管拡張性CS）への救済</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>一酸化窒素合成酵素とグアニル酸シクラーゼを阻害</td><td>SVR↑</td><td>パルスオキシメトリに干渉して真の酸素飽和度を過小評価させる（血液ガスによる SaO2 直接測定は正確）／G6PD欠損での溶血</td></tr>
+</tbody></table></div>
+<p>Table 2 は Overgaard &amp; Dzavik（Circulation 2008）と van Diepen ら（AHA 科学的声明 2017）を改変したもの。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>用量域について <mark class="hl">Table 2 に用量（開始量・維持量・上限）の列は無く、本文にも各薬剤の推奨用量域の記載は無い。</mark> 本論文で数値として出てくる用量は SOAP II の「ドパミン最大20 μg/kg/min まで」の1点のみ。<mark class="hl">用量設計は本論文からは引けないので、他の資料に当たること。</mark></p>
+</div>
+<h4>6-1. Inopressors</h4>
+<p>アドレナリン・ノルアドレナリン・ドパミンはいずれもカテコラミンで、α および β アドレナリン受容体を活性化し、心拍数・心拍出量・血管緊張を上げる。血行動態への総合的な影響は似ているが、受容体活性化の力価が薬剤間で異なるため、やや異なる効果が出うる。</p>
+<ul><li><strong>ドパミン</strong>：ドパミン受容体と β1・α1 受容体を用量依存性に刺激するという独特の性質を持つ。低用量ではドパミン受容体刺激が優位、中等量では β1 活性化により心拍出量と心拍数が増加、高用量では α1 刺激が優勢となり血管収縮として現れる。</li><li><strong>アドレナリン</strong>：ノルアドレナリンに比べて相対的に β1 刺激が強いと一般に考えられており、心拍出量と心拍数のより大きな上昇をもたらす。</li><li><strong>ノルアドレナリン</strong>：アドレナリンに比べて相対的に α1 刺激が強いと一般に考えられており、SVR のより大きな上昇をもたらす。</li></ul>
+<p>心拍出量を改善し血圧を上げるため、これらは低血圧を伴う classic または血管拡張性CS の第一選択とされるのが通常である。ただし、これほど広く使われ、かつ効果に差が出うる可能性があるにもかかわらず、ショックにおける比較有効性・安全性を評価した研究は非常に少なく、CS に限ればさらに少ない。</p>
+<p><strong>比較有効性データの実際</strong></p>
+<ul><li><strong>SOAP II</strong>：ドパミン（最大20 μg/kg/min）は主要評価項目である全死因死亡でノルアドレナリンと差が無かったが、副次評価項目の頻脈性不整脈は高率だった（24.1% vs 12.4%）。対象はショック全般の異種混合集団（n=1679）。CS サブグループ（n=280、試験全体の17%）では、ドパミンで不整脈イベントが多く、死亡は有意でないものの増加傾向（28日で約50% vs 40%）。ただしショック型による死亡の真の異質性の証拠は無い（ショック型×死亡の交互作用 P=0.87）。</li><li><strong>他の2つの小規模試験</strong>（OptimaCC、CAT）：アドレナリンはノルアドレナリンより心拍数と乳酸値が高かった。</li><li><strong>OptimaCC</strong>：高度に選択された AMI-CS 患者57例。事後解析のエンドポイント「難治性ショック」（乳酸高値の持続を含む）がアドレナリンで多い傾向。</li></ul>
+<p>著者らはここで重要な留保を置いている。この所見は実際の難治性CSを反映していない可能性がある。アドレナリンは心拍出量や全身の灌流とは無関係な機序で乳酸を上げることが知られており（骨格筋での灌流非依存的な乳酸産生が提唱されている）、そうした低灌流非依存の乳酸上昇が転帰の悪化と相関するかどうかは不明である。他方でこの乳酸上昇は、(1) 酸塩基状態、(2) 灌流改善の経時的評価、の2点で問題になりうる。後者については他の灌流指標を併せて考えることが重要である。</p>
+<p><strong>AHA の結論と実臨床のばらつき</strong>：限られたデータに基づき、AHA の「心原性ショックの現代的管理」科学的声明は「心原性ショックにおける最適な first-line 血管作動薬は依然として不明」と結論した。この不確実性が診療パターンの大きなばらつきを生んでいるが、全体としてはアドレナリンやドパミンよりノルアドレナリンを使う方向へのトレンドがある。</p>
+<div class="tw"><table>
+<thead><tr><th>データソース</th><th>ノルアドレナリン</th><th>アドレナリン</th><th>ドパミン</th></tr></thead>
+<tbody>
+<tr><td>AHA Cardiogenic Shock Registry（血管作動薬を要したCS患者）</td><td>約65%</td><td>29%</td><td>6%</td></tr>
+<tr><td>DanGer Shock 試験（欧州、AMI-CS）</td><td>81%</td><td>37%</td><td>23%</td></tr>
+</tbody></table></div>
+<p><strong>著者らの立場</strong>：理論的には、アドレナリンは β1・β2 混合作動（とくに低〜中等量）により「より強い心収縮支持とより少ない血管収縮」という点で CS により好ましい生理学的効果を持ちうる。対してノルアドレナリンは α1 優位作動のため、後負荷の上昇が大きく心収縮の支持は他剤より小さい。そのため著者らは「低血圧を伴う CS ではノルアドレナリンよりアドレナリンをしばしば考慮し、特異的な乳酸上昇を監視する」としている。また相対的徐脈がショックに寄与していると考えられるときは、変時作用がより強いという理由でドパミンを好む。逆に頻脈性不整脈が経過を複雑にしているときは、(1) 変時作用が強く＝催不整脈性が強い薬剤を避けてドパミンよりノルアドレナリンを選ぶか、(2) バソプレシンを追加して MAP を支える adrenergic-sparing 戦略を考える。</p>
+<h4>6-2. Inodilators</h4>
+<p>収縮力増強と血管拡張の両方の作用があるため、inodilator は正常血圧CS で最初の薬剤として、あるいは低血圧（classic または血管拡張性）CS で inopressor によって MAP を安定させた後の追加治療として使われることが最も多い。</p>
+<ul><li><strong>ドブタミン</strong>：β1・β2 受容体作動のカテコラミンで、変力・変時作用と血管拡張をもたらす。</li><li><strong>ミルリノン</strong>：ホスホジエステラーゼ阻害薬（cAMP バイオアクティビティを調節）で、変力作用と血管拡張作用を持つ。</li></ul>
+<p><strong>DOREMI 試験</strong>は、CS 患者192例をドブタミン群とミルリノン群に無作為化し、院内死亡・心停止・MI・MCS の必要・脳卒中・腎代替療法を含む広範で異種混合の主要複合アウトカムに差が無いことを示した。</p>
+<p><strong>薬物動態の違いと使い分け</strong>（著者らの実践）：</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>ドブタミン</th><th>ミルリノン</th></tr></thead>
+<tbody>
+<tr><td>半減期</td><td>約2分</td><td>腎機能正常で約2.5時間</td></tr>
+<tr><td>腎機能障害での蓄積</td><td>しない</td><td>蓄積しうる</td></tr>
+<tr><td>肺血管拡張</td><td>相対的に小さい</td><td>より大きい傾向</td></tr>
+<tr><td>頻脈の増悪</td><td>より起こしやすい</td><td>より起こしにくい傾向</td></tr>
+<tr><td>タキフィラキシー</td><td>起こりうる</td><td>起こさない</td></tr>
+<tr><td>著者らが好む場面</td><td>経過の早期（迅速な調節が可能）、腎機能障害のある患者</td><td>管理困難な頻脈性不整脈、肺高血圧、長期使用が見込まれる場合（例：在宅強心薬療法）</td></tr>
+</tbody></table></div>
+<p>腎機能障害の患者にミルリノンを使う場合は、生体内蓄積とそれによる過度の血管拡張を避けるため慎重に漸増する。なお薬剤選択は臨床医の慣れ・快適さにも依存する、と著者らは率直に書いている。</p>
+<p><strong>レボシメンダンについて</strong>：Table 2 に inodilator として掲載されており（カルシウム感受性増強薬、ミオフィラメント Ca²⁺ 感受性増強＋PDE-3 阻害、適応は非代償性心不全、CO↑・HR↑・SVR↓、副作用は頻脈・房室伝導亢進・低血圧）、<mark class="hl">レボシメンダンを検証した臨床試験（試験名・n・アウトカム・効果量）は本論文には記載なし</mark>。Table 3 の RCT 一覧にもレボシメンダンの試験は含まれていない。</p>
+<h4>6-3. Vasopressors</h4>
+<p>純粋な血管収縮薬が血管収縮を起こす機序は薬剤によって異なる。</p>
+<ul><li><strong>バソプレシン（抗利尿ホルモン）</strong>：全身血管の V1 受容体作動により動脈平滑筋を収縮させる。通常は難治性の血管拡張性ショック、とくに敗血症性ショックで使われる。ただし、重症患者では内因性バソプレシンが経時的に枯渇しうるという仮説に基づき、とくに血管拡張性CS の場面で adrenergic-sparing アプローチの一部として使われうる。CS における転帰の臨床試験データは限られるが、血管麻痺・低血圧・心拍出量保持を伴う心臓術後ショック患者300例の小規模研究で、ノルアドレナリンに比べて死亡または重篤合併症の複合エンドポイントを減らした（VANCS）。また、バソプレシンは PVR への影響が最小と報告されており、その結果として RV 優位ショックの低血圧では「RV 後負荷を上げずに SVR を上げる」目的で first-line 薬としてしばしば使われる。</li><li><strong>フェニレフリン</strong>：純粋な α 作動薬で、PVR も上げる。</li><li><strong>アンジオテンシンII</strong>：血管平滑筋のアンジオテンシンII 1型受容体に結合して血管収縮とアルドステロン放出増加をもたらすペプチドホルモン。</li><li><strong>メチレンブルー</strong>：一酸化窒素合成酵素を阻害する酸化還元剤で、血管収縮をもたらす。</li></ul>
+<p>後ろの3剤（フェニレフリン、アンジオテンシンII、メチレンブルー）は CS 患者ではほとんど使われないが、他の介入に不応の高度な血管麻痺に対する救済療法として考慮されうる。</p>
+<h4>Table 3. CS 患者を含んだ血管作動薬のランダム化比較試験（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>試験（年）</th><th>治療</th><th>対象</th><th>主要評価項目</th><th>その他の評価項目</th></tr></thead>
+<tbody>
+<tr><td>SOAP II（2010）</td><td>ドパミン vs ノルアドレナリン</td><td>ショック1679例（敗血症 n=1044、心原性 n=280、循環血液量減少 n=263、その他 n=92）</td><td>28日死亡：52.5% vs 48.5%、OR 1.17（95%CI 0.97–1.42）、P=0.10。CS サブグループではノルアドレナリン有利で HR 約0.75（交互作用 P=0.87）</td><td>不整脈 24.1% vs 12.4%、P&lt;0.001／28日時点の人工呼吸器非装着日数 8.5±11.2 vs 9.5±11.4（P=0.13）／腎代替療法非施行日数 12.8±12.4 vs 14.0±12.3（P=0.07）／昇圧薬非使用日数 11.0±12.1 vs 12.5±12.1（P=0.01）</td></tr>
+<tr><td>OptimaCC（2018）</td><td>アドレナリン vs ノルアドレナリン</td><td>AMI-CS かつ LVEF&lt;40% の57例</td><td>心係数：差なし、P=0.43</td><td>難治性CS（事後エンドポイント）37%（27例中10例）vs 7%（30例中2例）、P=0.01／不整脈 41% vs 33%、P=0.56／60日死亡 52% vs 37%、P=0.25</td></tr>
+<tr><td>CAT Study（2008）</td><td>アドレナリン vs ノルアドレナリン</td><td>ショック280例（重症敗血症 n=158、AMI-CS n=27 を含む）</td><td>昇圧薬なしで MAP 目標を24時間以上維持するまでの時間：中央値35.1時間（IQR 13.8–70.4）vs 40.0時間（14.5–120.0）、HR 0.88（95%CI 0.69–1.12）、P=0.26</td><td>28日死亡 22.5% vs 26.1%、HR 0.86（95%CI 0.57–1.31）、P=0.48／昇圧薬非使用日数 中央値26.0（IQR 19.2–27.3）vs 25.4（13.8–27.3）、P=0.31</td></tr>
+<tr><td>DOREMI（2021）</td><td>ミルリノン vs ドブタミン</td><td>心原性ショック192例</td><td>院内死亡・蘇生された心停止・心移植またはMCS・MI・TIAまたは脳卒中・腎代替療法開始の複合：49% vs 54%、RR 0.90（95%CI 0.69–1.19）、P=0.47</td><td>院内死亡 37% vs 43%、RR 0.85（95%CI 0.60–1.21）／蘇生された心停止 7% vs 9%、HR 0.78（95%CI 0.29–2.07）／心移植またはMCS 12% vs 15%、HR 0.78（95%CI 0.36–1.71）／腎代替療法 22% vs 17%、HR 1.39（95%CI 0.73–2.67）</td></tr>
+<tr><td>VANCS（2017）</td><td>バソプレシン vs ノルアドレナリン</td><td>心臓手術後の血管麻痺性ショックかつ心係数 &gt;2.2 L/min/m² の300例（CS ではない）</td><td>30日以内の死亡または重篤合併症（脳卒中・48時間超の人工呼吸・深部胸骨創感染・再手術・急性腎不全）の複合：32% vs 49%、HR 0.55（95%CI 0.38–0.80）、P=0.0014</td><td>30日死亡 15.4% vs 15.9%、HR 0.99（95%CI 0.56–1.76）、P=0.98／48時間超の人工呼吸 5.4% vs 8.6%、HR 0.62（95%CI 0.26–1.49）、P=0.28／胸骨創感染 4.7% vs 9.9%、HR 0.46（95%CI 0.19–1.23）、P=0.09／再手術 6.7% vs 6.6%、HR 0.8（95%CI 0.52–1.23）、P=0.31／脳卒中 2.7% vs 2.6%、HR 1.03（95%CI 0.26–4.11）、P=0.97／急性腎不全 10.3% vs 35.8%、HR 0.26（95%CI 0.15–0.46）、P&lt;0.0001／心房細動 63.8% vs 82.1%、HR 0.38（95%CI 0.22–0.65）、P=0.0004</td></tr>
+</tbody></table></div>
+<h3>7. 表現型別のCS内科的管理への戦略的アプローチ</h3>
+<p>比較有効性データが極めて限られているため、以下は著者らの practice-based approach であり、薬理学・病態生理・各表現型を定義する血行動態異常を統合したものである。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Central Illustration. 心原性ショックの早期内科的管理への戦略的アプローチ — 縦に3つの大きな枠が並ぶ。最上段は「CS に対する血管作動薬選択への段階的戦略アプローチ」で、灰紫色の4つの箱が矢印で左から右へ連結される。Step 1「MAP を守る」→ Step 2「病態生理を定義する：ショック表現型（下の A 参照）／病因と寄与因子（下の B 参照）」→ Step 3「血行動態目標を設定する（下の C 参照）」→ Step 4「持続する血行動態異常に対処し血行動態目標を達成するよう薬物療法を仕立てる」。Step 4 の箱の下に斜体で「変時作用が望ましいか、頻脈性不整脈のリスクはどうかを考慮せよ」と添えられる。中段は「選択と実施を導く同時進行の考慮事項」で、青いヘッダーの3つのパネル A・B・C が横に並ぶ。A「ショック表現型」＝低血圧を伴う classic CS／低血圧を伴う血管拡張性CS／RV 優位CS／正常血圧CS／動的LV流出路閉塞。B「病因と寄与因子」＝病因指向治療を追求し可逆的原因に対処する（AMI での早期血行再建、STEMI による LV 優位CS への tMCS、CS の機械的原因への決定的介入、不安定な不整脈の管理、代謝異常の是正、中毒症候群の治療）。C「おおよその血行動態目標」＝一次目標として MAP 65–75 mmHg、CI &gt;2.2 L/min/m²、PCWP 14–18 mmHg、RAP 5–10 mmHg。追加の考慮として SVR 800–1000 dyn·s/cm⁵、PAPI &gt;1.0、PVR &lt;240 dyn·s/cm⁵。最下段は「ショック表現型に応じた個別化アプローチ」で、色分けされた5つの箱（橙＝低血圧を伴う classic CS、緑＝低血圧を伴う血管拡張性CS、赤＝RV 優位CS、茶＝正常血圧CS、紫＝動的LV流出路閉塞）に Step 1 と Step 4 の具体的手順が書かれる。脚注：短剣符＝タンポナーデへの心嚢ドレナージ、VSD 閉鎖、重症大動脈弁狭窄や急性重症僧帽弁・大動脈弁逆流への弁介入、広範囲肺塞栓への薬物的・機械的治療を含む。星印＝充満圧が正常または上昇していることを前提とする。低心拍出状態に循環血液量減少が寄与するなら蘇生する。段落記号＝うっ血があれば並行して除水（利尿または腎代替療法）。</p>
+</div>
+<h4>7-1. 4ステップの骨格</h4>
+<div class="tw"><table>
+<thead><tr><th>Step</th><th>やること</th><th>具体</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>MAP を守る</td><td>生命維持臓器への灌流を可能な限り回復させる最初の試み</td></tr>
+<tr><td>2</td><td>血行動態の表現型を定義し、病因を同定する</td><td>病因指向の介入を行い、寄与因子を反転させる</td></tr>
+<tr><td>3</td><td>MAP を超えた追加の血行動態目標を設定する</td><td>原則は各パラメータの正常化。ただし病態によって目標を変える（例：急性右室梗塞では RAP 目標を高めに置く）</td></tr>
+<tr><td>4</td><td>薬物療法を仕立てる</td><td>(1) 低灌流の残存、(2) 持続する血行動態異常、の反復評価に基づく</td></tr>
+</tbody></table></div>
+<p><strong>目標値（Central Illustration パネル C）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>目標</th></tr></thead>
+<tbody>
+<tr><td>MAP</td><td>65–75 mmHg</td></tr>
+<tr><td>CI</td><td>&gt;2.2 L/min/m²</td></tr>
+<tr><td>PCWP</td><td>14–18 mmHg</td></tr>
+<tr><td>RAP</td><td>5–10 mmHg</td></tr>
+<tr><td>SVR（追加考慮）</td><td>800–1000 dyn·s/cm⁵</td></tr>
+<tr><td>PAPI（追加考慮）</td><td>&gt;1.0</td></tr>
+<tr><td>PVR（追加考慮）</td><td>&lt;240 dyn·s/cm⁵</td></tr>
+</tbody></table></div>
+<h4>7-2. 侵襲的血行動態モニタリング（肺動脈カテーテル）</h4>
+<p>侵襲的血行動態は有用でありうるが、身体所見・画像・バイタルサイン・検査値による非侵襲的評価を代用にできる（Table 1 脚注と同じ内容）。ショック状態における侵襲的血行動態の有用性を検証した RCT が存在しないことを認めたうえで、著者らの実践はガイドライン推奨（2022 AHA/ACC/HFSA 心不全ガイドライン）に沿い、以下の3つの場面で肺動脈カテーテル留置を考慮する。</p>
+<ol><li>血行動態またはショック表現型についての診断的不確実性がある</li><li>血行動態の状態（血行動態目標が達成されているか）が不確かである</li><li>経験的介入にもかかわらず改善が無い</li></ol>
+<h4>7-3. SCAI 病期・SHARC 病因との関係</h4>
+<p>著者らは、SCAI ショック病期（例：C〜E）と SHARC 病因の全域にわたって同じアルゴリズム的アプローチを取る、と明記している。役割分担は次の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>何に使うか</th></tr></thead>
+<tbody>
+<tr><td>SCAI ショック病期</td><td>予後の規定に有用。加えて、反復評価と治療エスカレーション（血管作動薬による内科的管理、および一時的機械的補助の検討を含む）の「速さ」を決める</td></tr>
+<tr><td>SHARC 病因</td><td>病因指向治療の提供を方向づける（アルゴリズムの Step 2）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>SCAI 分類そのものの定義について <mark class="hl">SCAI ショック分類 A〜E の各病期の定義・診断基準・死亡率は、本論文には記載なし。</mark> 本文で言及されるのは「stage B（低灌流を伴わない pre-shock）は本 primer の対象外」「stage C〜E に同じアルゴリズムを適用する」「CAPITAL DOREMI 2 の対象が stage C または D」の3点のみ。<mark class="hl">A〜E の定義が必要なら SCAI 専門家合意（Naidu ら、JACC 2022;79:933–946）に当たること。</mark></p>
+</div>
+<h4>7-4. 表現型ごとの実際</h4>
+<p><strong>低血圧を伴う classic CS</strong></p>
+<ul><li>Step 1：inopressor で MAP を守る。</li><li>MAP が目標に達したら、灌流（すなわち CI）が十分かを評価する。</li><li>不十分なら、(a) inodilator を追加する（inopressor の増量が必要になりうる）か、(b) 該当すればノルアドレナリンからアドレナリンへの cross-titration を考慮する。</li><li>Central Illustration の記載：Step 4 は「inodilator を追加する、または inopressor を増やす（ただし MAP の過度な上昇を避ける。他剤よりアドレナリンを考慮）」。</li></ul>
+<p><strong>低血圧を伴う血管拡張性CS（mixed）</strong></p>
+<ul><li>戦略は classic と同様で、inopressor から始める。</li><li>反復評価により「灌流は十分だが低血圧が続く」と分かることがある。この場合、前述の adrenergic-sparing 薬としてバソプレシンをしばしば追加する。</li><li>逆に「MAP は目標だが灌流が不足」なら、MAP が許す限り inodilator を追加するのが一般的。</li><li>Central Illustration の記載：Step 4 は「inopressor を漸増しつつ血行動態を再評価。CI は目標だが MAP がなお低ければ vasopressor（バソプレシン）を追加するか inopressor を増やす（過度の変力・変時作用は避ける）。MAP は目標だが CI がなお低ければ inodilator を追加するか inopressor を増やす（MAP の過度な上昇は避け、他剤よりアドレナリンを考慮）」。</li></ul>
+<p><strong>正常血圧CS</strong></p>
+<p>考慮すべき戦略が2つある。</p>
+<ol><li>血管拡張薬による標的化された SVR 低下 — 心拍出量の増加が期待される</li><li>inodilator、または inodilator と血管拡張薬の併用による、収縮力改善と SVR 低下の同時達成</li></ol>
+<p>持続静注の血管拡張薬としては、強力な動脈拡張薬であるニトロプルシド（長期使用でシアン／チオシアン酸中毒を来しうる）、または静脈拡張薬であり高用量では動脈拡張薬としても働きうるニトログリセリンがある。Central Illustration では Step 4 として「必要に応じて血管拡張薬および／または inodilator を再評価・漸増する」と付記される。</p>
+<p><strong>動的LV流出路閉塞</strong></p>
+<p>目的は閉塞を最小化することで、そのために ①十分な容量を確保し、②後負荷を上げ、③収縮力の増加を避ける。一般的なアプローチは以下の組み合わせ。</p>
+<ul><li>輸液（静注）</li><li>血管収縮薬（例：フェニレフリンまたはバソプレシン）</li><li>β 遮断（例：エスモロール静注）</li></ul>
+<p>Central Illustration の記載：Step 1 は「十分な容量の確保」＋「純粋な血管収縮薬の追加」で MAP を守る。Step 4 は「CI がなお低ければ陰性変力薬を追加して閉塞を減らす」。</p>
+<p><strong>RV優位CS</strong></p>
+<p>管理は基礎病態による。指導原則は「SVR を上げて全身性低血圧を治療しつつ、RV 後負荷への影響を最小化する」。</p>
+<div class="tw"><table>
+<thead><tr><th>順序</th><th>手</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>バソプレシンから始めることが多い</td><td>MAP への作用が PVR 中立だから</td></tr>
+<tr><td>2</td><td>追加支持が必要ならアドレナリン</td><td>RV の変力支持も得られる。フェニレフリンは避ける（PVR を上げるため）</td></tr>
+<tr><td>3</td><td>PVR を上げる因子を回避・是正</td><td>低酸素、高二酸化炭素、アシドーシス、低体温、陽圧換気／過剰な PEEP</td></tr>
+<tr><td>4</td><td>左心系のうっ血が無ければ肺血管拡張薬を追加検討</td><td>吸入一酸化窒素、吸入プロスタサイクリン。PVR を下げて RV 拍出量を増やす狙い</td></tr>
+<tr><td>5</td><td>RV 収縮力の支持を inodilator または inopressor で</td><td>選択は「RV 後負荷を下げるが全身性低血圧を招きうる（inodilator）」対「RV 後負荷は上がるが MAP を守れる（inopressor）」の利益・リスク評価による</td></tr>
+</tbody></table></div>
+<p>Central Illustration の記載：Step 1 は「SVR は上げるが PVR は上げない血管作動薬で MAP を守る（バソプレシン &gt; アドレナリン &gt; その他）」。Step 4 は「CI がなお低ければ PVR を下げて RV の CI を上げる：低酸素・アシドーシス・低体温・過剰 PEEP の是正、PCWP が高くなければ吸入肺血管拡張薬の追加を検討、MAP が許せば inodilator で RV を支持、または inopressor（アドレナリン &gt; その他）」。</p>
+<h3>8. 今後の方向性（Future Directions）</h3>
+<p>CS の内科的管理、とくに血管作動薬の選択と戦略を導くデータは非常に限られている。進行中の研究として著者らが挙げるのは2本。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>登録番号</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>CAPITAL DOREMI 2</td><td>NCT05267886</td><td>SCAI stage C または D の患者で、強心薬 vs プラセボの有益性を評価。複合エンドポイントは死亡・持続する低血圧・持続する乳酸上昇・MCS の必要・持続する不整脈・蘇生された心停止</td></tr>
+<tr><td>PACCS（Pulmonary Artery Catheter in Cardiogenic Shock Trial）</td><td>NCT05485376</td><td>心不全CS における6時間以内の早期肺動脈カテーテル使用の死亡に対する有益性を評価</td></tr>
+</tbody></table></div>
+<p>CS における今後の研究関心領域として著者らが挙げるのは、各種血管作動薬の有効性・安全性を比較する追加研究、最適な血行動態目標を定義する試験、心不全CS 以外の集団での侵襲的血行動態の有用性の評価。</p>
+<p>本 primer に直接関わるものとしては、以下2つの試験を著者らは強く望んでいる。</p>
+<ol><li>低血圧を伴う classic および血管拡張性CS における inopressor 同士の比較有効性・安全性を評価する十分な検出力を持つ RCT。評価すべきは血行動態支持、他の補助療法（腎代替療法や機械的補助循環など）の必要性、安全性エンドポイント（四肢虚血、不整脈イベントなど）、および死亡。</li><li>低血圧を伴うCS におけるバソプレシンの研究（adrenergic-sparing 戦略の検証）。</li></ol>
+<h3>9. 結論（原著の Conclusions）</h3>
+<p>血管作動薬による内科的管理は、事実上すべてのCS 患者における初期戦略である。各薬剤の有効性・安全性についての比較データは欠けている。その結果として、薬理学的原則と病態生理学的原則を統合し、ショック表現型に合わせて仕立てるフレームワークに依拠することになる。</p>
+<h3>10. MCS への移行判断について</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本論文が扱う範囲の限界 <mark class="hl">MCS 導入の具体的な判断基準（開始閾値、デバイス選択、タイミング、除外条件）は本論文には記載なし。</mark> 本文で MCS に触れるのは以下の4点のみで、いずれも判断アルゴリズムを構成しない。</p>
+<ul><li>早期MCS は AMI 患者の高度に選択されたサブセットで有益性が証明されたが、これは CS 全体の5%を占めるにすぎない</li><li>SCAI ショック病期の定義が「治療エスカレーション（血管作動薬による内科的管理と一時的機械的補助の検討を含む）の速さ」を決めるのに有用である</li><li>Central Illustration のパネル B（病因と寄与因子）に「STEMI による LV 優位CS からの tMCS」が病因指向治療の一例として挙がる</li><li>DOREMI の複合アウトカムに「心移植または MCS」が含まれる</li></ul>
+<p><mark class="hl">本 primer は「血管作動薬による内科的管理」に範囲を限定しており、MCS への移行判断は明示的に対象外。</mark> tMCS の選択は <span class="wl">心原性ショックの管理 — 診断からデバイスまで、SCAI分類とPAC表現型でtMCSを選ぶ（CHESTCritCare2024）</span> や <span class="wl">心原性ショックの評価と管理 — SCAI病期・病因分類・PAC・tMCSを1本にまとめたACCの実践指針（ACC専門家合意・JACC2025）</span> を参照する。</p>
+</div>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<p><strong>① 推奨の大半が一人称の実践知であり、エビデンスの重み付けが読者に委ねられている</strong></p>
+<p>本文の推奨は "we will often consider…" "we prefer…" "we tend to…" という形で書かれ、推奨クラスもエビデンスレベルも付されていない。Clinical Primer という体裁上これは誠実な書き方だが、Central Illustration という「アルゴリズム図」の形式は権威的に見えるため、読者が「AHA 系のガイドライン図」と誤読するリスクがある。図の中に「これは practice-based である」という但し書きは無い。</p>
+<p><strong>② アドレナリン推しの論拠は理論であり、唯一の CS 対象 RCT はむしろ逆向きのシグナル</strong></p>
+<p>著者らは β1・β2 混合作動という薬理学的理由でアドレナリンをノルアドレナリンより考慮すると述べる。しかし CS を対象にアドレナリン vs ノルアドレナリンを比較した唯一の RCT である OptimaCC は、事後エンドポイントとはいえアドレナリンで難治性ショックが有意に多く（37% vs 7%、P=0.01）、60日死亡も数値上は不利（52% vs 37%、P=0.25）で、そもそも安全性の懸念で早期中止された試験である（早期中止の事実は本論文には記載なし）。著者らはこれを「乳酸上昇は灌流と無関係でありうる」という機序論で相対化するが、では何をもって難治性を判定するのかという代替指標は「他の灌流指標を考慮する」以上に具体化されていない。n=57 という規模から「アドレナリン有利」も「不利」も結論できない、というのが公平な読みだろう。</p>
+<p><strong>③ 用量が一切書かれていない</strong></p>
+<p>Table 2 は受容体親和性を <code>+</code> の個数で示す一方、開始量・目標量・上限の記載が無い。ドパミンの「低用量／中等量／高用量」という決定的に重要な区分も、具体的な μg/kg/min が示されない。実践指針を名乗る文書としてこれは大きな欠落で、ベッドサイドでそのまま使うことはできない。</p>
+<p><strong>④ SOAP II の CS サブグループの提示が読者を迷わせる</strong></p>
+<p>本文は「CS サブグループで死亡が約50% vs 40%」と書き、Table 3 は「HR 約0.75 favoring norepinephrine」と書く。しかし同時に交互作用 P=0.87 を示して「ショック型による真の異質性の証拠は無い」と述べる。つまり全体で有意差が無い試験のサブグループ差であり、しかも交互作用検定も陰性。それでも本文の位置づけとしては「ドパミンを避ける」根拠として機能してしまっている。サブグループ解析の解釈としては弱い。</p>
+<p><strong>⑤ VANCS は CS の試験ではない</strong></p>
+<p>Table 3 に含まれる VANCS は、対象が「心係数 &gt;2.2 L/min/m² の心臓術後血管麻痺性ショック」であり、表の中でも「（CS ではない）」と明記されている。にもかかわらず、CS におけるバソプレシンの根拠として本文で引かれる唯一の RCT である。RV 優位CS でバソプレシンを first-line にするという実践的にはインパクトの大きい推奨も、根拠は PVR への影響を見た報告2本（うち1本は 2014 年のヒト肺動脈・橈骨動脈の in vitro 研究）であり、臨床アウトカムのデータは無い。</p>
+<p><strong>⑥ 表現型の判別可能性が検証されていない</strong></p>
+<p>classic／mixed／正常血圧／RV 優位という分け方は概念的には明快だが、ベッドサイドでどれだけ再現性よく分類できるかのデータは示されない。とくに mixed shock の「不適切に低い SVR」の閾値が示されていない（classic の SVR は「しばしば &gt;2200 dyn·s/cm⁵」と数字が出るのに対し、mixed の側は定性的表現のみ）。目標 SVR は 800–1000 dyn·s/cm⁵ と示されるので、この帯域と「不適切に低い」の境界が読者判断になる。</p>
+<p><strong>⑦ 頻度の数字の出所が cardiac ICU レジストリである</strong></p>
+<p>classic 約65%、mixed 15〜20%、正常血圧CS 15%以上という頻度は、循環器集中治療室（CCCTN／AHA レジストリ）由来である。一般 ICU に混在する CS（術後、敗血症合併、心停止後など）の分布はこれと違いうる。当院の mixed ICU にそのまま当てはめる際は注意が要る。</p>
+<p><strong>⑧ 利益相反の量が大きい</strong></p>
+<p>両著者とも TIMI Study Group メンバーで、同グループは Abiomed（Impella のメーカー）を含む23社から施設あて資金を受けている。本論文が MCS の推奨を積極的にしていない点でむしろ抑制的だが、読者としては認識しておくべき背景である。</p>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>AHA「心原性ショックの現代的管理」科学的声明。Table 2 の元資料の1つ</td><td>van Diepen S ら. Circulation. 2017;136:e232–e268</td></tr>
+<tr><td>2</td><td>心原性ショックの疫学と原因</td><td>Berg DD, Bohula EA, Morrow DA. Curr Opin Crit Care. 2021;27:401–408</td></tr>
+<tr><td>3</td><td>SHARC 専門家パネルによる CS 研究とMCSデバイスの標準化定義</td><td>Waksman R ら. Circulation. 2023;148:1113–1126</td></tr>
+<tr><td>4</td><td>CCCTN 前向き北米多施設レジストリ。cardiac ICU 入室の5人に1人超がCSという数字の出所</td><td>Bohula EA ら. JAMA Cardiol. 2019;4:928–935</td></tr>
+<tr><td>5</td><td>SCAI SHOCK 病期分類の専門家合意アップデート（検証研究の統合）。A〜Eの定義はここ</td><td>Naidu SS ら. J Am Coll Cardiol. 2022;79:933–946</td></tr>
+<tr><td>6</td><td>DanGer Shock 試験。梗塞関連CSへの微小軸流ポンプ vs 標準治療</td><td>Møller JE ら. N Engl J Med. 2024;390:1382–1393</td></tr>
+<tr><td>7</td><td>SHOCK 試験の1年生存（早期血行再建）</td><td>Hochman JS ら. JAMA. 2001;285:190–192</td></tr>
+<tr><td>8</td><td>CULPRIT-SHOCK。AMI-CS におけるPCI戦略</td><td>Thiele H ら. N Engl J Med. 2017;377:2419–2432</td></tr>
+<tr><td>9</td><td>DanGer Shock の選択基準を現代コホートに当てはめた検討</td><td>O'Brien CG ら. J Am Coll Cardiol. 2024;84:2490–2493</td></tr>
+<tr><td>10</td><td>IABP-SHOCK II。AMI-CS への大動脈内バルーンパンピング</td><td>Thiele H ら. N Engl J Med. 2012;367:1287–1296</td></tr>
+<tr><td>11</td><td>現代の cardiac ICU におけるショックの疫学。表現型頻度の出所</td><td>Berg DD ら. Circ Cardiovasc Qual Outcomes. 2019;12:e005618</td></tr>
+<tr><td>12</td><td>AHA Cardiogenic Shock Registry の血管作動薬使用パターン（ノルアド65%・アドレナリン29%・ドパミン6%）</td><td>Patel SM ら. J Am Heart Assoc. 2025;14:e044373</td></tr>
+<tr><td>13</td><td>SHARC コンセンサス定義を用いたCSの疫学</td><td>Berg DD ら. Eur Heart J Acute Cardiovasc Care. 2024;13:709–714</td></tr>
+<tr><td>14</td><td>mixed cardiogenic shock の標準化分類・血行動態定義・管理枠組みの提案</td><td>van Diepen S ら. Circulation. 2024;150:1459–1468</td></tr>
+<tr><td>15</td><td>cardiac ICU における RV 優位心不全・ショックの疫学と管理。RAP/PAWP &gt;0.86、PAPI &lt;1.0 の出所</td><td>Kanwar MK ら. Eur Heart J Acute Cardiovasc Care. 2022;11:584–594</td></tr>
+<tr><td>16</td><td>強心薬と昇圧薬の生理学と臨床使用のレビュー。Table 2 の元資料</td><td>Overgaard CB, Džavík V. Circulation. 2008;118:1047–1056</td></tr>
+<tr><td>17</td><td>ノルアドレナリン・イソプロテレノール・ドパミンの末梢血管作用（1963年の古典）</td><td>Allwood MJ ら. Br Med Bull. 1963;19:132–136</td></tr>
+<tr><td>18</td><td>SOAP II。ショックにおけるドパミンとノルアドレナリンの比較</td><td>De Backer D ら. N Engl J Med. 2010;362:779–789</td></tr>
+<tr><td>19</td><td>OptimaCC。AMI 後CSにおけるアドレナリン vs ノルアドレナリン</td><td>Levy B ら. J Am Coll Cardiol. 2018;72:173–182</td></tr>
+<tr><td>20</td><td>CAT Study。重症患者におけるアドレナリンとノルアドレナリンの比較</td><td>Myburgh JA ら. Intensive Care Med. 2008;34:2226–2234</td></tr>
+<tr><td>21</td><td>DOREMI。CS におけるミルリノン vs ドブタミン（引用は Reply）</td><td>Mathew R, Di Santo P, Hibbert B. N Engl J Med. 2021;385:2108–2109</td></tr>
+<tr><td>22</td><td>VANCS。心臓術後血管麻痺性ショックにおけるバソプレシン vs ノルアドレナリン</td><td>Hajjar LA ら. Anesthesiology. 2017;126:85–93</td></tr>
+<tr><td>23</td><td>「乳酸は外傷・敗血症における組織低酸素の信頼できない指標ではない」。アドレナリンの乳酸上昇を機序で説明する根拠</td><td>James JH ら. Lancet. 1999;354:505–508</td></tr>
+<tr><td>24</td><td>心原性ショックにおけるバソプレシン：病態生理・臨床エビデンス・治療展望</td><td>Filomia S ら. ESC Heart Fail. 2026;13（2026年2月3日オンライン公開）</td></tr>
+<tr><td>25</td><td>非心臓手術における肺高血圧の評価と管理（AHA 科学的声明）。バソプレシンのPVR中立性の根拠</td><td>Rajagopal S ら. Circulation. 2023;147:1317–1343</td></tr>
+<tr><td>26</td><td>ヒト肺動脈・橈骨動脈における昇圧薬への血管収縮反応（in vitro）</td><td>Currigan DA ら. Anesthesiology. 2014;121:930–936</td></tr>
+<tr><td>27</td><td>ATHOS-3。血管拡張性ショックへのアンジオテンシンII</td><td>Khanna A ら. N Engl J Med. 2017;377:419–430</td></tr>
+<tr><td>28</td><td>敗血症性ショック管理におけるメチレンブルーの役割</td><td>Smith BA, Robinson R, Most AK. J Pharm Pract. 2026;39:57–66</td></tr>
+<tr><td>29</td><td>2022 AHA/ACC/HFSA 心不全ガイドライン（要旨）。肺動脈カテーテル留置の推奨根拠</td><td>Heidenreich PA ら. Circulation. 2022;145:e876–e894</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">心原性ショックで「どの昇圧薬が優れているか」を示した試験は1本も無い。だから薬を決める前に、ショックの型（classic LV優位／血管拡張合併／正常血圧／RV優位／動的LVOT閉塞）を口に出して定義することが、薬剤選択そのものより先に来る。</mark></p>
+<ul><li><mark class="hl">低血圧CS は inopressor で MAP 65–75 mmHg を先に守る。CI &gt;2.2 L/min/m² に届かなければ inodilator を足すか、ノルアドレナリンからアドレナリンへ切り替える。</mark></li><li><mark class="hl">灌流は足りているのに低血圧が続くなら、カテコラミンを増やさずバソプレシンを足す（adrenergic-sparing）。</mark></li><li><mark class="hl">RV 優位ショックの1剤目はバソプレシン。PVR を上げないから。フェニレフリンは PVR を上げるので避ける。</mark></li><li><mark class="hl">正常血圧でも乳酸&gt;2・尿量&lt;0.5 mL/kg/h・Cr 2倍・ALT 3倍・四肢冷感・意識変容のどれか1つがあればショック。「肝機能異常だけ」を急性肝炎と誤読しない。</mark></li><li><mark class="hl">アドレナリンの乳酸上昇は骨格筋由来で灌流と無関係に起こりうる。乳酸だけで「難治性」と判定せず、他の灌流指標を併読する。</mark></li><li><mark class="hl">用量域と SCAI A〜E の定義、MCS 導入基準はこの論文には載っていない。別資料に当たること。</mark></li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
