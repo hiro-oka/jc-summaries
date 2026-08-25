@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>急性高カリウム血症の診断と管理 — 心電図は除外に使えない、Ca・細胞内シフト・体外除去の3ステップ（State of the Art Review・BMJ2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="bmj-2026-100287.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">急性高カリウム血症の診断と管理 — 心電図は除外に使えない、Ca・細胞内シフト・体外除去の3ステップ（State of the Art Review・BMJ2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Rech MA, Zimmerman DE, Ray L, Desai D, Hoffman JW, Howington GT. Diagnosis and management of acute hyperkalaemia. BMJ. 2026;394:e100287. DOI: 10.1136/bmj-2026-100287</dd><dt>掲載誌</dt><dd>BMJ（2026-08-21）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1136/bmj-2026-100287" target="_blank" rel="noopener">doi.org/10.1136/bmj-2026-100287</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Diagnosis and management of acute hyperkalaemia</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院ICU 急性高K血症プロトコル案（誰が・何を・どの順で） <strong>0. 発見（0分）— 発見者（看護師・研修医・当直医の誰でも）</strong></p>
+<ul><li>血ガス（POCT）または生化学で K ≥5.5 を見たら、その場で ①12誘導心電図をオーダー ②モニター装着 ③リーダー看護師とICU当番医へ声かけ。<mark class="hl">心電図の結果を待って治療開始を遅らせない</mark>（本総説の核心）。</li><li>同時に採血をやり直すかを判断する。ライン側管・駆血1分超・細径針・溶血コメント付きは偽性を疑い、対側から新規採血。ただし <mark class="hl">「疑い」で治療を止めるのは K&lt;6.0 かつ無症状のときだけ</mark>。</li><li>血ガス（全血）で異常が出たら血漿検体で確認する。逆（血漿の異常値を全血で確認する）は溶血を検出できないので行わない。</li></ul>
+<p><strong>1. Step 1 膜／伝導の回復（0〜5分）— ICU当番医が指示、担当看護師が実施</strong></p>
+<ul><li>適応：心電図変化あり、または心電図がすぐ撮れない状況で K &gt;6.5、または血行動態不安定。</li><li>当院採用のグルコン酸カルシウム（8.5% カルチコール 10 mL＝Ca 約2.2 mmol）で、本総説の「1 g を2〜5分」に相当する量を末梢から投与。<mark class="hl">心電図が5分後に正常化しなければ追加する（111例の前向き観察では97%が1 g×3回を要し、1回だけで十分だった患者は皆無）</mark>。</li><li>塩化カルシウムは中心静脈路がある場合か心停止時に限る（血管外漏出で組織壊死）。</li><li>重炭酸と同一ルートで同時に流さない（炭酸カルシウムが析出しルートが閉塞する）。ルートを分けるか十分にフラッシュする。</li></ul>
+<p><strong>2. Step 2 細胞内シフト（5〜15分）— ICU当番医＋担当看護師＋（可能なら）薬剤師</strong></p>
+<ul><li>速効型インスリン 5〜10単位を静注。<mark class="hl">CKD・AKI・インスリン未使用・体重50 kg未満・投与前血糖 &lt;126 mg/dL のいずれかがあれば5単位を選ぶ</mark>（当院の重症患者はほぼ全例がこの条件に当たる）。</li><li>ブドウ糖は 25 g から（10%液250 mLが本総説の推奨濃度。50%液20 mLは高張で高K血症を悪化させうる）。投与前血糖 &gt;200 mg/dL ならブドウ糖不要。</li><li>サルブタモール（当院はサルタノール／ベネトリン吸入）を併用すると相加的に0.65〜1 mmol/L 下がる。ESKD・非選択性β遮断薬使用中は効きが落ちる。頻脈・振戦が出るので循環が張り詰めている症例では単独では選ばない。</li><li><strong>血糖再検のタイミング（プロトコル化して指示簿に固定する）</strong>：インスリン投与後 <mark class="hl">30分・60分・90分・120分・180分・240分の6点で必ず測定</mark>。本総説は「30〜60分ごとに最低4時間」を要求しており、ブドウ糖の作用（約1時間）はインスリン（約2時間）より短いので、60分〜120分が最も危ない。低血糖は入院患者の17.2%に起きる。</li><li>PRN指示（低血糖時の追加ブドウ糖）を高K血症オーダーセットにあらかじめ組み込み、看護師判断で即投与できるようにする。ESKD・AKI・投与前血糖 &lt;126 mg/dL の症例は最初から10%ブドウ糖持続投与に切り替える（ERC 2025 は 10% 50 mL/h を5時間）。</li></ul>
+<p><strong>3. Step 3a 体外への除去・薬物（15〜60分）— ICU当番医＋薬剤師</strong></p>
+<ul><li>容量過負荷（急性心不全）かつ腎機能が保たれていればフロセミド 20〜40 mg 静注。<mark class="hl">脱水・正常血液量では有害になりうるので反射的に使わない</mark>（K低下は 0.3 mmol/L 程度）。</li><li>経口・経管が使えるならK吸着薬。当院の選択肢はポリスチレンスルホン酸Ca／Na（ケイキサレート・カリメート等）とジルコニウムシクロケイ酸Na（ロケルマ）。急性期のエビデンスはどちらも弱く、<mark class="hl">「これで下がったことにして次の一手を止める」のが最大の落とし穴</mark>。</li><li>ロケルマ 10 g（1日3回まで＝30 g/日）。他の内服薬とは2〜3時間ずらす。</li></ul>
+<p><strong>4. Step 3b 腎代替療法（同時並行で判断）— ICU当番医が腎臓内科へコール</strong></p>
+<ul><li>適応：内科的治療に不応、維持透析患者、乏尿性AKI（尿量 &lt;400 mL/24h）、心停止に至った高K血症。</li><li>血行動態が不安定なら効率は落ちるがCRRTを選ぶ（<span class="wl">CRRTの現代的レビュー — 適応・モダリティ・血管アクセス・用量・抗凝固・容量管理・栄養を一望する（総説・CJASN2022）</span>）。</li><li><mark class="hl">透析後1〜6時間のリバウンド高K血症を必ず見に行く</mark>。透析終了＝終了ではない。</li></ul>
+<p><strong>5. 再評価と原因治療（4〜24時間）— 主治医チーム</strong></p>
+<ul><li>K再検を UK Kidney Association に合わせて 1・2・4・6・24時間で組む。ICUでは血ガスで代用できる。</li><li>RAAS阻害薬・K保持性利尿薬・ST合剤・NSAIDs・タクロリムス・ジゴキシン・β遮断薬を薬剤リストで洗う。<mark class="hl">KDIGO 2024 は「内科治療でも制御できない高K血症」以外ではCKD患者のRAAS阻害薬を中止しないよう求めている</mark>ので、退院処方で反射的に切らない。</li><li>代謝性アシドーシスがあるなら原因（<span class="wl">代謝性アシドーシスは原因アニオンで死亡が違う — 乳酸56%・SIG 39%・高Cl 29%（851例・CritCare2006）</span>）を治す。<mark class="hl">重炭酸は高K血症そのものの治療としては推奨されない</mark>。</li></ul>
+<p><strong>当院で変わること／変わらないこと</strong></p>
+<ul><li><strong>変わる</strong>：インスリンの既定量を10単位から5〜10単位（リスク因子があれば5単位）へ。血糖再検を「4時間・6点」で指示簿に固定。心電図を待たずに治療を開始する運用の明文化。</li><li><strong>変わらない</strong>：カルシウム＋インスリン＋ブドウ糖という骨格、透析の適応、重炭酸を第一選択にしないこと。</li><li><strong>導入を検討</strong>：高K血症オーダーセット（Ca・インスリン・ブドウ糖・PRNブドウ糖・血糖再検・K再検が1クリックで並ぶ）。本総説が繰り返し指摘する「投与遅れ」と「低血糖」は、いずれもオーダーセットで防げる種類の問題。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：高K血症が致死的不整脈・心停止と関連すること、原因が「腎排泄低下・細胞外シフト・摂取過剰」の3つに整理できること、治療が「カルシウム／細胞内シフト／体外除去」の3段階であることは確立している。</li><li><strong>Unknown</strong>：定義（≥5.0 か ≥5.5 か）が統一されていない。カルシウムの至適塩・至適量・T波異常のみの症例での役割。インスリンの至適用量。新規K吸着薬（patiromer・SZC）が急性期に本当に透析や入院を減らすか。RAAS阻害薬を継続しながらK吸着薬で抑える戦略の長期アウトカム。</li><li><strong>What's new</strong>：①カルシウムの作用機序が「膜安定化」ではなく「Ca依存性の伝導再生」であるとする2024年の犬心筋細胞研究（QRS幅増大には効くがT波異常だけでは効かない可能性を説明する）。②インスリン低用量（5単位・0.1単位/kg）が低血糖を減らしK低下は同等というメタ解析。③SZC・patiromer の急性期試験が出そろい、いずれも「SPSを明確に上回らない」という結果。④2025年のERC／AHA蘇生ガイドラインの高K血症関連推奨の整理。⑤SGLT2阻害薬が重度高K血症を減らす（HR 0.84）というIPDメタ解析。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 急性高K血症は「心電図では除外できない」電解質異常であり、<strong>カルシウム（伝導回復）→インスリン＋ブドウ糖±β2刺激薬（細胞内シフト）→K吸着薬・利尿薬・透析（体外除去）</strong> の3段階を、心電図所見を待たずに開始することが要点。新規K吸着薬は期待ほどの上乗せを示せておらず、低血糖こそが最も頻度の高い医原性合併症である。</p>
+</div>
+<ul><li>定義は統一されていない。ERC／UK Kidney Association／KDIGO は ≥5.5 mmol/L、AHA／AAFP は ≥5.0 mmol/L（心電図所見と組み合わせる）。いずれにせよリスクは閾値ではなく連続的に上がる。</li><li>一般人口の有病率は 1.5〜3%、CKD または心不全があると 6.4〜9.3%。米国では2011年に約81万4000件の救急受診が高K血症関連、2014年の入院費は約12億ドル。</li><li>心電図の感度は低い。K 5.5〜7.0 でテント状T波は25%未満、K &gt;7.0 でも35%にしか出ない。QRS幅増大は K 5.5〜7.0 の13%未満。<mark class="hl">心電図が正常でも致死的でありうる</mark>。</li><li>一方で心電図所見が出たときの意味は重い。QRS延長 RR 4.7、徐脈 RR 12.3、接合部調律 RR 7.5 で6時間以内の重篤有害事象（VF・CPR・死亡）と関連。</li><li>治療の実数：カルシウムはK値を下げない（発現3分・持続30〜60分）。インスリン＋ブドウ糖は 0.6〜1.4 mmol/L 低下（発現&lt;15分・持続2時間）。サルブタモールは 0.65〜1 mmol/L（発現&lt;30分・持続2時間）。ループ利尿薬 0.3 mmol/L。patiromer 0.4〜0.6 mmol/L。SZC 0.1〜0.7 mmol/L。SPS は「変動が大きくおおむね無視できる」。重炭酸は「無視できる」。</li><li>透析は最も確実で、1時間で約1 mmol/L、3時間で最大2 mmol/L 低下させる。ただし1〜6時間後のリバウンドがある。</li><li>インスリンによる低血糖は入院患者の17.2%に発生。5単位への減量で低血糖のオッズは0.55に下がり、K低下は変わらない（平均差 -0.02 mmol/L）。</li><li>塩化カルシウムはグルコン酸カルシウムの3倍の元素カルシウムを含む（1 gあたり 6.8 mmol/273 mg vs 2.3 mmol/93 mg）が、効果は同等で、血管外漏出の危険から中心静脈路か心停止時に限るのが原則。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — カリウムの生理と、なぜ心臓が止まるのか 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む カリウムは体内の98%が細胞内にあり、細胞外にあるのはわずか2%。血清値の正常域は 3.5〜5.0 mmol/L と狭く、この狭さが「小さなずれが致死的不整脈になる」理由である。細胞外Kが上がると心筋細胞の静止膜電位が浅くなり（部分脱分極）、速いナトリウムチャネルが不活化されて第0相の脱分極が遅くなる。その結果、心房・房室結節・心室の伝導速度が落ちる。心電図上はテント状T波 → PR延長 → QRS幅増大 → サインカーブへと進み、最終的に心室性不整脈・心静止に至る。 血清K値を決めているのは3つの仕組みである。<strong>酸塩基平衡</strong>（アシデミアでは Na⁺/H⁺ 交換が阻害されて細胞内Naが減り、Na⁺/K⁺-ATPase が抑制されてKが細胞外へ出る）、<strong>腎の排泄</strong>（Kが上がるとアルドステロンが分泌され、遠位ネフロンの上皮性Naチャネルと Na⁺/K⁺-ATPase を増やしてK分泌を高める）、そして<strong>ホルモン</strong>（インスリンとカテコラミンのβ2刺激が Na⁺/K⁺-ATPase を介してKを細胞内へ押し込む。α刺激は逆にKを出すが通常は無視できる）。 見落とされやすい第4の機序が<strong>血漿浸透圧の上昇</strong>である。高張状態では水が細胞外へ引かれ（溶媒牽引）、細胞が縮んで細胞内K濃度が上がり、濃度勾配に沿ってKが外へ漏れる。DKA・高浸透圧高血糖状態、マンニトール投与で起きる。体内総K量は増えていないのに血清Kが上がる。 略語：CKD＝慢性腎臓病、AKI＝急性腎障害、ESKD＝末期腎不全、RAAS＝レニン・アンジオテンシン・アルドステロン系、SPS＝ポリスチレンスルホン酸ナトリウム、SZC＝ジルコニウムシクロケイ酸ナトリウム（本邦ではロケルマ）、KDIGO＝Kidney Disease: Improving Global Outcomes、ERC＝欧州蘇生協議会、AHA＝米国心臓協会、AAFP＝米国家庭医学会。</p>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. カリウム恒常性の機序。横一列に4つのパネルが並ぶ。左端「Muscle cell（筋細胞）」はアシデミアのパネルで、紫色の筋細胞に Na⁺/H⁺ 交換体（青丸で「impaired＝阻害」と注記）が描かれ、細胞膜上の Na⁺/K⁺-ATPase（ピンク丸にATP）には青の×印が重ねられて動きが止まっていることを示し、K⁺が細胞外へ出る青矢印が引かれている。上部の見出しは「Acidaemia（代謝性＞呼吸性、無機酸アシドーシス＞有機酸アシドーシス）」。第2パネル「Kidney（腎）」は緑色の皮質集合管主細胞を2つ縦に並べ、左上「Early acidaemia：血清K⁺は正味で上昇（↑）」、左下「Late acidaemia：血清K⁺は正味で低下（↓）」、右上「Aldosterone antagonism（アルドステロン拮抗）：血清K⁺は正味で上昇」、右下「Aldosterone：血清K⁺は正味で低下」の4象限になっており、中央に灰色の下向き太矢印で「Lumen / urine（管腔・尿）」が描かれる。第3パネル「Muscle cell」はホルモンのパネルで、「Insulin」と「β2 adrenergic activation」の2つのラベルの下に紫の筋細胞があり、Na⁺/K⁺-ATPase を介してK⁺が細胞内へ入る青矢印が引かれている。右端「Cell」は「↑Plasma tonicity（血漿浸透圧上昇）」で、灰色の太矢印「Solvent drag H₂O」が細胞から水を引き出し、細胞が縮んだ結果として「K⁺ passive efflux（受動的なK⁺流出）」のオレンジ破線矢印が外向きに描かれる。図の下部に凡例：実線の青矢印＝通常の移動、青の×印つき破線＝阻害された移動、オレンジ破線矢印＝促進された移動、紫の丸＝筋細胞またはその他の組織細胞、緑の丸＝ネフロン主細胞（皮質集合管）。パネル上部の帯には「Activation of these systems (shown) causes decreased serum potassium（図示したこれらの系が活性化すると血清カリウムは下がる）」と注記。原図・無改変。</p>
+</div>
+<h3>2. 定義 — 「≥5.0」と「≥5.5」が併存している</h3>
+<h4>Table 1. 高カリウム血症の定義（重症度別）</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>ERC・UK Kidney Association・KDIGO</th><th>AHA・AAFP</th></tr></thead>
+<tbody>
+<tr><td>全体の定義</td><td>血清K ≥5.5 mmol/L</td><td>血清K ≥5.0 mmol/L（血清濃度と心電図所見に基づく）</td></tr>
+<tr><td>軽症</td><td>5.5〜5.9 mmol/L</td><td>5.0〜5.9 mmol/L で心電図変化なし</td></tr>
+<tr><td>中等症</td><td>6.0〜6.4 mmol/L</td><td>5.0〜5.9 mmol/L で心電図変化あり、または 6.0〜6.4 mmol/L で心電図変化なし</td></tr>
+<tr><td>重症</td><td>≥6.5 mmol/L</td><td>6.0〜6.4 mmol/L で心電図変化あり、または &gt;6.5 mmol/L で心電図変化なし</td></tr>
+</tbody></table></div>
+<p>米国のガイドラインは mEq/L を用いるが、カリウムでは 1 mmol/L＝1 mEq/L なので本総説では mmol/L に統一されている。著者らは「どの定義を採ろうとも、リスクは離散的な閾値ではなく連続的に上昇する」と繰り返し注記しており、上昇速度と患者背景を加味しなければ定義だけでは危険度を測れないという立場をとる。</p>
+<h3>3. 疫学 — 頻度・受診・コスト</h3>
+<ul><li>一般人口の有病率は 1.5〜3%。米国の保険請求データベース／メディケア研究では年間有病率 1.5〜2.7%、CKD または心不全（あるいは両方）があると 6.4〜9.3% に上がる。</li><li>有病率は過小評価されている可能性が高く、高K血症の定義と検査室の感度に依存する。</li><li>高齢・CKD・心不全・糖尿病・高血圧、および多くの薬剤が、発症リスクと重症度の両方を高める。</li><li>2011年の米国では高K血症関連の救急受診が約 <strong>81万4000件</strong>。入院中の高K血症発生率は研究集団により 1.1〜10%。英国のデータは限られるが同様の傾向。</li><li>経済負担：2014年の米国では入院費用に約 <strong>12億ドル</strong>（9億ポンド／10億5000万ユーロ）。スペインのHFrEF 1181例の後ろ向きコホートでは、262例に438エピソードが発生し、64か月間の医療利用コストは 89,178.82ユーロ。</li></ul>
+<h3>4. 原因とリスク因子</h3>
+<p>原因は3つの大枠に整理される。</p>
+<p><strong>(1) 腎排泄の低下</strong> — カリウムの90%は腎から排泄されるため、AKIが起きれば高K血症も起きる。RAASが疾患または薬理学的に阻害されると遠位ネフロンでのK分泌能が落ちる。糖尿病・高血圧・心不全・CKDの予後を改善する薬（ACE阻害薬、ARB、ミネラルコルチコイド受容体拮抗薬、直接的レニン阻害薬）が、そのままリスク因子になるという構造的なジレンマがある。ほかにK保持性利尿薬（アミロライド、トリアムテレン）、NSAIDs、ヘパリン、トリメトプリム、カルシニューリン阻害薬、スキサメトニウム、β遮断薬。低アルドステロン症では遠位集合管でのK分泌が阻害される。</p>
+<p><strong>(2) 細胞外へのシフト</strong> — アシドーシス、インスリン欠乏（DKA）、組織崩壊（横紋筋融解、外傷・挫滅損傷、腫瘍崩壊症候群）、薬剤（ジゴキシン、スキサメトニウム）。電撃傷や戦闘関連外傷での報告もある。</p>
+<p><strong>(3) 摂取増加</strong> — 腎の排泄能があるため単独ではまれ。ただしCKD・AKIがあると医原性高K血症が起こる（経口・経静脈のK補充、輸血）。K含有の代用塩、ハーブ製品（アルファルファ、タンポポ、トウワタなど）も外因性曝露になる。</p>
+<p><strong>特に警戒すべき集団</strong>：血液透析患者（食事摂取、透析頻度と時間、血糖コントロール、便秘の影響を受ける）。多剤併用、とくにK上昇薬（ACE阻害薬、アルドステロン拮抗薬、NSAIDs、β遮断薬）の同時使用。</p>
+<p><strong>CKDでの用量反応</strong> — CKD Prognosis Consortium（2018）は100万人超を国際コホート横断で解析し、eGFR低下に伴う高K血症リスク上昇を示した。関連は非線形だが、既存の観察研究では eGFR が 15 mL/min/1.73 m² 下がるごとに K &gt;5.5 のリスクがおおよそ倍になり、eGFR &lt;15 で最大となる。CKD早期は遠位ネフロンのK分泌が代償的に増えて補うが、腎機能が落ちるとこの代償が破綻し、併存疾患・脱水・K上昇薬があると一気に顕在化する。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 高カリウム血症の原因・リスク因子・特に考慮すべき状況。角の丸い水色の大枠の中に、青い見出し帯をもつパネルが4つ配置され、中央に人体シルエットの線画が置かれている。左上「Pseudohyperkalaemia（偽性高カリウム血症）」：溶血検体、駆血1分超、機械的外傷、緩衝材なしの気送管、細径針、留置針からの採血（ストレート針との比較）、温度（熱ショックまたは冷ショック）、保存時間、血小板増多、手の握りしめ、白血球増多（慢性リンパ性白血病など）。左下「Predisposing factors（素因）」：低GFR、男性、白人・高度蛋白尿、ベースラインK高値、糖尿病、うっ血性心不全、冠動脈疾患、末梢動脈疾患、悪性腫瘍、低ヘモグロビン、高脂血症、代謝性アシドーシス（非有機酸性）、溶血、運動、アルドステロン分泌低下、アルドステロン反応性低下、電位依存性尿細管性アシドーシス、K分泌の選択的障害、痛風、尿管空腸吻合、組織崩壊（横紋筋融解など）。右上「Drugs and substances（薬剤・物質）」：K保持性利尿薬、β遮断薬、NSAIDs、RAAS阻害薬、カルシニューリン阻害薬（タクロリムスなど）、マンニトール、ヘパリン、ジゴキシン、ペニシリンG、スキサメトニウム、オクトレオチド、ジアゾキシド、ミノキシジル、揮発性麻酔薬（イソフルランなど）、トリメトプリム、ST合剤、K製剤、赤血球輸血、代用塩、果物、アルファルファ、アミノ酸、タンポポ、乾燥ヒキガエル皮、サンザシ、スギナ、スズラン、トウワタ、イラクサ、ノニジュース、シベリアニンジン。右下（オレンジの見出し帯）「Special considerations（特に考慮すべき状況）」：CKD G4-G5（eGFR &lt;30 mL/min/1.73 m²）、AKI、心不全、糖尿病、高度の組織崩壊、RAAS阻害薬、NSAIDs、K保持性利尿薬。原図・無改変。</p>
+</div>
+<h3>5. 偽性高カリウム血症の見分け方</h3>
+<p>偽性高K血症は、生理学的な異常がないのに血清K値だけが上がる状態である。本総説が挙げる原因は以下。</p>
+<div class="tw"><table>
+<thead><tr><th>機序</th><th>具体的な要因</th><th>見分け方・対処</th></tr></thead>
+<tbody>
+<tr><td>検体の保存</td><td>検査までの保存時間が長い、保存状態が悪い（最多）</td><td>検体到着時刻と測定時刻の乖離を確認。再採血</td></tr>
+<tr><td>溶血</td><td>駆血1分超、細径針、機械的外傷、緩衝材なしの気送管、留置針からの採血、温度（熱・冷ショック）</td><td>検査室から溶血コメントが出たら必ず再採血する</td></tr>
+<tr><td>血球からの遊出</td><td>血小板増多、白血球増多（慢性リンパ性白血病など）</td><td>血算と併せて解釈。血漿検体で測る</td></tr>
+<tr><td>筋収縮</td><td>採血時の手の握りしめ</td><td>駆血・握りしめをせずに再採血</td></tr>
+<tr><td>汚染</td><td>K含有輸液と同一ラインからの採血</td><td>対側または輸液のないラインから再採血</td></tr>
+</tbody></table></div>
+<p><strong>検体の種類による違い（重要）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>検体</th><th>処理</th><th>長所</th><th>短所</th></tr></thead>
+<tbody>
+<tr><td>血漿</td><td>抗凝固血を遠心して血球成分を除去</td><td>血球からのK遊出が抑えられ、循環中のK量を確実に反映</td><td>遠心・搬送で時間がかかる</td></tr>
+<tr><td>全血</td><td>遠心しない。POC分析器が主</td><td>迅速。院外・搬送中に使える</td><td>取り扱いによるばらつきに弱く、<mark class="hl">溶血を検出できない</mark></td></tr>
+</tbody></table></div>
+<ul><li>多くの患者では全血のK値は血漿よりわずかに低いが、偽性高K血症により臨床的に意味のある乖離が生じうる。</li><li>POC分析器（全血測定）は迅速推定・院外・重症患者搬送で有用だが、しばしば検査室での確認を要する。</li><li><strong>手順の原則</strong>：全血検体が異常なら血漿Kで確認する。血漿検体が異常で溶血が検出されたら新しい検体を採り直す。<mark class="hl">「異常な血漿検体を全血検体で確認する」のは頻発する臨床的誤りで、全血は溶血を示せないため確認にならない</mark>。</li><li>最も使われる検査は基本代謝パネル／包括代謝パネルで、中央検査室の処理済み血清・血漿で測る。限界は検体処理と搬送による結果待ち時間。</li></ul>
+<h3>6. 症状 — 半数以上は無症状</h3>
+<ul><li>ほとんどの患者は症状がなく、スクリーニング心電図や定期採血で見つかる。</li><li>早期の徴候になりうるのは知覚異常と筋線維束攣縮。</li><li>致死的な現れ方は麻痺、不整脈、心停止。</li><li>頻度の低い症状として悪心と倦怠感。</li><li>筋力低下は<strong>下行性ではなく上行性</strong>で、下肢から始まり体幹へ進む。ギラン・バレー症候群に似ることがある。</li><li>重症高K血症で受診した923例の後ろ向きコホートでは、<strong>46.8%</strong> に高K血症に帰せられる症状があり、<strong>20.3%</strong> が心停止、<strong>35.2%</strong> が不整脈を呈していた。</li><li>ただし症状が高K血症そのものではなく背景疾患によることもある（横紋筋融解での筋痛など）。</li></ul>
+<h3>7. 心電図 — 閾値と信頼性</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>心電図で高カリウム血症は除外できない 心電図は診断とリスク層別化に有用で迅速だが、<mark class="hl">転帰の信頼できる予測因子ではなく、検出感度が低く、血清K濃度と確実には相関しない</mark>。所見はむしろ「Kが速く上がったこと」のマーカーで、特定のK値のマーカーではない可能性がある。したがって <mark class="hl">治療開始の閾値を心電図所見だけで決めてはならず、古典的な心電図変化が出るのを待って治療を遅らせてはならない</mark>。</p>
+</div>
+<p><strong>実際にどれだけ出ないか（203例の前向き観察研究）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>K値</th><th>テント状T波</th><th>QRS幅増大</th></tr></thead>
+<tbody>
+<tr><td>5.5〜7.0 mmol/L</td><td>25%未満</td><td>13%未満</td></tr>
+<tr><td>&gt;7.0 mmol/L</td><td>35%</td><td>記載なし</td></tr>
+</tbody></table></div>
+<p><strong>出たときの重み（188例の重症高K血症の後ろ向き解析）</strong> — 6時間以内の重篤有害事象（心室細動、心肺蘇生、死亡）との関連。</p>
+<div class="tw"><table>
+<thead><tr><th>心電図所見</th><th>相対リスク</th><th>95%信頼区間</th></tr></thead>
+<tbody>
+<tr><td>QRS延長</td><td>4.7</td><td>2.0〜11.6</td></tr>
+<tr><td>徐脈</td><td>12.3</td><td>6.7〜22.6</td></tr>
+<tr><td>接合部調律</td><td>7.5</td><td>5.3〜11.1</td></tr>
+</tbody></table></div>
+<p><strong>進行の順序</strong> — 最も早い徴候の一つがテント状T波。K値が上がるとPR延長、QRS幅増大へ進む。重症高K血症（K &gt;6.5、心電図変化、またはその両方）でよく見られ重篤なのが<strong>接合部性徐脈とサインカーブ波形</strong>。この調律は原発性の心疾患と誤られることがあるが、カルシウム投与で速やかに改善するのが典型である。</p>
+<p><strong>高リスクの定義</strong> — 一般に血清K &gt;6.5 mmol/L または病的な心電図変化、あるいはその両方。ただしリスク層別化では上昇速度、併存疾患、筋力低下・麻痺・血行動態不安定などの臨床症状も考慮する。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. カリウム濃度ごとの心電図変化。淡い青の縦長パネルの中に7行が縦に並び、各行は左が血清カリウム値（mmol/L）、中央が1〜2拍分の心電図波形の線画、右が対応する心電図所見のラベルという構成。上から順に、「&lt;&lt; 3.5」＝各種の心房性・心室性不整脈（P波・QRS・T波が不規則に乱れた波形）、「&lt; 3.5」＝ST低下とU波（すなわち二相性T波。T波の後に小さな陽性の隆起が続く波形）、「3.5-5.0」＝正常心電図（この行だけ数値・波形・ラベルがすべて緑色で描かれ、正常域であることを視覚的に区別している）、「&gt; 5.5」＝テント状T波（鋭く尖った高いT波）、「&gt;&gt; 5.5」＝QRS幅増大とテント状T波（QRS群が横に広がりT波が尖る）、「&gt;&gt; 5.5」＝PR間隔延長とテント状T波（P波とQRSの間隔が開く）、「&gt;&gt;&gt; 5.5」＝サインカーブ波形（P波とQRSとT波の境界が消え、大きなうねりが連続する）。低K血症側（上2行）と高K血症側（下4行）を1枚で対比させている点、および不等号の重ね方（&gt;、&gt;&gt;、&gt;&gt;&gt;）でK値の高さの程度を表している点が特徴。原図・無改変。</p>
+</div>
+<h3>8. 治療の全体設計 — 作用発現時間で3段階に分ける</h3>
+<p>臨床的に不安定な患者、またはAKIを伴う患者では、作用発現の早さに基づく3段階アプローチが推奨される。</p>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>目的</th><th>手段</th><th>位置づけ</th></tr></thead>
+<tbody>
+<tr><td>Step 1</td><td>カルシウム依存性チャネルを介した心筋伝導の回復</td><td>静注カルシウム</td><td>血行動態不安定または高リスク（K &gt;6.5）なら速やかに。緊急でない・生命を脅かさない高K血症では不要</td></tr>
+<tr><td>Step 2</td><td>カリウムの細胞内シフト</td><td>インスリン＋ブドウ糖、β2刺激薬、（限定的に）重炭酸</td><td>カルシウム投与の次に優先</td></tr>
+<tr><td>Step 3a</td><td>薬物による体外除去</td><td>K吸着薬、ループ利尿薬</td><td>確定的治療の準備と並行</td></tr>
+<tr><td>Step 3b</td><td>腎代替療法</td><td>血液透析、CRRT、腹膜透析</td><td>最も確実。適応があれば早期に相談</td></tr>
+</tbody></table></div>
+<p>著者らは同時に、「高K血症の管理は複雑で、患者の臨床状態（心電図変化の有無、静脈路、容量状態、腎機能、酸塩基平衡）と施設の能力（緊急血液透析が可能か）に応じて個別化しなければならない」と留保する。また多数の研究があるにもかかわらず、患者集団・臨床設定・投与戦略・アウトカム評価時期の異質性のために解釈が制限されるとしている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 高カリウム血症治療のマネジメント・アルゴリズム。上端の灰青色ボックス「血清カリウム &gt;5 mmol/L」から下へ流れる。次の水色ボックス「高カリウム血症の高リスクまたは警告徴候があるか？」に4項目が列挙される（カリウム &gt;6.5 mmol/L／知覚異常・筋力低下／併存疾患：急性腎障害・心不全・慢性腎臓病／カリウム濃度の急激な変化）。ここから「No」で右へ分岐すると青いボックス「偽性高カリウム血症か？」に至り、「Yes」なら灰青色の「これ以上の対応不要」、「No」ならピンクのボックス（食事の代用塩を避けるよう指導し高カリウム血症の原因を評価／RAAS系阻害薬の変更を評価／K吸着薬（patiromer、SPS、SZC）を検討）へ進む。元のボックスから「Yes, perform ECG（はい、心電図を施行）」で下へ進むと青いボックス「心電図変化あり？」があり、「No」は左端の縦の経路を通ってStep 2へ直行、「Yes」はStep 1へ向かう。右側には破線で「心電図が利用できない、またはカリウム &gt;6.5 mmol/L」→「投与を考慮するのが妥当」の分岐が添えられ、これもStep 1へ合流する。オレンジ見出しの「Step 1」ボックス：グルコン酸カルシウム 2〜3 g 静注／心停止時は塩化カルシウム 1 g 静注／5分後に心電図を再検し必要に応じてカルシウムを追加投与。矢印で下の「Step 2」ボックス：速効型インスリン 5〜10単位を静注ボーラス＋ブドウ糖 25〜50 g（10%液を推奨）の静注ボーラスまたは持続投与、±サルブタモール 10〜20 mg ネブライザーまたは吸入。Step 2の右横には赤い見出しの「Additional considerations（追加の考慮事項）」ボックスがあり、「容量過負荷のないアシドーシスがある場合：炭酸水素ナトリウム 50 mmol 静注ボーラス、または 50〜150 mmol を数時間かけて点滴（アシドーシスの原因を是正する）」「容量過負荷（急性心不全など）があり、循環血液量減少も末期腎不全もない場合：フロセミド 20〜40 mg 静注または経口、あるいはブメタニド 0.5〜1 mg 静注または経口、あるいはトラセミド 10〜20 mg 経口を検討」と記される。Step 2から下へ「Step 3a」ボックス：K吸着薬を検討 — SZC 10 g 経口または patiromer 8.4 mg、代替として SPS 15 g 経口または 30 g 注腸。そこから青いボックス「急性腎障害、慢性腎臓病、または再検カリウム &gt;6 mmol/L」へ矢印が伸び、「Yes」なら「Step 3b：緊急の腎代替療法を検討」、「No」なら右側の長い矢印で先ほどのピンクの外来指導ボックスへ戻る。原図・無改変。なお図中の patiromer 8.4 mg は原図の記載どおりで、Table 2 では 8.4〜25.2 g と単位が異なる（原著内の不整合）。</p>
+</div>
+<h4>Table 2. 高カリウム血症治療薬の一覧（初回量・薬物動態・期待されるK低下量）</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>初回量</th><th>薬物動態</th><th>期待されるK低下量</th><th>注意点</th></tr></thead>
+<tbody>
+<tr><td><strong>Step 1: 伝導の回復</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>グルコン酸カルシウム 10%</td><td>1〜2 g（10〜20 mL）を2〜5分で静注、または 3 g（30 mL）を10分で静注</td><td>発現3分／持続30〜60分</td><td>なし</td><td>心電図異常が正常化しなければ5〜10分後に反復</td></tr>
+<tr><td>塩化カルシウム 10%</td><td>1 g（10 mL）を2〜5分で静注</td><td>発現3分／持続30〜60分</td><td>なし</td><td>中心静脈路が望ましい。心停止時はグルコン酸より優先</td></tr>
+<tr><td><strong>Step 2: 細胞内シフト</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>速効型インスリン（＋ブドウ糖）</td><td>インスリン 5〜10単位または 0.1単位/kg（最大10単位）を静注ボーラス。ブドウ糖 25〜50 g（10%液を推奨）を静注ボーラスまたは持続投与</td><td>発現&lt;15分／持続はインスリン2時間、ブドウ糖1時間</td><td>0.6〜1.4 mmol/L</td><td>血糖を30〜60分ごとに最低4時間モニター。必要に応じてブドウ糖を追加。CKD・AKI・インスリン未使用・体重50 kg未満・初回血糖 &lt;7 mmol/L（&lt;126 mg/dL）なら5単位を推奨。ブドウ糖は25 gから開始し必要なら反復。低血糖高リスク（ESKD、AKI）または初回血糖 &lt;7 mmol/L ならブドウ糖持続投与を検討。初回血糖 &gt;11.1 mmol/L（&gt;200 mg/dL）ならブドウ糖は不要な場合がある</td></tr>
+<tr><td>サルブタモール（アルブテロール）</td><td>10〜20 mg ネブライザー、または定量噴霧器4〜6吸入</td><td>発現&lt;30分／持続2時間</td><td>0.65〜1 mmol/L</td><td>末期腎不全では効果が落ちうる</td></tr>
+<tr><td>炭酸水素ナトリウム</td><td>50 mmol 静注ボーラス、または 50〜150 mmol を数時間かけて点滴</td><td>変動する</td><td>無視できる程度</td><td>一般に推奨されない。代謝性アシドーシスのある一部の患者で考慮</td></tr>
+<tr><td><strong>Step 3a: 排泄の促進</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>ループ利尿薬（フロセミド、ブメタニド）</td><td>フロセミド 20〜80 mg 静注、ブメタニド 0.5〜2 mg 静注</td><td>発現30〜60分／持続2〜3時間</td><td>0.3 mmol/L</td><td>腎機能低下例やループ利尿薬既使用例では高用量側が必要になりうる</td></tr>
+<tr><td>ポリスチレンスルホン酸ナトリウム（SPS）</td><td>15 g 経口、30 g 注腸</td><td>発現1時間／持続4〜12時間</td><td>変動が大きくおおむね無視できる</td><td>一般的な使用は推奨されない。経口は1日4回まで反復可、注腸はもう1回だけ反復可。他の経口薬とは2〜3時間空ける</td></tr>
+<tr><td>パチロマー（patiromer）</td><td>8.4〜25.2 g 経口</td><td>発現2〜7時間</td><td>0.4〜0.6 mmol/L</td><td>他の経口薬とは2〜3時間空ける</td></tr>
+<tr><td>ジルコニウムシクロケイ酸ナトリウム（SZC）</td><td>10 g 経口</td><td>発現1時間／持続4〜12時間</td><td>0.1〜0.7 mmol/L</td><td>1日合計30 gまで反復可。他の経口薬とは2〜3時間空ける</td></tr>
+</tbody></table></div>
+<h3>9. Step 1 — カルシウム（塩化 vs グルコン酸）</h3>
+<p><strong>機序が書き換わった</strong> — 従来はカルシウムが静止膜電位を回復させる「膜安定化」で効くと考えられていた。しかし最近の犬心筋細胞研究は、カルシウムがカルシウム依存性の興奮伝播を介して<strong>伝導を回復させる</strong>ことを見出した。この所見には重要な含意がある。すなわち、<mark class="hl">QRS幅増大のような伝導遅延の徴候がある患者では有益であるが、T波異常のみの患者では有益とは限らない</mark>、という説明が立つ。</p>
+<p><strong>適応</strong> — コンセンサスとガイドラインは、高K血症かつ心電図異常のある患者にカルシウムを投与すべきとしている。心電図異常がなく軽症（K &lt;6 mmol/L）なら見送ってよい。K &gt;6 mmol/L で心電図異常がない場合については<strong>コンセンサスがない</strong>。KDIGO の救急部門向け勧告要約は、心電図がすぐ取れない状況では K &gt;6.5 の全患者にカルシウムを投与するよう推奨する。実務上はふつう心電図の前にK値が分かることは稀だが、その状況ならカルシウム投与は妥当である。</p>
+<p><strong>2つの塩の違い</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>塩化カルシウム 10%</th><th>グルコン酸カルシウム 10%</th></tr></thead>
+<tbody>
+<tr><td>元素カルシウム量（1 gあたり）</td><td>6.8 mmol/10 mL（273 mg）</td><td>2.3 mmol/10 mL（93 mg）</td></tr>
+<tr><td>相対量</td><td>グルコン酸の3倍</td><td>基準</td></tr>
+<tr><td>投与経路</td><td>浸透圧が高く刺激性が強い。血管外漏出で組織壊死。原則として中心静脈路または心停止時</td><td>末梢からの投与では組織傷害リスクが低く一般に優先される</td></tr>
+<tr><td>効果</td><td>両者は同等の有効性を示している</td><td>同左</td></tr>
+</tbody></table></div>
+<ul><li>用量を導く質の高いデータは乏しい。UK Kidney Association はグルコン酸カルシウム 3 g を推奨し、他の団体は 1〜2 g とするか用量を特定していない。</li><li>この推奨の根拠は、心電図変化を伴う高K血症にグルコン酸カルシウムを投与された111例の前向き観察研究で、<strong>97%が1 g×3回を必要とし、1 g 1回のみで有効だった患者は一人もいなかった</strong>という結果に由来する。</li><li>末梢からの10%塩化カルシウム投与72件の後ろ向き研究では、<strong>6%</strong> に注入反応が生じたが永久的な組織傷害はなく、安全性プロファイルは許容範囲だった。より質の高いデータが出るまでは中心静脈路が原則だが、切迫した状況では太い末梢路からの投与を考慮するのは妥当である。</li><li>どちらの製剤でも見られる有害事象は低血圧、末梢血管拡張、徐脈、不整脈で、<strong>用量依存性かつ投与速度依存性</strong>と考えられる。</li><li>グルコン酸カルシウムは効果を発揮する前に肝での活性化が必要という説はすでに否定されている。</li><li>前向き多施設観察研究（203例）では <strong>55%</strong> が静注カルシウムを受けていた。</li><li>ジギタリス中毒では高K血症が多く、カルシウムが心室性不整脈を誘発するという懸念があったが、ジギタリス中毒161例の後ろ向きコホートでは、カルシウム投与は不整脈とも死亡率上昇とも関連しなかった。</li><li><mark class="hl">カルシウムは血清K濃度をまったく下げない</mark>。投与後は直ちに細胞内シフトへ移る。</li></ul>
+<h3>10. Step 2 — 細胞内シフト</h3>
+<h4>10-1. インスリン</h4>
+<ul><li>機序は Na⁺/K⁺-ATPase の活性化。数分以内に細胞内シフトを起こし、血清Kを <strong>約0.6〜1.4 mmol/L</strong> 下げ、数時間持続する。ただしリバウンド高K血症が起こりうる。</li><li>歴史的には速効型インスリン 10〜20単位を静注し、低血糖予防にブドウ糖を併用してきた。</li><li>後ろ向きコホート研究からの新しいエビデンスは、<strong>5〜10単位</strong>でもK濃度への効果は十分で低血糖が少ないことを示唆する。とくに腎疾患のある患者で。</li><li>10単位に対する5単位または体重換算（0.1単位/kg）の比較：後ろ向きコホート10件のメタ解析（n=3437）で、低用量は低血糖のオッズを下げ（<strong>オッズ比 0.55、95%CI 0.43〜0.69</strong>）、血清K低下に差はなかった（<strong>平均差 -0.02 mmol/L、95%CI -0.11〜0.07</strong>）。</li><li>ただし最近の2つの後ろ向きコホートはK低下効果について<strong>相反する結果</strong>を報告しており、至適投与戦略を決めるには前向き研究が必要と著者らは留保する。</li><li>超速効型（リスプロ）の検討：237例の後ろ向き試験でK値への効果は大きかったが<strong>低血糖リスクは高かった</strong>。静注では製剤間の差は小さいと予想される（製剤の違いは主に皮下吸収プロファイルに基づくため）。</li><li>低血糖こそが能動的に対策すべき主要有害事象である。62研究を含むスコーピングレビューでは、高K血症に対してインスリンを受けた入院患者の <strong>17.2%</strong> に低血糖が発生した。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>インスリンによる低血糖のリスク因子（この6つが揃う患者がICUには多い） CKD／AKI／糖尿病の既往がない／治療前血糖が低い／体重が軽い／インスリン用量 ≥10単位またはブドウ糖用量 ≤25 g。<mark class="hl">ICUの腎不全患者は「糖尿病でない・腎不全・低体重」がしばしば同時に成立するため、既定を10単位のままにしておくと低血糖を作りにいくことになる</mark>。</p>
+</div>
+<h4>10-2. ブドウ糖</h4>
+<ul><li>インスリンと併用して低血糖を防ぐ。ボーラスまたは持続投与で、実際には5%・10%・20%・50%と様々な濃度が使われる。</li><li><strong>低濃度（5%）は輸液過剰</strong>を招きうる。<strong>高張製剤（50%）は浸透圧効果でKを細胞内から細胞外へ移動させ高K血症を悪化させうる</strong>ほか、血管外漏出による傷害を起こしうる。本総説の推奨は10%。</li><li>血糖の厳密なモニタリングが必要な理由は、<mark class="hl">ブドウ糖の効果（約1時間）がインスリンの効果（約2時間）より短いから</mark>である。</li><li>治療前血糖 &lt;7 mmol/L（&lt;126 mg/dL）は医原性低血糖の高リスクを示唆する。</li><li>ブドウ糖投与の遅れを防ぐため、高K血症オーダーセットに<strong>頓用（PRN）のブドウ糖指示を組み込む</strong>ことができる。</li><li><strong>ブドウ糖単独</strong>で内因性インスリン分泌を促す方法（とくに非糖尿病患者）も検討されている。小規模ランダム化クロスオーバー試験（10例）では、ブドウ糖単独で <strong>0.50±0.31 mmol/L</strong> の緩やかなK低下が得られたが、インスリン＋ブドウ糖の <strong>0.83±0.53 mmol/L</strong> より数値上は小さかった。後ろ向き研究のエビデンスからは役割は限定的で、ブドウ糖投与後の内因性インスリン分泌は個人差が大きく、腎機能障害・ストレス・不顕性糖尿病では鈍る。</li></ul>
+<h4>10-3. β2刺激薬</h4>
+<ul><li>サルブタモール（アルブテロール）も Na⁺/K⁺-ATPase の活性化を介して細胞内シフトを起こし、インスリン＋ブドウ糖への追加または代替として提案されている。</li><li>静注・ネブライザー・定量噴霧器のいずれも<strong>同等に有効</strong>とされるが、ネブライザーまたは吸入が推奨される。</li><li><strong>用量依存性</strong>があり、20 mg は 10 mg より大きなK低下をもたらす。</li><li><strong>相加効果</strong>：血液透析患者12例のクロスオーバー研究で、インスリン＋ブドウ糖 0.65 mmol/L、サルブタモール 0.66 mmol/L、両者併用 1.21 mmol/L の低下。両者を比較するRCTが進行中で2026年に完了予定。</li><li>有害事象は頻脈、振戦、頭痛（β受容体刺激による）。</li><li>末期腎不全患者、非選択性β遮断薬を服用中の患者では効果が落ちうる。</li></ul>
+<h4>10-4. 炭酸水素ナトリウム（重炭酸）の位置づけ</h4>
+<ul><li>機序としては、ナトリウム負荷の増加とアルカリ化によって Na⁺/K⁺-ATPase 活性と H⁺/K⁺ 交換が高まり細胞内シフトが起きるとされるが、<strong>効果は緩やかで一貫しない</strong>。</li><li>有害事象は高Na血症、アルカローシス、輸液過剰。</li><li><mark class="hl">重炭酸とカルシウムを静脈内で同時投与してはならない。炭酸カルシウムが析出して静脈路を閉塞し、薬剤の到達を妨げる</mark>。2本目のラインを確保するか、投与間にラインを十分フラッシュする。</li><li>救急部門の観察研究（203例）では、初期4時間以内に <strong>29%</strong> で重炭酸が使われていた。</li><li>健常ボランティア14例の研究では、代謝性アシドーシスのない患者では血清Kを下げる効果がなかった。</li><li>代謝性アシドーシスのある患者でも利益は疑問視される。K低下は血清pHの変化とは独立しているように見えるため。</li><li>代謝性アシドーシスに対する重炭酸を評価した2件の前向きRCTがあるが、その多くの患者は高K血症を有していなかった。したがってこれらの研究から示唆される利益は、代謝性アシドーシスの原因治療によるものであって高K血症の是正によるものではないと考えられる。</li><li>結論として、<strong>代謝性アシドーシスの有無にかかわらず、高K血症の緊急治療として重炭酸を支持するエビデンスは不足している</strong>。</li></ul>
+<h3>11. Step 3a — 体外への除去（薬物）</h3>
+<h4>11-1. ループ利尿薬</h4>
+<ul><li>機序はヘンレ係蹄の管腔側 Na-K-2Cl 共輸送体の阻害。</li><li>慢性期の管理・予防には有効だが、緊急治療での使用は少なく、実臨床の観察研究では <strong>5%</strong> にしか使われていなかった。</li><li>急性高K血症での役割を支持するエビデンスは限られ、効果は腎機能の温存と容量状態に依存する。<mark class="hl">循環血液量減少または正常血液量の患者では有害となりうる</mark>。</li><li>したがって<strong>容量過負荷（急性非代償性心不全など）があり腎機能が保たれている患者に限定</strong>すべきである。</li></ul>
+<h4>11-2. 陽イオン交換樹脂（SPS・CPS）</h4>
+<ul><li>ポリスチレンスルホン酸ナトリウム／カルシウムは、消化管内でナトリウムまたはカルシウムをカリウムと交換し、糞便中へのK排泄を高めることで数十年使われてきた。</li><li>しかし<strong>急性高K血症での使用を支持するエビデンスは乏しい</strong>。</li><li>2005年のCochraneシステマティックレビューは、24時間時点でのK低下を示した<strong>1960年代の非ランダム化研究2件しか引用できていない</strong>。</li><li>2015年のCochraneシステマティックレビュー（7研究・241例）は、これらを評価したRCTが存在しないため、SPS・CPSについて論評できなかった。</li><li>有害事象は低K血症、低Mg血症、消化器症状、そしてまれだが致死的となりうる<strong>結腸壊死</strong>。</li><li>経口薬の吸収阻害による薬物相互作用の可能性もある。</li></ul>
+<h4>11-3. 新規K吸着薬 — patiromer と SZC</h4>
+<p><strong>patiromer</strong></p>
+<ul><li>経口薬で、高K血症の<strong>慢性期治療</strong>に承認されている。</li><li>入院患者の後ろ向き単群コホート（n=881）で6時間時点のK低下 <strong>0.50±0.56 mmol/L</strong>。</li><li>救急部門30例のオープンラベル・パイロットRCTでは、patiromer 25.2 g ＋標準治療が標準治療単独と比べ<strong>2時間以内</strong>にKを下げたが、6時間時点では差がなかった。</li><li>より大規模な試験が開始されたが144例の登録で早期中止となり、結果は抄録の形でしか公表されていない。</li></ul>
+<p><strong>SZC（ジルコニウムシクロケイ酸ナトリウム）</strong></p>
+<ul><li>吸収されない無機の陽イオン交換体で、ナトリウムと水素イオンと引き換えにカリウムとアンモニウムを結合する。<strong>SPSの最大9倍のカリウム結合能</strong>をもつ。</li><li>有害事象は消化器症状と浮腫。</li><li>500例のケースコントロール研究では、SZC使用は歴史的対照と比べ緊急血液透析の必要性の減少と関連した（<strong>オッズ比 0.23、95%CI 0.17〜0.31</strong>）。</li><li>しかし70例のパイロットRCT（インスリン＋ブドウ糖に加えてSZCまたはプラセボ）では、4時間時点のK低下に差がなかった。ただしSZCは<strong>2時間時点のK低下が大きく、4時間時点で追加治療を要する頻度が少なかった</strong>。</li><li>SPS・SZC・patiromer・プラセボを比較する前向き研究は、中間解析で群間差なしとして早期中止された。</li></ul>
+<h4>Table 3. 緊急高カリウム血症に対するSZCの研究一覧</h4>
+<div class="tw"><table>
+<thead><tr><th>筆頭著者・年</th><th>デザイン</th><th>SZC介入</th><th>対照</th><th>結果</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>Peacock, 2025</td><td>ランダム化実験研究、n=70</td><td>10 g を最大3回</td><td>プラセボ</td><td>4時間時点のK低下の絶対差 -0.13 mmol/L（95%CI -0.44〜0.17）</td><td>2時間時点では有意なK低下：絶対差 -0.35（95%CI -0.68〜-0.02）</td></tr>
+<tr><td>Grewal, 2025</td><td>後ろ向きコホート、n=101</td><td>5〜10 g</td><td>SPS 15〜30 g</td><td>主要評価項目のK正常化までの中央値に差なし：SZC 14時間 vs SPS 17時間（P=0.26）</td><td>SZC群で2時間・8時間時点の有意なK低下、4時間時点の正常K血症はSZCがSPSより多い</td></tr>
+<tr><td>Thai, 2025</td><td>後ろ向きコホート、n=46</td><td>10〜20 g（中央値）</td><td>SPS 30〜45 g（中央値）</td><td>K正常化までの中央値に差なし：SZC 26.7時間 vs SPS 16.8時間（P=0.24)</td><td>—</td></tr>
+<tr><td>Joyce, 2024</td><td>後ろ向きコホート、n=246</td><td>5〜15 g</td><td>SPS 15〜30 g</td><td>24時間時点の平均K低下に差なし：SZC -0.78±0.81、SPS -0.91±0.76（P=0.22）</td><td>—</td></tr>
+<tr><td>Yoo, 2023</td><td>後ろ向きコホート、n=260</td><td>10 g</td><td>SPS 7.5〜45 g</td><td>有意でない平均K低下：SZC -0.88±0.64、SPS -0.75±0.65（P=0.09）</td><td>K再評価は投与後平均およそ15±8時間</td></tr>
+<tr><td>Hasara, 2023</td><td>後ろ向きコホート、n=105</td><td>10〜20 g</td><td>SPS 15〜60 g</td><td>再検K値の平均変化に群間差なし：SZC -1.1±0.87、SPS -1.1±0.62</td><td>K再検までの中央値：SZC 550分、SPS 362分</td></tr>
+<tr><td>Gasparovic, 2025</td><td>後ろ向きコホート、n=189</td><td>用量の記載なし。高K血症オーダーセット治療の一部</td><td>高K血症オーダーセット治療を受けた対照群</td><td>6時間時点の有意でないK低下：SZC -1.096±0.71、非SZC -1.067±0.6（P=0.798）</td><td>—</td></tr>
+<tr><td>Sullivan, 2023</td><td>後ろ向きコホート、n=3903</td><td>10 g（中央値）</td><td>SPS 30 g（中央値）</td><td>4〜24時間時点の平均K低下はSPS群で有意に大きい：SZC 0.78、SPS 0.96（P&lt;0.001）</td><td>24時間時点の高K血症解消率もSPS群が高い（74.9% vs SZC 68.8%、P&lt;0.001）</td></tr>
+<tr><td>Bower, 2025</td><td>後ろ向きコホート、n=75</td><td>単回投与、用量の記載なし</td><td>SPS・patiromer とも単回投与、用量の記載なし</td><td>24時間時点でSZCとSPSはpatiromerより平均低下が大きい：SZC -0.92±0.85、SPS -1.16±0.74、patiromer -0.76±0.63（SZCとSPSでP&lt;0.001）</td><td>—</td></tr>
+</tbody></table></div>
+<p>これらの研究の限界として著者らは、後ろ向きデザイン、用量の不均一、高K血症に対する併用薬物療法、患者集団の差を挙げ、「SZCの仮説上の利益が実臨床で見られるかどうかはまだ扱われるべき問いである」と結論している。</p>
+<h3>12. Step 3b — 血液透析・腹膜透析</h3>
+<ul><li>血液透析は<strong>カリウム除去の最も有効な手段</strong>である。</li><li>ガイドラインは、内科的治療に不応の高K血症、慢性血液透析を要する末期腎不全、重症AKIで開始すべきとしている。</li><li>効果の実数：<strong>最初の1時間で約1 mmol/L、3時間までに最大2 mmol/L</strong> のK低下。ただし <mark class="hl">1〜6時間後にリバウンド高K血症が起こりうるため継続的なモニタリングが必要</mark>。</li><li>限界は開始までの時間と段取り（とくに透析未導入の患者、資源が限られる状況）、および有害事象（低血圧、こむら返り、頭痛、悪心、嘔吐）。</li><li>血行動態が不安定な患者では、効率は劣るが持続的腎代替療法（CRRT）を要することがある。</li><li>血液透析が利用できない・実行不能な場合の代替が緊急腹膜透析。透析未導入の末期腎不全＋高K血症82例の前向きコホートでは、腹膜透析群は1日目のK低下が血液透析群と同等で、5〜15日目までの安定化も同等だった。</li><li>腎代替療法の開始を待つ間、とくに不整脈または血行動態不安定がある患者では、静注カルシウム・インスリン＋ブドウ糖・サルブタモールといった一時しのぎの治療が必要になることが多い。</li></ul>
+<p><strong>難治性高カリウム血症</strong> — 標準治療に不応の高K血症は生命を脅かし、確定的治療として緊急血液透析またはCRRTを要する。ガイドラインは、進行CKD、乏尿性AKI（<strong>24時間尿量 &lt;400 mL</strong> など）、内科的治療抵抗性の高K血症、または高K血症により心停止に至った患者では、血液透析を早期に考慮するよう示唆している。</p>
+<h3>13. 特殊な状況</h3>
+<h4>13-1. 薬剤性高カリウム血症</h4>
+<p>薬剤は、細胞外シフトの促進、腎からのK排泄の障害、外因性K摂取（通常はAKIの状況で）を介してK恒常性を乱す。<mark class="hl">RAAS阻害によるK排泄低下が、薬剤性高K血症の最も一般的かつ重要な機序である</mark>。降圧薬服用患者194,456例の大規模観察研究では、3年間で <strong>10.8%</strong> に高K血症（K &gt;5 と定義）が発生し、ACE阻害薬服用者に最も多かった。</p>
+<p>KDIGOガイドラインは、CKD患者では<strong>内科治療にもかかわらず制御できない高K血症を来した場合を除き、RAAS阻害薬を中止しないよう示唆している</strong>。初期対応としては、食事性K制限、併用中のK補充の中止、K喪失性利尿薬の追加、経口K吸着薬の追加を段階的に行い、RAAS阻害薬の継続使用を可能にすることを優先する。</p>
+<h4>Table 4. 薬剤性高カリウム血症の機序と対処</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤クラス</th><th>高K血症の機序</th><th>高リスク集団</th><th>データ</th><th>対処戦略</th></tr></thead>
+<tbody>
+<tr><td>RAAS阻害薬（ACE阻害薬、ARB）</td><td>アルドステロン低下→腎でのK⁺分泌低下</td><td>CKD、高齢、糖尿病、心不全、K⁺上昇薬の併用</td><td>ACE阻害薬はARBより中等症高K血症のオッズが高い（オッズ比 1.26、95%CI 1.02〜1.56）</td><td>ルーチンには中止しない（KDIGO）。CKDでは制御不能な高K血症でない限り継続。食事性K⁺制限、K⁺補充の中止、ループまたはサイアザイド利尿薬あるいは経口K⁺吸着薬の追加</td></tr>
+<tr><td>NSAIDs</td><td>プロスタグランジン阻害→レニンとアルドステロンの低下</td><td>高齢者、CKD、糖尿病、心血管疾患</td><td>高リスク高齢者の 16.7% が高K血症または急性腎疾患あるいは両方を発症</td><td>NSAIDsを中止。持続するなら利尿薬または吸着薬でK⁺排泄を促進</td></tr>
+<tr><td>カルシニューリン阻害薬（タクロリムス、シクロスポリン）</td><td>完全には解明されていない。アルドステロン活性の低下、Na⁺送達の減少、Na⁺/Cl⁻共輸送体の活性化</td><td>AKI、CKD</td><td>リスクにより発生率は 10〜73% と幅がある。タクロリムスでより高い</td><td>可能なら減量。低K⁺食、サイアザイド利尿薬（クロルタリドンなど）、patiromer または SZC。低用量フルドロコルチゾンを考慮</td></tr>
+<tr><td>K保持性利尿薬（スピロノラクトン、エプレレノン、アミロライド、トリアムテレン）</td><td>アルドステロン拮抗（スピロノラクトン、エプレレノン）または上皮性Naチャネル遮断（アミロライド、トリアムテレン）</td><td>高齢、心不全、CKD、ACE阻害薬・ARB併用</td><td>高K血症のオッズを上昇（2.1、95%CI 1.3〜3.3）。RALES試験後に高K血症関連入院が増加</td><td>薬剤レビュー、減量または一時中止。長期的にはK⁺吸着薬と食事指導</td></tr>
+<tr><td>トリメトプリム</td><td>上皮性Naチャネル遮断（アミロライド様作用）</td><td>CKD、高用量治療</td><td>K⁺ &gt;5.5 mmol/L がおよそ 10%。発症は通常1週間以内</td><td>中止。容量補正。継続が必要ならループ利尿薬±静脈輸液</td></tr>
+<tr><td>スキサメトニウム</td><td>脱分極性筋弛緩薬 — 大量のK⁺流出</td><td>熱傷、外傷、除神経、不動、敗血症</td><td>外傷・熱傷後5〜15日に重症高K血症。リスクは数か月持続</td><td>高リスク患者では回避。心停止を来したら静注カルシウム、インスリン、β刺激薬。高用量インスリンの症例報告あり</td></tr>
+<tr><td>β遮断薬（とくに非選択性）</td><td>Na⁺/K⁺-ATPase を介した細胞へのK⁺取り込み低下、レニン放出の低下</td><td>糖尿病、CKD、RAAS阻害薬使用、心臓バイパス</td><td>非選択性はβ1選択性よりK⁺を上げる。観察データは相反する</td><td>中止は慎重に判断。食事性K⁺制限、K⁺吸着薬、必要なら減量</td></tr>
+<tr><td>ジゴキシン</td><td>Na⁺/K⁺-ATPase 阻害→K⁺流出</td><td>CKD、AKI、甲状腺機能低下症、薬物相互作用</td><td>高K血症は重症中毒のサイン</td><td>ジゴキシンを中止。重症中毒にはジゴキシンFab。静注カルシウム、インスリン＋ブドウ糖。腎不全があれば血液透析</td></tr>
+</tbody></table></div>
+<h4>13-2. CKD・末期腎不全（血液透析中）の患者</h4>
+<ul><li>進行CKDでは遠位ネフロンの慢性適応により<strong>高めのベースラインK値が許容される</strong>。したがって2024年のKDIGOガイドラインは絶対値よりも臨床的文脈を重視する。</li><li>中等症高K血症（K &gt;6.0〜6.4）は、臨床的に不安定な患者やAKIを伴う患者では入院管理とすべき。重症高K血症（K ≥6.5）は医学的緊急事態で、直ちにK値の確認と心電図モニタリングを要する。</li><li>末期腎不全で血液透析中の患者では、K恒常性維持の主柱は透析そのもの。ただし透析間の慢性高K血症の管理は新規経口K吸着薬（SZC、patiromer）で補強できる。これらは末期腎不全患者でもRAAS阻害薬の継続使用を可能にする点で重要である。</li></ul>
+<h4>13-3. 心停止</h4>
+<ul><li>高K血症が疑われる心停止では、2025年のERCおよびAHAの心肺蘇生ガイドラインに沿い、迅速な安定化と細胞内シフトを優先する。</li><li>両ガイドラインは、心停止でない患者からの間接的エビデンスに基づき、高K血症が疑われる心停止に静注インスリン＋ブドウ糖がK低下効果をもたらすと示唆している。ただし蘇生中および蘇生後の低血糖モニタリングを怠ってはならない。</li><li>標準的な全身アドレナリンを超えるβ刺激薬は、心停止では追加の利益をもたらさない。</li><li>炭酸水素ナトリウムは、<strong>既存の代謝性アシドーシスに起因する高K血症関連の心停止が疑われる場合にのみ</strong>適応となる。</li><li>未分類の院外心停止391例のRCTでは、<mark class="hl">カルシウムに利益はなく、むしろ有害の方向のシグナルが示されたため推奨されない</mark>。ただしこの試験では<strong>高K血症が疑われる症例は除外基準</strong>だった。高K血症を示唆する心電図変化のある患者に絞ったサブグループ解析でも同様の結果だった。</li><li>高K血症が疑われる心停止患者への経験的カルシウム投与の有益性を評価する質の高い臨床試験が必要である。</li></ul>
+<h4>13-4. 妊娠</h4>
+<ul><li>重症高K血症または心電図変化がある場合は緊急対応の適応。</li><li>CKDを合併した妊婦は電解質異常を来しやすく、母体・胎児の有害転帰のリスクも高い。</li><li>妊娠高血圧腎症（子癇前症）などの妊娠高血圧症候群は高K血症のリスクを高めうる。</li><li>急性期の管理は非妊娠患者と同様で、細胞外シフトへの対処とK排泄に焦点を当てた多面的アプローチをとりつつ可逆的原因を探す。</li></ul>
+<h4>13-5. 小児</h4>
+<ul><li>小児の高K血症は血清K &gt;5.5 mmol/L と定義される。</li><li>リスク因子は成人と類似するが、<strong>薬剤関連である可能性は低い</strong>。</li><li>CKDの小児も成人と同様にK異常を来しうるが、遺伝性または後天性の尿細管障害により<strong>持続性の低K血症</strong>を呈することもある。</li><li>頑健な臨床試験データが乏しいため、急性期の管理は成人プロトコルを転用しつつ薬用量を体重換算とすることが多い。</li></ul>
+<h3>14. 新しい治療の方向性</h3>
+<ul><li>開発パイプラインは限られている。消化管内でカリウムを選択的に結合し有害事象が少ないことを狙って、シクロホスファミド類似体とポリマー技術が初期段階の研究にある。</li><li>新しい戦略の主眼は、高K血症を招きやすい薬（RAAS阻害薬、K保持性利尿薬）を<strong>継続しながら</strong>カリウムを制御することに移っている。</li><li><strong>RAAS阻害薬の種類でKへの影響が違う</strong>：二重盲検RCT PARADIGM-HF（NYHA II〜IV度のHFrEF 8442例）で、重症高K血症の発生率はサクビトリル・バルサルタンがエナラプリルより低かった（<strong>4.3% vs 5.6%、P=0.007</strong>）。HFpEF 4822例のPARAGON-HFでも、サクビトリル・バルサルタン vs バルサルタン単独で同様の結果。</li><li><strong>SGLT2阻害薬</strong>：心血管高リスクまたはCKDを有する2型糖尿病 49,876例を含む、ランダム化二重盲検プラセボ対照試験の個別患者データメタ解析で、重篤な高K血症（K ≥6.0 と定義）のリスクが低下した（<strong>ハザード比 0.84、95%CI 0.76〜0.93</strong>）。糖尿病患者ではSGLT2阻害薬が重篤な高K血症のリスクを下げうる。</li><li>複雑または反復性の高K血症には併用レジメンがさらなる可能性を提供し、安全性を損なわずに最適な疾患修飾治療を維持する、個別化・ガイドライン準拠の戦略への広い転換を反映している。</li></ul>
+<h3>15. ガイドライン比較（Table 5 の要点）</h3>
+<h4>KDIGO 2024 CKD診療ガイドライン（CKD患者）— すべて practice point</h4>
+<ul><li>症候性低血圧、または内科治療にもかかわらず制御できない高K血症のいずれかがあれば、RAAS阻害薬の減量または中止を考慮する。</li><li>カリウムの検査値は、日内・季節変動、血漿と血清の違い、薬剤の影響など様々な要因でばらつく。</li><li>緊急でない高K血症の薬物管理は、各施設で利用可能な薬剤と採用薬の制限に基づいて決める。</li></ul>
+<h4>KDIGO 救急部門会議サマリー（急性高K血症の管理）— すべて consensus suggestions</h4>
+<ul><li>高K血症誘発性の心電図変化の有無を評価するため心電図を推奨する。</li><li>カリウム濃度の迅速な測定を行う。可能ならPOC検査で行い、続いて中央検査室で確認する。</li><li>カリウム濃度 &gt;6.0 mmol/L では心電図モニタリングと12誘導心電図。</li><li><strong>細胞膜の安定化</strong>：心電図変化を伴う高K血症では直ちに静注カルシウム塩を投与。カリウム濃度は分かっているが心電図やモニター装着が直ちにできない場合、K濃度 &gt;6.5 mmol/L の全患者にカルシウムを投与することを示唆する。</li><li><strong>細胞内シフト</strong>：短時間作用型の静注インスリン（5〜10単位）＋ブドウ糖（25〜50 g）。β刺激薬をインスリン＋ブドウ糖への追加または代替として示唆。静注炭酸水素ナトリウムは代謝性アシデミアがありナトリウム負荷に耐えられる患者にのみ使用。</li><li><strong>除去</strong>：無尿または高度の容量減少がなければループ利尿薬を考慮。SPS（15〜60 g 経口）またはSZC（10 g を1日3回 経口）などのK吸着薬を考慮。治療抵抗性またはAKIを伴う高K血症は、血液透析の検討のため腎臓内科へ紹介する。</li><li><strong>再評価</strong>：K移行薬の投与後60分に再評価し、リバウンド高K血症を評価するため2〜3時間後の再評価も考慮する。</li></ul>
+<h4>UK Kidney Association 2023（成人の急性高K血症）</h4>
+<ul><li>血清K ≥6.0 mmol/L で入院する全患者に緊急12誘導心電図（1C）。</li><li>緊急時には、検査室測定を待つ間、動脈または静脈血を用いてPOC血液ガス分析器でK値を測定する（1B）。</li><li>院内の高K血症治療は<strong>5段階アプローチ</strong>に従う（1B）。</li><li><strong>Step 1</strong>：心電図変化がある高K血症患者に静注カルシウム。10%グルコン酸カルシウム 30 mL を10分かけて、または10%塩化カルシウム 10 mL を5分かけて（1C）。</li><li><strong>Step 2</strong>：インスリン＋ブドウ糖（インスリン10単位をブドウ糖25 gに）の静脈内投与で重症高K血症（K ≥6.5）を治療（1B）。サルブタモール吸入 10〜20 mg を重症高K血症の補助治療として使用（1B）。静注重炭酸は急性期治療にルーチンには使用しない（2C）。</li><li><strong>Step 3</strong>：SZCを重症高K血症（K ≥6.5）の緊急管理に推奨（1B）、中等症高K血症（K 6.0〜6.4）の急性期管理に示唆（1B）。</li><li><strong>Step 4</strong>：中等症または重症高K血症の同定・治療後、<mark class="hl">少なくとも1・2・4・6・24時間に血清K評価を推奨</mark>（2C）。</li><li><strong>Step 5</strong>：再発予防 — 具体的な推奨なし。</li><li>重症高K血症（血清K ≥6.5）の血液透析患者には緊急の透析治療を推奨（1A）。</li><li>心停止した全患者で、4Hs・4Ts による可逆的原因の同定と治療の一環として高K血症を考慮する（1A）。</li><li>透析を要する患者の心停止では標準的な二次救命処置を推奨（1A）。</li></ul>
+<h4>欧州蘇生協議会（ERC）ガイドライン2025 — すべて expert consensus</h4>
+<ul><li><strong>細胞内シフト</strong>：中等症〜重症高K血症に可溶性インスリン10単位＋ブドウ糖25 gを静注。<mark class="hl">治療前血糖 &lt;7 mmol/L なら、続けて10%ブドウ糖を50 mL/時で5時間投与する</mark>。</li><li><strong>高K血症の効果への拮抗</strong>：心電図変化を伴う重症高K血症には10%グルコン酸カルシウム 30 mL を静注。高K血症性心停止の治療には10%塩化カルシウム 10 mL の静注＋炭酸水素ナトリウム50 mmol。</li><li><strong>体外への除去</strong>：SZC 10 g を経口投与。重症・難治性高K血症には透析を考慮。</li><li>初回の蘇生が奏効しない場合、各施設のプロトコルに従って体外循環式心肺蘇生（eCPR）を考慮。</li><li><strong>小児の心停止ではカルシウムを使用しない</strong>。</li></ul>
+<h4>AHA 2025 心肺蘇生・救急心血管治療ガイドライン</h4>
+<div class="tw"><table>
+<thead><tr><th>推奨</th><th>クラス・エビデンスレベル</th></tr></thead>
+<tbody>
+<tr><td>高K血症が疑われる成人・小児の心停止での静注カルシウムの有効性は確立されていない</td><td>2b, C-LD</td></tr>
+<tr><td>同、静注炭酸水素ナトリウムの有効性は確立されていない</td><td>2b, C-EO</td></tr>
+<tr><td>同、静注インスリン＋ブドウ糖の有効性は確立されていない</td><td>2b, C-EO</td></tr>
+<tr><td>高K血症が疑われる心停止の成人・小児にβ刺激薬の吸入は推奨されない</td><td>No benefit, C-EO</td></tr>
+</tbody></table></div>
+<h4>AAFP（カリウム異常：低K血症と高K血症）</h4>
+<ul><li>高K血症の緊急治療の判断を<strong>心電図結果のみに基づいて行うべきではない</strong>（心電図変化の一貫した閾値がないため）（推奨度C）。</li><li>CKD、心不全、糖尿病性腎症を伴う高K血症患者では、K吸着薬を併用してRAAS阻害薬治療を再開することを考慮する（推奨度C）。</li></ul>
+<h4>救急部門の専門家パネル・コンセンサス</h4>
+<ul><li>診断：心電図を高K血症の除外の唯一の手段として用いるべきではない。</li><li>治療開始前にK値を検証して偽性高K血症を除外し、既往歴・現在の薬剤・検査異常を確認して事前確率を考慮する。</li><li>心電図で心臓への影響を評価する。新しい心電図変化があればグルコン酸カルシウム 1 g を推奨し、必要に応じて反復する。</li><li>治療選択はK値に基づき、<strong>再分布</strong>（静注インスリン＋ブドウ糖、β2刺激薬吸入）と<strong>除去</strong>（経口吸着薬、血液透析、利尿薬）に分類する。静注炭酸水素ナトリウムは急性期治療に推奨されない。</li><li>再評価は2〜4時間ごとに推奨。</li><li>カリウムが再分布されただけで除去されていない患者、または急性期治療に難治性の高K血症の患者では入院を推奨。</li></ul>
+<h3>16. 患者の視点（Patient involvement）</h3>
+<p>Edward Hines Jr VA Medical Centre が組織した3施設11名の退役軍人パネルが本稿の内容を査読し、医療者に対して以下のコミュニケーションを求めた。</p>
+<ul><li>高K血症について患者や介護者と話すとき、平易で患者中心の言葉を使い、専門用語を減らす。</li><li>リスクのある人に、高K血症が徐々に進むのか突然起きるのか、あるいはその両方なのかを明確に説明する。</li><li>高K血症と腎疾患・糖尿病・心疾患・不整脈との関連を明確にする。</li><li>薬剤に関連したカリウムのリスクを実務的な言葉で議論する。なぜその高リスク薬が処方されているのか、どうモニターされるのかを含めて。</li><li>緊急または救急受診が必要となる症状・警告徴候について明確な指針を提供する。</li><li>症状悪化時や救急受診時に備えた緊急時行動計画を、患者・介護者とともに作る。</li><li>リスクのある患者を同定するための簡単なスクリーニング質問や症状チェックリストを用意する。</li><li>定期的なカリウムモニタリングを強調し、経時的にどう追跡されるかを説明する。</li><li>文書の教育資材だけに頼らず、医療者と患者の直接の対話を促進する。</li></ul>
+<h3>17. 批判的吟味（JCでの論点）</h3>
+<p><strong>(1) State of the Art Review であってシステマティックレビューではない</strong> 検索式と採用の優先順位は明示されているが、二重スクリーニング・バイアスリスク評価・エビデンスの確実性評価（GRADE等）は行われていない。したがって記載された数値は「著者らが選んだ研究の値」であり、統合された推定値ではない。Table 2 の「期待されるK低下量」も出典が7文献に一括して付されており、どの数字がどの研究由来かを追えない。</p>
+<p><strong>(2) 定義が統一されていないという問題を、本総説自身も解決していない</strong> 「≥5.0」と「≥5.5」を併記したまま議論を進めるため、疫学の数字（有病率1.5〜3%、入院1.1〜10%）も、治療研究の対象集団も、比較可能性が担保されない。著者らが挙げる「今後の研究課題」の最初にも定義の標準化が来ていない点は、やや踏み込み不足に見える。</p>
+<p><strong>(3) 心電図の扱いに緊張がある</strong> 「心電図は除外に使えない・感度が低い」と繰り返しながら、治療アルゴリズム（Fig 4）の分岐点は「心電図変化あり／なし」である。この緊張は、心電図陽性の<strong>特異度と重篤度</strong>（QRS延長 RR 4.7、徐脈 RR 12.3）が高いことに由来する。JCでは「心電図は rule in には強く、rule out には弱い」と整理するのが実務的である。</p>
+<p><strong>(4) カルシウムの新しい機序は臨床試験で検証されていない</strong> 「膜安定化ではなくCa依存性伝導の回復」という説は犬の心筋細胞研究に基づく。ここから「T波異常のみでは効かないかもしれない」という臨床的含意を引き出しているが、これはあくまで機序からの推論であり、T波異常単独の患者を対象とした前向き研究は存在しない。にもかかわらずアルゴリズムは「心電図変化あり」を一括してStep 1の適応にしている。</p>
+<p><strong>(5) 用量の記載に原著内の不整合がある</strong> <mark class="hl">Fig 4 の Step 3a は「patiromer 8.4 mg」と記載されているが、Table 2 は「8.4〜25.2 g」である。3桁の単位差であり、図をそのままプロトコルに写すと過少投与になる</mark>。同様に Fig 4 のグルコン酸カルシウムは「2〜3 g」だが Table 2 は「1〜2 g または 3 g」で、UK Kidney Association の 3 g 推奨と KDIGO 系の 1〜2 g が図の中で融合している。</p>
+<p><strong>(6) 新規K吸着薬の評価が「玉虫色」になっている</strong> Table 3 の9研究のうち、SZCがSPSに明確に勝った主要評価項目は一つもない。むしろ最大規模の研究（Sullivan 2023、n=3903）ではSPSが有意に優れていた。にもかかわらず本文の要約は「SZCとpatiromerは可能性を示すがさらなる前向き評価を要する」と穏当な表現にとどまる。SPSは「一般的な使用は推奨されない」と切って捨てられている一方で、SZCに対しては同じ厳しさが向けられていない。ここは製薬企業の関与とは無関係に（著者らのCOIは「なし」）、新薬に対する記述バイアスとして議論の価値がある。</p>
+<p><strong>(7) 重炭酸の否定は明快だが、代謝性アシドーシスの治療とは切り分けが必要</strong> 本総説は「高K血症の治療としての重炭酸」を明確に否定するが、これは「代謝性アシドーシスの治療としての重炭酸」とは別問題である（<span class="wl">重症代謝性アシドーシスの重炭酸補正（BICAR-ICU・Lancet2018）</span>、<span class="wl">急性代謝性アシドーシスへの重炭酸ナトリウム — 分かっていること・まだ分かっていないこと（エディトリアル・ICM2026）</span>）。ICUでは両者が同時に存在するため、「Kのために出す」のか「pHのために出す」のかを毎回言語化する必要がある。</p>
+<p><strong>(8) 心停止時のカルシウムの推奨が2つの方向から引っ張られている</strong> ERC 2025 は高K血症性心停止に塩化カルシウム10 mLを推奨し、AHA 2025 は「有効性は確立していない（2b, C-LD）」とし、未分類OHCAのRCTは「有害の方向」を示した。ただしそのRCTは高K血症疑い例を除外している。<mark class="hl">「高K血症が原因と分かっている心停止」と「原因不明の心停止」でカルシウムの評価は正反対になりうる</mark>という点は、実務で最も誤解されやすい箇所である。</p>
+<p><strong>(9) 日本での適用の限界</strong> 本総説は米国・英国・欧州の製剤と用量を前提としている。サルブタモール 10〜20 mg のネブライザー投与は本邦の通常用量（サルタノール吸入液0.5% 0.3〜0.5 mL＝1.5〜2.5 mg）よりはるかに多い。グルコン酸カルシウムも本邦のカルチコールは8.5%製剤である。<mark class="hl">用量をそのまま院内プロトコルに写さず、本邦製剤の濃度に換算し直す必要がある</mark>。</p>
+<h3>18. 今後の研究課題（原著が挙げる5点）</h3>
+<ol><li>CKDや末期腎不全の患者を含む多様な集団において、カリウム低下と低血糖リスクの最小化を両立させる、急性高K血症に対する最も安全で有効なインスリン投与戦略は何か。</li><li>高K血症かつ心電図異常のある患者で、心筋安定化の発現・効果持続時間・安全性のアウトカムに関して、グルコン酸カルシウムと塩化カルシウムの比較有効性はどうか。</li><li>急性のカリウム移行治療（インスリン＋ブドウ糖、β刺激薬など）への反応・非反応を予測する患者側・薬剤側の因子は何か。またそれをどう個別化した治療アルゴリズムに反映できるか。</li><li>SZCやpatiromerといった新しいK吸着薬は、高K血症の緊急治療においてどのような役割をもつべきか。また血液透析や入院の必要性を意味のある形で減らせるか。</li><li>反復性または慢性の高K血症患者において、RAAS阻害薬を補助的なカリウム低下戦略とともに継続することは、RAAS阻害薬を中止する場合と比べ、長期の臨床・心血管アウトカムがどうなるか。</li></ol>
+<h3>19. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>救急部門での高K血症治療の実態（203例・前向き多施設観察、REVEAL-ED）</td><td>Peacock WF, et al. J Emerg Med. 2018;55:741-50</td></tr>
+<tr><td>重症高K血症で入院を要した923例・死亡の予測因子</td><td>An JN, et al. Crit Care. 2012;16:R225</td></tr>
+<tr><td>血清Kと全死亡のU字型関連（CKD Prognosis Consortium・100万人超のメタ解析）</td><td>Kovesdy CP, et al. Eur Heart J. 2018;39:1535-42</td></tr>
+<tr><td>血清Kと全死亡（&gt;90万人の入院患者、0.1 mmol/Lごとの解析）</td><td>Collins AJ, et al. Am J Nephrol. 2017;46:213-21</td></tr>
+<tr><td>救急部門でのK異常・重症度・治療・転帰（約5万例）</td><td>Singer AJ, et al. Clin Exp Emerg Med. 2017;4:73-9</td></tr>
+<tr><td>入院時血漿Kと在院日数のメタ解析（5研究・246,612例）</td><td>Logan Ellis H, et al. BMJ Open. 2023;13:e068387</td></tr>
+<tr><td>救急部門の急性高K血症・KDIGO会議サマリー</td><td>Lindner G, et al. Eur J Emerg Med. 2020;27:329-37</td></tr>
+<tr><td>重症高K血症の心電図による短期有害事象のリスク層別化（188例）</td><td>Durfey N, et al. West J Emerg Med. 2017;18:963-71</td></tr>
+<tr><td>救急部門における高K血症管理・専門家パネル・コンセンサス</td><td>Rafique Z, et al. J Am Coll Emerg Physicians Open. 2021;2:e12572</td></tr>
+<tr><td>カルシウムの効果は「膜安定化」によるものではない（犬心筋細胞）</td><td>Piktel JS, et al. Crit Care Med. 2024;52:1499-508</td></tr>
+<tr><td>グルコン酸カルシウムの効果（111例・前向き観察。97%が1 g×3回を要した）</td><td>Celebi Yamanoglu NG, Yamanoglu A. Turk J Emerg Med. 2022;22:75-82</td></tr>
+<tr><td>10%塩化カルシウムの末梢投与72件の安全性</td><td>Patel S, Dillon R. J Emerg Nurs. 2022;48:484-91</td></tr>
+<tr><td>ジギタリス中毒患者への静注カルシウム（161例）</td><td>Levine M, et al. J Emerg Med. 2011;40:41-6</td></tr>
+<tr><td>インスリン減量投与のメタ解析（10研究・3437例。低血糖OR 0.55）</td><td>Moussavi K, et al. Pharmacotherapy. 2021;41:598-607</td></tr>
+<tr><td>速効型インスリン vs リスプロ（SIR-LISPRO 試験・237例）</td><td>Kroll C, et al. Am J Emerg Med. 2026;101:92-8</td></tr>
+<tr><td>高K血症へのインスリン治療による低血糖のスコーピングレビュー（62研究・17.2%）</td><td>Chothia MY, et al. PLoS One. 2022;17:e0268395</td></tr>
+<tr><td>ブドウ糖単独ボーラス投与のRCT（10例）</td><td>Chothia MY, et al. Nephron Physiol. 2014;126:1-8</td></tr>
+<tr><td>アルブテロールとインスリンの相加効果（透析患者12例のクロスオーバー）</td><td>Allon M, Copkney C. Kidney Int. 1990;38:869-72</td></tr>
+<tr><td>血中pHが一定でも重炭酸は高K血症を是正する（健常者14例）</td><td>Fraley DS, Adler S. Kidney Int. 1977;12:354-60</td></tr>
+<tr><td>陽イオン交換樹脂による高K血症の管理（1960年代の原典）</td><td>Scherr L, et al. N Engl J Med. 1961;264:115-9</td></tr>
+<tr><td>成人の急性高K血症に対する薬物介入（Cochrane・7研究241例）</td><td>Batterink J, et al. Cochrane Database Syst Rev. 2015;10:CD010344</td></tr>
+<tr><td>救急部門でのpatiromerパイロットRCT（30例）</td><td>Rafique Z, et al. Acad Emerg Med. 2020;27:54-60</td></tr>
+<tr><td>急性期でのpatiromer単剤療法の評価（881例）</td><td>Di Palo KE, et al. JAMA Netw Open. 2022;5:e2145236</td></tr>
+<tr><td>SZC（ZS-9）の構造と機能の特性（SPSの最大9倍の結合能）</td><td>Stavros F, et al. PLoS One. 2014;9:e114686</td></tr>
+<tr><td>SZCと高K血症への緊急介入率（傾向スコア重み付けケースコントロール・500例）</td><td>Marshall WR, et al. Clin Kidney J. 2024;17:sfae313</td></tr>
+<tr><td>SZCの第II相二重盲検プラセボ対照試験（ENERGIZE・70例）</td><td>Peacock WF, et al. Acad Emerg Med.（ENERGIZE）</td></tr>
+<tr><td>経口K吸着薬の比較RCT（早期中止）</td><td>Cañas AE, et al. BMC Nephrol. 2023;24:89</td></tr>
+<tr><td>重症高K血症での緊急血液透析 vs 腹膜透析（前向き・82例）</td><td>Alcantar-Vallin L, et al. Clin Kidney J. 2025;18:sfaf343</td></tr>
+<tr><td>院外心停止での静注・骨髄内カルシウム vs 生理食塩水のRCT（391例）</td><td>Vallentin MF, et al. JAMA.（COCA試験）</td></tr>
+<tr><td>SGLT2阻害薬と高K血症リスクのIPDメタ解析（49,876例、HR 0.84）</td><td>Neuen BL, et al.（個別患者データメタ解析）</td></tr>
+<tr><td>KDIGO 2024 CKD診療ガイドライン</td><td>KDIGO CKD Work Group. Kidney Int. 2024;105:S117-314</td></tr>
+<tr><td>ERCガイドライン2025 エグゼクティブサマリー</td><td>Greif R, et al. Resuscitation. 2025;215:110770</td></tr>
+<tr><td>AHA 2025 CPR・ECCガイドライン Part 10（蘇生の特殊状況）</td><td>Cao D, et al. Circulation. 2025;152:S578-672</td></tr>
+<tr><td>UK Kidney Association 成人の高K血症管理ガイドライン（2023年10月）</td><td>Ngwenya B. UKKA Clinical Practice Guideline. 2023</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ul><li><mark class="hl">心電図が正常でも高カリウム血症は致死的でありうる。K 5.5〜7.0 でテント状T波が出るのは25%未満、K &gt;7.0 でも35%にすぎない。心電図は rule in には強く、rule out には使えない。</mark></li><li><mark class="hl">治療は「カルシウム（伝導回復・K値は下がらない）→インスリン＋ブドウ糖±サルブタモール（0.6〜1.4＋0.65〜1 mmol/L）→K吸着薬・利尿薬・透析（1時間で約1 mmol/L）」の3段階を、心電図所見を待たずに開始する。</mark></li><li><mark class="hl">今日から変える一手：高K血症でインスリンを使うときは既定を5〜10単位とし（CKD・AKI・非糖尿病・体重50 kg未満・血糖126 mg/dL未満なら5単位）、ブドウ糖は10%液25 gから、血糖再検は投与後30分・60分・90分・120分・180分・240分の6点を指示簿に固定する。低血糖は17.2%に起きる、最も頻度の高い医原性合併症である。</mark></li><li><mark class="hl">新規K吸着薬（SZC・patiromer）は、9研究のいずれでもSPSを主要評価項目で明確に上回っていない。「吸着薬を出したから大丈夫」で透析の判断を先送りしない。</mark></li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
