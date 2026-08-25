@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ARDSのサブフェノタイプは二分法から連続スペクトラムへ — 二値分類が隠す低炎症性群内の高リスク患者（エディトリアル・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08531-1.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ARDSのサブフェノタイプは二分法から連続スペクトラムへ — 二値分類が隠す低炎症性群内の高リスク患者（エディトリアル・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Nasa P, Parhar KKS, Nakayama R. Beyond binary: rethinking subphenotyping in ARDS as a continuous spectrum. Intensive Care Med. 2026. DOI: 10.1007/s00134-026-08531-1</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-06-24）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08531-1" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08531-1</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Beyond binary: rethinking subphenotyping in ARDS as a continuous spectrum</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>今日の診療は変わらない</strong>。hyper/hypo炎症性サブフェノタイプの判定に必要な血漿バイオマーカー（IL-6、IL-8、sTNFR-1、プロテインC、重炭酸など）は当院で日常測定できず、point-of-care 化もされていない。この論説自体が「前向き検証と即時判定手段の不在」を最大の障壁として挙げている</li><li><strong>変わるのは論文の読み方</strong>。今後「hyperinflammatory群でだけ効いた」という二次解析（ステロイド・スタチン・輸液戦略・PEEP戦略）を読むとき、<mark class="hl">「二群に切った時点で群内の高リスク患者が薄まっている」可能性を必ず併せて考える</mark>。とくに患者の大多数を占める hypoinflammatory 群は「均質な対照群」ではない</li><li><strong>代用できる連続指標は既にある</strong>。PaO2/FiO2 は当院で連日追える連続変数であり、単時点の値より経時的な推移（dynamic oxygenation subgroup）のほうが予後とPEEP反応の予測に優れるという報告がある。バイオマーカーを待たずに「静的な1点」から「軌跡」へ発想を移すことは今日からできる</li><li><strong>サブフェノタイプは固定ではない</strong>。同一患者が経過中に hyper と hypo を行き来しうるため、入室時の1回判定でラベルを貼りっぱなしにしない。研究に参加する場合も、登録ウィンドウ（ICU入室から72時間など）の設定がそのまま結果を左右することを意識する</li><li><strong>研究側の含意</strong>：当院が参加しうる ARDS 関連の多施設研究では、層別化を二値ラベルではなく連続確率（またはスコア）で保存しておくと、後から解析の自由度が高い</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ARDS は約60年前に「急性の頻呼吸・低酸素血症・コンプライアンス低下」を示す症候群として記載されて以来、定義は反復的に改訂され、胸部X線だけでなく高流量鼻カニュラ、SpO2/FiO2 閾値、胸部CT・肺エコーによる両側性陰影の同定まで含むようになった。それでも ARDS は臨床的・生物学的・生理学的に不均一で、有効な治療は乏しい。潜在クラス分析（LCA）による hyperinflammatory / hypoinflammatory の二分は概念的な前進で、予後差（hyper群は死亡が高く人工呼吸器離脱日数が少ない）と治療効果の異質性（HTE）を示した</li><li><strong>Unknown</strong>：これらのサブフェノタイプは<mark class="hl">本当に離散した生物学的カテゴリーなのか、それとも連続体上の点なのか</mark>。二値化が群内の意味のある不均一性を隠していないか。バイオマーカー高値が死亡に直接寄与するのか、単に重症度を反映しているだけなのか</li><li><strong>What's new</strong>：本誌の Venkatesan・Kitsios らの研究を受けて、著者らは「二値ラベル」から「連続確率＋経時的軌跡」への移行を提案する。とくに患者の多数派である hypoinflammatory 群の内部にリスクの大きな幅があることが、異なるデザイン・時期・病因（COVID-19を含む）を通じて一貫して示された点を重視する</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ARDS の hyper/hypo 炎症性サブフェノタイプという二分法は、<strong>群内の不均一性を隠して高リスク患者を取りこぼす</strong>恐れがあり、著者らは所属確率という<strong>連続変数と、その経時的な軌跡</strong>で捉え直すことを提案する。ただし本稿は新規データを持たない論説であり、提案する枠組み自体もまだ前向きに検証されていない。</p>
+</div>
+<ul><li>ARDS の定義は約60年かけて改訂されてきたが、依然として不均一で有効な治療は限られ、治療効果の異質性（HTE）は ARDS の「受け入れるべき性質」と見なされるようになった</li><li>LCA による二分（hyper/hypo）は予後差とHTEを示し、元の試験データセット外（敗血症関連肺傷害を含む）でも再現された。輸液管理・シンバスタチン・ステロイド・換気戦略でHTEが報告されている</li><li>ベッドサイドでの即時判定を可能にするため、Sinha らは少数の臨床的に入手可能な変数による parsimonious（倹約的）分類アルゴリズムを開発・検証した</li><li>しかし残る根本的な問い＝これらは真に離散したカテゴリーか、連続体上の点か（Fig. 1）</li><li>二値分類の3つの弊害：①群内の不均一性を隠す ②いわゆる炎症性サブフェノタイプの中の高リスク患者を系統的に除外し、有益かもしれない治療を奪う ③そもそもフェノタイプ所属は経過中に固定されておらず、患者は hyper と hypo の間を移行しうる（その軌跡自体が転帰と関連する）</li><li>Kitsios らは、急性低酸素性呼吸不全（AHRF）と ARDS の患者で、炎症性サブフェノタイプ所属の<mark class="hl">連続確率</mark>を評価。従来の二群それぞれの内部でリスクと生物学が大きく異なることを示し、群内均質性の仮定に反証した。さらに確率の経時変化が重要な予後情報を持つことを示した</li><li>とくに一貫していたのは hypoinflammatory 群内の substantial heterogeneity で、デザイン・時期・病因（COVID-19を含む）が異なっても同様だった。hypo 群は患者の大多数を占めるため、この群をさらに層別化できる意義は大きい</li><li>限界：これらはすべて post hoc 解析で、バイオマーカーもコホートも不均一。前向き検証もPOCTもないため、専門家の間でもベッドサイドへの翻訳の仕方について意見が割れている</li><li>反対方向のエビデンスもある：Delucchi らは2つのRCTの post hoc 解析で、バイオマーカーによるサブフェノタイプは登録後3日間おおむね安定し、転帰は day 3 のクラス割り当てとより強く関連したと報告。著者らは、その「安定性」は真の均質性ではなく hypo 群内での平均化効果を映しているのかもしれない、と留保をつける</li><li>今後の優先課題：リアルタイムのリスク層別化を可能にする研究デザイン、サブフェノタイピングの臨床フローへの統合、そして従来の二値分類ではなく確率的・連続的枠組みでのバイオマーカー駆動サブフェノタイピングの評価</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — サブフェノタイピングの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ARDS（急性呼吸窮迫症候群）</strong> は単一の疾患ではなく、肺炎・敗血症・外傷・誤嚥など多様な誘因の後に「急性発症の低酸素血症＋両側性陰影＋心不全で説明できない」という共通の表現型を示す症候群。だからこそ、同じ ARDS というラベルの中に生物学的に別物の患者が混ざっている。 <strong>サブフェノタイプ（subphenotype）</strong> とは、症候群の内側にある、より均質な患者群のこと。ARDS では血漿の炎症バイオマーカーと少数の臨床変数から、炎症反応が強い <strong>hyperinflammatory</strong> 群と、弱い <strong>hypoinflammatory</strong> 群の2つが繰り返し同定されてきた。hyper 群は死亡が高く人工呼吸器離脱日数（ventilator-free days, VFD）が少ない。 <strong>LCA（latent class analysis, 潜在クラス分析）</strong> はその同定に使われた統計手法。観測された複数の変数（IL-6 などのバイオマーカーや臨床値）の背後に、直接は観測できない「潜在クラス」が存在すると仮定し、各患者がどのクラスに属するかを確率として推定する。<mark class="hl">重要なのは、LCA が出力するのは本来「所属確率（0〜1の連続値）」であって、「あなたは hyper です」という断定ではない</mark>こと。実務では確率0.5などで切って二値ラベルに変換しているだけで、その切断こそが本稿の批判の的である。 <strong>HTE（heterogeneity of treatment effect, 治療効果の異質性）</strong> は、同じ治療が患者群によって効いたり効かなかったり（時に害になったり）すること。サブフェノタイプ研究の目的は、この HTE を説明できる軸を見つけて「効く人にだけ効く治療を届ける」＝精密医療（precision medicine）を実現することにある。 <strong>parsimonious classifier（倹約的分類器）</strong> は、多数の変数と複雑な LCA を必要とせず、少数の入手しやすい変数だけで同じ分類を再現しようとするモデル。ベッドサイド実装のための工夫だが、あくまで「元の二値ラベル」を当てにいくモデルであることに注意。 <strong>POCT（point-of-care testing）</strong> は検査室に送らずベッドサイドで数十分以内に結果が出る検査。サブフェノタイピングの臨床実装が止まっている最大の技術的ボトルネックがここ。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>ARDS は約60年前、多様な臨床的侵襲の後に生じる「急性発症の頻呼吸・低酸素血症・肺コンプライアンス低下」を特徴とする臨床症候群として初めて記載された</li><li>以後、診断基準は現代の臨床実践を反映するよう改訂され、胸部X線を超えて <strong>高流量鼻カニュラ酸素、SpO2/FiO2 閾値、胸部CT、肺エコー</strong> が両側性肺陰影の同定手段として組み込まれた</li><li>しかし度重なる定義の精緻化にもかかわらず、ARDS は臨床的・生物学的・生理学的に不均一なままで、有効な治療は掴めていない</li><li>現在では <strong>HTE は ARDS の「受け入れるべき特性」</strong> と考えられている。理由は、多様なリスク因子・基礎病態・現行診断基準の内在的限界が相互作用しているため</li><li>本エディトリアルの目的は、Kitsios らの原著を踏まえ、<mark class="hl">サブフェノタイピングの枠組みを「二値」から「連続確率＋動的軌跡」へ移すべきだと論じること</mark></li></ul>
+<h3>3. 二分法はどう作られ、何を達成したか</h3>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>内容</th><th>主な出典</th></tr></thead>
+<tbody>
+<tr><td>概念的前進</td><td>LCA により潜在サブフェノタイプを同定、ARDS を hyperinflammatory と hypoinflammatory に二分</td><td>Sinha 2023（Annu Rev Med）ほか</td></tr>
+<tr><td>予後の差</td><td>hyper 群は死亡が高く、人工呼吸器離脱日数が少ない</td><td>Das 2025（SR・メタ解析, Indian J Crit Care Med）</td></tr>
+<tr><td>再現性</td><td>元の試験データセットに限らず、敗血症関連肺傷害を含む追加コホートでも再現</td><td>Sinha 2018（SAILS二次解析, ICM）</td></tr>
+<tr><td>HTE の実証</td><td>輸液管理、シンバスタチン、ステロイド、換気戦略で治療反応が群間で異なる</td><td>Calfee 2018（シンバスタチン, Lancet Respir Med）／Sinha 2021（COVID-19 ARDS ステロイド, AJRCCM）／Das 2025</td></tr>
+<tr><td>ベッドサイド化</td><td>少数の臨床的に入手可能な変数による parsimonious 分類アルゴリズムを開発・検証。実装可能性を高めつつ許容できる判別精度を保持</td><td>Sinha 2020（Lancet Respir Med）</td></tr>
+</tbody></table></div>
+<ul><li>ここまでの流れは「ARDS を均質な塊として扱うのをやめる」という点で明確な前進だった</li><li>しかし著者らは、多変量かつ統計的に複雑な LCA に基づく <strong>リアルタイムのベッドサイド判定は依然として困難</strong> であると指摘する</li><li>そして残る根本的な問いを立てる：<strong>これらのサブフェノタイプは真に離散した生物学的カテゴリーなのか、それとも生物学的連続体上の点なのか（Fig. 1）</strong></li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 急性低酸素性呼吸不全における、二値サブフェノタイプから連続確率モデリングへの移行。左パネル（淡い青の枠、見出し「TRADITIONAL BINARY CLASSIFICATION」）は円グラフで、円の大部分（上側・青）が Hypo-inflammatory、残る下側の小さい扇（オレンジ）が Hyper-inflammatory とラベルされ、2つは細い隙間で完全に切り離されている。中央の黒い矢印が右パネルへ向かう。右パネル（淡い緑の枠、見出し「NOVEL CONTINUOUS SPECTRUM MODELLING」）では、左下の黒点「Hypo-inflammatory Pole」から右上の黒点「Hyper-inflammatory Pole (High Score)」へ向かって斜めに伸びる帯が描かれ、帯の色は青から白を経て赤へ連続的に変化する。パネル下部には同じ青→赤のグラデーションを持つ両方向矢印があり、「Continuous probabilities for risk stratification」と注記される。要点は、切り分けられた2つの扇が、境界のない1本のグラデーション軸に置き換わること。原図・無改変。</p>
+</div>
+<h3>4. 二値サブフェノタイピングの3つの弊害</h3>
+<p>これまでの研究の大半はバイオマーカーを用いた二値サブフェノタイピングに集中してきたが、著者らはこれが ARDS における病態生理と疾患軌跡の複雑な相互作用の全スペクトラムを捉え損ねうると論じる。</p>
+<div class="tw"><table>
+<thead><tr><th>弊害</th><th>何が起きているか</th><th>帰結</th></tr></thead>
+<tbody>
+<tr><td>① 群内不均一性の隠蔽</td><td>二値バイオマーカー分類の HTE 解析で「患者は均質な対照群として扱える」という一般的な信念は根本的に誤り（fundamentally flawed）</td><td>群内に意味のある不均一性があるのに、平均効果で塗りつぶされる</td></tr>
+<tr><td>② 高リスク患者の系統的除外</td><td>いわゆる二値の炎症性サブフェノタイプの内部にいる高リスク患者が、過度に還元的な分類のせいで除外される</td><td>有益かもしれない治療を、分類を理由に奪ってしまう</td></tr>
+<tr><td>③ 所属は固定ではない</td><td>縦断解析では、患者は経過中に hyper と hypo の間を移行しうる。その時間的軌跡が臨床転帰と関連しうる</td><td>入室時の1回判定によるラベルは、時間とともに誤りになる</td></tr>
+</tbody></table></div>
+<ul><li>③の根拠は van Amstel ら（2025, AJRCCM）の「重症疾患における hyper/hypo フェノタイプの時間的移行」</li></ul>
+<h3>5. Kitsios らの原著が示したこと（本エディトリアルが評する対象）</h3>
+<ul><li>対象は <strong>急性低酸素性呼吸不全（AHRF）および ARDS</strong> の患者</li><li>手法：parsimonious なバイオマーカーモデルを用い、炎症性サブフェノタイプ所属の <strong>連続確率</strong> を評価</li><li>結果1：<strong>従来定義の hyperinflammatory 群・hypoinflammatory 群それぞれの内部で、リスクと基礎にある生物学が実質的に大きく異なる</strong>（群内均質性の仮定への挑戦）</li><li>結果2：縦断的軌跡を検討したところ、<strong>サブフェノタイプ確率の動的変化が重要な予後情報を持つ</strong></li><li>結果3（著者らが「より striking」と評した点）：<strong>hypoinflammatory 群内の実質的な不均一性が、研究デザイン・研究期間・AHRF/ARDS の病因（COVID-19 を含む）が異なっても一貫して観察された</strong></li><li>意義：hypoinflammatory サブフェノタイプは<strong>患者の大多数</strong>に見られるため、この群をさらに層別化できる枠組みは、より細やかなリスク層別化を提供する。<mark class="hl">群内の意味のある HTE を検出する能力を高めうる</mark>（Fig. 1）</li><li>総括：二値分類を超えて確率的・動的なサブフェノタイピングモデルへ進むことは、精密医療にとって重要な一歩になりうる</li></ul>
+<h3>6. 連続スペクトラムとして扱うとは、具体的に何をすることか</h3>
+<p>本稿が明示的に挙げている手法を原文の順で整理する。</p>
+<div class="tw"><table>
+<thead><tr><th>手法</th><th>内容</th><th>現状の裏づけ</th></tr></thead>
+<tbody>
+<tr><td>連続確率（continuous probabilities）</td><td>0/1 のラベルではなく、サブフェノタイプ所属確率そのものをリスク層別化の変数として使う</td><td>Kitsios らの post hoc 解析（本誌）</td></tr>
+<tr><td>縦断的軌跡モデリング（trajectory modelling）</td><td>バイオマーカーを単一時点で測るのではなく連日測定し、確率の推移＝動的サブフェノタイピングを行う</td><td>Kitsios らの trajectory modelling</td></tr>
+<tr><td>parsimonious な POCT モデル</td><td>少数変数のモデルを point-of-care 化し、診断から72時間以内に実時間で層別化する</td><td>Reddy 2026（PHIND, 多施設観察研究）で実行可能性が示された</td></tr>
+<tr><td>連続生理指標の動的サブグループ化</td><td>PaO2/FiO2 比の縦断測定に基づく動的サブグループ化。静的な PaO2/FiO2 より予後予測と PEEP 反応性の予測に優れた</td><td>Bai 2025（Thorax）</td></tr>
+<tr><td>肺胞レベル・生物学的プロファイリング</td><td>ARDS の生物学的サブフェノタイプ profiling、肺胞バイオマーカー評価。全身の炎症シグネチャと肺の病態生理の乖離を埋める補完的アプローチ</td><td>Heijnen 2021（AJRCCM）</td></tr>
+</tbody></table></div>
+<ul><li>著者らの結論部は、今後の研究に対して3点を優先せよと明記する：<strong>①リアルタイムのリスク層別化を可能にする研究デザイン ②サブフェノタイピングの臨床フローへの統合 ③従来の二値分類ではなく確率的・連続的枠組みでのバイオマーカー駆動サブフェノタイピングの評価</strong></li></ul>
+<h3>7. HTE は連続変数で見るとどう変わりうるか</h3>
+<ul><li>二値分類下での HTE 報告（輸液管理・シンバスタチン・ステロイド・換気戦略）は、いずれも「hyper 群では効き、hypo 群では効かない（またはその逆）」という形で提示されてきた</li><li>著者らの論点は、この提示が <strong>hypo 群を均質な比較対照とみなす前提</strong> に依存していること。hypo 群内にリスクの広い幅があるなら、その中の高リスク側では治療が効いているのに、低リスク側で希釈されて群平均としては無効に見えている可能性がある</li><li>逆向きの誤りもある。二値分類で hyper と判定されなかったために、実際には炎症軸の高い側にいる患者が治療の対象から系統的に外される（弊害②）</li><li>したがって、連続確率を交互作用項として扱えば、「閾値のどちら側か」ではなく「どの確率帯から治療効果が立ち上がるか」を推定できる。これが著者らの言う「群内 HTE の検出能を高める」の実質的な意味</li><li><mark class="hl">ただし本稿はこの利得を示す実データを提示していない</mark>。連続変数で再解析すれば HTE が見えるようになる、というのは現時点では仮説である</li></ul>
+<h3>8. 臨床実装の障壁</h3>
+<ul><li><strong>すべて post hoc 解析である</strong>：用いられたバイオマーカーも患者コホートも研究間で不均一</li><li><strong>前向き検証がない／POCT がない</strong>：リアルタイム層別化ができないため、<mark class="hl">エビデンスをベッドサイドにどう翻訳するかについて専門家の見解が分かれている</mark>（Nasa 2025 の国際 Delphi 専門家パネルが根拠）</li><li><strong>登録ウィンドウの問題</strong>：Kitsios らは、ICU入室から72時間という登録ウィンドウ内での前向きリスク層別化に困難があることを自ら認めている。さらに、縦断的モニタリングで観察された群内不均一性は、この登録ウィンドウの妥当性そのものに疑問を投げかける</li><li><strong>実行可能性の光</strong>：最近の feasibility study では、AHRF または ARDS の診断から72時間以内に、parsimonious な point-of-care モデルによるリアルタイム層別化に成功している（Reddy 2026, PHIND）</li><li><strong>測定の性質</strong>：血漿バイオマーカー由来の分類は、より長期の疾患生物学や、肺という区画（lung compartment）の傷害の進展を十分に捉えていない可能性がある。肺胞バイオマーカーなど補完的アプローチが必要</li></ul>
+<h3>9. 静的か動的か — 相反するエビデンス</h3>
+<div class="tw"><table>
+<thead><tr><th>立場</th><th>報告</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>動的に見るべき</td><td>Kitsios ら（2026, ICM）</td><td>バイオマーカーの軌跡モデリングで予後の不均一性を観察。単一時点の静的測定ではなく連続測定による動的サブフェノタイピングの可能性を示す</td></tr>
+<tr><td>静的で足りる</td><td>Delucchi ら（2018, Thorax）</td><td>2つのRCTの post hoc 解析で、バイオマーカーによるサブフェノタイプは登録後3日間おおむね安定し、臨床転帰は day 3 のクラス割り当てとより強く関連した</td></tr>
+<tr><td>著者らの解釈</td><td>—</td><td>Delucchi らが観察した安定性は真の均質性ではなく、hypoinflammatory 亜群内での<strong>平均化効果（averaging effect）</strong>を反映しているのかもしれない</td></tr>
+<tr><td>生理学側からの支持</td><td>Bai ら（2025, Thorax）</td><td>PaO2/FiO2 比の縦断測定に基づく動的サブグループ化は、静的 PaO2/FiO2 より予後予測と PEEP 反応性の予測に優れた</td></tr>
+</tbody></table></div>
+<ul><li>なお van Amstel ら（2025, AJRCCM）の「時間的移行」は動的側の根拠となる</li></ul>
+<h3>10. 著者ら自身が置いた留保</h3>
+<ul><li>post hoc であるため <strong>因果の推論はできず</strong>、所見は慎重に解釈しなければならない</li><li><mark class="hl">バイオマーカー高値やその時間的軌跡が死亡に直接寄与しているのか、単に基礎にある疾患重症度を反映しているだけなのかは依然として不明</mark></li><li>血漿バイオマーカー由来の分類は、長期の疾患生物学や肺区画傷害の進展を十分に捉えられない可能性がある</li><li><strong>バイオマーカー誘導の治療戦略が臨床転帰を意味のある形で変えられるかは未確立</strong>。ただし少なくとも1つの大規模試験が進行中（Reddy 2025, ERS Clinical Research Collaboration）</li></ul>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>これはエディトリアルであり、新規データを一切持たない</strong>。症例数・効果量・信頼区間は本文に存在せず、主張はすべて引用文献に依存している。「連続確率のほうが良い」という命題は、本稿によって検証されたものではない</li><li><strong>提案手法自体が未検証</strong>。連続確率・軌跡モデリング・POCT 実装のいずれも、前向きに転帰改善を示した研究はない。本稿が挙げる最も前向きな証拠は「実行可能性が示された（PHIND）」という段階にとどまる</li><li><strong>統計的な争点が明示されていない</strong>。LCA が離散クラスを出力するのは、そもそもモデルが「クラスが存在する」と仮定して当てはめているからで、適合が良いことはクラスの実在を証明しない（連続的な分布に混合正規を当てはめても、しばしば複数クラスが「検出」される）。<mark class="hl">本稿はこの identifiability の問題に踏み込まず、「離散か連続か」を実証的な未解決問題として提示するにとどまる</mark>。JCで議論すべき核心はここにある</li><li><strong>連続化には代償がある</strong>。二値ラベルは臨床現場で使いやすく、試験の適格基準にも書きやすい。連続確率に移せば、どこで治療を開始するかという閾値問題が今度は連続軸上に現れるだけで、消えるわけではない。著者らはこのトレードオフを論じていない</li><li><strong>循環論法の懸念</strong>。parsimonious モデルは元の LCA 二値ラベルを教師データとして学習している。その出力確率を「連続スペクトラム」として解釈することは、二値ラベルの内部構造を見ているだけで、真の生物学的連続体を見ている保証はない</li><li><strong>Delucchi らへの反論が推測的</strong>。「安定性は平均化効果の反映かもしれない」という一文には根拠が示されていない。相反する所見に対する説明としては弱い</li><li><strong>予後因子か治療標的か</strong>。著者ら自身が認めるとおり、バイオマーカーが重症度の指標にすぎない可能性は排除されていない。予後の層別化（prognostic enrichment）ができることと、治療効果を予測できること（predictive enrichment）は別問題で、精密医療に必要なのは後者である</li><li><strong>引用の選択性</strong>。二値サブフェノタイプの HTE を支持する研究は肯定的に、否定的な研究（Delucchi）は解釈を付けて紹介されており、論説という性質上やむを得ないが、バランスの取れた総説として読むべきではない</li><li><strong>一般化可能性</strong>：AHRF と ARDS を並べて論じているが、両者の生物学が同一である保証はない。COVID-19 を含む病因の多様性を「一貫性の証拠」とするか「混合の懸念」とするかは読み手によって割れうる</li></ul>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ARDS の定義と過去・現行定義の有用性に関する Delphi 研究プロトコル</td><td>Nasa P, Bos LD, Estenssoro E, et al. BMJ Open 2024;14(4):e082986</td></tr>
+<tr><td>2</td><td>敗血症と ARDS における生物学的フェノタイピング（総説）</td><td>Sinha P, Meyer NJ, Calfee CS. Annu Rev Med 2023;74:457-471</td></tr>
+<tr><td>3</td><td>炎症バイオマーカーによるサブフェノタイプが ARDS 予後に与える影響（SR・メタ解析）</td><td>Das SK, Choupoo NS, Rochwerg B, et al. Indian J Crit Care Med 2025;29(7):597-603</td></tr>
+<tr><td>4</td><td>ARDS サブフェノタイプの LCA（SAILS 試験の二次解析）＝敗血症関連肺傷害での再現</td><td>Sinha P, Delucchi KL, Thompson BT, et al. Intensive Care Med 2018;44(11):1859-1869</td></tr>
+<tr><td>5</td><td>COVID-19 関連 ARDS のサブグループとステロイドへの differential response</td><td>Sinha P, Furfaro D, Cummings MJ, et al. Am J Respir Crit Care Med 2021;204(11):1274-1285</td></tr>
+<tr><td>6</td><td>ARDS サブフェノタイプとシンバスタチンへの differential response（RCT 二次解析）</td><td>Calfee CS, Delucchi KL, Sinha P, et al. Lancet Respir Med 2018;6(9):691-698</td></tr>
+<tr><td>7</td><td>ARDS フェノタイプ分類のための parsimonious アルゴリズムの開発と検証</td><td>Sinha P, Delucchi KL, McAuley DF, et al. Lancet Respir Med 2020;8(3):247-257</td></tr>
+<tr><td>8</td><td>重症疾患における hyper/hypo 炎症フェノタイプの時間的移行</td><td>van Amstel RBE, Bartek B, Vlaar APJ, et al. Am J Respir Crit Care Med 2025;211(3):347-356</td></tr>
+<tr><td>9</td><td><strong>本エディトリアルが評する原著</strong>：hypoinflammatory 急性呼吸不全の内部のリスク不均一性 — 連続確率は二値分類で隠れた高リスク患者を同定する</td><td>Venkatesan N, Shah FA, Bain W, et al. Intensive Care Med 2026. DOI: 10.1007/s00134-026-08406-5</td></tr>
+<tr><td>10</td><td>ARDS の定義とサブフェノタイピング — 国際 Delphi 専門家パネルからの知見</td><td>Nasa P, Bos LD, Estenssoro E, et al. Lancet Respir Med 2025;13(7):638-650</td></tr>
+<tr><td>11</td><td>急性呼吸不全のサブフェノタイプのベッドサイド同定（PHIND・多施設観察コホート）</td><td>Reddy K, Sinha P, Antcliffe DB, et al. Lancet Respir Med 2026</td></tr>
+<tr><td>12</td><td>2つの RCT における ARDS サブフェノタイプの経時的安定性</td><td>Delucchi K, Famous KR, Ware LB, et al. Thorax 2018;73(5):439-445</td></tr>
+<tr><td>13</td><td>動的酸素化サブグループ — 静的 PaO2/FiO2 より予後と PEEP 反応の予測に優れる</td><td>Bai Y, Chen S, Yang H, et al. Thorax 2025;80(9):594-603</td></tr>
+<tr><td>14</td><td>ARDS の生物学的サブフェノタイプは ARDS でない人工呼吸患者でも予後 enrichment を示す</td><td>Heijnen NFL, Hagens LA, Smit MR, et al. Am J Respir Crit Care Med 2021;203(12):1503-1511</td></tr>
+<tr><td>15</td><td>ARDS サブフェノタイプのベッドサイド前向き同定（多施設・ERS Clinical Research Collaboration・進行中）</td><td>Reddy K, O'Kane C, Antcliffe D, et al. Eur Respir J 2025;66(suppl 69):OA3405</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ARDS の hyper/hypo という二分法は、<mark class="hl">患者の大多数を占める hypoinflammatory 群の内部にいる高リスク患者を隠している</mark>。今後「サブフェノタイプ別の二次解析で効いた／効かなかった」という論文を読むときは、<mark class="hl">二値に切った時点で群内の効果が平均化されている可能性を必ず併せて考える</mark>。ただし本稿はエディトリアルで新規データを持たず、<mark class="hl">連続確率・軌跡モデリングという提案自体もまだ前向きに検証されていない</mark>ため、当院の診療を今日変えるものではない。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
