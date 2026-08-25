@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>新生児と小児で敗血症の予測因子はほぼ別物 — CBC由来1924次元からNICU・PICU別18変数モデルを開発し二重外的検証（CALM2302・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06261-w.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">新生児と小児で敗血症の予測因子はほぼ別物 — CBC由来1924次元からNICU・PICU別18変数モデルを開発し二重外的検証（CALM2302・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>He R, Fu J, Zhang X, et al; CALM2302 Consortium Investigators. Development and external validation of age-specific predictive models for sepsis in critically ill neonates and children using multidimensional hematological parameters: a multicenter retrospective study. Crit Care. 2026. DOI: 10.1186/s13054-026-06261-w</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-20）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06261-w" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06261-w</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Development and external validation of age-specific predictive models for sepsis in critically ill neonates and children using multidimensional hematological parameters: a multicenter retrospective study</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院の診療は変わらない</strong>。対象はNICU/PICUの小児・新生児で、当科（成人ICU）に直接の適応はない。加えて18変数のうち大半は Mindray 社の解析装置が内部生成する研究用パラメータで、著者自身が「現行の血球計数装置からは直接取得できない」と明記している。当院の測定系では再現できない</li><li><strong>持ち帰るべきは中身ではなく方法論の教訓</strong>。①AUROC だけを並べた予測モデルは臨床導入の可否を判断できない（本論文にはキャリブレーション・Brier score・decision curve のいずれも無い）②有病率7〜11%の集団では感度0.81・特異度0.79でも陽性適中率は2〜3割にとどまる — アラート4回に3回は空振りになる。RRS・バイタル自動収集の院内プロジェクトで「予測モデルを載せる」議論をするときの共通の物差しにする</li><li><strong>既存データの"隠れた次元"という発想は流用できる</strong>。本研究の骨子は「日常のCBCを撮った時点で装置内部に生じている散乱・蛍光の生データを捨てずに使う」こと。成人領域の商用対応品としては MDW（monocyte distribution width）がすでにあり、当院の検査部と「今の装置が出しているが報告していない指標は何か」を一度棚卸しする価値はある</li><li><strong>ただし今回の増分は小さい</strong>。1,887次元の研究用パラメータを積み上げても、誰の施設にもある29変数のCBCパネルに対する上乗せは ΔAUC 0.029〜0.062、6つの検証比較のうち統計的有意は2つだけ。NICU外的検証1ではむしろ素のCBCのほうが良かった（0.753 対 0.742）。当院で類似の投資判断を迫られたら、まず「素のCBC＋バイタルのベースラインモデル」を作ってから上乗せを測る、という順序を守る</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：新生児・小児の敗血症は世界で年間約300万人（新生児）・約120万人（小児）に発症し、致死率は新生児で最大50%、小児で4〜50%に達する。血液培養は感度が不十分で結果まで最大48時間かかり、CRP・PCT・IL-6 は早期感染では感度・特異度とも不十分。PRISM・PIM・SNAP・SNAP-II・SNAPPE-II といった小児スコアは死亡リスクの推定用で発症予測用ではない。2024年の Phoenix Sepsis Criteria も「感染に伴う生命を脅かす臓器障害」の定義であって発症予測を意図していない</li><li><strong>Unknown</strong>：現代の自動血球計数装置は、報告される37項目のCBCの裏側で、散乱光・蛍光の生信号から膨大な形態学的パラメータを生成している。これらが「臨床症状が出る前の潜在的炎症による造血系の変化」を捉えられるかは、大規模小児コホートで検証されていない。また新生児と年長児で予測因子が同じかどうかも不明だった</li><li><strong>What's new</strong>：中国30施設・17,066例の重症新生児・小児で、CBC由来1,924次元（うち研究用1,887）から NICU・PICU 別に18変数の CatBoost モデルを構築し、2つの独立外部コホートで検証した。<strong>NICUとPICUの上位18特徴量のうち共有されたのは2つだけ</strong>で、年齢層で敗血症の血液学的シグネチャがほぼ入れ替わることを示した。一方で、素のCBCモデルに対する上乗せは限定的であることも同時に示している</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 中国30施設17,066例の重症新生児・小児で、日常CBCの装置内部データ1,924次元から NICU/PICU 別に18変数の CatBoost モデルを開発し、二重外的検証で AUC 0.742〜0.846（NICU）／0.717〜0.811（PICU）を得た。最大の知見は性能ではなく、<strong>上位18特徴量がNICUとPICUで2つしか重ならなかった</strong>こと — 新生児と年長児では敗血症の血液学的な立ち上がり方が違うため、単一の小児モデルを作るべきではない。</p>
+</div>
+<ul><li><strong>対象</strong>：2020年10月〜2023年10月、中国12省23市30施設のNICU/PICUに入室した18歳未満17,066例。入室時に敗血症のある例は除外し、<strong>入院後に新規発症する院内敗血症</strong>を予測する設計</li><li><strong>アウトカム</strong>：退院時のICD-10コードによる敗血症診断。<strong>発症時刻は取得できず</strong>、予測ウィンドウは定義されていない</li><li><strong>予測因子</strong>：Mindray BC-6000PLUS/6800PLUS/7500 が生成する散布図・蛍光画像から独自アルゴリズムで抽出した1,887の研究用パラメータ＋37の通常CBC項目＝計1,924次元。欠測&gt;5%・分散ほぼゼロ・相関|r|&gt;0.8 を段階的に除去して NICU 203／PICU 204 変数に絞った</li><li><strong>モデル</strong>：9アルゴリズムを比較して CatBoost を採用。クラス不均衡には訓練セットのみ1:1ランダムアンダーサンプリングを適用。SHAP で重要度を順位づけ、逐次前向き選択で上位18で頭打ちになることを確認して縮約モデルを再学習</li><li><strong>性能（縮約18変数）</strong>：NICU 内部テスト 0.846／外部1 0.742／外部2 0.827。PICU 内部テスト 0.803／外部1 0.717／外部2 0.811。フルモデルからの減衰は 0.005〜0.027 に収まった</li><li><strong>年齢層差</strong>：NICU の上位は未熟顆粒球・好中球・単球の蛍光（核酸量）と形態的ばらつき、PICU は複数白血球分画の散乱・蛍光の不均一性＋血小板指標。共有は <strong>D_Ig_FSC_L0 と HGB の2つのみ</strong></li><li><strong>ベンチマーク</strong>：29変数のCBCモデルに対する ΔAUC は −0.011〜+0.062。有意差がついたのは NICU 内部テスト（p-adj 0.045）と PICU 外部検証2（p-adj 0.015）だけ。一方 WBC単独・好中球数単独に対しては全検証セットで有意に優れた（すべて p-adj &lt; 0.01）</li><li><strong>著者の限界の自己申告</strong>：後ろ向き・ICD-10ベース・発症時刻不明・アンダーサンプリングの影響・PCT/hs-CRP や既存スコアとの比較不能・パラメータが現行装置では取得不可・中国の三次施設のみ</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・技術の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>NICU/PICU の敗血症予測がなぜ難しいか</strong>。新生児は免疫が未熟で炎症反応が鈍く、体温上昇も白血球増多も出ないまま急速に悪化しうる。年長児は逆に非感染性の重症病態でも派手な全身炎症を起こすため、感染由来かどうかの識別が難しい。どちらも「悪くなってから診断する」のでは間に合わない。 <strong>既存の道具の限界</strong>。血液培養は特異度は高いが、抗菌薬先行投与・採血量不足・菌量が少ないことで偽陰性が多く、結果は最大48時間後。CRP／PCT（procalcitonin）／IL-6 は早期には立ち上がりが遅い。PRISM（Pediatric Risk of Mortality）・PIM（Pediatric Index of Mortality）・SNAP（Score for Neonatal Acute Physiology）系は死亡リスクの推定装置であって発症予測装置ではない。2024年の Phoenix Sepsis Criteria（PSC）も「感染＋臓器障害」の定義であり、発症前の予測は守備範囲外である。 <strong>多次元血球パラメータとは何か</strong>。現代の自動血球計数装置は、フローセルを通る1細胞ごとに3つの信号を測る — FSC（forward scatter、前方散乱＝細胞の大きさ）、SSC（side scatter、側方散乱＝内部構造の複雑さ・顆粒量）、SFL（side fluorescence、側方蛍光＝核酸量）。この3次元空間に細胞集団の"雲"が描かれ、装置はそこから WBC・好中球%・Hb といった37項目だけを切り出して報告し、雲の形そのものは捨てている。本研究は雲の形を数値化した — 中心位置（Peak・P・MEAN）、幅（W）、左右の境界（L・R）、歪度（Skew）、尖度（Kurt）、変動係数（CV）、投影面積（Area）などである。変数名は「D_Neu_SFL_W1」＝DIFFチャンネル・好中球集団・蛍光方向の左右境界幅（両側1%の粒子を除いた後）のように読む。チャンネル記号は D＝DIFF（白血球分類）、N＝WNB（有核白血球）、Ig＝immature granulocyte（未熟顆粒球）。 <strong>なぜ機械学習か</strong>。1,900次元の相互に強く相関する変数を単一のカットオフで扱うことはできない。CatBoost は勾配ブースティング決定木の一種で、ordered boosting により過学習を抑えつつ非線形交互作用を自動で拾う。ただしブラックボックスになるため、SHAP（SHapley Additive exPlanations、ゲーム理論のシャープレイ値を借りて「各変数が予測値をどれだけ動かしたか」を配分する手法）で寄与を可視化するのが定石である。<strong>SHAP は"モデルがどれだけその変数に依存したか"を示すのであって、その変数が疾患と因果的・独立に関連することを示すものではない</strong> — 本論文の中でもこの区別が効いてくる（後述の D_Ig_FSC_L0）。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>敗血症はNICU/PICUにおける罹患・死亡の主要因であり、世界で年間およそ新生児300万人・小児120万人が発症する。致死率は新生児で最大50%、小児で4〜50%と報告される。迅速な認識と治療がなければ多臓器不全から死に至るため、早期の正確な予測が決定的に重要である。</p>
+<p>しかし既存の道具はいずれも「予測」には向いていない。Phoenix Sepsis Criteria は臓器障害の定義であり発症予測を意図していない。血液培養はゴールドスタンダードだが感度が不十分で、最大48時間を要する。CRP・PCT・IL-6 は早期感染で感度・特異度とも不十分。PRISM・PIM・SNAP・SNAP-II・SNAPPE-II は死亡リスク推定である。著者らは「日常検査から得られる、すぐ使えて安価な予測指標」という未充足ニーズを設定した。</p>
+<p>そこで着目したのが、フローイメージング搭載の自動血球計数装置が生成する形態学的・生物物理学的パラメータである。細胞の表現型と全身性炎症は直結しているため、これらは「顕在化する前の潜在的炎症が引き起こす早期の造血系変化」を捉えうる、というのが生物学的な仮説である。ただし特徴量抽出の技術的障壁と、これらの"隠れた指標"に対する臨床側の認識の低さから、小児・新生児敗血症の領域ではほとんど研究されてこなかった。</p>
+<p><strong>目的</strong>：これら未活用のCBC由来形態計測パラメータが、重症新生児・小児の敗血症を機械学習モデルで早期に予測できるかを探索し検証する。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：多施設後ろ向きコホートによる予測モデルの開発と2つの独立外的検証。中国検査医学会（CALM）2302プロジェクトの一部。<strong>TRIPOD-AI（TRIPOD+AI statement, BMJ 2024）に準拠したと記載</strong>。ClinicalTrials.gov に事前登録（NCT06034639、2023-08-11）</li><li><strong>セッティング</strong>：中国12省23市の30施設のNICU/PICU、2020年10月〜2023年10月。全施設が三次医療機関</li><li><strong>組み入れ</strong>：NICU/PICUに入室した18歳未満の全患者</li><li><strong>除外</strong>：①入室時点ですでに敗血症、②敗血症発症前のCBCデータが無いか利用不能、③臨床記録が不完全、④既知の染色体異常、⑤妊娠</li><li><strong>コホート構成（本文の組み入れフロー）</strong>：開発コホート 11,798例（NICU 7,595／PICU 4,203）、外的検証コホート1 1,949例（NICU 1,221／PICU 728）、外的検証コホート2 3,666例（NICU 1,650／PICU 2,016）</li><li><strong>アウトカム</strong>：入室時非敗血症の患者に<strong>入院後に新規発症した院内敗血症</strong>。ICD-10 の退院時診断コードで判定（参照は Goldstein らの2005年小児敗血症コンセンサス定義）。<strong>後ろ向き行政データの制約により、敗血症発症の正確なタイムスタンプは取得できなかった</strong></li><li><strong>予測因子</strong>：Mindray BC-6000PLUS／BC-6800PLUS／BC-7500 による通常CBC測定時に生成される散布図・蛍光画像を、独自の画像ベース特徴量抽出アルゴリズムで数値化。中心傾向・ばらつき・歪度・尖度・集団境界・投影面積・変動性などを含み、計1,924特徴量（通常CBC 37＋画像由来研究用1,887）</li><li><strong>前処理と特徴量選択</strong>（NICU/PICU 別に実施）：</li></ul>
+<ol><li>欠測&gt;5% または分散ほぼゼロの変数を除外 → NICU 1,805／PICU 1,733</li><li>分散ほぼゼロの除去後 → NICU 1,798／PICU 1,718</li><li>研究用パラメータ同士で Spearman |r|&gt;0.8 のペアは片方のみ残す</li><li>残った研究用パラメータと通常CBC項目のペアで |r|&gt;0.8 の場合は<strong>研究用のほうを捨ててCBC項目を残す</strong></li></ol>
+<p>→ 最終的に <strong>NICU 203変数／PICU 204変数</strong></p>
+<ul><li><strong>データ分割とリサンプリング</strong>：開発コホートを訓練70%／内部テスト30%にランダム分割（NICU/PICU比を保持）。クラス不均衡に対し<strong>訓練セットのみ 1:1 ランダムアンダーサンプリング</strong>を適用し、<strong>内部テストセットは元の分布のまま</strong>。乱数シードは固定</li><li><strong>モデル開発</strong>：R 4.3.2 の mlr3（0.22.1）を使用。9アルゴリズム（RF・LightGBM・XGBoost・CatBoost・SVM・KNN・naïve Bayes・RPART・FNNs）を、バランス化訓練セット上の5分割交差検証・AUCで比較。最良モデルをさらに5分割CV＋ランダムサーチでハイパーパラメータ調整。性能は内部テストセットと2つの外部検証コホートで評価</li><li><strong>モデル解釈と特徴量の優先順位づけ</strong>：SHAP により寄与を定量化し、平均絶対SHAP値で順位づけ。重要度の降順に特徴量を1つずつ追加する逐次前向き選択を行い、5分割CVによる累積AUCを記録。改善が止まった時点で打ち切り</li><li><strong>選択された予測因子の回帰分析</strong>：①粗の単変量ロジスティック回帰、②年齢・性別・施設を事前指定の交絡因子として調整した単一予測因子ロジスティック回帰。効果量はオッズ比（OR）と95%CI。粗・調整のそれぞれで Benjamini-Hochberg 法による FDR 補正</li><li><strong>記述統計</strong>：連続変数は平均±SD または中央値（IQR）、カテゴリ変数は n（%）。両側 P&lt;0.05、多重比較では FDR 補正後 P（P-FDR）&lt;0.05 を有意とした</li><li><strong>報告されなかった解析（重要）</strong>：キャリブレーションプロット、キャリブレーション勾配・切片、Brier score、decision curve analysis、AUC の95%CI、縮約モデルの外部コホートにおける感度・特異度・PPV／NPV — いずれも本文にも図表にも無い</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 研究全体のワークフロー概観。4段に分かれる。最上段「Study cohort」は左に中国地図（12省23市、施設数を色濃度で表示）、中央に30施設のアイコンから上下2本の破線矢印が伸び、上が NICU group（開発コホート N=7,538／外的検証1 N=1,206／外的検証2 N=1,603）、下が PICU group（開発コホート N=4,036／外的検証1 N=709／外的検証2 N=1,974）の箱に入る。右にEMRアイコンと「Oct 2020-Oct 2023」、さらに右端に細菌・ウイルス・真菌のアイコンから新生児の絵に向かう矢印で「Sepsis」「Outcome」。2段目「Multidimensional hemocyte parameters preprocessing」は採血→血球の前処理→レーザーによる光学的形態計測（FSC/SSC/SFL の3次元立方体と、Width・Area・Extremum・Kurtosis・Skewness・Pulse width・Left bound・Right bound の抽出項目）→1,924次元の特徴量テーブル、という流れ。3段目「Features and model selection」は左に4段の絞り込みフロー（多次元血球パラメータ N=1,924 → 欠測5%超を除去し NICU 1,805・PICU 1,733 → 分散ほぼゼロを除去し NICU 1,798・PICU 1,718 → 相関|r|&gt;0.8 を除去し NICU 203・PICU 204）、中央に9アルゴリズムの箱（CatBoost・RF・SVM・LightGBM・KNN・RPART・XGBoost・NB・FNNs）が「Sepsis」を予測、右に9モデルのAUCを右下がりに並べた折れ線と「The optimal model: CatBoost」の注記。最下段「SHAP analysis and Logistic regression analysis」は SHAP から3枚の図 — 特徴量重要度の横棒グラフ、特徴量数に対する累積AUCの飽和曲線、そして単変量ロジスティック回帰と年齢・性別・施設で調整したロジスティック回帰から得るオッズ比のフォレストプロット。原図・無改変。</p>
+</div>
+<h3>4. 結果① — コホートのベースライン特性</h3>
+<p>Table 1 の実測値は本文の組み入れフローよりやや小さい（後述の批判的吟味を参照）。</p>
+<h4>Table 1（抜粋）. 開発コホートと2つの外的検証コホートのベースライン</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>NICU 開発</th><th>NICU 外部1</th><th>NICU 外部2</th><th>PICU 開発</th><th>PICU 外部1</th><th>PICU 外部2</th></tr></thead>
+<tbody>
+<tr><td>n</td><td>7,538</td><td>1,206</td><td>1,603</td><td>4,036</td><td>709</td><td>1,974</td></tr>
+<tr><td>年齢 中央値（IQR）</td><td>0.00日（0.00–0.00）</td><td>0.00日（0.00–0.01）</td><td>0.01日（0.00–0.02）</td><td>1.75歳（0.13–6.00）</td><td>2.65歳（0.42–7.50）</td><td>1.65歳（0.25–5.74）</td></tr>
+<tr><td>女児 %</td><td>43.4</td><td>42.4</td><td>39.9</td><td>39.1</td><td>38.2</td><td>42.5</td></tr>
+<tr><td>在院日数 中央値（IQR）</td><td>7（5–18）</td><td>9（5–24）</td><td>10（6–19）</td><td>10（6–18）</td><td>11（7–21）</td><td>11（7–20）</td></tr>
+<tr><td>WBC 中央値（IQR）</td><td>12.24（8.96–16.98）</td><td>11.21（8.74–15.02）</td><td>12.39（9.38–16.68）</td><td>10.18（7.37–14.04）</td><td>10.14（6.72–14.91）</td><td>9.48（6.40–13.36）</td></tr>
+<tr><td>好中球数 中央値</td><td>6.89</td><td>5.90</td><td>6.88</td><td>5.94</td><td>5.74</td><td>4.95</td></tr>
+<tr><td>好中球% 中央値</td><td>59.50</td><td>56.10</td><td>60.70</td><td>63.55</td><td>65.85</td><td>60.90</td></tr>
+<tr><td>リンパ球数 中央値</td><td>3.38</td><td>3.37</td><td>3.28</td><td>2.44</td><td>2.19</td><td>2.43</td></tr>
+<tr><td><strong>敗血症発症 n（%）</strong></td><td><strong>521（6.9）</strong></td><td><strong>114（9.5）</strong></td><td><strong>（8.7）</strong></td><td><strong>（10.3）</strong></td><td><strong>74（10.4）</strong></td><td><strong>（12.5）</strong></td></tr>
+</tbody></table></div>
+<p>年齢・在院日数・WBC・好中球数など主要項目は3コホート間で有意差あり（いずれも P&lt;0.001）。女児比率も NICU で P=0.03、PICU で P=0.02。</p>
+<h4>Table 1（抜粋）. 入室時の主病態分類 n（%）</h4>
+<div class="tw"><table>
+<thead><tr><th>病態群</th><th>NICU 開発</th><th>NICU 外部1</th><th>NICU 外部2</th><th>PICU 開発</th><th>PICU 外部1</th><th>PICU 外部2</th></tr></thead>
+<tbody>
+<tr><td>呼吸器疾患</td><td>3,782（50.2）</td><td>（32.1）</td><td>（28.1）</td><td>（40.6）</td><td>（32.4）</td><td>620（31.4）</td></tr>
+<tr><td>血液・造血器疾患</td><td>（20.5）</td><td>（18.7）</td><td>（12.5）</td><td>221（5.5）</td><td>15（2.1）</td><td>62（3.1）</td></tr>
+<tr><td>感染症</td><td>731（9.7）</td><td>96（8.0）</td><td>（9.9）</td><td>178（4.4）</td><td>33（4.7）</td><td>155（7.9）</td></tr>
+<tr><td>神経疾患</td><td>131（1.7）</td><td>36（3.0）</td><td>99（6.2）</td><td>（18.3）</td><td>（15.5）</td><td>（13.1）</td></tr>
+<tr><td>腫瘍</td><td>12（0.2）</td><td>9（0.7）</td><td>18（1.1）</td><td>341（8.4）</td><td>61（8.6）</td><td>160（8.1）</td></tr>
+<tr><td>外傷・中毒</td><td>11（0.1）</td><td>8（0.7）</td><td>5（0.3）</td><td>287（7.1）</td><td>40（5.6）</td><td>82（4.2）</td></tr>
+<tr><td>先天異常</td><td>370（4.9）</td><td>（15.0）</td><td>（17.8）</td><td>158（3.9）</td><td>80（11.3）</td><td>112（5.7）</td></tr>
+<tr><td>消化器疾患</td><td>167（2.2）</td><td>67（5.6）</td><td>（9.1）</td><td>158（3.9）</td><td>46（6.5）</td><td>168（8.5）</td></tr>
+<tr><td>内分泌・代謝疾患</td><td>294（3.9）</td><td>60（5.0）</td><td>（9.3）</td><td>64（1.6）</td><td>19（2.7）</td><td>72（3.6）</td></tr>
+<tr><td>循環器疾患</td><td>104（1.4）</td><td>32（2.7）</td><td>31（1.9）</td><td>83（2.1）</td><td>23（3.2）</td><td>68（3.4）</td></tr>
+<tr><td>免疫系疾患</td><td>0（0.0）</td><td>1（0.1）</td><td>6（0.4）</td><td>45（1.1）</td><td>16（2.3）</td><td>43（2.2）</td></tr>
+<tr><td>泌尿生殖器疾患</td><td>5（0.1）</td><td>2（0.2）</td><td>9（0.6）</td><td>32（0.8）</td><td>11（1.6）</td><td>36（1.8）</td></tr>
+<tr><td>その他</td><td>382（5.1）</td><td>102（8.5）</td><td>46（2.9）</td><td>93（2.3）</td><td>25（3.5）</td><td>137（6.9）</td></tr>
+</tbody></table></div>
+<p>コホート間で病態構成は大きく異なる（すべて P&lt;0.001）。NICU開発コホートは呼吸器疾患が半数を占め血液疾患が20.5%、対して PICU は神経疾患13〜18%・腫瘍8%台・外傷中毒4〜7%と、そもそも母集団が別物である。<strong>外的検証コホート間でもこの構成が揃っていない</strong>ことが、後述する外部性能のばらつきを読むうえで効いてくる。</p>
+<p>血液培養プロファイルは eTable 2 にまとめられ、<strong>全体として陽性率は低く</strong>、培養で確認された感染の大半は細菌であった（具体的数値は本文に記載なし）。</p>
+<h3>5. 結果② — 9つの機械学習アルゴリズムの比較</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. NICU・PICU コホートにおける敗血症予測モデルの性能。(A) 9つの機械学習モデルのAUC比較を、青＝NICU群・紫＝PICU群の2本の折れ線で示す。横軸はAUC降順に CatBoost・RF・LightGBM・SVM・XGBoost・NB・RPART・KNN・FNNs と並び、NICU の線は 0.845 付近から緩やかに下り、右端の FNNs で 0.55 付近に急落する。PICU の線は一貫して NICU より低い位置を平行に走る。(B–C) CatBoost モデルのROC曲線。(B) が NICU コホート、(C) が PICU コホートで、それぞれ訓練セット・内部テストセット・2つの外的検証セットの4本を色分けして重ねている。(D) 重要度順に血球特徴量を追加していったときの累積AUC曲線を NICU・PICU 別に描き、<strong>縦の破線が x=18 の位置</strong>に立って、これ以上足しても改善がほぼ無いことを示す。(E–F) 特徴量選択後（上位18）の CatBoost モデルのROC曲線を、(E) NICU・(F) PICU について訓練・内部テスト・2つの外的検証セットで描いたもの。原図・無改変。</p>
+</div>
+<ul><li><strong>NICU</strong>：CatBoost が最高の AUC 0.845、次いで RF 0.840、LightGBM 0.839。FNNs・RPART・KNN は AUC &lt; 0.75 と劣った</li><li><strong>PICU</strong>：RF が最高 AUC 0.786、CatBoost 0.782、SVM 0.775 とわずかに下回る。LightGBM 0.752、XGBoost 0.744 は中程度。FNNs・RPART・KNN は AUC &lt; 0.70</li></ul>
+<p><strong>アルゴリズム選択の根拠</strong>：PICU では RF のほうが数値上わずかに高かった（0.786 対 0.782、差 0.004）が、著者らは総合性能と SHAP による解釈可能性を考慮して CatBoost を採用した。</p>
+<h3>6. 結果③ — フル特徴量 CatBoost モデルの構築と評価</h3>
+<p>5分割CV＋ランダムサーチでハイパーパラメータを調整したフルモデルの性能：</p>
+<div class="tw"><table>
+<thead><tr><th>コホート</th><th>集団</th><th>AUC</th><th>感度</th><th>特異度</th><th>正確度</th></tr></thead>
+<tbody>
+<tr><td>内部テストセット</td><td>NICU</td><td>0.866</td><td>0.811</td><td>0.785</td><td>0.787</td></tr>
+<tr><td>外的検証1</td><td>NICU</td><td>0.769</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>外的検証2</td><td>NICU</td><td>0.840</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>内部テストセット</td><td>PICU</td><td>0.808</td><td>0.744</td><td>0.761</td><td>0.760</td></tr>
+<tr><td>外的検証1</td><td>PICU</td><td>0.736</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>外的検証2</td><td>PICU</td><td>0.827</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>感度・特異度が報告されているのは内部テストセットのみである。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>有病率を戻すと陽性適中率は2〜3割にしかならない 論文には陽性適中率（PPV）の記載が無いが、報告されている感度・特異度と各集団の敗血症発生率から逆算できる。<strong>NICU</strong>（発生率7.48%、感度0.811・特異度0.785）で <strong>PPV ≈ 23%・NPV ≈ 98%</strong>。<strong>PICU</strong>（発生率10.92%、感度0.744・特異度0.761）で <strong>PPV ≈ 28%・NPV ≈ 96%</strong>。<mark class="hl">つまりアラートが鳴った4例のうち実際に敗血症になるのは1例強で、残り3例弱は空振りになる</mark>。AUC 0.85 という数字の見た目と、現場で受け取るアラートの質はまったく別物である（この換算は本ノートでの計算であり、原著の記載ではない）。</p>
+</div>
+<h3>7. 結果④ — 特徴量選択と縮約 CatBoost モデルの検証</h3>
+<p>フル特徴量 CatBoost の SHAP 値で変数を平均絶対重要度順に並べ、重要度の高い順に1つずつ加えながら累積AUCを再計算した。性能は上位の数変数で急速に立ち上がり、<strong>NICU・PICU ともに上位18付近で頭打ち</strong>となり、それ以上の追加は寄与がわずかであった（Figure 2D）。この観察に基づき上位18特徴量で CatBoost を再学習し、5分割CV＋ランダムサーチでハイパーパラメータを再最適化した。</p>
+<h4>縮約18変数モデル と フルモデル の性能比較</h4>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>データセット</th><th>フルモデル AUC</th><th>18変数モデル AUC</th><th>減衰</th></tr></thead>
+<tbody>
+<tr><td>NICU</td><td>内部テスト</td><td>0.866</td><td>0.846</td><td>0.020</td></tr>
+<tr><td>NICU</td><td>外的検証1</td><td>0.769</td><td>0.742</td><td>0.027</td></tr>
+<tr><td>NICU</td><td>外的検証2</td><td>0.840</td><td>0.827</td><td>0.013</td></tr>
+<tr><td>PICU</td><td>内部テスト</td><td>0.808</td><td>0.803</td><td>0.005</td></tr>
+<tr><td>PICU</td><td>外的検証1</td><td>0.736</td><td>0.717</td><td>0.019</td></tr>
+<tr><td>PICU</td><td>外的検証2</td><td>0.827</td><td>0.811</td><td>0.016</td></tr>
+</tbody></table></div>
+<p>減衰は 0.005〜0.027 の範囲に収まり、著者らは「簡潔性と解釈可能性を大きく高めつつ強い予測能を保持した」と結論している。</p>
+<p><strong>外的妥当性の読み方</strong>：内部テストから外的検証1への低下は NICU で 0.104、PICU で 0.086 と大きい。一方、外的検証2ではむしろ内部テストに近い水準（NICU 0.827、PICU 0.811）まで戻っている。<strong>2つの外部コホートの間で AUC が 0.085〜0.094 も違う</strong>ことは、「外的検証に耐えた」という単純な結論を許さない。外的検証1は n が小さく（NICU 1,206／PICU 709）、先天異常の比率が突出して高い（NICU 15.0%・PICU 11.3%）など病態構成も他と異なる。どのタイプの施設で通用しどこで壊れるのかを説明する解析は行われていない。</p>
+<h3>8. 結果⑤ — NICU と PICU で上位予測因子はほとんど重ならない</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. NICU・PICU コホートの上位血球特徴量に対する SHAP 重要度と多変量ロジスティック回帰。(A) NICU群。左は平均絶対SHAP値で降順に並べた18本の横棒（上から Nrbc%・D_Ig_FSC_L0・D_Neu_SFL_W0・N_WBC_SSC_P15・HGB・D_Lym_SFL_Skew0・D_Ig_SFL_Peak0・IMG%・D_Mon_SSC_Skew0・D_Mon_SFL_W9・MCHC・N_Lym_SSC_CV19・N_Neu_SFL_L1・D_Mon_SFL_CV8・D_Lym_Ratio_FSC・D_Mon_FSFL_Area・Mon%・D_Ig_SFL_CV9）。棒は血球系統ごとに色分けされ、青＝赤芽球系、紫＝顆粒球、橙＝リンパ球、赤＝単球、緑＝総白血球、黄＝血小板。右は同じ順で並べた調整オッズ比のフォレストプロットで、対数目盛の横軸に黒四角と95%CIのひげが並び、<strong>OR=1 の位置に赤い縦破線</strong>が入る。HGB・MCHC・D_Mon_FSFL_Area・D_Lym_Ratio_FSC・D_Ig_SFL_CV9 は破線の左（保護方向）、D_Neu_SFL_W0・D_Ig_SFL_Peak0・D_Mon_SFL_W9・N_Neu_SFL_L1 は右に大きく離れる。D_Ig_FSC_L0・D_Lym_SFL_Skew0・IMG%・Mon% はひげが赤破線に重なる。(B) PICU群を同じ形式で描いたもの。上から D_Neu_SFL_W1・PCT・N_WBC_SFL_Kurt5・HCT・N_Neu_SSC_P15・D_Neu_Ig_SFL_CV2・D_NeuIg_SSFL_Area・N_WBC_FSC_CV1・N_Neu_SSC_PULWID_MEAN0・Baso%・D_Mon_SSC_W9・N_Lym_SFL_W16・D_Mon_SSC_CV9・D_Ig_FSC_L0・RBC・N_NRBC_Zone_Num・N_WBC_SFL_P・HGB。PCT・HCT・RBC・HGB・D_Ig_FSC_L0・Baso% は赤破線の左側にある。原図・無改変。</p>
+</div>
+<p><strong>系統の違い</strong>：NICU モデルの上位は赤芽球系・顆粒球系・リンパ球系・単球系・総白血球由来の指標で構成されるのに対し、<strong>PICU モデルはこれに加えて血小板関連パラメータを含む</strong>。</p>
+<p><strong>通常CBC項目の割合</strong>：18のうち通常CBC項目だったのは、NICU が5つ（NRBC%＝有核赤血球%、HGB、IMG%＝未熟顆粒球%、MCHC＝平均赤血球ヘモグロビン濃度、Mon%＝単球%）、PICU が5つ（<strong>PCT＝plateletcrit・血小板クリット</strong>、HCT、Baso%＝好塩基球%、RBC、HGB）。残りはすべてヘモグラム由来の研究用パラメータである。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>PICU モデルの「PCT」はプロカルシトニンではない Figure 3B で2番目に重要な特徴量として並ぶ <strong>PCT は plateletcrit（血小板クリット＝血小板容積率）</strong> であり、<mark class="hl">集中治療で日常的に使う procalcitonin ではない</mark>。しかも方向は保護的（OR&lt;1）で、血小板量が少ないほど敗血症リスクが高いという読みになる。この論文だけで「PCTが2番目に重要」と要約すると、まったく別の意味に伝わる。</p>
+</div>
+<p><strong>共有された特徴量はわずか2つ</strong>：NICU と PICU の18変数で重なったのは <strong>D_Ig_FSC_L0</strong>（DIFFチャンネルの未熟顆粒球集団について、前方散乱方向で両側5%の粒子を除いた後の左境界）と <strong>HGB</strong> の2つだけである（eFigure 2 のベン図）。つまり両モデルとも多次元血液学的情報に依拠しているものの、<strong>予測に効く細胞レベルの寄与因子は新生児と年長児で大きく異なる</strong>。</p>
+<h3>9. 結果⑥ — 上位予測因子と敗血症の関連（単変量・多変量ロジスティック回帰）</h3>
+<h4>NICU コホート</h4>
+<p>18特徴量のうち <strong>14が単変量で有意（P&lt;0.05）</strong>、そして<strong>性別・年齢・施設で調整した後も14すべてが有意を維持</strong>した。核酸蛍光の増強と免疫細胞の不均一性増大を反映するパラメータが強い関連を示した。効果量の大きい順：</p>
+<div class="tw"><table>
+<thead><tr><th>特徴量</th><th>意味</th><th>調整オッズ比（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>D_Ig_SFL_Peak0</td><td>DIFFチャンネル未熟顆粒球集団の蛍光方向ピーク位置</td><td>3.71（2.64–5.23）</td></tr>
+<tr><td>D_Neu_SFL_W0</td><td>DIFFチャンネル好中球集団の蛍光方向の左右境界幅（両側の粒子除去なし）</td><td>3.67（2.70–5.00）</td></tr>
+<tr><td>D_Mon_SFL_W9</td><td>DIFFチャンネル単球集団の蛍光方向の左右境界幅（両側14%の粒子を除去後）</td><td>2.94（2.25–3.83）</td></tr>
+<tr><td>N_Neu_SFL_L1</td><td>WNBチャンネル好中球集団の蛍光方向の左境界（高さ20で切断、左0.5%・右1%の粒子除去後）</td><td>2.78（2.20–3.52）</td></tr>
+</tbody></table></div>
+<p>これらは総じて、<strong>好中球・未熟顆粒球・単球における核酸含量の増加、免疫細胞の活性化、形態学的不均一性の増大</strong>を示唆し、敗血症の新生児で広範な免疫調節不全が存在することを支持する。すべての関連は Benjamini-Hochberg 補正後も有意であった（FDR調整 P はいずれも &lt;0.001）。</p>
+<h4>PICU コホート</h4>
+<p><strong>17が単変量で有意</strong>、うち <strong>16が多変量調整後も有意</strong>を維持した。末梢白血球亜分画の蛍光・散乱の異常な不均一性を反映するパラメータが強い関連を示した：</p>
+<div class="tw"><table>
+<thead><tr><th>特徴量</th><th>意味</th><th>調整オッズ比（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>D_Neu_SFL_W1</td><td>DIFFチャンネル好中球集団の蛍光方向の左右境界幅（両側1%の粒子除去後）</td><td>3.14（2.20–4.49）</td></tr>
+<tr><td>N_WBC_SFL_Kurt5</td><td>WNBチャンネル白血球集団の蛍光方向の尖度（高さ50で切断後）</td><td>3.05（1.77–5.27）</td></tr>
+<tr><td>N_Neu_SSC_P15</td><td>WNBチャンネル好中球集団の側方散乱方向の重心位置（高さ120で切断後）</td><td>2.38（1.82–3.11）</td></tr>
+<tr><td>D_Mon_SSC_W9</td><td>DIFFチャンネル単球集団の側方散乱方向の左右境界幅（両側14%の粒子除去後）</td><td>2.19（1.67–2.86）</td></tr>
+<tr><td>N_Lym_SFL_W16</td><td>WNBチャンネルリンパ球集団の蛍光方向の左右境界幅（高さ120で切断、左0.5%・右1%の粒子除去後）</td><td>2.13（1.69–2.68）</td></tr>
+</tbody></table></div>
+<p>これらは<strong>好中球・単球・リンパ球における核酸のばらつきと細胞内構造の複雑さの増大</strong>を示し、敗血症小児における白血球の活性化・形態学的不均一性・免疫調節不全を反映する。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>重要度と独立関連は一致しない — D_Ig_FSC_L0 の教訓 NICU モデルで SHAP 重要度<strong>第2位</strong>の D_Ig_FSC_L0 は、Figure 3A のフォレストプロットでは95%CIが OR=1 をまたいでいる。同じ変数は PICU では OR&lt;1（保護方向）に位置する。<mark class="hl">モデルが強く依存している変数が、単独では敗血症と独立に関連していないことは普通に起こる</mark>。SHAP は「そのモデルの中での寄与配分」を測る道具であって、生物学的関連の証拠でも移植可能性の保証でもない。JCで機械学習論文を読むとき、SHAP順位表を関連の強さの表として読まないこと。</p>
+</div>
+<h3>10. 結果⑦ — 素のCBCモデル・単変量ベンチマークとの比較</h3>
+<p>最適化した18変数 CatBoost モデルと <strong>29変数のCBCモデル</strong>を、NICU・PICU 別に頭対頭で比較した。ペアAUC差は DeLong 検定で評価し、P値は FDR 補正した。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. NICU・PICU コホートにおける CBCモデル対上位18特徴量モデルのAUC比較を、内部テストセット1つと外的検証データセット2つで示す。(A) NICU コホート：ピンクの棒＝CBCモデル、水色の棒＝上位18特徴量モデル。(B) PICU コホート：杏色の棒＝CBCモデル、薄緑の棒＝上位18特徴量モデル。DeLong検定によるモデル間AUC比較を行い、FDR調整P値（p.adj）が各ペア棒の上に表示されている。原図・無改変。</p>
+</div>
+<h4>Table 2. 18変数 CatBoost モデルと CBC モデルの AUC 比較</h4>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>データセット</th><th>18変数モデル</th><th>CBCモデル</th><th>ΔAUC</th><th>p-adj</th></tr></thead>
+<tbody>
+<tr><td>NICU</td><td>訓練セット</td><td>0.868</td><td>0.806</td><td>0.062</td><td>—</td></tr>
+<tr><td>NICU</td><td>内部テストセット</td><td>0.846</td><td>0.813</td><td>0.033</td><td>0.045</td></tr>
+<tr><td>NICU</td><td>外的検証1</td><td>0.742</td><td>0.753</td><td>−0.011</td><td>0.486</td></tr>
+<tr><td>NICU</td><td>外的検証2</td><td>0.827</td><td>0.795</td><td>0.032</td><td>0.05</td></tr>
+<tr><td>PICU</td><td>訓練セット</td><td>0.786</td><td>0.751</td><td>0.035</td><td>—</td></tr>
+<tr><td>PICU</td><td>内部テストセット</td><td>0.803</td><td>0.771</td><td>0.032</td><td>0.118</td></tr>
+<tr><td>PICU</td><td>外的検証1</td><td>0.717</td><td>0.688</td><td>0.029</td><td>0.245</td></tr>
+<tr><td>PICU</td><td>外的検証2</td><td>0.811</td><td>0.779</td><td>0.032</td><td>0.015</td></tr>
+</tbody></table></div>
+<p>p-adj は DeLong 検定によるペアAUC比較の FDR 調整P値。</p>
+<ul><li><strong>NICU</strong>：訓練・内部テスト・外的検証2 では18変数モデルが上回った（ΔAUC 0.062／0.033／0.032）。ただし<strong>外的検証1ではCBCモデルのほうがわずかに良い</strong>（0.753 対 0.742、ΔAUC −0.011）。統計的に有意な改善は内部テストセットのみ（p-adj 0.045）で、2つの外的検証コホートでは有意な差は認めなかった（外部1 p-adj 0.486、外部2 p-adj 0.05）</li><li><strong>PICU</strong>：4つのデータセットすべてで数値上は18変数モデルが上回った（ΔAUC 0.035／0.032／0.029／0.032）。ただし有意に達したのは<strong>外的検証2のみ</strong>（p-adj 0.015）で、内部テストは p-adj 0.118、外的検証1は p-adj 0.245 であった</li></ul>
+<h4>単変量ベースラインとの比較</h4>
+<p>18変数モデルを、WBC単独・好中球数（Neu）単独・入室時体温単独の3つのベースラインと比較した（eTable 5）。体温モデルの解析は、NICU・PICU とも外的検証2で体温データが利用できなかったため同コホートを除外した。</p>
+<ul><li>評価可能なほぼすべてのデータセットで、単変量モデルは18変数モデルより実質的に低い AUC を示し、<strong>ΔAUC は 0.026〜0.277</strong> の範囲で一貫して正</li><li><strong>WBC単独・Neu単独</strong>との比較では、両群のすべてのテスト・外的検証コホートで18変数モデルが統計的に有意に優れた（すべて p-adj &lt; 0.01）</li><li><strong>体温単独</strong>との比較で有意差がついたのは NICU 内部テスト（p-adj &lt;0.0001）と PICU 内部テスト（p-adj 0.0005）のみ。外的検証1では NICU（p-adj 0.1907）・PICU（p-adj 0.714）とも有意差なし</li></ul>
+<p>著者らの総括は率直である — 18変数モデルは<strong>フル29変数のCBCパネルに対しては大半のコホートで数値上わずかな改善しかもたらさず、いくつかの検証サブセットでは統計的有意に達しなかった</strong>。ただし大幅に少ない特徴量数で良好な識別能を達成しており、3つの単変量ベースラインは一貫して上回った。単一指標では捉えきれない末梢血の免疫・炎症シグネチャを、複数の血液学的指標を統合することで包括的に捉えられるためと解釈している。</p>
+<h3>11. 考察 — 著者らの主張</h3>
+<ul><li><strong>本研究の設計上の主眼</strong>：入院時にすでに敗血症のある患者を除外し、<strong>入院後に新規発症する敗血症を予測した</strong>点。従来研究の大半は「確立した敗血症の診断」を扱っており、早期リスク同定という臨床的に意味のある目的に踏み込んだのは本研究の特徴である</li><li><strong>CatBoost が選ばれた理由</strong>：勾配ブースティング決定木として、異質な血液学的変数間の複雑な非線形交互作用を捉えつつ、ordered boosting により過学習を抑制する。大規模な特徴量エンジニアリング無しに非線形関係を自動学習でき、高次元臨床データセットに適する。SHAP により大域的な特徴量寄与の透明な解釈が可能になり、臨床導入を後押しする</li><li><strong>年齢層差の生物学的解釈</strong>：新生児では未熟顆粒球・好中球・単球の<strong>核酸蛍光の増加と形態的不均一性の増大</strong>が上位に来た。これは新生児感染に特徴的な免疫未熟性と早期の細胞活性化と整合する。対して小児では複数の白血球亜分画にわたる<strong>散乱・蛍光特性の変化</strong>が優位で、小児敗血症で典型的に見られる強い全身性炎症反応を反映する。この差が、全小児年齢を1つのモデルで扱うのではなく別々のモデルを構築すべき生物学的根拠になる</li><li><strong>臨床実装上の含意（NICU）</strong>：新生児の院内発症敗血症は免疫未熟性が炎症反応を鈍らせるため、微細で非特異的な所見しか出ないことが多い。多次元血球パラメータは通常CBCの測定過程で自動的に生成されるため、NICU特化モデルは動的なリスク層別化を支え、顕在化する前に厳重監視や追加評価を要する高リスク児を拾い上げうる</li><li><strong>臨床実装上の含意（PICU）</strong>：小児では全身性炎症反応がより顕著だが、敗血症由来の変化を非感染性の重症病態と区別することは依然難しい。PICU特化18変数モデルは、入院中に通常CBCが実施されたタイミングでの迅速なリスク層別化ツールとして、追加の微生物学的・炎症学的検査を要する高リスク児の同定を助けうる</li><li><strong>既存の血液学的マーカー研究との違い</strong>：先行研究は WBC・PLT・RDW や派生比（I:T比＝未熟／総好中球比、NLR＝好中球リンパ球比、PLR＝血小板リンパ球比、MDW＝monocyte distribution width）といった通常CBC指標が中心だった。これらは診断的・予後的価値を示してきたが、早期敗血症における循環白血球の複雑な形態・機能変化を十分には捉えられない可能性がある。本研究の予測因子はすべて自動CBC解析時に日常的に生成される散乱・蛍光信号から抽出されており、<strong>追加採血も追加検査も要さない</strong>点でコスト効率とスケーラビリティに優れる</li><li><strong>強み（著者の自己評価）</strong>：①確立敗血症の診断ではなく新規発症の予測を扱った ②多施設デザインと内部・独立外部の両検証により単施設研究より頑健で一般化可能 ③侵襲的検査・画像・臓器障害マーカー・複雑な臨床変数を一切使わず、日常のCBC由来パラメータのみに依拠するため既存のワークフローに組み込みやすい</li></ul>
+<h3>12. 著者が挙げた限界</h3>
+<ol><li><strong>後ろ向き観察デザイン</strong>のため、記録の不完全性・選択バイアス・残余交絡を受ける。加えて敗血症は退院時 ICD-10 コードで同定しており、<strong>正確な発症時刻が得られない</strong>。そのため固定の予測ウィンドウの評価も、早発型／遅発型敗血症の比較もできない</li><li><strong>クラス不均衡への対処にランダムダウンサンプリングを用いた</strong>ことが、実世界の敗血症有病率をもつ外部コホートで性能が低下したことの一因かもしれない</li><li><strong>参加施設間のデータ利用可能性が揃わなかった</strong>ため、確立した敗血症スコアリングシステムとの比較、プロカルシトニン・高感度CRPといった従来の炎症バイオマーカーとの比較、微生物学的病因や血液培養陽性別の解析ができなかった</li><li>多次元血球パラメータは本研究では専用ソフトウェアで抽出しており、<strong>現時点では従来の血球計数装置から直接取得することはできない</strong>。ただし数学的に定義可能な変数であり、将来的に装置ソフトウェアに実装すれば通常CBC測定時に自動リスク予測が可能になりうる</li><li><strong>全参加施設が中国の三次医療機関</strong>であり、異なる医療システム・異なる民族集団での前向き検証が一般化可能性の確認に必要</li><li>SHAP により解釈可能性は向上したが、<strong>いくつかの光学的サイトメトリーパラメータの生物学的意義は十分には理解されていない</strong>。フローサイトメトリーとマルチオミクスを統合した機序研究が必要</li></ol>
+<h3>13. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 警告</span>
+<p>「TRIPOD+AI に準拠」と書かれているが、キャリブレーションの報告が一切ない 本論文は Methods で TRIPOD+AI（Collins GS, et al. BMJ 2024;385:e078378）に従ったと明記しているが、<mark class="hl">キャリブレーションプロット・キャリブレーション勾配と切片・Brier score・decision curve analysis のいずれも本文にも図表にも存在しない</mark>。TRIPOD は識別能とキャリブレーションの双方の報告を求めており、この欠落は準拠の主張と矛盾する。しかも本研究は<strong>訓練セットに1:1ランダムアンダーサンプリングをかけている</strong> — 有病率7〜11%の集団を50%に人為的に引き上げているので、モデルが出力する予測確率は<strong>構造的に過大</strong>になる（切片が log(オッズ比の変化分) だけずれる）。再較正しない限り、このモデルの出す「敗血症確率」は数値としてそのまま使えない。著者は「アンダーサンプリングが外部コホートでの性能低下の一因かもしれない」と述べているが、アンダーサンプリングが主に壊すのは識別能ではなくキャリブレーションであり、この自己評価は論点をずらしている。</p>
+</div>
+<ul><li><strong>AUC に95%CIが1つも付いていない</strong>。Table 2・本文・図いずれも点推定のみ。DeLong 検定でペア比較はしているのに、単独の AUC の不確実性は示されない。特に外的検証1（NICU 1,206例中114イベント／PICU 709例中74イベント）のような小さいコホートでは、AUC の CI は容易に ±0.05 級になる。「外部で 0.742 だった」という数字を CI 抜きで受け取ってはいけない</li><li><strong>これは本当に「予測」か</strong>。発症時刻が不明なため、モデルが使う CBC が敗血症の何時間前・何日前のものか誰にも分からない。「発症前のCBC」という条件だけでは、発症直前（すでに前駆症状があり、だから採血された）の検体が混ざりうる。<mark class="hl">予測ウィンドウのない予測モデルは、臨床導入の設計図としては使えない</mark>。「48時間前に鳴るアラート」なのか「悪化しつつある児のCBCを後追いしている」だけなのかで、価値はまったく違う</li><li><strong>アウトカム定義が退院時ICD-10コード</strong>。参照は2005年 Goldstein らの小児敗血症コンセンサス定義であり、Introduction で言及した Phoenix Sepsis Criteria ではない。コーディングの施設間ばらつきは検証されていない。外的検証1と2で AUC が 0.09 も違う原因の一部は、モデルの性能ではなく<strong>施設ごとのコーディング習慣の違い</strong>である可能性がある</li><li><strong>効果的なサンプルサイズが小さい</strong>。NICU開発コホート7,538例のうち敗血症は521例。70%を訓練に回すと約365イベント、1:1アンダーサンプリング後の訓練セットは<strong>約730行</strong>である。この730行で203変数の中から特徴量を選び、ハイパーパラメータをチューニングし、SHAP順位を確定している。「17,066例の大規模研究」という見出しの印象と、モデル学習に実際に使われたデータ量は大きく乖離する</li><li><strong>特徴量選択の情報漏洩の疑い</strong>。Methods は「データ前処理と選択は NICU・PICU データセットごとに実施した」と書くのみで、相関フィルタ（|r|&gt;0.8）を訓練セット内で行ったのか開発コホート全体で行ったのかが読み取れない。後者なら内部テストセットの性能はやや楽観的に出る</li><li><strong>数字が合わない</strong>。Methods の組み入れフローは開発11,798＋外部1 1,949＋外部2 3,666＝<strong>17,413例</strong>だが、Abstract と Table 1 の合計は NICU 10,347＋PICU 6,719＝<strong>17,066例</strong>。347例の差が説明されていない。また Methods は「37の通常CBCパラメータ」と書くのに、Results と Discussion は比較対象を一貫して「29変数のCBCモデル」と呼ぶ。Discussion にはさらに「縮約18変数モデルはフルの<strong>29特徴量CBCモデル</strong>と同等かやや良好」という一文があり、フルモデル（203/204変数）とCBCモデル（29変数）を取り違えている</li><li><strong>上乗せ価値の実質</strong>。1,887次元の研究用パラメータを抽出する専用パイプラインを構築して得られた上乗せは、どこの病院にもある29変数のCBCパネルに対して ΔAUC 0.029〜0.062。6つの検証比較のうち有意は2つ、NICU外的検証1では逆転している。<mark class="hl">「機械学習で AUC 0.85」という見出しではなく、「素のCBCの 0.81 に対して 0.85」という比較でこそ読むべき論文である</mark></li><li><strong>COI 記載の不整合</strong>。共著者の1名（Huan Qi）は Shenzhen Mindray Bio-Medical Electronics 社の Algorithm and Clinical Research Department 所属であり、モデルの入力は同社装置の内部データを同社関連の独自アルゴリズムで抽出したものである。それにもかかわらず COI 欄は「利益相反として認識されうる商業的・財務的関係はない」と記載する。企業が「技術支援とデータ処理支援」を提供したことは Conflict of Interest 欄で述べられているが、著者としての参加と両立しない書き方になっている</li><li><strong>実装可能性がゼロに近い</strong>。著者自身が「現行の血球計数装置からは直接取得できない」と認めている。単一ベンダー（Mindray BC-6000PLUS/6800PLUS/7500）の内部データに依存し、抽出アルゴリズムは非公開。データも「著者への請求ベース」。他施設が再現・検証する手段が事実上ない</li><li><strong>最も重要な比較が行われていない</strong>。Introduction は PCT・CRP・IL-6 の感度特異度不足を出発点にしているのに、施設間のデータ不揃いを理由に PCT・hs-CRP との比較も、PRISM/PIM/SNAP 系との比較も行われていない。比較されたのは WBC単独・好中球数単独・体温単独という、誰も単独では使わないベースラインだけである。しかもその体温単独との比較ですら、外的検証1では有意差が出ていない</li><li><strong>臨床的有用性の評価が無い</strong>。decision curve analysis も net benefit も無く、運用閾値の提案も無い。前述のとおり実運用での PPV は2〜3割にとどまるため、アラート疲れの観点からは閾値設計こそが本丸になる。既報でも機械学習の敗血症早期警告システムは、性能指標が良好でも臨床医の受容が伴わないことが示されている（<span class="wl">敗血症予測の機械学習アラートは臨床医に響かなかった — 有用と答えたのは看護師42%・医師16%（EWS 2.0・CCM2019）</span>）</li><li><strong>「完全な記録がある症例」に限った complete-case デザイン</strong>。除外基準③「臨床記録が不完全」は、記録の質と重症度・転帰が相関する状況では選択バイアスを生む。欠測の扱い（多重代入等）に関する記載はない</li></ul>
+<h4>JCで押さえたい論点を1枚に</h4>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>識別能だけで導入判断していないか</td><td>キャリブレーション勾配・切片、Brier score、decision curve の有無</td><td>本論文には無い。導入検討時は必ず要求する</td></tr>
+<tr><td>アンダーサンプリングの副作用</td><td>予測確率が有病率と整合するか</td><td>実装前に再較正（platt scaling／isotonic）が必須</td></tr>
+<tr><td>「予測」の時間軸</td><td>予測ウィンドウ（何時間前か）の定義</td><td>定義が無い研究は運用設計に落とせない</td></tr>
+<tr><td>外部性能のばらつき</td><td>外的検証1と2でAUCが 0.085〜0.094 違う理由</td><td>施設特性・コーディング習慣・症例構成を層別解析すべき</td></tr>
+<tr><td>上乗せ価値</td><td>素のCBCモデルを必ずベースラインに置く</td><td>ΔAUC 0.03・有意は6中2。投資対効果は小さい</td></tr>
+<tr><td>SHAPの読み方</td><td>重要度上位＝独立関連ではない</td><td>D_Ig_FSC_L0（重要度2位・調整OR≒1）が反例</td></tr>
+<tr><td>変数名の罠</td><td>PCT＝plateletcrit であって procalcitonin ではない</td><td>抄録だけで要約しない</td></tr>
+<tr><td>移植可能性</td><td>装置ベンダー・抽出アルゴリズムの依存度</td><td>Mindray専用・非公開のため他施設では再現不能</td></tr>
+</tbody></table></div>
+<h3>14. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>Tan B, et al.</td><td>小児重症敗血症・敗血症性ショックの世界の致死率のSR・MA</td><td>JAMA Pediatr. 2019;173(4):352-362</td></tr>
+<tr><td>Fleischmann C, et al.</td><td>入院加療を要する敗血症の世界の発生率と死亡率の推計</td><td>Am J Respir Crit Care Med. 2016;193(3):259-72</td></tr>
+<tr><td>Watson RS, et al.</td><td>小児敗血症の疾病負荷と現代的疫学のレビュー</td><td>Lancet Child Adolesc Health. 2024;8(9):670-681</td></tr>
+<tr><td>Meyer NJ, Prescott HC</td><td>敗血症と敗血症性ショックの総説</td><td>N Engl J Med. 2024;391(22):2133-2146</td></tr>
+<tr><td>Weiss SL, et al.</td><td>小児重症敗血症の世界疫学（SPROUT研究）</td><td>Am J Respir Crit Care Med. 2015;191(10):1147-57</td></tr>
+<tr><td>Sankar J, et al.</td><td>小児敗血症で認識から1時間を超える抗菌薬投与遅延は死亡増加と関連</td><td>J Pediatr. 2021;233:183-190.e3</td></tr>
+<tr><td>Lane RD, et al.</td><td>救急外来での抗菌薬遅延と小児敗血症の死亡リスク</td><td>JAMA Netw Open. 2024;7(6):e2413955</td></tr>
+<tr><td>Weiss SL, et al.</td><td>小児敗血症で抗菌薬遅延は死亡と臓器障害持続を増やす</td><td>Crit Care Med. 2014;42(11):2409-17</td></tr>
+<tr><td>Schlapbach LJ, et al.</td><td>小児敗血症・敗血症性ショックの国際コンセンサス基準</td><td>JAMA. 2024;331(8):665-674</td></tr>
+<tr><td>Sanchez-Pinto LN, et al.</td><td>Phoenix 基準の開発と検証</td><td>JAMA. 2024;331(8):675-686</td></tr>
+<tr><td>Rand KH, et al.</td><td>抗菌薬前投与が血液培養陽性率に及ぼす時間依存的影響</td><td>Open Forum Infect Dis. 2019;6(5):ofz179</td></tr>
+<tr><td>Scheer CS, et al.</td><td>敗血症初期の抗菌薬投与が血液培養陽性率に与える影響</td><td>Clin Microbiol Infect. 2019;25(3):326-331</td></tr>
+<tr><td>Pontrelli G, et al.</td><td>新生児・小児SIRSにおける血清プロカルシトニンの診断精度のMA</td><td>BMC Infect Dis. 2017;17(1):302</td></tr>
+<tr><td>Pollack MM, et al.</td><td>PRISM III スコア</td><td>Crit Care Med. 1996;24(5):743-52</td></tr>
+<tr><td>Pal S, et al.</td><td>SNAP-II による新生児敗血症疑いの転帰予測</td><td>J Trop Pediatr. 2020;66(4):377-384</td></tr>
+<tr><td>Shean RC, et al.</td><td>血球計数装置技術の進歩</td><td>Clin Lab Med. 2024;44(3):377-386</td></tr>
+<tr><td>Shen Y, et al.</td><td>Mindray BC-6000 の臨床性能評価</td><td>Int J Lab Hematol. 2019;41(5):622-634</td></tr>
+<tr><td><strong>Collins GS, et al.</strong></td><td><strong>TRIPOD+AI 声明 — 回帰・機械学習を用いた臨床予測モデルの報告ガイダンス改訂版</strong>（本研究が準拠を主張）</td><td><strong>BMJ. 2024;385:e078378</strong></td></tr>
+<tr><td>Goldstein B, et al.</td><td>国際小児敗血症コンセンサス会議 — 小児の敗血症と臓器障害の定義（ICD-10判定の参照）</td><td>Pediatr Crit Care Med. 2005;6(1):2-8</td></tr>
+<tr><td>Hu J, et al.</td><td>重症小児のAKIに対する説明可能な予測モデルの同定と検証（相関フィルタ手法の参照）</td><td>EClinicalMedicine. 2024;68:102409</td></tr>
+<tr><td>Regassa DA, et al.</td><td>新生児敗血症におけるCBCおよびヘモグラム由来マーカーの診断的意義</td><td>World J Clin Pediatr. 2024;13(2):92392</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 中国30施設17,066例の重症新生児・小児で、日常CBCの装置内部データから NICU/PICU 別の18変数 CatBoost モデルを構築し、二重外的検証で AUC 0.742〜0.846（NICU）／0.717〜0.811（PICU）を得た。だが<strong>上乗せの本体は薄い</strong> — 誰の施設にもある29変数のCBCパネルに対する ΔAUC は 0.029〜0.062、6つの検証比較で有意は2つだけ、NICU外的検証1では素のCBCに負けている。 一方で<strong>方法論の教訓は厚い</strong>。TRIPOD+AI 準拠を掲げながらキャリブレーションを一切報告せず、1:1アンダーサンプリングで予測確率を構造的に歪め、AUCに95%CIを付けず、発症時刻不明のまま「予測」を名乗っている。<mark class="hl">予測モデルの論文を読むときは AUC の大きさではなく、①素のベースラインに対する上乗せ ②キャリブレーションの有無 ③有病率を戻したときのPPV ④予測ウィンドウの定義、の4点を先に探す</mark>。本研究の内部テスト値から逆算すると PPV は NICU 約23%・PICU 約28%で、アラート4回のうち3回は空振りになる。 臨床的に最も価値のある知見は性能ではなく生物学のほうで、<strong>上位18特徴量のうち新生児と年長児で共有されたのは2つだけ</strong>だった。年齢層を跨いだ単一の小児敗血症予測モデルを作ろうとする発想そのものが、生物学的に無理筋である可能性を示している。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
