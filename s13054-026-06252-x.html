@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AKIは腎だけの病気ではない — 肺・脳・心・肝・免疫への遠隔臓器障害、AKI＋ARDSでICU死亡21%・AKI後の新規感染44%（総説・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06252-x.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">AKIは腎だけの病気ではない — 肺・脳・心・肝・免疫への遠隔臓器障害、AKI＋ARDSでICU死亡21%・AKI後の新規感染44%（総説・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Manca B, Forni L, Booke H, Meuth S, Koyner J, La A, Zarbock A. AKI as a systemic syndrome and its impact on other organ systems. Crit Care. 2026;30:442. DOI: 10.1186/s13054-026-06252-x</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-22）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06252-x" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06252-x</a>（本文PDFは別途）</dd><dt>原題</dt><dd>AKI as a systemic syndrome and its impact on other organ systems</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「腎機能が悪い」で止めず、遠隔臓器の点検リストとして使う</strong>。AKIを見つけた時点で、肺（体液過剰・駆動圧・P/F）、脳（せん妄・意識レベル・薬剤）、心（うっ血・不整脈・K）、肝（うっ血肝・胆道系酵素）、免疫（新規感染）を「AKIの合併症候補」として能動的に探す。この総説の最大の実務的価値はここにある</li><li><strong>AKIとARDSが揃った患者を別枠で扱う</strong>。ICU死亡は21%で、AKI単独・ARDS単独の4〜9%とは桁が違う。特に「AKIが先にあってARDSが後から出た」順序（死亡29%）は、当院でも回診時に時系列をカルテで確認する価値がある</li><li><strong>AKI患者のせん妄を「AKIの症状」として扱う</strong>。せん妄のプール有病率32%、AKI重症度と並行して増える。当院のPADIS運用（CAM-ICU）を、AKI患者では評価頻度を落とさないことが実務的な落とし所</li><li><strong>AKI患者では薬剤性脳症を必ず鑑別に入れる</strong>。セフェピムは既に周知だが、オピオイド・ガバペンチノイド・抗ウイルス薬（アシクロビル）も同じ土俵に乗せる。「ヘルペス脳炎の増悪」と誤読されたアシクロビル神経毒性の例が挙がっている</li><li><strong>体液管理が5臓器すべての共通レバー</strong>であることを共有する。初期蘇生後のde-resuscitation（利尿薬・限外濾過）を、腎のためではなく肺・心・肝のために行うという言い方に変える</li><li><strong>肺保護換気はAKIの予防・進行抑制でもある</strong>、と呼吸管理チームに伝える（腎から肺だけでなく肺から腎への矢印がある）</li><li><strong>CRRT中の低リン血症を「電解質の些細な異常」にしない</strong>。抜管成功率と人工呼吸器フリー日数に効いている。当院のCRRTプロトコルのリン補充閾値を点検する余地がある</li><li>一方で、<strong>この総説から新しい治療は出てこない</strong>。「AKIそのものを直接治す薬はなく、予防と支持療法しかない」が著者の結論であり、血液吸着（hemoadsorption）も推奨には至らない。運用を変えるとすれば「探し方」と「体液管理の理由づけ」であって「新規薬剤」ではない</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：AKIは入院患者の約15%、重症患者の約半数に起こり、死亡・合併症・CKD移行のリスクを上げる。腎肺・心腎の連関は個別には長く議論されてきた。透析依存AKIの死亡率がESKDより高いことも知られている</li><li><strong>Unknown</strong>：なぜ透析（KRT）が使えるのに重症AKIの死亡率が高いままなのか。遠隔臓器障害の分子機序が、前臨床モデルの知見をどこまでヒトに外挿できるのか。AKI試験でMAKE（Major Adverse Kidney Events）以外にどのエンドポイントを採るべきか</li><li><strong>What's new</strong>：肺・脳・心・肝・免疫の5系統を1つの枠組み（①GFR低下の直接の帰結 ②腎細胞傷害が起こす無菌性炎症カスケード）で横断的に整理した。加えて、遠隔臓器合併症そのものをAKI試験のエンドポイント候補として体系的に提案した点（Table 3）が本総説の独自部分</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで AKIは腎臓の中で完結する臓器障害ではなく、<strong>体液過剰・尿毒症物質・代謝性アシドーシスという「機能喪失の帰結」と、傷害された尿細管細胞が放出するDAMPs・サイトカインという「炎症の帰結」の二本立てで、肺・脳・心・肝・免疫を同時に傷める全身症候群</strong>である。</p>
+</div>
+<ul><li>AKIの発生は10,000人年あたり114〜174人、2017年時点で世界約1330万人。高所得国では入院患者の約15%、重症患者の約半数</li><li>KDIGO stage 1 で死亡は約2倍、stage 2〜3 では約7倍になる</li><li><strong>肺</strong>：透析を要する重症AKIの47%が肺合併症（主にARDS）。ICUのAKI患者の70〜85%が人工呼吸を要する。AKIとARDSが併存するとICU死亡21%（単独なら4〜9%）</li><li><strong>脳</strong>：尿毒症性脳症はICUのAKI患者の最大20%。せん妄のプール有病率は32%（158,694例のメタ解析）でAKI重症度と並行して増える</li><li><strong>心</strong>：CRS type 3（AKIが心機能障害を引き起こす型）の発生率は0〜29%と報告が割れる。心疾患既往を除外したコホートで29%、非選択コホートで17.1%</li><li><strong>肝</strong>：重症AKI患者の約28%がその後に肝機能障害を発症。機序はうっ血肝・低心拍出による虚血・Kupffer細胞を介した無菌性肝炎症、そしてCYP450活性の抑制</li><li><strong>免疫</strong>：AKIありの患者の44%が新規感染を発症（AKIなしは20%）。透析要AKIの生存者は重症敗血症の発症が50〜70%高く、腎機能が完全回復してもこの超過リスクは残る</li><li><strong>薬</strong>：腎クリアランス低下だけでなく、肝CYP450活性の抑制、脳のOAT3ダウンレギュレーションが重なる。治療域の狭い薬は「肝機能が正常でも」溜まりうる</li><li><strong>試験デザイン</strong>：MAKEは非エンリッチ集団では発生率が5〜10%未満で、数千例規模を要する。遠隔臓器合併症（人工呼吸器フリー日数・不整脈・せん妄/昏睡・感染・出血）を複合エンドポイントに組み込む提案</li><li>結論として、<strong>AKIそのものを直接治す治療は存在せず、予防と支持療法しかない</strong></li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>AKI（急性腎障害）</strong> は、血清クレアチニン（SCr）の上昇か尿量の低下で定義される急性の腎機能低下。国際的な診断基準が <strong>KDIGO 2012</strong>（Kidney Disease: Improving Global Outcomes）で、重症度を stage 1〜3 に分ける（Table 1）。 <strong>KRT（kidney replacement therapy、腎代替療法）</strong> は透析・血液濾過の総称で、以前の「RRT（renal replacement therapy）」と同義。持続的に行うものが <strong>CKRT/CRRT</strong>、間欠的に行うものが <strong>IHD</strong>。 <strong>GFR（糸球体濾過量）</strong> が落ちると、水・ナトリウム・カリウム・水素イオン・尿毒症物質・薬剤が排泄されずに溜まる。これが「機能喪失の直接の帰結」。 一方、尿細管細胞が壊れると <strong>DAMPs（damage-associated molecular patterns、傷害関連分子パターン＝ミトコンドリアDNA、HMGB-1、ヒストンなど、細胞が壊れたときに漏れ出て免疫を起動する分子群）</strong> が放出され、<strong>TLR（Toll様受容体）</strong> を介して局所の免疫細胞（常在マクロファージ・樹状細胞）を活性化し、<strong>IL-1・IL-6・IL-10・TNFα</strong> といったサイトカインが全身循環に出ていく。感染がなくても起きるので <strong>無菌性（sterile）炎症</strong> と呼ぶ。これが「炎症の帰結」。 本総説の主張は、AKIの臨床像はこの2本立ての合成であり、<strong>GFR低下だけでは説明できない部分（＝炎症の側）が遠隔臓器障害の実体である</strong>、というもの。 <strong>MAKE（Major Adverse Kidney Events）</strong> は「死亡＋透析導入＋腎機能の遷延性低下」の複合アウトカムで、腎臓領域の試験で標準的に使われる長期エンドポイント。 <strong>CRS（cardiorenal syndrome、心腎症候群）</strong> は心と腎の双方向障害の分類で、type 3 が「急性の腎障害が心機能障害を引き起こす」型。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>AKIは世界的な健康問題として認識されるに至っている。過去の推計は集団によって幅があり、<strong>10,000人年あたり114〜174人</strong>、2017年時点で<strong>世界約1330万人</strong>とされる。報告される発生率は低・中所得国で最も高く、高所得地域では<strong>入院患者の約15%、重症患者の約半数</strong>がAKIを起こす。</p>
+<p>AKIは死亡だけでなく罹病率も上げる。AKIのエピソードを生き延びた患者は<strong>CKD（慢性腎臓病）発症のリスクが上がる</strong>。転帰を左右するのは元の原因だけでなく、<strong>腎機能障害の持続期間と重症度、そしてCKD合併を含むベースラインの患者背景</strong>である。</p>
+<p>著者らが立てる問いは明確である。<strong>KRTが使えるにもかかわらず、重症AKIの死亡率が高いままなのはなぜか</strong>。AKIは腎の孤立した臓器不全ではなく、腎の持つ多様な機能ゆえに他臓器も影響を受ける。遠隔臓器の傷害は合併症と死亡の重要な原因と考えられ、実際にAKI患者では多臓器機能障害がしばしば観察され、臓器不全の数は死亡率の上昇と関連する。</p>
+<p>決定的な傍証として、<strong>透析依存のAKI患者の死亡率は、ESKD（末期腎不全）患者よりも相当に高い</strong>。これは「腎機能が悪いこと」だけでは説明がつかず、AKIには腎機能低下以外の因子が予後を悪くしていることを示唆する。</p>
+<p>前臨床研究は、免疫系・肺・心・肝・脳・腸に及ぶ機序を明らかにしてきた。それらは臓器特異的かつ多様で、免疫細胞応答・酸化ストレス・炎症性サイトカインを含む。動物実験で確立されたこれらの臓器間相互作用は、臨床観察研究でも裏づけられている。</p>
+<p>本総説の構成は、①AKI関連遠隔臓器障害の分子機序、②合併症の疫学、③文献で報告された臨床転帰、④AKI試験の新規エンドポイント、の4部である。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。系統的検索の手順・データベース・検索式・選択基準の記載はない（本文にPRISMAフローや検索期間の記載なし）</li><li><strong>対象</strong>：AKIと遠隔臓器障害に関する前臨床（虚血再灌流モデル、両側腎摘モデル等）および臨床（観察研究・コホート・RCTの二次解析・SR/メタ解析）の文献。引用は181件</li><li><strong>介入・比較</strong>：該当なし（総説）</li><li><strong>アウトカム</strong>：肺・脳・心・肝・免疫系の5系統について、(a) 病態生理と前臨床所見、(b) 臨床エビデンスと患者転帰、(c) 治療戦略、を整理。加えて臓器別の傷害バイオマーカーを一覧化（Table 2）、AKI試験の新規エンドポイントを提案（Table 3）</li><li><strong>解析</strong>：定量的統合（メタ解析）は行っていない。引用元研究の効果量をそのまま引く記述的統合</li><li><strong>限界（著者が明示するもの）</strong>：機序の多くは前臨床モデル由来でヒトへの外挿に限界がある。臨床エビデンスは後ろ向き観察研究が主体で因果推論ができない。AKI定義のばらつきとAKI誘発性心傷害を既存疾患から区別する特異的バイオマーカーの欠如により、CRS type 3 の発生率をプールできない</li></ul>
+<h3>4. AKIの帰結 — 何が溜まり、何が起きるのか</h3>
+<p>AKIは在院日数（LOS）・ICU-LOSの延長、罹病率の上昇、短期・長期死亡の上昇と関連する。</p>
+<p><strong>重症度と死亡の関係</strong>は明確な用量反応を示す。<strong>KDIGO stage 1 で死亡は約2倍、重症AKI（stage 2〜3）では約7倍</strong>に増える。</p>
+<p>AKIの臨床像は極めて多様で、傷害の重症度に依存する。症状の多くは<strong>糸球体濾過能の急性喪失</strong>で説明できる。すなわち窒素血症（azotemia）と、プロトン・電解質・毒素・薬剤の蓄積である。</p>
+<p>尿毒症物質の蓄積は他臓器に直接影響するだけでなく、<strong>腎毒性の悪循環</strong>を起こしうる。毒素が溜まる → GFRがさらに低下 → 毒素がさらに溜まる → 毒性が増す、というループである。</p>
+<p><strong>代謝性アシドーシスの発生はとりわけ予後不良と関連する。</strong></p>
+<p>尿毒症毒性の具体的な臨床像は次のとおり整理されている。</p>
+<div class="tw"><table>
+<thead><tr><th>病態</th><th>主たる機序</th><th>臨床像</th></tr></thead>
+<tbody>
+<tr><td>不整脈</td><td>高カリウム血症など電解質異常</td><td>徐脈性・頻脈性不整脈</td></tr>
+<tr><td>倦怠感</td><td>窒素血症</td><td>tiredness</td></tr>
+<tr><td>意識障害・昏睡</td><td>毒素・薬剤の蓄積</td><td>confusion から coma まで</td></tr>
+<tr><td>呼吸障害</td><td>尿量低下による体液過剰・うっ血</td><td>換気障害の発症・増悪</td></tr>
+<tr><td>静脈うっ血</td><td>体液過剰</td><td>肝・腎自身への直接の悪影響</td></tr>
+</tbody></table></div>
+<p>初期蘇生フェーズを過ぎたあとも、<strong>腎機能低下は de-resuscitation（余分な水を抜く相）を難しくする</strong>。</p>
+<p>さらにAKIのエピソードは腎機能に長期の影響を残し、CKDの発症・進行のリスクを上げる。<strong>見かけ上腎機能が完全回復してもESKDのリスクは上がったまま</strong>である。この進行の機序は、機能ネフロンの喪失だけでは説明できず、<strong>不適応修復（maladaptive repair）、無秩序な再生、内皮傷害→低酸素/虚血→さらなる内皮傷害という悪循環</strong>が関与する。</p>
+<p>結果としてAKIは「複数の異なる帰結を持つ症候群」とみなされ、<strong>すべての臨床像がGFRの機能的低下だけで説明できるわけではない</strong>。腎細胞傷害と腎内炎症が臓器連関の病態生理で重要な役割を果たす。</p>
+<p>AKIは腎細胞と局所免疫細胞（常在マクロファージ・樹状細胞）の<strong>（無菌性）活性化</strong>を引き起こし、炎症性サイトカインの放出とそれに続く全身性炎症をもたらす。過去数十年で、樹状細胞・マクロファージなどの免疫細胞、IL-17やTNFαといったサイトカイン、TLRなどのパターン認識受容体が、AKIの発症と進行に関与することが明らかにされてきた。</p>
+<p>加えて、<strong>線維芽細胞・筋線維芽細胞・ペリサイト・上皮細胞のエピジェネティックな変化</strong>もAKIの進行と帰結に重要である。たとえば腎機能が見かけ上回復した後も、<strong>局所には線維化促進シグナルが残存</strong>しうるし、<strong>液性経路を介して遠隔にも作用して他臓器の長期的帰結につながる</strong>。これがAKIを「急性のGFR低下に伴う急性合併症をはるかに超える全身症候群」とする根拠である（Figure 1）。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. AKI誘発性の遠隔臓器障害の機序。図は上段中央に稲妻マークの付いた腎臓（AKI）を置き、そこから左右2つのボックスに分岐する構成。<strong>左のボックス「Reduced kidney function（腎機能の低下）」</strong> は、水色の背景に人体シルエットを配し、体内にK+と H+ のイオンが散らばる様子と、上向き・下向きの矢印（紫・赤・青）で貯留と喪失を表す。列挙されるのは、体液過剰（Fluid overload）、代謝性アシドーシス（Metabolic acidosis）、電解質異常（Electrolyte disturbances）、尿毒症物質の蓄積（Uremic toxin accumulation）、RAASと交感神経系の活性化（RAAS and SNS activation）の5項目。<strong>右のボックス「Intrarenal inflammation（腎内炎症）」</strong> は灰色背景で、上部にDAMPsの放出、ミトコンドリア障害、酸化ストレス上昇、サイトカイン上昇、白血球トラフィッキング上昇の5要素を並べ、下半分に腎尿細管の断面模式図を描く。尿細管上皮細胞の内部にROSとDAMPs、ミトコンドリア、細胞膜上にTLR2/4 が描かれ、間質（Interstitium）にIL-1・IL-6・TNF-α・IL-10 が放出され、その下の血管（Blood vessel）に向かって白血球が動員される（Leukocyte recruitment）。血管から出る赤い楕円のラベルが「Systemic circulation（全身循環）」。両ボックスから太い赤矢印が下方の1つのボックス「<strong>Distant organ injury（遠隔臓器障害）</strong>」に合流する。略語：DAMPs＝傷害関連分子パターン、IL-1/6/10＝インターロイキン-1/6/10、RAAS＝レニン・アンジオテンシン・アルドステロン系、ROS＝活性酸素種、SNS＝交感神経系、TLR2/4＝Toll様受容体2/4、TNF-α＝腫瘍壊死因子α。原図・無改変。</p>
+</div>
+<h4>Table 1. KDIGO 2012 ガイドラインによるAKI重症度分類（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>Stage</th><th>血清クレアチニン</th><th>尿量</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ベースラインの1.5〜1.9倍 または ≥0.3 mg/dL（≥26.5 µmol/L）の上昇</td><td>&lt;0.5 mL/kg/h が6〜12時間</td></tr>
+<tr><td>2</td><td>ベースラインの2.0〜2.9倍</td><td>&lt;0.5 mL/kg/h が12時間以上</td></tr>
+<tr><td>3</td><td>ベースラインの3.0倍 または 血清クレアチニンが ≥4.0 mg/dL（≥353.6 µmol/L）まで上昇 または 腎代替療法の開始 または 18歳未満ではeGFRが35 mL/min/1.73 m² 未満に低下</td><td>&lt;0.3 mL/kg/h が24時間以上 または 12時間以上の無尿</td></tr>
+</tbody></table></div>
+<p>（eGFR＝推算糸球体濾過量。原表では単位が mmol/l と記載されているが、クレアチニンの分子量から µmol/L が正しい。未編集版ゆえの誤植と思われる）</p>
+<h4>Table 2. 臓器傷害バイオマーカー（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>臓器・系</th><th>バイオマーカー</th><th>位置づけ</th><th>目的</th></tr></thead>
+<tbody>
+<tr><td>肺</td><td>sRAGE、SP-D、Ang-2</td><td>実験的</td><td>上皮・内皮傷害／ALI</td></tr>
+<tr><td>脳</td><td>NfL、GFAP、UCH-L1、Tau</td><td>実験的</td><td>脳機能障害・予後</td></tr>
+<tr><td>脳</td><td>S100B、NSE</td><td>実装済み</td><td>TBI・心停止後の予後予測。重症患者一般の神経学的予後予測にはなお検証中</td></tr>
+<tr><td>心</td><td>BNP、cTn</td><td>実装済み</td><td>心不全・急性冠症候群の診断</td></tr>
+<tr><td>心</td><td>sST2、Galectin-3</td><td>実験的</td><td>予後</td></tr>
+<tr><td>肝</td><td>ビリルビン、GGT、ALP</td><td>実装済み</td><td>うっ血</td></tr>
+<tr><td>肝</td><td>AST、ALT</td><td>実装済み</td><td>肝細胞傷害</td></tr>
+<tr><td>肝</td><td>miR-122、GLDH、K18/ccK18、HMGB-1</td><td>実験的</td><td>肝細胞傷害</td></tr>
+<tr><td>感染</td><td>PCT、CRP</td><td>実装済み</td><td>感染・敗血症</td></tr>
+<tr><td>免疫系</td><td>IL-6、IL-8、IL-10</td><td>実験的</td><td>炎症／免疫麻痺</td></tr>
+<tr><td>腎</td><td>SCr、尿量、シスタチンC</td><td>実装済み</td><td>AKIの診断と病期分類、GFR推算</td></tr>
+<tr><td>腎</td><td>NGAL、TIMP-2·IGFBP7</td><td>実装済み（ただしルーチンではない）</td><td>早期の尿細管ストレス・傷害／リスク層別化</td></tr>
+<tr><td>腎</td><td>CCL14、DKK3、プロエンケファリンA、KIM-1、L-FABP</td><td>実験的</td><td>持続性AKI、リスク予測、サブフェノタイピング</td></tr>
+</tbody></table></div>
+<p>（略語：ALI＝急性肺傷害、ALP＝アルカリホスファターゼ、ALT＝アラニンアミノトランスフェラーゼ、Ang-2＝アンジオポエチン2、AST＝アスパラギン酸アミノトランスフェラーゼ、BNP＝B型ナトリウム利尿ペプチド、ccK18＝カスパーゼ切断型サイトケラチン18、CCL14＝C-Cモチーフケモカインリガンド14、cTn＝心筋トロポニン、DKK3＝Dickkopf-3、GFAP＝グリア線維性酸性タンパク、GGT＝γ-グルタミルトランスフェラーゼ、GLDH＝グルタミン酸脱水素酵素、HMGB-1＝high mobility group box 1、IGFBP7＝インスリン様成長因子結合タンパク7、KIM-1＝腎傷害分子1、L-FABP＝肝型脂肪酸結合タンパク、NfL＝ニューロフィラメント軽鎖、NGAL＝好中球ゼラチナーゼ結合リポカリン、NSE＝神経特異エノラーゼ、PCT＝プロカルシトニン、sRAGE＝可溶型終末糖化産物受容体、SP-D＝サーファクタントプロテインD、sST2＝可溶型ST2、TIMP-2＝メタロプロテアーゼ組織阻害因子2、UCH-L1＝ユビキチンC末端加水分解酵素L1）</p>
+<h3>5. 肺 — 腎肺クロストーク</h3>
+<h4>5-1. 疫学と双方向性</h4>
+<p>AKIの経過中、とりわけ<strong>体液過剰</strong>を筆頭とする複数の機序がALI（acute lung injury、急性肺傷害）の発症に寄与しうる。</p>
+<ul><li>透析を要する重症AKI患者の単施設小規模研究では、<strong>47%が肺合併症を発症</strong>し、その主体はARDSであった</li><li>これと整合して、<strong>ICUに入室したAKI患者の70〜85%が人工呼吸を必要とした</strong>（複数研究をまたいだ数字）</li></ul>
+<p>逆向きの矢印も存在する。人工呼吸を要するALI患者では、<strong>静脈還流の障害、全身の静脈うっ血、前負荷依存性の心拍出量（CO）低下</strong>が腎灌流圧を下げ、GFRを低下させる。これが患者・臨床医・医療システムに重大な脅威となる<strong>悪循環</strong>を生む（Figure 2）。さらに両臓器はいずれも全身性炎症に高い感受性を持ち、これが病的クロストークの主要な駆動因子となる。</p>
+<h4>5-2. AKIの帰結（機序）</h4>
+<p><strong>(a) 体液過剰と静水圧の上昇</strong></p>
+<p>AKIではナトリウムと水の排泄障害が生命を脅かす体液過剰を招く。血管内容量の増加は静水圧を上げ、心室機能障害と心原性肺水腫を引き起こしうる。この過程は<strong>心不全の既往がある患者では急速に増悪する</strong>。浮腫は肺内の細胞間相互作用を変化させ、組織構築を程度の差はあれ破壊し、ALIと呼吸補助の必要性をもたらす。</p>
+<p>臨床的な裏づけとして、<strong>人工呼吸中にAKIを発症した患者は、プラトー圧と駆動圧がより高く、呼吸系コンプライアンスが低下し、PaO₂/FiO₂比が低い</strong>ことが示されている（肺機能のより重度な障害を示す）。</p>
+<p><strong>(b) 炎症性メディエータによる肺毛細血管透過性の亢進</strong></p>
+<p>体液過剰と代謝異常を超えて、AKIは腎内炎症を引き起こし、放出された炎症性メディエータが<strong>独立して</strong>遠隔臓器障害を誘導しうる。虚血再灌流傷害を含む前臨床AKIモデルは、腎と他臓器の病的クロストークの機序を解明してきた。</p>
+<p>AKI誘発性ALIの前臨床モデルでは、<strong>炎症が肺毛細血管の漏出を増やすことで肺水腫に寄与する</strong>ことが示されている。傷害された尿細管細胞は<strong>DAMPs（ミトコンドリアDNA、HMGB-1、ヒストン）</strong> を放出し、これが尿細管上皮細胞のTLR4シグナルを活性化して炎症性サイトカインの全身放出につながる。これらのメディエータは肺内皮の透過性を上げ、白血球を肺組織に動員し、<strong>非心原性肺水腫</strong>の発症を促す。</p>
+<p><strong>(c) 「好中球トレイン」— 直接肺傷害とは異なる分布</strong></p>
+<p>最近の研究では、AKI誘発性ALIの前臨床モデルにおいて、<strong>肺への好中球動員が主として肺胞毛細血管内に限局し、そこで特徴的な "neutrophil trains（好中球の列）" を形成する</strong>ことが示された。これは直接の肺傷害で好中球が主に肺胞腔内に集積するのとは対照的である。つまり<strong>AKIによる肺障害は、体液過剰・血行動態不安定・代謝異常だけの帰結ではなく、独自の炎症経路を含む</strong>。</p>
+<p><strong>(d) 肺胞液クリアランスの障害</strong></p>
+<p>さらにAKIは、<strong>肺胞上皮のナトリウムチャネル、Na⁺/K⁺-ATPase、アクアポリン5をダウンレギュレート</strong>することで浮腫の消退を阻害しうる。これらはいずれも肺胞液クリアランスに関与する分子である。病態生理学的には、<strong>難治性肺水腫の一部の患者で除水に反応しないこと</strong>を、この機序が説明しうる。</p>
+<h4>5-3. 臨床的示唆</h4>
+<p>AKIの文脈における肺合併症は予後の主要な決定因子である。</p>
+<p><strong>大規模後ろ向き単施設コホート研究</strong>が、AKIとARDSの併存はどちらか単独よりも実質的に短期転帰が悪いことを示した。</p>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>ICU死亡</th><th>付随所見</th></tr></thead>
+<tbody>
+<tr><td>AKIとARDSの併存</td><td><strong>21%</strong></td><td>ICU滞在の延長、人工呼吸の長期化、KRT使用の増加</td></tr>
+<tr><td>AKI単独またはARDS単独</td><td>4〜9%</td><td>—</td></tr>
+<tr><td>AKIの後にARDSが発症</td><td><strong>29%</strong></td><td>時系列が予後に影響する可能性</td></tr>
+<tr><td>ARDSの後にAKIが発症</td><td><strong>14%</strong></td><td>同上</td></tr>
+</tbody></table></div>
+<p>ただし著者は、<strong>後ろ向き観察デザインでは因果推論ができず、AKI関連肺傷害の長期的帰結はなお十分に定義されていない</strong>と留保している。</p>
+<p>治療については、<strong>体液過剰が死亡と独立して関連する以上、体液過剰への対処が最重要</strong>とされる。実施可能な限り、個別化された fluid stewardship、初期安定化後の de-resuscitation 戦略、あるいは限外濾過を採用し、体液バランスを中立ないし負にすべきである。並行して、<strong>肺保護的な人工呼吸は肺傷害を抑えるためだけでなく、AKIの発症・進行のリスクを下げうるという理由でも必須</strong>である。</p>
+<h3>6. 脳 — 腎脳クロストーク</h3>
+<h4>6-1. 疫学</h4>
+<p>AKIと脳機能障害の臨床的な関連は一貫して報告されている。</p>
+<ul><li><strong>尿毒症性脳症</strong>：ICUに入室したAKI患者の<strong>最大20%</strong>に生じる</li><li><strong>せん妄</strong>：<strong>158,694例を含む最近のメタ解析でプール有病率32%</strong>。AKIの重症度と並行して増加する</li></ul>
+<p>逆に、中枢神経系がAKIの経過に影響することも報告されており（Figure 2）、直接経路と免疫系の修飾を介する経路の両方がある。</p>
+<h4>6-2. AKIの帰結（機序）</h4>
+<p><strong>(a) 尿毒症物質</strong></p>
+<p>尿素とその代謝産物は、AKIによる排泄障害と、重症患者への高蛋白栄養投与の両方によって蓄積する。前臨床モデルは尿毒症的環境（uremic milieu）が腎回復の強力な刺激になりうることを示唆する一方で、<strong>グアニジノ化合物や蛋白結合溶質といった特定の尿素回路代謝産物は、シナプス伝達を変え、直接的細胞傷害を起こし、神経炎症を促す</strong>ことが知られている。</p>
+<p>毒性が現れるのはおそらく<strong>尿素が高値になった場面に限られる</strong>。この点を臨床で切り分けたのが <strong>AKIKI 2 試験の二次解析</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>KRT開始戦略</th><th>BUN閾値</th><th>昏睡日数</th></tr></thead>
+<tbody>
+<tr><td>'more-delayed'（より遅い）</td><td>BUN &gt; 140 mg/dL</td><td>多い</td></tr>
+<tr><td>'delayed'（遅い）</td><td>BUN &gt; 112 mg/dL</td><td>少ない</td></tr>
+</tbody></table></div>
+<p>すなわち<strong>尿毒症物質への曝露が長く高いほど脳機能障害が悪化しうる</strong>ことを示唆する。</p>
+<p><strong>(b) 透析不均衡症候群（DDS）</strong></p>
+<p>一方で、<strong>急速な尿素除去、とくに間欠的KRTの際には、細胞外の浸透圧が急に下がり浸透圧勾配が生じて脳浮腫を来しうる</strong>。臨床的には幅広い神経症状として現れ、<strong>dialysis disequilibrium syndrome（透析不均衡症候群）</strong> と呼ばれる。尿毒症は「溜めすぎても、抜きすぎても」脳に悪い、という両側性の注意が要る。</p>
+<p><strong>(c) PRES（可逆性後頭葉白質脳症）</strong></p>
+<p>AKI中の意識変容・頭痛・けいれん・視覚障害は、<strong>PRES（posterior reversible encephalopathy syndrome）</strong> に関連することもある。体液貯留とRAAS活性化に駆動されたAKI関連の高血圧が、脳血流自動調節の破綻を介してPRESを誘発しうる。ただし<strong>血管内皮傷害とBBB（血液脳関門）の破綻は、重度の高血圧がなくても頭頂後頭葉の血管原性浮腫を起こす</strong>。この場面ではMRIが鑑別診断に必須となりうる。</p>
+<p><strong>(d) 代謝性アシドーシスと電解質異常</strong></p>
+<p>AKIに続発する代謝性アシドーシスは神経機能を直接に障害しうる。<strong>ニューロン膜上の酸感受性イオンチャネル（acid-sensing ion channels）の活性化がカルシウムとナトリウムの流入を起こし、脱分極・神経細胞傷害、ひいては細胞死につながる</strong>。AKIに伴う電解質異常、とくに<strong>低ナトリウム血症</strong>は、破綻したBBBを越えて伝播し全般性の脳浮腫に寄与しうる。</p>
+<p><strong>(e) 神経毒性薬剤のクリアランス低下</strong></p>
+<p>重症患者の認知機能を損なう鍵となる機序が、<strong>神経毒性を持つ薬剤のクリアランス低下</strong>である。抗菌薬関連の神経毒性（例：セフェピム）は広く認識され日常診療でも考慮されるが、<strong>オピオイド・ガバペンチノイド・抗ウイルス薬</strong>など、重症患者で日常的に用いられる他の薬剤の神経毒性はより見落とされやすい。</p>
+<p>その臨床像は<strong>尿毒症性脳症や敗血症性脳症、あるいは原疾患である感染症の進行と誤認されうる</strong>。著者が挙げる典型例が、<strong>アシクロビルの神経毒性がヘルペス脳炎の増悪と誤読された</strong>ケースである。</p>
+<p><strong>(f) BBBの破綻と神経炎症</strong></p>
+<p>他臓器と同様に、AKIの前臨床モデルでは全身性炎症がBBBの完全性を損なうことが示されている。透過性の亢進により、通常は中枢神経系から排除されている分子が通過する。サイトカインと炎症性メディエータは<strong>アストロサイトとグリア細胞を活性化し、局所の神経炎症を増幅</strong>する。尿毒症物質は<strong>常在ミクログリアを活性化</strong>し、病的刺激下で炎症と異常なシナプス刈り込み（aberrant synaptic pruning）を促す。加えてAKIは、<strong>BBBの基底膜側にある有機アニオントランスポーター3（OAT3）をダウンレギュレート</strong>し、脳からの毒性代謝産物・薬剤の排出を障害するとされる。</p>
+<h4>6-3. 臨床的示唆</h4>
+<p>腎脳相互作用は罹病率と死亡率に実質的に寄与する。<strong>AKI関連せん妄を来した患者は、人工呼吸・昇圧薬・KRTの使用率が有意に高く、せん妄のないAKI患者に比べ死亡率も高い。</strong></p>
+<p>さらにAKIは<strong>脳卒中の長期リスク、脳卒中後死亡、認知症の長期リスク上昇</strong>とも関連する。ただしこれらの解釈は、現行のエビデンスが主として後ろ向きであることに制約される。</p>
+<p>治療的観点からは、<strong>意識レベルの変化を速やかに捉えるための頻回の神経学的評価</strong>と、KRT施行中も含めた<strong>治療戦略の定期的な再評価と最適化</strong>が管理の柱となる。2件の事後解析は、AKIと急性神経機能障害（せん妄を含む）の関連をKRTが緩和しうる可能性を示唆している。ただし<strong>KRTが神経学的転帰を直接に変えるかを判断するには、さらなる前向き研究が必要</strong>である。</p>
+<h3>7. 心 — 心腎症候群（CRS）type 3</h3>
+<h4>7-1. CRSの分類と本総説の焦点</h4>
+<p>心と腎の双方向性の相互作用は長らく<strong>心腎症候群（cardiorenal syndrome、CRS）</strong> として認識されてきた（Figure 2）。本総説が焦点を当てるのは <strong>type 3 CRS</strong>、すなわち <strong>AKIが急性の心機能障害を惹起する型</strong>である。</p>
+<p>（CRSは一般に、急性心不全→AKI＝type 1、慢性心不全→CKD＝type 2、AKI→急性心機能障害＝type 3、CKD→慢性心機能障害＝type 4、全身疾患が両臓器を同時に侵す＝type 5、と分類される。本総説はtype 3のみを扱うと明記している）</p>
+<p><strong>CRS type 3 の報告発生率は0%から29%と極端に幅がある。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>コホートの性格</th><th>発生率</th></tr></thead>
+<tbody>
+<tr><td>心疾患既往を厳密に除外したコホート</td><td><strong>29%</strong></td></tr>
+<tr><td>非選択のAKIコホート</td><td><strong>17.1%</strong></td></tr>
+<tr><td>報告全体の幅</td><td>0〜29%</td></tr>
+</tbody></table></div>
+<p>この著しい不均一性は、<strong>AKI定義のばらつき</strong>と、<strong>AKI誘発性心傷害を既存疾患から区別する特異的バイオマーカーの欠如</strong>によって増幅されており、信頼できるプール発生率の推定を妨げている。</p>
+<h4>7-2. AKIの帰結（機序）</h4>
+<p><strong>(a) 体液過剰と前負荷</strong></p>
+<p>AKIに続発する体液過剰は、<strong>すでに心機能が障害されている場合にとりわけ有害</strong>である。前負荷と心室充満圧を上げることで心筋収縮性を損ない、COを減らす。同時に肺動脈圧の上昇が肺水腫をもたらしうる。とくに<strong>敗血症などで血管透過性亢進が併存する場面</strong>でそうである。</p>
+<p><strong>(b) 代償機転が悪循環になる</strong></p>
+<p>この過程の早期には、前負荷と後負荷を維持するための代償機転として<strong>両臓器がRAASと交感神経系を活性化</strong>する。しかしナトリウムと水の貯留、末梢血管収縮、アドレナリン緊張の亢進を通じて、これらの機転は<strong>かえって臓器機能障害を悪化させうる</strong>。生じた静脈うっ血は、COの低下と相まって<strong>腎の濾過能をさらに下げ、腎回復を遅らせる</strong>。</p>
+<p><strong>(c) KRT自体が心を追い詰める</strong></p>
+<p>興味深いことに、<strong>KRTは積極的な除水の後に前負荷依存性のCO低下を悪化させることで、心機能をさらに脅かしうる</strong>。しかもこれは<strong>低血圧を伴わない場合にも起こりうる</strong>。「血圧が下がっていないから大丈夫」とは言えないという指摘である。</p>
+<p><strong>(d) 代謝性アシドーシスと電解質</strong></p>
+<p>代謝性アシドーシスも心機能障害を促す。<strong>収縮蛋白のカルシウム感受性を下げることで心筋収縮性を損ない</strong>、<strong>心筋細胞をまたぐ電解質輸送を乱すことで不整脈を助長</strong>する。AKIに伴う電解質異常、とりわけ<strong>高カリウム血症</strong>もこの点で重要である。加えて<strong>アシドーシスは肺血管収縮を促し、急性の右室機能障害を惹起しうる</strong>。</p>
+<p><strong>(e) 尿毒症物質とサイトカインの心筋抑制</strong></p>
+<p>前臨床研究は尿毒症物質が心筋傷害・炎症・リモデリングに寄与することを示しているが、<strong>ヒトでの役割はなお未検証</strong>である。CRS type 3 の正確な発症機序は依然として完全には解明されていない。</p>
+<p>前臨床AKIモデルでは、循環血中の<strong>IL-1β、TNFα、IL-6</strong> の上昇が<strong>心筋抑制作用</strong>を発揮することが観察されている。これらのメディエータは<strong>心筋細胞のアポトーシス、白血球浸潤、酸化ストレス、ミトコンドリア機能障害</strong>を誘導することで、心筋収縮性を有意に低下させる。とりわけ<strong>ミトコンドリア傷害</strong>は、心筋細胞の収縮と興奮収縮連関が持続的にATPを要求することを考えると重要度が高い。これらが心筋回復を促す新規治療標的になりうるかは今後の課題である。</p>
+<h4>7-3. 臨床的示唆</h4>
+<p>臨床的には、type 3 CRS は優位な病態生理学的ドライバーによって異なる3つのシナリオとして現れる。</p>
+<div class="tw"><table>
+<thead><tr><th>シナリオ</th><th>主たるドライバー</th><th>臨床像</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>乏尿性AKI＋進行する体液過剰</td><td>急性うっ血性心不全と心原性肺水腫</td></tr>
+<tr><td>2</td><td>重度の高カリウム血症・酸塩基異常</td><td>徐脈性／頻脈性不整脈</td></tr>
+<tr><td>3</td><td>代謝性アシドーシス</td><td>心筋収縮性の低下＋カテコラミン反応性の鈍化</td></tr>
+</tbody></table></div>
+<p>これら急性の生命を脅かす事象を超えて、<strong>AKIは長期の心血管脆弱性の独立したマーカー</strong>でもある。<strong>54研究のシステマティックレビュー・メタ解析</strong>は、AKIが以下のリスク上昇と有意に関連することを示した。</p>
+<ul><li>主要心血管イベント（MACE）</li><li>心不全</li><li>心筋梗塞</li><li>脳卒中</li><li>心血管死</li></ul>
+<p>しかも<strong>超過リスクは stage 1 のAKIの後でも明らかである</strong>。</p>
+<p>管理は、AKIの重症度と併存する心症状の性質の双方を勘案した個別化アプローチを要する。<strong>心原性肺水腫を伴う急性心不全が最も頻度の高い現れ方</strong>であるため、<strong>ループ利尿薬または適応があれば体外限外濾過による体液バランスの最適化が中心的な治療目標</strong>となる。</p>
+<h3>8. 肝 — 腎肝クロストーク</h3>
+<h4>8-1. 疫学</h4>
+<p>肝と腎は解毒と代謝恒常性の維持を担う2大臓器系である。<strong>肝不全に続発する腎機能障害（肝腎症候群）</strong> はよく知られた臨床実体である一方、<strong>その逆向き（AKI→肝機能障害）はかなり注目されてこなかった</strong>（Figure 2）。</p>
+<p><strong>重症AKI患者の前向き研究では、約28%がその後に肝機能障害を発症し、それが死亡率上昇と関連した。</strong> ただし、この双方向性の臓器相互作用に関する現代的なエビデンスは限られている。</p>
+<h4>8-2. AKIの帰結（機序）</h4>
+<p><strong>(a) 血行動態経路</strong></p>
+<p>乏尿・無尿性AKIにおける体液過剰は遠隔臓器障害の主要な決定因子である。AKI関連の体液過剰による肝機能障害は<strong>急性心不全を介して媒介されうる</strong>ため、この相互作用は type 3 CRS の枠組みに置かれる。基礎機序は、</p>
+<ul><li>右心不全における<strong>中心静脈圧の上昇に続発する肝静脈うっ血</strong></li><li><strong>COの低下による肝細胞虚血</strong></li></ul>
+<p>の2つである。</p>
+<p>心機能障害の併存を超えた知見として、<strong>肝硬変のない重症患者の前向き研究</strong>が、<strong>腎不全と積極的な輸液蘇生による体液過剰、および中心静脈圧の上昇が、ICU入室中の肝硬度（liver stiffness）上昇の主要な決定因子</strong>であることを示した。この急性の場面では、<strong>transient elastography で測定される肝硬度は構造的な線維化ではなく肝うっ血を反映する</strong>。</p>
+<p><strong>(b) 無菌性の肝炎症</strong></p>
+<p>血行動態機序を超えて、実験研究は<strong>AKIが直接に無菌性の肝炎症を誘導しうる</strong>ことを示している。循環血中の炎症性サイトカイン、とくに<strong>IL-1、IL-6、TNFα</strong> の増加が<strong>常在Kupffer細胞を活性化</strong>し、二次的な肝内炎症カスケードを起動する。この応答は<strong>肝血管透過性を上げ、間質浮腫を促し、好中球とリンパ球の浸潤を助長</strong>する。</p>
+<p><strong>(c) 酸化ストレス</strong></p>
+<p>酸化ストレスもAKI誘発性肝傷害に寄与する。腎虚血再灌流傷害の実験モデルでは、<strong>グルタチオンの前投与が肝傷害を有意に軽減し、その後の血清トランスアミナーゼ上昇を減らした</strong>ことが、活性酸素種の病原的役割を裏づける。</p>
+<p><strong>(d) 薬物代謝の変化 — 「肝機能が正常でも溜まる」</strong></p>
+<p>腎の薬物クリアランス障害に加えて、<strong>AKIは肝の薬物代謝も変える</strong>。AKI中の炎症性サイトカイン・活性酸素種・尿毒症物質の全身的な蓄積が、<strong>大半の異物（xenobiotics）の代謝を担う肝チトクロームP450（CYP450）酵素の活性を抑制</strong>する。結果として、<strong>肝機能が保たれているように見えても、肝代謝能の低下により予期しない薬物蓄積と毒性が生じうる</strong>。とりわけ<strong>治療域の狭い薬剤</strong>で問題になる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>AKI患者の薬物動態は「腎排泄」だけでは読めない AKIでは ①腎クリアランスの低下、②肝CYP450活性の抑制、③BBBのOAT3ダウンレギュレーションによる脳内からの排出障害 の3つが同時に起こる。<mark class="hl">「肝機能が正常だから肝代謝薬は減量不要」という読み方は、AKI患者では成立しない。</mark> 治療域の狭い薬剤では血中濃度モニタリング（TDM）を厳密に行う、というのが本総説の実務的な帰結である。</p>
+</div>
+<h4>8-3. 臨床的示唆</h4>
+<p>相互作用の機序は不明な点が残るものの、<strong>肝機能障害とAKIの併存はAKI単独よりも転帰が悪い</strong>。</p>
+<p><strong>現時点でAKI誘発性肝機能障害に特異的な治療戦略は存在しない。</strong> 管理は臓器サポートの基本原則、すなわち<strong>容量管理、心機能を支える血行動態最適化、毒性予防のための厳密な血中濃度モニタリング（TDM）</strong> に依拠する。</p>
+<p>高度な介入としては、全身のサイトカイン負荷を軽減する<strong>体外血液吸着（hemoadsorption）</strong> に生物学的に妥当な根拠はあるが、<strong>この特定の文脈でルーチン使用を支持する堅牢な臨床エビデンスは不十分</strong>である。</p>
+<h3>9. 免疫系 — AKIが引き起こす免疫麻痺</h3>
+<h4>9-1. 疫学</h4>
+<p>生理的条件下で、<strong>腎は免疫恒常性に寄与する免疫臓器</strong>として機能する。腎傷害が起こると腎内で炎症カスケードが起動する。前臨床モデルが示すように、この過程は局所で増幅し全身に伝播しうるため、AKIによる遠隔臓器障害の新たな機序を定義しうる（Figure 1）。それには<strong>免疫系そのものの深刻な調節障害</strong>も含まれる（Figure 2）。</p>
+<p>臨床的には、<strong>AKIは患者のフレイルティと新規（de novo）感染への感受性を、外科系・非外科系を問わず多様な集団で顕著に増加させる。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>ICU入室時にAKIあり</th><th>ICU入室時にAKIなし</th></tr></thead>
+<tbody>
+<tr><td>その後の新規感染発症率</td><td><strong>44%</strong></td><td><strong>20%</strong></td></tr>
+</tbody></table></div>
+<p>しかも<strong>リスクはAKIの重症度と並行して増加する</strong>。</p>
+<h4>9-2. AKIの帰結（機序）</h4>
+<p>AKIは免疫系を<strong>2つの異なる方向</strong>に修飾しうる。</p>
+<p><strong>(a) 過剰炎症（hyperinflammation）</strong>：早期の、文脈依存的な自然免疫の活性化、全身的なサイトカイン放出、炎症シグナルの亢進を特徴とする。</p>
+<p><strong>(b) 免疫麻痺（immunoparalysis）</strong>：主に自然免疫を侵す。</p>
+<p>免疫麻痺側の具体的な所見は次のとおり。</p>
+<ul><li><strong>好中球機能の抑制</strong>：AKIの文脈で、遊走（migration）と貪食（phagocytosis）が阻害されると報告されている</li><li><strong>レジスチン（resistin）の関与</strong>：この障害は、炎症性サイトカインかつ尿毒症物質でもあるレジスチンによって部分的に媒介されうる。<strong>レジスチンのレベルはAKI中に有意に上昇する</strong></li><li><strong>敗血症性ショック＋AKIで好中球遊走がより強く抑制</strong>：敗血症性ショックのみの患者と比べ、AKIを合併した患者では好中球遊走の抑制がより広範であった</li><li><strong>単球HLA-DR発現の低下</strong>：免疫麻痺の確立したマーカーである単球HLA-DR発現が、<strong>AKIを合併した敗血症患者では合併しない敗血症患者より有意に低く、しかも重症度とは独立</strong>していた。より深い免疫抑制状態を反映し、転帰の悪化と関連する</li></ul>
+<p>逆に、<strong>AKIが非炎症性の環境で発生した場合には（主に前臨床モデルで示されているように）、炎症促進的な効果が優位になる</strong>。すなわち「AKIは免疫を上げるのか下げるのか」は、AKIが起きた文脈（敗血症のような炎症下か否か）に依存する。</p>
+<h4>9-3. 臨床的示唆</h4>
+<p>短期的には、<strong>敗血症は重症AKI患者の主要な死因</strong>である。</p>
+<p>この脆弱性は急性期を超えて持続する。</p>
+<ul><li><strong>透析を要したAKIの生存者は、マッチさせた対照と比べて重症敗血症の発症率が50〜70%高い</strong></li><li>決定的なのは、<strong>この超過リスクが腎機能の完全回復後も持続する</strong>ことである。すなわちAKIは一過性の擾乱ではなく<strong>持続的な免疫調節障害を誘導する</strong></li></ul>
+<p>確立された感染予防策と、適時・標的化された抗菌薬治療を超えて、<strong>AKI関連の免疫調節障害を特異的に是正する上流の介入は現在存在しない</strong>。</p>
+<p>血液吸着は敗血症性ショック患者においてレジスチン濃度を修飾し循環炎症メディエータを除去する潜在能力を示したが、<strong>この場面でのルーチン使用を支持するにはエビデンスがなお不十分</strong>である。</p>
+<p>新規の免疫調節アプローチが不適応な炎症経路を標的として研究中であり、<strong>敗血症関連AKIに対するリコンビナントCD39（TIN816）の臨床試験（CLEAR-AKI、NCT05996835）</strong> が挙げられている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 腎と遠隔臓器系の双方向クロストーク。図は縦長の3層構成。<strong>最上段の帯</strong>が「AKI-INDUCED DISTANT ORGAN DAMAGE（AKI誘発性の遠隔臓器障害）」。<strong>中央部</strong>は、図の中心に稲妻の付いた腎臓（AKI）を置き、左上から「Ischemia, sepsis, toxins（虚血・敗血症・毒素）」の矢印がAKIに入り、右上へ「Persistent intrarenal inflammation（持続する腎内炎症）」の灰色矢印がCKDへ抜ける。そこから青い双方向の破線矢印が5方向に伸び、各臓器のイラストと2段のボックスに接続する。<strong>左＝肺</strong>：上段の白ボックスに「体液過剰↑／肺胞液クリアランス↓／好中球トレイン／肺コンプライアンス↓」、下段の濃青ボックスに「浮腫／ALI・ARDS／人工呼吸の長期化」。<strong>右＝心</strong>：上段に「体液過剰↑／アシドーシス／収縮性↓／白血球浸潤」、下段に「急性心不全／不整脈／心筋梗塞」。<strong>左下＝脳</strong>：上段に「尿毒症物質↑／薬物クリアランス↓／BBBの破綻／KRT」、下段に「尿毒症性脳症／せん妄／脳卒中／DDS／PRES」。<strong>中央下＝免疫系（細胞のイラスト）</strong>：上段に「尿毒症物質↑／サイトカイン産生↑／サイトカインクリアランス↓／好中球機能障害／単球機能障害」、下段に「免疫麻痺／感染／敗血症」。<strong>右下＝肝</strong>：上段に「体液過剰／炎症／CYP450活性↓」、下段に「うっ血／虚血／薬物代謝の変化」。<strong>2層目の帯</strong>が「THERAPEUTIC OPTIONS（治療の選択肢）」で、ベッドサイドの医療者のイラストとともに2列の箇条書き：左列は「de-resuscitation戦略（利尿薬・KRT）／心拍出量の最適化／電解質異常の管理／肺保護換気」、右列は「薬物毒性のモニタリング／薬剤用量と選択の再評価／感染予防と管理／支持療法」。<strong>最下段の帯</strong>が「OUTCOMES（転帰）」で、「KRTと関連合併症↑」「長期罹病率↑」「死亡率↑」の3項目。略語：ALI＝急性肺傷害、ARDS＝急性呼吸窮迫症候群、BBB＝血液脳関門、CKD＝慢性腎臓病、CYP450＝チトクロームP450、DDS＝透析不均衡症候群、KRT＝腎代替療法、MV＝人工呼吸、PRES＝可逆性後頭葉白質脳症。原図・無改変。</p>
+</div>
+<h3>10. 腸管 — 本総説で「言及はあるが章がない」領域</h3>
+<p>背景セクションで、著者は「免疫系・肺・心・肝・脳、<strong>そして腸（gut）</strong> に及ぶ機序が示されてきた」と明記している。しかし<strong>臓器別の各論で腸管に独立した節は置かれていない</strong>。抄録でも焦点臓器は「肺・脳・心・肝・免疫系の5つ」と明示されており、腸管バリア障害・細菌トランスロケーションの機序、骨髄・造血系への影響、腎クリアランス亢進（ARC, augmented renal clearance）といった主題は<strong>本総説の対象外</strong>である。</p>
+<p>腸管に関して本総説から言えるのは間接的な内容にとどまる。</p>
+<div class="tw"><table>
+<thead><tr><th>本総説が扱っている範囲</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>腸管の機序の存在</td><td>背景で「示されてきた」と1行だけ言及。各論なし</td></tr>
+<tr><td>免疫麻痺と感染</td><td>新規感染44% vs 20%、敗血症の超過リスク50〜70%。感染源の内訳（腸管由来か否か）の記載はなし</td></tr>
+<tr><td>全身うっ血</td><td>体液過剰・中心静脈圧上昇による臓器うっ血を肝で論じており、同じ機序が腸管にも及ぶことは示唆されるが本総説では論じていない</td></tr>
+</tbody></table></div>
+<p>JCで腸管・骨髄・ARCを扱うなら、<strong>本総説以外の文献を持ち込む必要がある</strong>。ここは「読めば分かることを書かない」という原則を守り、原文にない内容を補わない。</p>
+<h3>11. AKI試験のエンドポイント — MAKEの限界と代替案</h3>
+<h4>11-1. 試験の目的でエンドポイントは変わる</h4>
+<p>AKIの最適なエンドポイントを考えるとき、<strong>試験の目的がエンドポイントの選択肢を規定する</strong>。</p>
+<ul><li><strong>AKI予防・軽減試験</strong>：発生率・重症度・持続期間を反映し、AKIのスペクトラム全体にわたる段階づけ（gradation）を許すエンドポイントが理想</li><li><strong>長期アウトカム（MAKE＝死亡＋透析導入＋腎機能の遷延性低下）</strong> は予防試験には向かない。<strong>非エンリッチ集団での発生率が極めて低い（&lt;5〜10%）</strong> ため、有効性を示すには<strong>数千例規模の試験</strong>が必要になる</li><li><strong>治療試験</strong>：MAKE、hospital-free days、dialysis-free days といった患者中心の長期アウトカムを使うべき。ただしコホート・臨床設定・介入によっては、<strong>MAKEの1成分が全体を支配してしまう</strong></li></ul>
+<h4>11-2. 短期のクレアチニン・尿量エンドポイントの功罪</h4>
+<p>AKIをアウトカムとするとき、<strong>短期・一過性のクレアチニン変化や尿量ベースのエンドポイントは実務的でイベント率を確実に増やし、より小規模で速い試験を可能にする</strong>。しかし、<strong>わずかなクレアチニン変化が長期転帰をどれだけ確実に予測するかは不明</strong>である。stage 1 のAKIと不良転帰を結びつける疫学研究はあるものの、<strong>データは一貫していない</strong>。</p>
+<p>また<strong>重症患者を対象とする試験は、市中発症AKIや一般病棟のAKIを対象とする試験とは別物</strong>であり、ICUでの研究はより重症で持続性のAKIとMAKEを見るのに適している。</p>
+<h4>11-3. MAKEの構造的な問題と競合リスク</h4>
+<p>MAKE、とりわけ死亡は、<strong>AKIと無関係な要因（術後敗血症・脳卒中など）に影響される</strong>。さらに<strong>死亡はCKDや透析依存/ESKDといった長期アウトカムに対する競合リスク（competing risk）</strong> である。</p>
+<p>AKI後のCKD進行をアウトカムとして調べる戦略として、著者は3点を挙げる。</p>
+<ol><li>AKI重症度の各stageに十分な割合の患者を確保する</li><li>年齢・ベースライン腎機能・併存症で患者をマッチさせる</li><li>頻回の検査フォローアップで腎機能の軌跡（trajectory）を解析する</li></ol>
+<p><strong>ベースライン（登録前）腎機能の確定が難題</strong>である。過去の血清クレアチニンデータの有無に依存し、これがAKIの発生率・重症度・回復の発生率に影響する。</p>
+<p>CKDが既知でない患者で信頼できる病前クレアチニン（またはシスタチンC）が得られないとき、<strong>KDIGO 2012 ガイドラインの推奨</strong>は次の2つ。</p>
+<div class="tw"><table>
+<thead><tr><th>方法</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>逆算法</td><td>MDRD式を用い、<strong>ベースラインeGFRを75 mL/min/1.73 m² と仮定</strong>して逆算</td></tr>
+<tr><td>院内最低値法</td><td>入院中の最低クレアチニン値を代用（未認識のCKDが除外されていることが条件）</td></tr>
+</tbody></table></div>
+<p>ただし<strong>逆算法はコホート次第でAKI発生率を過大にも過小にも見積もる</strong>。<strong>若く健康なコホートでは過小評価しやすく、より重症で高齢のコホートでは過大評価しやすい。</strong></p>
+<h4>11-4. 代替エンドポイント候補 — アルブミン尿とバイオマーカー</h4>
+<p>これらの問題を回避するため、<strong>アルブミン尿がCKD進行の代替マーカー</strong>として使えるかもしれない。</p>
+<p><strong>ASSESS-AKI 研究</strong>（前向き・縦断的・観察研究）は、<strong>AKIでの入院から3か月後の尿アルブミン/クレアチニン比（ACR）が高いほどCKD進行のリスクが高い</strong>ことを示した。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>入院3か月後の尿ACR高値 → CKD進行</td><td><strong>HR 1.53（95%CI 1.45〜1.62）</strong></td></tr>
+</tbody></table></div>
+<p>アルブミン尿はAKI後のCKD進行リスク患者を予測する代替指標としてだけでなく、<strong>治療標的</strong>にもなりうる。挙げられている薬剤クラスは <strong>RAAS阻害薬、SGLT2阻害薬、GLP-1受容体作動薬</strong>。</p>
+<p>その他の構造・機能バイオマーカーとして、<strong>血漿 sTNFR1・sTNFR2、尿 NGAL、尿 TIMP-2·IGFBP7</strong> がCKD進行やAKIからの回復を予測することが示されており、AKI試験の代替アウトカムとしての役割がありうる。ただし<strong>今後の検証と妥当性確認が必要</strong>である。なお、これは<strong>傷害・ストレスバイオマーカーを「エンリッチメント戦略」（AKIの発生率と重症度を高めるための選択）として使うのとは別の話</strong>である。</p>
+<h4>11-5. 透析依存と回復の定義がばらばらである</h4>
+<p><strong>透析を要するAKI患者の試験では、回復と透析依存の標準的定義が存在しない。</strong> 実際に使われてきた定義は次のように分かれる。</p>
+<div class="tw"><table>
+<thead><tr><th>定義の切り口</th><th>具体例</th></tr></thead>
+<tbody>
+<tr><td>透析継続の判定時点</td><td>退院時／28日／90日</td></tr>
+<tr><td>90日透析依存</td><td>ESKDの定義と一致。ただし90日より前の評価も同等に妥当</td></tr>
+<tr><td>透析依存からの回復（LIBERATE-D 試験）</td><td><strong>14日連続で生存かつ透析なし</strong></td></tr>
+<tr><td>透析依存からの回復（ATN試験の事後解析）</td><td>透析不要かつ<strong>最低クレアチニンクリアランス20 mL/min</strong></td></tr>
+</tbody></table></div>
+<p><strong>Days alive and dialysis-free（生存かつ透析不要の日数）</strong> は、患者中心のアウトカムと院内AKIに伴う死亡の双方を勘案する新しい代替エンドポイントである。ただし<strong>本質的に複合アウトカムであり、死亡と透析依存を同等の重みで扱ってしまう</strong>という弱点がある。</p>
+<p>これに対応するため、<strong>階層的複合エンドポイント（hierarchical composite endpoints）と win ratio の計算</strong>が探索されている。死亡と透析依存が競合アウトカムとなるAKI試験で、異なるアウトカムの相対的重要度を考慮し、より精緻な解釈を可能にする狙いである。</p>
+<p>なお<strong>AKI後に透析が不要になった患者でも、AKI再発とESKD発症のリスクは高いまま</strong>であり、初回AKI後のケア最適化は今後の研究課題である。</p>
+<h4>11-6. 遠隔臓器合併症をエンドポイントに組み込む</h4>
+<p>AKIの全身合併症は、AKI試験ではしばしば<strong>副次・事後・安全性アウトカム</strong>に置かれている。例として、人工呼吸の長期化、心不整脈、低血圧/血行動態不安定への曝露、せん妄、感染、出血が挙がる。<strong>AKIはこれらの合併症と関連し、合併症は患者転帰に影響するため、治療試験の複合エンドポイントとして使いうる</strong>というのが著者の提案である（Table 3）。</p>
+<h4>Table 3. AKI試験の新規エンドポイント（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>AKIとの相互作用</th><th>既存試験からの例</th></tr></thead>
+<tbody>
+<tr><td>人工呼吸／人工呼吸器フリー日数</td><td>体液過剰が肺水腫・低酸素血症・肺コンプライアンス低下を引き起こす、または増悪させる</td><td>透析の遅延開始戦略や保存的戦略は人工呼吸日数を増やさないと見える。ただしプロトコル上、臨床医の判断による透析が許容されていた点に留保</td></tr>
+<tr><td>人工呼吸／人工呼吸器フリー日数</td><td>CKRTの長期化に伴う低リン血症が神経筋の脱力に寄与しうる</td><td>CKRT中の低リン血症は抜管成功の確率低下と、人工呼吸器フリー日数の減少に関連した</td></tr>
+<tr><td>心不整脈</td><td>AKIに関連する電解質異常が不整脈を惹起しうる</td><td>透析の遅延開始戦略や保存的戦略は心不整脈の発生を増やさないと見える／間欠的KRTのモダリティはKRT中の低血圧および／または不整脈と関連した</td></tr>
+<tr><td>血行動態</td><td>容量バランスと透析が血管作動薬の必要性に影響しうる</td><td>透析の早期開始・遅延開始いずれの戦略も、昇圧薬フリー日数と関連しなかった</td></tr>
+<tr><td>せん妄／昏睡</td><td>尿毒症物質や神経毒性のある薬剤・代謝産物の蓄積がせん妄・昏睡に寄与しうる</td><td>より遅い透析開始戦略は、昏睡状態のAKI患者における覚醒の確率低下と関連した</td></tr>
+<tr><td>感染</td><td>透析カテーテル留置が血流感染のリスクを上げうる</td><td>透析の早期開始戦略はカテーテル関連血流感染と関連しなかった</td></tr>
+<tr><td>感染</td><td>透析によるクリアランスが抗菌薬の血中濃度に影響しうる</td><td>CKRTを受ける患者は多剤耐性菌感染の発生率が高い</td></tr>
+<tr><td>術後出血</td><td>尿毒症物質の蓄積と体液過剰が術後出血に寄与しうる</td><td>術後AKIは出血性合併症のリスク上昇と関連してきた</td></tr>
+</tbody></table></div>
+<p>（AKI＝急性腎障害、CKRT＝持続的腎代替療法、KRT＝腎代替療法）</p>
+<h4>11-7. 患者・介護者中心のアウトカムを増やす</h4>
+<p>院内発症AKIの罹病率の高さを考えると、<strong>重症疾患を生き延びた患者について、患者・介護者中心のアウトカムの測定を拡大することが重要</strong>である。</p>
+<ul><li><strong>在院日数と再入院率</strong>：しばしば病院の質指標とみなされるが、<strong>患者が自宅ではなく病院で過ごした時間</strong>でもあり、AKI予防試験や退院後AKIケア試験で有用なアウトカムになる。ただし<strong>文脈特異的に使うべき</strong>（例：敗血症関連AKIの文脈では妥当だが、心臓手術関連AKIの試験には向かない）。また<strong>非病院施設（skilled nursing facility や long-term acute care facility）での時間と、自宅での時間を区別すべき</strong>である</li><li><strong>経済的負担と就労への影響</strong>：同じくらい人生を変えるアウトカムだが、AKI研究ではほとんど探索されていない</li><li><strong>健康関連QOLと身体機能</strong>：AKIでの入院後に低下することが繰り返し示されている。<strong>STARRT-AKI や AKIKI 2</strong> のような透析導入試験は、QOLとADLの指標を副次アウトカムに含めている</li><li><strong>早期離床</strong>：ICU後の身体機能を最適化するため、<strong>CKRT施行中の早期離床</strong>の実行可能性と効果を検討した研究がいくつかある</li></ul>
+<h3>12. 結論（著者の言葉）</h3>
+<p>分子機序は完全には解明されていないものの、文献は<strong>機能不全の腎と他臓器の関連、そしてAKI関連合併症が罹病率と死亡率の上昇と関連することを一貫して報告している</strong>。<strong>不幸なことに、AKIを直接標的とする治療は存在せず、医師は予防的措置と支持的措置を適用できるにとどまる</strong>。これらのAKI関連合併症が患者の転帰に直接影響する以上、<strong>それらをAKI試験のエンドポイントとして考慮しうる</strong>。</p>
+<h3>13. 批判的吟味（JCでの論点）</h3>
+<p><strong>(1) ナラティブレビューであり、方法の透明性がない</strong> 検索式・データベース・期間・選択基準の記載がなく、引用181件がどう選ばれたかは追跡できない。「一貫して報告されている」という表現の裏づけを読者が検証する手段がない。<strong>引用の偏り（前臨床モデルの陽性所見が優先的に拾われている可能性）を排除できない。</strong></p>
+<p><strong>(2) 前臨床モデルからヒトへの外挿距離が大きい</strong> 機序の記述の相当部分が<strong>両側腎摘モデル</strong>や<strong>虚血再灌流モデル</strong>由来である。両側腎摘は「腎実質の傷害なしにGFRゼロ」という極端な条件であり、ヒトのAKIとは病態が異なる。「好中球トレイン」「肺胞ナトリウムチャネルのダウンレギュレーション」「グルタチオン前投与による肝保護」はいずれも動物実験の所見で、<strong>ヒトでの検証はない</strong>。著者自身も尿毒症物質の心筋傷害について「ヒトでの役割は未検証」と明記している。</p>
+<p><strong>(3) 臨床データはほぼすべて観察研究で、交絡と逆因果が残る</strong> AKI+ARDSのICU死亡21%も、AKI後の新規感染44%も、単施設ないし後ろ向きコホートである。<strong>「AKIが重いから他臓器が悪くなる」のか「元々重症だからAKIも他臓器障害も起きる」のかを分離できていない。</strong> 著者も因果推論はできないと繰り返し留保している。JCではここを最初に確認すべき。</p>
+<p><strong>(4) 「発症順序で死亡が違う（29% vs 14%）」は魅力的だが弱い</strong> 時系列が予後を分けるという主張は臨床的に興味深いが、<strong>単一施設の後ろ向き研究1本</strong>に依っている。AKIとARDSの診断タイミングは検査頻度に依存する（クレアチニンを測らなければAKIは「後」になる）ため、<strong>確認バイアス（ascertainment bias）に極めて脆弱</strong>である。</p>
+<p><strong>(5) CRS type 3 の発生率0〜29%という幅は、この分野の未成熟さの証拠</strong> 著者自身が「プール推定は不可能」と述べている。<strong>AKI定義のばらつき</strong>と<strong>AKI由来の心傷害を既存心疾患から区別する特異的バイオマーカーの不在</strong>が原因。29%という数字は心疾患既往を厳密に除外したコホート（インドの単一施設研究）から来ており、<strong>一般化には注意が要る</strong>。</p>
+<p><strong>(6) 肺の47%という数字の出所が小さい</strong> 「透析を要する重症AKIの47%が肺合併症」は<strong>単施設の小規模研究</strong>である。同様に「ICU AKI患者の70〜85%が人工呼吸」は複数研究の幅であり、プール推定ではない。JCでこれらを引用するときは、規模と設定を必ず添える。</p>
+<p><strong>(7) 治療の提案が既存の一般原則に収束してしまう</strong> 5臓器すべてについて、結論的な治療は「体液管理」「血行動態最適化」「TDM」「感染予防」「肺保護換気」であり、<strong>臓器連関の機序論から新しい特異的治療が導かれていない</strong>。血液吸着は3か所（肝・免疫・敗血症性ショック）で「生物学的には妥当だがエビデンス不十分」として退けられている。<strong>機序の精緻さと治療の変化量が釣り合っていない</strong>ことは、この総説の構造的な限界として指摘できる。</p>
+<p><strong>(8) 尿毒症物質は「溜めすぎ」と「抜きすぎ」の両方が悪いのに、閾値がない</strong> AKIKI 2 二次解析（BUN&gt;140 vs &gt;112 mg/dL）で高い方が昏睡日数が多かった一方、急速な尿素除去はDDSを起こす。<strong>では臨床でBUNをどこに置くべきか</strong>という問いに、本総説は答えを持たない。著者は「頻回の神経学的評価」としか言えていない。ここは臨床的に最も知りたい部分であり、率直な未解決領域である。</p>
+<p><strong>(9) 腸管・骨髄・ARCが抜けている</strong> 背景で腸への機序に言及しながら各論に節がない。<strong>腸管バリア障害と細菌トランスロケーション</strong>は免疫麻痺と新規感染の議論と直結するはずの主題だが扱われていない。<strong>骨髄・造血系</strong>への影響（AKI後の貧血・血小板減少）も同様。薬物動態についても<strong>腎クリアランス亢進（ARC）</strong> — 若年・敗血症患者でクリアランスが亢進し抗菌薬が過少投与になる現象 — は登場せず、本総説の薬物動態の議論は「排泄が落ちて溜まる」方向のみである。<strong>AKI患者の一部にARCが併存しうる（AKI stage 1 と ARC が同一患者で同時に起こりうる）</strong> 点は、JCで補って議論する価値がある。</p>
+<p><strong>(10) 未編集版（ARTICLE IN PRESS）である</strong> 出版社が「誤りが含まれる可能性があり、最終版で編集される」と明記している版である。実際、Table 1 のクレアチニン単位は mmol/L と誤記されている（正しくは µmol/L）。<strong>引用時は最終版の確認が必要。</strong></p>
+<p><strong>(11) COIの密度が高い</strong> 著者のうち3名がバイオマーカー企業（Astute Medical-Biomerieux、Bioporto、SphingoTec）から研究費・コンサル料を受けている。<strong>Table 2 のバイオマーカー一覧と、11-4 の「バイオマーカーを代替アウトカムに」という提案は、この文脈で読む必要がある。</strong> 提案自体は妥当だが、利益相反の存在は明示しておくべき論点。</p>
+<h3>14. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>ICU患者のAKI疫学（AKI-EPI 多国籍研究）</td><td>Hoste EAJ, et al. Intensive Care Med. 2015;41:1411-23</td></tr>
+<tr><td>AKIの総説（機序から治療まで）</td><td>Ronco C, Bellomo R, Kellum JA. Lancet. 2019;394:1949-64</td></tr>
+<tr><td>体液バランスとAKI</td><td>Prowle JR, et al. Nat Rev Nephrol. 2010;6:107-15</td></tr>
+<tr><td>重症AKI患者の体液過剰と転帰</td><td>Hayashi Y, et al. Sci Rep. 2023;13:17410</td></tr>
+<tr><td>人工呼吸中のAKIと呼吸メカニクス</td><td>Vemuri SV, et al. Crit Care Explor. 2022;4:e0720</td></tr>
+<tr><td>腎-人工呼吸器連関と腎保護的換気</td><td>Kusirisin P, Bagshaw SM. Curr Opin Crit Care. 2025</td></tr>
+<tr><td>IL-6が腎虚血・両側腎摘後の肺傷害を媒介</td><td>Klein CL, et al. Kidney Int. 2008;74:901-9</td></tr>
+<tr><td>AKIによる肺傷害でのミトコンドリアDAMPs</td><td>Hepokoski M, et al. Am J Physiol Lung Cell Mol Physiol. 2021;320:L821-31</td></tr>
+<tr><td><strong>「好中球トレイン」— AKIが肺血管内好中球滞留で低酸素血症を起こす</strong></td><td>Komaru Y, et al. J Clin Invest. 2025;135:e186705</td></tr>
+<tr><td>AKIによる肺の塩・水チャネルの調節障害</td><td>Rabb H, et al. Kidney Int. 2003;63:600-6</td></tr>
+<tr><td><strong>腎肺クロストークの大規模コホート（AKI+ARDSでICU死亡21%）</strong></td><td>Tomasi A, Song X, Gajic O, Kashani K. J Nephrol. 2023;36:1037-46</td></tr>
+<tr><td>AKIへの制限的輸液管理（REVERSE-AKI）</td><td>Vaara ST, et al. Intensive Care Med. 2021;47:665-73</td></tr>
+<tr><td>AKIとせん妄の関連（2データベース後ろ向き）</td><td>Porschen C, et al. Crit Care. 2026;30:158</td></tr>
+<tr><td>AKIはせん妄・昏睡のリスク因子</td><td>Siew ED, et al. Am J Respir Crit Care Med. 2017;195:1597-607</td></tr>
+<tr><td>尿毒症性脳症の総説</td><td>Rosner MH, et al. Kidney Int. 2022;101:227-41</td></tr>
+<tr><td><strong>AKIと神経認知アウトカムのSR・メタ解析</strong></td><td>Kelly DM, Kelleher EM, Rothwell PM. Neurology. 2026;106:e218031</td></tr>
+<tr><td><strong>AKI・せん妄・転帰のSR・メタ解析（158,694例、プール有病率32%）</strong></td><td>Kusirisin P, et al. Crit Care Med. 2026;54:571-83</td></tr>
+<tr><td><strong>昏睡患者でのKRT開始戦略（AKIKI 2 二次解析、BUN 140 vs 112）</strong></td><td>Rambaud T, et al. Intensive Care Med. 2024;50:385-94</td></tr>
+<tr><td>高蛋白投与と尿素トラジェクトリ（RE-EFFORT）</td><td>Haines RW, et al. Crit Care. 2024;28:24</td></tr>
+<tr><td>透析不均衡症候群の分子基盤</td><td>Trinh-Trang-Tan MM, Cartron JP, Bankir L. Nephrol Dial Transplant. 2005;20:1984-8</td></tr>
+<tr><td>心腎症候群の原典分類</td><td>Ronco C, Haapio M, House AA, Anavekar N, Bellomo R. J Am Coll Cardiol. 2008;52:1527-39</td></tr>
+<tr><td>CRS type 3 レビュー</td><td>Okpara R, Pena C, Nugent K. Cardiol Rev. 2024;32:140-5</td></tr>
+<tr><td>CRS type 3 発生率（インド、心疾患既往を除外して29%）</td><td>Pavan M. Iran J Kidney Dis. 2014;8:42-5</td></tr>
+<tr><td>CRS type 3 の腎関連転帰（非選択コホートで17.1%）</td><td>Drubel K, et al. Int J Nephrol. 2022;2022:4895434</td></tr>
+<tr><td>全身性アシデミアが心機能を損なう</td><td>Rodríguez-Villar S, et al. EClinicalMedicine. 2021;37:100956</td></tr>
+<tr><td>急性期の高カリウム血症管理</td><td>Dépret F, et al. Ann Intensive Care. 2019;9:32</td></tr>
+<tr><td>IHD中の連続心拍出量・血圧モニタリング</td><td>Spano S, et al. Blood Purif. 2024</td></tr>
+<tr><td><strong>AKI後の長期MACEリスク（54研究SR・メタ解析）</strong></td><td>Veltkamp DMJ, et al. Clin Kidney J. 2026;19:sfag145</td></tr>
+<tr><td>ICUの急性腎不全スペクトラム（AKI患者の28%が肝機能障害）</td><td>Liaño F, et al. Kidney Int Suppl. 1998;66:S16-24</td></tr>
+<tr><td>腎肝クロストークの総説</td><td>Bonavia A, Stiles N. Nephrol Dial Transplant. 2022;37:1218-28</td></tr>
+<tr><td>重症非肝硬変患者の肝硬度上昇</td><td>Koch A, et al. Crit Care. 2011;15:R266</td></tr>
+<tr><td>虚血性・非虚血性AKIが肝障害を起こす（グルタチオン実験）</td><td>Golab F, et al. Kidney Int. 2009;75:783-92</td></tr>
+<tr><td><strong>AKI後の重症敗血症リスク（人口ベースコホート、50〜70%増）</strong></td><td>Lai TS, et al. Crit Care. 2013;17:R231</td></tr>
+<tr><td>stage 1 AKIでも心臓手術後感染と独立に関連</td><td>Griffin BR, et al. J Thorac Cardiovasc Surg. 2021;161:1346-1355.e3</td></tr>
+<tr><td><strong>AKI後の新規感染リスク（44% vs 20%）</strong></td><td>Bernier-Jean A, et al. J Crit Care. 2018;48:9-14</td></tr>
+<tr><td>AKI患者の免疫プロファイリング（REALAKI）</td><td>Bidar F, et al. Crit Care. 2024;28:227</td></tr>
+<tr><td><strong>AKI誘発性好中球機能障害とレジスチン</strong></td><td>Singbartl K, Miller L, Ruiz-Velasco V, Kellum JA. Crit Care Med. 2016;44:e492-501</td></tr>
+<tr><td>敗血症＋AKIで単球HLA-DR低下</td><td>Wu HP, et al. Medicina (Mex). 2022;58:1198</td></tr>
+<tr><td>血液吸着が高レジスチン血症を是正し好中球機能を回復</td><td>Bonavia A, Miller L, Kellum JA, Singbartl K. Intensive Care Med Exp. 2017;5:36</td></tr>
+<tr><td>AKI患者の死因の定義</td><td>Selby NM, et al. PLOS ONE. 2012;7:e48580</td></tr>
+<tr><td><strong>重症患者のAKI予防と長期影響（本総説と同著者群）</strong></td><td>Zarbock A, Forni L, Koyner JL, et al. Intensive Care Med. 2025;51:1331-47</td></tr>
+<tr><td><strong>ASSESS-AKI（3か月尿ACRとCKD進行、HR 1.53）</strong></td><td>Hsu C, et al. JAMA Intern Med. 2020;180:402</td></tr>
+<tr><td><strong>LIBERATE-D（保存的透析戦略と腎機能回復）</strong></td><td>Liu KD, et al. JAMA. 2026;335:326</td></tr>
+<tr><td>ATN試験の頻回透析と腎回復</td><td>Vijayan A, et al. Kidney Int Rep. 2018;3:456-63</td></tr>
+<tr><td><strong>STARRT-AKI（RRT開始タイミング）</strong></td><td>The STARRT-AKI Investigators. N Engl J Med. 2020;383:240-51</td></tr>
+<tr><td><strong>AKIKI 2（2つの遅延戦略の比較）</strong></td><td>Gaudry S, et al. Lancet. 2021;397:1293-300</td></tr>
+<tr><td>IDEAL-ICU（敗血症のRRT開始タイミング）</td><td>Barbar SD, et al. N Engl J Med. 2018;379:1431-42</td></tr>
+<tr><td>重症患者の階層的エンドポイント（win ratio）</td><td>Zampieri FG, et al. J Crit Care. 2024;82:154767</td></tr>
+<tr><td>敗血症関連AKIのエンリッチメント・サブフェノタイピング</td><td>Legrand M, et al. Crit Care. 2024;28:92</td></tr>
+<tr><td>重度代謝性アシデミアへの重炭酸（BICAR-ICU 2）</td><td>Jung B, et al. JAMA. 2025;334:2000</td></tr>
+<tr><td>CRRT強度と人工呼吸期間（RENAL二次解析）</td><td>Serpa Neto A, et al. Blood Purif. 2023;52:888-97</td></tr>
+<tr><td><strong>CRRT中の低リン血症と人工呼吸器フリー日数（STARRT-AKI事後解析）</strong></td><td>Neyra JA, et al. Am J Kidney Dis. 2026;87:654-664.e1</td></tr>
+<tr><td>STARRT-AKIでの血行動態有害事象の関連因子</td><td>Kelly YP, et al. Crit Care. 2025;29:534</td></tr>
+<tr><td>CRRT患者の感染と死亡</td><td>Quickfall D, La A, Pisano J, et al. BMC Nephrol. 2025;26:321</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 AKIを見つけたら、<mark class="hl">その時点で肺・脳・心・肝・免疫の5臓器を「AKIの合併症候補」として能動的に探しにいく</mark>。AKIとARDSが揃えばICU死亡は21%（単独なら4〜9%）、AKI後の新規感染は44%（AKIなしは20%）、せん妄は32%に及ぶ。 <mark class="hl">5臓器すべてに効く唯一のレバーは体液管理であり、初期蘇生後の de-resuscitation は「腎のため」ではなく「肺・心・肝のため」に行う。</mark> 薬については、<mark class="hl">AKIでは腎クリアランス低下だけでなく肝CYP450活性も落ちるため、「肝機能が正常だから肝代謝薬は減量不要」という読み方は成立しない</mark>。治療域の狭い薬はTDMを厳密に。 <mark class="hl">セフェピムだけでなく、オピオイド・ガバペンチノイド・アシクロビルの神経毒性を、AKI患者の意識障害の鑑別に常に入れる。</mark> ただし本総説から新しい治療は生まれない。<mark class="hl">「AKIを直接治す薬はなく、予防と支持療法しかない」というのが2026年時点の到達点である。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
