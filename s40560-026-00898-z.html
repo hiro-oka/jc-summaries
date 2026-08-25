@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症治療は表現型別の上乗せ療法へ — treatable trait 11分類とバイオマーカー閾値（総説・JIntensiveCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s40560-026-00898-z.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症治療は表現型別の上乗せ療法へ — treatable trait 11分類とバイオマーカー閾値（総説・JIntensiveCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Chiscano-Camon L, Ruiz-Rodríguez JC, Ruiz-Sanmartin A, Nicolas-Morales P, Hernandez-Gonzalez M, Ferrer R. Update on sepsis treatment. J Intensive Care. 2026;14:68. DOI: 10.1186/s40560-026-00898-z</dd><dt>掲載誌</dt><dd>Journal of Intensive Care（2026-07-01）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s40560-026-00898-z" target="_blank" rel="noopener">doi.org/10.1186/s40560-026-00898-z</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Update on sepsis treatment</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院の標準治療は本論文では変わらない</strong>。この総説は「標準治療（早期抗菌薬・ソースコントロール・輸液・昇圧薬）は土台として済んでいる前提で、その上に表現型別の上乗せ療法を積む」という構成であり、標準治療そのものの推奨は一切扱っていない。抗菌薬のタイミング・期間、輸液の種類と量、MAP 目標、ステロイドの適応といった日々の意思決定は、<span class="wl">敗血症・敗血症性ショックの国際ガイドライン2026 — 全129推奨、強い推奨は18だけ（SSC2026・CCM2026）</span> と <span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span> を正本として運用を続ける。</li><li><strong>使える形になっているのは「難治性ショックの言語化」だけ</strong>。Table 1 の treatable trait のうち、当院で今日から使えるのは ①カテコラミン抵抗性低血圧（CRH）の閾値定義＝ノルアドレナリン換算 0.25 µg/kg/min 以上が6時間以上 ②低灌流の表現型（ScvO₂ &lt; 70%、ΔAvCO₂ &gt; 6 mmHg、乳酸推移、心エコー）の2つ。バソプレシン追加のトリガー（NE 0.25–0.5 µg/kg/min）は既に当院の運用と整合する。</li><li><strong>本邦で入手できない薬剤・デバイスが多い</strong>。アンジオテンシンII（Giapreza）は国内未承認、CytoSorb・HA-330 も薬事未承認、emapalumab は敗血症適応なし、adrecizumab・nangibotide は治験薬。読むときに「日本で買えるのはどれか」を最初に切り分けないと、議論が空回りする。<strong>日本で実際に選べるのはポリミキシンB血液灌流（トレミキシン）、rTM（リコモジュリン）、IVIG、ステロイド、血漿交換の5つ</strong>である点は、この総説を日本語で読む最大の利点になる。</li><li><strong>PMX の患者選択が実務論点になる</strong>。TIGRIS 試験（EAA 0.6–0.9 に限定）と本総説の EAA 閾値提示は、当院で PMX を「難治性ショックだから回す」ではなく「EAA を測って窓に入っている症例に回す」運用へ寄せる根拠になる。ただし本邦では EAA（エンドトキシン活性測定）が保険収載されておらず、実際にはエンドトキシン定量（リムルス法）で代用せざるを得ない。この乖離を認識せずに TIGRIS を引用しないこと。→ <span class="wl">エンドトキシン性敗血症性ショックへのPMX-HA 患者選択と実施の20項目コンセンサス（CritCare2026）</span></li><li><strong>ICU 勉強会の教材としては優秀</strong>。Table 1 は「治せる特徴（treatable trait）→ 測るもの → 打ち手」の3列が揃った1枚で、レジデントに敗血症のヘテロ性を説明するときの共通言語になる。当院の抄読会では、この表を配って「うちで測れるのはどれか」に印をつけさせる形が実用的。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：敗血症は世界の主要死因の一つで、早期認知・早期抗菌薬・ソースコントロール・血行動態蘇生という標準治療の骨格は国際ガイドラインで確立している。それでも敗血症性ショックの死亡率は高いままで、単一経路を狙った補助療法（抗エンドトキシン抗体、抗TNF、IL-1受容体拮抗薬、活性化プロテインC など）は非選択集団の RCT でほぼ一貫して失敗してきた。その理由として「敗血症は単一疾患ではなく、宿主応答が生物学的に異なる症候群である」という理解が共有されつつあった。</li><li><strong>Unknown（分かっていなかったこと）</strong>：①どの生物学的サブグループをどのバイオマーカー閾値で切り出すのが臨床的に意味があるのか ②切り出した集団に対して具体的に何を投与すべきか ③その打ち手を「いつ始めていつ止めるか」を決める指標は何か。とくにサイトカイン吸着では、開始・終了を決める血中サイトカイン閾値が存在しないままデバイスだけが普及していた。</li><li><strong>What's new（本総説の新規性・意義）</strong>：Vall d'Hebron グループが、敗血症の「治せる特徴（treatable trait）」を11分類に整理し、それぞれに <strong>測定可能なバイオマーカーと数値閾値</strong>、そして<strong>対応する治療</strong>を1対1で紐づけた統合表（Table 1）を提示した点。フェリチン 4,420 ng/mL、IFN-γ 3 pg/mL、CXCL9 2,200 pg/mL、単球 HLA-DR 5,000 受容体、IgG 500 mg/dL、bio-ADM 108 pg/mL、レニン 172.3 pg/mL、EAA 0.6–0.9 といった具体的な数字を1枚に集約した資料は他にない。加えて、2024–2026年の新しい知見（IFN-γ 駆動型敗血症 IDS という新エンドタイプ、ImmunoSep 試験、TIGRIS 試験）を組み込み、「治験のエンリッチメント戦略」を臨床のベッドサイド運用に落とす3段階ロードマップ（trait を決める → バイオマーカーで濃縮する → 動的に再評価する）を提案している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症を「単一疾患」ではなく生物学的に異なる複数のエンドタイプの集合とみなし、<strong>11の treatable trait（治せる特徴）それぞれにバイオマーカーの数値閾値と対応治療を紐づけた統合表</strong>を提示したナラティブレビュー。標準治療は土台として扱い、その上に表現型別の補助療法を積む「layered approach」を提案する。</p>
+</div>
+<ul><li><strong>著者らの立ち位置</strong>：早期のソースコントロール・抗菌薬・血行動態安定化は「基礎（foundational）」であり続けるが、免疫や内皮の破綻が強い患者ではそれだけでは不十分。標準治療を土台（baseline）とし、その上に表現型に沿った補助療法を層状に重ねるべきだと主張する。</li><li><strong>病態の3本柱</strong>：①免疫調節不全（過剰炎症と免疫抑制の共存）②内皮障害とグリコカリックス脱落（SHINE モデル）③血管麻痺（vasoplegia）。この3つが患者ごとに異なる比率で混在するため、非選択集団での介入は効果が希釈される。</li><li><strong>新エンドタイプ IDS</strong>：IFN-γ &gt; 3 pg/mL かつ CXCL9 &gt; 2,200 pg/mL で定義。Sepsis-3 患者の約20%を占め、28日死亡 <strong>40〜43%</strong>（MALS に次いで高い）。MALS との重複は1%未満で、機序的に別物。EMBRACE 試験（NCT06694701）で emapalumab を検証中。</li><li><strong>アンジオテンシンII</strong>：第一選択にはならないが、カテコラミン抵抗性低血圧（CRH）の補助昇圧薬としての位置づけ。ATHOS-3 では MAP 上昇の主要評価項目達成が <strong>Ang II 群 69.9% 対 プラセボ群 23.4%</strong>。post-hoc では NE 換算 ≤ 0.25 µg/kg/min での早期開始が生存と関連。</li><li><strong>免疫調節の転換点</strong>：ImmunoSep 試験（276例）で、フェリチンと単球 HLA-DR によるエンドタイプ層別化に基づく精密免疫療法（MALS→anakinra、免疫麻痺→rhIFN-γ）が、9日目 SOFA 改善を <strong>35.1% 対 17.9%（絶対差 17.2%、95% CI 6.8–27.2、P = .002）</strong> で達成。ただし28日死亡に差はない。</li><li><strong>血液浄化</strong>：TIGRIS 試験がベイズ解析で PMX の28日死亡 <strong>OR 0.67</strong>、90日で <strong>OR 0.54・NNT 8.1</strong> を示し、EUPHRATES の陰性結果を「患者選択の問題だった」と再解釈する流れ。一方サイトカイン吸着は開始・終了の閾値が未確立で、抗菌薬まで吸着してしまう非選択性の問題が残る。</li><li><strong>血行動態目標の個別化</strong>：初期 MAP 65 mmHg は多くの患者で妥当だが、その後は「MAP チャレンジ」（一時的に MAP を上げて尿量・意識・CRT が改善するかを見る）で個別化すべき、と提案。</li><li><strong>結論の慎重さ</strong>：著者ら自身が Table 1 を「処方アルゴリズムではなく生物学的・臨床的な地図（a biological and clinical map rather than a prescriptive treatment algorithm）」と明言している。この留保を外して読んではいけない。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>敗血症（sepsis）</strong>：感染に対する制御不能な宿主反応（dysregulated host response）によって生命を脅かす臓器障害が起きた状態（Sepsis-3）。<strong>敗血症性ショック（septic shock）</strong>は、十分な輸液後も MAP 65 mmHg 以上の維持に昇圧薬を要し、かつ乳酸 &gt; 2 mmol/L のもの。 <strong>エンドタイプ（endotype）とサブフェノタイプ（subphenotype）</strong>：同じ「敗血症」という臨床像の下に、生物学的機序が異なる集団が隠れているという考え方。エンドタイプは機序で定義された亜型、サブフェノタイプは観測可能な特徴（臨床・検査・オミクス）で分けた亜型を指す。両者はしばしば互換的に使われる。 <strong>treatable trait（治せる特徴）</strong>：もともと喘息・COPD 領域で発展した概念で、「診断名」ではなく「介入すれば変えられる特徴」を単位に治療を組む発想。本総説はこれを敗血症に持ち込んでいる。 <strong>PAMPs / DAMPs</strong>：病原体由来分子パターン（細菌の LPS など）と、傷害細胞由来分子パターン（細胞外ヒストン、cell-free DNA など）。いずれもパターン認識受容体を介して炎症を起動する。 <strong>MALS（マクロファージ活性化様症候群）</strong>：高フェリチン血症を伴う過剰炎症エンドタイプ。血球貪食症候群に類似した病態で、急速に死亡へ進行する。<strong>免疫麻痺（immunoparalysis）</strong>：単球 HLA-DR 発現が低下し抗原提示能が落ちた状態。二次感染・ウイルス再活性化・晩期死亡と関連する。この2つが敗血症免疫異常の両極。 <strong>グリコカリックス（glycocalyx）</strong>：血管内皮の管腔側を覆う糖鎖の層。敗血症で脱落（shedding）すると血管透過性が亢進し浮腫と臓器障害を招く。脱落の指標がシンデカン-1。 <strong>血管麻痺（vasoplegia）</strong>：NO 過剰産生・プロスタノイド不均衡・血管平滑筋シグナル障害により血管緊張が失われ、カテコラミンに反応しなくなる状態。 <strong>CRH（catecholamine-resistant hypotension／カテコラミン抵抗性低血圧）</strong>：本総説では「ノルアドレナリン換算 0.25 µg/kg/min 以上を6時間以上要する」を実務的な閾値として繰り返し用いている。 <strong>HA（hemoadsorption／血液吸着）</strong>：カートリッジ内の吸着体に血液を通し、エンドトキシンやサイトカインを吸着除去する体外循環療法。エンドトキシン標的（ポリミキシンB固定カラム＝トレミキシン／Toraymixin）と非選択的サイトカイン吸着（CytoSorb、HA-330）で標的分子が異なる。 <strong>EAA（Endotoxin Activity Assay）</strong>：好中球の化学発光を利用したエンドトキシン活性の半定量測定。0〜1 のスケールで、0.6 以上が高エンドトキシン血症とされる。<strong>本邦では保険収載されていない</strong>。 <strong>theragnostics（セラグノスティクス）</strong>：診断バイオマーカーと治療を一体で設計する考え方。「測って、その結果で治療を選ぶ」を制度化した用語。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>敗血症は支持療法と抗菌薬治療の進歩にもかかわらず、世界的に罹病と死亡の主要因であり続けている（Rudd らの GBD 解析）。国際ガイドラインは過去数十年にわたり、早期認知・迅速な抗菌薬投与・ソースコントロール・血行動態蘇生といった管理の要点を標準化してきた。これらの戦略は転帰を改善したが、敗血症性ショックの死亡率は依然として高く、現行の治療アプローチの限界を示している。</p>
+<p>著者らの問題設定は明快である。敗血症は単一の疾患単位ではなく、感染に対する制御不能な宿主反応によって特徴づけられる<strong>きわめて不均一な症候群</strong>である。患者は免疫の活性化、内皮機能障害、凝固異常、代謝反応において大きなばらつきを示す。この生物学的不均一性が、特定の病態経路を標的とした多くの治療介入が非選択集団で一貫した利益を示せなかった理由を部分的に説明する。</p>
+<p>したがって、より広い敗血症集団のなかから臨床的に意味のあるサブフェノタイプ、すなわち「treatable traits」を同定する精密医療アプローチへの関心が高まっている。バイオマーカープロファイリング、トランスクリプトミクス、多面的な臨床モニタリングの進歩により、生物学的シグネチャが異なり治療反応も異なりうる患者サブグループの同定が可能になりつつある。</p>
+<p>本総説の目的は、①敗血症病態生理の最新知見を統合し、②新興の治療戦略を、とくにバイオマーカー誘導型の介入と精密医療アプローチに重点を置いて論じ、③ガイドライン推奨・トランスレーショナル研究・ランドマーク試験を組み合わせて、免疫プロファイルと内皮プロファイルに介入を合わせる精密医療の論拠を示すことである。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。<strong>系統的検索戦略・データベース・検索期間・選択基準・PRISMA フロー・エビデンス格付けのいずれも記載がない</strong>。著者らはこれを「guidelines, translational research, and clinical trials からのデータを統合した包括的視座」と表現している。</li><li><strong>対象</strong>：成人の敗血症・敗血症性ショック。小児は Epstein-Barr ウイルス関連血球貪食症候群での早期血液浄化（引用文献59）に一度触れられるのみ。</li><li><strong>構成</strong>：Background → Table 1（統合フレームワーク）→ Main Text（病態生理 → 臨床管理 → 将来展望）→ Conclusions。</li><li><strong>執筆体制</strong>：全著者が原稿準備の全側面に等しく寄与したと申告。資金なし、COI なし。</li><li><strong>限界（方法上）</strong>：単一施設グループによる専門家意見であり、引用文献71本の選択は著者らの裁量による。自グループの業績（Ruiz-Rodríguez ら、Baldirà ら、Chiscano-Camon ら）が複数引用されている（引用文献51, 52, 57, 64, 65）。推奨の強さやエビデンスの確実性は一切格付けされていない。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>読むときの前提 本総説は <mark class="hl">GRADE 等の格付けを行っていない専門家意見であり、記載された数値閾値の多くは単一研究由来の派生値（Youden 指数など）である</mark>。「Table 1 に書いてある閾値だから使ってよい」と読むと、根拠の強さを取り違える。著者ら自身が Table 1 を「処方的な治療アルゴリズムではなく、生物学的・臨床的な地図」と明言している。</p>
+</div>
+<h3>4. 病態生理</h3>
+<h4>4-1. 制御不能な宿主反応（dysregulated host response）</h4>
+<p>敗血症は感染に対する不適応な宿主反応から生じ、そこでは<strong>過剰炎症と免疫抑制が共存する</strong>。PAMPs と DAMPs がパターン認識受容体を活性化し、サイトカインの制御不能な放出、凝固経路の活性化、細胞傷害を引き起こす。同時に、代償機構が免疫の疲弊（exhaustion）とリンパ球のアポトーシスを生み、二次感染とウイルス再活性化への感受性が高まる。この相反する2つの反応が併存することが、敗血症の臨床経過の不均一性を説明する。</p>
+<h4>4-2. DAMPs としての細胞外ヒストン</h4>
+<p>細胞外ヒストンは、好中球細胞外トラップ（NETs）形成と細胞死の際に放出され、敗血症における強力な DAMP として働く。ヒストンは①内皮細胞毒性を誘導し、②凝固を活性化し、③全身性炎症を伝播させる。循環ヒストン濃度の上昇は、重症患者における診断・重症度評価・予後判定のバイオマーカー候補として提案されている。ヒストン中和を標的とする治療戦略は、内皮傷害を軽減する将来の道筋になりうる。</p>
+<h4>4-3. 免疫機能障害とサブフェノタイプ</h4>
+<p>著者らは、敗血症の免疫機能障害は「重症度の単一の連続体」ではなく、<strong>生物学的に異なるサブフェノタイプのスペクトラム</strong>であると強調する。これらの免疫エンドタイプは、炎症の軌跡・時間的動態・臨床転帰が異なり、治療介入への反応が不均一である機序的説明を与える。</p>
+<div class="tw"><table>
+<thead><tr><th>エンドタイプ</th><th>定義・特徴</th><th>転帰上の意味</th></tr></thead>
+<tbody>
+<tr><td>MALS（マクロファージ活性化様症候群）</td><td>高フェリチン血症、圧倒的な炎症</td><td>敗血症のなかで死亡へ最も急速に進行する群</td></tr>
+<tr><td>免疫麻痺（immunoparalysis）</td><td>単球 HLA-DR 発現低下、抗原提示能の障害</td><td>反復感染・晩期死亡と関連</td></tr>
+<tr><td>代謝サブフェノタイプ</td><td>代謝プロファイルによる層別化。経時的安定性は限定的</td><td>予後への影響が異なる</td></tr>
+<tr><td>トランスクリプトーム・シグネチャ</td><td>過剰炎症クラスタと低炎症クラスタに分かれる</td><td>治療反応（とくにステロイド）が異なる</td></tr>
+</tbody></table></div>
+<h4>4-4. 新エンドタイプ IDS（Interferon-gamma–driven sepsis）</h4>
+<p>本総説が最も紙幅を割く新規知見。Giamarellos-Bourboulis らが、欧州14コホート <strong>5,503例</strong>を解析した多施設研究で提唱した。</p>
+<ul><li><strong>仮説</strong>：IFN-γ 誘導性のケモカイン CXCL9 の産生が、独立した病態機序を反映しているのではないか。</li><li><strong>閾値の決め方</strong>：探索セットの解析で、<strong>IFN-γ &gt; 3 pg/mL かつ CXCL9 &gt; 2,200 pg/mL</strong> が死亡を最もよく予測することを見出し、これを IDS の診断基準とした。</li><li><strong>頻度</strong>：探索コホート・検証コホートのいずれでも <strong>全患者の約20%</strong>。再現性が高い。</li><li><strong>生物学的位置づけ</strong>：マクロファージが活性化しているが MALS ではないエンドタイプで、CXCL9 が不釣り合いに高い。<strong>MALS との重複は1%未満</strong>で、機序的に別物であることを支持する。</li><li><strong>臨床的重み</strong>：<strong>28日死亡 約40〜43%</strong>（MALS に次いで高い）。併存症・重症度スコア・感染巣・起因菌で調整しても、死亡の独立予測因子であり続けた。</li><li><strong>動態</strong>：最初の72時間で IFN-γ と CXCL9 が低下した患者は生存が良好、CXCL9 高値が持続した患者は非生存者だった。</li><li><strong>治療への接続</strong>：EMBRACE 試験（NCT06694701）で、抗 IFN-γ 抗体 emapalumab の有効性を検証中。</li></ul>
+<h4>4-5. 内皮障害とグリコカリックス脱落</h4>
+<p>内皮機能障害は敗血症の中核的特徴であり、血管漏出・組織浮腫・臓器不全を駆動する。<strong>SHINE（Shock-Induced Endotheliopathy）モデル</strong>は、グリコカリックス脱落・微小血管血栓・バリア機能の破綻の役割を強調する。循環バイオマーカーとして、シンデカン-1、可溶性 VE-カドヘリン、スフィンゴシン-1-リン酸（S1P）が不良転帰と相関する（ALBIOS 試験のサブスタディ）。</p>
+<p><strong>アルブミンは内皮完全性を保護する</strong>ことが示されている。機序は VE-カドヘリンのリン酸化を減らし、グリコカリックス障害を軽減することによる。したがって内皮表層は、病態の結節点であると同時に治療標的でもある。</p>
+<h4>4-6. プロテインC経路</h4>
+<p>炎症・内皮機能障害・凝固の相互作用は敗血症病態の中心的構成要素である。<strong>プロテインC経路</strong>は、抗凝固作用・抗炎症作用・細胞保護作用を発揮する枢要な調節役を担う。敗血症患者では内因性プロテインC値の低下が臓器障害・死亡リスク増加と一貫して関連する。プロテインC活性のモニタリングが、標的治療から利益を得られる敗血症性凝固障害・DIC 患者の同定に役立つ可能性が示唆されている。補充戦略は依然として研究段階だが、凝固経路が精密医療の潜在的標的であるという概念を補強する。</p>
+<h4>4-7. 敗血症における血管麻痺</h4>
+<p>敗血症性ショックはしばしば血管麻痺に支配される。機序は①過剰な一酸化窒素産生 ②プロスタノイドの不均衡 ③血管平滑筋シグナル伝達の障害 ④グリコカリックスの分解。血管麻痺は難治性低血圧に寄与するだけでなく、微小循環障害を増悪させる。血管麻痺性ショックを独立した病態単位として認識することが、個別化された血行動態目標と、バソプレシン・アンジオテンシンII・血液吸着といった補助療法の論拠になる。</p>
+<h3>5. Table 1. 敗血症の treatable trait・バイオマーカー・精密治療の統合フレームワーク</h3>
+<p>原表を日本語化して以下に示す。<strong>この1枚が本総説の中核</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>treatable trait（治せる特徴）</th><th>説明</th><th>バイオマーカーと閾値</th><th>治療</th></tr></thead>
+<tbody>
+<tr><td>高エンドトキシン血症型</td><td>過剰炎症型の一角。エンドトキシンが主因</td><td>EAA 0.6 – 0.9</td><td>エンドトキシン吸着デバイス（例：トレミキシン Toraymixin）</td></tr>
+<tr><td>高サイトカイン型</td><td>過剰炎症型の一角。サイトカインストーム</td><td>IL-6 血中濃度。ただし治療の開始・終了を決める閾値は未確立</td><td>サイトカイン吸着デバイス（例：CytoSorb）</td></tr>
+<tr><td>高 EAA かつ高サイトカイン型</td><td>両者が併存</td><td>上記と同じ閾値</td><td>逐次的血液吸着。PMX（トレミキシン）でエンドトキシンを吸着し、続いて CytoSorb でサイトカインを吸着する。厳選症例に適用。制御不能な炎症反応を誘導している一次刺激の除去が目的</td></tr>
+<tr><td>MALS（マクロファージ活性化様症候群）</td><td>過剰炎症型</td><td>フェリチン &gt; 4,420 ng/mL</td><td>抗 IL-1（アナキンラ）／抗 TNFα／選択例で血漿交換（TPE）</td></tr>
+<tr><td>IDS（IFN-γ 駆動型敗血症）</td><td>過剰炎症型</td><td>IFN-γ &gt; 3 pg/mL、単球（CD45/CD14）上の HLA-DR ≥ 8,000 受容体、CXCL9 &gt; 2,200 pg/mL</td><td>抗 IFN-γ 調節療法（emapalumab・研究段階）</td></tr>
+<tr><td>低ガンマグロブリン血症</td><td>低炎症型。多価免疫グロブリンは炎症・抗炎症の双方を調節する論理的アプローチ</td><td>IgG &lt; 500 mg/dL、または年齢基準値の 2SD 未満</td><td>多価 IVIG／IgM・IgA 強化ポリクローナル IVIG を 250 mg/kg/日、10時間かけて3日間連続投与</td></tr>
+<tr><td>免疫麻痺（T細胞疲弊症候群）</td><td>低炎症型</td><td>フェリチン &lt; 4,420 ng/mL、HLA-DR &lt; 5,000</td><td>rhIFN-γ／チェックポイント阻害薬（例：ニボルマブ）</td></tr>
+<tr><td>CRH（カテコラミン抵抗性低血圧）— バソプレシン</td><td>血管麻痺</td><td>NE 0.25 – 0.5 µg/kg/min</td><td>バソプレシン持続投与と用量調整</td></tr>
+<tr><td>CRH — アンジオテンシンII</td><td>血管麻痺・RAAS 系の破綻</td><td>血漿レニン濃度 &gt; 172.3 pg/mL、カテコラミン換算 &gt; 0.25 µg/kg/min が6時間以上</td><td>Ang II 持続投与と用量調整</td></tr>
+<tr><td>CRH — コルチコステロイド</td><td>血管麻痺</td><td>カテコラミン換算 &gt; 0.25 µg/kg/min が6時間以上</td><td>ヒドロコルチゾン 100 mg 単回に続いて 200 mg/日</td></tr>
+<tr><td>CRH — 代謝蘇生（metabolic resuscitation）</td><td>ミトコンドリア機能障害により活性酸素種・活性窒素種が増加し、血管緊張の変化・血管透過性亢進・カテコラミン抵抗性を生じる</td><td>カテコラミン換算 &gt; 0.25 µg/kg/min が6時間以上、血漿アスコルビン酸濃度</td><td>アスコルビン酸 1,500 mg を6時間ごと15回 ＋ チアミン 200 mg を12時間ごと ＋ ヒドロコルチゾン（100 mg 単回に続いて 200 mg/日）</td></tr>
+<tr><td>低灌流（low-flow）型</td><td>敗血症性心筋症で、血管作動薬の投与・用量調整と他表現型に応じた支持療法を行っても灌流不良の徴候が続く患者</td><td>乳酸値と Δ乳酸、ScvO₂ &lt; 70%、ΔAvCO₂ &gt; 6 mmHg、心エコー指標</td><td>V-A ECMO</td></tr>
+<tr><td>内皮機能障害</td><td>内皮細胞は免疫反応を増幅し凝固系を活性化する。炎症の標的であり源でもあり、局所と全身の免疫応答をつなぐ</td><td>bio-ADM &gt; 108 pg/mL、MR-proADM（入室48時間以内に 1.65 nmol/L まで低下するか）、シンデカン-1（グリコカリックス）、可溶性トロンボモジュリン sTM（深部内皮傷害）、Ang-2/Ang-1 比、Tie-2（内皮障害で低下）、VWF 上昇と ADAMTS-13 低下、可溶性 VE-カドヘリン、S1P、E-セレクチン・P-セレクチン、ICAM-1・VCAM-1、細胞外ヒストン、内皮・白血球由来微小胞。直接評価として PBR（perfused boundary region）、MFI（微小血管フローインデックス）、灌流血管比率</td><td>今後の研究課題。アルブミン投与（内皮安定化作用）、adrecizumab（抗 ADM・研究段階）、モノクローナル抗体（ニボルマブ）</td></tr>
+<tr><td>蘇生関連内皮障害（resuscitation-associated endotheliopathy）</td><td>蘇生そのものが内皮完全性を悪化させる</td><td>ボーラス後のシンデカン-1 上昇、蘇生後の sTM 上昇、PBR 上昇（グリコカリックス脱落）、MFI 低下（微小循環血流障害）</td><td>不要な急速輸液ボーラスを避ける／初期輸液量を制限する／昇圧薬の早期開始を優先する／微小循環モニタリング（SDF イメージング）</td></tr>
+<tr><td>免疫血栓症（immunothrombosis）</td><td>凝固亢進・微小血栓形成状態で DIC のリスク</td><td>血小板減少、D-ダイマー上昇、TAT 複合体、FDP、PT・APTT 延長、NETs（細胞外ヒストン、cell-free DNA、MPO–DNA 複合体）、VWF 上昇・ADAMTS13 低下</td><td>TPE（血漿交換）／個別化した凝固管理／rTM（可溶性トロンボモジュリン）／補体阻害薬（C5a・C3a 遮断・実験段階）</td></tr>
+<tr><td>TAMOF・TMA・TTP/HUS・DIC</td><td>血小板減少関連多臓器不全、血栓性微小血管症、血栓性血小板減少性紫斑病・溶血性尿毒症症候群、播種性血管内凝固</td><td>上記に準ずる</td><td>TPE／ヘパリン、アンチトロンビンIII、遺伝子組換え組織因子経路インヒビター、遺伝子組換え活性化プロテインC、プロテインC濃縮製剤、遺伝子組換え可溶性トロンボモジュリン</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>この表の読み方 縦軸は「過剰炎症 → 低炎症 → 血管麻痺 → 低灌流 → 内皮 → 凝固」という病態軸で並んでおり、1人の患者が複数の trait を同時にもちうる。フェリチン 4,420 ng/mL が MALS と免疫麻痺の<strong>同一の分岐点</strong>として使われている点（超えれば MALS、下回れば免疫麻痺の候補）が、ImmunoSep 試験の層別化ロジックそのものである。</p>
+</div>
+<h3>6. 臨床管理 — 全体の設計思想</h3>
+<p>敗血症の不均一性を認識することは臨床管理に重要な含意をもつ。早期のソースコントロール、抗菌薬治療、血行動態安定化は基礎的措置であり続けるが、免疫や内皮の調節不全が深い患者ではこれらだけでは不十分でありうる。したがって<strong>標準治療（standard-of-care）は「その上に表現型に沿った補助戦略を重ねるための土台（baseline）」として見るべきである</strong>——これが本総説の設計思想である。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本総説が扱っていない領域 <mark class="hl">抗菌薬の投与タイミングと投与期間、輸液の種類（バランス晶質液か生理食塩液か）と投与量、ソースコントロールの実施時期、SSC 2021 の推奨の強さとエビデンスの質については、本総説には具体的な記載が一切ない</mark>。Background で「早期認知・迅速な抗菌薬投与・ソースコントロール・血行動態蘇生」と列挙されるのみで、推奨文も数値も grade も示されない。タイトルの "Update on sepsis treatment" から標準治療の最新推奨を期待して読むと肩透かしを食う。標準治療については後述の第10節と、当 Vault の SSC ノートを参照すること。</p>
+</div>
+<h3>7. 血行動態蘇生とカテコラミン抵抗性低血圧（CRH）</h3>
+<p>血管麻痺は敗血症性ショックの病態生理的に独立した構成要素であり、内皮機能障害・血管平滑筋反応性の低下・神経体液性シグナルの調節不全の相互作用を反映する。血管麻痺性ショックを特定の表現型として認識することが、個別化された血行動態目標と、それに合わせた昇圧薬戦略の論拠を与える。</p>
+<h4>7-1. アンジオテンシンIIの位置づけ</h4>
+<p>血管拡張性ショック患者のなかには RAAS エンドタイプの大きな不均一性がある。著者らの結論は明確で、<strong>Ang II は第一選択薬とみなすべきではない</strong>が、安全性と生理学的有効性が示された以上、<strong>昇圧薬の補助（vasopressor adjuvant）としての役割はありうる</strong>、というものである。Ang II は内分泌的性質をもつ天然ホルモンで、オートクリン・パラクリン作用ももち、動脈系と静脈系の双方に血管収縮作用を示す。分布性ショックの治療薬として承認されている（FDA）。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・解析</th><th>n</th><th>主な所見</th></tr></thead>
+<tbody>
+<tr><td>Chawla ら（ATHOS パイロット）</td><td>—</td><td>CRH に対する Ang II の安全性と有効性を支持</td></tr>
+<tr><td>ATHOS-3（Khanna ら、NEJM 2017）</td><td>344</td><td>カテコラミン（ノルアドレナリン 0.2 µg/kg/min 相当）に不応の患者を Ang II 群とプラセボ群に無作為化。主要評価項目は「ベースラインから MAP 10 mmHg 以上の上昇、または血圧 75 mmHg 超への上昇」。達成率は <strong>Ang II 群 69.9% 対 プラセボ群 23.4%</strong>。有害事象に有意差なし</td></tr>
+<tr><td>Wieruszewski ら（ATHOS-3 探索的 post-hoc、CritCare 2023）</td><td>—</td><td><strong>NE 換算量 ≤ 0.25 µg/kg/min という低用量の段階で Ang II を開始した群</strong>は、プラセボと比べて生存の可能性が高かった</td></tr>
+<tr><td>Tumlin ら（ATHOS-3 post-hoc、CCM 2018）</td><td>—</td><td>無作為化時点で腎代替療法（RRT）を受けていた患者は、Ang II で7日目の RRT 離脱率と生存が改善</td></tr>
+<tr><td>Bellomo ら（ATHOS-3 post-hoc、CritCare 2020）</td><td>—</td><td>アンジオテンシンI/II 比が中央値未満の患者（＝内因性 Ang II 欠乏を示唆）で有意に生存が良好</td></tr>
+</tbody></table></div>
+<p>Coloretti らのナラティブレビューによれば、Ang II の治療的役割が最も顕著になるのは、RAAS 軸の調節不全で特徴づけられる生物学的に明確な表現型である。反応しうるクラスタとして次の3群が挙げられている。</p>
+<ol><li><strong>著明な高レニン血症</strong>を示す患者。内因性 Ang II 欠乏または受容体脱感作を示唆する。Bellomo らは血管拡張性ショックでレニン値が著明に上昇することを観察し、Ang II 治療が有益な患者の同定に使えると述べている（Table 1 の閾値は &gt; 172.3 pg/mL）。</li><li><strong>RRT を要する、または要するリスクのある AKI 患者</strong>。輸出細動脈の選択的収縮により糸球体濾過と腎回復を促進しうる。</li><li><strong>ARDS 患者</strong>。肺内皮の ACE 枯渇と Ang II 産生障害を伴う病態である。</li></ol>
+<p>臨床的利益が最大化されるのは、<strong>Ang II を多剤併用の昇圧薬レジメンのなかに早期に組み込んだとき</strong>、とくにノルアドレナリン換算が低〜中等度（&lt; 0.3 µg/kg/min）の段階である。これは血管麻痺の病態生理学的サブタイプに合わせた精密血行動態アプローチを反映する。</p>
+<h3>8. 免疫調節療法</h3>
+<p>免疫療法は発展途上の領域である。TREM-1 経路阻害薬 nangibotide、非中和型抗アドレノメデュリン抗体 adrecizumab といった標的薬剤は、安全性と生物学的活性を示している——<strong>とくにバイオマーカーで濃縮された集団において</strong>。これらの試験が強調するのは患者選択の重要性であり、利益は免疫・内皮のバイオマーカーで定義されたサブセットで最も顕著である。将来の方向性には免疫チェックポイント阻害薬とサイトカイン標的戦略が含まれる。</p>
+<h4>8-1. スコーピングレビューが示した現状（Slim ら、CritCare 2024）</h4>
+<p>2024年1月までの主要データベースの系統的検索により、<strong>771研究</strong>（介入試験 489、観察研究 282）を同定。対象となった介入は、自然免疫応答の調節、補体系、凝固・内皮機能障害、さらにサイトカイン・増殖因子・IVIG・間葉系幹細胞・免疫チェックポイント阻害薬といった免疫刺激戦略まで、広範な経路にわたる。</p>
+<p>決定的な数字は次の1つである。<strong>バイオマーカーによる患者層別化や特定のサブフェノタイプ同定に基づく個別化治療アプローチを取り入れていた研究は、全体の約9%にすぎなかった</strong>。多くの臨床試験が一貫しないまたは陰性の結果を出してきたのは、敗血症の不均一性と "one-size-fits-all" 戦略の限界を部分的に反映している可能性がある。</p>
+<h4>8-2. アナキンラ（IL-1受容体拮抗薬）</h4>
+<p>IL-1 受容体遮断への関心は、免疫フェノタイピングの進歩により敗血症が生物学的に異なるエンドタイプの集合であると判明したことで再燃した。</p>
+<ul><li><strong>原点</strong>：重症敗血症に対する遺伝子組換え IL-1 受容体拮抗薬（IL-1ra）の第III相試験（Fisher ら 1994、Opal ら）は、非選択集団で死亡率改善を示せなかった。しかし IL-1 駆動型の過剰炎症を標的とする機序的論拠は確立した。</li><li><strong>再解析</strong>：Shakoory ら（CCM 2016）が同じデータセットを再解析し、<strong>肝胆道系機能障害と凝固障害を伴うサブグループ</strong>でアナキンラによる実質的な生存優位を同定した。</li><li><strong>PROVIDE 試験</strong>（Leventogiannis ら、Cell Rep Med 2022）：バイオマーカーで定義した MALS 患者に限定してアナキンラを割り付ける戦略を実際に運用し、エンドタイプ誘導型 IL-1 阻害の実行可能性と生物学的整合性を示した。</li><li><strong>ImmunoSep 試験</strong>（Giamarellos-Bourboulis ら）：本総説で最も新しい引用。詳細は下表。</li></ul>
+<p><strong>ImmunoSep 試験の設計と結果</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>対象</td><td>Sepsis-3 で定義された敗血症のうち、肺炎（市中・院内・人工呼吸器関連）または菌血症に伴うもの</td></tr>
+<tr><td>層別化</td><td>フェリチンと単球 HLA-DR 発現で免疫エンドタイプを判定</td></tr>
+<tr><td>MALS の定義</td><td>フェリチン &gt; 4,420 ng/mL</td></tr>
+<tr><td>SIP（敗血症誘発免疫麻痺）の定義</td><td>フェリチン ≤ 4,420 ng/mL かつ CD45/CD14 単球上の HLA-DR &lt; 5,000 受容体</td></tr>
+<tr><td>介入</td><td>標準治療＋精密免疫療法 対 標準治療＋プラセボ。MALS には静注アナキンラ、SIP には皮下 rhIFN-γ。ダブルダミー法で最長15日間</td></tr>
+<tr><td>主要評価項目</td><td>臓器障害の改善＝9日目までに平均 SOFA スコアが 1.4点以上低下</td></tr>
+<tr><td>対象数・背景</td><td>主要解析 276例。平均年齢 70±13歳、ベースライン SOFA 中央値 9</td></tr>
+<tr><td>主要評価項目の結果</td><td>精密免疫療法群 <strong>35.1%</strong> 対 プラセボ群 <strong>17.9%</strong>（絶対差 <strong>17.2%、95% CI 6.8–27.2、P = .002</strong>）</td></tr>
+<tr><td>28日死亡</td><td><strong>両群で有意差なし</strong></td></tr>
+</tbody></table></div>
+<h4>8-3. インターフェロンγ — 双方向の免疫調節ツール</h4>
+<p>IFN-γ は、現代の敗血症性ショック免疫病態モデルにおいて逆説的かつ中心的な位置を占める。<strong>早期の過剰炎症性傷害の駆動因子</strong>であると同時に、<strong>晩期の免疫麻痺における治療薬候補</strong>でもある。</p>
+<ul><li><strong>過剰炎症相</strong>：NK 細胞・Th1 リンパ球・活性化マクロファージによる過剰な IFN-γ 分泌が、下流の細胞傷害プログラムを増幅する。とくに IFN-γ によって特異的に誘導されるケモカイン CXCL9 を介する経路が重要で、CXCL9 は強力なアポトーシス促進作用と内皮傷害作用をもつ。IFN-γ 誘導性 CXCL9 は組織傷害を増強し、白血球動員を促し、内皮細胞・実質細胞のアポトーシスを促進して多臓器障害に寄与する。この機序が IDS エンドタイプ（IFN-γ &gt; 3 pg/mL かつ CXCL9 &gt; 2,200 pg/mL、Sepsis-3 患者の約20%、28日死亡 40〜43%）として定式化された。</li><li><strong>免疫抑制相</strong>：単球 HLA-DR の著明な低下、サイトカイン産生能の障害、微生物クリアランス不良で特徴づけられる相では、内因性 IFN-γ が不足し、その欠乏が二次感染と難治性ショックに相関する。</li><li><strong>臨床データ</strong>：Payen らの多施設症例集積（BMC Infect Dis 2019）で、敗血症誘発免疫抑制に外因性 IFN-γ を投与すると、単球 HLA-DR 発現が回復し、抗菌エフェクター機能が改善し、病原体クリアランスが向上した。重大な安全性の懸念はなかった。</li><li><strong>前臨床の機序</strong>：IFN-γ は PI3K/AKT/mTOR シグナルを介して樹状細胞の代謝を解糖系優位へ再プログラムし（Warburg 効果）、免疫刺激能を回復させることで敗血症関連免疫麻痺を是正する。</li><li><strong>治療戦略の帰結</strong>：<strong>IDS 様の過剰炎症では IFN-γ/CXCL9 軸の阻害が、バイオマーカーで確認された免疫麻痺では IFN-γ の投与が有利</strong>という二方向戦略。IFN-γ は定量と動態が精密免疫療法を導くべき双方向の免疫調節ツールとして位置づけられる。</li></ul>
+<h4>8-4. Nangibotide（TREM-1 阻害薬）</h4>
+<p>TREM ファミリーはメンバー間の配列相同性が低く、単一の免疫グロブリン様ドメインをもつ複数のアイソフォームからなる。TREM 受容体の結合は、カルシウム動員・アクチン細胞骨格の再構成・転写因子の活性化を導く細胞内シグナル伝達を開始する。これらの受容体のエフェクター細胞表面での発現は、グラム陽性菌・グラム陰性菌・真菌による感染時に、皮膚・体液・組織で著明に上昇する。TREM とその可溶型（sTREM-1）は敗血症性ショックの診断マーカー、感染の予後マーカー、そして補助治療の標的分子として機能する。</p>
+<p><strong>ASTONISH 試験</strong>（第2b相、NCT04055909）：敗血症性ショック患者における nangibotide の有効性・安全性・忍容性を、とくに高 sTREM-1 サブグループとその阻害特性に焦点を当てて評価した。</p>
+<ul><li><strong>主要評価項目</strong>：ベースラインから5日目までの総 SOFA スコアの変化。<strong>全試験集団では達成されなかった</strong>。</li><li><strong>事前規定の探索的解析</strong>：<strong>sTREM-1 濃度 ≥ 532 pg/mL</strong> の患者に限定すると、5日目 ΔSOFA スコアの統計学的に有意な改善が高用量 nangibotide 群で観察された。</li><li><strong>著者らの注意喚起</strong>：sTREM-1 の予後的意義を踏まえると、単一バイオマーカーのカットオフで患者選択を行う将来の試験では、<strong>両群間で sTREM-1 絶対濃度の分布が均衡していることを保証しなければ交絡が生じる</strong>。</li></ul>
+<h4>8-5. Adrecizumab とアドレノメデュリン</h4>
+<p>内皮機能障害を反映するバイオマーカーのうち、アドレノメデュリン（ADM）はとくに注目されている。ADM は血管作動性ペプチドホルモンで、免疫調節作用をもち、内皮バリアの安定化に寄与して血管の完全性を保つ。一方で、血管内皮・間質組織・平滑筋への親和性と血管拡張作用のため、敗血症関連の低血圧と血管透過性亢進に寄与しうる。高濃度では過剰な血管拡張を誘導し、循環値の上昇は昇圧薬必要量の増大・多臓器障害・死亡増加と関連する。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>数値</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>bio-ADM と昇圧薬必要性（Lundberg ら、CritCare 2020）</td><td><strong>OR 1.33（95% CI 1.23–1.42）</strong></td><td>入院時の循環 bio-ADM 高値は昇圧薬必要性の増加と関連</td></tr>
+<tr><td>bio-ADM のカットオフ（従来）</td><td>70 pg/mL</td><td>敗血症の生存者と非生存者を区別</td></tr>
+<tr><td>bio-ADM のカットオフ（Youden 指数由来）</td><td><strong>108 pg/mL</strong></td><td>70 pg/mL より良好な性能。Table 1 の採用値</td></tr>
+<tr><td>MR-proADM の推移</td><td>入室48時間以内に <strong>約 1.65 nmol/L</strong> まで低下</td><td>生存者に典型的な推移。5日目も非生存者より一貫して低値</td></tr>
+<tr><td>MR-proADM の予測性能</td><td>PCT・CRP・SOFA スコア・乳酸より優れる</td><td>感染巣によらず、臓器障害高リスク患者の早期同定に使える。病院・ICU の資源配分の意思決定支援としても提案されている</td></tr>
+</tbody></table></div>
+<p><strong>Adrecizumab（HAM8101）</strong>：ADM の N 末端領域にエピトープ特異性をもつ<strong>非中和型</strong>モノクローナル抗体。ADM に結合するがその生物活性を完全には阻害せず、ADM を介したセカンドメッセンジャーシグナルを減弱させる。この機序により、間質コンパートメントに存在する高濃度 ADM を隔離して過剰な血管拡張を抑える一方、循環 ADM の実効活性を高めて内皮透過性の安定化に寄与しうる。</p>
+<ul><li><strong>AdrenOSS-2 試験</strong>（第IIa相、二重盲検、無作為化、プラセボ対照、バイオマーカー誘導型）：血中 bio-ADM &gt; 70 pg/mL の敗血症性ショック患者を対象に adrecizumab の安全性・忍容性を評価。<strong>忍容性は良好で安全性プロファイルも良好</strong>。主要目的ではなかったが、多臓器障害の改善が観察された。</li><li><strong>ENCOURAGE 試験</strong>（第IIb/III相）：昇圧薬開始直後の敗血症性ショック患者に adrecizumab 4 mg/kg を投与。<strong>予測的濃縮（predictive enrichment）と予後的濃縮（prognostic enrichment）を組み合わせた設計</strong>で、主要目的は28日死亡と SOFA スコアの低減。</li></ul>
+<h3>9. 過剰炎症型に対する体外血液浄化</h3>
+<p>一部の患者では、最適化された従来治療にもかかわらず、極端な炎症性またはエンドトキシン駆動性の調節不全が持続する。この文脈で体外血液浄化は、標準的支持療法を置き換えるのではなく、上流の病態駆動因子を調節することを狙った<strong>補助的・表現型指向の介入</strong>として提案されている。</p>
+<h4>9-1. 高サイトカイン型に対するサイトカイン吸着</h4>
+<ul><li><strong>位置づけ</strong>：標準治療に抵抗する敗血症性ショックと多臓器障害の状況で、個別化治療として考慮しうる。</li><li><strong>機序の裏づけ</strong>：CytoSorb は、ヒト生体内の全身性炎症において循環サイトカイン濃度を実際に著明に減弱させることが示されている（Jansen ら、CritCare 2023）。</li><li><strong>他デバイス</strong>：HA-330 血液灌流も有望な結果を示している（Onuk ら、Blood Purif 2023 の症例集積）。血漿交換（TPE）も炎症メディエータを除去して患者に利益をもたらしうるが、まだ道半ばである（Kuklin らのシステマティックレビュー・メタ解析、CritCare 2024）。</li><li><strong>想定される適応</strong>：重症敗血症性ショック、高乳酸血症、多臓器不全、そして<strong>きわめて高度の高サイトカイン血症</strong>を伴う特定サブグループ。</li><li><strong>開始時期のベストプラクティス基準</strong>（Mitzner ら、J Clin Med 2023 のコンセンサス）：標準治療に反応せず可溶性炎症マーカーが著明に上昇している敗血症性／血管麻痺性ショックでは、<strong>診断から12時間以内に開始し、遅くとも24時間を超えない</strong>。</li><li><strong>最大の未解決点</strong>：<strong>治療の開始・中止を導く血漿サイトカインの特定の閾値は、現時点で確立されていない</strong>。既発表研究のうち、敗血症患者を対象としたものと IL-6 濃度を報告したものを区別することが重要であり、IL-6 を組み入れ基準として用いた研究と、情報提供目的でのみ報告した研究が混在している。</li><li><strong>重症高サイトカイン血症</strong>：敗血症患者において早期に生じる、しばしば認識されない特徴で、高サイトカイン血症スペクトラムの最も極端な端に位置する。臨床的には難治性敗血症性ショック・多臓器障害・著明に高い死亡率で特徴づけられる。こうした症例では、血液浄化が循環サイトカインを迅速かつ広範に減少させることで炎症反応を減弱させ、生存を改善しうる。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>当院の抄読会での接続 — CLEANSE 試験との突き合わせ 本総説は HA-330 を「promising results」と1行で肯定的に紹介し、根拠として引用しているのは Onuk らの <strong>症例集積（case series）</strong> である。しかし当 Vault には、この記述より一段強いエビデンスがすでに入っている。<span class="wl">HA-330血液吸着は敗血症性ショックの28日死亡を有意には減らさない — 高用量昇圧薬128例・早期中止（CLEANSE・CritCare2026）</span> は、高用量ノルアドレナリン（≥ 0.2 µg/kg/min）を要する敗血症性ショック 128例を対象にした多施設 RCT で、28日死亡は 58% → 44%、RR 0.76（95% CI 0.54–1.07、P = 0.16）と<strong>有意差なし</strong>だった。 つまり本総説の HA-330 の記述は、①より上位のエビデンス（RCT）が存在するのに症例集積を引いている、②その RCT の結果は「有意差なし」である、という二重の意味で更新が必要である。ただし CLEANSE は計画 206例に対し 128例で早期中止されており、点推定値（RR 0.76）は利益の方向を向いたまま検出力が足りていない。したがって「HA-330 は効かないと証明された」とも読めない。<strong>本総説の楽観と CLEANSE の陰性結果の両方を、検出力不足という一点で説明できる</strong>——これがジャーナルクラブで詰めるべき論点になる。 なお本総説の Accepted 日は 2026年6月19日で、CLEANSE の掲載と前後している。単純に「引き忘れ」の可能性が高い。</p>
+</div>
+<h4>9-2. エンドトキシン吸着の新しいパラダイム — TIGRIS 試験</h4>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>設計</th><th>主な結果</th></tr></thead>
+<tbody>
+<tr><td>EUPHRATES（Dellinger ら、JAMA 2018）</td><td>敗血症性ショックかつエンドトキシン高値を対象に PMX 血液灌流の28日死亡への効果を検証</td><td>全体では陰性。ただし EAA の「治療窓」に基づくサブグループ解析が後の議論を生んだ</td></tr>
+<tr><td><strong>TIGRIS</strong>（Neyra ら、Lancet Respir Med 2026）</td><td>多施設、非盲検、<strong>ベイズ流</strong>、無作為化、対照、第3相。バイオマーカーで定義したエンドトキシン性敗血症性ショックが対象</td><td><strong>28日死亡 OR 0.67</strong>。効果は90日でも持続し、<strong>90日死亡 OR 0.54、NNT 8.1</strong>。選択された患者における PMX の効果の持続性を支持</td></tr>
+</tbody></table></div>
+<p>補完的データとして、Ruiz-Rodríguez らは、<strong>極度のエンドトキシン血症（EAA ≥ 0.9）</strong>を伴う難治性敗血症性ショック患者において、エンドトキシン吸着がエンドトキシン値を有意に低下させ血行動態の安定性を改善することを示した。ただし<strong>死亡率は依然として高いまま</strong>である。これらの知見は、エンドトキシン標的治療から利益を得られる患者を同定するための、バイオマーカー誘導型の精密医療アプローチをさらに支持する。</p>
+<h4>9-3. 逐次的血液吸着（sequential hemoadsorption）</h4>
+<p>敗血症・敗血症性ショックでは、エンドトキシン血症（血流中のエンドトキシンの存在）と炎症メディエータの過剰産生（サイトカインストーム）が、重症度と予後の双方で決定的な役割を果たす。逐次的 HA の目的は、<strong>エンドトキシンとサイトカインの両方を標的として免疫恒常性を回復し、調節不全の炎症反応を鎮めること</strong>である。</p>
+<ul><li>現在の実践では HA が免疫恒常性の回復を助けることが示されているが、特定の患者ではエンドトキシンのみの吸着では不十分である。</li><li>実施形態：PMX（トレミキシン）でエンドトキシンを吸着し、続いて CytoSorb でサイトカインを吸着する。<strong>厳選症例に適用</strong>されている（Ruiz-Rodríguez ら、Blood Purif 2022）。</li><li>候補となる患者像：<strong>難治性敗血症性ショック＋多臓器障害＋高エンドトキシン血症＋高サイトカイン血症（きわめて高い IL-6）</strong>。</li><li><strong>中止判断</strong>：血漿サイトカイン（IL-6、IL-10）のリアルタイムモニタリングが、治療の差し控え・中止の判断を導きうる。</li></ul>
+<h4>9-4. 安全性の考慮と意図しない吸着</h4>
+<p>潜在的利益の裏側で、HA 療法には手技関連リスクと生物学的限界の慎重な考慮が必要である（Girardis ら、ICM 2025 の "Hemoadsorption in septic shock - CON"）。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>回路トラブルによる治療の未完遂</td><td>PMX 血液灌流では、体外回路の合併症と早期中断——最も多いのは<strong>回路の凝固</strong>——により、予定された治療セッションが不完全にしか実施されないことが臨床シリーズで報告されている</td></tr>
+<tr><td>効果の不均一性</td><td>提案されたエンドトキシンの「治療窓」の外にあるサブグループは改善しない可能性がある。<strong>エンドトキシン負荷が過剰に高い場合</strong>に一部の患者で利益が欠如する説明になりうると示唆されており、EAA がきわめて高い層の解釈には慎重さが必要</td></tr>
+<tr><td>分子選択性の欠如</td><td>広域スペクトラムの吸着カートリッジでは選択性が限られ、生物学的に重要なメディエータや併用薬——<strong>抗菌薬を含む</strong>——を意図せず除去しうる。循環薬物濃度が低下して治療効果に影響する可能性がある。実験的・臨床的観察は複数の抗菌薬で相応の吸着が起こりうることを示しており、体外吸着療法の適用時には<strong>治療薬物モニタリング（TDM）と用量調整</strong>が支持される</td></tr>
+<tr><td>エビデンスの確実性</td><td>無作為化試験とメタ解析は不均一でしばしば結論不明瞭な結果を出しており、転帰の利益に関する<strong>全体の確実性は低い（low certainty）</strong>。慎重な患者選択とさらなる前向き研究の重要性が強調される</td></tr>
+</tbody></table></div>
+<h3>10. 標準治療について本総説が述べていること・述べていないこと</h3>
+<p>本総説は標準治療の推奨を扱わないため、ここで「本文中に実際に現れる標準治療関連の記述」だけを漏れなく列挙し、扱われていない項目を明示する。当院の運用は本総説ではなくガイドラインノートを正本とする。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本総説の記載</th></tr></thead>
+<tbody>
+<tr><td>抗菌薬の投与タイミング</td><td>「prompt antimicrobial administration」が国際ガイドラインで標準化された要素の一つとして列挙されるのみ。<strong>時間閾値・推奨の強さ・エビデンスの質のいずれも記載なし</strong></td></tr>
+<tr><td>抗菌薬の投与期間</td><td><strong>記載なし</strong>。ただし血液吸着による抗菌薬の意図しない除去と TDM の必要性は論じられている（第9-4節）</td></tr>
+<tr><td>輸液の種類（バランス晶質液・生理食塩液・アルブミン）</td><td>種類の比較は<strong>記載なし</strong>。アルブミンは「輸液」としてではなく<strong>内皮安定化薬</strong>として2箇所で登場する（VE-カドヘリンのリン酸化抑制とグリコカリックス保護、Table 1 の内皮機能障害 trait の "future research"）</td></tr>
+<tr><td>輸液の量</td><td>具体的な数値（30 mL/kg 等）は<strong>記載なし</strong>。ただし Table 1 の「蘇生関連内皮障害」trait で <mark class="hl">不要な急速輸液ボーラスを避ける／初期輸液量を制限する／昇圧薬の早期開始を優先する</mark> という方向性が明示されている</td></tr>
+<tr><td>昇圧薬の選択</td><td>ノルアドレナリンが基準薬である前提は共有。バソプレシンは Table 1 で CRH の第一の打ち手（NE 0.25–0.5 µg/kg/min で追加）。Ang II は第一選択にせず補助として位置づけ（第7節）</td></tr>
+<tr><td>昇圧薬の開始タイミング</td><td>「早期開始を優先する（prefer early initiation of vasopressors）」が Table 1 の蘇生関連内皮障害への対策として明記。Ang II は NE 換算 &lt; 0.3 µg/kg/min の早期段階での併用が最も有益と論じる</td></tr>
+<tr><td>MAP 目標</td><td>「初期 MAP 目標 約65 mmHg は多くの患者で妥当」。その後は個別化すべきとし、<strong>MAP チャレンジ</strong>（一時的に MAP を上げ、尿量・意識状態・皮膚灌流／CRT が改善するかを見る。改善すれば高い MAP を採用、改善しないか忍容性が悪ければ低い目標に戻す）を提案</td></tr>
+<tr><td>ステロイド</td><td>Table 1 の CRH trait に <strong>ヒドロコルチゾン 100 mg 単回 → 200 mg/日</strong>、適応閾値はカテコラミン換算 &gt; 0.25 µg/kg/min が6時間以上。加えて「ステロイド反応性は免疫エンドタイプとバイオマーカーシグネチャで異なる（トランスクリプトーム・エンドタイプ、セラノスティックなサイトカイン比）」として、<strong>ステロイド感受性群と抵抗性群を前向きに同定する戦略</strong>を提唱。VANISH 試験のトランスクリプトーム解析（Antcliffe ら、AJRCCM 2019）を根拠に引用</td></tr>
+<tr><td>血液浄化</td><td>本総説の中心テーマの一つ（第9節に詳述）</td></tr>
+<tr><td>免疫調節</td><td>本総説の中心テーマの一つ（第8節に詳述）</td></tr>
+<tr><td>ソースコントロール</td><td>「early source control」「prompt source control」として2箇所で言及されるのみ。<strong>実施時期・手技選択・推奨の強さのいずれも記載なし</strong></td></tr>
+<tr><td>SSC 2021 と各国ガイドライン</td><td>SSC 2021（Evans ら、ICM 2021）を引用文献2として引くのみ。<strong>個別の推奨文・推奨の強さ・エビデンスの質は一切引用されていない</strong>。他国のガイドライン（J-SSCG、NICE 等）への言及もない</td></tr>
+<tr><td>代謝蘇生（ビタミンC）</td><td>Table 1 に <strong>アスコルビン酸 1,500 mg×6時間ごと×15回 ＋ チアミン 200 mg×12時間ごと ＋ ヒドロコルチゾン</strong> が CRH の一 trait として掲載。本文での議論・エビデンス評価はなし</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>当院で参照すべき正本 <mark class="hl">標準治療の推奨（抗菌薬のタイミングと期間、輸液の種類と量、ソースコントロール、ステロイドの適応、推奨の強さとエビデンスの質）は、本総説ではなく SSC を正本とする</mark>。当 Vault では <span class="wl">敗血症・敗血症性ショックの国際ガイドライン2026 — 全129推奨、強い推奨は18だけ（SSC2026・CCM2026）</span>（129推奨のうち強い推奨は18項目のみ。qSOFA の単独スクリーニング除外、末梢からの昇圧薬開始、β-ラクタムの持続・延長投与と de-escalation の強い推奨化、ノルアドレナリン優位の降格、ステロイドの対象拡大と確実性の降格が主な変更）と <span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span>（全93声明）が該当する。本総説を読んだあとにこの2本を突き合わせると、「ガイドラインが扱う土台」と「本総説が扱う上乗せ」の境界がはっきりする。</p>
+</div>
+<h3>11. 将来展望</h3>
+<h4>11-1. 精密医療とセラグノスティクス</h4>
+<p>敗血症研究と管理の将来は、生物学的サブフェノタイピングと標的治療戦略の統合にある。マルチオミクス技術とリアルタイムのバイオマーカー評価の進歩は、患者層別化を精緻化し、プロトコル化された画一性から真の精密医療へと重症医療を動かす機会を与える。ハイスループット技術は、患者を生物学的に異なる群に分類するトランスクリプトーム・プロテオーム・メタボローム・シグネチャの同定を可能にした。<strong>セラグノスティクス（theragnostics）</strong>——診断バイオマーカーと個別化治療の組み合わせ——は、<strong>適切な介入を、適切な患者に、適切なタイミングで</strong>届ける大きな機会である。</p>
+<h4>11-2. サブフェノタイピングとバイオマーカー</h4>
+<p>サブフェノタイピングは敗血症の不均一性の理解を作り変えた。過剰炎症エンドタイプと低炎症エンドタイプといった免疫クラスタは介入への反応が異なる。同様に、敗血症性ショックの代謝サブフェノタイプは安定性と予後への影響がさまざまである（Antcliffe ら、ICM 2025）。フェリチン、単球 HLA-DR、可溶性 VE-カドヘリン、シンデカン-1、循環ヒストンといったバイオマーカーが免疫・内皮機能障害への洞察を提供し、新興のプラットフォームがマルチオミクスデータを統合して患者層別化を精緻化しつつある。</p>
+<h4>11-3. 個別化された血行動態目標</h4>
+<p>血行動態蘇生戦略は個別化へ向かっている。平均血圧と輸液投与量の<strong>固定的な目標</strong>に代えて、併存症・血管生理・内皮の状態に基づく個別化された目標が支持を集めている（De Backer ら、CritCare 2022 の "A plea for personalization"）。動的かつ多面的なモニタリングにより、輸液と昇圧薬を灌流最適化と医原性障害の制限の両立に向けて調整できる。個別化蘇生は、ガイドラインに基づくケアと患者固有の生理の間隙を埋めうる。</p>
+<h4>11-4. ベッドサイドへの落とし込み — 3段階ロードマップ</h4>
+<p>精密医療の実装には、生物学的不均一性を実行可能なベッドサイドの意思決定に翻訳する必要がある。著者らが提示する実務的ロードマップは次の3段階である。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>やること</th><th>具体例</th></tr></thead>
+<tbody>
+<tr><td>① 支配的な treatable trait を定める</td><td>臨床的に実行可能なマーカーで、いま患者を支配している特徴を1つ（または複数）決める</td><td>過剰炎症／免疫麻痺／内皮バリア破綻／凝固障害・免疫血栓症／カテコラミン抵抗性血管麻痺</td></tr>
+<tr><td>② バイオマーカーで濃縮する</td><td>バイオマーカーと生理学的テストで、反応する可能性が最も高い患者を絞り込む（enrichment）</td><td>フェリチン、単球 HLA-DR、EAA、レニン、bio-ADM、IL-6、sTREM-1</td></tr>
+<tr><td>③ 動的に再評価する</td><td>敗血症の生物学は強い時間依存性をもつため、反応を経時的に評価し直す</td><td>IFN-γ・CXCL9 の72時間動態、IL-6・IL-10 のリアルタイム推移、MR-proADM の48時間推移</td></tr>
+</tbody></table></div>
+<p>免疫調節については、"one-size-fits-all" のアプローチが治療効果を希釈しうる一方、バイオマーカー誘導型の濃縮が選択されたサブグループで利益のシグナルを顕在化させうる。<strong>ステロイド反応性が免疫エンドタイプとバイオマーカーシグネチャで異なる</strong>（トランスクリプトーム・エンドタイプ、セラノスティックなサイトカイン比）ことは、ステロイド感受性群と抵抗性群を同定する前向きバイオマーカー誘導戦略を支持する好例として挙げられている。</p>
+<p>同様に、活性化プロテインCとその関連アプローチのような抗凝固・内皮標的戦略は集団間で効果が不均一だった。サブグループ解析と機序的推論は、<strong>プロテインC経路の著明な機能障害および／または敗血症関連凝固障害の表現型</strong>をもつ患者に将来の試験を絞ることを支持する——出血リスクとの慎重な釣り合いを取りながら。</p>
+<p>血行動態目標の個別化も精密医療のパラダイムに従うべきである。初期 MAP 目標 約65 mmHg は多くの患者に妥当だが、その後の目標は併存症（例：慢性高血圧）、臓器特異的な脆弱性、リアルタイムの灌流評価に基づいて個別化されるべきである。実務的な戦略が <strong>MAP チャレンジ</strong>である。一時的に MAP を上げている間の灌流代替指標（尿量、意識状態、皮膚灌流／毛細血管再充満時間）の変化を評価し、灌流が改善すればより高い MAP を採用し、利益がないか忍容性が悪ければ低い目標に戻す。このアプローチはガイドラインに基づくケアと患者固有の生理を統合し、医原性の昇圧薬曝露を制限する。</p>
+<h3>12. Figure 1 — 表現型駆動型アプローチの概念図</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 生物学的に異なるエンドタイプの同定に基づく、敗血症管理の表現型駆動型アプローチの概念枠組み 中央に、ベッドに横たわる患者を線で描いた円がある。その円の中には、ウイルス・細菌を模した球状のアイコンと、心電図波形を表示したモニタ画面のアイコンが並んでおり、「感染＋生体モニタリングを受けている重症患者」を表している。この中央の円から、点線が4方向（左上・右上・左下・右下）と真上へ放射状に伸び、5つの表現型の円につながっている。 <strong>左上（オレンジ）Hyperinflammatory（過剰炎症型）</strong>：円の中に4つの小円が2×2に並ぶ。左上が Hypercytokinemia（液滴の中に細胞が浮かぶ図）、右上が MALS（表面に突起をもつマクロファージ様の細胞）、左下が IDS（炎のアイコン）、右下が Hyperendotoxemia（緑色の桿菌）。 <strong>真上（赤）Low-flow（低灌流型）</strong>：赤い心臓の中を心電図波形が走るアイコン1つのみ。心拍出量が保てない敗血症性心筋症を表す。 <strong>右上（紫）Endothelial dysfunction（内皮機能障害）</strong>：紫色の内皮細胞が横一列に並び、その細胞間に亀裂が入って隙間が開いている図。細胞の下には基底膜を表す帯が描かれている。バリア破綻と血管漏出を示す。 <strong>左下（赤）CRH（カテコラミン抵抗性低血圧）</strong>：上部に赤い心臓のアイコン、その下に4つの小円が横一列に並ぶ。左から ATII（肺のアイコン。アンジオテンシンII と肺 ACE の関係を示唆）、VP（バソプレシン。分子模型のアイコン）、CS（corticosteroids。炎のアイコン）、MR（metabolic resuscitation。ミトコンドリアのアイコン）。CRH に対する4つの打ち手が並置されている。 <strong>右下（青）Hypoinflammatory（低炎症型）</strong>：上部に青い抗体（Y字）の集合アイコン、その下に2つの小円。左が Hypo-Ig（緑色の抗体アイコン、低ガンマグロブリン血症）、右が Immunoparalysis（盾の中にウイルスが描かれ、防御が破られている図）。 <strong>キャプション訳</strong>：敗血症患者は不均一な宿主反応を示し、臨床的特徴・バイオマーカー・免疫学的プロファイリングによって特徴づけられる。これらのエンドタイプは、過剰炎症、エンドトキシン血症、免疫抑制、血管麻痺、代謝機能障害を含む特定の treatable traits を定義しうる。これらの生物学的シグネチャの同定により、免疫調節療法（例：IL-1 遮断）、エンドトキシン除去、サイトカイン調節、基礎にある病態生理に合わせた血行動態介入といった標的治療戦略が可能になる。このアプローチは、従来の "one-size-fits-all" 管理を超えてバイオマーカー誘導型の精密医療へ向かうものであり、新興治療への患者選択を改善し、敗血症の臨床転帰を向上させることを目指す。（原図・無改変）</p>
+</div>
+<h3>13. 批判的吟味（JCでの論点）</h3>
+<h4>13-1. タイトルと中身の乖離</h4>
+<p>"Update on sepsis treatment" というタイトルは「敗血症治療全般の最新情報」を期待させるが、実質は <strong>「難治性敗血症性ショックに対する表現型別補助療法のレビュー」</strong>である。キーワードが Septic shock, Refractory septic shock, hemoadsorption, Polymyxin B, Catecholamine-resistant-hypotension であることが内容を正確に反映しており、タイトルのほうが実態より広い。抄読会で紹介するときは、この点を最初に断らないと参加者の期待がずれる。</p>
+<h4>13-2. ナラティブレビューであることの限界</h4>
+<p>系統的検索なし、選択基準なし、格付けなし。引用文献71本の選択は著者らの裁量で、自グループの業績が複数含まれる（引用文献51, 52, 57, 64, 65）。とくに逐次的血液吸着（sequential HA）の項は、実質的に著者ら自身の症例報告レベルの経験（Blood Purif 2022、Front Med 2022）を根拠に構成されており、独立した検証はない。<strong>「バルセロナの1施設が難治例で実践していること」を一般化して読まないこと</strong>。</p>
+<h4>13-3. 閾値の根拠の強さがバラバラ</h4>
+<p>Table 1 に並ぶ数値は、見た目の均質さに反して根拠の質が大きく異なる。</p>
+<div class="tw"><table>
+<thead><tr><th>閾値</th><th>由来</th><th>根拠の強さ</th></tr></thead>
+<tbody>
+<tr><td>フェリチン 4,420 ng/mL</td><td>MALS の定義。ImmunoSep 試験で前向きに層別化に使用</td><td>比較的強い（RCT の割付基準として運用実績あり）</td></tr>
+<tr><td>HLA-DR &lt; 5,000 受容体</td><td>同上</td><td>同上</td></tr>
+<tr><td>IFN-γ &gt; 3 pg/mL、CXCL9 &gt; 2,200 pg/mL</td><td>5,503例の探索セットで死亡予測が最適になる点として導出、検証コホートで再現</td><td>中程度（大規模だが観察研究、治療反応での検証はこれから）</td></tr>
+<tr><td>sTREM-1 ≥ 532 pg/mL</td><td>ASTONISH の<strong>事前規定の探索的解析</strong>のカットオフ。著者ら自身が両群の絶対値分布の不均衡による交絡を警告</td><td>弱い</td></tr>
+<tr><td>bio-ADM 108 pg/mL</td><td>単一コホートの Youden 指数由来</td><td>弱い（データ駆動の最適化値は過適合しやすい）</td></tr>
+<tr><td>レニン &gt; 172.3 pg/mL</td><td>小数点以下1桁まで示されているが、由来する研究の特定が本文では曖昧</td><td>弱い</td></tr>
+<tr><td>EAA 0.6 – 0.9</td><td>EUPHRATES の post-hoc から派生した「治療窓」。TIGRIS が前向きに採用</td><td>中程度</td></tr>
+<tr><td>IL-6 の閾値</td><td><strong>存在しない</strong>（著者ら自身が明記）</td><td>—</td></tr>
+<tr><td>MR-proADM 1.65 nmol/L</td><td>生存者の典型的推移として記述。カットオフではなく観察値</td><td>弱い</td></tr>
+</tbody></table></div>
+<p><strong>小数点以下1桁まで書かれた閾値は、精度が高いのではなく、単に導出時の計算結果をそのまま転記しているだけ</strong>である点に注意が必要。</p>
+<h4>13-4. 内的不整合</h4>
+<ul><li><strong>引用番号の誤り</strong>：IFN-γ の節（第8-3節）で、IDS エンドタイプの記述に引用文献24（Coloretti らの Ang II ナラティブレビュー）が付されている。正しくは引用文献13（Giamarellos-Bourboulis ら）である。Accepted Manuscript の未校正版であることを差し引いても、読者が原典を追えなくなる誤りである。</li><li><strong>サブフェノタイピングの節</strong>でも「免疫クラスタ…（引用21）」とあるが、引用文献21は Wieruszewski らの ATHOS-3 post-hoc であり、内容が対応しない。</li><li><strong>IDS の HLA-DR 閾値の向き</strong>：Table 1 の IDS 行には「≥ 8,000 HLA-DR 受容体」とあるが、本文には対応する記述がない。免疫麻痺の &lt; 5,000 と対になる数字と推測されるが、根拠が示されていない。</li><li><strong>CytoSorb 引用の誤り</strong>：Table 1 の綴りが "hemoadsoroption" になっている（未校正版の typo）。</li></ul>
+<h4>13-5. エビデンスの新しさの取りこぼし</h4>
+<p>第9-1節の記載どおり、HA-330 について症例集積を根拠に "promising" としているが、同時期に多施設 RCT（CLEANSE）が出ている。同様に、サイトカイン吸着全般についてメタ解析の確実性が低いことは第9-4節で認めているのに、第9-1節では肯定的に紹介されており、<strong>同じ論文内で温度差がある</strong>。読者が「結局どちらなのか」を判断できるだけの整理がされていない。</p>
+<h4>13-6. 費用・実装可能性への言及が皆無</h4>
+<p>Table 1 に並ぶバイオマーカー（IFN-γ、CXCL9、sTREM-1、bio-ADM、レニン、EAA、単球 HLA-DR フローサイトメトリー）のうち、<strong>日常診療で当日中に結果が返ってくるものはほとんどない</strong>。「動的に再評価する」という第③段階は、測定のターンアラウンドタイムが数時間以内であることを前提とするが、その実現可能性・費用・保険適用は一切論じられていない。精密医療の提案としては、この空白が最も大きな弱点である。</p>
+<h4>13-7. それでも価値がある理由</h4>
+<p>これらの限界を踏まえてもなお、この総説は3つの点で有用である。①<strong>「何を測って何を打つか」の対応表が1枚にまとまっている</strong>資料は他にない。②<strong>難治性ショックを「昇圧薬の量」ではなく「生物学的特徴」で語る語彙</strong>を提供する。③<strong>日本の集中治療医学会英文誌に載っている</strong>ため、国内の抄読会で共有しやすく、日本で使える PMX・rTM・IVIG が正面から扱われている（欧米の総説では PMX がほぼ無視されることが多い）。</p>
+<h3>14. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>世界の敗血症罹患と死亡（GBD 1990–2017）</td><td>Rudd KE ら. Lancet. 2020;395(10219):200-211</td></tr>
+<tr><td>2</td><td>SSC 国際ガイドライン2021</td><td>Evans L ら. Intensive Care Med. 2021;47(11):1181-1247</td></tr>
+<tr><td>3</td><td>敗血症誘発免疫抑制 — 細胞機能障害から免疫療法へ</td><td>Hotchkiss RS, Monneret G, Payen D. Nat Rev Immunol. 2013;13(12):862-74</td></tr>
+<tr><td>4</td><td>敗血症の免疫病理と治療標的</td><td>van der Poll T ら. Nat Rev Immunol. 2017;17(7):407-420</td></tr>
+<tr><td>5</td><td>細胞外ヒストンは敗血症死亡の主要メディエータ</td><td>Xu J ら. Nat Med. 2009;15(11):1318-21</td></tr>
+<tr><td>6</td><td>MALS — 敗血症で急速に死亡へ進行する免疫学的単位</td><td>Kyriazopoulou E ら. BMC Med. 2017;15(1):172</td></tr>
+<tr><td>7</td><td>肝機能障害と凝固障害を伴う敗血症はマクロファージ活性化パターンを予測</td><td>Anderko RR ら（ProCESS 研究者）. Intensive Care Med Exp. 2022;10(1):6</td></tr>
+<tr><td>8</td><td>単球 HLA-DR 低発現の持続は敗血症性ショックの死亡を予測</td><td>Monneret G ら. Intensive Care Med. 2006;32(8):1175-83</td></tr>
+<tr><td>10</td><td>敗血症の新規臨床フェノタイプの導出・検証（α/β/γ/δ）</td><td>Seymour CW ら. JAMA. 2019;321(20):2003-2017</td></tr>
+<tr><td>12</td><td>敗血症性ショックの代謝サブフェノタイプと経時的安定性</td><td>Antcliffe DB ら. Intensive Care Med. 2025;51(3):529-541</td></tr>
+<tr><td><strong>13</strong></td><td><strong>IFN-γ 駆動性 CXCL9 上昇 — 死亡と独立に関連する新たな敗血症エンドタイプ（IDS）</strong></td><td>Giamarellos-Bourboulis EJ ら. EBioMedicine. 2024;109:105414</td></tr>
+<tr><td>14</td><td>敗血症性ショックの内皮障害（シンデカン-1・S1P・可溶性 VE-カドヘリン、ALBIOS サブスタディ）</td><td>Piotti A ら. Crit Care. 2021;25(1):113</td></tr>
+<tr><td>15</td><td>アルブミンによる VE-カドヘリンのリン酸化と内皮バリア機能障害の調節</td><td>Li Y ら. Crit Care. 2021;25(1):232</td></tr>
+<tr><td>16</td><td>成人敗血症におけるプロテインC — 病態から監視・補充まで</td><td>Coloretti I ら. J Anesth Analg Crit Care. 2025;5(1):21</td></tr>
+<tr><td>17</td><td>血管麻痺性ショックの定義と病態生理</td><td>Lambden S ら. Crit Care. 2018;22(1):174</td></tr>
+<tr><td>18</td><td>分布性ショックの低血圧に対する Ang II の FDA 承認</td><td>Senatore F ら. Am J Cardiovasc Drugs. 2019;19:11-20</td></tr>
+<tr><td>19</td><td>高心拍出量ショックへの Ang II 静注（ATHOS パイロット）</td><td>Chawla LS ら. Crit Care. 2014;18(5):534</td></tr>
+<tr><td><strong>20</strong></td><td><strong>血管拡張性ショックに対するアンジオテンシンII（ATHOS-3）</strong></td><td>Khanna A ら. N Engl J Med. 2017;377:419-430</td></tr>
+<tr><td>21</td><td>血管拡張性ショックでの低用量昇圧薬段階での Ang II 開始（ATHOS-3 post-hoc）</td><td>Wieruszewski PM ら. Crit Care. 2023;27(1):175</td></tr>
+<tr><td>22</td><td>RRT を受けた血管拡張性ショック患者での Ang II の転帰</td><td>Tumlin JA ら. Crit Care Med. 2018;46:949-957</td></tr>
+<tr><td>23</td><td>カテコラミン抵抗性血管拡張性ショックでのアンジオテンシンI/II 比</td><td>Bellomo R ら. Crit Care. 2020;24:43</td></tr>
+<tr><td>24</td><td>難治性敗血症性ショックでの Ang II — どの患者が最も利益を得るか</td><td>Coloretti I ら. J Anesth Analg Crit Care. 2024;4(1):13</td></tr>
+<tr><td>26・45</td><td>ASTONISH 試験（nangibotide 第2b相）の論拠とプロトコル</td><td>Francois B ら. BMJ Open. 2021;11:e042921</td></tr>
+<tr><td>27・53</td><td>AdrenOSS-2 — adrecizumab の安全性・忍容性（第2a相）</td><td>Laterre PF ら（AdrenOSS-2 参加者）. 2021</td></tr>
+<tr><td>28</td><td>敗血症の免疫療法スコーピングレビュー（771研究、個別化は約9%）</td><td>Slim MA ら（ImmunoSep コンソーシアム）. Crit Care. 2024;28(1):183</td></tr>
+<tr><td>29</td><td>重症敗血症への rhIL-1ra 第III相試験（陰性）</td><td>Fisher CJ Jr ら. JAMA. 1994;271(23):1836-43</td></tr>
+<tr><td>30</td><td>rhIL-1ra 確認試験（第III相・陰性）</td><td>Opal SM ら</td></tr>
+<tr><td>31</td><td>マクロファージ活性化症候群の特徴をもつ敗血症で IL-1 遮断が死亡を減らす（再解析）</td><td>Shakoory B ら. Crit Care Med. 2016;44(2):275-81</td></tr>
+<tr><td>33</td><td>PROVIDE 試験 — 敗血症の個別化免疫療法へ</td><td>Leventogiannis K ら. Cell Rep Med. 2022;3(11):100817</td></tr>
+<tr><td><strong>34</strong></td><td><strong>ImmunoSep 試験 — フェリチンと HLA-DR による層別化に基づく精密免疫療法</strong></td><td>Giamarellos-Bourboulis EJ ら</td></tr>
+<tr><td>38</td><td>敗血症の免疫学</td><td>van der Poll T, Shankar-Hari M, Wiersinga WJ. Immunity. 2021;54(11):2450-2464</td></tr>
+<tr><td>39</td><td>敗血症誘発免疫抑制への IFN-γ 治療の多施設経験（症例集積）</td><td>Payen D ら. BMC Infect Dis. 2019;19(1):931</td></tr>
+<tr><td>40</td><td>IFN-γ は PI3K/AKT/mTOR 経路を介する Warburg 効果で免疫抑制を調節（マウス）</td><td>Fu XZ, Wang Y. Mol Med. 2023;29(1):95</td></tr>
+<tr><td>41</td><td>TREM-1 は炎症を増幅し敗血症性ショックの主要メディエータである</td><td>Bouchon A ら. Nature. 2001;410(6832):1103-7</td></tr>
+<tr><td>42</td><td>血漿 sTREM-1 の敗血症診断精度（SR・MA）</td><td>Wu Y ら. Crit Care. 2012;16(6):R229</td></tr>
+<tr><td>48</td><td>循環 bio-ADM は敗血症の血行動態サポート必要性と死亡を予測（ALBIOS）</td><td>Caironi P ら. Chest. 2017;152:312-20</td></tr>
+<tr><td><strong>50</strong></td><td><strong>循環 bio-ADM は敗血症・敗血症性ショック・重症病態のマーカー（OR 1.33、閾値 108 pg/mL）</strong></td><td>Lundberg OHM ら. Crit Care. 2020;24:636</td></tr>
+<tr><td>54</td><td>CytoSorb 血液灌流はヒト生体内の全身性炎症で循環サイトカインを著明に減弱</td><td>Jansen A ら. Crit Care. 2023;27(1):117</td></tr>
+<tr><td>55</td><td>敗血症性ショックでの HA-330＋CRRT の臨床・検査所見（症例集積）</td><td>Onuk S ら. Blood Purif. 2023;52(2):140-147</td></tr>
+<tr><td>56</td><td>敗血症性臓器障害の重症患者に対する血漿交換と短期死亡（SR・MA）</td><td>Kuklin V ら. Crit Care. 2024;28(1):12</td></tr>
+<tr><td>58</td><td>敗血症性・血管麻痺性ショックでの CytoSorb 補助療法のベストプラクティス・コンセンサス（12時間以内・遅くとも24時間以内）</td><td>Mitzner S ら. J Clin Med. 2023;12(23):7199</td></tr>
+<tr><td><strong>60</strong></td><td><strong>エンドトキシン性敗血症性ショックへのポリミキシンB血液吸着（TIGRIS、ベイズ流第3相）</strong></td><td>Neyra J, Legrand M, Tidswell M ら. Lancet Respir Med. 2026</td></tr>
+<tr><td><strong>61</strong></td><td><strong>EUPHRATES — 標的化ポリミキシンB血液灌流の28日死亡への効果</strong></td><td>Dellinger RP ら. JAMA. 2018;320(14):1455-63</td></tr>
+<tr><td>64</td><td>敗血症性ショック・多臓器不全でのエンドトキシンとサイトカインの逐次的血液吸着</td><td>Ruiz-Rodríguez JC ら. Blood Purif. 2022;51:630-633</td></tr>
+<tr><td>66</td><td>敗血症性ショックにおける血液吸着 — CON（反対の立場）</td><td>Girardis M, Tosi M, David S. Intensive Care Med. 2025;51(5):948-950</td></tr>
+<tr><td>67</td><td>CytoSorb 治療中の併用薬の薬物動態的含意（抗菌薬の吸着）</td><td>Scheier J ら. Crit Care Explor. 2022;4(5):e0688</td></tr>
+<tr><td>68</td><td>敗血症サブフェノタイプ、セラグノスティクス、個別化敗血症ケア</td><td>Antcliffe DB ら. Intensive Care Med. 2025;51(4):756-768</td></tr>
+<tr><td>69</td><td>敗血症のトランスクリプトーム・シグネチャとステロイドへの反応の差（VANISH）</td><td>Antcliffe DB ら. Am J Respir Crit Care Med. 2019;199(8):980-986</td></tr>
+<tr><td>70</td><td>重症医療におけるサブフェノタイプ — 臨床実装への翻訳</td><td>Reddy K ら. Lancet Respir Med. 2020;8(6):631-643</td></tr>
+<tr><td>71</td><td>敗血症性ショックの血行動態管理の個別化を求める</td><td>De Backer D ら. Crit Care. 2022;26(1):372</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 敗血症治療の次の一手は「新薬」ではなく「<strong>患者選択</strong>」である。この総説は、11の treatable trait それぞれにバイオマーカーの数値閾値と対応治療を紐づけた1枚の表を示し、非選択集団での RCT が失敗し続けた理由を「効かない薬」ではなく「効く相手を選べていない設計」に帰した。ImmunoSep（35.1% 対 17.9%、絶対差 17.2%）と TIGRIS（28日 OR 0.67、90日 OR 0.54・NNT 8.1）は、その仮説が前向き試験で初めて形になった2例である。 <strong>明日から変えること</strong>：<mark class="hl">難治性敗血症性ショックを「ノルアドレナリンが何γか」だけで語るのをやめ、「フェリチン・単球HLA-DR・エンドトキシン活性・レニン・乳酸とΔAvCO₂」のどれが跳ねているかを言えるようにする</mark>。当院で今日から測れるのはフェリチンと乳酸とScvO₂だけだが、それでも MALS 疑い（フェリチン 4,420 ng/mL 超）と低灌流型の切り分けは始められる。 <strong>同時に変えないこと</strong>：<mark class="hl">抗菌薬のタイミングと期間、輸液、ソースコントロール、ステロイドの適応は本総説の守備範囲外であり、SSC 2026／2021 を正本とする</mark>。「Update on sepsis treatment」という題名に引きずられて、標準治療の根拠をこの総説に求めないこと。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
