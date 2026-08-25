@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s41479-026-00209-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Khoshnam Rad N, Lakzaei T, Nakhostin M, Soltanmohammadi S. Pneumonia. 2026;18:19. DOI: 10.1186/s41479-026-00209-y</dd><dt>掲載誌</dt><dd>Pneumonia（2026-08-25）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s41479-026-00209-y" target="_blank" rel="noopener">doi.org/10.1186/s41479-026-00209-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>A clinician's guide to corticosteroid therapy in pneumonia and critical illness: agent selection, dosing, monitoring, and interactions</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>役割分担を先に確認する</strong>。当院の「ステロイドを使うか否か」の判断根拠は <span class="wl">市中肺炎の診断と管理 — 4つのPICO、肺エコーは胸部X線の代替可・臨床安定なら5日未満・重症CAPにステロイド（ATS単独ガイドライン・AJRCCM2026）</span>・<span class="wl">重症市中肺炎（sCAP）の国際ガイドライン — 8つの臨床疑問、マクロライド併用・ショック時のステロイド（ERS ESICM ESCMID ALAT・ERJ2023）</span>・<span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span> にすでに整理されている。本総説はそこに何も足さない。本総説の価値は「使うと決めた後の実務」＝どの薬剤を何mg・何日・どう止め・何を測り・何と併用してはいけないか、に限られる</li><li><strong>重症CAPはヒドロコルチゾン200 mg/日を持続投与で</strong>。持続 vs 間欠のメタ解析（14研究2834例）で死亡は同等だが、7日目ショック解除 RR 1.14、低カリウム血症 RR 0.67、平均血糖変動が24 mg/dL 小さい。当院のシリンジポンプ運用と相性がよく、既定を持続にしてよい根拠になる</li><li><strong>血糖プロトコルを先に立てる</strong>。目標140〜180 mg/dL、q4〜6h（持続インスリン中はq2h）、2回連続180超で持続インスリン開始。ステロイド開始オーダーと血糖測定オーダーをセットにする運用が現実的</li><li><strong>開始24時間以内に薬剤師の相互作用スクリーニングを挟む</strong>。特にボリコナゾール・ポサコナゾール・クラリスロマイシン併用時のメチルプレドニゾロン／デキサメタゾン50%減量、リファンピシン・フェニトイン併用時の効果減弱。マクロライドはアジスロマイシンを選ぶ（CYP3A4阻害がない）</li><li><strong>筋弛緩薬の持続はステロイド併用時に48時間で切る</strong>。ICU-AWの相乗リスク。TOFで滴定し早期リハに繋ぐ。<span class="wl">ICU-acquired weakness</span> の予防と直結する</li><li><strong>10日以内のコースは漸減しない</strong>。デキサメタゾン（生物学的半減期36〜54時間）は自己漸減効果があり突然中止でよい。ヒドロコルチゾンはCAPE CODプロトコル準拠なら7日かけて段階的に落とす（100→50→25 mg/日を各2〜3日）</li><li><strong>変わらないこと</strong>：インフルエンザ肺炎に使わない方針、非低酸素血症のCOVID-19に使わない方針、ショックのない敗血症に使わない方針。いずれも既存の当院運用と一致</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：CAPE COD・RECOVERY・DEXA-ARDS・APROCCHSS・ADRENAL の5大試験と2024年SCCM/ESICM焦点更新により、「どの症候群にステロイドを使うか」はほぼ決着している。CIRCI（重症病態関連ステロイド不全）の概念が1990年代の大量パルス療法から低用量ストレス量への転換をもたらした</li><li><strong>Unknown</strong>：漸減が本当に必要か（CAPE CODは漸減あり・有効、REMAP-CAPは漸減なし・中立）。フルドロコルチゾンの上乗せ効果。非COVID ARDSでデキサメタゾンとメチルプレドニゾロンのどちらが優れるか。ステロイド反応者を同定するバイオマーカー。免疫抑制患者での最適解</li><li><strong>What's new</strong>：症候群別の推奨を「実務手順」に翻訳した点。①製剤ごとの調製・投与速度・pH・安定性の一覧（Table 3）、②多臓器モニタリング表（Table 4）、③高リスク相互作用チェックリスト（Table 5）、④免疫抑制宿主の6分類表（Table 2）、⑤ベッドサイド・アルゴリズム図（Fig 1）。REMAP-CAP（2025）と持続 vs 間欠のメタ解析（2026）という新しい2本を組み込んでいる</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICUのステロイドは症候群ごとに薬剤・量・期間が違う<strong>別々の治療</strong>であり、「重症CAPと敗血症性ショックはヒドロコルチゾン200 mg/日、COVID-19はデキサメタゾン6 mg/日、非COVID ARDSはデキサメタゾン20→10 mg/日、インフルエンザは使わない」の4本立てで整理できる。</p>
+</div>
+<ul><li><strong>CIRCI</strong>：敗血症性ショックの40〜60%で、重症度に見合ったコルチゾール産生ができない、あるいは組織側が抵抗性を示す。ただし血中コルチゾールもACTH負荷試験もステロイド反応者を同定できないため、診断は臨床的・症候群ベースで行う</li><li><strong>重症CAP</strong>：CAPE COD（795例）でヒドロコルチゾン200 mg/日 4〜7日＋7日漸減が28日死亡を11.9%→6.2%に低下（NNT 17.5）。REMAP-CAP（2025、漸減なし固定7日）は死亡に有意差なし、昇圧薬期間はわずかに短縮</li><li><strong>COVID-19</strong>：RECOVERY（6425例）でデキサメタゾン6 mg/日が人工呼吸例の28日死亡を41.4%→29.3%（RR 0.64）に低下。酸素不要例では効果なく有害傾向（RR 1.19）。低酸素血症が必須のトリガー。12〜24 mg への増量は上乗せなく高血糖・二次感染が増える</li><li><strong>インフルエンザ</strong>：明確な「使うな」シナリオ。1846例の傾向スコアマッチ研究でICU死亡 HR 1.32（95%CI 1.08–1.60）。例外は難治性敗血症性ショック・COPD/喘息増悪・副腎不全・後期の非インフルエンザ型ARDS</li><li><strong>非COVID ARDS</strong>：DEXA-ARDS（277例）でデキサメタゾン20 mg/日×5日→10 mg/日×5日が人工呼吸器離脱日数を4.8日延ばし、60日死亡を36%→21%に低下（NNT 7）。漸減なしで終了</li><li><strong>敗血症性ショック</strong>：APROCCHSS（1241例、ヒドロコルチゾン＋フルドロコルチゾン）は90日死亡 49.1%→43.0%。ADRENAL（3800例、ヒドロコルチゾン単独持続）は死亡不変だがショック期間3日 vs 4日と短縮</li><li><strong>投与法</strong>：ヒドロコルチゾンの持続 vs 間欠は死亡同等。持続のほうが7日目ショック解除が多く（RR 1.14）、低カリウム血症が少なく（RR 0.67）、血糖変動が小さい</li><li><strong>漸減</strong>：3〜4週未満のコースは突然中止でよい。3〜4週超は2相性の漸減が必要で、最終段階は朝の血中コルチゾール（300 nmol/L超で中止可）で判断する</li><li><strong>相互作用</strong>：デキサメタゾンはCYP3A4とP糖蛋白の基質かつ強力な誘導薬という双方向のリスクを持つ。強い阻害薬併用時は経験的50%減量、強い誘導薬併用時は倍量を検討</li><li><strong>本総説の限界</strong>：ナラティブレビュー、英語・成人限定、生成AIを文章作成に使用、Table 3 の薬剤情報はLexicomp等の二次資料に依拠</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ステロイド（グルココルチコイド）</strong> は副腎皮質から出るコルチゾールを人工的に補う薬。1980〜90年代のICUでは「炎症を抑えれば助かる」という発想でメチルプレドニゾロン30 mg/kg といった超大量パルスが試され、死亡は下がらず二次感染だけが増えた。この失敗で20年近くICUからステロイドが消えた。 復活のきっかけが <strong>CIRCI（critical illness-related corticosteroid insufficiency、重症病態関連ステロイド不全）</strong> という概念。健常人では急性疾患でコルチゾール産生が数時間以内に5〜10倍に跳ね上がるが、重症患者の一部ではこれが起きない、あるいは組織側の受容体が効かない。そこで「大量に叩く」のではなく「足りない分を生理量に近い形で補う」＝ <strong>ストレス量（ヒドロコルチゾン換算で約200 mg/日）</strong> という考えに変わった。 使う薬は主に3つ。<strong>ヒドロコルチゾン</strong>（＝コルチゾールそのもの。鉱質コルチコイド作用があり血圧を支える。半減期が短い）、<strong>デキサメタゾン</strong>（グルココルチコイド作用が強く、鉱質コルチコイド作用がまったくない。半減期が長い。肺の抗炎症に向く）、<strong>メチルプレドニゾロン</strong>（中間的）。<strong>フルドロコルチゾン</strong> は鉱質コルチコイド作用に特化した内服薬で、敗血症性ショックでヒドロコルチゾンに上乗せする。 略語：<strong>PSI</strong>＝肺炎重症度指数、<strong>CURB-65</strong>＝意識障害・BUN・呼吸数・血圧・年齢による重症度スコア、<strong>P/F比</strong>＝PaO₂/FiO₂、<strong>NNT</strong>＝1人を救うために必要な治療人数、<strong>RRA</strong>＝ステロイド受容体への相対親和性、<strong>ICU-AW</strong>＝ICU後天性筋力低下、<strong>HPA軸</strong>＝視床下部-下垂体-副腎軸、<strong>SUCRA</strong>＝ネットワークメタ解析での順位確率。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>1980〜90年代の高用量・短期メチルプレドニゾロン（例：30 mg/kg）は敗血症・ARDSで死亡を減らさず、二次感染を増やした。この結果、ICUからステロイドはほぼ完全に姿を消した。</p>
+<p>転機はCIRCIの認識である。CIRCIは、コルチゾール代謝の破綻・組織のグルココルチコイド抵抗性・HPA軸機能不全が重なった状態を指し、重症度に見合わない低いコルチゾール値をもたらし、制御されない炎症・血行動態不安定・予後悪化につながる。</p>
+<p>現代のプロトコルは超薬理量を捨て、生理的コルチゾール産生を模倣する低用量（ストレス量、ヒドロコルチゾン換算約200 mg/日）に置き換わった。2024年のSCCM/ESICM合同焦点更新が症候群別の推奨を提示し、ベッドサイド実践をさらに精緻化した。</p>
+<p>しかし著者らは、過去10年の大規模試験があってなお、薬剤選択・用量・期間・漸減戦略・有害事象対策について臨床現場の混乱が残っていると述べる。本総説はこれを6領域（CIRCIの病態生理／症候群別選択／用量と投与と漸減／構造化モニタリング／相互作用管理／薬剤間の比較有効性）に整理する。対象は成人重症患者に限定し、小児は扱わない。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。著者自身が「正式なシステマティックレビューでもメタ解析でもない」と明記</li><li><strong>検索</strong>：PubMed・Scopus・Cochrane Library、2026年6月までの発表分。検索語は（corticosteroids OR glucocorticoids OR hydrocortisone OR dexamethasone OR methylprednisolone）AND（critical illness OR pneumonia OR ARDS OR septic shock OR COVID-19 OR influenza）</li><li><strong>優先した証拠</strong>：ランドマークRCT（CAPE COD・RECOVERY・DEXA-ARDS・APROCCHSS・ADRENAL）、主要メタ解析、コンセンサスガイドライン（SCCM/ESICM 2024・IDSA/ATS 2019・Surviving Sepsis Campaign 2021）。ランダム化証拠がない領域（インフルエンザなど）は主要な観察研究で補った</li><li><strong>証拠の質</strong>：適用可能な場面ではGRADEを用い、主要な推奨に確信度を明示</li><li><strong>想定読者</strong>：集中治療医・呼吸器内科医・感染症専門医・集中治療薬剤師</li><li><strong>限界（著者記載）</strong>：英語文献のみ、成人のみ。用量推奨は出典（試験・ガイドライン・専門家合意）を明示し、証拠に基づくものと専門家由来のものを読者が区別できるようにしたとする</li></ul>
+<h3>4. 病態生理 — なぜ重症病態でステロイドが効くのか</h3>
+<h4>4-1. 正常なストレス反応</h4>
+<p>健常人では急性疾患がHPA軸を急速に活性化し、数時間以内にコルチゾール産生を5〜10倍に増やす。コルチゾールは、①カテコラミン感受性を高めて血管緊張を保つ、②IL-1・IL-6・TNF-αなど過剰な炎症性サイトカインカスケードを抑える、③糖代謝を調整して重要臓器へのエネルギー供給を保つ、という3つの経路で重症ストレス下の生存に寄与する。</p>
+<h4>4-2. CIRCI</h4>
+<p>CIRCIは、副腎が重症度に見合ったコルチゾールを産生できないか、標的組織が循環中のステロイドに抵抗性となった状態を指す。敗血症性ショック患者の推定40〜60%、重症ARDSでもかなりの割合が該当する。</p>
+<p>機序は4つ挙げられている。</p>
+<div class="tw"><table>
+<thead><tr><th>機序</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>組織抵抗性</td><td>グルココルチコイド受容体（GR-α）の機能不全</td></tr>
+<tr><td>産生低下</td><td>サイトカイン（特にIL-1・TNF-α）による副腎抑制</td></tr>
+<tr><td>代謝の変化</td><td>11β水酸化ステロイド脱水素酵素2型による不活性型コルチゾンへの変換増加</td></tr>
+<tr><td>HPA軸抑制</td><td>先行するステロイド使用、エトミデート、重症病態による視床下部機能障害</td></tr>
+</tbody></table></div>
+<h4>4-3. CIRCIの診断 — 臨床的・生化学的な限界</h4>
+<p>ベッドサイドでのCIRCI診断は難しく、ルーチンには行われない。初期のSCCM/ESICM声明は生化学的基準を示していたが、現在のコンセンサスは、ベースラインのコルチゾールもACTH負荷試験も治療の恩恵を受ける患者を一貫して同定できないと認めている。</p>
+<ul><li>総血清コルチゾール値は幅が大きく死亡と相関しない</li><li>標準的な測定系は遊離型ではなく総コルチゾールを測っている</li><li>ACTH負荷試験の結果は一定しない</li><li>挿管に使うエトミデートが結果を撹乱する</li></ul>
+<p>CIRCIを示唆する臨床所見（十分な輸液後も昇圧薬依存が続くショック、原因不明の発熱または低体温、好酸球増多、説明のつかない血糖・電解質異常）はいずれも非特異的である。したがって敗血症性ショックの基準を満たす患者の大半は、正式な検査を経ずに経験的にストレス量ステロイドを受ける。著者は「生化学検査がステロイド反応者を確実に見分けられると誤解してはならない。治療判断は臨床的・症候群ベースである」と明言している。</p>
+<h3>5. 症候群別のステロイド選択</h3>
+<h4>5-1. 重症市中肺炎（sCAP）</h4>
+<p><strong>重症CAPの定義</strong>：典型的にはICU入室、人工呼吸、または高流量鼻カニュラ酸素で定義される。妥当性が検証された重症度スコアも高リスク患者を拾う。</p>
+<ul><li>PSI クラスIV〜V（スコア130超）。CAPE COD試験の組み入れ基準は「PSI 130超、またはICU入室・人工呼吸・高流量酸素の必要性」だった</li><li>CURB-65 スコア3〜5（Confusion／Uremia：BUN 19 mg/dL超／呼吸数30以上／低血圧／65歳以上）</li></ul>
+<p>著者は重要な留保をつけている。CAPE CODはPSI 130超を組み入れ基準に用いたがCURB-65は使っていない。両スコアは重なりつつも同一ではない集団を拾うため、CAPE CODの結果をCURB-65で選んだ患者に外挿するには但し書きが要る。PSIとCURB-65は厳格な組み入れ基準ではなく補完的な道具として使い、最終的には臨床判断と重症度で選ぶ。</p>
+<p><strong>CAPE COD試験</strong>：第3相・二重盲検・プラセボ対照。フランス31施設のICUで重症CAP患者795例をランダム化。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>介入</td><td>ヒドロコルチゾン200 mg/日（持続静注、または50 mg を6時間ごと分割）を4〜7日間、その後7日間の必須漸減</td></tr>
+<tr><td>28日死亡</td><td>6.2% vs プラセボ11.9%（絶対リスク減少 5.7%、NNT 17.5）</td></tr>
+<tr><td>90日死亡</td><td>9.3% vs 14.7%（NNT 18.5）</td></tr>
+<tr><td>一貫性</td><td>事前規定サブグループを通じて維持。敗血症性ショック合併の有無を問わない</td></tr>
+<tr><td>安全性</td><td>院内感染・消化管出血の増加なし</td></tr>
+</tbody></table></div>
+<p><strong>REMAP-CAP（2025）</strong>：重症CAPに対し、漸減なしの固定7日間ヒドロコルチゾン200 mg/日を評価。CAPE CODと対照的に28日死亡の統計学的有意な低下は示さなかった。ただし有益性の確率は相当に高く、昇圧薬使用期間のわずかな短縮は示した（ステロイドの既知の血行動態効果と整合）。</p>
+<p>著者はこの食い違いの解釈を丁寧に扱う。患者集団の違い、登録タイミング、併用介入、あるいはREMAP-CAPに漸減がなかったことが、死亡に関する結論の分岐を説明しうる。臨床医は両者を併せて重みづけし、「ヒドロコルチゾンは重症CAPに恩恵をもたらす可能性が高いが、死亡減少の大きさはCAPE CODの点推定値が示すほどではないかもしれない」と考えるべきだとする。</p>
+<p><strong>国際ガイドラインとの対比</strong>：本総説の枠組み（重症CAPへの早期ヒドロコルチゾン）は2024年SCCM/ESICM焦点更新に沿う。一方、IDSA/ATS 2019は難治性敗血症性ショックがない限り重症CAPへのルーチン使用に反対しており、ESCMID・BTSも慎重な記載にとどまる。著者はCAPE CODの実践変更力を優先することでこの隔たりを埋めると述べている。</p>
+<p><strong>臨床推奨</strong>：ヒドロコルチゾン200 mg/日 静注を5〜7日間、その後5〜7日かけて段階的に減量（例：100 mg/日を2〜3日 → 50 mg/日を2〜3日 → 25 mg/日を2〜3日）。ただし漸減自体がCAPE CODの死亡減少に寄与したかは直接比較で証明されていない。漸減を用いなかったREMAP-CAPは中立の死亡結果だった。CAPE CODプロトコルに沿った漸減を検討してよいが、短期コース後の突然中止も他の証拠から安全と考えられる（確信度：中等度）。</p>
+<h4>5-2. COVID-19肺炎とARDS — インフルエンザとの決定的な違い</h4>
+<p><strong>用量と根拠</strong>：デキサメタゾン6 mg/日（経口または静注）を最長10日間が、酸素投与を要する入院COVID-19患者の世界標準治療。デキサメタゾンが選ばれるのは、強力なグルココルチコイド活性、長い生物学的半減期、そして鉱質コルチコイド由来の体液貯留がまったくないことによる純粋な肺の抗炎症作用のため。</p>
+<p><strong>RECOVERY試験（2021）</strong>：大規模・実践的・オープンラベル。入院患者6425例をランダム化（うち約2104例がデキサメタゾン6 mg/日、残りが通常ケア）。ベースラインの呼吸サポートによって結果がはっきり分かれた。</p>
+<div class="tw"><table>
+<thead><tr><th>ベースラインの呼吸サポート</th><th>デキサメタゾン群 28日死亡</th><th>対照</th><th>効果量</th></tr></thead>
+<tbody>
+<tr><td>侵襲的人工呼吸</td><td>29.3%</td><td>41.4%</td><td>率比 0.64（95%CI 0.51–0.81）</td></tr>
+<tr><td>非侵襲的酸素療法</td><td>23.3%</td><td>26.2%</td><td>率比 0.82（95%CI 0.72–0.94）</td></tr>
+<tr><td>呼吸サポート不要</td><td>17.8%</td><td>14.0%</td><td>率比 1.19（95%CI 0.92–1.55）</td></tr>
+</tbody></table></div>
+<p>呼吸サポート不要群では恩恵がなく有害方向に振れており、低酸素血症が治療の必須トリガーであることを確立した。追跡の用量設定試験とメタ解析では、デキサメタゾンを12〜24 mg/日に増やしても生存の上乗せはなく、重症高血糖と二次感染が有意に増えることが確認されている。</p>
+<p><strong>臨床推奨</strong>：低酸素血症のあるCOVID-19患者にデキサメタゾン6 mg/日（静注または経口）を最長10日間、漸減不要（確信度：高）。</p>
+<h4>5-3. インフルエンザ例外 — 「使うな」シナリオ</h4>
+<p>全身性ステロイドはルーチンのインフルエンザ肺炎には明確に推奨されず、ICUにおける第一の「do not use」シナリオとされる。</p>
+<ul><li>頑健なメタ解析で、インフルエンザにおけるステロイド使用は粗死亡の増加、二次感染（侵襲性肺アスペルギルス症を含む）の増加、ウイルス排出の遷延（ウイルスクリアランスの遅れによる）と関連</li><li>最大かつ方法論的に最も厳密な非ランダム化証拠は、スペイン148施設のICUにおける重症インフルエンザ肺炎1846例の傾向スコアマッチ解析。交絡調整後もステロイド曝露はICU死亡の増加と独立に関連（ハザード比 1.32、95%CI 1.08–1.60）。CAPや敗血症性ショックで使われるのと同程度の用量のメチルプレドニゾロンを受けた患者でも同様だった</li></ul>
+<p><strong>インフルエンザでも使わざるを得ない絶対的例外</strong>：難治性敗血症性ショックの合併、基礎にあるCOPDまたは喘息の急性増悪、副腎不全、経過後期に生じた重症の非インフルエンザ型ARDS表現型（害についての確信度：低。一貫した観察研究に基づく）。</p>
+<h4>5-4. 非COVID ARDS</h4>
+<p><strong>病態生理の枠組み</strong>：発症72時間以内の早期・中等症〜重症ARDS（P/F比 200 mmHg以下、PEEP 10 cmH₂O以上、FiO₂ 0.5以上）ではデキサメタゾンが第一選択。グルココルチコイドはGRα受容体のアゴニストとして働き、細胞のホメオスタシス調節器として炎症性転写因子を抑え、組織の修復を促進する。外因性投与はGRα受容体の濃度と結合親和性を高め、局所の細胞レベルのステロイド抵抗性を実質的に逆転させる。</p>
+<p><strong>DEXA-ARDS試験（2020）</strong>：スペイン17施設の多施設ランダム化試験。確立した中等症〜重症ARDS 277例。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>介入</td><td>デキサメタゾン20 mg/日×5日 → 10 mg/日×5日（計10日）vs 通常ケア</td></tr>
+<tr><td>28日時点の人工呼吸器離脱日数</td><td>群間差 4.8日（95%CI 2.6–7.0、p&lt;0.001）</td></tr>
+<tr><td>60日死亡</td><td>21%（デキサメタゾン）vs 36%（通常ケア）。絶対リスク減少15%、NNT 7</td></tr>
+<tr><td>安全性</td><td>重症高血糖・二次感染・消化管出血の発生率に有意差なし</td></tr>
+</tbody></table></div>
+<p>メタ解析ではデキサメタゾンと体重換算メチルプレドニゾロン（約1.5 mg/kg/日）のいずれも、最大効果に近い用量で用いれば有効とされる。ただしベッドサイドでは、この短期・漸減なしのデキサメタゾンプロトコルが、従来の長期メチルプレドニゾロン漸減をほぼ置き換えている。</p>
+<p><strong>臨床推奨</strong>：デキサメタゾン20 mg 静注 1日1回を5日間、続いて10 mg 静注 1日1回をさらに5日間、漸減せず終了（確信度：中等度）。</p>
+<h4>5-5. 敗血症性ショック</h4>
+<p>昇圧薬依存で輸液抵抗性の敗血症性ショックでは、低用量ヒドロコルチゾンが治療の主軸。2018年の2つのランドマーク試験が補完的なデータを提供する。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>n</th><th>レジメン</th><th>主要結果</th><th>副次</th></tr></thead>
+<tbody>
+<tr><td>APROCCHSS</td><td>1241</td><td>ヒドロコルチゾン200 mg/日＋フルドロコルチゾン50 µg/日 経口、7日間</td><td>90日死亡 43.0% vs 49.1%（絶対リスク減少 6.1%、NNT 約16〜17）</td><td>二次解析でのCAPサブグループ死亡率は39%</td></tr>
+<tr><td>ADRENAL</td><td>3800（人工呼吸中の敗血症性ショック）</td><td>ヒドロコルチゾン200 mg/日 持続静注、7日間、フルドロコルチゾンなし</td><td>90日死亡 27.9% vs 28.8%（有意差なし）</td><td>ショック期間 3日 vs 4日と短縮、人工呼吸日数も短縮</td></tr>
+</tbody></table></div>
+<p><strong>基盤となる過去のデータ</strong></p>
+<ul><li>CORTICUS（2008）：ヒドロコルチゾン200 mg/日 vs プラセボ、499例。ショック解除が早まった（3.3日 vs 5.8日）が28日死亡の改善なし。二次感染率が高い方向への非有意の傾向</li><li>VANISH（2016）：ヒドロコルチゾンを併用している患者で、ベースラインの昇圧薬選択（バソプレシン vs ノルアドレナリン）は死亡を変えないことを確認</li></ul>
+<p><strong>フルドロコルチゾン上乗せの機序仮説</strong>：鉱質コルチコイド作用を超えるものとして、IL-1産生の抑制、自然免疫の活性化、神経系の抗アポトーシス効果、肺上皮細胞による過剰な肺胞液のクリアランス促進が提案されている。</p>
+<p><strong>患者選択</strong>：十分な輸液蘇生（典型的には晶質液30 mL/kg）に反応せず昇圧薬が必要な敗血症性ショック。多くの有益性試験は「輸液後も1時間超にわたり収縮期血圧90 mmHg未満」を用いた。蓄積しつつあるデータは、発症から6時間以内という早期の開始が血行動態的な恩恵を最大化し、ショック解除を早めることを示唆する。</p>
+<p><strong>特殊集団</strong>：敗血症性ショックにステロイド反応性病態（急性好酸球性肺炎、器質化肺炎、血球貪食性リンパ組織球症など）を合併する場合は、昇圧薬の必要量にかかわらず直ちにステロイドを投与する。逆に、ショックが純粋に重症インフルエンザによって駆動されている場合は、細菌の二次感染が確認されない限りステロイドを避ける。</p>
+<p><strong>臨床推奨</strong>：ヒドロコルチゾン200 mg/日 静注（持続投与、または50 mgを6時間ごと）を7日間、または昇圧薬を離脱できるまで。特に昇圧薬必要量が多い患者や重症CAP関連の敗血症性ショックを合併する患者では、フルドロコルチゾン50 µg を経口または経鼻胃管で1日1回追加することを強く検討する（確信度：中等度）。</p>
+<h4>Table 1. 症候群別ステロイド推奨と証拠グレード（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>臨床症候群</th><th>推奨薬剤</th><th>標準用量・経路</th><th>期間</th><th>漸減の要否</th><th>主要な根拠</th><th>確信度</th></tr></thead>
+<tbody>
+<tr><td>重症CAP</td><td>ヒドロコルチゾン</td><td>200 mg/日 静注</td><td>5〜7日</td><td>推奨される</td><td>CAPE COD</td><td>中等度</td></tr>
+<tr><td>COVID-19（低酸素血症）</td><td>デキサメタゾン</td><td>6 mg/日 静注または経口</td><td>最長10日</td><td>不要</td><td>RECOVERY</td><td>高</td></tr>
+<tr><td>インフルエンザ</td><td>ステロイドを避ける</td><td>該当なし</td><td>該当なし</td><td>該当なし</td><td>観察研究</td><td>低</td></tr>
+<tr><td>非COVID ARDS</td><td>デキサメタゾン</td><td>20 mg/日（1〜5日目）→ 10 mg/日（6〜10日目）</td><td>10日</td><td>不要</td><td>DEXA-ARDS</td><td>中等度</td></tr>
+<tr><td>敗血症性ショック</td><td>ヒドロコルチゾン ± フルドロコルチゾン</td><td>200 mg/日 静注／± 50 µg/日 経口</td><td>7日またはショック解除まで</td><td>5日超なら必要</td><td>APROCCHSS／ADRENAL</td><td>中等度</td></tr>
+</tbody></table></div>
+<h3>6. 免疫抑制宿主での使用</h3>
+<p>ランドマークICU試験はほぼ例外なく免疫正常コホートで行われており、免疫抑制宿主（固形臓器移植レシピエント、ベースラインで免疫抑制薬を使う患者、HIV関連肺炎など）への外挿には限界がある。この集団ではリスク・ベネフィットの計算が大きく変わり、ステロイドは生命を脅かす日和見感染（CMV再活性化、侵襲性真菌症、ニューモシスチス肺炎＝PJP）を誘発する不釣り合いなリスクを負う。</p>
+<p><strong>免疫の「トリプルヒット」モデル</strong>：①ベースラインの免疫抑制（第1のヒット）、②重症病態による免疫調節異常（第2のヒット）、③外因性ステロイドによる免疫修飾（第3のヒット）。第3のヒットは炎症を減弱させると同時に免疫抑制を深める。これらは重症病態に伴うコルチゾール代謝と組織のグルココルチコイド応答性の変化によってさらに修飾される。</p>
+<p><strong>主な考慮点</strong></p>
+<ul><li>日和見感染リスクが不釣り合いに高いため、診断閾値を下げる</li><li>カルシニューリン阻害薬・mTOR阻害薬（いずれもCYP3A4基質）との薬物動態相互作用があり、血中濃度モニタリング（TDM）が必要</li><li>ステロイド使用時は監視を強化する（真菌バイオマーカー、CMVウイルス量、気管支鏡＋BAL）</li><li>高リスク患者では先制的抗真菌療法を考慮</li><li>強いステロイド反応性病態（低酸素血症を伴う重症PJPなど）に駆動されない限り、ルーチンの経験的ステロイドは避ける</li></ul>
+<p><strong>病原体特異的な証拠</strong>：免疫抑制患者の肺炎における補助ステロイドの最も強い根拠は病原体特異的である。AIDS関連の重症PJPではステロイドが転帰を改善する。しかしこの恩恵はHIV陰性の免疫抑制患者の重症PJPには一様には及ばない（PIC試験・Lancet Respir Med 2025）。</p>
+<p><strong>専用のランダム化証拠がない状況での6領域フレーム</strong>：①宿主の特性把握、②感染と病原体の評価、③重症度と治療目標、④日和見感染リスクの層別化、⑤実施原則、⑥モニタリングと再評価。</p>
+<h4>Table 2. 免疫抑制宿主の分類・免疫欠損・病原体・ステロイド関連リスク（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>ベースラインの免疫欠損</th><th>主な日和見病原体</th><th>ステロイド関連リスク</th></tr></thead>
+<tbody>
+<tr><td>血液悪性腫瘍（化学療法中）</td><td>好中球減少、リンパ球減少、貪食能低下</td><td>Aspergillus属、Candida属、P. jirovecii、グラム陰性桿菌</td><td>侵襲性真菌症の高リスク、診断の隠蔽</td></tr>
+<tr><td>固形臓器移植</td><td>カルシニューリン阻害薬によるT細胞抑制、B細胞機能不全</td><td>CMV、P. jirovecii、Aspergillus属、Nocardia属</td><td>CMV・PJP・真菌感染の再活性化、薬物相互作用</td></tr>
+<tr><td>造血幹細胞移植（急性期）</td><td>高度のリンパ球減少、抗原提示障害、GVHD</td><td>Aspergillus属、CMV、EBV、P. jirovecii</td><td>侵襲性真菌症・ウイルス再活性化の極めて高いリスク</td></tr>
+<tr><td>HIV/AIDS（CD4 200/µL未満）</td><td>CD4陽性T細胞の枯渇、マクロファージ機能障害</td><td>P. jirovecii、結核菌、Cryptococcus属</td><td>重症PJPでは有益性の強い証拠。IRISと感染の顕在化のリスク</td></tr>
+<tr><td>ステロイド慢性使用</td><td>T細胞機能低下、マクロファージ貪食能低下</td><td>P. jirovecii、Aspergillus属、Listeria monocytogenes</td><td>免疫抑制の累積、感染リスク増加</td></tr>
+<tr><td>原発性免疫不全</td><td>B細胞・T細胞・貪食細胞の可変的欠損</td><td>莢膜形成菌、P. jirovecii、抗酸菌</td><td>個々の欠損に応じた個別リスク評価</td></tr>
+</tbody></table></div>
+<p>（原表の出典：Morales-Olivera ら、Pneumonia 2026;18:12）</p>
+<h3>7. どう投与し、どう漸減するか</h3>
+<h4>7-1. 開始のタイミング</h4>
+<p>重症CAPと敗血症性ショックでは、診断後できるだけ早く、理想的には発症・受診から12時間以内に開始する。抗菌薬は数時間の遅れでも死亡が有意に増えるのに対し、ステロイドの数時間の遅れは長期転帰を悪化させないようだが、早い投与ほどショック解除が速く臓器障害の改善も速いことと強く関連する。明らかなショックのない重症CAPでは、入院後24時間以内の開始が臨床的に適切とされる。</p>
+<h4>7-2. 経口への切り替え</h4>
+<ul><li><strong>デキサメタゾン</strong>：経口バイオアベイラビリティ100%のため静注から経口への移行はシームレス。臨床改善、解熱、血行動態安定、消化管が機能していることを確認できれば直接経口に切り替えてよい</li><li><strong>ヒドロコルチゾン</strong>：ICUの急性期管理で経口製剤が使われることはまれ。ICU退室準備が整うか、外来での漸減のためにプレドニゾンなど他の経口ステロイドに移行するまでは静注を続ける</li><li><strong>換算</strong>：静注ヒドロコルチゾン約20 mg ≒ 経口プレドニゾン5 mg</li></ul>
+<p><strong>経口移行・減薬の準備が整ったことを示す客観指標</strong>：24時間超の解熱、ショックの解除、P/F比の50ポイント以上の上昇、血漿CRPの50%超の低下。</p>
+<h4>7-3. 製剤と技術的留意点</h4>
+<p>有効性は薬力学と薬物動態の両方に依存する。<strong>相対受容体親和性（RRA）</strong> はデキサメタゾン100に対しヒドロコルチゾン9、メチルプレドニゾロン42と大きな差があるが、in vitro の力価の低さは用量を増やすか投与頻度を上げることで補える。ARDS患者では疾患が薬物代謝に影響するため血中濃度の患者間変動が大きい。早期ARDSでは炎症を介した肝薬物代謝酵素のダウンレギュレーションによりグルココルチコイドの消失が著しく障害され、治療開始時点でクリアランスが約50%低下し、炎症の消退とともに徐々に正常化する。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>力価換算表について <mark class="hl">本総説には、プレドニゾロン換算での等力価表（例：ヒドロコルチゾン20 mg＝プレドニゾロン5 mg＝メチルプレドニゾロン4 mg＝デキサメタゾン0.75 mg）、鉱質コルチコイド活性の相対比、各薬剤の血漿半減期・生物学的半減期を一覧にした表は「記載なし」</mark>。本文から確認できるのは以下だけである。</p>
+<ul><li>相対受容体親和性（RRA）：デキサメタゾン100／メチルプレドニゾロン42／ヒドロコルチゾン9</li><li>換算：静注ヒドロコルチゾン20 mg ≒ 経口プレドニゾン5 mg。近生理量はプレドニゾロン5 mg/日 ≒ ヒドロコルチゾン20 mg/日</li><li>半減期：デキサメタゾンの生物学的半減期36〜54時間（自己漸減効果の根拠）。ヒドロコルチゾン・メチルプレドニゾロンの半減期の記載はなし</li><li>鉱質コルチコイド活性：デキサメタゾンは「完全に欠如」、ヒドロコルチゾンは鉱質コルチコイド活性を持つと定性的に記載。数値の相対比はなし</li><li>ストレス量の定義：ヒドロコルチゾン換算で約200 mg/日</li></ul>
+</div>
+<h4>Table 3. 製剤・投与の比較（ベッドサイド用リファレンス・原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>ヒドロコルチゾンリン酸ナトリウム</th><th>デキサメタゾンリン酸ナトリウム</th><th>メチルプレドニゾロンコハク酸ナトリウム</th></tr></thead>
+<tbody>
+<tr><td>規格</td><td>100 mg/mL 用時調製不要の溶液</td><td>4 mg/mL または 10 mg/mL 溶液</td><td>40 mg・125 mg・500 mg・1 g・2 g の凍結乾燥粉末バイアル</td></tr>
+<tr><td>溶解の要否</td><td>不要。希釈済みで即時使用可</td><td>不要。希釈済みで即時使用可</td><td>必要。添付の溶解液または注射用水で溶解（例：40 mgバイアルに1 mLで40 mg/mL）</td></tr>
+<tr><td>静注方法と速度</td><td>最低30秒かけた緩徐静注、または希釈して点滴。500 mg以上の大量投与は最低10分かけて点滴</td><td>最低1分かけた緩徐静注、または生理食塩水・5%ブドウ糖に希釈して5〜30分で点滴</td><td>数分かけた緩徐静注。250 mgを超える用量は30〜60分かけて点滴</td></tr>
+<tr><td>pHと浸透圧</td><td>pH 7.5〜8.5。浸透圧 533 mOsm/kg（50 mg/mL時）</td><td>pH 7.0〜8.5。浸透圧 356 mOsm/kg（4 mg/mL時）</td><td>pH 7.0〜8.0。浸透圧 318 mOsm/kg（生食中10 mg/mL時）</td></tr>
+<tr><td>調製後の安定性</td><td>ポリプロピレンシリンジ中で高い安定性。標準的なPVCチューブへの吸着なし</td><td>生食・5%ブドウ糖での希釈液は室温24時間まで化学的に安定</td><td>溶解後のバイアルは室温48時間安定。さらに希釈した点滴は4時間以内に使用</td></tr>
+<tr><td>希釈時の注意</td><td>pH 8を超える溶液との混合は避ける（即時に酸化し力価が失われる）</td><td>希釈せず急速静注すると重度の会陰部灼熱感・刺激感を生じうる。希釈して緩徐に投与して防ぐ</td><td>希釈時に明らかな白濁が生じることがあるが正常であり化学的分解を意味しない</td></tr>
+<tr><td>保存剤・安全性</td><td>ベンジルアルコール不含で新生児にも安全</td><td>多回量バイアルにベンジルアルコールを含むことが多い。新生児には保存剤フリー製剤を明示的に選ぶ</td><td>多くの製剤がベンジルアルコールを含み、早産児には厳格に禁忌</td></tr>
+<tr><td>保存条件</td><td>未開封バイアルは25℃未満の室温。凍結を避ける</td><td>20〜25℃で保存。遮光し、高温と凍結を厳格に避ける</td><td>未溶解の未開封バイアルは20〜25℃。遮光</td></tr>
+</tbody></table></div>
+<h4>7-4. 特殊集団での投与量</h4>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>推奨</th><th>根拠の質</th></tr></thead>
+<tbody>
+<tr><td>肥満（BMI 30 kg/m²以上）</td><td>体重換算投与が必要なまれな場面（高用量パルス療法など）では毒性回避のため実体重ではなく理想体重を用いる。ヒドロコルチゾンとメチルプレドニゾロンは固定用量が標準</td><td>非重症集団の薬物動態研究に限られる</td></tr>
+<tr><td>腎機能障害</td><td>3剤いずれも用量調整不要。ステロイドは主として肝代謝で、未変化体の腎排泄は全身クリアランスの10%未満。重度腎障害や血液透析中でも補充投与や透析後の追加投与は不要</td><td>Lexicomp</td></tr>
+<tr><td>肝機能障害</td><td>重度肝疾患（Child-Pugh B・C）は肝クリアランスの低下により生物学的半減期を著しく延長しうる。具体的な減量幅の指標はない。標準用量を慎重に用い、重症高血糖・体液貯留・高度の免疫抑制を注意深く監視</td><td>Lexicomp</td></tr>
+</tbody></table></div>
+<h4>7-5. 持続投与 vs 間欠ボーラス（ヒドロコルチゾン）</h4>
+<p>2026年のGRADEに基づくシステマティックレビュー・メタ解析（14研究・2834例）が敗血症性ショックにおける持続投与と間欠ボーラスを比較した。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>ICU死亡・院内死亡・28日死亡</td><td>いずれも有意差なし</td></tr>
+<tr><td>7日目までのショック解除</td><td>持続投与で有意に高い（RR 1.14、95%CI 1.02–1.27）</td></tr>
+<tr><td>低カリウム血症</td><td>持続投与でリスク低下（RR 0.67、95%CI 0.51–0.88）</td></tr>
+<tr><td>血糖変動</td><td>持続投与で明確に減少。平均血糖の変動幅が24 mg/dL 小さい</td></tr>
+</tbody></table></div>
+<p>どちらの投与法も臨床的に許容され生存アウトカムは同等だが、持続投与は代謝・電解質コントロールの面で有利であり、特に血糖不安定や低カリウム血症のリスクが高い患者に向く。</p>
+<p>薬物動態の観点も加えられている。8〜24時間間隔の低頻度投与では、血中グルココルチコイド濃度が意味のあるレベルに達しない時間帯がかなり生じるのに対し、持続投与は1日を通じて高い曝露を維持する。持続投与の欠点である高曝露到達の遅れは、十分な負荷投与（例：メチルプレドニゾロン1 mg/kg を先行投与し、続いて1 mg/kg/日で持続）で補正できる。ARDSでは限られたデータながら、持続投与を採用したRCTのほうが間欠ボーラスの試験より疾患の改善が速く人工呼吸器離脱日数が多かったとされる。</p>
+<h4>7-6. 漸減戦略</h4>
+<p>漸減が必要か突然中止でよいかは治療期間で決まる。3〜4週未満の短期コース（ICU患者の大多数がここに入る）では突然中止でおそらく安全。3〜4週を超える長期コースでは、続発性副腎不全を防ぐため段階的で構造化された漸減が必要。</p>
+<p><strong>短期コース（3〜4週未満）</strong></p>
+<ul><li>突然中止は安全。比較的高用量であっても短期曝露後のHPA軸抑制はまれで臨床的に問題にならない</li><li>全身性グルココルチコイドを3週間まで投与された患者に臨床的に意味のあるHPA抑制は生じず、漸減なしで直接中止できる</li><li>重症CAP・COVID-19・ARDS・敗血症性ショックでステロイドを受けるICU患者の大多数がこの短期コースに該当し、典型的な総投与期間は5〜10日</li><li>敗血症性ショックでは414例のコホート研究が、短期コース後のヒドロコルチゾン突然中止が安全であり、代謝合併症を最小化し、不要な長期漸減と比べてICU在室日数が短くなることを確認した</li><li>10日以下のデキサメタゾンも、長い生物学的半減期（36〜54時間）が内在的な「自己漸減」効果をもたらすため突然中止する</li></ul>
+<p><strong>長期コース（3〜4週超）</strong></p>
+<p>超生理量の外因性グルココルチコイドは、CRH（副腎皮質刺激ホルモン放出ホルモン）とACTHの分泌を抑えて内因性コルチゾール産生を抑制する。長期使用後に突然中止すると、ストレスに対する内因性コルチゾール応答が不十分となり副腎クリーゼの現実的なリスクが生じる。ルーチンのICU診療ではまれだが、極めて難治性の基礎疾患を持つ患者や、入院前から長期ステロイドを使用していた患者では起こりうる。</p>
+<p><strong>長期コースの漸減手順（2相性）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>相</th><th>目標</th><th>速さの決め方</th></tr></thead>
+<tbody>
+<tr><td>第1相</td><td>近生理量まで減量（プレドニゾロン約5 mg/日、またはヒドロコルチゾン20 mg/日相当）</td><td>原疾患が決める。もともとステロイドを処方した病態の再燃を避けられる範囲で、できる限り速く落とす</td></tr>
+<tr><td>第2相</td><td>生理量から中止まで、よりゆっくり減量</td><td>視床下部の放出因子の回復と副腎萎縮の回復が段階的に進むのを待つ</td></tr>
+</tbody></table></div>
+<p><strong>朝の血清コルチゾールによる最終段階の判断</strong></p>
+<div class="tw"><table>
+<thead><tr><th>朝のコルチゾール値</th><th>解釈</th><th>対応</th></tr></thead>
+<tbody>
+<tr><td>300 nmol/L 超</td><td>HPA軸が回復</td><td>中止してよい</td></tr>
+<tr><td>150〜300 nmol/L</td><td>回復の可能性あり</td><td>生理量を継続し、数週間後に再検</td></tr>
+<tr><td>150 nmol/L 未満</td><td>HPA抑制が持続</td><td>生理量の補充を継続</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>デキサメタゾン投与中に朝のコルチゾールを測ってはいけない <mark class="hl">デキサメタゾンの長い生物学的半減期はHPA抑制を持続させ、検査結果の解釈を撹乱する</mark>。正式なコルチゾール測定の前に、プレドニゾンやヒドロコルチゾンなど短時間作用型の同等量に切り替える必要がある。</p>
+</div>
+<h4>7-7. 減量中の症状の見分け方</h4>
+<p>漸減中には3つの異なる病態を正確に区別しなければならない。</p>
+<div class="tw"><table>
+<thead><tr><th>病態</th><th>発生する用量域</th><th>症状</th><th>検査所見</th></tr></thead>
+<tbody>
+<tr><td>グルココルチコイド離脱症候群</td><td>プレドニゾン換算で約15 mg/日を下回るとき</td><td>高度の倦怠感、全身のだるさ、びまん性の関節痛、急激な気分変動</td><td>客観的検査値は完全に正常</td></tr>
+<tr><td>真の副腎不全</td><td>プレドニゾン換算で生理的補充量を下回るとき（5 mg/日未満）、または急性の併発疾患時</td><td>起立時のめまい、強い悪心・嘔吐、腹痛</td><td>低ナトリウム血症、急性の低血糖</td></tr>
+<tr><td>原疾患の再燃</td><td>用量域を問わない</td><td>ステロイドを処方した炎症性病態の再来（呼吸困難の再燃、浸潤影の拡大、炎症マーカーの再上昇）</td><td>原疾患に応じた所見</td></tr>
+</tbody></table></div>
+<h4>7-8. 副腎クリーゼとシックデイ・ドージング</h4>
+<p>3週間を超える慢性・高用量グルココルチコイドの突然中止は急性副腎クリーゼ（昇圧薬に反応しない低血圧、低ナトリウム血症、高カリウム血症、低血糖、発熱）を誘発しうる。</p>
+<ul><li>ステロイド中止直後に説明のつかない低血圧をきたしたICU患者には、評価と並行して経験的ストレス量ヒドロコルチゾン（100 mg 静注ボーラス、続いて24時間で200 mg を持続投与または分割投与）を投与する</li><li>漸減中または慢性の生理量投与中の患者は、併発疾患・手術・外傷の際にリスクが残る。そうしたストレス下では生理量の3倍（例：プレドニゾロン15 mg/日）に増量し、改善に伴って戻す</li><li>重症で経口摂取が完全に不能な場合は、直ちに非経口ヒドロコルチゾンへ切り替えることが必須</li></ul>
+<h4>7-9. 減薬・経口移行・ICU後フォローアップ</h4>
+<p><strong>減薬の原則（4点）</strong></p>
+<ol><li>原疾患が許す限り速く漸減する</li><li>副腎不全の症状（倦怠感、悪心、低血圧）を監視する</li><li>患者と家族にシックデイ・ドージングを教育する</li><li>漸減の最終段階では朝のコルチゾール測定を考慮する</li></ol>
+<p><strong>ICU後フォローアップ</strong></p>
+<ul><li>3週間を超える長期コースを受けた患者は、副腎の回復を監視し漸減を完了するために構造化された外来フォローが必要。中止から4〜6週後の朝のコルチゾール測定でHPA軸の回復を確認できる。副腎クリーゼの兆候と、併発疾患・手術時のストレス量投与の必要性を教育する</li><li>14日未満の短期コースの患者には内分泌科の定期フォローは不要。ただし高用量を受けた患者や既存のリスク因子を持つ患者では遅発性の副腎不全に注意を払う</li></ul>
+<p>著者は本節を次の一文で締めている。漸減の複雑さと有害事象を最小化する最も効果的な戦略は、不要な追加投与日を作らないこと。総投与期間こそが、中止後の副腎抑制と血行動態不安定の最強の予測因子である。</p>
+<h3>8. ステロイドが適応にならない場面（7つ）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>場面</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>合併症のないインフルエンザ肺炎（細菌二次感染・COPD/喘息増悪・副腎不全を伴わない）</td><td>死亡増加・二次感染・ウイルス排出遷延という一貫した害のシグナル</td></tr>
+<tr><td>2</td><td>酸素投与を要さない軽症COVID-19</td><td>RECOVERYで恩恵なし（RR 1.19、95%CI 0.92–1.55）、害の方向への傾向</td></tr>
+<tr><td>3</td><td>低酸素血症もショックもないCAP</td><td>恩恵の証拠なし。重症度基準（PSI 130超、CURB-65 3以上、ICU入室、人工呼吸／高流量酸素）を満たす患者に限る</td></tr>
+<tr><td>4</td><td>ショックを伴わない合併症のない敗血症</td><td>昇圧薬依存のない敗血症には推奨されない。リスク・ベネフィット比が不利</td></tr>
+<tr><td>5</td><td>活動性の侵襲性真菌症</td><td>真菌の播種を悪化させうる。無関係の生命を脅かす病態のために必要かつ抗真菌療法が最適化されている場合のみ例外</td></tr>
+<tr><td>6</td><td>コントロールされていない消化管出血</td><td>ステロイドは粘膜治癒を妨げ、出血を悪化させうる</td></tr>
+<tr><td>7</td><td>強いCYP3A4阻害薬の併用（用量調整なし）</td><td>ボリコナゾール・ポサコナゾール・クラリスロマイシンとの併用で減量しないと重度のステロイド毒性を招きうる</td></tr>
+</tbody></table></div>
+<p>このほか、ステロイド過敏症の既往、適切な抗菌薬治療のない活動性結核、生ワクチンの最近の接種でも慎重を要する。</p>
+<h3>9. 実務のモニタリングプロトコル</h3>
+<p>各領域の病態生理的な根拠は次のとおり。</p>
+<ul><li><strong>高血糖</strong>：グルココルチコイドは末梢のインスリン抵抗性と肝の糖新生を急速に誘導し、開始から24〜48時間以内に大きな代謝上の課題となる</li><li><strong>二次感染</strong>：マクロファージ活性化を抑える一方、好中球のデマージネーション（辺縁プールからの動員）によって予測可能な非感染性の白血球増多を起こし、臨床評価を難しくする。白血球数はベースラインより5000〜10000/µL 上振れするのが通常であり、これを治療失敗と誤読してはならない</li><li><strong>神経筋の脆弱化</strong>：グルココルチコイドは筋蛋白合成をダウンレギュレートする。持続投与の筋弛緩薬（NMBA）と併用するとICU-AWのリスクが相乗的に高まる</li><li><strong>消化管出血</strong>：ステロイドは粘膜細胞の修復を妨げる。低用量レジメン単独では大出血の独立した原因にならないが、NSAIDsや治療量の抗凝固と組み合わさるとリスクが指数関数的に上がる</li><li><strong>電解質・体液シフト</strong>：鉱質コルチコイド活性が近位尿細管でのナトリウム再吸収と遠位でのカリウム喪失を駆動するため、電解質の緊密な追跡が要る</li></ul>
+<h4>Table 4. ベッドサイド・モニタリングプロトコル（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>標的とする有害事象</th><th>ベッドサイド指標（目標値）</th><th>監視頻度</th><th>根拠のある軽減・対処</th></tr></thead>
+<tbody>
+<tr><td>高血糖</td><td>血糖（140〜180 mg/dL）</td><td>4〜6時間ごと（ステロイド／インスリン持続静注中は2時間ごと）</td><td>連続2回の測定で180 mg/dL を超えたらインスリン持続静注を開始</td></tr>
+<tr><td>二次感染</td><td>昇圧薬必要量、P/F比、CRP／プロカルシトニンの推移</td><td>継続的な臨床レビュー</td><td>非感染性の白血球上昇（5000〜10000/µL）は無視する。体温以外の感染マーカーを追う。真菌の侵襲（CAPA／IAPA）を強く疑う</td></tr>
+<tr><td>ICU後天性筋力低下</td><td>MRC sum score または握力を毎日</td><td>毎日の身体評価</td><td>必須でない限り持続NMBAとステロイドの併用を避ける。NMBAは48時間未満に限り、TOFで調整する</td></tr>
+<tr><td>消化管出血</td><td>ヘモグロビンの安定性、便の目視確認</td><td>毎日</td><td>独立したリスク因子（48時間超の人工呼吸、凝固障害など）がある場合に限りPPIまたはH2RAによる潰瘍予防を必須とする</td></tr>
+<tr><td>電解質異常</td><td>血清カリウム（4.0 mEq/L以上）、累積水分バランス</td><td>毎日の基本代謝パネル（高用量ループ利尿薬使用時は12時間ごとに）</td><td>カリウム喪失を積極的に補充。重症CAP／ARDSではループ利尿薬で水分バランスを中立に保つ</td></tr>
+<tr><td>せん妄</td><td>CAM-ICU または ICDSC（CAM-ICU陰性が目標）</td><td>12時間ごと</td><td>非薬物的な見当識再獲得と睡眠衛生を最大化。強い興奮にはデクスメデトミジンまたはクエチアピン</td></tr>
+</tbody></table></div>
+<h3>10. 高リスク薬物相互作用</h3>
+<p>ステロイドは肝酵素で広範に代謝され、主要な薬物輸送・クリアランス経路の基質でもあり修飾因子でもある。多剤併用が常態のICUでこれを見落とすと、重篤な治療失敗か、医原性のステロイド毒性を招く。</p>
+<p>デキサメタゾンはCYP3A4とP糖蛋白（P-gp）の基質であると同時に強力な誘導薬でもあり、双方向の相互作用リスクを生む。ヒドロコルチゾンとプレドニゾロンはCYP3A4への依存度が低いが、他の重要な相互作用は共有する。</p>
+<ul><li><strong>CYP3A4阻害薬（ボリコナゾール、クラリスロマイシン）</strong>：ステロイドのクリアランスを激しく損ない、全身曝露を何倍にも増やして即座の毒性リスクを生む。マクロライドではCYP3A4阻害がまったくないアジスロマイシンが優先される</li><li><strong>CYP3A4誘導薬（リファンピシン、フェニトイン）</strong>：肝代謝を加速させ、ステロイド血中濃度を急落させて治療失敗のリスクを生む</li><li><strong>デスモプレシン（DDAVP）併用</strong>：重大な高リスク相乗作用。グルココルチコイドは腎の自由水処理を独立に変化させ、集合管のV2受容体を介した抗利尿応答をデスモプレシンに対して増強する。重度の希釈性低ナトリウム血症と劇症の脳浮腫のリスクが指数関数的に高まる。併用が避けられない場合は厳格な自由水制限と6〜12時間ごとの血清ナトリウム追跡が必要。低ナトリウム血症の補正中にデスモプレシンを急に中止すると、急速な自由水利尿から浸透圧性脱髄症候群（ODS）を招くため避ける</li></ul>
+<h4>Table 5. 重要なステロイド薬物相互作用（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>相互作用薬のクラス</th><th>代表薬</th><th>機序</th><th>ベッドサイドでの管理戦略</th></tr></thead>
+<tbody>
+<tr><td>強いCYP3A4阻害薬</td><td>ボリコナゾール、ポサコナゾール、クラリスロマイシン</td><td>肝クリアランスを阻害し、ステロイド曝露と毒性リスクを激増させる</td><td>メチルプレドニゾロン／デキサメタゾンの経験的な50%減量を検討。クラリスロマイシンよりアジスロマイシンを選ぶ</td></tr>
+<tr><td>強いCYP3A4誘導薬</td><td>リファンピシン、フェニトイン、カルバマゼピン</td><td>肝クリアランスを加速させ、ステロイドの完全な治療失敗を招きうる</td><td>併用を避ける。やむを得ない場合はベースライン用量の倍量を検討し臨床効果で滴定</td></tr>
+<tr><td>神経筋遮断薬</td><td>シサトラクリウム、ベクロニウム、ロクロニウム</td><td>筋の異化を相乗的に促進し、重症病態関連ミオパチー（CIM）を加速</td><td>NMBAの持続投与を48時間未満に制限。TOFで滴定。早期理学療法を最大化</td></tr>
+<tr><td>潰瘍原性薬</td><td>NSAIDs（ケトロラク、イブプロフェン）</td><td>粘膜障害が加重し、消化管出血率を指数関数的に増加</td><td>全身性NSAIDsを完全に中止。ステロイドと併用するならPPIまたはH2RAによる潰瘍予防を必須とする</td></tr>
+<tr><td>バソプレシン類似薬</td><td>デスモプレシン（DDAVP）</td><td>腎V₂受容体の抗利尿応答を増強し、急性の希釈性低ナトリウム血症を招く</td><td>併用を避ける。厳格な水分制限。血清ナトリウムを6〜12時間ごとに監視。ODSのリスクがあれば「デスモプレシン・クランプ」を用いる</td></tr>
+</tbody></table></div>
+<h3>11. ステロイド間の比較有効性</h3>
+<p>著者はまず注意喚起から入る。ネットワークメタ解析（NMA）は薬剤選択に有用な情報をもたらすが、確率的な順位づけは慎重に解釈しなければならない。NMAは重症度の閾値・ステロイド用量・背景の併用介入が大きく異なる試験を統合しており、多くの比較で大規模な直接比較試験が存在しない以上、推移性の仮定を完全には検証できず、間接推定は統計学的に不確かである。</p>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>解析</th><th>主な結果</th></tr></thead>
+<tbody>
+<tr><td>重症CAP</td><td>2025年NMA、11 RCT、n=2042。ヒドロコルチゾン・メチルプレドニゾロン・デキサメタゾン・プレドニゾロンを比較</td><td>ヒドロコルチゾンが死亡減少で最も有効（SUCRA 0.89）。CAPE CODの成功と整合</td></tr>
+<tr><td>ARDS</td><td>2025年の用量反応NMA、28試験、n=6502</td><td>デキサメタゾン（15〜20 mg/日）とメチルプレドニゾロン（約1.5 mg/kg/日）が最大効果に近い用量で死亡減少と人工呼吸器離脱日数増加に最も有効。等価用量のヒドロコルチゾン（200〜300 mg/日）は肺特異的アウトカムで劣るように見えた。間接比較のため仮説生成的</td></tr>
+<tr><td>重症COVID-19</td><td>2023年メタ解析</td><td>メチルプレドニゾロンとデキサメタゾンの死亡に有意差なし（RR 0.96、95%CI 0.82–1.12）</td></tr>
+<tr><td>重症COVID-19（直接比較）</td><td>メチルプレドニゾロン250 mg/日×3日 vs デキサメタゾン6 mg/日×最長10日のオープンラベル試験</td><td>28日死亡は両群とも約4.8%で同等</td></tr>
+<tr><td>敗血症性ショック</td><td>2024年NMA、17試験</td><td>ヒドロコルチゾン＋フルドロコルチゾンはヒドロコルチゾン単独に比べ全死因死亡を12%相対的に減少（RR 0.88、95%信用区間 0.74–1.03）、絶対リスク減少3.8%</td></tr>
+<tr><td>敗血症</td><td>Cochraneレビュー</td><td>ステロイドは28日死亡をおそらく減らす（RR 0.89、95%CI 0.84–0.99）</td></tr>
+<tr><td>敗血症性ショック</td><td>2025年 MIMIC-IV 後ろ向きコホート、n=1607、傾向スコアマッチ376ペア</td><td>30日死亡はメチルプレドニゾロン37.5% vs ヒドロコルチゾン34.8%（HR 1.105、95%CI 0.871–1.402、p=0.410）で有意差なし。メチルプレドニゾロン群はICU在室が長く、血糖が高く、バソプレシンの維持期間が短かった</td></tr>
+</tbody></table></div>
+<p>著者の結論はきわめて実務的である。これらすべての解析に共通する限界は、NMAが直接ではなく間接の比較証拠しか与えないことにある。臨床医はSUCRAの順位を実践に外挿するのではなく、各症候群のランドマーク試験で実際に試された薬剤と用量を優先すべきである。</p>
+<h3>12. 未解決の論争（5点）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>論争点</th><th>現状</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>漸減の必要性</td><td>CAPE CODの必須漸減が死亡減少に寄与したかは不明。漸減なしのREMAP-CAPが中立だったことは、漸減が本質的なのか、CAPE CODの結果が他のプロトコル差を反映しているのかという問いを投げかける</td></tr>
+<tr><td>2</td><td>フルドロコルチゾンの上乗せ</td><td>APROCCHSSは併用で有益、ADRENAL（併用なし）は死亡減少を示さなかった。独立した価値があるのか、単に試験集団が違うだけなのかは不明</td></tr>
+<tr><td>3</td><td>ARDSの最適薬剤</td><td>非COVID ARDSではデキサメタゾンが最も研究されているが、メチルプレドニゾロンも一部で有益性を示す。直接比較試験がなく優劣は不確か</td></tr>
+<tr><td>4</td><td>バイオマーカー誘導療法</td><td>生物学的合理性はあるが、最も恩恵を受ける患者を同定できる検証済みバイオマーカーは存在しない。CRP・IL-6・トランスクリプトーム・エンドタイプはいずれも前向き検証が必要</td></tr>
+<tr><td>5</td><td>免疫抑制患者</td><td>証拠基盤が極めて乏しく最適な管理は不明。免疫正常集団からの外挿は不適切かもしれない</td></tr>
+</tbody></table></div>
+<h3>13. 今後の方向</h3>
+<p>CRPのような単一バイオマーカーを超えた濃縮戦略が必要とされている。具体的には、ARDSの濃縮研究で同定されたフェリチンに基づく高炎症性表現型、薬力学マーカーかつ治療標的としての血漿IL-6の追跡、SRS1/SRS2という敗血症反応シグネチャーによるトランスクリプトーム・エンドタイピング（ステロイド反応者と医原性の害を受けやすい患者を前向きに分離する枠組み）が挙げられる。臨床・検査・バイオマーカーのデータを統合する機械学習も早期の恩恵患者同定に寄与しうるが、前向き検証が前提となる。</p>
+<p>薬理ゲノミクスではグルココルチコイド受容体（NR3C1）やCYP3A4/5の遺伝子多型が反応性や毒性を予測するかが焦点になる。最適な漸減プロトコル、特に14日を超える長期投与を受けた患者の理想的な漸減期間の解明も課題である。免疫調節薬（トシリズマブ、バリシチニブ）との併用戦略、そしてRSウイルス・メタニューモウイルスなど他のウイルス性肺炎でどの患者が恩恵を受けるかという「ウイルス特異的適応の精緻化」も残されている。</p>
+<h3>14. Figure 1 — ベッドサイド・アルゴリズム</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 重症病態におけるステロイド療法のベッドサイド・アルゴリズム。上端に「臨床病態を同定する」という緑の起点ボックスが置かれ、そこから5本の縦列（重症CAP／COVID-19肺炎／インフルエンザ肺炎／中等症〜重症ARDS／敗血症性ショック）に分岐する。インフルエンザの列だけが赤枠・警告アイコンつきで「絶対禁忌：使うな」と表示され、右上にはピンク地の「ステロイド非適応」ボックス（軽症CAP、合併症のない敗血症、軽症COVID-19、活動性侵襲性真菌症、コントロール不良の消化管出血）が置かれる。5列はいずれも緑の横帯「必須の安全ゲート：臨床薬剤師コンサルト」に流れ込み、そこから「ヒドロコルチゾン開始」「デキサメタゾン開始」の2ボックスへ、さらに青い横帯「毎日のベッドサイド監視」（血糖／電解質／感染サーベイランス）へ下る。最下段中央の菱形「臨床反応の評価」から左（改善＝緑のチェック「治療継続・必要なら漸減」）と右（悪化＝赤の警告「即時再評価」）に矢印が分かれ、最下部に「経口療法への移行」ボックスが独立して置かれる。図末の注記は「本アルゴリズムは成人ICU患者を対象とする。臨床判断を適用し個別化すること」。原図・無改変</p>
+</div>
+<p>図の各ボックスの文言は次のとおり。</p>
+<p><strong>分岐1：臨床病態の同定</strong></p>
+<div class="tw"><table>
+<thead><tr><th>列</th><th>選択基準</th><th>薬剤・用量</th><th>漸減</th></tr></thead>
+<tbody>
+<tr><td>1. 重症CAP</td><td>PSI 130超、またはCURB-65 3以上、またはICU入室</td><td>ヒドロコルチゾン200 mg/日 静注</td><td>3〜7日かけて漸減</td></tr>
+<tr><td>2. COVID-19肺炎</td><td>（低酸素血症例）</td><td>デキサメタゾン6 mg 静注／経口 1日1回、最長10日。デキサメタゾンが使えない場合の二次選択はヒドロコルチゾン200 mg/日 静注</td><td>記載なし</td></tr>
+<tr><td>3. インフルエンザ肺炎</td><td>絶対禁忌：ステロイドを使うな。死亡増加と関連</td><td>例外：難治性敗血症性ショック、COPD/喘息、副腎不全</td><td>該当なし</td></tr>
+<tr><td>4. 中等症〜重症ARDS</td><td>—</td><td>デキサメタゾン20 mg 静注 1日1回×5日、続いて10 mg 静注 1日1回×5日</td><td>記載なし</td></tr>
+<tr><td>5. 敗血症性ショック（難治性）</td><td>—</td><td>ヒドロコルチゾン200 mg/日 静注（50 mg 6時間ごと）± フルドロコルチゾン50 µg 経口 1日1回、7日間または昇圧薬中止まで</td><td>5日を超えるコースでは3〜7日かけて漸減</td></tr>
+</tbody></table></div>
+<p><strong>分岐2：必須の安全ゲート — 臨床薬剤師コンサルト</strong></p>
+<div class="tw"><table>
+<thead><tr><th>開始前レビュー</th><th>CYP3A4阻害薬に注目</th></tr></thead>
+<tbody>
+<tr><td>服薬の完全な突合（medication reconciliation）</td><td>強い阻害薬：ケトコナゾール、イトラコナゾール、ボリコナゾール、ポサコナゾール、クラリスロマイシン、リトナビル、コビシスタット、ネファゾドン</td></tr>
+<tr><td>重要な薬物相互作用の確認</td><td>中等度の阻害薬：ジルチアゼム、ベラパミル、エリスロマイシン、フルコナゾール、グレープフルーツジュース</td></tr>
+<tr><td>併存疾患と禁忌の評価</td><td>ステロイドを減量するか代替薬を選択する</td></tr>
+</tbody></table></div>
+<p><strong>分岐3：投与開始</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ヒドロコルチゾン開始</th><th>デキサメタゾン開始</th></tr></thead>
+<tbody>
+<tr><td>200 mg/日 静注（50 mg 6時間ごと）持続または間欠</td><td>6 mg 静注／経口 1日1回</td></tr>
+<tr><td>期間：3〜7日（病態に応じる）</td><td>期間：最長10日または退院まで</td></tr>
+<tr><td>臨床反応に応じて3〜7日かけて漸減</td><td>10日以下の治療では漸減不要</td></tr>
+</tbody></table></div>
+<p><strong>分岐4：毎日のベッドサイド監視</strong></p>
+<div class="tw"><table>
+<thead><tr><th>血糖管理</th><th>電解質バランス</th><th>感染サーベイランス</th></tr></thead>
+<tbody>
+<tr><td>血糖を4〜6時間ごとに測定</td><td>Na・K・Mg を毎日測定</td><td>新規・悪化する感染を毎日評価</td></tr>
+<tr><td>目標140〜180 mg/dL</td><td>低カリウム血症・低ナトリウム血症・アルカローシスに注意</td><td>白血球数・体温・培養を監視</td></tr>
+<tr><td>必要に応じてインスリンプロトコルを開始・調整</td><td>ICUプロトコルに従って補充</td><td>制御できない感染が生じたらステロイドを減量・中止</td></tr>
+</tbody></table></div>
+<p><strong>分岐5：臨床反応の評価</strong></p>
+<div class="tw"><table>
+<thead><tr><th>改善（成功）</th><th>非改善（治療失敗・即時再評価）</th></tr></thead>
+<tbody>
+<tr><td>治療を継続</td><td>診断を再評価する</td></tr>
+<tr><td>適応があれば漸減</td><td>感染・出血・血栓症を評価する</td></tr>
+<tr><td>毎日の監視を継続</td><td>多職種チームにコンサルトする</td></tr>
+</tbody></table></div>
+<p><strong>経口療法への移行</strong></p>
+<div class="tw"><table>
+<thead><tr><th>元の薬剤</th><th>移行先</th></tr></thead>
+<tbody>
+<tr><td>デキサメタゾン → 経口</td><td>6 mg 経口 1日1回に切り替え（コース完了まで継続）</td></tr>
+<tr><td>ヒドロコルチゾン → プレドニゾン</td><td>臨床反応に応じてプレドニゾン40〜50 mg 経口 1日1回、3〜7日かけて漸減</td></tr>
+</tbody></table></div>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>漸減について本文内で3か所が食い違う</strong>。7-6節は短期コースについて「突然中止は entirely safe（完全に安全）」と断言する。しかしTable 1の敗血症性ショック行は「漸減：5日超なら必要」とし、結論部は「ヒドロコルチゾンは短くとも構造化された漸減を要する」と書く。Fig 1 に至っては重症CAPも敗血症性ショックも「3〜7日かけて漸減」と断定形である。同じ論文の中で「不要」「条件つきで必要」「必要」が並立している。実務に落とすなら、漸減の要否は未解決（本文12節の論争点1がそれを認めている）と理解し、施設で1つの方針に決める以外にない</li><li><strong>REMAP-CAPの数値がまったく書かれていない</strong>。CAPE CODと対比させるうえで本総説の中心的な論点であるにもかかわらず、n も死亡率も効果推定値も信頼区間も記載がない。「有益性の確率は相当に高い」という定性的表現だけで、読者は自分で判断できない。原著（Heming ら、ICM 2025;51(4):665-80）に当たる必要がある</li><li><strong>RECOVERYのnの記載が不正確</strong>。「6425例をランダム化（うち約2104例がデキサメタゾン、残りが通常ケア）」とあるが、原著は2104 vs 4321 の2:1割付である。「残り」と書けば形式的には誤りではないが、読者が対照群の規模を誤認しやすい書き方である</li><li><strong>APROCCHSSの「CAPサブグループ死亡率39%」が解釈不能</strong>。どちらの群の値か、比較対照は何かが書かれていない。二次解析からの引用とだけあり、単独では使えない数字である</li><li><strong>インフルエンザの「絶対禁忌」は証拠の強さと釣り合っていない</strong>。本文自身が確信度を「低（一貫した観察研究に基づく）」としながら、Fig 1 では赤枠・警告アイコンつきで「ABSOLUTE CONTRAINDICATION」と表示している。傾向スコアマッチはランダム化ではなく、重症度による適応交絡（重い患者ほどステロイドが使われる）を完全には除去できない。方針としては妥当でも、図の表現は証拠を上回っている</li><li><strong>デスモプレシン相互作用の引用が疑わしい</strong>。機序の記述に引用番号[42]が付されているが、[42]はVANISH試験（敗血症性ショックのバソプレシン vs ノルアドレナリン）であり、グルココルチコイドの腎自由水処理の機序を支持する文献ではない。引用の取り違えの可能性が高い</li><li><strong>持続投与の「血糖変動24 mg/dL 低下」は指標が曖昧</strong>。平均血糖の変動幅なのか、標準偏差なのか、MAGEなどの変動指標なのかが特定できない。臨床的意義を評価できない形で提示されている</li><li><strong>Table 3 に成人ICUと無関係な情報が混在</strong>。本総説は冒頭で「成人のみを扱う」と宣言しているのに、保存剤の行は「新生児に安全」「早産児に禁忌」という小児情報である。またこの表の出典はLexicomp・Trissel's Handbook・添付文書という二次資料であり、日本で流通する製剤の規格・添加物と一致する保証はない（当院採用品の添付文書で確認が要る）</li><li><strong>古典的な力価換算表が欠けている</strong>。「agent selection（薬剤選択）」を標題に掲げた総説でありながら、プレドニゾロン換算の等力価表、鉱質コルチコイド活性の相対比、各薬剤の血漿半減期・生物学的半減期の一覧が存在しない。RRA（100／42／9）は受容体親和性であって臨床用量の換算比ではないため、これを換算に使うと誤る。実務でヒドロコルチゾンからメチルプレドニゾロンに切り替える場面では、本総説だけでは足りない</li><li><strong>ARDSのNMA所見の扱いに一貫性がない</strong>。「等価用量のヒドロコルチゾン200〜300 mg/日は肺特異的アウトカムで劣る」と書きながら、直後に「間接比較なので仮説生成的」と留保し、さらに11節の結論では「SUCRAを実践に外挿するな」と述べる。読者がどう行動すべきかは示されない</li><li><strong>ナラティブレビューとしての方法論的な弱さ</strong>。文献選択の基準が明示されず、2名以上による独立した抽出やバイアスリスク評価もない。英語・成人限定。GRADEは「適用可能な場面で」用いたとあるが、確信度がどう決まったかの記録はない</li><li><strong>生成AIの使用</strong>。DeepSeekを文章推敲に用いたと明記されている。誠実な開示だが、数値の転記精度については読者側で原典照合が要る（上記のRECOVERYのn、引用[42]の取り違えは、その種の誤りの実例と読める）</li><li><strong>免疫抑制患者の節はほぼ全面的に同誌の別総説に依拠</strong>。Table 2 の出典は Morales-Olivera ら（Pneumonia 2026;18:12）であり、同じ雑誌の同じ年の別論文である。本総説独自の統合ではない</li></ul>
+<h3>16. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>Dequin PF ら（CAPE COD）</td><td>重症CAP 795例へのヒドロコルチゾン200 mg/日。28日死亡 6.2% vs 11.9%</td><td>N Engl J Med. 2023;388(21):1931–41</td></tr>
+<tr><td>RECOVERY Collaborative Group</td><td>入院COVID-19 6425例へのデキサメタゾン6 mg/日。人工呼吸例で28日死亡 RR 0.64</td><td>N Engl J Med. 2021;384(8):693–704</td></tr>
+<tr><td>Villar J ら（DEXA-ARDS）</td><td>中等症〜重症ARDS 277例へのデキサメタゾン20→10 mg/日。60日死亡 21% vs 36%</td><td>Lancet Respir Med. 2020;8(3):267–76</td></tr>
+<tr><td>Annane D ら（APROCCHSS）</td><td>敗血症性ショック1241例へのヒドロコルチゾン＋フルドロコルチゾン。90日死亡 43.0% vs 49.1%</td><td>N Engl J Med. 2018;378(9):809–18</td></tr>
+<tr><td>Venkatesh B ら（ADRENAL）</td><td>敗血症性ショック3800例へのヒドロコルチゾン持続。90日死亡は不変、ショック期間短縮</td><td>N Engl J Med. 2018;378(9):797–808</td></tr>
+<tr><td>Heming N ら（REMAP-CAP）</td><td>重症CAPへのヒドロコルチゾンの死亡への効果</td><td>Intensive Care Med. 2025;51(4):665–80</td></tr>
+<tr><td>Chaudhuri D ら</td><td>2024年焦点更新：敗血症・ARDS・CAPにおけるステロイド使用ガイドライン</td><td>Crit Care Med. 2024;52(5):e219–33</td></tr>
+<tr><td>Chaudhuri D ら</td><td>敗血症・ARDS・CAPにおけるステロイド関連有害事象のシステマティックレビュー</td><td>Crit Care. 2019;23(1):99</td></tr>
+<tr><td>Metlay JP ら</td><td>成人市中肺炎の診断と治療（ATS/IDSA 2019）</td><td>Am J Respir Crit Care Med. 2019</td></tr>
+<tr><td>Martin-Loeches I ら</td><td>重症市中肺炎の管理に関するERS/ESICM/ESCMID/ALATガイドライン</td><td>Intensive Care Med. 2023;49(6):615–32</td></tr>
+<tr><td>Moreno G ら</td><td>重症インフルエンザ肺炎1846例の傾向スコアマッチ。ICU死亡 HR 1.32</td><td>Intensive Care Med. 2018;44(9):1470–82</td></tr>
+<tr><td>Meduri GU ら</td><td>ARDSにおける長期グルココルチコイド治療の薬理学的原則</td><td>Intensive Care Med. 2020;46(12):2284–96</td></tr>
+<tr><td>Imai R ら</td><td>COVID-19および非COVID ARDSにおけるステロイドレジメンの用量反応NMA（28試験・6502例）</td><td>CHEST Crit Care. 2025;3(4):100207</td></tr>
+<tr><td>Morales-Olivera JA ら</td><td>免疫抑制ICU患者の肺炎におけるステロイド：リスク・証拠・実践</td><td>Pneumonia. 2026;18(1):12</td></tr>
+<tr><td>Lemiale V ら（PIC試験）</td><td>非AIDS患者の重症PJPに対する補助ステロイドの多施設二重盲検RCT</td><td>Lancet Respir Med. 2025;13(9):800–8</td></tr>
+<tr><td>Mahmoudi PS ら</td><td>敗血症性ショックにおける持続 vs 間欠投与のGRADE準拠SR・MA（14研究・2834例）</td><td>J Anesth Analg Crit Care. 2026;6(1):16</td></tr>
+<tr><td>Zhu L ら</td><td>重症CAPにおけるステロイド薬剤間のネットワークメタ解析（11 RCT・2042例）</td><td>BMC Pulm Med. 2025;25(1):210</td></tr>
+<tr><td>Teja B ら</td><td>敗血症性ショックにおけるフルドロコルチゾン＋ヒドロコルチゾン vs ヒドロコルチゾン単独のNMA（17試験）</td><td>Am J Respir Crit Care Med. 2024;209(10):1219–28</td></tr>
+<tr><td>Annane D ら（Cochrane）</td><td>小児・成人の敗血症に対するステロイド</td><td>Cochrane Database Syst Rev. 2019;2019(12)</td></tr>
+<tr><td>Xu J ら</td><td>敗血症性ショックにおけるメチルプレドニゾロン vs ヒドロコルチゾン（MIMIC-IV・1607例）</td><td>BMC Infect Dis. 2025;25(1):328</td></tr>
+<tr><td>Corral-Gudino L ら</td><td>重症COVID-19におけるメチルプレドニゾロン250 mg vs デキサメタゾン6 mg のオープンラベルRCT</td><td>Eur J Clin Invest. 2023;53(1)</td></tr>
+<tr><td>Delaleu J ら</td><td>肥満患者におけるグルココルチコイド投与量のシステマティックレビュー</td><td>Therapies. 2019;74(4):451–8</td></tr>
+<tr><td>Annane D ら</td><td>CIRCI：SCCM/ESICM合同タスクフォースによるナラティブレビュー</td><td>Crit Care Med. 2017;45(12):2089–98</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ICUのステロイドは「使うか否か」ではなく <mark class="hl">症候群ごとに薬剤・用量・期間・止め方が違う4つの別の治療</mark> として扱う。<mark class="hl">重症CAPと敗血症性ショックはヒドロコルチゾン200 mg/日を持続投与（持続は死亡同等でショック解除が多く低K・血糖変動が少ない）、COVID-19はデキサメタゾン6 mg/日を最長10日、非COVID ARDSはデキサメタゾン20 mg×5日→10 mg×5日、インフルエンザは使わない</mark>。そして <mark class="hl">開始オーダーには必ず「血糖q4〜6h・目標140〜180」「CYP3A4阻害薬の薬剤師チェック（ボリコナゾール・クラリスロマイシン併用ならメチルプレドニゾロン／デキサメタゾンを50%減量）」「筋弛緩薬持続は48時間まで」の3点をセットで乗せる</mark>。<mark class="hl">10日以内のコースは漸減不要（デキサメタゾンは半減期36〜54時間で自己漸減する）が、漸減の要否そのものは本総説の中でも記載が食い違っており未解決</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
