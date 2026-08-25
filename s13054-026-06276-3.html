@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ビタミンC・D・鉄・カルニチンをどう個別化するか — 血中低値は欠乏ではない、測るならCRPと同時に（総説・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06276-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ビタミンC・D・鉄・カルニチンをどう個別化するか — 血中低値は欠乏ではない、測るならCRPと同時に（総説・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Koekkoek KWAC, de Man AME, Amrein K, Casaer MP, Berger MM. Tailored strategies for vitamin C, D, iron, and carnitine in critical illness. Crit Care. 2026. DOI: 10.1186/s13054-026-06276-3</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-22）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06276-3" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06276-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Tailored strategies for vitamin C, D, iron, and carnitine in critical illness</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「微量栄養素の血中濃度を測るなら、必ずCRPを同時に出す」を明文化する</strong>。本総説の最大の実務メッセージがこれ。CRP が 10 mg/L を超えた時点で、銅を除くほとんどの微量栄養素の血中濃度は炎症性の再分布によって下がる。CRP を並べずに出した低値は、欠乏の証明にならない。当院の栄養関連オーダーセットに「微量栄養素 → CRP同時測定」のリンクを入れる価値がある</li><li><strong>測定の適応を「結果で治療が変わる場面」に絞る</strong>。本総説は測定コスト・保険償還・turnaround time の悪さを正面から認めたうえで、対象を①CRRT 2週間以上、②40%以上の広範囲熱傷、③1500 kcal/日に届かない経腸栄養、④創傷治癒遅延・褥瘡、⑤進行性の筋萎縮、⑥Hb 100 g/L 未満の遷延性重症病態、に限定している。当院で「なんとなくビタミンD」「なんとなく亜鉛」を出している場面を、この6条件に整理し直せる</li><li><strong>入室時チアミン 100〜300 mg/日 静注を3〜4日</strong>、および<strong>経腸・静脈にかかわらず初日から基礎量の微量栄養素を毎日カバー</strong>する、という ESPEN の2点は当院でもすぐ実装できる。本総説は「栄養開始前でも、PN用マルチ微量栄養素製剤を約5日間投与してよい」とまで踏み込んでいる</li><li><strong>敗血症急性期に鉄欠乏を「補正しない」</strong>。安全性が不確かなため、炎症が引くのを待って補正する、というのが本総説の推奨。逆に<strong>ICU退室が近づき炎症が引いた段階での静注鉄（フェリック・カルボキシマルトース 1 g、または総量 20 mg/kg）は積極的に検討</strong>してよい。ICU退室後の貧血（Hb&lt;100 g/L が退室時 53.3%）は再入室・在院日数・死亡・QOL の全てを悪化させる</li><li><strong>CRRT が2週間を超えた患者、バルプロ酸を使っている患者ではカルニチン欠乏を疑う</strong>。ただし当院で血漿遊離カルニチンを実測できるかは要確認（LC-MS/MS はリアルタイム検査として提供されないことが多い）。測れる場合、25 µmol/L 未満なら 0.5〜1 g/日から開始、というのが著者らの実務的提案（エキスパートオピニオン・RCTの裏づけなし）</li><li><strong>高用量ビタミンCは、当院では現時点で「使わない」で確定してよい</strong>。本総説が並べる LOVIT・LOVIT-COVID・VICTORY・VITaCCA の4試験すべてが害寄りで、同じ号の <span class="wl">敗血症へのメガドースビタミンCは28日死亡を変えない — ショックなし群だけ有益シグナル、乳酸2.6が分かれ目（CEMVIS・CritCare2026）</span> も全体としては完全に中立だった。用量を上げる余地も、この総説と CEMVIS の両方で塞がれた</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症患者では大多数で微量栄養素の血中濃度が低い。炎症は微量栄養素を血中から細胞内へ再分布させ、血漿蛋白の低下も蛋白結合型の微量栄養素を見かけ上下げる。ESPEN のガイドラインは全ICU患者に基礎量（DRI）を毎日投与することを推奨してきた。ビタミンC・D・セレンの小規模試験は有望だったが、大規模フェーズIII試験はことごとく再現に失敗し、時に害を示した</li><li><strong>Unknown</strong>：血中濃度は「本当の欠乏（true depletion）」と「炎症による見かけの低下（apparent depletion）」を区別できない。したがって個々の患者の実際の必要量（量・期間）は現時点で決定不能。ビタミンCの至適用量・投与期間・製剤（アスコルビン酸 vs アスコルビン酸ナトリウム）・他の微量栄養素との組み合わせ、いずれも未確定。ビタミンDのICU特異的推奨は試験規模不足で出せない。鉄は欠乏と過剰の治療域が狭い。カルニチンは低値も高値も予後不良と関連する</li><li><strong>What's new</strong>：①ビタミンCの最新2試験（VICTORY・VITaCCA）を含む主要ICU試験を一覧化し、より均質な集団（重症熱傷・心停止後）でも害寄りだったことを提示。②鉄についてヘプシジン・可溶性トランスフェリン受容体（sTfR）を軸にした「炎症が引いてから、ヘプシジン低値を狙って静注鉄」という戦略を提案。③EPaNIC バイオバンク1600例の解析から、カルニチンは <strong>24 µmol/L 未満だけでなく 50 µmol/L 超も予後不良</strong>という双方向の関連を提示し、用量探索RCTの必要性を主張。④血漿以外のマトリクス（赤血球・白血球）と機能的バイオマーカーへの移行を、EU助成の BIO-MICRO プロジェクトとして具体化</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 重症患者の微量栄養素は <strong>「血中濃度が低い＝欠乏」ではない</strong>。炎症による再分布と本当の欠乏を血漿値で区別できないことが、これまでの固定用量・固定タイミング試験がほぼ全て中立か有害に終わった根本原因であり、次に必要なのは <strong>細胞内・機能的バイオマーカーと縦断的サンプリング</strong>である。</p>
+</div>
+<ul><li>全ICU患者に<strong>基礎量（DRI）の微量栄養素を入室時から毎日</strong>カバーする。追加のモニタリングと増量は、喪失のあるハイリスク群に限定する</li><li>血中濃度は<strong>CRPと必ず同時に</strong>解釈する。<strong>CRP が 10 mg/L を超えると、銅を除くほとんどの微量栄養素の濃度が下がる</strong></li><li><strong>ビタミンC</strong>：大規模RCTは中立か有害。LOVIT（n=872）で死亡・持続的臓器障害 44.5% vs 38.5%、LOVIT-COVID（n=2590）で害の事後確率 91.4%、VICTORY（熱傷 n=238）で 40.8% vs 29.7%（P=0.06）で早期中止、VITaCCA（心停止後 n=273）で10 g群の臓器機能改善が最も乏しい。「無選別の高用量投与は効かない」か「そもそも早期介入としてビタミンCは無効」かは決着していない</li><li><strong>ビタミンD</strong>：非ICU大規模試験（VITAL・DO-HEALTH・D2D）は主要評価項目こそ陰性だが、副次解析で自己免疫・進行がん・糖尿病の抑制という一貫したシグナル。ICUではメタ解析で死亡 RR 0.78（0.62–0.97）だが、最大規模の VIOLET（n=1078）・VITDAL-ICU（n=480）はいずれも主要評価項目陰性。VITDALIZE（n=2400）の結果が2027年に出る。現時点では<strong>一般人口の推奨量（800 IU/日、上限4000 IU/日）を確保し、重度欠乏リスク（低Ca血症など）のみ精査</strong>が妥当</li><li><strong>鉄</strong>：治療域が狭い。欠乏と貧血はICU中・退室後を通じて高頻度（貧血は最大90%、退室時に Hb&lt;100 g/L が 53.3%）だが、鉄過剰とフェロトーシスによる臓器障害もある。<strong>ヘプシジン低値を目印にした標的的な静注鉄</strong>が有望。急性敗血症期の補正は推奨しない</li><li><strong>カルニチン</strong>：<strong>欠乏（&lt;24 µmol/L）も高値（&gt;50 µmol/L）も予後不良</strong>と関連。リスク因子は CRRT・腎肝機能障害・バルプロ酸・炎症・創部からの喪失・女性。用量探索RCTが必要。実務的には CRRT・バルプロ酸使用時に測定し、25 µmol/L 未満なら 0.5〜1 g/日から</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 微量栄養素という言葉と、この総説が解こうとしている問題 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>微量栄養素（micronutrients）</strong>とは、ビタミン（水溶性・脂溶性）と微量元素（trace elements：鉄・亜鉛・銅・セレンなど）の総称で、エネルギー源にはならないが、酵素の補因子として代謝・免疫・細胞機能を支える。カルニチンは厳密にはビタミンではないが、体内合成が可能でありながら重症病態では不足しうるため、ESPEN ガイドラインでは「同化ビタミン（assimilated vitamin）」として扱われる。 <strong>なぜ重症患者で問題になるか</strong>。①代謝亢進で消費が増える、②摂取が減る（絶食・経腸不耐）、③吸収が落ちる（消化管不全・薬剤相互作用）、④喪失が増える（下痢・嘔吐・CRRT・熱傷創からの滲出・腹水・胸水）、⑤大量輸液で希釈される、⑥炎症で血中から細胞内へ再分布する。 <strong>決定的な難しさ</strong>は、この6つのうち <strong>①〜④は「血中も体内貯蔵も減る＝本当の欠乏」だが、⑤⑥は「血中だけ減って体内貯蔵は変わらない＝見かけの低下」</strong>であること。そして臨床で測れるのは血漿濃度だけなので、両者を区別できない。これが本総説の出発点であり、全ての章に通底する主題である。 <strong>DRI（Dietary Reference Intakes）</strong>＝食事摂取基準。健常人向けの基礎必要量で、ICUでも「最低これは毎日入れる」の基準として使われる。<strong>RDA（recommended dietary allowance）</strong>＝推奨量、<strong>UL（upper limit）</strong>＝耐容上限量。 <strong>ヘプシジン</strong>は肝細胞が産生する鉄代謝の中心的ホルモン。細胞表面の鉄輸出蛋白フェロポーチンを減らして鉄の放出を止める。鉄が余ると上がり、鉄が足りないと下がる。同時に<strong>炎症で強く上がる（2型急性期蛋白）</strong>ため、「炎症性貧血＝ヘプシジン高値」「純粋な鉄欠乏性貧血＝ヘプシジン低値」という鑑別に使える。 <strong>フェロトーシス</strong>は鉄依存性の膜脂質過酸化によって細胞膜が破綻する、アポトーシスとは別の細胞死。敗血症・ウイルス感染・急性肺障害との関連が報告され、多臓器障害への寄与が疑われている。抑制側にはセレン（グルタチオンペルオキシダーゼ4＝GPX4を介する）、コエンザイムQ10、ビタミンKが関わる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>微量栄養素は抗酸化・免疫・代謝の役割を持ち、重症病態で生命維持に不可欠である</li><li>全身の微量栄養素の状態は、代謝亢進・摂取と吸収の低下・喪失増加によって大きく損なわれうる</li><li>現時点で微量栄養素の状態を推定できるのは血漿濃度のみ。大多数の重症患者で低下するが、組織濃度を正確に反映しない</li><li>近年、多数の微量栄養素試験が実施されたが、正確でタイムリーなモニタリング手段がないため、研究者は<strong>固定用量・固定タイミングのレジメン</strong>を採用せざるを得なかった。これは現行の臨床実践を反映したものでもある</li><li>ビタミンC・D・セレンなどの小規模試験は繰り返し有望な結果を示したが、<strong>より大規模なフェーズIII試験は一貫して先行する陽性結果の確認に失敗し、時に有害性を示した</strong></li><li>著者らは「エビデンスの集積を踏まえると、現在のアプローチは厳格な再考を要する」と述べる</li><li>本総説の目的は、高い関心を集めている4つ（ビタミンC・ビタミンD・鉄）と、あまり知られていないカルニチンについて、最近の知見を報告すること</li><li>4つを通じて、<strong>血中濃度の解釈・モニタリング要件・個別化治療という、より広い問題</strong>を照らし出すという構成をとる</li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：エキスパート・ナラティブレビュー</li><li><strong>文献の同定</strong>：PubMed、Cochrane Library、Web of Science の主要論文を<strong>手作業でスクリーニング</strong>。加えてランドマーク論文と、著者らが既に知っていた文献</li><li><strong>明示されていないもの</strong>：検索式、検索期間、選択・除外基準、複数レビュアーによる選定、バイアスリスク評価、GRADE 等のエビデンス確実性評価。系統的レビューではないことを著者自身が明示している</li></ul>
+<h3>4. Figure 1 — 血漿微量栄養素濃度を左右する6因子</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>図の実体について 本PDFは Accepted manuscript（未編集版）であり、<strong>Figure 1・Figure 2 の画像は本文PDFに埋め込まれていない</strong>（図の凡例のみが巻末に収載されている）。以下は凡例の全訳であり、図そのものは正式版の公開を待つ必要がある。</p>
+</div>
+<p><strong>Figure 1. 重症患者の血漿微量栄養素濃度に影響するものは何か</strong>（Biorender で作成、Marino らの報告に基づく）</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>因子</th><th>内容</th><th>血漿濃度</th><th>体内貯蔵</th><th>解釈</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>摂取の低下</td><td>入院前からの低栄養、または現在の栄養療法が不十分</td><td>↓</td><td>↓</td><td>真の欠乏</td></tr>
+<tr><td>2</td><td>吸収の低下</td><td>消化管不全、薬剤・栄養素相互作用</td><td>↓</td><td>↓</td><td>真の欠乏</td></tr>
+<tr><td>3</td><td>喪失の増加</td><td>消化管（嘔吐・下痢）、腎（過剰クリアランスまたはRRT）、（広範囲熱傷）創部滲出、腹水、胸水</td><td>↓</td><td>↓</td><td>真の欠乏</td></tr>
+<tr><td>4</td><td>希釈</td><td>（積極的な）輸液蘇生</td><td>↓</td><td>↔</td><td>見かけの変化</td></tr>
+<tr><td>5</td><td>需要の増加</td><td>炎症細胞による消費、全身の代謝亢進状態</td><td>↓</td><td>↓</td><td>真の欠乏</td></tr>
+<tr><td>6</td><td>炎症による再分布</td><td>炎症シグナルによる細胞内への移動、血漿蛋白低下による蛋白結合型の低下</td><td>↓</td><td>↔</td><td>見かけの変化</td></tr>
+</tbody></table></div>
+<p>この表が本総説の背骨である。<strong>同じ「低値」でも、1・2・3・5なら足すべきで、4・6なら足すべきとは限らない。そして血漿値だけではどちらか分からない。</strong></p>
+<h3>5. ビタミンC</h3>
+<h4>5-1. 生理的役割と標準必要量</h4>
+<ul><li>体内では主に<strong>アスコルビン酸塩（ascorbate）</strong>として存在する水溶性栄養素</li><li>機能：抗酸化・抗炎症防御機構の最適化、<strong>ノルアドレナリンとコラーゲンの合成調節</strong>、微小循環血流の回復、アポトーシスの抑制、虚血再灌流障害の軽減</li><li>ヒトは合成できないため、健常成人で<strong>1日約90〜100 mg</strong>の食事摂取が必要</li><li><strong>重症病態における至適用量は不明</strong></li></ul>
+<h4>5-2. 重症病態での動態 — なぜ「低値＝欠乏」と言えないか</h4>
+<ul><li>重症患者では血漿濃度が<strong>正常値の90%減</strong>まで低下しうる</li><li>しかし重症患者は「真の枯渇」「見かけの枯渇」の<strong>どちらも、または両方</strong>を起こしうる</li><li>ビタミンC欠乏の臨床症状と代謝的影響は、基礎にある病態そのものの症状と区別しがたい。<strong>したがって欠乏の診断は実行不可能</strong>というのが著者らの評価</li></ul>
+<h4>5-3. 測定の落とし穴</h4>
+<div class="tw"><table>
+<thead><tr><th>測定法</th><th>位置づけ</th><th>問題点</th></tr></thead>
+<tbody>
+<tr><td>血漿ビタミンC濃度</td><td>現在唯一の実用手段</td><td>turnaround time が長い。すべての重症患者は程度の差はあれ炎症を持つため、<strong>見かけの枯渇しか反映しない可能性</strong></td></tr>
+<tr><td>白血球中ビタミンC</td><td>より機能的な微量栄養素の状態を反映しうる</td><td>敗血症患者で血漿は著明に低下したが<strong>白血球濃度は不変</strong>だった（Carr 2021）。小規模研究のみ。検体処理が非常に煩雑</td></tr>
+<tr><td>赤血球中ビタミンC</td><td>同上</td><td>敗血症患者で<strong>低下したが低下の程度は血漿より軽い</strong>。小規模研究のみ、処理が煩雑</td></tr>
+<tr><td>POC 酸化還元電位（ORP）測定</td><td>ビタミンC枯渇のスクリーニング法として有望</td><td>エビデンスが限られ、臨床では未実装。<strong>セレンやビタミンEなど他の抗酸化微量栄養素の状態にも影響される</strong>ため解釈に注意</td></tr>
+</tbody></table></div>
+<p>この「血漿は9割下がるのに白血球は下がらない」という所見こそ、再分布と欠乏を混同してきたことの直接的な証拠になっている。</p>
+<h4>5-4. 主要RCT — Table 1（ビタミンCの部）</h4>
+<p>前臨床研究と初期の臨床試験は、敗血症・虚血再灌流障害・外傷・熱傷で有望な結果を報告した。しかしその後の大規模RCTは利益を確認できず、<strong>敗血症とCOVID-19の2つのフェーズIII試験はむしろ害を示唆</strong>した（28日時点の死亡または持続的臓器障害のリスク上昇）。ただし<strong>腎代替療法の必要性やステージ3腎不全の発生には有意差はなかった</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年・n・国</th><th>対象・介入・主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td><strong>CITRIS-ALI</strong>、2019、n=167、米国</td><td>24時間以内に発症した敗血症＋ARDS。ビタミンC静注またはプラセボを6時間ごと96時間。PE：96時間の修正SOFAスコア変化（副次：死亡）</td><td>初報では ΔmSOFA に差なし（2020年に再計算され有意として公表）。<strong>28日死亡が16%低下</strong></td></tr>
+<tr><td><strong>LOVIT</strong>、2022、n=872、カナダ</td><td>敗血症性ショック。ビタミンC 50 mg/kg を6時間ごと最大96時間。PE：死亡または持続的臓器障害の複合</td><td>28日時点の死亡または持続的臓器障害が<strong>ビタミンC群 44.5% vs プラセボ群 38.5%</strong>でビタミンC群が高い</td></tr>
+<tr><td><strong>LOVIT-COVID</strong>、2023、n=2590、4大陸</td><td>ICUおよび一般病棟のCOVID-19入院患者。ビタミンC 50 mg/kg を6時間ごと最大96時間。多施設RCT。PE：死亡または持続的臓器障害の複合</td><td>事後確率は<strong>有効性 8.6%、有害性 91.4%、無益性 99.9%</strong></td></tr>
+<tr><td><strong>VITaCCA</strong>、2026、n=273、オランダ</td><td>心停止後・初期波形がショック可能・GCS ≤8。ビタミンC 3 g/日静注、10 g/日静注、またはプラセボを最大96時間。PE：96時間のR-SOFA（蘇生-SOFA）スコア変化</td><td>96時間のR-SOFA変化の平均（SD）は<strong>プラセボ −3.2（5.7）、3 g群 −2.3（7.4）、10 g群 −0.8（7.6）、群間差 P=0.04</strong>（数値が小さいほど改善が乏しい＝10 g群が最も改善しなかった）</td></tr>
+<tr><td><strong>VICTORY</strong>、2026、n=238、24熱傷センター（南北中米・欧州・アジア）</td><td>18歳以上、体表面積20%超のII度深達性またはIII度熱傷で植皮を要する。ビタミンC 50 mg/kg を6時間ごと最大96時間。PE：28日死亡と持続的臓器障害の複合</td><td>主要複合アウトカムは<strong>ビタミンC群 40.8% vs プラセボ群 29.7%、P=0.06</strong>。中間解析で無益性／有害性の閾値を越え<strong>早期中止</strong></td></tr>
+</tbody></table></div>
+<p>著者らは VICTORY について「ビタミンC群で28日死亡と持続的臓器障害が高かった（P = 0.06）」と本文に記載し、VITaCCA について「臓器機能の改善がプラセボより乏しく、<strong>その効果は10 g群で最も顕著</strong>だった」とまとめている。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>VITAMINS試験の位置づけ 引用[10]の <strong>VITAMINS 試験</strong>（Fujii 2020、JAMA 323(5):423-431）は、敗血症性ショックに対し「ビタミンC＋ヒドロコルチゾン＋チアミン」を「ヒドロコルチゾン単独」と比較し、<strong>生存かつ昇圧薬不要である時間</strong>を主要評価項目とした多施設RCTである。本総説は「その後のより大規模なRCTは利益を確認できなかった[10]」という文脈で引用しており、<strong>Table 1 には収載していない</strong>。理由は明示されていないが、他の5試験がビタミンC単剤 vs プラセボであるのに対し VITAMINS は3剤カクテル vs ステロイド単剤という設計であり、ビタミンC単剤の効果を分離できないためと読める。既存ノート <span class="wl">重症敗血症へのビタミンC・ヒドロコルチゾン・チアミン Marik（Chest2016）</span> の Marik プロトコルを否定した試験として、JCでは別枠で扱うのが妥当。</p>
+</div>
+<h4>5-5. 著者らが挙げる5つの未解決点</h4>
+<p><strong>第1：血漿濃度と組織濃度の関係が不明</strong>。おそらく患者ごとに異なり、今後の試験にとって決定的である。血漿ビタミンC濃度が著明に低いことは検査データで一貫して示されているにもかかわらず、<strong>異なる患者集団に無選別で高用量を投与する方法は無効に見える</strong>。</p>
+<p><strong>第2：至適な投与期間が不明</strong>。ほとんどの試験で4〜7日間投与されたが、これが全患者にとって最善とは限らない。</p>
+<ul><li><strong>短すぎるとリバウンド効果</strong>を招きうる（Hemilä らによる LOVIT の二次解析：ICU患者からのビタミンC突然中止が死亡を増やしうる）</li><li><strong>長すぎると、活性酸素種（ROS）が担う生理的シグナル伝達と修復機能を妨げる</strong>可能性</li><li>酸化ストレス・炎症・代謝需要は重症病態の経過で動的に変化するため、微量栄養素は<strong>特定の病期にのみ有益</strong>である可能性がある</li><li>酸化ストレス・炎症・ビタミンC濃度／機能活性のPOC測定が、投与タイミングの精緻化と個別化された投与期間の設定に役立つかもしれない</li></ul>
+<p><strong>第3：至適用量が未決定</strong>。用量設定研究がほとんど存在しない。</p>
+<ul><li>de Grooth らの薬物動態試験（Chest 2018）では、<strong>2 g の静注ボーラスを1日2回で血漿濃度を正常域に回復</strong>でき、<strong>10 g ボーラスは超正常濃度</strong>をもたらした</li><li>したがって、これまでの投与レジメンは至適でなかった可能性がある</li><li><strong>より低用量も、より高用量（メガドースも含む）も検討に値し</strong>、至適用量はおそらく患者ごとに異なる</li><li>ガイドラインが述べるように基礎必要量を満たすことが好ましいかもしれないが、<strong>その「基礎必要量」の量自体が分かっていない</strong></li><li>前臨床データはメガドースが有益効果を生む可能性を示唆するが、臨床では小規模パイロット試験（Yanase 2023、Crit Care）でしか検証されていない</li></ul>
+<p><strong>第4：使用すべき生化学的製剤が不明</strong>。</p>
+<ul><li><strong>アスコルビン酸の pH は 5.4〜5.6</strong>、<strong>アスコルビン酸ナトリウムの pH は 6.5〜7.2</strong></li><li>ほとんどの試験がアスコルビン酸を使用しており、既に低下している pH をさらに下げた可能性がある</li><li>ただしこの pH への影響が臨床的に問題になるのは、<strong>通常用いられる ≤0.2 g/kg ではなく、&gt;1 g/kg のはるかに高い「メガ」用量</strong>の場合だろう、と著者らは留保している</li></ul>
+<p><strong>第5：他の微量栄養素との至適な組み合わせが未探索</strong>。ビタミンC単剤では不十分かもしれない。微量栄養素は複雑に相互作用しており、<strong>緊密に相互連結した代謝ネットワークの1成分だけを投与することは治療効果を制限しうる</strong>。</p>
+<h4>5-6. 高用量ビタミンCの安全性 — シュウ酸腎症</h4>
+<ul><li>一部の腫瘍学フェーズI・II試験では、<strong>長期間・超高用量の静注ビタミンC</strong>が用いられている</li><li><strong>ビタミンCはシュウ酸に代謝される</strong>ため、<strong>シュウ酸腎症（oxalate nephropathy）</strong>のリスクがある</li><li><strong>透析を要する急性腎障害の報告</strong>があり、急性・慢性腎臓病など腎予備能が低下した患者では念頭に置くべきである</li></ul>
+<h4>5-7. CEMVIS（同じ号の対になる論文）との突き合わせ</h4>
+<p>本総説は 2026年8月16日 accept、<span class="wl">敗血症へのメガドースビタミンCは28日死亡を変えない — ショックなし群だけ有益シグナル、乳酸2.6が分かれ目（CEMVIS・CritCare2026）</span> は同年8月18日 accept で、<strong>本総説は CEMVIS を引用していない</strong>。したがって両者は「独立に同じ結論に到達した2本」として読める。整合性は以下のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>本総説の主張</th><th>CEMVIS の結果</th><th>整合するか</th></tr></thead>
+<tbody>
+<tr><td>無選別の高用量ビタミンC投与は効かない</td><td>敗血症231例で28日死亡 30.7% vs 31.0%、OR 0.99（0.56–1.74）、p=0.97。副次アウトカムも全て陰性</td><td><strong>完全に整合</strong>。CEMVIS は「無選別・固定用量・固定期間」の典型例であり、本総説の予測どおり中立</td></tr>
+<tr><td>至適用量は未決定で、より高用量（メガドース）も検討に値する</td><td>メガドース＝<strong>24 g/日（12 gを12時間ごと）を4日間</strong>という臨床試験としては最大級の用量を投与し、それでも全体では何も動かなかった</td><td><strong>本総説の「余地」を CEMVIS が実測で潰した</strong>。総説は「メガドースは前臨床で有望、臨床では小規模パイロットのみ」と書いているが、CEMVIS がその空白を埋め、否定的な答えを出した</td></tr>
+<tr><td>製剤の pH が問題になるのは &gt;1 g/kg のメガ用量のとき</td><td>CEMVIS の製剤 pH は 6.8〜7.2（アスコルビン酸ナトリウムに近い）。24 g/日は70 kgで約0.34 g/kg。pH の問題は起きなかったが、代わりに<strong>高Na血症（155 mmol/L超）が 35.1% vs 20.5% と有意に増加</strong></td><td><strong>総説が見落としていた軸</strong>。総説は pH ばかり論じてナトリウム負荷に触れていない。製剤選択の議論には「pH を上げると Na が増える」というトレードオフを加えるべき</td></tr>
+<tr><td>集団の異質性が中立結果の一因かもしれない</td><td>事前規定サブグループで<strong>ショックの有無に有意な交互作用（P=0.026、交互作用HR 3.32［1.10–9.96］）</strong>。非ショック群 OR 0.35（0.12–1.02）、ショック群 OR 1.52（0.75–3.08）。ベースライン乳酸のRCS解析で<strong>2.6 mmol/L 付近を境に有益から有害へ反転</strong>（交互作用 P=0.03）</td><td><strong>本総説の「フェノタイプ・軌跡に基づく戦略へ移行すべき」という提言に、具体的な候補軸を1本与えた</strong>。総説は BIO-MICRO 的なバイオマーカー開発を提案するが、CEMVIS は「ショックの有無／乳酸値」というベッドサイドで即座に得られる層別化因子を提示している</td></tr>
+<tr><td>VITaCCA では10 g群で臓器機能改善が最も乏しかった</td><td>CEMVIS の乳酸RCS解析は、乳酸が高いほど害へ振れることを示す。心停止後患者はベースライン乳酸が高い集団である</td><td><strong>相互に補強</strong>。「重症ショック・高乳酸状態での高用量ビタミンCは支持されない」という一点で、独立した2試験が一致する</td></tr>
+<tr><td>LOVIT（ショックのみ・害）と CITRIS-ALI（非ショックを含む・死亡低下の示唆）の食い違い</td><td>CEMVIS はこの食い違いを「ショックの有無」という一本の軸で説明できると主張。しかも<strong>ショックの有無を層別因子として事前に組み込んでいた</strong></td><td><strong>本総説の Table 1 が並べただけで説明していない矛盾に、CEMVIS が仮説を与えた</strong>。ただし多重性未調整であり、著者自身が仮説生成的と釘を刺している</td></tr>
+</tbody></table></div>
+<p><strong>結論として、両論文は同じ方向を向いている</strong>。本総説は「無選別・固定用量では駄目だ、フェノタイプで層別化せよ」と言い、CEMVIS は「実際に最大級の用量で無選別にやったが駄目だった、層別化するならショックの有無／乳酸2.6が候補だ」と言っている。JCでは<strong>この2本を並べて「総説が語る方法論の問題が、同じ号の実測データで実演されている」</strong>という構成にするのが最も有効である。</p>
+<h3>6. ビタミンD</h3>
+<h4>6-1. 生理的役割と標準必要量</h4>
+<ul><li>健常人への推奨摂取量は <strong>600〜800 IU/日</strong>。ICUではこれが標準的な栄養で満たされず、補充もされないことが多い</li><li><strong>最大の供給源である日光が ICU には無い</strong></li><li>静注製剤の入手性が限られるため経腸製剤に依存するが、<strong>経腸製剤の吸収は一定しない</strong></li><li>近年のICUガイドラインは推奨がまちまち</li><li><strong>2024年 Endocrine Society ガイドライン</strong>は、以下の群では<strong>事前の血液検査なしに RDA を超える摂取</strong>を提案している：</li><li>18歳未満の小児・思春期、および75歳超の高齢者</li><li>糖尿病予備群（prediabetes）、および妊娠中</li><li>骨の健康にビタミンDが不可欠であることに疑いはなく、<strong>ICUサバイバーでも骨折が問題</strong>になることが示されている。骨粗鬆症治療のあらゆる選択肢は、十分なビタミンD・カルシウム・蛋白の摂取を前提とする</li><li>ANZICS グループが <strong>BONE ZONE 試験</strong>（重症成人におけるゾレドロン酸またはデノスマブによる骨量減少予防）を現在リクルート中</li></ul>
+<h4>6-2. 重症病態での動態</h4>
+<ul><li><strong>ビタミンD欠乏の定義：25-ヒドロキシビタミンD、25(OH)D &lt; 20 ng/mL（&lt; 50 nmol/L）</strong></li><li>健常一般人口でも高頻度であり、重症病態ではさらに高頻度</li><li>低ビタミンD値は成人・小児いずれのICU集団でも、死亡を含む転帰の悪化と関連する</li><li>転帰不良を説明する仮説：低値は<strong>血糖調節異常、敗血症、院内感染、筋骨格系の健康障害、自然免疫・獲得免疫の両方の機能障害（カテリシジン産生低下を含む）</strong>のリスク因子である</li></ul>
+<h4>6-3. 測定の落とし穴</h4>
+<ul><li><strong>血清または血漿の総25(OH)D</strong> が確立したバイオマーカー</li><li><strong>高性能 LC-MS/MS が分析のゴールドスタンダード</strong></li><li>炎症が血漿ビタミンDに与える影響のデータは限られ、真の影響は不明のまま。<strong>ただし炎症による低下は存在するものの、大半の他の微量栄養素より程度は軽い</strong>とされる — これがビタミンDを他の3つと分ける重要な違い</li></ul>
+<h4>6-4. 主要RCT</h4>
+<p><strong>（a）非ICU集団の大規模試験（Supplemental Table 1）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験・年・n・国</th><th>対象・介入・主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td><strong>VITAL</strong>、2018、n=25,871、米国</td><td>50/55歳超の成人。2×2要因デザイン4群：ビタミンD3 2000 IU/日、オメガ3 PUFA 1 g/日（最大800 IU/日の自己摂取は許容）。PE：新規心血管イベントまたはがん</td><td>ベースラインの25(OH)Dは測定せず。<strong>PE 陰性</strong>。副次解析：自己免疫の低下、進行がん・致死的がんの低下、糖尿病の低下</td></tr>
+<tr><td><strong>DO-HEALTH</strong>、2020、n=2157、欧州5か国（スイス・仏・独・ポルトガル・オーストリア）</td><td>70歳超の成人。2×2×2要因デザイン8群：ビタミンD3 2000 IU/日、オメガ3 1 g/日、筋力トレーニングプログラム。PE：6項目（収縮期・拡張期血圧、SPPB、MoCA、3年間の非椎体骨折発生率・感染症発生率）</td><td><strong>PE 陰性</strong>。副次解析：自己免疫の低下、進行がん・致死的がんの低下、（プレ）フレイルの低下</td></tr>
+<tr><td><strong>D2D（Pittas ら）</strong>、2019、n=2423、米国</td><td>糖尿病予備群（3基準中2つを満たす）の成人。ビタミンD 4000 IU/日またはプラセボ、2年間。PE：新規糖尿病発症</td><td><strong>PE 陰性</strong>。ただし同様の小規模試験2本では糖尿病発症の有意な減少あり</td></tr>
+</tbody></table></div>
+<ul><li>著者らはこれらについて「<strong>小さいが臨床的に意味のある利益</strong>が（前）糖尿病・進行がん・自己免疫で示され、興味深いことに <strong>BMI との交互作用</strong>がある」と評価している</li><li><strong>UK Biobank の実世界データ</strong>：ビタミンDサプリメント使用者は非使用者に比べ、<strong>がん死亡 11%、心血管疾患死亡 11%、呼吸器疾患死亡 29% 低下</strong>（有意）</li></ul>
+<p><strong>（b）ICU試験（Table 1）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験・年・n・国</th><th>対象・介入・主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td><strong>VITDAL-ICU</strong>、2014、n=480、オーストリア</td><td>25(OH)D &lt; 20 ng/mL（50 nmol/L）。経腸コレカルシフェロール <strong>540,000 IU 単回</strong>、その後 90,000 IU 毎月 vs プラセボ。PE：在院日数</td><td><strong>PE 有意差なし</strong>。事前規定サブグループの<strong>重度欠乏（&lt;12 ng/mL）では死亡が有意かつ相当程度に低下</strong></td></tr>
+<tr><td><strong>VIOLET</strong>、2019、n=1078、米国</td><td>25(OH)D &lt; 20 ng/mL の重症患者。経腸コレカルシフェロール <strong>540,000 IU 単回</strong> vs プラセボ。PE：90日全死亡（全場所）、在院日数</td><td><strong>主要評価項目の90日死亡に有意差なし</strong>。<strong>目標3000例に対し最初の中間解析で早期中止</strong></td></tr>
+<tr><td><strong>VITDALIZE</strong>、n=2400、オーストリア・ベルギー・ドイツ・英国</td><td>25(OH)D &lt; 20 ng/mL。経腸コレカルシフェロール 540,000 IU 単回、その後 90,000 IU 毎月 vs プラセボ（最大800 IU/日の併用は許容）。PE：28日死亡</td><td><strong>リクルート完了、初回結果は2027年に予定</strong>（本文では2026年中にリクルート終了と記載）</td></tr>
+<tr><td><strong>VITDALIZE-KIDS</strong>、n=766、カナダ</td><td>修正在胎37週超の新生児から18歳未満の重症小児。25(OH)D &lt; 50 nmol/L。経腸コレカルシフェロール <strong>10,000 IU/kg 単回（最大400,000 IU）</strong> vs プラセボ。PE：28日時点のHRQL</td><td><strong>資金問題により早期終了</strong>。解析継続中で結果未公表</td></tr>
+</tbody></table></div>
+<p><strong>（c）メタ解析（Menger ら、Crit Care 2022）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>研究数</th><th>効果量</th><th>95%CI</th><th>P</th><th>I²</th><th>n</th></tr></thead>
+<tbody>
+<tr><td>全死亡（特に非経口投与時）</td><td>16</td><td>RR <strong>0.78</strong></td><td>0.62–0.97</td><td>0.03</td><td>30%</td><td>—</td></tr>
+<tr><td>ICU在室日数</td><td>12</td><td>平均差 <strong>−3.13日</strong></td><td>−5.36 〜 −0.89</td><td>0.006</td><td>70%</td><td>1250</td></tr>
+<tr><td>人工呼吸期間</td><td>9</td><td>平均差 <strong>−5.07日</strong></td><td>−7.42 〜 −2.73</td><td>&lt;0.0001</td><td>54%</td><td>572</td></tr>
+</tbody></table></div>
+<h4>6-5. 投与経路と製剤</h4>
+<ul><li><strong>最大規模の試験はすべて経腸ビタミンDを使用</strong>している。非経口製剤は容易に入手できず、出血・感染の懸念からも制限される</li><li>用いられた代謝物は典型的には<strong>コレカルシフェロール（天然型）</strong>。活性型の追加使用は研究対象として興味深いが、<strong>高カルシウム血症のリスクがより大きい</strong></li><li>高用量ビタミンDは「数日以内に正常値に戻す」ことを目指し、大きな初回ローディングを要する設計が近年ICUで試されてきた。しかし<strong>異化亢進のため、この方法は重症病態以外では既に放棄されている</strong></li><li><strong>高い初回ローディングが本当に必要かは不明</strong>。<strong>10,000 IU から開始する実務的アプローチで数日以内に血中濃度を補正できる</strong>ことが示されている</li></ul>
+<h4>6-6. 推奨される投与量と対象</h4>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>ビタミンDの現時点の実務的立場</p>
+<ul><li>非重症患者の研究は、代謝・骨・免疫学的エンドポイントに<strong>小さいが意味のある利益</strong>を示唆する</li><li>メタ解析は利益方向のシグナルを示唆するが、<strong>異質性が高く、試験規模が限られ、ICU特異的な確固たる推奨を出す前に十分な検出力を持つ試験が必要</strong></li><li>現時点で妥当なのは：<strong>①ICU患者に一般人口向けの推奨量（800 IU/日＝RDA、上限4000 IU/日＝UL）を、追加検査なしに確実に投与する。②重度欠乏のリスクがある患者（低カルシウム血症など）を同定し、診断的精査と高用量投与を検討する</strong> — リスクが低くコストも低いことを踏まえて</li><li>成人・小児の最大規模RCT である <strong>VITDALIZE と VITDALIZE-KIDS</strong> が、ICUにおける高用量ビタミンDによる欠乏の急速補正について答えを出すはずである</li></ul>
+</div>
+<h3>7. 鉄</h3>
+<h4>7-1. 生理的役割と標準必要量</h4>
+<ul><li>鉄欠乏（iron deficiency, ID）は重症患者で高頻度であり、<strong>入室前から ID を持っている可能性が高い</strong>。ID は<strong>世界で20億人超が罹患する主要な健康問題</strong>である</li><li>最もよく知られた機能：<strong>赤血球（RBC）産生と全身組織への酸素運搬</strong></li><li>その他の必須の役割：<strong>DNA合成、電子伝達、レドックス恒常性、複数の金属蛋白の構造、炎症過程、自然免疫応答</strong></li><li><strong>標準投与量</strong>：</li><li><strong>経腸栄養（EN）：18〜30 mg/日</strong></li><li><strong>静脈栄養（PN）：元素鉄として少なくとも 1 mg/日</strong>。この用量を提供する多微量元素製剤が入手できない場合、同等量を定期的に別途点滴で投与してよい</li><li><strong>鉄過剰状態では、反復瀉血（venesection）により貯蔵鉄を減らす</strong></li></ul>
+<h4>7-2. 重症病態での動態 — 欠乏と過剰の両端</h4>
+<p><strong>欠乏側</strong></p>
+<ul><li>状態の異常のうち欠乏が最も頻度が高いが、スペクトラムは「少なすぎ」から「多すぎ」まで広い</li><li><strong>欠乏は進行性の状態であり、古典的な貧血が現れるはるか前から存在する</strong>。非貧血性鉄欠乏の早期段階で既に<strong>心臓などの臓器に悪影響</strong>が出る</li><li>欠乏が進むと貧血が出現し、<strong>ICU患者の最大90%が貧血、15〜35%が輸血を要する</strong></li><li>鉄に関連する貧血の主要2病態：</li></ul>
+<ol><li><strong>鉄欠乏性貧血</strong>：ICU患者の <strong>20〜40%</strong>。主因は出血・失血と<strong>採血（phlebotomy）</strong></li><li><strong>炎症性貧血</strong>（旧称：慢性疾患の貧血）：<strong>鉄がマクロファージ内に貯留し、鉄欠乏性赤血球造血をもたらす</strong></li></ol>
+<ul><li><strong>ICU退室時に Hb &lt; 100 g/L が最大 53.3%</strong> の患者に存在し、退院時、さらに<strong>最大12か月間持続</strong>する</li><li><strong>ICU退室後の貧血は、ICU再入室率の上昇・在院日数の延長・死亡率の上昇・QOLの低下と相関</strong>する</li></ul>
+<p><strong>過剰側</strong></p>
+<ul><li>鉄過剰も臓器障害を起こす。原因は<strong>無効造血、複数回の赤血球輸血、疾患特異的な治療</strong>であり、最終的に<strong>フェロトーシス</strong>に至る</li><li>フェロトーシス＝鉄依存性の膜脂質過酸化により細胞膜が破綻して起こる非アポトーシス性の細胞死</li><li>フェロトーシスの抑制因子のうち<strong>セレンが GPX4（グルタチオンペルオキシダーゼ4）を介して主要な役割</strong>を果たす。<strong>細胞質および ミトコンドリアの GPX4 が予防に必須</strong>であり、<strong>コエンザイムQ10とビタミンK</strong>も寄与する</li><li>フェロトーシスは<strong>敗血症・ウイルス感染・急性肺障害</strong>と関連づけられ、重症患者の多臓器障害に寄与しうる</li><li>もう一つの鉄過剰は<strong>ヘモクロマトーシス</strong>：ヘプシジン合成の調節が障害される遺伝性疾患。<strong>HFE遺伝子（haemostatic iron regulator）のホモ接合変異が95%</strong>を占め、<strong>北欧系の150〜220人に1人</strong>が罹患。<strong>血清トランスフェリン上昇、トランスフェリン飽和度 &gt;45%、MCHC・MCV の上昇がフェリチン上昇に先行する</strong></li></ul>
+<h4>7-3. 測定の落とし穴 — Table 2</h4>
+<p><strong>Table 2. 成人の鉄の状態を評価する検査項目（血液・骨髄）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>古典的な基準範囲</th><th>欠乏での変化</th><th>炎症の影響</th><th>コメント</th></tr></thead>
+<tbody>
+<tr><td>血漿鉄</td><td>男 12.5〜25.1 μmol/L／女 10.7〜21.4 μmol/L</td><td>低下</td><td>あり（強い）</td><td>炎症の影響が強いが、変化は依然として解釈可能で有用。循環鉄を定量する</td></tr>
+<tr><td>ヘモグロビン</td><td>男 135〜175 g/L／女 120〜155 g/L</td><td>進行性に低下</td><td>変化なし</td><td><strong>輸液蘇生による希釈で、鉄欠乏がなくても値が下がりうる</strong></td></tr>
+<tr><td>MCV</td><td>80〜100 fL</td><td>小球性</td><td>—</td><td><strong>出血による急性貧血では MCV が正常のままのことがある</strong></td></tr>
+<tr><td>トランスフェリン</td><td>24.7〜44.4 μmol/L</td><td>上昇</td><td>あり</td><td>上昇は必要量に比例する。半減期8〜10日。健常では<strong>トランスフェリンの3分の1しか鉄で飽和しておらず、67%の余剰結合能</strong>がある</td></tr>
+<tr><td>トランスフェリン飽和度</td><td>男 20〜40%／女 15〜35%</td><td>低下</td><td>あり</td><td>血漿鉄／TIBC × 100 の比</td></tr>
+<tr><td>TIBC（総鉄結合能）</td><td>250〜370 μg/dL（45〜66 μmol/L）</td><td>上昇</td><td>あり</td><td>血液がトランスフェリンで鉄を結合しうる能力を測る</td></tr>
+<tr><td>フェリチン</td><td>男 30〜400 μg/L／女 15〜150 μg/L</td><td>低下</td><td><strong>欠乏があっても上昇する</strong></td><td>炎症がなければ貯蔵鉄量を示す</td></tr>
+<tr><td><strong>ヘプシジン</strong></td><td>10.40〜14.47 ng/mL</td><td>低下</td><td>上昇するが<strong>変化は軽度</strong></td><td>鉄代謝を調節する。<strong>炎症が強い患者では他の方法より優れる</strong></td></tr>
+<tr><td><strong>sTfR（可溶性トランスフェリン受容体）</strong></td><td>0.76〜1.76 mg/L</td><td>上昇</td><td><strong>変化なし</strong></td><td>機能的な状態を示す。<strong>炎症が強い患者では他の方法より優れる</strong></td></tr>
+<tr><td>葉酸</td><td>8.8〜60.8 nmol/L</td><td>低下</td><td>変化なし</td><td>大球性貧血のときに検索</td></tr>
+<tr><td>ビタミンB12</td><td>145〜569 pmol/L</td><td>低下</td><td>影響あり</td><td>大球性貧血のときに検索</td></tr>
+<tr><td>骨髄鉄（ヘモジデリン）</td><td>不可視または小点状</td><td>消失</td><td>変化なし</td><td>ヘモジデリンは部分消化されたフェリチンとリソソームからなる鉄貯蔵複合体。マクロファージ内に見られ、出血後に特に豊富</td></tr>
+</tbody></table></div>
+<p><strong>ヘプシジンと sTfR が鍵になる理由</strong></p>
+<ul><li>ヘプシジンは<strong>2001年に同定され、肝細胞が合成</strong>する。<strong>鉄輸出蛋白フェロポーチン</strong>の量を調節し、鉄過剰時には転写が誘導されてフェロポーチンを減らし鉄の利用可能性を下げる。逆に鉄需要増加や鉄不足ではヘプシジンが低下して鉄の利用性を高める</li><li>ヘプシジンの発現は<strong>炎症と強く結びつき、炎症で上方調節される</strong>。<strong>2型急性期蛋白</strong>とみなされ、入院患者における低鉄血症と炎症性貧血の発生に関与する</li><li><strong>大多数のICU患者は「混合型貧血」</strong>で、炎症が優位（ヘプシジン高値・エリスロポエチン高値・鉄高値、造血が制限される）。一部は<strong>純粋な鉄欠乏性貧血（ヘプシジン低値）</strong></li><li><strong>炎症性貧血の診断</strong>：正球性・正色素性貧血、<strong>sTfR 正常</strong>、<strong>フェリチンとヘプシジンの上昇</strong>。この非鉄欠乏型は<strong>ICU入室から8日以内に発症</strong>する</li><li><strong>鉄欠乏性貧血の診断</strong>：小球性・低色素性貧血、<strong>sTfR 上昇</strong>、<strong>フェリチンとヘプシジンの低下</strong></li><li><strong>ヘプシジン低値はICU死亡と関連</strong>し、<strong>鉄療法への反応性を予測</strong>する。有用性が証明されているにもかかわらず、ヘプシジン測定は依然として広く利用可能ではない</li><li>追加検査：<strong>肝生検</strong>（反復輸血患者の過剰検出。<strong>正常上限は肝乾燥重量1 gあたり鉄2 mg</strong>）、<strong>MRI T2\</strong>*（心臓・肝臓・脾臓・膵臓を中心とした臓器鉄負荷の評価）</li></ul>
+<h4>7-4. 主要RCT — Table 1（鉄の部）</h4>
+<ul><li>同種血輸血は、基礎にある原因・コスト・リスクを十分に考慮しないまま貧血の補正に広く用いられてきた</li><li>予定手術では<strong>術前の状態の最適化が第一歩</strong>であり、鉄療法がそこに含まれる</li><li>静注鉄療法は <strong>2009年以前に観察された副作用のせいで評判が悪い</strong>が、新しい鉄製剤の登場により誤解は徐々に解消しつつある</li><li>重症患者では<strong>投与経路とタイミングが有効性を決める</strong>。<strong>経腸鉄の吸収は低く、炎症でさらに低下する</strong>ため、<strong>静注鉄が最も効率的</strong>（投与経路を比較したメタ解析でも静注の優位性が確認されている）</li><li><strong>静注鉄はHbを緩徐に上げ、臨床的結果は投与後10〜30日で見えてくる</strong>。これによりICUでの赤血球輸血を減らす</li></ul>
+<div class="tw"><table>
+<thead><tr><th>試験・年・n・国</th><th>対象・介入・主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td><strong>IRONMAN</strong>、2016、n=140、オーストラリア</td><td>Hb &lt; 100 g/L。<strong>早期の静注鉄（フェリック・カルボキシマルトース 500 mg）</strong> vs プラセボ、多施設RCT。PE：同種赤血球輸血とHb</td><td>退院時Hb が鉄群で高い（<strong>P=0.02</strong>）。赤血球単位数の減少（<strong>97単位 vs 136単位、P=0.19</strong>）。安全性アウトカムに差なし</td></tr>
+<tr><td><strong>Hepcidane 試験</strong>、2021、n=405、フランス</td><td>Hb &lt; 100 g/L の重症患者。<strong>ヘプシジン測定でガイドし、ICU退室が近い時点で静注フェリック・カルボキシマルトース 1 g</strong>。単盲検RCT。PE：ICU在室日数</td><td><strong>PE の在室日数に差なし</strong>（ICU退室後の在院日数 33日）。<strong>90日死亡（P=0.008）と1年死亡（P=0.035）が低下</strong></td></tr>
+<tr><td><strong>INTACT Investigators</strong>、2022、n=98、英国</td><td>Hb &lt; 100 g/L。<strong>退室が近い時点で静注鉄 1 g</strong> vs 通常ケア。多施設・実施可能性RCT。PE：28日・90日のHb、再入院</td><td>28日・90日の平均Hb が高い（<strong>P&lt;0.001</strong>）。<strong>90日ICU再入室率の低下（P=0.037）</strong>。感染率は同等</td></tr>
+<tr><td><strong>Pieracci ら</strong>、2014、n=150、米国</td><td>ICU入室72時間以内に登録した Hb &lt; 120 g/L の重症外傷患者。<strong>鉄スクロース 100 mg 静注を週3回、最大2週間</strong> vs プラセボ。多施設RCT。PE：トランスフェリン飽和度、Hb、輸血</td><td><strong>トランスフェリン飽和度・Hb・輸血のいずれにも効果なし</strong>。フェリチンのみ有意に上昇</td></tr>
+<tr><td><strong>Practical Anemia Bundle</strong>、2025、n=100、米国</td><td>Hb &lt; 100 g/L の術後・内科ICU患者。<strong>バンドル（採血実務の最適化＋臨床意思決定支援＋静注鉄デキストラン 1 g）</strong> vs 標準診療。並行群間RCT。PE：1か月時点のHbの平均差</td><td><strong>1か月のHb が高い（中央値［IQR］12.2［11.8–13.0］g/dL vs 11.5［10.2–12.6］g/dL、平均差 0.69 g/dL、P=0.02）</strong>。高いHb値は<strong>3か月まで持続</strong>。採血の頻度と量もバンドル群で低下</td></tr>
+</tbody></table></div>
+<ul><li>Pieracci 試験が無効だった理由として著者らが挙げるのは：<strong>①入室早期の炎症が存在した可能性が高い（CRPもヘプシジンも測定していない）、②真の鉄欠乏がなかった、③鉄の用量が低かった</strong></li><li>Practical Anemia Bundle の<strong>事後解析</strong>（Warner 2026、Br J Anaesth）は、<strong>フェリチンとトランスフェリン飽和度は炎症の影響を受けるが sTfR は受けない</strong>ことを確認し、sTfR が鉄療法に反応しやすい患者の同定に寄与すると示した。<strong>ヘプシジンにも同じ予測能があるが、この試験では測定されていない</strong></li></ul>
+<h4>7-5. 感染リスク — 相反する2つのメタ解析</h4>
+<p>輸注された鉄が細菌に貪欲に取り込まれ、感染を助長するのではないかという懸念は、静注鉄療法の最大の論点である。</p>
+<div class="tw"><table>
+<thead><tr><th>メタ解析</th><th>規模</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Avni ら（Mayo Clin Proc 2015）</td><td><strong>103試験、静注鉄 10,390例／鉄なし 1,329例／プラセボ 3,335例</strong></td><td><strong>感染リスクの上昇なし（相対リスク 1.04）</strong>、その他の重篤有害事象の増加もなし</td></tr>
+<tr><td>Shah ら（JAMA Netw Open 2021）</td><td><strong>154試験、32,762例</strong></td><td><strong>鉄療法は感染リスクを高めうる（RR 1.16、95%CI 1.03–1.29、I²=36%）</strong>。貧血治療と輸血減少の潜在的利益と天秤にかける必要がある</td></tr>
+</tbody></table></div>
+<p>その他の安全性関連の知見：</p>
+<ul><li><strong>敗血症＋鉄欠乏性貧血の34,040例の後ろ向きコホート</strong>：交絡を考慮したうえで、<strong>早期の静注鉄投与が14日・30日・60日・90日の死亡を有意に減少</strong>させることと関連。<strong>ただしポスター抄録としてしか公表されていない</strong></li><li><strong>敗血症患者35例の前向き研究</strong>：鉄デキストランの分割投与が、鉄欠乏の敗血症患者で<strong>網赤血球Hb相当量を比較的速やかに正常化</strong>した</li><li><strong>抗菌薬投与中の感染患者に静注鉄を投与した研究</strong>：感染の増加はなかった</li><li>著者らはこれら小規模研究について「慎重に扱うべき」と明記</li><li><strong>APEKS-NP 試験の事後安全性解析</strong>：メロペネムと<strong>セフィデロコル（鉄キレート型シデロフォア・セファロスポリン、細菌を殺すための「トロイの木馬」戦略）</strong>を重症肺炎で比較。重要な検討だが安全性データはなお限定的</li></ul>
+<h4>7-6. 推奨される投与量と対象</h4>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>鉄の実務的立場</p>
+<ul><li><strong>現在の知識では、急性敗血症の期間中の鉄欠乏の補正は推奨しない</strong>。安全性が不確かなままだからである。むしろ<strong>炎症反応が減衰するのを待ってから補正する</strong></li><li>待機的冠動脈バイパス術（CABG）は<strong>非炎症性疾患のモデル</strong>であり、術前鉄療法はHbと鉄の改善、輸血率の低下の両方で有効であることが示されている（Supplemental Table 1 参照）</li><li><strong>静注鉄療法は、鉄欠乏性貧血（Hb &lt; 100 g/L かつヘプシジン低値）の患者に、炎症が引きつつある ICU 滞在中に用いるのが最も効率的</strong>なツールになりつつある</li><li><strong>ICU退室後の使用には制限を設けるべきでない</strong>。貧血は回復と転帰を明確に悪化させるからである</li><li><strong>具体的な用量</strong>（Table 3 より）：<strong>ヘプシジン低値かつ／または sTfR 上昇なら静注鉄 1 g</strong>。<strong>総量 20 mg/kg（1回最大 1 g、体重とHb によってはしばしば2回投与が必要）</strong>。リハビリ期の Hb &lt;100 g/L には <strong>0.5〜1.0 g 静注</strong></li></ul>
+</div>
+<p><strong>Supplemental Table 1（鉄の部）— 非ICU・外科コホート</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験・年・n・国</th><th>対象・介入・主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td><strong>Houry ら</strong>、2023、レバノン、n=195</td><td><strong>非貧血の</strong>待機的CABG患者。静注フェリック・カルボキシマルトース 1 g vs 生理食塩水。RCT</td><td>30日時点でHb が鉄群で高い（<strong>P&lt;0.001</strong>）。輸血必要量が鉄群で減少（<strong>P=0.037</strong>）。副作用の観察なし</td></tr>
+<tr><td><strong>Shokri &amp; Ali</strong>、2022、エジプト、n=80</td><td>待機的CABG患者。静注フェリック・カルボキシマルトース 1 g vs 生理食塩水、<strong>手術7日前</strong>に投与。RCT。PE：貧血の発生率</td><td>鉄群で<strong>退院4週後の貧血発生率が低い（P&lt;0.001）</strong>。<strong>在院日数・ICU在室日数が短い（P&lt;0.001）</strong>、大動脈遮断時間も短縮、術後の濃厚赤血球必要量も減少</td></tr>
+</tbody></table></div>
+<h3>8. カルニチン</h3>
+<h4>8-1. 生理的役割と標準必要量</h4>
+<ul><li>ESPEN ガイドラインでは<strong>「同化ビタミン（assimilated vitamin）」</strong>と位置づけられる。<strong>アシル基やその他の代謝中間体と結合</strong>し、<strong>ミトコンドリア機能と代謝恒常性に不可欠</strong></li><li>語源どおり<strong>骨格筋（carne＝肉）に豊富</strong>な小さな第四級アンモニウム化合物で、<strong>肝臓・心筋のようなエネルギー消費の大きい細胞で決定的</strong></li><li><strong>長鎖脂肪酸は カルニチンパルミトイル転移酵素（CPT）系によってミトコンドリア内へ輸送</strong>され、そこで初めて β酸化を受けられる</li><li><strong>内因性合成には L-リジンと L-メチオニンを材料とし、ビタミンCと鉄の利用可能性、そして十分な腎・肝機能が必須</strong>である</li><li>→ <strong>本総説の4つの微量栄養素が互いに繋がる結節点がここにある</strong>。ビタミンC欠乏と鉄欠乏は、それ自体でカルニチン合成を落としうる</li><li>したがって欠乏は、<strong>臓器不全、栄養摂取低下、喪失増加、または脂質・蛋白・糖代謝の中間体へのカルニチン結合の増加</strong>という状況で起こりうる</li><li>アミノ酸を基質として健常人体内で合成できるため、<strong>標準必要量に関する推奨は存在しない</strong></li></ul>
+<h4>8-2. 重症病態での動態</h4>
+<ul><li><strong>低カルニチン血症の報告頻度は 4% から 70% と幅広く</strong>、ICU退室後のフォローアップでは正常化する</li><li><strong>EPaNIC-RCT のバイオバンク（ICU 6日目に検体のある1600例）の解析</strong>から、</li><li><strong>欠乏（&lt;24 µmol/L）だけでなく、血漿カルニチン濃度の上昇（&gt;50 µmol/L）も、罹患率と死亡率の上昇と関連</strong>することが示された</li><li>この「高値と転帰不良」の関連には因果関係は確立していないが、<strong>用量探索RCTでカルニチン投与量を評価する必要性</strong>を示唆する</li><li><strong>外科・心血管ICU患者144例の横断研究</strong>（臨床チームの裁量でカルニチンを測定）では、<strong>CRRT が同様に カルニチン欠乏（&lt;36 µmol/L と定義）と関連</strong>した。症例報告も一様に CRRT を寄与因子として挙げる</li><li><strong>腎（および肝）機能障害それ自体、特に尿毒症は、非常に高いカルニチン濃度・死亡・罹患と関連</strong>する。ただしこれが因果なのか、<strong>臓器不全が死亡と高カルニチンの両方を引き起こす駆動因子なのか</strong>は未解明</li><li><strong>広範囲熱傷や広範な創傷の患者</strong>も、滲出液への喪失に強い炎症が重なるためリスク群と考えられるが、<strong>確たるデータがない</strong>。EPaNIC コホートでは熱傷・外傷患者の割合が低すぎ、多変量回帰で有意なリスク因子とはならなかった（欠乏はこれらの患者でより高頻度だったにもかかわらず）</li><li><strong>バルプロ酸治療はよく知られたリスク因子</strong>。<strong>クリアランスを介した喪失増加と、カルニチン結合代謝物の消費</strong>による。ただし最近の2つのコホート研究のうち<strong>1つでしか確認されなかった</strong>。バルプロ酸への曝露時間のばらつきで説明できるかもしれない</li><li><strong>女性であることは、閾値を 24 µmol/L に置いても 36 µmol/L に置いてもカルニチン欠乏と関連</strong>する</li><li><strong>静脈栄養（PN）には実務的理由からカルニチンが含まれていない</strong>が、経腸製剤には含まれうる。EPaNIC コホートでは<strong>早期PN群に割り付けられた患者でカルニチン欠乏の発症が多かった</strong>が、これはPN投与そのものより、この治療群での回復の遅れに関連している可能性がある。経口・経腸のエネルギー（および蛋白）摂取量は、カルニチン欠乏患者とそれ以外で同等だった</li></ul>
+<h4>8-3. 臨床像 — 決め手を欠く</h4>
+<ul><li><strong>遷延性重症患者におけるカルニチン欠乏の臨床的帰結は、ほとんど非特異的</strong>：筋力低下、回復の遅延、そして最終的な死亡率上昇</li><li>カルニチン測定が可能なICUでは、<strong>高トリグリセリド血症</strong>が測定のきっかけとなる臨床所見の一つだが、<strong>EPaNIC コホートでの関連は予想外に弱かった</strong>。理由として、①このコホートのICU6日目の高トリグリセリド血症の発生率が全体に低かった、②<strong>重症病態における高トリグリセリド血症の原因が多因子的（プロポフォールの用量、栄養によるエネルギー摂取量など）</strong>であることが挙げられる</li><li>重篤な欠乏例では<strong>低ケトン性低血糖（hypoketotic hypoglycaemia）や高乳酸血症</strong>が報告されているが、閾値を 24 µmol/L または 36 µmol/L に設定した患者群では確認されなかった</li></ul>
+<h4>8-4. 高カルニチン — もう一つの端</h4>
+<ul><li>経腸カルニチンの代謝物 <strong>トリメチルアミンN-オキシド（TMAO）</strong>は血管系の罹患と関連づけられている</li><li>ICU での<strong>短期・高用量投与</strong>（例：<strong>4 g を2〜3分でボーラス静注し、続く12時間で 8 g を持続投与</strong>）は、<strong>敗血症（RACE試験）・脳卒中・外傷性脳損傷で忍容性が良好</strong>であることが示されており、カルニチン毒性に対する反証となる。ただし臨床的有益性のシグナルは、より大規模なRCTでの確認を要する</li><li><strong>50 µmol/L を超えるカルニチン濃度が、ICU での罹患、および ICU退室後 数年経ってからの身体機能の悪化・生存の悪化と関連する</strong>という新しい所見は、さらなる検討を要する</li><li><strong>カルニチンを段階的に増量するRCT</strong>により、この現象が因果的（＝潜在的な毒性の予兆）なのか、それとも高カルニチンが臓器不全の随伴現象にすぎないのかを解明できる</li></ul>
+<h4>8-5. 測定の落とし穴</h4>
+<ul><li><strong>炎症（CRP値に反映される）は内因性カルニチン産生を低下</strong>させ、EPaNIC コホートで低カルニチン値と強く関連した</li><li>しかし<strong>ピークCRP値の重なりが大きく、CRP単独でICUのカルニチン療法を導くことは考えにくい</strong>。特に高い血漿濃度が罹患と関連することを踏まえると難しい</li><li><strong>カルニチンとアシルカルニチン代謝物は LC-MS/MS で定量できる</strong>が、<strong>今日これらの測定はリアルタイムの臨床検査としては利用できず、多くのICUでは全く利用できない</strong></li><li>そのため著者らは「<strong>臨床的な推奨は作れない</strong>」と明言している</li></ul>
+<h4>8-6. 相対的欠乏（アシルカルニチン／遊離カルニチン比）</h4>
+<ul><li><strong>アシルカルニチン／遊離カルニチン比（Acyl-C/Free-C） &gt; 0.4</strong> が慢性透析患者で「相対的欠乏」とみなされ、<strong>慢性心不全では &gt; 0.3</strong></li><li>ICU では、CRRT を要する患者で相対的カルニチン欠乏が報告された。しかし<strong>アシル／遊離比の上昇は CRRT による遊離カルニチン喪失では説明されなかった</strong>。したがって<strong>遷延する腎不全中のアシルカルニチン種の増加</strong>が説明候補として残る</li><li>一方 EPaNIC コホートでは、<strong>遊離カルニチンが正常下限を下回る患者でアシル／遊離比が高かった</strong></li><li>生理的に生じるアシルカルニチン値の幅は広く、原因は<strong>健常時の絶食から脂質酸化障害まで</strong>さまざまで、その極端な例が<strong>プロポフォール注入症候群</strong>である</li><li><strong>アシル／遊離比は長期のICU滞在後も長らく異常なまま</strong>であり、相対的な微量栄養素欠乏というより<strong>代謝の破綻を映す読み取り値</strong>として機能するかもしれない</li><li>そのような低値を「疾患の代謝的な足跡」とみなすべきか、カルニチン投与の適応とみなすべきかは不明のまま</li></ul>
+<h4>8-7. 推奨される投与量と対象</h4>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>カルニチンの実務的立場（エキスパートオピニオン）</p>
+<ul><li>著者らの<strong>実務的・エキスパートオピニオンに基づく提案</strong>：<strong>欠乏が疑われるとき、特に CRRT 施行中とバルプロ酸治療中に血漿カルニチン値を測定し、25 µmol/L 未満であれば 0.5〜1 g/日を開始用量として投与を検討する</strong></li><li>ただし著者らは同時に「臨床的推奨は作れない」と明記しており、<strong>この提案はRCTに裏づけられていない</strong></li><li><strong>遷延する重症病態におけるカルニチン濃度の前向き調査</strong>が、臨床的・科学的に大きな重要性を持つ</li><li>供給は<strong>段階的アプローチで評価</strong>し、<strong>過剰な濃度になっていないかを検出できる用量探索RCT</strong>を行うべきである</li></ul>
+</div>
+<h3>9. 臨床実践におけるモニタリング</h3>
+<h4>9-1. 基本方針</h4>
+<ul><li>微量栄養素の必要量とモニタリングは重症病態では十分に定義されていない。重症患者は非常に不均質なカテゴリであり、入室前・ICU滞在中の双方で微量栄養素の状態を脅かす要因が多数あり、しばしば<strong>治療そのものと施設ごとに異なる栄養投与の基準</strong>に関連する</li><li><strong>現行ガイドラインは、全ての重症患者に少なくともベースラインの微量栄養素必要量（DRI）を投与し、より集中的なモニタリングは選択されたハイリスク群に限る</strong>ことを推奨</li><li><strong>投与経路にかかわらず、入室時点から必須微量栄養素の適切な1日量を供給すべき</strong>。可能な限り<strong>経口または経腸投与が優先</strong>される</li><li><strong>ほとんどの経腸栄養製剤は、患者が 1500 kcal/日 を受け取れば標準的な必要量をカバー</strong>する。PN用の静注微量栄養素補充製剤も同様</li><li>ただし<strong>代謝亢進状態にある患者や生物学的体液の喪失がある患者では必要量が高い</strong></li></ul>
+<h4>9-2. 血中濃度をどう扱うか</h4>
+<ul><li>血中濃度は依然として<strong>最もアクセスしやすいマトリクス</strong>であり、多くの場合<strong>重症患者の微量栄養素の状態に近づく唯一の実行可能な方法</strong></li><li>ただし濃度はサイトカインを介した血中区画からの再分布に影響され、<strong>体内総貯蔵量よりも区画間の流れを反映</strong>する</li><li><strong>CRP が 10 mg/L を超えた時点で、ほとんどの微量栄養素の濃度は下がる。例外は銅で、逆に上昇する</strong></li><li><strong>解釈が難しいため、微量栄養素を投与するかどうかの判断を単一の検査値に依拠させてはならない</strong>。代わりに：</li></ul>
+<ol><li>枯渇・欠乏を示唆する臨床徴候と症状を統合する</li><li>先制的な治療を要しうるハイリスク患者を同定する</li><li>明らかな臨床徴候のない患者の異常値は慎重に解釈する</li></ol>
+<ul><li>検査上の制約も正面から認められている：<strong>多くのICUで微量栄養素の測定は依然として困難</strong>で、結果がタイムリーに得られないことが多く、<strong>高価で、しばしば保険償還されない</strong>。さらに<strong>カルニチンのように、そもそも実施できない検査</strong>もある</li><li>したがって<strong>検査は「血中濃度を知ることで治療が変わりうる状況」に的を絞る</strong>べきである（より良い機能的分析法が利用可能になるまで）</li><li>個別化された至適補充については <strong>EU助成の BIO-MICRO プロジェクト</strong>（Advancing micronutrient diagnostics for personalised ICU care）で検討が進んでいる</li></ul>
+<h4>9-3. Table 3 — 病期に応じた測定の提案</h4>
+<p><strong>Table 3. 急性疾患の病期に応じて提案される、標的的な微量栄養素の組み合わせと電解質の血中濃度測定</strong>（著者らの臨床経験に基づく。貧血については周術期ガイドラインとフランス集中治療学会 SFAR-SRLF に基づく。<strong>注：微量栄養素と必ず同時にCRPを測定する</strong>）</p>
+<div class="tw"><table>
+<thead><tr><th>ICU滞在の病期</th><th>特定の状況</th><th>測定項目</th><th>頻度</th><th>提案される対応</th></tr></thead>
+<tbody>
+<tr><td><strong>急性期前半（72時間まで）</strong></td><td>ショック、ARDS</td><td>Mg、P、Na、K／血糖</td><td>1日1〜2回／血糖は1日4回</td><td><strong>多微量元素製剤・マルチビタミン製剤を1日1バイアル</strong></td></tr>
+<tr><td><strong>安定期（4〜10日）</strong></td><td>栄養（経腸または静脈）の開始</td><td>マグネシウム、リン、Na、K／血糖</td><td>1日1〜2回／血糖は1日4回</td><td>ガイドライン推奨のモニタリング</td></tr>
+<tr><td>同上</td><td>拡張型心筋症の悪化</td><td>チアミン二リン酸、Se</td><td>診断時。欠乏補正後に再検</td><td>ガイドライン推奨：<strong>経験的にチアミン 200 mg ＋ セレン 200 µg</strong></td></tr>
+<tr><td>同上</td><td>経腸栄養が困難で 1500 kcal/日 未満</td><td>Se、Zn、ビタミンD</td><td>入室後7〜10日。欠乏補正後に再検</td><td>ガイドライン推奨のモニタリング</td></tr>
+<tr><td>同上</td><td>体表面積40%超の広範囲熱傷</td><td>Cu、Se、Zn／血漿遊離カルニチン、アシル／遊離カルニチン比</td><td>理想的には週1回／カルニチンは月1回</td><td>—</td></tr>
+<tr><td><strong>遷延性重症病態</strong></td><td>Hb &lt; 100 g/L の貧血</td><td>血漿Fe、トランスフェリン、トランスフェリン飽和度、TIBC、フェリチン、葉酸、B12／<strong>ヘプシジン、sTfR</strong></td><td><strong>ICU滞在2週後から検索開始</strong>。静注鉄療法後2週間経っても Hb &lt; 100 g/L が続くなら再検</td><td>ガイドライン推奨：<strong>ヘプシジン低値かつ／または sTfR 上昇なら静注鉄 1 g</strong>。<strong>総量 20 mg/kg（1回最大1 g、体重とHbによってしばしば2回投与が必要）</strong></td></tr>
+<tr><td>同上</td><td><strong>CRRT が2週間超</strong></td><td>アスコルビン酸、チアミン、Cu、Se、Zn／血漿遊離カルニチン、アシル／遊離カルニチン比</td><td><strong>2週後、以降は隔週</strong></td><td>欠乏検出のため、<strong>初週以降はマルチ微量栄養素の1日量投与を検討</strong></td></tr>
+<tr><td>同上</td><td>創傷治癒の遅延</td><td>Cu、Fe、Se、Zn、アスコルビン酸</td><td>想定外に治癒が遅い、または褥瘡が持続する場合の診断目的。欠乏補正後に再検</td><td><strong>処方された量の栄養を実際に受け取れているかを確認</strong>する。検査結果が返るまで経験的にマルチ微量栄養素を補充</td></tr>
+<tr><td>同上</td><td>進行性の筋萎縮</td><td>ビタミンD、Cu、Fe、Se、Zn／血漿遊離カルニチン、アシル／遊離カルニチン比</td><td>状態を認識した時点で診断目的。欠乏補正後（2〜3週）に再検</td><td>—</td></tr>
+<tr><td><strong>リハビリ期</strong></td><td>医学的栄養療法に依存が続く患者／Hb &lt; 100 g/L の貧血</td><td>ビタミンD／鉄の精査は上記参照</td><td>月1回、静脈栄養から経腸・経口栄養への移行期に</td><td>微量栄養素摂取量の妥当性を確認。<strong>貧血には静注鉄 0.5〜1.0 g</strong></td></tr>
+</tbody></table></div>
+<h4>9-4. ハイリスク患者への先制的治療</h4>
+<ul><li>重症病態は、<strong>摂取不足・利用増加・喪失増加（例：腎代替療法）</strong>の組み合わせにより、微量栄養素枯渇のハイリスク状態である</li><li><strong>ESPEN の ICU ガイドラインと微量栄養素ガイドラインは、全ての重症患者に対し、ICU入室時に神経学的合併症の予防と糖代謝の支持のため、チアミン 100〜300 mg/日 を静注で3〜4日間投与</strong>することを助言している</li><li>これと組み合わせて、<strong>急性欠乏の予防のため、PN用のマルチ微量栄養素静注製剤を、栄養開始前であっても約5日間投与</strong>する</li></ul>
+<h4>9-5. 臨床的疑いが測定の主要トリガー</h4>
+<p><strong>病歴と生物学的体液の喪失に基づく臨床的疑い</strong>が、標的的な微量栄養素評価の第一トリガーであり続ける。関連する徴候・症状・状況：</p>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>具体的な手がかり</th></tr></thead>
+<tbody>
+<tr><td>病歴</td><td>重度の低栄養、吸収不良、アルコール多飲</td></tr>
+<tr><td>神経・循環</td><td>原因不明の脳症、原因不明の心筋症、ニューロパチー</td></tr>
+<tr><td>創傷</td><td>治癒不良</td></tr>
+<tr><td>喪失</td><td>広範囲熱傷、持続する消化管からの喪失、持続的腎代替療法</td></tr>
+<tr><td>滞在</td><td>ICU滞在の長期化、長期の静脈栄養</td></tr>
+</tbody></table></div>
+<p>こうした場合には検査測定が臨床判断を支持しうる。具体的なモニタリング・治療の推奨は ESPEN ガイドラインを参照。</p>
+<h3>10. Tailored strategies — 個別化への道筋</h3>
+<h4>10-1. 臨床徴候のない異常値をどう扱うか</h4>
+<p>これが本総説の実務上の核心であり、<strong>病期によって答えが逆になる</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>血漿値の解釈</th><th>とるべき対応</th></tr></thead>
+<tbody>
+<tr><td><strong>ICU入室早期・強い炎症下</strong></td><td>孤立した低値は<strong>真の欠乏ではなく再分布を反映</strong>しうる</td><td><strong>標準的な補充の継続と再評価</strong>を正当化する。<strong>即座に治療へエスカレートしない</strong></td></tr>
+<tr><td><strong>遷延性重症病態</strong></td><td>同様の異常でも、<strong>真の枯渇・欠乏のリスクが上がっており、臨床徴候は重症病態そのものに覆い隠されうる</strong></td><td><strong>古典的な症状がなくても、補充または中等量の追加投与を正当化</strong>しうる</td></tr>
+</tbody></table></div>
+<h4>10-2. Figure 2 — 新しい分析法の方向性</h4>
+<p><strong>Figure 2. 革新的な分析法</strong>（凡例の訳。画像は未編集版PDFには含まれない）</p>
+<p>現行の微量栄養素の状態の判定法は血漿濃度の測定であり、炎症のある患者では解釈が難しい。新しい分析法は、<strong>末梢血単核球（PBMC）や赤血球</strong>といった他のマトリクスで濃度を測定し、これらは血漿値より正確に機能的な微量栄養素の状態を反映しうる。あるいは、<strong>微量栄養素が補因子として働く酵素反応の細胞内／細胞外の基質と産物を定量</strong>し、機能的マーカーとして用いる。図示された分析ワークフローは LC-MS を例として用いているが、具体的なシグナル取得とデータ解析の手順は分析プラットフォーム（AAS、ICP-MS、HPLC、LC-MS など）によって異なる。</p>
+<p><strong>本文で述べられている2つの戦略</strong></p>
+<p><strong>第1：血漿以外のマトリクスでの測定</strong></p>
+<ul><li><strong>血球は、体内貯蔵をより正確に反映しうる、唯一容易にアクセスできる組織</strong>である。一過性の変動を受けにくく、炎症誘発性の再分布の間もより安定している可能性が高い</li><li><strong>赤血球の寿命は約110日</strong>であり、その微量栄養素含量は<strong>長期の状態</strong>を反映する</li><li>対照的に<strong>白血球は代謝活性が高く寿命が短い（数時間から20日）</strong>ため、<strong>急性の変化</strong>を示しやすい</li></ul>
+<p><strong>第2：機能的マーカーの開発</strong></p>
+<ul><li>微量栄養素が補因子として働く酵素反応の<strong>細胞内／細胞外の基質と産物を定量</strong>する</li><li>補因子の不足による酵素活性の低下は、<strong>基質の蓄積と産物の減少</strong>という特徴的な代謝パターンをもたらす。したがってこれらの基質・産物の測定を機能的マーカーとして応用できる</li><li>さらに<strong>細胞内の酵素活性は、鍵となるレドックスペアのシフトに影響される</strong>。例えば<strong>アスコルビン酸／デヒドロアスコルビン酸</strong>のようなレドックス対は細胞内外の双方で重要な役割を果たし、患者のレドックスバランスと全体的な微量栄養素の状態について、<strong>より早期でより正確な洞察</strong>を提供しうる</li></ul>
+<h4>10-3. 研究デザインの個別化</h4>
+<p><strong>問題設定</strong>：これまでの高用量微量栄養素試験がおおむね中立だったのは、<strong>①広範なコホートの登録、②再分布と真の枯渇の不十分な区別、③急速に変化する生理にもかかわらず静的なレジメン</strong>という、繰り返される設計上の限界を反映している可能性が高い。今後は微量栄養素療法を<strong>精密栄養（precision nutrition）の問題</strong>として扱うべきで、そこではリスク・必要量・喪失・反応が時間とともに、またサブグループ間で変動する。</p>
+<div class="tw"><table>
+<thead><tr><th>方向性</th><th>内容</th><th>限界</th></tr></thead>
+<tbody>
+<tr><td><strong>①検査前確率の高い患者の同定</strong></td><td><strong>BIO-MICRO プロジェクト</strong>（EU助成）が担当。赤血球・白血球での微量栄養素測定と新しい機能的バイオマーカーの開発により、真の欠乏と炎症由来の変化を区別する。重症病態の各病期にわたる全身微量栄養素の状態の時間経過の理解も目指す。<strong>単回のベースライン測定より縦断的サンプリングを優先すべき</strong></td><td>—</td></tr>
+<tr><td><strong>②適応的プラットフォーム試験</strong></td><td>早期学習、アーム中止、事前規定サブフェノタイプ内での選択された微量栄養素バンドルの同時検証を可能にする</td><td><strong>不十分なフェノタイピング、不適切なバイオマーカー、アウトカム選択という根本問題は解決しない</strong>。強く時間依存的な必要量を十分に捉えられない（レジメンと適応は試験アームのレベルで定義されるが、真の必要量は日ごとに変わりうる）。結果として、実践で最終的に必要となる<strong>滴定（titration）ではなく、依然として比較的粗い戦略</strong>を検証することになる</td></tr>
+<tr><td><strong>③生理学に基づく test-and-titrate 試験</strong>（著者らが最も有望とする方向）</td><td>ベッドサイドまたはニアペイシェントの迅速アッセイで真の微量栄養素の状態を推定（理想的には細胞内・機能的バイオマーカーを反復測定と組み合わせる）。その結果で個別化された補充を導き、<strong>変化する微量栄養素値と進行中の喪失に応じて連続的に用量調整</strong>する。<strong>「リアルタイムの生理＋滴定」が「静的なガイドラインベースのバンドル」に優るかを直接検証</strong>できる</td><td><strong>実行可能性が最大の課題</strong>。このアプローチでも、あらゆる微量栄養素の組み合わせと用量を検証することも、日々の必要量の変動を完璧に再現することもできない。ただし現行実践からの実質的な前進にはなる</td></tr>
+</tbody></table></div>
+<p>著者らは最後に「<strong>上記の問いに答えが出ないうちは、適切なデザインを提案するには時期尚早である</strong>」と、自らの提案にも留保を付している。</p>
+<h3>11. 結論（原文の主張）</h3>
+<ul><li>重症病態における微量栄養素の評価と管理は、<strong>静的な血漿濃度への依存によって制約されている</strong>。血漿濃度は組織貯蔵や機能的状態を正確に反映しない可能性があり、<strong>炎症由来の再分布と真の欠乏を区別できない</strong></li><li>したがって、これを達成し、時間とともに変化するダイナミクスを捉えるために<strong>新しいバイオマーカーと分析法が必要</strong>である。<strong>細胞レベル・機能的なバイオマーカーが有望な代替</strong>であり、体内総貯蔵と生物学的活性をより良く反映しうる（BIO-MICRO で検討中）</li><li>上記4つの微量栄養素についてのエビデンスは、<strong>より標的的で個別化された戦略の必要性</strong>を裏づける</li><li><strong>中立あるいは陰性の試験結果が「真に効果がない」ことを示すのか、「試験デザインが最適でなかった」（異質な集団、タイミング、用量、測定の問題）ことを示すのかは、現時点で切り分け不能</strong>である</li><li><strong>4つの微量栄養素すべてについて、欠乏も過剰も、ICU患者の転帰悪化と関連する</strong></li><li>現在の制約を踏まえると、<strong>微量栄養素血中濃度のモニタリングは「結果が治療方針を変えると期待される場面」に限定し、CRPを含め、測定のタイミングは基礎にあるリスクプロファイルで導かれるべき</strong>である</li></ul>
+<h3>12. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この総説を読むときに割り引くべき点</p>
+<ul><li><strong>系統的レビューではない</strong>。検索式・期間・選択基準・複数レビュアーによる選定・バイアスリスク評価・GRADE のいずれも欠く。「PubMed・Cochrane・Web of Science の手作業スクリーニング＋著者らが既に知っていた論文」という記述は、選択バイアスの可能性を著者自身が開示しているに等しい。<strong>引用された利益相反（Fresenius Kabi・BBraun・Nestlé Health からの講演料）が3名にある</strong>ことも、栄養製剤に関する総説である以上、読み手が意識しておく必要がある</li></ul>
+</div>
+<p><strong>個別の論点</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>論点</th><th>具体的な問題</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>CITRIS-ALI の Table 1 での扱いが甘い</strong></td><td>「初報では ΔmSOFA に差なし（2020年に再計算され有意として公表）／28日死亡が16%低下」と併記されているが、<strong>28日死亡は副次アウトカムであり、主要評価項目が陰性の試験の副次解析</strong>である。再計算による有意化も後づけ。本総説は他の試験には厳しく「害」と書きながら、CITRIS-ALI の行だけは肯定的な数字を残している</td></tr>
+<tr><td>2</td><td><strong>VICTORY を「害」と書きながら P=0.06</strong></td><td>主要複合アウトカム 40.8% vs 29.7%、<strong>P=0.06 は従来の有意水準を満たさない</strong>。ただし中間解析の無益性／有害性境界を越えたのは事実で、本文の記述（"higher 28-day mortality and persistent organ dysfunction (P = 0.06)"）は数値を正直に併記している。JCでは「境界を越えた＝有意」ではないことを確認しておきたい</td></tr>
+<tr><td>3</td><td><strong>VITaCCA の P=0.04 は「有害方向の有意」</strong></td><td>R-SOFA 変化は プラセボ −3.2 が最も大きく改善、10 g群 −0.8 が最も改善しなかった。<strong>「有意差あり」が良い方向を意味しない典型例</strong>。用量依存的に悪い（3 g &lt; 10 g）ことも押さえておく</td></tr>
+<tr><td>4</td><td><strong>ビタミンDのメタ解析と最大規模RCTが矛盾</strong></td><td>Menger メタ解析は死亡 RR 0.78（0.62–0.97）を示すが、<strong>ICU最大規模の VIOLET（n=1078）も VITDAL-ICU（n=480）も主要評価項目は陰性</strong>。しかも VIOLET は目標3000例に対し最初の中間解析で早期中止。在院日数の I²=70%、人工呼吸期間の I²=54% と<strong>異質性が高く</strong>、非経口投与サブグループでの効果は小規模試験に駆動されている疑いが濃い。著者らも「異質、規模不足」と留保しており、<strong>この留保を落として RR 0.78 だけを引用しないこと</strong></td></tr>
+<tr><td>5</td><td><strong>鉄の感染リスクで2つのメタ解析が食い違う</strong></td><td>Avni（103試験・10,390例）は RR 1.04 で増加なし、Shah（154試験・32,762例）は RR 1.16（1.03–1.29）で増加しうる。<strong>本総説の「急性敗血症期には補正しない」という推奨は、実質的に後者に寄って書かれている</strong>。どちらを採るかで臨床方針が変わる論点であり、JCの議論に適する</td></tr>
+<tr><td>6</td><td><strong>本文中の引用番号が入れ替わっている</strong></td><td>「A meta-analysis addressed this serious concern <strong>[71]</strong>, searching for adverse events across 103 trials involving 10,390 patients ... They showed no associated risk of infections (relative risk, 1.04) <strong>[69]</strong>」— 103試験のメタ解析は<strong>参考文献69（Avni、Mayo Clin Proc 2015）</strong>であり、<strong>71 は Centanni（J Maine Med Cent 2024）</strong>の別研究である。未編集版特有の校正漏れだが、引用を追う際は注意</td></tr>
+<tr><td>7</td><td><strong>IRONMAN の輸血減少を有意差なしのまま「利益」として提示</strong></td><td>本文は「3つのRCTが……輸血必要量の減少（97単位 vs 136単位）[50] から……臨床的利益を示した」と書くが、<strong>Table 1 の同じ行には P=0.19 と明記</strong>されている。本文だけ読むと有意差があるように読める</td></tr>
+<tr><td>8</td><td><strong>Hepcidane の死亡低下は副次アウトカム</strong></td><td>主要評価項目の ICU在室日数は差なし。90日死亡 P=0.008、1年死亡 P=0.035 はいずれも副次。<strong>n=405 の単盲検試験の副次アウトカムに基づいて「mortality improved」と要約するのは強すぎる</strong></td></tr>
+<tr><td>9</td><td><strong>34,040例の鉄・敗血症コホートは「ポスター抄録のみ」</strong></td><td>著者自身が明記しているが、<strong>査読済み論文ではないデータを、鉄の有益性を支える文脈で引用</strong>している</td></tr>
+<tr><td>10</td><td><strong>カルニチンの推奨が内的に緊張している</strong></td><td>同じ節で「<strong>臨床的推奨は作れない</strong>（測定がリアルタイムでできない）」と述べながら、「25 µmol/L 未満なら 0.5〜1 g/日から」という具体的な数値を提案している。しかも本総説の最大の新規性は「<strong>&gt;50 µmol/L の高値も予後不良</strong>」であり、<strong>測れない状況で補充を始めれば、高値側へ押し込むリスクを検知できない</strong>。著者らが用量探索RCTを求めるのは筋が通るが、その前に実務提案を置く順序は議論の余地がある</td></tr>
+<tr><td>11</td><td><strong>カルニチンの閾値が研究間で揃っていない</strong></td><td>EPaNIC は &lt;24 µmol/L、横断研究は &lt;36 µmol/L、実務提案は &lt;25 µmol/L。<strong>同じ「欠乏」という語が異なる集団で異なる数字を指している</strong>。閾値の根拠（生物学的か、分布の便宜か）は示されていない</td></tr>
+<tr><td>12</td><td><strong>EPaNIC のカルニチン解析は観察的で、ICU6日目の単回測定</strong></td><td>本総説自身が「縦断的サンプリングを優先すべき」と主張しているのに、その主張の根拠となる中心的データが<strong>単一時点の横断的関連</strong>である。高カルニチンと転帰の関連についても、著者らは「臓器不全が両方を駆動している可能性」を自ら認めている</td></tr>
+<tr><td>13</td><td><strong>Figure 1・Figure 2 が未編集版PDFに含まれない</strong></td><td>Accepted manuscript のため図の実体がなく、凡例のみ。図に依拠した理解は正式版を待つ必要がある</td></tr>
+<tr><td>14</td><td><strong>「4つを選んだ理由」の説明が薄い</strong></td><td>「最近関心の高い4つ」とされるが、セレン・亜鉛・チアミン・銅も同等かそれ以上に ICU で議論される。特に<strong>セレンは本文中でフェロトーシス抑制の主役として登場しながら、独立した節を与えられていない</strong>。選択の基準が明示されていれば、レビューとしての説得力が増した</td></tr>
+</tbody></table></div>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症病態の微量栄養素についての現時点の知見（著者らの先行総説）</td><td>de Man AME, Stoppe C, Koekkoek K, et al. Crit Care（本総説の姉妹論文）</td></tr>
+<tr><td>2</td><td>微量栄養素の状態評価に用いる血液検査の解釈の落とし穴</td><td>Berger MM, Talwar D, Shenkin A. Nutr Clin Pract 2023;38(1):36–69</td></tr>
+<tr><td>3</td><td><strong>LOVIT</strong>：敗血症成人への静注ビタミンC</td><td>Lamontagne F, et al. N Engl J Med 2022;386(25):2387–2398</td></tr>
+<tr><td>4</td><td><strong>LOVIT-COVID</strong>：COVID-19入院患者への静注ビタミンC（2つの調和RCT）</td><td>LOVIT-COVID Investigators. JAMA 2023;330(18):1745–1759</td></tr>
+<tr><td>5</td><td><strong>ESPEN 微量栄養素ガイドライン</strong></td><td>Berger MM, et al. Clin Nutr 2022;41(6):1357–1424</td></tr>
+<tr><td>6</td><td>全身性炎症反応の大きさと微量栄養素状態への影響の定量データ</td><td>Duncan A, et al. Am J Clin Nutr 2012;95(1):64–71</td></tr>
+<tr><td>7</td><td>敗血症患者の好中球はビタミンC取り込みが亢進し細胞内濃度は正常</td><td>Carr AC, et al. Antioxidants (Basel) 2021;10</td></tr>
+<tr><td>8</td><td>POC 酸化還元電位による低ビタミンC血症の迅速スクリーニング</td><td>Rozemeijer S, et al. Intensive Care Med Exp 2021;9:40</td></tr>
+<tr><td>10</td><td><strong>VITAMINS</strong>：ビタミンC＋ヒドロコルチゾン＋チアミン vs ヒドロコルチゾン単独</td><td>Fujii T, et al. JAMA 2020;323(5):423–431</td></tr>
+<tr><td>11</td><td><strong>VICTORY</strong>：重症熱傷への高用量静注ビタミンC</td><td>Stoppe C, et al. JAMA 2026</td></tr>
+<tr><td>12</td><td><strong>VITaCCA</strong>：院外心停止への早期高用量ビタミンC</td><td>Rozemeijer S, et al. Intensive Care Med 2026</td></tr>
+<tr><td>14</td><td>ビタミンCの突然中止が死亡を増やしうる（LOVIT二次解析）</td><td>Hemilä H, Chalker E. Eur J Clin Nutr 2023;77(4):490–494</td></tr>
+<tr><td>16</td><td>重症患者のビタミンC薬物動態（4つの静注レジメンのRCT）</td><td>de Grooth H, et al. Chest 2018;153(6):1368–1377</td></tr>
+<tr><td>17</td><td>メガドースアスコルビン酸ナトリウムの前臨床用量最適化RCT</td><td>Ow CPC, et al. Crit Care 2025;30:6</td></tr>
+<tr><td>18</td><td><strong>ESPEN 実践版ショート微量栄養素ガイドライン</strong></td><td>Berger MM, et al. Clin Nutr 2024;43(3):825–857</td></tr>
+<tr><td>19</td><td>メガドースアスコルビン酸ナトリウムのパイロット単回投与二重盲検RCT</td><td>Yanase F, et al. Crit Care 2023;27:371</td></tr>
+<tr><td>22</td><td><strong>2024 Endocrine Society ビタミンD臨床実践ガイドライン</strong></td><td>Demay MB, et al. J Clin Endocrinol Metab 2024;109:1907–1947</td></tr>
+<tr><td>23</td><td><strong>BONE ZONE 試験</strong>プロトコル（重症成人の骨量減少予防）</td><td>Orford N, et al. Crit Care Resusc 2026;28:100173</td></tr>
+<tr><td>27</td><td>ビタミンDサプリメント使用と全死亡・原因別死亡の実世界エビデンス</td><td>Sha S, et al. J Intern Med 2023;293(3):384–397</td></tr>
+<tr><td>29</td><td><strong>VITDALIZE</strong> プロトコル</td><td>Amrein K, et al. BMJ Open 2019;9(11):e031083</td></tr>
+<tr><td>30</td><td>重症成人へのビタミンDとその代謝物投与のSR・メタ解析</td><td>Menger J, et al. Crit Care 2022;26(1):268</td></tr>
+<tr><td>31</td><td><strong>VITDALIZE-KIDS</strong>（PICUのビタミンD欠乏の急速正常化）</td><td>O'Hearn K, et al.</td></tr>
+<tr><td>50</td><td><strong>IRONMAN</strong>：ICUの貧血への静注鉄 vs プラセボ</td><td>IRONMAN Investigators, Litton E, et al. Intensive Care Med 2016;42(11):1715–1722</td></tr>
+<tr><td>51</td><td>ヘプシジン20年の総括</td><td>Colucci S, et al. Semin Hematol 2021;58(3):132–144</td></tr>
+<tr><td>52</td><td><strong>重症病態の貧血（簡潔決定版レビュー）</strong></td><td>Corwin HL, Napolitano LM. Crit Care Med 2026;54:343–353</td></tr>
+<tr><td>55</td><td>重症患者の炎症性貧血診断に対する鉄代謝指標の可能性</td><td>Boshuizen M, et al. Transfus Med Hemother 2020;47(1):61–67</td></tr>
+<tr><td>56</td><td>貧血のある重症患者における鉄欠乏に対する血清ヘプシジンの診断精度</td><td>Lasocki S, et al. Intensive Care Med 2010;36(6):1044–1048</td></tr>
+<tr><td>57</td><td>ヘプシジンはICU患者の静注鉄への反応を予測する</td><td>Litton E, et al. J Intensive Care 2018;6:60</td></tr>
+<tr><td>60</td><td><strong>静注鉄と感染リスクのSR・メタ解析（154試験・32,762例）</strong></td><td>Shah AA, et al. JAMA Netw Open 2021;4(11):e2133935</td></tr>
+<tr><td>63</td><td>敗血症中の静注鉄投与：転帰・安全性・Hb反応（<strong>ポスター抄録</strong>）</td><td>Wilson LS, et al. Blood 2025;146:1129</td></tr>
+<tr><td>64</td><td><strong>INTACT</strong>：ICU後の貧血に対する静注鉄の多施設実施可能性RCT</td><td>Shah A, et al. Br J Anaesth 2022;128(2):272–282</td></tr>
+<tr><td>65</td><td><strong>Hepcidane</strong>：ヘプシジンで診断した鉄欠乏の治療がICU長期滞在後の転帰に与える影響</td><td>Lasocki S, et al. Crit Care 2021;25(1):62</td></tr>
+<tr><td>66</td><td>外傷性重症病態の貧血への静注鉄補充の多施設RCT</td><td>Pieracci F, et al. Crit Care Med 2014;42(9):2048–2057</td></tr>
+<tr><td>67</td><td><strong>Practical Anemia Bundle</strong>：重症病態におけるHb回復のRCT</td><td>Warner MA, et al. JAMA Netw Open 2025;8:e252353</td></tr>
+<tr><td>68</td><td>Practical Anemia Bundle の縦断解析（Hb・貯蔵鉄・炎症マーカー）</td><td>Warner MA, et al. Br J Anaesth 2026;136(2):516–524</td></tr>
+<tr><td>69</td><td>静注鉄製剤の安全性のSR・メタ解析（103試験）</td><td>Avni T, et al. Mayo Clin Proc 2015;90(1):12–23</td></tr>
+<tr><td>72</td><td>セフィデロコル投与患者の鉄動態（APEKS-NP 事後解析）</td><td>Skaar EP, et al. Eur J Clin Microbiol Infect Dis 2022;41(3):467–</td></tr>
+<tr><td>73</td><td>非貧血CABG患者への静注鉄</td><td>Houry ら. Anaesth Crit Care Pain Med 2023;42(1):101171</td></tr>
+<tr><td>74</td><td>CABG患者への静注鉄補充</td><td>Shokri H, Ali I. Ann Card Anaesth 2022;25(2):141–147</td></tr>
+<tr><td>75</td><td>慢性重症病態におけるカルニチン欠乏</td><td>Bonafé L, Berger M, Que Y, Mechanick J. Curr Opin Clin Nutr Metab Care 2014;17:200–209</td></tr>
+<tr><td>81</td><td>ICU長期滞在後の血清アシルカルニチンプロファイルの変化</td><td>Rousseau AF, et al. Nutrients 2022;14</td></tr>
+<tr><td>82</td><td><strong>EPaNIC バイオバンク：重症病態の異常カルニチン濃度と転帰悪化</strong></td><td>Lauwers C, et al. Crit Care 2026;30:34</td></tr>
+<tr><td>84</td><td>重症成人のカルニチン欠乏のリスク因子（横断研究144例）</td><td>Gordon J, et al. JPEN J Parenter Enteral Nutr 2026;50:394–401</td></tr>
+<tr><td>86</td><td><strong>EPaNIC 本試験</strong>：重症成人の早期 vs 後期静脈栄養</td><td>Casaer M, et al. N Engl J Med 2011;365(6):506–517</td></tr>
+<tr><td>91</td><td><strong>RACE</strong>：敗血症性ショックへのレボカルニチン上乗せ</td><td>Jones AE, et al. JAMA Netw Open 2018;1:e186076</td></tr>
+<tr><td>98</td><td>ESPEN ICU栄養ガイドライン（病期の考慮）</td><td>—</td></tr>
+<tr><td>100</td><td>フランス集中治療学会（SFAR-SRLF）の貧血ガイドライン</td><td>Lasocki S, et al.</td></tr>
+<tr><td>106</td><td><strong>CITRIS-ALI</strong>：敗血症性ARDSへの高用量ビタミンC</td><td>Fowler A 3rd, et al. JAMA 2019</td></tr>
+<tr><td>108</td><td><strong>VITDAL-ICU</strong>：重症患者への高用量ビタミンD3</td><td>Amrein K, et al.</td></tr>
+<tr><td>109</td><td><strong>VIOLET</strong>：ビタミンD欠乏の重症患者への早期高用量ビタミンD3</td><td>NHLBI PETAL Network, Ginde A, et al.</td></tr>
+<tr><td>116</td><td><strong>VITAL</strong>：ビタミンDサプリメントとがん・心血管疾患の予防</td><td>Manson JE, et al. N Engl J Med</td></tr>
+<tr><td>117</td><td><strong>DO-HEALTH</strong>：ビタミンD・オメガ3・運動プログラムの効果</td><td>Bischoff-Ferrari HA, et al.</td></tr>
+<tr><td>118</td><td><strong>D2D</strong>：糖尿病予備群へのビタミンDと糖尿病発症</td><td>Pittas AG, et al.</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 重症患者の微量栄養素は <strong><mark class="hl">血中濃度が低い＝欠乏、ではない</mark></strong>。CRP が 10 mg/L を超えれば銅以外はほぼ全て下がるので、<strong><mark class="hl">測るなら必ずCRPを同時に出し、単一の検査値だけで補充を決めない</mark></strong>。実務上は <strong><mark class="hl">全例に基礎量（DRI）を入室初日から毎日、加えて入室時チアミン 100〜300 mg/日 静注を3〜4日</mark></strong> をルーチンにし、追加測定は「CRRT 2週間超・40%超熱傷・1500 kcal/日 未満・創傷治癒遅延・進行性筋萎縮・Hb&lt;100 g/L」の6状況に絞る。 個別の判断は — <strong><mark class="hl">高用量ビタミンCは使わない</mark></strong>（LOVIT・LOVIT-COVID・VICTORY・VITaCCA すべて害寄り、同じ号の CEMVIS も24 g/日で完全に中立）。<strong><mark class="hl">ビタミンDは800 IU/日を確保するだけで十分</mark></strong>、高用量ローディングの答えは VITDALIZE（2027年）を待つ。<strong><mark class="hl">鉄は「急性敗血症期には補正せず、炎症が引いてから、ヘプシジン低値／sTfR上昇を狙って静注鉄 1 g（総量20 mg/kg）」</mark></strong>、退室後の使用に制限は要らない。<strong><mark class="hl">カルニチンは CRRT とバルプロ酸のときだけ疑う</mark></strong>（測れるなら25 µmol/L未満で0.5〜1 g/日、ただし高値50 µmol/L超も予後不良なので漫然と続けない）。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
