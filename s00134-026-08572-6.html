@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>食道バルーンでARDSの換気を個別化すべきか — 経肺圧モニタリングの適応と実際（What's New・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08572-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">食道バルーンでARDSの換気を個別化すべきか — 経肺圧モニタリングの適応と実際（What's New・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Marini JJ, Ferguson ND, Talmor D. Should the esophageal balloon catheter be deployed to personalize ventilation of ARDS? Intensive Care Med. 2026. DOI: 10.1007/s00134-026-08572-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-08-24）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08572-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08572-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Should the esophageal balloon catheter be deployed to personalize ventilation of ARDS?</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わらないこと</strong>：ARDSの標準は今まで通り「低容量換気＋気道内圧ベースのプラトー圧・駆動圧の管理」。全例に食道バルーンを入れる根拠はなく、主要ガイドライン（ESICM 2023／ATS-ESICM-SCCM 2017／ATS 2024 update／独ガイドライン2025）はいずれも Pes の優先使用を推奨していない</li><li><strong>変わりうること</strong>：著者らが「強く支持する（strongly favor）」対象は3つに限定される。①重症肺損傷、②高度肥満・胸郭変形・大量胸水・片側性病変など胸壁環境が明らかに異常、③自発呼吸努力が旺盛。この3群では「Crs（呼吸器系コンプライアンス）が悪い＝肺が硬い」という読み替えが破綻するため、当院でも Pes 測定の適応を検討する価値がある</li><li><strong>すぐできる準備</strong>：新世代人工呼吸器には Pes 専用の低圧レンジ圧センサポートと経肺圧表示が実装されているものがある。まず当院の機種でこの機能が使えるか、食道バルーンカテーテルの院内在庫・請求区分がどうなっているかを確認する</li><li><strong>手技のハードルは低い</strong>：挿入は経鼻的に約40 cm、経管栄養チューブと同居させても測定は成立する。むしろ律速は「バルーン容量の維持とキャリブレーションを、慣れたスタッフが継続的に行えるか」という運用面。導入するなら測定担当を絞り、occlusion test の記録を必須項目にする</li><li>同時期の姉妹論文 <span class="wl">駆動圧と経肺圧の違い — ΔPはVTの個別化、PLはPEEPの個別化（総説・ICM2026）</span> と合わせて、ICU勉強会1コマ（ΔP＝一回換気量の個別化／PL＝PEEPの個別化）として組める</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：肺保護換気の数値目標（プラトー圧、PEEP、駆動圧）はいずれも人工呼吸器回路で測る気道内圧に基づく。しかし気道内圧は肺を膨らませると同時に胸郭を押し広げており、肺そのものにかかる張力＝経肺圧（PL = Paw − Ppl）とは別物である。食道内圧（Pes）は胸腔内圧の代用として使える</li><li><strong>Unknown</strong>：Pes を使って PEEP や上限圧を個別化すると、生理学的指標は改善する。しかし死亡率・人工呼吸期間といった臨床アウトカムを一貫して改善するかは、中等症〜重症ARDS全体では確認されていない</li><li><strong>What's new</strong>：この3名（Marini・Ferguson・Talmor＝EPVent試験の主導者を含む）が、①手技的なハードルは実際には低いこと、②胸壁環境が異常な患者では気道内圧ベースの前提が崩れること、③したがって「選択された患者」に限れば PL モニタリングを強く支持する、という立場を明示した。同時に「集団全体への上乗せ効果は未解決の重要問題であり、鋭い（incisive）将来研究を要する」と留保している</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 食道バルーンは低侵襲で、挿入も維持も難しくない。<strong>問題は「入れられるか」ではなく「誰に入れる価値があるか」であり、著者らの答えは「胸壁環境が異常な患者と、自発呼吸努力が強い患者」に限定される。</strong></p>
+</div>
+<ul><li>気道内圧（Paw）は肺と胸壁の両方を膨らませる圧であり、肺を伸展させている圧そのものではない。肺にかかるのは経肺圧 PL = Paw − Ppl（胸腔内圧）</li><li>安静時の食道は壁が虚脱しているため、内腔圧（Pes）はその高さの局所胸腔内圧をほぼそのまま反映する。ただし胸腔内圧には重力方向の勾配があるため、Pes は腹側（非重力側）をやや過大評価し、背側（重力側）を過小評価する</li><li>手技の要点：経鼻挿入で先端約40 cm、長さ10 cm の細径バルーンが食道の中〜下1/3に位置する。バルーン充填量は通常 1〜4 mL。位置と充填量の妥当性は occlusion test（呼気終末回路閉塞下の胸郭圧迫で ΔPes/ΔPaw が 0.8〜1.0）で確認する</li><li>相対禁忌は経鼻胃管・栄養チューブと同じ（活動性の凝固障害、大きな静脈瘤、大きな食道裂孔ヘルニア、高度の運動障害、食道腫瘍、最近の食道手術）。気管への誤挿入を避け、抵抗があれば決して押し込まない</li><li>呼気終末 PL が陰性なら「肺胞が閉じたまま／PEEP不足」を示唆する。一回換気ごとの PL の変化幅は、呼吸器系全体ではなく肺そのものの駆動圧を表す</li><li>数値目標として提案されているのは、吸気終末 PL（エラスタンス比法）で約 20〜25 cmH2O 以下、呼気終末 PL（Paw − Pes 直接法）で 0 ± 2 cmH2O。経肺駆動圧（ΔPL）の安全域は「胸壁が正常と仮定すれば 12 cmH2O 程度が妥当だろうが、これは未検証」と明記されている</li><li>胸壁が硬いとき Crs は肺の状態を誤って表す。エラスタンスは直列加算（Ers = El + Ew）だが、コンプライアンスは加算されない（Crs = Cl × Cw /(Cl + Cw)）ため</li><li>PL 基準の PEEP 設定は他法より高い PEEP になりがちで、すでに開いている肺胞のストレインを増やしうる、という副作用も著者は明示している</li><li>自発呼吸下では、Pes の圧変動が肺胞に実際に加わる伸展と機械的パワーを知る唯一の直接手段であり、VILI と P-SILI の両方のリスク評価に効く。Pocc（呼気閉塞法）は非侵襲的代替だが、Pes は依然として「ゴールドスタンダード」</li><li>エビデンスは分かれる。生理学的改善は再現性があるが、死亡率・人工呼吸日数の一貫した優位は示されていない。ただし「肺が生死を規定している患者かどうか」で効果が変わる可能性が示唆されている</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 人工呼吸器が表示する圧（気道内圧、Paw）は、肺と胸郭という2つのバネを直列に押し広げている合力である。肺胞壁が実際に感じている引き伸ばしの力は、内側の圧（＝Paw）から外側の圧（＝胸腔内圧 Ppl）を引いた差、すなわち経肺圧（transpulmonary pressure, PL）である。胸腔内圧は直接は測れないので、食道の中にバルーン付きカテーテルを置き、その内腔圧（食道内圧, Pes）を胸腔内圧の代用として使う。なぜ食道でよいかというと、安静時の食道は壁どうしがぺたりと合わさって虚脱しており、能動的に張力を出していないので、周囲の胸腔内圧がそのまま内腔に伝わるからである。 関連する略語を先に：<strong>VILI</strong> = ventilator-induced lung injury（人工呼吸器が起こす肺損傷）。<strong>P-SILI</strong>（本文では PSILI）= patient self-inflicted lung injury（患者自身の強い呼吸努力が起こす肺損傷）。<strong>エラスタンス</strong>（E）= 硬さ（1 cmH2O あたり何 mL 入るかの逆数）で、コンプライアンス（C）の逆数。<strong>El</strong> = 肺エラスタンス、<strong>Ew</strong> = 胸壁エラスタンス、<strong>Ers</strong> = 呼吸器系全体のエラスタンス。<strong>occlusion test</strong> = 回路を一時的に閉じて胸郭を外から押し、Paw と Pes が同じだけ動くかを確かめるキャリブレーション手技。</p>
+</div>
+<h3>2. Rationale（なぜ経肺圧なのか）</h3>
+<ul><li>プラトー圧・呼気終末圧・駆動圧という「一回換気ごとの気道内圧」は、鎮静下で自発呼吸のないARDS患者の肺保護換気を導くのに役立つ。ここまでは議論がない</li><li>しかし肺胞レベルで見ると、これらの陽圧は肺を膨らませると同時に胸郭を外へ押し出しており、肺そのものを膨らませている圧を必ずしも表さない。肺にかかっているのは経肺圧 PL＝気道内圧（Paw）− 胸腔内圧（Ppl）である</li><li>肺胞・食道・胸腔内の血管はいずれも本質的に受動的な構造であり、それらを取り巻く胸腔内圧を内腔圧から差し引いたものが、実際にそれらを膨らませる経壁的な力（transmural force）になる</li><li>安静時の食道壁は虚脱しているため、内腔圧 Pes はその高さの局所胸腔内環境の圧に近い。Pes の絶対値は、肺と胸壁の圧迫力の両方の影響を映している</li><li>重力方向に胸腔内圧の勾配があるため、Pes は非重力側（腹側）の局所 Ppl をやや過大評価し、重力側（背側）を過小評価する傾向がある</li><li>ここから重要な帰結が出る。Pes を使ったとしても、呼気終末に PL を陽性に保つことと、非重力側の肺胞の吸気終末の過伸展を避けることを、常に同時に達成できるとは限らない</li><li>適切に留置され最適に充填された食道バルーンカテーテルは、内腔の空気柱を介して胸腔内圧を歪めずに外部トランスデューサへ伝える</li><li>したがって静的気道内圧と Pes の差は、その高さでの経肺（肺胞）伸展圧を良く近似する。この値は、調節換気でも補助換気でも、VILI を避けるうえで臨床的関心が高い</li><li>呼気終末 PL が陰性であることは、肺胞の閉塞が持続していること、あるいは PEEP が不足していることを意味する。一回換気ごとの PL の差（tidal difference）は、呼吸器系全体ではなく肺に固有の駆動圧を表す</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 気道内圧（Paw）、食道バルーン圧（Pes）、およびその差（PL）を用いて、肺・胸壁・呼吸器系全体にかかる圧を見積もる模式図。図の左側には正面から見た胸郭と両肺のイラストが描かれ、気管の中を通る細い実線（オレンジ）が気管チューブ先端に達し、そこから左上のダイヤル型圧力計（Paw と表示）へ矢印が伸びる。同時に、気管の後方を下行する破線（青）が食道を通って肺の中央下方に描かれた細長い楕円形の食道バルーンに達し、そこから右上のもう一つのダイヤル型圧力計（Pes と表示）へ破線の矢印が伸びる。肺と胸壁の境界には青の両向き矢印（Pes に相当する胸壁側の圧）、肺の内部には黒の両向き矢印（PL に相当する肺の伸展圧）が置かれ、同じ気道内圧が「胸壁を押す分」と「肺を膨らませる分」に分かれることを視覚化している。図の右側には人工呼吸器モニタの実波形が3段に並ぶ。上段 Paw は方形波状に上下する典型的な気道内圧波形、中段 Pes は Paw よりはるかに振幅の小さい緩やかな波形（水平の基準線が重ねて引かれている）、下段 PL は上段から中段を引き算した波形で、Paw より低い水準で同じリズムを刻む。3段を上下に並べることで「表示されている気道内圧のうち、実際に肺にかかっているのはどの部分か」が一目で分かる構成になっている。原図・無改変</p>
+</div>
+<h3>3. Technique（手技の実際 — ここが本稿の実務的な核）</h3>
+<p>食道内圧計は解剖学的に背腹方向のほぼ中央に位置するため、肺と心臓を取り巻く平均的な胸腔内圧を推定するのに適した場所にある。市販の食道バルーンカテーテルは複数あり、Pes から得られる情報は生理学に基づく個別化ケアに明確な利点をもたらすにもかかわらず、普及していない。著者らは「医師・看護師の間の誤解（misperceptions）に反して、食道バルーンカテーテルの留置と継続使用は低侵襲であり、本質的に難しくも危険でもない」と断じている。挿入と維持の要点は既存の総説に詳しいとして、本稿では以下の点だけを強調している。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>数値・手順</th><th>根拠・注意点</th></tr></thead>
+<tbody>
+<tr><td>挿入経路と深さ</td><td>経鼻挿入点から先端を約40 cm 進める</td><td>この位置で長さ10 cm の細径バルーンが食道の中〜下1/3に収まる</td></tr>
+<tr><td>バルーン長</td><td>10 cm（細径）</td><td>局所の胸腔内圧を平均化して拾う</td></tr>
+<tr><td>充填量</td><td>通常 1〜4 mL の空気</td><td>少なすぎても多すぎても圧伝達が歪む。維持には慣れた術者が必要</td></tr>
+<tr><td>気道確保</td><td>PL 計算の精度にはバルーンの高さで気道が開いている十分な PEEP が必要</td><td>気道が閉じていると Pes と Paw の対応が崩れる</td></tr>
+<tr><td>位置・充填量の検証</td><td>occlusion test：呼気終末に回路を閉塞し、胸郭を周期的に圧迫して ΔPes/ΔPaw が 0.8〜1.0 になるか</td><td>0.8〜1.0 に入れば「位置が適切かつ充填量が適切」と判定する</td></tr>
+<tr><td>誤挿入の回避</td><td>気管への進入を避けるため特別な注意を払う。挿入は決して力ずくで行わない</td><td>本稿で最初に挙げられている安全上の注意</td></tr>
+<tr><td>経管栄養チューブとの併用</td><td>別の経鼻胃管・経口胃管が併存していても、バルーンカテーテルは胸腔内圧を許容範囲で追跡し続ける</td><td>「胃管が入っているから測れない」は誤り</td></tr>
+<tr><td>人工呼吸器側</td><td>新世代機の一部は Pes の低圧レンジ専用の圧センサポートを備え、経肺圧表示のオプションを提供する</td><td>専用ポートがあれば外付けトランスデューサが不要になる</td></tr>
+</tbody></table></div>
+<p><strong>相対禁忌</strong>は、経鼻胃管や栄養チューブなど食道を通す他のカテーテルに適用されるものと同じである。</p>
+<ul><li>活動性の凝固障害</li><li>大きな食道静脈瘤</li><li>大きな食道裂孔ヘルニア</li><li>高度の食道運動障害</li><li>食道腫瘍</li><li>最近の食道手術</li></ul>
+<p>正確な Pes データの流れを確保するには、慎重な挿入に加えて、経験のある担当者による適切なバルーン容量の維持が必要である、というのが著者の結論である。</p>
+<h3>4. Uses of Pes recording in ARDS（ARDSで Pes を何に使うか）</h3>
+<h4>4-1. 気道内圧を「肺の分」と「胸壁の分」に分解する</h4>
+<p>Pes 記録の第一の目的は、気道内圧を肺成分と胸壁成分に分割することである（Fig. 1）。ARDS管理においてこの分離は、肺リクルートメントや過伸展を決める圧、VILI リスク、血管内容量の過不足を、より情報に基づいて評価することを可能にする。</p>
+<p>現在の肺保護戦略は、人工呼吸器回路で測定された吸気終末圧と駆動圧の数値に強く依拠しており、そこには2つの前提がある。①呼吸努力がないこと、②胸壁が柔軟で力学的特性が比較的正常であること。言い換えれば「胸壁の重さとコンプライアンスが気道内圧に与える寄与は小さいので無視してよい」という前提だが、この前提は常に成り立つわけではない。</p>
+<p><strong>前提が崩れる代表例</strong>：</p>
+<ul><li>病的肥満（morbid obesity）</li><li>胸郭変形</li><li>大量の胸水</li><li>片側性に偏った肺病変（lateralized pulmonary pathology）</li></ul>
+<p>これらの患者の肺は、変化した胸郭環境に取り囲まれている。</p>
+<h4>4-2. なぜ Crs は肺の状態を誤って表すのか（エラスタンスとコンプライアンスの非対称）</h4>
+<p>直列に結合した肺（El）と胸壁（Ew）のエラスタンスは足し算で呼吸器系全体（Ers）になる。</p>
+<ul><li>Ers = El + Ew</li></ul>
+<p>ところがその逆数であるコンプライアンス（Crs、Cl、Cw）は足し算にならない。</p>
+<ul><li>Crs = (Cl × Cw) / (Cl + Cw)</li></ul>
+<p>したがって肺を包む胸郭のコンプライアンスが悪いとき、測定された呼吸器系コンプライアンスの変化は、肺のコンプライアンスの変化を誤って表す（misrepresent）ことになる。ベッドサイドで「Crs が下がった＝肺が悪化した」と読むのが危険になるのは、まさにこの状況である。</p>
+<h4>4-3. PEEP設定への応用と、その代償</h4>
+<ul><li>開いた肺胞と閉じた肺胞の境界面でリクルートメントを最適化しストレインを最小化するには、理論上、呼気終末 PL がわずかに陽性であることが必要になる</li><li>この基準に従って PL で PEEP を調整すると、他の方法で設定するより高い PEEP になることが多い</li><li>そして、すでに開いている肺胞のストレインをかえって増やしうる（may augment strain in open lung units）</li><li>それでもなお、PL でタイトレーションした PEEP は「ARDSに関連する生理学を改善する高いポテンシャルを示してきた」と著者は評価する</li></ul>
+<h4>4-4. 自発呼吸があるときの価値</h4>
+<p>呼吸筋が働いているときは、胸腔内圧とその変動を知ることが、肺胞組織に実際に加わる伸展と機械的パワーを見積もるうえで不可欠になる。これらは人工呼吸器由来（VILI）と呼吸努力由来（P-SILI）の両方の組織損傷リスクを決め、同時に呼吸仕事量そのものを決める。この情報は、換気補助のあらゆる段階で人工呼吸器のサポート量を調整する助けになる。</p>
+<p>具体例として著者が挙げるのは、気道内圧を上げたときの2通りの帰結である。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>気道内圧を上げたら呼吸努力が減った（有効）</td><td>Pes の呼吸性変動が縮小しているか</td><td>サポート量をその水準で維持し、過剰努力と呼吸筋疲労の軽減を確認する</td></tr>
+<tr><td>気道内圧を上げても呼吸ドライブが抑えられない（無効）</td><td>Pes の変動が変わらないまま PL だけが上がっていないか</td><td>PL と損傷リスクを単に増やしているだけなので、圧を上げる以外の手（鎮静・ドライブ抑制の原因検索）へ切り替える</td></tr>
+</tbody></table></div>
+<p>なお、患者の吸気努力を推定する非侵襲的手法として呼気閉塞法（Pocc）が存在するが、Pes で測る胸腔内圧の変動は依然として「ゴールドスタンダード」である、と著者は位置づけている。</p>
+<h3>5. Clinical investigations in ARDS（臨床試験のエビデンス）</h3>
+<p>異常な胸壁力学、あるいは活発な呼吸努力を持つ患者では、損傷肺にかかる力に焦点を絞ることが特に重要になる。これまでに提案され、気道内圧のみに基づく従来戦略と臨床的に比較検証されてきた基準は次の2つである。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>提案されている目標値</th><th>測定法</th></tr></thead>
+<tbody>
+<tr><td>最大安全吸気終末肺圧</td><td>PL 約 20〜25 cmH2O</td><td>エラスタンス比法（elastance-derived）</td></tr>
+<tr><td>肺胞の開存を保つ最小 PEEP</td><td>呼気終末 PL 0 ± 2 cmH2O</td><td>直接法（Paw − Pes の引き算）</td></tr>
+<tr><td>経肺駆動圧（ΔPL）の安全上限</td><td>約 12 cmH2O</td><td>胸壁が正常と仮定した場合の「妥当だが未検証（reasonable but untested）」の値と明記</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>2つの PL は計算方法が違う 同じ「PL」でも、<mark class="hl">吸気終末の上限（20〜25 cmH2O）はエラスタンス比法、呼気終末の目標（0 ± 2 cmH2O）は Paw − Pes の直接法</mark>という別々の計算で出す。エラスタンス比法は PL を Paw × (El/Ers) として推定する方法で、Pes の絶対値を使わないため絶対値のバイアス（食道壁の張力や縦隔の重さ）の影響を受けにくい一方、直接法は絶対値をそのまま使うので呼気終末の「開いているか閉じているか」の判定に向く。<mark class="hl">どちらの方法で出した値かを言わずに「PLが◯◯でした」と言うと議論が噛み合わない</mark>ので、JCでは必ず方法をセットで述べる。</p>
+</div>
+<h4>主要試験の結果（数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>デザイン・n</th><th>介入</th><th>主要結果</th></tr></thead>
+<tbody>
+<tr><td>EPVent（Talmor・NEJM 2008）</td><td>単施設RCT、急性肺損傷／ARDS、61例で早期中止（停止基準に到達）</td><td>Pes 誘導 PEEP vs ARDSNet標準</td><td>72時間後の P/F 比が Pes群で 88 mmHg 高い（95% CI 78.1〜98.3、P = 0.002）。24・48・72時間を通じて持続（反復測定ANOVA P = 0.001）。呼吸器系コンプライアンスも24・48・72時間で有意に良好（P = 0.01）</td></tr>
+<tr><td>EPVent-2（Beitler・JAMA 2019）</td><td>北米14施設、第2相RCT、200例（Pes群 102／経験的高PEEP群 98）、中等症〜重症ARDS（P/F ≤ 200）、2012年10月〜2017年9月登録</td><td>Pes 誘導 PEEP vs 経験的高PEEP-FiO2 表</td><td>主要複合エンドポイント（28日までの死亡＋人工呼吸離脱日数の順位複合スコア）に差なし。Pes群がより良い転帰となる確率 49.6%（95% CI 41.7〜57.5%）、P = 0.92</td></tr>
+<tr><td>EPVent-2 の副次</td><td>同上</td><td>同上</td><td>28日死亡 32.4%（33/102）vs 30.6%（30/98）、リスク差 1.7%（95% CI −11.1〜14.6%）、P = 0.88。生存者の人工呼吸離脱日数 中央値22日（IQR 15〜24）vs 21日（IQR 16.5〜24）、中央値差 0日（95% CI −1〜2）、P = 0.85。救済療法の必要性は Pes群で有意に少ない 3.9%（4/102）vs 12.2%（12/98）、リスク差 −8.3%（95% CI −15.8〜−0.8%）、P = 0.04。気圧外傷は6例 vs 5例。他の7つの事前設定副次評価項目はいずれも有意差なし</td></tr>
+<tr><td>EPVent-2 再解析（Sarge・AJRCCM 2021）</td><td>200例全例の post hoc 再解析</td><td>多臓器不全の重症度（APACHE-II）と肺力学による治療効果の異質性を検討</td><td>60日死亡への治療効果が多臓器不全の重症度で異なる（交互作用 P = 0.03）。APACHE-II が中央値未満の患者では Pes 誘導 PEEP が低死亡と関連（ハザード比 0.43、95% CI 0.20〜0.92）、APACHE-II が高い患者では逆方向の可能性（ハザード比 1.69、95% CI 0.93〜3.05）。治療群や多臓器不全の重症度と独立に、<mark class="hl">呼気終末 PL が 0 cmH2O 近傍に収まったときに死亡率が最も低かった</mark></td></tr>
+</tbody></table></div>
+<p>本稿の要約はこうである。呼吸器系コンプライアンスと酸素化の改善は PL タイトレーションによる PEEP 設定を支持する一方、中等症〜重症ARDSにおける死亡率と人工呼吸日数について一貫した優位性は臨床エビデンスとしてまだ確認されていない。ただし利益は「肺が生存を規定する主因であるかどうか」に依存するようだ、という但し書きが付く（これが Sarge 2021 の再解析の含意である）。</p>
+<h3>6. ガイドラインの立場と著者の推奨</h3>
+<ul><li>影響力のある学会ガイドラインは現時点で Pes の優先的使用を差し控えている。本稿が挙げるのは ESICM のARDS診療ガイドライン（2023）、ATS/ESICM/SCCM 合同ガイドライン（2017）、ATS のARDS管理アップデート（2024）、および侵襲的換気とECMOに関する独語圏の臨床ガイドライン（2025）</li><li>それでも著者らは「重症肺損傷、あるいは高度肥満や旺盛な自発呼吸努力など胸壁異常に関する大きな懸念がある選択された患者では、PL のモニタリングを強く支持する（we strongly favor）」と明言する</li><li>そのうえで結語は禁欲的である。選択されたARDS集団の肺保護を個別化するために Pes を使うことの上乗せ価値は、現時点では「重要だが未解決の問題（important but unresolved question）」であり、鋭い将来研究に値する</li></ul>
+<h3>7. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>エビデンスの階層としては専門家意見である</strong>。本稿は "What's New in Intensive Care" の4ページ短報で、新規データも系統的レビューも含まない。著者の一人（Talmor）は EPVent および EPVent-2 の責任著者、もう一人（Ferguson）は ATS/ESICM/SCCM ガイドラインの著者であり、Pes の推進側に立つ人物の見解であることを踏まえて読む必要がある（COIは申告されていないが、知的な利害は存在する）</li><li><strong>「選択された患者」の定義が操作的でない</strong>。重症肺損傷、高度肥満、旺盛な呼吸努力という3条件は挙がるが、BMI いくつから、呼吸努力をどう定量して、というカットオフは示されない。ベッドサイドで適応判断をプロトコル化しようとすると、この曖昧さが最大の障害になる</li><li><strong>推奨する行為の代償を自ら認めている</strong>。PL 基準の PEEP は他法より高くなりがちで、開存肺胞のストレインを増やしうる、と本文が明記している。これは「PL を見れば安全になる」という直感を否定する重要な留保であり、JCで流し読みされやすい</li><li><strong>Pes の空間的限界が原理的に残る</strong>。重力勾配のため Pes は腹側を過大評価し背側を過小評価する。その結果、「呼気終末 PL を陽性に保つ」ことと「非重力側の吸気終末の過伸展を避ける」ことを同時に満たせない場合がある、と著者自身が Rationale で述べている。つまり Pes は胸腔内圧の単一の代表値であって、局所分布の情報を与えない（関連：<span class="wl">経肺圧の局所分布（Silva &amp; Gama de Abreu 2018）</span>）</li><li><strong>エラスタンス比法と直接法が混在している</strong>。吸気終末の上限は文献7（エラスタンス比法）、呼気終末目標は文献8と10（直接法）と、根拠となる文献も方法も異なる。ΔPL の 12 cmH2O に至っては「untested」と自ら書いている。3つの数値が同じ強さの推奨として並んでいるように見えるが、根拠の強さは明らかに不均一である</li><li><strong>試験の外的妥当性</strong>。EPVent-2 は第2相200例で、主要評価が順位複合スコアという検出力に配慮した設計。救済療法の減少（−8.3%）という副次結果は臨床的に意味がありうるが、多重性の調整なしの副次評価項目である。Sarge 2021 の APACHE-II による部分集団効果は post hoc の交互作用検定（P = 0.03）であり、仮説生成にとどまる（著者ら自身が「前向き検証を要する」と結んでいる）</li><li><strong>普及しない本当の理由に踏み込んでいない</strong>。本稿は「誤解（misperceptions）」を主因として挙げるが、実際の障壁はカテーテルのコスト、保険償還、測定を維持できる人員、そして波形を解釈できる医師の数である可能性が高い。手技の平易さを強調するだけでは、導入の障壁は下がらない</li><li><strong>occlusion test の 0.8〜1.0 という許容幅の根拠が示されない</strong>。この範囲は広く使われているが、範囲外だったときに何を先に疑う（充填量か、位置か、気道閉塞か）かの手順は本稿には書かれていない。実務では <span class="wl">食道バルーンによる呼吸モニタリング 実践ガイド（Jonkman・EurRespirRev2023）</span> のような実践総説に当たる必要がある</li></ul>
+<h3>8. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症患者の経肺圧モニタリングの利点と欠点</td><td>Ball L, Talmor D, Pelosi P. Crit Care. 2024;28(1):177</td></tr>
+<tr><td>2</td><td>経肺圧のベッドサイドモニタリングの技術的側面</td><td>Mojoli F, et al. Ann Transl Med. 2018;6(19):377</td></tr>
+<tr><td>3</td><td>人工呼吸患者における食道バルーン — 最新の臨床レビューと実践</td><td>Jonkman AH, et al. Eur Respir Rev. 2023;32(168):220186</td></tr>
+<tr><td>4</td><td>経鼻胃管が正常成人の食道内圧測定に与える影響</td><td>Niknam J, ... Marini JJ. Chest. 1994;106(1):137-141</td></tr>
+<tr><td>5</td><td>ESICM ARDSガイドライン（定義・フェノタイピング・呼吸サポート戦略）</td><td>Grasselli G, et al. Intensive Care Med. 2023;49(7):727-759</td></tr>
+<tr><td>6</td><td>ALI/ARDS患者の胸壁エラスタンス（Bench-to-bedside review）</td><td>Gattinoni L, Chiumello D, Carlesso E, Valenza F. Crit Care. 2004;8(5):350-355</td></tr>
+<tr><td>7</td><td>5つの異なる PEEP タイトレーション法による VILI 潜在リスクの比較</td><td>Sutherasan Y, et al. Front Med (Lausanne). 2025;12:1642064</td></tr>
+<tr><td>8</td><td>急性肺損傷における食道内圧誘導の人工呼吸（EPVent）</td><td>Talmor D, et al. N Engl J Med. 2008;359(20):2095-2104</td></tr>
+<tr><td>9</td><td>過大な呼吸努力と動的経肺駆動圧を検出する非侵襲法（Pocc）</td><td>Bertoni M, et al. Crit Care. 2019;23(1):346</td></tr>
+<tr><td>10</td><td>H1N1関連ARDSのECMO基準における経肺圧の役割</td><td>Grasso S, et al. Intensive Care Med. 2012;38(3):395-403</td></tr>
+<tr><td>11</td><td>食道内圧誘導 PEEP vs 経験的高PEEP-FiO2（EPVent-2）</td><td>Beitler JR, et al. JAMA. 2019;321(9):846-857</td></tr>
+<tr><td>12</td><td>EPVent-2 のリスクベース・機序的再解析</td><td>Sarge T, et al. Am J Respir Crit Care Med. 2021;204(10):1153-1163</td></tr>
+<tr><td>13</td><td>ATS/ESICM/SCCM 合同ガイドライン（成人ARDSの人工呼吸）</td><td>Fan E, et al. Am J Respir Crit Care Med. 2017;195(9):1253-1263</td></tr>
+<tr><td>14</td><td>成人ARDS管理のアップデート（ATS公式ガイドライン）</td><td>Qadir N, et al. Am J Respir Crit Care Med. 2024;209(1):24-36</td></tr>
+<tr><td>15</td><td>急性呼吸不全に対する侵襲的換気とECMOの臨床ガイドライン</td><td>Hohmann F, et al. Respiration. 2025;1-17</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 食道バルーンは「入れるのが難しい検査」ではなく「誰に入れるかを選ぶ検査」である。<mark class="hl">高度肥満・胸郭変形・大量胸水・片側性病変、あるいは自発呼吸努力が旺盛なARDS患者を見たら、Crs と気道内圧だけで肺保護を語るのをやめて Pes 測定を検討する</mark>。 測るなら手順まで固める。<mark class="hl">経鼻40 cm・バルーン 1〜4 mL・occlusion test で ΔPes/ΔPaw 0.8〜1.0 を確認</mark>し、<mark class="hl">呼気終末 PL は Paw − Pes の直接法で 0 ± 2 cmH2O、吸気終末 PL はエラスタンス比法で 20〜25 cmH2O 以下</mark>を目標にする（ΔPL 12 cmH2O は未検証の目安）。 <mark class="hl">全例導入の根拠はまだない</mark>。EPVent-2 は主要複合エンドポイントで差を示せず（より良い転帰の確率 49.6%、P = 0.92）、28日死亡も 32.4% vs 30.6% と同等だった。ただし救済療法は Pes 群で少なく（3.9% vs 12.2%、P = 0.04）、再解析では <mark class="hl">APACHE-II が低い群でハザード比 0.43</mark>、そして <mark class="hl">呼気終末 PL が 0 近傍に収まった患者で死亡率が最も低かった</mark>。<mark class="hl">「肺が生死を決めている患者」ほど恩恵が大きい</mark>という仮説を持って、選択的に使うのが現時点の最適解である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
