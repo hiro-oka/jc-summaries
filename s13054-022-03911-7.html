@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-022-03911-7.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Wieruszewski PM, Khanna AK. Vasopressor Choice and Timing in Vasodilatory Shock. Crit Care. 2022;26:76. doi:10.1186/s13054-022-03911-7</dd><dt>掲載誌</dt><dd>Critical Care（2022-03-22）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-022-03911-7" target="_blank" rel="noopener">doi.org/10.1186/s13054-022-03911-7</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Vasopressor Choice and Timing in Vasodilatory Shock</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-022-03911-7.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-022-03911-7.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-022-03911-7.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>① 輸液抵抗性の低血圧で昇圧薬開始を待たない</strong>。本文が引くコホートでは、開始が4時間を超えると臓器不全悪化のオッズが4.34倍、6時間を超えると30日死亡のオッズが2.9倍。「もう少し輸液してから」「CVを入れてから」で数時間を失う構造が当院にもある。末梢からの短時間ノルアドレナリン投与を含めた開始経路を確認しておく。</li><li><strong>② 第2剤（バソプレシン）を「ノルアド15 µg/min 未満」で足すことを既定にする</strong>。VASST のサブ解析では、バソプレシン追加時のノルアドが 15 µg/min 未満だった群で28日死亡 26.5% vs 35.7%、90日死亡 35.8% vs 46.1%。別のコホートでは、追加時点のノルアドが 10 µg/min 増えるごとに院内死亡リスクが 20.7% 上がる。<mark class="hl">ノルアドを毒性域まで上げてから第2剤、という既定路線を外す</mark>。</li><li><strong>③ 乳酸を「昇圧薬を足すタイミングの指標」としても読む</strong>。バソプレシンに血行動態反応を示す患者は半数未満で、反応する確率は乳酸が低いほど2.15倍高い。乳酸が上がりきってから足しても効きにくい、という読み方ができる。</li><li><strong>④ ノルアド高用量の予後を数字で共有する</strong>。1 µg/kg/min 超（あるいは 90〜100 µg/min 超）では死亡率 60〜94%。家族面談・治療方針カンファでの「どこまで上げるか」の議論に使える。</li><li><strong>⑤ 不整脈をカテコラミン負荷の指標として記録する</strong>。敗血症性ショックのノルアド投与例の最大1/3に不整脈が起き、最大ノルアド用量が 5 µg/min 増えるごとに不整脈リスクが 6% 上がる。新規心房細動が出たら「第2剤を足す合図」と読む運用は理にかなう。</li><li><strong>⑥ ただし「早期バランス型」を検証したRCTは存在しない</strong>。著者ら自身が「現時点で説得力のあるデータは無い（there are not currently convincing data）」と明記している。当院で運用に落とすときは、生理学的仮説として扱い、アウトカム改善を約束しない。</li><li><strong>⑦ アンジオテンシンII とレニン測定は当院では選択肢に入らない</strong>（後述「日本の事情」参照。本論文には日本の承認状況の記載は無い）。本総説の個別化戦略の核であるレニン誘導のアンジオテンシンIIは、そのまま輸入できない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：血管拡張性ショックはICUで最も多い循環性ショックであり、10年以上にわたりノルアドレナリンが第一選択として推奨されてきた。開始の遅れが転帰を悪くすることは複数の観察研究で示され、SSC 2018 更新は輸液抵抗性低血圧に対する昇圧薬開始を1時間バンドルに含めた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：①どの時点をもって「ノルアドレナリン治療の失敗」とみなすか、②第2の昇圧薬をいつ足すか、③どの薬を第2剤に選ぶか。ガイドラインの記載は曖昧（vague guidance）で、集中治療医の実践は施設間・個人間で大きくばらついている。</li><li><strong>What's new（本総説の主張）</strong>：血管拡張性ショックでは交感神経系・バソプレシン系・レニン-アンジオテンシン系の3系統が同時に障害されているのだから、1系統（カテコラミン）だけを毒性域まで最大化してから次に移る段階的戦略は生理学的に不合理である。代わりに、複数クラスの昇圧薬を低用量で早期から併用する「早期・多モーダル（＝広域スペクトラム）昇圧薬戦略」を、バイオマーカーによる表現型診断と組み合わせて提案する。<strong>ただし著者ら自身が、抗菌薬の広域→デエスカレーションの類推と違って、この戦略を支持する説得力のあるデータはまだ無いと明言している。</strong></li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 「ノルアドレナリンを毒性域まで上げ、カテコラミン不応を確認してから次の薬へ」という段階的アプローチは、灌流圧の回復を遅らせ、高乳酸血症とカテコラミン負荷を積み上げるだけである。<strong>3系統のホルモン欠乏が同時に起きているという生理から、複数クラスを低用量で早期に併用する「早期バランス型」へ転換すべきだ、というのが本総説の主張</strong>（ただし検証RCTは無い）。</p>
+</div>
+<ul><li><strong>対象病態</strong>：血管拡張性ショック。ICU入室患者で最も多い循環性ショックの型。敗血症が主因だが、術後血管麻痺（vasoplegia）・アナフィラキシー・脊髄損傷（神経原性ショック）・急性膵炎による全身性炎症反応・全身麻酔および神経軸麻酔による直接の血管弛緩も原因になる。</li><li><strong>段階的アプローチの定義</strong>：ノルアドレナリン開始 → しばしば毒性域まで増量 → 相対的カテコラミン不応状態を待つ → 次の昇圧薬へ。</li><li><strong>その帰結</strong>：十分な灌流圧の達成が遅れ、進行性の多臓器不全に至る。臓器不全の総数が1つ増えるごとに死亡確率が上がる。</li><li><strong>3系統の同時障害</strong>：交感神経系（総心拍変動の低下）、バソプレシン系（敗血症性低血圧では血漿バソプレシンが 3.1 pg/mL と不適切に低い。心原性ショックの 22.7 pg/mL に対し p&lt;0.001）、レニン-アンジオテンシン系（活性化されているのに受容体がダウンレギュレート）。</li><li><strong>タイミング</strong>：重症度調整後、開始の遅れは院内死亡と関連（OR 1.02、95%CI 1.01–1.03、p&lt;0.001）。14.1時間超の遅れで最も顕著（OR 1.34、95%CI 1.03–1.76、p=0.048）。1時間の遅れごとに死亡リスク +5.3%。</li><li><strong>CENSER</strong>：敗血症性ショック発症1時間以内のノルアドレナリン開始を検証した前向き二重盲検RCT。6時間時点のショック離脱 OR 3.4（95%CI 2.09–5.53、p&lt;0.001）。死亡には差が無いが第II相で死亡を検出する検出力は無い。心原性肺水腫（OR 0.70）と不整脈（OR 0.74）は早期群で少なかった。</li><li><strong>高乳酸血症</strong>：予後指標であると同時に、非アドレナリン系昇圧薬の効きやすさの指標。乳酸が低いほどバソプレシン反応が2.15倍起きやすい。合成アンジオテンシンIIも同様（反応者の乳酸 6.5 vs 非反応者 9.5 mmol/L）。</li><li><strong>カテコラミン負荷</strong>：末梢虚血・脾臓域低酸素、不整脈（ノルアド投与例の最大1/3）。高用量ノルアドの死亡率は 60〜94%（PRISM メタ解析の敗血症性ショック全体は約25%）。</li><li><strong>個別化への道</strong>：ADRβ2・AGTRAP・LNPEP の遺伝子多型、アンジオポエチン-2、レニン、バソプレシン濃度が候補バイオマーカー。とくにレニンは乳酸より優れた死亡予測因子として台頭しているが、ベッドサイドで測れる POCT が無いことが最大の障壁。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 血管拡張性ショックと昇圧薬の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>血管拡張性ショック（vasodilatory shock）</strong> とは、血管の緊張（トーヌス）が失われて全身血管抵抗（SVR）が下がり、動脈血圧が保てなくなった状態を指す。心臓のポンプ機能が落ちる心原性ショックや、血液量が減る出血性ショックとは機序が違い、「血管が広がりすぎている」ことが本質である。</p>
+<p><strong>なぜ問題か</strong>：血圧は、毛細血管に動脈血を押し込んで組織に酸素を届けるための駆動圧である。これが下がると細胞レベルで酸素が使えなくなり、嫌気性代謝に切り替わり、多臓器不全から死に至る。</p>
+<p><strong>何を治すのか</strong>：①血管内容量を戻す（輸液蘇生）と ②薬で血管緊張を戻す（昇圧薬）の2本立て。本総説は後者だけを扱う。</p>
+<p><strong>登場する薬と受容体</strong>（Fig. 2 の内容に対応）</p>
+<ul><li><strong>カテコラミンとその誘導体</strong>（ノルアドレナリン、アドレナリン、フェニレフリン等）：血管平滑筋の <strong>α1受容体</strong> に結合して血管収縮を起こす。一部は <strong>β2受容体</strong> を介して血管拡張も起こす。心臓では <strong>β1受容体</strong> を介して心拍数と心収縮力を上げる。</li><li><strong>バソプレシンとその類似体</strong>：血管平滑筋の <strong>V1受容体</strong> に結合して血管収縮を起こす。下垂体後葉から分泌される内因性ホルモンの補充という位置づけ。</li><li><strong>アンジオテンシンII</strong>：<strong>アンジオテンシン1型受容体（AT1R）</strong> に結合して血管収縮を起こす。腎の灌流低下 → レニン分泌 → アンジオテンシンII 生成という経路の最終産物であり、アルドステロン合成とバソプレシン放出も促す。</li></ul>
+<p><strong>難治性血管拡張性ショック（refractory vasodilatory shock）</strong>：単剤または多剤の昇圧薬を増量しても十分な平均動脈圧（MAP）を持続的に保てない状態。治療失敗の終着点を指す臨床的な呼び名であり、本総説では「微小循環血流の変化、膜の過分極、細胞の弛緩、血管反応性の変化」などが分子レベルで組み合わさった状態と説明される。</p>
+<p><strong>略語</strong>：MAP＝平均動脈圧／SVR＝全身血管抵抗／SOFA・mSOFA＝臓器不全評価スコア／APACHE II＝重症度スコア／HRV＝心拍変動／POCT＝ベッドサイド迅速検査。</p>
+</div>
+<h3>2. 序論 — なぜ「選択とタイミング」が問題なのか 🫀</h3>
+<ul><li><strong>血管拡張性ショックはICU入室患者で最も多い循環性ショックの型</strong>である（引用は Vincent &amp; De Backer, *N Engl J Med* 2013）。</li><li><strong>原因</strong>：敗血症が主因。ほかに術後血管麻痺、アナフィラキシー、脊髄損傷（神経原性ショック）、急性膵炎による全身性炎症反応、全身麻酔および神経軸麻酔による直接の血管弛緩。</li><li><strong>共通する特徴</strong>：病因によらず、全身血管抵抗の低下と動脈性低血圧。血管内輸液蘇生と薬理学的昇圧薬による血管緊張の回復を要する。</li><li><strong>未治療の場合の経路</strong>：灌流圧が損なわれる → 細胞の酸素利用が不十分 → 嫌気性代謝への転換 → 多臓器不全 → 死。</li><li><strong>現状の問題</strong>：10年以上にわたりノルアドレナリンが第一選択として推奨されてきたが、<strong>第2剤の選択とタイミングについての指針は曖昧（vague guidance）</strong> であり、その結果、ベッドサイドでの集中治療医の実践に相当なばらつき（considerable heterogeneity）が生じている。</li><li>著者らは本総説で「昇圧薬の選択とタイミングを左右する因子を現代的にレビューし、血管拡張性ショックの古典的な治療パラダイムに挑戦する」と宣言する。</li></ul>
+<h3>3. 方法（Methods）📐</h3>
+<p>本論文はナラティブレビューであり、系統的検索・エビデンス格付けは行われていない。JCで扱うにあたって押さえるべき「方法」的性質は次の通り。</p>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（REVIEW）。*Annual Update in Intensive Care and Emergency Medicine 2022* に採録された10編のうちの1編。</li><li><strong>検索戦略・組み入れ基準</strong>：<mark class="hl">本文に記載は無い</mark>。文献の選定基準、検索データベース、期間の記載はどこにもない。</li><li><strong>エビデンスの格付け</strong>：無し。GRADE 等の枠組みは用いられていない。推奨の強さ・確実性の表記も無い。</li><li><strong>引用文献</strong>：51編。うちアウトカム試験は VASST（RCT・二次解析）、CENSER（第II相RCT）、ATHOS-3 の事前規定解析、PRISM メタ解析。その他は観察コホート、遺伝子関連研究、専門家レビュー。</li><li><strong>著者の立場</strong>：「早期・多モーダル（広域スペクトラム）昇圧薬戦略」を提唱する立場を明示している。本総説は仮説提示であって検証ではない。</li><li><strong>利益相反</strong>：両著者とも合成アンジオテンシンIIの製造元からの資金受領歴があり、筆頭著者は同薬の市販後研究（引用文献27）の第一著者でもある。</li></ul>
+<h3>4. バランス型昇圧薬アプローチ — 古典的段階戦略の何が問題か ⚖️</h3>
+<p><strong>古典的アプローチの定義（本文そのまま）</strong> 輸液抵抗性の血管拡張性ショックに対し、カテコラミン系昇圧薬を投与し、指定されたMAPを達成するようタイトレーションする。この段階的アプローチは伝統的に次の順序をとる。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ノルアドレナリンを開始する</td></tr>
+<tr><td>2</td><td>用量を漸増する（しばしば毒性域まで）</td></tr>
+<tr><td>3</td><td>相対的なカテコラミン不応状態になるのを待つ</td></tr>
+<tr><td>4</td><td>次の昇圧薬へ移る</td></tr>
+</tbody></table></div>
+<p><strong>この戦略の帰結</strong></p>
+<ul><li>十分な灌流圧の達成を遅らせ、最終的に進行性の多臓器不全に至る。</li><li>そして<strong>臓器不全の総数が1段階増えるごとに、死亡の確率が上がる</strong>。</li><li>終着点が「難治性血管拡張性ショック」＝単剤または多剤の昇圧薬を増量しても十分なMAPを持続的に保てない状態。</li></ul>
+<p><strong>集中治療医に残される3つの不確実性（本文が明示するもの）</strong></p>
+<ol><li><strong>どの時点をもって「ノルアドレナリン治療の失敗」と考えるのか</strong></li><li><strong>第2の昇圧薬をいつ投与するのか</strong></li><li><strong>どの第2昇圧薬を選ぶのか</strong></li></ol>
+<p>著者らは「これらの課題を理解し、古典的な段階的アプローチの代替として、早期・多モーダルのバランス型昇圧薬戦略を合理化することが重要だ」と述べる。そして本総説の残りで、①正常な血圧恒常性とショックでの病態、②ショック転帰の主要規定因子（灌流のタイミング遅延・高乳酸血症・カテコラミン負荷）を、昇圧薬の薬理と関連づけて論じていく。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03911-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03911-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 難治性血管拡張性ショックに至る病態機序（原図・無改変。文献8 Vallabhajosyula らより許諾転載）</p>
+</div>
+<h4>Fig. 1 の全ボックスを表に起こす</h4>
+<p>図は上端の黒いボックス（起点）から下端の黒いボックス（終点）へ向かう流れ図で、中間に灰色のボックス（上流の刺激・修飾因子）と青色のボックス（下流で生じる状態）が3列に配置されている。矢印はすべて青の細線。</p>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>ボックスの色</th><th>文言（原文）</th><th>日本語</th></tr></thead>
+<tbody>
+<tr><td>最上段・中央</td><td>黒（起点）</td><td>Hypoxia, acidosis, hyperlactatemia</td><td>低酸素・アシドーシス・高乳酸血症</td></tr>
+<tr><td>2段目・左</td><td>灰</td><td>Nitric oxide / cGMP inhibition</td><td>一酸化窒素／cGMP による抑制</td></tr>
+<tr><td>2段目・中央</td><td>灰</td><td>ATP-sensitive K⁺ and large Ca²⁺ channel activation</td><td>ATP感受性カリウムチャネルおよび大コンダクタンスカルシウムチャネルの活性化</td></tr>
+<tr><td>2段目・右</td><td>灰</td><td>ROS - superoxide anion, hydroxyl radical, peroxynitrite</td><td>活性酸素種：スーパーオキシドアニオン・ヒドロキシルラジカル・ペルオキシナイトライト</td></tr>
+<tr><td>3段目・左</td><td>青</td><td>Altered microcirculatory flow / Decreased bactericidal activity / Coagulation modulation / Elevated mitochondrial respiration</td><td>微小循環血流の変化／殺菌活性の低下／凝固の修飾／ミトコンドリア呼吸の亢進</td></tr>
+<tr><td>3段目・中央</td><td>青</td><td>Membrane hyperpolarization / Cellular relaxation / Vasorelaxation</td><td>膜の過分極／細胞の弛緩／血管弛緩</td></tr>
+<tr><td>3段目・右</td><td>青</td><td>Shock-like state / Vascular hyperreactivity</td><td>ショック様状態／血管の過反応性</td></tr>
+<tr><td>4段目・中央</td><td>白抜き（青枠）</td><td>Impaired responsiveness to catecholamines</td><td>カテコラミンへの反応性低下</td></tr>
+<tr><td>5段目・左</td><td>灰</td><td>Hyperglycemia / Hypocalcemia / Corticosteroid deficiency</td><td>高血糖／低カルシウム血症／副腎皮質ステロイド欠乏</td></tr>
+<tr><td>5段目・右</td><td>青</td><td>Vascular smooth muscle relaxation</td><td>血管平滑筋の弛緩</td></tr>
+<tr><td>6段目・右</td><td>灰</td><td>COX-2-mediated increase in PGI₂</td><td>COX-2 を介したプロスタグランジンI₂の増加</td></tr>
+<tr><td>最下段・中央</td><td>黒（終点）</td><td>REFRACTORY SHOCK</td><td>難治性ショック</td></tr>
+</tbody></table></div>
+<p><strong>矢印の向き（実践的な読み方）</strong></p>
+<ul><li>起点の「低酸素・アシドーシス・高乳酸血症」は、中央列の <strong>ATP感受性K⁺／大Ca²⁺チャネル活性化</strong> に直接流れ込む。左の NO/cGMP と右の ROS も同じチャネル活性化に横から合流する。</li><li>チャネル活性化 → <strong>膜の過分極 → 細胞の弛緩 → 血管弛緩</strong>（中央列）。過分極すると細胞内にカルシウムが入らず、いくらα1受容体を刺激しても収縮できない。<mark class="hl">これが「カテコラミンを上げても上がらない」の分子的な正体である</mark>。</li><li>左列（NO/cGMP系）は微小循環血流の変化・殺菌活性の低下・凝固の修飾・ミトコンドリア呼吸の亢進を経て、中央の「カテコラミンへの反応性低下」に合流する。</li><li>右列（ROS系）はショック様状態・血管過反応性を経て、やはり「カテコラミンへの反応性低下」に合流する。</li><li><strong>高血糖・低カルシウム血症・ステロイド欠乏</strong>（左下の灰）も「カテコラミンへの反応性低下」に流れ込む。この3つは補正できる因子なので、難治性と呼ぶ前に潰す価値がある。</li><li><strong>COX-2 を介した PGI₂ 増加 → 血管平滑筋弛緩</strong>（右下）も終点に流れ込む。</li><li>すべてが「カテコラミンへの反応性低下」に集まり、そこから <strong>REFRACTORY SHOCK</strong> に至る。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント Fig. 1 の入口に置かれているのは <strong>低酸素・アシドーシス・高乳酸血症</strong> である。つまりカテコラミン不応は「体質」ではなく、<mark class="hl">灌流を回復できていない時間そのものが作り出す状態</mark>として描かれている。「不応になるまで待ってから次の薬」という順序は、待つあいだに不応を深めているという自己成就の構造を持つ。</p>
+</div>
+<h3>5. 血圧の恒常性とショックでの破綻 — 3系統が同時に壊れる 🔗</h3>
+<p>正常な生理条件下では、血圧と循環機能は <strong>交感神経系・バソプレシン系・レニン-アンジオテンシン系</strong> の複雑な相互調節（counter regulatory interplay）によって恒常性が保たれている（Fig. 2）。</p>
+<p>敗血症などの侵襲でこれらが乱されると恒常性バランスが崩れる。最も明白な客観所見は、全身血圧を直接測ることで捉えられる<strong>マクロ循環の機能不全</strong>である。ただし、組織および微小血管への傷害は、<strong>全身の低血圧が現れるのと並行して、あるいはそれに先立って局所的に生じている</strong>。</p>
+<p>さらに重要なのは、<strong>強い全身性炎症反応による直接の侵襲に加えて、恒常性を担う系そのものがショックの間に障害されている</strong>という点である。</p>
+<h4>Table. 3系統の障害（本文の記述を整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>系</th><th>期待される反応</th><th>ショックで実際に起きていること</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>交感神経系</td><td>低血圧に対し交感神経が緊張し、心拍出量と血管抵抗を上げる</td><td>敗血症性ショックではストレス誘発性の hyperdynamic state を伴うことが多いにもかかわらず、総心拍変動（total heart rate variability）が低下しており、交感神経系の障害が示唆される</td><td>Garrard ら, *Clin Auton Res* 1993</td></tr>
+<tr><td>バソプレシン系</td><td>低血圧では下垂体後葉が内因性バソプレシンの貯蔵を分泌するはず</td><td>血管拡張性の敗血症性低血圧では、血漿バソプレシン濃度が不適切に低い（3.1 pg/mL）。同じホルモン反応が期待される他の低血圧状態、たとえば心原性ショック（22.7 pg/mL）に比べて有意に低い（p&lt;0.001）</td><td>Landry ら, *Circulation* 1997</td></tr>
+<tr><td>レニン-アンジオテンシン系</td><td>ショックで系が活性化し、アンジオテンシンIIが血管収縮を担う</td><td>系は活性化されているにもかかわらず、各種アンジオテンシン受容体がダウンレギュレートされており、血管低反応性に加えて内因性カテコラミン分泌の障害にも寄与する</td><td>Mederle ら, *Crit Care* 2013／Bucher ら, *Crit Care Med* 2001</td></tr>
+</tbody></table></div>
+<p><strong>著者らの結論（本節の核心）</strong>：血管拡張性ショックの経過を通じてこの<strong>多因子性・併存性のホルモン欠乏</strong>が存在するにもかかわらず、推奨されているアプローチは依然として、カテコラミンを開始して<strong>しばしば毒性域まで</strong>漸増し、そのあとでようやく第2剤の導入を検討するという段階的なものにとどまっている。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03911-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03911-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. アドレナリン系・バソプレシン系・レニン-アンジオテンシン系の生理学的協奏と、薬理学的昇圧薬の作用点（原図・無改変。Mayo Foundation for Medical Education and Research の許諾により使用、全権利留保）</p>
+</div>
+<h4>Fig. 2 の全要素を表に起こす</h4>
+<p>図は人体の解剖イラスト（頭部・心臓・腎臓と副腎）と、右側に拡大された血管平滑筋の断面（楕円形の拡大枠）で構成される。3つの「＋」記号が血管平滑筋上の受容体位置を示し、そこから右へ引き出し線で薬剤クラスの説明が置かれている。</p>
+<p><strong>解剖と経路（左半分）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>起点</th><th>経路</th><th>ラベル</th></tr></thead>
+<tbody>
+<tr><td>脳（下垂体：Pituitary gland）</td><td>灌流低下（↓Perfusion）→ 青い線で血管平滑筋へ</td><td>V₁ 受容体へ</td></tr>
+<tr><td>交感神経系（Sympathetic nervous system）</td><td>青い線で血管平滑筋へ、および心臓へ</td><td>血管には α₁、心臓には β₁</td></tr>
+<tr><td>心臓（Heart）</td><td>交感神経の β₁ 刺激を受ける（＋記号）</td><td>β₁</td></tr>
+<tr><td>副腎（Adrenal gland）</td><td>灌流低下（↓Perfusion）→ 黒い矢印で心臓と血管平滑筋へ</td><td>心臓へ β₁、血管へ α₁</td></tr>
+<tr><td>腎臓（Kidney）</td><td>灌流低下（↓Perfusion）→ Renin（レニン）→ Angiotensin II</td><td>アンジオテンシンIIから AT₁R へ、および「Increased aldosterone synthesis and vasopressin release（アルドステロン合成の増加とバソプレシン放出）」へ</td></tr>
+</tbody></table></div>
+<p><strong>血管平滑筋上の3つの受容体と薬剤（右半分の引き出し）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>受容体（上から）</th><th>薬剤クラス（原文）</th><th>作用の説明（原文の訳）</th></tr></thead>
+<tbody>
+<tr><td>V₁</td><td>Vasopressin &amp; Analogues（バソプレシンおよび類似体）</td><td>V₁受容体に結合し血管収縮をもたらす</td></tr>
+<tr><td>α₁</td><td>Catecholamines &amp; Derivatives（カテコラミンおよび誘導体）</td><td>α₁アドレナリン受容体に結合し血管収縮をもたらす。一部は β₂ を介した血管拡張も起こす</td></tr>
+<tr><td>AT₁R</td><td>Angiotensin II（アンジオテンシンII）</td><td>アンジオテンシン1型受容体に結合し血管収縮をもたらす</td></tr>
+</tbody></table></div>
+<p><strong>心臓側の引き出し（左中央）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>薬剤クラス</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td>心筋（β₁）</td><td>Catecholamines &amp; Derivatives</td><td>心拍数と心収縮力を増加させる</td></tr>
+</tbody></table></div>
+<p><strong>この図の読み方</strong>：3つの「＋」が血管平滑筋の同じ断面上に縦に並んでいることが、この総説の主張そのものを表している。<mark class="hl">血管収縮に至る受容体の入口は3つあり、そのうち1つ（α₁）だけを飽和させても、残る2つは空いたままである</mark>。またカテコラミンだけが心臓（β₁）にも矢印を持っている点が、カテコラミン負荷の節（不整脈）に直結する。</p>
+<h3>6. タイミング — 「遅れ」がどれだけ転帰を悪くするか ⏱️</h3>
+<p><strong>原則</strong>：血管拡張性ショックにおける蘇生の究極の目標は、動脈血を毛細血管へ押し込んで組織に酸素を届けるに足る灌流圧を達成することである。適切な灌流の回復が遅れることは、臓器不全の悪化と死亡リスクの上昇と一貫して関連している。</p>
+<h4>Table. 昇圧薬開始の遅れに関するエビデンス（本文の数値をそのまま）</h4>
+<div class="tw"><table>
+<thead><tr><th>報告（本文の引用）</th><th>比較</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Beck ら, *Crit Care* 2014（コホート）</td><td>重症度調整後の開始の遅れ</td><td>院内死亡の増加 OR 1.02（95%CI 1.01–1.03, p&lt;0.001）。遅れが 14.1時間を超えたとき最も顕著（OR 1.34, 95%CI 1.03–1.76, p=0.048）</td></tr>
+<tr><td>Bai ら, *Crit Care* 2014</td><td>1時間の遅れごと</td><td>死亡リスクが 5.3% 増加（抗菌薬投与遅延の時間依存性死亡リスクと同様、と本文は位置づける）</td></tr>
+<tr><td>Colon Hidalgo ら, *J Crit Care* 2020（コホート）</td><td>ショック発症6時間以内に昇圧薬 vs それ以降</td><td>目標MAP到達が2倍速い（1.5時間 vs 3.0時間, p&lt;0.01）／ショック最初の72時間で昇圧薬を使わない時間が長い（34.5時間 vs 13.1時間, p=0.03）／30日生存が独立して約3倍高い（6時間より後に昇圧薬を開始した場合の死亡 OR 2.9, 95%CI 1.3–7.0、p値は本文に記載なし）</td></tr>
+<tr><td>Black ら, *J Am Coll Emerg Physicians Open* 2020</td><td>開始が4時間を超えた vs 4時間未満</td><td>臓器不全悪化のオッズが4倍（OR 4.34, 95%CI 1.47–12.79, p=0.008）</td></tr>
+</tbody></table></div>
+<p><strong>ガイドラインの動き</strong></p>
+<ul><li><strong>2018年の Surviving Sepsis Campaign 更新</strong>は、輸液抵抗性の低血圧に対し、<strong>昇圧薬開始を重要な1時間バンドルに含める</strong>ことを推奨した（Levy ら, *Intensive Care Med* 2018）。</li><li><strong>しかし最新の2021年版では、昇圧薬開始のタイミングに関する指針は曖昧（ambiguous）である</strong>（Evans ら, *Intensive Care Med* 2021）。</li><li>遅延が転帰を悪くするというエビデンスがあるにもかかわらず、<strong>そうした戦略を支持するプロトコル化された実践を推進する努力は限定的</strong>だった、と著者らは述べる。</li></ul>
+<h4>CENSER 試験（本文が挙げる唯一の「早期開始」RCT）</h4>
+<ul><li><strong>位置づけ</strong>：この概念の<strong>早期のパイオニア</strong>。敗血症性ショック発症<strong>1時間以内</strong>のノルアドレナリン開始を、<strong>前向き・二重盲検・ランダム化</strong>の設定で評価した（Permpikul ら, *Am J Respir Crit Care Med* 2019;199:1097–1105）。</li><li><strong>主要結果</strong>：早期ノルアドレナリンに割り付けられた群は、6時間時点の<strong>ショック離脱（shock reversal）の確率が高かった</strong>。</li><li><strong>OR 3.4（95%CI 2.09–5.53, p&lt;0.001）</strong></li><li><strong>ショック離脱の定義</strong>：MAP &gt; 65 mmHg が2回の測定で確認され、かつ尿量 &gt; 0.5 mL/kg/h が2時間持続し、かつ乳酸がベースラインから10%低下すること。</li><li><strong>死亡</strong>：院内死亡・28日死亡に差は無かった。ただし<strong>この第II相試験は死亡を検出する検出力を持っていない</strong>（not powered for mortality）。</li><li><strong>興味深い副次所見</strong>：早期ノルアドレナリン群では</li><li><strong>心原性肺水腫が少ない：OR 0.70（95%CI 0.56–0.87, p=0.004）</strong></li><li><strong>不整脈が少ない：OR 0.74（95%CI 0.56–0.94, p=0.03）</strong></li></ul>
+<h4>第2剤のタイミング</h4>
+<p>「より早い昇圧薬開始のほうが良い」ことは明白だが、<strong>第2剤のタイミングははるかに不明確</strong>だと著者らは認める。そのうえで最近の大規模後ろ向きコホート（Sacha ら, *Crit Care Med* 2021）を挙げる。</p>
+<ul><li>敗血症性ショックでノルアドレナリンに<strong>バソプレシンを第2剤として追加</strong>した場合、<strong>ショック発症からバソプレシン開始までの遅れ（2.1〜12.2時間の範囲）と乳酸濃度の上昇に伴い、院内死亡のリスクが 12〜18% のオーダーで増加</strong>した。</li><li>著者らの解釈：これらはすべて、<strong>生理学的環境がまだ好ましいうちに、あるいはショックが不可逆点に達する前に、非カテコラミン系昇圧薬が作用する機会を早く与えること</strong>が転帰改善の鍵だというシグナルなのかもしれない。</li></ul>
+<h3>7. 高乳酸血症 — 予後指標であり、同時に「薬の効きやすさ」の指標 🧪</h3>
+<h4>7-1. なぜ乳酸が上がるのか（機序）</h4>
+<ol><li>病的ショックでは動脈性低血圧が酸素供給を減らし、局所および全身の組織低酸素をもたらす。</li><li>その結果、細胞レベルの酸素利用が障害され、ミトコンドリアでの酸化が不十分になる。</li><li>同時に、血管拡張性ショックはしばしばストレス（敗血症など）に続発する hyperdynamic state を伴い、<strong>好気的解糖（aerobic glycolysis）</strong> が進んで乳酸産生をさらに増やす。</li><li>正味の結果として高乳酸血症が生じ、<strong>アシデミアが肝の乳酸クリアランスを障害する</strong>ことで増悪する。</li></ol>
+<h4>7-2. 予後指標としての乳酸</h4>
+<div class="tw"><table>
+<thead><tr><th>報告</th><th>集団</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Javed ら, *J Crit Care* 2017</td><td>重症敗血症・敗血症性ショック</td><td>来院24時間以内に死亡した群の初期乳酸 7.3 mmol/L vs 24時間後に生存していた群 3.3 mmol/L。多変量解析で初期乳酸（OR 1.19, 95%CI 1.05–1.35, p=0.004）と mSOFA スコア（OR 1.17, 95%CI 1.00–1.36, p=0.046）がいずれも早期死亡の独立予測因子</td></tr>
+<tr><td>Thomas-Rueddel ら, *J Crit Care* 2015</td><td>敗血症性ショック（来院直後の期間外）</td><td>乳酸 &gt; 4 mmol/L は28日死亡リスクを3倍に（OR 3.0, 95%CI 2.1–4.1, p&lt;0.001）。昇圧薬の使用の有無によらない</td></tr>
+<tr><td>Hernandez ら, *J Crit Care* 2011</td><td>昇圧薬を要する敗血症性ショック</td><td>ショック経過中のいずれかの時点で乳酸 &gt; 2.5 mmol/L を1回以上経験した群の100日生存は 57.1%、高乳酸血症のない群は 92.3%（p&lt;0.0001）。約半分になる</td></tr>
+<tr><td>Nichol ら, *Crit Care* 2010</td><td>重症患者（多施設後ろ向き）</td><td>乳酸が一般に「正常範囲」とされる範囲内であっても、正常上限寄りへの相対的な上昇がある患者は死亡の可能性が高い</td></tr>
+<tr><td>Jansen ら, *Crit Care Med* 2009</td><td>ICU患者</td><td>乳酸濃度の上昇に伴い、多臓器不全と死亡のリスクが増加する</td></tr>
+</tbody></table></div>
+<p><strong>著者らのまとめ</strong>：これらを総合すると、血管拡張性ショックにおける高乳酸血症は<strong>臓器灌流の深刻な不足を体現している（epitomize）</strong> ように見える。</p>
+<h4>7-3. 乳酸は「非アドレナリン系昇圧薬をいつ足すか」の指標にもなる</h4>
+<p>予後だけでなく、<strong>とくにカテコラミンに追加する非アドレナリン系昇圧薬について、乳酸濃度は昇圧薬の選択とタイミングに有用な洞察を与えうる</strong>と著者らは主張する。</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>報告</th><th>乳酸との関係</th></tr></thead>
+<tbody>
+<tr><td>バソプレシン</td><td>Sacha ら, *Ann Intensive Care* 2018</td><td>バソプレシンを受けた患者のうち、好ましい血行動態反応を示すのは半数未満。しかし乳酸濃度が低い患者では反応する確率が2倍（OR 2.15, 95%CI 1.39–3.32, p&lt;0.001）。そして反応することがICU生存の高さと関連する</td></tr>
+<tr><td>バソプレシン（追加の遅れ）</td><td>Sacha ら, *Crit Care Med* 2021</td><td>第一選択のノルアドレナリンへのバソプレシン追加が遅れた場合、ショック発症から12.2時間の時点では、乳酸が 1 mmol/L 上がるごとに院内死亡のオッズが最大 18% 増加（95%CI 1.07–1.32）</td></tr>
+<tr><td>合成アンジオテンシンII</td><td>Wieruszewski ら, *Chest* 2021（市販後の使用経験）</td><td>投与された患者のベースライン重症度は極めて高い（ベースライン SOFA 12、APACHE II 30）。血行動態反応者のベースライン乳酸 6.5 mmol/L に対し、非反応者は 9.5 mmol/L。多変量モデルで乳酸が低いほど血行動態反応の可能性が高く（OR 1.11 / mmol/L, 95%CI 1.05–1.17, p&lt;0.001）、乳酸が低いほど30日死亡が低い（OR 0.94 / mmol/L, 95%CI 0.91–0.96, p&lt;0.001）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント ここは因果を読み違えやすい。「乳酸が低いほどバソプレシン／アンジオテンシンIIが効く」は、<mark class="hl">乳酸が上がりきる前に足せば効く、という因果の主張ではない</mark>。重症度が低い患者ほど何をしても反応が良い、という交絡（適応交絡・重症度交絡）で全部説明できてしまう。著者らはこれを「早く足せ」の根拠として並べているが、いずれも観察データであり、それを検証したRCTは本文に1本も挙げられていない。</p>
+</div>
+<h3>8. カテコラミン負荷 — 段階的アプローチの最も明白な代償 💉</h3>
+<p><strong>害の機序</strong></p>
+<ul><li>血管の末梢全域でα-アドレナリン受容体に強力な血管収縮作用を持つため、<strong>過剰な刺激は有害となりうる</strong>。とくに<strong>遠位の血管が最も脆弱</strong>で、<strong>手指の虚血</strong>や<strong>脾臓域（splanchnic）の低酸素</strong>をきたし、壊死と重篤な合併症に至る。</li><li>望ましい血管収縮作用に加えて、<strong>心筋レベルでのβ受容体刺激</strong>（Fig. 2）が、これらの薬剤をとりわけ忍容しにくいものにしている。</li><li><strong>不整脈は一般的で、敗血症性ショックにおけるノルアドレナリン投与例の最大3分の1に生じ、死亡リスクの増加と関連する</strong>。</li><li><strong>ノルアドレナリンの投与期間と用量は不整脈の予測に有用</strong>であり、<strong>最大ノルアドレナリン用量が 5 µg/min 増えるごとに不整脈リスクが 6% 増加する</strong>（Wieruszewski ED ら, *J Crit Care* 2021）。</li></ul>
+<p><strong>累積用量と予後</strong></p>
+<ul><li>比較の基準：<strong>PRISM 患者レベルメタ解析</strong>（Rowan ら, *N Engl J Med* 2017）における 3,000例超の国際的な敗血症性ショック患者の90日死亡は<strong>約25%</strong>。</li><li>これに対し、<strong>高用量ノルアドレナリンを要した患者の死亡率は 60% から 90% を超える範囲</strong>にわたる（Table 1）。</li></ul>
+<h4>Table 1. ノルアドレナリンの用量と死亡（原表を日本語化・数値は原表のまま）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>ノルアドレナリン用量</th><th>死亡の種別</th><th>死亡率（%）</th></tr></thead>
+<tbody>
+<tr><td>Jenkins ら 2009</td><td>&gt; 100 µg/min</td><td>ICU死亡</td><td>94</td></tr>
+<tr><td>Brown ら 2013</td><td>≥ 1 µg/kg/min</td><td>90日</td><td>83</td></tr>
+<tr><td>Dopp-Zemel ら 2013</td><td>≥ 0.9 µg/kg/min</td><td>28日</td><td>65</td></tr>
+<tr><td>Martin ら 2015</td><td>&gt; 1 µg/kg/min</td><td>90日</td><td>90</td></tr>
+<tr><td>Auchet ら 2017</td><td>&gt; 1 µg/kg/min</td><td>28日</td><td>60</td></tr>
+<tr><td>Auchet ら 2017</td><td>&gt; 1 µg/kg/min</td><td>90日</td><td>66</td></tr>
+<tr><td>Brand ら 2017</td><td>≥ 90 µg/min</td><td>院内</td><td>90</td></tr>
+</tbody></table></div>
+<p><strong>この表の読み方</strong>：横並びに見えるが、用量の表記が <strong>µg/min（体重非依存）</strong> と <strong>µg/kg/min（体重依存）</strong> で混在している。体重70 kgなら 1 µg/kg/min ＝ 70 µg/min なので、Jenkins（&gt;100 µg/min）と Brand（≥90 µg/min）は他の研究より高い閾値である。加えて、<strong>ノルアドレナリンの用量表記は塩基（base）か塩（酒石酸塩など）かで実質1.5倍ずれうる</strong>が、<mark class="hl">本総説にはどちらの表記かの断りが無い</mark>。死亡率の絶対値を施設間で比較するときは、この2重の非統一に注意する。</p>
+<p><strong>第2剤を足す閾値としてのカテコラミン用量</strong></p>
+<p>予後だけでなく、<strong>カテコラミン用量は昇圧薬をエスカレーションするかどうかを決める、ベッドサイドで容易な指標</strong>でもある。</p>
+<div class="tw"><table>
+<thead><tr><th>報告</th><th>閾値</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>VASST 試験（Russell ら, *N Engl J Med* 2008）— 本文が landmark と呼ぶ</td><td>ノルアドレナリン &lt; 15 µg/min の時点でバソプレシンを受けた患者</td><td>28日死亡 26.5% vs 35.7%（p=0.05）、90日死亡 35.8% vs 46.1%（p=0.04） といずれも低い</td></tr>
+<tr><td>Sacha ら, *Crit Care Med* 2021（1,500例超の敗血症性ショック）</td><td>バソプレシンを第2剤として追加した時点のノルアドレナリン用量</td><td>10 µg/min 増えるごとに院内死亡リスクが 20.7% 増加</td></tr>
+</tbody></table></div>
+<p><strong>そして最も重要な点として</strong>、反応率やベースライン重症度によらず、<strong>血行動態反応が得られた場合には死亡リスクが独立して低い</strong>。</p>
+<ul><li><strong>バソプレシンへの反応：OR 0.51（95%CI 0.35–0.76, p=0.001）</strong></li><li><strong>アンジオテンシンIIへの反応：HR 0.50（95%CI 0.35–0.71, p&lt;0.001）</strong></li></ul>
+<p>これらのデータはすべて、<strong>血行動態の回復とショック離脱が生存確率の決定的な規定因子である</strong>ことを示唆している、というのが著者らの読みである。</p>
+<h3>9. 個別化への道 — 早期・多モーダル昇圧薬療法 🧬</h3>
+<p>血管拡張性ショックで昇圧薬療法を個別化するには、<strong>表現型による予後予測（phenotypic prognostication）と薬理学的反応性の特徴づけ</strong>が必要である。敗血症性ショックにおいて昇圧薬反応性・転帰との関連が示された候補バイオマーカーが複数現れている（Table 2）。</p>
+<h4>9-1. 遺伝子多型</h4>
+<div class="tw"><table>
+<thead><tr><th>遺伝子</th><th>何をコードするか</th><th>関連する所見</th></tr></thead>
+<tbody>
+<tr><td>ADRβ2（本文表記。β2アドレナリン受容体遺伝子）</td><td>β2アドレナリン受容体</td><td>遺伝的変異が、より高いノルアドレナリン必要量、腎・血液・肝・神経の機能障害の増悪、敗血症性ショックの28日死亡の増加と関連（Nakada ら, *Am J Respir Crit Care Med* 2010）</td></tr>
+<tr><td>AGTRAP</td><td>アンジオテンシンII 1型受容体関連タンパク</td><td>変異が MAP の低下、血管緊張の低下、28日死亡の増加と関連（Nakada ら, *Crit Care Med* 2011）</td></tr>
+<tr><td>LNPEP</td><td>ロイシル・シスチニルアミノペプチダーゼ（＝バソプレシナーゼ）</td><td>欠損が血漿バソプレシンのクリアランス増加と28日死亡の増加と関連（Nakada ら, *Chest* 2011）</td></tr>
+</tbody></table></div>
+<h4>9-2. 循環ペプチド</h4>
+<ul><li><strong>アンジオポエチン-2</strong>：血管漏出を促進する内皮増殖因子。血漿濃度の上昇が<strong>腎・肝・凝固の機能障害</strong>および<strong>7日死亡・28日死亡の増加</strong>と関連（Fisher ら, *Crit Care Med* 2016）。</li><li><strong>バソプレシン</strong>：敗血症性ショックの初期に「相対的バソプレシン欠乏」が存在することは示されているものの、<strong>血漿バソプレシン濃度は外因性バソプレシン投与への良好な反応を予測しないことが示されており、転帰との相関も一定しない</strong>（Yerke ら, *Pharmacotherapy* 2020／Russell, *Crit Care* 2011）。</li><li><strong>レニン</strong>：乳酸は長らく重症疾患とショックの予後指標だったが、<strong>血清レニンがICUの各種ショック病態における死亡予測因子として、乳酸より優れうる指標として急速に台頭している</strong>。</li><li>2つの独立した研究が、<strong>レニンの絶対濃度の閾値</strong>と<strong>レニンの上昇速度（rate of rise）</strong> の双方が、重症患者のICU死亡・院内死亡との関連において<strong>乳酸より優れていた</strong>ことを示した（Jeyaraju ら, *Crit Care Med* 2022／Gleeson ら, *Crit Care Med* 2019）。</li><li><strong>レニンは安定しており、腎代替療法やレニン-アンジオテンシン系に作用する薬（ACE阻害薬・ARB）によって濃度が目立って影響を受けなかった</strong>。</li><li><strong>外因性アンジオテンシンIIの投与は、高レニンのショックにおいて生存に好ましい効果をもたらす</strong>ことが示されている（Bellomo ら, *Am J Respir Crit Care Med* 2020 ほか）。</li><li><strong>最大の臨床的障壁は、真の POCT（ベッドサイド迅速検査）が無いこと</strong>。濃度に応じてタイムリーに標的化した蘇生を行うことができない。</li></ul>
+<h4>Table 2. 昇圧薬療法のための候補バイオマーカー（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>バイオマーカー</th><th>病的バリアント／害の閾値</th><th>対応する昇圧薬</th><th>臨床的関連</th></tr></thead>
+<tbody>
+<tr><td>遺伝子多型</td><td>ADRβ2</td><td>SNP rs1042717</td><td>ノルアドレナリン、アドレナリン</td><td>臓器障害↑、ノルアドレナリン必要量↑、敗血症性ショック死亡↑</td></tr>
+<tr><td>遺伝子多型</td><td>AGTRAP</td><td>SNP rs11121816</td><td>アンジオテンシンII</td><td>血管緊張↓、敗血症性ショック死亡↑</td></tr>
+<tr><td>遺伝子多型</td><td>LNPEP</td><td>SNP rs4869317</td><td>バソプレシンおよび類似体</td><td>バソプレシンのクリアランス↑、敗血症性ショック死亡↑</td></tr>
+<tr><td>循環ペプチド</td><td>アンジオポエチン-2</td><td>&gt; 5807 pg/mL</td><td>バソプレシンおよび類似体</td><td>臓器不全↑、敗血症性ショック死亡↑</td></tr>
+<tr><td>循環ペプチド</td><td>レニン</td><td>&gt; 40 pg/mL</td><td>アンジオテンシンII</td><td>血行動態反応↓、ショック死亡↑</td></tr>
+<tr><td>循環ペプチド</td><td>バソプレシン</td><td>一定しない（variable）</td><td>バソプレシン</td><td>転帰は一定せず、血行動態反応も一定しない</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>原表の注記（そのまま）：ADRβ2＝β2アドレナリン受容体遺伝子、AGTRAP＝アンジオテンシンII 1型受容体関連タンパク遺伝子、LNPEP＝ロイシル／シスチニルアミノペプチダーゼ遺伝子</p>
+</div>
+<h4>9-3. 「早期・多モーダル（広域スペクトラム）昇圧薬」の提案</h4>
+<p>著者らの提案は次の通り（本文の論理をそのまま追う）。</p>
+<ol><li><strong>命名</strong>：自分たちのアプローチは「早期・多モーダル昇圧薬（early multimodal vasopressors）」であり、他者は「広域スペクトラム昇圧薬（broad-spectrum vasopressors）」とも呼ぶ。</li><li><strong>類推</strong>：敗血症の疑い例・確定例に対する<strong>早期の広域抗菌薬</strong>の使用と類似している。</li><li><strong>エビデンスの自己評価</strong>：<mark class="hl">「抗菌薬の類推と違って、現時点で説得力のあるデータは無い（while there are not currently convincing data）」</mark>。<strong>しかし、血管拡張性ショックの治療開始時に、異なるクラスの昇圧薬を複数、低用量で使うことには確かに生理学的な前提（physiological premise）がある</strong>。</li><li><strong>デエスカレーション</strong>：これはバイオマーカーの広範な使用と組み合わせる必要があり、<strong>あるバイオマーカーが特定の患者にとって明らかな害のシグナルとして際立つ場合には、多剤から単剤へのデエスカレーションが起こりうる</strong>。</li><li><strong>具体例（本文の症例的記述）</strong></li></ol>
+<ul><li><strong>バソプレシン優位への移行</strong>：敗血症性ショックで、乳酸の上昇およびアンジオテンシンIIの上昇（すなわち低レニン）に比して<strong>バソプレシン濃度が不釣り合いに低い</strong>患者。初期のバソプレシン使用が臨床的な利益とこの異常の検査的な補正を示したなら、<strong>広域スペクトラム戦略で灌流目標を速やかに達成したのち、ゆっくりとバソプレシン中心のアプローチへ移行</strong>できる。</li><li><strong>アンジオテンシンII優位への移行</strong>：<strong>血清レニンが高い状況で合成アンジオテンシンIIに絶妙な反応</strong>を示すなら、アンジオテンシンII 優位の昇圧薬アプローチを継続する明白な理由になる。アンジオテンシンII反応性を試験することの価値は臨床研究で証明されており（Ham ら, ATHOS-3 の事前規定解析, *Ann Intensive Care* 2019）、適切に選ばれた患者では優れた予後を予告する。</li></ul>
+<ol><li><strong>全員に併用が要るわけではない</strong>：<strong>benign shock（軽症のショック）</strong> の患者も存在し、<strong>ごく低用量のカテコラミンだけで十分な場合もある</strong>。明らかに全例が併用昇圧薬を必要とするわけではない。</li><li><strong>非血管収縮性の補助薬</strong>：<strong>基礎病態を標的とする非血管収縮性の補助薬（例：副腎皮質ステロイド）を、カテコラミン節減戦略として無視すべきではない</strong>。血管拡張性ショックの蘇生全体をバランスの取れたものにするために必要である（Jentzer ら, *Chest* 2018／Venkatesh・Khanna・Cohen, *Intensive Care Med* 2019「Less is more: catecholamine-sparing strategies in septic shock」）。</li></ol>
+<h3>10. 結論（本文の Conclusion）🎯</h3>
+<ul><li>血管拡張性ショック管理の古典的アプローチは昇圧薬の段階的エスカレーションから成り、それは<strong>遷延する低灌流状態、高乳酸血症、過剰なカテコラミン曝露、そして不良な転帰</strong>をもたらす。</li><li><strong>早期・バランス型・多モーダルの昇圧薬療法戦略</strong>は、血管拡張性ショックの複雑で多因子的な病態に対して、<strong>生理学に導かれたアプローチ</strong>を提供する。</li><li><strong>ショックの転帰を改善するために、昇圧薬療法の個別化に用いるバイオマーカーの開発と実装に関するデータが切実に必要とされている（desperately needed）</strong>。</li></ul>
+<h3>11. 本総説に「書かれていないこと」— 誤読を防ぐための明示 🚫</h3>
+<p>JCで議論するとき、この総説から読み取れないことを先に確定させておく。以下はすべて<strong>本文を全8ページ通読して確認した「記載なし」</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>期待されうる項目</th><th>本総説の記載</th></tr></thead>
+<tbody>
+<tr><td>各昇圧薬の具体的な用量・希釈・開始量</td><td><mark class="hl">記載なし</mark>。ノルアドレナリンについて「15 µg/min 未満」「5 µg/min ごと」「1 µg/kg/min 超」等が他研究の閾値として出るのみで、著者らの推奨用量は一切示されない</td></tr>
+<tr><td>目標MAPの数値</td><td>著者らの推奨としては記載なし。CENSER のショック離脱定義に「MAP &gt; 65 mmHg」が現れるのみ</td></tr>
+<tr><td>メチレンブルー・ヒドロキソコバラミン</td><td><mark class="hl">一度も登場しない</mark></td></tr>
+<tr><td>ヒドロコルチゾンの用量・投与法</td><td>記載なし。「非血管収縮性の補助薬（例：副腎皮質ステロイド）を無視すべきでない」と1文あるのみ</td></tr>
+<tr><td>アドレナリン・フェニレフリン・ドパミン・ミドドリンの位置づけ</td><td>個別の議論なし。Fig. 2 で「カテコラミンおよび誘導体」として一括される</td></tr>
+<tr><td>「早期バランス型」の具体的プロトコル（何を何 µg/min で同時に開始するか）</td><td><mark class="hl">記載なし</mark>。概念の提唱にとどまる</td></tr>
+<tr><td>各薬剤の費用・入手性・承認状況</td><td>記載なし</td></tr>
+<tr><td>日本の承認・保険適用</td><td><mark class="hl">記載なし</mark>（下記は論文本文ではなく背景知識）</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>これは論文本文ではなく、日本で読むときの一般的背景知識である 本総説は米国の2施設からの寄稿であり、<strong>日本の薬事・保険の事情は一切扱っていない</strong>。当院で議論する際に必要な範囲で、論文外の一般的な背景として以下を分離して記す（本総説の主張ではない）。</p>
+<ul><li><strong>合成アンジオテンシンII（angiotensin II）</strong>：本総説の個別化戦略の中核を担う薬剤だが、<strong>日本では承認されていない</strong>と理解している。したがって「高レニン → アンジオテンシンII」という本総説の中心的な提案は、当院ではそのまま実行できない。</li><li><strong>バソプレシン</strong>：日本で使用可能だが、<strong>敗血症性ショックの昇圧目的は添付文書上の適応とは異なる</strong>（適応外使用にあたる）。当院で運用に落とすときは院内の取り扱いを確認する必要がある。</li><li><strong>血清レニンの迅速測定</strong>：本総説自身が「真の POCT が無いことが最大の障壁」と述べており、これは日本でも同様である。</li><li>上記はいずれも<strong>本総説から得られる情報ではない</strong>。実際の採用可否は最新の添付文書と院内規定で確認すること。</li></ul>
+</div>
+<h2>🔍 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本総説</th><th>既存ノートとの関係</th></tr></thead>
+<tbody>
+<tr><td>早期ノルアドレナリン</td><td>CENSER をこの概念のパイオニアと位置づけ、6時間時点のショック離脱 OR 3.4（2.09–5.53）</td><td>Vault の CENSER ノートと数値は一致する。ただし<strong>Vault側のファイル名は「CCM2019」だが、本総説の引用文献18 は *Am J Respir Crit Care Med* 2019;199:1097–1105</strong> であり、<mark class="hl">誌略は AJRCCM が正しい</mark>（当ノートでは修正しないが、要確認）</td></tr>
+<tr><td>バソプレシンの開始閾値</td><td>VASST サブ解析の「ノルアド &lt; 15 µg/min」を根拠に、早い追加を支持</td><td>強化学習による開始ルールのノート（JAMA2025）が同方向の結論（より多くの患者に、より早く、より低いノルアド用量で。院内死亡 aOR 0.81, 95%CI 0.73–0.91）。本総説は2022年時点で同じ仮説を生理学から述べ、2025年の機械学習研究がデータで裏づけた形になる</td></tr>
+<tr><td>バソプレシンの反応予測</td><td>血漿バソプレシン濃度は反応を予測しない（転帰との相関も一定しない）。乳酸が低いほど反応しやすい</td><td>「相対的バソプレシン欠乏だから補充する」という説明は、<mark class="hl">濃度測定で個別化できるという意味ではない</mark>。バソプレシン系の総説（JCM2026）・実践レビュー（ICM2025）と併読する</td></tr>
+<tr><td>ステロイド</td><td>「カテコラミン節減戦略として無視すべきでない」と1文のみ</td><td>ヒドロコルチゾンの個々患者データメタ解析（NEJMEvid2023）は死亡を減らさないという結論。<mark class="hl">本総説の言及は死亡改善ではなくカテコラミン節減の文脈</mark> である点で矛盾はしないが、期待値を上げすぎない</td></tr>
+<tr><td>難治性ショックの前に潰すべき因子</td><td>Fig. 1 に高血糖・低カルシウム血症・ステロイド欠乏が明記される</td><td>「難治性」敗血症性ショックの可逆的要因（usual suspects）のノートと直接つながる。Fig. 1 はその生理学的な裏づけとして使える</td></tr>
+<tr><td>乳酸の位置づけ</td><td>予後指標かつ薬剤反応の予測因子。レニンのほうが優れうると示唆</td><td>連続乳酸値で蘇生を導く根拠は乏しいとするエディトリアル（ICM2024）とは強調点が異なる。<mark class="hl">「乳酸で蘇生を導く」と「乳酸で薬剤反応を予測する」は別の主張</mark>として切り分ける</td></tr>
+<tr><td>ドパミン</td><td>登場しない</td><td>JIPAD のドパミン研究（CritCare2022）が示す日本の実態は、本総説の枠組みの外側の問題（そもそも第一選択が違う）</td></tr>
+<tr><td>SSCG 2021</td><td>開始タイミングの記載が曖昧（ambiguous）になったと批判</td><td>SSCG2021 ノートと突き合わせて、ガイドラインの沈黙を「急がなくてよい」と読まないための材料にする</td></tr>
+</tbody></table></div>
+<h2>⚖️ 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>これは検証ではなく提唱である</strong>。著者ら自身が「現時点で説得力のあるデータは無い」と書いている。本総説の価値は「段階的アプローチの代償を数字で並べたこと」にあり、「早期バランス型が優れる」ことを示した点にはない。この区別を最初に確認する。</li></ol>
+<ol><li><strong>抗菌薬との類推は成立するか</strong>。「広域で始めてデエスカレーション」は抗菌薬では細菌学的な同定という明確なデエスカレーション基準がある。昇圧薬でこれに相当するのはバイオマーカーだが、本総説自身が「レニンには POCT が無い」「バソプレシン濃度は反応を予測しない」と認めている。<mark class="hl">デエスカレーションの基準が無い広域戦略は、単なる多剤併用になりうる</mark>。</li></ol>
+<ol><li><strong>タイミングのデータはすべて観察研究である</strong>。適応交絡が強く働く領域で、「昇圧薬開始が遅い患者」は「輸液で反応した軽症例」と「認識が遅れた重症例」が混ざる。CENSER だけがランダム化されているが、主要アウトカムは6時間時点のショック離脱という代替指標であり、死亡には差が出ていない（かつ検出力も無い）。</li></ol>
+<ol><li><strong>「1時間ごとに死亡5.3%増」の解釈</strong>。抗菌薬のタイミング論争と同じ構造で、因果の向きが確定していない。この数字は院内の説得には強いが、JCでは「これは相関である」と明示する。</li></ol>
+<ol><li><strong>Table 1 の死亡率は比較可能か</strong>。用量表記（µg/min と µg/kg/min）、死亡の種別（ICU／28日／90日／院内）、対象集団（敗血症性ショックか高用量昇圧薬全般か）がすべて研究ごとに異なる。PRISM の25%と並べて「60〜94%」と言うのは、比較対象を揃えていない。<mark class="hl">高用量ノルアドが死亡を「引き起こす」のか、「死ぬような患者に高用量が要る」のかは、この表からは決まらない</mark>。</li></ol>
+<ol><li><strong>VASST の「15 µg/min 未満」はサブグループ解析である</strong>。VASST 本体は主要アウトカム陰性の試験であり、この層別化された結果は仮説生成にとどまる。28日死亡の p=0.05 は境界値でもある。この閾値を院内プロトコルに書き込むときは、その出自を併記する。</li></ol>
+<ol><li><strong>利益相反の重さ</strong>。両著者が合成アンジオテンシンIIの製造元から資金を受けており、筆頭著者は引用文献27（アンジオテンシンIIの市販後研究）の第一著者、責任著者はレニン研究の助成を受けている。<mark class="hl">「レニンを測ってアンジオテンシンIIを使う」という結論は、著者らの利害と方向が一致している</mark>。データを否定する材料ではないが、強調の置き方は割り引いて読む。</li></ol>
+<ol><li><strong>バイオマーカーの臨床的な遠さ</strong>。Table 2 の6項目のうち3つは SNP であり、急性期のベッドサイドで測れない。アンジオポエチン-2 の閾値 5807 pg/mL、レニンの閾値 40 pg/mL も、いずれも1〜2報からの導出で外部検証は示されていない。</li></ol>
+<ol><li><strong>日本での適用可能性</strong>。中核となるアンジオテンシンIIが使えない環境では、本総説の「多モーダル」は事実上「ノルアドレナリン＋バソプレシン（＋ステロイド）」の2〜3剤に縮む。<mark class="hl">その縮んだ形で「早期バランス型」を名乗ることの妥当性</mark>は、JCで議論する価値がある。</li></ol>
+<ol><li><strong>Fig. 1 と Fig. 2 は他文献からの転載である</strong>。Fig. 1 は Vallabhajosyula ら（2018）から、Fig. 2 は Mayo Foundation の許諾による。本総説オリジナルの図は無く、この点でもレビューとしての新規性は概念の提示に限られる。</li></ol>
+<h2>📚 主要引用文献一覧（本文で数値を伴って引用されたもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>循環性ショックの分類・疫学</td><td>Vincent JL, De Backer D. Circulatory shock. *N Engl J Med*. 2013;369:1726–34.</td></tr>
+<tr><td>4</td><td>SSCG 2021（開始タイミングの記載が曖昧）</td><td>Evans L, et al. *Intensive Care Med*. 2021;47:1181–247.</td></tr>
+<tr><td>5</td><td>敗血症性ショックにおける昇圧薬使用の実態（実践のばらつき）</td><td>Scheeren TWL, et al. *Ann Intensive Care*. 2019;9:20.</td></tr>
+<tr><td>6</td><td>昇圧薬開始のタイミングと死亡（OR 1.02／14.1時間超で OR 1.34）</td><td>Beck V, et al. *Crit Care*. 2014;18:R97.</td></tr>
+<tr><td>7</td><td>難治性血管拡張性ショックの管理</td><td>Jentzer JC, et al. *Chest*. 2018;154:416–26.</td></tr>
+<tr><td>8</td><td>Fig. 1 の出典</td><td>Vallabhajosyula S, Jentzer JC, Khanna AK. In: *Annual Update in Intensive Care and Emergency Medicine*. Springer; 2018. p.99–111.</td></tr>
+<tr><td>10</td><td>敗血症症候群における心拍変動の低下</td><td>Garrard CS, et al. *Clin Auton Res*. 1993;3:5–13.</td></tr>
+<tr><td>11</td><td>バソプレシン欠乏（3.1 vs 22.7 pg/mL）</td><td>Landry DW, et al. *Circulation*. 1997;95:1122–5.</td></tr>
+<tr><td>14</td><td>開始が4時間超で臓器不全悪化（OR 4.34）</td><td>Black LP, et al. *J Am Coll Emerg Physicians Open*. 2020;1:222–30.</td></tr>
+<tr><td>15</td><td>6時間以内の開始と30日生存（OR 2.9）</td><td>Colon Hidalgo D, et al. *J Crit Care*. 2020;55:145–8.</td></tr>
+<tr><td>16</td><td>1時間の遅れごとに死亡 +5.3%</td><td>Bai X, et al. *Crit Care*. 2014;18:532.</td></tr>
+<tr><td>17</td><td>SSC 2018 バンドル更新（1時間バンドル）</td><td>Levy MM, Evans LE, Rhodes A. *Intensive Care Med*. 2018;44:925–8.</td></tr>
+<tr><td>18</td><td>CENSER 試験</td><td>Permpikul C, et al. *Am J Respir Crit Care Med*. 2019;199:1097–105.</td></tr>
+<tr><td>19</td><td>バソプレシン追加時のカテコラミン用量・乳酸・ショック持続時間と死亡</td><td>Sacha GL, et al. *Crit Care Med*. 2021（doi:10.1097/CCM.0000000000005317, Epub）</td></tr>
+<tr><td>21</td><td>敗血症の早期死亡の臨床予測因子（初期乳酸 7.3 vs 3.3）</td><td>Javed A, et al. *J Crit Care*. 2017;42:30–4.</td></tr>
+<tr><td>22</td><td>高乳酸血症は独立した死亡予測因子（乳酸&gt;4 で OR 3.0）</td><td>Thomas-Rueddel DO, et al. *J Crit Care*. 2015;30:e1-6.</td></tr>
+<tr><td>23</td><td>高乳酸血症を伴わない持続性低血圧（100日生存 57.1% vs 92.3%）</td><td>Hernandez G, et al. *J Crit Care*. 2011;26(435):e9-14.</td></tr>
+<tr><td>24</td><td>相対的高乳酸血症と院内死亡</td><td>Nichol AD, et al. *Crit Care*. 2010;14:R25.</td></tr>
+<tr><td>25</td><td>乳酸・SOFA サブスコアと28日死亡</td><td>Jansen TC, et al. *Crit Care Med*. 2009;37:2369–74.</td></tr>
+<tr><td>26</td><td>固定用量バソプレシンへの反応予測因子（OR 2.15／反応で OR 0.51）</td><td>Sacha GL, et al. *Ann Intensive Care*. 2018;8:35.</td></tr>
+<tr><td>27</td><td>ショックへのアンジオテンシンII 持続投与（SOFA 12／APACHE II 30／乳酸 6.5 vs 9.5）</td><td>Wieruszewski PM, et al. *Chest*. 2021;159:596–605.</td></tr>
+<tr><td>29</td><td>ノルアドレナリン「多すぎず、長すぎず」</td><td>Martin C, et al. *Shock*. 2015;44:305–9.</td></tr>
+<tr><td>30</td><td>ノルアドレナリン使用時の不整脈の予測因子（5 µg/min ごとに 6%）</td><td>Wieruszewski ED, et al. *J Crit Care*. 2021;61:133–7.</td></tr>
+<tr><td>31</td><td>PRISM 患者レベルメタ解析（90日死亡 約25%）</td><td>Rowan KM, et al. *N Engl J Med*. 2017;376:2223–34.</td></tr>
+<tr><td>32–36</td><td>Table 1 の高用量ノルアドレナリン研究群</td><td>Brown 2013 *Chest*／Auchet 2017 *Ann Intensive Care*／Döpp-Zemel 2013 *Am J Crit Care*／Jenkins 2009 *Anaesth Intensive Care*／Brand 2017 *J Pain Symptom Manag*</td></tr>
+<tr><td>37</td><td>VASST 試験</td><td>Russell JA, et al. *N Engl J Med*. 2008;358:877–87.</td></tr>
+<tr><td>38</td><td>ADRβ2 多型と敗血症性ショック死亡</td><td>Nakada T, et al. *Am J Respir Crit Care Med*. 2010;181:143–9.</td></tr>
+<tr><td>39</td><td>AGTRAP 多型と死亡増加</td><td>Nakada T, et al. *Crit Care Med*. 2011;39:1641–8.</td></tr>
+<tr><td>40</td><td>LNPEP 遺伝子変異</td><td>Nakada T, et al. *Chest*. 2011;139:1042–9.</td></tr>
+<tr><td>41</td><td>アンジオポエチン-2 高値と臓器障害・死亡</td><td>Fisher J, et al. *Crit Care Med*. 2016;44:2018–27.</td></tr>
+<tr><td>42</td><td>レニン動態は乳酸動態より優れる</td><td>Jeyaraju M, et al. *Crit Care Med*. 2022;50:50–60.</td></tr>
+<tr><td>43</td><td>高レニンショックにおけるアンジオテンシンIIと生存</td><td>Bellomo R, et al. *Am J Respir Crit Care Med*. 2020;202:1253–61.</td></tr>
+<tr><td>44</td><td>血漿バソプレシン濃度は反応を予測しない</td><td>Yerke JR, et al. *Pharmacotherapy*. 2020;40:33–9.</td></tr>
+<tr><td>46</td><td>レニンは組織灌流と予後の指標</td><td>Gleeson PJ, et al. *Crit Care Med*. 2019;47:152–8.</td></tr>
+<tr><td>50</td><td>ATHOS-3 事前規定解析（アンジオテンシンII 用量感受性）</td><td>Ham KR, et al. *Ann Intensive Care*. 2019;9:63.</td></tr>
+<tr><td>51</td><td>カテコラミン節減戦略（Less is more）</td><td>Venkatesh B, Khanna AK, Cohen J. *Intensive Care Med*. 2019;45:1810–2.</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 血管拡張性ショックでは<strong>交感神経系・バソプレシン系・レニン-アンジオテンシン系の3系統が同時に壊れている</strong>。<mark class="hl">1系統（カテコラミン）だけを毒性域まで最大化してから次に移る段階的戦略は、その生理と合っていない</mark>。</p>
+</div>
+<ul><li><mark class="hl"><strong>開始を待たない</strong></mark>：重症度調整後も、開始の遅れは院内死亡と関連（OR 1.02, 95%CI 1.01–1.03）。<strong>4時間超で臓器不全悪化オッズ 4.34倍</strong>、<strong>6時間超で30日死亡オッズ 2.9倍</strong>。SSCG 2021 の記載が曖昧になったことを「急がなくてよい」と読まない。</li><li><mark class="hl"><strong>第2剤はノルアドが低いうちに足す</strong></mark>：VASST では<strong>ノルアド &lt; 15 µg/min での バソプレシン追加</strong>が28日死亡 26.5% vs 35.7%、90日死亡 35.8% vs 46.1%。追加時のノルアドが <strong>10 µg/min 増えるごとに院内死亡 +20.7%</strong>。</li><li><strong>効くかどうかは乳酸が語る</strong>：バソプレシンに反応するのは半数未満で、<strong>乳酸が低いほど反応は2.15倍</strong>。アンジオテンシンIIも同様（反応者 6.5 vs 非反応者 9.5 mmol/L）。反応が得られれば死亡は独立して低い（バソプレシン OR 0.51／アンジオテンシンII HR 0.50）。</li><li><strong>カテコラミン負荷を数字で持つ</strong>：不整脈はノルアド投与例の最大1/3、<strong>最大用量 5 µg/min 増ごとに +6%</strong>。<strong>1 µg/kg/min 超では死亡 60〜94%</strong>（敗血症性ショック全体は約25%）。</li><li><mark class="hl"><strong>ただし「早期バランス型」を支持するRCTは1本も無い</strong></mark>。著者ら自身が「説得力のあるデータは無い」と明記し、かつ両著者はアンジオテンシンII製造元と利害関係がある。生理学的仮説として扱い、アウトカム改善を約束しない。</li><li><strong>日本での縮約</strong>：中核のアンジオテンシンIIは当院で使えないため、実行可能な「多モーダル」はノルアドレナリン＋バソプレシン（＋カテコラミン節減目的のステロイド）に縮む。<strong>この点は論文本文には無く、日本側の事情である</strong>。</li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>輸液を入れても MAP が保てない</td><td>ショック発症からの経過時間。4時間・6時間の壁を越えていないか</td><td>中心静脈路の確保を待たず昇圧薬を開始する。末梢からの短時間投与を含めた開始経路を確認</td></tr>
+<tr><td>ノルアドレナリンを開始した</td><td>現在の用量が 15 µg/min（およそ 0.2 µg/kg/min）に近づいているか</td><td>近づく前にバソプレシン追加を検討する。「不応を確認してから」ではない</td></tr>
+<tr><td>ノルアドレナリンが 1 µg/kg/min を超えた</td><td>乳酸、臓器不全の数、経過時間</td><td>死亡率60〜94%の領域。追加の昇圧薬だけでなく、治療目標そのものを多職種で再確認する</td></tr>
+<tr><td>新規の心房細動・頻脈性不整脈が出た</td><td>最大ノルアドレナリン用量と投与期間</td><td>カテコラミン負荷のシグナルとして読み、非カテコラミン系の追加（バソプレシン）とβ受容体刺激の減量を検討</td></tr>
+<tr><td>昇圧薬を増やしても反応が鈍い</td><td>高血糖・低カルシウム血症・副腎皮質ステロイド欠乏（Fig. 1 の可逆的因子）、感染源のコントロール</td><td>「難治性」と呼ぶ前に、補正できる因子を潰す</td></tr>
+<tr><td>バソプレシンを足したが反応が無い</td><td>乳酸の値（高いほど反応しにくい）、ショック発症からの時間</td><td>血漿バソプレシン濃度を測っても反応は予測できない。反応が無い場合は他の可逆的要因の検索へ</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

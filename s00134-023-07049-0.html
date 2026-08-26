@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>発熱についての10のtips（ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07049-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">発熱についての10のtips（ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Leone M, Juffermans NP, Nielsen ND. Ten tips on fever. Intensive Care Med. 2023. doi:10.1007/s00134-023-07049-0</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-04-03）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07049-0" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07049-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Ten tips on fever</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07049-0.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07049-0.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07049-0.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み この論文の価値は「発熱の下げ方」ではなく、<strong>発熱を下げにいく反射を止める根拠</strong>にある。冒頭の一文が本稿の基調で、多くの患者で発熱コントロールの努力は過剰であり、副作用を招き、転帰を悪化させている可能性がある、と書かれている。</p>
+<ul><li><strong>① 病態ごとに温度差をつける</strong>：心停止後は発熱予防を行う／敗血症では慎重に／脳損傷ではエビデンスが乏しく極端を避けるにとどめる。この3段階を当院の熱型指示の前提にする。原文の見出しの句読点そのものが温度差を表しており、心停止後だけが感嘆符、脳損傷だけが疑問符である</li><li><strong>② 敗血症の解熱を「快適性のため」と明示する</strong>：アセトアミノフェンは死亡を変えず、平均動脈圧と心拍数を下げ、肝酵素を上げうる。転帰改善を期待した投与はやめ、指示簿に目的を書き分ける</li><li><strong>③ 術直後の発熱で反射的に血培・画像を出さない</strong>：早期術後発熱100例のコホートで精査が有用だったのは9%。当院でも発熱評価のプロトコル化が必要という主張の裏づけになる</li><li><strong>④ 無熱・低体温の敗血症を「軽症」と読まない</strong>：低体温の敗血症患者の死亡率は発熱のある患者の2倍。トリアージで重症度を下げる材料にしない</li><li><strong>⑤ 体温の測定部位を1本化する</strong>：本稿は膀胱温の日常使用を支持する。ただし測定法の細目は本稿より <span class="wl">ICUの新規発熱の評価 SCCM・IDSAガイドライン2023 — 12推奨と9 best practice statement、すべて弱い推奨（CCM2023）</span> のほうが新しく具体的で、しかも一部で食い違う（第15節）</li></ul>
+<p><strong>使い方の注意</strong>：本稿は系統的レビューでもガイドラインでもなく、著者3名が選んだ10項目である。当院の手順書に落とす際は、本稿を「議論の枠組み」として使い、個々の数値と推奨は原典またはガイドラインで裏を取る。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：発熱は重症患者に頻発する症状で、感染性・非感染性の広い原因を持つ。正常核心温は37℃、生理的変動は0.5〜1℃。ガイドラインは 38.3℃ 以上を発熱と提案してきた。心停止後の発熱予防には実験的・臨床的な支持がある。</li><li><strong>Unknown（分かっていなかったこと）</strong>：個々の患者・病態にとって最適な体温（またはその範囲）が何度なのかは分かっていない。発熱を下げることが誰の転帰を良くするのかも定まっていない。低体温の敗血症患者を復温すべきかも不明。脳損傷での発熱コントロールの有効性のデータは欠けている。心停止後に低体温が能動的な発熱予防より有効かも不明。</li><li><strong>What's new（本稿の新規性・意義）</strong>：新しいデータを出す論文ではない。<strong>病態ごとに「治療するもの」「治療するかどうか分からないもの」を仕分けし、発熱コントロールの過剰を戒める枠組み</strong>を10項目で提示した点が価値である。著者らは「発熱コントロールの試験を始める前に、重症病態下の体温調節の理解を深めることが必要」と、研究の順序そのものに注文をつけている。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 重症患者の発熱について、著者3名が<strong>10の実践的助言</strong>を短くまとめた解説。基調は「発熱コントロールは多くの患者でおそらく過剰であり、副作用を招き転帰を悪化させうる」。文献が限られていることを著者自身が明記している。</p>
+</div>
+<ul><li><strong>対象</strong>：成人・非好中球減少患者。好中球減少患者・小児・免疫不全患者は扱わない。</li><li><strong>測定</strong>：核心温が内臓の温度を最もよく反映する。肺動脈カテーテルが基準だが実用的でないため、可能な限り膀胱温を日常的に使うことを支持する。</li><li><strong>定義</strong>：正常核心温は 37℃、生理的変動は 0.5〜1℃。発熱は 38.3℃ 以上。免疫不全患者ではより低い閾値が使われうる。環境要因、腎代替療法、ケタミンなどの干渉因子を除外する。</li><li><strong>精査</strong>：経験的抗菌薬を始めるべき患者では検体採取と画像が推奨される。一方、術直後の発熱のように炎症反応のピークに対応するものでは広範な精査は有用でない。早期術後発熱100例のコホートで精査が有用だったのは 9%。</li><li><strong>高体温</strong>：大半の感染症は核心温 38.9℃ を超えない。まれに感染中でも 41.1℃ を超える（hyperpyrexia）ことがあるが最適管理は不明。この重症度では非感染性病因の考慮が必須。</li><li><strong>悪性高熱症</strong>：高炭酸ガス血症・筋強直・不整脈・高体温として現れる。酸素投与、体外冷却、冷却輸液、鎮静、ダントロレンなどで積極的に治療する。</li><li><strong>敗血症</strong>：非常に高い体温は死亡と関連。動物では体温低下が転帰を改善するが、ヒトでは治療的低体温（32〜34℃）が臓器障害を悪化させた。発熱コントロールの結果は相反する。</li><li><strong>解熱薬・冷却</strong>：アセトアミノフェンは 700例の RCT で生存を変えず、別研究では平均動脈圧と心拍数の有意な低下を伴った。冷却デバイスは体温を下げるが転帰は改善しない。</li><li><strong>無熱の敗血症</strong>：低体温の敗血症患者の死亡率は発熱のある患者の2倍。復温すべきかは不明。</li><li><strong>脳損傷</strong>：誘導低体温はエビデンスに支持されない。発熱コントロールは3つの外傷性脳損傷ガイドラインのうち1つでしか推奨されていない。</li><li><strong>心停止後</strong>：発熱予防は実験的・臨床的研究の双方に支持される。ガイドラインでは昏睡患者で最初の侵襲から72時間、発熱コントロールを維持する。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 重症患者の発熱の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>発熱（fever）と高体温（hyperthermia）は別物である。</strong> 発熱は視床下部の体温調節中枢が設定点（set point）を上げた結果として体温が上がる状態で、身体は「上げようとして」震え・血管収縮を起こす。高体温は設定点は正常のまま、産熱が放熱を上回って体温が上がる状態で、悪性高熱症・甲状腺クリーゼ・熱中症などが該当する。設定点が動いていない高体温には解熱薬（設定点を下げる薬）が効かず、物理的冷却と原因治療が要る。本稿の Fig. 1 はこの区別を左右に描き分けている。</p>
+<p><strong>核心温（core temperature）</strong>は身体深部の温度で、肺動脈・膀胱・食道のサーミスタで測る。体表に近いほど実際より低く出る（核心‑皮膚の勾配）。<strong>発熱の起点は2種類の発熱物質（pyrogen）</strong>で、外因性発熱物質（細菌・真菌・エンドトキシン・薬剤・腫瘍）が免疫細胞に作用し、内因性発熱物質（インターロイキン‑1、インターフェロン、腫瘍壊死因子、プロスタグランジン）が視床下部に働いて設定点を上げる。</p>
+<p><strong>なぜ「下げるべきか」が論争になるのか</strong>：発熱は自然免疫・獲得免疫を増強する宿主防御反応でもある一方、酸素消費量と代謝需要を増やす。防御を削るのか、需要を減らすのか、どちらが勝つかが病態ごとに違うため、一律の答えが出ていない。これが本稿の出発点である。</p>
+<p><strong>本稿に出る略語</strong>：BT = body temperature（体温）。PAMPs = pathogen associated molecular patterns（病原体関連分子パターン。細菌の細胞壁成分など、免疫細胞が「異物」として認識する分子の総称）。HLA-DR = ヒト白血球抗原DR。単球表面の HLA-DR 発現が下がることは免疫抑制状態の指標として使われる。</p>
+</div>
+<h3>2. 本稿の作られ方（Methods に相当するもの）📐</h3>
+<p>本稿は原著研究ではないため方法のセクションを持たない。ジャーナルクラブで扱う際の前提として、文書としての性格を整理する。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>ICM 誌の "UNDERSTANDING THE DISEASE" 枠の短報型解説。系統的レビューではない</td></tr>
+<tr><td>検索戦略</td><td>記載なし。文献の選定基準・除外基準・検索期間はいずれも示されていない</td></tr>
+<tr><td>対象集団</td><td>成人・非好中球減少患者。原文が明示的に限定している</td></tr>
+<tr><td>成果物</td><td>見出しのみで番号を持たない10の助言。番号は表題の「Ten」から読み取る</td></tr>
+<tr><td>図表</td><td>Fig. 1（体温上昇の機序と原因の模式図）1点のみ。表はない</td></tr>
+<tr><td>参考文献</td><td>15件</td></tr>
+<tr><td>利益相反</td><td>Leone は AOP Pharma の講演者、AOP Pharma・Gilead・LFB・Viatris のコンサルタント。Juffermans と Nielsen は申告なし</td></tr>
+<tr><td>著者の自己申告</td><td>「文献はかなり限られている（Literature is quite limited）」と冒頭に明記</td></tr>
+</tbody></table></div>
+<p><strong>10項目の見出しは PDF で以下のとおり確認した</strong>（原文の見出しに番号は振られていない）。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>原文の見出し</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Be sure to measure temperature accurately</td><td>体温は正確に測ること</td></tr>
+<tr><td>2</td><td>Remember: definitions of fever vary</td><td>覚えておくこと：発熱の定義は一様でない</td></tr>
+<tr><td>3</td><td>Perform an extensive diagnostic workup in some, but not all, febrile patients</td><td>広範な精査は一部の発熱患者に行い、全員には行わない</td></tr>
+<tr><td>4</td><td>Consider non-infectious causes for very high fever</td><td>非常に高い発熱では非感染性の原因を考える</td></tr>
+<tr><td>5</td><td>Actively treat malignant hyperthermia</td><td>悪性高熱症は積極的に治療する</td></tr>
+<tr><td>6</td><td>Be careful with fever control in patients with sepsis</td><td>敗血症患者の発熱コントロールには注意する</td></tr>
+<tr><td>7</td><td>Acetaminophen and cooling devices do not improve outcomes in febrile septic patients</td><td>アセトアミノフェンと冷却デバイスは発熱性敗血症患者の転帰を改善しない</td></tr>
+<tr><td>8</td><td>Absence of fever in sepsis is not a good sign</td><td>敗血症で発熱がないことは良い徴候ではない</td></tr>
+<tr><td>9</td><td>Control fever in the patient with brain injury?</td><td>脳損傷患者では発熱をコントロールすべきか？</td></tr>
+<tr><td>10</td><td>Control fever post-cardiac arrest!</td><td>心停止後は発熱をコントロールせよ！</td></tr>
+</tbody></table></div>
+<h3>3. Fig. 1 — 体温上昇の機序と原因の全体像 🖼️</h3>
+<p class="figref">🖼 原著のFig. 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07049-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07049-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Fig. 1  Simplified mechanisms and causes of elevated body temperature（原図・無改変。©出典） 体温上昇の機序と原因を1枚に集約した模式図。中央に人体解剖図を置き、上段に「Fever」、その下に「Imbalance」、さらに下に視床下部のボックスが縦に並ぶ。下段の左右に内因性・外因性の発熱物質のボックスが向かい合う。</p>
+</div>
+<p>図中のすべてのボックスとラベルを表に起こす。</p>
+<h4>Fig. 1 の全要素</h4>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>ラベル</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>最上段（中央）</td><td>Fever</td><td>発熱。図の帰結として最上部に置かれる</td></tr>
+<tr><td>上から2段目（中央）</td><td>Imbalance</td><td>不均衡。視床下部から Fever へ向かう矢印の中間に置かれる</td></tr>
+<tr><td>中段（中央のボックス）</td><td>Hypothalamus / Thermoregulation centre / Normal range: 37°C (± 0.5-1°C)</td><td>視床下部＝体温調節中枢。正常域は 37℃（±0.5〜1℃）</td></tr>
+<tr><td>左上（見出し）</td><td>To treat or not ?</td><td>治療するかどうか不明。左列の2群（Inflammation と Infection source）にかかる</td></tr>
+<tr><td>右上（見出し）</td><td>To treat</td><td>治療する。右列の2群（Neurogenic と Hyperthermia）にかかる</td></tr>
+<tr><td>左上のボックス群</td><td>Inflammation：Trauma／Surgical insult</td><td>炎症：外傷、手術侵襲</td></tr>
+<tr><td>左のイタリック注記（Inflammation の下）</td><td>No work-up</td><td>精査しない</td></tr>
+<tr><td>左中のボックス群</td><td>Infection source：Lung／Abdomen／Kidney／Lines／Skin &amp; Tissues／Cerebral</td><td>感染源：肺、腹部、腎、ライン、皮膚・軟部組織、脳</td></tr>
+<tr><td>左のイタリック注記（Infection source の下）</td><td>Work-up</td><td>精査する</td></tr>
+<tr><td>右上のボックス群</td><td>Neurogenic：Brain injury／Post cardiac arrest</td><td>神経原性：脳損傷、心停止後</td></tr>
+<tr><td>右中のボックス群</td><td>Hyperthermia：Malignant hyperthermia／Thyroid storm／Serotonin syndrome／Severe drug reaction／Neuroleptic malignant syndrome</td><td>高体温：悪性高熱症、甲状腺クリーゼ、セロトニン症候群、重症薬疹、悪性症候群</td></tr>
+<tr><td>下段左のボックス</td><td>Endogenous pyrogens：Prostaglandins／Norepinephirine／Interleukin-1／Interferons／Tumor necrosis factors</td><td>内因性発熱物質：プロスタグランジン、ノルエピネフリン、インターロイキン‑1、インターフェロン、腫瘍壊死因子</td></tr>
+<tr><td>下段右のボックス</td><td>Exogenous pyrogens：Bacteria／Fungi／Endotoxin／Drugs／Tumors</td><td>外因性発熱物質：細菌、真菌、エンドトキシン、薬剤、腫瘍</td></tr>
+<tr><td>下段中央（人体図上の注記）</td><td>Lymphocytes／Activated mononuclear phagocytes</td><td>リンパ球、活性化単核食細胞。外因性→内因性の変換を担う細胞として2つのボックスの間に置かれる</td></tr>
+</tbody></table></div>
+<p><strong>矢印の向き</strong>：外因性発熱物質のボックスから左向きの矢印がリンパ球・活性化単核食細胞を経て内因性発熱物質のボックスへ入る。内因性発熱物質のボックスから上向きの矢印が視床下部へ入る。視床下部から上向きの矢印が Imbalance を経て Fever へ抜ける。左右の見出し（To treat or not ? と To treat）からは括弧状の線が下方に伸び、それぞれの群を束ねる。</p>
+<p><strong>この図の読み方</strong>：左列（炎症・感染）は「治療するかどうか分からない」、右列（神経原性・高体温）は「治療する」に振り分けられている。精査の要否は左列の中でさらに分かれ、外傷・術後の炎症は精査せず、感染源が疑われるものは精査する。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Fig. 1 は本文より踏み込んでいる <mark class="hl">図は「脳損傷」を心停止後と同じ <strong>To treat</strong>（治療する）の側に置いているが、本文の Tip 9 は見出し自体が疑問符で終わり、「脳損傷における発熱コントロールの有効性のデータが欠如している」と述べている</mark>。図と本文で脳損傷の扱いが食い違う。当院で図だけを教育資料に転用すると、本文が持っている慎重さが失われる。図を使うなら Tip 9 の本文と必ずセットにする。 また、図の高体温ボックスは5疾患（悪性高熱症・甲状腺クリーゼ・セロトニン症候群・重症薬疹・悪性症候群）だが、本文の Tip 4 は<strong>熱中症と急性溶血性輸血反応を加えた7疾患</strong>を挙げている。図の5疾患だけを覚えると2つ落ちる。</p>
+</div>
+<p><strong>図中の誤記</strong>：内因性発熱物質の「Norepinephirine」は Norepinephrine の綴り誤りである。なお、ノルエピネフリンを内因性発熱物質に並べるのは一般的な教科書記載とは異なる（通常はインターロイキン‑1、インターロイキン‑6、腫瘍壊死因子、インターフェロンが内因性発熱物質で、プロスタグランジン E2 が最終メディエータ）。これは本稿の本文には説明がなく、図中でのみ示されている。</p>
+<h3>4. Tip 1 — 体温は正確に測ること 🌡️</h3>
+<p><strong>原題</strong>：Be sure to measure temperature accurately</p>
+<p><strong>何をするか</strong></p>
+<ul><li>体温には核心‑皮膚の勾配があることを前提にする。核心温が内臓の温度を最も正確に反映する。</li><li>重症患者では侵襲的モニタリングが核心温の最良の推定を与える。</li><li>肺動脈カテーテル測定を基準とした比較研究では、<strong>食道・直腸・腋窩・鼠径部・膀胱</strong>からの測定で肺動脈温との差が最も小さかった。</li><li>肺動脈カテーテルの実用上の困難を考えると、この結果は<strong>可能な限り膀胱温を日常的に使うこと</strong>を支持する。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>引用は比較研究1本のみ（Lefrant JY, et al. *Intensive Care Med* 2003;29:414-418）。本稿はこの1本から結論を導いている。</li><li>「膀胱温を日常的に使え」という結論は、原典が示した精度比較からの<strong>著者らの外挿</strong>である。原典が膀胱温を推奨したとは本文に書かれていない。</li><li>判定：<strong>弱いエビデンス＋著者の推論</strong>。ただし方向性は後述の 2023年ガイドラインとおおむね整合する。</li></ul>
+<h3>5. Tip 2 — 発熱の定義は一様でないことを忘れない 📏</h3>
+<p><strong>原題</strong>：Remember: definitions of fever vary</p>
+<p><strong>何をするか</strong></p>
+<ul><li>正常核心温は <strong>37℃</strong>、生理的変動は <strong>0.5〜1℃</strong> と置く。</li><li>ガイドラインは <strong>38.3℃ 以上</strong>を発熱と提案する。ただし免疫不全患者ではより低い閾値が使われうる。</li><li>発熱の診断にあたっては<strong>環境要因を除外</strong>し、<strong>腎代替療法</strong>や<strong>ケタミン</strong>のように体温に干渉しうる介入・薬剤も考慮する。</li><li>定義を定める目的は、<strong>感染リスクのある患者に注意を向けさせること</strong>にある、と原文は説明する。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>閾値 38.3℃ の出典は 2008年の ACCM・IDSA ガイドライン（O'Grady NP, et al. *Crit Care Med* 2008;36:1330-1349）。<strong>本稿が引くのは2008年版であり、2023年の更新版ではない</strong>（本稿の受理は2023年3月、更新版の刊行は同年11月なので時系列上引けない）。</li><li>環境要因・腎代替療法・ケタミンの3点には引用が付いていない。判定：<strong>専門家意見</strong>。</li><li>「定義の目的は注意を向けさせること」という解釈も引用なし。判定：<strong>著者の見解</strong>。</li></ul>
+<h3>6. Tip 3 — 広範な精査は一部の発熱患者に行い、全員には行わない 🔎</h3>
+<p><strong>原題</strong>：Perform an extensive diagnostic workup in some, but not all, febrile patients</p>
+<p><strong>何をするか</strong></p>
+<ul><li>発熱はしばしば、疑われる感染源を同定するための検体採取と画像を含む精査につながる。<strong>経験的抗菌薬の開始が適切と判断される患者では、これらの手順が推奨される</strong>。</li><li>しかし<strong>すべての発熱患者に広範な精査が有用なわけではない</strong>。例として、炎症反応のピークに対応する術直後の発熱が挙げられる。不要な精査はコストを増やし、不適切な治療を招く。</li><li>早期術後発熱の<strong>100名のコホート研究</strong>では、精査が有用だったのは<strong>9%</strong>にとどまった。</li><li><strong>発熱の評価はプロトコル化して、収率の低い精査を減らすべき</strong>である。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>9% の数字の出どころは、参考文献一覧の内容から判断すると Lesperance R, et al. *J Surg Res* 2011;171:245-250（早期術後発熱とルーチンの発熱精査の前向き研究）である。<strong>単施設・n=100 の観察研究</strong>であり、外的妥当性は限定的。</li><li>「プロトコル化すべき」は<strong>著者の提言</strong>で、プロトコル化の効果を示した研究は引かれていない。</li><li>判定：<strong>観察研究1本＋著者の提言</strong>。方向性は 2023年ガイドラインの総論と一致する（第15節）。</li></ul>
+<h3>7. Tip 4 — 非常に高い発熱では非感染性の原因を考える 🔥</h3>
+<p><strong>原題</strong>：Consider non-infectious causes for very high fever</p>
+<p><strong>何をするか</strong></p>
+<ul><li><strong>大半の感染性疾患は通常、核心温 38.9℃ を超えない</strong>ことを前提に置く。</li><li>ただし<strong>まれに感染中でも核心温が 41.1℃ を超える</strong>ことがある（"hyperpyrexia"）。これは有害でありうるが、<strong>この状況での最適管理は不明のまま</strong>である。</li><li>非感染性の高体温の原因の多くは特異的な評価と治療を要し、適切に対処しないと致死的な帰結をもたらしうる。したがってこの重症度の体温上昇では<strong>非感染性病因の考慮が必須</strong>。</li><li>該当する病態は7つ挙げられている：<strong>セロトニン症候群、悪性高熱症、悪性症候群、甲状腺クリーゼ、熱中症、急性溶血性輸血反応、重症薬疹</strong>。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>38.9℃ と 41.1℃ という2つの閾値には、本文中で個別の出典が付いていない。臨床通念として提示されている。判定：<strong>専門家意見</strong>。</li><li>本項に付された引用番号 [5] は、参考文献一覧では EUROBACT 調査（Niven DJ, et al. *Crit Care* 2013;17:R289。ICU における体温異常の診断と管理についての調査研究）であり、列挙された7疾患の出典としては対応が弱い。</li><li>判定：<strong>専門家意見</strong>。ただし「高体温では非感染性を鑑別に入れる」という原則自体は広く受け入れられている。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「41.1℃ を超えたら感染ではない」と読まない <mark class="hl">本稿は「41.1℃ を超えたら非感染性」とは書いていない。書かれているのは、①大半の感染症は 38.9℃ を超えない、②まれに感染中でも 41.1℃ を超えうる、の2点である</mark>。したがって 41.1℃ を超えていても感染は除外できず、逆に 38.9℃ 台でも非感染性はありうる。本ノートの旧版は「41.1℃ を超えたら感染以外を考える」と単純化して記載していたが、これは原文の但し書き（"rarely, core BT can exceed 41.1°C during infection"）を落とした読み方だったので訂正した。</p>
+</div>
+<p><strong>本文に無いこと（一般的な背景知識として補う）</strong>：7疾患の鑑別に必要な手がかり（発症契機となる薬剤、筋緊張の型、瞳孔、腱反射、発汗の有無など）は本稿には一切書かれていない。当院で鑑別表を作るなら別文献を当てる必要がある。熱中症については <span class="wl">SCCM熱射病（熱中症）診療ガイドライン — 氷水浸漬で30分以内に目標体温、ダントロレンは推奨しない（CCM2025）</span> が具体的な冷却手順を持つ。</p>
+<h3>8. Tip 5 — 悪性高熱症は積極的に治療する 💉</h3>
+<p><strong>原題</strong>：Actively treat malignant hyperthermia</p>
+<p><strong>何をするか</strong></p>
+<ul><li>悪性高熱症は <strong>高炭酸ガス血症・筋強直・不整脈・高体温</strong>として現れる。<strong>麻酔薬のトリガー物質への曝露</strong>から発症しうる。</li><li>機序は、<strong>筋小胞体のカルシウム放出に対するマグネシウムの抑制の障害</strong>と、<strong>細胞外カルシウムの流入</strong>に関連する、と原文は述べる。</li><li>管理は概ね、<strong>酸素投与・体外冷却・冷却輸液・鎮静</strong>、および<strong>ダントロレンなどの特異的薬剤</strong>を含む。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>引用は Association of Anaesthetists の悪性高熱症ガイドライン（Hopkins PM, et al. *Anaesthesia* 2021;76:655-664）。<strong>本稿10項目のうち、専門学会ガイドラインを直接の根拠とする数少ない項目</strong>である。</li><li>判定：<strong>ガイドラインに基づく推奨</strong>。10項目中で最も根拠が明確。</li></ul>
+<p><strong>本文に無いこと（一般的な背景知識として補う）</strong>：ダントロレンの用量・投与経路・反復投与の間隔は本稿に一切記載がない。悪性高熱症の分子病態として一般に説明されるのはリアノジン受容体1（RYR1）遺伝子変異による筋小胞体カルシウム放出の異常であり、本稿の「マグネシウムの抑制の障害」という記述は一般的な教科書の説明とは表現が異なる。当院のプロトコルを作る際は本稿だけを根拠にしない。</p>
+<h3>9. Tip 6 — 敗血症患者の発熱コントロールには注意する ⚠️</h3>
+<p><strong>原題</strong>：Be careful with fever control in patients with sepsis</p>
+<p><strong>何をするか</strong></p>
+<ul><li><strong>非常に高い体温は敗血症で死亡と関連</strong>する。原文は「おそらく代謝需要の増加による」と推定として書いている。</li><li><strong>動物実験では体温低下が敗血症の転帰を改善する</strong>ことが示唆される。</li><li><strong>しかしヒトの敗血症試験では、治療的低体温（32〜34℃）はむしろ臓器障害を悪化させた</strong>。</li><li>発熱コントロールの結果は相反しており、<strong>ある試験では血行動態が改善</strong>し、<strong>他の2研究では有害な効果</strong>が示された。</li><li><strong>敗血症のサブ集団によって発熱コントロールへの反応が異なる可能性がある</strong>、というのが著者らの解釈である。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>32〜34℃ の治療的低体温で臓器障害が悪化したという記述に対応する試験は、参考文献一覧の内容から判断すると CASS 試験（Itenov TS, et al. *Lancet Respir Med* 2018;6:183-192。敗血症性ショックと呼吸不全に対する誘導低体温の RCT）である。</li><li>「血行動態が改善した1試験」は Schortgen F, et al. *Am J Respir Crit Care Med* 2012;185:1088-1095（敗血症性ショックにおける体表冷却による発熱コントロールの RCT）。</li><li>「有害な効果を示した2研究」は Lee BH, et al. *Crit Care* 2012;16:R33（FACE 研究。多施設前向き観察研究）と Ye S, et al. *Can Respir J* 2017:3087505。<strong>いずれも観察研究であり RCT ではない</strong>。</li><li>判定：<strong>RCT を含むが結果が相反する領域</strong>。結論は「注意せよ」という保留であって、行動を指定する推奨ではない。「サブ集団で反応が異なる可能性」は<strong>著者の仮説</strong>で、検証されていない。</li></ul>
+<h3>10. Tip 7 — アセトアミノフェンと冷却デバイスは発熱性敗血症患者の転帰を改善しない 💊</h3>
+<p><strong>原題</strong>：Acetaminophen and cooling devices do not improve outcomes in febrile septic patients</p>
+<p><strong>何をするか</strong></p>
+<ul><li>アセトアミノフェンは敗血症患者にしばしば使われるが、<strong>エビデンスはこの実践を支持しない</strong>。疑いまたは証明された敗血症の発熱患者 <strong>700名</strong>をアセトアミノフェン群とプラセボ群にランダム化した試験で、<strong>生存は同等</strong>だった。</li><li>別の研究では、アセトアミノフェン群は体温の<strong>緩やかな低下</strong>を得たが、<strong>平均動脈圧と心拍数の有意な低下</strong>を伴った。</li><li>患者の快適性の改善はありうるものの、<strong>アセトアミノフェンによる発熱治療は死亡リスクを変えるうえで無効であり、敗血症では血行動態を悪化させうる</strong>。加えて<strong>肝酵素上昇などの有害効果</strong>も報告されている。</li><li>対照的に、<strong>冷却デバイスは重症敗血症患者でも体温低下に有効</strong>である。方法の比較では、<strong>血管内冷却とハイドロゲル冷却システムが体表冷却デバイスより高い効果</strong>を持つと示唆される。</li><li><strong>しかし敗血症による発熱患者では、体外冷却も体内冷却も転帰に効果がなかった</strong>。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>700名の RCT は、参考文献一覧の内容から判断すると HEAT 試験（Young P, et al. *N Engl J Med* 2015;373:2215-2224。感染疑いの重症患者へのアセトアミノフェン）である。<strong>本稿10項目のうち最も強い臨床エビデンス</strong>。</li><li>体温は下がるが平均動脈圧と心拍数が下がったという記述に対応するのは Schell-Chaple HM, et al. *Crit Care Med* 2017;45:1199-1207（発熱のある重症成人への静注アセトアミノフェンの RCT）。</li><li>冷却法の比較（血管内・ハイドロゲル &gt; 体表）に対応するのは Hammond NE, Boyle M. *Aust Crit Care* 2011;24:4-17（薬理学的 vs 非薬理学的解熱の系統的レビュー・メタ解析）。</li><li>判定：<strong>RCT とメタ解析に基づく、本稿で最も確度の高い項目</strong>。ただし個々の数値（信頼区間、群間差、p値）は本文に一切示されていない。</li></ul>
+<p><strong>この項目のその後</strong>：本稿の刊行後、敗血症への静注アセトアミノフェンを検証した ASTER 試験が出ている（<span class="wl">敗血症へのアセトアミノフェン静注は臓器支持なし生存日数を改善しない（ASTER・JAMA2024）</span>）。方向は本稿の記述と一致する。当院の勉強会では本稿の一文を起点に ASTER まで繋げると議論が現在地に届く。</p>
+<h3>11. Tip 8 — 敗血症で発熱がないことは良い徴候ではない 🧊</h3>
+<p><strong>原題</strong>：Absence of fever in sepsis is not a good sign</p>
+<p><strong>何をするか</strong></p>
+<ul><li>感染中、発熱は<strong>病原体関連分子パターン（PAMPs）が免疫細胞と相互作用し、自然免疫・獲得免疫の双方を増強する</strong>ことで惹起される。</li><li>したがって<strong>敗血症で発熱がないことは、免疫応答の欠陥を反映しうる</strong>。低体温の敗血症患者における<strong>リンパ球減少</strong>と<strong>単球の HLA-DR 発現低下</strong>がこれを示唆する。</li><li>ただしこの説明はおそらく単純化しすぎである。<strong>炎症性サイトカインのプロファイルは発熱のある敗血症患者とない患者で差がない</strong>ためである。むしろ<strong>無熱の敗血症患者には心血管・血行動態のリスク因子が存在する</strong>可能性がある。</li><li><strong>原因によらず、低体温の敗血症患者の死亡率は発熱のある患者の2倍</strong>である。</li><li><strong>ただしこれらの患者を復温すべきかは不明</strong>、と原文は明記する。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>引用は Wiewel MA, et al. *Crit Care* 2016;20:328（低体温敗血症の危険因子・宿主応答・転帰）1本。<strong>観察コホート研究</strong>であり、低体温と死亡の関連は因果を意味しない。</li><li>「復温すべきかは不明」という留保は原文どおりで、著者らは介入を推奨していない。</li><li>判定：<strong>観察研究1本に基づく所見＋明示的な留保</strong>。行動の指定はない。</li></ul>
+<h3>12. Tip 9 — 脳損傷患者では発熱をコントロールすべきか？ 🧠</h3>
+<p><strong>原題</strong>：Control fever in the patient with brain injury?（見出し自体が疑問符で終わる）</p>
+<p><strong>何をするか</strong></p>
+<ul><li><strong>脳損傷患者では、感染がなくても高体温が生じる</strong>。しばしば神経原性の原因による。</li><li><strong>誘導低体温はエビデンスに支持されない実践</strong>である。</li><li>発熱は脳損傷後の転帰不良と関連するが、<strong>発熱コントロールは3つの外傷性脳損傷ガイドラインのうち1つでしか推奨されておらず、他の2つでは言及すらない</strong>。脳損傷における発熱コントロールの有効性のデータが欠如しているためである。</li><li>日常診療では、<strong>体温の極端を避けることがこれらの患者の管理の慎重な要素</strong>である。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>引用は Wiles MD, et al. *Anaesthesia* 2023（脳神経外科以外の ICU における外傷性脳損傷管理のナラティブレビュー）1本。<strong>ガイドラインを数えた二次情報</strong>であり、どの3ガイドラインを指すかは本稿に書かれていない。</li><li>「体温の極端を避ける」は "prudent"（慎重な）という語で提示されており、<strong>著者の経験則</strong>である。閾値（何℃を極端とするか）は示されていない。</li><li>判定：<strong>エビデンス欠如の明示＋著者の経験則</strong>。10項目中で最も推奨として弱い。</li></ul>
+<p><strong>この項目のその後</strong>：脳損傷の体温管理は「低体温を目指す」から「発熱を作らせない」へ軸足が移っている（<span class="wl">急性脳損傷の体温管理 — 低体温から「発熱を作らせない」へ（ナラティブレビュー・ICM2026）</span>）。本稿の慎重な書きぶりは、この転換の途中に置かれたものとして読むと位置づけやすい。</p>
+<h3>13. Tip 10 — 心停止後は発熱をコントロールせよ！ ❤️‍🔥</h3>
+<p><strong>原題</strong>：Control fever post-cardiac arrest!（見出しが感嘆符で終わる。10項目で唯一）</p>
+<p><strong>何をするか</strong></p>
+<ul><li><strong>心停止後の患者では、発熱の予防は実験的研究・臨床研究の双方に支持される治療的手段</strong>である。</li><li><strong>ただし低体温が能動的な発熱予防より有効かどうかは、現時点でも不明</strong>である。</li><li><strong>ガイドラインによれば、心停止後の昏睡患者では、最初の侵襲から72時間、発熱コントロールを維持すべき</strong>である。</li></ul>
+<p><strong>根拠の強さ</strong></p>
+<ul><li>引用は Sandroni C, Natalini D, Nolan JP. *Crit Care* 2022;26:361（心停止後の体温管理）1本。<strong>レビューを介したガイドラインの引用</strong>である。</li><li>「発熱予防が低体温より優れるか不明」という留保は原文どおり。</li><li>判定：<strong>ガイドラインに基づく推奨</strong>。10項目のうち、著者らが最も強い調子で書いた唯一の項目。</li></ul>
+<p><strong>この項目のその後</strong>：2025年の ERC・ESICM 心停止後ケアガイドラインは、目標を <strong>37.5℃以下</strong>、期間を <strong>36〜72時間</strong>と具体化している（<span class="wl">心停止後ケアガイドライン2025 ERC・ESICM — 発熱予防は37.5℃以下、予後予測は2つ以上の指標で（Resuscitation2025）</span>）。本稿の「72時間」は上限側の数字であり、当院の PCAS プロトコルは2025年版の数値に合わせる。</p>
+<h3>14. 10項目の仕分け — 「エビデンスに基づく推奨」と「著者の経験則」📊</h3>
+<p>各項目を、本文が挙げた根拠の型で分類する。同じ「tip」でも重みがまったく違う。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>項目</th><th>本文が挙げた根拠</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>体温は正確に測る</td><td>比較研究1本（Lefrant 2003）</td><td>弱いエビデンス＋著者の外挿（膀胱温の推奨は原典に無い）</td></tr>
+<tr><td>2</td><td>発熱の定義は一様でない</td><td>2008年ガイドライン</td><td>ガイドライン参照。干渉因子の列挙は経験則</td></tr>
+<tr><td>3</td><td>精査は一部の患者に</td><td>観察研究1本（n=100）</td><td>観察研究＋著者の提言（プロトコル化の効果は未検証）</td></tr>
+<tr><td>4</td><td>高体温では非感染性を考える</td><td>出典の対応が弱い</td><td>専門家意見。閾値2つに出典なし</td></tr>
+<tr><td>5</td><td>悪性高熱症は積極的に治療</td><td>学会ガイドライン（2021）</td><td>ガイドラインに基づく推奨</td></tr>
+<tr><td>6</td><td>敗血症の発熱コントロールに注意</td><td>RCT 複数＋観察研究2本、結果は相反</td><td>保留。行動の指定なし</td></tr>
+<tr><td>7</td><td>アセトアミノフェンと冷却は転帰を改善しない</td><td>RCT（n=700）＋RCT＋メタ解析</td><td>本稿で最も強い。数値は本文に無い</td></tr>
+<tr><td>8</td><td>無熱の敗血症は良い徴候でない</td><td>観察コホート1本</td><td>関連の記述。復温の是非は「不明」と明記</td></tr>
+<tr><td>9</td><td>脳損傷での発熱コントロール？</td><td>ナラティブレビュー1本</td><td>エビデンス欠如の明示＋経験則</td></tr>
+<tr><td>10</td><td>心停止後は発熱をコントロール</td><td>ガイドライン（レビュー経由）</td><td>ガイドラインに基づく推奨</td></tr>
+</tbody></table></div>
+<p><strong>読み取り</strong>：10項目のうち、行動を明確に指定できるのは <strong>5・7・10 の3項目</strong>にとどまる。<strong>1・2・3</strong> は方向を示すが根拠が細い。<strong>4・9</strong> は専門家意見。<strong>6・8</strong> は保留である。「10のtips」という体裁が10項目を等価に見せるが、実際の重みは3段階に分かれる。</p>
+<h3>15. 既存ノートとの整合 — SCCM・IDSA 2023 ガイドラインとの対比 🔗</h3>
+<p>同じ2023年に、同じ「ICU の発熱」を扱う SCCM・IDSA のガイドラインが刊行されている。<strong>本稿の受理は3月、ガイドラインの刊行は11月</strong>なので、本稿はガイドラインを引けない。逆にガイドラインの推奨と本稿の助言は、いくつかの点で明確に食い違う。</p>
+<ul><li>本体：<span class="wl">ICUの新規発熱の評価 SCCM・IDSAガイドライン2023 — 12推奨と9 best practice statement、すべて弱い推奨（CCM2023）</span></li><li>要約版：<span class="wl">ICUの新規発熱の評価ガイドライン2023 エグゼクティブサマリー — 24項目＝12推奨＋9 BPS＋3保留、鼓膜温をやめ反射的な培養もやめる（CCM2023）</span></li></ul>
+<h4>Table. 3つの論点での対比</h4>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本稿（10 tips・2023年3月受理）</th><th>SCCM・IDSA 2023（同年11月刊行）</th><th>評価</th></tr></thead>
+<tbody>
+<tr><td>体温測定の部位</td><td>肺動脈が基準。食道・直腸・腋窩・鼠径部・膀胱で差が最小。可能な限り膀胱温</td><td>中枢デバイス（肺動脈・膀胱・食道バルーンのサーミスタ）が留置されていればそれ。無ければ口腔温か直腸温</td><td>膀胱温を最上位に置く点は一致</td></tr>
+<tr><td>腋窩温・鼠径温の扱い</td><td>「差が最小」の5部位に含める</td><td>腋窩温は「信頼性が低く依拠すべきでない」群に名指し。鼠径部には言及なし</td><td><strong>正反対</strong></td></tr>
+<tr><td>鼓膜温</td><td>言及なし</td><td>「信頼性が低い」群。要約版は誤差 −1.42℃ 〜 +1.26℃ を提示</td><td>本稿は論点を持たない</td></tr>
+<tr><td>発熱の定義</td><td>38.3℃ 以上（2008年版を引用）</td><td>単回測定で 38.3℃ 以上</td><td>一致（引く版が違うだけ）</td></tr>
+<tr><td>精査の適応</td><td>経験的抗菌薬を始めるなら精査を推奨。術直後は不要。プロトコル化を</td><td>すべての発熱が検査を要するわけではない。病歴・身体診察で候補を絞り、反射的に全部位の培養を出さない</td><td>方向は一致</td></tr>
+<tr><td>培養の採り方</td><td>記載なし</td><td>2セット・合計60 mL・異なる部位・時間間隔を空けずに連続採取。CVC 疑いでは2ルーメン＋末梢血を同時採取</td><td>本稿に欠落</td></tr>
+<tr><td>解熱薬（転帰目的）</td><td>アセトアミノフェンは死亡を変えず、敗血症では血行動態を悪化させ、肝酵素を上げうる</td><td>推奨2：体温を下げること自体を目的としたルーチン使用を避ける（弱い推奨・確実性 moderate）</td><td>一致</td></tr>
+<tr><td>解熱薬（快適性目的）</td><td>「快適性の改善はありうる」と述べるにとどめ、血行動態リスクを強調</td><td>推奨3：快適さを重視する患者では、非薬物的方法より解熱薬を使う（弱い推奨・確実性 low）</td><td><strong>逆向き</strong></td></tr>
+<tr><td>冷却デバイス</td><td>体温低下には有効（血管内・ハイドロゲル &gt; 体表）。ただし転帰は改善しない</td><td>快適さ目的では解熱薬に劣後する位置づけ</td><td><strong>逆向き</strong></td></tr>
+<tr><td>心停止後</td><td>「発熱をコントロールせよ！」72時間維持</td><td>神経損傷後・心停止後では理論的利益がリスクを上回りうるが、これらの集団での解熱薬ルーチン使用を支持するエビデンスはほとんどない</td><td><strong>温度差が大きい</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>腋窩温・鼠径温をこの1本だけで許容しない <mark class="hl">本稿は腋窩・鼠径を「肺動脈温との差が最小」の5部位に含めているが、2023年の SCCM・IDSA ガイドラインは腋窩温を「依拠すべきでない」群に明示的に置いている</mark>。本稿の根拠は2003年の比較研究1本、ガイドラインの根拠は2015年のメタ解析である。<strong>当院の体温測定手順は本稿ではなくガイドライン側に合わせる</strong>。本稿から採るのは「膀胱温を第一に置く」という結論だけにとどめる。</p>
+</div>
+<p><strong>なぜ食い違うのか</strong>：解熱薬をめぐる逆向きの推奨は、両者が答えている問いが違うことに由来する。本稿は「敗血症で解熱薬を使うと転帰が良くなるか」に答え、ガイドラインは「快適さのために体温を下げると決めた場合、薬と物理的冷却のどちらを選ぶか」に答えている。<strong>目的が転帰改善なら本稿、手段の選択ならガイドライン</strong>、と読み分ければ矛盾しない。ただしベッドサイドでこの読み分けは自明ではないので、当院の指示簿では「解熱の目的」を明記する運用にする。</p>
+<p><strong>その他の関連ノートとの整合</strong></p>
+<ul><li><span class="wl">体温測定方法の比較（膀胱・食道・直腸・腋窩・鼠径vs肺動脈温）</span>：本稿 Tip 1 の引用文献（Lefrant 2003）そのものを扱うノート。5部位の内訳を確認するならこちらが一次側。</li><li><span class="wl">ICUでの発熱コントロールに意味はあるのか（REACTOR trial・ICM2019）</span> ／ <span class="wl">重症患者の発熱コントロール（IPDメタ解析, ICM2019）</span> ／ <span class="wl">ICUの発熱管理と解熱（NSAIDs・アセトアミノフェンと血圧低下・ICM2019）</span>：いずれも Tip 6・7 と同じ論点を扱い、結論の方向（死亡は改善しない）は一致する。</li><li><span class="wl">敗血症へのアセトアミノフェン静注は臓器支持なし生存日数を改善しない（ASTER・JAMA2024）</span>：Tip 7 の刊行後の追試。</li><li><span class="wl">急性脳損傷の体温管理 — 低体温から「発熱を作らせない」へ（ナラティブレビュー・ICM2026）</span>：Tip 9 の論点のその後。</li><li><span class="wl">心停止後ケアガイドライン2025 ERC・ESICM — 発熱予防は37.5℃以下、予後予測は2つ以上の指標で（Resuscitation2025）</span> ／ <span class="wl">心停止後症候群ガイドライン ERC・ESICM（ICM2021）</span>：Tip 10 の「72時間」を具体化した現行版。</li><li><span class="wl">低体温療法は延長しても神経予後を改善しない — 最短6時間が最適の事後確率0.51（ICECAP・JAMA2026）</span> ／ <span class="wl">脳損傷における体温管理療法のデバイス（Special Issue Insight・ICM2022）</span>：低体温と発熱予防の優劣という Tip 10 の未解決点に関わる。</li><li><span class="wl">SCCM熱射病（熱中症）診療ガイドライン — 氷水浸漬で30分以内に目標体温、ダントロレンは推奨しない（CCM2025）</span> ／ <span class="wl">熱射病（NEJM総説2019）</span>：Tip 4 の7疾患のうち熱中症の具体的管理。ダントロレンは悪性高熱症の薬であって熱中症には推奨されない点が、Tip 4・5 を並べて読むときの落とし穴になる。</li><li><span class="wl">甲状腺クリーゼとDKAの同時発症 — 26例のレビューで88%が女性・死亡15%、服薬アドヒアランス不良が共通（症例報告SR・BMCEndocrDisord2019）</span>：Tip 4 の7疾患のうち甲状腺クリーゼ。</li><li><span class="wl">敗血症の血液培養診断の体制と実践 — 24時間微生物検査は12%しかない（CritCare2025）</span> ／ <span class="wl">市中発症敗血症の血液培養陽性は14%、耐性菌は稀 — 培養陰性のほうが死亡が高い（米国201病院147061例・CCM2023）</span>：Tip 3 の「収率の低い精査を減らす」を実データで裏づける。</li><li><span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span> ／ <span class="wl">重症患者の血流感染（エキスパートステートメント・ICM2020）</span>：Tip 6〜8 の敗血症側の文脈。</li></ul>
+<h3>16. 批判的吟味 — ジャーナルクラブでの論点 🔍</h3>
+<ol><li><strong>本文の引用番号と参考文献一覧が複数箇所でずれている。</strong> 本文の主張と参考文献一覧のタイトルを1件ずつ突き合わせると、少なくとも5か所で対応しない。最も分かりやすいのは Tip 7 で、「700名をアセトアミノフェン vs プラセボにランダム化した試験」に付された番号は一覧では n=40 規模の別 RCT（Schell-Chaple 2017）を指し、実際の700名の試験（Young 2015, NEJM）は別の番号に置かれている。</li></ol>
+<ol><li><strong>Tip 1 の5部位の並べ方が原理的に不自然。</strong> 「食道・直腸・腋窩・鼠径部・膀胱で差が最小」と書かれているが、食道・膀胱は中枢体温計、腋窩・鼠径は体表であり、両者を同列に「差が最小」と束ねるのは無理がある。原典の結論がこの5部位を等価に扱っていたかは本稿からは確認できない。<strong>JC では原典（Lefrant 2003）に当たって確認する価値がある</strong>。</li></ol>
+<ol><li><strong>Fig. 1 と本文が脳損傷の扱いで食い違う</strong>（第3節の警告コールアウト参照）。図は "To treat"、本文は疑問符。</li></ol>
+<ol><li><strong>Fig. 1 の高体温ボックスが本文より2疾患少ない。</strong> 熱中症と急性溶血性輸血反応が図から落ちている。図だけを教材に使うと鑑別が抜ける。</li></ol>
+<ol><li><strong>数値がほとんど示されていない。</strong> 効果量・信頼区間・p値は本文に一つも出てこない。示された数値は「37℃」「0.5〜1℃」「38.3℃」「38.9℃」「41.1℃」「32〜34℃」「9%」「100名」「700名」「2倍」「72時間」だけである。<strong>この論文単独では効果の大きさを議論できない</strong>。</li></ol>
+<ol><li><strong>文献の選定基準が示されていない。</strong> 系統的検索ではないため、著者らが選んだ15件がその分野を代表しているかは検証できない。とくに Tip 6 で「有害な効果を示した2研究」として観察研究2本を挙げ、RCT の結果と並べている点は、エビデンスの階層を平坦に扱っている。</li></ol>
+<ol><li><strong>「10」という数の必然性がない。</strong> 見出しに番号は振られておらず、10という数は表題に由来する。項目間の重みの差（第14節）が体裁に反映されていない。</li></ol>
+<ol><li><strong>利益相反の位置づけ。</strong> 筆頭著者は複数の製薬企業のコンサルタントである。本稿の主張は特定薬剤の使用を促す方向ではなく、むしろアセトアミノフェンの有用性を否定する内容なので、利益相反が主張を歪めた形跡は見当たらない。ただし JC では確認しておく。</li></ol>
+<ol><li><strong>参考文献14番の書誌情報に誤植がある。</strong> "Wiles MD, Braganza M, Edwards H, Krause E, Jackson J (2023) Tait F (2023)" と、年が二重に入り著者 Tait F の位置が崩れている。図中の "Norepinephirine" と併せ、短報とはいえ校正が十分でない。</li></ol>
+<ol><li><strong>好中球減少患者を除外した意味。</strong> 好中球減少患者では発熱の閾値も精査の閾値も大きく変わる（発熱性好中球減少症は緊急事態として扱われる）。<strong>本稿を当院の血液内科系患者にそのまま適用してはならない</strong>ことを、勉強会では明示する。</li></ol>
+<h3>17. 主要な引用文献一覧 📚</h3>
+<p>本稿の参考文献15件すべて。本文の引用番号と内容が対応しない箇所があるため、ここでは一覧の番号順に、内容と本文中で対応すると考えられる主張を並べる。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th><th>本文で対応すると考えられる主張</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ICU 患者の体温測定：膀胱・食道・直腸・腋窩・鼠径 vs 肺動脈中枢法の比較</td><td>Lefrant JY, et al. *Intensive Care Med* 2003;29(3):414-418</td><td>Tip 1 の測定部位比較</td></tr>
+<tr><td>2</td><td>重症成人の新規発熱の評価ガイドライン 2008年更新（ACCM・IDSA）</td><td>O'Grady NP, et al. *Crit Care Med* 2008;36(4):1330-1349</td><td>Tip 2 の 38.3℃ 閾値</td></tr>
+<tr><td>3</td><td>早期術後発熱と「ルーチン」の発熱精査：前向き研究</td><td>Lesperance R, et al. *J Surg Res* 2011;171(1):245-250</td><td>Tip 3 の「100例中9%」</td></tr>
+<tr><td>4</td><td>HEAT 試験：感染疑いの重症患者へのアセトアミノフェン</td><td>Young P, et al. *N Engl J Med* 2015;373(23):2215-2224</td><td>Tip 7 の「700名の RCT で生存は同等」</td></tr>
+<tr><td>5</td><td>ICU における体温異常の診断と管理：EUROBACT 研究者の調査</td><td>Niven DJ, et al. *Crit Care* 2013;17(6):R289</td><td>Tip 4（対応は弱い）</td></tr>
+<tr><td>6</td><td>悪性高熱症2020：Association of Anaesthetists のガイドライン</td><td>Hopkins PM, et al. *Anaesthesia* 2021;76(5):655-664</td><td>Tip 5 の管理（ダントロレン等）</td></tr>
+<tr><td>7</td><td>敗血症性ショックにおける体表冷却を用いた発熱コントロール：RCT</td><td>Schortgen F, et al. *Am J Respir Crit Care Med* 2012;185(10):1088-1095</td><td>Tip 6 の「血行動態が改善した1試験」、Tip 7 の「冷却は転帰に効果なし」</td></tr>
+<tr><td>8</td><td>FACE 研究：体温と解熱治療の、敗血症の有無別の死亡との関連（多施設前向き観察）</td><td>Lee BH, et al. *Crit Care* 2012;16(1):R33</td><td>Tip 6 の「有害な効果を示した2研究」の1つ</td></tr>
+<tr><td>9</td><td>人工呼吸を受ける敗血症重症患者における解熱療法の死亡への影響</td><td>Ye S, et al. *Can Respir J* 2017:3087505</td><td>Tip 6 の「有害な効果を示した2研究」の1つ</td></tr>
+<tr><td>10</td><td>発熱のある重症成人への静注アセトアミノフェンの核心温・血行動態への影響：RCT</td><td>Schell-Chaple HM, et al. *Crit Care Med* 2017;45(7):1199-1207</td><td>Tip 7 の「体温は緩やかに低下したが MAP と心拍数が有意に低下」</td></tr>
+<tr><td>11</td><td>発熱のある重症成人における薬理学的 vs 非薬理学的解熱治療：系統的レビュー・メタ解析</td><td>Hammond NE, Boyle M. *Aust Crit Care* 2011;24(1):4-17</td><td>Tip 7 の「血管内冷却・ハイドロゲルが体表冷却より高効果」</td></tr>
+<tr><td>12</td><td>CASS 試験：敗血症性ショックと呼吸不全に対する誘導低体温（無作為化・非盲検）</td><td>Itenov TS, et al. *Lancet Respir Med* 2018;6(3):183-192</td><td>Tip 6 の「治療的低体温（32〜34℃）が臓器障害を悪化させた」</td></tr>
+<tr><td>13</td><td>低体温敗血症の危険因子・宿主応答・転帰</td><td>Wiewel MA, et al. *Crit Care* 2016;20(1):328</td><td>Tip 8 の「低体温の敗血症は死亡2倍」「無熱例には心血管リスク因子」</td></tr>
+<tr><td>14</td><td>脳神経外科以外の ICU における外傷性脳損傷の管理：現行エビデンスのナラティブレビュー</td><td>Wiles MD, et al. *Anaesthesia* 2023</td><td>Tip 9 の「3ガイドライン中1つでしか推奨されていない」</td></tr>
+<tr><td>15</td><td>心停止後の体温管理</td><td>Sandroni C, Natalini D, Nolan JP. *Crit Care* 2022;26(1):361</td><td>Tip 10 の「72時間の発熱コントロール」</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>「発熱＝下げる」という反射を止めるための1本</strong></mark>。基調は、発熱コントロールの努力は多くの患者でおそらく過剰であり、副作用を招き転帰を悪化させうる、という一文にある。</p>
+<p>病態ごとの温度差が本稿の核心である。<mark class="hl"><strong>心停止後は発熱を予防する（!）／敗血症では慎重に／脳損傷はデータが無く極端を避けるにとどめる（?）</strong></mark>。原文の見出しの句読点そのものがこの3段階を表している。</p>
+<p>10項目は等価ではない。行動を明確に指定できるのは <mark class="hl"><strong>悪性高熱症（学会ガイドライン）・アセトアミノフェンと冷却の無効（RCT とメタ解析）・心停止後の発熱予防（ガイドライン）の3つだけ</strong></mark> で、残りは方向を示す助言か、専門家意見か、保留である。</p>
+<p><mark class="hl"><strong>体温測定の細目は本稿ではなく SCCM・IDSA 2023 ガイドラインに従う</strong></mark>。本稿は腋窩・鼠径を許容群に含めるが、ガイドラインは腋窩を「依拠すべきでない」と名指ししている。本稿から採るのは「膀胱温を第一に置く」までにとどめる。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ICU で新たに発熱した</td><td>体温はどこで測ったか</td><td>中枢デバイス（肺動脈・膀胱・食道）があればそれを使う。無ければ口腔温か直腸温（ガイドライン側の推奨）</td></tr>
+<tr><td>発熱を確認した</td><td>術直後で炎症反応のピークに対応するものか</td><td>該当すれば広範な精査を行わない（有用だったのは100例中9%）</td></tr>
+<tr><td>精査するか迷う</td><td>経験的抗菌薬を開始すべき状況か</td><td>開始すべきなら検体採取と画像を行う。開始しないなら精査の収率を考える</td></tr>
+<tr><td>核心温が 38.9℃ を大きく超える</td><td>感染以外の7病態（悪性高熱症・悪性症候群・セロトニン症候群・甲状腺クリーゼ・熱中症・急性溶血性輸血反応・重症薬疹）に当てはまるか</td><td>当てはまれば病態特異的な治療へ。41.1℃ 超でも感染は除外できない</td></tr>
+<tr><td>麻酔薬曝露後に高炭酸ガス血症・筋強直・不整脈・高体温</td><td>悪性高熱症か</td><td>積極的に治療する（酸素・体外冷却・冷却輸液・鎮静・ダントロレン等）</td></tr>
+<tr><td>敗血症で発熱している</td><td>解熱の目的は転帰改善か快適性か</td><td>転帰改善が目的なら解熱薬も冷却も効果がない。快適性が目的なら目的を指示簿に明記する</td></tr>
+<tr><td>敗血症で解熱薬を使う</td><td>平均動脈圧・心拍数・肝酵素を追えているか</td><td>血行動態悪化と肝酵素上昇が報告されている。使うなら経過を追う</td></tr>
+<tr><td>敗血症だが発熱がない・低体温</td><td>「熱がないから軽症」と判断していないか</td><td>死亡率は発熱例の2倍。復温すべきかは不明なので、復温を目的化しない</td></tr>
+<tr><td>脳損傷で高体温</td><td>感染源はあるか</td><td>神経原性でありうる。誘導低体温は行わない。体温の極端を避けるにとどめる</td></tr>
+<tr><td>心停止後で昏睡が続く</td><td>発熱予防の体制が組めているか</td><td>発熱を予防する。目標値と期間は2025年の ERC・ESICM 版に合わせる</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

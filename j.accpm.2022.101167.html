@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>深層学習でICU退室後1年までの死亡を予測しSHAPで説明する（JIPAD・透明なcAI開発の枠組み・AnaesthCritCarePainMed2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="j.accpm.2022.101167.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">深層学習でICU退室後1年までの死亡を予測しSHAPで説明する（JIPAD・透明なcAI開発の枠組み・AnaesthCritCarePainMed2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Ishii E, Nawa N, Hashimoto S, Shigemitsu H, Fujiwara T. Development, validation, and feature extraction of a deep learning model predicting in-hospital mortality using Japan's largest national ICU database: a validation framework for transparent clinical Artificial Intelligence (cAI) development. Anaesth Crit Care Pain Med. 2022;42(2):101167. doi:10.1016/j.accpm.2022.101167</dd><dt>掲載誌</dt><dd>Anaesthesia Critical Care &amp; Pain Medicine（2022-10-24）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.accpm.2022.101167" target="_blank" rel="noopener">doi.org/10.1016/j.accpm.2022.101167</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Development, validation, and feature extraction of a deep learning model predicting in-hospital mortality using Japan's largest national ICU database: a validation framework for transparent clinical Artificial Intelligence (cAI) development</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/j.accpm.2022.101167.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/j.accpm.2022.101167.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/j.accpm.2022.101167.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>明日からどうするか <strong>① 深層学習は識別能で従来スコアを上回る。ただし「上回る」の中身に注意。</strong> <mark class="hl"><strong>ICU死亡の AUC 0.94（0.93–0.95）、院内死亡 0.91（0.90–0.92）。</strong> 参考として本文が挙げる従来値は <strong>APACHE-III のICU死亡 AUC 約0.87–0.88、院内死亡 0.73–0.90、JROD 0.91</strong>。</mark> → <strong>識別能では確かに勝っているが、<span class="wl">GOSSIS論文</span>が示したとおり、質評価で問題になるのは較正。本論文は較正を主要な評価軸にしていない。</strong></p>
+<p><strong>② 「上位20変数だけ」で従来スコアを超える。</strong> <mark class="hl"><strong>SHAP で抽出した上位20変数だけを使った外部検証モデルが、従来の重症度スコアより高いAUCを出した。</strong></mark> → <strong>当院で予後予測の仕組みを作るなら、100項目を集める必要はない</strong>という実務的な示唆。<strong>どの20項目かを確認する価値がある。</strong></p>
+<p><strong>③ ICU退室後1年まで予測が持つ。</strong> <mark class="hl"><strong>ICU退室からの日数によらず AUC 0.91〜0.95 を維持した。</strong> 著者らの知る限り、<strong>ICU退室後1年以上までの日数別にICU死亡と院内死亡を臨床AIで予測した初の研究</strong>。</mark> → PICS・長期予後の議論につながる。当院の退室後フォローの設計に使える視点。</p>
+<p><strong>④ 「透明な臨床AI（cAI）」という問題意識は、当院がAI導入を検討するときの評価軸になる。</strong> <mark class="hl">著者の問題提起：<strong>臨床AIの死亡予測モデルと関連研究は増えているが、外部検証研究の欠如と不十分なモデル較正による全体的な精度低下という限界が観察されている。</strong></mark> → <strong>「AUCが高い」だけで導入を判断しない。外部検証と較正を必ず確認する。</strong></p>
+<p><strong>⑤ SHAP はブラックボックスを説明する標準手法。</strong> <mark class="hl"><strong>SHAP（SHapley Additive exPlanations）はゲーム理論に基づく手法で、モデルへの寄与度の順に変数を統計的に決定・抽出し、複雑なニューラルネットワークの「ブラックボックス」アルゴリズムの解釈を可能にする。</strong></mark> 院内でAIツールを評価するとき、<strong>「説明できるか」を問う語彙</strong>として使える。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>3点で掴む <strong>Known（既に分かっていたこと）</strong></p>
+<ul><li><mark class="hl">死亡予測と高リスクICU患者の慎重な評価は、<strong>早期診断と治療を通じて臨床実践に情報を与え</strong>、死亡と医療費の低減に寄与しうる。死亡予測は<strong>重症度の指標</strong>としても機能する。</mark></li><li><strong>APACHE</strong> と <strong>SAPS</strong> が死亡予測・意思決定支援・患者予後のベンチマークとして臨床で使われている。</li><li>文献上、<mark class="hl"><strong>APACHE-III の ICU死亡予測 AUC は約 0.87–0.88、院内死亡（ICU退室後）予測 AUC は 0.73–0.90</strong></mark>。</li><li><mark class="hl"><strong>JIPADワーキンググループは ANZICS の死亡予測ツール（ANZROD）の日本版として JROD を開発し、AUC 0.91 を得ている。</strong></mark></li></ul>
+<p><strong>Unknown（分かっていなかったこと）</strong></p>
+<ul><li><mark class="hl"><strong>臨床AI（cAI）の死亡予測モデルは増えているが、外部検証研究の欠如と不十分なモデル較正による精度低下という限界がある。</strong></mark></li><li><mark class="hl"><strong>SHAP をICU死亡予測に用いた研究は限られており、ICU入室時点および ICU退室からの日数別に院内死亡を予測しつつ、SHAP由来の変数の重要度の時間推移まで考慮した研究は存在しない。</strong></mark></li></ul>
+<p><strong>What's new（本研究の新規性）</strong></p>
+<ul><li><mark class="hl"><strong>新規の深層ニューラルネットワーク（DNN）と、透明な cAI 開発を促進する検証枠組み</strong>を開発・評価した。</mark></li><li><mark class="hl"><strong>ICU退室後1年以上までの日数別に、ICU死亡と院内死亡を臨床AIで予測した初の研究</strong>（著者らの知る限り）。</mark></li><li><mark class="hl"><strong>SHAP で抽出した上位20変数のみのモデルも外部検証</strong>し、従来の重症度スコアを上回るAUCを得た。</mark></li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<ul><li><strong>目的</strong>：<mark class="hl"><strong>臨床AI（cAI）の死亡予測モデルの限界（外部検証の欠如、不十分な較正）に対抗するため、新規の深層ニューラルネットワーク（DNN）と、透明な cAI 開発を促進する検証枠組みを開発・評価する。</strong></mark></li><li><strong>データ</strong>：<mark class="hl"><strong>日本最大のICUデータベース（JIPAD）</strong></mark></li><li><strong>モデル</strong>：<strong>DNN</strong>。<mark class="hl"><strong>ICU死亡と ICU退室後の死亡を含む院内死亡を、ICU退室からの日数別に予測</strong></mark></li><li><strong>説明可能性</strong>：<mark class="hl"><strong>SHAP（SHapley Additive exPlanations）でモデルにとって最も重要な変数を抽出</strong>し、DNNの有効性を検討するとともに、外部検証も行うモデルを開発</mark></li><li><strong>主要結果</strong>：</li></ul>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>AUC（95%CI）</th></tr></thead>
+<tbody>
+<tr><td><mark class="hl"><strong>ICU死亡</strong></mark></td><td><mark class="hl"><strong>0.94（0.93–0.95）</strong></mark></td></tr>
+<tr><td><mark class="hl"><strong>院内死亡</strong></mark></td><td><mark class="hl"><strong>0.91（0.90–0.92）</strong></mark></td></tr>
+<tr><td><strong>ICU退室後1年を通じて</strong></td><td><mark class="hl"><strong>0.91–0.95</strong></mark></td></tr>
+</tbody></table></div>
+<ul><li><mark class="hl"><strong>上位20変数のみを用いた外部検証は、従来の重症度スコアより高いAUCを示した。</strong></mark></li><li><strong>結論</strong>：<mark class="hl"><strong>本DNNモデルは ICU退室からの日数によらず一貫して AUC 0.91–0.95 を生成した。DNNにとって最も重要な20変数もまた、ICU退室からの日数によらず従来の重症度スコアより高いAUCを生成した。著者らの知る限り、これは1年以上にわたる ICU退室後の日数別に cAI でICU死亡と院内死亡を予測した初の研究である。この所見は cAI 応用の透明性向上に寄与しうる。</strong></mark></li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 臨床AI（cAI）と SHAP</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>初学者向けの基礎 <strong>なぜ死亡予測が重要か（本論文の導入）</strong> <mark class="hl"><strong>死亡予測と高リスクICU患者の慎重な評価は、早期診断と治療を通じて臨床実践に情報を与え、それによって死亡と入院費用の低減に寄与しうる。死亡予測はまた重症度の指標としても機能し、ICU患者ケア管理の向上のために長らく関心が持たれてきた領域である。</strong></mark></p>
+<p><strong>従来スコアの到達点（本論文が挙げる数値）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>AUC</th></tr></thead>
+<tbody>
+<tr><td>APACHE-III（ICU死亡）</td><td>約 <strong>0.87–0.88</strong></td></tr>
+<tr><td>APACHE-III（院内死亡、ICU退室後）</td><td><strong>0.73–0.90</strong></td></tr>
+<tr><td><mark class="hl"><strong>JROD</strong></mark></td><td><mark class="hl"><strong>0.91</strong></mark></td></tr>
+</tbody></table></div>
+<p><mark class="hl"><strong>JIPADワーキンググループは ANZICS の死亡予測ツール ANZROD の日本版として JROD を開発した</strong>と本論文が明記している。</mark> → <span class="wl">JROD 日本版死亡リスク予測モデル — APACHE III-jの過大評価を階層GAMで補正（JIPAD 33557例・JIntensiveCare2021）</span></p>
+<p><strong>cAI（clinical Artificial Intelligence）の問題</strong> <mark class="hl"><strong>"limitations including the lack of external validation studies and inadequate model calibration leading to decreased overall accuracy have been observed."</strong></mark> ＝<strong>①外部検証がない ②較正が不十分 → 全体の精度が落ちる</strong></p>
+<p><strong>SHAP（SHapley Additive exPlanations）</strong> <mark class="hl"><strong>ゲーム理論に基づく手法で、モデルへの寄与度の順に変数を統計的に決定・抽出することで、複雑なニューラルネットワークベースの「ブラックボックス」アルゴリズムの解釈を可能にする。</strong></mark> 元はゲーム理論の Shapley 値（協力ゲームで各プレイヤーの貢献をどう配分するか）を機械学習の特徴量寄与度に応用したもの。<mark class="hl"><strong>「このモデルはなぜこの患者を高リスクと判定したのか」を変数単位で分解できる。</strong></mark></p>
+</div>
+<h3>2. 背景 — 本研究が埋めようとした空白</h3>
+<ul><li><mark class="hl"><strong>SHAP をICU死亡予測に用いた研究は限られている。</strong></mark></li><li><mark class="hl"><strong>しかし、ICU入室時点から、そして ICU退室からの日数別に院内死亡を予測しつつ、SHAP由来の変数の重要度の時間経過による変化まで考慮した研究は存在しない。</strong></mark></li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>データ</strong>：<mark class="hl"><strong>日本最大のICUデータベース（JIPAD）</strong></mark></li><li><strong>モデル</strong>：<strong>DNN（deep neural network）</strong>を開発。<mark class="hl"><strong>ICU死亡と ICU退室後の死亡を含む院内死亡を、ICU退室からの日数別に予測</strong></mark></li><li><strong>特徴量抽出</strong>：<mark class="hl"><strong>SHAP でモデルにとって最も重要な変数を抽出。</strong> DNNの有効性を検討すると同時に、<strong>外部検証も行うモデル（上位20変数のみのモデル）を開発</strong></mark></li></ul>
+<h3>4. 結果</h3>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>AUC（95%CI）</th></tr></thead>
+<tbody>
+<tr><td><mark class="hl"><strong>ICU死亡</strong></mark></td><td><mark class="hl"><strong>0.94（0.93–0.95）</strong></mark></td></tr>
+<tr><td><mark class="hl"><strong>院内死亡</strong></mark></td><td><mark class="hl"><strong>0.91（0.90–0.92）</strong></mark></td></tr>
+<tr><td><strong>ICU退室からの1年を通じて</strong></td><td><mark class="hl"><strong>0.91〜0.95</strong></mark></td></tr>
+</tbody></table></div>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>上位20変数だけで従来スコアを超える <mark class="hl"><strong>"An external validation using only the top 20 variables resulted with higher AUCs than traditional severity scores."</strong></mark> <mark class="hl"><strong>"The 20 most important variables to our DNN, also generated higher AUCs than traditional severity scores regardless of days since ICU discharge."</strong></mark> <strong>＝100項目を集めなくても、適切に選ばれた20項目で従来スコアを上回れる。</strong></p>
+</div>
+<h3>5. 結論（著者の言葉に沿って）</h3>
+<p>&gt; <mark class="hl"><strong>本DNNモデルは ICU退室からの日数によらず一貫して AUC 0.91–0.95 を生成した。DNNにとって最も重要な20変数もまた、ICU退室からの日数によらず従来の重症度スコアより高いAUCを生成した。著者らの知る限り、これは1年以上にわたる ICU退室後の日数別に cAI でICU死亡と院内死亡を予測した初の研究である。この所見は cAI 応用の透明性向上に寄与しうる。</strong></mark></p>
+<h2>🔍 批判的吟味（JCでの論点）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>① 較正が主要な評価軸になっていない <mark class="hl">著者自身が導入で「<strong>cAI の限界は外部検証の欠如と不十分な較正</strong>」と問題提起しているのに、<strong>結果として報告されているのは AUC（識別能）が中心</strong>。</mark> <span class="wl">GOSSIS外部検証</span>が示したとおり、<strong>質評価で問題になるのは較正の方</strong>。<mark class="hl"><strong>AUC 0.94 は「よく順位づけできる」ことしか意味しない。</strong></mark></p>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>② 「ICU退室後1年の死亡を予測する」ことの臨床的意味 <mark class="hl">ICU退室後1年の死亡には、原疾患の進行・併存症・社会的要因が大きく関わる。</mark> <strong>それを「ICU入室時のデータ」で AUC 0.91 で当てられるというのは、裏を返せば「入室時点で1年後の生死がほぼ決まっている」ということでもある。</strong> <mark class="hl">この所見の倫理的含意（治療の差し控えの根拠に使われうる）は本論文で論じられていない。</mark></p>
+</div>
+<ul><li><strong>③ 「外部検証」の中身が abstract からは読み取れない。</strong> <mark class="hl">「上位20変数を使った外部検証」とあるが、<strong>どのコホートで外部検証したのか</strong>（JIPADの別期間か、別データベースか）が明示されていない。</mark> 著者が「外部検証の欠如」を問題提起している以上、ここは最も厳密であるべき箇所。</li><li><strong>④ 上位20変数が何かが要確認。</strong> <mark class="hl">実務的に最も価値があるのはこのリスト。</mark> 本文の Figure/Table を確認する必要がある。</li><li><strong>⑤ 従来スコアとの比較が「文献値」との比較になっている可能性。</strong> <mark class="hl">導入で挙げられた APACHE-III の 0.87–0.88 や JROD の 0.91 は<strong>他研究の報告値</strong>。同一コホートでの head-to-head 比較でなければ、「上回った」という主張は弱い。</mark> → <span class="wl">GOSSIS論文</span>は同一コホートで4モデルを比較しており、方法論的にはそちらが厳密。</li><li><strong>⑥ DNN の実装詳細（層数・正則化・学習データの分割）が abstract にない。</strong> 再現性の観点から本文の確認が要る。</li><li><strong>⑦ 「透明な cAI 開発の検証枠組み」という主張。</strong> <mark class="hl">SHAP を使うこと自体は説明可能性の一手段にすぎず、<strong>「枠組み」と呼ぶには何をどう検証すべきかの規範が要る</strong>。</mark> タイトルの主張がやや大きい。</li></ul>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>まとめ</p>
+<ol><li><mark class="hl"><strong>JIPAD を用いた深層学習モデル（DNN）。ICU死亡 AUC 0.94、院内死亡 0.91。ICU退室後1年を通じて 0.91〜0.95 を維持。</strong></mark></li><li><mark class="hl"><strong>SHAP で抽出した上位20変数のみのモデルでも、従来の重症度スコアより高いAUCを達成。</strong></mark> 100項目集めなくてもよい、という実務的示唆。</li><li><mark class="hl"><strong>ICU退室後1年以上までの日数別に cAI でICU死亡・院内死亡を予測した初の研究</strong>（著者らの主張）。</mark></li><li><mark class="hl"><strong>著者の問題意識は「臨床AIには外部検証の欠如と較正不足という限界がある」。</strong> ただし本論文自体の報告も AUC 中心で、<strong>較正の評価が薄い</strong>。</mark></li><li><strong>SHAP はブラックボックスを変数単位で分解する標準手法。</strong> 院内でAIツールを評価するときの語彙になる。</li><li><mark class="hl"><strong>AUC が高いだけで導入を判断しない。外部検証と較正を必ず確認する</strong>——これが本論文から引き出すべき最も実務的な教訓。</mark></li></ol>
+</div>
+<h2>📚 主要な引用文献</h2>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>Endo H, ... Okamoto H, et al. J Intensive Care 2021;9:18</strong></td><td><mark class="hl"><strong>JROD（本論文が「ANZROD の日本版」と紹介、AUC 0.91）</strong></mark> → <span class="wl">JROD 日本版死亡リスク予測モデル — APACHE III-jの過大評価を階層GAMで補正（JIPAD 33557例・JIntensiveCare2021）</span></td></tr>
+<tr><td><strong>Irie H, Okamoto H, et al. J Crit Care 2020;55:86</strong></td><td><strong>JIPAD の紹介論文</strong> → <span class="wl">JIPAD 日本ICU患者データベースの紹介</span></td></tr>
+<tr><td>Lundberg SM, Lee SI（SHAP）</td><td><mark class="hl">ゲーム理論に基づく特徴量寄与度の手法。ブラックボックスモデルの解釈を可能にする</mark></td></tr>
+<tr><td>Knaus WA, et al.</td><td>APACHE の原著。ICU死亡 AUC 約0.87–0.88</td></tr>
+<tr><td>Le Gall JR, et al.</td><td>SAPS の原著</td></tr>
+<tr><td>ANZICS ANZROD</td><td>JROD の元になった豪NZの死亡予測ツール</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

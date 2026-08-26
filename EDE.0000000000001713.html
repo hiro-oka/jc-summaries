@@ -119,6 +119,15 @@
 
 .jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
 .jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
 .jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
   background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
 
@@ -153,9 +162,12 @@
 <header class="masthead">
   <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
   <h1 class="title">介入下予測モデルの性能はどう検証するか — 人工打ち切り＋逆確率重み付けで反実仮想の較正・判別・Brierを測る（方法論・Epidemiology2024）</h1>
-  <dl class="cite"><dt>出典</dt><dd>Keogh RH, Van Geloven N. Prediction Under Interventions: Evaluation of Counterfactual Performance Using Longitudinal Observational Data. Epidemiology. 2024;35(3):329-339. DOI: 10.1097/EDE.0000000000001713</dd><dt>掲載誌</dt><dd>Epidemiology（2024）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">doi.org/10.1097/EDE.0000000000001713</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Prediction Under Interventions: Evaluation of Counterfactual Performance Using Longitudinal Observational Data</dd></dl>
+  <dl class="cite"><dt>出典</dt><dd>Keogh RH, Van Geloven N. Prediction Under Interventions: Evaluation of Counterfactual Performance Using Longitudinal Observational Data. Epidemiology. 2024;35(3):329-339. DOI: 10.1097/EDE.0000000000001713</dd><dt>掲載誌</dt><dd>Epidemiology（2024-04-18）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">doi.org/10.1097/EDE.0000000000001713</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Prediction Under Interventions: Evaluation of Counterfactual Performance Using Longitudinal Observational Data</dd></dl>
 </header>
 <div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/EDE.0000000000001713.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/EDE.0000000000001713.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/EDE.0000000000001713.pdf)</p>
 <h2>🏥 聖路加ICUでの実践への示唆</h2>
 <div class="call example"><span class="lab">聖路加ICUでの実践</span>
 <p>病棟プロトコルへの落とし込み</p>
@@ -222,6 +234,7 @@
 <tr><td>初期条件</td><td>全員が時刻0の直前は未治療（A_{0-} = 0）。時刻0以降は任意の治療パターンをとってよい</td></tr>
 </tbody></table></div>
 <p>記号は次のとおり。T＝イベント時刻、C＝通常の打ち切り時刻、観察される追跡終了は T* = min(T, C)、イベント指示子は D。時間依存共変量は L_k、治療状態は A_k。予測因子 X は、ベースライン交絡因子 L₀ の全部または一部（L₀* と表記）に加えて、<strong>転帰を予測するが治療状態には影響しない変数 P</strong> から成る（X = {L₀*, P}）。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">原論文（doi.org/10.1097/EDE.0000000000001713）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 1. 検証データの構造を表す有向非巡回グラフ（DAG）。3段構成で、上段に時間依存共変量 L₀ → L₁ → L₂ → L₃ → L₄ が左から右へ矢印で連なり、中段に治療 A₀ → A₁ → A₂ → A₃ → A₄、下段に離散時間アウトカム Y₁ → Y₂ → Y₃ → Y₄ → Y₅ が並ぶ。各 L_k からは同時点の A_k へ斜め下向きの矢印が伸び（共変量が治療開始・継続を決める）、各 A_k からは次の L_{k+1} へ斜め上向きの矢印が伸びる（治療が将来の共変量を変える）。L_k と A_k の双方から下段の Y へも矢印が入り、共変量が転帰を予測することを示す。左端の P（ベースラインの予後変数）からは、下段の Y₁ から Y₅ すべてに向かって扇状に長い矢印が伸びるが、A へは矢印が出ていない（治療に影響しない予後因子であることを表す）。Y_k は「時点 k−1 と k の間にイベントが起きたか」の指示子で、各受診の間にさらに細かい時間区間を挟んでいけば連続時間の設定に近づく。この図の要点は、L_k が(1)治療の開始・継続を決め、(2)転帰を予測し、(3)過去の治療の影響を受けるという三条件を満たす時間依存交絡因子であること。原図・無改変</p>
 </div>
@@ -286,6 +299,7 @@
 <p>シナリオ2・3は「性能が悪いはずの状況」を意図的に作っており、<strong>手法が悪さを悪いと言えるか</strong>を試すための設計である。3つの主要シナリオではいずれも一致性・正値性・条件つき交換可能性・重みモデルの正しい特定がすべて成立している。さらに<strong>これらの仮定を1つずつ破る追加3シナリオ</strong>を用意し、手法がどこでどう壊れるかを検討している。データ生成機構は加法ハザードモデル版と比例ハザードモデル版の両方を用意した。</p>
 <p>図2〜4に示されるのは加法ハザードモデル版の結果で、時間地平線は τ = 5。比例ハザード版と追加シナリオは補遺（eFigures 8–13、eTables 7–11）に置かれている。</p>
 <h4>4-2. シナリオ1の結果（正しく特定されたモデル）</h4>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">原論文（doi.org/10.1097/EDE.0000000000001713）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. シミュレーション結果：加法ハザードモデル・シナリオ1。2列4行のパネル構成で、左列が無治療（never treated）戦略、右列が常時治療（always treated）戦略。3種類の推定が色と記号で区別され、黒丸＝完全な検証データから得た真の性能、オレンジ四角＝部分集合アプローチ、緑三角＝提案する人工打ち切り＋逆確率重み付けによる反実仮想的推定である。最上段は較正プロットで、横軸が推定リスクの十分位ごとの平均予測リスク、縦軸が観察された転帰割合、灰色の破線が対角線（完全較正）。左パネルでは緑三角の系列がおおむね対角線上に乗るのに対し、オレンジ四角の系列は対角線の上方に大きく外れて走り、予測0.6付近で観察0.64、予測0.78付近で観察0.91まで持ち上がっている。右パネルではオレンジも緑も対角線上に重なる。2段目は時点5で打ち切ったc-indexの箱ひげ図で、左パネルは黒（中央値約0.54）と緑（同）がほぼ一致する一方、オレンジは約0.575と明らかに上方にずれる。右パネルでは3者とも約0.555〜0.56で一致。3段目は時点5の累積／動的AUCtで、左パネルは黒と緑が約0.57で一致し、オレンジは約0.63と上方に外れる。右パネルは3者一致（約0.58）。最下段はscaled Brierスコア（%）で、左パネルは黒と緑が約+1.5%で正の値をとるのに対し、オレンジの箱は中央値約−3%と負の領域に落ち、下ひげは−10%以下に伸びる。右パネルは3者とも約+1.5〜2%で一致する。原図・無改変</p>
 </div>
@@ -293,11 +307,13 @@
 <ul><li>提案法（緑）は、較正プロットで正しく対角線上に位置し、O/E比の平均は1.0にごく近い</li><li>部分集合アプローチ（オレンジ）は、<strong>無治療戦略について較正不良を誤って示唆</strong>した</li><li>判別も同様で、提案法はc-index・AUCtを正しく推定したが、部分集合アプローチは無治療戦略でこれらを<strong>過大評価</strong>した</li><li>scaled Brierでは、部分集合アプローチは無治療戦略で<strong>平均して負の値</strong>を出した。これは「開発したモデルは、検証データの全員に平均リスクを割り当てるだけの帰無モデルより劣る」というシグナルであり、真の scaled Brier が正であることと矛盾する</li><li>常時治療戦略については、提案法も部分集合アプローチも不偏だった（右列で3者が重なる）</li></ul>
 <p>つまり、部分集合アプローチのバイアスは戦略によって現れ方が違う。この設定では、無治療戦略で目立ち、常時治療戦略では目立たなかった。バイアスの大きさと向きの議論は補遺（eAppendix 4）にある。</p>
 <h4>4-3. シナリオ2の結果（開発データのベースラインハザードが高い）</h4>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">原論文（doi.org/10.1097/EDE.0000000000001713）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2の様式と同一のFigure 3。シミュレーション結果：加法ハザードモデル・シナリオ2。最上段の較正プロットでは、左（無治療）・右（常時治療）とも、緑三角の系列が灰色破線の対角線より明確に下方に位置する。左パネルでは予測0.75付近で観察0.60、予測0.85付近で観察0.79という具合に、予測が観察を上回っている。オレンジ四角の系列は緑より上に位置し、より対角線に近く見える（＝過大推定を過小に見積もっている）。右パネルでは緑とオレンジがほぼ重なり、いずれも対角線の下方を走る。2段目のc-indexと3段目のAUCtはシナリオ1と同一の分布で、左パネルでオレンジのみが上方に外れる構図も変わらない。最下段のscaled Brierでは、左パネルの黒と緑がともに中央値約−5%と負の領域にあるのに対し、オレンジのみが約+2%と正の領域に浮き上がっている。右パネルは3者とも約−7〜−8%で一致し負である。原図・無改変</p>
 </div>
 <ul><li>反実仮想的な較正指標は、<strong>推定リスクが観察転帰割合より高いこと（過大推定）を正しく検出</strong>した。較正曲線が対角線の下に来て、O/E比は1未満、scaled Brier は両戦略とも負になる</li><li>部分集合アプローチのO/E比は高すぎ、無治療戦略では<strong>scaled Brierを誤って正と示唆</strong>した（＝ダメなモデルを合格にしてしまう）</li><li>判別はベースラインハザードの変化に影響されないため、c-index・AUCtの結果はシナリオ1と同一</li></ul>
 <h4>4-4. シナリオ3の結果（誤差を含む予測因子）</h4>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">原論文（doi.org/10.1097/EDE.0000000000001713）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2・3と同一様式のFigure 4。シミュレーション結果：加法ハザードモデル・シナリオ3。最上段左（無治療）の較正プロットでは、緑三角の系列が対角線をまたぐ緩いS字を描き、低い予測（0.55付近）では観察が予測より高く（0.63付近）、高い予測（0.80付近）では観察が予測より低い（0.76付近）という、予測が両端で行き過ぎている（too extreme）パターンを示す。オレンジ四角の系列は対角線の上方に大きく外れて走る。右パネル（常時治療）では緑とオレンジが接近し、いずれも対角線のわずかに上方を通る。2段目のc-indexでは、左パネルで黒と緑がともに中央値約0.535と、シナリオ1より低い水準で一致し、オレンジのみ約0.56と上方に外れる。右パネルは3者とも約0.54で一致。3段目のAUCtも同様に、左パネルは黒と緑が約0.555で一致し、オレンジは約0.60。右パネルは3者一致（約0.56）。最下段のscaled Brierでは、左パネルの黒と緑がともに0%付近であるのに対し、オレンジは中央値約−5%と負に落ちる。右パネルは3者とも0%付近で一致する。原図・無改変</p>
 </div>
@@ -330,6 +346,7 @@
 </tbody></table></div>
 <p>結合データをランダムに <strong>70%（開発）／30%（検証）</strong> に分割した。開発データで2つの介入下予測モデルを構築（移植の効果推定に用いられてきた手法を介入下予測の設定に拡張したもの）、検証データで本論文の反実仮想的検証法を適用している。詳細は補遺（eAppendix 5、eTables 12–14）。</p>
 <h4>5-3. 較正の結果</h4>
+<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/EDE.0000000000001713" target="_blank" rel="noopener">原論文（doi.org/10.1097/EDE.0000000000001713）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 5. 肝移植への応用：無移植戦略・移植戦略のもとでの推定リスクの較正。左パネルは横軸が時間（0〜3年）、縦軸が生存確率（0〜1.0）。4本の曲線があり、黒の実線が無移植戦略の平均予測生存曲線、灰色の実線が移植戦略の平均予測生存曲線、黒の破線が無移植戦略の反実仮想生存曲線、灰色の破線が移植戦略の反実仮想生存曲線である（破線は人工打ち切り＋逆確率重み付けで推定）。黒の2本は3年時点で0.46〜0.49付近まで下降し、破線が実線よりわずかに上を走る（予測がやや低すぎる）。灰色の2本は3年時点で0.88〜0.89付近と高い位置にとどまり、両者はほぼ重なる。右パネルは横軸が3年時点の群平均推定リスク（0〜1.0）、縦軸が反実仮想的な転帰割合で、破線が等値線。黒丸で結ばれた無移植戦略の系列は10点が全域に広がり、低リスク側（予測0.17付近で観察0.21）ではやや上、高リスク側（予測1.0付近で観察0.89）では下に位置して、等値線をまたぐ緩いS字を描く。灰色の系列は予測リスク0.07〜0.23という狭い範囲に10点が固まり、等値線の近傍で上下に不規則に振れ、一部の点は右下方向へ折り返している。原図・無改変</p>
 </div>
@@ -406,7 +423,7 @@
 </div>
 <footer class="foot">
   本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
-  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
 </footer>
 </div>
 </body>

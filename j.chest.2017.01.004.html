@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="j.chest.2017.01.004.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Ni YN, Luo J, Yu H, Liu D, Zhong N, Cheng J, Liang BM, Liang ZA. Can high-flow nasal cannula reduce the rate of endotracheal intubation in adult patients with acute respiratory failure compared with conventional oxygen therapy and noninvasive positive pressure ventilation? A systematic review and meta-analysis. Chest. 2017;151(4):764-775. doi:10.1016/j.chest.2017.01.004</dd><dt>掲載誌</dt><dd>Chest（2017-04）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">doi.org/10.1016/j.chest.2017.01.004</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Can high-flow nasal cannula reduce the rate of endotracheal intubation in adult patients with acute respiratory failure compared with conventional oxygen therapy and noninvasive positive pressure ventilation? A systematic review and meta-analysis</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/j.chest.2017.01.004.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/j.chest.2017.01.004.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/j.chest.2017.01.004.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「COTで足りない低酸素にはまずHFNC」は本研究で支持される</strong>。従来型酸素療法（COT）と比べた挿管オッズは <strong>OR 0.47（95%CI 0.27–0.84、Z=2.55、P=0.01）</strong>。当院の「マスクを上げ続けるくらいならHFNCへ」という運用を追認する結果。</li><li><mark class="hl"><strong>HFNCを入れても死亡もICU滞在も変わらない。導入理由は「挿管回避と快適性」であり「予後改善」ではない</strong>、と説明を揃える</mark>。ICU死亡は vs COT <strong>OR 0.65（0.37–1.13）</strong>、vs NPPV <strong>OR 0.63（0.34–1.18）</strong>、いずれも有意差なし。ICU滞在は vs COT <strong>平均差 +0.30日（−0.78〜+1.37）</strong>、vs NPPV <strong>−1.21日（−3.35〜+0.94）</strong>で不変。</li><li><strong>NPPVをHFNCに置き換える根拠にはならない</strong>。本研究のHFNC vs NPPV は <strong>OR 0.73（0.47–1.13）、P=0.16</strong> で「差が出なかった」だけであり、<strong>非劣性マージンは事前設定されていない</strong>（後述の批判的吟味を参照）。当院の「高炭酸ガス血症・心原性肺水腫はNPPV、純粋な低酸素はHFNC」という病態別の使い分けは、本研究では変更されない。</li><li><strong>本研究の重心は「de novo の急性呼吸不全治療」ではなく「抜管後」にある</strong>。事後解析の抜管後サブグループは <strong>n=2,741</strong>（全体3,881例の約71%）を占め、抜管後の再挿管は vs COT <strong>OR 0.39（0.23–0.65、P=0.0003）</strong>、vs NPPV <strong>OR 1.07（0.82–1.40、P=0.60）</strong>。<mark class="hl">抜管後の予防的HFNCは、当院で最も適用しやすい使いどころ</mark>。ハイリスク抜管例で「NPPVの代わりにHFNC」は成立しうる。</li><li>一方で <strong>de novo 低酸素性ARFにおけるHFNC vs NPPV の優劣は、本研究からは決まらない</strong>。この比較にはFLORALI（Frat 2015）を含む3つのRCTしか入っておらず、残る3研究は後ろ向き／観察研究である。</li><li>HFNCを始めたら<strong>失敗判定をセットで運用する</strong>。本研究は「HFNCで粘ってよい」根拠には一切ならない。ROX指数での定時評価を併用する（<span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>）。</li><li>心臓・胸部外科術後の予防的HFNCについては、本研究に Stéphan 2016（n=830）・Parke 2013（n=340）・Corley 2015（n=155）・Parke 2011（n=56）・Nicolet 2011（n=40）が含まれており、いずれも<strong>挿管をほとんど起こさない集団</strong>である。当院の術後管理を変える情報は本研究からは得られない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：急性呼吸不全（ARF）はICU入室の約30%を占め、死亡率は最大50%に達する。ARF患者の約60%が挿管・人工呼吸を要し、侵襲的人工呼吸を受けた患者の院内死亡は30.7%と高い。NPPV（NIPPV）は選択された患者で挿管を回避し予後を改善するが、皮膚障害・眼刺激・インターフェース不耐・食事と喀出の中断といった有害事象があり、実臨床での適用を制限している。HFNCは最大60 L/分の加温加湿ガスを供給する新しい酸素療法で、小児・乳児領域では有効性と忍容性が確立していた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：成人ARFにおけるHFNCの効果は<strong>臨床試験が多数あるにもかかわらず結論が相反していた</strong>。著者らが挙げる典型例が2つ。①<strong>Frat 2015（FLORALI, n=310）</strong>では、HFNCはCOTともNPPVとも挿管率に差がなかった（38% vs 47% vs 50%、P=0.18）。②<strong>Hernández 2016</strong> では、抜管後患者でHFNCはCOTより再挿管を減らした（4.9% vs 12.2%、P=0.004）。つまり「HFNCはCOTより良いのか」「NPPVの代わりになるのか」の両方が未決着だった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：<strong>HFNCをCOTとNPPVの両方に対して同時に評価した</strong>初期のメタ解析のひとつ。著者らの設計思想は「<strong>COTに対しては優越性（superiority）を、NPPVに対しては非劣性（non-inferiority）を検定する</strong>」というもので、HFNCを「NPPVの代替」として位置づけようとした点が新しい。結果は非対称で、<strong>COTには勝つが、NPPVとは差が出ず、死亡・ICU滞在はどちらに対しても改善しない</strong>。ただし後述するとおり、この「非劣性」の主張は方法論上きわめて弱い。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 18試験3,881例を統合し、HFNCは<strong>COTと比べて挿管を減らす（OR 0.47, 95%CI 0.27–0.84）</strong>が、<strong>NPPVとは有意差がなく（OR 0.73, 0.47–1.13）</strong>、<strong>ICU死亡もICU滞在日数もどちらの比較でも改善しなかった</strong>。効果があるのは「挿管を避ける」という一点だけである。</p>
+</div>
+<ul><li><strong>デザイン</strong>：1946年〜2016年10月の系統的検索によるシステマティックレビュー・メタ解析。<strong>RCTに限定せず「すべての比較研究」を採用</strong>（RCT 12、後ろ向き解析 4、前向きコホート 2）。</li><li><strong>統合対象</strong>：<strong>18試験・計3,881例</strong>。内訳は <strong>HFNC群 1,893例、NPPV群 934例、COT群 1,054例</strong>。</li><li><strong>主要アウトカム＝気管挿管率</strong>、副次アウトカム＝<strong>ICU死亡</strong>と<strong>ICU滞在日数（ICU LOS）</strong>。</li><li><strong>挿管率</strong></li><li>vs COT：<strong>OR 0.47（95%CI 0.27–0.84）、Z=2.55、P=0.01</strong>（HFNC有利・有意）</li><li>vs NPPV：<strong>OR 0.73（95%CI 0.47–1.13）、Z=1.40、P=0.16</strong>（有意差なし）</li><li>全体（両対照を合算）：<strong>OR 0.60（95%CI 0.41–0.86）、Z=2.76、P=0.006</strong></li><li><strong>ICU死亡</strong>：vs COT <strong>OR 0.65（0.37–1.13）P=0.13</strong>／vs NPPV <strong>OR 0.63（0.34–1.18）P=0.15</strong>／全体 <strong>OR 0.67（0.44–1.01）P=0.05</strong>。<mark class="hl">いずれも有意差なし</mark>。</li><li><strong>ICU滞在日数</strong>：vs COT <strong>平均差 +0.30日（−0.78〜+1.37）P=0.59</strong>／vs NPPV <strong>−1.21日（−3.35〜+0.94）P=0.27</strong>／全体 <strong>−0.01日（−0.97〜+0.96）P=0.99</strong>。完全に不変。</li><li><strong>異質性</strong>：HFNC vs NPPV の挿管率（<strong>I²=63%、χ²=13.51、P=0.02</strong>）とICU死亡（<strong>I²=67%、χ²=12.21、P=0.02</strong>）で有意。HFNC vs COT では挿管率 I²=34%（P=0.13）、ICU死亡 I²=0%（P=0.50）と低い。</li><li><strong>事後解析（抜管後、n=2,741）</strong>：再挿管は vs COT <strong>OR 0.39（0.23–0.65）P=0.0003</strong> と明確にHFNC有利、vs NPPV <strong>OR 1.07（0.82–1.40）P=0.60</strong> で差なし。死亡・LOSは変わらず。</li><li><strong>バイアスリスク</strong>：全18試験で<strong>盲検化が不可能なため performance bias はすべて高リスク</strong>。ランダム化と割付隠蔽は13/18試験が低リスク、5試験（Brotfain 2014、Coudroy 2016、Nagata 2015、Nicolet 2011、Roca 2015）が高リスク。「その他のバイアス」は全試験 unclear。</li><li><strong>著者の結論（本文CONCLUSIONS）</strong>：「呼吸メカニクスが同等で臨床アウトカムも同等、かつコンプライアンスが良く合併症が少ないことから、<strong>HFNCはNPPVの信頼できる代替となりうる。とくに抜管後の患者において</strong>」。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 急性呼吸不全と3つの酸素・換気モードの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>急性呼吸不全（ARF, acute respiratory failure）</strong>とは、肺が酸素を取り込めない（低酸素性）か二酸化炭素を吐き出せない（高炭酸ガス性）状態が急に起こったもの。本論文が組み入れ基準で採用した定義は「<strong>呼吸数 25回/分超</strong>、かつ <strong>酸素化指数（OI＝PaO₂/FiO₂）≤300 mmHg</strong>、または <strong>10〜12 L/分の酸素投与下で SaO₂&lt;92%</strong>、または <strong>室内気で SaO₂&lt;94%</strong>」。</p>
+<p>治療の選択肢は、侵襲の低い順に3つある。</p>
+<p><strong>① 従来型酸素療法（COT, conventional oxygen therapy）</strong>：鼻カニュラ、フェイスマスク、ベンチュリマスク、リザーバ付きマスクなど。流量はせいぜい15 L/分程度。<strong>患者の吸気流量（頻呼吸では30〜60 L/分に達する）に流量が届かないため、足りない分だけ室内気を吸い込んでしまい、実際に肺に届くFiO₂は設定より大きく下がる</strong>。これがCOTの根本的な弱点。</p>
+<p><strong>② HFNC（high-flow nasal cannula、高流量鼻カニュラ／ネーザルハイフロー）</strong>：加温・加湿したガスを専用の太い鼻カニュラから<strong>最大60 L/分</strong>で流す。効く仕組みは4つ。(a) 吸気流量を上回る流量を出せるので<strong>FiO₂が設定どおりに届く</strong>、(b) 高流量が咽頭に溜まったCO₂を洗い流す（<strong>死腔洗い出し効果</strong>）ため、同じ分時換気量でもガス交換に使われる割合が増える、(c) 呼気に対する抵抗で<strong>2〜5 cmH₂O程度の軽度のPEEP様陽圧</strong>が生じ、肺胞を開いたまま保つ（口を開けると下がるが、呼気終末肺容量を増やす効果は残る）、(d) <strong>加温加湿により粘液線毛機能が保たれ喀痰排出が改善</strong>し、無気肺を減らす。マスクを付けないので<strong>会話・食事・喀痰ができる</strong>のが臨床上の最大の利点。</p>
+<p><strong>③ NPPV（NIPPV, noninvasive positive pressure ventilation、非侵襲的陽圧換気／NIV）</strong>：マスクやヘルメットを介して陽圧をかけ、吸気を補助しPEEPをかける。虚脱肺胞をリクルートしてシャントとV/Qミスマッチを減らす力はHFNCより強い。ただし<strong>皮膚障害・眼刺激・インターフェース不耐・食事と喀出の中断</strong>という代償があり、これが実臨床での使いにくさになっている。</p>
+<p><strong>本論文の問い</strong>：「HFNCはCOTより挿管を減らすか（優越性）」と「HFNCはNPPVの代わりになるか（非劣性）」の2つ。<strong>アウトカムは挿管率・ICU死亡・ICU滞在日数の3つだけ</strong>で、快適性・有害事象・呼吸生理指標は統合されていない（Table 1 の Outcome 欄には快適性や呼吸変数も挙がっているが、メタ解析されたのは3つ）。</p>
+</div>
+<h4>略語の一覧（原著 ABBREVIATIONS LIST を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>略語</th><th>原語</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>APACHE</td><td>The Acute Physiologic and Chronic Health Evaluation</td><td>急性生理学・慢性健康評価スコア</td></tr>
+<tr><td>ARDS</td><td>acute respiratory distress syndrome</td><td>急性呼吸窮迫症候群</td></tr>
+<tr><td>ARF</td><td>acute respiratory failure</td><td>急性呼吸不全</td></tr>
+<tr><td>CENTRAL</td><td>Cochrane Central Register of Controlled Trials</td><td>コクラン対照試験登録</td></tr>
+<tr><td>CI</td><td>confidence interval</td><td>信頼区間</td></tr>
+<tr><td>COT</td><td>conventional oxygen therapy</td><td>従来型酸素療法</td></tr>
+<tr><td>FiO₂</td><td>fraction of inspired oxygen</td><td>吸入酸素濃度</td></tr>
+<tr><td>HFNC</td><td>high flow nasal cannula</td><td>高流量鼻カニュラ</td></tr>
+<tr><td>ICU</td><td>intensive care unit</td><td>集中治療室</td></tr>
+<tr><td>ISI</td><td>Information Sciences Institute</td><td>ISI Web of Science</td></tr>
+<tr><td>LOS</td><td>length of stay</td><td>滞在日数</td></tr>
+<tr><td>MD</td><td>mean difference</td><td>平均差</td></tr>
+<tr><td>NIPPV</td><td>noninvasive positive pressure ventilation</td><td>非侵襲的陽圧換気（本ノートでは NPPV と表記）</td></tr>
+<tr><td>OI</td><td>oxygen index</td><td>酸素化指数（PaO₂/FiO₂）</td></tr>
+<tr><td>OR</td><td>odds ratio</td><td>オッズ比</td></tr>
+<tr><td>PaO₂</td><td>partial pressure of arterial oxygen</td><td>動脈血酸素分圧</td></tr>
+<tr><td>PEEP</td><td>positive end expiratory pressure</td><td>呼気終末陽圧</td></tr>
+<tr><td>RCT</td><td>randomized controlled trial</td><td>ランダム化比較試験</td></tr>
+<tr><td>SaO₂</td><td>arterial oxygen saturation</td><td>動脈血酸素飽和度</td></tr>
+<tr><td>SAPS</td><td>Simplified Acute Physiologic Score</td><td>簡易急性生理学スコア</td></tr>
+<tr><td>SD</td><td>standard derivation（原文ママ。正しくは standard deviation）</td><td>標準偏差</td></tr>
+</tbody></table></div>
+<h3>2. 背景と目的 🫁</h3>
+<p>原著BACKGROUNDの論旨を追う。</p>
+<ul><li>ARFは多くの疾患の致死的合併症であり、<strong>ICU入室の30%</strong>を占め、<strong>死亡率は最大50%</strong>に達する。ARF患者の<strong>約60%</strong>が、原疾患が改善するまで気管挿管と人工呼吸を要すると報告されている。</li><li>しかし侵襲的人工呼吸はさまざまな有害事象と結びつくことが認識されつつあり、<strong>侵襲的人工呼吸を受けた患者の院内死亡は依然30.7%</strong>と高い。</li><li>NPPVは挿管を回避し、選択された患者では臨床アウトカムを改善する。しかし<strong>皮膚障害・眼刺激・インターフェース不耐・食事と喀出の中断</strong>などの潜在的危険があり、臨床での適用をある程度制限している。したがって「<strong>同等の有効性を持ちながら有害事象がより少ないNPPVの代替</strong>」が切実に求められている、というのが著者の問題設定。</li><li>HFNCは加温加湿ガスを最大60 L/分で供給する新しい酸素療法で、<strong>重症の乳児・小児で有効性・使いやすさ・忍容性が広く実証</strong>されたことから、成人ARFへの応用に関心が向いた。</li><li>しかし成人では結論が相反していた。<strong>Frat 2015</strong>（多施設オープンラベル、n=310）はHFNCがCOTともNPPVとも挿管率で差がないとし（38% vs 47% vs 50%、P=0.18）、一方 <strong>Hernández 2016</strong> は抜管後患者でHFNCがCOTより再挿管を減らした（4.9% vs 12.2%、P=0.004）とした。</li><li><strong>仮説</strong>：挿管率に関して、HFNCはCOTより有効であり、かつNPPVの代替となりうるのではないか。そこで<strong>COTに対する優越性検定、NPPVに対する非劣性検定を含む</strong>すべての公表試験のシステマティックレビュー・メタ解析を行った。</li></ul>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：システマティックレビューおよびメタ解析。<strong>PROSPERO等の事前登録の記載はなく、PRISMA準拠の宣言もない</strong>（本文に該当記述が無い＝「本文に無い」）。</li><li><strong>検索期間・データベース</strong>：<strong>1946年〜2016年10月</strong>。<strong>PubMed、Embase、Medline、Cochrane CENTRAL、ISI Web of Science</strong> の5つ。加えて、採用論文の<strong>参考文献リストを精査し、関連論文を手検索</strong>して出版バイアスを最小化しようとした。</li><li><strong>検索式（原著記載のキーワードそのまま）</strong>：</li><li>HFNC側：<code>"HFNC" OR "high-flow nasal cannula" OR "high-flow oxygen therapy" OR "nasal high-flow oxygen therapy"</code></li><li>対照側：<code>"NIPPV" OR "non-invasive positive pressure ventilation" OR "noninvasive positive pressure ventilation" OR "non-invasive ventilation" OR "noninvasive ventilation" OR "oxygen therapy" OR "COT" OR "venturi mask"</code></li><li>病態側：<code>"respiratory failure"</code></li><li><strong>出版形式・言語による制限はかけていない</strong>。</li><li><strong>組み入れ基準</strong>（3項目すべてを満たす）</li></ul>
+<ol><li>対象がARF患者。ARFの定義＝<strong>呼吸数 &gt;25回/分</strong>、かつ <strong>OI（PaO₂/FiO₂）≤300 mmHg</strong>、または <strong>10〜12 L/分の酸素下で SaO₂&lt;92%</strong>、または <strong>室内気で SaO₂&lt;94%</strong></li><li><strong>実験群＝HFNC</strong>、<strong>対照群＝NPPVまたはCOT</strong> に分けられていること</li><li>アウトカムに<strong>挿管率・ICU死亡・ICU滞在日数</strong>が含まれること（これらに限らない）</li></ol>
+<ul><li><strong>除外基準</strong>：動物実験、18歳未満、総説、症例報告。</li><li><strong>文献選択</strong>：2名の独立した研究者（HY・DL）が2段階で実施。①タイトル・抄録のスクリーニングで重複と非対照研究を除外、②残りを全文精査。不一致は第三者（YN-Ni）同席の合意で解決。</li><li><strong>データ抽出</strong>：2名が独立して、Cochrane推奨の標準フォームに、<strong>著者・発表年・研究デザイン・国・NCT番号・母集団・人口統計（年齢・性別）・重症度（APACHE II、SAPS II）・アウトカム指標・結果</strong>を記録。<strong>欠測データは責任著者にメールで原データを請求</strong>。意見の相違は合意または第三者で解決。</li><li><strong>バイアスリスク評価</strong>：<strong>Cochrane risk of bias tool</strong> を使用。7項目 —（1）ランダム化系列生成（選択バイアス）、(2) 割付隠蔽（選択バイアス）、(3) 参加者・実施者の盲検化（実行バイアス）、(4) アウトカム評価者の盲検化（検出バイアス）、(5) 不完全アウトカムデータ（症例減少バイアス）、(6) 選択的報告（報告バイアス）、(7) その他のバイアス。2名が独立して評価。</li><li><strong>統計解析</strong>：独立した統計家が <strong>RevMan 5.3.5</strong>（Nordic Cochrane Centre、コペンハーゲン、2014）で実施。</li><li>二値変数は<strong>オッズ比（OR）と95%CI</strong>、連続変数は<strong>平均差（MD）と95%CI</strong>。</li><li>異質性は <strong>χ²検定で P&lt;0.1 かつ I²&gt;50%</strong> を有意とする基準。</li><li><strong>統計的異質性が存在する場合にランダム効果モデルを適用</strong>。</li><li><strong>感度分析</strong>を実施し、恣意的または不明確な判断について代替の決定・値の範囲を当てはめた。</li><li>有意性は <strong>Z値とP値&lt;0.05</strong> で表示し、結果はフォレストプロットで示す。</li><li><mark class="hl">原文は「<strong>仮説検証には Mann-Whitney U 検定を用いた</strong>」と記載しているが、これはメタ解析の統合法として意味をなさない。実際のフォレストプロットのヘッダは "M-H, Random, 95% CI"（Mantel-Haenszel ランダム効果）および "IV, Fixed, 95% CI"（逆分散 固定効果）であり、記述と実装が一致していない</mark>（批判的吟味を参照）。</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Study flow.（原図・無改変。© Elsevier / CHEST） PRISMA型の縦一列フローチャート。上から下へ13段の細長い箱が積み重なり、各段が選択の1ステップを表す。数値は次のとおり。<strong>初期に同定された記録 776件</strong>（電子データベースから <strong>767件</strong>、参考文献リストのレビューから <strong>9件</strong>）→ タイトル・抄録のスクリーニングで <strong>741件を除外</strong>（内訳：<strong>重複 205件／動物実験 157件／成人でない患者 330件／非対照研究 49件</strong>）→ <strong>残り35件を全文精査</strong> → <strong>17件を除外</strong>（<strong>関連アウトカムを報告していない 11件／想定した設計になっていない 6件</strong>）→ <strong>最終的に18試験を採用</strong>。35 − 11 − 6 = 18 で計算は合う。</p>
+</div>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. Risk of bias.（原図・無改変。© Elsevier / CHEST） Cochrane risk of bias tool の7項目を、全18試験にわたる割合の<strong>横積み上げ棒グラフ</strong>で示した図。左に項目名、右に0〜100%の帯。緑＝低リスク、黄＝不明、赤＝高リスク。読み取れる形は次のとおり。<strong>ランダム化系列生成</strong>と<strong>割付隠蔽</strong>：ともに約72%が緑、右端の約28%が赤（＝18試験中13試験が低リスク、5試験が高リスク）。<strong>参加者・実施者の盲検化</strong>：<mark class="hl">帯が左端から右端まで全部赤＝18試験すべてが高リスク</mark>。<strong>アウトカム評価者の盲検化</strong>・<strong>不完全アウトカムデータ</strong>・<strong>選択的報告</strong>：3項目とも帯が全部緑＝全試験が低リスク。<strong>その他のバイアス</strong>：帯が全部黄色＝全試験が判断不能。</p>
+</div>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. Risk of bias summary.（原図・無改変。© Elsevier / CHEST） 縦に18試験、横に7項目を並べた<strong>信号機マトリクス</strong>。列見出しは上向きに縦書きで、左から「ランダム化系列生成」「割付隠蔽」「参加者・実施者の盲検化」「アウトカム評価者の盲検化」「不完全アウトカムデータ」「選択的報告」「その他のバイアス」。丸印は緑のプラス＝低リスク、赤のマイナス＝高リスク、黄のクエスチョンマーク＝不明。<strong>3列目（参加者・実施者の盲検化）は18行すべてが赤</strong>で縦一直線に染まっているのが最も目を引く。<strong>7列目（その他のバイアス）は18行すべてが黄色</strong>。<strong>1列目・2列目に赤が付くのは5試験</strong> — Brotfain 2014、Coudroy 2016、Nagata 2015、Nicolet 2011、Roca 2015。この5試験はいずれも後ろ向き解析または非ランダム化の観察研究であり、ランダム化と割付隠蔽の項目が原理的に成立しないことの反映である。4〜6列目は全18行が緑。</p>
+</div>
+<h4>Table 1. 採用18試験の詳細（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>著者（年）</th><th>研究デザイン</th><th>登録番号</th><th>国</th><th>対照</th><th>例数</th><th>ARFの原因</th></tr></thead>
+<tbody>
+<tr><td>Bell 2015</td><td>非盲検ランダム化比較試験</td><td>NR</td><td>オーストラリア</td><td>標準酸素療法（Hudson・ベンチュリ・リザーバ付き）</td><td>100</td><td>心不全、COPD、在宅酸素</td></tr>
+<tr><td>Brotfain 2014</td><td>後ろ向き解析</td><td>NR</td><td>イスラエル</td><td>標準リザーバ付き酸素フェイスマスク</td><td>67</td><td>敗血症/SIRS、外傷、膵炎、その他</td></tr>
+<tr><td>Corley 2015</td><td>ランダム化比較試験</td><td>ACTRN12610000942055</td><td>オーストラリア</td><td>標準酸素療法</td><td>155</td><td>心臓外科術後</td></tr>
+<tr><td>Coudroy 2016</td><td>観察コホート研究</td><td>NR</td><td>フランス</td><td>NPPV</td><td>115</td><td>感染症の証明例、心原性肺水腫、特異的原因、その他の特定原因、原因不明</td></tr>
+<tr><td>Frat 2015（FLORALI）</td><td>多施設・オープンラベル・ランダム化試験</td><td>NCT01320384</td><td>フランス</td><td>NPPV</td><td>310</td><td>市中肺炎、院内肺炎、肺外敗血症、誤嚥・溺水、免疫抑制関連肺炎、その他</td></tr>
+<tr><td>Hernández 2016</td><td>多施設ランダム化試験</td><td>NCT01191489</td><td>スペイン</td><td>COT</td><td>527</td><td>内科系、外傷、外科系</td></tr>
+<tr><td>Hernández 2016(2)</td><td>多施設ランダム化試験</td><td>NCT01191489</td><td>スペイン</td><td>NPPV</td><td>604</td><td>内科系、外傷、外科系</td></tr>
+<tr><td>Jones 2016</td><td>プラグマティック・オープン・ランダム化比較研究</td><td>ACTRN12610000964011</td><td>ニュージーランド</td><td>標準的酸素供給法</td><td>303</td><td>COPD、肺炎、心不全、混合、喘息、その他、記載なし</td></tr>
+<tr><td>Lemiale 2015</td><td>多施設・並行群間・ランダム化比較研究</td><td>NCT02424773</td><td>フランス</td><td>ベンチュリマスク</td><td>100</td><td>敗血症、心原性肺水腫、非感染性肺疾患、原疾患の肺浸潤、大量胸水、ニューモシスチス肺炎、その他、診断なし</td></tr>
+<tr><td>Maggiore 2014</td><td>ランダム化比較・オープンラベル試験</td><td>NCT01575353</td><td>イタリア</td><td>ベンチュリマスク</td><td>105</td><td>肺炎、多発外傷、無気肺、ショック、心原性肺水腫、心停止、その他</td></tr>
+<tr><td>Nagata 2015</td><td>後ろ向き単施設コホート研究</td><td>NR</td><td>日本</td><td>NPPV</td><td>76</td><td>肺炎、誤嚥性肺炎、その他の肺炎、間質性肺炎、COPDと喘息、その他</td></tr>
+<tr><td>Nicolet 2011</td><td>前向きオープン研究</td><td>NR</td><td>フランス</td><td>高流量酸素フェイスマスク</td><td>40</td><td>心臓外科術後</td></tr>
+<tr><td>Parke 2011</td><td>前向きランダム化比較研究</td><td>ACTRN012606000139572</td><td>オーストラリア</td><td>高流量フェイスマスク</td><td>56</td><td>血管外科、心臓外科、胸部外科、循環器、呼吸器</td></tr>
+<tr><td>Parke 2013</td><td>プラグマティック・ランダム化比較試験</td><td>ACTRN12610000973011</td><td>ニュージーランド</td><td>シンプルフェイスマスクまたは鼻カニュラ</td><td>340</td><td>心臓外科術後</td></tr>
+<tr><td>Rittayamai 2015</td><td>前向きランダム化比較研究</td><td>TCRT 20140618002</td><td>タイ</td><td>COT</td><td>40</td><td>うっ血性心不全、喘息発作、COPD増悪、肺炎、その他</td></tr>
+<tr><td>Roca 2015</td><td>後ろ向き解析</td><td>NR</td><td>スペイン</td><td>COT</td><td>40</td><td>肺移植</td></tr>
+<tr><td>Stéphan 2016（BiPOP）</td><td>多施設・ランダム化・非劣性試験</td><td>NCT01458444</td><td>フランス</td><td>NPPV</td><td>830</td><td>心臓・胸部外科術後</td></tr>
+<tr><td>Yoo 2016</td><td>後ろ向きコホート解析</td><td>（記載なし）</td><td>韓国</td><td>NPPV</td><td>73</td><td>肺炎、敗血症、COPD増悪、ARDS、急性心不全</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 「ARF」の中身が均質でない Table 1 を通して読むと、<mark class="hl">本研究の「ARF」は臨床的にまったく異なる3つの状況の寄せ集めである</mark>。 ① <strong>de novo 低酸素性ARFの治療</strong>（Frat 2015、Coudroy 2016、Lemiale 2015、Nagata 2015、Yoo 2016、Brotfain 2014） ② <strong>抜管後の再挿管予防</strong>（Hernández 2016 と 2016(2)、Maggiore 2014、Roca 2015 の一部） ③ <strong>心臓・胸部・血管外科術後の予防的使用</strong>（Stéphan 2016、Parke 2013、Corley 2015、Parke 2011、Nicolet 2011） 例数では ② と ③ が圧倒的多数を占める。<strong>「HFNCが挿管を減らす」という結論を、目の前の de novo 低酸素性呼吸不全の患者にそのまま当てはめてはいけない</strong>。</p>
+</div>
+<h4>Table 2. 採用試験の患者背景（原表を日本語化）</h4>
+<p>平均（標準偏差）。NR＝報告なし。</p>
+<div class="tw"><table>
+<thead><tr><th>著者（年）</th><th>HFNC 年齢</th><th>HFNC 男性 n(%)</th><th>HFNC SAPS II</th><th>HFNC APACHE II</th><th>対照 年齢</th><th>対照 男性 n(%)</th><th>対照 SAPS II</th><th>対照 APACHE II</th></tr></thead>
+<tbody>
+<tr><td>Bell 2015</td><td>74.5</td><td>20（41.7%）</td><td>NR</td><td>NR</td><td>72.9</td><td>24（46.2%）</td><td>NR</td><td>NR</td></tr>
+<tr><td>Brotfain 2014</td><td>51.93（23.1）</td><td>21（61.8%）</td><td>NR</td><td>23.9（6.1）</td><td>60.12（16.41）</td><td>21（63.6%）</td><td>NR</td><td>24.1（6）</td></tr>
+<tr><td>Corley 2015</td><td>63（11.4）</td><td>58（72%）</td><td>NR</td><td>15（3.6）</td><td>65（11.1）</td><td>56（76%）</td><td>NR</td><td>15（3.9）</td></tr>
+<tr><td>Coudroy 2016</td><td>62</td><td>35（58%）</td><td>46（13）</td><td>NR</td><td>58</td><td>42（76%）</td><td>42（11）</td><td>NR</td></tr>
+<tr><td>Frat 2015</td><td>61（16）</td><td>75（71%）</td><td>25（9）</td><td>NR</td><td>61（17）</td><td>63（67%）</td><td>24（9）</td><td>NR</td></tr>
+<tr><td>Hernández 2016</td><td>51（13.1）</td><td>164（62.1%）</td><td>NR</td><td>7</td><td>51.8（12.2）</td><td>153（58.2%）</td><td>NR</td><td>7</td></tr>
+<tr><td>Hernández 2016(2)</td><td>64.6（15.4）</td><td>186（64.1）</td><td>NR</td><td>11</td><td>64.4（15.8）</td><td>202（64.3）</td><td>NR</td><td>10</td></tr>
+<tr><td>Jones 2016</td><td>74.6（15.6）</td><td>73（44.2%）</td><td>NR</td><td>NR</td><td>72.2（16.8）</td><td>71（51.5%）</td><td>NR</td><td>NR</td></tr>
+<tr><td>Lemiale 2015</td><td>59.3</td><td>38（73.1%）</td><td>42</td><td>NR</td><td>64.5</td><td>32（66.7%）</td><td>37.5</td><td>NR</td></tr>
+<tr><td>Maggiore 2014</td><td>64（17）</td><td>33（62.3%）</td><td>44（16）</td><td>NR</td><td>65（18）</td><td>35（67.3%）</td><td>43（14）</td><td>NR</td></tr>
+<tr><td>Nagata 2015</td><td>75.5（9.6）</td><td>30（91%）</td><td>NR</td><td>NR</td><td>77.6（8.8）</td><td>33（77%）</td><td>NR</td><td>NR</td></tr>
+<tr><td>Nicolet 2011</td><td>62（10.4）</td><td>14（73.7%）</td><td>NR</td><td>NR</td><td>64（11）</td><td>16（76.2%）</td><td>NR</td><td>NR</td></tr>
+<tr><td>Parke 2011</td><td>64</td><td>21（85.2%）</td><td>NR</td><td>12</td><td>64</td><td>23（72.4%）</td><td>NR</td><td>12</td></tr>
+<tr><td>Parke 2013</td><td>65</td><td>129（76.3%）</td><td>NR</td><td>NR</td><td>66</td><td>129（75.4%）</td><td>NR</td><td>NR</td></tr>
+<tr><td>Rittayamai 2015</td><td>65.6（14.4）</td><td>9（45%）</td><td>NR</td><td>NY（原文ママ）</td><td>63.6（15.7）</td><td>6（30%）</td><td>NR</td><td>NR</td></tr>
+<tr><td>Roca 2015</td><td>53.5</td><td>11（61.1%）</td><td>NR</td><td>20</td><td>56</td><td>13（59.1%）</td><td>NR</td><td>21</td></tr>
+<tr><td>Stéphan 2016</td><td>63.8</td><td>273（65.9%）</td><td>29</td><td>NR</td><td>63.9</td><td>278（66.8%）</td><td>28.8</td><td>NR</td></tr>
+<tr><td>Yoo 2016</td><td>62.1（16.8）</td><td>18（52.9%）</td><td>NR</td><td>19.7（4.1）</td><td>62.9（16.1）</td><td>25（64.1%）</td><td>NR</td><td>19.2（3.9）</td></tr>
+</tbody></table></div>
+<p><strong>重症度の落差が大きい</strong>：Hernández 2016 の APACHE II 7、Parke 2011 の 12、Corley 2015 の 15 に対し、Yoo 2016 は 19.7、Roca 2015 は 20、Brotfain 2014 は 23.9。SAPS II も Frat 2015 の 25 から Coudroy 2016 の 46 まで開いている。<strong>同じ「ARF」でも生命予後がまったく違う集団が同じ土俵に載っている</strong>ことを、この表は端的に示している。なお Rittayamai 2015 の HFNC群 APACHE II 欄は「NY」と印字されており、<strong>NR（not reported）の誤植と思われる</strong>。</p>
+<h3>4. 結果 — 文献選択と採用試験の構成 🔍</h3>
+<ul><li>初期同定 <strong>776件</strong>（電子データベース 767件＋参考文献リスト 9件）。タイトル・抄録スクリーニングで <strong>741件除外</strong>（重複 205、動物実験 157、非成人 330、非対照研究 49）。全文精査 <strong>35件</strong>から、関連アウトカム未報告 11件・想定外の設計 6件を除き、<strong>18試験を採用</strong>。</li><li><strong>18試験すべてが HFNC 単独と NPPV または COT を比較</strong>している。</li><li><strong>アウトカムの報告状況</strong></li><li><strong>気管挿管</strong>：18試験（全試験）</li><li><strong>ICU死亡</strong>：9試験</li><li><strong>ICU滞在日数</strong>：12試験</li><li><strong>研究デザインの内訳</strong>：<strong>RCT 12試験／後ろ向き解析 4試験／前向きコホート研究 2試験</strong>。</li><li><strong>例数の内訳</strong>：総計 <strong>3,881例</strong>。<strong>HFNC 1,893例／NPPV 934例／COT 1,054例</strong>。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 「18試験」の数え方に含みがある Table 1 の18行のうち <strong>Hernández 2016 と Hernández 2016(2) は同じ登録番号 NCT01191489 が振られている</strong>（原表の記載どおり）。すなわち<strong>同一の登録から派生した2つの比較が、独立した2試験として数えられている</strong>。また <strong>Frat 2015（FLORALI）は3群試験</strong>であるため、HFNC vs COT と HFNC vs NPPV の<strong>両方のサブグループに登場し、HFNC群106例が2回カウントされている</strong>。 フォレストプロット（Fig. 5）の合計欄が <strong>HFNC 1,999例・対照 1,988例</strong> となっているのに対し、本文の記載が <strong>HFNC 1,893例</strong>であるのは、この差（1,999 − 106 = 1,893）で説明がつく。<mark class="hl">つまり「Total 3,987例」の見かけは重複を含んでおり、実数は3,881例である</mark>。</p>
+</div>
+<h3>5. 結果 — 異質性 📊</h3>
+<p>原著が本文に列挙している異質性の値をすべて表に起こす。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>比較</th><th>I²</th><th>χ²</th><th>P値</th><th>有意な異質性か</th></tr></thead>
+<tbody>
+<tr><td>気管挿管率</td><td>HFNC vs NPPV</td><td><strong>63%</strong></td><td>13.51</td><td><strong>0.02</strong></td><td><strong>あり</strong></td></tr>
+<tr><td>気管挿管率</td><td>HFNC vs COT</td><td>34%</td><td>15.19</td><td>0.13</td><td>なし</td></tr>
+<tr><td>ICU死亡</td><td>HFNC vs NPPV</td><td><strong>67%</strong></td><td>12.21</td><td><strong>0.02</strong></td><td><strong>あり</strong></td></tr>
+<tr><td>ICU死亡</td><td>HFNC vs COT</td><td>0%</td><td>3.35</td><td>0.50</td><td>なし</td></tr>
+<tr><td>ICU滞在日数</td><td>HFNC vs COT</td><td>0%</td><td>3.99</td><td>0.68</td><td>なし</td></tr>
+<tr><td>ICU滞在日数</td><td>HFNC vs NPPV</td><td>32%</td><td>5.89</td><td>0.21</td><td>なし</td></tr>
+</tbody></table></div>
+<ul><li>判定基準は「<strong>χ²検定でP&lt;0.1 かつ I²&gt;50%</strong>」。上表で「あり」と判定された2つは、いずれも<strong>HFNC vs NPPV</strong> の比較である。</li><li><strong>HFNC vs COT では3アウトカムとも異質性が低い</strong>（I² 0〜34%）。つまり「HFNCはCOTより挿管を減らす」という結論は、研究間でおおむね方向が揃っている。</li><li>一方 <strong>HFNC vs NPPV は結果の向きが研究によって割れている</strong>。後述するように、この割れ方には規則性がある（RCTか観察研究かで分かれる）。</li></ul>
+<h3>6. 結果 — 気管挿管率（主要アウトカム）🫁</h3>
+<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 5. Endotracheal intubation.（原図・無改変。© Elsevier / CHEST） RevMan標準のフォレストプロット。左半分が数値表（HFNC群のイベント数／総数、対照群のイベント数／総数、重み、M-H ランダム効果のOR と95%CI）、右半分がログスケール（0.01・0.1・1・10・100）のプロット。青い小四角が各試験の点推定値、横線が95%CI、黒い菱形がサブグループおよび全体の統合値。中央の縦線がOR=1。下端に「Favours [experimental]（左＝HFNC有利）／Favours [control]（右＝対照有利）」。<strong>サブグループ 1.1.1 が HFNC vs COT（13行）</strong>、<strong>1.1.2 が HFNC vs NPPV（6行）</strong>。COTサブグループの菱形はOR=1の線より明確に左に寄って線と交わらず、NPPVサブグループの菱形は右端がOR=1をわずかに越えている。Nagata 2015 の横線は左端で矢印になっており、CIが図の範囲外へ突き抜けていることを示す。</p>
+</div>
+<h4>Table. Figure 5 の全数値（各試験の点推定値・95%CI・重み）</h4>
+<p><strong>サブグループ 1.1.1：HFNC vs COT</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>HFNC イベント/総数</th><th>COT イベント/総数</th><th>重み</th><th>OR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Bell 2015</td><td>0/48</td><td>1/52</td><td>1.2%</td><td>0.35（0.01–8.90）</td></tr>
+<tr><td>Brotfain 2014</td><td>1/34</td><td>6/33</td><td>2.4%</td><td>0.14（0.02–1.20）</td></tr>
+<tr><td>Corley 2015</td><td>0/81</td><td>2/74</td><td>1.3%</td><td>0.18（0.01–3.77）</td></tr>
+<tr><td>Frat 2015</td><td>40/106</td><td>44/94</td><td>11.5%</td><td>0.69（0.39–1.21）</td></tr>
+<tr><td>Hernández 2016</td><td>13/264</td><td>32/263</td><td>10.4%</td><td><strong>0.37（0.19–0.73）</strong></td></tr>
+<tr><td>Jones 2016</td><td>1/165</td><td>3/138</td><td>2.3%</td><td>0.27（0.03–2.67）</td></tr>
+<tr><td>Lemiale 2015</td><td>4/52</td><td>2/48</td><td>3.5%</td><td>1.92（0.33–10.97）</td></tr>
+<tr><td>Maggiore 2014</td><td>2/53</td><td>11/52</td><td>4.1%</td><td><strong>0.15（0.03–0.70）</strong></td></tr>
+<tr><td>Nicolet 2011</td><td>3/19</td><td>1/21</td><td>2.1%</td><td>3.75（0.36–39.59）</td></tr>
+<tr><td>Parke 2011</td><td>0/29</td><td>0/27</td><td>—</td><td>推定不能</td></tr>
+<tr><td>Parke 2013</td><td>2/169</td><td>0/171</td><td>1.3%</td><td>5.12（0.24–107.43）</td></tr>
+<tr><td>Rittayamai 2015</td><td>0/20</td><td>0/20</td><td>—</td><td>推定不能</td></tr>
+<tr><td>Roca 2015</td><td>13/22</td><td>16/18</td><td>3.6%</td><td><strong>0.18（0.03–0.99）</strong></td></tr>
+<tr><td><strong>小計（95%CI）</strong></td><td><strong>79/1,062</strong></td><td><strong>118/1,011</strong></td><td><strong>43.8%</strong></td><td><strong>0.47（0.27–0.84）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：τ²=0.26、χ²=15.19、df=10（P=0.13）、<strong>I²=34%</strong>。全体効果の検定：<strong>Z=2.55（P=0.01）</strong>。</p>
+<p><strong>サブグループ 1.1.2：HFNC vs NPPV</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>デザイン</th><th>HFNC イベント/総数</th><th>NPPV イベント/総数</th><th>重み</th><th>OR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Coudroy 2016</td><td>観察コホート</td><td>21/60</td><td>30/55</td><td>9.5%</td><td><strong>0.45（0.21–0.95）</strong></td></tr>
+<tr><td>Frat 2015</td><td>RCT</td><td>40/106</td><td>55/110</td><td>11.7%</td><td>0.61（0.35–1.04）</td></tr>
+<tr><td>Hernández 2016(2)</td><td>RCT</td><td>66/290</td><td>60/314</td><td>13.3%</td><td>1.25（0.84–1.85）</td></tr>
+<tr><td>Nagata 2015</td><td>後ろ向き</td><td>0/33</td><td>10/43</td><td>1.5%</td><td><strong>0.05（0.00–0.85）</strong></td></tr>
+<tr><td>Stéphan 2016</td><td>RCT</td><td>58/414</td><td>57/416</td><td>13.3%</td><td>1.03（0.69–1.52）</td></tr>
+<tr><td>Yoo 2016</td><td>後ろ向き</td><td>7/34</td><td>13/39</td><td>6.8%</td><td>0.52（0.18–1.50）</td></tr>
+<tr><td><strong>小計（95%CI）</strong></td><td></td><td><strong>192/937</strong></td><td><strong>225/977</strong></td><td><strong>56.2%</strong></td><td><strong>0.73（0.47–1.13）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：τ²=0.16、χ²=13.51、df=5（P=0.02）、<strong>I²=63%</strong>。全体効果の検定：<strong>Z=1.40（P=0.16）</strong>。</p>
+<p><strong>全体（両サブグループを合算）</strong></p>
+<div class="tw"><table>
+<thead><tr><th></th><th>HFNC</th><th>対照</th><th>重み</th><th>OR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td><strong>Total（95%CI）</strong></td><td><strong>271/1,999</strong></td><td><strong>343/1,988</strong></td><td><strong>100.0%</strong></td><td><strong>0.60（0.41–0.86）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：τ²=0.23、χ²=35.21、df=16（P=0.004）、<strong>I²=55%</strong>。全体効果の検定：<strong>Z=2.76（P=0.006）</strong>。サブグループ間の差の検定：χ²=1.41、df=1（P=0.23）、I²=29.2%。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — NPPV比較の異質性はデザインで割れている サブグループ 1.1.2 を<strong>デザイン別に並べ直すと構造が見える</strong>。==RCT 3件（Frat 0.61／Hernández(2) 1.25／Stéphan 1.03）はいずれもOR=1の近くに集まり、観察・後ろ向き研究 3件（Coudroy 0.45／Nagata 0.05／Yoo 0.52）はすべて強くHFNC有利に振れている==。I²=63% の正体はこれである。重みで見ると <strong>RCTが合計38.3%、観察研究が17.8%</strong> を占め、統合値 OR 0.73 は観察研究に引き下げられた値と読める。 RCTのみに限った同時期のメタ解析（Zhao 2017、Crit Care）が <strong>HFNC vs NIV の挿管 OR 0.96（0.66–1.39）</strong> とほぼ 1.00 を報告しているのは、この見立てと整合する。<strong>「HFNCがNPPVよりやや良さそう」という印象は、観察研究由来のバイアスで説明できる可能性が高い</strong>。</p>
+</div>
+<p><strong>読み方のポイント</strong></p>
+<ul><li><strong>HFNC vs COT で結果を動かしているのは実質2試験</strong>。重みが二桁なのは Frat 2015（11.5%）と Hernández 2016（10.4%）だけで、有意な効果を示したのも Hernández 2016（0.37）、Maggiore 2014（0.15）、Roca 2015（0.18）の3試験である。残る10試験はイベントが0〜4件しかなく、CIが桁で振れている（Parke 2013 は 5.12、上限107.43）。</li><li><strong>Parke 2011（0/29 vs 0/27）と Rittayamai 2015（0/20 vs 0/20）はイベントゼロで「推定不能」</strong>として統合から落ちている。したがって「18試験」と言いながら、挿管の統合に実際に寄与したのは<strong>17行（重複を除けば16試験）</strong>である。df=10（COT側11試験）と df=5（NPPV側6試験）を足すと17行になり、これと一致する。</li><li><strong>サブグループ間差は有意でない</strong>（P=0.23）。すなわち「COTに勝ちNPPVには勝たない」という非対称は、統計的には両サブグループの効果量の差として証明されているわけではない。<strong>それぞれの区間推定の有意性が違うだけ</strong>である。この区別は臨床的な解釈で誤りやすいところ。</li></ul>
+<h3>7. 結果 — ICU死亡 💀</h3>
+<p class="figref">🖼 原著のFigure 6 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 6. ICU mortality.（原図・無改変。© Elsevier / CHEST） Figure 5と同じ形式のフォレストプロット。サブグループ 2.1.1 が HFNC vs COT（5行）、2.1.2 が HFNC vs NPPV（5行）。両サブグループの黒い菱形とも右端がOR=1の縦線を越えており、統合値が有意でないことが一目で分かる。全体の菱形（OR 0.67）も右端がわずかにOR=1に触れている（上限1.01）。</p>
+</div>
+<h4>Table. Figure 6 の全数値</h4>
+<p><strong>サブグループ 2.1.1：HFNC vs COT</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>HFNC イベント/総数</th><th>COT イベント/総数</th><th>重み</th><th>OR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Brotfain 2014</td><td>1/34</td><td>0/33</td><td>1.5%</td><td>3.00（0.12–76.31）</td></tr>
+<tr><td>Frat 2015</td><td>12/106</td><td>18/94</td><td>13.3%</td><td>0.54（0.24–1.19）</td></tr>
+<tr><td>Hernández 2016</td><td>3/264</td><td>3/263</td><td>5.2%</td><td>1.00（0.20–4.98）</td></tr>
+<tr><td>Maggiore 2014</td><td>6/53</td><td>5/52</td><td>7.7%</td><td>1.20（0.34–4.20）</td></tr>
+<tr><td>Roca 2015</td><td>10/22</td><td>13/18</td><td>7.0%</td><td>0.32（0.08–1.21）</td></tr>
+<tr><td><strong>小計（95%CI）</strong></td><td><strong>32/479</strong></td><td><strong>39/460</strong></td><td><strong>34.8%</strong></td><td><strong>0.65（0.37–1.13）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：τ²=0.00、χ²=3.35、df=4（P=0.50）、<strong>I²=0%</strong>。全体効果の検定：<strong>Z=1.53（P=0.13）</strong>。</p>
+<p><strong>サブグループ 2.1.2：HFNC vs NPPV</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>デザイン</th><th>HFNC イベント/総数</th><th>NPPV イベント/総数</th><th>重み</th><th>OR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Coudroy 2016</td><td>観察コホート</td><td>9/60</td><td>20/55</td><td>11.7%</td><td><strong>0.31（0.13–0.76）</strong></td></tr>
+<tr><td>Frat 2015</td><td>RCT</td><td>12/106</td><td>27/110</td><td>14.2%</td><td><strong>0.39（0.19–0.82）</strong></td></tr>
+<tr><td>Hernández 2016(2)</td><td>RCT</td><td>19/290</td><td>18/314</td><td>15.5%</td><td>1.15（0.59–2.24）</td></tr>
+<tr><td>Stéphan 2016</td><td>RCT</td><td>28/414</td><td>23/416</td><td>17.4%</td><td>1.24（0.70–2.19）</td></tr>
+<tr><td>Yoo 2016</td><td>後ろ向き</td><td>3/34</td><td>8/39</td><td>6.4%</td><td>0.38（0.09–1.55）</td></tr>
+<tr><td><strong>小計（95%CI）</strong></td><td></td><td><strong>71/904</strong></td><td><strong>96/934</strong></td><td><strong>65.2%</strong></td><td><strong>0.63（0.34–1.18）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：τ²=0.32、χ²=12.21、df=4（P=0.02）、<strong>I²=67%</strong>。全体効果の検定：<strong>Z=1.44（P=0.15）</strong>。</p>
+<p><strong>全体</strong></p>
+<div class="tw"><table>
+<thead><tr><th></th><th>HFNC</th><th>対照</th><th>重み</th><th>OR（95%CI）</th></tr></thead>
+<tbody>
+<tr><td><strong>Total（95%CI）</strong></td><td><strong>103/1,383</strong></td><td><strong>135/1,394</strong></td><td><strong>100.0%</strong></td><td><strong>0.67（0.44–1.01）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：τ²=0.17、χ²=15.72、df=9（P=0.07）、I²=43%。全体効果の検定：<strong>Z=1.92（P=0.05）</strong>。サブグループ間の差の検定：χ²=0.00、df=1（P=0.96）、I²=0%。</p>
+<p><strong>読み方のポイント</strong></p>
+<ul><li>全体の <strong>OR 0.67（0.44–1.01）、P=0.05</strong> は「境界」である。上限が 1.01 とわずかに1をまたぐため有意ではないが、<strong>点推定は33%の死亡オッズ低下</strong>を示している。ただしこれは<strong>COT対照とNPPV対照を混ぜて出した数字</strong>であり、臨床的な意味を持たせるべきではない。</li><li><strong>ICU死亡を報告したのは9試験のみ</strong>（Fig. 6 は延べ10行、Frat 2015 が両サブグループに登場するため）。挿管を報告した18試験に対して半分であり、<strong>死亡の解析は挿管の解析より情報量がはるかに少ない</strong>。</li><li>サブグループ 2.1.2 の異質性（I²=67%）も、挿管と同じく <strong>Coudroy 0.31・Frat 0.39・Yoo 0.38 と Hernández(2) 1.15・Stéphan 1.24 の二極化</strong>で説明できる。前者3つは de novo 低酸素性ARF、後者2つは抜管後・術後の集団であり、<mark class="hl">「HFNCが死亡を減らすかどうかは、対象がde novoか予防的使用かで向きが変わる」という仮説と整合する</mark>。著者は生データがないためサブグループ解析ができなかったと述べている。</li></ul>
+<h3>8. 結果 — ICU滞在日数（ICU LOS）🛏️</h3>
+<p class="figref">🖼 原著のFigure 7 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 7. ICU LOS.（原図・無改変。© Elsevier / CHEST） 連続変数のフォレストプロット。左半分は実験群・対照群それぞれの平均・SD・例数、重み、逆分散 <strong>固定効果</strong>モデルの平均差と95%CI。右半分は −20 から +20 日の線形スケールで、緑の四角が点推定値、黒い菱形が統合値。中央の縦線が「差なし（0日）」。サブグループ 3.1.1 が HFNC vs COT（7行）、3.1.2 が HFNC vs NPPV（5行）。<strong>全体の菱形は0の線のほぼ真上にあり、視覚的にも完全な「差なし」</strong>。Yoo 2016 のみ左に大きく外れており（−7.20日）、唯一CIが0をまたがない試験である。</p>
+</div>
+<h4>Table. Figure 7 の全数値（単位は日）</h4>
+<p><strong>サブグループ 3.1.1：HFNC vs COT</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>HFNC 平均（SD）/例数</th><th>COT 平均（SD）/例数</th><th>重み</th><th>平均差（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Brotfain 2014</td><td>10.7（6.2）/34</td><td>10.5（7.3）/33</td><td>8.8%</td><td>+0.20（−3.05〜+3.45）</td></tr>
+<tr><td>Hernández 2016</td><td>6（24.87）/264</td><td>6（28.96）/263</td><td>4.4%</td><td>0.00（−4.61〜+4.61）</td></tr>
+<tr><td>Jones 2016</td><td>4.5（7.21）/165</td><td>4.9（6.89）/138</td><td>36.6%</td><td>−0.40（−1.99〜+1.19）</td></tr>
+<tr><td>Maggiore 2014</td><td>11.7（10.2）/53</td><td>10.4（8.5）/52</td><td>7.2%</td><td>+1.30（−2.29〜+4.89）</td></tr>
+<tr><td>Nicolet 2011</td><td>6（4）/19</td><td>5.5（3）/21</td><td>19.0%</td><td>+0.50（−1.71〜+2.71）</td></tr>
+<tr><td>Parke 2013</td><td>33.4（22.8）/169</td><td>28.9（24）/171</td><td>3.7%</td><td>+4.50（−0.48〜+9.48）</td></tr>
+<tr><td>Roca 2015</td><td>14（26.32）/22</td><td>9（44.37）/18</td><td>0.2%</td><td>+5.00（−18.26〜+28.26）</td></tr>
+<tr><td><strong>小計（95%CI）</strong></td><td><strong>726例</strong></td><td><strong>696例</strong></td><td><strong>79.9%</strong></td><td><strong>+0.30（−0.78〜+1.37）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：χ²=3.99、df=6（P=0.68）、<strong>I²=0%</strong>。全体効果の検定：<strong>Z=0.54（P=0.59）</strong>。</p>
+<p><strong>サブグループ 3.1.2：HFNC vs NPPV</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>HFNC 平均（SD）/例数</th><th>NPPV 平均（SD）/例数</th><th>重み</th><th>平均差（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>Coudroy 2016</td><td>7（9.88）/60</td><td>8（15.14）/55</td><td>4.2%</td><td>−1.00（−5.72〜+3.72）</td></tr>
+<tr><td>Hernández 2016(2)</td><td>3（21.72）/290</td><td>4（31.64）/314</td><td>5.0%</td><td>−1.00（−5.30〜+3.30）</td></tr>
+<tr><td>Nagata 2015</td><td>6（11.72）/33</td><td>4（13.38）/43</td><td>2.9%</td><td>+2.00（−3.66〜+7.66）</td></tr>
+<tr><td>Stéphan 2016</td><td>6（31.22）/414</td><td>6（31.14）/416</td><td>5.2%</td><td>0.00（−4.24〜+4.24）</td></tr>
+<tr><td>Yoo 2016</td><td>13.4（10.3）/34</td><td>20.6（14.2）/39</td><td>2.9%</td><td><strong>−7.20（−12.84〜−1.56）</strong></td></tr>
+<tr><td><strong>小計（95%CI）</strong></td><td><strong>831例</strong></td><td><strong>867例</strong></td><td><strong>20.1%</strong></td><td><strong>−1.21（−3.35〜+0.94）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：χ²=5.89、df=4（P=0.21）、<strong>I²=32%</strong>。全体効果の検定：<strong>Z=1.10（P=0.27）</strong>。</p>
+<p><strong>全体</strong></p>
+<div class="tw"><table>
+<thead><tr><th></th><th>HFNC</th><th>対照</th><th>重み</th><th>平均差（95%CI）</th></tr></thead>
+<tbody>
+<tr><td><strong>Total（95%CI）</strong></td><td><strong>1,557例</strong></td><td><strong>1,563例</strong></td><td><strong>100.0%</strong></td><td><strong>−0.01（−0.97〜+0.96）</strong></td></tr>
+</tbody></table></div>
+<p>異質性：χ²=11.39、df=11（P=0.41）、I²=3%。全体効果の検定：<strong>Z=0.01（P=0.99）</strong>。サブグループ間の差の検定：χ²=1.51、df=1（P=0.22）、I²=33.8%。</p>
+<p><strong>読み方のポイント</strong></p>
+<ul><li><strong>全体の平均差 −0.01日</strong> は、これ以上ないほど明確な「差なし」である。<strong>HFNCの導入でICU在室が短くなることは期待できない</strong>。</li><li><strong>重みの76%近くを1試験（Jones 2016、36.6%）と Nicolet 2011（19.0%）が占めている</strong>。Jones 2016 は救急外来での軽症〜中等症を対象としたプラグマティック試験、Nicolet 2011 は心臓外科術後40例の小規模研究であり、<strong>この2つがICU LOSの結論を実質的に決めている</strong>。</li><li><strong>平均とSDの記載に無理がある試験が混じっている</strong>。Hernández 2016 は平均6日・SD 24.87日、Stéphan 2016 は平均6日・SD 31.22日、Hernández 2016(2) は平均3日・SD 21.72日と、<strong>SDが平均の4〜7倍</strong>になっている。ICU滞在日数は強く右に歪んだ分布であり、元論文が中央値・四分位で報告した値を平均±SDへ変換した結果と考えられる（本文にその手順の記載は無い）。<mark class="hl">歪んだ分布に平均差を当てはめている以上、この解析の精度表示（信頼区間の幅）は額面どおりに受け取れない</mark>。</li><li><strong>ICU LOSだけ固定効果モデル（IV, Fixed）が使われている</strong>。挿管と死亡はランダム効果（M-H, Random）である。方法の記述は「異質性がある場合にランダム効果を適用」なので、I²が低いLOSで固定効果を使うのは記述と矛盾しない。ただし<strong>同一論文内でモデルが混在していること自体は明示されていない</strong>。</li></ul>
+<h3>9. 結果 — 出版バイアス 📉</h3>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2017.01.004" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2017.01.004）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. Publication bias.（原図・無改変。© Elsevier / CHEST） 挿管率に関するファンネルプロット。横軸が OR（対数目盛、0.01〜100）、縦軸が <strong>SE(log[OR])</strong>（上が0、下が2で、上ほど精度が高い大規模試験）。青い破線で逆三角形の擬似95%信頼域が描かれ、その頂点から下に垂直の破線（統合ORの位置、およそ0.7）が伸びる。マーカーは2種類 — <strong>黒い丸が HFNC vs COT</strong>、<strong>赤い菱形が HFNC vs NPPV</strong>（凡例が図下部の枠内にある）。 分布の特徴は3点。①<strong>上部（SE&lt;0.5、＝精度の高い試験）には赤い菱形が4つ集まり、いずれもOR 0.5〜1.3付近</strong>に位置する。②<strong>下半分（SE&gt;0.8、＝小規模試験）はほぼ黒い丸で占められ、左（HFNC有利）に6つ、右（対照有利）に3つ</strong>と左に偏る。③<strong>逆三角形の外に出ているマーカーがある</strong> — とくに左側 SE≒1.47 の赤い菱形（Nagata 2015、OR 0.05）は擬似信頼域を明らかに外れている。 <mark class="hl">本文には Egger 検定・Begg 検定などの<strong>出版バイアスの定量的検定が一切報告されていない</strong></mark>。図を目視するかぎり小規模試験が左に多い非対称の傾向があり、<strong>小規模研究効果（small-study effect）を否定できない</strong>。</p>
+</div>
+<h3>10. 事後解析 — 抜管後患者のサブグループ（e-Appendix 1）🔁</h3>
+<p>原著のオンライン補遺（Supplemental file 1 / e-Appendix 1）に記載された内容を全て起こす。<strong>対象は抜管後の患者 n=2,741</strong>（全体3,881例の約71%）。</p>
+<h4>異質性</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>比較</th><th>I²</th><th>χ²</th><th>P値</th></tr></thead>
+<tbody>
+<tr><td>ICU死亡</td><td>HFNC vs NPPV</td><td>0%</td><td>0.36</td><td>0.84</td></tr>
+<tr><td>ICU死亡</td><td>HFNC vs COT</td><td>0%</td><td>0.18</td><td>0.91</td></tr>
+<tr><td>気管挿管率</td><td>HFNC vs COT</td><td>44%</td><td>8.96</td><td>0.11</td></tr>
+<tr><td>気管挿管率</td><td>HFNC vs NPPV</td><td>17%</td><td>2.40</td><td>0.30</td></tr>
+<tr><td>ICU LOS</td><td>HFNC vs COT</td><td>0%</td><td>2.39</td><td>0.66</td></tr>
+<tr><td>ICU LOS</td><td>HFNC vs NPPV</td><td>54%</td><td>4.32</td><td>0.12</td></tr>
+</tbody></table></div>
+<p>※ 原著の補遺本文は「<strong>ICU死亡でHFNCとNPPVの間に有意な統計的異質性が認められた（I²=0%、χ²=0.36、P=0.84）</strong>」と書いているが、==I²=0%・P=0.84 は異質性が「無い」ことを示す値であり、文と数値が矛盾している==。「only found」という語も含め、この一文は原文の誤記と考えられる。数値のほうを正とすべきである。</p>
+<h4>再挿管率（抜管後）</h4>
+<div class="tw"><table>
+<thead><tr><th>比較</th><th>OR（95%CI）</th><th>Z</th><th>P</th></tr></thead>
+<tbody>
+<tr><td><strong>HFNC vs COT</strong></td><td><strong>0.39（0.23–0.65）</strong></td><td>3.64</td><td><strong>0.0003</strong></td></tr>
+<tr><td>HFNC vs NPPV</td><td>1.07（0.82–1.40）</td><td>0.52</td><td>0.60</td></tr>
+<tr><td>全体</td><td>0.85（0.67–1.07）</td><td>1.40</td><td>0.16</td></tr>
+</tbody></table></div>
+<h4>ICU死亡（抜管後）</h4>
+<div class="tw"><table>
+<thead><tr><th>比較</th><th>OR（95%CI）</th><th>Z</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>HFNC vs COT</td><td>1.23（0.48–3.15）</td><td>0.44</td><td>0.66</td></tr>
+<tr><td>HFNC vs NPPV</td><td>1.22（0.80–1.87）</td><td>0.92</td><td>0.36</td></tr>
+<tr><td>全体</td><td>1.22（0.83–1.80）</td><td>1.02</td><td>0.31</td></tr>
+</tbody></table></div>
+<h4>ICU滞在日数（抜管後）</h4>
+<div class="tw"><table>
+<thead><tr><th>比較</th><th>平均差（95%CI）日</th><th>Z</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>HFNC vs COT</td><td>+0.94（−0.58〜+2.47）</td><td>1.21</td><td>0.23</td></tr>
+<tr><td>HFNC vs NPPV</td><td>−2.35（−6.32〜+1.63）</td><td>1.16</td><td>0.25</td></tr>
+<tr><td>全体</td><td>+0.11（−1.62〜+1.83）</td><td>0.12</td><td>0.90</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 抜管後の死亡は「点推定が反転」している 全体解析ではICU死亡の点推定がHFNC有利（vs COT 0.65、vs NPPV 0.63）だったのに対し、<mark class="hl">抜管後サブグループでは<strong>vs COT 1.23、vs NPPV 1.22 と逆方向に反転</strong>している</mark>（いずれも有意ではない）。信頼区間は広く、統計的には何も言えない。しかし<strong>「HFNCで挿管は減るが死亡は減らない、抜管後ではむしろ点推定が悪い側にある」という不整合を認識しておく</strong>必要がある。再挿管を減らしても死亡が減らないなら、その「再挿管回避」がどこまで患者利益なのかを問う余地がある。原著はこの反転に一切言及していない。</p>
+</div>
+<h3>11. 考察 — 著者の解釈 💭</h3>
+<p>原著DISCUSSIONの論旨を追う。</p>
+<p><strong>■ なぜHFNCはCOTより挿管を減らすのか（著者が挙げる4つの機序）</strong></p>
+<ol><li><strong>十分な分時換気量と酸素化の担保</strong>。HFNCは持続的な高流量酸素を供給し、一回換気量を増やし吸気流量動態を改善する。その結果、<strong>呼吸数の低下、呼吸仕事量の減少、胸腹部同調の改善</strong>が生じる。これには中枢性および反射性の神経機構が関与する。</li><li><strong>CO₂の速やかな低下</strong>。咽頭の<strong>死腔洗い出し効果（pharyngeal dead space washout）</strong>により、分時換気量のうちガス交換に関与する割合が増える。</li><li><strong>一定の酸素濃度の供給</strong>。高流量と、洗い出し効果でつくられる上気道の酸素リザーバにより、患者に届く酸素濃度が安定する。対照的に <strong>COTでは頻呼吸患者の要求流量を満たせないため、室内気の流入と吸入酸素の希釈により実際のFiO₂が大幅に低下する</strong>。</li><li><strong>持続的な肺胞リクルートメント</strong>。高流量が生む<strong>PEEP（2〜5 cmH₂O）</strong>により気道虚脱が減り、V/Qミスマッチが改善する。PEEPの量はわずかで開口により低下するとの報告もあるが、<strong>呼気終末肺容量を増やす作用はHFNC下で観察されている</strong>。</li></ol>
+<p>加えて、生理的条件に近い加温加湿が粘膜機能を保ち喀痰排出を助けるため、無気肺リスクが下がり酸素化が改善する。</p>
+<p><strong>■ なぜ死亡とICU滞在は変わらないのか</strong></p>
+<ul><li>乳児での報告と同様、成人でもHFNCはICU死亡・LOSをさらに減らすことはできなかった。</li><li>著者の説明：<strong>ICU死亡とLOSには呼吸状態そのもの以外の因子が大きく寄与する</strong>。とくに<strong>急性腎障害や心機能障害といった併存合併症</strong>。</li><li>さらに、<strong>一般病棟の空床状況や保険の状況といった医療資源・費用</strong>も転帰と強く関係しており、HFNCの好影響をある程度打ち消しうる。</li></ul>
+<p><strong>■ NPPVとの比較をどう位置づけたか</strong></p>
+<ul><li>NPPVはARF、さらにARDSにおいても酸素化と換気を改善することが広く認識されている。外因性PEEPで虚脱肺胞をリクルートし、シャントとV/Qミスマッチを減らす力があると考えられている。COTと違い比較的一定のFiO₂を供給できる点も利点。</li><li>しかしNPPVの有害事象という限界が、<strong>「NPPVによる不利益を避けつつ同等の有効性を保つ新しい酸素供給法」</strong>の探索を促してきた。</li><li>「NPPVはCOTと比べてARF患者のICU死亡を減らせない」という先行エビデンスと、本研究でHFNCについて同様の所見が得られたことを踏まえ、著者は <strong>HFNCとNPPVの非劣性検定</strong>を行った。結果、挿管・ICU死亡・LOSのいずれにも有意差がなかったことを、<strong>外因性PEEP・正確なFiO₂・十分な分時換気量の担保という「呼吸メカニクスとガス交換への作用が似ている」ことの表れ</strong>と解釈している。</li><li>さらに著者は、HFNCがNPPVに優る点として先行研究を引く。①<strong>安定した加温加湿ガスにより乾燥感が減り、快適性が高く忍容性に優れる</strong>。②<strong>インターフェースが優しく、会話や食事を妨げない</strong>。③<strong>抜管後患者では挿管率が低かった</strong>。</li><li>以上から著者は「<strong>HFNCはARF患者、とくに抜管後の患者において、NPPVの良い代替となりうる</strong>」と結論する。</li></ul>
+<p><strong>■ 著者自身が挙げる限界</strong></p>
+<p>主要な限界は<strong>統計的異質性</strong>であるとし、その理由を4つ挙げる。</p>
+<ol><li>採用試験における<strong>ARFの原因が不均一</strong>。ただし個々の呼吸不全の原因別データが独立して入手できなかったため、対応するサブグループ解析ができなかった。</li><li><strong>低酸素性呼吸不全と高炭酸ガス性呼吸不全でHFNCの効果は異なる可能性がある</strong>。しかしこれも生データがないためサブグループ解析ができなかった。</li><li><strong>APACHE II・SAPS IIから推測される重症度が多様</strong>であった。</li><li>試験間で<strong>初期流量・酸素濃度・治療期間が異なる</strong>ことも統計的異質性に寄与した。</li></ol>
+<p>加えて、<strong>盲検化が不可能であるためバイアスを完全には排除できない</strong>と述べている。</p>
+<h3>12. 結論（原著CONCLUSIONS）✍️</h3>
+<p>&gt; COTと比較して、HFNCはARF患者の気管挿管率を低下させうるが、ICU死亡もICU滞在日数も減らすことはできない。呼吸メカニクスが同様で臨床アウトカムも同等でありながら、コンプライアンスがより良く合併症がより少ないことから、<strong>HFNCはNPPVの信頼できる代替となりうる。とくに抜管後の患者において</strong>。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント — 抄録の結論文は英語として壊れている 抄録のConclusionsは "In patients with ARF, HFNC is a more reliable alternative of NIPPV to reduce rate of endotracheal intubation than COT." と書かれており、<strong>"than COT" が何と比較されているのか文法上は確定しない</strong>（「COTよりも信頼できるNPPVの代替」とも「COTよりも挿管率を下げる」とも読める）。 <mark class="hl">本文CONCLUSIONSのほうが明瞭であり、「especially in patients after extubation（とくに抜管後の患者において）」という<strong>抄録には無い重要な限定</strong>が付いている</mark>。引用するときは抄録ではなく本文の結論文を用いるべきである。</p>
+</div>
+<h2>🔗 既存ノートとの整合 — 姉妹論文（Zhao 2017, Crit Care）との対比</h2>
+<p>同じ2017年に、同じ問い（HFNC vs COT／HFNC vs NIV の挿管率）を扱った<strong>別のメタ解析</strong>がVaultにある。</p>
+<p><strong>まずDOIで別論文であることを確認済み</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th></th><th>本ノート</th><th>姉妹ノート</th></tr></thead>
+<tbody>
+<tr><td>論文</td><td>Ni YN ら</td><td>Zhao H ら</td></tr>
+<tr><td>誌</td><td><strong>CHEST</strong> 2017;151(4):764-775</td><td><strong>Critical Care</strong> 2017;21:184</td></tr>
+<tr><td><strong>DOI</strong></td><td><strong>10.1016/j.chest.2017.01.004</strong></td><td><strong>10.1186/s13054-017-1760-8</strong></td></tr>
+</tbody></table></div>
+<p><mark class="hl">DOIが異なるため統合せず、両ノートを並存させる</mark>。姉妹ノート＝<span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span></p>
+<h3>試験数・例数・効果量の対比</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th><strong>Ni 2017（本論文・CHEST）</strong></th><th><strong>Zhao 2017（CritCare）</strong></th></tr></thead>
+<tbody>
+<tr><td>採用研究数</td><td><strong>18試験</strong></td><td><strong>11研究</strong></td></tr>
+<tr><td>総例数</td><td><strong>3,881例</strong>（HFNC 1,893／NPPV 934／COT 1,054）</td><td><strong>3,459例</strong>（HFNC群 1,681）</td></tr>
+<tr><td>組み入れデザイン</td><td><mark class="hl"><strong>すべての比較研究</strong>（RCT 12・後ろ向き 4・前向きコホート 2）</mark></td><td><mark class="hl"><strong>RCTのみ</strong>（後ろ向き・観察研究は明示的に除外）</mark></td></tr>
+<tr><td>検索期間</td><td>1946年〜2016年10月</td><td>開始〜2016年10月20日</td></tr>
+<tr><td>データベース</td><td>PubMed・Embase・Medline・CENTRAL・ISI Web of Science（5つ）</td><td>Cochrane Library・Embase・Ovid Medline（3つ）</td></tr>
+<tr><td>事前登録・報告基準</td><td><strong>記載なし</strong></td><td><strong>PROSPERO CRD42016039581・PRISMA準拠</strong></td></tr>
+<tr><td>言語制限</td><td>なし</td><td>なし（ただし除外基準で英語・中国語以外を除外）</td></tr>
+<tr><td>主要アウトカム</td><td>挿管率</td><td>挿管率</td></tr>
+<tr><td>副次アウトカム</td><td>ICU死亡、ICU滞在日数</td><td>人工呼吸率、呼吸サポートのエスカレーション率、死亡</td></tr>
+<tr><td><strong>挿管 vs COT</strong></td><td><strong>OR 0.47（0.27–0.84）P=0.01</strong></td><td><strong>OR 0.52（0.34–0.79）P=0.002</strong></td></tr>
+<tr><td><strong>挿管 vs NPPV/NIV</strong></td><td><strong>OR 0.73（0.47–1.13）P=0.16</strong></td><td><strong>OR 0.96（0.66–1.39）P=0.84</strong></td></tr>
+<tr><td>死亡 vs COT</td><td>ICU死亡 OR 0.65（0.37–1.13）P=0.13</td><td>死亡 OR 1.01（0.67–1.53）P=0.96</td></tr>
+<tr><td>死亡 vs NPPV/NIV</td><td>ICU死亡 OR 0.63（0.34–1.18）P=0.15</td><td>死亡 OR 0.85（0.43–1.68）P=0.65</td></tr>
+<tr><td>ICU滞在日数</td><td>vs COT +0.30日／vs NPPV −1.21日（いずれも差なし）</td><td><strong>報告なし</strong></td></tr>
+<tr><td>異質性（挿管 vs NIV）</td><td><strong>I²=63%（P=0.02）</strong></td><td>ノートに記載なし</td></tr>
+<tr><td>対照を跨いだ全体プール</td><td><strong>実施している</strong>（OR 0.60, 0.41–0.86）</td><td><mark class="hl"><strong>明示的に否定</strong>（「COTとNIVをまとめて比較した先行メタ解析は誤解を招く」）</mark></td></tr>
+</tbody></table></div>
+<h3>この対比から読むべきこと</h3>
+<ol><li><strong>一致点は堅い</strong>。<mark class="hl"><strong>「HFNCはCOTより挿管を減らす」は、対象の作り方が違う2つのメタ解析で OR 0.47 と 0.52 と一致した</strong>。この結論は方法論の選択に対して頑健である</mark>。</li><li><strong>不一致点は「NPPV/NIVとの比較」に集中する</strong>。Ni は <strong>0.73</strong>、Zhao は <strong>0.96</strong>。<mark class="hl">Zhao はRCTのみを採用しており、Ni がRCT以外に含めた3つの観察研究（Coudroy 0.45／Nagata 0.05／Yoo 0.52）がすべて強くHFNC有利であることが差の説明として最も自然</mark>。本ノートのFigure 5の表を見ると、Ni のNPPV比較でRCT 3件（Frat 0.61／Hernández(2) 1.25／Stéphan 1.03）だけを見ればZhaoの0.96に近い値になる。<strong>「HFNCがNPPVよりやや良い」という印象は観察研究由来である可能性が高い</strong>、というのが両者を並べたときの結論。</li><li><strong>死亡の点推定は逆を向いている</strong>。Ni の ICU死亡 vs COT は <strong>0.65</strong>（HFNC有利方向）、Zhao の死亡 vs COT は <strong>1.01</strong>（完全に中立）。<mark class="hl">どちらも有意ではないので実質的な矛盾ではないが、「HFNCは死亡を減らしそうだ」と読むのは Ni の点推定だけを取り出した誤読になる</mark>。アウトカム定義もICU死亡と（時期の定義が明示されない）死亡で異なる。</li><li><strong>方法論の質は Zhao が上</strong>。PROSPERO事前登録・PRISMA準拠・RCT限定という3点で、Zhao のほうが現代のシステマティックレビューの標準に近い。<mark class="hl"><strong>同じ問いで両者が食い違うときは、Zhao の推定を優先して読む</strong></mark>。</li><li><mark class="hl"><strong>Zhao が名指しで批判している設計を、Ni はまさに実行している</strong></mark>。Zhao は「作用機序も臨床応用もまったく異なるCOTとNIVを合算すると患者の異質性と統計的バイアスが増す」と述べ、そのような先行メタ解析を「誤解を招く」と評した。Ni の Figure 5〜7 の "Total (95% CI)" 行（挿管 OR 0.60、死亡 OR 0.67、LOS −0.01日）は、まさにCOT対照とNPPV対照を合算したものである。<mark class="hl"><strong>Ni の "Total" 行は臨床的に解釈してはならない</strong></mark>。</li></ol>
+<h3>他の既存ノートとの関係</h3>
+<ul><li><span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span> — 本研究の9年後のガイドライン。<strong>病態別に推奨を分けている</strong>点で、本研究の「ARFを一括りにした」限界を後年の合意が引き受けている。本研究単独では病態別の適応は決まらない。</li><li><span class="wl">急性呼吸不全におけるHFNCのERS臨床実践ガイドライン — 8つの条件付き推奨（ERJ2022）</span> — 同じくHFNCの適応を病態別に整理した推奨。本研究の全体プール値ではなく、病態別の推奨に従うべき。</li><li><span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span> — 本研究の限界（病態混在）を直接埋めるレビュー。<strong>実務ではこちらを参照する</strong>。</li><li><span class="wl">HFNCのガイドライン（ICM2020）</span> — 本研究直後の時期の推奨。</li><li><span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span> — 本研究は「HFNCを始めるか」の話であり、「HFNCをいつ諦めるか」には答えない。ROXがその欠落を埋める。</li><li><span class="wl">免疫不全患者の急性呼吸不全に対するHFNC（HIGH試験）</span> — 本研究に含まれる Lemiale 2015（免疫不全100例、ベンチュリマスク対照、挿管 OR 1.92）と同じ病態を、より大規模なRCTで検証したもの。本研究の免疫不全サブセットは小さく、結論を持たない。</li><li><span class="wl">心原性肺水腫に対する非侵襲的陽圧換気（Cochrane 2019）</span> — <strong>本研究が答えられない領域</strong>。心原性肺水腫ではNPPVの有効性が別立てで確立しており、本研究の「HFNCはNPPVに劣らない」を持ち込んではいけない。</li><li><span class="wl">ヘルメット型NIV vs 対照戦略（システマティックレビュー・メタ解析）</span> — NPPV側のインターフェース改良という別の解決路線。本研究が前提とする「NPPV＝有害事象が多い」という図式を、インターフェースの側から変えにいく。</li><li><span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span> — 著者が「サブグループ解析できなかった」と述べた高炭酸ガス血症領域を扱う。</li><li><span class="wl">COPD増悪（軽度高CO2血症）でのHFNC vs 従来型酸素療法 RCT</span> — 同上。</li><li><span class="wl">HFNCとCPAPの生理は同じではない — 閉口で鼻咽頭圧6.8cmH2O、呼気抵抗増加が呼吸数低下を説明（ベンチ＋健常者・JApplPhysiol2022）</span> — <mark class="hl">本研究の考察が前提にする「HFNCとNPPVは呼吸メカニクスが似ている」という主張に、生理学の側から異議を唱える</mark>。著者の「similar respiratory mechanics」という論拠は、後年の生理学研究では単純には支持されない。</li><li><span class="wl">HFNC（ネーザルハイフロー）基礎まとめ</span> / <span class="wl">NPPV NIVの適応と原理</span> — 前提知識。</li><li><span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> — テーマのハブ。</li></ul>
+<h2>🔬 批判的吟味（ジャーナルクラブでの論点）</h2>
+<h3>論点1（最重要）— <mark class="hl">「非劣性」を主張しているが、非劣性試験になっていない</mark></h3>
+<ul><li>著者は Introduction で「<strong>COTとの優越性検定、NPPVとの非劣性検定を含む</strong>」と述べ、Discussion でも「<strong>HFNCとNPPVの非劣性検定を実施した</strong>」と書いている。</li><li>しかし、<strong>非劣性マージン（Δ）が一切事前設定されていない</strong>。実際に行われているのは<strong>通常の優越性検定</strong>であり、その結果が P=0.16 で有意でなかっただけである。</li><li><mark class="hl"><strong>「差が検出されなかったこと」は「差がないこと」の証明ではない</strong></mark>。しかも95%CIは <strong>0.47–1.13</strong> と幅広く、<strong>上限1.13は「HFNCがNPPVより13%オッズが高い（悪い）」可能性を排除できていない</strong>。</li><li><strong>JCで問うべき質問</strong>：「もし臨床的に許容できる非劣性マージンをOR 1.2に設定していたら、この結果は非劣性を示せていたか？」（CI上限1.13 &lt; 1.2 なので示せた可能性はあるが、<strong>それは事後の議論であり本研究の設計上の主張にはならない</strong>。）</li></ul>
+<h3>論点2 — 対照が異なるサブグループを1つに合算している</h3>
+<ul><li>Figure 5〜7 の "Total (95% CI)" 行は、<strong>COT対照とNPPV対照を合算した値</strong>（挿管 OR 0.60、ICU死亡 OR 0.67、LOS −0.01日）。</li><li><strong>「HFNCは何と比べて0.60倍なのか」が定義できない</strong>ため、この数値は臨床的に解釈不能である。</li><li>同時期の姉妹論文（Zhao 2017, Crit Care）がまさにこの設計を「誤解を招く」と名指しで批判している。</li><li>加えて、<strong>Frat 2015 のHFNC群106例が両サブグループで二重計上</strong>されている（unit-of-analysis error）。Figure 5 の Total 表示 1,999 例と本文の 1,893 例のずれがその証拠。</li></ul>
+<h3>論点3 — <mark class="hl">統計手法の記述が実装と一致しない</mark></h3>
+<ul><li>Methods は「<strong>仮説検証には Mann-Whitney U 検定を用い、有意性はZ値とP値&lt;0.05で示した</strong>」と書いている。</li><li>しかしフォレストプロットのヘッダは <strong>"M-H, Random, 95% CI"（Mantel-Haenszel ランダム効果）</strong> と <strong>"IV, Fixed, 95% CI"（逆分散 固定効果）</strong>。<strong>Mann-Whitney U検定はメタ解析の統合手法ではない</strong>。</li><li><strong>JCで問うべき質問</strong>：「独立した統計家が実施したと書かれているのに、Methodsの記述が実装と食い違っているのはなぜか。査読で気づかれなかったのはなぜか。」</li></ul>
+<h3>論点4 — RCT以外を混ぜたことの帰結</h3>
+<ul><li>18試験中 <strong>6試験（33%）が後ろ向き解析または観察研究</strong>。しかも <strong>HFNC vs NPPV の6試験のうち3試験（半分）が非ランダム化</strong>。</li><li>観察研究では<strong>治療選択そのものに交絡がある</strong>。実臨床ではNPPVの適応がある患者（高炭酸ガス血症、心原性肺水腫）にNPPVが、そうでない患者にHFNCが選ばれる。<mark class="hl"><strong>適応による交絡（confounding by indication）が、そのままHFNC有利の方向に効きうる</strong></mark>。</li><li>論点2で挙げた3つの非ランダム化試験（Coudroy 0.45／Nagata 0.05／Yoo 0.52）がすべてHFNC有利であることは、この交絡の存在と整合する。</li><li><strong>感度分析を実施したと書かれているが、「デザイン別（RCTのみ）の感度分析」の結果は報告されていない</strong>（「本文に無い」）。読者が最も知りたい感度分析が欠けている。</li></ul>
+<h3>論点5 — 組み入れ基準と実際に組み入れられた集団のずれ</h3>
+<ul><li>組み入れ基準は「<strong>呼吸数&gt;25回/分 かつ P/F≤300、または SaO₂&lt;92%（10〜12L/分下）、または SaO₂&lt;94%（室内気）</strong>」という<strong>明確なARFの生理学的定義</strong>である。</li><li>しかし実際に採用された試験には、<strong>Parke 2013・Corley 2015・Parke 2011・Nicolet 2011（心臓/胸部外科術後の予防的使用）や Hernández 2016（抜管後の予防）</strong>が含まれる。これらは<strong>この定義を満たさない患者を多数含む</strong>。</li><li><mark class="hl"><strong>「ARFの治療」と「ARFの予防」が同じ解析に入っている</strong></mark>。挿管が起きた割合を見ればこれは明白で、Parke 2011（0/29 vs 0/27）、Rittayamai 2015（0/20 vs 0/20）、Corley 2015（0/81 vs 2/74）、Jones 2016（1/165 vs 3/138）はイベントがほぼゼロ＝そもそも挿管の危機にない集団である。</li><li>抜管後サブグループが <strong>n=2,741（全体の71%）</strong> を占めることを踏まえると、<strong>本研究の実体は「ARFのメタ解析」というより「予防的HFNCのメタ解析」に近い</strong>。</li></ul>
+<h3>論点6 — 「異質性なし」という抄録の記載が自らの図と矛盾する</h3>
+<ul><li>抄録は「<strong>ICU死亡と挿管率（HFNC vs NPPV）を除き、アウトカム指標に有意な異質性は認められなかった</strong>」と書いている。</li><li>しかし <strong>Figure 5 の全体統合行は τ²=0.23、χ²=35.21、df=16、P=0.004、I²=55%</strong> であり、著者自身の基準（P&lt;0.1 かつ I²&gt;50%）で<strong>有意な異質性に該当する</strong>。</li><li>抄録の記述はサブグループ内の異質性のみを指しているものと解されるが、<mark class="hl"><strong>主要アウトカムの全体統合が異質性を伴っていることは抄録から読み取れない</strong></mark>。抄録だけを読むと、実態より均質な印象を受ける。</li></ul>
+<h3>論点7 — 出版バイアスを図示しただけで検定していない</h3>
+<ul><li>Figure 4 のファンネルプロットは提示されているが、<strong>Egger検定・Begg検定などの非対称性の定量的評価が報告されていない</strong>。</li><li>目視では、<strong>下半分（小規模試験）が左（HFNC有利）に偏る非対称</strong>が見られ、擬似信頼域の外に出るマーカーもある。</li><li><strong>JCで問うべき質問</strong>：「小規模試験効果を検定していれば、HFNC vs COT の OR 0.47 は減弱したのではないか。」</li></ul>
+<h3>論点8 — 事前登録・報告基準の欠如</h3>
+<ul><li><strong>PROSPERO等の事前登録の記載がない</strong>。<strong>PRISMA準拠の宣言もない</strong>。</li><li>したがって、<strong>アウトカムの選択や解析計画が事後に決まった可能性を排除できない</strong>。実際、抜管後サブグループ解析は「Post hoc analysis」と明記されている。</li><li>対照的に姉妹論文の Zhao 2017 は PROSPERO CRD42016039581 に登録されている。</li></ul>
+<h3>論点9 — ICU LOSの平均±SD変換</h3>
+<ul><li>論点として既述のとおり、<strong>Hernández 2016（平均6日・SD 24.87）、Stéphan 2016（平均6日・SD 31.22）、Hernández 2016(2)（平均3日・SD 21.72）は、SDが平均の4〜7倍</strong>という不自然な値。</li><li>ICU滞在日数は右に強く歪む分布であり、元論文の中央値・四分位範囲から変換された可能性が高いが、<strong>変換手順が本文に記載されていない</strong>（「本文に無い」）。</li><li>変換が妥当でなければ<strong>重みづけが歪み、信頼区間が過大または過小になる</strong>。ICU LOSの結論（差なし）自体は他の試験でも一貫しているため覆りにくいが、<strong>精度の表示は割り引いて読むべき</strong>。</li></ul>
+<h3>論点10 — 補遺の内部矛盾</h3>
+<ul><li>e-Appendix 1 の異質性の記述「<strong>ICU死亡でHFNCとNPPVの間にのみ有意な統計的異質性が認められた（I²=0%、χ²=0.36、P=0.84）</strong>」は、<strong>文と数値が正反対</strong>である。</li><li>本文の「12試験がRCT（引用番号 15-16, 18, 20, 22-25, 27-28, 30, 32）」「2試験が前向きコホート（引用番号 21, 27）」という記載も、<mark class="hl"><strong>引用番号27が両方のリストに入っている</strong></mark>。18試験の内訳（12＋4＋2）は合うが、個々の分類は照合できない。</li><li><strong>JCで問うべき質問</strong>：「これだけ校正上の綻びが残っている論文の数値を、どこまで信用してよいか。フォレストプロットの数値と本文の数値は一致していたか（＝本ノートで照合したかぎり一致していた）。」</li></ul>
+<h2>📚 主要引用文献一覧</h2>
+<p>本研究の考察と背景を支える主要な文献（原著の参考文献リストより、本文で実質的な役割を果たしているもの）。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ARDSの総説。ARFの背景</td><td>Ware LB, Matthay MA. *N Engl J Med*. 2000;342(18):1334-1349</td></tr>
+<tr><td>2</td><td>成人集中治療における多施設臨床研究</td><td>Cook D, Brower R, Cooper J, Brochard L, Vincent JL. *Crit Care Med*. 2002;30(7):1636-1643</td></tr>
+<tr><td>3</td><td>現代の呼吸ICUにおけるARF患者の生存率（国際多施設前向き調査）。死亡率最大50%の根拠</td><td>Vasilyev S, Schaap RN, Mortensen JD. *Chest*. 1995;107(4):1083-1088</td></tr>
+<tr><td>4</td><td>臨床試験外でのNPPV使用の実態（マサチューセッツ総合病院の経験）。ARF患者の約60%が挿管を要する根拠</td><td>Schettino G, Altobelli N, Kacmarek RM. *Crit Care Med*. 2008;36(2):441-447</td></tr>
+<tr><td>5</td><td>人工呼吸を受けた成人患者の特徴と転帰（28日間国際研究）。院内死亡30.7%の根拠</td><td>Esteban A, Anzueto A, Frutos F, et al. *JAMA*. 2002;287(3):345-355</td></tr>
+<tr><td>6</td><td>人工呼吸器関連肺炎とは何か、なぜ重要か</td><td>Kollef MH. *Respir Care*. 2005;50(6):714-721</td></tr>
+<tr><td>7</td><td>人工呼吸からのウィーニング</td><td>Boles JM, Bion J, Connors A, et al. *Eur Respir J*. 2007;29(5):1033-1056</td></tr>
+<tr><td>8</td><td>NIV実践の欧州調査</td><td>Crimi C, Noto A, Princi P, Esquinas A, Nava S. *Eur Respir J*. 2010;36(2):362-369</td></tr>
+<tr><td>10</td><td>ICUにおける抜管の判断</td><td>Thille AW, Richard JC, Brochard L. *Am J Respir Crit Care Med*. 2013;187(12):1294-1302</td></tr>
+<tr><td>11</td><td>急性期病院におけるNPPVの使用と転帰（マサチューセッツ州）</td><td>Ozsancak Ugurlu A, Sidhom SS, et al. *Chest*. 2014;145(5):964-971</td></tr>
+<tr><td>12</td><td>フランスのICUにおけるNIV使用の増加</td><td>Demoule A, Girou E, Richard JC, Taillé S, Brochard L. *Intensive Care Med*. 2006;32(11):1747-1755</td></tr>
+<tr><td>13</td><td>NPPVの合併症</td><td>Hill NS.（原文の該当箇所は本PDFの切り出し範囲外）</td></tr>
+<tr><td>15</td><td><strong>FLORALI試験</strong>。ARF 310例で HFNC vs COT vs NPPV。挿管率 38% vs 47% vs 50%（P=0.18）。本研究の主要な組み入れ試験</td><td>Frat JP, et al. 2015</td></tr>
+<tr><td>16</td><td><strong>抜管後患者でHFNCがCOTより再挿管を減らす</strong>（4.9% vs 12.2%、P=0.004）。本研究の抜管後サブグループの中核</td><td>Hernández G, et al. 2016</td></tr>
+<tr><td>17</td><td><strong>Cochrane Handbook</strong>。データ抽出の標準フォームとrisk of bias toolの出典</td><td>Higgins JPT, Green S（Cochrane Collaboration）</td></tr>
+<tr><td>56</td><td>低流量・高流量鼻カニュラで実際に供給される酸素濃度。COTでFiO₂が低下する根拠</td><td>Wettstein RB, Shelledy DC, Peters JI. *Respir Care*. 2005;50(5):604-609</td></tr>
+</tbody></table></div>
+<p>※ 原著の参考文献は全56件。上表は本文の論旨を支える主要文献のみを抜き出したもので、<strong>本PDFの参考文献リストで著者名・誌名・年まで確認できたものに限っている</strong>。番号は原著の付番。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>HFNCがCOTより減らすのは「挿管」だけ。死亡もICU滞在も動かない。そしてNPPVに対しては「差が出なかった」だけで、「劣らない」とは証明されていない</strong></mark>。</p>
+</div>
+<ul><li><strong>HFNC vs COT：挿管 OR 0.47（0.27–0.84）</strong>。<mark class="hl">この一点だけは、RCT限定の姉妹メタ解析（OR 0.52）とも一致し、頑健</mark>。</li><li><strong>HFNC vs NPPV：挿管 OR 0.73（0.47–1.13）で有意差なし</strong>。<mark class="hl">ただし非劣性マージンは設定されておらず、これは非劣性の証明ではない</mark>。<mark class="hl">RCTのみに絞った姉妹メタ解析では OR 0.96 とほぼ完全な同等になり、本研究の 0.73 は組み入れた観察研究3件が引き下げた値と考えるのが自然</mark>。</li><li><strong>ICU死亡・ICU滞在日数はどちらの比較でも不変</strong>（LOSの全体平均差は <strong>−0.01日</strong>）。<mark class="hl">HFNCの導入を「予後が良くなる」と説明してはいけない</mark>。</li><li><strong>本研究の重心は抜管後にある</strong>（n=2,741＝全体の71%）。<strong>抜管後の再挿管予防は vs COT OR 0.39（0.23–0.65）</strong>と明確。<mark class="hl">当院で最も適用しやすいのはここ</mark>。ただし<strong>抜管後の死亡は点推定が反転している（vs COT 1.23）</strong>ことも併せて覚える。</li><li><strong>Figure 5〜7 の "Total" 行（OR 0.60 など）は引用しない</strong>。<mark class="hl">COT対照とNPPV対照を合算した値であり、臨床的意味を持たない</mark>。</li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>COTで酸素化が保てない低酸素性ARF</td><td>高炭酸ガス血症がないか、心原性肺水腫でないか</td><td><strong>HFNCへ</strong>。本研究が最も強く支持する使い方（vs COT 挿管 OR 0.47）</td></tr>
+<tr><td>高炭酸ガス血症・心原性肺水腫がある</td><td>意識・気道保護・血行動態</td><td><strong>NPPVを選ぶ</strong>。本研究は病態別の適応に答えておらず、HFNCへの置き換え根拠にならない</td></tr>
+<tr><td>抜管直後でハイリスク</td><td>再挿管リスク因子（高齢・心不全・APACHE高値・咳嗽力低下）</td><td><strong>予防的HFNC</strong>。vs COT で再挿管 OR 0.39（0.23–0.65）。NPPVとは差なし（OR 1.07）</td></tr>
+<tr><td>抜管直後で低リスク</td><td>呼吸数・SpO₂・咳嗽</td><td>通常の酸素で可。本研究の低リスク群はイベントがほぼゼロ</td></tr>
+<tr><td>HFNCを開始した後</td><td><strong>ROX指数</strong>（SpO₂/FiO₂ ÷ 呼吸数）を定時評価</td><td>悪化なら躊躇せず挿管へ。<mark class="hl">本研究は「HFNCで粘ってよい」根拠にはならない</mark></td></tr>
+<tr><td>心臓・胸部外科術後の予防的酸素</td><td>呼吸不全の有無</td><td>本研究からは方針変更の根拠が得られない。施設の既存プロトコルに従う</td></tr>
+<tr><td>「HFNCで予後が良くなる」と説明されそうなとき</td><td>家族・スタッフへの説明内容</td><td><mark class="hl"><strong>死亡もICU滞在も変わらない</strong>と明示する。目的は挿管回避と快適性</mark></td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PIICSはPICSの上流にある免疫・代謝の病態 — 診断基準は未確立、症候群から測れるエンドタイプへ（Understanding the Disease・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08587-z.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">PIICSはPICSの上流にある免疫・代謝の病態 — 診断基準は未確立、症候群から測れるエンドタイプへ（Understanding the Disease・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Halacli B, David S, Lipcsey M. Persistent inflammation, immunosuppression, and catabolism syndrome: from conceptual framework to biological endotype. Intensive Care Med. 2026. doi:10.1007/s00134-026-08587-z</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-08-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08587-z" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08587-z</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Persistent inflammation, immunosuppression, and catabolism syndrome: from conceptual framework to biological endotype</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-026-08587-z.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-026-08587-z.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-026-08587-z.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>明日からどうするか（本稿は概念整理であり、診療を変える介入は提示していない） <strong>① 用語を院内で切り分ける。PIICS と PICS を同じ言葉として使わない。</strong> 本稿の最大の実務的価値はここにある。ICU在室中の患者について「免疫と代謝が壊れて回復しない状態」を語るときが PIICS、退室・退院後の生存者の「身体・認知・精神の機能障害」を語るときが PICS。当院のカンファ・退室サマリー・RRS記録で両者を混ぜると、対象患者も介入のタイミングも別物になる。既存ノート <span class="wl">PICS 集中治療後症候群（JAMA2026）</span> の定義（2010年 SCCM コンセンサス）と、本稿の PIICS の定義を並べて共有すると誤解が減る。</p>
+<p><strong>② 「14日を超えて臓器補助から離れない患者」を、退室調整だけでなく免疫・代謝の視点で見る。</strong> 本稿は CCI（慢性重症疾患）を「ICU滞在の遷延と臓器障害の持続」で定義し、図1と表1では <strong>ICU在室14日以上</strong>を臨床像として挙げている。当院で14日を超えて人工呼吸・血液浄化から離れない患者に対して、現状は「転院先」「気管切開」「リハ」の議論に寄りがちだが、本稿の枠組みではそこに <strong>反復する院内感染・創傷治癒不良・筋量減少</strong>が同時進行しているかを見る視点が加わる。</p>
+<p><strong>③ ただし、本稿からベッドサイドの新しい検査や治療は導入できない。</strong> <mark class="hl">本稿が繰り返し述べているのは「使える診断基準もバイオマーカーも無い」という現状であり、mHLA-DR・MDSC・PD-1 はいずれも研究用の測定である</mark>。CRP・リンパ球数・アルブミン・体重減少を組み合わせた運用的定義を当院で採用しても、本稿の指摘どおり非特異的で日々変動するため、「PIICSと診断した」と記録する運用は今は作らない方がよい。</p>
+<p><strong>④ 研究の接続点として。</strong> JIPAD×DPC 連結で長期ICU患者を追う枠組みは既にある（<span class="wl">遷延性・慢性重症疾患（PerCI・CCI）は定義次第で有病率も死亡率も変わる — 定義の標準化を求めるMatters Arising（CritCare2025）</span>）。本稿は「定義が揺れると疫学も治療開発も進まない」という同じ問題を免疫学の側から述べており、<strong>当院の長期重症例コホートに、リンパ球数・CRP・アルブミン・体重の経時データを最初から拾っておく</strong>だけでも将来の解析に効く。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：重症患者の救命率は大きく改善した。一方で <strong>7.6%</strong> が CCI（chronic critical illness、慢性重症疾患）へ移行し、そのうち <strong>30〜50%</strong> が PIICS として概念化された異常を呈する。PIICS は 2012年に外科ICUコホートで最初に記述され、遷延する炎症・免疫抑制・異化の3要素からなる。ベッドサイドでは何年も前から認識されてきた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：PIICS に<strong>普遍的に受け入れられた診断基準が無い</strong>。運用的定義は CRP・リンパ球数・血清アルブミン・体重減少の組み合わせに依存し、いずれも非特異的で動的。急性期との時間的境界も未定義。結果としてコホートごとに拾われ方が違う。そもそも <strong>PIICS が独立した病態なのか、CCI と敗血症性免疫麻痺の重なりに付けた便宜的なラベルにすぎないのかが決着していない</strong>。</li><li><strong>What's new（本稿の新規性・意義）</strong>：①PIICS を「3つの偶発的な問題」ではなく <strong>トリガーから臨床像まで一本で辿れる単一の免疫調節不全</strong>として読み直す病態生理の再構成、②<strong>PICS との役割分担の明示</strong>（PIICS＝上流の免疫・代謝状態、PICS＝生存者に現れる下流の機能的帰結）、③敗血症免疫学が進みつつある「多パラメータのエンドタイプ／combitype」への移行を <strong>PIICS はまだ経ていない</strong>と指摘し、症候群チェックリストから<strong>測定可能な生物学的実体</strong>への転換を提案したこと。パイロットコホートで「臨床基準を満たさないのに機能的異常はある」ことを根拠に、横断的定義では取り逃がすと主張する。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで PIICS は「炎症・免疫抑制・異化の3点セット」ではなく、<strong>制御の失敗によって自己増殖する1つの免疫・代謝ループ</strong>として理解すべきであり、診断基準が無いまま静的な代替マーカーで拾おうとするから研究も治療開発も進まない。<strong>症候群のチェックリストから、経時的に測る生物学的エンドタイプへ</strong>移行せよ、というのが本稿の主張である。</p>
+</div>
+<ul><li><strong>疫学の起点</strong>：重症患者の <strong>7.6%</strong> が CCI へ進み、そのうち <strong>30〜50%</strong> が PIICS 相当の異常を示す。完全な回復に至らず、反復感染・創傷治癒不良・筋消耗・機能低下・死亡へ向かう長期の脆弱状態に入る。</li><li><strong>PIICS と PICS の関係</strong>：PIICS は重大な急性侵襲（特に重症感染・敗血症・外傷）の後に生じうる <strong>免疫・代謝の状態</strong>。PICS は生存者に現れる<strong>下流の機能的帰結</strong>を記述するもので、両者は別物であると本稿は明記する。</li><li><strong>危険因子</strong>：高齢、急性腎障害（AKI）、市中感染ではなく<strong>院内感染</strong>であること。</li><li><strong>診断の空白</strong>：普遍的な診断基準が無い。運用的定義は CRP・リンパ球数・血清アルブミン・体重減少の組み合わせに依存し、非特異的・動的・多因子の影響を受ける。急性期からの時間的境界も未定義。</li><li><strong>病態生理の核</strong>：侵襲 → 自然免疫の急性活性化（サイトカイン放出・過剰炎症、これ自体は急性期には適切）→ <strong>決定的なのは制御の失敗</strong>。炎症を終息させるはずの対抗制御・炎症収束プログラムが破綻し、炎症が消えないまま深い免疫抑制と結合する。</li><li><strong>維持機構</strong>：骨髄由来抑制細胞（MDSC）の増加、T細胞疲弊、抗原提示能の低下、サイトカインシグナルの障害 — これらが持続的な異化シグナル（骨格筋崩壊・代謝機能障害）と共存する。<strong>並列ではなく相互に噛み合っている</strong>ため、自己維持的なループになる。</li><li><strong>現行アプローチの限界</strong>：現代のICU管理は急性臓器不全に集中しており、PIICS を規定する長期の免疫・代謝の歪みを扱っていない。<strong>PIICS 軌道に乗る患者を同定できる実行可能なバイオマーカーが無い</strong>。免疫・炎症を標的とした試験は主に早期病期に集中し、患者選択の不適切さ・免疫の異質性・生体内での標的関与を確認する機序的エンドポイントの欠如により結果が一貫しない。</li><li><strong>パイロットコホートの所見</strong>（引用文献6・著者自身の先行研究）：敗血症ICU患者を経時的に免疫プロファイリングしたところ、<strong>従来の PIICS 臨床基準を満たした患者は一人もいなかった</strong>。にもかかわらず大半で、機能的にしか検出できない不顕性の遷延炎症・免疫抑制が認められた — 単球系MDSCの持続的増加、濾胞ヘルパーT細胞上の <strong>PD-1 高値</strong>、単球 <strong>HLA-DR（mHLA-DR）低下</strong>。<strong>14日目が変曲点</strong>として浮上した。</li><li><strong>傍証</strong>：CCI へ進行する外科的敗血症患者の血中転写プロファイルは、速やかに回復する患者と <strong>1日目と14日目の両方で異なる</strong>（引用文献13）。機能面と転写面の両層で同じ時間的分岐が見える。</li><li><strong>提案</strong>：PIICS を測定可能な生物学的実体として定義すれば <strong>予測的エンリッチメント基準</strong>として機能する。候補戦略は敗血症の免疫調節から外挿したもの（免疫チェックポイント修飾、サイトカイン標的治療、代謝サポート、同化的介入）で、いずれも<strong>タイミングと層別化に依存</strong>する。</li><li><strong>結論の慎重さ</strong>：PIICS は臨床的に観察可能かつ生物学的に妥当な症候群だが、<strong>独立した実体としての地位は暫定的（provisional）</strong>であり、合意された診断基準と機序に根ざした研究による確認を待つ。ただしどちらであれ、既に集中治療における大きなアンメットニーズである。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — CCI・PIICS・PICS の3語を分ける（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>CCI（chronic critical illness、慢性重症疾患）</strong>：急性期を生き延びたが、ICU滞在が遷延し臓器障害が続く状態。本稿の定義は「prolonged ICU stay and ongoing organ dysfunction」で、図1と表1では <strong>ICU在室14日以上</strong>という数値が示されている（本文には14日という数字は出てこない）。重症患者の 7.6% が到達する。</p>
+<p><strong>PIICS（persistent inflammation, immunosuppression, and catabolism syndrome）</strong>：CCI 患者の 30〜50% に見られる、<strong>遷延する炎症・免疫抑制・異化</strong>の状態。2012年に Gentile らが外科ICUコホートで記述した（引用文献2）。本稿の言い方では「その軌道の底にある免疫・代謝状態（the immune–metabolic state underlying this trajectory）」。重大な急性侵襲、特に重症感染・敗血症・外傷の後に生じうる。</p>
+<p><strong>PICS（post-intensive care syndrome、集中治療後症候群）</strong>：2012年の Needham らの提言（引用文献3）に由来し、<strong>生存者に現れる下流の機能的帰結</strong>を記述する。</p>
+<p><strong>3語の関係</strong>（本稿の記述に忠実に）：</p>
+<div class="tw"><table>
+<thead><tr><th>用語</th><th>何を指すか</th><th>時間軸</th><th>記述の階層</th></tr></thead>
+<tbody>
+<tr><td>CCI</td><td>ICU滞在の遷延＋臓器障害の持続</td><td>ICU在室中</td><td>経過・軌道</td></tr>
+<tr><td>PIICS</td><td>その軌道の底にある免疫・代謝状態</td><td>ICU在室中（時間的境界は未定義）</td><td>生物学</td></tr>
+<tr><td>PICS</td><td>生存者の機能障害（downstream functional consequences）</td><td>退室・退院後</td><td>機能・生活</td></tr>
+</tbody></table></div>
+<p><strong>押さえておく略語</strong>：</p>
+<ul><li><strong>MDSC</strong>（myeloid-derived suppressor cell、骨髄由来抑制細胞）＝未熟な骨髄系細胞が増え、T細胞応答を抑え込む。敗血症性免疫抑制の代表的軸のひとつ。</li><li><strong>mHLA-DR</strong>（monocyte human leukocyte antigen-DR）＝単球表面のHLA-DR発現。低下＝抗原提示能の低下で、<strong>免疫麻痺（immunoparalysis）の広く受け入れられた代替指標</strong>と本稿が明記している。</li><li><strong>PD-1</strong>＝T細胞の免疫チェックポイント分子。高発現は T細胞疲弊（exhaustion）と結びつく。本稿では <strong>濾胞ヘルパーT細胞（T follicular helper cell）上の PD-1</strong> が測られた。</li><li><strong>endotype（エンドタイプ）</strong>＝症状の集まり（症候群）ではなく、背後の生物学的機序で定義した患者区分。<strong>combitype</strong> は複数のエンドタイプ指標を統合した区分で、引用文献11（Cajander ら、Lancet Respir Med 2024）由来の用語。</li><li><strong>予測的エンリッチメント（predictive enrichment）</strong>＝治療が効きやすい生物学的特徴を持つ患者だけを試験に組み入れ、効果検出力を上げる選択法。</li></ul>
+</div>
+<h3>2. 背景 — 救命率は上がったが、回復しきらない集団が残った 🫁</h3>
+<p>本稿の書き出しは、集中治療の到達点が広がったことと引き換えに生じた集団を提示する。重症患者の <strong>7.6%</strong> が CCI へ進行し、その <strong>30〜50%</strong> が PIICS として概念化された異常を発症する。彼らは完全な回復に到達せず、代わりに<strong>反復感染・創傷治癒不良・筋消耗・機能低下、さらには死亡</strong>によって特徴づけられる遷延した脆弱状態へと移行する。</p>
+<p>PIICS はもともと<strong>外科ICUコホート</strong>で記述されたが、現在はこの軌道の基盤にある免疫・代謝状態を指す語として使われている。生じうるのは重大な急性侵襲の後 — 特に<strong>重症感染・敗血症・外傷</strong>。そして本稿はここで PICS との関係を1文で切っている：PIICS は <strong>PICS とは別物</strong>であり、PICS は<strong>生存者における下流の機能的帰結</strong>を記述するものである、と。</p>
+<p>かつては理論的枠組みとして提唱された PIICS は、現在では臨床的・生物学的エビデンスの蓄積（<strong>逐次的な免疫プロファイリングのデータを含む</strong>）によって支持され、再現性があり臨床的に意味のあるフェノタイプであることが示されている、と著者は述べる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ この段落と次の段落は主張の強さが食い違う <mark class="hl">導入部は「再現性があり臨床的に意味のあるフェノタイプ」と断定するが、直後の節では「PIICS が独立した実体なのか便宜的ラベルなのかは contested（決着していない）」と書かれ、末尾でも「独立した実体としての地位は provisional（暫定的）」とされる</mark>。同じ論文の中で確信度が振れており、読むときは<strong>慎重側の記述（provisional・contested）を著者の本当の立場</strong>として受け取るのが妥当である。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<p>本稿は一次研究ではない。書誌情報どおり <strong>ICM の "Understanding the Disease" 枠の短報（末尾では letter と自称）</strong>であり、以下の点を明示しておく。</p>
+<ul><li><strong>デザイン</strong>：<strong>ナラティブな概念整理・オピニオン</strong>。系統的検索の記述は無い。PRISMA 等の報告ガイドラインへの言及も無い。</li><li><strong>対象・介入・比較</strong>：無し（PICO は成立しない）。</li><li><strong>データ</strong>：新規の患者データは提示されない。引用14件のうち、著者らのパイロットコホート（引用文献6・Halacli B ら, J Crit Care 2025）の結果が論述の中心的な支えになっている。</li><li><strong>統計解析</strong>：無し。数値は引用文献からの転記（7.6%、30〜50%）。</li><li><strong>図表</strong>：Figure 1（PIICS の悪循環の概念図）1点、Table 1（4ドメイン別の臨床像・現行マーカー・研究優先課題）1点。いずれも本文の要約であり、新規データではない。</li><li><strong>限界（評者による指摘）</strong>：<mark class="hl">7.6% と 30〜50% という2つの数値には、母集団・地域・診断定義・観察期間の記載が本文に無い</mark>。引用文献1（Mira JC ら, Crit Care Clin 2017）に遡らないと解釈できない。本稿の本文だけでは「どの ICU 集団の 7.6% か」は分からない。</li></ul>
+<h3>4. 病態生理 — 3つの偶然ではなく、1つの制御破綻 🔬</h3>
+<p>本稿で最も内容のある節。著者は「PIICS を3つの偶発的な問題としてではなく、<strong>トリガーから臨床フェノタイプまで一本で辿れる単一の免疫調節不全応答</strong>として読むのが最善である」と述べ、4段階で記述する。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>本文の記述</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>① 刺激（stimulus）</td><td>重大な侵襲 — 大きな感染、外傷、その他の重度ストレス。自然免疫のパターン認識経路を作動させる</td><td>ここまでは通常の急性期反応</td></tr>
+<tr><td>② エフェクター応答</td><td>サイトカイン放出を伴う自然免疫の急性活性化と過剰炎症。<strong>急性期には適切な反応である</strong></td><td>著者は明示的に「appropriate to the acute phase」と書く</td></tr>
+<tr><td>③ 決定的な出来事</td><td><strong>制御の失敗</strong>。この応答を終息させ免疫恒常性を回復させるはずの対抗制御プログラム・炎症収束プログラムが破綻する</td><td>ここが PIICS への分岐点</td></tr>
+<tr><td>④ 帰結</td><td>炎症は収束せずベースラインにも戻らず、代わりに<strong>深い免疫抑制と結合する</strong>（becomes coupled with profound immunosuppression）</td><td>炎症と免疫抑制が同時に成立する状態</td></tr>
+</tbody></table></div>
+<p>この持続状態を維持しているのは、定義可能な機序群である：</p>
+<ul><li><strong>MDSC の増加</strong></li><li><strong>T細胞の疲弊（exhaustion）</strong></li><li><strong>抗原提示の低下</strong></li><li><strong>サイトカインシグナルの障害</strong></li></ul>
+<p>そしてこれらが、<strong>骨格筋の崩壊と代謝機能障害を駆動する持続的な異化シグナル</strong>と共存する。</p>
+<p>著者が強調するのは「これらの機序は<strong>並列（parallel）ではなく相互に噛み合っている（interlocking）</strong>」という点である。だからこそ、炎症・免疫不全・異化が互いを強め合う<strong>自己維持的なループ（self-sustaining loop）</strong>を形成し、それが合わさって臨床フェノタイプを生む。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-026-08587-z" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-026-08587-z）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. PIICS ― 慢性重症疾患の自己維持的な悪循環（原図・無改変。© Springer-Verlag GmbH Germany, part of Springer Nature 2026） 中央に大きな青い円「Self-sustaining vicious cycle」を置き、その周囲を4つのパネル（A〜D）が時計回りに囲む構図。パネル間は青紫の楕円ラベル（Persistent inflammation／Recurrent infection／Sustained catabolism／Immunosuppression (paralysis)）でつながれ、円環が閉じることを示す。</p>
+</div>
+<h4>Figure 1 の全ボックスを表に起こす（図中の文言を漏らさず転記）</h4>
+<div class="tw"><table>
+<thead><tr><th>パネル</th><th>見出し</th><th>図中に描かれた要素</th><th>図中の説明文（訳）</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>Acute insult &amp; acute response（急性侵襲と急性期反応）</td><td>敗血症・感染／大外傷（骨のアイコン）／手術合併症（メスのアイコン）／心停止（心臓のアイコン）、ICUベッドの患者</td><td>急性侵襲が引き金となり、<strong>過剰炎症（サイトカインストーム）</strong>と<strong>代償性抗炎症反応</strong>が起こる</td></tr>
+<tr><td><strong>A→B の矢印</strong></td><td>Failure of resolution: Transition to chronic dysregulation（収束の失敗：慢性的な調節不全への移行）</td><td>—</td><td>患者は急性期を生き延びるが回復に失敗し、慢性的な脆弱性へ入る</td></tr>
+<tr><td><strong>B</strong></td><td>Persistent inflammation（遷延する炎症）</td><td>低レベルのサイトカイン産生が続く様子／単球・好酸球・好塩基球・好中球が血管内皮から遊出する図／炎症マーカー上昇（例：CRP）</td><td>炎症が収束しない＝<strong>不適応な慢性状態</strong>。慢性重症疾患。<strong>ICU在室の遷延（14日以上）と臓器補助への依存の持続</strong></td></tr>
+<tr><td><strong>C</strong></td><td>Immunosuppression (immune paralysis)（免疫抑制・免疫麻痺）</td><td>疲弊したT細胞とリンパ球減少（緑のT細胞アイコン）／MDSC（骨髄由来抑制細胞）の増加（紫の細胞アイコン）</td><td>深い免疫麻痺とT細胞疲弊。<strong>反復する院内感染、感染への高い感受性、病原体クリアランスの障害</strong></td></tr>
+<tr><td><strong>D</strong></td><td>Sustained catabolism（持続する異化）</td><td>骨格筋（赤い筋線維）／筋断面の変性像／崩れゆく筋組織のアイコン</td><td>骨格筋の崩壊とミトコンドリア機能障害。<strong>負の窒素バランス</strong>が身体的回復を妨げる。<strong>ICU獲得性筋力低下、創傷治癒の障害、機能的自立の喪失</strong></td></tr>
+<tr><td><strong>中央円</strong></td><td>Self-sustaining vicious cycle</td><td>—</td><td>炎症が異化を駆動し、異化が免疫不全を引き起こし、それが反復感染につながり、感染が炎症を再点火して循環が続く</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 図と本文で「同時か、順番か」が食い違う <mark class="hl">Figure 1 のパネルAは、急性侵襲が過剰炎症と代償性抗炎症反応を<strong>同時に（simultaneous）</strong>引き起こすと書くのに対し、本文の病態生理の節は「まず自然免疫の急性活性化があり、<strong>その後に</strong>対抗制御プログラムが破綻する」という<strong>時間的な順序</strong>として記述している</mark>。免疫抑制が最初から並走しているのか、収束機構の破綻の結果として現れるのかは、介入のタイミングを考えるうえで本質的な違いになる。本稿はこの点を統一していない。</p>
+</div>
+<h3>5. なぜ現在のアプローチでは届かないのか 🚧</h3>
+<p>本稿は3つの理由を挙げる。</p>
+<p><strong>① 焦点のずれ</strong> 現代のICU管理は<strong>急性臓器不全</strong>に大きく焦点を当てており、PIICS を規定する<strong>長期の免疫・代謝の歪み</strong>には向いていない。</p>
+<p><strong>② 実行可能なバイオマーカーの不在（本稿が "A central drawback" と呼ぶもの）</strong> PIICS の軌道に乗っている患者を同定できるバイオマーカーが無い。従来の検査値は<strong>特異度を欠き、免疫系の機能状態を捉えない</strong>。ここが本稿の中心的な批判で、CRP やリンパ球数が「どれだけ炎症があるか」を示しても「免疫が働けるか」を示さないという区別が根拠になっている。</p>
+<p><strong>③ 試験デザインの問題</strong> 炎症標的・免疫標的の介入試験は<strong>主に早期の病期に集中</strong>し、結果は一貫しなかった。著者が挙げる理由は3つ：</p>
+<ul><li>患者選択が不完全（imperfect patient selection）</li><li>免疫の異質性（immune heterogeneity）</li><li><strong>生体内での標的関与（target engagement in vivo）を確認する機序的エンドポイントの欠如</strong></li></ul>
+<p>3つ目は実務的に重要で、「免疫調節薬を投与したが、狙った免疫の異常が実際に是正されたかを測っていなかった」という指摘である。</p>
+<h3>6. 概念から「使えるエンドタイプ」へ — パイロットコホートが示したこと 🔬</h3>
+<p>敗血症免疫学は、単一マーカーによる症候群的ラベルから離れ、<strong>動的に測定される多パラメータのエンドタイプ</strong>へ、さらにそれらを統合した <strong>combitype</strong> へと移行しつつある（引用文献11）。本稿は「<strong>PIICS 自身はこの移行をまだ経ていない</strong>」と指摘する。したがって中心的な課題はもはや「PIICS を概念として肯定すること」ではなく、<strong>臨床基準から前提するのではなく生物学から導いた、測定可能な生物学的実体として定義すること</strong>である。</p>
+<p>その根拠として提示されるのが、著者らのパイロットコホート（引用文献6）である。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>対象</td><td>敗血症のICU患者（<strong>n数・施設・期間は本文に記載が無い</strong>）</td></tr>
+<tr><td>方法</td><td>経時的（longitudinal）な免疫プロファイリング</td></tr>
+<tr><td>PIICS 臨床基準の充足</td><td><strong>none met the conventional clinical criteria</strong> ＝ 従来の臨床基準を満たした患者は一人もいなかった</td></tr>
+<tr><td>それでも認められた所見</td><td>大半（most）で、<strong>機能的にしか検出できない</strong>不顕性の遷延炎症・免疫抑制</td></tr>
+<tr><td>具体的な3つの読み出し</td><td>① 単球系MDSC（monocytic MDSC）の持続的増加&lt;br&gt;② 濾胞ヘルパーT細胞上の <strong>PD-1 高値</strong>&lt;br&gt;③ <strong>単球HLA-DR（mHLA-DR）の低下</strong></td></tr>
+<tr><td>時間軸</td><td><strong>14日目が変曲点（inflection point）として浮上</strong></td></tr>
+</tbody></table></div>
+<p>著者は、この3つの読み出しがいずれも<strong>敗血症関連免疫抑制の確立された軸</strong>であることを補強する — mHLA-DR 低値は免疫麻痺の広く受け入れられた代替指標であり、MDSC の増加とチェックポイント関連のT細胞疲弊も同様に認知されている（引用文献11）。</p>
+<p>そして結論する：<strong>症候群基準を満たさないにもかかわらずこれらの機能的異常が存在したことは、PIICS が横断的定義では過小に認識されており、静的な代替指標から推測するより動的に捉えるほうがよく捕捉できることを示す。</strong></p>
+<p>この臨床像と免疫学的所見の乖離は自分たちのコホートに固有のものではない、として著者は引用文献13（Darden DB ら, J Clin Med 2021）を挙げる。<strong>CCI へ進行する外科的敗血症患者の血中転写プロファイルは、速やかに回復する患者とは 1日目と14日目の両方で異なっていた</strong>。機能的な層と転写の層の<strong>両方で同じ時間的分岐が見える</strong>、というのが著者の読みである。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ この節は「基準を満たさなくても病態はある」を、そのまま「基準が間違っている」に読み替えている <mark class="hl">誰も臨床基準を満たさなかったのに研究用測定では異常があった、という所見は、「臨床基準が鈍い」とも「研究用測定が病気でない人でも動く」とも読める</mark>。本稿はコホートに<strong>対照群（非敗血症・非重症）を置いた記述が無く</strong>、mHLA-DR 低下や MDSC 増加が PIICS に<strong>特異的</strong>である証拠は示されていない。しかもこのパイロットコホートは<strong>責任著者自身の先行研究</strong>であり、本稿の論証の要をなす。COI 申告は財務的利益相反についてのものなので、この構造的な利害（自らの研究を枠組みの根拠として提示している）は申告の対象外である点は、読み手が意識しておくべきである。</p>
+</div>
+<p><strong>予測的エンリッチメントとしての価値</strong>：PIICS を症候群のチェックリストではなく測定可能な生物学的実体として定義すれば、<strong>予測的エンリッチメント基準</strong>として機能する。敗血症全般でバイオマーカー誘導の選択が、有望な免疫調節試験を「選択しない集団での失敗」から切り分けてきたのと同じように、生物学的に定義された PIICS は患者選択を鋭くし、治療効果を検出できる可能性を高める。</p>
+<p>候補となる戦略は<strong>大部分が敗血症の免疫調節からの外挿</strong>であるとして、以下が挙げられる（いずれも<strong>適切なタイミングと層別化に依存する</strong>という留保付き）。</p>
+<ul><li>免疫チェックポイント修飾（immune checkpoint modulation）</li><li>サイトカイン標的治療（cytokine-targeted therapies）</li><li>代謝サポート（metabolic support）</li><li>同化的介入（anabolic interventions）</li></ul>
+<h3>7. Table 1 の全転記 — 4ドメイン × 臨床像 × 現行マーカーと研究優先課題 📋</h3>
+<h4>Table 1. PIICS における臨床的特徴・現行の運用マーカー・研究優先課題（原表を日本語化・全セル転記）</h4>
+<div class="tw"><table>
+<thead><tr><th>ドメイン</th><th>臨床的・生物学的特徴</th><th>現行のマーカーと研究優先課題</th></tr></thead>
+<tbody>
+<tr><td><strong>遷延する炎症</strong>&lt;br&gt;Persistent inflammation</td><td>・収束しない急性期反応&lt;br&gt;・自然免疫の活性化の持続&lt;br&gt;・サイトカインの調節不全</td><td>・<strong>CRP、フェリチン（非特異的）</strong>&lt;br&gt;・サイトカインプロファイリング、トランスクリプトミクス&lt;br&gt;・エンドタイプ誘導型の免疫調節試験</td></tr>
+<tr><td><strong>免疫抑制</strong>&lt;br&gt;Immunosuppression</td><td>・リンパ球減少、T細胞疲弊&lt;br&gt;・骨髄由来抑制細胞（MDSC）の増加&lt;br&gt;・抗原提示の低下、反復する院内感染</td><td>・<strong>絶対リンパ球数、mHLA-DR</strong>&lt;br&gt;・機能的免疫アッセイ（ex vivo 刺激試験）&lt;br&gt;・免疫チェックポイント修飾、サイトカイン標的治療</td></tr>
+<tr><td><strong>異化</strong>&lt;br&gt;Catabolism</td><td>・骨格筋の消耗、筋力低下&lt;br&gt;・負の窒素バランス&lt;br&gt;・創傷治癒の障害、機能の低下</td><td>・<strong>血清アルブミン、体重減少、超音波による筋評価</strong>&lt;br&gt;・早期リハビリテーションプログラム&lt;br&gt;・標的化した栄養療法と同化的戦略</td></tr>
+<tr><td><strong>臨床経過</strong>&lt;br&gt;Clinical trajectory</td><td>・<strong>ICU在室の遷延（14日以上）</strong>、臓器補助への慢性的依存&lt;br&gt;・機能的自立を取り戻せない&lt;br&gt;・<strong>集中治療後症候群（PICS）との重複</strong></td><td>・前向きの長期アウトカムコホート&lt;br&gt;・試験への機序的エンドポイントの組み込み</td></tr>
+</tbody></table></div>
+<p>*表脚注（原文）*：CRP＝C反応性蛋白、ICU＝集中治療室、mHLA-DR＝単球ヒト白血球抗原DR、PIICS＝遷延する炎症・免疫抑制・異化の症候群。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 表と本文が PICS の扱いで食い違う <mark class="hl">本文の導入は PIICS が PICS とは "distinct（別物）" だと明言するのに対し、Table 1 の「臨床経過」ドメインは PICS を「Overlap with post-intensive care syndrome（PICS との重複）」として PIICS の臨床的特徴の中に列挙している</mark>。別物なのか重複なのか、本稿は整理していない。実務上は「時間軸と記述の階層が違う（ICU在室中の生物学 vs 退室後の機能）ため概念としては別だが、同一患者では連続して起こる」と読むのが整合的だが、<strong>それは本稿が書いていることではなく評者の補完である</strong>。</p>
+</div>
+<h3>8. 前進の道筋（The way forward）🧭</h3>
+<p>著者の結語は、確信と留保を両方載せた慎重なものである。原文の慎重さのまま再現する。</p>
+<ul><li>PIICS は「<strong>臨床的に観察可能で生物学的に妥当な症候群</strong>」と見なすのが最善である。</li><li>ただし「<strong>独立した実体としての地位は、合意された基準と機序に根ざした研究が確認するまで暫定的（provisional）である</strong>」。</li><li>「<strong>いずれにせよ（either way）、それは既に集中治療における大きなアンメットニーズを表している</strong>」。</li><li>認識と有効な介入の間のギャップを埋めるには、以下の3つが必要である：</li></ul>
+<ol><li><strong>合意された診断基準</strong>（consensus diagnostic criteria）</li><li><strong>機序の解明</strong>（mechanistic insights）</li><li><strong>機能的な免疫・代謝エンドポイントを備えたトランスレーショナル試験</strong>（translational trials with functional immune and metabolic endpoints）</li></ol>
+<h2>🔍 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>既存ノートの記述</th><th>本稿の記述</th><th>整合性</th></tr></thead>
+<tbody>
+<tr><td>PICS の定義</td><td><span class="wl">PICS 集中治療後症候群（JAMA2026）</span>：2010年SCCMコンセンサス。「重症疾患の後に新規または悪化する身体・認知・精神の障害で、急性期入院を越えて持続するもの」。<strong>正式な診断名ではなく概念枠組み</strong></td><td>PICS は「生存者における下流の機能的帰結」を記述するもの。引用は2012年 Needham らの stakeholders' conference 報告</td><td><strong>矛盾しない</strong>。JAMAノートは2010年の会議、本稿は2012年の報告書を引く（同じコンセンサス会議の会議年と報告年）</td></tr>
+<tr><td>PICS の位置</td><td>JAMAノート：PICS は生存者の半数以上に生じる。退院後2〜4週での評価を推奨</td><td>PICS は PIICS の<strong>下流</strong>。評価時期への言及なし</td><td><strong>補完関係</strong>。本稿はICU在室中の上流、JAMAノートは退院後の下流を扱う</td></tr>
+<tr><td>診断名としての地位</td><td>JAMAノート：PICS は正式な診断名ではない</td><td>PIICS は「普遍的に受け入れられた診断基準を欠く」「独立した実体としての地位は暫定的」</td><td><strong>同じ構造の問題</strong>。両者とも「臨床的には見えるが診断名としては未確立」</td></tr>
+<tr><td>慢性重症疾患の定義</td><td><span class="wl">遷延性・慢性重症疾患（PerCI・CCI）は定義次第で有病率も死亡率も変わる — 定義の標準化を求めるMatters Arising（CritCare2025）</span>：定義次第で有病率が数%〜67%、院内死亡が7%〜61%まで動く</td><td>CCI は重症患者の <strong>7.6%</strong>（単一の数値として提示）</td><td><mark class="hl"><strong>注意が必要</strong></mark>。既存ノートが示したのは「CCI の有病率は定義次第で桁が動く」こと。本稿は 7.6% を定義の明示なしに提示しており、<strong>この数値を当院で引用するときは引用文献1に遡って定義を確認する必要がある</strong></td></tr>
+<tr><td>敗血症の免疫麻痺</td><td><span class="wl">敗血症の過剰炎症と免疫麻痺は単球の転写プログラムが違う（単一細胞RNA-seq・CritCare2026）</span>：過剰炎症と免疫麻痺は単球の転写プログラムのレベルで別物</td><td>PIICS では炎症と免疫抑制が「結合（coupled）」して同時に成立する</td><td><strong>補強関係</strong>。単一細胞レベルで別プログラムだからこそ、両者が同一患者で併存しうるという本稿の主張と整合する</td></tr>
+<tr><td>免疫代謝</td><td><span class="wl">周術期・集中治療における免疫代謝 — 免疫細胞は代謝を切り替えて戦う、ただし今日の診療を変える介入はまだない（ナラティブレビュー・BJA2026）</span>：免疫代謝の理解は進んだが臨床介入はまだ無い</td><td>PIICS の候補治療はすべて敗血症からの外挿で、タイミングと層別化に依存</td><td><strong>同じ結論</strong>。機序の理解と臨床介入の間にギャップがある</td></tr>
+<tr><td>筋消耗・ICU-AW</td><td><span class="wl">重症疾患関連筋力低下（CIW）— ICUから地域までの診断・治療・長期転帰（総説・CritCare2023）</span></td><td>異化ドメインの帰結として ICU獲得性筋力低下・創傷治癒障害・機能的自立の喪失</td><td><strong>矛盾しない</strong>。本稿は筋力低下を免疫・代謝ループの一要素として位置づける</td></tr>
+</tbody></table></div>
+<h2>⚖️ 批判的吟味（ジャーナルクラブでの論点）</h2>
+<p><strong>① 原著の内的不整合（本稿を読むときに必ず指摘すべき点）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>不整合</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>確信度の振れ</td><td>導入部は PIICS を「再現性があり臨床的に意味のあるフェノタイプ」と断定するが、次節では「独立した実体か便宜的ラベルかは contested」、結語では「地位は provisional」。同一論文内で3段階に揺れる</td></tr>
+<tr><td>2</td><td>「従来の臨床基準」の存在</td><td>「PIICS は普遍的に受け入れられた診断基準を欠く」と書きながら、パイロットコホートの記述では「誰も <strong>conventional clinical criteria</strong> を満たさなかった」と、あたかも確立した基準があるかのように書く。どの基準を用いたかは本文に無い</td></tr>
+<tr><td>3</td><td>PICS との関係</td><td>本文は「PICS とは distinct（別物）」、Table 1 は「PICS との overlap（重複）」。別物か重複か統一されていない</td></tr>
+<tr><td>4</td><td>同時か順次か</td><td>図1パネルAは過剰炎症と代償性抗炎症反応が<strong>同時</strong>に起こると書き、本文は急性活性化の<strong>後に</strong>制御が破綻すると書く</td></tr>
+<tr><td>5</td><td>「14日」の出所</td><td>ICU在室14日以上という数値は<strong>図1と表1にしか無く、本文には出てこない</strong>。一方でパイロットコホートの「14日目の変曲点」は本文にある。<strong>同じ14という数字が、CCI の定義（在室日数）と免疫学的な変曲点という別の意味で使われている</strong>が、両者の関係は論じられていない</td></tr>
+<tr><td>6</td><td>区分名の自称</td><td>誌面区分は "UNDERSTANDING THE DISEASE" だが、Declarations では "this letter" と自称</td></tr>
+<tr><td>7</td><td>冒頭の文が壊れている</td><td>"Survival after critical illness has improved substantially, yet as the boundaries of what is achievable have expanded." は文として完結していない（yet 以下が従属節のまま終わる）。編集上の瑕疵</td></tr>
+<tr><td>8</td><td>引用文献の略語衝突</td><td>引用文献7（Chadda KR ら, Br J Anaesth 2024）は<strong>同じ症候群を "PICS" と略記</strong>している。<mark class="hl">本稿が最も戒めている PIICS と PICS の混同が、自らの参考文献リストの中で起きている</mark></td></tr>
+</tbody></table></div>
+<p><strong>② 方法論上の限界</strong></p>
+<ul><li><strong>一次データが無い</strong>。7.6%・30〜50% は引用文献1からの転記で、母集団・地域・診断定義・観察期間は本文から確認できない。</li><li><strong>パイロットコホート（引用文献6）の詳細が本文にない</strong>。n数・施設・期間・対照群の有無・「conventional clinical criteria」の具体的な閾値のいずれも記載が無く、<strong>本稿だけでは所見の頑健さを評価できない</strong>。</li><li><strong>系統的レビューではない</strong>。引用14件は選択的で、PIICS に否定的な報告がどれだけあるかは分からない。</li><li><strong>循環論法のリスク</strong>：「PIICS の臨床基準では拾えない ⇒ だから生物学的定義が必要」という論証は、生物学的指標が PIICS <strong>に特異的</strong>であることを前提にしているが、その特異性は示されていない。mHLA-DR 低下も MDSC 増加も、PIICS に至らない敗血症患者でも起こりうる。</li></ul>
+<p><strong>③ エビデンスと著者の意見の切り分け</strong></p>
+<div class="tw"><table>
+<thead><tr><th>記述</th><th>種別</th></tr></thead>
+<tbody>
+<tr><td>CCI 7.6%、そのうち PIICS 30〜50%</td><td><strong>引用データ</strong>（文献1。ただし本稿には定義の記載なし）</td></tr>
+<tr><td>危険因子＝高齢・AKI・院内感染</td><td><strong>引用データ</strong>（文献7の系統的レビュー・メタ解析。ただし効果量は本稿に転記されていない）</td></tr>
+<tr><td>運用的定義が CRP・リンパ球数・アルブミン・体重減少に依存し非特異的</td><td><strong>事実の記述</strong>（文献2・4）</td></tr>
+<tr><td>パイロットコホートで誰も臨床基準を満たさず、機能的異常はあった</td><td><strong>引用データ</strong>（文献6・著者自身の研究）</td></tr>
+<tr><td>転写プロファイルが1日目・14日目で異なる</td><td><strong>引用データ</strong>（文献13）</td></tr>
+<tr><td>mHLA-DR が免疫麻痺の広く受け入れられた代替指標である</td><td><strong>合意された事実</strong>（文献11）</td></tr>
+<tr><td><strong>PIICS は「単一の調節不全応答」として読むのが最善である</strong></td><td><mark class="hl"><strong>著者の解釈・意見</strong></mark>。この読み方を支持する直接的な実証は本稿に示されていない</td></tr>
+<tr><td><strong>機序は並列ではなく相互に噛み合っている（interlocking）</strong></td><td><mark class="hl"><strong>著者の解釈・意見</strong></mark>。個々の機序は文献9・10で確認されるが、「噛み合っている」ことの実証は引かれていない</td></tr>
+<tr><td><strong>生物学的に定義された PIICS は患者選択を鋭くし治療効果の検出可能性を高める</strong></td><td><mark class="hl"><strong>著者の仮説</strong></mark>。PIICS で検証された事実ではなく、敗血症全般からの外挿として明示的にそう書かれている</td></tr>
+<tr><td><strong>候補治療（チェックポイント修飾・サイトカイン標的・代謝サポート・同化的介入）</strong></td><td><mark class="hl"><strong>著者の提案</strong></mark>。本稿は「largely extrapolated from sepsis immunomodulation」と自ら明記しており、<strong>PIICS を対象に検証された治療は1つも挙げられていない</strong></td></tr>
+<tr><td><strong>診断基準は「提案されたもの」か「合意されたもの」か</strong></td><td><mark class="hl"><strong>どちらでもない</strong></mark>。本稿は「合意された診断基準がまだ無い」ことを問題として提起しており、<strong>本稿自身も新しい基準を提案していない</strong>。表1の「現行マーカー」は基準ではなく現状の代替指標の列挙である</td></tr>
+</tbody></table></div>
+<p><strong>④ ジャーナルクラブで投げる問い</strong></p>
+<ul><li>当院で「PIICS」という語を診療記録に書く実務的な意味はあるか。診断基準が無い状態で名前を付けることの利益と害は。</li><li>「14日」という区切りは、CCI の定義としても免疫学的変曲点としても使われている。当院の長期ICU患者の把握はどの14日を採るべきか。</li><li>mHLA-DR や MDSC が測れない施設で、この枠組みから残るものは何か（＝反復院内感染・創傷治癒不良・筋量減少を「別々の合併症」ではなく「1つのループ」として見る視点そのもの）。</li><li>免疫抑制が確立した患者に対して、我々が既にやっている介入（早期リハ、栄養、感染管理、不要なステロイドの回避）のうち、このループを切りうるのはどれか。本稿はそれを論じていない。</li></ul>
+<h2>📚 主要引用文献一覧（本文で役割を持つもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>PIICS の総説。本稿の疫学数値（CCI 7.6%、うち PIICS 30〜50%）の出典</td><td>Mira JC, Brakenridge SC, Moldawer LL, Moore FA. Crit Care Clin. 2017;33(2):245–258. doi:10.1016/j.ccc.2016.12.001</td></tr>
+<tr><td>2</td><td><strong>PIICS の原記述</strong>。外科ICUにおける遷延炎症と免疫抑制</td><td>Gentile LF, Cuenca AG, Efron PA, Ang D, Bihorac A, McKinley BA, Moldawer LL, Moore FA. J Trauma Acute Care Surg. 2012;72(6):1491–1501. doi:10.1097/TA.0b013e318256e000</td></tr>
+<tr><td>3</td><td><strong>PICS の定義の出典</strong>。ICU退室後の長期アウトカム改善に関するステークホルダー会議報告</td><td>Needham DM, Davidson J, Cohen H, Hopkins RO, Weinert C, Wunsch H, et al. Crit Care Med. 2012;40(2):502–509. doi:10.1097/CCM.0b013e318232da75</td></tr>
+<tr><td>4</td><td>敗血症の病態生理・CCI・PIICS。運用的定義の非特異性の根拠</td><td>Mira JC, Gentile LF, Mathias BJ, Efron PA, Brakenridge SC, Mohr AM, Moore FA, Moldawer LL. Crit Care Med. 2017;45(2):253–262. doi:10.1097/CCM.0000000000002074</td></tr>
+<tr><td>5</td><td>CCI と PIICS の総説。「ICU依存」という表現の出典</td><td>Hawkins RB, Raymond SL, Stortz JA, Horiguchi H, Brakenridge SC, Gardner A, Efron PA, Bihorac A, Segal M, Moore FA, Moldawer LL. Front Immunol. 2018;9:1511. doi:10.3389/fimmu.2018.01511</td></tr>
+<tr><td>6</td><td><mark class="hl"><strong>本稿の論証の中核をなす著者自身のパイロットコホート</strong></mark>。敗血症患者の逐次的免疫プロファイリング。臨床基準は誰も満たさず、mMDSC増加・PD-1高値・mHLA-DR低下を検出、14日目が変曲点</td><td>Halacli B, Yilmaz K, Kara R, Bolat AB, Topeli A, Tezcan I, Halacli SO, Cagdas D. J Crit Care. 2025;89:155158. doi:10.1016/j.jcrc.2025.155158</td></tr>
+<tr><td>7</td><td>危険因子（高齢・AKI・院内感染）の出典。<strong>系統的レビュー＋メタ解析</strong>。<mark class="hl">論題では同じ症候群を "PICS" と略記している</mark></td><td>Chadda KR, Blakey EE, Davies TW, Puthucheary ZA. Br J Anaesth. 2024;133(3):538–549. doi:10.1016/j.bja.2024.03.038</td></tr>
+<tr><td>8</td><td>敗血症の免疫学。炎症収束プログラムの破綻の根拠</td><td>van der Poll T, Shankar-Hari M, Wiersinga WJ. Immunity. 2021;54(11):2450–2464. doi:10.1016/j.immuni.2021.10.012</td></tr>
+<tr><td>9</td><td>敗血症誘発性免疫抑制 — 細胞機能障害から免疫療法まで。MDSC・T細胞疲弊・抗原提示低下の機序の出典</td><td>Hotchkiss RS, Monneret G, Payen D. Nat Rev Immunol. 2013;13(12):862–874. doi:10.1038/nri3552</td></tr>
+<tr><td>10</td><td>重症疾患における急性骨格筋消耗。異化ドメインの根拠</td><td>Puthucheary ZA, Rawal J, McPhail M, Connolly B, Ratnayake G, Chan P, et al. JAMA. 2013;310(15):1591–1600. doi:10.1001/jama.2013.278481</td></tr>
+<tr><td>11</td><td><strong>エンドタイプ／combitype の概念</strong>、mHLA-DR の位置づけ、バイオマーカー誘導選択の出典。本稿が最も多く引く文献</td><td>Cajander S, Kox M, Scicluna BP, Weigand MA, Almansa Mora R, Flohé SB, et al. Lancet Respir Med. 2024;12(4):305–322. doi:10.1016/S2213-2600(23)00330-2</td></tr>
+<tr><td>12</td><td>敗血症誘発性免疫抑制の理解と治療の進歩</td><td>Venet F, Monneret G. Nat Rev Nephrol. 2018;14(2):121–137. doi:10.1038/nrneph.2017.165</td></tr>
+<tr><td>13</td><td>CCI へ進む敗血症生存者の白血球転写プロファイルが1日目・14日目とも速やかな回復者と異なる</td><td>Darden DB, Ghita GL, Wang Z, et al. J Clin Med. 2021;10(15):3211. doi:10.3390/jcm10153211</td></tr>
+<tr><td>14</td><td>敗血症免疫生物学の再構成 — 情報量のあるサブタイプ化と標的免疫調節へ</td><td>Shankar-Hari M, Calandra T, Soares MP, Bauer M, Wiersinga WJ, Prescott HC, et al. Lancet Respir Med. 2024;12(4):323–336. doi:10.1016/S2213-2600(23)00468-X</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>PIICS は PICS の別名でも略記違いでもない。PIICS＝ICU在室中に進行する免疫・代謝の状態、PICS＝退室後の生存者に現れる機能障害</strong>であり、本稿はこの上流と下流の切り分けを明示した点で最も価値がある。</mark></p>
+<p><mark class="hl"><strong>そして本稿が実際に伝えているのは「PIICS はまだ診断できない」という現状である。</strong></mark>普遍的な診断基準は無く、CRP・リンパ球数・アルブミン・体重減少という運用的指標は非特異的で、<mark class="hl"><strong>本稿も新しい基準を提案していない</strong></mark>。著者自身、PIICS が独立した実体である地位を「<strong>暫定的（provisional）</strong>」と表現している。</p>
+<p><mark class="hl"><strong>病態理解として持ち帰るのは1つ — 炎症・免疫麻痺・異化は3つの合併症ではなく、互いを強め合う1つのループである。</strong></mark>炎症が異化を進め、異化が免疫を壊し、免疫の破綻が院内感染を招き、感染が炎症を再点火する。14日を超えて臓器補助から離れない患者で、この4つを別々の問題として拾っていないかを見直す価値はある。</p>
+<p><mark class="hl"><strong>臨床行動を変える介入は本稿には無い。</strong></mark>チェックポイント修飾・サイトカイン標的・代謝サポート・同化的介入はいずれも敗血症からの外挿であり、著者自身が「タイミングと層別化に依存する」と留保している。</p>
+</div>
+<h4>判断の流れ（本稿の枠組みを診療の言葉に置き換えると）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ICU在室が14日を超え、臓器補助から離れない</td><td>反復する院内感染・創傷治癒不良・筋量減少が<strong>同時に</strong>起きていないか</td><td>3つを別々の合併症として扱わず、1つの遷延した免疫・代謝状態として症例カンファに載せる</td></tr>
+<tr><td>CRP が下がりきらない／リンパ球数が低いまま／アルブミンが低い</td><td>これらは<strong>非特異的な代替指標</strong>であり、免疫が機能しているかは示さない</td><td>「PIICS」と診断名を付けない。感染源検索・栄養・リハの standard care を続ける</td></tr>
+<tr><td>免疫調節薬（ステロイド等）の追加を検討したくなる</td><td>本稿の候補治療はすべて<strong>敗血症からの外挿で未検証</strong>。標的関与を確認する手段が院内に無い</td><td><mark class="hl">ルーチンの免疫調節は行わない</mark>。既存の適応（敗血症性ショックのヒドロコルチゾン等）の範囲を超えない</td></tr>
+<tr><td>退室が見えてきた／退室後の外来を組む</td><td>ここからは PIICS ではなく <strong>PICS の領域</strong></td><td><span class="wl">PICS 集中治療後症候群（JAMA2026）</span>・<span class="wl">PICS評価尺度の推奨20種類 — 754研究のスコーピングレビュー＋修正デルファイ（日本集中治療医学会PICS委員会・CritCare2023）</span> の評価尺度に接続する</td></tr>
+<tr><td>院内の長期重症例を数えたい・研究したい</td><td>「CCI 7.6%」は定義を明示せずに引用されている数値</td><td>当院での定義を先に1つ決める（<span class="wl">遷延性・慢性重症疾患（PerCI・CCI）は定義次第で有病率も死亡率も変わる — 定義の標準化を求めるMatters Arising（CritCare2025）</span> 参照）</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

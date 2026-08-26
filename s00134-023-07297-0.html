@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICUにおける概日リズム医学 — 環境・補助療法・臓器補助の3領域（What's New・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07297-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICUにおける概日リズム医学 — 環境・補助療法・臓器補助の3領域（What's New・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Luetz A, Spies C, Kervezee L. It's about time: circadian medicine in the intensive care unit. Intensive Care Med. 2023. doi:10.1007/s00134-023-07297-0</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-12-19）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07297-0" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07297-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>It's about time: circadian medicine in the intensive care unit</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07297-0.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07297-0.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07297-0.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>「Hotel ICU」プロジェクトにこの短報をどう接続するか <strong>【A】本稿の本文に根拠がある示唆</strong></p>
+<ul><li><strong>単発の介入では効かない、を出発点にする</strong>。本稿が名指しした2つの大規模RCTはいずれも陰性である（日中の高照度光曝露 734名／予防的メラトニン 847名）。したがって照明単体・薬剤単体を「導入すれば効く施策」として提案しない。</li><li><strong>本稿が提示する束（bundle）の構成要素は4つ</strong>：①高照度光曝露、②鎮静の低減（promotion of less sedation）、③耳栓とアイマスクの使用、④夜間騒音と予定ケア活動の削減。<mark class="hl">この4つはそのまま Hotel ICU の「音・光・睡眠」施策の骨格として使える</mark>。</li><li><strong>陽性だった唯一の介入は夜間の低用量デクスメデトミジン</strong>（心臓外科・非挿管 394名、OR 0.32、95%CI 0.10–0.83、p = 0.029）。鎮静薬の「種類」と「投与する時間帯」を分けて設計する発想は当院でも取り入れられる。ただし対象は人工呼吸を受けていない心臓外科患者であり、一般ICU患者への外挿は本稿も保証していない。</li><li><strong>持続栄養は概日破綻を増幅しうる</strong>という仮説が提示された。ただし根拠は非ICU集団の経静脈栄養データであり、ICUの経腸栄養では4件のRCTが進行中（下記 §7）。<mark class="hl">現時点で当院の栄養プロトコルを変える根拠にはならない</mark>。</li><li><strong>平均動脈圧の24時間リズムの減弱が ICU死亡と関連</strong>（OR 1.3、95%CI 1.1–1.5、p = 0.002）。バイタルの高頻度自動収集を持つ施設であれば検証可能な仮説である。</li></ul>
+<p><strong>【B】本稿の本文には無い、当院固有の判断（＝私見であることを明示する）</strong></p>
+<ul><li>本稿は<strong>具体的な照度（lux）・光照射の時刻と持続時間・メラトニンの投与量・騒音の目標 dB を一切記載していない</strong>（§10 で照合結果を示す）。当院で運用基準を作るなら、数値は本稿ではなく個別の原著（Simons 2016、Pro-MEDIC 2022 等）と当院の実測値から決める必要がある。</li><li>4要素のうち<strong>「夜間騒音と予定ケア活動の削減」は設備投資ゼロで今日から着手できる</strong>唯一の要素であり、Hotel ICU の初手として費用対効果が最も高いと考える。既に当院には騒音源のマッピングという先行知見がある（下記 関連ノート）。</li><li><strong>「鎮静の低減」は既に当院の A2F バンドル運用と重なる</strong>。概日リズムという新しい旗を立てるより、既存の鎮静プロトコル遵守率の指標に「夜間の深鎮静日数」を1本足すほうが実装コストが低い。</li><li>ICU退室後訪問の場面で「夜眠れたか」を構造化して聴取するなら、当院で既に検証されている RCSQ 日本語版が使える。本稿は評価尺度に一切言及していないので、これは当院側の補完である。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：概日時計は睡眠覚醒だけでなくホルモン・代謝・免疫・肺および心血管機能に24時間リズムを生む。視交叉上核（SCN）の中枢時計とほぼ全細胞の末梢時計からなり、組織特異的に数千の遺伝子発現に24時間リズムを作る。重症患者では概日リズムの破綻が高頻度かつしばしば重篤である。</li><li><strong>Unknown（分かっていなかったこと）</strong>：破綻した概日リズムを「回復させる介入」が臨床転帰を改善するのか。どの領域（環境／薬理／臓器補助）に、どの患者に、どのタイミングで介入すべきか。概日アウトカムをそもそも何で測るのか。</li><li><strong>What's new（本稿の新規性・意義）</strong>：新しいデータを提示するものではない。<strong>ICUで概日リズムに介入しうる領域を「①環境条件 ②補助療法 ③高度臓器補助」の3つに整理し、各領域の機会（✓）と障壁（✖）を1枚の図に対置させた</strong>点が貢献である。同時に、この分野の主要RCTが陰性であったことを隠さずに提示し、「巨大な未開拓のポテンシャルがあるが、エビデンスはこれから」という慎重な結論に着地している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICUの概日リズム医学には環境・補助療法・臓器補助という3つの介入領域があるが、<strong>大規模RCTで陽性だったのは夜間低用量デクスメデトミジンのみ</strong>であり、光もメラトニンも陰性だった。本稿は「有望だが未証明」を正直に述べた研究アジェンダの提案である。</p>
+</div>
+<ul><li>概日時計は<strong>中枢時計（視交叉上核 SCN）と、ほぼ全細胞に存在する末梢時計</strong>からなる。分子機構が組織特異的に数千の遺伝子発現に24時間リズムを生成する。</li><li>重症患者では概日破綻が高頻度かつしばしば重篤で、<strong>臨床・ホルモン・分子パラメータの日内リズムの「振幅の異常」と「ピーク位相のずれ」</strong>として現れる。</li><li>概日破綻は患者の病態生理の<strong>結果であると同時に、臓器障害の発生に寄与して転帰を悪化させうる</strong>（双方向の関係）。</li><li>支持する2つの観察所見：①<strong>時計遺伝子発現の概日リズムの消失が炎症マーカー高値と関連</strong>、②<strong>平均動脈圧の24時間リズムの減弱が ICU死亡率の増加と関連</strong>（OR 1.3、95%CI 1.1–1.5、p = 0.002）。</li><li>介入の可能性は3領域に整理される（Fig. 1）。<strong>① 環境条件</strong>（光・騒音・中断）、<strong>② 補助療法</strong>（薬理・非薬理）、<strong>③ 高度臓器補助</strong>（人工呼吸・血液浄化など）。</li><li><strong>領域①の最大RCT（734名、日中の高照度光曝露）は陰性</strong>。せん妄発生率その他の臨床転帰に有意な効果なし。著者らは「単独の対策ではなく circadian-proof なICU環境という介入バンドルが必要だろう」と述べる。</li><li><strong>領域②のメラトニンRCT（847名、多施設、予防投与）も陰性</strong>。一方で<strong>夜間低用量デクスメデトミジンのRCT（394名、心臓外科・非挿管、プラセボ対照）はせん妄発生率を低下</strong>させた（OR 0.32、95%CI 0.10–0.83、p = 0.029）。</li><li>領域②にはさらに<strong>分子時計を直接標的とする薬物</strong>（REV-ERBα 修飾因子）、<strong>時間を考慮した栄養</strong>、<strong>理学療法</strong>が挙がる。ICUでの時間制限経腸栄養は4件のRCTで検証中。</li><li><strong>領域③の根拠は前臨床のみ</strong>。マウスを休止期に人工呼吸へ曝露すると活動期より VILI が重篤だった、という1報が引かれる。</li><li>結論：<strong>巨大な未開拓の研究ポテンシャルがあるが臨床エビデンスは現状限られる</strong>。実装には患者の受容性・潜在的リスク・スタッフのコンプライアンスという実務的課題が伴う。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 概日リズムの基礎（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>概日リズム（circadian rhythm）</strong>とは、外界の手がかりが無くてもおよそ24時間周期で自律的に振動する体内の時間構造をいう。ラテン語の circa（およそ）+ dies（1日）が語源である。</p>
+<p><strong>中枢時計</strong>は視床下部の<strong>視交叉上核（SCN：suprachiasmatic nucleus）</strong>にある。網膜から入る光の情報を受け取り、体内の時刻を外界の昼夜に合わせる（同調＝entrainment）。<strong>末梢時計</strong>は肝・肺・心・腸・骨格筋など、ほぼ全ての細胞に存在し、SCN からの神経・液性シグナルによって時刻を揃えられている。</p>
+<p><strong>時計遺伝子</strong>（CLOCK、BMAL1、PER、CRY、REV-ERBα など）が転写・翻訳のフィードバックループを作り、約24時間の振動を生む。この振動が下流の数千の遺伝子の発現を組織ごとに時間で切り分けている。だから「同じ薬・同じ換気設定でも、投与する時刻によって効果と害が変わりうる」という発想（時間薬理学＝chronopharmacology）が成り立つ。</p>
+<p><strong>同調因子（Zeitgeber、ツァイトゲーバー）</strong>は体内時計に時刻を教える外部の手がかりのことで、最も強力なのは<strong>光</strong>である。食事のタイミング、身体活動、社会的接触も同調因子として働く。</p>
+<p><strong>概日ミスアライメント（circadian misalignment）</strong>とは、体内時計の指す時刻と実際の行動（睡眠・食事・活動）がずれた状態を指す。交代勤務者で代謝異常が増えるのはこれで説明される。</p>
+<p><strong>ICUで何が問題か</strong>：ICUは光が不規則で、騒音が過剰で、ケアによる中断が頻回である。つまり<strong>同調因子が弱く、しかも互いに矛盾した信号を体内時計に送り続ける環境</strong>である。加えて鎮静薬・昇圧薬・持続栄養・人工呼吸そのものがリズムを乱す。結果として重症患者では概日リズムが壊れる。本稿は「それを治せば転帰が良くなるのではないか」という仮説を、3つの介入領域に分けて検討したものである。</p>
+<p><strong>本稿で出てくる略語</strong>：SCN＝視交叉上核／VILI＝人工呼吸器誘発肺傷害（ventilator-induced lung injury）／REV-ERBα＝核内受容体型の時計蛋白／TDM＝治療薬物モニタリング（target drug monitoring）／INTM＝間欠的（intermittent）／Adv.＝advanced（高度）。</p>
+</div>
+<h3>2. 本稿の体裁と作法（Methods に相当するもの）📐</h3>
+<p>原著研究ではないため、通常の Methods セクションは存在しない。ジャーナルクラブで扱う際は、以下を「デザイン」として明示的に置き換えて評価する。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本稿の実態</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>ICM誌の「WHAT'S NEW IN INTENSIVE CARE」コラム。専門家による論説（narrative）</td></tr>
+<tr><td>文献検索</td><td><strong>記載なし</strong>。検索式・データベース・期間・選択基準はいずれも示されていない</td></tr>
+<tr><td>対象（P）</td><td>重症患者一般。年齢・疾患・重症度による限定なし</td></tr>
+<tr><td>介入（I）</td><td>概日リズムを考慮した介入。3領域（環境／補助療法／高度臓器補助）に分類</td></tr>
+<tr><td>比較（C）</td><td>明示されない（各引用研究の比較群に依存）</td></tr>
+<tr><td>アウトカム（O）</td><td>せん妄発生率・ICU死亡・代謝アウトカム・在院日数など。<strong>本稿として統一されたアウトカム定義は無い</strong></td></tr>
+<tr><td>統合方法</td><td><strong>なし</strong>。効果量の統合は行わず、代表的な研究を選んで文中に列挙する形式</td></tr>
+<tr><td>引用文献</td><td>15件。うち機序・総説が5件、RCTが3件、観察研究が3件、前臨床が1件、研究アジェンダが1件</td></tr>
+<tr><td>図表</td><td>Fig. 1 のみ（概念図。数値データを含まない）</td></tr>
+<tr><td>事前登録</td><td>該当なし</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>読むときの前提 — これは「エビデンスの要約」ではなく「研究アジェンダの提案」である 文献の選択基準が示されていない以上、本稿に載っていない陽性研究・陰性研究が存在する可能性を常に想定する。著者が選んだ3つのRCT（734名・847名・394名）が、この領域の全RCTを代表しているという保証は本稿からは得られない。</p>
+</div>
+<h3>3. ICU患者における概日リズムの破綻 🕰️</h3>
+<p>本稿は冒頭で、概日破綻が重症患者において「common and often severe（高頻度かつしばしば重篤）」であると述べる。その現れ方は次の2つである。</p>
+<ul><li><strong>振幅の異常（aberrant amplitudes）</strong> — リズムの山と谷の差が小さくなる、あるいは不規則になる</li><li><strong>ピーク時刻のずれ（altered peak timing）</strong> — 本来の時刻とは違う時間帯に最大値が来る</li></ul>
+<p>対象となるパラメータは「臨床的・ホルモン的・分子的」の3層にわたる、と明記されている。</p>
+<p>因果の向きについて、本稿は<strong>双方向性</strong>を明示する。すなわち概日破綻は「患者の病態生理状態から結果として生じうる（may result from）」と同時に、「臓器障害の発生に寄与し、結果として転帰を悪化させる（concurrently contributing to the development of organ dysfunction, consequently worsening outcomes）」。この双方向性が、本稿全体の論理的な土台である。</p>
+<h4>支持する2つの観察所見</h4>
+<div class="tw"><table>
+<thead><tr><th>所見</th><th>内容</th><th>効果量</th><th>デザイン</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>分子レベル</td><td><strong>時計遺伝子発現の概日リズムの消失</strong>が炎症マーカー高値と関連</td><td>数値の記載なし</td><td>観察研究（ClinCirc）</td><td>Cunningham PS et al. *J Clin Invest* 2022</td></tr>
+<tr><td>臨床レベル</td><td><strong>平均動脈圧の24時間リズムの減弱</strong>が ICU死亡率の増加と関連</td><td><strong>OR 1.3、95%CI 1.1–1.5、p = 0.002</strong></td><td>観察研究</td><td>Gao Y et al. *Crit Care Med* 2018</td></tr>
+</tbody></table></div>
+<p>この2つから著者らは、「生理機能の概日制御の喪失は ICU患者の転帰不良を予測しうる」という中間結論を置き、そこから「<strong>概日リズムを回復させる介入が臨床転帰を改善しうる</strong>」という仮説へ進む。この推論の飛躍が本稿の最大の弱点であり、§11 で改めて検討する。</p>
+<h3>4. Figure 1 — 3領域の機会（✓）と障壁（✖）🖼️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07297-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07297-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 重症医療における概日介入の各領域の機会（✓）と課題（✖）（原図・無改変。© 2023 Springer-Verlag GmbH Germany）</p>
+</div>
+<h4>図の構成（眼に浮かぶレベルの記述）</h4>
+<p>中央に半透明の人体シルエットが立ち、脳・肺・消化管・骨格筋にそれぞれ小さな時計のアイコンが描かれる。脳内に「SCN」が赤字でラベルされ、<strong>赤い矢印が SCN から末梢臓器へ</strong>向かう（中枢から末梢への制御）。逆に<strong>青い矢印が末梢から SCN へ</strong>戻る（循環ホルモンと自律神経による末梢からのフィードバック）。臓器のラベルは、肺＝Mechanical Ventilation、消化管＝Nutrition、骨格筋＝Early Mobilisation と、それぞれ対応する治療介入名で示される。</p>
+<p>人体を取り囲むように<strong>灰色の太い矢印が時計回りの円環</strong>を作り、円環上に灰色の丸で「Circadian Disruption（概日破綻）」→「Organ Dysfunction（臓器機能障害）」→「Organ Failure（臓器不全）」が並び、再び Circadian Disruption に戻る悪循環を表現する。この円環に<strong>3つの色付きの丸いアイコンが割り込む形で配置</strong>され、それぞれが介入領域を示す。</p>
+<ul><li>左（水色）：太陽と月のアイコン＋「Environment（環境）」</li><li>右上（黄色）：手のひらに心臓を載せたアイコン＋「Adjuvant Therapy（補助療法）」</li><li>下（青紫）：モニター画面のアイコン＋「Adv. Organ Support（高度臓器補助）」</li></ul>
+<p>各アイコンから吹き出す形で、同色の枠線を持つボックスが3つ配置される。<strong>各ボックスは点線で上下2段に分かれ、上段が緑のチェックマーク（✓＝機会）、下段が赤いバツ印（✖＝障壁）</strong>である。上段の項目は緑文字、下段の項目は赤文字で書かれる。</p>
+<h4>全ボックス・全ラベルの転記（原図の文言をそのまま日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>✓ 機会（緑・上段）</th><th>✖ 障壁（赤・下段）</th></tr></thead>
+<tbody>
+<tr><td><strong>Environment（環境）</strong>&lt;br&gt;水色枠</td><td>・アラーム管理（Alarm management）&lt;br&gt;・夜間のベッドサイド介入を避ける（Avoid bedside interventions at night）&lt;br&gt;・アイマスクと耳栓（Eye masks &amp; ear plugs）&lt;br&gt;・ICU（病室）の建築設計（ICU (room) architecture）&lt;br&gt;・光療法（Light therapy）</td><td>・アルゴリズムが未開発（Algorithms yet to be developed）&lt;br&gt;・実行可能性が限られる、「文化の変革」（Limited feasibility, "culture change"）&lt;br&gt;・患者が主体性の喪失を感じる（Patients feel loss of control）&lt;br&gt;・コスト（Costs）&lt;br&gt;・ICU患者に有効な光アルゴリズムが不明（Effective light algorithms for ICU patients unknown）</td></tr>
+<tr><td><strong>Adjuvant Therapy（補助療法）</strong>&lt;br&gt;黄色枠</td><td>・深鎮静を避ける（Avoid deep sedation）&lt;br&gt;・鎮静薬の選択（Choice of sedatives）&lt;br&gt;・時間薬理学：抗菌薬と抗炎症薬（Chronopharmacology: antimicrobial &amp; anti-inflammatory）&lt;br&gt;・早期離床（Early Mobilisation）&lt;br&gt;・間欠的経腸栄養（INTM enteral feeding）&lt;br&gt;・メラトニン（Melatonin）</td><td>・患者の受容性（Patient acceptance）&lt;br&gt;・睡眠段階判定が困難（Sleep staging difficult）&lt;br&gt;・人員の制約と血行動態の不安定さ（Limited staff &amp; haemodynamic instability）&lt;br&gt;・TDM（治療薬物モニタリング）が困難になる（TDM becomes difficult）&lt;br&gt;・患者の不耐性、誤嚥（Patients intolerance, aspiration）&lt;br&gt;・敗血症患者での高メラトニン血症（High melatonin in septic patients）</td></tr>
+<tr><td><strong>Adv. Organ Support（高度臓器補助）</strong>&lt;br&gt;青紫枠</td><td>・夜間血液透析（Nocturnal haemodialysis）&lt;br&gt;・人工呼吸のタイミング（Timing of mechanical ventilation）</td><td>・血行動態の不安定さ（Haemodynamic instability）&lt;br&gt;・時間変動する換気スケジュールと人工呼吸器設定が不明（Time-varying ventilation schedules &amp; ventilator settings unclear）</td></tr>
+</tbody></table></div>
+<h4>図の凡例（原文キャプションの全訳）</h4>
+<p>&gt; 重症医療における概日介入の各領域の機会（✓）と課題（✖）。重症患者における概日リズムの障害は、臓器機能障害の結果であるだけでなく、進行中の臓器不全に寄与する因子でもありうる。臓器特異的な時計遺伝子は視床下部の視交叉上核（SCN）によって制御される（赤い矢印）。SCN は網膜からの環境光の手がかりと他の脳領域からのシナプス入力を処理するだけでなく、循環ホルモンと自律神経シグナルによって末梢からのフィードバックも受け取る（青い矢印）。集中治療は臨床ケアの複数の層を調整することによって概日ネットワークを考慮すべきである。 &gt; 略語：Adv.＝advanced（高度）、GI＝gastrointestinal（消化管）、INTM＝intermittent（間欠的）、MV＝mechanical ventilation（人工呼吸）、TDM＝target drug monitoring（治療薬物モニタリング）</p>
+<p>図の読み方として重要なのは、<strong>本文が扱っていない項目がボックスには複数含まれる</strong>という点である。本文にはアラーム管理・ICU建築設計・夜間血液透析・時間薬理学（抗菌薬／抗炎症薬）・早期離床への言及が無い、あるいはごく短い。図のほうが本文より広い主張をしているので、図から引用する際は「本文に根拠の記述は無い」と断る必要がある。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>図に対する2つの技術的注記</p>
+<ul><li>凡例に <code>MV mechanical ventilation</code> と <code>GI gastrointenstinal</code> が挙げられているが、<strong>図中に MV という略語は現れず</strong>（肺のラベルは "Mechanical Ventilation" と完全表記）、<strong>GI も "GI-Tract" として1箇所に現れるのみ</strong>である。凡例が図の実装と一致していない。なお <code>gastrointenstinal</code> は原文のスペルミスである（正しくは gastrointestinal）。</li><li>図は「機会」と「障壁」を対等に並べるが、<strong>機会の側に効果量や研究の裏付けは一切添えられていない</strong>。図単体を切り出してスライドに使うと、未検証の介入が検証済みの介入と同格に見えてしまう。</li></ul>
+</div>
+<h3>5. 領域① 環境条件 💡</h3>
+<h4>5.1 ICU環境の何が問題か</h4>
+<p>本稿はICU環境を「<strong>不規則な光パターン（irregular light patterns）、過剰な騒音（excessive noise）、頻回の中断（frequent interruptions）</strong>」で特徴づけ、その結果として概日システムに「弱く、かつ矛盾した入力（weak and conflicting input）」を与える状態が作られる、と述べる。</p>
+<p>「弱い」と「矛盾した」を分けて書いている点が重要である。単に手がかりが乏しいのではなく、<strong>間違った時刻に強い手がかりが入る</strong>（例：夜間の処置照明）ことが独立した問題として扱われている。</p>
+<h4>5.2 光介入の根拠と、その挫折</h4>
+<p>光は概日システムを同調させる<strong>主要な環境手がかり（principal environmental cue）</strong>である。この生理学的事実から、日中の照度を上げる専用照明システムの導入が「ICU患者の概日同調を促進し、それによって転帰を改善する有望な戦略」として提案されてきた（Luetz A et al. *Semin Respir Crit Care Med* 2019 を引用。<mark class="hl">これは著者自身の先行論文である</mark>）。</p>
+<p>しかし本稿は直後にこう書く。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>研究</td><td><strong>このテーマで最大のRCT</strong></td></tr>
+<tr><td>デザイン</td><td>ランダム化比較試験（引用元は Simons KS et al. *Lancet Respir Med* 2016、"Dynamic light application therapy"）</td></tr>
+<tr><td>対象</td><td><strong>重症患者 734名</strong></td></tr>
+<tr><td>介入</td><td>日中の高照度光曝露（daytime bright light exposure）</td></tr>
+<tr><td>結果</td><td><strong>せん妄発生率その他の臨床転帰に有意な効果を認めなかった</strong></td></tr>
+</tbody></table></div>
+<p>本稿は効果量・信頼区間を一切示さず、「no significant effect」とだけ記す。</p>
+<h4>5.3 陰性だった理由として著者が挙げる4つの可能性</h4>
+<ul><li><strong>採用した照明スケジュール</strong>（lighting schedules deployed）— 何時から何時まで、どの照度でという設計</li><li><strong>重症病態の経過における位相</strong>（phase of critical illness trajectory）— 急性期か慢性期か</li><li><strong>その他の患者レベルの因子</strong>（other patient-level factors）</li><li><strong>患者が目を開けているかどうか</strong>（whether or not the patients keep their eyes open）</li></ul>
+<p>最後の1点は具体的で実務的である。<mark class="hl">鎮静下・閉眼状態の患者に室内照度を上げても網膜に光が届かない</mark>という、当たり前だが介入設計で見落とされがちな指摘である。</p>
+<h4>5.4 著者の結論 — 単発ではなくバンドル</h4>
+<p>「<strong>単独の対策（single measures）ではなく、"circadian-proof"（概日リズムに配慮した）ICU環境という介入バンドル</strong>が必要になるだろう」と述べ、バンドルの構成要素を4つ列挙する。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>構成要素（原文）</th><th>日本語</th><th>当院での実装難度（本文に無い私見）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>bright light exposure</td><td>高照度光曝露</td><td>高（設備投資・照明設計が必要）</td></tr>
+<tr><td>2</td><td>promotion of less sedation</td><td>鎮静の低減の推進</td><td>中（既存の鎮静プロトコルに組み込める）</td></tr>
+<tr><td>3</td><td>use of earplugs and eye masks</td><td>耳栓とアイマスクの使用</td><td>低（物品購入のみ・患者受容性が課題）</td></tr>
+<tr><td>4</td><td>reduction of nighttime noise and scheduled care activities</td><td>夜間騒音と予定ケア活動の削減</td><td>低（運用変更のみ・文化の変革が課題）</td></tr>
+</tbody></table></div>
+<p>なお本稿は、このバンドルが検証されたとは述べていない。「likely entail（〜を伴うことになるだろう）」という推量の助動詞で書かれた<strong>提案</strong>である。</p>
+<h3>6. 領域② 補助療法（薬理学的・非薬理学的）💊</h3>
+<p>本稿は補助療法を「薬理学的・非薬理学的モダリティを包含し、概日介入の有望な標的である」と位置づけたうえで、5つのトピックを順に扱う。</p>
+<h4>6.1 外因性メラトニン — 期待と陰性結果</h4>
+<p>メラトニンは「概日システムを調節する役割と、<strong>謳われている（purported）</strong>睡眠促進作用・抗炎症作用」で知られ、集中治療領域で近年（over recent decades）大きな注目を集めてきた、とされる。<code>purported</code> という語の選択に、著者らの距離の取り方が表れている。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td><strong>多施設RCT</strong>（引用元は Wibrow B et al. Pro-MEDIC 試験、*Intensive Care Med* 2022）</td></tr>
+<tr><td>対象</td><td><strong>ICU患者 847名</strong></td></tr>
+<tr><td>介入</td><td><strong>予防的</strong>メラトニン補充（preventive melatonin supplementation）</td></tr>
+<tr><td>結果</td><td><strong>せん妄その他の臨床転帰に影響しなかった</strong>（does not impact delirium or other clinical outcomes）</td></tr>
+</tbody></table></div>
+<p>著者らは今後のRCTへの注文として、<strong>観察研究で報告されている重症患者のメラトニン濃度の著しい異質性</strong>を考慮すべきだと述べる。具体例として挙がるのが「<strong>敗血症患者における異常な高濃度</strong>（unusually high concentrations in patients with sepsis）」である。この所見は Fig. 1 の障壁欄にも "High melatonin in septic patients" として再掲されている。</p>
+<p>含意は明快である。すでに内因性メラトニンが高い患者に外から足しても、上乗せ効果は期待しにくい。集団を層別せずに全例へ予防投与する設計そのものが陰性結果の一因かもしれない、という読み筋になる。</p>
+<h4>6.2 鎮静 — 自然睡眠との決定的な違い</h4>
+<p>本稿は「<strong>本質的な生物学的機能を持つ自然睡眠とは異なり、ICUの鎮静は概日破綻を引き起こすと想定される</strong>（is supposed to cause circadian disruption）」と述べる。ここでも <code>is supposed to</code> という推量表現が使われており、確立した事実としては提示されていない。</p>
+<p>さらに重要な区別として、この反応は「<strong>鎮静の深さだけに依存するのではなく、使用する鎮静薬の種類にも影響されうる</strong>」と述べる。深さと薬剤種を分けて考えるという発想が、次の陽性RCTへの伏線になる。</p>
+<h4>6.3 デクスメデトミジン — 本稿で唯一の陽性RCT</h4>
+<p>α2作動薬であるデクスメデトミジンは「<strong>ノンレム睡眠（non-rapid eye movement sleep）を促進すると想定される</strong>」とされる。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td><strong>プラセボ対照RCT</strong>（引用元は Qu JZ et al. MINDDS 試験、*eClinicalMedicine* 2022。単施設・並行群間・優越性試験）</td></tr>
+<tr><td>対象</td><td><strong>心臓外科患者 394名。人工呼吸を受けていない（without mechanical ventilation）</strong></td></tr>
+<tr><td>介入</td><td><strong>夜間の低用量デクスメデトミジン</strong>投与（low-dose dexmedetomidine during nighttime）</td></tr>
+<tr><td>主要アウトカム</td><td>せん妄発生率</td></tr>
+<tr><td>結果</td><td><strong>せん妄発生率の低下。OR 0.32、95%CI 0.10–0.83、p = 0.029</strong></td></tr>
+</tbody></table></div>
+<p>本稿はこの結果から「<strong>鎮静薬の選択が『概日リズム集中治療（circadian critical care）』の重要な構成要素になりうる</strong>」と結論する。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この1本を一般ICUへ拡張する前に確認すること 対象は<strong>人工呼吸を受けていない心臓外科術後患者</strong>であり、当院の一般ICU患者（敗血症・呼吸不全・術後多臓器不全）とは概日リズムの壊れ方も鎮静の必要性も異なる。<mark class="hl">OR 0.32 という一見大きな効果は、95%CI 0.10–0.83 という幅の広さが示すとおり少数のイベント数に基づいている</mark>。用量・投与時刻・投与時間は本稿に記載が無いため、当院で試すなら原著（MINDDS）に当たって確認する必要がある。</p>
+</div>
+<h4>6.4 分子時計を直接叩く薬</h4>
+<p>将来の治療戦略として「<strong>分子時計を直接標的とする薬物療法</strong>（pharmacotherapies that target the molecular clock directly）」が挙げられる。根拠として引かれるのは、概日時計蛋白 <strong>REV-ERBα の修飾因子（modulators）が心保護作用・免疫調節作用</strong>を示したという知見である。</p>
+<p>引用元は Montaigne D et al. *Lancet* 2018。表題は「心臓外科における周術期心筋傷害の日内変動と、Rev-Erbα 拮抗によるその予防 — 単施設傾向スコアマッチコホート研究およびランダム化研究」であり、<strong>修飾因子とは具体的には拮抗薬（antagonist）</strong>である。本稿本文は「modulators」としか書いておらず、作動薬か拮抗薬かは本文からは判別できない。</p>
+<h4>6.5 時間を考慮した栄養（timed nutrition）</h4>
+<p>論理の運びは次の3段である。</p>
+<ol><li><strong>健常人</strong>では、<strong>生物学的夜間の食事摂取が概日ミスアライメントを招き、代謝の健康を損なう</strong>。</li><li>したがって、<strong>ICU患者に典型的な持続的栄養投与（continuous nutritional support）は概日破綻を増幅し、代謝的転帰を損ないうる</strong>。</li><li>実際、<strong>非ICU集団では、日中限定の経静脈栄養（daytime-restricted parenteral feeding）が持続投与と比べて代謝に良い影響を与え、在院日数を短縮しうる</strong>という証拠がいくらかある（there is some evidence）。</li></ol>
+<p>そのうえで「この考え方は現在、<strong>ICU集団における経腸栄養支援の文脈で複数のRCTにおいて検証されている</strong>」と述べ、脚注で4件の試験登録番号を明示する。</p>
+<h4>進行中のRCT（本稿の脚注1に記載）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>試験登録番号</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>NCT05627167</td></tr>
+<tr><td>2</td><td>NCT05795881</td></tr>
+<tr><td>3</td><td>NCT04737200</td></tr>
+<tr><td>4</td><td>NCT04870554</td></tr>
+</tbody></table></div>
+<p>この脚注は本文2〜3ページの区切りに小さく置かれており、旧版のノートはこの4件を取りこぼしていた。ジャーナルクラブで「結論が出るのはいつか」を議論するなら、この4試験が最も具体的な手がかりである。</p>
+<h4>6.6 理学療法</h4>
+<p>「時間を考慮した栄養<strong>または</strong>理学療法（timed nutrition or physical therapy）」として並列に挙げられるのみで、<strong>本文に独立した記述は無い</strong>。Fig. 1 の機会欄に "Early Mobilisation" が入っているのが唯一の展開である。</p>
+<h3>7. 領域③ 高度臓器補助 🫁</h3>
+<p>本稿は「<strong>あらゆる形態の高度臓器補助が患者の概日システムと相互作用し、介入の標的となりうる</strong>」と広く述べたうえで、直ちに「この領域の臨床エビデンスは限られる（clinical evidence in this area is limited）」と留保する。</p>
+<p>前臨床研究が道を開く（open up avenues）として挙げられるのは1報のみである。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>種別</td><td><strong>前臨床研究（動物実験）</strong></td></tr>
+<tr><td>対象</td><td><strong>マウス</strong></td></tr>
+<tr><td>介入</td><td>人工呼吸への曝露</td></tr>
+<tr><td>比較</td><td><strong>休止期（resting phase）に曝露 vs 活動期（active phase）に曝露</strong></td></tr>
+<tr><td>結果</td><td><strong>休止期に曝露したときのほうが VILI（人工呼吸器誘発肺傷害）が重篤だった</strong></td></tr>
+<tr><td>出典</td><td>Felten M et al. *Am J Respir Crit Care Med* 2022（"Ventilator-induced lung injury is modulated by the circadian clock"）</td></tr>
+</tbody></table></div>
+<p>著者らはここから「<strong>VILI感受性の概日変動を考慮して人工呼吸プロトコルを最適化しうる</strong>」ことが示唆される、と述べる。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>種差と昼夜の反転に注意 マウスは夜行性であり、マウスの「休止期」は昼、ヒトの休止期は夜である。「休止期に人工呼吸をすると悪い」をそのままヒトに移すと「夜間に人工呼吸を始めると悪い」という主張になるが、<strong>本稿はそのような臨床的読み替えを一切行っていない</strong>。ヒトでの検証は存在しない。</p>
+</div>
+<p>Fig. 1 の機会欄には本文に無い「<strong>夜間血液透析（Nocturnal haemodialysis）</strong>」も挙がっているが、本文中にこれを支持する記述・引用は無い。</p>
+<h3>8. Take-home message（原文の主張）📝</h3>
+<p>原文の最終節は3文からなる。</p>
+<ol><li>生理機能の概日的性質は<strong>集中治療医学のあらゆる側面にわたる研究に巨大な未開拓のポテンシャル</strong>を持つが、<strong>臨床エビデンスは現状限られている</strong>。</li><li>最近開発された<strong>研究アジェンダ</strong>がこの分野に焦点をもたらす助けになりうる（引用元は Knauert MP et al. *Am J Respir Crit Care Med* 2023、<strong>米国胸部学会（ATS）の公式リサーチステートメント</strong>「ICUにおける睡眠・概日リズム障害の原因・帰結・治療」）。</li><li>ICUへ概日介入を導入することは、<strong>患者の受容性（patient acceptance）、潜在的リスク（potential risks）、スタッフのコンプライアンス（staff compliance）</strong>に関わる相当な実務的課題をもたらす（Fig. 1）。</li></ol>
+<p>そのうえで、堅牢なエビデンス基盤を作るために必要なものとして3つを挙げて締めくくる。</p>
+<ul><li><strong>明確に定義された概日アウトカム指標</strong>（clearly defined circadian outcome measures）</li><li><strong>「適切な」患者集団の同定</strong>（identification of the 'right' patient population）</li><li><strong>専用の多施設研究</strong>（dedicated multi-centre studies）</li></ul>
+<h3>9. 旧版ノートとPDFの照合結果 🔎</h3>
+<p>今回の全文精読で判明した、旧版（2026-08-01 作成・97行）の記述との食い違い・欠落を列挙する。PDFを正とする。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧版の記述</th><th>PDF本文</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「主要RCTはいずれも陰性であり」（要点）</td><td>光 734名とメラトニン 847名は陰性だが、<strong>デクスメデトミジン 394名は陽性</strong>（OR 0.32、p = 0.029）</td><td><mark class="hl"><strong>誤り</strong></mark>。旧版は同じノート内の後段で陽性RCTを正しく記載しており、<strong>要点と本文が内的に矛盾していた</strong></td></tr>
+<tr><td>2</td><td>進行中の経腸栄養RCTを「複数のRCTで現在検証中」とのみ記載</td><td>脚注1に <strong>NCT05627167／NCT05795881／NCT04737200／NCT04870554</strong> の4件を明示</td><td><strong>欠落</strong>。具体的な登録番号を補った</td></tr>
+<tr><td>3</td><td>研究アジェンダへの言及なし</td><td>Take-home に「最近開発された研究アジェンダ」＝<strong>ATS公式リサーチステートメント（Knauert 2023）</strong>が挙げられている</td><td><strong>欠落</strong>。補った</td></tr>
+<tr><td>4</td><td>Fig. 1 を「3領域（Fig.1）」と参照するのみ</td><td>図には<strong>3領域×（機会5・6・2項目／障壁5・6・2項目）＝計26項目</strong>が具体名で記載</td><td><strong>欠落</strong>。§4 で全ボックスを表に転記した</td></tr>
+<tr><td>5</td><td>利益相反に言及なし</td><td><strong>著者2名が本研究に関連する特許3件を保有</strong>し、AL は<strong>照明メーカー Zumtobel Group AG と Philips Healthcare から研究費</strong>を受領</td><td><mark class="hl"><strong>重大な欠落</strong></mark>。§11 で詳述</td></tr>
+<tr><td>6</td><td>「臨床への示唆（当院）」を末尾に配置</td><td>—</td><td><strong>書式</strong>。最新テンプレートに従い冒頭へ移動</td></tr>
+<tr><td>7</td><td>論文本文PDFの埋め込みなし（frontmatter に <code>pdf:</code> はあった）</td><td>—</td><td><strong>書式</strong>。<code>!<span class="wl">s00134-023-07297-0.pdf</span></code> を冒頭に追加</td></tr>
+<tr><td>8</td><td>原図の抽出・掲載なし</td><td>Fig. 1（1890×1216 px の埋め込み画像）</td><td><strong>欠落</strong>。無改変で抽出し掲載</td></tr>
+</tbody></table></div>
+<p><strong>数値の照合結果</strong>：旧版が記載した数値（OR 1.3、95%CI 1.1–1.5、p = 0.002／734名／847名／394名／OR 0.32、95%CI 0.10–0.83、p = 0.029）は、<mark class="hl"><strong>すべてPDF本文と完全に一致した</strong></mark>。数値の誤りは無かった。</p>
+<h3>10. 本稿に「無い」もの — 数値の不在の確認 🚫</h3>
+<p>Hotel ICU の運用基準づくりのために本稿を参照する場合、次の点を先に押さえておく必要がある。<strong>以下はすべて本稿の全4ページ・Fig. 1 を通じて一切記載が無い</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>探した項目</th><th>本稿での記載</th></tr></thead>
+<tbody>
+<tr><td>照度（lux）の具体値</td><td><strong>無し</strong>。「daytime bright light exposure」「increase daytime light levels」という定性的表現のみ</td></tr>
+<tr><td>光照射の開始・終了時刻</td><td><strong>無し</strong>。「lighting schedules deployed」が結果を左右しうると述べるのみで、具体的なスケジュールは示さない</td></tr>
+<tr><td>光照射の持続時間</td><td><strong>無し</strong></td></tr>
+<tr><td>光の色温度・波長・メラノピック指標</td><td><strong>無し</strong></td></tr>
+<tr><td>メラトニンの投与量</td><td><strong>無し</strong>。「preventive melatonin supplementation」とのみ</td></tr>
+<tr><td>メラトニンの投与時刻</td><td><strong>無し</strong></td></tr>
+<tr><td>デクスメデトミジンの用量・投与時間帯の定義</td><td><strong>無し</strong>。「low-dose ... during nighttime」とのみ</td></tr>
+<tr><td>騒音の dB 値・目標値</td><td><strong>無し</strong>。「excessive noise」「reduction of nighttime noise」という定性的表現のみ</td></tr>
+<tr><td>耳栓・アイマスクの装着時間帯</td><td><strong>無し</strong></td></tr>
+<tr><td>「日中限定」栄養の時間窓の定義</td><td><strong>無し</strong></td></tr>
+<tr><td>概日アウトカムの測定法（尿中6-スルファトキシメラトニン、深部体温、アクチグラフ等）</td><td><strong>本文には無し</strong>。引用文献10の表題に「urinary excretion of 6-sulfatoximelatonin」が現れるのみ</td></tr>
+<tr><td>せん妄評価スケール（CAM-ICU／ICDSC）の指定</td><td><strong>無し</strong></td></tr>
+<tr><td>睡眠評価スケール（RCSQ／PSG）の指定</td><td><strong>無し</strong>。Fig. 1 の障壁欄に "Sleep staging difficult" とあるのみ</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>数値が必要なら原著に当たる <mark class="hl">本稿はWhat's Newコラムであり、実装可能な数値を1つも提供していない</mark>。当院で照明・騒音・メラトニンの基準値を決める際に本稿を根拠として引用してはならない。数値は Simons 2016（光）、Pro-MEDIC 2022（メラトニン）、MINDDS 2022（デクスメデトミジン）の各原著と、当院の実測値から決める。</p>
+</div>
+<h3>11. 批判的吟味 — ジャーナルクラブでの論点 🔍</h3>
+<h4>11.1 利益相反 — 本稿を読むうえで最重要の論点</h4>
+<p>Declarations に記載された内容のうち、本稿の主張と直結するものを抜き出す。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>特許</td><td><strong>CS（発明者）と AL（発明者）が、本投稿論文に関連する特許を保有</strong>：European Patent 3 174 589（2015年7月31日）、European Patent 3 174 588（2015年7月31日）、US Patent US 2017/0224950 A1（2017年8月10日）</td></tr>
+<tr><td>研究費（AL）</td><td><strong>Philips Healthcare、Dr. Franz Köhler Chemie GmbH、Zumtobel Group AG</strong> からの研究費（部門資金として受領。本投稿論文とは別）</td></tr>
+<tr><td>講演料等（AL）</td><td>Avanos Medical、Drägerwerk、Dr. Franz Köhler Chemie、Hill-Rom Holdings、Philips Healthcare</td></tr>
+<tr><td>研究費（CS）</td><td>ドイツ研究振興協会ほか多数の公的・企業資金（Baxter、Cytosorbents、Edwards、Fresenius、Masimo、Pfizer、Philips Healthcare、Drägerwerk 等）</td></tr>
+<tr><td>LK</td><td>競合利益の開示なし。オランダ ZonMw の VENI フェローシップ（2020—09150161910128）による支援</td></tr>
+</tbody></table></div>
+<p><strong>Zumtobel Group AG はオーストリアの照明機器メーカーであり、Philips Healthcare も医療用照明システムを供給する。</strong> 本稿は「専用照明システム（dedicated lighting systems）の使用が有望な戦略として提案されてきた」と述べ、その根拠として著者自身の先行論文（Luetz 2019）を引用している。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>論点として提示すべき構造 <mark class="hl"><strong>照明介入を推す論拠部分が、照明メーカーから資金を受け、関連特許を保有する著者によって書かれている</strong></mark>。しかも本稿は「最大のRCTは陰性だった」と認めながら、「バンドルなら効くだろう」「照明スケジュールが違ったのかもしれない」という形で照明介入を存続させる論法をとっている。この論法自体は科学的に妥当な留保でありうるが、<mark class="hl">COI の存在を知ったうえで読むのと知らずに読むのとでは重みが変わる</mark>。ジャーナルクラブでは必ず開示すべき点である。</p>
+</div>
+<h4>11.2 相関から介入可能性への飛躍</h4>
+<p>本稿の中核的推論は「概日リズムの喪失が転帰不良と<strong>関連する</strong>」→「概日リズムを<strong>回復させれば</strong>転帰が改善するかもしれない」である。しかしこの推論は次の反証に耐えていない。</p>
+<ul><li><strong>概日破綻は重症度の代理指標である可能性</strong>：重症であるほどリズムが壊れ、重症であるほど死ぬ。介入で治せるのはリズムであって重症度ではない。</li><li>実際、<strong>この推論が正しければ効くはずだった光介入もメラトニンも大規模RCTで陰性だった</strong>。本稿はこの事実を正直に報告しているが、それが中核推論への反証になっている可能性を検討していない。</li></ul>
+<h4>11.3 引用の中身と本文の主張のずれ</h4>
+<p>全文精読で確認できた範囲で、本文の記述と引用元論文の表題との間にずれがある箇所を挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>本文の記述</th><th>引用元（表題から分かること）</th><th>ずれの内容</th></tr></thead>
+<tbody>
+<tr><td>「平均動脈圧の<strong>24時間リズムの減弱</strong>が ICU死亡率と関連（OR 1.3）」</td><td>Gao Y et al. "Impact of <strong>mean arterial pressure fluctuation</strong> on mortality in critically ill patients." *Crit Care Med* 2018</td><td>原著は<strong>平均動脈圧の「変動（fluctuation）」</strong>の研究である。「24時間リズムの減弱」という概日的解釈が原著の枠組みと一致するかは、原著に当たらないと判定できない</td></tr>
+<tr><td>「非ICU集団で<strong>日中限定の経静脈栄養が代謝に良い影響を与え在院日数を短縮しうる</strong>」</td><td>Wang YM et al. "Daytime-restricted parenteral feeding is associated with <strong>earlier oral intake in children following stem cell transplant</strong>." *J Clin Invest* 2023</td><td>原著の主要な焦点は<strong>小児造血幹細胞移植後の経口摂取開始の早期化</strong>である。対象は小児で、しかも観察的な関連（associated with）である</td></tr>
+<tr><td>「<strong>敗血症患者での異常な高メラトニン濃度</strong>」</td><td>Acuña-Fernández C et al. "Daily changes in the expression of <strong>clock genes in sepsis</strong> and their relation with sepsis outcome and urinary excretion of <strong>6-sulfatoximelatonin</strong>." *Shock* 2020</td><td>測定されているのは尿中6-スルファトキシメラトニン（代謝産物）であり、血中メラトニン濃度そのものではない可能性がある</td></tr>
+<tr><td>「概日時計蛋白 REV-ERBα の<strong>修飾因子</strong>が心保護作用・免疫調節作用」</td><td>Montaigne D et al. "Daytime variation of perioperative myocardial injury in cardiac surgery and its prevention by <strong>Rev-Erbα antagonism</strong>." *Lancet* 2018</td><td>「modulators（修飾因子）」ではなく<strong>拮抗薬（antagonism）</strong>。方向性が本文からは読み取れない</td></tr>
+</tbody></table></div>
+<h4>11.4 自己引用の比率</h4>
+<p>引用15件のうち、著者グループ（Charité の Luetz / Spies / Felten ら）が関与するものは少なくとも4件（文献3・4・7・14）である。分野の性質上ある程度は避けられないが、<strong>照明介入を「有望な戦略」と位置づける根拠が自己引用（文献7）である</strong>点は §11.1 と併せて評価する必要がある。</p>
+<h4>11.5 図と本文の乖離</h4>
+<p>§4 で述べたとおり、Fig. 1 には本文に対応する記述が無い項目が複数ある（アラーム管理、ICU建築設計、夜間血液透析、抗菌薬・抗炎症薬の時間薬理学、早期離床）。<strong>図は本文より広い主張をしており、しかも機会欄の項目には効果量も引用も付いていない。</strong></p>
+<h4>11.6 本稿の強み</h4>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>公平に評価すべき点</p>
+<ul><li><strong>陰性結果を隠していない</strong>。1.5ページの短報でありながら、最大RCT2本が陰性であったことを明示する。この分野を推進したい立場の著者が書いた文章としては誠実である。</li><li><strong>3領域という整理が使える</strong>。環境／補助療法／臓器補助という切り分けは、施設で何から手を付けるかを議論する枠組みとして実用的である。</li><li><strong>障壁を機会と同じ数だけ列挙している</strong>。Fig. 1 の下段（✖）は、実装を考える側にとって上段より有用である。</li><li><strong>「目を開けているかどうか」への言及</strong>は、光介入の設計を根本から問い直す具体的な指摘である。</li></ul>
+</div>
+<h3>12. 主要な引用文献（全15件）📚</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>医学における概日機構の総説</td><td>Allada R, Bass J. *N Engl J Med* 2021;384:550–561</td></tr>
+<tr><td>2</td><td>組織特異的にリズム発現するヒト遺伝子のデータベース</td><td>Ruben MD, Wu G, Smith DF et al. *Sci Transl Med* 2018</td></tr>
+<tr><td>3</td><td>概日医学の基盤</td><td>Kramer A, Lange T, Spies C et al. *PLoS Biol* 2022;20:e3001567</td></tr>
+<tr><td>4</td><td><strong>重症患者における概日リズム破綻</strong>（本稿の中核となる総説）</td><td>Felten M, Dame C, Lachmann G et al. *Acta Physiol* 2023;238:e13962</td></tr>
+<tr><td>5</td><td><strong>ClinCirc — 重症患者の末梢概日振動子の変化を同定</strong>（時計遺伝子と炎症）</td><td>Cunningham PS, Kitchen GB, Jackson C et al. *J Clin Invest* 2022;133:e162775</td></tr>
+<tr><td>6</td><td><strong>平均動脈圧の変動と死亡</strong>（OR 1.3 の出典）</td><td>Gao Y, Wang Q, Li J et al. *Crit Care Med* 2018;46:e1167–e1174</td></tr>
+<tr><td>7</td><td>せん妄とPICSを予防・軽減する革新的ICUソリューション（<strong>照明介入の提案・著者の自己引用</strong>）</td><td>Luetz A, Grunow J, Mörgeli R et al. *Semin Respir Crit Care Med* 2019;40:673–686</td></tr>
+<tr><td>8</td><td><strong>ダイナミック光療法によるせん妄の発生率と期間の低減 — RCT</strong>（734名・陰性）</td><td>Simons KS, Laheij RJF, van den Boogaard M et al. *Lancet Respir Med* 2016;4:194–202</td></tr>
+<tr><td>9</td><td><strong>Pro-MEDIC — ICUせん妄への予防的メラトニン RCT</strong>（847名・陰性）</td><td>Wibrow B, Martinez FE, Myers E et al. *Intensive Care Med* 2022;48:414–425</td></tr>
+<tr><td>10</td><td>敗血症における時計遺伝子発現の日内変化と転帰・尿中6-スルファトキシメラトニン</td><td>Acuña-Fernández C, Marín JS, Díaz-Casado ME et al. *Shock* 2020;53:550–559</td></tr>
+<tr><td>11</td><td><strong>MINDDS — 心臓外科後の非挿管患者への夜間デクスメデトミジン RCT</strong>（394名・陽性、OR 0.32）</td><td>Qu JZ, Mueller A, McKay TB et al. *eClinicalMedicine* 2022;56:101796</td></tr>
+<tr><td>12</td><td>心臓外科の周術期心筋傷害の日内変動と Rev-Erbα 拮抗による予防</td><td>Montaigne D, Marechal X, Modine T et al. *Lancet* 2018;391:59–70</td></tr>
+<tr><td>13</td><td>日中限定の経静脈栄養と、小児造血幹細胞移植後の経口摂取開始の早期化</td><td>Wang YM, Taggart CB, Huber JF et al. *J Clin Invest* 2023;133:e167275</td></tr>
+<tr><td>14</td><td><strong>VILI は概日時計によって修飾される</strong>（マウス・前臨床）</td><td>Felten M, Ferencik S, Alves L-GT et al. *Am J Respir Crit Care Med* 2022;207:1464–1474</td></tr>
+<tr><td>15</td><td><strong>ICUの睡眠・概日障害の原因・帰結・治療 — 米国胸部学会（ATS）公式リサーチステートメント</strong></td><td>Knauert MP, Ayas NT, Bosma KJ et al. *Am J Respir Crit Care Med* 2023;207:e49–e68</td></tr>
+</tbody></table></div>
+<p>上表の巻・頁・年はいずれも本PDFの引用リストの記載をそのまま転記したものである（推測で補ったものは無い）。文献5と文献14は、引用リスト上の発行年（2022）と巻番号（133／207）が通常の対応と食い違って見えるが、原文の記載を改変せずそのまま載せている。原典に当たる際はDOIを使うのが確実である。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ICUの概日リズム医学は<strong>環境・補助療法・高度臓器補助の3領域</strong>に整理できるが、<mark class="hl">大規模RCTで陽性だったのは夜間低用量デクスメデトミジン1本のみ（394名・心臓外科・非挿管、OR 0.32）であり、光（734名）もメラトニン（847名）も陰性である</mark>。</p>
+<p><mark class="hl">本稿には照度・投与量・騒音の目標値が1つも書かれていない。数値が要るなら原著に当たること</mark>。</p>
+<p><mark class="hl">実装するなら単発ではなくバンドル（高照度光＋鎮静低減＋耳栓・アイマスク＋夜間騒音とケア活動の削減）で設計する</mark>。当院で今日から着手できるのは4つ目の「夜間騒音と予定ケア活動の削減」である。</p>
+<p>読むときは<strong>著者2名が関連特許を保有し、照明メーカー Zumtobel と Philips から資金を受けている</strong>ことを踏まえる。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ICUの睡眠・せん妄対策を新しく立ち上げたい</td><td>単発の施策になっていないか</td><td>本稿の4要素をバンドルとして同時に設計する。単独の照明導入は734名RCTで陰性</td></tr>
+<tr><td>照明システムの導入を提案された</td><td>何 lux・何時から何時までかの根拠はどこか</td><td>本稿は数値を持たない。Simons 2016 の原著と当院の実測照度から設計する。COI に注意</td></tr>
+<tr><td>せん妄予防にメラトニンを検討している</td><td>対象を層別しているか</td><td>予防的な全例投与は847名RCTで陰性。敗血症患者では内因性メラトニンが高い可能性</td></tr>
+<tr><td>非挿管の術後患者でせん妄が多い</td><td>鎮静薬の種類と投与時間帯を分けて考えているか</td><td>夜間低用量デクスメデトミジンが唯一の陽性介入。ただし心臓外科・非挿管に限られた根拠</td></tr>
+<tr><td>持続経腸栄養を時間制限に変えたい</td><td>ICUでのエビデンスがあるか</td><td>まだ無い。4件のRCT（NCT05627167ほか）が進行中。現時点で運用は変えない</td></tr>
+<tr><td>夜間の騒音とケア活動を減らしたい</td><td>何が音を出しているかを把握しているか</td><td>本稿のバンドル要素であり設備投資ゼロで着手できる。当院の騒音源マッピングから始める</td></tr>
+<tr><td>人工呼吸の開始時刻を変えたい</td><td>ヒトのデータがあるか</td><td>マウスの前臨床1報のみ。しかもマウスは夜行性で昼夜が反転している。臨床応用の段階にない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

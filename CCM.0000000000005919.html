@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>心原性ショック管理の進歩 — SCAI分類・表現型・出口戦略で個別化する（Concise Definitive Review・CCM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000005919.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">心原性ショック管理の進歩 — SCAI分類・表現型・出口戦略で個別化する（Concise Definitive Review・CCM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Jentzer JC, Pöss J, Schaubroeck H, Morrow DA, Hollenberg SM, Mebazaa A. Advances in the Management of Cardiogenic Shock. Crit Care Med. 2023;51(9):1222-1233. doi:10.1097/CCM.0000000000005919</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2023-05-15）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000005919" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000005919</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Advances in the Management of Cardiogenic Shock</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000005919.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000005919.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000005919.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>SCAI A〜E を回診の共通言語にする</strong>。「循環動態は不安定です」ではなく「SCAI C、乳酸トレンドは上昇、ノルアド0.1γ」と言い切る。ステージは臨床所見と検査だけで付けられ（Fig. 2）、デバイスも肺動脈カテーテル（PAC）も要らない。<mark class="hl"><strong>まず「低灌流があるか」→ 無ければ「血行動態不安定があるか」の2問だけでA〜Eが決まる</strong></mark></li><li><strong>「血圧が正常だから心原性ショックではない」を捨てる</strong>。本文は正常血圧CS（normotensive CS）を独立の病型として扱い、preshock ＞ 正常血圧CS ＞ 低血圧CS の順に予後が良いとする。当院で拾い損ねやすいのは、<mark class="hl"><strong>血圧は保たれているのに乳酸だけが上がっている患者</strong></mark></li><li><strong>表現型（phenotype）と重症度（severity）を別々に評価する</strong>。Fig. 3 のとおり、重症度＝乳酸・血圧・昇圧薬量・SCAI stage、表現型＝左室か右室か・充満圧・炎症/血管拡張の有無・病因。<mark class="hl"><strong>同じ「SCAI D」でも右室優位とうっ血なしの「cold and dry」では次の一手が全く違う</strong></mark></li><li><strong>出口戦略（exit strategy）を決めずに一時的MCSを始めない</strong>。回復への橋渡し／判断（candidacy）への橋渡し／恒久的MCS／心移植のどれか。本文は「MCSは明確な出口戦略があるときにのみ使う」と明示する</li><li><strong>薬物の初手は当院の現行運用と一致</strong>：低血圧にはノルアドレナリン、圧が戻ったらドブタミンを足して心拍出量と灌流を戻し、ノルアドを減らす。<strong>バソプレシンは左室後負荷を上げて心係数を下げるので、心係数が保たれた右室優位CSや混合型血管拡張性CS（心臓術後など）に限る</strong></li><li><strong>右室優位CSでは挿管を避ける努力をする</strong>。可能なら高流量鼻カニュラ。低酸素・高炭酸・アシドーシス・高気道内圧という肺血管抵抗を上げる因子を全部潰す。RAP 15〜20 mmHg超は右室性能をむしろ悪化させる</li><li><strong>多職種ショックチーム</strong>：本文はチーム化を最善の個別化手段としつつ、<mark class="hl"><strong>チームのどの要素が効いているかは未検証</strong></mark>とはっきり書く。当院で導入するなら「何を標準化するか」を明示した形にする</li><li><strong>β遮断薬とRAS系薬はCSが解けるまで止める</strong>（低灌流も昇圧薬需要も無くなった時点まで）</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：心原性ショック（CS）は循環器疾患が循環不全・低灌流・臓器障害に至る最終共通経路であり、短期死亡は経時的に低下したものの<strong>入院中で30%超、30日後には40〜50%</strong>に達する。AMI-CSでは早期の責任血管血行再建が長期生存を改善する（SHOCK試験）一方、多枝への初期同時血行再建は有害（CULPRIT-SHOCK試験）。IABPのルーチン使用はAMI-CSの生存を改善しない（IABP-SHOCK II）。</li><li><strong>Unknown（分かっていなかったこと）</strong>：CS患者の最適な血行動態補助の選び方。<strong>どの患者が一時的MCSで利益を得るのか</strong>。至適血圧目標。HF関連CS（HF-CS）に対するエビデンスはほぼ皆無で、公表されたCSのRCTはほぼすべてAMI-CSのみを組み入れてきた。</li><li><strong>What's new（本レビューの新規性・意義）</strong>：<strong>「ショック重症度（SCAI A〜E）」「表現型」「修飾できないリスク因子」の三軸モデル</strong>を臨床判断と予後予測の枠組みとして提示し、<strong>SCAI stage ごとの具体的な管理アルゴリズム（Fig. 4）</strong>に落とし込んだ点。加えて、<strong>AMIからHF-CSへという疫学の転換</strong>、<strong>hemometabolic（cardiometabolic）ショック</strong>という末期像の概念化、そして<mark class="hl"><strong>一時的MCSのルーチン使用を支持するRCTは存在しないという明言</strong></mark>を、2022年の国際ワークショップの議論とともにまとめている。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 心原性ショックは単一の病気ではなく、<strong>重症度（SCAI A〜E）× 表現型 × 修飾できないリスク</strong>の三軸で記述すべき症候群である。<strong>原因の是正（AMIなら早期の責任血管血行再建）とノルアドレナリン＋ドブタミンが土台</strong>で、一時的機械的循環補助は<strong>ルーチン使用を支持するRCTが1つも無い</strong>ため、明確な出口戦略と多職種チームの判断のもとで選択的に用いる。</p>
+</div>
+<ul><li><strong>目的</strong>：心原性ショック（CS）患者に対する現代的な管理アプローチをレビューする。</li><li><strong>方法</strong>：CSに関する主要文献をレビューし、<strong>専門学会の科学声明</strong>と<strong>転帰を検討した臨床研究（RCT を中心に）</strong>を採用。学会推奨と評価済み研究を統合した。</li><li><strong>疫学</strong>：AMIが歴史的に最多の病因だったが、<strong>一部の施設では非AMI原因（新規発症または慢性心筋症＋非代償性心不全）が現在は優勢</strong>。AMI-CSとHF-CSは病態生理・臨床像・治療が乖離しており、疫学の転換は治療にもRCT設計にも影響する。</li><li><strong>定義</strong>：CSは「無効な心拍出量による組織・臓器の低灌流」。伝統的三徴は<strong>低血圧（例：収縮期血圧 &lt; 90 mmHg）＋十分な前負荷にもかかわらず低い心拍出量＋低灌流（乳酸上昇・四肢冷感/網状皮斑・意識変容・乏尿）</strong>。代償が保たれた早期には低血圧を欠く（<strong>正常血圧CS</strong>）。低心拍出で低血圧だが灌流が保たれていれば <strong>preshock</strong>。</li><li><strong>重症度</strong>：<strong>SCAI Shock Classification（A〜E の5段階）</strong>。各段階が上がるごとに死亡が段階的に高くなることが検証研究で一貫して示されている。<strong>preshock（stage B）や軽症/正常血圧CS（stage C）の死亡リスクも決して小さくない</strong>。</li><li><strong>表現型</strong>：心室機能パターン・充満圧・末梢血管緊張・心拍出量が多様。<strong>右室または両室機能不全＋うっ血</strong>はショック重症度が高く臓器不全が多く転帰が悪い。<strong>うっ血は3分の1の患者では欠如する（cold and dry）</strong>。全身炎症に伴う<strong>混合型血管拡張性CS</strong>は重症度・臓器不全・予後が悪い。<strong>CS患者の30〜50%に心停止（CA）を合併</strong>。末期像は <strong>hemometabolic（cardiometabolic）ショック</strong>（高度乳酸アシドーシス＋多臓器不全）。</li><li><strong>予後予測</strong>：三軸モデル（重症度／表現型／リスク修飾因子）。最も重要なリスク修飾因子は<strong>高齢</strong>と<strong>昏睡を伴う心停止</strong>。既存の複合リスクスコア（<strong>IABP-SHOCK II score</strong>、<strong>CS score</strong>）はSCAI分類と組み合わせるとリスク層別化を高める。</li><li><strong>初期治療</strong>：心電図とPOCUS、動脈ライン＋中心静脈ライン。<strong>表現型が不確かな症例・重症CS・初期治療への反応が悪い症例ではPACが有用</strong>。AMI疑い/未診断の心筋症では早期の冠動脈造影。</li><li><strong>薬物</strong>：ノルアドレナリンが第一選択（<strong>不整脈が少ない</strong>ためドパミン・アドレナリンより安全）。圧が戻ったら強心薬を追加。<strong>ドブタミンとミルリノンは転帰・安全性が同等</strong>（DOREMI）。<strong>レボシメンダンは生存を改善しない</strong>（メタ解析）。</li><li><strong>一時的MCS</strong>：IABPは低コスト・容易・低合併症で多くの国で最も使われるが<strong>AMI-CSの生存を改善せずルーチン使用は非推奨</strong>（AMIの機械的合併症には適応が残る）。pLVADはIABPより強力な補助を与えるが<strong>生存改善は示されておらず出血・血栓塞栓・下肢虚血が増えうる</strong>。pRVADは<strong>RCTで検証されていない</strong>。VA-ECMOは唯一の両室＋肺補助手段だが、<strong>ECMO-CS試験で早期VA-ECMOは初期薬物療法＋レスキューVA-ECMO（39%で使用）に対し生存を改善しなかった</strong>。</li><li><strong>結論</strong>：<mark class="hl"><strong>CS集団の著しい異質性は「一律のアプローチ（one-size-fits-all）」を許さない</strong></mark>。ショック重症度分類＋多職種チーム戦略が個別化を可能にする。どの補助戦略を選ぼうと、<strong>低灌流をできる限り速く完全に是正すること</strong>が本質。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 心原性ショックの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>心原性ショック（cardiogenic shock, CS）</strong> は、心臓のポンプ機能が落ちて全身に十分な血液を送れなくなり、組織が酸素不足に陥った状態です。本文の定義は「<strong>無効な心拍出量による組織・臓器の低灌流</strong>」で、原因は心筋自体の機能不全のこともあれば、<strong>閉塞性の原因（心タンポナーデなど。特異的な処置を要する）</strong> のこともあります。</p>
+<p>伝統的な診断三徴は、①<strong>低血圧</strong>（例：収縮期血圧 90 mmHg未満）、②<strong>十分な前負荷があるのに低い心拍出量</strong>、③<strong>低灌流の所見</strong>（乳酸上昇、四肢が冷たい・網状皮斑（mottling）、意識変容、乏尿）。ただし本レビューの重要な主張は、<mark class="hl"><strong>①の低血圧は必須ではない</strong></mark>ということです。代償機構（交感神経緊張による血管収縮）が働いている早期には血圧が保たれたまま低灌流が進みます。これを <strong>正常血圧CS（normotensive CS）</strong> と呼びます。逆に、低心拍出のために血圧は下がっているが灌流はまだ保たれている段階を <strong>preshock</strong> と呼びます。</p>
+<p><strong>SCAI Shock Classification</strong> は、Society for Cardiovascular Angiography and Intervention（心血管造影・インターベンション学会）が2019年に提唱し2022年に改訂した重症度分類で、急性心血管疾患（AMIや非代償性心不全）の患者を <strong>A（At risk）→ B（Beginning／preshock）→ C（Classic shock）→ D（Deterioration）→ E（Extremis）</strong> の5段階に分けます。段階が上がるほど死亡が高くなることが繰り返し検証されています。</p>
+<p>治療の道具立ては3層です。①<strong>原因の是正</strong>（AMIなら責任血管の再灌流、タンポナーデならドレナージ）、②<strong>血管作動薬</strong>（血圧を上げる昇圧薬＝ノルアドレナリンなど、心収縮を上げる強心薬＝ドブタミン・ミルリノンなど）、③<strong>一時的機械的循環補助（temporary MCS）</strong>。MCSにはIABP（大動脈内バルーンパンピング）、経皮的左室補助装置（pLVAD）、経皮的右室補助装置（pRVAD）、VA-ECMO（静脈脱血-動脈送血の体外式膜型人工肺）があります。<strong>恒久的MCS（durable MCS＝植込型LVAD）</strong> と <strong>心移植（HTX）</strong> は「出口」にあたります。</p>
+<p><strong>PAC（pulmonary artery catheter, 肺動脈カテーテル／Swan-Ganz）</strong> は心拍出量・充満圧・体血管抵抗を直接測る道具で、本レビューでは「表現型がはっきりしないとき」「重症・初期治療への反応が悪いとき」に有用とされます。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<ul><li>CSは、<strong>心血管疾患が循環不全・低灌流・末梢臓器障害を引き起こす「最終共通経路」</strong>である。</li><li>成人CSの短期死亡は経時的に低下してきたが、<mark class="hl"><strong>なお入院中に30%を超え、30日後には40〜50%に増える</strong></mark>。</li><li><strong>ショックの下降スパイラル（downward spiral）</strong>——しばしば死に至る——を防ぐには、CSの<strong>早期認識と有効な治療</strong>が必要である。</li><li>しかし <strong>CSの管理は依然として主に専門家合意に駆動されている</strong>。<strong>十分な検出力を持つRCTで標準治療に対する生存改善を示したものがほとんどない</strong>ためである。</li><li><strong>CSにおけるRCTの困難</strong>（本文が挙げる4点）：</li></ul>
+<ol><li><strong>同意取得の困難</strong></li><li><strong>equipoise（臨床的均衡）への違和感</strong></li><li><strong>疾患の異質性</strong></li><li><strong>施設間・国家間で標準化された管理が無いこと</strong></li></ol>
+<ul><li>→ 現代のCS研究について、<strong>目標と実行の再評価が必要</strong>である。</li><li>本レビューは、文献レビューと <strong>2022年 Critical Care Clinical Trialists' Workshop</strong> での議論に基づく<strong>ナラティブレビュー</strong>である。</li></ul>
+<div class="call note"><span class="lab">補足</span>
+<p>KEY POINTS（原文の枠・全文訳） <strong>Question</strong>：心原性ショック（CS）患者の最適な管理は何か。 <strong>Findings</strong>：<mark class="hl"><strong>CS患者に対して検証された治療で、生存の上乗せ改善を示したランダム化試験はほとんどない。とくにAMIのない患者では</strong></mark>。 <strong>Meaning</strong>：現代のCS管理には、<strong>ショック重症度・表現型・リスク修飾因子を統合する多職種チームに導かれた個別化治療</strong>が必要である。<strong>引き金となった病因の是正が最優先</strong>（とくにAMI患者では早期血行再建）で、<strong>血管作動薬と一時的MCSの組み合わせ</strong>により、患者のニーズに合わせて全身灌流を回復させつつ、<strong>予防可能な合併症を最小化する</strong>。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<p>本論文はRCTでもメタ解析でもない。原文の構造化抄録がそのまま方法の記述にあたる。</p>
+<ul><li><strong>デザイン</strong>：<strong>ナラティブレビュー</strong>（CONCISE DEFINITIVE REVIEW シリーズ）。<strong>系統的検索式・PROSPERO登録・エビデンスの質評価（GRADE等）はない</strong>。</li><li><strong>OBJECTIVES</strong>：CS患者に対する現代的な管理アプローチをレビューすること。</li><li><strong>DATA SOURCES</strong>：CSに関する主要（salient）な医学文献をレビューした。</li><li><strong>STUDY SELECTION</strong>：<strong>専門学会の科学声明</strong>と、<strong>CS患者の転帰を検討した臨床研究</strong>を含めた。<strong>RCTに焦点を当てた</strong>。</li><li><strong>DATA EXTRACTION</strong>：CSの管理に関する主要な研究結果と学会声明の推奨を抽出した。</li><li><strong>DATA SYNTHESIS</strong>：学会推奨を、評価した研究と統合した。</li><li><strong>議論の基盤</strong>：<strong>2022年 Critical Care Clinical Trialists' Workshop</strong>（現行のCS管理戦略・進行中の試験・将来のRCT設計への提言を批判的に評価する国際CS専門家の会合）。</li><li><strong>限界（構造上の）</strong>：検索の網羅性が担保されず、著者の選択が結果を左右しうる。<strong>推奨の多くは専門家合意であり、Fig. 4のアルゴリズムは著者ら自身が「authors' expert consensus」と明記している</strong>。</li></ul>
+<h3>4. 変わりつつある疫学 — AMIからHF-CSへ 🔄</h3>
+<ul><li><strong>AMI（急性心筋梗塞）が歴史的にはCSの最も一般的な病因</strong>であり、<mark class="hl"><strong>公表されたCSのRCTはほぼすべてAMI-CS患者のみを組み入れてきた</strong></mark>。他の病因のCSに対するRCTはほとんどない。</li><li><strong>一部の施設では非AMI原因が現在は優勢になっている可能性がある</strong>。<strong>新規発症または慢性の心筋症に非代償性心不全を伴うものを含む、非AMI原因の相対的増加が大きい</strong>ためである。</li><li>この疫学の転換は<strong>治療とRCTの双方に含意を持つ</strong>。<strong>AMI-CSとHF関連CS（HF-CS）は、病態生理・臨床像・治療アプローチが乖離している</strong>ためである。</li><li>さらに <strong>de novo HF-CS</strong>（急性心筋炎、心筋症の新規診断など）は、<strong>慢性心筋症から生じたHF-CS</strong>とも異なりうる。後者は<strong>慢性適応により、より悪い心室機能とより低い心拍出量に耐えうる</strong>。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl"><strong>「エビデンス」と呼ばれているCSの知見の大半は、目の前のHF-CS患者には外挿である</strong></mark>。SHOCK試験もCULPRIT-SHOCK試験もIABP-SHOCK II試験もAMI-CSの試験であり、当院で増えている急性増悪の慢性心不全患者にそのまま当てはまる保証はない。同じ心係数・同じ血圧でも、<strong>慢性適応した患者はそれに耐えていることがある</strong>——数字だけで重症度を決めない。</p>
+</div>
+<h3>5. 進化する定義 — 低血圧は必須条件ではない 📖</h3>
+<ul><li><strong>CSは広く「無効な心拍出量による組織・臓器の低灌流」と定義される</strong>。<strong>心筋機能不全</strong>からも、<strong>特異的な介入を要する閉塞性原因（心タンポナーデなど）</strong>からも生じうる。</li><li><strong>伝統的な臨床・研究上の定義の三徴</strong>：</li></ul>
+<ol><li><strong>低血圧</strong>（例：収縮期血圧 &lt; 90 mmHg）</li><li><strong>十分な前負荷にもかかわらず低い心拍出量</strong></li><li><strong>低灌流</strong>（乳酸上昇、四肢冷感または網状皮斑、意識変容、乏尿）</li></ol>
+<ul><li><strong>代償機構が保たれている早期段階のCS患者では、低血圧を欠くことがある</strong>。これを <strong>正常血圧CS（normotensive CS）</strong> と呼ぶ。</li><li><strong>低心拍出量のために低血圧だが、灌流は保たれている患者</strong>は <strong>preshock</strong> に分類される（Fig. 1）。</li><li><mark class="hl"><strong>preshock の患者は正常血圧CSより予後が良く、正常血圧CSは低血圧CSより転帰が良い</strong></mark>。この順序は、<strong>早期認識と低灌流の是正によって適時の安定化を図る機会がある</strong>ことを浮き彫りにする。</li><li><strong>最近の研究は、血圧や血行動態ではなく「低灌流（とくに血清乳酸値の上昇）」が転帰を決める</strong>ことの重要性を強調している。</li></ul>
+<h4>Table A. 3つの病型の位置づけ（原文の記述を整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>病型</th><th>血圧</th><th>心拍出量</th><th>灌流</th><th>予後の順序</th></tr></thead>
+<tbody>
+<tr><td><strong>preshock</strong></td><td>低い（低心拍出による）</td><td>低い</td><td><strong>保たれている</strong></td><td>最も良い</td></tr>
+<tr><td><strong>正常血圧CS（normotensive CS）</strong></td><td><strong>正常</strong>（代償機構が保たれている）</td><td>低い</td><td><strong>障害されている</strong></td><td>中間</td></tr>
+<tr><td><strong>低血圧CS（classic CS）</strong></td><td>低い</td><td>低い</td><td><strong>障害されている</strong></td><td>最も悪い</td></tr>
+</tbody></table></div>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005919" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005919）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 血行動態破綻の各状態の重なりを示す概念モデル（原図・無改変。©Crit Care Med 2023） 3つの円が重なるベン図。左上のオレンジの円が <strong>Hypoperfusion（低灌流）</strong>、右上の青の円が <strong>Hypotension（低血圧）</strong>、下の紫の円が <strong>Low cardiac output（低心拍出量）</strong>。重なりの領域は次のとおり。</p>
+<ul><li><strong>低灌流 ∩ 低血圧</strong>（上部・赤）＝ <strong>Other shock</strong>（心原性以外のショック）</li><li><strong>3つすべての交差</strong>（中央・濃赤）＝ <strong>Classic cardiogenic shock</strong>（古典的心原性ショック）</li><li><strong>低灌流 ∩ 低心拍出</strong>（左下）＝ <strong>Normotensive cardiogenic shock</strong>（正常血圧心原性ショック）</li><li><strong>低血圧 ∩ 低心拍出</strong>（右下）＝ <strong>Low-output HF without shock</strong>（ショックを伴わない低拍出心不全）</li></ul>
+<p><strong>原キャプション訳</strong>：ショックは<strong>低灌流の存在によって定義される</strong>。<strong>大半の——しかし全員ではない——患者は低血圧も呈する</strong>。ショックの基準を満たさない血行動態不安定の患者を <strong>preshock</strong> と呼ぶ。</p>
+<p><strong>読み方</strong>：<mark class="hl"><strong>この図の要点は「Hypotension の円の外にも心原性ショックがある」こと</strong></mark>。低血圧を診断の入口に置くと、左下の「正常血圧CS」を丸ごと見落とす。</p>
+</div>
+<h3>6. 重症度の staging — SCAI Shock Classification 🪜</h3>
+<ul><li><strong>臨床実践で遭遇するCS重症度の幅の広さ</strong>を認識したことが、<strong>SCAI Shock Classification</strong> の開発につながった。<strong>急性心血管疾患（AMIや非代償性心不全を含む）の患者</strong>に対し、<strong>重症度が上がる5段階（A〜E）</strong>を定義した（Fig. 2）。</li><li><strong>段階の骨格</strong>（原文の記述）：</li><li><strong>血行動態が安定した急性心血管疾患の患者</strong> → <strong>SCAI Shock Stage A（"At Risk"）</strong></li><li><strong>低灌流を伴わない血行動態不安定</strong> → <strong>SCAI Shock Stage B（"Beginning" ＝ preshock）</strong></li><li><strong>輸液蘇生を超える介入を要する低灌流</strong> → <strong>ショック（SCAI Shock Stages C、D、E）</strong></li><li>SCAI分類は、<strong>臨床コミュニケーションと研究においてCSを特徴づける有用な道具</strong>を提供する。</li><li><strong>検証研究は一貫して、SCAI分類が予後と相関し、SCAI stageが1段上がるごとに死亡が段階的に高くなることを示してきた</strong>。</li><li><strong>改訂版SCAI分類は、各SCAI stage の内部にもCS重症度と死亡リスクのスペクトラムが存在することを強調している</strong>。</li><li><mark class="hl"><strong>preshock（stage B）や軽症/正常血圧CS（stage C）で観察される死亡リスクは些細（trivial）ではない</strong></mark>。これは<strong>疾患過程の早期にCSを認識することの重要性</strong>を強調する。</li></ul>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005919" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005919）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 改訂版SCAI Shock Classification を用いた SCAI Shock stage の決定（原図・無改変。©Crit Care Med 2023／Jentzer らからの許諾を得た改変図） 左側が判定フロー、右側がステージの定義。CPR＝心肺蘇生、MCS＝機械的循環補助。右端に上向きの太い灰色矢印「SHOCK SEVERITY」が置かれ、下からA→Eへ重症度が上がることを示す。ステージの色は下から順に淡青（A）→青（B）→藍（C）→紫（D）→赤（E）。</p>
+</div>
+<h4>Table B. Figure 2 の全ボックスの文言（原図を日本語化・網羅）</h4>
+<p><strong>左側：判定フロー</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ボックス</th><th>記載内容</th></tr></thead>
+<tbody>
+<tr><td>起点（黒帯）</td><td>Patient with acute cardiac disease（急性心疾患の患者）</td></tr>
+<tr><td>第1ステップ</td><td>Clinical examination ＋ Laboratory assessment（臨床診察＋検査評価）</td></tr>
+<tr><td>分岐1「HYPOPERFUSION?（低灌流はあるか）」— Clinical signs（臨床所見）</td><td>・Cool and mottled extremities（四肢冷感と網状皮斑）&lt;br/&gt;・Delayed capillary refill（毛細血管再充満時間の延長）&lt;br/&gt;・Oliguria（乏尿）&lt;br/&gt;・Altered mental status（意識変容）</td></tr>
+<tr><td>分岐1「HYPOPERFUSION?」— Laboratory signs（検査所見）</td><td>・Elevated serum lactate（血清乳酸上昇）&lt;br/&gt;・Metabolic acidosis（代謝性アシドーシス）&lt;br/&gt;・Azotemia (acute kidney injury)（高窒素血症／急性腎障害）&lt;br/&gt;・Ischemic hepatitis（虚血性肝炎）</td></tr>
+<tr><td>分岐1 → YES</td><td><strong>SHOCK</strong> → stage C／D／E のいずれかへ</td></tr>
+<tr><td>分岐1 → NO</td><td><strong>NO SHOCK</strong> → 分岐2へ</td></tr>
+<tr><td>分岐2「HEMODYNAMIC INSTABILITY?（血行動態不安定はあるか）」</td><td>・Hypotension（低血圧）&lt;br/&gt;・Tachycardia（頻脈）&lt;br/&gt;・Reduced cardiac output（心拍出量低下）&lt;br/&gt;・Need for vasoactive drugs（血管作動薬の必要）</td></tr>
+<tr><td>分岐2 → YES</td><td><strong>SCAI Shock STAGE B</strong></td></tr>
+<tr><td>分岐2 → NO</td><td><strong>SCAI Shock STAGE A</strong></td></tr>
+</tbody></table></div>
+<p><strong>右側：ステージ定義</strong></p>
+<div class="tw"><table>
+<thead><tr><th>Stage</th><th>見出し</th><th>定義（原図の文言）</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong></td><td><strong>At risk</strong>（リスクあり）</td><td>・Stable without shock（ショックなく安定）&lt;br/&gt;・Normal hemodynamics and perfusion（血行動態と灌流は正常）</td></tr>
+<tr><td><strong>B</strong></td><td><strong>Beginning</strong>（始まり）</td><td>・Pre-shock（プレショック）&lt;br/&gt;・Abnormal hemodynamics with preserved perfusion（血行動態は異常だが灌流は保たれている）</td></tr>
+<tr><td><strong>C</strong></td><td><strong>Classic shock</strong>（古典的ショック）</td><td>・Hypoperfusion requiring intervention (vasoactives or MCS)（介入＝血管作動薬またはMCS を要する低灌流）&lt;br/&gt;・Hypotension is usually present (not always)（低血圧は<strong>通常</strong>存在するが、<strong>常にではない</strong>）</td></tr>
+<tr><td><strong>D</strong></td><td><strong>Deterioration</strong>（悪化）</td><td>・Rising lactate or vasopressors（乳酸または昇圧薬が上昇中）&lt;br/&gt;・Criteria for SCAI stage C ＋ escalation of support（stage C の基準＋補助の強化）</td></tr>
+<tr><td><strong>E</strong></td><td><strong>Extremis</strong>（瀕死）</td><td>・Extremis with actual or impending circulatory collapse（実際のまたは切迫した循環虚脱を伴う瀕死状態）&lt;br/&gt;・Maximum-dose vasopressors or ongoing CPR（最大用量の昇圧薬、または進行中のCPR）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl"><strong>Stage C の定義に「低血圧は常にではない（not always）」と明記されている</strong></mark>。血圧計の数字が正常でも、<strong>乳酸・毛細血管再充満・網状皮斑・尿量・意識</strong>のどれかが崩れていて、それに対して血管作動薬やMCSを入れる判断をしているなら、その患者はすでに <strong>stage C</strong> である。当院でありがちな「血圧は保てているので経過観察」は、この定義のもとでは<strong>stage C の患者を stage A/B に誤分類している</strong>ことになる。</p>
+</div>
+<h3>7. CSの表現型（phenotype）— 何が違うと転帰が変わるか 🧬</h3>
+<ul><li><strong>CSは血行動態的に多様な病態</strong>であり、<strong>心室機能のパターン・充満圧・末梢血管緊張・心拍出量</strong>の組み合わせが異なる。</li><li><strong>右室（RV）または両室機能不全＋うっ血</strong>を有する患者は、<strong>ショック重症度が高く、臓器不全が多く、転帰が悪い</strong>。</li><li><mark class="hl"><strong>うっ血は3分の1の患者では欠如しうる（"cold and dry"）</strong></mark>。</li><li><strong>CSの病因</strong>、とくに<strong>AMIの存在と血行再建の成否</strong>が、臨床像と経過に影響する。</li><li><strong>AMIとCSは炎症性メディエータの放出を誘導しうる</strong>。これが全身性炎症反応を引き起こし、<strong>微小循環障害・不適切な血管拡張・進行性の臓器障害</strong>の引き金となりうる。</li><li><strong>混合型血管拡張性CS（mixed vasodilatory-CS）</strong>：<strong>感染の有無にかかわらず全身炎症から生じる</strong>もので、<strong>より高いショック重症度・より多い臓器不全・より悪い予後</strong>と関連する。</li><li><mark class="hl"><strong>CS患者の30〜50%が心停止（CA）を合併する</strong></mark>。CAは<strong>心筋機能障害・全身の虚血再灌流傷害・全身炎症・より高い死亡</strong>と関連する。</li><li><strong>hemometabolic ショック（＝cardiometabolic ショック）</strong>：<strong>高度な乳酸アシドーシスと多臓器不全</strong>で特徴づけられる<strong>CSの末期像</strong>として最近命名された。<strong>右室うっ血・より高いショック重症度・より悪い転帰</strong>と関連する。</li></ul>
+<h3>8. CSにおける予後予測 — 三軸モデル 🎯</h3>
+<ul><li><strong>改訂版SCAI Shock Classification は、個々のCS患者の臨床判断と予後予測に必要なコア領域を概念化する三軸モデル（three-axis model）を精緻化した</strong>：</li></ul>
+<ol><li><strong>ショック重症度（shock severity）</strong></li><li><strong>表現型（phenotype）</strong></li><li><strong>リスク修飾因子（risk modifiers）</strong></li></ol>
+<ul><li><strong>CS重症度の全体評価は、単にSCAI stage を割り当てる以上の多数の因子を統合する</strong>（Fig. 3）。</li><li><strong>CSの表現型は、重症度と相互に関連しつつも別物であり、心エコー・侵襲的血行動態・病因・検査所見・その他の臨床変数によって定義できる</strong>。</li><li><strong>リスク修飾因子＝CS重症度のスペクトラム全体にわたる、修飾できない独立した死亡リスク因子</strong>。<mark class="hl"><strong>最も顕著なのは「高齢」と「昏睡を伴う心停止」</strong></mark>。</li><li>SCAI分類の文脈で同定されてきたリスク修飾因子の例：</li><li><strong>血行動態変数</strong>（例：<strong>右房圧</strong>）</li><li><strong>心エコー計測</strong>（例：<strong>右室機能不全</strong>）</li><li><strong>検査バイオマーカー</strong>（例：<strong>hemometabolic CS</strong>）</li><li><strong>臨床的特徴</strong>（例：<strong>ショック経過の悪化傾向</strong>）</li><li><strong>心停止後に昏睡状態の患者における不可逆的な無酸素性脳損傷の存在は、ショックが是正されても良好な転帰を妨げうる</strong>。</li><li>確立された死亡リスク因子は複合リスクスコアに体系化されている（<strong>IABP-SHOCK II score</strong>、<strong>CS score</strong>）。<strong>SCAI分類と組み合わせるとリスク層別化が高まる</strong>。</li></ul>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005919" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005919）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 心原性ショック患者の重症度と表現型を評価する際に考慮すべき構成要素（原図・無改変。©Crit Care Med 2023） 中央に赤い円「Cardiogenic Shock」。それを取り巻くドーナツの<strong>上半分が紫の "PHENOTYPE"</strong>、<strong>下半分が青の "SEVERITY"</strong>。さらに外周に、上半分（紫の円＝表現型の要素）と下半分（青の円＝重症度の要素）が円環状に並ぶ。原キャプション訳：<strong>ショック重症度のマーカー（下）は、ショック表現型の評価（上）とは区別される</strong>。</p>
+</div>
+<h4>Table C. Figure 3 の全要素（原図を日本語化・網羅）</h4>
+<div class="tw"><table>
+<thead><tr><th>軸</th><th>要素（原図の文言）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td><strong>PHENOTYPE（表現型・上半分）</strong></td><td>Etiology</td><td>病因</td></tr>
+<tr><td></td><td>Timing / Chronic compensation</td><td>発症の時相／慢性代償の有無</td></tr>
+<tr><td></td><td>Ventricular dysfunction pattern</td><td>心室機能不全のパターン（左室・右室・両室）</td></tr>
+<tr><td></td><td>Systemic inflammation / Vasodilatation</td><td>全身炎症／血管拡張</td></tr>
+<tr><td></td><td>Filling pressures / Hemodynamic profile</td><td>充満圧／血行動態プロファイル</td></tr>
+<tr><td></td><td>Laboratory biomarkers / Clustering 'Omics'</td><td>検査バイオマーカー／クラスタリング・オミクス</td></tr>
+<tr><td><strong>SEVERITY（重症度・下半分）</strong></td><td>Blood pressure / Cardiac output</td><td>血圧／心拍出量</td></tr>
+<tr><td></td><td>Response to initial therapy / Deterioration</td><td>初期治療への反応／悪化</td></tr>
+<tr><td></td><td>Need for temporary MCS</td><td>一時的MCSの必要性</td></tr>
+<tr><td></td><td>SCAI Shock stage</td><td>SCAI Shock stage</td></tr>
+<tr><td></td><td>Vasopressor requirements</td><td>昇圧薬の必要量</td></tr>
+<tr><td></td><td>Lactic acidosis / Hypoperfusion</td><td>乳酸アシドーシス／低灌流</td></tr>
+</tbody></table></div>
+<p><strong>読み方</strong>：<mark class="hl"><strong>「昇圧薬の量」と「乳酸」は重症度の軸であって、表現型の軸ではない</strong></mark>。ノルアドレナリン0.3γという情報からは「重い」ことは分かるが「何をすべきか」は決まらない。次の一手を決めるのは上半分（左室か右室か、うっ血があるか、炎症が乗っているか、de novo か acute-on-chronic か）である。</p>
+<h3>9. 現代の標準治療 ①早期の同定と評価 🔍</h3>
+<ul><li><strong>早期認識と、基礎にある原因の同定・治療が、CS患者の初期管理における中心的な目標</strong>である（原文はここで Supplemental Table 1 を参照している。<mark class="hl">本ノートの範囲外</mark>）。</li><li><strong>心電図とポイントオブケア心臓超音波（POCUS）</strong>が、<strong>心筋虚血・左室/右室機能不全・構造的心疾患</strong>のスクリーニングに有用。</li><li><strong>侵襲的血行動態モニタリングは価値がある</strong>。まず<strong>動脈カテーテル</strong>（正確な血圧測定）と<strong>中心静脈ライン</strong>（血管作動薬の投与、充満圧と静脈血酸素飽和度の測定）から始める。</li><li><strong>PACモニタリングは情報価値がありうる</strong>。とくに、</li><li><strong>ショック表現型が不確かな患者</strong></li><li><strong>重症CSまたは初期治療への反応が乏しい患者</strong></li></ul>
+<p>→ <strong>心拍出量と体血管抵抗の直接測定が、血管作動薬の調節を容易にする</strong>。</p>
+<ul><li><strong>CSでAMIが疑われる場合、または未診断の心筋症の場合は、早期の冠動脈造影を実施すべき</strong>。</li><li><strong>AMI-CSでは、RCTが「早期の責任血管血行再建の成功は長期生存を改善する」ことを示している</strong>。<mark class="hl"><strong>非責任病変の血行再建は初期には見送るべき</strong></mark>。</li></ul>
+<h4>Table 1. RCTに基づく心原性ショック患者へのエビデンスに基づく介入（原表を日本語化・全項目）</h4>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>エビデンスに基づく戦略</th><th>出典（原表の記載）</th></tr></thead>
+<tbody>
+<tr><td><strong>AMI-CSの血行再建</strong></td><td><strong>早期血行再建は生存を改善する</strong></td><td>SHOCK 試験（Should We Emergently Revascularize Occluded Coronaries for Cardiogenic Shock trial）</td></tr>
+<tr><td></td><td><strong>初期の多枝血行再建は有害である</strong></td><td>CULPRIT-SHOCK 試験（Culprit Lesion Only PCI versus Multivessel PCI in Cardiogenic Shock trial）</td></tr>
+<tr><td><strong>血管作動薬の使用</strong></td><td><strong>ノルアドレナリンはドパミンやアドレナリンより安全（不整脈が少ない）</strong></td><td>SOAP II 試験（Sepsis Occurrence in Acutely Ill Patients-II trial）および 心原性ショックにおけるアドレナリンとノルアドレナリンの有効性・忍容性比較試験</td></tr>
+<tr><td></td><td><strong>ドブタミンとミルリノンは生存と有害事象が同等</strong></td><td>Dobutamine Compared with Milrinone（DOREMI）</td></tr>
+<tr><td></td><td><strong>レボシメンダンは生存を改善しない</strong></td><td>メタ解析</td></tr>
+<tr><td><strong>一時的機械的循環補助の使用</strong></td><td><strong>AMI-CSでのIABPルーチン使用は生存を改善しない</strong></td><td>IABP-SHOCK II 試験</td></tr>
+<tr><td></td><td><strong>前もってのVA-ECMO使用は、レスキューVA-ECMOに対して生存を改善しない</strong></td><td>ECMO-CS 試験（Extracorporeal Membrane Oxygenation-Cardiogenic Shock trial）</td></tr>
+</tbody></table></div>
+<p><strong>注</strong>：AMI-CS＝急性心筋梗塞に伴う心原性ショック、IABP＝大動脈内バルーンパンピング、VA-ECMO＝静脈脱血-動脈送血体外式膜型人工肺。<mark class="hl"><strong>この表が「RCTに基づく」と言える介入のすべてである</strong></mark>——つまり、CSの管理でRCTが答えを出しているのは<strong>7項目だけ</strong>であり、しかもそのうち<strong>4項目は「効かない／有害」という陰性の答え</strong>である。</p>
+<h3>10. 現代の標準治療 ②初期の呼吸・血行動態の安定化 💨</h3>
+<p><strong>呼吸</strong></p>
+<ul><li><strong>動脈血酸素飽和度を90%より上に保つよう酸素投与が推奨される</strong>。</li><li><strong>CPAPによる非侵襲換気は呼吸仕事量を減らし肺水腫を改善しうる</strong>。<strong>高流量鼻カニュラ（HFNC）は、とくに陽圧が望ましくないときに有用でありうる</strong>。</li><li><strong>侵襲的人工呼吸が必要なときは、一回換気量と駆動圧を制限する肺保護換気を考慮してよい</strong>——ただし <mark class="hl"><strong>それを支持するエビデンスは無い（in the absence of supporting evidence）</strong></mark> と原文は明記する。</li><li><strong>陽圧換気は左室のloading条件を改善し肺水腫を和らげうる</strong>一方、<mark class="hl"><strong>volume status と右室機能次第では血行動態を悪化させうる</strong></mark>ことを認識することが本質的。</li></ul>
+<p><strong>輸液・降圧薬</strong></p>
+<ul><li><strong>うっ血徴候のないCS患者は慎重な輸液投与から利益を得るかもしれない</strong>（例：<strong>晶質液250 mLを15〜30分かけてボーラス</strong>）。</li><li><strong>うっ血がある場合は利尿薬治療が適応</strong>。</li><li><mark class="hl"><strong>β遮断薬とその他の降圧治療は、CSが解消する（低灌流の持続も昇圧薬需要も無くなる）まで、一般に差し控えるべき</strong></mark>。</li><li><strong>正常血圧CSには静注血管拡張薬のトライアル（例：ニトロプルシド、ニトログリセリン）を考慮してよい</strong>。<strong>体血管抵抗（したがって左室後負荷）が高いと予想される</strong>ため。</li></ul>
+<p><strong>昇圧薬・強心薬</strong></p>
+<ul><li><strong>エビデンスは限られているが、昇圧薬と強心薬による治療はCS患者の初期血行動態補助の標準であり続けている</strong>。</li><li><strong>ノルアドレナリンが、低血圧のCS患者において一般に第一選択の昇圧薬</strong>である。<strong>ドパミンやアドレナリンと比較して安全性プロファイルがより好ましい（とくに不整脈が少ない）</strong>ことに基づく。</li><li><strong>CS患者の至適血圧目標はまだ確立されておらず、患者間で異なる可能性が高い</strong>。</li><li><mark class="hl"><strong>最初の24時間の平均MAPが65 mmHg未満だと転帰が悪いことが示されている</strong></mark>。</li><li><strong>収縮期血圧 ≥ 90 mmHg、平均動脈圧 ≥ 65 mmHg</strong> が目標として提案されているが、<mark class="hl"><strong>これは他の型のショックの集団からの外挿に基づく</strong></mark>。</li><li><strong>昇圧薬で動脈圧が回復したら、強心薬を追加して心拍出量を改善し灌流を回復させてよい</strong>。<strong>これはしばしば動脈圧をさらに上げ、昇圧薬の漸減を可能にする</strong>。</li><li><strong>最近の検出力不足のRCT（DOREMI）は、AMI-CSが3分の1を占める異質なCS集団において、ドブタミンとミルリノンで同様の転帰と安全性プロファイルを示した</strong>。</li><li><strong>注目すべきは、ドブタミンのほうが効果の発現と消失が速く、血管拡張性低血圧を起こしにくい可能性がある</strong>こと。</li><li><strong>ノルアドレナリン＋ドブタミンの組み合わせが多くのCS患者で有用</strong>。ただし<strong>CSの病因と表現型によっては別の薬剤のほうが反応が良いことがある</strong>。</li><li><strong>バソプレシンは左室後負荷を増やし心係数を下げうる</strong>。したがって <mark class="hl"><strong>心係数が十分な「右室優位CS」または「混合型血管拡張性CS（例：心臓術後CS）」に限って用いる</strong></mark>。</li><li><strong>昇圧薬・強心薬の毒性はよくある</strong>：</li><li><strong>過剰な血管収縮が低灌流を悪化させる</strong></li><li><strong>頻脈が心筋虚血を起こす</strong></li><li><strong>頻脈性不整脈</strong></li></ul>
+<h4>判断の流れ（薬物療法の初手）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>CSで低血圧がある</td><td>SBP・MAP、低灌流所見、うっ血の有無</td><td><strong>ノルアドレナリンを第一選択で開始</strong>（ドパミン・アドレナリンより不整脈が少ない）</td></tr>
+<tr><td>動脈圧は戻ったが灌流が戻らない</td><td>乳酸トレンド、心拍出量、末梢所見</td><td><strong>強心薬を追加</strong>（ドブタミンまたはミルリノン。転帰は同等。ドブタミンは発現/消失が速く低血圧を起こしにくい）</td></tr>
+<tr><td>正常血圧CS（血圧は保たれ低灌流のみ）</td><td>体血管抵抗が高いと予想されるか</td><td><strong>静注血管拡張薬のトライアルを考慮</strong>（ニトロプルシド／ニトログリセリン）</td></tr>
+<tr><td>うっ血徴候がない</td><td>容量負荷の余地があるか</td><td><strong>晶質液250 mLを15〜30分でボーラス</strong>（慎重に）</td></tr>
+<tr><td>うっ血徴候がある</td><td>充満圧、肺うっ血</td><td><strong>利尿薬</strong></td></tr>
+<tr><td>右室優位CS、または心係数が保たれた混合型血管拡張性CS</td><td>心係数、右室機能</td><td><strong>バソプレシンを検討</strong>（左室後負荷↑・心係数↓の副作用があるため適応を限る）</td></tr>
+<tr><td>CS患者にβ遮断薬・RAS系薬が入っている</td><td>低灌流の持続、昇圧薬需要</td><td><mark class="hl"><strong>CSが解消するまで差し控える</strong></mark></td></tr>
+<tr><td>昇圧薬・強心薬を増量中</td><td>過剰血管収縮・頻脈・不整脈</td><td><strong>毒性を疑い、MCSの適応評価に移る</strong></td></tr>
+</tbody></table></div>
+<h3>11. 一時的機械的循環補助（MCS）— デバイスごとのエビデンス ⚙️</h3>
+<ul><li><strong>より高い昇圧薬必要量はCS患者の死亡増加と関連する</strong>。<strong>より高いショック重症度と、薬剤性有害作用のリスク上昇の双方を反映していると考えられる</strong>。</li><li><strong>一時的MCSデバイスは、血管作動薬が無効なとき、あるいは毒性を伴うときに、追加の血行動態補助を提供できる</strong>。</li></ul>
+<p><strong>IABP（大動脈内バルーンパンピング）</strong></p>
+<ul><li><strong>低コスト・植込みの容易さ・比較的低い合併症リスク</strong>のため、<strong>多くの国で最も使われている一時的MCSデバイス</strong>であり続けている。</li><li><mark class="hl"><strong>AMI-CS患者で生存改善に失敗しており、この設定でのルーチン使用は推奨されない</strong></mark>。</li><li><strong>IABPは左室後負荷を減らす</strong>。<strong>HF-CS患者、とくにショック重症度が低い患者で有用かもしれないと推測されている</strong>（＝あくまで推測）。</li><li><mark class="hl"><strong>AMIの機械的合併症（乳頭筋断裂、心室中隔穿孔）にはIABPの適応が残る</strong></mark>。</li></ul>
+<p><strong>pLVAD（経皮的左室補助装置）</strong></p>
+<ul><li><strong>IABPより大きな血行動態補助を提供する</strong>。</li><li><mark class="hl"><strong>生存改善は示されていない</strong></mark>。</li><li><strong>出血・血栓塞栓・下肢虚血を含む合併症リスクの上昇と関連しうる</strong>。</li></ul>
+<p><strong>pRVAD（経皮的右室補助装置）</strong></p>
+<ul><li><strong>単独（孤立性右室不全に対して）でも、pLVADとの併用（両室不全に対して）でも使用できる</strong>。</li><li><mark class="hl"><strong>RCTで検証されていない</strong></mark>。</li></ul>
+<p><strong>VA-ECMO</strong></p>
+<ul><li><mark class="hl"><strong>強力な両室補助と肺補助の双方を提供できる唯一の一時的MCSデバイス</strong></mark>であり、<strong>重症または難治性CS（SCAI Shock Stage D および E）</strong>、<strong>進行中の心停止を含む</strong>症例に有用でありうる。</li><li><strong>しかし最近の ECMO-CS 試験は、早期VA-ECMOが「初期薬物療法＋レスキューVA-ECMO（39%で使用）」に対して生存を改善することを示せなかった</strong>。</li><li><strong>VA-ECMOは左室後負荷を増やしうる</strong>。結果として<strong>左室拡張末期圧の上昇・左室拡大・大動脈弁開放の障害</strong>を招きうる。</li><li>したがって <strong>VA-ECMO中の左室アンローディング（"venting"）が重要でありうる</strong>。<strong>IABPまたはpLVADの追加</strong>などで達成できる。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl"><strong>「RCTがCS患者でいずれのMCSデバイスについても転帰改善を示していないことを踏まえると、選択されていないCS患者へのMCSデバイスのルーチン使用は推奨できない」</strong></mark>——原文の結論である。一部の患者に利益の可能性があることは否定されていないが、<strong>「誰が利益を得るのかを同定するにはエビデンスが不十分」</strong>とも明記される。さらに、<strong>最高リスクの患者の多くは強力なMCSを使っても転帰が悪い</strong>こと、<strong>hemometabolicショックに進行してからのMCS導入では患者を救い出せないかもしれない</strong>ことが述べられる。<mark class="hl"><strong>「遅れて入れる」ことの無効性が、「入れるべきか」の議論と同じ重みで書かれている</strong></mark>。</p>
+</div>
+<p><strong>一時的MCSの患者選択（原文が示す原則）</strong></p>
+<p>著者らが用いる患者選択の一般原則は、<strong>SCAI分類の三軸モデルと並行する</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>軸</th><th>問い</th><th>判断</th></tr></thead>
+<tbody>
+<tr><td><strong>重症度</strong></td><td>血管作動薬で血行動態が十分に支えられているか。薬剤毒性が出ていないか</td><td><strong>支えられていない／毒性がある患者ほどMCSの必要性が大きい</strong>。<strong>適格と判断されたらできるだけ速やかに導入するのが望ましい</strong></td></tr>
+<tr><td><strong>表現型</strong></td><td>右室機能不全か左室機能不全か。呼吸不全があるか</td><td><strong>pRVAD/pLVAD か VA-ECMO か</strong>の選択を規定する</td></tr>
+<tr><td><strong>リスク修飾因子</strong></td><td>年齢、併存症、脳損傷、臓器不全の総量</td><td><strong>予後だけでなく、destination therapy（恒久治療）への適格性そのものを規定する</strong></td></tr>
+</tbody></table></div>
+<p><strong>出口戦略（exit strategy）</strong></p>
+<ul><li><mark class="hl"><strong>一時的MCSは、明確な出口戦略があるときにのみ使用すべきである</strong></mark>：</li></ul>
+<ol><li><strong>回復（recovery）への橋渡し</strong></li><li><strong>恒久的MCS（durable MCS）への橋渡し</strong></li><li><strong>心移植（heart transplantation）への橋渡し</strong></li><li><strong>選択された患者では「判断／適格性（decision/candidacy）への橋渡し」戦略を考慮してよい</strong></li></ol>
+<ul><li><strong>多くのCS患者、とくに acute-on-chronic HF-CS では心機能が回復せず、恒久的MCSまたは心移植を要する</strong>。</li><li><strong>恒久的MCSと心移植への適格性は早期に評価すべき</strong>。<strong>これらの治療の対象になりうる患者では末梢臓器機能を保つことを目標とする</strong>ため。</li><li><mark class="hl"><strong>心機能が回復せず、恒久的MCSにも移植にも適格でないCS患者の転帰は悲惨（dismal）であり、早期の緩和ケア相談が適切である</strong></mark>。</li></ul>
+<p><strong>多職種ショックチーム</strong></p>
+<ul><li><strong>十分なデータが得られるまでは、構造化された評価アプローチと標準化されたケアプロトコル（侵襲的血行動態データに基づきうる）を用いる多職種ショックチームによる評価が、進行したCS治療を個別化する最善の方法と思われる</strong>。</li><li><mark class="hl"><strong>多面的なショックチーム対応のどの要素（侵襲的血行動態評価、一時的MCSの迅速な導入とエスカレーション、多職種の調整、標準化プロトコル）が有益なのかを理解するには、さらなる研究が必要である</strong></mark>。</li></ul>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005919" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005919）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. SCAI Shock stage に合わせた、心原性ショック（またはそのリスク）患者の管理アルゴリズム（原図・無改変。©Crit Care Med 2023） <strong>原キャプション訳</strong>：本アルゴリズムは、<strong>現時点で得られる最良のエビデンスに基づく一般的アプローチに関する著者らの専門家合意</strong>を表すものであり、<strong>判断は患者固有の因子に合わせて調整すべきである</strong>ことを認識したうえで示されている。略語：AMI＝急性心筋梗塞、BP＝血圧、ECG＝心電図、ECMO＝体外式膜型人工肺、HTX＝心移植、IABP＝大動脈内バルーンパンピング、LVAD＝左室補助装置、MCS＝機械的循環補助、PAC＝肺動脈カテーテル、Spo2＝パルスオキシメトリ、STEMI＝ST上昇型心筋梗塞。</p>
+<p><strong>図の構成</strong>：左側に「入院したリスク患者」から始まる初期3ステップ（番号1〜2〜3の灰色ボックス）。そこから右側の5段のステージ別管理へ矢印が伸びる。右側は下から A → B → C → D → E と積み上がり、右端に上向き太矢印「SHOCK SEVERITY」。stage C〜E をまたぐ縦の灰色帯に「SHOCK TEAM ACTIVATION &amp; TRANSFER TO ICU」と書かれ、その帯の中に小さく「Assess contra-indications for MCS as bridge to LVAD/HTX/recovery」とある。左のステップ1へ戻る矢印には「Serial reassessment based on response to treatment」と記されている。</p>
+</div>
+<h4>Table D. Figure 4 の全ボックスの文言（原図を日本語化・網羅）</h4>
+<p><strong>左側：初期の3ステップ</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>見出し</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>—</td><td>起点（黒帯）</td><td>At risk patient admitted to the hospital（入院したリスク患者）</td></tr>
+<tr><td><strong>1</strong></td><td><strong>Assign patient to SCAI Shock Stage</strong>（患者にSCAI Shock Stage を割り当てる）</td><td>・Vital signs (hypotension, tachycardia)（バイタルサイン：低血圧、頻脈）&lt;br/&gt;・Hypoperfusion (cold extremities, narrow pulse pressure, altered mental state)（低灌流：四肢冷感、脈圧狭小、意識変容）&lt;br/&gt;・Lab values (lactate, creatinine, transaminases)（検査値：乳酸、クレアチニン、トランスアミナーゼ）&lt;br/&gt;・Hemodynamic support (inotropes, vasopressors)（血行動態補助：強心薬、昇圧薬）</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Initial cardiac assessment</strong>（初期の心臓評価）</td><td>・ECG (exclude STEMI / ischemia)（心電図：STEMI・虚血を除外）&lt;br/&gt;・Bedside cardiac ultrasound（ベッドサイド心臓超音波）&lt;br/&gt;・Coronary angiogram if suspected AMI → Early culprit vessel revascularization（AMI疑いなら冠動脈造影 → 早期の責任血管血行再建）&lt;br/&gt;・Identify/treat reversible causes or contributors（可逆的な原因・寄与因子の同定と治療）&lt;br/&gt;・Place arterial line ＋ central line if hypotensive（低血圧なら動脈ライン＋中心静脈ライン）</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Respiratory stabilization</strong>（呼吸の安定化）</td><td>・Secure airway if comatose（昏睡なら気道確保）&lt;br/&gt;・Supplemental oxygen (SpO2 ~ 94-96%)（酸素投与：SpO2 約94〜96%）&lt;br/&gt;・Consider trial of non-invasive ventilation（非侵襲換気のトライアルを考慮）&lt;br/&gt;・Intubation if respiratory distress, progressive hemodynamic instability, or cardiac arrest（呼吸窮迫・進行する血行動態不安定・心停止があれば挿管）</td></tr>
+<tr><td>↩</td><td>フィードバック矢印</td><td>Serial reassessment based on response to treatment（治療反応に基づく反復再評価）</td></tr>
+</tbody></table></div>
+<p><strong>右側：SCAI stage 別の管理</strong></p>
+<div class="tw"><table>
+<thead><tr><th>Stage</th><th>管理項目（原図の文言・全項目）</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>・Consider comprehensive echocardiogram（包括的心エコーを考慮）&lt;br/&gt;・Optimize volume status（容量状態を最適化）&lt;br/&gt;・Avoid preventable complications（予防可能な合併症を避ける）&lt;br/&gt;・Identify high-risk patients using risk stratification（リスク層別化で高リスク患者を同定）&lt;br/&gt;・Monitor closely for signs of hypoperfusion or instability（低灌流・不安定の徴候を注意深くモニター）&lt;br/&gt;・Initiate guideline-directed medical therapy（ガイドラインに沿った薬物療法を開始）</td></tr>
+<tr><td><strong>B</strong></td><td>・Consider ICU transfer（ICU転棟を考慮）&lt;br/&gt;・Perform comprehensive echocardiogram（包括的心エコーを実施）&lt;br/&gt;・Monitor lactate and assess for signs of hypoperfusion（乳酸をモニターし低灌流徴候を評価）&lt;br/&gt;・Optimize volume status（容量状態を最適化）&lt;br/&gt;・Consider to reduce or hold betablocker ± renin-angiotensin-system-acting agents if hypotensive（低血圧ならβ遮断薬・RAS系薬の減量/中止を考慮）&lt;br/&gt;・Consider vasoactive drugs depending on blood pressure（血圧に応じて血管作動薬を考慮）</td></tr>
+<tr><td><strong>C</strong></td><td>・Consider PAC（肺動脈カテーテルを考慮）&lt;br/&gt;・Perform comprehensive echocardiogram（包括的心エコーを実施）&lt;br/&gt;・Determine CS phenotype（CS表現型を決定）&lt;br/&gt;・Trend lactate levels（乳酸のトレンドを追う）&lt;br/&gt;・Optimize volume status（容量状態を最適化）&lt;br/&gt;・Initiate vasoactive drugs（血管作動薬を開始）：&lt;br/&gt;　◦ Norepinephrine for hypotension to restore BP（低血圧にはノルアドレナリンで血圧を戻す）&lt;br/&gt;　◦ Dobutamine to normalize cardiac output and perfusion（心拍出量と灌流を正常化するためにドブタミン）&lt;br/&gt;・Evaluate candidacy and need for temporary MCS（一時的MCSの適格性と必要性を評価）</td></tr>
+<tr><td><strong>D</strong></td><td>・Place PAC（肺動脈カテーテルを留置）&lt;br/&gt;・Consider to repeat echocardiogram（心エコーの再検を考慮）&lt;br/&gt;・Determine hemodynamic ＆ ventricular function phenotype（血行動態・心室機能の表現型を決定）&lt;br/&gt;・Identify causes of deterioration（悪化の原因を同定）&lt;br/&gt;・Trend lactate levels（乳酸のトレンドを追う）&lt;br/&gt;・Optimize volume status（容量状態を最適化）&lt;br/&gt;・Escalate inotropes/vasopressors（強心薬・昇圧薬を増強）&lt;br/&gt;・Initiate MCS in eligible patients（適格な患者でMCSを開始）：&lt;br/&gt;　◦ LIMITED role for IABP（IABPの役割は限定的）</td></tr>
+<tr><td><strong>E</strong></td><td>・Determine goals of care（ケアの目標を決定）：&lt;br/&gt;　◦ Palliation if not a candidate for advanced therapies（進んだ治療の適応でなければ緩和）&lt;br/&gt;・Place PAC if not present（未挿入なら肺動脈カテーテルを留置）&lt;br/&gt;・Exclude new causes of refractory shock（難治性ショックの新たな原因を除外）：&lt;br/&gt;　◦ Repeat echocardiogram if suspicion of new structural change（新たな構造的変化を疑えば心エコー再検）&lt;br/&gt;・Address metabolic acidosis and optimize ventilation（代謝性アシドーシスへの対処と換気の最適化）&lt;br/&gt;・Optimize volume status（容量状態を最適化）&lt;br/&gt;・Escalate MCS if needed（必要ならMCSを強化）：&lt;br/&gt;　◦ ECMO for eligible patients（適格な患者にはECMO）</td></tr>
+<tr><td><strong>C〜E をまたぐ縦帯</strong></td><td><strong>SHOCK TEAM ACTIVATION ＆ TRANSFER TO ICU</strong>（ショックチームの起動とICUへの搬送）／Assess contra-indications for MCS as bridge to LVAD/HTX/recovery（LVAD・心移植・回復への橋渡しとしてのMCSの禁忌を評価）</td></tr>
+</tbody></table></div>
+<h3>12. 右室（RV）優位の心原性ショック 🫀</h3>
+<ul><li><strong>孤立性または優位な右室不全によるCSの治療では、①肺高血圧の存在と病因、②陽圧換気の右心への有害作用、を考慮しなければならない</strong>。</li><li><mark class="hl"><strong>肺血管抵抗を上げる因子（低酸素、高炭酸ガス血症、アシドーシス、高い気道内圧）の是正が本質的</strong></mark>であり、<strong>可能なら気管挿管を避けるべき</strong>。<strong>高流量鼻カニュラは過度の陽圧なしに酸素化補助を提供できる</strong>。</li><li><strong>右室前負荷が不十分だと一回拍出量が損なわれる</strong>。しかし <mark class="hl"><strong>高い右室充満圧（すなわち RAP &gt; 15〜20 mmHg）は右室性能を悪化させ、腎機能障害・肝機能障害をもたらしうる</strong></mark>。</li><li><mark class="hl"><strong>平均動脈圧を平均肺動脈圧より上に維持することが望ましい</strong></mark>。</li><li><strong>ミルリノンまたはバソプレシンは、カテコラミンより右室後負荷に対して好ましい効果を持つかもしれない</strong>。</li><li><strong>選択的肺血管拡張薬（吸入または全身投与）は、右室不全の原因によっては適応となりうる</strong>。とくに <strong>肺うっ血や低酸素性肺疾患を伴わない肺高血圧による右室不全</strong>で。</li><li><strong>pRVAD が利用できる場合、一般には「重度の肺高血圧を伴わない難治性の右室優位CS」に温存される</strong>。<strong>肺高血圧または両室性CS には VA-ECMO が好まれる</strong>。</li><li><strong>右室梗塞によるCS では、輸液負荷とドブタミンが有用</strong>。<strong>難治例には吸入一酸化窒素とpRVADを用いる</strong>。</li><li><strong>完全房室ブロックによる房室電気的同期の喪失は血行動態を損ないうる</strong>。<strong>房室順次ペーシング（DDDペーシングモード）で改善しうる</strong>。</li></ul>
+<h3>13. 今後のCS研究 🔬</h3>
+<ul><li><strong>CS患者を対象とした多数のRCTが現在進行中</strong>であり、エビデンス基盤を拡大するだろう（原文は Supplemental Table 2 を参照。<mark class="hl">本ノートの範囲外</mark>）。</li><li>そのなかには、<strong>進んだ一時的MCSデバイス（例：Impella、VA-ECMO）と至適薬物療法を比較する試験</strong>が複数含まれ、<mark class="hl"><strong>その予定サンプルサイズは、これらのデバイスを用いて公表済みのRCTに組み入れられた患者の総和を超える</strong></mark>。</li><li><strong>将来の研究には、表現型分類とショック重症度分類の統合が必須</strong>である。CS集団の異質性を包み込み、<strong>特定のサブグループで新たな治療戦略を生みうる病態生理学的機序を理解する</strong>ためである。</li><li><strong>多職種ショックチームとエビデンスに基づくCSプロトコルを含む、より一貫した標準治療の実装は、RCTの一般化可能性を臨床実践へ高める潜在力を持つ</strong>。ただし<strong>各要素の有効性と安全性を確立するには、さらなる厳密な研究を要する</strong>。</li><li><strong>RCT設計時には、政府・規制当局の関与と患者アドボケイトの意見の取り込みが推奨される</strong>。</li><li><mark class="hl"><strong>初回来院時の重症度のためにインフォームド・コンセントはしばしば遅延・免除せざるを得ないため、介入群と対照群を定義する際に患者代表が関与することが決定的に重要</strong></mark>であり、<strong>緊急時のインフォームド・コンセント免除（emergency exception from informed consent）プロセスの利用が必要かもしれない</strong>。</li><li><strong>患者の状態と臨床経過の動的変化を考慮するアダプティブ試験がこの集団では有用でありうる</strong>。</li><li><mark class="hl"><strong>生存を超えた患者中心アウトカム（例：臓器不全のない生存日数 days alive without organ failure）の組み入れが推奨される</strong></mark>。</li></ul>
+<h3>14. 結論（原文） 🏁</h3>
+<ul><li><strong>CS患者は現代の治療にもかかわらず死亡リスクが高い</strong>。</li><li><mark class="hl"><strong>どの血行動態補助戦略を選んだとしても、進行性の末梢臓器不全と難治性CSを避けるため、低灌流をできる限り速く・完全に是正することが本質的である</strong></mark>。</li><li><strong>CS集団内に観察される著しい異質性が、CS患者のケアに対する「一律のアプローチ」を妨げる</strong>。</li><li><strong>ショック重症度分類と多職種チームに基づく戦略の組み合わせが、個別化治療を可能にしうる</strong>。</li><li><strong>特定のCS表現型に関連する病態生理とバイオマーカーパターンの理解が進めば、個別化医療をさらに促進しうる</strong>。</li><li><strong>将来の研究は、CSにおける特定の治療の安全性と有効性を確立するだけでなく、どの患者が一時的MCSなどの治療から最も利益を得やすいかを同定する必要がある</strong>。</li><li><strong>CS研究は、ショック表現型と重症度、そして検討するアウトカムの点で調和（harmonize）されるべきである</strong>。一般化可能性を担保するため。</li></ul>
+<h2>🔍 既存ノートとの整合（PDF照合で判明した旧記述の誤り・不足）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>旧版（2026-08-02 取り込み）からの訂正点 旧版は<strong>PDFの1〜2ページのみ</strong>（抄録・KEY POINTS・Introduction・疫学と定義の冒頭）から作られており、本文の<strong>7割以上が欠落</strong>していた。今回、原著12ページ全文とFig. 1〜4・Table 1を照合して全面改稿した。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧版の記述</th><th>PDF照合の結果</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「SCAI分類の各段階（A〜E）の具体的定義、表現型分類、昇圧薬・強心薬の選択と用量、一時的MCSの各デバイスの適応と成績、Fig. 1〜2 の内容は<strong>抽出範囲外のため本ノートに反映していない</strong>」と自己申告</td><td><strong>すべて原著本文とFig. 2〜4に明記されている</strong>。本版で全面補完（§6・§7・§10・§11、Table B/C/D）</td></tr>
+<tr><td>2</td><td>「Fig. 1〜2」と記載</td><td><strong>図は Fig. 1〜4 の4点</strong>（Fig. 3＝重症度と表現型の構成要素、Fig. 4＝SCAI stage別管理アルゴリズム）。<mark class="hl">旧版は図の点数を取り違えていた</mark></td></tr>
+<tr><td>3</td><td>一時的MCSのルーチン使用について「<strong>ECLS-SHOCK の結果と整合する</strong>」と記載</td><td><mark class="hl"><strong>誤り。本レビューが引用しているのは ECMO-CS 試験（Ostadal 2023, Circulation）であって ECLS-SHOCK ではない</strong></mark>。ECLS-SHOCK は本論文では<strong>引用文献74の「design and rationale」論文</strong>としてのみ登場し、<strong>結果は本レビューの時点（2023年9月号）ではまだ出ていない進行中試験</strong>として扱われている。旧版は後年の知識を本論文の主張に混ぜていた</td></tr>
+<tr><td>4</td><td>「preshock ＞ 正常血圧CS ＞ 低血圧CS の順に予後が良い」</td><td><strong>正しい</strong>（原文どおり）。維持</td></tr>
+<tr><td>5</td><td>「入院中30%超、30日後には40〜50%」</td><td><strong>正しい</strong>（原文 "exceeds 30% during hospitalization and increases to 40–50% after 30 days"）。維持</td></tr>
+<tr><td>6</td><td>表の「低血圧CS」行が「—」（空欄）</td><td>本版で三病型を血圧・心拍出量・灌流の3列で埋めた（Table A）</td></tr>
+<tr><td>7</td><td>薬剤の具体名・用量・血圧目標の記載なし</td><td>本版で補完：<strong>ノルアドレナリン第一選択</strong>／<strong>ドブタミン＝ミルリノン（DOREMI）</strong>／<strong>レボシメンダンは無効</strong>／<strong>バソプレシンは右室優位・混合型血管拡張性CSに限定</strong>／<strong>目標 SBP ≥ 90・MAP ≥ 65（他のショックからの外挿）</strong>／<strong>MAP &lt; 65 は転帰不良</strong>／<strong>晶質液250 mL/15〜30分</strong></td></tr>
+<tr><td>8</td><td>「機械的循環補助」の内訳（IABP／pLVAD／pRVAD／VA-ECMO）と各エビデンスの記載なし</td><td>本版で §11 に全記載。<strong>pRVAD はRCT未検証</strong>、<strong>pLVAD は生存改善なし＋合併症増</strong>、<strong>IABP はAMI機械的合併症には適応が残る</strong>などを追加</td></tr>
+<tr><td>9</td><td>「出口戦略」を4分類と書いていたが原文の内訳が不明確</td><td>原文の4分類を正確化：<strong>回復／恒久的MCS／心移植への橋渡し</strong>の3つが本線で、<strong>「判断/適格性（decision/candidacy）への橋渡し」は選択された患者で考慮してよい</strong>という位置づけ</td></tr>
+<tr><td>10</td><td>心停止合併・hemometabolicショック・混合型血管拡張性CS・「cold and dry」の記載なし</td><td>本版で §7 に追加（<strong>CA合併30〜50%</strong>、<strong>うっ血欠如は3分の1</strong>）</td></tr>
+<tr><td>11</td><td>frontmatter に <code>updated</code> なし、PDF埋め込みなし、図なし</td><td>本版で <code>updated: 2026-08-15</code> を追加（<code>created: 2026-08-02</code> は変更せず）、PDFを <code>_attachments/</code> にコピーして冒頭に埋め込み、原図4点を <code>fig/</code> に抽出して該当箇所に配置</td></tr>
+</tbody></table></div>
+<p><strong>旧版が正しかった点</strong>：疫学の転換（AMI→HF-CS）、正常血圧CSの概念、乳酸の重要性、SCAI A〜E の5段階であること、CS研究のRCT困難4点、「専門家合意駆動」という著者の留保。これらは原文と一致していたため維持した。</p>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>ナラティブレビューであることの限界</strong></li></ol>
+<p>系統的検索式・PROSPERO登録・エビデンスの質評価（GRADE等）がない。<strong>DATA SOURCES は "salient medical literature" とだけ書かれている</strong>——何を採用し何を落としたかは追跡できない。著者6名のうち複数がCS領域の主要データ産生者でもあり、<strong>引用75本のうち著者自身（Jentzer JC）が筆頭または共著の論文が20本以上を占める</strong>。自己引用の多さは論点になる。</p>
+<ol><li><strong>「専門家合意」と「RCT」の境界が図と本文で揺れる</strong></li></ol>
+<p><mark class="hl"><strong>Table 1 が「RCTに基づく」と言えるのは7項目だけで、そのうち4項目は陰性の答え</strong></mark>（多枝同時PCIは有害／IABPルーチンは無効／レボシメンダンは無効／早期VA-ECMOはレスキューに勝らない）。一方 <strong>Fig. 4 のアルゴリズムは全体が著者らの専門家合意</strong>であり、キャプションにそう明記されている。<mark class="hl"><strong>JCでは「Fig. 4 の各ボックスのうち、Table 1 に裏付けがあるのはどれか」を一つずつ突き合わせると議論が締まる</strong></mark>。裏付けがあるのは実質「AMI疑いなら早期の責任血管血行再建」「低血圧にノルアドレナリン」「強心薬はドブタミンでもミルリノンでも可」程度で、<strong>PAC留置・乳酸トレンド・MCSエスカレーション・ショックチーム起動はすべて専門家意見</strong>である。</p>
+<ol><li><strong>本文と図の内的不一致（2箇所）</strong></li></ol>
+<ul><li><mark class="hl"><strong>酸素化目標</strong>：本文は「動脈血酸素飽和度を90%より上に保つ」と書くが、<strong>Fig. 4 のステップ3は「SpO2 ~ 94-96%」</strong>と書く</mark>。90%超と94〜96%は臨床的に別物の指示であり、原文はこの差を説明していない。</li><li><strong>preshock の定義</strong>：本文は「<strong>低心拍出量のために低血圧だが灌流は保たれている</strong>患者」と定義するが、<strong>Fig. 1 では同じ領域（低血圧∩低心拍出）が "Low-output HF without shock" とラベルされ</strong>、<strong>Fig. 2 の stage B は「血行動態は異常だが灌流は保たれている」＋判定基準に「頻脈」「血管作動薬の必要」を含む</strong>——つまり<strong>低血圧を必須としない</strong>。<mark class="hl"><strong>3つの図表で preshock の外延がずれている</strong></mark>。</li></ul>
+<ol><li><strong>「一時的MCSはルーチンには推奨できない」と「Fig. 4 で stage D/E にMCS・ECMOを置く」の緊張</strong></li></ol>
+<p>本文は「RCTがどのMCSデバイスについても転帰改善を示していない以上、選択されていない患者へのルーチン使用は推奨できない」と明言する。にもかかわらず Fig. 4 は stage D で「適格な患者でMCSを開始」、stage E で「必要ならMCSを強化：適格な患者にはECMO」と指示する。<strong>「選択された患者」を定義する基準は本文にもFig. 4にも無い</strong>——著者ら自身が「<strong>どの患者が利益を得るかを同定するにはエビデンスが不十分</strong>」と書いているのだから、これは論理的には<strong>未解決のまま実装を勧めている</strong>ことになる。JCで最も議論になる箇所。</p>
+<ol><li><strong>血圧目標が外挿である</strong></li></ol>
+<p><strong>SBP ≥ 90 / MAP ≥ 65 は「他の型のショックの集団からの外挿」</strong>と原文が明記している。<mark class="hl"><strong>CS特有の至適血圧を検証したRCTは引用されていない</strong></mark>。「MAP &lt; 65 で転帰が悪い」というのは観察研究（Burstein 2020, Crit Care）の関連であって、<strong>MAPを上げれば転帰が良くなることの証明ではない</strong>。心原性ショックでは昇圧そのものが後負荷を上げて心拍出量を下げうるので、この外挿は敗血症より危うい可能性がある。</p>
+<ol><li><strong>数値の粒度が薄い</strong></li></ol>
+<p>本レビューは<strong>効果量をほとんど提示しない</strong>。「早期血行再建は生存を改善する」「IABPは改善しない」と定性的に書くだけで、<mark class="hl"><strong>RR・HR・95%CI・NNT が本文にもTable 1にも一つも出てこない</strong></mark>。読者は原典（SHOCK、CULPRIT-SHOCK、IABP-SHOCK II、ECMO-CS）に当たらないと大きさが分からない。CONCISE DEFINITIVE REVIEW という体裁の制約とはいえ、<strong>「30%超」「40〜50%」「30〜50%」「3分の1」「39%」「250 mL」「15〜30分」「RAP 15〜20 mmHg」「MAP 65 mmHg」「SBP 90 mmHg」「SpO2 90% / 94〜96%」以外に数字がない</strong>のは、JCの素材としては薄い。</p>
+<ol><li><strong>HF-CS のエビデンス空白を指摘しながら、推奨はAMI-CS由来のまま</strong></li></ol>
+<p>「非AMI原因が現在は優勢かもしれない」「AMI-CSとHF-CSは病態生理も治療も乖離している」と述べておきながら、<strong>Table 1 の7項目のうち5項目はAMI-CS由来</strong>である。<mark class="hl"><strong>HF-CS に固有の推奨として本文が挙げるのは「IABPが有用かもしれないと推測されている」という推測レベルの1文だけ</strong></mark>。この非対称は本レビューの構造的弱点であり、著者らもそれを自覚した書き方をしている。</p>
+<ol><li><strong>利益相反</strong></li></ol>
+<p>Schaubroeck は <strong>Abiomed（Impella の製造元）</strong> からの謝金、Morrow の所属機関は <strong>Abbott・Abiomed・Amgen</strong> からの資金を受けている。Mebazaa は複数企業からの助成・謝金・コンサルタント契約があり、<strong>「昇圧薬と特定の機械的循環補助デバイスはショックへの適応で承認されていない可能性がある」というオフラベル使用の開示</strong>をしている。<mark class="hl"><strong>pLVAD への評価（「生存改善は示されていない」「合併症が増えうる」）はむしろ抑制的であり、COIが推奨を甘くした形跡は本文からは読み取れない</strong></mark>が、JCでは開示として押さえておく。</p>
+<ol><li><strong>本文に無いこと（推測で埋めない）</strong></li></ol>
+<p>本レビューには次の記載が<strong>無い</strong>。ノートでも書かない。</p>
+<ul><li><strong>日本での薬剤・デバイスの承認状況と保険適用</strong>（ミルリノン・レボシメンダン・Impella・pRVAD等）。レボシメンダンは日本で未承認、Impella は施設要件つきという事情は<strong>本論文の範囲外</strong>であり、当院で議論するときは<strong>別の情報源に基づく話として明確に分離する</strong>こと。</li><li><strong>具体的な投与量（γ数）</strong>。原文は「ノルアドレナリン」「ドブタミン」と薬剤名を挙げるだけで、<mark class="hl"><strong>用量の数値は一つも書かれていない</strong></mark>（唯一の数値は輸液の250 mL/15〜30分）。</li><li><strong>SCAI 各 stage の実測死亡率</strong>。「stage が上がるごとに死亡が段階的に高くなる」とあるが、<mark class="hl"><strong>本文に stage 別の死亡率の数値は掲載されていない</strong></mark>。</li><li><strong>Supplemental Table 1（初期評価）と Supplemental Table 2（進行中RCT一覧）</strong> の中身。電子付録であり本PDFには含まれない。</li></ul>
+<h2>📚 主要引用文献一覧（本文中の記載から）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典（原文の引用表記）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>CSの現代的管理（AHA科学声明）</td><td>van Diepen S, et al. *Circulation* 2017;136:e232–e268</td></tr>
+<tr><td>2</td><td>CSの疫学・病態生理・現代的管理（ESC心不全学会ポジションステートメント）</td><td>Chioncel O, et al. *Eur J Heart Fail* 2020;22:1315–1341</td></tr>
+<tr><td>3</td><td>米国におけるCS入院の発生率と院内死亡の15年推移</td><td>Osman M, et al. *J Am Heart Assoc* 2021;10:e021061</td></tr>
+<tr><td>4</td><td>急性MCSの "door to support" time</td><td>Esposito ML, Kapur NK. *F1000Res* 2017;6:737</td></tr>
+<tr><td>6</td><td>AMI合併CSの診断・治療（ESC急性心血管ケア学会ポジションステートメント）</td><td>Zeymer U, et al. *Eur Heart J Acute Cardiovasc Care* 2020;9:183–197</td></tr>
+<tr><td>10</td><td>HF関連CS：病態生理・評価・管理</td><td>Abraham J, et al. *J Card Fail* 2021;27:1126–1140</td></tr>
+<tr><td>11</td><td>de novo vs acute-on-chronic のHF-CS（CCCTNレジストリ）</td><td>Bhatt AS, et al. *J Card Fail* 2021;27:1073–1081</td></tr>
+<tr><td>13</td><td><strong>SCAI分類 初版</strong>（ACC・AHA・SCCM・STS が2019年4月に承認）</td><td>Baran DA, et al. *Catheter Cardiovasc Interv* 2019;94:29–37</td></tr>
+<tr><td>14</td><td><strong>SCAI SHOCK stage 分類 専門家合意アップデート</strong>（ACC・ACEP・AHA・ESC-ACVC・ISHLT・SCCM・STS が2021年12月に承認）</td><td>Naidu SS, et al. *J Am Coll Cardiol* 2022;79:933–946</td></tr>
+<tr><td>15</td><td>低血圧を伴わない全身低灌流を合併したAMI（SHOCK試験レジストリ）</td><td>Menon V, et al. *Am J Med* 2000;108:374–380</td></tr>
+<tr><td>16</td><td>心臓ICU患者の死亡リスク層別化のためのshock/preshockの定義</td><td>Jentzer JC, et al. *Circ Heart Fail* 2021;14:e007678</td></tr>
+<tr><td>18</td><td>アシドーシスの検査マーカーとCSの死亡（<strong>hemometabolic shock の定義開発</strong>）</td><td>Jentzer JC, et al. *Shock* 2022;57:31–40</td></tr>
+<tr><td>21</td><td><strong>CSの staging と phenotyping の進歩 Part 1（三軸モデル）</strong></td><td>Jentzer JC, et al. *JACC* 2022;1:1–14</td></tr>
+<tr><td>22</td><td>心臓ICUにおけるCS分類と死亡予測</td><td>Jentzer JC, et al. *J Am Coll Cardiol* 2019;74:2117–2128</td></tr>
+<tr><td>23</td><td>CS重症度の各段階を定義する基準</td><td>Kapur NK, et al. *J Am Coll Cardiol* 2022;80:185–198</td></tr>
+<tr><td>24</td><td>両室機能とショック重症度が心臓ICU患者の死亡を予測する</td><td>Burstein B, et al. *Chest* 2022;161:697–709</td></tr>
+<tr><td>32</td><td><strong>CSの phenotyping</strong></td><td>Zweck E, et al. *J Am Heart Assoc* 2021;10:e020085</td></tr>
+<tr><td>37</td><td>病因によらないCSの早期リスク層別化（<strong>CS score</strong>）</td><td>Beer BN, et al. *Eur J Heart Fail* 2022;24:657–667</td></tr>
+<tr><td>38</td><td><strong>CSの最初の120分の管理</strong>（蘇生から診断まで）</td><td>Jentzer JC, Tabi M, Burstein B. *Curr Opin Crit Care* 2021;27:416–425</td></tr>
+<tr><td>40</td><td>AMI合併CSの侵襲的管理（AHA科学声明）</td><td>Henry TD, et al. *Circulation* 2021;143:e815–e829</td></tr>
+<tr><td>41</td><td>CSにおけるPACによる完全血行動態プロファイリングと院内死亡低下の関連</td><td>Garan AR, et al. *JACC Heart Fail* 2020;8:903–913</td></tr>
+<tr><td>42</td><td><strong>SHOCK試験</strong>：AMI合併CSにおける早期血行再建</td><td>Hochman JS, et al. *N Engl J Med* 1999;341:625–634</td></tr>
+<tr><td>43</td><td><strong>CULPRIT-SHOCK試験</strong>：AMI合併CSにおけるPCI戦略</td><td>Thiele H, et al. *N Engl J Med* 2017;377:2419–2432</td></tr>
+<tr><td>44</td><td>心臓ICUにおける陽圧換気</td><td>Alviar CL, et al. *J Am Coll Cardiol* 2018;72:1532–1553</td></tr>
+<tr><td>45</td><td>進行中のCS患者への早期心不全薬物療法の発生と転帰</td><td>van Diepen S, et al. *Crit Care Med* 2014;42:281–288</td></tr>
+<tr><td>46</td><td><strong>心臓集中治療における昇圧薬・強心薬療法</strong></td><td>Jentzer JC, Hollenberg SM. *J Intensive Care Med* 2021;36:843–856</td></tr>
+<tr><td>47</td><td>CSにおけるアドレナリンと短期生存（2583例の個別データメタ解析）</td><td>Leopold V, et al. *Intensive Care Med* 2018;44:847–856</td></tr>
+<tr><td>49</td><td>最初の24時間のMAPとCS患者の院内死亡の関連</td><td>Burstein B, et al. *Crit Care* 2020;24:513</td></tr>
+<tr><td>50</td><td><strong>DOREMI試験</strong>：CSにおけるミルリノン vs ドブタミン</td><td>Mathew R, et al. *N Engl J Med* 2021;385:516–525</td></tr>
+<tr><td>51</td><td>AMI合併難治性CSにおけるバソプレシンの血行動態効果</td><td>Jolly S, et al. *Am J Cardiol* 2005;96:1617–1620</td></tr>
+<tr><td>56</td><td><strong>IABP-SHOCK II試験</strong>：AMI合併CSへのIABP補助</td><td>Thiele H, et al. *N Engl J Med* 2012;367:1287–1296</td></tr>
+<tr><td>61</td><td>CSにおける経皮的短期能動的MCSデバイス（RCTの系統的レビュー・共同メタ解析）</td><td>Thiele H, et al. *Eur Heart J* 2017;38:3523–3531</td></tr>
+<tr><td>62</td><td>微小軸流LVAD vs IABP と院内死亡・大出血の関連</td><td>Dhruva SS, et al. *JAMA* 2020;323:734–745</td></tr>
+<tr><td>64</td><td>成人へのVA-ECMO（JACC科学専門家パネル）</td><td>Guglin M, et al. *J Am Coll Cardiol* 2019;73:698–716</td></tr>
+<tr><td>67</td><td><strong>ECMO-CS試験</strong>：CS治療におけるECMO</td><td>Ostadal P, et al. *Circulation* 2023;147:454–464</td></tr>
+<tr><td>68</td><td>VA-ECMO施行患者における機械的左室アンローディング</td><td>Grandin EW, et al. *J Am Coll Cardiol* 2022;79:1239–1250</td></tr>
+<tr><td>70</td><td>ショックチームの有無による心臓ICUのCS管理と転帰</td><td>Papolos AI, et al. *J Am Coll Cardiol* 2021;78:1309–1317</td></tr>
+<tr><td>71</td><td>CSに対する標準化されたチームベースのケア</td><td>Tehrani BN, et al. *J Am Coll Cardiol* 2019;73:1659–1669</td></tr>
+<tr><td>73</td><td>心臓ICUにおける<strong>右室優位の心不全・ショック</strong>の疫学と管理</td><td>Kanwar MK, et al. *Eur Heart J Acute Cardiovasc Care* 2022;11:584–594</td></tr>
+<tr><td>74</td><td><strong>ECLS-SHOCK試験の design and rationale</strong>（＝本レビュー時点では<strong>結果未発表の進行中試験</strong>）</td><td>Thiele H, et al. *Am Heart J* 2021;234:1–11</td></tr>
+<tr><td>75</td><td><strong>DanGer Shock試験の rationale and design</strong>（同上・進行中）</td><td>Udesen NJ, et al. *Am Heart J* 2019;214:60–68</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>心原性ショックは「重症度（SCAI A〜E）× 表現型 × 修飾できないリスク」の三軸で記述する。血圧ではなく低灌流——とくに乳酸——が予後を決め、stage C の定義には「低血圧は常にではない」と書かれている。</strong></mark></p>
+<ul><li><mark class="hl"><strong>原因の是正（AMIなら早期の責任血管血行再建。多枝同時PCIは有害）＋ ノルアドレナリン → 圧が戻ったらドブタミン、が土台。強心薬はドブタミンでもミルリノンでも転帰は同じ。</strong></mark></li><li><mark class="hl"><strong>一時的MCSはルーチン使用を支持するRCTが一つも無い。使うなら「回復／恒久的MCS／心移植（または判断）への橋渡し」という出口戦略を先に決める。hemometabolicショックに落ちてから入れても救えないかもしれない、と原文は書く。</strong></mark></li><li><mark class="hl"><strong>右室優位CSでは挿管を避け、肺血管抵抗を上げる因子（低酸素・高炭酸・アシドーシス・高気道内圧）を潰し、MAPを平均肺動脈圧より高く保つ。RAP 15〜20 mmHg超はむしろ有害。</strong></mark></li><li><strong>回復せず、恒久的MCSにも移植にも適格でない患者の転帰は悲惨——早期の緩和ケア相談が適切、と原文が明記する。</strong></li></ul>
+</div>
+<h4>判断の流れ（SCAI stage 別・Fig. 4 に基づく要約）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>急性心疾患で入院、低灌流も血行動態不安定もない</td><td>診察＋検査（乳酸・Cr・トランスアミナーゼ）、リスク層別化</td><td><strong>Stage A</strong>：包括的心エコーを考慮、容量最適化、ガイドライン薬物療法を開始、低灌流の徴候を密に監視</td></tr>
+<tr><td>血行動態は不安定（低血圧・頻脈・低心拍出・血管作動薬が要る）だが灌流は保たれている</td><td>乳酸、末梢所見、内服中のβ遮断薬・RAS系薬</td><td><strong>Stage B</strong>：ICU転棟を考慮、包括的心エコー、乳酸を追う、<strong>低血圧ならβ遮断薬・RAS系薬を減量/中止</strong>、血圧に応じて血管作動薬</td></tr>
+<tr><td>低灌流があり、輸液以上の介入（血管作動薬またはMCS）を要する。血圧は正常のこともある</td><td>表現型（左室/右室・充満圧・炎症）、乳酸トレンド</td><td><strong>Stage C</strong>：<strong>ショックチーム起動＋ICU</strong>、PACを考慮、<strong>ノルアドレナリンで血圧を戻し、ドブタミンで心拍出量と灌流を戻す</strong>、一時的MCSの適格性を評価</td></tr>
+<tr><td>乳酸または昇圧薬が上昇中／stage C の基準＋補助の強化が要る</td><td>悪化の原因（新たな虚血・機械的合併症・感染）、右室機能</td><td><strong>Stage D</strong>：<strong>PACを留置</strong>、心エコー再検、表現型を決定、強心薬・昇圧薬を増強、<strong>適格ならMCSを開始（IABPの役割は限定的）</strong></td></tr>
+<tr><td>実際のまたは切迫した循環虚脱。最大用量の昇圧薬または進行中のCPR</td><td>ケアの目標、進んだ治療（LVAD/移植）の適格性、新たな構造的変化</td><td><strong>Stage E</strong>：<strong>まずゴール・オブ・ケアを決める（適応外なら緩和）</strong>、PAC留置、難治性ショックの新原因を除外、代謝性アシドーシスと換気を是正、<strong>適格ならECMOへエスカレート</strong></td></tr>
+<tr><td>右室優位のCS</td><td>肺高血圧の有無と原因、RAP、気道内圧</td><td><strong>挿管を避ける努力（HFNC）</strong>、低酸素/高炭酸/アシドーシス/高気道内圧を是正、<strong>MAP &gt; 平均肺動脈圧</strong>、ミルリノンまたはバソプレシン、選択的肺血管拡張薬、難治かつ重度肺高血圧なしならpRVAD、肺高血圧または両室ならVA-ECMO</td></tr>
+<tr><td>MCSを検討している</td><td>出口戦略が決まっているか</td><td><strong>回復／恒久的MCS／心移植（選択例では判断・適格性）への橋渡しが定まらなければ始めない</strong>。恒久的MCS・移植の適格性は<strong>早期に</strong>評価する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

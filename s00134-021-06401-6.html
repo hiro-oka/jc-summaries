@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>REVERSE-AKI 制限的輸液管理の実現可能性RCT（ICM2021）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-021-06401-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">REVERSE-AKI 制限的輸液管理の実現可能性RCT（ICM2021）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Vaara ST, Ostermann M, Bitker L, Schneider A, Poli E, Hoste E, Fierens J, Joannidis M, Zarbock A, van Haren F, Prowle J, Selander T, Bäcklund M, Pettilä V, Bellomo R, on behalf of the REVERSE-AKI study team. Restrictive fluid management versus usual care in acute kidney injury (REVERSE-AKI): a pilot randomized controlled feasibility trial. Intensive Care Medicine. 2021. doi:10.1007/s00134-021-06401-6（手元PDFはonline-first版のため巻・ページの印字なし）</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2021-05-07）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-021-06401-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-021-06401-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Restrictive fluid management versus usual care in acute kidney injury (REVERSE-AKI): a pilot randomized controlled feasibility trial</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-021-06401-6.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-021-06401-6.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-021-06401-6.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>この論文で決められること</strong>：「AKIで、初期蘇生が済んで血管内容量不足ではないと判断した患者に、輸液を絞り、必要なら利尿薬で出す」という<strong>運用が現場で回るかどうか</strong>。回った（72時間で約1.1 Lの差がついた）。それ以上のことは、この研究では決められない。</li><li><strong>この論文で決められないこと</strong>：RRT回避・AKI期間短縮・死亡改善。RRTの差（13% vs 30%）は副次評価項目であり、非盲検・多重性未補正・イベント数21件の所見。<mark class="hl">RRTを減らすためのプロトコルとして採用する根拠にはならない</mark>。</li><li><strong>当院で実装するなら</strong>、本試験の介入は5要素バンドルとしてそのまま移植できる粒度がある（下記「介入の中身」の表）。特に<strong>維持輸液の全廃</strong>（経腸栄養が不耐かつ静脈栄養が禁忌のときだけ許可）は、当院のAKI回診チェック項目に落とせる。</li><li><strong>一方で、本試験で最も守られなかったのも維持輸液の制限だった</strong>（RFM群のプロトコル違反18/49件のうち、過剰な維持輸液が9件＝18.4%）。ルールを書くだけでは減らない部分なので、<strong>指示簿の維持輸液オーダーそのものを既定オフにする</strong>ような構造的な仕掛けが要る。</li><li><strong>数値目標の置き方</strong>：本試験の1日目標は「陰性が望ましいが、少なくとも1日あたり +300 mL 未満」。達成できないときはRRTでの除水を検討するが強制ではなく、24時間に限り +900 mL までは許容する、という<strong>段階的な緩め方</strong>まで規定されていた。当院のde-resuscitationプロトコルにも「達成できないときの許容範囲」を明記する価値がある。</li><li><strong>患者選択の落とし穴</strong>：本試験はスクリーニング997例のうち102例（10.2%）しかランダム化できていない。除外理由の最多は「まだ血管内容量不足と判断された」227例で、ICU入室から12時間以上たってもなお「絞ってよい」と言い切れない患者が最大の層である。当院でも「絞る対象の見極め」がボトルネックになる。</li><li><strong>モニタリング</strong>：本試験の有害事象の大半は電解質異常とRRT関連だった。当院で制限的管理を行うなら、Na・K・Mg・Pの日次確認をセットにする。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：輸液療法はAKIの予防・治療の伝統的な柱である一方、AKI患者は輸液過剰（fluid overload）に陥りやすく、輸液過剰は死亡率上昇（複数の観察研究）とAKIの進行に関連する。ARDS（FACTT）、敗血症（CLASSIC pilot、Chen &amp; Kollef）、一般ICU（SWIPE）では各種の制限的戦略が「安全」とは報告されていた。逆に大腹部手術では、術中・術後の制限的輸液が通常ケアよりAKIリスクを高めた（RELIEF, NEJM 2018）。</li><li><strong>Unknown（分かっていなかったこと）</strong>：<strong>AKIを発症した重症患者そのものを対象に、制限的輸液管理を検証したRCTは1本も存在しなかった</strong>。ICM の AKI リサーチアジェンダ、KDIGO の Controversies 会議のいずれもこれを研究優先課題に挙げていた。「絞るのが良いのか」以前に「絞る運用が現場で成立するのか（分離がつくのか・安全か・遵守できるのか）」が未知だった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：AKI患者に特化した初の制限的輸液管理RCT。<strong>入力を絞る</strong>（維持輸液の原則禁止）と<strong>出力を増やす</strong>（利尿薬は制限なし、必要ならRRTでの除水）の<strong>両輪を1つのバンドルにした点</strong>が先行試験と異なる。結果、72時間累積輸液バランスで平均 −1148 mL の分離を達成し、有害事象はむしろ通常ケア群で多かった。ただし本研究は<strong>実現可能性試験</strong>であり、転帰の優劣を判定する設計ではない。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 初期蘇生が済み血管内容量不足ではないと判断されたAKI患者100例で、制限的輸液管理は<strong>主要評価項目である「72時間累積輸液バランスの分離」を達成した</strong>（−1080 mL vs +61 mL、平均差 −1148 mL、P=0.033）。<strong>これは「実現可能性が示された」という結論であって、転帰が改善したという結論ではない。</strong></p>
+</div>
+<ul><li><strong>デザイン</strong>：欧州5・豪州2の計7 ICUでの多施設・非盲検・並行群間・パイロット実現可能性RCT。2017年10月〜2020年1月。997例をスクリーニングし102例をランダム化、両群1例ずつが同意を撤回して<strong>解析対象は100例</strong>（制限群49・通常ケア群51）。</li><li><strong>主要評価項目</strong>：ランダム化から<strong>72時間の累積輸液バランス</strong>（層別化変数で調整）。転帰指標ではない。</li><li><strong>達成された分離（介入の本体）</strong>：72時間累積バランスは制限群 <strong>−1080 mL（SD 2003）</strong> vs 通常ケア群 <strong>+61 mL（SD 3131）</strong>、調整平均差 <strong>−1148 mL</strong>（95%CI −2200〜−97、P=0.033）。24時間では −416（1194）vs +409（1566）、差 −822 mL（−1381〜−264、P=0.004）。ICU退室時／7日目では −2166（2988）vs −650（4469）、差 −1532 mL（−3036〜−29、P=0.046）。</li><li><strong>副次評価項目</strong>：AKI持続期間の中央値は 2日［1–3］vs 3日［2–7］、中央値差 −1（−3〜0）だが <strong>P=0.071 で有意差なし</strong>。RRT施行は <strong>6/46（13%）vs 15/50（30%）、RR 0.42（95%CI 0.16–0.91）、P=0.043</strong>。フロセミド1日量（中央値）は 0（0–19）vs 1.4（0–26.2）mg、差 0（−11〜5.7）、P=0.700 で<strong>両群同等</strong>。</li><li><strong>探索的評価項目</strong>：90日死亡 9/46（19.6%）vs 13/49（26.5%）、RR 0.74（0.35–1.46）、P=0.387。人工呼吸器フリー日数・昇圧薬フリー日数・ICUフリー日数・90日RRTフリー日数・90日透析依存は<strong>いずれも有意差なし</strong>。</li><li><strong>安全性</strong>：1つ以上の有害事象は制限群 11例（22.4%）vs 通常ケア群 25例（49%）、RR 0.46（95%CI 0.36–0.63）、P=0.001。重篤有害事象は 6例（12.2%）vs 16例（31.4%）、RR 0.39（0.15–0.86）、P=0.031。<strong>大半は血清電解質異常とRRT関連</strong>。</li><li><strong>遵守</strong>：プロトコル違反は制限群 18例（36.7%）vs 通常ケア群 5例（9.8%）。制限群で最多の違反は<strong>過剰な維持輸液の使用 9例（18.4%）</strong>。組み入れ速度は中央値 0.8［0.5–1.7］例／施設／月。</li><li><strong>著者の結論</strong>：制限的輸液管理レジメンは<strong>実行可能で、通常ケアより有害事象が少なく、輸液バランスに有意な分離をもたらした</strong>。より大規模な試験が正当化される。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — AKIと輸液の関係の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>AKI（acute kidney injury／急性腎障害）</strong> は、数時間〜数日で腎機能が低下する症候群。診断は <strong>KDIGO基準</strong>（血清クレアチニンの上昇、または尿量の低下）で行う。ICU患者の大きな割合が発症し、死亡・入院期間延長と結びつく。</p>
+<p><strong>なぜ輸液の話になるのか。</strong> AKIには2つの顔がある。</p>
+<ol><li><strong>入口の顔（腎前性・低灌流）</strong>：循環血液量が足りないと腎血流が落ちて尿が出なくなる。だから「AKI＝まず輸液」が長く教科書的な第一手だった。</li><li><strong>出口の顔（うっ血・輸液過剰）</strong>：しかし腎はいったん障害されると尿を出せなくなる。そこに輸液を続ければ体内に水が溜まる（<strong>fluid overload／輸液過剰</strong>）。腎は被膜に包まれた臓器なので、静脈圧が上がって腎が腫れると<strong>腎内圧が上がって灌流がさらに落ちる（腎うっ血）</strong>。つまり、入口の治療がそのまま出口の害になる。</li></ol>
+<p><strong>本試験が狙ったのはこの切り替え点</strong>。「もう血管内容量不足ではない」と判断した後の患者に、輸液を絞り（入力を減らす）、必要なら利尿薬やRRTで水を引く（出力を増やす）ことで、水が溜まるのを止めようという発想である。この「引く」局面を <strong>de-resuscitation</strong> と呼ぶ。</p>
+<p>用語の整理（初出定義）：</p>
+<ul><li><strong>RRT（renal replacement therapy／腎代替療法）</strong>：血液透析・持続的血液濾過透析などの総称。本試験では「輸液を引くために使う手段」としても位置づけられている。</li><li><strong>累積輸液バランス（cumulative fluid balance）</strong>：入った水（点滴・経口）から出た水（尿・ドレーン・消化管・RRTの除水）を引いた値の積算。本試験では<strong>不感蒸泄を計算に入れていない</strong>。</li><li><strong>実現可能性試験（feasibility trial）／パイロット試験</strong>：本試験のような設計。目的は「治療が効くか」ではなく「本番の大規模試験を回せるか」。主要評価項目が転帰ではなく「介入がちゃんと違いを生んだか（separation）」に置かれるのが特徴。</li><li><strong>層別化変数（stratification variables）</strong>：ランダム化を層に分けて行うための変数。本試験ではAKI重症度と輸液貯留所見の有無。</li><li><strong>SOFA / SAPS II</strong>：それぞれ臓器障害の程度、重症度を点数化するスコア。</li></ul>
+<p><mark class="hl">この論文を読むときは「主要評価項目が輸液バランスであって転帰ではない」ことを最初に頭に固定する</mark>。ここを外すと「RRTが減った試験」として誤って記憶される。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p><strong>AKIに特異的な治療は存在しない。</strong> 論文冒頭の整理は明快である。多くの重症患者がAKIを発症し、AKIは有害転帰リスクの増加と関連する。現在のAKI管理は依然として支持療法にとどまり、血行動態と輸液状態の最適化、腎毒性物質の回避、重症例ではRRT、で構成される。心臓外科（PrevAKI）や敗血症（recombinant alkaline phosphatase）で新規治療が評価されているものの、<strong>一般ICU患者に使える薬理学的治療は現時点で存在しない</strong>。</p>
+<p><strong>輸液は両刃である。</strong> 輸液療法はAKIの予防・治療における伝統的な礎石でありながら、AKI患者はとりわけ輸液過剰に陥りやすい。そして輸液過剰は死亡率上昇（引用文献7〜11）およびAKIの進行（同12, 13）と関連する。したがって、<strong>適切に蘇生済みのAKI患者に対しては、より制限的な輸液管理がうっ血を減らし、腎およびその他の臓器機能を改善しうる</strong>、というのが本試験の作業仮説である。</p>
+<p><strong>先行研究が示していた方向</strong>：</p>
+<ul><li>敗血症性ショックにおける制限的な蘇生輸液 vs 通常ケアの実現可能性試験（CLASSIC pilot）で、制限群のAKI悪化リスクが低かった。</li><li>一般ICU（SWIPE）、敗血症（CLASSIC pilot・Chen &amp; Kollef）、ARDS（FACTT）では、各種の制限的戦略が「安全」と報告されていた。</li><li><strong>ただし逆方向の証拠もある</strong>：大腹部手術患者では、術中・術後の制限的輸液蘇生・管理が通常ケアと比べて<strong>AKIリスクを増加させた</strong>（RELIEF）。</li></ul>
+<p><strong>空白</strong>：「AKIを持つ重症患者における制限的輸液管理」は、ICMのAKIアジェンダおよびKDIGOのControversies会議のいずれからも研究優先課題として名指しされていたが、そのような試験は本論文の時点まで1本も実施されていなかった。</p>
+<p><strong>目的</strong>：多国籍・非盲検・無作為化・対照・実現可能性パイロット試験として、制限的輸液管理（RFM: restrictive fluid management）レジメンと通常ケアを比較し、<strong>分離（separation）・安全性・遵守（compliance）の観点から介入の実現可能性を検討する</strong>こと。検証した仮説は「提案するRFMレジメンはランダム化後72時間の累積輸液バランスをより低くする」である。</p>
+<h3>3. 方法（Methods）📐</h3>
+<h4>3-1. デザイン</h4>
+<ul><li><strong>形式</strong>：研究者主導・多施設・非盲検・無作為化・対照・並行群間パイロット実現可能性試験</li><li><strong>登録</strong>：ClinicalTrials.gov NCT03251131。試験プロトコルと統計解析計画は<strong>データ収集完了前に公表済み</strong></li><li><strong>施設</strong>：欧州5 ICU＋豪州2 ICU の計7施設（Helsinki／Guy's &amp; St Thomas'／Ghent／Innsbruck／Münster／Lausanne／Royal London／Austin／Canberra の研究チームが謝辞に列記されている）</li><li><strong>期間</strong>：2017年10月〜2020年1月</li><li><strong>倫理</strong>：各施設で研究倫理委員会の承認をスクリーニング開始前に取得。施設の慣行と倫理承認に応じ、<strong>組み入れ前の本人・代諾者からの書面同意</strong>、または<strong>遅延同意</strong>（可及的速やかに書面同意を取得）のいずれかを採用。同意が得られない／撤回された場合は、それまでに収集したデータの使用許可を求めた。ヘルシンキ宣言に準拠</li><li><strong>ランダム化</strong>：電子プラットフォームで 1:1 に割付。<strong>ブロックサイズ 2〜4 の可変置換ブロック</strong></li><li><strong>層別化変数（2つ）</strong>：</li><li>AKIの重症度（KDIGO基準の <strong>stage 1</strong> vs <strong>stage 2または3</strong>）</li><li><strong>輸液貯留の臨床所見の有無</strong>（末梢の圧痕性浮腫、および／または P/F比 200 mmHg未満を伴う陽性バランス、と定義）</li><li><strong>盲検化</strong>：介入の性質上不可能。データ解析を行う統計家のみが割付に盲検</li></ul>
+<h4>3-2. 対象（組み入れ・除外）</h4>
+<p><strong>組み入れ基準（5つすべてを満たす）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>基準</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>18歳以上で、動脈ラインが留置された状態で critical care に入室している</td></tr>
+<tr><td>2</td><td>critical care 滞在が 12時間以上72時間以下</td></tr>
+<tr><td>3</td><td>AKIがあるが RRTを受けていない</td></tr>
+<tr><td>4</td><td>主治医により 血管内容量不足ではないと判断されている</td></tr>
+<tr><td>5</td><td>ランダム化後 48時間は critical care に留まる見込み がある</td></tr>
+</tbody></table></div>
+<p><strong>本試験のAKI定義</strong>（KDIGOそのままではなく、以下の運用定義）</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>血漿クレアチニンがベースラインの 1.5倍以上（ただし直前の測定値から 27 µmol/L 以上の低下がないこと）</td></tr>
+<tr><td>2</td><td>直前12時間の全体尿量が 0.5 mL/kg/h未満（または 6 mL/kg 未満）</td></tr>
+</tbody></table></div>
+<p>（1）および／または（2）で定義。適格基準の詳細定義は電子付録 Table S1・S2 にある（本ノートは本文PDFのみに基づき、付録は参照していない）。</p>
+<p><strong>除外基準</strong>は Fig. 1 のフローチャートに列挙されている（後述の表に全数値を起こした）。</p>
+<h4>3-3. 介入 — 何をもって「制限的」としたか 💧</h4>
+<p>試験介入（RFM）は、試験患者を治療する臨床医に対する<strong>治療推奨のバンドル</strong>である。全体の狙いは「ランダム化後の各日に<strong>陰性バランス</strong>を達成すること」。推奨は5要素からなる。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>推奨の中身</th><th>数値・条件</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>1日総輸液入力を絞る</td><td>許容するのは 薬剤・栄養輸液（経腸または静脈）・血液製剤（臨床的に必要な場合）のみ</td></tr>
+<tr><td>2</td><td>維持輸液（maintenance IV fluids）を原則禁止</td><td>許可されるのは「経腸栄養が不耐 かつ 静脈栄養が禁忌」のときだけ</td></tr>
+<tr><td>3</td><td>ボーラス輸液は許可</td><td>臨床的に必要と判断されればいつでも投与してよい</td></tr>
+<tr><td>4</td><td>出力を入力に合わせる</td><td>利尿薬は使用制限なし。可能な限り出力を入力に一致させ、望ましくは陰性の累積バランス、しかし常に 1日あたり +300 mL 未満</td></tr>
+<tr><td>5</td><td>達成できないときはRRTでの除水を検討</td><td>RRT開始は義務ではない。RRTが臨床的に望ましくないと判断された場合、プロトコルは24時間に限り +900 mL までの目標未達を許容すると規定</td></tr>
+</tbody></table></div>
+<p><strong>対照群（通常ケア）</strong>：輸液管理は主治医チームの裁量に完全に委ねられた。</p>
+<p><strong>輸液バランスの算出</strong>：総入力（静脈内＋経口）から総出力（尿量、ドレーンへの喪失、消化管からの喪失、RRTによる除水）を差し引く。<strong>不感蒸泄は計算に含めていない</strong>。</p>
+<p><strong>介入期間</strong>：ランダム化から<strong>7日間、またはICU退室まで</strong>のいずれか早い方。</p>
+<h4>3-4. アウトカム</h4>
+<p><strong>主要評価項目</strong></p>
+<ul><li>ランダム化後 <strong>72時間の累積輸液バランス</strong>（層別化変数で調整）</li></ul>
+<p><strong>副次評価項目</strong></p>
+<ul><li><strong>AKIの持続期間（日数）</strong>：KDIGOのクレアチニン基準および尿量基準で定義。ICU退室または14日のいずれか早い方で打ち切り</li><li><strong>RRTを要した患者数</strong>：14日で打ち切り（<strong>ICU退室後に開始されたRRTも含む</strong>）</li><li>ランダム化後 <strong>24時間の累積輸液バランス</strong></li><li><strong>ICU退室時の累積輸液バランス</strong>（ICU滞在が7日を超えた場合は7日で打ち切り）</li><li>介入期間中（ICU在室中、最大7日）の<strong>利尿薬（フロセミド）累積投与量</strong>。観察期間の長さで調整</li></ul>
+<p><strong>探索的評価項目</strong></p>
+<ul><li>14日時点の生存かつ人工呼吸器フリー日数</li><li>14日時点の生存かつ昇圧薬フリー日数</li><li>14日時点の生存かつICUフリー日数</li><li>生存かつRRTフリー日数（90日時点で評価）</li><li>90日透析依存</li><li>90日死亡</li></ul>
+<p><strong>安全性・実現可能性評価項目</strong></p>
+<ul><li>両群における1つ以上の（重篤）有害事象・副反応を有した患者数（詳細定義は Table S3）</li><li>スクリーニング数 対 組み入れ数の比</li><li><strong>組み入れ速度</strong>（患者数／施設／月）</li><li><strong>プロトコル遵守</strong>（両群のプロトコル違反患者数）</li></ul>
+<h4>3-5. 統計解析</h4>
+<ul><li><strong>サンプルサイズ</strong>：1群50例で、主要評価項目に <strong>1200 mL の差</strong>を、両側 α=0.05、検出力80%超で示せると推定</li><li><strong>設計時の仮定</strong>：FINNAKI研究のAKI患者の未公表データに基づき、72時間累積バランスは<strong>通常ケア群 2700 mL、制限群 1500 mL</strong>（両群ともSD 2000 mL）と想定</li><li><strong>主解析集団</strong>：ITT（intention-to-treat）＝解析へのデータ使用に同意したすべての無作為化被験者</li><li><strong>感度解析</strong>：per-protocol 集団＝ITTから、プロトコル違反を経験した被験者、またはランダム化後48時間未満でICUを退室した被験者を除いたもの</li><li><strong>調整</strong>：主要・副次・探索的評価項目のいずれも層別化変数（軽症 vs 重症AKI、輸液貯留所見の有無）で調整。二値アウトカムは両側ロジスティック回帰、連続変数は線形モデル（平均または中央値回帰モデル）</li><li><strong>報告形式</strong>：リスク比（RR）と95%信頼区間、あるいは平均／中央値の差と95%信頼区間</li><li><strong>正規性</strong>：連続変数に Shapiro–Wilk 検定</li><li><strong>有意水準</strong>：0.05、両側P値</li><li><strong>ソフトウェア</strong>：R version 3.6.2 および SPSS 24</li></ul>
+<h3>4. 患者フロー（Figure 1・CONSORT）</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-021-06401-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-021-06401-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 試験患者のフローチャート（原図・無改変。©出典 Vaara et al., Intensive Care Med 2021, CC BY-NC 4.0） 上から「997例を評価」→ 右へ「895例を除外」（理由の内訳を14行で列挙）→「102例を無作為化」→ 左右に「50例を制限的輸液管理に割付」「52例を通常ケアに割付」→ 各群から横に「1例が試験プロトコルを中止し同意を辞退」→ 最下段「49例を解析」「51例を解析」。</p>
+</div>
+<h4>Table. Figure 1 の全数値（原図を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>内訳</th><th>n</th></tr></thead>
+<tbody>
+<tr><td>評価</td><td>スクリーニングされた患者</td><td>997</td></tr>
+<tr><td>除外</td><td>除外された患者（合計）</td><td>895</td></tr>
+<tr><td>除外理由</td><td>血管内容量不足と判断された</td><td>227</td></tr>
+<tr><td>除外理由</td><td>ランダム化後48時間ICUに留まる見込みがなかった</td><td>278</td></tr>
+<tr><td>除外理由</td><td>輸血を要する活動性出血があった</td><td>61</td></tr>
+<tr><td>除外理由</td><td>維持輸液が必要と判断された（注a）</td><td>90</td></tr>
+<tr><td>除外理由</td><td>慢性RRT中／透析可能な毒物中毒でRRTが必要／6時間以内のRRT開始が予測された</td><td>148</td></tr>
+<tr><td>除外理由</td><td>実質性AKIの存在または強い臨床的疑い（注b）</td><td>40</td></tr>
+<tr><td>除外理由</td><td>重度の低Na血症（Na&lt;125 mmol/L）または高Na血症（Na&gt;155 mmol/L）</td><td>20</td></tr>
+<tr><td>除外理由</td><td>ECMO または MARS（分子吸着再循環システム）が必要</td><td>20</td></tr>
+<tr><td>除外理由</td><td>フルの積極的治療の対象と考えられていない患者</td><td>127</td></tr>
+<tr><td>除外理由</td><td>ベースラインのクレアチニンが得られない</td><td>10</td></tr>
+<tr><td>除外理由</td><td>妊娠中または授乳中</td><td>7</td></tr>
+<tr><td>除外理由</td><td>同意が得られない</td><td>91</td></tr>
+<tr><td>除外理由</td><td>他の試験に登録済み</td><td>64</td></tr>
+<tr><td>除外理由</td><td>その他（注c）／ロジスティックな理由</td><td>42</td></tr>
+<tr><td>無作為化</td><td>無作為化された患者</td><td>102</td></tr>
+<tr><td>割付</td><td>制限的輸液管理に割付</td><td>50</td></tr>
+<tr><td>割付</td><td>通常ケアに割付</td><td>52</td></tr>
+<tr><td>脱落</td><td>制限群：試験プロトコルを中止し同意を辞退</td><td>1</td></tr>
+<tr><td>脱落</td><td>通常ケア群：試験プロトコルを中止し同意を辞退</td><td>1</td></tr>
+<tr><td>解析</td><td>制限群：解析対象</td><td>49</td></tr>
+<tr><td>解析</td><td>通常ケア群：解析対象</td><td>51</td></tr>
+</tbody></table></div>
+<p>原図の脚注（訳）：</p>
+<ul><li>注a：糖尿病性ケトアシドーシス、非ケトン性昏睡、重症熱傷、その他医療スタッフが判断した臨床的理由</li><li>注b：糸球体腎炎、血管炎、急性間質性腎炎、または腎後性閉塞</li><li>注c：2018年4月のプロトコル改訂で削除された2つの除外基準を含む。(1) メトホルミン関連乳酸アシドーシスまたは急性肝不全（n=8）、(2) AKI stage 2以上が48時間を超えて存在していたことが既知（n=14）。これらの基準は除外基準を明確化するために改訂された</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント 除外理由の合計（227+278+61+90+148+40+20+20+127+10+7+91+64+42＝<strong>1225</strong>）は、除外患者数 895 を大きく上回る。<mark class="hl">除外理由は相互排他ではなく、1人が複数の理由で除外されている</mark>。「227例が容量不足で除外」は「除外患者の約4分の1」という本文の記述（Discussion）と整合するが、割合の分母を除外理由の総数と取り違えないこと。</p>
+</div>
+<h4>ランダム化のタイミングと72時間時点の在室状況</h4>
+<ul><li>ランダム化は <strong>ICU入室後 中央値 30.7時間［IQR 20.4–46.2］</strong> に行われた</li><li>72時間時点で <strong>66例（66%）がまだICUにいた</strong>。29例（29%）は退室、4例が死亡（制限群1・通常ケア群3）、1例が以降のデータ収集への同意を撤回</li><li>72時間前に退室・死亡した34例のICU滞在（ランダム化から退室まで）の中央値は、制限群 <strong>49.2時間［32.6–51.9］</strong>、通常ケア群 <strong>51.0時間［29.3–60.2］</strong></li><li>主要評価項目が評価された時点の中央値［IQR］は <strong>72.0時間［53.9–72］</strong>。つまり4分の1以上の患者は54時間未満の観察で「72時間バランス」を代表させている（Table 2 脚注c：エンドポイント充足前にICU退室・同意撤回が起きた患者についても、<strong>最後に利用可能な累積バランス値</strong>を解析した）</li></ul>
+<h3>5. 患者背景（Table 1）</h3>
+<p>ベースラインおよびランダム化時点の状態は両群でよく均衡していた。ICU入室理由で最も多かったのは<strong>心停止（8.2%）、敗血症性ショック（7.2%）、消化管穿孔／破裂（7.2%）</strong>。AKIの推定病因は <strong>55例（55%）で多因子性</strong>だった。</p>
+<h4>Table 1. 患者背景（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>制限的輸液管理（n=49）</th><th>通常ケア（n=51）</th></tr></thead>
+<tbody>
+<tr><td>年齢、中央値［IQR］、歳</td><td>71［60–77］</td><td>64.5［56.2–74］</td></tr>
+<tr><td>男性、n（%）</td><td>30（62.5）</td><td>36（70.6）</td></tr>
+<tr><td>BMI、中央値［IQR］、kg/m²</td><td>25.6［22.8–29.5］</td><td>26.4［22.7–31.1］</td></tr>
+<tr><td>高血圧、n（%）</td><td>26（54.2）</td><td>32（65.3）</td></tr>
+<tr><td>糖尿病、n（%）</td><td>24（50）</td><td>33（66）</td></tr>
+<tr><td>慢性心不全、n（%）</td><td>6（12.5）</td><td>7（14）</td></tr>
+<tr><td>冠動脈疾患、n（%）</td><td>9（18.8）</td><td>16（31.4）</td></tr>
+<tr><td>慢性閉塞性肺疾患、n（%）</td><td>8（16.7）</td><td>14（27.5）</td></tr>
+<tr><td>慢性腎臓病、n（%）</td><td>5（10.6）</td><td>6（11.8）</td></tr>
+<tr><td>慢性肝疾患、n（%）</td><td>4（8.3）</td><td>3（5.9）</td></tr>
+<tr><td>外科系ICU入室、n（%）</td><td>22（44.9）</td><td>20（40）</td></tr>
+<tr><td>緊急ICU入室、n（%）</td><td>37（75.5）</td><td>41（82）</td></tr>
+<tr><td>入院からICU入室まで、中央値［IQR］、日</td><td>1（0.1–4）</td><td>0.9（0.2–2.9）</td></tr>
+<tr><td>ICU入室からランダム化まで、中央値［IQR］、時間</td><td>33.3（21.4–45.9）</td><td>30（20.3–46）</td></tr>
+<tr><td>ランダム化時点のデータ</td><td></td><td></td></tr>
+<tr><td>AKI組み入れ基準：クレアチニン</td><td>25（51）</td><td>28（54.9）</td></tr>
+<tr><td>AKI組み入れ基準：尿量</td><td>10（20.4）</td><td>8（15.7）</td></tr>
+<tr><td>AKI組み入れ基準：クレアチニンと尿量の両方</td><td>14（28.6）</td><td>15（29.4）</td></tr>
+<tr><td>SAPS II スコア、中央値［IQR］（注a）</td><td>41.5［31.3–51.5］</td><td>43［30–50］</td></tr>
+<tr><td>SOFA スコア、中央値［IQR］（注b）</td><td>9［8–11］</td><td>9［7–11］</td></tr>
+<tr><td>AKI stage 2〜3（層別化）、n（%）</td><td>31（63.3）</td><td>33（64.7）</td></tr>
+<tr><td>輸液貯留あり（層別化）、n（%）（注c）</td><td>21（42.9）</td><td>22（43.1）</td></tr>
+<tr><td>呼吸補助：人工呼吸、n（%）</td><td>24（49）</td><td>33（66）</td></tr>
+<tr><td>血管作動薬、n（%）</td><td>30（61.2）</td><td>37（72.5）</td></tr>
+<tr><td>敗血症、n（%）</td><td>27（55.1）</td><td>30（58.8）</td></tr>
+<tr><td>敗血症性ショック、n（%）</td><td>5（10.2）</td><td>9（17.7）</td></tr>
+<tr><td>ICU入室からランダム化までの累積輸液バランス、平均（SD）、mL</td><td>2437（2103）</td><td>1982（2434）</td></tr>
+</tbody></table></div>
+<p>原表の脚注（訳）：</p>
+<ul><li>注a：SAPS II スコアの下位項目のデータが、制限群11例・通常ケア群15例で欠損していたため、それらのスコアは除外して算出</li><li>注b：ビリルビン値が欠損していた制限群4例・対照群3例では、肝下位項目スコアを0と仮定</li><li>注c：層別化変数の定義＝末梢の圧痕性浮腫の存在、および／または P/F比 200 mmHg未満を伴う陽性バランス</li><li>欠損データの件数は電子付録 Table S4 に記載</li></ul>
+<p><strong>背景の読み方</strong>：層別化に使った2変数（AKI stage 2-3、輸液貯留あり）はほぼ完全に揃っている（63.3% vs 64.7%、42.9% vs 43.1%）。一方で、<strong>通常ケア群のほうが人工呼吸（49% vs 66%）・血管作動薬（61.2% vs 72.5%）・敗血症性ショック（10.2% vs 17.7%）・冠動脈疾患・COPD・糖尿病が多い</strong>傾向がある。n=100 のパイロットでは避けられないずれだが、後述するRRT・有害事象の群間差を解釈する際に必ず脇に置いておくべき不均衡である（層別化には含まれていない）。逆に、ランダム化時点までの累積バランスは制限群のほうが 455 mL 多く（2437 vs 1982 mL）、こちらは制限群に不利な方向のずれである。</p>
+<h3>6. 主要評価項目 — 達成された輸液バランスの分離 💧</h3>
+<p>これが本試験の本体である。</p>
+<h4>Table 2. 主要・副次評価項目（層別化変数で調整。原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>制限的輸液管理（n=49）</th><th>通常ケア（n=51）</th><th>制限 vs 通常ケア（95%CI）（注a）</th><th>P値（注b）</th></tr></thead>
+<tbody>
+<tr><td>ランダム化後72時間の累積輸液バランス、平均（SD）mL（注c）</td><td>−1080（2003）</td><td>61（3131）</td><td>−1148（−2200；−97）</td><td>0.033</td></tr>
+<tr><td>AKIの持続期間（日）、中央値［IQR］（注d）</td><td>2［1–3］</td><td>3［2–7］</td><td>−1（−3；0）</td><td>0.071</td></tr>
+<tr><td>RRTを受けた患者数、n（%）（注e）</td><td>6/46（13）</td><td>15/50（30）</td><td>0.42（0.16；0.91）</td><td>0.043</td></tr>
+<tr><td>ランダム化後24時間の累積輸液バランス、平均（SD）mL（注c）</td><td>−416（1194）</td><td>409（1566）</td><td>−822（−1381；−264）</td><td>0.004</td></tr>
+<tr><td>ICU退室時／7日目の累積輸液バランス、平均（SD）mL（注c）</td><td>−2166（2988）</td><td>−650（4469）</td><td>−1532（−3036；−29）</td><td>0.046</td></tr>
+<tr><td>フロセミド1日累積投与量、中央値［IQR］mg（注f）</td><td>0（0–19）</td><td>1.4（0–26.2）</td><td>0（−11；5.7）</td><td>0.700</td></tr>
+</tbody></table></div>
+<p>原表の脚注（訳）：</p>
+<ul><li>注a：調整済み（AKI重症度・輸液貯留の有無）の平均／中央値の差、またはリスク比と95%CI</li><li>注b：層別化変数（AKI重症度・輸液貯留の有無）で調整した回帰モデルから得られたP値</li><li>注c：エンドポイント充足前にICU退室または同意撤回が生じた患者も含め、<strong>全患者について最後に利用可能な累積バランス値を解析した</strong></li><li>注d：7日、ICU退室、または同意撤回で打ち切り。制限群3例・通常ケア群1例でデータ欠損</li><li>注e：14日で打ち切り（ICU退室後に施行されたRRTを含む）</li><li>注f：経口フロセミド用量は静脈内用量と比較可能にするため2で除した</li></ul>
+<p><strong>分離は達成されたか — 3つの時点すべてで達成された。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>制限群（mL）</th><th>通常ケア群（mL）</th><th>差（mL）</th><th>95%CI</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>24時間</td><td>−416</td><td>+409</td><td>−822</td><td>−1381〜−264</td><td>0.004</td></tr>
+<tr><td>72時間（主要）</td><td>−1080</td><td>+61</td><td>−1148</td><td>−2200〜−97</td><td>0.033</td></tr>
+<tr><td>ICU退室時／7日</td><td>−2166</td><td>−650</td><td>−1532</td><td>−3036〜−29</td><td>0.046</td></tr>
+</tbody></table></div>
+<p><strong>注目すべきは通常ケア群の値である。</strong> 設計時には通常ケア群の72時間累積バランスを <strong>+2700 mL</strong> と想定していた。実測は <strong>+61 mL</strong> で、想定より約2.6 L も「すでに絞られていた」。つまり本試験が観測した分離は「制限群が劇的に絞った」からではなく、「制限群が <strong>−1080 mL</strong> まで踏み込んだ一方、通常ケア群がほぼゼロで踏みとどまった」ことによる。著者自身も Discussion で「2011〜2012年に収集したデータに基づく想定より、通常ケア群の実際の輸液バランスははるかに低かった」と述べ、<strong>重症患者における輸液管理慣行が全体として制限的な方向へシフトしている</strong>ことの表れだと解釈している（同様のシフトは別のRFMパイロット試験でも報告されている）。</p>
+<p><strong>分離の大きさは設計値に届いていない。</strong> 設計は 1200 mL の差を検出する前提だったが、実測差は <strong>1148 mL</strong>。かつ通常ケア群の実測SD（3131 mL）は想定SD（2000 mL）を大きく上回った。それでも P=0.033 に達したが、95%CI の上限は <strong>−97 mL</strong>、つまり「ほぼゼロの差」もデータと両立する。</p>
+<p><strong>分離はどこから来たのか（利尿薬ではない）。</strong> 利尿薬は両群で差がなかった。</p>
+<ul><li>利尿薬を投与された患者：制限群 <strong>35例（71.4%）</strong> vs 通常ケア群 <strong>38例（74.5%）</strong></li><li>初回投与日の中央値［IQR］：<strong>両群とも 1［1］日目</strong></li><li>観察日数で調整した累積投与量：差なし（P=0.700）</li></ul>
+<p>つまり<strong>「利尿薬を増やして出した」のではなく、主に「入れる量を絞り、出させ方をわずかに変えた」ことで分離がついた</strong>。これは介入バンドルの第1・第2要素（維持輸液の原則禁止）が効いたことを示唆する。</p>
+<p><strong>粗解析とも整合</strong>：調整前の主要評価項目も調整解析と一致していた（Table S6）。</p>
+<h3>7. Figure 2 — 日々の入力・出力・日次バランス</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-021-06401-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-021-06401-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. ランダム化からの1日ごとの輸液入力・輸液出力・日次輸液バランス（制限群 vs 通常ケア）（原図・無改変。©出典 Vaara et al., Intensive Care Med 2021, CC BY-NC 4.0） 縦軸は mL。上半分（正の領域）が Fluid in、下半分（負の領域）が Fluid out で、いずれも箱ひげ図（中央値・IQR・範囲）。ゼロ付近の斜線入りバーが「その日の日次バランス（累積ではない）」。横軸は Day 1〜7。各日ごとに濃い青＝RFM、明るい青＝Usual care の2本が並ぶ。図の下に各日の解析対象患者数が印字されている。</p>
+</div>
+<p><strong>図の読み方（3層構造）</strong></p>
+<ol><li><strong>上段の箱ひげ（Fluid in）</strong>：どちらの群も概ね中央値 2000 mL 前後で、<strong>両群の差は目で見て明らかなほど大きくない</strong>。RFM群がやや低い日が多いが重なりは大きい。</li><li><strong>下段の箱ひげ（Fluid out）</strong>：負の方向にプロットされており、両群とも中央値 −2000〜−3000 mL 台。RFM群のほうがわずかに深い（＝出ている）日が Day 1〜3 に見える。</li><li><strong>中央の斜線バー（日次バランス）</strong>：これが介入の効果そのもの。RFM群は Day 1 から一貫して<strong>ゼロよりわずかに下</strong>にあり、Day 6 で最も深い。通常ケア群は Day 1 が<strong>ゼロより上（陽性）</strong>で、以降はほぼゼロ近傍を推移する。Day 4 のみ通常ケア群が RFM群より深く落ち込んでいる。</li></ol>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">日次バランスの差は1日あたり数百 mL 程度でしかない</mark>。「制限的輸液管理」という語感から想像される劇的な除水ではなく、<strong>毎日ほんの少しずつゼロより下に置く</strong>という運用である。この規模の介入で72時間に 1.1 L の差がつくということは、逆にいえば<strong>日々の小さな陽性バランスの積み上げこそが輸液過剰の実体</strong>だということでもある。なお、Day 1 の通常ケア群だけが陽性バランスで、Day 2 以降はほぼゼロという事実は、<strong>この試験の「通常ケア」がすでにかなり保守的だった</strong>ことを裏づけている。</p>
+</div>
+<h4>Table. Figure 2 の解析対象患者数（原図に印字された数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>日</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead>
+<tbody>
+<tr><td>制限的輸液管理（RFM）</td><td>49</td><td>47</td><td>39</td><td>30</td><td>27</td><td>19</td><td>17</td></tr>
+<tr><td>通常ケア</td><td>51</td><td>51</td><td>44</td><td>32</td><td>28</td><td>25</td><td>21</td></tr>
+</tbody></table></div>
+<p><strong>この表が重要な理由</strong>：Day 7 には制限群17例・通常ケア群21例まで減っている。後半の日次バランスは、ICUに残り続けた最重症の患者だけを見ている（生存者・残存者バイアス）。Day 5〜7 の見かけ上の差を効果として読んではいけない。なお、この図の箱ひげの中央値・四分位は原図に数値として印字されていないため、本ノートでは数値化していない（本文中に記載がない値を推定して書かない）。</p>
+<h3>8. 副次評価項目 — AKI期間とRRT</h3>
+<p><strong>AKI持続期間</strong>：中央値 <strong>2日［1–3］（制限群）vs 3日［2–7］（通常ケア群）</strong>、調整中央値差 −1日（95%CI −3〜0）、<strong>P=0.071</strong>。 本文は「AKIの持続期間に差はなかった（There was no difference in duration of AKI）」と明記している。中央値だけを見て「1日短い」と要約してはいけない。信頼区間の上限は 0 に接しており、P値は 0.05 を超えている。</p>
+<p><strong>RRT施行</strong>：<strong>6/46（13%）vs 15/50（30%）、RR 0.42（95%CI 0.16–0.91）、P=0.043</strong>。</p>
+<ul><li>分母が 46 と 50 であり、ITT の 49・51 ではない（14日までの追跡データが揃わなかった患者を除く）</li><li><strong>14日を過ぎてからRRTを開始した患者が通常ケア群にさらに2例いた</strong>（本文に明記されている）。この2例を含めれば通常ケア群のRRT施行はより多くなるが、事前定義の打ち切り（14日）に従って主表からは外れている</li><li>イベント数は合計21件。<strong>極めて fragile な所見</strong>である</li></ul>
+<p><strong>利尿薬</strong>：上述のとおり両群で差なし。</p>
+<p><strong>探索的評価項目はすべて有意差なし。</strong></p>
+<h4>Table 3. 探索的評価項目（層別化変数で調整。原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>制限的輸液管理</th><th>通常ケア</th><th>制限 vs 通常ケア（95%CI）（注a）</th><th>P値（注b）</th></tr></thead>
+<tbody>
+<tr><td>生存かつ人工呼吸器フリー日数、中央値［IQR］（注c）</td><td>13（9–14）</td><td>11.5（1.5–14）</td><td>0（−1；6）</td><td>0.284</td></tr>
+<tr><td>生存かつ昇圧薬フリー日数、中央値［IQR］（注c）</td><td>12（10–14）</td><td>11.5（7–13）</td><td>1（0；2）</td><td>0.072</td></tr>
+<tr><td>生存かつICU治療フリー日数、中央値［IQR］（注c）</td><td>8（3–11）</td><td>2.5（0–11）</td><td>2（0；6）</td><td>0.106</td></tr>
+<tr><td>90日時点の生存かつRRTフリー日数、中央値［IQR］（注d）</td><td>90（85–90）</td><td>90（33–90）</td><td>0（0；14）</td><td>0.145</td></tr>
+<tr><td>90日透析依存、n（%）</td><td>0/46（0）</td><td>1/49（2）</td><td>0.34（0.01；8.55）</td><td>1.000</td></tr>
+<tr><td>90日死亡、n（%）</td><td>9/46（19.6）</td><td>13/49（26.5）</td><td>0.74（0.35；1.46）</td><td>0.387</td></tr>
+</tbody></table></div>
+<p>原表の脚注（訳）：</p>
+<ul><li>注a：調整済み（AKI重症度・輸液貯留の有無）の平均／中央値の差と95%CI</li><li>注b：層別化変数（AKI重症度・輸液貯留の有無）で調整した回帰モデルから得られたP値</li><li>注c：14日またはICU退室で打ち切り。ICU再入室は含まない。制限群2例・通常ケア群1例でデータなし</li><li>注d：両群とも2例でデータなし</li></ul>
+<p>調整・非調整いずれの探索的評価項目にも有意差はなかった（非調整は Table S7）。日々のSOFAスコアの推移は Figure S1 に示されている（本ノートは本文PDFのみを参照しており、付録図は未確認）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl"><strong>この試験は転帰を判定する検出力を持っていない</strong></mark>。90日死亡は 9件 vs 13件、90日透析依存は 0件 vs 1件。信頼区間はいずれも1.0を大きくまたいでいる（RR 0.74、95%CI 0.35–1.46／RR 0.34、95%CI 0.01–8.55）。「制限的輸液管理は死亡を減らさなかった」も「減らした」も、どちらもこのデータから言えない。<strong>言えるのは「害のシグナルが見えなかった」ことだけ</strong>である。</p>
+</div>
+<h3>9. 安全性と実現可能性</h3>
+<p><strong>有害事象（AE）</strong></p>
+<ul><li>1つ以上のAEを経験した患者：制限群 <strong>11例（22.4%）</strong> vs 通常ケア群 <strong>25例（49%）</strong></li><li><strong>RR 0.46（95%CI 0.36–0.63）、P=0.001</strong></li></ul>
+<p><strong>重篤有害事象（SAE）</strong></p>
+<ul><li>制限群 <strong>6例（12.2%）</strong> vs 通常ケア群 <strong>16例（31.4%）</strong></li><li><strong>RR 0.39（95%CI 0.15–0.86）、P=0.031</strong></li></ul>
+<p><strong>内訳</strong>：ほとんどの事象は<strong>血清電解質濃度の異常とRRTに関連するもの</strong>だった（詳細は Table S8）。著者は Discussion で「有害事象が通常ケア群に多かったのは、<strong>同群でRRTの使用がより頻回だったことに関連する可能性がある</strong>」と述べている。すなわち、AEの群間差は介入そのものの安全性というより、<strong>RRTという処置を受ける機会の差</strong>を反映している可能性がある。</p>
+<p><strong>組み入れ速度</strong>：施設あたり <strong>中央値 0.8［IQR 0.5–1.7］例／月</strong>（Figure S2）。7施設・約28か月で102例なので、実現可能性試験としては「回せたが速くはない」水準。</p>
+<p><strong>プロトコル違反と遵守</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>制限的輸液管理</th><th>通常ケア</th></tr></thead>
+<tbody>
+<tr><td>プロトコル違反があった患者</td><td>18例（36.7%）</td><td>5例（9.8%）</td></tr>
+<tr><td>うち最多の違反：過剰な維持輸液の使用</td><td>9例（18.4%）</td><td>—</td></tr>
+<tr><td>プロトコル一時停止</td><td>5例</td><td>1例</td></tr>
+</tbody></table></div>
+<p>制限群のプロトコル一時停止5例の理由：<strong>高Na血症（n=2）、手術の必要（n=1）、完全房室ブロック（n=1、試験介入に起因するとは考えられていない）、同意撤回（n=1）</strong>。通常ケア群の1例はICU治療全体が差し控えられたための停止。</p>
+<p><strong>per-protocol 解析</strong></p>
+<ul><li>対象：制限群 <strong>23例（49例の46.9%）</strong>、通常ケア群 <strong>37例（51例の72.5%）</strong></li><li>結果：主要・副次評価項目は、<strong>24時間の輸液バランスを除いて群間差なし</strong>（Table S10）</li><li>per-protocol 集団では主要評価項目の有意差が消えている。これは本試験の最も重い内的制約の一つである（プロトコルを守り切れた患者だけを見ると、72時間バランスの差が統計的に消える）</li></ul>
+<h3>10. 考察 — 著者の解釈</h3>
+<p><strong>主要所見</strong>：適切に蘇生されたと考えられるAKI重症患者100例を対象とした本試験で、RFMプロトコルは72時間累積輸液バランスを通常ケアより低くすることに<strong>有効だった</strong>。加えてRFM群はRRTの施行が少なく、有害事象も少なかった。</p>
+<p><strong>先行研究との関係</strong></p>
+<ul><li>AKIを持つ重症患者を対象にRFMレジメンを検討したRCTは、本試験以前に存在しない</li><li><strong>FACTT</strong>（2000〜2005年実施、ARDS対象）：保存的輸液管理 vs リベラル。60日死亡に差はなかったが、保存的群で人工呼吸期間が短く、RRTが少ない傾向。AKI患者のサブ解析では高い累積バランスと死亡の関連が示された。FACTTの3日目累積バランスは<strong>保存的群で約 150 mL、リベラル群で約 5000 mL</strong> であり、<strong>本試験の両群よりも陽性側にあった</strong></li><li><strong>CLASSIC pilot</strong>（敗血症性ショック）：投与された蘇生輸液量には差がついたが、<strong>総輸液バランスには差がつかなかった</strong>。本試験は入力と出力の「コインの両面」を1つの試験に組み合わせたことで、臨床医が輸液療法を個別化する道具を増やしつつ、臨床的に意味のあるアウトカム指標を狙えた、と著者は主張する</li><li><strong>非蘇生輸液の重み</strong>：ショック患者においてすら、蘇生輸液以外の輸液が投与輸液の最大の割合を占めることが報告されている。ここを絞れるかどうかが分離の鍵</li><li><strong>POINCARE-2</strong>（フランスのステップドウェッジ・クラスターRCT）：一般ICU患者を対象に、体重が増加している患者で1日 0.5 kg の体重減少を目指す輸液制限／出力増強を評価中。本論文の時点で結果は未公表</li><li><strong>Semler らの敗血症性ショックのパイロット試験</strong>：制限的 vs 通常ケアで比較的大きいが有意でない差を認め、害のシグナルはなかったが、<strong>事前設定した「1日平均輸液バランスで 500 mL の差」というエンドポイントに達しなかったため早期中止</strong>された</li></ul>
+<p><strong>動的バンドルの意義</strong>：AKI患者は不均一な集団で、著しく尿量が低下して達成可能な出力が大きく制約される患者もいれば、クレアチニンは上昇しているが尿量は保たれている患者もいる。本試験のような<strong>動的な介入バンドル</strong>はこの不均一性により適合しうる、というのが著者の論点。</p>
+<p><strong>Study implications（著者による含意）</strong></p>
+<ol><li>血管内容量不足ではないと考えられるAKI患者において、<strong>1日輸液バランスの制御を狙う複合戦略は実行可能かつ安全</strong>である</li><li>有害事象は通常ケア群に多く、これは同群でのRRT使用がより頻回だったことに関連する可能性がある</li><li>本試験は「<strong>輸液蓄積がAKI患者の重要な転帰（RRTの必要性など）と結びついている</strong>」という仮説への初期的支持を与える。この仮説は<strong>より大規模な臨床試験で検討されるべき</strong>である</li><li>除外患者の4分の1は、ICUに12時間以上滞在したにもかかわらず、なお血管内容量不足と判断されたために不適格になった。これは将来のRFM試験を設計する際に考慮すべき重要なコホートであり、<strong>受動的下肢挙上（PLR）などの動的な輸液反応性検査を用いて、低容量血症の是正後に明確な開始トリガーをRFMプロトコルに組み込めば</strong>、これらの患者も組み入れられる可能性がある</li></ol>
+<p><strong>強み（著者の主張）</strong></p>
+<ul><li>選択バイアスを最小化する無作為化</li><li>多国籍アプローチにより、輸液治療慣行が異なりうる複数の場所で同時に実現可能性を評価でき、外的妥当性が高まる</li><li>入力と出力の両方を標的とする治療バンドル（動的・二正面アプローチ）により柔軟性が増し、患者の必要に応じた個別化が可能になった</li><li>潜在的な有害事象のデータを毎日収集し、害のシグナルを確実に同定できるようにした</li></ul>
+<p><strong>限界（著者が明記したもの）</strong></p>
+<ol><li><strong>盲検化不能</strong>：介入の性質上、盲検化はできなかった</li><li><strong>算出した輸液バランスは正確な指標ではない</strong>：創部ドレッシングへの喪失など不感喪失が大きい患者では出力の測定が正確でない。したがって両群の実際の輸液バランスは、報告値より低い（より陰性寄りの）可能性がある</li><li><strong>過剰な維持輸液というプロトコル違反</strong>：これは将来の試験でより良く対処すべき<strong>ローカルな慣行の存在</strong>を示唆する</li><li><strong>治療制限のある患者を除外した</strong>：この不均一な集団の多くは組み入れ可能だった可能性がある</li></ol>
+<p><strong>結論（原文）</strong>：適切に輸液蘇生されたと考えられるAKI重症患者を対象としたパイロット多施設国際RCTにおいて、制限的輸液管理レジメンは<strong>実行可能であり、通常ケアより有害事象が少なく、輸液バランスに有意な分離をもたらした</strong>。結果は患者中心のアウトカムの点でも利益を示唆しており、<strong>この介入は今後より大規模な試験で検討されるべき</strong>である。</p>
+<h2>🔗 既存ノートとの整合</h2>
+<h3>旧記述の訂正（PDF精読で判明した誤り）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧ノートの記述</th><th>PDFの記載（正）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「重症AKI患者100名を1:1にランダム化」</td><td>無作為化されたのは102例。両群1例ずつが同意を辞退して解析100例（49 vs 51）。また対象は「重症AKI」に限らず、KDIGO stage 1 も組み入れられている（stage 2-3 は 63.3% / 64.7%）</td></tr>
+<tr><td>2</td><td>主要評価項目の明示がなかった</td><td>主要評価項目は「ランダム化後72時間の累積輸液バランス」であり、転帰ではない。旧ノートは「実現可能性試験」と書きつつ、結果を転帰の並びで列挙していたため、読み手が転帰試験と誤読する構造になっていた</td></tr>
+<tr><td>3</td><td>「72時間後の累積水分バランスが低下」（数値なし）</td><td>−1080 mL（SD 2003）vs +61 mL（SD 3131）、調整平均差 −1148 mL（95%CI −2200〜−97）、P=0.033</td></tr>
+<tr><td>4</td><td>「AKIの持続期間中央値 2日（1–3）vs 3日（2–7）」を結果として列挙</td><td>同じ数値だが、中央値差 −1（−3〜0）、P=0.071 で有意差なし。本文は明示的に "There was no difference in duration of AKI" と書いている。旧ノートはこの否定を落としていた</td></tr>
+<tr><td>5</td><td>「RRT施行 13% vs 30%」</td><td>分母つきで 6/46（13%）vs 15/50（30%）、RR 0.42（95%CI 0.16–0.91）、P=0.043。加えて14日以降にRRTを開始した患者が通常ケア群にさらに2例いる</td></tr>
+<tr><td>6</td><td>「有害事象は通常ケア群でより高頻度」（数値なし）</td><td>AE 11例（22.4%）vs 25例（49%）、RR 0.46（95%CI 0.36–0.63）、P=0.001／SAE 6例（12.2%）vs 16例（31.4%）、RR 0.39（0.15–0.86）、P=0.031。大半は電解質異常とRRT関連</td></tr>
+<tr><td>7</td><td>「利尿薬投与量は両群で差なし」</td><td>同じ結論だが数値が必要：フロセミド1日量 中央値 0（0–19）vs 1.4（0–26.2）mg、差 0（−11〜5.7）、P=0.700。投与された患者割合は 35例（71.4%）vs 38例（74.5%）</td></tr>
+<tr><td>8</td><td>介入の中身が「輸液入力の最小化、必要に応じ利尿薬」の2行だけ</td><td>5要素のバンドルで、1日バランスの数値目標（常に +300 mL 未満）、維持輸液の許可条件（経腸栄養不耐かつ静脈栄養禁忌のときのみ）、RRT除水の位置づけ、達成不能時の許容（24時間に限り +900 mL まで）まで規定されている</td></tr>
+<tr><td>9</td><td>死亡・遵守・per-protocol の記載なし</td><td>90日死亡 19.6% vs 26.5%（RR 0.74、P=0.387）／プロトコル違反 36.7% vs 9.8%／per-protocol 集団では24時間バランスを除き主要・副次すべてで差が消えた</td></tr>
+<tr><td>10</td><td>frontmatter に <code>doi</code> <code>title_en</code> がなく、<code>citation</code> が "REVERSE-AKI multicenter pilot RCT. Intensive Care Medicine" のみ</td><td>doi: 10.1007/s00134-021-06401-6、著者15名、NCT03251131 を追記。PDFはonline-first版で巻・ページの印字がないため、巻・ページは記載していない</td></tr>
+</tbody></table></div>
+<h3>同一論文の重複ノートについて</h3>
+<p>同じフォルダにあった <span class="wl">AKIへの制限輸液 vs 通常ケア（REVERSE-AKI・ICM2021）</span> は<strong>同一論文のノート</strong>であり（DOI・症例数100例・主要評価項目72時間累積輸液バランスが一致）、2026-08-15 に本ノートへ統合してリダイレクトのスタブに変更した。統合元にあった記述（デザイン・主要結果・有害事象・パイロットという位置づけ）は、いずれも本ノートに数値付きで収録済みで、追加すべき固有情報はなかった。</p>
+<p>統合元は別のEvernoteノート（<code>Evernote【ICU】【ICU】.770</code>）由来で、本ノートの元素材（<code>Evernote【ICU】REVERSE-AKI restrictive fluid management…</code>）とは別レコードだった。同じ論文が2件のEvernoteノートに分かれて取り込まれていたことになる。</p>
+<p>なお統合元の citation にあった巻・ページ <code>47:665–673</code> は、手元PDFがSpringerのonline-first版で巻・ページの印字がないため<strong>確認できていない</strong>。推測で補わない方針により、本ノートでは採用していない。</p>
+<h3>近接ノートとの結論の対比</h3>
+<div class="tw"><table>
+<thead><tr><th>ノート</th><th>主張の骨格</th><th>REVERSE-AKI との関係</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">AKIの輸液管理 fluid responsivenessからfluid toleranceへ</span></td><td>「輸液に反応するか」から「輸液に耐えられるか」へ判断軸を移す。うっ血の評価（VExUS等）を前面に</td><td>REVERSE-AKI はその「耐えられない側」に振れた後の運用を試したもの。ただし本試験に耐容性の測定は組み込まれていない。組み入れは「主治医が容量不足でないと判断」という主観的トリガーにとどまる</td></tr>
+<tr><td><span class="wl">敗血症性ショックの輸液を個別化する — 輸液の種類から除水まで各段階の選び方（レビュー・CritCare2023）</span></td><td>蘇生から除水まで段階ごとに輸液を設計する。除水期には目標を数値で置く</td><td>REVERSE-AKI はこの「段階ごとの設計」をAKI患者で実際にプロトコル化して回した数少ない実例。1日 +300 mL 未満という具体的な数値目標は、レビューが説く原則を現場の指示に翻訳したもの</td></tr>
+<tr><td><span class="wl">輸液の生理学を蘇生に使う — 等浸透圧の原則・Starling則の改訂・stressed volume（Concise Definitive Review・CCM2023）</span></td><td>Starling則の改訂・グリコカリックス・stressed volume という生理から蘇生を組み立てる</td><td>REVERSE-AKI は生理学的指標を一切測っていない。測っているのは体重計でも超音波でもなく「入出量の記録」だけ。生理学レビューの理想と、実際に多施設で回せるプロトコルとの距離を測るのに有用な対比</td></tr>
+<tr><td><span class="wl">敗血症性ショックの輸液制限は90日死亡を減らさない（CLASSIC・NEJM2022）</span></td><td>本番の大規模RCT（n=1554）では、制限的輸液は90日死亡を改善しなかった</td><td>REVERSE-AKI は「本番をやる価値がある」と結論したパイロット。CLASSIC の教訓は、パイロットで見えた副次アウトカムの差（本試験のRRT 13% vs 30%）が本番で再現される保証はないということ</td></tr>
+<tr><td><span class="wl">ショック離脱期の輸液除去 ESICMガイドライン Part3（13RCT・3推奨・ICM2025）</span></td><td>除水（de-resuscitation）に関するガイドラインの推奨</td><td>REVERSE-AKI はこのガイドラインが参照するエビデンスベースの一部を構成する</td></tr>
+</tbody></table></div>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<h3>A. 設計そのものに関する論点</h3>
+<p><strong>A-1. 「主要評価項目が転帰でない」ことの意味を最後まで貫けているか。</strong> 本試験は実現可能性試験であり、主要評価項目は72時間累積輸液バランスという<strong>プロセス指標</strong>である。設計上これは正しい。しかし論文の Abstract の Results は、輸液バランスの直後に AKI持続期間・RRT・有害事象を並べ、Conclusions では "resulted in lower cumulative fluid balance <strong>and less adverse events</strong>" と書く。読み手が「有害事象を減らす介入」として記憶するのを防ぐ書き方にはなっていない。JCではまずここを議論の入口にしたい。</p>
+<p><strong>A-2. サンプルサイズの前提が現実と乖離していた。</strong> 設計は「通常ケア群 +2700 mL、制限群 +1500 mL、両群SD 2000 mL」という想定に基づく。実測は「通常ケア群 +61 mL、制限群 −1080 mL、SD はそれぞれ 3131 と 2003」。<strong>平均は両群とも想定より約 2600 mL 陰性側にずれ、通常ケア群のばらつきは想定の1.6倍</strong>だった。分離の絶対値（1148 mL）は設計値（1200 mL）にほぼ等しかったため有意差は出たが、これは偶然に近い。将来の試験では<strong>現代の「通常ケア」を基準に設計をやり直す必要がある</strong>。</p>
+<p><strong>A-3. 「主治医が血管内容量不足でないと判断」という組み入れトリガーは再現できない。</strong> これが本試験の最大の外的妥当性の制約である。スクリーニング997例のうち <strong>227例（除外患者の約4分の1）がこの判断で除外</strong>されている。何をもって「容量不足でない」とするかが施設・医師で異なれば、介入対象の集団そのものが変わる。著者自身が Discussion で PLR などの動的検査を開始トリガーに組み込むべきだと提案しており、本試験の対象定義は次の試験で必ず作り直されるべき部分である。</p>
+<h3>B. 結果の内的整合性</h3>
+<p><strong>B-1. 抄録と Table 2 で95%信頼区間の下限が食い違う。</strong> Abstract：mean difference (95% CI) − 1148 mL (<strong>− 2200 to − 96</strong>) mL。 Table 2：− 1148 (− 2200; <strong>− 97</strong>)。 1 mL の差であり結論に影響しないが、同一論文内で主要評価項目の信頼区間が2通り印字されているのは事実。本ノートでは Table 2 の値（−97）を採用した。</p>
+<p><strong>B-2. 有害事象のリスク比の信頼区間が狭すぎる。</strong> 本文は「11/49（22.4%）vs 25/51（49%）、risk ratio 0.46; 95% CI <strong>0.36–0.63</strong>, P=0.001」と記す。粗リスク比は 11/49 ÷ 25/51 ＝ 0.457 で点推定は合う。しかし<strong>この標本サイズ（合計36イベント）で 0.36〜0.63 という幅の信頼区間は成立しにくい</strong>。同じ論文の SAE（6/49 vs 16/51、RR 0.39）では 95%CI が 0.15–0.86 と、はるかに広い妥当な幅になっている。AEのCIだけが不自然に狭く、印字上の誤りか、他の解析（別モデル）の出力が混入している可能性がある。JCで「RR 0.46（0.36–0.63）」をそのまま引用しないほうがよい。</p>
+<p><strong>B-3. per-protocol 解析で主要評価項目の差が消える。</strong> per-protocol 集団は制限群 23例（46.9%）・通常ケア群 37例（72.5%）で、24時間バランスを除き主要・副次評価項目に差がなかった。プロトコルを守り切れた患者「だけ」を見ると分離が統計的に消えるという事実は、ITT解析の差がどこから来ているのかを問い直させる。もっとも per-protocol 集団は n が小さく（合計60例）、かつ除外基準に「ICU滞在48時間未満」が含まれるため単純な解釈はできない。「感度解析が主解析を支持していない」という事実自体を JC の論点にすべき。</p>
+<p><strong>B-4. 除外理由の合計（1225）が除外患者数（895）を超える。</strong> 理由が相互排他でないためだが、Figure 1 にその旨の注記はない。CONSORT フローとしては読者に注意が要る。</p>
+<h3>C. 効果の解釈</h3>
+<p><strong>C-1. RRT の差（13% vs 30%）は 4つの理由で慎重に扱うべき。</strong></p>
+<ol><li><strong>副次評価項目</strong>であり、多重性の補正はされていない（副次6項目＋探索6項目）</li><li><strong>非盲検試験で、RRT開始は臨床医の裁量</strong>。制限群では「まだ絞れる」と考えてRRTを遅らせ、通常ケア群では躊躇なく開始した可能性がある（performance bias）</li><li><strong>イベント数21件</strong>。1〜2例の移動で有意性が消える fragility</li><li><strong>14日以降にRRTを開始した通常ケア群の2例</strong>が主表から外れている（この方向は差を小さくはしない）</li><li>加えて、通常ケア群はベースラインで人工呼吸（66% vs 49%）・血管作動薬（72.5% vs 61.2%）・敗血症性ショック（17.7% vs 10.2%）が多く、層別化に含まれない重症度の偏りが RRT の差を説明しうる</li></ol>
+<p><strong>C-2. 有害事象の差は「介入が安全」ではなく「RRTを受ける機会が少なかった」を意味している可能性。</strong> 著者自身が Discussion でこの解釈を示している。AE の大半が電解質異常と RRT 関連であり、RRT を受けた患者が多い群で RRT 関連 AE が多いのは同語反復に近い。「制限的輸液管理は有害事象を減らす」という因果的読み替えは避けるべき。</p>
+<p><strong>C-3. 分離が利尿薬によらなかったことの含意。</strong> 利尿薬の使用率・初回投与日・累積量が両群でほぼ同一なのに出力に差が出ているのは、一見すると不思議である。考えられる説明は、(i) 入力を絞ったことで相対的に出力が優位になっただけ、(ii) 集計上の出力に RRT 除水が含まれる（ただし RRT は通常ケア群のほうが多いので、この方向では説明できない）、(iii) 単なる偶然の変動。<strong>JC では「では何が効いたのか」を突き詰める価値がある</strong>。介入バンドルのうち有効成分が特定できていないのは、次の試験の設計上の弱点になる。</p>
+<p><strong>C-4. 「72時間バランス」の観察期間が患者ごとに大きく違う。</strong> 主要評価項目が評価された時点の中央値［IQR］は 72.0［53.9–72］時間で、<strong>Table 2 脚注c により、エンドポイント到達前に退室・同意撤回した患者では最後に得られた値を採用</strong>している。ICU に長く残った重症者ほど 72時間フルに観察され、早く退室した軽症者ほど短い観察で打ち切られる。累積バランスは時間とともに大きくなる指標なので、観察時間の不均一は群間比較にノイズを持ち込む。</p>
+<h3>D. 外的妥当性</h3>
+<p><strong>D-1. 組み入れ率 10.2%（102/997）、0.8例／施設／月。</strong> 7施設・約28か月で102例。実現可能性としては「回った」が、大規模試験を同じ基準で行うには相当数の施設が要る。</p>
+<p><strong>D-2. 治療制限のある患者を除外（127例）。</strong> 著者も限界として挙げている。ICU の実臨床では治療制限のある患者が相当割合を占め、そこにこそ「絞る」判断が求められることも多い。</p>
+<p><strong>D-3. 不感蒸泄を計算していない。</strong> 著者の言うとおり、両群の実際のバランスは報告値より陰性寄りである可能性が高い。<strong>日常臨床の輸液バランス記録そのものが持つ限界</strong>であり、この試験に固有の欠陥ではないが、「−1080 mL」という数字を額面通りに受け取らない理由になる。</p>
+<h3>E. 日本・当院の文脈での論点</h3>
+<ul><li>本試験の「通常ケア」の72時間累積バランスは <strong>+61 mL</strong> だった。当院のAKI患者の同じ指標が何 mL かを知らないまま、この試験の結論を輸入することはできない。まずは自施設の実測から始めるべき。</li><li>維持輸液が最頻の違反だったという事実は、<strong>プロトコルではなくオーダーセットの問題</strong>であることを示唆する。当院で介入するなら、指示簿の構造を変えるところから。</li><li>RRT の判断が非盲検下で交絡した可能性は、当院で類似の運用を評価する際にも同じ形で起こる。自施設で「絞ったらRRTが減った」という観察が出ても、それは判断の変化かもしれない。</li></ul>
+<h2>📚 主要引用文献一覧（本文中で内容に言及されているもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>文献</th><th>内容</th><th>本論文での役割</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Nisula S, et al. FINNAKI study. Intensive Care Med 2013;39:420-428</td><td>フィンランドICUにおけるAKIの発生率・危険因子・90日死亡</td><td>サンプルサイズ設計の根拠（未公表データから72時間バランスを想定）</td></tr>
+<tr><td>2</td><td>Hoste EA, et al. AKI-EPI study. Intensive Care Med 2015;41:1411-1423</td><td>重症患者におけるAKIの疫学（多国籍）</td><td>AKIの頻度と有害転帰の背景</td></tr>
+<tr><td>3</td><td>KDIGO. KDIGO clinical practice guideline for acute kidney injury. Kidney Inter Suppl 2012</td><td>AKI診療ガイドライン</td><td>AKI stage の定義（層別化変数）と支持療法の枠組み</td></tr>
+<tr><td>4</td><td>Meersch M, et al. PrevAKI RCT. Intensive Care Med 2017;43:1551-1561</td><td>バイオマーカーで同定した高リスク心臓外科患者へのKDIGOバンドル</td><td>新規治療の評価例（心臓外科領域）</td></tr>
+<tr><td>5</td><td>Pickkers P, et al. JAMA 2018;320:1998-2009</td><td>敗血症関連AKIへのヒト遺伝子組換えアルカリホスファターゼ</td><td>新規治療の評価例（敗血症領域）</td></tr>
+<tr><td>6</td><td>Prowle JR, Kirwan CJ, Bellomo R. Nat Rev Nephrol 2014;10:37-47</td><td>AKIの予防・軽減のための輸液管理</td><td>「輸液はAKI治療の伝統的礎石」の根拠</td></tr>
+<tr><td>7</td><td>RENAL Replacement Therapy Study Investigators. Crit Care Med 2012;40:1753-1760</td><td>RENAL試験の輸液バランスと転帰の観察研究</td><td>輸液過剰と死亡の関連</td></tr>
+<tr><td>8</td><td>Vaara ST, et al. FINNAKI. Crit Care 2012;16:R197</td><td>RRTを受ける重症患者の輸液過剰と90日死亡</td><td>同上（本論文筆頭著者の先行研究）</td></tr>
+<tr><td>9</td><td>Grams ME, et al. Clin J Am Soc Nephrol 2011;6:966-973</td><td>AKIにおける輸液バランス・利尿薬使用・死亡（FACTTサブ解析）</td><td>AKI患者で高い累積バランスと死亡が関連</td></tr>
+<tr><td>10</td><td>Bouchard J, et al. Kidney Int 2009;76:422-427</td><td>AKI重症患者の輸液蓄積・生存・腎機能回復</td><td>輸液過剰と転帰</td></tr>
+<tr><td>11</td><td>Messmer AS, et al. Crit Care Med 2020;48:1862-1870</td><td>輸液過剰と死亡（観察研究のSR・メタ解析）</td><td>輸液過剰と死亡（統合エビデンス）</td></tr>
+<tr><td>12</td><td>Raimundo M, et al. Shock 2015;44:431-437</td><td>早期AKI後の輸液投与増加と腎回復低下の関連</td><td>輸液過剰とAKI進行</td></tr>
+<tr><td>13</td><td>Zhang J, et al. Crit Care 2019;23:392</td><td>累積輸液蓄積とAKI発症・腎機能非回復</td><td>同上</td></tr>
+<tr><td>14</td><td>Hjortrup PB, et al. CLASSIC pilot. Intensive Care Med 2016;42:1695-1705</td><td>敗血症性ショックの初期管理後の蘇生輸液量制限</td><td>最重要の比較対象。制限群でAKI悪化リスクが低かった／総バランスには差がつかなかった</td></tr>
+<tr><td>15</td><td>Martensson J, et al. SWIPE RCT. Intensive Care Med 2018;44:1797-1806</td><td>ICUでの20%アルブミンによる少量蘇生の生理学的効果</td><td>一般ICUでの制限的戦略の安全性</td></tr>
+<tr><td>16</td><td>Chen C, Kollef MH. Chest 2015;148:1462-1469</td><td>敗血症性ショックの初期蘇生後の標的輸液最小化パイロット</td><td>敗血症での制限的戦略</td></tr>
+<tr><td>17</td><td>Wiedemann HP, et al. FACTT. N Engl J Med 2006;354:2564-2575</td><td>急性肺傷害における2つの輸液管理戦略の比較</td><td>最も重要な先行RCT。60日死亡に差なし、人工呼吸期間短縮、RRT減少傾向</td></tr>
+<tr><td>18</td><td>Myles PS, et al. RELIEF. N Engl J Med 2018;378:2263-2274</td><td>大腹部手術における制限的 vs リベラル輸液</td><td>逆方向の証拠：制限的輸液がAKIリスクを増加させた</td></tr>
+<tr><td>19</td><td>Pickkers P, et al. Intensive Care Med 2017;43:1198-1209</td><td>ICMのAKIアジェンダ</td><td>本試験を研究優先課題に指定</td></tr>
+<tr><td>20</td><td>Ostermann M, et al. KDIGO Controversies. Kidney Int 2020;98:294-309</td><td>AKIにおける論争点（KDIGO会議の結論）</td><td>同上</td></tr>
+<tr><td>21</td><td>Vaara ST, et al. Acta Anaesthesiol Scand 2020;64:831-838</td><td>REVERSE-AKI のプロトコルと統計解析計画</td><td>本試験の事前公表プロトコル</td></tr>
+<tr><td>22</td><td>Kahan BC, Morris TP. BMJ 2012;345:e5840</td><td>層別化ランダム化を用いた試験の報告と解析</td><td>層別化変数で調整する解析方針の根拠</td></tr>
+<tr><td>23</td><td>Grissom CK, et al. Crit Care Med 2015;43:288-295</td><td>ARDSに対する簡略化保存的輸液プロトコル</td><td>FACTTの3日目累積バランス（保存的約150 mL／リベラル約5000 mL）の出典</td></tr>
+<tr><td>24</td><td>Semler MW, et al. J Intensive Care Med 2020;35:1374-1382</td><td>敗血症蘇生後の保存的輸液管理パイロットRCT</td><td>早期中止された類似パイロット（1日平均500 mLの差に到達せず）／慣行の制限化シフトの傍証</td></tr>
+<tr><td>29</td><td>Berthelsen RE, et al. FFAKI. Acta Anaesthesiol Scand 2018;62:936-944</td><td>AKI患者への強制的除水の無作為化実現可能性試験</td><td>出力側（除水）に絞った先行試験</td></tr>
+<tr><td>30</td><td>Silversides JA, et al. Crit Care Med 2018;46:1600-1607</td><td>医原性輸液過剰患者の de-resuscitation と死亡低下の関連</td><td>非蘇生輸液の重みとde-resuscitationの根拠</td></tr>
+<tr><td>31</td><td>Van Regenmortel N, et al. Intensive Care Med 2018;44:409-417</td><td>維持輸液と fluid creep が蘇生輸液より大きな負荷を課す</td><td>維持輸液を絞る介入設計の直接的根拠</td></tr>
+<tr><td>32</td><td>Lindén-Søndersø A, et al. Ann Intensive Care 2019;9:132</td><td>敗血症性ショック中に投与される非蘇生輸液の調査</td><td>ショック患者でも非蘇生輸液が最大割合</td></tr>
+<tr><td>33</td><td>Agrinier N, et al. POINCARE-2. Contemp Clin Trials 2019;83:109-116</td><td>1日0.5 kgの体重減少を目指すステップドウェッジ試験の設計</td><td>進行中の類似アプローチ（結果未公表）</td></tr>
+<tr><td>34</td><td>Douglas IS, et al. FRESH. Chest 2020;158:1431-1445</td><td>敗血症性低血圧・ショックにおける輸液反応性評価</td><td>将来のRFM試験の開始トリガー候補（動的指標）</td></tr>
+<tr><td>35</td><td>Vignon P, et al. Intensive Care Med 2020;46:2252-2264</td><td>ARDSにおける輸液投与とモニタリング</td><td>同上</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>REVERSE-AKI が示したのは「AKI患者に輸液を絞る運用は多施設で回せる」ことであって、「絞れば転帰が良くなる」ことではない。</strong></mark> 主要評価項目は72時間累積輸液バランスで、達成された差は <strong>−1148 mL（−1080 mL vs +61 mL、95%CI −2200〜−97、P=0.033）</strong>。<mark class="hl"><strong>RRTの差（13% vs 30%、RR 0.42）は副次評価項目・非盲検・21イベントの所見であり、臨床判断の根拠にしてはならない。</strong></mark></p>
+<p>覚えておく数字は3つ：<strong>分離 −1148 mL</strong>／<strong>1日目標は「陰性が望ましく、常に +300 mL 未満」</strong>／<strong>現代の「通常ケア」の72時間バランスは既に +61 mL（設計時想定の +2700 mL ではない）</strong>。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ICU入室12〜72時間、AKIあり、RRT未導入</td><td>血管内容量不足か（動的指標・臨床所見）</td><td>容量不足なら本試験の対象外。まず蘇生を完了させる</td></tr>
+<tr><td>容量不足ではないと判断できた</td><td>現在の維持輸液・薬剤希釈・栄養輸液の内訳</td><td>維持輸液を止める（経腸栄養が不耐かつ静脈栄養が禁忌のときだけ許可）</td></tr>
+<tr><td>入力を絞ってもバランスが陽性</td><td>尿量、利尿薬への反応</td><td>利尿薬を使用制限なしで調整し、1日 +300 mL 未満、望ましくは陰性を目指す</td></tr>
+<tr><td>利尿薬でも目標に届かない</td><td>RRT導入の臨床的妥当性</td><td>除水目的のRRTを「検討」する。義務ではない。24時間に限り +900 mL までの未達は許容してよい</td></tr>
+<tr><td>ボーラス輸液が必要な状況が生じた</td><td>循環動態</td><td><mark class="hl">制限プロトコル下でもボーラスは臨床判断で投与してよい（本試験でも明示的に許可されていた）</mark></td></tr>
+<tr><td>制限的管理を継続中</td><td>Na・K・Mg・P、RRT関連合併症</td><td>本試験の有害事象の大半は電解質異常とRRT関連。日次の電解質確認をセットにする</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

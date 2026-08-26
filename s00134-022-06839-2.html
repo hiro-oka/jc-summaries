@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>フランスICUの延命治療差し控え・中止カンファレンスの実態（Letter・ICM2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06839-2.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">フランスICUの延命治療差し控え・中止カンファレンスの実態（Letter・ICM2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Tarcy T, Kallel H, Giffard M, Besch G, Aubry R, on behalf of the REUREA Study Group. Decision-making process during limitation life-sustaining support meetings in French intensive care units. Intensive Care Med. 2022. doi:10.1007/s00134-022-06839-2</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2022-08-29）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06839-2" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06839-2</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Decision-making process during limitation life-sustaining support meetings in French intensive care units</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06839-2.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06839-2.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06839-2.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>「多職種カンファをやる」ではなく「誰に何分渡すか」を決める 本研究の価値は、多職種カンファレンスという形式が満たされている場で、<strong>実際に誰が何分話したかを秒単位で測った</strong>点にある。当院で意思決定カンファレンスの型を決めるとき、そのまま設計値として使える。</p>
+<p><strong>① 所要時間の設計値 — 20分の枠では議論に14分しか残らない</strong> 実測は10〜42分（平均20±10分）。うち約3分の1が患者プレゼンに消え、実質的なやりとりは<strong>14±10分</strong>。当院で枠を取るなら「20分」ではなく「プレゼン5分＋議論20分＝25分」のように<strong>議論の分を明示して確保する</strong>。プレゼンは事前に電子カルテのサマリーで共有し、カンファ冒頭は要点3行に圧縮すれば、同じ20分でも議論時間が5割増える。</p>
+<p><strong>② 発言時間の偏りは「司会の仕事」として明文化する</strong> 議論14分の内訳は集中治療医9±7分（70%）、外部コンサルタント医3±2分（18%）、後期研修医1±2分（6%）、看護師・看護助手1±1分（5%）、その他（心理士・学生）0分（1%）。<strong>医師合計で94%</strong>。当院の治療方針カンファ・倫理カンファでも、司会が黙っていれば同じ配分になると想定してよい。対策は精神論ではなく手順にする——「議論に入る前に、担当看護師に必ず最初に振る」「発言していない職種がいたら閉じない」をカンファのチェック項目に入れる。</p>
+<p><strong>③ 看護師の観察は「意見」ではなく「データ」として構造化して取る</strong> 1分では意見は言えても観察は伝わらない。当院のICテンプレート改訂に合わせ、カンファ前に担当看護師が<strong>定型項目で記入する欄</strong>（本人の言動・苦痛の徴候・家族の来訪状況と発言・ケア中の反応）を用意し、司会がそれを読み上げるところから議論を始める。発言時間の配分を変えるより、<strong>発言の形式を変える方が確実</strong>に情報が入る。</p>
+<p><strong>④ 事前指示は「あるか」ではなく「取得率を測る」</strong> 15例中、自分で意思表示できたのは1名、事前指示があったのは0名。当院のACP推進の根拠として最も強い数字はここ。ただし施策に落とすなら、啓発ではなく<strong>分母のある指標</strong>（ICU入室患者のうち入室前に意思表示の記録がある割合、入室72時間以内に代理意思決定者を特定・記録できた割合）を毎月出す形にする。</p>
+<p><strong>⑤ 「主観が入る」を前提に、可視化する仕組みを置く</strong> 5テーマのうち2つ（医師の主観性・出来事の時間性）は医学的事実ではない。これは非難ではなく実態の記述。当院で置ける仕組みは、複数医師の関与（既に外部コンサルタントに相当）、時間を置いた再検討（時間制限つき治療トライアルの発想）、そして看護師の観察の明示的聴取（③）の3つ。</p>
+<p><strong>⑥ そのまま輸入してはいけない部分</strong> フランスは医師の集団決定が法制化されており、この論文のカンファに<strong>家族は参加していない</strong>（参加者内訳に家族が一人もいない）。日本は法定手続がなく、家族の同意を実質的な要件として運用している。時間配分と発言分布の知見は移植できるが、<strong>カンファの構成員と権限の設計はそのまま移せない</strong>。詳細は下記「7. 法的枠組みの違い」。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：延命治療の差し控え・中止は世界中のICUで日常的に行われている（WELPICUS Study, AJRCCM 2014）。フランスではこれらの決定が法律に従い、医療・非医療チームによるLLSSカンファレンスの場で行われる（2016年法）。フランスのICU死亡の<strong>半数超</strong>がこれらのカンファでの決定後に生じている（Lesieur, Ann Intensive Care 2015／43 ICU）。</li><li><strong>Unknown</strong>：これまでの研究の大半は、そのプロセスの<strong>様態（modalities）の明確さの欠如</strong>を報告してきた。つまり「決定がカンファで下されている」ことは分かっていたが、<strong>カンファの中で実際に何が語られ、誰がどれだけ発言しているのか</strong>は記述されていなかった。</li><li><strong>What's new</strong>：カンファレンスを<strong>録音</strong>して逐語化し、質的解析（Framework Method）と発言時間の実測を組み合わせた。その結果、(1) 決定を左右する論拠は医学的パラメータだけでなく、近親者の関与・出来事の時間性・医師の主観性を含む5テーマからなること、(2) 法的基準は満たされているのに、実質的な学際的プロセスは成立していなかったこと、の2点を示した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで フランスの3施設で延命治療制限カンファレンス15回を録音し、<strong>議論に使われた実質14分のうち94%を医師が話し、看護師・看護助手の発言は1分（5%）にとどまっていた</strong>。法的要件（多職種の同席）は満たされていても、学際的な熟議は成立していなかった。</p>
+</div>
+<ul><li>対象は<strong>15回</strong>のLLSSカンファレンス。内訳は差し控え7、中止6、決定の延期2。</li><li>延べ<strong>122名</strong>が参加（医師33、後期研修医31、パラメディカル＝ICU看護師・看護助手28、心理士2、学生28）。</li><li>患者側の条件は極端に乏しい。<strong>自分で意思表示できた患者は1名のみ</strong>、<strong>事前指示があった患者は0名</strong>、意思を代弁できる近親者がいたのは10/15名（66.7%）。</li><li>録音の逐語解析から5テーマが浮上した。医学的な参照事項／患者に特有の特徴／近親者の関与／<strong>医師の主観性</strong>／<strong>出来事の時間性</strong>。後ろ2つが医学的事実ではないことが本研究の眼目。</li><li>カンファは1回あたり参加者10±2名（うち医師4±1名）、所要10〜42分（20±10分）。発言時間の約3分の1は患者プレゼンに費やされ、実質的なやりとりは14±10分。</li><li>その14分の配分は集中治療医70%、外部コンサルタント医18%、後期研修医6%、看護師・看護助手5%、その他1%。</li><li>著者の結論は2つ。意思決定は医学的パラメータのみに基づかないこと、そして法的基準を満たしても真の学際的プロセスは出現しなかったこと。改善の主軸は<strong>熟議の質</strong>である。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — フランスの「延命治療制限カンファレンス」とは何か 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>LLSS meeting（limitation life-sustaining support meeting）</strong> ＝ 延命治療の差し控え（withholding）・中止（withdrawal）を決めるために開かれる、フランスICUの定型カンファレンス。日本の「治療方針カンファレンス」「倫理カンファレンス」に相当するが、決定的に違うのは<strong>法律で手続が定められている</strong>点である。</p>
+<p>フランスでは2005年のレオネッティ法、2016年のクレース＝レオネッティ法（LOI n° 2016-87 du 2 février 2016）により、意思表示できない患者の延命治療を制限する場合、<strong>「合議手続（procédure collégiale）」を経ることが法的要件</strong>とされる。担当医が単独で決めることは認められず、ケアチームおよび利害関係のない第三者の医師（外部コンサルタント）の意見を聴いたうえで決定する。本研究の Fig. 1B に「External Physician consultants」という発言者カテゴリが独立して存在するのは、この法的要件が実務に現れたものである。</p>
+<p><strong>重要な非対称</strong>：この合議手続において、最終的な決定権は<strong>医師にある</strong>。家族・信頼できる人（personne de confiance）は意見を聴かれ、決定を通知されるが、決定主体ではなく、合議の場に参加する構成員でもない。日本のように「家族の同意」を実質的な要件として運用する国とは、カンファの意味そのものが異なる。</p>
+<p><strong>用語の対応</strong></p>
+<div class="tw"><table>
+<thead><tr><th>原文</th><th>本ノートでの訳</th><th>中身</th></tr></thead>
+<tbody>
+<tr><td>withholding</td><td>差し控え</td><td>これから始める治療を開始しないこと</td></tr>
+<tr><td>withdrawal</td><td>中止</td><td>すでに行っている治療をやめること</td></tr>
+<tr><td>paramedics</td><td>看護師・看護助手</td><td>Fig. 1 のキャプションが「ICU nurses and health care assistants」と明示的に定義している。救急救命士ではない</td></tr>
+<tr><td>junior doctors</td><td>後期研修医</td><td>interne 等の研修中の医師</td></tr>
+<tr><td>other participants</td><td>その他</td><td>Fig. 1 キャプションの定義では心理士・医学生・看護学生</td></tr>
+<tr><td>advance directives</td><td>事前指示</td><td>2016年法で医師への拘束力が強化された書面</td></tr>
+<tr><td>Framework Method</td><td>フレームワーク法</td><td>逐語録を体系的にコード化しテーマへ集約する質的解析の定型手法</td></tr>
+<tr><td>theoretical saturation</td><td>理論的飽和</td><td>新たな症例を追加しても新しいテーマが出てこなくなる状態。質的研究における組み入れ終了の基準</td></tr>
+</tbody></table></div>
+</div>
+<h3>2. 背景と目的</h3>
+<p>本文が挙げる出発点は3つである。第一に、延命治療の差し控え・中止はICUにおける世界的な実践であること（引用1：WELPICUS Study）。第二に、フランスではこれらの決定が法律に従い、医療・非医療チームによりLLSSカンファレンスの場で行われること（引用2：2016年法）。第三に、フランスのICUにおける<strong>死亡の半数超</strong>が、これらのカンファで下された差し控え・中止の決定の後に生じていること（引用3：Lesieur 2015、43 ICUでの研究）。</p>
+<p>そのうえで著者は、これまでの研究の大半が<strong>プロセスの様態の明確さを欠く</strong>と報告してきた点を問題にする（引用4：Quenot 2017、引用5：Curtis &amp; Vincent 2010）。</p>
+<p>目的は明快に2つ書かれている。<strong>(1) LLSSカンファでの決定に影響する主要な論拠を明らかにすること</strong>、<strong>(2) これらの決定における職種間アプローチ（interprofessional approach）の実態を分析すること</strong>。</p>
+<h3>3. 方法（Methods）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>多施設・観察研究。無作為にスクリーニングされたLLSSカンファレンスの全参加者を対象に、連続的に組み入れ</td></tr>
+<tr><td>施設</td><td>ブザンソン大学病院、ディジョン大学病院、カイエンヌ総合病院（仏領ギアナ）の3施設。大学病院2＋総合病院1</td></tr>
+<tr><td>期間</td><td>2021年8月2日〜2022年2月2日（6か月間）</td></tr>
+<tr><td>同意</td><td>参加者および患者（適切な場合はその近親者）の録音への非反対を、組み入れ前に確認</td></tr>
+<tr><td>組み入れ単位</td><td>1患者につき1回のLLSSカンファレンスのみが適格</td></tr>
+<tr><td>データ収集</td><td>非参加型の観察法（non-participatory observational method）。録音とリアルタイムのメモ取り</td></tr>
+<tr><td>質的解析</td><td>録音を逐語化し、テーマ別 Framework Method で解析</td></tr>
+<tr><td>組み入れ終了基準</td><td>理論的飽和に到達した時点</td></tr>
+<tr><td>量的解析</td><td>発言時間を各カンファ後に録音から算出。収集データを統計モデルで提示することを目的とする</td></tr>
+<tr><td>統合</td><td>最後に質的アプローチと量的アプローチの間の潜在的な関連を検討</td></tr>
+</tbody></table></div>
+<p>方法の記述はここまでで、Letter という形式上きわめて簡潔である。<strong>サンプルサイズ設計・統計手法の具体名・コーディングの二重化の有無・事前登録の有無は本文に記載がない</strong>。ただし著者は Author contributions 欄で、共著者 MG を「データ解析の客観性を担保した co-investigator」と位置づけており、単独コーディングではないことを示唆している。</p>
+<h3>4. 結果 — 組み入れとカンファの内訳</h3>
+<p><strong>カンファレンス（15回）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>決定の内容</th><th>回数</th></tr></thead>
+<tbody>
+<tr><td>差し控え（withholding life support）</td><td>7</td></tr>
+<tr><td>中止（withdrawal life support）</td><td>6</td></tr>
+<tr><td>決定の延期（postponed decisions）</td><td>2</td></tr>
+<tr><td>合計</td><td>15</td></tr>
+</tbody></table></div>
+<p>延期が2回（13%）ある点は見落とされやすい。カンファを開けば必ず結論が出るわけではない。</p>
+<p><strong>参加者（延べ122名）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>職種</th><th>人数</th><th>構成比</th></tr></thead>
+<tbody>
+<tr><td>医師（physicians）</td><td>33</td><td>27.0%</td></tr>
+<tr><td>後期研修医（junior doctors）</td><td>31</td><td>25.4%</td></tr>
+<tr><td>看護師・看護助手（paramedics）</td><td>28</td><td>23.0%</td></tr>
+<tr><td>心理士（psychologists）</td><td>2</td><td>1.6%</td></tr>
+<tr><td>学生（students）</td><td>28</td><td>23.0%</td></tr>
+<tr><td>合計</td><td>122</td><td>100%</td></tr>
+</tbody></table></div>
+<p>構成比は原文にはなく、本ノートで算出した（122を分母とする単純計算）。医師系（医師＋後期研修医）が64名で52.5%、非医師（看護師・看護助手＋心理士＋学生）が58名で47.5%。<strong>人数の上ではほぼ半々</strong>である。この「人数は半々」と後述の「発言は医師が94%」の対比が、本研究の中心的な発見にあたる。</p>
+<p><strong>患者側の条件</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>自分で意思表示できた患者</td><td>1名（15例中）</td></tr>
+<tr><td>意思を表明できる近親者がいた患者</td><td>10/15名（66.7%）</td></tr>
+<tr><td>事前指示（advance directives）を表明していた患者</td><td>0名</td></tr>
+</tbody></table></div>
+<p>66.7% は 10/15 の検算と一致する。事前指示が15例すべてでゼロという結果は、2016年法で事前指示の拘束力が強化されたフランスにおいてすら、ICUの現場に事前指示が届いていないことを示す。裏返すと、<strong>残りの5例（33%）は、本人も語れず、代弁できる近親者もいない状態で決定が下された</strong>（この5例という数字は 15−10 の計算であり、原文が明示した数ではない）。</p>
+<p>なお、患者背景（年齢・重症度・診断・ICU入室からの日数など）は online Supplement（supplementary material 1）に置かれており、<strong>Letter本文には一切記載がない</strong>。本ノートも本文の範囲でしか書けていない。</p>
+<h3>5. 図 — 5テーマとサブテーマ、発言時間の配分</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06839-2" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06839-2）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. LLSSカンファレンスの意思決定プロセスの全体像 上下2段の図。上段（A）は中央に「Themes emerged from LLS meetings」と書かれた白い円を置き、その周囲を5色のドーナツ状の扇形が囲む。扇には内側から 01〜05 の番号が白抜きで振られ、時計回りに 01 濃紺、02 灰、03 橙、04 朱、05 暗赤と並ぶ。各扇の外側にテーマ名が大きな番号（1〜5）とともに配置され、その下にサブテーマが箇条書きで並ぶ。5つの扇はほぼ均等な大きさで描かれており、テーマ間の量的な重みづけを表すものではない。下段（B）は「Effective exchange time allocation」と中央に書かれたドーナツ円グラフ。赤の巨大な扇が円の7割を占め、そこから引き出し線で「ICU Physicians 9±7min（70%）」が示される。残りは紺（External Physician consultants 3±2min、18%）、灰（Junior Doctors 1±2min、6%）、橙（Paramedics 1±1min、5%）、緑の極細の扇（Other participants 0min、1%）。値は平均±標準偏差または総やりとり時間に対する百分率。effective exchange time は患者プレゼン後の発言時間（分）を指す。キャプションは paramedics を「ICU nurses and health care assistants」、other participants を「psychologists, medical students or students in nursing care」と定義している。原図・無改変。</p>
+</div>
+<h4>Fig. 1A — 5つの主要テーマとサブテーマ（図から起こした全文）</h4>
+<p>旧版のノートは「サブテーマは本文に記載がなく転記できていない」としていたが、図中に全て記載されている。以下は図から書き起こしたものである。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>テーマ</th><th>サブテーマ</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>医学的な参照事項（medical references）</td><td>既往歴／臨床所見の観察／検査所見（para-clinical findings）／治療の行き詰まりまたは失敗（therapeutic impasse or failure）／外部専門医の助言</td></tr>
+<tr><td>2</td><td>患者に特有の特徴（patient's characteristics）</td><td>年齢／自立度（autonomy）／生活様式・生活の質／フレイル／本人の意向（wishes）／事前指示</td></tr>
+<tr><td>3</td><td>近親者の関与（involvement of relatives）</td><td>近親者から報告された本人の意向／近親者との関係性／決定に対する近親者の理解（relatives understanding against the decision）</td></tr>
+<tr><td>4</td><td>医師の主観性（physician's subjectivity）</td><td>心的投影（mental projection）／既視感のある経験（already seen experiences）／予後の確信度（prognostic certainty）／経過の見通しについての仮定／感情（feeling）</td></tr>
+<tr><td>5</td><td>時間性（temporality）</td><td>出来事の時系列／可逆性（reversibility）／回復能力（recovery capacity）／期限（deadline）／在室日数（length of stay）</td></tr>
+</tbody></table></div>
+<p>テーマ3のサブテーマがすべて<strong>近親者から間接的に伝えられた情報</strong>である点は重要である。「近親者の関与」とは、近親者がカンファに参加することではなく、近親者の言葉が医療者を介して議論に持ち込まれることを指している。</p>
+<p>テーマ4は本研究の白眉で、医師が自分の心的投影・過去の類似症例の記憶・予後判断の主観的確信・感情を根拠に語っていた事実が、録音の逐語解析によって可視化されている。テーマ5の「期限（deadline）」「在室日数」は、患者の病態ではなく<strong>時間の経過そのものが決定の論拠になっていた</strong>ことを示す。</p>
+<h4>Fig. 1B — 実質的やりとり時間（14±10分）の職種別配分</h4>
+<div class="tw"><table>
+<thead><tr><th>発言者</th><th>発言時間</th><th>割合</th></tr></thead>
+<tbody>
+<tr><td>集中治療医（ICU physicians）</td><td>9±7分</td><td>70%</td></tr>
+<tr><td>外部コンサルタント医（external physician consultants）</td><td>3±2分</td><td>18%</td></tr>
+<tr><td>後期研修医（junior doctors）</td><td>1±2分</td><td>6%</td></tr>
+<tr><td>看護師・看護助手（paramedics）</td><td>1±1分</td><td>5%</td></tr>
+<tr><td>その他（心理士・医学生・看護学生）</td><td>0分</td><td>1%</td></tr>
+<tr><td>合計</td><td>14分</td><td>100%</td></tr>
+</tbody></table></div>
+<p>検算：分の合計 9+3+1+1+0 = 14 で、本文の「effective exchange time 14±10分」と一致する。百分率の合計 70+18+6+5+1 = 100 も整合する。本文は集中治療医の割合を <strong>70±15%</strong> と幅つきで記しており、図の 70% はその平均値にあたる。</p>
+<p>本ノートで算出した派生値は次のとおり（原文には記載がない）。</p>
+<ul><li><strong>医師の発言合計 = 70 + 18 + 6 = 94%</strong>、非医師（看護師・看護助手＋その他）は <strong>6%</strong>。</li><li>看護師・看護助手は参加者の23.0%（28/122）を占めながら、発言時間は5%。</li><li>非医師は参加者の47.5%（58/122）を占めながら、発言時間は6%。</li><li>標準偏差にも意味がある。看護師・看護助手は 1±1分であり、<strong>平均から1SD下げると0分</strong>になる。つまり一言も発言しないカンファレンスが相当数あったことを示唆する。同様に後期研修医は 1±2分と、平均より標準偏差の方が大きい。</li></ul>
+<h4>カンファレンスの構造（本文の記載）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>1回あたりの参加者数</td><td>10±2名（うち医師 4±1名）</td></tr>
+<tr><td>所要時間</td><td>10〜42分（平均20±10分）</td></tr>
+<tr><td>患者プレゼンに費やされた発言時間</td><td>全発言時間の約3分の1</td></tr>
+<tr><td>実質的なやりとりの時間</td><td>14±10分</td></tr>
+</tbody></table></div>
+<p>平均20分のうち約3分の1（およそ6〜7分）がプレゼン、残りの14分が議論という配分は、20分と14分という2つの数字とも整合する。</p>
+<h3>6. 本文に書かれていないこと（読者が探すが見つからない項目）</h3>
+<p>Letter という形式上、実務設計に必要な次の項目は<strong>本文に一切記載がない</strong>。当院で仕組みを設計する際は、この論文を根拠にできない部分として区別しておく必要がある。</p>
+<div class="tw"><table>
+<thead><tr><th>読者が知りたい項目</th><th>本文の記載</th></tr></thead>
+<tbody>
+<tr><td>カンファ開催のトリガー（何を契機に開くか）</td><td>記載なし。「無作為にスクリーニングされたカンファ」としか書かれておらず、開催の判断基準は不明</td></tr>
+<tr><td>誰が招集するか</td><td>記載なし</td></tr>
+<tr><td>ICU入室から何日目に開かれるか</td><td>記載なし（患者背景は Supplement）</td></tr>
+<tr><td>家族が同席するか</td><td>明示的な記述はない。ただし参加者内訳（医師・後期研修医・看護師/看護助手・心理士・学生）に家族は一人も含まれない</td></tr>
+<tr><td>決定内容の記録（カルテ記載）の方法</td><td>記載なし</td></tr>
+<tr><td>決定から実施までの時間</td><td>記載なし</td></tr>
+<tr><td>決定後の転帰（死亡率・実際に中止されたか）</td><td>記載なし</td></tr>
+<tr><td>3施設それぞれの内訳（何回ずつか）</td><td>記載なし。15回が施設間でどう分配されたかは不明</td></tr>
+<tr><td>各カンファの司会者の有無・役割</td><td>記載なし</td></tr>
+<tr><td>質的コーディングの二重化・κ係数</td><td>記載なし（co-investigator による客観性担保の言及のみ）</td></tr>
+<tr><td>Hawthorne効果（録音されている自覚が発言を変える）</td><td>論じられていない。著者が挙げた限界はパンデミックのバイアスのみ</td></tr>
+</tbody></table></div>
+<p><strong>家族の同席について</strong>は、参加者の職種内訳に家族が含まれないこと、テーマ3のサブテーマがすべて「近親者から報告された」情報であることの2点から、<strong>家族はカンファの場にいなかった</strong>と読むのが自然である。これはフランスの合議手続の法的構造とも整合する。ただしこれは本ノートの解釈であり、論文がそう明記しているわけではない。</p>
+<h3>7. 法的枠組みの違い — なぜそのまま日本に持ち込めないか</h3>
+<p>以下の比較表のうち、フランス側の「法定の合議手続」「医師が決定主体」は本論文の引用文献2（2016年法）に依拠する背景知識であり、<strong>論文本文の記述ではない</strong>。日本側も本論文の記述ではなく、Vault内の関連ノートに基づく整理である。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>フランス（本論文の舞台）</th><th>日本</th></tr></thead>
+<tbody>
+<tr><td>手続の法的位置づけ</td><td>2016年法（クレース＝レオネッティ法）により合議手続が法的要件</td><td>延命治療の中止を直接定める法律はない。厚労省ガイドライン・学会提言による</td></tr>
+<tr><td>決定の主体</td><td>医師（担当医が、ケアチームと利害関係のない第三者医師の意見を聴いたうえで決定）</td><td>医療チームと患者・家族の合意形成。実務上は家族の同意が要件的に扱われる</td></tr>
+<tr><td>家族の位置</td><td>意見を聴かれ、決定を通知される。合議の構成員ではない</td><td>代理意思決定者として実質的な決定関与者</td></tr>
+<tr><td>カンファの目的</td><td>法定要件を満たす手続であり、同時に臨床判断の場</td><td>合意形成の場。法的な形式要件は定められていない</td></tr>
+<tr><td>外部医師の関与</td><td>法的に要求される（本研究で発言時間の18%を占めた）</td><td>制度化されていない。倫理コンサルテーションを置く施設はあるが任意</td></tr>
+<tr><td>事前指示の効力</td><td>2016年法で医師への拘束力を強化</td><td>法的拘束力はない</td></tr>
+</tbody></table></div>
+<p><strong>移植できる知見と、できない知見を分ける。</strong></p>
+<ul><li>移植できる：所要時間の実測値、発言時間の職種別分布、患者プレゼンが時間の3分の1を食うという構造、5テーマ（とくに医師の主観性と時間性が論拠に入り込むこと）。これらは制度に依存しない、会議という場そのものの性質である。</li><li>移植できない：カンファの構成員設計と権限配分。フランスは「家族抜きで医師が決める」ことが合法かつ規範であり、その前提で多職種の同席が意味を持つ。日本で同じ構成にすれば、家族の意向を反映する経路そのものが失われる。</li><li>日本で読み替えるなら：本研究の「学際的プロセスが成立していない」という指摘は、日本では<strong>家族同席のカンファにおける家族の発言時間</strong>という形に置き換わる。同席していても発言できていないなら、構造は同じである。</li></ul>
+<h3>8. 批判的吟味（JCでの論点）</h3>
+<p><strong>(1) 結論の中核概念が測定されていない</strong> 著者の目的の2つ目は「職種間アプローチの実態を分析する」であり、結論は「真の学際的プロセスの出現が欠けていた」である。しかし論文は、<strong>何をもって「真の学際的プロセス」とするかの事前定義も閾値も示していない</strong>。示されたのは発言時間の分布のみで、「看護師の発言が5%だから学際的でない」という判断は、著者の規範的評価であって測定結果ではない。発言時間が少なくても事前に情報が共有され、決定に影響していれば学際的でありうる。ここが本論文で最も議論になる点である。</p>
+<p><strong>(2) 発言時間は影響力の代理指標として妥当か</strong> 発言時間の測定は客観的で再現性が高いが、意思決定への寄与とは別物である。看護師の1分の発言が結論を反転させた可能性を、この設計では検出できない。本研究は「誰が場を占有したか」を測ったのであって「誰が決めたか」を測ってはいない。逆に、患者プレゼンを行う者（多くは研修医または担当医）の発言は「効果的やりとり時間」から除外されており、プレゼンの枠組み設定効果（どの情報を選んで提示したか）も測られていない。</p>
+<p><strong>(3) サンプルサイズと一般化可能性</strong> 15回のカンファ、3施設。質的研究として理論的飽和には到達したと述べており、テーマの網羅性という点では正当化されうる。ただし量的指標（発言時間の平均±SD）を15例から出している点は別問題で、標準偏差が平均に匹敵する項目（後期研修医 1±2分、看護師 1±1分、集中治療医 9±7分）はばらつきが大きく、点推定を施設方針の根拠にするには弱い。信頼区間は示されていない。施設は大学病院2＋総合病院1で、うち1施設は仏領ギアナのカイエンヌであり、本土2施設と医療資源・文化背景が異なる可能性があるが、施設別の内訳は示されていない。</p>
+<p><strong>(4) パンデミック期のバイアス（著者自身が明記）</strong> 本研究は SARS-CoV-2 パンデミック危機の最中（2021年8月〜2022年2月、欧州のオミクロン流行期を含む）に実施された。著者は「この期間に医療者が経験した業務負荷の増加と苦痛に伴うバイアスを無視できない」と明記している。カンファが平時より短く、非医師の発言がより抑制された可能性は否定できない。これは結果を保守的に読む方向にも、逆に「平時ならもっと良い」という言い訳にもなりうる両刃の限界である。</p>
+<p><strong>(5) 観察者効果が論じられていない</strong> 録音とリアルタイムのメモ取りという非参加型観察であるが、参加者は録音への非反対を事前に確認されており、<strong>観察されていることを知っている</strong>。この設計では発言が抑制される方向にも、逆に「見られているから発言する」方向にも歪みうる。著者はこの点を限界として挙げていない。</p>
+<p><strong>(6) 1患者1カンファの制約</strong> 組み入れは1患者につき1回のみ。しかし実際の意思決定は複数回のカンファを経て進むことが多く、「決定の延期」が2例あることはそれを示している。<strong>同一患者における議論の経時的変化</strong>は本研究の設計では捉えられない。初回カンファでは看護師が発言しにくく、2回目以降で変わる可能性も検証できない。</p>
+<p><strong>(7) COIと資金</strong> 資金なし、COIなしと明記されており、この主題で開示先が結論を歪める構造的な利益相反は見当たらない。ただしCOI記載が "The author declares"（単数）と形式的で、著者5名＋研究班11名の個別開示になっていない点は、ICMJE基準の記載としては簡略に過ぎる。また最終著者 Régis Aubry は緩和ケア部門の所属であり、筆頭著者も麻酔集中治療科と緩和ケア部門の両方に所属している。「熟議の質を高めるべき」という規範的結論は緩和ケアの立場と親和的であり、これは利益相反ではないが<strong>視座の偏り</strong>として読者が意識しておくべき点である。引用文献5件のうち自己引用はなく、引用の偏りは認めない。</p>
+<p><strong>(8) 原著の内的不整合</strong></p>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>不整合の内容</th></tr></thead>
+<tbody>
+<tr><td>参加者総数と1回あたり人数</td><td>15回×10±2名＝約150名分の出席が見込まれるのに、報告は「122名」。122は延べ出席数ではなく実人数（同一人物の複数回出席を1と数えた）である可能性が高いが、本文は「15回のカンファに122名が関与した」としか書いておらず、どちらか判別できない</td></tr>
+<tr><td>医師の人数</td><td>参加者内訳は「医師33名」だが、1回あたり「医師4±1名」なら15回で約60名分。上と同じ論点。加えて Fig. 1B は発言者を「ICU Physicians」と「External Physician consultants」に分けているのに、参加者内訳には外部コンサルタントのカテゴリが存在せず、33名の中に含まれているのか別枠なのかが不明</td></tr>
+<tr><td>略語の不統一</td><td>本文は LLSS（limitation life-sustaining support）、Fig. 1 キャプションは <strong>LSST</strong> meetings、Fig. 1A の図中は <strong>LLS</strong> meetings と、同じ会議に3通りの略語が使われている</td></tr>
+<tr><td>Table 1〜4 の不在</td><td>Author contributions 欄に「SM は table 1 の作成に寄与」「HK は table 1 から 4 を最適化した」とあるが、<strong>Letter本文には表が1つも掲載されていない</strong>。本文が参照する補足資料は「supplementary material 1（患者背景）」のみ。原稿が原著として書かれた後にLetterへ縮約された痕跡と読める</td></tr>
+<tr><td>Fig. 1B の「0min (1%)」</td><td>その他の参加者を「0分（1%）」と表記。14分の1%は約8秒であり四捨五入すれば0分だが、0分と1%を併記する表現は整合が取りにくい</td></tr>
+<tr><td>綴り</td><td>"We conducted a mixt qualitative and quantitative analysis" — mixed の誤植</td></tr>
+</tbody></table></div>
+<h3>9. 旧記述からの訂正（PDF照合で判明した点）</h3>
+<p>旧版のノート（49行）とPDFを突き合わせ、次を訂正・追加した。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧記述</th><th>PDF照合の結果</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>published: 2022-08-29</code></td><td>紙面に印字されているのは「Accepted: 20 July 2022」のみで、Published online の日付・巻号・頁の印字はない（online-first版）。月日を紙面から確認できないため <code>published: 2022</code> に修正した</td></tr>
+<tr><td>2</td><td>「Fig. 1A の5テーマのサブテーマは本文に記載されておらず、本ノートに転記できていない」</td><td><strong>誤り。サブテーマは Fig. 1A の図中に全24項目が記載されている</strong>。高解像度でレンダリングして全文を起こし、本ノートに表として収載した</td></tr>
+<tr><td>3</td><td>Fig. 1B について「実質的やりとり時間のうち集中治療医への配分 70±15%」のみ記載</td><td><strong>不完全</strong>。Fig. 1B は5職種すべての発言時間と割合を示している（外部コンサルタント医3±2分18%、後期研修医1±2分6%、看護師・看護助手1±1分5%、その他0分1%）。本論文の最重要データである職種別配分が旧ノートには欠落していた</td></tr>
+<tr><td>4</td><td>「参加者は10名（医師4名、パラメディカル28名が全体で参加）いても」</td><td>記述が混線している。10名と4名は<strong>1回あたり</strong>の平均、28名は<strong>研究全体</strong>の延べ人数であり、次元の異なる数字を同一文中で並べていた</td></tr>
+<tr><td>5</td><td>「パラメディカル 28名」（訳語のまま）</td><td>Fig. 1 キャプションが paramedics を「ICU nurses and health care assistants」と定義している。<strong>看護師・看護助手</strong>であることを明示しないと、日本語の「パラメディカル」から救急救命士等を連想させうる</td></tr>
+<tr><td>6</td><td>「Table 1〜4 が謝辞で言及されている」</td><td>言及箇所は Acknowledgements ではなく <strong>Author contributions</strong> 欄</td></tr>
+<tr><td>7</td><td>「フランスの法制度（2016年法）に固有の枠組み」とのみ記載</td><td>法律名（LOI n° 2016-87、クレース＝レオネッティ法）と、合議手続における<strong>医師が決定主体・家族は構成員ではない</strong>という中核構造が書かれていなかった。日本との対比表を新設した</td></tr>
+<tr><td>8</td><td>ライセンスの記載なし</td><td><strong>CC BY-NC 4.0</strong>（非営利限定）。プレーンな CC BY ではない</td></tr>
+<tr><td>9</td><td>資金・COIの記載なし</td><td>資金なし（公的・商業・非営利いずれも受けていない）、COIなしと明記されている</td></tr>
+<tr><td>10</td><td>倫理承認は「IRB 00010254-2021-136」のみ</td><td>承認日（2021年6月29日）、委員長名（Dr PJ Zetlaoui）、<strong>非反対（non-opposition）方式</strong>である点を追加</td></tr>
+<tr><td>11</td><td>家族の同席について言及なし</td><td>参加者内訳に家族が含まれないこと、テーマ3が全て間接情報であることを整理し、家族不在と読めることを明記した</td></tr>
+<tr><td>12</td><td>「本文に無い項目」の整理なし</td><td>開催トリガー・招集者・入室からの日数・記録方法・決定から実施までの時間・施設別内訳など、実務設計に必要でありながら本文に無い項目を一覧化した</td></tr>
+<tr><td>13</td><td>内的不整合の指摘なし</td><td>122名と15×10名の齟齬、LLSS/LSST/LLS の略語不統一、本文に存在しない Table 1〜4 など6件を新たに摘出した</td></tr>
+</tbody></table></div>
+<p>なお、旧記述のうち次は<strong>PDFと一致しており正しかった</strong>。15回の内訳（差し控え7・中止6・延期2）、122名の職種内訳、意思表示できた患者1名、近親者10/15名（66.7%）、事前指示0名、10±2名・4±1名、10〜42分（20±10分）、発言時間の約3分の1がプレゼン、実質やりとり14±10分、70±15%、施設名と期間、パンデミックのバイアスが著者の明記した限界であること、Hawthorne効果が論じられていないこと。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この論文で言えないこと <mark class="hl"><strong>「看護師の発言が5%だったから、この施設の意思決定は学際的でない」とは、この研究からは言い切れない</strong></mark>。測られたのは発言時間の分布だけで、<mark class="hl"><strong>発言時間が意思決定への影響力の妥当な代理指標である保証は論文中にない</strong></mark>。また <mark class="hl"><strong>「真の学際的プロセス」の事前定義が示されていない</strong></mark> ため、結論は測定結果ではなく著者の規範的評価である。当院で引用するときは「多職種が同席しても発言時間は医師に9割集まりうる」という<strong>事実の水準</strong>にとどめ、「だから質が低い」という<strong>評価の水準</strong>まで論文の権威を借りない。</p>
+</div>
+<h3>10. 主要な引用文献一覧</h3>
+<p>本Letterの引用は5件のみ。すべて本文中の主張と1対1で対応している。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>書誌</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症患者の終末期ケアの原則に関する世界的な専門家合意（WELPICUS Study）。差し控え・中止が世界的な実践であることの根拠</td><td>Sprung CL, Truog RD, Curtis JR, et al. Am J Respir Crit Care Med. 2014;190:855–866. doi:10.1164/rccm.201403-0593CC</td></tr>
+<tr><td>2</td><td>フランスの2016年法。病者および終末期にある者のための新たな権利を創設する法律（クレース＝レオネッティ法）。合議手続の法的根拠</td><td>LOI n° 2016-87 du 2 février 2016</td></tr>
+<tr><td>3</td><td>フランスの43 ICUにおける差し控え・中止の実態調査。ICU死亡の半数超がこれらの決定後に生じるという根拠</td><td>Lesieur O, Leloup M, Gonzalez F, et al. Ann Intensive Care. 2015;5:15. doi:10.1186/s13613-015-0056-x</td></tr>
+<tr><td>4</td><td>集中治療における治療の制限・中止をめぐる合議的意思決定プロセスの倫理的側面。プロセスの明確さの欠如の根拠</td><td>Quenot J-P, Ecarnot F, Meunier-Beillard N, et al. Ann Transl Med. 2017;5:S43. doi:10.21037/atm.2017.04.15</td></tr>
+<tr><td>5</td><td>成人ICUにおける倫理と終末期ケアの総説。同上</td><td>Curtis JR, Vincent J-L. Lancet. 2010;376:1347–1353. doi:10.1016/S0140-6736(10)60143-2</td></tr>
+</tbody></table></div>
+<p>引用4の筆頭著者 Quenot は本研究の REUREA Study Group メンバーでもある（自己引用ではないが、研究班内の先行研究にあたる）。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 フランスの3施設で延命治療制限カンファレンス15回を録音した結果、<mark class="hl"><strong>議論に使える実質14分のうち医師が94%を話し、看護師・看護助手は1分（5%）、心理士と学生は0分（1%）だった</strong></mark>。参加者の人数では非医師がほぼ半数（58/122）を占めていたにもかかわらずである。<mark class="hl"><strong>多職種が同席しているという形式は、多職種が議論しているという実質を何ら保証しない</strong></mark>。</p>
+<p>決定の論拠も医学的事実だけではなかった。5テーマのうち2つは <mark class="hl"><strong>医師の主観性（心的投影・既視感・感情）と時間性（在室日数・期限）</strong></mark> であり、患者側の条件は <mark class="hl"><strong>自分で意思表示できた者1名、事前指示ゼロ</strong></mark> という状態だった。</p>
+<p><mark class="hl"><strong>当院で明日から変えられるのは、カンファの時間配分と発言順序の2つ</strong></mark>。所要20分のうち3分の1が患者プレゼンで消えるなら、プレゼンは事前に文書で共有して枠を議論に振り替える。そして <mark class="hl"><strong>司会が担当看護師に最初に発言を振ることを手順として明文化する</strong></mark>。看護師の発言が「1±1分」＝1標準偏差下げると0分になる分布である以上、<mark class="hl"><strong>振らなければ発言はゼロになる</strong></mark> と考えて設計する。</p>
+<p>ただし <mark class="hl"><strong>フランスは医師の集団決定が法定の枠組みであり、このカンファに家族は参加していない</strong></mark>。時間配分と発言分布の知見は移植できるが、<mark class="hl"><strong>構成員と権限の設計はそのまま輸入してはいけない</strong></mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

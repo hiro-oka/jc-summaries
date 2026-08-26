@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICU-ROX Posthoc 低酸素性脳症に対する酸素療法（ICM2020）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-020-06196-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICU-ROX Posthoc 低酸素性脳症に対する酸素療法（ICM2020）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Young P, Mackle D, Bellomo R, Bailey M, Beasley R, Deane A, Eastwood G, Finfer S, Freebairn R, King V, Linke N, Litton E, McArthur C, McGuinness S, Panwar R, on behalf of the ICU-ROX Investigators and the ANZICS Clinical Trials Group. Conservative oxygen therapy for mechanically ventilated adults with suspected hypoxic ischaemic encephalopathy. Intensive Care Med. 2020;46(12):2411-2422. doi:10.1007/s00134-020-06196-y</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2020-08-18）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-020-06196-y" target="_blank" rel="noopener">doi.org/10.1007/s00134-020-06196-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Conservative oxygen therapy for mechanically ventilated adults with suspected hypoxic ischaemic encephalopathy</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-020-06196-y.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-020-06196-y.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-020-06196-y.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>この論文だけで当院のプロトコルを変えない</strong>。デザインが事後解析で、主要アウトカムの解析対象は150例、著者自身が「必要サンプルサイズは586例」と書いている。<strong>今ある結論は仮説であって根拠ではない</strong>。</li><li><strong>一方で「心停止後の高酸素を放置してよい」根拠にもならない</strong>。調整オッズ比の95%信頼区間は 0.23〜1.26 で、臨床的に重要な利益も害も同じくらい入る幅がある。<strong>判断材料が足りないだけで、中立が証明されたわけではない</strong>。</li><li>実務上いちばん効くのは「対照群がすでに何をしていたか」を見ること。この試験の通常群の時間加重PaO₂は 88 mmHg で、制限群は 84 mmHg。差はわずか 4 mmHg（P=0.33）だった。現行の ERC・ESICM 2025 が推奨する PaO₂ 75〜100 mmHg の帯に、通常群がすでに収まっていた。当院がガイドラインどおり SpO₂ 94〜98% で滴定できているなら、この試験の「制限群」を上乗せしても得られる分離はほとんどない。</li><li>削るべきは平均PaO₂ではなく「SpO₂ 97%以上で放置している時間」。制限群が実際に減らしたのはそこで、SpO₂ ≥97% の時間割合が 0.53 → 0.39（P=0.001）。FiO₂ 0.21 で回せている時間は 0時間 → 25時間。当院で介入余地があるのはこの一点に絞られる。</li><li><strong>下限を攻めない</strong>。制限群では PaO₂ &lt;60 mmHg を一度以上経験した患者が有意に多かった（P=0.02）。<mark class="hl">心停止後は低酸素への耐性が低い。上限アラーム97%は使ってよいが、SpO₂の下限目標（90%以上）は絶対に下げない</mark>。</li><li><strong>この論文が本当に突きつけているのは神経予後予測の質の問題</strong>。SSEP 7〜10%、EEG 9〜18%、NSE 0%、MRI 6〜13% という実施率で、しかも治療中止（WLST）の判断が標準化されていない。日180の死亡・機能予後の大半は「治療を止める判断」で決まっていた可能性がある。当院で見るべきは酸素目標より先に、<span class="wl">心停止蘇生後昏睡の神経予後予測 システマティックレビュー（ICM2020）</span> に沿った多モダリティ評価が回っているかどうかである。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：心停止後の昏睡患者に対する標準管理では酸素が自由に使われがちで、これが二次性脳損傷に寄与しうる。心停止の動物モデルでは高酸素血症が脳損傷を悪化させ（Pilcher 2012）、ヒトの観察研究の一部でも高酸素血症が死亡リスク上昇と独立に関連していた（Kilgannon 2010・2011、Roberts 2018、Helmerhorst 2015、Vaahersalo 2014）。</li><li><strong>Unknown（分かっていなかったこと）</strong>：この関連はすべての研究で再現されているわけではない（Bellomo 2011、Ebner 2019）。逆に、酸素を制限すれば低酸素血症への曝露が増え、心停止後の昏睡患者では低酸素血症こそ強く転帰悪化と結びつく。ICUでの酸素レジメンが低酸素性虚血性脳症（HIE）患者の生存と神経学的障害に及ぼす影響を検証したランダム化比較試験は、当時 COMACARE（ICM2018）<strong>1本しかなく、しかも検出力不足だった</strong>。</li><li><strong>What's new（本研究の新規性・意義）</strong>：親試験 ICU-ROX で「HIE疑いサブグループだけ制限群が有利に見えた」という所見が、偶然のベースライン不均衡や交絡で説明できるのかを検証するために、心停止に特有の変数（発生場所・目撃の有無・初期波形・ROSCまでの時間・原因・STEMIの有無）をカルテから追加収集して調整した。結果、未調整では有意だった180日死亡の差が調整後に消えた。HIE患者で酸素療法を評価したランダム化試験としては当時最大の標本である一方、結論は「有意差なし」ではなく「<strong>この標本サイズでは判定できない</strong>」であった。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICU-ROX に登録された「低酸素性虚血性脳症が疑われる」166例の事後解析。制限的酸素療法は180日の死亡または不良な神経学的転帰を統計学的に有意には減らさなかったが、<strong>点推定値は一貫して制限群に有利</strong>で、信頼区間は臨床的に重要な利益も害も除外できないほど広かった。</p>
+</div>
+<ul><li><strong>デザイン</strong>：ICU-ROX（21施設・1,000例・2015年9月〜2018年5月・豪州とニュージーランド）の事後解析。ITT集団965例のうち、<strong>HIE疑い166例</strong>（制限群87例・通常群79例）。</li><li><strong>サブグループの定義</strong>：ランダム化前に、心停止後の入室患者は「ROSC後・鎮静開始前に指示動作が確認できた記録がない限り、HIE疑いとする」と研究コーディネーターに明示指示。<strong>心停止を経ていることが前提</strong>の集団である。</li><li><strong>介入の実態（最重要）</strong>：SpO₂ ≥97% の時間割合 0.391 vs 0.529（P=0.001）、FiO₂ 0.21 の時間 25時間 vs 0時間（P&lt;0.0001）。しかし時間加重PaO₂は 84 vs 88 mmHg、差 −4 mmHg（95%CI −12.2〜4.2）、P=0.33。分離は「上限を削った」だけで、平均酸素化はほぼ動いていない。</li><li><strong>主要アウトカム</strong>：180日時点の死亡またはGOS-E 1〜4（不良転帰）。制限群 43/78（55.1%）vs 通常群 49/72（68.1%）。絶対差 −12.9ポイント（95%CI −28.3〜+2.5）、OR 0.58（95%CI 0.30〜1.12）、調整OR 0.54（95%CI 0.23〜1.26）P=0.15。</li><li><strong>副次（180日死亡）</strong>：37/86（43%）vs 46/78（59%）。絶対差 −16ポイント（95%CI −31.1〜−0.8）、未調整OR 0.53（95%CI 0.28〜0.98）P=0.04 → 調整OR 0.56（95%CI 0.25〜1.23）P=0.15。<mark class="hl">調整で有意性が消えたことが本論文の中心的な発見</mark>。</li><li><strong>感度解析</strong>：GOS-E を順序尺度のまま比較すると、中央値 4（IQR 1〜7）vs 1（IQR 1〜6）、<strong>P=0.03 で制限群が有意に良好</strong>。旧ノートが落としていた所見。</li><li><strong>害の方向のシグナル</strong>：PaO₂ &lt;60 mmHg を一度以上経験した患者は制限群で有意に多い（P=0.02）。28日以上生存者の昇圧薬使用日数は制限群が1日長い（95%CI 0.03〜1.97、P=0.04）。</li><li><strong>死因</strong>：脳障害が最多で両群同様（P=0.87）。心原性ショック・不整脈も多い。</li><li><strong>著者の結論</strong>：統計学的に有意な減少はなかったが、<strong>重要な利益・害の可能性はこのデータでは除外できない</strong>。今後の試験には586例が必要（対照イベント率68.1%、絶対差13ポイント、検出力90%、両側検定）。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 心停止後脳症と酸素の基礎（初めての人にも）🧠</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 低酸素性虚血性脳症（HIE, hypoxic ischaemic encephalopathy）とは、心停止などで脳への酸素供給が絶たれた結果として生じる脳損傷のこと。心停止から自己心拍が再開（<strong>ROSC</strong>, return of spontaneous circulation）しても、脳は「一次性損傷（虚血そのもの）」に続いて「<strong>二次性損傷</strong>」を数時間から数日かけて受ける。二次性損傷を減らすことが、心停止後ケアの中心的な狙いになる。</p>
+<p><strong>なぜ酸素が問題になるのか</strong>。虚血後に再灌流が起こると、ミトコンドリアから活性酸素種が大量に発生する。動脈血の酸素分圧（<strong>PaO₂</strong>）が高いほど、この活性酸素の発生量が増え、脂質過酸化・DNA損傷・炎症を介して神経細胞死を促すと考えられている。これが「高酸素血症（hyperoxaemia）は心停止後の脳に悪い」という仮説の生物学的根拠であり、動物実験では一貫して支持されている。</p>
+<p><strong>しかし逆方向のリスクもある</strong>。酸素を絞れば、当然ながら低酸素血症（hypoxaemia）の機会が増える。心停止後の昏睡患者において低酸素血症は転帰悪化と強く結びついており、これは高酸素血症の害より確実性が高い。つまり酸素療法は「<strong>両側に崖がある尾根道</strong>」であり、どこに最適点があるかがこの領域の問いになる。</p>
+<p><strong>用語の整理</strong>（この論文を読むために必要な最小限）</p>
+<ul><li><strong>保存的／制限的酸素療法（conservative oxygen therapy）</strong>：この試験では「SpO₂の上限アラームを97%に設定し、許容下限を維持できる範囲でFiO₂を0.21まで下げる」戦略を指す。<strong>下限を低く狙いにいく戦略ではない</strong>点が重要。</li><li><strong>通常酸素療法（usual oxygen therapy）</strong>：特別な制限をかけない。ただし SpO₂ の上限アラーム使用は禁止され、侵襲的換気中の FiO₂ &lt;0.3 は推奨されなかった。</li><li><strong>SpO₂</strong>：パルスオキシメータによる動脈血酸素飽和度。<strong>PaO₂</strong>：動脈血酸素分圧。FiO₂：吸入酸素濃度（0.21＝室内気）。</li><li><strong>GOS-E（Glasgow Outcome Scale — Extended）</strong>：機能的転帰を1〜8の8段階で表す。1＝死亡、2＝植物状態、3〜4＝重度障害（下位・上位）、5〜6＝中等度障害（下位・上位）、7〜8＝良好回復（下位・上位）。本研究は <strong>1〜4を「不良転帰」</strong>と定義した。</li><li><strong>人工呼吸器フリー日（VFD）／昇圧薬フリー日</strong>：ランダム化後28日間のうち、補助なしで呼吸できた（昇圧薬を要さなかった）日数。<strong>28日以内に死亡した患者は一律0日</strong>とする。したがって死亡率の差がそのまま増幅されて現れる指標である。</li><li><strong>TTM（targeted temperature management）</strong>：体温管理療法。心停止後ケアの標準的な併用治療。</li><li><strong>WLST（withdrawal of life-sustaining treatment）</strong>：生命維持治療の中止。心停止後研究では、これが転帰の実質的な決定因子になりうる。</li></ul>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p>心停止後の昏睡患者に対する標準的な管理では、酸素が自由に使われる。これが二次性脳損傷に寄与しうるという懸念は古くからある。動物モデルでは高酸素血症が脳損傷を悪化させ、ヒトの観察研究のいくつかでは高酸素血症が死亡リスク上昇と独立に関連していた。</p>
+<p>ただし著者らは、この関連が<strong>すべての研究で示されているわけではない</strong>ことを明記している。さらに、保存的酸素療法には「低酸素血症への曝露を増やす」という逆方向の懸念があり、心停止後の意識障害患者では低酸素血症こそ転帰悪化と強く結びつく。</p>
+<p>ICUで用いる酸素レジメンがHIE患者の生存・神経学的障害に及ぼす影響を評価したランダム化比較試験は、<strong>当時 COMACARE 1本のみ</strong>だった。COMACARE は保存的酸素と自由な酸素で転帰が同様だったと報告したが、著者らは同試験に<strong>これらの転帰の差を検出する統計学的検出力がなかった</strong>と評価している。</p>
+<p>親試験 ICU-ROX の報告で、著者らは「HIE疑いサブグループでは制限的酸素療法が死亡リスク低下と関連し、不良な神経学的転帰も数値上は低かった」と述べていた。問題は、この所見が真の有益性を示すのか、偶然のベースライン不均衡や交絡で説明されるのかが不明であったことである。</p>
+<p>本解析の仮説は明快で、「心停止患者の転帰を予測するベースライン変数で調整したあとでも、制限的酸素療法は180日時点の死亡または不良神経転帰の確率を下げる」というものであった。</p>
+<h3>3. 方法（Methods）📐</h3>
+<h4>3-1. デザイン — 「事前規定サブグループ」への「事後解析」という二重構造</h4>
+<p>本論文で最も誤読されやすいのがここである。原著の記載は次の2つで、一見矛盾して見える。</p>
+<div class="tw"><table>
+<thead><tr><th>原著の記載箇所</th><th>記述</th><th>意味するもの</th></tr></thead>
+<tbody>
+<tr><td>Methods / Trial design</td><td>「ICU-ROXに登録され、登録時点でHIEの可能性があると考えられた患者の <strong>pre-specified subgroup</strong> における post-hoc 解析を行った」</td><td><strong>集団の切り出し方（誰がHIE疑いか）はランダム化前に定義済み</strong></td></tr>
+<tr><td>Methods / Patients</td><td>「本解析に含まれるHIE疑い患者は、<strong>ランダム化前に</strong>、その診断が診療記録に記載されているかどうかに基づいて定義された事前規定サブグループを構成した」</td><td>同上。選択バイアスの心配は小さい</td></tr>
+<tr><td>Methods / Statistical Analysis</td><td>「<strong>Whilst not pre-specified</strong>（事前規定ではないが）、ここで報告する解析は元の解析計画に沿って実施した」</td><td><strong>アウトカムの選定・調整モデル・多変量解析は事後に決めた</strong></td></tr>
+</tbody></table></div>
+<p>したがって正しい理解は「サブグループの定義は事前規定・解析は事後（post hoc）」である。集団の切り出しは信頼できるが、「180日死亡または不良神経転帰」を主要アウトカムに据えたこと、6変数での調整モデルを組んだことは、<strong>結果を見たあとの決定</strong>である。ゆえに本論文の位置づけは<strong>仮説生成にとどまる</strong>。</p>
+<p>親試験のサンプルサイズ設計はこのサブグループの検出力を考慮していないため、<strong>本解析はいかなる意味でも確証的ではない</strong>。</p>
+<h4>3-2. 対象（組み入れ・除外・HIEの定義）</h4>
+<p><strong>親試験 ICU-ROX の組み入れ</strong></p>
+<ul><li>18歳以上の成人</li><li>ICUで侵襲的人工呼吸または非侵襲的換気を受けている</li><li>登録日の翌暦日を超えて人工呼吸が続くと予想される</li><li>換気開始から<strong>2時間以内</strong>にランダム化。これを過ぎると「登録ウィンドウを逃した」扱い</li></ul>
+<p><strong>HIE疑いの定義（本解析の要）</strong></p>
+<p>研究コーディネーターに与えられた指示は具体的である。心停止後に入室した患者は、ROSC後・鎮静開始前に「指示動作に従った」という記録がない限り、すべてHIE疑いとする。</p>
+<p>この定義から読み取るべきことが3つある。</p>
+<ol><li><strong>心停止を経ていることが前提</strong>。非心停止性の低酸素性脳症（たとえば重症呼吸不全単独、透析不均衡症候群、CO中毒）は原則として含まれない。</li><li><strong>原因は心原性に限らない</strong>。実際にベースライン表には窒息・薬物過量・溺水・外傷が含まれる（ただし合計で数%）。大半（制限群96.6%・通常群89.9%）は「medical（内科的）」原因である。</li><li><strong>「疑い」の閾値が低い</strong>。指示動作の記録がなければHIE疑いになるため、実際には脳障害が軽微な患者も混じりうる。これは効果を希釈する方向に働く。</li></ol>
+<p><strong>本解析のために追加収集したデータ</strong>（元のICU-ROXでは集めていなかったもの）</p>
+<ul><li>心停止の発生場所</li><li>目撃の有無（他者が見た・聞いた、またはモニタ監視下）</li><li>バイスタンダー対応の有無</li><li>初期モニタ波形</li><li>心停止の原因</li><li>STEMI（ST上昇型急性心筋梗塞）の診断有無</li><li>持続的ROSCまでの時間</li><li>心血管疾患に関連する併存症の追加情報</li><li>体温管理療法の実施と目標体温</li><li>実施された神経予後予測検査</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-020-06196-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-020-06196-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 参加者フロー（原図・無改変。©出典） ICU-ROX登録1,000例 →（同意撤回35例）→ ITT集団965例 →（HIE疑いでない799例を除外）→ <strong>HIE疑い166例</strong> → 制限群87例／通常群79例（いずれも割付どおりの介入を受けた）→ 制限群では180日時点の生死不明1例・GOS-E欠測8例、通常群では生死不明1例・GOS-E欠測6例 → <strong>解析対象 78例／72例</strong>。図から読み取れる重要点は、脱落が介入後ではなく追跡不能（連絡が取れない）に集中していること。166例中16例（9.6%）の神経転帰が欠測しており、著者はこれが「良い転帰の人も悪い転帰の人も連絡が取りにくい可能性がある」ためランダムな欠測ではないかもしれないと述べている。</p>
+</div>
+<h4>3-3. 介入・比較</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>制限的酸素療法群</th><th>通常酸素療法群</th></tr></thead>
+<tbody>
+<tr><td>SpO₂ 下限アラーム</td><td>既定90%（臨床的に必要なら別の下限を指定可）</td><td>同左</td></tr>
+<tr><td>SpO₂ 上限アラーム</td><td><strong>97%に設定</strong>。ICUで酸素投与中は常時使用</td><td><strong>上限アラームの使用は禁止</strong></td></tr>
+<tr><td>FiO₂ の扱い</td><td>SpO₂が許容下限を上回る限り、<strong>0.21まで可能なかぎり下げる</strong></td><td>特に制限なし。ただし侵襲的換気中の<strong>0.3未満は非推奨</strong></td></tr>
+<tr><td>安全弁</td><td>PaO₂ &lt;60 mmHg または許容できない低いSaO₂ を血液ガスが示した場合、<strong>SpO₂にかかわらずFiO₂を上げてよい</strong></td><td>同左</td></tr>
+<tr><td>継続期間</td><td>ICU退室または<strong>ランダム化から28日</strong>のいずれか早い方まで</td><td>同左</td></tr>
+<tr><td>盲検</td><td>患者・家族には割付を開示せず（<strong>医療者は非盲検</strong>）</td><td>同左</td></tr>
+</tbody></table></div>
+<p><strong>ランダム化</strong>：ウェブベースの安全なインターフェース。研究統計家が計算機生成の乱数で割付順序を作成し、<strong>施設層別・可変ブロック・1対1</strong>。</p>
+<h4>3-4. アウトカム</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>アウトカム</th><th>定義・測定</th></tr></thead>
+<tbody>
+<tr><td><strong>主要</strong></td><td>180日時点の死亡または不良な神経学的転帰</td><td>GOS-E カテゴリ <strong>1〜4</strong>。患者本人または近親者への連絡で確認</td></tr>
+<tr><td>副次</td><td>ICU死亡・院内死亡・180日死亡</td><td>—</td></tr>
+<tr><td>副次</td><td>死因別死亡</td><td>既報の分類法（Ridgeon 2016）で分類</td></tr>
+<tr><td>副次</td><td>生存時間</td><td>Kaplan-Meier、log-rank、Cox比例ハザード</td></tr>
+<tr><td>副次</td><td>ICU在室日数・入院日数</td><td>—</td></tr>
+<tr><td>副次</td><td>人工呼吸器フリー日</td><td>28日間のうち補助なし呼吸の暦日数。<strong>28日までに死亡＝0日</strong>（Schoenfeld 2002）</td></tr>
+<tr><td>副次</td><td>昇圧薬フリー日</td><td>同様に定義</td></tr>
+</tbody></table></div>
+<h4>3-5. 統計解析</h4>
+<ul><li><strong>解析集団</strong>：ITT。データ使用の同意を撤回した者のみ除外。</li><li><strong>主要解析</strong>：未調整の <strong>Fisher正確検定</strong>。群ごとの頻度（%）、絶対差、オッズ比と95%信頼区間を報告。他の二値アウトカムも同様。</li><li><strong>欠測対応</strong>：<strong>事後の best/worst 解析</strong>（欠測者を最良・最悪に振った感度解析）。</li><li><strong>感度解析</strong>：GOS-E を順序尺度のまま比較。カテゴリ間の比例性が不十分で順序ロジスティック回帰が使えなかったため、<strong>ノンパラメトリック手法</strong>で実施。</li><li><strong>生存解析</strong>：log-rank検定、Kaplan-Meier曲線、Cox比例ハザードモデル。</li><li>連続変数の副次アウトカム：Wilcoxon順位和検定。中央値の差は<strong>単体法による分位点回帰</strong>で算出し、95%信頼区間は<strong>反転法</strong>（Koenker 1993）。</li><li><strong>多変量（階層）解析</strong>：二値アウトカムはロジスティック回帰、生存はCox。調整共変量は6つ。</li></ul>
+<ol><li>年齢</li><li>院外での心停止</li><li>初期モニタ波形がショック適応</li><li>ROSCまでの時間</li><li>心停止の原因が内科的か</li><li>STEMI の有無</li></ol>
+<p>「内科的原因」には、心原性と推定される例、その他の内科的原因（アナフィラキシー・喘息・消化管出血など）、<strong>原因が特定できなかった例</strong>を含む。共変量は心停止患者の神経学的転帰との既知の関連（Neumar 2008）に基づき事前選定。<strong>患者を施設にネストさせ、施設をランダム変数として扱った</strong>。</p>
+<ul><li><strong>反復測定（時間加重PaO₂など）</strong>：混合線形モデル。患者をランダム効果とし、治療・時間の主効果と<strong>治療×時間の交互作用</strong>を当てはめて、群が時間とともに異なる挙動を示すかを判定。</li><li><strong>ソフトウェア・有意水準</strong>：SAS 9.4。両側 α=0.05。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">サブグループ効果そのものの交互作用p値は本論文に記載がない</mark> 本論文が報告する「交互作用」は、<mark class="hl">時間加重PaO₂などの反復測定における「治療×時間」の交互作用だけ</mark>であって、「HIE疑い群と非HIE群で治療効果が異なるか」という treatment × subgroup の交互作用p値は<strong>本文・表・図のいずれにも示されていない</strong>。本論文はHIE疑い166例だけを取り出して群間比較しているため、構造上その検定を含まない。したがって「HIEだけ効く」ことの統計学的な裏づけは、<strong>本論文からは得られない</strong>。親試験（NEJM2020）が人工呼吸器フリー日について事前規定サブグループの異質性を検定しているが、その検定結果は本論文には転載されていない。</p>
+</div>
+<h3>4. ベースライン特性（Table 1）— 群間は概ね揃っていたが2つ例外がある 📋</h3>
+<h4>Table 1. ベースライン特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>制限群（n=87）</th><th>通常群（n=79）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳、平均±SD）</td><td>62.3 ± 14.8</td><td>60.6 ± 16.1</td><td>0.49</td></tr>
+<tr><td>男性</td><td>66（75.9%）</td><td>62（78.5%）</td><td>0.69</td></tr>
+<tr><td>高血圧</td><td>33（37.9%）</td><td>24（30.4%）</td><td>0.31</td></tr>
+<tr><td>糖尿病</td><td>24（27.6%）</td><td>18（22.8%）</td><td>0.48</td></tr>
+<tr><td>虚血性心疾患</td><td>18（20.7%）</td><td>23（29.1%）</td><td>0.21</td></tr>
+<tr><td>喘息またはCOPD</td><td>17（19.5%）</td><td>15（19%）</td><td>0.93</td></tr>
+<tr><td>心筋梗塞の既往</td><td>10（11.5%）</td><td>16（20.3%）</td><td>0.12</td></tr>
+<tr><td>不整脈の既往</td><td>14（16.1%）</td><td>8（10.1%）</td><td>0.26</td></tr>
+<tr><td>PCI の既往</td><td>8（9.2%）</td><td>10（12.7%）</td><td>0.47</td></tr>
+<tr><td>うっ血性心不全</td><td>10（11.5%）</td><td>6（7.6%）</td><td>0.40</td></tr>
+<tr><td>CABG の既往</td><td>10（11.5%）</td><td>5（6.3%）</td><td>0.25</td></tr>
+<tr><td>TIA・脳卒中の既往</td><td>4（4.6%）</td><td>7（8.9%）</td><td>0.27</td></tr>
+<tr><td>心停止の場所：救急外来</td><td>3（3.4%）</td><td>6（7.6%）</td><td>0.24</td></tr>
+<tr><td>心停止の場所：一般病棟</td><td>5（5.7%）</td><td>3（3.8%）</td><td>0.56</td></tr>
+<tr><td>心停止の場所：ICU</td><td>1（1.1%）</td><td>0（0%）</td><td>1.00</td></tr>
+<tr><td>心停止の場所：手術室</td><td>0（0%）</td><td>1（1.3%）</td><td>0.48</td></tr>
+<tr><td>心停止の場所：院内その他</td><td>1（1.1%）</td><td>3（3.8%）</td><td>0.35</td></tr>
+<tr><td>心停止の場所：自宅・居所</td><td>33（37.9%）</td><td>32（40.5%）</td><td>0.73</td></tr>
+<tr><td>心停止の場所：介護施設</td><td>1（1.1%）</td><td>2（2.5%）</td><td>0.61</td></tr>
+<tr><td>心停止の場所：院外その他</td><td>43（49.4%）</td><td>32（40.5%）</td><td>0.25</td></tr>
+<tr><td>目撃された心停止</td><td>72（82.8%）</td><td>61（77.2%）</td><td>0.37</td></tr>
+<tr><td>バイスタンダー対応あり</td><td>65（74.7%）</td><td>56（70.9%）</td><td>0.58</td></tr>
+<tr><td>初期波形が VF・VT・AEDショック適応</td><td>58（66.7%）</td><td>46（58.2%）</td><td>0.26</td></tr>
+<tr><td><strong>覚知から到着までの時間（分、平均±SD）</strong></td><td><strong>7.3 ± 6.3</strong></td><td><strong>5.0 ± 4.2</strong></td><td><strong>0.01</strong></td></tr>
+<tr><td>除細動までの時間（分、平均±SD）</td><td>9.7 ± 7</td><td>9.0 ± 5.2</td><td>0.56</td></tr>
+<tr><td>持続的ROSCまでの時間（分、平均±SD；範囲）</td><td>26.5 ± 17.8（2〜84）</td><td>25.4 ± 14.7（2〜66）</td><td>0.69</td></tr>
+<tr><td>原因：内科的</td><td>84（96.6%）</td><td>71（89.9%）</td><td>0.08</td></tr>
+<tr><td>原因：窒息</td><td>3（3.4%）</td><td>4（5.1%）</td><td>0.71</td></tr>
+<tr><td>原因：薬物過量</td><td>0（0%）</td><td>2（2.5%）</td><td>0.23</td></tr>
+<tr><td>原因：溺水</td><td>0（0%）</td><td>1（1.3%）</td><td>0.48</td></tr>
+<tr><td>原因：外傷</td><td>0（0%）</td><td>1（1.3%）</td><td>0.48</td></tr>
+<tr><td>STEMI あり</td><td>23/86（26.7%）</td><td>29/77（37.7%）</td><td>0.14</td></tr>
+<tr><td>呼吸回数（回/分）</td><td>16.1 ± 3.5</td><td>16.4 ± 4.2</td><td>0.62</td></tr>
+<tr><td><strong>SpO₂（%、中央値[IQR]）</strong></td><td><strong>98[96–100]</strong></td><td><strong>96[95–99]</strong></td><td><strong>0.04</strong></td></tr>
+<tr><td>PaO₂（mmHg、中央値[IQR]）</td><td>107[86.8–172]</td><td>94.5[82.5–141]</td><td>0.39</td></tr>
+<tr><td>PaCO₂（mmHg）</td><td>49.4 ± 13.8</td><td>47.4 ± 13.4</td><td>0.37</td></tr>
+<tr><td>FiO₂</td><td>0.64 ± 0.23</td><td>0.64 ± 0.24</td><td>0.91</td></tr>
+<tr><td>PEEP（cmH₂O、中央値[IQR]）</td><td>5[5–10]</td><td>8[5–10]</td><td>0.13</td></tr>
+<tr><td>強心薬・昇圧薬使用</td><td>33（37.9%）</td><td>34（43%）</td><td>0.50</td></tr>
+<tr><td>ICU入室からランダム化まで（時間、中央値[IQR]）</td><td>1.25[0.62–1.7]</td><td>1.1[0.7–1.78]</td><td>0.84</td></tr>
+</tbody></table></div>
+<p>*注：呼吸回数とSpO₂は制限群86例・通常群78例、PaO₂とPaCO₂は制限群79例・通常群71例のデータ。*</p>
+<p><strong>読み方</strong>。40項目近い比較で P&lt;0.05 になったのは2つだけで、これは偶然の範囲である。ただし<strong>その2つの向きが正反対</strong>なのが厄介である。</p>
+<ul><li><strong>覚知から到着までの時間は制限群のほうが2.3分長い</strong>（7.3 vs 5.0分、P=0.01）。これは<strong>制限群に不利</strong>な不均衡。</li><li>ベースラインSpO₂は通常群のほうが2ポイント低い（96 vs 98%、P=0.04）。著者はこれを「<strong>通常群のほうが重症だった可能性を否定できない</strong>」根拠として限界の項に挙げている。これは<strong>制限群に有利</strong>な不均衡。</li></ul>
+<p>さらに著者は、蘇生中のアドレナリン投与が通常群でやや多かったこと（75.9% vs 69%、P=0.32、有意ではない）も同じ文脈で挙げている。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>ベースライン不均衡の読み方 ベースラインの不均衡は「制限群に有利な方向」と「不利な方向」の両方に存在する。どちらか一方だけを取り上げて結論を補強してはならない。著者が6変数で調整したのはこの問題への対処だが、標本が小さいため<strong>調整するほど推定の精度が落ちる</strong>というトレードオフに直面している（実際、調整後は信頼区間が広がって有意性が消えた）。</p>
+</div>
+<h3>5. 酸素はどれだけ分離したのか（Table 2 前半・Figure 2）— この論文の解釈を決める章 💨</h3>
+<p><strong>この節が本論文でいちばん重要である</strong>。介入が実際にどれだけ違ったのかを数値で押さえないと、結果を解釈できない。</p>
+<h4>Table 2a. ランダム化後の酸素療法（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>制限群（n=87）</th><th>通常群（n=79）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td><strong>SpO₂ ≥97% だった時間の割合（平均(SD)）</strong></td><td><strong>0.391（0.254）</strong></td><td><strong>0.529（0.257）</strong></td><td><strong>0.001</strong></td></tr>
+<tr><td>SpO₂ ≥97% だった時間数（中央値[IQR]）</td><td>26[13–45]</td><td>35[19–70]</td><td>0.05</td></tr>
+<tr><td>SpO₂ &lt;88% だった時間の割合</td><td>0[0–0.02]</td><td>0[0–0.01]</td><td>0.37</td></tr>
+<tr><td>SpO₂ &lt;88% だった時間数</td><td>0[0–2]</td><td>0[0–1]</td><td>0.40</td></tr>
+<tr><td><strong>PaO₂ &lt;60 mmHg を1回以上記録した患者</strong></td><td><strong>31（87%）※原著表記のまま</strong></td><td><strong>15/79（19%）</strong></td><td><strong>0.02</strong></td></tr>
+<tr><td>PaO₂ &gt;100 mmHg を1回以上記録した患者</td><td>51（59%）</td><td>60（76%）</td><td>0.02</td></tr>
+<tr><td>FiO₂ 0.21 だった時間の割合（中央値[IQR]）</td><td>0.37[0.08–0.61]</td><td>0[0–0.12]</td><td>&lt;0.0001</td></tr>
+<tr><td><strong>FiO₂ 0.21 だった時間数（中央値[IQR]）</strong></td><td><strong>25[8–43]</strong></td><td><strong>0[0–6]</strong></td><td><strong>&lt;0.0001</strong></td></tr>
+</tbody></table></div>
+<p><strong>本文が示した絶対差</strong></p>
+<ul><li>SpO₂ ≥97% の時間：<strong>−9時間</strong>（95%CI −21.4〜3.4）。信頼区間が0を跨いでいる</li><li>FiO₂ 0.21 の時間：<strong>+25.0時間</strong>（95%CI 18.7〜31.1）。こちらは明確に分離</li><li>時間加重PaO₂（最初の10日間）：制限群 <strong>84 mmHg</strong>（95%CI 78〜90）vs 通常群 <strong>88 mmHg</strong>（95%CI 82〜94）。差 −4 mmHg（95%CI −12.2〜4.2）、P=0.33</li></ul>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-020-06196-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-020-06196-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. ICUで人工呼吸中のPaO₂（a：時間加重平均、b：最高値、c：最低値）（原図・無改変。©出典） 3段組の折れ線グラフ。青＝Conservative（制限群）、赤＝Standard（通常群）、エラーバーは平均の標準誤差。横軸の下に各日の観測数が C(n)／S(n) として並ぶ。 <strong>パネルa（時間加重平均PaO₂、縦軸60〜120 mmHg、10日目まで）</strong>：day 0 は青93前後・赤105前後とやや開くが、day 2 以降は両線が 78〜95 mmHg の帯の中でほぼ重なり、day 7 前後では上下が逆転する日もある。全体としてP=0.33。<mark class="hl">「制限群」と名がついていても、平均PaO₂はほとんど動いていない</mark>。観測数はday 0で C 145／S 132（患者数ではなく6時間ごとの測定回数）から、day 10 には C 17／S 35 まで減る。 <strong>パネルb（各日の最高PaO₂、縦軸50〜250 mmHg、28日目まで）</strong>：day 0〜10 は両群とも100〜130 mmHg 前後で重なる。day 19以降は各群の残存患者が2〜3例まで減るため、赤が day 20 に210 mmHg、青が day 27 に220 mmHg といった鋭いスパイクが出る。<strong>これは個々の症例の値であって群間差ではない</strong>。P=0.62。 <strong>パネルc（各日の最低PaO₂、縦軸50〜100 mmHg、28日目まで）</strong>：day 1〜18 は青（制限群）が赤より一貫してわずかに下に位置し、おおむね65〜80 mmHg。赤は70〜85 mmHg。P=0.52。<strong>差は小さいが向きは一貫している</strong>。Table 2 の「PaO₂ &lt;60 mmHg を1回以上」が制限群で有意に多かったこととは整合する。 <strong>図全体からの読み取り</strong>：この試験の分離は「平均を下げた」ものではなく、「SpO₂ 97%以上の滞在時間を削り、FiO₂ 0.21で回せる時間を増やした」ことに尽きる。動脈血の酸素分圧としては、両群とも現代のガイドラインが推奨する 75〜100 mmHg の帯におおむね収まっていた。</p>
+</div>
+<p><strong>その他の記載</strong></p>
+<ul><li>最初の10日間の<strong>平均FiO₂は制限群で統計学的に有意に低かった</strong>（Fig S1、ESM）</li><li><strong>時間加重の1日PaCO₂は両群同様</strong>（Fig S2、ESM）</li><li>PEEP の平均値も提示（Fig S3、ESM）</li><li>ランダム化後10日間に絞った生存曲線は Fig S4（ESM）</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">「保存的酸素療法」の実態は「上限を削っただけ」である</mark> ==時間加重PaO₂の群間差はわずか 4 mmHg（P=0.33）。この分離幅で180日の神経転帰を動かせると期待するほうが無理がある==。逆に言えば、本試験が陰性でも「酸素目標は転帰に影響しない」という結論には<strong>まったくならない</strong>。著者自身がこう書いている——「点推定値が示した効果量が大規模試験で確認されるのであれば、<strong>我々が観察した分離の大きさは明らかに重要</strong>であり、低酸素血症曝露のリスクを伴ってでも保存的酸素療法を実施するのが適切ということになる」。つまり著者は、この小さな分離でこれだけの点推定値が出たこと自体を注目すべき所見とみなしている。</p>
+</div>
+<h3>6. 併用治療と神経予後予測検査（Table 2 後半）🌡️</h3>
+<h4>Table 2b. 蘇生中の薬剤・体温管理・予後予測検査（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>制限群（n=87）</th><th>通常群（n=79）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>蘇生中アドレナリン投与</td><td>60（69%）</td><td>60（75.9%）</td><td>0.32</td></tr>
+<tr><td>蘇生中アミオダロン投与</td><td>24（27.6%）</td><td>24（30.4%）</td><td>0.69</td></tr>
+<tr><td>蘇生中バソプレシン投与</td><td>0（0%）</td><td>0（0%）</td><td>1.00</td></tr>
+<tr><td>蘇生中の薬剤なし</td><td>24（27.6%）</td><td>17（21.5%）</td><td>0.37</td></tr>
+<tr><td>不明</td><td>2（2.3%）</td><td>1（1.3%）</td><td>1.00</td></tr>
+<tr><td>体温管理療法（TTM）実施</td><td>72（82.8%）</td><td>65（82.3%）</td><td>0.94</td></tr>
+<tr><td>── 目標 32〜34℃</td><td>3/72（4.2%）</td><td>4/65（6.2%）</td><td>0.79</td></tr>
+<tr><td>── 目標 36℃</td><td>51/72（70.8%）</td><td>43/65（66.2%）</td><td>—</td></tr>
+<tr><td>── その他の目標</td><td>18/72（25.0%）</td><td>18/65（27.7%）</td><td>—</td></tr>
+<tr><td><strong>体性感覚誘発電位（SSEP）</strong></td><td><strong>6（7%）</strong></td><td><strong>8（10.1%）</strong></td><td>0.45</td></tr>
+<tr><td><strong>神経特異エノラーゼ（NSE）</strong></td><td><strong>0（0%）</strong></td><td><strong>0（0%）</strong></td><td>1.00</td></tr>
+<tr><td><strong>脳波（EEG）</strong></td><td><strong>8（9.2%）</strong></td><td><strong>14（17.7%）</strong></td><td>0.11</td></tr>
+<tr><td>頭部CT</td><td>39（44.8%）</td><td>26（32.9%）</td><td>0.12</td></tr>
+<tr><td>頭部MRI</td><td>5（5.7%）</td><td>10（12.7%）</td><td>0.12</td></tr>
+</tbody></table></div>
+<p>*注：SSEP と NSE のデータは制限群86例・通常群78例で利用可能。*</p>
+<p><strong>この表から読み取るべきこと</strong></p>
+<ol><li><strong>併用治療は揃っている</strong>。TTM の実施率（約83%）も目標体温の分布も群間で差がない。2015〜2018年の豪州・ニュージーランドでは<strong>すでに36℃が主流（約7割）</strong>で、32〜34℃は5%前後にすぎない。TTM2 試験（2021年）より前の時期にこの分布であった点は、当地の実践を知るうえで有用である。</li><li><strong>神経予後予測検査の実施率が極端に低い</strong>。SSEP は1割未満、<strong>NSE はゼロ</strong>、EEG も1〜2割、MRI も1割前後。心停止後の予後予測は複数モダリティの組み合わせで行うのが原則であり（<span class="wl">心停止蘇生後昏睡の神経予後予測 システマティックレビュー（ICM2020）</span> を参照）、この実施率は原則から大きく乖離している。</li><li><strong>著者はWLSTの非標準化を限界として明記している</strong>。予後予測検査の実施率が群間で似ていても、治療中止の判断そのものが標準化されていないことがバイアス源になると述べている。</li></ol>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">神経予後予測が回っていない集団の「180日死亡」は、疾患の重症度ではなく治療中止の判断を測っている可能性がある</mark> <mark class="hl">NSE ゼロ・SSEP 7〜10%・EEG 9〜18% という実施率で、しかもWLSTの基準が統一されていない。この条件下では、主要アウトカムの相当部分が「いつ治療をやめたか」で決まる。酸素目標の効果を見ているつもりで、施設ごとの終末期文化を見ている恐れがある</mark>。本論文の内的妥当性に関する最大の懸念はここにある。</p>
+</div>
+<h3>7. 主要アウトカム — 180日時点の死亡または不良神経転帰 🎯</h3>
+<p><strong>結果</strong></p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>制限群</td><td>43/78（55.1%）</td></tr>
+<tr><td>通常群</td><td>49/72（68.1%）</td></tr>
+<tr><td>絶対差</td><td><strong>−12.9 パーセントポイント</strong>（95%CI −28.3 〜 +2.5）</td></tr>
+<tr><td>未調整オッズ比</td><td><strong>0.58</strong>（95%CI 0.30〜1.12）</td></tr>
+<tr><td>調整オッズ比</td><td><strong>0.54</strong>（95%CI 0.23〜1.26）、P=0.15</td></tr>
+</tbody></table></div>
+<p><strong>P値について</strong>。原著の中でP値の表記が割れている。Abstract は「P = 0.1」、Results 本文は「P = 0.14」、Table 3 は「0.10」。Table 3 と Abstract の 0.10 を採るのが妥当（Fisher正確検定の値として一貫している）。この不一致は後述の「原著の内的不整合」にも再掲する。</p>
+<p><strong>欠測への対処</strong>。事後の best/worst 解析（欠測16例を最良・最悪に振る）を ESM に示しており、著者は「<strong>主解析よりもさらに推定の不精確さが大きいことを示す</strong>」と述べている。つまり欠測を考慮すると、結論はさらに不確かになる。</p>
+<p><strong>順序尺度での感度解析（旧ノートが落としていた所見）</strong></p>
+<p>GOS-E をカテゴリに二分せず、1〜8の順序尺度のまま比較すると——</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>制限群</th><th>通常群</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>GOS-E 中央値[IQR]</td><td><strong>4[1–7]</strong></td><td><strong>1[1–6]</strong></td><td><strong>0.03</strong></td></tr>
+</tbody></table></div>
+<p>統計学的に有意に制限群が良好。「不良／良好」に二分すると有意でなくなり、順序尺度のまま見ると有意になる。これは、<strong>二分化によって情報が捨てられている</strong>ことを示す典型的な所見である。ただし著者は、カテゴリ間の比例性が不十分で順序ロジスティック回帰が使えず、ノンパラメトリック手法に頼らざるを得なかったと明記しており、この解析も<strong>調整はされていない</strong>。</p>
+<h3>8. 副次アウトカム（Table 3）📊</h3>
+<h4>Table 3. 主要アウトカムと主な副次アウトカム（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>制限群（n=87）</th><th>通常群（n=79）</th><th>オッズ比（95%CI）</th><th>未調整P</th><th>調整オッズ比（95%CI）</th><th>調整P</th></tr></thead>
+<tbody>
+<tr><td>180日の不良神経転帰</td><td>43/78（55.1%）</td><td>49/72（68.1%）</td><td>0.58（0.30–1.12）</td><td>0.10</td><td>0.54（0.23–1.26）</td><td>0.15</td></tr>
+<tr><td><strong>180日死亡</strong></td><td><strong>37/86（43%）</strong></td><td><strong>46/78（59%）</strong></td><td><strong>0.53（0.28–0.98）</strong></td><td><strong>0.04</strong></td><td><strong>0.56（0.25–1.23）</strong></td><td><strong>0.15</strong></td></tr>
+<tr><td>ICU死亡</td><td>31（35.6%）</td><td>37（46.8%）</td><td>0.63（0.34–1.17）</td><td>0.14</td><td>0.68（0.31–1.48）</td><td>0.33</td></tr>
+<tr><td>院内死亡</td><td>37（42.5%）</td><td>43（54.4%）</td><td>0.62（0.34–1.14）</td><td>0.13</td><td>0.65（0.30–1.42）</td><td>0.28</td></tr>
+</tbody></table></div>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>制限群</th><th>通常群</th><th>中央値の差（95%CI）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>ICU在室日数（中央値[IQR]）</td><td>3.01[2.03–5.91]</td><td>3[1.75–5.67]</td><td>0.01（−1.21〜1.23）</td><td>0.99</td></tr>
+<tr><td>入院日数（中央値[IQR]）</td><td>8.72[3.89–17.6]</td><td>6.49[2.31–14.2]</td><td>2.23（−1.04〜5.5）</td><td>0.18</td></tr>
+<tr><td><strong>昇圧薬フリー日（中央値[IQR]）</strong></td><td><strong>23[0–26]</strong></td><td><strong>0[0–25]</strong></td><td><strong>23（12.43〜33.57）</strong></td><td><strong>&lt;0.001</strong></td></tr>
+<tr><td>昇圧薬使用日数（28日生存者、中央値[IQR]）</td><td>3[1–4]、N=51</td><td>2.5[1.5–4]、N=36</td><td><strong>1（0.03〜1.97）</strong></td><td><strong>0.04</strong></td></tr>
+<tr><td><strong>人工呼吸器フリー日（中央値[IQR]）</strong></td><td><strong>21.1[0–26.1]</strong></td><td><strong>0[0–26]</strong></td><td><strong>21.08（10.43〜31.73）</strong></td><td><strong>&lt;0.001</strong></td></tr>
+<tr><td>換気時間（28日生存者のみ、時間、中央値[IQR]）</td><td>51[27–92]、N=51</td><td>45.5[23–114]、N=36</td><td>5.0（−27.3〜37.3）</td><td>0.52</td></tr>
+</tbody></table></div>
+<p>*注：副次解析の信頼区間は多重性の調整を行っていないため、群間の確定的な差の推論には用いるべきでないと原著が明記している。*</p>
+<h4>Table 3b. 死因別死亡（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>死因</th><th>制限群（37例中）</th><th>通常群（46例中）</th></tr></thead>
+<tbody>
+<tr><td>不整脈</td><td>8（21.6%）</td><td>7（15.2%）</td></tr>
+<tr><td>脳死</td><td>3（8.1%）</td><td>2（4.3%）</td></tr>
+<tr><td><strong>脳障害（脳死を除く）</strong></td><td><strong>15（40.5%）</strong></td><td><strong>20（43.5%）</strong></td></tr>
+<tr><td>心原性ショック</td><td>9（24.3%）</td><td>12（26.1%）</td></tr>
+<tr><td>血液分布異常性ショック</td><td>1（2.7%）</td><td>1（2.2%）</td></tr>
+<tr><td>低酸素性呼吸不全</td><td>1（2.7%）</td><td>3（6.5%）</td></tr>
+<tr><td>代謝性</td><td>0（0%）</td><td>1（2.2%）</td></tr>
+</tbody></table></div>
+<p>死因全体の分布に群間差はない（χ²検定、<strong>P=0.87</strong>）。<strong>最多の死因は脳障害</strong>（両群とも4割強）で、これに脳死を加えると約半数が神経学的原因による死亡である。次いで心原性ショックが4分の1を占める。</p>
+<p><strong>フリー日の解釈に注意する</strong>。昇圧薬フリー日・人工呼吸器フリー日の「中央値の差 23日・21日」という数字は一見巨大だが、<strong>通常群の中央値が0日</strong>であることが示すとおり、この集団は半数以上が28日以内に死亡している。フリー日は死亡＝0日と定義されるため、死亡率の差がそのまま増幅されて現れる。効果量の大きさをそのまま臨床効果として読んではならない。</p>
+<p><strong>むしろ注目すべきは逆向きのシグナル</strong>である。28日以上生存した患者だけを見ると、<strong>昇圧薬の使用日数は制限群のほうが1日長い</strong>（95%CI 0.03〜1.97、P=0.04）。著者は考察の限界で、酸素運搬（lactate や中心静脈血酸素飽和度）のデータを取っていないこと、心原性ショックと不整脈が主要な死因であったこと、それらのリスクが酸素運搬の影響を受けうることを挙げている。</p>
+<h3>9. 生存曲線と機能転帰の分布（Figure 3）📈</h3>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-020-06196-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-020-06196-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 生存確率のKaplan-Meier推定と GOS-E カテゴリの分布（原図・無改変。©出典。原著注：N Engl J Med, ICU-ROX investigators, 382:989–998, Copyright © 2020 Massachusetts Medical Society より許諾を得て改変転載） <strong>上段：Kaplan-Meier曲線</strong>（縦軸 生存確率0〜1.0、横軸 ランダム化から死亡または追跡までの日数、250日で打ち切り）。青実線＝Conservative（制限群）、赤破線＝Standard（通常群）。両曲線とも最初の10日で急峻に落ち、以後ほぼ水平になる。<strong>プラトーは制限群 約0.57、通常群 約0.42</strong>。曲線が離れるのは最初の2週間以内で、その後は平行に近い。つまり差がつくのは急性期であり、遅発性の分離ではない。 <strong>リスク集合（図中の数字）</strong>：制限群 87 → 50（day 50）→ 50（day 100）→ 50（day 150）→ 11（day 200）→ 1（day 250）。通常群 79 → 35 → 33 → 33 → 4 → 0。day 150 以降の急減は死亡ではなく<strong>追跡打ち切り</strong>である。 調整ハザード比 0.67（95%CI 0.43〜1.03）、P=0.20（年齢・院外心停止・ショック適応初期波形・ROSCまでの時間・内科的原因・STEMI で調整し、患者を施設にネスト、施設をランダム変数として扱った）。 <strong>下段：GOS-E カテゴリの積み上げ棒グラフ</strong>（横軸 割合0〜100%）。上段が Conservative oxygen、下段が Usual oxygen。左から Death（濃灰）、Vegetative（赤）、Lower severe disability（濃橙）、Upper severe disability（黄）、Lower moderate disability（薄緑）、Upper moderate disability（緑）、Lower good recovery（濃紺）、Upper good recovery（青）。両バーの間を破線が結び、各カテゴリ境界の移動が視覚化されている。 <strong>本文の数値から導かれる内訳</strong>（解析対象 制限群78例・通常群72例）：死亡帯は 37/78＝47.4% vs 46/72＝63.9%。不良転帰（GOS-E 1〜4）全体は 55.1% vs 68.1% なので、死亡以外の不良転帰（植物状態＋重度障害）は 6/78＝7.7% vs 3/72＝4.2%。良好転帰（GOS-E 5〜8）は <strong>35/78＝44.9% vs 23/72＝31.9%</strong>。 <mark class="hl">図の要点は「制限群では死亡帯が短く、右端の Upper good recovery（最良カテゴリ）の帯が明確に広い」こと</mark>。ただし<strong>死亡以外の不良転帰は制限群のほうがやや多い</strong>（7.7% vs 4.2%）。死亡を減らした分の一部が重度障害の生存者として残っている可能性を、この図は示唆している。標本が小さいため確定的には言えないが、心停止後研究で常に問われる「死亡を減らすことと良い機能転帰を増やすことは同じではない」という論点そのものである。</p>
+</div>
+<h3>10. 考察 — 著者は何を主張し、何を主張していないか 💬</h3>
+<p><strong>著者の中心的な主張</strong>は次の5点である。</p>
+<ol><li>主要アウトカムを二分化した解析では、制限的酸素療法は統計学的に有意な減少と関連しなかった。</li><li><strong>しかし方向は一貫している</strong>。順序尺度全体でのGOS-E解析は制限的酸素に有利であり、二分化解析でも点推定値は制限的酸素に有利。<strong>ただし95%信頼区間が広い</strong>。</li><li>ベースライン共変量で調整すると、信頼区間は「臨床的に重要な利益」と「臨床的に重要な害」の両方を包含するほど広くなった。</li><li>親試験で有意だった180日死亡の差は、今回のベースライン共変量調整に対して頑健ではなかった。これが本論文が明らかにした中心的な事実である。他の時点の死亡率に有意差はなく、死因も群間で有意に異ならなかった。</li><li>人工呼吸器フリー日と昇圧薬フリー日は制限群で統計学的に有意に増加した。</li></ol>
+<p><strong>先行するCOMACARE試験との比較</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>COMACARE（Jakkula 2018, ICM）</th><th>ICU-ROX HIE サブグループ（本研究）</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>2³要因デザインのパイロットRCT</td><td>大規模RCTの事後解析</td></tr>
+<tr><td>n</td><td>123例（院外心停止からの蘇生後）</td><td>166例</td></tr>
+<tr><td>介入</td><td>PaCO₂ 低め正常／高め正常 × 酸素 × MAP 低め正常／高め正常</td><td>保存的酸素 vs 通常酸素</td></tr>
+<tr><td>酸素の割付</td><td><strong>正常酸素（PaO₂ 75〜112.5 mmHg）vs 中等度高酸素（PaO₂ 150〜187.5 mmHg）</strong></td><td>保存的（SpO₂上限97%・FiO₂ 0.21まで）vs 通常ケア</td></tr>
+<tr><td>介入期間</td><td>ICUで36時間</td><td>ICU退室または28日まで</td></tr>
+<tr><td>対照群の性格</td><td><strong>能動的に中等度高酸素血症を狙う</strong></td><td><strong>通常ケア。高酸素を狙う操作はしない</strong></td></tr>
+<tr><td>主な結果</td><td>30日死亡・6か月時点の良好神経転帰に有意差なし。点推定値は正常酸素に有利</td><td>180日の死亡または不良転帰に有意差なし。点推定値は保存的酸素に有利</td></tr>
+</tbody></table></div>
+<p>著者はこの対比から2つを導く。第一に、<strong>COMACARE のほうが群間のPaO₂差は大きかった</strong>。第二に、それでも両試験の所見は広く一致しており、いずれも点推定値は酸素を絞る側に有利であった。</p>
+<p>そのうえで著者は重要な留保を置く。「我々のデータは、通常のICU診療で用いられるより高い酸素レベルを目標とするレジメンが有害である可能性を排除しない」。つまり本試験が否定していないのは「高すぎる酸素は悪い」という仮説のほうである。</p>
+<p><strong>著者が明示した「もし〜なら」の条件文</strong></p>
+<p>本論文の実践的な核心はここにある。著者はこう書く——「この研究で観察された点推定値が示す治療効果の大きさが<strong>より大規模な試験で確認されるのであれば</strong>、我々が観察した酸素曝露の分離の大きさは明らかに重要であり、低酸素血症曝露のリスクを伴ってでも保存的酸素療法を実施するのが適切ということになる」。</p>
+<p>これは「効果があるかどうか未定だが、もしあるならこの程度の介入強度で十分」という、<strong>次の試験の設計に直結する主張</strong>である。</p>
+<h3>11. 限界（著者が自ら挙げたもの）⚠️</h3>
+<p>原著が明示した限界は7つある。原文の慎重さのまま列挙する。</p>
+<ol><li>標本サイズの制約により、潜在的に重要なベースライン変数のすべてを調整することはできなかった。</li><li><strong>通常ケア群のほうが重症だった可能性を否定できない</strong>。根拠として、わずかに低い平均SpO₂と、蘇生中のアドレナリン使用がやや多かったことを挙げている。</li><li><strong>測定していない変数に群間の不均衡があった可能性</strong>。具体例として、除細動回数、用いた気道確保法、機械的圧迫デバイスの使用を挙げる。</li><li><strong>転帰の差が単に偶然によって生じた可能性</strong>。</li><li>WLST（生命維持治療の中止）に関する意思決定が標準化されていないことは、本研究の潜在的なバイアス源である。神経予後予測検査の実施率が群間で似ていたことは述べつつ、それでもこの限界を明記している。</li><li>180日時点の神経転帰データが得られなかった16例は、ランダムな欠測でない可能性がある。良い転帰の患者も悪い転帰の患者も連絡が取りにくいことがあるため。</li><li>酸素運搬に関する情報（lactate・中心静脈血酸素飽和度）を収集していない。保存的酸素群で低酸素血症の有意な増加は観察されなかったとしつつ（Results の記載と食い違う。後述）、心原性ショックと不整脈が主要な死因であり、そのリスクは酸素運搬の影響を受けうると述べている。</li></ol>
+<h3>12. 次の試験の設計へ 🧪</h3>
+<p>著者は具体的なサンプルサイズを提示している。</p>
+<div class="tw"><table>
+<thead><tr><th>前提</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>対照群のイベント率</td><td>68.1%（本研究の通常群の不良転帰率）</td></tr>
+<tr><td>検出したい絶対差</td><td><strong>13 パーセントポイント</strong></td></tr>
+<tr><td>検出力</td><td>90%</td></tr>
+<tr><td>検定</td><td>両側</td></tr>
+<tr><td><strong>必要例数</strong></td><td><strong>586例</strong></td></tr>
+</tbody></table></div>
+<p><strong>本研究の主要アウトカム解析対象は150例</strong>（78＋72）である。<strong>必要とされる586例の約26%にすぎない</strong>。この一点だけで、本研究の「有意差なし」が「差がない」を意味しないことは自明である。観察された絶対差は12.9ポイントで、著者が検出目標に据えた13ポイントとほぼ同じであった。つまり本研究は、著者自身が臨床的に意味があると考える大きさの効果を、検出できるだけの規模を持っていなかった。</p>
+<p>締めくくりで著者は次のように書く。「<strong>一部の臨床医は</strong>、動物データの一貫性、いくつかの観察データ、既存のランダム化比較試験における有益性への傾向に基づいて、この患者集団に保存的酸素療法を実施することを選ぶかもしれない。しかし明確な臨床実践勧告を生成するのに十分頑健なデータを提供するには、<strong>さらに大規模な試験が必要である</strong>」。</p>
+<p>引用文献 [18] は Young PJ, Nickson CP, Perner A の「臨床試験の統計学的に有意でない結果に臨床医はいつ基づいて行動すべきか」（JAMA 2020;323:2256）で、<strong>筆頭著者が自らこの問題を論じた論考</strong>を引いている点は示唆的である。</p>
+<h2>🔗 既存ノートとの整合（Vault内の関連知見との突き合わせ）</h2>
+<h3>A. 親試験ノートとの数値の対応 — 矛盾ではないが表現の補正が要る</h3>
+<p><span class="wl">ICU-ROX 人工呼吸中の制限的酸素療法（NEJM2020）</span> は、HIE疑いサブグループについて「180日死亡 <strong>RR 0.73（95%CI 0.54〜0.99）</strong>」「HR 0.67（95%CI 0.43〜1.03）」「人工呼吸器フリー日の絶対差 21.1日（95%CI 10.4〜28.0）」と記載している。</p>
+<p>本論文（ICM2020）は同じ180日死亡を OR 0.53（95%CI 0.28〜0.98）と表現している。リスク比とオッズ比は別の指標であり、イベント率が高い（43% vs 59%）集団ではオッズ比のほうが1から遠ざかるため、数値が異なるのは正しい。矛盾ではない。</p>
+<p>一方で、親ノートの「<strong>事前規定サブグループで唯一、明確な異質性が出た集団</strong>」という表現は、本論文の調整解析を踏まえると精度を欠く。本論文が示したのは「<mark class="hl">その異質性は、心停止に特有の6変数で調整すると統計学的有意性を失う程度のものだった</mark>」ということである。親ノート自身も「著者が仮説生成的と明記している」と正しく注記しているため、本ノートではこの対比を明示するにとどめる（親ノートの本文は本作業の対象外）。</p>
+<p>なお本論文の Figure 3 の脚注は HR 0.67（95%CI 0.43〜1.03）を「<strong>Adjusted</strong> hazard ratio」と明記している。親ノートでは調整の有無が明示されていないため、<strong>本ノートでは調整後の値として扱う</strong>。</p>
+<h3>B. 現行ガイドラインとの整合 — 「通常群」はすでに推奨帯に入っていた</h3>
+<p><span class="wl">心停止後ケアガイドライン2025 ERC・ESICM — 発熱予防は37.5℃以下、予後予測は2つ以上の指標で（Resuscitation2025）</span> は、ROSC後の酸素について SaO₂ 94〜98%（PaO₂ 10〜13 kPa ＝ 75〜100 mmHg）への滴定を推奨し、<strong>高酸素血症を避ける</strong>ことを明記している。<span class="wl">心停止後症候群ガイドライン ERC・ESICM（ICM2021）</span> も同方向である。</p>
+<p>本論文の実測値と並べると次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>制限群</th><th>通常群</th><th>ERC・ESICM 2025 の推奨帯</th></tr></thead>
+<tbody>
+<tr><td>時間加重PaO₂（10日間）</td><td>84 mmHg</td><td>88 mmHg</td><td>75〜100 mmHg</td></tr>
+<tr><td>各日の最低PaO₂（Fig 2c の帯）</td><td>概ね65〜80 mmHg</td><td>概ね70〜85 mmHg</td><td>60 mmHg 未満を避ける</td></tr>
+</tbody></table></div>
+<p><mark class="hl">2015〜2018年の豪州・ニュージーランドの「通常ケア」は、2025年のガイドライン推奨帯にすでにほぼ収まっていた</mark>。これは本試験の分離が小さかったことの直接的な説明であり、同時に「ガイドラインどおり滴定できている施設では、この試験の制限群を上乗せしても得られるものは小さい」という実践的な含意を与える。当院で意味があるのは平均PaO₂を下げることではなく、<strong>SpO₂ 97%以上で放置される時間を削ること</strong>である。</p>
+<h3>C. 「制限的酸素」という言葉の多義性 — 3つの試験は別のことをしている</h3>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>「制限的」が意味するもの</th><th>対照群の設定</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Oxygen-ICU（JAMA2016）</td><td>PaO₂ 70〜100 mmHg／SpO₂ 94〜98% を狙う</td><td><strong>SpO₂ 97〜100%・PaO₂ 150 mmHg まで許容</strong></td><td>ICU死亡低下（単施設・早期中止）</td></tr>
+<tr><td>COMACARE（ICM2018）</td><td>PaO₂ 75〜112.5 mmHg を狙う</td><td><strong>PaO₂ 150〜187.5 mmHg を能動的に狙う</strong></td><td>有意差なし。点推定値は正常酸素に有利</td></tr>
+<tr><td>ICU-ROX（NEJM2020／本論文）</td><td><strong>SpO₂上限アラーム97%＋FiO₂ 0.21まで下げる</strong></td><td><strong>通常ケア。高酸素は狙わない</strong></td><td>有意差なし</td></tr>
+<tr><td>LOCO2（NEJM2020）</td><td><strong>PaO₂ 55〜70 mmHg という低い下限を狙う</strong></td><td>PaO₂ 90〜105 mmHg</td><td><strong>害の兆候により早期中止</strong></td></tr>
+</tbody></table></div>
+<p><mark class="hl">「制限的酸素療法」という同じ語が、上限を削る戦略と下限を攻める戦略の両方に使われている</mark>。<span class="wl">LOCO2試験_ARDSの酸素管理目標（低め vs 高め・NEJM2020）</span> が示したのは後者の危険性であり、本試験の制限群とは別物である。<span class="wl">酸素は投与しすぎない Oxygen-ICU trial（JAMA2016）</span> の効果の大きさは、対照群を高酸素側に振ったことにかなりを負っている。院内で「制限的酸素」と言うときは、どちらの制限かを必ず添える必要がある。</p>
+<p>観察研究側の知見としては、<span class="wl">高酸素血症への曝露はICU死亡と関連するが用量反応関係はない（CC-HIC・多施設観察コホート・AJRCCM2019）</span> と <span class="wl">ERでの高酸素は人工呼吸患者の死亡率上昇と関連する（Page 2018）</span> があり、いずれも関連は示すが因果は示さない。本論文の引用文献 [4]〜[8] と同じ性質の証拠である。</p>
+<h3>D. 神経予後予測との突き合わせ — 本論文の最大の弱点が見える</h3>
+<p><span class="wl">心停止蘇生後昏睡の神経予後予測 システマティックレビュー（ICM2020）</span>（本論文と同じ Intensive Care Medicine 2020年46巻に掲載。doi:10.1007/s00134-020-06198-w）は、心停止後昏睡の予後予測を<strong>複数モダリティの組み合わせ</strong>で行うべきことを示している。本論文で実際に行われた検査は SSEP 7〜10%、NSE 0%、EEG 9〜18%、MRI 6〜13% である。</p>
+<p><mark class="hl">同じ雑誌の同じ年に「多モダリティで慎重に予測せよ」というSRが出ている一方で、実臨床のRCTコホートではNSEが1例も測られていない</mark>。この落差は、本論文の180日死亡・機能転帰が何を測っているのかという疑問に直結する。<span class="wl">早期WLSTを除外した心停止後の神経予後予測（不良マーカー2つ以上で偽陽性ゼロ・CritCare2026）</span> が扱うとおり、WLSTのタイミングは予後予測研究の中心的なバイアス源である。本論文の著者自身がこれを限界として挙げている。</p>
+<h3>E. 体温管理療法との関係</h3>
+<p>本試験のTTM実施率は約83%、うち目標36℃が約7割、32〜34℃は5%前後であった。当時すでに36℃が主流だったことになる。<span class="wl">低体温療法は延長しても神経予後を改善しない — 最短6時間が最適の事後確率0.51（ICECAP・JAMA2026）</span> や <span class="wl">HYPERION trial 非ショック波形心停止後の低体温療法（NEJM2019）</span> とあわせて読むと、心停止後ケアの各要素（体温・酸素・血圧）は個別に見ても効果が小さく、いずれも大規模試験でようやく判定できる領域であることが分かる。血圧については <span class="wl">心停止後の脳酸素化と最適平均動脈圧（自己調節能）</span> を参照。</p>
+<h3>F. その後の大規模RCTで再現されたか — <mark class="hl">Vault未収載のため確認できない</mark></h3>
+<p>本論文は「今後586例の試験が必要」と述べるにとどまり、後続試験の名称には言及していない。<mark class="hl">本Vaultには、心停止後患者を対象に酸素目標を検証した後続の大規模RCTのノートが収載されていない</mark>（<code>04-論文サマリー/</code> 全体を ICU-ROX・Mega-ROX・HOT-ICU・COMACARE・BOX で横断検索して確認）。したがって、<mark class="hl">本サブグループ所見がその後の大規模試験で再現されたかどうかは、本ノートの時点では判断できない</mark>。後続試験を取り込んだ際には、本節と「実践への示唆」を必ず更新すること。</p>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<h3>論点1：<mark class="hl">「差がなかった」ではなく「差を検出する検出力がなかった」</mark></h3>
+<p>本論文でもっとも誤読されやすい点である。区別を明確にしておく。</p>
+<div class="tw"><table>
+<thead><tr><th>表現</th><th>意味</th><th>本論文に当てはまるか</th></tr></thead>
+<tbody>
+<tr><td>「両群に差はなかった」</td><td>効果がゼロであることが示された</td><td><strong>当てはまらない</strong></td></tr>
+<tr><td>「両群は同等だった」</td><td>非劣性マージン内であることが示された</td><td><strong>当てはまらない</strong>（非劣性試験ではない）</td></tr>
+<tr><td>「統計学的に有意な差は検出されなかった」</td><td>有意水準を下回らなかった</td><td><strong>当てはまる</strong></td></tr>
+<tr><td>「臨床的に重要な利益も害も除外できない」</td><td>信頼区間が広く判定不能</td><td><mark class="hl"><strong>これが正しい記述</strong></mark></td></tr>
+</tbody></table></div>
+<p>数量的な裏づけ：調整オッズ比の95%信頼区間は <strong>0.23〜1.26</strong>。下限0.23は「オッズを77%減らす」＝きわめて大きな利益、上限1.26は「オッズを26%増やす」＝無視できない害に相当する。<strong>必要例数586に対して解析対象150例（26%）</strong>という規模では、この幅は必然である。</p>
+<h3>論点2：未調整では有意、調整で消える — どちらを信じるか</h3>
+<p>180日死亡は未調整 OR 0.53（0.28〜0.98）P=0.04 → 調整 OR 0.56（0.25〜1.23）P=0.15。点推定値はほとんど動いていない（0.53→0.56）が、信頼区間が大きく広がった。</p>
+<p>これは「交絡が取り除かれて効果が消えた」というより、「6変数＋施設ランダム効果を150例弱に当てはめた結果、推定精度が落ちた」と読むのが素直である。著者自身も「調整は治療効果推定値の精度の低下をもたらした」と書いている。統計学的には、イベント数83（180日死亡）に対して6共変量＋施設効果はやや過剰であり、1変数あたり10イベントという慣習的な目安を満たしていない。</p>
+<p>したがって「調整後に有意でなくなったから効果はない」も、「未調整で有意だから効果がある」も、どちらも言い過ぎである。<mark class="hl"><strong>この規模のデータからは何も確定できない</strong>というのが唯一誠実な読み方</mark>。</p>
+<h3>論点3：二分化 vs 順序尺度 — 結論が逆転する</h3>
+<p>同じGOS-Eデータで、二分化（1〜4 vs 5〜8）すると P=0.10、順序尺度のまま比較すると P=0.03。<strong>二分化は情報を捨てる</strong>ため検出力が落ちる。ただし順序解析のほうも調整されていないうえ、著者自身が比例性の仮定が満たされずノンパラメトリック手法に落としたと述べている。<strong>どちらか一方を「本当の結果」として採用すべきではない</strong>が、抄録と結論が二分化のほうだけを述べている点は、報告のバランスとして議論の余地がある。</p>
+<h3>論点4：フリー日の効果量は見かけ上増幅されている</h3>
+<p>人工呼吸器フリー日の「中央値の差21.08日」は、通常群の中央値が0日であることに由来する。<mark class="hl">フリー日は死亡＝0日と定義されるため、死亡率の差が指標の性質によって増幅される</mark>。この集団は半数以上が28日以内に死亡しており、フリー日の差は実質的に死亡率の差の言い換えに近い。JCで「21日も人工呼吸期間が短くなる」と紹介するのは誤りである。</p>
+<h3>論点5：害の方向のシグナルを軽く扱っていないか</h3>
+<p>3つの所見が制限的酸素の害を示唆しうる。</p>
+<ol><li>PaO₂ &lt;60 mmHg を1回以上経験した患者は制限群で有意に多い（P=0.02）</li><li><strong>28日生存者の昇圧薬使用日数は制限群で1日長い</strong>（95%CI 0.03〜1.97、P=0.04）</li><li><strong>死亡以外の不良転帰（植物状態＋重度障害）は制限群でやや多い</strong>（7.7% vs 4.2%、Fig 3 の分布と本文数値から導出）</li></ol>
+<p>いずれも小さな所見だが、方向は揃っている。心停止後の脳は低酸素に対する耐性が低く、「上限を削る」操作が「下限を割る」事故を伴うなら、正味の効果は打ち消されうる。著者が酸素運搬の指標（lactate・ScvO₂）を測っていないことは、この検証を不可能にしている。</p>
+<h3>論点6：非盲検デザインとWLST</h3>
+<p>医療者は割付を知っている。神経予後予測検査の実施率は群間で似ていたが、<strong>WLSTの判断基準は標準化されていない</strong>。この集団の死因の約半数が脳障害・脳死であることを踏まえると、<mark class="hl">主要アウトカムの相当部分が「治療を止める判断」で決まっていた可能性を排除できない</mark>。心停止後研究一般に共通する構造的問題だが、標本が小さい本研究では影響が相対的に大きい。</p>
+<h3>論点7：<mark class="hl">PDF検証で見つかった旧ノート記述の誤り・欠落</mark></h3>
+<p>本ノートの旧版（概要版）とPDFを1行ずつ照合した結果、以下が見つかった。<strong>すべてPDFを正とした</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧記述</th><th>PDFに基づく訂正</th><th>重大度</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>citation が「ICU-ROX Investigators, Intensive Care Med 2020;46:2411-2422」</td><td>筆頭著者は <strong>Paul Young</strong>。正しくは Young P, Mackle D, Bellomo R ほか（on behalf of the ICU-ROX Investigators and the ANZICS CTG）</td><td>中</td></tr>
+<tr><td>2</td><td>doi の記載なし</td><td><strong>10.1007/s00134-020-06196-y</strong></td><td>中</td></tr>
+<tr><td>3</td><td>published が「2020」のみ</td><td>紙面に <strong>Published online 18 August 2020</strong> が印字されている（Received 31 May／Accepted 20 July）。<strong>2020-08-18</strong> に確定</td><td>小</td></tr>
+<tr><td>4</td><td>「post hoc解析」とだけ記載</td><td>正確には「<strong>事前規定サブグループへの事後解析</strong>」。サブグループ定義はランダム化前、アウトカム選定と調整モデルは事後。この二重構造が解釈の核心</td><td><strong>大</strong></td></tr>
+<tr><td>5</td><td>「制限群55.1%（78例中）、通常群68.1%（72例中49例）」</td><td>制限群の分子 <strong>43</strong> が欠落。また<strong>絶対差 −12.9ポイント（95%CI −28.3〜+2.5）</strong>の記載がない</td><td>中</td></tr>
+<tr><td>6</td><td>GOS-E順序尺度の感度解析に言及なし</td><td><strong>中央値 4[IQR 1–7] vs 1[IQR 1–6]、P=0.03 で制限群が有意に良好</strong>。「有意差なし」という旧結論の印象を変える最重要の欠落</td><td><strong>大</strong></td></tr>
+<tr><td>7</td><td>酸素の実際の分離幅がゼロ記載</td><td><strong>時間加重PaO₂ 84 vs 88 mmHg（差 −4、P=0.33）／SpO₂≥97%時間割合 0.391 vs 0.529（P=0.001）／FiO₂ 0.21 時間 25 vs 0（P&lt;0.0001）</strong>。介入強度が分からないままでは結果を解釈できない</td><td><strong>大</strong></td></tr>
+<tr><td>8</td><td>結論を「有意な減少とは関連しなかった」で止め、「差がなかった」と読める形で提示</td><td>原著は続けて「<strong>重要な利益・害の可能性はこのデータでは除外できない</strong>」と明記。<mark class="hl">検出力不足であって同等性の証明ではない</mark></td><td><strong>大</strong></td></tr>
+<tr><td>9</td><td>低酸素曝露への言及なし</td><td><strong>PaO₂ &lt;60 mmHg を1回以上経験した患者が制限群で有意に多い（P=0.02）</strong>という害の方向のシグナル</td><td>中</td></tr>
+<tr><td>10</td><td>副次アウトカムに言及なし</td><td><strong>VFD・昇圧薬フリー日が制限群で有意に多い（いずれもP&lt;0.001）</strong>。ただし死亡＝0日による増幅。<strong>28日生存者の昇圧薬使用日数は制限群で1日長い（P=0.04）</strong></td><td>中</td></tr>
+<tr><td>11</td><td>「HIE患者」と一般化</td><td>定義は「<strong>心停止後、ROSC後・鎮静前に指示動作の記録がない患者</strong>」。<strong>心停止を経ていることが前提</strong>で、非心停止性の低酸素性脳症は対象外。原因は96.6%／89.9%が内科的</td><td>中</td></tr>
+<tr><td>12</td><td>交互作用に関する記載なし</td><td><mark class="hl"><strong>サブグループ効果の交互作用p値は本論文に記載がない</strong></mark>。報告されている交互作用は反復測定の「治療×時間」のみ</td><td>中</td></tr>
+<tr><td>13</td><td>神経予後予測検査・TTMへの言及なし</td><td><strong>NSE 0%・SSEP 7〜10%・EEG 9〜18%・MRI 6〜13%</strong>。TTM 実施率83%で目標36℃が約7割。予後予測の実施率の低さは本研究の内的妥当性に直結する</td><td>中</td></tr>
+<tr><td>14</td><td>必要サンプルサイズへの言及なし</td><td>著者は <strong>586例が必要</strong>と算出。本研究の主要解析は150例＝約26%</td><td>中</td></tr>
+</tbody></table></div>
+<p>旧ノートに明確な数値の誤り（間違った数字を書いていた）は見つからなかった。問題は誤記ではなく、<strong>解釈を左右する情報の欠落</strong>と、<strong>「有意差なし」を「差がない」と読ませる書き方</strong>である。</p>
+<h3>論点8：原著の内的不整合（PDF内で数値・記述が食い違う箇所）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>箇所</th><th>不整合の内容</th><th>本ノートの扱い</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Abstract／Results本文／Table 3</td><td>主要アウトカムのP値が <strong>0.1 ／ 0.14 ／ 0.10</strong> と3か所で異なる</td><td><strong>Table 3 と Abstract の 0.10 を採用</strong></td></tr>
+<tr><td>B</td><td>Abstract vs Results本文</td><td>SpO₂ ≥97% の絶対差を Abstract は「9 h」、Results は「− 9 h」と符号が異なる</td><td><strong>制限群のほうが9時間短い（−9 h）が正</strong></td></tr>
+<tr><td>C</td><td>Table 2</td><td>「PaO₂ &lt;60 mmHg を1回以上」の制限群が「<strong>31 (87%)</strong>」。31/87 は 35.6% であり 87% にはならない。対する通常群は「15/79 (19%)」と分数表記で形式も不統一</td><td><mark class="hl"><strong>分母87の誤植と判断。原著表記のまま併記し注記</strong></mark></td></tr>
+<tr><td>D</td><td>Results vs Discussion</td><td>Results は「制限群は低酸素血症エピソードを経験する可能性が<strong>有意に高かった</strong>」（P=0.02）と述べるが、Discussion の限界では「保存的酸素群で低酸素血症の<strong>有意な増加は観察されなかった</strong>」と正反対を書いている</td><td><mark class="hl"><strong>Results と Table 2 を正とする。制限群で有意に多い</strong></mark></td></tr>
+<tr><td>E</td><td>Fig 3 脚注</td><td>調整HR 0.67（95%CI 0.43〜1.03）に <strong>P=0.20</strong> が付されている。信頼区間の上限が1をわずかに超える程度なら通常P値は0.07前後になる</td><td>施設ランダム効果を含む階層モデルによる可能性があるが、<strong>原著に説明がない</strong>。値はそのまま転載</td></tr>
+<tr><td>F</td><td>Methods内</td><td>Trial design と Patients で「pre-specified subgroup」、Statistical Analysis で「whilst not pre-specified」と用語が揺れる</td><td><strong>サブグループ定義＝事前規定、解析＝事後</strong>と解釈（論点1・3-1参照）</td></tr>
+<tr><td>G</td><td>Table 2</td><td>SpO₂ ≥97% 時間数は <strong>P=0.05</strong>、95%CI（−21.4〜3.4）は0を跨ぐ。有意／非有意の判定が境界的なまま提示</td><td>「時間割合（P=0.001）は明確に分離、時間数は境界的」と整理</td></tr>
+</tbody></table></div>
+<p><mark class="hl"><strong>Dが最も重い</strong></mark>。低酸素曝露が増えたかどうかは、保存的酸素療法の安全性判断そのものである。原著は結果と考察で正反対を述べており、<strong>査読で見逃された明白な誤り</strong>と考えられる。JCで取り上げる価値がある。</p>
+<h3>論点9：資金源とCOI</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>記載内容</th></tr></thead>
+<tbody>
+<tr><td><strong>資金源</strong></td><td><mark class="hl"><strong>本PDFには本解析および ICU-ROX の資金源に関する記載が一切ない</strong></mark>。Funding セクションが存在しない。親試験（NEJM2020）の資金源は本Vaultの <span class="wl">ICU-ROX 人工呼吸中の制限的酸素療法（NEJM2020）</span> にニュージーランド Health Research Council 助成・企業支援なしと記載されているが、<strong>これは本PDFから確認できる情報ではない</strong></td></tr>
+<tr><td><strong>COI</strong></td><td>Beasley 医師：<strong>Fisher and Paykel Healthcare</strong> から研究助成。Freebairn 医師：<strong>Hamilton Medical</strong> および <strong>IMT（Bellavista）</strong> から旅費支援。「本論文に関連する他の潜在的利益相反は報告されていない」</td></tr>
+<tr><td><strong>倫理</strong></td><td>各参加施設の倫理委員会が承認。HIE疑い患者の診療録から本解析用の追加データを取得する承認も得ている。登録またはデータ使用継続の書面同意を患者本人または法的代理人から取得。同意取得前に死亡した場合は、地域の規制で許容され倫理委員会が承認した場合にデータを含めた</td></tr>
+<tr><td><strong>その他</strong></td><td>電子付録（ESM）あり。ICU-ROXの全研究者リストは謝辞に掲載</td></tr>
+</tbody></table></div>
+<p>COIに挙がった2社（Fisher and Paykel Healthcare は加温加湿・酸素療法デバイス、Hamilton Medical と IMT は人工呼吸器のメーカー）は<strong>いずれも酸素療法・人工呼吸に関連する事業を持つ</strong>。ただし助成は本試験に対するものとは明記されておらず、また支援内容も研究助成と旅費にとどまる。</p>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>酸素療法の最新動向</td><td>Girardis M, Alhazzani W, Rasmussen BS. Intensive Care Med 2019;45:1009-11</td></tr>
+<tr><td>2</td><td>心停止患者の蘇生中・蘇生後の酸素とCO₂の目標</td><td>Skrifvars MB, Olasveengen TM, Ristagno G. Intensive Care Med 2019;45:284-6</td></tr>
+<tr><td>3</td><td><strong>心停止後の高酸素の影響（動物試験の系統的レビュー・メタ解析）</strong></td><td>Pilcher J, Weatherall M, Shirtcliffe P, Bellomo R, Young P, Beasley R. Resuscitation 2012;83:417-22</td></tr>
+<tr><td>4</td><td>心停止蘇生後の超正常酸素分圧と転帰の関係</td><td>Kilgannon JH ほか. Circulation 2011;123:2717-22</td></tr>
+<tr><td>5</td><td>心停止蘇生後の動脈血高酸素と院内死亡の関連</td><td>Kilgannon JH ほか. JAMA 2010;303:2165-71</td></tr>
+<tr><td>6</td><td>心停止蘇生後の早期高酸素曝露と神経学的障害（前向き多施設）</td><td>Roberts BW ほか. Circulation 2018;137:2114-24</td></tr>
+<tr><td>7</td><td>心停止蘇生後の動脈血CO₂・O₂濃度と院内死亡の関連</td><td>Helmerhorst HJ ほか. Crit Care 2015;19:348</td></tr>
+<tr><td>8</td><td>院外心停止蘇生後の動脈血液ガスと長期神経学的転帰</td><td>Vaahersalo J ほか（FINNRESUSCI）. Crit Care Med 2014;42:1463-70</td></tr>
+<tr><td>9</td><td>動脈血高酸素と院内死亡（関連を示さなかった研究）</td><td>Bellomo R ほか. Crit Care 2011;15:R90</td></tr>
+<tr><td>10</td><td>院外心停止患者の酸素分圧と神経学的転帰（探索的解析）</td><td>Ebner F ほか. Crit Care 2019;23:30</td></tr>
+<tr><td>11</td><td><strong>COMACARE：心停止蘇生後のCO₂と酸素の2水準を標的とするパイロットRCT</strong></td><td>Jakkula P ほか. Intensive Care Med 2018;44:2112-21</td></tr>
+<tr><td>12</td><td><strong>親試験 ICU-ROX：ICUでの人工呼吸中の保存的酸素療法</strong></td><td>ICU-ROX Investigators, ANZICS CTG. N Engl J Med 2020;382:989-98</td></tr>
+<tr><td>13</td><td>ICU-ROX のプロトコル要約と統計解析計画</td><td>Mackle DM ほか. Crit Care Resusc 2018;20:22-32</td></tr>
+<tr><td>14</td><td><strong>心停止後症候群：疫学・病態生理・治療・予後予測（調整共変量の根拠）</strong></td><td>Neumar RW ほか. Circulation 2008;118:2452-83</td></tr>
+<tr><td>15</td><td>集中治療における死因分類システムの検証（評価者間信頼性）</td><td>Ridgeon E ほか. Crit Care Resusc 2016;18:50-4</td></tr>
+<tr><td>16</td><td>人工呼吸器フリー日の統計学的評価</td><td>Schoenfeld DA, Bernard GR. Crit Care Med 2002;30:1772-7</td></tr>
+<tr><td>17</td><td>回帰分位点の計算法（95%CIの反転法）</td><td>Koenker RO, d'Orey V. Appl Stat 1993;43:410-4</td></tr>
+<tr><td>18</td><td><strong>統計学的に有意でない結果に臨床医はいつ基づいて行動すべきか</strong></td><td>Young PJ, Nickson CP, Perner A. JAMA 2020;323:2256</td></tr>
+<tr><td>19</td><td>院外心停止における昇圧薬・抗不整脈薬・酸素・挿管：less is more の可能性</td><td>Sandroni C, Skrifvars MB, Soar J. Intensive Care Med 2019;45:1454-8</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">この論文は「心停止後に酸素を絞っても意味がない」ではなく、「絞る意味があるかどうかを判定できるだけのデータがまだない」と読む</mark>。180日の死亡または不良神経転帰は 55.1% vs 68.1%、調整オッズ比 0.54（95%CI 0.23〜1.26）で、<mark class="hl">臨床的に重要な利益も害も同じくらい信頼区間に入っている</mark>。著者自身が必要例数を586例と算出しており、本研究の解析対象150例はその26%にすぎない。</p>
+</div>
+<ul><li>==介入の実態を数字で押さえる。時間加重PaO₂の群間差はわずか 4 mmHg（P=0.33）==。実際に動いたのは「SpO₂ 97%以上の滞在時間（0.53→0.39）」と「FiO₂ 0.21で回せた時間（0→25時間）」だけである。</li><li><mark class="hl"><strong>「事前規定サブグループ」への「事後解析」である</strong></mark>。集団の切り出しはランダム化前に決まっていたが、アウトカムの選定と調整モデルは結果を見たあとの決定であり、位置づけは仮説生成にとどまる。</li><li><mark class="hl"><strong>サブグループ効果の交互作用p値は本論文に記載がない</strong></mark>。「HIEだけ効く」ことの統計学的裏づけは、本論文からは得られない。</li><li>==未調整で有意だった180日死亡（OR 0.53、P=0.04）は、心停止に特有の6変数で調整すると有意性を失う（OR 0.56、P=0.15）。点推定値はほぼ動かず、信頼区間だけが広がった==。これは「効果が消えた」のではなく「この規模では判定できない」ことを意味する。</li><li>==GOS-Eを順序尺度のまま見ると制限群が有意に良好（P=0.03）==。二分化すると有意でなくなる。抄録は二分化の結果だけを述べている。</li><li>==害の方向のシグナルを見落とさない。PaO₂ &lt;60 mmHg を1回以上経験した患者は制限群で有意に多い（P=0.02）==。心停止後の脳に対して、下限を割る事故は上限を削る利益を打ち消しうる。</li><li><mark class="hl">現行ガイドライン（ERC・ESICM 2025：SaO₂ 94〜98%、PaO₂ 75〜100 mmHg）を守れている施設では、この試験の「制限群」を上乗せしても得られる分離はほとんどない</mark>。削るべきは平均PaO₂ではなく、SpO₂ 97%以上で放置される時間である。</li><li><mark class="hl">原著自身が Results と Discussion で低酸素曝露について正反対のことを書いている</mark>。JCで扱う価値のある明白な内的矛盾である。</li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>心停止後でROSC、指示動作なし</td><td>HIE疑いとして扱うか（本試験の定義に一致）</td><td>心停止後ケアのバンドルを開始。酸素は単独で最適化しない</td></tr>
+<tr><td>ROSC直後、SpO₂がまだ信頼できない</td><td>パルスオキシメータの波形と動脈血液ガス</td><td>100%酸素を継続。測定が安定したら滴定に切り替える</td></tr>
+<tr><td>SpO₂が安定して測定できる</td><td>SpO₂ が97%以上で放置されていないか</td><td><strong>上限アラーム97%を設定</strong>し、FiO₂を刻んで下げる。下限90%は下げない</td></tr>
+<tr><td>FiO₂を下げてSpO₂が下限を割った</td><td>直前のFiO₂と下げ幅</td><td><strong>直ちに直前のFiO₂へ戻す</strong>。この「戻す」規定があるから安全に運用できる</td></tr>
+<tr><td>血液ガスでPaO₂ &lt;60 mmHg</td><td>低酸素の原因（肺・循環・シャント）</td><td><strong>SpO₂の値にかかわらずFiO₂を上げる</strong>。制限プロトコルより安全弁が優先</td></tr>
+<tr><td>平均PaO₂が75〜100 mmHgに収まっている</td><td>それ以上下げる根拠があるか</td><td><strong>ない</strong>。本試験の分離幅（4 mmHg）を超える介入を支持するデータはない</td></tr>
+<tr><td>予後の説明を求められた</td><td>SSEP・EEG・NSE・MRIが実施されているか</td><td>酸素目標の議論より先に、<strong>多モダリティの予後予測</strong>を整える</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

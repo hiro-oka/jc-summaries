@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>圧容量関係と時変エラスタンスで重症患者の循環を読む — Ea Ees 心室動脈カップリング（Concise Definitive Review・CCM2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000006136.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">圧容量関係と時変エラスタンスで重症患者の循環を読む — Ea Ees 心室動脈カップリング（Concise Definitive Review・CCM2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Bronicki RA, Tume S, Gomez H, Dezfulian C, Penny DJ, Pinsky MR, Burkhoff D. Application of Cardiovascular Physiology to the Critically Ill Patient. Crit Care Med. 2024;52(5):821-832. doi:10.1097/CCM.0000000000006136</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2024-05）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000006136" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000006136</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Application of Cardiovascular Physiology to the Critically Ill Patient</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006136.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000006136.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006136.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>共通語彙を Ea・Ees・SBV に置き換える</strong>。「ノルアドを上げる／ドブタミンに変える」ではなく「Ea を上げるのか、Ees を上げるのか、SBV を動かすのか」で回診の会話を組み立てる。この論文から持ち帰る最大の実利はこの言い換えで、当院の血行動態カンファレンスの共通語にできる。</li><li><strong>敗血症性心筋症で EF が正常に見える理由を説明できるようにする</strong>。Ees が落ちていても SVR・Ea の低下がそれを相殺するため、Fig. 3A のシミュレーションでは EF は 55% と正常域に残った。「EF が保たれている＝収縮性は大丈夫」と読まない根拠をこの図で示せる。</li><li><strong>AVP を足す前に心拍出量を見る</strong>。AVP は Ees を上げないため、同じ Ea 上昇でもノルアドレナリンより Ea/Ees を大きく悪化させる。Fig. 3A では AVP 追加で EF 48%・SV 低下・EDP 上昇となり、血圧は上がったのに冠灌流圧（CPP）は 39 mmHg で不十分なままだった。</li><li><strong>「血圧が上がった」を成功の指標にしない</strong>。見るのは CPP（大動脈拡張期圧 − LV EDP）。分子（大動脈拡張期圧）を上げても分母側の LV EDP が同時に上がれば CPP は改善しない。Fig. 3A はそれが起きた図である。</li><li><strong>収縮性が落ちた敗血症では inodilator と inoconstrictor のトレードオフを明示的に議論する</strong>。Fig. 3 の比較では inodilator 戦略のほうが SV は約10%多く、心拍出量は約600 mL/分多く、LV EDP は低い（22 → 17 mmHg）。代わりに血圧が低い分 CPP は低いが、心筋酸素消費も低い。どちらを取るかは患者の冠動脈予備能次第、という会話にできる。</li><li><strong>VA-ECMO 中は流量を上げるほど LV に不利になりうる、を共有する</strong>。ECMO 流量↑ → 大動脈圧↑ → Ea↑ → Ea/Ees↑ → SV↓ で、LV は容量・圧の両方で負荷され続ける。当院で VA-ECMO を回すときの「ベント／アンローディングを議論する引き金」の生理学的説明として使える。</li><li><strong>VA-ECMO 中の LV 評価はエコーで LV 径を測る、が本文の唯一のベッドサイド指示</strong>（Fig. 5A キャプション）。大動脈弁が開かなくなると動脈圧は非拍動性になり、LV 収縮期圧は高いまま PV ループの幅がゼロ（縦線）になる。動脈圧波形だけでは LV の負荷状態が読めない。</li><li><strong>薬でアンローディングする選択肢を捨てない</strong>。Fig. 5C では VA-ECMO にニトロプルシド＋利尿薬を足すだけで PV ループが左下方へ移動し、PVA と心筋 VO₂ が大きく減り、大動脈拡張期圧が下がっても LV EDP が同時に下がるため CPP は保たれた。Impella が使えない状況での代替の理屈になる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：心室の圧容量関係と時変エラスタンスモデルは、Frank（1895）、Suga &amp; Sagawa、Sunagawa ら、Suga による PVA と心筋 VO₂ の関係、という順に半世紀以上かけて確立している。多学会のコンセンサス・ガイドラインは、重症小児・成人の血行動態フェノタイプを把握し治療を導くために高度血行動態モニタリングの使用を推奨している。</li><li><strong>Unknown（分かっていなかったこと）</strong>：その一方で、身体診察と標準的な血行動態モニタリングは循環機能の定量的指標を信頼して予測しない。高度血行動態モニタリングも、侵襲モニタリング固有のリスク、転帰改善を示すエビデンスの欠如、そして臨床推論の欠陥・知識の不足・解釈の習熟度の欠如により、相当な精査に晒されている。つまり「測る道具はあるが読めていない」という空白がある。</li><li><strong>What's new（本研究の新規性・意義）</strong>：新しいデータを出す論文ではない。既知の生理学モデルとシミュレータ（Harvi）を使い、敗血症・心原性ショック・MCS という3つの臨床場面で、<strong>治療介入を「薬剤名」ではなく「Ea・Ees・Ea/Ees・SBV への効果」として読み替えて見せた</strong>点が新しい。ガイドラインのアルゴリズム的蘇生が、フェノタイプによっては裏目に出うることを図で示している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 圧容量ループ（PVL）と時変エラスタンスモデルを土台に、<strong>昇圧薬・強心薬・血管拡張薬・輸液・機械的循環補助を「Ea（動脈負荷）・Ees（収縮性）・Ea/Ees（カップリング）・SBV（ストレス血液量）への効果」に翻訳して読む</strong>ための教科書的レビュー。臨床試験ではなくシミュレーションであり、転帰への影響は一切示していない。</p>
+</div>
+<ul><li><strong>目的</strong>：心室圧容量関係と時変エラスタンスモデルを、循環の生理・病態生理の理解、高度血行動態モニタリングの解釈、治療介入の生理学的基盤と血行動態効果の説明のための土台として使う。その上で心血管シミュレータを用い、重症敗血症・心原性ショック・急性 MCS での応用を図示する。</li><li><strong>情報源</strong>：時変エラスタンスモデル・心原性ショック・敗血症に関連する文献を MEDLINE から検索。必要に応じて支持エビデンスも MEDLINE から取得。系統的レビューではない。</li><li><strong>モデル</strong>：Harvi 心血管シミュレータ。心腔は Suga・Sunagawa の時変エラスタンス原理で、血管は Guyton の抵抗とキャパシタンスの直列モデルでモデル化される。4つの心腔すべての PVL、圧・流量・容量の時間波形、そこから導かれる血行動態パラメータを出力する。</li><li><strong>中核の3つの関係</strong>：ESPVR（傾き＝Ees、収縮性）、EDPVR（受動的な硬さ）、Ea（動脈負荷、≒ 総末梢血管抵抗 × 心拍数 ＝ Pes/SV）。この3つで SV・EF・Pes・EDP が決まる。</li><li><strong>カップリング</strong>：Ea/Ees が EF と SV を決め、Ea と Ees の絶対値が Pes を決める。正常 Ea/Ees は体循環・肺循環とも約 0.6。比が上がると「アンカップル」して EF・SV が低下する。</li><li><strong>エネルギー</strong>：SW（＝Pes × SV、ループ内側の面積）＋ PE（収縮末期に残る位置エネルギー）＝ PVA。PVA は心筋 VO₂ と強く正相関し、単位 SW あたりと単位 PE あたりの VO₂ コストは等しい。</li><li><strong>敗血症</strong>：炎症は肺・体循環の抵抗血管トーヌス、静脈容量血管トーヌス（→ SBV と静脈還流）、両心室の拡張機能・収縮機能のすべてに影響しうる。この異質性のもとでは、コンセンサス由来のアルゴリズム的蘇生は問題を孕みうる、というのが著者らの主張。</li><li><strong>心原性ショック</strong>：急性 LV 収縮不全では EDV の増加は比較的限られる（慢性心不全のリモデリングとは対照的）。inodilator ＋ vasodilator 戦略は inoconstrictor ＋ vasopressor 戦略より SV・心拍出量が大きく EDP は低かった。</li><li><strong>MCS</strong>：VA-ECMO は LV をアンロードしない。流量を上げるほど Ea が上がり、ある流量で大動脈弁が開かなくなる。Impella の追加、あるいは血管拡張薬＋利尿薬でアンロードできる。</li><li><strong>著者らの留保</strong>：血行動態の値は説明のために提供されたもので、変化の大きさは治療に対する宿主反応によって変わりうる。<strong>シミュレーションは処方箋ではなく、治療の転帰への影響を示すものでもない</strong>。検討は LV と体循環に限定されている。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 圧容量ループと時変エラスタンスの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>圧容量ループ（PVL, pressure–volume loop）</strong> とは、1心拍のあいだの左室（LV）の「圧」と「容量」を、縦軸＝圧・横軸＝容量の平面上に点で追って描いた閉じた輪のこと。心電図や動脈圧波形が「時間」を横軸に取るのに対し、PVL は時間軸を捨てて圧と容量の関係だけを見る。これにより、前負荷・後負荷・収縮性という3つの概念が、輪の「幅」「高さ」「傾き」として同時に目に見える。</p>
+<p>心臓は1拍ごとに「収縮して硬くなり、収縮末期に最も硬く、そこから弛緩して拡張末期に最も柔らかくなる」。つまり心腔の力学特性は<strong>周期的に時間変化する（time-varying）</strong>。この「硬さ」を圧÷容量で表したものが<strong>エラスタンス（elastance, mmHg/mL）</strong>で、硬いほど大きい。硬さが最大になる収縮末期のエラスタンスが <strong>Ees（end-systolic elastance）</strong>、最小になる拡張末期の関係が <strong>EDPVR</strong> である。</p>
+<p>用語の最短の定義：</p>
+<ul><li><strong>EDV / ESV</strong>：拡張末期容量 / 収縮末期容量。差が <strong>SV（1回拍出量）</strong></li><li><strong>Pes</strong>：収縮末期圧</li><li><strong>EDP</strong>：拡張末期圧</li><li><strong>ESPVR</strong>：収縮末期圧容量関係。負荷条件を変えて複数の PVL を描き、各ループの収縮末期の点を結んだ線。心臓の作動圧容量域では概ね直線で、その傾きが <strong>Ees</strong>＝<strong>負荷非依存性の収縮性指標</strong></li><li><strong>EDPVR</strong>：拡張末期圧容量関係。同様に各ループの拡張末期の点を結んだもので、こちらは<strong>曲線的</strong>。心室の受動的な粘弾性＝硬さを表す</li><li><strong>Vo（unstressed volume）</strong>：EDPVR 上で圧がゼロのままである最大容量。ESPVR を直線外挿したときの容量軸切片としても得られる</li><li><strong>Ea（effective arterial elastance）</strong>：動脈系を弾性チャンバーと見なしたときのエラスタンス。<strong>血管の物理的コンプライアンスではなく「抵抗」が主決定因子</strong>なので "effective（実効）" と呼ぶ</li><li><strong>SBV（stressed blood volume, ストレス血液量）</strong>：血管壁を張って圧を生んでいる分の血液量。静脈容量血管が収縮すると総血液量が変わらなくても SBV が増え、静脈還流が増える</li><li><strong>PVA（pressure–volume area）</strong>：SW（外的仕事）＋ PE（残存する位置エネルギー）。心筋酸素消費（VO₂）の主決定因子</li><li><strong>inoconstrictor / inodilator</strong>：強心作用＋血管収縮作用を併せ持つ薬（例：ノルアドレナリン）／強心作用＋血管拡張作用を併せ持つ薬（例：ドブタミン、ミルリノン）。本稿はこの2語を対比の軸に使う</li></ul>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p>心血管の生理・病態生理は多くの疾患過程で主役を演じ、疾患を引き起こすか、その進展に寄与する。最適な治療を選ぶには、<strong>ベースラインの血行動態フェノタイプを確立し、定型的（formulaic）な治療アプローチを避けること</strong>が不可欠である。疾患の呈し方は多様で、併存症があり、疾患過程はダイナミックで、複雑な臓器連関があり、治療介入自体が心血管機能に影響するからである。</p>
+<p>重症患者の評価と管理をさらに難しくしているのが、<strong>臨床診察と標準的な血行動態モニタリングは、循環機能の定量的指標を信頼して予測しない</strong>という事実である（引用文献3〜11）。この点は、身体所見からの心係数推定（Tibby 1997）、慢性心不全での身体徴候の信頼性の限界（Stevenson &amp; Perloff, JAMA 1989）、EF の医師推定とゲート血液プールスキャンの比較（Eagle 1988）、進行心不全での臨床評価と侵襲的血行動態の不一致（Narang, J Card Fail 2020）など、複数の古典的研究で示されている。</p>
+<p>こうした理由から、多学会のコンセンサス由来のガイドラインは、重症小児・成人の管理においてベースラインおよび推移する血行動態フェノタイプを確立し治療を導くために、<strong>高度血行動態モニタリングの使用を推奨</strong>している。しかし高度血行動態モニタリングの使用は相当な精査に晒されている。理由は3つで、①侵襲モニタリング固有のリスク、②転帰改善を示すエビデンスの欠如（ESCAPE 試験、PAC-Man 試験など）、③<strong>臨床推論の欠陥（引用18〜20）・知識の不足（19, 21, 22）・高度血行動態モニタリングの解釈における習熟度の欠如（23〜28）</strong>が示されていること。</p>
+<p>そこで著者らは、心室圧容量関係と時変エラスタンスの枠組みを土台に据え、シミュレータでその応用・モニタリングの解釈・治療介入の生理学的基盤と血行動態効果を示す、という構成を取る。</p>
+<p><strong>シミュレータについて</strong>：Harvi 心血管シミュレータ（PVLoops LLC、ソフトウェアは Burkhoff が設計）を用いる。心腔は Suga・Sunagawa の時変エラスタンス原理に従ってモデル化され、血管は体循環・肺循環の性質を一連の抵抗とキャパシタンスで記述する Guyton のモデルに従う。4心腔それぞれの PVL、圧・流量・容量の時間依存トレース、およびそれらから導かれる血行動態パラメータを生成する。<strong>血行動態の値は説明のために提供されたもので、これらのパラメータの変化の大きさは治療に対する宿主反応によって変わりうる</strong>。シミュレータは過去の刊行物（引用32〜34：Burkhoff, Mirsky &amp; Suga 2005／Burkhoff &amp; Tyberg 1993／Doshi &amp; Burkhoff 2016）で要約・検証されている、と著者らは述べる。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：CONCISE DEFINITIVE REVIEW（招待総説）＋ 心血管シミュレーション。<strong>RCT でも観察研究でもメタ解析でもない</strong>。したがって n 数・効果量・95%CI・p 値は一切存在しない。</li><li><strong>情報源（DATA SOURCES）</strong>：時変エラスタンスモデル、心原性ショック、敗血症の議論に関連する文献を MEDLINE から検索。支持エビデンスも必要に応じて MEDLINE から取得。<strong>検索式・期間・件数・選択基準は記載されていない</strong>（系統的レビューの手続きを踏んでいない）。</li><li><strong>選択・抽出・統合（STUDY SELECTION, DATA EXTRACTION, AND SYNTHESIS）</strong>：関連文献のデータをレビューし、必要に応じて適用した、とのみ記載。</li><li><strong>シミュレーションの対象</strong>：LV と体循環に限定。心原性ショックの症例設定は<strong>体重 60 kg、体表面積 1.6 m²</strong>。</li><li><strong>主要・副次アウトカム</strong>：<strong>設定されていない</strong>。出力は PVL の形状と、そこから読み取れる Ea・Ees・Ea/Ees・EF・SV・ESV・EDV・EDP・Pes・CPP・PVA・心筋 VO₂ の変化方向である。</li><li><strong>限界（著者らの明示）</strong>：シミュレーションは処方箋ではなく、治療の転帰への影響を示すものでもない。パラメータ変化の大きさは宿主反応によって変わりうる。</li><li><strong>利益相反</strong>：<strong>Burkhoff は PVLoops（本稿で使用した Harvi シミュレータの提供元）から資金提供を受けており、かつ同シミュレータの設計者である</strong>。Gomez は所属機関が NIDDK・Baxter・bioMérieux から、本人が Trilinear Bioventures・AclRx・Novartis・National Kidney Foundation から資金提供を受けている。他の著者は申告なし。</li></ul>
+<h3>4. 心室圧容量図 — Fig. 1 を1点ずつ読む 📈</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000006136" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000006136）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Left ventricular pressure-volume loop（原図・無改変。©Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<h4>4-1. 図の軸と凡例</h4>
+<div class="tw"><table>
+<thead><tr><th>要素</th><th>図中の表記</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>横軸</td><td>VOLUME (mL)</td><td>左室容量。目盛りは 0・50・100・150</td></tr>
+<tr><td>縦軸</td><td>PRESSURE (mmHg)</td><td>左室圧。目盛りは 0 から 140 まで 20 刻み</td></tr>
+<tr><td>凡例（薄い赤の網かけ）</td><td>SW</td><td>ループの内側を塗った面積＝1回仕事（stroke work）</td></tr>
+<tr><td>凡例（薄い青の網かけ）</td><td>PE</td><td>ループの左側、ESPVR と EDPVR と拡張期部分に囲まれた面積＝残存位置エネルギー</td></tr>
+</tbody></table></div>
+<h4>4-2. ループの4辺（1心拍を反時計回りに1周する）</h4>
+<p>心周期は左下から始まり、<strong>反時計回り</strong>に1周する。</p>
+<div class="tw"><table>
+<thead><tr><th>辺</th><th>図中のラベル</th><th>何が起きているか</th><th>容量・圧の動き</th></tr></thead>
+<tbody>
+<tr><td>右の垂直な辺（上向き）</td><td>Isovolumic Contraction</td><td>収縮開始。僧帽弁も大動脈弁も閉じている</td><td>容量は EDV のまま不変、圧だけが急上昇</td></tr>
+<tr><td>上の辺（左向き）</td><td>Ejection</td><td>心室圧が大動脈圧を超えて大動脈弁が開き、駆出が始まる。図では最高 LV 圧が約 118 mmHg で、これは最高大動脈圧（収縮期血圧）とほぼ等しい</td><td>容量が減り、圧は山なりに上がって下がる</td></tr>
+<tr><td>左の垂直な辺（下向き）</td><td>Isovolumic Relaxation</td><td>収縮末期圧（Pes）を経て、大動脈弁が閉じ、等容弛緩へ</td><td>容量は ESV のまま不変、圧だけが急降下</td></tr>
+<tr><td>下の辺（右向き）</td><td>Filling</td><td>心房圧が心室圧を超えて僧帽弁が開き、充満期</td><td>容量が増え、圧は EDPVR に沿ってわずかに上がる</td></tr>
+</tbody></table></div>
+<p><strong>ESV と EDV の差が SV</strong>。図の目盛りから読むと、ESV は約 40 mL、EDV は約 125 mL の位置にある（本文にこれらの数値は印字されていないので、図の軸から読んだ概数である）。</p>
+<h4>4-3. ループに引かれた3本の線と2つの点</h4>
+<div class="tw"><table>
+<thead><tr><th>線・点</th><th>図中のラベル</th><th>描かれ方</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>ESPVR</td><td>ESPVR（破線・直線）／傾きに Ees</td><td>容量軸の Vo 付近から左上に向かって急に立ち上がる直線。ループの左上角（Pes・ESV の点）を通る</td><td>筋フィラメント最大活性化時点での心室の硬さ。負荷条件を変えて複数のループを描き、各ループの収縮末期の点を結んで得る。傾きが Ees</td></tr>
+<tr><td>EDPVR</td><td>EDPVR（実線・曲線）</td><td>図の底を這い、右へ行くほど反り上がる曲線。ループの右下角（EDP・EDV の点）を通る</td><td>完全な筋フィラメント不活性化時点での受動的粘弾性＝硬さ。曲線的</td></tr>
+<tr><td>Ea</td><td>Ea（実線・負の傾きの直線）</td><td>ループの左上角（収縮末期の圧容量座標）から、右下の「圧ゼロにおける EDV」の点へ下る直線</td><td>動脈負荷。この直線の<strong>負の傾きの大きさ</strong>が Ea</td></tr>
+<tr><td>Vo</td><td>Vo（容量軸上、原点のすぐ右）</td><td>容量軸上、およそ 5 mL の位置</td><td>EDPVR 上で圧がゼロのままである最大容量。ESPVR の直線外挿による容量軸切片</td></tr>
+<tr><td>収縮末期の点</td><td>Pes / ESV</td><td>ループ左上角（およそ 40 mL、95 mmHg）</td><td>ESPVR と Ea 直線が交わる点。ここが SV と Pes を決める</td></tr>
+<tr><td>拡張末期の点</td><td>EDP / EDV</td><td>ループ右下角（およそ 125 mL、15 mmHg）</td><td>EDPVR 上の点</td></tr>
+</tbody></table></div>
+<p><strong>なぜこの図の読み方が実務に効くのか</strong>：ESPVR（心臓側の性質）と Ea（血管側の性質）の<strong>2本の直線の交点</strong>が、その心拍の収縮末期の圧と容量、すなわち Pes と ESV を決める。EDV が決まっていれば SV も決まる。<strong>心臓と血管を1枚の平面上で同時に扱えるようにしたのが Sunagawa らの枠組みの本質</strong>である。</p>
+<h4>4-4. EDPVR が動くとき</h4>
+<ul><li>心室の<strong>硬さが増すと EDPVR は左上方へシフト</strong>し、<strong>硬さが下がると右下方へシフト</strong>する。</li><li>同一の EDPVR 上でも、容量が増えると圧が上がり始め、<strong>大容量では圧が不釣り合いに上昇する</strong>。つまり作動時の chamber stiffness は高容量ほど大きくなる（volume-dependent changes in chamber stiffness）。</li><li><strong>心室の硬さを決めるもの</strong>：心室（chamber）の形状（心室重量あるいは壁厚 / EDV 比）と、心筋の材料特性。後者は心筋細胞および／または細胞外マトリックスの変化に由来し、<strong>急性には炎症と浮腫</strong>で、<strong>慢性にはコラーゲン代謝の変化</strong>などで起こる。</li><li><strong>心臓外の因子</strong>：心膜疾患、胸腔内圧、肺と胸壁のメカニクスが心臓全体の実効コンプライアンスを変えうる。</li><li><strong>弛緩過程</strong>：心室充満の速度と程度、したがって拡張期容量と圧を左右するもう1つの重要因子が心筋弛緩の過程で、これは<strong>心筋虚血で急性に障害される</strong>。</li></ul>
+<h4>4-5. ESPVR と Ees</h4>
+<ul><li>ESPVR は筋フィラメント最大活性化時点での心腔の硬さを反映する。負荷条件を変えて一連の PVL を描き、各ループの収縮末期の圧容量点を結んで得る。</li><li>Suga と Sagawa が、心室圧と容量の収縮末期における関係が<strong>心臓の作動圧容量域では概ね直線的</strong>であることを示し、これを<strong>負荷非依存性の収縮性指標</strong>として最初に用いた（本文は 1969 年としている。引用文献29 は Circ Res 1974）。</li><li><strong>Ees（mmHg/mL）= Pes /（ESV − Vo）</strong>。Vo は ESPVR の直線外挿から得られる容量軸切片。</li><li><strong>急性の収縮性変化では Ees が変化し、Vo はほとんど変わらない</strong>。ただし<strong>大きくリモデリングを起こした心臓では、LV 収縮性の変化を定量するのに Ees と Vo の両方の考慮が必要</strong>になる。</li></ul>
+<h4>4-6. Ea（実効動脈エラスタンス）</h4>
+<ul><li>Sunagawa らが、心室が動脈系と相互作用して SV と圧（Pes）を決める仕組みを説明する理論枠組みとグラフ表現を構築した。このアプローチでは<strong>動脈負荷も圧容量平面上に表現する必要がある</strong>。</li><li>心室と同じく、動脈系も圧が容量に応じて周期的に変化する弾性チャンバー（Ea, mmHg/mL）と見なせる。<strong>SV が2つのチャンバーにどう分配されるかは相対エラスタンス（Ea/Ees）で決まる</strong>。</li><li>ただし <strong>Ea の主たる決定因子は動脈系の物理的コンプライアンスではなく「抵抗」であるため、"effective（実効）" エラスタンスと呼ばれる</strong>。</li><li>3要素 Windkessel モデルに基づき、動脈入力インピーダンスの<strong>定常・非拍動成分（末梢抵抗）と拍動成分（コンプライアンスと特性インピーダンス）</strong>を統合して Ea が導かれた。簡略化の仮定により、Ea は次の3通りで表せる：</li></ul>
+<div class="tw"><table>
+<thead><tr><th>表し方</th><th>式・作図</th></tr></thead>
+<tbody>
+<tr><td>近似式</td><td>Ea ≒ 総末梢血管抵抗 × 心拍数</td></tr>
+<tr><td>比</td><td>Ea ＝ Pes / SV</td></tr>
+<tr><td>作図</td><td>収縮末期の圧容量座標と、圧ゼロにおける EDV とを結ぶ直線の負の傾き</td></tr>
+</tbody></table></div>
+<ul><li><strong>動脈圧は「動脈の性質」と「心室の性質」の積であるのに対し、Ea は流れに対抗する動脈系固有の性質を包括的に記述する</strong>。これが「後負荷の指標として血圧より Ea を見る」ことの理由である。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Ea は純粋な動脈負荷の指標ではない <mark class="hl"><strong>動脈インピーダンスは心拍数に非依存だが、Ea は心拍数に有意に影響される</strong></mark>。心拍数が変わっただけで Ea は動く。したがって「Ea が上がった＝血管が締まった」と短絡してはいけない。この点は著者ら自身が明記している留保で、後述する <strong>ドブタミンで Ea がほとんど変わらない</strong>（SVR 低下を心拍数上昇が相殺する）という現象の説明そのものでもある。</p>
+</div>
+<h4>4-7. PVA と心筋酸素消費（VO₂）</h4>
+<p>圧容量図は心室のメカニクスを記述するだけでなく、<strong>心筋 VO₂ の決定因子を理解する枠組み</strong>も与える。</p>
+<div class="tw"><table>
+<thead><tr><th>量</th><th>定義</th><th>図中の位置</th></tr></thead>
+<tbody>
+<tr><td>SW（stroke work, 外的機械的仕事）</td><td>SW ＝ Pes × SV。1回拍出量を駆出するために心室が行った外的仕事。Frank が最初に特徴づけた</td><td>PVL の内側の面積（Fig. 1 の薄い赤の網かけ）</td></tr>
+<tr><td>PE（potential energy）</td><td>収縮末期に残る機械的位置エネルギー</td><td>EDPVR・ESPVR・PVL の拡張期部分で囲まれた面積（Fig. 1 の薄い青の網かけ）</td></tr>
+<tr><td>PVA（pressure–volume area）</td><td>PVA ＝ SW ＋ PE</td><td>上記2つの面積の合計</td></tr>
+</tbody></table></div>
+<ul><li>Suga が <strong>SW と PE の合計（PVA）と心筋 VO₂ の強い正の相関</strong>を示した。</li><li><strong>単位 SW あたりと単位 PE あたりの VO₂ コストは等しい</strong>。つまり「仕事として外に出たエネルギー」と「壁の中に取り残されたエネルギー」は、酸素の値段としては同じである。</li><li>PVA はアクチン–ミオシンのクロスブリッジ循環に由来する総機械的仕事を表す。</li><li><strong>PVA 非依存性の VO₂ 決定因子</strong>は、基礎代謝と、興奮–収縮–弛緩に伴うカルシウム循環のコストの2つ。</li></ul>
+<p>この「PVA 非依存性の成分」があるために、後述のとおり <strong>ドブタミンは PVA 依存性・非依存性の両方で VO₂ を増やし、バソプレシンは PVA 依存性にのみ増やす</strong>という差が生まれる。カテコラミンはカルシウム循環そのものを増やすからである。</p>
+<h4>4-8. 心室–動脈カップリング</h4>
+<ul><li><strong>Ea/Ees が EF と SV を決め、各パラメータの絶対値が Pes を決める</strong>。</li><li><strong>正常な Ea/Ees は体循環・肺循環とも約 0.6</strong>。EF・SV とは逆相関する。</li><li>比が上がると（Ea の上昇および／または Ees の低下）、<strong>心室は動脈系から「アンカップル（uncoupled）」した</strong>といい、EF と SV が低下する。比が下がると逆で、Ea が下がるか Ees が上がるとカップリングの程度は増す。</li><li><strong>Ea と Ees が同じ程度に増えれば、Pes は上がるが EF と SV は変わらない</strong>。同じ程度に減れば逆になる。</li></ul>
+<h4>4-9. 前負荷・後負荷・収縮性・心拍数が PVL 上でどう現れるか</h4>
+<div class="call note"><span class="lab">補足</span>
+<p>これは論文本文の記述ではなく、上記の関係から導かれる読み方の整理（一般的な背景知識） 本稿は「前負荷を上げたときのループの形」を独立した節では説明していない。以下は Fig. 1 の作図規則と本文中の Ea・Ees・EDPVR の記述から機械的に導かれるもので、<strong>論文の主張ではなく読み方の補助</strong>である。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>変えるもの</th><th>PVL 上での現れ方</th><th>ESPVR・EDPVR・Ea 直線への影響</th></tr></thead>
+<tbody>
+<tr><td>前負荷（EDV）を上げる</td><td>ループの右端が右へ伸び、幅（SV）が広がる。EDP は EDPVR に沿って上がる</td><td>ESPVR・EDPVR は動かない。Ea 直線の足（圧ゼロの EDV 点）が右へ移る</td></tr>
+<tr><td>後負荷（Ea）を上げる</td><td>ループが縦に高く、幅は狭くなる。ESV が増え SV が減る</td><td>ESPVR・EDPVR は動かない。Ea 直線が急峻になり、ESPVR との交点が上方・右方へ移る</td></tr>
+<tr><td>収縮性（Ees）を上げる</td><td>ループの左上角が左上へ移り、ESV が減って幅（SV）が広がる</td><td>ESPVR が反時計回りに立ち上がる（Vo はほぼ不変）。EDPVR・Ea 直線は動かない</td></tr>
+<tr><td>心室が硬くなる（拡張障害）</td><td>ループの右下角が上へ持ち上がり、同じ EDV でも EDP が高くなる</td><td>EDPVR が左上方へシフト</td></tr>
+<tr><td>心拍数を上げる</td><td>1拍ごとのループは小さくなりうる</td><td><strong>Ea が上がる</strong>（Ea ≒ 総末梢血管抵抗 × 心拍数）。ESPVR・EDPVR は直接には動かない</td></tr>
+</tbody></table></div>
+<h3>5. ベッドサイドで何が測れて何が測れないか 🩺</h3>
+<div class="call note"><span class="lab">補足</span>
+<p>本稿はこの点をほとんど扱っていない — 以下は「本文にあること」と「本文に無いこと」の切り分け <strong>本文にあること</strong>：</p>
+<ul><li>高度血行動態モニタリングは推奨されているが、侵襲リスク・転帰改善エビデンスの欠如・解釈の習熟度不足という3つの理由で精査に晒されている（イントロ）。</li><li><strong>VA-ECMO 中は、LV の負荷状態を判定するためにエコーで LV 径を評価する必要がある</strong>（Fig. 5A キャプション）。大動脈弁が開かなくなると動脈圧波形は非拍動性になり、LV 収縮期圧は高いままでも動脈圧からは分からないため。</li></ul>
+<p><strong>本文に無いこと（＝この論文からは答えが出ない）</strong>：</p>
+<ul><li>Ees・Ea をベッドサイドでどう推定するか（single-beat 法、エコーによる非侵襲的推定など）の手順は<strong>一切書かれていない</strong>。</li><li>PVL を臨床で取得するにはコンダクタンスカテーテル等の左室内圧容量計測が必要だが、その適応・手技・限界も<strong>本稿の範囲外</strong>。</li><li>Ea/Ees を治療目標として使った臨床試験の有無も触れられていない。</li></ul>
+<p>したがって本稿は「PVL を測れ」という論文ではなく、<strong>測れない量を頭の中のモデルとして持ち、測れる量（血圧・心拍数・心拍出量・EF・エコーでの LV 径・拡張期圧）を解釈するために使え</strong>、という論文である。</p>
+</div>
+<h3>6. 薬剤を Ea・Ees・SBV に翻訳する 💊</h3>
+<p>以下はすべて本文（SIMULATIONS 節）の記述をそのまま整理したもの。<strong>血管作動薬は「薬剤名・薬効分類」ではなく、Ea・Ees・両者の関係、そしてそこから決まる動脈圧と SV への効果として捉える</strong>、というのが著者らの視点である。</p>
+<h4>Table 1. 4薬剤＋輸液の作用（本文を表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>血管への作用</th><th>Ea</th><th>Ees</th><th>Ea/Ees</th><th>EF・SV</th><th>ESV / EDV / EDP</th><th>Pes</th><th>心筋 VO₂</th></tr></thead>
+<tbody>
+<tr><td>ノルアドレナリン（inoconstrictor）</td><td>体血管抵抗血管と静脈容量血管を収縮。静脈容量の低下が、総血液量（TBV）を変えずに SBV と体静脈還流を増やす</td><td>上昇（SVR 上昇＋頻脈が寄与）</td><td>上昇</td><td>上昇（Ea が収縮性・Ees より大きく上昇するため）</td><td>低下</td><td>ESV 上昇＋SBV 上昇 → LV EDV・EDP ともに上昇</td><td>上昇（Ea と Ees の両方が上がるため）</td><td>PVA 依存性・非依存性の双方で増加</td></tr>
+<tr><td>バソプレシン（AVP、vasopressor）</td><td>体血管抵抗血管と静脈容量血管を収縮。Ees は変化させない</td><td>上昇</td><td>不変</td><td>上昇（同じ Ea 上昇ならノルアドレナリンより Ea/Ees の上昇が大きい）</td><td>低下</td><td>ESV 上昇＋SBV 上昇 → LV EDP 上昇</td><td>上昇（Ea 上昇による）</td><td>PVA 依存性のみで増加</td></tr>
+<tr><td>ドブタミン（inodilator）</td><td>体血管抵抗血管と静脈容量血管を拡張。静脈拡張が静脈容量を増やし SBV を減らす</td><td>低下方向だが、正味の効果は心拍数がどれだけ上がるかに依存</td><td>上昇</td><td>低下（主に Ees の上昇による）</td><td>上昇</td><td>ESV 低下＋SBV 低下 → EDP 低下</td><td>Ea と Ees の絶対変化次第。Ees の上昇が Ea の低下を上回れば上昇</td><td>PVA 依存性・非依存性の双方で増加</td></tr>
+<tr><td>ニトロプルシド（vasodilator）</td><td>動脈抵抗血管と静脈容量血管を拡張</td><td>低下</td><td>記載なし</td><td>低下</td><td>上昇</td><td>ESV 低下＋静脈容量の増加 → EDP 低下</td><td>低下（Ea 低下による）</td><td>PVA 依存性に減少</td></tr>
+<tr><td>血管内容量投与（輸液）</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>TBV を増やし、したがって SBV と体静脈還流を増やす</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>この表から読み取るべき3つのこと</h4>
+<p><strong>① 昇圧薬にも「前負荷を増やす作用」がある。</strong> ノルアドレナリンと AVP は静脈容量血管を収縮させることで、<strong>総血液量を1 mL も増やさずに SBV と静脈還流を増やす</strong>。輸液は総血液量そのものを増やして SBV を増やす。到達点は同じ「SBV 増加」でも経路が違う。</p>
+<p><strong>② AVP とノルアドレナリンの差は Ees にある。</strong> 同じだけ Ea を上げたとして、ノルアドレナリンは Ees も一緒に上げるが、AVP は Ees を動かさない。したがって <strong>AVP のほうが Ea/Ees の上昇が大きく、EF と SV の低下も大きい</strong>。心筋 VO₂ も、ノルアドレナリンは PVA 依存性・非依存性の両方で増やすのに対し、AVP は PVA 依存性にのみ増やす。</p>
+<p><strong>③ ドブタミンは「血管拡張薬」として振る舞うとは限らない。</strong> 動脈抵抗血管を拡げて SVR を下げるが、<strong>心拍数の上昇が Ea を押し上げるため、正味の Ea は下がらないことがある</strong>。実際 Fig. 3C と Fig. 4B のシミュレーションでは Ea の変化はほぼゼロで、収縮期血圧（LV 後負荷）はむしろ上昇した。</p>
+<h3>7. 重症敗血症・敗血症性ショック 🦠</h3>
+<p>重症敗血症の管理が臨床的に難しい理由の一部は、<strong>その呈し方と経過が異質（heterogeneous）</strong>であることにある。続いて起こる炎症反応は、循環のあらゆる側面に影響しうる：</p>
+<ul><li>肺および体循環の<strong>抵抗血管のトーヌス</strong>の変化</li><li><strong>静脈容量血管のトーヌス</strong>の変化（→ SBV と体静脈還流に影響）</li><li><strong>両心室の拡張機能</strong>（弛緩障害と心室硬さの増加）と<strong>収縮機能</strong></li></ul>
+<p><strong>このような臨床的異質性のもとでは、コンセンサス由来のガイドラインが示すようなアルゴリズム的な蘇生アプローチは問題を孕みうる</strong>、というのが著者らの主張である。</p>
+<h4>本稿が引用する現行推奨</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>初期輸液</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>小児</td><td>最初の1時間に晶質液 40〜60 mL/kg</td><td>Surviving Sepsis Campaign 小児版（Weiss, Pediatr Crit Care Med 2020）</td></tr>
+<tr><td>成人</td><td>最初の3時間に少なくとも 30 mL/kg</td><td>SSC 2021（Evans, Crit Care Med 2021）／SSC バンドル 2018 更新（Levy, Intensive Care Med 2018）</td></tr>
+</tbody></table></div>
+<p>初期輸液蘇生にもかかわらず低血圧または灌流不足が続けば、血管作動薬治療が推奨される。ただし<strong>どの血管作動薬（vasopressor・inoconstrictor・inodilator）を使うか、そしてその順序については、最近発表されたコンセンサス由来のガイドライン間で一致していない</strong>。この不一致があるからこそ、以下のシミュレーション（Fig. 2 と Fig. 3A–C）は、<strong>敗血症誘発の血行動態フェノタイプのスペクトラムを持つ患者に、コンセンサス由来のアルゴリズム的な蘇生ベースのガイドラインを適用したときの影響</strong>を図示するものになっている。</p>
+<h4>7-1. Fig. 2 — 血管麻痺（vasoplegia）を伴う重症敗血症を輸液＋昇圧薬で治療する</h4>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000006136" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000006136）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. Severe sepsis with vasoplegia treated with volume and a vasopressor（原図・無改変。©Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>ループに起きること</th></tr></thead>
+<tbody>
+<tr><td>ベースライン（血管麻痺）</td><td>SVR と Ea、したがって Pes が低下している。<strong>Ees は影響を受けていない</strong>。Ea/Ees の低下により <strong>EF はむしろ上昇</strong>している。一方で静脈拡張と SBV・体静脈還流の低下により、<strong>EDV したがって SV は著明に減少</strong>している</td></tr>
+<tr><td>血管内容量の投与</td><td>TBV を増やし、したがって SBV、静脈還流、最終的に EDV・SV・Pes を増やす</td></tr>
+<tr><td>AVP の追加</td><td>Ea を上げ、したがって Ea/Ees を上げる。その結果 <strong>EF と SV は低下</strong>し、<strong>Pes は上昇</strong>する。ESV と SBV の増加が EDV と EDP を上げる</td></tr>
+</tbody></table></div>
+<p><strong>この図の教育的な要点</strong>：血管麻痺の敗血症では、<strong>収縮性が正常でも EF は「良く見える」</strong>（Ea が下がっているため）。そして <strong>AVP を足すと血圧は上がるが EF・SV は下がる</strong>。「昇圧薬を入れたら EF が下がった」は薬剤性の心筋抑制ではなく、Ea/Ees が上がっただけかもしれない。</p>
+<h4>7-2. Fig. 3 — LV 収縮性が低下した重症敗血症の3戦略比較（本稿で最も実務的な図）</h4>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000006136" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000006136）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. Treatment of severe sepsis with decreased left ventricular contractility（A: 輸液＋昇圧薬／B: 輸液＋inoconstrictor／C: 輸液＋inodilator。原図・無改変。©Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<p><strong>A：輸液＋昇圧薬（AVP）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>所見</th></tr></thead>
+<tbody>
+<tr><td>ベースライン</td><td>収縮性が明らかに低下しているにもかかわらず、<strong>EF は低下しつつも正常域（55%）にとどまる</strong>。理由は、Ees の低下が SVR と Ea（動脈負荷）の低下によって部分的に相殺されるため。ESV は増えるが、SBV と静脈還流の低下により <strong>EDV と EDP は不変</strong>。Ea と Ees の低下により<strong>冠灌流圧（CPP＝大動脈拡張期圧 − LV EDP）が不十分</strong></td></tr>
+<tr><td>輸液後</td><td>TBV・SBV、最終的に EDV・SV・血圧が増える。しかし <strong>LV EDP がより大きく上昇（20 mmHg）したため CPP はさらに低下</strong>。加えて<strong>静水圧性肺水腫が発生</strong></td></tr>
+<tr><td>AVP 追加後</td><td>Ea と Ea/Ees が上がり、<strong>EF（48%）と SV は低下</strong>、ESV・SBV・EDP はさらに上昇。<strong>血圧は著明に上昇したにもかかわらず、LV EDP の上昇のため CPP は不十分なまま（39 mmHg）</strong>で、肺水腫も悪化</td></tr>
+</tbody></table></div>
+<p><strong>B：輸液＋inoconstrictor（ノルアドレナリン）</strong></p>
+<p>輸液に続いてノルアドレナリンを投与すると、<strong>Ea を Ees より大きく上げる</strong>ため Ea/Ees が上昇し、<strong>輸液単独に比べ EF と SV は低下</strong>する。ただし Ea と Ees の上昇が収縮末期圧を上げ、<strong>EDP が高いままでも十分な CPP を生む</strong>。EDP は ESV と SBV の増加により高値のまま。</p>
+<p><strong>C：輸液＋inodilator（ドブタミン）</strong></p>
+<p>輸液に続いてドブタミンを投与し、<strong>Ees の上昇がノルアドレナリンによるものと同程度になるように漸増</strong>した。SVR の低下が心拍数の上昇で相殺されるため、<strong>Ea の変化はゼロ</strong>。Ea/Ees の低下により EF と SV が上昇。Ees の上昇と Ea のほぼ不変により<strong>血圧と CPP が上昇（42 mmHg）</strong>。ESV と SBV の低下により <strong>LV EDV と EDP が低下</strong>。<strong>血管拡張作用を持つにもかかわらず動脈負荷 Ea は目立って変化せず、LV 後負荷（収縮期血圧）はむしろ上昇した</strong>。</p>
+<p><strong>B と C の直接比較</strong>（Ees と心拍数への効果を揃えた場合）</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>inoconstrictor（B・ノルアドレナリン）</th><th>inodilator（C・ドブタミン）</th></tr></thead>
+<tbody>
+<tr><td>SV</td><td>基準</td><td>約10% 大きい</td></tr>
+<tr><td>心拍出量</td><td>基準</td><td>約600 mL/分 大きい</td></tr>
+<tr><td>LV EDP</td><td>22 mmHg</td><td>17 mmHg</td></tr>
+<tr><td>血圧</td><td>高い</td><td>低い</td></tr>
+<tr><td>CPP</td><td>高い</td><td>低い（ただし 42 mmHg で確保）</td></tr>
+<tr><td>心筋 VO₂</td><td>高い</td><td>低い</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「血圧が上がった」を治療の成功と読まない Fig. 3A では、輸液と AVP で <mark class="hl"><strong>血圧は著明に上昇したのに、CPP は 39 mmHg で不十分なまま、肺水腫はむしろ悪化した</strong></mark>。CPP の分子（大動脈拡張期圧）を上げても、同時に分母側の LV EDP が上がれば冠灌流は改善しない。<mark class="hl"><strong>収縮性の落ちた敗血症患者で見るべきは血圧ではなく CPP と LV EDP の組</strong></mark> である。</p>
+</div>
+<h3>8. 急性 LV 収縮不全による心原性ショック 🫀</h3>
+<p>敗血症と同様、<strong>呈示時の血行動態フェノタイプは複数の因子によって変わりうる</strong>：傷害の機序、神経体液性活性化の程度と、それが抵抗血管・静脈容量血管のトーヌスおよび TBV に及ぼす効果、構造的心疾患の有無、右心機能障害の程度。</p>
+<p><strong>小児でも成人でも、急性 LV 収縮不全を治療する最適な血管作動薬レジメンについてのコンセンサスは存在しない</strong>。本稿が引用する各声明：</p>
+<div class="tw"><table>
+<thead><tr><th>声明</th><th>年</th><th>推奨内容</th></tr></thead>
+<tbody>
+<tr><td>AHA 小児心筋炎に関する声明</td><td>2021</td><td>低血圧でない限り、<strong>ミルリノンなどの inodilator を第一選択</strong>とする。低血圧なら inoconstrictor または vasopressor を推奨</td></tr>
+<tr><td>小児の心肺蘇生・救急心血管治療に関する国際コンセンサス（Circulation）</td><td>2020</td><td>「心原性ショックの乳幼児・小児における強心薬サポートには、アドレナリン、レボシメンダン、ドパミン、ドブタミンを使うことが妥当である」</td></tr>
+<tr><td>AHA 成人心筋炎に関する科学的声明</td><td>2022</td><td><strong>ノルアドレナリン・ドパミンなどの inoconstrictor</strong> を強調。症例によっては AVP・フェニレフリンなどの vasopressor も、原因と血行動態フェノタイプに応じて</td></tr>
+<tr><td>AHA 成人心原性ショックに関する科学的声明</td><td>2017</td><td>同上</td></tr>
+</tbody></table></div>
+<p>このように推奨が広い（＝定まっていない）ことを踏まえ、著者らは <strong>体重 60 kg・体表面積 1.6 m² の急性 LV 収縮不全による心原性ショック患者</strong>を設定し、inoconstrictor／vasoconstrictor 戦略と inodilator／vasodilator 戦略を対比する。</p>
+<h4>8-1. Fig. 4 — 急性 LV 収縮性心不全の薬物管理</h4>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000006136" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000006136）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. Medical management of acute left ventricular systolic heart failure（A: inoconstrictor ＋ vasopressor／B: inodilator ＋ vasodilator。原図・無改変。©Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<p><strong>A：inoconstrictor ＋ vasopressor</strong></p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>所見</th></tr></thead>
+<tbody>
+<tr><td>ベースライン</td><td><strong>神経体液性活性化が SVR と心拍数を上げるため Ea が著明に上昇</strong>。これに Ees の著明な低下が加わり、Ea/Ees が大きく上昇して EF と SV が著明に低下。ESV の増加と静脈収縮による SBV の増加が EDV と EDP を上げる</td></tr>
+<tr><td>重要な対比</td><td><strong>急性 LV 収縮不全では EDV の増加は比較的限られる</strong>。これは、心室リモデリングにより chamber の著明な拡大（EDV 増加）と心室硬さの低下が起こる<strong>慢性</strong> LV 収縮不全とは対照的</td></tr>
+<tr><td>ノルアドレナリン追加</td><td>Ea/Ees を上げ、EF と SV が低下。Ea と Ees がともに上がるため <strong>Pes は著明に上昇</strong>。ESV と SBV の増加が EDV と EDP をさらに上げる</td></tr>
+<tr><td>AVP 追加</td><td>Ea と Ea/Ees をさらに上げ、EF と SV はさらに低下。ESV と SBV の増加が EDV と EDP をさらに上げる</td></tr>
+</tbody></table></div>
+<p><strong>B：inodilator ＋ vasodilator</strong></p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>所見</th></tr></thead>
+<tbody>
+<tr><td>ドブタミン</td><td>Ees を上げる。SVR の低下が心拍数の上昇で相殺されるため <strong>Ea の変化はゼロ</strong>。Ea/Ees の低下により EF と SV が上昇し、<strong>Ees の上昇が Ea の低下を上回るため、Pes だけでなく平均圧・収縮期圧も上昇</strong>。ESV の低下と SBV の低下により EDV と EDP が低下</td></tr>
+<tr><td>ニトロプルシド追加</td><td>SVR と Ea を下げ、Ea/Ees を下げるため EF と SV がさらに上昇。<strong>Ea 単独の低下により Pes は低下</strong>。ESV の低下に加えて追加の静脈拡張と SBV の減少により、EDV と EDP はさらに低下</td></tr>
+<tr><td>臨床上の但し書き</td><td>これらの変化は<strong>心臓の観点からは概ね好ましいが、血圧が末梢臓器灌流に不十分であれば臨床的に許容されない可能性がある</strong>。本シミュレーションではニトロプルシドは<strong>平均血圧 &gt; 65 mmHg を保つように漸増</strong>された</td></tr>
+</tbody></table></div>
+<p><strong>A と B の直接比較</strong>（LV Ees と心拍数の上昇幅を揃えた場合）</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>A（inoconstrictor＋vasopressor）</th><th>B（inodilator＋vasodilator）</th></tr></thead>
+<tbody>
+<tr><td>SV</td><td>基準</td><td>約35% 大きい</td></tr>
+<tr><td>心拍出量</td><td>基準</td><td>1.3 L/分 超 大きい</td></tr>
+<tr><td>EDP</td><td>原文は「20 vs. 30 mmHg」と記載（下記の批判的吟味を参照）</td><td>同左</td></tr>
+<tr><td>灌流圧</td><td>高い</td><td>低い</td></tr>
+<tr><td>CPP</td><td>—</td><td>45 mmHg で十分</td></tr>
+<tr><td>心筋 VO₂</td><td>高い</td><td>低い</td></tr>
+</tbody></table></div>
+<p><strong>敗血症（Fig. 3）と心原性ショック（Fig. 4）で同じ結論が出ている</strong>点が重要である。すなわち、<strong>Ees の上げ幅と心拍数を揃えたとき、inodilator 系の戦略のほうが SV・心拍出量が大きく、EDP は低く、心筋 VO₂ も低い。代償は灌流圧の低さである</strong>。差の大きさは心原性ショック（SV 約35%、CO &gt; 1.3 L/分）のほうが敗血症（SV 約10%、CO 約600 mL/分）より大きい。</p>
+<h3>9. 急性機械的循環補助（MCS）🔧</h3>
+<p><strong>MCS デバイスの最適な選択とその留置のタイミングは依然として不明</strong>で、実臨床には大きなばらつきがある。</p>
+<p><strong>MCS の目標は、十分な血圧と流量を生むことだけではなく、LV をアンロード（unload）することにある</strong>。アンロードすることで心筋の保護と温存が最適化され、肺傷害の程度も最小化される。</p>
+<p>しかし <strong>VA-ECMO は LV をアンロードしない</strong>。LV が容量・圧の両方で負荷され続ける限り、そして心筋が回復しうるという前提に立つ限り、<strong>VA-ECMO で支持された患者において LV アンローディング戦略をどこまで積極的に追求すべきかについては相当な議論がある</strong>。それが心筋温存を最適化し転帰を改善するという決定的なデータが存在しないためである（Donker, Burkhoff &amp; Mack, JACC 2022「ECMO: We need to vent about the need to vent!」／Stewart, JACC Heart Fail 2018）。</p>
+<h4>9-1. Fig. 5 — 急性 LV 収縮性心不全に対する機械的循環補助</h4>
+<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000006136" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000006136）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 5. Mechanical circulatory support of acute left ventricular systolic heart failure（A: VA-ECMO／B: VA-ECMO ＋ LVAD（Impella）／C: VA-ECMO ＋ 血管拡張薬・利尿薬。原図・無改変。©Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<p><strong>A：VA-ECMO 単独 — 流量を上げるほど LV には不利になる</strong></p>
+<div class="tw"><table>
+<thead><tr><th>流量を上げていくと</th><th>起きること</th></tr></thead>
+<tbody>
+<tr><td>大動脈圧</td><td>さらに上昇する</td></tr>
+<tr><td>Ea</td><td>上昇する（大動脈圧上昇に伴い実効動脈エラスタンスが上がる）</td></tr>
+<tr><td>Ea/Ees</td><td>上昇する</td></tr>
+<tr><td>SV</td><td>Ea/Ees の上昇の結果、<strong>低下する</strong></td></tr>
+<tr><td>LV EDV・EDP</td><td>ESV の増加に加え、<strong>肺循環を通る残存血流・テベシウス静脈のドレナージ・気管支血流の左房への還流</strong>があるため、<strong>高いまま</strong>留まる。すなわち <strong>LV は容量・圧の両方で負荷され続ける</strong></td></tr>
+<tr><td>ある流量に達すると</td><td>Ea の上昇が大きくなりすぎ、<strong>与えられた LV 収縮性と前負荷では大動脈弁を開けるだけの圧を LV が生成できなくなる</strong></td></tr>
+</tbody></table></div>
+<p><strong>大動脈弁が開かなくなったときに図で見えるもの</strong>：</p>
+<ul><li>インセットの LV 圧トレース（緑）と大動脈圧トレース（赤）が<strong>解離する</strong></li><li>自己拍出はゼロになり、<strong>大動脈圧は非拍動性</strong>になる</li><li><strong>LV が駆出していなくても、LV 収縮期圧は著明に高いままでありうる</strong></li><li>右端の PV ループは、圧を生成しているが SV がゼロなので<strong>幅がなく縦線のように見える</strong></li><li>この状態では <strong>PVA と心筋 VO₂ は高いまま</strong></li></ul>
+<p><strong>この状態での実務</strong>：</p>
+<ul><li><strong>LV の負荷状態を判定するにはエコーで LV 径を評価する必要がある</strong>（動脈圧波形だけでは分からない）</li><li>LV EDV が高いままなら、LV は（大動脈圧より低いとはいえ）相当な圧を生成できている可能性がある</li><li>とくに急性 LV 収縮不全では、EDV が高ければ EDP も高い可能性が最も高い</li><li>この場合、<strong>アンローディングの欠如が急性肺傷害と肺水腫に寄与している</strong></li></ul>
+<p><strong>B：VA-ECMO ＋ LVAD（経皮的 Impella、Abiomed 社）</strong></p>
+<p>LVAD 流量を上げて直接的に LV をアンロードしていくと：</p>
+<ul><li><strong>LV EDV と EDP が漸進的に低下</strong>し、LV が圧を生成する能力が下がる</li><li>最終的に <strong>LV 収縮期圧と大動脈圧が解離</strong>する</li><li><strong>PVA と心筋 VO₂ が著明に減少</strong>する</li><li>一方で <strong>CPP は著明に上昇</strong>する（大動脈拡張期圧の上昇と LV EDP の低下の両方による）</li><li>結果として、<strong>心筋の酸素消費／供給の関係が最適化され、LV への機械的ストレスが減り、肺毛細管静水圧が最小化される</strong></li></ul>
+<p><strong>C：VA-ECMO ＋ 血管拡張薬・利尿薬 — 薬でアンロードする</strong></p>
+<div class="tw"><table>
+<thead><tr><th>追加するもの</th><th>起きること</th></tr></thead>
+<tbody>
+<tr><td>ニトロプルシド</td><td>SVR と Ea、そして Ea/Ees を下げ、<strong>SV が著明に増加</strong>。Pes も低下。ESV の低下と SBV の低下により <strong>EDV と EDP が明らかに低下</strong></td></tr>
+<tr><td>利尿薬</td><td>総血液量を減らすことで <strong>SBV をさらに低下</strong>させる</td></tr>
+<tr><td>図で見えること</td><td>LV の負荷条件の低下が、<strong>PV ループの左下方への漸進的なシフト</strong>として現れる。<strong>PVA と心筋 VO₂ は著明に減少</strong></td></tr>
+<tr><td>CPP</td><td><strong>大動脈拡張期圧は下がるのに、LV EDP が同時に著明に下がるため CPP は十分に保たれる</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>VA-ECMO で「流量を上げれば良くなる」わけではない <mark class="hl"><strong>VA-ECMO の流量を上げるほど Ea が上がり、Ea/Ees が上がり、SV は減る</strong></mark>。ある流量を超えると大動脈弁が開かなくなり、動脈圧は非拍動性になる。このとき <strong>LV 収縮期圧は高いまま、PVA と心筋 VO₂ も高いまま</strong>で、LV は最も損な状態に置かれる。<mark class="hl"><strong>動脈圧波形が平坦になったら、それは「うまくいっている」ではなく「LV が閉じ込められた」のサインとして読み、エコーで LV 径と EDV を確認する</strong></mark>。</p>
+</div>
+<h3>10. 結論（原文）📝</h3>
+<p>Suga と Sunagawa、そして他の研究者らの仕事は、<strong>心血管系全体をモデル化するアプローチを提供</strong>し、したがって心血管の生理・病態生理と治療のインパクトを理解し、シミュレートし、図示するための基盤を与える。</p>
+<p>（アブストラクトの CONCLUSIONS ではさらに「複雑な病態生理学的異常が、臨床医がベッドサイドで用いる臨床パラメータをどのように変えるかを実証した」と述べられている。）</p>
+<h2>🔍 既存ノートとの整合 — PDF 精読で見つかった旧記述の誤り</h2>
+<p>本ノートは 2026-08-02 版（151行）の改稿である。原著 PDF 全12ページと突き合わせた結果、以下を訂正・補完した。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧記述</th><th>PDF の記載</th><th>対応</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「SV が約10%（約600 mL/分）多く」</td><td>"the SV and thus cardiac output are greater (~10% and ~600 mL/min, respectively)" ＝ <strong>SV が約10%、心拍出量が約600 mL/分</strong></td><td>訂正。約600 mL/分は SV ではなく<strong>心拍出量</strong>の差。SV の絶対値は 600 mL などではない</td></tr>
+<tr><td>2</td><td>「本稿は…<strong>患者データも抄録もない</strong>」</td><td>本稿には <strong>OBJECTIVES / DATA SOURCES / STUDY SELECTION, DATA EXTRACTION, AND SYNTHESIS / CONCLUSIONS の構造化抄録がある</strong></td><td>訂正。「患者データがない」は正しいが「抄録もない」は誤り</td></tr>
+<tr><td>3</td><td>「Harvi シミュレータは…<strong>本稿でその検証データは示されていない</strong>」</td><td>"The simulator has been summarized and validated as described in previous publications (32–34)" ＝ <strong>検証は引用文献32〜34（Burkhoff 2005／Burkhoff &amp; Tyberg 1993／Doshi &amp; Burkhoff 2016）で示されている</strong></td><td>訂正。総説として引用による提示は標準的で、「示されていない」は言い過ぎ。ただし<strong>引用元の3本はいずれも Burkhoff 自身が著者</strong>である点は批判点として残る</td></tr>
+<tr><td>4</td><td>「本ノートは PDF の1〜10ページから抽出した範囲に基づく。<strong>MCS の節と Fig. 5 以降は反映していない</strong>」</td><td>本文9ページに MCS の節、8ページに Fig. 5A–C がある</td><td>補完。<strong>MCS 節・Fig. 5 の3パネルを全面追加</strong>（本ノート §9）</td></tr>
+<tr><td>5</td><td>心原性ショックの節が <strong>Fig. 4A のみ</strong>で、Fig. 4B（inodilator＋vasodilator）と A/B 比較の数値が欠落</td><td>Fig. 4B、および「SV 約35%・CO &gt; 1.3 L/分・EDP 20 vs 30 mmHg・CPP 45 mmHg」の比較がある</td><td>補完（本ノート §8-1）</td></tr>
+<tr><td>6</td><td>心原性ショックの症例設定の記載なし</td><td><strong>体重 60 kg・体表面積 1.6 m²</strong> と明記されている</td><td>補完</td></tr>
+<tr><td>7</td><td>成人・小児の初期輸液推奨の<strong>出典が不記載</strong></td><td>小児＝Weiss PCCM 2020、成人＝Evans CCM 2021／Levy ICM 2018</td><td>補完</td></tr>
+<tr><td>8</td><td>心原性ショックの推奨に関する<strong>4声明の記載なし</strong></td><td>AHA 小児心筋炎2021・小児 CPR 国際コンセンサス2020・AHA 成人心筋炎2022・AHA 成人心原性ショック2017</td><td>補完（本ノート §8 の表）</td></tr>
+<tr><td>9</td><td>利益相反の記載なし</td><td><strong>Burkhoff は本稿で用いた Harvi の設計者であり、PVLoops から資金提供を受けている</strong></td><td>補完。総説の解釈に直結する重要な情報</td></tr>
+<tr><td>10</td><td>「Suga と Sagawa が…最初に用いた」（年の記載なし）</td><td>本文は <strong>1969 年</strong>とするが、引用文献29 は <strong>Circ Res 1974</strong></td><td>補完＋内的不整合として批判点に記載</td></tr>
+<tr><td>11</td><td>Fig. 1 の各点・各辺の説明が文章のみ</td><td>図には Ejection / Isovolumic Contraction / Isovolumic Relaxation / Filling / Pes・ESV / EDP・EDV / Vo / Ees / Ea / SW / PE の12ラベルがある</td><td>補完。<strong>全ラベルを表に起こした</strong>（本ノート §4-2, §4-3）</td></tr>
+<tr><td>12</td><td>「ベッドサイドで何が測れるか」への言及なし</td><td>本文の唯一の該当記述は Fig. 5A の「エコーで LV 径を評価する必要がある」のみ</td><td>補完＋<strong>本文に無いこと</strong>を明示（本ノート §5）</td></tr>
+</tbody></table></div>
+<p><strong>生理の向きの照合結果</strong>：旧ノートの記載のうち、EDPVR のシフト方向（硬さ↑ で左上）、Ees と Vo の関係、Ea ≒ SVR × HR、Ea/Ees と EF・SV の逆相関、4薬剤それぞれの Ea・Ees・Ea/Ees・EF・SV・EDP・Pes・VO₂ の向き、Fig. 2 の「Ea/Ees 低下で EF 上昇」、Fig. 3A の「EF 55% → AVP 追加で 48%」「CPP 39 mmHg」、Fig. 3C の「CPP 42 mmHg」、Fig. 4A の「急性では EDV 増加は限定的」は、<strong>いずれも PDF と一致しており向きの誤りはなかった</strong>。</p>
+<p><strong>他ノートとの矛盾</strong>：<span class="wl">敗血症性心筋症（The Septic Heart・Chest2019）</span> や <span class="wl">敗血症における心機能障害（敗血症性心筋症）</span> が述べる「敗血症では後負荷低下により EF が保たれて見える」という記述と、本稿 Fig. 3A の「Ees 低下が SVR・Ea 低下で相殺されて EF 55%」は完全に整合する。<span class="wl">敗血症性ショックにおける血管収縮 — 昇圧薬は動脈だけに効いているのではない（What's New・ICM2024）</span> の「昇圧薬は静脈側にも効く」という主張は、本稿の「ノルアドレナリンは静脈容量を下げて SBV と静脈還流を増やす（TBV は不変）」と同じことを言っている。矛盾は見つからなかった。</p>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<p><strong>① これはエビデンスではなくモデルである。</strong> 著者らは「シミュレーションは処方箋ではなく、治療の転帰への影響を示すものでもない」と明記している。それでも Fig. 3・Fig. 4 の「inodilator のほうが SV が大きく EDP が低い」という結論は、読者に<strong>臨床的優越性の印象</strong>を残す。実臨床では DOREMI 試験（ミルリノン vs ドブタミン）のように、生理学的に説明のつく差が転帰の差にならない例が多数ある。<strong>「生理学的に望ましい」と「患者が良くなる」は別の主張である</strong>という線引きを、JC の最初に置くべき論点。</p>
+<p><strong>② 利益相反の構造。</strong> 本稿で用いた Harvi シミュレータは共著者 Burkhoff が設計し、彼は提供元 PVLoops から資金提供を受けている。さらにシミュレータの「検証」の根拠として挙げられた引用文献32〜34の3本すべてに Burkhoff が著者として入っている。<strong>モデルの妥当性が、モデル作成者自身の論文によってのみ担保されている</strong>構造は指摘しておくべき。</p>
+<p><strong>③ Fig. 4 の EDP の記載が Fig. 3 と逆順になっている。</strong> Fig. 3 の比較は "LV EDP lower (22 vs. 17 mm Hg) with the inodilator strategy" と書かれ、後ろの 17 が inodilator（＝低いほう）である。ところが Fig. 4 は「B（inodilator＋vasodilator）が lower EDP」としながら "(20 vs. 30 mm Hg)" と記載している。この順序では 30 が B になり文意と矛盾する。<strong>原著内の表記の不整合</strong>で、20 が B・30 が A と読むのが文意上の唯一の解釈である。数値を引用するときは注意が要る。</p>
+<p><strong>④ Suga &amp; Sagawa の年が本文と引用文献で食い違う。</strong> 本文は「1969年に負荷非依存性の収縮性指標を導入した」とするが、引用文献29 は Circ Res 1974 である。歴史的には Suga らの一連の仕事は1969年前後から始まっており誤りとは言い切れないが、<strong>引用の付け方としては整合していない</strong>。</p>
+<p><strong>⑤ 「アルゴリズム的蘇生は問題を孕みうる」という主張の証拠が示されていない。</strong> 著者らは SSC のような一律のアプローチを批判し、フェノタイプ別のアプローチを示唆する。しかし<strong>フェノタイプ別治療が一律治療より優れることを示した RCT は本稿では引用されていない</strong>。批判の対象（30 mL/kg）には大規模 RCT の裏づけがあるのに対し、代案には生理学的説明しかない、という非対称がある。</p>
+<p><strong>⑥ 右心と肺循環がまるごと欠落している。</strong> 「検討は LV と体循環に限定した」と明記されている。しかし ICU で困るのは右心（敗血症性右心不全、ARDS の急性肺性心、VA-ECMO 中の右心）である場面が多い。Ea/Ees の正常値 0.6 は肺循環にも当てはまるとしながら、右室のシミュレーションは1枚もない。<strong>本稿の枠組みをそのまま右心に当てはめてよいかは、本稿からは答えが出ない</strong>。</p>
+<p><strong>⑦ Ea が心拍数の関数であることの副作用が十分に議論されていない。</strong> Ea ≒ SVR × HR である以上、頻脈だけで Ea は上がる。ドブタミンの解説ではこの点が明示的に使われているが、<strong>Fig. 4A の「神経体液性活性化が SVR と心拍数を上げて Ea が著明に上昇」も同じ理屈</strong>である。すると「Ea を後負荷の指標として使う」ことの妥当性自体が、心拍数が大きく動く重症患者では揺らぐ。著者らは「Ea は純粋な動脈負荷の指標ではない」と1行で認めているが、その帰結（β遮断や心拍数コントロールが Ea を通じてカップリングを変える可能性）は議論されていない。</p>
+<p><strong>⑧ ベッドサイドでの測定法が書かれていない。</strong> Ees も Ea も Vo も、実臨床で測るには圧容量計測（コンダクタンスカテーテル）か single-beat 推定が要る。本稿は「高度血行動態モニタリングの解釈の習熟度が足りない」という問題意識から出発しながら、<strong>では何をどう測るのかを一切示さない</strong>。教育レビューとしての最大の弱点。</p>
+<p><strong>⑨ 血管麻痺で EF が「上がる」という記述の臨床的解像度。</strong> Fig. 2 のベースラインでは Ea/Ees 低下により EF が上昇している。しかし実臨床の敗血症で EF が上昇して見えるケースの一部は測定の問題（心拍数、負荷条件、画質）でもある。<strong>シミュレーションでは EF は決定論的に出るが、ベッドサイドの EF はそうではない</strong>。</p>
+<p><strong>⑩ 小児と成人が混在している。</strong> 著者チームは小児集中治療医が主体で、小児の推奨（40〜60 mL/kg／1時間、AHA 小児心筋炎声明、小児 CPR 国際コンセンサス）と成人の推奨（30 mL/kg／3時間、AHA 成人声明）が同じ文脈で並べられ、シミュレーション自体は成人（60 kg、BSA 1.6 m²）で行われている。<strong>どちらの読者に向けた推奨なのかが節ごとに揺れている</strong>。</p>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>臨床診察は血行動態評価の引き金にはなるが代替にはならない</td><td>De Backer D, Vieillard-Baron A. Intensive Care Med 2019;45:269-271</td></tr>
+<tr><td>6</td><td>慢性心不全において身体徴候から血行動態を推定する信頼性は限られる</td><td>Stevenson LW, Perloff JK. JAMA 1989;261:884-888</td></tr>
+<tr><td>11</td><td>進行心不全患者では臨床評価と侵襲的血行動態が乖離する</td><td>Narang N, et al. J Card Fail 2020;26:128-135</td></tr>
+<tr><td>12</td><td>循環性ショックと血行動態モニタリングに関する ESICM コンセンサス</td><td>Cecconi M, De Backer D, Antonelli M, et al. Intensive Care Med 2014;40:1795-1815</td></tr>
+<tr><td>13</td><td>小児の敗血症性ショック・敗血症関連臓器障害に対する SSC 国際ガイドライン（小児 40〜60 mL/kg／1時間の出典）</td><td>Weiss SL, Peters MJ, Alhazzani W, et al. Pediatr Crit Care Med 2020;21:e52-e106</td></tr>
+<tr><td>15</td><td>ESCAPE 試験（心不全における肺動脈カテーテルの有効性評価）</td><td>Binanay C, et al. JAMA 2005;294:1625-1633</td></tr>
+<tr><td>17</td><td>PAC-Man 試験（重症患者管理における肺動脈カテーテルの臨床有効性 RCT）</td><td>Harvey S, et al. Lancet 2005;366:472-477</td></tr>
+<tr><td>23</td><td>集中治療医のベッドサイドでの右心カテーテル知識が不十分である</td><td>Gnaegi A, Feihl F, Perret C. Crit Care Med 1997;25:213-220</td></tr>
+<tr><td>24</td><td>肺動脈カテーテルに関する医師の知識の多施設調査</td><td>Iberti TJ, et al. JAMA 1990;264:2928-2932</td></tr>
+<tr><td>29</td><td>摘出灌流イヌ左室における瞬時圧容量関係とその比（ESPVR・Ees の原典）</td><td>Suga H, Sagawa K. Circ Res 1974;35:117-126</td></tr>
+<tr><td>30</td><td>摘出イヌ心室で研究された左室と動脈負荷の相互作用（Ea の原典）</td><td>Sunagawa K, Maughan WL, Burkhoff D, et al. Am J Physiol 1983;245(5 Pt 1):H773-H780</td></tr>
+<tr><td>31</td><td>静脈還流曲線と心拍出量曲線の一致による心拍出量の決定（Guyton の血管モデル）</td><td>Guyton AC. Physiol Rev 1955;35:123-129</td></tr>
+<tr><td>32</td><td>圧容量解析による収縮期・拡張期心室特性の評価（本稿の理論的基盤・シミュレータの根拠の1つ）</td><td>Burkhoff D, Mirsky I, Suga H. Am J Physiol Heart Circ Physiol 2005;289:H501-H512</td></tr>
+<tr><td>33</td><td>LV 機能不全発症後になぜ肺静脈圧が上がるのか（理論解析・シミュレータの根拠の1つ）</td><td>Burkhoff D, Tyberg JV. Am J Physiol 1993;265(5 Pt 2):H1819-H1828</td></tr>
+<tr><td>34</td><td>心不全の病態生理と治療の心血管シミュレーション（シミュレータの根拠の1つ）</td><td>Doshi D, Burkhoff D. J Card Fail 2016;22:303-311</td></tr>
+<tr><td>37</td><td>動脈–心室カップリング（安静時と運動時の心血管パフォーマンス・Ea/Ees ≈ 0.6 の根拠の1つ）</td><td>Chantler PD, Lakatta EG, Najjar SS. J Appl Physiol 2008;105:1342-1351</td></tr>
+<tr><td>45</td><td>心室モデルの総機械的エネルギーと心筋酸素消費（PVA の原典）</td><td>Suga H. Am J Physiol Heart Circ Physiol 1979;236:H498-H505</td></tr>
+<tr><td>54</td><td>負荷系との心室相互作用</td><td>Sunagawa K, Sagawa K, Maughan WL. Ann Biomed Eng 1984;12:163-189</td></tr>
+<tr><td>55</td><td>ヒトにおける動脈血管負荷の指標としての実効動脈エラスタンス</td><td>Kelly RP, Ting CT, Yang TM, et al. Circulation 1992;86</td></tr>
+<tr><td>56</td><td>解析モデルで予測される心室効率</td><td>Burkhoff D, Sagawa K. Am J Physiol 1986;250(6 Pt 2):R1021-R1027</td></tr>
+<tr><td>57</td><td>左室–動脈カップリング</td><td>Little WC, Pu M. J Am Soc Echocardiogr 2009;22:1246-1248</td></tr>
+<tr><td>61</td><td>循環性ショックにおける血管作動薬（本稿の薬剤作用の根拠）</td><td>Hollenberg SM. Am J Respir Crit Care Med 2011;183:847-855</td></tr>
+<tr><td>62</td><td>心不全における静脈トーヌスとストレス血液量（SBV の根拠）</td><td>Fudim M, Kaye DM, Borlaug BA, et al. J Am Coll Cardiol 2022;79:1858-1869</td></tr>
+<tr><td>63</td><td>LV 機能不全発症後に肺静脈圧が上がる理由のさらなる解析</td><td>Magder S, Veerassamy S, Bates JH. J Appl Physiol 2009;106:81-90</td></tr>
+<tr><td>64</td><td>健常・疾患における静脈系の自律神経制御（薬剤の効果）</td><td>Pang CC. Pharmacol Ther 2001;90:179-230</td></tr>
+<tr><td>78</td><td>SSC 国際ガイドライン 2021 エグゼクティブサマリー（成人 30 mL/kg／3時間の出典）</td><td>Evans L, Rhodes A, Alhazzani W, et al. Crit Care Med 2021;49:1974-1982</td></tr>
+<tr><td>79</td><td>SSC バンドル 2018 更新</td><td>Levy MM, Evans LE, Rhodes A. Intensive Care Med 2018;44:925-928</td></tr>
+<tr><td>80</td><td>心原性ショックの現代的管理（AHA 科学的声明 2017）</td><td>van Diepen S, Katz JN, Albert NM, et al. Circulation 2017</td></tr>
+<tr><td>83</td><td>小児心筋炎の診断と管理（AHA 声明 2021・ミルリノン第一選択の出典）</td><td>Law YM, Lal AK, Chen S, et al. Circulation 2021</td></tr>
+<tr><td>84</td><td>小児二次救命処置：2020 国際コンセンサス（心原性ショックの強心薬推奨の出典）</td><td>Maconochie IK, Aickin R, Hazinski MF, et al. Circulation 2020</td></tr>
+<tr><td>87</td><td>心原性ショックと心停止に対する VA-ECMO</td><td>Rao P, Khalpey Z, Smith R, et al. Circ Heart Fail 2018;11:e004905</td></tr>
+<tr><td>94</td><td>機械的循環補助の血行動態（MCS の PV ループ解析の原典）</td><td>Burkhoff D, Sayer G, Doshi D, et al. J Am Coll Cardiol 2015;66:2663-2674</td></tr>
+<tr><td>98</td><td>ECMO：ベントの必要性について語ろう（LV アンローディング論争）</td><td>Donker DW, Burkhoff D, Mack MJ. J Am Coll Cardiol 2022;79:1251-1253</td></tr>
+<tr><td>99</td><td>ベントの適切なタイミングと場所を見つける</td><td>Stewart GC. JACC Heart Fail 2018;6:1044-1046</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>昇圧薬・強心薬・輸液・ECMO を「薬剤名」ではなく「Ea を上げるのか、Ees を上げるのか、SBV を動かすのか」で語れるようになると、血圧が上がったのに患者が悪くなる現象が説明できるようになる</strong></mark>。ただしこれはシミュレーションであって転帰のエビデンスではない。</p>
+</div>
+<ul><li><strong>3つの線と1つの比を覚える</strong>：ESPVR（傾き＝Ees、収縮性）／EDPVR（受動的な硬さ）／Ea 直線（動脈負荷 ≒ SVR × HR ＝ Pes/SV）、そして <strong>Ea/Ees（正常 約0.6）が EF と SV を決める</strong>。</li><li><strong>EF は収縮性の指標ではない</strong>。Ea/Ees の関数である。<mark class="hl"><strong>敗血症で EF が正常に見えるのは、Ees の低下を Ea の低下が相殺しているからで、収縮性が保たれているからではない</strong></mark>（Fig. 3A：EF 55%）。</li><li><strong>AVP は Ees を上げない</strong>。だから同じ Ea 上昇でもノルアドレナリンより Ea/Ees を悪化させ、EF と SV を余計に下げる。心筋 VO₂ の増え方も PVA 依存性のみで異なる。</li><li><mark class="hl"><strong>見るべきは血圧ではなく CPP（大動脈拡張期圧 − LV EDP）</strong></mark>。Fig. 3A は「血圧が著明に上がったのに CPP 39 mmHg で肺水腫が悪化した」図である。</li><li><strong>inodilator と inoconstrictor のトレードオフを言語化する</strong>：Ees と心拍数を揃えれば、inodilator のほうが SV・心拍出量が大きく EDP と心筋 VO₂ が低い。代償は灌流圧の低さ（敗血症で SV 約10%／CO 約600 mL/分、心原性ショックで SV 約35%／CO &gt; 1.3 L/分）。</li><li><strong>ドブタミンは Ea を下げるとは限らない</strong>。心拍数の上昇が SVR 低下を相殺し、収縮期血圧（LV 後負荷）はむしろ上がりうる。</li><li><mark class="hl"><strong>VA-ECMO は LV をアンロードしない。流量を上げるほど Ea が上がり SV は減り、ある点で大動脈弁が開かなくなる</strong></mark>。動脈圧が非拍動性になったらエコーで LV 径・EDV を確認する。アンローディングは Impella でも、血管拡張薬＋利尿薬でも実現しうる（Fig. 5B・5C）。</li><li><strong>この論文は転帰を語っていない</strong>。処方箋として読まない。生理学的に説明できることと患者が良くなることは別である。</li></ul>
+<h4>判断の流れ（本稿の生理学をベッドサイドの手順に落としたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手（本稿の生理学から導かれるもの）</th></tr></thead>
+<tbody>
+<tr><td>敗血症で低血圧、EF は正常に見える</td><td>Ea が下がっているせいで EF が良く見えていないか（SVR・脈圧・拡張期圧）</td><td>EF を収縮性の証拠として使わない。SV／心拍出量と CPP を別に評価する</td></tr>
+<tr><td>輸液後も低血圧、心拍出量は保たれている</td><td>SBV は足りているか（静脈還流の余地）</td><td>Ea を上げる薬（ノルアドレナリン）で Pes を確保。Ees は同時に上がるので Ea/Ees の悪化は AVP より小さい</td></tr>
+<tr><td>輸液後も低血圧、心拍出量が低い（収縮性低下）</td><td>LV EDP と CPP はどうなっているか</td><td>Ea だけを上げる（AVP）と SV が減り EDP が上がって CPP が改善しない。Ees を上げる選択（inodilator）を天秤にかける</td></tr>
+<tr><td>昇圧薬で血圧は上がったが尿量・乳酸が改善しない</td><td>CPP（大動脈拡張期圧 − LV EDP）を計算したか</td><td>血圧上昇が EDP 上昇を伴っていれば CPP は改善していない。EDP を下げる方向（前負荷・SBV の調整）を検討</td></tr>
+<tr><td>ドブタミン開始後に収縮期血圧が上がった</td><td>心拍数がどれだけ上がったか</td><td>心拍数上昇が SVR 低下を相殺して Ea が下がっていない可能性。「血管拡張薬なのに血圧が上がった」は矛盾ではない</td></tr>
+<tr><td>VA-ECMO 中に動脈圧が非拍動性になった</td><td>エコーで LV 径・EDV、大動脈弁が開いているか</td><td>LV が閉じ込められている。PVA と心筋 VO₂ は高いまま。Impella 追加、または血管拡張薬＋利尿薬でのアンローディングを検討</td></tr>
+<tr><td>VA-ECMO 中に肺水腫が悪化する</td><td>LV EDV・EDP が高いままではないか</td><td>アンローディング不足が肺傷害に寄与している。ECMO 流量を上げることは Ea を上げるので解決にならない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

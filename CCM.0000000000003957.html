@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>救急外来からICU入室までの待機時間と死亡 — 粗解析では「待つほど死なない」、重症度調整で反転（NICE registry 14788例・CCM2019）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000003957.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">救急外来からICU入室までの待機時間と死亡 — 粗解析では「待つほど死なない」、重症度調整で反転（NICE registry 14788例・CCM2019）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Groenland CNL, Termorshuizen F, Rietdijk WJR, van den Brule J, Dongelmans DA, de Jonge E, de Lange DW, de Smet AMGA, de Keizer NF, Weigel JD, Jewbali LSD, Boersma E, den Uil CA. Crit Care Med. 2019;47(11):1564–1571. DOI: 10.1097/CCM.0000000000003957</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2019-11-05）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000003957" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000003957</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Emergency Department to ICU Time Is Associated With Hospital Mortality: A Registry Analysis of 14,788 Patients From Six University Hospitals in The Netherlands</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000003957.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000003957.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000003957.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>① ER滞在時間を院内指標にすべきか — 「測る」は Yes、「2.4時間を目標にする」は No</strong></p>
+<ul><li>測ること自体のコストはほぼゼロ。ER到着時刻とICU入室時刻はどちらも既に電子カルテに存在する。まず当院の分布（中央値・IQR・上位5%）を出すところから始める</li><li>ただし本研究の「2.4時間」は当院の目標値にならない。この数字はオランダ6大学病院コホートの<strong>五分位の境界</strong>であって、モデルで推定した閾値ではない。中央値2.0時間の集団を5等分したら第4分位の下限がたまたま2.4時間だった、というだけである。当院の中央値が違えば境界も動く</li><li>指標にするなら<strong>全体の平均値ではなく、重症層の裾</strong>にする。本研究で死亡と関連したのは APACHE IV 予測死亡率 60.9%超の最重症群のみで、低リスク群のオッズ比は 0.99〜1.02（＝完全に無関係）。全患者を混ぜた平均値は、圧倒的多数を占める低リスク患者に薄められて動かない</li><li>具体案：<strong>「予測死亡率上位20%相当の患者のうち、ER滞在が4時間を超えた例の割合」を月次で追う</strong>。分子を絞ることで、指標が実際の運用に反応する</li></ul>
+<p><strong>② SDU・病床運用の議論にどう使うか — 「空床があるか」と対で測る</strong></p>
+<ul><li>著者が待機の原因として挙げるのは、トリアージ・診断検査・ロジスティクス・<strong>ICU病床のキャパシティ・ストレイン</strong>である。ただし本研究はそのどれも測っていない（後述の通り待機理由は本文に一切データがない）</li><li>したがってこの論文単独では「ベッドを増やせば死亡が減る」とは言えない。使えるのは問いの立て方のほうで、<strong>ER→ICU時間と、その時点のICU空床数・SDU空床数を同じ台帳に並べて記録する</strong>設計にすれば、当院固有のデータで因果に近い議論ができる</li><li>これは <span class="wl">🏨 HDU・SDU（中間治療室）と病床機能 Home</span> の中心命題（「箱の数ではなく箱の間で患者を動かせているか」）の入口側バージョンにあたる。SDUの存在意義のひとつは「ICUの1床を空けておけること」なので、SDU増床の根拠に <strong>「ER要請時にICU/SDUに空床があった割合」</strong> を加えられる</li><li>逆向きのリスクも先に置く。ER滞在時間だけをKPIにすると、時刻の付け替えや「本来ICUを要さない患者の先回り入室」で数字だけ良くなる。米国データが示す ICU-bed elasticity of demand（病床を増やすと入室も増える）と同じ構図になりうる（→ <span class="wl">予防可能な可能性のあるICU入室（米国2006-2015）</span>）</li></ul>
+<p><strong>③ RRS起動から入室までの時間に読み替えられるか — 方法は移せるが、数字は移せない</strong></p>
+<ul><li>本研究の待機時間は<strong>ER到着からICU入室まで</strong>であって、「重症と認識してから」ではない。院内急変（RRS起動→ICU入室）は起点も時間スケールも違う。病棟からのICU入室を扱った Harris 2018（本論文の引用文献27）では遅延の中央値が<strong>11時間</strong>（IQR 6–26）で、ERの2.0時間とは桁が違う</li><li>したがって「2.4時間」をRRSに持ち込むことはできない。移せるのは方法だけ ——(a) 区間を定義して全例に時刻を打つ、(b) 重症度で層別する、(c) 最重症層の裾を見る、の3点</li><li>本論文の考察が引く <strong>score-to-door time</strong>（Oglesby 2011・引用文献25）は、まさにRRSのベンチマーク指標として提案されたものである。当院の急変ワーキングで「早期警告スコアが閾値を超えてからICU/SDU入室までの時間」を定義するなら、この語で先行研究を辿れる（→ <span class="wl">★急変ワーキング Home</span>）</li><li>過大な期待は置かない。国内データでは RRT起動そのものが敗血症の院内死亡を下げなかった（→ <span class="wl">RRT起動は敗血症の院内死亡を下げなかった（JIPAD 3883例・95ICU・IPTW・CCM2025）</span>）。「速く入れれば助かる」は、本論文を含めてまだ観察研究の域を出ていない</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト <strong>Known（既に分かっていたこと）</strong></p>
+<ul><li>重症患者は、緩和ケアが目的の場合や急性期の処置を優先する場合を除き、可能な限り早くICUに入室すべきだという原則自体は広く共有されている</li><li>一般病棟からのICU入室では、入室前の在院日数が長いほど死亡が高いことが示されていた（Goldhill 2004・引用文献5）</li><li>一方、ERから直接ICUに入る患者のデータは<strong>矛盾していた</strong>。Chalfin 2007（DELAY-ED）は搬送遅延が院内在院日数とICU死亡を増やすと報告し、Carter 2010（ANZICS レジストリ）は調整後に関連を示せず、Saukkonen 2006 はER滞在が最も短い四分位で粗院内死亡が最も低かったと報告している</li><li>ER滞在時間そのものが国により大きく違う。豪州・NZ 3.9時間、フィンランド 4.8時間、オランダ 2.2時間。この違い自体が死亡との関係を修飾しうる</li></ul>
+<p><strong>Unknown（この研究の時点で未解決だったこと）</strong></p>
+<ul><li>ヨーロッパの全国規模データが存在しなかった</li><li>ER滞在時間と死亡の関係が、重症度によって変わるのか（効果修飾があるのか）が検証されていなかった</li><li>ICU死亡・30日死亡・90日死亡という異なる時点のアウトカムで、同じ関係が見えるのかが不明だった</li></ul>
+<p><strong>What's new（この論文が足したこと）</strong></p>
+<ul><li>14,788例という当時最大規模で、<strong>重症度で調整すると関連の向きが逆転する</strong>ことを明示した。粗解析では「長く待った患者ほど死ににくい」（オッズ比0.56）という真逆の結果が出る</li><li>関連は<strong>最重症層に限局する</strong>ことを、APACHE IV 予測死亡率で層別して示した。低リスク層ではオッズ比はほぼ1.00で動かない</li><li>院内死亡・30日死亡・90日死亡では同じパターンが出るが、<strong>ICU死亡では調整後に有意でなくなる</strong>（p=0.20）という不一致を報告した</li><li>追加解析で、診断別では<strong>心停止のみ</strong>が粗・調整の両方で有意だった（供給資料のみ、本文に数値なし）</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで オランダの6大学病院でERから直接ICUに入った14,788例で、ER→ICU時間の中央値は2.0時間だった。<strong>粗解析では待機が長い患者ほど院内死亡が低かった（最長五分位でオッズ比0.56）が、APACHE IV 予測死亡率で調整すると向きが逆転し、2.4時間超でオッズ比1.20〜1.27になった。</strong> この逆転は「重症な患者ほど速く入室する」という適応交絡の教科書的な実例であり、同時に、この論文が「待たせると死ぬ」の証明にはならない理由でもある。</p>
+</div>
+<ul><li><strong>デザイン</strong>：オランダの質評価レジストリ NICE を用いた後ろ向き観察コホート。2009年1月1日〜2016年12月31日、6大学病院、成人、ERから直接ICU入室</li><li><strong>待機時間の定義</strong>：患者がERに<strong>物理的に到着した時刻</strong>から、ICUに<strong>物理的に入室した時刻</strong>まで。診断・治療開始・入室決定のいずれの時点も起点にしていない</li><li><strong>分布</strong>：中央値 2.0時間（IQR 1.3–3.3）。五分位は &lt;1.2／1.2–1.7／1.7–2.4／2.4–3.7／3.7–24.0 時間</li><li><strong>主要アウトカム</strong>：院内死亡（22.2%）。副次は ICU死亡（18.1%）・30日死亡・90日死亡</li><li><strong>調整変数は実質2つだけ</strong>：入院した大学病院（ダミー変数）と APACHE IV 予測死亡率。年齢・併存症・診断は APACHE IV に内包される形でのみ調整されている</li><li><strong>粗（モデルA）</strong>：2.4–3.7時間 オッズ比 0.82（0.72–0.92）、3.7時間超 0.56（0.49–0.64）。待つほど死亡が<strong>低い</strong></li><li><strong>調整後（モデルB）</strong>：2.4–3.7時間 1.20（1.03–1.39）、3.7時間超 1.27（1.08–1.49）。向きが<strong>反転</strong>する</li><li><strong>効果修飾（モデルC）</strong>：APACHE IV 予測死亡率 &gt;60.9% の最重症群のみ、ER時間全体のWald検定が有意（p=0.019）。2.4–3.7時間 1.29（1.02–1.64）、3.7時間超 1.54（1.11–2.14）</li><li><strong>ICU死亡は動かない</strong>：調整後 p=0.20。院内死亡が動いてICU死亡が動かないという不一致を著者は説明していない</li><li><strong>30日・90日死亡</strong>：Cox比例ハザードモデルで、調整後 2.4–3.7時間 ハザード比 1.21（1.09–1.34）／1.21（1.09–1.33）、3.7時間超 1.18（1.05–1.33）／1.23（1.11–1.37）</li><li><strong>待機の理由は記録されていない</strong>：ベッド満床・人員・検査中といった内訳のデータは本文にも表にも存在しない</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この論文を読むための3つの道具立て 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>(a) NICE registry（National Intensive Care Evaluation）</strong> オランダの全国ICU質評価レジストリ。オランダ国内84のICUが参加し、参加ICUの入室患者データを網羅的・連続的に登録する。日本でいうJIPADに相当する位置づけで、ベンチマーキングと質改善を目的とする。ただし本研究で必要な「ER到着時刻」はNICEに存在せず、各施設からあとから集めてNICEデータに突合している。</p>
+<p><strong>(b) APACHE IV 予測死亡率</strong> 重症度スコアAPACHE III（ICU入室後24時間の生理学的異常＋併存症＋年齢）に、<strong>入室診断（445分類）</strong>と<strong>入室理由（内科・緊急手術・予定手術）</strong>を組み合わせて、院内死亡確率を0〜1で出す予測モデル（Zimmerman 2006）。本研究の「重症度調整」はこの1変数で行われている。重要なのは、この値が<strong>ICU入室後</strong>の24時間のデータから計算される点である（→ 第8節）。</p>
+<p><strong>(c) 適応交絡（confounding by indication）</strong> 「治療や処置の割り付けが、患者の状態そのものによって決まる」ことで生じる交絡。ここでは「重症な患者ほど速くICUに運ばれる」ため、待機時間が短い群に重症患者が集まる。この構造があると、粗解析は「速く入った患者のほうが死ぬ」という、真の因果と逆向きの結果を返す。本論文はまさにこの反転が数字で見える教材になっている。</p>
+<p><strong>(d) 用語の注意</strong> 原文は一貫して correlate / correlation（相関）という語を使っているが、実際に推定しているのは回帰モデルの association（関連）である。相関係数は計算されていない。読むときは「相関」を「関連」に読み替える。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>理想としては、緩和ケアを目的とする患者と急性期の処置（手術・カテーテル等）を優先すべき患者を除き、重症患者は可能な限り速やかにICUに入室すべきである。しかし入室の遅れはトリアージ・診断検査・ロジスティクス上の理由で日常的に起きている（引用文献1–4）</li><li>ICUへの入室経路は3つある。術後患者、病棟で悪化した患者、ERから直接入室する急性期患者。このうち病棟由来の患者では、ICU入室前の在院日数が長いほど死亡が高いことが示されていた（引用文献5）</li><li>ER由来の患者についてのデータは矛盾していた</li></ul>
+<div class="tw"><table>
+<thead><tr><th>先行研究</th><th>データ</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Saukkonen 2006（J Intern Med）</td><td>フィンランド</td><td>粗院内死亡はER滞在が最短の四分位で最も低い</td></tr>
+<tr><td>Chalfin 2007（DELAY-ED・CCM）</td><td>米国</td><td>ER→ICU搬送の遅延は院内在院日数とICU死亡を増やす（APACHE II で調整）</td></tr>
+<tr><td>Carter 2010（Emerg Med Australas）</td><td>ANZICS レジストリ</td><td>調整後、ER滞在時間と院内死亡の関連を示せなかった</td></tr>
+</tbody></table></div>
+<ul><li>ER滞在時間の中央値自体が国で大きく違う（豪州・NZ 3.9時間／フィンランド 4.8時間／オランダ 2.2時間）。この違いが死亡との関係を修飾しうる</li><li>結果が矛盾しており、かつヨーロッパの全国規模データが存在しないため、大規模研究が必要と考えた</li><li><strong>目的</strong>：ER→ICU時間が院内死亡と関連するかを検討する。副次的に、ICU死亡・30日死亡・90日死亡との関連も調べる</li></ul>
+<h3>3. 方法（Methods）</h3>
+<h4>3-1. デザイン・対象</h4>
+<ul><li><strong>デザイン</strong>：後ろ向き観察コホート研究。介入なし</li><li><strong>データ源</strong>：NICE registry（オランダ84 ICUが参加）＋各施設から後ろ向きに収集したER到着日時＋全国の保険請求データベース Vektis</li><li><strong>対象施設</strong>：オランダの大学病院6施設（Amsterdam UMC、Erasmus MC、Leiden UMC、Radboud UMC、UMC Groningen、UMC Utrecht）。オランダには大学病院が8つあり、著者はこの6施設がケースミックス上代表的だとしている</li><li><strong>期間</strong>：2009年1月1日〜2016年12月31日</li><li><strong>組み入れ</strong>：ERから直接ICUに入室した成人患者</li><li><strong>除外</strong>：ER→ICU時間が無効または取得不能だった356例（全体の3%未満）</li><li><strong>解析対象</strong>：15,144例 − 356例 ＝ <strong>14,788例</strong></li></ul>
+<h4>3-2. 曝露 — 待機時間の定義（この論文の要）</h4>
+<ul><li><strong>定義</strong>：患者がERに物理的に入室した時刻（time of physical admission at the ED）から、患者がICUに物理的に入室した時刻（time of physical admission to the ICU）まで</li><li>起点は<strong>到着</strong>であり、「重症と認識した時点」でも「ICU入室を決定した時点」でも「ICUに要請を出した時点」でもない。したがってこの時間には、トリアージ待ち・診察・画像検査・ER内での初期治療・入室決定のための議論・搬送準備・実際の搬送が<strong>すべて混ざっている</strong></li><li>ER到着日時はNICEに存在しないため、参加各施設から後ろ向きに収集してNICEデータに突合（deterministic linkage ではなく施設からの提供データのマージ）</li><li>解析では<strong>五分位（quintile）でカテゴリ化</strong>。連続量としては扱っていない</li></ul>
+<h4>3-3. アウトカム</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>アウトカム</th><th>取得方法</th></tr></thead>
+<tbody>
+<tr><td><strong>主要</strong></td><td>院内死亡</td><td>NICE registry</td></tr>
+<tr><td>副次</td><td>ICU死亡</td><td>NICE registry</td></tr>
+<tr><td>副次</td><td>30日死亡</td><td>NICE × Vektis（保険請求DB）を決定論的リンケージで結合</td></tr>
+<tr><td>副次</td><td>90日死亡</td><td>同上</td></tr>
+</tbody></table></div>
+<ul><li>オランダはほぼ全国民が健康保険に加入し、死亡日が請求データベースに含まれるため、30日・90日死亡を追跡できる</li><li>ただし研究集団の<strong>5.5%は請求データベースに登録がなく</strong>、30日・90日死亡が取得できなかった</li></ul>
+<h4>3-4. 統計解析（この論文の「読みどころ」）</h4>
+<p>Evernote時代のフォルダ名が「予測 統計手法の勉強に」であった通り、本論文は結果より<strong>手法の組み立て</strong>を読む価値がある。使われたものを列挙する。</p>
+<p><strong>記述統計</strong></p>
+<ul><li>中央値（IQR）と n（%）。カテゴリ変数は頻度（%）</li><li>正規性の検定：Kolmogorov-Smirnov 検定</li><li>五分位間の比較：連続変数は正規分布なら分散分析、非正規分布なら Kruskal-Wallis 検定。カテゴリ変数はカイ二乗検定または Fisher の正確検定</li></ul>
+<p><strong>主要アウトカム（院内死亡）とICU死亡：ロジスティック回帰</strong></p>
+<ul><li>参照カテゴリ＝ER→ICU時間が最短の五分位（&lt;1.2時間）</li><li>全モデルで入院した大学病院を<strong>施設ごとのダミー変数</strong>として投入（混合効果モデルではない。施設が6つと少ないため固定効果で扱うのは妥当）</li><li>3段階でモデルを構築</li></ul>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>投入した変数</th><th>目的</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>ER→ICU時間の五分位 ＋ 施設ダミー</td><td>粗の関連を見る</td></tr>
+<tr><td><strong>B</strong></td><td>A ＋ APACHE IV 予測死亡率</td><td>重症度で調整する</td></tr>
+<tr><td><strong>C</strong></td><td>B ＋ APACHE IV 予測死亡率 × ER→ICU時間 の交互作用項</td><td>重症度が効果を修飾するかを見る</td></tr>
+</tbody></table></div>
+<ul><li>APACHE IV 予測死亡率は五分位に分けたうえで、<strong>第1・第2五分位はイベント数が少ないと予想されたため1群に統合</strong>。結果として4群（&lt;10.5%／10.5–25.6%／25.7–60.9%／&gt;60.9%）</li><li>モデル適合後、<strong>Wald検定</strong>でER→ICU時間という因子<strong>全体</strong>（5カテゴリ＝4自由度）が死亡と関連するかを検定。さらに APACHE IV 各群ごとに同じ検定を実施</li></ul>
+<p><strong>30日・90日死亡：Cox比例ハザードモデル</strong></p>
+<ul><li>ロジスティックではなくCoxを使った理由が明記されている。一部の患者は観察期間が30日／90日より短く、NICE registry での最終観察時点で<strong>打ち切り（censoring）</strong>になる。打ち切りを正しく扱えるモデルが必要だったため</li><li>同じく3段階（A：施設調整のみ／B：＋APACHE IV／C：＋交互作用）、同じくWald検定</li></ul>
+<p><strong>環境・有意水準</strong></p>
+<ul><li>R version 3.5.0</li><li>p &lt; 0.05 を有意とした</li></ul>
+<p><strong>使われなかった手法（ここが批判的吟味の入口になる）</strong></p>
+<ul><li>制限付き3次スプライン等の<strong>連続量としての用量反応の検討はしていない</strong>。閾値の推定も行っていない</li><li>傾向スコア（マッチング・重み付け）を使っていない</li><li>操作変数法を使っていない。同じ問題を病棟由来の患者で扱った Harris 2018（引用文献27）は病床のストレインを操作変数にしている</li><li>多重性の調整をしていない。3モデル × 4アウトカム × 4重症度層で数十回のWald検定と数百のカテゴリ別推定を行いながら、α=0.05 のまま</li><li>生存退院を競合リスクとして扱っていない</li><li>欠測データの補完をしていない（除外のみ）</li><li>サンプルサイズ設計・検出力の記載がない</li><li>事前登録（プロトコル登録）の記載がない</li></ul>
+<h3>4. 結果 — 対象集団の姿</h3>
+<ul><li>期間中に6施設でERから直接ICUに入室したのは15,144例。ER→ICU時間が無効または取得不能な356例を除外し、<strong>14,788例</strong>を解析</li><li>年齢中央値 59歳（IQR 45–71）、男性 61.9%</li><li>APACHE IV スコア中央値 64（42–92）、APACHE IV 予測死亡率中央値 0.16（0.05–0.50）</li><li>ER→ICU時間中央値 <strong>2.0時間</strong>（IQR 1.3–3.3）</li><li>ICU在室日数中央値 2.0日（1.0–4.0）、在院日数中央値 5.8日（1.4–14.4）</li><li>ICU死亡 18.1%、<strong>院内死亡 22.2%</strong></li></ul>
+<h4>Table 1. ベースラインと入院中の特性（五分位別）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>全体&lt;br&gt;n=14,788</th><th>&lt;1.2 hr&lt;br&gt;n=2,956</th><th>1.2–1.7 hr&lt;br&gt;n=2,998</th><th>1.7–2.4 hr&lt;br&gt;n=2,938</th><th>2.4–3.7 hr&lt;br&gt;n=2,956</th><th>3.7–24.0 hr&lt;br&gt;n=2,940</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）中央値</td><td>59（45–71）</td><td>59（43–71）</td><td>59（43–71）</td><td>60（45–71）</td><td>59（45–71）</td><td>59（46–70）</td><td>0.38</td></tr>
+<tr><td>男性</td><td>9,151（61.9%）</td><td>1,854（62.8%）</td><td>1,884（62.9%）</td><td>1,842（62.8%）</td><td>1,840（62.3%）</td><td>1,731（58.9%）</td><td>0.006</td></tr>
+<tr><td>APACHE IV スコア</td><td>64（42–92）</td><td>71（45–99）</td><td>69（45–99）</td><td>68（44–100）</td><td>61（40–88）</td><td>54（36–76）</td><td>&lt;0.001</td></tr>
+<tr><td>APACHE IV 予測死亡率</td><td>0.16（0.05–0.50）</td><td>0.23（0.07–0.62）</td><td>0.21（0.06–0.62）</td><td>0.20（0.06–0.60）</td><td>0.14（0.04–0.41）</td><td>0.10（0.03–0.26）</td><td>&lt;0.001</td></tr>
+<tr><td><strong>入室診断（上位10）</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>心停止</td><td>2,118（14.3%）</td><td>550（18.6%）</td><td>558（18.6%）</td><td>584（19.9%）</td><td>346（11.7%）</td><td>80（2.7%）</td><td>&lt;0.001</td></tr>
+<tr><td>外傷（非手術）</td><td>2,018（13.6%）</td><td>440（14.9%）</td><td>596（19.9%）</td><td>398（13.5%）</td><td>346（11.7%）</td><td>238（8.1%）</td><td>&lt;0.001</td></tr>
+<tr><td>頭蓋内・硬膜下・硬膜外出血</td><td>1,389（9.4%）</td><td>363（12.3%）</td><td>354（11.8%）</td><td>261（8.9%）</td><td>236（8.0%）</td><td>175（5.9%）</td><td>&lt;0.001</td></tr>
+<tr><td>呼吸不全</td><td>1,395（9.4%）</td><td>274（9.3%）</td><td>277（9.2%）</td><td>243（8.3%）</td><td>295（10.0%）</td><td>306（10.4%）</td><td>0.13</td></tr>
+<tr><td>薬物過量</td><td>895（6.1%）</td><td>245（8.2%）</td><td>180（5.9%）</td><td>174（6.0%）</td><td>167（5.6%）</td><td>129（4.3%）</td><td>&lt;0.001</td></tr>
+<tr><td>敗血症</td><td>683（4.6%）</td><td>65（2.2%）</td><td>97（3.2%）</td><td>109（3.7%）</td><td>177（6.0%）</td><td>235（8.0%）</td><td>&lt;0.001</td></tr>
+<tr><td>肺炎</td><td>1,028（7.0%）</td><td>169</td><td>190</td><td>173</td><td>269</td><td>227</td><td>&lt;0.001</td></tr>
+<tr><td>外傷（手術）</td><td>450（3.0%）</td><td>21</td><td>38（1.3%）</td><td>55（1.9%）</td><td>125（4.2%）</td><td>211（7.2%）</td><td>0.245</td></tr>
+<tr><td>急性冠症候群</td><td>336（2.3%）</td><td>66（2.2%）</td><td>56（1.9%）</td><td>68（2.3%）</td><td>77（2.6%）</td><td>69（2.3%）</td><td>0.40</td></tr>
+<tr><td>動脈瘤</td><td>286（1.9%）</td><td>22（0.7%）</td><td>33（1.1%）</td><td>19（0.65%）</td><td>57（1.9%）</td><td>155（5.3%）</td><td>&lt;0.001</td></tr>
+<tr><td><strong>入院中の指標</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>ER→ICU時間（時間）中央値</td><td>2.0（1.3–3.3）</td><td>0.9（0.7–1.1）</td><td>1.5（1.3–1.6）</td><td>2.0（1.9–2.2）</td><td>3.0（2.7–3.3）</td><td>5.0（4.2–6.3）</td><td>&lt;0.001</td></tr>
+<tr><td>ICU在室（日）</td><td>2.0（1.0–4.0）</td><td>1.7（0.7–4.2）</td><td>1.7（0.7–4.4）</td><td>1.8（0.8–4.5）</td><td>1.6（0.7–4.2）</td><td>1.6（0.7–3.9）</td><td>0.012</td></tr>
+<tr><td>在院日数（日）</td><td>5.8（1.4–14.4）</td><td>4.1（0.8–12.4）</td><td>5.2（1.2–13.9）</td><td>5.8（1.5–14.2）</td><td>6.1（1.4–14.5）</td><td>7.6（2.65–17）</td><td>&lt;0.001</td></tr>
+<tr><td>ICU死亡</td><td>2,683（18.1%）</td><td>616（20.8%）</td><td>619（20.6%）</td><td>608（20.7%）</td><td>511（17.3%）</td><td>329（11.2%）</td><td>&lt;0.001</td></tr>
+<tr><td>院内死亡</td><td>3,285（22.2%）</td><td>739（25.0%）</td><td>726（24.2%）</td><td>740（25.2%）</td><td>626（21.2%）</td><td>454（15.4%）</td><td>&lt;0.001</td></tr>
+</tbody></table></div>
+<p>注：入室診断は445分類のうち頻度上位10のみ。肺炎行と外傷（手術）第1五分位のパーセント表記は原表の記載が n/N と一致しないため、上表では実数のみを示した（→ 第9節）。</p>
+<p><strong>この表だけで論文の骨格がほぼ読める。</strong></p>
+<ul><li>待機が長い群ほど APACHE IV スコアが低く（71 → 54）、予測死亡率も低い（0.23 → 0.10）。<strong>待たされた患者は最初から軽症だった</strong></li><li>診断構成が劇的に入れ替わる。心停止は 18.6% → 2.7%（7分の1）、頭蓋内出血は 12.3% → 5.9%。逆に敗血症は 2.2% → 8.0%、動脈瘤は 0.7% → 5.3%、外傷（手術）は最下位群で最多</li><li>つまり第1五分位は「ERに着いた瞬間に運ばれる病態（心停止・頭蓋内出血）」、第5五分位は「診断と初期治療にERで時間がかかる病態（敗血症・動脈瘤）」で構成されている</li><li>在院日数だけは待機が長い群ほど長い（4.1日 → 7.6日）。ICU在室日数はむしろ短い（1.7日 → 1.6日）</li></ul>
+<h3>5. 主要アウトカム — 粗解析と調整後で向きが逆転する</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000003957" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000003957）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 院内死亡のオッズ比（ER滞在時間別）。左パネルAが施設のみで調整したモデル、右パネルBが施設とAPACHE IV 予測死亡率で調整したモデル。縦軸はオッズ比（95%CI）、目盛は0.4・0.8・1.2・1.6。横軸はER→ICU時間の五分位（&lt;1.2／1.2-1.7／1.7-2.4／2.4-3.7／3.7-24.0時間）。オッズ比1.0の水平な点線が引かれ、各カテゴリは黒丸の点推定と上下のエラーバー（95%CI）で示される。最左の参照カテゴリはCIのない黒丸として1.0の位置に置かれる。パネル上部にER滞在時間全体のWald検定のp値が記される（Aはp&lt;0.001、Bはp&lt;0.002）。パネルAでは右にいくほど点が下がり、最右のカテゴリは0.6付近まで落ちて点線を大きく下回る。パネルBでは同じデータが逆向きになり、右にいくほど点が上がって最右は1.3付近で点線を上回る。同一の集団・同一の曝露で、共変量を1つ足すだけで折れ線の傾きが反転して見えることが、この2枚並びの主眼である。</p>
+</div>
+<h4>5-1. モデルA（施設調整のみ）— 待つほど死ににくい</h4>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>院内死亡 オッズ比（95%CI）</th><th>ICU死亡 オッズ比（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.95（0.85–1.07）</td><td>0.99（0.88–1.13）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.01（0.89–1.14）</td><td>1.00（0.88–1.13）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>0.82（0.72–0.92）有意</td><td>0.81（0.71–0.92）有意</td></tr>
+<tr><td>&gt;3.7 hr</td><td>0.56（0.49–0.64）有意</td><td>0.49（0.42–0.57）有意</td></tr>
+<tr><td><strong>全体のWald検定</strong></td><td><strong>p&lt;0.001</strong></td><td><strong>p&lt;0.001</strong></td></tr>
+</tbody></table></div>
+<h4>5-2. モデルB（＋APACHE IV 予測死亡率）— 向きが反転する</h4>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>院内死亡 オッズ比（95%CI）</th><th>ICU死亡 オッズ比（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.97（0.84–1.12）</td><td>1.03（0.88–1.19）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.07（0.92–1.24）</td><td>1.05（0.90–1.22）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.20（1.03–1.39）有意</td><td>1.18（1.01–1.39）有意</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.27（1.08–1.49）有意</td><td>1.14（0.96–1.37）</td></tr>
+<tr><td><strong>全体のWald検定</strong></td><td><strong>p&lt;0.002</strong></td><td><strong>p=0.20</strong></td></tr>
+</tbody></table></div>
+<ul><li>院内死亡では最長2群が有意に上振れ、因子全体も有意</li><li><strong>ICU死亡では、個々のカテゴリで 2.4–3.7時間 が有意（1.18, 1.01–1.39）であるにもかかわらず、因子全体のWald検定は p=0.20 で有意でない。</strong> 抄録は後者のみを引いて「ICU死亡とは関連しなかった」と書いている</li></ul>
+<h3>6. 効果修飾 — 関連が出るのは最重症層だけ</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000003957" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000003957）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. APACHE IV 予測死亡率の階層ごとに描き分けた、院内死亡のオッズ比（ER滞在時間別）。2行2列の4パネルで、AがAPACHE IV 予測死亡率 10.5%未満、Bが10.5–25.6%、Cが25.7–60.9%、Dが60.9%超。各パネルの縦軸はオッズ比（95%CI）で目盛は0.5・1.0・1.5・2.0、横軸は五分位（&lt;1.2／1.2-1.7／1.7-2.4／2.4-3.7／3.7-24.0時間）、1.0の水平点線が引かれる。参照カテゴリは各パネル左端の黒丸。パネル上部にER滞在時間全体のWald検定のp値が記される（Aはp=0.93、Bはp=0.07、Cはp=0.09、Dはp=0.019）。パネルAではすべての点が1.0付近に並び、エラーバーは低リスク層ゆえに長い。BとCでは右側のカテゴリがやや上に持ち上がるがCIは点線をまたぐものが多い。パネルDのみ右肩上がりが明瞭で、右端2つのエラーバー下端が点線より上にある。4枚を通して見ると、上振れは最重症のパネルDにしか現れない。</p>
+</div>
+<h4>Table 2 モデルC. 院内死亡・ICU死亡のオッズ比（APACHE IV 予測死亡率の層別）</h4>
+<p><strong>層① APACHE IV 予測死亡率 &lt;10.5%</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>院内死亡</th><th>ICU死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.79（0.43–1.45）</td><td>0.81（0.37–1.79）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.02（0.57–1.83）</td><td>0.79（0.35–1.77）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.01（0.58–1.76）</td><td>0.71（0.34–1.54）</td></tr>
+<tr><td>&gt;3.7 hr</td><td>0.99（0.58–1.70）</td><td>0.83（0.41–1.71）</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.93</strong></td><td><strong>p=0.94</strong></td></tr>
+</tbody></table></div>
+<p><strong>層② APACHE IV 予測死亡率 10.5–25.6%</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>院内死亡</th><th>ICU死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.87（0.59–1.30）</td><td>0.95（0.59–1.53）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.32（0.90–1.93）</td><td>1.01（0.62–1.63）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.41（0.97–2.03）</td><td>1.40（0.90–2.18）</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.12（0.76–1.63）</td><td>0.93（0.58–1.48）</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.07</strong></td><td><strong>p=0.27</strong></td></tr>
+</tbody></table></div>
+<p><strong>層③ APACHE IV 予測死亡率 25.7–60.9%</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>院内死亡</th><th>ICU死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.97（0.76–1.24）</td><td>1.01（0.77–1.32）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.08（0.84–1.38）</td><td>1.07（0.82–1.39）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.04（0.81–1.24）</td><td>1.00（0.76–1.31）</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.32（1.02–1.69）有意</td><td>1.13（0.86–1.49）</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.09</strong></td><td><strong>p=0.89</strong></td></tr>
+</tbody></table></div>
+<p><strong>層④ APACHE IV 予測死亡率 &gt;60.9%（最重症）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>院内死亡</th><th>ICU死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>1.03（0.83–1.27）</td><td>1.07（0.87–1.31）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>0.99（0.81–1.24）</td><td>1.06（0.86–1.31）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.29（1.02–1.64）有意</td><td>1.33（1.05–1.67）有意</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.54（1.11–2.14）有意</td><td>1.33（0.98–1.81）</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.019</strong></td><td><strong>p=0.09</strong></td></tr>
+</tbody></table></div>
+<p><strong>読み方</strong></p>
+<ul><li>ER滞在時間という因子<strong>全体</strong>が院内死亡と関連したのは、<strong>最重症層（&gt;60.9%）だけ</strong>（p=0.019）。層③は p=0.09、層②は p=0.07、層①は p=0.93</li><li>抄録と結論は「APACHE IV 予測死亡率が高い患者で」と複数形で書くが、全体検定が有意なのは1層のみである。層③で有意になっているのは &gt;3.7時間 の個別オッズ比（1.32）だけで、全体では有意でない</li><li>最重症層でも<strong>用量反応は単調でない</strong>。1.03 → 0.99 → 1.29 → 1.54 で、第3五分位（1.7–2.4時間）は参照より低い。「2.4時間を超えると危ない」という閾値が、モデルから推定されたのではなく五分位の切れ目をあとから読んだものであることが、この非単調性から見える</li></ul>
+<h3>7. 副次アウトカム — 30日死亡・90日死亡</h3>
+<h4>Table 3 モデルA・B. 30日死亡・90日死亡のハザード比</h4>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>30日死亡 A</th><th>90日死亡 A</th><th>30日死亡 B</th><th>90日死亡 B</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>1.00（0.91–1.11）</td><td>1.00（0.91–1.09）</td><td>1.04（0.94–1.14）</td><td>1.03（0.94–1.14）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.04（0.94–1.15）</td><td>1.03（0.94–1.14）</td><td>1.05（0.95–1.17）</td><td>1.06（0.96–1.16）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>0.90（0.81–0.997）有意</td><td>0.91（0.83–1.00）</td><td>1.21（1.09–1.34）有意</td><td>1.21（1.09–1.33）有意</td></tr>
+<tr><td>&gt;3.7 hr</td><td>0.61（0.54–0.68）有意</td><td>0.67（0.60–0.74）有意</td><td>1.18（1.05–1.33）有意</td><td>1.23（1.11–1.37）有意</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p&lt;0.001</strong></td><td><strong>p&lt;0.001</strong></td><td><strong>p&lt;0.001</strong></td><td><strong>p&lt;0.001</strong></td></tr>
+</tbody></table></div>
+<p>A＝施設調整のみ、B＝施設＋APACHE IV 予測死亡率で調整。院内死亡と同じく、調整によって向きが反転する。</p>
+<h4>Table 3 モデルC. 層別のハザード比</h4>
+<p><strong>層① &lt;10.5%</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>30日死亡</th><th>90日死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.99（0.58–1.68）</td><td>1.09（0.72–1.69）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.17（0.70–1.96）</td><td>1.26（0.82–1.92）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.51（0.95–2.42）</td><td>1.43（0.97–2.12）</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.24（0.77–1.99）</td><td>1.28（0.87–1.89）</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.31</strong></td><td><strong>p=0.40</strong></td></tr>
+</tbody></table></div>
+<p><strong>層② 10.5–25.6%</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>30日死亡</th><th>90日死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>0.92（0.66–1.29）</td><td>0.92（0.69–1.23）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.25（0.91–1.74）</td><td>1.16（0.87–1.54）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.38（1.01–1.88）</td><td>1.29（0.98–1.69）</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.11（0.81–1.54）</td><td>1.17（0.89–1.54）</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.07</strong></td><td><strong>p=0.09</strong></td></tr>
+</tbody></table></div>
+<p><strong>層③ 25.7–60.9%</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>30日死亡</th><th>90日死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>1.05（0.86–1.27）</td><td>1.05（0.87–1.26）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>1.14（0.94–1.39）</td><td>1.15（0.96–1.39）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.15（0.95–1.40）</td><td>1.17（0.98–1.41）</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.24（1.02–1.52）有意</td><td>1.31（1.09–1.58）有意</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.22</strong></td><td><strong>p=0.039</strong></td></tr>
+</tbody></table></div>
+<p><strong>層④ &gt;60.9%（最重症）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ER→ICU時間</th><th>30日死亡</th><th>90日死亡</th></tr></thead>
+<tbody>
+<tr><td>&lt;1.2 hr</td><td>参照</td><td>参照</td></tr>
+<tr><td>1.2–1.7 hr</td><td>1.05（0.93–1.19）</td><td>1.05（0.92–1.18）</td></tr>
+<tr><td>1.7–2.4 hr</td><td>0.98（0.87–1.12）</td><td>0.97（0.86–1.11）</td></tr>
+<tr><td>2.4–3.7 hr</td><td>1.18（1.03–1.36）有意</td><td>1.17（1.02–1.35）有意</td></tr>
+<tr><td>&gt;3.7 hr</td><td>1.19（0.99–1.42）</td><td>1.22（1.03–1.46）有意</td></tr>
+<tr><td><strong>Wald検定</strong></td><td><strong>p=0.031</strong></td><td><strong>p=0.014</strong></td></tr>
+</tbody></table></div>
+<ul><li>30日・90日でも院内死亡と同じ形が出る。ただし層別の p 値は院内死亡よりやや高い（著者も「slightly higher p values」と記述）</li><li>層③では30日 p=0.22 に対し90日 p=0.039 と、ほぼ同じ設計のアウトカム間で結論が入れ替わる</li></ul>
+<h3>8. 考察 — 著者が挙げたメカニズム</h3>
+<p>著者が「なぜER滞在が延びるのか／なぜそれが死亡につながりうるのか」として挙げるのは3つの経路である。<strong>いずれも本研究のデータでは検証されていない</strong>点に注意する。</p>
+<div class="tw"><table>
+<thead><tr><th>経路</th><th>著者の記述</th><th>本研究のデータ</th></tr></thead>
+<tbody>
+<tr><td><strong>トリアージの精度</strong></td><td>最重症患者を認識・診断するにはトリアージ体制が要る。ヨーロッパで最も使われる Manchester Triage Scale に NEWS を加えると識別能が上がる（Bilben 2016）。予測モデルとベンチマーキングツールは、遅延の原因を施設が特定するのに役立ちうる</td><td>トリアージスコアのデータなし</td></tr>
+<tr><td><strong>ERで提供されるケアの質</strong></td><td>ER職員が重症患者に必要な時間と注意を割けない場合がある。臨床上の必要が資源を上回るとき（strain）に転帰が悪化しうる</td><td>ER側の人員・負荷のデータなし</td></tr>
+<tr><td><strong>ICU病床のキャパシティ・ストレイン</strong></td><td>Harris 2018 は病棟患者で、速やかな入室が90日死亡を下げたことを示した（対照群の遅延中央値11時間、IQR 6–26）。速やかな入室は、空床が2床以上あるときのほうが1床以下より高頻度だった（p&lt;0.001）</td><td>ICU空床数・稼働率のデータなし</td></tr>
+</tbody></table></div>
+<p><strong>待機の理由は本文に一切データがない。</strong> ベッド満床・人員不足・検査中・入室決定の遅れといった内訳は、表にも供給資料の表題にも現れない。緒言で「トリアージ・診断・ロジスティクス上の理由」と一般論として述べられるだけである。本研究のデータでは、長い待機が「ICUに空きがなかった」のか「ERで診断と初期治療をしていた」のかを区別できない。この区別は介入可能性を根本的に分けるため、読者が最も知りたい情報だが<strong>本文に無い</strong>。</p>
+<p><strong>著者が実際に検証して否定した仮説</strong></p>
+<ul><li>ER到着時刻（夜間 vs 日中）が ER滞在時間と院内死亡の関係を修飾するかを検討したが、影響がなかったため最終モデルには含めなかった。Kuijsten 2010（引用文献17）が入室時刻と死亡の関連を報告したことを受けた検討である</li></ul>
+<p><strong>追加解析：診断別</strong></p>
+<ul><li>APACHE IV に入室診断（445分類）が含まれているにもかかわらず、診断単独で効果修飾があるかを著者は追加で検討した</li><li>上位4診断（心停止14.3%／外傷（非手術）13.6%／頭蓋内出血9.4%／呼吸不全9.4%）で層別したところ、<strong>心停止のみ</strong>が粗・調整の両方でER滞在時間と院内死亡の有意な関連を示した</li><li>著者自身「入室診断が今回の所見の説明になりうる」「本サンプルは入室診断を唯一の説明因子として信頼できる結論を出すには小さすぎる」と述べ、<strong>数値は本文に載せず「参考のみ（for reference only）」として供給資料の Table B・C に置いている</strong>（供給資料は本PDFに含まれない）</li></ul>
+<p><strong>著者が挙げた限界</strong></p>
+<ol><li>6大学病院のみ。ケースミックス上はオランダの8大学病院を代表するが、紹介元の非大学病院を含められなかった（ER到着日時がNICEに無いため）。一般化可能性に限界がある。次の研究は非大学ICUを含めるべき</li><li><strong>APACHE III スコアはICU入室後24時間の最悪値で計算されている。</strong> ER滞在1時間の患者と23時間の患者が同じ枠で扱われ、APACHE IV 予測死亡率に影響しうる</li><li>ER到着日時を後ろ向きに収集したため3%未満（356例）を除外した。損失が小さいため無視できると考える</li></ol>
+<h3>9. 批判的吟味（JCでの論点）</h3>
+<h4>9-1. 中心論点 — 適応交絡を処理できているか</h4>
+<p><strong>この論文の解釈可能性は、ほぼこの一点にかかっている。</strong></p>
+<ul><li>Table 1 が示す通り、待機時間の五分位間で患者集団はまったく別物である。心停止 18.6% → 2.7%、頭蓋内出血 12.3% → 5.9%、APACHE IV 予測死亡率 0.23 → 0.10。<strong>「速く入室した」という曝露は、実質的に「心停止・頭蓋内出血だった」とほぼ同義</strong>になっている</li><li>この構造下での粗オッズ比 0.56 は「待つと助かる」ではなく、単に軽症が待たされているだけである。ここまでは著者・読者ともに合意できる</li><li>問題は、<strong>調整後の 1.27 を「待たせた害」と読んでよいか</strong>である。調整に使われたのは APACHE IV 予測死亡率という<strong>単一の要約変数</strong>のみ。以下の点で残余交絡が残る</li></ul>
+<div class="tw"><table>
+<thead><tr><th>残余交絡の源</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>関数形の仮定</td><td>APACHE IV 予測死亡率をモデルB でどう投入したか（連続量か・線形か・ロジット変換か）が記載されていない。ケースミックスの差がこれほど極端な場合、単一変数の投入では調整しきれない可能性が高い</td></tr>
+<tr><td>診断の残余効果</td><td>APACHE IV は診断445分類を内包するが、著者自身の追加解析で診断（心停止）が独立に効果修飾を示した。内包による調整が不十分だったことを著者自身のデータが示している</td></tr>
+<tr><td>未測定の交絡</td><td>治療制限の方針（DNAR等）、ER到着時の蘇生状況、紹介元の有無、家族との合意形成に要した時間。いずれも待機時間を延ばし、同時に死亡と関連しうる</td></tr>
+<tr><td>施設内の時期効果</td><td>2009–2016の8年間で、トリアージ体制・ICU運用・治療内容が変化しているはずだが、年次を調整していない</td></tr>
+</tbody></table></div>
+<h4>9-2. さらに重い問題 — 調整変数が曝露の「後」に測られている</h4>
+<ul><li>APACHE III の生理学的スコアは<strong>ICU入室後24時間の最悪値</strong>で計算される。つまり <strong>APACHE IV 予測死亡率は、ER滞在という曝露が終わったあとに測定された変数</strong>である</li><li>曝露の下流にある変数で調整すると、次の2方向のバイアスが同時に起こりうる</li><li><strong>中間変数への過剰調整</strong>：長い待機が実際に生理学的悪化を招いたなら、その悪化はAPACHE IVに反映され、調整によって「待機の害」の一部が消される（帰無方向へのバイアス）</li><li><strong>逆向きのバイアス</strong>：ERで診断と初期治療を受けて安定してからICUに入った患者は、ICU入室後24時間の生理学的異常が小さくAPACHE IVも低い。同じ院内死亡なら「軽症なのに死んだ」と評価され、待機の害が過大に見える</li><li><strong>どちらの向きに、どれだけ効いているかを推定する感度分析が一切ない。</strong> 著者は測定タイミングの問題を限界に挙げているが、それがバイアスの名前を持つ構造的な問題であることには触れていない</li><li>同じ問いを扱った Harris 2018（引用文献27）は、ICU病床のストレインを操作変数に使うことでこの問題を回避している。本研究がその手法を採らなかった理由の説明はない</li></ul>
+<h4>9-3. 「線形か閾値か」— どちらも検討されていない</h4>
+<ul><li>曝露は五分位でカテゴリ化されただけで、連続量としての用量反応も、閾値の推定も行われていない</li><li>結論の「&gt;2.4時間」は五分位の境界であり、<strong>この集団の分布に依存する</strong>。中央値2.0時間の集団を5等分した結果にすぎず、中央値3.9時間の豪州・NZ や 4.8時間のフィンランドに持ち込めない。当院にも持ち込めない</li><li>最重症層の用量反応は単調でない（1.03 → 0.99 → 1.29 → 1.54）。真の閾値があるなら第3五分位が参照より下（0.99）になる理由がない</li><li>最上位カテゴリは 3.7–24.0時間 という<strong>6.5倍の幅</strong>を1つにまとめている（中央値5.0時間、IQR 4.2–6.3）。「20時間待たせたらどうなるか」はこの推定からは何も言えない</li><li>なお Table 1 の五分位ラベルは 3.7–24.0時間 と上限24時間で切れているが、方法に「24時間超を除外した」という記載はない</li></ul>
+<h4>9-4. アウトカム間の不一致が説明されていない</h4>
+<ul><li>待機の害が「集中治療の開始が遅れること」で生じるなら、<strong>最も早く・最も強く動くはずのアウトカムはICU死亡</strong>である。ところが調整後のICU死亡は p=0.20 で有意でなく、院内死亡だけが動く</li><li>差分は「ICU退室後・退院前の死亡」に集中していることになるが、この経路を説明する機序は本文に示されていない</li><li>一方で、ICU死亡でも最重症層の 2.4–3.7時間 は 1.33（1.05–1.67）と有意である。層別に見ると信号はあり、全体検定で消えている。<strong>この不一致を著者は考察していない</strong></li></ul>
+<h4>9-5. 多重性と選択的な報告</h4>
+<ul><li>3モデル × 4アウトカム（院内・ICU・30日・90日）× 4重症度層で、Wald検定だけでも数十回、カテゴリ別推定は数百に及ぶ。多重性の調整はない</li><li>最重症層の院内死亡の p=0.019 は、この検定回数のもとでは強い証拠ではない</li><li>抄録は最重症層の 1.29 と 1.54 を引用して結論を組み立てるが、これは<strong>全推定のうち最も大きい2つ</strong>である</li><li>一方でICU死亡については、個別カテゴリの有意所見（1.18, 1.01–1.39）ではなく全体検定の p=0.20 を引いて「関連しなかった」と書く。<strong>同じ論文の中で、有意になる方の要約を採る基準が揃っていない</strong></li></ul>
+<h4>9-6. 因果的な言い回し</h4>
+<ul><li>抄録の結論は「We hereby provide evidence that rapid admission of the most critically ill patients to the ICU might reduce hospital mortality」であり、観察研究から介入の効果（reduce）を語る形になっている。might という留保は付いているが、"provide evidence" は強い</li><li>本文は一貫して correlation / correlated という語を使うが、相関係数は計算していない。推定しているのは回帰係数である</li></ul>
+<h4>9-7. COI・資金源の評価</h4>
+<ul><li>Termorshuizen・de Keizer の所属機関が <strong>NICE registry 自身</strong>から資金を受けている。de Keizer は NICE財団に所属し、Amsterdam UMC 医療情報学部門の研究者でもある</li><li>本研究は NICE registry の価値を示す方向に働く研究であり、その意味で開示先と主題は重なる。ただしレジストリ研究では珍しくない構造であり、結果の方向を歪めたと考えるべき具体的な兆候は本文にない</li><li>Termorshuizen 個人の受領先（精神科医療機関・薬学研究所）は本研究の主題と無関係</li><li>残りの著者は利益相反なしと申告。企業資金の記載はない</li></ul>
+<h4>9-8. 原著自身の内的不整合（数値を検算した結果）</h4>
+<div class="call note"><span class="lab">図の解説</span>
+<p>原表の記載と実数が合わない箇所 <strong>① Table 1「肺炎」行の五分位パーセントが全て誤り。</strong> 全体は 1,028/14,788 = 7.0% で正しいが、五分位は 169/2,956 = 5.7%（原表3.1%）、190/2,998 = 6.3%（同3.2%）、173/2,938 = 5.9%（同3.5%）、269/2,956 = 9.1%（同4.9%）、227/2,940 = 7.7%（同3.9%）。実数の合計は 1,028 で正しいため、パーセント計算の分母を誤ったと考えられる <strong>② Table 1「外傷（手術）」第1五分位 21（7.1%）</strong> は 21/2,956 = 0.7% が正しい。小数点位置の誤植。同じ行の p=0.245 も、0.7% → 7.2% という10倍の勾配（n=450）に対して統計的に成立しがたい <strong>③ Table 1「呼吸不全」の p が「&lt; 0.13」</strong> と印字されている。不等号は不要 <strong>④ Table 2 モデルC 層③のカテゴリ名が「1.7–2.2 hr」</strong> となっている。他はすべて 1.7–2.4 hr で、誤植 <strong>⑤ Table 2 モデルC 層③ 2.4–3.7時間の「1.04（0.81–1.24）」</strong> は、点推定が信頼区間の幾何中心（√(0.81×1.24)=1.00）と一致しない。他の全行は幾何中心と点推定が一致しており、上限が 1.34 の誤植である可能性が高い <strong>⑥ Table 3 モデルC 層④ 30日死亡 &gt;3.7時間の「1.19（0.99–1.42）」に p&lt;0.05 の印</strong>が付いているが、信頼区間が1をまたぐ。逆に<strong>同じ Table 3 モデルC 層② 30日死亡 2.4–3.7時間の「1.38（1.01–1.88）」には印が付いていない</strong>。有意マークの付与が両方向に誤っている <strong>⑦ 抄録・本文の「p &lt; 0.002」</strong> という表記。Wald検定は具体的な p 値を返すため、この書き方は 0.002 という区切りが恣意的に選ばれたことを示す（通常は p=0.002 と書く） <strong>⑧ 本文の「ED to ICU time as a whole was negatively associated with higher hospital mortality」</strong> は二重否定的で、意味が取りにくい（「待機時間が長いほど院内死亡が低かった」の意） <strong>⑨ 抄録の結論「mainly driven by patients who had a higher APACHE IV probability」</strong> は複数層を示唆するが、因子全体のWald検定が有意なのは &gt;60.9% の1層のみ（層③は p=0.09）</p>
+</div>
+<h3>10. Vault内の関連論文との突き合わせ</h3>
+<h4>10-1. その後どうなったか（本論文の論点が国内データでどう扱われたか）</h4>
+<div class="tw"><table>
+<thead><tr><th>本論文の論点</th><th>Vault内で裏が取れるもの</th><th>何が言えるか</th></tr></thead>
+<tbody>
+<tr><td>入室のタイミングと死亡</td><td><span class="wl">時間外のICU入室はむしろ院内死亡が低い — 16.7%対20.6%（JIPAD 28200例・JIntensiveCare2022）</span></td><td>本論文は「夜間 vs 日中のER到着」が効果修飾しないと述べて最終モデルから外した。JIPADの国内データは時間外入室のほうが院内死亡が低いことを示しており、入室タイミングの議論は素朴な予想と逆に出やすいという点で一致する</td></tr>
+<tr><td>病床のキャパシティが待機を生む</td><td><span class="wl">ICUのない病院の中間治療室（IMCU）は院内死亡が15%高い（DPC 306万例・CritCare2025）</span> ／ <span class="wl">🏨 HDU・SDU（中間治療室）と病床機能 Home</span></td><td>本論文の考察が推測にとどめた「病床事情」を、国内では病床機能の側から定量化する研究が出ている。ただしER→ICU時間を直接扱った国内研究はVault未収載</td></tr>
+<tr><td>どの重症度をどこで診るか</td><td><span class="wl">敗血症のICU・HDU入室はSOFAで線引きできる — 6以上でICU or HDU、12以上でICU（DPC 97070例・PSマッチ・CCM2023）</span></td><td>本論文が「最重症層でだけ待機が効く」と示したのに対し、こちらは「どの重症度をどのユニットで診るか」に答えている。<strong>両者を合わせると「最重症層を速く適切なユニットへ」という運用の形になるが、どちらも観察研究である</strong></td></tr>
+<tr><td>速く動かせば救えるのか</td><td><span class="wl">RRT起動は敗血症の院内死亡を下げなかった（JIPAD 3883例・95ICU・IPTW・CCM2025）</span></td><td>院内急変対応チームの起動は、傾向スコア重み付け後に敗血症の院内死亡を下げなかった。「早期認知と迅速な移送」という同じ仮説に対する国内の陰性所見</td></tr>
+<tr><td>病床を増やせば解決するか</td><td><span class="wl">予防可能な可能性のあるICU入室（米国2006-2015）</span></td><td>ICU病床数と入室率に相関があり、病床を増やすと入室も増える（ICU-bed elasticity of demand）。「待機を減らすために増床する」は需要側を動かしてしまう</td></tr>
+<tr><td>人的資源の効き方</td><td><span class="wl">平日10時の集中治療医対病床比が院内死亡を下げる（JIPAD 46503例・65ICU・JICM2024）</span></td><td>日勤帯の集中治療医密度が院内死亡と関連。夜間・週末は有意でない。待機時間より先に医師配置を議論する余地がある</td></tr>
+<tr><td>重症度スコアで調整することの限界</td><td><span class="wl">欠測値がAPACHE IIIとJRODのSMRを押し上げる — 血ガスとアルブミンを測らない施設ほど成績が悪く見える（JIPAD 61357例・JCritCare2024）</span> ／ <span class="wl">JROD 日本版死亡リスク予測モデル — APACHE III-jの過大評価を階層GAMで補正（JIPAD 33557例・JIntensiveCare2021）</span></td><td>本論文の調整はAPACHE IV 予測死亡率という1変数に全面依存している。国内データはAPACHE系スコアが測定慣行や集団によって系統的に偏ることを示しており、<strong>この1変数調整の頑健性に疑問符が付く</strong></td></tr>
+</tbody></table></div>
+<h4>10-2. 直接の対になる論文でVault未収載のもの</h4>
+<ul><li>Harris S, et al. Impact on mortality of prompt admission to critical care for deteriorating ward patients: An instrumental variable analysis using critical care bed strain. <strong>Intensive Care Med 2018;44:606–615</strong>（本論文の引用文献27。<strong>操作変数法で同じ問いを扱った、本論文より方法論的に強い研究</strong>。優先度が高い）</li><li>Chalfin DB, et al. Impact of delayed transfer of critically ill patients from the emergency department to the intensive care unit（DELAY-ED）. <strong>Crit Care Med 2007;35:1477–1483</strong>（引用文献7）</li><li>Carter AW, et al. Is ED length of stay before ICU admission related to patient mortality? <strong>Emerg Med Australas 2010;22:145–150</strong>（引用文献8。ANZICS で関連を示せなかった陰性研究）</li><li>Bagshaw SM, et al. Association between strained capacity and mortality among patients admitted to intensive care. <strong>J Crit Care 2018;43:81–87</strong>（引用文献26）</li><li>Mathews KS, et al. Effect of emergency department and ICU occupancy on admission decisions and outcomes for critically ill patients. <strong>Crit Care Med 2018;46:720–727</strong>（引用文献16）</li><li>Kuijsten HA, et al. Hospital mortality is associated with ICU admission time. <strong>Intensive Care Med 2010;36:1765–1771</strong>（引用文献17）</li><li>Oglesby KJ, et al. 'Score to Door Time', a benchmarking tool for rapid response systems. <strong>Crit Care 2011;15:R180</strong>（引用文献25。<strong>RRSへの読み替えを議論するならこれが起点になる</strong>）</li></ul>
+<h3>11. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ICU患者のトリアージ — 合意と論争の所在</td><td>Sprung CL, et al. Intensive Care Med 2013;39:1916–1924</td></tr>
+<tr><td>2</td><td>ICUへのトリアージ — 入室判断に影響する因子と転帰のパイロット研究</td><td>Garrouste-Orgeas M, et al. Intensive Care Med 2003;29:774–781</td></tr>
+<tr><td>5</td><td>入院からICU入室までが長いほど死亡が高い（病棟由来）</td><td>Goldhill DR, et al. Intensive Care Med 2004;30:1908–1913</td></tr>
+<tr><td>6</td><td>ER遅延と重症内科患者の転帰（6か月QOLを含む）</td><td>Saukkonen KA, et al. J Intern Med 2006;260:586–591</td></tr>
+<tr><td>7</td><td>DELAY-ED：ER→ICU搬送遅延の影響</td><td>Chalfin DB, et al. Crit Care Med 2007;35:1477–1483</td></tr>
+<tr><td>8</td><td>ER滞在時間と死亡は関連するか（ANZICS・陰性）</td><td>Carter AW, et al. Emerg Med Australas 2010;22:145–150</td></tr>
+<tr><td>9</td><td>充実したプライマリケアがER滞在時間に与える影響（オランダの2.2時間の出典）</td><td>Thijssen WAMH, et al. BMC Health Serv Res 2016;16:149</td></tr>
+<tr><td>10</td><td>NICE財団（レジストリの一次情報）</td><td>stichting-nice.nl</td></tr>
+<tr><td>11</td><td>Vektis データベース（保険請求DB）</td><td>vektis.nl</td></tr>
+<tr><td>12</td><td>ICU生存者の医療費は入室前後とも対照群より高い</td><td>van Beusekom I, et al. J Crit Care 2018;44:345–351</td></tr>
+<tr><td>13</td><td><strong>APACHE IV の原典</strong></td><td>Zimmerman JE, et al. Crit Care Med 2006;34:1297–1310</td></tr>
+<tr><td>14</td><td>ICU入室遅延が重症患者の死亡に与える影響</td><td>Cardoso LT, et al. Crit Care 2011;15:R28</td></tr>
+<tr><td>15</td><td>ER boarding 時間とICU患者の転帰</td><td>Al-Qahtani S, et al. BMC Emerg Med 2017;17:34</td></tr>
+<tr><td>16</td><td>ERとICUの占床率が入室判断と転帰に与える影響</td><td>Mathews KS, et al. Crit Care Med 2018;46:720–727</td></tr>
+<tr><td>17</td><td>院内死亡はICU入室時刻と関連する</td><td>Kuijsten HA, et al. Intensive Care Med 2010;36:1765–1771</td></tr>
+<tr><td>21</td><td>NEWS を急性呼吸困難患者のER予測指標として検証</td><td>Bilben B, et al. Scand J Trauma Resusc Emerg Med 2016;24:80</td></tr>
+<tr><td>22</td><td>Manchester Triage Scale の教科書</td><td>Mackway-Jones K, Windle J. Emergency Triage. Wiley, 2014</td></tr>
+<tr><td>23</td><td>MEWS の内科入院患者での妥当性検証</td><td>Subbe CP, et al. QJM 2001;94:521–526</td></tr>
+<tr><td>24</td><td>ERで死亡高リスク患者を同定する臨床予測モデル</td><td>Coslovsky M, et al. Intensive Care Med 2015;41:1029–1036</td></tr>
+<tr><td>25</td><td><strong>Score to Door Time — RRSのベンチマーク指標</strong></td><td>Oglesby KJ, et al. Crit Care 2011;15:R180</td></tr>
+<tr><td>26</td><td>キャパシティ・ストレインとICU患者の死亡</td><td>Bagshaw SM, et al. J Crit Care 2018;43:81–87</td></tr>
+<tr><td>27</td><td><strong>悪化した病棟患者の迅速な入室と死亡（操作変数法）</strong></td><td>Harris S, et al. Intensive Care Med 2018;44:606–615</td></tr>
+<tr><td>28</td><td>ICUの疼痛管理を改善するための質指標測定</td><td>Roos-Blom MJ, et al. J Crit Care 2019;49:136–142</td></tr>
+<tr><td>29</td><td>ICUで使うべき質指標はどれか</td><td>de Vos M, et al. J Crit Care 2007;22:267–274</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ul><li><mark class="hl"><strong>この論文の主役は結果ではなく「反転」そのものである。</strong></mark> 同じ14,788例・同じ曝露で、粗解析のオッズ比0.56（待つほど死なない）が、APACHE IV 予測死亡率を1つ足すだけで1.27（待つほど死ぬ）に変わる。<mark class="hl">適応交絡を目で見る教材としてこれ以上のものはない</mark></li><li><mark class="hl"><strong>関連が出るのは APACHE IV 予測死亡率 60.9%超の最重症層だけ</strong></mark>。低リスク層のオッズ比は0.99〜1.02で完全に平坦。<mark class="hl">「ER滞在時間を全患者の平均値で管理する」設計は、この論文からは支持されない</mark></li><li><mark class="hl"><strong>「2.4時間」はモデルが推定した閾値ではなく、オランダのこの集団の五分位の切れ目である。</strong></mark> 最重症層の用量反応は単調ですらない（1.03 → 0.99 → 1.29 → 1.54）。<mark class="hl">当院の目標値としてそのまま持ち込んではいけない</mark></li><li><mark class="hl">調整に使った APACHE IV 予測死亡率は<strong>ICU入室後24時間の最悪値</strong>から計算される＝<strong>曝露の後に測られた変数</strong>である</mark>。過剰調整にも過小調整にもなりうるが、<mark class="hl">感度分析は行われていない</mark>。同じ問いを操作変数法で扱った Harris 2018 のほうが方法論的に強い</li><li>==<strong>院内死亡は動くのにICU死亡は動かない（調整後 p=0.20）。</strong><mark class="hl"> 集中治療の開始遅れが機序なら最初に動くべきはICU死亡であり、</mark>この不一致を著者は説明していない==</li><li><mark class="hl"><strong>待機の理由（ベッド満床・人員・検査中）は本文に一切データがない。</strong></mark> 介入可能かどうかを決める最重要情報が欠けている</li><li><mark class="hl">行動が変わる一文：<strong>当院でまず作るべきは「ER滞在時間の目標値」ではなく、「重症度で層別したER→ICU時間の分布」と「その時点のICU/SDU空床数」を同じ台帳に並べて記録する仕組みである。</strong></mark> 数字を作ってから閾値を議論する順序を逆にしない</li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

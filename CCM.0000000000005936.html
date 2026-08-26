@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICUリハビリで QOL が改善するのは併存疾患2つ以上の患者だけ — 4RCT 810例の個別患者データ統合（CCM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000005936.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICUリハビリで QOL が改善するのは併存疾患2つ以上の患者だけ — 4RCT 810例の個別患者データ統合（CCM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Jones JRA, Karahalios A, Puthucheary ZA, Berry MJ, Files DC, Griffith DM, McDonald LA, Morris PE, Moss M, Nordon-Craft A, Walsh T, Berney S, Denehy L. Responsiveness of Critically Ill Adults With Multimorbidity to Rehabilitation Interventions: A Patient-Level Meta-Analysis Using Individual Pooled Data From Four Randomized Trials. Crit Care Med. 2023;51(10):1373-1385. doi:10.1097/CCM.0000000000005936</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2023-10）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000005936" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000005936</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Responsiveness of Critically Ill Adults With Multimorbidity to Rehabilitation Interventions: A Patient-Level Meta-Analysis Using Individual Pooled Data From Four Randomized Trials</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000005936.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000005936.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000005936.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>変わること — 「誰に」の優先順位に一本の軸が入る</strong></p>
+<ul><li>入室時に <strong>Functional Comorbidity Index（FCI）</strong>（18項目のチェックリスト。後述）を取り、<strong>FCI 2以上を「リハビリ資源を厚くする層」として明示する</strong>。本研究で反応が見えたのはこの層だけで、FCI 1以下ではSF-36 PCS の差が最小重要差（2点）に届かない</li><li>本研究の上位5併存疾患は<strong>肥満・糖尿病・上部消化管疾患・うつ・うっ血性心不全</strong>。当院の入室患者でもごくありふれた組み合わせで、「特殊な難治例」を探す話ではない</li><li>直感は「元気な人ほどリハビリが効く」だが、患者報告アウトカムでは逆向きの示唆になる。伸びしろ（ベースラインの低さ）が大きい層ほど本人の実感が動く</li></ul>
+<p><strong>変わらないこと — 用量と ICU 内の安全性の話には答えていない</strong></p>
+<ul><li>4試験の介入はいずれも「機能再獲得訓練＋運動処方」だが、頻度・強度・時間は数量化されていない。著者ら自身が「最適な運動処方の検討は本研究の範囲外」と明言している</li><li><strong>エルゴメータ（サイクリング）と NMES を用いた介入は最初から除外</strong>されている。本論文をこれらの根拠には使えない</li><li><strong>人工呼吸中の ICU 内で強度をどこまで上げるかは、本論文の射程外</strong>。むしろ <span class="wl">強化早期離床は「誰に効くか」で真逆になる — 機械学習が示した死亡 −8.35%対+14.63%の異質性（TEAM二次解析・ICM2025）</span> は「併存疾患が<strong>少ない</strong>患者ほどベネフィット側」という真逆の層別を出している（対象・アウトカム・時間軸が違う。後述の対比表）</li></ul>
+<p><strong>Hotel ICU（退室後訪問・連続ケア）への具体的な落とし込み</strong></p>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ICU 入室時（48時間以内）</td><td>FCI を18項目で採点。2以上か</td><td>2以上なら退室後訪問と外来フォローの対象リストに入れる。1以下は通常運用</td></tr>
+<tr><td>ICU 退室時</td><td>急性期入院中にリハビリが継続する導線があるか</td><td>4試験のうち3試験は病棟でも介入を続けた。ICU 退室で切れる設計は本研究の介入と別物になる</td></tr>
+<tr><td>退院時</td><td>6分間歩行距離だけで判定していないか</td><td>本研究では退院時 6MWD に群間差が出ていない。退院時の歩行距離は数か月後の QOL を代表しない</td></tr>
+<tr><td>退室後訪問 3か月</td><td>SF-12 または SF-36 の PCS を測っているか</td><td>PCS の最小重要差は<strong>2点</strong>。訪問時の主観的印象ではなく点数で追う。FCI 2以上の層で 5〜6点の差が出るかが検証ポイント</td></tr>
+<tr><td>退室後訪問 6か月</td><td>3か月の値から改善しているか</td><td>本研究では介入群 36.2 → 38.3、対照群 30.4 → 32.5 と両群とも約2点上がる。改善しない場合は個別の要因を探す</td></tr>
+<tr><td>12か月</td><td>12か月まで追う体力があるか</td><td>本研究の12か月時点は例数が減って CI が広がり、有意差が消える。当院で12か月を主要評価にするのは非現実的</td></tr>
+</tbody></table></div>
+<p><strong>研究デザインの教訓</strong>：<mark class="hl">平均効果がゼロでも、層別すると効果が見えることがある</mark>。当院で介入研究を組むときは、治療効果の異質性（HTE）の検証項目を<strong>プロトコルに事前登録した状態で</strong>始める。本研究が説得力を持てたのは、PROSPERO 事前登録と公表プロトコルで「どの交互作用を見るか」を先に宣言していたからである</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症疾患後の退院時にみられる機能状態の喪失を、身体リハビリ介入が軽減することはレベル1のエビデンスで支持されている（Tipping 2017 ICM の系統的レビュー）。しかし複数の RCT は、<strong>退院後</strong>の身体機能と HRQoL の改善を示すことに失敗している（Denehy 2013、Moss 2016、Walsh 2015）。患者特性が重症疾患からの回復に重要であることを示す実質的なエビデンスは既にある</li><li><strong>Unknown</strong>：既存の併存疾患・年齢・性別・重症度といった<strong>患者特性が、リハビリ介入への反応を修飾するのか</strong>。個々の RCT の探索的解析では「既存の併存疾患の数」が反応する患者を特徴づけると示唆されていたが、単一試験では検出力が足りなかった。集計データだけを使う通常のメタ解析ではこの問いに答えられない</li><li><strong>What's new</strong>：<strong>集中治療リハビリ領域で初めて、RCT の個別患者データを統合した研究</strong>。810例の統合データで、<strong>FCI 2以上（多疾患併存）の患者だけが SF-36 PCS の改善を示し、その差は最小重要差を超えていた</strong>（交互作用 Wald 検定 p = 0.041）。FCI 1以下では差が出ない。一方で客観的身体パフォーマンス（6分間歩行距離）はどの患者特性でも修飾されなかった</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 4つのリハビリ RCT の個別患者データ 810例を統合すると、<strong>Functional Comorbidity Index が2以上の患者に限って、介入群の SF-36 Physical Component Summary が3か月・6か月時点で対照群より約5.8点高く、最小重要差（2点）を大きく超えていた</strong>（交互作用 Wald 検定 p = 0.041）。FCI 1以下では差がなく、客観的な歩行距離ではどの層でも差が出なかった。</p>
+</div>
+<ul><li><strong>問い</strong>：患者特性（既存の併存疾患・年齢・性別・重症度）は、身体リハビリの効果を修飾するか。共主要アウトカムは健康関連QOL（HRQoL）と客観的身体パフォーマンス</li><li><strong>データ源</strong>：既発表の系統的レビューで同定された4つの重症患者向け身体リハビリ RCT（豪1・英1・米2）の個別患者データ。<strong>810例（介入 403例、対照 407例）</strong></li><li><strong>層別因子は事前規定</strong>：PROSPERO 事前登録（CRD42019152526）と公表プロトコルで、FCI（1以下 / 2以上）・年齢（3区分）・性別・APACHE II 三分位の4つの交互作用を先に宣言している。事後解析は APACHE II を 20 未満 / 20 以上で二分した1つだけ</li><li><strong>主結果（HRQoL）</strong>：FCI 2以上で PCS t スコアが 3か月 36.2 対 30.4、6か月 38.3 対 32.5（いずれも介入 対 対照）。差はどの時点も約5.8点で、PCS の最小重要差 2点を大きく超える。12か月時点も点推定の差は同じ約5.8点だが、CI が広がり有意でなくなる</li><li><strong>主結果（PF ドメイン）</strong>：同じ方向・同じ程度だが、交互作用は Wald 検定 p = 0.061 で有意に届かない</li><li><strong>主結果（MCS）</strong>：どの患者特性でも修飾されない。精神的側面は動かない</li><li><strong>主結果（身体パフォーマンス）</strong>：6分間歩行距離の交互作用 Wald 検定 <strong>p = 0.264</strong>（図中にのみ記載）。5回立ち座り・Timed Up and Go も陰性。ただし解析対象は 236 / 223 / 218例と全体の約3割にとどまる</li><li><strong>年齢・性別・重症度</strong>：どのアウトカムも修飾しなかった</li><li><strong>エビデンスの質</strong>：Cochrane RoB 2 で4試験すべて "some concerns"。GRADE は HRQoL が <strong>moderate</strong>、身体パフォーマンスが <strong>low</strong></li><li><strong>著者の結論</strong>：「併存疾患2つ以上」という標的群を同定したことが重要な所見であり、今後のリハビリ研究に方向性を与える。多疾患併存の ICU 後集団は、前向き研究にとって選ばれた集団でありうる</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この論文を読むのに要る道具立て 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>多疾患併存（multimorbidity）</strong> とは、2つ以上の慢性疾患が併存している状態を指す。本論文はこれを世界で最も有病率の高い慢性健康問題と位置づけ、本研究の患者の59%が該当したと述べる。</p>
+<p><strong>Functional Comorbidity Index（FCI）</strong> は、Groll らが2005年に開発した併存疾患指数で、Charlson Comorbidity Index と違い<strong>死亡ではなく身体機能を予後指標として作られている</strong>。18項目のチェックリスト（本研究で拾われた項目は後述の Table 3）に該当数を数え、0〜18点で表す。本論文が FCI を選んだ根拠は3つ挙げられている。重症患者集団での評価者間信頼性が高いこと（Fan 2012）、Charlson より SF-36 の PCS スコアおよび PF ドメインとの相関が強いこと（Groll 2006）、身体パフォーマンステストと中等度の相関があること（Haines 2014）。</p>
+<p><strong>SF-36 / SF-12</strong> は健康関連QOL の代表的な患者報告尺度で、身体面をまとめた <strong>PCS（Physical Component Summary）</strong>、精神面をまとめた <strong>MCS（Mental Component Summary）</strong>、その下位項目の <strong>PF（Physical Functioning）ドメイン</strong>などに整理される。いずれも一般人口の平均が 50、標準偏差が 10 になるよう標準化された t スコアで表される。したがって「40点」は一般人口平均より1標準偏差低い、という読み方をする。本論文が採用した最小重要差（MID）は <strong>PCS が 2点、PF ドメインと MCS が 3点</strong>（SF-36v2 マニュアル）。</p>
+<p><strong>客観的身体パフォーマンス</strong>の3尺度。<strong>6MWD（6分間歩行距離）</strong> は6分間で歩いた距離（m）。<strong>5STS（5回立ち座り）</strong> は椅子から5回立ち座りする所要時間（秒）。<strong>TUG（Timed Up and Go）</strong> は椅子から立ち上がって3m歩いて戻って座るまでの所要時間（秒）。後2者は右に裾を引く分布なので、本研究では対数変換して解析している。</p>
+<p><strong>個別患者データメタ解析（IPD meta-analysis, IPDMA）</strong> は、各試験の要約統計量（平均・オッズ比など）ではなく、患者1人ずつの生データを集めて解析する手法。Cochrane はこれを信頼できる結果を得るゴールドスタンダードと位置づけ、特に<strong>不確実性がある状況で異なる患者フェノタイプの反応を検討する</strong>用途に推奨している。通常のメタ解析ではサブグループの定義が試験ごとにバラバラで比較できないが、IPD なら共通の閾値で切り直せる。代償として、データ共有契約の締結・データ移送・変数のハーモナイゼーション（同じ意味の変数を同じ形に揃える作業）に膨大な時間と労力がかかる。</p>
+<p><strong>交互作用の Wald 検定</strong>：本研究の主張はすべて「治療群 × 患者特性」の交互作用項が0かどうかの検定に依存している。これは「介入と対照の差が、患者特性のカテゴリ間で違うか」を問うもので、「あるサブグループの中で介入が効いたか」を問うものではない。この区別は後述の批判的吟味で効いてくる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>本文の導入は次の流れで書かれている。</p>
+<ul><li>レベル1のエビデンスは、重症疾患後の<strong>退院時</strong>にみられる機能状態の喪失を軽減する目的での身体リハビリ介入の使用を支持する（Tipping 2017 ICM）</li><li>しかし複数の RCT は、<strong>退院後</strong>の身体機能と HRQoL の改善を示すことに失敗している（Denehy 2013、Moss 2016、Walsh 2015 — いずれも本研究に組み入れられた試験そのもの）</li><li>患者の異質性が、リハビリ介入への反応の修飾因子でありうる。実際、患者特性が重症疾患からの回復に重要であることを示す実質的なエビデンスがある（社会経済的地位、患者背景・既往・重症度、ICU 前の認知機能、高齢 ICU 生存者の機能回復要因、高齢者の障害）</li><li>特定の特性に応じて集団を捉え直すことが、治療への反応をよりよく説明する助けになりうる</li><li>患者がまだ ICU や病院にいる間に、患者特性に基づいてリハビリ介入への反応を予測できれば、臨床医はより特異性の高いリハビリ治療を<strong>先回りして</strong>設計できる</li><li>ICU リハビリ RCT の探索的解析は、<strong>既存の併存疾患の数</strong>といった因子が反応する患者を特徴づけるうえで重要であることを示している（Puthucheary &amp; Denehy 2015、Gandotra 2019、Neumeier 2017）</li><li>反応性と安全性の両方を理解するには RCT の大規模データセットを用いたさらなる解析が必要であり、それは<strong>最近の大規模 RCT（TEAM 試験）の結果</strong>を踏まえると特にそうである</li></ul>
+<p>そのうえで著者らは、経験ある集中治療研究チームを招いて個別患者データを結合し、患者特性（既存の併存疾患・年齢・性別・重症度）が共主要アウトカムを修飾するかを検討した。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>3-1. 試験の同定</h4>
+<ul><li><strong>報告指針</strong>：PRISMA-IPD ガイドラインに準拠</li><li><strong>事前登録</strong>：PROSPERO CRD42019152526。プロトコルは BMJ Open 2020;10:e035613 に公表済み</li><li><strong>適格基準</strong>（要約として本文に記載）</li><li>公表された身体リハビリ RCT であること</li><li>ICU に入室した成人患者が <strong>50例超</strong>であること（検出力のある研究だけを含めるため。この基準で除外された研究は実際には無かった）</li><li><strong>併存疾患が評価されている</strong>こと。かつ FCI を採点できる程度に詳細に記録されていること</li><li>介入群が急性期入院中に<strong>運動トレーニング（筋力または持久力）または機能再獲得訓練</strong>を含むこと</li><li>対照群が標準的な理学療法ケアを受けていること</li><li>追跡期間が<strong>最短3か月</strong>で、パフォーマンスベースの身体機能と HRQoL の両方を測定していること</li><li>HRQoL が <strong>SF-12 または SF-36</strong> で評価されていること（データのハーモナイゼーションを可能にするため）</li><li><strong>検索</strong>：MEDLINE、Embase、CINAHL、CENTRAL の4データベース。2名の独立した研究者（J.R.A.J.、L.A.M.）が4つの適格 RCT を同定</li><li>選択過程は PRISMA-IPD フロー図（eFig. 1）に、除外理由は eTable 2 に置かれている（いずれも補足資料）</li></ul>
+<h4>3-2. 個別患者データの移送とハーモナイゼーション</h4>
+<ul><li><strong>適格 RCT すべての主任研究者に</strong>匿名化個別患者データを依頼</li><li>データ共有契約を締結。各試験は倫理承認済みで、全患者からインフォームドコンセントが取得されている</li><li>共有された個別患者データに標準的なチェックを実施</li><li>元の系統的レビューの最終検索日を、個別患者データ取得の締切とした（契約締結・移送・ハーモナイゼーション・解析の時間を確保するため）。<strong>この設計上、締切以降に公表された TEAM 試験は含まれていない</strong></li></ul>
+<h4>3-3. バイアスリスクとエビデンスの質</h4>
+<ul><li>2名（J.R.A.J.、L.A.M.）が Cochrane RoB 2 で独立して評価。討議で合意に至り、仲裁は不要だった</li><li>GRADE は1名（J.R.A.J.）が実施し、別の1名（L.D.）がクロスチェック</li></ul>
+<h4>3-4. アウトカム</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>内容</th><th>測定時点</th></tr></thead>
+<tbody>
+<tr><td>共主要① HRQoL</td><td>SF-12 または SF-36。PCS・PF ドメイン・MCS の t スコア</td><td>3・6・12か月</td></tr>
+<tr><td>共主要② 身体パフォーマンス</td><td>6MWD・5STS・TUG</td><td>退院時・3・6か月</td></tr>
+<tr><td>副次（事前規定）</td><td>人工呼吸期間・退院先・ICU 在室日数・入院日数</td><td>—</td></tr>
+</tbody></table></div>
+<p>最小重要差は PCS t スコアで 2点、PF ドメインと MCS t スコアで 3点。</p>
+<p><strong>事前規定した交互作用</strong>（治療群 × 患者特性）は次の4つ。</p>
+<ol><li>既存の併存疾患：FCI スコア 1以下 / 2以上</li><li>年齢：45歳以下 / 45歳超かつ66歳未満 / 66歳以上</li><li>性別：男性 / 女性</li><li>重症度：APACHE II スコアの三分位</li></ol>
+<h4>3-5. データ解析</h4>
+<ul><li><strong>one-stage の多水準モデル</strong>で試験間のクラスタリングを考慮し、試験間の異質性を許容</li><li>正規分布するアウトカム（6MWD・PF ドメイン・PCS・MCS）：<strong>線形混合モデル。治療群・時間・試験を固定効果、個人をランダム効果</strong></li><li>右に裾を引くアウトカム（5STS・TUG）：アウトカムの<strong>対数</strong>を用いた線形混合モデル</li><li>連続の副次アウトカム（人工呼吸期間・ICU 在室日数・入院日数）：治療群を固定効果、試験をランダム効果とする<strong>負の二項回帰</strong>を個別に当てはめ</li><li>名義の副次アウトカム（退院先）：<strong>自宅 対 それ以外</strong>に二値化し、治療群を固定効果、試験をランダム効果とする混合効果ロジスティック回帰</li><li>負の二項モデルとロジスティックモデルには<strong>ロバスト標準誤差</strong>を使用</li><li><strong>効果修飾</strong>：上記モデルに交互作用項を別々に加えて評価</li><li><strong>事後解析</strong>：新たな臨床的エビデンス（Waldauf 2020 CCM）に基づき、重症度を <strong>APACHE II 20未満（低）/ 20以上（高）</strong> で二分する解析を追加。<mark class="hl">本研究で事後なのはこれ1つだけ</mark></li><li><strong>欠測</strong>：被験者は元の割付群に残したまま解析。<strong>死亡による欠測は補完しない</strong>（したがって modified intention to treat）。追跡脱落などの欠測は chained equations による多重代入（MICE）で補完。HRQoL の欠測は試験間で最小限で、12か月データのみ Morris と Moss について補完した（この時点が両試験に無かったため）</li><li>感度解析：complete case 解析と two-stage モデルを追加実施</li><li><strong>統計ソフト</strong>：Stata version 16.1</li></ul>
+<h3>4. 結果 — 試験と患者背景</h3>
+<p>豪州1試験・英国1試験・米国2試験の計4試験が 810例のデータを提供した。すべての試験の介入群が、急性期入院中に機能再獲得訓練と運動処方を提供していた。試験横断で見た機能再獲得の活動には、移乗（立ち上がりなど）と離床（歩行など）が含まれる。運動処方には<strong>既知だが最小限のばらつき</strong>があり、すべての介入群が自動関節可動域運動・抵抗筋力トレーニング・心血管系トレーニングのいずれかを提供していた。対照群は通常ケアまたは標準化された身体リハビリプログラムを受けた。</p>
+<h4>Table 1. 組み入れられた4試験の特性</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>Denehy 2013</th><th>Moss 2016</th><th>Walsh 2015（RECOVER）</th><th>Morris 2016</th></tr></thead>
+<tbody>
+<tr><td>掲載誌</td><td>Crit Care 2013;17:R156</td><td>Am J Respir Crit Care Med 2016;193:1101-1110</td><td>JAMA Intern Med 2015;175:901-910</td><td>JAMA 2016;315:2694-2702</td></tr>
+<tr><td>国</td><td>オーストラリア</td><td>米国</td><td>英国</td><td>米国</td></tr>
+<tr><td>組み入れ基準</td><td>18歳以上、ICU 入室、ICU 在室 5日以上。リハビリ参加を妨げる神経・脊椎・筋骨格系の機能障害が無い。病院から50km圏内に居住</td><td>18歳以上、ICU 入室、人工呼吸 4日以上</td><td>18歳以上、ICU 入室、人工呼吸 48時間以上、医師が ICU 退室可能と判断</td><td>18歳以上、ICU 入室、気管チューブまたはマスク NIV による人工呼吸、PaO₂/FiO₂ &lt; 300</td></tr>
+<tr><td>介入</td><td>機能再獲得訓練・抵抗筋力トレーニング・心血管運動を、ICU・病棟・<strong>外来</strong>で実施</td><td>機能再獲得訓練・抵抗筋力トレーニング・関節可動域運動を、<strong>ランダム化後28日間</strong></td><td>機能再獲得訓練・離床・運動を<strong>病棟で</strong>実施</td><td>機能再獲得訓練・抵抗筋力トレーニング・関節可動域運動を、ICU と病棟で実施</td></tr>
+<tr><td>対照</td><td>通常の理学療法ケア</td><td><strong>標準化された理学療法</strong></td><td>通常の理学療法ケア</td><td>通常の理学療法ケア</td></tr>
+<tr><td>例数</td><td>150（介入74 / 対照76）</td><td>120（介入59 / 対照61）</td><td>240（介入120 / 対照120）</td><td>300（介入150 / 対照150）</td></tr>
+<tr><td>年齢 中央値（IQR）介入 / 対照</td><td>62（50, 75）/ 62（49, 74）</td><td>57（47, 66）/ 53（36, 61）</td><td>62（51, 71）/ 62（52, 69）</td><td>55（44, 67）/ 58（51, 67）</td></tr>
+<tr><td>男性 介入 / 対照</td><td>43（58%）/ 52（68%）</td><td>36（61%）/ 35（57%）</td><td>67（56%）/ 70（58%）</td><td>84（56%）/ 82（55%）</td></tr>
+<tr><td>女性 介入 / 対照</td><td>31（42%）/ 24（32%）</td><td>23（39%）/ 26（43%）</td><td>53（44%）/ 50（42%）</td><td>66（44%）/ 68（45%）</td></tr>
+<tr><td>APACHE II 中央値（IQR）介入 / 対照</td><td>18（16, 23）/ 20（16, 23）</td><td>17（14, 22）/ 18（14, 21）</td><td>20（17, 24）/ 19（15, 26）</td><td>20（14, 25）/ 19（14, 25）</td></tr>
+<tr><td>FCI 中央値（IQR）介入 / 対照</td><td>2（1, 3）/ 2（0, 3）</td><td>1（0, 2）/ 1（0, 2）</td><td>2（1, 4）/ 2（1, 4）</td><td>2（1, 3）/ 2（1, 4）</td></tr>
+</tbody></table></div>
+<p>この表を横に読むと、<strong>介入の設定される場所と期間が試験ごとに大きく違う</strong>ことが分かる。Denehy は ICU から外来まで通し、Walsh は ICU 退室後の病棟だけ、Moss はランダム化後28日という時間で区切り、Morris は ICU と病棟。著者らが「既知だが最小限のばらつき」と書いているのは運動処方の内容についてであって、投与の場と期間はまったく揃っていない。また Moss の対照群だけが「標準化された理学療法」＝実質的な能動対照であることも見落とせない。</p>
+<h4>Table 2. 統合データの患者背景</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入（n = 403）</th><th>対照（n = 407）</th></tr></thead>
+<tbody>
+<tr><td>年齢 中央値（IQR）</td><td>59（48, 69）</td><td>59（49, 68）</td></tr>
+<tr><td>45歳以下</td><td>85（21%）</td><td>81（20%）</td></tr>
+<tr><td>45歳超かつ66歳未満</td><td>184（46%）</td><td>198（49%）</td></tr>
+<tr><td>66歳以上</td><td>134（33%）</td><td>128（31%）</td></tr>
+<tr><td>男性</td><td>230（57%）</td><td>239（59%）</td></tr>
+<tr><td>女性</td><td>173（43%）</td><td>168（41%）</td></tr>
+<tr><td>APACHE II 中央値（IQR）</td><td>19（15, 24）</td><td>19（15, 24）</td></tr>
+<tr><td>APACHE II 20未満</td><td>189（47%）</td><td>198（49%）</td></tr>
+<tr><td>APACHE II 20以上</td><td>179（44%）</td><td>172（42%）</td></tr>
+<tr><td>APACHE II 不明</td><td>35（9%）</td><td>37（9%）</td></tr>
+<tr><td>ICU 診断：呼吸器</td><td>197（49%）</td><td>200（49%）</td></tr>
+<tr><td>ICU 診断：循環器</td><td>55（14%）</td><td>60（15%）</td></tr>
+<tr><td>ICU 診断：敗血症</td><td>59（15%）</td><td>58（14%）</td></tr>
+<tr><td>ICU 診断：肝胆膵</td><td>35（9%）</td><td>25（6%）</td></tr>
+<tr><td>ICU 診断：消化管</td><td>17（4%）</td><td>17（4%）</td></tr>
+<tr><td>ICU 診断：その他</td><td>40（10%）</td><td>47（12%）</td></tr>
+<tr><td>FCI 中央値（IQR）</td><td>2（1, 3）</td><td>2（1, 4）</td></tr>
+<tr><td>FCI 1以下</td><td>134（33%）</td><td>137（34%）</td></tr>
+<tr><td>FCI 2以上</td><td>240（60%）</td><td>237（58%）</td></tr>
+<tr><td>FCI 不明</td><td>29（7%）</td><td>33（8%）</td></tr>
+</tbody></table></div>
+<p>統合データは介入群と対照群でよく釣り合っている。<strong>多疾患併存（FCI 2以上）は 477例で、全体の 58.9%</strong> を占める（本文は「59%」と記載）。一方で <strong>FCI が不明な患者が 62例（7.7%）、APACHE II が不明な患者が 72例（8.9%）</strong> いて、これらを交互作用モデルでどう扱ったかは本文に記載が無い。FCI で層別できるのは 748例（92.3%）である。</p>
+<h4>Table 3. FCI の内訳（有病率順）</h4>
+<div class="tw"><table>
+<thead><tr><th>併存疾患</th><th>介入（n = 403）</th><th>対照（n = 407）</th></tr></thead>
+<tbody>
+<tr><td>肥満</td><td>116（29%）</td><td>118（29%）</td></tr>
+<tr><td>糖尿病</td><td>95（24%）</td><td>101（25%）</td></tr>
+<tr><td>上部消化管疾患</td><td>95（24%）</td><td>83（20%）</td></tr>
+<tr><td>うつ</td><td>87（22%）</td><td>77（19%）</td></tr>
+<tr><td>うっ血性心不全</td><td>91（23%）</td><td>75（18%）</td></tr>
+<tr><td>COPD・ARDS・肺気腫</td><td>58（14%）</td><td>73（18%）</td></tr>
+<tr><td>不安</td><td>58（14%）</td><td>59（14%）</td></tr>
+<tr><td>関節炎</td><td>45（11%）</td><td>59（14%）</td></tr>
+<tr><td>喘息</td><td>48（12%）</td><td>56（14%）</td></tr>
+<tr><td>腰背部痛</td><td>22（5%）</td><td>39（10%）</td></tr>
+<tr><td>心筋梗塞</td><td>37（9%）</td><td>37（9%）</td></tr>
+<tr><td>脳卒中・TIA</td><td>25（6%）</td><td>28（7%）</td></tr>
+<tr><td>視覚障害</td><td>25（6%）</td><td>25（6%）</td></tr>
+<tr><td>狭心症</td><td>21（5%）</td><td>18（4%）</td></tr>
+<tr><td>骨粗鬆症</td><td>12（3%）</td><td>14（3%）</td></tr>
+<tr><td>末梢血管疾患</td><td>12（3%）</td><td>12（3%）</td></tr>
+<tr><td>聴覚障害</td><td>16（4%）</td><td>10（2%）</td></tr>
+<tr><td>神経疾患</td><td>11（3%）</td><td>5（1%）</td></tr>
+</tbody></table></div>
+<p>FCI が拾う18項目がそのまま並んでいる。<strong>肥満・糖尿病・上部消化管疾患・うつ・心不全という上位5つは、当院の ICU 患者でもごく普通に見る組み合わせ</strong>で、この「2つ以上」という閾値は決して高いハードルではない。腰背部痛（5% 対 10%）と神経疾患（3% 対 1%）でやや偏りがあるが、いずれも低頻度項目である。</p>
+<p><strong>バイアスリスク</strong>：HRQoL アウトカムのデータを4試験でハーモナイズして解析し、これがバイアスリスク評価に反映された結果、<strong>4試験すべてが "some concerns"</strong> に格付けされた（eFig. 2）。</p>
+<h3>5. 結果 — 健康関連QOL</h3>
+<p>4試験すべてが3か月と6か月に PCS t スコアを測定し、うち2試験が12か月にも測定した。欠測のある患者と無い患者で、介入群・対照群とも患者背景は同様だった。最長追跡時点までの死亡率は治療群間で同様だった（数値は本文に記載が無い）。各試験の院内および退院後の死亡があるため、標準的手法での補完後に残った患者数は <strong>3か月 696例、6か月 668例、12か月 658例</strong>で、これらが解析対象となった。</p>
+<p>治療群（介入 対 対照）と PCS t スコアの関連は、<strong>既存の併存疾患の有無によって修飾された</strong>（FCI 1以下 / 2以上、Wald 検定 <strong>p = 0.041</strong>）。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005936" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005936）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 混合モデルによる Physical Component Summary（t スコア）の効果推定値と95%CI。3・6・12か月の3時点を横軸に取り、Functional Comorbidity Index スコアと治療群で層別してある。左パネルが「FCI score one or less（FCI 1以下）」、右パネルが「FCI score two or more（FCI 2以上）」。各パネルとも縦軸は PCS score で 25 から 50 まで。四角と実線が介入群、丸と点線が対照群で、各点から上下にエラーバー（95%CI）が伸びる。一般人口の基準値である 50 点の位置に破線が引かれ、そこから1標準偏差（10点）下、すなわち 40 から 50 の帯が灰色に塗られている。左パネルでは介入群と対照群の2本の線がほぼ重なりながら灰色の帯の下端付近を上昇していく。右パネルでは介入群の線が対照群の線より一貫して上に位置し、2本が離れたまま平行に上昇する。右パネルの両群はいずれも灰色の帯より下、つまり一般人口平均から1標準偏差以上低い水準にとどまる。右下に「Wald test p=0.041」と記されている。キャプション本文には、他の患者特性である性別・重症度・年齢は治療群と PCS の関連を修飾しなかったと記され、参照先として eFig. 2 が挙げられている（ただし本文の記述では eFig. 3 が該当図とされており、番号が食い違う）</p>
+</div>
+<p><strong>FCI 2以上の患者（多疾患併存）</strong> で、介入を受けた群の PCS t スコアは最小重要差を超えて対照群より高かった。</p>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>介入 効果推定値（95%CI）</th><th>対照 効果推定値（95%CI）</th><th>差（点推定）</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>3か月</td><td>36.2（34.4–38.1）</td><td>30.4（28.3–32.6）</td><td>5.8</td><td>最小重要差（2点）を超える。CI 重複なし</td></tr>
+<tr><td>6か月</td><td>38.3（36.4–40.1）</td><td>32.5（30.4–34.6）</td><td>5.8</td><td>最小重要差を超える。CI 重複なし</td></tr>
+<tr><td>12か月</td><td>37.9（33.2–42.7）</td><td>32.1（27.9–36.3）</td><td>5.8</td><td>本文は「12か月では超えない」と判定。CI が大きく重複</td></tr>
+</tbody></table></div>
+<p><strong>FCI 1以下の患者</strong>では、3・6・12か月のいずれでも介入群と対照群の PCS t スコアは同様だった。他の患者特性（年齢・性別・重症度）は治療群と PCS スコアの関連を修飾しなかった。</p>
+<p>続いて PF ドメイン。こちらも4試験が3か月と6か月に、2試験が12か月に測定している。治療群と PF ドメインの関連を併存疾患カテゴリで見た結果は PCS と同様のパターンだったが、<strong>有意には達しなかった</strong>（Wald 検定 <strong>p = 0.061</strong>）。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005936" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005936）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 混合モデルによる Physical Functioning ドメイン（t スコア）の効果推定値と95%CI。Figure 1 と同じ体裁で、左が FCI 1以下、右が FCI 2以上のパネル。縦軸は PF domain で 30 から 60 まで。四角と実線が介入群、丸と点線が対照群。50 点の破線を挟んで上下1標準偏差（10点）、すなわち 40 から 60 の帯が灰色に塗られている点が Figure 1 と異なる（Figure 1 は下側1標準偏差だけを塗る）。左パネルでは2本の線が近接して上昇し、右パネルでは介入群が一貫して上に位置する。右パネルの両群とも灰色の帯の下、40 点未満にとどまる。右下に「Wald test p=0.061」。キャプション本文は、他の患者特性は治療群と PF ドメインの関連を修飾しなかったとし、参照先に eFig. 3 を挙げている（本文の記述では eFig. 4 が該当図で、ここでも番号が食い違う）</p>
+</div>
+<p><strong>FCI 2以上の患者</strong>の PF ドメイン t スコア。</p>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>介入 効果推定値（95%CI）</th><th>対照 効果推定値（95%CI）</th><th>差（点推定）</th><th>最小重要差3点との比較</th></tr></thead>
+<tbody>
+<tr><td>3か月</td><td>35.9（33.9–37.8）</td><td>29.5（27.1–32.0）</td><td>6.4</td><td>超える</td></tr>
+<tr><td>6か月</td><td>37.3（35.2–39.3）</td><td>31.0（28.6–33.3）</td><td>6.3</td><td>超える</td></tr>
+<tr><td>12か月</td><td>38.0（31.9–44.1）</td><td>31.6（26.4–36.9）</td><td>6.4</td><td>本文は「12か月では超えない」と判定</td></tr>
+</tbody></table></div>
+<p><strong>MCS スコア</strong>については、どの患者特性も治療群との関連を修飾しなかった。精神的側面はまったく動かない。</p>
+<p>HRQoL アウトカムの <strong>GRADE 格付けは "moderate"</strong>。</p>
+<h3>6. 結果 — 客観的身体パフォーマンス</h3>
+<p>プロトコルに記載のとおり、最も多くの試験で用いられた身体パフォーマンス指標を共主要アウトカムとして解析する予定だった。ところがハーモナイズできたデータでは <strong>3尺度（6MWD・5STS・TUG）が同数の試験で並んでいた</strong>（各時点につき2試験ずつ）。3尺度すべてを解析したが、どの患者特性も治療群とアウトカムの関連を修飾しなかった。</p>
+<p>退院後の生存者を研究する際に 6MWD を推奨するコアアウトカムセット（Needham 2017 AJRCCM）が既にあるため、本文では 6MWD の結果を代表として報告している。補完後の解析対象は <strong>退院時 236例、3か月 223例、6か月 218例</strong>。5STS と TUG の結果は eFigures 7・8 に置かれている。</p>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005936" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005936）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 混合モデルによる6分間歩行距離（メートル）の効果推定値と95%CI。横軸は退院時（Hosp DC）・3か月・6か月の3時点で、左が FCI 1以下、右が FCI 2以上のパネル。縦軸は 6MWD（meters）で 100 から 500 超まで。四角と実線が介入群、丸と点線が対照群。左パネル（FCI 1以下）では<strong>対照群の線が介入群より一貫して上</strong>にあり、退院時で約 350 対 300、3か月で約 415 対 365、6か月で約 440 対 393 と、方向が HRQoL とは逆向きになっている。右パネル（FCI 2以上）では介入群がわずかに上だが、エラーバーが大きく重なる。両パネルとも右のほうがすべての値が低い。右下に「Wald test p=0.264」と記されており、<strong>この p 値は本文中には一度も現れず、図の中にしか無い</strong>。キャプション本文は、併存疾患・性別・重症度・年齢のいずれも治療群と 6MWD の関連を修飾しなかったとし、性別・重症度・年齢の参照先をすべて eFig. 5 と記している（本文の記述では eFig. 6 が該当図であり、eFig. 5 は MCS の図とされている）</p>
+</div>
+<p>身体パフォーマンスアウトカムの <strong>GRADE 格付けは "low"</strong>。</p>
+<h3>7. 結果 — 医療資源利用と感度解析</h3>
+<ul><li><strong>医療資源利用</strong>：患者特性は、治療群と医療資源利用アウトカム（人工呼吸期間・退院先・ICU 在室日数・入院日数）の関連を修飾しなかった（eTables 12・13）</li><li><strong>complete case 解析</strong>：患者特性・治療群・アウトカムの関連は多重代入を用いた場合と同様だったが、<strong>やや減弱していた</strong>（eTable 14）</li><li><strong>two-stage モデル</strong>：one-stage モデルと同様の結果だった</li></ul>
+<h3>8. 考察（著者らの解釈）</h3>
+<ul><li>本 IPD メタ解析は、<strong>併存疾患のある重症患者はリハビリに異なる反応を示す</strong>という仮説を支持する。同程度の併存疾患を持つ対照群と比べて、介入を受けた多疾患併存患者の PCS スコアは3か月と6か月で<strong>5〜6点高く</strong>、SF-36 の最小重要差を超えていた</li><li>他のどの患者特性も、PCS・6MWD・その他の HRQoL ドメイン・医療資源利用アウトカムに対するリハビリの効果を修飾しなかった</li><li><strong>集中治療リハビリ領域で個別患者データを結合した初めての研究</strong>。この領域はこれまで、重症疾患の中の異質性のために、リハビリの効果と転帰の利益を結びつける試みが阻まれてきた可能性がある</li><li>本研究の新規性は、より均質なサブグループ（併存疾患2つ以上）についての新しい知見を与えた点にある。国際的な研究チームによる試験データ統合という透明で包括的な試みから同定された</li><li><strong>他研究との整合</strong>：人工知能で患者特性のクラスタを同定し、離床介入への反応が異なることを示した Fuest 2023（Crit Care）と一致する。より均質な外科系患者集団で離床の有意な転帰を報告した Schaller 2016（Lancet、SOMS）とも似ている</li><li><strong>TEAM 試験との関係</strong>：本 IPD に含まれた RCT と同様、公表された最大の離床 RCT（TEAM、750例）は早期離床の機能・HRQoL への効果を示さなかった。この大規模サンプルにおける異質性は、患者特性がアウトカムに与える効果に基づく二次解析を正当化する</li><li>対照的に、早期離床文献の記念碑的所見（Schweickert 2009 Lancet）は<strong>退院時にのみ</strong>良好な転帰を示した。この結果は、対照群における通常ケアの提供量が少なかったことに影響された可能性がある（Wang 2022 CCM）</li><li><strong>信号対雑音比</strong>：多疾患併存は世界で最も有病率の高い慢性健康問題で、本研究の患者の59%が該当した。この集団は不良な健康アウトカムを経験することが広く認識されている。そこで慢性疾患負荷の低い群（FCI 1以下）と多疾患併存群（FCI 2以上）を分けた。多疾患併存患者の PCS t スコアは、併存疾患1つ以下の患者と比べて3・6か月時点で悪く、人口基準値（平均 50 ± 10）より1標準偏差低かった。層別アプローチによって、<strong>多疾患併存患者のリハビリ反応性（信号）が、併存疾患1つ以下の患者を含めた群間差の報告（雑音）に埋もれていた</strong>構図が明らかになった</li><li><strong>12か月時点</strong>：欠測は標準的手法による多重代入で扱い、予想どおり12か月時点でさらなるばらつきが生じた。既存データの統合である以上、長期アウトカムのデータは少なくなり、時間経過とともに群間差は12か月では狭まると予想される。それでも12か月を通じた PCS スコアの<strong>効果の方向は一貫していた</strong></li><li><strong>なぜ身体パフォーマンスは動かないのか</strong>：重症疾患からの回復研究では、パフォーマンスベースの機能測定（6MWD など）は、患者が自身の機能能力とその水準をどう知覚しているかを測る患者報告アウトカム（PCS など）と<strong>弱い相関しか示さない</strong>（Denehy 2014 ICM、Berry 2019 J Crit Care）。これが PCS スコアと比べた身体パフォーマンスアウトカムでの効果欠如に最も寄与している可能性が高い。加えて、ハーモナイズできたデータでは3尺度が各時点2試験ずつと分散したため、HRQoL アウトカムに比べて解析可能な患者数が減った。その結果、<strong>身体パフォーマンス所見の頑健性は PCS スコアより確実性が低い</strong></li><li><strong>臨床実践への含意</strong>：多疾患併存のある重症患者は、検討した4つの RCT で試された身体リハビリ介入から利益を得ることが示唆される。本研究と今後の前向き介入研究・ICU 後フォローアップ研究が、医学会が支持する新しいガイドライン合意声明に資する可能性がある</li><li><strong>今後の研究への含意</strong>：大陸と医療システムをまたぐ国際的アプローチをとった。既に患者から提供されたデータからより大きなサンプルを作り、より検出力のあるサブグループ解析を支えることは、<strong>研究の無駄を減らす</strong>。ただし IPD メタ解析は時間と資源を大きく消費する。特にデータ共有契約の締結とデータ移送のための研究協働体の調整とコミットメント、そして取得後のハーモナイゼーションの複雑さがそうである。今後の研究ではコアアウトカムセットへの準拠と一貫したデータ収集が求められ、これは前向きのハーモナイゼーションを含む国際協働で対応しうる</li></ul>
+<h3>9. 著者らが挙げた限界（7点）</h3>
+<ol><li><strong>多重性</strong>：複数の患者特性をリハビリアウトカムの修飾因子として検討することは、第一種の過誤の可能性を高める。<strong>CI と p 値の多重比較調整は行わなかった</strong>。理由は、統計学の文献でこの問題が議論の的であること、および統計解析計画に規定していなかったこと。ただし本研究は事前登録と公表プロトコルによって「どの曝露/アウトカムの関連とサブグループ解析を行うか」を事前規定した厳密な方法論の恩恵を受けている</li><li><strong>測定尺度の不統一</strong>：試験間で用いられた尺度が統一されておらず、身体パフォーマンスアウトカムのデータが限られた</li><li><strong>生存者バイアス</strong>：死亡はランダム化後のイベントであり、生存者バイアスの可能性を認める。ただし最長追跡までの死亡率は治療群間で同様だった</li><li><strong>追跡欠測</strong>：重症疾患生存者の研究でよく知られた課題で、標準的手法による多重代入で対処した。転帰の悪い患者あるいは良い患者のほうが欠測しやすい可能性という限界を認める</li><li><strong>バイアスリスク</strong>：4試験すべてが "some concerns" と格付けされた。HRQoL アウトカムが評価に反映されたためで、<strong>Cochrane RoB 2 では患者報告アウトカムに許される最高の格付けがこれである</strong>、と著者らは述べる</li><li><strong>併存疾患評価が前提条件</strong>：併存疾患の測定が無い試験を含めていたら、介入がアウトカムに与える効果の主要な交絡因子または効果修飾因子を除外することになっていた。適格基準を参加者50例超に限ったのは検出力のある研究だけを含めるためだが、この基準で除外された研究は無かった</li><li><strong>介入内容のばらつき</strong>：介入群と対照群の内容には既知の最小限のばらつきがあった。ただし身体リハビリプログラムの内容にゴールドスタンダードは無く、すべての研究が急性期入院中に機能再獲得訓練と運動処方を提供していた。<strong>最適な運動処方の検討は本研究の範囲外</strong>。<strong>エルゴメータ（サイクリング）や神経筋電気刺激（NMES）を用いた介入は含めなかった</strong>。いずれかの群で異なる介入があれば結果に影響しうる</li></ol>
+<h3>10. 批判的吟味（JC での論点）</h3>
+<h4>10-1. 「事前規定か事後か」は決着している — ここが旧理解の最大の誤り</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>層別の事前性についての確認 <mark class="hl">本研究の「FCI 1以下 / 2以上」という層別は、事後に見つけた都合のよい切り口ではない</mark>。PROSPERO（CRD42019152526）に<strong>事前登録</strong>され、BMJ Open に<strong>プロトコルが公表</strong>され、そこで4つの交互作用（併存疾患・年齢・性別・APACHE II 三分位）を検討することが宣言されている。<mark class="hl">事後解析（post hoc）と本文に明記されているのは、APACHE II を 20未満 / 20以上に二分した1つだけ</mark>。 ただし<mark class="hl">「事前規定」は「多重性から自由」を意味しない</mark>。事前に4つの特性を宣言していても、4つ検定すれば偽陽性の機会は4倍あり、著者らも第一種の過誤の増加を限界の第1項に挙げている。<mark class="hl">そして CI と p 値の多重比較調整を「していない」ことを明言している</mark>（「していない可能性が高い」ではない）。p = 0.041 は、名目上の 0.05 に対して<strong>調整前</strong>の値である。仮に事前規定した4特性 × 主要3尺度で単純に Bonferroni をかければ有意水準は 0.05/12 ≈ 0.004 となり、p = 0.041 は通らない。</p>
+</div>
+<h4>10-2. 検定しているのは「交互作用」であって「サブグループ内の効果」ではない</h4>
+<p>抄録と結論は「FCI 2以上の患者は有意に高い HRQoL スコアを持っていた」と書く。しかし論文が示す唯一の形式的検定は<strong>交互作用の Wald 検定</strong>であり、これは「介入と対照の差が FCI カテゴリ間で異なるか」を問うものである。<strong>FCI 2以上の層の中での群間差そのものについて、差の点推定と95%CI も p 値も報告されていない</strong>。示されているのは介入群・対照群それぞれの周辺平均とその CI だけで、「有意」は CI が重ならないことから推論されている。厳密には、2つの CI が重ならないことは差が有意であることの十分条件ではあっても必要条件ではなく、逆に重なっていても差が有意なことがある。JC で提示するときは「交互作用が p = 0.041」と正確に言い、「サブグループで p &lt; 0.05 だった」とは言わない。</p>
+<h4>10-3. 12か月の「差が消えた」は効果が消えたのではない</h4>
+<p>PCS の群間差の点推定は 3か月 5.8点、6か月 5.8点、<strong>12か月も 5.8点</strong>で、まったく変わっていない。12か月で「最小重要差を超えない」と判定されたのは、例数が減って CI が 33.2–42.7 と 27.9–36.3 に広がり重なったからである。著者ら自身も「効果の方向は12か月を通じて一貫していた」と書いている。「1年で効果が消える」と読んではいけない。<strong>「1年時点は測れていない」が正しい</strong>。</p>
+<h4>10-4. FCI 1以下の群も「ゼロ」ではない</h4>
+<p>Figure 1 の左パネルを読むと、FCI 1以下の層でも介入群が対照群より一貫して約1.5点上にある。抄録の「差はなかった」は、この差が最小重要差 2点に届かず、かつ交互作用が有意という文脈での表現である。したがって本研究が示したのは「FCI 1以下では効かない」ではなく、<strong>「効果の大きさが最小重要差の手前にとどまる」</strong>である。差の差（difference in differences）はおよそ 5.8 − 1.5 = 4.3点程度と読める。</p>
+<h4>10-5. 身体パフォーマンスの陰性は「効かない」ではなく「測れていない」</h4>
+<p>6MWD の解析対象は 236 / 223 / 218例で、<strong>810例のわずか27〜29%</strong>にすぎない。3尺度が2試験ずつに分散したためで、GRADE も "low"。しかも 6MWD の交互作用 p 値（0.264）は<strong>図の中にしか書かれておらず、本文には一度も現れない</strong>。共主要アウトカムの一方が陰性であることは重要だが、それを「客観的機能は改善しない」と読むのは検出力の問題を無視している。一方で、Figure 3 の左パネル（FCI 1以下）では<strong>対照群のほうが一貫して長く歩いている</strong>（6か月で約 440m 対 393m）。方向としては HRQoL と同じ交差型の交互作用パターンだが、有意ではない。</p>
+<h4>10-6. 「最小重要差 2点」という基準の緩さ</h4>
+<p>著者らは PCS t スコアの最小重要差として <strong>2点</strong>（SF-36v2 マニュアル）を採用している。SF-36 の PCS については 2点から 5点までの値が文献上流通しており、<strong>2点は最も緩い部類</strong>である。5.8点の差はどの基準を採っても超えるので本研究の結論は揺るがないが、「最小重要差を超えた」という表現の説得力は採用値に依存する。なお本研究の多疾患併存患者の PCS は介入群でも 36〜38点で、一般人口平均 50 から 1.2〜1.4標準偏差低い水準にとどまる。<strong>「良くなった」のではなく「もっと悪くなるところが少し戻った」</strong>である。（考察は「1標準偏差低かった」と書くが、実測値 30.4〜38.3 は 1.2〜2.0標準偏差低い。控えめに過ぎる表現）</p>
+<h4>10-7. 解析者と元試験の実施者が同一である</h4>
+<p>IPD を提供した Berry・Berney・Denehy・Files・Griffith・Morris・Moss・Nordon-Craft・Walsh は、いずれも<strong>組み入れられた4試験そのものの研究者</strong>であり、同時に本論文の共著者である。IPD メタ解析の性質上これは不可避で、むしろデータ提供の協力を得るには必須の体制である。しかし構図としては、<strong>自分たちの試験が主要評価項目で陰性だった同じチームが、統合したデータで陽性のサブグループを見つけて報告している</strong>。参考文献のうち [2][3][4][22]（組み入れ4試験）、[15]（自らのプロトコル）、[5][10][11][37][41][42] が著者チームの自己引用である。企業との利益相反ではないが、<strong>解釈上の利益相反として JC では言及する価値がある</strong>。</p>
+<h4>10-8. 介入の「量」が定義されていない</h4>
+<p>本研究の最大の実務的弱点はここにある。4試験の介入は「機能再獲得訓練＋運動処方」と定性的に括られているだけで、<strong>開始時期・頻度・1回の時間・強度・総セッション数のいずれも数量化されていない</strong>。しかも Table 1 が示すとおり、実施の場（ICU のみ / ICU＋病棟 / 病棟のみ / ICU＋病棟＋外来）と期間（28日間 / 入院中 / 外来まで）が試験間で揃っていない。Moss の対照群は「標準化された理学療法」で、他3試験の「通常ケア」より濃い可能性が高い。したがって本研究から「多疾患併存患者にどれだけリハビリをすればよいか」は一切導けない。著者らも範囲外と明言している。</p>
+<h4>10-9. 交互作用モデルにおける「不明」の扱いが不明</h4>
+<p>FCI 不明 62例（7.7%）、APACHE II 不明 72例（8.9%）が Table 2 に計上されているが、これらを交互作用モデルでどう扱ったか（除外か、多重代入で補完したか）の記載が本文に無い。FCI が主結果を規定する変数である以上、<strong>7.7% の扱いは結果の解釈に影響しうる</strong>。補足資料に記載がある可能性はあるが、本文だけでは確認できない。</p>
+<h4>10-10. 対照群の「通常ケア」が試験ごとにも国ごとにも違う</h4>
+<p>豪・英・米の3か国、2013〜2016年の4試験である。通常の理学療法ケアの中身は国・施設・時代で大きく異なり、これは離床研究で繰り返し指摘されてきた問題である（著者ら自身が Schweickert 2009 の陽性結果について「対照群の通常ケア量が少なかった影響」を挙げている）。<strong>対照群の濃さが違えば、同じ介入でも群間差は変わる</strong>。統合によってこの差は平均化されるが、消えるわけではない。</p>
+<h4>10-11. 本文に無いこと</h4>
+<p>読者が探して見つからない項目を列挙する。</p>
+<ul><li><strong>死亡率の実数</strong>。「治療群間で同様だった」とだけ書かれ、数値は補足資料（eTable 5）に送られている</li><li><strong>サブグループごとの例数</strong>。FCI 2以上・1以下それぞれで何例が3・6・12か月に解析されたのか、本文に無い</li><li><strong>交互作用の効果量</strong>。差の差の点推定と CI が示されない</li><li><strong>副次アウトカムの実数</strong>。人工呼吸期間・ICU 在室日数・入院日数・退院先の数値が本文に一切出ない。「修飾されなかった」とのみ</li><li><strong>5STS と TUG の結果</strong>。eFigures に送られている</li><li><strong>APACHE II 20未満 / 20以上の事後解析の結果</strong>。方法で予告されているが、結果セクションに対応する記述が無い</li><li><strong>FCI の採点方法の詳細</strong>。誰が、いつの時点の情報で、どう採点したか（各元試験の記録からの後付け採点のはず）</li></ul>
+<h4>10-12. 原著の内的不整合</h4>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>図キャプションと本文の補足図番号</td><td>Figure 1 のキャプションは他特性の参照先を eFig. 2 とするが、本文は eFig. 3 とする。Figure 2 のキャプションは eFig. 3 とするが本文は eFig. 4。Figure 3 のキャプションは性別・重症度・年齢をすべて eFig. 5 とするが本文は eFig. 6。しかも本文では eFig. 2 がバイアスリスク図、eFig. 5 が MCS の図とされている。<strong>キャプション側の番号が系統的に1つずれている</strong></td></tr>
+<tr><td>抄録の括弧</td><td><code>based on the Physical Component Summary score (Wald test p = 0.041).</code> と、開き括弧が2つで閉じ括弧が1つ。組版上の誤り</td></tr>
+<tr><td>PF ドメインの CI 表記</td><td>3か月の介入群が <code>35.9 [33.9–37.8)]</code> と、角括弧と丸括弧が混在した表記</td></tr>
+<tr><td>Figure 3 の自己参照</td><td>キャプションが「併存疾患（Fig. 3）」と自らの図番号を参照している</td></tr>
+<tr><td>考察の「1標準偏差低い」</td><td>実際の値は 30.4〜38.3 で、一般人口平均 50 から 1.2〜2.0標準偏差低い</td></tr>
+<tr><td>6MWD の p 値</td><td>図中にのみ p = 0.264 と記載され、本文には出ない</td></tr>
+<tr><td>「59%が多疾患併存」の分母</td><td>477/810 = 58.9% で本文と整合するが、FCI 不明 62例を除いた 477/748 = 63.8% とは異なる。どちらの分母を使うかで数字が変わる</td></tr>
+</tbody></table></div>
+<p><strong>検算した結果、整合していた数値</strong>：試験別の例数（150 + 120 + 240 + 300 = 810）、群別（74 + 59 + 120 + 150 = 403、76 + 61 + 120 + 150 = 407）、Table 1 の男女内訳（各試験で群の n に一致）、Table 2 の割合（189/403 = 46.9% など）。</p>
+<h3>11. 旧ノートの記述で本 PDF と食い違った点</h3>
+<p>改稿前のノートは PDF の1〜2ページ（抄録と導入冒頭）だけから書かれていた。今回、全13ページを読んで次の食い違いを摘出した。</p>
+<div class="tw"><table>
+<thead><tr><th>旧ノートの記述</th><th>PDF の記載</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>区分「FEATURE ARTICLE」</td><td>紙面の柱（running head）は <strong>Review Articles</strong>。1ページ目に FEATURE ARTICLE のバナーは無い</td><td>誤り。訂正した</td></tr>
+<tr><td><code>published: 2023-05-30</code></td><td>紙面に <code>Published online</code> の印字が無い。印字されているのは October 2023 • Volume 51 • Number 10 のみ</td><td>根拠不明のため <code>2023-10</code> に訂正</td></tr>
+<tr><td>「探索的解析であり、事前規定の主要仮説検証ではない（著者ら自身が "explore" と表現）」</td><td>PROSPERO 事前登録＋公表プロトコルで、FCI 1以下/2以上を含む4つの交互作用を<strong>事前規定</strong>。事後解析は APACHE II の二分1つのみ。"explore" は目的文の動詞であって、解析が事後という意味ではない</td><td><strong>本改稿の最大の訂正</strong>。旧記述は論文の方法論的な強みを弱みと取り違えていた</td></tr>
+<tr><td>「p = 0.041 は多重比較の調整を経ていない<strong>可能性が高く</strong>」</td><td>著者らが「調整しなかった」と明記し、その理由（統計学界での議論、SAP に未規定）まで書いている</td><td>推測ではなく事実。断定形に訂正</td></tr>
+<tr><td>「個別患者データが共有された試験のみが含まれ、選択バイアスがありうる」</td><td><strong>適格4試験すべてが</strong>データを提供している。提供拒否による脱落は無い。絞り込みは適格基準（FCI 採点可能・SF-12/36・50例超・追跡3か月以上）の側で起きている</td><td>誤り。バイアスの所在が違う</td></tr>
+<tr><td>「効いたのは HRQoL（PCS）だけ」</td><td><strong>PF ドメインも同方向・同程度</strong>（3か月 6.4点差、p = 0.061）。完全に無反応だったのは MCS</td><td>不正確。訂正した</td></tr>
+<tr><td>「身体パフォーマンスのアウトカムを修飾する患者特性は一つもなかった — 共主要アウトカムの一方は完全に陰性」</td><td>事実だが、解析対象が 236/223/218例（全体の約27〜29%）、GRADE "low"、交互作用 p = 0.264 は図中のみ</td><td>事実として正しいが、検出力の文脈が欠けていた</td></tr>
+<tr><td>限界ブロック「4試験の名称と特性、スコア差と95%CI、最小重要差の値、身体パフォーマンスの測定法と結果、サブグループごとの例数は抽出範囲外」</td><td>サブグループごとの例数を除き、<strong>すべて本文に記載がある</strong></td><td>抽出不足。今回すべて反映した</td></tr>
+<tr><td>「線形混合モデル（治療群・時間・試験を固定効果）」</td><td>正しいが、<strong>個人をランダム効果</strong>とする one-stage 多水準モデルであること、5STS/TUG は対数変換、副次は負の二項回帰と混合ロジスティック、two-stage モデルでの感度解析も行われたことが抜けていた</td><td>補完した</td></tr>
+<tr><td>「わずか4試験・810例」</td><td>810例は登録数。<strong>解析対象は HRQoL が 696/668/658、6MWD が 236/223/218</strong></td><td>数字の意味が違う。区別して記載した</td></tr>
+<tr><td>介入内容・対照群の中身・組み入れ基準の記載なし</td><td>Table 1 に4試験分すべてある</td><td>追加した</td></tr>
+<tr><td>COI・資金源の記載なし</td><td>資金は公的研究費のみ。COI は Puthucheary（製薬・栄養）、Files（Cytovale ほか）、Griffith 所属機関（Fresenius-Kabi、BBraun）</td><td>追加した</td></tr>
+</tbody></table></div>
+<h3>12. Vault 内の他ノートとの突き合わせ</h3>
+<h4>12-1. TEAM 二次解析とは「併存疾患」の向きが真逆</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>同じ FCI を使って正反対の層別が出ている ==本 IPD 統合は「FCI が高い（2以上）患者ほど反応する」と結論し、<span class="wl">強化早期離床は「誰に効くか」で真逆になる — 機械学習が示した死亡 −8.35%対+14.63%の異質性（TEAM二次解析・ICM2025）</span> は「FCI が低い患者ほどベネフィット側」と結論している<mark class="hl">。同じ Functional Comorbidity Index を使いながら向きが逆である。 </mark>矛盾として片付けず、比較している対象が違うことを押さえる<mark class="hl">。アウトカムが「3・6か月の患者報告 QOL」と「180日死亡」、介入が「急性期入院中〜外来のリハビリ」と「人工呼吸中 ICU 内の強化早期離床」、時間軸が「回復期」と「急性期」でそれぞれ異なる。</mark><strong>急性期に強度を上げてよいか（安全性）と、回復期に資源を投じて QOL が返ってくるか（有効性）は別のレイヤーの問い</strong>である<mark class="hl">。臨床的には「併存疾患が多い患者は、ICU 内では慎重に、退院後は手厚く」と読むのが両者と矛盾しない解釈になる。ただし</mark>これは2つの研究をまたいだ推論であって、どちらの論文にも書かれていない==。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本研究（IPD統合・CCM2023）</th><th><span class="wl">強化早期離床は「誰に効くか」で真逆になる — 機械学習が示した死亡 −8.35%対+14.63%の異質性（TEAM二次解析・ICM2025）</span></th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>4RCT の個別患者データ統合、810例</td><td>単一RCT（TEAM、750例）の二次解析、BART による機械学習</td></tr>
+<tr><td>介入</td><td>急性期入院中の機能再獲得訓練＋運動処方（サイクリング・NMES は除外）</td><td>人工呼吸中 ICU 内の強化早期離床</td></tr>
+<tr><td>主アウトカム</td><td>SF-36 PCS（3・6・12か月）と 6MWD</td><td>180日死亡</td></tr>
+<tr><td>併存疾患の向き</td><td>FCI 2以上でのみ PCS 改善（交互作用 p = 0.041）</td><td>FCI が<strong>低い</strong>患者がベネフィット側。糖尿病はハーム側の因子</td></tr>
+<tr><td>層別の性格</td><td>事前規定（PROSPERO・公表プロトコル）</td><td>機械学習による探索。三分位の ATE はいずれも有意でなく仮説生成</td></tr>
+<tr><td>位置づけ</td><td>TEAM は本研究の締切後に公表され、参考文献 [14] として「二次解析が正当化される」と名指しされている</td><td>まさにその二次解析にあたる</td></tr>
+</tbody></table></div>
+<h4>12-2. CIW 総説（CritCare2023）との関係 — 引用される側</h4>
+<p><span class="wl">重症疾患関連筋力低下（CIW）— ICUから地域までの診断・治療・長期転帰（総説・CritCare2023）</span> は、本論文を<strong>参考文献 [113]</strong> として引用し、「CIP と診断されたらリハビリテーション科医と理学療法士への紹介が正当化される。<strong>特に併存疾患の負荷が高い患者ではそうである</strong>」と述べている。つまり本論文は、あの総説の「誰を優先して紹介するか」という一文の唯一の出典である。逆に言えば、総説側は本論文の限界（交互作用 p = 0.041、多重性未調整、身体パフォーマンスは陰性）に触れずに使っている。</p>
+<p>同じ2023年の CCM 掲載でありながら、<span class="wl">神経筋電気刺激（NMES）はICU-AWを減らす — 18RCTの更新メタ解析（CCM2023）</span> とは<strong>介入が排他的</strong>である。本研究は NMES とサイクリングを用いた介入を明示的に除外しており、両者は同じ「ICU リハビリ」の看板の下で別の介入を扱っている。CIW 総説には NMES も血糖管理も治療手段としての記載が無いため、この3本は補完関係にある。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本研究（IPD統合）</th><th><span class="wl">神経筋電気刺激（NMES）はICU-AWを減らす — 18RCTの更新メタ解析（CCM2023）</span></th><th><span class="wl">重症疾患関連筋力低下（CIW）— ICUから地域までの診断・治療・長期転帰（総説・CritCare2023）</span></th></tr></thead>
+<tbody>
+<tr><td>介入</td><td>機能再獲得訓練＋運動処方。<strong>NMES・サイクリングは除外</strong></td><td>NMES</td><td>早期離床＋ABCDEF バンドル（NMES は治療として扱わない）</td></tr>
+<tr><td>主アウトカム</td><td>SF-36 PCS・6MWD</td><td>ICU-AW 発生 RR 0.48（95%CI 0.32–0.72、6試験）</td><td>総説のため単一の効果量は無い</td></tr>
+<tr><td>誰に効くか</td><td>FCI 2以上に限定（p = 0.041）</td><td>早期離床の適応がない重症例への代替</td><td>「個々の患者のニーズに合わせて調節する」と定性的にのみ</td></tr>
+<tr><td>引用関係</td><td>CIW 総説に [113] として引用されている側</td><td>—</td><td>本研究を [113] として引用</td></tr>
+</tbody></table></div>
+<h4>12-3. 測定の話 — コアアウトカムセットとの接続</h4>
+<p>本研究が 6MWD を代表指標に選んだ根拠は Needham 2017（AJRCCM）のコアアウトカム measures である。その後に出た <span class="wl">重症患者の身体リハビリ試験に必須の8アウトカム — PRACTICEコアアウトカムセット（AnnalsATS2024）</span> は、より新しい枠組みで必須アウトカムを定めている。本研究の限界2（尺度の不統一）と、考察の「コアアウトカムセットへの準拠と前向きハーモナイゼーションが必要」という提言は、まさに PRACTICE が答えようとしている課題である。<strong>当院で退室後アウトカムを測る設計を作るときは、本研究ではなく PRACTICE を参照する</strong>。</p>
+<h4>12-4. 「効く群を探す」系の先行ノート</h4>
+<p><span class="wl">ベースライン死亡リスクで治療効果は変わるか — シンバスタチンだけ低リスク群で有益・高リスク群で有害（VANISH・LeoPARDS・HARP-2再解析・CritCare2019）</span> は、同じ「治療効果の異質性（HTE）」の方法論を薬剤で行ったもの。あちらでは APACHE II を連続変数として扱うと交互作用が消えることが示されている。<strong>本研究も APACHE II を三分位（および事後に 20 で二分）というカテゴリで扱っており、同じ落とし穴の上にある</strong>。本研究で重症度が効果を修飾しなかったという結論は、カテゴリ化の仕方に依存している可能性がある。</p>
+<h4>12-5. その後どうなったか</h4>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>出来事</th><th>Vault 内のノート</th></tr></thead>
+<tbody>
+<tr><td>2022</td><td>TEAM 試験（NEJM、750例）が公表。早期離床の機能・HRQoL への効果を示さず。本 IPD の検索締切後のため未収載</td><td>—</td></tr>
+<tr><td>2023-10</td><td><strong>本論文</strong>。4RCT・810例で FCI 2以上の層に PCS の改善（p = 0.041）</td><td>本ノート</td></tr>
+<tr><td>2023</td><td>CIW 総説（CritCare）が本論文を [113] として引用し、「併存疾患の負荷が高い患者への紹介」を正当化</td><td><span class="wl">重症疾患関連筋力低下（CIW）— ICUから地域までの診断・治療・長期転帰（総説・CritCare2023）</span></td></tr>
+<tr><td>2024-12</td><td>PRACTICE コアアウトカムセットが、身体リハビリ試験の必須8アウトカムを定義</td><td><span class="wl">重症患者の身体リハビリ試験に必須の8アウトカム — PRACTICEコアアウトカムセット（AnnalsATS2024）</span></td></tr>
+<tr><td>2025-11</td><td>TEAM 二次解析（ICM）が機械学習で HTE を検討し、<strong>FCI が低い患者ほどベネフィット側</strong>という真逆の層別を報告</td><td><span class="wl">強化早期離床は「誰に効くか」で真逆になる — 機械学習が示した死亡 −8.35%対+14.63%の異質性（TEAM二次解析・ICM2025）</span></td></tr>
+<tr><td>2026-04</td><td>ICM の連続ケア総説が、本論文を「誰に効くか」の文脈で参照</td><td><span class="wl">重症患者リハビリテーションの標準治療 — ICU・病棟・地域をつなぐ連続ケア（総説・ICM2026）</span></td></tr>
+</tbody></table></div>
+<p>本論文が提案した「多疾患併存の ICU 後集団を標的にした前向き研究」は、<strong>Vault 内で確認できる範囲ではまだ実施されていない</strong>。</p>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>[1]</td><td>ICU での能動的離床とリハビリの死亡・機能への効果（レベル1エビデンスの根拠）</td><td>Tipping CJ ら. Intensive Care Med 2017;43:171-183</td></tr>
+<tr><td>[2]</td><td><strong>組み入れ試験①</strong> 重症患者への運動リハビリの12か月追跡 RCT（豪、n = 150）</td><td>Denehy L ら. Crit Care 2013;17:R156</td></tr>
+<tr><td>[3]</td><td><strong>組み入れ試験②</strong> 急性呼吸不全患者への集中的理学療法 RCT（米、n = 120）</td><td>Moss M ら. Am J Respir Crit Care Med 2016;193:1101-1110</td></tr>
+<tr><td>[4]</td><td><strong>組み入れ試験③</strong> RECOVER 試験。ICU 退室後の病院ベースリハビリ強化と情報提供（英、n = 240）</td><td>Walsh TS ら. JAMA Intern Med 2015;175:901-910</td></tr>
+<tr><td>[22]</td><td><strong>組み入れ試験④</strong> 標準化リハビリと在院日数（米、n = 300）</td><td>Morris PE ら. JAMA 2016;315:2694-2702</td></tr>
+<tr><td>[11]</td><td>重症疾患生存者への運動介入 — 組み入れと層別化の基準を理解する（併存疾患が反応を特徴づけるという着想の源）</td><td>Puthucheary ZA, Denehy L. Am J Respir Crit Care Med 2015;191:1464-1467</td></tr>
+<tr><td>[14]</td><td><strong>TEAM 試験</strong>。人工呼吸中の早期能動離床（n = 750）。効果なし</td><td>Hodgson CL ら. N Engl J Med 2022;387:1747-1758</td></tr>
+<tr><td>[15]</td><td>本研究のプロトコル（CRITICALConnect）と元になった系統的レビュー</td><td>Jones JRA ら. BMJ Open 2020;10:e035613</td></tr>
+<tr><td>[17]</td><td>PRISMA-IPD 声明</td><td>Stewart LA ら. JAMA 2015;313:1657-1665</td></tr>
+<tr><td>[18]</td><td><strong>FCI の原著</strong>。身体機能をアウトカムとする併存疾患指数の開発</td><td>Groll DL ら. J Clin Epidemiol 2005;58:595-602</td></tr>
+<tr><td>[19]</td><td>急性肺傷害患者で FCI の評価者間信頼性が高いことの検証</td><td>Fan E ら. BMC Anesthesiol 2012;12:21</td></tr>
+<tr><td>[20]</td><td>ARDS 患者で Charlson より FCI のほうが SF-36 PCS と相関することの検証</td><td>Groll DL ら. Am J Phys Med Rehabil 2006;85:574-581</td></tr>
+<tr><td>[23]</td><td>Cochrane RoB 2</td><td>Sterne JA ら. BMJ 2019;366:l4898</td></tr>
+<tr><td>[25]</td><td><strong>最小重要差の出典</strong>。SF-36v2 マニュアル第3版</td><td>Maruish ME（編）. QualityMetric, 2011</td></tr>
+<tr><td>[29]</td><td>事後の APACHE II 二分（20未満/20以上）の根拠となったリハビリ介入の系統的レビュー</td><td>Waldauf P ら. Crit Care Med 2020;48:1055-1065</td></tr>
+<tr><td>[32]</td><td>急性呼吸不全生存者のコアアウトカム measures（6MWD 採用の根拠）</td><td>Needham DM ら. Am J Respir Crit Care Med 2017;196:1122-1130</td></tr>
+<tr><td>[33]</td><td>機械学習によるクラスタリングで離床の用量最適化（本研究と整合すると著者らが述べる）</td><td>Fuest KE ら. Crit Care 2023;27:1</td></tr>
+<tr><td>[34]</td><td>SOMS 試験。外科系 ICU での早期目標指向型離床 RCT</td><td>Schaller SJ ら. Lancet 2016;388:1377-1388</td></tr>
+<tr><td>[35]</td><td>早期理学療法・作業療法の記念碑的 RCT。退院時のみ良好</td><td>Schweickert WD ら. Lancet 2009;373:1874-1882</td></tr>
+<tr><td>[36]</td><td>ICU での身体リハビリの系統的レビュー（対照群の通常ケア量の議論）</td><td>Wang YT ら. Crit Care Med 2022;50:375-388</td></tr>
+<tr><td>[37]</td><td>敗血症生存者の機能回復軌跡のサブフェノタイプ化</td><td>Puthucheary ZA ら. Crit Care 2020;24:577</td></tr>
+<tr><td>[41]</td><td>3か月時点で異なるアウトカム指標が異なる側面を測っていることの実証</td><td>Denehy L ら. Intensive Care Med 2014;40:1862-1869</td></tr>
+<tr><td>[42]</td><td>ICU 後の自己報告とパフォーマンスベース指標の関係（相関の弱さ）</td><td>Berry MJ ら. J Crit Care 2019;51:19-23</td></tr>
+<tr><td>[43]</td><td>PADIS ガイドライン（今後のガイドライン合意声明への言及先）</td><td>Devlin JW ら. Crit Care Med 2018;46:e825-e873</td></tr>
+<tr><td>[46][47]</td><td>多重比較調整を「するべきか」の論争（調整しなかった理由の典拠）</td><td>Bender R, Lange S. J Clin Epidemiol 2001;54:343-349 ／ Perneger TV. BMJ 1998;316:1236-1238</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 4つのリハビリ RCT の個別患者データ 810例を統合すると、<mark class="hl">Functional Comorbidity Index が2以上の患者に限って SF-36 PCS が3か月・6か月で対照より 5.8点高く、最小重要差（2点）を超えた</mark>（交互作用 Wald 検定 p = 0.041）。<mark class="hl">この層別は PROSPERO 事前登録と公表プロトコルで事前規定されており、「後から都合よく切った」ものではない</mark>。ただし<mark class="hl">多重比較の調整は行われておらず、著者自身がそれを明記している</mark>。検定されたのは交互作用であって、サブグループ内の群間差ではない。 ==客観的な歩行距離では差が出ないが、これは「効かない」ではなく「810例中 236例しか測れていない」（GRADE low、交互作用 p = 0.264 は図中のみ）<mark class="hl">。</mark>「歩けるようになる」ではなく「本人が感じる健康度が変わる」という区別は、説明のときに崩さない<mark class="hl">。 </mark>行動として変えるのは「誰に」だけである。ICU 入室時に FCI を採点し、2以上の患者を退室後訪問と外来フォローの優先層に置き、3か月・6か月時点で SF-12/36 の PCS を点数で追う<mark class="hl">。</mark>「どれだけやるか」は本研究からは決められない（著者が範囲外と明言）。人工呼吸中の ICU 内で強度を上げる根拠にもならない — TEAM 二次解析は併存疾患が少ない患者ほどベネフィット側という真逆の層別を出している==。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

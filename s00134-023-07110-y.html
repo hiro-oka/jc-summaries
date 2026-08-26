@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>脳死判定の補助検査 — 血流は灌流ではなく灌流は機能ではない（What's New・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07110-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">脳死判定の補助検査 — 血流は灌流ではなく灌流は機能ではない（What's New・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Chassé M. Ancillary testing for neurologic determination of death in adults: in search of a surrogate of clinical function. Intensive Care Med. 2023;49:1117-1119. doi:10.1007/s00134-023-07110-y</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-06-13）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07110-y" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07110-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Ancillary testing for neurologic determination of death in adults: in search of a surrogate of clinical function</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07110-y.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07110-y.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07110-y.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟での使いどころ</p>
+<ul><li><strong>原則を1本に絞る</strong>：補助検査が測っているのは血流・灌流・活動であって、臨床的な脳機能そのものではない。「CTAで血流が少し残っている」「TCDで残存波形がある」という所見だけで判定を覆したり、逆に「造影されないから機能なし」と即断したりしない。本稿の主張は最後までこの一点に集約される。</li><li><strong>臨床診察を省略する道具として使わない</strong>：交絡がなく臨床診察が明確なら、補助検査は（法域によって義務づけられていても）医学的には必要でない、と著者は明言している。補助検査は診察の代用ではなく、診察が不完全・結論不能なときの補完である。</li><li><strong>検査が食い違ったときの規則を先に決めておく</strong>：本稿は「最も特異度の高い検査を繰り返す」を保守的アプローチとして提案する。誤って死と宣告しない側に倒す、という方向性だけは事前に共有しておくと現場で迷わない。</li><li><strong>「他の適応で撮った検査」に備える</strong>：判定後にベッドサイドモニタで脳波活動が出た、別目的のCTAで血流が写った、という事態を図1が独立の入口として扱っている。当院でも「判定後に偶発的に得られた所見をどう扱うか」を決めておく価値がある（図1では、この場合は補助検査の選択へ戻る）。</li><li><strong>TCDの位置づけを混同しない</strong>：当院がTCDを使う文脈（<span class="wl">経頭蓋ドプラによる圧目標型の神経集中治療（MAPを個別最適化する・CritCare2026）</span>／<span class="wl">脳エコー（経頭蓋カラードプラ）ナラティブレビュー ICM2019</span>）は自己調節能や圧目標の最適化であり、要求される精度と判定の重みがまったく違う。同じプローブでも「モニタリング」と「死亡判定」を地続きに扱わない。</li><li><strong>CTPへの前のめりを抑える</strong>：CTPがCTAより優れるという記述は、最終結果が保留中の多施設試験の予備的結果に基づく。現時点で運用を変える根拠にはならない。</li><li><strong>家族説明の言葉を用意する</strong>：「検査で血が流れているように見えても、それは脳が働いていることを意味しない」という説明は、本稿の骨子そのまま使える。<span class="wl">ICUで死にゆく患者家族への3ステップ支援戦略（Lancet2022）</span> の枠組みと組み合わせる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：神経学的基準による死亡判定（DNC）は不可逆的な脳幹機能の停止を指し、潜在的臓器提供者の同定と適切な終末期ケアに不可欠である（引用1：World Brain Death Project、JAMA 2020）。補助検査は血流・灌流・活動を測るものとして整理でき、「血流は灌流ではなく、灌流は機能ではない」という定式化は先行するカナダの総説（引用2：Plourde et al, Can J Anesth 2021）で既に提示されている。</li><li><strong>Unknown（分かっていなかったこと）</strong>：DNCには普遍的に受け入れられたゴールドスタンダードが存在しない。そのため各補助検査の精度・信頼性を横並びで比較すること自体が難しい。臨床診察が主に脳幹機能を見るのに対し、補助検査はテント上・テント下の両方を評価してしまうという「見ている対象のズレ」も残る。複数の検査が一致しないときの対処も定まっていない。</li><li><strong>What's new（本稿の位置づけ）</strong>：新しいデータを出す論文ではない。神経集中治療の進歩を踏まえて、現行の補助検査（EEG・EP／脳血管造影／CTA／TCD／CTP／核医学シンチグラフィ）を「何を測っているか」で3群に整理し直し、各々の適応と限界、そして将来技術を1本のフローチャート（図1）にまとめた<strong>概念整理</strong>が新しい。CTA対CTPの大規模多施設試験の予備的結果に触れた点も含む。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 補助検査が測れるのは脳の<strong>血流・灌流・活動</strong>までであり、臨床的な脳機能ではない。臨床診察がゴールドスタンダードであり続け、交絡がなく診察が明確なら補助検査は医学的には不要である。</p>
+</div>
+<ul><li>本稿は成人のDNCに用いる補助検査の<strong>簡潔なレビュー</strong>（concise review）である。適応・限界・将来の発展方向を扱う。</li><li>補助検査は <strong>脳血流（cerebral blood flow）／脳灌流（cerebral perfusion）／脳活動（cerebral activity）</strong> を、それぞれ異なる妥当性の程度で評価する。3つは同義ではない。</li><li><strong>臨床診察がゴールドスタンダード</strong>であり、補助検査は有用な確認情報（valuable confirmatory information）を与える位置づけにとどまる。</li><li><strong>現行のどの補助検査も臨床的な脳機能を正確に評価できない</strong>。各検査の限界を必ず考慮する必要がある。</li><li><strong>脳活動を測る検査（EEG・EP）</strong>：平坦脳波または誘発電位の消失はDNCの診断を支持する。ただし鎮静薬・代謝性異常・技術的問題の影響を受け、単独の補助検査としては一般に推奨されない。一方で<strong>脳活動の存在はDNCと両立しない</strong>。</li><li><strong>脳血流を測る検査（脳血管造影・CTA・TCD）</strong>：造影は侵襲的で熟練者を要し、"stasis filling" により偽陰性を生じうる。CTAも同じ制約を受け、DNCへの感度が altered（変化する／損なわれる）と記載される。TCDは非侵襲的でポータブルだが、解剖学的因子と術者依存性が課題。</li><li><strong>脳灌流を測る検査（CTP・核医学シンチグラフィ）</strong>：CTPは脳組織内の血流パラメータを評価し灌流のより正確な推定を与えうる。多施設試験の予備的結果では<strong>CTPはCTAよりDNCへの感度・特異度が高い</strong>が、最終結果は保留中。核医学は<strong>親油性トレーサー（Tc-99m-HMPAO）が灌流の、疎油性トレーサー（Tc-99m-ECD）が血流の</strong>代替指標になる。</li><li><strong>課題</strong>：ゴールドスタンダードの不在／臨床診察（脳幹中心）と補助検査（テント上下の両方）の評価対象のズレ／テント上に残存活動がある場合の解釈をめぐる論争と推奨の分岐／複数検査が不一致のときの対処が不明確。</li><li><strong>不一致時の提案</strong>：最も特異度の高い検査を繰り返すのが、誤って死と宣告する可能性を最小化する保守的アプローチかもしれない。</li><li><strong>将来</strong>：コンピュータビジョン・機械学習、高解像度MRI・MRA、PET、fMRI、近赤外分光法（NIRS）。ただしコスト・アクセス性・さらなる妥当性検証が普及を妨げている。</li><li><strong>結語</strong>：臨床医は自国のガイドラインを常に確認すること。補助検査と臨床診察を賢明に統合することでDNC診断の精度と一貫性が高まる。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 脳死判定と補助検査の基礎（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>DNC（determination of death by neurologic criteria、神経学的基準による死亡判定）</strong> とは、心臓が動いていても脳の機能が不可逆的に失われた状態をもって死亡と判定することを指す。本稿は冒頭で「Clinical DNC は<strong>脳幹機能の不可逆的停止</strong>を指す」と定義している。集中治療の中でも専門性の高い領域であり、潜在的な臓器提供者の同定と、適切な終末期ケアの提供の両方にとって決定的に重要である。</p>
+<p><strong>補助検査（ancillary test）</strong> とは、臨床診察（脳幹反射・無呼吸テストなど）に加えて行う客観的検査のこと。本稿が扱うのは6種類 — 脳波（EEG）、誘発電位（EP）、脳血管造影、CT血管造影（CTA）、経頭蓋ドプラ（TCD）、CT灌流（CTP）、放射性核種脳灌流シンチグラフィである。</p>
+<p><strong>本稿の中心概念は「3つの層」の区別</strong>である。著者は本文で各語を次のように定義している。</p>
+<ul><li><strong>脳血流（cerebral blood flow）</strong>：脳の血管内を通過する血液の量</li><li><strong>脳灌流（cerebral perfusion）</strong>：脳組織への血液の供給（delivery）</li><li><strong>脳活動（cerebral activity）</strong>：脳の電気的および代謝的な活動</li></ul>
+<p>血管に血が流れていること（血流）と、それが組織に届いていること（灌流）と、組織が働いていること（活動・機能）は別々の事象である。タイトルの "in search of a surrogate of clinical function"（臨床的機能の代替指標を求めて）は、補助検査がこの3つのどれかを測ることで「機能」を推し量ろうとする営みだが、まだ代替指標として十分ではない、という含意を持つ。</p>
+<p><strong>用語の補足</strong>（本文の記載に基づく）</p>
+<ul><li><strong>stasis filling（うっ滞性充盈）</strong>：血管造影・CTAで、近位側の血管segmentが<strong>緩徐に・遅れて・淡く・持続的に</strong>造影される現象。「血流がある」と誤読されうるため、DNCの評価では偽陰性の原因になる。</li><li><strong>reverberating flow（往復血流／振動血流）</strong>：TCDでDNCのときに典型的に見られる特徴的パターン。収縮期の順行性血流と拡張期の逆行性血流が打ち消し合い、正味の脳灌流がない状態を示す波形。</li><li><strong>テント上（supratentorial）／テント下（infratentorial）</strong>：小脳テントを境にした大脳側と脳幹・小脳側の区別。臨床診察は主に脳幹（テント下）を見るのに対し、画像系の補助検査は両方を写してしまう。この評価対象のズレが本稿の論点の一つ。</li></ul>
+</div>
+<div class="call note"><span class="lab">補足</span>
+<p>これは論文本文ではなく一般的な背景知識である 以下は本文に記載がない補足であり、論文の主張と混ぜてはならない。</p>
+<ul><li><strong>日本の制度</strong>：日本の法的脳死判定（臓器移植法に基づく判定）は、本稿が扱う国際的議論とは別の、独自の手続き・要件を持つ。本稿は各国の法域差を繰り返し指摘しており、著者自身「臨床医は自国のガイドラインを常に確認しなければならない」と結んでいる。<mark class="hl"><strong>日本で判定を行う際の必須項目・除外例・観察時間は、必ず日本の公式な判定基準の原文に当たって確認すること</strong></mark>。本稿の記述から日本の要件を推論してはならない。</li><li><strong>著者の所属背景</strong>：Michaël Chassé はカナダ（モントリオール大学CHUM）の集中治療医で、本文の引用6・引用7に挙がるCTA/CTP多施設診断試験（INDex-CTP、NCT03098511）の責任者でもある。CTPに関する記述には、著者自身の進行中研究が背景にあることを踏まえて読む。</li></ul>
+</div>
+<h3>2. 背景と目的 🎯</h3>
+<p>本稿は冒頭で、DNCが集中治療医学における専門領域であること、そして神経集中治療の最近の進歩と新たなエビデンスがDNCの理解を改善してきたことを述べる。</p>
+<p>その上で問題設定を行う。補助検査は脳血流・脳灌流・脳活動を、<strong>それぞれ異なる妥当性の程度で（to varying degrees of validity）</strong> 評価できる。臨床診察がDNCのゴールドスタンダードであり続ける一方で、補助検査は有用な確認情報を提供する（図1）。しかし<strong>現行のどの補助検査も臨床的な脳機能を正確に評価できず</strong>、各検査の限界を考慮しなければならない。</p>
+<p><strong>目的</strong>：現在利用可能なDNCの補助検査について、適応・限界・将来の発展の可能性を論じる簡潔なレビューを提供すること。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>タイトルの出典に注意 「Flow is not perfusion, and perfusion is not function」という定式化は本稿が初めて言い出したものではなく、引用2の Plourde G, Briard JN, Shemie SD, Shankar JJS, Chassé M. *Can J Anesth* 2021;68(7):953-961 の論文タイトルそのものである（本稿の著者もその共著者）。本ノートのファイル名にある「血流は灌流ではなく灌流は機能ではない」は、この先行総説から受け継がれた標語であって、本稿固有の新規主張ではない。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<p>本稿は原著研究ではないため、通常のMethodsセクションを持たない。以下は形式面の整理である。</p>
+<ul><li><strong>デザイン</strong>：ナラティブな短報レビュー（ICMの WHAT'S NEW IN INTENSIVE CARE 枠）。系統的検索の記述はない。</li><li><strong>対象</strong>：成人のDNC（小児は明示的に扱わない）。</li><li><strong>データ</strong>：新規データなし。Data availability は Not applicable と明記。</li><li><strong>構成</strong>：導入 → 脳活動を測る検査 → 脳血流を測る検査 → 脳灌流を測る検査 → 課題（Challenges） → 将来の方向性（Future directions） → 結語。</li><li><strong>図表</strong>：図1（検査選択のフローチャート）1点のみ。表はない。</li><li><strong>引用</strong>：12件。うち診断精度に関する系統的レビュー・メタ解析（引用3）、テント下損傷に関する系統的レビュー・メタ解析（引用9）、進行中の多施設診断試験（引用6・7）を含む。</li><li><strong>限界（形式面）</strong>：本文には<strong>各検査の感度・特異度・尤度比などの具体的な数値が一切示されていない</strong>。数値は引用3・引用6の原典に当たる必要がある。</li></ul>
+<h3>4. 脳活動を測る検査 — EEG と誘発電位（EP）⚡</h3>
+<p><strong>測っているもの</strong>：脳の電気活動。</p>
+<p><strong>DNCの文脈での意味づけ</strong>（本文の記載）</p>
+<ul><li>脳機能の不在を示す証拠を提供しうる。</li><li><strong>平坦脳波（isoelectric EEG）または誘発電位の消失は、DNCの診断を支持する</strong>。</li></ul>
+<p><strong>限界</strong>（本文の記載を一つずつ）</p>
+<div class="tw"><table>
+<thead><tr><th>限界</th><th>本文の記載</th><th>実務での含意</th></tr></thead>
+<tbody>
+<tr><td>交絡</td><td>鎮静薬（sedative medications）の影響を受ける</td><td>薬物の残存・クリアランスを確認しないと平坦脳波を信用できない</td></tr>
+<tr><td>交絡</td><td>代謝性異常（metabolic disturbances）の影響を受ける</td><td>電解質・内分泌・体温などの交絡を先に潰す</td></tr>
+<tr><td>技術</td><td>技術的問題（technical issues）の影響を受ける</td><td>電極・アーチファクト・ゲイン設定など記録条件が結果を左右する</td></tr>
+<tr><td>感度</td><td>電気活動がないことが常にDNCを意味するわけではない。<strong>検出閾値以下</strong>の脳活動が残っている可能性、<strong>検査で評価されていない脳領域</strong>に活動が残っている可能性がある</td><td>「平坦＝機能なし」と等号で結ばない</td></tr>
+</tbody></table></div>
+<p><strong>推奨の強さの区別（本稿の言い方を厳密に）</strong></p>
+<ul><li>「一般にDNCの<strong>唯一の</strong>補助検査としては推奨されない」（generally not recommended as only ancillary tests for DNC）。禁止でも不使用でもなく、「単独では足りない」という限定である。</li><li>一方で <strong>脳活動の存在はDNCと両立しない</strong>（evidence of cerebral activity is not compatible with DNC）。つまり陽性所見（活動あり）の意味は明確で強い。<strong>陰性所見（活動なし）の意味だけが弱い</strong>、という非対称性がこの検査の本質である。</li></ul>
+<p>図1でもこの2点が1行に凝縮されている — 「Subject to confounding. Presence of activity is incompatible with NDD.」（交絡を受ける。活動の存在はNDDと両立しない）。</p>
+<h3>5. 脳血流を測る検査 — 脳血管造影・CTA・TCD 🩸</h3>
+<h4>5-1. 脳血管造影（cerebral angiography）</h4>
+<ul><li><strong>性質</strong>：侵襲的（invasive）であり、熟練した人員（experienced personnel）を要する。</li><li><strong>陽性所見の意味</strong>：<strong>すべての主要頭蓋内血管における血流の不在の証明はDNCを支持する</strong>。</li><li><strong>限界</strong>：<strong>stasis filling</strong> により解釈が複雑になる。近位血管segmentの、緩徐で・遅延した・微弱な・持続的な造影が観察されうる。これは脳血流の評価において<strong>偽陰性（false-negative）</strong> の結果をもたらす可能性がある（引用5：Sawicki M et al, *Neuroradiology* 2013;55(9):1061-1069）。</li><li><strong>図1の位置づけ</strong>：「Recommended in some jurisdictions. Better alternative available.」 — <strong>一部の法域で推奨されている</strong>が、より良い代替手段が存在する。ここは「推奨されている」と「一部の国で認められている」を混同してはいけない典型例である。本稿は脳血管造影を一律に推奨しておらず、むしろ「法域によっては推奨されているが、より良い選択肢がある」という距離の取り方をしている。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>用語の落とし穴 — ここでの「偽陰性」は何に対する陰性か 本文は "potentially resulting in false-negative results <strong>in the assessment of cerebral blood flow</strong>"（脳血流の評価における偽陰性）と書いている。すなわち <mark class="hl"><strong>「血流がない」という判定に対する偽陰性＝本当は血流が止まっているのに造影所見上は流れているように見える</strong></mark> ことを指す。stasis filling を「残存血流あり」と読んでしまうと、DNCの支持所見を取り逃す方向に働く。逆方向の誤り（本当は流れているのに止まって見える）ではない点に注意。</p>
+</div>
+<h4>5-2. CT血管造影（CTA）</h4>
+<ul><li><strong>性質</strong>：脳血流を<strong>非侵襲的に</strong>評価できる。</li><li><strong>限界</strong>：脳血管造影と同様に、<strong>DNCに対する感度が altered（変化する／損なわれる）</strong>。理由は2つ。</li></ul>
+<ol><li><strong>必ずしも灌流や機能を意味しない血流を検出しうる</strong>（it can detect flow that does not necessarily indicate perfusion or function） — 本稿のタイトルそのものの現れ方。</li><li><strong>stasis filling の影響も同様に受ける</strong>（引用5）。</li></ol>
+<ul><li><strong>図1の位置づけ</strong>：CTAとCTPは同じボックスにまとめられ、「Very specific (excludes NDD), CTP more sensitive to NDD than CTA but less accessible.」と記載されている。</li></ul>
+<h4>5-3. 経頭蓋ドプラ（TCD）</h4>
+<ul><li><strong>性質</strong>：脳血流評価の<strong>非侵襲的かつポータブル</strong>な方法。ベッドサイドで実施できる。</li><li><strong>DNCでの典型所見</strong>：<strong>血流の消失</strong>、または <strong>"reverberating flow"</strong> と呼ばれる特徴的パターンを示す。</li><li><strong>限界</strong>：</li><li><strong>解剖学的因子により、テント下（infra-tentorial）およびテント上（supratentorial）の血流評価が難しいことがある</strong>。</li><li><strong>術者の技量への依存度がより高い</strong>（more dependent on the operator's skill）。</li><li><strong>解釈の作法</strong>（本文の指示）：</li><li><strong>血流研究の解釈には、テント上・テント下の両領域の血流解析を含めるべきである</strong>。</li><li>ただし <strong>残存血流の臨床的意義については慎重であるべき</strong>。それは機能を表さないかもしれないため（as it may not represent function）。</li><li><strong>図1の位置づけ</strong>：「Non invasive, available at the bedside. Anatomical considerations and operator dependent.」</li></ul>
+<h4>Table. 脳血流を測る3検査の比較（本文の記載のみで構成）</h4>
+<div class="tw"><table>
+<thead><tr><th>検査</th><th>侵襲性・可搬性</th><th>支持所見</th><th>主な限界</th><th>図1のコメント</th></tr></thead>
+<tbody>
+<tr><td>脳血管造影</td><td>侵襲的・熟練者が必要</td><td>すべての主要頭蓋内血管で血流なし</td><td>stasis filling による偽陰性</td><td>一部の法域で推奨。より良い代替手段がある</td></tr>
+<tr><td>CTA</td><td>非侵襲的</td><td>（本文に明示的な陽性基準の記載なし）</td><td>灌流・機能を意味しない血流を検出しうる／stasis filling</td><td>非常に特異的。CTPより感度は劣るがアクセスは良い</td></tr>
+<tr><td>TCD</td><td>非侵襲的・ポータブル</td><td>血流消失または reverberating flow</td><td>解剖学的因子／術者依存／テント上下の描出困難</td><td>非侵襲的でベッドサイドで可能。解剖学的考慮と術者依存</td></tr>
+</tbody></table></div>
+<h3>6. 脳灌流を測る検査 — CTP と核医学シンチグラフィ 🧪</h3>
+<p>本文はこの節を「一部の補助検査は、脳血流に<strong>加えて</strong>脳灌流の推定を提供できる」という一文で始める。血流を測る検査の上位互換ではなく、測っている層が一段深いという整理である。</p>
+<h4>6-1. CT灌流（CTP）</h4>
+<ul><li><strong>原理</strong>：<strong>脳組織内の血流パラメータ（blood flow parameters within brain tissue）</strong> を評価する。したがって<strong>脳灌流のより正確な推定を提供しうる</strong>（potentially more accurate estimate）。</li><li><strong>エビデンスの現状</strong>：<strong>CTAとCTPの妥当性を測定する大規模多施設試験の予備的結果（preliminary results）</strong> が、<strong>CTPはCTAよりDNCに対する感度・特異度が高い</strong>ことを示唆している（引用6：Chassé M, Shankar JJS, 2021, Toronto）。</li><li><strong>この試験の最終結果は保留中（pending）である</strong>（引用7：ClinicalTrials.gov NCT03098511、INDex-CTP）。</li><li><strong>アクセス性</strong>：図1に「less accessible」（CTAよりアクセスが劣る）と明記されている。</li></ul>
+<h4>6-2. 放射性核種脳灌流シンチグラフィ（Radionuclide Cerebral Perfusion Scintigraphy）</h4>
+<ul><li><strong>原理</strong>：放射性トレーサーを<strong>静脈内投与</strong>し、撮像して脳の血流と灌流を評価する。</li><li><strong>トレーサーの分類</strong>（引用8：Zuckier LS, Sogbein OO, *Semin Nucl Med* 2013;43(2):129-138）：</li></ul>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>代表的トレーサー（本文の正式名）</th><th>体内動態</th><th>何を表すか</th></tr></thead>
+<tbody>
+<tr><td><strong>親油性（lipophilic）</strong></td><td>Tc-99m-hexamethylpropyleneamine-oxime（HMPAO）</td><td><strong>脳組織に集積する</strong></td><td><strong>灌流のより正確な代替指標となりうる</strong>（potentially a more accurate surrogate of perfusion）</td></tr>
+<tr><td><strong>疎油性（lipophobic）</strong></td><td>Tc-99m-ethyl-cysteinate-dimer（ECD）</td><td><strong>血管内に留まる</strong></td><td><strong>主に血流を表す</strong>（primarily represent blood flow）</td></tr>
+</tbody></table></div>
+<ul><li><strong>重要な含意</strong>：<strong>どのトレーサーを使うかがスキャンの判読に影響する</strong>（The radiotracer can impact the interpretation of the scan）。同じ「核医学検査で取り込みなし」でも、親油性か疎油性かで意味する層が違う。</li><li><strong>図1の位置づけ</strong>：「Likely comparable to CTA/CTP, logistic and availability challenges.」 — 精度はCTA/CTPと<strong>おそらく同等</strong>だが、ロジスティクスと利用可能性に課題がある。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>トレーサーの種別を確認せずに核医学レポートを読まない <mark class="hl"><strong>「親油性なら灌流、疎油性なら血流」という対応を確認しないまま結果だけを受け取ると、測っている層を1段取り違えることになる</strong></mark>。本稿の3層構造（血流／灌流／活動）は、まさにこの取り違えを防ぐための道具である。</p>
+</div>
+<h3>7. 図1（検査選択フローチャート）の完全な読み解き 🗺️</h3>
+<p class="figref">🖼 原著のFig. 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07110-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07110-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Fig. 1 Test selection flowchart.（原図・無改変。©2023 Springer-Verlag GmbH Germany, part of Springer Nature） 原キャプション：「Test selection flowchart. NDD Neurological death determination, EEG electroencephalogram, EP evoked potentials, CTA CT-angiography, CTP CT-perfusion, TCD transcranial Doppler」 背景には淡いグレーの脳の線画が透かしとして敷かれている。左端に入口、上部にゴール（家族・医療チームへの伝達）、中段右側に5つの検査と各々の評価コメントが2列で並ぶ構成。</p>
+</div>
+<h4>7-1. 全ボックス・全ラベルの起こし（原文と訳）</h4>
+<div class="tw"><table>
+<thead><tr><th>位置・形</th><th>原文ラベル</th><th>日本語</th></tr></thead>
+<tbody>
+<tr><td>左端・角丸長方形（入口）</td><td>Clinical evaluation for NDD</td><td>NDDのための臨床評価</td></tr>
+<tr><td>上部中央・楕円（濃い枠、緑〜青のグラデーション）</td><td><strong>Yes</strong> ／ Avoid conducting additional ancillary testing</td><td><strong>はい</strong> ／ 追加の補助検査の実施を避ける</td></tr>
+<tr><td>右上・八角形（青のグラデーション、人物の透かし入り）</td><td>Communicate NDD Determination to the Healthcare Team and Family</td><td>NDD判定を医療チームと家族に伝達する</td></tr>
+<tr><td>中央・角丸長方形（見出し帯が濃紺、白抜き太字）</td><td><strong>INCOMPLETE OR INCONCLUSIVE</strong> ／ Select an appropriate ancillary test</td><td><strong>不完全または結論不能</strong> ／ 適切な補助検査を選択する</td></tr>
+<tr><td>下部・角丸長方形（見出し帯が黄色、黒太字）</td><td><strong>CONCURRENT TEST DONE FOR OTHER INDICATION</strong> ／ Evidence of flow, perfusion or function after NDD (eg. EEG activity on bedside monitoring, flow on CTA)</td><td><strong>他の適応で並行して実施された検査</strong> ／ NDD後の血流・灌流・機能の所見（例：ベッドサイドモニタでの脳波活動、CTAでの血流）</td></tr>
+<tr><td>検査ボックス1</td><td>EEG, EP (activity)</td><td>EEG・EP（活動）</td></tr>
+<tr><td>評価ボックス1</td><td>Subject to confounding. Presence of activity is incompatible with NDD.</td><td>交絡を受ける。活動の存在はNDDと両立しない</td></tr>
+<tr><td>検査ボックス2</td><td>Cerebral angiography (flow)</td><td>脳血管造影（血流）</td></tr>
+<tr><td>評価ボックス2</td><td>Recommended in some jurisdictions. Better alternative available.</td><td>一部の法域で推奨されている。より良い代替手段がある</td></tr>
+<tr><td>検査ボックス3</td><td>CTA (Flow); CTP (Flow and perfusion)</td><td>CTA（血流）／CTP（血流と灌流）</td></tr>
+<tr><td>評価ボックス3</td><td>Very specific (excludes NDD), CTP more sensitive to NDD than CTA but less accessible.</td><td>非常に特異的（NDDを除外する）。CTPはCTAよりNDDに対して感度が高いが、アクセスは劣る</td></tr>
+<tr><td>検査ボックス4</td><td>Lipophobic (flow) and Lipophilic (perfusion) agent Nuclear scan</td><td>疎油性（血流）および親油性（灌流）製剤による核医学スキャン</td></tr>
+<tr><td>評価ボックス4</td><td>Likely comparable to CTA/CTP, logistic and availability challenges.</td><td>おそらくCTA/CTPと同等。ロジスティクスと利用可能性に課題</td></tr>
+<tr><td>検査ボックス5</td><td>TCD (flow)</td><td>TCD（血流）</td></tr>
+<tr><td>評価ボックス5</td><td>Non invasive, available at the bedside. Anatomical considerations and operator dependent.</td><td>非侵襲的でベッドサイドで実施可能。解剖学的考慮を要し、術者に依存する</td></tr>
+</tbody></table></div>
+<h4>7-2. 矢印のつながり（図の骨格）</h4>
+<p>矢印にラベル文字は付いていない。線の走り方は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>起点</th><th>終点</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>Clinical evaluation for NDD</td><td>「Yes（追加の補助検査を避ける）」楕円</td><td>臨床評価だけで結論が出た場合の経路。左端から上に折れて上部へ回り込む</td></tr>
+<tr><td>Clinical evaluation for NDD</td><td>「INCOMPLETE OR INCONCLUSIVE」ボックス</td><td>臨床評価が不完全・結論不能な場合の経路</td></tr>
+<tr><td>「Yes」楕円</td><td>「Communicate NDD Determination…」八角形</td><td>判定確定 → 医療チームと家族への伝達</td></tr>
+<tr><td>「INCOMPLETE OR INCONCLUSIVE」ボックス</td><td>5つの検査ボックスへ分岐</td><td>適切な補助検査の選択</td></tr>
+<tr><td>各検査ボックス</td><td>各評価ボックス</td><td>各検査の特性・注意点</td></tr>
+<tr><td>各評価ボックス</td><td>右端の縦線を通って「Communicate…」八角形</td><td>補助検査を経てもゴールは同じ伝達</td></tr>
+<tr><td>「CONCURRENT TEST DONE FOR OTHER INDICATION」ボックス</td><td>上向きに「INCOMPLETE OR INCONCLUSIVE」ボックス</td><td>他目的の検査で血流・灌流・機能の所見が出たら、補助検査の選択に戻る</td></tr>
+<tr><td>「CONCURRENT TEST…」ボックス</td><td>左端の縦線を経て上部へ</td><td>左側の縦線で入口・上部経路と接続される</td></tr>
+</tbody></table></div>
+<h4>7-3. この図が示している判断の流れ（表で再構成）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>NDDのための臨床評価を行った</td><td>交絡がなく、診察が明確に結論できたか</td><td>結論できた（Yes）→ <strong>追加の補助検査を行わない</strong>。医療チームと家族へ伝達する</td></tr>
+<tr><td>臨床評価が不完全または結論不能</td><td>何が評価できていないか（活動か、血流か、灌流か）</td><td>適切な補助検査を1つ選ぶ（EEG・EP／脳血管造影／CTA・CTP／核医学／TCD）</td></tr>
+<tr><td>EEG・EPを選ぶ</td><td>鎮静薬・代謝性異常・技術的問題の交絡はないか</td><td>単独では判定しない。ただし活動があればNDDと両立しない</td></tr>
+<tr><td>脳血管造影を選ぶ</td><td>自国・自法域の要件はどうなっているか</td><td>一部の法域では推奨。ただしより良い代替手段があることを踏まえる</td></tr>
+<tr><td>CTA・CTPを選ぶ</td><td>CTPが利用可能か</td><td>非常に特異的。CTPのほうが感度は高いがアクセスが劣る</td></tr>
+<tr><td>核医学スキャンを選ぶ</td><td>親油性か疎油性かのトレーサー種別</td><td>精度はCTA/CTPと同等程度。ロジスティクスと在庫の問題を先に確認する</td></tr>
+<tr><td>TCDを選ぶ</td><td>術者の熟練度、テント上下の窓が取れるか</td><td>非侵襲的でベッドサイドで可能。残存血流を機能と読まない</td></tr>
+<tr><td>他の適応で行った検査で、NDD後に血流・灌流・機能の所見が出た</td><td>それが何を意味するのか（例：ベッドサイドモニタの脳波活動、CTAでの血流）</td><td>「不完全または結論不能」の段階に戻り、適切な補助検査を選び直す</td></tr>
+<tr><td>いずれの経路も</td><td>—</td><td>最終的にNDD判定を医療チームと家族へ伝達する</td></tr>
+</tbody></table></div>
+<h3>8. 課題（Challenges）— 本稿の中核 🧗</h3>
+<p>本文は4つの課題を挙げる。</p>
+<p><strong>① ゴールドスタンダードの不在</strong> DNCについて<strong>普遍的に受け入れられた「ゴールドスタンダード」が存在しない</strong>。これが、異なる補助検査の<strong>精度と信頼性を比較することを難しくしている</strong>（makes it difficult to compare the accuracy and reliability of different ancillary tests）。診断精度研究の参照基準そのものが揺らいでいる、という方法論上の根本問題である。</p>
+<p><strong>② 臨床診察と補助検査で「見ている領域」が違う</strong> <strong>臨床診断は主に脳幹機能の評価を強調する</strong>（predominantly emphasizes the assessment of brainstem function）のに対し、<strong>補助検査はテント下・テント上の両領域の評価を可能にする</strong>。同じ「DNC」を対象にしているようで、測定対象の解剖学的範囲が一致していない。</p>
+<p><strong>③ テント上に残存活動があるときの解釈をめぐる論争</strong> <strong>脳幹における血流・灌流・機能の不在に対し、テント上の残存活動が存在する場合の臨床的意義について論争が続いている</strong>（引用4：Smith M, Citerio G, *Intensive Care Med* 2017;43(9):1383-1385／引用9：Neves Briard J et al, *Neurology* 2023;100(4):e443-e453）。<strong>推奨も分岐しており（Recommendations diverge）</strong>、補助検査の利用と解釈にもう一段の複雑さを加えている。</p>
+<p><strong>④ 複数の検査が一致しないときの対処が不明確</strong> <strong>臨床評価を含む複数の検査が一致しない状況にどう臨むかも不明確である</strong>（It is also unclear how to approach situations where several tests (including the clinical assessment) are not concordant）。</p>
+<p>本稿の提案は次のとおり。<strong>最も特異度の高い検査を繰り返すのが最善かもしれない</strong>（It may be best to repeat the test with the highest specificity）。理由は、それが<strong>患者を守り、誤って死亡と宣告する可能性を最小化する保守的アプローチを提供する</strong>からである。そして<strong>最良の検査の選択は、利用可能な最良のエビデンスに導かれるべき</strong>である（引用3：Neves Briard J, Nitulescu R, Lemoine É et al. Diagnostic accuracy of ancillary tests for death by neurologic criteria: a systematic review and meta-analysis. *Can J Anesth* 2023）。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>提案の強さを読み違えない ここで著者が使っているのは "It <strong>may</strong> be best"（〜が最善かもしれない）という表現であり、<strong>確立した推奨ではなく、保守的な選択肢としての提案にとどまる</strong>。本ノートでも断定に直していない。原文の慎重さをそのまま運ぶ。</p>
+</div>
+<h3>9. 将来の方向性（Future directions）🔭</h3>
+<p>画像技術の進歩が、より正確で信頼できる検査への道を開くと著者は述べる。挙げられているのは以下。</p>
+<div class="tw"><table>
+<thead><tr><th>技術</th><th>本文の記載</th><th>期待される役割</th></tr></thead>
+<tbody>
+<tr><td><strong>コンピュータビジョン・機械学習</strong></td><td>画像データの自動化された洗練された判読を提供することで検査精度を高めうる。<strong>人的誤差と主観性を最小化する</strong>（引用10：Esteva A et al, *NPJ Digit Med* 2021;4(1):5）</td><td>判読のばらつきを減らす</td></tr>
+<tr><td><strong>高解像度MRI・MRA</strong></td><td>脳の構造と血管の詳細な画像を得る。<strong>一部の研究がDNCの潜在的指標となりうる識別可能なパターンを提案している</strong></td><td>構造・血管の高精細評価</td></tr>
+<tr><td><strong>PET</strong></td><td>脳代謝と血流の評価を提供する</td><td>代謝＝活動の層を直接見る</td></tr>
+<tr><td><strong>fMRI</strong></td><td>血液酸素化と血流の変化を通じて脳活動を<strong>非侵襲的にモニタする</strong></td><td>活動の層を非侵襲で</td></tr>
+<tr><td><strong>近赤外分光法（NIRS）</strong></td><td>同上（血液酸素化と血流の変化を通じて脳活動を非侵襲的にモニタする）</td><td>ベッドサイドでの活動評価</td></tr>
+</tbody></table></div>
+<p>これらの検査は、<strong>EEGやEPといった従来の活動系補助検査よりも包括的な脳活動の評価をもたらす可能性</strong>を持ち、<strong>交絡因子の影響も受けにくい</strong>（less susceptible to confounding factors）と記載される（引用11：Monti MM et al, *N Engl J Med* 2010;362(7):579-589／引用12：Boly M et al, *Hum Brain Mapp* 2009;30(8):2393-2400）。</p>
+<p>ただし <strong>コスト・アクセス性・さらなる妥当性検証の必要性</strong> といった限界が、DNCにおける広範な臨床応用を妨げている（引用1）。</p>
+<h3>10. 結語（本文の締め）🏁</h3>
+<p>本文最終段落の主張を分解する。</p>
+<ol><li><strong>DNCにおいて補助検査は重要な役割を果たす</strong>。とりわけ<strong>臨床診察が不明確なとき、または交絡因子の影響を受けているとき</strong>に。</li><li><strong>各検査は固有の利点と課題を持つ</strong>ため、それぞれの臨床状況に最適な検査を選ぶには慎重な評価が必要である。</li><li><strong>交絡因子がなく、臨床診察が明確な場合、補助検査は — 一部の法制度で義務づけられていても — 医学的には必要ではない</strong>（in the absence of confounding factors and when clinical examinations are unequivocal, ancillary tests, though mandated by certain legislations, are not medically required）。</li><li><strong>臨床医は自国のガイドラインを常に確認しなければならない</strong>（Clinicians must stay updated with national guidelines for their appropriate application）。</li><li><strong>補助検査と臨床診察を賢明に統合することで</strong>、DNC診断の精度と一貫性が高まり、患者ケアの改善と重大な終末期の意思決定の導きにつながる。</li></ol>
+<h2>🔍 旧記述とPDF原文の照合（今回の改稿で確認した点）</h2>
+<p>本ノートは2026-07-31時点では94行の概要止まりで、抄録・本文の一部からの要約にとどまっていた。今回PDF全文（3ページ・10,834字）と図1を精読して照合した結果を記録する。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>旧記述</th><th>PDF原文</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>図1の内容</td><td>「フローチャートの分岐の詳細は原文の図を参照」として未記載</td><td>検査選択フローチャート。入口・Yes経路・不完全/結論不能経路・<strong>他適応での並行検査</strong>経路・5検査＋5評価・伝達ゴール</td><td><strong>重大な欠落を補った</strong>。とくに「CONCURRENT TEST DONE FOR OTHER INDICATION」の経路は旧ノートに一言も無かった</td></tr>
+<tr><td>脳血管造影の推奨の強さ</td><td>記載なし</td><td>図1「Recommended in some jurisdictions. Better alternative available.」</td><td><strong>欠落を補った</strong>。「一部の法域で推奨」であって一般推奨ではない</td></tr>
+<tr><td>CTA・CTPの特異度</td><td>記載なし</td><td>図1「Very specific (excludes NDD)」</td><td><strong>欠落を補った</strong>（ただし本文には数値なし。文言の解釈は下記の批判的吟味を参照）</td></tr>
+<tr><td>3概念の定義</td><td>「血流・脳灌流・脳活動」と語だけ列挙</td><td>血流＝血管内を通過する血液の量／灌流＝脳組織への血液の供給／活動＝電気的および代謝的活動、と本文で明示的に定義</td><td><strong>定義を補った</strong>。本稿の骨格そのものが定義に依存している</td></tr>
+<tr><td>標語の出自</td><td>タイトルの標語を本稿の主張として提示</td><td>引用2 Plourde et al, *Can J Anesth* 2021;68(7):953-961 のタイトルそのもの</td><td><strong>要修正だった</strong>。本稿固有の新規主張ではなく先行総説からの継承</td></tr>
+<tr><td>日付の訳語</td><td>「2023年3月29日<strong>受理</strong>、5月24日採択、6月13日公開」</td><td>Received 29 March 2023／Accepted 24 May 2023／Published 13 June 2023</td><td><strong>訳語の誤り</strong>。Received は「受付／投稿受領」であり「受理」ではない（受理＝Accepted と紛らわしい）。本ノートでは原語のまま併記に修正</td></tr>
+<tr><td>Citation の巻号</td><td>「2023;49(9):1117-1119」</td><td>PDF紙面には「Intensive Care Med (2023) 49:1117–1119」とあり、<strong>号数（9）はPDF本文中に記載がない</strong></td><td><strong>未検証</strong>。号数はPDFから確認できないため、frontmatterの citation からは号数を外し「49:1117-1119」とした</td></tr>
+<tr><td>偽陰性の向き</td><td>「stasis filling により<strong>偽陰性</strong>を生じうる」</td><td>"false-negative results <strong>in the assessment of cerebral blood flow</strong>"</td><td>記載自体は正しいが<strong>何に対する偽陰性かが不明瞭</strong>だった。本ノートで方向を明記</td></tr>
+<tr><td>CTAの感度</td><td>「DNCへの感度が<strong>損なわれる</strong>」</td><td>"its sensitivity for DNC <strong>is altered</strong>"</td><td><strong>やや強い訳</strong>。altered は「変化する」であり損失方向とは限らない。本ノートでは両論併記に修正</td></tr>
+<tr><td>核医学トレーサー</td><td>親油性HMPAO＝灌流／疎油性ECD＝血流</td><td>同じ</td><td><strong>一致</strong>（正式名を補完：hexamethylpropyleneamine-oxime／ethyl-cysteinate-dimer）</td></tr>
+<tr><td>CTP対CTA</td><td>「予備的結果でCTPが感度・特異度とも高い、最終結果保留」</td><td>同じ（引用6・引用7、INDex-CTP／NCT03098511）</td><td><strong>一致</strong>。試験名とNCT番号を補完</td></tr>
+<tr><td>EEG・EPの位置づけ</td><td>「唯一の補助検査としては推奨されない」「活動の存在はDNCと両立しない」</td><td>同じ</td><td><strong>一致</strong></td></tr>
+<tr><td>TCD所見</td><td>「血流消失または reverberating flow」「テント上下の解析を含めるべき」「残存血流の意義に慎重」</td><td>同じ</td><td><strong>一致</strong></td></tr>
+<tr><td>不一致時の対処</td><td>「最も特異度の高い検査を繰り返すのが最善<strong>かもしれない</strong>」</td><td>"It may be best to repeat the test with the highest specificity"</td><td><strong>一致</strong>（原文の慎重さが保たれていた）</td></tr>
+<tr><td>感度・特異度の数値</td><td>「各検査の感度・特異度の具体値は本文に記載されていない」</td><td>本文に数値の記載は一切ない（引用3のメタ解析が原典）</td><td><strong>一致</strong>。本稿から数値を引くことはできない</td></tr>
+<tr><td>日本の制度への言及</td><td>「日本の法的枠組みでは脳波が必須であり」と本文の示唆に続けて記載</td><td>本文に日本への言及は一切ない</td><td><strong>分離が必要だった</strong>。本ノートでは「これは論文本文ではなく一般的な背景知識である」として明示的に分離し、日本の判定基準は公式原文で確認するよう注意書きを付けた</td></tr>
+<tr><td>著者の利益相反の位置</td><td>記載なし</td><td>本文 Declarations に「No conflict of interest」</td><td><strong>補完</strong>。ただし著者は引用6・7のCTA/CTP多施設試験の責任者であり、この関係は本ノートの背景知識欄に記載した</td></tr>
+</tbody></table></div>
+<p><strong>旧ノートに事実の捏造はなかった</strong>。誤りは「訳語（受理／Received）」「altered の訳の強さ」「標語の出自の帰属」「日本の制度の混在」の4点と、<strong>図1の未転記という大きな欠落</strong>である。</p>
+<h2>🧐 批判的吟味（JCでの論点）</h2>
+<p><strong>① 「Very specific (excludes NDD)」の文言が論理的に読みにくい</strong> 図1のCTA/CTP評価ボックスは「非常に特異的（NDDを除外する）」と読める。しかし特異度が高い検査は本来「陽性ならその病態を確定する（rule in）」ものであり、「除外する（exclude）」のは感度が高い検査の陰性結果の役割である。本文にはこの文言の説明がなく、数値も示されない。<strong>この括弧書きが何を意味しているのかは、図の文言だけからは確定できない</strong>。JCの論点として提示する価値がある。原典（引用3のメタ解析、引用6の多施設試験）に当たらなければ解けない。</p>
+<p><strong>② 診断精度研究として成立しない構造</strong> 著者自身が「ゴールドスタンダードが存在しない」と述べているのに、同じ本文で「CTPはCTAより感度・特異度が高い」と述べる。参照基準が存在しないところで感度・特異度をどう定義したのか（臨床診察を参照基準に据えたのか、複合参照基準か、追跡転帰か）は本文から読み取れない。<strong>この内的な緊張こそが本稿の最大の論点</strong>であり、引用6・7の原典で方法論を確認する必要がある。</p>
+<p><strong>③ 著者と引用文献の関係</strong> 引用2（標語の出典）・引用6・引用7（CTA/CTP試験）はいずれも著者自身が関与した研究である。単著のナラティブレビューであり、系統的検索の記述はない。CTPを推す記述の重みづけには、この構造を踏まえて読む必要がある。ただし利益相反は「なし」と明記されており、研究者としての関与は開示の要否とは別問題である。</p>
+<p><strong>④ 数値が一つもない</strong> 「感度が高い」「非常に特異的」「おそらく同等」といった定性的表現に終始し、感度・特異度・尤度比・95%信頼区間の類が一切ない。ICMの短報枠という制約はあるが、<strong>このノートだけで検査を選ぶ根拠にはならない</strong>。数値が必要なら引用3のメタ解析を読む。</p>
+<p><strong>⑤ テント上残存活動の問題に結論が出ていない</strong> 臨床診察が脳幹中心である以上、補助検査が拾うテント上の残存活動をどう扱うかは本質的な問題である。本稿は「論争が続き、推奨も分岐している」と述べるだけで、実務上の判断基準を示さない。この空白を各施設・各法域が埋めなければならない。</p>
+<p><strong>⑥ 小児が対象外</strong> タイトルに "in adults" とあるとおり、小児のDNCは扱われていない。小児の補助検査の要件は成人と異なる場合があり、本稿の記述を小児に外挿できない。</p>
+<p><strong>⑦ 法域差の扱いが「注意喚起」で止まる</strong> 「一部の法制度で義務づけられている」「一部の法域で推奨されている」「自国のガイドラインを確認せよ」と繰り返されるが、実際にどの国がどう定めているかの一覧は示されない。読者は自力で自国の基準に当たる必要がある。日本の読者にとってはこの点が最も実務に効く制約である。</p>
+<p><strong>⑧ 「将来の方向性」が臨床応用と距離がある</strong> fMRI・PET・NIRSは意識障害研究（引用11・12は植物状態・意識障害の文献）で発達した手法であり、DNC判定への応用は概念段階にある。「コスト・アクセス性・さらなる妥当性検証」という制約が明記されているとおり、近い将来に判定手順が変わる見通しを示すものではない。</p>
+<h2>📚 主要引用文献一覧（本文の引用12件）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>脳死／神経学的基準による死の判定 — World Brain Death Project</td><td>Greer DM, Shemie SD, Lewis A et al. *JAMA* 2020;324(11):1078</td></tr>
+<tr><td>2</td><td><strong>本稿タイトルの標語の出典</strong>。血流は灌流ではなく、灌流は機能ではない — 脳死診断のための補助検査</td><td>Plourde G, Briard JN, Shemie SD, Shankar JJS, Chassé M. *Can J Anesth* 2021;68(7):953-961</td></tr>
+<tr><td>3</td><td><strong>補助検査の診断精度に関する系統的レビュー・メタ解析</strong>（数値の原典）</td><td>Neves Briard J, Nitulescu R, Lemoine É et al. *Can J Anesth* 2023. doi:10.1007/s12630-023-02426-1</td></tr>
+<tr><td>4</td><td>神経学的基準による死の判定 — 次の一歩</td><td>Smith M, Citerio G. *Intensive Care Med* 2017;43(9):1383-1385</td></tr>
+<tr><td>5</td><td><strong>stasis filling 現象のCTによる動的評価</strong>（脳死診断における）</td><td>Sawicki M, Bohatyrewicz R, Safranow K et al. *Neuroradiology* 2013;55(9):1061-1069</td></tr>
+<tr><td>6</td><td><strong>CTA/CTP の前向きカナダ多施設診断試験</strong>（予備的結果の出典）</td><td>Chassé M, Shankar JJS. Improving neurological diagnostic death evaluation: a prospective Canadian multicenter diagnostic test study. Toronto, 2021</td></tr>
+<tr><td>7</td><td><strong>INDex-CTP 試験登録</strong>（最終結果保留中）</td><td>Chassé M, Shankar JJS. ClinicalTrials.gov NCT03098511, 2023</td></tr>
+<tr><td>8</td><td>急性神経学的異常の評価における脳灌流検査（トレーサー分類の出典）</td><td>Zuckier LS, Sogbein OO. *Semin Nucl Med* 2013;43(2):129-138</td></tr>
+<tr><td>9</td><td><strong>DNC疑い患者におけるテント下脳損傷</strong> — 系統的レビュー・メタ解析</td><td>Neves Briard J, Plourde G, Nitulescu R et al. *Neurology* 2023;100(4):e443-e453</td></tr>
+<tr><td>10</td><td>深層学習による医用コンピュータビジョン</td><td>Esteva A, Chou K, Yeung S et al. *NPJ Digit Med* 2021;4(1):5</td></tr>
+<tr><td>11</td><td>意識障害における脳活動の随意的調節</td><td>Monti MM, Vanhaudenhuyse A, Coleman MR et al. *N Engl J Med* 2010;362(7):579-589</td></tr>
+<tr><td>12</td><td>安静時デフォルトネットワークの機能的結合 — 植物状態では保たれるが脳死患者では保たれない</td><td>Boly M, Tshibanda L, Vanhaudenhuyse A et al. *Hum Brain Mapp* 2009;30(8):2393-2400</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>血流は灌流ではなく、灌流は機能ではない。補助検査は脳機能の代替指標としてまだ不十分であり、臨床診察がゴールドスタンダードであり続ける。</strong></mark></p>
+</div>
+<ul><li><mark class="hl"><strong>交絡がなく臨床診察が明確なら、補助検査は法制度が求めていても医学的には必要でない</strong></mark>。逆に、診察が不明確・交絡があるときこそ補助検査の出番である。</li><li><strong>陽性所見と陰性所見の意味は対称ではない</strong>。EEG・EPは「活動あり」ならDNCと両立しないと言い切れるが、「活動なし」だけでDNCとは言えない。</li><li><strong>残存血流を機能と読まない</strong>。CTA・TCDで拾った血流は、灌流でも機能でもないかもしれない。stasis filling は「血流あり」の見かけを作る。</li><li><strong>核医学は親油性（灌流）か疎油性（血流）かで意味が変わる</strong>。トレーサー種別を確認せずに判読しない。</li><li><strong>CTP &gt; CTA は予備的結果にとどまり、最終結果は保留中</strong>。現時点で運用を変える材料ではない。</li><li><strong>検査が食い違ったら、最も特異度の高い検査を繰り返す</strong>（誤って死と宣告しない側に倒す）。これは著者の提案であって確立した推奨ではない。</li><li><mark class="hl"><strong>日本で判定するときは、本稿ではなく日本の公式な判定基準の原文に当たる</strong></mark>。本稿は国際的な議論であり、法域差を繰り返し注意喚起している。</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

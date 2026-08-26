@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICUリサイクルプログラムの始め方 — SusQIとCOM-Bで循環型ICUへ（What's New・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-06983-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICUリサイクルプログラムの始め方 — SusQIとCOM-Bで循環型ICUへ（What's New・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Barbariol F, Baid H. Introduction to an intensive care recycling program. Intensive Care Med. 2023;49(3):327-329. doi:10.1007/s00134-023-06983-3</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-02-27）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-06983-3" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-06983-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Introduction to an intensive care recycling program</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-06983-3.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-06983-3.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-06983-3.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で最初の一歩として何を測り、誰を巻き込むか <strong>本稿の枠組みから直接引ける実務（＝論文の記載）</strong></p>
+<ul><li>本稿は「ICUのリサイクルは SusQI という質改善の型に載せて回す」と言っている。つまり <mark class="hl">環境の話を「思想」ではなく「QIプロジェクト」として起案する</mark> のが本稿の最大の実践的示唆。安全性と臨床的有効性を落とさないことが SusQI の前提条件に組み込まれているので、ICU単独で始めても臨床リスクが小さい。</li><li>本稿が例示する SMART 目標がそのまま初期案になる：規制医療廃棄物（RMW）を総廃棄物の20%未満に下げ、リサイクル率10%超を達成する。</li><li>巻き込む相手が本文に列挙されている：ICU管理者・病院管理部門・感染対策チーム（IPC）・廃棄物処理業者。とくに廃棄物処理業者と地域の規制の確認が「システムを調べる」段階の中身。</li><li>介入の勘所は教育より容器設計。RMW容器はバイオハザード表示を付けて小さく、一般廃棄物容器は大きく開口部を広く、両者を隣接配置。回収を適時に行い溢れさせない。</li></ul>
+<p><strong>当院固有の話（本稿には無い。岡本の補助線）</strong></p>
+<ul><li>まず測るのは「量」ではなく「比率」にする。当院の廃棄物は業者への委託単位で計量されるはずなので、ICU単位の重量が取れないなら <mark class="hl">最初の指標は「RMW容器の交換本数／患者日」</mark> に置き換えるほうが早く回る。本稿も「成功の指標を具体的に決めよ（例：削減できた廃棄物量）」と言っているだけで、指標の形は指定していない。</li><li>経営戦略会議に出すときは環境論ではなくコストで出す。本稿が引くのは「RMWは一般廃棄物の5〜10倍高い」という米国 Practice Greenhealth のガイド由来の数字で、当院の実額ではない。当院の委託契約単価を先に押さえ、RMW比率×単価差＝年間削減見込みの1枚に直してから提案する。</li><li>巻き込む順番は本稿の列挙どおりでよいが、当院では感染対策チームの合意が事実上のゲートになる。本稿も「容器内の交差汚染を完全には防げない」と認めたうえで教育で最小化する、という慎重な書き方をしているので、<mark class="hl">IPCには「感染性廃棄物の定義を緩める提案ではない」と最初に明言する</mark> と話が早い。</li><li>パイロットの対象は本稿が言う「地域でリサイクル可能な品目」。当院なら未使用の包装材・紙・PVC以外の硬質プラ（点滴ボトル等）が候補だが、これは本文に無い当院向けの当て込みであり、実際に何が回収可能かは業者確認が先。</li><li>グリーンチームは新設せず、既存の ICU 運営会議の下に係を置く形が現実的（本稿は「味方を見つけ、責任を分担する」としか言っていない）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：医療産業は年間数百万トンの廃棄物により環境劣化に大きく寄与し、ICUはその主要な発生源である。気候変動は21世紀の地球規模の健康への最大の脅威であり、現在の医療システムの持続不可能な慣行が健康そのものを損なっている。オーストラリアの単一ICUの監査では、一般非感染性廃棄物のほぼ60%がリサイクル可能だった。</li><li><strong>Unknown（分かっていなかったこと）</strong>：「ICUで実際にリサイクルプログラムをどう起ち上げるか」の手順が、集中治療の読者向けに整理されていなかった。廃棄物削減が臨床アウトカムやコストに与える効果の定量も確立していない。</li><li><strong>What's new（本稿の新規性・意義）</strong>：新しいデータを出した論文ではない。既存の3つの枠組み（循環型経済／SusQI／COM-B）をICUのリサイクルという1つの課題に重ねて、着手手順として提示したことが新しい。COVID-19で供給網の脆弱性が露呈したことを、資源が無尽蔵ではないと認識し直す契機として位置づけている。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICUのリサイクルを「環境のための善行」ではなく、SusQI という質改善の型に載せたプロジェクトとして起ち上げ、COM-B で人の行動を設計せよ、という着手の手引き。新規データは無い。</p>
+</div>
+<ul><li>立脚点：医療システムは「供給は潤沢に手に入る」という誤認に由来する浪費的慣行に悩まされている。COVID-19パンデミックで医療用品の不足が起き、供給網の脆さと資源の限界が突きつけられた。</li><li>医療産業は埋立・熱処理・化学処理・放射線処理に回る年間数百万トンの廃棄物により環境劣化に大きく寄与し、ICUは廃棄物の主要な発生源である。したがって ICU廃棄物の環境負荷の最小化は「望ましい」だけでなく倫理的に必要、というのが著者の主張。</li><li>枠組み1：循環型経済（circular economy）。資源をシステム内に留め、環境改善とコスト削減の両方を狙う。優先順位が Fig.1 に3段階で示される。</li><li>枠組み2：SusQI（Sustainable Quality Improvement）。目標設定 → システム調査 → 改善設計 → 影響測定 の4ステップ。安全性と臨床的有効性を維持しつつ医療資源利用の持続可能な価値を最大化する。</li><li>枠組み3：COM-B。Capability（能力）・Opportunity（機会）・Motivation（動機）が協働して Behaviour（行動）に影響するモデル。スタッフの行動変容の介入設計に使う。</li><li>数値（すべて引用文献由来で、本稿の実測ではない）：オーストラリアの1つのICUが2008年に週540 kgの総廃棄物を産生し、一般非感染性廃棄物のほぼ60%がリサイクル可能。2013年のリサイクルプログラム導入後、同ICUは非連続7日間で505 kgの廃棄物を産生し、総廃棄物の14%がリサイクルされた（潜在的リサイクル可能量のほぼ半分）。</li><li>コスト：RMW は埋立処分や焼却の前に専門処理を要し、一般廃棄物と比べてコストが著しく高く、5〜10倍になりうる。非RMW廃棄物の適切な処分は、財政的にも環境的にも持続可能性に必須。</li><li>締めくくり：リサイクルを含む日常の集中治療業務での責任ある環境スチュワードシップの実践が、病院のより倫理的で持続可能な未来につながる。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 医療廃棄物・循環型経済・SusQI・COM-Bの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む この論文は、集中治療の臨床論文とは語彙がまったく違う。用語を先に潰しておく。</p>
+<p><strong>医療廃棄物の2分類</strong>：病院のごみは大きく「規制／登録が必要な医療廃棄物」と「一般廃棄物」に分かれる。本稿では前者を <strong>RMW</strong> と呼ぶ。RMW は埋立や焼却の前に専門処理（滅菌・高温焼却など）を挟む必要があり、その分だけ処理費が高い。一般廃棄物のうち紙・プラスチック・ガラスなどは、汚染されていなければリサイクル資源になりうる。問題は、臨床現場では「迷ったらRMWへ」という運用になりやすく、リサイクル可能なものまでRMWに混入することにある。</p>
+<p><strong>循環型経済（circular economy）</strong>：作る→使う→捨てる の一方通行（linear economy／直線型経済）に対して、資源をできるだけ系内に留め続ける考え方。捨てないための行動が英語の「R」で始まる語で列挙される（refuse＝そもそも受け取らない、rethink＝使い方を考え直す、reduce＝減らす、redesign＝設計し直す、research＝研究する、reuse＝再使用、repair＝修理、refurbish＝改修、remanufacture＝再製造、repurpose＝別用途に転用、recycle＝再資源化、recover＝熱回収等での回収）。<strong>リサイクルはこの階段の下のほう</strong>であり、上流（買わない・減らす）のほうが効果は大きい。ただし本稿は「だからリサイクルは軽視してよい」ではなく、包括的な循環型経済戦略の重要な一部として含めるべきだ、と釘を刺している。</p>
+<p><strong>SusQI（Sustainable Quality Improvement）</strong>：英国の Centre for Sustainable Healthcare が提唱する質改善の方法論。通常のQIが「臨床の質／安全／コスト」を見るのに対し、そこに環境と社会の持続可能性という視点（sustainability lens）を足す。重要なのは <mark class="hl">安全性と臨床的有効性を維持することが前提条件として組み込まれている</mark> 点で、「環境のために医療の質を落とす」ことを認めない設計になっている。</p>
+<p><strong>COM-B</strong>：行動科学のモデル（Michie ら、Behaviour Change Wheel）。人がある行動（Behaviour）をとるには、Capability（能力＝知識・技能・身体的にできること）、Opportunity（機会＝物理的環境・時間・社会規範）、Motivation（動機＝意思・習慣・感情）の3つが揃う必要がある、という枠組み。「やる気がないから分別されない」と決めつけず、<mark class="hl">ごみ箱を置く場所が無い（Opportunity）／何が感染性か知らない（Capability）／気持ちはある（Motivation）</mark> のどれが欠けているかを切り分けて介入するために使う。</p>
+<p><strong>SMART目標</strong>：specific（具体的）・measurable（測定可能）・attainable（達成可能）・realistic（現実的）・timely（期限がある）の頭字語。QIの目標設定の定番。</p>
+</div>
+<h3>2. 背景と目的 🌍</h3>
+<p><strong>なぜ今か</strong>。著者はまず、医療システムが「容易に手に入る供給は潤沢にある」という誤認に由来する浪費的慣行に悩まされている、と述べる。そこに COVID-19 パンデミックが起き、医療用品の不足が資源の限界を浮き彫りにして、供給網の脆弱性が突然に自覚された。</p>
+<p><strong>規模感</strong>。医療産業は、埋立・熱処理・化学処理・放射線処理に送られる年間数百万トンの廃棄物によって環境劣化に大きく寄与している。そしてICUは廃棄物の主要な発生源である。</p>
+<p><strong>倫理としての位置づけ</strong>。気候変動は21世紀の地球規模の健康への最大の脅威であり、現在の医療システムの持続不可能な慣行は健康そのものを損なっている。したがって著者は、ICU廃棄物の環境負荷の最小化は「望ましい」にとどまらず、集中治療の提供の結果として地球の健康が損なわれないようにするために倫理的に必要である、と結論づける。この一文が本稿全体の立脚点になっている。</p>
+<p>本稿の目的は、この立脚点から「では明日どう始めるか」に降ろすこと。以降は3つの枠組みの各論になる。</p>
+<h3>3. 方法（Methods）📐</h3>
+<p>原著研究ではないので Methods セクションは存在しない。JC で扱う際に押さえるべき「デザイン」を整理する。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>WHAT'S NEW IN INTENSIVE CARE（ICM誌の短報型解説）。著者自身が倫理承認の項で「エディトリアル」と表現している</td></tr>
+<tr><td>対象・n</td><td>なし（患者データを含まない）</td></tr>
+<tr><td>介入・比較</td><td>なし</td></tr>
+<tr><td>アウトカム</td><td>なし</td></tr>
+<tr><td>解析</td><td>なし。統計処理は一切行われていない</td></tr>
+<tr><td>提示されるもの</td><td>3つの既存枠組み（循環型経済／SusQI／COM-B）の統合、介入候補のリスト、図1点</td></tr>
+<tr><td>データの出所</td><td>定量値はすべて引用文献からの転記。本稿による新規測定はゼロ</td></tr>
+<tr><td>補足資料</td><td>行動計画を実務的に詰めるための資料と、容器のラベリングの例が Supplementary material に置かれている（本ノートは補足資料を参照していない）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>読むときの最大の注意点 <mark class="hl">本稿に「実証された効果」は1つも無い。数値は他論文の引用、介入候補は著者の提案である。</mark> JCで「14%リサイクルできた」を本稿の成果として引用すると誤りになる。それは Kubicki らの2015年の監査（オーストラリアの1施設）の結果である。</p>
+</div>
+<h3>4. 枠組み1：ICUにおける循環型経済としてのリサイクル ♻️</h3>
+<p>ICUの環境持続可能性戦略の1つが、廃棄物を管理しながら循環型経済のためにリサイクルすることである。このアプローチは、環境改善のために資源をシステム内に維持することを目指し、同時にコスト削減にもつながりうる。</p>
+<p>優先順位の考え方は本文と図で少しずれた形で提示されるので、両方を並べる。</p>
+<p><strong>本文の記述</strong>：より賢い製品の使用と製造（refuse, rethink, reduce, redesign, research）と、製品およびその部品の寿命延長（reuse, repair, refurbish, remanufacture, repurpose）が、循環型経済ではより高い優先順位にある。しかしリサイクルも大きく寄与しうるので、その重要性を過小評価すべきではなく、包括的な循環型経済戦略の重要な一部として含めるべきである。</p>
+<p class="figref">🖼 原著のFig.1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-06983-3" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-06983-3）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Fig.1 Circular economy of healthcare resources（原図・無改変。©Springer / Intensive Care Med 2023） 医療資源の循環型経済。3つの優先領域が紫の点線矢印でループを描き、そこから外れた分だけが右下の直線型経済（埋立・焼却）へ抜ける、という構図。</p>
+</div>
+<h4>Fig.1 の全ボックス・全ラベル（図が読めなくても運用に移せるように）</h4>
+<div class="tw"><table>
+<thead><tr><th>図中の位置</th><th>ボックスのラベル（原文）</th><th>対応する日本語</th><th>併記された行動（原文の R 語）</th></tr></thead>
+<tbody>
+<tr><td>左上・青ラベル</td><td>PRIORITY 1</td><td>優先度1</td><td>—</td></tr>
+<tr><td>左上・白箱</td><td>Production and transport of healthcare supplies</td><td>医療用品の製造と輸送</td><td>—</td></tr>
+<tr><td>左上・薄紫箱</td><td>Refuse, Rethink, Reduce, Redesign</td><td>断る・考え直す・減らす・設計し直す</td><td>4語</td></tr>
+<tr><td>右上・青ラベル</td><td>PRIORITY 2</td><td>優先度2</td><td>—</td></tr>
+<tr><td>右上・白箱</td><td>Consumption of supplies in healthcare practice</td><td>医療実践における用品の消費</td><td>—</td></tr>
+<tr><td>右上・薄紫箱</td><td>Refuse, Rethink, Reduce, Research</td><td>断る・考え直す・減らす・研究する</td><td>4語</td></tr>
+<tr><td>中央下・青ラベル</td><td>PRIORITY 3</td><td>優先度3</td><td>—</td></tr>
+<tr><td>中央下・白箱</td><td>Sustainable waste management of products and packaging</td><td>製品と包装の持続可能な廃棄物管理</td><td>—</td></tr>
+<tr><td>中央下・薄紫箱</td><td>Reuse, Repair, Refurbish, Remanufacture, Repurpose, Recycle, Recover</td><td>再使用・修理・改修・再製造・転用・再資源化・回収</td><td>7語</td></tr>
+<tr><td>中央・紫箱</td><td>CIRCULAR ECONOMY</td><td>循環型経済（ループの中心）</td><td>—</td></tr>
+<tr><td>右下・白箱</td><td>Linear economy disposal</td><td>直線型経済の処分（ループから抜ける経路）</td><td>—</td></tr>
+<tr><td>右下・オレンジ箱</td><td>Landfill / Incineration</td><td>埋立・焼却</td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>矢印の読み方</strong>：紫の点線矢印が PRIORITY 1 → 2 → 3 → 1 と時計回りのループを描く。PRIORITY 2 から下へ降りる矢印の途中で、オレンジの矢印が右へ分岐して「Linear economy disposal」→「Landfill / Incineration」に抜ける。つまり <mark class="hl">循環の輪から漏れた分だけが埋立・焼却行きになる</mark> ことを1枚で示している。ICUのリサイクルプログラムは、この漏れの太さを細くする作業にあたる。</p>
+<h4>本文と図のずれ（JCで指摘できる点）</h4>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本文の書き方</th><th>Fig.1 の書き方</th></tr></thead>
+<tbody>
+<tr><td>research の位置</td><td>「より賢い製品の使用と製造」の側（redesign と同じ群）</td><td>PRIORITY 2（消費）の側。PRIORITY 1 は redesign まで</td></tr>
+<tr><td>recycle・recover</td><td>本文の2群のリストには入っていない（別扱いで後述される）</td><td>PRIORITY 3 のリストに明記されている</td></tr>
+<tr><td>優先順位の粒度</td><td>2群（上流／寿命延長）で説明</td><td>3段階（製造・輸送／消費／廃棄物管理）</td></tr>
+</tbody></table></div>
+<p>図のほうが情報量が多く、recycle と recover が明示的に PRIORITY 3 に位置づけられている。本文だけを読むと「リサイクルは階段の外」に見えるが、図では階段の最下段として枠内に入っている。</p>
+<h3>5. 数値でみるICU廃棄物 📊</h3>
+<p>本稿が挙げる定量値は次の4つのみ。すべて引用文献からの転記であり、出所を分けて示す。</p>
+<div class="tw"><table>
+<thead><tr><th>数値</th><th>内容</th><th>本稿の実測か</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>540 kg／週</td><td>あるオーストラリアのICUが2008年に産生した総廃棄物</td><td>いいえ</td><td>引用[3] McGain 2009, Anaesthesia</td></tr>
+<tr><td>ほぼ60%</td><td>同ICUの一般非感染性廃棄物のうちリサイクル可能だった割合</td><td>いいえ</td><td>引用[3] 同上</td></tr>
+<tr><td>505 kg／非連続7日間</td><td>2013年のリサイクルプログラム導入後、同ICUが産生した廃棄物</td><td>いいえ</td><td>引用[9] Kubicki 2015, Crit Care Resusc</td></tr>
+<tr><td>14%</td><td>同期間に総廃棄物のうちリサイクルされた割合。潜在的リサイクル可能量のほぼ半分にあたる</td><td>いいえ</td><td>引用[9] 同上</td></tr>
+</tbody></table></div>
+<p>著者はこれを受けて「リサイクルプログラムの導入により、リサイクルされた材料の割合はかなり増加した」と述べる。ここで注意すべきは次の3点。</p>
+<ul><li>2008年と2013年以降の測定は <strong>測定期間の単位が違う</strong>（週単位 vs 非連続7日間）。総量 540 kg と 505 kg を直接比べて「減った」と読むことはできないし、著者もそう主張していない。</li><li>「潜在的リサイクル可能量のほぼ半分」という表現は、2008年の監査で得た「一般非感染性廃棄物のほぼ60%がリサイクル可能」というベースラインに対する到達度を指している。</li><li>統計学的検定は行われていない。前後比較の記述のみ。</li></ul>
+<p><strong>コストの数値</strong>：RMW は埋立処分や焼却の前に専門処理を必要とし、一般廃棄物と比べてコストが著しく高く、5〜10倍になりうる。この 5〜10倍は 引用[10]（Practice Greenhealth の実務ガイド "Less Waste. How to guide."）由来であり、査読論文の実測ではない。したがって当院に適用する際は自院の委託単価で確認が要る。</p>
+<p>著者の結論はシンプルで、非RMW廃棄物の適切な処分は財政的にも環境的にも持続可能性に必須である、というもの。<mark class="hl">つまりリサイクルの投資対効果は「資源を売る」ではなく「高いRMWの箱に入る量を減らす」ところから出る。</mark></p>
+<h3>6. 枠組み2：質改善としてのリサイクル（SusQI）🔧</h3>
+<p>ICUでリサイクルを強化することは、SusQI 方法論による質改善の一形態になりうる。SusQI は、安全性と臨床的有効性を維持しつつ、医療資源利用の持続可能な価値を最大化することを重視する。</p>
+<p>目標の立て方には2通りが提示されている。</p>
+<ul><li>リサイクルそのものに純化した目標を立てる</li><li>臨床的な主題を掲げ、その達成のための行動の1つとしてリサイクル改善を組み込む（＝あらゆるICUのQIプロジェクトに持続可能性のレンズを当てながら進める）</li></ul>
+<h4>SusQI の4ステップ（本文の記述を1つずつ噛み砕く）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>原文の名称</th><th>本稿が具体的に書いていること</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>set goals（目標を設定する）</td><td>SMART目標を設定する。例示は「RMWを総廃棄物の20%未満に減らし、リサイクル率10%超を達成する」</td></tr>
+<tr><td>2</td><td>study the system（システムを調べる）</td><td>地域の規制を調べ、施設内に既にある分別処分・リサイクルのプログラムの有無を確認する。ICU管理者・病院管理部門・感染対策チーム・廃棄物処理業者と緊密に連携し、関連方針と必要な許認可を把握する。他の病院・ICUとつながり、成功事例から学ぶ</td></tr>
+<tr><td>3</td><td>design improvement（改善を設計する）</td><td>計画を具体的にし、範囲・目標・とるべき行動を明確に定義する。コストや業務量増加などの起こりうる帰結を考慮する。成功を判定する具体的な指標（例：削減できた廃棄物量）を定める。詳細な行動計画の資料は Supplementary material にある</td></tr>
+<tr><td>4</td><td>measure impact（影響を測定する）</td><td>ベースライン評価と、行動実施後の再評価を行う。完了時には成功を公表し祝い、勢いを作りスタッフの士気を高め、「誇れるICUである」ことを示す。地域メディアにも共有して環境への前向きな改善を市民に伝える</td></tr>
+</tbody></table></div>
+<p>ステップ3の「コストや業務量増加などの起こりうる帰結を考慮する」は見落とされやすいが重要で、本稿は <mark class="hl">リサイクル導入がタダではないこと（分別の手間、容器の場所、回収頻度の増加）を最初から見積もれ</mark> と言っている。</p>
+<h3>7. 改善設計で検討すべき介入候補（本文の5項目）🧰</h3>
+<p>本文が箇条書きで挙げる介入は次の5つ。表に起こす。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>介入</th><th>本文の具体的記述</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「グリーンチーム」を作る</td><td>味方を見つけ、責任を分担し、集団的アプローチをとる</td></tr>
+<tr><td>2</td><td>廃棄物分別を容易にする</td><td>色分けと一貫したラベルの容器（例：プラスチック・紙・ガラス／ラベル例は補足資料）。RMW容器はバイオハザード表示を付け、他のものを何気なく投げ込むのを減らすためにできるだけ小さくする。より大きく開口部が広い一般廃棄物容器は使用を促すので、小さい規制廃棄物容器の隣に非規制廃棄物容器を置く。適時の回収により、容器が溢れて不適切な分別が起きるのを防ぐ</td></tr>
+<tr><td>3</td><td>再利用可能な容器を使う</td><td>埋立地・焼却炉、および液体キャニスターの内容物を下水道に流す処理系に、これらの容器を送るのを防ぐ</td></tr>
+<tr><td>4</td><td>地域でリサイクル可能な品目のパイロット</td><td>実施してプロセスを評価する</td></tr>
+<tr><td>5</td><td>スタッフ教育</td><td>多職種ICUチームの全員がプログラムの目標を認識し、廃棄物分別を理解するようにする。臨床医の不適切な廃棄習慣を取り除くことは難題でありうる。施設のRMW定義について繰り返しの再強化（reinforcement）が必要になりうる</td></tr>
+</tbody></table></div>
+<p>介入2は、心理学的には行動を「意志」ではなく「環境」で誘導する設計になっている。小さい容器＝入れにくい、大きく開口部が広い容器＝入れやすい、隣接配置＝迷ったときの代替先が目に入る、という3点セットで、<mark class="hl">教育の前に容器の物理設計で勝負がつく</mark> という主張として読める。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>感染リスクについての著者の慎重な記述 本稿は「容器内の感染性の交差汚染を完全に防ぐことは不可能である」と明言している。そのうえで、スタッフ教育により感染性物品による一般廃棄物の汚染を最小化できる、と述べるにとどまる。<mark class="hl">「リサイクルすれば感染リスクは無い」とは一言も書かれていない。</mark> 感染対策チームに提案する際、この留保をそのまま伝えることが誠実であり、かつ通りやすい。</p>
+</div>
+<h3>8. 枠組み3：行動変容としてのリサイクル（COM-B）🧠</h3>
+<p>COM-B モデルは行動変容に影響する因子を整理したもので、Capability・Opportunity・Motivation が協働して Behaviour に影響する。医療スタッフの行動変容を促す介入を設計するのに有用である。</p>
+<h4>COM-B の構成要素と、本稿がICUで挙げた具体例</h4>
+<div class="tw"><table>
+<thead><tr><th>構成要素</th><th>意味</th><th>本稿がICUで挙げた具体的な障壁・所見</th></tr></thead>
+<tbody>
+<tr><td>Capability（能力）</td><td>その行動を実行できる知識・技能があるか</td><td>ロジスティクスの課題として一括で述べられる。感染リスクの認識（何が感染性か分からない）とデータの欠如が該当</td></tr>
+<tr><td>Opportunity（機会）</td><td>物理的・社会的環境がその行動を許すか</td><td>複数のごみ箱を置くスペースの不足、回収頻度の低さ</td></tr>
+<tr><td>Motivation（動機）</td><td>やろうと思うか</td><td>一部に抵抗は生じうるが、大半のスタッフはリサイクルへの動機が高く、集中治療における持続可能性と環境保護のための行動変容の意欲がある（引用[14] 米国麻酔科学会会員への調査）</td></tr>
+<tr><td>Behaviour（行動）</td><td>実際の分別・リサイクル行動</td><td>上記3要素の帰結。ICUが「グリーン化」すると、病院の他部門もそれに続くのを助けうる（引用[15]）</td></tr>
+</tbody></table></div>
+<p>本文は Capability と Opportunity について「克服すべきロジスティクス上の問題」として4つを列挙する：複数のごみ箱を置くスペースの不足、回収頻度の低さ、感染リスクの認識、データの欠如。この4つは並列に書かれており、どれが Capability でどれが Opportunity かの割り当ては本文では明示されていない（上表の割り当ては読解による整理）。</p>
+<p><strong>この枠組みの実務的な意味</strong>：スタッフの動機は既に高い、というのが本稿の観測である。したがって <mark class="hl">失敗の原因を「意識が低い」に帰属させず、場所・回収頻度・データの3つを先に潰すべき</mark> ということになる。ここが COM-B を持ち出した理由。</p>
+<h3>9. 結び 🌱</h3>
+<p>著者は、リサイクルを含む日常の集中治療業務における責任ある環境スチュワードシップの実践が、病院のより倫理的で持続可能な未来に向かう助けになる、と締めくくる。</p>
+<h3>10. 本文には無い背景知識（明確に分離する）📎</h3>
+<div class="call note"><span class="lab">補足</span>
+<p>ここから下は論文本文ではなく、日本で実装する際の一般的な背景知識である 本稿は英国・イタリアの著者による国際誌の解説であり、<strong>日本の廃棄物規制についての記載は一切ない</strong>。以下は本稿の内容ではなく、当院で検討する際に別途確認すべき事項として挙げる。</p>
+<ul><li>日本では感染性廃棄物の分類・保管・委託は廃棄物処理法とその関連ガイドラインの枠組みで運用され、バイオハザードマークの色分けにも慣行がある。本稿がいう RMW と日本の「感染性廃棄物」は制度上の定義が同一ではない。</li><li>本稿の「RMWは一般廃棄物の5〜10倍高価」は米国の実務ガイド由来であり、日本の委託単価には当てはまらない可能性がある。当院の実額での検証が必要。</li><li>SusQI は英国発の方法論で、日本の医療機関での標準的な質改善手法として定着しているわけではない。院内で提案する際は、既存のQI枠組み（PDCA等）との接続を説明する必要がある。</li><li>以上はいずれも本稿の主張ではないので、抄読会で紹介する際は本文の内容と混ぜない。</li></ul>
+</div>
+<h2>🔎 既存ノートとの整合・旧記述との食い違い</h2>
+<p>本改稿にあたり、旧ノート（89行・2026-08-01作成）の記述をPDF本文と1つずつ照合した。以下は照合の結果。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>旧ノートの記述</th><th>PDF本文（正）</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>RMW の展開</td><td>「規制医療廃棄物（RMW）」</td><td>Registered medical waste（RMW）＝登録医療廃棄物。ただし本文の別の箇所では容器を regulated／non-regulated と書き分けている</td><td>要修正。原文の定義は registered。本ノートでは原語を併記した</td></tr>
+<tr><td>Fig.1 の内容</td><td>「Fig.1 からの要約」と書きつつ、本文の2群（上流／寿命延長）しか記載がなく、図の3優先度・Linear economy 経路・Recycle/Recover の位置づけが欠落</td><td>図は PRIORITY 1／2／3 の3段構成で、Recycle と Recover は PRIORITY 3 に明記。右下に Linear economy disposal → Landfill/Incineration の離脱経路</td><td>要修正。本改稿で全ボックスを表に起こした</td></tr>
+<tr><td>数値の出所</td><td>出所を示さず本稿の記述として提示</td><td>4つの定量値はすべて引用[3][9]（オーストラリア単一ICUの監査2件）からの転記。5〜10倍は引用[10]の米国実務ガイド由来</td><td>要修正。本改稿で出所を表で分離した</td></tr>
+<tr><td>540 kg と 505 kg の比較</td><td>並記のみで単位の違いに触れず</td><td>前者は「週あたり」、後者は「非連続7日間」。著者は総量の減少を主張していない</td><td>補足が必要。本改稿で明記した</td></tr>
+<tr><td>60% の表現</td><td>「約60%」</td><td>almost 60%（ほぼ60%＝60%をわずかに下回る）</td><td>微修正</td></tr>
+<tr><td>実証と提案の区別</td><td>「具体的な介入候補」として列挙されており誤りではないが、効果が検証済みか否かは書かれていない</td><td>介入候補はすべて著者の提案であり、本稿での検証はない</td><td>要補強。本改稿で警告コールアウトを置いた</td></tr>
+<tr><td>COVID-19の位置づけ</td><td>記載なし</td><td>冒頭で供給網の脆弱性の自覚として明示的に述べられている</td><td>欠落。本改稿で追加</td></tr>
+<tr><td>改善設計の前提</td><td>記載なし</td><td>「コストや業務量増加などの起こりうる帰結を考慮せよ」「成功の具体的指標を定めよ」が本文にある</td><td>欠落。本改稿で追加</td></tr>
+<tr><td>巻・号・頁</td><td>49(3):327-329</td><td>紙面1ページ目に "Intensive Care Med (2023) 49:327–329" と印字。号数(3)は紙面には無いが ICM 49巻3号の該当ページであり、DOI・Springerの書誌と一致</td><td>妥当。維持</td></tr>
+<tr><td>関連リンク</td><td>旧ノートは「低・中所得国のICUケアの質を測る指標セットの開発（ICM2022）」へリンクしていた</td><td>当該ノートは「（デルファイ・ICM2022）」にリネーム済み</td><td>リンク切れ。本改稿で修正</td></tr>
+</tbody></table></div>
+<p><strong>他ノートとの矛盾</strong>：同フォルダの <span class="wl">集中治療における環境持続可能性 ESICM Green Paper（ICM2024）</span>、<span class="wl">ICUの脱炭素は「低価値ケアをやめること」から始まる — SCCM持続可能性タスクフォース報告（CCM2025）</span>、<span class="wl">GERDA — ICUの環境負荷を可視化するダッシュボード（ICM2026）</span> との間に、事実関係の矛盾は見つからなかった。強調点の違いはある（本稿は廃棄物とリサイクル、SCCM報告は低価値ケアの削減、GERDA は測定基盤）。むしろ本稿の「データの欠如」という障壁に GERDA が答える形になっており、時系列で読むと補完関係にある。</p>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<ul><li><strong>エビデンスの階層が最下層である</strong>。原著研究でもレビューでもなく、著者自身が「エディトリアル」と呼ぶ短報。推奨に GRADE のような確実性評価は無く、介入候補は経験知に基づく提案である。JCで「この論文に従って導入しよう」と言うときは、<mark class="hl">従っているのは著者の意見であって検証済みの効果ではない</mark> と明示する必要がある。</li><li><strong>定量データが単一施設・単一国に依存している</strong>。中核の数値はオーストラリアの1つのICUの監査2件（2009年・2015年）に由来する。医療用品の構成、廃棄物規制、リサイクル産業の成熟度は国ごとに大きく違うため、外的妥当性は担保されていない。日本のICUでの再現性は未知。</li><li><strong>前後比較のみで対照が無い</strong>。2008年ベースライン→2013年導入後という比較には、同時期の他の変化（用品の変更、病床稼働、監査そのものによる Hawthorne 効果）が交絡しうる。統計的検定も無い。</li><li><strong>アウトカムが廃棄物量に限られる</strong>。臨床アウトカム（感染率、有害事象）への影響は測られていない。SusQI が「安全性と臨床的有効性の維持」を前提に置いているにもかかわらず、それを担保したデータは提示されていない。ここは提案と検証のギャップ。</li><li><strong>コストの評価が片側だけ</strong>。RMW が高いという費用の話は出るが、リサイクル導入側のコスト（容器、スペース、回収の増便、教育の工数）の定量は無い。本文が「コストや業務量増加を考慮せよ」と述べていること自体が、著者もこれを未解決と認識している証拠。</li><li><strong>本文と図の不一致</strong>（第4節の表）。research の位置づけと、recycle・recover の扱いが本文とFig.1でずれている。査読の粗さとも読めるし、本文が引用[7]の分類を、図が別の整理を採ったとも読める。JCで指摘できる具体的な瑕疵。</li><li><strong>「RMW 5〜10倍」の出所が査読論文でない</strong>。引用[10]は Practice Greenhealth の実務向けガイド（灰色文献）。数値としての信頼性は限定的で、地域・契約形態への依存が大きい。<mark class="hl">自院の実額を確認せずに経営提案に使うのは危険。</mark></li><li><strong>COM-B の適用が記述的にとどまる</strong>。Capability と Opportunity の障壁が並列に列挙されるだけで、どの障壁にどの介入が対応するかのマッピングが無い。COM-B の本来の使い方（Behaviour Change Wheel で介入機能を選ぶ）まで到達していない。</li><li><strong>Motivation が高いという根拠が麻酔科医の調査</strong>（引用[14]、米国麻酔科学会会員対象）。ICUの多職種チーム（看護師・臨床工学技士・薬剤師）に一般化できるかは示されていない。</li><li><strong>実務の詳細が Supplementary material に外出しされている</strong>。本文3ページで実装できる情報量ではなく、本稿だけを読んで着手すると容器のラベリング等で詰まる。JCで扱うなら補足資料も併せて配布するのが親切。</li></ul>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>地域保健サービスの手術室とICUにおける薬剤廃棄の評価（第一著者自身の先行研究）</td><td>Barbariol F, et al. Anesth Analg. 2021;132(5):1450-1456</td></tr>
+<tr><td>2</td><td>現行の医療廃棄物管理法とその地球規模の健康への影響のレビュー</td><td>Kenny C, Priyadarshini A. Healthcare. 2021;9(3):284</td></tr>
+<tr><td>3</td><td>ICUのリサイクル可能廃棄物の監査（540 kg／週、一般非感染性廃棄物のほぼ60%がリサイクル可能の出典）</td><td>McGain F, Story D, Hendel S. Anaesthesia. 2009;64(12):1299-1302</td></tr>
+<tr><td>4</td><td>気候変動の健康影響の管理（Lancet・UCL Institute for Global Health 委員会報告）</td><td>Costello A, et al. Lancet. 2009;373:1693-1733</td></tr>
+<tr><td>5</td><td>EU循環型経済モデルにおける持続可能な医療廃棄物管理</td><td>Health Care Without Harm. 2020（ポジションペーパー）</td></tr>
+<tr><td>6</td><td>麻酔と集中治療における環境持続可能性</td><td>McGain F, Muret J, Lawson C, Sherman JD. Br J Anaesth. 2020;125(5):680-692</td></tr>
+<tr><td>7</td><td>循環型経済のターゲット（Rの階層の出典）</td><td>Morseletto P. Resour Conserv Recycl. 2020;153:104553</td></tr>
+<tr><td>8</td><td>循環型医療製品の設計戦略に向けて</td><td>Kane GM, Bakker CA, Balkenende AR. Resour Conserv Recycl. 2018;135:38-47</td></tr>
+<tr><td>9</td><td>ICUリサイクルプログラムの監査（505 kg／非連続7日間、総廃棄物の14%リサイクルの出典）</td><td>Kubicki MA, McGain F, O'Shea CJ, Bates S. Crit Care Resusc. 2015;17(2):135-140</td></tr>
+<tr><td>10</td><td>廃棄物削減の実務ガイド（RMWが一般廃棄物の5〜10倍高価の出典。灰色文献）</td><td>Howard J, Krause D, Hill L. Practice Greenhealth. 2015</td></tr>
+<tr><td>11</td><td>SusQI とは（SusQI 4ステップの出典）</td><td>Centre for Sustainable Healthcare. 2022（ウェブ資料）</td></tr>
+<tr><td>12</td><td>病院のリサイクルプログラムの成功と教訓を伝える</td><td>Healthcare Plastics Recycling Council. 2022（ウェブ資料）</td></tr>
+<tr><td>13</td><td>行動変容ホイール：行動変容介入を特徴づけ設計する新しい方法（COM-Bの出典）</td><td>Michie S, van Stralen MM, West R. Implement Sci. 2011;6:42</td></tr>
+<tr><td>14</td><td>米国麻酔科学会会員の環境に対する態度・知識・組織に関する調査（スタッフの動機が高いの出典）</td><td>Ard JL Jr, et al. Anesth Analg Case Rep. 2016;6(7):208-216</td></tr>
+<tr><td>15</td><td>集中治療のグリーン化（ICUのグリーン化が病院全体に波及しうるの出典）</td><td>Chapman M, Chapman A. Crit Care. 2011;15(2):302</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ICUのリサイクルは、<mark class="hl">環境の善行としてではなく SusQI の質改善プロジェクトとして起案する</mark>。安全性と臨床的有効性の維持が枠組みに内蔵されているので、ICU単独で始めても臨床リスクは小さい。</p>
+</div>
+<ul><li>最初の一手は目標の言語化。本稿の SMART 例（RMWを総廃棄物の20%未満、リサイクル率10%超）をたたき台にできる。</li><li>次に「システムを調べる」。地域規制・院内の既存の分別スキーム・許認可を、ICU管理者／病院管理部門／感染対策チーム／廃棄物処理業者の4者と一緒に洗う。</li><li>介入の本命は教育ではなく容器の物理設計。<mark class="hl">RMW容器は小さくバイオハザード表示、一般廃棄物容器は大きく開口部を広く、両者を隣接させ、溢れる前に回収する。</mark></li><li>COM-B の観点では、スタッフの動機は既に高い。障壁は場所・回収頻度・感染リスクの認識・データの欠如の4つなので、そこを潰す。</li><li><mark class="hl">本稿に実証データは無い。14%・60%・5〜10倍はすべて他文献からの引用であり、当院で使う前に自院の数字で置き換える。</mark></li></ul>
+<h4>判断の流れ（本稿の枠組みを当院に当てるとき）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>起案</td><td>この提案は臨床アウトカムを変えるか</td><td>変えないので QI として起案する。SusQI の4ステップに載せる</td></tr>
+<tr><td>目標</td><td>測れる指標があるか</td><td>重量が取れないなら容器交換本数／患者日など代替指標を先に決める</td></tr>
+<tr><td>システム調査</td><td>院内に既存の分別スキームがあるか</td><td>あれば乗る。無ければ廃棄物処理業者に地域で回収可能な品目を確認する</td></tr>
+<tr><td>関係者</td><td>感染対策チームの合意は取れているか</td><td>未了なら先に取る。交差汚染を完全には防げない点を隠さず伝える</td></tr>
+<tr><td>設計</td><td>容器の大きさ・開口部・配置は行動を誘導しているか</td><td>RMWは小さく、一般廃棄物は大きく開口部広く、隣接配置に変更する</td></tr>
+<tr><td>パイロット</td><td>対象品目を絞ったか</td><td>1品目から。プロセス評価を同時に設計する</td></tr>
+<tr><td>測定</td><td>ベースラインを取ったか</td><td>取っていなければ介入前に取る。取れていないなら効果は主張しない</td></tr>
+<tr><td>完了</td><td>成果を共有したか</td><td>院内で公表し祝う。士気の維持が次の改善の燃料になる</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

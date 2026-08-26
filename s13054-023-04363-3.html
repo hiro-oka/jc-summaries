@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症性ショックの輸液を個別化する — 輸液の種類から除水まで各段階の選び方（レビュー・CritCare2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-023-04363-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症性ショックの輸液を個別化する — 輸液の種類から除水まで各段階の選び方（レビュー・CritCare2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Monnet X, Lai C, Teboul JL. How I personalize fluid therapy in septic shock? Crit Care. 2023;27:123. doi:10.1186/s13054-023-04363-3</dd><dt>掲載誌</dt><dd>Critical Care（2023-03-24）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-023-04363-3" target="_blank" rel="noopener">doi.org/10.1186/s13054-023-04363-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>How I personalize fluid therapy in septic shock?</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-023-04363-3.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-023-04363-3.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-023-04363-3.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み ① 晶質液の選択を「全例バランス」から「条件付きバランス」へ Fig. 1 の基準は明快で、そのまま指示簿に落とせる。大量輸液を要する／<strong>血清Cl ≥ 110 mmol/L</strong> ならバランス晶質液、低アルブミン血症ならアルブミンを考慮、それ以外は生理食塩水。前提として <strong>Cl を測る</strong>運用（初期蘇生の血ガス・生化に Cl を必ず含める）を作る。70 kg で HCO₃⁻ が 10 mmol/L 下がるには 12 L を要するという数字が、この「条件付き」の論拠になる。</p>
+<p>② 初期輸液は「30 mL/kg を一括」ではなく「10 mL/kg を1時間で入れて再評価」 著者らの実践（Fig. 1）は SSC の 30 mL/kg とは別の刻み方で、明らかな低容量血症・体液喪失があれば速度を上げ、輸液蓄積リスクが高ければ速度を下げる。当院の敗血症バンドルに「投与速度を病態で変える」という発想を持ち込める。ただし <mark class="hl">患者の状態だけを理由に初期輸液を減らす判断は死亡を増やしうる</mark> と原著が釘を刺している点も一緒に共有する。</p>
+<p><strong>③ 「初期は測らず入れる、その後は必ず測る」の2段構え</strong> ごく初期は低容量血症が普遍的なので前負荷反応性の検査は蘇生を遅らせるだけ。しかし ANDROMEDA-SHOCK では 27 mL/kg 投与後に 70% が反応性を保っていたのに、4時間後に残っていたのは 20% 未満。<strong>評価開始のタイミングを逃さない</strong>運用（初期輸液終了時＝評価開始のトリガー）にする。</p>
+<p><strong>④ 動脈ライン1本で回るテスト群を標準に据える</strong> 当院の人工呼吸患者は Vt 6 mL/kg・自発呼吸あり・Crs 低値が大半で、PPV/SVV の絶対値が使える条件（自発呼吸なし・Vt ≥ 8・Crs ≥ 30・IAH なし・洞調律・HR/RR ≥ 3.6）を満たすのは少数派。Vt チャレンジ（6→8 mL/kg）／PLR（PPV または perfusion index で判定）／ミニ輸液チャレンジ（PPV で判定） を標準の代替に置く。EEXPO は CO の精密測定が要るため PiCCO 装着例に限る。心エコーで行うなら呼気終末＋吸気終末ポーズを組み合わせる。</p>
+<p><strong>⑤ ミニ輸液チャレンジは「引き戻せない検査」として扱う</strong> 100〜150 mL は返らない。輸液蓄積リスクが高い症例では繰り返さない（Fig. 1 の "No repeated mini-fluid challenge"）。手術室向きの検査という位置づけを共有する。</p>
+<p><strong>⑥ ノルアドレナリンを「輸液を効かせる薬」として再定義する</strong> 静脈 α 受容体を介して stressed volume を増やし平均体循環圧を上げる（fluid-like effect）。昇圧薬下の容量負荷は収縮した静脈領域で起こるため前負荷への効果が大きい。早期開始を積極的に考えるのは <strong>最も低血圧の患者</strong>と<strong>拡張期圧 &lt; 40 mmHg のような著明な血管拡張</strong>。diastolic shock index（HR ÷ 拡張期血圧）はベッドサイドで即計算でき、当院でも導入コストがない。</p>
+<p><strong>⑦ 「輸液を止める基準」を病態別に持つ</strong> ARDS では P/F ではなく PAOP・肺水分量・肺血管透過性・右室拡大、腹部病態では IAP、そして全例で累積輸液バランスと CVP。P/F は肺の硬化や微小血栓のシャントでも下がり、追加輸液の影響を受けない部分が混じるため単独では不適。</p>
+<p><strong>⑧ 除水は「前負荷非反応性」を条件にする</strong> 血行動態が安定し昇圧薬が低用量か中止であること、そして PLR 陰性（前負荷非反応性）であることを確認してから引く。前負荷反応性が残っているなら引かない。無尿・利尿薬無効なら限外濾過。低アルブミン血症なら 20% 高張アルブミンの併用が相乗的に働きうる。</p>
+<p><strong>⑨ 効果判定は MAP ではなく脈圧・CO で</strong> 交感神経系が CO の変動に対して MAP を一定に保とうとするため、MAP の変化は減弱する。輸液の一次効果は CO 増加であり血圧上昇は副次的。当院の「輸液したら血圧が上がったか」という評価軸を変える指摘。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：輸液は敗血症性ショックの第一の治療だが、効果は一定せず一過性で、有害作用は十分に文書化されている。ICU での累積輸液バランスは死亡に独立して影響する（敗血症性ショック・ARDS でとくに顕著）。制限的／保存的輸液戦略の介入試験は一貫して輸液バランスを減らし、腎への悪影響もないが、死亡を減らさない。SSC 2021 は晶質液を第一選択とし、全ての敗血症性ショック患者にバランス晶質液を弱く推奨し、低血圧または乳酸上昇があれば3時間以内に 30 mL/kg 以上を推奨する。</li><li><strong>Unknown（分かっていなかったこと）</strong>：これらのガイドラインは臨床文脈と患者特性を区別しない「万人共通」の答えである。輸液の種類・初期量・前負荷反応性テストの選択・止める基準・目標・除水を、患者の生理学的状態に応じて個別化した戦略は、RCT で検証されていない。とくに前負荷反応性は輸液バランスを減らすことが知られているのに、輸液制限試験で考慮されたことがない。</li><li><strong>What's new（本稿の新規性・意義）</strong>：Bicêtre の Monnet・Teboul グループが、既存文献と輸液効果の病態生理概念の両方に基づいて「私はこう個別化する」を6つの問い（種類／初期量／前負荷反応性の測り方／昇圧薬の追加／止める基準／目標／除水）に分解し、判断基準を Fig. 1 に、蘇生段階ごとの輸液バランス低減手段を Fig. 2 に一枚化した。個々の推奨に効果推定値は付いていないが、<mark class="hl">「どの段階で何を見て何を決めるか」の具体的な閾値（Cl ≥ 110 mmol/L、10 mL/kg/hr、MAP ≥ 75–80 mmHg、PCO₂ gap &lt; 6 mmHg など）がFig. 1 に明記されている</mark>点が本稿最大の実用価値である。</li><li><strong>著者らの警告</strong>：これらの個別化基準を考慮しない限り、輸液戦略を検証する臨床研究は今後も陰性であり続ける、と結論で述べている。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症性ショックの輸液は「効果が一定せず一過性」「有害作用が多い」という2つの問題を抱えるため、輸液の種類・初期量・前負荷反応性の測り方・昇圧薬の併用・止める基準・治療目標・除水のすべてを、患者特性と臨床状況に応じて個別化する余地がある、と著者らが自らの流儀を提示したナラティブレビュー。</p>
+</div>
+<ul><li><strong>輸液の種類</strong>：生理食塩水は高Cl性アシドーシスを起こすが、それはごく大量を投与した場合に限られる（70 kg で HCO₃⁻ が 10 mmol/L 下がるには 12 L）。バランス晶質液は「既に大量の輸液を受け、かつCl濃度が上昇している患者」に取っておくべき。Fig. 1 の閾値は <strong>Cl ≥ 110 mmol/L</strong>。外傷性脳損傷と低Cl血症では非バランス晶質液を選好する。低アルブミン血症（＋おそらく輸液蓄積）では等膠質浸透圧アルブミンを考慮しうるが、エビデンスは乏しい。</li><li><strong>初期輸液量</strong>：SSC の 30 mL/kg は観察研究1本のみに基づき、個別化の変数が体重だけ。相対的低容量血症（静脈拡張・ショック重症度に依存）に加え、絶対的低容量血症（体液喪失）も補償されねばならない（腹膜炎の欠乏量は肺炎より大きいはず）。恣意的な 30 mL/kg は一部で蘇生不足、他で輸液過剰を必然的に招く。著者らの実践は その他の症例では 10 mL/kg を1時間で投与して再評価（Fig. 1）。</li><li><strong>前負荷反応性</strong>：ごく初期は低容量血症が普遍的なので検査は正当化されず蘇生を遅らせる。その後は必ず測る。ANDROMEDA-SHOCK では 27 mL/kg 投与後、組入時に 70% が前負荷反応性を持っていたが、そのうち4時間後もそうだったのは 20% 未満。</li><li><strong>テストの選び方は3つの問い</strong>：①挿管されているか ②どの血行動態モニタリングがあるか ③輸液蓄積のリスクはどれくらいか。未挿管なら PLR とミニ輸液チャレンジ。CO モニタが無くても動脈ライン1本あれば Vt チャレンジ・PLR・ミニ輸液チャレンジが PPV で実施できる。蓄積リスクが高ければミニ輸液チャレンジを繰り返さない。</li><li><strong>昇圧薬</strong>：ノルアドレナリンは静脈 α 受容体を介して stressed blood volume を増やし平均体循環圧を上げる「fluid-like effect」を持ち、輸液と相乗する。早期開始は最も低血圧の患者、拡張期圧 &lt; 40 mmHg のような著明な血管拡張の患者で考慮。CLOVERS からは早期ノルアドレナリン単独の予後影響は推論できない。輸液ボーラスの CO への効果は儚く、周術期では 250 mL の効果が 10分後に消失した。</li><li><strong>止める基準</strong>：ARDS では PAOP・肺水分量と透過性・P/F・右室拡大、腹部病態では IAP、いかなる場合も累積輸液バランスと CVP（Fig. 1）。</li><li><strong>治療目標</strong>：ICU 外は MAP ≥ 65/70 mmHg（高血圧既往なら ≥ 80–85 mmHg）、ICU 内は MAP ≥ 75–80 mmHg・CO 増加・SvO₂/ScvO₂ ≥ 60/70%・PCO₂ gap &lt; 6 mmHg・PCO₂ gap / C(O₂) gap &lt; 1.4。いかなる場合も網状皮斑・CRT・尿量・乳酸。</li><li><strong>除水</strong>：有意な輸液蓄積のある患者で検討する。前負荷反応性があれば除水しない、明らかな輸液蓄積がなければ除水しない、無尿・利尿薬無効なら限外濾過、それ以外は利尿薬（Fig. 1）。前負荷反応性テストで除水を導ける — 前負荷依存状態では血行動態の悪化が起こりやすいため。</li><li><strong>輸液制限試験の2つの欠点</strong>：①ボーラス制限・維持輸液制限・プロトコル化された除水の3つを同時に行った研究がない（CLASSIC は5日目で 700 mL しか節約できず、RADAR-2 は維持輸液制限＋除水で 3300 mL 減らした） ②患者特性に応じた個別化がない。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 敗血症性ショックの輸液の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>敗血症性ショックで輸液を入れる理由</strong>：感染に対する全身反応で血管が拡張し（相対的低容量血症）、加えて毛細血管漏出・不感蒸泄・消化管喪失で実際の体液も失われる（絶対的低容量血症）。静脈側に貯まっている血液のうち、血管壁を張って圧を生んでいる分を <strong>stressed volume（張力のかかった容量）</strong> と呼び、これが平均体循環充満圧を決め、右房圧との差が静脈還流を駆動する。輸液はこの stressed volume を増やして心臓の前負荷を上げ、1回拍出量と心拍出量（CO）を増やし、最終的に組織の酸素供給を改善することを狙う。</p>
+<p>前負荷反応性（preload responsiveness）：心臓が Frank–Starling 曲線の急峻部にいれば、前負荷を増やすと1回拍出量が増える（＝反応性あり）。平坦部にいれば前負荷を増やしても拍出量は増えず、水だけが溜まる（＝反応性なし）。輸液を「効く患者にだけ」入れるための判定が前負荷反応性テストである。</p>
+<p><strong>主なテストの原理</strong>：</p>
+<ul><li>PLR（passive leg raising、受動的下肢挙上）：下肢を挙げて約 300 mL の血液を中心へ移す「可逆的な自己輸液」。効果を CO・PPV・呼気終末CO₂・perfusion index などで見る。人工呼吸を必要としない。</li><li><strong>PPV / SVV（脈圧変動 / 1回拍出量変動）</strong>：陽圧換気が胸腔内圧を周期的に変え、その分だけ拍出量が揺れる。揺れが大きいほど前負荷依存。ただし成立には厳しい条件が要る。</li><li><strong>Vt チャレンジ</strong>：Vt 6 mL/kg では PPV の感度が落ちるため、一時的に 8 mL/kg へ上げて PPV の増分を見る。</li><li><strong>EEXPO（呼気終末閉塞）試験</strong>：15秒の呼気終末ポーズで胸腔内圧の周期的上昇を止め、静脈還流を増やして CO が上がるかを見る。不整脈があっても、Vt と PEEP がいくつでも使える。</li><li><strong>ミニ輸液チャレンジ</strong>：100〜150 mL を素早く入れて反応を見る。少量とはいえ<strong>引き戻せない</strong>。</li></ul>
+<p><strong>輸液の害</strong>：入れた分は血管内に留まらず間質へ移る。肺では間質性・肺胞性浮腫、腹部では内臓・体壁浮腫による腹腔内圧（IAP）上昇、静脈側では CVP 上昇＝臓器血流の後方圧上昇を招く。累積輸液バランスは重症患者の死亡に独立して影響する。</p>
+<p><strong>ROSE の4相</strong>：Resuscitation（蘇生）→ Optimisation（最適化）→ Stabilisation（安定化）→ Evacuation（除水）。Fig. 2 はこの4相に沿って輸液バランスを減らす手段を並べている。</p>
+<p><strong>略語</strong>：CO＝心拍出量、CVP＝中心静脈圧、PAOP＝肺動脈閉塞圧、EVLW＝血管外肺水分量、PVPI＝肺血管透過性指数、IAP＝腹腔内圧、IAH＝腹腔内圧上昇、Crs＝呼吸器系コンプライアンス、CRT＝毛細血管再充満時間、PI＝perfusion index、SB＝自発呼吸。</p>
+</div>
+<h3>2. 背景と目的 💧</h3>
+<ul><li>敗血症性ショックにおける最初の治療手段である容量負荷は、一見単純である。数百 mL の輸液を数分かけて静注するだけ。しかし敗血症患者における輸液戦略には、単純なものは何ひとつない。</li><li>今日では複数の異なる種類の輸液が利用できる。輸液ボーラスの効果は一定せず一過性である。輸液はリスクを伴う治療であり、とくに敗血症性ショックではそうである。</li><li>そこで実践上、多くの問いが生じる。どの輸液を選ぶか。そもそも投与すべきか。そのリスクをどう評価し、投与を控えるか。効果をどう予測するか。効果をどう評価するか。</li><li>これらの問いに対し、標準的で一義的な答えを与えることはできる。現行ガイドラインがやっているのはそれであり、<strong>臨床文脈と患者特性による区別をしていない</strong>。</li><li>目的はおそらく、広く適用できるよう十分に一般的にすることであり、それは間違いなく称賛に値する。</li><li>もう一つの理由は、これらのガイドラインが既存の RCT に基づいており、それらの RCT が組み入れた患者の特殊性にほとんど注意を払ってこなかったことにある。</li><li>したがって、これらの推奨は大きな価値を持つ一方で、<strong>より個別化された輸液管理の余地がおそらくある</strong>。</li><li>「万人に合う一つのサイズはない（one size does not fit all）」という考えは、集中治療のいくつもの戦略について長年擁護されてきた。治療の個別化の必要性は追求すべき徳目として現れており、とくに敗血症性ショックでそうである。輸液も他の治療と同じである。</li><li><strong>本稿の目的</strong>：既存の文献だけでなく、輸液の効果の基礎にある病態生理概念にも基づいて、敗血症性ショックにおける個別化輸液戦略がどのようなものでありうるかを記述する。輸液の種類の選択から、過剰に投与された輸液を除去する決断まで、<strong>各段階で選択を合理的に個別化できることを示そうとする</strong>。</li></ul>
+<h3>3. 方法（Methods）📐</h3>
+<div class="call note"><span class="lab">補足</span>
+<p>これはナラティブレビューであり、システマティックレビューではない <mark class="hl">本稿には系統的検索式・組入基準・エビデンスの質評価（GRADE 等）・利益相反管理された推奨作成プロセスのいずれも存在しない</mark>。「私はこうする（How I do it）」形式の実践レビューであり、著者個人（Bicêtre グループ）の流儀が、既存文献と病態生理の解釈の上に構築されている。読むときは「文献に裏づけられた部分」と「著者の慣習」を分けて受け取る必要がある（この切り分けは第13節に表で示す）。</p>
+</div>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（REVIEW 区分）。Critical Care 誌の "How I do it" 系の実践レビュー。</li><li><strong>構成</strong>：6つの実践的な問いに分解して章立てされている。①輸液の種類 ②初期輸液量 ③前負荷反応性テスト／指標の選択 ④昇圧薬を輸液に加える判断 ⑤輸液を止める基準 ⑥治療目標、そして⑦除水。</li><li><strong>エビデンスの提示形式</strong>：引用は104件。個々の主張に対応する効果推定値（RR・OR・HR・95%CI・p値）は本文にほとんど示されない。本文に明記された定量値のみを本ノートに転記している（第14節の総括表に集約）。</li><li><strong>資金</strong>：本研究に対する特定の資金提供はない（"The author(s) received no specific funding for this work."）。</li><li><strong>倫理</strong>：該当なし（Not applicable）。</li><li><strong>著者貢献</strong>：XM・CL・J-LT が初稿を執筆し、全著者が最終稿を読んで承認。</li></ul>
+<h3>4. 輸液の種類をどう個別化するか 🧪</h3>
+<h4>4-1. コロイドは使わない、しかしバランス晶質液は？</h4>
+<ul><li>敗血症性ショックでは、<strong>SSC が晶質液を第一選択として指示している</strong>。</li><li>ただし、<strong>この選択を支持するエビデンスはわずかしかないにもかかわらず</strong>、たとえば低アルブミン血症があり、おそらく輸液蓄積のある患者では、血漿膠質浸透圧を上げるために 等膠質浸透圧アルブミン（iso-oncotic albumin） を選ぶことがありうる。</li><li>現在の論争は主として <strong>バランス晶質液を使うか、非バランス晶質液を使うか</strong> にある。</li><li>生理食塩水を主たる輸液源として使うと高Cl性アシドーシスを起こしうる。これは腎皮質灌流を低下させ、腎不全を誘発しうる。</li><li>Cl 濃度の高い輸液と比較して、バランス製剤は <strong>腎不全の発生率を減らし、おそらく死亡も減らす</strong> と複数の研究が示唆してきた。</li><li>これに沿って、2021年 SSC ガイドラインは全ての敗血症性ショック患者でバランス晶質液を選好することを示唆した。</li><li>この <strong>弱い推奨は主に SMART 研究に基づく</strong>が、SMART には自身の限界があった —— 単施設であること、個別ランダム化がないこと、敗血症の同定が疑わしいこと。</li></ul>
+<h4>4-2. バランス晶質液を、しかし全患者に？</h4>
+<ul><li>著者らは他の論者と同様、<strong>この選択はむしろ個別化されるべきだ</strong>と考える。</li><li>生理食塩水は高Cl血症を起こしうるが、それは大量が投与された場合に限られる。</li><li>具体的な量：70 kg の患者では、血中重炭酸値が 10 mmol/L 下がるためには 12 L を注入しなければならない（小児髄膜炎菌性敗血症の蘇生後相の高Cl血症を扱った O'Dell らのデータに基づく）。</li><li>したがって バランス晶質液は、大量の輸液量を要し、かつCl濃度が有意に上昇する患者に、論理的に取っておくべきである（Fig. 1）。</li><li>さらに、外傷性脳損傷の場合と低Cl血症の場合には非バランス晶質液が選好されねばならない。</li><li>いずれにせよ、輸液の種類を調整するためにCl濃度を測定すべきである。</li></ul>
+<h4>4-3. PLUS 研究による間接的な裏づけ</h4>
+<ul><li>先行研究はバランス晶質液の 0.9% 生食に対する <strong>有益な効果</strong>（SMART）または <strong>中立の効果</strong>（SPLIT、メタ解析）を示してきた。</li><li><strong>PLUS 研究</strong>は PlasmaLyte 対 生理食塩水を重症患者（敗血症患者に限らない）で比較した。<strong>結果は陰性</strong>：死亡も急性腎不全リスクもバランス晶質液で低くならず、敗血症患者に限っても同様だった。</li><li>しかし著者らは問う —— これは驚くべきことか。</li><li>同研究は区別のない ICU 患者集団を組み入れており、最初の2日間に受けた輸液は 1日あたり 2 L 未満だった。</li><li>その結果、Cl 濃度は最終的に群間でごくわずかしか違わなかったので、治療群でバランス製剤が何らかの利益を発揮しようがなかった。</li><li>バランス製剤の使用を「注入量」と「Cl 濃度」で条件づけていたなら、この研究は陽性になっていたかもしれない、というのが著者らの読みである。</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-023-04363-3" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-023-04363-3）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 敗血症性ショックの各段階で輸液戦略を個別化する基準（原図・無改変。© The Author(s) 2023, CC BY 4.0） 濃紺の角丸ボックス6つが左上から右下へ点線矢印で連なり、蘇生の時間軸に沿った6つの問い（Which type of fluid? → Which initial fluid volume? → How to assess fluid responsiveness? → Which criteria to decide not to give fluid? → Which therapeutic targets? → Should fluid be removed?）を成す。各問いから点線矢印が下方に扇状に分岐し、<strong>左列＝患者の条件（薄青の塗りボックス）</strong>、<strong>右列＝その条件下での選択（白抜きボックス）</strong> の2列で対応づけられている。左列の一番下は必ず "Other cases"（その他）で、既定の選択が示される。図中の全ボックスの文言は下記の各表に起こした。 原図キャプションの略語一覧：ARDS acute respiratory distress syndrome, CO cardiac output, C(O2) oxygen content, CRT capillary refill time, CVP central venous pressure, EEXPO end-expiratory occlusion, HR heart rate, ICU intensive care unit, MAP mean arterial pressure, P/F ratio ratio of the arterial oxygen partial pressure to the inspired oxygen fraction, PAOP pulmonary artery occlusion pressure, PCO2 carbon dioxide partial pressure, PLR passive leg raising, PPV pulse pressure variation, PI perfusion index, RR respiratory rate, RV right ventricular, SvO2 mixed venous oxygen saturation, ScvO2 central venous oxygen saturation, SVV stroke volume variation, Vt tidal volume</p>
+</div>
+<h4>Table 4-1. Fig. 1 ①「Which type of fluid ?（どの輸液を選ぶか）」の全ボックス</h4>
+<div class="tw"><table>
+<thead><tr><th>患者の条件（原文）</th><th>和訳</th><th>選択（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>High volume infused</td><td>大量が注入されている</td><td>Balanced crystalloid</td><td>バランス晶質液</td></tr>
+<tr><td>Chloride ≥110 mmol/L</td><td>血清Cl ≥ 110 mmol/L</td><td>Balanced crystalloid</td><td>バランス晶質液</td></tr>
+<tr><td>Hypoalbuminemia</td><td>低アルブミン血症</td><td>Consider albumin</td><td>アルブミンを考慮</td></tr>
+<tr><td>Other cases</td><td>その他の症例</td><td>Normal saline</td><td>生理食塩水</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>図と本文の食い違い（Cl の閾値） <mark class="hl">本文には「Cl 濃度が有意に上昇したら」としか書かれておらず、具体的な閾値 110 mmol/L は Fig. 1 にしか現れない</mark>。この数値の根拠となる引用文献も本文には示されていない。著者らの実務的なカットオフとして扱うべきで、検証された閾値ではない。</p>
+</div>
+<h3>5. 初期輸液量をどう個別化するか 🚰</h3>
+<ul><li>最新の SSC ガイドラインは、低血圧または血中乳酸上昇のある敗血症患者は、来院から3時間以内に晶質液 ≥ 30 mL/kg を受けるべきであると述べる。</li><li><strong>この量は観察研究1本のみに基づく</strong>（Kuttab ら, Crit Care Med 2019）。狙いは敗血症性ショック初期の相対的および絶対的な低容量血症を代償することにある。</li><li><strong>個別化のパラメータは患者体重だけ</strong>である。しかし初期の容量欠乏の程度は患者ごとに明らかに異なる。</li><li>第一に、相対的低容量血症は静脈拡張に関連し、ショックの重症度に依存する。</li><li>第二に、一部の患者では体液喪失が絶対的低容量血症を占め、これも代償されなければならない。たとえば <strong>体液欠乏は腹膜炎のほうが肺炎より大きいはず</strong>である。</li><li>30 mL/kg という恣意的な量の推奨は、一部の患者では蘇生不足を、他の患者では輸液過剰を必然的に招く。</li><li>加えて、<strong>輸液投与に対する耐容性は心機能にも依存する</strong>。したがって初期輸液療法は個別化されるべきである。</li><li>ただし著者らは重要な留保を置く —— 患者の状態のみに基づいて初期投与量を減らす決定は、死亡を増やしうる（同じ Kuttab らの観察研究による）。</li></ul>
+<h4>5-1. 前負荷反応性はいつから測るか</h4>
+<ul><li>ごく初期の相では、低容量血症が普遍的（constant）であるため、前負荷反応性の検査は正当化されず、蘇生を遅らせうる。</li><li>その後は、不必要な輸液を避けるため、前負荷反応性の程度に応じて容量負荷を個別化すべきである（Fig. 1）。<strong>SSC もこの点については治療の個別化を示唆している</strong>。</li><li>前負荷反応性の評価を遅らせてはならない —— 敗血症性ショックの発症後、急速に消失するため。</li><li>ANDROMEDA-SHOCK 研究の二次解析では、27 mL/kg の輸液を受けた後、組入時点でなお 70% の患者が前負荷反応性を持っていたが、そのうち4時間後もそうであったのは 20% 未満だった。</li><li>敗血症性ショックで前負荷反応性の評価によって初期輸液療法を導くと、輸液バランスを減らせる（FRESH 試験ほか）。</li></ul>
+<h4>Table 5-1. Fig. 1 ②「Which initial fluid volume ?（初期輸液量をどうするか）」の全ボックス</h4>
+<div class="tw"><table>
+<thead><tr><th>患者の条件（原文）</th><th>和訳</th><th>選択（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>Obvious hypovolaemia, or fluid losses</td><td>明らかな低容量血症、または体液喪失</td><td>Higher rate of infusion</td><td>投与速度を上げる</td></tr>
+<tr><td>High risk of fluid accumulation</td><td>輸液蓄積のリスクが高い</td><td>Lower rate of infusion</td><td>投与速度を下げる</td></tr>
+<tr><td>Other cases</td><td>その他の症例</td><td>10 mL/kg in 1 hr and reassess</td><td>10 mL/kg を1時間で投与し、再評価する</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>本文と Fig. 1 で初期輸液の書きぶりが違う <mark class="hl">本文は SSC の「3時間以内に 30 mL/kg」を批判的に検討するだけで、<strong>著者ら自身の推奨量を数字で書いていない</strong>。「10 mL/kg を1時間で入れて再評価」は Fig. 1 にのみ現れる著者らの実践であり、本文中に根拠文献の提示もない</mark>。当院で採用するなら「著者らの慣習」として扱い、SSC の 30 mL/kg との関係（置き換えるのか、その内訳の刻み方なのか）は本稿からは決められない点を明示する必要がある。</p>
+</div>
+<h3>6. 前負荷反応性テスト／指標の選び方 🔬</h3>
+<p>著者らは「指標とテストを詳述したレビューは他所にある。ここでの目的は、<strong>一つを他より選ばせるものは何か</strong> を記述することだ」と述べ、選択は次の3つの問いに依存するとする（Fig. 1）。</p>
+<h4>6-1. ① 患者は挿管されているか</h4>
+<ul><li><strong>PLR テストとミニ輸液チャレンジは人工呼吸を必要としない</strong>。これにより、たとえば患者がまだ挿管されていない救急外来などで使用可能になる。</li><li>当然ながら、心肺相互作用に基づくテストは挿管され換気されている患者でしか使えない。</li><li><strong>PPV と SVV（絶対値）</strong> が使えるのは、次の条件をすべて満たす患者に限られる：</li><li>自発呼吸がない</li><li>一回換気量（Vt）≥ 8 mL/kg</li><li>呼吸器系コンプライアンス ≥ 30 mL/cmH₂O</li><li>腹腔内圧上昇がない</li><li>洞調律である</li><li>心拍数／呼吸数比 ≥ 3.6</li><li><strong>すなわちショック患者の少数派でしか使えない</strong>。</li><li><strong>下大静脈および上大静脈の径の変化は同じ限界を持つ</strong>（不整脈と、上大静脈については高呼吸数を除く）。最適な使用条件下でも診断価値はより低く、とくに下大静脈の distensibility でそうである。</li><li><strong>EEXPO 試験</strong>（15秒の呼気終末ポーズ。前負荷反応性があれば CO を増やす）は、不整脈があっても、Vt と PEEP の水準がいくつであっても、換気されている患者で使える。ただし <strong>患者がこの比較的長い呼吸中断に耐えなければならない</strong>。</li><li>Vt 6 mL/kg で換気されている患者では、Vt チャレンジ（一時的に Vt を 8 mL/kg へ増やす。前負荷反応性があれば PPV が増加する）が使え、<strong>自発呼吸があっても妥当</strong>であり、これが広く使える理由になっている。<strong>その妥当性はますますよく実証されつつある</strong>。</li><li>リクルートメント手技は ARDS 患者にのみ適応があり、ルーチンではないため、使用は大きく制限される。</li><li><strong>腹臥位では Trendelenburg 手技</strong>を使って血液を心腔へ移し、前負荷反応性を検出しうる。<strong>現時点では検証がほとんど得られていない</strong>。腹臥位では Vt チャレンジも妥当である。</li></ul>
+<h4>6-2. ② どの血行動態モニタリングが設置されているか</h4>
+<ul><li>Vt チャレンジ、PLR テスト、そしておそらくミニ輸液チャレンジの大きな利点は、単純な PPV で実施できること —— すなわち動脈ライン1本だけを要することにある。</li><li><strong>PLR テストでは、CO の代わりに多くの他の変数が使える</strong>。たとえば <strong>換気患者の呼気終末CO₂</strong>、プレチスモグラフィの perfusion index。</li><li><strong>EEXPO 試験は CO の精密な測定を要する</strong>。誘導される1回拍出量の変化が小さいためである。</li><li>心エコーを使う場合は、呼気終末ポーズと吸気終末ポーズを組み合わせるべきである。velocity time integral（VTI）の変化を増幅し、心エコーの精度と両立させるためである。</li></ul>
+<h4>6-3. ③ 輸液蓄積のリスクはどれくらいか</h4>
+<ul><li>ミニ輸液チャレンジは 100〜150 mL の輸液注入を要し、無効だった場合にそれを引き抜くことはできない。</li><li>したがって <strong>輸液蓄積のリスクが高ければ、これを繰り返さないのが合理的</strong>である。</li><li>この観点からは、ミニ輸液チャレンジはおそらく ICU よりも手術室に適している。</li></ul>
+<h4>Table 6-1. Fig. 1 ③「How to assess fluid responsiveness ?（前負荷反応性をどう評価するか）」の全ボックス</h4>
+<div class="tw"><table>
+<thead><tr><th>患者の条件（原文）</th><th>和訳</th><th>選択（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>No SB, no arrhythmia, Vt ≥ 8 mL/kg, Crs ≥ 30 mL/cmH₂O, HR/RR &gt; 3.6</td><td>自発呼吸なし・不整脈なし・Vt ≥ 8 mL/kg・Crs ≥ 30 mL/cmH₂O・心拍数／呼吸数 &gt; 3.6</td><td>PPV, SVV</td><td>脈圧変動、1回拍出量変動</td></tr>
+<tr><td>No mechanical ventilation</td><td>人工呼吸をしていない</td><td>PLR test / Mini-fluid challenge</td><td>PLR テスト／ミニ輸液チャレンジ</td></tr>
+<tr><td>No CO monitoring</td><td>心拍出量モニタリングがない</td><td>Vt challenge / PLR test on PI or PPV / Mini-fluid challenge on PPV</td><td>Vt チャレンジ／perfusion index または PPV で判定する PLR テスト／PPV で判定するミニ輸液チャレンジ</td></tr>
+<tr><td>High risk of fluid accumulation</td><td>輸液蓄積のリスクが高い</td><td>No repeated mini-fluid challenge</td><td>ミニ輸液チャレンジを繰り返さない</td></tr>
+<tr><td>Prone positioning</td><td>腹臥位</td><td>EEXPO test / Trendelenburg manoeuver</td><td>EEXPO 試験／Trendelenburg 手技</td></tr>
+<tr><td>Other cases</td><td>その他の症例</td><td>PLR test / Mini-fluid challenge / Vt challenge / EEXPO test</td><td>PLR テスト／ミニ輸液チャレンジ／Vt チャレンジ／EEXPO 試験</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Fig. 1 と本文の3つの食い違い（テスト選択） <mark class="hl">① <strong>腹腔内圧上昇がないこと</strong>は本文では PPV/SVV の必須条件だが、Fig. 1 のボックスからは脱落している</mark>。IAH のある患者に Fig. 1 だけを見て PPV を使うと誤る。 ② 心拍数／呼吸数比は <strong>本文が「≥ 3.6」、Fig. 1 が「&gt; 3.6」</strong> と表記が揺れている。実務上の差は小さいが、原著内で一致していない。 ③ 腹臥位について、<strong>本文は「Vt チャレンジも妥当」と明記</strong>しているが、Fig. 1 の腹臥位ボックスには EEXPO と Trendelenburg しか挙がっていない。腹臥位での Vt チャレンジの妥当性は Shi ら（Crit Care 2022）で示されているので、実務では図より本文を採る。</p>
+</div>
+<h4>Table 6-2. 各テストの原理・成立条件・限界（本文の記述を整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>テスト</th><th>原理・操作</th><th>判定に使える変数</th><th>成立条件・使える場面</th><th>主な限界</th></tr></thead>
+<tbody>
+<tr><td>PLR（受動的下肢挙上）</td><td>下肢挙上により血液を中心へ移す可逆的な自己輸液</td><td>CO、PPV、呼気終末CO₂（換気患者）、perfusion index</td><td>人工呼吸を必要としない。救急外来など未挿管でも可</td><td>本文に限界の明記なし（腹腔内圧上昇下の限界は本稿の対象外）</td></tr>
+<tr><td>ミニ輸液チャレンジ</td><td>100〜150 mL を注入して反応を見る</td><td>PPV の低下、SVV の低下</td><td>人工呼吸を必要としない</td><td>無効でも引き抜けない。蓄積リスクが高ければ繰り返さない。ICU より手術室向き</td></tr>
+<tr><td>PPV / SVV（絶対値）</td><td>陽圧換気による周期的な胸腔内圧変化に伴う拍出量の揺れ</td><td>PPV、SVV</td><td>自発呼吸なし・Vt ≥ 8 mL/kg・Crs ≥ 30 mL/cmH₂O・IAH なし・洞調律・HR/RR ≥ 3.6</td><td>これらを満たすのはショック患者の少数派</td></tr>
+<tr><td>上・下大静脈径の変化</td><td>同じ心肺相互作用を径の変化で見る</td><td>大静脈径の変動</td><td>PPV/SVV と同じ限界（不整脈と、上大静脈では高呼吸数を除く）</td><td>最適条件下でも診断価値がより低い。とくに下大静脈 distensibility</td></tr>
+<tr><td>EEXPO（呼気終末閉塞）試験</td><td>15秒の呼気終末ポーズで静脈還流を増やす</td><td>CO（精密測定が必要）、心エコーなら呼気終末＋吸気終末ポーズの組み合わせで VTI</td><td>不整脈があっても、Vt・PEEP がいくつでも可</td><td>誘導される1回拍出量の変化が小さく CO の精密測定を要する。患者が15秒の呼吸中断に耐える必要</td></tr>
+<tr><td>Vt チャレンジ</td><td>Vt 6 → 8 mL/kg へ一時的に増やし PPV の増加を見る</td><td>PPV</td><td>自発呼吸があっても妥当。腹臥位でも妥当（本文）</td><td>Vt 6 mL/kg で換気されている患者が対象</td></tr>
+<tr><td>リクルートメント手技</td><td>肺容量を増やし静脈還流を減らす負荷</td><td>CO 等</td><td>ARDS 患者にのみ適応</td><td>ルーチンではないため使用が大きく制限される</td></tr>
+<tr><td>Trendelenburg 手技</td><td>頭低位で血液を心腔へ移す</td><td>CO 等</td><td>腹臥位での代替</td><td>現時点で検証がほとんど得られていない</td></tr>
+</tbody></table></div>
+<h3>7. 昇圧薬を輸液に加える判断の個別化 💉</h3>
+<h4>7-1. 昇圧薬は輸液と相乗しうる</h4>
+<ul><li>ノルアドレナリンは通常、輸液ボーラスがもはや利益をもたらさなくなった時点で、動脈圧を上げるために開始される。</li><li>しかし <strong>体静脈還流への効果を見落とすべきではない</strong>。それが敗血症性ショックにおける輸液バランスの抑制に寄与しうるからである（Fig. 2）。</li><li>機序：静脈 α アドレナリン受容体への結合により血管収縮が起こり、stressed blood volume の割合が増える。これが 平均体循環圧を上げ、「輸液のような（fluid-like）」効果を発揮する。</li><li>さらに、昇圧薬下で行う容量負荷は、収縮した静脈領域で起こるため、心臓の前負荷により大きな効果を及ぼしうる。</li></ul>
+<h4>7-2. 一部の患者には昇圧薬を早期に投与しうる</h4>
+<ul><li>ノルアドレナリンのこれらの静脈側の効果は輸液投与と相乗的であり、<strong>蘇生のために投与される輸液量を減らしうる</strong>（Fig. 2）。</li><li><strong>観察研究</strong>：敗血症患者において、<strong>ノルアドレナリンの早期開始が輸液バランスを減らしうる</strong>と示唆された。そのうち 傾向スコアで患者をマッチさせた1研究は、ごく早期にノルアドレナリンが投与された場合により良い生存を示唆した。ただし反対の観察結果も報告されている（Yeo ら, Crit Care Med 2022：輸液負荷から1時間以内の昇圧薬開始は死亡増加と関連）。</li><li><strong>CLOVERS 研究</strong>は、より低い輸液量と昇圧薬を優先する制限的戦略と、昇圧薬開始前により多くの輸液を優先するリベラル戦略に患者をランダム化した。最初の24時間に投与された輸液は少なかったが、90日死亡は群間で差がなかった。</li><li>しかし介入群は早期ノルアドレナリン投与と制限的輸液戦略を組み合わせており、上述の諸研究と同じ欠点を抱えている。したがって 早期ノルアドレナリン投与単独の予後への影響は、この結果からは推論できない。</li><li>さらにこの研究では、より早期にノルアドレナリンを投与された患者が選択されていなかった。</li><li><strong>著者らの提案</strong>：この早期ノルアドレナリン投与は、血圧回復を促すため「最も低血圧の敗血症患者」で考慮されるべきである。</li><li>また、ノルアドレナリンは、低い拡張期圧（例：&lt; 40 mmHg）で示されるような著明な血管拡張のある患者で最も強力と考えられる（Fig. 1）。</li><li>diastolic shock index（心拍数を拡張期動脈圧で割った値。各変数単独より死亡をよく予測する）も、この目的のために考慮しうる。</li></ul>
+<h4>7-3. 輸液ボーラスの効果は儚い</h4>
+<ul><li>輸液ボーラスの CO への有効性は儚い（ephemeral）。</li><li>周術期の文脈では、250 mL の晶質液ボーラスの CO への効果が 10分後に消失することが示された。</li><li>敗血症患者では、血管拡張と毛細血管漏出のため、この持続時間はさらに短い可能性がある。</li><li>検討はされていないが、輸液ボーラスの微小循環への効果もおそらく一過性である。</li><li>したがって、敗血症患者ではノルアドレナリンで血行動態を回復させるほうが、おそらくより持続的な効果を可能にする。<strong>ただしこれはまだ証明されていない</strong>（著者らの明示的な留保）。</li></ul>
+<h3>8. 輸液を止める基準の個別化 🛑</h3>
+<ul><li>良い輸液管理には安全基準（safety criteria）が含まれるべきである。安全基準とは、<strong>輸液投与のリスクが期待される利益を上回ることを示す指標</strong>である。</li><li>これらの基準は、初期の低容量血症を補正した後の「安定化相」でとくに重要である（Fig. 2）。</li><li>特定の指標のモニタリングを正当化する臨床状況が2つある。</li></ul>
+<h4>8-1. ARDS 患者</h4>
+<ul><li>これらの患者では、追加輸液のリスクを警告するために <strong>P/F 比（PaO₂/FiO₂）がしばしば使われる</strong>。</li><li>しかし P/F 比は、肺の硬化（consolidation）や微小血栓に関連するシャントなどによっても低下しうる。これらは追加の輸液注入の影響を受けない。</li><li>「洗練された」血行動態モニタリング技術は、輸液蘇生の肺リスクをより直接的に推定する。</li><li><strong>肺動脈カテーテルは肺毛細血管圧を推定する</strong>。これは <strong>体液を間質へ押し出す圧</strong>である。</li><li><strong>この圧の心エコーによる推定は、重症患者では信頼性が低い</strong>。</li><li>経肺熱希釈法で測定される血管外肺水分量（EVLW）と肺血管透過性は、間質および肺胞への体液漏出のリスクを直接反映する。</li><li>肺水分量の最大値は、他の重症度基準とは独立に ARDS 患者の予後に影響する。</li><li>肺エコーは B-line によって間質性肺水腫を明らかにする。</li><li><strong>間質性浮腫の診断には信頼できる</strong>が、肺水腫の総量の定量には B-line の本数を退屈に数える作業を経るしかない。</li><li><strong>さらに肺胞性浮腫を無視するため、総肺水分量をよく反映しない</strong>。</li></ul>
+<h4>8-2. 腹腔内圧上昇のある患者</h4>
+<ul><li>とくに腹部の問題を抱える患者では、輸液蓄積のリスクを推定するために腹腔内圧（IAP）が考慮されるべきである。<strong>輸液蓄積は内臓および体壁の浮腫を介して IAP を上げる</strong>。</li><li>腹腔内圧上昇は腹部臓器（主に腎）の灌流を損ない、ICU 患者の予後に独立して影響する。</li><li>この変数は、安定化相で輸液ボーラスを投与する決定の前に考慮されなければならない。</li></ul>
+<h4>8-3. CVP を忘れるな</h4>
+<ul><li>患者が誰であれ、CVP は前負荷反応性を予測しないが、その測定はしばしば見落とされている多くの情報を与える。</li><li><strong>CVP は臓器血流の後方圧であり</strong>、<strong>CVP 高値は臓器障害と関連する</strong>。</li><li><strong>CVP の上昇を制限することは合理的な目標でありうる</strong>し、CVP が上昇している患者ではより高い平均動脈圧目標を狙うことが正当化されうる。</li></ul>
+<h4>Table 8-1. Fig. 1 ④「Which criteria to decide not to give fluid ?（輸液を与えないと判断する基準）」の全ボックス</h4>
+<div class="tw"><table>
+<thead><tr><th>患者の条件（原文）</th><th>和訳</th><th>見るべき指標（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>ARDS</td><td>ARDS</td><td>PAOP / Lung water and permeability / P/F ratio / RV dilation</td><td>肺動脈閉塞圧／肺水分量と透過性／P/F 比／右室拡大</td></tr>
+<tr><td>Abdominal problem</td><td>腹部の問題</td><td>Intra-abdominal pressure</td><td>腹腔内圧</td></tr>
+<tr><td>In any case</td><td>いかなる場合も</td><td>Cumulative fluid balance / CVP</td><td>累積輸液バランス／中心静脈圧</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>Fig. 1 は本文に無い項目を2つ含む <mark class="hl">右室拡大（RV dilation）は Fig. 1 にしか現れず、本文の ARDS の節では一切論じられていない</mark>。本文が論じるのは PAOP（肺毛細血管圧）・EVLW・肺血管透過性・P/F・肺エコーの4つ。また 累積輸液バランスを「いかなる場合も見る指標」として明示するのも Fig. 1 のみ。 さらに、抄録と Fig. 1 は "pulmonary arterial occlusion pressure（PAOP）" と書き、本文は "pulmonary capillary pressure（肺毛細血管圧）" と書いている。両者は厳密には同じ圧ではない（肺毛細血管圧は PAOP より高く、肺静脈抵抗の寄与を含む）。原著内での用語の不一致である。</p>
+</div>
+<h3>9. 治療目標の個別化 🎯</h3>
+<ul><li>輸液ボーラスは、平均体循環圧を上げ、心前負荷を上げ、その結果1回拍出量と CO を上げ、最終的に組織酸素化を改善することを狙う。</li><li>しかし治療目標は、利用できる血行動態モニタリングと文脈に合わせられなければならない。</li></ul>
+<h4>9-1. ICU の外（病棟・病院前・救急外来）</h4>
+<ul><li>輸液療法が病棟、病院前、救急外来で行われる場合、<strong>臨床診察で組織灌流改善の臨床徴候を探さねばならない</strong>：</li><li><strong>網状皮斑（skin mottling）の消失</strong></li><li><strong>毛細血管再充満時間（CRT）の短縮</strong>。CRT は <strong>かなり速く消失し、単回の輸液ボーラスの後でも変化しうる</strong>。</li><li>臓器機能の改善、とくに尿量の増加は、観察時間が非常に短いためほとんど得られない（Fig. 1）。</li><li>これらの徴候は常に探すべきだが、CO の変化をよく反映しない。</li><li>輸液ボーラスの一次的効果は CO を増やすことであり、動脈圧の上昇は副次的にしか起こらない。</li><li>なお、平均動脈圧の目標は、高血圧の既往の有無に合わせて調整しうる（SEPSISPAM）。</li><li><strong>しかし CO の変化をモニタするには脈圧を観察すべき</strong>である。<strong>脈圧が1回拍出量を最もよく反映する圧の値だから</strong>である。</li><li>平均動脈圧の変化は減弱している。交感神経系が、CO が変動する中で MAP を一定に保とうとするためである。</li><li>平均動脈圧の回復が輸液療法の目的とみなされうるのを見るのは驚きである（著者らの明示的な批判）。</li><li><strong>ただし脈圧の変化も CO を不完全にしか反映せず</strong>、<strong>上腕カフで評価するとおそらくなおさら</strong>である。</li><li>同様に、心拍数の低下も、輸液による CO 上昇の検出には信頼できない。</li><li>これが、可能なときは CO を直接測定して輸液の効果をよりよく評価することを正当化する。</li></ul>
+<h4>9-2. ICU の中</h4>
+<ul><li><strong>輸液の有効性を推定するのに使える変数がより多い</strong>。</li><li><strong>CO は容易に測定できる</strong> —— <strong>経肺熱希釈法</strong>、最重症の患者で推奨される肺動脈カテーテル、または 心エコーによって。</li><li>CO の直接測定がなくても動脈ラインが入っていれば、PPV の低下が前負荷反応性の低下を反映し、輸液への反応を示す。</li><li>挿管され完全に安定して換気されている患者では、呼気終末CO₂ の上昇が CO の上昇と平行する。</li><li>プレチスモグラフィ信号の振幅（perfusion index で定量）も、輸液による CO 上昇を反映しうる（いくつかの研究が示唆）。</li></ul>
+<h4>9-3. 組織酸素化への効果も評価する</h4>
+<ul><li><strong>CO の増加が常に酸素消費の改善に帰結するとは限らない</strong>ため、<strong>組織酸素化への効果も評価されなければならない</strong>。理由は2つ：</li><li><strong>酸素消費と酸素供給が独立している</strong>場合</li><li><strong>微小循環が障害されている</strong>場合</li><li>ICU ではこの目的にいくつかの変数が使える：</li><li><strong>乳酸の低下</strong>は良好な予後と関連しており、<strong>妥当な治療目標</strong>である。</li><li>非常にしばしば挿入されている中心静脈カテーテルを通じて、静脈血酸素飽和度と二酸化炭素由来の変数が組織酸素化の改善を示す。肺動脈カテーテルが入っていれば、これらの変数は混合静脈血からより信頼性高く測定される。</li><li>静脈血酸素飽和度が正常な症例では、二酸化炭素分圧の静脈-動脈較差を、酸素含量の動静脈較差で割った比（呼吸商の推定値）が、<strong>乳酸より反応が速く偽陽性が少ない嫌気性代謝のマーカー</strong>として提唱されている。</li><li>その正常値は &lt; 1.4 と報告されているが、異なる閾値も報告されている。</li></ul>
+<h4>Table 9-1. Fig. 1 ⑤「Which therapeutic targets ?（どの治療目標を置くか）」の全ボックス</h4>
+<div class="tw"><table>
+<thead><tr><th>患者の条件（原文）</th><th>和訳</th><th>目標（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>Outside the ICU</td><td>ICU の外</td><td>MAP ≥65/70 mmHg（星印付き）</td><td>平均動脈圧 ≥ 65/70 mmHg</td></tr>
+<tr><td>In the ICU</td><td>ICU の中</td><td>MAP ≥75-80 mmHg（星印付き）／Increase in CO／SvO₂/ScvO₂ ≥ 60/70%／PCO₂ gap &lt; 6 mmHg／PCO₂ gap / C(O₂) gap &lt; 1.4</td><td>平均動脈圧 ≥ 75–80 mmHg／CO の増加／混合静脈血または中心静脈血酸素飽和度 ≥ 60/70%／静脈-動脈 PCO₂ 較差 &lt; 6 mmHg／PCO₂ gap を C(O₂) gap で割った値 &lt; 1.4</td></tr>
+<tr><td>星印の注：In hypertensive patients</td><td>星印の注：高血圧の既往がある患者</td><td>MAP ≥80-85 mmHg</td><td>平均動脈圧 ≥ 80–85 mmHg</td></tr>
+<tr><td>In any case</td><td>いかなる場合も</td><td>Mottling, CRT／Urine output／Lactate</td><td>網状皮斑・毛細血管再充満時間／尿量／乳酸</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">ICU 内の MAP 目標 ≥ 75–80 mmHg は著者らの慣習であり、ガイドラインの目標ではない</mark> <mark class="hl">SSC も SEPSISPAM も初期目標は <strong>MAP 65 mmHg</strong>（SEPSISPAM の高目標群は 80–85 mmHg で、全体としては死亡差なし、慢性高血圧のサブグループで腎代替療法が減っただけ）。Fig. 1 の「ICU 内は MAP ≥ 75–80 mmHg」は本文中に一切根拠が示されておらず、引用文献も付いていない</mark>。当院で採用する理由はない。ただし本文が述べる「CVP が高い患者ではより高い MAP を狙うことが正当化されうる」という条件付きの主張とは整合する。</p>
+</div>
+<h3>10. 除水（fluid depletion / evacuation 相）をどう個別化するか 🚿</h3>
+<ul><li>総輸液バランスを減らす方法の一つは、ROSE 概念（resuscitation–optimisation–stabilisation–evacuation）の「evacuation（除水）」相で能動的な除水を行うことである（Fig. 2）。</li><li>実際、蘇生輸液の削減だけでは不十分である。ICU で注入される輸液のうち、維持輸液と補充輸液が大きな割合を占めるためである。</li><li>この de-escalation の様式は多様であり、有用性と安全性を考慮して個別化されるべきである。</li></ul>
+<h4>10-1. どの患者で除水を行うべきか</h4>
+<ul><li><strong>除水は、輸液蓄積が最も大きい患者で最も有益なはず</strong>である。蓄積は上述の変数で示される：</li><li><strong>左室充満圧の高値</strong></li><li><strong>CVP の高値</strong></li><li><strong>肺水分量の高値</strong>（原文は "very lung water" と誤植されているが、文脈上「非常に高い肺水分量」を指す）</li><li><strong>CT での肺うっ血所見</strong></li><li><strong>IAP の上昇</strong></li><li>軟部組織浮腫の存在は必ずしも要件でなくてよい。むしろ軟部組織浮腫は、血管内が枯渇した状態と併存しうる。</li><li><strong>逆に、輸液蓄積が少なければ</strong>（たとえば容易に軽快した敗血症性ショックでは）<strong>除水の利益はより不明瞭である</strong>。それを行うリスクを、ありうる利益と天秤にかけなければならない。</li></ul>
+<h4>10-2. どうやって除水するか</h4>
+<ul><li><strong>利尿薬がまず使われる</strong>。</li><li>しかし乏尿または無尿の場合には、腎代替療法中の限外濾過が代替手段となる。</li><li>低アルブミン血症の場合、20% 高張アルブミンが除水に相乗効果を誘導しうる。</li><li>急性肺傷害のため人工呼吸を受けている患者で、IAP に合わせて調整した PEEP、その後に高張アルブミンとフロセミドの投与を組み合わせた戦略は、累積輸液バランスを陰性化させ、肺水分量と IAP を減少させた（Cordemans らの PAL 戦略パイロット研究）。</li></ul>
+<h4>10-3. どれだけ引くかをどう決めるか</h4>
+<ul><li><strong>輸液を引きすぎるリスクは、血行動態を悪化させることにある</strong>。</li><li>除水の安全性を確保するには生理学的条件が考慮されなければならないが、実践ではそれが行われることは稀である。</li><li>第一に、血行動態が安定していなければならず、昇圧薬は低用量か中止されていなければならない。</li><li>次に、除水によって心前負荷を下げることが血行動態を悪化させうるのは、前負荷反応性がある場合に限られる。逆に、心室が前負荷非反応性であれば、除水はよく耐容されるはずである。</li><li>したがって、輸液を引くという決定を「前負荷非反応性の存在」に条件づけるべきである。</li><li><strong>裏づけ</strong>：ショックの安定化相にある重症患者の研究で、除水前の PLR テストが陰性であることによって前負荷反応性がないと証明された患者では、限外濾過による除水が透析中低血圧を誘導しなかった（Fig. 1）。</li><li>体外循環回路のプライミング時にも、CO の低下は前負荷反応性がある場合のほうが、ない場合よりはるかに頻度が高い。ただし <strong>透析中低血圧には他の要因も関与しうる</strong>。</li><li>それでも、前負荷反応性の存在は、追加の輸液を引かないよう強く促すものである。</li></ul>
+<h4>Table 10-1. Fig. 1 ⑥「Should fluid be removed ?（輸液を除去すべきか）」の全ボックス</h4>
+<div class="tw"><table>
+<thead><tr><th>患者の条件（原文）</th><th>和訳</th><th>選択（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>Preload responsiveness</td><td>前負荷反応性がある</td><td>Do not remove fluid</td><td>輸液を除去しない</td></tr>
+<tr><td>No obvious fluid accumulation</td><td>明らかな輸液蓄積がない</td><td>Do not remove fluid</td><td>輸液を除去しない</td></tr>
+<tr><td>Anuria, inefficacy of diuretics</td><td>無尿、利尿薬の無効</td><td>Ultrafiltration</td><td>限外濾過</td></tr>
+<tr><td>In other cases</td><td>その他の症例</td><td>Diuretics</td><td>利尿薬</td></tr>
+</tbody></table></div>
+<h3>11. 累積輸液バランスを減らす5つのてこ（Fig. 2）📉</h3>
+<ul><li>著者らは輸液制限研究の<strong>2つの大きな欠点</strong>を指摘する。</li></ul>
+<p><strong>欠点その1：あらゆる手段を同時に使った研究がない</strong></p>
+<ul><li>輸液バランスを最大限に減らすには、そのための可能な手段をすべて使うほかない（Fig. 2）。</li><li>しかし研究が制限したのは、蘇生輸液のみ、あるいは維持輸液と補充輸液のみ、あるいはプロトコル化された除水のみであって、3つを同時に行ったものは一つもない。</li><li>CLASSIC 研究では、輸液制限が輸液ボーラスの注入に限られた。その結果、<strong>投与総量は群間でほとんど違わず</strong>（<strong>5日目で制限群が節約したのは 700 mL のみ</strong>）、アウトカムの差を観察する見込みを減らした。</li><li>逆に RADAR-2 研究では、維持輸液の制限と除水に基づく戦略が、累積輸液バランスをより大きく減らした（5日目で 3300 mL）。</li></ul>
+<p><strong>欠点その2：患者特性に応じた個別化がない</strong></p>
+<ul><li><strong>これらの研究は患者特性に応じて戦略を個別化していない</strong>。</li><li>ARDS 患者のように輸液蓄積のリスクがとくに高い患者を組み入れた研究もあれば、保存的戦略の期待される利益が必然的に小さい患者を含む区別のない集団で行われた研究もある。</li><li>また、患者の生理学的状態に基づく個別化された輸液制限を検証した研究は一つもない。たとえば前負荷反応性は輸液バランスを減らすことが知られているのに、考慮されてこなかった。</li></ul>
+<p><strong>著者らの結論</strong></p>
+<ul><li>累積輸液バランスの低減が敗血症性ショック患者で追求すべき目標であるように見えるならば、それを達成する戦略は標準化されるべきではない。</li><li>著者らは、蘇生の全相を考慮し（Fig. 2）、かつ個別化された（Fig. 1）方法を提案する。</li></ul>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-023-04363-3" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-023-04363-3）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 敗血症性ショックの蘇生の段階に応じた累積輸液バランス低減の手段（原図・無改変。© The Author(s) 2023, CC BY 4.0） 横軸は Days（日数）、縦軸は Volume（容量）。薄青の縦帯が左から Resuscitation → Optimisation → Stabilisation → Evacuation の4相（ROSE）を示す。青い棒グラフが日々の輸液の入り（0 の上）と出（0 の下）を表し、蘇生相の入りが最大で日を追って小さくなり、evacuation 相では出が入りを上回って下向きに伸びる。青い折れ線が「Fluid balance（累積輸液バランス）」で、蘇生相で急峻に上昇し、安定化相で頭打ちになり、evacuation 相で下降する。赤い丸番号1〜5の吹き出しが、この曲線を押し下げる5つのてこを、それぞれ対応する時点へ矢印で指している。各吹き出しには、さらに具体的な手段を記した赤枠の付箋が付く。全ボックスの文言は下記の表に起こした。 原図キャプションの略語：CVP central venous pressure, PAOP pulmonary artery occlusion pressure</p>
+</div>
+<h4>Table 11-1. Fig. 2 の5つのてこ（全ボックス）</h4>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>相</th><th>標語（原文）</th><th>和訳</th><th>具体的手段（原文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Resuscitation（蘇生）</td><td>No ineffective fluid !</td><td>効かない輸液を入れるな</td><td>Detect preload responsiveness</td><td>前負荷反応性を検出する</td></tr>
+<tr><td>2</td><td>Resuscitation（蘇生）</td><td>Increase fluid efficacy !</td><td>輸液の効きを上げよ</td><td>Consider early norepinephrine infusion</td><td>早期ノルアドレナリン投与を考慮する</td></tr>
+<tr><td>3</td><td>Resuscitation〜Optimisation</td><td>No fluid if the risk is too high !</td><td>リスクが高すぎるなら輸液しない</td><td>Assess lung water and permeability, CVP or PAOP</td><td>肺水分量と透過性、CVP または PAOP を評価する</td></tr>
+<tr><td>4</td><td>Stabilisation〜Evacuation</td><td>Avoid unnecessary fluid !</td><td>不必要な輸液を避けよ</td><td>Reduce maintenance fluids at maximum</td><td>維持輸液を最大限に減らす</td></tr>
+<tr><td>5</td><td>Evacuation（除水）</td><td>Remove excessive fluid !</td><td>過剰な輸液を除去せよ</td><td>Consider individualized fluid removal</td><td>個別化された除水を考慮する</td></tr>
+</tbody></table></div>
+<h3>12. 結論（原文の要旨）🏁</h3>
+<ul><li><strong>その見かけの単純さにもかかわらず、輸液療法は複雑である</strong>。</li><li><strong>輸液は薬である</strong>。<strong>効果は一定せず、注目すべき有害作用を備えている</strong>。</li><li>どんな薬とも同じく、正しい用量で、それを必要とする患者にのみ投与されねばならない。</li><li>輸液療法を導くには、全患者に同一の戦略に頼るのではなく、決定を個別化することが可能である。</li><li><strong>考慮すべきもの</strong>：</li><li><strong>患者の特性</strong>（血管拡張の重症度、輸液蓄積の程度）</li><li><strong>患者の臨床経過</strong>（初期低容量血症の深さを評価するため）</li><li><strong>患者の生理学的条件</strong>（とくに前負荷反応性）</li><li>これらを考慮すれば、論理的には有効かつ安全な輸液の投与と除去が確保されるはずである。</li><li>これらの個別の基準が考慮されないならば、様々な輸液療法戦略を検討する臨床研究は、今も今後も陰性であり続ける。</li></ul>
+<h3>13. 「エビデンスに基づく部分」と「著者の慣習」の切り分け 🧭</h3>
+<p>本稿は "How I do it" 型であり、<strong>ガイドラインではない</strong>。項目ごとに、原著が引用文献で裏づけている部分と、著者らの流儀にとどまる部分を分ける。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th><th>裏づけの性質</th><th>JC での扱い</th></tr></thead>
+<tbody>
+<tr><td>生食の大量投与で高Cl性アシデミア</td><td>70 kg で HCO₃⁻ が 10 mmol/L 下がるには 12 L</td><td>引用文献あり（O'Dell ら、小児髄膜炎菌性敗血症の蘇生後相の観察）</td><td>数値の由来が小児の観察データである点に注意。成人敗血症で直接検証されたものではない</td></tr>
+<tr><td>バランス製剤の腎不全・死亡低減</td><td>複数研究が示唆</td><td>引用文献あり（Yunos、SMART、Raghunathan、SMART 敗血症二次解析）</td><td>SMART の限界（単施設・クラスタランダム化・敗血症の同定）を著者自身が明記</td></tr>
+<tr><td>PLUS が陰性だった理由の解釈</td><td>輸液が少なく Cl 差が付かなかった</td><td>著者らの事後的解釈</td><td>仮説であり検証されていない。「量と Cl で条件づければ陽性だったかも」は反実仮想</td></tr>
+<tr><td>Cl ≥ 110 mmol/L でバランス製剤</td><td>Fig. 1 のみ</td><td>根拠文献なし</td><td>著者らの実務的カットオフ</td></tr>
+<tr><td>外傷性脳損傷では非バランス製剤</td><td>本文</td><td>引用文献 [17] は Zampieri ら BaSICS の「輸液ボーラス速度」論文であり、輸液の種類と脳損傷を扱う論文ではない</td><td>主張自体は広く受け入れられているが、<mark class="hl">本稿の引用は対応していない</mark></td></tr>
+<tr><td>30 mL/kg は観察研究1本のみに基づく</td><td>本文</td><td>引用文献あり（Kuttab ら CCM 2019）</td><td>正確な批判</td></tr>
+<tr><td>「10 mL/kg を1時間で投与し再評価」</td><td>Fig. 1 のみ</td><td>根拠文献なし</td><td>著者らの慣習</td></tr>
+<tr><td>前負荷反応性は急速に消失</td><td>27 mL/kg 後、組入時 70%、4時間後 &lt; 20%</td><td>引用文献あり（ANDROMEDA-SHOCK 二次解析、FCREV）</td><td>定量的で強い</td></tr>
+<tr><td>PPV/SVV の6条件</td><td>本文</td><td>引用文献あり（De Backer ら Anesthesiology 2009 ほか）</td><td>条件は確立。Fig. 1 は IAH を落としているので本文を採る</td></tr>
+<tr><td>EEXPO 15秒</td><td>本文</td><td>引用文献あり（Gavelli らのメタ解析）</td><td>確立</td></tr>
+<tr><td>Vt チャレンジ 6 → 8 mL/kg</td><td>本文</td><td>引用文献あり（Myatra ら CCM 2017）</td><td>確立</td></tr>
+<tr><td>ミニ輸液チャレンジ 100〜150 mL</td><td>本文</td><td>引用文献あり（Messina らのメタ解析）</td><td>確立。「繰り返さない」は著者らの判断</td></tr>
+<tr><td>ノルアドレナリンの fluid-like effect</td><td>stressed volume 増加・平均体循環圧上昇</td><td>引用文献あり（Persichini ら CCM 2012、Adda ら Crit Care 2021）</td><td>生理学的に確立</td></tr>
+<tr><td>早期ノルアドレナリンの生存改善</td><td>傾向スコア研究1本</td><td>観察研究。反対の観察結果（Yeo ら）も本文に併記</td><td>未確立。著者も断定していない</td></tr>
+<tr><td>拡張期圧 &lt; 40 mmHg を早期昇圧薬の目安に</td><td>Fig. 1 と本文（例として）</td><td>「例（e.g.）」として提示され、検証データなし</td><td>著者らの慣習</td></tr>
+<tr><td>250 mL の効果が10分で消失</td><td>本文</td><td>引用文献あり（Aya ら CCM 2016、周術期）</td><td>周術期データ。敗血症では「さらに短い可能性」と推測にとどまる</td></tr>
+<tr><td>ICU 内の MAP 目標 ≥ 75–80 mmHg</td><td>Fig. 1 のみ</td><td>根拠文献なし</td><td><mark class="hl">著者らの慣習。SSC の 65 mmHg と異なる</mark></td></tr>
+<tr><td>高血圧既往で MAP ≥ 80–85 mmHg</td><td>Fig. 1、本文は「調整しうる」</td><td>引用文献あり（SEPSISPAM）</td><td>SEPSISPAM は全体で死亡差なし。サブグループの腎代替療法の減少に基づく</td></tr>
+<tr><td>PCO₂ gap &lt; 6 mmHg</td><td>Fig. 1 のみ</td><td>本文に閾値の記載なし</td><td>集中治療で広く使われる目安だが本稿は根拠を示さない</td></tr>
+<tr><td>PCO₂ gap / C(O₂) gap &lt; 1.4</td><td>本文と Fig. 1</td><td>引用文献あり（Mekontso-Dessap ら ICM 2002）。本文は「異なる閾値も報告されている」と留保</td><td>留保付きで扱う</td></tr>
+<tr><td>右室拡大を輸液中止基準に</td><td>Fig. 1 のみ</td><td>本文に記載なし</td><td>著者らの慣習</td></tr>
+<tr><td>除水は前負荷非反応性を条件に</td><td>本文</td><td>引用文献あり（Monnet ら Ann Intensive Care 2016：PLR 陰性なら限外濾過で透析中低血圧が起きなかった）</td><td>観察研究1本だが機序は明快</td></tr>
+<tr><td>PAL 戦略（IAP に合わせた PEEP＋高張アルブミン＋フロセミド）</td><td>本文</td><td>引用文献あり（Cordemans ら、パイロット研究・学会抄録形式）</td><td><mark class="hl">パイロット研究1本。ルーチン化の根拠にはならない</mark></td></tr>
+<tr><td>個別化戦略そのものの有効性</td><td>本稿全体の主張</td><td><mark class="hl">RCT で検証されていない。著者ら自身が「患者の生理学的状態に基づく個別化を検証した研究は一つもない」と明記</mark></td><td>本稿の最大の限界</td></tr>
+</tbody></table></div>
+<h3>14. 段階別の総括 — 何を見て、何をどれだけ入れ、いつ引くか 📋</h3>
+<p>原著本文と Fig. 1・Fig. 2 を、ROSE の4相に沿って実測値と対応づけて統合した表（本ノートによる整理。原著に同じ形の表は存在しない）。</p>
+<div class="tw"><table>
+<thead><tr><th>相</th><th>判断すること</th><th>見る実測値・基準（原著の数値）</th><th>輸液の種類と量</th><th>昇圧薬</th><th>止める／引く基準</th></tr></thead>
+<tbody>
+<tr><td>Resuscitation（蘇生）</td><td>まず入れる。低容量血症は普遍的なので前負荷反応性の検査は正当化されず蘇生を遅らせる</td><td>SSC：低血圧または乳酸上昇があれば3時間以内に 30 mL/kg（観察研究1本のみに基づく）。著者らの実践：その他の症例では 10 mL/kg を1時間で投与し再評価</td><td>晶質液が第一選択。Cl ≥ 110 mmol/L または大量投与ならバランス晶質液、低アルブミン血症ならアルブミンを考慮、それ以外は生理食塩水。外傷性脳損傷と低Cl血症では非バランス晶質液</td><td>最も低血圧の患者、拡張期圧 &lt; 40 mmHg、diastolic shock index（HR ÷ DBP）高値では早期開始を考慮</td><td>明らかな低容量血症・体液喪失があれば速度を上げる。輸液蓄積リスクが高ければ速度を下げる</td></tr>
+<tr><td>Optimisation（最適化）</td><td>初期輸液の後は必ず前負荷反応性を測る。急速に消失するため遅らせない</td><td>ANDROMEDA-SHOCK：27 mL/kg 後、組入時 70% が反応性あり、4時間後は &lt; 20%。輸液ボーラスの CO 効果は 250 mL で10分（周術期）</td><td>反応性がある場合にのみ追加。ミニ輸液チャレンジは 100〜150 mL で引き戻せない</td><td>ノルアドレナリン下の容量負荷は収縮した静脈領域で起こるため前負荷への効果が大きい</td><td>蓄積リスクが高ければミニ輸液チャレンジを繰り返さない</td></tr>
+<tr><td>Stabilisation（安定化）</td><td>安全基準を見る。輸液のリスクが期待利益を上回るかを判断する</td><td>ARDS：PAOP・EVLW・肺血管透過性・P/F・右室拡大。腹部：IAP。全例：累積輸液バランス・CVP。目標：ICU 内 MAP ≥ 75–80 mmHg（高血圧既往 ≥ 80–85）、SvO₂/ScvO₂ ≥ 60/70%、PCO₂ gap &lt; 6 mmHg、PCO₂ gap / C(O₂) gap &lt; 1.4</td><td>維持輸液を最大限に減らす（Fig. 2 のてこ4）。ICU で注入される輸液の大きな割合は維持・補充輸液</td><td>CVP が高い患者ではより高い MAP を狙うことが正当化されうる</td><td>P/F 単独は不可（肺の硬化・微小血栓シャントでも下がる）。肺エコー B-line は間質性浮腫の診断には信頼できるが総肺水分量の定量には不向き</td></tr>
+<tr><td>Evacuation（除水）</td><td>蓄積が大きい患者で、前負荷非反応性を条件に引く</td><td>除水を考える所見：左室充満圧高値・CVP 高値・肺水分量高値・CT の肺うっ血・IAP 上昇。軟部組織浮腫は要件でなく、血管内枯渇と併存しうる</td><td>利尿薬が第一。無尿・利尿薬無効なら限外濾過。低アルブミン血症なら 20% 高張アルブミンが相乗しうる。PAL 戦略（IAP に合わせた PEEP＋高張アルブミン＋フロセミド）は累積バランス陰性化・肺水分量と IAP 低下</td><td>血行動態が安定し昇圧薬が低用量か中止であること</td><td>前負荷反応性があれば引かない。明らかな蓄積がなければ引かない。PLR 陰性なら限外濾過で透析中低血圧が起きなかった</td></tr>
+</tbody></table></div>
+<h4>参考：試験別の輸液バランス低減量（原著本文に明記された数値のみ）</h4>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>制限した対象</th><th>5日目の累積輸液バランス低減</th><th>死亡への影響</th></tr></thead>
+<tbody>
+<tr><td>CLASSIC</td><td>輸液ボーラスのみ</td><td>700 mL</td><td>差なし</td></tr>
+<tr><td>RADAR-2</td><td>維持輸液の制限＋除水</td><td>3300 mL</td><td>本稿では言及なし</td></tr>
+<tr><td>CLOVERS</td><td>制限的輸液＋早期昇圧薬（対 リベラル）</td><td>最初の24時間の輸液が少ない（数値の記載なし）</td><td>90日死亡に群間差なし</td></tr>
+<tr><td>PLUS</td><td>輸液の種類（PlasmaLyte 対 生食）</td><td>最初の2日間の投与は 1日 2 L 未満</td><td>死亡・急性腎不全リスクに差なし（敗血症患者でも同様）</td></tr>
+</tbody></table></div>
+<h3>15. 初学者向けの補足 🧩</h3>
+<div class="call note"><span class="lab">補足</span>
+<p>ここから下は論文本文の記述ではなく、一般的な背景知識である 本稿を読むために必要だが、原著本文には書かれていない事項を分離して記す。<strong>論文の主張と混同しないこと</strong>。</p>
+<ul><li><strong>ROSE 概念の出典</strong>：Malbrain ら（Ann Intensive Care 2018）が提唱した「4つの D と輸液療法の4相」。本稿は引用文献 [2] としてこれを挙げている。</li><li>stressed volume / unstressed volume：血管系に入っている血液のうち、血管壁を伸展させて圧を生んでいる分が stressed volume、壁を伸展させずに単に容器を満たしている分が unstressed volume。両者の比率は静脈トーヌスで変わる。ノルアドレナリンは静脈を収縮させて unstressed → stressed へ変換するため、輸液を入れなくても静脈還流の駆動圧（平均体循環充満圧 − 右房圧）を上げられる。</li><li><strong>PCO₂ gap（静脈-動脈 PCO₂ 較差）</strong>：心拍出量が下がると組織で産生された CO₂ の洗い出しが滞り、静脈側の PCO₂ が上がる。&lt; 6 mmHg は「灌流が十分」の目安として広く使われる。</li><li><strong>PCO₂ gap / C(O₂) gap</strong>：呼吸商の代用。嫌気性代謝が起これば産生 CO₂ が消費 O₂ を上回るため、この比が上がる。</li><li><strong>SEPSISPAM（Asfar ら NEJM 2014）</strong>：敗血症性ショックで MAP 目標 80–85 mmHg 群と 65–70 mmHg 群を比較。28日・90日死亡に差はなく、慢性高血圧のサブグループで腎代替療法が減った。本稿の「MAP 目標を高血圧既往に合わせて調整しうる」はこれを指す。</li><li><strong>B-line</strong>：肺エコーで胸膜から画面下端まで伸びる高輝度の縦線。小葉間隔壁の肥厚（間質性浮腫）を反映する。</li><li><strong>本稿は成人を対象としており、小児の輸液戦略は扱っていない</strong>。</li></ul>
+</div>
+<h2><span class="sec-emoji">🔗</span>🔍 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本稿（Monnet 2023）の立場</th><th>Vault 内の関連ノートの内容</th><th>整合／対立</th></tr></thead>
+<tbody>
+<tr><td>バランス晶質液を全例に使うか</td><td>個別化すべき。大量投与かつ Cl 上昇例に取っておく</td><td>SMART は敗血症で 30日死亡・腎複合アウトカムを改善。ESICM 輸液ガイドライン Part1 はバランス晶質液を推奨</td><td><strong>対立</strong>。本稿は SMART の限界（単施設・個別ランダム化なし）を根拠にガイドラインの全例推奨に異を唱える少数意見</td></tr>
+<tr><td>初期輸液 30 mL/kg</td><td>恣意的で、蘇生不足と輸液過剰の両方を招く</td><td>ESICM Part2 は初期蘇生輸液量を扱う。「敗血症で 30 mL/kg 輸液が不足すると予後悪化（CCM 2019）」は同じ Kuttab らの観察研究</td><td><strong>部分的に整合</strong>。本稿も同じ観察研究を引き、「患者の状態だけで減らすと死亡が増えうる」と併記している</td></tr>
+<tr><td>CLASSIC の解釈</td><td>制限がボーラスに限られたため 5日目で 700 mL しか差が付かず、差を検出する見込みが減った</td><td>CLASSIC 本体（NEJM 2022）と1年追跡（ICM 2023）はいずれも制限で予後が変わらないと報告</td><td><strong>整合</strong>。本稿は「陰性の理由」を実行の弱さに帰す解釈を加える</td></tr>
+<tr><td>早期ノルアドレナリン</td><td>最も低血圧・拡張期圧 &lt; 40 mmHg の患者で考慮。CLOVERS からは単独効果を推論できない</td><td>CENSER（CCM 2019）は早期ノルアドレナリンでショック制御を改善。「敗血症性ショックにおける早期ノルアドレナリン開始（CCM2019）」</td><td><strong>整合</strong>。ただし本稿は反対の観察結果（Yeo ら）も併記する慎重な立場</td></tr>
+<tr><td>PLR の位置づけ</td><td>未挿管でも使え、PPV・呼気終末CO₂・perfusion index で判定できる汎用テスト</td><td>「受動的下肢挙上（PLR）テストと輸液反応性の予測」「EtCO2変化によるPLR輸液反応性予測（メタ解析・CritCare2022）」「PLRで輸液反応性を確かめてから輸液すると72時間バランスが1.37L減る — ITTでは有意差消失（FRESH・Chest2020）」</td><td><strong>整合</strong>。FRESH が本稿の「前負荷反応性で導けば輸液バランスが減る」の直接の根拠</td></tr>
+<tr><td>PLR の限界</td><td>本稿は限界を論じていない</td><td>「腹腔内圧上昇下ではPLRが当てにならない（EEO・ミニ輸液負荷は有効・CritCare2026）」</td><td><strong>補完関係</strong>。本稿は IAH 下の PLR の限界に触れていないので、当院では後者を併せて読む必要がある</td></tr>
+<tr><td>低 Vt 下のテスト選択</td><td>Vt チャレンジ・PLR・EEXPO を推す</td><td>「低一回換気量下の輸液反応性 PPV・PLR・IVCDV・Vtチャレンジ（Crit Care2021）」「人工呼吸器を使って輸液反応性を予測する — Vtチャレンジ・EEO・PEEPテスト（エディトリアル・ICM2024）」</td><td><strong>整合</strong>。後者は PEEP テストも選択肢に挙げるが、本稿は PEEP テストに言及していない</td></tr>
+<tr><td>PEEP テスト</td><td>言及なし</td><td>「PEEPを5cmH2Oまで下げて心係数が8.6%超増えれば輸液反応性あり（PEEP-test・64例・CritCare2023）」</td><td><strong>本稿の欠落</strong>。2023年同誌の同時期の論文だが本稿には入っていない</td></tr>
+<tr><td>CVP の使い方</td><td>前負荷反応性は予測しないが、臓器血流の後方圧として意味がある。CVP 高値なら高い MAP を狙う</td><td>「CVPの忘れられた有用性（ICM2023）」「中心静脈圧（CVP）の測定と解釈（ICM2022）」</td><td><strong>整合</strong></td></tr>
+<tr><td>除水の設計</td><td>前負荷非反応性を条件に、利尿薬→限外濾過。維持輸液の削減が要</td><td>「Deresuscitation（輸液の引き）のすべて（ICM 2022）」「ショック離脱期の輸液除去 ESICMガイドライン Part3（13RCT・3推奨・ICM2025）」「重症患者の輸液デエスカレーション — リンパ排液の限界を知って除水を設計する（総説・AnnIntensiveCare2026）」</td><td><strong>整合し、かつ本稿が先行</strong>。ESICM Part3 はガイドライン化された版として読む</td></tr>
+<tr><td>輸液耐容性（fluid tolerance）</td><td>本稿は「輸液を止める基準」として実質的に同じ概念を扱うが、用語は使っていない</td><td>「fluid tolerance（輸液耐容性）という新概念 — 反応性だけを見て静脈うっ血を見ない蘇生への異議（ポジションペーパー・JCritCare2022）」</td><td><strong>概念的に整合</strong>。本稿の Fig. 1 ④が fluid tolerance の実装に相当する</td></tr>
+<tr><td>4相モデル</td><td>ROSE を採用</td><td>「静脈内輸液療法の4フェーズ概念モデル（SOSD）」「敗血症性ショックの血行動態管理を個別化する — SOSD 4相ごとのモニタリングと治療（総説・CritCare2022）」</td><td><strong>並立</strong>。ROSE と SOSD は同じ4相の別名（De Backer らは SOSD を使う）</td></tr>
+</tbody></table></div>
+<h2><span class="sec-emoji">🔎</span>🧪 批判的吟味（JCでの論点）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">本稿の推奨の少なからぬ部分は Fig. 1 にしか現れず、本文に根拠が示されていない</mark> Cl ≥ 110 mmol/L、10 mL/kg/hr、ICU 内 MAP ≥ 75–80 mmHg、右室拡大、PCO₂ gap &lt; 6 mmHg の5つは、図の中でだけ数値化されていて、本文にも引用文献にも対応する記述がない。図は本文より具体的で使いやすいぶん、<mark class="hl">根拠の薄い数値がそのまま現場のプロトコルに転写される危険が最も大きい</mark>。JC では「図から数字を拾うときは本文で裏を取る」を実演する題材にできる。</p>
+</div>
+<ol><li><strong>デザインの限界</strong>：ナラティブレビューであり、系統的検索式もエビデンスの質評価もない。引用文献104件の選択基準は示されていない。<strong>著者ら自身の論文が多数引用されている</strong>（Monnet・Teboul・Jozwiak・Gavelli・Persichini・Adda・Shi・Beurton・Lai らの筆頭・共著論文が目視で30件以上）。自グループの研究に依拠した「流儀」であることを踏まえて読む。</li></ol>
+<ol><li><strong>利益相反との関係</strong>：XM と J-LT は Pulsion Medical Systems / Getinge（経肺熱希釈式 CO モニタ PiCCO の製造元）の Medical Advisory Board メンバーであり、同社から講演料と研究費を受けている。本稿は <strong>経肺熱希釈法による EVLW・肺血管透過性指数の測定</strong>、EEXPO 試験（CO の精密測定を要する）、ICU での CO 直接測定を繰り返し推奨する。推奨の方向が利益相反の方向と一致している点は JC で指摘すべき。ただし著者らは PPV による代替（動脈ライン1本）も明記しており、モニタ依存一辺倒ではない。</li></ol>
+<ol><li><strong>図と本文の不一致が5か所ある</strong>：①PPV/SVV の条件から IAH が脱落（図）、②HR/RR が「≥ 3.6」（本文）と「&gt; 3.6」（図）、③腹臥位で Vt チャレンジが図に載っていない、④右室拡大と累積輸液バランスが図にのみ、⑤PAOP（抄録・図）と肺毛細血管圧（本文）の用語不一致。<strong>原著の校正の甘さ</strong>であり、実務では本文を優先する。</li></ol>
+<ol><li><strong>引用の対応が取れていない箇所がある</strong>：「外傷性脳損傷では非バランス晶質液を選好すべき」に付された引用 [17] は Zampieri ら BaSICS の「輸液ボーラス投与速度」を比較した JAMA 2021 論文であり、輸液の種類でも脳損傷でもない。主張自体は BaSICS の輸液種類の解析（同時発表の別論文）や SMART の TBI サブグループから支持されうるが、<strong>本稿の引用はその根拠を指していない</strong>。</li></ol>
+<ol><li>「12 L で HCO₃⁻ が 10 mmol/L 低下」の由来：引用 [15] は O'Dell ら（CCM 2007）の <strong>小児髄膜炎菌性敗血症の蘇生後相</strong>における高Cl血症の研究。<strong>70 kg 成人への外挿は原著が明示していない</strong>。この数値は当院でバランス製剤の適応を絞る根拠として最もよく引かれるが、由来を知った上で使うべき。</li></ol>
+<ol><li><strong>PLUS の解釈は反実仮想である</strong>：「輸液量と Cl 濃度で条件づけていれば陽性だったかもしれない」は事後的な仮説であり、検証されていない。同じ論法で、どんな陰性試験も「対象を絞れば陽性だったかもしれない」と言える。この主張が検証可能な形（Cl 上昇例に限定した RCT）に落ちていない点が本稿の弱さ。</li></ol>
+<ol><li><strong>CLOVERS の扱いが非対称である</strong>：著者らは CLOVERS の陰性結果を「介入が束ねられているから早期ノルアドレナリン単独の効果は推論できない」として退けるが、同じ論理は「早期ノルアドレナリンが有益である」という主張にも等しく及ぶ。観察研究（傾向スコア）を肯定側の根拠に使いつつ、RCT の陰性結果を方法論で退けるのは、証拠の重みづけとして一貫していない。</li></ol>
+<ol><li><strong>個別化戦略そのものが未検証である</strong>：著者ら自身が「患者の生理学的状態に基づく個別化された輸液制限を検証した研究は一つもない」と書いている。<strong>本稿の中心的主張は仮説であり、実践の推奨ではない</strong>。結論の「これらの基準を考慮しないなら臨床研究は陰性であり続ける」は強い断言だが、その根拠は提示されていない。</li></ol>
+<ol><li><strong>「輸液の効果は10分で消える」の外挿</strong>：Aya ら（CCM 2016）の 250 mL は<strong>周術期患者</strong>のデータ。敗血症では「さらに短い可能性がある」と推測にとどまる。この数字を敗血症患者に対して断定的に語らないこと。</li></ol>
+<ol><li><strong>PAL 戦略の根拠が弱い</strong>：IAP に合わせた PEEP＋高張アルブミン＋フロセミドの組み合わせは、Cordemans ら（Ann Intensive Care 2012, Suppl）の<strong>パイロット研究1本</strong>。累積バランス陰性化・肺水分量と IAP の低下という中間アウトカムのみで、患者アウトカムは示されていない。</li></ol>
+<ol><li><strong>除水の安全性の根拠</strong>：「PLR 陰性なら限外濾過で透析中低血圧が起きなかった」は Monnet ら（Ann Intensive Care 2016）の観察研究1本。著者ら自身、「透析中低血圧には他の要因も関与しうる」と留保している。前負荷非反応性は「引いてよい」の十分条件ではなく、「引くな」の警告としてのみ強い、というのが本稿の慎重な読み方である。</li></ol>
+<ol><li><strong>原著の誤植</strong>：除水対象を列挙する箇所で "high left ventricular filling pressure, high CVP, very lung water" と書かれており、"very high lung water" の脱字と考えられる。また前負荷反応性の消失を述べる文が "…after the onset of septic shock and it [37, 38]." と途中で切れている。査読・校正の甘さの傍証。</li></ol>
+<ol><li><strong>本稿が扱っていないこと</strong>：小児、輸液のグリコカリックスへの影響、VExUS などの静脈うっ血エコー評価、PEEP テスト、fluid tolerance という用語、高張食塩水、輸液の投与速度そのものを比較した研究の内容。当院のプロトコルを作るなら、これらは別ソースで補う必要がある。</li></ol>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>敗血症性ショックにおける輸液管理とスチュワードシップの原則（4つの D と輸液療法の4相＝ROSE の原典）</td><td>Malbrain M ら. Ann Intensive Care. 2018;8(1):66</td></tr>
+<tr><td>4</td><td>SSC 国際ガイドライン 2021 エグゼクティブサマリー</td><td>Evans L ら. Crit Care Med. 2021;49(11):1974–82</td></tr>
+<tr><td>5</td><td>敗血症性ショックの血行動態管理の個別化を求める提言</td><td>De Backer D ら. Crit Care. 2022;26(1):372</td></tr>
+<tr><td>11</td><td>重症成人におけるバランス晶質液 対 生理食塩水（SMART）</td><td>Semler MW ら. N Engl J Med. 2018;378(9):829–39</td></tr>
+<tr><td>13</td><td>敗血症におけるバランス晶質液 対 生食（SMART の二次解析）</td><td>Brown RM ら. Am J Respir Crit Care Med. 2019;200(12):1487–95</td></tr>
+<tr><td>15</td><td>小児髄膜炎菌性敗血症の蘇生後相では高Cl血症が代謝性アシドーシスの主因（12 L の数字の出典）</td><td>O'Dell E ら. Crit Care Med. 2007;35(10):2390–4</td></tr>
+<tr><td>18</td><td>重症成人におけるバランス多電解質液 対 生食（PLUS）</td><td>Finfer S ら. N Engl J Med. 2022;386(9):815–26</td></tr>
+<tr><td>22</td><td>血管外肺水分量は ARDS の独立した予後因子</td><td>Jozwiak M ら. Crit Care Med. 2013;41(2):472–80</td></tr>
+<tr><td>25</td><td>敗血症性ショック ICU 患者における輸液制限（CLASSIC）</td><td>Meyhoff TS ら. N Engl J Med. 2022;386(26):2459–70</td></tr>
+<tr><td>27</td><td>保存的輸液投与と de-resuscitation の実行可能性（RADAR-2）</td><td>Silversides JA ら. Intensive Care Med. 2022;48(2):190–200</td></tr>
+<tr><td>31</td><td>敗血症誘発性低血圧への早期制限的 対 リベラル輸液管理（CLOVERS）</td><td>Shapiro NI ら. N Engl J Med. 2023;388(6):499–510</td></tr>
+<tr><td>32</td><td>敗血症性低血圧・ショックにおける輸液反応性評価（FRESH）</td><td>Douglas IS ら. Chest. 2020;158(4):1431–45</td></tr>
+<tr><td>34</td><td>重症敗血症・敗血症性ショックにおける輸液蘇生の評価と予測因子（30 mL/kg の根拠となった観察研究）</td><td>Kuttab HI ら. Crit Care Med. 2019;47(11):1582–90</td></tr>
+<tr><td>38</td><td>早期敗血症性ショック蘇生における輸液反応性の系統的評価（ANDROMEDA-SHOCK 二次解析）</td><td>Kattan E ら. Crit Care. 2020;24(1):23</td></tr>
+<tr><td>39</td><td>輸液反応性の予測 — 何が新しいか</td><td>Monnet X, Shi R, Teboul JL. Ann Intensive Care. 2022;12(1):46</td></tr>
+<tr><td>40</td><td>呼吸数が SVV に与える影響（HR/RR 比 3.6 の出典）</td><td>De Backer D ら. Anesthesiology. 2009;110(5):1092–7</td></tr>
+<tr><td>41</td><td>換気患者における輸液反応性予測のための心エコー指標の比較</td><td>Vignon P ら. Am J Respir Crit Care Med. 2017;195(8):1022–32</td></tr>
+<tr><td>42</td><td>呼気終末閉塞試験の系統的レビュー・メタ解析</td><td>Gavelli F ら. Ann Intensive Care. 2020;10(1):65</td></tr>
+<tr><td>44</td><td>低一回換気量換気下の「Vt チャレンジ」による輸液反応性予測</td><td>Myatra SN ら. Crit Care Med. 2017;45(3):415–21</td></tr>
+<tr><td>47</td><td>腹臥位 ARDS 患者における Trendelenburg 手技</td><td>Yonis H ら. Crit Care. 2017;21(1):295</td></tr>
+<tr><td>48</td><td>腹臥位 ARDS 患者における Vt チャレンジ</td><td>Shi R ら. Crit Care. 2022;26(1):219</td></tr>
+<tr><td>51</td><td>ミニ輸液チャレンジ後の PPV・SVV 低下による輸液反応性予測</td><td>Mallat J ら. Br J Anaesth. 2015;115(3):449–56</td></tr>
+<tr><td>52</td><td>PLR テストにおいて呼気終末CO₂ は動脈圧より優れる</td><td>Monnet X ら. Intensive Care Med. 2013;39(1):93–100</td></tr>
+<tr><td>55</td><td>呼気終末＋吸気終末閉塞と心エコーの組み合わせ</td><td>Jozwiak M ら. Crit Care Med. 2017;45(11):e1131–8</td></tr>
+<tr><td>57</td><td>EEXPO 試験とミニ輸液チャレンジの信頼性のメタ解析</td><td>Messina A ら. Crit Care. 2019;23(1):264</td></tr>
+<tr><td>59</td><td>敗血症性ショックにおけるノルアドレナリンの平均体循環圧と静脈還流への効果</td><td>Persichini R ら. Crit Care Med. 2012;40(12):3146–53</td></tr>
+<tr><td>60</td><td>ノルアドレナリンは容量負荷の平均体循環圧への効果を増強する</td><td>Adda I ら. Crit Care. 2021;25(1):302</td></tr>
+<tr><td>63</td><td>敗血症性ショックにおけるごく早期のノルアドレナリン開始（傾向スコア解析）</td><td>Ospina-Tascon GA ら. Crit Care. 2020;24(1):52</td></tr>
+<tr><td>64</td><td>輸液負荷から1時間以内の昇圧薬開始は死亡増加と関連（反対の観察結果）</td><td>Yeo HJ ら. Crit Care Med. 2022;50(4):e351–60</td></tr>
+<tr><td>65</td><td>Diastolic shock index と敗血症性ショックの臨床アウトカム</td><td>Ospina-Tascon GA ら. Ann Intensive Care. 2020;10(1):41</td></tr>
+<tr><td>66</td><td>輸液チャレンジの薬力学的解析（250 mL の効果が10分で消失）</td><td>Aya HD ら. Crit Care Med. 2016;44(5):880–91</td></tr>
+<tr><td>70</td><td>血管外肺水分量の値は死亡と関連（系統的レビュー・メタ解析）</td><td>Gavelli F ら. Crit Care. 2022;26(1):202</td></tr>
+<tr><td>75</td><td>腹腔内圧上昇と腹部コンパートメント症候群 WSACS コンセンサス定義とガイドライン</td><td>Kirkpatrick AW ら. Intensive Care Med. 2013;39(7):1190–206</td></tr>
+<tr><td>77</td><td>CVP を輸液管理に使うべきか — 10の問いへの10の答え</td><td>De Backer D, Vincent JL. Crit Care. 2018;22(1):43</td></tr>
+<tr><td>83</td><td>動脈圧は容量負荷による CO 変化はモニタできるがノルアドレナリンによる変化はできない</td><td>Monnet X ら. Crit Care Med. 2011;39:1394–9</td></tr>
+<tr><td>84</td><td>敗血症性ショックにおける高い血圧目標 対 低い血圧目標（SEPSISPAM）</td><td>Asfar P ら. N Engl J Med. 2014;370(17):1583–93</td></tr>
+<tr><td>97</td><td>静脈動脈 PCO₂ 較差と動静脈 O₂ 含量較差の組み合わせによる嫌気性代謝の検出（&lt; 1.4 の出典）</td><td>Mekontso-Dessap A ら. Intensive Care Med. 2002;28(3):272–7</td></tr>
+<tr><td>99</td><td>維持輸液と fluid creep は蘇生輸液より大きな輸液・Na・Cl 負荷を課す</td><td>Van Regenmortel N ら. Intensive Care Med. 2018;44(4):409–17</td></tr>
+<tr><td>101</td><td>de-resuscitation について知っておくべきすべて</td><td>Malbrain M, Martin G, Ostermann M. Intensive Care Med. 2022;48(12):1781–6</td></tr>
+<tr><td>102</td><td>急性肺傷害と腹腔内圧上昇のある患者で陰性バランスを目指す（PAL 戦略）</td><td>Cordemans C ら. Ann Intensive Care. 2012;2(Suppl 1):S15</td></tr>
+<tr><td>103</td><td>重症患者の除水を導く PLR テスト</td><td>Monnet X ら. Ann Intensive Care. 2016;6(1):46</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">輸液は薬である。効かない患者に入れず（前負荷反応性）、効きを上げ（早期ノルアドレナリン）、リスクが高ければ入れず（肺水分量・IAP・CVP）、不要な輸液を避け（維持輸液の削減）、余った分は前負荷非反応性を確かめてから引く</mark> —— これが Fig. 2 の5つのてこであり、本稿の全内容がここに収まる。</p>
+</div>
+<ul><li><mark class="hl">バランス晶質液は「全例」ではなく「大量投与かつ Cl ≥ 110 mmol/L」に取っておく。そのために Cl を測る</mark>（70 kg で HCO₃⁻ が 10 下がるには 12 L 要る）。外傷性脳損傷と低Cl血症では生食。</li><li><mark class="hl"><strong>30 mL/kg は出発点であって処方ではない</strong></mark>。腹膜炎と肺炎で必要量は違う。ただし「患者の状態だけを見て減らす」判断は死亡を増やしうる。</li><li><mark class="hl">初期は測らず入れる。初期輸液が終わったら必ず測る</mark> —— ANDROMEDA-SHOCK で 27 mL/kg 投与後 70% が反応性ありでも、4時間後には 20% 未満。</li><li><mark class="hl">動脈ライン1本あれば PPV で PLR・Vt チャレンジ・ミニ輸液チャレンジが回る</mark>。PPV/SVV の絶対値が使えるのはショック患者の少数派だけ。</li><li><mark class="hl">ミニ輸液チャレンジの 100〜150 mL は引き戻せない。蓄積リスクが高ければ繰り返さない</mark>。</li><li><mark class="hl">輸液の効果は 250 mL で10分（周術期）。敗血症ではさらに短い可能性がある</mark> —— 「輸液で血圧を維持する」戦略の限界を数字で示せる。</li><li><mark class="hl"><strong>輸液の効果判定は MAP ではなく脈圧・CO で見る</strong></mark> —— 交感神経系が MAP を一定に保とうとするため。</li><li><mark class="hl">除水は「前負荷反応性がないこと」を条件にする。軟部組織浮腫があっても血管内は枯渇していることがある</mark>。</li><li><strong>本稿はガイドラインではない</strong>。Fig. 1 の数値のうち Cl 110 mmol/L・10 mL/kg/hr・ICU 内 MAP 75–80 mmHg・右室拡大・PCO₂ gap 6 mmHg には本文の根拠がなく、著者らの慣習である。</li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックのごく初期</td><td>低容量血症は普遍的。前負荷反応性の検査は蘇生を遅らせる</td><td>まず入れる。明らかな低容量血症・体液喪失があれば速度を上げ、蓄積リスクが高ければ速度を下げる（著者らの実践：その他は 10 mL/kg を1時間）</td></tr>
+<tr><td>どの輸液を選ぶか</td><td>投与量が大きいか、Cl ≥ 110 mmol/L か、低アルブミン血症か</td><td>大量投与または Cl 高値ならバランス晶質液、低アルブミン血症ならアルブミンを考慮、外傷性脳損傷・低Cl血症なら生食、その他は生食</td></tr>
+<tr><td>初期輸液が終わった</td><td>前負荷反応性は急速に消失する。4時間で 20% 未満になる</td><td>直ちに前負荷反応性を評価する。以後は反応性がある場合にのみ追加する</td></tr>
+<tr><td>患者が未挿管</td><td>心肺相互作用に基づくテストは使えない</td><td>PLR テストまたはミニ輸液チャレンジ</td></tr>
+<tr><td>挿管され、自発呼吸なし・Vt ≥ 8・Crs ≥ 30・IAH なし・洞調律・HR/RR ≥ 3.6</td><td>6条件をすべて満たすか</td><td>PPV / SVV の絶対値で判定</td></tr>
+<tr><td>挿管されているが上の6条件を満たさない</td><td>CO モニタがあるか</td><td>CO モニタなし → Vt チャレンジ／PLR（PI または PPV）／ミニ輸液チャレンジ（PPV）。CO モニタあり → EEXPO も選択肢</td></tr>
+<tr><td>不整脈がある、あるいは Vt・PEEP が制約される</td><td>15秒の呼吸中断に耐えられるか</td><td>耐えられれば EEXPO 試験（CO の精密測定が必要）。心エコーなら呼気終末＋吸気終末ポーズを組み合わせる</td></tr>
+<tr><td>輸液蓄積のリスクが高い</td><td>100〜150 mL は引き戻せない</td><td>ミニ輸液チャレンジを繰り返さない</td></tr>
+<tr><td>腹臥位</td><td>通常のテストが使いにくい</td><td>EEXPO 試験または Trendelenburg 手技（検証は乏しい）。本文では Vt チャレンジも妥当</td></tr>
+<tr><td>血圧が上がらない／著明な血管拡張</td><td>拡張期圧 &lt; 40 mmHg か、diastolic shock index（HR ÷ DBP）が高いか</td><td>早期ノルアドレナリンを考慮（stressed volume を増やす fluid-like effect）</td></tr>
+<tr><td>ARDS で追加輸液を迷う</td><td>P/F だけを見ていないか</td><td>PAOP・肺水分量と透過性・右室拡大も見る。P/F は肺の硬化・微小血栓シャントでも下がる</td></tr>
+<tr><td>腹部病態で追加輸液を迷う</td><td>IAP を測っているか</td><td>IAP を測り、上昇していればボーラスを控える</td></tr>
+<tr><td>安定化相に入った</td><td>累積輸液バランスと CVP はどうか</td><td>維持輸液を最大限に減らす。CVP が高ければより高い MAP を狙う</td></tr>
+<tr><td>輸液が明らかに蓄積している</td><td>血行動態は安定し昇圧薬は低用量／中止か。前負荷反応性は消えているか</td><td>両方を満たせば除水へ。利尿薬が第一、無尿・利尿薬無効なら限外濾過、低アルブミン血症なら 20% 高張アルブミンを併用</td></tr>
+<tr><td>除水中に血圧が下がる</td><td>前負荷反応性が残っていないか</td><td>前負荷反応性があるなら追加の除水をしない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

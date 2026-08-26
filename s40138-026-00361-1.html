@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症性ショックの輸液制限と脱蘇生を5ステップで実行する — 救急外来から使うROSEモデル運用指針（レビュー・CurrEmergHospMedRep2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s40138-026-00361-1.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症性ショックの輸液制限と脱蘇生を5ステップで実行する — 救急外来から使うROSEモデル運用指針（レビュー・CurrEmergHospMedRep2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Carvey MMT, Glauser J. When to Restrict Fluids and Initiate De-Resuscitation in Sepsis and Septic Shock: A Step-by-Step Reference Guide. Curr Emerg Hosp Med Rep. 2026;14:25. DOI: 10.1007/s40138-026-00361-1</dd><dt>掲載誌</dt><dd>Current Emergency and Hospital Medicine Reports（2026-08-07）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s40138-026-00361-1" target="_blank" rel="noopener">doi.org/10.1007/s40138-026-00361-1</a>（本文PDFは別途）</dd><dt>原題</dt><dd>When to Restrict Fluids and Initiate De-Resuscitation in Sepsis and Septic Shock: A Step-by-Step Reference Guide</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s40138-026-00361-1.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s40138-026-00361-1.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s40138-026-00361-1.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わらないこと（ICU内の運用）</strong>：当院ICUの輸液運用は既に SOSD/ROSE の4相と ESICM ガイドライン Part2・Part3、SSC2026 推奨89（急性蘇生期後の積極的除水）で骨格が決まっている。本論文は新しいエビデンスを1つも足していないので、ICU内の指示簿を書き換える理由にはならない。</li><li><strong>変わりうること（ERとICUの申し送りの言語）</strong>：本論文の価値は「救急外来から使える1枚」である点にある。ER・一般病棟・RRS チームと ICU が同じ4相の語彙（蘇生・最適化・安定化・脱蘇生）で申し送れるかどうかが実務上の分かれ目。ICU入室時の申し送りに「いま何相か」を1語入れる運用は、既存の指示を変えずに今日から試せる。</li><li><strong>fluid creep の帳簿はICUの外にも要る</strong>：本論文が Step 4 で強調する「薬剤キャリア・維持液・栄養・電解質補正」の可視化は、当院では既に高Na血症対策（希釈液を生食から5%ブドウ糖へ）の文脈で走っている。ER滞在中と一般病棟の分は帳簿に載っていない。ここが最も抜けやすい。</li><li><strong>導入しないもの</strong>：VExUS を ER のトリアージ判断に組み込むことは本論文の記述からは正当化できない（後述のとおり原著は心臓術後コホートでのAKI予測研究）。当院で先に整えるのは CRT と累積バランス・体重という無料の指標。</li><li><strong>RRS への接続</strong>：一般病棟で「昇圧薬は要らないが尿が出ず体重が増えている」患者は、本論文の Stabilization/Evacuation 相そのもの。RRS 起動基準ではないが、RRS 訪問時のチェック項目に「累積バランスと体重」を足す価値はある。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：EGDT（Rivers 2001）以降、敗血症性ショックの初期蘇生は大量晶質液が標準となり、SSC は2026年版でも「3時間以内に少なくとも 30 mL/kg」を条件付きで維持している。一方で累積正バランスは独立して死亡・臓器障害と関連し、CLASSIC・CLOVERS の2つの大規模RCTは「初期安定化後の自由輸液に利益はない」ことを示した。輸液療法の4相モデル（ROSE／SOSD）も、グリコカリックス障害の病態も、fluid creep の存在も、いずれも既知。</li><li><strong>Unknown（まだ分かっていないこと）</strong>：「いつ制限へ切り替えるか」の切替点を前向きに検証した試験はない。脱蘇生の開始基準・目標・停止基準を規定したRCTもなく、SSC2026 の積極的除水推奨（推奨89）の確実性は very low。救急外来という時間軸の短い・モニタリングの薄い環境で、この切替をどう運用するかの手順書はほぼ存在しない。</li><li><strong>What's new（本論文の新規性）</strong>：新しいデータはゼロ。新しいのは提示形式で、①ROSE の4相を救急医の語彙に翻訳し、②「相 × 目的 × モニタリング手段 × 介入」の1枚表（Table 1）に落とし、③5ステップの手順として順序づけたこと。ガイドラインではなく著者2名の提案である点を最初に確認しておく必要がある。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 救急外来で敗血症性ショックを診る医師に向けて、ROSE の4相（蘇生・最適化・安定化・脱蘇生）を5ステップの手順に翻訳し、<strong>「輸液が効く相」から「輸液が害になる相」への切り替えを能動的に管理せよ</strong>と説くナラティブレビュー。新しいエビデンスはなく、推奨の格付けもない。</p>
+</div>
+<ul><li>中心概念は fluid accumulation syndrome（FAS、輸液蓄積症候群）。組織浮腫・酸素拡散障害・静脈うっ血・臓器障害の遷延を伴う臨床実体として近年認識されたもの。</li><li>病態の機序は2段構え。①敗血症そのものが炎症性サイトカイン・酸化ストレス・内皮活性化でグリコカリックスを破壊する、②輸液反応性を失った患者へ大量ボーラスを打つと心房伸展から ANP が放出され、ANP がさらにグリコカリックスを剝離させる。結果として投与した晶質液のうち血管内に留まる割合が下がり続ける。</li><li>Step 1：ROSE モデルを当てはめ、輸液を「1回の介入」ではなく相の移り変わりとして見る。輸液は適応・期待効果・副作用をもつ薬剤として扱う（fluid stewardship）。</li><li>Step 2：初期晶質液は緩衝晶質液で約 30 mL/kg を維持しつつ、250〜500 mL ずつに割って毎回再評価する。</li><li>Step 3：追加輸液の可否は低血圧ではなく輸液反応性で決める。重症患者のおよそ半数しか輸液反応性がない。CRT・PLR＋LVOT VTI・VExUS といった動的評価を、CVP のような静的指標より優先する。</li><li>Step 4：初期蘇生後も低血圧が続くなら、それは血管緊張の喪失であって血管内容量不足ではないと考え、早期に昇圧薬へ移る。同時に維持輸液・キャリア液・栄養など「隠れた輸液」を蘇生輸液と同じ厳しさで処方する。</li><li>Step 5：灌流が回復し昇圧薬が横ばい〜減量に入ったら、FAS の客観所見（累積正バランス、肺エコーBライン、VExUS高値、CVP上昇＋うっ血徴候、浮腫、酸素化悪化、体重増加、腎機能低下）を能動的に探し、静注ループ利尿薬で緩徐な負バランスを目指す。昇圧薬が増える・低灌流が再発するなら直ちに除水戦略を見直す。</li><li>結論は「固定プロトコルより nuanced なアプローチのほうが適切かもしれない（may be more appropriate）」という控えめな言い方で、断定していない。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 敗血症性ショックの患者には、血管拡張と血管透過性亢進のせいで「血管の容れ物が急に大きくなり、中身が漏れる」状態が起きる。だから最初は輸液を入れて容れ物を満たす必要がある。ところがある時点を過ぎると、入れた分は血管内に留まらず間質へ抜けていくだけになり、組織のむくみと静脈うっ血だけが残る。この「入れても意味がなくなる点」を見つけて、輸液を止め、昇圧薬に切り替え、最後は溜まった水を抜く（脱蘇生する）ための手順書が本論文である。 押さえておく用語は次の通り。 <strong>EGDT</strong>（Early Goal-Directed Therapy）：Rivers らが2001年に発表した、中心静脈圧・ScvO₂ などの目標値を決めて蘇生する初期プロトコル。大量輸液文化の起点になった。 <strong>SSC</strong>（Surviving Sepsis Campaign）：国際的な敗血症ガイドラインを出している団体。2026年版でも「3時間以内に少なくとも 30 mL/kg」を条件付きで維持している。 <strong>FAS</strong>（fluid accumulation syndrome、輸液蓄積症候群）：輸液が溜まった結果として組織浮腫・酸素拡散障害・静脈うっ血・臓器障害の遷延を起こす状態を1つの臨床実体として捉えた概念。 <strong>グリコカリックス</strong>：血管内皮の管腔側を覆う糖鎖に富んだ層。血管透過性・メカノトランスダクション・白血球接着・血管内膠質浸透圧の調節を担う。敗血症で壊れる。 <strong>ANP</strong>（心房性ナトリウム利尿ペプチド）：心房が伸展されると出るホルモン。利尿・血管拡張だけでなく、グリコカリックスの剝離も促すことが実験的に示されている。 <strong>ROSE</strong>：Resuscitation（蘇生）・Optimization（最適化）・Stabilization（安定化）・Evacuation（脱蘇生）の4相モデル。 <strong>fluid creep</strong>：蘇生でも維持でもない目的で入る輸液。薬剤の希釈液・持続投与のキャリア液・栄養など、気づかないうちに積み上がる分。 <strong>CRT</strong>（capillary refill time、毛細血管再充満時間）：指先を圧迫して離してから色が戻るまでの秒数。末梢灌流の簡便な指標。 <strong>PLR</strong>（passive leg raise、受動的下肢挙上）：仰臥位の患者の下肢を挙げて、下肢から胸腔へ血液を移動させる「内因性の輸液負荷」。輸液を入れずに輸液反応性を試せる。 <strong>LVOT VTI</strong>：左室流出路の血流速度時間積分値。心エコーで測る1回拍出量の代用指標。 <strong>VExUS</strong>（venous excess ultrasound）：肝静脈・門脈・腎内静脈のドプラ波形と下大静脈径を組み合わせて静脈うっ血を段階づけるPOCUS手法。 <strong>fluid stewardship</strong>：抗菌薬適正使用（antimicrobial stewardship）になぞらえて、輸液も「適応・用量・期間・中止基準」を管理する対象と考える枠組み。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>20年以上にわたり、敗血症性ショックの超急性期蘇生は積極的な静脈内輸液で特徴づけられてきた。EGDT に代表される初期のプロトコル化蘇生戦略は、あらかじめ決めた血行動態目標を強調し、規格化された晶質液投与の普及に寄与した。その延長線上に、SSC の2026年版ガイドラインにおける「敗血症性ショックには初期 30 mL/kg のボーラスを投与し続ける」という推奨がある。</p>
+<p>著者らは、絶対的または相対的な血管内容量不足の急速な補正が組織灌流の回復に不可欠であることは認めたうえで、現代のエビデンスは固定量アプローチではなく個別化された輸液蘇生を支持する方向に傾いていると述べる。CLASSIC と CLOVERS、および更新された国際ガイドラインが、「適切な灌流が達成された後の過剰な輸液投与は転帰を改善せず、むしろ医原性の害に寄与しうる」という概念を補強した、というのが出発点である。</p>
+<p>救急外来では、晶質液の投与は即時の生理学的効果が概して好ましいために低リスクな介入と受け取られがちである。しかし輸液反応性を失った時点を越えて輸液を続けると、内皮グリコカリックスの分解が進み、微小血管透過性が上がり、間質への液体貯留が加速する。これが FAS につながる。</p>
+<p>本論文の目的は、「有益な容量蘇生」から「有害になりうる輸液蓄積」への移行点を救急医およびその他の急性期臨床医が認識できるようにする、臨床志向の5ステップのフレームワークを提供することである。内皮生物学・fluid stewardship・脱蘇生戦略に関する現代的なエビデンスを踏まえ、敗血症性ショックの初期管理における早期の輸液制限と的を絞った脱蘇生のための実践的なベッドサイドアプローチを提案する、と著者らは書いている。リアルタイムでの臨床応用を助けるために、簡潔なベッドサイド意思決定支援表（Table 1）が付されている。</p>
+<h3>3. なぜ入れすぎが害になるのか — 病態生理</h3>
+<h4>3.1 グリコカリックスの二重の破壊</h4>
+<p>生理的条件下では、内皮グリコカリックスは血管内腔を覆う糖鎖に富んだ保護層を形成し、血管透過性・メカノトランスダクション・白血球接着・血管内膠質浸透圧の恒常性を調節している。敗血症では、炎症性サイトカイン・酸化ストレス・内皮活性化がこの保護バリアを進行性に破壊し、微小循環を毛細血管透過性亢進と間質浮腫に晒す。</p>
+<p>ここまでは「敗血症が壊す」話である。本論文が重ねるのはもう一段の機序で、輸液反応性を失った患者に大量の晶質液ボーラスを投与すると、急性の血管内容量拡張が心房伸展を刺激して ANP が放出される。実験的研究は、ANP がグリコカリックスのさらなる剝離を促し、内皮透過性をいっそう高め、輸液を血管内に保持する血管コンパートメントの能力を低下させることを示唆している。結果として、投与した晶質液のうち血管内に留まる割合は進行性に小さくなり、間質へ再分布する割合が増えて、組織浮腫と臓器うっ血が悪化する。</p>
+<p>つまり、<strong>輸液が効かなくなるほど輸液が効かなくなるという正のフィードバック</strong>が回る。これが「早く止めること」の生理学的な根拠になっている。</p>
+<h4>3.2 臓器別の帰結</h4>
+<div class="tw"><table>
+<thead><tr><th>臓器</th><th>機序</th><th>帰結</th></tr></thead>
+<tbody>
+<tr><td>腎</td><td>上昇した中心静脈圧が腎静脈循環に伝達され、腎間質圧が上がり、腎を横切る灌流勾配（trans-renal perfusion gradient）が減る</td><td>うっ血関連の急性腎障害（congestion-associated AKI）</td></tr>
+<tr><td>肺</td><td>過剰な肺内水分貯留が換気血流不均等を悪化させ、ガス交換を障害する</td><td>ARDS または ARDS リスク患者での人工呼吸期間の延長・転帰不良</td></tr>
+<tr><td>消化管</td><td>腸管壁浮腫が腸管運動を障害し、腹腔内圧を上げ、粘膜バリアの完全性を損なう</td><td>細菌トランスロケーションを助長しうる</td></tr>
+</tbody></table></div>
+<p>著者らはこれらをまとめて、「輸液療法は当初は救命的でありながら、生理学的必要性を越えて継続されると臓器障害を持続させる駆動因子になりうる」と述べている。腎の項の機序は心不全領域の知見（Mullens ら 2009）から借りてきたもので、敗血症性ショックで直接検証されたものではない点は読むときに区別しておきたい。</p>
+<h3>4. Table 1. 敗血症性ショックの輸液制限と脱蘇生のためのベッドサイド指針（原表を日本語化）</h3>
+<p>本論文の実質的な中身はこの1枚に凝縮されている。5ステップの本文は、この表を時間軸に沿って言い直したものと読める。</p>
+<div class="tw"><table>
+<thead><tr><th>蘇生の相</th><th>目的</th><th>モニタリング手段</th><th>介入</th></tr></thead>
+<tbody>
+<tr><td>RESUSCITATION（蘇生）</td><td>有効循環血液量を回復し、組織低灌流を是正する</td><td>MAP ≥65 mmHg、乳酸の推移、CRT、尿量（&gt;0.5 mL/kg/時）、VExUS、心エコー</td><td>① 緩衝晶質液を投与（臨床的に適応があれば約 30 mL/kg）／② 大量持続注入ではなく 250〜500 mL の分割投与とする／③ ボーラスごとに再評価する</td></tr>
+<tr><td>OPTIMIZATION（最適化）</td><td>追加の輸液が心拍出量を増やすかどうかを判定する</td><td>静的指標より動的評価を優先：PLR＋LVOT VTI、CRT、VExUS、心エコー</td><td>① 輸液反応性がある場合に限り輸液を継続／② モニタリング上の適応が消えたら反復ボーラスを中止／③ 低血圧が続くなら追加の晶質液ではなく早期昇圧薬</td></tr>
+<tr><td>STABILIZATION（安定化）</td><td>十分な臓器灌流を保ちながら輸液蓄積を防ぐ</td><td>記録上の輸液バランス、体重、隠れた輸液源（薬剤・維持輸液・栄養）、尿量と腎機能</td><td>① 維持輸液を制限／② 不要なキャリア輸液を排除／③ 頻回の再評価を継続</td></tr>
+<tr><td>EVACUATION（脱蘇生）</td><td>灌流を維持しながら過剰な細胞外液を除去する</td><td>累積正の輸液バランス、VExUS、肺エコー（Bライン）、CVP の推移、酸素化、腎機能、昇圧薬必要量を再評価</td><td>① 静注ループ利尿薬を開始（灌流が回復し、うっ血徴候が出現したとき）／② 緩徐な正常体液量到達を目標とする／③ CRT・尿量・乳酸・腎機能・血行動態の監視を継続／④ 低灌流が再発したら除水を緩めるか中止する</td></tr>
+</tbody></table></div>
+<h3>5. Step 1. 敗血症のスペクトラムを認識し、ROSE モデルを当てはめる</h3>
+<p>敗血症性ショックにおける輸液管理の成功は、輸液蘇生が単一の介入ではなく、病態の経過を通じて変化する動的プロセスであると認識することから始まる。低血圧が消えるまで輸液ボーラスを繰り返すという伝統的アプローチは、輸液を「特定の適応・期待される利益・潜在的な有害作用をもつ薬剤」とみなす fluid stewardship の概念へ徐々に移行してきた、と著者らは述べる。</p>
+<p>ROSE モデルの各相の記述は以下の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>相</th><th>時間軸</th><th>主目的</th><th>この相で同時に行うこと・注意点</th></tr></thead>
+<tbody>
+<tr><td>Resuscitation</td><td>敗血症性ショックを認識してからの最初の数時間</td><td>有効循環血液量を急速に回復し組織低灌流を是正する</td><td>感染源制御・抗菌薬・必要なら昇圧薬を同時に開始する。任意の容量目標の達成ではなく、実証可能な血管内容量不足の是正に焦点を置く</td></tr>
+<tr><td>Optimization</td><td>初期安定化の後</td><td>追加輸液が一回拍出量を意味あるだけ増やすかを判定する</td><td>血管透過性亢進とグリコカリックス障害が進むほど、輸液が血管内に残る割合は下がる。追加輸液が心拍出量を改善する見込みは下がり、組織浮腫のリスクは上がる</td></tr>
+<tr><td>Stabilization</td><td>灌流が正常化した後</td><td>臓器機能を維持しつつ不要な輸液蓄積を防ぐ</td><td>fluid creep が問題になる相。薬剤キャリア・維持輸液・栄養・電解質補正から相当量の隠れた輸液が入る。1日ごとの正バランスがわずかでも数日で急速に積み上がる</td></tr>
+<tr><td>Evacuation</td><td>ショックが解消した後</td><td>過剰な細胞外液を能動的に除去する</td><td>選択された患者で、呼吸メカニクスの改善・静脈うっ血の減少・人工呼吸期間の短縮・腎回復の改善と関連づけられている</td></tr>
+</tbody></table></div>
+<p>著者らはこの節を「輸液療法は蘇生時に開始される1回きりの介入ではなく、ROSE の4相すべてを通じて継続的に再評価されるべきである」とまとめている。</p>
+<h3>6. Step 2. 初期の晶質液蘇生を慎重に行う</h3>
+<p>早期の静脈内晶質液投与は依然として敗血症性ショック管理の要である。病初期には高度の血管拡張・血管容量増大・相対的血管内容量不足がしばしば併存するためである。SSC ガイドラインは敗血症誘発性低灌流の患者に対して約 30 mL/kg の晶質液投与を推奨し続けているが、その後の輸液投与は個別化されるべきだと強調している、と著者らは書く。</p>
+<p>実務上の指示は3点。</p>
+<div class="tw"><table>
+<thead><tr><th>何を</th><th>どうする</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>投与形式</td><td>大量持続注入ではなく 250〜500 mL のアリコートに分ける</td><td>不要な輸液曝露を最小化しつつ、可逆的な血管内容量不足の迅速な補正は可能にする</td></tr>
+<tr><td>再評価</td><td>ボーラスごとに輸液反応性を評価する（Step 3 へ）</td><td>「まだ効くか」を確かめずに次を打たないため</td></tr>
+<tr><td>輸液の種類</td><td>0.9% 生理食塩水より緩衝晶質液（乳酸リンゲル液、プラズマライト）を選ぶ</td><td>過剰なクロール負荷は腎血管収縮・高Cl性代謝性アシドーシス・腎障害と関連づけられている</td></tr>
+</tbody></table></div>
+<p>そして「CLASSIC も CLOVERS も、初期安定化後の無差別な自由輸液投与の利益を示さなかった」ことを、プロトコル駆動から生理学ガイドへ移行する根拠として挙げている。この一文の読み方には注意が必要で、後述する通り両試験はいずれも制限戦略の優越も示していない（第12節）。</p>
+<h3>7. Step 3. 動的なベッドサイド評価で輸液反応性を判定する</h3>
+<p>追加輸液を行うかどうかは、低血圧の有無ではなく輸液反応性によって決めるべきである。著者らは「重症患者のおよそ半数が輸液反応性である（＝追加輸液で一回拍出量が増える）」とし、それを超えると追加輸液は主に静脈うっ血と組織浮腫に寄与すると述べる。動的評価手技は中心静脈圧のような静的指標を一貫して上回る、というのが本節の主張である。</p>
+<p>提示される3手技は以下の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>手技</th><th>何を測るか</th><th>本文が示す判定値・根拠</th></tr></thead>
+<tbody>
+<tr><td>CRT（毛細血管再充満時間）</td><td>末梢灌流。安価でベッドサイドで完結する</td><td>ANDROMEDA-SHOCK 試験で蘇生の実践的な目標として「検証された（validated）」と本文は記す。CRT 延長は、血圧が一見正常でも組織低灌流が続いていることを示唆する</td></tr>
+<tr><td>PLR（受動的下肢挙上）</td><td>下肢から胸腔へ約 300 mL の内因性血液を一過性に移動させる。輸液を投与せずに前負荷試験ができる</td><td>POCUS 心エコーで測定した LVOT VTI と組み合わせ、一回拍出量が 10〜15% を超えて増加すれば輸液反応性を強く予測する</td></tr>
+<tr><td>VExUS（静脈うっ血エコー）</td><td>肝静脈・門脈・腎内静脈のドプラを統合して全身の静脈うっ血を定量する</td><td>末梢浮腫が比較的遅れて出現するのに対し、静脈ドプラ波形の異常は明らかな臨床徴候が出る前に有害なうっ血をしばしば同定する</td></tr>
+</tbody></table></div>
+<p>著者らの結論は「輸液反応性の判定では、静的指標よりも CRT・PLR・VExUS といった動的評価手技を考慮すべきである」。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この節の3手技は、それぞれ違う質問に答えている <mark class="hl">CRT は「灌流が足りているか」、PLR＋VTI は「入れたら心拍出量が増えるか」、VExUS は「もう入る余地がないか」を測っている</mark>。本文はこの3つを「動的評価」として横並びに置いているが、<mark class="hl">VExUS は輸液反応性の指標ではなく輸液耐容性（fluid tolerance）の指標であり、PLR の代わりにはならない</mark>。<mark class="hl">VExUS が正常でも輸液反応性がないことはあるし、VExUS が高値でも輸液反応性は残りうる</mark>。3つを1つの列に並べた表をそのまま運用すると、「VExUS が正常だから輸液を続けてよい」という誤読が起きる。</p>
+</div>
+<h3>8. Step 4. 早期に昇圧薬へ移り、維持輸液を制限する</h3>
+<p>初期蘇生後も低血圧が持続する場合、臨床医は血管内容量不足の遷延ではなく血管緊張の喪失を考えるべきである。早期の昇圧薬使用は、α受容体を介した血管収縮によって血管緊張を回復させ、stressed volume（張力のかかった静脈容量）を増やし、静脈還流を増強し、組織浮腫を悪化させずに平均動脈圧を支える。現在のエビデンスは、中心静脈路を確保している間、適切に留置された末梢静脈カテーテルからの開始を支持しており、目標灌流圧到達の遅れを最小化できる、と著者らは記す。</p>
+<p>同じくらい重要なのが維持輸液の最小化である。薬剤キャリア液・持続注入・電解質補正・栄養サポート・不要な維持輸液は、ICU 最初の数日でしばしば数リットルを占める。これら「隠れた輸液」は、蘇生輸液と同じ厳しさで処方されるべきである。</p>
+<p>まとめは「初期蘇生の相を過ぎても低血圧が残るなら、早期昇圧薬を考慮し、不要な維持輸液を制限する」。</p>
+<h3>9. Step 5. 早期の脱蘇生を開始する</h3>
+<p>十分な組織灌流が回復し、昇圧薬の必要量が安定または減少に転じたら、臨床医は FAS の有無を能動的に評価すべきである。</p>
+<p>本文が挙げる FAS の指標は次の8つ。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>見る場所</th></tr></thead>
+<tbody>
+<tr><td>持続する累積正の輸液バランス</td><td>記録上の in/out（fluid creep を含む）</td></tr>
+<tr><td>肺の「Bライン」</td><td>肺エコー</td></tr>
+<tr><td>VExUS スコアの上昇</td><td>肝静脈・門脈・腎内静脈ドプラ</td></tr>
+<tr><td>CVP の上昇（臨床的うっ血所見を伴う）</td><td>中心静脈圧モニタ＋身体所見</td></tr>
+<tr><td>末梢浮腫</td><td>身体所見</td></tr>
+<tr><td>酸素化の悪化</td><td>P/F 比・SpO₂／FiO₂・人工呼吸設定</td></tr>
+<tr><td>体重増加</td><td>体重測定</td></tr>
+<tr><td>灌流が十分であるにもかかわらず進む腎機能低下</td><td>血清クレアチニン・尿量</td></tr>
+</tbody></table></div>
+<p>客観的なうっ血を示す患者は、静注ループ利尿薬による慎重な利尿から利益を得る可能性がある。標準的な初期治療は静注フロセミドで、十分な臓器灌流を維持しながら緩徐な負バランスが得られるよう用量調節する。</p>
+<p>脱蘇生の間、臨床医は CRT・乳酸クリアランス・尿量・昇圧薬必要量・血清クレアチニンを監視し、動的な超音波所見を再評価すべきである。昇圧薬必要量の増加や低灌流の再発の徴候があれば、直ちに除水戦略を再考する。最近の観察研究は、適切なタイミングの脱蘇生が肺機能を改善し、人工呼吸期間を短縮し、ICU 在室日数を短縮しうることを示唆している、と著者らは述べる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本論文が「どこで止めるか」を数値で書いていない点は自覚しておく 開始のトリガー（灌流が回復し、昇圧薬が安定または減少）と停止のトリガー（昇圧薬増量・低灌流再発）は言葉では示されるが、<mark class="hl">利尿薬の初期用量・1日あたりの目標負バランス・到達すべき最終体重・治療期間はどこにも数値がない</mark>。<mark class="hl">「gradual（緩徐な）euvolemia を目標に」という表現だけで運用すると、施設ごと・当直ごとに除水速度がばらつく</mark>。<mark class="hl">限外濾過・体外循環による除水についても本文は一切触れていない</mark>（SSC2026 の推奨89は「利尿薬で不十分なら限外濾過」まで書いている）。数値を入れるなら本論文の外から持ってくる必要がある。</p>
+</div>
+<h3>10. 結論（原文の言い方のまま）</h3>
+<p>著者らの結論は控えめである。「敗血症・敗血症性ショックの管理においては、固定されたプロトコルよりも nuanced（機微を踏まえた）アプローチのほうが適切かもしれないと我々は示唆する（we suggest that ... may be more appropriate）。これは、腎障害・組織浮腫・ガス交換障害・人工呼吸期間の延長を含む（ただしそれらに限られない）輸液蓄積による合併症を軽減するためである」。</p>
+<p>抄録の Summary はより踏み込んだ書き方で、「輸液管理は敗血症性ショックにおける静的なトリアージのチェックボックスではない。医師は輸液蘇生の各相を通じて患者を能動的に導かねばならない」としている。本文の結論と抄録の語気の差は、レビューを引用するときに注意すべき点である。</p>
+<h3>11. 「いつ切り替えるか」— 本文から拾えるトリガーを全部並べる</h3>
+<p>本論文の実用価値は、この切替トリガーがどれだけ具体的かにかかっている。本文・Table 1 から拾えるものをすべて集めると次のようになる。数値が入っているものは4つしかない。</p>
+<div class="tw"><table>
+<thead><tr><th>切り替え</th><th>トリガー（本文の記載）</th><th>数値の有無</th></tr></thead>
+<tbody>
+<tr><td>蘇生 → 最適化</td><td>約 30 mL/kg の初期投与が終わった後、ボーラスごとの再評価に移る</td><td>あり（30 mL/kg、250〜500 mL/回）</td></tr>
+<tr><td>輸液を続ける／止める</td><td>輸液反応性があるときのみ続ける。PLR で一回拍出量が 10〜15% を超えて増えれば反応性あり</td><td>あり（&gt;10〜15%）</td></tr>
+<tr><td>灌流が足りているかの判定</td><td>MAP ≥65 mmHg、尿量 &gt;0.5 mL/kg/時、乳酸の低下、CRT の正常化</td><td>あり（65 mmHg、0.5 mL/kg/時）</td></tr>
+<tr><td>輸液 → 昇圧薬</td><td>初期蘇生後も低血圧が持続するとき（＝血管緊張喪失と解釈する）。時間の閾値は示されていない</td><td>数値なし</td></tr>
+<tr><td>最適化 → 安定化</td><td>灌流が正常化したら</td><td>数値なし</td></tr>
+<tr><td>安定化 → 脱蘇生</td><td>十分な組織灌流が回復し、昇圧薬必要量が安定または減少しているとき</td><td>数値なし</td></tr>
+<tr><td>脱蘇生の適応</td><td>上記8つのうっ血所見のいずれか（累積正バランス、Bライン、VExUS高値、CVP上昇＋うっ血、浮腫、酸素化悪化、体重増加、腎機能低下）</td><td>数値なし</td></tr>
+<tr><td>脱蘇生の中止</td><td>昇圧薬必要量の増加、低灌流の再発</td><td>数値なし</td></tr>
+<tr><td>到達目標</td><td>緩徐な正常体液量（gradual euvolemia）</td><td>数値なし</td></tr>
+</tbody></table></div>
+<p>臨床で最も判断に迷う「安定化から脱蘇生へ」と「どこで除水を止めるか」の2か所に数値がない、という構造になっている。ここは本論文の外（ESICM Part3、SSC2026 推奨89、REVERSE-AKI）から補うのが実務的である。</p>
+<h3>12. 根拠になっているランドマーク試験 — 本文の書きぶりと、試験が実際に示したこと</h3>
+<p>本論文は臨床フレームワークの提示が主目的で、引用試験の結果を数値で示していない。JC では引用元の実際の結果と突き合わせておく価値がある（下表の「実際に示したこと」は本論文の記述ではなく、原著論文の抄録から確認したもの）。</p>
+<div class="tw"><table>
+<thead><tr><th>試験（文献番号）</th><th>本論文での扱われ方</th><th>原著が実際に示したこと</th></tr></thead>
+<tbody>
+<tr><td>Rivers EGDT（1、NEJM 2001）</td><td>大量輸液文化の起点として言及されるのみ</td><td>単施設RCTで死亡減少を示したが、後の ProCESS・ARISE・ProMISe で再現されなかった。本論文はこの3試験を引用していない</td></tr>
+<tr><td>SSC 2026（2、CCM 2026;54:725-812）</td><td>「30 mL/kg を推奨し続けている」「その後は個別化」「緩衝晶質液を選ぶ」「末梢からの昇圧薬開始」の根拠として4回引用</td><td>全129推奨のうち強い推奨は18。初期輸液 30 mL/kg は推奨10（条件付き／low）。「30 mL/kg 後も低灌流が続く例では自由・制限どちらでもよい」が推奨48（条件付き／low、2021年版の「エビデンス不十分」から格上げ）。急性蘇生期後の積極的除水が推奨89（条件付き／very low、新設）</td></tr>
+<tr><td>CLASSIC（3、NEJM 2022）</td><td>「初期安定化後の無差別な自由輸液の利益を示さなかった」</td><td>1,554例。ICU内輸液量 中央値 1,798 mL vs 3,811 mL。90日死亡 42.3% vs 42.1%（調整絶対差 0.1ポイント、95%CI −4.7〜4.9、P=0.96）。制限戦略の優越も示していない。「差がない」であって「制限がよい」ではない</td></tr>
+<tr><td>CLOVERS（4、NEJM 2023）</td><td>同上。抄録では「制限戦略＋早期昇圧薬は安全で、組織浮腫と臓器コンパートメント症候群の破壊的な下流効果を防ぐ」と踏み込んだ書き方</td><td>1,563例、米国60施設。24時間の輸液量の中央値差 −2,134 mL（95%CI −2,318〜−1,949）。制限群では昇圧薬がより早く・より多くの患者に・より長く使われた。90日までの退院前全死因死亡 14.0% vs 14.9%（推定差 −0.9ポイント、95%CI −4.4〜2.6、P=0.61）。重篤有害事象は同等。「組織浮腫と臓器コンパートメント症候群を防いだ」ことを示したデータはこの試験にはない。示されたのは死亡が同等で安全性が同等だったことまで</td></tr>
+<tr><td>ANDROMEDA-SHOCK（21、JAMA 2019）</td><td>「CRT が蘇生の実践的な目標として validated された」</td><td>424例。28日死亡 34.9%（CRT群）vs 43.4%（乳酸群）、HR 0.75（95%CI 0.55〜1.02）、P=.06。主要評価項目は有意差なしで、原著の結論も「28日死亡を減らさなかった」。72時間SOFA は −1.00（95%CI −1.97〜−0.02、P=.045）で有意。「validated」は言い過ぎ</td></tr>
+<tr><td>Monnet PLR メタ解析（22、ICM 2016）</td><td>「PLR＋LVOT VTI で SV が 10〜15% 超増加すれば輸液反応性を強く予測」</td><td>21研究・991例・995回の輸液負荷。心拍出量変化で見た PLR は感度 0.85（0.81〜0.88）、特異度 0.91（0.88〜0.93）、AUC 0.95±0.01、最適閾値は心拍出量 ≥10±2% 増加。一方、脈圧の変化で判定すると感度 0.56 と落ちる。「10〜15%」の上限側の根拠はこのメタ解析にはない</td></tr>
+<tr><td>VExUS 原著（23、Ultrasound J 2020）</td><td>「静脈うっ血を定量する」手技として紹介</td><td>心臓手術患者145例・706回の評価の事後解析。複数のドプラ波形の高度異常＋IVC ≥2 cm を「重症」と定義したとき術後AKIと最も強く関連（HR 3.69、95%CI 1.65〜8.24、P=0.001。調整後 HR 2.82、95%CI 1.21〜6.55、P=0.02）。ICU入室時の陽性尤度比 6.37（2.19〜18.50）。敗血症性ショックでも救急外来でも検証されていない。AKI 予測の研究であって、除水の適応を決める研究ではない</td></tr>
+<tr><td>Silversides 脱蘇生（7）</td><td>「脱蘇生は呼吸メカニクス改善・静脈うっ血減少・人工呼吸期間短縮・腎回復と関連」の根拠</td><td>誌面の記載は Intensive Care Med. 2018;44(10):1630–40 だが、この題名の論文は Crit Care Med 2018;46(10):1600–1607 として登録されている（誌名・巻号頁の誤り）</td></tr>
+<tr><td>Silversides メタ解析（18、ICM 2017）</td><td>脱蘇生の根拠として引用</td><td>49研究をレビュー、うちRCT 11件・2,051例のメタ解析。死亡に有意差なし（プールRR 0.92、95%CI 0.82〜1.02、I²=0%）。人工呼吸器非装着日数は 1.82日（95%CI 0.53〜3.10）増加、ICU在室は 1.88日（95%CI −0.12〜−3.64）短縮。「死亡への効果は不確実（uncertain）」が原著の結論</td></tr>
+<tr><td>FACTT（17、NEJM 2006）</td><td>腎うっ血の文脈で引用</td><td>急性肺傷害 1,000例。60日死亡 25.5% vs 28.4%（P=0.30、有意差なし）。7日間の累積バランス −136±491 mL vs +6,992±502 mL（P&lt;0.001）。人工呼吸器非装着日数 14.6 vs 12.1日（P&lt;0.001）。死亡は変わらず、肺機能と人工呼吸期間が改善した試験</td></tr>
+<tr><td>REVERSE-AKI</td><td>引用されていない（脱蘇生・輸液制限を扱った代表的RCTだが本論文の23文献に含まれない）</td><td>—</td></tr>
+</tbody></table></div>
+<p>この表から言えることは1つで、<strong>輸液制限・脱蘇生の領域で死亡を減らしたRCTは今のところ存在しない</strong>。改善が示されているのは人工呼吸器非装着日数・ICU在室日数・肺機能といった中間アウトカムである。本論文の5ステップも、そこまでを目標とする介入として説明するのが誠実である。</p>
+<h3>13. 使う道具とその限界</h3>
+<div class="tw"><table>
+<thead><tr><th>道具</th><th>本論文での役割</th><th>限界</th></tr></thead>
+<tbody>
+<tr><td>MAP ≥65 mmHg</td><td>蘇生相の到達目標</td><td>血圧が正常でも微小循環は低灌流でありうる（本文も CRT でこれを補う設計）。SSC2026 は65歳以上で 60〜65 mmHg への引き下げを扱っており、一律 65 ではない</td></tr>
+<tr><td>乳酸の推移</td><td>蘇生相と脱蘇生中の監視項目</td><td>敗血症の乳酸は低灌流以外（アドレナリン作動性の解糖亢進、肝クリアランス低下）にも上がる。連続乳酸で蘇生を導く根拠は乏しいとする論考がある</td></tr>
+<tr><td>尿量 &gt;0.5 mL/kg/時</td><td>蘇生相の到達目標</td><td>敗血症性AKIでは灌流が回復しても尿量は戻らないことがあり、尿量だけで輸液を続けると過剰投与になる</td></tr>
+<tr><td>CRT</td><td>蘇生・最適化・脱蘇生の全相で使える無料の指標</td><td>測定法（圧迫部位・圧迫時間・判定秒数）の標準化が不十分。室温・年齢・皮膚色の影響を受ける。ANDROMEDA-SHOCK の主要評価項目は有意差なし</td></tr>
+<tr><td>PLR＋LVOT VTI</td><td>輸液反応性の判定</td><td>腹腔内圧上昇・下肢の圧迫装具・意識下の疼痛や不快で無効化される。VTI の測定にはエコーの技能と時間が要る。移動 300 mL は概算で、体格・静脈容量に依存</td></tr>
+<tr><td>CVP</td><td>「静的指標」として劣位に位置づけ</td><td>単独では輸液反応性を予測しない。ただし本論文自身が脱蘇生相のうっ血指標としては CVP の上昇を採用しており、扱いが一貫していない</td></tr>
+<tr><td>VExUS</td><td>脱蘇生相のうっ血評価</td><td>原著は心臓術後コホートでのAKI予測。判定には肝静脈・門脈・腎内静脈の3か所のドプラが要り、習熟が必要。門脈波形は肝疾患・右心不全以外の要因でも変わる</td></tr>
+<tr><td>肺エコーBライン</td><td>脱蘇生相の肺うっ血指標</td><td>Bライン は静水圧性肺水腫に特異的ではなく、肺炎・ARDS・間質性肺疾患でも出る。敗血症性ショックでは原疾患の肺炎と区別がつかないことが多い</td></tr>
+<tr><td>体重・累積バランス</td><td>安定化・脱蘇生相の基本指標</td><td>記録上のバランスは実測体重と乖離する（不感蒸泄・記録漏れ）。ER 滞在中と手術室の分が帳簿に入らないことが多い</td></tr>
+<tr><td>ループ利尿薬</td><td>脱蘇生の主手段</td><td>初期用量・目標速度・終点の記載がない。利尿薬抵抗性、低K・低Mg・代謝性アルカローシス、腎前性増悪への言及もない</td></tr>
+</tbody></table></div>
+<h3>14. 批判的吟味（JCでの論点）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>区分と格付け</td><td>誌面の区分は REVIEW。系統的レビューではなく、検索式・選択基準・バイアス評価はない。23文献のみで、5ステップは著者2名の提案であってガイドラインではない。推奨の強さもエビデンスの確実性も一切示されていない</td></tr>
+<tr><td>対象読者と前提のずれ</td><td>表題どおり救急外来向けだが、Table 1 のモニタリング列には VExUS・心エコー・CVP・肺エコーが並ぶ。CVP は中心静脈路を、VExUS は3か所のドプラを要求する。ER の滞在時間（数時間）とモニタリング密度では最適化・安定化相までしか実行できず、脱蘇生相は事実上 ICU・病棟の話になっている。ER 向けと銘打ちながら、ER で完結する部分は Step 1〜3 に限られる</td></tr>
+<tr><td>CLOVERS の読み替え</td><td>抄録は CLOVERS/CLASSIC が「制限戦略は安全で、組織浮腫と臓器コンパートメント症候群の破壊的な下流効果を防ぐ」ことを示したと書く。しかし両試験の主要評価項目はいずれも死亡で、いずれも有意差なし。「組織浮腫を防いだ」というアウトカムは測定されていない。エビデンスの過大表現</td></tr>
+<tr><td>ANDROMEDA-SHOCK の「validated」</td><td>CRT を「validated as a practical target」と記すが、原著の結論は「28日死亡を減らさなかった」（HR 0.75、P=.06）。有意だったのは72時間SOFA のみ。この表現は引用として不正確</td></tr>
+<tr><td>「およそ半数が輸液反応性」の出典</td><td>文献12（Malbrain ら、Ann Intensive Care 2018）が付されているが、これは fluid stewardship の総説であり原データではない。しかも当院の関連ノートが扱う ICM2019 の解析では、敗血症性ショックで来院時 57% だった輸液反応性は8時間後には 3% まで落ちる。「半数」は入室初期のスナップショットであって、ICU に着いた後の患者に当てはめてはならない</td></tr>
+<tr><td>引用の誤り2件</td><td>文献9は「Chappell D, Jacob M. Role of the glycocalyx in fluid management: small things matter. Br J Anaesth. 2014;113(5):740–6」と印字されているが、この論文は Best Pract Res Clin Anaesthesiol 2014;28(3):227–234。印字された BJA 2014;113(5):740–747 は Hoste らの ADQI 四相モデル論文の書誌である。文献7も誌名・巻号頁が Crit Care Med 2018;46(10):1600–1607 と食い違う。ROSE/四相概念の一次資料（ADQI・Malbrain）を挙げずに2024年のドイツ語圏レビュー（文献20）を出典にしている点と合わせて、出典の追跡が甘い</td></tr>
+<tr><td>抜けている試験</td><td>REVERSE-AKI、RIFTS、REFRESH、ProCESS/ARISE/ProMISe のいずれも引用がない。脱蘇生と輸液制限をランダム化で検証した試験群を欠いたまま「エビデンスに基づく（evidence-based）」と抄録に書いている</td></tr>
+<tr><td>脱蘇生の手段が利尿薬のみ</td><td>静注フロセミド以外の選択肢（限外濾過、体外循環による除水、輸液の中止そのもの）に本文が触れていない。SSC2026 推奨89の Remark は「利尿薬で不十分なら限外濾過」を明記しており、ESICM の輸液ガイドラインは RRT の他の適応がない限外濾過の日常使用に反対している。この論争に本論文は入っていない</td></tr>
+<tr><td>内的な不整合</td><td>①Step 3 で CVP を「静的指標」として退けながら、Step 5 と Table 1 では CVP 上昇を脱蘇生の適応に使っている。②Table 1 の蘇生相は「約 30 mL/kg」を推奨しつつ Step 2 では「固定量アプローチではなく個別化」を説く。③抄録の Summary は断定調、本文の Conclusions は「may be more appropriate」と留保調で、語気が揃っていない</td></tr>
+<tr><td>校正の粗さ</td><td>Abbreviations に「Atrial Naturetic Peptide」（正しくは Natriuretic）、「Left Ventricular Outflow Tact」（正しくは Tract）の綴り誤り。Author Contributions に「substancial」（substantial）。Step 5 本文の「capillary CRT」は重複表現。参考文献 [6–11] の後にピリオドが欠落。査読と校正の密度が高くないことを示唆する</td></tr>
+<tr><td>それでも残る価値</td><td>上記を差し引いても、Table 1 は「相 × 目的 × モニタ × 介入」という4列で、ER・病棟・ICU が共通言語を持つのに十分な粒度がある。新しいエビデンスを求めて読む論文ではなく、既に知っていることをチームに配れる1枚に変換した教育資材として評価するのが妥当</td></tr>
+</tbody></table></div>
+<h3>15. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>書誌（誌面の記載どおり。誤りが疑われるものは注記）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>EGDT。重症敗血症・敗血症性ショックへの早期目標指向型治療</td><td>Rivers E, Nguyen B, Havstad S, et al. N Engl J Med. 2001;345(19):1368–77</td></tr>
+<tr><td>2</td><td>SSC 国際ガイドライン2026</td><td>Prescott HC, Antonelli M, Alhazzani W, Møller MH, Alshamsi F, et al. Crit Care Med. 2026;54(4):725–812</td></tr>
+<tr><td>3</td><td>CLASSIC。ICU の敗血症性ショックにおける輸液制限</td><td>Meyhoff TS, Hjortrup PB, Møller MH, et al. N Engl J Med. 2022;386(26):2459–70</td></tr>
+<tr><td>4</td><td>CLOVERS。敗血症誘発性低血圧への早期の制限 vs 自由輸液</td><td>Shapiro NI, Douglas IS, Brower RG, et al. N Engl J Med. 2023;388(6):499–510</td></tr>
+<tr><td>5</td><td>蘇生輸液の総説</td><td>Casey JD, Brown RM, Semler MW. Curr Opin Crit Care. 2018;24(6):512–8</td></tr>
+<tr><td>6</td><td>FAS（輸液蓄積症候群）の病態・意義・治療の包括的レビュー。本論文の中心概念の出典</td><td>Pfortmueller CA, Dabrowski W, Wise R, van Regenmortel N, Malbrain MLNG. Ann Intensive Care. 2024;14(1):115</td></tr>
+<tr><td>7</td><td>医原性体液過剰の脱蘇生と死亡低下の関連</td><td>Silversides JA, Fitzgerald E, Manickavasagam US, et al.（誌面は Intensive Care Med. 2018;44(10):1630–40 だが、実際は Crit Care Med 2018;46(10):1600–1607）</td></tr>
+<tr><td>8</td><td>敗血症におけるグリコカリックス</td><td>Uchimido R, Schmidt EP, Shapiro NI. Crit Care. 2019;23(1):16</td></tr>
+<tr><td>9</td><td>輸液管理におけるグリコカリックスの役割</td><td>Chappell D, Jacob M.（誌面は Br J Anaesth. 2014;113(5):740–6 だが、実際は Best Pract Res Clin Anaesthesiol 2014;28(3):227–234）</td></tr>
+<tr><td>10</td><td>敗血症における内皮</td><td>Ince C. Crit Care. 2015;19(Suppl 3):S13</td></tr>
+<tr><td>11</td><td>うっ血性腎症の診断基準の提案</td><td>Husain-Syed F, Gröne HJ, Assmus B, et al. ESC Heart Fail. 2021;8(1):183–203</td></tr>
+<tr><td>12</td><td>敗血症性ショックにおける輸液管理と fluid stewardship。4つの D と輸液療法の4相</td><td>Malbrain MLNG, Van Regenmortel N, Saugel B, et al. Ann Intensive Care. 2018;8:66</td></tr>
+<tr><td>13</td><td>ANP 放出が冠血管床のグリコカリックス剝離を誘導する</td><td>Bruegger D, Schwartz L, Chappell D, et al. Crit Care. 2005;9(2):R157–163</td></tr>
+<tr><td>14</td><td>過剰輸液が ANP 放出とグリコカリックス剝離を増やす</td><td>Chappell D, Bruegger D, Potzel J, et al. Crit Care. 2014;18:538</td></tr>
+<tr><td>15</td><td>進行した非代償性心不全における静脈うっ血と腎機能悪化</td><td>Mullens W, Abrahams Z, Francis GS, et al. J Am Coll Cardiol. 2009;53(7):589–96</td></tr>
+<tr><td>16</td><td>輸液投与と腎</td><td>Prowle JR, Bellomo R. Curr Opin Crit Care. 2010;16(4):332–6</td></tr>
+<tr><td>17</td><td>FACTT。急性肺傷害における2つの輸液管理戦略の比較</td><td>Wiedemann HP, Wheeler AP, Bernard GR, et al. N Engl J Med. 2006;354(24):2564–75</td></tr>
+<tr><td>18</td><td>敗血症・ARDS の蘇生後相における保存的輸液管理・脱蘇生の系統的レビューとメタ解析</td><td>Silversides JA, Major E, Ferguson AJ, et al. Intensive Care Med. 2017;43(2):155–70</td></tr>
+<tr><td>19</td><td>腹腔内圧上昇の腎への影響</td><td>De Laet IE, Malbrain MLNG, Jadoul JL, et al. Acta Clin Belg Suppl. 2007;62(Suppl 1):119–26</td></tr>
+<tr><td>20</td><td>ROSE 概念。集中治療における現代的な輸液管理（ドイツ語圏の総説）</td><td>Willam C, Herbst L. Med Klin Intensivmed Notfmed. 2024;119(8):634–9</td></tr>
+<tr><td>21</td><td>ANDROMEDA-SHOCK。CRT 目標 vs 乳酸目標の蘇生</td><td>Hernández G, Ospina-Tascón GA, Damiani LP, et al. JAMA. 2019;321(7):654–64</td></tr>
+<tr><td>22</td><td>PLR による輸液反応性予測の系統的レビュー・メタ解析</td><td>Monnet X, Marik PE, Teboul JL. Intensive Care Med. 2016;42(12):1935–47</td></tr>
+<tr><td>23</td><td>VExUS グレーディングシステムの開発</td><td>Beaubien-Souligny W, Rola P, Haycock K, et al. Ultrasound J. 2020;12(1):16</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">救急外来を出発点に、輸液を「蘇生・最適化・安定化・脱蘇生」の4相で管理し、相ごとに目的・見る指標・打つ手を1枚の表で共有せよ</mark>、というナラティブレビュー。<mark class="hl">明日から変わるのは3点だけ</mark>。<mark class="hl">①初期晶質液は 250〜500 mL に割り、ボーラスごとに再評価する。②低血圧が続くなら追加晶質液ではなく早期昇圧薬に移り、同時に薬剤キャリア・維持液・栄養（fluid creep）を帳簿に載せる。③灌流が回復し昇圧薬が減り始めたら、累積バランス・体重・Bライン・VExUS を能動的に見て、静注ループ利尿薬で緩徐に抜き始める</mark>。 ただし<mark class="hl">本論文は REVIEW であり、5ステップは著者2名の提案であってガイドラインではない。推奨の格付けもエビデンスレベルも一切ない</mark>。<mark class="hl">輸液制限・脱蘇生で死亡を減らしたRCTは今のところ存在せず（CLASSIC 42.3% vs 42.1%、CLOVERS 14.0% vs 14.9%、いずれも有意差なし）、改善が示されているのは人工呼吸器非装着日数・ICU在室日数といった中間アウトカムまでである</mark>。==CRT を「ANDROMEDA-SHOCK で validated」と書く点（主要評価項目は P=.06 で有意差なし）と、VExUS を輸液反応性の指標として PLR と同列に並べる点は、引用の過大表現として指摘しておく<mark class="hl">。</mark>臨床で最も迷う「いつ抜き始め、どこで止めるか」に数値が無いので、そこは ESICM Part3・SSC2026 推奨89 から補う==。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

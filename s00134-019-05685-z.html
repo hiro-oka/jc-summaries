@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>脳損傷に対する腎反応を理解する — 低Na・高Na・糸球体過剰濾過・AKI（Understanding the Disease・ICM2019）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-019-05685-z.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">脳損傷に対する腎反応を理解する — 低Na・高Na・糸球体過剰濾過・AKI（Understanding the Disease・ICM2019）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Legrand M, Sonneville R. Understanding the renal response to brain injury. Intensive Care Med. 2019;45(8):1112–1115. doi:10.1007/s00134-019-05685-z</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2019-07-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-019-05685-z" target="_blank" rel="noopener">doi.org/10.1007/s00134-019-05685-z</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Understanding the renal response to brain injury</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-019-05685-z.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-019-05685-z.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-019-05685-z.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li>神経集中治療の輸液指示は「投与する液の浸透圧」と「尿浸透圧」を並べて書く。本論文の中核はここ1点に集約される。尿浸透圧より低い液を入れれば、たとえ生理食塩水でも自由水はプラスになり血清Naは下がる。急性脳損傷でNaを下げたくない患者では、<strong>輸液指示簿に尿浸透圧の測定値（または直近値）を必ず添える</strong>運用にする。</li><li>急性脳損傷患者に「維持輸液として1号液・3号液・5%ブドウ糖」を漫然と流さない。ADHが高い状況ではこれらは事実上の自由水負荷になる。当院の術後・神経ICU患者の維持輸液オーダーを点検する（関連: <span class="wl">術後維持輸液のNa含有量と体液バランス（生食 vs 維持液RCT）</span>）。</li><li><strong>SIADHかCSWかで初手を変えない</strong>。本論文は両者に共通の第一選択として「無ナトリウム水の投与制限＋高張食塩水」を挙げる。<mark class="hl">鑑別が付くまで治療を止めるより、両者に安全な初手を先に置くほうが実務的</mark>。分岐が要るのは第二選択（尿素・鉱質コルチコイド）から。</li><li><strong>ただし低Na血症の補正速度上限は本論文には書かれていない</strong>。当院の指示簿は <span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span> の「24時間で10 mEq毎L、48時間で18 mEq毎L、ODS高リスクは任意の24時間で8 mEq毎L」を正として、本論文の内容はその枠内で運用する。</li><li><strong>マンニトール使用時は浸透圧ギャップと尿量を毎日フォローする</strong>。本論文はマンニトール由来の高Na血症を「予測しにくい」とし、対策として <mark class="hl">浸透圧ギャップの監視と、必要ならマンニトールの減量・中止</mark> を挙げる。当院のマンニトール指示にこの2項目を紐づける。</li><li>急性脳損傷の初期は抗菌薬・抗てんかん薬が「効いていない」ときに腎クリアランス増大（ARC）を疑う。CrCl &gt; 120 mL/分で過小投与のリスク。実測CrCl（蓄尿）とTDMを敷居低く回す（関連: <span class="wl">重症患者の抗菌薬PKを理解して投与設計を最適化する — Vd増大・ARC・RRT・ECMOと持続投与・TDM（総説・JIntensiveMed2024）</span>）。</li><li><strong>急性脳損傷患者のAKIチェックを日課に入れる</strong>。最大20%に起こり死亡と関連する。腎毒性薬剤の使用時はCrと尿量を追い、<mark class="hl">低容量血症と静脈うっ血の両方が脳にも腎にも悪い</mark> という前提で輸液バランスを詰める。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：急性脳損傷では低Na血症が脳浮腫・痙攣・ICP上昇・脳虚血を招くこと、その背景にADH分泌があること、機序としてSIADHとCSWSが古典的に提唱されてきたことは確立していた。ADHが高いと尿浸透圧が上がり尿量が減るという腎生理も既知。</li><li><strong>Unknown（分かっていなかったこと）</strong>：SIADHとCSWSをベッドサイドでどう見分けるか、見分けた結果として治療をどこまで変えるべきかは論争が続いていた。予防的高張食塩水がICPを下げて予後を改善するかも未確定。CSWSが「脳性」なのか単なる「腎性の塩喪失」なのかという用語・概念の整理も途上だった。</li><li><strong>What's new（本論文の新規性・意義）</strong>：新しいデータを出す論文ではない。急性脳損傷における腎の反応を「水・Na」「糸球体機能」の2軸4項目（低Na・高Na・糸球体過剰濾過・AKI）に整理し、それぞれに「治療上の含意は何か」を1対1で対応させた教育的枠組みが本論文の貢献。とりわけ、<mark class="hl">低Na血症を「SIADHかCSWSか」の鑑別問題から「投与液と尿の浸透圧の大小関係」という定量問題に置き換えた</mark> 点が実務的な新規性。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 急性脳損傷は腎を変える。水・Na代謝（低Na血症と高Na血症）と糸球体機能（過剰濾過とAKI）の4つを押さえれば治療を調整でき、なかでも低Na血症は 「投与する液の浸透圧が尿浸透圧より低ければ自由水はプラスになる」 という一点で理解できる。</p>
+</div>
+<ul><li>急性脳損傷は離れた臓器（remote organs）を変化させ、腎もその1つ。本論文はその変化と治療への影響を簡潔にレビューする、というのが冒頭の宣言。</li><li><strong>低Na血症</strong>（血清Na &lt; 135 mmol/L の低浸透圧性）が急速に進むと、脳浮腫・痙攣・ICP上昇・脳虚血リスク増大を起こしうる。</li><li>低Na血症は ADH分泌後の腎における自由水再吸収の増加の結果。神経ICUでのADH過剰分泌の機序として古典的に <strong>SIADH</strong> と <strong>CSWS（脳性塩喪失症候群）</strong> の2つが提唱されてきた。</li><li><strong>SIADH</strong>：本来は血漿浸透圧が下がるとADH分泌は抑制されるのに、いわゆるSIADHでは <strong>低Na血症にもかかわらずADH分泌が増える</strong>。</li><li><strong>CSWS</strong>：高度なナトリウム利尿と負のNaバランスによる 血管内容量の低下がADH分泌のトリガー。想定される機序はナトリウム利尿ペプチドの放出と、交感神経活性化・昇圧薬投与による全身血圧上昇後の「<strong>圧誘発性ナトリウム利尿</strong>」。後者は全身血行動態変化への生理的応答なので、より適切な用語として「renal salt wasting（腎性塩喪失）」が提案されている。</li><li><strong>治療の中核</strong>：SIADH・CSWSのいずれでも <strong>輸液は尿浸透圧に基づいて調整する</strong>。尿より浸透圧の低い液（低張液・等張液）を入れると自由水が貯留し低Na血症を促進する＝desalination（脱塩）。</li><li><strong>生理食塩水は血漿よりわずかに高浸透圧であるにもかかわらず</strong>、ADHが高く尿浸透圧が高い状況では自由水バランスがプラスになり低Na血症を促進する。</li><li><strong>第一選択</strong>：SIADH・CSWSともに 無ナトリウム水（sodium-free water）の投与制限＋高張食塩水の投与。</li><li><strong>第二選択</strong>：尿素の経口投与 15〜30 g/日 はSIADHの低Na血症是正の有効な代替戦略。ただし <strong>CSWSには不適切</strong>。</li><li><strong>CSWSでは循環血液量減少の補正が必要</strong>で、そのため高張食塩水が最良の選択となる。脳血流自己調節能に合わせた血圧調整も、不要で有害となりうる全身性高血圧を避けるのに役立ちうる。</li><li><strong>薬物療法</strong>：ヒドロコルチゾンはSAH＋CSWS患者で腎Na排泄を有効に減らした。髄膜炎に合併したCSWSのRCTでは、生食＋経口食塩補充に加えたフルドロコルチゾンが <strong>低Na血症の是正を早めたが、アウトカムは変えなかった</strong>。</li><li><strong>高Na血症</strong>：主因は高張Na液の投与、マンニトール後の浸透圧利尿による腎自由水喪失、ループ利尿薬、水分摂取不足、腎外性喪失。ADH分泌低下（下垂体手術後・脳死患者の尿崩症）でも起こる。</li><li><strong>予防的高張食塩水がICPを下げて予後を改善するかは不確実</strong>で、RCT（NCT03143751）で検証中と本文は述べる。</li><li><strong>糸球体過剰濾過</strong>：CrCl &gt; 120 mL/分で診断。心拍出量増加と高血圧が急性脳損傷早期の腎クリアランス増大と関連。<strong>腎排泄型薬剤（抗菌薬・抗てんかん薬）の過小投与</strong>を招くため血中濃度モニタリングと調整を考慮する。</li><li><strong>AKI</strong>：急性脳損傷患者の <strong>最大20%</strong> に起こり、死亡率上昇と関連。危険因子はCKD・腎毒性薬剤・高Cl血症・横紋筋融解症・敗血症。脳死は全身性免疫応答・神経内分泌活性化・内皮活性化・血行動態不安定を誘導し、腎障害と移植腎の遅発性機能不全に寄与しうる。</li><li><strong>結論</strong>：自由水の扱いと糸球体濾過をモニターすることで、急性脳損傷後の腎生理の理解を通じた治療調整が可能になる。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ADH（抗利尿ホルモン、バソプレシン）</strong> は視床下部のニューロンから分泌され、腎の集合管に働いて水だけを再吸収させるホルモン。正常なら「血漿浸透圧が下がる＝薄まった」と感知した時点で分泌が止まり、余った水が尿として出ていく。だから健常人は水を飲んでも血清Naが下がり続けない。</p>
+<p>急性脳損傷ではこの止まるはずのADHが止まらない。 本論文はADHを「stress hormone（ストレスホルモン）」と呼び、脳損傷そのものと血管内容量の低下の両方に反応して視床下部ニューロンから分泌されると説明する。ADHが高いと ①<strong>尿浸透圧が上がる</strong>（濃い尿になる）②<strong>尿量が減る</strong>。この2つは本論文のFigure 1中央のグラフがそのまま示している。</p>
+<p>ここから低Na血症の理屈が出る。 腎は「入ってきた溶質（Na・Cl などの浸透圧物質）を濃い尿として捨て、水は再吸収する」ことになる。すると、点滴で入れた液の浸透圧が尿の浸透圧より低ければ、<strong>溶質だけが出ていって水が体に残る</strong>。これが <strong>desalination（脱塩）</strong> と呼ばれる現象で、「生理食塩水を入れているのに血清Naが下がる」という一見矛盾した事態の正体である。</p>
+<p><strong>キーワード</strong></p>
+<ul><li><strong>低浸透圧性低Na血症</strong>：血清Na &lt; 135 mmol/L で、かつ血漿浸透圧が低い状態。水が細胞内へ移動し脳が腫れる。</li><li><strong>SIADH（ADH不適合分泌症候群）</strong>：低Na血症なのにADHが増えている状態。</li><li><strong>CSWS（脳性塩喪失症候群）</strong>：塩が腎から漏れ出て血管内容量が減り、その結果としてADHが出る状態。</li><li><strong>自由水（free water）／無ナトリウム水（sodium-free water）</strong>：溶質を含まない、純粋な水の分画。「自由水バランスがプラス」＝体に水が溜まる＝血清Naが下がる。</li><li><strong>ICP（頭蓋内圧）</strong>：頭蓋内の圧。脳が腫れると上がり、脳灌流圧（＝MAP − ICP）が下がって脳虚血を招く。</li><li><strong>糸球体過剰濾過／ARC（腎クリアランス増大）</strong>：腎の濾過が正常を超えて亢進した状態。薬が早く抜けるので効かなくなる。</li></ul>
+</div>
+<h3>2. 論文の構成 — 「腎の反応」は4項目からなる 🧭</h3>
+<p>本論文は導入で <strong>「急性脳損傷は腎を含む離れた臓器に変化をもたらす」</strong> と宣言し、その変化を次の2軸4項目に整理する。各項目に必ず「What are the therapeutic implications?（治療上の含意は何か）」という同名の小見出しが続く、という反復構造を持つ。</p>
+<h4>Table A. 原著の構成（紙面の見出しをそのまま並べたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>軸</th><th>項目</th><th>対応する「治療上の含意」の中身</th></tr></thead>
+<tbody>
+<tr><td><strong>1. 水とNaの取り扱い</strong>（Water and sodium handling）</td><td>低Na血症（Hyponatremia）</td><td>尿浸透圧に基づく輸液調整／desalination／無ナトリウム水制限＋高張食塩水／尿素／ヒドロコルチゾン・フルドロコルチゾン</td></tr>
+<tr><td>同上</td><td>高Na血症（Hypernatremia）</td><td>予防的高張食塩水の是非（RCT進行中）／マンニトールの浸透圧ギャップ監視／緩徐な自由水補充とリバウンドICP上昇／尿崩症での低浸透圧尿を指標にした補充とrecombinant ADH</td></tr>
+<tr><td><strong>2. 糸球体機能の変化</strong>（Changes in renal glomerular function）</td><td>糸球体過剰濾過（Glomerular hyperfiltration）</td><td>腎排泄型薬剤の過小投与リスク／血中濃度モニタリングと用量調整</td></tr>
+<tr><td>同上</td><td>急性腎障害（Acute kidney injury）</td><td>腎毒性薬剤使用時のリスク評価／Cr・尿量監視／低容量血症と静脈うっ血の両方を避ける輸液バランス</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>旧ノートの理解は狭すぎた（PDF照合で判明） 旧ノートは本論文を「低ナトリウム血症の論文」として要約し、高Na血症・糸球体過剰濾過・AKIの3項目を丸ごと落としていた。原著のタイトルは *Understanding the renal response to brain injury*（脳損傷に対する腎反応）であり、<mark class="hl">低Na血症は4項目のうちの1つにすぎない</mark>。本改稿でファイル名も「低ナトリウム血症」から4項目を並べた形に改めた。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：<strong>ナラティブな教育記事</strong>。紙面の柱に *UNDERSTANDING THE DISEASE* と印字された ICM の連載枠。原著研究・システマティックレビュー・メタ解析のいずれでもない。</li><li><strong>対象</strong>：患者を組み入れていない。倫理承認欄に「本論文は著者による人・動物を対象とした研究を含まない」と明記されている。</li><li><strong>検索戦略・選択基準</strong>：<strong>記載なし</strong>。ナラティブな性質上、文献の選定方法・網羅性・エビデンスレベルの格付けはいずれも示されていない。</li><li><strong>推奨の格付け</strong>：<strong>なし</strong>。GRADE等の確実性評価は行われていない。「first-line strategy（第一選択）」「best choice（最良の選択）」といった表現が根拠の強さを明示せずに使われる。</li><li><strong>アウトカム</strong>：該当なし。</li><li><strong>補足資料</strong>：SIADHとCSWSの比較表は online supplemental material, Table 1 として外部に置かれ、<strong>本PDFには含まれない</strong>。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">本論文の本文は SIADH と CSWS の鑑別方法を一切書いていない</mark> 本文にあるのは両者の <strong>成因の定義</strong>（SIADH＝低Na血症なのにADHが増える／CSWS＝高度Na利尿と負のNaバランスで血管内容量が減りADHが出る）だけである。 <mark class="hl">細胞外液量をどう評価するか、その評価がどれだけ当てになるか、尿Na・尿酸分画排泄・CVPをどう使うかは、本文に一行も書かれていない</mark>。鑑別表はオンライン補足資料 Table 1 に外出しされている。 「Understanding the Disease」を名乗る記事が、このテーマで最も難しい鑑別を本文で扱っていないのは、本論文の最大の構造的な弱点である。鑑別の実務は本論文では学べない。 別ノートに当たる必要がある（後述「既存ノートとの整合」）。</p>
+</div>
+<h3>4. 低Na血症 — 病態 💧</h3>
+<p>原著の記述をそのまま追う。</p>
+<p>低浸透圧性低Na血症（血清Na &lt; 135 mmol/L）が急速に進展すると、①脳浮腫を生じ、②痙攣を起こし、③ICPを上昇させ、④脳虚血のリスクを増大させうる。引用文献[1]は Citerio らのイタリア22施設・動脈瘤性SAH 350例の管理研究（*Intensive Care Med* 2007）。</p>
+<p>低Na血症は「ADH分泌後の腎における自由水再吸収の増加の結果」である。 本論文はこの一文で低Na血症を腎の水処理の問題として定義し直す。</p>
+<p><strong>ADH過剰分泌の2つの機序</strong>（神経ICU患者において古典的に提唱されてきたもの）：</p>
+<h4>Table B. SIADH と CSWS — 本論文が本文に書いている内容のみ</h4>
+<div class="tw"><table>
+<thead><tr><th></th><th><strong>SIADH</strong></th><th><strong>CSWS（脳性塩喪失症候群）</strong></th></tr></thead>
+<tbody>
+<tr><td><strong>正常時の生理</strong></td><td>血漿浸透圧が下がるとADH分泌は抑制される</td><td>同左</td></tr>
+<tr><td><strong>本論文による定義</strong></td><td>低Na血症にもかかわらずADH分泌が増加する</td><td>高度なNa利尿と負のNaバランスによる血管内容量の低下がADH分泌のトリガーとなる</td></tr>
+<tr><td><strong>想定される機序</strong></td><td>損傷脳の複数部位でバソプレシンが合成される（引用[3] Szmydynger-Chodobska 2011）</td><td>①ナトリウム利尿ペプチドの放出（引用[4] Berendes 1997、動脈瘤性SAH患者のBNP分泌）②圧誘発性ナトリウム利尿（引用[5] Ivy &amp; Bailey 2014）</td></tr>
+<tr><td><strong>用語の問題</strong></td><td>本論文は「the so-called SIADH（いわゆるSIADH）」という距離を置いた表現を使う</td><td>全身血行動態変化への<strong>生理的応答</strong>であるため、<strong>「renal salt wasting（腎性塩喪失）」というより適切な用語が提案されている</strong>（引用[6] Maesaka 2009 *Is it cerebral or renal salt wasting?*）</td></tr>
+<tr><td><strong>鑑別方法</strong></td><td><mark class="hl">本文に記載なし</mark>（オンライン補足資料 Table 1 に外出し）</td><td><mark class="hl">本文に記載なし</mark>（同左）</td></tr>
+</tbody></table></div>
+<p><strong>圧誘発性ナトリウム利尿（pressure-induced natriuresis）の説明</strong>：交感神経系の活性化または昇圧薬の投与によって全身動脈圧が上がった後に起こる。動脈圧が上昇したときに、Na利尿を通じて血管内血液量と血圧を下げることを目的とした反応である。本論文はこれを病的な現象ではなく生理的応答として位置づけ、だからこそ「脳性」より「腎性」の呼称がふさわしいと述べる。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>CSWの実在をめぐる議論について 本論文は <strong>「CSWは存在しない」とは主張していない</strong>。主張しているのは <strong>呼称の妥当性</strong>であり、圧誘発性ナトリウム利尿が全身血行動態への生理的応答である以上、脳に固有の症候群として扱うのは適切でない、という限定的な議論である。ただし引いている文献 Maesaka JK ら *Is it cerebral or renal salt wasting?*（*Kidney Int* 2009）は、まさにCSWの脳特異性を疑う立場の代表的論文であり、著者らがその立場に共感的であることは読み取れる。それ以上の踏み込み（診断された「CSWS」の多くが実は別物である、といった主張）は本文にない。</p>
+</div>
+<h3>5. 低Na血症 — 治療（Figure 1 の読み解き）💧</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-019-05685-z" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-019-05685-z）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 高ADH下における生理食塩水と高張食塩水の自由水バランス・血清Naへの影響（原図・無改変。©2019 Springer-Verlag GmbH Germany, part of Springer Nature）</p>
+</div>
+<p>図の構成（左右対称の1枚図。中央に人体のシルエット、左半分と右半分で対照させる）</p>
+<h4>Table C. Figure 1 の全要素（図中の文言をそのまま起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>番号・位置</th><th>図中の文言（原文）</th><th>描画</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>① 左上</td><td><code>NaCl 0.9%</code> / <code>≈300 mOsml/L</code></td><td>点滴バッグとスタンド。管は赤で人体へ</td><td>生理食塩水を投与する。浸透圧は約300</td></tr>
+<tr><td>左中央</td><td><code>Positive free water balance</code></td><td>赤枠の白箱。矢印は腎へ</td><td>自由水バランスがプラスになる</td></tr>
+<tr><td>② 中央下</td><td><code>Hyperosmolar Urine</code> / <code>≈600 mOsml/L</code></td><td>青枠の箱。左右の腎から矢印が集まり、下の採尿バッグへ</td><td>高ADHで尿は高浸透圧（約600）。<strong>投与液の300より濃い</strong>ため、溶質だけが出て水が残る</td></tr>
+<tr><td>③ 左上（頭部）</td><td><code>Blood:</code> <code>↘Na⁺</code>（赤い下向き矢印）</td><td>試験管アイコン＋脳の断面図。<strong>脳回が腫れ赤く描かれている</strong>（脳浮腫の表現）</td><td>血清Naが低下し、脳が浮腫む</td></tr>
+<tr><td>④ 右上</td><td><code>NaCl 3.0%</code> / <code>≈1000 mOsml/L</code></td><td>点滴バッグとスタンド。管は青で人体へ</td><td>高張食塩水を投与する。浸透圧は約1000</td></tr>
+<tr><td>右中央</td><td><code>Negative free water balance</code></td><td>赤枠の白箱。矢印は腎へ</td><td>自由水バランスがマイナスになる</td></tr>
+<tr><td>⑤ 右上（頭部）</td><td><code>Blood:</code> <code>↗Na⁺</code>（緑の上向き矢印）</td><td>試験管アイコン＋脳の断面図。<strong>脳回は正常な形</strong></td><td>血清Naが上昇し、脳浮腫が生じない</td></tr>
+<tr><td>中央のインセット図</td><td>横軸 <code>Plasma ADH</code>、縦軸 <code>Min</code>〜<code>Max</code>、曲線2本：<code>Urine Osmolality</code>（右上がり）／<code>Urine Output</code>（右下がり）</td><td>白背景の小さな折れ線グラフ</td><td><strong>血漿ADHが上がるほど尿浸透圧は上がり、尿量は減る</strong>。図全体の前提を示す</td></tr>
+</tbody></table></div>
+<p><strong>キャプション全文の訳（原文の構造をそのまま保つ）</strong></p>
+<p>&gt; Figure 1. 高ADH分泌下における、生理食塩水と高張食塩水の投与が自由水バランスと血清Na変化に与える影響。 &gt; <strong>左パネル</strong>：ADHは、脳損傷と血管内容量の低下に応答して視床下部ニューロンから分泌されるストレスホルモンである。脳損傷の文脈では、SIADHまたはCSWSによるADHの過剰分泌が高い尿浸透圧と腎における電解質フリー水の再吸収をもたらす一方で、腎は浸透圧物質（すなわち電解質）を排泄する。NaCl 0.9%の投与は、血漿よりわずかに高い浸透圧を持つにもかかわらず、この状況では自由水バランスをプラスにし低Na血症を促進する（①）。高ADH分泌により尿浸透圧が約600 mOsmol/Lとなっている例では、生理食塩水（NaCl 0.9%、溶質浸透圧 約300 mosml/L）で投与された浸透圧物質は高浸透圧の尿として排泄され（②）、正味の自由水バランスがプラスになり低Na血症を促進する（③）。 &gt; <strong>右 B</strong>：高張食塩水の投与（④）（すなわち尿浸透圧を上回る浸透圧を持つ液の投与）は、自由水バランスが負になることにより血清Naの上昇をもたらす（⑤）。</p>
+<p><strong>この図が伝えている実務上の一点</strong>：判断の材料は「投与する液の浸透圧」と「尿の浸透圧」の <strong>大小関係だけ</strong> である。SIADHかCSWSかを決めなくても、この比較はベッドサイドでできる。</p>
+<h4>5-1. desalination（脱塩）</h4>
+<p>尿より低い浸透圧の液（低張液または等張液）を注入すると自由水の貯留が起こり低Na血症を促進する。 この現象は <strong>desalination</strong> と呼ばれる（引用[7] Steele ら *Ann Intern Med* 1997「ほぼ等張の生食を注入したにもかかわらず生じた術後低Na血症：desalinationという現象」）。注入されたNaとClは浸透圧物質として排泄される一方で、集合管レベルでのADHの作用によりNaを含まない水が再吸収される。</p>
+<p>生理食塩水の注入は、血漿よりわずかに高い浸透圧を持つにもかかわらず、高ADH・高尿浸透圧という文脈では自由水バランスを正にし、低Na血症を促進する。</p>
+<h4>5-2. 第一選択</h4>
+<p>無ナトリウム水（sodium-free water）投与の制限と高張食塩水の投与は、SIADHとCSWSの双方で低Na血症を予防または是正することが期待され、第一選択の戦略とみなされるべきである。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">「SIADHは水制限、CSWは塩と水の補充」という古典的な二分法を、本論文は採っていない</mark> 古典的な教科書的対比では、SIADHには水制限、CSWにはNaと水の補充とされ、<strong>取り違えると害が正反対の形で出る</strong>とされてきた。すなわち ①CSWをSIADHと誤って水制限すれば、循環血液量減少が悪化して脳灌流が落ち、SAHでは遅発性脳虚血のリスクが上がる。②SIADHをCSWと誤って自由水を含む液で負荷すれば、脳浮腫とICP上昇が悪化する。</p>
+<p>本論文の立場はこれと異なる。 本文が第一選択として挙げるのは、両者に共通の <strong>「無ナトリウム水の"投与"制限＋高張食塩水」</strong> である。<mark class="hl">注目すべきは、これが古典的な意味の「水制限（飲水・輸液総量の制限）」ではなく、"投与する液の組成"を変える戦略である点</mark>。高張食塩水はNaと水の両方を与えるので、CSWの循環血液量減少を悪化させない。結果として、鑑別を誤っても第一選択の段階では害が出にくい設計になっている。</p>
+<p>ただし本文はこの含意を明示していない（「第一選択が両者共通である」と書くだけで、なぜ安全なのかの説明はない）。上の解釈は本文の記述から導いたものであって、<mark class="hl">論文が明言した内容ではない</mark>。</p>
+</div>
+<h4>5-3. 第二選択 — 尿素</h4>
+<p>尿素の経口投与（15〜30 g/日） は、<strong>SIADH</strong> における低Na血症の是正に有効な代替戦略であり、重症度の低い患者または<strong>第二選択治療</strong>として考慮できる（引用[8] Decaux ら *Crit Care* 2010「ICUにおける等容量性低Na血症の尿素による治療」）。</p>
+<p><strong>尿素の作用機序（本文の記述）</strong>：</p>
+<ul><li><strong>尿素は脳の毛細血管を部分的にしか通過しない</strong>。したがって血漿-脳間の濃度勾配が保たれ、<strong>脳の水分量とICPを低下させる</strong>。</li><li>しかし二次的に浸透圧利尿が起こり、電解質フリー水の喪失を伴って血清Na濃度の上昇をもたらす。</li><li>本文はここに定量的な関係を添える：尿浸透圧が低いほど、電解質フリー水の喪失と血清Na上昇は大きくなる。</li><li><strong>これがCSWSにおいて尿素を不適切とする理由である</strong>、と本文は結論する。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原著の論理が飛んでいる箇所 本文は「浸透圧利尿で電解質フリー水が失われ血清Naが上がる → だからCSWSには不適切」と書く。しかし <strong>低Na血症の治療では血清Naを上げることこそが目的</strong> であって、この理由づけだけでは不適切さの説明にならない。 意図されているのは「CSWSでは既に血管内容量が減っており、そこへ浸透圧利尿を加えれば容量減少がさらに悪化する」という論理のはずだが、<mark class="hl">本文にはこの一文が書かれていない</mark>。尿素をCSWSで避ける理由は「容量」であって「Na」ではない、と補って読む必要がある。</p>
+</div>
+<h4>5-4. 循環血液量減少の補正と血圧</h4>
+<p>CSWSでは循環血液量減少の補正が必要であり、上述の理由から高張食塩水が最良の選択となる。</p>
+<p>脳血流の自己調節能に合わせて動脈圧を調整することは、動脈圧レベルの最適化をさらに助け、不要かつ潜在的に有害な全身性高血圧を避けることに寄与しうる（引用[9] Klein、Depreitere、Meyfroidt *Crit Care* 2019「私はどのように脳自己調節能をモニターするか」）。本文は「might further help」という控えめな助動詞を使っており、断定していない。</p>
+<h4>5-5. 薬物療法（鉱質コルチコイド・糖質コルチコイド）</h4>
+<h4>Table D. 本論文が挙げる2つの薬物療法（本文の記述のまま）</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>本文の記述</th><th>引用</th><th>本文が述べた効果</th><th>本文が述べたアウトカム</th></tr></thead>
+<tbody>
+<tr><td><strong>ヒドロコルチゾン</strong></td><td>「くも膜下出血とCSWSの患者において、腎Na排泄を有効に減少させることが示された」</td><td>[10] Katayama Y ら *Stroke* 2007;38:2373–2375（動脈瘤性SAH患者の低Na血症に対するヒドロコルチゾンのRCT）</td><td>腎Na排泄の減少</td><td><strong>記載なし</strong></td></tr>
+<tr><td><strong>フルドロコルチゾン</strong></td><td>「髄膜炎に合併したCSWSの患者で実施されたRCTでは、生理食塩水と経口食塩補充に加えたフルドロコルチゾンが、低Na血症のより早期の是正をもたらしたが、<strong>アウトカムには影響しなかった</strong>」</td><td>[11] Misra UK, Kalita J, Kumar M. *JAMA Neurol* 2018;75:1383–1391（<strong>結核性髄膜炎</strong>患者のCSW治療におけるフルドロコルチゾンの安全性と有効性のRCT）</td><td>低Na血症の是正が早まる</td><td><mark class="hl"><strong>アウトカムは変わらなかった</strong></mark></td></tr>
+</tbody></table></div>
+<p>用量・投与期間は本文にも表にも一切書かれていない。 「ヒドロコルチゾン何mgを何時間ごと」「フルドロコルチゾン何mg」といった情報は本論文からは得られない。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>引用元と本文記述のずれ（2点）</p>
+<ul><li><strong>フルドロコルチゾンRCTの母集団</strong>：本文は「meningitis（髄膜炎）」と書くが、引用[11]の表題は tuberculous meningitis（結核性髄膜炎） である。母集団が狭められておらず、一般の細菌性・ウイルス性髄膜炎に外挿できるかのように読める。</li><li><strong>ヒドロコルチゾンRCTの母集団</strong>：本文は「patients with subarachnoid hemorrhage and CSWS（SAH かつ CSWS の患者）」と書くが、引用[10]の表題は「動脈瘤性SAH患者における低Na血症に対する」RCTであり、CSWS確定例に限定した試験であるとは表題からは読めない。</li></ul>
+</div>
+<h3>6. 高Na血症 🧂</h3>
+<p><strong>主な原因（本文が列挙する5つ）</strong></p>
+<ol><li>高張Na液の注入</li><li>マンニトール注入後の浸透圧利尿による腎からの自由水喪失</li><li>ループ利尿薬の投与</li><li>水分摂取不足</li><li>腎外性喪失</li></ol>
+<p>過剰な腎自由水喪失は、ADH分泌の低下の結果でもありうる。すなわち <strong>下垂体手術後の尿崩症</strong> と <strong>脳死患者における尿崩症</strong>（引用[12] Nongnuch、Panorchan、Davenport *Crit Care* 2014「Brain-kidney crosstalk（脳-腎クロストーク）」）。</p>
+<h4>6-1. 治療上の含意</h4>
+<p>① 治療目的で意図的に高Na血症を作ることがある。 急性の高Na血症はICPを下げる治療標的として誘導されることがある。しかし そのような予防的高張食塩水の注入がICPを下げアウトカムを改善する有効かつ安全な戦略であるかは不確実であり、現在RCT（NCT03143751）で検証中である、と本文は述べる。</p>
+<p>② マンニトールによる高Na血症は予測しにくい。 腎からの自由水喪失が可変であるため。本文の対処は2段構え：</p>
+<ul><li>腎の反応（すなわち尿量）と血漿浸透圧ギャップに合わせてマンニトールを漸増・漸減することが、二次的な循環血液量減少のリスクを抑えるために必要（warranted）。</li><li>マンニトールに伴う過剰な高Na血症を予防・是正する最良の戦略は、おそらく浸透圧ギャップをモニターし、必要ならマンニトールを減量または中止することである（本文は "probably" という語を使い、断定を避けている）。</li></ul>
+<p><strong>③ 過剰な高Na血症は自由水の投与によりゆっくり是正できる</strong>（引用[13] Chauhan ら *CJASN* 2019「重症患者における高Na血症の是正速度と健康アウトカム」）。ただしこの戦略はリバウンドの頭蓋内圧亢進のリスクを持つ。</p>
+<p><strong>④ 尿崩症の管理</strong>：低浸透圧尿（すなわち尿浸透圧 &lt; 100 mOsmol/L）が、尿量に合わせて調整する自由水（例：2.5%ブドウ糖液）の補充量を導き、リコンビナントADHの補充を開始する引き金となる。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>数値の確認 本文が高Na血症の項で示す唯一の具体的な数値は <strong>尿浸透圧 &lt; 100 mOsmol/L</strong>（尿崩症の指標）である。血清Naの上限値、是正速度の上限、高張食塩水の濃度・用量はいずれも記載がない。</p>
+</div>
+<h3>7. 糸球体過剰濾過（腎クリアランス増大）🚿</h3>
+<p><strong>診断</strong>：高いクレアチニンクリアランス（CrCl &gt; 120 mL/分） の同定によってなされる。本文は算出式を明示する：</p>
+<p>&gt; CrCl = ［尿中クレアチニン × (尿量 ÷ 血清クレアチニン) ÷ 蓄尿時間（分）］</p>
+<p><strong>機序</strong>：心拍出量の増加と高い動脈圧が、急性脳損傷の早期における腎クリアランス増大と関連する（引用[14] Udy ら *Anesth Analg* 2010「外傷性脳損傷におけるクレアチニンクリアランス増大」）。</p>
+<p><strong>治療上の含意</strong>：腎過剰濾過は、腎排泄型薬剤（すなわち抗菌薬・抗てんかん薬）の治療域を下回る過小投与を招くため、薬物血中濃度モニタリングと用量調整を考慮すべきである（引用[15] Carrie ら *Anaesth Crit Care Pain Med* 2018「脳損傷患者の人工呼吸器関連肺炎における腎クリアランス増大と抗菌薬治療の臨床的失敗の関連：予備的研究」）。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>閾値 120 mL/分の出所 本文は CrCl &gt; 120 mL/分を過剰濾過の診断閾値として示すが、<strong>この数値そのものには引用が付いていない</strong>。直後に引かれる[14] Udy らは「心拍出量増加・高血圧との関連」に対する引用であって、閾値の根拠ではない。腎クリアランス増大（ARC）の文献では体表面積補正した値（mL/分/1.73 m²）が用いられることが多く、<strong>本文の120 mL/分は補正の有無が明示されていない</strong>。当院で運用するなら、閾値は自施設の実測CrClの算出法に合わせて再定義する必要がある。</p>
+</div>
+<h3>8. 急性腎障害（AKI）🩺</h3>
+<p><strong>疫学</strong>：AKIは急性脳損傷患者の最大20%に生じ、より高い死亡率と関連する。</p>
+<p><strong>危険因子（本文が列挙する5つ）</strong>：①慢性腎臓病 ②腎毒性薬剤の使用 ③高Cl血症 ④横紋筋融解症 ⑤敗血症。</p>
+<p><strong>脳死の影響</strong>：脳死は全身性の免疫応答・神経内分泌活性化・内皮活性化・血行動態不安定を誘導し、これらはいずれも腎障害と移植腎の遅発性機能不全（delayed allograft function）に寄与しうる潜在的因子である（引用[16] Civiletti ら *Sci Rep* 2019「急性尿細管障害は重症外傷性脳損傷と関連する：ヒト尿細管上皮細胞を用いたin vitro研究」）。</p>
+<p><strong>治療上の含意</strong>：</p>
+<ul><li>潜在的な腎毒性薬剤を使用する際にはAKIのリスクを評価すべきであり、クレアチニンと尿量のモニタリングを要する。</li><li>輸液バランスは慎重に調整すべきである。低容量血症と静脈うっ血の両方が、脳と腎の障害の危険因子として同定されているためである（引用[17] Ameloot ら *Crit Care* 2016「心停止後、静脈うっ血は脳酸素化の低下と神経学的予後の悪化に関連するか」／[18] Legrand ら *Crit Care* 2013「重症患者における全身血行動態と敗血症性AKIの関連」）。</li><li>とりわけ、（例えばマンニトール注入後の）循環血液量減少の予防と是正が、AKIのリスクを抑えると期待される（引用[19] Oddo ら *Intensive Care Med* 2018「神経集中治療患者における輸液療法：ESICMコンセンサスと臨床実践勧告」）。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>「最大20%」に引用が付いていない AKIの発生頻度（最大20%）と死亡率との関連という <strong>疫学的な主張に対して、本文は引用を付けていない</strong>。直後の[16]はヒト尿細管上皮細胞を用いたin vitro研究であり、この疫学数値を支持する文献ではない。この20%という数字を当院の資料に転記する際は、原典を別途確認する必要がある。</p>
+</div>
+<h3>9. 結論（原文）</h3>
+<p>&gt; 自由水の取り扱いと糸球体濾過をモニターすることで、急性脳損傷後の腎生理の理解を通じた治療調整が可能になる。</p>
+<p>本文の最終段落はこの一文のみ。具体的な数値目標、プロトコル、アルゴリズムは提示されない。</p>
+<h2>🔄 既存ノートとの整合（Vault内の他ノートとの突き合わせ）</h2>
+<h3>一致している点</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本論文（ICM2019）</th><th>Vault内の既存ノート</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>高ADH下で等張液は低Na血症を悪化させる</td><td>生食は血漿よりわずかに高浸透圧でも自由水バランスを正にし低Na血症を促進</td><td><span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span>「等張生食はSIADでは血清Naをむしろ悪化させる」</td><td><strong>一致</strong></td></tr>
+<tr><td>神経集中治療で低Na血症に輸液制限をしない</td><td>第一選択は「無ナトリウム水の投与制限＋高張食塩水」であり、輸液総量の制限ではない</td><td><span class="wl">🧠 脳神経 Home</span>「低ナトリウム血症で輸液制限をしない。低容量血症は遅発性脳虚血のリスクを上げる」</td><td><strong>一致</strong></td></tr>
+<tr><td>尿素はSIADHの選択肢になる</td><td>経口尿素 15〜30 g/日</td><td><span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span>／<span class="wl">SIAD（ADH不適合分泌症候群）の病態から治療まで — 水制限は約半数で失敗、トルバプタン・尿素・SGLT2阻害薬（総説・EndocrRev2023）</span></td><td><strong>一致</strong>（用量幅は下記参照）</td></tr>
+<tr><td>静脈うっ血も低容量血症も腎・脳に悪い</td><td>両方がAKIと脳障害の危険因子</td><td><span class="wl">人工呼吸誘発性AKI — 高PEEPは腎うっ血を介して腎を傷めるか（レビュー・CritCare2025）</span>／<span class="wl">腎灌流圧（RPP）— MAP単独では腎は守れない、自己調節・静脈うっ血・個別化目標（AnnIntensiveCare2025）</span></td><td><strong>一致</strong></td></tr>
+<tr><td>高Na血症の予防は「入れる液の組成」で決まる</td><td>マンニトール由来の高Na血症は浸透圧ギャップ監視と減量で対処</td><td><span class="wl">薬剤の希釈液を生食から5%ブドウ糖に変えると重症高Na血症が20%から6.6%に減る（前後比較265例・ClinKidneyJ2024）</span></td><td><strong>方向は一致</strong>（本論文は薬剤希釈液には触れていない）</td></tr>
+</tbody></table></div>
+<h3>食い違い・補完が必要な点</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本論文（ICM2019）</th><th>Vault内の既存ノート</th><th>どう扱うか</th></tr></thead>
+<tbody>
+<tr><td><strong>尿素の用量</strong></td><td><strong>15〜30 g/日</strong></td><td><span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span>は <strong>15〜60 g/日</strong>。「尿素30 g（500 mOsm）は尿浸透圧500 mOsm/kgのとき1 Lの水排泄に相当」と定量も示す</td><td><strong>上限が2倍違う</strong>。より新しく定量的なJAMA2022を実務の正とし、本論文は「神経ICUでの下限側の使い方」と位置づける</td></tr>
+<tr><td><strong>SIADの第一選択</strong></td><td>神経ICUでは「無ナトリウム水の投与制限＋高張食塩水」。<strong>古典的な水制限を第一選択とは書いていない</strong></td><td><span class="wl">SIAD（ADH不適合分泌症候群）の病態から治療まで — 水制限は約半数で失敗、トルバプタン・尿素・SGLT2阻害薬（総説・EndocrRev2023）</span>は「水制限が現行ガイドラインでSIADの第一選択として広く支持」かつ「約半数で失敗する」</td><td><strong>母集団が違う</strong>（一般内科のSIAD vs 神経ICU）。<mark class="hl">神経ICUでは水制限を第一選択にしない</mark> という本論文の立場を優先し、一般病棟のSIADには EndocrRev2023 を使う</td></tr>
+<tr><td><strong>補正速度の上限・ODS</strong></td><td><mark class="hl">本文に一切記載なし</mark>。ODSという語も一度も出てこない</td><td><span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span>が「24時間で10 mEq毎L、48時間で18 mEq毎L、ODS高リスクは任意の24時間で8 mEq毎L」を提示</td><td><strong>本論文だけでは低Na血症の治療はできない。</strong> 補正速度は必ずJAMA2022側を参照する</td></tr>
+<tr><td><strong>SAHにおける低Na血症の頻度</strong></td><td><mark class="hl">記載なし</mark>。SAHは薬物療法の項で登場するのみ</td><td><span class="wl">くも膜下出血後の低ナトリウム血症の診断と管理</span>（*J Clin Med* 2015）が <strong>30〜56%</strong> と記載</td><td>頻度は既存ノートから引く</td></tr>
+<tr><td><strong>SAHで水制限が禁忌に近いとされる理由</strong></td><td><mark class="hl">明示的な記載なし</mark>。ただし第一選択に水制限を置かないことで実質的に整合</td><td><span class="wl">🧠 脳神経 Home</span>「低容量血症は遅発性脳虚血のリスクを上げる」</td><td><strong>本論文はSAHの水制限禁忌を論じていない</strong>と明記したうえで、理由づけはHome側を使う</td></tr>
+<tr><td><strong>高張食塩水の投与法（ボーラス vs 持続）</strong></td><td><mark class="hl">記載なし</mark>。濃度は図の NaCl 3.0% のみ</td><td><span class="wl">SALSA試験 症候性低Na血症への高張食塩水ボーラス vs 持続投与（JAMA2021）</span></td><td>投与法は SALSA を参照</td></tr>
+<tr><td><strong>過剰補正の予防</strong></td><td><mark class="hl">記載なし</mark></td><td><span class="wl">重症低Na血症に高張食塩水＋先制デスモプレシン — 過剰補正が27.1%から6.8%に減る（4病院184例・Kidney360 2025）</span></td><td>本論文の第一選択（高張食塩水）を実行するときの安全装置として併読する</td></tr>
+<tr><td><strong>バプタン（トルバプタン）・SGLT2阻害薬</strong></td><td><mark class="hl">記載なし</mark></td><td><span class="wl">SIAD（ADH不適合分泌症候群）の病態から治療まで — 水制限は約半数で失敗、トルバプタン・尿素・SGLT2阻害薬（総説・EndocrRev2023）</span></td><td>本論文は2019年で、SGLT2阻害薬のSIAD適用が広く議論される前の記事</td></tr>
+</tbody></table></div>
+<h3>その後どうなったか</h3>
+<ul><li><strong>予防的高張食塩水のRCT（NCT03143751）</strong>：本文が「検証中」とした試験の結果を扱ったノートは <strong>Vault未収載</strong>。ICP管理の現在地は <span class="wl">頭蓋内圧の生理・モニタリングと個別化管理 — 22mmHgの一律閾値から降りる（ICM2026）</span> および <span class="wl">脳浮腫の急性期治療ガイドライン — 高張食塩水をマンニトールより優先するのはTBIとICHのみ（NCS・NeurocritCare2020）</span> に譲る。</li><li><strong>SIADHとCSWSの鑑別</strong>：2019年以降の鑑別に特化した論文・ガイドラインは <strong>Vault未収載</strong>。現時点で最も詳しいのは <span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span> だが、これも神経ICU特異の鑑別は扱っていない。<mark class="hl">当Vaultには「SIADHとCSWをベッドサイドでどう分けるか」を正面から扱ったノートがまだ無い</mark>（本論文もその答えを本文に持たない）。</li><li><strong>脳-腎連関そのもの</strong>：<span class="wl">重症病態における脳の管理アップデート — 神経モニタリング・脳のエネルギー基質・脳臓器連関・予後予測（ICMExp2024）</span> が脳-臓器連関を扱っており、本論文の5年後の視点として併読できる。</li></ul>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<p>① 記事の性質を取り違えない。 *UNDERSTANDING THE DISEASE* は ICM の教育連載であり、文献検索戦略・選択基準・エビデンスの格付けがいずれも示されていない。にもかかわらず本文は「first-line strategy」「best choice」といった強い言葉を使う。推奨の強さは著者の見解の強さであって、エビデンスの強さではない。</p>
+<p>② 第一選択の推奨に引用が1本も付いていない。 「無ナトリウム水の投与制限と高張食塩水の投与は、SIADHとCSWSの双方で低Na血症を予防または是正することが期待され（is expected to）、第一選択の戦略とみなされるべきである」——この中心的な推奨には引用文献が付かない。しかも動詞は "is expected to"（期待される）という推定形である。推定形の根拠から「第一選択とすべき」という規範が導かれている構造は、JCで指摘すべき点。</p>
+<p>③ 最も難しい問題（SIADH vs CSWSの鑑別）が本文から外されている。 本文が扱うのは成因の定義だけで、鑑別方法はオンライン補足資料 Table 1 に出されている。紙面だけを読む読者は鑑別の手がかりを1つも得られない。 「Understanding the Disease」という題目に照らして、これは構造的な欠落である。</p>
+<p>④ 尿素をCSWSで避ける理由の論理が飛んでいる。 本文は「血清Naが上がるから不適切」と書くが、低Na血症では血清Naを上げることが目的である。真の理由（容量減少の悪化）が書かれていない。</p>
+<p>⑤ 引用元と本文記述にずれが2箇所ある。 結核性髄膜炎のRCTを「髄膜炎」と一般化していること、SAHの低Na血症RCTを「SAHかつCSWSの患者」と限定的に記述していること。いずれも読者が引用元に当たらないと気づけない。</p>
+<p>⑥ 疫学的主張に引用がない。 「AKIは急性脳損傷患者の最大20%に生じ死亡率上昇と関連」——この数値に引用がない。直後の[16]はin vitro研究である。</p>
+<p>⑦ 過剰濾過の閾値 120 mL/分に根拠が示されていない。 体表面積補正の有無も明示されない。そのまま院内基準にはできない。</p>
+<p>⑧ 図の体裁に不整合がある。 キャプションが左を「<strong>Left panel</strong>」、右を「<strong>Right B</strong>」と呼び分けており、A/Bというパネル記号は本文にも図中にも定義されていない。また図中と一部キャプションの単位表記が「mOsml/L」（正しくは mOsmol/L）と誤植になっている。内容の理解には影響しないが、査読・組版の粗さを示す。</p>
+<p>⑨ 利益相反と推奨内容の関係。 <mark class="hl">両著者がともに <strong>Baxter</strong>（輸液製剤メーカー）から講演料を受けている</mark>。本論文の中心的な推奨は <strong>高張食塩水の使用</strong> である。COIは「submitted work の範囲外」と明記されており不正を示すものではないが、推奨の方向と資金提供者の製品領域が重なっていることはJCで言及に値する。</p>
+<p><strong>⑩ 何が書かれていないかのリスト</strong>（本論文だけで診療しないために）</p>
+<ul><li>低Na血症の補正速度の上限、ODS（浸透圧性脱髄症候群）</li><li>SIADH／CSWSのベッドサイド鑑別基準、細胞外液量評価の信頼性</li><li>高張食塩水の濃度・用量・投与速度・目標血清Na</li><li>低Na血症の頻度・予後、SAHにおける頻度</li><li>バプタン、SGLT2阻害薬</li><li>ヒドロコルチゾン・フルドロコルチゾンの用量と投与期間</li><li>AKIに対する具体的な予防バンドル</li></ul>
+<h2>📚 主要引用文献一覧（本文で参照された19本）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>低Na血症とSAHの管理（イタリア22施設・動脈瘤性SAH 350例）</td><td>Citerio G ら. *Intensive Care Med*. 2007;33:1580–1586</td></tr>
+<tr><td>2</td><td>低Na血症の診断と治療の臨床実践ガイドライン（欧州）</td><td>Spasovski G, Vanholder R, Allolio B ら. *Nephrol Dial Transplant*. 2014;29(Suppl 2):i1–i39</td></tr>
+<tr><td>3</td><td>損傷脳における複数部位でのバソプレシン合成</td><td>Szmydynger-Chodobska J, Zink BJ, Chodobski A. *J Cereb Blood Flow Metab*. 2011;31:47–51</td></tr>
+<tr><td>4</td><td>動脈瘤性SAH患者における脳性ナトリウム利尿ペプチドの分泌</td><td>Berendes E, Walter M, Cullen P ら. *Lancet*. 1997;349:245–249</td></tr>
+<tr><td>5</td><td>圧ナトリウム利尿と動脈血圧の腎による制御</td><td>Ivy JR, Bailey MA. *J Physiol*. 2014;592:3955–3967</td></tr>
+<tr><td>6</td><td><strong>「脳性か腎性か」——CSW/RSWの用語をめぐる論考</strong></td><td>Maesaka JK, Imbriano LJ, Ali NM, Ilamathi E. *Kidney Int*. 2009;76:934–938</td></tr>
+<tr><td>7</td><td><strong>desalination（脱塩）</strong> — ほぼ等張の生食投与にもかかわらず生じた術後低Na血症</td><td>Steele A, Gowrishankar M, Abrahamson S ら. *Ann Intern Med*. 1997;126:20–25</td></tr>
+<tr><td>8</td><td><strong>ICUにおける等容量性低Na血症の尿素による治療</strong></td><td>Decaux G, Andres C, Gankam Kengne F, Soupart A. *Crit Care*. 2010;14:R184</td></tr>
+<tr><td>9</td><td>脳自己調節能をどうモニターするか</td><td>Klein SP, Depreitere B, Meyfroidt G. *Crit Care*. 2019;23:160</td></tr>
+<tr><td>10</td><td><strong>動脈瘤性SAH患者の低Na血症に対するヒドロコルチゾンのRCT</strong></td><td>Katayama Y, Haraoka J, Hirabayashi H ら. *Stroke*. 2007;38:2373–2375</td></tr>
+<tr><td>11</td><td><strong>結核性髄膜炎患者のCSW治療におけるフルドロコルチゾンのRCT</strong></td><td>Misra UK, Kalita J, Kumar M. *JAMA Neurol*. 2018;75:1383–1391</td></tr>
+<tr><td>12</td><td>脳-腎クロストーク</td><td>Nongnuch A, Panorchan K, Davenport A. *Crit Care*. 2014;18:225</td></tr>
+<tr><td>13</td><td>重症患者における高Na血症の是正速度と健康アウトカム</td><td>Chauhan K, Pattharanitima P, Patel N ら. *Clin J Am Soc Nephrol*. 2019;14:656–663</td></tr>
+<tr><td>14</td><td><strong>外傷性脳損傷におけるクレアチニンクリアランス増大</strong></td><td>Udy A, Boots R, Senthuran S ら. *Anesth Analg*. 2010;111:1505–1510</td></tr>
+<tr><td>15</td><td>脳損傷患者のVAPにおける腎クリアランス増大と抗菌薬治療失敗の関連</td><td>Carrie C, Bentejac M, Cottenceau V ら. *Anaesth Crit Care Pain Med*. 2018;37:35–41</td></tr>
+<tr><td>16</td><td>急性尿細管障害と重症TBIの関連（ヒト尿細管上皮細胞のin vitro研究）</td><td>Civiletti F, Assenzio B, Mazzeo AT ら. *Sci Rep*. 2019;9:6090</td></tr>
+<tr><td>17</td><td>心停止後の静脈うっ血と脳酸素化・神経学的予後</td><td>Ameloot K, Genbrugge C, Meex I ら. *Crit Care*. 2016;20:146</td></tr>
+<tr><td>18</td><td>全身血行動態と敗血症性AKIの関連</td><td>Legrand M, Dupuis C, Simon C ら. *Crit Care*. 2013;17:R278</td></tr>
+<tr><td>19</td><td><strong>神経集中治療患者における輸液療法：ESICMコンセンサスと臨床実践勧告</strong></td><td>Oddo M, Poole D, Helbok R ら. *Intensive Care Med*. 2018;44:449–463</td></tr>
+</tbody></table></div>
+<p><strong>謝辞</strong>：Jean-Philippe Haymann教授に原稿の批判的査読への謝辞。</p>
+<p><strong>利益相反</strong>：Legrand — フランス保健省からの研究助成、Sphingotec社からの研究支援、Baxter社・Fresenius社からの講演料、Novartis社からのコンサルティング料（いずれも本投稿論文の範囲外）。Sonneville — フランス保健省、フランス集中治療医学会（SRLF）、欧州集中治療医学会（ESICM）からの研究助成、Baxter社からの講演料。</p>
+<p><strong>資金源</strong>：<mark class="hl">本論文自体への資金提供（funding）の記載は紙面に無い</mark>。Funding欄そのものが設けられていない。</p>
+<p><strong>倫理</strong>：本論文は著者による人・動物を対象とした研究を含まない。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">急性脳損傷の低Na血症は「SIADHかCSWか」ではなく「投与する液の浸透圧が尿浸透圧より高いか低いか」で判断できる。低ければ、たとえ生理食塩水でも血清Naは下がる。</mark></p>
+</div>
+<ul><li><mark class="hl">第一選択はSIADH・CSWSで共通 — 無ナトリウム水の"投与"制限＋高張食塩水。輸液総量を絞る古典的な水制限ではない</mark>。だから鑑別を誤っても初手では害が出にくい。</li><li><strong>分岐が要るのは第二選択から</strong>。尿素（経口15〜30 g/日）はSIADHには有効だがCSWSには不適切。理由はNaではなく<strong>容量</strong>（本文はここを書いていない）。</li><li><mark class="hl">本論文には低Na血症の補正速度上限もODSも書かれていない。補正速度は必ず別の資料で確認する</mark>（当Vaultでは JAMA2022 レビューの 10／18／8 mEq毎L）。</li><li>この論文は低Na血症の論文ではない。 高Na血症（マンニトール・尿崩症）、糸球体過剰濾過（CrCl &gt; 120 mL/分で抗菌薬・抗てんかん薬が過小投与になる）、AKI（最大20%・死亡と関連）まで含む<strong>脳-腎連関の全体像</strong>を扱っている。</li><li>マンニトールを使うなら浸透圧ギャップと尿量をセットで追う。 二次的な循環血液量減少がAKIを招く。</li><li><strong>SIADHとCSWSの鑑別方法は本文に一行も無い</strong>（オンライン補足資料に外出し）。鑑別を学ぶ目的でこの論文を読んではいけない。</li></ul>
+<h4>判断の流れ（急性脳損傷＋低Na血症）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>急性脳損傷患者の血清Naが下がってきた</td><td>尿浸透圧を測る。同時に、いま投与している液の浸透圧を確認する</td><td>投与液の浸透圧 &lt; 尿浸透圧 なら、その液が低Na血症を作っている（desalination）</td></tr>
+<tr><td>投与液が生理食塩水（約300）で尿浸透圧が高い（例 600）</td><td>ADHが高い状態と判断</td><td>生食では下がり続ける。<strong>高張食塩水へ切り替える</strong>＋無ナトリウム水の投与を止める</td></tr>
+<tr><td>維持輸液に低張液（1号液・3号液・5%ブドウ糖）が入っている</td><td>ADHが高い局面かどうか</td><td><mark class="hl">直ちに中止・変更を検討</mark>。ADH高値下では事実上の自由水負荷</td></tr>
+<tr><td>循環血液量減少が疑われる（CSWSを疑う）</td><td>血圧・尿量・Naバランス。昇圧薬使用の有無（圧誘発性Na利尿の要因）</td><td>高張食塩水はNaと水の両方を与えるので<strong>この状況でも安全</strong>。水制限はしない</td></tr>
+<tr><td>SIADHが強く疑われ、重症度が低い／第二選択を検討</td><td>CSWSが除外できているか</td><td><strong>経口尿素 15〜30 g/日</strong>を考慮。CSWSが否定できないなら使わない</td></tr>
+<tr><td>高張食塩水を開始した</td><td>補正速度</td><td><mark class="hl">本論文には上限が書かれていない</mark>。JAMA2022の 24時間10／48時間18／高リスク8 mEq毎L を適用し、過剰補正時はデスモプレシン＋5%ブドウ糖</td></tr>
+<tr><td>抗菌薬・抗てんかん薬が効いていない印象がある（脳損傷早期）</td><td>実測CrCl（蓄尿）</td><td><strong>&gt; 120 mL/分なら過剰濾過を疑い、増量またはTDM</strong></td></tr>
+<tr><td>マンニトールを使っている</td><td>血漿浸透圧ギャップ・尿量・血清Na</td><td>ギャップが開けば減量・中止。循環血液量減少を作らない（AKI予防）</td></tr>
+<tr><td>下垂体手術後／脳死ドナー管理で多尿</td><td>尿浸透圧</td><td><strong>&lt; 100 mOsmol/L なら尿崩症</strong>。尿量に合わせた自由水（2.5%ブドウ糖）補充とリコンビナントADH</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>エコーによる臓器灌流評価 — 腎・脾のドプラ抵抗係数で内臓低灌流を捉える（What's New・ICM2020）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-019-05791-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">エコーによる臓器灌流評価 — 腎・脾のドプラ抵抗係数で内臓低灌流を捉える（What's New・ICM2020）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Corradi F, Via G, Tavazzi G. Intensive Care Med. 2020;46:775-779. doi:10.1007/s00134-019-05791-y</dd><dt>掲載誌</dt><dd>Intensive Care Med（2020-04）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-019-05791-y" target="_blank" rel="noopener">doi.org/10.1007/s00134-019-05791-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>What's new in ultrasound-based assessment of organ perfusion in the critically ill: expanding the bedside clinical monitoring window for hypoperfusion in shock</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-019-05791-y.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-019-05791-y.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-019-05791-y.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で「使えること」と「まだ使えないこと」</p>
+<ul><li><strong>考え方は取り入れる</strong>：マクロ循環（血圧・心拍出量）が正常でも内臓臓器の灌流は既に落ちていることがある。この「見えない低灌流（occult hypoperfusion）」の視点は、乳酸・CRT・尿量と並べてショック評価の枠組みに入れてよい</li><li><strong>手技は既存装置で足りる</strong>：低周波のセクタ／コンベックスプローブ、カラードプラ＋パルスドプラのみ。造影剤も専用機器も不要で、既に病棟にあるエコーで測れる</li><li><strong>プロトコル化はしない</strong>：本論文が挙げる閾値（RDRI 0.7 超・SDRI 0.71 超・SDRI 4%以上の低下）は、いずれも単施設の小規模研究に由来し、これを目標に治療した群の予後を検証したランダム化比較試験は1本も引用されていない。当院の蘇生プロトコルの判断基準には入れない</li><li><strong>やるなら記述的に</strong>：ショック患者のベッドサイドで RDRI／SDRI を「参考値」として記録し、乳酸・ScvO2・CRT・尿量とどう動くかを観察する段階にとどめる。値が悪いことを理由に昇圧薬や輸液を増減しない</li><li><strong>静脈側は VExUS が先</strong>：門脈拍動指数（PVPI）は当院で既に VExUS の一要素として運用可能。本論文の PVPI 50% 超という指標は、VExUS の門脈拍動度の判定と実質的に同じものを見ている。新しい別指標として導入する必要はない</li><li><strong>教育での使い道</strong>：レジデントへの「抵抗係数＝(S−D)/S」「拡張期波が消える＝末梢抵抗が上がっている」という生理の説明教材として、図1は非常に分かりやすい</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：循環性ショックは「臨床的かつ生化学的な組織低灌流の証拠を伴う循環障害で、細胞の酸素利用が不十分な状態」と定義される。臨床徴候は皮膚・腎・脳という3つの「窓」から取り、生化学的には高乳酸血症、混合／中心静脈血酸素飽和度の低下、静脈-動脈CO2較差（pCO2ギャップ）の増大が感度・信頼性のある指標として確立している。心エコーは心機能障害の診断・モニタリングに広く使われてきた</li><li><strong>Unknown（分かっていなかったこと）</strong>：これらはいずれも<strong>全身（マクロ）の指標</strong>か、臓器不全が起きた後の<strong>下流の結果</strong>を見ているにすぎない。心エコーが与えるのはマクロ血行動態の部分的な情報で、血管緊張については間接的にしか分からず、末梢臓器の灌流そのものは推し量れない。「臓器そのものの灌流」をベッドサイドで直接見る手段が空白だった</li><li><strong>What's new（本論文が示すこと）</strong>：内臓（splanchnic）領域のドプラ抵抗係数（腎＝RDRI、脾＝SDRI）と静脈側の波形（腎葉間静脈・門脈拍動）を使えば、生化学的・マクロ血行動態的な変化が出る<strong>前</strong>に灌流異常を捉えうる、という主張。著者らは「診断・モニタリングのツールとしての潜在能力（potential）」という言葉で締めており、確立した推奨としては提示していない</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 内臓臓器は体重の10〜12%にすぎないのに安静時心拍出量の最大40%を受け取っており、ショックではここが真っ先に犠牲になる。腎と脾のドプラ抵抗係数を測れば、乳酸や血圧が動く前にその犠牲を捉えられるかもしれない — ただし本論文が示すのは<strong>仮説と少数の単施設研究</strong>であって、治療判断を変える根拠ではない。</p>
+</div>
+<ul><li>ショックの定義：臨床的・生化学的な組織低灌流の<strong>両方</strong>の証拠を伴う循環障害で、細胞による酸素利用が不十分な状態。収縮期血圧 95 mmHg 未満を伴う場合と伴わない場合がある（引用文献1＝ESICM コンセンサス2014）</li><li>臨床の3つの窓：<strong>皮膚・腎・脳</strong>。生化学的指標：高乳酸血症、混合／中心静脈血酸素飽和度の低下、pCO2ギャップの増大</li><li>内臓臓器は全体重の 10〜12% にすぎないが、安静時に心拍出量の最大 <strong>40%</strong> を受け取る。これが大きな「preload reserve（前負荷予備能）」「perfusion reserve（灌流予備能）」となり、循環血液量減少や低拍出時に全身循環を支える。ショック急性期には血流が主に生命維持臓器の短期灌流へ振り向けられる</li><li>ただし内臓臓器の低灌流が遷延すると<strong>中長期の転帰</strong>を大きく損なう。ここが著者らの問題意識</li><li>カラードプラ抵抗係数は拍動性血流の指標で、微小血管床の血流抵抗を反映する。内臓低灌流は微小循環の抵抗を上げ、その結果として抵抗係数が上がる</li><li><strong>腎</strong>：RDRI（renal Doppler resistive index）。<strong>0.7 超</strong>で、末梢動脈血の酸素化が正常でも臓器レベルの需給ミスマッチを示しうる。ARDS患者で他のマクロ指標が動かない軽度低酸素血症を RDRI だけが反映したという報告がある</li><li><strong>静脈側</strong>：拡張期のみの断続的な腎静脈血流パターンが「うっ血性腎不全（congestive kidney failure）」の指標として提案されている。技術的により容易な門脈血流でも代用でき、<strong>門脈拍動指数（PVPI）50% 超</strong>が全身静脈うっ血の強さ・拡張期灌流圧の低さ・術後AKI発生の多さと独立に関連した</li><li><strong>脾</strong>：SDRI（splenic Doppler resistive index）。4% 以上の低下は、輸液チャレンジに心拍出量が反応するか否かにかかわらず内臓循環が改善したことの証拠であり、内臓循環の能動的血管拡張を表す。<strong>0.71 超</strong>は潜在性の出血性・循環血液量減少性ショックの検出に非常に鋭敏で、動脈血乳酸がまだ正常な段階でも拾える</li><li>脾は心拍出量の約10%を受け、内臓血液の約2/3（&gt;800 mL）をβ2・α受容体活性化により数秒で全身循環へ自己輸血しうる。血圧低下に対する交感神経性の脾-腎反射がレニン-アンジオテンシン系を動かす</li><li>これらは携帯型POCUSの普及により、外傷・敗血症・心原性ショックで、病院前・ERから麻酔・ICUまで応用しうる</li><li>結論（著者ら自身の言葉）：内臓臓器灌流のドプラ評価とその治療反応性は「これまで部分的にしか探索されておらず（so far only partially explored）」、ベッドサイドでの心血管相互作用の包括的評価に対し「より鋭敏な診断・モニタリングツールとなる<strong>潜在能力</strong>を持つ」</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 「灌流」と抵抗係数の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ショックとは何か</strong>：血圧が低いことではなく、細胞が酸素を使えていない状態。だから定義には「臨床的な低灌流の証拠」と「生化学的な低灌流の証拠」の両方が要る。収縮期血圧が95 mmHg以上でもショックはありうる。</p>
+<p><strong>マクロ循環とミクロ循環</strong>：血圧・心拍出量は「大きな管の中の流れ」（マクロ循環）。実際に酸素を渡すのは毛細血管（微小循環）。両者は敗血症や大量の昇圧薬使用時に解離することが知られている。血圧を上げても組織に酸素が届いていない、という事態が起きる。</p>
+<p><strong>ドプラ抵抗係数（resistive index, RI）とは</strong>：臓器内の小さな動脈にパルスドプラを当て、収縮期最大速度 S と拡張末期速度 D を測って <strong>RI =（S − D）/ S</strong> で計算する無名数（単位なし）。0〜1の値を取る。</p>
+<ul><li>下流の抵抗が低い（＝よく灌流している）と、拡張期にも血液が流れ続けるので D が大きく、RI は小さい（例 0.60）</li><li>下流の抵抗が上がると拡張期の流れが減って D が小さくなり、RI が上がる（例 0.80）</li><li>極端になると拡張期の流れが消え、収縮期のスパイクだけになる（RI = 1）。これを本論文は「血管はあるが灌流されていない（vascularized but unperfused）」と呼ぶ</li></ul>
+<p><strong>なぜ内臓（splanchnic）を見るのか</strong>：内臓臓器（腎・肝・脾・腸管など）は体重の1割程度なのに心拍出量の4割を受け取る。出血や心拍出量低下が起きると、体は真っ先にここの血流を絞って脳・心臓へ回す。つまり内臓の血流は「最初に犠牲になる」ため、全身の指標が動く前の早期警報になりうる、というのが本論文の発想。</p>
+<p><strong>略語</strong>：RDRI＝renal Doppler resistive index（腎ドプラ抵抗係数）／SDRI＝splenic Doppler resistive index（脾ドプラ抵抗係数）／PVPI＝portal vein pulsatility index（門脈拍動指数）／pCO2ギャップ＝静脈-動脈CO2分圧較差／POCUS＝point-of-care ultrasound。</p>
+</div>
+<h3>2. 背景 — 何が足りないのか 🎯</h3>
+<p>本論文は引用文献1（ESICM の循環性ショックと血行動態モニタリングに関するコンセンサス, Cecconi ら, ICM 2014）の定義から出発する。ショックは「臨床的かつ生化学的な組織低灌流の証拠を伴う循環障害で、細胞による酸素利用が不十分な状態、収縮期血圧95 mmHg未満を伴う場合と伴わない場合がある」。その特徴は、酸素の輸送/需要の不均衡が全身の代謝的・循環的帰結として現れた<strong>低灌流の徴候</strong>である。</p>
+<p>臨床徴候は3つの身体の「窓」— <strong>皮膚・腎・脳</strong> — を見ることで検出される。生化学的に感度が高く信頼できる従来のパラメータは、高乳酸血症、混合ないし中心静脈血酸素飽和度の低下、静脈-動脈CO2較差（pCO2ギャップ）の増大である。</p>
+<p>しかし著者らはここに限界を置く。すなわち「臓器の不適応の<strong>下流の帰結</strong>を評価するのではなく、<strong>末梢臓器の灌流そのもの</strong>を特異的に評価することのほうが、治療のガイドとして意味を持ちうる」。</p>
+<p>心エコーについても評価は抑制的である。心エコーは血行動態不安定をきたす心機能障害の診断・モニタリング、そしてショックの病態生理一般に広く採用されてきたが、<strong>マクロ血行動態についての情報は部分的</strong>であり、特に血管緊張については間接的であるにとどまり、<strong>末梢臓器の灌流について何ら推論を許さない</strong>。</p>
+<h3>3. 方法（Methods）📐</h3>
+<p>本論文は原著研究ではないため、通常の Methods セクションは存在しない。JC で扱う上での位置づけを明示しておく。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>記載内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>ICM の "What's New in Intensive Care" 短報（招待・専門家記事）。原著データなし</td></tr>
+<tr><td>検索戦略</td><td>記載なし。系統的検索は行われていない</td></tr>
+<tr><td>組み入れ・除外基準</td><td>記載なし</td></tr>
+<tr><td>エビデンス評価</td><td>記載なし。GRADE 等の格付けは一切ない</td></tr>
+<tr><td>対象・n数</td><td>該当なし（引用された個々の研究の n も本文には書かれていない）</td></tr>
+<tr><td>アウトカム</td><td>該当なし</td></tr>
+<tr><td>統計解析</td><td>該当なし</td></tr>
+<tr><td>事前登録</td><td>記載なし</td></tr>
+<tr><td>引用文献</td><td>15件。うち4件（引用6・7・13・14）が著者ら自身のグループの研究</td></tr>
+<tr><td>図表</td><td>図2点（Fig.1 抵抗係数の3パターン、Fig.2 ショックにおける灌流評価の全体像）。表は無し</td></tr>
+</tbody></table></div>
+<h3>4. 内臓灌流をどう評価するか — 原理 🩸</h3>
+<p>原文の見出しは "How to assess splanchnic perfusion"。</p>
+<p>カラードプラ抵抗係数による局所内臓血行動態の評価は、「拍動性血流の指標であり、微小血管床の血流に対する抵抗を反映する」ものとして、<strong>生化学的あるいはマクロ血行動態的な変化が生じる前に</strong>、臓器機能障害に関連した早期の血行動態異常を検出する有用なツールとなる、と著者らは述べる。</p>
+<p>理由づけは単純である。内臓の低灌流は臓器の微小循環を変化させて血流抵抗を上げ、それがドプラ抵抗係数を上げる。</p>
+<h4>測定手順（図1のキャプション記載を表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>手順</th><th>具体的な記載</th></tr></thead>
+<tbody>
+<tr><td>プローブ</td><td>低周波プローブ（セクタまたはコンベックスアレイ探触子）</td></tr>
+<tr><td>体位</td><td>仰臥位</td></tr>
+<tr><td>血管の同定</td><td>カラードプラで目的血管をターゲティング</td></tr>
+<tr><td>トレースの取得</td><td>パルス波（PW）ドプラでトレースをサンプリング</td></tr>
+<tr><td>測定部位（腎）</td><td>腎皮質の<strong>葉間動脈</strong>（interlobar arteries）</td></tr>
+<tr><td>測定部位（脾）</td><td><strong>脾動脈の主要分枝</strong>（main branches of the splenic artery）</td></tr>
+<tr><td>サンプリング誤差対策</td><td>複数の測定の<strong>平均</strong>を採用し、臓器全体の指標として用いる</td></tr>
+<tr><td>計算式</td><td>RI =（S − D）/ S。S＝収縮期最大速度、D＝拡張末期速度（図中では黄色の十字で示される）</td></tr>
+<tr><td>スペクトルの設定</td><td>エイリアシングを起こさない最小の周波数シフトレンジを用いてPWドプラのスペクトルを拡大</td></tr>
+<tr><td>ウォールフィルタ</td><td>低周波に設定（<strong>原文表記は 100 MHz</strong>。下記「批判的吟味」参照）</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. ドプラ抵抗係数から推定される内臓灌流の3つのパターン（原図・無改変。© Springer-Verlag GmbH Germany, part of Springer Nature） 3列構成。<strong>左列「KIDNEY」</strong>：腎のカラードプラ像が上中下の3枚。いずれも黄色の文字で "Interlobar Arteries" と注記され、扇形のカラーボックス内に赤（プローブに向かう血流）と青（遠ざかる血流）の血流信号が描かれる。上段は赤青のモザイクが皮質全体に密に分布し、中段では信号が明らかに疎になり、下段では信号がわずかな点状にまで減って白矢印で示される。 中列「DOPPLER RESISTIVE INDEX」：対応する3つのPWドプラ波形。上段はオレンジ色のスペクトルで、収縮期ピークに白字の "S"、拡張期の谷に "D" のラベルが付き、拡張期にも明瞭な血流が残る。その下の帯に緑文字で <strong>PERFUSED</strong>、黄文字で SvO2&gt;60%、白字で RI: 0.60。中段は拡張期成分が低くなった波形で、収縮期最大点と拡張末期点に黄色の十字（＋）が置かれている。帯には黄橙文字で HYPOPERFUSED、SvO2&lt;60%、RI: 0.80。下段は水色（シアン）のスペクトルで、鋭い収縮期スパイクが4つ並ぶだけで拡張期成分が完全に消失している。帯には赤文字で UNPERFUSED、SvO2&lt;50%、<strong>RI: 1</strong>。 <strong>右列「SPLEEN」</strong>：脾のカラードプラ像が<strong>2枚だけ</strong>（上段・下段）。いずれも白矢印と "Splenic artery main branches" の注記が付く。上段は脾門部に赤青の血流信号が集まり、下段は赤と青の大きな塊状の信号として描かれる。 <strong>読み方</strong>：拡張期波（D）が残っているほど下流の抵抗は低く灌流は保たれている。拡張期波が減れば RI が上がり、消失すれば RI は 1 に近づく。「血管は見えているのに灌流していない（vascularized but unperfused）」という状態を可視化するのがこの図の主眼。 <strong>注意すべき点</strong>：帯に併記された SvO2 の閾値（60%・50%）は<strong>本文中には一切登場しない</strong>。図が独自に持ち込んだ対応づけである。また右列は3段に対して2枚しか画像がなく、"unperfused" に対応する脾の画像が欠けている。</p>
+</div>
+<h3>5. 腎 — RDRI 🫘</h3>
+<p>原文の小見出しは "Kidney, liver"（腎・肝）である。ただし本文で実際に論じられるのは腎のみで、肝実質の灌流評価についての記載は一行も無い（門脈血流は「腎静脈血流の代用」として登場するだけで、肝灌流の指標としては語られない）。</p>
+<h4>何が言われているか</h4>
+<ul><li>腎ドプラ抵抗係数（RDRI）は、重症患者の腎灌流の変化を評価するツール（引用2＝Deruddre ら, ICM 2007）、および重症敗血症患者（引用3＝Lerolle ら, ICM 2006）や人工呼吸を要する患者（引用4＝Darmon ら, ICM 2011）での急性腎障害の予測ツールとして導入された</li><li>一般的な考え方は「<strong>RDRI が高いほど腎血管のコンプライアンスが低い</strong>」というもの</li><li>ただし解釈に影響する因子は多い（引用5＝Schnell &amp; Darmon, ICM 2012 の再評価）。本文が列挙するのは次の6つ</li></ul>
+<div class="tw"><table>
+<thead><tr><th>本文が挙げる RDRI 解釈の交絡因子</th><th>補足（論文本文ではない一般的説明）</th></tr></thead>
+<tbody>
+<tr><td>不整脈</td><td>拍ごとに S・D が変動し平均化が難しくなる</td></tr>
+<tr><td>動脈スティフネス（arterial stiffness）</td><td>加齢・動脈硬化で脈圧が増し RI が上がる</td></tr>
+<tr><td>腹腔内圧</td><td>腹腔内圧上昇は腎の還流を妨げ RI を上げる</td></tr>
+<tr><td>低酸素</td><td>引用8で実際に RDRI が軽度低酸素血症を反映した</td></tr>
+<tr><td>右心機能</td><td>右心不全は腎静脈側のうっ血を介して RI を上げる</td></tr>
+<tr><td>実質の楔入圧上昇（increased parenchymal wedge pressure）</td><td>腎実質の間質圧上昇</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本文が挙げていない交絡因子がある RRI は<strong>年齢・心拍数・脈圧・平均動脈圧</strong>にも強く依存することが以前から知られているが、本文の交絡因子リストにこれらは明示されていない（「不整脈」「動脈スティフネス」が部分的に重なるのみ）。<mark class="hl">単一のカットオフ値をそのまま重症患者に当てはめられない最大の理由がこの依存性であり、本文はそれを十分に扱っていない</mark>。この段落は論文本文ではなく、一般的な背景知識として補ったものである。</p>
+</div>
+<h4>RDRI が高感度を示したとされる3場面（本文の列挙をそのまま）</h4>
+<ol><li><strong>見かけ上血行動態が安定している患者</strong>で、初期の循環血液量減少による<strong>潜在性の内臓低灌流</strong>を検出すること（引用6＝Corradi ら, *Radiology* 2011。多発外傷の出血性ショック）</li><li>全身血行動態の推定と、腎血流・腎機能を改善するための<strong>アミン（昇圧薬）の用量調整</strong></li><li>血管収縮を避けつつ局所灌流圧を改善するための<strong>最適な平均動脈圧の決定</strong>（引用2＝Deruddre ら, ICM 2007）</li></ol>
+<p>さらに、<strong>RDRI &gt; 0.7</strong> は、末梢の動脈血酸素化が正常であっても臓器特異的な供給・需要のミスマッチを同定しうるとされ、これは全身の組織低酸素に対する早期の血管反応を反映しているとされる（図1、引用7＝Corradi ら, *Biomed Res Int* 2015、心臓手術後患者）。この仮説は、ARDS患者において他のマクロ血行動態パラメータが動かないのに RDRI だけが軽度低酸素血症を反映したという知見（引用8＝Darmon ら, ICM 2009）と整合する、と著者らは述べる。</p>
+<p>原文の表現は一貫して控えめで、「may also identify（同定しうる）」「This hypothesis is in line with（この仮説は〜と整合する）」であり、確立した診断基準としては述べられていない。</p>
+<h3>6. 静脈側 — 腎静脈波形と門脈拍動指数（PVPI）🌊</h3>
+<p>腎灌流のドプラ検査は、駆出率が保たれた心不全（HFpEF）と低下した心不全（HFrEF）の双方において、心機能および心エコーで得られる拡張機能障害の指標と密接に関連することも示されている（引用9＝Di Nicolo, *Heart Fail Rev* 2018）。その所見は、低い前負荷および／または<strong>腎の後負荷（腎静脈側の圧）の上昇</strong>と、それに伴う内臓低灌流を映している。</p>
+<p>この文脈で、ドプラで検出される「鏡像的に低下した静脈血流パターン（断続的で、拡張期のみに孤立した血流）」が、「うっ血性腎不全（congestive kidney failure）」のマーカーとして提唱されており、全身のうっ血・右房圧・肺動脈圧との病態生理学的な結びつきが示されている（引用10＝Iida ら, *JACC Heart Fail* 2016）。</p>
+<p>そして本論文が実務的に重要視するのが次の点である。技術的により難度の低い門脈血流のドプラ評価が、病的な腎静脈血流の検出の代用となりうる。門脈拍動指数（portal vein pulsatility index, <strong>PVPI）&gt; 50%</strong> は、より強い全身静脈うっ血、より低い動脈拡張期灌流圧、そしてより高い術後急性腎障害の発生率と<strong>独立して関連していた</strong>（引用11＝Beaubien-Souligny ら, *J Am Heart Assoc* 2018。心臓手術後の前向き観察コホート）。</p>
+<p>この引用11は、後に <strong>VExUS スコア</strong>へ発展する研究群の中核であり、本論文が2019年時点でその意義を捉えていたことは評価できる。</p>
+<h3>7. 脾 — SDRI 🫀</h3>
+<p>原文の小見出しは "Spleen"。</p>
+<h4>生理（本文の記述）</h4>
+<ul><li>脾は、正常時・病的状態のいずれにおいても<strong>体液恒常性の鍵となる調節器官</strong>である</li><li>脾は<strong>心拍出量の約10%</strong>を受け取る</li><li>ショックの際には、内臓血管床における β2 受容体および α 受容体の活性化を介して、内臓血液のほぼ2/3（<strong>&gt; 800 mL</strong>）が<strong>数秒のうちに</strong>全身循環へ自己輸血されうる</li><li>血圧低下に応答する<strong>交感神経性の脾-腎（spleno-renal）神経反射</strong>が、内因性の血管収縮物質として作用するレニン-アンジオテンシン系を仲介し、適切な灌流圧を回復させる</li><li>レニンの過剰発現は、ショック状態における心血管系の調節不全の<strong>開始因子</strong>として同定されている（引用12＝Gelman &amp; Mushlin, *Anesthesiology* 2004）</li><li>静脈リザーバーおよび圧のメディエータとしての重要な役割に加え、脾は<strong>組織低灌流の早期指標</strong>でもあることが示されている</li></ul>
+<h4>SDRI の2つの使い方（本文の記述）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>本文が述べる意味</th><th>根拠として引かれる研究</th></tr></thead>
+<tbody>
+<tr><td>SDRI の<strong>4% 以上の低下</strong>（percentage reduction ≥ 4%）</td><td>輸液チャレンジに対する反応が陽性であっても陰性であっても、内臓循環の改善が起きていることの証拠となる。内臓循環における<strong>能動的な血管拡張</strong>を表す。動脈血乳酸値および中心静脈血酸素飽和度の変化との相関により裏づけられる</td><td>引用13＝Brusasco ら, *Biomed Res Int* 2018（術後の人工呼吸患者）</td></tr>
+<tr><td><strong>SDRI &gt; 0.71</strong></td><td>潜在性の循環血液量減少性ショックの検出に<strong>非常に鋭敏</strong>であり、遷延する潜在性低灌流を標的として蘇生の適切さを調整（titrate）できる。<strong>動脈血乳酸がまだ正常な段階でも</strong>検出できる</td><td>引用14＝Corradi ら, *Shock* 2012（成人多発外傷後の潜在性出血性ショック）</td></tr>
+</tbody></table></div>
+<p><strong>「4%以上の低下」の含意</strong>が最も面白い部分である。輸液チャレンジに対して心拍出量が増えるか（＝古典的な輸液反応性）とは独立に、内臓循環が改善しているかどうかを別に見られる、という主張になっている。当院で使っている輸液チャレンジの枠組み（下記「既存ノートとの整合」参照）と直交する軸を提示している。</p>
+<h3>8. 適用範囲と結論 🧭</h3>
+<p>これらの指標は、<strong>心血管の恒常性が損なわれるあらゆる場面</strong>（外傷・敗血症・心原性ショック）で、そして<strong>あらゆる臨床の場</strong>（病院前・救急外来から麻酔・集中治療まで）に適用しうる、と著者らは述べる。理由は POCUS の可搬性と、今日ますます普遍的になった可用性である。</p>
+<p>脳超音波（引用15＝Robba ら, ICM 2019 のナラティブレビュー）と同様に、超音波ベースの内臓灌流評価も、外傷のような複雑なシナリオに対する<strong>全身アプローチ（whole-body-approach）</strong>へ容易に統合でき、全体（global）と局所（regional）の血流を同時に評価できる（図2）。</p>
+<h4>著者らの結論（原文の慎重さのまま）</h4>
+<ul><li>循環性ショックにおける治療の目標は、<strong>適切な末梢臓器灌流の達成と維持</strong>である</li><li>現在利用可能な末梢低灌流評価の変数は、<strong>マクロ血行動態</strong>と、感度は高いものの<strong>非特異的</strong>な既存の臨床的・生化学的徴候に依拠しているにすぎない</li><li>内臓臓器灌流のドプラ評価とその治療への反応は、<strong>これまで部分的にしか探索されておらず</strong>、ベッドサイドでの心血管相互作用の包括的評価にとって、より鋭敏な診断・モニタリングのツールを臨床現場で<strong>代表しうる潜在能力（potential）を持つ</strong></li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. ショック患者における臓器灌流評価の全体像（原図・無改変。© Springer-Verlag GmbH Germany, part of Springer Nature） 上部に濃紺の帯で BEDSIDE PERFUSION ASSESSMENT IN SHOCK のタイトル。中央に人体シルエットが置かれ、脳（頭部）・心臓・肝臓・両腎・脾臓が描かれる。各臓器から青い丸印と矢印が左右のボックスへ伸びる。</p>
+<p><strong>左側（超音波）は上下2ブロック</strong></p>
+<ul><li>上ブロック（淡い青灰色）<strong>ULTRASOUND, GLOBAL</strong></li><li>CARDIOMECHANICS, CENTRAL VOLEMIA (inferred) — 心エコー静止画6枚（傍胸骨長軸・短軸・心尖部像など）</li><li>VOLUME RESPONSIVENESS (inferred) — 3枚（IVC の M モード、呼吸性変動を示す像など）</li><li><strong>CARDIAC OUTPUT MEASUREMENT</strong> — 2枚（LVOT の PW ドプラ波形とトレース）</li><li>下ブロック（淡い青緑）<strong>ULTRASOUND, SPLANCHNIC</strong></li><li><strong>PORTAL VEIN PULSATILITY INDEX</strong> — 拍動性の門脈波形</li><li>RENAL DOPPLER RESISTIVE INDEX (RDRI) — オレンジ色の腎動脈スペクトル</li><li>SPLENIC DOPPLER RESISTIVE INDEX (RDRI) — 白黒の脾動脈スペクトル（※ラベルの略語が誤植。下記参照）</li></ul>
+<p>右側（淡い藤色）CLINICAL (skin, kidney, brain), BIOCHEMICAL — 上から6ボックス</p>
+<ul><li><strong>CONSCIOUSNESS, MENTATION</strong>（患者の顔の写真）</li><li><strong>SVO2, SVcO2, pCO2 GAP</strong>（採血中の中心静脈カテーテルの写真）</li><li><strong>BLOOD LACTATES</strong>（採血の写真）</li><li><strong>CAPILLARY REFILL TIME</strong>（指腹を圧迫している写真）</li><li><strong>URINARY OUTPUT</strong>（尿測メモリ付きバッグの写真）</li><li><strong>MOTTLING SCORE</strong>（網状皮斑のシェーマと膝周囲の写真3枚、Stage-2／Stage 3／Stage 5 のラベル付き）</li></ul>
+<p><strong>キャプションの要旨</strong>：右側は全体灌流の確立された臨床指標＝3つの「臨床の窓」（脳＝意識レベル・精神状態、皮膚＝網状皮斑スコアと毛細血管再充満時間、腎＝尿量モニタリング）。左側は超音波の現行応用で、上半分が全体灌流、下半分が内臓領域の灌流。心エコーは心拍出量測定に使わない限り、全身灌流の妥当性について間接的な情報しか推論させない。すなわち、正常な心メカニクス（左右室機能正常・弁の健全性・血行動態に影響する心膜病変の除外）と適切な心充満（重度の中心性循環血液量減少を否定する2D所見、上大静脈虚脱性・下大静脈拡張性・LVOT血流の呼吸性変動・PLRに対するLVOT血流反応といった容量反応性のエコー指標が陰性）が確認されれば、心拍出量が著しく損なわれてはいないと仮定できる。LVOT血流のPWドプラサンプリングによって一回拍出量の測定とトレンド化が可能となり、全体灌流の推定が得られる。腎葉間動脈と脾動脈のドプラサンプリングからそれぞれ RDRI と SDRI を算出し、内臓灌流の状態を推し量る。腎葉間<strong>静脈</strong>と門脈血流（特にその拍動度）のドプラサンプリングが、内臓静脈うっ血の有無と程度についての情報を加える。</p>
+<p><strong>注意すべき点</strong>：脾のボックスのラベルが "SPLENIC DOPPLER RESISTIVE INDEX (RDRI)" と書かれており、括弧内が <strong>SDRI の誤植</strong>になっている。またキャプションは腎葉間静脈の評価に言及しているが、図の左下ブロックに腎静脈のボックスは存在しない（門脈拍動指数のみ）。本文で言及される脳超音波も図には現れない。</p>
+</div>
+<h3>9. 指標ごとの到達段階 — 「関連まで」か「治療判断まで」か 📏</h3>
+<p>本論文の JC における最重要の論点。<strong>本文に書かれている根拠だけ</strong>で、各指標がどこまで来ているかを切り分けると次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>閾値・カットオフ</th><th>本文が主張する用途</th><th>根拠の種類</th><th>到達段階</th></tr></thead>
+<tbody>
+<tr><td>RDRI</td><td>記載なし（連続量として）</td><td>敗血症・人工呼吸患者のAKI予測</td><td>単施設の観察研究2件（引用3・4）</td><td><strong>予後との関連まで</strong></td></tr>
+<tr><td>RDRI</td><td>&gt; 0.7</td><td>末梢動脈酸素化が正常でも臓器の需給ミスマッチを同定</td><td>単施設の術後心臓外科研究1件（引用7）。原文も "may identify"、"hypothesis"</td><td><strong>仮説段階</strong></td></tr>
+<tr><td>RDRI</td><td>記載なし</td><td>潜在性内臓低灌流の検出（見かけ上安定した患者）</td><td>単施設の外傷研究1件（引用6・著者ら自身）</td><td><strong>診断精度まで</strong></td></tr>
+<tr><td>RDRI</td><td>記載なし</td><td>ノルアドレナリン用量・最適MAPの決定</td><td>生理学的小規模研究1件（引用2）</td><td><strong>生理学的反応の確認まで</strong>。転帰を改善したという検証はない</td></tr>
+<tr><td>腎静脈血流波形（断続的・拡張期のみ）</td><td>記載なし</td><td>「うっ血性腎不全」のマーカー</td><td>心不全患者の観察研究1件（引用10）。原文は "has been proposed"</td><td><strong>提唱段階</strong></td></tr>
+<tr><td>PVPI（門脈拍動指数）</td><td>&gt; 50%</td><td>全身静脈うっ血・低い拡張期灌流圧・術後AKI</td><td>前向き観察コホート1件（引用11）。<strong>独立した関連</strong>を示した</td><td><strong>独立した関連まで</strong></td></tr>
+<tr><td>SDRI</td><td>低下 ≥ 4%</td><td>輸液チャレンジ後の内臓循環改善の証拠、能動的血管拡張の指標</td><td>単施設の術後研究1件（引用13・著者ら自身）</td><td><strong>生理学的相関まで</strong></td></tr>
+<tr><td>SDRI</td><td>&gt; 0.71</td><td>潜在性の循環血液量減少性ショックの検出、蘇生の調整</td><td>単施設の外傷研究1件（引用14・著者ら自身）</td><td><strong>診断精度まで。"titrate" は著者の主張であり試験はない</strong></td></tr>
+</tbody></table></div>
+<p>結論として、本論文に引用された15文献の中に、これらの指標を治療目標として用いた介入試験は1本も存在しない。 どの指標も「関連・診断精度」の段階にとどまっており、「治療判断を変える」段階に到達したものは一つもない。著者ら自身も最終段落で "potential" という語を使い、"so far only partially explored" と明記している。この慎重さは正しい。</p>
+<h3>10. 本文に書かれていないこと（重要）🚫</h3>
+<p>読者が期待しがちだが、この論文には一切記載がない項目を明示しておく。以下は「無い」ことの記録であり、補ってはいない。</p>
+<div class="tw"><table>
+<thead><tr><th>期待される項目</th><th>本論文での扱い</th></tr></thead>
+<tbody>
+<tr><td><strong>造影エコー（CEUS）による微小循環の定量</strong></td><td><strong>本文に無い</strong>。contrast、microbubble、CEUS、灌流指標、再灌流曲線（refill curve）といった語は一度も現れない。造影剤を用いた微小循環評価は本論文の射程外</td></tr>
+<tr><td><strong>腸管（腸間膜動脈・腸管壁）の灌流評価</strong></td><td><strong>本文に無い</strong>。"splanchnic" と総称されるが、実際に論じられるのは腎と脾のみ</td></tr>
+<tr><td><strong>肝実質の灌流評価</strong></td><td><strong>本文に無い</strong>。小見出しは "Kidney, liver" だが、肝動脈・肝静脈波形・肝灌流指標のいずれも登場しない</td></tr>
+<tr><td><strong>脳の超音波による灌流評価</strong></td><td>引用15（Robba ら, ICM 2019）を「同様に」と参照するのみで、経頭蓋ドプラの指標（PI・搏動係数など）の具体的記載は<strong>無い</strong>。図2でも脳は臨床の窓（意識・精神状態）としてのみ現れる</td></tr>
+<tr><td><strong>VExUS スコア</strong></td><td><strong>本文に無い</strong>。ただし VExUS の中核となった Beaubien-Souligny らの門脈拍動の研究（引用11）は引用されている</td></tr>
+<tr><td><strong>測定者間・測定内の再現性（ICC・変動係数）</strong></td><td><strong>本文に無い</strong>。図1のキャプションに「複数測定の平均を採用してサンプリング誤差を最小化する」という手技上の記述があるのみで、再現性を定量した数値は一切示されていない。POCUS指標として最も知りたい情報が欠けている</td></tr>
+<tr><td><strong>正常値・年齢別基準値</strong></td><td><strong>本文に無い</strong>。RDRI &gt; 0.7、SDRI &gt; 0.71 という「異常のカットオフ」だけが示され、正常範囲の定義や年齢補正の議論は無い</td></tr>
+<tr><td><strong>感度・特異度・AUC などの数値</strong></td><td><strong>本文に無い</strong>。"high sensitivity"、"very sensitive" という定性的な形容だけで、数値は一つも示されていない</td></tr>
+<tr><td><strong>費用・習熟に要する検査数</strong></td><td><strong>本文に無い</strong></td></tr>
+<tr><td><strong>資金源（Funding）</strong></td><td><strong>記載自体が無い</strong>。Compliance with ethical standards の下にあるのは Conflicts of interest のみ</td></tr>
+</tbody></table></div>
+<h2>🔍 批判的吟味（JCでの論点）</h2>
+<h3>11-1. 自己引用への依存と、開示されない知的COI</h3>
+<p><strong>COI宣言</strong>：Compliance with ethical standards の Conflicts of interest 欄に、Francesco Corradi、Gabriele Via、Guido Tavazzi の3名それぞれについて "has no conflict of interest to declare"（申告すべき利益相反なし）と記載されている。エコー機器メーカー・造影剤メーカーとの関係についての個別の記載は無い。資金源（Funding）の記載は article 全体を通じて存在しない。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>金銭的COIは無いが、指標の根拠がほぼ著者ら自身の研究である 引用15件のうち、<mark class="hl">閾値を与えている決定的な4件（引用6・7・13・14）はすべて著者ら自身のグループの研究</mark>である。RDRI &gt; 0.7（引用7）、SDRI ≥4%低下（引用13）、SDRI &gt; 0.71（引用14）、外傷での潜在性低灌流検出（引用6）— 本論文が提示する数値のほぼ全部がここから来ている。金銭的COIが無いことと、自らの研究群を "What's New" 枠で紹介していることは別の問題である。第三者による外部検証（independent validation）が引用されていない点を、JC では必ず指摘したい。</p>
+</div>
+<h3>11-2. 原著の内的不整合・誤記</h3>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>記載内容</th><th>問題</th></tr></thead>
+<tbody>
+<tr><td>図1キャプション</td><td>ウォールフィルタを "low frequency (100 MHz)" に設定</td><td><strong>単位の誤り</strong>。100 MHz は超音波の送信周波数の数十倍にあたる値で、ウォールフィルタとしては物理的にありえない。通常は 50〜100 <strong>Hz</strong> 程度</td></tr>
+<tr><td>図1</td><td>各パターンに <strong>SvO2&gt;60% / &lt;60% / &lt;50%</strong> を対応づけている</td><td>この対応づけは<strong>本文中に一切根拠が示されていない</strong>。RI と SvO2 を並べた研究も引用されていない</td></tr>
+<tr><td>図1</td><td>右列（SPLEEN）が2枚しかない</td><td>中列は3パターン（perfused / hypoperfused / unperfused）なのに、脾の画像は2枚。"unperfused" に対応する脾の像が欠落</td></tr>
+<tr><td>図2 ラベル</td><td>"SPLENIC DOPPLER RESISTIVE INDEX (<strong>RDRI</strong>)"</td><td><strong>略語の誤植</strong>。SDRI が正しい。同じ図の1つ上のボックスが RDRI であり、混同を招く</td></tr>
+<tr><td>図2 キャプション vs 図</td><td>キャプションは「腎葉間<strong>静脈</strong>と門脈血流のドプラサンプリング」と述べる</td><td>図の SPLANCHNIC ブロックに腎静脈のボックスは存在しない（門脈拍動指数のみ）</td></tr>
+<tr><td>本文 p.1</td><td>混合／中心静脈血酸素飽和度を "(SvCO2, SvO2)" と表記</td><td><strong>略語の誤記</strong>。中心静脈血は ScvO2 が標準。図2では "SVcO2" と別の綴りで書かれており、本文と図で不統一</td></tr>
+<tr><td>小見出し "Kidney, liver"</td><td>肝の灌流評価が本文に無い</td><td>見出しと内容の不一致</td></tr>
+<tr><td>本文 p.2（RDRI の説明）</td><td>"the higher is RDRI, the lower is renal vessel <strong>compliance</strong>"</td><td>「<strong>抵抗</strong>係数」と名乗りながら、説明は<strong>コンプライアンス</strong>で行われている。RI が抵抗より血管コンプライアンス・脈圧を強く反映するという批判（引用5 の Schnell &amp; Darmon がまさにこれを論じている）を、本文はこの一文で認めながら、指標名と用途の記述はそのままにしている</td></tr>
+<tr><td>本文 p.4（Spleen）</td><td>「脾は心拍出量の約10%を受け、内臓血液のほぼ2/3（&gt;800 mL）が数秒で自己輸血されうる」</td><td><strong>脾と内臓（splanchnic）の混同</strong>。&gt;800 mL は内臓血管床全体のリザーバー容量に関する記述（引用12 の Gelman &amp; Mushlin は splanchnic circulation を論じている）で、ヒトの脾の血液貯留量（一般に 200〜300 mL 程度とされる）を大きく超える。Spleen の節に置かれると、脾単独で800 mL を放出できるかのように読める</td></tr>
+<tr><td>本文 p.4（Spleen）</td><td>自己輸血が "β2 and α-adrenergic receptor activation" による</td><td>β2 受容体刺激は血管<strong>拡張</strong>方向に働く。容量血管からの血液動員は主に α 受容体を介した静脈収縮で説明されるため、β2 を並記する根拠は本文からは追えない</td></tr>
+<tr><td>本文 p.4</td><td>"splancnic"（splanchnic の誤植）、"a adequate perfusion pressure"、"endogen vasoconstrictor"</td><td>校正漏れの誤記が複数</td></tr>
+</tbody></table></div>
+<h3>11-3. 方法論上の限界</h3>
+<ul><li><strong>エビデンスの格付けが無い</strong>：What's New コラムであり、系統的検索もエビデンス評価も行われていない。引用された研究のデザイン・n数・追跡期間は本文に一切書かれていないため、読者は引用文献に当たらなければ強さを判断できない</li><li><strong>感度の主張が定性的</strong>：「high sensitivity」「very sensitive」とあるが、感度・特異度・AUC・カットオフの導出方法（ROC か事前設定か）はいずれも示されていない</li><li><strong>カットオフの外的妥当性</strong>：RDRI &gt; 0.7 は術後心臓外科、SDRI &gt; 0.71 は多発外傷という特定集団に由来する。敗血症性ショックへの外挿は検証されていない</li><li><strong>交絡の扱いが弱い</strong>：交絡因子を6つ挙げた直後に単一のカットオフを提示しており、交絡を補正した上で閾値が保たれるかの議論が無い</li><li><strong>測定者依存性の欠落</strong>：POCUS 指標を臨床導入する際に最初に問われる再現性のデータが無い（前掲）</li><li><strong>出版年のずれ</strong>：オンライン公開は2019年10月、冊子体は2020年。引用文献も2019年（引用15）が最新であり、内容は2019年時点の景色である。VExUS の体系化・CRT ガイド蘇生の大規模検証はいずれもこの後に来る</li></ul>
+<h2>🔄 2020年以降どうなったか（Vault内の後続ノートとの突き合わせ）</h2>
+<p>本論文が「これから」と述べたものが、その後どう発展したかを整理する。</p>
+<div class="tw"><table>
+<thead><tr><th>本論文（2019/2020）の記述</th><th>その後の展開</th><th>Vault内の該当ノート</th></tr></thead>
+<tbody>
+<tr><td>門脈拍動指数 &gt; 50% が静脈うっ血・術後AKIと独立に関連（引用11）</td><td>門脈拍動は IVC 径・肝静脈・腎葉間静脈と組み合わされ <strong>VExUS スコア</strong>として体系化。判定基準・落とし穴・心腎症候群への応用まで整理された</td><td>後掲「関連」の VExUS 3本</td></tr>
+<tr><td>「拡張期のみの断続的な腎静脈血流＝うっ血性腎不全」の提唱</td><td>VExUS の腎静脈波形（continuous / biphasic / monophasic）としてグレード化され、うっ血評価の一要素になった</td><td>同上</td></tr>
+<tr><td>臨床の3つの窓（皮膚・腎・脳）の記述</td><td>皮膚の窓（CRT・網状皮斑）は ANDROMEDA-SHOCK 系の検証を経て、蘇生ターゲットとして最も検証が進んだ末梢灌流指標になった。ショックの臨床徴候そのものの診断特性も系統的に検討された</td><td>後掲「関連」の CRT・臨床徴候の2本</td></tr>
+<tr><td>「マクロ循環が正常でも臓器灌流は保たれない」という問題意識</td><td>高用量昇圧薬下で MAP が保たれていても組織酸素化が低下することが二次解析で示され、本論文の問題意識が実データで裏づけられた</td><td>後掲「関連」の HySpec-ICU</td></tr>
+<tr><td>内臓ドプラ抵抗係数（RDRI・SDRI）そのもの</td><td><strong>Vault 未収載</strong>。RDRI/SDRI を蘇生ターゲットとした介入試験のノートは当 Vault に存在しない。2025年の ESICM 血行動態ガイドライン（50推奨）でも RDRI/SDRI は推奨項目として立っていない</td><td>後掲「関連」の ESICM2025</td></tr>
+<tr><td>造影エコー（CEUS）による微小循環定量</td><td>本論文の射程外。<strong>Vault 未収載</strong></td><td>—</td></tr>
+<tr><td>腸管灌流の超音波評価</td><td>本論文の射程外。<strong>Vault 未収載</strong></td><td>—</td></tr>
+</tbody></table></div>
+<h3>既存ノートとの整合／不整合</h3>
+<ul><li><strong><span class="wl">輸液チャレンジの4要素を事前に決める — TROL（エディトリアル・CritCare2020）</span>（同じ2020年）との関係</strong>：TROL は輸液チャレンジの Type・Rate・Objective・Limit を<strong>投与前に</strong>決めることを求める枠組みで、Objective（何を目標とするか）は通常 CO・SV・脈圧といったマクロ指標が置かれる。本論文の SDRI 4%低下は、この Objective に「内臓循環の改善」という別軸を置きうると示唆する点で TROL を補完する。ただし SDRI を Objective に据えた研究は存在しないため、現時点で TROL の Objective を SDRI に置き換える根拠は無い。当院では従来通りマクロ指標を Objective に置き、SDRI は記述的観察にとどめるのが妥当</li><li><strong><span class="wl">血行動態評価による容量状態の把握（ICM2022）</span> との関係</strong>：同ノートは灌流指標として乳酸・臨床徴候を扱う。本ノートはそこに内臓ドプラという未確立の選択肢を加えるが、序列は変わらない</li><li><strong>旧ノートの記述との食い違い</strong>：改稿前の本ノートは「レビュー」と記載していたが、実際は What's New 短報である（下記「改稿での訂正」参照）</li><li><strong>心エコーの位置づけ</strong>：<span class="wl">クリティカルケア心エコーの10年（ICM 2019 レビュー）</span> が心エコーの発展を肯定的に総括するのに対し、本論文は同じ年に「心エコーは末梢臓器灌流について何も推論させない」と限界を明示する。同じ ICM の同時期の2本が、心エコーの守備範囲について異なるトーンを取っている点は JC の論点になる</li></ul>
+<h3>🔧 改稿で訂正した旧記述（PDF照合の結果）</h3>
+<div class="tw"><table>
+<thead><tr><th>旧ノートの記述</th><th>PDF の記載</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>タイトル「（レビュー・ICM2020）」</td><td>誌面のセクション見出しは <strong>WHAT'S NEW IN INTENSIVE CARE</strong></td><td><strong>誤り</strong>。レビュー（総説）ではなく短報コラム。ファイル名・title_ja を訂正し、Vault内の参照5件を追随させた</td></tr>
+<tr><td>frontmatter に <code>doi</code> なし</td><td>doi:10.1007/s00134-019-05791-y</td><td><strong>欠落</strong>。追加</td></tr>
+<tr><td>frontmatter に <code>title_en</code> <code>citation</code>（著者名）なし</td><td>Corradi F, Via G, Tavazzi G</td><td><strong>欠落</strong>。追加</td></tr>
+<tr><td><code>citation: Intensive Care Med (2020) 46:775–779</code></td><td>同上（誌名・巻・頁は正しい）</td><td><strong>正しい</strong>。著者名を補って整えた</td></tr>
+<tr><td>「生化学的指標：… SvO2, ScvO2」</td><td>原文表記は "(SvCO2, SvO2)"</td><td>旧ノートの表記は<strong>臨床的には正しい</strong>が、原文はこの略語を誤記している。原著の誤記として明記</td></tr>
+<tr><td>「内臓血流の評価法として、Doppler resistive index（ショック前に臓器の血管抵抗が上がる想定を捉える）などのエコー指標が提示される」</td><td>抵抗係数の定義、腎・脾それぞれの閾値、静脈側の指標、図2の全体像</td><td><strong>著しく不足</strong>。RDRI・SDRI・PVPI・腎静脈波形の4指標と、それぞれの閾値・根拠を追加</td></tr>
+<tr><td>脾（SDRI）についての記述が皆無</td><td>本文の約1/3が脾に割かれている</td><td><strong>重大な欠落</strong>。SDRI ≥4%低下、SDRI &gt; 0.71、脾-腎反射、&gt;800 mL 自己輸血を追加</td></tr>
+<tr><td>図1・図2の記載が皆無</td><td>図2点（灌流3パターン、ショックにおける灌流評価の全体像）</td><td><strong>欠落</strong>。原図2点を無改変抽出して差し込み、全ラベルを表・キャプションに起こした</td></tr>
+<tr><td>COI・資金源の記載なし</td><td>COI：3名とも申告なし／Funding：記載自体が無い</td><td><strong>欠落</strong>。追加</td></tr>
+</tbody></table></div>
+<h2>📚 主要引用文献一覧（本文で参照されている15件）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>循環性ショックと血行動態モニタリングに関するコンセンサス（ESICM タスクフォース）。ショックの定義の出典</td><td>Cecconi M, De Backer D, Antonelli M ら. *Intensive Care Med* 2014;40:1795–1815</td></tr>
+<tr><td>2</td><td>敗血症性ショックにおける腎動脈抵抗 — ノルアドレナリンでMAPを上げたときの腎抵抗係数の変化</td><td>Deruddre S, Cheisson G, Mazoit JX ら. *Intensive Care Med* 2007;33:1557–1562</td></tr>
+<tr><td>3</td><td>敗血症性ショックの腎不全 — ドプラ腎動脈抵抗係数の予測価値</td><td>Lerolle N, Guerot E, Faisy C ら. *Intensive Care Med* 2006;32:1553–1559</td></tr>
+<tr><td>4</td><td>重症患者のAKI可逆性に対するドプラ腎抵抗係数の診断精度</td><td>Darmon M, Schortgen F, Vargas F ら. *Intensive Care Med* 2011;37:68–76</td></tr>
+<tr><td>5</td><td>重症患者の腎灌流評価としての腎ドプラ — 再評価。交絡因子の出典</td><td>Schnell D, Darmon M. *Intensive Care Med* 2012;38:1751–1760</td></tr>
+<tr><td>6</td><td>多発外傷患者の出血性ショック — 腎ドプラ抵抗係数による早期検出（著者らのグループ）</td><td>Corradi F, Brusasco C, Vezzani A ら. *Radiology* 2011;260:112–118</td></tr>
+<tr><td>7</td><td>心臓手術後患者における酸素の供給・需要ミスマッチのマーカーとしての腎ドプラ抵抗係数。<strong>RDRI &gt; 0.7 の出典</strong>（著者らのグループ）</td><td>Corradi F, Brusasco C, Paparo F ら. *Biomed Res Int* 2015;2015:763940</td></tr>
+<tr><td>8</td><td>人工呼吸中の軽度低酸素血症が腎機能と腎抵抗係数に与える影響</td><td>Darmon M, Schortgen F, Leon R ら. *Intensive Care Med* 2009;35:1031–1038</td></tr>
+<tr><td>9</td><td>心腎症候群における腎の暗黒面 — 腎静脈高血圧とうっ血性腎不全</td><td>Di Nicolo P. *Heart Fail Rev* 2018;23:291–302</td></tr>
+<tr><td>10</td><td>心不全におけるドプラ超音波による腎内血行動態評価の臨床的意義。<strong>「うっ血性腎不全」の腎静脈波形の出典</strong></td><td>Iida N, Seo Y, Sai S ら. *JACC Heart Fail* 2016;4:674–682</td></tr>
+<tr><td>11</td><td>心臓手術後の門脈血流・腎内静脈血流の変化とAKIの関連（前向き観察コホート）。<strong>PVPI &gt; 50% の出典</strong>。VExUS の源流</td><td>Beaubien-Souligny W, Benkreira A, Robillard P ら. *J Am Heart Assoc* 2018;7:e009961</td></tr>
+<tr><td>12</td><td>カテコラミンによる内臓循環の変化と全身血行動態への影響。<strong>内臓リザーバー・レニンの出典</strong></td><td>Gelman S, Mushlin PS. *Anesthesiology* 2004;100:434–439</td></tr>
+<tr><td>13</td><td>術後人工呼吸患者における輸液チャレンジ蘇生時の脾ドプラ抵抗係数の変動。<strong>SDRI ≥4%低下の出典</strong>（著者らのグループ）</td><td>Brusasco C, Tavazzi G, Robba C ら. *Biomed Res Int* 2018;2018:1978968</td></tr>
+<tr><td>14</td><td>成人多発外傷後の潜在性出血性ショックの早期検出のための脾ドプラ抵抗係数。<strong>SDRI &gt; 0.71 の出典</strong>（著者らのグループ）</td><td>Corradi F, Brusasco C, Garlaschi A ら. *Shock* 2012;38:466–473</td></tr>
+<tr><td>15</td><td>脳超音波 — 方法論、基礎・応用原理と臨床応用（ナラティブレビュー）</td><td>Robba C, Goffi A, Geeraerts T ら. *Intensive Care Med* 2019;45:913–927</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>マクロ循環が正常でも内臓臓器は既に低灌流でありうる</strong> — この視点は取り入れる価値がある。しかし腎・脾のドプラ抵抗係数（RDRI &gt; 0.7、SDRI &gt; 0.71、SDRI 4%低下）はすべて著者ら自身の単施設研究に由来し、これを目標に治療した介入試験は本論文に1本も引用されていない。</mark></p>
+<ul><li>どの指標も到達しているのは「関連・診断精度」まで。<mark class="hl"><strong>治療判断を変える段階に来たものは一つもない</strong></mark></li><li>静脈側（門脈拍動・腎静脈波形）だけはその後 VExUS として体系化された。当院で使うならこちらが先</li><li>図1は「拡張期波が消える＝下流の抵抗が上がっている」を一目で示す優れた教材。教育目的での価値は高い</li><li>原著には単位の誤り（ウォールフィルタ 100 MHz）、図の略語誤植（脾なのに RDRI）、本文に根拠のない SvO2 閾値、脾と内臓リザーバーの混同がある。数値を引用する際は必ず原典（引用7・13・14）に当たること</li></ul>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ショックだが血圧・心拍出量は保たれている</td><td>乳酸・CRT・網状皮斑・尿量・ScvO2・pCO2ギャップ</td><td>まず確立した指標で低灌流の有無を判断する。RDRI/SDRI は判断材料にしない</td></tr>
+<tr><td>上記が正常なのに臓器障害が進む</td><td>静脈うっ血の評価（IVC・肝静脈・門脈拍動・腎静脈波形＝VExUS）</td><td>うっ血が主因なら除水・後負荷軽減を検討。本論文の PVPI &gt; 50% はこの枠組みに吸収されている</td></tr>
+<tr><td>輸液チャレンジを行うか迷う</td><td>事前に Type・Rate・Objective・Limit を決める（TROL）</td><td>Objective はマクロ指標（CO・SV）に置く。SDRI の4%低下を Objective にする根拠は現時点で無い</td></tr>
+<tr><td>RDRI/SDRI を測ってみたい</td><td>低周波プローブ、仰臥位、腎葉間動脈／脾動脈主要分枝、複数測定の平均、RI=(S−D)/S</td><td>記述的に記録し、乳酸・CRT・尿量と並べて観察する。値を根拠に昇圧薬・輸液を増減しない</td></tr>
+<tr><td>教育・勉強会で使いたい</td><td>図1の3パターン（perfused / hypoperfused / unperfused）</td><td>「拡張期波の有無＝末梢抵抗」の説明に使う。SvO2 の閾値は本文に根拠が無い旨を必ず添える</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

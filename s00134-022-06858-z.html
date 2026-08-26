@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>脳損傷における体温管理療法のデバイス（Special Issue Insight・ICM2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06858-z.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">脳損傷における体温管理療法のデバイス（Special Issue Insight・ICM2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Taccone FS, Donadello K, Mayer SA. Manipulating temperature: devices for targeted temperature management (TTM) in brain injury. Intensive Care Med. 2022;48:1409-1412. doi:10.1007/s00134-022-06858-z</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2022-08-17）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06858-z" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06858-z</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Manipulating temperature: devices for targeted temperature management (TTM) in brain injury</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06858-z.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06858-z.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06858-z.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>■ 機器を選ぶときの判断軸（本稿の核心）</strong></p>
+<ul><li><mark class="hl"><strong>選定基準は「体表か血管内か」ではなく「体温フィードバック制御があるか」</strong></mark>。本稿が引くメタ解析で血管内法が優位に見えたのは、主に「フィードバックのない体表デバイス（冷却ブランケット等）」との比較においてだった。フィードバック付きなら体表でも血管内でもよい、というのが著者らの整理</li><li>機器選定の会議では、カタログの「冷却速度」より <strong>①核心温の連続モニタリングと連動しているか ②目標体温を入力すると装置が自動で出力を上下させるか ③復温速度を毎時単位で指定できるか</strong> を確認する。本稿が言う「質の高いTTM」の4条件（速い目標到達／維持期の変動が小さい／制御された復温／発熱の適切な制御）はすべてこの3点から出る</li><li>血管内法を選ぶなら中心静脈カテーテル留置に伴う <strong>感染・刺入部出血・深部静脈血栓症</strong> を運用リスクとして明記する。本稿は具体的な発生率を示していない</li></ul>
+<p><strong>■ 心停止後プロトコル</strong></p>
+<ul><li>「TTM をやめた」＝「機器を使わない」ではない。TTM2 試験では 37.7℃ 超で治療する群でも <strong>患者のほぼ50%が体表または血管内デバイスを要した</strong>。当院の PCAS プロトコルが「解熱薬とアイスノンで様子を見る」運用に退行していないかを点検する</li><li>本稿が引く発熱の閾値は 2022年 ERC-ESICM の <strong>&gt; 37.7℃・少なくとも72時間</strong>。当院は 2025年版に合わせて <strong>≤37.5℃・36〜72時間</strong> を用いる（本稿は2022年の記述なので数値をそのまま採用しない）</li><li><strong>VA-ECMO 装着中は ECMO の熱交換器で 33℃／36℃ を提供できる</strong>（追加機器不要）。ECPR 症例で冷却装置を二重に用意しない</li></ul>
+<p><strong>■ 非低酸素性脳損傷（脳卒中・SAH・TBI）</strong></p>
+<ul><li>デバイスによる正常体温維持は <strong>発熱負荷を確実に減らすが、転帰改善は未証明</strong>。この位置づけを脳外科・神経内科と共有したうえで適応を決める</li><li>コストが本稿に明示されている：SAH のケースコントロール研究で体表TTMは <strong>ICU滞在の延長・鎮静の遷延・気管切開率の上昇</strong> を伴った。導入するならこの3つを事前に説明し、実施後に自施設データで確認する</li><li><strong>シバリング対策をセットで用意する</strong>。フィードバック付きデバイスは発熱回避に有効だが、シバリングの発生率は高かった</li><li>TBI では <strong>最初の48時間の体温変動の大きさ</strong> が長期の神経学的転帰不良と関連した。当院のバイタル自動収集で「平均体温」だけでなく「変動幅」を残せるようにしておくと、この指標を自施設で検証できる</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：急性脳損傷（ABI）後は非感染性・感染性いずれの原因でも体温調節が破綻し、発熱が高頻度に起こる。発熱は虚血性損傷の増悪・脳浮腫・頭蓋内圧亢進・一時的な神経学的悪化、そして死亡と神経学的転帰不良に関連する。発熱の予防・治療は既に ABI 管理の標準治療となっている。低体温は頭蓋内圧を下げ神経保護効果を持ちうるが、臨床試験での利益は依然として極めて議論がある。</li><li><strong>Unknown（分かっていなかったこと）</strong>：TTM という用語はこれら異なるアプローチ（低体温・正常体温維持・発熱予防）を包含するが、<strong>最適な TTM を提供する最適な方法は未知</strong>である。どのデバイスを選ぶべきかを比較したランダム化データが乏しい。</li><li><strong>What's new（本研究の新規性・意義）</strong>：治療目標（何℃を狙うか）ではなく <strong>「どうやってその温度を作るか」＝デバイスの選択</strong> に絞って論じた短報。①旧来法（冷輸液・ブランケット・アイスパック）はフィードバック制御付きの体表・血管内デバイスに置き換わりつつある、②心停止後では体表／血管内どちらでもよいが <strong>フィードバック機構のあるものを選ぶべき</strong>、③非低酸素性脳損傷ではデバイスは正常体温維持と体温変動の低減に有効だが、患者転帰への効果は未実証、という3点を整理した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 急性脳損傷における TTM を「目標温度」ではなく「デバイス」の観点から整理した ICM 特集の短報。旧来の冷輸液・冷却ブランケット・アイスパックは、体表冷却デバイスと血管内法に置き換わりつつある。心停止後では体表と血管内の間にランダム化試験での差はなく、<strong>優劣を分けるのはむしろ体温フィードバック制御の有無</strong>である。非低酸素性脳損傷ではデバイスは発熱を減らし体温変動を抑えるが、患者転帰の改善は未証明。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th></th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>問い</td><td>急性脳損傷患者に TTM を提供するとき、どのデバイスを選ぶべきか</td></tr>
+<tr><td>区分</td><td>SPECIAL ISSUE INSIGHT（*Intensive Care Med* 2022）。系統的レビューでもガイドラインでもない。検索戦略・バイアス評価・GRADE 格付けはない</td></tr>
+<tr><td>デバイスの分類</td><td>旧来法（静脈内冷輸液・冷却ブランケット・アイスパック／パッド）／体表冷却デバイス（熱伝導。冷たい液体または空気が循環する冷却パッド）／血管内法（中心静脈カテーテル内の閉鎖回路を冷却液が循環）</td></tr>
+<tr><td>デバイスの利点</td><td>体温をより精密に制御できる／目標体温到達までの時間が短くより予測可能／フィードバック制御により医療者の業務量が減る</td></tr>
+<tr><td>デバイスの欠点</td><td>旧来法より高価。管理された環境（ICU・手術室・カテ室）でしか使えない。血管内法はより侵襲的で、感染・刺入部出血・深部静脈血栓症のリスクが潜在的に高い</td></tr>
+<tr><td>「質の高いTTM」の4条件</td><td>速い目標到達／維持期の体温変動が少ない／制御された復温／発熱の適切な制御</td></tr>
+<tr><td>心停止後</td><td>ガイドラインは &gt; 37.7℃ の発熱を少なくとも72時間、能動的に予防することを推奨。根拠は院外心停止生存者 1,850名の RCT（33℃ vs 37.7℃ 超で治療＝同等）。ランダム化試験では血管内法と体表冷却で生存・神経学的転帰に差なし。非ランダム化データのメタ解析では血管内法・フィードバック付き法が優位に見えるが、その優位は主にフィードバックのない体表デバイスとの比較で生じていた</td></tr>
+<tr><td>VA-ECMO</td><td>ECMO 装置の熱交換器が、追加の機器なしに 33℃ または 36℃ の TTM を正確に提供するのに有効</td></tr>
+<tr><td>非低酸素性脳損傷</td><td>脳卒中と外傷性脳損傷で正常体温（核心温 約37℃）を目標とする推奨があるが、これを支持するランダム化試験は存在しない。デバイスは発熱負荷を減らし体温変動を抑えるが、シバリングは増え、SAH では ICU 滞在延長・鎮静遷延・気管切開率上昇を伴った</td></tr>
+<tr><td>進行中</td><td>INTREPID 試験（NCT02996266）。重症急性虚血性・出血性脳卒中患者への体表冷却システムによる先取り的発熱管理</td></tr>
+<tr><td>数値の乏しさ</td><td>本文に <strong>冷却速度（℃/時）・目標到達時間の実測値・合併症の発生率・信頼区間・p値は一切示されていない</strong>。効果量は原典（引用文献）に当たる必要がある</td></tr>
+</tbody></table></div>
+<p><strong>押さえるべき5点</strong></p>
+<ol><li>論点は「何℃を狙うか」ではなく「どうやってその温度を作るか」。デバイスの話に絞った短報である</li><li>心停止後で体表 vs 血管内のランダム化比較に差はない。差を作っていたのは <strong>フィードバック制御の有無</strong> の可能性が高い</li><li>「発熱予防」に切り替えてもデバイスは要る。TTM2 の 37.7℃ 群でもほぼ50%が機器を使った</li><li>非低酸素性脳損傷では、デバイスは「体温という中間指標」を確実に改善するが「患者転帰」は未証明。この区別を崩さない</li><li>著者3名全員が TTM デバイス企業から資金を受けている。結論の方向と利害の方向が一致している</li></ol>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 脳損傷における体温管理の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 健常人の体温は複数の機構で厳密に制御されているが、<strong>急性脳損傷（ABI＝acute brain injury。心停止後の低酸素性脳症、脳卒中、くも膜下出血、外傷性脳損傷などの総称）</strong> の後にはこの制御が崩れる。原因は非感染性（組織損傷、全身または脳の炎症、血管損傷、出血性病変、深部静脈血栓症）と感染性の両方である。 その結果、ABI 患者は脳疾患の種類や体温の測定部位によらず、しばしば発熱する。<strong>発熱の定義は一定せず、37.5〜38.5℃ を超える体温と様々に定義されている</strong>（この定義の幅の広さ自体が、研究間の比較を難しくしている）。 なぜ発熱が問題か。実験研究とヒト研究の双方で、発熱は虚血性損傷の増悪・脳浮腫・頭蓋内圧亢進・一時的な神経学的悪化と関連してきた。さらに発熱を経験した ABI 患者は死亡と神経学的転帰不良のリスクも高かった。そのため、発熱の予防および／または治療は現在 ABI 患者の臨床管理における標準治療として実施・考慮されている。 一方、体温を正常範囲より下げること（<strong>低体温</strong>）は頭蓋内圧を下げ、いくらかの神経保護効果を提供しうる。ただし臨床研究におけるその利益は依然として極めて議論が多い。 <strong>TTM（targeted temperature management＝目標体温管理）</strong> は、この「低体温にする」「正常体温を保つ」「発熱を防ぐ」という異なるアプローチをまとめて指す用語である。 本稿の主題は、<strong>最適な TTM を提供する最適な方法（＝どのデバイスを使うか）が未知である</strong>という点にある。 本稿を読むうえで鍵になる用語をひとつだけ先に定義しておく。<strong>体温フィードバック制御（temperature feedback control）</strong> とは、患者の核心温を連続測定し、その値に応じて装置が冷却・加温の出力を自動で上下させる仕組みのことである。これがないデバイス（従来の冷却ブランケットなど）は、設定した温度の水を流し続けるだけで患者の体温に追従しない。本稿の議論はほぼこの一点に収束する。</p>
+</div>
+<h3>2. 背景と目的 🧠</h3>
+<p>本稿は ICM 誌の「命を救う機械（machines that save lives）」特集に置かれた SPECIAL ISSUE INSIGHT である。特集の趣旨に沿い、TTM を <strong>「どの温度を目標にするか」ではなく「その温度をどの機械で作るか」</strong> の側から論じる。</p>
+<p>著者らの出発点は次の3つである。</p>
+<ul><li>ABI 後の発熱は高頻度で、転帰不良と関連する。したがって発熱の予防・治療は既に標準治療である</li><li>低体温は頭蓋内圧を下げ神経保護効果を持ちうるが、臨床試験での利益は極めて議論がある</li><li>TTM はこれらを包含する用語だが、<strong>最適な TTM を提供する最適な方法は未知</strong>である</li></ul>
+<p>目的は、この最後の空白に対して、現時点で言えることを整理することにある。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：招待制の短報解説（SPECIAL ISSUE INSIGHT）。<strong>系統的レビューでもメタ解析でもガイドラインでもない</strong></li><li><strong>検索戦略・選択基準</strong>：記載なし</li><li><strong>バイアス評価・エビデンスの確実性評価（GRADE 等）</strong>：なし</li><li><strong>統計解析</strong>：なし。本文に信頼区間・p値・効果量の数値は一切示されていない</li><li><strong>引用</strong>：16件。うちガイドライン2件（AHA/ASA 急性虚血性脳卒中2019、Neurocritical Care Society の動脈瘤性 SAH 合意2011）、ERC-ESICM の体温管理ガイドライン1件、RCT 3件（TTM2、HYPO-ECMO、Broessner）、系統的レビュー・メタ解析3件</li><li><strong>補足資料</strong>：Supplemental Table 1「既存の TTM アプローチの要約」がオンライン版に存在する。<strong>本PDFには含まれていないため、その内容は本ノートに反映できていない</strong></li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>このノートで数値表を作れない理由 依頼されたデバイス別の <strong>冷却速度（℃/時）・目標体温への到達時間・オーバーシュートの大きさ・合併症発生率・コスト</strong> は、<mark class="hl"><strong>本文に数値としては一切記載がない</strong></mark>。本稿はこれらを定性的な比較（「より速い」「より高価」「リスクが潜在的に高い」）でしか述べていない。数値が要る場合は Supplemental Table 1 と引用文献 [4][7][8] に当たる必要がある。以下の表は本文の記述の範囲内で作成し、記載のない欄はすべて「本文に記載なし」と明記する。</p>
+</div>
+<h3>4. TTM を提供する方法 — デバイスの分類と比較 🌡️</h3>
+<p>本文の記述はおおむね次の通りである。TTM を臨床実践に実装するために様々なデバイスが開発されてきており、これらは <strong>静脈内冷輸液・冷却ブランケット・アイスパック／パッド</strong> といった、より近代的でないアプローチを徐々に置き換えてきた。</p>
+<p>置き換えの主役である <strong>体表冷却デバイス</strong> と <strong>血管内法</strong>（Fig. 1）は、他の方法と比べて <strong>より高価であり、管理された環境（ICU・手術室・カテ室）でしか使用できない</strong>。その代わりに次の3つの利点を持つ。</p>
+<ul><li>体温をより精密に制御できる</li><li>目標体温到達までの時間がより短く、より予測可能である</li><li>患者の体温に合わせて調整する <strong>フィードバック制御</strong> を用いることで、医療者の業務量を減らす</li></ul>
+<p>原理は次の通り。<strong>体表冷却デバイス</strong>は熱伝導（thermal conductivity）の原理に基づく。すなわち、患者の体に接触する冷却パッド内を冷たい液体または空気が循環する。<strong>血管内法</strong>はより侵襲的で、中心静脈カテーテルの留置を要し、そのカテーテル内の閉鎖回路を冷却液が循環する。</p>
+<h4>Table 1. デバイス別の比較（本文の記述の範囲内で作成）</h4>
+<div class="tw"><table>
+<thead><tr><th>デバイス</th><th>原理</th><th>冷却速度（℃/時）</th><th>目標体温への到達時間</th><th>体温のばらつき・オーバーシュート</th><th>合併症</th><th>コスト</th></tr></thead>
+<tbody>
+<tr><td>静脈内冷輸液</td><td>冷たい輸液の静脈内投与</td><td>本文に記載なし</td><td>本文に記載なし</td><td>本文に記載なし（フィードバック制御を持たない旧来法として分類）</td><td>本文に記載なし</td><td>体表・血管内デバイスより安価（「より高価」と対比される側）</td></tr>
+<tr><td>冷却ブランケット</td><td>体表からの熱伝導</td><td>本文に記載なし</td><td>本文に記載なし</td><td>フィードバックのないブランケットは、水循環式体表デバイスや血管内カテーテルより発熱の回避・正常体温の維持に劣った</td><td>本文に記載なし</td><td>同上（安価な側）</td></tr>
+<tr><td>アイスパック／パッド</td><td>体表からの熱伝導</td><td>本文に記載なし</td><td>本文に記載なし</td><td>本文に記載なし</td><td>本文に記載なし</td><td>同上（安価な側）</td></tr>
+<tr><td>体表冷却デバイス（フィードバック付き・水循環式または空気循環式）</td><td>熱伝導。患者の体に接触する冷却パッド内を冷たい液体または空気が循環</td><td>本文に記載なし</td><td>血管内法より一般に遅い（数値は本文に記載なし）</td><td>維持期の体温変動を低減。制御された復温が可能</td><td>本文に記載なし。ただし発熱回避に有効な一方でシバリングの発生率が高かった</td><td>旧来法より高価。管理された環境でのみ使用可</td></tr>
+<tr><td>血管内法（中心静脈カテーテル＋閉鎖回路）</td><td>カテーテル内の閉鎖回路を冷却液が循環</td><td>本文に記載なし</td><td><strong>一般に体表冷却デバイスより速く目標体温に到達できる</strong>（数値は本文に記載なし）</td><td>維持期の体温変動を低減。制御された復温が可能</td><td>感染、カテーテル刺入部の出血、深部静脈血栓症のリスクが潜在的に高い（発生率は本文に記載なし）</td><td>旧来法より高価。管理された環境でのみ使用可</td></tr>
+<tr><td>VA-ECMO の熱交換器</td><td>体外循環回路内の熱交換</td><td>本文に記載なし</td><td>本文に記載なし</td><td>33℃ または 36℃ の TTM を「正確に（accurately）」提供できると記載</td><td>本文に記載なし</td><td>追加の機器が不要（＝既に ECMO を回している症例では追加コストなし）</td></tr>
+<tr><td>経鼻冷却（nasal / intranasal cooling）</td><td>—</td><td><mark class="hl"><strong>本稿には経鼻冷却に関する記述が一切ない</strong></mark></td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>表の読み方の注意 この表の「本文に記載なし」は「そのデバイスにその特性がない」という意味ではなく、<strong>この短報がその数値を書いていない</strong> という意味である。カタログ値や他文献の数値をここに混ぜていない。<mark class="hl"><strong>当院で機器を比較するときは、この表ではなく各社の仕様書と引用文献 [4][7][8] を一次資料として用いること</strong></mark>。</p>
+</div>
+<h4>復温速度の制御について</h4>
+<p>本文が復温に触れているのは1か所である。体表冷却デバイスと血管内法の使用は「質の高い TTM（high quality TTM）」を提供しうるとし、その内容を <strong>①より速い目標到達 ②維持期の体温変動の減少 ③制御された復温（controlled rewarming） ④発熱の適切な制御</strong> の4点と定義している。</p>
+<p>つまり <strong>「制御された復温」はデバイスを使う理由のひとつとして明示されている</strong> が、<strong>毎時何℃で戻すべきかという具体的な速度、および復温中の発熱（rebound hyperthermia）の頻度や対処については本文に記載がない</strong>。復温速度そのものを検証した研究は本稿の引用文献に含まれていない。</p>
+<h4>フィードバック制御が体温のばらつきを決めるという論点</h4>
+<p>本稿でもっとも実務に効く論点がこれである。本文の記述を順に追うと、次の3段の論理になっている。</p>
+<ol><li>体表・血管内デバイスの利点として「フィードバック制御を用いることで医療者の業務量を減らす」ことが挙げられている</li><li>心停止後の非ランダム化データのメタ解析では、<strong>(a) 侵襲的かつ体温フィードバック付きの TTM 法は不良転帰の確率の低下と関連した</strong>（死亡率とは関連しなかった）</li><li>さらに <strong>(c) 血管内法の利益は、主に体温フィードバックのない体表デバイスとの比較で観察された</strong></li></ol>
+<p>すなわち、見かけ上「血管内 &gt; 体表」に見えた差は、<strong>「フィードバックあり &gt; フィードバックなし」の差だった可能性が高い</strong>。著者らの結論もこれに沿っており、「体表冷却デバイスまたは血管内冷却デバイス、<strong>とくに体温フィードバックシステムを用いるもの</strong>が理想的な冷却技術として考慮されるべき」と述べている。</p>
+<p>また非低酸素性脳損傷の節でも、体表・血管内デバイスの「もうひとつの重要な利点は、TTM 中の体温変動（temperature variability）を低減できることである」と明記されている。フィードバック制御 → 体温変動の低減 → 転帰、という因果の鎖のうち、本稿が確かなものとして扱っているのは前半（制御 → 変動低減）までで、後半（変動低減 → 転帰）は未証明という位置づけである。</p>
+<h3>5. 図の詳細 🖼️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06858-z" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06858-z）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. フィードバック制御を備えた体表または血管内体温デバイスの模式図（原図・無改変。©Springer Nature / Intensive Care Medicine 2022） 原題：Schematic presentation of surface or endovascular temperature devices with feedback control</p>
+</div>
+<p>図は4つの要素で構成される。上段左に青い液柱の体温計、上段右に赤い液柱の体温計、下段左に患者と冷却装置本体のイラスト、下段右に装置の画面のクローズアップが配置されている。図中のラベルと数値をすべて起こすと次の通りである。</p>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>図中の表記（原文）</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>上段左（青い体温計の下）</td><td>Cardiac Arrest= 37.7°C (33°C?)</td><td>心停止後の目標は 37.7℃。かっこ内の「33℃?」は疑問符付きで、33℃ を狙うべきかがなお未確定であることを示す</td></tr>
+<tr><td>上段左（同・2行目）</td><td>Other Injuries= 37.0°C</td><td>心停止以外の脳損傷では 37.0℃（正常体温）が目標</td></tr>
+<tr><td>上段右（赤い体温計の下）</td><td>Continuous Core Temperature Monitoring</td><td>連続核心温モニタリング。フィードバック制御の入力側</td></tr>
+<tr><td>下段左（患者イラスト）</td><td>—</td><td>仰臥位の患者に、胸部に2枚・大腿部に1枚の冷却パッドが貼付され、複数のチューブが装置本体に接続されている。装置は車輪付きの床置き型で、上部にカラー画面がある</td></tr>
+<tr><td>下段左（吹き出し）</td><td>Temperature Feedback Control</td><td>体温フィードバック制御。患者側（センサー）と装置側（冷却／加温出力）が閉ループを作ることを示す</td></tr>
+<tr><td>下段右・画面左半分（見出し）</td><td>Patient / Target temperature</td><td>患者側の表示欄。目標体温</td></tr>
+<tr><td>下段右・画面左半分（大きな数値）</td><td>33.5°C</td><td>設定されている目標体温の例。33.5℃</td></tr>
+<tr><td>下段右・画面左半分（縦軸目盛り）</td><td>40 / 38 / 36 / 34 / 32 / 30 / °C</td><td>体温トレンドの縦軸。30〜40℃</td></tr>
+<tr><td>下段右・画面左半分（曲線）</td><td>—</td><td>白い実線のトレンド。左端で 34℃ 付近から急速に 32℃ 付近まで下降し、しばらく 32℃ 前後で平坦に推移した後、右側で緩やかに上昇して 34℃ 付近に至る（＝導入 → 維持 → 制御された復温の3相を1本の線で示している）</td></tr>
+<tr><td>下段右・画面右半分（見出し）</td><td>Device / System temperature</td><td>装置側の表示欄。システム温度</td></tr>
+<tr><td>下段右・画面右半分（上端）</td><td>Max warming</td><td>最大加温。赤</td></tr>
+<tr><td>下段右・画面右半分（下端）</td><td>Max cooling</td><td>最大冷却。濃青</td></tr>
+<tr><td>下段右・画面右半分（中央）</td><td>—</td><td>赤 → 白 → 青のグラデーションで区切られた縦方向のバー。右から太い矢印がバーの下部（青寄り）を指しており、現在装置が冷却側に出力していることを示す</td></tr>
+<tr><td>下段右（吹き出し）</td><td>Fast time to target / Reduced Variability</td><td>速い目標到達／変動の低減。デバイスを使う目的そのもの</td></tr>
+</tbody></table></div>
+<p>図の読み方として重要なのは、<strong>画面が「患者の体温」と「装置の出力」を左右に並べて表示している</strong>点である。フィードバック制御とは、左（患者の実測値）を見て右（装置の冷却／加温出力）を自動で動かす仕組みであり、この2つを同一画面に置いた設計がそれを可視化している。矢印が青側にあれば冷却中、赤側にあれば加温中と読む。</p>
+<p>なお、図に示された <strong>37.7℃／37.0℃／33.5℃／33℃?</strong> はいずれも本文の記述と整合する。図に冷却速度・到達時間・合併症率の数値は含まれていない。</p>
+<h3>6. 低酸素性脳損傷（心停止後）における TTM デバイス ❤️‍🩹</h3>
+<p><strong>ガイドラインの推奨</strong>。最近の蘇生後ケアガイドラインは、心停止後に意識が戻らない患者において、<strong>少なくとも72時間、発熱（&gt; 37.7℃ と定義）を能動的に予防すること</strong> を推奨している（引用は 2022年の ERC-ESICM ガイドライン）。</p>
+<p><strong>その根拠</strong>。この推奨を主に駆動したのは、<strong>院外心停止生存者 1,850名のランダム化試験</strong>である。この試験では、<strong>33℃ で TTM を行った群と、体温が 37.7℃ を超えたときに治療した群で転帰は同様</strong>だった（引用文献 [6] は TTM2 試験、Dankiewicz ら *N Engl J Med* 2021;384(24):2283-2294）。</p>
+<p><strong>見落とされやすい点</strong>。この試験では、目標体温の達成に <strong>両群とも体表冷却デバイスと血管内法が使われた</strong>。その結果、<strong>37.7℃ 群でも患者のほぼ50%がそうした機器を要した</strong>。「発熱を防ぐ」方針への転換は、機器を使わないことを意味しない。</p>
+<p><strong>デバイス間の比較</strong>。ランダム化試験では血管内法と体表冷却デバイスの間に生存・神経学的転帰の差は認められなかった。一方で非ランダム化データの系統的レビュー・メタ解析（引用文献 [7] Calabró ら *Crit Care* 2019、[8] Bartlett ら *Resuscitation* 2020）は次の3つの所見を出している。</p>
+<div class="tw"><table>
+<thead><tr><th></th><th>所見</th><th>注記</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>侵襲的かつ体温フィードバック付きの TTM 法は、不良転帰の確率の低下と関連した。<strong>死亡率とは関連しなかった</strong></td><td>ただしこれらの効果は主に非ランダム化試験に駆動されていた</td></tr>
+<tr><td>(b)</td><td>血管内法は、すべての種類の体表デバイスと比較して神経学的転帰の改善と関連した</td><td>効果量・信頼区間は本文に記載なし</td></tr>
+<tr><td>(c)</td><td>血管内法の利益は、<strong>主に体温フィードバックのない体表デバイスとの比較で観察された</strong></td><td>(b) の見かけの優位を説明する所見</td></tr>
+</tbody></table></div>
+<p>著者らはこれらから、TTM を受ける心停止生存者において <strong>体表冷却デバイスまたは血管内冷却デバイス、とくに体温フィードバックシステムを用いるもの</strong> が理想的な冷却技術として考慮されるべきだと述べる。</p>
+<p><strong>VA-ECMO 症例</strong>。当初 VA-ECMO 療法を要した心停止生存者では、<strong>ECMO 装置の熱交換器が追加の機器なしで 33℃ または 36℃ の TTM を正確に提供するのに有効</strong>である（引用文献 [9]）。</p>
+<h3>7. その他の脳損傷における TTM デバイス 🩹</h3>
+<p>発熱はあらゆる形態の ABI で有害な転帰と関連している。しかし <strong>非低酸素性の脳損傷患者では、発熱の最適な管理は依然として十分に定義されていない</strong>。</p>
+<p>各種ガイドラインは脳卒中と外傷性脳損傷の患者で <strong>正常体温（核心温 約37℃）</strong> を目標とすることを推奨しているが、<strong>この戦略を支持するランダム化試験は存在しない</strong>。</p>
+<h4>Table 2. 引用された個々の研究（本文の記述を整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>対象・設定</th><th>比較</th><th>所見</th><th>引用元</th></tr></thead>
+<tbody>
+<tr><td>重症脳血管疾患の ABI 患者集団</td><td>血管内法 vs 従来のアプローチ（抗炎症薬と体表冷却デバイス）</td><td>発熱の負荷を有意に減らした。有害事象のリスク増加はなく、死亡率と神経学的長期転帰に有意差はなかった</td><td>Broessner ら *Stroke* 2009（2施設・前向きランダム化試験）</td></tr>
+<tr><td>くも膜下出血（SAH）</td><td>正常体温を目指す体温フィードバック付き体表 TTM デバイス vs 解熱薬</td><td>長期の神経学的転帰の改善と関連した。ただしこのアプローチは <strong>より長い ICU 滞在・遷延する鎮静・より高い気管切開率</strong> ももたらした</td><td>Badjatia ら *Neurosurgery* 2010（ケースコントロール研究）</td></tr>
+<tr><td>ABI 患者</td><td>血管内法（カテーテルベースの熱交換システム）vs 従来療法</td><td>発熱負荷の有意な減少と関連し、感染リスクの上昇はなかった</td><td>Diringer ら *Crit Care Med* 2004</td></tr>
+<tr><td>神経集中治療患者</td><td>水循環式の体表 TTM デバイスまたは血管内カテーテル vs 他のシステム（体温フィードバックのない冷却ブランケットや解熱薬）</td><td>発熱の回避と正常体温の維持により有効だった。ただし <strong>シバリングの発生率はより高かった</strong></td><td>Mayer ら *Crit Care Med* 2004</td></tr>
+<tr><td>外傷性脳損傷（TBI）</td><td>—</td><td><strong>最初の48時間の高い体温変動が、長期の神経学的転帰不良と関連した</strong></td><td>Abu-Arafeh ら *Crit Care Med* 2018</td></tr>
+</tbody></table></div>
+<p>著者らは、この設定における体表・血管内デバイスの <strong>もうひとつの重要な利点は、TTM 中の体温変動を低減できること</strong> だと述べる。</p>
+<p><strong>進行中の試験</strong>。<strong>INTREPID 試験（ClinicalTrials.gov Identifier: NCT02996266）</strong> が、重症の急性虚血性または出血性の患者において、体表冷却システムを用いた先取り的（proactive）な発熱管理の臨床的影響を検証中である。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原文の記述が途中で切れている INTREPID の対象を述べた文は、印刷版で "in patients with severe acute ischemic or hemorrhagic." と終わっており、<mark class="hl"><strong>最後の名詞（stroke）が脱落したまま出版されている</strong></mark>。文脈上「脳卒中」であることは明らかだが、本ノートでは原文が不完全であることを明記しておく。</p>
+</div>
+<h3>8. 著者らの結論 🏁</h3>
+<ul><li>急性脳損傷後に TTM を受ける患者では、<strong>フィードバック制御付きの体表冷却デバイスと血管内法の実装により</strong>、望ましい目標範囲内での核心温のより適切な維持と、TTM の「用量」（＝特定の体温レベルへの経時的な曝露）の精密な評価が可能になる</li><li>心停止後の意識のない患者では、これらの機器は神経学的転帰の改善と関連するようである。<strong>しかしこれらの所見は主に非ランダム化試験に駆動されており、発熱回避における役割はさらなる評価を要する</strong></li><li>非低酸素性の脳損傷患者では、体表冷却デバイスと血管内法のほうが正常体温の維持と体温変動の低減に有効である。<strong>心停止領域と比べて質の高いデータが相対的に乏しいため、臨床的に意義のある患者転帰への効果は今後の実証を要する</strong></li></ul>
+<h2>🔗 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本稿（2022年）</th><th>Vault 内の他ノート</th><th>整合の取り方</th></tr></thead>
+<tbody>
+<tr><td>発熱予防の閾値</td><td>&gt; 37.7℃ を少なくとも72時間、能動的に予防（2022年 ERC-ESICM に基づく）</td><td>2025年 ERC-ESICM は <strong>≤37.5℃ を 36〜72時間</strong> に改訂し、章名も「TTM」から「Temperature control」へ変更</td><td><strong>数値は 2025年版を採用する</strong>。本稿の 37.7℃ は 2022年時点の記述として読む</td></tr>
+<tr><td>33℃ vs 発熱予防</td><td>TTM2（1,850名）で同等</td><td>ICECAP は低体温の延長（6〜72時間）でも神経予後は改善せず、最短6時間が最適である事後確率 0.51</td><td>本稿の「33℃ を狙う根拠は乏しい」という立場は、その後の ICECAP でさらに補強された</td></tr>
+<tr><td>ECPR 後の目標温度</td><td>記載なし</td><td>JAAM-OHCA 890例で 32-34℃ と 35-36℃ の30日神経予後に差なし。SAVE-J II との対比レターもあり、解釈は組み入れ集団に依存</td><td>ECPR では本稿の VA-ECMO 熱交換器の記述が実務的に効くが、<strong>目標温度そのものの選択は本稿の射程外</strong></td></tr>
+<tr><td>復温速度</td><td>「制御された復温」と述べるのみで速度の数値なし</td><td>脳低体温療法後の復温速度を扱ったノートあり（NEJM2013）</td><td>復温速度の具体は本稿からは得られない。当院プロトコルの根拠は別ノートに置く</td></tr>
+<tr><td>TBI への低体温</td><td>正常体温目標を支持する RCT が存在しないと明記</td><td>POLAR-RCT・B-HYPO ともに TBI への低体温の有益性を示せていない</td><td>本稿の慎重な記述と一致する。TBI では「低体温」ではなく「発熱を作らせない」に軸足がある</td></tr>
+<tr><td>発熱そのものの扱い</td><td>発熱＝転帰不良と関連、予防は標準治療</td><td>ICM2026 のナラティブレビュー「低体温から『発熱を作らせない』へ」がこの流れを継承</td><td>本稿は 2022年時点でこの転換点に立つ位置づけ。4年後のレビューと並べて読むと変化が見える</td></tr>
+</tbody></table></div>
+<h2>🧪 批判的吟味（JC での論点）</h2>
+<ol><li><mark class="hl"><strong>著者3名全員が TTM デバイス企業から資金を受けている</strong></mark>。FST は ZOLL と BD から講演料、KD は BD から講演料、SM は BrainCool からコンサルティング料を受けている。本稿の結論は一貫して「旧来法よりデバイスを、フィードバックなしよりフィードバックありを」という方向であり、<strong>結論の方向と利害の方向が完全に一致している</strong>。COI があるから内容が誤りだということにはならないが、短報で数値を示さず定性的な優位性を述べる形式は、この一致をより注意して読むべき理由になる。（企業名は論文本文の記載。各社がどの製品を扱うかは本文に記載がなく、一般知識として補足すれば ZOLL は血管内カテーテル型、BD は体表パッド型、BrainCool は体表・経鼻の冷却装置を扱う。<mark class="hl">この製品対応は本稿には書かれていない</mark>）</li></ol>
+<ol><li><strong>メタ解析の (b) と (c) が事実上矛盾している</strong>。(b)「血管内法はすべての種類の体表デバイスより神経学的転帰が良い」と (c)「その利益は主にフィードバックのない体表デバイスとの比較で観察された」は、並べて読めば (b) の見かけの優位が交絡（フィードバックの有無）で説明されることを示す。著者らはこれを明示的に「(b) は (c) で説明される」とは書かず、3つの所見を並置している。JC ではここを詰める価値がある。</li></ol>
+<ol><li><strong>ランダム化データと非ランダム化データの結論が逆を向いている</strong>。RCT では体表と血管内に差がなく、非ランダム化データでのみ差が出る。著者ら自身が「効果は主に非ランダム化試験に駆動されていた」と2回書いており、この留保は原文の慎重さのまま読むべきである。<strong>デバイス選択で神経予後が変わるという主張の強度は、現時点では弱い</strong>。</li></ol>
+<ol><li><strong>VA-ECMO の根拠として引かれた文献が主題とずれている</strong>。「ECMO の熱交換器が 33℃ または 36℃ の TTM を正確に提供する」の引用文献 [9] は HYPO-ECMO 試験（Levy ら *JAMA* 2022）であり、これは <strong>心原性ショックで VA-ECMO を受ける患者における中等度低体温 vs 正常体温の30日死亡率を比較した RCT</strong> である。心停止生存者を対象に熱交換器の温度制御精度を検証した研究ではない。「精度が高い」という記述の直接の根拠にはなっていない。</li></ol>
+<ol><li><strong>「脳卒中と TBI で正常体温を推奨するガイドライン」として引かれた2件のうち、TBI のガイドラインが含まれていない</strong>。引用 [10] は AHA/ASA の急性虚血性脳卒中ガイドライン2019、[11] は Neurocritical Care Society の <strong>動脈瘤性くも膜下出血</strong> に関する合意勧告2011 である。本文の "stroke and traumatic brain injury" という記述と引用文献が対応していない。</li></ol>
+<ol><li><strong>数値がまったくない</strong>。信頼区間・p値・効果量・冷却速度・到達時間・合併症発生率のいずれも本文にない。Supplemental Table 1 に一部あると思われるが本PDFには含まれない。<strong>機器選定の一次資料としては使えず、引用文献への入口として使うのが正しい読み方</strong>である。</li></ol>
+<ol><li><strong>体温変動（variability）を転帰指標として扱う根拠が1件の観察研究に依存している</strong>。TBI で最初の48時間の高い体温変動が長期転帰不良と関連したという所見は Abu-Arafeh ら（*Crit Care Med* 2018）の1件のみで、変動を減らせば転帰が改善するという介入研究は引用されていない。<strong>中間指標の改善を転帰の改善と読み替えない</strong>。</li></ol>
+<ol><li><strong>コストの記述が「高価」の一語で終わっている</strong>。本文は体表・血管内デバイスが「より高価」としか述べず、機器価格・消耗品費・人件費削減効果のいずれも数値化していない。フィードバック制御による業務量減少という利点を挙げながら、その定量もない。<mark class="hl"><strong>費用対効果の判断は本稿からはできない</strong></mark>。</li></ol>
+<ol><li><strong>INTREPID の文が途中で切れたまま出版されている</strong>（前述）。査読・校正の粗さを示す小さな傷であり、短報の性質と併せて読む。</li></ol>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>急性脳損傷における発熱管理のレビュー</td><td>Bogossian EG, Taccone FS. *Curr Opin Crit Care* 2022;28(2):130-137</td></tr>
+<tr><td>2</td><td>脳温の生理と脳損傷後の病態生理</td><td>Mrozek S, Vardon F, Geeraerts T. *Anesthesiol Res Pract* 2012;2012:989487</td></tr>
+<tr><td>3</td><td>脳卒中・神経損傷患者における発熱の転帰への影響（包括的メタ解析）</td><td>Greer DM ら. *Stroke* 2008;39(11):3029-3035</td></tr>
+<tr><td>4</td><td>心停止後 TTM の実践的アプローチ（デバイスの特性の出典）</td><td>Annoni F, Donadello K, Nobile L, Taccone FS. *Minerva Anestesiol* 2020;86(10):1103-1110</td></tr>
+<tr><td>5</td><td>成人の心停止後体温管理に関する ERC-ESICM ガイドライン（&gt; 37.7℃・72時間の出典）</td><td>Sandroni C ら. *Intensive Care Med* 2022;48(3):261-269</td></tr>
+<tr><td>6</td><td>TTM2 試験。院外心停止後の低体温 vs 正常体温（1,850名）</td><td>Dankiewicz J ら. *N Engl J Med* 2021;384(24):2283-2294</td></tr>
+<tr><td>7</td><td>心停止後の TTM における冷却方法別の転帰（系統的レビュー・メタ解析）</td><td>Calabró L ら. *Crit Care* 2019;23(1):285</td></tr>
+<tr><td>8</td><td>血管内体温管理 vs 体表冷却（系統的レビュー・メタ解析）</td><td>Bartlett ES ら. *Resuscitation* 2020;146:82-95</td></tr>
+<tr><td>9</td><td>HYPO-ECMO 試験。VA-ECMO 中の心原性ショックにおける中等度低体温 vs 正常体温の30日死亡率</td><td>Levy B ら. *JAMA* 2022;327(5):442-453</td></tr>
+<tr><td>10</td><td>急性虚血性脳卒中の早期管理ガイドライン（AHA/ASA 2019）</td><td>Powers WJ ら. *Stroke* 2019;50:e344-e418</td></tr>
+<tr><td>11</td><td>動脈瘤性くも膜下出血後の集中治療管理（Neurocritical Care Society 合意勧告）</td><td>Diringer MN ら. *Neurocrit Care* 2011;15:211-240</td></tr>
+<tr><td>12</td><td>重症脳血管疾患患者への予防的・血管内・長期正常体温維持（2施設・前向きランダム化試験）</td><td>Broessner G ら. *Stroke* 2009;40(12):e657-e665</td></tr>
+<tr><td>13</td><td>くも膜下出血後の誘導正常体温が転帰に与える影響（ケースコントロール研究）</td><td>Badjatia N ら. *Neurosurgery* 2010;66(4):696-700</td></tr>
+<tr><td>14</td><td>神経集中治療室におけるカテーテルベース熱交換システムによる発熱治療</td><td>Diringer MN ら. *Crit Care Med* 2004;32(2):559-564</td></tr>
+<tr><td>15</td><td>神経集中治療患者の発熱管理のための新規体表冷却システムの臨床試験</td><td>Mayer SA ら. *Crit Care Med* 2004;32:2508-2515</td></tr>
+<tr><td>16</td><td>現代の TTM 試験における体温変動（TBI・最初の48時間）</td><td>Abu-Arafeh A, Rodriguez A, Paterson RL, Andrews PJD. *Crit Care Med* 2018;46(2):223-228</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>機器を選ぶときに見るのは「体表か血管内か」ではなく「体温フィードバック制御があるか」</strong></mark>。心停止後で体表 vs 血管内のランダム化比較に差はなく、非ランダム化データで血管内が優位に見えたのは、比較相手がフィードバックのない体表デバイスだったからである。 <mark class="hl"><strong>「発熱予防に切り替えた」＝「機器を使わない」ではない</strong></mark>。TTM2 の 37.7℃ 群でもほぼ50%がデバイスを要した。 <mark class="hl"><strong>非低酸素性脳損傷では、デバイスは発熱負荷と体温変動を確実に減らすが、患者転帰の改善は未証明</strong></mark>。中間指標の改善を転帰の改善と読み替えない。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>心停止後・昏睡が持続</td><td>発熱予防の目標値をプロトコルで定めているか</td><td>2025年 ERC-ESICM に合わせ ≤37.5℃・36〜72時間。本稿の 37.7℃ は 2022年時点の値</td></tr>
+<tr><td>心停止後・体温管理を開始する</td><td>使う機器に体温フィードバック制御があるか</td><td>フィードバック付きなら体表・血管内のどちらでもよい。フィードバックのないブランケット単独は避ける</td></tr>
+<tr><td>VA-ECMO を装着中</td><td>追加の冷却装置を用意しようとしていないか</td><td>ECMO の熱交換器で 33℃／36℃ を提供できる。二重に機器を出さない</td></tr>
+<tr><td>血管内法を選ぶ</td><td>感染・刺入部出血・深部静脈血栓症を運用リスクとして共有しているか</td><td>中心静脈カテーテル管理のバンドルに乗せる。本稿に発生率の記載はない</td></tr>
+<tr><td>脳卒中・SAH・TBI で正常体温を狙う</td><td>「発熱は減るが転帰改善は未証明」を関係科と共有できているか</td><td>適応を限定し、ICU 滞在延長・鎮静遷延・気管切開率上昇・シバリングを事前に説明する</td></tr>
+<tr><td>デバイスで冷却中</td><td>平均体温だけを見ていないか</td><td>体温変動（とくに TBI の最初の48時間）を記録・可視化する</td></tr>
+<tr><td>復温に移る</td><td>復温速度を毎時で指定できる機器か</td><td>「制御された復温」が本稿の言う質の高い TTM の要件。具体的な速度は本稿に記載がなく別文献による</td></tr>
+<tr><td>機器の購入・更新を検討</td><td>冷却速度・到達時間・合併症率の数値を本稿から取ろうとしていないか</td><td>本稿に数値はない。Supplemental Table 1 と引用文献 [4][7][8]、各社仕様書に当たる</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

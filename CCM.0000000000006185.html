@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000006185.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Tonna JE, Cho SM. Extracorporeal Cardiopulmonary Resuscitation. Crit Care Med. 2024;52(6):963-973. doi:10.1097/CCM.0000000000006185</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2024-06）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000006185" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000006185</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Extracorporeal Cardiopulmonary Resuscitation</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006185.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000006185.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006185.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>「当院で ECPR をやるか」を経営判断として分解する 本稿は臨床手技の解説であると同時に、ECPR を「プログラム投資の意思決定」として読める数少ない総説である。以下は本文の記述を経営会議で使える形に並べ直したもので、括弧内は本文に根拠があるか否かを示す。</p>
+<p><strong>① 症例数（本文に数値あり）</strong></p>
+<ul><li>成人 ECPR には 年間12例超の施設で強い center-level の volume-outcome 関係があると明記（Tonna らの ELSO レジストリ解析による）。まず当院の年間 ECPR 実施件数を数え、この閾値の上か下かを確認する。下であれば、本稿の主張どおり「手技だけを導入しても生存利益は期待できない」側に立つ</li><li>個人レベルの手技件数についても、外科文献からの外挿として「多いほど転帰が良い可能性が高い」とするに留まり、<strong>個人の症例数閾値は本文に無い</strong></li></ul>
+<p><strong>② 人員（本文に構成要素の列挙あり・人数は無し）</strong></p>
+<ul><li>24/7 で回路をプライミング・管理できる perfusion／ECMO スペシャリスト</li><li>24/7（少なくとも ECPR を提供する時間帯）に利用可能なカニュレーター</li><li>血液バンクの利用可能性、血管修復ができる外科医</li><li>カニュレーション中も蘇生を継続するための人員（胸骨圧迫を交代する一連の人員または機械、気道担当、ACLS 薬担当、蘇生を「回す」リーダー）</li><li>冠動脈造影・体温管理・神経内科コンサルトが常時利用できること</li><li><strong>必要人数・シフト設計・呼び出し体制の具体は本文に無い</strong></li></ul>
+<p><strong>③ 訓練（本文に方向性あり・頻度は無し）</strong></p>
+<ul><li>手技の複雑さゆえ、シミュレーションが技能維持に重要な役割を果たしうる、と1文のみ。<strong>訓練頻度・評価基準・認定要件は本文に無い</strong></li></ul>
+<p><strong>④ 搬送体制（本文に目標時間あり・実装法は論争中）</strong></p>
+<ul><li>心停止から60分以内のカニュレーションが妥当な目標。理想は30分以内</li><li>IHCA では処置室（手技可能エリア）への迅速な搬送。処置室のほうがカニュレーションされやすく生存も良好</li><li>OHCA では「患者を病院へ運ぶ」か「カニュレーターを患者のもとへ送る」かで<strong>合意がない</strong></li><li>搬送中の質の高い連続 CPR は困難なため、多くの高質プログラムとガイドラインが自動機械的圧迫を選好する（ただし OHCA での優越性を示すランダム化データは無い）</li></ul>
+<p><strong>⑤ 費用（本文に一切無い）</strong></p>
+<ul><li>回路・カニューレ・待機回路の維持コスト、人件費、費用対効果、DPC 上の扱いのいずれも<strong>本稿は論じていない</strong>。経営提案に使うなら、この部分は本稿の外から持ってくる必要がある</li></ul>
+<p><strong>⑥ 本稿が答えていない最重要の問い</strong></p>
+<ul><li>著者自身が結論で「新規または低volume システムで ECPR をどう実装するのが最適かは今後の研究課題」と書いている。つまり本稿は「高volume 施設ではやる価値がある」ことは述べるが、<strong>「ゼロから始める施設はどうすべきか」には答えていない</strong>。当院が新規立ち上げを検討するなら、本稿は「やらない理由」を与えはするが「やり方」は与えない</li></ul>
+<p>⑦ 段階的な意思決定の骨格（本稿の記述から組み立てた案・本文そのものではない）</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>問い</th><th>本稿の根拠</th></tr></thead>
+<tbody>
+<tr><td>第0段階</td><td>既存の ECMO プログラムは「高パフォーマンス」と言えるか</td><td>ELSO ガイドラインは ECPR を既存プログラムから育て、単独で立ち上げないことを提唱</td></tr>
+<tr><td>第1段階</td><td>年間の想定 ECPR 件数は12例を超えるか</td><td>年間12例超で center-level の volume-outcome 関係</td></tr>
+<tr><td>第2段階</td><td>60分以内カニュレーションを24/7で達成できる導線があるか</td><td>Prague・ARREST の両試験が達成した目標値</td></tr>
+<tr><td>第3段階</td><td>カニュレーション後の冠動脈造影・体温管理・神経内科を24/7で回せるか</td><td>ECPR＝ECMO＋心停止ケア。両方が揃わないと転帰は決まらない</td></tr>
+<tr><td>第4段階</td><td>ELSO 等のレジストリに参加し質をベンチマークできるか</td><td>全国レジストリ参加期間が長いほど転帰が良いという関連</td></tr>
+</tbody></table></div>
+<p>⑧ 当院の日常診療にすぐ効く点（プログラム立ち上げの可否と独立）</p>
+<ul><li>遠位灌流カテーテル（DPC）を VA-ECMO で標準化する。成人 ECPR での使用率が5%ほどに低いという指摘があり、返血カニューレは15〜17 Fr、高用量アドレナリン後や細い大腿動脈では遠位血流がゼロになりうる。不十分な遠位灌流は潜在性で、最初の数日で変動する</li><li>カニュレーションに体表エコーを標準化する（成人 ECPR でカニュレーション時間の短縮と関連）</li><li>ECPR 後の神経学的予後予測を早まらせない。ARREST のプロトコルは72時間の予後予測禁止だった。意識回復に数週間を要する患者がいると報告されている</li><li>肥満を単独で禁忌にしない（難度・時間は上がるが、成功例の転帰は許容できる）</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ECPR は難治性心停止に ECMO を適用する手技で、救急外来・心カテ室・ICU・路上でも施行されうる。ARREST は劇的な生存改善を示し、Prague OHCA は主要評価項目で有意差に届かず、INCEPTION は差を示さなかった。この3試験の不一致が ECPR 論争の中心にある。</li><li><strong>Unknown</strong>：どの患者に、どの時間枠で、どの体制で行えば利益が出るのか。非ショッカブル波形・高齢・多併存症・バイスタンダーCPR なしの患者に利益があるかは観察データが割れ、RCT はこれらの患者を十分に組み入れていない。新規／低volume 施設での実装法も分かっていない。</li><li><strong>What's new</strong>：3試験の食い違いを「試験デザインの差」ではなく「<strong>システムの質の差</strong>」として読み替える枠組みを提示した点。カニュレーション所要時間（ARREST 平均6分 vs INCEPTION 約15分）、合併症（肢虚血ゼロ vs 9%不成功・6%肢虚血）、術者経験（数十例 vs 限定的）、蘇生後ケアのプロトコル化（あり vs 各施設慣行）という4つの軸で対比し、「高volume・高度にプロトコル化されたシステムの外では、ECPR という手技そのものだけでは生存利益をもたらさない」と結論した。ただしこれは著者らの解釈であって、試験間の直接比較や交絡調整に基づく検証ではない。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ECPR の利益は「カニュレーションが成功したか」ではなく「<strong>それを取り巻くシステムが機能したか</strong>」で決まる。ARREST（単施設・心カテ室・熟練4名・平均6分・肢虚血ゼロ・退院生存43% vs 7%）と INCEPTION（10施設・複数場所・3診療科・約15分・9%不成功・6%肢虚血・30日生存20% vs 16%）の対比が、著者らの主張のほぼすべてを担っている。</p>
+</div>
+<ul><li>米国では年間60万人超が心停止。院外心停止（OHCA）35万件で生存率12%、院内心停止（IHCA）29万件で20%。最大の原因は冠動脈疾患と急性心筋虚血による致死性不整脈。</li><li>CPR は正常な灌流・血圧の達成にしばしば無効で、時間的な限界があり、多くの診断と治療を妨げる。CPR 1分ごとに生存確率は劇的に低下し、20分で5%に達する。</li><li>ECPR は難治性心停止への ECMO 適用。適切な環境では6〜15分で施行しうる。ECMO 流量が確立すれば従来の CPR を止められ、圧迫の外傷と、CPR が妨げていた診断・治療の制約から解放される。</li><li>利益は3条件に依存する。① 最適な患者（若年・初期ショッカブル波形・no-flow 時間が最小・質の高い CPR）、② 非外傷性のカニュレーション、③ 質の高いカニュレーション後のケア。これらの最適条件を超えると、ECPR は利益を与えることもあるが、不十分であったり、害を及ぼすことさえある。</li><li>患者選択は「その時点の生存確率」と「カニュレーションのリスク／利益」の両方で決まる。初回除細動で戻りそうな患者では ECPR のほうがリスクが上回りうる。2〜3回の除細動が不成功なら ECPR の絶対利益は30〜40%を超えうる。難治性心停止20分で良好神経転帰の確率は約3%となり、絶対利益は30〜50%になりうる。</li><li>時間目標は「心停止から60分以内のカニュレーション」。ある高volume センターでは、難治性 VT/VF で30分以内にカニュレーションされた患者の生存がほぼ100%だった。60分超は生存悪化と関連する。</li><li>施設の年間実施件数が12例を超えると、center-level の volume-outcome 関係が強く現れる。</li><li>ECPR は原因を治さない。カニュレーション後に、虚血なら血行再建、肺塞栓なら摘除／溶解、薬物なら時間と代謝、と病因別の次手が要る。ELSO は明らかな非心原性の原因がない全 ECPR 患者に緊急冠動脈造影を推奨。</li><li>ELSO ガイドラインは ECPR プログラムを既存の高パフォーマンス ECMO プログラムから育て、単独で立ち上げないことを提唱している。</li><li>各節に "Controversy" が置かれ、搬送方針・カニュレーション場所・術者の診療科・冠動脈造影の必須化・画像の必須化のいずれにも合意がないことが明示される。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>心停止の蘇生</strong>は50年間、閉胸式胸骨圧迫（CPR）を標準としてきた。CPR は生命維持臓器の灌流を保つための手段だが、正常な血圧・灌流には遠く及ばず、時間が経つほど成功率が落ちる。 ECPR（extracorporeal cardiopulmonary resuscitation） は、通常の蘇生に反応しない「難治性心停止」の患者に <strong>VA-ECMO（静脈脱血・動脈送血の体外式膜型人工肺）</strong> を装着し、心臓と肺の仕事を機械が肩代わりする方法である。大腿静脈から脱血し、大腿動脈へ返血するのが典型で、返血カニューレは15〜17 Fr と太い。 ECPR の理屈は単純で、「胸骨圧迫では足りない灌流を機械で作り、そのあいだに原因を診断・治療する」というものである。ECMO 流量が立てば胸骨圧迫を止められるので、CPR 中には難しい冠動脈造影・CT・薬剤の全身分布が可能になる。 <strong>用語</strong></p>
+<ul><li><strong>no-flow 時間</strong>：心停止から CPR 開始までの、血流がまったく無い時間。短いほど神経学的転帰が良い</li><li><strong>low-flow 時間</strong>：CPR による不十分な血流しかない時間（＝CPR 継続時間）</li><li><strong>ショッカブル波形</strong>：心室細動（VF）・無脈性心室頻拍（pVT）。除細動の適応がある</li><li><strong>非ショッカブル波形</strong>：無脈性電気活動（PEA）・心静止（asystole）</li><li><strong>ROSC</strong>：自己心拍再開</li><li><strong>CPC</strong>：Cerebral Performance Category。1〜2 が「良好な神経学的転帰」</li><li><strong>DPC（distal perfusion catheter）</strong>：遠位灌流カテーテル。返血カニューレより末梢側の大腿動脈に入れ、下肢への血流を確保する</li><li><strong>ELSO</strong>：Extracorporeal Life Support Organization。国際的な ECMO レジストリと指針を運営する団体</li><li><strong>本稿は成人 ECPR に限定</strong>する。小児 ECPR は多くの点で異なるとして、明示的に範囲外にしている</li></ul>
+</div>
+<h3>2. 背景と理論上の利益（Background and Theoretical Benefit）</h3>
+<p><strong>疫学</strong></p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>年間件数（米国）</th><th>生存率</th></tr></thead>
+<tbody>
+<tr><td>院外心停止（OHCA）</td><td>35万件</td><td>12%</td></tr>
+<tr><td>院内心停止（IHCA）</td><td>29万件</td><td>20%</td></tr>
+<tr><td>合計</td><td>60万人超</td><td>—</td></tr>
+</tbody></table></div>
+<ul><li>心停止の原因は多様だが、最大の原因は冠動脈疾患（CAD）と急性心筋虚血による致死性不整脈である。</li><li>AHA の ACLS ガイドラインが提供する「可逆的な原因」への診断・経験的介入は限られており、除細動がその中心にある。</li><li>心停止中は、良好な神経学的転帰を伴う生存のために生命維持臓器の灌流を保たなければならない。それを担うのが閉胸式胸骨圧迫（CPR）で、過去50年間の標準である。</li></ul>
+<p>CPR の限界（本稿が ECPR の理論的根拠として挙げるもの）</p>
+<ul><li>正常な灌流・血圧の達成にしばしば無効。</li><li>時間的な限界がある。CPR 1分ごとに生存確率は劇的に低下し、20分で5%に達する。</li><li>CPR の中断と質の低い CPR は、ROSC の失敗と生存低下に関連する。</li><li>CPR は本質的に外傷的であり、蘇生中の多くの検査・処置を妨げる。冠動脈血行再建、画像検査、薬剤の全身分布はいずれも CPR 中には困難または不可能である。</li><li>臨床医が心停止の病因を診断できなければ、それを有効に治療することもできない。</li></ul>
+<p><strong>ECPR の理論的利益</strong></p>
+<ul><li>ECPR は難治性心停止の患者への ECMO 適用であり、即時の生命維持を提供し、それを数日間継続できる。</li><li>施行環境は多様で、救急外来、心カテ室、ICU、さらには路上でも可能。<strong>わずか6〜15分</strong>で施行しうる、との報告がある。<strong>長時間 CPR（60〜75分）の後でも</strong>施行された報告がある。</li><li>ECMO 流量の確立により従来の CPR を中止でき、用手圧迫の外傷が止まると同時に、CPR が妨げていた診断・治療が可能になる。</li><li><strong>ただし</strong>、脈が無く胸骨圧迫を受けている患者で、非外傷的に血管アクセスを確保し十分な ECMO 流量を立ち上げることは「よくても困難（at best, challenging）」であり、カニュレーションと ECMO 管理の両方に習熟した術者を要する。</li></ul>
+<h3>3. 患者選択（Patient Selection）</h3>
+<p><strong>選択の原理</strong></p>
+<ul><li>最適な患者選択は、<strong>従来 CPR に対する ECPR の絶対的な上乗せ利益</strong>に依存する。すなわち、①その時点でのその患者の生存確率と、②カニュレーションのリスク／利益、の両方による。</li><li><strong>例①（ECPR が不利になりうる場面）</strong>：若く健康で、目撃された心停止、即座の質の高い CPR、初期波形が VF/pVT の患者は、初回除細動で洞調律に戻る確率が高い。この患者では、迅速に ECMO を回しても、抗凝固やカニュレーション手技のリスクのぶんだけ、従来の ACLS よりリスクが上回りうる。</li><li><strong>例②（同じ患者でも状況が変わる）</strong>：除細動を2〜3回試みて不成功、質の高い CPR を継続した後では、ROSC の確率は劇的に低下し、ECPR の絶対的な潜在利益は ACLS 継続に比べ30〜40%を超えうる。</li><li>難治性心停止が20分に達すると、良好な神経学的転帰の確率は約3%となり、ECPR の絶対利益は30〜50%になりうる。</li></ul>
+<p>（注：本文は「20分の CPR で生存確率5%」と「20分の難治性心停止で良好神経転帰3%」を別々の箇所で述べている。前者は生存、後者は良好神経転帰であり、指標が違う。混同しないこと。）</p>
+<p><strong>初期波形が持つ2つの情報</strong></p>
+<p>初期波形は、①心停止の病因を示唆し、②CPR 開始前の no-flow 時間としばしば相関する。</p>
+<div class="tw"><table>
+<thead><tr><th>波形</th><th>病因の示唆</th><th>no-flow への含意</th><th>転帰</th></tr></thead>
+<tbody>
+<tr><td>ショッカブル（VF/pVT）</td><td>急性心筋虚血と強く相関し、PCI で治療できる</td><td>VF/pVT は未治療では限られた時間しか持続せず非ショッカブルへ移行する → 短い no-flow を示唆</td><td>生存が最良</td></tr>
+<tr><td>PEA</td><td>大量鞍状肺塞栓（ECMO が自己循環をバイパスして優れた灌流を可能にしうる）、劇症型心筋炎（典型的に過小診断され、ECMO で良好な転帰を得られる）、あるいは遷延する呼吸不全・低酸素血症の末の心停止</td><td>一定しない</td><td>非心原性の心停止は不整脈で発症しにくく、蘇生成功も少ないと報告されている</td></tr>
+<tr><td>心静止</td><td>治療困難／不可能な病因を反映しうる</td><td>あるいは no-flow／low-flow 時間が波形の劣化を来すほど長かった</td><td><strong>最も転帰が悪い</strong>。上の2つの可能性はいずれも不良転帰と関連する</td></tr>
+</tbody></table></div>
+<ul><li><strong>重要な留保</strong>：遷延性低酸素の後に ECMO で循環を回復させても、<strong>脈拍消失に先行して確立した臓器障害は回復しない</strong>。ECMO は時計を巻き戻さない。</li><li><strong>実世界のエビデンスによる裏づけ</strong>：VT/VF に限定した ARREST 試験の生存（約43%）と、PEA・心静止も含めた Prague OHCA 試験の生存（約32%）の差が、このスペクトラムを部分的に説明する。</li></ul>
+<p><strong>病因の治療可能性を選択時に考える</strong></p>
+<ul><li>急性心筋梗塞による心停止 → 迅速な PCI。</li><li>慢性心不全の非代償化による心停止 → 恒久的な左室補助人工心臓（LVAD）または移植への移行が必要になりうる（ECMO で治療された心原性ショックの一部で観察されているのと同様）。</li></ul>
+<p><strong>最適な患者の定義（本文の要約文）</strong></p>
+<p>&gt; no-flow 時間が最小で、従来治療に不応の心停止であり、<strong>迅速かつ非外傷的なカニュレーション</strong>の後に ECMO 流量を立ち上げてから治療できる病因を持つ患者。</p>
+<p><strong>Controversy（患者選択）</strong></p>
+<ul><li>この理想化された患者を理想化されたシステムで扱うことについては、ほとんど論争がない。</li><li>論争があるのは、この理想的な患者であっても ECPR を広く実装すれば転帰が改善するのかという点。INCEPTION 試験は生存に差を示さず、より実践的（pragmatic）に実装された試験であり、厳密に管理され十分に習熟したシステムの外では ECPR の利益はそれほど大きくないかもしれないことを示唆する。</li><li>さらに、非ショッカブル波形・高齢・多数の併存症・バイスタンダーCPR なしの患者に ECPR が有益かも論争がある。観察データは一貫せず、RCT はこうした患者をまだ組み入れていない（Prague だけが非ショッカブル波形を組み入れた）。</li></ul>
+<h3>4. 搬送（Transport）</h3>
+<ul><li>カニュレーション前の CPR 継続時間と生存には強い逆相関がある。</li><li>ある高volume ECPR センターでは、難治性 VT/VF で<strong>30分以内にカニュレーションされた患者の生存はほぼ100%</strong>だった。</li><li><strong>心停止から60分以内のカニュレーションが妥当な目標</strong>であり、Prague・ARREST の両試験で達成された。60分を超える心停止時間はより悪い生存と関連し、これが INCEPTION 試験で ECPR の利益が示されなかった一因かもしれない（他のプロトコル差も含めて）。</li><li><strong>多くの蘇生は灌流の動的指標を介入の指針にしていない</strong>（多くの OHCA では持続動脈圧モニタリングすら行われない）ため、ECPR 開始の判断は歴史的に「難治性心停止の持続時間」に基づいてきた。将来、持続灌流モニタリングの採用が ECPR 開始の最適タイミングに意味のある影響を与えうる。</li></ul>
+<p><strong>IHCA と OHCA で異なる搬送課題</strong></p>
+<div class="tw"><table>
+<thead><tr><th>設定</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>IHCA</td><td>カニュレーション場所への迅速な搬送を（必要なら）行う。<strong>処置室（procedural area）のほうがカニュレーションされやすく、かつ生存も良好</strong>と報告されている</td></tr>
+<tr><td>OHCA</td><td>大多数は救急外来または心カテ室でのカニュレーションのために病院へ搬送される。一部の都市では<strong>病院前カニュレーション</strong>が行われているという注目すべき例外がある</td></tr>
+</tbody></table></div>
+<ul><li>搬送を要する患者では、病院前時間を最小化するために EMS プロトコルの修正が必要になりうる。<strong>ここに緊張がある</strong>：近年のデータは、<strong>ECPR を受けない OHCA 患者では</strong>、迅速搬送より現場での蘇生継続を優先するほうが有益であることを示唆している。つまり非 ECPR 患者向けの最適戦略と ECPR 患者向けの最適戦略は逆を向きうる。</li><li><strong>機械的胸骨圧迫</strong>：OHCA での優越性を示すランダム化データは無い（PARAMEDIC・LINC）。しかし胸骨圧迫の中断回避が優れた転帰をもたらすことは知られており、搬送中の質の高い連続 CPR が困難なため、多くの高質プログラムとガイドラインが ECPR 前の自動機械的圧迫を選好する。</li></ul>
+<p><strong>Controversy（搬送）</strong></p>
+<ul><li>「60分以内のカニュレーション」が妥当な目標であることには合意がある。</li><li>しかし、<strong>それを達成するために EMS の搬送を変えるべきか</strong>には異なる考えがある。</li><li>さらに、一部のセンターは「患者を病院へ運ぶのではなく、カニュレーターを患者のもとへ送る」ことを主張する。これらの点に合意はない。</li></ul>
+<h3>5. カニュレーション（Cannulation）</h3>
+<p><strong>なぜ難しいか</strong></p>
+<ul><li>CPR 中の患者の大腿血管への非外傷的カニュレーションは極めて困難である。理由は <strong>血管内容量の低下</strong> と <strong>物理的な体動</strong> の2つで、いずれも血管損傷と反復穿刺の確率を上げる。</li><li>これらの損傷が認識・治療されないと、血管攣縮や血管内血栓を招き、遠位虚血に至る。肢虚血は VA-ECMO のカニュレーションに伴う既知の合併症である。</li><li>損傷は <strong>DPC（遠位灌流カテーテル）</strong> を返血カニューレより末梢の大腿動脈に置くことで軽減しうるが、<strong>成人 ECPR 患者での使用率は5%ほどに低いことがある</strong>。</li><li>さらに、複数回の穿刺による認識されない血管損傷は修復を不可能にし、<strong>DPC をルーチンに留置しても合併症に至りうる</strong>。</li></ul>
+<p><strong>非外傷的で迅速なカニュレーションの確率を決める4因子</strong></p>
+<p>患者の体格（body habitus）／カニュレーション資源／環境／術者の技能。</p>
+<p>試験間のカニュレーションの質の差（本レビューの核心的な対比）</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>ARREST</th><th>INCEPTION</th></tr></thead>
+<tbody>
+<tr><td>施設</td><td>単施設（University of Minnesota）</td><td>10施設</td></tr>
+<tr><td>環境</td><td>透視可能な環境（心カテ室）</td><td>複数のカニュレーション場所（救急外来・心カテ室）</td></tr>
+<tr><td>術者</td><td>4名のうちの1人。大半が長年 high-volume ECPR を実施</td><td>3診療科（心臓血管外科・集中治療・インターベンション循環器）</td></tr>
+<tr><td>カニュレーション所要時間</td><td>平均 <strong>6分</strong></td><td>約 <strong>15分</strong></td></tr>
+<tr><td>合併症</td><td>肢虚血ゼロ</td><td>6例（9%）でカニュレーション不成功、6% に肢虚血</td></tr>
+<tr><td>結果</td><td>退院時生存の絶対利益 約30%（本文の Cannulation 節の表現）</td><td>主要評価項目に有意差なし</td></tr>
+</tbody></table></div>
+<ul><li><strong>volume-outcome</strong>：成人 ECPR では、年間12例超の施設で強い center-level の volume-outcome 関係が存在する。外科文献からの外挿では、個人レベルでも手技件数が多いほど、患者にとってもシステムにとっても転帰が改善する可能性が高い。</li><li><strong>エコー</strong>：透視の有無にかかわらず、体表エコーは中心静脈・動脈カテーテル留置の標準となっており、成人 ECPR ではカニュレーション時間の短縮と関連する。</li><li><strong>肥満</strong>：カニュレーション難度が有意に上がり、時間も延び、比較転帰も悪い。ただし、カニュレーションに成功すればこれらの患者も許容できる転帰であり、肥満それ自体を禁忌とみなすべきではない。</li><li><strong>末梢血管疾患</strong>：冠動脈疾患のある患者の多くは有意な末梢血管疾患（大腿動脈の狭小化・動脈石灰化）も併存する。これはカニュレーションを困難にし、より細いカニューレを必要とさせ、あるいは遠位塞栓や出血を招きうる。</li></ul>
+<p><strong>遠位肢灌流をどう守るか</strong></p>
+<ul><li>返血カニューレ（大腿動脈）は典型的に <strong>15〜17 Fr</strong>。</li><li>次の条件下では<strong>カニューレ遠位の動脈血流が最小またはゼロになりうる</strong>：① 大腿動脈が細い、② 血管収縮薬の先行または併用（高用量の蘇生用アドレナリンを含む）、③ カニュレーション中の複数回の動脈アクセス（血栓形成につながる）。</li><li>遠位灌流は ECPR 最初の数日で患者状態とともに変動し、不十分な遠位灌流はしばしば潜在性（occult）である。</li><li>返血カニューレ遠位に追加の動脈 DPC を置くと末梢灌流が改善し、成人 ECPR 患者の転帰改善と関連している。</li></ul>
+<p><strong>カニュレーション中も蘇生は止まらない</strong></p>
+<ul><li>流量が確立するまで蘇生を継続しなければならない。そのために必要な人員は、① 胸骨圧迫を担う一連の人員（または機械的圧迫装置）、② 気道を確保・管理できる人、③ ACLS 薬を投与できる人、④ 蘇生を「回す」人。</li><li>手技の複雑さゆえ、シミュレーションが施設の技能維持と練習に重要な役割を果たしうる。</li></ul>
+<p><strong>Controversy（カニュレーション）</strong></p>
+<ul><li><strong>透視可能な環境か、救急外来か</strong>：多くのプログラムは ED ベースだが、最良の転帰を示した2つの RCT（Prague・ARREST）は心カテ室ベースだった。</li><li><strong>術者の最適な診療科</strong>：少数の高手技件数の術者（インターベンション循環器医など。ただし24/7 では利用できないかもしれない）か、より広い層（救急医など。ただし個人の件数は少ない）か。前者は常時／広く利用できないかもしれず、後者は十分な能力（透視の可用性や手技件数）を持たないかもしれない。</li></ul>
+<h3>6. 心停止の病因の治療（Treatment of Cardiac Arrest Etiology）</h3>
+<ul><li>ECPR による ECMO 流量の確立は血行動態を一時的に支え、心肺補助を提供するだけで、心停止の原因を治療しない。根治治療とその時間的緊急度は病因によって異なる。</li></ul>
+<div class="tw"><table>
+<thead><tr><th>病因</th><th>ECMO が果たす役割</th><th>ECMO が果たさない役割・次の一手</th></tr></thead>
+<tbody>
+<tr><td>急性心筋虚血</td><td>血行動態の維持</td><td><strong>ECMO 支持下でも虚血は継続する</strong> → ECMO 流量確立後に緊急血行再建</td></tr>
+<tr><td>大量肺塞栓</td><td>右室流出路と前負荷を減圧し、右室過伸展／虚血を軽減、心肺補助を提供</td><td><strong>血栓は除去しない</strong> → 塞栓摘除／血栓溶解が必要になりうる</td></tr>
+<tr><td>薬物・医薬品による呼吸停止</td><td>ECMO 流量で低酸素血症・高炭酸ガス血症を正常化</td><td><strong>時間と代謝だけで基礎の問題が解決することが多い</strong></td></tr>
+</tbody></table></div>
+<p>冠動脈造影の優先順位（緊急度と有病率の2軸で階層化。有病率は初期波形が教える）</p>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>CAD の有病率</th><th>本文の付記</th></tr></thead>
+<tbody>
+<tr><td>初期心電図が STEMI</td><td><strong>70〜85%</strong></td><td>これら ECPR 患者の<strong>最大90%で PCI が成功</strong></td></tr>
+<tr><td>初期ショッカブル波形で ST 上昇なし</td><td><strong>25〜50%</strong></td><td>ECPR を要する難治性心停止では、この有病率はさらに高い可能性がある</td></tr>
+</tbody></table></div>
+<ul><li>初期ショッカブル波形の患者では、緊急冠動脈造影と PCI を優先すべき。ECPR 患者、とくに初期ショッカブル波形の患者は、STEMI 患者と同じ緊急度で、カニュレーション直後に冠動脈造影を受けるべきである。</li><li>ELSO ガイドラインは、明らかな非心原性の原因がない ECPR 患者すべてに、カニュレーション後の緊急冠動脈造影を推奨している。</li><li>初期波形が非ショッカブルでも急性心筋虚血が原因でありうるため、選択された患者では緊急／準緊急の冠動脈造影は妥当。大量肺塞栓も肺動脈造影で心カテ室で診断できる。</li><li>冠動脈造影・肺動脈造影は非 MI／非 PE の原因を診断はしないが、<strong>それらを除外はする</strong>。そして ECMO で患者を安定化させることで、呼吸原性の心停止や心毒性薬物の過量など、他の原因も心カテ室の後で診断・治療しうる。</li></ul>
+<p><strong>Controversy（病因治療）</strong></p>
+<ul><li>INCEPTION 試験が示すとおり、<strong>ECPR 後の冠動脈造影を必須とすることに広い合意はない</strong>。</li></ul>
+<h3>7. 画像（Imaging）</h3>
+<ul><li>ECPR 患者への画像は診断的であると同時に、治療を可能にする。主要な2モダリティは、既述の冠動脈造影と（全身）CT。</li><li>ECPR 患者における診断的 CT の価値についてのデータは限られる。ある研究では、CT が次の3種を同定できた。① 心停止を誘発した可能性のある損傷（大動脈解離など）、② 蘇生による外傷性合併症（気胸・骨折など）、③ カニュレーション由来の合併症（穿刺部出血・血管損傷など）。</li><li>ECPR なしで ROSC を得た OHCA 患者を「全身」CT で撮像した良質なデータもあり、蘇生された OHCA 患者における病態・損傷の有病率と分布を記述している。これは損傷の高い有病率と、包括的な心停止後診断画像の価値を裏づける。</li><li><strong>VA-ECMO 中の画像は難しい</strong>。体外血流が造影剤の分布とタイミングに影響するためである。大きく2択になる。① 単純撮影にする（頭蓋内出血や他部位の大量出血は描出できる）、② 造影が必要なら <strong>ECMO 回路の一時クランプまたはプロトコル修正</strong> を行う。</li><li>外傷患者と同様、状況の切迫度を考慮して、腎障害の証拠や情報が無くても造影剤投与を許容する施設プロトコルがありうる。</li></ul>
+<p><strong>Controversy（画像）</strong></p>
+<ul><li><strong>カニュレーション後の画像を必須とすることにも合意はない</strong>。</li></ul>
+<h3>8. ECPR の4つのランダム化試験（The Randomized Trials of ECPR）</h3>
+<p>本稿の執筆時点で、ECPR の RCT は4本が公表されている。</p>
+<p><strong>主要3試験 — 1行1試験</strong></p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>n（解析集団）</th><th>設定</th><th>主要評価項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td><strong>ARREST</strong>（Lancet 2020）</td><td>30（DSMB により早期中止）</td><td>単施設（University of Minnesota）、非盲検。難治性 OHCA・初期 VF・3回のショック後も ROSC なし。全例を自動圧迫装置で搬送、来院時に 1:1 ランダム化。ECPR 群は心カテ室へ搬送しカニュレーション → 冠動脈造影・必要に応じ血行再建 → 心臓 ICU で 34℃ の体温管理・72時間は神経学的予後予測をしない・即時頭部CT・持続脳波。対照群は救急外来に留まり救急医の管理下</td><td><strong>退院時生存</strong></td><td><strong>43% vs 7%</strong>（リスク差 36%［3.7〜59.2%］、ECMO 優越の事後確率 0.9861）。30例登録時点で DSMB が優越性のため早期中止</td></tr>
+<tr><td><strong>Prague OHCA</strong>（JAMA 2022）</td><td>256</td><td>単施設。目撃された心原性と推定される OHCA・ROSC なし。<strong>ショッカブル（VF/VT）と非ショッカブル（PEA・心静止）の両方を含む</strong>。現場で 1:1 ランダム化。介入群は心カテ室へ搬送しカニュレーション＋冠動脈造影・必要に応じ血行再建、対照群は現場で標準 ACLS 継続（ROSC すれば救急外来へ）。生存入院した両群に標準化された蘇生後ケア（33℃ の体温管理、可能なら全身CT）</td><td><strong>180日の CPC 1-2 生存</strong>（独立評価者）</td><td><strong>31.5% vs 22.0%（p = 0.09）</strong>。30日の良好神経学的転帰を伴う生存は 30.6% vs 18.2%（p = 0.02）。事前規定の効果差に達せず DSMB が中止。標準ケア群から10例がクロスオーバーして ECPR を受けた（うち 40%［4/10］が生存）</td></tr>
+<tr><td><strong>INCEPTION</strong>（NEJM 2023）</td><td>134（ITT）</td><td>オランダ・<strong>10施設・12 EMS システム</strong>。目撃された OHCA・初期 VF・バイスタンダーCPR・15分以上の難治性心停止。病院前でランダム化し、来院時に組み入れ／除外基準を再確認して各群へ。<strong>カニュレーション場所は救急外来・心カテ室など多様、術者は心臓血管外科／集中治療／インターベンション循環器の3診療科。蘇生後管理（体温管理を含む）は各施設の慣行</strong>。想定効果差 22%</td><td>本文の記載が2箇所で異なる（下記の内的不整合を参照）</td><td><strong>30日生存 20% vs 16%（p = 0.52）</strong></td></tr>
+</tbody></table></div>
+<p><strong>4本目：EROCA（実行可能性 RCT）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>施設</td><td>University of Michigan、実行可能性 RCT</td></tr>
+<tr><td>スクリーニング条件</td><td>OHCA で、初期ショッカブル波形または目撃された心停止。<strong>911通報から ED 到着までの予測時間が30分以下</strong></td></tr>
+<tr><td>割付</td><td><strong>4:1</strong> で「迅速搬送＋ECPR 予定」vs「現場での治療継続」</td></tr>
+<tr><td>n</td><td>15例（12例が迅速搬送、3例が標準ケア）</td></tr>
+<tr><td>主要評価項目</td><td>911通報から ED 到着までの時間が30分以下だった患者の割合</td></tr>
+<tr><td>結果</td><td>迅速搬送に割り付けられた12例のうち <strong>5例が30分以内に到着し ECPR を受けた</strong>。その5例のうち <strong>3例で到着後30分以内に ECMO 流量が確立</strong>。<strong>どちらの群にも良好神経学的転帰を伴う生存者はいなかった</strong></td></tr>
+</tbody></table></div>
+<p><strong>なぜ結果が割れたのか — 著者らの説明</strong></p>
+<p>著者らは試験間の差を次のように整理する。</p>
+<div class="tw"><table>
+<thead><tr><th>軸</th><th>ARREST</th><th>Prague</th><th>INCEPTION</th><th>EROCA</th></tr></thead>
+<tbody>
+<tr><td>対象波形</td><td>VF に限定</td><td>ショッカブル＋非ショッカブル</td><td>VF に限定</td><td>ショッカブルまたは目撃</td></tr>
+<tr><td>施設数</td><td>単施設</td><td>単施設</td><td><strong>多施設</strong></td><td>単施設</td></tr>
+<tr><td>蘇生後ケア</td><td>プロトコル化（冠動脈カテーテル・体温管理）</td><td>プロトコル化（冠動脈カテーテル・体温管理）</td><td><strong>プロトコル化されず</strong>（各施設慣行）</td><td>—</td></tr>
+<tr><td>術者の ECPR カニュレーション経験</td><td>数十例規模</td><td>数十例規模</td><td><strong>より限定的</strong></td><td><strong>より限定的</strong></td></tr>
+<tr><td>カニュレーション場所・術者</td><td>心カテ室・インターベンション循環器医</td><td>心カテ室・インターベンション循環器医</td><td>プロトコル化されず</td><td>ED ベース</td></tr>
+</tbody></table></div>
+<ul><li>著者らの統合的解釈：「これらの試験を総合すると、高度にプロトコル化された高volume システム内では生存がはるかに良い。より実践的・多施設・プロトコル化の弱いアプローチとは対照的である」。</li><li>心カテ室とインターベンション循環器が一部のセンターで最適な場所・診療科とみなされてきたのは、単にこれらの術者の経皮的血管アクセス経験の多さと、心カテ室の透視能力を反映しているだけかもしれない、と著者らは付言する。</li><li>著者らは、Prague の10%差（p = 0.09）と ARREST の36%差（3.7〜59.2、ECMO 優越の事後確率 0.9861）は、高volume・高経験・高度プロトコル化のシステム内では、標準治療に対して少なくとも10%の神経学的に無傷の生存利益があることを「確認する（confirms）」と述べる。また VF は非ショッカブル波形に比べ良好な生存の強い指標である、とする。</li><li><strong>ARREST の36%と Prague の10%の差</strong>は、① 非ショッカブル波形の組み入れ、② <strong>対照群の生存が歴史的な観察値より大きく上がったこと</strong>、③ Prague のクロスオーバー、に帰しうる、と説明される。</li><li><strong>プール解析</strong>：ARREST と Prague の患者をプールし、クロスオーバーを除外した per protocol 解析では、全波形を含めても180日の神経学的無傷生存が統計学的に改善した（<strong>32.4% vs 19.7%、p = 0.015</strong>）。</li><li><strong>治療の差し控えという交絡</strong>：転帰不良が予想される場合の治療差し控え（withdrawal of care）は広く行われている実践であり、ECPR を受けた患者のかなりの割合が意識回復までに数週間を要しうることが示されている。<strong>早期の治療中止が試験の転帰にどう影響したかは分かっていない</strong>。</li><li>本節の結び：「これらの試験から得られる重要な認識は、ECPR という手技だけでは、高volume・高度に習熟したシステムを伴わず、しかもより実践的に実装された場合には、生存利益をもたらさない、ということである」。</li></ul>
+<h3>9. 神経学的転帰（Neurologic Outcomes）</h3>
+<ul><li>最終的な神経学的転帰は、蘇生の連鎖における複数の必須ステップに依存する。概念的には、生存は <strong>患者特性</strong> と <strong>3つのケア段階</strong> に強く依存する。</li></ul>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>内容</th><th>本稿での扱い</th></tr></thead>
+<tbody>
+<tr><td>① 心停止の段階（arrest phase）</td><td>下記の3構成要素</td><td>本節で詳述</td></tr>
+<tr><td>② カニュレーションと即時治療の段階</td><td>転帰を予測する因子</td><td>「カニュレーション」節を参照、とされる</td></tr>
+<tr><td>③ 蘇生後ケアの段階</td><td>転帰を予測する因子</td><td><strong>同じ CCM 誌の別稿に譲られており、本稿には含まれない</strong></td></tr>
+</tbody></table></div>
+<p><strong>心停止の段階の3つの構成要素</strong></p>
+<ol><li><strong>即時の心停止か、先行する低換気・低灌流の期間があったか</strong>。即時の心停止は不整脈性心停止や大量肺塞栓に多く、先行期間があるのは進行性・未治療の心不全や呼吸不全に多い。これが「心停止の認識前の脳の低酸素／低灌流の負荷（burden）」を決めるため重要である。</li><li><strong>CPR 開始前の "no-flow" 時間</strong>。目撃された心停止と即時 CPR（no-flow 時間が最小またはゼロ）が、良好な神経学的転帰と最も強く関連する。</li><li><strong>CPR の質と、カニュレーション前の CPR 時間の逆数</strong>。心停止一般でも ECPR でも生存との関連が報告されている。</li></ol>
+<p><strong>2つの生存予測モデル</strong></p>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>予測因子</th><th>導出集団</th><th>検証</th></tr></thead>
+<tbody>
+<tr><td><strong>TiPS65</strong></td><td><strong>Ti</strong>me to hospital arrival（来院までの時間）／<strong>p</strong>H in initial blood gas（初回血液ガスの pH）／<strong>S</strong>hockable rhythm on hospital arrival（来院時のショッカブル波形）／age &lt; <strong>65</strong> years</td><td>主に OHCA（Okada Y ら・日本のデータ）</td><td>内的検証のみ</td></tr>
+<tr><td><strong>RESCUE-IHCA</strong></td><td>Resuscitation Using ECPR During In-Hospital Cardiac Arrest</td><td>IHCA（Tonna ら・AHA GWTG-R）</td><td><strong>外的検証あり</strong></td></tr>
+</tbody></table></div>
+<ul><li>本文は TiPS65 の各因子の 具体的な閾値（pH のカットオフ、来院までの時間のカットオフ）を示していない。スコアを使うには原典に当たる必要がある。</li></ul>
+<h3>10. ECMO プログラムの中での位置づけ（Context Within an ECMO Program）</h3>
+<ul><li><strong>ECPR ＝ ECMO ＋ 心停止ケア</strong>。それゆえ ECPR は単独の心停止より複雑である。</li><li>この理由から、ELSO ガイドラインは ECPR プログラムを既存の高パフォーマンス ECMO プログラムから育て、単独で立ち上げないことを提唱している。これは ECMO 一般に必要な構成要素が ECPR にも揃うことを担保するためで、具体例として次が挙げられる。</li><li>24/7 で回路をプライミング・管理できる perfusion／ECMO スペシャリスト</li><li>血液バンクの利用可能性</li><li>血管修復ができる外科医</li><li>臨床転帰は、心停止後の蘇生後ケアと、ECMO 中のカニュレーション後臨床管理の両方に依存する。したがって ECPR を受ける患者は、既存の ECMO プログラムの中で、理想的にはプロトコル化された心停止後ケアのもとで治療されるべきである。</li><li><strong>全国の心停止レジストリへの参加期間が長いほど患者転帰が良い</strong>ことが知られており、ECPR を行う施設は ELSO 等の全国／国際レジストリに参加して質のベンチマーキングと研究を行うことが推奨される。</li><li><strong>成人 ECPR の年間実施件数が多い施設ほど患者生存が良い</strong>ことも知られている。</li><li>プログラム立ち上げ時、カニュレーターは 24/7（少なくとも ECPR を提供する時間帯）に利用可能でなければならない。多くの成人プログラムはプライミング済みの待機回路を用い、それによって 24/7 で ECPR に対応できるようにしている。</li><li>ECPR 患者はしばしば <strong>冠動脈造影・体温管理・神経内科コンサルト</strong> を含む専門的な心停止後ケアを要するため、これらの診療科／資源が利用可能であるべきである。</li></ul>
+<h3>11. 著者らの結論（Conclusions）</h3>
+<ul><li>ECPR は完全な心肺補助を提供し、外傷的な胸骨圧迫を不要にし、心停止の原因を是正するためのその後の介入・処置を可能にする潜在力を持つ。</li><li><strong>ECPR の利益は次の3条件に前提づけられる</strong>。</li></ul>
+<ol><li><strong>最適な患者</strong>（若年、初期ショッカブル波形、no-flow 時間が最小、質の高い CPR。すなわち治療可能な病因を持ち、カニュレーション時点での神経学的損傷が最小である可能性が高い患者）</li><li><strong>非外傷的なカニュレーション</strong></li><li><strong>質の高いカニュレーション後のケア</strong></li></ol>
+<ul><li>活動性の胸骨圧迫中の大腿カニュレーションは「よくても困難」であり、末梢血管疾患や肥満のある一部の患者ではより困難、あるいは不可能になりうる。</li><li>高パフォーマンスなシステム内であれば、ECPR は選択された患者に優れた生存をもたらす。これらの最適条件を超えると、ECPR は利益を与えることもあるが、<strong>不十分であったり、害を及ぼすことさえある</strong>。</li><li><strong>今後の研究が定義すべきこと</strong>：① ケアの個々の要素の価値、② 異なる患者・異なる CPR 継続時間における利益の限界、③ 新規または低volume のシステム内で ECPR を実装する最適な方法。</li></ul>
+<h3>12. 「手技ではなくシステム」を支えるデータの棚卸し</h3>
+<p>本稿の中心主張を支える数値だけを、施設volume 別・プロトコル化の有無別に抜き出すと次のようになる。</p>
+<p><strong>A. 施設volume で層別された数値（本文にあるもの）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>層</th><th>数値</th><th>出典（本文の引用）</th></tr></thead>
+<tbody>
+<tr><td>年間12例超の施設</td><td>center-level の強い volume-outcome 関係が「存在する」</td><td>Tonna ら・Crit Care Explor 2022（ELSO レジストリ解析）</td></tr>
+<tr><td>高volume センター1施設</td><td>難治性 VT/VF で30分以内にカニュレーションされた患者の生存がほぼ100%</td><td>Bartos ら・Circulation 2020</td></tr>
+<tr><td>個人レベル</td><td>「手技件数が多いほど転帰が改善する可能性が高い」（外科文献からの外挿。ECPR の実データではない）</td><td>Birkmeyer ら・NEJM 2003</td></tr>
+<tr><td>全国レジストリ参加</td><td>参加期間が長いほど患者転帰が良い</td><td>Bradley ら・Resuscitation 2012（GWTG-R）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>volume の「12例」以外に施設層別の数値は本文に無い <mark class="hl">本稿は「年間12例超」という<strong>単一の閾値</strong>を挙げるだけで、施設volume を階層化した生存率の表・図を一切示していない</mark>。「12例未満の施設の生存率は何%か」「12例と50例で差はどれくらいか」といった、経営判断に直結する数値は本文から得られない。<mark class="hl">「高volume なら良い」という結論の定量的な裏づけは、本稿の中では引用1本（Tonna ら自身の ELSO レジストリ解析）に依存している</mark>。</p>
+</div>
+<p><strong>B. プロトコル化の有無で対比された数値（本文にあるもの）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>高プロトコル化（ARREST・Prague）</th><th>低プロトコル化（INCEPTION・EROCA）</th></tr></thead>
+<tbody>
+<tr><td>カニュレーション所要時間</td><td>ARREST 平均6分</td><td>INCEPTION 約15分</td></tr>
+<tr><td>カニュレーション不成功</td><td>ARREST は記載なし（肢虚血ゼロ）</td><td>INCEPTION 6例（9%）</td></tr>
+<tr><td>肢虚血</td><td>ARREST ゼロ</td><td>INCEPTION 6%</td></tr>
+<tr><td>蘇生後ケア</td><td>冠動脈カテーテル・体温管理をプロトコル化（ARREST 34℃、Prague 33℃）</td><td>INCEPTION は各施設慣行、EROCA は記載なし</td></tr>
+<tr><td>術者経験</td><td>各々数十例のカニュレーション経験</td><td>より限定的</td></tr>
+<tr><td>主要評価項目</td><td>ARREST 43% vs 7%（RD 36%）／Prague 31.5% vs 22.0%（p = 0.09）</td><td>INCEPTION 20% vs 16%（p = 0.52）／EROCA は両群とも良好転帰の生存者ゼロ</td></tr>
+<tr><td>プール per protocol</td><td>ARREST＋Prague で 32.4% vs 19.7%（p = 0.015、180日・全波形）</td><td>—</td></tr>
+</tbody></table></div>
+<ul><li><strong>この対比が本稿の主張のほぼすべてを担っている</strong>。逆に言えば、「システムの質」を独立変数として測定・調整した解析は本稿に存在せず、試験間の後付けの対比（indirect comparison）にとどまる。</li></ul>
+<h3>13. 時間指標 — 本文にある目標値の全部</h3>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>本文の値</th><th>位置づけ</th></tr></thead>
+<tbody>
+<tr><td>CPR 20分時点の生存確率</td><td>5%</td><td>背景（ECPR の理論的根拠）</td></tr>
+<tr><td>難治性心停止20分時点の良好神経転帰確率</td><td>約3%</td><td>患者選択（絶対利益30〜50%の根拠）</td></tr>
+<tr><td>ECPR 施行に要する時間</td><td>6〜15分（環境により）</td><td>背景</td></tr>
+<tr><td>長時間 CPR 後の施行報告</td><td>60〜75分の CPR 後でも報告あり</td><td>背景</td></tr>
+<tr><td>高volume センターでのカニュレーション目標</td><td><strong>30分以内</strong>（難治性 VT/VF で生存ほぼ100%）</td><td>搬送</td></tr>
+<tr><td>心停止からカニュレーションまでの妥当な目標</td><td><strong>60分以内</strong>（Prague・ARREST で達成）</td><td>搬送</td></tr>
+<tr><td>悪化の閾値</td><td>心停止時間 <strong>60分超</strong>は生存悪化と関連</td><td>搬送</td></tr>
+<tr><td>カニュレーション手技そのものの所要時間</td><td>ARREST 平均6分／INCEPTION 約15分</td><td>カニュレーション</td></tr>
+<tr><td>INCEPTION の組み入れ条件</td><td>15分以上の難治性心停止</td><td>試験</td></tr>
+<tr><td>EROCA の主要評価項目</td><td>911通報から ED 到着 <strong>30分以内</strong></td><td>試験</td></tr>
+<tr><td>EROCA の副次的達成</td><td>ED 到着後 <strong>30分以内</strong>の ECMO 流量確立（5例中3例）</td><td>試験</td></tr>
+<tr><td>神経学的予後予測の禁止期間</td><td>ARREST プロトコルで <strong>72時間</strong></td><td>試験</td></tr>
+<tr><td>ECMO 使用時間の規制上の位置づけ</td><td><strong>6時間超は適応外使用</strong>（筆頭著者の COI 開示より）</td><td>COI</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本文に無い時間指標 <mark class="hl">no-flow 時間・low-flow 時間の具体的なカットオフ（何分までなら適応か）は本文に一切示されていない</mark>。「no-flow は最小であるべき」「low-flow は短いほどよい」という定性的な記述に留まる。同様に、<mark class="hl">call-to-cannulation・door-to-ECMO という指標名も、それらの数値目標も本文には登場しない</mark>（EROCA の「911通報から ED 到着30分以内」と「到着から流量確立30分以内」が最も近いが、これは1つの実行可能性試験の評価項目であって推奨値ではない）。</p>
+</div>
+<h3>14. 適応・除外基準 — 本文にあるもの／無いもの</h3>
+<p><strong>本文が「最適な患者」として挙げる条件</strong></p>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>「若年（young）」とのみ。<strong>数値の年齢上限は無い</strong>。唯一の数値は TiPS65 の予測因子としての「65歳未満」で、これは適応基準ではなく予測モデルの一項目</td></tr>
+<tr><td>初期波形</td><td>ショッカブル（VF/pVT）が最良。心静止が最悪。PEA は病因により両極に振れる</td></tr>
+<tr><td>目撃の有無</td><td>目撃された心停止と即時 CPR（no-flow が最小／ゼロ）が良好な神経学的転帰と最も強く関連</td></tr>
+<tr><td>CPR の質</td><td>質の高い CPR が条件として明記される。<strong>質の測定法・基準値は本文に無い</strong></td></tr>
+<tr><td>難治性であること</td><td>従来治療（除細動を含む）に不応であること</td></tr>
+<tr><td>病因</td><td>ECMO 流量確立後に治療できる病因を持つこと</td></tr>
+<tr><td>体格</td><td>肥満は難度・時間・比較転帰を悪化させるが、<strong>単独では禁忌としない</strong></td></tr>
+<tr><td>末梢血管疾患</td><td>カニュレーションを困難にし、より細いカニューレを要し、遠位塞栓・出血を招きうる。禁忌とは書かれていない</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本文に無い適応・除外の項目 <mark class="hl">ETCO₂・乳酸・pH の適応判断用カットオフ値は本文に一切登場しない</mark>。pH は TiPS65 の予測因子として名前が挙がるだけで閾値は示されない。ETCO₂ と乳酸は本文に出てこない。<mark class="hl">年齢上限・併存症スコア・DNAR の扱い・目撃の有無を必須とするか、といった「除外基準の一覧」も本稿は提示していない</mark>。本稿は総説であって適応基準の策定文書ではなく、<mark class="hl">適応基準を作りたい読者は ELSO の暫定ガイドライン（Richardson ら・ASAIO J 2021）と ECPR² 専門家コンセンサス（Schmitzberger ら・Resuscitation 2022）に当たる必要がある</mark>。</p>
+</div>
+<h3>15. 必要な体制 — 本文から抽出したチェックリスト</h3>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>要件（本文の記述）</th><th>数値目標の有無</th></tr></thead>
+<tbody>
+<tr><td>プログラム基盤</td><td>既存の高パフォーマンス ECMO プログラムの上に育てる（単独で立ち上げない）</td><td>なし</td></tr>
+<tr><td>症例数</td><td>成人 ECPR 年間12例超で center-level の volume-outcome 関係</td><td><strong>あり（12例／年）</strong></td></tr>
+<tr><td>カニュレーター</td><td>24/7、少なくとも ECPR を提供する時間帯に利用可能</td><td>人数の指定なし</td></tr>
+<tr><td>回路</td><td>多くの成人プログラムはプライミング済みの待機回路を用いる</td><td>本数の指定なし</td></tr>
+<tr><td>ECMO スペシャリスト</td><td>24/7 で回路をプライミング・管理できる perfusion／ECMO スペシャリスト</td><td>なし</td></tr>
+<tr><td>外科</td><td>血管修復ができる外科医</td><td>なし</td></tr>
+<tr><td>輸血</td><td>血液バンクの利用可能性</td><td>なし</td></tr>
+<tr><td>蘇生チーム</td><td>胸骨圧迫の交代要員または機械的圧迫装置、気道管理者、ACLS 薬投与者、蘇生リーダー</td><td>人数の指定なし</td></tr>
+<tr><td>訓練</td><td>シミュレーションが技能維持と練習に重要な役割を果たしうる</td><td>頻度・評価基準なし</td></tr>
+<tr><td>画像・手技環境</td><td>体表エコーはカニュレーションの標準。透視の可否は論争中</td><td>なし</td></tr>
+<tr><td>心停止後ケア</td><td>冠動脈造影・体温管理・神経内科コンサルトが利用可能であること</td><td>温度目標は試験の記述として 33℃（Prague）・34℃（ARREST）</td></tr>
+<tr><td>質管理</td><td>ELSO 等の全国／国際レジストリに参加してベンチマーキングと研究を行う</td><td>なし</td></tr>
+<tr><td>搬送前カニュレーション</td><td>一部の都市で病院前カニュレーションが行われている。「カニュレーターを患者のもとへ送る」主張もあるが<strong>合意なし</strong></td><td>なし</td></tr>
+</tbody></table></div>
+<h3>16. 批判的吟味（JCでの論点）</h3>
+<p><strong>① 格付けが無いことを明示する</strong></p>
+<ul><li>本稿は CCM の <strong>CONCISE DEFINITIVE REVIEW</strong> 枠であり、招待総説である。系統的な文献検索・選択基準・バイアス評価・GRADE 等のエビデンス格付けは一切行われていない。抄録も無い。したがって本稿の記述は「専門家2名の統合的解釈」であり、推奨の強さ・エビデンスの確実性という形で読者に提示されるものではない。ガイドラインとして引用してはならない。</li></ul>
+<p><strong>② 中心主張が単一の後付け対比に依存している</strong></p>
+<ul><li>「システムの質が結果を分けた」という主張の証拠は、実質的に <strong>ARREST と INCEPTION の対比1本</strong>である。両試験は施設数・対象波形・蘇生後ケア・術者経験・カニュレーション場所が同時に異なっており、<strong>どの因子が効いたのかを分離する解析は行われていない</strong>。「システムの質」を独立変数として測定した研究は引用されていない。</li><li>INCEPTION の null を「低volume・低プロトコル化ゆえ」と説明するのは<strong>事後的な解釈</strong>である。INCEPTION は 30日生存 20% vs 16%（p = 0.52）で、想定効果差 22% に対して n=134 であり、<strong>この差を検出する検出力が無い</strong>。「差が無かった」ことは「システムが悪かった」ことも「効果が無い」ことも同等には証明しない。</li></ul>
+<p>③ p = 0.09 の結果を「確認する（confirms）」と書いている</p>
+<ul><li>著者らは「Prague の10%差（p = 0.09）と ARREST の36%差は、少なくとも10%の神経学的無傷生存の利益を confirms する」と述べる。Prague の主要評価項目は有意差に達しておらず、事前規定の効果差にも達せずに DSMB が中止した試験である。有意差の無い結果を「確認」と呼ぶのは、総説の語り口として踏み込みすぎている。</li><li>同じ文で "survival mortality benefit" と生存と死亡を並置した表現になっており、記述として不正確である。</li></ul>
+<p><strong>④ ARREST の36%は「手技の効果」ではない</strong></p>
+<ul><li>ARREST の ECPR 群は、ECPR に加えて 心臓 ICU への転棟・34℃ の体温管理・72時間の予後予測禁止・即時頭部CT・持続脳波 というバンドルを受けた。対照群は<strong>救急外来に留まり救急医の管理下</strong>だった。つまり ARREST が比較したのは「ECPR という手技」ではなく <strong>2つのケアバンドルと2つのケア場所</strong>である。</li><li>皮肉なことに、この事実は本稿の「システムであって手技ではない」という主張を<strong>支持する</strong>と同時に、36%という数字を ECPR 単独の効果として引用してはならないことを意味する。本稿はこの点を明示していない。</li></ul>
+<p><strong>⑤ n=30 で早期中止された試験の効果量</strong></p>
+<ul><li>ARREST は30例で優越性のため早期中止された。優越性で早期中止された小規模試験は効果量を過大に推定することが知られている。リスク差の95%区間が 3.7〜59.2% と極めて広いことがそれを反映しているが、本稿は「36%差」を繰り返し用い、この不確実性に触れていない。</li></ul>
+<p><strong>⑥ 「ほぼ100%生存」の引用</strong></p>
+<ul><li>「ある高volume ECPR センターでは、難治性 VT/VF で30分以内にカニュレーションされた患者の生存はほぼ100%」という記述は、<strong>n も信頼区間も示されない単一施設の部分集団</strong>である。30分以内にカニュレーションできた患者は、そもそも搬送距離・体格・血管条件・チームの即応性のすべてに恵まれた選択された集団であり、<strong>選択バイアスと生存者バイアスの両方を負っている</strong>。この数字を目標値の根拠として提示するのは慎重であるべきである。</li></ul>
+<p><strong>⑦ COI と自己引用の重なり</strong></p>
+<ul><li>筆頭著者 Tonna は <strong>ELSO レジストリの Chair</strong> である。本稿が提示する2つの中核的な処方箋、すなわち ① 年間12例超という volume 閾値 と <strong>② ELSO 等のレジストリへの参加推奨</strong> は、いずれも Tonna 自身の ELSO レジストリ解析（Crit Care Explor 2022） に依拠している。外的検証済みと紹介される RESCUE-IHCA も Tonna が筆頭の論文である。</li><li>利益相反として不適切とまでは言えないが、「レジストリの責任者が、自身のレジストリ解析を根拠に、レジストリ参加を推奨している」という構造は、読者が認識しておくべきである。</li><li>Tonna は <strong>ECMO の6時間超使用が適応外である</strong>ことを開示している。ECPR は定義上この適応外使用に該当する。</li><li>Cho は Hyperfine（携帯型MRI企業）の支援を開示しており、本稿の神経学的転帰の節を担当していると推定される。ただし本稿は特定の神経モニタリング機器を推奨していない。</li><li><strong>開示文の不整合</strong>：末尾に「残りの著者は潜在的な利益相反を有しない」とあるが、著者は2名のみで両名とも開示している。定型文がそのまま残った形になっている。</li></ul>
+<p><strong>⑧ 原著自身の内的不整合</strong></p>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>記述</th><th>食い違い</th></tr></thead>
+<tbody>
+<tr><td>Cannulation 節</td><td>「ARREST は退院時の絶対生存利益 <strong>約30%</strong> を示した」</td><td>Trials 節と Discussion では <strong>36%</strong>（43% vs 7% ＝ 36ポイント）。同じ論文内で ARREST の効果量が2通りに書かれている。<strong>36% が実測値と一致する</strong></td></tr>
+<tr><td>Cannulation 節</td><td>「INCEPTION の<strong>主要評価項目（6か月時点の神経学的転帰）</strong>に有意差なし」</td><td>Trials 節では「<strong>30日生存</strong> 20% vs 16%（p = 0.52）」と報告している。同じ試験の主要評価項目が2通りに書かれており、両者は別の評価項目である</td></tr>
+<tr><td>Trials 節</td><td>INCEPTION の結果を「survival to 30 days」とのみ表記</td><td>神経学的転帰の限定（CPC 1-2）が付いているかどうかが本文からは読み取れない</td></tr>
+<tr><td>Discussion</td><td>「at least a 10% neurologically intact survival mortality benefit」</td><td>生存利益と死亡利益を同一句で並置しており、日本語にも英語にも直訳できない</td></tr>
+</tbody></table></div>
+<ul><li><strong>検算</strong>：ARREST 43% vs 7% → 差 36ポイント（リスク差 36%［3.7〜59.2%］の報告と一致）。Prague 31.5% vs 22.0% → 差 9.5ポイント（本文の「10%差」は四捨五入）。Prague 30日 30.6% vs 18.2% → 差 12.4ポイント。INCEPTION 20% vs 16% → 差 4ポイント（想定 22% の 1/5 以下）。プール解析 32.4% vs 19.7% → 差 12.7ポイント。いずれも本文の記述と整合する。</li><li><strong>プール per protocol 解析の位置づけ</strong>：クロスオーバー患者を除外した per protocol 解析はランダム化の保護を失う。Prague のクロスオーバー10例は「標準ケアに割り付けられたが ECPR を受けた」患者で、その40%が生存している。<strong>これらを除外すれば対照群の生存は下がる方向に働く</strong>。本稿はこの解析を主張の補強として引くが、方法論上の限界には触れていない。</li></ul>
+<p><strong>⑨ 本稿が扱わないと明言していること</strong></p>
+<ul><li>小児 ECPR（範囲外と明記）。</li><li><strong>カニュレーション後の管理（抗凝固・体温管理・神経モニタリング等）の詳細</strong>：同じ CCM 誌の別稿（Kang JK, Darby Z, Bleck TP ら・Crit Care Med 2023、online ahead of print）に譲られている。本稿だけでは ECPR 後の管理は組み立てられない。</li><li>費用・費用対効果・医療経済（一切の記載なし）。</li><li>倫理・意思決定（治療差し控えの実践に1文触れるのみ）。</li><li>地域化（regionalization）・搬送圏の設計（「カニュレーターを患者のもとへ」の論争に1文触れるのみ）。</li></ul>
+<h3>17. その後どうなったか（Vault 内で裏が取れるもののみ）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本稿（2024）の立場</th><th>その後の Vault 内ノート</th></tr></thead>
+<tbody>
+<tr><td>ECPR 後の体温管理</td><td>ARREST 34℃、Prague 33℃。両試験ともプロトコル化されていたことを「高品質システム」の証拠として引く</td><td><span class="wl">ECPR後のTTMは32-34℃でも35-36℃でも30日神経予後が変わらない（JAAM-OHCA 890例・CritCare2022）</span>（本稿より前）と <span class="wl">ECPR後TTMの解釈は「誰を含めたか」で変わる — SAVE-J IIとの対比（レター・CritCare2023）</span>。<strong>低体温そのものの上乗せ効果は日本のレジストリでは支持されていない</strong>。本稿は「プロトコル化されていたこと」を評価しており、温度目標の是非は論じていない</td></tr>
+<tr><td>非ショッカブル波形への低体温</td><td>触れず</td><td><span class="wl">HYPERION trial 非ショック波形心停止後の低体温療法（NEJM2019）</span>。<strong>非ショッカブル波形でも33℃で90日 CPC 1-2 が改善した</strong>という所見があり、本稿の「非ショッカブルは転帰が悪い」という記述と、「だから何もできない」という含意は別である</td></tr>
+<tr><td>ECPR の患者選定と地域化</td><td>「最適な実装法は今後の研究課題」と留保</td><td><span class="wl">AHA CPR・ECCガイドライン2025のハイライト — 全760推奨、ECPRの患者選定と地域化・セーフティハドル・臍帯遅延結紮（日本語版）</span>。<strong>本稿の翌年、AHA が患者選定と地域化を明示的に扱った</strong>。本稿の未解決課題に対する公式の回答がここにある</td></tr>
+<tr><td>ECPR 後の抗凝固</td><td>触れず（別稿に譲る）</td><td><span class="wl">成人ECPRの凝固障害と抗凝固管理 — 固定目標をやめ、心停止の病因ごとに個別化する（ナラティブレビュー・CritCare2026）</span></td></tr>
+<tr><td>予後予測のタイミング</td><td>ARREST の72時間ルールに言及。早期の治療中止が試験結果を歪めた可能性を示唆</td><td><span class="wl">早期WLSTを除外した心停止後の神経予後予測（不良マーカー2つ以上で偽陽性ゼロ・CritCare2026）</span>、<span class="wl">心停止後ケアガイドライン2025 ERC・ESICM — 発熱予防は37.5℃以下、予後予測は2つ以上の指標で（Resuscitation2025）</span></td></tr>
+<tr><td>心停止の原因検索</td><td>冠動脈造影と全身CT の2本柱</td><td><span class="wl">心停止の「治せる原因」をどう探すか — 心電図・冠動脈造影・CT・エコー・血液検査の使い分け（総説・JClinMed2024）</span></td></tr>
+<tr><td>日本での ECPR 実施実態</td><td>触れず（米国・欧州のデータのみ）</td><td><span class="wl">非心臓手術の周術期心停止に対するECPRは8.5%で使われ、死亡との関連は不明のまま（JIPAD 518例・129ICU・AnesthesiologyOpen2026）</span></td></tr>
+<tr><td>低体温の延長</td><td>触れず</td><td><span class="wl">低体温療法は延長しても神経予後を改善しない — 最短6時間が最適の事後確率0.51（ICECAP・JAMA2026）</span></td></tr>
+</tbody></table></div>
+<p>日本のデータが本稿を支えている2点（PDF の引用文献から確認できる事実）</p>
+<ul><li><strong>TiPS65</strong> の導出論文は Okada Y ら（JAMA Netw Open 2020）で、日本の OHCA データから導出された。本稿が挙げる2つの生存予測モデルのうち片方が日本発である。</li><li><strong>エコーガイド下カニュレーションの時間短縮</strong>を示す引用（Nakatsutsumi K ら・Resuscitation 2023）は <strong>SAVE-J II study group</strong> による多施設後ろ向きコホートである。本稿が SAVE-J II 由来の論文を引用しているのはこの1本と、PDF の文献リストから確認できる。</li></ul>
+<h3>18. volume-outcome の一般論として束ねる</h3>
+<p>本稿の「年間12例超」という閾値は、ECPR に固有の話ではなく、<strong>集中治療における症例数と転帰の一般法則</strong>の一事例として読むべきである。Vault 内の関連ノートと並べると次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>ノート</th><th>対象</th><th>volume／体制と転帰の関係</th></tr></thead>
+<tbody>
+<tr><td>本稿（CCM2024）</td><td>成人 ECPR</td><td>施設の年間12例超で center-level の volume-outcome 関係。個人レベルは外科文献からの外挿</td></tr>
+<tr><td><span class="wl">救急患者が多いICUほど症例数の効果が大きい — 集約化で院内死亡が3割減（JIPAD 72214例・80ICU・JIntensiveCare2024）</span></td><td>日本の ICU 全般</td><td><strong>症例数の効果は救急患者割合の高い ICU で大きい</strong>。集約化で院内死亡が3割減という推計。ECPR はまさに「救急患者」の極北であり、本稿の主張と方向が一致する</td></tr>
+<tr><td><span class="wl">平日10時の集中治療医対病床比が院内死亡を下げる（JIPAD 46503例・65ICU・JICM2024）</span></td><td>日本の ICU</td><td>症例数ではなく<strong>人員密度</strong>が転帰を動かす。ECPR の「24/7 カニュレーター」要件と同じ構造</td></tr>
+<tr><td><span class="wl">high-intensity ICUの死亡低下は術後患者に限られる — 全体ではOR 0.96、術後で0.81（JIPAD 65395例・87ICU・日集中医誌2025）</span></td><td>日本の ICU</td><td><strong>体制の効果は患者層で異なる</strong>。「高volume なら常に良い」わけではないという対照的な所見</td></tr>
+<tr><td><span class="wl">ICUのない病院の中間治療室（IMCU）は院内死亡が15%高い（DPC 306万例・CritCare2025）</span></td><td>日本の病院</td><td>体制の欠落が死亡に直結する。ECPR を「ECMO プログラムの上に育てよ」という ELSO の主張と同型</td></tr>
+<tr><td><span class="wl">国家ICUレジストリは臨床研究と質改善を可能にする（LOGIC・JIPAD WG共同の総説・CCM2024）</span></td><td>レジストリ論</td><td>本稿の「ELSO 等のレジストリに参加せよ」という推奨の一般形。<strong>同じ 2024年の CCM 誌</strong>に載っている</td></tr>
+<tr><td><span class="wl">レジストリのベンチマーキングで外れ値施設をどう検出するか — 最適な統計手法は未確立（SR 19研究・BMJOpen2023）</span></td><td>方法論</td><td>「レジストリで質をベンチマークする」と言うのは簡単だが、<strong>外れ値検出の統計手法は未確立</strong>である。本稿の推奨の実装上の弱点</td></tr>
+<tr><td><span class="wl">SCCMがガイドラインを「リビングガイドライン」型に作り替える — 制作18か月・更新単位は個々の推奨（Invited Foreword・CCM2023）</span></td><td>学会の制度設計</td><td>同じ CCM 誌の体制論。<strong>推奨を作る側の仕組みを変える</strong>話であり、本稿の「施設側の仕組みを変える」話と対になる</td></tr>
+</tbody></table></div>
+<ul><li><strong>束ね方</strong>：本稿・JIPAD の集約化解析・IMCU の DPC 解析はいずれも「<strong>何をするか</strong>」より「どこで・どういう体制でするか」が転帰を決めると言っている。ECPR はその極端例で、手技の成否が数分単位の体制設計に直結するために、volume-outcome が最も見えやすい領域になっている。</li><li><strong>注意</strong>：high-intensity ICU の JIPAD 解析が示すように、体制の効果は患者層で変わる。ECPR でも「12例を超えれば良くなる」のではなく、「12例を超えるだけの搬入・導線・人員がある施設は、それ以外の条件も揃っている」という交絡の可能性が残る。本稿はこの点を検討していない。</li></ul>
+<h3>19. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>ARREST 試験（単施設 RCT・退院生存 43% vs 7%）</td><td>Yannopoulos D, et al. Lancet 2020;396:1807-1816</td></tr>
+<tr><td>Prague OHCA 試験（256例 RCT・180日 CPC 1-2 で 31.5% vs 22.0%）</td><td>Belohlavek J, et al. JAMA 2022;327:737-747</td></tr>
+<tr><td>INCEPTION 試験（オランダ多施設 RCT・30日生存 20% vs 16%）</td><td>Suverein MM, et al. N Engl J Med 2023;388:299-309</td></tr>
+<tr><td>EROCA 試験（実行可能性 RCT・15例）</td><td>Hsu CH, et al. Ann Emerg Med 2021;78:92-101</td></tr>
+<tr><td>ARREST＋Prague のプール per protocol 解析（32.4% vs 19.7%）</td><td>Belohlavek J, Yannopoulos D, Smalcova J, et al. EClinicalMedicine 2023;59:101988</td></tr>
+<tr><td>年間症例数と ECPR 後生存（本稿の「12例超」の根拠。ELSO レジストリ）</td><td>Tonna JE, Selzman CH, Bartos JA, et al. Crit Care Explor 2022;4:e0733</td></tr>
+<tr><td>RESCUE-IHCA 予測スコアと外的検証</td><td>Tonna JE, Selzman CH, Girotra S, et al. JACC Cardiovasc Interv 2022;15:237-247</td></tr>
+<tr><td>TiPS65 スコアの導出・内的検証（日本の OHCA データ）</td><td>Okada Y, Kiguchi T, Irisawa T, et al. JAMA Netw Open 2020;3:e2022920</td></tr>
+<tr><td>ELSO の ECPR 暫定ガイドライン合意声明</td><td>Richardson ASC, Tonna JE, Nanjayya V, et al. ASAIO J 2021;67:221-228</td></tr>
+<tr><td>ECPR² 経皮的カニュレーションの専門家コンセンサス</td><td>Schmitzberger FF, Haas NL, Coute RA, et al. Resuscitation 2022;179:214-220</td></tr>
+<tr><td>30分以内カニュレーションでほぼ100%生存（高volume センター）</td><td>Bartos JA, Grunau B, Carlson C, et al. Circulation 2020;141:877-886</td></tr>
+<tr><td>意識回復に数週間を要する ECPR 生存者</td><td>Bartos JA, Carlson K, Carlson C, et al. Resuscitation 2018;132:47-55</td></tr>
+<tr><td>エコーガイド下カニュレーションの時間短縮（SAVE-J II study group）</td><td>Nakatsutsumi K, Endo A, Costantini TW, et al. Resuscitation 2023;191:109927</td></tr>
+<tr><td>VA-ECMO の肢虚血（発生・予防・監視・治療のナラティブレビュー）</td><td>Bonicolini E, Martucci G, Simons J, et al. Crit Care 2019;23:266</td></tr>
+<tr><td>BMI と ECPR の心停止特性・生存</td><td>Kosmopoulos M, Kalra R, Alexy T, et al. Resuscitation 2023;188:109842</td></tr>
+<tr><td>現場蘇生継続 vs 搬送中蘇生（非 ECPR の OHCA）</td><td>Grunau B, Kime N, Leroux B, et al. JAMA 2020;324:1058-1067</td></tr>
+<tr><td>機械的圧迫 vs 用手圧迫（PARAMEDIC）</td><td>Perkins GD, Lall R, Quinn T, et al. Lancet 2015;385:947-955</td></tr>
+<tr><td>心停止後の心カテ室の役割（AHA 科学的声明）</td><td>Yannopoulos D, Bartos JA, Aufderheide TP, et al. Circulation 2019;139:e530-e552</td></tr>
+<tr><td>ECPR 後の外傷性・出血性合併症（CT の価値）</td><td>Nguyen ML, Gause E, Mills B, et al. Resuscitation 2020;157:225-229</td></tr>
+<tr><td>VA-ECMO の CT アンギオグラフィ</td><td>Shen J, Tse JR, Chan F, et al. Radiographics 2022;42:23-37</td></tr>
+<tr><td>全国心停止レジストリへの参加期間と生存</td><td>Bradley SM, Huszti E, Warren SA, et al. Resuscitation 2012;83:1349-1357</td></tr>
+<tr><td>術者症例数と手術死亡（volume-outcome の外挿元）</td><td>Birkmeyer JD, Stukel TA, Siewers AE, et al. N Engl J Med 2003;349:2117-2127</td></tr>
+<tr><td>シミュレーション訓練による ECPR の迅速・安全な開始</td><td>Whitmore SP, Gunnerson KJ, Haft JW, et al. Resuscitation 2019;138:68-73</td></tr>
+<tr><td>ECPR 後の心停止後ケア（本稿が詳細を譲った姉妹論文）</td><td>Kang JK, Darby Z, Bleck TP, et al. Crit Care Med 2023 Nov 3［online ahead of print］</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">ECPR を「導入するか」ではなく「どのシステムでやるか」から議論を始める</mark>。本稿が示す判断材料は3つに集約できる。</p>
+<ul><li><mark class="hl"><strong>年間12例</strong></mark> — 成人 ECPR で center-level の volume-outcome 関係が現れる唯一の数値。まず自施設の年間件数を数える。</li><li><mark class="hl"><strong>60分／30分</strong></mark> — 心停止からカニュレーションまで60分以内が妥当な目標、30分以内が理想。この導線が24/7で組めないなら、手技だけ導入しても意味がない。</li><li><mark class="hl"><strong>ECPR ＝ ECMO ＋ 心停止ケア</strong></mark> — 既存の高パフォーマンス ECMO プログラムの上に育てる（ELSO）。カニュレーション後に冠動脈造影・体温管理・神経内科が24/7で回らないなら、流量を立てても転帰は変わらない。</li></ul>
+<p>ただし本稿の限界も同じ強さで持ち帰る。<mark class="hl">Concise Definitive Review であり、エビデンスの格付けは無い</mark>。中心主張は <mark class="hl"><strong>ARREST と INCEPTION の後付けの対比1本</strong></mark> に依存し、<mark class="hl">ARREST の36%はケアバンドルごとの効果であって手技単独の効果ではない</mark>（対照群は救急外来に留まった）。==<strong>Prague は p = 0.09 の陰性試験である</strong><mark class="hl">。そして著者自身が結論で </mark>「新規・低volume システムでの実装法は今後の研究課題」と書いている== 以上、本稿は当院に「やり方」を教えてはくれない。</p>
+<p><mark class="hl"><strong>明日から変えられるのは、プログラムの可否と独立した3点</strong></mark> — VA-ECMO の遠位灌流カテーテルを標準化する、カニュレーションに体表エコーを標準化する、心停止後の神経学的予後予測を72時間より早めない。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

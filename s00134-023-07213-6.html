@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ショックの臨床徴候はどこまで使えるか — 10徴候の系統的レビュー（Letter・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07213-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ショックの臨床徴候はどこまで使えるか — 10徴候の系統的レビュー（Letter・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Tschoellitsch T, Noitz M, Türk M, Meier J, Dünser MW. The value of clinical signs as indicators of shock. Intensive Care Med. 2023. doi:10.1007/s00134-023-07213-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-09-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07213-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07213-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>The value of clinical signs as indicators of shock</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07213-6.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07213-6.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07213-6.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「皮膚を見る・触る」に重心を移す</strong>。本レビューが有効と結論したのは、末梢灌流／体温、CRT、網状皮斑、ショック指数の4つ。血圧計と心電図モニタが答える徴候ではない。ラウンドの所見欄に「膝の網状皮斑の範囲／示指のCRT秒数／足趾の冷感」を定型項目として置く。</li><li><strong>体温は「測り方」を決めないと結論が逆になる</strong>。本論文が支持したのは体幹—足趾（core-to-toe）／体幹—指尖の温度較差であって、「手が冷たいか」という主観評価や前腕—指尖較差は敗血症性ショックで上昇しなかった、と Figure 1 は明記している。当院で末梢温を扱うなら 深部体温と足趾温を同時に測る運用にする。触って「冷たい」だけでは本論文の根拠にならない。</li><li><strong>CRTは「6時間後 ≤ 4秒」を蘇生の到達点として扱える</strong>。Figure 1 は敗血症性ショックで6時間時点のCRT ≤ 4秒が蘇生成功と関連したと記述している。初期蘇生バンドルの6時間チェックにCRTを入れる根拠になる。測定手技（示指遠位指節、10秒圧迫、白色消退からの回復秒数）は施設内で1通りに固定する。</li><li><strong>ショック指数を敗血症に使うときは「本論文の外」だと自覚する</strong>。本レビューでショック指数を支持したのは心原性ショック6研究＋出血性ショック1研究で、<mark class="hl">敗血症性ショックでショック指数を評価した研究は1件も組み入れられていない</mark>。当院で外傷・消化管出血・心原性の初期トリアージに使うのは筋が通るが、敗血症の早期認知に転用するのは本論文からは正当化されない。</li><li><strong>RRS起動基準・NEWSの再評価には使えない</strong>。頻脈・頻呼吸・尿量低下は「ショックの指標」としては支持研究がごく少数だった。ただしこれは「急変を拾う感度が低い」という意味ではない。「拾える」ことと「ショックであることの指標として妥当」は別であり、本論文をRRS基準の削減根拠にしてはならない。</li><li><strong>意識障害・発汗・脈の触知の質は、教科書に載っていてもエビデンスがゼロ</strong>。ICU入室時の身体所見教育で「これは実証されていない伝統である」と明示して教える。捨てる必要はないが、これだけで判断しない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：臨床試験と合意定義は伝統的に、ショックを「組織低灌流の有無を問わない動脈性低血圧（収縮期血圧 &lt; 90 mmHg、平均血圧 &lt; 65 mmHg など）」と定義してきた（引用[1][2]）。病態生理的にはショックは、全身の酸素供給と酸素利用が不十分になる循環不全の臨床表現型である。</li><li><strong>Unknown（分かっていなかったこと）</strong>：ESICM のタスクフォース（Cecconi 2014、引用[3]）は、ショックを「乳酸値上昇を伴う生命を脅かす全身性組織低灌流」と定義し、動脈性低血圧はよく併存するがショックの診断に必須とすべきでないと述べ、代わりに臨床徴候で組織低灌流を検出することを推奨した。ところが、この記述と推奨を支える科学的エビデンスは「定義」「事実の陳述」「ベストプラクティス」として提示されており、どの臨床徴候にどれだけの実証的裏付けがあるのかは体系的に調べられていなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：ESICM が挙げた10の臨床徴候について、成人を対象に「その徴候とショックの存在の関係」を評価した観察研究を系統的に探し、質的に統合した最初の試み。結果は、教科書的な徴候の多くが実は無検証であることを可視化した。有効と言えたのは末梢灌流／体温、CRT、網状皮斑、ショック指数の4つで、意識状態の変化・発汗・末梢動脈の触知の質については研究が1件も存在しなかった。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ESICM が「ショックの検出に使え」と推奨した10の臨床徴候を系統的に検証したところ、<strong>実証的に支持されたのは末梢灌流／体温・CRT・網状皮斑・ショック指数の4つだけ</strong>で、頻脈・頻呼吸・尿量低下は支持研究がごく少数、意識状態の変化・発汗・末梢動脈の触知の質は研究そのものが存在しなかった。</p>
+</div>
+<ul><li><strong>検索と組み入れ</strong>：19,655件の出版物をスクリーニングし、25研究・67,894名を質的統合に組み入れた。</li><li>統計手法が研究間で不均質だったため、量的メタ解析は実施できず、<strong>質的統合</strong>にとどまった。</li><li>全体のバイアスリスクは中等度（Newcastle–Ottawa Scale で評価）。</li><li>有効と同定された4徴候：<strong>末梢灌流／体温の低下、CRTの延長、網状皮斑、ショック指数 ≥ 0.7〜0.8</strong>。</li><li><strong>頻脈・頻呼吸・尿量低下</strong>は、ショックとの関連を支持した研究がごく少数。</li><li><strong>意識状態の変化・発汗・末梢動脈の触知の質</strong>は、ショック指標としての報告が1件も見つからなかった（各 n = 0）。</li><li>著者らが挙げた限界は2点：①量的メタ解析ができなかったこと、②組み入れ研究の大半が動脈性低血圧に依拠した標準的ショック定義を使っていたため、代償性ショック・潜在性（occult）ショックを検出する価値を結論づけられなかったこと。</li><li>著者らの結論：単一の、そしてとくに複数の臨床徴候を組み合わせた場合の予測的価値を理解するには、さらなる研究が必要。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — ショックと臨床徴候の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ショック</strong>とは、循環不全の結果として全身の酸素供給・酸素利用が不十分になった状態の臨床表現型を指す。ここで大事なのは、血圧が下がっていること＝ショック、ではないという点である。血圧は心拍出量と血管抵抗の積に相当するため、血管を締め上げれば臓器灌流が落ちていても血圧は保たれうる（＝<strong>代償性ショック</strong>、あるいは潜在性（occult）ショック）。逆に、慢性的に血圧が低いだけで組織灌流に問題のない人もいる。</p>
+<p>そこで ESICM のタスクフォースは、ショックを「乳酸値の上昇を伴う、生命を脅かす全身性の組織低灌流」と定義し直し、<strong>血圧ではなく組織灌流を見よ</strong>、それには臨床徴候（身体所見）を使えと推奨した。本論文はその推奨の足元を点検している。</p>
+<p><strong>本論文に登場する用語（初出の一言定義）</strong></p>
+<ul><li><strong>CRT（capillary refill time／毛細血管再充満時間）</strong>：指尖や膝の皮膚を圧迫して白くし、離してから元の色に戻るまでの秒数。末梢の微小循環の代用指標。</li><li><strong>網状皮斑（skin mottling）</strong>：主に膝周囲に現れる、網目状・大理石模様の紫斑。膝から広がる範囲でスコア化される。</li><li><strong>ショック指数（shock index）</strong>：心拍数 ÷ 収縮期血圧。血圧単独より早く循環不全を捉えるとされる簡易指標。本論文には呼吸数補正ショック指数（respiratory rate adjusted shock index）も登場する。</li><li><strong>中枢—末梢温度較差（core-to-toe / core-to-finger temperature gradient）</strong>：深部体温と足趾・指尖の皮膚温の差。末梢血管収縮が強いほど大きくなる。</li><li><strong>Newcastle–Ottawa Quality Assessment Scale（NOS）</strong>：非ランダム化研究（コホート・症例対照）のバイアスリスクを評価する標準的な尺度。</li><li><strong>PRISMA 2020</strong>：系統的レビューの報告基準。何を検索し何を除外したかを透明に書くための枠組み。</li><li><strong>質的統合（qualitative synthesis）</strong>：研究間で統計手法が揃わずプールできないとき、数値を合算せずに所見を言葉で整理する統合方法。効果量も信頼区間も出ない。</li></ul>
+</div>
+<h3>2. 背景と目的 🎯</h3>
+<p>論文冒頭（Dear Editor 以下）の論理は3段構えである。</p>
+<ol><li><strong>伝統的な定義</strong>：臨床試験と合意定義は、ショックを「組織低灌流の有無を問わない動脈性低血圧（収縮期血圧 &lt; 90 mmHg、平均血圧 &lt; 65 mmHg など）」と定義してきた（引用[1] Vincent &amp; De Backer 2013、[2] Sepsis-3）。</li><li><strong>病態生理からの定義</strong>：ショックは、不十分な全身酸素供給と酸素利用をもたらす循環不全の臨床表現型である（引用[1]）。</li><li><strong>タスクフォースの再定義</strong>：ESICM のタスクフォース（引用[3] Cecconi 2014）は、ショックを「乳酸値上昇を伴う生命を脅かす全身性組織低灌流」と定義し、動脈性低血圧はよく存在するもののショックの診断に必須とすべきでないと強調した。そのうえで、組織低灌流の検出に臨床徴候を用いることを推奨した。ただしその根拠は「定義」「事実の陳述」「ベストプラクティス」として示されていた（＝エビデンスレベルの裏付けを伴っていなかった）。</li></ol>
+<p>そこで著者らは、ショックを検出するための10の臨床徴候の価値についてのエビデンスを同定する目的で系統的レビューを行った。10徴候は原文の列挙順で次の通り。</p>
+<p><strong>頻脈（tachycardia）／頻呼吸（tachypnoea）／網状皮斑（skin mottling）／毛細血管再充満時間（capillary refill time）／乏尿（oliguria）／意識状態の変化（altered mental state）／発汗（diaphoresis）／末梢動脈の触知（peripheral pulse）／末梢動脈の触知の質（peripheral pulse quality）／ショック指数（shock index）</strong></p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原著内での呼称のずれ（JCで必ず確認すべき点） 本文の10徴候リストには <strong>peripheral pulse（末梢動脈の触知）</strong> が入っているが、<mark class="hl">Figure 1 と結果の記述にはこの項目が無く、代わりに <strong>Peripheral Perfusion/Temperature（末梢灌流／体温）</strong> という枠が登場する</mark>。つまり本文で宣言した10項目と、図に示された10項目が<strong>一対一で対応していない</strong>。図側の10枠は「意識状態の変化・発汗・頻呼吸・頻脈・末梢動脈の触知の質・尿量・末梢灌流／体温・CRT・網状皮斑・ショック指数」である。プロトコル上どちらが事前規定だったかは Letter 本文からは判定できない（INPLASY の登録内容を見ないと分からない）。<strong>「10徴候」という数は正しいが、中身の一項目が入れ替わっている</strong>と読むのが正確。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>デザイン</strong></td><td>系統的レビュー（質的統合）。<strong>事前登録</strong>：INPLASY2022120047、2022年12月12日</td></tr>
+<tr><td><strong>報告基準</strong></td><td>PRISMA 2020 声明（引用[4]）に従って報告</td></tr>
+<tr><td><strong>検索</strong></td><td><strong>MEDLINE のみ</strong>（検索式は Supplementary Table 1）。<strong>すべての検索を2名で重複実施</strong>。加えて、選択した出版物の<strong>全参考文献リストをハンドサーチ</strong></td></tr>
+<tr><td><strong>組入基準</strong></td><td><strong>成人（≥ 19歳）</strong>で、臨床徴候とショックの存在の関係を評価した、<strong>後ろ向きまたは前向きの観察研究／コホート研究</strong></td></tr>
+<tr><td><strong>除外基準</strong></td><td>①<strong>臨床徴候のみに基づくショック定義</strong>を用いた研究（循環論法を避けるため）、②英語以外の言語の報告、③論評・総説・エディトリアル・学会抄録、④<strong>10名未満の症例集積</strong></td></tr>
+<tr><td><strong>制限なし</strong></td><td>性別・地理的地域・雑誌・出版日に制限を設けなかった</td></tr>
+<tr><td><strong>データ抽出</strong></td><td>一般情報（著者、出版年、研究デザイン、セッティング、集団、<strong>ショックの型と定義</strong>）を抽出し、結果をスプレッドシートに要約</td></tr>
+<tr><td><strong>バイアス評価</strong></td><td>各研究について <strong>Newcastle–Ottawa Quality Assessment Scale</strong>（引用[5]）で評価</td></tr>
+<tr><td><strong>統合</strong></td><td>研究間で統計手法が不均質だったため<strong>量的メタ解析は不可能</strong>。<strong>質的統合</strong>を行った</td></tr>
+</tbody></table></div>
+<p>除外基準①は方法論的に重要である。「臨床徴候だけでショックを定義した研究」を入れてしまうと、徴候が徴候を予測するという循環になり、診断価値の検証にならない。この除外の代償として、組み入れ研究の大半が「低血圧を前提とした標準的なショック定義」を参照基準に使うことになり、後述の限界②に直結する。</p>
+<h3>4. 結果の全体像 📊</h3>
+<ul><li><strong>スクリーニング</strong>：19,655件の出版物</li><li><strong>最終組み入れ</strong>：25研究・67,894名（フローは Supplementary Fig. 1、個別研究の詳細は Supplementary Tables 2–4）</li><li><strong>全体のバイアスリスク</strong>：中等度（moderate）</li><li>Figure 1 が、ショックの型別に主要所見を要約している</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本PDFに含まれていないもの（数値を探すなら Supplementary へ） 本PDFは3ページのLetter本体のみで、<mark class="hl"><strong>Supplementary Fig. 1（PRISMA フロー）と Supplementary Tables 1–4（検索式・個別研究の一覧・バイアス評価）はPDFに含まれていない</strong></mark>。したがって、<mark class="hl"><strong>個々の徴候の感度・特異度・尤度比・AUC・オッズ比・95%信頼区間は本PDFのどこにも記載が無い</strong></mark>。Figure 1 が示すのは「研究数」「バイアスリスク」「所見の方向性」「一部の閾値」だけである。本ノートで数値として示せるのはそこまでで、それ以上は本文に無い。</p>
+</div>
+<h3>5. Figure 1 — 10徴候 × ショック型の質的統合（全文起こし）🖼️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07213-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07213-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Qualitative data synthesis of included studies on the relationship between ten clinical signs and the presence of shock.（原図・無改変。©出典） 人体の全身循環（動脈を赤、静脈を青で描いた模式図）を中央に置き、そこから矢印で10個の白い箱が引き出されている。各箱は「濃青の見出し帯（徴候名）＋薄青の帯（ショックの型・研究数 n・バイアスリスク）＋白地の本文（所見の要約）」の3段構成。ショックの型が複数ある徴候（頻脈・尿量・末梢灌流／体温・CRT・ショック指数）は、薄青帯と白地本文の組が型の数だけ縦に積まれている。矢印の出発点はそれぞれの徴候が観察される部位（意識状態・発汗は頭部、頻脈は心臓、頻呼吸は肺、尿量は骨盤部、末梢動脈の触知の質・末梢灌流／体温は上肢、CRT・網状皮斑は下肢）。ショック指数だけは身体から矢印が出ておらず、最下段に全幅の箱として置かれている（＝計算値であり身体部位を持たないため）。人体イラストは stock.adobe.com のライセンス素材。</p>
+</div>
+<h4>Table 1. Figure 1 の全10枠を起こしたもの（研究数・バイアス・所見・閾値）</h4>
+<div class="tw"><table>
+<thead><tr><th>徴候</th><th>ショックの型</th><th>研究数 n</th><th>バイアスリスク</th><th>図に記載された所見</th><th>図に出てくる閾値</th></tr></thead>
+<tbody>
+<tr><td>意識状態の変化</td><td>—</td><td><strong>0</strong></td><td>該当なし</td><td>意識状態の変化とショックの関係についての公表エビデンスは同定できなかった</td><td>—</td></tr>
+<tr><td>発汗</td><td>—</td><td><strong>0</strong></td><td>該当なし</td><td>発汗とショックの関係についての公表エビデンスは同定できなかった</td><td>—</td></tr>
+<tr><td>末梢動脈の触知の質</td><td>—</td><td><strong>0</strong></td><td>該当なし</td><td>末梢動脈の触知の質とショックの関係についての公表エビデンスは同定できなかった</td><td>—</td></tr>
+<tr><td>頻呼吸</td><td>敗血症性ショック</td><td>3</td><td>中等度〜高</td><td>頻呼吸は敗血症性ショックでよくみられる</td><td>24回/分以上</td></tr>
+<tr><td>頻脈</td><td>敗血症性ショック</td><td>1</td><td>中等度</td><td>敗血症におけるピーク心拍数は敗血症性ショックの発症と関連する</td><td>—</td></tr>
+<tr><td>頻脈</td><td>出血性ショック</td><td>1</td><td>高</td><td>頻脈は出血性ショックにおける高度出血と関連する</td><td>120回/分以上</td></tr>
+<tr><td>頻脈</td><td>心原性ショック</td><td>2</td><td>中等度</td><td>頻脈は心原性ショックでよくみられる。心拍数はショックの重症度と正に相関する</td><td>100回/分以上</td></tr>
+<tr><td>尿量</td><td>敗血症性ショック</td><td>1</td><td>中等度</td><td>栄養療法・消化管不全のある敗血症性ショック患者では、そうでない患者より尿量低下が多い</td><td>—</td></tr>
+<tr><td>尿量</td><td>心原性ショック</td><td>2</td><td>低〜中等度</td><td>乏尿は心原性ショック患者で多く、短期死亡率と正に相関する</td><td>—</td></tr>
+<tr><td>末梢灌流／体温</td><td>敗血症性ショック</td><td>4</td><td>低〜中等度</td><td>中枢—足趾／中枢—指尖の温度較差は敗血症性ショックで増大する（一方、末梢温の主観的評価と前腕—指尖較差は増大しない）。乳酸値および栄養療法／消化管不全と正に相関する</td><td>6時間時点の中枢—足趾温度較差 <strong>7℃以下</strong>が敗血症性ショックからの蘇生成功と独立して関連</td></tr>
+<tr><td>末梢灌流／体温</td><td>未分化／混合ショック</td><td>3</td><td>低〜高</td><td>指尖温はショックで低下する。温かい末梢皮膚は高心拍出量型ショックを高い陽性・陰性的中率で予測する。<strong>ただし前腕—指尖の温度較差はショックの有無で差がない</strong></td><td>—</td></tr>
+<tr><td>CRT</td><td>敗血症性ショック</td><td>4</td><td>低〜中等度</td><td>CRTは敗血症性ショックで延長し、内臓臓器の低灌流・乳酸値・SOFAスコア・栄養療法／消化管不全と正に相関する</td><td>6時間時点のCRT <strong>4秒以下</strong>が敗血症性ショックからの蘇生成功と関連</td></tr>
+<tr><td>CRT</td><td>未分化／混合ショック</td><td>2</td><td><strong>高</strong></td><td><strong>CRTは未分化ショックの有無で差がなかった</strong>が、SOFAスコアとは正に相関した。素早いCRTは高心拍出量型ショックを高い陽性・陰性的中率で予測する</td><td>—</td></tr>
+<tr><td>網状皮斑</td><td>敗血症性ショック</td><td>3</td><td>低〜中等度</td><td>網状皮斑は尿量と負に相関し、乳酸値・腎低灌流・SOFAスコア・栄養療法／消化管不全と正に相関する</td><td>—</td></tr>
+<tr><td>ショック指数</td><td>出血性ショック</td><td>1</td><td>中等度</td><td>ショック指数、とくに<strong>呼吸数補正ショック指数</strong>は、潜在性（occult）出血性ショックの存在を予測する</td><td>—</td></tr>
+<tr><td>ショック指数</td><td>心原性ショック</td><td>6</td><td>低〜高</td><td>ショック指数 0.7以上は心原性ショックでよくみられる。0.8以上は心原性ショックの有意な予測因子である。ショック指数は心原性ショックの重症度と直接相関する</td><td><strong>0.7以上／0.8以上</strong></td></tr>
+</tbody></table></div>
+<p><strong>この表から読み取れること（本文には書かれていない、表の算術）</strong>：徴候×ショック型の枠に付いた研究数を合計すると <strong>33</strong> になるが、組み入れ研究は25本である。したがって1本の研究が複数の徴候（あるいは複数の型）に計上されている。個々の研究がどこに重複計上されたかは Supplementary Tables 2–4 を見ないと分からない。</p>
+<h3>6. ベッドサイドで手が動く粒度 — どの徴候をどう取るか 🩺</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>分離の明示 以下のうち、<strong>閾値と方向性（何秒・何℃・何回/分）は Figure 1 に記載された論文の内容</strong>である。一方、測定手技の細部（どの指で、何秒圧迫し、どこにプローブを当てるか）は本論文に記載が無く、一般的な背景知識として補ったものである。両者を混ぜないよう、以下では手技を「【手技・論文外】」と明示する。</p>
+</div>
+<p><strong>① 末梢灌流／体温（有効／敗血症性ショック4研究・未分化3研究）</strong></p>
+<ul><li>論文が支持したのは <strong>中枢—足趾／中枢—指尖の温度較差</strong>。主観的な「末梢が冷たいか」の評価と前腕—指尖較差は、敗血症性ショックで増大しなかった。</li><li>到達目標として使えるのは <strong>6時間時点の中枢—足趾較差 7℃以下</strong>（蘇生成功と独立して関連）。</li><li>未分化ショックでは、<strong>温かい末梢＝高心拍出量型ショック</strong>を高い陽性・陰性的中率で予測する（＝「温かいから大丈夫」ではない。分布性ショックを示唆する）。</li><li>【手技・論文外】深部体温は膀胱温・食道温・血液温など施設の標準を1つに固定し、足趾温は第1趾の背側に表面温度プローブをテープ固定して同時記録する。掛け物・室温・末梢を温める処置で値が動くため、測定条件を記録に残す。</li></ul>
+<p><strong>② CRT（有効／敗血症性ショック4研究・未分化2研究）</strong></p>
+<ul><li>敗血症性ショックでは延長し、内臓低灌流・乳酸・SOFA と正相関。<strong>6時間時点で4秒以下</strong>が蘇生成功と関連。</li><li>未分化／混合ショックの2研究（バイアス高）では、CRTはショックの有無を区別しなかった。<strong>敗血症で使う指標であって、原因不明のショックの鑑別に使う指標ではない</strong>、というのが本レビューの読み方。</li><li>【手技・論文外】測定部位・圧迫時間・判定方法を施設で1通りに固定する（例：示指遠位指節の掌側を白色化するまで圧迫し10秒保持、解除から色調が戻るまでの秒数）。測る人によるばらつきが大きい指標なので、手技の統一そのものが精度を作る。</li></ul>
+<p><strong>③ 網状皮斑（有効／敗血症性ショック3研究）</strong></p>
+<ul><li>尿量と負に相関し、乳酸・腎低灌流・SOFA・栄養療法／消化管不全と正に相関。</li><li>【手技・論文外】膝蓋骨を中心にどこまで広がっているかで段階評価する運用が一般的。掛け物を外し、両膝を明るい照明下で見る。色素性病変・末梢血管疾患・寒冷曝露は偽陽性になりうる。</li></ul>
+<p><strong>④ ショック指数（有効／出血性1研究・心原性6研究）</strong></p>
+<ul><li>心拍数 ÷ 収縮期血圧。<strong>0.7以上は心原性ショックでよくみられ、0.8以上は有意な予測因子</strong>、重症度と直接相関。</li><li>出血性では、<strong>呼吸数補正ショック指数</strong>が潜在性ショックを予測。</li><li>敗血症性ショックでの研究は本レビューに1件も組み入れられていない。</li><li>【手技・論文外】ペーシング調律・β遮断薬内服・妊娠・高齢者では心拍応答が鈍り、指数が上がらないまま循環不全が進行しうる。</li></ul>
+<p><strong>⑤ 頻脈（支持は少数／各型1〜2研究）</strong></p>
+<ul><li>敗血症ではピーク心拍数が敗血症性ショック発症と関連（1研究）。出血性は<strong>120回/分以上</strong>が高度出血と関連（1研究・バイアス高）。心原性は100回/分以上が一般的で、心拍数が重症度と正相関（2研究）。</li></ul>
+<p><strong>⑥ 頻呼吸（支持は少数／敗血症性3研究）</strong></p>
+<ul><li><strong>24回/分以上</strong>が敗血症性ショックでよくみられる、という記述にとどまる。「よくみられる」は診断精度ではない。</li></ul>
+<p><strong>⑦ 尿量（支持は少数／敗血症性1・心原性2研究）</strong></p>
+<ul><li>敗血症性は「栄養療法・消化管不全のある患者で尿量低下が多い」という、ショックそのものより併存病態に紐づく所見。心原性では乏尿が多く短期死亡と正相関。</li></ul>
+<p><strong>⑧⑨⑩ 意識状態の変化・発汗・末梢動脈の触知の質（各 n = 0）</strong></p>
+<ul><li>公表エビデンスが同定できなかった。<strong>「否定された」のではなく「調べられていない」</strong>。</li></ul>
+<h3>7. 限界 ⚠️</h3>
+<p><strong>著者が本文で明示した限界は2点だけである。</strong></p>
+<ol><li><strong>量的メタ解析ができなかった</strong>：組み入れ研究間で統計手法が不均質だったため、研究結果を質的に統合せざるを得なかった。→ 効果量も信頼区間も算出されていない。</li><li><strong>代償性・潜在性ショックへの価値が結論できなかった</strong>：大半の研究が、典型的には動脈性低血圧の存在に依拠する標準的なショック定義を用いていたため。→ 本論文が最も知りたかった問い（血圧が下がる前に臨床徴候で拾えるか）に、本論文は答えられていない。</li></ol>
+<p><strong>以下は著者が「限界」として列挙してはいないが、方法の記述から読み取れる制約</strong>（本ノートの読み手向けに分離して記す）。</p>
+<ul><li>MEDLINE 単独検索：Embase・Cochrane・Web of Science は使われていない。ハンドサーチで補ってはいる。</li><li>英語のみ／成人（≥19歳）のみ：これらは除外基準・組入基準として宣言されたもので、著者は限界として挙げていない。</li><li>Letter形式：本文が3ページに圧縮されており、個別研究の一覧・バイアス評価・PRISMAフローがすべて電子付録に追い出されている。</li><li>著者らの結び：単一の、そしてとくに複数の臨床徴候を組み合わせた場合の予測的価値を理解するには、さらなる研究が必要。</li></ul>
+<h2>🔍 既存ノートとの整合（今回のPDF照合で判明した旧記述の誤り）</h2>
+<p>今回、原著PDFと Figure 1 を1枠ずつ照合した結果、<strong>旧版（100行の概要ノート）に以下の不正確な点があった</strong>。すべて本改稿で修正済み。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧ノートの記述</th><th>PDFの実際</th><th>影響</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「主要結果」の表を10行にし、そこに「末梢灌流／温度の低下」を入れつつ、事前規定リストにあった<strong>末梢動脈の触知（peripheral pulse）を落としていた</strong></td><td>本文の10徴候リストには peripheral pulse が入っており、Figure 1 には Peripheral Perfusion/Temperature が入っている。<strong>原著の中で項目名がずれている</strong></td><td>表は結果的にFigure 1と一致していたが、原著内の不整合を素通りしていた。JCの論点として最重要</td></tr>
+<tr><td>2</td><td>「Fig. 1 と Supplementary Tables 2–4 に含まれる性能指標は本文に記載されておらず、本ノートに転記できていない」</td><td><strong>Figure 1 はPDF 2ページ目に全文含まれており転記可能</strong>。転記できないのは Supplementary Tables 2–4 のみ</td><td>転記可能な情報（研究数・バイアス・閾値・所見の方向）を丸ごと落としていた。本改稿で全10枠を Table 1 に起こした</td></tr>
+<tr><td>3</td><td>「有効な4徴候」を型を問わない一律の結論として提示</td><td><strong>ショック指数は心原性6研究＋出血性1研究のみで、敗血症性ショックの研究はゼロ</strong>。CRTは未分化ショックの2研究で差が出なかった</td><td>「敗血症にショック指数を」「原因不明のショックにCRTを」という誤った外挿を招く</td></tr>
+<tr><td>4</td><td>「ショック指数 ≥0.7〜0.8 は簡単に計算でき、有効な指標として支持された。当院で採用しやすい」</td><td>支持されたのは心原性・出血性の文脈のみ</td><td>当院の敗血症早期認知への転用根拠にはならない</td></tr>
+<tr><td>5</td><td>「末梢灌流／温度の低下＝有効」とのみ記載</td><td>Figure 1 は<strong>末梢温の主観的評価と前腕—指尖較差は敗血症性ショックで増大しなかった</strong>と明記し、支持したのは<strong>中枢—足趾／中枢—指尖較差</strong>に限られる</td><td>「触って冷たい」を根拠にすると本論文の支持から外れる。実務上いちばん効く訂正</td></tr>
+<tr><td>6</td><td>6時間時点の閾値（中枢—足趾較差 7℃以下、CRT 4秒以下）の記載なし</td><td>Figure 1 に明記されている</td><td>蘇生の到達目標として使える具体値が欠けていた</td></tr>
+<tr><td>7</td><td>「英語の報告のみ」等を limitation として著者の2点と並べて記載</td><td>著者が明示した限界は2点のみ。英語限定・成人限定は<strong>除外/組入基準</strong></td><td>著者の主張と評者の補足が混在していた。本改稿で分離</td></tr>
+<tr><td>8</td><td>論文本文PDFの埋め込み・ビジュアル資料枠が無かった</td><td>—</td><td>テンプレート未準拠</td></tr>
+</tbody></table></div>
+<p><strong>書誌情報について</strong>：<code>doi</code>（10.1007/s00134-023-07213-6）、<code>published</code>（2023）、<code>journal</code>（Intensive Care Medicine）、<code>title_en</code> はいずれもPDFと一致しており訂正不要だった。巻・号・ページはPDF紙面に印字が無いため、記載しない（捏造しない）。ファイル名の「10徴候」も原文 "ten clinical signs" と一致しており、リネーム不要と判断した。</p>
+<p><strong>他ノートとの矛盾</strong>：同フォルダの ESICM コンセンサス（2014）は本論文の引用[3]そのものであり、本論文はその推奨の実証的裏付けを点検した立場にある。矛盾ではなく上下関係として読むのが正しい。</p>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>参照基準の循環と自己矛盾</strong>。著者は「臨床徴候のみでショックを定義した研究」を除外した。方法論的には正しいが、その結果、参照基準は低血圧ベースの定義になった。すると本レビューが評価しているのは「低血圧を伴うショックに、これらの徴候がどれだけ随伴するか」であって、ESICM が期待した「低血圧の前に組織低灌流を捉えられるか」ではない。著者自身が限界②で認めているが、この一点でレビューの問いと答えがすれ違っている。</li><li><strong>「有効な指標」という言葉の中身が薄い</strong>。Figure 1 の記述の多くは「common in（よくみられる）」「positively correlated with（正に相関する）」であり、診断精度でも予測性能でもない。「敗血症性ショックで頻呼吸がよくみられる」は、頻呼吸を見たときにショックである確率を何も語らない。相関と診断能を分けて読むべき。</li><li><strong>研究数が極端に少ない</strong>。有効とされた4徴候ですら、型ごとに1〜6研究。ショック指数の心原性6研究が最多で、それ以外は1〜4研究である。25研究・67,894名という総数は印象的だが、1つの徴候×1つの型に割り当てられる研究は数本にすぎない。</li><li><strong>n = 0 の3徴候の解釈</strong>。意識状態の変化・発汗・末梢動脈の触知の質は「エビデンスがない」だけで、「役に立たない」ではない。とくに意識状態の変化は多くの早期警告スコアに組み込まれており、MEDLINE単独・英語限定・成人限定・観察研究限定という検索の枠が、既存知見を取りこぼした可能性を吟味する価値がある。</li><li><strong>検索の網が1データベース</strong>。19,655件から25本という絞り込み率（0.13%）は、検索式が広く網羅的だったことを示すが、MEDLINE以外を引いていない以上、EmbaseにしかないヨーロッパのICU研究などが漏れている可能性は残る。</li><li><strong>バイアスリスクの粒度</strong>。「全体として中等度」とまとめられているが、Figure 1 を見ると 出血性ショックの頻脈（1研究）と未分化ショックのCRT（2研究）は高リスクである。高リスク研究に依拠した所見（未分化ショックでCRTが差を出さなかった）を、そのまま結論に使ってよいかはJCの論点になる。</li><li><strong>Letterという器の限界</strong>。事前登録され PRISMA 準拠で行われた系統的レビューが、3ページのLetterとして出版されている。個別研究の一覧・PRISMAフロー・バイアス評価がすべて電子付録にあり、本文だけでは追試も検証もできない。査読付きの systematic review としてフルペーパーで出ていれば、感度・特異度が本文に載った可能性がある。</li><li><strong>臨床への実装のギャップ</strong>。有効とされた4つのうち3つ（末梢温較差・CRT・網状皮斑）は測定者間のばらつきが大きい。本レビューは測定手技の標準化については何も述べていない。「有効な指標」を採用する前に、院内で測り方を固定する作業が必ず要る。</li></ol>
+<h2>📚 主要引用文献一覧（本文が引用した5件）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>[1]</td><td>循環性ショックの総説。ショック＝不十分な酸素供給・利用をもたらす循環不全の臨床表現型という位置づけの出所</td><td>Vincent JL, De Backer D. Circulatory shock. *N Engl J Med* 2013;369:1726–1734. doi:10.1056/NEJMra1208943</td></tr>
+<tr><td>[2]</td><td>Sepsis-3。敗血症・敗血症性ショックの第3回国際コンセンサス定義</td><td>Singer M, Deutschman CS, Seymour CW, et al. *JAMA* 2016;315:801–810. doi:10.1001/jama.2016.0287</td></tr>
+<tr><td>[3]</td><td><strong>本論文が点検した対象</strong>。ESICM タスクフォースによる循環性ショックと血行動態モニタリングのコンセンサス。「低血圧は必須でない／臨床徴候で組織低灌流を検出せよ」の出所</td><td>Cecconi M, De Backer D, Antonelli M, et al. *Intensive Care Med* 2014;40:1795–1815. doi:10.1007/s00134-014-3525-z</td></tr>
+<tr><td>[4]</td><td>PRISMA 2020 声明。報告の枠組み</td><td>Page MJ, McKenzie JE, Bossuyt PM, et al. *BMJ* 2021;372:71. doi:10.1136/bmj.n71</td></tr>
+<tr><td>[5]</td><td>Newcastle–Ottawa Scale。非ランダム化研究のバイアス評価尺度</td><td>Wells GA, Shea B, O'Connell D, et al. (2000)（2023年5月11日アクセス）</td></tr>
+</tbody></table></div>
+<p>引用[3]は本Vaultに <span class="wl">循環性ショックと血行動態モニタリングに関するコンセンサス（ESICM・ICM2014）</span> としてノートがある。その後継にあたる <span class="wl">循環性ショックと血行動態モニタリング ESICMガイドライン2025（50推奨・ICM2025）</span> も参照するとよい。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ESICM が「ショックの検出に使え」と推奨した10の臨床徴候のうち、<strong>実証的に支持されたのは末梢灌流／体温・CRT・網状皮斑・ショック指数の4つだけ</strong>。<mark class="hl">意識状態の変化・発汗・末梢動脈の触知の質は、研究が1件も存在しなかった</mark>。</p>
+</div>
+<ul><li><mark class="hl"><strong>末梢温は「触った感じ」ではなく中枢—足趾の温度較差で測る</strong>。主観的評価と前腕—指尖較差は、敗血症性ショックで増大しなかった</mark>。</li><li><mark class="hl"><strong>CRTは敗血症性ショックの指標であって、原因不明のショックの鑑別には使えない</strong>（未分化ショック2研究で差が出ていない）</mark>。</li><li><mark class="hl"><strong>ショック指数を敗血症の早期認知に転用しない</strong>。支持したのは心原性6研究と出血性1研究で、敗血症性ショックの研究はゼロ</mark>。</li><li><strong>蘇生の6時間チェックに使える具体値</strong>：中枢—足趾温度較差 7℃以下、CRT 4秒以下。</li><li><strong>頻脈・頻呼吸・尿量低下</strong>は支持研究がごく少数。ただしこれをRRS起動基準の削減根拠にしてはならない（「拾える」と「ショックの指標として妥当」は別）。</li><li>本レビューの記述の多くは「よくみられる」「正に相関する」であって<strong>診断精度ではない</strong>。感度・特異度・尤度比は本論文のどこにも載っていない。</li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>血圧は保たれているが「ショックかもしれない」</td><td>膝の網状皮斑、示指のCRT、中枢—足趾温度較差</td><td>皮膚所見が陽性なら乳酸を測り、低血圧を待たずに評価を進める。本論文は代償性ショックでの妥当性を示していないので、これは推論であることを自覚する</td></tr>
+<tr><td>敗血症性ショックの蘇生中、6時間経過</td><td>CRT（4秒以下か）、中枢—足趾温度較差（7℃以下か）</td><td>到達していれば蘇生成功と関連する所見。到達していなければ灌流の再評価（心拍出量・血管作動薬・輸液反応性）へ</td></tr>
+<tr><td>原因不明（未分化）のショック</td><td>CRTだけで判断していないか</td><td>CRTは未分化ショックの有無を区別しなかった。エコー・乳酸・病歴で原因を絞る作業に戻す</td></tr>
+<tr><td>末梢が温かい</td><td>高心拍出量型ショックの可能性</td><td>「温かいから大丈夫」ではない。分布性ショックとして評価する（高い陽性・陰性的中率で予測されたと報告）</td></tr>
+<tr><td>外傷・消化管出血・心原性の初期トリアージ</td><td>心拍数 ÷ 収縮期血圧</td><td>0.7以上／0.8以上を閾値に。出血性では呼吸数補正ショック指数が潜在性ショックを予測</td></tr>
+<tr><td>敗血症の早期認知にショック指数を使いたい</td><td>本レビューに敗血症性ショックのショック指数研究はあるか</td><td>無い。使うなら本論文以外の根拠を用意する</td></tr>
+<tr><td>意識障害・発汗・脈が弱い</td><td>これらの徴候にエビデンスはあるか</td><td>研究ゼロ。所見として記録はするが、単独で判断の根拠にしない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

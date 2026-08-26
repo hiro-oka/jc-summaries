@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>中心静脈圧（CVP）の測定と解釈（ICM2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06835-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">中心静脈圧（CVP）の測定と解釈（ICM2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Hamzaoui O, Teboul JL. Central venous pressure (CVP). Intensive Care Med. 2022;48:1498–1500. doi:10.1007/s00134-022-06835-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2022-08-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06835-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06835-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Central venous pressure (CVP)</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06835-6.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06835-6.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06835-6.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>CVPを「輸液を入れるか決める数字」として使わない</strong>。本論文は、CVPが輸液反応性を予測できないことを明言している。輸液の可否は動的テスト（PLR・EEO・Vtチャレンジ等）で判断する。</li><li><strong>一方でCVPを測るのはやめない</strong>。ショック患者には中心静脈カテーテルを入れているのだから、①右室機能障害の察知、②臓器灌流の下流圧（MPP）の計算、という2用途に使う。</li><li>==<strong>乏尿・AKI進行のときは MAP だけでなく MPP = MAP − CVP を計算し、60 mmHg を下回っていないか確認する</strong>==。下回っていて CVP が高いなら、まず CVP を下げる手（除水・利尿・PEEP見直し・右室後負荷の是正）を優先し、昇圧薬で MAP を上げるのは次善策と位置づける（MAP を上げても静脈うっ血は解けない）。</li><li><strong>ゼロ点合わせを手技として教育する</strong>。トランスデューサーは右房中点＝胸骨角から垂直に 5 cm 下（phlebostatic point）。体位変換のたびに合わせ直す。わずかな高さのずれが解釈を変える。</li><li><strong>読み取りは呼気終末</strong>。自発呼吸なら波形の最高値付近、人工呼吸なら最低値付近。一回換気量 6〜8 mL/kg ならモニターの平均値表示で代用してよい（呼気終末値を 1 mmHg 過大評価するだけ）。</li><li><strong>PEEP をかけているときは経壁CVPを意識する</strong>。右室機能の評価には経壁CVP、MPP の計算には実測CVP、と用途で使い分ける。</li><li><strong>PICCでの測定は本論文の想定外</strong>。本文が要求するのは「液体充填の中心静脈カテーテル＋電子圧トランスデューサ＋連続波形表示モニター」で、先端は右房上流の上大静脈内。ルートが長い PICC の圧測定精度については本論文に記載がなく、可能なら通常の中心静脈カテーテルを用いる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：CVP はつい最近まで輸液療法をガイドする指標として最も好まれていた（FENICE study が世界的な実態を示した）。しかし 2016 年版 Surviving Sepsis Campaign ガイドラインが敗血症患者の輸液管理のガイドとして CVP を推奨しなくなって以降、関心は急速に薄れた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：「輸液のガイドに使えない」ことと「測る価値がない」ことは別である。にもかかわらず両者が混同され、CVP そのものが臨床から消えつつあった。CVP を何に使えばよいのか、どう測れば解釈に耐えるのかが、実務レベルで共有されていなかった。</li><li><strong>What's new（本論文の新規性・意義）</strong>：CVP を「輸液反応性の指標」という座から降ろしたうえで、<strong>①右室充満圧としての解釈</strong>と<strong>②臓器灌流の下流圧としての解釈</strong>という2つの役割に整理し直した。あわせて、測定の質（先端位置・ゼロ点・呼気終末・PEEP補正）を誤ると解釈が破綻することを具体的な数値で示している。新規データを出す研究論文ではなく、既存知見を臨床の使いどころに再配置した解説である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで CVP は輸液反応性の予測には使えないが、<strong>右室機能障害の察知</strong>と<strong>平均臓器灌流圧（MPP = MAP − CVP）</strong>という2つの用途では今なお極めて重要であり、そのどちらも<strong>正しく測れていること</strong>が前提になる。</p>
+</div>
+<ul><li><strong>背景</strong>：CVP は輸液療法のガイド指標として好まれてきたが、SSCG2016 以降に関心が低下した。しかし CVP は、Frank–Starling 機構を介した心機能全体の主要決定因子であると同時に、静脈還流と臓器灌流の下流圧でもあり、血行動態の要となる変数である。</li><li><strong>測定の前提</strong>：液体充填の中心静脈カテーテル＋電子圧トランスデューサ＋連続圧波形表示モニター。先端は右房の上流の上大静脈内。</li><li><strong>ゼロ点</strong>：右房中点。<strong>胸骨角から垂直に 5 cm 下</strong>の点が最も適切。わずかな水平合わせの誤差でも解釈に重大な影響が出る（Fig. 1）。</li><li><strong>タイミング</strong>：呼気終末（胸腔内圧＝上大静脈周囲の圧が最低となる時点）。自発呼吸では波形の最高値付近、人工呼吸では最低値付近。呼気が能動的なら呼気の早期で読む。一回換気量が高くない（6〜8 mL/kg）ならモニター表示の平均値でも許容でき、呼気終末値を <strong>1 mmHg</strong> 過大評価するにとどまる。</li><li><strong>PEEP 補正</strong>：PEEP 下では呼気終末の胸腔内圧が陽性になる。経壁CVP＝呼気終末CVP − 呼気終末胸腔内圧。胸腔へ伝播する PEEP は <strong>PEEP 10 cmH2O で最大 4 mmHg</strong> に達しうる。伝播率は（吸気終末CVP − 呼気終末CVP）÷（気道プラトー圧 − PEEP）で推定でき、これに PEEP を掛けて伝播 PEEP を求める。ただしこの方法は CVP では<strong>PAOP ほど検証されていない</strong>。</li><li><strong>右室充満圧としての解釈</strong>：経壁CVPが得られていれば CVP は右室充満圧を反映する。経壁CVP高値は右室機能障害を示唆し、心エコーで機序を確認すべき。Vieillard-Baron らは<strong>右室拡大 ＋ CVP ≥ 8 mmHg</strong> で右室不全を定義することを提案した。急性の原因として心タンポナーデ、重症肺塞栓、広範な右室虚血、緊張性気胸。</li><li><strong>輸液反応性</strong>：CVP も、その変化も、<strong>輸液反応性の予測には使えない</strong>。CVP は前負荷の静的指標であり、同じ CVP 値が、心収縮性次第で（Frank–Starling 機構を介して）前負荷反応性ありとも、なしとも両立するため。</li><li><strong>臓器灌流の下流圧としての解釈</strong>：脳・腎など大半の重要臓器の灌流の下流圧が CVP であり、平均灌流圧 <strong>MPP = MAP − CVP</strong>。この用途では<strong>経壁CVPではなく実測CVP</strong>を用いる。Ostermann らは、MAP ではなく MPP が AKI 進行と独立に関連し、<strong>カットオフ 60 mmHg</strong> と報告した。</li><li><strong>CVP高値への対処の順序</strong>：CVP高値で MPP が不足しているなら、<strong>まず CVP を下げる</strong>のが最善（静脈うっ血のリスクも同時に下がる）。速やかに下げられないときは MAP を上げて MPP を回復させるが、この手では<strong>静脈うっ血は防げない</strong>。CVP は肺リンパ管の下流圧でもあるため、CVP高値は肺リンパ流と肺水腫の吸収を低下させうる。</li><li><strong>Supplementary Table 1</strong> が本文中で参照されているが、これは電子付録であり<strong>本PDF（3ページ）には含まれない</strong>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — CVPとは何を測っている数字か（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>中心静脈圧（central venous pressure, CVP）</strong>は、上大静脈〜右房入口部の圧である。臨床では中心静脈カテーテルの内腔を液体で満たし、その先に圧トランスデューサ（圧を電気信号に変える素子）をつないでモニターに連続波形として表示する。</p>
+<p>CVP には<strong>2つの顔</strong>がある。</p>
+<ol><li><strong>右室の充満圧（前負荷）としての顔</strong>。右室に血液を押し込む圧なので、右室が硬い・拡張しにくい・後負荷が高いといった状態では上がる。</li><li><strong>下流圧としての顔</strong>。静脈還流にとっても、脳や腎など臓器の灌流にとっても、CVP は「出口側の圧」である。出口の圧が高ければ、同じ入口の圧（MAP）でも臓器を通る圧較差は小さくなる。</li></ol>
+<p><strong>用語の整理</strong>（初出で一言ずつ）。</p>
+<ul><li><strong>経壁圧（transmural pressure）</strong>：血管や心腔の「内圧 − 外圧」。CVP の外圧は胸腔内圧なので、経壁CVP＝CVP − 胸腔内圧。心臓を膨らませる真の力はこちら。</li><li><strong>Frank–Starling 機構</strong>：心筋は伸ばされるほど強く収縮する。同じ前負荷でも、収縮性が高い心臓は曲線の平坦部に、低い心臓は上行部にいる。だから<strong>充満圧の値だけでは、輸液を入れて心拍出量が増えるかどうかが決まらない</strong>。</li><li><strong>PAOP（肺動脈閉塞圧）</strong>：肺動脈カテーテルのバルーンを膨らませて測る左房充満圧の代用値。本論文では、PEEP の胸腔伝播率を推定する方法の「検証済みの先例」として登場する。</li><li><strong>MPP（mean perfusion pressure, 平均灌流圧）</strong>：MAP − CVP。臓器を血液が通り抜ける正味の圧較差。</li><li><strong>静脈うっ血（venous congestion）</strong>：静脈側の圧が高く、臓器から血液が出ていけない状態。腎うっ血が AKI の一因になる。</li></ul>
+<p><strong>本論文にない一般的背景知識（区別のため明示する）</strong>：静脈還流量は概ね（平均体循環充満圧 Pmsf − CVP）÷ 静脈抵抗で表され、<mark class="hl">CVP が上がると静脈還流は減る</mark>。本論文は CVP を「静脈還流の下流圧」と述べるにとどまり、この式そのものは書いていない。関連は <span class="wl">Volume（前負荷）と心拍出量・静脈還流の関係（Magderレビュー）</span> と <span class="wl">平均体循環充満圧（Pmsf）Part1</span> を参照。</p>
+</div>
+<h3>2. 背景と目的 📉</h3>
+<p>CVP は<strong>つい最近まで、輸液療法をガイドするために最も好まれる変数</strong>であった（Cecconi らの FENICE study が世界的な実態を示した）。しかしここ数年で CVP への関心は低下しており、その主因は <strong>2016年版 Surviving Sepsis Campaign（SSC）ガイドライン</strong>が、敗血症患者の輸液管理をガイドする指標として CVP をもはや推奨しなくなったことにある。</p>
+<p>それでもなお CVP は要となる血行動態変数である、と著者らは述べる。理由は2つ挙げられている。</p>
+<div class="tw"><table>
+<thead><tr><th>CVP が要である理由</th><th>説明（原文に即して）</th></tr></thead>
+<tbody>
+<tr><td>心機能全体の主要決定因子</td><td>Frank–Starling 機構を介して、心機能全体を決める主要因子となる</td></tr>
+<tr><td>静脈系の状態を表す</td><td>静脈還流の下流圧であり、かつ臓器灌流の下流圧でもある</td></tr>
+</tbody></table></div>
+<p>本論文の目的は、<strong>ショック患者の血行動態を最大限に評価し、適切な治療選択を行ううえで CVP 測定がいかに重要かを強調すること</strong>である。この一文の末尾に <code>(Supplementary Table 1)</code> の参照が置かれている。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Supplementary Table 1 は本PDFに含まれない 本文はショック患者の血行動態評価と治療選択を整理した表として Supplementary Table 1 を参照しているが、<mark class="hl"><strong>この表は電子付録であり、手元の3ページのPDF本体には収載されていない</strong></mark>（PyMuPDF で全3ページを確認済み）。この付録は、初回オンライン公開時に添付漏れとなり、後日 Correction で追加されたものである（<span class="wl">中心静脈圧（CVP）の訂正（Correction・ICM2022）</span>）。勉強会で本論文を配布する場合、<strong>PDF だけでは表が欠ける</strong>点に注意する。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：<strong>該当なし</strong>。本稿は Special Issue Insight（招待解説）であり、研究デザイン・対象・介入・アウトカム・統計解析のいずれも存在しない。新規データの提示もない。</li><li><strong>論拠の性質</strong>：既存文献 15 本を引用した専門家による整理である。したがって推奨の強さや確実性のグレーディングは付されていない。</li><li><strong>本ノートでこの項を空欄にしない理由</strong>：ジャーナルクラブで「Methods が読み取れなかったのか、そもそも無いのか」を区別できるようにするため。</li></ul>
+<h3>4. CVP は正しく測られなければならない 🩺</h3>
+<p>著者らはまず「CVP を正しく解釈するための基本的な前提は測定の質であり、誤差の原因は数多く存在する」と述べる。</p>
+<p><strong>■ 機器と先端位置</strong></p>
+<ul><li>液体充填の中心静脈カテーテル（fluid-filled central venous catheter）を、電子圧トランスデューサに接続し、連続的な圧波形を表示するモニターにつなぐ。</li><li>カテーテル<strong>先端は、右房の上流にあたる上大静脈内</strong>に位置させる。</li></ul>
+<p><strong>■ ゼロ点（トランスデューサーの高さ）</strong></p>
+<ul><li>トランスデューサは<strong>右房中点</strong>の高さに置く。</li><li><strong>胸骨角から垂直に 5 cm 下</strong>の点が最も適切と思われる、と本文は述べる（<code>seems to be the most suitable</code>＝断定ではない）。</li><li>水平合わせ（levelling）が適切であることは決定的に重要で、<strong>わずかな誤差でも CVP の解釈に重大な帰結をもたらしうる</strong>。</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06835-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06835-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. トランスデューサーの水平合わせ（原図・無改変・© Springer Nature） 仰臥位の患者を左向きの側面から描いた線画。胸郭は肋骨の輪郭で表され、その中央やや上方に<strong>青い点</strong>が打たれ、そこから上へ引き出し線が伸びて上部のボックスに <code>The phlebostatic point at 5 cm below the sternal angle</code>（胸骨角から 5 cm 下の phlebostatic point）と記されている。青い点のすぐ左側には<strong>赤い破線の縦線</strong>が引かれ、この点の高さを示すレベル線として機能する。右下からは<strong>青い2本のライン（カテーテル・輸液ライン）</strong>が体幹へ入り、その接続部に<strong>黄色の三角形（トランスデューサ）</strong>が描かれ、そこから<strong>黄色の太い曲線矢印</strong>が胸郭内の青い点へ向かって伸びている。すなわち「トランスデューサの高さを、胸骨角から垂直 5 cm 下の点（右房中点）に合わせる」という一点だけを図解した図である。 補足：本文では <code>midpoint of the right atrium</code> と書かれ、図中では <code>phlebostatic point</code> という用語が使われている。<strong>両者は同じ点を指している</strong>。本文中に phlebostatic point の語は出てこないため、用語は図でのみ与えられている。</p>
+</div>
+<p><strong>■ 読み取りのタイミング</strong></p>
+<p>CVP は<strong>呼気終末</strong>で読む。理由は、呼気終末が「上大静脈を取り巻く圧である胸腔内圧が最も低くなる時点」だからである。ただし波形上のどこが呼気終末かは、呼吸様式で逆転する。</p>
+<h4>Table. 呼吸様式別の呼気終末の読み方（原文を表に整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>呼吸様式</th><th>呼気終末に対応する波形上の位置</th><th>根拠・注記</th></tr></thead>
+<tbody>
+<tr><td>自発呼吸</td><td>曲線に見える<strong>最高値</strong>に近い値</td><td>吸気で胸腔内圧が下がるため、呼気終末が最も高くなる</td></tr>
+<tr><td>能動的（努力性）呼気</td><td><strong>呼気の早期</strong>で測るのが望ましい</td><td>腹筋・呼吸筋の収縮が呼気中の胸腔内圧を上げてしまうため</td></tr>
+<tr><td>人工呼吸</td><td>曲線に見える<strong>最低値</strong>に近い値</td><td>吸気で胸腔内圧が上がるため、自発呼吸と逆になる</td></tr>
+<tr><td>人工呼吸・一回換気量が高くない（6〜8 mL/kg）</td><td>モニター表示の<strong>平均値</strong>でも許容できる</td><td>平均値は呼気終末値を<strong>わずか 1 mmHg 過大評価</strong>するにとどまる</td></tr>
+</tbody></table></div>
+<p><strong>■ PEEP がかかっているときの補正（経壁CVP）</strong></p>
+<p>PEEP を用いていると、<strong>呼気終末の胸腔内圧が陽性</strong>になる。したがって経壁CVP（＝呼気終末CVP − 呼気終末胸腔内圧）を推定するには、<strong>胸腔へ伝播した PEEP の値で補正</strong>する必要がある。</p>
+<ul><li>胸腔に伝わる PEEP は、<strong>PEEP 10 cmH2O のとき 4 mmHg にも達しうる</strong>（原文 <code>could be as high as 4 mmHg</code>＝上限としての値であり、平均値でも代表値でもない）。</li><li><strong>伝播率の推定式</strong>（PAOP で示されたことからの類推）：</li></ul>
+<p>気道内圧の胸腔への伝播率（％）＝（<strong>吸気終末CVP − 呼気終末CVP</strong>）÷（<strong>気道プラトー圧 − PEEP</strong>）</p>
+<ul><li>この伝播率に PEEP 値を掛けると、<strong>伝播 PEEP</strong> が推定できる。</li><li><strong>限界</strong>：この方法は CVP を用いた先行研究（Roger らの人工呼吸患者での測定手技比較）で使われてはいるが、<mark class="hl"><strong>PAOP で検証されたほどには検証されていない</strong></mark>、と著者らは明示的に留保している。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>分数の向きを間違えない 伝播率の分子は <strong>CVP の差</strong>（吸気終末CVP − 呼気終末CVP）、分母は <strong>気道内圧の差</strong>（プラトー圧 − PEEP）である。<mark class="hl"><strong>分子と分母を逆にすると伝播率が逆数になり、伝播PEEPの推定値が桁違いになる</strong></mark>。本ノートの旧版はこの2つを「プラトー圧とPEEPの差」「吸気終末CVPと呼気終末CVPの差」の順で並べており、比の向きが逆に読める記載になっていた（下記「既存ノートとの整合」参照）。</p>
+</div>
+<h3>5. CVP の解釈 ① — 右室充満圧としての CVP 🫀</h3>
+<ul><li>CVP は<strong>右室充満圧を反映すると仮定される</strong>。ただしその前提は、<strong>経壁圧が得られていること</strong>である。</li><li><strong>経壁CVPの上昇は右室機能障害（RV dysfunction）の存在を示唆する</strong>。</li><li>この所見を得たら、臨床医は<strong>心エコーを行って確認し、原因となっている機序を突き止めるべき</strong>である、と著者らは述べる。CVP は入口であって答えではない。</li><li><strong>Vieillard-Baron らの提案</strong>：<strong>右室拡大（RV dilatation）と CVP ≥ 8 mmHg を組み合わせて右室不全（RV failure）を定義する</strong>。輸液管理に対して潜在的な意味を持つ定義である（原著は敗血症性ショックの右室不全に関する Crit Care 2020 の報告）。</li><li><strong>こうした状態を起こしうる急性病態</strong>として、本文は4つを挙げる。</li></ul>
+<h4>Table. 経壁CVP高値・右室不全を起こしうる急性病態（原文の列挙）</h4>
+<div class="tw"><table>
+<thead><tr><th>病態</th><th>補足（本文には機序の説明はない）</th></tr></thead>
+<tbody>
+<tr><td>心タンポナーデ</td><td>—</td></tr>
+<tr><td>重症肺塞栓</td><td>—</td></tr>
+<tr><td>広範な右室虚血</td><td>—</td></tr>
+<tr><td>緊張性気胸</td><td>—</td></tr>
+</tbody></table></div>
+<h3>6. CVP の解釈 ② — 輸液反応性は予測できない 🚫</h3>
+<ul><li>CVP が右室充満圧を反映するとしても、<strong>CVP（およびその変化）が輸液反応性の予測には使えないことは、いまや十分に確立している</strong>（Osman ら 2007、Marik &amp; Cavallazzi 2013 のメタ解析）。</li><li><strong>理由（本文の説明そのまま）</strong>：CVP は<strong>前負荷の静的指標（static marker of preload）</strong>である。そのため、<strong>ある1つの CVP 値が、心収縮性次第で、前負荷反応性ありとも前負荷反応性なしとも結びつきうる</strong>（Frank–Starling 機構を介して）。</li><li>著者らはこの節を次のようにまとめている：<strong>正しく測定されていれば、経壁CVP は右室機能障害の存在を疑うための良い手段であるが、輸液反応性を予測するための手段ではない</strong>。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「CVPが低いから輸液」という推論は成立しない 静的指標である以上、<mark class="hl"><strong>CVP の絶対値からも、輸液後の CVP 上昇幅からも、心拍出量が増えるかどうかは判定できない</strong></mark>。輸液の可否は動的テストで判断する。関連ノート：<span class="wl">輸液反応性予測の来歴 — 静的指標の敗北から動的テストへ（Lasting Legacy・ICM2022）</span>、<span class="wl">受動的下肢挙上（PLR）テストと輸液反応性の予測</span>、<span class="wl">人工呼吸器を使って輸液反応性を予測する — Vtチャレンジ・EEO・PEEPテスト（エディトリアル・ICM2024）</span>。</p>
+</div>
+<h3>7. CVP の解釈 ③ — 臓器灌流の下流圧としての CVP 🧠🫘</h3>
+<p>ここが旧ノートで丸ごと欠落していた節である。</p>
+<ul><li>CVP は、<strong>大半の重要臓器（例：脳、腎）の灌流の下流圧</strong>でもある。</li><li>それらの臓器の<strong>平均灌流圧（MPP）＝ 平均動脈圧（MAP） − CVP</strong>。</li><li><mark class="hl"><strong>この用途では、経壁CVPではなく「実測CVP」を用いなければならない</strong></mark>（原文 <code>the measured CVP but not the transmural CVP must be considered</code>）。臓器を出ていく血液が実際に押し返される圧は、経壁圧ではなく実測圧だからである。</li><li><strong>Ostermann らの知見</strong>：<strong>MAP ではなく MPP が、急性腎障害（AKI）の進行と独立に関連する因子</strong>であることを示し、<strong>カットオフ値 60 mmHg</strong> を報告した。</li></ul>
+<p><strong>■ MPP が不足しているときの対処の順序</strong></p>
+<div class="tw"><table>
+<thead><tr><th>順位</th><th>対処</th><th>本文の記載</th></tr></thead>
+<tbody>
+<tr><td>第一選択</td><td><strong>CVP を下げる</strong>（可能な限り）</td><td>CVP高値による MPP 不足では、CVP を下げるのが最善の選択肢。<strong>静脈うっ血のリスクも同時に下がる</strong>ため。静脈うっ血は臓器障害に寄与しうる</td></tr>
+<tr><td>次善</td><td><strong>MAP を上げて MPP を回復させる</strong></td><td>CVP を速やかに下げられない場合の代替。ただし<mark class="hl"><strong>この方法では静脈うっ血を防げない</strong></mark></td></tr>
+</tbody></table></div>
+<ul><li><strong>裏づけとなるメタ解析</strong>：Chen らの最近のメタ解析は、<strong>CVP高値が重症患者における AKI と死亡のリスク増加に関連する</strong>ことを示した。</li><li><strong>肺への影響</strong>：CVP は<strong>肺リンパ管の下流圧</strong>でもある。したがって <strong>CVP高値は肺リンパ流を低下させ、肺水腫の吸収を妨げうる</strong>。</li></ul>
+<h3>8. Take-home message（原文最終段落の全訳）📌</h3>
+<p>訂正で更新された最終段落は、原文では <code>Take-home message</code> という見出しの下に置かれている。全訳すると次の通り。</p>
+<p>&gt; 中心静脈圧は極めて重要な血行動態指標である。右室機能と平均臓器灌流圧について重要な情報を与えるからである。CVP は輸液反応性の予測には使えない。CVP を正しく解釈するための前提は測定の質であり、誤差の原因は数多く存在する。ショック患者には中心静脈カテーテルを挿入することが推奨されているのだから、それを CVP 測定に使って心血管系の状態を最大限に評価しないのは残念なことだろう。</p>
+<p>この段落は、<strong>①右室機能／②平均臓器灌流圧という2つの用途を肯定し、③輸液反応性予測としての使用を明確に否定する</strong>という本論文の構造を過不足なく畳んでいる。最後の一文（中心静脈カテーテルはどのみち入っているのだから使わないのはもったいない）が、著者らの実務的な立場を端的に示す。</p>
+<h3>9. 既存ノートとの整合 🔗</h3>
+<p>本改稿は、旧ノート（Evernote移行由来の抜き書き。frontmatter の <code>original:</code> に痕跡が残る）を原著PDF全文と1項目ずつ照合して行った。<strong>PDFを正</strong>として、食い違いを以下に列挙する。</p>
+<h4>Table. 旧記述とPDFの照合結果</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>旧ノートの記述</th><th>PDF（正）の記載</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>DOI</td><td><strong>記載なし</strong>（<code>citation: Intensive Care Medicine, 2022</code> のみ）</td><td>doi:10.1007/s00134-022-06835-6、48:1498–1500</td><td><strong>欠落</strong>。DOI照合から漏れていた。今回追記</td></tr>
+<tr><td>訂正の有無</td><td>言及なし</td><td>著作権行に <code>corrected publication 2022</code></td><td><strong>欠落</strong>。今回、版の確認として明記</td></tr>
+<tr><td>Supplementary Table 1</td><td>言及なし</td><td>導入部末尾で参照。PDF本体には未収載</td><td><strong>欠落</strong>。今回追記</td></tr>
+<tr><td>臓器灌流の下流圧の節</td><td><strong>節ごと欠落</strong>（本文が Vieillard-Baron の途中で途切れていた）</td><td>MPP = MAP − CVP、実測CVPを使う、Ostermann のカットオフ 60 mmHg、CVP を下げるのが第一選択、Chen らのメタ解析、肺リンパ流</td><td><strong>欠落</strong>。今回全面追加</td></tr>
+<tr><td>最終段落（Take-home）</td><td><strong>欠落</strong>。「CVPは輸液反応性の予測に使えない」の明示なし</td><td>Take-home message として明記</td><td><strong>欠落</strong>。今回全訳を追加</td></tr>
+<tr><td>PEEP 伝播率の比の向き</td><td>「『プラトー圧とPEEPの差』と『吸気終末CVPと呼気終末CVPの差』の比」</td><td>（吸気終末CVP − 呼気終末CVP）÷（プラトー圧 − PEEP）</td><td><strong>誤り</strong>。旧記載は分子・分母が逆に読める語順だった</td></tr>
+<tr><td>PEEP 10 cmH2O の伝播値</td><td>「PEEP 10cmH2Oで約4mmHgとも」</td><td><code>could be as high as 4 mmHg</code>（最大 4 mmHg に達しうる）</td><td><strong>不正確</strong>。「約」ではなく<strong>上限値</strong>。代表値と誤読される</td></tr>
+<tr><td>伝播率法の検証状況</td><td>「PAOP同様、…かもしれず…未検証」</td><td>CVP では先行研究で用いられたが、<strong>PAOP ほどには検証されていない</strong></td><td><strong>やや不正確</strong>。「PAOP同様」は留保の向きを弱める。正しくは「PAOP と違って検証が不十分」</td></tr>
+<tr><td>右室不全の原因病態</td><td>言及なし</td><td>心タンポナーデ・重症肺塞栓・広範な右室虚血・緊張性気胸</td><td><strong>欠落</strong>。今回追加</td></tr>
+<tr><td>Vieillard-Baron の定義</td><td>「右室拡張とCVP≧8mmHg…（途切れ）」</td><td>右室拡大＋CVP ≥ 8 mmHg で<strong>右室不全を定義</strong>し、輸液管理に潜在的含意</td><td><strong>不完全</strong>。今回補完</td></tr>
+<tr><td>経壁CVPと実測CVPの使い分け</td><td>言及なし</td><td>右室機能評価＝経壁CVP／MPP計算＝実測CVP</td><td><strong>欠落</strong>。今回追加</td></tr>
+<tr><td>「CVPは心機能と静脈還流の主な決定因子」</td><td>そう記載</td><td><strong>Frank–Starling 機構を介した</strong>心機能全体の決定因子であり、静脈還流と臓器灌流の<strong>下流圧</strong>として静脈系の状態を表す</td><td><strong>不十分</strong>。機序（Frank–Starling）と「下流圧」の語が落ちていた</td></tr>
+<tr><td>先端位置・ゼロ点・呼気終末の向き</td><td>カテーテル先端＝右房上流の上大静脈内／胸骨角から垂直 5 cm 下／自発呼吸は最高値・人工呼吸は最低値</td><td>いずれも同じ</td><td><strong>一致</strong>（生理の向きも含めて誤りなし）</td></tr>
+<tr><td>平均値の許容と誤差</td><td>6〜8 mL/kg なら平均値可、1 mmHg 過大評価</td><td>同じ</td><td><strong>一致</strong></td></tr>
+<tr><td>CVPの正常値</td><td>記載なし</td><td><strong>本論文に正常値の記載はない</strong></td><td>記載なしが正しい。<mark class="hl">本論文で数値として登場するのは CVP ≥ 8 mmHg（右室不全の定義の一部）と MPP 60 mmHg（AKI進行のカットオフ）のみ</mark></td></tr>
+<tr><td>CVP波形（a波・c波・v波、x谷・y谷）</td><td>記載なし</td><td><strong>本論文に波形成分の記載はない</strong>（連続圧波形を表示すること、および呼気終末が波形上のどこかという記述のみ）</td><td>記載なしが正しい。波形成分の解説を求めるなら別の資料に当たる</td></tr>
+</tbody></table></div>
+<p><strong>旧ノートに残っていた本人メモの扱い</strong>：旧ノートの「原本メモ（校正）」にあった本人のコメント（PICC での測定精度への懸念、CVP を知らない医師が増えているという実感）は臨床的示唆として価値があるため、上記「🏥 聖路加ICUでの実践への示唆」に統合した。</p>
+<h3>10. 批判的吟味（JCでの論点）🧐</h3>
+<ol><li><strong>「5 cm 下」の根拠が弱いことを著者自身が示している</strong>。原文は <code>seems to be the most suitable</code>（最も適切と思われる）であって、検証データに基づく断定ではない。実際には体型・体位（頭側挙上角度）で右房中点の位置は変わり、<strong>同じ患者でも角度を変えれば数 mmHg 動く</strong>。「わずかな誤差でも解釈に重大な帰結」と言いながら、その基準点の妥当性の議論は本稿にない。</li><li><strong>MPP のカットオフ 60 mmHg は単一の後ろ向き解析に依拠する</strong>。Ostermann らの報告は後ろ向き解析であり、前向き検証も、この閾値を目標に介入して転帰が改善したという RCT も存在しない。<strong>目標値として運用するには根拠が薄い</strong>。にもかかわらず数字が独り歩きしやすい形で提示されている。</li><li><strong>「CVP を下げるのが第一選択」は方法が書かれていない</strong>。除水か、利尿薬か、PEEP を下げるか、右室後負荷を減らすか——<strong>どの手段でどこまで下げるかの指針がない</strong>。実務では「下げられない」場面が多く、その場合の次善策（MAP を上げる）には「うっ血は防げない」という但し書きが付くだけで行き止まりになる。</li><li><strong>CVP高値と AKI・死亡の関連は因果ではない</strong>。引用されている Chen らのメタ解析は観察研究の統合であり、<strong>重症であるほど CVP が高くなる（交絡）</strong>可能性を排除できない。「CVP を下げれば転帰が良くなる」とは示されていない。本文はこの区別を明示していない。</li><li><strong>経壁CVPを実際に測れるのか</strong>。経壁CVPを得るには呼気終末胸腔内圧が必要で、本稿の推奨する推定法は著者自身が「PAOP ほど検証されていない」と認めている。<strong>食道内圧を測っていない大多数の施設では、右室機能評価に必要な経壁CVPは推定値の推定値になる</strong>。この実行可能性のギャップは論じられていない。</li><li><strong>右室機能の評価には結局エコーが要る</strong>。本文自身が「経壁CVP高値なら心エコーで確認せよ」と述べており、<strong>エコーを行うなら CVP を介さず直接右室を見ればよい</strong>という反論が成り立つ。CVP の付加価値は「連続監視できる」点にあるはずだが、その利点は明示されていない。</li><li><strong>Supplementary Table 1 が本文の主張の要になっている構造</strong>。「CVP をどう治療選択に結びつけるか」という本稿の目的そのものが付録の表に委ねられており、<strong>PDF 単体では論文の実務的な結論部分が読めない</strong>。しかもその付録は当初添付漏れだった。ジャーナルクラブで扱うなら付録を必ず入手する。</li><li><strong>利益相反</strong>：両著者とも血行動態モニタリング関連企業（Pulsion/Getinge、AOP ORPHAN）のアドバイザリーボードメンバーである。侵襲的モニタリングの価値を擁護する論調との関係は、読む側で意識しておく。</li><li><strong>ジャーナルクラブでの立て方</strong>：本稿単独では議論の材料が少ないため、<strong>同じ ICM 2022 特集の他稿や、CVP を再評価する後続論文とセットにする</strong>のがよい。関連：<span class="wl">CVPの忘れられた有用性（ICM2023）</span>、<span class="wl">CVPの現在の使い方と展望（Intensive Care Medicine 2025）</span>。</li></ol>
+<h3>11. 主要引用文献一覧 📚</h3>
+<p>本論文の参考文献は 15 本。すべて列挙する。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>文献</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Cecconi M, et al. FENICE study. *Intensive Care Med*. 2015;41(9):1529–1537</td><td>集中治療における輸液チャレンジの世界的実態調査。CVP が輸液指標として好まれてきた背景</td></tr>
+<tr><td>2</td><td>Rhodes A, et al. Surviving Sepsis Campaign 2016. *Intensive Care Med*. 2017;43(3):304–377</td><td>CVP を輸液管理のガイドとして推奨しなくなった版</td></tr>
+<tr><td>3</td><td>de Backer D, Vincent JL. *Crit Care*. 2018;22(1):43</td><td>「CVP を測って輸液管理をガイドすべきか — 10の質問への10の答え」</td></tr>
+<tr><td>4</td><td>Magder S. *Crit Care Med*. 2006;34(8):2224–2227</td><td>CVP は有用だがそれほど単純ではない。ゼロ点と呼気終末の議論の出典</td></tr>
+<tr><td>5</td><td>Figg KK, Nemergut EC. *Anesth Analg*. 2009;108(4):1209–1211</td><td>CVP 測定における誤差（水平合わせの重要性）</td></tr>
+<tr><td>6</td><td>Roger C, et al. *Br J Anaesth*. 2017;118(2):223–231</td><td>人工呼吸中の重症患者における CVP 測定手技の比較。平均値が呼気終末値を 1 mmHg 過大評価する根拠</td></tr>
+<tr><td>7</td><td>Teboul JL, et al. *Crit Care Med*. 2000;28(11):3631–3636</td><td>過膨張のある人工呼吸患者の充満圧推定。気道内圧の胸腔伝播率の考え方（PAOP で検証）</td></tr>
+<tr><td>8</td><td>Vieillard-Baron A, et al. *Crit Care*. 2020;24(1):630</td><td>敗血症性ショックの右室不全 — 特徴・発生率・輸液反応性への影響。右室拡大＋CVP ≥ 8 mmHg の定義</td></tr>
+<tr><td>9</td><td>Osman D, et al. *Crit Care Med*. 2007;35(1):64–68</td><td>心充満圧は容量負荷への血行動態反応を予測するのに適切でない</td></tr>
+<tr><td>10</td><td>Marik PE, Cavallazzi R. *Crit Care Med*. 2013;41(7):1774–1781</td><td>CVP は輸液反応性を予測するか（更新メタ解析と常識への訴え）</td></tr>
+<tr><td>11</td><td>Ostermann M, et al. *BMC Nephrol*. 2017;18(1):151</td><td>低い平均灌流圧は重症患者の AKI 進行の危険因子（後ろ向き解析）。カットオフ 60 mmHg</td></tr>
+<tr><td>12</td><td>Prowle JR, Bellomo R. *Curr Opin Crit Care*. 2010;16(4):332–336</td><td>輸液投与と腎臓。静脈うっ血と臓器障害</td></tr>
+<tr><td>13</td><td>Chen CY, et al. *Crit Care*. 2020;24(1):80</td><td>CVP高値は重症患者の死亡と AKI の増加に関連（メタ解析）</td></tr>
+<tr><td>14</td><td>Allen SJ, et al. *Crit Care Med*. 1987;15(10):963–970</td><td>肺水腫に関する知見。肺リンパ流と浮腫の吸収</td></tr>
+<tr><td>15</td><td>Teboul JL, et al. *Intensive Care Med*. 2016;42(9):1350–1359</td><td>重症患者における低侵襲血行動態モニタリング。ショック患者への中心静脈カテーテル挿入の推奨</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>CVP で輸液を決めない。CVP で右室と臓器灌流を見る。</strong></mark> 正しく測った経壁CVPは右室機能障害を疑う手がかりになり、実測CVPは MPP = MAP − CVP という形で臓器灌流の下流圧を教える。<mark class="hl"><strong>乏尿・AKI進行では MAP だけでなく MPP を計算し、60 mmHg を割っていて CVP が高いなら、まず CVP を下げにいく</strong></mark>（MAP を上げても静脈うっ血は解けない）。そして<mark class="hl"><strong>すべての前提は測定の質</strong></mark>——先端は上大静脈、ゼロ点は胸骨角から垂直 5 cm 下、読みは呼気終末。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ショックで中心静脈カテーテルが入っている</td><td>CVP を測っているか</td><td>測る。右室機能と MPP の2用途に使う。輸液の可否判断には使わない</td></tr>
+<tr><td>輸液を入れるか迷っている</td><td>CVP は何 mmHg か</td><td>CVP では決まらない。PLR・EEO・Vtチャレンジ等の動的テストへ</td></tr>
+<tr><td>CVP が高い（経壁CVP高値）</td><td>右室機能障害を疑う所見か</td><td>心エコーへ。右室拡大＋CVP ≥ 8 mmHg なら右室不全。タンポナーデ・肺塞栓・右室虚血・緊張性気胸を鑑別</td></tr>
+<tr><td>乏尿・AKI が進行している</td><td>MPP = MAP − CVP を計算したか</td><td>60 mmHg を下回っていないか確認。MAP 単独では判断しない</td></tr>
+<tr><td>MPP &lt; 60 mmHg で CVP が高い</td><td>CVP を下げられるか</td><td>下げられるなら下げる（うっ血も同時に軽減）。下げられないなら MAP を上げる（ただしうっ血は防げない）</td></tr>
+<tr><td>PEEP をかけている</td><td>用途はどちらか</td><td>右室機能評価なら経壁CVP（PEEP の胸腔伝播分を補正）。MPP 計算なら実測CVP をそのまま使う</td></tr>
+<tr><td>人工呼吸中で一回換気量 6〜8 mL/kg</td><td>波形の最低値を探しているか</td><td>モニターの平均値表示で代用可（呼気終末値を 1 mmHg 過大評価するだけ）</td></tr>
+<tr><td>本論文を配布・引用する</td><td>著作権行に <code>corrected publication 2022</code> があるか</td><td>無ければ訂正前の版。Supplementary Table 1 も別途取得して添える</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

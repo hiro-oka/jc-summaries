@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000006172.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Chaudhuri D, Nei AM, Rochwerg B, et al; Annane D, Pastores SM (Chairs). 2024 Focused Update: Guidelines on Use of Corticosteroids in Sepsis, Acute Respiratory Distress Syndrome, and Community-Acquired Pneumonia. Crit Care Med. 2024;52(5). doi:10.1097/CCM.0000000000006172</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2024-01-19）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000006172" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000006172</a>（本文PDFは別途）</dd><dt>原題</dt><dd>2024 Focused Update: Guidelines on Use of Corticosteroids in Sepsis, Acute Respiratory Distress Syndrome, and Community-Acquired Pneumonia</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006172.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000006172.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006172.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>重症CAPが最も行動が変わる</strong>。本更新で唯一の「強い推奨」がここ。院内死亡 RR 0.62（95%CI 0.45–0.85、確実性 moderate）。重症肺炎の初期指示セットにステロイドを組み込む根拠になる。<mark class="hl"><strong>微生物学的確定は不要</strong>で、細菌性肺炎の臨床的疑いが高く経験的抗菌薬を受けている患者が対象</mark></li><li><strong>重症CAPの線引きを1つ決めて運用する</strong>。本文は「ATS/IDSA 2007 の major 1つ or minor 3つ以上」「CAPE COD 基準」「PSI IV/V」「CURB-65 ≥ 3」を並べているだけで、どれを使えとは書いていない。当院は入室判断と揃えて ATS/IDSA 2007 か CAPE COD 基準のどちらかに統一するのが現実的</li><li><strong>軽症CAPには出さない</strong>。RR 1.08（95%CI 0.83–1.42）で利益なし。「肺炎だからステロイド」の拡大を止める線引きとして使える</li><li><strong>敗血症性ショックの適応が広がった</strong>。2017年の「輸液と中〜高用量昇圧薬に反応しないショック」→ 2024年は「昇圧薬を要するショックであれば用量にかかわらず」。当院プロトコルの「難治例のみ」という文言は更新が要る</li><li><strong>ただし説明の言葉を変える</strong>。ステロイドの根拠は死亡（RR 0.93〜0.94）ではなく、<strong>7日時点のショック離脱 RR 1.24 と SOFA 1.41点低下</strong>（どちらも確実性 high）。家族説明は「死ににくくなる」ではなく「昇圧薬を早く切れる・臓器障害が軽くなる」</li><li><strong>高用量／短期間は明確に禁止側</strong>。ヒドロコルチゾン換算 400 mg/日超を3日未満、という古い使い方が残っていれば廃止する（強い推奨・確実性 moderate）</li><li><strong>標準レジメン（敗血症性ショック）</strong>：ヒドロコルチゾン 200 mg/日 静注（持続 or 6時間ごと分割）± フルドロコルチゾン 50 µg 経腸/日、<strong>7日間または ICU 退室まで</strong></li><li><strong>ARDS は「短く切らない」</strong>。28日死亡 RR 0.82。7日超の投与群のほうが生存が良かった（サブグループ交互作用 p = 0.04、信頼性 moderate）。抜管したら止める運用だと、Table 4 のどのレジメンにも合わない</li><li><strong>副作用のセットオーダー化</strong>：高血糖（敗血症で RR 1.13、ARDS で RR 1.11、CAPでも増加）、<strong>高Na血症 RR 1.64</strong>、神経筋の脆弱 RR 1.21。<mark class="hl">高Na血症は見落とされやすいので、ステロイド開始オーダーに Na のフォローを紐づける</mark></li><li><strong>小児には使えない</strong>。3病態すべてで「小児への推奨は出さない」と明記されている。当院PICU側にそのまま適用しない</li></ul>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本文に無いこと（推測で補わない）</p>
+<ul><li><strong>日本での保険適用・適応外使用の扱いは本文に一切書かれていない</strong>。ヒドロコルチゾン・メチルプレドニゾロン・デキサメタゾン・フルドロコルチゾンの国内添付文書上の位置づけは、<mark class="hl">本ガイドラインとは別に院内で確認する必要がある</mark></li><li><strong>本文が想定するのは米国・欧州・豪州中心のRCT</strong>。18本のCAP試験のうち低〜中所得国のものは2本のみ。日本人データについての言及はない</li><li><strong>CIRCI の定義と診断（ACTH刺激試験・random cortisol の閾値など）は本更新の対象外</strong>。2017年版のままである</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：2008年に SCCM の多専門タスクフォースが <strong>CIRCI（critical illness-related corticosteroid insufficiency）</strong> を提唱し、2017年に SCCM/ESICM が 8つの臨床状況について推奨を出した。敗血症性ショックには「輸液と中〜高用量昇圧薬に反応しない場合」に条件付きで、中等症〜重症ARDS（P/F &lt; 200、発症14日以内）にはメチルプレドニゾロン 1 mg/kg/日、CAPには 5〜7日・ヒドロコルチゾン換算 400 mg/日未満、といずれも条件付き推奨だった。</li><li><strong>Unknown（分かっていなかったこと）</strong>：2017年以降に ADRENAL・APROCCHSS・RECOVERY・CoDEX・DEXA-ARDS・ESCAPe・CAPE COD といった大規模RCTが相次いで出たが、①敗血症性ショックの適応を「難治例」に限る必要があるのか、②ARDSで P/F の閾値やステロイドの分子種を指定すべきか、③CAPの重症度で効果が変わるのか、が未整理のままだった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：5つの PICO に系統的レビュー＋メタ解析を行い、<strong>4本の推奨</strong>を出した。最大の変更は ①敗血症性ショックの適応から「昇圧薬に不応」という条件が外れたこと、②ARDSから P/F &lt; 200 という限定が外れたこと、③CAPが重症度で分割され、重症CAPだけが「強い推奨」に格上げされたこと。逆に、ARDSの分子種（メチルプレドニゾロン vs 他）については推奨を出せないと結論した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 5つの PICO に対して <strong>4本の推奨</strong>。敗血症性ショックとARDSは「提案（条件付き）」、<strong>重症の細菌性市中肺炎だけが「推奨（強い）」</strong>。高用量／短期間のステロイドは強い推奨で否定された。小児については3病態すべてで推奨を出せなかった。</p>
+</div>
+<ul><li><strong>推奨1A</strong>：敗血症性ショックの成人にステロイド投与を<strong>提案</strong>（条件付き推奨・確実性 low）</li><li><strong>推奨1B</strong>：敗血症性ショックの成人への高用量／短期間ステロイド（ヒドロコルチゾン換算 400 mg/日超を3日未満）を<strong>推奨しない</strong>（強い推奨・確実性 moderate）</li><li><strong>推奨2A</strong>：ARDSの成人重症患者にステロイド投与を<strong>提案</strong>（条件付き推奨・確実性 moderate）</li><li><strong>推奨3A</strong>：重症の細菌性CAPで入院した成人にステロイド投与を<strong>推奨</strong>（強い推奨・確実性 moderate）</li><li><strong>推奨3B</strong>：より軽症の細菌性CAPで入院した成人については<strong>推奨を出さない</strong>（no recommendation）</li><li><strong>PICO④（ARDSでメチルプレドニゾロンを他より優先すべきか）</strong>：現在のエビデンスでは<strong>分子種・用量・期間について特定の推奨を出せなかった</strong></li><li><strong>Remark（3病態共通）</strong>：小児の敗血症・敗血症性ショック・ARDS・CAP については、いずれも<strong>推奨を出さない</strong></li><li>効果量の要点：敗血症性ショックの ICU/短期死亡 RR 0.93（0.88–0.98）／7日ショック離脱 RR 1.24（1.11–1.38、high）、ARDS 28日死亡 RR 0.82（0.72–0.95）、<strong>重症CAP 院内死亡 RR 0.62（0.45–0.85）</strong>、軽症CAP 院内死亡 RR 1.08（0.83–1.42）</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 重症患者とステロイドの基礎（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>なぜ重症患者にステロイドを使うのか</strong>。急性期の重症患者では炎症反応が制御を失う（dysregulated inflammatory response）。ステロイドは幅広い抗炎症作用を持つので、この制御不能な炎症を抑えられるのではないか、というのが仮説である。</p>
+<p><strong>CIRCI とは</strong>。2008年に SCCM の国際タスクフォースが提唱した概念で、日本語では「重症病態関連ステロイド不全」。①全身性炎症、②視床下部–下垂体–副腎系（HPA軸）の調節異常、③コルチゾール代謝の変化、④組織レベルのグルココルチコイド抵抗性、が組み合わさった状態を指す。「副腎が壊れている」のではなく、「必要量に対してステロイド作用が足りていない」という捉え方である。</p>
+<p><strong>用語の整理</strong></p>
+<ul><li><strong>ヒドロコルチゾン</strong>：コルチゾールそのもの。糖質コルチコイド作用に加えて弱いミネラルコルチコイド作用（Na保持・K排泄）を持つ。敗血症性ショックの標準</li><li><strong>フルドロコルチゾン</strong>：ミネラルコルチコイド作用が非常に強い合成ステロイド。経腸 50 µg/日で併用される</li><li><strong>メチルプレドニゾロン</strong>：ヒドロコルチゾンの約5倍の糖質コルチコイド力価、ミネラルコルチコイド作用はほぼない。ARDSで多用される</li><li><strong>デキサメタゾン</strong>：約25倍の力価、ミネラルコルチコイド作用なし、半減期が長い。COVID-19とARDSで使われた</li><li><strong>ヒドロコルチゾン換算</strong>：異なるステロイドの用量を比較するための共通単位。「400 mg/日」はメチルプレドニゾロン約80 mg/日、デキサメタゾン約15 mg/日に相当する量感</li></ul>
+<p><strong>GRADE の読み方</strong>。推奨は2段階しかない。「<strong>recommend（推奨する）＝強い推奨</strong>」は望ましい効果が明らかに上回る（または明らかに下回る）とき。「<strong>suggest（提案する）＝条件付き推奨</strong>」はトレードオフが不確実なとき。これとは別に、エビデンスの確実性が high / moderate / low / very low の4段階で付く。<mark class="hl">強い推奨に low certainty が付くこともあるし、条件付き推奨に high certainty が付くこともある。この2つは別物である</mark>。</p>
+<p><strong>重症CAPの重症度スコア</strong>。PSI（Pneumonia Severity Index、I〜Vクラス）、CURB-65（意識障害・尿素窒素・呼吸数・血圧・65歳）、CORB、SMART-COP（収縮期血圧・多葉浸潤影・アルブミン・呼吸数・頻脈・意識障害・酸素化・動脈血pH）などがある。本ガイドラインは「どれか1つ」を指定していない。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<ul><li>2008年、SCCM と ESICM のメンバーからなる集中治療医学・内分泌学の国際多専門タスクフォースが <strong>CIRCI</strong> という用語を導入した。</li><li>このタスクフォースは 2017年に更新版ガイドラインを出し、<strong>CIRCI の診断</strong>と <strong>8つの臨床状況の管理</strong>について推奨を発表した。</li><li>その後、急性期患者へのステロイド投与を検証する新しい研究が続々と発表されたため、<strong>最も頻度の高い病態について推奨を更新する必要が生じた</strong>。</li><li>SCCM は国際専門家パネルを再招集し、入院を要する急性期患者へのステロイド使用について、エビデンスに基づく推奨を更新した。</li><li><strong>対象を3疾患に絞った理由</strong>：敗血症・ARDS・CAP が「<strong>ステロイドが検討される最も一般的な診断であり、再評価に足る新規データが十分にあるもの</strong>」として優先されたため。</li><li><strong>本更新の対象外</strong>：CIRCI の<strong>定義と診断</strong>に関する過去の推奨は、この focused update では扱っていない。</li></ul>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：GRADE 法に基づく臨床実践ガイドラインの focused update。5つの PICO ごとに系統的レビュー＋ペアワイズ・メタ解析を実施。</li><li><strong>パネル構成</strong>：SCCM が議長2名（S.P.＝Pastores, D.A.＝Annane）と共同副議長2名（R.B.＝Balk, A.N.＝Nei）を任命。臨床医–方法論家2名（D.C.＝Chaudhuri, B.R.＝Rochwerg）と、McMaster大学 GUIDE（Guidelines in Intensive Care Development and Evaluation）グループの方法論チーム（T.P.＝Pitre, K.D.＝Drover）が支援。<strong>専門家22名</strong>のパネル（成人・小児集中治療医、呼吸器科医、内分泌科医、看護師、薬剤師、方法論家）。22名のうち2名は内分泌学会（The Endocrine Society）推薦の内分泌科医。</li><li><strong>投票権</strong>：20名。方法論チームの4名（D.C., B.R., T.P., K.D.）はデータ抽出・解析とパネル討議に参加したが、<strong>推奨への投票には加わっていない</strong>。</li><li><strong>COI管理</strong>：ACCM/SCCM の標準業務手順書に従って財務的・学術的COIを収集し、SCCM が管理。議長でありパネル参加者でもある Annane は学術的COIを開示し、敗血症でのステロイドの討議には参加したが、<strong>敗血症・敗血症性ショックに関する最終推奨の投票を棄権</strong>した。</li><li><strong>PICO作成</strong>：5つの実行可能な PICO を設定（Table 1）。いずれも 2017年ガイドラインの PICO から大部分を引き継ぎ、わずかに修正したもの。パネルは患者にとっての重要性に基づいてアウトカムの優先順位リストも作成したが、<strong>組み入れ研究で報告されたデータが限られていたため、パネルが挙げたアウトカムのすべてを含めることはできなかった</strong>。</li><li><strong>文献検索と選択</strong>：医学図書館員と共同で系統的検索。<strong>5つのPICOのうち4つ（ARDSと敗血症に関するもの）は、本ガイドラインの共著者が最近実施した系統的レビューが既にあったため、更新検索のみで足りた</strong>。Covidence を用い、レビュアー3名（D.C., T.P., K.D.）が独立・二重にタイトル/抄録および全文をスクリーニング。データ抽出とバイアスリスク評価も独立・二重に実施。</li><li><strong>統計解析</strong>：Revman v5.3、逆分散重みづけ、ランダム効果モデル。確実性の評価は GRADE、エビデンスプロファイルは GRADEPro。サブグループ効果の信頼性（credibility）は <strong>ICEMAN ツール</strong>で評価。</li><li><strong>推奨の作成</strong>：GRADE の <strong>Evidence-to-Decision フレームワーク</strong>（確実性、望ましい効果と望ましくない効果のバランス、患者の価値観と好み、資源利用、健康の公平性、受容可能性、実行可能性を考慮）。強い推奨は "we recommend"、条件付き推奨は "we suggest" と表現。</li><li><strong>投票</strong>：正式なウェブベース投票で全推奨と根拠を承認。時差で電話会議に参加できないメンバーは録画を視聴し、電子的に意見を提出できた。<strong>合意の定義＝パネルの75%以上が参加し、そのうち80%の一致</strong>。</li><li><strong>限界（方法上）</strong>：ARDSの分子種に関する PICO については、データ解析とパネル討議の結果、<strong>特定の推奨を出さないことを選択</strong>した。</li></ul>
+<h4>Table 1. 5つの PICO クエスチョン（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>臨床疑問</th><th>P（対象）</th><th>I（介入）</th><th>C（比較）</th><th>O（アウトカム）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>敗血症で入院した患者にステロイドを投与すべきか</td><td>敗血症の全成人・小児</td><td>ステロイド</td><td>プラセボまたはステロイドなし</td><td>SDC 4</td></tr>
+<tr><td>2</td><td>敗血症患者にステロイドを投与するなら、高用量/短期間か低用量/長期間か</td><td>敗血症の全成人・小児</td><td>高用量/短期間</td><td>低用量/長期間</td><td>SDC 4</td></tr>
+<tr><td>3</td><td>ARDS患者にステロイドを使うべきか</td><td>ARDSの全成人・小児</td><td>ステロイド</td><td>プラセボまたはステロイドなし</td><td>SDC 4</td></tr>
+<tr><td>4</td><td>ARDS患者でメチルプレドニゾロンを他のステロイドより優先すべきか</td><td>ARDSの全成人・小児</td><td>メチルプレドニゾロン</td><td>デキサメタゾン、ヒドロコルチゾン</td><td>SDC 4</td></tr>
+<tr><td>5</td><td>CAPで入院した患者にステロイドを投与すべきか</td><td>CAPの全成人・小児</td><td>ステロイド</td><td>プラセボまたはステロイドなし</td><td>SDC 4</td></tr>
+</tbody></table></div>
+<p><strong>注</strong>：PICO の対象欄はいずれも「全成人・小児」だが、<strong>実際に出た推奨はすべて成人に限定</strong>されている。</p>
+<h4>Table 2. GRADE における推奨の強さとその意味（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>強い推奨（"We recommend…"）</th><th>条件付き推奨（"We suggest…"）</th></tr></thead>
+<tbody>
+<tr><td><strong>前提</strong></td><td>介入の望ましい効果が望ましくない効果を明らかに上回る、または明らかに上回らない</td><td>トレードオフの確実性が低い。エビデンスの質が低いか、望ましい効果と望ましくない効果が拮抗しているため</td></tr>
+<tr><td><strong>患者にとって</strong></td><td>この状況にある大多数が推奨される選択を望み、望まない人はごく一部</td><td>この状況にある大多数は提案される選択を望むが、望まない人も多い</td></tr>
+<tr><td><strong>臨床医にとって</strong></td><td>大多数がこの選択を受けるべき。ガイドラインへの遵守は質指標・パフォーマンス指標として使いうる。正式な意思決定支援ツールは必要としないだろう</td><td>患者ごとに異なる選択が適切でありうるので、個々の状況に合わせて治療を調整すべき。状況には患者・家族の価値観と好みが含まれる</td></tr>
+<tr><td><strong>政策立案者にとって</strong></td><td>ほとんどの状況で政策として採用でき、パフォーマンス指標にも使える</td><td>政策化には相当の議論と多数の関係者の関与が必要。政策は地域間で異なりやすい。パフォーマンス指標は「管理選択肢について十分な熟議が行われたか」に焦点を当てざるをえない</td></tr>
+</tbody></table></div>
+<h3>4. 推奨の全体像 — Table 3 全数値 📋</h3>
+<p>パネルは <strong>4つの推奨</strong>を出した（1A・1B・2A・3A）。3B は「推奨を出さない（no recommendation）」という声明である。推奨はすべて成人に関するもので、小児については利用可能な研究が限られていたため特定の推奨を作れなかった。</p>
+<h4>Table 3. 推奨のまとめ（原表を日本語化・2017年との対比つき）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>2024年の推奨</th><th>強さ・エビデンスの質</th><th>Table 3 が対置した2017年推奨</th></tr></thead>
+<tbody>
+<tr><td><strong>1A</strong></td><td>敗血症性ショックの成人患者にステロイド投与を「提案する」</td><td>条件付き推奨、確実性 low</td><td>「ショックのない敗血症の成人にはステロイド投与を提案しない」（条件付き推奨、質 moderate）</td></tr>
+<tr><td><strong>1B</strong></td><td>敗血症性ショックの成人患者への高用量/短期間ステロイド（ヒドロコルチゾン換算 400 mg/日超を3日未満）を「推奨しない」</td><td>強い推奨、確実性 moderate</td><td>「輸液と中〜高用量昇圧薬に反応しない敗血症性ショックにはステロイド使用を提案する」（条件付き推奨、質 low）</td></tr>
+<tr><td><strong>2A</strong></td><td>ARDS の成人入院患者にステロイド投与を「提案する」</td><td>条件付き推奨、確実性 moderate</td><td>「早期の中等症〜重症ARDS（P/F &lt; 200 かつ発症14日以内）にはステロイド使用を提案する」（条件付き推奨、質 moderate）</td></tr>
+<tr><td><strong>3A</strong></td><td>重症の細菌性CAPで入院した成人患者にステロイド投与を「推奨する」</td><td>強い推奨、確実性 moderate</td><td>「CAPで入院した患者には5〜7日、ヒドロコルチゾン静注換算 400 mg/日未満でのステロイド使用を提案する」（条件付き推奨、質 moderate）</td></tr>
+<tr><td><strong>3B</strong></td><td>より軽症の細菌性CAPで入院した成人患者へのステロイド投与</td><td>推奨なし（no recommendation）</td><td>（対置なし）</td></tr>
+</tbody></table></div>
+<p><strong>Table 3 の脚注 a</strong>：小児の敗血症・敗血症性ショック、ARDS、CAP へのステロイド使用については、いずれも推奨を出さない。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Table 3 と本文が食い違っている箇所が2つある ① <strong>推奨1B の確実性</strong>。本文の Recommendations セクション（原著4ページ）は「strong recommendation, moderate certainty」、Table 3 の強さ欄も「Strong recommendation, moderate certainty evidence」だが、<mark class="hl"><strong>Table 3 の推奨文の中だけ "(strong recommendation, low certainty)" と印字されている</strong></mark>。3か所中2か所が moderate なので本ノートは moderate を採る。 ② <strong>推奨2A の対象</strong>。本文は "adult critically ill patients with ARDS"（成人重症患者）、Table 3 は "adult hospitalized patients"（成人入院患者）。<mark class="hl"><strong>「重症」の限定が付くかどうかで適応範囲が変わる</strong>ので、JCで確認すべき点</mark>。</p>
+</div>
+<h3>5. 推奨1A・1B — 敗血症と敗血症性ショック 💧</h3>
+<p><strong>臨床疑問</strong>：敗血症で入院した患者にステロイドを投与すべきか。投与するなら高用量/短期間か、低用量/長期間か。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>推奨</p>
+<ul><li><strong>1A</strong>：敗血症性ショックの成人患者にステロイド投与を「提案する」（<strong>条件付き推奨</strong>・確実性 low）</li><li><strong>1B</strong>：敗血症性ショックの成人患者への高用量/短期間ステロイド（ヒドロコルチゾン換算 400 mg/日超を3日未満）の投与を「推奨しない」（<strong>強い推奨</strong>・確実性 moderate）</li><li><strong>Remark</strong>：小児の敗血症へのステロイド使用については推奨を出さない</li></ul>
+</div>
+<h4>エビデンスの基盤（46 RCT）</h4>
+<div class="tw"><table>
+<thead><tr><th>内訳</th><th>試験数</th><th>原著の引用番号</th></tr></thead>
+<tbody>
+<tr><td><strong>敗血症（ショックなし）を組み入れ</strong></td><td>7</td><td>21, 24, 33, 48, 50, 51, 53</td></tr>
+<tr><td><strong>CAP＋敗血症を組み入れ</strong></td><td>5</td><td>14, 28, 35, 38, 46</td></tr>
+<tr><td><strong>ARDS＋敗血症を組み入れ</strong></td><td>4</td><td>22, 26, 32, 44</td></tr>
+<tr><td><strong>残りは敗血症性ショック</strong></td><td>30</td><td>—</td></tr>
+<tr><td><strong>小児を対象</strong></td><td>6</td><td>16, 17, 29, 37, 47, 54</td></tr>
+<tr><td><strong>成人・小児の両方を組み入れ</strong></td><td>1</td><td>15</td></tr>
+</tbody></table></div>
+<p>試験はステロイドの種類・用量・投与期間が多様だった。</p>
+<h4>アウトカム別の効果推定値（全数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>効果推定値</th><th>95%CI</th><th>確実性</th><th>原著の表現</th></tr></thead>
+<tbody>
+<tr><td>院内/長期死亡（60日〜1年）</td><td>RR 0.94</td><td>0.89–1.00</td><td>low</td><td>may reduce（減らしうる）</td></tr>
+<tr><td>ICU/短期死亡（14〜30日）</td><td>RR 0.93</td><td>0.88–0.98</td><td>moderate</td><td>probably reduces（おそらく減らす）</td></tr>
+<tr><td>ICU在室日数</td><td>MD 0.60日短縮</td><td>1.48日短縮〜0.27日延長</td><td>low</td><td>may reduce</td></tr>
+<tr><td>在院日数</td><td>MD 0.74日短縮</td><td>2.06日短縮〜0.57日延長</td><td>low</td><td>may reduce</td></tr>
+<tr><td><strong>7日時点のショック離脱</strong></td><td>RR 1.24</td><td>1.11–1.38</td><td><strong>high</strong></td><td>results in higher rates（もたらす）</td></tr>
+<tr><td><strong>7日時点の臓器障害（SOFA）</strong></td><td>1.41点低下</td><td>0.96点低下〜1.87点低下</td><td><strong>high</strong></td><td>reduced organ dysfunction</td></tr>
+<tr><td>神経筋の脆弱</td><td>RR 1.21</td><td>1.01–1.45</td><td>low</td><td>may increase</td></tr>
+<tr><td>高Na血症</td><td>RR 1.64</td><td>1.32–2.03</td><td>moderate</td><td>probably increase</td></tr>
+<tr><td>高血糖</td><td>RR 1.13</td><td>1.08–1.18</td><td>moderate</td><td>probably increase</td></tr>
+<tr><td>神経精神症状</td><td>RR 0.58</td><td>0.33–1.03</td><td>low</td><td>may reduce（減らしうる）</td></tr>
+<tr><td>消化管出血</td><td>不確実</td><td>—</td><td>very low</td><td>uncertain effect</td></tr>
+<tr><td>重複感染</td><td>不確実</td><td>—</td><td>very low</td><td>uncertain effect</td></tr>
+<tr><td>脳卒中</td><td>不確実</td><td>—</td><td>very low</td><td>uncertain effect</td></tr>
+<tr><td>心筋梗塞</td><td>不確実</td><td>—</td><td>very low</td><td>uncertain effect</td></tr>
+</tbody></table></div>
+<h4>サブグループ解析</h4>
+<ul><li><strong>ステロイドの種類・投与期間・用量</strong>に基づくサブグループ解析では、<strong>信頼できるサブグループ効果は示されなかった</strong>。</li><li><strong>敗血症 vs 敗血症性ショック</strong>の比較では、短期死亡に交互作用なし（<strong>サブグループ交互作用 p = 0.08</strong>）。</li></ul>
+<h4>パネルの判断（Evidence to Recommendation）</h4>
+<ul><li>ステロイドは<strong>小〜中等度の望ましい効果</strong>をもたらす、特に敗血症性ショックで、とパネルは判断した。</li><li><strong>短期・長期の死亡に対する効果量は CAP や ARDS ほど大きくない</strong>が、臓器障害の軽減とショック離脱は<strong>病院資源の観点から重要な意味を持つ</strong>。</li><li>さらに、<strong>敗血症性ショックは世界的に有病率と死亡率が高い</strong>ため、相対効果が小さくても<strong>大きな絶対効果に転化しうる</strong>。</li><li><strong>望ましくない効果は小さいと予想</strong>される。ただし神経筋の脆弱・高Na血症・高血糖は研究間で定義がばらばらであり、患者への真の影響、特に長期の影響は不明である。とはいえ、患者中心のアウトカムとしての神経筋の脆弱の重要性を考えると、わずかな増加でも重要でありうる。</li><li>ステロイドは<strong>神経精神症状に対して保護的に見えた</strong>。精神疾患へのステロイド使用を示唆するシグナルは存在するが、さらなる研究が必要である。</li><li><strong>費用対効果</strong>：ADRENAL 試験のデータを用いたニュージーランドの研究は、敗血症性ショックへのヒドロコルチゾンが<strong>長期費用にも費用対効果にも影響しなかった</strong>と報告した。ただしこの研究は46試験のうちの1試験のデータしか使っていない。ステロイドは安価であり、臓器補助の必要と在院日数を減らすなら医療費削減の重要な要素になりうる、とパネルは述べた。</li><li>ステロイド使用は<strong>医療提供者にとって実行可能かつ受容可能</strong>と判断された。</li></ul>
+<h4>特記事項（Special Considerations）</h4>
+<ul><li><strong>2017年からの最大の変更</strong>：2017年 SCCM/ESICM ガイドラインは「輸液と中〜高用量昇圧薬に反応しない敗血症性ショック」に限定していた。<strong>本パネルは、昇圧薬を要する敗血症性ショックであれば用量にかかわらず利益が示されると判断した</strong>（根拠として引用されたのは APROCCHSS、ADRENAL、および低用量ヒドロコルチゾンの個々患者データメタ解析）。</li><li><strong>高用量/短期間を否定した根拠</strong>：400 mg/日超のヒドロコルチゾン換算を3日未満使用した歴史的研究と、現代的な研究とを比較したサブグループ解析は、<strong>有害事象のリスクを踏まえるとこの高用量/短期間レジメンを支持しなかった</strong>。</li><li><strong>小児への一般化可能性は不確実</strong>（この集団を評価した研究が限られていたため）。</li><li><strong>ショックのない敗血症については特定の推奨を出していない</strong>。ただし、<strong>敗血症＋重症CAP、または敗血症＋ARDS で来院した場合は、それぞれの推奨に従ってステロイドを投与することを提案する</strong>、と明記されている。</li><li><strong>特定のステロイドや投与法は推奨していない</strong>。敗血症性ショックの研究で最も多く使われた用量は、<strong>ヒドロコルチゾン 200〜300 mg/日 静注（分割または持続）を 5〜7日、漸減の有無は問わない</strong>。</li><li><strong>フルドロコルチゾン</strong>：一部の研究がヒドロコルチゾンに<strong>フルドロコルチゾン 50 µg 経腸/日</strong>を併用していた。成人敗血症性ショックの低用量ヒドロコルチゾンの個々患者データメタ解析は、フルドロコルチゾン併用群で死亡利益を示唆したが、このサブグループ所見の信頼性は不明であり、本解析ではミネラルコルチコイド力価による差は示されなかった。したがって<strong>フルドロコルチゾンについての特定の推奨は出されなかった</strong>。</li></ul>
+<h3>6. 推奨2A — ARDS 🫁</h3>
+<p><strong>臨床疑問</strong>：ARDS患者にステロイドを使うべきか。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>推奨</p>
+<ul><li><strong>2A</strong>：ARDS の成人重症患者にステロイド投与を「提案する」（<strong>条件付き推奨</strong>・確実性 moderate）</li><li><strong>Remark</strong>：小児のARDSへのステロイド使用については推奨を出さない</li></ul>
+</div>
+<h4>エビデンスの基盤（18 RCT）</h4>
+<ul><li>成人入院ARDS患者を対象に、ステロイドをプラセボまたは標準治療と比較した <strong>18本のRCT</strong>。</li><li><strong>12本（67%）</strong>が AECC（American-European Consensus Conference）または Berlin 基準の ARDS を組み入れ。</li><li><strong>6本（33%）</strong>が COVID-19 患者を組み入れ。</li><li>試験はステロイドの種類・<strong>開始時期</strong>・用量・投与期間が多様だった。</li></ul>
+<h4>アウトカム別の効果推定値（全数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>効果推定値</th><th>95%CI</th><th>確実性</th><th>原著の表現</th></tr></thead>
+<tbody>
+<tr><td><strong>28日死亡</strong></td><td>RR 0.82</td><td>0.72–0.95</td><td><strong>moderate</strong></td><td>probably reduces</td></tr>
+<tr><td>人工呼吸日数</td><td>減少しうる</td><td>—</td><td>low</td><td>may lead to fewer days</td></tr>
+<tr><td>在院日数</td><td>短縮しうる</td><td>—</td><td>low</td><td>shorter hospital LOS</td></tr>
+<tr><td>ICU在室日数</td><td>不確実</td><td>—</td><td>very low</td><td>uncertain effect</td></tr>
+<tr><td>神経筋の脆弱</td><td>不確実</td><td>—</td><td>very low</td><td>uncertain effect</td></tr>
+<tr><td>消化管出血</td><td>不確実</td><td>—</td><td>low</td><td>uncertain effect</td></tr>
+<tr><td>高血糖</td><td>RR 1.11</td><td>1.01–1.23</td><td>moderate</td><td>probably an increase</td></tr>
+</tbody></table></div>
+<h4>サブグループ解析</h4>
+<ul><li><strong>COVID-19の有無・ステロイドの種類・用量・開始時期</strong>に基づくサブグループ解析では、<strong>信頼できるサブグループ効果は認めなかった</strong>。</li><li>ただし、<strong>より長い投与（7日超）を受けた患者は、短い投与（7日以下）より生存率が高かった</strong>（<strong>サブグループ交互作用 p = 0.04、信頼性 moderate</strong>）。</li></ul>
+<h4>パネルの判断</h4>
+<ul><li><strong>中等度の望ましい効果</strong>があるとパネルは判断した。主たる駆動要因は、①死亡を減らすという確実性 moderate のエビデンス、②在院日数と人工呼吸期間を減らすという確実性 low のエビデンス。</li><li><strong>残る不確実性の3つの理由</strong>：①いくつかの小規模な陽性試験が全体の陽性効果に大きく寄与している、②長期アウトカムのデータがない、③組み入れ患者の半数が COVID-19 ARDS。</li><li><strong>短期ステロイドの望ましくない効果は大部分が未解明</strong>であり、さらなる研究を要する。高血糖はおそらく増えるが、研究間で定義がばらばらで、短期的には薬物で管理可能であり、長期的影響は不確実。消化管出血・神経筋の脆弱・二次感染・神経精神症状への影響も不明のままである。</li><li><strong>費用対効果</strong>：ARDSでの費用対効果を検討した研究は存在しない。人工呼吸期間の短縮による短期的な費用節減はありうるが、神経筋の脆弱などの増加により長期的な費用が発生する可能性がある、とパネルは述べた。</li></ul>
+<h4>特記事項</h4>
+<ul><li><strong>小児への一般化可能性は不確実</strong>（この集団のRCTが<strong>1本も存在しない</strong>）。敗血症では6本の小児RCTがあったのに対し、ARDSではゼロである。</li><li><strong>2017年からの変更</strong>：2017年 SCCM/ESICM ガイドラインは「中等症〜重症ARDS（P/F &lt; 200）の診断から14日以内にメチルプレドニゾロン 1 mg/kg/日」を推奨していた。本パネルは、COVID-19 由来のARDS患者も含めたプール推定値に基づき、<strong>P/F 比による限定を最新の推奨から外すことを決めた</strong>。</li><li><strong>更新解析は、ステロイドの開始時期・種類・用量による効果の差を示さなかった</strong>（直接の頭対頭比較を含めても）。サブグループ効果がなかったため、<strong>ステロイドの分子種（メチルプレドニゾロンか他か）についての特定の推奨は作られなかった</strong>。</li><li><strong>投与方法（間欠 vs 持続）</strong>は Table 4 のレジメンに含めたが、<strong>持続投与を受けた患者のサンプルサイズが小さいため、それ以上の検討は行っていない</strong>。</li><li><strong>複数の投与戦略が許容可能</strong>であり、具体的な選択は臨床医の裁量と他の考慮事項に委ねるのがよい、とパネルは認めた。</li><li><strong>用量範囲</strong>：メチルプレドニゾロン換算で 40 mg/日 から 2 mg/kg/日 まで、<strong>一般的な投与期間は 7〜30日</strong>。RCTで最も多く用いられた分子種はメチルプレドニゾロン、デキサメタゾン、ヒドロコルチゾン（フルドロコルチゾン併用の有無を問わず）。</li></ul>
+<h3>7. PICO④ — ARDSでの分子種の選択（推奨を出さなかった）</h3>
+<ul><li><strong>臨床疑問</strong>：ARDS患者でメチルプレドニゾロンをデキサメタゾン・ヒドロコルチゾンより優先すべきか。</li><li><strong>結論</strong>：データ解析とパネル討議の結果、<strong>この PICO については特定の推奨を出さないことを選択した</strong>。</li><li><strong>理由</strong>：更新解析でステロイドの分子種による効果の差が示されず（頭対頭比較を含む直接比較でも）、<strong>サブグループ効果が存在しなかった</strong>ため。</li><li><strong>含意</strong>：<mark class="hl">「メチルプレドニゾロンがARDSで優れている」とは言えないし、「劣っている」とも言えない。ガイドラインは分子種の選択について沈黙している</mark>。</li></ul>
+<h3>8. 推奨3A・3B — 市中肺炎（CAP）🦠</h3>
+<p><strong>臨床疑問</strong>：CAPで入院した患者にステロイドを投与すべきか。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>推奨</p>
+<ul><li><strong>3A</strong>：<strong>重症の細菌性CAP</strong>で入院した成人患者にステロイド投与を「推奨する」（<strong>強い推奨</strong>・確実性 moderate）</li><li><strong>3B</strong>：<strong>より軽症の細菌性CAP</strong>で入院した成人患者へのステロイド投与については「推奨を出さない」</li><li><strong>Remark</strong>：小児のCAPへのステロイド使用については推奨を出さない</li></ul>
+</div>
+<h4>エビデンスの基盤（18 RCT）</h4>
+<ul><li>疑い例または probable な<strong>細菌性CAP</strong>で入院した成人を対象に、ステロイドをステロイドなしと比較した <strong>18本のRCT</strong>（重症・軽症の両方を含む）。エビデンスの出典は Pitre らの系統的レビュー・用量反応メタ解析（J Gen Intern Med 2023）。</li><li><strong>重症の分類基準</strong>：以下のいずれかを満たす場合に「重症」に分類した。</li><li><strong>参加者の50%以上が重症肺炎</strong>（PSI クラス IV または V、CURB-65 スコア 3以上、CORB スコア 2以上、SMART-COP スコア 4以上）</li><li><strong>またはランダム化時点で大半の患者がICUに入室していた</strong></li><li><strong>または持続静注の昇圧薬を要した</strong></li><li><strong>内訳</strong>：<strong>重症 10試験</strong>（14, 35, 46, 66–68, 80–83）、<strong>軽症 8試験</strong>（38, 84–90）。そのうち2試験（38, 88）からは試験内サブグループデータが利用できた。</li></ul>
+<h4>死亡に対する効果（重症度別）</h4>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>院内死亡</th><th>95%CI</th><th>確実性</th><th>原著の表現</th></tr></thead>
+<tbody>
+<tr><td><strong>重症CAP</strong></td><td><strong>RR 0.62</strong></td><td>0.45–0.85</td><td><strong>moderate</strong></td><td>probably reduce</td></tr>
+<tr><td>より軽症のCAP</td><td>RR 1.08</td><td>0.83–1.42</td><td>low</td><td>効果は認めず</td></tr>
+</tbody></table></div>
+<ul><li><strong>重症度によるサブグループ交互作用 p = 0.01</strong>（ICEMAN ツールによる評価で<strong>信頼性 moderate</strong>）。</li><li><strong>ステロイドの分子種による死亡へのサブグループ効果も認めた</strong>：サブグループ交互作用 p &lt; 0.001（ICEMAN で信頼性 moderate/low）。</li></ul>
+<h4>死亡以外のアウトカム（重症・軽症を合わせたCAP入院患者全体）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>方向</th><th>確実性</th></tr></thead>
+<tbody>
+<tr><td>侵襲的人工呼吸の必要</td><td>おそらく減らす</td><td>moderate</td></tr>
+<tr><td>ICU在室日数</td><td>短縮しうる</td><td>low</td></tr>
+<tr><td>在院日数</td><td>短縮しうる</td><td>low</td></tr>
+<tr><td>高血糖</td><td>おそらくリスクを増やす</td><td>moderate</td></tr>
+<tr><td>二次感染</td><td>増やしうる</td><td>low</td></tr>
+<tr><td>消化管出血</td><td>効果は不確実</td><td>low</td></tr>
+</tbody></table></div>
+<p>死亡以外のアウトカムでは、<strong>重症度によるサブグループ効果も分子種によるサブグループ効果もなかった</strong>。</p>
+<h4>パネルの判断</h4>
+<ul><li><strong>重症CAPで大きな望ましい治療効果、軽症CAPでは効果の大きさが小さい</strong>、という信頼できるサブグループ効果があることについて、パネル内で概ね合意があった。このサブグループ効果を踏まえ、<strong>重症と非重症で推奨を分けることを決めた</strong>。</li><li><strong>望ましくない効果は重症度を通じて小さい</strong>と予想される。高血糖は増えたが、研究間で定義がばらつくため患者中心アウトカムとしての意味は不明。二次感染が増えたにもかかわらず、<strong>人工呼吸器フリー日数や在院日数といった臨床アウトカムに悪影響がなかったこと</strong>にパネルは安心した。</li><li>ただし、<strong>有害事象の系統的評価が行われていないこと</strong>と、<strong>RCTでは見えない有害事象の増幅リスク</strong>があるため、一定の不確実性が残るとパネルは認めた。</li><li><strong>強い推奨を後押しした決定打</strong>：CAPE COD 試験（本トピック最大のRCT、Dequin ら、N Engl J Med 2023）。<strong>重症CAPサブグループの患者の約35%を占め</strong>、ステロイドによる強い死亡利益を示した。</li><li><strong>健康の公平性</strong>：ステロイドは安価で広く入手可能であり、より高価な介入と比べて公平性を改善しうる。<strong>18試験のうち2試験が低〜中所得国で実施</strong>された。</li><li><strong>費用対効果</strong>：CAPでの全身性ステロイドの費用対効果を示すエビデンスは不足している。1件の研究が費用節減を示唆し、<strong>重症CAPでより顕著な利益</strong>を示した。</li><li><strong>軽症CAPへの「反対の条件付き推奨」も検討されたが、最終的に合意に至らなかった</strong>。一部のエンドポイントで、程度は小さくより主観的ながら利益が示唆されたためである。<strong>軽症CAPにおけるステロイドの役割を評価するRCTが緊急に必要</strong>とされている。</li></ul>
+<h4>特記事項</h4>
+<ul><li><strong>小児については、このテーマのRCTが存在しないため、いかなる声明も出せなかった</strong>。</li><li><strong>細菌性CAPの推奨は微生物学的確定を必要としない</strong>。<strong>細菌性肺炎の臨床的疑いが高く、経験的抗菌薬治療を受けている患者</strong>を指す。</li><li><strong>世界的にCAPの微生物学は多様</strong>であり、<strong>ステロイドの効果が他の病因のCAPに一般化できるかは不確実</strong>である。</li><li><strong>2017年からの変更</strong>：2017年 SCCM/ESICM ガイドラインは「5〜7日、ヒドロコルチゾン静注換算 400 mg/日未満」を推奨していた。現在のエビデンスは投与期間による効果の差を示さず、分子種による死亡へのサブグループ交互作用の可能性を示した。ただしこの分子種解析は重症・非重症の両方を含んでいる。更新された推奨は「<strong>重症CAPには複数の投与戦略が許容され、さらなるデータが出るまでは臨床医の裁量による</strong>」とした。</li><li><strong>典型的な用量</strong>：<strong>メチルプレドニゾロン静注換算 40〜80 mg/日 を 5〜7日</strong>。1試験は20日にわたる漸減を含み、1試験は臨床基準に従って 8日または14日とした。</li></ul>
+<h3>9. Table 4 — ステロイド投与レジメン（全数値）💊</h3>
+<h4>敗血症性ショック</h4>
+<div class="tw"><table>
+<thead><tr><th>レジメン</th></tr></thead>
+<tbody>
+<tr><td><strong>ヒドロコルチゾン 200 mg/日 静注</strong>（持続静注または6時間ごと分割）<strong>± フルドロコルチゾン 50 µg 経腸/日</strong>、<strong>7日間または ICU 退室まで</strong></td></tr>
+</tbody></table></div>
+<p><strong>脚注 a</strong>：投与期間はさまざま。ここに示したのは<strong>最大かつ最新のランダム化研究（APROCCHSS、ADRENAL）</strong>で用いられたレジメンである。</p>
+<h4>ARDS</h4>
+<div class="tw"><table>
+<thead><tr><th>病期</th><th>レジメン</th><th>出典試験</th></tr></thead>
+<tbody>
+<tr><td><strong>早期ARDS（24時間以内）</strong></td><td><strong>デキサメタゾン 20 mg 静注/日 × 5日、その後 10 mg 静注/日 × 5日、抜管まで</strong></td><td>Villar ら（DEXA-ARDS, Lancet Respir Med 2020）</td></tr>
+<tr><td><strong>早期ARDS（72時間以内）</strong></td><td><strong>メチルプレドニゾロン 1 mg/kg 静注ボーラス</strong>、その後：1〜14日目 1 mg/kg/日 持続静注 → 15〜21日目 0.5 mg/kg/日 → 22〜25日目 0.25 mg/kg/日 → 26〜28日目 0.125 mg/kg/日。<strong>1〜15日目に抜管したらレジメンの15日目に進む</strong></td><td>Meduri ら（JAMA 1998）</td></tr>
+<tr><td><strong>遷延性ARDS（7〜21日）</strong></td><td><strong>メチルプレドニゾロン 2 mg/kg 静注ボーラス</strong>、その後：1〜14日目 2 mg/kg/日 6時間ごと分割 → 15〜21日目 1 mg/kg/日 → 22〜28日目 0.5 mg/kg/日 → 29〜30日目 0.25 mg/kg/日 → 31〜32日目 0.125 mg/kg/日。<strong>14日目より前に抜管したらレジメンの15日目に進む</strong></td><td>Meduri ら（Chest 2007）</td></tr>
+</tbody></table></div>
+<h4>重症の細菌性市中肺炎</h4>
+<div class="tw"><table>
+<thead><tr><th>レジメン</th><th>出典試験</th></tr></thead>
+<tbody>
+<tr><td><strong>ヒドロコルチゾン 200 mg 静注 単回、その後 10 mg/時 持続静注 × 7日</strong></td><td>Confalonieri ら（AJRCCM 2005）、Nafae ら（2013）</td></tr>
+<tr><td><strong>ヒドロコルチゾン 200 mg 静注/日</strong>（臨床的改善に応じて4日または8日）、<strong>その後漸減</strong>（総投与期間 8日または14日）。<strong>ICU退室時にヒドロコルチゾンを中止</strong></td><td>Dequin ら（CAPE COD, NEJM 2023）</td></tr>
+<tr><td><strong>メチルプレドニゾロン 0.5 mg/kg 静注 12時間ごと × 7日</strong>（入院36時間以内、CRP 150 mg/L 超）</td><td>Torres ら（JAMA 2015）</td></tr>
+<tr><td><strong>メチルプレドニゾロン 40 mg 静注ボーラス</strong>、その後：1〜7日目 40 mg/日 → 8〜14日目 20 mg/日 → 15〜17日目 12 mg/日 → 18〜20日目 4 mg/日。<strong>ICUでは持続静注、ICU退室後は1日2回分割（静注または経腸）に変更</strong></td><td>Meduri ら（ESCAPe, ICM 2022）</td></tr>
+</tbody></table></div>
+<p><strong>Table 4 の脚注</strong>：組み入れ研究で用いられたステロイドレジメンの完全な一覧は補足資料 SDC 9 にある。</p>
+<h3>10. Table 5 — 重症市中肺炎の定義（全数値）📏</h3>
+<p>原著は「重症CAPの定義とリスク層別化スコアの使い方はRCT間でばらついており、なお研究課題である」と述べたうえで、Table 5 に<strong>実際に使われた基準の例</strong>を挙げている。</p>
+<h4>ATS/IDSA 2007 基準</h4>
+<p><strong>major 基準1つ、または minor 基準3つ以上</strong>を満たす。</p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>項目</th></tr></thead>
+<tbody>
+<tr><td><strong>major</strong></td><td>昇圧薬を要する敗血症性ショック</td></tr>
+<tr><td><strong>major</strong></td><td>人工呼吸を要する呼吸不全</td></tr>
+<tr><td><strong>minor</strong></td><td>呼吸数 30回/分 以上（脚注 b）</td></tr>
+<tr><td><strong>minor</strong></td><td>P/F 比 250 以下（脚注 b）</td></tr>
+<tr><td><strong>minor</strong></td><td>多葉性の浸潤影</td></tr>
+<tr><td><strong>minor</strong></td><td>意識障害・失見当識</td></tr>
+<tr><td><strong>minor</strong></td><td>尿毒症（BUN 20 mg/dL 以上）</td></tr>
+<tr><td><strong>minor</strong></td><td>白血球減少（WBC 4000/µL 未満、脚注 c）</td></tr>
+<tr><td><strong>minor</strong></td><td>血小板減少（血小板 100,000/µL 未満）</td></tr>
+<tr><td><strong>minor</strong></td><td>低体温（深部体温 36 ℃ 未満）</td></tr>
+<tr><td><strong>minor</strong></td><td>積極的な輸液蘇生を要する低血圧</td></tr>
+</tbody></table></div>
+<ul><li><strong>脚注 a</strong>：各研究は Ewig らが修正した旧版の ATS 基準を用いていた。</li><li><strong>脚注 b</strong>：<strong>非侵襲換気の必要性は、呼吸数 30回/分 以上または P/F 250 以下の代替となりうる</strong>。</li><li><strong>脚注 c</strong>：感染のみを原因とする場合。</li></ul>
+<h4>CAPE COD 試験の重症基準</h4>
+<p><strong>以下の4つのうち1つ</strong>を満たす。加えて、<strong>研究への組み入れにはICU入室が必須</strong>であった。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>基準</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>PEEP 5 cmH2O 以上</strong>での人工呼吸（侵襲的または非侵襲的）の開始</td></tr>
+<tr><td>2</td><td><strong>高流量鼻カニュラ</strong>による酸素投与で <strong>P/F 300 未満、かつ FiO2 50% 以上</strong></td></tr>
+<tr><td>3</td><td><strong>リザーバーマスク</strong>で、事前規定のチャートに基づく推定 <strong>P/F 300 未満</strong></td></tr>
+<tr><td>4</td><td><strong>PSI スコア 130 超（グループV）</strong></td></tr>
+</tbody></table></div>
+<h4>リスク層別化スコア（Table 5 の記載）</h4>
+<div class="tw"><table>
+<thead><tr><th>スコア</th><th>閾値</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td><strong>PSI（Pneumonia Severity Index）</strong></td><td>クラス IV または V</td><td>Fine ら（NEJM 1997）</td></tr>
+<tr><td><strong>CURB-65</strong>（意識障害・尿素窒素・呼吸数・血圧・65歳）</td><td>3 以上</td><td>Lim ら（Thorax 2003）</td></tr>
+<tr><td><strong>CORB</strong>（意識障害・酸素化・呼吸数・血圧）</td><td>2 以上</td><td>Buising ら（Emerg Med Australas 2007）</td></tr>
+<tr><td><strong>SMART-COP</strong>（収縮期血圧・多葉性陰影・アルブミン・呼吸数・頻脈・意識障害・酸素化・動脈血pH）</td><td><strong>3 以上</strong>（Table 5）／<strong>4 以上</strong>（本文）</td><td>Charles ら（Clin Infect Dis 2008）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>SMART-COP の閾値が本文と Table 5 で食い違う 本文（CAPのエビデンス要約）は「SMART-COP <strong>4 以上</strong>」、Table 5 のリスク層別化スコア欄は「SMART-COP <strong>3 以上</strong>」と印字されている。 同様に、本文の CORB は抽出テキスト上「2 以上」が「22 以上」と崩れており、Table 5 の「<strong>2 以上</strong>」が正しい。 <mark class="hl"><strong>重症CAPの線引きを院内プロトコルに落とすときは、SMART-COP を使うなら閾値をどちらにするか明示的に決める必要がある</strong></mark>。</p>
+</div>
+<h3>11. 研究アジェンダ（原著の列挙・全12項目）🔬</h3>
+<ol><li><strong>小児</strong>における敗血症性ショック・ARDS・CAP へのステロイド投与</li><li><strong>ショックのない外科的敗血症</strong>へのステロイド使用（このサブグループは組み入れRCTで過小評価されており、<strong>創傷治癒と吻合部に関する理論的な害が存在する</strong>）</li><li><strong>神経学的問題を伴う敗血症</strong>へのステロイド投与（この集団では害と利益で<strong>相反するエビデンス</strong>がある）</li><li><strong>軽症CAP</strong> で入院した患者におけるステロイドの役割</li><li><strong>プレシジョンメディシンと enrichment</strong>（敗血症・敗血症性ショック、ARDS、CAP でステロイドの恩恵を最も受けやすい<strong>患者の表現型・遺伝型</strong>）</li><li>敗血症・敗血症性ショック、ARDS、CAP における<strong>ステロイド投与期間に影響する患者固有の因子</strong>の評価</li><li><strong>各医療制度でのステロイドの費用対効果</strong></li><li>重症病態におけるステロイド使用に関する<strong>患者・家族の見解と関与</strong>（特に患者にとって重要なアウトカムの決定において）</li><li>敗血症・CAP・ARDS における<strong>最適な用量と期間</strong>（全体としても、重症患者のサブ集団ごとにも）</li><li>ステロイド使用の<strong>長期・短期の帰結</strong>（神経筋の脆弱、神経精神症状、二次感染など）</li><li>重症患者（敗血症・CAP・ARDS）における<strong>神経精神学的な後遺症の予防</strong>を目的としたステロイド使用</li><li>重症病態におけるステロイドの<strong>作用機序の理解</strong>を深めること</li></ol>
+<h2>🔍 旧記述とPDFの照合（このノートで訂正した点）</h2>
+<p>改稿前のノートには、PDF本文と照合した結果、次の誤り・不足があった。<strong>すべてPDFを正として訂正した</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧記述</th><th>PDFの記載</th><th>扱い</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「Table 5 のリスク層別化スコア一覧は補足資料にあり、本ノートには反映していない」</td><td><strong>Table 5 は本文10ページに全文が印字されている</strong>（ATS/IDSA 2007 基準、CAPE COD 基準、4つのリスク層別化スコア）</td><td>訂正。第10節に全数値を転記</td></tr>
+<tr><td>2</td><td>研究アジェンダを <strong>6項目</strong>として列挙</td><td>原著の箇条書きは <strong>12項目</strong></td><td>訂正。全12項目を第11節に転記</td></tr>
+<tr><td>3</td><td>citation に <code>52(5):e219-e233</code></td><td>手元PDFは online-first 版で、柱は "Volume XXX • Number 00"。<strong>巻号・ページは印字されていない</strong></td><td>citation から削除し、書誌情報の警告に明記</td></tr>
+<tr><td>4</td><td>重症CAPの分類基準を「PSI IV/V、CURB-65 ≥ 3、SMART-COP ≥ 3」と記載</td><td>本文は <strong>PSI IV/V、CURB-65 3以上、CORB 2以上、SMART-COP 4以上</strong>。Table 5 の SMART-COP は 3以上</td><td>訂正。CORB を追加し、SMART-COP の本文/表の食い違いを明示</td></tr>
+<tr><td>5</td><td>推奨1B の確実性を moderate とのみ記載</td><td>本文と Table 3 強さ欄は moderate、<strong>Table 3 の推奨文中だけ low</strong> と印字</td><td>moderate を採用しつつ、食い違いを明示</td></tr>
+<tr><td>6</td><td>推奨2A を「ARDS の成人重症患者」とのみ記載</td><td>本文は "critically ill"、<strong>Table 3 は "hospitalized"</strong></td><td>両表記の食い違いを明示</td></tr>
+<tr><td>7</td><td>ARDSの2017年推奨との比較なし</td><td>2017年は「<strong>P/F &lt; 200 かつ発症14日以内にメチルプレドニゾロン 1 mg/kg/日</strong>」。<strong>2024年は P/F の限定を外した</strong></td><td>追記（ARDSの最大の変更点）</td></tr>
+<tr><td>8</td><td>46 RCT の内訳なし</td><td>敗血症のみ7、CAP＋敗血症5、ARDS＋敗血症4、残り30が敗血症性ショック、小児6、成人小児混在1</td><td>追記</td></tr>
+<tr><td>9</td><td>ARDSの用量範囲の記載なし</td><td><strong>メチルプレドニゾロン換算 40 mg/日 〜 2 mg/kg/日、期間 7〜30日</strong></td><td>追記</td></tr>
+<tr><td>10</td><td>ADRENAL 由来の費用対効果研究への言及なし</td><td><strong>ニュージーランドのデータで長期費用にも費用対効果にも影響なし</strong>（46試験中1試験のみのデータ）</td><td>追記</td></tr>
+<tr><td>11</td><td>「ステロイドは安価で医療費削減にも寄与しうる」とだけ記載</td><td>上記の null 所見とセットで書かれている。CAPでは1件が費用節減を示唆</td><td>文脈を補って訂正</td></tr>
+<tr><td>12</td><td>Table 4 の CAP レジメン（メチルプレドニゾロン 40 mg）の投与経路の記載なし</td><td><strong>ICUでは持続静注、ICU退室後は1日2回分割（静注または経腸）</strong></td><td>追記</td></tr>
+<tr><td>13</td><td>Table 4 の各レジメンの出典試験名なし</td><td>原表は引用番号付き（DEXA-ARDS、Meduri 1998/2007、Confalonieri、CAPE COD、Torres、ESCAPe）</td><td>追記</td></tr>
+<tr><td>14</td><td>CAP の18試験の出典が不明</td><td>エビデンスは <strong>Pitre ら（J Gen Intern Med 2023）の系統的レビュー・用量反応メタ解析</strong>に依拠。2試験は試験内サブグループデータあり</td><td>追記</td></tr>
+<tr><td>15</td><td>「低〜中所得国での実施」への言及なし</td><td><strong>18試験のうち2試験のみ</strong>。健康の公平性の判断材料として明記されている</td><td>追記</td></tr>
+<tr><td>16</td><td>Table 1・Table 2 の内容が未記載</td><td>5つの PICO 表と GRADE の強さの意味の表がある</td><td>追記</td></tr>
+<tr><td>17</td><td>「敗血症＋重症CAP／敗血症＋ARDS ならそれぞれの推奨に従う」を関連事項として記載</td><td>原文でも Special Considerations に明記</td><td>記載を維持（PDFと一致）</td></tr>
+</tbody></table></div>
+<p><strong>照合して誤りが見つからなかった主な数値</strong>：46 RCT／18 RCT（ARDS）／18 RCT（CAP、重症10・軽症8）／RR 0.94（0.89–1.00）／RR 0.93（0.88–0.98）／MD 0.60日・0.74日／RR 1.24（1.11–1.38）／SOFA 1.41点（0.96–1.87）／RR 1.21（1.01–1.45）／RR 1.64（1.32–2.03）／RR 1.13（1.08–1.18）／RR 0.58（0.33–1.03）／RR 0.82（0.72–0.95）／RR 1.11（1.01–1.23）／RR 0.62（0.45–0.85）／RR 1.08（0.83–1.42）／p = 0.08／p = 0.04／p = 0.01／p &lt; 0.001／CAPE COD が重症CAPサブグループの約35%／パネル22名・投票20名・合意は75%参加中80%一致。</p>
+<h2>🔗 既存ノートとの整合</h2>
+<ul><li><strong><span class="wl">敗血症性ショックへのヒドロコルチゾンは死亡を減らさない（個々患者データメタ解析・NEJMEvid2023）</span></strong> ＝ 本ガイドラインの引用文献63（Pirracchio ら）そのもの。本ガイドラインはこの個々患者データメタ解析をフルドロコルチゾン併用の死亡利益を示唆したものとして引用しつつ、サブグループ所見の信頼性は不明とし、自らのメタ解析ではミネラルコルチコイド力価による差が出なかったとしてフルドロコルチゾンの推奨を見送った。ノート側のタイトル（「死亡を減らさない」）とガイドラインの結論（条件付きで投与を提案）は<strong>矛盾しない</strong>。前者はヒドロコルチゾン単独 vs 併用の話、後者はステロイド vs 非投与の話である。</li><li><strong><span class="wl">敗血症性ショックのステロイド（ADRENAL trial）</span></strong> ＝ 引用文献49。本ガイドラインが「昇圧薬を要するショックであれば用量にかかわらず」と適応を広げる根拠の1つ。ADRENAL 自体は90日死亡に差を示さなかったが、ショック離脱と人工呼吸期間を改善しており、本ガイドラインの「死亡ではなくショック離脱と臓器障害で推奨する」という論理構成と整合する。</li><li><strong><span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span></strong> は「輸液・昇圧薬に反応しない敗血症性ショック」にヒドロコルチゾン 200 mg/日を弱い推奨としていた。<strong>本更新はこの「不応」条件を外した</strong>点で SSCG2021 より適応が広い。当院プロトコルがどちらを基準にしているか確認が要る。</li><li><strong><span class="wl">非ウイルス性市中肺炎へのステロイドは短期死亡と挿管を減らす（30RCT・7519例のSR・MA・ICM2025）</span></strong> は本ガイドラインより新しく、試験数も多い（30 RCT・7519例）。方向は一致している。</li><li><strong><span class="wl">重症市中肺炎（sCAP）の国際ガイドライン — 8つの臨床疑問、マクロライド併用・ショック時のステロイド（ERS ESICM ESCMID ALAT・ERJ2023）</span></strong> は 2023年の欧州系ガイドラインで、ステロイドをショック合併例に絞る立場だった。<strong>本 SCCM 2024 は「重症CAP」全体に強い推奨</strong>で、より広い。<mark class="hl">同じ患者に対して2つのガイドラインが違う答えを出す典型例</mark>なので、院内方針としてどちらを採るか決めておく必要がある。</li><li><strong><span class="wl">成人ARDS管理のATSガイドライン更新 — ステロイド・VV-ECMO・筋弛緩・PEEP（AJRCCM2024）</span></strong> と本更新は同年。両者のARDSステロイド推奨の強さを並べて確認すること。</li><li><strong><span class="wl">ARDSに対するデキサメタゾン（DEXA-ARDS試験・LancetRespMed2020）</span></strong> ＝ 引用文献64。Table 4 の「早期ARDS 24時間以内、デキサメタゾン 20 mg → 10 mg」はこの試験のレジメンである。</li><li><strong><span class="wl">SCCM 2024年ステロイド焦点更新の補足資料 — パネル22名・COI管理・GRADE手順・フォレストプロット（SDC・CCM2024）</span></strong> が同じガイドラインの補足資料（SDC 1、全124ページ）を扱っている。<strong>エビデンスプロファイル・ROB 2.0・フォレストプロットはそちら</strong>にある。本ノートは本文と Table 1〜5 の内容を担当する。</li><li><strong><span class="wl">重症患者の血糖管理は個別化目標へ — SHRと相対的低血糖、TGC-Fastでも厳格管理は死亡を変えなかった（AnnEndocrinol2026）</span></strong>：本ガイドラインが3病態すべてで挙げた唯一の一貫した有害事象が高血糖である。ステロイド開始後の血糖目標をどう置くかはこちらを参照。</li></ul>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>推奨1B の確実性が3か所で一致していない</strong>。本文と Table 3 の強さ欄は moderate、Table 3 の推奨文中だけ low。<strong>強い推奨に低確実性を付けることは GRADE では例外的</strong>（5つの例外状況にしか許されない）なので、この不整合は無視できない。校正ミスと考えるのが自然だが、JCでは「どちらが本当か」を問う価値がある。</li><li><strong>推奨2A の対象が "critically ill" か "hospitalized" か</strong>。本文は重症患者、Table 3 は入院患者。軽症のARDS入院患者にも適用するのかどうかで、対象患者数が大きく変わる。しかも2017年にあった P/F &lt; 200 の限定を外したため、<strong>どこまで軽いARDSに使ってよいかの下限が消えている</strong>。</li><li><strong>ARDSの18試験に対して引用番号が14個しかない</strong>。本文は「18 RCT（22, 26, 32, 44, 64, 65, 69–76）」と書いているが、この括弧内は14個の番号しかない。さらに「12本（67%）」の一覧と「6本（33%）」の一覧を足すと引用番号75が両方に登場する。番号75は WHO REACT の前向きメタ解析（それ自体が複数RCTのプール）なので、<strong>1つの引用番号が複数試験を表しているとしか読めない</strong>。<mark class="hl">試験数の数え方が透明でない</mark>。</li><li><strong>3つの推奨のエビデンス基盤が独立していない</strong>。敗血症の46試験のうち5試験は CAP＋敗血症、4試験は ARDS＋敗血症であり、<strong>これらは CAP解析・ARDS解析にも登場する</strong>（14, 35, 46, 38 は CAP の18試験に、22, 26, 32, 44 は ARDS の18試験に含まれる）。3つの推奨は互いに独立した検証ではない。</li><li><strong>重症CAPの「強い推奨」の35%が1試験に依存している</strong>。CAPE COD が重症CAPサブグループの約35%を占め、その強い死亡効果が判断を後押ししたと明記されている。<strong>単一試験の寄与がこれだけ大きい状態で「強い推奨」に格上げする</strong>ことの妥当性はJCの中心論点になる。ESCAPe（Meduri ら、ICM 2022）はメチルプレドニゾロンで死亡を減らせなかったことも思い出しておきたい。</li><li><strong>分子種のサブグループ効果 p &lt; 0.001 を推奨に反映していない</strong>。CAPの死亡について分子種によるサブグループ効果が p &lt; 0.001（信頼性 moderate/low）で出ているのに、推奨は分子種を指定していない。原著は「この解析は重症・非重症の両方を含む」と限定を付けているが、<strong>p &lt; 0.001 のシグナルを推奨に落とさない判断の説明としては薄い</strong>。</li><li><strong>軽症CAPが「推奨なし」で終わったこと</strong>。反対の条件付き推奨が検討されたが合意に至らなかった。<strong>RR 1.08（0.83–1.42）で利益がない一方、有害事象は増える</strong>のだから、臨床的には「出さない」で運用するのが自然だが、ガイドラインは沈黙している。この沈黙が「出してもよい」と読まれるリスクがある。</li><li><strong>敗血症性ショックの死亡効果の 95%CI 上限が 1.00 に接する</strong>。長期死亡 RR 0.94（0.89–1.00）。パネル自身が「効果量は CAP や ARDS ほど大きくない」と認めており、条件付き推奨の実質的な根拠は<strong>確実性 high の2つの代替アウトカム（ショック離脱・SOFA）</strong>である。<mark class="hl">代替アウトカムで推奨を支えている構造</mark>を意識して読むべき。</li><li><strong>有害事象の定義が研究間でばらばら</strong>とパネル自身が3か所で述べている。神経筋の脆弱（RR 1.21、95%CI 1.01–1.45）は下限が 1.01 とぎりぎりで、しかも定義が不統一。<strong>真の害の大きさは評価できていない</strong>。</li><li><strong>小児は3病態すべてで推奨なし</strong>。ARDS と CAP に至っては小児RCTが1本もない。にもかかわらず PICO の対象欄は「全成人・小児」となっており、<strong>問いと答えの範囲がずれている</strong>。</li><li><strong>Table 3 の「2017年との対比」欄の対応がずれて見える</strong>。1A（ショックにステロイドを提案）の対置が「ショックのない敗血症には提案しない」、1B（高用量/短期間を推奨しない）の対置が「不応性ショックには提案する」となっており、<strong>各2024年推奨が何を置き換えたのかが表からは読み取りにくい</strong>。</li><li><strong>本文の相互参照に誤りがある</strong>。CAPの Special Considerations は「重症CAPのレジメン例は Table 3 にある」と書いているが、実際は <strong>Table 4</strong> である。また ESCAPe の投与期間について「actual median [interquartile range] duration 5 (68) d」と、四分位範囲が引用番号に潰れた形で印字されている。</li><li><strong>議長 Annane の COI 管理</strong>。敗血症でのステロイドを検証する複数のRCTに自ら関わっており、討議には参加して投票のみ棄権した。<strong>討議への参加は影響力を残す</strong>という指摘は成り立つ。一方で CAP と ARDS の投票には参加している。</li><li><strong>「投与は7日超のほうがよい」というシグナルの扱い</strong>。ARDS で p = 0.04、ICEMAN 信頼性 moderate のサブグループ効果があるのに、推奨本文には期間の指定がない。<strong>Table 4 のレジメンは 5日〜32日と幅がありすぎ</strong>、ベッドサイドで再現できる指示になっていない。</li></ol>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>CIRCI という用語の提唱（2008年の国際タスクフォース）</td><td>Marik PE, Pastores SM, Annane D, et al. Crit Care Med 2008;36:1937–1949</td></tr>
+<tr><td>2</td><td>CIRCI のナラティブレビュー（SCCM/ESICM 多専門タスクフォース）</td><td>Annane D, Pastores SM, Arlt W, et al. Intensive Care Med 2017;43:1781–1792</td></tr>
+<tr><td>3</td><td>CIRCI ガイドライン part II</td><td>Pastores SM, Annane D, Rochwerg B. Crit Care Med 2018;46:146–148</td></tr>
+<tr><td>4</td><td><strong>CIRCI ガイドライン part I（本更新が置き換えた2017年版）</strong></td><td>Annane D, Pastores SM, Rochwerg B, et al. Crit Care Med 2017;45:2078–2088</td></tr>
+<tr><td>5</td><td>GRADE の原典</td><td>Guyatt GH, Oxman AD, Vist GE, et al. BMJ 2008;336</td></tr>
+<tr><td>6</td><td>GRADE guidelines 2（問いの立て方とアウトカム選定）</td><td>Guyatt GH, Oxman AD, Kunz R, et al. J Clin Epidemiol 2011;64:395–400</td></tr>
+<tr><td>7</td><td><strong>ARDSのPICOの基になった系統的レビュー</strong>（COVID/非COVID ARDSのステロイド）</td><td>Chaudhuri D, Sasaki K, Karkar A, et al. Intensive Care Med 2021;47:521–537</td></tr>
+<tr><td>8</td><td><strong>敗血症のPICOの基になった系統的レビュー</strong></td><td>Rochwerg B, Oczkowski SJ, Siemieniuk RAC, et al. Crit Care Med 2018;46:1411–1420</td></tr>
+<tr><td>9</td><td><strong>ICEMAN ツール</strong>（サブグループ効果の信頼性評価）</td><td>Schandelmaier S, Briel M, Varadhan R, et al. CMAJ 2020;192:E901–E906</td></tr>
+<tr><td>10</td><td>GRADE guidelines 14（エビデンスから推奨へ）</td><td>Andrews J, Guyatt G, Oxman AD, et al. J Clin Epidemiol 2013;66:719–725</td></tr>
+<tr><td>11</td><td>低用量ヒドロコルチゾン＋フルドロコルチゾンの敗血症性ショックRCT</td><td>Annane D, Sébille V, Charpentier C, et al. JAMA 2002;288:862–871</td></tr>
+<tr><td>12</td><td><strong>APROCCHSS</strong>（ヒドロコルチゾン＋フルドロコルチゾン）</td><td>Annane D, Renault A, Brun-Buisson C, et al. N Engl J Med 2018;378:809–818</td></tr>
+<tr><td>14</td><td>重症CAPへのヒドロコルチゾン持続静注（Table 4 のレジメン出典）</td><td>Confalonieri M, Urbino R, Potena A, et al. Am J Respir Crit Care Med 2005;171:242–248</td></tr>
+<tr><td>21</td><td><strong>HYPRESS</strong>（重症敗血症でのショック発症予防）</td><td>Keh D, Trips E, Marx G, et al. JAMA 2016;316:1775–1785</td></tr>
+<tr><td>26</td><td>早期重症ARDSへのメチルプレドニゾロン持続（Table 4 の遷延性ARDSレジメン出典）</td><td>Meduri GU, Golden E, Freire AX, et al. Chest 2007;131:954–963</td></tr>
+<tr><td>46</td><td>高炎症反応を伴う重症CAPへのメチルプレドニゾロン</td><td>Torres A, Sibila O, Ferrer M, et al. JAMA 2015;313:677–686</td></tr>
+<tr><td>49</td><td><strong>ADRENAL</strong>（敗血症性ショックへの補助的グルココルチコイド）</td><td>Venkatesh B, Finfer S, Cohen J, et al. N Engl J Med 2018;378:797–808</td></tr>
+<tr><td>62</td><td>ADRENAL データによる長期費用・費用対効果（ニュージーランド）</td><td>Thompson KJ, Young PJ, Venkatesh B, et al. Aust Crit Care 2022;35:241–250</td></tr>
+<tr><td>63</td><td><strong>低用量ヒドロコルチゾンの個々患者データメタ解析</strong>（フルドロコルチゾン併用のシグナル）</td><td>Pirracchio R, Annane D, Waschka AK, et al. NEJM Evid 2023;2:1–12</td></tr>
+<tr><td>64</td><td><strong>DEXA-ARDS</strong>（ARDSへのデキサメタゾン。Table 4 の早期ARDS 24時間以内レジメン）</td><td>Villar J, Ferrando C, Martínez D, et al. Lancet Respir Med 2020;8:267–276</td></tr>
+<tr><td>65</td><td>遷延ARDSへの長期メチルプレドニゾロン（Table 4 の早期ARDS 72時間以内レジメン）</td><td>Meduri GU, Headley AS, Golden E, et al. JAMA 1998;280:159–165</td></tr>
+<tr><td>66</td><td>CAPへのステロイド補助療法</td><td>Nafae RM, Ragab MI, Amany FM, et al. Egypt J Chest Dis Tuberc 2013;62:439–445</td></tr>
+<tr><td>67</td><td><strong>CAPE COD</strong>（重症CAPへのヒドロコルチゾン。重症CAPサブグループの約35%）</td><td>Dequin P-F, Meziani F, Quenot J-P, et al. N Engl J Med 2023;388:1931–1941</td></tr>
+<tr><td>68</td><td><strong>ESCAPe</strong>（重症CAPへの低用量メチルプレドニゾロン）</td><td>Meduri GU, Shih MC, Bridges L, et al. Intensive Care Med 2022;48:1009–1023</td></tr>
+<tr><td>69</td><td>遷延ARDSへのステロイド（LaSRS）</td><td>Steinberg KP, Hudson LD, Goodman RB, et al. N Engl J Med 2006;354:1671–1684</td></tr>
+<tr><td>71</td><td><strong>RECOVERY</strong>（COVID-19へのデキサメタゾン）</td><td>RECOVERY Collaborative Group. N Engl J Med 2021;384:693–704</td></tr>
+<tr><td>75</td><td>COVID-19重症患者のステロイドの前向きメタ解析（WHO REACT）</td><td>Sterne JAC, Murthy S, et al.</td></tr>
+<tr><td>76</td><td><strong>CoDEX</strong>（COVID-19中等症〜重症ARDSへのデキサメタゾン）</td><td>Tomazini BM, Maia IS, Cavalcanti AB, et al. JAMA 2020;324:1307–1316</td></tr>
+<tr><td>79</td><td><strong>CAPの18試験の出典</strong>（系統的レビュー・ペアワイズ・用量反応メタ解析）</td><td>Pitre T, Abdali D, Chaudhuri D, et al. J Gen Intern Med 2023;38:2593–2606</td></tr>
+<tr><td>91</td><td>CAPへのステロイドの費用対効果</td><td>Pliakos EE, Andreatos N, Tansarli GS, et al. Chest 2019;155:787–794</td></tr>
+<tr><td>92</td><td><strong>ATS/IDSA 2007 CAPガイドライン</strong>（Table 5 の重症基準の出典）</td><td>Mandell LA, Wunderink RG, Anzueto A, et al. Clin Infect Dis 2007;44:S27–S72</td></tr>
+<tr><td>93</td><td><strong>PSI</strong> の原典</td><td>Fine MJ, Auble TE, Yealy DM, et al. N Engl J Med 1997;336:243–250</td></tr>
+<tr><td>94</td><td><strong>CURB-65</strong> の原典</td><td>Lim WS, van der Eerden MM, Laing R, et al. Thorax 2003;58:377–382</td></tr>
+<tr><td>95</td><td><strong>CORB</strong> の原典</td><td>Buising KL, Thursky KA, Black JF, et al. Emerg Med Australas 2007;19:418–426</td></tr>
+<tr><td>96</td><td><strong>SMART-COP</strong> の原典</td><td>Charles P, Wolfe R, Whitby M, et al. Clin Infect Dis 2008;47:375–384</td></tr>
+<tr><td>97</td><td>重症CAP評価基準（各研究が用いた修正ATS基準）</td><td>Ewig S, Ruiz M, Mensa J, et al. Am J Respir Crit Care Med</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>重症の細菌性CAPだけが「強い推奨」（院内死亡 RR 0.62）。敗血症性ショックとARDSは「条件付き推奨」で、敗血症性ショックの根拠は死亡ではなくショック離脱とSOFA改善である。</strong></mark></p>
+</div>
+<ul><li><mark class="hl"><strong>重症CAPには出す。微生物学的確定は不要</strong></mark>。細菌性肺炎の臨床的疑いが高く経験的抗菌薬を受けていればよい。院内死亡 RR 0.62（0.45–0.85、moderate）</li><li><mark class="hl"><strong>軽症CAPには出さない</strong></mark>。RR 1.08（0.83–1.42）で利益がなく、高血糖と二次感染は増える。ガイドラインは「推奨なし」だが臨床的には出さない側で運用する</li><li><mark class="hl"><strong>敗血症性ショックの適応から「昇圧薬に不応」の条件が消えた</strong></mark>。昇圧薬を要するショックなら用量にかかわらず対象。ヒドロコルチゾン 200 mg/日 ± フルドロコルチゾン 50 µg、7日または ICU 退室まで</li><li><mark class="hl"><strong>高用量／短期間（ヒドロコルチゾン換算 400 mg/日超を3日未満）は強い推奨で禁止側</strong></mark>。古いパルス的な使い方は廃止する</li><li><mark class="hl"><strong>ARDSは短く切らない</strong></mark>。28日死亡 RR 0.82。7日超のほうが生存が良かった（p = 0.04）。P/F &lt; 200 という2017年の限定は外れた</li><li><mark class="hl"><strong>小児には適用しない</strong></mark>。3病態すべてで推奨なし。ARDSとCAPは小児RCTがゼロ</li><li><strong>副作用のセットオーダー</strong>：高Na血症 RR 1.64、高血糖 RR 1.13、神経筋の脆弱 RR 1.21。<strong>Na のフォローを開始オーダーに紐づける</strong></li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>昇圧薬を要する敗血症性ショック</td><td>昇圧薬の用量は問わない。以前の「不応性」条件は不要</td><td>ヒドロコルチゾン 200 mg/日 静注（持続 or 6時間ごと）± フルドロコルチゾン 50 µg 経腸/日、7日または ICU 退室まで</td></tr>
+<tr><td>ショックのない敗血症</td><td>重症CAP か ARDS を合併していないか</td><td>合併していれば各推奨に従って投与。どちらもなければガイドラインは推奨を出していない</td></tr>
+<tr><td>CAPで入院</td><td>ATS/IDSA 2007 の major 1つ or minor 3つ以上、または CAPE COD 基準を満たすか</td><td>満たす（＝重症）→ 投与する（強い推奨）。満たさない（＝軽症）→ ガイドラインは推奨なし、利益も示されていない</td></tr>
+<tr><td>重症CAPと判断した</td><td>どのレジメンにするか（ガイドラインは指定していない）</td><td>ヒドロコルチゾン 200 mg 静注 → 10 mg/時 × 7日、または CAPE COD 式（200 mg/日 4〜8日 → 漸減、総8〜14日、ICU退室で中止）</td></tr>
+<tr><td>ARDS</td><td>発症からの時間（24時間以内／72時間以内／7〜21日）</td><td>24時間以内＝デキサメタゾン 20 mg × 5日 → 10 mg × 5日。72時間以内＝メチルプレドニゾロン 1 mg/kg から漸減。遷延性＝2 mg/kg から漸減</td></tr>
+<tr><td>ARDSで投与中</td><td>抜管したので止めるか</td><td>7日超のほうが生存が良い。Table 4 のレジメンは抜管後も漸減を続ける設計になっている</td></tr>
+<tr><td>すでに高用量ステロイド（400 mg/日超）を短期で使う指示が残っている</td><td>3日未満の高用量か</td><td>強い推奨で否定されている。廃止する</td></tr>
+<tr><td>ステロイドを開始した</td><td>Na・血糖・筋力のフォロー体制があるか</td><td>Na のフォローをオーダーに紐づける。高Na血症 RR 1.64 が最も見落とされやすい</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

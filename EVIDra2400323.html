@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ペースメーカーの基礎から最新デバイスまで — NBGコード・適応・リードレス・伝導系ペーシングを一望する（総説・NEJMEvid2025）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="EVIDra2400323.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ペースメーカーの基礎から最新デバイスまで — NBGコード・適応・リードレス・伝導系ペーシングを一望する（総説・NEJMEvid2025）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Aldaas OM, Roberge-Lacharite AS, Birgersdotter-Green U. Pacemakers. NEJM Evid 2025;4(7). DOI: 10.1056/EVIDra2400323</dd><dt>掲載誌</dt><dd>NEJM Evidence（2025-06-24）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1056/EVIDra2400323" target="_blank" rel="noopener">doi.org/10.1056/EVIDra2400323</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Pacemakers</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/EVIDra2400323.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/EVIDra2400323.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/EVIDra2400323.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>本総説はICUの論文ではない</strong>。循環器・不整脈の総説であり、「ICUでのペースメーカー患者管理」「一時ペーシング」「経皮ペーシング」は主題ではない。ICU向けの記述は断片的に散っているだけで、体系立った推奨はない</li><li>それでも当院ICUに直結する記述は4つある。① 手術・MRI 中の非同期モード（AOO・VOO・DOO）、② 電気メスによるペーシング抑制、③ MRI 非対応デバイスでも 1.5 テスラなら厳格プロトコル下で撮像可・遺残リード（abandoned lead）は原則禁忌、④ デバイス感染時の全抜去適応（黄色ブドウ球菌のデバイス関連感染・弁膜症性心内膜炎・適切な抗菌薬にもかかわらず持続/再燃する菌血症）</li><li><strong>急性心筋梗塞に伴う高度房室ブロックの扱いはICUの日常</strong>。本総説は「急性期は血行動態が破綻すれば一時ペーシング、恒久ペーシングはブロックが遷延する症例に限る」「前壁梗塞のブロックは下壁梗塞より自然回復しにくい」「恒久ペーシングは5日以上の待機期間の後」と明記している。ICUで焦って恒久ペーシングを急がせない根拠になる</li><li><strong>レジデント講義への使い方</strong>：NBGコード（Table 1）→ モードの意味 → 適応（Table 4）→ デバイス選択（Figure 1・Figure 2）の順に4枚で足りる。Figure 1 の6パネル図と Figure 2 のアルゴリズムはそのまま板書代わりに使える</li><li>当院で変わるものは（今のところ）ない。本総説はエビデンスの更新ではなく、地図の提示である</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ペースメーカーは非可逆性の徐脈性不整脈に対する唯一の根治的治療であり、世界で年間100万台超が植込まれている。NBGコード・洞不全症候群と房室ブロックの適応・CRT の心不全での有効性は確立している</li><li><strong>Unknown</strong>：伝導系ペーシング（His束ペーシング・左脚領域ペーシング）が従来の右室ペーシングや両室ペーシング（CRT）を本当に上回るのかは、まだ大規模ランダム化試験の結果待ち。リードレスペースメーカーの長期安全性データも不足している</li><li><strong>What's new</strong>：本総説自体に新しいデータはない。価値は「基礎（構成要素・NBGコード・モード）から最先端（デュアルチャンバー・リードレス、LBBAP、リードレス CSP、AI 連携遠隔モニタリング）までを1本で通す見取り図」を、進行中の大規模ランダム化試験7本（Table 3）とともに提示した点にある</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 徐脈治療のペースメーカーを、構成要素・NBGコード・モード・デバイス種別・適応・心不全での役割・合併症・将来展望まで通しで整理した UCSD 循環器グループのナラティブレビューで、<strong>「右室心尖部ペーシングの害を避けるために、いかに生理的な心室興奮を保つか」という一本の軸</strong>が全体を貫いている。</p>
+</div>
+<ul><li>経静脈ペースメーカーは「パルスジェネレータ＋リード＋電極」の3要素からなり、鎖骨下（前胸筋前面）に埋め込むのが標準</li><li>NBGコードは1974年に AHA と ACC が導入し、後に NASPE と BPEG が改訂した最大5文字の記法。5文字未満のときは省略部分を「O（なし）」とみなす</li><li>単腔は AAI(R)／VVI(R)、二腔は DDD(R)／DDI(R)。VVI は「どんな原因の徐脈にも効く汎用モード」だが房室非同期を起こしペースメーカー症候群の原因になる</li><li>非同期モード（AOO・VOO・DOO）は長期使用はまれだが、手術中・MRI 中に頻用される。電気メスの信号を自己心拍と誤認してペーシングが抑制されるのを防ぐため</li><li>デバイスは6種類（Figure 1）：経静脈二腔／単腔心室リードレス／二腔リードレス／両室（CRT）／二腔伝導系ペーシング／心外膜</li><li>リードレスはリード関連感染・静脈狭窄を避けられるが、CRT 非対応・遠隔モニタリングは Micra のみ・高コスト・抜去の経験が乏しい（Table 2）</li><li>適応は「症状があるか」「不可逆か」で決まる。洞不全症候群は症状の有無のみで決め、心拍数やポーズ長に絶対的な閾値はない</li><li>心不全では CRT（NYHA II〜IV・左脚ブロック・EF ≤35%）が確立。QRS 130ミリ秒未満では有効でなく、むしろ死亡増加の可能性</li><li>合併症は即時 5〜10%、長期 1〜2%/年。二腔は単腔より合併症が多く、最多は心房リード脱転</li><li>将来：充電式電池、リードレスによる LBBAP、AI を組み込んだ遠隔モニタリングと遠隔プログラミング</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 心臓は洞結節（右房上部のペースメーカー細胞）が電気を出し、房室結節（AV node）を経て His 束→左右脚→Purkinje 線維へ伝わることで、左右の心室がほぼ同時に収縮する。この経路のどこかが壊れると徐脈になる。壊れ方は大きく2つで、①「発電所」が弱る＝洞不全症候群（sinus-node dysfunction, SND）、②「送電線」が切れる＝房室ブロック（AV block）。ペースメーカーはこの2つに対して、電気刺激を人工的に与えて心拍数を回復させる装置である。 重要なのは「どこをペーシングするか」で、右室心尖部を刺激すると興奮が心筋を伝って左室へ遅れて届くため、心電図上は左脚ブロック（LBBB）様となり、左右心室の収縮がずれる（心室ディスシンクロニー）。これが長期的に心不全や心房細動を増やす。この副作用を避けるための工夫が、両室ペーシング（CRT）と伝導系ペーシング（CSP＝His 束ペーシング・左脚領域ペーシング）である。 略語の最小セット：<strong>SND</strong>＝洞不全症候群、<strong>AV block</strong>＝房室ブロック、<strong>CRT</strong>＝心臓再同期療法（cardiac-resynchronization therapy、両室ペーシング）、<strong>CSP</strong>＝伝導系ペーシング（conduction system pacing）、<strong>LBBAP</strong>＝左脚領域ペーシング（left bundle-branch area pacing）、<strong>HV 間隔</strong>＝His 束から心室興奮までの伝導時間（正常は概ね35〜55ミリ秒、本文では70ミリ秒以上を異常として扱う）、<strong>LVEF</strong>＝左室駆出率、<strong>NYHA</strong>＝ニューヨーク心臓協会心機能分類。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>ペースメーカーは徐脈と心ブロックの管理を一変させ、<strong>非可逆性の徐脈性不整脈に対する唯一の根治的治療</strong>である</li><li>心臓ペーシングは適切な心拍数と心拍応答を回復し、血行動態を正常化して有効な循環を再確立する</li><li>世界で年間100万台超が植込まれており、高齢化と心血管併存症の増加によりさらに増える見込み</li><li>従来の単腔・二腔デバイスから、リードレス、CRT のための両室ペーシング、His 束ペーシング、左脚領域ペーシングへと選択肢が広がった</li><li>本総説の目的は6つ：① ペースメーカーの基本原理、② 現在の植込み適応、③ デバイスの種類、④ 心不全管理における役割、⑤ 新たな進歩、⑥ この分野の継続的課題と限界</li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（REVIEW ARTICLE）。文献検索期間・データベース・検索式・選択基準・除外基準・質評価の記載は<strong>本文に一切ない</strong></li><li><strong>対象</strong>：ヒト対象研究ではないため n・施設・期間の概念がない</li><li><strong>介入・比較</strong>：なし（総説）</li><li><strong>アウトカム</strong>：なし（総説）</li><li><strong>解析</strong>：統計解析なし。事前登録（PROSPERO 等）の記載もない</li><li><strong>含まれる図表</strong>：Figure 1（デバイス6種の解剖図）、Figure 2（モード選択アルゴリズム）、Table 1（NBGコード）、Table 2（経静脈 vs リードレス）、Table 3（進行中の LBBAP 大規模RCT 7本）、Table 4（米欧ガイドラインの適応推奨）</li><li><strong>限界（方法論として）</strong>：エビデンスの重み付けが著者の裁量に委ねられ、引用文献の選択にバイアスが入りうる。数値の多くは「reported as」「approximately」という形で提示され、出典ごとの定義差が吸収されていない</li></ul>
+<h3>4. ペースメーカーの基本原理</h3>
+<h4>4-1. 構成要素と植込み部位</h4>
+<div class="tw"><table>
+<thead><tr><th>要素</th><th>役割</th></tr></thead>
+<tbody>
+<tr><td>パルスジェネレータ（pulse generator）</td><td>電気インパルスを産生する本体。通常は鎖骨下部（infraclavicular region）の前胸筋前面（prepectoral）に植込む。まれに胸筋下（subpectoral）植込みを用いる</td></tr>
+<tr><td>リード（leads）</td><td>インパルスを心臓へ伝える導線</td></tr>
+<tr><td>電極（electrodes）</td><td>自己リズムをセンシングし、必要時に心筋へインパルスを送る先端</td></tr>
+</tbody></table></div>
+<ul><li>「センシング」と「ペーシング」を同じ電極が担う点が要。センシングが誤作動すると、ペーシングも誤作動する（後述の電気メス問題の根本）</li></ul>
+<h4>4-2. NBGコード — 5文字を1文字目から読む</h4>
+<p>1974年に American Heart Association と American College of Cardiology がペースメーカー機能を記述するコード体系を導入し、後に North American Society of Pacing and Electrophysiology（NASPE）と British Pacing and Electrophysiology Group（BPEG）が改訂した。これが <strong>NBGコード</strong>である。最大5文字を用い、5文字未満のときは省略された位置は「O（なし）」とみなす。</p>
+<h4>Table 1. NBG Code for Pacing Nomenclature（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>記号</th><th>1文字目 ペーシング部位</th><th>2文字目 センシング部位</th><th>3文字目 センシングへの応答</th><th>4文字目 レート応答</th><th>5文字目 多部位ペーシング</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>心房（Atrium）</td><td>心房（Atrium）</td><td>—</td><td>—</td><td>心房（Atrium）</td></tr>
+<tr><td>V</td><td>心室（Ventricle）</td><td>心室（Ventricle）</td><td>—</td><td>—</td><td>心室（Ventricle）</td></tr>
+<tr><td>D</td><td>両方（Dual）</td><td>両方（Dual）</td><td>両方の応答（Dual）</td><td>—</td><td>両方（Dual）</td></tr>
+<tr><td>I</td><td>—</td><td>—</td><td>抑制（Inhibited）</td><td>—</td><td>—</td></tr>
+<tr><td>T</td><td>—</td><td>—</td><td>同期・トリガー（Triggered）</td><td>—</td><td>—</td></tr>
+<tr><td>R</td><td>—</td><td>—</td><td>—</td><td>レート応答あり（Rate modulation）</td><td>—</td></tr>
+<tr><td>O</td><td>なし（None）</td><td>なし（None）</td><td>なし（None）</td><td>なし（None）</td><td>なし（None）</td></tr>
+</tbody></table></div>
+<p>原表の脚注（3点とも重要なので全文を訳す）：</p>
+<ol><li>NBGコードは最大5文字で各種機能を表す。5文字未満のときは省略された位置は「O（なし）」とみなす（※原文はここで "The NGB code" と綴られており、NBG のタイプミス）</li><li>3文字目について。<strong>I</strong> は抑制型ペーシング（自己拍を検出するとペーシングを出さない）。<strong>T</strong> はセンシングした事象に応じてペーシングを出すトリガー型。<strong>D</strong> は両者を併せ持つ応答で、心房センシングは心房ペーシングを抑制する一方、プログラム可能な遅延（PR 間隔を模倣）の後に心室ペーシングをトリガーする。あるいはその遅延中に自己心室興奮が検出されれば心室ペーシングは抑制される</li><li>2文字目・3文字目の <strong>O</strong> は「センシングをしない」ことを意味し、自己リズムに関係なく固定レートでペーシングすることを許す</li></ol>
+<p>読み方の型：<strong>1文字目「どこを叩くか」→ 2文字目「どこを聴くか」→ 3文字目「聴こえたらどうするか」→ 4文字目「運動で速くするか」→ 5文字目「複数箇所を叩くか」</strong>。この順に読めば、初見のコードでも意味が取れる。</p>
+<h3>5. ペーシングモード — 主要モードの意味と使いどころ</h3>
+<p>最適なペーシングの選択は、患者の基礎不整脈、運動能力、変時応答（chronotropic response）、左室機能、併存症を考慮して行う。</p>
+<div class="tw"><table>
+<thead><tr><th>モード</th><th>読み下し</th><th>挙動</th><th>使いどころ（本総説の記述に基づく）</th><th>弱点</th></tr></thead>
+<tbody>
+<tr><td>AAI／AAIR</td><td>心房ペーシング・心房センシング・抑制</td><td>心房をペーシングしセンシングし、自己心房活動を検出するとペーシング出力を抑制する</td><td>洞不全症候群で房室結節病変のエビデンスがない症例。Figure 2 では「頻回のペーシングを要し、かつ房室伝導が正常」の枝</td><td>房室ブロックが後から出ると心室が守られない</td></tr>
+<tr><td>VVI／VVIR</td><td>心室ペーシング・心室センシング・抑制</td><td>心室をペーシングしセンシングし、自己心室事象を感知するとペーシング出力を抑制する</td><td>汎用性が高く、あらゆる原因の徐脈から守れる。心房の組織的な活動がない場合（永続性心房細動）、ペーシング需要が低い場合</td><td>房室非同期（AV dyssynchrony）を起こし、ペースメーカー症候群の原因になる</td></tr>
+<tr><td>DDD／DDDR</td><td>心房・心室の両方をペーシング／センシング、両応答</td><td>心房・心室ともにセンシング・ペーシングし、心房活動をトラッキングして房室同期を保つ</td><td>洞結節機能が保たれた房室ブロック、房室結節病変を伴う洞不全症候群</td><td>右室ペーシング率が高くなるとディスシンクロニーを招く</td></tr>
+<tr><td>DDI／DDIR</td><td>心房・心室の両方をペーシング／センシング、抑制のみ</td><td>両腔をセンシング・ペーシングするが、センシングされた心房事象はプログラムされた房室遅延後の心室ペーシングを開始しない。心房トラッキングがなく房室同期が失われる</td><td>上室頻拍のエピソードがある洞不全症候群（心房頻拍を心室に追従させない）</td><td>房室同期が失われる</td></tr>
+<tr><td>VDD</td><td>心室ペーシング・両腔センシング・両応答</td><td>心房をセンシングして心室をペーシング（心房ペーシングはしない）</td><td>洞調律が保たれた房室ブロックで、ペーシング需要が低い場合（Figure 2 の房室ブロック枝）</td><td>洞不全が併存すると使えない</td></tr>
+<tr><td>AOO／VOO／DOO</td><td>非同期（センシングなし）</td><td>自己リズムを一切センシングせず固定レートでペーシングする</td><td>長期使用はまれ。<strong>手術中・MRI 中</strong>にセンシングが信頼できないときに頻用</td><td>自己リズムとの競合。理論上、ペーシングパルスが自己 T 波の受攻期に落ちて心室性不整脈を誘発しうる</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>電気メスと非同期モード — ICUと手術室が交差する点 電気メス（electrocautery）の信号が自己の心活動と誤認されると、<strong>ペーシングが不適切に抑制される</strong>。これを避けるために術中・MRI 中は非同期モード（AOO・VOO・DOO）に切り替える。ただし非同期ペーシングには自己リズムとの競合という代償があり、<mark class="hl">理論上はペーシングパルスが自己 T 波の受攻期に落ちて心室性不整脈を誘発しうる</mark>。著者はこの理論的リスクは「速いレートでペーシングすることで低減される」と述べている。ICU で「なぜ術後にモードが戻っていないのか」を問う場面が必ず来るため、<mark class="hl">術後に設定を元に戻す確認は最後の砦としてICUが担う</mark>（設定復帰の運用は本総説の対象外で、<span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span> に詳しい）。</p>
+</div>
+<h3>6. 現代のペースメーカー — デバイスの種類</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1056/EVIDra2400323" target="_blank" rel="noopener">原論文（doi.org/10.1056/EVIDra2400323）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Types of Pacemakers（ペースメーカーの種類）。臨床使用が承認されている各種ペースメーカーを描いた図。2行3列の6パネル構成で、各パネルは同じ角度の心臓断面イラスト（右房・右室を開いて描き、大血管を上方に配置）に、デバイスとリードの位置を重ねている。上段左「Transvenous dual-chamber pacemaker（経静脈二腔ペースメーカー）」＝左鎖骨下から2本のリードが下行し、1本が右心耳、1本が右室心尖部に固定される。上段中「Single-chamber ventricular leadless pacemaker（単腔心室リードレスペースメーカー）」＝リードがなく、カプセル型デバイスが右室内に単独で留置されている。上段右「Dual-chamber ventricular leadless pacemaker（二腔リードレスペースメーカー）」＝右房と右室にそれぞれカプセルが1個ずつ留置され、2個が無線で通信する構成。下段左「Biventricular pacemaker（両室ペースメーカー）」＝右房・右室に加えて、冠静脈洞を経由して左室側壁の心外膜側に第3のリードが到達している。下段中「Dual-chamber conduction system pacing（二腔伝導系ペーシング）」＝右房リードに加え、心室側リードが右室心尖部ではなく心室中隔（His 束から遠位の中隔深部）に打ち込まれている。下段右「Epicardial pacing（心外膜ペーシング）」＝心臓を外側から見た図で、心表面に2本のリードが縫着され、経静脈経路をまったく使わない。各パネルの見出しは青字、デバイス先端の固定部位が赤色で強調されている。講義でデバイス選択を説明するときの1枚目に適する。</p>
+</div>
+<h4>6-1. 経静脈ペースメーカー（transvenous）</h4>
+<ul><li>依然として最も多く植込まれている</li><li>単腔システム（リードが心房または心室のいずれか1本）と二腔システム（両腔に1本ずつ）がある</li></ul>
+<h4>6-2. リードレスペースメーカー（leadless）</h4>
+<ul><li>自己完結型デバイスを心臓内に直接植込む。経静脈リードが不要になるため、<strong>リード関連の感染と静脈狭窄のリスクを減らす</strong></li><li>当初は右室ペーシングに限られていたが、現在は心房・心室の活動をセンシングでき（VDDR）、AAIR・VVIR・DDDR を提供できる</li><li>植込みは通常、経大腿静脈アプローチで経皮的に行う。必要に応じて経頸静脈アクセスも用いられる</li><li>安全性と有効性は複数の<strong>前向き・非ランダム化・多施設研究</strong>で示されている（ここが要点：ランダム化比較試験ではない）</li></ul>
+<h4>Table 2. 経静脈ペースメーカーとリードレスペースメーカーの比較（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>経静脈ペースメーカー</th><th>リードレスペースメーカー</th></tr></thead>
+<tbody>
+<tr><td>植込み時合併症</td><td>弁の損傷、ポケット血腫、リード脱転、血胸・気胸</td><td>血管損傷、鼠径部出血・血腫、デバイス塞栓、心穿孔・タンポナーデ</td></tr>
+<tr><td>感染</td><td>高リスク</td><td>低リスク</td></tr>
+<tr><td>抜去（extraction）</td><td>十分な経験の蓄積あり</td><td>経験が限られる</td></tr>
+<tr><td>心房ペーシング</td><td>可能</td><td>可能</td></tr>
+<tr><td>心臓再同期（CRT）</td><td>可能</td><td>不可</td></tr>
+<tr><td>回復期間</td><td>長い</td><td>短い</td></tr>
+<tr><td>電池寿命</td><td>最長17年（中央値10.8年）</td><td>最長27年（中央値12.1年）</td></tr>
+<tr><td>遠隔モニタリング</td><td>可能</td><td>現時点で Micra のみ可能</td></tr>
+<tr><td>MRI 条件付き対応</td><td>あり</td><td>あり</td></tr>
+<tr><td>コスト</td><td>低い</td><td>高い</td></tr>
+</tbody></table></div>
+<p>原表の脚注：二腔リードレスペースメーカーで相互通信をプログラムした場合は電池寿命が短くなり、<strong>心房側デバイスで平均6.4年、心室側デバイスで11.3年</strong>である。</p>
+<h4>6-3. 心臓再同期療法（CRT）</h4>
+<ul><li>従来型とリードレスはいずれも房室同期は保てるが、<strong>ペーシングが右室からのみのため心室間同期（interventricular synchrony）は得られない</strong></li><li>この限界に対応するために「心臓生理的ペーシング（cardiac physiological pacing）」が開発された。これは CRT と CSP の両方を包含する概念</li><li>CRT は両心室をペーシングして心室同期を改善する。左室は冠静脈洞リード、心外膜リード、または左室内のリードレスデバイスのいずれかでペーシングする</li><li>収縮期心不全と左脚ブロックを有する患者で特に有益</li><li>ただし冠静脈洞リードの留置は常に可能とは限らない。不可能な理由として、静脈狭窄、瘢痕組織、高いペーシング閾値、横隔膜刺激、先天奇形が挙げられている</li><li>リードが1本増えることで<strong>静脈閉塞のリスクと電池消耗の早期化</strong>が増す</li></ul>
+<h4>6-4. 伝導系ペーシング（CSP）— His 束ペーシングと左脚領域ペーシング</h4>
+<p>CSP は CRT への追加または代替として登場した。狙いは <strong>His–Purkinje 系を賦活して心室同期を改善する</strong>こと。</p>
+<div class="tw"><table>
+<thead><tr><th>手技</th><th>リードの位置</th><th>利点</th><th>課題</th></tr></thead>
+<tbody>
+<tr><td>His 束ペーシング（His-bundle pacing）</td><td>近位中隔に留置して His 束を捕捉する</td><td>最も生理的な興奮伝播を狙える</td><td>リード安定性が悪くリード脱転による再介入が多い。心房オーバーセンシング。捕捉閾値が高く電池消耗が速い</td></tr>
+<tr><td>左脚領域ペーシング（LBBAP）</td><td>右室中隔の近位、His 束より遠位にリードを打ち込み、左脚捕捉をテストで確認する</td><td>成功率が高く、QRS 幅が120ミリ秒未満に短縮する。左室駆出率と心不全症状の改善と関連。His 束ペーシングと比べて合併症率が低く、ペーシング閾値が良好で、心房オーバーセンシングが少ない</td><td><strong>中隔穿孔のリスクが高い</strong>（リードがより遠位・深部に入るため）</td></tr>
+</tbody></table></div>
+<ul><li>これまでの研究は「左脚ブロックを有する CRT 適応患者」に集中していたが、<strong>His–CRT 試験は右脚ブロックを有する CRT 適応患者での His 束ペーシングを評価中</strong>（NIH プロジェクト番号 5R01HL160795-03、2022〜2025年）</li><li>心房側の代替部位ペーシングで心房性不整脈の進行を抑えるという仮説は、<strong>ランダム化比較試験のメタ解析で否定された</strong></li><li>ただし Bachmann 束ペーシングへの関心が電位図ガイド法によって再燃しており、現在も検討中（本文の綴りは "Bachman's Bundle"、引用文献38の綴りは "Bachmann's bundle" で不一致）</li></ul>
+<h4>Table 3. 左脚領域ペーシング（LBBAP）を評価中の大規模ランダム化試験（原表を日本語化・全7試験）</h4>
+<div class="tw"><table>
+<thead><tr><th>試験名</th><th>ClinicalTrials.gov ID</th><th>施設</th><th>予定登録数</th><th>追跡</th><th>終了予定</th><th>比較</th><th>主要アウトカム</th></tr></thead>
+<tbody>
+<tr><td>Left versus Left Randomized Clinical Trial</td><td>NCT05650658</td><td>米国・カナダの12施設</td><td>2136</td><td>5.5年</td><td>2029年6月</td><td>His または LBBAP 対 CRT。対象は LVEF 50%以下かつ QRS 幅130ミリ秒以上、または現在もしくは今後40%超のペーシングが見込まれ、心不全の標準薬物療法をすでに受けている患者</td><td>全死亡と心不全入院の複合臨床エンドポイント</td></tr>
+<tr><td>Conduction-System Pacing with Left Bundle-Branch Pacing as Compared to Standard Right Ventricular Pacing</td><td>NCT05015660</td><td>カナダ単施設</td><td>1300</td><td>3年</td><td>2027年1月</td><td>高度房室ブロック患者での LBBAP 対 標準的右室ペーシング</td><td>心血管死までの時間、初回心不全イベントまでの時間、2年時点の左室収縮末期容積係数（LVESVi）の悪化</td></tr>
+<tr><td>Protection of Cardiac Function with Left Bundle-Branch Pacing in Patients with AV Block（OptimPacing）</td><td>NCT04624763</td><td>中国単施設</td><td>683</td><td>3年</td><td>2029年6月</td><td>LBBAP 対 右室ペーシング</td><td>全死亡・心不全入院・ペーシング誘発心筋症の発生の複合</td></tr>
+<tr><td>Physiological Ventricular Pacing versus Managed Ventricular Pacing for Persistent AF Prevention in Prolonged AV Interval（PhysioVP-AF）</td><td>NCT05367037</td><td>イタリア単施設</td><td>640</td><td>3年</td><td>2028年12月</td><td>洞結節疾患または発作性の1型・2型第2度房室ブロック患者で、His または LBBAP 対 心室ペーシング回避アルゴリズムを付加した二腔ペーシング</td><td>持続性心房細動からの回避、および心血管死・心不全・CSP や CRT へのアップグレードの複合</td></tr>
+<tr><td>Impact of Left Bundle-Branch Area Pacing versus Right Ventricular Pacing in AV Block（LEAP-Block）</td><td>NCT04730921</td><td>中国8施設</td><td>458</td><td>2年</td><td>2025年12月</td><td>房室ブロック患者での LBBAP 対 右室ペーシング</td><td>全死亡・心不全入院・ペーシング誘発心不全による CRT へのアップグレードの複合の初回イベントまでの時間</td></tr>
+<tr><td>Preventive Effect of Left Bundle-Branch Area Pacing versus Right Ventricular Pacing on All-Cause Death, Heart-Failure Progression, and Ventricular Dyssynchrony in Patients with Substantial Ventricular Pacing（PROTECT-SYNC）</td><td>NCT05585411</td><td>韓国8施設</td><td>450</td><td>2年</td><td>2026年11月</td><td>高いペーシング負荷（40%超）を要する徐脈性不整脈患者での LBBAP 対 右室ペーシング</td><td>全死亡・心不全入院・ペーシング誘発心筋症の発生・CRT へのアップグレードの複合</td></tr>
+<tr><td>Conduction-System Pacing versus Biventricular Pacing in Systolic Dysfunction and Wide QRS: Mortality, Heart-Failure Hospitalization or Cardiac Transplant（CONSYST-CRT II）</td><td>NCT06105580</td><td>スペイン単施設</td><td>320</td><td>1年</td><td>2027年11月</td><td>左脚ブロック・QRS 130ミリ秒以上・LVEF 35%以下の患者での His 束または LBBAP 対 CRT</td><td>全死亡・心臓移植・心不全入院の複合エンドポイント</td></tr>
+</tbody></table></div>
+<p>読みどころ：7試験の総登録予定は 2136＋1300＋683＋640＋458＋450＋320 = <strong>5987例</strong>。最大の Left versus Left（2136例・5.5年追跡）の結果が出るのは2029年6月であり、<strong>「LBBAP が CRT や右室ペーシングを上回るか」の決着は2020年代末までつかない</strong>。現時点で LBBAP を推す根拠は観察研究・単施設研究にとどまる。</p>
+<h4>6-5. 心外膜ペースメーカー（epicardial）</h4>
+<ul><li>静脈アクセスの制約で経静脈もリードレスも使えない患者向け</li><li>心外膜リード（心房・右室・左室のいずれか、または複数）を<strong>第4または第5肋間、前腋窩線より前方</strong>からの小開胸（minithoracotomy）で外科的に留置する</li><li>経静脈リードと違い、左室の静脈解剖の分枝に縛られないため配置の自由度が高い</li><li>ただし合併症リスクが高く、経静脈リードに対する明確な優位性がないため、<strong>経静脈リードの適応がない患者に限って用いる</strong></li></ul>
+<h4>6-6. 現代デバイスの付加機能</h4>
+<div class="tw"><table>
+<thead><tr><th>機能</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>レート応答センサー（rate-responsive sensor）</td><td>体動、分時換気量、右室インピーダンスの変化などを検出して活動に応じたペーシングレートに調整する</td></tr>
+<tr><td>心室ペーシング最小化アルゴリズム</td><td>右室ペーシングは右室が左室より先に収縮するため左脚ブロックの状態を模倣し、心室ディスシンクロニーを生む。これが一部の患者で心不全を惹起・悪化させ、心房細動の頻度を増やす。これに対処する専用モードが開発されている</td></tr>
+<tr><td>遠隔モニタリング</td><td>すべての現代ペースメーカーが備える（※ Table 2 の記述と矛盾。後述）</td></tr>
+<tr><td>MRI 対応</td><td>すべての現代ペースメーカーが備える</td></tr>
+</tbody></table></div>
+<h3>7. ペースメーカーの適応</h3>
+<p>ガイドラインは ACC・AHA・Heart Rhythm Society（HRS）の合同版と、欧州心臓病学会（ESC）版がある。分類は3段階：</p>
+<div class="tw"><table>
+<thead><tr><th>クラス</th><th>定義（本文の定義をそのまま）</th></tr></thead>
+<tbody>
+<tr><td>クラス I</td><td>恒久ペーシングが明確に有益・有用・有効である状態</td></tr>
+<tr><td>クラス II</td><td>恒久ペーシングが適応となりうるが、エビデンスが相反する、または意見が分かれる状態</td></tr>
+<tr><td>クラス III</td><td>恒久ペーシングが有用でも有効でもなく、場合によっては有害でありうる状態</td></tr>
+</tbody></table></div>
+<p>原表の脚注による色分けと証拠レベルの定義も転記する。</p>
+<ul><li>推奨クラス：<strong>I（緑）</strong> = 推奨・適応、<strong>IIa（黄）</strong> = 考慮すべき、<strong>IIb（橙）</strong> = 考慮してもよい、<strong>III（赤）</strong> = 推奨されない</li><li>米国ガイドラインの証拠レベル：<strong>A</strong> = 複数のランダム化比較試験もしくはメタ解析、または1つ以上のRCTを質の高いレジストリ研究が裏づけたもの（高品質）／<strong>B-R</strong> = 1つ以上のRCTまたはメタ解析（中等度）／<strong>B-NR</strong> = 十分に設計・実施された非ランダム化研究またはそのメタ解析（中等度）／<strong>C-LD</strong> = 設計・実施に限界のあるランダム化・非ランダム化研究またはそのメタ解析／<strong>C-EO</strong> = 専門家意見の合意</li><li>欧州ガイドラインの証拠レベル：<strong>A</strong> = 複数のRCTまたはメタ解析由来／<strong>B</strong> = 単一のRCTまたは大規模非ランダム化研究由来／<strong>C</strong> = 専門家の意見の合意、あるいは小規模研究・後ろ向き研究・レジストリ</li></ul>
+<h4>Table 4. 恒久ペーシングの主要適応 — 米欧ガイドライン推奨の一覧（原表を日本語化・全件）</h4>
+<p>##### 洞不全症候群（sinus-node dysfunction）</p>
+<p>推奨ペーシングモード（この疾患群に共通）：房室結節病変のエビデンスがなければ <strong>AAI</strong>／房室結節病変を伴う場合は <strong>DDD</strong>／変時性不全があれば <strong>DDDR</strong>／上室頻拍のエピソードがあれば <strong>DDIR</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>ACC/AHA/HRS クラス</th><th>米国レベル</th><th>ESC クラス</th><th>欧州レベル</th><th>適応（恒久ペーシング）</th></tr></thead>
+<tbody>
+<tr><td>I</td><td>C-LD</td><td>I</td><td>A</td><td>洞不全症候群に直接帰せられる症状がある</td></tr>
+<tr><td>I</td><td>C-EO</td><td>—</td><td>—</td><td>ガイドライン推奨薬物治療による症候性洞徐脈で、代替治療がなく治療の継続が臨床的に必要</td></tr>
+<tr><td>IIa</td><td>C-EO</td><td>I</td><td>B</td><td>徐脈に起因する症状を伴う徐脈頻脈症候群</td></tr>
+<tr><td>IIa</td><td>C-EO</td><td>IIa</td><td>B</td><td>症候性の変時性不全</td></tr>
+<tr><td>—</td><td>—</td><td>IIb</td><td>C</td><td>原因不明の失神があり、無症候性の6秒超のポーズを伴う洞不全症候群</td></tr>
+<tr><td>—</td><td>—</td><td>IIb</td><td>C</td><td>徐脈を示唆する症状はあるが確定的証拠がない洞徐脈</td></tr>
+<tr><td>III</td><td>C-LD</td><td>—</td><td>—</td><td>生理的に亢進した副交感神経緊張による洞徐脈・ポーズで無症候の場合</td></tr>
+<tr><td>III</td><td>C-LD</td><td>—</td><td>—</td><td>睡眠に関連した洞徐脈・睡眠中の洞停止</td></tr>
+<tr><td>III</td><td>C-LD</td><td>III</td><td>C</td><td>無症候性、または一過性の原因による洞不全症候群。あるいは症状が徐脈・変時性不全のない時間帯に生じることが記録されている場合</td></tr>
+</tbody></table></div>
+<p>##### 房室ブロック（AV block）</p>
+<p>推奨ペーシングモード（この疾患群に共通）：組織的な心房活動がなければ <strong>VVI</strong>／変時性不全があれば <strong>VVIR</strong>／洞結節機能が保たれていれば <strong>DDD</strong>／変時性不全があれば <strong>DDDR</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>ACC/AHA/HRS クラス</th><th>米国レベル</th><th>ESC クラス</th><th>欧州レベル</th><th>適応（恒久ペーシング）</th></tr></thead>
+<tbody>
+<tr><td>I</td><td>B-NR</td><td>I</td><td>C</td><td>後天性の発作性または永続性の第2度 Mobitz II 型、結節下 2:1、高度房室ブロック、または第3度房室ブロックで、可逆性・生理的原因に帰せられないもの</td></tr>
+<tr><td>I</td><td>C-LD</td><td>—</td><td>—</td><td>必須のエビデンスに基づく治療を受けている患者の症候性房室ブロックで、有効な代替がない場合</td></tr>
+<tr><td>I</td><td>C-LD</td><td>—</td><td>—</td><td>症候性徐脈を伴う永続性心房細動</td></tr>
+<tr><td>I</td><td>B-NR</td><td>I</td><td>C</td><td>伝導障害を伴う神経筋疾患（例：1型筋強直性ジストロフィー）または Kearns–Sayre 症候群で、第2度・第3度房室ブロック、あるいは HV 間隔70ミリ秒以上の所見がある</td></tr>
+<tr><td>IIa</td><td>C-LD</td><td>IIa</td><td>C</td><td>著明な第1度房室ブロック（PR 間隔300ミリ秒超）または第2度 Mobitz I 型房室ブロックで、症候性、あるいは電気生理学的検査で His 内・His 下レベルと判明したもの</td></tr>
+<tr><td>IIa</td><td>B-NR</td><td>IIa</td><td>C</td><td>浸潤性心筋症（例：心臓サルコイドーシス）で、第2度 Mobitz II 型、結節下 2:1、または第3度房室ブロックを伴う</td></tr>
+<tr><td>IIa</td><td>B-NR</td><td>IIa</td><td>C</td><td>Lamin A/C 遺伝子変異（肢帯型および Emery–Dreifuss 型筋ジストロフィーを含む）で、PR 間隔240ミリ秒超かつ左脚ブロックがある</td></tr>
+<tr><td>IIb</td><td>C-LD</td><td>IIb</td><td>C</td><td>1型筋強直性ジストロフィーなどの神経筋疾患で、PR 間隔240ミリ秒超、QRS 幅120ミリ秒超、または分枝ブロックがある</td></tr>
+<tr><td>III</td><td>C-LD</td><td>III</td><td>C</td><td>補正・予防が可能な一過性原因による房室ブロック（例：迷走神経性房室ブロック）</td></tr>
+<tr><td>III</td><td>C-LD</td><td>—</td><td>—</td><td>無症候性の第1度房室ブロック、または房室結節レベルと考えられる第2度 Mobitz I 型・2:1 房室ブロック</td></tr>
+</tbody></table></div>
+<p>##### 急性心筋梗塞</p>
+<p>推奨モードは房室ブロックと同じ（VVI／VVIR／DDD／DDDR）。</p>
+<div class="tw"><table>
+<thead><tr><th>ACC/AHA/HRS クラス</th><th>米国レベル</th><th>ESC クラス</th><th>欧州レベル</th><th>適応（恒久ペーシング）</th></tr></thead>
+<tbody>
+<tr><td>I</td><td>B-NR</td><td>I</td><td>C</td><td>急性心筋梗塞に伴う第2度 Mobitz II 型房室ブロック、高度房室ブロック、第3度房室ブロック、または交代性脚ブロックで、<strong>5日以上の待機期間の後</strong></td></tr>
+</tbody></table></div>
+<p>##### 脚ブロック</p>
+<p>推奨モードは房室ブロックと同じ（VVI／VVIR／DDD／DDDR）。</p>
+<div class="tw"><table>
+<thead><tr><th>ACC/AHA/HRS クラス</th><th>米国レベル</th><th>ESC クラス</th><th>欧州レベル</th><th>適応（恒久ペーシング）</th></tr></thead>
+<tbody>
+<tr><td>I</td><td>C-LD</td><td>I</td><td>B</td><td>交代性脚ブロック</td></tr>
+<tr><td>I</td><td>C-LD</td><td>I</td><td>B</td><td>失神＋脚ブロックまたは二枝ブロックで、HV 間隔70ミリ秒以上、心房漸増ペーシング中の第2度・第3度の His 内・His 下ブロック、または薬理学的負荷への異常反応がある</td></tr>
+</tbody></table></div>
+<p>##### 先天性心疾患</p>
+<p>推奨モードは房室ブロックと同じ。</p>
+<div class="tw"><table>
+<thead><tr><th>ACC/AHA/HRS クラス</th><th>米国レベル</th><th>ESC クラス</th><th>欧州レベル</th><th>適応（恒久ペーシング）</th></tr></thead>
+<tbody>
+<tr><td>I</td><td>B-NR</td><td>I</td><td>C</td><td>成人で、症候性の洞不全症候群、変時性不全、房室ブロック、または幅広い QRS の補充調律を伴う症候性徐脈、心室補充調律の周期長の3倍を超えるポーズ、日中平均心拍数50/分未満、QT 延長、複雑心室期外収縮、あるいは徐脈による血行動態破綻に起因する心室機能障害を伴うもの</td></tr>
+<tr><td>IIa</td><td>B-NR</td><td>IIb</td><td>C</td><td>無症候性の先天性完全房室ブロックまたは高度房室ブロック</td></tr>
+</tbody></table></div>
+<p>##### 神経調節性失神（neurocardiogenic syncope）</p>
+<p>推奨モード：洞結節機能が保たれていれば <strong>DDD</strong>／変時性不全があれば <strong>DDDR</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>ACC/AHA/HRS クラス</th><th>米国レベル</th><th>ESC クラス</th><th>欧州レベル</th><th>適応（恒久ペーシング）</th></tr></thead>
+<tbody>
+<tr><td>IIb</td><td>B-R</td><td>I</td><td>A</td><td>40歳超で重度・予測不能・反復性の失神があり、自然発生の症候性心停止性ポーズ3秒超もしくは無症候性ポーズ6秒超（洞停止または房室ブロックによる）、心抑制型頸動脈洞症候群、またはチルト試験中の心停止性失神を有する患者において、失神再発を減らす目的</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>神経調節性失神は米欧で推奨が2段階食い違う 同じ適応に対して <mark class="hl">ACC/AHA/HRS は IIb（B-R）、ESC は I（A）</mark> と、クラスも証拠レベルも大きく異なる。同一の臨床像に対して「考慮してもよい」と「推奨する」が併存している状態で、本総説はこの乖離の理由を説明していない。洞不全症候群の第1行（米 I C-LD 対 欧 I A）でも同様に証拠レベルだけが2段階違う。<mark class="hl">ガイドラインを引くときは「どちらのガイドラインか」を必ず言う必要がある</mark>。</p>
+</div>
+<h4>7-1. 洞不全症候群 — 決め手は「症状」だけ</h4>
+<ul><li>病態生理は電気生理学的・構造的リモデリングが絡む複雑なもの</li><li>恒久ペースメーカーを植込むかどうかの判断は<strong>症状の有無に完全に依拠する</strong></li><li>心拍数40/分未満、ポーズ4秒超は症状と関連しやすいものの、<strong>植込みを必須とする心拍数やポーズ長の絶対的な閾値は存在しない</strong>。とくに徐脈が睡眠中に生じる場合は該当しない</li></ul>
+<h4>7-2. 房室ブロック — 決め手は「重症度」と「不可逆性」</h4>
+<ul><li>房室ブロックの多くは後天性で、感染性・炎症性・変性・虚血性・医原性など多様な病因から生じる</li><li>植込みの判断は主に<strong>ブロックの重症度と不可逆性</strong>に基づく</li><li>さらに基礎病因（浸潤性・遺伝性心筋症、神経筋疾患、先天性伝導異常）が恒久ペーシングの要否判断に重要な役割を果たす</li></ul>
+<h4>7-3. ペーシングを要するその他の不整脈</h4>
+<ul><li>心筋梗塞では伝導異常が頻繁に生じる。急性期の高度房室ブロック（第2度 Mobitz II 型、結節下 2:1、第3度）は、血行動態破綻があれば<strong>一時ペーシング</strong>で管理し、恒久ペーシングはブロックが遷延する症例に限る</li><li><strong>前壁梗塞に続発する房室ブロックは下壁梗塞のものより自然回復しにくい</strong></li><li>交代性脚ブロック、あるいは失神＋脚ブロックで HV 間隔70ミリ秒以上、または電気生理学的検査で結節下ブロックが示された場合も適応</li><li>神経筋疾患・浸潤性疾患・遺伝性疾患に伴う房室ブロックは恒久ペーシングの強い適応</li><li>構造的に正常心の無症候性先天性完全房室ブロックにおける恒久ペーシングの役割は明確でない。高リスク所見（幅広い QRS、日中平均心拍数50/分未満、複雑心室期外収縮、心室機能障害）があれば推奨されるが、これらがなくても妥当でありうる</li><li>神経調節性失神では、失神エピソードが明確に心抑制反応または徐脈反応と結びついている選ばれた患者で適応となる</li></ul>
+<h4>7-4. デバイス選択のアルゴリズム（Figure 2）</h4>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1056/EVIDra2400323" target="_blank" rel="noopener">原論文（doi.org/10.1056/EVIDra2400323）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. Algorithm to Determine Need for Single- versus Dual-Chamber Pacing and Recommended Pacing Modes in Sinus-Node Dysfunction and Atrioventricular Block（洞不全症候群と房室ブロックにおける単腔対二腔ペーシングの必要性と推奨モードを決めるアルゴリズム）。左右2本のフローが並列に描かれ、左が「Sinus-node Dysfunction」（緑の角丸ボックス）、右が「Atrioventricular Block」（同じく緑）から始まる。各フローは同じ第1問「Infrequent need for pacing for rate support or significant comorbidities?（レートサポートのためのペーシング需要が低いか、重大な併存症があるか）」（薄緑の長方形）に入り、Yes は左右の外側へ、No は下方へ分岐する。左フローの No は茶色の円形判断ノード「Normal AV conduction?（房室伝導は正常か）」へ進み、Yes → 淡桃色の「Single-chamber atrial pacing」→ 淡黄色の出力ボックス「AAI(R)」、No → 「Dual-chamber pacing」→「DDD(R) + AV-delay programming」となる。左フローの第1問 Yes は最も左の「Single-chamber ventricular pacing」→「VVI(R) / VVI + rate hysteresis」に至る。右フローの No は茶色の円形ノード「Permanent atrial fibrilation?（永続性心房細動か。原図の綴りは fibrilation で誤記）」へ進み、Yes は右端の「Single-chamber ventricular pacing」に合流、No はさらに茶色の長方形「LVEF &gt;50% and predicted pacing &lt;40%」へ。この最後の判断は Yes（左向き）→「Dual-chamber pacing to maintain physiologic left ventricular activation」、No（右向き）→「Dual-chamber pacing with right ventricular pacing」に分かれ、いずれも出力は同じ「DDD(R) + AV-delay programming」である。右フローの第1問 Yes および永続性心房細動 Yes は右端の「Single-chamber ventricular pacing」に集まり、出力は「VVI(R), VVI + rate hysteresis, or VDD if sinus rhythm; VVI(R) if atrial fibrilation」。凡例（原図の説明文）：(R) は変時性不全の場合にレート応答のプログラミングが望ましいことを示す。房室遅延のプログラミングやレートヒステリシスなどのアルゴリズムは心室ペーシングを最小化するために用いる。</p>
+</div>
+<p>図の各ボックスを表に起こすと次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>起点</th><th>質問</th><th>分岐</th><th>到達するペーシング様式</th><th>推奨モード</th></tr></thead>
+<tbody>
+<tr><td>洞不全症候群</td><td>レートサポートのペーシング需要が低い、または重大な併存症がある？</td><td>Yes</td><td>単腔心室ペーシング</td><td>VVI(R)、または VVI＋レートヒステリシス</td></tr>
+<tr><td>洞不全症候群</td><td>同上 → No → 房室伝導は正常か？</td><td>Yes</td><td>単腔心房ペーシング</td><td>AAI(R)</td></tr>
+<tr><td>洞不全症候群</td><td>同上 → No → 房室伝導は正常か？</td><td>No</td><td>二腔ペーシング</td><td>DDD(R)＋房室遅延プログラミング</td></tr>
+<tr><td>房室ブロック</td><td>レートサポートのペーシング需要が低い、または重大な併存症がある？</td><td>Yes</td><td>単腔心室ペーシング</td><td>洞調律なら VVI(R)、VVI＋レートヒステリシス、または VDD／心房細動なら VVI(R)</td></tr>
+<tr><td>房室ブロック</td><td>同上 → No → 永続性心房細動か？</td><td>Yes</td><td>単腔心室ペーシング</td><td>同上</td></tr>
+<tr><td>房室ブロック</td><td>同上 → No → 永続性心房細動か？ → No → LVEF 50%超かつ予測ペーシング率40%未満か？</td><td>Yes</td><td>生理的左室興奮を保つ二腔ペーシング</td><td>DDD(R)＋房室遅延プログラミング</td></tr>
+<tr><td>房室ブロック</td><td>同上</td><td>No</td><td>右室ペーシングによる二腔ペーシング</td><td>DDD(R)＋房室遅延プログラミング</td></tr>
+</tbody></table></div>
+<p>最後の分岐の Yes／No の割り当ては、本文の主張（右室ペーシングは有害なので生理的興奮を保ちたい）と逆向きに見える。この点は「批判的吟味」で詳述する。</p>
+<h3>8. 心不全管理におけるペースメーカー</h3>
+<h4>8-1. CRT の確立したエビデンス</h4>
+<ul><li>中等症〜重症心不全（NYHA クラス II〜IV）、左脚ブロック、駆出率低下（<strong>35%以下</strong>）の患者における CRT のエビデンスは確立している</li><li>大規模試験である MADIT with CRT（MADIT-CRT）と RAFT（Resynchronization–Defibrillation for Ambulatory Heart Failure Trial）は、<strong>薬物療法への上乗せとしての両室ペーシングで心不全イベントと入院が有意に減少</strong>することを示した</li><li>植込み型除細動器（ICD）と両室ペーシングの両方の基準を満たす患者では、右室ペーシングリードの代わりに除細動リードを留置する。ここから <strong>CRT-Pacemaker（CRT-P）と CRT-Defibrillator（CRT-D）の重要な区別</strong>が生じる</li></ul>
+<div class="tw"><table>
+<thead><tr><th>用語</th><th>中身</th><th>使い分け</th></tr></thead>
+<tbody>
+<tr><td>CRT-P</td><td>両室ペーシング機能のみ</td><td>ICD 適応を満たさない場合</td></tr>
+<tr><td>CRT-D</td><td>両室ペーシング＋除細動機能（右室リードが除細動リードに置き換わる）</td><td>ICD と両室ペーシングの双方の基準を満たす場合</td></tr>
+</tbody></table></div>
+<h4>8-2. レスポンダーとノンレスポンダー</h4>
+<ul><li>CRT 植込み後の心不全イベント率の改善は定義が難しく、議論が続く領域</li><li>患者はしばしば CRT の「レスポンダー」と「ノンレスポンダー」に分けられる</li><li>両室ペーシングへの反応不良の予測因子として挙げられているもの：進行した心不全、虚血性心筋症、機械的ディスシンクロニーの残存、心房細動、<strong>QRS 幅150ミリ秒未満</strong>、心室性不整脈</li></ul>
+<h4>8-3. 適応の拡大と縮小</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・知見</th><th>年</th><th>内容</th><th>帰結</th></tr></thead>
+<tbody>
+<tr><td>BLOCK HF（Biventricular versus Right Ventricular Pacing in Heart-Failure Patients with AV Block）</td><td>本文は2013年と記載（引用は Curtis ら JACC 2016）</td><td>房室ブロックがあり LVEF 50%以下の患者を対象に、両室ペーシングの適応を拡大</td><td>右室心尖部ペーシングの継続には左室機能障害のリスクが知られており、境界域あるいは既に低下した駆出率の患者では両室ペーシングが優れることが示された</td></tr>
+<tr><td>狭い QRS への CRT</td><td>—</td><td>QRS 幅130ミリ秒未満の患者への両室ペーシングは心不全入院も死亡も減らさず、<strong>死亡が増加する可能性さえある</strong></td><td>ガイドラインが更新され、洞調律・EF 35%以下・非左脚ブロック型で QRS 幅150ミリ秒未満・ガイドライン推奨薬物療法下で NYHA クラス I または II の患者への CRT は<strong>クラス III（no benefit）</strong> となった</td></tr>
+<tr><td>LBBAP の位置づけ</td><td>—</td><td>冠静脈洞の解剖が難しく左室リードが留置できない心不全患者への新たな選択肢として登場</td><td>CRT が依然として両室ペーシング基準を満たす患者の主軸だが、有効な CRT ペーシングが達成できない場合に LBBAP を用いる役割が CSP ガイドラインで示された</td></tr>
+<tr><td>CSP のクラス IIb 適応</td><td>—</td><td>洞調律で駆出率中間域（<strong>36〜50%</strong>）、左脚ブロックで <strong>QRS 幅150ミリ秒超</strong>、ガイドライン推奨薬物療法下で NYHA クラス II〜IV の患者</td><td>CSP 戦略を考慮してよい（クラス IIb）</td></tr>
+</tbody></table></div>
+<h4>8-4. ペーシング誘発心筋症について本総説が書いていること・書いていないこと</h4>
+<ul><li><strong>書いていること</strong>：右室ペーシングは右室を左室より先に収縮させ、左脚ブロックの効果を模倣する。その結果、心室ディスシンクロニーが生じ、一部の患者で心不全を惹起・悪化させ、心房細動の頻度を増やす。この対策として心室ペーシング最小化モードが開発された</li><li><strong>書いていないこと</strong>：<strong>ペーシング誘発心筋症（pacing-induced cardiomyopathy, PICM）という用語は本文中では定義されていない</strong>。この語が現れるのは Table 3 の3試験（OptimPacing・PROTECT-SYNC・LEAP-Block）の主要アウトカム欄のみである。<strong>PICM の発症率・診断基準（EF 低下の幅・ペーシング率の閾値・発症までの期間）・危険因子・治療（CRT へのアップグレード）は本文に記載がない</strong></li><li>数値としての「ペーシング負荷の閾値」は Figure 2 の「予測ペーシング率40%未満」と Table 3 の PROTECT-SYNC・Left versus Left の「40%超」だけで、<strong>本文中に閾値の根拠となる研究の提示はない</strong></li></ul>
+<h3>9. 合併症と限界</h3>
+<h4>9-1. 経静脈ペースメーカーの合併症</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>数値（本文の表現をそのまま）</th></tr></thead>
+<tbody>
+<tr><td>即時合併症（あらゆる合併症）の全体率</td><td>約 5〜10%（ただし文献間のばらつきが大きい）</td></tr>
+<tr><td>長期の合併症リスク</td><td>年 1〜2%。主にリード不全と感染に関連</td></tr>
+<tr><td>二腔と単腔の比較</td><td>二腔システムのほうが植込み合併症率が高い。最多は<strong>心房リード脱転</strong></td></tr>
+<tr><td>経静脈リード挿入後の主要合併症率（過去の報告）</td><td>最高 15%</td></tr>
+<tr><td>リード不全（lead malfunction）率</td><td>10年時点で 5%未満</td></tr>
+</tbody></table></div>
+<ul><li>よく報告されるその他の合併症：<strong>血管アクセスによる気胸</strong>、血腫形成、心穿孔、デバイス不全、感染</li><li>より頻度の低い合併症：<strong>深部静脈血栓症、三尖弁損傷、肺塞栓症</strong></li><li><strong>デバイスのアップグレードとジェネレータ交換は合併症リスクの増加を伴う</strong></li></ul>
+<h4>9-2. リードレスペースメーカーの合併症</h4>
+<ul><li>リードとジェネレータに関連する合併症のいくつかを回避できる</li><li>当初は心タンポナーデと電池消耗に関する安全性の懸念があったが、<strong>現在は適切な患者集団において経静脈システムの概ね安全で有効な代替と考えられている</strong></li><li>主な合併症：<strong>送達カテーテルが大口径であることによる血管損傷</strong>、心穿孔・タンポナーデ、デバイス脱転</li><li><strong>新しいリードレス技術が市場に入り続けているため、縦断的な安全性データはまだ不足している</strong></li></ul>
+<h4>9-3. デバイス・リード抜去（extraction）</h4>
+<ul><li>適応拡大と技術進歩に伴い、リード不全・デバイス関連感染・システムアップグレードのための抜去の必要性が増している</li><li><strong>2017 HRS Expert Consensus Statement on CIED Lead Management and Extraction</strong> は、以下の場合にデバイスとリードの完全抜去を推奨している</li><li>明らかなデバイス関連ブドウ球菌感染</li><li>弁膜症性心内膜炎</li><li>適切な抗菌薬治療にもかかわらず持続または再燃する菌血症</li><li>その他の抜去適応：デバイス挿入部位の慢性重度疼痛、経静脈リードに関連した特定の血管・血栓症の問題</li><li><strong>抜去手技は心臓血管外科医の支援のもとで計画すべき</strong>である。血管裂傷・心臓裂離が起きた場合に胸骨切開を要するリスクがあるため</li><li>リード抜去に伴うその他の主要合併症：<strong>血胸、肺塞栓症、介入を要する三尖弁損傷</strong></li></ul>
+<h4>9-4. 三尖弁逆流・鎖骨下静脈閉塞について本総説が書いていること</h4>
+<ul><li><strong>三尖弁</strong>：Table 2 の経静脈植込み合併症に「弁の損傷（valve injury or damage）」、本文の頻度の低い合併症に「三尖弁損傷（tricuspid-valve injury）」、リード抜去の合併症に「介入を要する三尖弁損傷」と3か所で言及される。しかし三尖弁逆流（tricuspid regurgitation）という語も、その発生頻度・重症度・リード関連 TR の機序も本文には一切記載がない（この段落は総説の欠落を指摘するもので、外部知識を持ち込まないよう注意して読むこと）</li><li><strong>静脈閉塞</strong>：CRT の節で「リードが1本増えることで静脈閉塞（venous obstruction）のリスクが増す」、リードレスの節で「リードレスはリード関連の感染と静脈狭窄（venous stenosis）のリスクを減らす」、CRT の節で冠静脈洞リード留置が不可能となる理由の1つとして「静脈狭窄」と記載される。<strong>鎖骨下静脈閉塞という具体的な部位名と、その発生頻度は本文に記載がない</strong></li><li><strong>気胸</strong>：「血管アクセスによる気胸（pneumothorax from vascular access）」と Table 2 の「血胸・気胸（Hemo/pneumothorax）」に言及があるのみで、<strong>頻度の数値は示されていない</strong></li><li><strong>感染</strong>：Table 2 で経静脈「高リスク」対リードレス「低リスク」という定性的な比較のみで、<strong>感染率の数値は本文にない</strong></li></ul>
+<h3>10. 最近の進歩と将来の方向性</h3>
+<h4>10-1. 電池</h4>
+<ul><li>現代のペースメーカーは軽量なリチウム系電池を用い、10年超もつよう設計されている</li><li>しかし患者の長寿命化により、<strong>多くの人が電池寿命を超えて生き、生涯に複数回のジェネレータ交換を要する</strong></li><li>充電式ペースメーカーが有望な革新。ニッケル–カドミウム電池による初期の試みは信頼性の問題で中止されたが、最近は<strong>無線外部充電デバイス</strong>と、<strong>体動と重力から生体力学的エネルギーを変換して電源を維持する自己充電型ジェネレータ</strong>が開発されている</li><li>これらは現在研究段階だが、電池寿命の延長、ジェネレータ交換の削減、コスト低減、電池廃棄物による環境負荷の最小化の可能性がある</li></ul>
+<h4>10-2. MRI</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>本総説の記載</th></tr></thead>
+<tbody>
+<tr><td>MRI 対応デバイス</td><td>現代のペースメーカーは MRI 互換に設計されており、デバイス不全のリスクなく MRI を受けられる</td></tr>
+<tr><td>MRI 非対応デバイス</td><td><strong>1.5 テスラの磁場</strong>であれば、撮像前後のデバイス interrogation を含む厳格なプロトコル下で施行可能</td></tr>
+<tr><td>遺残リード（abandoned leads）</td><td><strong>MRI 条件付き対応デバイスであっても、遺残リードは一般に MRI の禁忌</strong>。ただし一部の撮像施設は専門的な設定下で施行できるプロトコルを持つ</td></tr>
+</tbody></table></div>
+<h4>10-3. 適応の拡大とリードレス CSP</h4>
+<ul><li>新たな集団におけるペーシングの潜在的な利益を探る研究が進んでおり、適応は今後広がりうる</li><li><strong>リードレスペースメーカーが最近 LBBAP に用いられた</strong>。これは心臓生理的ペーシングの実現方法を変えうる。現在、前向きの Leadless CSP feasibility study で検討中（引用は Abbott 社の2024年12月17日付プレスリリース）</li></ul>
+<h4>10-4. 遠隔モニタリングと AI</h4>
+<ul><li>遠隔モニタリングはペースメーカー管理を一変させた。ほぼリアルタイムのデータ伝送により、合併症・不整脈（心房細動や心室頻拍など）・デバイス不全の早期検出が可能になった</li><li>病院受診を減らし、より先回りしたケアで患者アウトカムを向上させる</li><li>現在の遠隔モニタリングは無線化されており、患者が持ち帰るコミュニケータ／トランスミッタが<strong>ユーザー入力に依存せずにデータを送信する</strong></li><li>将来：AI による予測アルゴリズムと自動アラートを統合すれば、<strong>電池消耗の正確な予測</strong>と<strong>緊急対応時間の短縮</strong>が期待できる。パラメータの遠隔調整が可能になれば対面フォローアップが減り、個別化が進む。AI 駆動のアプローチは、個々の生理と活動パターンに合わせたペーシング戦略の個別化を支えうる</li></ul>
+<h3>11. 結論（著者の言葉）</h3>
+<ul><li>ペースメーカーは徐脈性不整脈の管理を一変させ、非可逆性の伝導障害を持つ患者に救命的治療を提供している</li><li>MRI 互換デバイス、リードレスシステム、CSP といった技術進歩が臨床応用の範囲を広げ、アウトカムを向上させた</li><li>電池寿命の延長、遠隔モニタリング、AI による個別化といった新興の革新は、ペースメーカー治療をさらに洗練させ、医療負担を最小化し、より個別化されたケアを可能にすると期待される</li><li>分野の進化に伴い、残された限界に対処し患者の生活の質を高めるために、継続的な研究と革新が不可欠である</li></ul>
+<h3>12. 「限界」の節をどう読むか</h3>
+<p>本総説には “Limitations” という独立した見出しはない。「限界」に相当する記述は2か所に分散している。</p>
+<div class="tw"><table>
+<thead><tr><th>記述の場所</th><th>何の限界か</th><th>具体的な内容</th></tr></thead>
+<tbody>
+<tr><td>Complications and Limitations（第9節）</td><td><strong>治療・デバイスの限界</strong></td><td>経静脈系の合併症率（即時5〜10%、長期1〜2%/年）、リードレスの縦断的安全性データ不足、抜去手技の危険性、二腔系での心房リード脱転の多さ</td></tr>
+<tr><td>Recent Advances and Future Directions（第10節）</td><td><strong>技術の限界</strong></td><td>電池寿命を患者が超えてしまう問題、遺残リードと MRI、リードレス CSP がまだ feasibility 段階</td></tr>
+<tr><td>Conduction System Pacing（第6-4節）</td><td><strong>手技の限界</strong></td><td>His 束ペーシングのリード安定性・オーバーセンシング・高閾値、LBBAP の中隔穿孔リスク</td></tr>
+<tr><td>Cardiac Resynchronization Therapy（第6-3節）</td><td><strong>解剖学的限界</strong></td><td>冠静脈洞リードが留置できない5つの理由と、リード追加による静脈閉塞・電池消耗</td></tr>
+</tbody></table></div>
+<p>一方で、<strong>本総説自体の方法論的限界（ナラティブレビューであることの限界）は一切述べられていない</strong>。系統的な文献検索を行っていないこと、引用選択にバイアスが入りうること、数値が出典ごとに定義の異なるものを並べていることは、読者が自分で補う必要がある。</p>
+<h3>13. COI をどう読むか</h3>
+<ul><li>紙面には「Author disclosures are available at evidence.nejm.org」の1行しかなく、<strong>PDF 本体には開示内容が一切印字されていない</strong>。したがって本ノートに全著者分の企業関係を転記することはできない</li><li><strong>これはこの領域の総説としては重い欠落である</strong>。ペースメーカー総説は、Medtronic（Micra）、Abbott／St. Jude（リードレス CSP、Aveir）、Boston Scientific、Biotronik といった製造販売企業の製品評価に直接触れる。実際、本総説は本文中で <strong>Micra を製品名で1回（Table 2 の遠隔モニタリング欄）</strong>、<strong>Abbott 社のプレスリリースを引用文献65として1回</strong>、名指ししている</li><li>責任著者の Birgersdotter-Green は FHRS（Fellow of the Heart Rhythm Society）の肩書きを持つデバイス領域の専門家であり、この分野の専門家がメーカーとの関係を持つこと自体は一般的だが、<strong>その有無と内容は紙面から確認できない</strong></li><li><strong>ジャーナルクラブでの扱い</strong>：本ノートの読者は evidence.nejm.org の disclosure ページを別途確認すること。とくに「リードレスは概ね安全で有効」「Micra のみ遠隔モニタリング可能」「Abbott のリードレス CSP が将来を変えうる」という3つの記述は、企業との関係の有無によって重みが変わる</li></ul>
+<h3>14. 批判的吟味（JCでの論点）</h3>
+<h4>14-1. 原著の内的不整合</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>不整合の内容</th><th>場所</th><th>なぜ問題か</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Figure 2 の最終分岐の Yes／No が本文の論旨と逆向きに見える</strong></td><td>Figure 2 右フロー</td><td>「LVEF 50%超かつ予測ペーシング率40%未満」に <strong>Yes</strong> の枝が「生理的左室興奮を保つ二腔ペーシング」、<strong>No</strong> の枝が「右室ペーシングによる二腔ペーシング」へ向かう。本文は一貫して「右室ペーシングは害を生むので、EF が低い・ペーシング率が高い患者ほど生理的興奮を保つべき」と述べているから、Yes／No が入れ替わっているように読める。しかも両枝の出力モードは同じ「DDD(R)＋房室遅延プログラミング」で、分岐の意味が出力に反映されていない。<strong>講義で Figure 2 をそのまま配ると誤って教えることになるため、この1点は必ず口頭で補足する</strong></td></tr>
+<tr><td>2</td><td><strong>本文の表参照が誤っている</strong></td><td>9ページ「The U.S. and European guidelines regarding common indications for permanent pacing and recommended pacing modes are summarized in Table 3.」</td><td>米欧ガイドラインの適応は <strong>Table 4</strong> にあり、Table 3 は進行中の LBBAP 試験一覧である。同じページの少し前では正しく Table 4 を参照しているため、単純な参照ミス</td></tr>
+<tr><td>3</td><td><strong>遠隔モニタリングの記述が本文と Table 2 で矛盾</strong></td><td>本文「All modern pacemakers also offer remote monitoring and MRI compatibility」対 Table 2「遠隔モニタリング：現時点で Micra のみ可能（リードレス列）」</td><td>「すべての現代ペースメーカーが遠隔モニタリング可能」と「リードレスは Micra だけ可能」は両立しない。リードレスを「現代のペースメーカー」に含めるかどうかの定義があいまい</td></tr>
+<tr><td>4</td><td><strong>CRT 対応の可否が本文と Table 2 で矛盾</strong></td><td>本文「左室は冠静脈洞リード、心外膜リード、または<strong>左室内のリードレスデバイス</strong>でペーシングする」／将来の節「リードレスが LBBAP に用いられた」対 Table 2「心臓再同期：リードレスは不可」</td><td>本文自身が「リードレスで左室をペーシングできる」と2か所で述べている以上、Table 2 の「不可」は現状の承認範囲を指すのか原理的な不可を指すのかが不明</td></tr>
+<tr><td>5</td><td><strong>心穿孔が経静脈の合併症から漏れている</strong></td><td>Table 2 の植込み時合併症欄（経静脈：弁損傷・ポケット血腫・リード脱転・血胸/気胸／リードレス：血管損傷・鼠径部出血/血腫・デバイス塞栓・心穿孔/タンポナーデ）</td><td>本文の第9節は経静脈の合併症として明確に「cardiac perforation」を挙げている。Table 2 では心穿孔がリードレス側にしか置かれておらず、経静脈が心穿孔しないかのように読める</td></tr>
+<tr><td>6</td><td><strong>合併症率の数値が並列されて整合しない</strong></td><td>「即時合併症の全体率は約5〜10%」対「経静脈リード挿入後の主要合併症率は以前は最高15%と報告」</td><td>「あらゆる合併症で5〜10%」より「主要合併症で15%」のほうが大きい。分母・分子・時代・定義が異なる数値が同じ段落に並び、著者はその差を説明していない</td></tr>
+<tr><td>7</td><td><strong>電池寿命の出典がICDの研究</strong></td><td>Table 2 の電池寿命（経静脈：最長17年・中央値10.8年／リードレス：最長27年・中央値12.1年）が引用文献17に紐づく。文献17は "battery longevity of implantable cardioverter-defibrillators"（BMC Cardiovasc Disord 2023）</td><td>ICD の電池寿命の研究をペースメーカーの電池寿命の根拠に使っているように見える。ICD は除細動用の高電圧充電があるため電池消費のプロファイルが異なる</td></tr>
+<tr><td>8</td><td><strong>レート応答センサーの引用が失神ペーシングの試験</strong></td><td>「Rate-responsive sensors adjust the pacing rate…41,42」の文献41が Brignole ら "Cardiac pacing in severe recurrent reflex syncope and tilt-induced asystole"（Eur Heart J 2021）</td><td>文献41は反射性失神へのペーシングの試験であり、レート応答センサーの記述とは無関係。文献42（分時換気量の付加）のみが該当する。文献41は Table 4 の神経調節性失神の行に付くべきもの</td></tr>
+<tr><td>9</td><td><strong>BLOCK HF の年と引用が食い違う</strong></td><td>本文「In 2013, the ... BLOCK HF trial」に対して引用文献54は Curtis ら <strong>JACC 2016</strong></td><td>BLOCK HF の主報告は2013年の別誌であり、2016年の論文は続報。年を書くなら対応する文献を引くべき</td></tr>
+<tr><td>10</td><td><strong>QRS 幅の閾値が130と150で混在</strong></td><td>「QRS 130ミリ秒未満への両室ペーシングは無効・死亡増加の可能性」→「クラス III は QRS 150ミリ秒未満」</td><td>根拠となった研究の閾値（130）と、ガイドラインが採用した閾値（150）が同じ段落で切り替わる。読者は「130と150のどちらで判断するのか」を判別できない</td></tr>
+<tr><td>11</td><td><strong>綴りの誤り3件</strong></td><td>Table 1 脚注「The NGB code」（正しくは NBG）／Figure 2 内「fibrilation」2か所（正しくは fibrillation）／本文「Bachman's Bundle」対 文献38「Bachmann's bundle」</td><td>単純な誤植だが、Table 1 は本総説の中核であり、コード名そのものを取り違えているのは目立つ</td></tr>
+</tbody></table></div>
+<h4>14-2. デザイン・記述の限界</h4>
+<ul><li><strong>ナラティブレビューであることの限界</strong>：検索式も選択基準も示されていない。「reported as」「approximately」という表現で示される数値は、出典ごとの定義差を吸収していない</li><li><strong>数値の乏しさ</strong>：合併症の項以外、数値がほとんど提示されない。感染率、気胸の頻度、リード脱転の頻度、三尖弁逆流の頻度、PICM の発症率はいずれも記載がない。<strong>「数値で議論する」タイプのジャーナルクラブには素材が足りない</strong></li><li><strong>エビデンスの世代差</strong>：CRT のエビデンスは MADIT-CRT（2009）と RAFT（2014の入院解析）という15年前の試験に依拠する一方、CSP は進行中試験の一覧だけで結果がない。<strong>「確立した古いエビデンス」と「未完の新しい期待」が同じ熱量で並べられている</strong></li><li><strong>リードレスの根拠がRCTでない</strong>：著者自身が「複数の前向き・非ランダム化・多施設研究で示されている」と正確に書いているが、Table 2 の「感染：高リスク対低リスク」という断定的な比較は、非ランダム化研究の比較に基づく。交絡（リードレスを選ぶ患者はそもそも感染リスクが高いと判断された患者かもしれない）の議論がない</li><li><strong>費用の議論が「Cost: Low / High」の2語のみ</strong>：リードレスの高コストが、感染回避や入院短縮でどこまで相殺されるかの費用対効果の議論はまったくない</li></ul>
+<h4>14-3. ICU・集中治療の視点で足りないもの（すべて「本文に記載がない」）</h4>
+<div class="tw"><table>
+<thead><tr><th>ICU で必ず問われること</th><th>本総説の記述</th></tr></thead>
+<tbody>
+<tr><td>一時ペーシング（経静脈・経皮）の適応と方法</td><td>急性心筋梗塞の節で「血行動態破綻があれば一時ペーシングで管理」と1回触れるのみ。<strong>方法・閾値・カテーテルの選択・合併症の記載はない</strong></td></tr>
+<tr><td>ペースメーカー不全の鑑別（センシング不全・キャプチャ不全・出力不全）</td><td><strong>記載なし</strong>。心電図所見の図もない</td></tr>
+<tr><td>ペースメーカー患者の心停止時対応（胸骨圧迫・除細動パッドの位置）</td><td><strong>記載なし</strong></td></tr>
+<tr><td>磁石の使い方と磁石応答</td><td><strong>記載なし</strong>（非同期モードへの切替は述べるが、その手段としての磁石には触れていない）</td></tr>
+<tr><td>デバイス感染の診断（血液培養・経食道心エコー・PET）</td><td><strong>記載なし</strong>。抜去適応は述べるが診断過程は述べない</td></tr>
+<tr><td>敗血症・電解質異常・薬剤による閾値変動</td><td><strong>記載なし</strong></td></tr>
+<tr><td>ペースメーカー症候群の症状と診断</td><td>用語は1回出るが、<strong>症状・診断・対処の記載はない</strong></td></tr>
+<tr><td>心臓外科術後の一時心外膜ペーシングワイヤ</td><td><strong>記載なし</strong>（心外膜ペーシングは恒久デバイスの文脈のみ）</td></tr>
+</tbody></table></div>
+<p>これらは「この総説の欠点」ではなく「この総説の守備範囲外」である。レジデント講義でICU寄りの内容を扱うなら、別資料での補完が要る。</p>
+<h4>14-4. 講義に使うときの注意点</h4>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>ジャーナルクラブでの問い</th></tr></thead>
+<tbody>
+<tr><td>Figure 2 の分岐</td><td>「LVEF 50%超・ペーシング率40%未満で生理的ペーシングを選ぶ」で本当に正しいか。逆ではないか</td></tr>
+<tr><td>VVI の位置づけ</td><td>Figure 2 は洞不全症候群の「ペーシング需要が低い」枝で VVI を推すが、本文は VVI が房室非同期とペースメーカー症候群を招くと警告している。この2つはどう両立するか</td></tr>
+<tr><td>米欧の乖離</td><td>神経調節性失神で米 IIb・欧 I。どちらを当院の標準とするか</td></tr>
+<tr><td>40%という閾値</td><td>Figure 2 と Table 3 に繰り返し出る「ペーシング率40%」の根拠となる研究は本文に示されていない。どこから来た数字か</td></tr>
+<tr><td>CSP への期待</td><td>5987例分のRCTが2025〜2029年に出そろう。それまで LBBAP を第一選択にする根拠はあるか</td></tr>
+</tbody></table></div>
+<h3>15. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>2021 ESC 心臓ペーシング・CRT ガイドライン（欧州側の適応の正本）</td><td>Glikson M, et al. Eur Heart J 2021;42:3427-3520</td></tr>
+<tr><td>4</td><td>2018 ACC/AHA/HRS 徐脈・心臓伝導遅延ガイドライン（米国側の適応の正本）</td><td>Kusumoto FM, et al. J Am Coll Cardiol 2019;74:e51-e156</td></tr>
+<tr><td>5</td><td>NASPE/BPEG 改訂版ジェネリックコード（NBGコードの正本）</td><td>Bernstein AD, et al. Pacing Clin Electrophysiol 2002;25:260-264</td></tr>
+<tr><td>10</td><td>完全心内リードレスペースメーカーの経皮的植込み（Micra 主要試験）</td><td>Reddy VY, et al. N Engl J Med 2015;373:1125-1135</td></tr>
+<tr><td>11</td><td>リードレス心内経カテーテルペーシングシステム</td><td>Reynolds D, et al. N Engl J Med 2016;374:533-541</td></tr>
+<tr><td>15</td><td>二腔リードレスペースメーカー（Table 2 の電池寿命脚注の出典）</td><td>Knops RE, et al. N Engl J Med 2023;388:2360-2370</td></tr>
+<tr><td>16</td><td>Micra 承認後レジストリ5年追跡</td><td>El-Chami MF, et al. Eur Heart J 2024;45:1241-1251</td></tr>
+<tr><td>17</td><td>ICD の実臨床での電池寿命（Table 2 の電池寿命に紐づくが対象はICD）</td><td>de Almeida Fernandes D, et al. BMC Cardiovasc Disord 2023;23:609</td></tr>
+<tr><td>18</td><td>経静脈ペースメーカーの合併症と医療費（全国規模の評価）</td><td>Cantillon DJ, et al. JACC Clin Electrophysiol 2017;3:1296-1305</td></tr>
+<tr><td>20</td><td>リードレスペースメーカーの安全性・有効性の系統的レビューとメタ解析</td><td>Ngo L, et al. J Am Heart Assoc 2021;10:e019212</td></tr>
+<tr><td>21</td><td>ジェネレータ交換・アップグレードの合併症率（REPLACE レジストリ）</td><td>Poole JE, et al. Circulation 2010;122:1553-1561</td></tr>
+<tr><td>22</td><td>2023 HRS/APHRS/LAHRS 心臓生理的ペーシングガイドライン（CSP のクラス IIb 推奨の出典）</td><td>Chung MK, et al. Heart Rhythm 2023;20:e17-e91</td></tr>
+<tr><td>30</td><td>LBBAP と His 束ペーシングの成功率・合併症率のメタ解析的比較</td><td>Parlavecchio A, et al. J Interv Card Electrophysiol 2024;67:719-729</td></tr>
+<tr><td>35</td><td>非虚血性心筋症での LBBAP による CRT</td><td>Huang W, et al. JACC Clin Electrophysiol 2020;6:849-858</td></tr>
+<tr><td>36</td><td>左脚ペーシング中の中隔穿孔の電気生理学的特徴</td><td>Ponnusamy SS, et al. Heart Rhythm 2022;19:728-734</td></tr>
+<tr><td>37</td><td>二腔ペースメーカー患者への心房中隔ペーシングによる心房細動抑制のメタ解析（否定的結果）</td><td>Shali S, et al. Int J Cardiol 2016;219:421-427</td></tr>
+<tr><td>43</td><td>二腔ペーシング対心室バックアップペーシング（DAVID 試験。右室ペーシングの害）</td><td>Wilkoff BL, et al. JAMA 2002;288:3115-3123</td></tr>
+<tr><td>44</td><td>洞不全症候群で正常 QRS 幅の患者における心室ペーシングの有害作用</td><td>Sweeney MO, et al. Circulation 2003;107:2932-2937</td></tr>
+<tr><td>47</td><td>洞結節疾患での心室ペーシング最小化による心房細動低減</td><td>Sweeney MO, et al. N Engl J Med 2007;357:1000-1008</td></tr>
+<tr><td>51</td><td>心不全イベント予防のための CRT（MADIT-CRT）</td><td>Moss AJ, et al. N Engl J Med 2009;361:1329-1338</td></tr>
+<tr><td>52</td><td>RAFT における CRT の入院への影響</td><td>Gillis AM, et al. Circulation 2014;129:2021-2030</td></tr>
+<tr><td>53</td><td>現代における CRT ノンレスポンダー（state-of-the-art レビュー）</td><td>Gerra L, et al. Heart Rhythm 2024;22:159-169</td></tr>
+<tr><td>54</td><td>両室ペーシング対右室ペーシングの臨床アウトカム改善（BLOCK HF）</td><td>Curtis AB, et al. J Am Coll Cardiol 2016;67:2148-2157</td></tr>
+<tr><td>56</td><td>狭い QRS の心不全に対する CRT（EchoCRT。無効かつ死亡増加の可能性）</td><td>Ruschitzka F, et al. N Engl J Med 2013;369:1395-1405</td></tr>
+<tr><td>58</td><td>2017 HRS CIED リード管理・抜去エキスパートコンセンサス（抜去適応の正本）</td><td>Kusumoto FM, et al. Heart Rhythm 2017;14:e503-e551</td></tr>
+<tr><td>59</td><td>2018 EHRA リード抜去エキスパートコンセンサス</td><td>Bongiorni MG, et al. Europace 2018;20:1217</td></tr>
+<tr><td>62</td><td>摩擦電気ナノ発電機による自己充電型ペースメーカー</td><td>Ryu H, et al. Nat Commun 2021;12:4374</td></tr>
+<tr><td>63</td><td>2017 HRS CIED 患者の MRI・放射線被曝エキスパートコンセンサス（MRI 運用の正本）</td><td>Indik JH, et al. Heart Rhythm 2017;14:e97-e153</td></tr>
+<tr><td>66</td><td>ペースメーカー患者の長期遠隔モニタリングのランダム化試験（COMPAS）</td><td>Mabo P, et al. Eur Heart J 2012;33:1105-1111</td></tr>
+<tr><td>68</td><td>心室オーバーセンシング検出のための AI（遠隔送信データのノイズ検出）</td><td>Strik M, et al. Heart Rhythm 2023;20:1378-1384</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ペースメーカーの読み方は <strong>NBGコードを1文字目から順に読む</strong>ことに尽き、<mark class="hl">「1. どこを叩くか → 2. どこを聴くか → 3. 聴こえたらどうするか → 4. 運動で速くするか → 5. 複数箇所を叩くか」の順で読めば初見のモードでも意味が取れる</mark>。適応は洞不全症候群なら<strong>症状の有無だけ</strong>（心拍数40/分未満・ポーズ4秒超は症状と関連しやすいが絶対的閾値はない）、房室ブロックなら<strong>重症度と不可逆性</strong>で決まる。技術の進歩はすべて「右室心尖部ペーシングによるディスシンクロニーをどう避けるか」という一点に収束しており、CRT が確立解、伝導系ペーシング（His 束・LBBAP）が有望な次の解だが、<mark class="hl">LBBAP を右室ペーシングや CRT より優先する決着は進行中の大規模RCT 7本（計5987例、2025〜2029年に結果）を待たねばならない</mark>。ICUにとっての実務的な要点は3つで、<mark class="hl">急性心筋梗塞の高度房室ブロックは一時ペーシングでしのぎ恒久ペーシングは5日以上待つ・術中とMRI中は電気メスによるペーシング抑制を避けるため非同期モードにする・デバイス関連ブドウ球菌感染と弁膜症性心内膜炎と持続菌血症はシステム全抜去の適応</mark>である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症関連AKIに日常収集データで挑む（エディトリアル・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07200-x.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症関連AKIに日常収集データで挑む（エディトリアル・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Claure-Del Granado R, James MT, Legrand M. Tackling sepsis-associated acute kidney injury using routinely collected data. Intensive Care Med. 2023;49:1100-1102. doi:10.1007/s00134-023-07200-x</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-08-28）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07200-x" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07200-x</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Tackling sepsis-associated acute kidney injury using routinely collected data</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07200-x.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07200-x.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07200-x.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で何を変えるか</p>
+<ul><li><strong>「ICUでAKIを予防する」という枠組みを見直す</strong>。原著では SA-AKI 診断までの中央値がICU入室から1日で、大半が敗血症を認識したその日に基準を満たし、その日のうちに最高ステージに達していた。当院でも SA-AKI は「ICUで発生する」より「ICUに到着する」ものとして扱い、力点を<strong>回復の支援と帰結の予防</strong>（体液過剰の回避、腎毒性薬の中止、投与量の適正化、新規感染の予防）に移す。</li><li><strong>カンファレンスで「AKI stage 1」と言うときに、尿量基準かクレアチニン基準かを必ず言う</strong>。エディトリアルが引用した数値では、院内死亡率が尿量のみ12%・クレアチニンのみ15%・両方35%と大きく違う。同じラベルの中に予後の異なる集団が混ざっている。</li><li><strong>尿量アラートの閾値を「そのまま介入トリガーにしない」</strong>。現行 KDIGO stage 1 の尿量基準（0.5 mL/kg/h 未満が6時間）で拾われる患者の多くは24〜48時間で回復し、14日目までクレアチニンがほとんど上がらない。当院で尿量だけを根拠に輸液負荷や利尿薬をエスカレートしている場面があれば、遷延の有無とクレアチニンの動きを併せて見る運用のほうが実態に合う。</li><li><strong>後ろ向き研究・レジストリ解析でベースラインクレアチニンをどう置くかを事前に決める</strong>。入院前クレアチニンが無いときに「全員 eGFR 75 相当」と逆算する方法は、CKDを見落としてAKIを過剰診断する。JIPAD や当院DWHの解析でも、この仮定を採るなら<strong>入室時クレアチニンをベースラインにした感度分析を必ず併走させる</strong>。</li><li><strong>退院後のRAS阻害薬</strong>が「AKIの帰結を防ぐ介入」の候補として挙げられている。当院の退院後フォローと腎臓内科連携を設計するときの論点になる（ただしこれは著者の提案であり、本稿で試験結果が示されたわけではない）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：敗血症は世界で年間4億8,900万件が記録され、全世界の死亡の19.7%を占める。AKIは敗血症の高頻度な合併症で、重症患者のAKIの45〜70%は敗血症が原因。2023年にADQI第28回ワークグループが SA-AKI の合意定義（Sepsis-3 と KDIGO AKI 基準の組み合わせ、敗血症診断から7日以内）を発表した。</li><li><strong>Unknown（分かっていなかったこと）</strong>：SA-AKI に普遍的に受け入れられた定義がなく、研究と臨床管理の大きな障害になっていた。ADQI定義を大規模な実診療データに当てはめたとき、どれだけの患者が該当し、その内訳と予後がどうなるかは示されていなかった。</li><li><strong>What's new（この論考の主張）</strong>：White らが<strong>日常収集された電子カルテデータ</strong>でADQI定義を検証した結果を受け、著者らは3つの論点を提起する。①SA-AKIの予防より<strong>回復と帰結の改善</strong>に資源を向けるべき、②現行の<strong>尿量基準は stage 1 に対してリベラルすぎる</strong>可能性があり KDIGO 改訂で再評価すべき、③<strong>真のベースラインクレアチニンの同定</strong>はAKI研究全体の未解決課題である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 日常収集データで SA-AKI の疫学は描けた。しかし描けた輪郭の中身は均質ではなく、<strong>尿量だけで拾ったAKIとクレアチニンが上がったAKIはまるで別の疾患のように予後が違う</strong>。著者らは「予防から回復へ」「尿量基準の再評価」「ベースラインCrの解決」の3点を次の課題として挙げる。</p>
+</div>
+<ul><li>本稿は原著研究ではなく <strong>EDITORIAL</strong>。同号の White ら（オーストラリア・12のクローズドICU・2015〜2021年・後ろ向きコホート）への論評である。</li><li>原著では 84,528入室のうち 18% が SA-AKI の定義を満たし、これは Sepsis-3 定義を満たす患者の 57% にあたった。SA-AKI 基準を満たすまでの中央値はICU入室から1日。</li><li>SA-AKI 患者の半数が stage 1 で、そのうち 65% は低尿量基準のみによる診断だった。</li><li>院内死亡率は SA-AKI 全体で 18%。内訳は尿量のみ 12%、クレアチニンのみ 15%、両基準 35%。</li><li>尿量のみによる SA-AKI は、クレアチニン基準を満たす SA-AKI より死亡オッズが有意に低かった（OR 0.37、95%CI 0.34–0.39）。腎代替療法（KRT）を要した割合も 3.5% と、クレアチニン単独 18%、両基準 51% より低い。</li><li>著者らの含意①：大半が敗血症認識当日に基準を満たし同日に最高ステージへ達する以上、<strong>予防より回復と帰結の改善のほうが効果を持ちうる</strong>。</li><li>著者らの含意②：尿量のみのAKIは速やかに回復し14日目までクレアチニンがほぼ上がらない。<strong>現行の尿量基準は stage 1 に対してリベラルすぎ、特異度を欠く</strong>可能性がある。KDIGO 改訂で閾値を再評価すべき。</li><li>著者らの含意③：入院前クレアチニンが無いため CKD-EPI 式で eGFR 75 相当と逆算する手法は、<strong>CKDの過小認識とAKIの過剰診断</strong>のリスクを伴う。AKIとCKDを区別する追加基準やバイオマーカーが研究領域となるべき。</li><li>結論：SA-AKI は敗血症患者のICU入室の早期に起こり、<strong>クレアチニンと尿量の情報を組み合わせると腎機能の軌跡と転帰が異なる集団を区別できる</strong>（Fig. 1）。日常的に得られる臨床データで高リスク集団を切り出せることが、新規治療の標的設定にもつながる。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — SA-AKI と KDIGO 基準の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>AKI（急性腎障害）</strong> の現行定義は <strong>KDIGO 2012</strong> に基づき、①血清クレアチニン（Screat）の上昇か、②尿量（UO）の低下のどちらか一方を満たせば診断される。stage 1 は「Screat が48時間以内に0.3 mg/dL以上上昇、または7日以内にベースラインの1.5〜1.9倍」あるいは「UO が0.5 mL/kg/h未満で6〜12時間持続」。2つの独立した入り口があるため、同じ「stage 1 AKI」でも中身が違う患者が混ざる。 <strong>Sepsis-3</strong>（2016）は敗血症を「感染に対する制御不能な宿主反応による生命を脅かす臓器障害」と定義し、感染の証明または疑いに SOFA スコア2点以上の上昇を組み合わせて運用する。 <strong>SA-AKI（敗血症関連AKI）</strong> は「敗血症の文脈で生じたAKI」を運用上ひとまとめにする用語。<strong>ADQI（Acute Disease Quality Initiative）第28回ワークグループ</strong>が2023年に合意定義を出し、Sepsis-3 と KDIGO を組み合わせ、<strong>敗血症診断から7日以内</strong>に KDIGO 基準を満たすAKIを SA-AKI とした。 <strong>ベースラインクレアチニン</strong>は「その患者がもともと持っていた腎機能の値」。入院前の外来採血が無いと確定できないため、後ろ向き研究では <strong>CKD-EPI 式を逆算して「eGFR 75 mL/min/1.73m² だったと仮定」する</strong>手法がよく使われる。この仮定を置くと、もともとCKDだった患者の真のベースラインより低い（＝腎機能が良い）値を割り当ててしまい、CKDを見落とし、AKIを過剰に診断する方向へ偏る。 <strong>日常収集データ（routinely collected data）</strong> は、研究のために別に集めたのではなく診療の副産物として電子カルテやレジストリに溜まるデータ。n数を稼げて現実の診療を映す一方、<strong>測定が欠けている理由自体が臨床状況に依存する</strong>（例：尿道カテーテルが入っていないから尿量がゼロと記録される）という固有の落とし穴を持つ。</p>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>一般的な背景知識であり本稿の記述ではない部分 上記のうち、<strong>KDIGO stage 1 の具体的な数値基準（0.3 mg/dL上昇・1.5倍・0.5 mL/kg/h × 6時間）と Sepsis-3 の運用手順の詳細</strong>は、読者の理解のために補った一般的な背景知識である。本エディトリアル本文はこれらの数値を明示していない。本文が明記しているのは「KDIGO 基準」「Sepsis-3」という参照と、後述する「UO &lt; 0.2 または 0.3 mL/kg/h」というより厳格な代替閾値だけである。</p>
+</div>
+<h3>2. 背景 — なぜ SA-AKI の標準化定義が要るのか 🫁</h3>
+<p>著者らはまず敗血症の負荷を数字で置く。<strong>世界で推定4億8,900万件の敗血症が記録</strong>され、敗血症は重症患者の主要な死因であり <strong>全世界の死亡の19.7%</strong> を占める。発生率は着実に上昇しており、脆弱な集団にとってのリスクと重症疾患の負荷の双方を押し上げている。</p>
+<p>AKI は敗血症の高頻度な合併症で転帰に大きく影響する。<strong>重症患者のAKI全症例の45〜70%を敗血症が占める</strong>（AKI-EPI 研究などに基づく引用）。SA-AKI という用語は、敗血症の文脈におけるAKIを運用上ひとつにまとめるためのものである。</p>
+<p>そのうえで著者らは、<strong>SA-AKI に普遍的に受け入れられた定義が無かったことが研究と臨床管理の大きな障害だった</strong>と述べ、標準化定義が重要な理由を3つ挙げる。</p>
+<h4>標準化された定義が重要な3つの理由（本文の列挙をそのまま）</h4>
+<div class="tw"><table>
+<thead><tr><th>順序</th><th>理由</th><th>本文の言い回し</th></tr></thead>
+<tbody>
+<tr><td>第一</td><td>研究とデータ収集の一貫性</td><td>統一基準はより一貫した研究とデータ収集を促し、意味のある比較とメタ解析を可能にする</td></tr>
+<tr><td>第二</td><td>ガイドライン策定</td><td>標準化定義は SA-AKI 管理のエビデンスに基づくガイドライン策定を助け、提供されるケアの全体的な質を高める可能性が高い</td></tr>
+<tr><td>第三</td><td>独立した疾患単位としての認識</td><td>他の原因のAKIと区別された特定の疾患単位として SA-AKI を認識することで、固有の寄与因子・病態生理・転帰改善の機会をよりよく理解できる</td></tr>
+</tbody></table></div>
+<p>第二の理由に「likely（〜する可能性が高い）」、第三に「may allow（〜できるかもしれない）」という留保が付いている点は、原文の慎重さとして保っておく価値がある。標準化そのものが質を上げると断定してはいない。</p>
+<h3>3. 論評の対象となった原著（White ら）の設計と、必要とされた仮定 📐</h3>
+<p>エディトリアルが本文で記述している範囲での原著の設計は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>後ろ向きコホート研究</td></tr>
+<tr><td>データソース</td><td><strong>日常収集された電子カルテ（EMR）データ</strong></td></tr>
+<tr><td>施設</td><td>オーストラリアの<strong>12のクローズドICU</strong></td></tr>
+<tr><td>期間</td><td><strong>2015〜2021年</strong></td></tr>
+<tr><td>検討対象</td><td>ADQI が最近提案した SA-AKI 定義に基づく発生率・患者背景・臨床転帰</td></tr>
+<tr><td>SA-AKI の定義</td><td><strong>Sepsis-3 と KDIGO AKI 基準の組み合わせ</strong>。敗血症診断から<strong>7日以内</strong></td></tr>
+</tbody></table></div>
+<p>著者らは、カルテデータの性質上いくつかの仮定が必要だったことを明記する。ここが本エディトリアルの方法論的な核心であり、レジストリ研究を読むときにそのまま流用できる着眼点である。</p>
+<h4>日常収集データを使うために置かれた2つの仮定</h4>
+<div class="tw"><table>
+<thead><tr><th>仮定</th><th>内容</th><th>生じるバイアスの向き</th></tr></thead>
+<tbody>
+<tr><td>ベースライン血清クレアチニン</td><td>ICU入室前の Screat が得られなかったため、<strong>コホート全患者について eGFR 75 mL/min/1.73m² に相当する値をベースラインと仮定</strong>した。その結果 <strong>CKD は同定されなかった</strong></td><td>CKD を過小認識し、AKI を過剰診断する方向</td></tr>
+<tr><td>尿量の補完</td><td>1時間ごとの測定が欠損またはゼロ記録の区間は、<strong>先行区間の平均で補完</strong>した。根拠は「そうした場合には尿道カテーテルが入っていない可能性がある」という推論</td><td>尿量測定のない患者が<strong>低尿量と誤分類されうる</strong></td></tr>
+</tbody></table></div>
+<p>著者ら自身が「Patients without urine output measurements may thus be misclassified as having low urine output（尿量測定のない患者はこのため低尿量として誤分類されうる）」と書いている。<strong>補完した尿量を除外した感度分析で SA-AKI の発生率が低下した</strong>ことが、この懸念が実際に効いていたことの裏づけになっている。</p>
+<h3>4. エディトリアルが引用した原著の主要結果 📊</h3>
+<p>以下はすべて <strong>著者らが本文に引用した事実</strong>であり、著者らの意見ではない。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>総入室数</td><td><strong>84,528</strong></td></tr>
+<tr><td>SA-AKI 定義を満たした割合</td><td><strong>18%</strong></td></tr>
+<tr><td>Sepsis-3 定義を満たす患者に占める SA-AKI の割合</td><td><strong>57%</strong></td></tr>
+<tr><td>SA-AKI 基準を満たすまでの時間（中央値）</td><td>ICU入室から<strong>1日</strong></td></tr>
+<tr><td>SA-AKI に占める stage 1 の割合</td><td><strong>半数（half）</strong></td></tr>
+<tr><td>stage 1 のうち低尿量基準のみによる診断</td><td><strong>65%</strong></td></tr>
+<tr><td>低尿量のみの患者の回復</td><td>大半が <strong>24〜48時間以内</strong>に回復</td></tr>
+<tr><td>SA-AKI で昇圧薬を受けた割合</td><td><strong>59%</strong></td></tr>
+<tr><td>最高SOFAスコア（中央値・IQR）</td><td><strong>7（4, 9）</strong></td></tr>
+</tbody></table></div>
+<h4>診断基準別の院内死亡率</h4>
+<div class="tw"><table>
+<thead><tr><th>診断基準</th><th>院内死亡率</th></tr></thead>
+<tbody>
+<tr><td>尿量のみ</td><td><strong>12%</strong></td></tr>
+<tr><td>クレアチニンのみ</td><td><strong>15%</strong></td></tr>
+<tr><td>両基準</td><td><strong>35%</strong></td></tr>
+<tr><td>SA-AKI 全体</td><td><strong>18%</strong></td></tr>
+</tbody></table></div>
+<h4>診断基準別の腎代替療法（KRT）実施率と死亡オッズ</h4>
+<div class="tw"><table>
+<thead><tr><th>診断基準</th><th>KRT 実施率</th></tr></thead>
+<tbody>
+<tr><td>尿量のみ</td><td><strong>3.5%</strong></td></tr>
+<tr><td>クレアチニン単独</td><td><strong>18%</strong></td></tr>
+<tr><td>両基準</td><td><strong>51%</strong></td></tr>
+</tbody></table></div>
+<p>低尿量は、AKIのない患者と比べれば転帰不良と関連した。しかし<strong>低尿量のみに基づく SA-AKI は、クレアチニン基準を満たす SA-AKI より死亡オッズが有意に低かった（OR 0.37、95%CI 0.34–0.39）</strong>。</p>
+<p>著者らは重症度についても釘を刺す。<strong>本コホートの患者は重症度が比較的低く（acuity of illness was rather low）</strong>、かつ<strong>資源の豊富な環境</strong>で治療されていた。したがって「これらの SA-AKI の特徴は他の環境に移し替えられない可能性がある（might not be transposable to other settings）」。</p>
+<h3>5. 著者の主張と、引用のある事実を分ける 🔍</h3>
+<p>エディトリアルは事実の報告と論評が同じ段落に同居する形式なので、読むときに切り分けが要る。本稿の骨格を2列で並べる。</p>
+<div class="tw"><table>
+<thead><tr><th>引用のある事実（出典つき）</th><th>著者らの主張・解釈（意見）</th></tr></thead>
+<tbody>
+<tr><td>世界で推定4億8,900万件の敗血症、全世界の死亡の19.7%（Rudd 2020、Rudd 2018、Chiu &amp; Legrand 2021）</td><td>―</td></tr>
+<tr><td>重症患者のAKIの45〜70%を敗血症が占める（AKI-EPI、Hoste 2015）</td><td>―</td></tr>
+<tr><td>ADQI 第28回ワークグループが SA-AKI の合意定義を発表（Zarbock 2023）</td><td>標準化定義は研究の一貫性・ガイドライン策定・独立疾患としての理解を助ける（第二・第三の理由には「likely」「may」の留保つき）</td></tr>
+<tr><td>White らのコホートで 84,528入室中18%が SA-AKI、診断までの中央値1日、stage 1 が半数でその65%は尿量のみ（White 2023）</td><td>大半が敗血症認識当日に基準を満たし同日に最高ステージへ達する以上、<strong>予防より回復と帰結の改善のほうが効果を持つ可能性が高い</strong></td></tr>
+<tr><td>死亡率 尿量のみ12%／Cr のみ15%／両方35%、KRT 3.5%／18%／51%、OR 0.37（0.34–0.39）（White 2023）</td><td>これらは<strong>現行のAKI定義・病期分類への乏尿の組み込み方に異議を唱える</strong>ものである</td></tr>
+<tr><td>より厳格な基準（UO &lt; 0.2 または 0.3 mL/kg/h、あるいはより遷延した乏尿）に関する最近のデータ（Vaara 2015、Kellum 2015）</td><td>現行の尿量基準は <strong>stage 1 に対してリベラルすぎる</strong>可能性がある</td></tr>
+<tr><td>両基準を満たした患者の尿量は、尿量基準のみの患者よりはるかに低かった（White 2023）</td><td>現行の尿量基準は<strong>腎障害の検出において特異度を欠いている</strong>（Legrand &amp; Payen 2011 を参照）</td></tr>
+<tr><td>KDIGO ガイドラインの改訂が予定されている</td><td>定義と病期分類における<strong>尿量の閾値は再評価されるべき</strong>である</td></tr>
+<tr><td>ベースライン Screat が入手できず CKD-EPI で推定した。入室時 Screat をベースラインとする感度分析では発生率が低下したが、それ以外に結果を根本的には変えなかった（White 2023）</td><td>この手法は <strong>CKDの過小認識とAKIの過剰診断のリスク</strong>を伴う</td></tr>
+<tr><td>stage 3 を除き、大半の患者で組み入れ時と14日目のクレアチニン値がほとんど変わらなかった（White 2023）</td><td>説明は2つ考えられる。<strong>①多くの患者でCKDが実際に過小診断されていた ②stage 1・2 のAKI患者の大半は速やかには回復しなかった</strong></td></tr>
+<tr><td>AKI は遠隔臓器障害（心血管障害・肺障害）や体液過剰・薬剤の過少／過剰投与・新規感染と関連する（Legrand &amp; Rossignol 2020）</td><td>機序の理解、回復を改善する介入、帰結を防ぐ介入（退院後のRAS阻害薬など）は<strong>今後の主要な研究領域とすべき</strong></td></tr>
+</tbody></table></div>
+<h3>6. 含意1 — 予防ではなく「回復と帰結」を標的にせよ 💧</h3>
+<p>著者らの問いは「これらの結果は集中治療・腎臓内科コミュニティにとって何を意味するか」から始まる。第一の答えは<strong>タイミング</strong>から導かれる。</p>
+<p>大半の患者が<strong>敗血症を認識したその日に SA-AKI の基準を満たし、その大半が同日に最高ステージに達していた</strong>。つまりICUに患者が来た時点で、SA-AKI はすでに起きてしまっている。ここから著者らは「AKI予防は依然として称賛に値するが（remains commendable）、最終的に敗血症を発症する患者においては、SA-AKI を予防する努力より <strong>AKI の回復と転帰（＝AKI の帰結）を改善する努力のほうが効果を持つ可能性が高い</strong>」と論じる。</p>
+<p>「予防に意味がない」とは書いていない。<strong>予防の余地が構造的に小さい集団において、限られた研究資源をどちらに配分するか</strong>という優先順位の議論である。</p>
+<p>著者らが挙げる「AKIの帰結」の具体像と、研究すべき領域は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>遠隔臓器障害</td><td>心血管障害、肺障害</td></tr>
+<tr><td>合併症</td><td>体液過剰、薬剤の過少投与または過剰投与、新規感染</td></tr>
+<tr><td>研究領域①</td><td>SA-AKI 患者の転帰悪化に至る機序のよりよい理解</td></tr>
+<tr><td>研究領域②</td><td>回復を改善しうる介入（適時の適切な支持療法の開始、腎へのさらなる侵襲の制限を含む）</td></tr>
+<tr><td>研究領域③</td><td>SA-AKI の帰結を防ぐ介入（退院後のレニン・アンジオテンシン系阻害薬など）</td></tr>
+</tbody></table></div>
+<h3>7. 含意2 — 乏尿の扱いを見直せ 🚱</h3>
+<p>第二の論点は、これらの結果が <strong>AKI の現行定義と病期分類における乏尿の組み込み方に異議を唱えている（challenge the way oliguria is included）</strong> という点にある。</p>
+<p>尿量のみで同定されたAKIは、クレアチニン上昇によるAKIあるいは両基準によるAKIと比べて、①全体として転帰が良好で、②速やかに回復し、③<strong>入室後14日間でクレアチニンの上昇をほとんど示さなかった</strong>。この差は <strong>stage 1 AKI でとくに顕著</strong>だった。</p>
+<p>著者らはこれを、より厳格な基準を支持する最近のデータと整合すると位置づける。すなわち <strong>現行の尿量基準は stage 1 AKI に対してリベラルすぎ、より厳格な基準（UO &lt; 0.2 または 0.3 mL/kg/h、あるいはより遷延した乏尿）と比べて予後不良な患者を同定できていない</strong>可能性がある。</p>
+<p>さらに本研究では、<strong>両基準を満たした患者の尿量は、尿量基準のみを満たした患者よりはるかに低かった</strong>。この所見から著者らは、現行の尿量基準が<strong>腎障害の検出において特異度を欠いている</strong>と読む。裏返せば、KDIGO の尿量基準に引っかかる患者の多くは「腎が障害された」のではなく「生理的に、あるいは血行動態の変化に応じて尿を減らしている」だけかもしれない。</p>
+<p>結論として、<strong>KDIGO の AKI ガイドラインの更新が予定されており、定義と病期分類における尿量の閾値は再評価されるべき</strong>である、と提言する。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント 「尿量のみのAKIは予後が良い」を「尿量のみのAKIは無視してよい」と読み替えてはならない。著者らは同時に <strong>低尿量はAKIのない患者と比べれば転帰不良と関連した</strong> と明記している。<mark class="hl">本稿が支持するのは「尿量だけを根拠に介入を強めない」ことであって、「尿量を見ない」ことではない</mark>。</p>
+</div>
+<h4>判断の流れ（本稿の論旨を当院向けに整理したもの・原文に該当する図表はない）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>敗血症患者が尿量 0.5 mL/kg/h 未満で stage 1 に該当</td><td>クレアチニンが動いているか。乏尿が何時間続いているか</td><td>クレアチニンが不変で乏尿が短時間なら、輸液負荷のエスカレートを即断しない。24〜48時間の推移を見る</td></tr>
+<tr><td>乏尿が遷延、あるいは 0.3 mL/kg/h 未満に落ちた</td><td>血行動態・腹腔内圧・腎灌流圧・腎毒性薬</td><td>より厳格な閾値に該当する層。原因検索と侵襲の除去を積極的に行う</td></tr>
+<tr><td>クレアチニンが上昇（尿量は保たれている）</td><td>ベースラインの妥当性、CKDの有無、薬剤</td><td>予後は尿量のみより悪い。KRT 必要性が約5倍（18% 対 3.5%）の層として扱う</td></tr>
+<tr><td>尿量とクレアチニンの両方が該当</td><td>最高ステージ、昇圧薬、SOFA</td><td>死亡率 35%・KRT 51% の最重症層。腎臓内科への早期相談と KRT の準備</td></tr>
+</tbody></table></div>
+<h3>8. 含意3 — ベースラインクレアチニンという積年の問い 🧪</h3>
+<p>第三の論点は、AKI という診断そのものの土台に関わる。<strong>AKI を定義するときの積年の問いは、真のベースライン血清クレアチニンの同定である</strong>。著者らはこれを「後ろ向き・前向きを問わず、介入試験を含むすべてのAKI研究にとって決定的（critical）」と書く。</p>
+<p>本研究では、世界中の多くの重症患者と同様に入院前の血清クレアチニンが得られず、<strong>CKD-EPI 式を用いた推定GFRでベースラインを推定</strong>した。この手法は <strong>CKD の過小認識と AKI の過剰診断のリスク</strong>を伴う。</p>
+<p>感度分析の結果はこうである。<strong>入室時クレアチニンをベースラインとすると SA-AKI の発生率は低下したが、それ以外に結果を根本的には変えなかった（did not otherwise fundamentally affect the results）</strong>。発生率という「量」は仮定に敏感だが、群間比較という「構造」は頑健だった、と読める。</p>
+<p>そのうえで著者らは、原著の中でとくに目を引く（strikingly）所見として次を挙げる。<strong>stage 3 の患者を除き、大半の患者は組み入れ時と14日目でクレアチニン値がほとんど変化しなかった</strong>。</p>
+<h4>この所見に対して著者らが挙げた2つの説明</h4>
+<div class="tw"><table>
+<thead><tr><th>説明</th><th>内容</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>①</td><td>多くの患者で <strong>CKD が実際に過小診断されていた</strong></td><td>ベースラインを eGFR 75 と置いた時点で、もともと腎機能が悪かった患者を「AKI」として拾ってしまっていた</td></tr>
+<tr><td>②</td><td><strong>stage 1・2 の AKI 患者の大半は速やかには回復しなかった</strong></td><td>「軽症AKIは早く治る」という前提のほうが誤りで、14日たってもクレアチニンが戻っていない</td></tr>
+</tbody></table></div>
+<p>この2つは臨床的な意味がほぼ正反対である。①なら過剰診断の問題、②なら過小評価の問題になる。<strong>日常収集データだけではこの2つを区別できない</strong>というのが著者らの認識であり、だからこそ「これらの状況で AKI と CKD を区別するのに役立つ<strong>追加の臨床基準やバイオマーカー</strong>は、臨床実践にも試験のための患者同定にも有用であり、研究領域とすべきである」と締めている。</p>
+<h3>9. 結論と Figure 1 🗺️</h3>
+<p>著者らの結論は2文である。第一に、White らの研究は <strong>SA-AKI が敗血症患者のICU受診の早期に起こる</strong>ことを浮き彫りにした。第二に、<strong>クレアチニンと尿量の基準を組み合わせて用いると、腎機能の軌跡（trajectories）と転帰が異なる患者を区別できる</strong>（Fig. 1）。</p>
+<p>この知見は、①医療者が敗血症の経過の早期にAKIを認識し介入をもって応答することへの警戒を助け、②<strong>日常的に得られる臨床データによって同定される高リスクのサブグループ</strong>に対して、敗血症とAKIの新規治療を狙い定めることを助ける。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07200-x" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07200-x）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1（原図・無改変。©Springer-Verlag GmbH Germany） 原文キャプション：Heat map illustrating differences in prognosis when serum creatinine changes (Screat) and urine output (UO) criteria are used in combination to identify sepsis-associated acute kidney injury (SA-AKI). <strong>図の読み方</strong>：横軸が Screat 基準（左半分 Screat −、右半分 Screat +）、縦軸が乏尿（下半分 Oliguria −、上半分 Oliguria +）。点線が2本入って全体が4象限に分かれ、各象限がさらに2×2の小マスに分割された合計16マスの格子になっている。右の凡例は上端が濃赤の「High risk of death」、下端が濃緑の「Low risk of death」で、その間を赤・橙・淡黄・淡灰緑・緑と段階的につないだ8段のカラーバー。 <strong>色の配置</strong>：左下象限（Screat −／Oliguria −）が最も濃い緑で、最も低リスク。左上象限（Screat −／Oliguria +）は淡黄から淡橙で中間リスク。右半分（Screat +）は乏尿の有無にかかわらず全マスが赤〜赤褐色で、右上（両基準該当）に向かうほど濃くなる。 <strong>要点</strong>：リスクの主軸は Screat 側にあり、乏尿は Screat が陰性のときに勾配をつける因子として働く。ただし本図は<strong>数値の目盛りを持たない概念図</strong>であり、実データをプロットしたものではない。各マスに対応する死亡率は図中に示されていない。</p>
+</div>
+<h3>10. 「日常収集データで表現型が作れる」ことと「その表現型が役立つ」ことは別 🧭</h3>
+<p>タイトルの「using routinely collected data（日常収集データを使って）」は本稿の主題そのものであり、レジストリ研究をやる側からは次のように整理しておくと使いやすい。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>本稿で達成されていること</th><th>本稿では達成されていないこと</th></tr></thead>
+<tbody>
+<tr><td>① 表現型が<strong>作れる</strong></td><td>Screat × UO の2×2で SA-AKI を4群に切り分けられた。日常データだけで実行できた</td><td>―</td></tr>
+<tr><td>② 表現型が<strong>予後を分ける</strong></td><td>死亡率 12%／15%／35%、KRT 3.5%／18%／51% と明確に分離した</td><td>―</td></tr>
+<tr><td>③ 表現型が<strong>測定の産物でない</strong></td><td>―</td><td>尿量の補完と eGFR 75 の仮定という<strong>2つの仮定が群の割り付けそのものに効いている</strong>。感度分析で発生率が動くことを著者ら自身が認めている</td></tr>
+<tr><td>④ 表現型が<strong>治療方針を変える</strong></td><td>―</td><td>群ごとに異なる治療を試した研究は本稿に無い。「高リスク群に新規治療を狙い定めることを助ける」は<strong>将来の可能性としての記述</strong></td></tr>
+<tr><td>⑤ 表現型で<strong>転帰が改善する</strong></td><td>―</td><td>検証されていない。著者ら自身が回復改善の介入も帰結予防の介入も「今後の主要な研究領域」と位置づけている</td></tr>
+</tbody></table></div>
+<p><strong>①②までは示され、③④⑤は未達である</strong>。この区別は、日常収集データで表現型を作る研究一般に当てはまる。予後が分かれることは、その分類が介入の分岐点として使えることを意味しない。</p>
+<h2>🔗 既存ノートとの整合</h2>
+<p>同一の原著を扱う既存ノートとの間に、<strong>数値の食い違いが3か所ある</strong>。どちらかに丸めず、出典ごとに併記する。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本エディトリアル本文</th><th>原著（White ら）の抄録＝既存ノート <span class="wl">敗血症関連AKIはICU患者の6人に1人・初日に診断される（ADQI定義・12施設8万例・ICM2023）</span></th></tr></thead>
+<tbody>
+<tr><td>stage 1 の割合</td><td>「half（半数）」</td><td><strong>54%</strong></td></tr>
+<tr><td>死亡のオッズ比</td><td><strong>OR 0.37（95%CI 0.34–0.39）</strong></td><td><strong>OR 0.34（95%CI 0.32–0.36）</strong></td></tr>
+<tr><td>KRT 実施率（尿量のみ／Cr単独／両方）</td><td><strong>3.5% ／ 18% ／ 51%</strong></td><td><strong>2.8% ／ 18% ／ 50%</strong></td></tr>
+</tbody></table></div>
+<p>食い違いの解釈：エディトリアル本文は OR の比較対象を「SA-AKI fulfilling Screat criteria（クレアチニン基準を満たす SA-AKI）」と書き、原著抄録は「クレアチニン単独または両基準」と書いている。<strong>比較群の取り方が異なる</strong>ため値がずれた可能性が高いが、いずれの文献も算出の内訳を明示していないため断定はできない。JC で数値を引用するときは<strong>どちらの出典の値かを明示する</strong>。</p>
+<p>なお、既存ノート側の「限界」欄に書かれている重症度の記述（SA-AKI の59%が昇圧薬、最高SOFA中央値7（4, 9））と、ベースライン eGFR 75 の仮定・尿量補完の記述は、いずれも本エディトリアル本文の記載と一致している。既存ノートはこれらをエディトリアル由来と明記しており、整合している。</p>
+<h2>🔎 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>これはエディトリアルであり、新しいデータは1つも含まれない</strong>。示された数値はすべて White らの原著からの引用で、Fig. 1 も概念図である。「ICM2023 でこう示された」と引用するときは、原著と論評のどちらを引いているのかを区別する必要がある。</li></ol>
+<ol><li><strong>著者らは原著の共著者ではないが、中立の第三者とも言い切れない</strong>。責任著者 Legrand は引用文献のうち3件（Chiu &amp; Legrand 2021、Legrand &amp; Rossignol 2020、Legrand &amp; Payen 2011）の著者であり、「尿量基準は特異度を欠く」という主張は自身の2011年の論考を根拠に置いている。COI では Alexion と La Jolla からのコンサルティング料を申告している。</li></ol>
+<ol><li><strong>「予防より回復」の推論には飛躍がありうる</strong>。「ICU入室初日にすでにAKIが成立している」は事実だが、そこから導けるのは「<strong>ICU入室後の</strong>予防介入の余地が小さい」までである。ICU入室前（救急外来・病棟・院外）の予防が無効だという証拠にはならない。実際、原著では患者の典型的な入り口が自宅からED経由だった。<strong>予防の場所がICUの外に移るだけ</strong>という読み方も成り立つ。</li></ol>
+<ol><li><strong>尿量基準の「特異度不足」は、補完の仮定と分離できていない</strong>。尿量が欠損またはゼロ記録の区間を先行区間平均で補完した以上、「尿量のみで拾われた群」には<strong>カテーテルが入っていなかっただけの患者が混入している</strong>。その群の予後が良いのは当たり前で、これは基準の特異度ではなく<strong>データ収集の特異度</strong>の問題かもしれない。著者らは補完除外の感度分析で発生率が下がったことに触れているが、感度分析後も死亡オッズ比が同じ方向・同じ大きさだったかどうかは本稿に書かれていない。</li></ol>
+<ol><li><strong>「より厳格な基準（UO &lt; 0.2 または 0.3 mL/kg/h）」の妥当性は本稿では検証されていない</strong>。Vaara 2015 と Kellum 2015 の引用として言及されるにとどまり、どの閾値がどれだけ予後判別を改善するかの効果量は示されない。KDIGO 改訂を待つ段階の提言である。</li></ol>
+<ol><li><strong>「stage 1・2 の大半は速やかに回復しなかった」という第二の説明は、含意2と緊張関係にある</strong>。含意2では「尿量のみのAKIは速やかに回復し、14日目までクレアチニンが上がらない」ことを軽症の証拠として使う。一方で含意3では、同じ「14日目までクレアチニンが変わらない」所見を「回復していない証拠かもしれない」と読む。同じ観察が、文脈によって「良好」とも「未回復」とも解釈されている。この内的な緊張は本稿が明示的には解いていない。ベースラインが不確かだと、クレアチニンが動かないことの意味自体が決まらない、というのが根本にある。</li></ol>
+<ol><li><strong>外的妥当性の制約を著者ら自身が明記している</strong>。59%が昇圧薬、最高SOFA中央値7（4, 9）という比較的低い重症度と、資源の豊富な環境。「これらの SA-AKI の特徴は他の環境に移し替えられない可能性がある」。日本のICU（当院を含む）が「資源の豊富な環境」に当たるとしても、敗血症の入り口の構造、尿道カテーテル留置率、時間尿の記録粒度が異なれば、尿量基準の振る舞いは変わりうる。</li></ol>
+<ol><li><strong>KRT の実施率は「必要性」ではなく「実施」である</strong>。51% という数字は、その施設群での KRT 開始の閾値を反映している。開始タイミングの方針が違えば数字は変わる（→ <span class="wl">AKIの腎代替療法（開始タイミング・IDEAL・AKIKI・ELAIN）</span>）。</li></ol>
+<h2>📚 主要引用文献一覧</h2>
+<p>本エディトリアルが引用する13件。番号は原文どおり。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>世界の敗血症発生率と死亡（1990–2017、GBD 解析）。推定4億8,900万件の根拠</td><td>Rudd KE, Johnson SC, Agesa KM, et al. *Lancet*. 2020;395:200-211</td></tr>
+<tr><td>2</td><td>敗血症の世界的負荷 — 障壁と解決の可能性</td><td>Rudd KE, Kissoon N, Limmathurotsakul D, et al. *Crit Care*. 2018;22:232</td></tr>
+<tr><td>3</td><td>敗血症・敗血症性ショックの疫学</td><td>Chiu C, Legrand M. *Curr Opin Anaesthesiol*. 2021</td></tr>
+<tr><td>4</td><td>Sepsis-3 — 敗血症・敗血症性ショックの第三次国際コンセンサス定義</td><td>Singer M, Deutschman CS, Seymour CW, et al. *JAMA*. 2016;315:801-810</td></tr>
+<tr><td>5</td><td>AKI-EPI — 重症患者のAKI疫学（多国籍）。「AKIの45〜70%が敗血症」の根拠</td><td>Hoste EAJ, Bagshaw SM, Bellomo R, et al. *Intensive Care Med*. 2015;41:1411-1423</td></tr>
+<tr><td>6</td><td><strong>ADQI 第28回ワークグループによる SA-AKI 合意報告</strong>（本稿の定義の出発点）</td><td>Zarbock A, Nadim MK, Pickkers P, et al. *Nat Rev Nephrol*. 2023;19:401-417</td></tr>
+<tr><td>7</td><td>重症疾患への精密医療アプローチの課題と機会</td><td>Seymour CW, Gomez H, Chang C-CH, et al. *Crit Care*. 2017;21:257</td></tr>
+<tr><td>8</td><td><strong>論評の対象となった原著</strong>（White ら・12施設84,528入室）</td><td>White KC, Serpa-Neto A, Hurford R, et al. *Intensive Care Med*. 2023. doi:10.1007/s00134-023-07138-0</td></tr>
+<tr><td>9</td><td>KDIGO AKI 診療ガイドライン 2012</td><td>KDIGO AKI Work Group. *Kidney Int Suppl*. 2012;2:1-138</td></tr>
+<tr><td>10</td><td>AKI の心血管系への帰結（「帰結を防ぐ」論の根拠）</td><td>Legrand M, Rossignol P. *N Engl J Med*. 2020;382:2238-2247</td></tr>
+<tr><td>11</td><td>重症患者における乏尿とAKI発症の関連（より厳格な尿量閾値の根拠①）</td><td>Vaara ST, Parviainen I, Pettilä V, et al. *Kidney Int*. 2015</td></tr>
+<tr><td>12</td><td>尿量基準 対 血清クレアチニン基準による AKI 分類（より厳格な尿量閾値の根拠②）</td><td>Kellum JA, Sileanu FE, Murugan R, et al. *J Am Soc Nephrol*. 2015;26:2231-2238</td></tr>
+<tr><td>13</td><td>重症患者の尿量をどう理解するか（尿量基準の特異度不足の根拠）</td><td>Legrand M, Payen D. *Ann Intensive Care*. 2011;1:13</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ul><li>SA-AKI は <mark class="hl"><strong>ICUで「発生する」のではなく、ICUに「到着する」</strong></mark>。診断までの中央値は入室から1日で、大半が敗血症を認識したその日に最高ステージへ達する。ICUでできることの重心は予防ではなく回復と帰結の予防にある。</li><li><strong>同じ「SA-AKI stage 1」の中に別物が混ざっている</strong>。尿量のみ／クレアチニンのみ／両方で、院内死亡率は12%／15%／35%、KRT は3.5%／18%／51%。<mark class="hl"><strong>AKIを語るときは、どちらの基準で拾ったかを必ず添える</strong></mark>。</li><li>現行の KDIGO 尿量基準は stage 1 に対してリベラルすぎ、特異度を欠く可能性がある。KDIGO 改訂での閾値再評価が提言されている（→ <span class="wl">KDIGO 2026 AKI・AKDガイドライン草案 — 病期にバイオマーカーのB軸が加わり、一過性と持続性を48時間で分ける（パブリックレビュー版）</span>）。</li><li>入院前クレアチニンが無いときに「全員 eGFR 75 相当」と逆算する手法は、<strong>CKDを見落としAKIを過剰診断する</strong>。レジストリ解析では入室時クレアチニンを使った感度分析を必ず併走させる。</li><li><mark class="hl"><strong>日常収集データで予後の分かれる表現型を作れることと、その表現型が治療の分岐点になることは、まったく別の問題である</strong></mark>。本稿が示したのは前者までで、後者は未検証である。</li></ul>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

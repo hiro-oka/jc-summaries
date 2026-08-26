@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>自動急変アラートは院内心停止を4割減らすが院内死亡は動かさない — 18研究349818例、心停止RR 0.60・死亡RR 0.80（SR・MA・CCM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="ccm.0000000000006960.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">自動急変アラートは院内心停止を4割減らすが院内死亡は動かさない — 18研究349818例、心停止RR 0.60・死亡RR 0.80（SR・MA・CCM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Chua WL, Azimirad M, Chia M, Jones D, Woon PY. Crit Care Med. 2026;54(3):557-570. DOI: 10.1097/CCM.0000000000006960</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2026-03-01）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/ccm.0000000000006960" target="_blank" rel="noopener">doi.org/10.1097/ccm.0000000000006960</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Effects of Real-Time Automated Clinical Deterioration Alert and Trigger Systems on Clinical Outcomes in Adult General Ward Patients: A Systematic Review and Meta-Analysis</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/ccm.0000000000006960.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/ccm.0000000000006960.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/ccm.0000000000006960.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み 当院は RRS と、PrimeGaia によるバイタルサイン自動収集を並行して進めている。この論文は「自動収集したバイタルから自動でアラートを出す」という次の一歩の、現時点での最良のエビデンス整理にあたる。読みどころは効果量そのものより「どの設計なら効いたか」にある。</p>
+<p><strong>1. 期待するアウトカムを「院内心停止」に置く</strong> 統合結果で明確に減ったのは院内心停止（アラート対象群 RR 0.60、95% CI 0.43–0.85）であり、院内死亡は有意にならなかった（RR 0.80、95% CI 0.62–1.05）。当院で導入効果を測るなら、主指標は <strong>病棟での予期しない心停止（コードブルー）件数／1000入院</strong> に置くのが妥当。死亡率で評価設計すると、検出力の面でもロジックの面でも失敗しやすい。</p>
+<p><strong>2. アラートの宛先は「ベッドサイド看護師だけ」にしない — これがこのレビューの組み入れ基準そのもの</strong> 本レビューは、受け持ち看護師だけに飛ぶアラートを最初から除外した。理由は、個人の気づきは高まってもエスカレーション経路が起動しないから。当院で PrimeGaia 連動アラートを設計するなら、最低でも <strong>リーダー看護師（charge nurse）＋病棟当直医</strong> に同報し、一定閾値を超えたら <strong>RRT へ自動同報</strong> する二段構えにする。組み入れ18研究の宛先内訳は、リーダー看護師3・病棟／当直医4・RRT/MET看護師3・RRT/MET 6。</p>
+<p><strong>3. 通知手段は「ポケベル」より「モバイル」— ここだけはサブグループで有意差が出た</strong> 携帯テキストによる通知はポケベルより院内死亡が低かった（RR 0.69、95% CI 0.52–0.92、p &lt; 0.001）。当院はすでに院内スマートフォンが動いているので、この点は追い風。逆に、既存の PHS 単独運用のまま自動アラートだけ載せる設計は、この結果と整合しない。</p>
+<p><strong>4. 病棟看護師にも「見える」ようにする</strong> アラートが病棟看護師にも可視化されていた研究のほうが死亡減少が大きかった（有意なサブグループ差）。具体的には色分けした観察チャート、患者ダッシュボード、電子カルテのポップアップ。当院なら <strong>病棟の患者一覧画面での色分け表示</strong> が最小実装になる。「RRT にだけ飛んで病棟は知らない」構成は避ける。</p>
+<p><strong>5. DNAR／緩和ケア方針の患者をどう扱うかを先に決める</strong> 治療制限のある患者を除外した研究のほうが死亡減少が大きかった。裏を返せば、方針が決まっている患者にアラートを飛ばし続けると、アラート疲労だけが増えて効果は薄まる。当院の ACP／DNAR 記録とアラートロジックを連結し、<strong>方針確認済みの患者はアラート対象から外す（あるいは別トリアージにする）</strong> 設計を最初から入れる。ここは <span class="wl">⚖️ 倫理 Home</span> の議論とも接続する。</p>
+<p><strong>6. スコアの種類・計算頻度・宛先の職種では差が出なかった</strong> 従来型の点数式 EWS（NEWS・MEWS等）10研究と、電子カルテデータを使った予測モデル8研究のあいだにも、計算頻度（5分ごと〜12時間ごと）にも、アラート受け手の職種にも、有意なサブグループ差はなかった。つまり <strong>「まず高性能な AI モデルを買う」より「エスカレーション経路と通知手段を先に整える」ほうが、現時点のエビデンスに合っている</strong>。当院で機械学習モデルを検討するなら、性能指標より運用要件（誰が受けて、何分以内に、何をするか）を先に固める。</p>
+<p><strong>7. ICU 在室日数は短くなるが、在院日数と予定外ICU入室は動かない</strong> ICU 在室は平均1.07日短縮（95% CI −1.56 to −0.59 日、I² = 0%）。一方、在院日数（平均差 −2.38日、95% CI −7.12 to 2.35）と予定外ICU入室（RR 0.88、95% CI 0.67–1.16）は有意差なし。予定外入室が減らない理由として著者は「早期発見は、予定外入室を『予定された予防的入室』に置き換えるだけで、総数は減らない可能性」を挙げている。当院の <span class="wl">緊急ICU再入室は2.9% — 院内死亡3.8倍・在院日数3.1倍、半数は退室後5日以内（JIPAD 69594件・日集中医誌2025）</span> の議論とも整合する。<strong>経営側に「ICU 入室が減ってコストが下がる」と説明しない</strong>こと。18研究のうち費用を報告した1研究では、介入群のほうが平均入院費用は高かった。</p>
+<p><strong>8. 効果測定は前後比較になる — 設計を先に決める</strong> 組み入れ18研究のうち15研究が前後比較で、死亡低下はほぼその前後比較が駆動していた。RCT 2本はいずれも効果なし。当院で導入するなら、せめて <strong>病棟単位の段階的ウェッジ（stepped-wedge）</strong> か、導入前後で同期間・同季節を揃えた比較にして、経時トレンドの交絡を減らす。</p>
+</div>
+<h3>導入判断のフロー</h3>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>自動アラート導入の是非を院内で問われた</td><td>何を主要指標に置くか（心停止か死亡か）</td><td>主要指標を「病棟予期しない心停止／1000入院」に設定。死亡は副次に落とす</td></tr>
+<tr><td>PrimeGaia のバイタルが自動で入るようになった</td><td>計算頻度と、値の欠測・アーチファクト率</td><td>まず EWS の自動計算と可視化だけを先行実装。アラート発報は次段階</td></tr>
+<tr><td>アラートの宛先を決める</td><td>受け持ち看護師だけになっていないか</td><td>リーダー看護師＋病棟当直医に同報。高スコアは RRT へ自動同報</td></tr>
+<tr><td>通知手段を選ぶ</td><td>PHS／ポケベルのみになっていないか</td><td>院内スマートフォンのテキスト通知へ。ダッシュボード表示を併設</td></tr>
+<tr><td>アラート件数が多すぎると現場から声が出た</td><td>DNAR・緩和ケア方針の患者が混ざっていないか</td><td>方針確認済み患者をアラート対象から除外し、再計測</td></tr>
+<tr><td>高価な機械学習モデルの導入提案が来た</td><td>エスカレーション経路が先に整っているか</td><td>経路と通知手段を先に整備。モデル種別では差が出ないと説明する</td></tr>
+<tr><td>効果検証の設計を組む</td><td>単純前後比較になっていないか</td><td>病棟単位の段階的ウェッジ、または同期間比較で経時トレンドを補正</td></tr>
+<tr><td>費用対効果を聞かれた</td><td>在院日数短縮を根拠にしていないか</td><td>在院日数・予定外ICU入室は減らないと明言。心停止減少で説明する</td></tr>
+</tbody></table></div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：入院患者のバイタル異常は死亡・院内心停止・予定外ICU入室に先行する。多くの病院が RRS（rapid response system）を導入し、MET／RRT を起動して介入している。ただし従来の RRS は、病棟スタッフがバイタルを測り、EWS で解釈し、手動で起動する前提に立つ。この経路は「測定が遅れる」「解釈の知識にばらつきがある」「上申しづらい組織文化」で詰まりうる。</li><li><strong>Unknown</strong>：自動アラートシステムの臨床的有効性は結論が出ていない。先行するスコーピングレビュー（Blythe ら）は、多くのシステムがアラートを受け持ち看護師にしか送っておらず、それではエスカレーション経路が起動しない可能性を指摘していた。<strong>受け持ち看護師を超えた宛先（リーダー看護師・病棟医・MET）にアラートを飛ばすと、実際にアウトカムが改善するのか</strong>は不明だった。</li><li><strong>What's new</strong>：この宛先条件を組み入れ基準に据えた初のシステマティックレビュー・メタ解析。18研究349,818例。アラート対象患者では院内心停止が有意に減った（RR 0.60）が、院内死亡は有意にならなかった（RR 0.80、p = 0.09）。全入院コホートの二次解析では死亡（RR 0.80、p = 0.04）・心停止（RR 0.56）・ICU在室日数がいずれも有意に改善。サブグループでは、通知手段（モバイル &gt; ポケベル）、病棟看護師への可視化、治療制限患者の除外の3点で有意差が出た一方、EWS の種類・計算頻度・受け手の職種では差が出なかった。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 受け持ち看護師を超えて多職種に飛ぶリアルタイム自動急変アラートは、<strong>アラート対象患者の院内心停止を4割減らした（RR 0.60、95% CI 0.43–0.85）一方、院内死亡は有意に減らさなかった（RR 0.80、95% CI 0.62–1.05）</strong>。ただし根拠の大半は前後比較研究で、RCT 2本はいずれも効果を示していない。</p>
+</div>
+<ul><li>7つのデータベースを対象に開始時点から2024年4月1日まで検索。重複除去後5,378件をスクリーニングし、18研究（成人一般病棟患者349,818例：介入168,879例／対照180,939例）を組み入れた</li><li>内訳は前後比較15研究、RCT 2研究（並行1・クロスオーバー1）、回帰不連続デザインの準実験1研究。<strong>全研究が少なくとも中等度のバイアスリスク</strong>（非ランダム化研究：moderate 8・serious 7・critical 1、RCT 2本はいずれも「懸念あり」）</li><li>主解析はアラート対象患者（アラート閾値を満たした患者、対照期間では MET レビューを受けた患者）9研究58,632例</li><li>院内死亡：6研究45,287例、RR 0.80（95% CI 0.62–1.05、p = 0.09）、I² = 84%。研究デザイン別のサブグループ差は有意でない（p = 0.10）が、RCT 2本は無効果、前後比較は減少傾向（統合 RR 0.74、95% CI 0.51–1.07）</li><li>院内心停止：前後比較2研究のみ統合可能、RR 0.60（95% CI 0.43–0.85、p = 0.004）、I² = 0%</li><li>ICU在室日数：平均1.07日短縮（95% CI −1.56 to −0.59 日、p &lt; 0.001、I² = 0%）。RCT 1本と前後比較1本</li><li>在院日数（平均差 −2.38日、95% CI −7.12 to 2.35、I² = 100%）と予定外ICU入室（RR 0.88、95% CI 0.67–1.16、I² = 85%）は、アラート対象群でも全入院群でも有意差なし</li><li>全入院コホート10研究284,126例の二次解析：院内死亡 RR 0.80（95% CI 0.65–0.98、p = 0.04、I² = 89%）、院内心停止 RR 0.56（95% CI 0.43–0.75、p = 0.003、I² = 2%）、ICU在室日数 平均差 −0.56日（95% CI −0.68 to −0.44、p = 0.001、I² = 0%）</li><li>有意なサブグループ差：通知手段（携帯テキスト vs ポケベル：RR 0.69、95% CI 0.52–0.92、p &lt; 0.001）、病棟看護師への可視化、治療制限患者の除外。<strong>EWS の種類・計算頻度・アラート受け手の職種では差が出なかった</strong></li><li>著者の結論：自動アラート・トリガーシステムは院内心停止の減少と関連し、<strong>構造化されたエスカレーション経路に統合されたときに死亡ベネフィットをもたらしうる</strong>。高品質な試験が必要</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この仕組みの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>RRS（rapid response system／院内迅速対応システム）</strong>：病棟で状態が悪化した患者を早期に見つけ、専門チームが駆けつける院内の仕組み全体を指す。「見つける側（afferent limb）」と「駆けつける側（efferent limb）」に分かれる。</p>
+<p><strong>MET／RRT（medical emergency team／rapid response team）</strong>：駆けつける側の実働チーム。MET は医師を含む編成、RRT は看護師主体の編成を指すことが多いが、施設ごとに定義は揺れる。</p>
+<p><strong>EWS（early warning score／早期警告スコア）</strong>：呼吸数・SpO₂・体温・血圧・脈拍・意識レベルなどに点数を割り当て、合計点で悪化リスクを表すスコア。代表が NEWS（National Early Warning Score）と MEWS（Modified Early Warning Score）。従来は看護師が測定値を紙やカルテに入力し、点数を計算して閾値を超えたら人が判断して起動する。</p>
+<p><strong>自動急変アラート・トリガーシステム（automated clinical deterioration alert and trigger system）</strong>：電子カルテやモニターのデータをアルゴリズムが常時読み、悪化の兆候を検出したらリアルタイムで通知を発報する仕組み。「点数式の EWS を自動計算するだけ」のものから、「バイタル＋検査値＋患者背景を入力にした予測モデル（機械学習を含む）」まで幅がある。</p>
+<p><strong>この論文が引いた線</strong>：アラートが受け持ち看護師にだけ届くシステムは除外した。受け持ち看護師しか知らなければ、その人の気づきは上がってもエスカレーション経路（上級者を呼ぶ流れ）は動かないから。<strong>リーダー看護師・病棟医・当直医・重症ケアアウトリーチ看護師・RRT/MET のいずれかに届くシステムだけ</strong>を対象とした。</p>
+<p><strong>アラート対象コホート（alert-eligible cohort）と全入院コホート（all-admission cohort）</strong>：本レビューの解析の骨格。前者は「介入期間にアラート閾値を満たした患者＋対照期間にアラートを起動したか MET レビューを受けた患者」で、リスクの高い層に絞った比較。後者は「その期間の一般病棟患者全員」で、アラートの有無を問わない。主解析は前者、二次解析は後者。後者は病棟全体への波及効果（スピルオーバー）を見られる一方、そもそも恩恵を受けない低リスク患者が大量に混ざるため効果が希釈される。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>入院患者の異常バイタルは、死亡・院内心停止・予定外ICU入室といった重大イベントにしばしば先行する。多くの病院はこれに対して RRS を整備し、MET／RRT による早期介入を行っている。しかし従来の RRS 起動は、病棟スタッフが悪化を認識し（多くは EWS に導かれて）、手動で MET／RRT を起動することに依存する。この過程は次の3点で阻害されうる。</p>
+<ol><li>バイタル測定の遅れ</li><li>バイタル解釈における知識のギャップ</li><li>上申（escalation of care）に対する社会文化的な障壁</li></ol>
+<p>RRS の性能を高めるため、自動急変アラート・トリガーシステムへの関心が高まっている。これらはバイタル・検査値・その他の臨床指標をアルゴリズムで解析し、悪化の徴候を検出してリアルタイムのアラートを生成する。RRS の枠組みに統合すれば、人的失敗を減らし、より早い介入を支えうる。</p>
+<p>しかし採用が進む一方で、臨床的有効性は結論が出ていない。近年のスコーピングレビューは、アウトカムのばらつきが大きいこと、そして<strong>多くのシステムがアラートを受け持ち看護師にのみ送っていること</strong>を指摘した。個人の認識は高まっても、エスカレーション経路が起動するとは限らない。リーダー看護師・病棟医・MET など他の臨床スタッフに自動アラートを回すことが、より有効な対応と患者アウトカム改善につながるかは不明だった。</p>
+<p><strong>目的</strong>：</p>
+<ol><li>受け持ち看護師を超えて通知する既存の自動急変アラート・トリガーシステムの特徴を同定する</li><li>成人一般病棟患者における主要な臨床アウトカムへの効果を評価する</li></ol>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：システマティックレビュー・メタ解析。PROSPERO 前向き登録（CRD42024526092）、PRISMA 準拠</li><li><strong>検索</strong>：7データベース（PubMed、Cochrane Library、CINAHL、Embase、Scopus、Web of Science、IEEE Xplore）を各データベースの開始時点から2024年4月1日まで。「automated alerts」「clinical deterioration」「early warning score」に関する語を Boolean 演算子とデータベース固有の索引語で組み合わせた。前方・後方の引用追跡を追加</li><li><strong>組み入れ基準</strong>：RCT、準実験研究、前後比較デザインで、①自動急変アラート・トリガーシステムを、手動でのエスカレーションを伴う従来型 RRS 起動と比較していること、②自動アラートが受け持ち看護師を超えた臨床スタッフ（リーダー看護師、病棟医、重症ケアアウトリーチ看護師、RRT/MET）に届いていること。対象は成人一般病棟</li><li><strong>除外基準</strong>：対照群または導入前比較を欠く研究、アラートが受け持ち看護師にのみ届く研究、学会抄録・症例報告・症例集積</li><li><strong>選定</strong>：2組のレビュアー（P.Y.W.＋M.C.、W.L.C.＋M.A.）が独立にタイトル・抄録をスクリーニング、通過分を全文レビュー。不一致は討議または第三のレビュアーが裁定</li><li><strong>データ抽出</strong>：Cochrane 準拠の標準化フォームを用い、1組（P.Y.W.＋M.A.）が抽出、別のレビュアー（W.L.C.）が全項目をクロスチェック</li><li><strong>主要アウトカム</strong>：院内死亡、院内心停止</li><li><strong>副次アウトカム</strong>：予定外ICU入室、在院日数、ICU在室日数。予定外ICU入室は「コードブルー、RRT 診察、急変によるICUコンサルトが先行した、予定外の病棟→ICU 転送」と定義</li><li><strong>バイアスリスク</strong>：RCT は Cochrane RoB 2、非ランダム化研究は ROBINS-I。2組のレビュアーが独立に評価、不一致は第三者が解決</li><li><strong>統計</strong>：RevMan Web を使用。逆分散重み付けのランダム効果モデル。二値アウトカムは risk ratio、連続アウトカムは平均差、いずれも95% CI 付き。平均と SD が得られないときは中央値と四分位範囲から推定。研究間分散（τ²）は制限最尤法（REML）で推定。<strong>3研究以上かつ τ² &gt; 0 のときは Hartung-Knapp-Sidik-Jonkman（HKSJ）法、それ以外は Wald 型</strong>を用いた。統合できない知見は記述的に要約</li><li><strong>異質性</strong>：Cochran Q 検定と I²。解釈は低（&lt; 40%）、中等度（30–60%）、実質的（50–90%）、相当（≥ 75%）</li><li><strong>サブグループ（事前規定）</strong>：EWS の種類、アラート受け手、アラート通知手段。<strong>事後追加</strong>：研究デザイン、病棟看護師へのアラート可視性、EWS 計算頻度、患者の蘇生方針（code status）。1研究のみのサブグループは記述的に報告。p &lt; 0.05 をサブグループ差ありとした</li><li><strong>出版バイアス</strong>：アウトカムあたりの研究数が10未満のため検討していない</li><li><strong>限界（著者記載）</strong>：組み入れ研究の大半は同時対照を欠く前後比較で、中等度〜重篤なバイアスリスク。実質的な研究間異質性が一般化を制限。対照群の診療内容のばらつきも効果に影響しうる</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>統合エビデンスの確信度について <mark class="hl">本レビューは GRADE によるエビデンス確信度の評価を行っていない</mark>。バイアスリスク（RoB 2／ROBINS-I）と I² は報告されているが、非直接性・非精確性・出版バイアスを含めた総合判定はない。加えて出版バイアスの検討も研究数不足を理由に省かれている。したがって「心停止が RR 0.60 で減る」という数値は、<mark class="hl">2つの前後比較研究のみに基づく、確信度の低い推定</mark>として扱うべきである。</p>
+</div>
+<h3>4. 検索と組み入れ（PRISMA）</h3>
+<p>7データベースから7,891件（CINAHL 854、Cochrane 479、Embase 2,332、IEEE Xplore 111、PubMed 2,509、Scopus 264、Web of Science 1,342）。重複2,513件を除去し5,378件をスクリーニング。タイトル・抄録で5,303件を除外。75件の全文入手を試み1件が全文入手不能、74件を適格性評価。59件を除外した内訳は、アラート受け手が対象外19件、非自動の急変アラート／起動1件、原著がすでに組み入れ済み1件、学会抄録22件、コメンタリー2件、アウトカム不適合8件、対象集団不適合1件、試験登録5件。並行して引用追跡から5件を同定し、5件を適格性評価、2件を除外（アラート受け手が対象外1件、データ不足1件）。<strong>最終的に18研究</strong>。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/ccm.0000000000006960" target="_blank" rel="noopener">原論文（doi.org/10.1097/ccm.0000000000006960）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. PRISMA フロー図。左半分がデータベース検索の経路、右半分が引用追跡による経路。左上のオレンジ帯が「データベース・レジストリからの同定」、右上が「その他の方法による同定」。左列を上から追うと、7,891件の同定（内訳がボックス内に列挙される）→ 重複2,513件除去 → 5,378件スクリーニング → タイトル・抄録で5,303件除外 → 75件の入手試行 → 全文入手不能1件 → 74件の適格性評価 → 59件除外（除外理由が縦に9項目並ぶ）→ 最下段の「レビュー組み入れ 18研究」へ合流する。右列は5件の同定 → 5件入手 → 5件評価 → 2件除外 → 同じ最下段のボックスへ左向きの矢印で合流する。左端には縦書きの青いラベルで Identification／Screening／Included の3段階が示される。図の下に PRISMA 2020 の出典と CC BY 4.0 のライセンス表記がある。</p>
+</div>
+<p>組み入れ18研究の患者数は成人一般病棟患者349,818例（介入168,879例／対照・導入前180,939例）。7研究はアラート対象患者のみを報告し、11研究はアラート状態を問わない全病棟患者を含んだ。後者のうち2研究はアラート対象患者のデータも抽出可能だった。5研究は DNR 指示のある患者や緩和ケアを受けている患者を除外していた。1つの前後比較研究（Kollef 2019）は、組み入れた RCT（Kollef 2014）を段階的に全院展開したもので、導入前年を対照、全面導入年を介入とした。</p>
+<h4>Table 1. 組み入れ研究の特徴（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>著者・国</th><th>デザイン</th><th>閾値超過時の介入</th><th>研究期間（対照／介入、月）</th><th>症例数（総/介入/対照）：対象コホート</th></tr></thead>
+<tbody>
+<tr><td>Ahmed 2022・インド</td><td>前後比較</td><td>MET へモバイルアラート</td><td>計58</td><td>526/261/265（アラート対象）※DNR除外</td></tr>
+<tr><td>Bailey 2013・米国</td><td>クロスオーバー RCT</td><td>予測アルゴリズム＋リーダー看護師へポケベル</td><td>計12</td><td>2,353/1,194/1,159（アラート対象）</td></tr>
+<tr><td>Balshi 2022・サウジアラビア</td><td>前後比較</td><td>RRT へスマートフォンアラート</td><td>8／8</td><td>4,497/2,346/2,151（アラート対象）※DNR除外</td></tr>
+<tr><td>Bassin 2021・豪州</td><td>前後比較</td><td>リーダー看護師へモバイルアラート</td><td>10／10</td><td>28,639/14,540/14,099（全入院）※緩和・comfort care 除外</td></tr>
+<tr><td>Danesh 2019・米国</td><td>前後比較</td><td>RRT 看護師のラウンドリストへ自動収載</td><td>6／6</td><td>12,148/6,273/5,875（全入院）</td></tr>
+<tr><td>Escobar 2020・米国</td><td>前後比較</td><td>遠隔モニタリング。閾値到達で RRT へ通報</td><td>12／42（19病院で3.5年かけ段階導入）</td><td>37,071/13,274/23,797（アラート対象）</td></tr>
+<tr><td>Evans 2015・米国</td><td>前後比較</td><td>リーダー看護師へポケベル</td><td>12／12</td><td>ユニットA 6,612/3,189/3,423、ユニットB 6,269/3,100/3,169（全入院）</td></tr>
+<tr><td>Gallo 2023・米国</td><td>回帰不連続デザインの準実験</td><td>病棟看護師と医師へモバイルアラート</td><td>NA／22</td><td>NA/953/NA（アラート対象）、NA/9,896/NA（全入院）</td></tr>
+<tr><td>Heller 2020・ドイツ</td><td>前後比較</td><td>病棟医・当直医へモバイルアラート</td><td>12／12</td><td>3,827/1,931/1,896（全入院）</td></tr>
+<tr><td>Jones 2011・英国</td><td>前後比較</td><td>病棟医へポケベル</td><td>1.57／1.27</td><td>1,481/776/705（全入院）</td></tr>
+<tr><td>Kollef 2014・米国</td><td>RCT</td><td>RRT 看護師へモバイルアラート</td><td>計4</td><td>571/286/285（アラート対象）</td></tr>
+<tr><td>Kollef 2019・米国</td><td>前後比較</td><td>RRT 看護師へモバイルアラート</td><td>12／12（2003–2014の12年解析。2009から段階導入、2014に全面導入。導入前＝2008年、導入後＝2014年）</td><td>28,372/14,795/13,577（全入院）※DNR・緩和除外</td></tr>
+<tr><td>Morgan 2021・米国</td><td>前後比較</td><td>RRT へポケベル</td><td>6／6</td><td>3,351/1,610/1,741（アラート対象）</td></tr>
+<tr><td>Na 2021・韓国</td><td>前後比較</td><td>MET へモバイルアラート</td><td>41／41</td><td>1,415/849/566（アラート対象）※DNR・緩和除外</td></tr>
+<tr><td>Singh 2022・米国</td><td>前後比較</td><td>遠隔モニタリング。閾値超過でベッドサイド看護師へ通知</td><td>11／11</td><td>53,229/26,725/26,504（全入院）</td></tr>
+<tr><td>Subbe 2017・英国</td><td>前後比較</td><td>RRT へポケベル</td><td>病棟1: 12／14、病棟2: 12／12</td><td>4,402/2,263/2,139（全入院）</td></tr>
+<tr><td>Wu 2018・台湾</td><td>前後比較</td><td>主治医へモバイルアラート</td><td>5／3（5か月の導入期間は除外）</td><td>43,639/20,096/23,543（全入院）</td></tr>
+<tr><td>You 2021・韓国</td><td>前後比較</td><td>MET 看護師へポケベル</td><td>16／12</td><td>1,883/1,115/768（アラート対象）、95,508/42,354/53,154（全入院）</td></tr>
+</tbody></table></div>
+<p>（発表年は本文フォレストプロットの表記に合わせた。原表は文献番号のみを掲載）</p>
+<h3>5. バイアスリスク</h3>
+<ul><li><strong>RCT 2本</strong>：いずれも「some concerns（懸念あり）」。理由はランダム化の順序生成と割付隠蔽に関する情報が欠けていること</li><li><strong>非ランダム化研究16本</strong>：moderate 8件、serious 7件、critical 1件</li></ul>
+<p>つまり<strong>バイアスリスクが low の研究は1つもない</strong>。critical と判定された1件は Ahmed（インド）で、後述のとおり感度解析で外れ値としても検出された。</p>
+<h3>6. 自動アラート・トリガーシステムの特徴</h3>
+<ul><li><strong>EWS の種類</strong>：従来型の点数ルールベース EWS が10研究、バイタル・検査値・患者背景を組み込んだ高度な予測モデルが8研究</li><li><strong>計算頻度</strong>：10研究では最新測定値に基づいて EWS が動的に更新され、計算頻度は<strong>5分ごとから12時間ごと</strong>まで</li><li><strong>アラート受け手</strong>：リーダー看護師3、病棟医または当直医4、RRT/MET 看護師3、RRT/MET 6</li><li><strong>通知手段</strong>：ポケベル5、モバイルテキスト10。ただし2研究（You、Wu）は通知時間帯を制限していた</li><li><strong>特殊な運用</strong>：2研究（Escobar、Singh）は遠隔の看護師がアラートをレビューしてエスカレーションを指導。1研究（Danesh）はアラート患者を RRT 看護師のラウンドリストに自動収載</li><li><strong>病棟看護師への可視化</strong>：10研究が色分け観察チャート、患者ダッシュボード、電子カルテのポップアップでベッドサイド看護師にも通知</li><li><strong>対照群の内容</strong>：多くは事前規定の基準と臨床医の懸念に基づく手動 MET 起動。3研究は段階的エスカレーション（tiered escalation）を実装、2研究はより能動的な手法（電子カルテアラート：Morgan、MET 看護師による高リスク患者の能動的サーベイランス：You）を用いていた</li></ul>
+<h4>Table 2. 自動急変アラート・トリガーシステムの特徴（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>著者</th><th>EWS の種類</th><th>計算頻度</th><th>通知手段</th><th>アラート受け手</th></tr></thead>
+<tbody>
+<tr><td>Ahmed</td><td>従来型</td><td>1日4回以上</td><td>モバイルテキスト、色分け観察チャート</td><td>MET</td></tr>
+<tr><td>Bailey</td><td>電子カルテベース予測モデル</td><td>連続</td><td>ポケベル</td><td>リーダー看護師</td></tr>
+<tr><td>Balshi</td><td>従来型</td><td>5〜30分ごと</td><td>モバイルテキスト、スマートフォンのダッシュボード通知</td><td>RRT</td></tr>
+<tr><td>Bassin</td><td>AI ベース</td><td>新規入力が入るたび</td><td>モバイルテキスト、電子カルテのダッシュボード通知</td><td>リーダー看護師</td></tr>
+<tr><td>Danesh</td><td>電子カルテベース予測モデル</td><td>1時間ごと</td><td>RRT 看護師のラウンドリストへ自動収載、色分け観察チャート</td><td>RRT 看護師</td></tr>
+<tr><td>Escobar</td><td>電子カルテベース予測モデル</td><td>1時間ごと</td><td>訓練された看護師による遠隔モニタリング</td><td>訓練された遠隔看護師</td></tr>
+<tr><td>Evans</td><td>従来型</td><td>電子カルテ5分ごと、生体モニター15〜60分ごと</td><td>ポケベル</td><td>リーダー看護師</td></tr>
+<tr><td>Gallo</td><td>電子カルテベース予測モデル</td><td>15分ごと</td><td>モバイルアラート</td><td>病棟医と受け持ち看護師</td></tr>
+<tr><td>Heller</td><td>従来型</td><td>MEWS 5–6は1時間ごと、MEWS 7以上は SpO₂ 連続測定と収縮期血圧15分ごと</td><td>モバイルテキスト、生体モニター上のプロンプト</td><td>病棟医または当直医</td></tr>
+<tr><td>Jones</td><td>従来型</td><td>間欠的</td><td>ポケベル、患者ダッシュボードへの EWS 表示</td><td>病棟医</td></tr>
+<tr><td>Kollef（2014）</td><td>電子カルテベース予測モデル</td><td>連続</td><td>モバイルテキスト</td><td>RRT 看護師</td></tr>
+<tr><td>Kollef（2019）</td><td>電子カルテベース予測モデル</td><td>modified NEWS 5点以上で連続</td><td>モバイルテキスト</td><td>RRT 看護師</td></tr>
+<tr><td>Morgan</td><td>従来型</td><td>間欠的</td><td>ポケベル</td><td>RRT</td></tr>
+<tr><td>Na</td><td>従来型</td><td>間欠的</td><td>モバイルテキスト、色分け観察チャート</td><td>MET</td></tr>
+<tr><td>Singh</td><td>電子カルテベース予測モデル</td><td>間欠的</td><td>バーチャルケアチームによる24時間365日の遠隔モニタリング、ベッドサイドスタッフに EWS を可視化</td><td>バーチャルケアチームの看護師</td></tr>
+<tr><td>Subbe</td><td>従来型</td><td>間欠的</td><td>ポケベル、ナースステーション中央画面での EWS 色分け</td><td>RRT と病棟看護師</td></tr>
+<tr><td>Wu</td><td>従来型</td><td>高リスク患者は1時間ごと</td><td>モバイルテキスト、患者ダッシュボードへのスコア表示</td><td>主治医（7時〜17時）</td></tr>
+<tr><td>You</td><td>従来型</td><td>間欠的</td><td>モバイルテキスト、電子カルテのポップアップ</td><td>MET 看護師（毎日7時〜22時）、MET 集中治療医（平日7時〜19時）</td></tr>
+</tbody></table></div>
+<p>この表が示す実装のばらつきこそが、後述の異質性（I² が 84%、85%、100% と並ぶ）の実態である。「自動アラート」という一語で括られているものの中身は、5分ごとに更新される連続予測モデルから、間欠的に計算される点数式まで、また24時間の遠隔看護師レビューから日中限定の主治医ポケベルまで、まったく別物といってよい幅がある。</p>
+<h3>7. 院内死亡（主要アウトカム）</h3>
+<p>アラート対象患者の院内死亡を報告したのは7研究。うち1研究（Gallo）はデータ不足でメタ解析から除外。残る<strong>6研究45,287例で RR 0.80（95% CI 0.62–1.05、p = 0.09）、実質的な異質性（I² = 84%、Chi² = 22.40、df = 5、p &lt; 0.001、τ² = 0.05）</strong>。研究デザイン別のサブグループ差は有意でなかった（Chi² = 4.54、df = 2、p = 0.10、I² = 55.9%）が、<strong>RCT 2本はいずれも効果を示さず、前後比較研究のみが死亡ベネフィットを示唆</strong>した。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/ccm.0000000000006960" target="_blank" rel="noopener">原論文（doi.org/10.1097/ccm.0000000000006960）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. アラート対象患者における院内死亡のフォレストプロット（自動急変アラート・トリガーシステム対 手動エスカレーション）。左から順に、研究名、ACDA 群のイベント数と総数、対照群のイベント数と総数、重み、リスク比（逆分散・ランダム効果・95% CI）が数字で並び、右側に対数目盛（0.01・0.1・1・10・100）のプロット領域が置かれる。縦の実線が RR 1.0 で、その左下に「Favours experimental（介入有利）」、右下に「Favours control（対照有利）」と書かれている。プロットは3つのサブグループに分かれる。①並行 RCT：Kollef 2014 が 21/286 対 22/285、RR 0.95（0.54–1.69）、重み8.1%。信頼区間の横棒は縦線をまたいで左右に長く伸び、菱形の統合マークも縦線をまたぐ。②クロスオーバー RCT：Bailey 2013 が 127/1194 対 117/1159、RR 1.05（0.83–1.34）、重み17.6%。青い四角は縦線のわずかに右にあり、菱形も縦線をまたぐ。③前後比較：Ahmed 2022 が 59/265 対 95/261、RR 0.61（0.46–0.81）、重み16.2%。Escobar 2020 が 1300/13274 対 3427/23797、RR 0.68（0.64–0.72）、重み22.7%で、信頼区間がきわめて狭く四角が縦線の明らかに左に位置する。Morgan 2021 が 75/1610 対 73/1741、RR 1.11（0.81–1.52）、重み14.9%で唯一はっきり右側。Na 2021 が 231/849 対 218/566、RR 0.71（0.61–0.82）、重み20.5%。前後比較の小計（HKSJ 法）は 0.74（0.51–1.07）で、菱形は左寄りだが右端がわずかに縦線を越える。異質性は τ²（REML）= 0.03、Chi² = 9.83、df = 3、p = 0.02、I² = 83%。全体の統合（HKSJ 法）は総イベント 1813/17478 対 3952/27809 で RR 0.80（0.62–1.05）、菱形は縦線の左寄りに位置するが右端が縦線をわずかに越えており、有意に届いていないことが視覚的に読み取れる。全体効果の検定は T = 2.12、df = 5、p = 0.09、サブグループ差の検定は Chi² = 4.54、df = 2、p = 0.10、I² = 55.9%、全体の異質性は τ² = 0.05、Chi² = 22.40、df = 5、p = 0.0004、I² = 84%。脚注に、信頼区間は Hartung-Knapp-Sidik-Jonkman 法、τ² は制限最尤法で算出したと明記されている。</p>
+</div>
+<p><strong>感度解析</strong>：外れ値として2研究が同定された。Escobar（バーチャル看護師が連続監視とエスカレーション指導を行う研究）と Ahmed（バイアスリスク critical）。この2つを除くと I² は70%に下がり、<strong>RR 0.92（95% CI 0.64–1.31、p = 0.51）</strong> となる。つまり <strong>点推定値の 0.80 は、この2研究にほぼ依存している</strong>。</p>
+<p>Gallo は、アラート対象953例で院内死亡の絶対リスク減少 0.4パーセントポイント（95% CI −6.4 to 5.6、p = 0.88）と、有意でない結果を報告した。</p>
+<p><strong>サブグループ解析（院内死亡）</strong>：有意差が出たのは3つ。</p>
+<div class="tw"><table>
+<thead><tr><th>サブグループ</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>アラート通知手段</td><td><strong>携帯テキストはポケベルより院内死亡が低い（RR 0.69、95% CI 0.52–0.92、p &lt; 0.001）</strong></td></tr>
+<tr><td>病棟看護師へのアラート可視性</td><td>可視化していた研究のほうが死亡減少が大きい</td></tr>
+<tr><td>患者の蘇生方針</td><td>DNR・緩和ケアなど治療制限のある患者を除外した研究のほうが死亡減少が大きい</td></tr>
+<tr><td>EWS の種類</td><td>有意差なし（従来型点数式 vs 予測モデル）</td></tr>
+<tr><td>EWS 計算頻度</td><td>有意差なし</td></tr>
+<tr><td>アラート受け手</td><td>有意差なし（リーダー看護師／病棟医／RRT/MET）</td></tr>
+</tbody></table></div>
+<h3>8. 院内心停止（主要アウトカム）</h3>
+<p>アラート対象患者の院内心停止を報告したのは前後比較4研究。うち2研究（Ahmed、Gallo）はデータ不足でメタ解析から除外。<strong>残る2研究で RR 0.60（95% CI 0.43–0.85、p = 0.004、I² = 0%）</strong>。</p>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/ccm.0000000000006960" target="_blank" rel="noopener">原論文（doi.org/10.1097/ccm.0000000000006960）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. アラート対象患者における院内心停止のフォレストプロット。列構成は Figure 2 と同じ（研究名、介入群イベント／総数、対照群イベント／総数、重み、リスク比と95% CI、右に対数目盛のプロット）。サブグループ分けはなく2行のみ。Balshi 2022 が 42/2151 対 78/2346、RR 0.59（0.41–0.85）、重み86.0%。青い四角は大きく、縦線（RR 1.0）の明らかに左にあり、信頼区間の右端も縦線に届かない。You 2021（アラート対象コホート）が 9/1115 対 9/768、RR 0.69（0.27–1.73）、重み14.0%。こちらは四角が小さく、信頼区間の横棒が左右に長く伸びて縦線を大きくまたぐ。総イベントは 51/3266 対 87/3114、統合（Wald 型）は RR 0.60（0.43–0.85）で、黒い菱形は縦線の左に置かれ、右端は縦線に届かない。全体効果の検定は Z = 2.91、p = 0.004。サブグループ差の検定は該当なし。異質性は τ²（REML）= 0.00、Chi² = 0.10、df = 1、p = 0.75、I² = 0%。脚注に、信頼区間は Wald 型、τ² は制限最尤法で算出したと記されている。</p>
+</div>
+<p>別に、メタ解析から外れた2研究も心停止関連の減少を報告している。</p>
+<ul><li>Ahmed：オッズ比 5.16（95% CI 2.03–13.11、p &lt; 0.001）を「有意な減少」として報告（後述の批判的吟味を参照）</li><li>Gallo：RRT 起動・心停止・予定外ICU入室を含む複合アウトカムで、絶対リスク減少 10.4パーセントポイント（95% CI −20.1 to −0.8、p = 0.03）</li></ul>
+<h3>9. 副次アウトカム（アラート対象患者）</h3>
+<ul><li><strong>ICU 在室日数</strong>：<strong>平均1.07日短縮（95% CI −1.56 to −0.59 日、p &lt; 0.001、I² = 0%）</strong></li><li><strong>在院日数</strong>：平均差 −2.38日（95% CI −7.12 to 2.35、p = 0.25、I² = 100%）— 有意差なし</li><li><strong>予定外ICU入室</strong>：RR 0.88（95% CI 0.67–1.16、p = 0.30、I² = 85%）— 有意差なし</li></ul>
+<p>研究デザイン別のサブグループ解析では、いずれも効果推定値に有意差なし。メタ解析から除外された1研究（Na）は在院日数について「有意な減少（導入前25日 対 導入後29日、p = 0.003）」と報告している（数値としては増加。後述）。</p>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/ccm.0000000000006960" target="_blank" rel="noopener">原論文（doi.org/10.1097/ccm.0000000000006960）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4（A・B）. アラート対象患者における（A）在院日数の平均差と（B）予定外ICU入室のリスク比のフォレストプロット。 <strong>（A）在院日数</strong>：列は研究名、ACDA 群の平均・SD・総数、対照群の平均・SD・総数、重み、平均差（95% CI）で、右のプロットは −100・−50・0・50・100 の線形目盛。3サブグループに分かれる。前後比較：Ahmed 2022 が 13.23±1.47（265例）対 24.76±1.12（261例）で平均差 −11.53（−11.75 to −11.31）、重み16.8%。Balshi 2022 が 8.3±8（2151例）対 8.7±3.4（2346例）で −0.40（−0.59 to −0.21）、重み16.8%。Escobar 2020 が 6.5±8（13274例）対 7.2±10.1（23797例）で −0.70（−0.89 to −0.51）、重み16.8%。Morgan 2021 が 11.14±11.71（1610例）対 11.69±12.42（1741例）で −0.55（−1.37 to 0.27）、重み16.7%。小計（HKSJ 法）は −3.30（−12.04 to 5.44）で、異質性は τ² = 30.15、Chi² = 6934.03、df = 3、p &lt; 0.00001、I² = 100%。クロスオーバー RCT：Bailey 2013 が 7.74±6.04（1194例）対 7.8±6.56（1159例）で −0.06（−0.57 to 0.45）、重み16.7%、Z = 0.23、p = 0.82。並行 RCT：Kollef 2014 が 8.4±9.5（286例）対 9.4±11.1（281例）で −1.00（−2.70 to 0.70）、重み16.2%、Z = 1.15、p = 0.25。全体は18,780例対29,585例で平均差 −2.38（−7.12 to 2.35）、T = 1.29、df = 5、p = 0.25。サブグループ差は Chi² = 2.39、df = 2、p = 0.30、I² = 16.3%。全体の異質性は τ² = 20.32、Chi² = 7092.99、df = 5、p &lt; 0.00001、I² = 100%。目盛が −100 から100と広いため、Ahmed 以外の緑の点はすべてゼロ線上に重なって見え、菱形もほぼゼロ線に張り付いている。 <strong>（B）予定外ICU入室</strong>：右のプロットは対数目盛（0.01・0.1・1・10・100）。並行 RCT：Kollef 2014 が 51/286 対 52/285、RR 0.98（0.69–1.39）、重み12.6%、Z = 0.13、p = 0.90。クロスオーバー RCT：Bailey 2013 が 192/1194 対 166/1159、RR 1.12（0.93–1.36）、重み16.1%、Z = 1.19、p = 0.24。前後比較：Ahmed 2022 が 36/265 対 58/261、RR 0.61（0.42–0.89）、重み12.0%。Balshi 2022 が 50/2151 対 49/2346、RR 1.11（0.75–1.64）、重み11.7%。Morgan 2021 が 148/1610 対 148/1741、RR 1.08（0.87–1.34）、重み15.5%。Na 2021 が 350/849 対 406/566、RR 0.57（0.52–0.63）、重み17.6%で信頼区間がきわめて狭く、四角が縦線の明らかに左に位置する。You 2021（アラート対象コホート）が 114/1115 対 83/768、RR 0.95（0.72–1.24）、重み14.5%。前後比較の小計（HKSJ 法）は 0.82（0.55–1.22）、T = 1.36、df = 4、p = 0.25、異質性は τ² = 0.09、Chi² = 41.63、df = 4、p &lt; 0.00001、I² = 87%。全体は 941/7470 対 962/7126 で RR 0.88（0.67–1.16）、菱形は縦線をまたぐ。T = 1.13、df = 6、p = 0.30。サブグループ差は Chi² = 3.25、df = 2、p = 0.20、I² = 38.4%。全体の異質性は τ² = 0.07、Chi² = 67.64、df = 6、p &lt; 0.00001、I² = 85%。</p>
+</div>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/ccm.0000000000006960" target="_blank" rel="noopener">原論文（doi.org/10.1097/ccm.0000000000006960）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4（C）. アラート対象患者における ICU 在室日数の平均差のフォレストプロット。列は研究名、ACDA 群の平均・SD・総数、対照群の平均・SD・総数、重み、平均差（95% CI）で、右のプロットは −100・−50・0・50・100 の線形目盛。3サブグループが縦に並ぶ。並行 RCT：Kollef 2014 が 4.8±6.6（286例）対 5.8±6.4（285例）で平均差 −1.00（−2.07 to 0.07）、重み20.6%、Z = 1.84、p = 0.07。信頼区間の上端がわずかにゼロを越える。クロスオーバー RCT：該当研究がなく、総数は0対0で「Not estimable（推定不能）」と記される。前後比較：Morgan 2021 が 4.32±7.03（1610例）対 5.41±8.98（1741例）で −1.09（−1.63 to −0.55）、重み79.4%、Z = 3.93、p &lt; 0.0001。緑の四角が最も大きい。全体は1,896例対2,026例で平均差 −1.07（−1.56 to −0.59）、Z = 4.33、p &lt; 0.0001。サブグループ差は Chi² = 0.02、df = 1、p = 0.88、I² = 0%。異質性も τ²（REML）= 0.00、Chi² = 0.02、df = 1、p = 0.88、I² = 0%。目盛の幅が広いため、点も菱形もゼロ線のすぐ左に小さく重なって見える。脚注に、信頼区間は Wald 型、τ² は制限最尤法で算出したと記されている。</p>
+</div>
+<h3>10. 全入院データを用いた二次解析</h3>
+<p>全病棟患者284,126例を含む10研究のメタ解析で、自動アラート・トリガーシステムのより広い集団レベルの影響を検討した。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>統合効果量</th><th>95% CI</th><th>p</th><th>I²</th></tr></thead>
+<tbody>
+<tr><td>院内死亡</td><td>RR 0.80</td><td>0.65–0.98</td><td>0.04</td><td>89%</td></tr>
+<tr><td>院内心停止</td><td>RR 0.56</td><td>0.43–0.75</td><td>0.003</td><td>2%</td></tr>
+<tr><td>ICU 在室日数</td><td>平均差 −0.56日</td><td>−0.68 to −0.44</td><td>0.001</td><td>0%</td></tr>
+<tr><td>予定外ICU入室</td><td>有意差なし（介入有利の傾向）</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>在院日数</td><td>有意差なし（介入有利の傾向）</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>米国 vs 米国外のサブグループ解析（償還構造と ICU 病床の余裕の違いの代理指標として使用）では有意なサブグループ差はなかった（Q = 0.10、df = 1、p = 0.76、I² = 0%）。著者は、米国の ICU 入室は償還構造と高い病床可用性の影響を受けうるものの、こうしたシステムレベルの因子は全体効果を変えていないようだと述べている。</p>
+<p>ただしこの二次解析は、①研究間異質性、②アラートシステムから恩恵を受ける見込みの低い低リスク患者を含めたことによる効果の希釈の可能性、の2点から慎重に解釈すべきだと著者自身が注意を促している。</p>
+<h3>11. 考察（著者の論旨）</h3>
+<p><strong>このレビューの新規性</strong>：受け持ち看護師を超えて通知する自動急変アラート・トリガーシステムに焦点を絞った初のシステマティックレビュー・メタ解析。この区別が重要なのは、受け持ち看護師だけに届くアラート（電子カルテのポップアップやバイタルモニターの表示など）は、より広い臨床チームを巻き込むエスカレーション経路を一貫して起動するとは限らないため。</p>
+<p><strong>死亡と心停止の乖離をどう読むか</strong>：死亡低下の傾向は主に前後比較研究が駆動しており、RCT 2本はいずれも効果を示さなかった。前後比較デザインはバイアスを受けやすいので慎重な解釈が要る。一方で RCT は方法論的に堅牢だが、実施が困難あるいは非現実的なことがあり、実世界の複雑さを捉えきれないことも多い。これがアラートシステム導入に伴うシステムレベルの影響を RCT が検出しにくくしている可能性がある。</p>
+<p>心停止が減って死亡が有意に減らないという乖離は、急変の複雑さと死亡の多因子性を映している。院内死亡は併存疾患・重症度・終末期の意思表示に左右される。自動アラートは心停止のような急性で可逆的なイベントの予防には有効でも、不可逆的あるいは進行した疾患を持つ患者のアウトカムは変えにくい。この解釈は、治療制限のある患者（急変後の積極的介入を受けない、あるいはそこから恩恵を受けにくい患者）を除外した研究でより大きな死亡ベネフィットが観察されたというサブグループ結果に支持される。</p>
+<p><strong>全入院コホートで有意になった理由</strong>：非 RCT のプールデータに基づく二次解析で死亡・心停止・ICU在室日数がいずれも有意に改善したことは、アラートシステムが高リスク患者に限らないシステムレベルの利益をもたらしうることを示唆する。著者はスピルオーバー効果として、臨床的警戒心の高まり、能動的な RRS ワークフロー、データに基づくプロセス改善を挙げている。例として Gallo は、リアルタイムアラートと協働型の臨床ワークフローを組み合わせて導入した後、RRT 起動・ICU 転送・院内心停止を含む複合アウトカムの有意な減少を報告した。著者はこれを「こうしたシステムが病院全体の文化変革とプロセス改善を触媒しうる」証拠と位置づけている。</p>
+<p><strong>在院日数と予定外ICU入室が動かない理由</strong>：早期認識と早期介入が可能になっても、急変から回復するのに長い時間が要る患者では在院日数は縮まらない。また Blythe らが指摘するとおり、早期発見は<strong>予定外ICU入室を「予定された予防的入室」に置き換えるだけで、総 ICU 入室数を減らしたりアウトカムを改善したりしない</strong>可能性がある（重症度が変わらなければ）。加えて ICU 入室は施設の入室基準・病床可用性・財政的インセンティブに左右されるため、文脈依存的で一貫しないアウトカム指標である。米国 vs 米国外のサブグループでは差が出なかったが、著者は国レベルの比較が施設固有のばらつきを十分反映しないと認めている。</p>
+<p><strong>異質性の由来</strong>：先行スコーピングレビューと一致して、EWS の種類・計算頻度・アラート閾値・アラート受け手の違いによる実質的な研究間異質性が観察された。アラート受け手の臨床的役割も異なる。MET/RRT は通常より高度な介入を提供し、病棟医は初期安定化とさらなるエスカレーションの判断を担い、リーダー看護師は初期対応を調整する。今回のサブグループ解析では、特定の特徴や構成が優れているとは同定されなかった。機械学習ベースのアラートを導入する施設の臨床リーダーは、モデルの実世界での性能だけでなく、van der Vegt らが示すような実装上の実務的因子も考慮すべきである。</p>
+<p><strong>経済性と未評価の領域</strong>：臨床アウトカムを超えて、今後の評価は費用対効果と資源使用の評価を含める必要がある。本レビューで財務アウトカムを報告したのは1研究のみで、介入群のほうが平均入院費用が高かったと報告している。加えて、臨床判断・スタッフ行動・<strong>アラート疲労（alarm fatigue）</strong>・ワークフロー統合への影響の評価も必要である。</p>
+<p><strong>限界（著者記載）</strong>：①組み入れ研究の大半が同時対照を欠く前後比較で、中等度〜重篤なバイアスリスク、②実質的な研究間異質性が一般化可能な結論を制限、③対照群の診療実践のばらつきが観察された効果に影響しうる、④標準化された性能指標と評価枠組みが必要。今後は RCT または段階的ウェッジクラスター試験のような、内的妥当性と実施可能性を両立する設計を採るべきとしている。</p>
+<h3>12. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>数値の内的不整合が複数ある <mark class="hl">Table 1 と本文フォレストプロットで、介入群と対照群の症例数が入れ替わっている研究が複数ある</mark>。Ahmed は Table 1 で介入261／対照265だが、Figure 2 では ACDA 265／対照261。Balshi は Table 1 で介入2,346／対照2,151だが、Figure 3・Figure 4 ではいずれも介入2,151／対照2,346。<mark class="hl">どちらが正しいかは本文からは判別できず、少なくとも一方は誤っている</mark>。効果量の方向が反転しうる規模ではないが、データ抽出のクロスチェックが機能していたのかという疑問は残る。</p>
+</div>
+<p><strong>1. 主要アウトカム「院内心停止」の統合はたった2研究</strong> 心停止を報告した4研究のうち2つがデータ不足で除外され、残る2研究で RR 0.60 が出ている。しかも重みの86%は Balshi 1研究（サウジアラビアの単施設前後比較）が占める。実質的には1つの前後比較研究の結果である。I² = 0% は「一致している」というより「2点しかない」ことの帰結。<mark class="hl">この論文の見出し所見は、単一施設の前後比較にほぼ依存している</mark>。</p>
+<p><strong>2. 死亡の点推定値は外れ値2研究に依存</strong> 感度解析で Escobar と Ahmed を外すと RR は 0.80 → 0.92、p = 0.51 になる。Escobar は19病院・3.5年かけた段階導入で、しかも「バーチャル看護師による連続監視とエスカレーション指導」という、他の研究とは質的に別物の介入。Ahmed は ROBINS-I で critical と判定された唯一の研究。この2つが点推定値を作っている。</p>
+<p><strong>3. Ahmed のオッズ比の向きが逆</strong> 本文は Ahmed が心停止の「有意な減少（significant reduction）」を報告したとして、オッズ比 5.16（95% CI 2.03–13.11、p &lt; 0.001）を示している。オッズ比 5.16 は 5倍の増加を意味する数値であり、記述と矛盾する。原著の定義（何を分子に置いたか）を確認しないと解釈できない。</p>
+<p><strong>4. Na の在院日数も記述と数値が逆</strong> 本文は Na が在院日数の「有意な減少」を報告したとして「導入前25日 対 導入後29日、p = 0.003」を示す。25日 → 29日は延長である。</p>
+<p><strong>5. 在院日数の I² = 100% は Ahmed の SD が原因</strong> Ahmed の在院日数は 13.23±1.47日 対 24.76±1.12日。平均24.76日の入院期間に対して SD が1.12日というのは、臨床的にありえない精度である（在院日数は右に強く歪む分布で、SD は平均と同程度かそれ以上になるのが普通）。この1研究が平均差 −11.53日（95% CI −11.75 to −11.31）という極端に狭い区間を生み、Chi² = 6934、I² = 100% を作っている。<strong>この研究を含めたまま「在院日数は有意差なし」と結論するのは、統合そのものが成立していないという意味で正しくない</strong>。</p>
+<p><strong>6. GRADE がない</strong> バイアスリスク評価はあるが、GRADE によるアウトカム別の確信度評価がない。出版バイアスも研究数10未満を理由に未検討。読者は「RR 0.60」の確信度を自分で判定しなければならない。</p>
+<p><strong>7. 前後比較の構造的問題</strong> 15/18研究が前後比較。この期間、RRS そのものの成熟、敗血症バンドルの普及、電子カルテの更新、コロナ禍前後の患者構成の変化など、アラート以外の要因が同時に動いている。Kollef 2019 に至っては「導入前＝2008年、導入後＝2014年」という6年の隔たりを持つ比較で、6年間の診療変化を全部アラートに帰属させることになる。</p>
+<p><strong>8. アラート閾値と発報件数が報告されていない</strong> Table 2 には EWS の種類と計算頻度はあるが、<strong>閾値（何点で鳴るか）とアラート発報件数（1日何件鳴ったか）、そして陽性的中率が体系的に報告されていない</strong>。アラート疲労を評価するのに最も必要な数字が、レビュー全体で欠けている。著者自身も「アラート疲労への影響の評価が今後必要」と述べているとおり、この論文からは当院で「1日何件鳴るか」を推定できない。導入計画を立てる側にとってはここが最大の空白である。</p>
+<p><strong>9. 対照群が一様でない</strong> 対照群の多くは「事前規定の基準と臨床医の懸念に基づく手動 MET 起動」だが、3研究は段階的エスカレーションを実装済み、2研究は電子カルテアラートや MET 看護師による能動的サーベイランスという、すでにかなり能動的な体制だった。<strong>対照群のベースラインの高さが施設によって大きく違うため、効果量の比較可能性は低い</strong>。既に RRS が成熟している施設（当院もこちら側に近い）では、上乗せ効果は本研究の平均より小さくなると考えるのが妥当。</p>
+<p><strong>10. 「予定外ICU入室が減らない」は失敗ではないかもしれない</strong> 著者も引くとおり、早期発見は予定外入室を予定入室に置き換える。当院で評価指標を立てるなら、予定外ICU入室の<strong>総数</strong>ではなく、「入室時の重症度（APACHE II／SOFA）」や「入室前6時間の異常バイタル持続時間」といった、より上流の指標のほうが介入効果を捉えやすい。</p>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>Kollef MH, et al.（本文24）</td><td>電子カルテベースの予測モデルによるアラートを RRT 看護師に送る並行 RCT（571例）。本メタ解析の主要 RCT の1つ。死亡 RR 0.95</td><td>Kollef ら（2014）米国</td></tr>
+<tr><td>Bailey TC, et al.（本文26）</td><td>予測アルゴリズムのアラートをリーダー看護師にポケベルで送るクロスオーバー RCT（2,353例）。死亡 RR 1.05</td><td>Bailey ら（2013）米国</td></tr>
+<tr><td>Escobar GJ, et al.（本文9）</td><td>19病院・3.5年の段階導入。遠隔看護師による連続監視と RRT 通報。本メタ解析で死亡に最大の重み（22.7%）を持ち、外れ値としても検出された</td><td>Escobar ら（2020）米国</td></tr>
+<tr><td>Kollef MH, et al.（本文13）</td><td>上記 RCT の全院段階展開版の前後比較（28,372例）。modified NEWS 5点以上で連続計算</td><td>Kollef ら（2019）米国</td></tr>
+<tr><td>Balshi AN, et al.（本文27）</td><td>RRT へスマートフォンアラート。心停止統合の重み86%を占める前後比較（4,497例）</td><td>Balshi ら（2022）サウジアラビア</td></tr>
+<tr><td>Na SJ, et al.（本文10）</td><td>MET へモバイルアラート。41か月ずつの前後比較（1,415例）。予定外ICU入室 RR 0.57 と最も大きな効果</td><td>Na ら（2021）韓国</td></tr>
+<tr><td>Morgan A, et al.（本文28）</td><td>RRT へポケベル。ICU在室日数の統合で重み79.4%を占める</td><td>Morgan ら（2021）米国</td></tr>
+<tr><td>Gallo E, et al.（本文30）</td><td>回帰不連続デザインの準実験。複合アウトカムで絶対リスク減少10.4パーセントポイント</td><td>Gallo ら 米国</td></tr>
+<tr><td>Blythe R, et al.（本文14）</td><td>先行スコーピングレビュー。多くのシステムがアラートを受け持ち看護師にのみ送っている問題を指摘し、本レビューの組み入れ基準の根拠となった</td><td>Blythe ら</td></tr>
+<tr><td>van der Vegt AH, et al.（本文49）</td><td>機械学習ベースのアラート導入における実装上の実務的因子の枠組み</td><td>van der Vegt ら</td></tr>
+<tr><td>Page MJ, et al.</td><td>PRISMA 2020 声明</td><td>BMJ 2021;372:n71</td></tr>
+<tr><td>Sterne JAC, et al.（本文18, 19）</td><td>Cochrane Risk of Bias Tool 2（RCT 用）と ROBINS-I（非ランダム化研究用）</td><td>Cochrane</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 受け持ち看護師を超えて多職種に飛ぶリアルタイム自動急変アラートは、==アラート対象患者の院内心停止を有意に減らした（RR 0.60、95% CI 0.43–0.85）が、院内死亡は有意に減らさなかった（RR 0.80、95% CI 0.62–1.05、p = 0.09）<mark class="hl">。ICU 在室日数は1.07日短縮したが、</mark>在院日数と予定外ICU入室は動かない==。</p>
+<p><mark class="hl">サブグループで差が出たのは「EWS の種類」でも「アラートを受ける職種」でもなく、通知手段（携帯テキスト &gt; ポケベル、RR 0.69）・病棟看護師への可視化・治療制限患者の除外の3点だった</mark>。</p>
+<p><strong>当院の行動</strong>：PrimeGaia のバイタル自動収集を自動アラートへ発展させるとき、<mark class="hl">まず投資すべきは高性能な予測モデルではなく、「リーダー看護師＋病棟当直医への院内スマホ同報」「病棟一覧画面での色分け可視化」「DNAR・緩和方針患者のアラート対象からの除外」という運用設計</mark>である。そして評価指標は死亡率ではなく <mark class="hl">病棟の予期しない心停止／1000入院</mark> に置き、単純前後比較ではなく病棟単位の段階的ウェッジで検証する。<mark class="hl">「ICU 入室が減ってコストが下がる」とは説明しない</mark>（在院日数・予定外ICU入室は減らず、費用を報告した唯一の研究では介入群のほうが高かった）。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

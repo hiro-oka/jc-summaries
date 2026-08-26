@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ECPR後TTMの解釈は「誰を含めたか」で変わる — SAVE-J IIとの対比（レター・CritCare2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-023-04302-2.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ECPR後TTMの解釈は「誰を含めたか」で変わる — SAVE-J IIとの対比（レター・CritCare2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Hifumi T, Inoue A, Otani N. The difference in the association between included ECPR patients and neurological outcomes. Crit Care. 2023;27:39. doi:10.1186/s13054-023-04302-2</dd><dt>掲載誌</dt><dd>Critical Care（2023-01-25）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-023-04302-2" target="_blank" rel="noopener">doi.org/10.1186/s13054-023-04302-2</a>（本文PDFは別途）</dd><dt>原題</dt><dd>The difference in the association between included ECPR patients and neurological outcomes</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-023-04302-2.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-023-04302-2.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-023-04302-2.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院からの発信である</strong>。第1著者・第3著者はいずれも当院 救急科・救命救急センターの所属で、ECPR後の体温管理をめぐる国際誌上の議論に当院が当事者として関与している。同じ院内で PICS-F の国際レビューを出しているグループと同一（<span class="wl">PICS-F（集中治療後症候群・家族）の包括的レビュー — 心理だけでなく身体・社会経済まで、予防は単発でなく連続したバンドルで（AcuteMedSurg2024）</span>）。</li><li><strong>さらに、レターが引く SAVE-J II 本体論文（Inoue A, et al. Crit Care. 2022;26:129）の第4著者は岡本洋史である</strong>（<span class="wl">岡本洋史 論文業績リスト</span> に 4/54 で収載）。つまり本レターが依拠するコホートの共著者が院内にいる。JCで扱うなら「外の論争」ではなく「自分たちのデータの話」として組める。</li><li><strong>プロトコル自体は本レターでは変わらない</strong>。新しい数値も新しい解析も提示されていないため、当院の体温管理の目標値・期間は <span class="wl">心停止後ケアガイドライン2025 ERC・ESICM — 発熱予防は37.5℃以下、予後予測は2つ以上の指標で（Resuscitation2025）</span> に従う（昏睡持続例で 37.5℃以下・36〜72時間）。ECPR例だけ別扱いにする根拠は、本レターにも原著にもない。</li><li><strong>変わるのは論文の読み方のほう</strong>。「ECPR後のTTMは何度でも同じ」という一般化に出会ったら、まず <strong>その研究が全原因のOHCAを含むか、非心原性を除いているか</strong> を確認する。ただし後述のとおり、ECPR適応となった集団では非心原性は 8.5% しか占めておらず、この論点の実務的な射程は著者が示唆するより狭い。</li><li><strong>回路が入っている患者の体温は「狙えば当たる」</strong>。ECMO の熱交換器がある以上、当院では目標体温の達成それ自体は制約にならない。だからこそ「達成できるか」ではなく「何を目標に置くか」だけが問題になる、という構図を JC で明示する。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ECPR を受けた OHCA 890例の全国レジストリ解析（Watanabe ら、Crit Care 2022）で、目標体温 32〜34℃ と 35〜36℃ の間に30日良好神経転帰・生存の差はなかった。日本には ECPR の大規模データが2つある（JAAM-OHCA レジストリと SAVE-J II）。</li><li><strong>Unknown</strong>：この「差なし」が、ECPR を受けるすべての患者に等しく当てはまるのか。心停止の原因（心原性か非心原性か）で目標体温の最適解は変わらないのか。原著には原因別のサブグループ解析がない。</li><li><strong>What's new</strong>：新しいデータはない。本レターが持ち込むのは <strong>「結論は組み入れ集団の関数である」という読み方の枠組み</strong>と、SAVE-J II 参加施設への質問紙調査から得た <strong>「日本では 33〜34℃ が施設の 83.3% で一次治療だった」</strong> という実態、そして <strong>平温は重症例に選ばれていたのではないかという適応交絡の指摘</strong>である。著者らは SAVE-J II を用いた目標体温別の詳細解析を準備中であると予告している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ECPR後のTTMで「32〜34℃も35〜36℃も同じ」という日本の全国データの結論に対し、SAVE-J II 側の研究者が <strong>「誰を組み入れたか」と「誰が平温を選ばれたか」の2点で解釈に留保をつけた</strong>2ページのレター。<strong>新規データはゼロ</strong>で、主張は既発表の引用と自分たちの質問紙調査に立つ。</p>
+</div>
+<ul><li>指摘は大きく2つ。<strong>① 包含基準</strong>：JAAM-OHCA は全原因の OHCA を含み、SAVE-J II は非心原性を除いている。非心原性（大動脈解離・大動脈瘤・偶発性低体温・一次性脳障害・感染・薬物中毒・外傷・窒息・溺水）は転帰も適切な目標体温も違うのだから、混ぜたまま「差なし」と言えないという主張。</li><li><strong>② 適応交絡</strong>：SAVE-J II 参加施設への質問紙では、一次治療としての目標体温は 33〜34℃ が 83.3%、35〜36℃ が 11.1% だった。つまり平温は「血行動態不安定・出血合併症・予後不良が強く予測される」重症例にあえて選ばれていた可能性が高く、医師の判断という制御不能なバイアスが入る。著者らは、バイアスをよく調整してもなお低体温が良好転帰と関連して見える疑いが強いと書く。</li><li>心原性か非心原性かは <strong>TTM 開始時点でほぼ判別できる</strong> のだから、原因別のサブグループ解析があれば目標体温の臨床判断に資したはずだ、と結ぶ。</li><li><strong>著者らの立場</strong>：SAVE-J II を用いた目標体温と神経転帰の詳細解析を準備中と明言している。批判の相手は競合コホートであり、著者は当事者である。</li><li><strong>最大の弱点</strong>：「非心原性が約50%」という数字は JAAM-OHCA レジストリ <strong>全体</strong> の話であって、ECPR を受けた集団の話ではない。原著コホート 890例では心原性が 91.5%（814/890）、非心原性は 8.5% にすぎない。分母が違う。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — レターという記事種別と、登場する4つの略語 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>CORRESPONDENCE（レター）</strong>：既発表論文への読者からのコメント。原著論文と違い、査読は編集判断が中心で、新規データの提示も統計解析も要求されない。本稿は Received から Accepted まで <strong>1日</strong>である。したがって読むときは「著者の意見」と「引用されたデータ」を必ず分けて扱う。格付け（エビデンスレベル）は存在しない。 <strong>ECPR（extracorporeal cardiopulmonary resuscitation／体外循環式心肺蘇生）</strong>：通常の CPR で自己心拍が戻らない心停止に対し、V-A ECMO を導入して循環を代替しながら蘇生を続ける方法。導入の可否そのものが施設体制に強く依存する（<span class="wl">ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</span>）。 <strong>TTM（targeted temperature management／体温管理療法）</strong>：ROSC 後の昏睡患者の体温を目標値に制御する治療。本稿の文脈では原著の定義に従い <strong>h-TTM = 32〜34℃</strong>、<strong>n-TTM = 35〜36℃</strong> の2分類。なお 35〜36℃ を「normothermia（平温）」と呼ぶのは原著の定義であって、現行ガイドラインが言う「発熱予防（37.5℃以下）」とは別物である。 <strong>JAAM-OHCA レジストリ</strong>：日本救急医学会の院外心停止前向きデータベース。全国 103施設が参加し、搬送されたすべての OHCA を原因を問わず登録する。 <strong>SAVE-J II（Study of Advanced life support for Ventricular fibrillation with Extracorporeal circulation in Japan II）</strong>：ECPR を受けた OHCA を集めた後ろ向き多施設レジストリ研究。本レターは 1644例・2013〜2018年・世界最大の ECPR コホートと記載する。<strong>非心原性の心停止は除外</strong>されている点が JAAM-OHCA との決定的な違い。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>レターの目的は明示的には書かれていないが、構成から3つに分解できる。</p>
+<ol><li>Watanabe らの結論（ECPR後の n-TTM と h-TTM で神経転帰・生存に差なし）を、<strong>否定するのではなく限定する</strong>こと。</li><li>その限定の根拠として、<strong>包含基準の違い</strong>と<strong>目標体温選択のバイアス</strong>という2つの機序を提示すること。</li><li>SAVE-J II を用いた自分たちの解析が近く出ることを予告し、<strong>議論の続きに場所取りをする</strong>こと。</li></ol>
+<p>「反論」と呼ぶより「解釈の条件づけ」に近い。レター中に原著の数値そのものへの異議はひとつもない。</p>
+<h3>3. 方法（レターとしての論拠の作り方）</h3>
+<ul><li><strong>デザイン</strong>：CORRESPONDENCE。一次データの収集・解析はない。</li><li><strong>論拠の材料</strong>：引用文献5本のみ（原著、SAVE-J II 本体、SAVE-J II 参加施設への質問紙調査、JAAM-OHCA レジストリのプロファイル論文、SAVE-J 原本）。</li><li><strong>統計</strong>：なし。レター内で計算された数値はひとつもなく、すべて他文献からの引用である。</li><li><strong>事前登録・倫理審査</strong>：該当なし（Not applicable と明記）。</li><li><strong>限界の自己申告</strong>：<strong>本文に無い</strong>。レター自身は自らの限界に一言も触れていない。</li></ul>
+<h3>4. レター本文を段落ごとに追う</h3>
+<h4>第1段落 — 原著の要約と、引用された効果量</h4>
+<p>原著は JAAM-OHCA レジストリから ECPR 後に TTM を受けた OHCA 患者を抽出し、n-TTM（35〜36℃）と h-TTM（32〜34℃）の2群を比較した、という要約に続けて2つの効果量を挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>引用されたアウトカム</th><th>OR（95%CI）</th><th>原著での位置づけ</th></tr></thead>
+<tbody>
+<tr><td>30日良好神経転帰</td><td>1.01（0.67–1.54）</td><td>Table 2 の IPW（逆確率重み付け）OR</td></tr>
+<tr><td>30日生存</td><td>1.05（0.76–1.46）</td><td>Table 2 の IPW OR</td></tr>
+</tbody></table></div>
+<ul><li>レターはこの2つを「差は観察されなかった」の根拠として提示する。数値の転記は正確である（Vault 内の原著ノートの Table 2 と一致）。</li><li>ただしレターは <strong>どの解析手法の値かを書いていない</strong>。原著には調整OR（それぞれ 0.91／1.00）も併記されており、点推定は手法によって 0.91 と 1.01 に分かれる。IPW 値だけを引くと「完全に無効果」の印象が強まる。</li></ul>
+<h4>第2段落 — 日本の ECPR データは2つある</h4>
+<div class="tw"><table>
+<thead><tr><th>コホート</th><th>n</th><th>期間</th><th>組み入れ</th><th>レター内の表現</th></tr></thead>
+<tbody>
+<tr><td>JAAM-OHCA レジストリ（＝原著）</td><td>890</td><td>2014–2019</td><td>すべての原因の OHCA</td><td>retrospective observational study</td></tr>
+<tr><td>SAVE-J II</td><td>1644</td><td>2013–2018</td><td>非心原性を除外</td><td>世界最大の ECPR 患者数を持つ後ろ向きレジストリ研究</td></tr>
+</tbody></table></div>
+<ul><li>施設数・良好転帰率など、両コホートの他の差異には触れていない。比較軸は「誰を入れたか」ひとつに絞られている。</li></ul>
+<h4>第3段落 — 質問紙調査が示した日本の実態と、適応交絡の指摘</h4>
+<p>SAVE-J II 参加施設に配布した質問紙調査（Hifumi ら、Ther Hypothermia Temp Manag. 2022）の結果として、次の2つの割合が引用される。</p>
+<div class="tw"><table>
+<thead><tr><th>一次治療として開始した目標体温</th><th>施設の割合</th></tr></thead>
+<tbody>
+<tr><td>33〜34℃</td><td>83.3%</td></tr>
+<tr><td>35〜36℃</td><td>11.1%</td></tr>
+</tbody></table></div>
+<p>そのうえで著者は次のように論を運ぶ。</p>
+<ol><li>日本では、とくに TTM2 試験の結果が公表された 2021年より前は、<strong>33〜34℃ が主流の目標体温だった</strong>。</li><li>平温は、<strong>血行動態不安定・出血合併症・予後不良が総合的に強く予測される</strong>といった重症例に限って開始されていたと考えられる。</li><li>したがって <strong>医師の判断という制御不能なバイアス</strong>が存在し、バイアスをよく調整してもなお、低体温のほうが良好神経転帰と関連しているように見える疑いが強い。</li><li>著者らは SAVE-J II に基づき、ECPR を受けた OHCA 患者における目標体温の違いと神経転帰の関連について<strong>詳細な解析を準備中</strong>である。</li></ol>
+<ul><li>3 の論理は「観察研究で低体温が良く見えるのは適応交絡のせいかもしれない」という警告であり、原著の結論（差なし）を弱めるのではなく、むしろ <strong>観察研究で低体温有利が出たときにそれを信用するな</strong>という向きに働く。原著は差なしなので、この指摘が直接効くのは原著ではなく、h-TTM 優越を報告した先行の観察研究群のほうである。</li></ul>
+<h4>第4段落 — 包含基準の違いが差を生むという主張</h4>
+<ul><li>両者の差は主として <strong>組み入れた患者の違い</strong>による、と断定する。</li><li>別の JAAM-OHCA 研究によれば、<strong>非心原性の原因はおよそ 50%</strong> を占めると見積もられる。</li><li>非心原性として列挙されるのは <strong>急性大動脈解離／大動脈瘤・一次性（偶発性）低体温・一次性脳障害・感染・薬物中毒・外傷・窒息・溺水</strong>の8つ。これらは臨床転帰も適切な目標体温も異なる、と述べる。</li><li><strong>心原性か非心原性かは TTM 開始時点でほぼ判別できる</strong>（原文の留保は "almost"）。それゆえ原因別のサブグループ解析の結果は、目標体温の臨床判断に資したはずである、と結ぶ。</li></ul>
+<h3>5. レターが述べていないこと（読者が探しに行って見つからない項目）</h3>
+<p>読み手が期待するのに本文に無いものを明示しておく。ここを埋めるのは読者側の仕事になる。</p>
+<div class="tw"><table>
+<thead><tr><th>期待される項目</th><th>本レターでの扱い</th></tr></thead>
+<tbody>
+<tr><td>SAVE-J II における目標体温別の実際の転帰</td><td>一切示されていない（「準備中」とのみ）</td></tr>
+<tr><td>非心原性を除いたときに原著の結論がどう動くかの試算</td><td>本文に無い</td></tr>
+<tr><td>原著コホート 890例のうち非心原性が何%だったか</td><td>本文に無い（後述のとおり原著には記載がある）</td></tr>
+<tr><td>質問紙調査の回答施設数・回収率</td><td>本文に無い（割合のみ）</td></tr>
+<tr><td>「非心原性は目標体温が異なる」ことを示す直接のエビデンス</td><td>引用は SAVE-J 原本1本のみで、体温比較の研究ではない</td></tr>
+<tr><td>レター自身の限界</td><td>本文に無い</td></tr>
+</tbody></table></div>
+<h3>6. 批判的吟味（JCでの論点）</h3>
+<h4>① 「非心原性が約50%」は分母が違う</h4>
+<ul><li>レターが引く 50% は JAAM-OHCA レジストリの <strong>プロファイル論文（2014–2015年の全登録例）</strong> から来ている。すなわち <strong>搬送されたすべての OHCA</strong> の内訳である。</li><li>一方、原著が解析したのは <strong>ECPR と TTM の両方を受けた 890例</strong>。この集団では原著 Table 1 に記載のとおり <strong>心原性が 91.5%（814/890）</strong>、非心原性は <strong>8.5%</strong> にすぎない（<span class="wl">ECPR後のTTMは32-34℃でも35-36℃でも30日神経予後が変わらない（JAAM-OHCA 890例・CritCare2022）</span> のノートで検算済み）。</li><li>ECPR は適応が絞られる治療であり、非心原性の多くはそもそも導入されない。<strong>50% と 8.5% では6倍以上の開き</strong>があり、「非心原性が半分を占めるから包含基準の差が結論を左右する」という論の前提は、ECPR 集団には当てはまらない。</li><li>したがってレターの主張は、<strong>方向としては正しいが効き幅を大きく見誤っている</strong>。非心原性 76例前後の混入で 890例の結論が反転するとは考えにくい。</li></ul>
+<h4>② 引用番号の付け違い</h4>
+<ul><li>本文に "especially before the results of TTM2 trial were published in 2021 [2]" とある。しかし <strong>[2] は Inoue らの SAVE-J II 本体論文（Crit Care. 2022;26:129）</strong> であって TTM2 試験ではない。</li><li>TTM2（Dankiewicz J, et al. N Engl J Med. 2021;384:2283–94）は <strong>参考文献リストに存在しない</strong>。読者は原典に当たれない。校正段階の見落としである。</li></ul>
+<h4>③ 「両者に観察された差」がまだ存在しない</h4>
+<ul><li>第4段落は "The difference observed between the JAAM-OHCA registry (the current study) and SAVE-J II" と書き出すが、<strong>SAVE-J II からの目標体温別の解析はこの時点で未発表</strong>であり、著者自身が同じレター内で「準備中」と述べている。</li><li>つまり <strong>比較すべき第二の結果がまだ無い状態で、差の原因を説明している</strong>。これは論理の順序が逆であり、レターで最も引っかかるべき箇所である。実質的には「今後違う結果を出すつもりだ、そのときは包含基準の違いで説明できる」という予告に読める。</li></ul>
+<h4>④ 交絡の向きは著者が言うほど一方向ではない</h4>
+<ul><li>レターは「平温＝重症例」という一方向のバイアスを想定する。原著 Table 1 はこの想定と部分的に整合する（n-TTM 群は現場ショッカブル 56.2% 対 69.7%、心原性 88.4% 対 92.7% と予後不良側の特徴が多い）。</li><li>しかし <strong>施設要因は逆向き</strong>である。n-TTM 群は ECMO 高volume 施設に偏り（38.6% 対 25.3%）、CCMC 比率も高い（96.8% 対 93.1%）。症例集積の多い施設ほど平温を選んでいた、とも読める。</li><li>患者要因は低体温に有利、施設要因は平温に有利。<strong>正味の向きは断定できない</strong>。レターは後者に触れていない。</li></ul>
+<h4>⑤ 温度区分が原著と一致しない</h4>
+<ul><li>質問紙の区分は <strong>33〜34℃ / 35〜36℃</strong>、原著の群分けは <strong>32〜34℃ / 35〜36℃</strong>。32℃台を一次治療に選ぶ施設は質問紙の 83.3% には含まれない。境界がずれた数字を並べて「日本では低体温が主流」と論じている。</li><li>また 83.3% + 11.1% = 94.4% で、<strong>残る 5.6% の施設が何を選んだかは書かれていない</strong>。割合の刻み（83.3 / 11.1 / 5.6）は分母 36 に対応し、30施設 / 4施設 / 2施設と読める（これは割合からの推定で、施設数はレター本文に記載がない）。</li><li>さらに、これは <strong>施設の割合であって患者の割合ではない</strong>。原著コホートで実際に h-TTM を受けたのは 72%（641/890）であり、施設ベースの 83.3% とは一致しない。方針と実施は別物である。</li></ul>
+<h4>⑥ 引用 [5] が主張を支えていない</h4>
+<ul><li>「非心原性は転帰も目標体温も異なる」の根拠として引かれる [5] は Sakamoto ら（Resuscitation. 2014;85:762–8）、すなわち <strong>SAVE-J 原本</strong>である。これは目撃された VF／無脈性 VT を対象に ECPR と従来 CPR を比較した前向き観察研究で、<strong>目標体温を比較した研究ではない</strong>。8つの非心原性病態それぞれの至適体温を示す文献でもない。引用の当て方が緩い。</li></ul>
+<h4>⑦ 「TTM 開始時点でほぼ判別できる」に根拠が示されていない</h4>
+<ul><li>原文の留保は "can almost be identified" で、断定はしていない。ただし裏づけの引用はない。</li><li>実務的には、急性大動脈解離・くも膜下出血・肺塞栓は ECPR 導入直後の時点で確定していないことがあり、造影 CT で判明したときには既に冷却が始まっている。原因別に体温を変える運用は、判別のタイミングという別の問題を抱える。</li></ul>
+<h4>⑧ 立場の非対称 — COI 欄には出ない利益相反</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>開示欄は「なし」だが、著者は中立の第三者ではない COI は "no competing interests"、資金は "None" と明記されている。財務的な利益相反はない。ただし <mark class="hl"><strong>3名の著者はいずれも SAVE-J II の中心研究者であり、批判の対象は競合コホートの解析結果である</strong></mark>。しかも同じレター内で自分たちの対抗解析を予告している。これは形式的な COI 欄には現れないが、<mark class="hl"><strong>主張の重みを読むうえで最も効く情報</strong></mark>である。引用5本のうち3本（[2][3][5]）が著者ら自身の関与する研究である点も併せて見ておく。</p>
+</div>
+<h4>⑨ レターの主張のうち、もっとも妥当な部分</h4>
+<ul><li>批判ばかりではない。<strong>原著 Table 4 のサブグループは「年齢65歳以上／未満」「目撃の有無」「初期波形ショッカブル／ノンショッカブル」の3つだけで、心原性／非心原性のサブグループは存在しない</strong>。原因は16の調整変数のひとつとして回帰に入っているが、層別の効果は示されていない。</li><li>「原因別のサブグループ解析があれば臨床判断に資したはず」という指摘は、<strong>原著に実際に欠けているものを正しく指している</strong>。ここはレターの正当な貢献である。</li><li>加えて、原著が扱えていないのは非心原性だけではない。原著コホートでは <strong>ECMO を受けた成人の 58%（1245例）が TTM 非施行または目標体温不明で解析から落ちている</strong>。組み入れの問題は、レターが指摘する軸よりもう一段深い。</li></ul>
+<h4>⑩ 記事種別と査読の速度</h4>
+<ul><li>Received 3 January 2023、Accepted 4 January 2023。<strong>受理まで1日</strong>。実質的に編集判断のみと考えるのが妥当で、上記②の引用ミスが残っていることとも符合する。JC で「Critical Care 誌に載った指摘だから」と重みを付けすぎないこと。</li></ul>
+<h3>7. その後どうなったか（2023年→現在）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本レター時点（2023年）</th><th>その後（Vault 収載ノートで裏が取れる範囲）</th></tr></thead>
+<tbody>
+<tr><td>目標体温の考え方</td><td>32〜36℃ の「TTM」の枠組みで議論</td><td><span class="wl">心停止後ケアガイドライン2025 ERC・ESICM — 発熱予防は37.5℃以下、予後予測は2つ以上の指標で（Resuscitation2025）</span> で軸足が 発熱予防（37.5℃以下・36〜72時間） へ移動。低体温にある患者を能動的に加温しない</td></tr>
+<tr><td>低体温の期間</td><td>議論の対象外</td><td><span class="wl">低体温療法は延長しても神経予後を改善しない — 最短6時間が最適の事後確率0.51（ICECAP・JAMA2026）</span> で 6/12/24時間の延長に利得なし</td></tr>
+<tr><td>ECPR 成績の規定因子</td><td>目標体温に焦点</td><td><span class="wl">ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</span>。体温より 施設のvolumeとプロトコル化が効く</td></tr>
+<tr><td>非ショック波形への低体温</td><td>言及なし</td><td><span class="wl">HYPERION trial 非ショック波形心停止後の低体温療法（NEJM2019）</span> は 33℃ で 90日 CPC 1–2 が改善。ただし原著のノンショッカブル層では点推定が逆向き</td></tr>
+<tr><td>ECPR の適応・体制</td><td>言及なし</td><td><span class="wl">AHA CPR・ECCガイドライン2025のハイライト — 全760推奨、ECPRの患者選定と地域化・セーフティハドル・臍帯遅延結紮（日本語版）</span></td></tr>
+<tr><td>SAVE-J II の目標体温別解析</td><td>「準備中」と予告</td><td>Vault 未収載。公表の有無を確認できていない。本レターの中心的な約束が果たされたかは、ここでは判定不能</td></tr>
+<tr><td>SAVE-J II 本体論文</td><td>引用文献 [2]</td><td>Vault 未収載（ノートなし。ただし <span class="wl">岡本洋史 論文業績リスト</span> に共著として収載）</td></tr>
+<tr><td>JAAM-OHCA プロファイル論文 [4]</td><td>「非心原性 約50%」の出典</td><td>Vault 未収載</td></tr>
+<tr><td>質問紙調査 [3]</td><td>83.3% / 11.1% の出典</td><td>Vault 未収載</td></tr>
+</tbody></table></div>
+<h3>8. 主要な引用文献一覧（全5本）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>批判対象の原著。ECMO 施行 OHCA における目標体温別の転帰（JAAM-OHCA 890例）</td><td>Watanabe M, Matsuyama T, Miyamoto Y, Kitamura T, Komukai S, Ohta B. *Crit Care*. 2022;26(1):380</td><td>Vault 収載</td></tr>
+<tr><td>2</td><td>SAVE-J II 本体。成人 OHCA に対する ECPR の後ろ向き大規模多施設研究</td><td>Inoue A, Hifumi T, Sakamoto T, Okamoto H, Kunikata J, Yokoi H, Sawano H, Egawa Y, Kato S, Sugiyama K, et al. *Crit Care*. 2022;26(1):129</td><td>第4著者が岡本洋史。TTM2 の引用箇所でも誤ってこの番号が振られている</td></tr>
+<tr><td>3</td><td>SAVE-J II 参加施設への質問紙調査。ECPR 後 TTM の実施方法の詳細</td><td>Hifumi T, Inoue A, Otani T, Otani N, Kushimoto S, Sakamoto T, Kuroda Y, SAVE-J II study group. *Ther Hypothermia Temp Manag*. 2022;12(4):215–22</td><td>83.3% / 11.1% の出典。著者ら自身の研究</td></tr>
+<tr><td>4</td><td>JAAM-OHCA レジストリ 2014–2015年のプロファイル</td><td>Kitamura T, Iwami T, Atsumi T, Endo T, Kanna T, Kuroda Y, Sakurai A, Tasaki O, Tahara Y, Tsuruta R, et al. *Acute Med Surg*. 2018;5(3):249–58</td><td>「非心原性 約50%」の出典。OHCA 全体の話であって ECPR 集団ではない</td></tr>
+<tr><td>5</td><td>SAVE-J 原本。成人 OHCA に対する ECPR と従来 CPR の前向き観察研究</td><td>Sakamoto T, Morimura N, Nagao K, Asai Y, Yokota H, Nara S, Hase M, Tahara Y, Atsumi T. *Resuscitation*. 2014;85(6):762–8</td><td>「非心原性は目標体温が異なる」の根拠として引かれるが、体温比較の研究ではない</td></tr>
+</tbody></table></div>
+<p><strong>参考文献リストに無いのに本文で言及されているもの</strong>：TTM2 試験（Dankiewicz J, et al. *N Engl J Med*. 2021;384:2283–94）。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">ECPR後の目標体温の論文を読むときは、まず「誰を組み入れたか」を確認する</mark>。ただし <mark class="hl">ECPR 適応となった集団では非心原性は 8.5%（原著 890例中）であって、レターが引く「約50%」は OHCA 全体の数字であり分母が違う</mark>。したがって <mark class="hl">本レターで当院の体温管理プロトコルを変える理由はない</mark>。<mark class="hl">実務で変えるのは論文の読み方だけで、目標値は ERC・ESICM 2025 の「発熱予防 37.5℃以下・36〜72時間」に従う</mark>。 <mark class="hl">JC で扱う値打ちは主張の当否ではなく、「新規データを持たないレターが、引用の分母をずらし、引用番号を誤り、まだ存在しない自分たちの結果を前提にして書かれている」という構造を読み解く練習にある</mark>。<mark class="hl">なお第1・第3著者は当院 救急科であり、SAVE-J II 本体の第4著者は岡本洋史である</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>人工呼吸器関連肺炎 VAP ナラティブレビュー（ICM2020）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-020-05980-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">人工呼吸器関連肺炎 VAP ナラティブレビュー（ICM2020）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Papazian L, Klompas M, Luyt CE. Ventilator-associated pneumonia in adults: a narrative review. Intensive Care Med. 2020;46(5):888-906. doi:10.1007/s00134-020-05980-0</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2020-03-10）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-020-05980-0" target="_blank" rel="noopener">doi.org/10.1007/s00134-020-05980-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Ventilator-associated pneumonia in adults: a narrative review</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-020-05980-0.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-020-05980-0.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-020-05980-0.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み ① 「VAPを疑う」の入口を2項目以上に固定する。CPISは使わない 本レビューは CPIS を診断に使うことを明確に否定する（特異度が低く、抗菌薬の過剰使用につながる。最近のガイドラインも診断への使用を推奨していない）。当院の運用は 発熱／膿性気道分泌物／白血球増加または減少／分時換気量の増加／酸素化の悪化／昇圧薬必要量の増加 のうち2つ以上で「疑い」に入る形に統一する。<strong>浸潤影の有無は入口条件にしない</strong>（本文が明示的にそう書いている）。</p>
+<p>② 「疑った瞬間に下気道検体」を先に固定する。採取法の議論はその次 本文が繰り返す最重要点は「検体採取法（気管吸引 vs BAL）の優劣ではなく、<strong>抗菌薬投与前に下気道検体を取ること</strong>」。ERS/ESICM/ESCMID/ALAT 2017 で唯一の<strong>強い推奨</strong>がこれ。当院で最初に直すべきは「先に抗菌薬、後で痰」を無くすこと。</p>
+<p>③ 経験的治療は「早期・MDRリスクなし」だけを単剤に切り出す 早期（挿管5日未満）かつMDRリスク因子ゼロかつ非免疫抑制なら、<strong>非抗緑膿菌性の第3世代セフェム単剤</strong>でよい（Table 3）。この切り出しをプロトコルに書かないと、全例が広域併用になる。それ以外は<strong>抗緑膿菌βラクタム＋非βラクタム抗緑膿菌薬</strong>の2剤。</p>
+<p>④ 抗MRSA薬は「そのユニットのVAP起因菌としてのMRSA比率」で決める 本文は、施設全体のMRSA保有率で決めることを数字で批判している（MRSA保有率20%超の病院のHAP 3562例中、実際にMRSAが生えたのは5%＝<strong>95%が過剰治療になりうる</strong>）。当院で必要なのは病院全体の耐性率表ではなく、<strong>ICUのVAP検体に限ったMRSA比率</strong>の集計。これが無いなら作るのが先。</p>
+<p>⑤ 48〜72時間の再評価を必須イベントにする。7日で終える 培養陰性かつ経過良好なら中止。感受性が出たら即 de-escalation、緑膿菌でも経過が順調なら<strong>2剤併用を単剤に落とす</strong>。総投与は<strong>7日</strong>（免疫不全・膿胸・肺膿瘍・壊死性肺炎は例外）。抗菌薬先行例ではプロカルシトニン &lt; 0.5 ng/mL またはピークから80%超の低下を中止判断に使ってよい、と本文にある。</p>
+<p><strong>⑥ 予防バンドルの中身を入れ替える</strong> 本文の結論は「効果が最も確からしいのは、挿管を避け・鎮静を浅くし・自発呼吸トライアルで早く抜き・早期離床すること」。デバイス（テーパー型カフ・ポリウレタンカフ）は無効、クロルヘキシジン口腔ケアは死亡を増やす可能性があるため<strong>滅菌水での口腔ケアが望ましい</strong>、と Table 2 に明記されている。当院のVAPバンドルにクロルヘキシジンが残っているなら、この論文を根拠に見直しの議題に上げる。</p>
+<p>⑦ VAP率をKPIにするなら、診断法を先に固定する 本文の通奏低音は「VAP率は測り方で 1〜2/1000人工呼吸日 から 18.3/1000人工呼吸日 まで変わる」。院内比較や経年比較をするなら、<strong>発生密度（/1000人工呼吸日）</strong>で、かつ検体採取法と閾値を固定して測る。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：VAPは48時間以上の侵襲的人工呼吸を受けた患者に生じる肺実質の感染で、ICU獲得感染のなかで最も頻度が高い部類に入る。人工呼吸期間とICU滞在の延長に一貫して関連する。米国の費用評価では VAP 1件あたりの寄与費用が $40,144（95%CI $36,286–$44,220）。</li><li><strong>Unknown（分かっていなかったこと）</strong>：①<strong>疫学と診断基準が今も論争中</strong>で、治療・予防・転帰研究の解釈を難しくしている。②どの検体採取法を使うべきかが決着していない。③VAPがどれだけ死亡に寄与しているのか（寄与死亡）が推定法によって 1% から 13% まで開く。④予防策の多くが「VAP率は下げるが客観的アウトカムを動かさない」という不整合を抱える。</li><li><strong>What's new（本レビューの意義）</strong>：新しいデータを出す研究ではなく、2020年時点での疫学・診断・予防・治療の到達点を1本に束ねた総説。とくに ①予防に関する従来の常識（クロルヘキシジン・ストレス潰瘍予防・声門下吸引・SDD）が近年の試験で相次いで揺らいだことを整理し、②「VAP率」ではなく人工呼吸期間・ICU滞在・VAE・抗菌薬使用量・死亡といった客観的アウトカムで予防策を評価せよという評価軸を提示した点、③多項目PCRによる数時間での起因菌同定という近未来像を Figure 4 で図示した点が特徴。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで VAPは ICU獲得感染で最も頻度が高く、報告発生率は施設と診断基準で 5〜40% と大きく振れる。微生物学的確認を強く推奨するが、どの採取法を使うかは今も論争中。予防の柱は人工呼吸への曝露を最小にし早期に離脱させることであり、個々のデバイスや消毒薬ではない。治療は<strong>大多数で7日まで</strong>、毎日疑いを再評価し、感受性が出たら直ちに狭域化し、<strong>培養陰性なら中止を検討する</strong>。</p>
+</div>
+<ul><li><strong>発生率</strong>：2日超の侵襲的人工呼吸を受けた患者の <strong>5〜40%</strong>。北米は 1〜2.5件/1000人工呼吸日と低く、欧州の EU-VAP/CAP 研究は 18.3件/1000人工呼吸日。低中所得国は米国より高い（18.5 vs 9.0/1000人工呼吸日、P = .035）。この差の相当部分は定義・適用・検体採取法の違いで説明される。</li><li><strong>発症時期</strong>：<strong>日々のVAP発症リスクは人工呼吸5〜9日目にピーク</strong>を打ち、累積発生率は総人工呼吸期間に強く依存する。</li><li>集団による差：がん患者 24.5/1000人工呼吸日、外傷 17.8%（511例中）、ARDS <strong>29%</strong>、ECMO 装着中の ARDS <strong>35%</strong>。年齢はVAPリスクと関連しない（45–64歳 13.7、65–74歳 16.6、75歳以上 13.0/1000人工呼吸日）。男性は独立危険因子。</li><li>寄与死亡：全死因死亡は最大50%と報告されるが、VAPがどれだけ死に寄与するかは推定法で大きく違う。フランス4479例の競合リスク解析では 30日 約1%・60日 約1.5%。58のVAP予防RCTの集計から <strong>9%</strong>。24試験6284例の個別患者データメタ解析では <strong>13%</strong>（外科系ICUと入室時中等度重症度＝APACHE II 20–29 / SAPS II 35–58 で高く、外傷・内科系・重症度が低いか高い群ではほぼゼロ）。</li><li><strong>起因菌</strong>：グラム陰性は緑膿菌・大腸菌・肺炎桿菌・Acinetobacter属、グラム陽性は<strong>黄色ブドウ球菌</strong>。早期発症（入院4日以内）は正常口腔咽頭細菌叢、晩期発症（5日以降）とMDRリスク保有例はMDR菌が多い。ただし早期発症でもMDR菌は分離されうる（とくに直近90日の抗菌薬曝露）。</li><li><strong>真菌・ウイルス</strong>：<strong>真菌がVAPを起こすことは稀</strong>。Candida は人工呼吸患者の最大27%の下気道に定着するが、起因菌としての直接的役割を支持するデータはない（213例の前向き評価で、68.5%に気管定着がありながら細菌性VAPとの関連なし）。HSV気管支肺炎の組織学的証拠は呼吸状態が悪化した人工呼吸患者の最大21%、CMV再活性化は重症患者の20〜30%。</li><li><strong>診断</strong>：臨床所見・バイオマーカー・スコアのいずれも単独でVAPを診断できるだけの精度はない。CPISは診断に推奨されない。胸部X線は<strong>感度も特異度もない</strong>。CTはより感度が高いが搬送の安全性と実行可能性が壁。肺エコーの感度・特異度データは不足。CRP・プロカルシトニン・sTREM-1 はいずれも精度不足で診断には推奨されない。</li><li><strong>検体採取</strong>：侵襲的定量培養と非侵襲的採取を比較した5つのRCTのメタ解析で患者アウトカムに差はなかった。IDSA/ATS 2016 は半定量培養での非侵襲的採取を提案（弱い推奨・低い質）、ERS/ESICM/ESCMID/ALAT 2017 は抗菌薬投与前の遠位定量検体を提案（弱い推奨）し、<strong>下気道検体を採ること自体は強い推奨</strong>。</li><li><strong>サーベイランス</strong>：CDCは肺炎に限らない呼吸状態悪化を広く捉える VAE（ventilator-associated events） を導入したが、VAE定義が従来の定義より正確（あるいは不正確）だと示すデータはない。</li><li><strong>予防</strong>：Table 2 の要約は、テーパー型カフとポリウレタンカフは<strong>無効</strong>、自動カフ圧監視は下げるかもしれない（研究不足）、声門下吸引は下げるかもしれない（ただし人工呼吸期間・ICU滞在・VAE・死亡は動かさない）、クロルヘキシジン口腔ケアは不明かつ死亡を増やす可能性、SDD/SODは下げる可能性が高い、プロバイオティクスは不明、ストレス潰瘍予防はVAPを増やすかもしれない、バンドルは下げる可能性が高い。</li><li><strong>治療</strong>：早期発症かつMDRリスクなしなら<strong>単剤</strong>（AMPC/CVA または非抗緑膿菌性第3世代セフェム）。それ以外は抗緑膿菌βラクタム＋非βラクタム抗緑膿菌薬の2剤。抗MRSA薬はMRSA保菌例、またはそのユニットのVAP由来MRSA比率が20%超に限る。感受性判明後は単剤に落とせる（緑膿菌などの非発酵菌でも）。</li><li><strong>期間</strong>：欧米ガイドラインとも<strong>7日を超えないこと</strong>を推奨。非発酵グラム陰性桿菌でも同じ。免疫不全・膿胸・肺膿瘍・壊死性肺炎はより長期。7日未満への短縮は現時点で推奨されないが、プロカルシトニン動態で個別化して7日未満で終えた報告はある。</li><li><strong>吸入抗菌薬</strong>：静注の代替としても、有効な静注に上乗せする補助療法としても<strong>推奨されない</strong>。XDRグラム陰性菌でコリスチンかアミノグリコシドにしか感受性がない症例に限定する。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — VAPという病態と「診断が曖昧なまま治療が始まる」構造（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む VAP（ventilator-associated pneumonia、人工呼吸器関連肺炎） とは、本論文の定義では「48時間以上の侵襲的人工呼吸に曝露された患者に生じた肺実質の感染」で、ICU獲得肺炎の一部である。</p>
+<p><strong>なぜ起きるか</strong>：気管チューブのカフは気道を完全には塞げない。口腔・咽頭の分泌物がカフの襞を伝って気管へ落ちる（<strong>微量誤嚥</strong>）。加えてチューブが咳と粘液線毛クリアランスを殺すため、落ちた菌が排出されない。だから予防策の多くは「カフより上に溜まった分泌物をどうにかする」（声門下吸引・カフ形状・カフ圧・体位）か、「そもそも菌を減らす」（口腔ケア・SDD）か、「チューブを早く抜く」に分かれる。</p>
+<p><strong>この領域が難しい理由</strong>：VAPには <strong>参照基準（gold standard）が無い</strong>。本文はここを繰り返し強調する。臨床所見（発熱・白血球増加・膿性痰・酸素化悪化）は肺水腫・肺挫傷・肺胞出血・粘液栓・無気肺・肺塞栓でも起きる。胸部X線は感度も特異度も無い。肺生検すら、病変分布が不均一で病理医の判定もばらつくため決定的でない。つまり「VAPである」と確定できないまま抗菌薬が始まるのがこの疾患の常態である。</p>
+<p><strong>初出用語の一言定義</strong></p>
+<ul><li><strong>CPIS（Clinical Pulmonary Infection Score）</strong>：Pugin らが提唱した6項目（体温・血中白血球・気管分泌物の性状・酸素化・X線浸潤影・気管吸引液のグラム染色付き半定量培養）のスコア。<strong>6点超</strong>でVAPのリスクありとされる。</li><li><strong>BAL（bronchoalveolar lavage、気管支肺胞洗浄）</strong>：気管支鏡を目的の区域気管支に楔入させ生食を注入・回収する。狙いは肺胞腔。</li><li><strong>PSB（protected specimen brush、保護検体ブラシ）</strong>：先端が保護されたブラシで、近位気道の汚染を避けて末梢の検体を採る。</li><li><strong>mini-BAL（blind mini-BAL）</strong>：気管支鏡を使わず、プラグ付きテレスコピックカテーテルを盲目的に進めて洗浄する。本文は「先端位置が確認できないため必ずしも遠位ではなく、非侵襲的と分類されるが<strong>出血・気胸は起こりうる</strong>」と注意している。</li><li><strong>ETA（endotracheal aspirate、気管吸引痰）</strong>：気管チューブから吸引カテーテルで痰を引く。最も簡便な近位検体。</li><li>MDR（multidrug resistant、多剤耐性）／XDR（extensively drug-resistant、広範囲薬剤耐性）。</li><li><strong>ESBL（extended-spectrum β-lactamase、基質特異性拡張型βラクタマーゼ）</strong>：第3・第4世代セフェムを分解する酵素。</li><li><strong>VAE（ventilator-associated events）</strong>：CDCが導入した監視上の概念。肺炎に限らず、人工呼吸中の呼吸状態悪化全般を捉える。電子カルテデータから自動判定できるように設計されている。</li><li><strong>IVAC（infection-related ventilator-associated complication）</strong>：VAEのうち感染に関連する可能性のあるサブカテゴリ。</li></ul>
+</div>
+<h3>2. この論文が何であって何でないか（方法にあたる部分）📐</h3>
+<ul><li><strong>デザイン</strong>：<strong>ナラティブレビュー</strong>。系統的検索式・組み入れ除外基準・データ抽出・バイアス評価・PRISMA フロー・登録番号のいずれも記載がない。エビデンスの重みづけは著者の裁量による。</li><li><strong>範囲</strong>：疫学・診断・予防・治療の4本柱。Introduction で「人工呼吸器関連気管気管支炎（VAT）などの他の病態は詳述しない」と明示的に範囲外を宣言している。</li><li><strong>図表</strong>：Figure 4枚（Fig 1・2 は症例の画像、Fig 3・4 は概念図）、Table 3枚（Table 1 ガイドライン比較、Table 2 予防策の要約、Table 3 経験的治療）。</li><li><strong>引用</strong>：163件。</li><li>本文中に「Take-home message」ボックスが1つ置かれている（890ページ）。内容は「微生物学的確認を強く推奨」「早期発症でMDRリスクがなく耐性率の低い環境で治療される患者を除き、大多数の患者の初期治療には併用療法が推奨される」「培養結果が出たら単剤へ de-escalation し、計7日治療する」。</li></ul>
+<div class="call note"><span class="lab">補足</span>
+<p>このレビューの読み方 本論文はナラティブレビューであり、系統的レビューでもガイドラインでもない。Table 2 の「May lower rates／Likely lowers／Unclear／No impact」という4段階の判定は、GRADE でもエビデンスレベルでもなく、著者（主に Klompas）の総合判断である。院内プロトコルの根拠として引用するときは、この判定そのものではなく、Table 2 が引く原典（Cochrane・メタ解析・個々のRCT）に当たること。</p>
+</div>
+<h3>3. 疫学 — 発生率はなぜ 5〜40% も振れるのか 📊</h3>
+<p><strong>報告値の幅</strong>：2日を超えて侵襲的人工呼吸を受けた患者の <strong>5〜40%</strong>。国・ICUの種類・使う基準によって大きく変わる。</p>
+<div class="tw"><table>
+<thead><tr><th>集計元</th><th>発生率</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>北米の病院</td><td>1〜2.5件/1000人工呼吸日</td><td>報告値としては最も低い部類</td></tr>
+<tr><td>EU-VAP/CAP 研究（欧州）</td><td>18.3件/1000人工呼吸日</td><td>発生密度</td></tr>
+<tr><td>低中所得国 vs 高所得国</td><td>18.5 vs 9.0件/1000人工呼吸日（P = .035）</td><td>低中所得国で有意に高い</td></tr>
+<tr><td>がん患者</td><td>24.5件/1000人工呼吸日</td><td></td></tr>
+<tr><td>外傷患者</td><td>17.8%（511例の1シリーズ）</td><td>免疫機能の変化・脳損傷による誤嚥・肺挫傷で説明</td></tr>
+<tr><td>ARDS 患者</td><td>29%</td><td>肺保護戦略下でもこの高さ</td></tr>
+<tr><td>ECMO 装着中の ARDS 患者</td><td>35%</td><td></td></tr>
+<tr><td>MPSMS（米・2005–2013、65歳以上の選択集団）</td><td>約10%（研究期間を通じてほぼ横ばい）</td><td>急性心筋梗塞・心不全・肺炎・主要手術が主病名</td></tr>
+</tbody></table></div>
+<p><strong>この幅の意味</strong>：本文は、この巨大な差が「少なくとも部分的には、定義の違い・定義の適用の仕方の違い・あらゆる定義が抱える診断上の限界・微生物学的採取法の違いによって説明される」と書く。つまり<strong>発生率の差の一部は本当の差ではなく測定の差</strong>である。</p>
+<p><strong>CDC NHSN の減少報告とその反証</strong>：NHSNは過去15年で内科系・外科系ICUとも VAP 発生率が大きく減ったと報告した。しかし安定した定義を用いた MPSMS の解析（2005–2013）はこれを確認できなかった。本文はこの食い違いを「サーベイランス基準の適用の仕方が変動している可能性」と読み、<strong>より客観的な監視指標を使うべき根拠</strong>とする。</p>
+<p><strong>発症のタイミング</strong>：日々のVAP発症リスクは<strong>人工呼吸5〜9日目にピーク</strong>。一方で累積発生率は総人工呼吸期間と密接に関連する。この2つは別物であり、混同すると予防策の効果を読み違える。</p>
+<p><strong>年齢と性別</strong>：欧州コホートの二次解析では 45–64歳 13.7、65–74歳 16.6、75歳以上 13.0 件/1000人工呼吸日で、ロジスティック回帰でも高齢者の高リスクは同定できなかった。対して男性は独立危険因子として一般に認識されている。本文は「最も重要な危険因子はおそらく<strong>基礎疾患・併存症・重症度そのもの</strong>」と結論する。</p>
+<h3>4. 転帰 — 「VAPで死ぬ」のか「死ぬ人がVAPになる」のか ⚖️</h3>
+<p><strong>全死因死亡は最大50%</strong>と報告されてきたが、VAPがどれだけ死に寄与するかには依然として相当の論争がある。一方で人工呼吸期間とICU滞在の延長との関連は一貫している。</p>
+<p><strong>なぜ推定が難しいか</strong>（本文の説明）：VAP発症リスクは人工呼吸期間を通じて一定ではなく最初の10日で高い。そのためICU死亡とICU退室が競合エンドポイントとして働くバイアスが生じる（最も重症の患者は早期死亡で在室期間が極端に短くなりうる）。だから多状態モデル・競合リスクモデルが必要になる。</p>
+<div class="tw"><table>
+<thead><tr><th>推定法</th><th>対象</th><th>寄与死亡の推定値</th></tr></thead>
+<tbody>
+<tr><td>競合リスク生存解析（ICU退室を競合リスクとする）</td><td>フランスのICU 4479例</td><td>30日 約1%、60日 約1.5%</td></tr>
+<tr><td>58のVAP予防RCTの集計データ</td><td>—</td><td>9%</td></tr>
+<tr><td>24のVAP予防試験の個別患者データメタ解析</td><td>6284例</td><td>13%（外科系ICU、入室時 APACHE II 20–29 / SAPS II 35–58 で高い。外傷・内科系・重症度が低いか高い群ではほぼゼロ）</td></tr>
+<tr><td>ARDS患者の粗死亡率</td><td>—</td><td>VAPあり 41.8% vs なし 30.7%（P = 0.05）。交絡調整後はICU死亡と関連せず、同じ危険因子を調整した多状態アプローチでも細菌性VAPの発生はICU死亡リスクと関連しなかった</td></tr>
+</tbody></table></div>
+<p><strong>同方向の報告</strong>：がん患者、外傷性脳損傷患者でも VAP は死亡と関連しなかった。</p>
+<p><strong>耐性菌の影響</strong>：耐性菌がVAPの死亡率を上げる可能性はあるが、<strong>これも論争中</strong>と本文は書く。</p>
+<p><strong>本文の結論</strong>：「VAPは人工呼吸期間とICU滞在の延長に関連するが、死亡は主として患者の基礎疾患と重症度によって規定される」。</p>
+<h3>5. 起因菌 — 早期／晩期の二分法はどこまで使えるか 🦠</h3>
+<p><strong>変動要因</strong>：人工呼吸期間、VAP発症前の在院・ICU滞在期間、抗菌薬曝露のタイミングと累積量、その施設の細菌叢、そのICUで起きている流行現象。</p>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>主な菌</th></tr></thead>
+<tbody>
+<tr><td>グラム陰性</td><td>緑膿菌、大腸菌、肺炎桿菌、Acinetobacter 属</td></tr>
+<tr><td>グラム陽性</td><td>黄色ブドウ球菌（主要なグラム陽性菌）</td></tr>
+</tbody></table></div>
+<p><strong>早期／晩期の枠組みと、その揺らぎ</strong></p>
+<ul><li>一般に、<strong>早期発症VAP（入院4日以内）</strong>で、それまで健康で抗菌薬を受けていない患者では、通常の口腔咽頭細菌叢が原因になる。</li><li><strong>晩期発症VAP（入院5日以降）</strong>とMDRリスク保有例ではMDR菌が原因になりやすい。</li><li>しかし本文は同じ段落で、<strong>早期発症でもMDR菌は分離されうる</strong>（とくに直近90日の抗菌薬曝露がある場合）、さらに早期と晩期でMDR菌の頻度が同等だったという報告が複数ある、と明記している。二分法は出発点にすぎない。</li></ul>
+<p><strong>MDR菌のリスク因子</strong>（本文の列挙）</p>
+<ol><li>直近90日以内の抗菌薬治療</li><li>入院期間 5日超</li><li>VAP発症時の敗血症性ショック</li><li>VAP発症前のARDS</li><li>VAP発症前の急性腎代替療法</li><li>MDR菌の既往（保菌または感染）</li><li>その施設・その環境における病原体の耐性率が高い（&gt;25%） — 経験的治療の節で列挙されるが、Table 3 の脚注と Figure 3 のキャプションのリストからは<strong>落ちている</strong>（後述の内的不整合）</li><li>欧州ガイドライン（ERS/ESICM/ESCMID/ALAT 2017）が追加を求めた項目：局所のMDR菌高頻度、直近の長期入院（5日超）、MDR菌の既往定着</li></ol>
+<p><strong>耐性の現況（本文の記載）</strong></p>
+<ul><li>Enterobacteriaceae における ESBL および AmpC βラクタマーゼによる第3・第4世代セフェム耐性が<strong>大きな懸念</strong>。</li><li>カルバペネマーゼ産生株の拡大も懸念が増している。</li><li>MDR 緑膿菌の増加。</li><li>VAPを起こす Acinetobacter baumannii 株の 1/2 から 2/3 が現在カルバペネム耐性。</li><li>XDR菌に対するコリスチン使用の増加に伴い<strong>コリスチン耐性が増加</strong>。</li><li><strong>複数菌によるVAP</strong>があり、治療方針を複雑にする。</li></ul>
+<p><strong>真菌</strong></p>
+<ul><li><strong>真菌がVAPを起こすことは稀</strong>。呼吸器検体から最も多く分離される酵母は Candida 属。</li><li>Candida 属による下気道の定着は<strong>人工呼吸患者の最大27%</strong>に及び、細菌性VAP（とくに緑膿菌）のリスク増加と関連しうる。</li><li>ただし本文は「利用可能なデータは Candida 属が VAP の起因菌であるという直接的な役割を支持しない」と明確に否定する。多臓器不全 213例の前向き評価では、146例（68.5%）に Candida の気管定着があったが細菌性VAPとの関連は認められなかった。</li><li>Aspergillus 属（主に A. fumigatus）は一部の晩期発症VAPに関与しうる。とくに<strong>直近のインフルエンザ既往</strong>がある患者。培養陽性の意義を評価し治療の是非を判断する臨床アルゴリズムが提案されている。</li></ul>
+<p><strong>ウイルス</strong></p>
+<ul><li>インフルエンザ、RSV などの呼吸器ウイルスがVAPの原因になりうる。</li><li><strong>HSV</strong>：呼吸状態が悪化した人工呼吸患者の<strong>最大21%</strong>に HSV 気管支肺炎の組織学的証拠が報告されている。</li><li><strong>CMV</strong>：<strong>重症患者の20〜30%で再活性化</strong>が観察され、とくに多臓器不全と長期ICU滞在例。BAL細菌培養陰性で臨床的悪化が続くARDS患者で組織学的にCMV肺炎が証明された報告がある。</li></ul>
+<h3>6. 診断① — 臨床診断とCPIS 🩺</h3>
+<p><strong>VAP診断の伝統的定義</strong>：①臨床的疑い ②新規・進行性かつ持続する画像上の浸潤影 ③下気道検体の培養陽性 の3つが同時に揃うこと。</p>
+<p><strong>臨床的疑いの限界</strong>：発熱・白血球増加・酸素化低下などVAPを疑う基準は多数あるが、<strong>単独でも組み合わせでもVAPを診断するには不十分</strong>。</p>
+<p><strong>CPIS の扱い</strong></p>
+<ul><li>Pugin らの原記載は6変数（体温、血中白血球、気管分泌物の性状、酸素化、X線浸潤影、気管吸引液のグラム染色付き半定量培養）。<strong>6点超</strong>でVAPのリスクありとされる。</li><li><strong>抗菌薬をいつ止めるか</strong>にCPISを使った1つのランダム化研究では、固定期間で投与する臨床戦略に比べて<strong>抗菌薬消費が減った</strong>。</li><li><strong>抗菌薬をいつ始めるか</strong>にCPISを使うと、<strong>特異度が低いため不当な抗菌薬使用につながりうる</strong>（とくに下気道検体を培養に出す戦略と比べて）。</li><li>したがって最近のガイドラインは VAP の診断に CPIS を推奨していない。</li></ul>
+<p><strong>本文が提示する「疑う基準」</strong>：次のうち<strong>少なくとも2つ</strong>があればVAPを疑う。</p>
+<ol><li>新規の発熱</li><li>膿性の気管内分泌物</li><li>白血球増加または白血球減少</li><li>分時換気量の増加</li><li>酸素化の悪化</li><li>血圧維持のための昇圧薬必要量の増加</li></ol>
+<p><strong>しかしこれらもVAPに特異的ではない</strong>。本文が挙げる鑑別（VAPを模倣する病態）：肺水腫、肺挫傷、肺胞出血、粘液栓、無気肺、血栓塞栓症 など。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">本レビューは、VAPの臨床診断・CPIS・定量培養のいずれについても、<strong>感度・特異度の数値をひとつも示していない</strong></mark>。「不十分」「特異度が低い」「感度も特異度もない」という定性的な記述だけである。感度・特異度で議論したい場合は、この論文ではなく Fernando SM ら（*Intensive Care Med*. 2020;46:1170-1179）などの系統的レビューに当たる必要がある。</p>
+</div>
+<h3>7. 診断② — 画像は何をしてくれないか 🖼️</h3>
+<p><strong>胸部X線</strong>：ほぼ全てのVAP定義が画像基準（新規・進行性かつ持続する浸潤影）を含むにもかかわらず、<strong>胸部X線はVAPに対して感度も特異度もない</strong>ことがよく知られている、と本文は書く。Figure 1 と Figure 2 が、画像基準が偽陰性になる例と役に立たない例を示す。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. VAPを発症した65歳男性の胸部X線とCT（原図・無改変。© Intensive Care Medicine） 4分割。<strong>左上（a）</strong>は VAP を疑ったその日のポータブル胸部X線で、両側に人工呼吸器回路と心電図リード、右鎖骨下から中心静脈カテーテルが走る。肺野には明らかな浸潤影がなく、一見して正常に見える。左横隔膜下から左下肺野にかけての淡い濃度上昇は心陰影・横隔膜と重なって判別できない。右上（b）と右下（d）は同日のCT（肺野条件・横断像2スライス）で、左下葉に明瞭なコンソリデーションがあり、内部に air bronchogram とみられる分枝状の含気が見える。左背側には少量の胸水と思われる濃度も伴う。右肺は保たれている。<strong>左下（c）</strong>は翌日の胸部X線で、左中下肺野の濃度が明らかに上昇し浸潤影の進行が見える。 <strong>読み方</strong>：BALから 10⁵ Enterobacter aerogenes が検出されており微生物学的には確定している。胸部X線だけで判断していれば、この症例のVAP診断は丸1日遅れていた、というのが原文の主張。左下葉は心陰影と横隔膜に隠れる典型的な死角である。</p>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. H1N1インフルエンザ関連ARDS（"white lungs"）の35歳女性の胸部X線（原図・無改変。© Intensive Care Medicine） 単一のポータブル胸部X線。<strong>両肺がほぼ全面的に白く</strong>、心陰影の輪郭も横隔膜のラインも追えない。気管チューブ、経鼻胃管、中心静脈カテーテルが白い肺野の上を走って見える。 <strong>読み方</strong>：この患者は発熱・白血球増加・膿性気管分泌物を呈し、気管支鏡下BALから <strong>10⁵ 緑膿菌</strong>が検出された。しかし胸部X線は1週間前から全く変わっておらず、VAPを疑うにも診断するにも明らかに役立たない。「新規または進行性の浸潤影」という基準は、すでに真っ白な肺には適用できない。</p>
+</div>
+<p><strong>CT</strong>：より感度が高いので良い代替になりうるが、<strong>実行可能性・搬送中の安全確保・撮影枠の確保</strong>という明白な難点がある。系統的にCTを撮る戦略は現実的でない。</p>
+<p><strong>肺エコー</strong>：VAPの診断補助として最近提案されているが、<strong>感度・特異度のデータが不足している</strong>。</p>
+<p><strong>バイオマーカー</strong>：CRP、プロカルシトニン、sTREM-1 が診断マーカーとして提案されてきたが、<strong>精度を欠き、現時点でVAPの診断には推奨されない</strong>。本文は、ゲノミクス・プロテオミクス・メタボロミクスを用いたトランスレーショナルなアプローチが有用な指標を見つけうる、と将来に言及する。</p>
+<p><strong>本節の結論</strong>：「VAPを診断できるだけの精度を持つ単一の臨床基準・バイオマーカー・スコアは存在しない」。したがって、感染に起因しうる新たな呼吸状態の悪化があれば、新規・進行性の浸潤影の有無にかかわらずVAPを考慮する。疑ったら次のステップは微生物学的検体採取（Figure 3）。</p>
+<h3>8. 診断③ — 検体採取：侵襲的か非侵襲的か 🔬</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. VAPの診断と治療の模式図（原図・無改変。© Intensive Care Medicine） 濃紺と白の3層構造のフロー図。<strong>全ボックスと全ラベルを下の表に起こす</strong>。</p>
+</div>
+<h4>Figure 3 の全要素（原図の全ボックスを書き出し）</h4>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>最上段（濃紺の帯）</td><td>Clinical suspicion of VAP（VAPの臨床的疑い）</td></tr>
+<tr><td>中段・左の分岐</td><td>Endotracheal aspirate — with semiquantitative or quantitative culture（気管吸引痰、半定量または定量培養）</td></tr>
+<tr><td>中段・右の分岐</td><td>Bronchoalveolar lavage — with quantitative culture（気管支肺胞洗浄、定量培養）</td></tr>
+<tr><td>左外側・上の枠（虫めがね「＋」＝利点）</td><td>Cheap（安価）／Tolerance（忍容性）／Easy to perform（実施が容易）／Sensitive（感度が高い）</td></tr>
+<tr><td>左外側・下の枠（虫めがね「−」＝欠点）</td><td>Specificity（特異度）／Antibiotic use（抗菌薬使用）／Only microbiological exams（微生物学的検査しかできない）</td></tr>
+<tr><td>右外側・上の枠（虫めがね「＋」＝利点）</td><td>Specific（特異的）／Less antibiotics（抗菌薬が少なくて済む）／Large sample（検体量が多い）</td></tr>
+<tr><td>右外側・下の枠（虫めがね「−」＝欠点）</td><td>Sensitivity（感度）／Cost（コスト）／Tolerance（忍容性）／Special skills（特別な技能）</td></tr>
+<tr><td>下段（破線で囲まれた治療ブロック）上</td><td>Empirical antibiotic treatment（経験的抗菌薬治療）</td></tr>
+<tr><td>同ブロック・左に分岐する小ボックス</td><td>Consider stopping antibiotics if negative（陰性なら抗菌薬中止を検討）</td></tr>
+<tr><td>同ブロック下</td><td>Definitive antibiotic treatment（確定的抗菌薬治療）</td></tr>
+<tr><td>最下部の楕円</td><td>7 days（7日間）</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3 のキャプション（原文の要旨） 「VAPの臨床的疑い」とは次のうちいくつかが揃うことを指す：発熱、膿性痰、白血球増加、酸素化の障害、原因不明の低血圧またはショック、胸部X線上の新規（または進行する）浸潤影（常に見られるとは限らない）。経験的治療は基礎疾患とその重症度、MDR菌のリスク因子（直近90日の抗菌薬治療、入院5日超、VAP発症時の敗血症性ショック、VAP発症前のARDS、VAP発症前の急性腎代替療法、MDR菌の既往定着）、および局所の感受性パターンを考慮して決める。免疫不全患者、膿胸・肺膿瘍・壊死性肺炎の患者は、より長期の抗菌薬コースを受けるべきである。 <strong>読みどころ</strong>：ETAとBALのどちらを選んでも、その先の「経験的治療 → 陰性なら中止を検討 → 確定治療 → 7日」という道筋は同一に描かれている。採取法の選択ではなく、その後の抗菌薬の動かし方が図の主役になっている。</p>
+</div>
+<p><strong>用語の整理（本文の明示的な定義）</strong></p>
+<ul><li><strong>侵襲的手技</strong>＝遠位かつ気管支鏡でガイドされるもの。<strong>BAL、PSB、肺生検</strong>（肺生検は稀な採取法）。</li><li><strong>盲目的 mini-BAL</strong>（プラグ付きテレスコピックカテーテル、または盲目的PSB）＝非ガイド下の採取で、カテーテル先端の位置が確認できないため必ずしも遠位ではない。「非侵襲的」に分類されるが、<strong>出血と気胸は起こりうる合併症</strong>である。</li></ul>
+<p><strong>侵襲的手技の欠点</strong>（本文の列挙）：①実施できる有資格者が必要（多くの国で集中治療医の必須技能になりつつあるとはいえ）、②患者リスク（<strong>低酸素血症、圧損傷、出血</strong>）、③コスト（とくに使い捨て気管支鏡）。</p>
+<p><strong>侵襲的手技の利点</strong>：気管支鏡下BALと定量培養の組み合わせは、質的な採取法より高い特異度で起因菌をより確実に同定でき、かつ<strong>補助的解析に足る量の回収液</strong>が得られる（細胞診、アルブミン値、ウイルス同定、ガラクトマンナン測定、ARDS患者ではIII型プロコラーゲン）。</p>
+<p><strong>近位採取（ETA）の質的培養の欠点</strong>：<strong>細菌の存在を過大評価</strong>し、不要な抗菌薬使用と耐性の助長につながりうる。ただし気管支鏡より迅速・簡便で、合併症も資源も少ない。</p>
+<p><strong>決定的な比較試験の結果</strong>：侵襲的採取＋定量培養 vs 非侵襲的採取＋定量または半定量培養を比べた5つのランダム化試験のメタ解析で、患者アウトカムに差は認められなかった。</p>
+<p><strong>遠位定量培養を勧める理由（欧州ガイドライン）</strong>：抗菌薬開始後に採取すると結果が変化するか陰性化しうるため、<strong>抗菌薬治療前に遠位定量検体を採ること</strong>。盲目的（非指向性）採取法より特異的でありうるため、グラム染色陽性・培養陽性・敗血症性ショック疑いの患者にだけ抗菌薬を始める運用なら、抗菌薬の過剰使用を減らしうる。</p>
+<p><strong>グラム染色の扱いは論争中</strong>：米国ガイドラインは「呼吸器検体の質の高いグラム染色で菌が多数かつ優勢に見えれば、VAP診断をさらに支持する」とする。しかしグラム染色で菌が見えないことはVAPを確実に除外しないため、培養結果も必ず確認する必要がある。この感度・特異度の限界こそが、迅速診断法（バイオマーカー・迅速な菌同定と感受性測定）を必要とする理由でもある。</p>
+<h4>Table 1. ガイドライン別の微生物学的診断（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>ガイドライン</th><th>臨床疑問</th><th>推奨（強さ・エビデンスの質）</th></tr></thead>
+<tbody>
+<tr><td>IDSA/ATS 2016（米国）</td><td>VAP疑い患者は、侵襲的採取（BAL・PSB・盲目的mini-BAL）＋定量培養、非侵襲的採取（気管吸引）＋定量培養、非侵襲的採取＋半定量培養のどれに基づいて治療すべきか</td><td>非侵襲的採取＋半定量培養でVAPを診断することを提案する。侵襲的採取＋定量培養よりも、また非侵襲的採取＋定量培養よりも（弱い推奨・低い質のエビデンス）</td></tr>
+<tr><td>IDSA/ATS 2016（米国）</td><td>侵襲的定量培養を行った場合、VAP疑い患者で培養結果が診断閾値未満（PSB &lt; 10³ CFU/mL、BAL &lt; 10⁴ CFU/mL）のとき、抗菌薬は継続ではなく中止すべきか</td><td>非侵襲的採取＋半定量培養が診断法として望ましい。ただしパネルは一部の臨床医が侵襲的定量培養を行うことを認識している。侵襲的定量培養が診断閾値未満のVAP疑い患者では、抗菌薬を継続するより中止することを提案する（弱い推奨・非常に低い質のエビデンス）</td></tr>
+<tr><td>ERS/ESICM/ESCMID/ALAT 2017（国際）</td><td>挿管されたVAP疑い患者では、近位定量検体ではなく遠位定量検体を採取すべきか</td><td>（あらゆる抗菌薬治療の前に）遠位定量検体を採取することを提案する。安定したVAP疑い患者の抗菌薬曝露を減らし、結果の正確性を高めるため（弱い推奨・低い質のエビデンス）</td></tr>
+<tr><td>ERS/ESICM/ESCMID/ALAT 2017（国際）</td><td>同上</td><td>下気道検体（遠位定量・近位定量・質的培養のいずれか）を採取することを推奨する。初期経験的抗菌薬治療を絞り込み狭域化するため（強い推奨・低い質のエビデンス）</td></tr>
+</tbody></table></div>
+<div class="call tip"><span class="lab">POINT</span>
+<p>推奨の重みづけ Table 1 の4つの推奨のうち<strong>強い推奨は1つだけ</strong>で、それは「BALかETAか」ではなく「<strong>下気道検体を採れ</strong>」である。採取法の議論に時間を使う前に、当院で「抗菌薬より先に検体」が守られているかを確認する方が効果が大きい。</p>
+</div>
+<p><strong>培養が陰性・閾値未満だったときにどうするか</strong>（本文の実践的指針）</p>
+<ul><li>IDSA/ATS は、<strong>臨床的に安定している限り抗菌薬を差し控える</strong>ことを提案する。抗菌薬関連有害事象（*Clostridium difficile* の出現、耐性化）とコストを減らせる。</li><li>ただし本文は、次の場合には集中治療医が臨床判断でこれを修正すべきだとする：肺感染を強く示唆する他の所見がある／検体採取前に抗菌薬が投与されていた／敗血症性ショックを伴う／免疫不全である／非感染性の悪化原因に対処しても改善しない。</li><li><strong>検体採取前に抗菌薬が入っていた場合</strong>（ガイドラインは推奨しないが実際に起こる）：培養が陰性化しやすい。ここで7日フルコースを回すと不要な曝露と耐性化を招く。著者らの推奨は 48〜72時間で再評価し、経過が良好で感染の可能性が低ければ抗菌薬を中止すること。あるいはプロカルシトニンを使い、48〜72時間の時点で &lt; 0.5 ng/mL、またはピーク値から80%超低下していれば中止する。</li><li>採取時点ですでに48時間超の抗菌薬が投与されていた場合（肺外感染など指示が別にある場合）：微生物学的結果が陰性なら<strong>VAPではないことを示唆する</strong>。したがって<strong>新たな抗菌薬は開始せず</strong>、現在の治療をどうするかは元の適応に基づいて判断する。</li></ul>
+<h3>9. 診断④ — 近未来の微生物学：数時間で起因菌に届くか ⏱️</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. VAP起因菌同定の現在と将来のワークアップ工程（原図・無改変。© Intensive Care Medicine） 左端に上から下へ伸びる時間軸（青のグラデーション矢印）。中央のピンク〜紫の列が「Current workup process（現在の工程）」、水色の列が「Empiric/Definitive treatment（それに基づく治療）」、右端の薄紫が「Potential future workup process（将来の工程）」。<strong>全ボックスを下の表に起こす</strong>。</p>
+</div>
+<h4>Figure 4 の全要素（原図の全ボックス・全数値を書き出し）</h4>
+<div class="tw"><table>
+<thead><tr><th>時間軸</th><th>現在の検査工程</th><th>それに基づく治療</th></tr></thead>
+<tbody>
+<tr><td>（最上段・帯）</td><td>Microbiological sampling（微生物学的検体採取）</td><td>—</td></tr>
+<tr><td>&lt; 1 hour</td><td>Microscopy examination（鏡検）</td><td>Empiric treatment guided by direct examination（直接鏡検に導かれた経験的治療）</td></tr>
+<tr><td>24–36 hrs.</td><td>Culture +/− MALDI-TOF MS（培養±MALDI-TOF質量分析）</td><td>Empiric treatment guided by culture +/− MALDI-TOF MS（培養±MALDI-TOFに導かれた経験的治療）</td></tr>
+<tr><td>24–36 hrs.（培養から分岐）</td><td>Specific, targeted PCR（特定病原体を狙った標的PCR）</td><td>Definitive, targeted treatment（確定的・標的治療）</td></tr>
+<tr><td>48–72 hrs.</td><td>Antimicrobial susceptibility tests（薬剤感受性試験）</td><td>Definitive, targeted treatment（確定的・標的治療）</td></tr>
+<tr><td>将来（右列）</td><td>Multiplex PCR（多項目PCR）</td><td>6 hrs. で Definitive, targeted treatment（確定的・標的治療）</td></tr>
+</tbody></table></div>
+<p><strong>現在の律速</strong>：本文（Figure 4 の本文中の記述）は「従来の微生物学的手法では起因菌の同定と感受性判定に<strong>少なくとも24〜48時間</strong>かかる」と書く。一方 Figure 4 のキャプションは「現時点では48〜72時間かかる」と書いており、本文と図で数字が食い違う（後述の内的不整合）。その間、広域の経験的抗菌薬が投与されることになる。</p>
+<p><strong>標的PCR（すでに使われている）</strong></p>
+<ul><li>細菌DNAを検出するPCRは同定と感受性判定を短縮できるが、<strong>特定の病原体と特定の耐性機序に限られる</strong>（例：黄色ブドウ球菌のメチシリン耐性を検出する *mecA*）。</li><li><strong>緑膿菌の耐性パターンの判定には使えない</strong>、あるいは耐性機序の検出に培養陽性を必要とする、という制約がある。</li><li>それでも、抗MRSA薬を中止・非開始にするといった非常に早期の de-escalation のために多くの施設でルーチンに使われている。</li></ul>
+<p><strong>多項目PCR（近未来）</strong></p>
+<ul><li>新鮮な（気管支鏡下の）検体に直接適用する多項目PCRが開発されている。主要病原体だけを見るものと、選択された耐性機序も見るものがある。</li><li>Unyvero システム（Curetis AG, Holzgerlingen, Germany）の肺炎アプリケーション：臨床検体から20種の細菌と1種の真菌、および<strong>19の耐性マーカー</strong>を直接検査でき、<strong>所要時間4〜5時間</strong>。</li><li>従来法との比較研究での一致率は、病原体同定で 50〜60%、耐性の同定で 70〜75%。</li><li><strong>限界</strong>：<strong>過剰検出のリスク</strong>（生きていない菌のDNAの検出、非病原性の閾値での病原体の検出、非病原性微生物＝侵襲者ではなく定着菌の検出）。</li><li>本文の判断：この種の技術は近い将来VAPの管理に大きな前進をもたらし、<strong>数時間以内に抗菌薬を調整できるようにするだろう</strong>。しかし、技術の幅と感度の改善、および迅速診断が抗菌薬治療の適切性・期間・患者アウトカムを改善するという安全性・有効性の研究が、ルーチン推奨の前に必要である。</li></ul>
+<h3>10. サーベイランス — VAPを「測る」ことの限界と VAE 📋</h3>
+<p><strong>測定の困難</strong>：VAP診断に使う臨床所見は単独でも組み合わせでも感度・特異度を欠く。<strong>肺生検すら決定的でない</strong>（病変分布が不均一で、病理医の解釈もばらつくため）。したがってサーベイランスの定義と実施方法について世界的な合意ができる見込みは極めて低い、と本文は書く。</p>
+<p><strong>なぜ切実か</strong>：とくに米国では、規制当局と立法者が病院のVAP率をベンチマークと診療報酬に組み込むことを検討している。</p>
+<p>VAE（ventilator-associated events）</p>
+<ul><li>CDCが開発した監視戦略。肺炎だけでなく、人工呼吸患者の呼吸状態悪化の複数の原因を包括的に捉えるように設計されている。</li><li>狙いは、①監視をより客観的にすること、②電子的な臨床データを用いた自動サーベイランスを可能にすること。</li><li>定義には、<strong>感染に関連しうるVAEのサブセット</strong>、さらに<strong>とくに肺炎によるものを同定しようとするサブ基準</strong>が含まれる。</li><li>しかし本文は「VAE定義が従来のサーベイランス定義より正確である（あるいは不正確である）ことを示すデータはない」と書く。</li><li>関連数値（治療の節に登場）：「感染関連人工呼吸器関連合併症（IVAC）の63%は、VAPでもなく、記録されたICU感染に起因するものでもなかった」。これは、診断戦略に注力し、真の感染例にだけカルバペネムを使い、感染の可能性が低ければカルバペネムを差し控えるべき根拠として引かれている。</li></ul>
+<p><strong>下気道の監視培養</strong>：VAPを発症した患者でMDR菌の関与を予測し、不要な広域抗菌薬を減らすのに役立ちうるが、この戦略が臨床アウトカムを改善したりコストを下げたりするという明確なデータはない。</p>
+<p><strong>本節の結論</strong>：公衆衛生上の計画と診療報酬のために病院間・国家間で発生率を比較するには、<strong>客観的に適用できる合意された診断基準が必要</strong>である。</p>
+<h3>11. 予防 — 常識が次々に崩れた領域 🛡️</h3>
+<p><strong>本節の書き出し</strong>：「VAPを最もよく予防する方法についての我々の思い込みの多くが、最近になって覆されつつある」。具体的に挙がるのは4点。</p>
+<ol><li>クロルヘキシジンによる口腔ケアとストレス潰瘍予防は有害でありうる</li><li>選択的口腔・消化管除菌（SDD）は、耐性率が高いICUでは有効でないかもしれないという長年の懸念を新しいデータが裏づけた</li><li>声門下吸引は、かつて考えられていたほど人工呼吸期間やICU滞在を短縮しないかもしれない</li><li>早期抜管あるいは低い死亡率と最も一貫して関連する診療は、挿管を避け抜管を早めることで侵襲的人工呼吸への曝露を制限することに集中したものである</li></ol>
+<p><strong>評価軸の提案</strong>：VAPの有無を判定する感度・特異度の高いマーカーが開発されるまでは、予防策の是非を評価する際に<strong>より客観的なアウトカム</strong>を見るべきである。すなわち人工呼吸期間、ICU滞在期間、VAE、抗菌薬使用量、死亡。「VAP率への影響」と「より客観的なアウトカムへの影響」を比べると、驚くような食い違いが出ることがある。その例として本文が挙げるのが、クロルヘキシジン口腔ケアのメタ解析はVAP率を下げる一方で死亡を増やしうるという所見である。</p>
+<h4>個別の予防策（本文の記述）</h4>
+<p><strong>① 気管チューブのカフ形状・材質</strong> テーパー型カフも超薄型ポリウレタンも、従来の円筒型カフやポリ塩化ビニルに比べて、VAP予防でも客観的アウトカムの改善でも優れていなかった。</p>
+<p><strong>② カフ圧の監視</strong></p>
+<ul><li><strong>8時間ごとの用手的カフ圧監視</strong>は、挿管時・明らかなチューブ移動後・カフリーク検出時にだけ測る運用と比べて、単施設研究でVAP予防・在室期間短縮・死亡低下のいずれにも優らなかった。</li><li>自動カフ圧監視の3試験のメタ解析では、自動システムでVAP率が有意に低かった。ただしこの解析は症例数が少なく、異質性が大きく、副次アウトカムの評価が限られるという限界があった。</li></ul>
+<p><strong>③ 声門下吸引</strong></p>
+<ul><li>個々のランダム化試験でもメタ解析でも、<strong>繰り返しVAP率の低下と関連してきた</strong>。</li><li>しかし抜管までの時間、ICU滞在期間、VAEの予防、死亡率のいずれも改善しないように見える。</li><li>より古いメタ解析は抜管までの時間とICU退室への影響を示唆したが、<strong>研究結果の曖昧さと高い異質性による交絡があった</strong>。</li><li>抗菌薬使用量が減ったとする研究が2つ、減らなかったとする研究が1つ。</li></ul>
+<p><strong>④ クロルヘキシジン口腔ケア</strong></p>
+<ul><li>二重盲検ランダム化試験のメタ解析では、クロルヘキシジン口腔ケアとVAP率低下の関連はない。</li><li>より懸念されるのは、一部のメタ解析と観察研究がクロルヘキシジン口腔ケアで死亡率が上がりうると報告していること。機序として、一部の患者が消毒薬を誤嚥し急性肺傷害の引き金になる可能性が挙げられている。</li><li>クラスターランダム化の「脱導入（de-adoption）」研究が進行中で、安全性と有効性をよりよく特徴づけようとしている。</li><li>Table 2 の記載：「Oral care with sterile water preferred（滅菌水による口腔ケアが望ましい）」。</li></ul>
+<p><strong>⑤ 頭部挙上（半坐位）</strong></p>
+<ul><li><strong>VAP予防のために最も広く行われている介入</strong>でありながら、<strong>驚くほど少数のランダム化試験にしか支えられていない</strong>。</li><li><strong>8試験759例のコクランレビュー</strong>では、頭部挙上に割り付けられた患者で<strong>臨床的に疑われたVAPは全体として少なかった</strong>が、微生物学的に確認されたVAPには効果がなく、客観的アウトカムにも効果がなかった。</li></ul>
+<p><strong>⑥ 側臥位トレンデレンブルグ</strong> 重力を使って口腔分泌物を肺から遠ざけるという仮説。最近の研究がこの仮説を確認したが、側臥位トレンデレンブルグに割り付けられた患者で有害事象が多発したため早期中止された。</p>
+<p><strong>⑦ 選択的口腔・消化管除菌（SDD/SOD）</strong></p>
+<ul><li>重症患者領域で死亡率低下と繰り返し関連してきた数少ない予防戦略の一つ。</li><li>オランダで広く実践されているが、他国の医療者は<strong>耐性菌を助長するのではないかという懸念</strong>から導入をためらってきた（とくに耐性菌と抗菌薬使用のベースラインが高いICUで）。</li><li>皮肉なことに、口腔・消化管除菌はむしろ全体の抗菌薬使用量を減らしうる（治療を要する感染症の発生を減らすためと推定される）。</li><li>それでも、耐性率と抗菌薬使用量のベースラインが高いICUで行われた最近のクラスターランダム化試験では、血流感染にも死亡にも有意な影響はなかった。</li></ul>
+<p><strong>⑧ プロバイオティクス</strong> マイクロバイオームを調節し侵襲的病原体の定着を阻害することで患者を守りうる。一部のランダム化試験はVAP率の低下を報告したが、二重盲検研究に限定したメタ解析ではこのシグナルは存在しない。<strong>大規模多施設研究が進行中</strong>。</p>
+<p><strong>⑨ ストレス潰瘍予防</strong></p>
+<ul><li>一部の観察研究と最近のランダム化試験のメタ解析で、<strong>VAP率の上昇と関連</strong>。</li><li>しかしパントプラゾール vs プラセボの大規模ランダム化試験では、両群で肺炎率に差はなかった。</li><li>同試験ではストレス潰瘍予防の消化管出血率への効果は比較的控えめ（2.5% vs 4.2%）で、<strong>輸血必要量にも死亡率にも影響しなかった</strong>。<strong>追加の大規模ランダム化試験が進行中</strong>。</li></ul>
+<p>⑩ 人工呼吸曝露そのものを減らす（本文が最も評価する群） 客観的アウトカムの改善と最も一貫して関連してきた予防診療は、<strong>挿管を避け侵襲的人工呼吸への曝露を最小化すること</strong>に集中したものである。具体的には：挿管の代替としての高流量酸素または非侵襲的換気、鎮静を浅くすること、自発呼吸トライアルによる早期抜管の促進、早期離床。</p>
+<ul><li>これらは<strong>相乗的</strong>である（鎮静の最小化が離床と早期抜管を促す）。</li><li><strong>医療の質改善コラボラティブの観察研究</strong>では、これらをバンドル化することが<strong>より早い抜管とより低い死亡率</strong>に関連すると報告されている。</li><li>ただし観察研究にはバイアス源が多いため、ランダム化試験での確認が重要であると本文は釘を刺す。</li></ul>
+<h4>Table 2. VAP予防に関する現在の知見の要約（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>介入</th><th>VAP率への推定される影響</th><th>コメント（原表のまま）</th></tr></thead>
+<tbody>
+<tr><td>頭部挙上</td><td>下げるかもしれない</td><td>研究が不足。ランダム化試験は少なく矛盾している</td></tr>
+<tr><td>テーパー型気管チューブカフ・超薄型ポリウレタン</td><td>影響なし</td><td>設計上の理論的利点にもかかわらず、生体内研究では無症候性誤嚥が高率に持続することが記録されている</td></tr>
+<tr><td>自動カフ圧監視</td><td>下げるかもしれない</td><td>研究が不足。さらなる評価に値する</td></tr>
+<tr><td>声門下吸引</td><td>下げるかもしれない</td><td>広範に研究されているが、VAP率が下がるにもかかわらず人工呼吸期間・ICU滞在・VAE・死亡には影響しない。抗菌薬使用量への影響は不明確</td></tr>
+<tr><td>クロルヘキシジン口腔ケア</td><td>不明</td><td>広範に研究されている。個々の研究の大半は陰性。非盲検研究のメタ解析はVAP率低下を示唆するが、二重盲検研究のメタ解析では影響なし。死亡率を上げる可能性がある。滅菌水による口腔ケアが望ましい</td></tr>
+<tr><td>選択的口腔・消化管除菌（SDD/SOD）</td><td>下げる可能性が高い</td><td>広範に研究されている。オランダの研究では抗菌薬の正味使用量が少なく死亡率も低い。耐性率と抗菌薬使用量のベースラインが高いユニットでは死亡への影響なし</td></tr>
+<tr><td>プロバイオティクス</td><td>不明</td><td>研究は多いが大半が限られた質で、結果もまちまち。メタ解析ではVAP率が低いが、二重盲検研究に限定するとシグナルなし</td></tr>
+<tr><td>ストレス潰瘍予防</td><td>上げるかもしれない</td><td>観察研究と一部のメタ解析はVAP率の上昇を示唆するが、最近の大規模ランダム化試験では影響なし</td></tr>
+<tr><td>VAP予防バンドル</td><td>下げる可能性が高い</td><td>広範に研究されているが、ほぼ例外なく前後比較と時系列解析による。死亡率の低下と関連しうる。利益の大半はおそらく鎮静の最小化と早期抜管の促進から来る</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">Table 2 で「VAP率を下げる」と書かれていても、それが患者の利益を意味しない列が複数ある</mark>。声門下吸引はVAP率を下げるが人工呼吸期間・ICU滞在・VAE・死亡を1つも動かさない。クロルヘキシジンはVAP率が不明なうえ死亡を増やしうる。「VAP率が下がった」を成果として報告するときは、必ず客観的アウトカムを並べて示すこと。</p>
+</div>
+<h3>12. 治療① — 経験的治療の組み立て 💊</h3>
+<p><strong>治療のジレンマ</strong>（本文の枠組み）：一方に不適切な初期抗菌薬治療は死亡増加と関連するという事実があり、他方に広域抗菌薬の消費は細菌耐性の増加と関連するという事実がある。したがってVAP治療は<strong>2段階のプロセス</strong>であるべき。第1段階＝経験的治療（選択と即時性は疾患の重症度＝死亡リスクとMDR菌のリスク因子に規定される）、第2段階＝確定的治療（抗菌薬の過剰使用を避けることに努める）。</p>
+<p><strong>経験的治療で考慮すべき4つのパラメータ</strong></p>
+<ol><li><strong>現在の疾患の重症度</strong></li><li><strong>基礎疾患の種類・数とその重症度</strong></li><li><strong>MDR菌のリスク因子</strong></li><li><strong>局所の抗菌薬感受性パターン</strong></li></ol>
+<p><strong>MDR菌のリスク因子（この節での列挙）</strong>：<strong>局所の病原体耐性率が高い（&gt;25%）</strong>／直近90日の抗菌薬治療／入院5日超／VAP発症時の敗血症性ショック／VAP発症前のARDS／VAP発症前の急性腎代替療法／MDR菌の既往定着。</p>
+<p><strong>単剤でよい場合</strong>：非免疫抑制患者で、早期発症VAPかつ上記のMDRリスク因子がない場合は、狭域抗菌薬（非抗緑膿菌性の第3世代セフェム）による単剤療法が使える。本文はここで「この状況は IDSA/ATS ガイドラインには言及されていない」と注記する（欧州ガイドライン由来）。</p>
+<p><strong>それ以外の場合</strong>：初期経験的治療は、緑膿菌および/またはESBL産生 Enterobacteriaceae を標的とする広域βラクタム（セフタジジム、セフェピム、ピペラシリン・タゾバクタム、またはカルバペネム）に、<strong>非βラクタムの抗緑膿菌薬</strong>（アミノグリコシド＝アミカシンまたはトブラマイシン、あるいはフルオロキノロン＝シプロフロキサシンまたはレボフロキサシン）を加える。</p>
+<p><strong>βラクタムの選び方</strong>：過去に使用した抗菌薬、局所の感受性パターン、患者のMDR菌保菌状況を考慮する。例として、ESBL産生 Enterobacteriaceae の保菌者にはカルバペネムを優先すべき。理由は、ESBL保菌者でカルバペネムが過剰処方されているのは事実だが、これらの患者のVAPエピソードの 7〜10% が ESBL産生 Enterobacteriaceae によるものであり、経験的治療でこの病原体を考慮しないのは難しいから。</p>
+<ul><li>同時に本文は、IVACの63%はVAPでも記録されたICU感染でもなかったというデータを引き、診断戦略に努力を集中し、真の感染例にだけカルバペネムを使い、感染の可能性が低いときはカルバペネムを差し控えるべきだと述べる。</li></ul>
+<p><strong>新規βラクタム薬の位置づけ</strong>：セフタジジム・アビバクタム、セフトロザン・タゾバクタム、メロペネム・バボルバクタム、イミペネム・レレバクタムの経験的治療での使用は、カルバペネム耐性 Enterobacteriaceae や、これらの薬剤にしか感受性のない XDR 緑膿菌などのMDR/XDR菌を保菌している患者に限定すべきである。</p>
+<p>抗MRSA薬をいつ使うか（本文が最も踏み込んで書いた箇所）</p>
+<div class="tw"><table>
+<thead><tr><th>立場</th><th>閾値</th></tr></thead>
+<tbody>
+<tr><td>IDSA/ATS（本文では「2017年」と記載。Table 1 では「2016年」）</td><td>直近90日に抗菌薬を受けた患者、または VAP患者におけるMRSA有病率が高い（&gt;20%）か不明なユニットに入院中の患者で、経験的MRSAカバーを推奨</td></tr>
+<tr><td>欧州ガイドライン（ERS/ESICM/ESCMID/ALAT 2017）</td><td>そのユニットの黄色ブドウ球菌呼吸器分離株の 25% 超がMRSAならMRSAカバーを検討すべき</td></tr>
+<tr><td>本レビュー著者らの推奨</td><td>抗MRSA薬の経験的使用は、そのユニットの「VAPの起因菌としてのMRSA」の発生率が高い（&gt;20%）場合、またはすでにMRSAを保菌している患者に限定すべき</td></tr>
+</tbody></table></div>
+<p><strong>著者らがこの限定を主張する根拠となる数字</strong>：米国で行われた最近の研究では、MRSA有病率が20%超の病院における院内肺炎（VAPに限らない）3562例のうち、呼吸器検体でMRSAが発育したのはわずか5%だった。つまりVAPに特異的なMRSA有病率ではなく病院全体の有病率を使うと、潜在的に95%が過剰治療になりうる。さらに、<strong>MRSA VAPの有病率が低い国も複数ある</strong>。</p>
+<h4>Table 3. VAPに対する推奨される初期経験的抗菌薬治療（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>薬剤クラス</th><th>具体的薬剤と用量</th></tr></thead>
+<tbody>
+<tr><td>早期VAP（5日未満）、MDR菌リスク因子なし ※IDSA/ATSガイドラインにはこの状況と該当薬剤の記載がない</td><td>非抗緑膿菌性βラクタム または 第3世代セフェム</td><td>アモキシシリン/クラブラン酸（文献[65]による） または 第3世代セフェム</td></tr>
+<tr><td>晩期VAP（5日以上） または MDR菌のリスク因子あり</td><td>緑膿菌に活性のあるβラクタム かつ 非βラクタムの抗緑膿菌薬</td><td>【βラクタム】セフェピム 2 g 8時間ごと / セフタジジム 2 g 8時間ごと / ピペラシリン・タゾバクタム 4 g 6時間ごと / メロペネム 2 g 8時間ごと のいずれか　／　【非βラクタム】アミカシン 25 mg/kg/日 または シプロフロキサシン 1200 mg/日</td></tr>
+<tr><td>MRSA保菌が判明、またはそのユニットのMRSA有病率が高い（&gt;20%）</td><td>MRSAに活性のある薬剤</td><td>バンコマイシン 30–45 mg/kg/日 または リネゾリド 600 mg 12時間ごと</td></tr>
+<tr><td>カルバペネム耐性 Enterobacteriaceae、または新規βラクタム薬にしか感受性のない緑膿菌の保菌が判明 ※これらの薬剤の経験的使用は、事前の感受性試験でその病原体が感受性であることが示された保菌患者に限定すべき</td><td>新規βラクタム薬</td><td>セフトロザン・タゾバクタム 3 g 8時間ごと / セフタジジム・アビバクタム 2.5 g 8時間ごと / メロペネム・バボルバクタム 4 g 8時間ごと / イミペネム・レレバクタム 1.5 g 6時間ごと のいずれか</td></tr>
+</tbody></table></div>
+<p><strong>Table 3 の脚注に記載されたMDRリスク因子</strong>：直近90日の抗菌薬治療、入院5日超、VAP発症時の敗血症性ショック、VAP発症前のARDS、VAP発症前の急性腎代替療法、MDR菌の既往定着。（本文にある「局所の耐性率&gt;25%」はこの脚注に含まれない）</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">Table 3 は「AND」と「OR」の構造がすべてである</mark>。晩期VAP／MDRリスクありの行は「抗緑膿菌βラクタムを1剤（4択）＋非βラクタム抗緑膿菌薬を1剤（2択）」であって、「メロペネム＋アミカシン、またはセフタジジム、またはシプロフロキサシン」ではない。旧版のこのノートはこの構造を崩して記載していた。</p>
+</div>
+<h3>13. 治療② — 起因菌が判明したあと（de-escalation）🎯</h3>
+<p><strong>目標は抗菌薬の過剰使用を避けること</strong>。本文が挙げる手順は4段階。</p>
+<ol><li><strong>病原体が検出されなければ抗菌薬を中止する</strong>。本文は「VAPが疑われたエピソードの多くは実際にはVAPではない」と書く。</li><li>細菌学的に証明されたVAPでは、培養と感受性の結果が出た時点で狭域化する。具体的には：</li></ol>
+<ul><li><strong>MRSAが検出されなければ抗MRSA薬を中止する</strong></li><li>カルバペネムは「カルバペネムにしか感受性がない病原体」に限定する（ESBL産生 Enterobacteriaceae 感染、カルバペネムにのみ感受性の緑膿菌や Acinetobacter 属）</li><li><strong>感受性株に感染している患者には狭域薬を使う</strong></li></ul>
+<ol><li>ESBL産生 Enterobacteriaceae によるVAPでピペラシリン・タゾバクタムに感受性がある場合：カルバペネムの代替としてピペラシリン・タゾバクタムを使うことを議論してよい（<strong>Merino試験の結果には異論がありうるため</strong>、と本文は書く）。一方、新規βラクタム薬（セフトロザン・タゾバクタム、セフタジジム・アビバクタム）をカルバペネム温存薬として位置づけられるかは<strong>まだ決まっていない</strong>。カルバペネムと比べた耐性出現への影響が不明だからである。これらは治療困難なMDR/XDR菌に対する最後の手段として温存すべき。</li><li><strong>感受性が判明したら単剤に切り替えて安全である</strong>。<strong>緑膿菌のような非発酵グラム陰性桿菌でも同じ</strong>。本文の理由づけ：「併用療法の有用性は主として治療が適切である確率を上げることにあり、患者の予後を改善することにはない」。したがって経過が順調な緑膿菌VAPでは、感受性判明後の二重抗緑膿菌カバーは避けるべきである。</li></ol>
+<h3>14. 治療③ — 期間は7日 📆</h3>
+<ul><li>欧州・米国のガイドラインとも、VAPに対する抗菌薬治療期間は大多数の患者で7日を超えるべきでないと推奨する。非発酵グラム陰性桿菌（緑膿菌、Acinetobacter 属など）に感染した患者も含む。</li><li><strong>より長期が適切なのは</strong>：<strong>免疫不全患者</strong>、および膿胸・肺膿瘍・壊死性肺炎の患者にはおそらく必要。</li><li><strong>7日未満への短縮は現時点で推奨されていない</strong>。ただし、プロカルシトニン動態に基づいて治療期間を個別化し、この戦略で一部の患者を7日未満で治療できたことを示した著者らもいる。</li></ul>
+<h3>15. 吸入抗菌薬（ネブライゼーション）💨</h3>
+<ul><li>近年増えているが、この治療を受けるべき理想的な候補が明確に定義されていない。</li><li>現時点で、吸入抗菌薬は静注経路の代替として推奨できない。理由は3つ：①この適応に関するデータが不足している、②<strong>VAP患者の10〜20%は同時に菌血症を伴う</strong>、③1日に複数回・反復してネブライゼーションを行うと人工呼吸期間が延びうる。</li><li>有効な静注治療に上乗せする補助療法としての使用も推奨されない。<strong>2つの最近のランダム化比較試験</strong>が、「従来の病原体」によるVAP患者において吸入抗菌薬（アミカシン単独、またはホスホマイシンとの併用）のプラセボに対する優越性を示すことに失敗した。</li><li>したがって吸入抗菌薬の使用は、コリスチンまたはアミノグリコシドにしか感受性のないXDRグラム陰性菌によるVAP患者に限定すべきである。</li><li><strong>3つのメタ解析</strong>が、そのような病原体に感染した患者では吸入コリスチンと静注コリスチンの併用が静注コリスチン単独より良好な転帰をもたらしたことを見出している。</li><li><strong>吸入抗菌薬が細菌耐性の出現を減らしうるか</strong>（人工呼吸器関連気管気管支炎の患者で行われた2つの研究が示唆）は<strong>未決定</strong>である。</li></ul>
+<h3>16. 将来の治療 — 病原体特異的抗体 🧬</h3>
+<ul><li><strong>病原体特異的抗体</strong>の補助療法または予防的治療としての使用が研究中。</li><li><strong>Aerucin（Aridis®）</strong>：緑膿菌の細胞接着に関与するアルギン酸エキソ多糖に結合するIgGモノクローナル抗体。緑膿菌によるHAP/VAP患者において、標準抗菌薬への補助療法としての安全性と有効性を評価する第2相・プラセボ対照・二重盲検試験（NCT00851435）が最近実施されたが、結果はまだ得られていない。</li><li>黄色ブドウ球菌または緑膿菌の特異的病原因子を中和・阻害する抗体の有用性を評価した研究がある。狙いは、これらの病原体を保菌している患者でVAPを発症するリスクを減らすこと。</li><li>緑膿菌の病原因子を標的とした第2相試験では、<strong>この病原体による感染率が低下する傾向</strong>が示された。</li><li><strong>SAATELITE 試験</strong>（黄色ブドウ球菌の病原因子に対する抗体）では、<strong>黄色ブドウ球菌肺炎の発生率が低下する傾向</strong>が示された。</li><li>本文の評価：この戦略は治療的というより予防的であり、抗菌薬の補助としての有用性は今後の評価が必要。</li></ul>
+<h3>17. ウイルス再活性化は治療すべきか 🦠</h3>
+<p><strong>本文の答え：「この問いに決定的な答えはない」</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>内容</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>PTH試験</td><td>HSVの口腔咽頭再活性化を呈する患者へのアシクロビル</td><td>人工呼吸器非装着日数（ventilator-free days）を変えなかった。ただし同じ研究で、アシクロビル群で死亡率が有意に近い水準まで低下したことが報告されている（本文は "intriguingly" と表現）</td></tr>
+<tr><td>抗ウイルス予防（バルガンシクロビルまたはバラシクロビル）</td><td>124例のランダム化研究</td><td>血中の再活性化を減らすことができた。ただしバラシクロビル群は28日死亡率が高かったため、明確な説明のないまま早期中止された</td></tr>
+<tr><td>ガンシクロビル予防</td><td>CMV血清陽性の重症成人</td><td>血漿インターロイキン6値を低下させなかった。ただしガンシクロビル群はITT集団でも敗血症サブグループでも人工呼吸器非装着日数が多かった</td></tr>
+</tbody></table></div>
+<p><strong>本文の結論</strong>：ウイルス再活性化の正確な臨床的帰結と、それをどう管理すべきかを評価するには<strong>さらなる研究が必要</strong>。</p>
+<h3>18. VAT・VAE と本レビューの関係（何が書かれていないか）📭</h3>
+<div class="call note"><span class="lab">補足</span>
+<p>本文に無いことの明示 課題として整理を求められた「VAPとVAT（人工呼吸器関連気管気管支炎）の区別」について、本レビューは Introduction で「人工呼吸器関連気管気管支炎などの他の病態は詳述しない」と明示的に範囲外を宣言している。VATの診断基準（発熱・膿性痰・培養陽性があるが画像上の新規浸潤影がない、といった一般的な定義）も、VATを治療すべきかどうかの議論も、<strong>本文には一切書かれていない</strong>。VATが登場するのは次の2箇所だけである。</p>
+<ol><li>Introduction の「詳述しない」という除外宣言</li><li>吸入抗菌薬の節で、「吸入抗菌薬が細菌耐性の出現を減らしうるかは、<strong>VAT患者で行われた2つの研究</strong>が示唆しているが未決定」という引用</li></ol>
+<p>VAE/IVAC についても、本文が書いているのは概念（肺炎に限らない呼吸状態悪化を捉える／自動サーベイランスを可能にする設計／感染関連のサブカテゴリとサブ基準がある）と、「VAE定義が従来定義より正確だと示すデータはない」という評価、そして「IVACの63%はVAPでも記録されたICU感染でもなかった」という数字だけである。VAC → IVAC → PVAP という段階構造や、FiO₂ ≥ 0.20 上昇 / PEEP ≥ 3 cmH₂O 上昇が2暦日持続、といった具体的な判定基準は本文に存在しない。</p>
+<p><strong>以下は論文本文ではなく一般的な背景知識</strong>（区別のために分離して記す）：VAT は一般に「VAPと同じ臨床所見があるが胸部画像に新規浸潤影がない」状態として扱われ、VAPへの前段階と見る立場と独立した病態と見る立場がある。CDCのVAEは VAC（人工呼吸器関連状態）→ IVAC（感染関連合併症）→ PVAP（可能性のある人工呼吸器関連肺炎）の3層構造をとる。これらはいずれも本論文の記述ではないので、本論文を根拠に引用してはならない。</p>
+</div>
+<h2>🔍 PDFとの照合で見つかった旧記述の誤り</h2>
+<p>改稿前のこのノート（43行・Evernote由来）を原著PDFと1行ずつ突き合わせた結果、次の食い違いが見つかった。<strong>PDFを正とし、食い違いを残す</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧ノートの記述</th><th>原著PDFの記述</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「頭部挙上、自動カフ圧計、カフ上吸引、クロルヘキシジンによる口腔ケアなどを組み合わせたバンドルは予後を改善させるかもしれない」</td><td>Table 2：クロルヘキシジン口腔ケアは VAP率への影響が「不明」、二重盲検研究のメタ解析では影響なし、死亡率を上げる可能性があり、滅菌水による口腔ケアが望ましい。またバンドルの利益は「大半がおそらく鎮静の最小化と早期抜管の促進から来る」</td><td>誤り。有害でありうる介入を、有効なバンドルの構成要素として並べていた</td></tr>
+<tr><td>2</td><td>「自動カフ圧計…を組み合わせたバンドルは」</td><td>Table 2：自動カフ圧監視は「下げるかもしれない／研究が不足、さらなる評価に値する」。8時間ごとの用手監視は単施設研究で無効。3試験のメタ解析は有意だが症例数少・異質性大・副次評価の限界あり</td><td>不正確。不確実性の記載が完全に落ちていた</td></tr>
+<tr><td>3</td><td>「死亡率は約10%で、外科系ICUや入院時に中等度の重症度スコアの症例ではより高い」</td><td>「寄与死亡（attributable mortality）が約10%」。全死因死亡は最大50%と報告される。推定値は競合リスク解析で30日約1%・60日約1.5%／58RCTの集計で9%／IPDメタ解析（6284例）で13%と大きく開く</td><td>不正確。「死亡率」と「寄与死亡」は別物。かつ本文が並記する 1%〜13% の幅が落ちていた</td></tr>
+<tr><td>4</td><td>「晩期（≧5日）または多剤耐性リスクありなら CFPM or PIPC/TAZ or MEPM＋AMK or CAZ or CPFX」</td><td>Table 3：「緑膿菌に活性のあるβラクタム（CFPM 2g q8h / CAZ 2g q8h / PIPC-TAZ 4g q6h / MEPM 2g q8h のいずれか）AND 非βラクタム抗緑膿菌薬（AMK 25 mg/kg/日 or CPFX 1200 mg/日）」</td><td>誤り。ANDとORの構造が崩れており、「MEPM＋AMK」の1択と読めてしまう。用量もすべて欠落していた</td></tr>
+<tr><td>5</td><td>MDRリスク因子として6項目を列挙</td><td>経験的治療の節では、これに加えて「局所の病原体耐性率が高い（&gt;25%）」が第1項目として挙がる</td><td>欠落（ただし原著の Table 3 脚注と Fig 3 キャプションでもこの項目は落ちている＝原著側の不整合。後述）</td></tr>
+<tr><td>6</td><td>「原文の『MRSA発生率 20%』は前後の記号が欠落しており、閾値の趣旨（20%以上）で記載されていたとみられる」</td><td>閾値は3つに割れている。IDSA/ATS：施設のMRSA有病率 &gt;20% または不明／欧州：S. aureus 呼吸器分離株の &gt;25% がMRSA／著者らの推奨：そのユニットの「VAP起因菌としてのMRSA」が &gt;20%。さらに本文は「MRSA有病率20%超の病院のHAP 3562例中、実際にMRSAが生えたのは5%＝95%が過剰治療になりうる」と施設全体の数字を使うことを明確に批判している</td><td>不十分。校正メモは「閾値20%」で片づけており、本文の最も実践的な主張（分母をVAPに絞れ）が丸ごと落ちていた</td></tr>
+<tr><td>7</td><td>「早期（&lt;5日）…第3世代セフェム」</td><td>本文は「非抗緑膿菌性（non-pseudomonal） の第3世代セフェム」と限定する</td><td>不正確（限定語の欠落）</td></tr>
+<tr><td>8</td><td>「（日本では静注製剤がないため ABPC/SBT）」</td><td>本文にこの記載はない</td><td>本文外の補足。有用な注記だが、論文の主張と区別すべき</td></tr>
+<tr><td>9</td><td>「レントゲンだけでは分かりにくいこともある」</td><td>「胸部X線はVAPに対して感度も特異度もない（neither sensitive nor specific）ことがよく知られている」</td><td>弱め過ぎ。原文の断定を「こともある」に薄めていた</td></tr>
+<tr><td>10</td><td>「治療期間：大多数の症例で7日まで」</td><td>正しい。ただし本文は①非発酵グラム陰性桿菌も含む ②免疫不全・膿胸・肺膿瘍・壊死性肺炎はより長期 ③7日未満への短縮は現時点で推奨されない の3つの留保を付けている</td><td>不完全（留保が落ちていた）</td></tr>
+<tr><td>11</td><td>「予防：人工呼吸への曝露を最小限にし、早期離脱を目指すことが基本」</td><td>正しい。本文はさらに具体策を挙げる：挿管の代替としての高流量酸素・NIV、鎮静を浅くする、自発呼吸トライアル、早期離床</td><td>不完全（本文が最も評価する介入群の中身が無かった）</td></tr>
+<tr><td>12</td><td>VAT・VAE への言及なし</td><td>Introduction で VATは範囲外と明示。VAEは概念のみ記載され「従来定義より正確だとするデータはない」</td><td>欠落。読者がこのレビューにVATの記述を期待して探すのを防ぐ必要がある</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>用語の区別 上記 #1 は「エビデンスが無い」と「否定された／有害の可能性が示された」の取り違えの典型である。旧ノートはクロルヘキシジンを「まだ確認が必要な有効策」の側に置いていたが、原著の位置づけは「二重盲検メタ解析で効果なし、かつ死亡増加の報告がある。滅菌水が望ましい」であり、方向が逆である。同様の区別を次の表にまとめる。</p>
+</div>
+<h4>本レビューにおける「エビデンスが無い」と「否定された」の区別</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>原著の記述の種類</th><th>正確な言い方</th></tr></thead>
+<tbody>
+<tr><td>肺エコーによるVAP診断</td><td>データが不足している（lacking）</td><td>エビデンスが無い</td></tr>
+<tr><td>VAE定義の精度</td><td>従来定義より正確（または不正確）だと示すデータはない</td><td>エビデンスが無い</td></tr>
+<tr><td>下気道の監視培養</td><td>臨床アウトカム改善やコスト低下の明確なデータはない</td><td>エビデンスが無い</td></tr>
+<tr><td>吸入抗菌薬が耐性出現を減らすか</td><td>未決定（remains to be determined）</td><td>エビデンスが無い</td></tr>
+<tr><td>CPISによるVAP診断</td><td>最近のガイドラインは推奨していない（特異度が低いため）</td><td>推奨されないと明言された</td></tr>
+<tr><td>クロルヘキシジン口腔ケア</td><td>二重盲検メタ解析で関連なし。死亡率を上げうる</td><td>効果が否定され、害が示唆された</td></tr>
+<tr><td>テーパー型カフ・ポリウレタンカフ</td><td>従来型に比べ優れていなかった</td><td>試験で否定された</td></tr>
+<tr><td>声門下吸引の客観的アウトカム</td><td>抜管時間・ICU滞在・VAE・死亡を改善しないように見える</td><td>試験で否定された</td></tr>
+<tr><td>高耐性ICUでのSDD</td><td>クラスターRCTで血流感染にも死亡にも有意な影響なし</td><td>試験で否定された</td></tr>
+<tr><td>吸入抗菌薬の補助療法</td><td>2つのRCTで優越性を示せなかった</td><td>試験で否定された</td></tr>
+<tr><td>ストレス潰瘍予防と肺炎</td><td>大規模RCTで両群に差なし</td><td>試験で否定された</td></tr>
+<tr><td>侵襲的 vs 非侵襲的採取</td><td>5RCTのメタ解析で患者アウトカムに差なし</td><td>試験で否定された（差がない）</td></tr>
+</tbody></table></div>
+<h2>🔗 既存ノートとの整合と「その後どうなったか」</h2>
+<p>2020年3月のレビューなので、この6年で更新された点・逆転した点をVault内のノートと突き合わせる。</p>
+<div class="tw"><table>
+<thead><tr><th>2020年レビューの記述</th><th>その後の知見（Vault内のノート）</th><th>更新か逆転か</th></tr></thead>
+<tbody>
+<tr><td>侵襲的採取と非侵襲的採取で患者アウトカムに差はない（5RCTのメタ解析）</td><td>ICM2022（Lasting Legacy）：診断法そのものではなく「陰性なら抗菌薬を止める」と決めているかどうかが転帰を決める。陰性時の中止を義務づけた Fagon 2000 だけが14日死亡低下と関連。精度は Fernando 2020 で ETA 感度75.7%・特異度67.9%、BAL 71.1%・79.6%</td><td>精緻化（結論は同じだが「何が効いているか」が特定された）</td></tr>
+<tr><td>自動カフ圧監視は「下げるかもしれない／研究不足」</td><td>MICROINHALO（ICM2026）：CO₂駆動の自動個別化カフ圧制御＋自動声門下吸引で、臨床診断VAP 12.6% vs 24.4%、細菌学的確定VAP 10.2% vs 19.5% と半減。ただし主要評価項目のDay 3気管内定着は 37% vs 41.5%（p=0.52）で未達、人工呼吸期間・抗菌薬使用・ICU滞在・死亡はすべて不変</td><td>部分的に前進。ただし2020年の警告（VAP率は下がるが客観的アウトカムは動かない）はそのまま生きている</td></tr>
+<tr><td>声門下吸引はVAP率を下げるが、抜管時間・ICU滞在・VAE・死亡を改善しない</td><td>ICM2024（What's New）：声門下吸引付きチューブを「確実に推奨できる5つ」の1つに含める（数日以上の人工呼吸が見込まれる症例）</td><td>評価が食い違う。ICM2024はドイツGL改訂の系統的検索に基づく推奨、2020年は客観的アウトカム重視の判定。「VAP率で推奨するか、客観的アウトカムで推奨するか」という評価軸の違いが実体</td></tr>
+<tr><td>クロルヘキシジン口腔ケアは死亡を増やしうる。滅菌水が望ましい</td><td>ICM2024（What's New）：同旨。ICM2026 のエディトリアルも予防策の評価軸を論点にする</td><td>維持</td></tr>
+<tr><td>側臥位トレンデレンブルグは有害事象で早期中止された</td><td>Gravity-VAP（ICM2017）の詳細：細菌学的VAP 0.5%（1/194）vs 4.0%（8/201）、RR 0.13（95%CI 0.02–1.03）。しかしSAE 6/171 vs 0/194（p=0.01）、うち1例が脳内出血で死亡、1例が腕神経叢損傷で永続障害。適正体位保持は中央値32.7%の時間のみ、93.6%が半坐位へクロスオーバー</td><td>維持（2020年の1文が、原著では極めて重い内容だった）</td></tr>
+<tr><td>SDD/SODは死亡を下げうるが、高耐性ICUでは効果なし</td><td>ICM2026（What's New）：無選択集団へのSDD・吸入アミカシンはVAP率を下げるが死亡・人工呼吸期間・抗菌薬フリー日数を改善しない。一方 ICM2018（ジュネーブ）の前後比較では9項目バンドル＋SODで VAP 24.0 → 3.9件/1000人工呼吸日（−85%）、人工呼吸期間 7.14 → 6.35日、ICU死亡 16.2 → 13.5%</td><td>維持。ICM2018は対照群なしの前後比較であり、2020年レビューが「バンドル研究はほぼ例外なく前後比較」と釘を刺した通りの構図</td></tr>
+<tr><td>ストレス潰瘍予防はVAPを増やすかもしれないが大規模RCTでは差なし</td><td>ICM2024 エディトリアル：PPIは出血を減らすが死亡への効果は重症度で割れる</td><td>継続論点</td></tr>
+<tr><td>多項目PCRは「6時間以内の未来」。一致率は同定 50–60%、耐性 70–75%</td><td>ICM2026（What's New）：20%超の起因菌がパネル非搭載。RCTでは適正治療への到達は速いが患者アウトカムも抗菌薬削減も明確な利益を示せなかった。不安定な患者で培養確認なしに狭域化することへの臨床医の抵抗が背景</td><td>期待が下方修正された。2020年の「近い将来大きな前進」は6年後も実現していない</td></tr>
+<tr><td>治療期間は7日</td><td>ICM2026：およそ7日で安全。D-PRISM（CritCare2024）の実態調査では 5〜7日が最頻、ただし3割が画像所見を肺炎診断に必須と考えていない</td><td>維持（実務にも定着）</td></tr>
+<tr><td>VAP再発について記載なし</td><td>ICM2025（Delphi）：VAP再発の定義に関する欧州エキスパートコンセンサスが成立</td><td>空白が埋まった</td></tr>
+<tr><td>予防的抗菌薬について記載なし</td><td>ANTHARTIC（NEJM2019）＝心停止後の早期VAP予防、Chest2009＝意識障害患者の挿管時セフトリアキソン単回投与。ICM2026 は昏睡患者という高リスクフェノタイプへの標的予防を「VAP減少に加えて抗菌薬曝露減少と人工呼吸期間短縮を示した」と評価</td><td>2020年レビューの欠落。ANTHARTIC は本レビューの前年（2019年）に *NEJM* に出ているが引用されていない</td></tr>
+<tr><td>Candida の定着は起因菌としての役割を支持しない</td><td>呼吸器マイクロバイオーム（ICM2020）／ICM2026：HAPの有無を区別する再現性のある気道マイクロバイオームのシグネチャ（Prevotella・Streptococcus など常在属の枯渇と日和見病原体の増加）と、HAPサブフェノタイプ</td><td>枠組みが変わった（「1菌種の是非」から「群集の破綻」へ）</td></tr>
+<tr><td>インフルエンザ後の Aspergillus が晩期VAPに関与しうる</td><td>CAPA コンセンサス（ICM2021）／CAPA 欧州多施設研究（ICM2021）</td><td>COVID-19で大きく展開した</td></tr>
+</tbody></table></div>
+<h2>🧪 批判的吟味（ジャーナルクラブでの論点）</h2>
+<ol><li><strong>ナラティブレビューであることの帰結</strong>。検索式も組み入れ基準もバイアス評価もない。Table 2 の4段階判定（No impact／May lower／Likely lowers／Unclear）はGRADEでもエビデンスレベルでもなく著者の総合判断であり、その判断過程は再現できない。院内プロトコルの根拠に使うなら、判定ではなく原典に当たる必要がある。</li></ol>
+<ol><li><strong>抄録と本文が矛盾する（寄与死亡）</strong>。抄録と結論は「寄与死亡は約10%」「VAPは死亡増加と関連する」とするが、Outcomes 節の結論は「死亡は主として患者の基礎疾患と重症度によって規定される」であり、引かれた最大規模の競合リスク解析（4479例）は <strong>30日で約1%</strong> を報告している。1% と 13% の間には13倍の開きがあるのに、抄録は「around 10%」とだけ書く。</li></ol>
+<ol><li>Take-home ボックスと Table 3 が矛盾する（併用療法の範囲）。890ページの Take-home ボックスは「<strong>大多数の患者の初期治療には併用療法が推奨される</strong>（早期発症でMDRリスクがなく耐性率の低い環境で治療される患者を除く）」とする。しかし Table 3 と本文は、早期発症・MDRリスクなし・非免疫抑制なら<strong>単剤</strong>であり、しかも本文はこの状況が「IDSA/ATSガイドラインに言及されていない」と注記する。「most patients」がどの分母を指すのかが本文から確定できない。</li></ol>
+<ol><li>起因菌同定に要する時間が本文と図で違う。本文は「従来法では<strong>少なくとも24〜48時間</strong>」、Figure 4 のキャプションは「<strong>現時点では48〜72時間</strong>」。図中の時間軸は 培養＋MALDI-TOF が 24–36時間、感受性試験が 48–72時間。本文の「24〜48時間」だけが浮いている。</li></ol>
+<ol><li><strong>MDRリスク因子のリストが3箇所で一致しない</strong>。本文（経験的治療の節）は「<strong>局所の耐性率&gt;25%</strong>」を含む7項目、Table 3 の脚注は6項目、Figure 3 のキャプションも6項目で、いずれも「局所の耐性率」を欠く。経験的治療の選択に直結する項目が、実際に参照される表と図から落ちている。</li></ol>
+<ol><li><strong>MRSA閾値の分母が本文内で揺れる</strong>。著者らは「そのユニットの『VAP起因菌としての』MRSA発生率 &gt;20%」に限定すべきと主張し、施設全体の有病率を使うことを 95%過剰治療 という数字で批判する。ところが Table 3 の行は「high (&gt;20%) MRSA prevalence in the unit」と書かれており、これは批判した側の表現に戻っている。表だけを見て運用すると著者の主張と逆のことをする。</li></ol>
+<ol><li>Table 2 の1語要約が本文の限定を落としている。頭部挙上は Table 2 で「May lower rates」だが、本文の記述は「臨床的に疑われたVAPは少なかったが、微生物学的に確認されたVAPには効果なし、客観的アウトカムにも効果なし」。「May lower rates」の "rates" が臨床診断ベースであることは表からは読めない。同じ罠は声門下吸引にもある。</li></ol>
+<ol><li><strong>範囲外宣言と実際の引用が食い違う</strong>。Introduction で「VATは詳述しない」と宣言しながら、吸入抗菌薬の節では<strong>VAT患者で行われた2つの研究</strong>を根拠に耐性出現の議論をしている。VATの定義を一度も与えないまま VAT のデータを援用しているため、読者はその2研究の対象がVAPと同じ集団なのか判断できない。</li></ol>
+<ol><li><strong>診断精度の数値が一つもない</strong>。「感度も特異度もない」「不十分」「特異度が低い」といった定性的記述だけで、CPIS・臨床基準・グラム染色・定量培養のいずれについても感度・特異度・尤度比が示されていない。「精度が足りない」を根拠に運用を変えるには、どの程度足りないのかが要る。</li></ol>
+<ol><li><strong>ETAの定量培養の閾値が示されていない</strong>。Table 1 は PSB &lt; 10³ CFU/mL、BAL &lt; 10⁴ CFU/mL を「診断閾値未満」として明記するが、ETA（気管吸引痰）の定量培養の閾値は本文・表のどこにも書かれていない。にもかかわらず Figure 3 は ETA の「半定量または定量培養」を第一分岐に置いている。ETAを選んだ読者は閾値を自分で調べる必要がある。</li></ol>
+<ol><li>COIと本文の主張が接触する箇所がある（開示済みだが読者が知るべき）。吸入抗菌薬の節は「吸入アミカシンはRCTで優越性を示せなかった／推奨できない」と書くが、著者 CEL は Bayer Healthcare から「本研究に関連して（吸入アミカシンのアドバイザリーボード）」報酬を受けていることを明記して開示している。予防の節を担う MK は UpToDate から VAP の記事に対するロイヤルティを受けている。いずれも適切に開示されており隠されていないが、「吸入抗菌薬に否定的」という結論が利害と逆方向である点は、むしろ記述の信頼性を上げる材料として読むべき。</li></ol>
+<ol><li><strong>校正の漏れ</strong>。Outcomes 節に「[18, 27]}」と閉じ波括弧が残っている。また IDSA/ATS ガイドラインを、本文では「<strong>2017 IDSA/ATS guidelines</strong>」、Table 1 では「2016 Clinical Practice Guidelines by IDSA and ATS」と、同じ文献[34]に対して異なる年で呼んでいる。</li></ol>
+<ol><li>予防の節の推奨と、実際に何をするかの間に橋が架かっていない。本文の結論は「挿管を避け・鎮静を浅く・SBTで早く抜き・早期離床する」だが、これらはいずれもVAP予防策としてではなく人工呼吸管理そのものとして評価された介入である。「VAP予防のために何をするか」という問いに対する答えが「VAP予防を目的としない診療をしっかりやれ」になっており、VAP予防バンドルという枠組み自体の存在意義に踏み込みかけて踏みとどまっている。</li></ol>
+<ol><li><strong>地域差の扱いが非対称</strong>。発生率の項では低中所得国が高い（18.5 vs 9.0/1000人工呼吸日）と示すが、治療の項の推奨薬・用量はすべて高所得国の薬剤供給を前提にしている。新規βラクタム4剤の用量が具体的に示される一方、それらが使えない環境での代替は論じられない。</li></ol>
+<h2>📚 主要引用文献一覧（本文の記述と対応するもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>本文での役割</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>VAPの寄与費用 $40,144（95%CI $36,286–$44,220）</td><td>Zimlichman E, Henderson D, Tamir O, et al. *JAMA Intern Med*. 2013（医療関連感染の費用のメタ解析）</td></tr>
+<tr><td>CPISの原記載（6変数・6点超）</td><td>Pugin J, et al.（本文引用[67]）</td></tr>
+<tr><td>IDSA/ATS 2016 ガイドライン（本文では2017年とも表記）</td><td>Kalil AC, Metersky ML, Klompas M, et al. *Clin Infect Dis*. 2016（本文引用[34]）</td></tr>
+<tr><td>ERS/ESICM/ESCMID/ALAT 2017 国際ガイドライン</td><td>Torres A, Niederman MS, Chastre J, et al. *Eur Respir J*. 2017（本文引用[38]）</td></tr>
+<tr><td>侵襲的 vs 非侵襲的採取の5RCTメタ解析（アウトカム差なし）</td><td>本文引用[78, 79]</td></tr>
+<tr><td>寄与死亡 約1%（30日）／1.5%（60日）の競合リスク解析（4479例）</td><td>本文引用[23]</td></tr>
+<tr><td>寄与死亡 9%（58のVAP予防RCTの集計）</td><td>本文引用[25]</td></tr>
+<tr><td>寄与死亡 13%（24試験6284例の個別患者データメタ解析）</td><td>本文引用[26]</td></tr>
+<tr><td>ARDSにおけるVAP（発生率29%、粗死亡 41.8% vs 30.7%、調整後は関連消失）</td><td>本文引用[10]</td></tr>
+<tr><td>ECMO装着中ARDSのVAP 35%</td><td>本文引用[17]</td></tr>
+<tr><td>高齢者でVAPリスクが上がらない欧州コホート二次解析</td><td>本文引用[18]</td></tr>
+<tr><td>Candida 定着と細菌性VAPの関連なし（多臓器不全213例の前向き評価）</td><td>本文引用[48]</td></tr>
+<tr><td>Unyvero 多項目PCR（20菌種＋1真菌＋19耐性マーカー、4〜5時間）</td><td>本文引用[85]</td></tr>
+<tr><td>多項目PCRの一致率（同定50–60%、耐性70–75%）</td><td>本文引用[85–88]</td></tr>
+<tr><td>声門下吸引のメタ解析（VAP率低下・客観的アウトカム不変）</td><td>本文引用[94]</td></tr>
+<tr><td>クロルヘキシジン口腔ケアと死亡増加</td><td>本文引用[99, 100, 111, 112]</td></tr>
+<tr><td>頭部挙上のコクランレビュー（8試験759例）</td><td>本文引用[116]</td></tr>
+<tr><td>側臥位トレンデレンブルグ試験（有害事象で早期中止）</td><td>本文引用[117]（＝ Li Bassi G, et al. Gravity-VAP. *Intensive Care Med*. 2017;43:1572-1584）</td></tr>
+<tr><td>高耐性ICUでのSDDクラスターRCT（血流感染・死亡に影響なし）</td><td>本文引用[93]</td></tr>
+<tr><td>ストレス潰瘍予防の大規模RCT（肺炎率に差なし、出血 2.5% vs 4.2%）</td><td>本文引用[125]（＝ SUP-ICU）</td></tr>
+<tr><td>MRSA有病率20%超の病院のHAP 3562例中MRSA陽性5%</td><td>本文引用[137]</td></tr>
+<tr><td>IVACの63%はVAPでも記録されたICU感染でもなかった</td><td>本文引用[136]</td></tr>
+<tr><td>感受性判明後の単剤化の安全性（非発酵グラム陰性桿菌を含む）</td><td>本文引用[142]</td></tr>
+<tr><td>Merino試験（ESBLに対するピペラシリン・タゾバクタム）</td><td>本文引用[138–141]</td></tr>
+<tr><td>プロカルシトニンによる治療期間の個別化</td><td>本文引用[80, 81, 146]</td></tr>
+<tr><td>吸入アミカシン／アミカシン＋ホスホマイシンの陰性RCT 2本</td><td>本文引用[150, 151]</td></tr>
+<tr><td>吸入コリスチン＋静注コリスチンの3メタ解析</td><td>本文引用[152–154]</td></tr>
+<tr><td>PTH試験（HSV再活性化へのアシクロビル）</td><td>本文引用[160]</td></tr>
+<tr><td>SAATELITE 試験（黄色ブドウ球菌病原因子への抗体）</td><td>本文引用[159]</td></tr>
+<tr><td>Table 2 の元となった予防策の総括</td><td>本文引用[162]</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">VAPは「確定できないまま治療が始まる」疾患である。だから本レビューの実践的な核心は、診断を精密にすることではなく、<strong>始めた抗菌薬をどう畳むか</strong>を先に決めておくことにある</mark>。 <strong>入口</strong>：発熱・膿性痰・白血球増加/減少・分時換気量増加・酸素化悪化・昇圧薬増量のうち<strong>2つ以上</strong>で疑う。浸潤影は入口条件にしない。<mark class="hl">CPISは診断に使わない</mark>。 <strong>検体</strong>：<mark class="hl">強い推奨は「BALかETAか」ではなく「抗菌薬の前に下気道検体を採れ」の1つだけ</mark>。5RCTのメタ解析で採取法によるアウトカム差はない。 <strong>治療</strong>：早期発症でMDRリスクなしなら<strong>非抗緑膿菌性第3世代セフェムの単剤</strong>。それ以外は抗緑膿菌βラクタム1剤＋非βラクタム抗緑膿菌薬1剤。抗MRSA薬は<mark class="hl">施設全体の保有率ではなく、そのユニットのVAP起因菌としてのMRSA比率&gt;20%</mark>で判断する（施設全体の数字だと95%が過剰治療になりうる）。 <strong>畳み方</strong>：48〜72時間で再評価。培養陰性なら中止、感受性が出たら緑膿菌でも単剤へ、<strong>総7日</strong>（免疫不全・膿胸・肺膿瘍・壊死性肺炎は除く）。 <strong>予防</strong>：<mark class="hl">効くのはデバイスでも消毒薬でもなく、「挿管しない・鎮静を浅く・SBTで早く抜く・早く動かす」</mark>。<mark class="hl">クロルヘキシジン口腔ケアは死亡を増やしうるため滅菌水が望ましい</mark>、と原著が明記している。 <strong>測り方</strong>：<mark class="hl"><strong>「VAP率が下がった」を成果として報告しない</strong></mark>。声門下吸引はVAP率を下げても人工呼吸期間・ICU滞在・VAE・死亡を1つも動かさない。客観的アウトカムを必ず並べる。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>人工呼吸48時間超で呼吸状態が悪化した</td><td>発熱・膿性痰・白血球増加/減少・分時換気量増加・酸素化悪化・昇圧薬増量のうち2つ以上あるか</td><td>あればVAPを疑う。新規浸潤影の有無は問わない。無ければ肺水腫・無気肺・粘液栓・肺塞栓を先に潰す</td></tr>
+<tr><td>VAPを疑った</td><td>抗菌薬より先に下気道検体を採れているか</td><td>採れていなければ、まず採る。ETAでもBALでもよい（アウトカムは変わらない）</td></tr>
+<tr><td>検体を採った。経験的治療を選ぶ</td><td>挿管5日未満か。MDRリスク因子（直近90日の抗菌薬・入院5日超・敗血症性ショック・先行ARDS・先行RRT・MDR既往定着・局所耐性率&gt;25%）はあるか</td><td>早期かつリスクゼロかつ非免疫抑制なら非抗緑膿菌性第3世代セフェム単剤。それ以外は抗緑膿菌βラクタム＋非βラクタム抗緑膿菌薬</td></tr>
+<tr><td>抗MRSA薬を足すか迷う</td><td>MRSA保菌があるか。そのユニットのVAP起因菌としてのMRSA比率が20%超か</td><td>どちらも該当しなければ足さない。病院全体の保有率で判断しない</td></tr>
+<tr><td>48〜72時間後</td><td>培養結果と臨床経過</td><td>陰性かつ経過良好なら中止。抗菌薬先行例ではプロカルシトニン &lt; 0.5 ng/mL または ピークから80%超低下でも中止判断に使える</td></tr>
+<tr><td>起因菌と感受性が判明した</td><td>抗MRSA薬・カルバペネムを続ける理由が残っているか</td><td>MRSA陰性なら抗MRSA薬中止。カルバペネムはカルバペネムのみ感受性の菌に限定。緑膿菌でも経過順調なら単剤へ</td></tr>
+<tr><td>いつ止めるか</td><td>免疫不全・膿胸・肺膿瘍・壊死性肺炎のいずれかがあるか</td><td>無ければ7日で終了。あればより長期。7日未満への短縮は推奨されない</td></tr>
+<tr><td>予防策を新しく導入したい</td><td>その介入が動かすのは「VAP率」か「人工呼吸期間・ICU滞在・VAE・抗菌薬使用量・死亡」か</td><td>VAP率しか動かさない介入は、コストと手間に見合うかを別途判断する。まず鎮静・SBT・早期離床の遵守率を見る</td></tr>
+<tr><td>バンドルにクロルヘキシジン口腔ケアが入っている</td><td>滅菌水に置き換えられるか</td><td>原著は滅菌水を望ましいとする。置き換えを検討する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

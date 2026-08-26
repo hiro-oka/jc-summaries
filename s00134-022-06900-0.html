@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>輸液反応性予測の来歴 — 静的指標の敗北から動的テストへ（Lasting Legacy・ICM2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06900-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">輸液反応性予測の来歴 — 静的指標の敗北から動的テストへ（Lasting Legacy・ICM2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Monnet X, Malbrain MLNG, Pinsky MR. The prediction of fluid responsiveness. Intensive Care Med. 2022. doi:10.1007/s00134-022-06900-0</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2022-11-03）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06900-0" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06900-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>The prediction of fluid responsiveness</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06900-0.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06900-0.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06900-0.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「輸液反応性がある」＝「輸液すべき」ではない</strong>。本稿で最も実務的な一文がこれ。陽性テストが輸液につながるのは、<strong>CO が低すぎると判断される場合のみ</strong>で、その判断は臓器機能と組織低酸素のマーカーで行う。ICU の輸液指示の議論で、この2段構えを明文化する価値がある。</li><li>輸液を入れる前に「反応するか」と「耐えられるか」を別々に問う。著者らは Fig. 1C で、反応性（横軸）と耐容性（縦軸）を掛け合わせた <strong>4×4 のリスクマトリクス</strong>を提示している。当院の VExUS・肺エコー・腹腔内圧の評価は、この縦軸（耐容性）の測定として位置づけられる。</li><li><strong>PPV/SVV が使えない条件を暗記して運用に組み込む</strong>：自発呼吸・不整脈・ARDS の低一回換気量・低肺コンプライアンス・腹腔内圧上昇。当院の ARDS 患者はほぼ全例が該当しうるため、<strong>PLR・EEO・ミニ輸液チャレンジを標準の代替</strong>として置く。</li><li><strong>ミニ輸液チャレンジのカットオフは CO ↗5%</strong>（Fig. 1A）で、古典的輸液チャレンジの ↗15% とは別物。<strong>100〜150 mL を入れて 5% 上がるか</strong>を見るので、精度の高い CO 測定（または信頼できる代替指標）が要る。反射的に 300〜500 mL を繰り返さない運用の土台になる。</li><li><strong>PLR は高価な CO モニタなしで実装できる</strong>。著者らはカプノグラフィ（EtCO2）・プレチスモグラフィ・バイオリアクタンス・PPV の変化を侵襲的 CO 測定の代替として挙げている。当院では EtCO2 が最も導入しやすい。</li><li><mark class="hl">輸液反応性は時間とともに変わり、輸液ボーラスの CO への効果は一過性である。1回の PLR で方針を固定せず、頻回に再評価する</mark>。</li><li><strong>導入を提案するときに約束できるのは「輸液量の減少」まで</strong>。敗血症性ショックで前負荷反応性テストを実装すると総輸液バランスが減ることは示されているが、集中治療領域で死亡改善を示した証拠は本稿には示されていない。周術期の GDFT で合併症率が減ったという記述にとどまる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：ショックにおける輸液の目的は CO を上げ、最終的に組織酸素化を改善することである。しかし1980年代の観察で、輸液ボーラスに CO が反応しない患者が <strong>およそ50%</strong> いることが分かっていた。CVP をはじめとする「静的」前負荷指標は、平均すると Frank-Starling 曲線の傾きを示さない。</li><li><strong>Unknown（分かっていなかったこと）</strong>：静的指標が使えないなら、何をベッドサイドで測ればよいのか。個々の動的テストは1990年代末から順次報告されてきたが、それらが「どういう順に」「何を克服するために」登場したのかを一本の系譜として整理した記述は乏しかった。また、反応性が陽性でも輸液すべきでない場面をどう表現するかも定まっていなかった。</li><li><strong>What's new（本稿の新規性・意義）</strong>：① 1831年のコレラ流行から2017年の Vt チャレンジまでを <strong>Fig. 1B の一本の年表</strong>にまとめ、② <strong>Fig. 1A で全7手技の診断閾値を並置</strong>し（「fluid challenge を模倣する群」と「心肺相互作用を使う群」の2系統に分類）、③ Fig. 1C で fluid responsiveness と fluid tolerance を直交する2軸に置いたリスクマトリクスを提示した。個々のテストの新データを出す論文ではなく、<mark class="hl"><strong>分野全体の見取り図</strong></mark>である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 輸液反応性予測は「<strong>輸液は有害であり、かつ一定して有効ではない</strong>」という二重の観察から生まれた。静的前負荷指標（CVP）が敗れたあと、前負荷を一過性に動かして SV の変化を見る<strong>動的テスト</strong>が1987年以降つぎつぎに開発され、いまや反応性だけでなく <strong>fluid tolerance（輸液耐容性）</strong> を並べて判断する段階に入っている。</p>
+</div>
+<ul><li><strong>19世紀のコレラ流行期</strong>、静脈内輸液は「血液を本来の比重に戻し、欠乏した塩類を回復させる」ものとして観察された。ここから、ショックにおける輸液療法の目的は CO を増やし、最終的に組織酸素化を改善することだと明確になった。</li><li><strong>1980年代</strong>、輸液ボーラスの CO への効果を測定した研究者たちは、<strong>おおよそ 50% の患者で CO が変化しない</strong>ことを見出した。これはベッドサイドで観察された生理学的現実であり、CO と前負荷の関係の傾きは、前負荷のレベルと、その前負荷における心室収縮性によって変わる（Frank-Starling 曲線）。1980年代に「輸液を入れる前に反応性を予測する」という概念が生まれた。</li><li>CVP をはじめとする「静的」前負荷指標は、平均すると Frank-Starling 曲線の傾きを示さないことが多数の研究で示された。→ 焦点は「必要としない患者への輸液を避け、必要な患者には積極的に入れる」ことへ移り、前負荷を一過性に操作して1回拍出量（SV）またはその代替指標の変化を見る<strong>動的アプローチ</strong>が採られた。</li><li>陽性の輸液反応性テストは、CO が低すぎると判断される場合にのみ輸液につながるべきである。判断は臓器機能と組織低酸素のマーカーに基づく。輸液投与の決定は、輸液反応性の有無だけでなく、輸液蓄積のリスク＝fluid intolerance にも基づかねばならない。</li><li>輸液投与の究極の目標は CO を上げることではなく組織酸素化を改善することであり、それは輸液反応例でも一定して起こるわけではない。輸液ボーラスの CO への効果は一過性で、輸液反応性は時間とともに変化するため、頻回に再評価すべきである。</li><li><strong>予後</strong>：周術期領域では前負荷反応性に基づく輸液負荷プロトコルが合併症率を減らした。集中治療領域では多因子が予後に影響するため証明はずっと難しいが、敗血症性ショックで前負荷反応性テストを実装すると総輸液バランスが減ることは示されている。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 輸液反応性という考え方の基礎（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む この節は論文本文そのものではなく、本稿を読むための一般的な背景知識である（本文に書かれている範囲は次節以降で明示する）。</p>
+<ul><li><strong>前負荷（cardiac preload）</strong>：心室が拡張末期にどれだけ引き伸ばされているか。心臓が「どれだけ血液を受け取っているか」の指標。</li><li><strong>Frank-Starling 曲線</strong>：横軸に前負荷、縦軸に1回拍出量（stroke volume, SV）を取った曲線。立ち上がりの急な部分（曲線の左側）にいる心臓は、前負荷を足せば SV が増える＝輸液反応性あり。平坦部（右側）にいる心臓は、前負荷を足しても SV がほとんど増えない＝輸液反応性なし。同じ前負荷でも収縮性が落ちていれば曲線は下に寝るので、<strong>「どこにいるか」は前負荷の値だけでは決まらない</strong>。これが「静的指標では傾きが分からない」ことの正体。</li><li><strong>静的指標 vs 動的指標</strong>：CVP・肺動脈楔入圧（PAOP）・拡張末期容積は、ある1時点の前負荷の「高さ」を測る（静的）。これに対し動的テストは、前負荷を<strong>わざと一過性に動かして</strong>、SV がどう応じるかを見る（＝曲線の傾きを直接サンプリングする）。</li><li>心肺相互作用（heart–lung interaction）：陽圧換気の送気で胸腔内圧が上がると、右心系への静脈還流が減り、数拍後に左室の SV が下がる。前負荷反応性のある患者ほどこの呼吸性の揺れが大きい。PPV（脈圧変動）・SVV（1回拍出量変動）はこの揺れの大きさを %で表したもの。</li><li>CO（cardiac output, 心拍出量）＝ SV × 心拍数。多くのテストは SV または CO、あるいはその代替（脈圧・大動脈血流速・EtCO2 など）の変化率で判定する。</li><li><strong>fluid tolerance（輸液耐容性）</strong>：「入れたら反応するか」ではなく「<strong>入れて臓器が耐えられるか</strong>」を問う新しい軸。静脈うっ血（VExUS）・肺水腫・腹腔内圧上昇などが耐容性を下げる。</li></ul>
+</div>
+<h3>2. 出発点 — なぜ「予測」が必要になったのか 🩸</h3>
+<ul><li><strong>19世紀のコレラ流行期</strong>、静脈内輸液は痙攣性コレラの blue stage において「血液を本来の比重に戻し、欠乏した塩類を回復させる」ものとして観察された（文献1：O'Shaughnessy WB, 1832, *Report on the chemical pathology of the malignant cholera*）。ここから、ショックにおける輸液療法の目的は CO を増やし、最終的に組織酸素化を改善することだと明確になった。</li><li><strong>1980年代</strong>、輸液ボーラスの CO への効果を測定した研究者たちは、<strong>CO がおよそ 50% の患者で変化しないまま</strong>であることを見出した（文献2：Calvin JE, Driedger AA, Sibbald WJ. *Surgery* 1981;90:61–76）。</li><li>著者らはこれを「ベッドサイドで観察された生理学的現実」と表現する。すなわち CO と前負荷の関係の傾きは可変であり、前負荷のレベルと、その前負荷における心室収縮性に依存する（Fig. 1A）。</li><li>1980年代に、輸液を注入する前に輸液反応性を予測するという概念が生まれた。</li><li>しかしその後長年、CVP およびその他の心臓前負荷マーカーが輸液ボーラスの判断に使われた（Fig. 1B）。残念ながら、当時もその後も、多くの研究が「これら静的前負荷マーカーは平均すると Frank-Starling 曲線の傾きを示さない」ことを示した（文献3：Marik PE, Cavallazzi R. *Crit Care Med* 2013;41:1774–1781。CVP は輸液反応性を予測するか、という更新版メタ解析）。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 本稿が「静的指標の敗北」として書いている範囲を誤読しない 著者らが否定しているのは <mark class="hl"><strong>「CVP などの静的指標で輸液反応性を予測すること」</strong></mark> であって、CVP という測定値そのものではない。原文は "on average, these static markers of preload do not indicate the slope of the Frank-Starling curve" であり、<strong>傾きの推定に使えない</strong>という限定的な主張である。CVP を後負荷側（静脈うっ血・腎うっ血）の指標として読む使い方は本稿の射程外で、そちらはむしろ Fig. 1C の縦軸（fluid tolerance）に接続する。</p>
+</div>
+<h3>3. 方法（本稿のデザイン）📐</h3>
+<ul><li><strong>デザイン</strong>：Lasting Legacy シリーズの<strong>招待短報レビュー（narrative）</strong>。系統的検索式・選択基準・データ抽出・メタ解析はいずれも行われていない。</li><li><strong>対象</strong>：輸液反応性予測という「概念」そのもの。特定の患者集団を扱っていない。</li><li><strong>構成</strong>：導入（歴史）→ Methods to determine fluid responsiveness（動的テストの系譜）→ Clinical validation（臨床的検証と位置づけ）→ Take-home message ＋ Fig. 1（3パネル）。</li><li><strong>エビデンス基盤</strong>：引用20本。うち原著の一次報告が9本、レビュー・メタ解析が4本、コンセンサス/ポジションペーパーが3本。個々のテストの感度・特異度・AUC・グレー ゾーンは本文中に一切示されていない。</li><li><strong>利益相反</strong>：3著者とも血行動態モニタ企業との関係を開示（XM：Pulsion Medical Systems-Getinge の医学諮問委員、Getinge から研究助成、Getinge・Baxter から講演料。MLNGM：Pulsion・Serenno・Potrero・Sentinel・Baxter の諮問委員、Serenno と Potrero のストックオプション保有、International Fluid Academy 共同創設者・現会長。MRP：NIH・DoD 助成、Baxter Medical と Edwards Lifesciences のコンサルタント）。</li></ul>
+<h3>4. 動的テストの系譜 — Fig. 1B の年表を全項目転記 🗓️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06900-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06900-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1 Panel B. Chronology of the main findings in the field of fluid responsiveness（原図・無改変。©Springer-Verlag GmbH Germany, part of Springer Nature 2022） 左から右へ伸びる1本の横軸に、年号つきの目盛りが立ち、各目盛りから斜め上に説明文が伸びる形式。1831→1981、1981→1987、1987→2000 の3か所に軸の省略記号（二重斜線）が入る。以下に全ラベルを起こす。</p>
+</div>
+<h4>Table 1. Fig. 1B の年表（図中の全ラベルを転記）</h4>
+<div class="tw"><table>
+<thead><tr><th>年（図中の表記）</th><th>図中のラベル（原文）</th><th>日本語</th></tr></thead>
+<tbody>
+<tr><td>1831</td><td>First IV injection of fluid in choleric patients</td><td>コレラ患者への最初の静脈内輸液</td></tr>
+<tr><td>1981</td><td>All patients do not "respond" to a fluid bolus</td><td>すべての患者が輸液ボーラスに「反応する」わけではない</td></tr>
+<tr><td>1987</td><td>Systolic pressure variation detects hypovolaemia</td><td>収縮期圧変動が低容量血症を検出する</td></tr>
+<tr><td>2000</td><td>PPV</td><td>呼吸性脈圧変動</td></tr>
+<tr><td>2001</td><td>SVV</td><td>1回拍出量変動</td></tr>
+<tr><td>2004</td><td>Distensibility of inferior and superior vena cava</td><td>下大静脈および上大静脈の distensibility</td></tr>
+<tr><td>2006</td><td>Passive leg raising test</td><td>受動的下肢挙上テスト</td></tr>
+<tr><td>2009</td><td>End-expiratory occlusion test</td><td>呼気終末閉塞試験</td></tr>
+<tr><td>2011</td><td>Mini-fluid challenge</td><td>ミニ輸液チャレンジ</td></tr>
+<tr><td>2017</td><td>Tidal volume challenge</td><td>一回換気量チャレンジ</td></tr>
+<tr><td>（年号なし・2017 の目盛り付近）</td><td>Sigh manoeuvers</td><td>Sigh（深吸気）手技</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 本文と Fig. 1B で食い違う箇所が2つある（JCの論点になる）</p>
+<ol><li><strong>コレラの年号</strong>：本文は「19世紀のコレラ流行期」とだけ書き、引用文献1は <strong>O'Shaughnessy 1832</strong> である。しかし <mark class="hl"><strong>Fig. 1B は「1831」と印字している</strong></mark>。1年ずれる（報告の実施年と刊行年の違いと思われるが、本稿は説明していない）。</li><li><strong>大静脈の用語</strong>：本文は "changes in the <strong>inferior</strong> vena cava diameter"（2004、文献10・11）と書き、Fig. 1B は "Distensibility of <strong>inferior and superior</strong> vena cava"、Fig. 1A は "Vena cava <strong>collapsibility</strong>" と、<mark class="hl"><strong>3か所で対象血管と指標名が食い違っている</strong></mark>。distensibility（陽圧換気下の拡張性・主に SVC と IVC）と collapsibility（自発呼吸下の虚脱率・主に IVC）は別指標であり、本稿はこれを区別していない。</li></ol>
+</div>
+<h4>本文が語る、各テストが「何を克服したのか」</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>手技</th><th>本文の記述（克服しようとした限界）</th></tr></thead>
+<tbody>
+<tr><td>0</td><td><strong>輸液チャレンジ（fluid challenge）</strong></td><td>「容量反応性を定義する時の試された（time-honored）方法」。<strong>300〜500 mL を急速輸液し、CO が ≥15% 増えるか</strong>を見る。ただし非反応例で繰り返すと<strong>容量蓄積を誘発し、後に除水（fluid removal）が必要になるリスク</strong>を伴う（文献6）。同時期に、<strong>陽性の輸液バランスが独立して死亡を予測する</strong>、とくに敗血症性ショックで、というエビデンスが増えていた（文献7：Vincent JL ら、SOAP study, *Crit Care Med* 2006;34:344–353）</td></tr>
+<tr><td>1</td><td><strong>収縮期動脈圧の呼吸性変動（前史）</strong></td><td>「1滴も輸液せずに輸液反応性を予測できた最初の方法」は心肺相互作用を利用したもの。人工呼吸患者の収縮期動脈圧の呼吸性変動が中心血液量と関係することは示されていた。しかし <mark class="hl"><strong>無呼吸中に ∆up と ∆down の成分を計算する手順には多くの欠点があり、普及しなかった</strong></mark></td></tr>
+<tr><td>2</td><td><strong>PPV（呼吸性脈圧変動）2000</strong></td><td>Michard らが、<strong>調節換気下で PPV（SVV の反映）が輸液反応性を検出する</strong>ことを実証（文献8：*Am J Respir Crit Care Med* 2000;162:134–138）。以後、多数の研究が PPV の妥当性を確認し、他の研究者は SV の各種代替指標を記述して、その呼吸性変動が輸液反応性を予測することを示した</td></tr>
+<tr><td>3</td><td><strong>大静脈径の変化 2004</strong></td><td>下大静脈径の変化が輸液反応性を予測すると報告された（文献10：Barbier C ら *Intensive Care Med* 2004;30:1740–1746／文献11：Feissel M ら *Intensive Care Med* 2004;30:1834–1837）。<strong>残念ながら、上大静脈および下大静脈の distensibility は PPV と多くの限界を共有し、予測価値は限定的</strong>（文献12：Vignon P ら *Am J Respir Crit Care Med* 2017;195:1022–1032）</td></tr>
+<tr><td>4</td><td><strong>PLR（受動的下肢挙上）2006</strong></td><td><strong>PPV の限界を回避するために適用された</strong>。この体位変換は、長年 collapse に陥った患者に用いられてきたもので、<strong>下肢と内臓（splanchnic）領域から一過性に約 300 mL の血液を移動させ、心臓前負荷を増やす</strong>。2006年に前負荷反応性を検出する能力が実証され、<strong>PPV を無効化する条件下でも有効</strong>であることが示された（文献13：Monnet X ら *Crit Care Med* 2006;34:1402–1407）。以後、広く検証されてきた</td></tr>
+<tr><td>5</td><td><strong>EEO（呼気終末閉塞試験）2009</strong></td><td>PPV・SVV に続き、他のテストも「人工呼吸中の心肺相互作用を使う」発想を追求した。すなわち<strong>肺胞内圧を変えることで心臓前負荷を操作し、CO への効果を観察する</strong>。EEO は<strong>送気（insufflation）が引き起こす前負荷低下を一時的に止める</strong>もので、2009年に記述された</td></tr>
+<tr><td>6</td><td><strong>Vt チャレンジ 2017</strong></td><td><strong>Vt を 6 → 8 mL/kg に一過性に増やし、その効果を PPV で評価する</strong>。<strong>低 Vt の場合の PPV の限界を回避するために開発された</strong>（文献15：Myatra SN ら *Crit Care Med* 2017;45:415–421）</td></tr>
+<tr><td>7</td><td><strong>呼吸性収縮期変動テスト／sigh 手技</strong></td><td>いずれも心肺相互作用に基づく（年号は本文に無し。Fig. 1B では sigh manoeuvers に年号が付いていない）</td></tr>
+<tr><td>8</td><td><strong>ミニ輸液チャレンジ 2011</strong></td><td>「古典的」輸液チャレンジによる輸液過剰の可能性を考慮し、Muller らが <strong>100〜150 mL の輸液だけでも容量反応性を予測でき、輸液蓄積のリスクがより小さい</strong>ことを実証（文献16：*Anesthesiology* 2011;115:541–547。原著は「1分間で 100 mL のコロイドを投与後の大動脈血流の増加」）。<strong>すでに合理的に検証されている（reasonably validated）</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 本文の年号と引用文献の年が一致しないところがある 本文は EEO を「<strong>2009年に記述された [14]</strong>」と書くが、<mark class="hl"><strong>その文献14は Gavelli F, Shi R, Teboul JL, Azzolina D, Monnet X. *Ann Intensive Care* 2020;10:65 という系統的レビュー・メタ解析</strong></mark>であり、2009年の原著記述論文ではない。本稿の年表を引用するときは、EEO の一次文献（2009年の原記述）を別途当たる必要がある。同様に、Fig. 1B の「1987 収縮期圧変動」に対応する引用文献は本稿に付されていない。</p>
+</div>
+<h4>PPV の限界（原文が列挙する偽陽性・偽陰性の条件）</h4>
+<p>原文："Spontaneous breathing, arrhythmias, lower tidal volumes (Vt) used in acute respiratory distress syndrome and low pulmonary compliance, increased intra-abdominal pressure generate false positives and negatives [9]"</p>
+<div class="tw"><table>
+<thead><tr><th>条件</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>自発呼吸</td><td>胸腔内圧変化が不規則になり、呼吸性変動が前負荷反応性を反映しなくなる</td></tr>
+<tr><td>不整脈</td><td>拍ごとの SV 変動が呼吸性ではなく不整脈由来になる</td></tr>
+<tr><td>低一回換気量（ARDS で用いる）</td><td>前負荷への揺さぶりが小さすぎ、反応例でも PPV が上がらない（偽陰性）</td></tr>
+<tr><td>低肺コンプライアンス</td><td>気道内圧が胸腔内圧に伝わらず、同じく揺さぶりが不足する</td></tr>
+<tr><td>腹腔内圧上昇</td><td>横隔膜経由の圧伝達が変わり、非反応例でも PPV が上がる（偽陽性）</td></tr>
+</tbody></table></div>
+<p>これらにより、PPV と SVV は循環不全患者の多くで使用不能（unusable）になる、というのが著者らの結論。文献9（Monnet X, Shi R, Teboul JL. *Ann Intensive Care* 2022;12:46）が根拠として引かれている。</p>
+<h3>5. Fig. 1A — 全7手技の診断閾値（原図から全ラベルを復元）🎯</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06900-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06900-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1 Panel A. Tests and indices of preload responsiveness（原図・無改変。©Springer-Verlag GmbH Germany, part of Springer Nature 2022） <strong>原キャプション訳</strong>：前負荷反応性の動的評価の原理は、心臓前負荷の自発的または誘発された変化と、その結果生じる心拍出量・1回拍出量またはその代替指標の変化を観察することである。心肺相互作用を人工呼吸患者で用いるテスト・指標がある一方、古典的な輸液チャレンジを模倣するものもある。<strong>診断閾値と記述年が示されている</strong>。CO＝cardiac output、PPV＝pulse pressure variation。</p>
+<p><strong>図の見え方</strong>：左に Frank-Starling 曲線群（横軸 Cardiac preload、縦軸 Stroke volume）。傾きの異なる<strong>5本の破線曲線</strong>が原点付近から扇状に立ち上がる。横軸上の同じ幅の二重矢印（前負荷の同一の変化量）が、縦軸では急峻な曲線で大きな SV 変化、平坦な曲線で小さな SV 変化を生むことを、縦軸上の2つの二重矢印で示す。赤い吹き出し①「The tests or mechanical ventilation change cardiac preload…（テストまたは人工呼吸が心臓前負荷を変え…）」が横軸側に、赤い吹き出し②「… and the changes in stroke volume or its surrogates are used to detect preload responders（…その1回拍出量またはその代替指標の変化が前負荷反応例の検出に使われる）」が縦軸側に付く。中央から右へ7本の破線が扇状に伸び、各先端にモノクロ青のアイコン（下肢挙上の人、輸液バッグ、動脈圧波形、大静脈エコー、閉塞を含む波形、増大した波形、sigh を含む波形）と、青地白抜きの手技名バー、そしてその右下に<strong>白地の閾値ラベル</strong>が付く。右端で青い角括弧が2群にまとめる。</p>
+</div>
+<h4>Table 2. Fig. 1A の全手技・全閾値（図中ラベルの完全転記）</h4>
+<div class="tw"><table>
+<thead><tr><th>群（右端の括弧）</th><th>手技（図中表記）</th><th>図中の診断閾値（原表記）</th><th>読み方</th></tr></thead>
+<tbody>
+<tr><td>Mimicking a fluid challenge（輸液チャレンジを模倣）</td><td>Passive leg raising test</td><td>↗CO ≥10%</td><td>PLR で CO が 10% 以上増加</td></tr>
+<tr><td>Mimicking a fluid challenge</td><td>Mini-fluid challenge</td><td>↗CO ≥5%</td><td>100〜150 mL 投与後に CO が 5% 以上増加</td></tr>
+<tr><td>Using heart–lung interactions（心肺相互作用を利用）</td><td>Pulse pressure variation</td><td>≥15%</td><td>PPV の値そのものが 15% 以上</td></tr>
+<tr><td>Using heart–lung interactions</td><td>Vena cava collapsibility</td><td>≥15%</td><td>大静脈虚脱率が 15% 以上</td></tr>
+<tr><td>Using heart–lung interactions</td><td>End-expiratory occlusion</td><td>↗CO ≥5%</td><td>呼気終末閉塞で CO が 5% 以上増加</td></tr>
+<tr><td>Using heart–lung interactions</td><td>Tidal volume challenge</td><td>↗PPV ≥1 to 3.5%</td><td>Vt を 6→8 mL/kg にして PPV が 1〜3.5% 以上増加</td></tr>
+<tr><td>Using heart–lung interactions</td><td>Sigh manoeuvre</td><td>↘CO ≥30%</td><td>sigh により CO が 30% 以上<strong>低下</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 図の閾値の読み方には注意が要る（本文に説明が無い）</p>
+<ul><li><strong>矢印の向きが手技ごとに違う</strong>。PLR・ミニ輸液チャレンジ・EEO・Vt チャレンジは「↗（増加）」だが、<mark class="hl">sigh 手技だけは「↘CO ≥30%」＝ CO の低下幅で判定する</mark>。sigh は大きな陽圧で前負荷を強く落とすため、反応例ほど CO が大きく下がるという理屈だが、本文はこの理屈を説明していない。</li><li>PPV と Vena cava collapsibility の「≥15%」には矢印が付いていない。文脈上は「指標の値そのものが15%以上」を意味すると読むのが自然だが、<mark class="hl">本文にはこの2つの閾値の記載が一切なく、図中の表記のみが根拠である</mark>。</li><li>本文中に明示されているのは輸液チャレンジの「CO ≥15% 増」だけで、残り7つの閾値はすべて Fig. 1A にしか出てこない。<strong>閾値の出典文献も図には示されていない</strong>ので、実装時は各テストの一次文献に当たる必要がある。</li><li>図キャプションは「診断閾値と記述年が示されている」と書くが、<strong>Fig. 1A に年号は印字されていない</strong>（年号は Fig. 1B にある）。キャプションと図の内容がずれている。</li></ul>
+</div>
+<h3>6. 臨床的検証と、予測テストの「置き場所」🧪</h3>
+<ul><li>当初の記述・検証段階では、多くのテストと指標は精密な CO 測定を基準に判定された。しかし CO モニタリングは日常的な使用が難しく、高価かつ侵襲的である。</li><li>→ その後の研究は、心肺相互作用テストと PLR 手技のモニタリングに非侵襲的な CO 推定を用いることに焦点を移した。原文が PLR について挙げる代替手段は次の4つ。</li></ul>
+<div class="tw"><table>
+<thead><tr><th>代替モニタ</th><th>何を見るか</th></tr></thead>
+<tbody>
+<tr><td>カプノグラフィ</td><td>呼気終末 CO2（EtCO2）の変化。肺血流＝CO の代替</td></tr>
+<tr><td>プレチスモグラフィ</td><td>パルスオキシメータ波形の変動</td></tr>
+<tr><td>バイオリアクタンス</td><td>胸部電気信号の位相シフトから非侵襲的に SV を推定</td></tr>
+<tr><td>PPV の単純な変化</td><td>動脈ライン波形から直接</td></tr>
+</tbody></table></div>
+<ul><li><strong>輸液反応性予測の「置き場所」も定まった</strong>：<mark class="hl">明らかな体液喪失（obvious fluid losses）がある患者では無用であり、輸液蓄積のリスクがある患者で有用である</mark>。</li><li>陽性の輸液反応性テストは、CO が低すぎると判断される場合にのみ輸液につながるべきである。その判断は臓器機能と組織低酸素のマーカーに基づき、患者の状態に依存する。</li><li>輸液ボーラス投与の決定は、輸液反応性の存在だけでなく、輸液蓄積のリスク＝ fluid intolerance にも基づかねばならない（Fig. 1C）。</li><li>輸液投与の究極の目標は CO を上げることではなく組織酸素化を改善することであり、<strong>それは輸液反応例でさえ一定して起こるわけではない</strong>（文献17：Monnet X ら *Intensive Care Med* 2011;37 Suppl 1:S282）。</li><li><strong>輸液ボーラスの CO への効果は一過性であり</strong>（文献18：Aya HD ら、輸液チャレンジの薬力学解析, *Crit Care Med* 2016;44:880–891）、<strong>輸液反応性は時間とともに変化する</strong>（文献19：Kattan E ら、ANDROMEDA-SHOCK の二次解析, *Crit Care* 2020;24:23）。<strong>したがって頻回に再評価すべきである</strong>。</li></ul>
+<h4>予後への影響（本文の記述をそのまま）</h4>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>本文が示す到達点</th></tr></thead>
+<tbody>
+<tr><td>周術期</td><td>前負荷反応性に基づいて輸液負荷をガイドするプロトコルが<strong>合併症率を減らす</strong>ことが示されている</td></tr>
+<tr><td>集中治療</td><td><strong>証明ははるかに難しい</strong>。多くの因子が予後に影響するため。ただし<strong>敗血症性ショックにおける前負荷反応性テストの実装が総輸液バランスを減らす</strong>ことは示されている（文献9）</td></tr>
+</tbody></table></div>
+<p>死亡率の改善は、周術期・集中治療のいずれについても本稿では主張されていない。</p>
+<h3>7. Fig. 1C — fluid tolerance という第2の軸 ⚖️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06900-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06900-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1 Panel C. Relationship between fluid responsiveness and fluid tolerance and the risk for fluid accumulation（原図・無改変。©Springer-Verlag GmbH Germany, part of Springer Nature 2022） <strong>原キャプション訳</strong>：fluid tolerance は、臓器障害を引き起こすことなく患者が輸液投与に耐えうる程度と定義できる。それは輸液（非）反応性と輸液蓄積の間の連続体を埋め、両者に内在する限界を克服する。蘇生期における輸液の影響について、下流（すなわち臓器灌流）から上流（すなわち静脈うっ血）へと焦点のバランスを移す（文献4）。これにより臨床医は戦略を修正し、より個別化された輸液蘇生および de-resuscitation のアプローチを提供できるようになりうる。</p>
+<p><strong>図の見え方</strong>：<strong>4行×4列の色分けマトリクス</strong>。横軸は左半分が Fluid responsive、右半分が Fluid unresponsive（中央に縦の点線で二分）。縦軸は上半分が Fluid Intolereance（原図のまま。intolerance の綴りが誤植）、下半分が Fluid tolerance（中央に横の点線で二分）。右に「Risk for fluid accumulation（輸液蓄積のリスク）」のカラーバーがあり、上から Very high／Intermediate high／Intermediate／Intermediate low／Very low の5段階が緑〜赤の連続グラデーションに割り当てられている。</p>
+</div>
+<h4>Table 3. Fig. 1C のマトリクス（左上→右下の色配置を転記）</h4>
+<div class="tw"><table>
+<thead><tr><th>縦軸（上ほど耐容性が低い）</th><th>反応性あり・より左</th><th>反応性あり・より右</th><th>反応性なし・より左</th><th>反応性なし・より右</th></tr></thead>
+<tbody>
+<tr><td>Fluid Intolerance（上段）</td><td>黄（Intermediate）</td><td>橙（Intermediate high）</td><td>赤（Very high 寄り）</td><td>濃赤（Very high）</td></tr>
+<tr><td>Fluid Intolerance（下段）</td><td>淡緑（Intermediate low）</td><td>黄（Intermediate）</td><td>橙（Intermediate high）</td><td>赤（Very high 寄り）</td></tr>
+<tr><td>Fluid tolerance（上段）</td><td>中緑（Very low 寄り）</td><td>淡緑（Intermediate low）</td><td>黄（Intermediate）</td><td>橙（Intermediate high）</td></tr>
+<tr><td>Fluid tolerance（下段）</td><td>濃緑（Very low）</td><td>中緑（Very low 寄り）</td><td>淡緑（Intermediate low）</td><td>黄（Intermediate）</td></tr>
+</tbody></table></div>
+<p><strong>読み方</strong>：リスクは左下（反応性あり＋耐容性高い）から右上（反応性なし＋耐容性低い）に向かって対角線状に上がる。同じ「輸液反応性あり」でも、耐容性が低ければリスクは黄〜赤になる。逆に「輸液反応性なし」でも、耐容性が高ければリスクは淡緑にとどまる。<mark class="hl">この図の含意は「反応性の陽性・陰性だけでは輸液蓄積リスクは決まらない」という一点に尽きる</mark>。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>fluid tolerance の位置づけ（本文の記述）</p>
+<ul><li><strong>定義</strong>：臓器障害を起こさずに輸液投与に耐えうる程度。</li><li><strong>役割</strong>：輸液（非）反応性と輸液蓄積の<strong>間の連続体を埋め、両者に内在する限界を克服する</strong>。</li><li><strong>視点の転換</strong>：蘇生期における輸液の影響について、下流（臓器灌流）から上流（静脈うっ血）へ焦点のバランスを移す。</li><li><strong>期待される帰結</strong>：より個別化された輸液蘇生と de-resuscitation。</li><li><strong>出典</strong>：文献4（Kattan E, Castro R, Miralles-Aguiar F, Hernandez G, Rola P. The emerging concept of fluid tolerance: a position paper. *J Crit Care* 2022;71:154070）。本稿は概念の紹介にとどまり、測定法・閾値・検証は扱っていない。</li></ul>
+</div>
+<h3>8. Take-home message（原文の全訳）📜</h3>
+<h2>🔗 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本稿の記述</th><th>Vault内の他ノートとの関係</th></tr></thead>
+<tbody>
+<tr><td>PLR の閾値</td><td>Fig. 1A で ↗CO ≥10%</td><td>PLR 単独ノートと整合。腹腔内圧上昇下では PLR が偽陰性化するという後年の知見は本稿の射程外</td></tr>
+<tr><td>PPV/SVV の限界</td><td>自発呼吸・不整脈・低 Vt・低コンプライアンス・腹腔内圧上昇</td><td>低 Vt 下の比較研究、および PPV/SVV メタ解析への Matters Arising と方向性が一致</td></tr>
+<tr><td>Vt チャレンジ</td><td>6→8 mL/kg、↗PPV ≥1〜3.5%</td><td>人工呼吸器を使った予測のエディトリアルと整合</td></tr>
+<tr><td>PEEP テスト</td><td><mark class="hl"><strong>本稿には登場しない</strong></mark>（2022年時点の系譜に含まれていない）</td><td>PEEP-test の一次研究（2023）は本稿より後。系譜の続きとして読む</td></tr>
+<tr><td>EtCO2 による PLR モニタ</td><td>「カプノグラフィが侵襲的 CO 測定を代替しうる」と一行のみ</td><td>EtCO2 の診断精度メタ解析が数値を補う</td></tr>
+<tr><td>総輸液バランスの減少</td><td>敗血症性ショックで示されている、と記述（文献9経由）</td><td>FRESH trial のノートが一次データを持つ</td></tr>
+<tr><td>輸液効果の一過性</td><td>文献18・19を引いて「一過性」「時間とともに変化」</td><td>FCREV study・晶質液効果の持続時間ノートが一次データを持つ</td></tr>
+<tr><td>fluid tolerance</td><td>Kattan 2022 のポジションペーパーを引いて概念紹介のみ</td><td>ポジションペーパー本体のノートが定義と測定の議論を持つ</td></tr>
+<tr><td>de-resuscitation</td><td>文献6（Malbrain 2022）を引いて「除水が後で必要になる」とだけ</td><td>Deresuscitation 総説のノートが実装を持つ</td></tr>
+</tbody></table></div>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>系統的レビューではない</strong>。Lasting Legacy は招待短報であり、検索式・選択基準・バイアス評価がない。<strong>引用20本の選択は著者の裁量</strong>で、うち5本（文献9・13・15・17・19 のいずれか）は著者自身が関与した論文である。系譜の描き方が著者らの貢献に沿って引かれている可能性を割り引いて読む。</li><li><strong>診断精度が一切示されていない</strong>。感度・特異度・AUC・グレーゾーンの幅がないため、Fig. 1A の閾値だけを見て「どのテストが優れているか」は判断できない。<mark class="hl">閾値の数値だけを抜き出して院内プロトコルに書き写すのは危険</mark>で、必ず各テストの一次文献に当たること。</li><li><strong>年号と引用文献の不整合</strong>（第4節の警告参照）。EEO を「2009年に記述」としながら文献14は2020年のメタ解析。1987年の収縮期圧変動には引用が付かない。年表としての厳密性には難がある。</li><li><strong>本文と図の食い違い</strong>。コレラの年（本文19世紀／文献1832年／図1831年）、大静脈の指標名（inferior のみ／inferior and superior distensibility／collapsibility）、Fig. 1A キャプションが「年が示されている」と書くのに Fig. 1A には年がない、図中の "Fluid Intolereance" の綴り誤り。<strong>査読・組版の詰めが甘い</strong>。</li><li><strong>利益相反が濃い</strong>。3著者とも血行動態モニタ企業（Pulsion-Getinge、Edwards、Baxter 等）と関係があり、うち2名は諮問委員またはストックオプション保有者である。「動的テストを使うべき」という結論が商業的関心と方向を同じくする点は明示的に議論されていない。</li><li><strong>予後の証拠が弱い</strong>。本稿が示せるのは周術期の合併症率減少と、集中治療での総輸液バランス減少まで。<mark class="hl">「輸液反応性を測ると患者が助かる」という主張は本稿のどこにも書かれていない</mark>。導入提案の際にこれを混同しない。</li><li>fluid tolerance の Fig. 1C は概念図であって検証されたリスク層別ではない。4×4 の各マス目の色は著者らの提案であり、実測データに基づく発生率ではない。「反応性なし＋耐容性低い＝濃赤」といった対応は、あくまで教育的な模式である。</li><li><strong>静的指標の扱いがやや粗い</strong>。「CVP は傾きを示さない」は Marik 2013 のメタ解析に依拠するが、そのメタ解析自体に「CVP の絶対値ではなく極端値（極めて低い／極めて高い）には情報がある」という反論が存在する。本稿はこの論争に触れていない。</li><li><strong>自発呼吸患者・体外循環中・小児での適用</strong>が一切扱われていない。本稿の系譜はほぼ「調節換気下の成人」を前提にしている。</li><li>「明らかな体液喪失では予測テストは無用」という主張の閾値が示されていない。どの程度の出血・脱水なら「明らか」なのかは臨床判断に委ねられている。</li></ol>
+<h2>📚 主要引用文献一覧（本稿が引く20本）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>悪性コレラの化学病理学報告（19世紀の静脈内輸液の観察）</td><td>O'Shaughnessy WB. Highley S, London, 1832</td></tr>
+<tr><td>2</td><td>重症患者への急速輸液の血行動態効果（約50%が非反応の原典）</td><td>Calvin JE, Driedger AA, Sibbald WJ. *Surgery* 1981;90:61–76</td></tr>
+<tr><td>3</td><td>CVP は輸液反応性を予測するか — 更新版メタ解析</td><td>Marik PE, Cavallazzi R. *Crit Care Med* 2013;41:1774–1781</td></tr>
+<tr><td>4</td><td>fluid tolerance という新概念（ポジションペーパー）</td><td>Kattan E, Castro R, Miralles-Aguiar F, Hernandez G, Rola P. *J Crit Care* 2022;71:154070</td></tr>
+<tr><td>5</td><td>機能的血行動態モニタリング</td><td>Pinsky MR, Payen D. *Crit Care* 2005;9:566–572</td></tr>
+<tr><td>6</td><td>de-resuscitation について知るべきすべて</td><td>Malbrain M, Martin G, Ostermann M. *Intensive Care Med* 2022. doi:10.1007/s00134-022-06761-7</td></tr>
+<tr><td>7</td><td>欧州ICUの敗血症（SOAP study。陽性輸液バランスが死亡を独立予測）</td><td>Vincent JL ら. *Crit Care Med* 2006;34:344–353</td></tr>
+<tr><td>8</td><td>脈圧の呼吸性変化と輸液反応性（PPV の原典）</td><td>Michard F, Boussat S, Chemla D, Anguel N, Mercat A, Lecarpentier Y, Richard C, Pinsky MR, Teboul JL. *Am J Respir Crit Care Med* 2000;162:134–138</td></tr>
+<tr><td>9</td><td>輸液反応性の予測 — What's new（本稿の主要な二次参照）</td><td>Monnet X, Shi R, Teboul JL. *Ann Intensive Care* 2022;12:46</td></tr>
+<tr><td>10</td><td>IVC 径の呼吸性変化が人工呼吸下敗血症患者の輸液反応性予測に有用</td><td>Barbier C ら. *Intensive Care Med* 2004;30:1740–1746</td></tr>
+<tr><td>11</td><td>IVC 径の呼吸性変動を輸液療法の指針に</td><td>Feissel M, Michard F, Faller JP, Teboul JL. *Intensive Care Med* 2004;30:1834–1837</td></tr>
+<tr><td>12</td><td>人工呼吸患者の輸液反応性予測に用いる心エコー指標の比較</td><td>Vignon P ら. *Am J Respir Crit Care Med* 2017;195:1022–1032</td></tr>
+<tr><td>13</td><td>PLR が重症患者の輸液反応性を予測する（PLR の原典）</td><td>Monnet X, Rienzo M, Osman D, Anguel N, Richard C, Pinsky MR, Teboul JL. *Crit Care Med* 2006;34:1402–1407</td></tr>
+<tr><td>14</td><td>前負荷反応性検出のための EEO — 系統的レビュー・メタ解析（<strong>本文は「2009年の記述」としてこれを引くが、実際には2020年のSR/MA</strong>）</td><td>Gavelli F, Shi R, Teboul JL, Azzolina D, Monnet X. *Ann Intensive Care* 2020;10:65</td></tr>
+<tr><td>15</td><td>Vt チャレンジ後の PPV・SVV の変化が低 Vt 換気中の輸液反応性を確実に予測</td><td>Myatra SN, Prabu NR, Divatia JV, Monnet X, Kulkarni AP, Teboul JL. *Crit Care Med* 2017;45:415–421</td></tr>
+<tr><td>16</td><td>1分間 100 mL のコロイド投与後の大動脈血流増加が輸液反応性を予測（ミニ輸液チャレンジの原典）</td><td>Muller L ら. *Anesthesiology* 2011;115:541–547</td></tr>
+<tr><td>17</td><td>嫌気性代謝マーカーは ScvO2 より組織低酸素の改善検出に優れる</td><td>Monnet X ら. *Intensive Care Med* 2011;37(Suppl 1):S282</td></tr>
+<tr><td>18</td><td>輸液チャレンジの薬力学解析（CO への効果は一過性）</td><td>Aya HD, Ster IC, Fletcher N, Grounds RM, Rhodes A, Cecconi M. *Crit Care Med* 2016;44:880–891</td></tr>
+<tr><td>19</td><td>早期敗血症性ショック蘇生中の輸液反応性の系統的評価（ANDROMEDA-SHOCK 二次解析）</td><td>Kattan E ら. *Crit Care* 2020;24:23</td></tr>
+<tr><td>20</td><td>SSC ガイドラインと個別化医療の均衡</td><td>Vincent JL, Singer M, Einav S ら. *Crit Care* 2021;25:397</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">「輸液反応性がある」は「輸液すべき」ではない。陽性テストが輸液につながるのは CO が低すぎると判断される場合のみで、かつ輸液蓄積のリスク（fluid intolerance）が許すときに限られる。</mark></p>
+<ul><li>1831年のコレラ以来、輸液の目的は一貫して<strong>組織酸素化の改善</strong>であって CO の上昇そのものではない。<mark class="hl">その組織酸素化は、輸液反応例でさえ一定して改善するわけではない</mark>。</li><li>静的指標（CVP）が敗れたのは「値が間違っている」からではなく、<strong>Frank-Starling 曲線の傾きを示さない</strong>から。傾きを知るには前負荷を動かすしかない。</li><li>動的テストは 1987→2000→2001→2004→2006→2009→2011→2017 と、<strong>前のテストの限界を次のテストが埋める形</strong>で発展した。だからどれが最良かではなく、目の前の患者で使える一手はどれかで選ぶ。</li><li>本稿が約束するのは<strong>総輸液バランスの減少</strong>まで。<mark class="hl"><strong>死亡改善は集中治療領域では示されていない</strong></mark>。</li></ul>
+</div>
+<h4>判断の流れ（本稿の記述から構成）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ショックがあり、明らかな体液喪失（大量出血・大量下痢など）がある</td><td>予測テストは本稿の記述では「無用（useless）」</td><td>予測テストを待たず補充する</td></tr>
+<tr><td>明らかな体液喪失はなく、輸液蓄積のリスクがある</td><td>ここが予測テストの適応域</td><td>使える動的テストを選ぶ（下記）</td></tr>
+<tr><td>調節換気・洞調律・Vt 8 mL/kg 以上・肺コンプライアンス良好</td><td>PPV/SVV が使える条件をすべて満たすか</td><td>PPV ≥15% で反応性ありと判定（Fig. 1A）</td></tr>
+<tr><td>自発呼吸・不整脈・低 Vt・低コンプライアンス・腹腔内圧上昇のいずれか</td><td>PPV/SVV は使用不能</td><td>PLR（↗CO ≥10%）／EEO（↗CO ≥5%）／ミニ輸液チャレンジ（↗CO ≥5%）へ</td></tr>
+<tr><td>低 Vt だけが問題で、他は満たす</td><td>Vt を一時的に上げられるか</td><td>Vt チャレンジ（6→8 mL/kg、↗PPV ≥1〜3.5%）</td></tr>
+<tr><td>高価な CO モニタがない</td><td>非侵襲的代替が使えるか</td><td>PLR を EtCO2・プレチスモグラフィ・バイオリアクタンス・PPV 変化でモニタ</td></tr>
+<tr><td>テストが陽性だった</td><td>CO は本当に低すぎるか（臓器機能・組織低酸素マーカー）</td><td>低すぎなければ<strong>輸液しない</strong></td></tr>
+<tr><td>CO も低く、テストも陽性</td><td>輸液蓄積のリスク／fluid tolerance はどうか（Fig. 1C）</td><td>耐容性が低ければ量を絞る。投与後は<strong>頻回に再評価</strong>する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

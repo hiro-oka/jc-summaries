@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>リアルタイム収集データでも動的重症度スコアは機能する — ViSIG 1810例・前向き第1相（CCM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000005931.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">リアルタイム収集データでも動的重症度スコアは機能する — ViSIG 1810例・前向き第1相（CCM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Kramer AA, Krinsley JF, Lissauer M. Prospective Evaluation of a Dynamic Acuity Score for Regularly Assessing a Critically Ill Patient's Risk of Mortality. Crit Care Med. 2023;51(10):1285-1293. doi:10.1097/CCM.0000000000005931</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2023-05-30）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000005931" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000005931</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Prospective Evaluation of a Dynamic Acuity Score for Regularly Assessing a Critically Ill Patient's Risk of Mortality</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000005931.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000005931.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000005931.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>バイタル自動収集（PrimeGaia）× RRS への落とし込み <strong>① 必要なデータ項目は5つだけ。当院のベッドサイドモニタから全部出る</strong> ViSIG が使ったのは 心拍数・呼吸数・平均動脈圧・SpO₂・人工呼吸の有無 のみ。診断名・併存症・検査値は「リアルタイムに抽出できない」という理由で意図的に外している。当院のバイタル自動収集で最初に届く項目とほぼ一致する。まずこの5項目だけで動くものを作る、という設計判断は模倣できる。</p>
+<p><strong>② ただし体温と昇圧薬は落ちる。ここが当院の設計論点</strong> 本研究は「体温の信頼できる情報が取れなかった」「MAPに影響する昇圧薬の情報を集めていない」と限界に明記した。当院では体温は電子カルテ側に、昇圧薬はポンプ／注射オーダに存在する。「モニタから来る波形系」と「カルテから来る投薬・処置系」を最初から結合する設計にしておくかを、実装前に決める必要がある。</p>
+<p><strong>③ 人工呼吸の有無を「呼吸数のタグ」で拾うのは失敗する</strong> 本研究はMV情報を呼吸数HL7メッセージの <code>VENT</code> タグで拾った結果、学術医療センター側（neuro ICU・心臓外科ICUを含む5ユニット）のMV割合が <strong>16.9%</strong> と不自然に低くなり、著者自身が「取りこぼしがあった可能性が高い」と限界に書いている。当院で同じことをやるなら、人工呼吸器そのものからのインターフェースを確保する。タグ推定は精度を静かに壊す。</p>
+<p><strong>④ 欠測と中断の扱いを先に決める</strong> ViSIG の設計は参考になる。10分ごとの中央値を使う（外れ値の影響を無効化）／その10分に値が無ければ「L」という専用の記号を割り当てる（欠測を欠測として符号化する）／生理学的にありえない値（SpO₂ &gt; 100%、呼吸数 = 0）は自動排除／バイタルが6時間以上途切れたらスコアをリセットして最初から立て直す。検査室搬送・手術室出棟のたびに起きる中断をどう扱うかは、当院でも必ず問題になる。</p>
+<p><strong>⑤ 更新頻度は30分。RRSの運用単位として現実的</strong> 10分ごとに文字を作り、3つ（＝30分）をひとまとまりにして点をつけ、直前のスコアとの指数平均で更新する。<strong>30分周期は「回診・巡回で拾える」テンポ</strong>であり、秒単位のアラームとは別物。当院RRSの起動基準（単発の閾値超え）を置き換えるものではなく、「トレンドが悪い患者リスト」を毎朝・毎夕作る道具として位置づけるのが妥当。</p>
+<p><strong>⑥ アラート負荷の試算</strong> 高リスク判定は 1,810入室中 <strong>236例</strong>（13.0%）。6ICUで研究期間（本文の記載が3か月と5か月で食い違う。後述）を3〜5か月とすると 1日あたり約1.6〜2.6件。当院ICU規模ならさらに少ない。<mark class="hl">「鳴る回数」より「鳴ってから死亡・退室までの中央値60時間」のほうが運用設計上は重要</mark>で、これは即応チーム出動ではなく多職種カンファの議題に載せるタイムスケールである。</p>
+<p><strong>⑦ 商用スコアに縛られない道がある</strong> 本文が明示している：「実務上、Visensia Index の代わりに NEWS 2 のような直交する重症度スコアを代入できる」。当院で内製するなら、Visensia（商用）ではなく NEWS2 を6番目の変数に据えればよい。ベンダーロックインを避けられる。</p>
+<p><strong>⑧ 3相設計そのものを導入手順として借りる</strong> 第1相＝生データで精度を確認 → 第2相＝連続症例で較正するが臨床医には見せない → 第3相＝見せて転帰の変化を測る。当院でRRSスコアや急変予測を導入するときの段階管理のひな型として、そのまま使える。特に<strong>第2相（サイレント運用）を飛ばさない</strong>ことが要点。</p>
+<p><strong>⑨ 導入前に必ず自施設で較正を確認する（本論文がやっていないこと）</strong> 本論文は判別（AUROC・感度特異度）しか報告していない。当院はJIPAD関連で「識別能は移植できるが較正は壊れる」という経験を既に持っている（GOSSIS-1の日本検証、サブグループ別再較正、欠測がSMRを押し上げる件）。リスク帯の実死亡率を自施設データで測り直す工程を、導入計画に最初から入れる。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong></li><li>ICU死亡予測アルゴリズムは数十年前からあり、症例構成を調整した施設間ベンチマークには有用だった（APACHE・SAPS など）。</li><li>しかしこれらは<strong>入室後最初の24時間のデータ</strong>に基づくため、そのままでは臨床意思決定支援システム（CDSS）には使えない。</li><li>一般病棟向けの早期警告システム（NEWS、NEWS2、Churpek らのリスク層別化ツール、Rothman Index）は先行して開発されていた。</li><li>ICU向けのCDSSも少数は存在した（DeepSOFA、Moss らの subacute potentially catastrophic illness モデル、EHRリスクスコア）。</li><li>ViSIG の中核である rSIGNIPHY は、後ろ向きデータで低・中・高の3群を作り、ICU死亡 <strong>3.9% / 13.8% / 25.7%</strong> を示していた。ただし感度43%・陽性的中率25%は最適とは言えないと考えられていた。</li><li>Unknown（分かっていなかったこと）</li><li>ICU向けCDSSはいずれも患者がICUを退室した後に得られた後ろ向きデータで評価されてきた。そうしたデータセットは入念にクリーニングされ、注釈が付き、欠測が補完されている。この後処理がモデル性能について過度に楽観的な主張を生んでいる可能性があった。</li><li>「あるがまま（as is）」のライブデータを、ほぼリアルタイムで受け取り、予測を「その場で（on the fly）」生成したときに、同じ性能が出るのか。</li><li>重症患者では生理学的破綻がはるかに重篤なため、ICUでCDSSを動かすと大量の偽陽性アラートを生むのではないか、という懸念も未解決だった。</li><li>What's new（本研究の新規性・意義）</li><li><strong>前向きにライブ収集したデータだけ</strong>で動的スコアを生成し、3群層別が成立することを示した（死亡 1.7% / 12.0% / 39.8%、p &lt; 0.001）。</li><li>高リスク群の<strong>感度51%・特異度91%</strong>、AUROC 0.83（95%CI 0.79–0.86）。時期をずらした検証コホート（2,094例）でも性能は保たれた（感度64%・特異度89%、AUROC 0.84）。</li><li>在院日数・再入室・推定費用という副次アウトカムもリスク帯に沿って階段状に増加し、スコアが死亡以外の資源消費とも相関することを示した。</li><li>これは「精度を確認する第1相」であり、臨床医に見せた場合の転帰への影響（第3相）は未実施である点が、本論文の到達点であり同時に限界。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICU死亡予測スコア ViSIG を、クリーニングも欠測補完もしていないライブの前向きデータで動かしたところ、低・中・高リスクの3群層別は成立し（ICU死亡 <strong>1.7% / 12.0% / 39.8%</strong>）、高リスク群の感度51%・特異度91%、AUROC 0.83だった。「後ろ向きの綺麗なデータでしか示されていない性能」が生データでも概ね再現した、という方法論の実証である。</p>
+</div>
+<ul><li><strong>目的</strong>：既存のICU死亡予測モデル ViSIG が、ほぼリアルタイムで前向き収集されたデータでも頑健かを確かめる。</li><li><strong>デザイン</strong>：前向きに収集したデータを集約・変換し、既存の rolling な ICU死亡予測因子を評価。3部構成研究の第1相。</li><li><strong>セッティング</strong>：米国2施設・成人ICU 6ユニット。Robert Wood Johnson-Barnabas University Hospital（学術医療センター、5ICU）と Stamford Hospital（305床の大学関連地域病院、1ICU）。</li><li><strong>対象</strong>：1,810入室（RWJ 1,407例＝77.8%、STM 403例＝22.2%）。2020年。</li><li><strong>スコア</strong>：心拍数・呼吸数・平均動脈圧・SpO₂・人工呼吸の有無・Visensia Index の6要素。30分ごとに更新、0〜100、高いほど死亡リスクが高い。</li><li><strong>主要結果</strong>：最大ViSIGスコアで3群化（≤37／&gt;37かつ≤58／&gt;58）。ICU死亡は 1.7% / 12.0% / 39.8%（p &lt; 0.001、Cochran-Armitage 傾向検定も有意）。相対リスクは低リスク群を基準に 7.2倍 / 23.7倍。</li><li><strong>判別能</strong>：高リスク群 vs その他で 感度51%（46–56%）・特異度91%（90–92%）・PPV 40%（34–46%）・NPV 94%（93–95%）。AUROC 0.83（95%CI 0.79–0.86）。precision-recall曲線下面積 0.39（95%CI 0.37–0.41）。</li><li><strong>検証コホート</strong>：2021年11月〜2022年2月、同2施設、2,094入室。死亡 3.0% / 8.3% / 45.1%、感度64%・特異度89%、AUROC 0.84（0.81–0.87）。</li><li><strong>副次アウトカム</strong>：ICU在室日数（最小二乗平均）2.32 / 3.82 / 5.43日、再入室率 6.7% / 6.5% / 16.9%、推定請求額 $8,713 / $13,096 / $18,774。</li><li><strong>アラートの時間的余裕</strong>：初回の赤（高リスク）アラートから死亡またはICU退室までの中央値60時間（IQR 8.5–147.0）。90%の患者で2.1時間以上の余裕があった。一方でアラートの約40%は死亡の1日以内に発生。</li><li><strong>較正（calibration）</strong>：報告されていない（後述）。</li><li><strong>資金・特許</strong>：ViSIG Health が資金提供。参加2病院は参加への支払いを受けている。筆頭著者の会社 Prescient Healthcare Consulting が rSIGNIPHY の特許を保有。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 「入室時スコア」と「動的スコア」は別の道具である（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 重症度スコアには目的の異なる2系統がある。</p>
+<p>(A) 入室時スコア（severity of illness score）：APACHE II/III、SAPS II、SOFA、日本の JROD など。<strong>ICU入室後24時間のデータ</strong>から予測死亡率を出す。用途はベンチマーク（この施設の実死亡は症例構成から予想される死亡より多いか少ないか＝SMR）。24時間分のデータが揃ってから計算するので、目の前の患者の「今」の急変を知らせる道具ではない。JIPAD が施設比較に使っているのもこの系統。</p>
+<p>(B) 動的スコア／CDSS（clinical decision support system）：数分〜数十分ごとに更新され、「この患者は今、悪くなりつつある」を知らせる。一般病棟では NEWS（National Early Warning Score）、MEWS、Rothman Index などが先行した。ICUでは症例がそもそも重症なので、単純な閾値では全員が鳴ってしまう（＝偽陽性の洪水）。</p>
+<p>本論文が扱うのは (B)。ViSIG は (B) の一つで、次の3つを重ねている。</p>
+<ol><li><strong>rSIGNIPHY</strong>：バイタルの「パターン」に重みをつける独自アルゴリズム。値そのものではなく、時間的な並び方を見るのが特徴。</li><li><strong>Visensia Index</strong>：OBS Medical社の商用スコア。複数のバイタルを統合して「非重症患者の死亡リスク」を連続的に評価する。本研究では1個の疑似バイタルサインとして ViSIG に組み込まれた。</li><li>遺伝的アルゴリズム（genetic algorithm）：生物の進化（選択・交叉・突然変異）を模した最適化手法。ここでは「どのパターンに何点を与えれば死亡をいちばんよく当てられるか」を総当たりでなく探索するために使われている。ロジスティック回帰のように係数を解析的に解くのではなく、目的関数を自分で設計できるのが利点（本研究では「偽陰性を罰し、真陽性を報いる」目的関数を使った）。</li></ol>
+<p>そして本論文の本当のテーマは、スコアの中身ではなく「データの質」である。 従来のCDSS研究は、患者が退室したあとに取り出したデータセットを使ってきた。そうしたデータは綺麗に掃除され、欠測は補完され、注釈が付いている。ところが実運用では、モニタが外れ、患者は検査に行き、値が飛び、ありえない数字が混ざる。「綺麗なデータでの性能」は「実運用での性能」を保証しない。本研究はそこを検証した。</p>
+<p><strong>用語の一言定義</strong></p>
+<ul><li><strong>感度（sensitivity）</strong>：死亡した人のうち、高リスクと判定できた割合。「見逃しの少なさ」。</li><li><strong>特異度（specificity）</strong>：生存した人のうち、高リスクと判定しなかった割合。「無駄鳴りの少なさ」。</li><li><strong>PPV（陽性的中率）</strong>：高リスクと判定した人のうち、実際に死亡した割合。有病率に強く依存する。</li><li><strong>AUROC（C統計量）</strong>：ランダムに選んだ死亡例と生存例で、死亡例のほうが高いスコアを持つ確率。判別（discrimination）の指標。</li><li><strong>較正（calibration）</strong>：予測した死亡確率と実際の死亡割合が一致しているか。判別とは独立で、AUROCが高くても較正は崩れうる。</li><li>precision-recall曲線下面積：感度（recall）を変えたときのPPV（precision）の平均。イベントが稀なときはAUROCより実務的な指標とされる。</li></ul>
+</div>
+<h3>2. 背景と目的 📚</h3>
+<ul><li>ICU患者の死亡を予測するアルゴリズムは数十年前から利用可能であり、症例構成（case-mix）を調整したうえでICU同士を比較するベンチマークとして有益であることが証明されてきた。</li><li>しかし近年は、患者の生理学的な変化を同時進行で（contemporaneously）同定する解析ツールへの流れがある。これが CDSS と呼ばれるもので、まず一般病棟（general acute care floors）の患者向けに開発された。</li><li>重症患者では生理学的破綻がはるかに重篤なため、ICU設定でのCDSSの利益は不確実であり、多数の偽陽性アラートを生む可能性がある、と著者は明記している。</li><li>APACHE や SAPS のような予測モデルは CDSS には使えない。理由は、入室後最初の24時間のデータ（多くは後ろ向き収集）に基づくから。</li><li>ICU向けに開発された数少ないCDSS（DeepSOFA、Moss ら、Kunitomo ら）も、後ろ向きデータ、すなわち患者がICUを退室した後に得られたデータで評価されてきた。</li><li>著者の批判は2点。適時性の欠如に加え、そうしたデータセットはしばしば入念にクリーニング・注釈付けされ、欠測値が補完されている。このデータ後処理が、モデル性能について過度に楽観的な主張を招きうる。</li><li>したがって、予測モデルが動的予測に価値を持つかを現実的に評価するには、ほぼリアルタイムで「as is」に収集されたデータで評価し、予測を「on the fly」で生成しなければならない。</li><li><strong>rSIGNIPHY</strong> は、バイタルサインの情報パターンと人工呼吸の有無を組み合わせるICU特化型CDSSで、複数データセットで有望な結果を示していた。将来の死亡を予測する特定の生理学的パターンを同定して重みづけし、退室前の患者の悪化を予測する rolling acuity score を出す。</li><li>先行研究では rSIGNIPHY 単独で3群のICU死亡が <strong>3.9% / 13.8% / 25.7%</strong> だった。しかし感度43%・陽性的中率25%は最適とは言えないと考えられた。</li><li>そこで OBS Medical（英国 Abingdon）と共同で、同社の Visensia Score を疑似バイタルサインとして rSIGNIPHY に追加すれば感度が改善するかを検討した。この組み合わせが ViSIG Score。既に解析済みのデータセットを用いた結果では感度が改善していた（本文中の出典は「A. Kramer, personal communication, 2023」＝査読済み文献ではなく私信）。</li><li>ただし ViSIG の性能も後ろ向きデータに基づいていたため、3部構成の臨床研究を立ち上げた。</li></ul>
+<h4>3部構成の研究計画（本文 Introduction の記載）</h4>
+<div class="tw"><table>
+<thead><tr><th>相</th><th>内容</th><th>本論文での状態</th></tr></thead>
+<tbody>
+<tr><td><strong>第1相</strong></td><td>連続収集されたライブデータで ViSIG を de novo に評価し、この「実生活（real-life）」データでアルゴリズムが正確かを確かめる</td><td><strong>本報告</strong></td></tr>
+<tr><td><strong>第2相</strong></td><td>連続症例で ViSIG を較正するが、<strong>所見は臨床医に見せない</strong></td><td>論文執筆時点で<strong>進行中（underway）</strong></td></tr>
+<tr><td><strong>第3相</strong></td><td>全患者の ViSIG を臨床医に<strong>見えるようにし</strong>、転帰の変化を得る</td><td>論文執筆時点で<strong>進行中（underway）</strong></td></tr>
+</tbody></table></div>
+<h3>3. 方法（Methods）📐</h3>
+<h4>3-1. デザインと対象</h4>
+<ul><li><strong>デザイン</strong>：前向きに収集したデータを集約・変換し、既に開発済みの rolling な ICU死亡予測因子を評価する proof-of-concept 研究。RCTではない。介入もない。</li><li><strong>セッティング（2施設・6ICU）</strong></li><li>Robert Wood Johnson-Barnabas University Hospital（RWJ）：ニュージャージー州 New Brunswick の学術医療センター。データを収集した <strong>5つのICU</strong> ＝ 内科系ユニット、外科／外傷ユニット、神経集中治療ユニット、冠疾患ユニット、心臓血管外科ユニット。</li><li>Stamford Hospital（STM）：コネチカット州 Stamford の <strong>305床の大学関連地域病院</strong>。単一の内科外科混合ICUで、心臓血管外科術後・脳神経外科術後を含む全成人を診る。</li><li><strong>対象</strong>：1,810入室（Abstract の記載は「2020年8月から12月」、Methods の記載は「2020年の3か月間」。後述の食い違い参照）。RWJ 1,407例（77.8%）、STM 403例（22.2%）。</li><li><strong>除外基準の明示的な記載はない</strong>。年齢・診断による選別の記述も本文にない。</li><li><strong>主要アウトカム</strong>：ICU死亡（ICU退室時の転帰が alive か dead か）。</li><li><strong>副次アウトカム</strong>：ICU在室日数（ICULOS）／ICU再入室／推定請求額（estimated charges）。</li><li>ICULOS ＝ 患者の最初のバイタル記録と最後のバイタル記録の間の時間として算出（入退室時刻ではない点に注意）。</li><li>再入室 ＝ <strong>同一入院エピソード内での2回目以降のICU入室</strong>。</li><li>推定請求額 ＝ 既発表の式（Kramer AA, Dasta JK, Kane-Gill SL. Crit Care Med 2017;45:1457-1463）から導出。</li></ul>
+<h4>3-2. ViSIG スコアの作り方（本文の記述を段階に分解）</h4>
+<p><strong>ステップ1：値 → 文字（bin への割り付け）</strong></p>
+<ul><li><strong>10分ごとに各バイタルの中央値を計算</strong>し、そのバイタルの分布のどの部分に当たるかを示す文字（letter）にマッピングする。この分布の区画を「bin」と呼ぶ。</li><li>bin の境界は、<strong>全患者の入室後最初の2時間のデータ</strong>という予備データセットを使って決める。患者横断で各バイタルの中央値を計算し、その中央値分布に3つのカットポイントを置く。カットポイントは「結果として得られる4つの bin 間で死亡率のばらつきが最大になるように」導出する。</li><li>4つの bin に文字を割り当てる（例：最上位の bin が「A」、次が「B」、下から2番目が「Y」、最下位が「Z」）。</li><li>中央値を使うことで、極端値の影響は無視できるようになる。</li><li><strong>ありえない値は自動的に排除される</strong>（SpO₂ &gt; 100%、呼吸数 = 0 など「意味をなさない値」「生命と両立しない値」）。</li><li>その10分間にそのバイタルの値が1つも無ければ、文字「L」を割り当てる。</li></ul>
+<p><strong>ステップ2：文字 → 単語（word）</strong></p>
+<ul><li><strong>連続する3つの10分区間の文字を「単語」とみなす</strong>。したがって1単語＝30分。</li><li>例：入室後1時間の10分ごとの文字が A, B, Z, Z, Y, A なら、最初の2つの単語は ABZ と ZYA。</li><li>出現頻度が100未満の単語は、雑多な単語「XXX」に集約される。</li></ul>
+<p><strong>ステップ3：単語 → 点数（遺伝的アルゴリズム）</strong></p>
+<ul><li>単語は <strong>ICU入室から7日間、または退室まで（早いほう）</strong> の各30分区間について得られる。7日以上滞在する患者は336単語を持つ（7日 × 48区間/日 ＝ 336）。</li><li>7日を超えてICUに残る患者は、既に臨床医から「異常に重症」と認識されているため、そこで打ち切る、というのが著者の論理。</li><li>先行研究に基づき、各単語には最初 0・1・2 のいずれかの値がランダムに割り当てられる。</li><li>遺伝的アルゴリズムを用いて、合計スコア（0〜12）がICU死亡という転帰に対して最適になるように、単語の点数を再割り当てする。</li></ul>
+<p><strong>ステップ4：他の2要素を足す</strong></p>
+<ul><li><strong>人工呼吸（MV）</strong>：その時間区間で 現在MV中＝2点／過去に受けたが現在は非MV＝1点／これまで一度もMVなし＝0点。</li><li><strong>Visensia Index</strong>：その時間区間内の最大値に対して点を与える。Visensia を追加のバイタルサインとみなし、低・中・高リスク域に応じて 0・1・2 点。</li><li>本文の重要な一文：「実務上は、NEWS 2 のような任意の直交する重症度スコアを Visensia Index の代わりに用いることができる」。</li></ul>
+<p>ステップ5：30分区間スコア → 0〜100 の ViSIG スコア</p>
+<ul><li><strong>1つの30分区間のスコアは 0〜12点</strong>（心拍数・呼吸数・平均動脈圧・SpO₂・人工呼吸状態・Visensia Index の6要素 × 0〜2点）。</li><li>各時間区間の ViSIG スコアは、直前の時間区間の ViSIG スコアと現区間のスコアの指数平均（exponential average）。これにより連続分布になる。</li><li>最後に <strong>0〜100 に再スケール</strong>。高いほど死亡リスクが高い。</li><li><strong>更新間隔は30分</strong>。</li><li>バイタルに6時間を超える欠落があった場合、新しい ViSIG スコアが立ち上げられる（それだけの間隔が空くとスコアの連続性が失われると考えられたため）。</li></ul>
+<h4>3-3. データの流れ（実装の要）</h4>
+<ul><li>患者のデータはベッドサイドモニタから連続的に伝送され、ICUの電子カルテ（EMR）に送られる。</li><li>EMR から電子的に、実時間で（実際の記録から数秒以内に）、次のバイタルが収集される：心拍数・呼吸数・平均動脈圧・酸素飽和度（SpO₂）。</li><li>本文の但し書き：「ViSIG スコアは任意の数の生理学的パラメータを使いうる。ここで収集したものに限られない」。</li><li>これらのデータは HL7メッセージを通じて、本研究専用に指定されたサーバ上の外部データベースへ転送される。</li><li>患者がMVを受けているという情報は、呼吸数の記録に付く「VENT」タグを通じて捕捉された。MVの開始・終了時刻はすべて、人工呼吸器装着中に記録されたことを示す指定を含む呼吸数のHL7メッセージで捕捉された。</li><li><strong>リアルタイムに抽出できない特徴量（診断名、併存症など）は含めていない</strong>。</li><li>ICU退室時の転帰（alive/dead）は、Phoenix ICU database system（Medical Decision Network, Charlottesville, VA）の記録と患者を突合して、EMRから後ろ向きに収集した。本文はこれを「ViSIGの精度を測るために必要だっただけで、将来の患者に対してスコアを生成するには不要」と説明している。</li></ul>
+<h4>3-4. リスク帯（cut point）の決め方</h4>
+<ul><li><strong>各患者の最大 ViSIG スコア</strong>を取得した。目的は「リスク帯を確立すること」だけ、と本文は明記する。</li><li>リスク帯は、最大 ViSIG スコアの分布のなかで死亡率が急に上昇する点を見つけることで生成した。</li><li>結果として得られた3帯：</li><li><strong>低リスク</strong>：最大 ViSIG スコアが一度も37を超えなかった</li><li><strong>中リスク</strong>：最大 ViSIG スコアが少なくとも1回37を超えたが、58は一度も超えなかった</li><li><strong>高リスク</strong>：最大 ViSIG スコアが58を超えた（1時点以上）</li></ul>
+<h4>3-5. 統計解析</h4>
+<ul><li>ICU退室時転帰（alive, dead）× 死亡リスク帯 の 3×2 分割表を作成。</li><li><strong>カイ二乗検定</strong>でリスク群とICU死亡の関連の有意性を判定。有意なら Cochran-Armitage 傾向検定を適用。</li><li><strong>検証データセット</strong>：RWJ と STM の 2021年11月〜2022年2月の入室。同じ方法でデータを収集。ViSIG スコアは開発データセットで決定した重みとリスク帯を用いて算出。3リスク帯でのICU死亡を得た。</li><li>副次解析（ICULOS、再入室率、推定請求額）：ICULOS と推定請求額は各リスク群の最小二乗平均（least-squares means）を計算して有意性を検定。最小二乗平均は「リスク群が病院（RWJ か STM か）とICU入室前の在院日数についてバランスしていた場合に得られる平均」。</li><li><strong>中央値ではなく平均で検定した理由</strong>を本文は明記：「中心傾向のモーメントを比較することではなく、これらの変数の平均的な経済的負担に関心があったため」。</li><li>ソフトウェア：<strong>SAS V9.4（Cary, NC）</strong> と R version 3.6。</li><li>倫理：Western IRB consortium（現 WCG IRB）が 2019年10月10日に承認（#20192653、「ViSIG Research Study Protocol VS001: A Study of the Usability and Utility of ViSIG for Mortality Risk Prediction in the Intensive Care Unit」）。インフォームド・コンセントは免除。</li><li>サンプルサイズ設計の記載は本文に無い。事前登録（ClinicalTrials.gov 等）の記載も本文に無い。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「1,810例」は検証コホートではなく 開発コホート である 本文は検証コホートの記述で「ViSIG スコアは開発データセット（development dataset）で決定した重みとリスク帯を用いて算出した」と書いている。<mark class="hl">つまり 1,810例のコホートこそが開発データセットであり、そこで報告された感度51%・特異度91%・AUROC 0.83 は「カットポイントを決めたのと同じデータで測った内部性能」</mark>。カットポイント（37 と 58）はこの1,810例の死亡率分布から最大シフト点を探して置かれたものなので、構造的に楽観側へ寄る。 独立性が担保されているのは <strong>2,094例の検証コホート</strong>のほうだが、これも同じ2施設の別時期（temporal validation）であり、外部検証（他施設）ではない。</p>
+</div>
+<h3>4. 結果 — 患者背景 📊</h3>
+<h4>Table 1. 施設別の入室患者背景（原表を日本語化）</h4>
+<p>数値は平均 ± 標準誤差（本文に SD/SE の明示はないが、値の大きさから標準誤差と解される）。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>両施設（n = 1,810）</th><th>RWJ（n = 1,407）</th><th>STM（n = 403）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>最大 ViSIG スコア</td><td>38.18 ± 0.38</td><td>38.13 ± 0.42</td><td>38.74 ± 0.91</td><td>&gt; 0.10</td></tr>
+<tr><td>ICU死亡率</td><td>10.2%</td><td>10.9%</td><td>7.9%</td><td>0.09</td></tr>
+<tr><td>ICU在室日数</td><td>3.22 ± 0.11</td><td>3.41 ± 0.14</td><td>2.58 ± 0.16</td><td>&lt; 0.001</td></tr>
+<tr><td>在院日数</td><td>10.29 ± 0.25</td><td>10.78 ± 0.29</td><td>8.56 ± 0.48</td><td>&lt; 0.001</td></tr>
+<tr><td>再入室率</td><td>7.4%</td><td>7.6%</td><td>7.2%</td><td>&gt; 0.10</td></tr>
+<tr><td>人工呼吸を受けた割合</td><td>19.6%</td><td>16.9%</td><td>29.0%</td><td>&lt; 0.001</td></tr>
+<tr><td>ICU入室前の在院日数</td><td>1.93 ± 0.11</td><td>2.04 ± 0.13</td><td>1.54 ± 0.23</td><td>0.05</td></tr>
+</tbody></table></div>
+<p><strong>本文の読み</strong></p>
+<ul><li>最大 ViSIG スコアの平均は 38.2 で、施設間にほぼ差が無い。</li><li>ICU死亡率は RWJ 10.9% と STM 7.9% で、有意差に向かう傾向（p = 0.09）。</li><li>対応して RWJ のほうが ICU在室日数・在院日数・ICU入室前在院日数の平均が長い。</li><li><strong>再入室率は両施設で同程度</strong>。</li><li>MVを受けた入室の割合は RWJ のほうが STM より低い（16.9% vs 29.0%）。神経集中治療ユニットと心臓血管外科ユニットを含む学術センターでこの数字は不自然に低く、著者自身が限界の項でMV捕捉の不完全性を認めている。</li></ul>
+<h3>5. 最大ViSIGスコアと死亡率の関係（Figure 1）📈</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005931" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005931）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. ICU mortality rate for 12.5% quantiles of patients' maximum ViSIG Score.（原図・無改変。© Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<p><strong>図の見え方</strong></p>
+<ul><li>横軸が<strong>最大 ViSIG スコア（0〜100）</strong>、縦軸がICU死亡率（0〜45%）。</li><li>患者を最大 ViSIG スコアの 12.5% 分位（＝8等分）に分け、各群の死亡率を青い折れ線（丸マーカー付き）で結んでいる。</li><li><strong>黒い破線</strong>が2次多項式回帰の当てはめ。本文によると r² = 0.98。</li><li><strong>縦のオレンジの線が 37</strong>、縦の赤い線が 58 に引かれ、3リスク帯の境界を示す。</li><li>横軸ラベル "Maximum ViSIG Score" の "Maximum" だけが赤字で強調されている（＝滞在中の最大値を使うという設計の強調）。</li></ul>
+<p>図から読み取れる各点の値（印字されていないため図面からの読み取り値。原文に数表は無い）</p>
+<div class="tw"><table>
+<thead><tr><th>おおよその最大ViSIGスコア</th><th>読み取ったICU死亡率</th></tr></thead>
+<tbody>
+<tr><td>約 0</td><td>約 0.0%</td></tr>
+<tr><td>約 21</td><td>約 1.2%</td></tr>
+<tr><td>約 25</td><td>約 0.8%</td></tr>
+<tr><td>約 31</td><td>約 3.5%</td></tr>
+<tr><td>約 37</td><td>約 1.4%</td></tr>
+<tr><td>約 41</td><td>約 8.0%</td></tr>
+<tr><td>約 49</td><td>約 9.5%</td></tr>
+<tr><td>約 58</td><td>約 16.8%</td></tr>
+<tr><td>約 100</td><td>約 40.3%</td></tr>
+</tbody></table></div>
+<p><strong>本文の記述</strong></p>
+<ul><li>患者の最大 ViSIG スコアと、その後にユニット内で死亡する確率との間に強い関係があった（2次多項式回帰モデルの r² = 0.98）。</li><li>ViSIG スコアが 37 と 58 を横切るところで、死亡確率の最大のシフトがあった。</li><li>これが3リスク群の作成につながった。</li></ul>
+<p><strong>この図を読むときの注意</strong></p>
+<ul><li>観測点（青線）は単調増加ではない。31 付近で 3.5% まで上がったあと、<strong>37 付近でいったん 1.4% に落ちている</strong>。カットポイント37は、まさにこの局所的な谷の位置に置かれている。滑らかな破線（多項式）の r² = 0.98 という高い当てはまりは、観測点そのものではなく平滑化後の曲線に対する当てはまりであることを踏まえて読む必要がある。</li><li>12.5%分位が8群であるのに対し、図には<strong>9個の点</strong>が読み取れる。区間の端点の扱いが図中に明示されていない。</li></ul>
+<h3>6. 主要結果 — 3リスク群のICU死亡（Table 2）🎯</h3>
+<h4>Table 2. 3つの ViSIG リスク群におけるICU退室時転帰：両施設（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>リスク群</th><th>生存</th><th>死亡</th><th>死亡率（95%CI）</th><th>相対リスク</th></tr></thead>
+<tbody>
+<tr><td>低（≤ 37）</td><td>935</td><td>16</td><td><strong>1.7%（0.9%–2.5%）</strong></td><td>基準群</td></tr>
+<tr><td>中（&gt; 37 かつ ≤ 58）</td><td>548</td><td>75</td><td><strong>12.0%（9.5%–14.6%）</strong></td><td><strong>7.2</strong></td></tr>
+<tr><td>高（&gt; 58）</td><td>142</td><td>94</td><td><strong>39.8%（33.6%–46.0%）</strong></td><td><strong>23.7</strong></td></tr>
+<tr><td>合計</td><td>1,625</td><td>185</td><td><strong>10.2%</strong></td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>判別能（高リスク群 vs 他の2群）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>感度</td><td><strong>51%（46%–56%）</strong></td></tr>
+<tr><td>特異度</td><td><strong>91%（90%–92%）</strong></td></tr>
+<tr><td>陽性的中率（PPV）</td><td><strong>40%（34%–46%）</strong></td></tr>
+<tr><td>陰性的中率（NPV）</td><td><strong>94%（93%–95%）</strong></td></tr>
+<tr><td>AUROC（最大ViSIGスコア、患者レベル）</td><td><strong>0.83（95%CI 0.79–0.86）</strong></td></tr>
+<tr><td>precision-recall曲線下面積</td><td><strong>0.39（95%CI 0.37–0.41）</strong></td></tr>
+</tbody></table></div>
+<p><strong>本文の記述と補足</strong></p>
+<ul><li><strong>3群の死亡率は明確に異なった</strong>。低リスク群 1.7% に対し、中リスク群は7.2倍（12.0%）、高リスク群の 39.8% は低リスク群のほぼ24倍。</li><li>カイ二乗統計量と Armitage 傾向検定はいずれも高度に有意（p &lt; 0.001）であり、群間で死亡率が異なること、および低→中→高の順に増加することが裏づけられた。</li><li>本文は NPV について補足している：「94%というのは、高リスクアラートが出なかった入室の6%が死亡したという意味」。</li><li>precision-recall曲線下面積 0.39 は、「感度の閾値を変えたときの平均PPV」。イベント（死亡）が10.2%と稀な状況で、AUROCより実務的な指標として提示されている。</li><li>著者自身が <strong>AUROC 0.83 に留保を付けている</strong>：「この数字は注意して受け取らねばならない。死亡率10.2%は50%を大きく下回るため」。</li><li>各群のn（生存＋死亡）：<strong>低リスク951例、中リスク623例、高リスク236例</strong>。高リスク判定は全体の13.0%。</li></ul>
+<h3>7. 施設別の再現性（Table 3）🏥</h3>
+<h4>Table 3. 施設別の3リスク群におけるICU退室時転帰（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>施設 / リスク群</th><th>生存</th><th>死亡</th><th>死亡率（95%CI）</th><th>相対リスク</th></tr></thead>
+<tbody>
+<tr><td><strong>Robert Wood Johnson</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>低</td><td>722</td><td>11</td><td>1.5%（0.6%–2.4%）</td><td>基準群</td></tr>
+<tr><td>中</td><td>432</td><td>66</td><td>13.3%（10.3%–16.2%）</td><td>8.8</td></tr>
+<tr><td>高</td><td>100</td><td>76</td><td>43.2%（35.9%–50.5%）</td><td>28.8</td></tr>
+<tr><td>合計</td><td>1,254</td><td>153</td><td>10.9%</td><td>—</td></tr>
+<tr><td>感度 50%（44%–55%）、特異度 92%（91%–93%）</td><td></td><td></td><td></td><td></td></tr>
+<tr><td><strong>Stamford Hospital</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>低</td><td>213</td><td>5</td><td>2.3%（0.3%–4.3%）</td><td>基準群</td></tr>
+<tr><td>中</td><td>116</td><td>9</td><td>7.2%（2.7%–11.7%）</td><td>3.1</td></tr>
+<tr><td>高</td><td>42</td><td>18</td><td>30.0%（18.5%–41.5%）</td><td>13.1</td></tr>
+<tr><td>合計</td><td>371</td><td>32</td><td>7.9%</td><td>—</td></tr>
+<tr><td>感度 56%（44%–69%）、特異度 89%（86%–91%）</td><td></td><td></td><td></td><td></td></tr>
+</tbody></table></div>
+<p><strong>読み</strong></p>
+<ul><li>学術医療センター（RWJ）のほうが高リスク群の死亡率が高い（43.2% vs 30.0%）一方、<strong>低リスク群の死亡率は低い（1.5% vs 2.3%）</strong>。識別のコントラストは RWJ で大きい（相対リスク 28.8 vs 13.1）。</li><li>地域病院（STM）では感度が高く（56% vs 50%）、特異度は低い（89% vs 92%）。症例構成が軽いぶん、高リスク判定が広めに出ていると読める。</li><li>STM の中リスク群は n = 125（116生存＋9死亡）と小さく、95%CI が 2.7%–11.7% と広い。施設別の数値は不確実性が大きい。</li><li>本文と表の間に軽微な不一致がある。本文は RWJ の3群死亡率を「<strong>1.5%, 13.2%, 43.2%</strong>」と書いているが、Table 3 は 13.3%（10.3%–16.2%）。生データから計算すると 66/498 = 13.25% なので表の13.3%が正しい丸め。</li></ul>
+<h3>8. 検証コホート（Table 4）✅</h3>
+<h4>Table 4. 3つの ViSIG リスク群におけるICU退室時転帰：検証データ（原表を日本語化）</h4>
+<p>期間：2021年11月〜2022年2月／同じ2施設／2,094入室／開発データセットで決めた重みとリスク帯をそのまま適用</p>
+<div class="tw"><table>
+<thead><tr><th>リスク群</th><th>生存</th><th>死亡</th><th>死亡率（95%CI）</th><th>相対リスク</th></tr></thead>
+<tbody>
+<tr><td>低</td><td>834</td><td>26</td><td><strong>3.0%（1.8%–4.2%）</strong></td><td>基準群</td></tr>
+<tr><td>中</td><td>782</td><td>71</td><td><strong>8.3%（6.4%–10.2%）</strong></td><td><strong>2.8</strong></td></tr>
+<tr><td>高</td><td>209</td><td>172</td><td><strong>45.1%（40.1%–50.1%）</strong></td><td><strong>15.0</strong></td></tr>
+<tr><td>合計</td><td>1,825</td><td>269</td><td><strong>12.8%</strong></td><td>—</td></tr>
+</tbody></table></div>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>感度</td><td><strong>64%（58%–70%）</strong></td></tr>
+<tr><td>特異度</td><td><strong>89%（90%–92%）</strong> ※原表のまま。点推定値が信頼区間の外にある（後述）</td></tr>
+<tr><td>陽性的中率（PPV）</td><td><strong>45%（40%–50%）</strong></td></tr>
+<tr><td>陰性的中率（NPV）</td><td><strong>94%（93%–95%）</strong></td></tr>
+<tr><td>AUROC（最大ViSIGスコア）</td><td><strong>0.84（0.81–0.87）</strong></td></tr>
+</tbody></table></div>
+<p><strong>本文の記述は3行だけ</strong>：「検証データセットには2,094入室があった。Table 4 がリスク帯別のICU死亡率を示す：低（3.0%）、中（8.3%）、高（45.1%）。感度は64%、特異度は89%だった」。</p>
+<p>開発コホートとの比較（本ノートで作成）</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>開発（n = 1,810）</th><th>検証（n = 2,094）</th><th>変化</th></tr></thead>
+<tbody>
+<tr><td>全体のICU死亡率</td><td>10.2%</td><td>12.8%</td><td>+2.6ポイント</td></tr>
+<tr><td>低リスク群の死亡率</td><td>1.7%</td><td>3.0%</td><td><strong>+1.3ポイント（約1.8倍）</strong></td></tr>
+<tr><td>中リスク群の死亡率</td><td>12.0%</td><td>8.3%</td><td><strong>−3.7ポイント（約0.69倍）</strong></td></tr>
+<tr><td>高リスク群の死亡率</td><td>39.8%</td><td>45.1%</td><td>+5.3ポイント</td></tr>
+<tr><td>低リスクに対する高リスクの相対リスク</td><td>23.7</td><td>15.0</td><td><strong>大きく減弱</strong></td></tr>
+<tr><td>高リスク判定を受けた割合</td><td>13.0%（236/1,810）</td><td>18.2%（381/2,094）</td><td>+5.2ポイント</td></tr>
+<tr><td>感度</td><td>51%</td><td>64%</td><td>+13ポイント</td></tr>
+<tr><td>特異度</td><td>91%</td><td>89%</td><td>−2ポイント</td></tr>
+<tr><td>PPV</td><td>40%</td><td>45%</td><td>+5ポイント</td></tr>
+<tr><td>AUROC</td><td>0.83</td><td>0.84</td><td>ほぼ不変</td></tr>
+</tbody></table></div>
+<p><strong>この表の読み方</strong></p>
+<ul><li>AUROC はほぼ不変（0.83 → 0.84）。すなわち判別（順位づけ）は移植できている。</li><li>一方で各リスク帯の実死亡率は動いている。特に<strong>低リスク群が 1.7% → 3.0% と約1.8倍</strong>、中リスク群は 12.0% → 8.3% と下がり、中リスク帯の死亡率が低リスク帯との差を縮めている。低→中の相対リスクは 7.2 から 2.8 へ落ちた。</li><li>全体死亡率が 10.2% → 12.8% に上がっているにもかかわらず中リスク帯の死亡率が下がったのは、リスク帯の意味そのものがコホート間でずれたことを示唆する。これは形式的には較正の話であり、本論文は較正指標を報告していないが、この表がその代替情報になる。</li></ul>
+<h3>9. 副次アウトカム（Figure 2）💰</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000005931" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000005931）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. A: ViSIGリスク群別のICU在室日数（最小二乗平均）。B: ViSIGリスク群別の再入室率。C: ViSIGリスク群別の推定請求額（最小二乗平均）。（原図・無改変。© Society of Critical Care Medicine / Wolters Kluwer）</p>
+</div>
+<p><strong>図の見え方</strong>：3枚の棒グラフ。いずれも横軸が左から Low・Moderate・High の3群で、低リスク＝緑、中リスク＝黄、高リスク＝赤に色分けされ、各棒の頂部に数値が印字されている。</p>
+<h4>Figure 2 の数値（図中の印字を転記）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>低リスク</th><th>中リスク</th><th>高リスク</th></tr></thead>
+<tbody>
+<tr><td>ICU在室日数（最小二乗平均、日）</td><td><strong>2.32</strong></td><td><strong>3.82</strong></td><td><strong>5.43</strong></td></tr>
+<tr><td>再入室率</td><td><strong>6.7%</strong></td><td><strong>6.5%</strong></td><td><strong>16.9%</strong></td></tr>
+<tr><td>推定請求額（最小二乗平均）</td><td><strong>$8,713</strong></td><td><strong>$13,096</strong></td><td><strong>$18,774</strong></td></tr>
+</tbody></table></div>
+<h4>本文が示した群間差</h4>
+<div class="tw"><table>
+<thead><tr><th>比較</th><th>差</th><th>95%CI</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>ICU在室日数：高 vs 中</td><td><strong>1.61日 長い</strong></td><td>1.31–1.92</td><td>&lt; 0.001</td></tr>
+<tr><td>ICU在室日数：高 vs 低</td><td><strong>3.11日 長い</strong></td><td>2.81–3.42</td><td>&lt; 0.001</td></tr>
+<tr><td>再入室率：高 vs 中</td><td><strong>10.4ポイント 高い</strong></td><td>3.0%–17.8%</td><td>&lt; 0.001</td></tr>
+<tr><td>推定請求額：高 vs 中</td><td><strong>$5,678 高い</strong></td><td>$2,226–$9,130</td><td>&lt; 0.001</td></tr>
+</tbody></table></div>
+<p><strong>補足</strong></p>
+<ul><li><strong>再入室の解析対象は 1,522 ICU入室</strong>（当該入院での最初のICU入室であり、かつ患者が生存したもの）。</li><li>再入室率は低リスク（6.7%）と中リスク（6.5%）でほぼ同じであり、<strong>高リスク群だけが際立って高い（16.9%）</strong>。死亡・在室日数・費用が低→中→高で階段状に増えるのに対し、再入室だけは2段構造になっている。</li><li>ICU在室日数と推定請求額の最小二乗平均は、病院（RWJ か STM か）とICU入室前の在院日数についてバランスを取った推定値である。</li></ul>
+<h3>10. アラートのタイミング ⏱️</h3>
+<ul><li>初回の赤（高リスク）アラートから、患者が死亡またはICU退室するまでの時間の中央値は 60時間（四分位範囲 8.5, 147.0）。</li><li>赤アラートが出た患者の90%は、少なくとも 2.1時間 の間隔があった。</li><li><strong>SDC Figure 3</strong>（Supplemental Digital Content）が、高リスクアラートから死亡までの日数の分布を示す。アラートの約40%は患者が死亡する1日以内に発生していた。</li><li>考察では「ViSIG スコアは高リスク患者の90%を、患者が亡くなる少なくとも2.1時間前に検出した。したがって、事後的（reactive）ではなく先手を打つ（proactive）ものであることによって、診療を変えうる可能性がある」と述べている。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>感度51%という数字を「アラート設計」の言葉に翻訳する 高リスク帯の感度51%・特異度91%・PPV 40% は、<mark class="hl">「死亡例の半分は最後まで赤にならない。ただし赤が点いたら10人に4人は本当に亡くなる」</mark>という意味である。赤が点かないことを安心材料に使ってはならない（アラートが出なかった入室の6%が死亡している）。逆に特異度91%・PPV 40% は、ICUのアラートとしては例外的に高い。一般病棟の早期警告システムが偽陽性の洪水で機能しなくなるのに対し、この設計思想は「見逃しを増やしてでも無駄鳴りを減らす」側に振っている。<mark class="hl">当院で導入するなら「これは急変を全部拾う網ではなく、見落としがちな高リスク患者を1日数人だけ挙げる道具だ」と最初に合意しておく</mark>。</p>
+</div>
+<h3>11. 考察 — なぜライブデータでも動いたのか（著者の説明）🔍</h3>
+<p>著者は良好な性能の理由を4点挙げている。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>理由</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>bin の切り方</strong></td><td>バイタルの分布を、<strong>bin 間での死亡率のばらつきが最適化されるように</strong>分割している。これは<strong>回帰スプラインやカイ二乗ベースの検定で bin を構成する従来法より優れている</strong></td></tr>
+<tr><td>2</td><td><strong>中央値を使ったこと</strong></td><td>各文字は、平均・最小値・最大値ではなく <strong>10分の時間枠での中央値</strong>から導出されている。これが<strong>ノイズと欠測に対する耐性</strong>を与え、予測値を改善しうる</td></tr>
+<tr><td>3</td><td><strong>目的関数の設計</strong></td><td>単語の重みを見つける遺伝的アルゴリズムが、<strong>偽陰性を罰し、真陽性を報いる目的関数</strong>を組み込んでいる。著者いわく「<strong>予測モデルはあまりにも頻繁に AU-ROC に注目するが、それはイベント数が非イベント数を大きく上回るときには重要性が曖昧である</strong>」</td></tr>
+<tr><td>4</td><td><strong>更新頻度</strong></td><td>ViSIG は<strong>30分ごとに更新</strong>されるため、<strong>患者の変化する生理学的状態を反映できる</strong></td></tr>
+</tbody></table></div>
+<p>&gt; 注：理由3の一文には論理の反転がある。本論文の設定ではICU死亡が10.2%であり、非イベント（生存）がイベント（死亡）を大きく上回る。著者が引用している2本（Leisman DE「Rare events in the ICU」CCM 2018／Romero-Brufau S ら「Why the C-statistic is not informative to evaluate early warning scores」Crit Care 2015）はいずれも稀なイベントを論じたものであり、主張の中身は正しい。原文の "when events greatly outnumber nonevents" は "nonevents greatly outnumber events" の誤りと読むのが妥当。</p>
+<h3>12. 著者が想定する臨床での使い方 🩺</h3>
+<ul><li>各高リスクアラートをフォローアップし、臨床的には通常「低リスク」と考えられている患者を同定する。</li><li>予期せぬ死亡（unexpected deaths）を減らせることが、ViSIG を特に有用にする。</li><li>回診では、医師はおそらく最もリスクの高い患者に最初に集中したいと考える。臨床的に明らかでないリスク患者を同定できるなら、より早期にこれらの患者に注意を向けられ、転帰に良い影響を与えうる。</li><li>患者はICU在室という事実が示すとおり「病気」ではあるが、まもなく悪化して死亡しうるほどの苦境にあるとは考えられていないことがしばしばある。</li><li>より高いスコアが、死亡・ICU在室日数・人工呼吸日数を減らすような臨床的対応を引き出すなら、そのスコアは絶大な価値を持ちうる。</li><li>考察の締め：「早期警告システムの真の試金石は、臨床医がそれを受け入れ、適切に反応するかどうかである。ICUのEWSが正確で誤警報が少ないと感じられれば、臨床医は適切に反応・対処する可能性が高い」。</li></ul>
+<h3>13. 限界（著者の記載を漏らさず）⚠️</h3>
+<p>本文は6つの限界を挙げている。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界（本文の記述）</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>2病院しか患者を提供していない。他の病院でも ViSIG が同じく正確かは不確実</strong></td><td>ただし ViSIG の構成要素である rSIGNIPHY については、<strong>13ICU・59,400入室の後ろ向き研究</strong>が有望な結果を示している（引用文献11）</td></tr>
+<tr><td>2</td><td><strong>本研究は proof-of-concept であり、ライブのリアルタイムデータで ViSIG を運用できるかを明らかにすることが目的。既存モデルを検証する意図はなかった</strong></td><td>したがって APACHE・SAPS などとの<strong>直接の性能比較は行っていない</strong></td></tr>
+<tr><td>3</td><td><strong>米国における COVID-19 デルタ株サージの最後の名残の時期に実施された。患者の体温について信頼できる情報を得られず、これが ViSIG の精度を制限した可能性がある</strong></td><td>体温という主要バイタルが1本欠けている。デルタ株の時期についての記述は後述の食い違い参照</td></tr>
+<tr><td>4</td><td><strong>平均動脈圧に影響する因子、たとえば昇圧薬の使用についての情報を収集していない</strong></td><td>MAP を「生理」として読むが、実際は治療で作られたMAPかもしれない</td></tr>
+<tr><td>5</td><td><strong>動的予測モデルの解析には、転帰を特定の予測と結びつける難しさがある</strong>。本研究では、患者の初回の赤アラートが有害事象の何時間も前に来ることがあり、その間にスコアがより低いリスクカテゴリに戻っている可能性がある</td><td>著者は「生理学的不安定性の早期認識は、臨床的悪化のより迅速な予後判定を可能にすると考える」と述べるにとどまる</td></tr>
+<tr><td>6</td><td><strong>RWJ で人工呼吸を受けた患者の割合が低いことは、そこでのMV確認方法がおそらく不完全だったことを示す</strong></td><td>RWJ 16.9% vs STM 29.0%。<strong>ViSIG の6要素のうち1つが施設によって系統的に欠けていた</strong>ことになる</td></tr>
+</tbody></table></div>
+<h3>14. 資金源・利益相反 💵</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>開発者が自社アルゴリズムを評価している構図</p>
+<ul><li>本研究は ViSIG Health の支援を受けている（Supported by ViSIG Health）。</li><li>Robert Wood Johnson-Barnabas University Hospital と Stamford Hospital は、研究への参加に対して支払いを受けている。</li><li><mark class="hl">Prescient Healthcare Consulting が、ViSIG システムの基礎をなすアルゴリズムの1つである rSIGNIPHY の特許を保有している。そして筆頭著者 Kramer AA の所属が、その Prescient Healthcare Consulting, LLC である</mark>（連絡先メールも akramer@prescienthealthcare.com）。</li><li>Lissauer 医師の所属機関は Prescient Healthcare Consulting から資金提供を受けた。同氏個人も Leon Piechta Esq、Lacava, Jacobs and Goodis、Saltz Mongeluzzi and Bendesky、Rutgers University（原文表記は "Rugers"）、Hartford Healthcare Medical Group から資金提供を受けている。</li><li>残りの著者（Krinsley）は潜在的利益相反を開示していない。</li><li>謝辞では <strong>OBS Medical Ltd の4名</strong>（Simon Didcote 氏、Iain Strachan 博士、Jean-Louis Baudino 博士、Brett Nicole 氏）と Medical Decision Network LLC の3名への謝意が述べられている。Medical Decision Network は転帰データの突合に使った Phoenix ICU database の提供元でもある。</li><li><mark class="hl">つまり「アルゴリズムの特許保有者が筆頭著者、資金提供元がアルゴリズムの事業会社、参加施設は支払いを受け、その施設の医師が共著者」という構造</mark>。データ解析の独立性についての記載は本文に無い。第三者による解析・独立した統計家の関与についての記載も無い。</li></ul>
+</div>
+<h3>15. 較正（calibration）は報告されているか — 明示的な確認 🎯</h3>
+<p>結論：本論文に較正の報告は一切無い。</p>
+<p>確認した内容：</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本論文での記載</th></tr></thead>
+<tbody>
+<tr><td>較正プロット（calibration plot / calibration belt）</td><td><strong>無い</strong></td></tr>
+<tr><td>Hosmer-Lemeshow 検定</td><td><strong>無い</strong></td></tr>
+<tr><td>Brier スコア</td><td><strong>無い</strong></td></tr>
+<tr><td>観測／予測比（O/E ratio、SMR）</td><td><strong>無い</strong></td></tr>
+<tr><td>calibration slope / intercept</td><td><strong>無い</strong></td></tr>
+<tr><td>判別の指標</td><td><strong>AUROC 0.83（0.79–0.86）／検証 0.84（0.81–0.87）、precision-recall AUC 0.39（0.37–0.41）、感度・特異度・PPV・NPV</strong></td></tr>
+</tbody></table></div>
+<p>なぜ較正が報告されていないのか（本ノートの解釈）</p>
+<ul><li>ViSIG スコアは 0〜100 の acuity score であって、死亡確率そのものではない。指数平均で作られた合成指標なので、「予測確率 vs 実測死亡率」という古典的な較正の枠組みが直接は当てはまらない。</li><li>ただし代替情報はある：各リスク帯の実死亡率（Table 2）と、それを検証コホートに適用したときの実死亡率（Table 4）を比べれば、リスク帯の意味がどれだけ保たれたかが分かる。前述のとおり低リスク帯 1.7% → 3.0%、中リスク帯 12.0% → 8.3% と動いており、判別（AUROC 0.83 → 0.84）はほぼ不変なのに、リスク帯の絶対値はずれている。これは較正のずれと同じ構造である。</li><li>導入する側にとってはこちらのほうが重要である。「低リスクなら退室してよい」という運用判断は、低リスク帯の実死亡率が1.7%なのか3.0%なのかで意味が変わる。</li></ul>
+<p>&gt; これは論文本文ではなく一般的な背景知識である：予測モデルの評価は TRIPOD 声明などで判別（discrimination）と較正（calibration）の両方を報告することが求められている。判別が保たれても較正が崩れる現象は、モデルを別集団に移したときの典型的な挙動として広く知られている。本論文は TRIPOD への準拠を宣言しておらず、報告項目も TRIPOD の要求を満たしていない。</p>
+<h3>16. PDF照合で判明した旧記述の誤り・不足 📝</h3>
+<p>本ノートの改稿前の版と原著PDFを1項目ずつ照合した結果。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>旧記述</th><th>PDF（正）</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>施設の表現</td><td>「RWJ の成人ICU <strong>5床群</strong> ＋ Stamford 病院の成人ICU <strong>1床群</strong>」</td><td><strong>RWJ は5つのICU（内科系／外科・外傷／神経集中治療／冠疾患／心臓血管外科）、STM は305床の地域病院の単一内科外科混合ICU</strong>。合計6ICU</td><td><strong>誤り</strong>。「床」ではなくユニット。訂正</td></tr>
+<tr><td>AUROC</td><td>「AUROC・較正の結果は抽出範囲外のため本ノートに反映していない」</td><td><strong>AUROC 0.83（95%CI 0.79–0.86）</strong>、検証 <strong>0.84（0.81–0.87）</strong> が Table 2・Table 4 に明記</td><td><strong>重大な欠落</strong>。追記</td></tr>
+<tr><td>較正</td><td>同上（「抽出範囲外」）</td><td><strong>較正は論文自体に報告が無い</strong>。「抽出範囲外」ではなく「存在しない」</td><td><strong>記述の性質が違う</strong>。訂正</td></tr>
+<tr><td>検証コホート</td><td>「検証データセットでも性能は高いままだった」（数値なし）</td><td><strong>2,094入室、2021年11月〜2022年2月、同2施設。死亡 3.0% / 8.3% / 45.1%、感度64%・特異度89%、PPV 45%、NPV 94%、AUROC 0.84</strong></td><td><strong>欠落</strong>。追記</td></tr>
+<tr><td>開発／検証の別</td><td>1,810例を単に「前向き評価」と記載</td><td><strong>1,810例が開発データセット</strong>。カットポイント37・58 はこのコホートで決定。<strong>検証コホートは別時期の2,094例（temporal validation、外部検証ではない）</strong></td><td><strong>重要な区別の欠落</strong>。追記</td></tr>
+<tr><td>在院日数・費用・再入室</td><td>「実数は抽出範囲外」</td><td><strong>ICU在室日数 2.32 / 3.82 / 5.43日、再入室 6.7% / 6.5% / 16.9%、推定請求額 $8,713 / $13,096 / $18,774</strong>（Figure 2）。群間差も95%CI付きで本文にあり</td><td><strong>欠落</strong>。追記</td></tr>
+<tr><td>利益相反</td><td>「商用製品（OBS Medical の Visensia）を構成要素に含む」のみ</td><td><strong>ViSIG Health が資金提供／参加2病院は支払いを受領／筆頭著者の会社 Prescient Healthcare Consulting が rSIGNIPHY の特許を保有／Lissauer の所属機関は Prescient から資金提供</strong></td><td><strong>重大な欠落</strong>。追記</td></tr>
+<tr><td>スコアの構成要素</td><td>「心拍数・呼吸数・酸素飽和度・平均動脈圧・人工呼吸の有無 ＋ Visensia Index」</td><td>同じ。<strong>6要素 × 0〜2点 ＝ 30分区間あたり0〜12点</strong>、指数平均のうえ0〜100に再スケール</td><td><strong>正しい</strong>。作り方の詳細を追記</td></tr>
+<tr><td>更新頻度</td><td>「30分ごと」</td><td><strong>30分ごと</strong>（ただし文字は10分ごと、単語＝連続3文字＝30分）</td><td><strong>正しい</strong>。内部構造を追記</td></tr>
+<tr><td>症例数</td><td>1,810入室</td><td><strong>1,810入室</strong>（RWJ 1,407＝77.8%、STM 403＝22.2%）</td><td><strong>正しい</strong>。内訳を追記</td></tr>
+<tr><td>研究期間</td><td>「2020年8〜12月」</td><td><strong>Abstract は「2020年8月から12月」だが、Methods は「2020年の3か月間」</strong></td><td><strong>原著内で食い違い</strong>。両論併記に訂正</td></tr>
+<tr><td>COVID-19</td><td>「2020年8〜12月（COVID-19 パンデミック期）」</td><td>本文の限界は「<strong>COVID-19 デルタ株サージの最後の名残の時期</strong>」と記載</td><td><strong>原著内で不整合</strong>（下記）</td></tr>
+<tr><td>感度・特異度</td><td>「感度51%、特異度91%」</td><td><strong>感度51%（46–56%）、特異度91%（90–92%）。加えて PPV 40%（34–46%）、NPV 94%（93–95%）</strong></td><td><strong>正しいが不足</strong>。CIとPPV/NPVを追記</td></tr>
+<tr><td>先行 rSIGNIPHY</td><td>「3群 3.9%・13.8%・25.7%、感度43%・PPV 25%」</td><td>同じ</td><td><strong>正しい</strong></td></tr>
+<tr><td>3相設計</td><td>第1相／第2相／第3相の説明</td><td>同じ。加えて<strong>論文執筆時点で第2相・第3相は「進行中（underway）」</strong></td><td><strong>正しい</strong>。進捗を追記</td></tr>
+<tr><td>ファイル名</td><td>「ViSIG 1810例・前向き第1相（CCM2023）」</td><td>1,810例・第1相・CCM 2023 いずれも一致</td><td><strong>訂正不要</strong></td></tr>
+<tr><td>書誌情報</td><td>Crit Care Med. 2023;51(10):1285-1293</td><td>紙面に <strong>October 2023 • Volume 51 • Number 10</strong>、ページ 1285–1293、DOI 10.1097/CCM.0000000000005931 が印字</td><td><strong>正しい</strong></td></tr>
+</tbody></table></div>
+<h4>原著自体に含まれる不整合（PDFを正とし、そのまま記録する）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>不整合</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>研究期間</strong></td><td>Abstract の PATIENTS は「2020年8月から12月（August to December 2020）」、Methods は「2020年の3か月間（a 3-month time period in 2020）」。<strong>5か月と3か月が並立している</strong></td></tr>
+<tr><td>2</td><td><strong>COVID-19の時期</strong></td><td>限界の項は「<strong>米国におけるCOVID-19デルタ株サージの最後の名残の時期に実施</strong>」と書くが、登録期間は2020年後半である。（<strong>これは論文本文ではなく一般的な背景知識であるが</strong>、米国のデルタ株サージは2021年後半であり、2020年8〜12月とは重ならない。検証コホート（2021年11月〜2022年2月）ならデルタ株末期に相当する。どちらのコホートを指した記述か本文からは判別できない）</td></tr>
+<tr><td>3</td><td><strong>Table 4 の特異度の信頼区間</strong></td><td>「<strong>specificity = 89% (90%–92%)</strong>」と印字されている。<strong>点推定値89%が信頼区間の外にある</strong>。生データから計算すると特異度 = 1,616/1,825 = 88.5% ≒ 89% なので<strong>点推定値のほうが正しく、CIは誤植</strong>（開発コホートの特異度91%(90–92%)のCIを取り違えた可能性が高い）</td></tr>
+<tr><td>4</td><td><strong>RWJ 中リスク群の死亡率</strong></td><td>本文は「13.2%」、Table 3 は「13.3%（10.3%–16.2%）」。生データ 66/498 = 13.25% なので<strong>表の丸めが正しい</strong></td></tr>
+<tr><td>5</td><td><strong>AUROC の表記単位</strong></td><td>Table 2 は「area under the receiver operating characteristic curve = <strong>0.83 (79%–86%)</strong>」と、点推定は小数、CIはパーセント表記が混在。Table 4 も「0.84 (81%–87%)」で同様</td></tr>
+<tr><td>6</td><td><strong>STM 低リスク群の死亡率</strong></td><td>本文中に「<strong>2.3%%</strong>」とパーセント記号が二重に印字されている（誤植）</td></tr>
+<tr><td>7</td><td><strong>AUROC についての論理</strong></td><td>考察の「AU-ROC は <strong>イベントが非イベントを大きく上回るとき</strong> に重要性が曖昧」は、引用文献の趣旨および本研究の状況（死亡10.2%）と逆。<strong>「非イベントがイベントを大きく上回るとき」の誤り</strong>と読める</td></tr>
+<tr><td>8</td><td><strong>感度改善の根拠</strong></td><td>Visensia 追加によって感度が改善したという主要な根拠が「<strong>A. Kramer, personal communication, 2023</strong>」＝<strong>私信</strong>であり、査読済み文献ではない</td></tr>
+</tbody></table></div>
+<h3>17. 既存ノートとの整合 🔗</h3>
+<ul><li><code>ICU重症度スコアリングシステム総論</code> および <code>ICUスコアリングシステムの40年（Lasting Legacy・ICM2022）</code> との関係：これらが扱う APACHE・SAPS・SOFA は「入室後24時間のデータ→ベンチマーク」という系統である。本論文の Introduction はまさにこの系統を「CDSSには使えない」と名指しで区別している。両者は競合ではなく用途が違う道具として整理すべきで、既存ノートの記述と矛盾しない。</li><li><code>GOSSIS-1は日本でも識別能を保つが疾患カテゴリで較正が崩れる — パンデミックで性能低下（JIPAD外部検証・CritCareExplor2025）</code> との関係：本論文は較正を報告していないが、開発コホートと検証コホートの間でリスク帯の実死亡率がずれている（低 1.7%→3.0%、中 12.0%→8.3%）。「識別能は移植できるが較正は崩れる」という GOSSIS-1 ノートの結論と同じ方向を示唆する。矛盾はない。</li><li><code>サブグループごとにモデルを再較正しないと質評価が誤作動する（JIPAD 14513例・9サブグループ・JClinEpi2023）</code> との関係：本論文でも施設別に高リスク群の死亡率が 43.2%（RWJ）vs 30.0%（STM）と大きく異なる。単一のカットポイントを複数施設に当てることの限界という点で整合する。</li><li><code>欠測値がAPACHE IIIとJRODのSMRを押し上げる — 血ガスとアルブミンを測らない施設ほど成績が悪く見える（JIPAD 61357例・JCritCare2024）</code> との関係：本論文の RWJ における人工呼吸捕捉の不完全性（16.9%）は、「測っていない／取れていない項目が施設間比較を歪める」という同じ現象のバイタル版である。整合する。</li><li><code>急性膵炎ICU患者の4人に1人が「ICU死亡または7日超滞在」 — ANZICS13275例の予測モデルはAUROC 0.827だが感度0.54（CritCare2025）</code> との関係：<strong>AUROC 0.83前後・感度0.5前後</strong>という数字がほぼ一致する。「AUROCが0.8台でも感度は半分」という関係は集中治療の予測モデルに共通するという読みを補強する。相互参照する価値が高い。</li><li><code>敗血症予測の機械学習早期警告システムに対する臨床医の認識（CCM）</code> との関係：本論文の考察が述べる「早期警告システムの真の試金石は臨床医が受け入れ適切に反応するか」という主張と直結する。本論文は第1相（精度）どまりで、受容の問題は扱っていない。</li><li><code>MEWS・早期警告スコアと迅速対応チーム（IHI）</code> および <code>NEWSは非待機の外科系入院でも内科系と同等以上に識別する — ただし「術後」は同定できていない（Kovacs・BJS2016）</code> との関係：本論文は Visensia Index の代わりに <strong>NEWS 2 を代入可能</strong>と明記しており、既存ノートの NEWS 系スコアと接続する。ただし本論文は一般病棟のEWSをそのままICUに持ち込むと偽陽性が洪水になると述べており、病棟のEWSとICUの動的スコアは同一視しない必要がある。</li><li><code>集中治療における人工知能の未来 — 予測AIから行動可能なAIへ（What's New・ICM2023）</code> との関係：「予測AI（当てる）」から「行動可能なAI（診療を変える）」への移行という枠組みで見ると、本論文はまだ完全に「予測AI」の段階であり、著者自身も第3相でしか行動変容を測らないと述べている。整合する。</li><li><code>深層学習でICU退室後1年までの死亡を予測しSHAPで説明する（JIPAD・透明なcAI開発の枠組み・AnaesthCritCarePainMed2022）</code> との関係：あちらは後ろ向きデータでの説明可能性、こちらは前向きライブデータでの実装可能性という別の軸。補完関係にある。</li><li>矛盾は見つからなかった。</li></ul>
+<h3>18. 批判的吟味（JCでの論点）🧐</h3>
+<ol><li>これは「検証」なのか「開発」なのか。1,810例のコホートは、カットポイント（37 と 58）をそこから導出した開発データセットである。本文自身が「開発データセットで決定した重みとリスク帯」という表現を使っている。したがって感度51%・特異度91%・AUROC 0.83 は内部性能であり、真に独立なのは2,094例の temporal validation のほうである。タイトルの "Prospective Evaluation" という語が、この構造をやや見えにくくしている。</li><li>検証は「時期をずらした同じ2施設」であり外部検証ではない。他施設への一般化可能性は依然として未検証。著者も限界1で認めている。</li><li>較正が一切報告されていない。そして代替情報（リスク帯の実死亡率）を見ると、低リスク帯が 1.7% → 3.0% とほぼ倍になっている。低リスクを退室判断に使うなら、この1.3ポイントの差は無視できない。</li><li>カットポイントがデータ駆動で決められ、その位置が Figure 1 の局所的な谷にある。37 という境界は観測点が 3.5% → 1.4% と落ちる直後に置かれている。別のコホートでは同じ位置に谷が来る保証はない。多項式回帰の r² = 0.98 は平滑化後の当てはまりであって、カットポイントの安定性を保証するものではない。</li><li>「最大 ViSIG スコア」を使う設計の帰結。リスク帯は滞在中の最大値で決まるので、滞在が長いほど高リスクに分類されやすい（サンプリングが増えるため）。実際、高リスク群のICU在室日数は5.43日と最も長い。「高リスクだから長く居た」のか「長く居たから高リスク判定された」のか、この解析では分離できない。副次アウトカムのICU在室日数の差（3.11日）は、この循環に一部由来している可能性がある。</li><li>7日で打ち切る設計。「7日を超えて残る患者は既に臨床医から異常に重症と認識されている」という理由づけは、日本のICU（在室日数が短い）にも米国の別の施設にも自動的には当てはまらない。当院の persistent critical illness に関する知見（JIPAD 28万例のノート）と併せて考えると、この打ち切りは施設依存の判断である。</li><li>6要素のうち1つ（人工呼吸）が施設間で系統的に測定精度が違う。RWJ の 16.9% は明らかに低い。にもかかわらず RWJ のほうが判別のコントラストが大きい（相対リスク 28.8 vs 13.1）というのは、MV要素の寄与が実は小さいのか、他の要素が補償したのか、本文からは判断できない。</li><li>体温と昇圧薬が入っていない。敗血症・感染症の悪化を捉えるうえで体温は主要な情報であり、MAP は昇圧薬で作られていれば意味が反転する。「取れるものだけで作った」ことの代償が、どれだけ性能を削ったかは不明。</li><li>副次アウトカムの検定を平均で行った根拠。在室日数は右に強く歪む分布であり、通常は中央値で比較する。著者は「平均的な経済的負担に関心があった」と明示的に理由を述べており、これ自体は defensible だが、在室日数の「差」を臨床効果として読むと過大評価になる。</li><li>推定請求額（charges）はコストではない。米国の charges は実際の資源消費でも支払額でもない。既発表の式から導出された推定値であり、日本の診療報酬体系にはそのまま移せない。</li><li>利益相反の構造が強い。特許保有者が筆頭著者、事業会社が資金提供、参加施設が支払いを受領。独立した解析についての記載がない。これは結果を否定する理由にはならないが、効果量を割り引いて読む理由にはなる。</li><li>アラートの40%が死亡の1日以内。「90%が2.1時間以上前」という表現は肯定的に響くが、裏返すと<strong>4割は「もう手遅れに近い段階」で鳴っている</strong>。中央値60時間という数字と併せると、アラートの分布は二峰性に近い可能性がある（SDC Figure 3 で確認すべき）。</li><li><strong>原著の数値表記に複数の誤植がある</strong>（Table 4 の特異度CI、本文の13.2% vs 表の13.3%、"2.3%%"、AUROCの単位混在）。査読・校正の精度という点で減点材料であり、他の数値も自分で検算する姿勢が要る。</li><li>鍵となる主張の一つが私信に依拠している。「Visensia を足したら感度が改善した」という ViSIG の存在理由そのものが、"A. Kramer, personal communication, 2023" で支えられている。</li><li>第2相・第3相がまだ出ていない（2023年時点）。本論文が本当に意味を持つかは、臨床医に見せたときに転帰が変わるかにかかっている。本論文単独で導入判断はできない。</li></ol>
+<h3>19. 主要引用文献一覧 📚</h3>
+<p>原著の参考文献のうち、本文の論旨に直接関わるもの。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症度と予測モデルの50年史（ベンチマークとしての位置づけの根拠）</td><td>Kramer AA, Zimmerman JE, Knaus WA. Crit Care Med 2021;49:728-740</td></tr>
+<tr><td>2</td><td>NEWS 初版（一般病棟の早期警告スコア）</td><td>Royal College of Physicians. National Early Warning Score (NEWS). London, RCP, 2012</td></tr>
+<tr><td>3</td><td>NEWS 2（Visensia の代替として本文が名指しするスコア）</td><td>Royal College of Physicians. NEWS 2. 2017</td></tr>
+<tr><td>4</td><td>病棟患者のリスク層別化ツールの多施設開発・検証</td><td>Churpek MM, Yuen TC, Winslow C, et al. Am J Respir Crit Care Med 2014;190:649-655</td></tr>
+<tr><td>5</td><td>Rothman Index が外科ICU患者の死亡と再入室を予測</td><td>Alarhayem AQ, Muir MT, Jenkins DJ, et al. J Trauma Acute Care Surg 2019;86:635-641</td></tr>
+<tr><td>6</td><td>DeepSOFA：解釈可能な深層学習による連続 acuity score</td><td>Shickel B, Loftus TJ, Adhikari L, et al. Sci Rep 2019;9:1879</td></tr>
+<tr><td>7</td><td>ICUにおける subacute potentially catastrophic illness の徴候：モデル開発と検証</td><td>Moss TJ, Lake DE, Calland JF, et al. Crit Care Med 2016;44:1639-1648</td></tr>
+<tr><td>8</td><td>電子カルテ由来リスクスコアによる心臓ICU患者の早期予後判定</td><td>Kunitomo Y, Thomas A, Chouairi F, et al. Am Heart J 2021;238:85-88</td></tr>
+<tr><td>9</td><td>深層学習で臨床的悪化の表面を引っかく（「as is」データで評価すべきという主張の出典）</td><td>Churpek MM, Edelson DP. Crit Care Med 2021;49:1366-1368</td></tr>
+<tr><td>10</td><td>バイタルサイン情報を用いたICU退室判断支援</td><td>Kramer AA. Med Res Archives 2017;5:1-12</td></tr>
+<tr><td>11</td><td>連続更新型予測解析モデル（rSIGNIPHY の3群 3.9%/13.8%/25.7%、13ICU・59,400入室の根拠）</td><td>Kramer AA. Med Res Archives 2019;7:1-12</td></tr>
+<tr><td>12</td><td>遺伝的アルゴリズムで生理学データの有害パターンを同定する（ViSIG の詳細記述の出典）</td><td>Kramer AA. Inf Med Unlocked 2021;26:100754</td></tr>
+<tr><td>13</td><td>統合モニタリングと解析による患者悪化の早期警告（Visensia の原典）</td><td>Tarassenko L, Hann A, Young D. Br J Anaesth 2006;97:64-68</td></tr>
+<tr><td>14</td><td>電子統合モニタリングによる step-down unit の心肺不安定性の発生率定義</td><td>Hravnak M, Edwards L, Clontz A, et al. Arch Intern Med 2008;168:1300-1308</td></tr>
+<tr><td>15</td><td>早期警告システムは迅速対応チームの高リスク患者検出を強化できるか</td><td>Reardon PM, Seely AJE, Fernando SM, et al. J Intensive Care Med 2021;36:542-549</td></tr>
+<tr><td>16</td><td>統合モニタリングシステム導入前後の心肺不安定性</td><td>Hravnak M, DeVita MA, Clontz A, et al. Crit Care Med 2011;39:65-72</td></tr>
+<tr><td>17</td><td>遺伝的アルゴリズム入門</td><td>Goodman ED. GECCO '13 Companion. 2013:225-246</td></tr>
+<tr><td>18</td><td>ICU内の総費用に対する死亡の影響（推定請求額の算出式の出典）</td><td>Kramer AA, Dasta JK, Kane-Gill SL. Crit Care Med 2017;45:1457-1463</td></tr>
+<tr><td>19</td><td>Univariate Flagging Algorithm：解釈可能な予測モデリング（従来の bin 構成法の比較対象）</td><td>Sheth M, Gerovitch A, Welsch R, et al. PLoS One 2019;14:e0223161</td></tr>
+<tr><td>20</td><td>ICUにおける稀なイベント：分類と予測の課題</td><td>Leisman DE. Crit Care Med 2018;46:418-424</td></tr>
+<tr><td>21</td><td>早期警告スコアの評価にC統計量が有益でない理由と、代わりに使うべき指標</td><td>Romero-Brufau S, Huddleston JM, Escobar GJ, et al. Crit Care 2015;19:1-6</td></tr>
+<tr><td>22</td><td>医療におけるマジック・エイトボールに用心せよ（proactive vs reactive の議論）</td><td>Blum JM. Crit Care Med 2019;47:1650-1651</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">綺麗に掃除された後ろ向きデータで示された予測性能は、生の臨床データでは同じに出るとは限らない。導入前に「あるがまま」のデータで測り直す</mark> —— これが本論文の本体である。ViSIG はライブデータでも3群層別を保ち（ICU死亡 <strong>1.7% / 12.0% / 39.8%</strong>、AUROC 0.83）、時期をずらした2,094例でも判別は保たれた（AUROC 0.84）。</p>
+</div>
+<ul><li><strong>判別は保たれたが、較正は報告されていない。</strong> そして代替指標を見ると、低リスク帯の死亡率は開発1.7% → 検証3.0%とほぼ倍になっている。<mark class="hl">「AUROCが同じだから移植できる」と読んではいけない。リスク帯の実死亡率は自施設で測り直す</mark>。</li><li><strong>感度51%・特異度91%・PPV 40%</strong> は、「死亡例の半分は拾えないが、鳴ったら10人に4人は本当に亡くなる」という設計。ICUでは偽陽性の洪水がシステムを殺すので、この振り方自体は妥当。ただし<mark class="hl">「鳴っていないから大丈夫」は成立しない（アラートなし群の6%が死亡）</mark>。</li><li><strong>必要なデータは5項目（HR・RR・MAP・SpO₂・人工呼吸の有無）だけ。当院のバイタル自動収集で揃う。</strong> ただし体温と昇圧薬が落ちること、人工呼吸の有無をタグ推定すると取りこぼすことは、この論文が実地で踏んだ地雷としてそのまま引き継がれる。</li><li><strong>Visensia は NEWS 2 で置き換えられる</strong>と本文が明記している。<mark class="hl">当院で内製するなら商用スコアに依存しない設計が取れる</mark>。</li><li><strong>導入手順は3相設計をそのまま借りる</strong>：第1相＝生データで精度確認 → 第2相＝臨床医に見せずに較正 → 第3相＝見せて転帰を測る。第2相を飛ばさない。</li><li><strong>本論文は第1相であり、転帰が改善するという証拠はまだ無い。</strong> 加えて特許保有者が筆頭著者・事業会社が資金提供・参加施設が支払いを受領という利益相反構造がある。導入根拠としては「実装可能性の証拠」であって「有効性の証拠」ではない。</li></ul>
+<h4>判断の流れ（当院で動的スコアを検討するとき）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>動的スコアを導入したいと言われた</td><td>その性能は後ろ向きの整形済みデータで出た数字か</td><td>ライブデータでの性能が示されていなければ、まず自施設の生データで第1相をやる</td></tr>
+<tr><td>ライブデータでの判別（AUROC）が良い</td><td>較正（各リスク帯の実死亡率）が示されているか</td><td>示されていなければ、自施設データでリスク帯ごとの実死亡率を測る</td></tr>
+<tr><td>リスク帯の実死亡率が公表値とずれた</td><td>判別も落ちているか、絶対値だけずれているか</td><td>判別が保たれているならカットポイントの再設定で足りることが多い</td></tr>
+<tr><td>感度が5割前後</td><td>「鳴らない＝安全」と運用側が誤解していないか</td><td>「見落としがちな高リスク患者を挙げる道具」と明示し、既存の起動基準は残す</td></tr>
+<tr><td>アラート数が多すぎる／少なすぎる</td><td>PPVと1日あたり件数を実測したか</td><td>高リスク閾値を動かす前に、まず1週間サイレント運用して件数を数える</td></tr>
+<tr><td>現場に見せる段階になった</td><td>見せない状態での較正（第2相）を終えたか</td><td>終えていなければ第3相に進まない</td></tr>
+<tr><td>人工呼吸・昇圧薬・体温をどう取るか</td><td>モニタ由来だけで足りるか、カルテ・ポンプ側と結合するか</td><td>人工呼吸器の直接インターフェースを確保する。タグ推定は使わない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

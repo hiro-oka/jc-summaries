@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>人工呼吸器の吸気呼気切り替えは適切か（波形で判断）（ICM2016）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-015-4174-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">人工呼吸器の吸気呼気切り替えは適切か（波形で判断）（ICM2016）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Mojoli F, Iotti GA, Arnal JM, Braschi A. Is the ventilator switching from inspiration to expiration at the right time? Look at waveforms! Intensive Care Med. 2016;42(6):914–915. doi:10.1007/s00134-015-4174-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2016-05）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-015-4174-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-015-4174-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Is the ventilator switching from inspiration to expiration at the right time? Look at waveforms!</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-015-4174-6.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-015-4174-6.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-015-4174-6.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>PSV中のラウンドで「フロー波形の呼気側の立ち上がり」を必ず1呼吸は見る</strong>。呼気ピークが吸気終了直後に鋭く出て、そのまま指数関数的に減衰していれば切り替えは妥当。ここが本論文の全て。</li><li><strong>呼気ピークが削られて平坦になり、同じ瞬間にPawがへこむ</strong>なら早期サイクリング。呼気トリガ感度（ETS）の閾値を<strong>下げて</strong>吸気を延ばす方向に調整する（機種により「ESENS」「Exp. Trigger」「E-Cycle」等の名称）。</li><li><strong>吸気フローの減衰が途中で「速い→遅い」に折れる</strong>なら遅延サイクリング。ETSを<strong>上げて</strong>吸気を短くする。折れ点より後は患者が吸っていない受動的な送気であり、auto-PEEPとトリガ失敗の温床になる。</li><li><strong>ETSの数値を施設一律で決めない</strong>。本論文の3例は正しい例がETS 10%、早すぎる例が50%、遅すぎる例が25%と、<mark class="hl">「何%が正しいか」は患者の呼吸メカニクス次第で決まる</mark>。数値ではなく波形で合わせる。</li><li><strong>食道内圧カテーテルが無くても運用できる</strong>のが利点。当院で日常的にPmuscを測っていない病棟でも、標準搭載のPaw・フロー波形だけでこの評価はできる。呼吸療法士・看護師とも共有できる指標として扱える。</li><li>努力の<strong>大きさ</strong>（P0.1・ΔPocc）を見る手技とは別物で、本論文が扱うのは努力の<strong>タイミング</strong>。当院では「まず大きさを合わせ、次にタイミングを合わせる」の二段構えで整理すると混乱しない（<span class="wl">圧支持換気での吸気努力タイミングを波形から検出する（波形法）</span> と同じ整理）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：自発呼吸では、吸気筋が完全に弛緩し切る<strong>前</strong>に吸気→呼気のフロー反転が起こる。正確な時点は呼吸パターンと呼吸メカニクスに依存するが、おおよそ「弛緩の半分（half-relaxation）」の時点と近似できる。理想的には補助換気中も人工呼吸器はこの時点でサイクルオフすべきである。</li><li><strong>Unknown（分かっていなかったこと）</strong>：その「理想の時点」を、食道内圧や吸気筋圧（Pmusc）を測らずに、<mark class="hl">ベッドサイドの標準波形だけで見分けられるのか</mark>。何を見ればサイクリングの早すぎ／遅すぎが分かるのか、具体的な視覚サインが整理されていなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：PSV下の3症例で、Pmuscを基準（reference）に置いて、正しい／早すぎる／遅すぎるサイクリングそれぞれに対応する<strong>標準波形上の特異的サイン</strong>を提示した。すなわち、人工呼吸器の画面上にある情報だけでサイクリングの最適時点を検出でき、ETS設定の調整を導けることを示した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで <strong>PSVのサイクリングが適切かどうかは、食道内圧を測らなくても、Pawとフローの波形にある3つのサイン（呼気ピークの出方、Pawのへこみ、吸気フロー減衰の折れ）で判定でき、そのままETS設定の調整に使える。</strong></p>
+</div>
+<ul><li>正常な非補助呼吸では、吸気筋が<strong>完全に弛緩する十分前</strong>に吸気→呼気のフロー反転が起きる。厳密な時点は呼吸パターンと呼吸メカニクスによるが、<strong>half-relaxation（弛緩の半分）で近似できる</strong>。</li><li>理想的には、補助換気中の人工呼吸器も<strong>この時点でサイクルオフすべき</strong>である。</li><li>PSV下の<strong>3症例</strong>について、吸気筋が発生する圧（Pmusc）を基準として、正しい／早すぎる／遅すぎるサイクリングに対応する標準波形上のサインを記述した。</li><li><strong>正しいサイクリング（図1a／パネルA）</strong>：吸気フローが速やかに減衰し、そのまま呼気フローへ移行して<strong>直ちにピーク（a）</strong>を示し、その後<strong>指数関数的に減衰（b）</strong>する。</li><li><strong>早すぎるサイクリング（図1b／パネルB）</strong>：サイクルオフ後も患者の吸気活動が続き、それが<strong>呼気フローにブレーキをかけて呼気ピークを削り取る（c）</strong>。同時に<strong>Pawにへこみ（d）</strong>が生じる。自発吸気が終わって初めて、正常な指数関数的呼気フロー減衰が始まる（e）。</li><li><strong>遅すぎるサイクリング（図1c／パネルC）</strong>：吸気フローの減衰が<strong>速い指数から遅い指数へ突然変化する点（f）</strong>が、自発吸気の終了と、そこから始まる<strong>二次的な受動的送気（passive inflation）相</strong>の開始を示す。</li><li>3例のETS設定はそれぞれ<strong>10%・50%・25%</strong>（ピーク吸気フローに対する割合）だった。</li><li>結論：人工呼吸器画面上の標準波形は、<strong>サイクルオフの最適時点を検出するための情報を提供しており、適切な設定調整の指針として使える</strong>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 吸気呼気切り替え（cycling）の基礎（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>PSV（pressure support ventilation, 圧支持換気）</strong>とは、患者が吸い始めた合図（トリガ）を人工呼吸器が受けて、設定した圧を気道にかけ、患者の吸気が終わりそうになったら圧を切って呼気に移す補助モードである。患者が吸気の開始と終了、呼吸数、そして（部分的に）1回換気量を決める。</p>
+<p><strong>サイクリング（cycling-off／吸気終了トリガ）</strong>とは、この「吸気から呼気へ切り替える判定」のこと。PSVでは通常<strong>フローが基準</strong>になる。人工呼吸器は各呼吸のピーク吸気フローを覚えておき、フローがその<strong>一定割合まで落ちたら</strong>吸気を終了する。この割合が<strong>ETS（expiratory trigger sensitivity, 呼気トリガ感度）</strong>で、機種により25%が既定値のことが多い（本論文はETSの語と3例の設定値を示すが、既定値についての記載はない）。</p>
+<p><strong>ETSの向きに注意</strong>：ETSの数値を<strong>大きく</strong>すると（例：25%→50%）、まだフローが高いうちに切れるので<strong>吸気は短くなる＝早く切り替わる</strong>。<strong>小さく</strong>すると（例：25%→10%）フローがもっと落ちるまで待つので<strong>吸気は長くなる＝遅く切り替わる</strong>。直感と逆になりやすいので、設定を触る前にこの向きを口に出して確認するとよい。</p>
+<p><strong>Pmusc（inspiratory muscle pressure, 吸気筋圧）</strong>とは、吸気筋が生み出す圧を陰性の値で表したもの。実測には食道内圧カテーテルなどが要る。本論文ではこのPmuscを「真実の基準（reference）」として置き、それに対して標準波形がどう見えるかを対照させている。<mark class="hl">つまりPmuscは答え合わせ用であって、日常でこれを測れという主張ではない</mark>。</p>
+<p><strong>なぜ半分（half-relaxation）なのか</strong>：自発呼吸では、吸気筋が力を抜き始めても肺と胸郭は慣性・粘性抵抗を持つため、筋が完全に脱力し切る前にフローの向きが変わる。その時点はメカニクスによって前後するが、実用的には「弛緩の半分」で近似できる、というのが本論文の出発点である。人工呼吸器がこの時点でサイクルオフすれば、機械の吸気時間と患者の神経性吸気時間がほぼ揃う。</p>
+<p><strong>ずれると何が起きるか（本論文の主張ではなく一般的な背景知識）</strong>：早すぎれば患者は吸い続けているのに送気が切れるため努力が空振りし、二段呼吸（double triggering）につながる。遅すぎれば呼気時間が削られて動的過膨張・auto-PEEPを招き、トリガ失敗（ineffective effort）の原因になる。<mark class="hl">本論文はこれらの帰結には触れておらず、あくまで「見分け方」に限定した短報である</mark>。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p>本文冒頭の主張は次の3文に集約される。</p>
+<ol><li><strong>正常な非補助呼吸（normal unassisted breathing）では、吸気→呼気のフロー反転は吸気筋の完全弛緩よりかなり前に生じる。</strong></li><li><strong>その正確なタイミングは呼吸パターンと呼吸メカニクスに依存するが、half-relaxation（弛緩の半分）で近似できる。</strong></li><li><strong>理想的には、補助換気中の人工呼吸器はこの時点でサイクルオフすべきである。</strong></li></ol>
+<p>この3文が本論文の理論的前提であり、以降の図はすべて「実際のサイクルオフが、この理想時点に対して前か・後か・一致か」を波形上で判定するための材料である。</p>
+<p>目的は明示的な一文としては書かれていないが、記述から「<strong>Pmuscを基準に置いたとき、正しい／早い／遅いサイクリングが標準波形上でどう見えるかを示すこと</strong>」であることが読み取れる。</p>
+<h3>3. 方法（Methods）📐</h3>
+<p>短報のため独立したMethodsセクションは存在しない。本文から読み取れる範囲を整理する。</p>
+<ul><li><strong>デザイン</strong>：症例波形の記述的提示（descriptive case illustration）。ICMの「Imaging in Intensive Care Medicine」枠。仮説検定・比較試験ではない。</li><li><strong>対象</strong>：<strong>PSV下の3症例</strong>。年齢・性別・基礎疾患・診断・重症度・換気設定（PS圧・PEEP・FiO₂）・呼吸メカニクス（コンプライアンス・抵抗・時定数）は<mark class="hl">本文に一切記載がない</mark>。</li><li><strong>測定</strong>：気道内圧（Paw, cmH₂O）、吸気筋圧（Pmusc, cmH₂O）、フロー（mL/s）の3チャネルを同時記録。Pmuscの測定法（食道内圧からの導出か、他の手法か）も<mark class="hl">本文に記載がない</mark>。</li><li><strong>参照基準</strong>：Pmusc。図中では破線が吸気筋弛緩の<strong>開始と終了</strong>を、実線が<strong>half-relaxationにおける最適サイクルオフ点</strong>を示す。</li><li><strong>介入・比較</strong>：3例のETS設定は<strong>ピーク吸気フローの10%（正しい例）・50%（早すぎる例）・25%（遅すぎる例）</strong>。ただし1例につき1設定の提示であり、<mark class="hl">同一患者でETSを振って比較した記録ではない</mark>。</li><li><strong>アウトカム</strong>：定量的アウトカムは設定されていない。提示されるのは波形上の質的サイン（a〜f の6点）。</li><li><strong>解析</strong>：統計解析なし。サンプルサイズ設計・事前登録の記載なし。参考文献リストもなし。</li></ul>
+<h3>4. 図1の読み方 — 全体構成 🖼️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-015-4174-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-015-4174-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. ベッドサイド波形解析によるPSV下のサイクルオフ評価（原図・無改変。©Springer-Verlag Berlin Heidelberg and ESICM 2015） 原キャプション訳：気道内圧（Paw）、吸気筋圧（Pmusc）、フローを、正しい（a）・早すぎる（b）・遅すぎる（c）サイクルオフの各症例で表示。呼気トリガ感度（ETS）はそれぞれピーク吸気フローの10%・50%・25%に設定されていた。小文字は本文で説明。破線は吸気筋弛緩の開始と終了を示し、垂直の実線はhalf-relaxationにおける最適サイクルオフ点を示す。Pawとフロー上の特異的サインが、サイクルオフの正しい時点だったはずのものを指し示しており（bのeとcのf）、ETSの適切な設定を導きうる。</p>
+</div>
+<p><strong>図の骨格（眼に浮かべるための情報）</strong></p>
+<ul><li><strong>横3列・縦3段のパネル構成</strong>。左列に大文字<strong>A</strong>（正しい）、中列に<strong>B</strong>（早すぎる）、右列に<strong>C</strong>（遅すぎる）。3例は別々の患者である。</li><li><strong>各列の上から順に</strong>：1段目 Paw（cmH₂O）、2段目 Pmusc（cmH₂O）、3段目 Flow（mL/s）。横軸はいずれも Time（s）だが、<mark class="hl">目盛りの数値ラベルは付いておらず、絶対時間は読み取れない</mark>。</li><li><strong>縦軸スケールは列ごとに異なる</strong>。Paw：A は 6〜22、B は 12〜24、C は 0〜30。Pmusc：3列とも -6〜2 で共通。Flow：A は -800〜+800、B は -800〜+800、C は -1500〜+1500。<mark class="hl">C だけフロー軸が約2倍のレンジであり、見た目の振幅を列間で直接比較してはいけない</mark>。</li><li><strong>各パネルを縦に貫く3本の垂直線</strong>：破線2本（吸気筋弛緩の開始＝Pmuscの最陰性点、終了＝Pmuscが0に戻る点）と、その間に引かれた実線1本（half-relaxation＝理想のサイクルオフ点）。この実線と、フロー波形が実際にゼロを横切る点との<strong>前後関係</strong>が、パネル判定の本体である。</li><li>波形は平滑化されておらず、Pmuscトレースには細かなノイズが乗っている。</li></ul>
+<h3>5. パネルA — 正しいサイクリング（ETS 10%）✅</h3>
+<p class="figref">🖼 原著のFigure 1a は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-015-4174-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-015-4174-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1a. 正しいサイクルオフ（原図・無改変。©出典）</p>
+</div>
+<p><strong>Paw（縦軸 6〜22 cmH₂O）</strong>：呼気終末のベースラインは約 10 cmH₂O（PEEP相当）。トリガの瞬間に約 8 cmH₂O まで短く落ち込み、そこから急峻に立ち上がって約 16 に達し、その後ゆるやかに右上がりに漸増して、実線のすぐ手前で頂点 約 20 cmH₂O をとる。頂点から垂直に近い勢いで落ち、約 13 でいったん小さな段（切り替え直後の肩）を作ってから、なだらかにベースラインの 10 へ戻る。</p>
+<p><strong>Pmusc（縦軸 -6〜2 cmH₂O）</strong>：呼気相はほぼ 0 でわずかに揺れる。吸気とともに滑らかに陰性へ振れ、最陰性 約 -4.5 cmH₂O に達する。この最陰性点が1本目の破線。そこから急な立ち上がりで 0 へ復し、2本目の破線で弛緩終了。<strong>両破線の間隔は短く</strong>、その中央に実線が立つ。</p>
+<p><strong>Flow（縦軸 -800〜+800 mL/s）</strong>：呼吸開始前のベースラインは約 -100 mL/s（前呼吸の呼気の尾）。吸気で立ち上がり、ピーク 約 +600 mL/s。その後、最初はなだらかに、実線に近づくにつれ急峻に減衰し、ゼロを鋭く横切って<strong>そのまま一気に呼気側の最大 約 -650 mL/s に到達</strong>する。この点に<strong>矢印付きラベル a</strong>（左から右向きの矢印）が付く。以後は指数関数的に立ち上がって 0 へ漸近し、その減衰カーブの中腹に<strong>ラベル b</strong>（右上から左下を指す矢印）が付く。</p>
+<p><strong>読みどころ</strong>：吸気フローの減衰から呼気ピークまでが<strong>一本の連続した動き</strong>になっている。切り替えの前後で波形が「引っかかる」箇所がない。これが正しいサイクリングの視覚的特徴である。</p>
+<h3>6. パネルB — 早すぎるサイクリング（ETS 50%）⏪</h3>
+<p class="figref">🖼 原著のFigure 1b は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-015-4174-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-015-4174-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1b. 早すぎるサイクルオフ（原図・無改変。©出典）</p>
+</div>
+<p><strong>Paw（縦軸 12〜24 cmH₂O）</strong>：ベースライン 約 15 cmH₂O、トリガ時に 約 13 へ落ち込み、急峻に立ち上がって 約 21.5〜22 のプラトーを保つ。そこからサイクルオフで急落するが、<strong>下がりきった先で約 15 まで落ちて凹む</strong>。この谷に<strong>上から下向きの矢印とラベル d</strong> が付く。その後 Paw は<strong>いったん 約 17.5 まで押し戻され</strong>（患者の吸気努力が終わって胸腔内圧が戻るため）、実線と2本目の破線を過ぎてから 約 14.5 へなだらかに減衰する。<mark class="hl">「サイクルオフしたのに Paw が一度へこんでから戻る」という二相性が、早すぎるサインである</mark>。</p>
+<p><strong>Pmusc（縦軸 -6〜2 cmH₂O）</strong>：最陰性 約 -4.6 cmH₂O。注目すべきは、<strong>Pmuscがまだ最陰性付近に張り付いている段階でサイクルオフが起きている</strong>こと。1本目の破線（弛緩開始）はサイクルオフより<strong>後</strong>にある。弛緩は急峻で、実線（half-relaxation）を経て2本目の破線で 0 に戻る。</p>
+<p><strong>Flow（縦軸 -800〜+800 mL/s）</strong>：ベースライン 約 -50、吸気ピーク 約 +680 mL/s。ETS 50% のため、フローがまだ 約 +350〜400 mL/s と高い段階で吸気が終了する。フローはゼロを横切って呼気側へ入るが、<strong>到達するのは 約 -250 mL/s どまり</strong>で、そこに小さなくぼみとラベル <strong>c</strong>（下から上を指す矢印）が付く。以後、フローは -200〜-300 mL/s の<strong>平坦な帯に押さえ込まれたまま</strong>推移する。これが「患者がまだ吸っているために呼気フローがブレーキをかけられている」区間である。実線／2本目の破線の付近で<strong>ラベル e</strong>（左下から右上を指す矢印）が示す点に達し、ここから初めて<strong>正常な指数関数的減衰</strong>が始まって 0 へ漸近する。</p>
+<p><strong>読みどころ</strong>：呼気ピークが「削り取られて（cutting off）」台形状に潰れ、その分だけ呼気の立ち上がりが遅れる。<mark class="hl">削られた呼気ピーク（c）と Paw のへこみ（d）は同時刻に起きる</mark>ので、2チャネルを縦に見比べれば確信が持てる。そして<strong>e の時点こそが本来サイクルオフすべきだった時刻</strong>であり、ここまで吸気を延ばすようETSを下げればよい、という設定変更の指示が図から直接読める。</p>
+<h3>7. パネルC — 遅すぎるサイクリング（ETS 25%）⏩</h3>
+<p class="figref">🖼 原著のFigure 1c は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-015-4174-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-015-4174-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1c. 遅すぎるサイクルオフ（原図・無改変。©出典）</p>
+</div>
+<p><strong>Paw（縦軸 0〜30 cmH₂O）</strong>：ベースライン 約 10.5 cmH₂O、トリガ時に 約 6.5 まで深く落ち込む（吸気努力が強い）。急峻に 約 21 まで立ち上がった後、<strong>プラトーにならずゆるやかに 約 28 cmH₂O まで上昇し続ける</strong>。この右上がりの区間の後半が、患者が吸うのをやめた後も送気が続いている相にあたる。最後に垂直に近い勢いで約 10 へ落ち、小さな山（約 13）を経てベースラインに戻る。</p>
+<p><strong>Pmusc（縦軸 -6〜2 cmH₂O）</strong>：最陰性 約 -5.1 cmH₂O。1本目の破線（弛緩開始）は Paw がまだ上昇途中の早い時点にあり、実線（half-relaxation）と2本目の破線（弛緩終了）を経て 0 に戻る。<mark class="hl">その後もしばらく送気が続いており、この「Pmusc が 0 に戻った後の送気」が余分な吸気時間である</mark>。</p>
+<p><strong>Flow（縦軸 -1500〜+1500 mL/s）</strong>：この列だけスケールが倍。<strong>呼吸開始前のベースラインが 0 ではなく 約 -700 → -500 mL/s の右上がりの区間</strong>になっており、前の呼気が終わり切らないうちに次の吸気が始まっている（呼気フローがゼロに戻っていない）。吸気で急峻に立ち上がりピーク 約 +1250 mL/s。その後、<strong>最初は速い指数関数的減衰</strong>で 約 +900 mL/s まで落ちるが、そこで<strong>傾きが折れて緩やかな減衰に変わる</strong>。この折れ点に<strong>下から上を指す矢印とラベル f</strong> が付く。以後は 約 +900 から 約 +500 mL/s まで長い時間をかけてだらだらと落ち、最後にサイクルオフで垂直に落下して呼気ピーク 約 -1300 mL/s に達し、そこから戻っていく。</p>
+<p><strong>読みどころ</strong>：<mark class="hl">f の折れ点が「患者の吸気が終わった瞬間」であり、そこから先の緩やかな減衰区間はすべて受動的送気（passive inflation）である</mark>。この区間の長さが、そのまま「吸気を短くすべき量」を表す。ETSを上げれば f に近い時点で切れる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">パネルCのフロー波形は、呼吸開始前にベースラインがゼロへ戻っていない</mark>。呼気が完了する前に次の吸気が始まっている所見であり、遅延サイクリングが呼気時間を削っている状況と整合する。ただし<mark class="hl">本論文はこの点にも auto-PEEP にも一切言及していない</mark>ので、図の観察としてのみ扱い、論文の主張として引用しない。</p>
+</div>
+<h3>8. 3つのサインの一覧（原文の記述を表に整理）📋</h3>
+<div class="tw"><table>
+<thead><tr><th>判定</th><th>パネル／ETS</th><th>決め手になる波形サイン</th><th>原文のラベル</th><th>設定の向き</th></tr></thead>
+<tbody>
+<tr><td>正しい</td><td>A ／ 10%</td><td>吸気フローが速やかに減衰し、そのまま呼気フローへ移行して<strong>即座にピーク</strong>、その後<strong>指数関数的減衰</strong></td><td>a（即座の呼気ピーク）、b（指数関数的減衰）</td><td>変更不要</td></tr>
+<tr><td>早すぎる</td><td>B ／ 50%</td><td>サイクルオフ後も吸気活動が続き<strong>呼気フローにブレーキ</strong>。<strong>呼気ピークが削られ</strong>、<strong>同時にPawがへこむ</strong>。自発吸気終了後に初めて正常な指数関数的減衰が始まる</td><td>c（削られた呼気ピーク）、d（Pawのへこみ）、e（正常減衰の開始＝本来の切替時点）</td><td>ETSを<strong>下げる</strong>＝吸気を延ばす</td></tr>
+<tr><td>遅すぎる</td><td>C ／ 25%</td><td>吸気フロー減衰が<strong>速い指数から遅い指数へ突然変化</strong>。その点が自発吸気の終了と、<strong>二次的な受動的送気相</strong>の開始を示す</td><td>f（減衰の折れ点＝本来の切替時点）</td><td>ETSを<strong>上げる</strong>＝吸気を短くする</td></tr>
+</tbody></table></div>
+<p><strong>チャネル別の見分け方（同じ内容を「どこを見るか」で並べ替えたもの）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>見るチャネル</th><th>正しい（A）</th><th>早すぎる（B）</th><th>遅すぎる（C）</th></tr></thead>
+<tbody>
+<tr><td>フロー（吸気側）</td><td>速やかに減衰して切り替わる</td><td>まだ高い（ピークの約50%）段階で切れる</td><td>減衰の途中に「速い→遅い」の折れ（f）が出る</td></tr>
+<tr><td>フロー（呼気側）</td><td>即座に鋭いピーク（a）→指数関数的減衰（b）</td><td>ピークが削られ平坦な帯（c）→遅れて減衰開始（e）</td><td>折れ以降の受動送気が終わってから一気に落ちる</td></tr>
+<tr><td>Paw</td><td>切り替え後は素直に減衰</td><td>サイクルオフ直後にへこみ（d）→押し戻される二相性</td><td>プラトーにならず送気中も漸増し続ける</td></tr>
+<tr><td>Pmusc（参照用）</td><td>弛緩の中間点と切替が一致</td><td>弛緩開始より前に切替が起きている</td><td>弛緩終了後も送気が続く</td></tr>
+</tbody></table></div>
+<h3>9. 本文に「無い」こと（明示）🚫</h3>
+<p>論文の主張と背景知識を混ぜないため、<mark class="hl">本短報が扱っていない事項</mark>を列挙する。</p>
+<ul><li><strong>患者背景</strong>：3例の年齢・診断・重症度・換気設定（PS圧・PEEP）・呼吸メカニクス。一切なし。</li><li><strong>Pmuscの測定方法</strong>：食道内圧由来か否かの記載なし。</li><li><strong>時間軸の目盛り</strong>：Time (s) のラベルはあるが数値目盛りがなく、吸気時間・遅延時間の絶対値は読めない。</li><li><strong>定量的な閾値</strong>：「何ミリ秒のずれから早期／遅延と呼ぶか」の定義なし。判定は視覚的・質的。</li><li><strong>診断精度</strong>：感度・特異度・観察者間一致度の検討なし。</li><li><strong>アウトカム</strong>：ETSを合わせることで換気日数・鎮静量・非同調指数・auto-PEEPが改善したかは検討していない。</li><li><strong>参考文献</strong>：<mark class="hl">本短報には参考文献リストが存在しない</mark>（Imaging枠のため）。したがって「主要引用文献一覧」は原理的に作成できない。以下は原典に当たるための<strong>一般的な背景知識としての関連文献</strong>であり、本論文が引用したものではない。</li><li>Tassaux D, et al. Impact of expiratory trigger setting on delayed cycling and inspiratory muscle workload. Am J Respir Crit Care Med. 2005;172(10):1283–9.（ETS設定と遅延サイクリング。姉妹ノート <span class="wl">圧支持換気での吸気努力タイミングを波形から検出する（波形法）</span> の引用文献26として収載）</li><li>Mojoli F, et al. Timing of inspiratory muscle activity detected from airway pressure and flow during pressure support ventilation: the waveform method. Crit Care. 2022;26:32. doi:10.1186/s13054-022-03895-4（同一著者グループによる後続研究。本短報の考え方を定量化・検証した）</li></ul>
+<h3>10. 既存ノートとの整合 🔗</h3>
+<ul><li><strong><span class="wl">圧支持換気での吸気努力タイミングを波形から検出する（波形法）</span>（Mojoli, Crit Care 2022）</strong>：著者が重なる直接の後継。本短報が「Pmuscを基準に置いた3例の目視サイン」に留まったのに対し、2022年版は同じ着想を<strong>波形法（waveform method）</strong>として体系化し、食道内圧を参照基準にタイミングのずれをミリ秒で評価している。同ノートは「早期サイクリングは拘束性の4例にのみ出現した。時定数が短い＝肺が硬く、送気による圧上昇が速いため、患者がまだ吸っている段階でフローが呼気トリガ閾値まで落ちてしまう」と記す。<mark class="hl">本短報が示せなかった「どの患者で早期サイクリングが起きるか」を補完する関係にあり、矛盾はない</mark>。</li><li><strong><span class="wl">人工呼吸器波形の段階的評価による病態診断（Anesthesiology 2022）</span></strong>：波形読解を段階的手順に落とす総説。本短報はその中の「サイクリング」の1コマを深掘りしたものにあたる。</li><li><strong><span class="wl">呼気終末閉塞法による患者-人工呼吸器同調のモニタリング（ICM2020）</span></strong>：手技（呼気終末閉塞）を挟んで非同調を検出する方法。本短報は<strong>手技を挟まず通常画面のみ</strong>で判定する点で対照的だが、目的は共通しており結論の衝突はない。</li><li><strong><span class="wl">侵襲的人工呼吸中の非同調 — 相変数で分類し波形・エコー・食道内圧で拾う（ナラティブレビュー・AcuteCritCare2022）</span></strong>：非同調を相変数（トリガ・制御・サイクリング・ベースライン）で分類する枠組み。本短報はそのうち「サイクリング相」に対応する。</li><li><strong><span class="wl">人工呼吸器の非同調（Asynchrony）</span></strong>：Vault内の基礎ノート。early/late cycling の定義はここと一致する。</li><li><strong><span class="wl">人工呼吸器の画面から肺生理を読む — 伝導圧・ストレスインデックス・時定数と低流量手技（Understanding the Disease・ICM2026）</span></strong>：同じICMの画面読解シリーズ。時定数の考え方は、本短報のパネルCで「呼気が終わり切らないうちに次の吸気が始まる」所見を解釈する際の背景になる。</li><li><strong>旧版ノートとの差分</strong>：改稿前の本ノートは「早すぎるサイクリング」までしか記載がなく、<mark class="hl"><strong>遅すぎるサイクリング（f のサイン）と、Pawのへこみ（d）・呼気減衰の再開点（e）が丸ごと欠落</strong>していた</mark>。また DOI・title_en・記事区分・3例のETS設定値（10%・50%・25%）も未記載だった。いずれもPDF本文から補った。</li></ul>
+<h3>11. 批判的吟味（JCでの論点）🔍</h3>
+<ol><li><strong>n=3の記述的提示であり、検証されていない</strong>。著者らは「標準波形は最適サイクルオフ時点を検出する情報を提供し、適切な設定を導ける（can be used to guide）」と書くにとどめ、<strong>有効性を主張していない</strong>。この慎重さはそのまま受け取るべきで、「波形でETSを合わせれば予後が良くなる」とは一切書かれていない。</li><li><strong>ETS値の解釈を取り違えやすい</strong>。3例のETSは 10%・50%・25% だが、<strong>正しかったのは 10% の例</strong>であり、<strong>25% の例は遅すぎた</strong>。ETS の数値だけを見れば 25% は 10% より「早く切れる」設定のはずで、一見矛盾する。理由は<mark class="hl">3例が別々の患者であり、呼吸メカニクス（時定数）が異なるから</mark>である。ここは JC で最も誤読されやすい点で、「25%だと遅くなる」といった一般化は誤り。</li><li><strong>参照基準（Pmusc）の測定法が書かれていない</strong>。食道内圧からの推定なのか、他の手法なのかが不明で、再現性の評価ができない。参照基準が曖昧なまま「サイン」の妥当性が示されている構造は弱点である。</li><li><strong>判定が完全に質的（visual）である</strong>。「呼気ピークが削られた」「減衰の傾きが折れた」の閾値がなく、観察者間一致度も検討されていない。ベッドサイドで教育する際は、<mark class="hl">境界例をどう扱うかの取り決めを施設側で決める必要がある</mark>。</li><li><strong>時間軸に目盛りがない</strong>。ずれの大きさ（何ミリ秒早い／遅い）が読めないため、「どの程度のずれなら許容するか」の議論に使えない。</li><li><strong>half-relaxation を最適点とする前提そのものの根拠が示されていない</strong>。本文は「呼吸パターンと呼吸メカニクスに依存するが half-relaxation で近似できる」と述べるが、参考文献が無いため出典を追えない。この前提が崩れれば、A を「正しい」と呼ぶ根拠も揺らぐ。</li><li><strong>アウトカムとの接続が無い</strong>。ETSを波形で合わせることが、非同調指数・auto-PEEP・鎮静量・人工呼吸期間のいずれを改善するのかは検討されていない。後継の Crit Care 2022 でも、そこは主眼ではない。</li><li><strong>適用範囲がPSVに限定されている</strong>。NAVA・PAV+・NIVなど他の補助様式で同じサインが成立するかは扱われていない。</li><li><strong>Paw波形の解釈には注意が要る</strong>。パネルB の「へこみ（d）」は患者の吸気努力によるものだが、リーク・回路の共振・トリガ設定でも Paw は乱れうる。<mark class="hl">単独のサインで判定せず、必ずフロー波形と同時刻で突き合わせる</mark>運用にすべきである。</li></ol>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <strong>PSVの吸気→呼気切り替えが適切かは、食道内圧を測らなくても、画面上のPawとフロー波形だけで判定できる。</strong></p>
+<ul><li><mark class="hl">呼気ピークが即座に鋭く出て指数関数的に減衰していれば、切り替えは合っている</mark>（サイン a・b）</li><li><mark class="hl">呼気ピークが削られ、同時にPawがへこむなら「早すぎる」。ETSを下げて吸気を延ばす</mark>（サイン c・d、本来の切替点は e）</li><li><mark class="hl">吸気フローの減衰が「速い→遅い」に折れるなら「遅すぎる」。折れ点 f から先は受動的送気なので、ETSを上げて吸気を短くする</mark></li><li>ETSの「正解の数値」は患者ごとに違う。本論文の3例では 10% が正しく、25% は遅すぎた。<strong>数値ではなく波形で合わせる</strong></li></ul>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況（フロー波形の呼気側を見る）</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>吸気フローが速やかに減衰し、そのまま鋭い呼気ピーク → 指数関数的減衰</td><td>切り替え前後に「引っかかり」が無いか</td><td>適切。ETSは変更しない</td></tr>
+<tr><td>呼気ピークが低く削られ、平坦な帯が続く</td><td>同時刻のPawに「へこみ」があるか（あれば早期サイクリングを支持）</td><td>早すぎる。ETSを下げ、平坦な帯が終わる時点（e）まで吸気を延ばす</td></tr>
+<tr><td>吸気フローの減衰が途中で「速い→遅い」に折れる</td><td>折れ点（f）以降にPmuscが0へ戻っている／Pawが漸増していないか</td><td>遅すぎる。ETSを上げ、折れ点に近い時点で切れるようにする</td></tr>
+<tr><td>Pawのへこみだけがあり、フローの呼気ピークは正常</td><td>リーク・回路の共振・トリガ設定など他因を否定できるか</td><td>サイン単独では判定しない。フローと同時刻で突き合わせて再評価</td></tr>
+<tr><td>波形上ではどれとも決めがたい</td><td>呼気フローが次の吸気前にゼロへ戻っているか（戻っていなければ呼気時間不足）</td><td>迷う例では努力の「大きさ」の評価（P0.1・ΔPocc）と鎮静・圧支持レベルの見直しを先に行う</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

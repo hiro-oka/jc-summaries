@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>パンデミック下でICUを家族面会に開く理由と方法（CritCare2021）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-021-03608-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">パンデミック下でICUを家族面会に開く理由と方法（CritCare2021）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Mistraletti G, Giannini A, Gristina G, Malacarne P, Mazzon D, Cerutti E, Galazzi A, Giubbilo I, Vergano M, Zagrebelsky V, Riccioni L, Grasselli G, Scelsi S, Cecconi M, Petrini F. Why and how to open intensive care units to family visits during the pandemic. Crit Care. 2021;25:191. doi:10.1186/s13054-021-03608-3</dd><dt>掲載誌</dt><dd>Critical Care（2021-06-02）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-021-03608-3" target="_blank" rel="noopener">doi.org/10.1186/s13054-021-03608-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Why and how to open intensive care units to family visits during the pandemic</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-021-03608-3.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-021-03608-3.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-021-03608-3.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院の面会方針に落とすとき、この論文をどう使うか <strong>① この論文は「運用設計の道具」であって「効果の証拠」ではない</strong> 本稿は VIEWPOINT であり、<mark class="hl"><strong>新しいデータは1つも含まない。数値は本文中に一切出てこない</strong></mark>。当院の面会方針を議論するとき、本稿から借りるのは <strong>7つのTips・4つの入室前提条件・実施ルール(a)〜(d)・12個の障壁と対策の表</strong> という「手順の骨格」であって、効果の根拠ではない。効果の根拠は別の論文（下の②）から持ってくる。</p>
+<p><strong>② 面会を開く根拠は「せん妄が減る」ではなく「家族の心理的転帰が良くなる」に置く</strong> 本稿は「家族の存在はせん妄の有病率を有意に下げうる（can significantly help reduce）」と書いているが、<mark class="hl">この主張に付された引用は [20] Pun BT ら（ABCDEF バンドル・15,226例の非ランダム化コホート）であり、面会そのものを検証した試験ではない</mark>。当院で使うべき一次根拠は <span class="wl">柔軟な面会はせん妄を減らさないが家族の不安・抑うつを改善する（ICU Visits クラスター交差RCT・JAMA2019）</span>（せん妄 18.9% 対 20.1%、P=0.44 で<strong>陰性</strong>／家族 HADS 不安 −1.6、抑うつ −1.2 で<strong>陽性</strong>）と、その 12か月追跡 <span class="wl">柔軟な面会は家族のPTSD症状を1年後も減らす（ICU Visits試験12か月解析・ICM2024）</span>。</p>
+<p><strong>③ 「開く／閉じる」を月1回の定例で見直す仕組みを作る（Tip 4）</strong> 本稿が最も運用に直結する提案がこれ。面会制限は一度決めると惰性で続く。<strong>ICU内に面会に関するワーキンググループを置き、少なくとも月1回、面会制限を正当化している構造的・組織的条件（病床逼迫・PPE在庫・地域の伝播状況）を再評価する</strong>。さらに、<mark class="hl"><strong>流行段階ごとに複数の面会プロトコルを最初から作っておき、地域の警戒レベルに自動で連動させる</strong></mark>（判断のたびに合意形成をやり直さない）。当院なら感染管理室の警戒レベルに紐づける形が現実的。</p>
+<p><strong>④ COVIDエリアと非COVIDエリアで守る向きが逆になる（Tip 2）</strong> COVID ICU では <strong>家族を守る</strong>（医療者と同じ着脱プロトコルで防護）。非COVID ICU では <strong>入室中の患者を守る</strong>（家族側の健康監視・身体的防護・迅速な鼻咽頭ぬぐい）。この非対称を明文化しておかないと、現場の運用が片方に引きずられる。</p>
+<p><strong>⑤ 面会の「量」ではなく「タイミング」を優先順位づけする（Tip 3）</strong> 総枠を絞らざるを得ないときに何を残すか、を先に決めておく。本稿の優先順位は2軸。<strong>臨床的に有用な時期</strong>＝長時間NPPV中、人工呼吸離脱期と鎮静の減量期（深鎮静の持続中は患者にとっての意義は小さい／家族にとっては別）。<strong>患者の人生にとって重要な時期</strong>＝ICU入室時、治療制限を伝えるとき、死の直前。</p>
+<p><strong>⑥ 「面会は総合病院の問題」として設計する（Tip 7）</strong> ICU だけを開いても、その前後の一般病棟が閉じていれば家族の体験は分断されたままになる。<strong>面会規程は院内共通ルールとして作る</strong>。Hotel ICU の連続ケア施策と射程が完全に一致する。</p>
+<p><strong>⑦ 訪問者への説明と（必要なら）同意取得</strong> COVIDエリアへの立ち入りリスクをゼロにはできないことを明示して説明する。本稿は「<strong>病院管理部門と相談のうえ、書面の同意取得を検討してもよい</strong>」と書く（must ではなく might be consulted）。当院で導入するなら、これは法務・感染管理と事前に握っておく事項。</p>
+<p><strong>⑧ 導線・付き添い要員が最大の律速になる</strong> 入室前提条件(4)は「<strong>訓練された人（医療者または病院ボランティア）が院内動線を案内し、非医療者にPPEの使い方を分かる言葉で説明し、正しい使用を監督すること</strong>」。<mark class="hl">時間・人ではなく <strong>この付き添い要員の確保</strong> が実務上の最大の壁になる</mark>。<span class="wl">ペットの面会をICUに迎える — フランスの現状と障壁（Comment・CritCare2026）</span> が示した「真の障壁は時間」と同型の構造。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：ICU の「開放（open ICU）」と「人間化（humanization）」は数十年かけて進んできた流れであり、患者と家族の<strong>権利</strong>として位置づけられていた（[3][4][5]）。家族中心ケアのガイドラインも 2017年に SCCM から出ている（[13] Davidson JE, et al. Crit Care Med. 2017;45:103–28）。パンデミック初期に面会が禁止されたのは、<strong>PPEの不足</strong>と<strong>疾患・伝播経路に関する知識の不足</strong>が主な理由だった。</li><li><strong>Unknown（分かっていなかったこと）</strong>：パンデミックが1年以上続き、PPE が供給され知識も蓄積した段階で、<mark class="hl"><strong>なお面会制限を続ける根拠が残っているのか</strong></mark>。そして、開くとしたら<strong>具体的にどういう条件と手順で開けばよいのか</strong>。学会レベルの運用ガイダンスは存在しなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：SIAARTI を中心とする多職種17名が、<strong>パンデミック下でも家族面会を再開すべきだという立場を明示</strong>し、それを <strong>7つのTips ＋ 4つの入室前提条件 ＋ 4つの実施ルール ＋ 12個の障壁・対策表</strong> という<strong>実装可能な形式</strong>に落とした。イタリアという「北欧・北米より open ICU の概念が普及していない」文脈から出た点も、日本にとって示唆が大きい。本稿の内容は <strong>SIAARTI 主導のデルファイで再評価する予定</strong>であると予告されている（2021年時点）。</li><li><mark class="hl">本稿は前向き研究でも系統的レビューでもない</mark>。<strong>新規データはゼロ</strong>であり、位置づけは「専門家集団の合意の素案」。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで パンデミックで閉じた ICU を家族に開き直すために、<strong>開く理由（患者・家族・医療チームの3者への利益）と、開く方法（7つのTips・4条件・4ルール・障壁12個の対策表）を1本にまとめた、イタリア多職種17名による VIEWPOINT</strong>。データは一切なく、位置づけは「運用設計のたたき台」。</p>
+</div>
+<ul><li><strong>主張</strong>：SARS-CoV-2 のパンデミックは、数十年続いた ICU の「人間化」と「開放」の歩みを<strong>突然中断させた</strong>。しかし現在の知識と PPE の供給状況では、<mark class="hl">面会を再開できない実質的な理由はもう残っていない</mark>。</li><li><strong>前提の認識</strong>：現行の地域規制の多くは面会を厳しく制限しているが、実際には「<strong>入院患者の特別なフレイル・脆弱性</strong>」がある場合、あるいは「<strong>特別な必要性</strong>」がある場合には入院病棟への立ち入りが認められている。同じ条件は小児病棟・小児ICUにも適用される。<strong>どの場合を例外とするかの判断は病棟責任者に委ねられている</strong>。</li><li><strong>患者への利益</strong>：長時間NPPV中と深鎮静の終了期において<strong>関係性の利益</strong>があり、せん妄の有病率低下に寄与しうる（引用は[20]）。<strong>負担の大きい治療を続ける動機づけ</strong>になる。</li><li><strong>家族への利益</strong>：<strong>複雑性悲嘆（complicated grief）から家族を守る</strong>。死の瞬間にそばにいられることは、心理的問題の長期化リスクを下げる（[23][24]）。悪い知らせを受け入れる難しさが軽減する（[22]）。</li><li><strong>医療チームへの利益</strong>：情報提供がより有効になり、<strong>意思決定過程の透明性と理解が上がり</strong>、ケアの選択を共有しやすくなる（[19]）。</li><li><strong>電話・ビデオ通話の位置づけ</strong>：まず必要ではあるが（[15][16]）、<mark class="hl"><strong>それだけでは不十分</strong></mark>（[17]）。プライバシーと守秘の尊重という客観的な困難も伴う（[18]）。</li><li><strong>リスクとの比較</strong>：家族の ICU 内存在に伴う利益は、<strong>特定のプロトコルで制御可能なパンデミックのリスクを大きく上回る</strong>（Fig. 1）。</li><li><strong>入室の必須条件は4つ</strong>：①家族と患者の双方が望む ②家族が自宅隔離・検疫中でない ③家族が無症状で伝染性疾患のリスク因子がなく、家族用のPPEが十分にある ④<strong>訓練された案内・監督要員がいる</strong>。</li><li><strong>実施ルールは4つ</strong>：(a) 入退室動線の分離・スケジューリング・対人距離・手指衛生・PPE着用の義務化 (b) 入館時体温測定と問診票による症状・リスク因子確認、任意で迅速抗原検査 (c) 待合に滞留させないスケジューリング、1患者あたりの人数制限、<mark class="hl"><strong>毎日が無理でも最低週1〜2回は保証する</strong></mark> (d) 長期入院・短期予後不良・特別なフレイルでは例外を認める。</li><li><strong>一般化可能性</strong>：イタリアの文脈に基づくが、<strong>「近しさと分かち合いを求める人間の欲求は国によって科学的に異ならない」</strong>（[34][35]）として一般化可能と主張。むしろイタリアは open ICU の概念が<strong>北欧・北米より普及していない</strong>環境である。</li><li><strong>結論</strong>：<mark class="hl"><strong>家族が COVID 病棟に入ることを許されない実質的な理由はないと考える。有用であるだけでなく、必要ですらありうる</strong></mark>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 「ICUの開放」と「人間化」の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>open ICU（開放型ICU）</strong>：面会の時間帯・人数・年齢に対する制限を最小化し、家族がベッドサイドにいられる ICU の運営形態を指す。対語は closed ICU（制限型）。1回30分・1日2回・小児不可、といった規則を敷いた ICU が長く標準だった。 <strong>humanization（人間化）</strong>：患者を「症例」ではなく「その人」として扱うための一連の実践。面会の開放はその代表的な柱で、他に患者を名前で呼ぶ、身体抑制を減らす、音と光を整える、日記、早期離床などが含まれる（<span class="wl">ICUのヒューマナイゼーション（人間らしいケア・ICM2020）</span>／<span class="wl">人間中心ケアICUモデルへ — HU-CI の人間化計画7領域と160アクション（Plenary・CCM2020）</span>）。 <strong>PICS-F（集中治療後症候群・家族）</strong>：ICU患者の家族に生じる不安・抑うつ・PTSD症状・複雑性悲嘆などの総称。面会方針が動かしうる主要な標的はここ（<span class="wl">PICS-F（集中治療後症候群・家族）の包括的レビュー — 心理だけでなく身体・社会経済まで、予防は単発でなく連続したバンドルで（AcuteMedSurg2024）</span>）。 <strong>complicated grief（複雑性悲嘆）</strong>：死別後の悲嘆反応が通常の経過を超えて遷延し、機能障害を伴う状態。「死に目に会えなかった」ことは古典的なリスク因子とされる。 <strong>donning and doffing</strong>：PPE の着用（donning）と脱衣（doffing）。感染は脱ぐときに起きやすいため、手順と監督が要る。本稿が家族に対しても医療者と同じ手順を求めているのはこのため。 <strong>なぜこれが問題か</strong> → パンデミック初期の面会禁止は<strong>緊急避難として妥当だった</strong>。問題は、PPE が供給され伝播経路が分かった後も、<mark class="hl">規則が惰性で残り続けた</mark>こと。本稿はその惰性を止めるための道具立てを提供している。</p>
+</div>
+<h3>2. 背景 — 数十年の歩みが「突然」中断した 🕰️</h3>
+<p>本稿の背景セクションは4段落で構成されている。</p>
+<p><strong>(1) 何が中断したか</strong> SARS-CoV-2 のパンデミックは、ICU における「人間化」（[1][2]）と「開放」（[3][4]）という<strong>数十年にわたる道筋を突然中断させた（abruptly interrupted）</strong>。著者らはこれを単なる運用上の後退ではなく、<strong>患者と家族の明確なニーズであり、明白な権利</strong>（a precise need and clearly a right、[5]＝イタリア国家生命倫理委員会の見解）の侵害として位置づける。家族とケアチームのあいだに理解と協働を打ち立てるものだ、という表現も添えられている。</p>
+<p><strong>(2) なぜ禁止されたのか</strong> パンデミック初期、家族が院内で患者に物理的に近づくことを禁ずる規則が出された。理由は主に<strong>個人防護具（PPE）の不足</strong>と、<strong>疾患とその伝播に関する知識の不足</strong>である。著者らは初期の判断そのものを否定していない。</p>
+<p><strong>(3) 1年後の状況</strong> これらの規則は、<mark class="hl"><strong>1年後も依然として有効か、わずかに緩和された程度にとどまっている</strong></mark>。愛する人のそばにいたいという理解可能な願いを持つ人々からは、しばしば<strong>不当（unjust）</strong>と受け取られている。とくに終末期においてそうである（[6][7]）。</p>
+<p><strong>(4) 制度上の抜け道は既に存在する</strong> 現行の地域規定の多くは家族面会を厳しく制限しているが、<strong>「入院患者の特別なフレイルと脆弱性」がある状況</strong>（[8]）、あるいは<strong>「特別な必要性」がある場合</strong>（[9][10]）には、時間と人数に厳しい制限を課したうえで<strong>入館が認められている</strong>。同じ条件が小児病棟・小児ICUにも適用される。そして<strong>どの場合に例外を認めるかの判断は、病棟責任者に委ねられている</strong>。</p>
+<p>COVID 病棟の状況は依然として極めて困難（extremely challenging）である。プロトコル実装の複雑さを認識したうえで、著者らは <strong>①いくつかの正確な戦略目標を設定すること（[11]）と ②それを達成するための運用ガイダンスを提供すること</strong>が絶対に不可欠であるとする。「即座の結果は保証できない」と留保しつつ、<strong>それぞれの地域の状況に適応可能な、共有された戦略を見出すことが優先事項である</strong>（[12]）と述べる。</p>
+<p>本稿の目的は3つ — <strong>①パンデミック下でICU面会を許可することの利益についての見解と経験を共有すること ②家族の存在を妨げる障壁を同定すること ③それらを克服する戦略を議論すること</strong>。著者らの信念の根拠と、著者グループの構成は <strong>電子付録（Additional file 1）</strong>に置かれている。</p>
+<h3>3. 方法（Methods）📐</h3>
+<p>本稿は研究論文ではないため、Methods セクションは存在しない。JC の吟味に必要な範囲で構造を整理する。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本稿の実際</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>VIEWPOINT（オピニオン／専門家見解）。前向き研究・後ろ向き研究・系統的レビューのいずれでもない</td></tr>
+<tr><td>対象</td><td>なし（患者データを扱っていない）</td></tr>
+<tr><td>介入・比較</td><td>なし</td></tr>
+<tr><td>アウトカム</td><td>なし。効果推定値・信頼区間・p値は<strong>本文に1つも登場しない</strong></td></tr>
+<tr><td>文献検索</td><td>系統的検索の記載なし。引用35件は著者らの選択による</td></tr>
+<tr><td>合意形成の手順</td><td>本稿の時点では<strong>なし</strong>。「可能な限り早期に SIAARTI 主導のデルファイで再評価する」と予告</td></tr>
+<tr><td>倫理承認</td><td>Not applicable（患者データを扱わないため）</td></tr>
+<tr><td>資金</td><td>助成なし。所属部門の資金のみ。オープンアクセス費用はミラノ大学と SIAARTI</td></tr>
+<tr><td>利益相反</td><td>全著者が「なし」と宣言</td></tr>
+<tr><td>著者の役割分担</td><td>GM が初稿を執筆。PM・DM・GGrass・MC が地域規制と適用例を提供。図・表・Tips の初版は8名で作成。学会運営委員会への提示は LR・GGrass・SS・FP</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl"><strong>本稿を「面会開放の効果を示したエビデンス」として引用してはいけない</strong></mark>。VIEWPOINT であり、<strong>新しいデータを1つも持たない</strong>。院内の会議資料に載せるなら、根拠の列には本稿ではなく <span class="wl">柔軟な面会はせん妄を減らさないが家族の不安・抑うつを改善する（ICU Visits クラスター交差RCT・JAMA2019）</span>（クラスター交差RCT・36 ICU・患者1685例）を置き、本稿は「運用手順の出典」として別の列に置く。</p>
+</div>
+<h3>4. 患者・家族・医療チームへの利益 🤝</h3>
+<p>本稿の「Benefits」セクションは、利益を <strong>意思決定の共有 → 患者 → 家族 → チーム</strong> の順に述べる。</p>
+<h4>4-1. 出発点は「治療選択の共有」</h4>
+<p>各患者のケアを導く治療選択が、有効・敬意ある・釣り合いのとれたものであるためには、<strong>患者・家族・医療専門職のあいだで共有されている必要がある</strong>（[13]）。パンデミック下でもそれは変わらない（[14]）。</p>
+<p>まず前提として<strong>電話・ビデオ通話による適切なコミュニケーション</strong>が要る（[15]）。これは終末期に向けても実施可能である（[16]）。ただし著者らはここで明確に留保する — <mark class="hl"><strong>これらの通信手段は、実行可能ではあっても十分ではない</strong></mark>（[17]）。加えて<strong>プライバシーと守秘の尊重</strong>という客観的な困難を伴う（[18]）。</p>
+<p>家族が物理的にそこにいることで、ケアの経路を共有することが<strong>より単純になる</strong>。具体的には3点 — <strong>①より有効な情報提供が可能になる</strong>（[19]）<strong>②意思決定過程の透明性が高まり理解が良くなる ③ケアの選択を共有することがより実行可能になる</strong>。</p>
+<h4>4-2. 患者への利益</h4>
+<p>臨床的には、家族の存在は特に <strong>①深鎮静期の終わり ②長時間の非侵襲的人工呼吸（NPPV）中</strong>において関係性の利益をもたらす。本稿はここで <strong>「せん妄の有病率を有意に低減させるのを助けうる（can significantly help reduce the prevalence of delirium）」</strong> と述べ、引用[20]を付す。あわせて、<strong>COVID 患者のせん妄は他の重症患者より多い</strong>（[21]）と記す。</p>
+<p>さらに、家族の存在は<strong>必要だが負担の大きいケアを継続する強い動機づけ</strong>を患者に与える。時間が限られ、必要な PPE によって条件づけられていたとしても、それは患者のニーズに応えるものである。</p>
+<h4>4-3. 家族への利益</h4>
+<ul><li><strong>ケアチームへの信頼と評価が高まる</strong>（[22]）。</li><li><strong>悪い知らせを受け入れる困難が軽減される</strong>。本稿の言い方は具体的で、家族は「重症患者を治療しケアすることが組織的・ケア的に何を意味するのかを、直接には確かめられないまま」悪い知らせを受け取ることになる、と指摘する。</li><li><strong>複雑性悲嘆から家族を守る</strong>。著者らは「<strong>近年の歴史において、愛する人の死に際してそばにいることが不可能になるような状況が生じたことは稀である</strong>」「この習慣は世界中で極めて深く根づいている」（[7]）と書く。<strong>家族が望むならば、死の瞬間にすらそばにいられる可能性</strong>（[23]）は、<strong>長期間持続しうる心理的問題の発生リスクを下げる</strong>（[24]）。</li></ul>
+<h4>4-4. 医療チームへの利益</h4>
+<p>チームへの利益は独立した段落としては短く、上記4-1の「情報提供・透明性・選択の共有」に集約されている。ただし Tip 6 で扱われるとおり、<strong>再開プロセスをチーム全体で共有すること自体がスタッフのストレス管理として重要</strong>という形で再登場する（[22][29]）。</p>
+<h4>4-5. 利益とリスクの比較</h4>
+<p>セクションの締めは1文。<strong>家族の ICU 内存在に結びついたすべての利益は、パンデミックのリスクを大きく上回る（greatly outweigh）。そのリスクは特定のプロトコルによって制御可能である（Fig. 1）。</strong></p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 「家族の物理的な ICU 内存在は、重症患者・家族・医療チームのそれぞれに有意な利点をもたらす」（原図・無改変。Crit Care 2021;25:191、CC BY 4.0） 原文キャプションは1文のみ。図の実体は<strong>ベッドを真上から見た俯瞰のイラストレーション</strong>で、青系のフラットデザイン。画面中央にICUベッドが斜めに配置され、上半身を起こし気味の患者が<strong>顔にマスク（酸素／NPPVインターフェース様）を装着</strong>し、左上方の<strong>人工呼吸器らしき機器</strong>とチューブでつながっている。右上には<strong>輸液ポンプ／モニタ様の機器</strong>が壁掛けで描かれ、ラインが患者の右上肢に伸びる。<strong>ベッド右側でスクラブとキャップ・マスクを着けた医療者が患者の手を取り</strong>、<strong>ベッド左下ではもう1名がクリップボードに記録をとっている</strong>。周囲には<strong>淡いウイルス粒子の模式図</strong>がいくつか浮かんでいる。 <strong>注意</strong>：この図は<strong>データを含まない装飾的イラストレーション</strong>である。謝辞に「Figure 1 は www.freepik.com のリソースを用いてデザインした」と明記されている。さらに <mark class="hl">図中に描かれているのは医療者2名であって、キャプションが主題とする「家族」は描かれていない</mark>。図表から読み取れる情報量はキャプション1文と等価であり、JC で図として議論する価値は低い。</p>
+</div>
+<h3>5. ICU開放の7つのTips（本稿の中核）🔑</h3>
+<p>原文の Tips は番号付きの見出し＋解説文で構成される。<strong>全7項目を漏らさず表に起こす</strong>（当院で規程に転記できるように）。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>Tip（原文の要旨）</th><th>本文の根拠・条件</th><th>当院で決めるべきこと</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>短時間であっても家族の入室を認めるべき</strong></td><td>患者・家族・チームの間の能動的で有効なつながりを保つ新しい方法が要る（[6][25]）。関係の<strong>量と質</strong>の両方を保つ。面会ゼロと比べれば、<strong>短時間の入室でも家族と患者にとってしばしば実質的な意義がある</strong>。適切に実施されれば、COVID／非COVID いずれのICUでも<strong>患者にも訪問者にも追加の安全上のリスクを生じない</strong>（[26]）</td><td>「15分でも入れる」を可とするか。プロトコル確立後は<strong>その正しい適用と、設定に合わせた条件づくりの責任はケアチームにある</strong>と本稿は明記している</td></tr>
+<tr><td>2</td><td><strong>COVID ICU と 非COVID ICU で異なるルールを設定する</strong></td><td>一般に<strong>単純なプロトコル</strong>が必要で、<strong>病院管理部門と共有</strong>すること。家族には明確・明瞭・曖昧さのない指示を与え、その実施を注意深く監督する。<strong>COVID ICU</strong>：家族も医療者と同様に着脱プロトコルで防護する。<strong>非COVID ICU</strong>：入室中の患者をさらなる SARS-CoV-2 罹患から守るため、追加の健康監視・適切な身体的防護・迅速な鼻咽頭ぬぐいを検討する</td><td>2つのエリアで<strong>守る対象が逆転する</strong>ことを規程に明記する。当院の感染管理室との合意事項</td></tr>
+<tr><td>3</td><td><strong>面会総数を制限せざるを得ないなら、最も利益を受ける人の面会を優先する</strong></td><td>2つの軸。<strong>臨床的に有用な時期</strong>＝長時間NPPV中、人工呼吸離脱中とそれに伴う薬理学的鎮静の減量期（[21]）。逆に<strong>深鎮静が続いている時期は患者にとっての重要性は低い</strong>（ただし家族にとってはそうではない、と明記）。<strong>その人の人生（biography）にとって重要な時期</strong>＝<strong>ICU入室時／治療制限を伝えるとき／死の直前</strong>（[27]）。これらの不可避に高ストレスな状況では、物理的存在が心理的外傷から家族を守る効果がより高い可能性がある</td><td>「入室数を絞るときの優先順位表」を先に決めておく。組織的理由やPPE不足で制限する場合は、<strong>その状況下で患者・訪問者の最大多数に最大の利益をもたらす面会を優先するのが賢明</strong>、という原則</td></tr>
+<tr><td>4</td><td><strong>ICU内に専門ワーキンググループを設置し、面会制限を正当化する構造的・組織的条件を少なくとも月1回は再評価する</strong></td><td>パンデミックの経過は、病院の過負荷水準・スタッフの業務量・PPEの可用性・住民全体での伝播率を変動させる。<strong>ある時点で必要だった制限が、別の時点では過剰にも過小にも不適切になりうる</strong>。したがって<strong>最初から複数のプロトコルを用意し、国・地域・自治体の規制に連動させて自動的に適応させる</strong>のが有用でありうる</td><td>定例の場（当院なら ICU 運営会議）に月次議題として固定する。<strong>警戒レベル連動の自動切替表</strong>を作る</td></tr>
+<tr><td>5</td><td><strong>親族・訪問者に COVID エリア立ち入りのリスクを説明する</strong></td><td>COVID患者との接触による個人のリスクは<strong>最小化できるが決してゼロにはならない</strong>。立ち入りを求める全員が、<strong>個人が害を受ける可能性のあるリスクと、患者のそばにいることで期待される増分の利益とを、比較衡量する必要性を認識している</strong>べき。<strong>病院管理部門に相談のうえ、COVIDエリアへ入る訪問者に書面のインフォームドコンセントに署名させるかどうかを検討してもよい</strong></td><td>説明文書のひな型。書面同意を取るか否かは<strong>法務・感染管理と事前に決める</strong>（本稿は「検討してもよい」であり必須としていない）</td></tr>
+<tr><td>6</td><td><strong>再開のプロセスをチーム全体で共有する</strong></td><td>「パンデミックから出てくる」局面は、組織の観点から特別な注意を要する。<strong>全スタッフが業務上・情緒上の過負荷を経験しており</strong>（[28]）、隔離のために必要になった内部規則の変更に不可避に影響を受けている。<strong>作業環境の重大な変更はいずれも医療者のストレスを増やすリスクがある</strong>（[22][29]）ため、病棟の再開は可能な限りスタッフ間で共有された手続きであることが重要</td><td>「面会を開く」は感染対策の変更であると同時に<strong>労働環境の変更</strong>でもある。看護部との事前合意を工程に入れる（<span class="wl">第二の犠牲者症候群の日米比較 — 日本の医療者は3倍「辞めたい」と考える（PSM・CritCare2026）</span> と同じ論点）</td></tr>
+<tr><td>7</td><td><strong>家族の物理的存在をICUに限定しない</strong></td><td>「開く」という決定は、ICU と<strong>他のすべての病院病棟</strong>にまたがって考えるべき。他病棟の業務は、疾患の最も重篤で複雑な段階の治療の<strong>前後に必ず位置している</strong>。医師・看護師がICUより少ない環境では管理が難しいかもしれないが、<strong>訪問者の存在を規律する包括的な院内ルールを作ることが望ましい</strong>。狙いは患者・家族中心のケアのプロセスを再起動すること（[30]）</td><td>面会規程を <strong>ICU 単独ではなく院内共通ルール</strong>として起草する。Hotel ICU の「連続ケア」施策と同じ設計思想</td></tr>
+</tbody></table></div>
+<h3>6. 開放へ進む手順 — 4つの必須条件と4つの実施ルール 🚪</h3>
+<div class="call note"><span class="lab">補足</span>
+<p>旧版ノートとの食い違い（2026-08-15 に原著PDFで照合し訂正） 改稿前の本ノートは入室条件を <strong>3つ</strong>と記載していたが、<mark class="hl"><strong>原著は4条件である</strong></mark>。第4条件（訓練された案内・監督要員の確保）が欠落していた。また旧記載は第3条件に含まれる「<strong>家族用のPPEが十分にあること</strong>」も落としていた。以下は原著本文に忠実に起こしたもの。</p>
+</div>
+<h4>6-1. 訪問者が入館するための必須条件（indispensable conditions）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>条件（原文の要旨）</th><th>実務上の含意</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>家族本人と患者の双方がそれを望んでいること</strong></td><td>患者の意思が先。本稿は結論でも「常に患者の希望を完全に尊重して」と繰り返す</td></tr>
+<tr><td>2</td><td><strong>家族が信託的自宅隔離（fiduciary home isolation）または検疫下にないこと</strong></td><td>ただし「これらの場合のための個別プロトコルが整備されている場合を除く。その場合もいずれにせよ例外的な時に限るべき」と留保</td></tr>
+<tr><td>3</td><td><strong>家族が無症状で、伝染性疾患のリスク因子を持たないこと。家族用のPPEが十分に確保されていること</strong></td><td>PPE の確保が条件に<strong>含まれている</strong>点が重要。Table 1 の logistical 障壁でも「PPE不足が持続するなら面会は<strong>認めない</strong>」と明記される</td></tr>
+<tr><td>4</td><td><strong>訓練された人（医療者または病院ボランティア）の存在が保証されていること</strong></td><td>その役割は3つ — <strong>①院内動線を示す ②非医療専門職にPPEの正しい使い方を明確で分かりやすい言葉で説明する ③正しく使用されているかを監督する</strong></td></tr>
+</tbody></table></div>
+<h4>6-2. 適用すべき4つのルール（(a)〜(d)）</h4>
+<div class="tw"><table>
+<thead><tr><th>記号</th><th>ルール（原文の要旨）</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td><strong>厳密で合意された手続きを用い、入館経路と退館経路を区別する。適切なスケジューリング、対人距離、手洗い、PPE着用義務を確保する</strong></td><td>適切に実施されれば、これらの措置は<strong>家族面会による感染リスクについて患者に十分以上の安全を保証し</strong>（[31]）、<strong>家族自身を感染から守る</strong>（[32]）</td></tr>
+<tr><td>(b)</td><td><strong>臨床モニタリングを整える</strong></td><td>①訪問者の入館時の<strong>体温測定</strong> ②<strong>インフルエンザ様症状の不在</strong>と他のリスク因子を、<strong>標的化した問診票の記入</strong>で確認 ③任意で<strong>迅速抗原検査</strong>による感染サーベイランス。本稿は「<strong>数分で答えが出て、それほど高価でもない</strong>」と評価している</td></tr>
+<tr><td>(c)</td><td><strong>待合室に人が滞留しないように面会をスケジューリングし、同時に多数の親族が集まることを避ける</strong></td><td>1患者あたりの親族／訪問者の人数を制限する。<mark class="hl"><strong>毎日の面会を組めない場合でも、少なくとも週に1〜2回は家族の面会を保証する可能性を検討する</strong></mark>。これにより、非COVID患者にとってすら今日では率直に受け入れがたい「閉じた病院」というイメージから脱出できるはず（[14]）</td></tr>
+<tr><td>(d)</td><td><strong>家族の面会を認めることが特に重要な状況では例外を認める</strong></td><td>具体例は<strong>長期入院中／短期予後が不良な場合</strong>（[33]）／<strong>患者に特別なフレイルがあるすべての場合</strong></td></tr>
+</tbody></table></div>
+<p>組織の観点からは、<strong>各医療施設が最も適切かつ持続可能と考える方法で開放への経路を組み立てられる</strong>。内部ルールは<strong>その有効性の継続的モニタリングに基づいて修正する</strong>。目標は、<strong>家族中心医療の良好な臨床実践を可能な限り早期に回復させること</strong>（[13][14]）。</p>
+<h3>7. Table 1 — 家族の存在を妨げる12の障壁と、克服の戦略（原表を日本語化）🧱</h3>
+<p>原表のキャプションは「ICU における家族の存在を妨げる可能性のある障壁は、特定の戦略によって克服できる」。<strong>臨床／文化／ロジスティクスの3群・計12項目</strong>。<mark class="hl">全項目を落とさず起こす</mark>。</p>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>障壁（Barriers to ICU visits）</th><th>実装のための戦略（Strategies for implementation）</th></tr></thead>
+<tbody>
+<tr><td>臨床</td><td>COVID-19 ICU に入る際の<strong>親族の感染リスク</strong></td><td>適切な着脱（donning and doffing）プロトコル</td></tr>
+<tr><td>臨床</td><td>COVID フリーの重症患者における<strong>患者の感染リスク</strong></td><td>面会前の<strong>家族・訪問者のスクリーニング</strong></td></tr>
+<tr><td>臨床</td><td><strong>不適切または不完全なPPE使用</strong></td><td>明確な指示と<strong>監督</strong></td></tr>
+<tr><td>臨床</td><td>面会する家族本人の<strong>身体的な不快</strong></td><td>予防的な説明と<strong>スタッフの立ち会い</strong></td></tr>
+<tr><td>文化</td><td><strong>家族面会がスタッフにとって優先事項ではない</strong></td><td>家族のニーズと要望に関する <strong>ICUスタッフのデブリーフィング</strong></td></tr>
+<tr><td>文化</td><td>スタッフの<strong>動機づけの欠如と疲労</strong></td><td>開放の利益に関する<strong>十分な知識の共有</strong></td></tr>
+<tr><td>文化</td><td>家族が持ち込む<strong>他の日和見感染への恐れ</strong></td><td>それが問題でないことを示す<strong>文献的エビデンス</strong></td></tr>
+<tr><td>文化</td><td>訪問者が感染した場合の<strong>法的帰結への懸念</strong></td><td>面会前の<strong>インフォームドコンセント取得</strong></td></tr>
+<tr><td>ロジ</td><td><strong>PPEの不足</strong></td><td>不足が持続するなら <strong>面会は認めない（NOT permitted）</strong></td></tr>
+<tr><td>ロジ</td><td><strong>スタッフの人員不足・時間的制約</strong></td><td>追加スタッフ、<strong>熟練したボランティア</strong></td></tr>
+<tr><td>ロジ</td><td><strong>プロトコル・ルールの不在</strong></td><td>病院／地域で<strong>共有されたプロトコルの起草</strong></td></tr>
+<tr><td>ロジ</td><td>ICU入室急増による<strong>スペースの不足・不適切</strong></td><td>面会時間と訪問者数の<strong>一時的制限</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この表で最も重い1行 <mark class="hl"><strong>「PPEの不足 → 不足が持続するなら面会は認めない」</strong></mark>。本稿は全体として開放を強く主張するが、<mark class="hl"><strong>唯一ここだけは「認めない」と断定形で書いている</strong></mark>。開放の主張が無条件ではないことの証拠であり、院内で本稿を引くときはこの1行も併せて示すべき。逆に言えば、<strong>PPE が潤沢な平時に面会を閉じ続ける根拠は本稿の枠組みには存在しない</strong>。</p>
+</div>
+<h3>8. 一般化可能性と、この後の予定 🌍</h3>
+<ul><li>本稿は<strong>イタリアの設定に基づく</strong>が、内容は一般化可能であることを意図している、と著者らは明示する。</li><li>根拠の第一は、<mark class="hl"><strong>「近しさと分かち合いを求める人間の欲求は、国のあいだで科学的に異ならないと記述されてきた」</strong></mark>（[34][35]）。引用[34]は肝移植レシピエントが経験するストレス因子と介護者の認識のずれを調べたイタリアの研究、[35]は重症がん患者の自己申告症状に関する米国の研究である。</li><li>根拠の第二は、本稿で用いた経験とシナリオが<strong>イタリアの文化的環境</strong>（[4]）に由来する点。<mark class="hl">イタリアは <strong>open ICU の概念が北欧・北米よりはるかに普及していない</strong>環境である</mark>。したがって、より閉鎖的な出発点から書かれた本稿は、同じく閉鎖的な環境（日本を含む）にとって移植しやすい、という論理。</li><li><strong>今後の予定</strong>：ここで提示された内容はすべて、<strong>可能な限り早期にデルファイ・プロセスを通じて再評価される</strong>。主導は <strong>SIAARTI</strong>、複数のイタリア学術団体からなる<strong>多職種タスクフォース</strong>が参加する。</li><li>謝辞では、本稿が <strong>H.E.R.O.I.C. バンドル</strong>（www.heroicbundle.org）を支持すると述べている。</li></ul>
+<h3>9. 結論 🎯</h3>
+<ul><li>SARS-CoV-2 パンデミックは、遺憾ながら患者の親族の病院立ち入りの<strong>制限あるいは禁止を必要とした</strong>。</li><li>医療の世界には、<strong>これらの決定が必要であったとしても、関わるすべての人にどれほどの苦しみを引き起こしたかについて十分な認識がある</strong> — まず患者と家族、そして医師と看護師にも。</li><li><strong>現在の知識と、保証されたPPEの可用性は、面会再開への注意深く漸進的な再開を支持することを可能にする</strong>。ただし<strong>常に患者の希望を完全に尊重して</strong>。</li><li><mark class="hl"><strong>家族が COVID 病棟に入ることを許されるべきでない実質的な理由はないと考える。それは有用であるだけでなく、必要ですらありうる（It may be not only useful, but even necessary）</strong></mark>。</li><li>各病院の個別の状況において、<strong>集中治療と非集中治療の両方の部門で「人間化する」実践を速やかに回復させるためのあらゆる可能性が探索されるべき</strong>である。</li></ul>
+<h2><span class="sec-emoji">📊</span>10. 面会制限の害と、開放の利益を「根拠の強さ」で分ける</h2>
+<p>本稿は害と利益を<strong>主張として</strong>並べるが、根拠の強さは区別していない。当院で使うために、<mark class="hl"><strong>「本稿が言っていること」と「Vault の他ノートが持っているデータ」を分けて</strong></mark>整理する。<strong>右端の「強さ」は本稿ではなく本ノートの評価</strong>である。</p>
+<h4>10-1. 面会制限の「害」</h4>
+<div class="tw"><table>
+<thead><tr><th>誰への害</th><th>内容</th><th>出典の型</th><th>強さ</th></tr></thead>
+<tbody>
+<tr><td>患者</td><td>深鎮静終了期・長時間NPPV中の関係性の喪失、負担の大きい治療を続ける動機の低下</td><td>本稿の主張（データなし）</td><td>弱い</td></tr>
+<tr><td>患者</td><td>せん妄の増加</td><td>本稿は[20]（ABCDEFバンドル・非ランダム化 15,226例）を引くが、<strong>面会そのものを検証していない</strong></td><td>非常に弱い（下の10-3を参照）</td></tr>
+<tr><td>家族</td><td>複雑性悲嘆・長期に持続する心理的問題</td><td>本稿の主張＋[23][24]。Vault では <span class="wl">PICS-F（集中治療後症候群・家族）の包括的レビュー — 心理だけでなく身体・社会経済まで、予防は単発でなく連続したバンドルで（AcuteMedSurg2024）</span></td><td>中等度（機序としては強い、介入効果としては別）</td></tr>
+<tr><td>家族</td><td>不安・抑うつ</td><td>本稿は明示していないが、<span class="wl">柔軟な面会はせん妄を減らさないが家族の不安・抑うつを改善する（ICU Visits クラスター交差RCT・JAMA2019）</span> が制限側で悪いことを示す</td><td><strong>強い（クラスター交差RCT）</strong></td></tr>
+<tr><td>家族</td><td>1年後のPTSD症状</td><td><span class="wl">柔軟な面会は家族のPTSD症状を1年後も減らす（ICU Visits試験12か月解析・ICM2024）</span></td><td>中等度（事後解析・脱落大）</td></tr>
+<tr><td>家族</td><td>面会制限そのものの体験の質</td><td><span class="wl">COVID-19 ICU生存者の面会制限に関する質的研究（ICM2021）</span>／<span class="wl">COVID-19重症生存者の家族の退院後回復軌跡 — 英国・スペインの質的研究（ICM2023）</span></td><td>質的（数量化不可）</td></tr>
+<tr><td>医療者</td><td>情緒的過負荷、規則変更に伴うストレス</td><td>本稿の主張＋[28][29]</td><td>弱い</td></tr>
+</tbody></table></div>
+<h4>10-2. 開放の「利益」</h4>
+<div class="tw"><table>
+<thead><tr><th>誰への利益</th><th>内容</th><th>出典の型</th><th>強さ</th></tr></thead>
+<tbody>
+<tr><td>医療チーム</td><td>情報提供の有効性、意思決定の透明性、選択の共有可能性</td><td>本稿の主張＋[19]</td><td>弱い（ただし異論も少ない）</td></tr>
+<tr><td>家族</td><td>不安・抑うつの改善</td><td>ICU Visits RCT（JAMA2019）で<strong>有意</strong>（HADS 不安 −1.6、抑うつ −1.2）</td><td><strong>強い</strong></td></tr>
+<tr><td>家族</td><td>ケアチームへの信頼と評価</td><td>本稿＋[22]（Giannini 2013・前後比較研究）</td><td>弱い</td></tr>
+<tr><td>患者</td><td>せん妄の減少</td><td>==ICU Visits RCT で<strong>否定</strong>（18.9% 対 20.1%、P=0.44）==</td><td><strong>反証あり</strong></td></tr>
+<tr><td>患者・家族</td><td>死の瞬間にそばにいられること</td><td>本稿＋[7][23][33]</td><td>質的・倫理的（RCT不能）</td></tr>
+<tr><td>安全性</td><td>面会による患者・訪問者への追加リスクなし</td><td>本稿は[26]（<strong>医療者のPPE使用の断面研究</strong>）を引く。訪問者のデータではない。ICU Visits RCT では ICU内感染 3.7% 対 4.5%（有意差なし）</td><td>中等度</td></tr>
+</tbody></table></div>
+<h4>10-3. <mark class="hl">「面会を拡げればせん妄が減る」は短絡である</mark></h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>院内提案でここを間違えると、後で全部ひっくり返る 本稿は「家族の存在はせん妄の有病率を有意に低減するのを助けうる」と書き、引用[20]を付す。しかし [20] は <strong>Pun BT らの ICU Liberation Collaborative（68 ICU・15,226例の非ランダム化コホート）</strong>であり、検証されたのは <strong>ABCDEF バンドル全体の実施割合</strong>であって面会単独ではない。バンドルの F（Family engagement）は6要素のうちの1つにすぎない。 一方、本稿の<strong>2年前</strong>に発表された <span class="wl">柔軟な面会はせん妄を減らさないが家族の不安・抑うつを改善する（ICU Visits クラスター交差RCT・JAMA2019）</span> は、==<strong>面会時間を1日1.4時間から4.8時間へ3.4時間延長しても、せん妄発生率は 18.9% 対 20.1%（調整差 −1.7%、95%CI −6.1〜2.7、P=0.44）で動かない</strong><mark class="hl">ことを、36 ICU・患者1685例のクラスター交差RCTで示している。</mark><strong>本稿はこの試験を引用していない</strong><mark class="hl">。 したがって当院の結論はこうなる — </mark><strong>面会を開く理由は「患者のせん妄を減らすため」ではなく「家族の心理的転帰（PICS-F）を守るため」と「倫理的に正しいから」の2つに置く</strong>==。せん妄を看板にした施策は、次に効果検証された瞬間に信用を失う。</p>
+</div>
+<h2><span class="sec-emoji">🔗</span>11. 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>対比する相手</th><th>本稿との関係</th><th>読み方</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">柔軟な面会はせん妄を減らさないが家族の不安・抑うつを改善する（ICU Visits クラスター交差RCT・JAMA2019）</span></td><td><strong>部分的に矛盾</strong>。本稿のせん妄に関する記述はこの RCT に反証されている。一方、家族の心理的転帰・感染の非増加については本稿の主張と整合</td><td><strong>効果の根拠はこちらが正、運用手順は本稿が正</strong>という役割分担で使う</td></tr>
+<tr><td><span class="wl">柔軟な面会は家族のPTSD症状を1年後も減らす（ICU Visits試験12か月解析・ICM2024）</span></td><td><strong>整合</strong>。本稿の「複雑性悲嘆・長期心理問題からの保護」という主張に、唯一の長期データを与える</td><td>ただし事後解析・脱落大。粗比ではなく aPR 0.91（0.85–0.98）を引く</td></tr>
+<tr><td><span class="wl">家族の面会が予後を悪くするのではなく、重症だから家族が来る — collider bias の指摘（Correspondence・ICM2022）</span></td><td><strong>方法論的な補足</strong>。<mark class="hl">院内の観察データで「面会が多い患者ほど転帰が悪い」と出ても、それは面会の害ではなく<strong>重症度が面会と転帰の両方の上流にある</strong>構造の産物でありうる</mark></td><td>当院で面会実績と転帰を集計するときに、この落とし穴を先に共有しておく。<strong>観察データで面会の効果を語らない</strong></td></tr>
+<tr><td><span class="wl">ICUの家族支援介入は満足度を上げてもPICS-Fは減らせない — 16施設885家族を1年追跡し全アウトカムで有意差なし（FICUSクラスターRCT・ICM2026）</span></td><td><strong>警告として整合</strong>。家族支援は多施設に展開すると効果が消えやすい</td><td>本稿の Tips を「導入すれば効く」と読まない。<strong>忠実度（誰がどれだけ回すか）が効果の大半を決める</strong></td></tr>
+<tr><td><span class="wl">ICU家族への4ステップ伴走はPTSD症状を6か月後に減らす — 患者が生存した家族では1年後もIES-R 10点差（Caregiver Pathway RCT・ICM2025）</span></td><td><strong>補完</strong>。本稿の Tip 3（重要な時期に集中させる）と設計思想が同じ</td><td>面会と面談を別々に設計せず、<strong>接点の時刻表</strong>として統合する</td></tr>
+<tr><td><span class="wl">COVID-19重症患者の家族ケアに注力すべき10の理由（ICM2020）</span>／<span class="wl">COVID-19下のICU家族中心ケアとつながり（JAMA2021）</span></td><td><strong>同時代の姉妹文献</strong>。本稿の引用[25]は前者の系列</td><td>3本を並べると、2020年の「つながりを保て」から2021年の「物理的に開け」への論調の移行が見える</td></tr>
+<tr><td><span class="wl">重症治療における子どもに優しい面会方針への10の推奨（ICM2023）</span></td><td><strong>延長線上</strong>。本稿は「同じ条件が小児病棟・小児ICUにも適用される」と1行触れるのみ</td><td>子どもの面会は当院で手つかず。本稿からは扱えない</td></tr>
+<tr><td><span class="wl">家族中心のケア ガイドライン（新生児・小児・成人ICU）</span>（SCCM 2017・本稿の引用[13]）</td><td><strong>上位文書</strong>。本稿はこれをパンデミック下に翻訳したもの</td><td><mark class="hl">SCCM 2017 の推奨はすべて弱い（2D・2C・2B）</mark>。上位文書の側も強い推奨を持たないことを踏まえる</td></tr>
+<tr><td><span class="wl">ICUのヒューマナイゼーション（人間らしいケア・ICM2020）</span>／<span class="wl">人間中心ケアICUモデルへ — HU-CI の人間化計画7領域と160アクション（Plenary・CCM2020）</span></td><td><strong>思想的な母体</strong>。本稿の「humanization の道筋の中断」という表現はこの系譜</td><td>面会を「人間化」の一領域として位置づける</td></tr>
+<tr><td><span class="wl">🏨 Hotel ICU・人間的ケア Home</span></td><td>本ノートは Home の <strong>G. 家族・面会</strong> に既に登録済み</td><td>Home 側の記述変更は不要</td></tr>
+</tbody></table></div>
+<h2><span class="sec-emoji">🔍</span>12. 批判的吟味（JCでの論点）</h2>
+<p><strong>① 新規データがゼロである</strong> 最大の限界。効果推定値・信頼区間・p値・n数のいずれも本文に存在しない。<strong>主張の当否は引用文献の質に完全に依存する</strong>。JC ではまずこの構造を確認したい。</p>
+<p><strong>② せん妄に関する主張と引用の不一致（最重要）</strong> 第10-3節のとおり。「家族の存在はせん妄を有意に減らしうる」に付された引用[20]は ABCDEF バンドル全体の非ランダム化コホートであり、面会単独の効果ではない。<strong>しかも本稿の2年前に、面会延長がせん妄を減らさないことを示した 36 ICU のクラスター交差RCT（JAMA 2019）が存在するのに引用されていない</strong>。<mark class="hl">2021年5月受理の論文が、2019年の主要RCTを引かずに反対方向の主張を書いている</mark>のは、JC で最初に出すべき指摘。</p>
+<p><strong>③ 「追加の安全上のリスクはない」の引用も対象がずれている</strong> Tip 1 の「適切に実施されれば患者にも訪問者にも追加の安全リスクはない」に付された引用[26]は、<strong>武漢の医療専門職におけるPPE使用の断面研究</strong>（Liu M, et al. BMJ. 2020;369:m2195）である。<strong>訓練を受けた医療者のデータを、訓練を受けていない家族に外挿している</strong>。同様に(a)の「家族自身を感染から守る」の引用[31]（Chu DK, et al. Lancet. 2020;395:1973–87）は物理的距離・マスク・眼の防護に関する系統的レビュー・メタ解析であり、ICU 面会の設定で検証されたものではない。</p>
+<p><strong>④ 利益相反はないが、選択バイアスは残る</strong> 著者17名は全員が「開放」を推進する立場（SIAARTI 倫理部会、open ICU の提唱者 Giannini、面会と家族コミュニケーションの研究者 Mistraletti）。<strong>反対側の論拠を体系的に探した形跡がない</strong>（系統的検索の記載がない）。VIEWPOINT として正当ではあるが、<strong>バランスの取れたレビューとして引用してはいけない</strong>。</p>
+<p><strong>⑤ 合意手順を経ていない</strong> 本稿自身が「デルファイで再評価する」と書いている。<mark class="hl"><strong>したがって本稿は「学会の推奨」ではなく「推奨案の素案」である</strong></mark>。院内文書で「SIAARTI が推奨」と書くのは不正確。</p>
+<p><strong>⑥ Table 1 の対策が抽象的すぎる</strong> 「明確な指示と監督」「十分な知識の共有」「文献的エビデンス」といった対策は、<strong>誰が・いつ・どれだけの工数で行うのかを含まない</strong>。実装研究の観点からは、これは対策ではなく方向の表明にとどまる。当院で使うなら、各行に<strong>担当部署と所要時間</strong>を足して初めて運用に乗る。</p>
+<p><strong>⑦ 一般化可能性の論証が薄い</strong> 「近しさを求める人間の欲求は国によって科学的に異ならない」の根拠として引かれた[34]（肝移植レシピエントのストレス因子・イタリア）と[35]（重症がん患者の自己申告症状・米国）は、いずれも<strong>面会や国際比較を扱った研究ではない</strong>。主張自体は直観的に受け入れやすいが、引用は主張を支えていない。</p>
+<p><strong>⑧ 図に情報がない</strong> Figure 1 は freepik 素材の装飾イラストレーションであり、<strong>キャプションが述べる「3者への利点」の内容を図として表現していない</strong>（描かれているのは医療者2名で、家族は登場しない）。査読を通ったこと自体が VIEWPOINT というカテゴリの緩さを示している。</p>
+<p><strong>⑨ 日本の文脈は本文にない</strong> <mark class="hl"><strong>日本の感染対策指針（厚労省・日本環境感染学会等）、当院の面会規程、面会に伴う労務・法務上の扱いは、本稿の本文には一切含まれていない</strong></mark>。本稿はイタリアの地域規制（トスカーナ州令第96号、ヴェネト州通達第466241号など）を前提に書かれている。当院で運用に落とすときは、<strong>本稿の骨格と、日本の規程との突き合わせを別立てで行う</strong>必要がある。本ノートもそれを行っていない。</p>
+<p><strong>⑩ 時点の限界</strong> 2021年5月受理。<strong>ワクチン接種の普及、オミクロン以降の変異株、5類移行後の運用は反映されていない</strong>。それでも Tip 4（月1回の再評価と、規制連動の自動切替）という設計は時点に依存しない部分であり、そこが本稿の最も長持ちする貢献。</p>
+<h2><span class="sec-emoji">📚</span>13. 主要引用文献一覧</h2>
+<p>本稿の引用は全35件。JC で原典に当たる価値の高いものを抜粋する。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>文献</th><th>内容・本稿での役割</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>Giannini A. Open intensive care units: the case in favour. Minerva Anestesiol. 2007;73(5):299–305.</td><td>open ICU 論の古典。本稿の第2著者</td></tr>
+<tr><td>4</td><td>Giannini A, Garrouste-Orgeas M, Latour JM. What's new in ICU visiting policies: can we continue to keep the doors closed? Intensive Care Med. 2014;40(5):730–3.</td><td>パンデミック前の面会方針レビュー</td></tr>
+<tr><td>6</td><td>Azoulay E, Kentish-Barnes N. A 5-point strategy for improved connection with relatives of critically ill patients with COVID-19. Lancet Respir Med. 2020;8(6):e52.</td><td>パンデミック初期の代表的な提言</td></tr>
+<tr><td>7</td><td>Wakam GK, Montgomery JR, Biesterveld BE, Brown CS. Not dying alone — modern compassionate care in the Covid-19 pandemic. N Engl J Med. 2020;382(24):e88.</td><td>「独りで死なせない」。複雑性悲嘆の議論の起点</td></tr>
+<tr><td>12</td><td>Kentish-Barnes N, Degos P, Viau C, Pochard F, Azoulay E. "It was a nightmare until I saw my wife": the importance of family presence for patients with COVID-19 hospitalized in the ICU. Intensive Care Med. 2021. doi:10.1007/s00134-021-06411-4</td><td>患者側から見た家族の存在の意味</td></tr>
+<tr><td>13</td><td>Davidson JE, Aslakson RA, Long AC, et al. Guidelines for family-centered care in the neonatal, pediatric, and adult ICU. Crit Care Med. 2017;45(1):103–28.</td><td><strong>SCCM 家族中心ケアガイドライン</strong>。本稿の上位文書。Vault に <span class="wl">家族中心のケア ガイドライン（新生児・小児・成人ICU）</span></td></tr>
+<tr><td>14</td><td>Hart JL, Turnbull AE, Oppenheim IM, Courtright KR. Family-centered care during the COVID-19 era. J Pain Symptom Manage. 2020;60(2):e93–7.</td><td>「閉じた病院」という表現の出典</td></tr>
+<tr><td>17</td><td>Galazzi A, Binda F, Gambazza S, et al. Video calls at end of life are feasible but not enough: a 1-year intensive care unit experience during the COVID-19 pandemic. Nurs Crit Care. 2021. doi:10.1111/nicc.12647</td><td><mark class="hl">ビデオ通話は「実行可能だが不十分」の根拠</mark>。本稿の核心的留保</td></tr>
+<tr><td>20</td><td>Pun BT, Balas MC, Barnes-Daly MA, et al. Caring for critically ill patients with the ABCDEF bundle: results of the ICU Liberation Collaborative in over 15,000 adults. Crit Care Med. 2019;47(1):3–14.</td><td><mark class="hl">せん妄減少の主張に付された唯一の引用。ただし<strong>バンドル全体</strong>の非ランダム化コホートであり面会単独ではない</mark></td></tr>
+<tr><td>21</td><td>Kotfis K, Williams Roberson S, Wilson JE, Dabrowski W, Pun BT, Ely EW. COVID-19: ICU delirium management during SARS-CoV-2 pandemic. Crit Care. 2020;24(1):176.</td><td>「COVID患者のせん妄は他の重症患者より多い」の根拠。レビューであり比較研究ではない</td></tr>
+<tr><td>22</td><td>Giannini A, Miccinesi G, Prandi E, Buzzoni C, Borreani C. Partial liberalization of visiting policies and ICU staff: a before-and-after study. Intensive Care Med. 2013;39(12):2180–7.</td><td><strong>面会緩和がスタッフに与える影響の前後比較研究</strong>。本稿でチームへの利益とストレスの両方の根拠として使われる</td></tr>
+<tr><td>24</td><td>Downar J, Kekewich M. Improving family access to dying patients during the COVID-19 pandemic. Lancet Respir Med. 2021;9:335–7.</td><td>死にゆく患者への家族アクセス改善</td></tr>
+<tr><td>25</td><td>Azoulay E, Curtis JR, Kentish-Barnes N. Ten reasons for focusing on the care we provide for family members of critically ill patients with COVID-19. Intensive Care Med. 2020;47:230–3.</td><td>Vault に <span class="wl">COVID-19重症患者の家族ケアに注力すべき10の理由（ICM2020）</span></td></tr>
+<tr><td>26</td><td>Liu M, Cheng SZ, Xu KW, et al. Use of personal protective equipment against coronavirus disease 2019 by healthcare professionals in Wuhan, China: cross sectional study. BMJ. 2020;369:m2195.</td><td><mark class="hl">「面会に追加の安全リスクはない」の根拠。ただし対象は<strong>医療専門職</strong>であり訪問者ではない</mark></td></tr>
+<tr><td>30</td><td>Munshi L, Evans G, Razak F. The case for relaxing no-visitor policies in hospitals during the ongoing COVID-19 pandemic. CMAJ. 2020;193:E135–7.</td><td>面会禁止方針の緩和を求める同時代の論説</td></tr>
+<tr><td>31</td><td>Chu DK, Akl EA, Duda S, et al. Physical distancing, face masks, and eye protection to prevent person-to-person transmission of SARS-CoV-2 and COVID-19: a systematic review and meta-analysis. Lancet. 2020;395(10242):1973–87.</td><td>距離・マスク・眼の防護の系統的レビュー。ルール(a)の根拠</td></tr>
+<tr><td>33</td><td>Ramos HCHN, Henry L. No one should die alone on our watch. Int J Care Caring. 2020;4(4):595–8.</td><td>ルール(d)の例外（短期予後不良）の根拠</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>この論文は「面会を開く効果の証拠」ではなく「面会を開くための手順書」である</strong></mark>。データはゼロ。借りるべきは 7 Tips・4条件・4ルール・12障壁の表という骨格であって、効果の主張ではない。</p>
+</div>
+<ul><li><mark class="hl"><strong>面会を開く根拠は「せん妄が減る」ではなく「家族の不安・抑うつ・PTSD を守る」に置く</strong></mark>。本稿のせん妄に関する主張は、2年前の ICU Visits クラスター交差RCT（36 ICU・1685例、18.9% 対 20.1%、P=0.44）に反証されており、<mark class="hl">本稿はその試験を引用していない</mark>。</li><li><strong>入室の必須条件は4つ</strong>（旧版ノートは3つと記載していた誤り）：①患者と家族の双方が望む ②家族が隔離・検疫下にない ③家族が無症状かつリスク因子なし・<strong>家族用PPEが十分</strong> ④<strong>訓練された案内・監督要員がいる</strong>。<mark class="hl">実務の律速は④</mark>。</li><li><mark class="hl"><strong>「PPE不足が持続するなら面会は認めない」は本稿が唯一断定した禁止条項</strong></mark>。裏を返せば、<strong>PPE が潤沢なのに閉じ続ける根拠は本稿の枠組みには存在しない</strong>。</li><li><strong>COVID エリアでは家族を守り、非COVID エリアでは患者を守る</strong>。守る向きが逆になることを規程に明記する。</li><li><strong>Tip 4 が最も長持ちする貢献</strong>：ICU 内にワーキンググループを置き、<strong>月1回以上、面会制限を正当化する条件を再評価する</strong>。さらに<strong>流行段階ごとの複数プロトコルを先に作り、地域の警戒レベルに自動連動させる</strong>。判断のたびに合意形成をやり直さない設計。</li><li><strong>面会規程は ICU 単独ではなく院内共通ルールとして作る</strong>（Tip 7）。ICU だけ開いても家族の体験は分断されたまま。</li><li><strong>本稿は「学会の推奨」ではない</strong>。著者ら自身がデルファイでの再評価を予告している段階の素案。院内文書で「SIAARTI 推奨」と書かない。</li><li><mark class="hl"><strong>日本の感染対策指針・当院の規程・労務・法務の扱いは本稿の本文には一切含まれない</strong></mark>。骨格を借りたうえで、日本側の突き合わせは別立てで行う。</li></ul>
+<h4>判断の流れ（当院で面会方針を見直すとき）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>面会を制限している</td><td>PPE は不足しているか</td><td>不足していないなら、制限を続ける根拠が何かを言語化する（Tip 4）</td></tr>
+<tr><td>制限の根拠を言語化した</td><td>それは構造的・組織的条件か（病床逼迫・人員・地域伝播）</td><td>条件と警戒レベルを紐づけた<strong>複数プロトコル</strong>を先に作る</td></tr>
+<tr><td>総枠を絞らざるを得ない</td><td>どの時期の面会か</td><td>入室時／治療制限の説明時／死の直前を最優先（Tip 3）。深鎮静持続中は患者側の優先度は下がる</td></tr>
+<tr><td>COVID（隔離）エリアか</td><td>守る対象は家族か患者か</td><td>隔離エリア＝家族を守る（着脱プロトコル）／非隔離エリア＝患者を守る（スクリーニング）</td></tr>
+<tr><td>開く方向で合意した</td><td>案内・PPE指導・監督をする人がいるか</td><td>要員が確保できるまで開かない。<strong>要員確保が最大の律速</strong></td></tr>
+<tr><td>効果を示したい</td><td>主要アウトカムは何か</td><td>患者のせん妄ではなく<strong>家族の不安・抑うつ</strong>（HADS）と満足度。せん妄を看板にしない</td></tr>
+<tr><td>院内データで効果を語りたい</td><td>面会実績と転帰の観察データか</td><td>重症度が両方の上流にある構造を先に共有する（collider の議論）</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

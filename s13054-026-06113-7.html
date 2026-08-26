@@ -119,6 +119,15 @@
 
 .jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
 .jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
 .jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
   background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
 
@@ -153,9 +162,12 @@
 <header class="masthead">
   <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
   <h1 class="title">難治性ウィーニングは多臓器の問題 — 統合エコー評価がAUROC 0.88で単独指標を上回る（WEAN-US・前向き観察・CritCare2026）</h1>
-  <dl class="cite"><dt>出典</dt><dd>Fogagnolo A, Dres M, Murgolo F, et al. Critical Care. 2026;30:309. doi:10.1186/s13054-026-06113-7</dd><dt>掲載誌</dt><dd>Critical Care（2026）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06113-7" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06113-7</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Integrated comprehensive assessment for predicting weaning success in difficult-to-wean critically ill patients: the WEAN-US study</dd></dl>
+  <dl class="cite"><dt>出典</dt><dd>Fogagnolo A, Dres M, Murgolo F, et al. Critical Care. 2026;30:309. doi:10.1186/s13054-026-06113-7</dd><dt>掲載誌</dt><dd>Critical Care（2026-06-04）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06113-7" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06113-7</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Integrated comprehensive assessment for predicting weaning success in difficult-to-wean critically ill patients: the WEAN-US study</dd></dl>
 </header>
 <div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-026-06113-7.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-026-06113-7.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-026-06113-7.pdf)</p>
 <h2>🏥 聖路加ICUでの実践への示唆</h2>
 <div class="call example"><span class="lab">聖路加ICUでの実践</span>
 <p>病棟プロトコルへの落とし込み</p>
@@ -206,6 +218,7 @@
 </tbody></table></div>
 <p>心エコーは単一の訓練された術者（FA）が実施し、測定の一貫性を確保。<strong>24時間以内に盲検化された循環器医が別途評価し直してバイアスを最小化</strong>した。抜管後の酸素療法は HFNC（Airvo 2）を60 L/分で開始し、不耐なら減量。加温加湿は侵襲モード（37℃）で開始し、熱すぎるようなら非侵襲モード（34℃）へ。</p>
 <ul><li><strong>主要アウトカム</strong>：<strong>離脱失敗</strong>の予測。WIND 定義に従い、離脱成功＝抜管後7日以上、侵襲的人工呼吸から解放されていること。離脱失敗＝<strong>離脱不能</strong>（補助換気のまま退室）または<strong>抜管後7日以内の再挿管</strong></li><li><strong>副次アウトカム</strong>：人工呼吸期間が各測定値に与える影響を、離脱失敗の有無別に検討</li><li><strong>追加アウトカム</strong>：<strong>SBT失敗</strong>＝臨床的な不耐徴候によりSBTを完遂できないこと。SBT失敗時は24時間ごとに次の離脱試行の可否を再評価</li><li><strong>解析</strong>：連続変数は中央値[IQR]、Wilcoxon検定。カテゴリ変数はχ²またはFisher。反復測定（複数回のSBT）は <strong>GLMM（一般化線形混合モデル）</strong> で対応。予測モデルは3段階＝①臨床判断による変数の事前選択 → ②各変数の単独ROC評価（Youden指数で最適カットオフ）→ ③<strong>LASSO 罰則化</strong>による統合モデル構築。5分割交差検証で罰則パラメータを最適化（binomial deviance）。LASSO係数には selective inference を適用して信頼区間とp値を推定。最終モデルは<strong>1000回ブートストラップ</strong>でAUC・感度・特異度・正確度の95%CIを推定し、各変数の重要度は「ランダム置換後の log loss の平均変化」で評価。R 3.5.2</li><li><strong>サンプルサイズ</strong>：AUCの精度に基づく設計。先行のマルチモーダル超音波モデルのAUCが約0.87であることを前提に、真のAUC 0.87・離脱失敗の予想有病割合40%として、<strong>89例で AUC を ±0.042（95%精度）で推定可能</strong>と算出</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06113-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06113-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 1. 統合ウィーニング評価プロトコル（原図・無改変。© Fogagnolo et al., Critical Care 2026, CC BY-NC-ND） 図は左から右への時間軸で描かれている。左端の白抜き矢印が「Invasive MV（侵襲的人工呼吸）」、そこに濃紺の矢羽根「Study inclusion（組み入れ）」が刺さり、以降オレンジの帯で <strong>T1 → SBT（30分）→ T2</strong> と続く。上段には別の白抜き矢印で「<strong>PSV 4 cm H₂O and PEEP 4 cm H₂O</strong>」が T1 の手前から T2 の後まで水平に伸び、SBT中も設定を変えないことを示す。T2 の右で濃紺の太い矢印が2方向に分岐し、上へ「<strong>SBT Success</strong>」、下へ「<strong>SBT Failure</strong>」。SBT Success からさらに上向き矢印が伸びて、最上段の白抜き矢印「<strong>WEANING — Follow-up 7 days</strong>」につながる（＝7日間の追跡で離脱成功を判定）。図の下半分には測定項目が2列で列挙される。左列「<strong>(T1) SBT assessment</strong>」は Traditional respiratory parameters (i.e. RSBI) / Lung ultrasound and dyspnea assessment / Handgrip strength / Diaphragm ultrasound / Cardiac ultrasound and other haemodynamic parameters の5行。右列「<strong>(T2) Post-SBT assessment</strong>」は Traditional respiratory parameters (i.e. RSBI) / Lung ultrasound and dyspnea assessment / Diaphragm ultrasound / Other haemodynamic parameters の4行（<strong>心エコーと握力はT2では再検しない</strong>のがポイント）。両列の下を細い青線が囲み、黄色でハイライトされた「<strong>Comprehensive integrated re-assessment (after 24h)</strong>」に集約される＝SBT失敗例では24時間後に同じ評価一式を繰り返す設計。</p>
 </div>
@@ -290,6 +303,7 @@
 <p>臨床判断で選ばれた<strong>18変数</strong>を候補とし、LASSO が<strong>6変数</strong>を選択した。</p>
 <ul><li><strong>ICUAW</strong></li><li><strong>SBT後の自己申告呼吸困難</strong></li><li><strong>EF（%）</strong></li><li><strong>横隔膜 TF</strong></li><li><strong>SBT後の横隔膜移動距離</strong></li><li><strong>E/e′</strong></li></ul>
 <p>ほとんどの単独指標（エコー・呼吸・血行動態・心・神経筋）の判別能は「限定的〜中等度」にとどまり、<strong>SBT後の呼吸困難スコアが単独では最良</strong>だった。</p>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06113-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06113-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 3. 単独指標と統合モデルのROC解析、および多変量モデルの推定値（原図・無改変。© Fogagnolo et al., Critical Care 2026, CC BY-NC-ND） <strong>Panel A（左上）</strong>：モデルに含まれた6つの単独指標のROC曲線を、X軸「Specificity (%)」を100→0の向きで、Y軸「Sensitivity (%)」0→100で描いた6色の折れ線。凡例に AUC が併記されている — 赤 ICUAW <strong>66.19</strong>、青 Self-reported dyspnea (T2) <strong>77.31</strong>、黄 Ejection fraction <strong>64.04</strong>、緑 Thickening fraction <strong>48.43</strong>、黒 Diaphragmatic displacement (T2) <strong>56.97</strong>、橙 E/e′ ratio <strong>61.06</strong>。青（SBT後の呼吸困難）だけが左上へ大きく張り出しており、緑（TF）は対角線とほぼ重なる＝単独ではほぼ無価値であることが一目で分かる。 <strong>Panel B（右上）</strong>：統合モデル（elastic net）のROC。1本の滑らかな青曲線が左上隅へ大きく膨らみ、灰色の対角線（判別なしの線）から明確に離れている。パネル見出しに <strong>AUROC = 0.88（95%CI 0.78–0.95）</strong>。 <strong>Panel C（下）</strong>：多変量モデルの推定値の表。左から Variable / Odds Ratio / 95% CI / p-value の4列。ICU-acquired weakness (ICUAW) <strong>0.22</strong>（0.02–0.68）p=0.019／Self-reported dyspnea after SBT <strong>2.67</strong>（1.52–3.86）p=0.005／Ejection Fraction (%) <strong>1.88</strong>（0.58–3.73）p=0.183／Diaphragm Thickening Fraction (TF, %) <strong>4.68</strong>（0.00–12.78）p=0.720／Diaphragmatic displacement after SBT <strong>1.62</strong>（0.12–2.51）p=0.481／E/e′ ratio <strong>1.08</strong>（0.56–1.24）p=0.606。<mark class="hl">有意なのは上2つだけ</mark>で、残り4変数の信頼区間はいずれも1をまたぐ。</p>
 </div>
@@ -345,7 +359,7 @@
 </div>
 <footer class="foot">
   本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
-  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
 </footer>
 </div>
 </body>

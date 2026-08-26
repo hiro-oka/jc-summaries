@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICU患者が自ら報告する症状 — 最も多く最も強いのは「口渇」（前向き多施設観察・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07219-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICU患者が自ら報告する症状 — 最も多く最も強いのは「口渇」（前向き多施設観察・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Saltnes-Lillegård C, Rustøen T, Beitland S, Puntillo K, Hagen M, Lerdal A, Hofsø K. Self-reported symptoms experienced by intensive care unit patients: a prospective observational multicenter study. Intensive Care Med. 2023. doi:10.1007/s00134-023-07219-0</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-10-09）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07219-0" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07219-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Self-reported symptoms experienced by intensive care unit patients: a prospective observational multicenter study</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07219-0.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07219-0.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07219-0.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>① 「口渇」を測定項目に入れる（本論文が最も強く支持する一手）</strong></p>
+<ul><li>本研究で口渇は <strong>初日有病率 66%・平均強度 6.13/10</strong>、7日間でも <strong>64%・6.05/10</strong> と、5症状のうち有病率・強度の両方で最上位だった。著者自身が「最も多く最も強い症状が、いまだにルーチンで評価も治療もされていないのはパラドックスだ」と本文に書いている。</li><li>当院の実装案：ケアラウンドに <strong>口渇のNRSを2問（強度0–10／苦痛0–10）</strong> 追加する。本研究の測定法はまさにこれで、追加の器具も加算も要らない。</li><li>患者への聞き方は本研究に準拠して <strong>「いまこの瞬間」</strong> を尋ねる（1日を振り返らせない）。想起バイアスを避けるためのデザイン上の選択である。</li></ul>
+<p><strong>② 「強度」と「苦痛」は別物として両方測る</strong></p>
+<ul><li>不安は有病率が最低（初日 24%・7日間 25%）だったが、<strong>苦痛スコアは全症状で最高</strong>（初日 5.24／7日間 5.46）。<mark class="hl"><strong>強度だけで優先順位をつけると、最も苦しい症状である不安を取りこぼす</strong></mark>。</li><li>逆に疲労は有病率 64% と多いのに苦痛は最低（3.50）。「よくある症状＝つらい症状」ではない。<strong>2次元で測って初めて資源の配分先が決まる</strong>。</li></ul>
+<p><strong>③ 「症状を訴えない患者」の扱いを決めておく</strong></p>
+<ul><li>本研究では 603名が組み入れられたが、初日に自己報告できたのは <strong>195名（32%）</strong>、7日間のどこかで自己報告できたのは <strong>353名（59%）</strong> にとどまる。<mark class="hl"><strong>ICUでは常に4割前後の患者が「自分の症状を語れない」</strong></mark> という数字を、評価プロトコルの前提に置く。</li><li>経口挿管中でも評価は不可能ではない：本研究では症状評価時に経口挿管されていた 18名のうち <strong>5名が強度・苦痛まで完全に回答</strong>し、13名は有無（yes/no）のみ回答できた。当院でも「挿管中だから聞かない」という運用は根拠が弱い。</li></ul>
+<p><strong>④ 敗血症患者では口渇を特に疑う（ただし機序は不明）</strong></p>
+<ul><li>敗血症の診断は口渇強度と関連した（多変量 <strong>B=1.71、95%CI 0.58–2.84、p=0.003</strong>）。著者は「驚きであり説明できない」と明記し、<strong>輸液バランスのデータが不完全で検討できなかった</strong>と述べている。当院では輸液バランス・血清Na・利尿薬と口渇の関係を後ろ向きに見るだけでも新規性がある。</li></ul>
+<p><strong>⑤ 面会制限の根拠には使わない</strong></p>
+<ul><li>家族の面会は不安強度の上昇と関連した（<strong>B=0.64、95%CI 0.04–1.24、p=0.038</strong>）が、著者は「この説明できない所見を面会制限の根拠にすべきではない」と本文で釘を刺している。当院の柔軟面会方針を変える材料にはならない。</li></ul>
+<p><strong>⑥ 本論文に「無い」もの（当院で足す必要がある部分）</strong></p>
+<ul><li><mark class="hl"><strong>本論文は介入研究ではない。口渇への具体的な介入（氷片・口腔スワブ・保湿剤・メントール等）の手技も効果も、本文には一切書かれていない</strong></mark>。</li><li>本文が触れているのは考察の引用レベルのみで、「口腔ケアの効果は1時間しか続かなかった（引用文献34）」「単純な thirst bundle が快適性を高めた（引用文献8・35・36）」という2文だけである。<strong>バンドルの中身は本論文からは分からない</strong>。</li><li>具体的な介入設計は当院では別ノート（1時間ごとの氷水スワブ＋メントール保湿の準実験、口渇マネジメントのレビュー）に依拠する。本ノートが担うのは「<strong>問題の大きさの定量</strong>」までである。</li><li>同様に、<strong>MCID（何点下げれば臨床的に意味があるか）も本論文にはない</strong>。当院で改善プロジェクトを組むなら、目標値は本論文からは設定できない。</li></ul>
+</div>
+<p>Hotel ICU プロジェクトでの位置づけと介入側の根拠は <span class="wl">🏨 Hotel ICU・人間的ケア Home</span> に集約されている。介入の型は <span class="wl">計画的な看護介入（1時間ごとの氷水スワブ＋メントール保湿）でICU患者の口渇と口腔乾燥は軽減する（AJCC2019）</span>、生理・評価・介入の全体像は <span class="wl">重症患者の口渇マネジメント — 生理・リスク因子・評価・介入の全体像（Clinical Evidence Review・AJCC2022）</span> を参照。</p>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：ICU患者は多彩な症状・不快を経験する。10年以上前に Puntillo らが「死亡リスクの高いICU患者」で10症状の有病率・強度・苦痛を評価し、その後の症状研究の土台を作った（Crit Care Med 2010）。また Chanques らは「毎日評価すべき5症状」として <strong>疼痛・口渇・不安・疲労・息切れ</strong> を提唱していた（ICM 2015）。症状は主観的経験であるため、<strong>患者自身に報告させること（自己報告）が症状評価のゴールドスタンダード</strong>であることも確立していた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：先行研究の多くは ①単一症状しか見ない、②強度しか見ない、③後ろ向きデザインでリアルタイムの体験を捉えられない、④除外基準が広すぎて一般ICU集団に外挿できない、という限界を持つ。とくに <strong>ICU入室最初期（first days）の症状を報告した研究は乏しい</strong>。現在のICU患者の症状体験がどうなっているか、また症状強度を予測しうる因子は何かは不明のままだった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：ノルウェー2病院・6 ICUの<strong>非選択的な混合ICU集団</strong>で、5症状の <strong>有病率・強度・苦痛の3次元</strong> を <strong>入室初日から7日間・毎日</strong> 自己報告で追跡した。結果、①<strong>口渇が最多かつ最強</strong>、②<strong>不安が最も苦痛</strong>、③<strong>7日間を通じて症状負荷が下がらない</strong>、という3点を示した。さらにGEEで、口渇↑に敗血症と鎮痛薬、疼痛↓に高齢とMV、疼痛↑に鎮痛薬、不安↑に家族面会、息切れ↑に女性という関連を示した。<mark class="hl">「症状は入室直後の一過性の問題ではなく、7日間続く定常的な負荷である」</mark> という描像が、本研究の最大の貢献である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 自己報告できるICU患者では、<strong>口渇が最も多く（64–66%）最も強い（6.05–6.13/10）症状</strong>であり、<strong>最も苦痛なのは不安（5.24–5.46/10）</strong>で、この症状負荷は<strong>7日間下がらない</strong>。著者の結論は「症状のルーチン評価は正当化される。臨床医は快適性を改善するために症状緩和の手立てを開始すべき」である。</p>
+</div>
+<ul><li><strong>デザイン</strong>：ノルウェーの2病院・6つの内科系/外科系ICUで実施された前向きコホート研究（多施設観察研究の一部、NCT03714230）。登録期間 <strong>2018年10月〜2020年6月</strong>、連続的リクルート。</li><li><strong>対象</strong>：18歳以上で、①人工呼吸を要する、②持続的血管作動薬療法を要する、③ICU滞在24時間超、のいずれかを満たす患者。</li><li><strong>測定</strong>：Patient Symptom Survey（PSS）を用い、<strong>疼痛・口渇・不安・疲労・息切れ</strong>の5症状について<strong>有無・強度（0–10）・苦痛（0–10）</strong>を <strong>1日1回・7日間</strong> 評価。設問は「<strong>いまこの瞬間</strong>」の症状を尋ねる。</li><li><strong>サンプル</strong>：組み入れ 603名。初日に自己報告できた <strong>195名（Sample 1）</strong>、7日間のどこかで自己報告できた <strong>353名（Sample 2）</strong>。7日間で計 <strong>668回</strong>の評価（患者あたり中央値 <strong>2回</strong>）。</li><li><strong>主要所見（初日・n=195）</strong>：口渇が最多 <strong>129名（66%）</strong>、平均強度 <strong>6.13（95%CI 5.70–6.56）</strong>。不安は最少 <strong>46名（24%）</strong>だが平均苦痛は最高 <strong>5.24（95%CI 4.32–6.15）</strong>。</li><li><strong>主要所見（7日間・668評価）</strong>：口渇が最多 <strong>425回（64%）</strong>、平均強度 <strong>6.05（95%CI 5.81–6.30）</strong>。不安の平均苦痛が最高 <strong>5.46（95%CI 4.95–5.98）</strong>。疼痛の平均強度が最低 <strong>4.61（95%CI 4.31–4.90）</strong>、疲労の平均苦痛が最低 <strong>3.50（95%CI 3.13–3.87）</strong>。</li><li><strong>GEE（多変量・n=335）で有意だった関連</strong>：口渇強度↑＝<strong>敗血症診断 B=1.71（0.58–2.84）</strong>・<strong>鎮痛薬投与 B=0.88（0.18–1.59）</strong>。疼痛強度↓＝<strong>高齢 B=−0.04（−0.07〜−0.02）</strong>・<strong>人工呼吸 B=−0.90（−1.48〜−0.32）</strong>、疼痛強度↑＝<strong>鎮痛薬投与 B=1.00（0.49–1.50）</strong>。不安強度↑＝<strong>家族の面会 B=0.64（0.04–1.24）</strong>。息切れ強度↑＝<strong>女性 B=0.56（0.00–1.11）</strong>。<strong>疲労は多変量で有意な因子ゼロ</strong>。</li><li><strong>著者の結論</strong>：自己報告可能なICU患者は7日間にわたり高く一貫した症状負荷を経験していた。いくつかの変数が症状強度と関連したが、<strong>これらの関連を理解するにはさらなる研究が必要</strong>である。</li><li><strong>Take-home message（原文枠）</strong>：自己報告できる患者はICU治療中に高く一貫した症状負荷を経験する。<strong>症状のルーチン評価が正当化され、臨床医は患者の快適性を改善するために症状緩和の手立てを開始すべきである</strong>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — ICUの「症状」を測るということ（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>症状（symptom）とは何か</strong>：症状は定義上「本人が知覚した経験」である。したがって血圧や乳酸のように外から測れるものではなく、<strong>患者本人に聞く以外に正確に知る方法がない</strong>。これが本研究の出発点で、著者は自己報告を「症状評価のゴールドスタンダード」と位置づけている。</p>
+<p><strong>なぜ今これが問題になるのか</strong>：かつてのICUでは深鎮静が標準で、患者は症状を語れなかった。しかし鎮静を浅くする流れ（analgosedation・eCASH等）が広がった結果、<strong>患者はより覚醒し、より意識清明になり、そのぶん煩わしい症状に曝されやすくなった</strong>——これが本論文の導入部の主張である。症状に注意を向けることが、回復の改善、あるいは治療が奏功しない場合のより穏やかな死につながる最初の一歩になりうる、と著者は述べる。</p>
+<p><strong>3つの次元を区別する</strong>：本研究は症状を3次元で測る。</p>
+<ul><li><strong>有病率（prevalence）</strong>：その症状が「ある」と答えた割合</li><li><strong>強度（intensity）</strong>：どれくらい強いか（0＝なし 〜 10＝考えうる最悪）</li><li><strong>苦痛（distress）</strong>：どれくらい患者を悩ませているか（0＝なし 〜 10＝考えうる最大の苦痛）</li></ul>
+<p>強度と苦痛は別物である。理論的背景は <strong>TOUS（theory of unpleasant symptoms／不快症状の中範囲理論）</strong> で、distress は「その症状にどれだけ悩まされているか」の程度と定義される。本研究の最も実用的な発見は、この2つが症状ごとに乖離することを示した点にある。</p>
+<p><strong>本研究に出てくる道具</strong></p>
+<ul><li><strong>PSS（Patient Symptom Survey）</strong>：Puntillo らが開発した10項目の症状チェックリスト。がん領域で検証済みの <strong>Edmonton Symptom Assessment Scale</strong> をICU用に調整したもの。本研究では実行可能性を高めるため、Chanques らの推奨に沿って <strong>5症状に絞った版</strong> を用い、ノルウェーのICU患者で表面妥当性と実行可能性を予備検証した。</li><li><strong>CFS（Clinical Frailty Scale）</strong>：入室前のフレイルを患者自身の主観的判断で9段階評価する尺度。本研究では non-frail／pre-frail／frail の3群に集約。</li><li><strong>CCI（Charlson comorbidity index）</strong>：併存疾患の重みづけ合計スコア。</li><li><strong>HADS（Hospital Anxiety and Depression Scale）</strong>：14項目・2下位尺度（HADS-A 不安7項目／HADS-D 抑うつ7項目）、各項目0–3のリッカート、各下位尺度0–21点、<strong>カットオフ ≥8</strong> で不安・抑うつ状態を示唆。本研究では「ICU入室前」の状態として取得。</li><li><strong>RASS（Richmond Agitation-Sedation Scale）</strong>：覚醒/興奮の指標。本研究では症状評価時に研究看護師が記録した。</li><li><strong>SAPS II（Simplified Acute Physiology Score II）</strong>：重症度スコア。</li><li><strong>GEE（generalized estimating equation）</strong>：同一患者が最大7回回答するため観測が独立でない。GEEはこの相関構造を扱い、かつ<strong>欠測がランダムなら補完（imputation）なしで解析できる</strong>手法である。</li></ul>
+</div>
+<h3>2. 背景と目的 🎯</h3>
+<p>重症患者への治療は生存率を改善してきた。しかし<strong>鎮静を減らす現在の実践は患者をより覚醒・清明にし、そのぶん煩わしい症状を受けやすくする</strong>。症状は知覚された経験であるため、患者に報告の機会を与えることが症状評価のゴールドスタンダードである。</p>
+<p>先行研究の限界として著者は次を挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>先行研究の型</th><th>何が問題か</th></tr></thead>
+<tbody>
+<tr><td>単一症状のみ評価</td><td>症状の複雑さ（複数症状の同時存在）を捉えられない</td></tr>
+<tr><td>強度のみ評価</td><td>苦痛の次元が抜け落ちる</td></tr>
+<tr><td>後ろ向きデザイン</td><td>リアルタイムの体験を引き出すのに特に不向き</td></tr>
+<tr><td>除外基準が広範</td><td>一般ICU集団への一般化可能性が下がる</td></tr>
+<tr><td>ICU初期の報告が乏しい</td><td>入室直後は不明確な臨床状況と多数の処置があり、症状が未緩和のまま残るリスクが高い時期なのに、データが少ない</td></tr>
+</tbody></table></div>
+<p>10年以上前に Puntillo らが「死亡リスクの高いICU患者」の10症状を評価して土台を作ったが、<strong>現在のICU患者の症状体験の実態と、症状強度を予測しうる因子は未知</strong>のままである。</p>
+<p><strong>主要目的</strong>：混合ICU集団において、毎日評価が推奨されている5症状（口渇・疼痛・不安・疲労・息切れ）の有病率・強度・苦痛を7日間にわたり記述する。 <strong>副次目的</strong>：5症状の強度と、あらかじめ選んだ人口統計学的・臨床的変数との関連を7日間にわたり検討する。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：前向きコホート研究。ICU患者の症状とICU入室後1年間の長期転帰を調べる多施設観察研究の一部（<strong>NCT03714230</strong>）。</li><li><strong>セッティング</strong>：ノルウェーの <strong>2病院・6つの内科系および外科系ICU部門</strong>。<strong>2018年10月〜2020年6月</strong>に連続的にリクルート。</li><li><strong>組み入れ基準</strong>：18歳以上で、以下のいずれか1つを満たす。</li><li>人工呼吸（MV）を要する</li><li>持続的血管作動薬療法を要する</li><li>ICU滞在が24時間を超える</li><li><strong>除外基準</strong>（5項目）：</li><li>診療録に記載された既定の認知機能障害（例：認知症）</li><li>ホームレス（Fig 1 の表記は「no permanent address」）</li><li>ノルウェー語の読み書きができない</li><li>臓器保存目的の入室</li><li><strong>72時間以内のICU再入室</strong></li><li><strong>同意</strong>：患者本人から、または本人が同意可能になるまで一時的に家族から書面同意。<strong>自己同意取得前に死亡した患者は研究に残した</strong>。自己報告・同意が可能になった時点で参加を望まなかった患者は、<strong>全データを削除</strong>した。</li><li><strong>自己報告と代理報告の扱い</strong>：組み入れ基準を満たした患者は全員登録され、日々の症状評価は<strong>可能なら自己報告、不能ならベッドサイド看護師による代理報告</strong>で直ちに開始された。ただし <mark class="hl"><strong>本研究の解析に用いたのは患者の自己報告データのみ</strong></mark> である。</li><li><strong>主要アウトカム</strong>：PSSで測定した自己報告症状情報（初日および7日間）。</li><li><strong>Sample 1</strong>：初日の症状評価がある患者</li><li><strong>Sample 2</strong>：7日間（初日を含む）の評価がある患者</li><li><strong>「ICU初日」の定義</strong>：入室日。ただし午後遅くに入室した患者は翌日（最初のフルデイ）。</li><li><strong>症状評価の方法</strong>：</li><li>PSS 10項目のうち <strong>5症状（疼痛・口渇・不安・疲労・息切れ）を選択</strong>（Chanques らの推奨に基づく）。5項目版はノルウェーのICU患者で研究グループが表面妥当性・実行可能性を予備検証した。</li><li>患者には <strong>「いまこの瞬間（in the present moment）」</strong> の症状を評価させた。</li><li><strong>強度</strong>：0–10のリッカート（0＝強度なし、10＝考えうる最悪の強度）</li><li><strong>苦痛</strong>：0–10（0＝苦痛なし、10＝考えうる最大の苦痛）</li><li><strong>頻度</strong>：ICU滞在中、<strong>1日1回・7日間</strong></li><li>研究チーム全員が評価・報告の一貫性を担保する訓練を受け、<strong>データ収集期間中に訓練を反復</strong>して手順遵守を確認した。</li><li><strong>入室前データ（PROMs）</strong>：組み入れ後にICU内で患者から取得。CFS（3カテゴリ化）、CCI、HADS-A／HADS-D。</li><li><strong>人口統計学的・臨床データ</strong>：年齢・性別・学歴・同居状況・就労状況。診療録から、<strong>評価前4時間以内の家族面会の有無</strong>、<strong>評価前6時間以内の薬剤投与（オピオイドまたは鎮静薬、yes/no）</strong>、RASS（症状評価時に研究看護師が実施）、SAPS II、ICU入室区分（外科系/内科系）、主要入室理由（呼吸・循環・消化器等）、IMV・NIVの有無。</li><li><strong>統計解析</strong>：</li><li>カテゴリ変数は件数と割合、連続変数は正規分布なら平均±SD、歪んだ分布なら中央値（IQR）。</li><li>同一患者が最大7日分報告するため観測が統計的に非独立 → <strong>GEE法による多変量線形回帰</strong>。GEEは時点ごとのランダム欠測を許容し、補完を要しない。</li><li><strong>5症状それぞれに1モデル</strong>をあてはめ、<strong>すべてのモデルで同一の候補予測因子リスト</strong>を用いた：年齢、性別、SAPS II、CCI、フレイルスコア、主要入室理由、入室区分、HADS-A 合計、HADS-D 合計、学歴、MV治療、鎮痛薬投与、鎮静薬投与、ICU滞在中の面会。因子の選択は経験的・臨床的考察に基づき研究チームの合意で決定。</li><li><strong>アウトカムの符号化</strong>：症状がなければ 0、0を超える評価（1–10）はその強度値として符号化。さらに <strong>7日間の全評価を患者ごとに1つの平均強度スコアに集約</strong>した。</li><li><strong>2段階</strong>：①全独立変数で単変量解析、②単変量で <strong>p ≤ 0.10</strong> の変数を多変量モデルに投入し、さらに<strong>年齢と性別で調整</strong>。多変量では <strong>p &lt; 0.05</strong> を有意とした。</li><li>ソフトウェア：<strong>SPSS 28 for Windows</strong>。</li><li><strong>倫理・報告</strong>：ヘルシンキ宣言準拠。地域医学研究倫理委員会承認（<strong>承認番号 2017/990-1</strong>）、各病院のデータ保護責任者も承認。<strong>STROBE</strong> 準拠。</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07219-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07219-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Flow diagram（原図・無改変。©2023 The Author(s), CC BY-NC 4.0） 上から下へ4段階で絞り込み、最下段で2つの解析サンプルに分岐する構造。各ボックスの文言は下表に起こした。</p>
+</div>
+<h4>Figure 1 のボックスを表に起こす（原図の全数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>ボックス</th><th>n</th><th>内訳</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Available patients（利用可能な患者）</td><td>1234</td><td>—</td></tr>
+<tr><td>1 除外</td><td>Lost before inclusion（組み入れ前に脱落）</td><td>143</td><td>ICU入室後まもなく死亡 54／組み入れ前に転院 19／その他（ロジスティック等） 70</td></tr>
+<tr><td>2</td><td>Eligible for inclusion（組み入れ適格）</td><td>1091</td><td>—</td></tr>
+<tr><td>2 除外</td><td>Excluded（除外）</td><td>165</td><td>臓器保存 10／住所不定 11／既定の認知機能障害 68／ノルウェー語の読み書き不能 69／72時間以内の再入室 7</td></tr>
+<tr><td>2 除外</td><td>Declined participation（参加辞退）</td><td>323</td><td>—</td></tr>
+<tr><td>3</td><td>Included patients / symptom assessment day one（組み入れ・初日症状評価）</td><td>603</td><td>—</td></tr>
+<tr><td>4 左</td><td>Not able to self-report day one（初日に自己報告不能）</td><td>408</td><td>—</td></tr>
+<tr><td>4 左</td><td><strong>Study sample 1</strong>：初日に自己報告できたICU患者</td><td><strong>195</strong></td><td>—</td></tr>
+<tr><td>4 右</td><td>Not able to self-report during seven days（7日間で自己報告不能）</td><td>250</td><td>—</td></tr>
+<tr><td>4 右</td><td><strong>Study sample 2</strong>：7日間で自己報告できたICU患者</td><td><strong>353</strong></td><td>—</td></tr>
+</tbody></table></div>
+<p>算術は整合する（1234−143=1091、1091−165−323=603、603−408=195、603−250=353）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 論文内で数字の説明が3通りに割れている（JCで必ず突く点） <mark class="hl"><strong>「適格（eligible）」という語が本文・図・抄録で別々の数を指している</strong></mark>。</p>
+<ul><li>抄録：「<strong>603名の適格患者</strong>のうち353名（Sample 2）を組み入れた」</li><li>結果本文：「合計 <strong>1234名が組み入れ適格</strong>であり、そのうち <strong>603名が組み入れ基準を満たした</strong>」</li><li>Figure 1：「Available 1234 → <strong>Eligible for inclusion 1091</strong> → Included 603」</li></ul>
+<p>図の 1091 が最も整合的（1234 から組み入れ前脱落143を引いた数）だが、<strong>本文は 1234 を「eligible」と呼び、抄録は 603 を「eligible」と呼んでいる</strong>。旧ノートは抄録の言い回し（603名中353名）だけを転記していたため、<strong>除外・辞退の内訳が失われていた</strong>。<mark class="hl">実際に「症状を聞かれるはずだった患者」は 1091 名で、そのうち初日に自分で答えられたのは 195 名（17.9%）にすぎない</mark>。この分母の取り方で、研究の外的妥当性の見え方が大きく変わる。</p>
+</div>
+<h4>Table 1. 患者背景（原表を日本語化・全数値）</h4>
+<p>カテゴリ変数は n(%)、連続変数は中央値（IQR、25–75パーセンタイル）。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>Sample 1（n=195）</th><th>Sample 2（n=353）</th></tr></thead>
+<tbody>
+<tr><td><strong>年齢（歳）</strong></td><td>64（48–73）</td><td>63（48–73）</td></tr>
+<tr><td>性別：男性</td><td>112（57.4）</td><td>213（60.3）</td></tr>
+<tr><td><strong>CCI 合計スコア</strong></td><td>4（2–6）</td><td>4（1–6）</td></tr>
+<tr><td>悪性腫瘍（白血病・リンパ腫・限局/転移性腫瘍）</td><td>53（27.2）</td><td>100（28.3）</td></tr>
+<tr><td>COPD</td><td>43（22.1）</td><td>81（22.9）</td></tr>
+<tr><td>糖尿病（合併症なし/臓器障害あり）</td><td>37（19）</td><td>73（20.6）</td></tr>
+<tr><td>うっ血性心不全</td><td>36（18.5）</td><td>66（18.7）</td></tr>
+<tr><td><strong>SAPS II 合計スコア</strong></td><td>36（25.5–45.5）／評価 189（96.9）</td><td>38（28–50）／評価 347（98.3）</td></tr>
+<tr><td>欠測</td><td>6（3.1）</td><td>6（1.7）</td></tr>
+<tr><td><strong>フレイルスコア</strong>：non frail</td><td>95（48.7）</td><td>180（51）</td></tr>
+<tr><td>pre frail</td><td>35（17.9）</td><td>53（15）</td></tr>
+<tr><td>frail</td><td>25（12.8）</td><td>40（11.3）</td></tr>
+<tr><td>欠測</td><td>40（20.5）</td><td>80（22.7）</td></tr>
+<tr><td><strong>入室区分</strong>：内科系</td><td>145（74.4）</td><td>224（63.5）</td></tr>
+<tr><td>外科系（予定/緊急）</td><td>50（25.6）</td><td>129（36.5）</td></tr>
+<tr><td><strong>主要入室理由</strong>：呼吸</td><td>39（20）</td><td>76（21.5）</td></tr>
+<tr><td>循環</td><td>47（24.1）</td><td>62（17.6）</td></tr>
+<tr><td>消化器</td><td>27（13.8）</td><td>59（16.7）</td></tr>
+<tr><td>その他（代謝・血液・腎障害・術後）</td><td>38（19.5）</td><td>50（14.2）</td></tr>
+<tr><td>外傷</td><td>18（9.2）</td><td>38（10.8）</td></tr>
+<tr><td>敗血症</td><td>17（8.7）</td><td>34（9.6）</td></tr>
+<tr><td>神経</td><td>9（4.6）</td><td>34（9.6）</td></tr>
+<tr><td><strong>侵襲的人工呼吸（日数）</strong></td><td>36（18.5）／0.7（0.2–1.4）</td><td>137（38.8）／1.9（0.6–4.5）</td></tr>
+<tr><td><strong>非侵襲的換気（日数）</strong></td><td>51（26.2）／0.3（0.1–0.9）</td><td>79（22.4）／0.5（0.1–1.1）</td></tr>
+<tr><td><strong>ICU在室日数</strong></td><td>2（1.3–3.5）</td><td>2.8（1.7–5.2）</td></tr>
+<tr><td><strong>在院日数</strong></td><td>9（5–16.6）</td><td>10.5（6.2–19.2）</td></tr>
+<tr><td>同居：パートナーと同居</td><td>112（57.4）</td><td>212（60.1）</td></tr>
+<tr><td>独居</td><td>50（25.6）</td><td>77（21.8）</td></tr>
+<tr><td>施設入所</td><td>4（2.1）</td><td>6（1.7）</td></tr>
+<tr><td>欠測</td><td>29（14.9）</td><td>58（16.4）</td></tr>
+<tr><td>学歴：初等・中等</td><td>102（52.3）</td><td>179（50.7）</td></tr>
+<tr><td>大学・カレッジ</td><td>63（32.3）</td><td>115（32.6）</td></tr>
+<tr><td>欠測</td><td>30（15.4）</td><td>59（16.7）</td></tr>
+<tr><td>就労：障害・失業・病休</td><td>41（21.0）</td><td>78（22.1）</td></tr>
+<tr><td>フルタイム・パートタイム就労</td><td>55（28.2）</td><td>96（27.2）</td></tr>
+<tr><td>退職</td><td>70（35.9）</td><td>121（34.3）</td></tr>
+<tr><td>欠測</td><td>29（14.9）</td><td>58（16.4）</td></tr>
+</tbody></table></div>
+<p><strong>読み方のポイント</strong></p>
+<ul><li>著者は「Sample 1 と Sample 2 は、<strong>主要入室理由と IMV 装着期間を除いて</strong>臨床的・人口統計学的変数が類似していた」と述べる。実際、Sample 2 は外科系が多く（36.5% vs 25.6%）、IMV 装着率が2倍以上（38.8% vs 18.5%）で装着期間も長い（1.9日 vs 0.7日）。<mark class="hl"><strong>Sample 2 のほうがより重く、より長く挿管されている集団</strong></mark>である。</li><li><strong>フレイルの欠測が 20.5%／22.7%</strong> と大きい。CFS は本人の主観的判断で取得するため、答えられない患者では欠測になる。</li><li>ICU在室日数の中央値が 2.8日と短く、<strong>多くの患者は3日目より前に退室</strong>した。これが「7日間」といいながら患者あたりの評価回数中央値が2回にとどまる理由である。</li></ul>
+<h3>4. 結果① 初日の有病率・強度・苦痛（Sample 1・n=195）💧</h3>
+<p>初日に自己報告できたのは 195名。</p>
+<div class="tw"><table>
+<thead><tr><th>症状</th><th>有病 n(%)</th><th>平均強度（0–10）</th><th>95%CI</th><th>平均苦痛（0–10）</th><th>95%CI</th></tr></thead>
+<tbody>
+<tr><td><strong>口渇</strong></td><td><strong>129（66）</strong></td><td><strong>6.13</strong></td><td>5.70–6.56</td><td>4.98</td><td>4.29–5.67</td></tr>
+<tr><td>疲労</td><td>125（64）</td><td>5.83</td><td>5.41–6.25</td><td>3.38</td><td>2.67–4.10</td></tr>
+<tr><td>疼痛</td><td>71（36）</td><td>5.06</td><td>4.50–5.61</td><td>5.11</td><td>4.37–5.86</td></tr>
+<tr><td>息切れ</td><td>62（32）</td><td>5.59</td><td>4.97–6.21</td><td>4.90</td><td>3.96–5.84</td></tr>
+<tr><td>不安</td><td>46（24）</td><td>5.93</td><td>5.31–6.55</td><td><strong>5.24</strong></td><td>4.32–6.15</td></tr>
+</tbody></table></div>
+<p>（95%CI はいずれも<strong>未調整推定値</strong>である旨が原表脚注に明記されている。）</p>
+<ul><li><strong>口渇が最多かつ最強</strong>（66%、6.13）。</li><li><strong>不安は最少（24%）だが最も苦痛（5.24）</strong>。</li><li>有病率の順位は 口渇 &gt; 疲労 &gt; 疼痛 &gt; 息切れ &gt; 不安。</li><li>強度はどの症状も 5.06〜6.13 の狭い帯に収まっており、<strong>「軽い症状」は1つもない</strong>。</li></ul>
+<h3>5. 結果② 7日間の有病率・強度・苦痛（Sample 2・n=353、668評価）💧</h3>
+<p>353名から計 <strong>668回</strong> の症状評価が得られた（患者あたり中央値 <strong>2回</strong>）。著者は「大半が3日目より前に退室した（ICU在室日数中央値 2.8日）ことが、患者あたりの評価回数が少ない理由」と説明している。</p>
+<div class="tw"><table>
+<thead><tr><th>症状</th><th>有病 n(%)</th><th>平均強度（0–10）</th><th>95%CI</th><th>平均苦痛（0–10）</th><th>95%CI</th></tr></thead>
+<tbody>
+<tr><td><strong>口渇</strong></td><td><strong>425（64）</strong></td><td><strong>6.05</strong></td><td>5.81–6.30</td><td>4.75</td><td>4.39–5.12</td></tr>
+<tr><td>疲労</td><td>422（64）</td><td>5.77</td><td>5.55–5.99</td><td>3.50</td><td>3.13–3.87</td></tr>
+<tr><td>疼痛</td><td>241（36）</td><td><strong>4.61</strong></td><td>4.31–4.90</td><td>4.90</td><td>4.51–5.29</td></tr>
+<tr><td>息切れ</td><td>237（36）</td><td>5.33</td><td>5.02–5.64</td><td>5.08</td><td>4.64–5.51</td></tr>
+<tr><td>不安</td><td>165（25）</td><td>5.96</td><td>5.57–6.35</td><td><strong>5.46</strong></td><td>4.95–5.98</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 7日間の「有病率」は患者の割合ではなく<strong>評価回数の割合</strong> 原表の脚注は「Study sample 2：<strong>n=353 の患者からの 668 評価</strong>」と明記している。425/668＝63.6%、422/668＝63.2%、241/668＝36.1%、237/668＝35.5%、165/668＝24.7% で、<strong>分母は患者数 353 ではなく評価回数 668</strong> である。 <mark class="hl"><strong>「ICU患者の64%が口渇を訴えた」ではなく「症状評価の64%で口渇が報告された」が正しい読み方</strong></mark>。旧ノートは患者単位の有病率として記述していた。多く評価された（＝長く在室した）患者ほど重みが大きくなる点に注意する。</p>
+</div>
+<ul><li>口渇が最多（64%）かつ最強（6.05）。</li><li>不安が最少（25%）かつ最も苦痛（5.46）。</li><li><strong>疼痛は平均強度が最低（4.61）</strong>、<strong>疲労は平均苦痛が最低（3.50）</strong>。</li><li>初日と7日間で順位はほぼ不変。<mark class="hl">症状負荷は日が経っても減衰しない</mark>。</li><li>考察で著者は「<strong>すべての症状でほぼ等しく強度スコア5前後</strong>であり、これは少なくとも中等度の強度に相当すると考えられる（Serlin ら 1995 の重症度分類に基づく）」と述べている。</li></ul>
+<h3>6. 結果③ 症状強度と予測因子の関連（GEE・Sample 2）📊</h3>
+<p>単変量 n=353、<strong>多変量 n=335</strong>（18名が多変量から外れている）。多変量には単変量で p ≤ 0.10 の変数を投入し、年齢と性別で追加調整した。以下は原表 Table 3a–e の<strong>有意（p&lt;0.05）およびボーダーラインの値</strong>をすべて拾ったもの。</p>
+<h4>Table 3a. 口渇強度（GEE）</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>単変量 B（95%CI）／p</th><th>多変量 B（95%CI）／p</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>0.00（−0.02〜0.02）／0.737</td><td>0.01（−0.02〜0.03）／0.600</td></tr>
+<tr><td>女性（参照＝男性）</td><td>0.53（−0.21〜1.28）／0.162</td><td>0.57（−0.13〜1.27）／0.111</td></tr>
+<tr><td>SAPS II</td><td>0.01（−0.01〜0.04）／0.330</td><td>—</td></tr>
+<tr><td>CCI 合計</td><td>0.00（−0.10〜0.11）／0.935</td><td>—</td></tr>
+<tr><td><strong>敗血症</strong>（参照＝その他すべて）</td><td><strong>1.86（0.70〜3.02）／0.002</strong></td><td><strong>1.71（0.58〜2.84）／0.003</strong></td></tr>
+<tr><td>その他の入室理由</td><td>−1.13（−2.04〜−0.21）／0.015</td><td>−0.81（−1.72〜0.11）／0.086</td></tr>
+<tr><td>循環</td><td>0.17（−0.84〜1.19）／0.736</td><td>—</td></tr>
+<tr><td>消化器</td><td>−0.18（−1.06〜0.69）／0.685</td><td>—</td></tr>
+<tr><td>神経</td><td>−0.34（−1.47〜0.78）／0.552</td><td>—</td></tr>
+<tr><td>外傷</td><td>−0.42（−1.55〜0.71）／0.463</td><td>—</td></tr>
+<tr><td>外科系入室（参照＝内科系）</td><td>−0.07（−0.80〜0.66）／0.854</td><td>—</td></tr>
+<tr><td>HADS-A 合計</td><td>0.09（−0.03〜0.22）／0.148</td><td>—</td></tr>
+<tr><td>HADS-D 合計</td><td>0.11（−0.04〜0.26）／0.142</td><td>—</td></tr>
+<tr><td>学歴（参照＝低）</td><td>−0.08（−0.88〜0.73）／0.855</td><td>—</td></tr>
+<tr><td>IMV＋NIV（参照＝なし）</td><td>0.25（−0.50〜1.00）／0.508</td><td>—</td></tr>
+<tr><td><strong>鎮痛薬 iv/po</strong>（参照＝なし）</td><td><strong>0.84（0.12〜1.56）／0.022</strong></td><td><strong>0.88（0.18〜1.59）／0.014</strong></td></tr>
+<tr><td>鎮静薬 iv（参照＝なし）</td><td>0.51（−0.22〜1.23）／<strong>1.169</strong></td><td>—</td></tr>
+<tr><td>面会（参照＝なし）</td><td>0.24（−0.50〜0.98）／0.517</td><td>—</td></tr>
+<tr><td>フレイル：pre frail</td><td>−0.15（−1.32〜1.02）／0.803</td><td>—</td></tr>
+<tr><td>フレイル：frail</td><td><strong>−0.69（−0.62〜1.99）</strong>／0.304</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 3b. 疼痛強度（GEE）</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>単変量 B（95%CI）／p</th><th>多変量 B（95%CI）／p</th></tr></thead>
+<tbody>
+<tr><td><strong>年齢</strong></td><td><strong>−0.03（−0.04〜−0.01）／&lt;0.001</strong></td><td><strong>−0.04（−0.07〜−0.02）／0.001</strong></td></tr>
+<tr><td>女性</td><td>0.09（−0.39〜0.58）／0.707</td><td>0.08（−0.39〜0.55）／0.751</td></tr>
+<tr><td>SAPS II</td><td>−0.01（−0.03〜0.00）／0.087</td><td>0.01（−0.01〜0.03）／0.245</td></tr>
+<tr><td>CCI 合計</td><td>−0.09（−0.17〜0.00）／0.053</td><td>0.08（−0.05〜0.21）／0.221</td></tr>
+<tr><td>外傷</td><td>0.73（0.00〜1.47）／0.051</td><td>0.43（−0.43〜1.29）／0.325</td></tr>
+<tr><td>敗血症</td><td>0.39（−0.59〜1.37）／0.435</td><td>—</td></tr>
+<tr><td>学歴（参照＝低）</td><td>0.50（−0.04〜1.03）／0.068</td><td>0.12（−0.40〜0.64）／0.649</td></tr>
+<tr><td><strong>IMV＋NIV</strong></td><td><strong>−0.61（−1.12〜−0.11）／0.018</strong></td><td><strong>−0.90（−1.48〜−0.32）／0.002</strong></td></tr>
+<tr><td><strong>鎮痛薬 iv/po</strong></td><td><strong>0.97（0.51〜1.43）／&lt;0.001</strong></td><td><strong>1.00（0.49〜1.50）／&lt;0.001</strong></td></tr>
+<tr><td>鎮静薬 iv</td><td>0.42（−0.05〜0.89）／0.081</td><td>0.10（−0.41〜0.60）／0.703</td></tr>
+<tr><td>面会</td><td>0.24（−0.25〜0.73）／0.335</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 3c. 不安強度（GEE）</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>単変量 B（95%CI）／p</th><th>多変量 B（95%CI）／p</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>−0.01（−0.03〜0.01）／0.219</td><td>−0.01（−0.03〜0.01）／0.315</td></tr>
+<tr><td>女性</td><td>0.38（−0.18〜0.94）／0.186</td><td>0.22（−0.34〜0.77）／0.446</td></tr>
+<tr><td>SAPS II</td><td>−0.01（−0.03〜0.00）／0.107</td><td>—</td></tr>
+<tr><td>HADS-A 合計</td><td>0.09（0.00〜0.18）／0.055</td><td>0.08（0.00〜0.17）／0.060</td></tr>
+<tr><td>HADS-D 合計</td><td>0.02（−0.11〜0.14）／0.819</td><td>—</td></tr>
+<tr><td>IMV＋NIV</td><td>0.50（−0.02〜1.01）／0.060</td><td>0.51（−0.06〜1.08）／0.079</td></tr>
+<tr><td>鎮痛薬 iv/po</td><td>0.24（−0.29〜0.76）／0.377</td><td>—</td></tr>
+<tr><td>鎮静薬 iv</td><td>0.41（−0.12〜0.94）／0.127</td><td>—</td></tr>
+<tr><td><strong>面会</strong>（参照＝なし）</td><td>0.49（−0.07〜1.04）／0.084</td><td><strong>0.64（0.04〜1.24）／0.038</strong></td></tr>
+</tbody></table></div>
+<h4>Table 3d. 疲労強度（GEE）— <strong>多変量で有意な因子ゼロ</strong></h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>単変量 B（95%CI）／p</th><th>多変量 B（95%CI）／p</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>0.00（−0.02〜0.02）／0.901</td><td>0.00（−0.02〜0.02）／0.763</td></tr>
+<tr><td>女性</td><td>−0.04（−0.66〜0.58）／0.896</td><td>0.10（−0.53〜0.73）／0.758</td></tr>
+<tr><td>循環（入室理由）</td><td>−0.72（−1.47〜0.03）／0.060</td><td>−0.67（−1.44〜0.10）／0.087</td></tr>
+<tr><td>外科系入室</td><td>0.52（−0.10〜1.13）／0.100</td><td>0.27（−0.41〜0.96）／0.435</td></tr>
+<tr><td>鎮痛薬 iv/po</td><td>0.58（−0.02〜1.18）／0.056</td><td>0.48（−0.17〜1.13）／0.150</td></tr>
+<tr><td>鎮静薬 iv</td><td>0.46（−0.14〜1.07）／0.135</td><td>—</td></tr>
+<tr><td>面会</td><td>0.29（−0.33〜0.91）／0.359</td><td>—</td></tr>
+<tr><td>IMV＋NIV</td><td>0.09（−0.53〜0.71）／0.777</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 3e. 息切れ強度（GEE）</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>単変量 B（95%CI）／p</th><th>多変量 B（95%CI）／p</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>0.01（−0.01〜0.02）／0.533</td><td>0.01（−0.01〜0.02）／0.448</td></tr>
+<tr><td><strong>女性</strong>（参照＝男性）</td><td>0.52（−0.04〜1.09）／0.069</td><td><strong>0.56（0.00〜1.11）／0.048</strong></td></tr>
+<tr><td>SAPS II</td><td>0.00（−0.01〜0.02）／0.687</td><td>—</td></tr>
+<tr><td>CCI 合計</td><td>0.05（−0.05〜0.15）／0.351</td><td>—</td></tr>
+<tr><td>IMV＋NIV</td><td>0.48（−0.06〜1.03）／0.082</td><td>0.49（−0.05〜1.02）／0.076</td></tr>
+<tr><td>鎮痛薬 iv/po</td><td>−0.05（−0.60〜0.50）／0.854</td><td>—</td></tr>
+<tr><td>鎮静薬 iv</td><td>0.41（−0.13〜0.96）／0.139</td><td>—</td></tr>
+<tr><td>面会</td><td>0.46（−0.11〜1.03）／0.113</td><td>—</td></tr>
+</tbody></table></div>
+<h4>有意所見のまとめ</h4>
+<div class="tw"><table>
+<thead><tr><th>症状</th><th>強度を<strong>上げた</strong>因子（多変量 p&lt;0.05）</th><th>強度を<strong>下げた</strong>因子（多変量 p&lt;0.05）</th></tr></thead>
+<tbody>
+<tr><td>口渇</td><td>敗血症診断 B=1.71、鎮痛薬投与 B=0.88</td><td>なし</td></tr>
+<tr><td>疼痛</td><td>鎮痛薬投与 B=1.00</td><td>高齢 B=−0.04／年、人工呼吸 B=−0.90</td></tr>
+<tr><td>不安</td><td>家族の面会 B=0.64</td><td>なし</td></tr>
+<tr><td>疲労</td><td><strong>なし</strong></td><td><strong>なし</strong></td></tr>
+<tr><td>息切れ</td><td>女性 B=0.56</td><td>なし</td></tr>
+</tbody></table></div>
+<p>Bは0–10スケール上の点数差である。たとえば敗血症の 1.71 は「敗血症患者では口渇強度が平均1.71点高い」と読む。<strong>臨床的に意味のある差（MCID）は本論文では定義されていない</strong>ため、この1.71点が患者にとってどれほどの違いかは本論文からは判断できない。</p>
+<h3>7. 考察（著者の解釈）🧠</h3>
+<p><strong>主要所見の総括</strong>：患者は最大7日間のICU滞在を通じ、<strong>一貫して高い症状負荷</strong>を報告した。有病率の順は 口渇 &gt; 疲労 &gt; 疼痛 &gt; 息切れ &gt; 不安。<strong>口渇が最も強く、不安が最も苦痛</strong>。すべての症状でほぼ等しく強度スコア5前後であり、これは少なくとも中等度の強度を示すと考えられる。</p>
+<p><strong>口渇について</strong></p>
+<ul><li>先行研究の口渇有病率は <strong>70〜76%</strong> と報告されており、本研究の <strong>64〜67%</strong> はやや低い。</li><li>強度の尺度は研究間で異なる。Puntillo らは <strong>3点満点で平均 2.16</strong>、Negro らは <strong>10点満点で平均 5.4</strong> を報告している。</li><li>著者の表現：「<strong>最も多く最も強い症状が、いまだにルーチンで評価も治療もされていないのはパラドックスである</strong>」。</li><li>ある研究では<strong>口腔ケアが口渇の知覚に及ぼした効果は1時間しか続かなかった</strong>ことが示されており、頻回の口渇緩和を提供することの重要性が強調される。</li><li><strong>単純な thirst bundle が患者の快適性を高めるのに有効</strong>であることが示されている。したがって<strong>日常ケアにルーチンの口渇評価と治療を実装すべき</strong>である。</li><li><mark class="hl">本論文の記述はここまでで、<strong>バンドルの構成要素・実施回数・具体的手技は書かれていない</strong></mark>。</li></ul>
+<p><strong>鎮痛薬と口渇</strong>：本研究では鎮痛薬投与が口渇強度の上昇と関連した。これは Stotts らが「高用量オピオイドが口渇の存在を予測した」とした報告と一致する。一方 Lin らはオピオイド使用が口渇のリスク因子ではないとしている。著者はこの不一致を「疼痛管理に用いたオピオイド用量が異なる、あるいは2研究で口渇の管理法が異なったため」と説明する。</p>
+<p><strong>敗血症と口渇</strong>：著者は「<strong>驚くべき、そして説明のつかない結果</strong>」と明言している。<strong>データが不完全であったため輸液バランスの影響は検討できなかった</strong>。ただし Stotts らは、口渇を訴えた患者と訴えなかった患者の間で輸液バランスに統計学的有意差はなかったと報告している。</p>
+<p><strong>不安と苦痛</strong>：不安は最も有病率が低かったが最も苦痛スコアが高かった。TOUS によれば distress は「その症状にどれだけ悩まされているか」の程度である。この所見は、<strong>症状の複数次元を調べ、患者の症状体験の心理的側面を評価することの重要性を補強する</strong>。</p>
+<p><strong>家族の面会と不安</strong>：予想外に、家族の面会が不安強度の上昇と関連した。対照的に、最近のシステマティックレビュー・メタ解析では<strong>柔軟な面会時間が不安症状を減らしうる</strong>と報告されている。また別の研究では<strong>家族と引き離されることが患者にとって2番目にストレスの強い体験</strong>とされている。著者は3つの説明可能性を挙げる。</p>
+<ol><li>家族が帰った後に患者はより不安を感じ、その体験が不安スコアの上昇と関連した</li><li><strong>もともと不安の強い患者ほど面会が多かった</strong>（逆の因果）</li><li>患者が、自分の病状を見て心配する家族の姿を目撃したため不安が増した</li></ol>
+<p>そのうえで著者は <mark class="hl">「この説明のつかない所見は<strong>家族面会の制限を促すものではなく</strong>、今後の研究でさらに探究されるべきである」</mark> と明記している。</p>
+<p><strong>疼痛</strong>：36%が疼痛を報告した。鎮痛薬を受けた患者のほうが疼痛強度が高かった。Europain 研究では処置前のオピオイド投与が処置時痛の強度上昇のリスク因子とされたが、最近の処置時痛の研究では反対の結果も出ている。著者は「<strong>評価前6時間以内の鎮痛薬投与の情報しかない</strong>ため、投与から評価までの間に痛みが増していた／投与が評価に近すぎた／鎮痛が不十分だった可能性がある」と説明する。</p>
+<p><strong>人工呼吸と疼痛</strong>：MV中の患者は疼痛強度が低かった。これはノルウェーのICU患者を対象とした最近の研究と一致する。本研究では <strong>MV患者の66%が鎮痛薬を受けていた（データ非提示）</strong> ため、著者は「MVと疼痛の関連は鎮痛薬投与を超えたところにある」ことを示唆するとしつつ、<strong>さらなる探究が必要</strong>と述べる。</p>
+<p><strong>年齢と疼痛</strong>：高齢は疼痛強度の低下と関連した。これは最近のICU患者研究と両立するが、処置時痛や重症患者を対象とした他の2研究では高齢と疼痛強度低下の関連は見られなかった。著者は「研究集団と疼痛管理の実践が異なることが、結果の違いを説明するのかもしれない」とまとめる。</p>
+<p><strong>息切れ</strong>：息切れはICU患者が苦痛と報告することの多い症状で、本研究では3分の1が報告した。MV患者では不安と関連することが知られている。<strong>女性であることが唯一の関連因子</strong>だった。</p>
+<h3>8. 強みと限界（著者の記載）⚖️</h3>
+<p>著者が明記した限界は次の4点である。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>評価は1日1回のみ</td><td><strong>24時間の中で症状が変動したかどうかは分からない</strong></td></tr>
+<tr><td>2</td><td>全モデルで同一の候補予測因子リスト</td><td>各症状に固有の予測因子を検討する余地が制約された</td></tr>
+<tr><td>3</td><td>検討できなかった因子がある</td><td><strong>輸液バランス・輸液制限・離床</strong>といった治療・看護行為、および<strong>症状同士の相互影響</strong></td></tr>
+<tr><td>4</td><td>自己報告可能な患者に限った選択コホート</td><td><strong>すべてのICU患者に一般化できない可能性がある</strong></td></tr>
+</tbody></table></div>
+<p><strong>強み</strong>：成人ICU患者の大規模で異質性の高いサンプルから、複数のICUで<strong>前向きに</strong>データを収集し、<strong>最大7日間という比較的長い追跡</strong>を行った点。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 旧ノートに書かれていた限界の一部は、原著に無い記述だった 改稿前のノートは限界として「登録期間の後半がCOVID-19パンデミック初期にかかっており面会方針が変化した可能性」「単一国・2病院であり鎮静実践やICU文化が異なる環境への一般化に注意」を挙げていたが、<mark class="hl"><strong>いずれも原著本文には書かれていない</strong></mark>。COVID-19 という語は本論文に一度も登場しない。 逆に、著者が明記した「<strong>1日1回の評価では24時間の変動が分からない</strong>」「<strong>全モデルで同じ予測因子リストを使ったこと</strong>」「<strong>輸液バランス・輸液制限・離床・症状間の相互作用を検討できなかった</strong>」は旧ノートに載っていなかった。<strong>この3点こそがJCで議論する価値のある限界である</strong>（とくに輸液バランスは、敗血症と口渇の説明できない関連の鍵になりうる）。</p>
+</div>
+<h2>🔍 既存ノートとの整合</h2>
+<ul><li><span class="wl">🏨 Hotel ICU・人間的ケア Home</span> は本論文を「口渇の<strong>問題の大きさ</strong>を与えるノート」として引用しており、本改稿の数値（初日66%・6.13、7日間64%・6.05）と一致する。<strong>Home側の記述に修正すべき誤りは見つからなかった</strong>。</li><li>ただし Home が「7日間の有病率 64%」を患者割合として提示している点は、本ノート §5 の注記（分母は 668 評価）を踏まえて読む必要がある。</li><li><span class="wl">人工呼吸中の口渇は「圧倒的」で存在的な苦痛 — 意識のある12名の質的研究・4テーマ（NursCritCare2017）</span> は本論文の量的所見（強度6点台）に、患者の語りという質的裏づけを与える。<strong>両者は矛盾しない</strong>。</li><li><span class="wl">計画的な看護介入（1時間ごとの氷水スワブ＋メントール保湿）でICU患者の口渇と口腔乾燥は軽減する（AJCC2019）</span> と <span class="wl">重症患者の口渇マネジメント — 生理・リスク因子・評価・介入の全体像（Clinical Evidence Review・AJCC2022）</span> が介入側を担う。本論文は介入を扱わないので、<strong>役割分担であって矛盾ではない</strong>。</li><li><span class="wl">口渇の不快感を12項目3因子で測るThirst Discomfort Scale — 外科患者198名での開発・妥当性検証（AJCC2023）</span> は口渇専用の多項目尺度だが、本論文が用いたのは <strong>NRS 2問（強度・苦痛）</strong> である。当院で採用するなら、本論文の方式のほうが実行可能性が高い。</li><li><span class="wl">家族の面会が予後を悪くするのではなく、重症だから家族が来る — collider bias の指摘（Correspondence・ICM2022）</span> は、本論文の「面会 → 不安↑」という関連を読むときの解毒剤になる。<strong>重症・不安の強い患者ほど家族が来る</strong>という選択の構造は、本論文の著者自身が挙げた説明可能性②と同じ論点である。</li><li><span class="wl">柔軟な面会はせん妄を減らさないが家族の不安・抑うつを改善する（ICU Visits クラスター交差RCT・JAMA2019）</span> はクラスターRCTであり、<strong>観察研究である本論文より因果推論の強度が高い</strong>。面会方針の判断は RCT 側に置く。</li><li><span class="wl">PADISガイドライン Focused Update — 不安が新領域、デクスメデトミジン・強化リハ・メラトニンを条件付き推奨（CCM2025）</span> が「不安」を新領域として扱ったことは、本論文の「<strong>不安が最も苦痛</strong>」という所見と方向が一致する。</li><li><span class="wl">挿管患者のwell-beingと安心感を4項目で測る TOURS Scale — 元患者と共同開発（CritCare2026）</span> は、本論文が拾えなかった「自己報告できない患者」層に踏み込む試みで、<strong>本論文の限界④を補完する位置</strong>にある。</li></ul>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<p><strong>① 分母の取り方で外的妥当性の見え方が変わる</strong> Figure 1 では <strong>1091名が組み入れ適格</strong>、うち <strong>323名（29.6%）が参加を辞退</strong>している。さらに組み入れ603名のうち <strong>408名（67.7%）が初日に自己報告できなかった</strong>。<mark class="hl">「ICU患者の66%が口渇を訴える」という数字は、<strong>適格患者1091名のうち195名（17.9%）から得られたもの</strong>である</mark>。この分母の階層を意識せずに引用すると、有病率が過大にも過小にも読める。</p>
+<p><strong>② 抄録・本文・図で「eligible」の定義が食い違う</strong> 抄録は 603 を eligible と呼び、本文は 1234 を eligible と呼び、図は 1091 を eligible と表示する。<strong>査読で見落とされた記述の不整合</strong>であり、二次利用者が数字を取り違えるリスクがある。</p>
+<p><strong>③ GEE の使い方に内的矛盾がある</strong> 方法には「同一患者が最大7日報告し統計的に非独立だから GEE を用いた」と書かれている一方、同じ段落で「<strong>7日間の全症状評価を患者ごとに1つの平均強度スコアに集約した</strong>」とも書かれている。<mark class="hl">集約して1患者1値にしたのなら反復測定の相関は消えており、GEE を使う必然性がない</mark>。どちらが実際に行われた解析なのか、論文からは判別できない。JCで最初に問うべき点。</p>
+<p><strong>④ GEE のアウトカムは Table 2 の「平均強度」とは別の量</strong> 「症状がなければ0、あれば1–10」と符号化しているため、GEEの従属変数は <strong>症状のない患者の0を含む混合量</strong>である。一方 Table 2 の平均強度は<strong>症状のある患者だけの平均</strong>。したがって「敗血症でB=1.71」は、<strong>口渇の有無が増えることと強度が増すことの合成</strong>であり、純粋な強度の差ではない。</p>
+<p><strong>⑤ 原表に明らかなデータエラーがある</strong></p>
+<ul><li>Table 3a の鎮静薬 iv（単変量）の <strong>p値が 1.169</strong>。p値は1を超えない。</li><li>Table 3a のフレイル（frail）は <strong>B=−0.69、95%CI −0.62〜1.99</strong> で、<strong>点推定値が信頼区間の外</strong>にある。</li><li>Table 3d の敗血症は B=0.47、95%CI −0.57〜1.50 に対し <strong>p=0.744</strong>（神経の p値と同一）。CIの幅から期待される値と合わない。</li></ul>
+<p>これらは結論を左右しないが、<strong>表全体の校閲精度に疑問を投げる</strong>。数値を二次引用するときは原表に当たること。</p>
+<p><strong>⑥ 多変量の n が 335 で、単変量の 353 と一致しない</strong> 18名（5.1%）が多変量から脱落しているが、その理由も、脱落した患者の特徴も記載がない。フレイルの欠測が20%超あることを考えると、<strong>欠測処理の記載が不足</strong>している。</p>
+<p><strong>⑦ 逆因果が排除できない関連が2つある</strong></p>
+<ul><li><strong>鎮痛薬 → 疼痛強度↑（B=1.00）</strong>：痛い患者に鎮痛薬が投与されるという逆向きの因果が最も自然な説明。著者も「投与から評価までに痛みが増した／投与が評価に近すぎた／鎮痛が不十分」の3説明を挙げるが、いずれも検証されていない。</li><li><strong>面会 → 不安↑（B=0.64）</strong>：不安な患者ほど家族が呼ばれる可能性。CIの下限が <strong>0.04</strong> とゼロぎりぎりで、頑健性も高くない。</li></ul>
+<p><strong>⑧ 息切れと女性の関連は境界的</strong> <strong>B=0.56、95%CI 0.00–1.11、p=0.048</strong>。CI下限がちょうど 0.00 であり、<strong>単変量では p=0.069 で非有意</strong>だった。5症状×多数の因子という多重比較の文脈で、この1つを実質的な所見として扱うのは慎重であるべき。</p>
+<p><strong>⑨ RASS を測ったのに一度も報告していない</strong> 方法には「症状評価時に研究看護師が RASS を実施した」と明記されているが、<strong>結果にも表にもGEEの予測因子リストにも RASS は登場しない</strong>。<mark class="hl">鎮静深度は「症状を自己報告できるか」を規定する最重要変数のはずで、これが報告されないのは大きな抜け</mark>。当院で同様の調査をするなら、RASS は必ず併記する。</p>
+<p><strong>⑩ 考察に数値の取り違えがある</strong> 考察に「<strong>We found mean intensity thirst score to be 6.13 for each of the seven days</strong>（7日間の各日で口渇の平均強度は6.13だった）」という一文があるが、<strong>6.13 は初日（Sample 1）の値</strong>であり、7日間（Sample 2）の値は <strong>6.05</strong> である。また「各日で6.13」という日別データは論文中のどこにも提示されていない。<strong>日別推移の図表は本論文には存在しない</strong>。</p>
+<p><strong>⑪ 症状は1日1回・「いまこの瞬間」しか測っていない</strong> 処置時痛のようなピークも、夜間の口渇や不安も原理的に捉えられない。著者も限界①として認めている。<mark class="hl">「7日間ずっと6点」なのではなく、「毎日1回聞いたら6点だった」</mark>。</p>
+<p><strong>⑫ 選択バイアスの方向は一義的でない</strong> 自己報告できる患者は「より軽い／より覚醒している」ため症状が過小評価されるとも、「より覚醒しているぶん症状を強く知覚する」ため過大評価されるとも言える。著者はこの方向を論じていない。</p>
+<p><strong>⑬ 単一国・単一言語のコホート（著者は限界に挙げていない）</strong> ノルウェー語の読み書きができない患者 <strong>69名を除外</strong>しており、言語的・文化的に均質な集団である。口渇や苦痛の表現には文化差がありうるが、<strong>著者は一般化可能性の限界としてこの点を挙げていない</strong>。日本のICUへの外挿を考えるときは意識すべき点。</p>
+<h2>📚 主要引用文献一覧（本文で参照されている主なもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>死亡リスクの高いICU患者の10症状（本研究の土台・PSSの原典）</td><td>Puntillo KA, et al. Symptoms experienced by intensive care unit patients at high risk of dying. *Crit Care Med* 2010;38(11):2155–2160</td></tr>
+<tr><td>毎日評価すべき5症状（本研究が5症状を選んだ根拠）</td><td>Chanques G, Nelson J, Puntillo K. Five patient symptoms that you should evaluate every day. *Intensive Care Med* 2015;41(7):1347–1350</td></tr>
+<tr><td>PSSの表面妥当性を検証したパイロット</td><td>Li DT, Puntillo K. A pilot study on coexisting symptoms in intensive care patients. *Appl Nurs Res* 2006;19(4):216–219</td></tr>
+<tr><td>口渇の予測因子（高用量オピオイド・輸液バランス）</td><td>Stotts NA, et al. Predictors of thirst in intensive care unit patients. *J Pain Symptom Manage* 2015;49(3):530–538</td></tr>
+<tr><td>オピオイドは口渇のリスク因子でないとした研究</td><td>Lin R, et al. Prevalence of and risk factors for thirst in the intensive care unit: an observational study. *J Clin Nurs* 2022</td></tr>
+<tr><td>口渇の観察研究（10点満点で平均5.4）</td><td>Negro A, et al. Thirst in patients admitted to intensive care units: an observational study. *Ir J Med Sci* 2021</td></tr>
+<tr><td>口腔ケアの効果は1時間しか続かない（日本発）</td><td>Doi S, Nakanishi N, Kawahara Y, Nakayama S. Impact of oral care on thirst perception and dry mouth assessments in intensive care patients. *Intensive Crit Care Nurs* 2021;66:103073</td></tr>
+<tr><td>口渇・口腔乾燥を緩和する介入のRCT</td><td>Puntillo K, et al. A randomized clinical trial of an intervention to relieve thirst and dry mouth in intensive care unit patients. *Intensive Care Med* 2014;40(9):1295–1302</td></tr>
+<tr><td>予定された看護介入の効果</td><td>VonStein M, et al. Effect of a scheduled nurse intervention on thirst and dry mouth in intensive care patients. *Am J Crit Care* 2019;28(1):41–46</td></tr>
+<tr><td>冷たい経口刺激の術後口渇への効果（SR・MA）</td><td>Tsai H-Y, Chao A, Hsiao W-L. The effectiveness of cold oral stimuli in quenching postoperative thirst. *Intensive Crit Care Nurs* 2023;75:103359</td></tr>
+<tr><td>口渇の生理から知覚まで</td><td>Arai S, Stotts N, Puntillo K. Thirst in critically ill patients: from physiology to sensation. *Am J Crit Care* 2013;22(4):328–335</td></tr>
+<tr><td>口渇緩和の研究の実践への翻訳</td><td>Leemhuis A, Shichishima Y, Puntillo K. Palliation of thirst in intensive care unit patients: translating research into practice. *Crit Care Nurse* 2019;39(5):21–28</td></tr>
+<tr><td>不快症状の中範囲理論（TOUS・distressの定義）</td><td>Lenz ER, et al. The middle-range theory of unpleasant symptoms: an update. *Adv Nurs Sci* 1997;19(3):14–27</td></tr>
+<tr><td>柔軟面会 vs 制限的面会（SR・MA）</td><td>Nassar Junior AP, et al. Flexible versus restrictive visiting policies in ICUs. *Crit Care Med* 2018;46(7):1175–1180</td></tr>
+<tr><td>ストレッサーとICU体験（家族との分離が2番目）</td><td>Zengin N, Ören B, Üstündag H. The relationship between stressors and intensive care unit experiences. *Nurs Crit Care* 2020;25(2):109–116</td></tr>
+<tr><td>処置時痛の決定因子（Europain）</td><td>Puntillo KA, et al. Determinants of procedural pain intensity in the intensive care unit. The Europain study. *Am J Respir Crit Care Med* 2014;189(1):39–47</td></tr>
+<tr><td>ICU患者の疼痛の縦断研究（MVと疼痛の関連）</td><td>Olsen BF, et al. Pain in intensive care unit patients—a longitudinal study. *Nurs Open* 2021;8(1):224–231</td></tr>
+<tr><td>退室時に自己報告された疼痛のリスク因子</td><td>Kalfon P, et al. Risk factors and events in the adult ICU associated with pain as self-reported at the end of the ICU stay. *Crit Care* 2020;24(1):685</td></tr>
+<tr><td>侵襲的換気中の呼吸困難の有病率・強度・臨床的影響</td><td>Demoule A, et al. Prevalence, intensity, and clinical impact of dyspnea in critically ill patients receiving invasive ventilation. *Am J Respir Crit Care Med* 2022;205(8):917–926</td></tr>
+<tr><td>MV患者の呼吸困難</td><td>Schmidt M, et al. Dyspnea in mechanically ventilated critically ill patients. *Crit Care Med* 2011;39(9):2059–2065</td></tr>
+<tr><td>疼痛の軽度/中等度/重度の区切り（強度5＝中等度の根拠）</td><td>Serlin RC, et al. When is cancer pain mild, moderate or severe? *Pain* 1995;61(2):277–284</td></tr>
+<tr><td>PADISガイドライン</td><td>Devlin JW, et al. Clinical Practice Guidelines for the Prevention and Management of Pain, Agitation/Sedation, Delirium, Immobility, and Sleep Disruption in Adult Patients in the ICU. *Crit Care Med* 2018;46(9):e825–e873</td></tr>
+<tr><td>CFS（フレイルの原典）</td><td>Rockwood K, et al. A global clinical measure of fitness and frailty in elderly people. *CMAJ* 2005;173(5):489–495</td></tr>
+<tr><td>HADS（原典）</td><td>Zigmond AS, Snaith RP. The hospital anxiety and depression scale. *Acta Psychiatr Scand* 1983;67(6):361–370</td></tr>
+<tr><td>SAPS II（原典）</td><td>Le Gall J-R, Lemeshow S, Saulnier F. A New Simplified Acute Physiology Score (SAPS II). *JAMA* 1993;270(24):2957–2963</td></tr>
+<tr><td>GEE（統計手法の原典）</td><td>Zeger SL, Liang K-Y, Albert PS. Models for longitudinal data: a generalized estimating equation approach. *Biometrics* 1988;44(4):1049–1060</td></tr>
+<tr><td>STROBE声明</td><td>von Elm E, et al. The STROBE statement. *J Clin Epidemiol* 2008;61(4):344–349</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>ICUで最も多く最も強い症状は「口渇」（有病率64–66%・強度6/10）であり、最も苦しい症状は「不安」である。どちらも当院では測っていない。</strong></mark></p>
+<ul><li>口渇：初日 <strong>66%・6.13（95%CI 5.70–6.56）</strong>／7日間 <strong>64%・6.05（95%CI 5.81–6.30）</strong></li><li>不安：苦痛 初日 <strong>5.24（4.32–6.15）</strong>／7日間 <strong>5.46（4.95–5.98）</strong>。有病率は最低（24–25%）</li><li>この負荷は <strong>7日間下がらない</strong>。入室直後だけの問題ではない</li><li><mark class="hl"><strong>強度と苦痛を両方測らないと、最も苦しい症状（不安）を取りこぼす</strong></mark></li><li>本研究は介入研究ではない。<mark class="hl"><strong>「何をすれば口渇が減るか」は本論文には書かれていない</strong></mark></li></ul>
+</div>
+<h4>判断の流れ（当院で症状評価を設計するとき）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>患者が自己報告できる（RASS −1〜+1 程度）</td><td>5症状（口渇・疲労・疼痛・息切れ・不安）を「いまこの瞬間」で聞けるか</td><td>強度NRS（0–10）と苦痛NRS（0–10）を<strong>両方</strong>記録。1日1回でも本論文と同じ密度</td></tr>
+<tr><td>経口挿管中だが覚醒している</td><td>筆談・文字盤・yes/noで答えられるか</td><td>本研究では挿管18名中5名が完全回答、13名が有無のみ回答。<strong>「挿管中だから聞かない」は根拠にならない</strong></td></tr>
+<tr><td>深鎮静・意識障害で自己報告できない</td><td>本研究の対象外である</td><td>代理評価に切り替える。本論文の数値は当てはめられない（TOURS等の別ツールを検討）</td></tr>
+<tr><td>口渇スコアが高い</td><td>敗血症・鎮痛薬投与・輸液制限の有無</td><td>敗血症と鎮痛薬は本研究で関連あり。<strong>介入の中身は本論文外</strong>なので当院の口渇バンドル系ノートを参照</td></tr>
+<tr><td>不安スコアが高い</td><td>強度ではなく<strong>苦痛</strong>が高くないか</td><td>不安は有病率が低く強度も中位だが苦痛が最高。<strong>強度だけの閾値では拾えない</strong></td></tr>
+<tr><td>面会後に不安が高い</td><td>本研究では面会と不安↑が関連（B=0.64）</td><td><strong>面会制限の根拠にしない</strong>（著者が明示的に否定）。観察研究の逆因果を疑う</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

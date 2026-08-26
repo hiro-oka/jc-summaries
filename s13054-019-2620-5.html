@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>喀血に対するトラネキサム酸と院内死亡（DPCデータベース研究）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-019-2620-5.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">喀血に対するトラネキサム酸と院内死亡（DPCデータベース研究）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Kinoshita T, Ohbe H, Matsui H, Fushimi K, Ogura H, Yasunaga H. Effect of tranexamic acid on mortality in patients with haemoptysis: a nationwide study. Crit Care. 2019;23:347. DOI: 10.1186/s13054-019-2620-5</dd><dt>掲載誌</dt><dd>Critical Care（2019-11-06）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-019-2620-5" target="_blank" rel="noopener">doi.org/10.1186/s13054-019-2620-5</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Effect of tranexamic acid on mortality in patients with haemoptysis: a nationwide study</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-019-2620-5.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-019-2620-5.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-019-2620-5.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>① 喀血で緊急入院した患者に、初日からトラネキサム酸（トランサミン）を投与する運用は支持しうる</strong> <mark class="hl">入院初日に静注トラネキサム酸を受けた群は、傾向スコアマッチ後の院内死亡が 9.0% vs 11.5%（リスク差 −2.5%）</mark>。<strong>NNT ＝ 40</strong>（1人の死亡を防ぐのに40人の治療が必要）。安価で、日本ではどのERにも常備されている薬剤である。</p>
+<p><strong>② 用量は2 g以下に収める</strong> 投与群の<strong>95.8%が2 g以下</strong>で投与されていた。けいれんリスクは用量依存的で、100 mg/kgでは有意に増加したという報告がある一方、<strong>2 g以下では増加しない</strong>とされる。本研究でけいれんが増えなかったのは、大半が2 g以下だったためと著者らも述べている。当院の喀血プロトコルにも<strong>「2 g以下」を明記</strong>する価値がある。</p>
+<p><strong>③ 血栓塞栓症は増えなかった、が「増えない」と言い切る研究ではない</strong> マッチ後の血栓塞栓症は <strong>2.3% vs 2.1%（リスク差 0.2%、95%CI −0.2〜0.6%、P=0.34）</strong>。<mark class="hl">安全性シグナルは出ていないが、これは行政データベースであり、血栓イベントの捕捉感度には限界がある</mark>。</p>
+<p><strong>④ 原因疾患を問わず一律に投与してよい、と読める</strong> 6つの原因カテゴリ（cryptogenic／結核／肺癌／嚢胞性線維症・気管支拡張／呼吸器感染／アスペルギルス症）のいずれでも、<strong>治療効果に有意な交互作用はなかった</strong>。当院で「肺癌からの喀血だから効かない」といった選別をする根拠はない。</p>
+<p><strong>⑤ ただしこれはRCTではない — 出血量で調整できていない</strong> <mark class="hl">データベースに<strong>バイタルサイン・胸部X線所見・喀血量</strong>が含まれないため、これらで調整できていない</mark>。「軽症だからトラネキサム酸だけで済んだ」という逆の因果が残る。気管支動脈塞栓術（BAE）や気管支鏡の適応判断を、この論文を根拠に遅らせてはならない。</p>
+<p><strong>⑥ 在院日数と医療費も下がる — 経営会議で使える数字</strong> 在院日数 <strong>−2.4日</strong>、総医療費 <strong>−$816/入院</strong>。トラネキサム酸自体のコストは各国で低い（タンザニア $17.5〜英国 $48.0）。<strong>費用対効果の面では dominant（費用も下がり転帰も良い）</strong> と著者らは述べている。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：喀血は下気道からの喀出血で、罹患率・死亡率の高い致死的病態。フランスの全国疫学研究（8万例超）では、喀血で入院した患者の<strong>9.0%がICU入室</strong>、<strong>8.7〜10.1%が入院中に死亡</strong>、肺癌死を除いても院内死亡は<strong>5.9〜7.1%</strong>であり、<strong>止血が本質的に重要</strong>と示唆されていた。トラネキサム酸はリジンの合成誘導体で、プラスミノゲンとフィブリンのリジン残基との相互作用を阻害する<strong>抗線溶薬</strong>。多数のRCTとメタ解析が、心臓・整形外科・口腔・婦人科・泌尿器の待機手術で出血量や輸血量を減らすことを示し、<strong>重症外傷（CRASH-2）や分娩後出血（WOMAN）では死亡すら防ぎうる</strong>とされている。</li><li><strong>Unknown（分かっていなかったこと）</strong>：<strong>喀血に対するトラネキサム酸が死亡率を改善するかは検討されていなかった</strong>。喀血患者を対象とした研究は少なく、症例数も<strong>46〜66例</strong>と小規模で結果も一貫しなかった。喀血の量や持続時間への効果すら不明瞭だった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：<strong>日本のDPC入院データベースを用い、喀血に対するトラネキサム酸の死亡率への効果を報告した初めての研究</strong>。傾向スコアマッチングにより、<strong>入院初日の静注トラネキサム酸が院内死亡の低下（−2.5%、NNT 40）、在院日数短縮、自宅退院率上昇、医療費低下と関連</strong>することを示した。血栓塞栓症とけいれんの増加は認めなかった。<strong>先行RCT（46〜66例）と比べ桁違いに大きなサンプルサイズ（マッチ後19,866例）</strong>が最大の強み。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 日本のDPCデータベース（2010年7月〜2017年3月）を用いた後ろ向き研究。<mark class="hl">喀血で緊急入院した患者において、入院初日の静注トラネキサム酸は院内死亡の低下と関連した（9.0% vs 11.5%、リスク差 −2.5%、95%CI −3.5〜−1.6%）</mark>。<strong>在院日数・自宅退院率・総医療費も良好で、血栓塞栓症・けいれんは増えなかった。</strong></p>
+</div>
+<ul><li><strong>デザイン</strong>：日本のDPC（Diagnosis Procedure Combination）入院データベースを用いた<strong>後ろ向き研究</strong>。1200を超える急性期病院を含み、<strong>日本の三次救急病院の約90%をカバー</strong>する。</li><li><strong>対象</strong>：2010年7月〜2017年3月に、<strong>喀血（ICD-10 R042）</strong>でICUまたは一般病棟へ<strong>緊急入院</strong>した全症例。入院後に喀血を発症した例は含めない。18歳未満、入院当日死亡、入院当日退院、待機入院は除外。複数回入院した患者は初回のみ。</li><li><strong>群分け</strong>：<strong>入院日に静注トラネキサム酸を受けた患者</strong>をトラネキサム酸群、残りを対照群とした。</li><li><strong>主要アウトカム</strong>：<strong>院内死亡</strong>。副次は在院日数、自宅退院、総医療費（110円 = $1 USDで換算）。安全性として入院後の<strong>血栓塞栓症</strong>と<strong>けいれん</strong>を収集。</li><li><strong>解析</strong>：多変量ロジスティック回帰で傾向スコアを推定し、<strong>キャリパー幅を傾向スコアSDの20%とした1:1最近傍マッチング（復元なし）</strong>。バランス評価は<strong>標準化差 ≤10%</strong>を許容とした。マッチ後は病院をクラスタとする<strong>一般化推定方程式（GEE）</strong>でリスク差と95%CIを算出。感度分析として傾向スコア調整解析と<strong>安定化IPTW</strong>も実施。</li><li><strong>結果（対象）</strong>：52,543例が喀血で入院と診断され、<strong>28,539例が組み入れ基準を満たした</strong>。うち<strong>トラネキサム酸群 17,049例／対照群 11,490例</strong>。投与群のうち<strong>16,325例（95.8%）が2 g以下</strong>の投与。対照群のうち<strong>2997例（26.1%）が入院2日目以降にトラネキサム酸を受けた</strong>（クロスオーバー）。</li><li><strong>結果（マッチ後 9,933ペア）</strong>：</li><li><strong>院内死亡 11.5%（1141/9933） vs 9.0%（890/9933）、リスク差 −2.5%（95%CI −3.5〜−1.6%）、P&lt;0.001</strong></li><li><strong>在院日数 18 ± 24日 vs 16 ± 18日、リスク差 −2.4日（95%CI −3.1〜−1.8）、P&lt;0.001</strong></li><li><strong>自宅退院 81.8% vs 84.7%、リスク差 +2.9%（95%CI 1.7〜4.1%）、P&lt;0.001</strong></li><li><strong>総医療費 $7573 ± 10,085 vs $6757 ± 9127、リスク差 −$816（95%CI −1109〜−523）、P&lt;0.001</strong></li><li><strong>血栓塞栓症 2.1% vs 2.3%、リスク差 0.2%（95%CI −0.2〜0.6%）、P=0.34</strong></li><li><strong>けいれん 9例 vs 5例</strong>（イベント数が少なく統計検定は実施できず）</li><li><strong>NNT</strong>：院内死亡の絶対差2.5%から、<strong>1人の死亡を防ぐのに必要な治療数は40</strong>。</li><li><strong>サブグループ</strong>：6つの原因カテゴリ（cryptogenic、結核、肺癌、嚢胞性線維症/気管支拡張、呼吸器感染、アスペルギルス症）のいずれでも、<strong>治療群との有意な交互作用はなかった</strong>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 喀血とトラネキサム酸（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>喀血（haemoptysis）</strong>は、下気道からの血液の喀出と定義される。潜在的に致死的で、罹患率・死亡率が高い。フランスの全国疫学研究（8万例超）では、喀血で入院した患者の<strong>9.0%がICUに入室</strong>し、<strong>8.7〜10.1%が入院中に死亡</strong>した。肺癌による死亡を除外しても院内死亡は<strong>5.9〜7.1%</strong>であり、<strong>出血のコントロールが本質的に重要</strong>であることを示唆する。</p>
+<p><strong>トラネキサム酸（tranexamic acid、日本では「トランサミン」）</strong>は、アミノ酸リジンの合成誘導体である。<strong>プラスミノゲンとフィブリンのリジン残基との相互作用をブロック</strong>することで<strong>抗線溶作用</strong>を発揮する。多数のRCTとメタ解析が、心臓・整形外科・口腔・婦人科・泌尿器の待機手術で出血量や輸血量を減らすことを示しており、<strong>重症外傷（CRASH-2）や分娩後出血（WOMAN試験）では死亡を防ぎうる</strong>とされている。</p>
+<p><strong>なぜ喀血に効きうるのか（機序）</strong>：喀血と止血異常の関連はよく検討されていないが、<strong>喀血の90%は気管支動脈の破綻に由来し、気管支動脈の内皮細胞は高濃度の組織プラスミノゲンアクチベータ（t-PA）を含む</strong>。したがって喀血は潜在的に線溶を惹起する。トラネキサム酸は、t-PAの内皮細胞からの放出によって活性化されるプラスミンとフィブリンの結合を阻害する。この機序に基づいて、線溶活性を低下させることで喀出血液量を減らし臨床転帰を改善する目的で、喀血患者に用いられてきた。</p>
+<p><strong>DPCデータベース</strong>：日本の<strong>診断群分類包括評価（Diagnosis Procedure Combination）</strong>に基づく入院データベース。1200を超える急性期病院の退院サマリと診療報酬請求データを含み、<strong>日本の三次救急病院の約90%をカバー</strong>する。年齢・性別・体重・身長・入院時意識レベル・診断・処置・処方・退院時状況を含む。診断はICD-10コードと日本語テキストで記録され、担当医は標準参照チャートを用いて記載する義務があり、支払システムと連動しているため<strong>診断の客観的根拠の報告も求められる</strong>。妥当性検証研究では、<strong>診断の特異度は96%超、感度50〜80%、処置の特異度・感度はいずれも90%超</strong>とされている。</p>
+</div>
+<h3>2. 背景と目的 🩸</h3>
+<p>トラネキサム酸は喀血患者に広く使われているが、<strong>死亡率を改善するかどうかは十分に検討されていなかった</strong>。喀血患者を対象とした先行研究は少なく（<strong>登録患者数46〜66例</strong>）、結果も一貫しなかった。とくに<strong>死亡というアウトカムでのベネフィットは未検討</strong>だった。</p>
+<p>著者らは、外傷や分娩後出血といった他の急性出血病態と同様に、<strong>喀血患者でもトラネキサム酸投与が有効であろう</strong>と仮説を立てた。本研究の目的は、<strong>緊急入院を要する喀血患者において、トラネキサム酸の死亡率への有効性を探索すること</strong>である。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：DPC入院データベースを用いた後ろ向き研究。東京大学倫理審査委員会承認。データが匿名であり、個々の患者・病院・担当医の情報を得ないため、インフォームドコンセントは免除。</li><li><strong>組み入れ</strong>：2010年7月〜2017年3月に、<strong>喀血（ICD-10 R042）</strong>の診断でICUまたは一般病棟に<strong>緊急入院</strong>した全例。<strong>入院後に喀血を発症した患者は含めない</strong>。</li><li><strong>除外</strong>：18歳未満、<strong>入院当日に死亡</strong>、<strong>入院当日に退院</strong>、<strong>待機入院</strong>。喀血コードで複数回入院した患者は<strong>初回入院のみ</strong>を使用。</li><li><strong>群分け</strong>：<strong>入院日に静注トラネキサム酸を受けた患者</strong>＝トラネキサム酸群、それ以外＝対照群。</li><li><strong>共変量</strong>：年齢、性別、喫煙歴（非喫煙／現在・過去喫煙／欠測）、入院時BMI、<strong>Japan Coma Scale（JCS）</strong>、Charlson併存疾患指数、併存する心房細動（I48）、静脈血栓塞栓症（I26, I80, I82, O22, O87, O88）、慢性腎臓病（N18, T82.4, Z49.2, Z99.2）、救急車利用、教育病院、入院当日のICU入室、喀血の原因、入院当日の検査（抗酸菌培養、気管支鏡、上部消化管内視鏡、CT）、入院当日の治療（治療的塞栓術、ドパミン、アドレナリン、ノルアドレナリン、輸血、酸素投与、機械換気、腎代替療法）。</li><li>BMIは &lt;18.5／18.5–24.9／25.0–29.9／≥30.0 kg/m²／欠測に分類。JCSは清明／めまい／傾眠／昏睡に分類（JCSはGCSと高い相関が示されている）。Charlson指数は 0/1/2/3/≥4。<strong>心房細動と静脈血栓塞栓症は入院前の抗凝固薬使用を予測するために収集</strong>。<strong>慢性腎臓病は、トラネキサム酸の添付文書が腎機能障害時の慎重投与を求めているため収集</strong>。</li><li><strong>アウトカム</strong>：<strong>主要＝院内死亡</strong>。副次＝在院日数、自宅退院、入院の総医療費（円をUSDに換算、110円 = $1）。安全性評価として入院後の<strong>血栓塞栓症</strong>（I21–I22, I26, I63, D735, N280, K763, K550, I74, I80, I822, I823, I829）と<strong>けいれん</strong>（R568, R252, R568, G403, G400）を収集。</li><li><strong>統計解析</strong>：多変量ロジスティック回帰で傾向スコアを推定（予測変数は上記共変量）。<strong>キャリパー幅を傾向スコアSDの20%とした1:1最近傍マッチング（復元なし）</strong>。マッチング性能は<strong>絶対標準化差</strong>で評価し、<strong>≤10%を無視できる不均衡</strong>とみなした。マッチングにはSTATAのPSMATCH2を使用。未マッチコホートの粗アウトカムはt検定・χ²検定で比較。マッチ後は<strong>病院をクラスタとするクラスタロバスト標準誤差を伴うGEE</strong>を用い、アウトカムの種類にかかわらず<strong>恒等リンク関数</strong>でリスク差と95%CIを算出。</li><li><strong>感度分析</strong>：①全コホートでの<strong>傾向スコア調整解析</strong>（GEE・クラスタロバスト標準誤差、院内死亡を従属変数、入院日の静注トラネキサム酸と推定傾向スコアを共変量）、②<strong>安定化逆確率治療重み付け（IPTW）</strong>。</li><li><strong>サブグループ解析</strong>：治療×共変量の交互作用を、6つの原因（cryptogenic、結核、肺癌、嚢胞性線維症/気管支拡張、呼吸器感染、アスペルギルス症）で評価。<strong>傾向スコアマッチコホートのみ</strong>で実施。</li><li><strong>ソフトウェア</strong>：STATA/MP 15.0。両側P値 &lt;0.05 を有意とした。</li></ul>
+<h3>4. 結果 — 患者選択とベースライン 📊</h3>
+<p><strong>52,543例</strong>が2010年7月〜2017年3月に喀血の診断で入院した。組み入れ基準を満たしたのは<strong>28,539例</strong>で、<strong>入院日にトラネキサム酸を投与された17,049例</strong>と<strong>投与されなかった11,490例</strong>から成る。投与群のうち<strong>16,325例（95.8%）が2 g以下</strong>の用量だった。対照群のうち<strong>2997例（26.1%）が入院2日目以降にトラネキサム酸を受けた</strong>。</p>
+<p>傾向スコアマッチングにより<strong>9,933ペア</strong>が生成された。</p>
+<p><strong>未マッチコホートでの偏り（標準化差 &gt;10%）</strong>：トラネキサム酸を受けやすかったのは、<strong>より若い／女性／心房細動がない／救急車搬送／教育病院</strong>の患者。<strong>肺癌または呼吸器感染</strong>の患者はトラネキサム酸を受けにくく、<strong>嚢胞性線維症/気管支拡張</strong>の患者は受けやすかった。<strong>抗酸菌培養・気管支鏡・CTなどの検査</strong>や<strong>治療的塞栓術・酸素投与などの集中的治療</strong>を受けた患者はトラネキサム酸を受けやすかった。<strong>傾向スコアマッチング後はすべてのベースライン特性が良好にバランス</strong>した。</p>
+<h4>Table 1. マッチ後の主なベースライン特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>対照（n = 9933）</th><th>トラネキサム酸（n = 9933）</th><th>標準化差（%）</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>72 ± 14</td><td>72 ± 13</td><td>3</td></tr>
+<tr><td>男性</td><td>6237（62.8%）</td><td>6285（63.3%）</td><td>1</td></tr>
+<tr><td>現在・過去喫煙</td><td>4115（41.4%）</td><td>4094（41.2%）</td><td>0</td></tr>
+<tr><td>BMI &lt; 18.5</td><td>2682（27.0%）</td><td>2716（27.3%）</td><td>1</td></tr>
+<tr><td>JCS 清明</td><td>8948（90.1%）</td><td>8892（89.5%）</td><td>2</td></tr>
+<tr><td>Charlson 0</td><td>4107（41.3%）</td><td>3950（39.8%）</td><td>3</td></tr>
+<tr><td>心房細動</td><td>509（5.1%）</td><td>530（5.3%）</td><td>1</td></tr>
+<tr><td>慢性腎臓病</td><td>263（2.6%）</td><td>284（2.9%）</td><td>1</td></tr>
+<tr><td>救急車搬送</td><td>3536（35.6%）</td><td>3508（35.3%）</td><td>1</td></tr>
+<tr><td>教育病院</td><td>8239（82.9%）</td><td>8073（81.3%）</td><td>4</td></tr>
+<tr><td>ICU入室</td><td>448（4.5%）</td><td>461（4.6%）</td><td>1</td></tr>
+<tr><td>原因：cryptogenic</td><td>3450（34.7%）</td><td>3363（33.9%）</td><td>2</td></tr>
+<tr><td>原因：結核</td><td>490（4.9%）</td><td>487（4.9%）</td><td>0</td></tr>
+<tr><td>原因：肺癌</td><td>1771（17.8%）</td><td>1851（18.6%）</td><td>2</td></tr>
+<tr><td>原因：嚢胞性線維症/気管支拡張</td><td>1540（15.5%）</td><td>1415（14.2%）</td><td>4</td></tr>
+<tr><td>原因：呼吸器感染</td><td>3715（37.4%）</td><td>3892（39.2%）</td><td>4</td></tr>
+<tr><td>原因：アスペルギルス症</td><td>453（4.6%）</td><td>418（4.2%）</td><td>2</td></tr>
+<tr><td>初日：気管支鏡</td><td>368（3.7%）</td><td>317（3.2%）</td><td>3</td></tr>
+<tr><td>初日：CT</td><td>6775（68.2%）</td><td>6484（65.3%）</td><td>6</td></tr>
+<tr><td>初日：治療的塞栓術</td><td>319（3.2%）</td><td>294（3.0%）</td><td>2</td></tr>
+<tr><td>初日：輸血</td><td>370（3.7%）</td><td>380（3.8%）</td><td>1</td></tr>
+<tr><td>初日：機械換気</td><td>367（3.7%）</td><td>376（3.8%）</td><td>1</td></tr>
+</tbody></table></div>
+<p>（原因は1例に複数割り当てられうるため合計は100%にならない。）</p>
+<h3>5. 結果 — アウトカム 💊</h3>
+<p><strong>粗アウトカム（未マッチ）</strong>：院内死亡は<strong>対照群12.0%（1379/11,490）vs トラネキサム酸群7.6%（1290/17,049）、P&lt;0.001</strong>。在院日数 19 ± 43日 vs 15 ± 17日、自宅退院 81.8% vs 85.5%、総医療費 $7686 ± 11,009 vs $6715 ± 8524（いずれもP&lt;0.001）。血栓塞栓症 2.2% vs 1.8%（P=0.02）、けいれん 9例 vs 8例（P=0.29）。</p>
+<h4>Table 3. マッチ後コホートのアウトカム（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>対照（n = 9933）</th><th>トラネキサム酸（n = 9933）</th><th>リスク差（95%CI）</th><th>P値</th></tr></thead>
+<tbody>
+<tr><td>院内死亡（主要）</td><td>1141（11.5%）</td><td>890（9.0%）</td><td>−2.5（−3.5 〜 −1.6）%</td><td>&lt; 0.001</td></tr>
+<tr><td>在院日数（日）</td><td>18 ± 24</td><td>16 ± 18</td><td>−2.4（−3.1 〜 −1.8）</td><td>&lt; 0.001</td></tr>
+<tr><td>自宅退院</td><td>8124（81.8%）</td><td>8410（84.7%）</td><td>2.9（1.7 〜 4.1）%</td><td>&lt; 0.001</td></tr>
+<tr><td>総医療費（USD）</td><td>7573 ± 10,085</td><td>6757 ± 9127</td><td>−816（−1109 〜 −523）</td><td>&lt; 0.001</td></tr>
+<tr><td>血栓塞栓症</td><td>212（2.1%）</td><td>232（2.3%）</td><td>0.2（−0.2 〜 0.6）%</td><td>0.34</td></tr>
+<tr><td>けいれん</td><td>9（0.0%）</td><td>5（0.0%）</td><td>イベント数が少なく検定不能</td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>感度分析</strong>：傾向スコア調整解析および安定化IPTW解析のいずれでも、<strong>トラネキサム酸群と院内死亡低下の有意な関連は主解析と一致</strong>した（Fig. 2）。</p>
+<p><strong>サブグループ解析</strong>：院内死亡について、<strong>治療群と喀血のいずれの原因との間にも有意な交互作用は認められなかった</strong>（Fig. 3）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">対照群の26.1%が「入院2日目以降に」トラネキサム酸を受けている</mark>。すなわち群間クロスオーバーがあり、<strong>真の効果はここで推定された値より大きい可能性も、逆に「初日に投与するかどうか」だけを比較していることになる</strong>。著者ら自身が限界として挙げている。また<strong>症状発症からトラネキサム酸開始までの時間が測定されていない</strong>ため、外傷（CRASH-2）や分娩後出血（WOMAN）で確立している「3時間以内なら有効、それ以降は無効」という時間依存性を検証できていない。</p>
+</div>
+<h3>6. 考察 — 著者らの解釈 🧠</h3>
+<p><strong>主要所見</strong>：緊急入院を要する喀血患者において、<strong>トラネキサム酸投与は傾向スコアマッチングによる交絡調整後、院内死亡の低下と関連していた</strong>。著者らの知る限り、喀血患者におけるトラネキサム酸の死亡率への効果を報告した<strong>初めての研究</strong>である。</p>
+<p><strong>サンプルサイズの意義</strong>：先行RCTは<strong>46〜66例</strong>と小規模だった。本研究の強みは<strong>桁違いに大きなサンプルサイズ</strong>であり、<strong>マッチ後 n = 19,866</strong> は効果推定を十分に精密にする。院内死亡の絶対差は<strong>2.5%</strong>であり、<strong>NNT ＝ 40</strong>。</p>
+<p><strong>投与タイミングについて</strong>：重症外傷と分娩後出血の研究は、<strong>発症3時間以内</strong>の投与で死亡が減り、それ以降では有効でないことを強く示唆する。この時間依存的な効果修飾を喀血でも想定し、<strong>急性発症と慢性発症の疾患を含む6つの原因カテゴリ</strong>でサブグループ解析を行ったが、呼吸器感染やアスペルギルス症のような急性疾患と、結核・肺癌・嚢胞性線維症/気管支拡張のような慢性病態との間で効果に有意差はなかった。したがって<strong>時間的効果の十分なエビデンスは得られなかった</strong>。喀血発症からトラネキサム酸開始までの時間を調整した将来の研究が必要である。</p>
+<p><strong>在院日数・自宅退院・費用</strong>：これらの改善は、<strong>トラネキサム酸吸入により入院5日後の症状消失率が有意に改善し在院日数も短縮した</strong>とする最近のRCTと一致する。トラネキサム酸は総医療費の低下とも関連しており、<strong>費用対効果の観点から dominant でありうる</strong>。在院日数の短縮が入院費用の低下に寄与したと推測される。<strong>トラネキサム酸投与のコストは各国で普遍的に低く（タンザニア $17.5 〜 英国 $48.0）</strong>、日本での結果は他国にも一般化しうると著者らは考えている。</p>
+<p><strong>安全性</strong>：血栓塞栓症・けいれんとも有意な増加はなかった。他疾患の先行RCTでも血栓塞栓症は増えていない。一方<strong>けいれんリスクは用量依存的</strong>とされ、<strong>100 mg/kg</strong>の投与ではあるRCTでけいれんと有意に関連したが、<strong>2 g以下では増加しなかった</strong>。本研究でけいれんとの関連が見られなかったのは、<strong>投与群の大半が2 g以下だった</strong>ためと考えられる。</p>
+<h3>7. 限界（Limitations）⚠️</h3>
+<ol><li><strong>後ろ向き・観察研究</strong>であり、バイアスと交絡の余地がある。測定された交絡因子はGEEを用いた傾向スコアマッチングで調整し、すべての測定変数はバランスし、病院特性もGEEモデルで調整したが、<mark class="hl"><strong>バイタルサイン・胸部X線所見・喀血量</strong>といった未測定の潜在的交絡因子は調整できない</mark>（これらはデータベースに含まれない）。</li><li><strong>抗凝固薬関連の原因が正しく記録されていない可能性</strong>。その割合が先行研究より小さかった。心房細動と静脈血栓塞栓症をベースライン変数に含めることで抗凝固薬使用の調整を試みた。</li><li><strong>症状発症からトラネキサム酸開始までの時間が測定されていない</strong>。投与タイミングによる効果の違いは将来の研究課題。</li><li><strong>群間クロスオーバー</strong>：対照群の<strong>26.1%</strong>が2日目以降にトラネキサム酸を受けており、結果に影響した可能性がある。</li></ol>
+<h3>8. 結論 🎯</h3>
+<p>大規模全国データベースを用いた本研究は、<strong>緊急入院を要する喀血患者において、トラネキサム酸投与が院内死亡の低下と関連する</strong>ことを示唆した。<mark class="hl">この関連は将来のランダム化比較試験で確認されるべきである</mark>。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">喀血で緊急入院した患者に、入院初日から静注トラネキサム酸（2 g以下）を投与することは、院内死亡の低下（9.0% vs 11.5%、NNT 40）、在院日数短縮（−2.4日）、自宅退院率上昇、医療費低下と関連する。血栓塞栓症とけいれんは増えなかった</mark>。ただし<strong>観察研究であり、喀血量・バイタルで調整できていない</strong>。<strong>気管支動脈塞栓術や気管支鏡の適応判断を遅らせる理由には決してならない。</strong></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

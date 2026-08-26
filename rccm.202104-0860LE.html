@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="rccm.202104-0860LE.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Sklar MC, Yarnell CJ. Always Say Never: Why Studies of Timing of Invasive Ventilation Should Compare \"Early versus Late/Never\" as Opposed to \"Early versus Late\". Am J Respir Crit Care Med. 2021;204(6):737–738. doi:10.1164/rccm.202104-0860LE</dd><dt>掲載誌</dt><dd>American Journal of Respiratory and Critical Care Medicine（2021-09-15）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1164/rccm.202104-0860LE" target="_blank" rel="noopener">doi.org/10.1164/rccm.202104-0860LE</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Always Say Never: Why Studies of Timing of Invasive Ventilation Should Compare \"Early versus Late/Never\" as Opposed to \"Early versus Late\</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/rccm.202104-0860LE.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/rccm.202104-0860LE.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/rccm.202104-0860LE.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で「挿管タイミング」の後ろ向き研究を組むなら、比較群に何を置くか これは臨床判断ではなく研究設計と論文の読み方に効く一本である。JIPAD・DPCを使って当院から「タイミング」の研究を出すときに、そのまま設計チェックリストになる。</p>
+<div class="tw"><table>
+<thead><tr><th>設計項目</th><th>やってはいけない置き方</th><th>本レターに従った置き方</th></tr></thead>
+<tbody>
+<tr><td>コホートの入り口</td><td>挿管された症例を全部拾う</td><td>挿管の適応になりうる状態に到達した全例（例：ICU入室時点で酸素需要が閾値を超えた／HFNC・NIVを開始した全例）を、挿管の有無を問わず入れる</td></tr>
+<tr><td>曝露の定義</td><td>実際の挿管時刻（結果として起きた事象）</td><td>時点0からの戦略（24時間以内に挿管する方針 vs 24時間以内は挿管しない方針）。後者には最後まで挿管しない患者が必然的に含まれる</td></tr>
+<tr><td>比較群</td><td>早期挿管 vs 遅延挿管</td><td>早期挿管 vs 遅延・しない</td></tr>
+<tr><td>分母</td><td>挿管された患者だけ</td><td>一度も挿管されなかった患者を必ず含む</td></tr>
+<tr><td>主要アウトカム</td><td>死亡のみ</td><td>死亡に加え人工呼吸器フリー日数。ただし一度も挿管されなかった患者が最良値を取ることを明記する</td></tr>
+<tr><td>事前確認</td><td>—</td><td>JIPADで挿管時刻がどの粒度（時刻／日）で取れるか、DPCの処置日が日単位であることが「24時間以内」の定義に耐えるかを先に確認する</td></tr>
+</tbody></table></div>
+<ul><li>当院で挿管タイミングの文献を読むときの一次スクリーニングは1問でよい。「このコホートは挿管された患者だけか」。そうなら、「遅い挿管は死亡が高い」という結論は割り引いて読む。</li><li>同じ構造の誤りは他の領域にもある。RRT開始時期、ECMO導入時期、気管切開の時期、手術のタイミング。介入を受けた人だけで介入のタイミングを論じていないかを毎回確認する。</li><li>抄録指導・査読で使うときは、<span class="wl">統計査読でよく指摘される12項目 — BMJ統計編集者からのクリスマスリスト（BMJ2022）</span> と <span class="wl">観察研究の因果的主張は2割が不整合 — 目的と結論の食い違い（BMJ掲載60編のレビュー・BMJOpen2021）</span> のチェックリストに対する具体的な実例として本レターを出せる。前者の「estimand をまず定めよ」に対する、集中治療領域での失敗例そのものである。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：観察研究には残余交絡がつきまとうこと。免疫不全患者で侵襲的人工呼吸を要した場合の予後が極めて悪いこと。挿管タイミングを扱った複数の観察研究が「遅延群で死亡が高い」と一様に報告してきたこと。</li><li><strong>Unknown</strong>：それらの研究が示す「遅延の害」が本物か、コホートの作り方が生んだ見かけかは検証されていなかった。侵襲的人工呼吸に治療効果の異質性があるとして、それを規定する変数は同定されていない。</li><li><strong>What's new</strong>：問題は残余交絡ではなくコホート構築（cohort construction）だと名指ししたこと。RCTを想像すれば分かる、という単純な思考実験で示したこと。STARRT-AKI試験の「遅延群の62%しか透析されなかった」という数字を、同型の誤りの大きさを測る物差しとして持ち込んだこと。そして呼び名を「早期 vs 遅延・しない」に変えるだけで将来の著者が落とし穴を避けられるのではないか、という運用可能な提案。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 侵襲的人工呼吸のタイミングを研究するとき、挿管された患者だけをコホートに入れてはいけない。遅延戦略に割り付けられた患者の一部は時間の経過とともに改善して挿管を回避するからであり、その人たちを外した瞬間、遅延群は「結局挿管が必要になった＝もともと重かった患者」の集まりに変わる。比較の名前を「早期 vs 遅延・しない」に変えよ、というのが著者らの提案である。</p>
+</div>
+<ul><li>Dumas らの免疫不全患者の統合個票データ解析（AJRCCM 2021;204:187–196）に対する編集者への手紙。原著の記述疫学への貢献は認めたうえで、挿管タイミングに関する推論だけは成立しないと指摘する。</li><li>著者らは冒頭で「これは、すべての観察研究の考察に必ず登場するあの残余交絡の話ではない」と、よくある批判との違いをわざわざ切り分けている。問題はコホート構築の側にある。</li><li>論証はランダム化試験の思考実験一つで完結する。早期挿管 vs 遅延挿管のRCTを想像すれば、遅延群の一部は挿管される前に改善して挿管を回避する。</li><li>実例として STARRT-AKI 試験を引く。遅延透析戦略に割り付けられた患者のうち実際に腎代替療法が開始されたのは62%だけであり、透析されなかった38%を解析から除外するのは明らかな誤りである。挿管でもまったく同じことが起きている。</li><li>この見落としは集中治療の文献で繰り返される盲点であり、どの研究も一様に遅延挿管コホートで死亡が高いと報告してきた。著者らはそれを「早期挿管の利益」ではなく「時間が臨床経過を明らかにしてくれる利益」で説明できる、と読み替える。</li><li>落とし穴を正しく避けた研究では、死亡率が最も低いのは一度も挿管されなかった患者である。</li><li>原著者の「侵襲的人工呼吸には重要な治療効果の異質性がある」という基本的主張には同意する。ただしこの解析の構築では、その異質性についても、挿管タイミングと死亡の関係についても、具体的な推論はできない。</li><li>将来の研究には、侵襲的人工呼吸の適応になりうる全患者をコホートに含めるよう促す。治療効果の異質性に真に関連する変数の同定こそが、侵襲的人工呼吸のRCTを可能にする鍵である。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 何に対するレターなのか 🧩</h3>
+<p>対象は Dumas G らの <strong>Survival in immunocompromised patients ultimately requiring invasive mechanical ventilation: a pooled individual patient data analysis</strong>（AJRCCM 2021;204:187–196）。タイトルの <code>ultimately requiring invasive mechanical ventilation</code>（最終的に侵襲的人工呼吸を要した）という句そのものが、本レターの標的である。コホートの入り口が「最終的に挿管された人」に置かれている、と表題が宣言してしまっている。</p>
+<p>原著の結論そのものは Sklar らのレター本文には書かれていない。同じ紙面（738頁）に並ぶ別のレター（Stahl ら、後述の第9節）が「著者らは、免疫不全患者において挿管の遅れが独立して死亡増加と関連しうると結論した」と要約しており、それが本Vaultで確認できる唯一の一次記述である。また同誌には Pickkers と van Haren によるエディトリアル <code>Immunocompromised patients with acute respiratory failure: "Don't wait to intubate?"</code>（AJRCCM 2021;204:121–123）が併載されている。</p>
+<p>用語の整理（初出の定義）。</p>
+<ul><li><strong>侵襲的人工呼吸</strong>：気管挿管を伴う陽圧換気。ここでは「挿管」とほぼ同義で使う。</li><li><strong>コホート構築（cohort construction）</strong>：解析対象に誰を入れ誰を外すかの決め方。統計モデルに変数を足しても直せない、解析より前の段階の設計。</li><li><strong>残余交絡（residual confounding）</strong>：測定・調整しきれなかった交絡が残ること。著者らが「今回はその話ではない」と明示的に退けたもの。</li><li><strong>治療効果の異質性（heterogeneity of treatment effect）</strong>：同じ治療でも患者によって効果の向きや大きさが違うこと。</li></ul>
+<h3>2. レターの中心主張 — 残余交絡ではなくコホート構築</h3>
+<p>著者らはまず、原著が免疫不全患者における侵襲的人工呼吸の記述疫学に価値ある貢献をしていることを認める。そのうえで、結果は方法論的バイアスの文脈で解釈されねばならず、そのバイアスは挿管タイミングに関する推論を実質的に妨げうる、と述べる。</p>
+<p>そして次の一文が本レターの姿勢を決めている。「これは、すべての観察研究の考察に必ず義務的に登場する、あのいつもの残余交絡の問題ではない。そうではなく、これはコホート構築の問題であり、そのために挿管タイミングに関する推論は、見た目よりずっと解釈が難しくなっている」。</p>
+<p>この切り分けが重要なのは、読者と著者の双方が「限界の項に残余交絡と書いてあるから対処済み」と流してしまう定型を、あらかじめ塞いでいるからである。残余交絡なら、より多くの変数を測って調整すれば近づける。コホート構築の誤りは、どれだけ調整しても近づかない。</p>
+<h3>3. なぜ「早期 vs 遅延」ではなく「早期 vs 遅延・しない」でなければならないのか</h3>
+<p>論証は思考実験一つで済む。早期挿管と遅延挿管を比べるランダム化試験を想像する。遅延戦略に割り付けられた患者の一部は、その遅い時刻が来る前に改善し、それによって侵襲的人工呼吸を完全に回避する。</p>
+<p>ここから3段階で崩れていく。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>起きること</th><th>帰結</th></tr></thead>
+<tbody>
+<tr><td>1. 戦略の定義</td><td>ランダム化できるのは「戦略」であって「実際に起きた事象」ではない</td><td>遅延戦略という戦略には、最後まで挿管されない患者が必然的に含まれる</td></tr>
+<tr><td>2. コホートの絞り込み</td><td>挿管された患者だけを解析対象にする</td><td>挿管されなかった患者＝遅延戦略のもとで改善した患者が丸ごと消える</td></tr>
+<tr><td>3. 比較の中身</td><td>早期群はほぼ全員が残るのに、遅延群は改善しなかった部分集団だけが残る</td><td>「戦略 vs 戦略」ではなく「戦略の全体 vs 戦略のうち経過が悪かった部分」を比べている</td></tr>
+</tbody></table></div>
+<p>つまり、挿管という事象は時点0より後に起こり、しかも比べようとしている戦略そのものによって左右される。その事象で対象を絞ることは、未来の情報でコホートを選ぶことにほかならない。この時点で、比較しているものに対応する仮想的なランダム化試験が存在しなくなる。推定したい量が定義できない、というのが崩壊の核心である。</p>
+<p>バイアスの向きも予測できる。除外されるのは改善した患者、つまり最も死亡が低い層であり、除外は遅延群に集中する。したがって遅延群の死亡は必ず持ち上がる。著者らが「どの研究も一様に遅延コホートで死亡が高いと報告してきた」と書けるのは、これが偶然ではなく構造的に決まっているからである。</p>
+<p>だから呼び名を変えろ、と著者らは言う。「早期 vs 遅延」ではなく「早期 vs 遅延・しない（early versus late/never）」と特徴づけておけば、名前そのものが「しない人を分母に入れ忘れていないか」を著者に思い出させる。データも統計手法も要らない、命名だけの介入である。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「観察研究で早期挿管の是非は言えない」の構造的理由 <mark class="hl">挿管タイミングの観察研究で早期挿管の良し悪しを言えないのは、データが足りないからでも交絡が残るからでもない</mark>。<mark class="hl">比較の一方の腕（遅延戦略）が、定義上「挿管しない人」を含んでいるのに、コホートがその人たちを排除している</mark>からである。<mark class="hl">統計モデルにいくら変数を足しても、消えた患者は戻ってこない</mark>。</p>
+</div>
+<h4>構造を数字で見る（本レターに数値例はない。以下は理解のための架空の例示であり、論文本文ではない）</h4>
+<p>早期戦略100人・遅延戦略100人のRCTを考える。遅延戦略では60人が挿管され、40人は時間の経過で改善して挿管を回避したとする。仮に戦略として両者の死亡が同じ（各群30人死亡）でも、次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>見方</th><th>早期戦略</th><th>遅延戦略</th><th>見える結論</th></tr></thead>
+<tbody>
+<tr><td>戦略どうしを正しく比べる（分母＝100人ずつ）</td><td>30 / 100＝30%</td><td>30 / 100＝30%</td><td>差なし（真実）</td></tr>
+<tr><td>挿管された人だけで比べる（遅延群の分母＝60人）</td><td>30 / 100＝30%</td><td>挿管回避40人の死亡を仮に2人とすると 28 / 60＝47%</td><td>遅延は死亡1.6倍（見かけ）</td></tr>
+</tbody></table></div>
+<p>死亡数を一つも動かしていないのに、分母から40人を落としただけで「遅延は危険」が生まれる。これが著者らの言う construction の誤りである。</p>
+<h3>4. STARRT-AKI という類推 — 62%という数字の意味</h3>
+<p>著者らは、集中治療の他領域で同じ構造をすでに見ていると述べ、腎代替療法を挙げる。紙面の記載はこうである。「たとえば STAART-AKI（Standard vs. Accelerated Initiation of Renal-Replacement Therapy in Acute Kidney Injury）試験では、遅延透析戦略に割り付けられた患者のうち、腎代替療法が実際に開始されたのはわずか62%だった。その研究の解析から、一度も透析されなかった患者を除外するのは明らかな誤りだろう」。</p>
+<p>この類推が効くのは、STARRT-AKI がランダム化試験だからである。ランダム化されているので、遅延群の38%が透析を受けなかったことは戦略の帰結であって、患者選択の産物ではない。にもかかわらず、そこから透析を受けなかった38%を落とせば結論が壊れることは誰にでも分かる。観察研究で挿管された人だけを拾うのは、それと同じ操作を、しかも気づかないうちにやっていることになる。</p>
+<p>同様に、挿管のタイミングに関するいかなる因果推論も、遅延戦略が採られた結果として一度も挿管されなかった患者の転帰を含める必要がある、と著者らは結論する。</p>
+<p>補足（論文本文ではない）。当Vaultでは STARRT-AKI そのもののノートは未収載だが、同じ問いを扱う <span class="wl">腎代替療法の開始タイミング（AKIKI 2, Lancet 2021）</span>、<span class="wl">敗血症の透析導入タイミング（IDEAL-ICU・NEJM2018）</span>、<span class="wl">RRT開始のタイミング フローチャート（CritCare2021）</span> が収載されている。いずれもランダム化の枠組みで戦略を比べており、本レターが求める形になっている。</p>
+<h3>5. 「遅延群の死亡が高い」の別解釈 — 時間が臨床経過を明らかにする</h3>
+<p>著者らは、この方法論的見落としが集中治療の文献で繰り返される盲点であり、引用した各研究がその構築上の誤りの威力を律儀に実証してきた、と書く。研究者たちは一様に遅延挿管コホートで死亡が高いことを見出したが、それは早期の侵襲的人工呼吸の利益ではなく、時間が臨床経過を明らかにしてくれることの利益で説明できる可能性が高い。</p>
+<p>そして逆側から同じことを言う。早期の侵襲的人工呼吸は、遅延戦略のもとであれば決して挿管されなかったはずの患者を、必然的に人工呼吸器に乗せてしまう。時間がその患者に改善の機会を与えていないからである。</p>
+<p>ここは臨床的にも読める箇所である。早期挿管の「利益」として観察されるものの一部は、遅く挿管する方針であれば挿管そのものを免れた人を、先回りして人工呼吸のリスク（人工呼吸器関連肺傷害、人工呼吸器関連肺炎、鎮静、横隔膜機能不全）に晒した結果と表裏である。</p>
+<p>一方で、落とし穴を正しく避けた他の研究では、死亡率が最も低いのは一度も侵襲的人工呼吸を受けなかった患者である、とも書かれている。これは「挿管を避ければ助かる」という意味ではなく、挿管を要さないほど経過が良かった人が最も予後が良い、という当たり前の事実であり、だからこそその人たちを分母から落とすと歪みが大きい、という論証の締めになっている。</p>
+<h3>6. 名指しされた研究 — 落とし穴に落ちた4本と、避けた3本</h3>
+<p>本レターの実務的価値の大半はここにある。著者らは文献を2群に分けて名指ししている。</p>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>文献</th><th>誌・年</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>落とし穴に落ちた（文献3）</td><td>Bauer PR, et al.（ICON Investigators）</td><td>J Crit Care 2017;42:1–5</td><td>重症患者における挿管のタイミングと転帰の関連（ICON audit の二次解析）</td></tr>
+<tr><td>落とし穴に落ちた（文献4）</td><td>Kang BJ, et al.</td><td>Intensive Care Med 2015;41:623–632</td><td>HFNC の失敗が挿管を遅らせ死亡を増やしうる</td></tr>
+<tr><td>落とし穴に落ちた（文献5）</td><td>Hraiech S, et al.</td><td>PLoS ONE 2013;8:e74937</td><td>市中肺炎における挿管までの時間と転帰の関連</td></tr>
+<tr><td>落とし穴に落ちた（文献6）</td><td>Zhang Q, et al.</td><td>J Trauma Acute Care Surg 2020;89:1092–1098</td><td>COVID-19重症患者における侵襲的人工呼吸のタイミング</td></tr>
+<tr><td>避けた（文献7）</td><td>Delbove A, et al.</td><td>J Crit Care 2015;30:1174–1178</td><td>敗血症性ショックにおける挿管の影響（SEPSISPAM 試験の事後解析）</td></tr>
+<tr><td>避けた（文献8）</td><td>Darreau C, et al.</td><td>Ann Intensive Care 2020;10:62</td><td>敗血症性ショックにおける気管挿管の使用・時期・関連因子（前向き多施設観察研究）</td></tr>
+<tr><td>避けた（文献9）</td><td>Hernandez-Romieu AC, et al.（Emory COVID-19 Collaborative）</td><td>Crit Care Med 2020;48:e1045–e1053</td><td>COVID-19重症患者における挿管のタイミングと死亡（単施設コホート）</td></tr>
+</tbody></table></div>
+<p>文献4（Kang 2015）は「HFNCで粘ると挿管が遅れて死ぬ」という臨床上の通念の出所として最も広く引用されてきた一本である。本レターはそれを、構築上の誤りの実例として名指ししている。当院で「HFNCを長く続けるのは危ない」という主張の根拠を問われたとき、その系譜がここで疑問に付されていることは押さえておく価値がある。</p>
+<p>文献9は本Vaultに <span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span> として収載されている。当該ノートによれば、そのコホートは人工呼吸例175例ではなく、COVID指定ICU入室例231例を入り口としており、そのうち25例（10.8%）はHFNCも人工呼吸も要さず、HFNC管理109例のうち31例（28.4%）は挿管を回避している。挿管しなかった患者が分母に入っているという点で、本レターの分類と当該ノートの記載は整合している。ただし当該研究のタイミング比較そのもの（ICU入室から挿管まで8時間未満／8〜24時間／24時間以上）は人工呼吸例のなかで行われており、「早期 vs 遅延・しない」の完全な実装ではない。この読み分けは本レターには書かれておらず、Vault内のノートを突き合わせて初めて言えることである。</p>
+<h3>7. 著者らが同意する点と、それでも推論できない点</h3>
+<p>著者らは、侵襲的人工呼吸とその最適な運用は集中治療にとって重要な研究課題だとしたうえで、原著者の「侵襲的人工呼吸には重要な治療効果の異質性がある」という基本的主張には同意すると明記する。批判の範囲を限定しているのが本レターの誠実な点である。</p>
+<p>しかし、この解析の構築は、その異質性についての具体的な推論を妨げる。挿管タイミングと死亡の関係も同様である、と続ける。異質性を主張するには「誰に効くか」を言わねばならず、そのためには効かなかった人・受けなかった人が分母にいなければならない。</p>
+<p>そのうえで将来の研究に対して、侵襲的人工呼吸の適応になりうる全患者をコホートに含めるよう促す。治療効果の異質性に真に関連する変数を同定することこそが、侵襲的人工呼吸のランダム化比較試験を可能にする鍵の一歩である、というのが締めくくりである。最後に、議論の機会を与えてくれたとして Dumas らに謝意を述べている。</p>
+<h3>8. 本レターが使っている語・使っていない語</h3>
+<p>方法論のレターを引用するときは、原文が背負っている語だけを引くのが安全である。以下は紙面での使用を実際に確認したもの。</p>
+<div class="tw"><table>
+<thead><tr><th>語</th><th>本レターでの使用</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>cohort construction（コホート構築）</td><td>使用。本レターの中心概念</td><td>「これは construction の誤りだ」という言い方を2回している</td></tr>
+<tr><td>residual confounding（残余交絡）</td><td>使用。ただし「今回はその問題ではない」と明示的に退ける文脈</td><td>引用するときに向きを間違えやすい</td></tr>
+<tr><td>methodological bias（方法論的バイアス）</td><td>使用</td><td>種類は特定していない</td></tr>
+<tr><td>causal inference（因果推論）</td><td>使用</td><td>「挿管タイミングに関するいかなる因果推論も」</td></tr>
+<tr><td>heterogeneity of treatment effect（治療効果の異質性）</td><td>使用。原著者の主張として肯定</td><td></td></tr>
+<tr><td>blind spot（盲点）</td><td>使用。「集中治療文献で繰り返される盲点」</td><td></td></tr>
+<tr><td>immortal time bias（不死時間バイアス）</td><td><mark class="hl">使用していない</mark></td><td></td></tr>
+<tr><td>confounding by indication（適応交絡）</td><td><mark class="hl">使用していない</mark></td><td></td></tr>
+<tr><td>selection bias（選択バイアス）</td><td><mark class="hl">使用していない</mark>（同紙面の別レターは使用）</td><td>旧ノートのタグにあったため外した</td></tr>
+<tr><td>target trial emulation</td><td><mark class="hl">使用していない</mark></td><td></td></tr>
+<tr><td>collider bias／estimand／per-protocol</td><td><mark class="hl">使用していない</mark></td><td></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>ここから先は論文本文ではない（背景知識としての整理） <mark class="hl">以下は本レターの主張ではなく、同じ現象を疫学の語彙で言い直したものである</mark>。引用のときは出典を分けること。</p>
+<ul><li><mark class="hl"><strong>適応交絡</strong></mark>：重い患者ほど早く挿管される。これは調整で近づけうる問題で、本レターが「今回はその話ではない」と切り分けた側にあたる。</li><li><mark class="hl"><strong>不死時間バイアス</strong></mark>：「挿管までの時間」で群を分けると、遅延群に割り当てられるには挿管の時点まで生存している必要がある。時間ゼロと曝露の割り当てがずれることで生じる別種の歪みで、本レターが論じたコホート構築の問題とは独立に併存しうる。</li><li><mark class="hl"><strong>target trial emulation</strong></mark>：観察データから「早期 vs 遅延・しない」を推定する実装として現在の標準的な枠組み。時間ゼロ・適格基準・戦略・追跡・アウトカムを仮想RCTとして先に書き、クローン化＋打ち切り＋逆確率重み付けで戦略を比較する。<mark class="hl">本レターは「全患者を含めよ」と言うだけで、この具体的手法を展開していない</mark>。Vault内では <span class="wl">介入下予測モデルの性能はどう検証するか — 人工打ち切り＋逆確率重み付けで反実仮想の較正・判別・Brierを測る（方法論・Epidemiology2024）</span> が人工打ち切りと逆確率重み付けの実装を扱っている。</li></ul>
+</div>
+<h3>9. 同じ紙面に並ぶもう1通のレター（別文献・参考）</h3>
+<p>本PDFの738頁には、同じ Dumas 論文に対する別のレターが続けて印刷されている。DOIも著者も異なる独立した文献であり、本ノートの対象ではないが、文脈として押さえておく価値がある。</p>
+<ul><li>表題：Staying Awake in Severe Acute Respiratory Distress Syndrome: A Perspective on Immunocompromised Patients（Stahl K, Schenk H, Seeliger B, Kühn C, Wiesner O, Hoeper MM, David S。ハノーバー医科大学およびチューリッヒ大学病院）。DOI 10.1164/rccm.202105-1160LE、オンライン先行2021年6月17日。</li><li>指摘の中身：このメタ解析に含まれた非侵襲換気の患者は全員が最終的に挿管されており、非侵襲的手技そのものの劣性については何も言えない。NIVに最終的に失敗する患者は、NIVで橋渡しできる患者と多くの点で異なる可能性があるため、強い選択バイアスが生じる。免疫不全患者に一律の早期挿管を勧めるのは時期尚早である。</li><li>提示データ：非挿管の免疫不全重症ARDS 18例に対する awake ECMO の単施設経験（P/F 中央値72、四分位範囲65–82）。ICU在室中に11例（61%）が二次的に挿管を要し、最も多い理由は高度の不穏だった。院内死亡は二次挿管を要した患者で73%、ECMO中に挿管を要さなかった患者で14%（ハザード比0.133、95%信頼区間0.058–0.789、P=0.023）。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>この数字を鵜呑みにしない ハザード比0.133に対する95%信頼区間が0.058–0.789と示されているが、点推定値0.133が区間の対数中央（およそ0.21）から外れており、通常の対称的な信頼区間としては整合しない。原著の印字どおり記載するが、統計値としてそのまま引用しないほうがよい。またこの比較は「二次挿管を要した患者 vs 要さなかった患者」であり、結果で群を分けているという点で、隣に載っている Sklar らのレターが批判している構造そのものである。同じ紙面の2通のレターが、方法論的に逆向きになっている。</p>
+</div>
+<h3>10. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>格付けは無い</strong>。CORRESPONDENCE であり、新規データも解析も再現材料も含まない。査読の深さは原著と同等ではなく、エビデンスレベルとして格付けできる対象ではない。本レターの強さは、データではなく論証の明快さだけに由来する。引用するときは「AJRCCM に載った知見」ではなく「AJRCCM に載った編集者への手紙での主張」と書くべきである。</li><li><strong>COIが確認できない</strong>。紙面には「著者の開示は本文とともにオンラインで入手可能」とあるだけで、開示内容はPDFに含まれない。資金は University of Toronto の2つの臨床研究者育成プログラムで、企業資金の記載はない。主題（研究方法論）の性質上、機器・薬剤メーカーとの利益相反が結論を歪める余地は小さいが、「COIなし」と書ける材料はないので、そう書かない。</li><li><strong>自誌・同僚への言及の偏り</strong>。落とし穴を避けた例として挙がる文献7・8はいずれもフランスの敗血症性ショック研究、文献9は米国のCOVIDコホートで、著者らのトロントのグループの論文は含まれていない。自己引用の偏りは見られない。</li><li><strong>原著の内的不整合（表記）</strong>。紙面は試験名を <code>STAART-AKI</code> と印字しているが、直後に自ら展開している正式名 Standard versus Accelerated Initiation of Renal-Replacement Therapy in Acute Kidney Injury の頭字語は STARRT-AKI であり、綴りが自分の展開と一致していない。単純な誤植だが、引用時は STARRT-AKI に直す。</li><li><strong>62%の出所は本文にない</strong>。「遅延透析戦略に割り付けられた患者の62%だけが腎代替療法を開始された」という数字はSTARRT-AKI本体（NEJM 2020;383:240–251）からの引用であり、本レターに検算の材料はない。数字を使うときは一次文献に当たること。</li><li><strong>落とし穴に落ちた／避けたの分類根拠が示されていない</strong>。文献3〜6と7〜9を分けた基準（どのコホートが挿管しない患者を含んでいたか）は明示されていない。読者は各原著を自分で確認する必要がある。実際、第6節に書いたとおり文献9は「非挿管例を分母に含む」点では正しいが、タイミング比較そのものは人工呼吸例内で行われており、分類は白黒ではない。</li><li><strong>提案の実効性は検証されていない</strong>。「早期 vs 遅延・しない」と呼び名を変えれば将来の著者が落とし穴を避けられるのではないか、という提案は仮説であり、その後に効果が測られたわけではない。実際、本レターの後に出た研究にも同じ構築の論文がある（次節）。</li><li><strong>臨床への含意を過剰に読まない</strong>。本レターは「早期挿管をするな」とも「遅らせてよい」とも言っていない。言っているのは「今あるデータでは判断できない」である。この区別は <span class="wl">観察研究の因果的主張は2割が不整合 — 目的と結論の食い違い（BMJ掲載60編のレビュー・BMJOpen2021）</span> が指摘する「目的と結論の食い違い」を、読み手の側で起こさないために重要である。</li></ul>
+<h3>11. この指摘が正しいとすると、Vault内のどの論文が再解釈を要するか</h3>
+<p>本レターの基準（コホートに挿管しなかった患者が含まれているか）で、本Vaultに収載済みの挿管タイミング関連ノートを突き合わせた。判定は各ノートの記載に基づく。</p>
+<div class="tw"><table>
+<thead><tr><th>ノート</th><th>コホートの入り口</th><th>本レターの基準での判定</th><th>再解釈の要否</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span></td><td>侵襲的人工呼吸を受けた連続症例2725例からPSマッチ614例</td><td>挿管された患者だけ。本レターが批判する構築そのもの</td><td>要。しかも本レター（2021年6月）より後の発表である。「マッチ前は差がなく調整して初めて差が出た」という記述は、選択された部分集団のなかで調整を強めた結果とも読める</td></tr>
+<tr><td><span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span></td><td>COVID指定ICU入室231例（うち非挿管25例、HFNCで挿管回避31例）</td><td>本レターが「避けた」側に分類（文献9）</td><td>不要。ただしタイミング比較自体は人工呼吸例175例内</td></tr>
+<tr><td><span class="wl">挿管までの時間とCOVID-19重症患者の死亡・肺後遺症（González 2022）</span>／<span class="wl">COVID-19重症患者における挿管までの時間と予後</span></td><td>最初の呼吸補助から48時間で早期・遅延を分ける前向きコホート205例</td><td>ノートの記載からは非挿管例が分母に入るか判別できない</td><td>要確認。原著でコホートの入り口を確かめる</td></tr>
+<tr><td><span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span></td><td>HFNO 先行と早期挿管をPSマッチで比較</td><td>HFNO群には挿管に至らない患者が含まれうる構造</td><td>部分的に該当しない。むしろ「戦略どうしの比較」に近い設計</td></tr>
+<tr><td><span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span></td><td>HFNC を受けた全例（失敗＝挿管をアウトカムとする予測研究）</td><td>該当しない。因果効果ではなく予測を扱っており、挿管はアウトカム側</td><td>不要。ただし「ROXが低いから早く挿管すべき」と因果的に読み替えた瞬間に本レターの批判圏に入る</td></tr>
+<tr><td><span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span></td><td>ランダム化試験のメタ解析。挿管はアウトカム</td><td>該当しない</td><td>不要</td></tr>
+</tbody></table></div>
+<p>補足。HACOR スコア（NIV失敗予測）の単独ノートは本Vaultに未収載である。ROX 指数と同じく予測モデルであり、因果的に読み替えたときにのみ本レターの射程に入る。</p>
+<h3>12. 主要な引用文献一覧（紙面の9本すべて）</h3>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>本レターの対象論文。免疫不全患者で最終的に侵襲的人工呼吸を要した症例の生存、統合個票データ解析</td><td>Dumas G, Lemiale V, Rathi N, Cortegiani A, Pene F, Bonny V, et al. Am J Respir Crit Care Med 2021;204:187–196</td></tr>
+<tr><td>2</td><td>類推の根拠。AKIにおける腎代替療法の開始時期（STARRT-AKI）</td><td>Bagshaw SM, Wald R, Adhikari NKJ, Bellomo R, da Costa BR, Dreyfuss D, et al. N Engl J Med 2020;383:240–251</td></tr>
+<tr><td>3</td><td>重症患者の挿管タイミングと転帰（ICON audit 二次解析）</td><td>Bauer PR, Gajic O, Nanchal R, Kashyap R, Martin-Loeches I, Sakr Y, et al. J Crit Care 2017;42:1–5</td></tr>
+<tr><td>4</td><td>HFNC の失敗が挿管を遅らせ死亡を増やしうる</td><td>Kang BJ, Koh Y, Lim CM, Huh JW, Baek S, Han M, et al. Intensive Care Med 2015;41:623–632</td></tr>
+<tr><td>5</td><td>市中肺炎における挿管までの時間と転帰</td><td>Hraiech S, Alingrin J, Dizier S, Brunet J, Forel J-M, La Scola B, et al. PLoS ONE 2013;8:e74937</td></tr>
+<tr><td>6</td><td>COVID-19重症患者における侵襲的人工呼吸のタイミング</td><td>Zhang Q, Shen J, Chen L, Li S, Zhang W, Jiang C, et al. J Trauma Acute Care Surg 2020;89:1092–1098</td></tr>
+<tr><td>7</td><td>敗血症性ショックにおける気管挿管の影響（SEPSISPAM 事後解析）</td><td>Delbove A, Darreau C, Hamel JF, Asfar P, Lerolle N. J Crit Care 2015;30:1174–1178</td></tr>
+<tr><td>8</td><td>敗血症性ショックにおける挿管の使用・時期・関連因子（前向き多施設観察研究）</td><td>Darreau C, Martino F, Saint-Martin M, Jacquier S, Hamel JF, Nay MA, et al. Ann Intensive Care 2020;10:62</td></tr>
+<tr><td>9</td><td>COVID-19重症患者における挿管のタイミングと死亡（単施設コホート）</td><td>Hernandez-Romieu AC, Adelman MW, Hockstein MA, Robichaux CJ, Edwards JA, Fazio JC, et al. Crit Care Med 2020;48:e1045–e1053</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">挿管タイミングの論文を読むとき、最初に確かめるのは統計手法ではなくコホートの入り口である</mark>。<mark class="hl">「このコホートは挿管された患者だけか」がイエスなら、「遅い挿管は死亡が高い」という結論は読まずに割り引く</mark>。<mark class="hl">当院からJIPAD・DPCでタイミングの研究を出すときは、比較群を「早期 vs 遅延」ではなく「早期 vs 遅延・しない」に置き、一度も挿管しなかった患者を必ず分母に残す</mark>。</p>
+<p><mark class="hl">ただし本文はレターであり、データも格付けも無い。強いのは論証だけで、「早期挿管をするな」とは一言も書かれていない</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

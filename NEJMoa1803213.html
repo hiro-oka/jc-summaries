@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症の透析導入タイミング（IDEAL-ICU・NEJM2018）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="NEJMoa1803213.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症の透析導入タイミング（IDEAL-ICU・NEJM2018）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Barbar SD, Clere-Jehl R, Bourredjem A, Hernu R, Montini F, Bruyère R, et al., for the IDEAL-ICU Trial Investigators and the CRICS TRIGGERSEP Network. N Engl J Med. 2018;379(15):1431-1442. DOI: 10.1056/NEJMoa1803213</dd><dt>掲載誌</dt><dd>The New England Journal of Medicine（2018-10-11）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1056/NEJMoa1803213" target="_blank" rel="noopener">doi.org/10.1056/NEJMoa1803213</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Timing of Renal-Replacement Therapy in Patients with Acute Kidney Injury and Sepsis</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/NEJMoa1803213.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/NEJMoa1803213.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/NEJMoa1803213.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院の「腎適応がなければ透析しない」方針は、この試験でそのまま追認される。</strong> 敗血症性ショック＋RIFLE failure という「今すぐ透析したくなる」患者集団で、12時間以内に始めても48時間待っても90日死亡は変わらなかった（58% 対 54%、P=0.38）。方針を変える必要はない。</li><li><strong>変わるのは「待つ」の中身。</strong> 待機戦略は放置ではなく、高カリウム血症・アシドーシス・利尿薬抵抗性の肺水腫という3つの緊急トリガーを監視し続ける戦略である。本試験では待機群の17%（41例）が48時間を待たずに透析に至った。当院でも、待つと決めた症例には「何が起きたら回すか」をカルテに明記し、ラウンドごとに読み上げる運用が要る。</li><li><strong>待てば38%は透析せずに済む。</strong> 待機群242例のうち93例（38%）は結局 RRT を受けなかった。その内訳は自然回復70例（全体の29%）・開始前死亡21例（8%）・その他2例。「透析を回避できた」と言えるのは自然回復の29%であって38%ではない。ここを混同しない。</li><li><strong>カテーテルを1本入れないことの価値を数字で言える。</strong> 早期群は97%（239/246）が透析を受け、待機群は62%（149/242）だった。透析中の低血圧は受けた患者の36% 対 38% で率は同じだが、割付全体を分母にすると 35.0% 対 23.6% で、早期戦略のほうが「透析中低血圧を経験する患者」を絶対数で増やす。</li><li><strong>待つ側の代償も明示する。</strong> 待機群では最初の7日間に重症高カリウム血症が10例（4%）発生し、早期群は0例だった（P=0.03）。代謝性アシドーシスも22例（9%）対40例（17%）と待機群に多い（掲載P=0.07）。「待つ＝無害」ではない。</li><li><strong>緊急基準に至った患者の死亡は68%（28/41）。</strong> ただし著者自身が「重症度による交絡」と留保しており、遅らせたせいで死んだとは読めない。当院で使うなら「緊急基準に至った症例はもともと予後が悪い群であり、そこを早く拾う努力に意味がある」という方向で。</li><li>当院の RRT 運用全体は <span class="wl">CRRTの実際の処方（Bellomo・CritCare2021）</span>（開始閾値を数値で書かない立場）、<span class="wl">RRT開始タイミングの最適化（AKI・CritCare2021）</span>（5試験の統合的読み替え）と合わせて読む。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：AKI は敗血症性ショックで最も頻度の高い合併症であり、死亡の独立危険因子である。高カリウム血症や代謝性アシドーシスなど生命を脅かす合併症があれば直ちに RRT を開始すべきことは広く合意されている。敗血症関連 AKI は非敗血症性 AKI とは異なる病態生理を持ち、RRT への反応も異なりうる。</li><li><strong>Unknown</strong>：生命を脅かす合併症が「ない」場合の開始タイミングは不明であった。本試験の直前に発表された2つの RCT（AKIKI＝差なし、ELAIN＝早期有利）は結論が食い違っており、早期開始の利益の有無も、遅らせることに伴うリスクの大きさも決着していなかった。敗血症性ショックだけを対象にした試験は存在しなかった。</li><li><strong>What's new</strong>：敗血症性ショックの初期（昇圧薬開始48時間以内）＋RIFLE failure 段階の AKI に対象を絞った初の RCT。12時間以内開始と48時間待機を比較し、90日死亡に差がないことを示した。第2回中間解析で無益性により早期中止。同時に、待機群の38%が RRT を受けずに済み、うち75%は腎機能の自然回復であったことを定量化した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症性ショック＋重症AKIで、緊急透析の適応がない患者に<strong>12時間以内の早期RRTを行っても90日死亡は下がらない</strong>（58% 対 54%、P=0.38）。一方で48時間待つと<strong>38%が透析を受けずに済み</strong>、その4分の3は腎機能の自然回復だった。</p>
+</div>
+<ul><li><strong>デザイン</strong>：フランス29施設、無作為化・オープンラベル・並行群間 RCT。2012年7月〜2016年10月。目標864例のところ、第2回中間解析で無益性と判断され488例で中止（中止時の条件付き検出力 51.44%）。</li><li><strong>対象</strong>：18歳以上、昇圧薬開始から48時間以内の敗血症性ショック、RIFLE failure 段階の AKI。無作為化前に緊急RRTを要した患者は除外。</li><li><strong>介入</strong>：早期＝failure 段階の記録から12時間以内に RRT 開始。待機＝48時間待ち、その間に緊急RRT基準（K &gt;6.5 mmol/L・pH &lt;7.15・利尿薬抵抗性の肺水腫を伴う血管外体液過剰）を満たせば直ちに開始、腎機能が自然回復すれば開始しない。</li><li><strong>主要アウトカム</strong>：無作為化後90日の全死因死亡。</li><li><strong>主要結果</strong>：早期 138/239（58%）対 待機 128/238（54%）、P=0.38。90日追跡率98%（477/488）。施設層別＋慢性腎不全・腎毒性薬剤曝露で調整しても結果は変わらず。</li><li><strong>透析実施率</strong>：早期 239/246（97%）対 待機 149/242（62%）、P&lt;0.001。AKI診断からRRT開始までの中央値は 7.6時間（IQR 4.4–11.5）対 51.5時間（IQR 34.6–59.5）、P&lt;0.001。</li><li><strong>待機群の内訳</strong>：93例（38%）が RRT を受けず。自然回復70例（29%）、開始前死亡21例（8%）、その他2例（1%）。緊急基準に該当して48時間前に開始したのが41例（17%）で、うち28例（68%）が死亡。</li><li><strong>副次</strong>：RRTフリー日数のみ待機群が長い（中央値16日 対 12日、P=0.006）。28日死亡・180日死亡・人工呼吸器フリー日数・昇圧薬フリー日数・ICU/在院日数・28日および90日のRRT依存率はいずれも差なし。主要アウトカムが陰性のため副次は探索的と著者自身が明記。</li><li><strong>安全性</strong>：待機群で重症高カリウム血症が多い（0例 対 10例、掲載P=0.03）。透析中の低血圧は透析を受けた患者の36% 対 38% で差なし。</li><li><strong>著者の結論</strong>：早期開始と待機で死亡に有意差はない。ただし「無期限の先送りを推奨するものではない」と明示している。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — RRT開始タイミング論争の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>RRT（renal-replacement therapy／腎代替療法）</strong> は、血液透析（IHD）や持続的血液濾過透析（CRRT）など、腎の機能を機械で肩代わりする治療の総称。ICU では AKI の3〜5人に1人が受ける。 <strong>RIFLE 分類</strong> は2004年に ADQI が出した AKI の重症度分類で、Risk / Injury / Failure / Loss / End-stage の5段階。本試験が使う <strong>failure 段階</strong>は、①血清クレアチニンがベースラインの3倍、または 4 mg/dL 以上かつ急速に 0.5 mg/dL 以上上昇、②尿量 0.3 mL/kg/時未満が24時間以上、③無尿12時間以上 —— のいずれかで定義される。KDIGO ステージ3 にほぼ相当する。 <strong>「早期 vs 待機」の問い</strong>とは：高カリウム血症やアシドーシスのような「今すぐ回さないと死ぬ」状態がない段階の重症AKIで、先回りして透析を始めたほうが助かるのか、それとも腎が自力で戻るのを待ったほうがよいのか、という問い。先回り派の理屈は「尿毒素・酸・水を早く抜けば臓器障害の連鎖を止められる」。待機派の理屈は「透析そのものが害（カテーテル感染、透析中低血圧、抗菌薬や微量元素の除去、抗凝固に伴う出血）を持ち、放っておけば治る腎を無駄に傷つける」。 <strong>本試験の前にあった2つの RCT</strong>：AKIKI（Gaudry ら、NEJM 2016、n=620、KDIGO ステージ3）は差なし。ELAIN（Zarbock ら、JAMA 2016、単施設 n=231、KDIGO ステージ2＋NGAL 高値）は早期群で90日死亡が有意に低かった。この食い違いが本試験の出発点である。 <strong>敗血症性ショックに絞る意味</strong>：敗血症関連AKIは虚血性壊死というより、微小循環障害・炎症・尿細管代謝再プログラミングが主体で、他の原因のAKIと病態が違うとされる。RRT への反応も違いうる。既存2試験は敗血症を含むが、敗血症性ショックを組み入れ基準そのものにした試験はなかった。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>本文の導入は次の論理で進む。</p>
+<ul><li>AKI は敗血症性ショックで ICU に入る患者の高頻度の合併症であり、高い死亡率と関連する（引用1〜7）。</li><li>敗血症に伴う AKI は独自の病態生理を持ち（引用8）、敗血症性ショックを伴う AKI 患者は、伴わない AKI 患者とは RRT への反応が異なる可能性がある（引用9）。</li><li>重症 AKI において、RRT を行うか否か、行うならいつ始めるかは不明確である。高カリウム血症や代謝性アシドーシスのような生命を脅かす合併症があれば直ちに開始すべきという点は広く受け入れられているが、それがない場合の適切なタイミングは不明である。</li><li>「敗血症性ショックの初期を治療する」目的で非常に早期に血液濾過を行う試みは過去にあったが、それらは腎不全の有無にかかわらず濾過を導入するもので、本問題とは別である（引用10・11＝Payen CCM 2009、Piccinni ICM 2006）。</li><li>直近の2つの RCT（引用12＝AKIKI、13＝ELAIN）は結論が矛盾している。したがって早期開始の利益は確立しておらず、敗血症関連 AKI で RRT を遅らせることに伴うリスクの大きさも（もしあるとして）不明である。</li></ul>
+<p><strong>目的</strong>：敗血症性ショックと重症 AKI を有する患者において、RRT 開始タイミングが90日死亡に及ぼす影響を検討する。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>3-1. デザイン</h4>
+<ul><li>無作為化・比較・<strong>オープンラベル</strong>・多施設試験。盲検化は行われていない（介入の性質上不可能）。</li><li>早期戦略＝RIFLE failure 段階の AKI と判断された時点から <strong>12時間以内</strong>に RRT 開始。</li><li>待機戦略＝<strong>48時間</strong>遅らせ、その間に腎機能が自然回復せず、かつ緊急RRT基準に該当する状態が生じなければ開始。</li><li>試験デザインとプロトコルは既発表（Trials 2014;15:270）で、プロトコルは NEJM.org で公開されている。</li></ul>
+<h4>3-2. 試験監督</h4>
+<ul><li>資金の使用は Dijon 大学病院が監督。独立データ安全性モニタリング委員会（DSMB）が2回の計画された中間解析で安全性と結果をレビュー。</li><li>Dijon 倫理委員会が全施設分を承認。試験運営委員会が監督。初稿は筆頭著者が執筆し、運営委員会がレビュー。</li><li>統計解析は試験統計家が ICH-GCP に従って実施。著者らが解析の正確性・完全性とプロトコル遵守を保証。商業的支援なし。</li></ul>
+<h4>3-3. 対象（組み入れ・除外・n・施設・期間）</h4>
+<p><strong>組み入れ基準</strong>（すべて満たす）</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>18歳以上</td></tr>
+<tr><td>病態</td><td>敗血症性ショックの初期に ICU 入室（昇圧薬開始から48時間以内）</td></tr>
+<tr><td>腎障害</td><td>RIFLE failure 段階の AKI（下記3項目のいずれか1つ以上）</td></tr>
+<tr><td>① 乏尿</td><td>尿量 &lt;0.3 mL/kg/時が24時間以上</td></tr>
+<tr><td>② 無尿</td><td>12時間以上</td></tr>
+<tr><td>③ 血清クレアチニン</td><td>ベースラインの3倍、または ≥4 mg/dL（≥350 µmol/L）かつ急速な ≥0.5 mg/dL（≥44 µmol/L）の上昇を伴う</td></tr>
+</tbody></table></div>
+<p>ベースラインのクレアチニンは ICU 入室前12か月の測定値、または推定値を用いた。</p>
+<p><strong>除外</strong>：無作為化前に緊急 RRT を要した患者は組み入れ不可。詳細な選択・除外基準は補遺 Table S2（本体PDFには無い）。</p>
+<p><strong>スクリーニングの流れ（Figure 1）</strong>：3573例が適格性評価 → 1728例が組み入れ基準を満たす → 1240例が除外 → 488例を無作為化（早期246・待機242）。</p>
+<p><strong>期間・施設</strong>：2012年7月〜2016年10月、フランス29 ICU（大学病院22・一般病院7）。</p>
+<h4>3-4. 無作為化</h4>
+<ul><li>オンライン応答システム（Tenalea, FormsVision BV）を用い、敗血症性ショック発症後48時間以内かつ RIFLE failure と判断された後に実施。</li><li><strong>最小化法</strong>で、施設・年齢・SOFA スコア・感染部位・感染の種類を層別因子とした。1:1 割付。</li><li>INSERM 臨床疫学ユニット（CIC 1432, Dijon）がデータ管理と DSMB 向けの盲検化レポート作成を担当。</li></ul>
+<h4>3-5. 介入の詳細</h4>
+<p><strong>早期群</strong>：failure 段階の記録から12時間以内に RRT 開始。</p>
+<p><strong>待機群</strong>：割付後に密に監視し、以下の<strong>緊急RRT基準</strong>のいずれかが生じたら可及的速やかに開始する。</p>
+<div class="tw"><table>
+<thead><tr><th>緊急RRT基準</th><th>本文 Methods の記載</th><th>Table 2 脚注のより厳密な定義</th></tr></thead>
+<tbody>
+<tr><td>高カリウム血症</td><td>K &gt;6.5 mmol/L</td><td>K &gt;6.5 mmol/L かつ特徴的な心電図変化を伴う</td></tr>
+<tr><td>代謝性アシドーシス</td><td>pH &lt;7.15</td><td>pH &lt;7.15 かつ base deficit &gt;5 mmol/L または重炭酸 ≤18 mmol/L</td></tr>
+<tr><td>体液過剰</td><td>利尿薬抵抗性の血管外体液過剰＋肺水腫</td><td>同左</td></tr>
+</tbody></table></div>
+<p>いずれも生じなければ AKI 診断から48時間後に開始。<strong>自然回復すれば開始しない</strong>：自然回復の定義はクレアチニンの低下かつ自発尿量が24時間で 1000 mL 超（利尿薬使用中なら 2000 mL 超）への回復。</p>
+<p><strong>モダリティ</strong>：間欠か持続かは各施設の臨床専門家の裁量。ただし設定とモニタリングは国際ガイドライン（ATS/ERS/ESICM/SCCM/SRLF 2010、KDIGO 2012）に基づくプロトコル指示に従うことが求められた（補遺 Table S3）。両群とも、上記の腎回復が得られれば RRT の中止を検討した。</p>
+<h4>3-6. アウトカム</h4>
+<p><strong>主要</strong>：無作為化後90日の全死因死亡。</p>
+<p><strong>副次</strong>（本文の列挙順）</p>
+<ol><li>28日死亡・180日死亡</li><li>無作為化後28日時点の RRT フリー日数・人工呼吸器フリー日数・昇圧薬フリー日数</li><li>ICU 在室日数・在院日数</li><li>ICU 滞在全体の有害事象（特に登録後7日間の AKI または RRT に関連しうる合併症）</li><li>登録後7日間の水分バランス</li><li>待機群における緊急 RRT の必要性</li><li>待機群のうち緊急RRT基準を1つ以上満たした患者の死亡</li><li>退院時の RRT 依存</li></ol>
+<h4>3-7. 統計解析・サンプルサイズ</h4>
+<ul><li>90日死亡を二値アウトカムとし、早期群で10パーセントポイント低い（45% 対 55%）と仮定、5%が評価不能と見込んで、両側α=0.05・検出力80%に必要な症例数を <strong>864例（各群432例）</strong> と算出。</li><li>中間有効性解析を2回計画。各中間解析では90日死亡をχ²検定で比較し、最終解析の有意水準を変えないよう <strong>α=0.000119</strong>（Peto 流、引用19）を用いた。</li><li>主要解析は <strong>intention-to-treat</strong>。主要比較はχ²検定。施設でさらに層別したロジスティック回帰で、ベースライン予後因子（慢性腎不全の有無、および無作為化前24時間のヒドロキシエチルデンプン曝露の有無）を調整。</li><li>副次解析では28日・180日死亡を評価し、Kaplan–Meier 法で生存確率を描出。時間変数・在室日数・フリー日数は中央値と IQR で表し Mann–Whitney 検定。</li><li>安全性は、緊急RRT基準を満たした割合、重症代謝異常、体液過剰による肺水腫、昇圧薬の増量・再導入を要する動脈性低血圧、重症症候性不整脈、重症出血の割合で評価。</li><li>SAS 9.3。有意水準0.05。<strong>主要アウトカムが陰性であるため、副次アウトカムは探索的とみなし、治療差の推論に用いるべきでない</strong>と著者が明記。</li></ul>
+<h3>4. 結果 — 組み入れと早期中止</h3>
+<ul><li>3573例を評価し、1728例が組み入れ基準を満たし、そのうち488例を無作為化（早期246・待機242）。</li><li><strong>第2回中間解析後、DSMB は「登録を完遂しても結果が有意に変わる可能性は低い」と判断し中止を勧告</strong>。中止勧告時の条件付き検出力（conditional power）は <strong>51.44%</strong>。</li><li>90日の追跡データが得られたのは477例（98%）。</li></ul>
+<h4>Figure 1. スクリーニング・無作為化・追跡（フローチャートの文言を表に起こす）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>早期戦略</th><th>待機戦略</th></tr></thead>
+<tbody>
+<tr><td>適格性評価</td><td>敗血症性ショックとAKIを有する3573例</td><td>—</td></tr>
+<tr><td>組み入れ基準を満たした</td><td>1728例</td><td>—</td></tr>
+<tr><td>無作為化</td><td>488例（早期246・待機242）</td><td>—</td></tr>
+<tr><td>RRT を受けた</td><td>239例</td><td>149例</td></tr>
+<tr><td>‥‥うち死亡</td><td>134例</td><td>41例が48時間前に緊急RRT（うち28例死亡）＋108例が48時間後に開始（うち59例死亡）</td></tr>
+<tr><td>RRT を受けなかった</td><td>7例</td><td>93例</td></tr>
+<tr><td>‥‥開始前に死亡</td><td>2例</td><td>21例</td></tr>
+<tr><td>‥‥カテーテル挿入失敗</td><td>1例</td><td>—</td></tr>
+<tr><td>‥‥腎機能の自然回復</td><td>4例（うち1例死亡）</td><td>70例</td></tr>
+<tr><td>‥‥その他の理由</td><td>—</td><td>2例</td></tr>
+</tbody></table></div>
+<p><strong>除外1240例の内訳</strong>（複数該当ありうる）</p>
+<div class="tw"><table>
+<thead><tr><th>除外理由</th><th>例数</th></tr></thead>
+<tbody>
+<tr><td>末期腎不全</td><td>85</td></tr>
+<tr><td>閉塞性 AKI</td><td>45</td></tr>
+<tr><td>緊急 RRT を既に受けた</td><td>340</td></tr>
+<tr><td>ICU で RRT を受けていた</td><td>40</td></tr>
+<tr><td>瀕死（moribund）</td><td>107</td></tr>
+<tr><td>DNR 指示あり</td><td>112</td></tr>
+<tr><td>他の死亡アウトカム試験に登録中</td><td>336</td></tr>
+<tr><td>同意が得られなかった</td><td>31</td></tr>
+<tr><td>その他</td><td>144</td></tr>
+</tbody></table></div>
+<p>除外の最大2群が「緊急RRTを既に受けた340例」と「他試験に登録中の336例」である点は、外的妥当性を読むときに効く。</p>
+<h3>5. ベースライン特性（Table 1）</h3>
+<p>著者は「両群間にベースライン特性の有意差はなかった」と記載している。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>早期（N=246）</th><th>待機（N=242）</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>69.3±11.6</td><td>68.7±12.8</td></tr>
+<tr><td>男性</td><td>142（58%）</td><td>154（64%）</td></tr>
+<tr><td>BMI</td><td>28.8±7.7</td><td>29.0±8.3</td></tr>
+<tr><td>慢性腎不全</td><td>32（13%）</td><td>44（18%）</td></tr>
+<tr><td>高血圧</td><td>145（59%）</td><td>137（57%）</td></tr>
+<tr><td>糖尿病</td><td>80（33%）</td><td>69（29%）</td></tr>
+<tr><td>うっ血性心不全（NYHA III–IV）</td><td>20（8%）</td><td>20（8%）</td></tr>
+<tr><td>慢性呼吸不全</td><td>19（8%）</td><td>10（4%）</td></tr>
+<tr><td>慢性肝疾患</td><td>31（13%）</td><td>31（13%）</td></tr>
+<tr><td>免疫抑制</td><td>69（28%）</td><td>74（31%）</td></tr>
+<tr><td>ICU入室前の在院日数（中央値, IQR）</td><td>1（1–2）</td><td>1（1–3）</td></tr>
+<tr><td>SAPS II（ICU入室時）</td><td>65.1±16.5</td><td>64.1±15.6</td></tr>
+<tr><td>SOFA（登録時）</td><td>12.2±2.9</td><td>12.4±2.9</td></tr>
+<tr><td>無作為化前4日以内の腎毒性薬剤曝露</td><td>128（52%）</td><td>106（44%）</td></tr>
+<tr><td>侵襲的人工呼吸</td><td>219（89%）</td><td>213（88%）</td></tr>
+<tr><td>ノルアドレナリンまたはアドレナリン</td><td>246（100%）</td><td>242（100%）</td></tr>
+<tr><td>ドブタミン</td><td>52（21%）</td><td>58（24%）</td></tr>
+<tr><td>ECMO</td><td>1（&lt;1%）</td><td>9（4%）</td></tr>
+<tr><td>RIFLE failure の診断根拠：乏尿</td><td>86（35%）</td><td>80（33%）</td></tr>
+<tr><td>同：無尿</td><td>83（34%）</td><td>88（36%）</td></tr>
+<tr><td>同：クレアチニン3倍</td><td>156（63%）</td><td>149（62%）</td></tr>
+<tr><td>ICU入室前クレアチニン（mg/dL）</td><td>1.01±0.49</td><td>1.06±0.50</td></tr>
+<tr><td>登録時クレアチニン（mg/dL）</td><td>3.21±1.48</td><td>3.40±1.60</td></tr>
+<tr><td>BUN（mg/dL）</td><td>59.2±26.9</td><td>63.1±30.0</td></tr>
+<tr><td>血清カリウム（mmol/L）</td><td>4.3±0.8</td><td>4.5±0.9</td></tr>
+<tr><td>血清重炭酸（mmol/L）</td><td>17.7±5.0</td><td>17.7±4.5</td></tr>
+<tr><td>登録前の水分バランス（mL/24時間）</td><td>3194±2352</td><td>3211±2244</td></tr>
+</tbody></table></div>
+<p><strong>読みどころ</strong>：SOFA 12点台、SAPS II 65前後、全例が昇圧薬使用、約9割が人工呼吸——極めて重症の集団である。診断根拠の内訳（乏尿・無尿・クレアチニン3倍）は合計が100%を超えており重複が前提。<strong>尿量基準だけで入った患者が約7割</strong>を占める点は、クレアチニンだけを見ていると見落とす。</p>
+<p>本文は「慢性腎不全は待機群で多く、腎毒性薬剤曝露は早期群で多かったが、いずれも有意ではなかった」と述べる。ECMO の 1 対 9 には言及がない。</p>
+<h3>6. RRT 開始の実際</h3>
+<ul><li>早期群では <strong>239/246（97%）</strong> が RRT を受けた。</li><li>待機群では <strong>149/242（62%）</strong> が RRT を受けた。残る93例の内訳は、腎機能の自然回復70例（29%）、RRT 開始前の死亡21例（8%）、その他の理由2例（1%）。</li><li>AKI 診断から RRT 開始までの中央値は、早期 <strong>7.6時間</strong>（IQR 4.4–11.5）対 待機 <strong>51.5時間</strong>（IQR 34.6–59.5）、P&lt;0.001。</li><li>待機群のうち <strong>41例（17%）</strong> が緊急RRT基準に該当し、48時間の待機を完了せずに RRT を開始した。</li></ul>
+<h4>緊急RRTに至った41例の内訳（Table 2）</h4>
+<div class="tw"><table>
+<thead><tr><th>基準</th><th>例数（待機群242例に対する%）</th><th>該当時の値（中央値, IQR）</th></tr></thead>
+<tbody>
+<tr><td>代謝性アシドーシス</td><td>20（8%）</td><td>pH 7.10（7.06–7.13）</td></tr>
+<tr><td>高カリウム血症</td><td>9（4%）</td><td>K 7.0 mmol/L（6.7–7.3）</td></tr>
+<tr><td>体液過剰</td><td>6（2%）</td><td>—</td></tr>
+<tr><td>その他の基準</td><td>6（2%）</td><td>—</td></tr>
+<tr><td>合計</td><td>41（17%）</td><td>—</td></tr>
+</tbody></table></div>
+<p>「その他の基準」は Table 2 脚注 § で「臨床医の判断で RRT 開始が必要と考えた多臓器不全の増悪で、SOFA スコアの2点以上の上昇で裏づけられたもの」と定義され、<strong>事前規定された緊急RRT基準ではない</strong>と明記されている。したがって事前規定基準を満たしたのは 35/242＝14.5% であり、抄録の「17%」はこの6例を含んだ数字である。</p>
+<h3>7. 主要アウトカム（90日死亡）</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1056/NEJMoa1803213" target="_blank" rel="noopener">原論文（doi.org/10.1056/NEJMoa1803213）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 早期RRT群と待機RRT群の全生存 横軸は無作為化からの日数（0・30・60・90・120・150・180日の目盛）、縦軸は生存割合（0.00〜1.00、0.25刻み）。上に位置する青い曲線が待機戦略、下に位置する赤い曲線が早期戦略で、曲線の右端にそれぞれ "Delayed strategy" "Early strategy" のラベルが直接付されている。両曲線は最初の30日で急峻に 1.00 から 0.50 付近まで落ち、その後ゆるやかに 0.45 前後へ収束する。2本は最初から最後までほぼ重なり、待機群がごくわずかに上を走る。曲線上の十字は打ち切りデータを示す。図の左下、生存割合 0.30 付近の高さに「P=0.52」（180日までの全生存の群間比較）が置かれている。下部に "No. at Risk" 表があり、待機戦略が 242・137・117・112・107・105・101、早期戦略が 246・127・109・99・98・92・92 と並ぶ。原図・無改変。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>早期</th><th>待機</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>90日死亡</td><td>138/239（58%）</td><td>128/238（54%）</td><td>0.38</td></tr>
+</tbody></table></div>
+<ul><li>追跡率98%（477/488）。</li><li>施設層別および慢性腎不全・腎毒性薬剤曝露での調整を加えても結果は変わらなかった。</li><li>本文には<strong>リスク差・リスク比とその95%信頼区間の記載がない</strong>。P値のみである。本ノートで掲載数値から算出すると、絶対リスク差は <strong>＋4.0パーセントポイント</strong>（早期のほうが高い方向、95%CI −4.9〜＋12.9）、リスク比 <strong>1.07</strong>（95%CI 0.92–1.26）となる。これは論文の記載ではなく本ノートの計算である。</li><li>Kaplan–Meier による180日までの全生存の比較は P=0.52。</li></ul>
+<h3>8. 副次アウトカム（Table 2）</h3>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>早期（N=246）</th><th>待機（N=242）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>28日死亡</td><td>111（45%）</td><td>102（42%）</td><td>0.48</td></tr>
+<tr><td>180日死亡</td><td>143/236（61%）</td><td>134/235（57%）</td><td>0.37</td></tr>
+<tr><td>AKI診断からRRT開始までの中央値（時間, IQR）</td><td>7.6（4.4–11.5）</td><td>51.5（34.6–59.5）</td><td>&lt;0.001</td></tr>
+<tr><td>RRT を受けた患者</td><td>239（97%）</td><td>149（62%）</td><td>&lt;0.001</td></tr>
+<tr><td>RRT 施行日数の中央値（IQR）</td><td>4（2–8）</td><td>2（0–6）</td><td>&lt;0.001</td></tr>
+<tr><td>RRT フリー日数の中央値（IQR）</td><td>12（1–25）</td><td>16（2–28）</td><td>0.006</td></tr>
+<tr><td>人工呼吸器フリー日数の中央値（IQR）</td><td>2（0–19）</td><td>3（0–21）</td><td>0.19</td></tr>
+<tr><td>昇圧薬フリー日数の中央値（IQR）</td><td>16（0–25）</td><td>17（0–25）</td><td>0.87</td></tr>
+<tr><td>ICU在室日数の中央値（IQR）</td><td>11（4–19）</td><td>10（5–19）</td><td>0.91</td></tr>
+<tr><td>‥‥生存者</td><td>12（8–21）</td><td>12（8–21）</td><td>0.88</td></tr>
+<tr><td>‥‥非生存者</td><td>5（2–15）</td><td>6（3–14）</td><td>0.64</td></tr>
+<tr><td>在院日数の中央値（IQR）</td><td>23（10–40）</td><td>23（10–44）</td><td>0.34</td></tr>
+<tr><td>‥‥生存者</td><td>22.0（9.0–38.0）</td><td>21.0（10.0–42.5）</td><td>0.53</td></tr>
+<tr><td>‥‥非生存者</td><td>25（15–53）</td><td>42（33–56）</td><td>0.08</td></tr>
+<tr><td>SOFA（腎成分を除く）Day 1</td><td>9.3±3.5</td><td>9.3±3.2</td><td>0.84</td></tr>
+<tr><td>同 Day 2</td><td>8.6±3.8</td><td>8.4±3.9</td><td>0.57</td></tr>
+<tr><td>同 Day 3</td><td>8.0±4.0</td><td>7.8±4.1</td><td>0.64</td></tr>
+<tr><td>同 Day 7</td><td>5.9±3.8</td><td>6.3±3.9</td><td>0.30</td></tr>
+<tr><td>累積水分バランス Day 2 以降（mL）</td><td>3737±3925</td><td>3437±3371</td><td>0.40</td></tr>
+<tr><td>累積水分バランス Day 7（mL）</td><td>5570±8761</td><td>5878±7472</td><td>0.75</td></tr>
+<tr><td>Day 0–7 に利尿薬を投与</td><td>121（49%）</td><td>124（51%）</td><td>0.65</td></tr>
+<tr><td>フロセミド累積量の中央値（IQR, mg）</td><td>215（65–760）</td><td>295（80–1160）</td><td>0.18</td></tr>
+<tr><td>生存者のRRT依存 Day 28</td><td>17/134（13%）</td><td>17/140（12%）</td><td>0.89</td></tr>
+<tr><td>同 Day 90</td><td>2/101（2%）</td><td>3/110（3%）</td><td>1.00</td></tr>
+<tr><td>クレアチニン ICU退室時（mg/dL）</td><td>2.00±1.26</td><td>2.19±1.47</td><td>0.15</td></tr>
+<tr><td>同 退院時（mg/dL）</td><td>1.46±0.98</td><td>1.61±1.30</td><td>0.31</td></tr>
+</tbody></table></div>
+<p>フリー日数は「28日時点で当該介入なしに生存していた日数」で、死亡例は0日として扱う（Table 2 脚注 ¶）。したがって死亡率が同等ならフリー日数の差はほぼ「介入を使わなかった日数」の差を反映する。RRT フリー日数が待機群で4日長いのは、待機群の38%が透析を受けなかったことの言い換えに近い。</p>
+<p><strong>RRT依存</strong>：28日で13% 対 12%、90日で2% 対 3%。長期の腎機能に差はない。これは「早期に始めたから腎が休めて回復した」という仮説を支持しない。</p>
+<h3>9. 安全性（Table 3）</h3>
+<p>登録後7日間の、AKI または RRT に関連しうる合併症。</p>
+<div class="tw"><table>
+<thead><tr><th>合併症</th><th>早期（N=246）</th><th>待機（N=242）</th><th>掲載P</th></tr></thead>
+<tbody>
+<tr><td>代謝性アシドーシス</td><td>22（9%）</td><td>40（17%）</td><td>0.07</td></tr>
+<tr><td>‥‥pH中央値（IQR）</td><td>7.1（7.1–7.1）</td><td>7.1（7.0–7.1）</td><td>0.36</td></tr>
+<tr><td>高カリウム血症</td><td>0</td><td>10（4%）</td><td>0.03</td></tr>
+<tr><td>‥‥K中央値（IQR, mmol/L）</td><td>—</td><td>7.0（6.7–7.3）</td><td>—</td></tr>
+<tr><td>体液過剰</td><td>1（&lt;1%）</td><td>9（4%）</td><td>0.16</td></tr>
+<tr><td>重症心リズム障害</td><td>23（10%）</td><td>13（5%）</td><td>0.77</td></tr>
+<tr><td>‥‥症候性徐脈</td><td>15（6%）</td><td>11（4%）</td><td>0.67</td></tr>
+<tr><td>‥‥心室頻拍・心室細動</td><td>10（4%）</td><td>3（1%）</td><td>0.25</td></tr>
+<tr><td>重症出血</td><td>12（5%）</td><td>15（6%）</td><td>0.52</td></tr>
+<tr><td>‥‥輸血赤血球量の中央値（IQR, 単位）</td><td>4.0（3.5–7.0）</td><td>5.0（3.0–7.0）</td><td>0.98</td></tr>
+<tr><td>RRT中の低血圧エピソード</td><td>86/239（36%）</td><td>57/149（38%）</td><td>0.62</td></tr>
+<tr><td>‥‥最重症時の平均動脈圧の中央値（IQR）</td><td>47（40–52）</td><td>44（36–52）</td><td>0.40</td></tr>
+<tr><td>その他の心血管合併症</td><td>94（38%）</td><td>95（39%）</td><td>0.81</td></tr>
+<tr><td>新規感染</td><td>55（22%）</td><td>44（18%）</td><td>0.25</td></tr>
+<tr><td>呼吸器合併症</td><td>25（10%）</td><td>36（15%）</td><td>0.11</td></tr>
+<tr><td>消化管合併症</td><td>32（13%）</td><td>25（10%）</td><td>0.36</td></tr>
+<tr><td>神経合併症</td><td>29（12%）</td><td>20（8%）</td><td>0.19</td></tr>
+<tr><td>血栓・塞栓合併症</td><td>13（5%）</td><td>14（6%）</td><td>0.81</td></tr>
+<tr><td>軽症出血</td><td>52（21%）</td><td>53（22%）</td><td>0.84</td></tr>
+<tr><td>その他の血液学的合併症</td><td>22（9%）</td><td>23（10%）</td><td>0.83</td></tr>
+<tr><td>その他の代謝合併症</td><td>9（4%）</td><td>8（3%）</td><td>0.83</td></tr>
+</tbody></table></div>
+<p><strong>定義</strong>（Table 3 脚注）：代謝性アシドーシス＝pH &lt;7.15 かつ base deficit &gt;5 mmol/L または重炭酸 ≤18 mmol/L。高カリウム血症＝K &gt;6.5 mmol/L かつ特徴的な心電図変化。体液過剰＝利尿薬抵抗性の血管外体液過剰＋肺水腫。重症心リズム障害＝心室頻拍・心室細動・torsades de pointes・III度房室ブロック・治療を要する極度の徐脈。重症出血＝同日に赤血球3単位以上の輸血を要したもの。RRT中の低血圧＝平均動脈圧 ≤55 mmHg かつ昇圧薬の増量または再導入を要したもの（<strong>RRT を受けた患者のみを分母</strong>とする）。その他の代謝合併症＝重症低リン血症（&lt;0.5 mmol/L）または重症低血糖（&lt;2.8 mmol/L）。</p>
+<p><strong>低血圧の読み方</strong>：率は 36% 対 38% で差がないが、分母が「RRT を受けた患者」なので、割付全体を分母にすると 86/246＝35.0% 対 57/242＝23.6% になる。早期戦略は透析中低血圧を経験する患者を絶対数で増やす。</p>
+<p><strong>カテーテル関連感染は独立した項目として報告されていない</strong>。「新規感染」（22% 対 18%、P=0.25）に丸め込まれており、カテーテル関連血流感染の発生率は本文からは分からない。Figure 1 に「カテーテル挿入失敗1例」（早期群）の記載があるのみである。開始タイミング論争で「早期のカテーテル留置は感染を増やす」という主張はよく使われるが、本試験はその主張を検証していない。</p>
+<h3>10. 水分バランス</h3>
+<p>無作為化前24時間、登録後48時間、7日時点のいずれにおいても群間差はなかった（詳細は補遺 Table S9）。Table 2 の累積水分バランスも Day 2 以降 3737±3925 対 3437±3371 mL（P=0.40）、Day 7 で 5570±8761 対 5878±7472 mL（P=0.75）と差がない。</p>
+<p>これは著者らの作業仮説を否定する所見である。「早期に透析を始めれば水が引ける → 予後が良くなる」という筋道の第1段階が成り立っていない。</p>
+<h3>11. 考察（Discussion）</h3>
+<p>著者らの論点を順に追う。</p>
+<ol><li><strong>本試験の位置づけ</strong>：敗血症性ショック初期の重症AKIという均質な集団に絞って開始タイミングを問うた。この集団では、12時間以内開始は48時間待機に比べて90日死亡を下げなかった。</li><li><strong>透析の使用量</strong>：待機群では RRT の使用が少なかった。38%が RRT を受けず、そのうち75%（70/93）は腎機能の自然回復による。</li><li><strong>全体死亡は55%</strong>で、公表データに基づく作業仮説（待機群55%）と完全に一致した。すなわち検出力計算の前提そのものは外していない。</li><li><strong>AKIKI との整合</strong>：Gaudry らは KDIGO ステージ3 の600例超で60日死亡に差を認めなかった。敗血症性ショック348例（全体の56%）の事後解析（引用20、AJRCCM 2018）も同様であった。本試験の結果はこれと一致する。</li><li><strong>ELAIN との不一致</strong>：Zarbock らの単施設231例（KDIGO ステージ2、クレアチニン2.0〜2.9倍または尿量 &lt;0.5 mL/kg/時が12時間以上）は逆に早期群で90日死亡が有意に低かった。著者らは組み入れ基準と透析手技の違いで説明しうるとする。</li><li><strong>早期開始の理論的利点が実現しなかった理由</strong>：早期透析は酸塩基・電解質・水分バランスを改善し、AKI のより重篤な合併症を防ぎ、毒素除去を促進しうる（引用21）。しかし本試験では死亡は下がらず、水分バランスも改善しなかった。著者らの説明は「<strong>敗血症性ショック初期の血行動態不安定な患者では、RRT による除水を容易にも安全にも行えないため、早く始めても水分バランスは改善しない</strong>」。</li><li><strong>早すぎる開始の害</strong>：自然回復したはずの患者を RRT のリスクに不必要に曝すことになる。実際、待機群の29%は自然回復により RRT を要さなかった（ただしその26%＝18/70 はその後死亡しており、他研究の報告と同程度・引用22）。48時間より長く待てばさらに回復する患者がいた可能性がある（引用12）。</li><li><strong>緊急基準に至った患者の予後</strong>：待機群のうち緊急RRT基準を満たした患者の死亡は <strong>68%（28/41）</strong> で、満たさなかった患者より高い。しかし著者らは「これらの合併症の出現は、より重症な基礎病態を持つサブグループを同定しているだけかもしれず、遅らせたせいで死んだとも、早く始めていれば救えたとも結論できない」と留保する。</li><li><strong>無期限の先送りへの警告</strong>：「緊急基準がない場合に開始を早めても利益はないが、本結果は RRT の無期限の先送りを推奨するものとは解釈できない。むしろ、緊急RRT基準を満たしそうな患者を同定する注意を払う限り、少なくとも48時間の先送りで死亡リスクは増えない、というのが本データの示すところである」。</li></ol>
+<h3>12. 限界（著者が挙げた2点）</h3>
+<div class="tw"><table>
+<thead><tr><th>限界</th><th>著者の記述</th></tr></thead>
+<tbody>
+<tr><td>RIFLE の使用</td><td>試験設計時点で最も一般的だったため RIFLE failure を用いたが、より新しい分類ほど感度が高くない。また failure 段階は「RRT を要する患者」を同定する目的で作られたものではない</td></tr>
+<tr><td>48時間という待機幅</td><td>一部の患者では腎機能回復に十分な長さでない可能性があり、早期と待機の差を検出するにも短い可能性がある。ただし、それ以上遅らせるのは本当に RRT を要する患者にとって非倫理的・不安全と考えた</td></tr>
+</tbody></table></div>
+<h3>13. 「早期開始に利益なし」と「待てば不要になる患者がいる」は別の主張</h3>
+<p>この試験がどちらを支持するのかを厳密に切り分ける。ジャーナルクラブで最も混乱しやすい点である。</p>
+<div class="tw"><table>
+<thead><tr><th>主張</th><th>本試験が支持するか</th><th>根拠と強度</th></tr></thead>
+<tbody>
+<tr><td>① 緊急適応のない敗血症性ショック＋重症AKIで、12時間以内の早期RRTは90日死亡を下げない</td><td><strong>支持する（ただし限定つき）</strong></td><td>無作為化比較の主要アウトカム。ITT解析。ただし無益性で早期中止され、計画864例に対し488例。90日死亡の絶対差の95%信頼区間は本ノート算出で −4.9〜＋12.9パーセントポイントであり、<strong>早期戦略に5ポイント程度の利益がある可能性はまだ排除されていない</strong></td></tr>
+<tr><td>② 48時間待てば、透析が不要になる患者が一定数いる</td><td><strong>支持する（ただし観察的）</strong></td><td>待機群242例中70例（29%）が自然回復により RRT を回避。これは<strong>待機群だけを見た記述統計であり、無作為化比較ではない</strong>。早期群でも12時間以内に4例が自然回復しており、待たなければ回復しなかったという反実仮想は検証されていない</td></tr>
+<tr><td>③ 待機戦略は早期戦略より優れている</td><td><strong>支持しない</strong></td><td>死亡・臓器支持フリー日数・在室日数・腎回復のいずれも差がない。RRTフリー日数のみ待機群が長いが、主要アウトカムが陰性のため探索的</td></tr>
+<tr><td>④ 早期開始は有害である</td><td><strong>支持しない</strong></td><td>死亡の方向は早期群がわずかに高いが有意でなく、有害事象は待機群のほうが多い（高カリウム血症・アシドーシス）</td></tr>
+<tr><td>⑤ RRT は無期限に先送りしてよい</td><td><strong>明確に否定</strong></td><td>著者が本文で明示的に否定。待機群の17%が48時間以内に緊急基準に到達し、その68%が死亡した</td></tr>
+<tr><td>⑥ 敗血症性ショックでは早期RRTで「敗血症そのもの」を治療できる</td><td><strong>本試験の対象外</strong></td><td>本試験は腎不全に対する RRT の話であり、サイトカイン除去目的の血液浄化とは別問題（導入で引用10・11を明確に切り分けている）</td></tr>
+</tbody></table></div>
+<p><strong>要するに</strong>：本試験は「早期に始めても得はない」を無作為化で示し、「待てば要らなくなる人がいる」を観察で示した。前者は因果の主張、後者は記述の主張である。実務では2つを合わせて「緊急適応がなければ待てる。待つ間は緊急トリガーを監視する」となるが、根拠の強さが違うことを意識して使い分ける。</p>
+<h3>14. 旧ノートの記述とPDFの照合 ✏️</h3>
+<p>改稿前のノート（26行）の記述をPDFと突き合わせた結果。</p>
+<div class="tw"><table>
+<thead><tr><th>旧ノートの記述</th><th>PDFの記載</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>citation の原題「Timing of Renal-Replacement Therapy in Septic Shock with AKI (IDEAL-ICU)」</td><td>正しくは "Timing of Renal-Replacement Therapy in Patients with Acute Kidney Injury and Sepsis"</td><td><strong>誤り</strong>。原題が置き換えられていた。検索・引用に支障が出る</td></tr>
+<tr><td><code>published: 2018</code> のみ</td><td>紙面に "N Engl J Med 2018;379:1431-42"、ページヘッダに "October 11, 2018"</td><td>不足。<strong>2018-10-11</strong> に確定</td></tr>
+<tr><td><code>doi</code> フィールドなし／<code>journal</code> フィールドなし</td><td>DOI: 10.1056/NEJMoa1803213</td><td>不足。追加</td></tr>
+<tr><td>「RIFLEの failure 段階は、血清クレアチニンがベースラインの3倍（または急速な0.5 mg/dL以上の上昇を伴う4 mg/dL以上）で定義される」</td><td>クレアチニン基準に加え、乏尿（&lt;0.3 mL/kg/時が24時間以上）と無尿（12時間以上）も failure 段階の定義に含まれる。実際の組み入れは乏尿34%・無尿35%・クレアチニン3倍62%</td><td><strong>範囲の限定が落ちていた</strong>。クレアチニン基準だけと読むと患者像を誤る</td></tr>
+<tr><td>「遅延戦略：48時間遅らせ、腎機能が回復しなければRRT開始」</td><td>48時間の間に緊急RRT基準（K &gt;6.5・pH &lt;7.15・利尿薬抵抗性の肺水腫）が生じたら直ちに開始する条項がある。実際に17%が該当した</td><td><strong>試験の安全弁が欠落</strong>。この条項を落とすと「48時間放置」と誤読される</td></tr>
+<tr><td>「※抽出テキストは背景・方法が中心で、結果・結論の詳細は含まれていない」</td><td>PDF 12ページに Table 1〜3・Figure 1〜2・Discussion まで完備</td><td><strong>誤り</strong>。旧ノート作成時のテキスト抽出の失敗であって、原典に情報がなかったわけではない</td></tr>
+<tr><td>「早期の敗血症性ショック」の定義なし</td><td>昇圧薬開始から48時間以内、と明記されている</td><td>不足</td></tr>
+<tr><td>試験の早期中止に言及なし</td><td>第2回中間解析後に無益性で中止。条件付き検出力 51.44%</td><td><strong>重要な欠落</strong>。結果の解釈の強度に直結する</td></tr>
+<tr><td>主要結果の数値なし</td><td>58% 対 54%、P=0.38</td><td>欠落</td></tr>
+<tr><td>待機群の RRT 非施行割合の記載なし</td><td>38%（93/242）、うち自然回復70例（29%）</td><td>欠落。この試験の最も引用される数字</td></tr>
+<tr><td>frontmatter の <code>title</code> が「（IDEAL-ICU / Barbar 2018）」、ファイル名は「（IDEAL-ICU ・ Barbar 2018）」</td><td>—</td><td><strong>不一致</strong>。かつファイル名に誌略・発行年のサフィックスがない</td></tr>
+<tr><td><code>category: 腎・電解質</code></td><td>—</td><td>規約の「06. 腎・電解質」形式でない</td></tr>
+</tbody></table></div>
+<h3>15. その後どうなったか（2018年以降）</h3>
+<p>Vault 内のノートで裏が取れるものだけを挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>年</th><th>試験・文献</th><th>IDEAL-ICU に対して何を足したか</th><th>Vaultノート</th></tr></thead>
+<tbody>
+<tr><td>2020</td><td>STARRT-AKI（国際多施設・n=2927）</td><td>KDIGO ステージ2または3で、促進（12時間以内）対 標準（72時間まで待つ）。90日死亡 43.9% 対 43.7%（P=0.92）。中間区間の決着。待機群の透析までの中央値は31時間</td><td><span class="wl">RRT開始タイミングの最適化（AKI・CritCare2021）</span>（独立ノートなし）</td></tr>
+<tr><td>2021</td><td>AKIKI 2（多施設・n=278）</td><td>「遅い 対 もっと遅い」の比較。<strong>待ちすぎには害がある</strong>方向を示し、IDEAL-ICU の「無期限の先送りは推奨しない」という留保を実証した</td><td><span class="wl">腎代替療法の開始タイミング（AKIKI 2, Lancet 2021）</span></td></tr>
+<tr><td>2021</td><td>Bagshaw ら（Crit Care 25:179）</td><td>緊急性の指標がなければ "watch and wait" が許容される、というアルゴリズム化</td><td><span class="wl">RRT開始のタイミング フローチャート（CritCare2021）</span></td></tr>
+<tr><td>2021</td><td>開始タイミングの統合レビュー（Crit Care）</td><td>5試験（ELAIN・AKIKI・IDEAL-ICU・STARRT-AKI・AKIKI 2）を「時間軸のどの区間を比べたか」で読み替え。両端を見た試験は遅延の害を示し、中間を見た3試験は差を示さなかった。待機群の RRT 回避率は3試験で 38〜49%</td><td><span class="wl">RRT開始タイミングの最適化（AKI・CritCare2021）</span></td></tr>
+<tr><td>2022</td><td>AKIKI・IDEAL-ICU 二次解析（Crit Care 26:93）</td><td>本試験の患者を含む543例で初回モダリティ CRRT 対 IHD を比較。IPTW 後の60日死亡は CRRT 54.4% 対 IHD 46.5%、weighted HR 1.26（95%CI 1.01–1.60）</td><td><span class="wl">重症AKIの初回モダリティ CRRT対IHD — CRRTのほうが60日死亡が高い方向、軽症ほど差が大きい（AKIKI・IDEAL-ICU二次解析・IPTW・CritCare2022）</span></td></tr>
+<tr><td>2022</td><td>RRT の最適化レビュー（ICM）</td><td>開始タイミング試験を Table 1 で横並びにして総括</td><td><span class="wl">腎代替療法（RRT）の最適化 レビュー（ICM2022）</span></td></tr>
+<tr><td>2026</td><td>SSC 国際ガイドライン</td><td>推奨93「AKI があるが RRT の確定的適応がない場合は、RRT を行わないことを提案」（conditional・moderate・Carryover）。IDEAL-ICU はこの推奨の根拠試験の一つ</td><td><span class="wl">敗血症・敗血症性ショックの国際ガイドライン2026 — 全129推奨、強い推奨は18だけ（SSC2026・CCM2026）</span></td></tr>
+<tr><td>2026</td><td>JIPAD レジストリの機械学習（CCM）</td><td>「RRT は集団平均では中立でも、患者によって効果が真逆」という異質性の議論へ。IDEAL-ICU の陰性結果を「平均の陰性」として読み直す視点</td><td><span class="wl">RRTの効果は患者によって真逆だった — 機械学習で見えた「効く群」と「害になる群」（JIPADレジストリ・CCM2026）</span></td></tr>
+</tbody></table></div>
+<p>STARRT-AKI と ELAIN は Vault に独立ノートがなく、上記レビューノート内の記述で参照している（<strong>Vault 未収載</strong>）。</p>
+<h3>16. 既存ノートとの整合</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本ノート（IDEAL-ICU）</th><th>既存ノート</th><th>突き合わせ</th></tr></thead>
+<tbody>
+<tr><td>早期開始の是非</td><td>90日死亡に差なし</td><td><span class="wl">CRRTの実際の処方（Bellomo・CritCare2021）</span>：本文は「早期のCRRT開始は転帰を改善しないかもしれない（may not improve outcomes）」の3文のみで、<strong>閾値を一切示さず「臨床判断」に委ねる</strong></td><td>矛盾しない。IDEAL-ICU は Bellomo らが「臨床判断」と書かざるを得ない根拠そのもの。ただし原文は "may not" であり「無効である」とは書いていない点も同じ</td></tr>
+<tr><td>待機群の RRT 回避率</td><td>38%（自然回復は29%）</td><td><span class="wl">RRT開始タイミングの最適化（AKI・CritCare2021）</span>：AKIKI・IDEAL-ICU・STARRT-AKI の待機群で 38〜49% が回避、早期群は10%未満</td><td>一致。本試験の早期群の非施行率は 7/246＝3%で「10%未満」と整合</td></tr>
+<tr><td>緊急基準到達例の死亡</td><td>68%（28/41）</td><td>同上ノート：「IDEAL-ICU では待機群の17%が緊急透析を要してその患者の死亡が高かった。ただし重症度による交絡が強いと留保」</td><td>一致。留保のかけ方も同じ</td></tr>
+<tr><td>「待てば安全」か</td><td>少なくとも48時間の先送りで死亡は増えない。ただし無期限の先送りは著者が明確に否定</td><td><span class="wl">腎代替療法の開始タイミング（AKIKI 2, Lancet 2021）</span>：どこまで遅らせられるかには限界があり、遅らせすぎは有害でありうる</td><td>矛盾しない。IDEAL-ICU が検証したのは「48時間まで」であって、それ以上は AKIKI 2 の領分</td></tr>
+<tr><td>分母の違い</td><td>ITT では死亡差なし。ただし待機群のうち実際に RRT を受けた149例に限れば緊急41例の68%が死亡</td><td><span class="wl">🫘 腎・電解質 Home</span>：「矛盾ではなく分母が違う。ランダム化した全員を分母にすれば差はなく、実際に透析した人だけを見れば延期群が重症に偏る」</td><td>Home の整理と一致。本ノートもこの読み方を採用</td></tr>
+<tr><td>モダリティ</td><td>施設裁量。本文には各群の IHD/CRRT 比率の記載がない（補遺 Table S8）</td><td><span class="wl">重症AKIの初回モダリティ CRRT対IHD — CRRTのほうが60日死亡が高い方向、軽症ほど差が大きい（AKIKI・IDEAL-ICU二次解析・IPTW・CritCare2022）</span>：本試験の患者を含む解析で CRRT 先行のほうが60日死亡が高い方向</td><td>本試験だけではモダリティの影響を評価できない。二次解析に委ねられている</td></tr>
+<tr><td>重炭酸との関係</td><td>待機群の緊急RRT理由の最多は代謝性アシドーシス（20/41）</td><td><span class="wl">重症代謝性アシドーシスの重炭酸補正（BICAR-ICU・Lancet2018）</span>／<span class="wl">重炭酸は「どのRRT開始」を防いだのか — 治療感受性エンドポイントへの異議（Matters Arising・CritCare2026）</span>：重炭酸投与は「アシドーシスを理由とする RRT 開始」を減らしうる</td><td>接続する。IDEAL-ICU の緊急RRT理由の内訳は、重炭酸が介入しうる余地が48%（20/41）あることを示す</td></tr>
+<tr><td>ガイドライン</td><td>—</td><td><span class="wl">敗血症・敗血症性ショックの国際ガイドライン2026 — 全129推奨、強い推奨は18だけ（SSC2026・CCM2026）</span> 推奨93</td><td>本試験は推奨93（確定的適応がなければ RRT を行わないことを提案、conditional・moderate）の直接の根拠</td></tr>
+</tbody></table></div>
+<h3>17. 批判的吟味（JCでの論点）</h3>
+<h4>A. デザイン・検出力</h4>
+<ul><li><strong>無益性で早期中止したが、中止時の条件付き検出力は 51.44%</strong> であった。一般的な無益性の基準は条件付き検出力 10〜20% 程度であり、50%超で止めるのは緩い。計画864例のところ488例（56%）で打ち切っており、<strong>「差がない」ではなく「差を検出できるだけの症例を集めなかった」</strong>という読み方が可能である。</li><li>掲載数値から算出した90日死亡の絶対リスク差の95%信頼区間は −4.9〜＋12.9パーセントポイント（本ノートの計算）。<strong>臨床的に意味のある5ポイント程度の早期戦略の利益は排除されていない</strong>。「差がない」ではなく「10ポイントの差はなさそう」が正確な結論である。</li><li>設計時の仮定（早期45% 対 待機55%、絶対差10ポイント）はそもそも楽観的である。開始タイミングという単一の管理判断で10ポイント動くと想定するのは大きい。</li><li><strong>オープンラベル</strong>。待機群の主治医は「待っている」と知っており、緊急基準の判定（特に「その他の基準」6例）や治療の強度に影響しうる。主要アウトカムが死亡なので判定バイアスは小さいが、介入の適用にはバイアスが入る。</li></ul>
+<h4>B. 外的妥当性</h4>
+<ul><li><strong>除外1240例のうち340例（27%）が「既に緊急RRTを受けた」ことによる除外</strong>である。つまり本試験の結論は「緊急適応がまだ出ていない患者」にのみ適用される。実臨床で最も判断に迷う「今にも緊急適応が出そうな患者」は除外されていない一方、既に出た患者は最初から対象外である。</li><li>336例（27%）が他の死亡アウトカム試験に登録中で除外されている。研究の盛んな施設で行われた試験であることの反映で、集団の代表性に影響しうる。</li><li>112例が DNR、107例が瀕死で除外。治療制限のある患者は含まれていない。</li><li><strong>フランス29施設のみ</strong>。透析処方・看護体制・モダリティ選好は国によって大きく異なる。フランスは ICU 看護師が IHD を回す体制で、日本とは前提が違う。</li><li>全例が敗血症性ショック＋SOFA 12点台という極めて重症な集団で、死亡55%。より軽症の敗血症関連AKIへの外挿はできない。</li></ul>
+<h4>C. 原著の内的不整合（本ノートで検算した）</h4>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>不整合</th></tr></thead>
+<tbody>
+<tr><td>高カリウム血症の例数</td><td>本文 Safety の段落は「9 patients (4%) in the delayed-strategy group had severe hyperkalemia」と書くが、Table 3 は 10（4%）である。9 は Table 2 の「緊急RRT基準としての高カリウム血症」の数であり、本文が2つの表の数字を取り違えている</td></tr>
+<tr><td>調整変数</td><td>Statistical Analysis は「慢性腎不全の有無と、無作為化前24時間のヒドロキシエチルデンプン曝露」で調整すると書くが、Results は「慢性腎不全と腎毒性薬剤曝露」で調整したと書く。Table 1 が報告するのは「無作為化前4日以内の腎毒性薬剤曝露」で、曝露の中身も観察窓も一致しない</td></tr>
+<tr><td>「その他の基準」の定義</td><td>Table 2 脚注 ‡ は「アシドーシスと高カリウム血症が閾値未満のまま臨床状態が悪化し、高乳酸血症を伴い、主治医が緊急RRTが必要と判断したもの」と書き、同じ表の脚注 § は「多臓器不全の増悪で SOFA が2点以上上昇したもの」と書く。同一カテゴリに2つの異なる定義が併記されている</td></tr>
+<tr><td>ベースラインの有意差</td><td>Table 1 の表題脚注は「ベースライン特性に有意な群間差はなかった」とするが、ECMO は 1（&lt;1%）対 9（4%）で、本ノートの Fisher 正確検定では P≈0.010 である。本文はこの項目に言及していない</td></tr>
+<tr><td>Table 3 のP値</td><td>掲載数値から2群比較を再現できない行がある。重症心リズム障害 23（10%）対 13（5%）で掲載P=0.77（本ノートの計算では χ² で P≈0.09、Fisher で P≈0.12）。代謝性アシドーシス 22（9%）対 40（17%）で掲載P=0.07（同 P≈0.012〜0.014）。体液過剰 1 対 9 で掲載P=0.16（同 P≈0.010）。高カリウム血症 0 対 10 で掲載P=0.03（同 P≈0.001）。<strong>検定法の明示がなく、掲載された分子・分母からは再現できない</strong></td></tr>
+<tr><td>緊急RRT率の分子</td><td>抄録は「緊急RRT基準を満たしたのは待機群の17%（41例）」とするが、Table 2 脚注 § は41例のうち6例の根拠が<strong>事前規定基準ではない</strong>と明記している。事前規定基準に限れば 35/242＝14.5%</td></tr>
+<tr><td>Figure 1 の死亡数と Table 2 の死亡数</td><td>Figure 1 の早期群は 134＋2＋1＝137、待機群は 28＋59＋21＝108（自然回復70例の死亡は図に記載なし）。Table 2 の90日死亡は 138 と 128。図の死亡ボックスの集計時点・対象が本文に定義されていないため、両者を突き合わせられない</td></tr>
+</tbody></table></div>
+<h4>D. 解釈上の注意</h4>
+<ul><li><strong>RRTフリー日数が長いことを利益と読まない</strong>。死亡例に0日を割り当てる指標であり、死亡率が同等なら「透析を使わなかった日数」を反映するにすぎない。しかも主要アウトカム陰性のため探索的である。</li><li><strong>「38%が透析を回避した」の分子に注意</strong>。93例のうち21例（8%）は透析開始前の死亡であり、回避ではない。回避と呼べるのは自然回復の70例（29%）だけである。</li><li><strong>緊急基準到達群の68%死亡を「待たせた害」と読まない</strong>。著者自身が重症度交絡の可能性を明示している。この数字は「緊急基準に至った患者は予後が悪い」という予後情報であって、治療効果の推定ではない。</li><li><strong>本試験は RRT のモダリティ・用量・抗凝固を統制していない</strong>。施設裁量で、各群の内訳は本体PDFに記載がない。したがって「開始タイミング」以外の要素が群間で偏っていた可能性を本文だけでは否定できない。</li></ul>
+<h4>E. 本文に無いもの（読者が探すが見つからない項目）</h4>
+<ul><li><strong>主要アウトカムの効果推定値と95%信頼区間</strong>。P値のみで、リスク差・リスク比・オッズ比のいずれも掲載されていない。調整解析の結果も「変わらなかった」という記述だけで数値がない。</li><li><strong>事前規定サブグループ解析</strong>。年齢・SOFA・乏尿型 対 クレアチニン型・慢性腎不全の有無などによる層別解析が本文に無い。</li><li><strong>カテーテル関連血流感染の独立した報告</strong>。</li><li><strong>各群の IHD／CRRT の比率と処方の詳細</strong>（補遺 Table S8 に委ねられている）。</li><li><strong>待機群で48時間を待って開始した108例の、開始時点の生化学値</strong>（補遺 Table S6）。</li><li><strong>費用・医療資源の解析</strong>。RRT 回避が38%あるにもかかわらず、コストの評価はない。</li></ul>
+<h4>F. COIと資金源</h4>
+<p>フランス保健省の公的助成（PHRC National, A00519-34）による医師主導試験で、<strong>商業的支援はない</strong>と明記されている。開示された COI は Jaber（Dräger Medical・Fisher and Paykel・Xenios のコンサルティング料）と Roger（MSD・Pfizer の旅費支援）の2名のみで、いずれも人工呼吸器・呼吸療法・抗菌薬領域であり、<strong>本試験の主題である透析装置・膜・透析液のメーカーとは重ならない</strong>。企業側の利害は「早期開始が有利」に働くはずだが、本試験は透析を減らす方向の結果を出しており、資金源による方向性のバイアスは考えにくい。</p>
+<p>一方、Dreyfuss・Gaudry ら AKIKI グループとは著者が重複し（二次解析論文で共著）、AKIKI と同じ「待機支持」の方向に結果が出ている。フランス集中治療コミュニティ内での方法論の同質性は、5試験を横並びに見るときに頭に置いておく価値がある。</p>
+<h3>18. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ICU における AKI の疫学（多国籍 AKI-EPI 研究）</td><td>Hoste EA, Bagshaw SM, Bellomo R, et al. Intensive Care Med 2015;41:1411-23</td></tr>
+<tr><td>2</td><td>国際腎臓学会 0by25 イニシアチブ</td><td>Mehta RL, Cerdá J, Burdmann EA, et al. Lancet 2015;385:2616-43</td></tr>
+<tr><td>3</td><td>フランス ICU の敗血症性ショック疫学（EPISS 前向き多施設コホート）</td><td>Quenot JP, Binquet C, Kara F, et al. Crit Care 2013;17:R65</td></tr>
+<tr><td>4</td><td>早期 AKI と敗血症の多施設評価</td><td>Bagshaw SM, George C, Bellomo R. Crit Care 2008;12:R47</td></tr>
+<tr><td>5</td><td>CRRT の強度（RENAL 試験）</td><td>RENAL Replacement Therapy Study Investigators. N Engl J Med 2009;361:1627-38</td></tr>
+<tr><td>6</td><td>AKI に対する腎支持の強度（ATN 試験）</td><td>VA/NIH Acute Renal Failure Trial Network. N Engl J Med 2008;359:7-20</td></tr>
+<tr><td>7</td><td>重症患者の急性腎不全（多国籍・多施設研究）</td><td>Uchino S, Kellum JA, Bellomo R, et al. JAMA 2005;294:813-8</td></tr>
+<tr><td>8</td><td>敗血症と AKI の有害なクロストーク</td><td>Dellepiane S, Marengo M, Cantaluppi V. Crit Care 2016;20:61</td></tr>
+<tr><td>9</td><td>敗血症における AKI</td><td>Bellomo R, Kellum JA, Ronco C, et al. Intensive Care Med 2017;43:816-28</td></tr>
+<tr><td>10</td><td>重症敗血症初期の CVVH が臓器不全に与える影響（RCT）</td><td>Payen D, Mateo J, Cavaillon JM, et al. Crit Care Med 2009;37:803-10</td></tr>
+<tr><td>11</td><td>敗血症性ショックの乏尿患者への早期等容量血液濾過</td><td>Piccinni P, Dan M, Barbacini S, et al. Intensive Care Med 2006;32:80-6</td></tr>
+<tr><td>12</td><td><strong>AKIKI</strong>：ICU における RRT の開始戦略</td><td>Gaudry S, Hajage D, Schortgen F, et al. N Engl J Med 2016;375:122-33</td></tr>
+<tr><td>13</td><td><strong>ELAIN</strong>：早期対遅延 RRT の死亡への影響（単施設 RCT）</td><td>Zarbock A, Kellum JA, Schmidt C, et al. JAMA 2016;315:2190-9</td></tr>
+<tr><td>14</td><td>本試験のプロトコル論文</td><td>Barbar SD, Binquet C, Monchi M, Bruyère R, Quenot JP. Trials 2014;15:270</td></tr>
+<tr><td>15</td><td>RIFLE 分類の原典（ADQI）</td><td>Bellomo R, Ronco C, Kellum JA, Mehta RL, Palevsky P. Crit Care 2004;8:R204-R212</td></tr>
+<tr><td>16</td><td>SOFA スコアの原典</td><td>Vincent JL, Moreno R, Takala J, et al. Intensive Care Med 1996;22:707-10</td></tr>
+<tr><td>17</td><td>ICU 患者の急性腎不全の予防と管理（ATS/ERS/ESICM/SCCM/SRLF 公式声明）</td><td>Brochard L, Abroug F, Brenner M, et al. Am J Respir Crit Care Med 2010;181:1128-55</td></tr>
+<tr><td>18</td><td>KDIGO AKI 診療ガイドライン</td><td>KDIGO AKI Work Group. Kidney Int Suppl 2012;2:1-138</td></tr>
+<tr><td>19</td><td>中間解析の有意水準（Peto 法）</td><td>Peto R, Pike MC, Armitage P, et al. Br J Cancer 1976;34:585-612</td></tr>
+<tr><td>20</td><td>AKIKI の敗血症性ショック・ARDS 事後解析</td><td>Gaudry S, Hajage D, Schortgen F, et al. Am J Respir Crit Care Med 2018;198:58-66</td></tr>
+<tr><td>21</td><td>AKI における RRT 開始時期は本当に早いほうがよいのか</td><td>Wald R, Bagshaw SM. Crit Care Med 2014;42:1933-4</td></tr>
+<tr><td>22</td><td>AKI における標準的開始と促進的開始の比較</td><td>Wald R, Adhikari NK, Smith OM, et al. Kidney Int 2015;88:897-904</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 敗血症性ショック＋RIFLE failure の AKI で、<mark class="hl">高カリウム血症・アシドーシス・利尿薬抵抗性の肺水腫がなければ、透析を12時間以内に始める理由はない</mark>（90日死亡 58% 対 54%、P=0.38）。 <mark class="hl">「待つ」とは48時間の高頻度監視のことであり、放置ではない</mark>。待機群の17%が48時間を待たずに緊急透析に至り、その68%が死亡している。 <mark class="hl">待てば29%は腎機能が自然回復して透析を受けずに済む</mark>。ただしこれは無作為化比較ではなく待機群の記述統計であり、「早期開始に利益なし」（因果の主張）とは根拠の強さが違う。 この試験は無益性で早期中止されており、<mark class="hl">「差がない」ではなく「10ポイントの差はなさそう」が正確</mark>。90日死亡の絶対差の95%信頼区間は −4.9〜＋12.9パーセントポイント（本ノートの算出）で、5ポイント程度の早期戦略の利益はまだ排除されていない。 <mark class="hl">無期限の先送りは著者自身が明確に否定している</mark>。48時間より先は AKIKI 2 の領分である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

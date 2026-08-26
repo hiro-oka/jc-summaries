@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症性ショック蘇生の現状と進化する概念（レビュー・ICM2021）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-021-06595-9.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症性ショック蘇生の現状と進化する概念（レビュー・ICM2021）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Bakker J, Kattan E, Annane D, Castro R, Cecconi M, De Backer D, Dubin A, Evans L, Gong MN, Hamzaoui O, Ince C, Levy B, Monnet X, Ospina Tascón GA, Ostermann M, Pinsky MR, Russell JA, Saugel B, Scheeren TWL, Teboul JL, Vieillard Baron A, Vincent JL, Zampieri FG, Hernandez G. Current practice and evolving concepts in septic shock resuscitation. Intensive Care Med. 2021. doi:10.1007/s00134-021-06595-9</dd><dt>掲載誌</dt><dd>Intensive Care Med（2021-12-15）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-021-06595-9" target="_blank" rel="noopener">doi.org/10.1007/s00134-021-06595-9</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Current practice and evolving concepts in septic shock resuscitation</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-021-06595-9.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-021-06595-9.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-021-06595-9.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li>「現在の標準」と「著者の提案」を分けて運用する。 本稿で SSC ガイドライン由来の記述は ①ノルアドレナリン第一選択、②MAP 65 mmHg を初期の下限介入閾値とする、③認知後3時間以内に 30 mL/kg 以上、④輸液後も組織灌流異常が残るときのドブタミン、⑤ノルアドレナリン 0.25〜0.5 µg/kg/分でバソプレシン追加、の5点だけ。それ以外（昇圧薬テスト、イノダイレーターテスト、Eadyn による離脱、拡張期ショック指数、微小循環目標）は<strong>著者の提案であり、ガイドラインには入っていない</strong>と本文が明記している。当院プロトコルに書き込むなら前者、カンファで議論するなら後者。</li><li>乳酸を「輸液を追加する引き金」として使わない。 本稿の Table 1 は乳酸の問題点として「非低酸素性の原因が臨床では優勢になりうる」「回復動態が遅い」「輸液ボーラスのような即効性の介入への反応判定には使えない」「輸液投与のトリガーとして誤用されがち」を挙げる。乳酸が下がらないという理由だけで輸液を足す運用は、著者らの立場では明確に誤用。</li><li>CRT（毛細血管再充満時間）を蘇生の目標指標として当直帯に導入するなら「補助指標」から。 本稿は CRT を Fig.1 で "Evolving Concepts"（進化する概念）側に置いており、現行標準ではない。SSC 2021 が採用したのは「他の組織灌流指標に加えて」という位置づけ。当院での第一歩は、測定手技の標準化（誰が・どの指で・何秒圧迫し・何秒で判定するか）を先に決めること。本稿自身が「評価者間のばらつき」「最適カットオフ値の議論」を未解決問題として挙げている。</li><li>難治性ショックと判断する前に Table 3 の9因子を全部つぶす。 中枢温 39℃超／80歳超／薬剤／pH 7.20未満／高血糖／低Ca血症／CIRCI・副腎不全／バソプレシン欠乏／チアミン・ビタミンC欠乏。<mark class="hl">チェックリスト化して昇圧薬 0.25 µg/kg/分を超えた時点で回す</mark>のが実務的。</li><li>難治性ショックの診断には必ず心エコーを添える。 本稿は「高用量昇圧薬による左室流出路（LVOT）閉塞」を、昇圧薬反応性低下と取り違えてはならない合併症として名指ししている。増量ではなく減量が正解になる場面。</li><li>早期・同時の昇圧薬開始は「輸液量・低血圧持続時間・肺水腫・新規不整脈」を減らす目的で考える。死亡を減らす目的では正当化しない。 本稿は RCT（CENSER）で死亡は減らなかったこと、観察研究を含む系統的レビューでのみ短期死亡低下が示されたことを両方書いている。</li><li>血液浄化（PMX 含む）を「難治性だから」で始めない。 Table 4 が挙げる RCT はすべて陰性か早期中止。当院で使うなら適応と評価項目を事前に決めた上で。</li><li>本稿では ScvO₂ の位置づけが「灌流そのものより代謝ストレスを表す」に格下げされている。 目標値として単独で追わない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：敗血症性ショックの病態理解と治療は数十年で大きく進み、関連する罹病率・死亡率は着実に低下してきた。血行動態蘇生の3本柱（輸液・昇圧薬・強心薬）については大規模 RCT が繰り返し行われてきた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：それらの RCT のうち、生存に有意な効果を示した介入は<strong>ひとつもない</strong>（本文の第1段落の主張）。モニタリング機器も、それ自体では転帰を変えない。「では何を目標に、いつ、どれだけ介入するのか」は各領域で未解決のまま残った。</li><li><strong>What's new（本研究の新規性・意義）</strong>：ARDS 領域の同型レビュー（Menk ら, ICM 2020）に対応する敗血症性ショック版として、①現行標準、②各領域で立ち上がりつつある概念、③残された問い、を<strong>同じ枠組みで並べて整理</strong>した点。とくに Table 1 は、血行動態・灌流の各指標について「現行の使い方／問題点／進化しつつある概念／残る課題」の4列を対応させた一覧になっており、モニタリング教育の下敷きに使える。新しいデータを出す論文ではなく、<mark class="hl">研究アジェンダを提示する論文</mark>。</li><li><strong>本稿が明示的に否定していること</strong>：β遮断薬、メチレンブルー、テルリプレシン、セレプレシンはいずれも「現時点では推奨できない／承認されていない」。血液浄化療法の臨床的有益性も「controversial」。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症性ショック蘇生の柱（輸液・昇圧薬・強心薬）は総論としては変わっていないが、どの目標を追い、いつ介入するかは「固定値」から「個別化と反応性のテスト」へ移りつつある。ただし本稿が挙げる新しい概念は、そのほぼ全てが転帰改善を示せておらず、著者ら自身が「強い推奨はできない」と結論している。</p>
+</div>
+<ul><li><strong>本稿の構造</strong>：Current practice（現行標準）→ Evolving concepts（進化する概念）を、①蘇生目標、②輸液、③昇圧薬、④強心薬、⑤難治性ショック、の5領域で対比する。全体像は Fig.1、モニタリング指標ごとの詳細は Table 1。</li><li><strong>現行標準（SSC 2021 準拠）</strong>：ノルアドレナリンが第一選択。MAP 65 mmHg が初期の下限介入閾値（その後は個別目標）。認知後ただちに蘇生を開始し3時間以内に 30 mL/kg 以上。輸液後も組織灌流異常が残ればドブタミン。ノルアドレナリン 0.25〜0.5 µg/kg/分でバソプレシンを追加。</li><li><strong>30 mL/kg の根拠は観察研究のみ</strong>であり、著者らは「controversial（議論がある）」と明記している。良好な臨床・血行動態反応を示す患者では投与継続が必要なこともあり、個別化が要る。</li><li><strong>輸液反応者は初期でも 50〜60% にとどまる</strong>。初期輸液後には 25% が既に輸液不応。すなわち相当数で過剰治療（＝害）が起こりうる。</li><li><strong>蘇生目標の新顔は「末梢灌流」と「舌下微小循環」</strong>。CRT については ANDROMEDA-SHOCK で CRT 目標群の死亡が 34.9% vs 43.4%（p = 0.06）と報告され、その後のベイズ解析が支持した。SSC 2021 も他の組織灌流指標に加えて CRT を採用した。</li><li><strong>乳酸への著者の立場</strong>：有効性を示した試験（Jansen 2010）はあるが、乳酸と血圧を目標にすることの複雑さが近年強調されており、<strong>このアプローチ全体に個別化が必要</strong>。Table 1 では乳酸の由来が多岐にわたること、非低酸素性の原因が臨床では優勢になりうること、回復動態が遅いこと、輸液投与のトリガーとして誤用されがちなことを問題点として列挙している。</li><li><strong>輸液の新概念</strong>：バランス晶質液（低クロール）、SOSD 4相概念、制限的輸液、エコーによる輸液過剰の予防、過剰輸液の早期是正。ただし除水の実施方法についてはガイドラインが存在しない。</li><li><strong>昇圧薬の新概念</strong>：早期のノルアドレナリン、拡張期ショック指数（DAP/心拍数）、心室動脈カップリング（Ea/Ees）と動的動脈エラスタンス（Eadyn＝PPV/SVV）、<strong>昇圧薬テスト</strong>（MAP を一過性に上げて組織灌流の反応を見る）、バソプレシン類縁体、その他の昇圧薬（アンジオテンシンII、メチレンブルー）。</li><li><strong>強心薬の新概念</strong>：<strong>イノダイレーターテスト</strong>（ドブタミン 5 µg/kg/分を限られた時間投与し、目標指標の反応を見て継続を判断）、敗血症性心筋症へのドブタミンの位置づけ、代替強心薬、アドレナリン応答の調節（デクスメデトミジン・β遮断薬）。</li><li><strong>難治性ショック</strong>：ノルアドレナリン 0.25 µg/kg/分を超えて投与しながら、低容量血症がないのに低血圧と低灌流が持続する状態。誘因は Table 3 の9因子。血液浄化（Table 4）は RCT がことごとく陰性。VA-ECMO は LVEF が非常に低い例で有益な可能性。</li><li><strong>結論</strong>：血行動態蘇生の柱は総じて変わっていないが、輸液と血管作動薬の使い方には新しい情報がある。あらゆる領域で確固たるエビデンスが欠けていることが懸念であり、ほとんどの介入について強い推奨はできない。個別化と表現型分類に焦点を当てた広範な研究アジェンダが不可欠。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 敗血症性ショックの循環の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 敗血症性ショックとは何が起きている状態か。 本稿の記述をそのまま追うと次のようになる。感染に対する自然免疫応答でメディエーターが放出され、<strong>血管麻痺（vasoplegia）による血管拡張</strong>が生じ、血流の分布が異常になる。その結果、微小血管が障害され、組織への酸素供給が足りなくなり、細胞代謝が異常になる。</p>
+<p>なぜ静脈還流（venous return）が減るのか。 本稿は複数の機序を挙げる。最も重要なのは<strong>血液の静脈プーリング</strong>（静脈系に血液が溜まって心臓に戻ってこない）で、これに病初期の摂取不足や喪失増加が重なる。さらに<strong>内皮障害による間質へのキャピラリーリーク</strong>が加わって静脈還流をさらに悪化させ、大循環の灌流を落とす。加えて<strong>心機能障害</strong>（敗血症性の心筋抑制、肺高血圧、最重症例では心筋灌流低下）が血行動態をさらに損なう。</p>
+<p><strong>ベッドサイドで見えるショックの臨床像</strong>は3つの混合として現れる。①低血圧（通常は昇圧薬を要する）、②組織灌流の異常（皮膚灌流の異常、意識変容、尿量低下）、③乳酸上昇。これらが消えることがショック離脱を意味するので、<strong>そのまま蘇生の到達目標（endpoint）として使える</strong>、というのが本稿の出発点。</p>
+<p><strong>用語の一言定義（初出のもの）</strong></p>
+<ul><li><strong>MAP（mean arterial pressure）</strong>：平均動脈圧。臓器灌流圧の代理指標。</li><li><strong>DAP（diastolic arterial pressure）</strong>：拡張期動脈圧。血管緊張（vasomotor tone）を反映しやすい。低ければ血管拡張が強いことを示唆する。</li><li><strong>CO（cardiac output）</strong>：心拍出量。</li><li><strong>CRT（capillary refill time）</strong>：毛細血管再充満時間。爪床などを圧迫して解除し、色が戻るまでの秒数。末梢灌流と交感神経緊張（hyperadrenergia）の指標。</li><li><strong>CVP（central venous pressure）</strong>：中心静脈圧。本稿は「輸液蘇生のガイドとして誤用されることが多い」と明記。</li><li><strong>PPV / SVV</strong>：脈圧変動／一回拍出量変動。人工呼吸下で輸液反応性を予測する動的指標。</li><li><strong>PLR（passive leg raising）</strong>：受動的下肢挙上。下肢の血液を中枢へ移して「可逆的な輸液負荷」を作るテスト。</li><li><strong>ScvO₂</strong>：中心静脈血酸素飽和度。酸素供給（DO₂）と酸素消費（VO₂）の関係の指標。</li><li><strong>Pv-aCO₂</strong>：中心静脈血と動脈血の二酸化炭素分圧較差。全身血流の間接指標。</li><li><strong>Ea / Ees / Eadyn</strong>：動脈エラスタンス／収縮末期エラスタンス／動的動脈エラスタンス（PPV と SVV の比）。心臓とその後負荷（血管系）の噛み合わせを表す。</li><li><strong>VAC（ventriculo-arterial coupling）</strong>：心室動脈カップリング。Ea/Ees 比で評価する。</li><li>tRBCp（tissue red blood cell perfusion）：組織赤血球灌流。微小循環の拡散能と対流能を合成した新しい指標。</li><li><strong>SOSD</strong>：Salvage（救命）／Optimization（最適化）／Stabilization（安定化）／De-escalation（離脱）。ショック蘇生の4相モデル。</li><li><strong>CIRCI</strong>：重症疾患関連コルチコステロイド不全。</li></ul>
+<p>※ここまでの用語定義のうち、略語の展開は本稿の Abbreviations 欄と Table 1 脚注に基づく。生理学的な補足説明（静脈プーリングのイメージなど）は本稿の記述の範囲内で言い換えたもので、本稿にない機序は足していない。</p>
+</div>
+<h3>2. 背景と目的 — なぜ「現状」と「進化する概念」を並べるのか 🎯</h3>
+<p>本稿は冒頭で、ARDS 領域の同型レビュー（Menk ら, Intensive Care Med 2020）を引き合いに出す。ARDS では「人工呼吸器関連肺傷害を避けるための単純なルール」を推奨できる。ところが敗血症性ショックでは、<strong>ケアのほぼあらゆる側面で確固たるエビデンスが欠けている</strong>。</p>
+<p>本稿の主張は3段構えになっている。</p>
+<ol><li>血行動態蘇生の柱（輸液・昇圧薬・強心薬）の適切な使い方と位置づけについて、複数の RCT が行われてきた。しかし<strong>生存に有意な効果を示した介入はひとつもなかった</strong>（引用は Vincent JL, Joosten A, Saugel B. Hemodynamic monitoring and support. Crit Care Med 2021）。</li><li>モニタリング機器も同様である。機器そのものは転帰を変えられない。その有効性は、臨床的に意味のある異常に対処する適切なプロトコルの下で正しく使われるかどうかに依存する。</li><li>新しい昇圧薬・強心薬の役割はなお不確実だが、輸液蘇生の新概念はゆっくりと導入されつつある。</li></ol>
+<p>そこで本稿は、モニタリング機器を含む敗血症性ショック蘇生の各領域について、現行実践を土台に、モニタリングと管理の進化しつつある概念に重点を置いた更新を提供する、と目的を述べる。全体像は Fig.1 に集約されている。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-021-06595-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-021-06595-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Current practices and evolving concepts in septic shock resuscitation（原図・無改変。© Springer-Verlag GmbH Germany） 左（緑）に「Current Practices」、右（青）に「Evolving Concepts」の見出しボックスを置き、中央の白い小ボックス（Resuscitation targets / Fluids / Vasopressors / Inodilators）を挟んで左右に両向き矢印が伸びる構成。4行それぞれが1領域に対応する。<mark class="hl">左が「今やっていること」、右が「これから」であり、CRT・微小循環・SOSD・早期昇圧薬・各種テストはすべて右側＝まだ標準ではない</mark>という読み方が図の要点。</p>
+</div>
+<h4>Figure 1 の全ボックスを表に起こす（原図の文言をそのまま日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>領域（中央ボックス）</th><th>Current Practices（左・緑）</th><th>Evolving Concepts（右・青）</th></tr></thead>
+<tbody>
+<tr><td>Resuscitation targets（蘇生目標）</td><td>臨床的な大循環（マクロ血行動態）の目標／蘇生の到達点としての乳酸</td><td>末梢灌流／舌下微小循環</td></tr>
+<tr><td>Fluids（輸液）</td><td>標準的な初期輸液蘇生／輸液反応性の評価</td><td>バランス晶質液の使用／SOSD 概念／制限的輸液蘇生／輸液過剰を予防するためのエコー指標／輸液過剰の早期是正</td></tr>
+<tr><td>Vasopressors（昇圧薬）</td><td>MAP を操作するためのノルアドレナリン</td><td>ノルアドレナリンの早期使用／ノルアドレナリン治療を導くための V-A カップリングの利用／MAP を最適化するための昇圧薬テストの使用／バソプレシン類縁体の使用／その他の昇圧薬の使用</td></tr>
+<tr><td>Inodilators（イノダイレーター）</td><td>組織灌流を改善するためのドブタミン</td><td>組織灌流を最適化するためのイノダイレーターテストの使用／敗血症性心筋症治療におけるドブタミンの役割／代替強心薬の使用／アドレナリン応答の調節</td></tr>
+</tbody></table></div>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（narrative review）。</li><li><strong>系統的検索なし</strong>：文献の検索式・選択基準・除外基準・PRISMA フローは一切示されていない。</li><li><strong>エビデンス評価の枠組みなし</strong>：GRADE などの確実性評価は行われていない。推奨の強さも付されていない。</li><li><strong>コンセンサス手続きなし</strong>：デルファイ法などの合意形成過程は記載がない。「GH, JB, EK, DDB が原稿を構想し、24名の著者が各パートを執筆・批判的改訂・最終承認した」という Author contributions の記載のみ。</li><li><strong>対象</strong>：成人の敗血症性ショック。小児は扱っていない。</li><li><strong>アウトカム</strong>：転帰指標を定量的に統合していない（メタ解析ではない）。引用試験の効果量は本文中に散発的に示されるのみ。</li><li><strong>資金</strong>：非資金研究（"This is a non-funded article."）。</li><li><strong>利益相反</strong>：24名中19名が COI なしと申告。Saugel（Edwards Lifesciences、Pulsion、CNSystems、Philips、GE Healthcare、Vygon、Retia Medical、Tensys Medical）、Ince（LaJolla Pharmaceuticals、Cytosorbents Europe。舌下微小循環用ハンドヘルド顕微鏡に関わる Active Medical BV の Chief Scientific Officer 兼株主）、Zampieri（Bactiguard、Ionis。BaSICS 試験の主任研究者で Baxter Hospitalar から物流支援）、Vieillard-Baron（GSK、Air Liquide）、Levy（Novartis、Abiomed、Amomed、Orion、Getinge）、Cecconi（Edwards Lifesciences、Directed Systems）が申告あり。</li><li><strong>補足資料</strong>：オンライン版に supplementary material があると記載されている（本 PDF には含まれない）。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント（本稿の「方法」に由来する限界） <mark class="hl">本稿は系統的レビューでもガイドラインでもない。数値目標や閾値をそのまま院内プロトコルに転記しない。</mark> 本文中の数値には、①SSC ガイドライン由来（MAP 65、30 mL/kg、バソプレシン 0.25〜0.5 µg/kg/分）、②単一試験由来（CRT 34.9% vs 43.4%、ドブタミン奏効 18%、MAP 80〜85）、③著者の提案（ドブタミン 5 µg/kg/分のテスト用量）、④他レビューからの引用（難治性ショックの 0.25 µg/kg/分）が混在しており、根拠の強さが4段階ほど違うものが同じ文章の中に並んでいる。</p>
+</div>
+<h3>4. 現行標準 ① 臨床的な蘇生目標 🎯</h3>
+<p>現行実践は不均一ではあるが、おおむね SSC ガイドラインに従っており、これは<strong>とくに救急外来で顕著</strong>、と本稿は述べる。</p>
+<p>ショックの臨床像は前掲のとおり「低血圧＋組織灌流異常＋乳酸上昇」の混合として現れ、これらの消退がショック離脱を示すので蘇生の到達点として使える。</p>
+<p><strong>乳酸について著者らが書いていること（原文のニュアンスを保つ）</strong>：</p>
+<ul><li>「乳酸に基づく蘇生は有効であることが示されている（Jansen 2010, AJRCCM）」——ここは肯定。</li><li>「しかし、乳酸値と血圧を目標に用いることの複雑さが近年強調されており、この一般的アプローチには個別化が必要である」——引用は Hernandez・Bellomo・Bakker「The ten pitfalls of lactate clearance in sepsis」（ICM 2019）、Vincent「How I treat septic shock」（ICM 2018）、Vincent ら「Equilibrating SSC guidelines with individualized care」（Crit Care 2021）。</li><li>Table 1 の「Problems/drawbacks」欄では、乳酸について次の5点が並ぶ。<strong>由来が複数ある</strong>／<strong>非低酸素性の原因が臨床実践では優勢になりうる</strong>／<strong>回復の動態が遅い</strong>／<strong>輸液ボーラスのような即効性の介入への反応評価には有用でない</strong>／<strong>輸液投与のトリガーとして誤用されることが多い</strong>。</li></ul>
+<p>つまり本稿における乳酸の位置づけは、「組織低灌流の直接指標」ではなく「複数の由来を持つ代謝の産物であり、単独では低灌流を意味しない指標」である。ただし著者らは乳酸を捨てていない。後述の昇圧薬テストでは、末梢灌流（1時間後）と並んで<strong>乳酸（2時間後）</strong>が反応判定の指標として使われている。</p>
+<h3>5. 現行標準 ② 初期輸液蘇生と輸液反応性 💧</h3>
+<p><strong>輸液が効く理屈</strong>：敗血症性ショックにおける輸液蘇生は、静脈還流を増やし、それによって CO と酸素運搬を増やす有効な介入である。</p>
+<p><strong>鍵は「量とタイミングの適切さ」＋「結果のモニタリング」</strong>の組み合わせで、輸液過剰を防ぐことにある。ショック状態での輸液の目的は組織低灌流の是正なので、<strong>タイミングが決定的</strong>。</p>
+<p><strong>SSC ガイドラインの記述</strong>：成人では認知した時点で直ちに蘇生を開始することを推奨し、認知から3時間以内に少なくとも 30 mL/kg を投与することを提案している。</p>
+<p>しかし本稿は 30 mL/kg にただちに留保をつける。</p>
+<ul><li>この推奨用量は<strong>観察エビデンスのみに基づく</strong>。</li><li><strong>議論がある（controversial）</strong>。良好な臨床的・血行動態的反応を示す患者では輸液の継続投与が必要なこともあり、個別化が求められる。</li></ul>
+<p><strong>輸液反応性の疫学（本稿の数値をそのまま）</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>割合</th><th>出典の性格</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショック初期に輸液反応者である患者</td><td>50〜60%</td><td>Toscani ら（Crit Care 2017, SR/メタ解析）、Guarracino ら（Crit Care 2020）</td></tr>
+<tr><td>初期輸液蘇生後に既に輸液不応となっている患者</td><td>25%</td><td>ANDROMEDA-SHOCK（Hernandez ら, JAMA 2019）</td></tr>
+<tr><td>輸液反応性の評価が実施可能だった患者</td><td>80%超</td><td>ANDROMEDA-SHOCK</td></tr>
+</tbody></table></div>
+<p>→ 著者らの結論は「<strong>相当数の患者で過剰治療（すなわち害の可能性）が起こりうる</strong>」。</p>
+<p><strong>輸液反応性を評価しなくてよい場面</strong>：低容量血症と静脈還流低下が明らかな場合（例：出血）はテスト不要。また、輸液不応に達したことは「輸液蘇生の到達点」ではなく「輸液使用の絶対的な停止点」として使う、という区別が明示されている。</p>
+<h4>輸液反応性を評価する3つのアプローチ（本稿の分類）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>アプローチ</th><th>具体的な方法</th><th>本稿が付した限界</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>実際に系に負荷をかける</td><td>短時間で一定量の輸液を投与し、CO と組織灌流をモニタリングする（fluid challenge）</td><td>過剰輸液のリスク（Table 1）</td></tr>
+<tr><td>2</td><td>物理的・機械的介入で静脈還流を「リクルート」する</td><td>PLR、呼気終末閉塞（end-expiratory hold）、人工呼吸患者での一回換気量の増加（6〜8 mL/kg）、より連続的には SVV・PPV</td><td>いずれも適切な文脈では有用だが限界がある。PPV/SVV は多くの ICU 患者では使えない。PLR は熟練を要し連続 CO モニタリングが必要</td></tr>
+<tr><td>3</td><td>心エコー由来の大血管径変動</td><td>上大静脈（SVC）の変動。下大静脈（IVC）と比べて信頼性が高く限界が少ない</td><td>より侵襲的な経食道心エコーを要する</td></tr>
+</tbody></table></div>
+<p><strong>輸液の効果は速やかに消退しうる</strong>（Roger ら, FCREV study, Crit Care 2019）ため、輸液蘇生の有効性を判定する指標は<strong>綿密にモニタリングし続ける必要がある</strong>。</p>
+<p>逆に、血行動態が安定した患者における輸液不応の診断は、安全に除水を始めるための材料として使える（Monnet ら, Ann Intensive Care 2016：除水を導く PLR テスト）。</p>
+<h3>6. 現行標準 ③ 血管作動薬の使用 💉</h3>
+<h4>6-1. ノルアドレナリン</h4>
+<p>現時点の第一選択昇圧薬。本稿は作用を MAP 上昇だけに限定していない。β1 アドレナリン作用と静脈還流の増加が相まって、CO と組織灌流を増やしうる、という書き方をしている。</p>
+<h4>6-2. ドブタミン</h4>
+<p>急性期患者における<strong>基準となる強心薬</strong>。理由として、臨床反応が明確であること、作用発現・消失の動態が良好であることを挙げる。</p>
+<ul><li>限られた用量のドブタミンは、<strong>動脈圧に大きく影響することなく</strong>、血流と微小循環灌流を確実に増加させる（Dubin ら, Crit Care 2009）。</li><li>現行の使用は主に「輸液蘇生後も組織灌流異常の徴候が持続する場合」（SSC 準拠）。</li><li>頻脈がドブタミン使用を難しくすることがあるが、<strong>これは通常（相対的）低容量血症のマーカーである</strong>。</li><li><mark class="hl">明らかな低容量血症のある患者ではドブタミンを避けるべき</mark>。併発する血管拡張が高度の低血圧を誘発しうるため。</li></ul>
+<h4>6-3. バソプレシン</h4>
+<p>生理学的な根拠があるにもかかわらず、実際の使用は施設間でばらつく。</p>
+<ul><li><strong>腎における V1a 受容体の分布</strong>を考えると、バソプレシンはノルアドレナリンより腎灌流を良好に保ちうる（Patel ら, Anesthesiology 2002）。</li><li>しかしこの好影響は大規模臨床試験（VASST：Russell ら NEJM 2008、VANISH：Gordon ら 2016）で<strong>死亡率の改善につながらなかった</strong>。ただし<strong>より軽症のショックの患者では有益に見えた</strong>。</li><li>メタ解析では、バソプレシン使用は<strong>腎代替療法の必要性の減少</strong>、<strong>90日死亡低下の傾向</strong>と関連したが、<strong>指趾虚血などの合併症は増えた</strong>。</li><li>現在の推奨は、MAP がなお不十分なときに、低〜中等量のノルアドレナリン（0.25〜0.5 µg/kg/分）にバソプレシンを追加することであり、第一選択薬として使うことではない。</li><li>臨床使用を後押ししているもう一つの期待される効果は、<strong>頻脈性不整脈の発生率低下</strong>。</li></ul>
+<h3>7. 進化する概念 ① 新しい蘇生目標 — 末梢灌流と CRT 🔴</h3>
+<h4>7-1. なぜ皮膚を見るのか（機序）</h4>
+<p><strong>皮膚領域には血流の自動調節（auto-regulation）がない</strong>。したがって循環不全時の交感神経賦活は皮膚灌流を直接損なう。この現象を捉えるのが末梢灌流評価である。末梢灌流異常の指標は、以前から罹病率・死亡率の増加と関連づけられてきた。</p>
+<h4>7-2. CRT を蘇生目標に据える根拠（本稿が挙げた5つ）</h4>
+<p>冷たく湿った皮膚、mottling（網状皮斑）、CRT 延長は、敗血症性ショック患者における<strong>輸液蘇生の臨床的トリガー</strong>として提案されてきた（van Genderen ら, AJRCCM 2015）。本稿は CRT を輸液蘇生の重要な目標として考慮すべき「強い理由」を5つ列挙する。</p>
+<ol><li><strong>CRT 正常化に伴う優れた予後</strong></li><li><strong>輸液負荷に対する反応時間が速い</strong></li><li><strong>相対的な簡便さ</strong></li><li><strong>資源の限られた環境でも利用できる</strong></li><li>肝脾臓領域（hepatosplanchnic region）のような生理学的に重要な領域の灌流と平行して変化する能力</li></ol>
+<h4>7-3. ANDROMEDA-SHOCK の扱い（数値をそのまま）</h4>
+<p>&gt; 「最近の試験は、CRT を目標とした蘇生がより低い死亡（34.9% vs 43.4%, p = 0.06）、臓器障害への有益な効果、治療強度の低下と関連したことを見出し、その後のベイズ解析（Zampieri ら, 2020）に支持された。」</p>
+<p>この一文の読み方は JC の論点になる。 p = 0.06 は統計学的有意水準に達しておらず、原著（ANDROMEDA-SHOCK, JAMA 2019）の主要評価項目は<strong>陰性</strong>である。本稿は "was associated with a lower mortality"（より低い死亡と関連した）という表現を用い、有意でないことを p 値の提示以外では明示していない。<mark class="hl">著者の多くが ANDROMEDA-SHOCK の研究者である点も併せて読む必要がある</mark>（→ 批判的吟味 2）。</p>
+<h4>7-4. ガイドラインでの位置づけ（本稿の記述）</h4>
+<p>&gt; 「前向き研究のエビデンスは現時点では限られているものの、最近の SSC ガイドラインも、<strong>他の組織灌流のパラメータに加えて</strong>、蘇生を導くための CRT の使用を採用した。」</p>
+<p><strong>本稿が書いていないこと</strong>：SSC 2021 におけるこの採用が「弱い推奨（suggest）／エビデンスの確実性は低い」であることは、本稿の本文には記載がない。強さを確認したい場合は SSC 2021 原文を当たる必要がある（→ <span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span>）。</p>
+<h4>7-5. 他の灌流指標</h4>
+<p>静脈−動脈 PCO₂ 較差（Pv-aCO₂）や、中心静脈−動脈 CO₂ と動脈−静脈 O₂ 含有量の比といった「進化する組織灌流・酸素化のマーカー」は、転帰指標との<strong>関連</strong>は示されているが、<strong>早期蘇生で用いたときの有益性の臨床的エビデンスはなお不十分</strong>。</p>
+<h3>8. 進化する概念 ② 微小循環 🩸</h3>
+<p>過去10年で、ショックとその蘇生における<strong>舌下微小循環の異常</strong>が転帰と密接に関係することが示された。加えて、組織灌流の最適化に応答しうる微小循環灌流のパラメータが同定されている。組織灌流の最適化こそ蘇生の究極の目標である、というのが本稿（および Cecconi ら 2014 のコンセンサス）の立場。</p>
+<p><strong>Dubin らの観察が重要</strong>、と本稿は名指しする。</p>
+<p>&gt; 全患者を解析すると<strong>ノルアドレナリンは微小循環血流を改善しなかった</strong>。しかし、<strong>微小循環灌流が異常な患者に限れば、ノルアドレナリンは灌流を改善した</strong>。</p>
+<p>→ この事実が「蘇生は個別化すべきであり、微小循環のリクルートメントは MAP と CO を超えた目標を含みうる」ことを裏づける。</p>
+<p><strong>ヘモグロビンと拡散距離</strong>：生理学的にはヘモグロビン濃度が組織酸素化の重要な決定因子であり、対流性の血流（convective flow）よりもはるかに重要である。したがって輸液蘇生中の希釈性貧血を避けるよう注意すべき。</p>
+<p>tRBCp（tissue red blood cell perfusion）：微小循環解析に基づき、<strong>赤血球流と微小循環における酸素運搬の拡散能と対流能を統合した</strong>新しいパラメータ。有効な蘇生の到達点になりうる。</p>
+<p>→ ここから導かれる「進化する概念」は<strong>輸血と血管拡張薬の使用</strong>。ただし本稿は「これらの生理学的に妥当な議論にもかかわらず、これらの介入が臨床的に意味のある転帰指標に影響するかは依然として不明である」と釘を刺す。</p>
+<p><strong>実装上の壁</strong>：画像の客観的な解釈。高速かつ正確な解析ソフトウェアが使えるようになれば、ベッドサイドでの舌下微小循環の利用が進む。Table 1 は「微小循環解析用ソフトウェアの開発が遅い」ことを課題として挙げている。</p>
+<h3>9. 進化する概念 ③ 輸液蘇生 — 種類・SOSD・制限と除水 🚰</h3>
+<h4>9-1. 輸液の種類</h4>
+<ul><li><strong>晶質液が敗血症蘇生の主流</strong>であることは変わらない。</li><li><strong>バランス（低クロール）晶質液</strong>の使用が増えており、<strong>とくに救急外来のごく初期に開始した場合により有益かもしれない</strong>（Semler ら SMART, NEJM 2018／Jackson ら, Chest 2021）。</li><li>未解決の問題として第一に挙がるのが<strong>クロールの影響</strong>。高クロール血症を誘発すると有害でありうる（Jaynes ら, J Crit Care 2018）。</li><li>ただし、最近の試験（BaSICS, Zampieri ら）はバランス液の高クロール生食に対する有意な有益性を見出せなかった。本稿はここに但し書きを付ける——<strong>その試験では高クロール血症が誘発されていなかった</strong>。</li><li><strong>アルブミン</strong>：SSC ガイドラインは大量の晶質液を使用した場合にアルブミンの使用を推奨しているが、<strong>エビデンスは中等度</strong>であり、one-size-fits-all の研究では死亡改善は示されていない。生理学的根拠と RCT で示された限定的な有益性（<strong>より低い正味輸液バランス、より高い血圧</strong>）を踏まえ、<strong>今後の研究は選択された患者群でこれらの側面に焦点を当てるべき</strong>。</li><li>輸液組成以外の重要な問い：<strong>最適な投与速度</strong>と<strong>輸液の温度</strong>。</li></ul>
+<h4>9-2. SOSD 概念</h4>
+<p>ショック蘇生の各段階を記述するために導入された概念（Salvage / Optimization / Stabilization / De-escalation）。本稿での記述は次のとおり簡潔。</p>
+<div class="tw"><table>
+<thead><tr><th>相</th><th>本稿の記述</th></tr></thead>
+<tbody>
+<tr><td>Salvage（救命）</td><td>低血圧患者において、輸液蘇生と、MAP または DAP が危機的に低いときの昇圧薬開始によって、血圧を上げることに焦点を置く</td></tr>
+<tr><td>Optimization（最適化）</td><td>組織灌流と酸素運搬に焦点を置く</td></tr>
+<tr><td>Stabilization（安定化）</td><td>輸液バランスの減少と血管作動薬の離脱を、適切な組織灌流を維持しながら達成すべき決定的な期間</td></tr>
+<tr><td>De-escalation（離脱）</td><td>同上（本稿は Stabilization と De-escalation を1文でまとめている）</td></tr>
+</tbody></table></div>
+<p><strong>本稿の留保</strong>：<mark class="hl">「しかし、de-escalation をどう導くのが最善か、および転帰指標への効果を決定する研究は欠けている」</mark>。</p>
+<p>より詳細な4相ごとのモニタリング・治療の割り当ては、同フォルダの <span class="wl">敗血症性ショックの血行動態管理を個別化する — SOSD 4相ごとのモニタリングと治療（総説・CritCare2022）</span> が担当する（→ 既存ノートとの整合）。</p>
+<h4>9-3. 制限的輸液蘇生と過剰輸液の適時除去</h4>
+<p><strong>出発点の認識</strong>：敗血症性ショック患者、とくに<strong>既に入院している患者では、真の低容量血症はしばしば存在しない</strong>。したがって輸液投与は、固定量を使うのではなく、<strong>病因・臨床的文脈・併存疾患の存在・副作用を組み込んで個別化すべき</strong>。</p>
+<p><strong>早期・同時の昇圧薬開始（Table 2）</strong>：</p>
+<ul><li>昇圧薬を輸液と同時に開始する、あるいはごく限られた輸液蘇生の後に開始することは、有益な効果と関連する（Table 2）。一方で<strong>開始の遅れは死亡増加と関連</strong>（Colon Hidalgo ら, J Crit Care 2020）。</li><li>同時開始と関連する具体的効果：<strong>輸液使用量の減少</strong>、<strong>より低い正味輸液バランス</strong>、<strong>低血圧持続時間の短縮</strong>、<strong>肺水腫および新規発症不整脈の発生率低下</strong>（Ospina-Tascón ら 2020／CENSER: Permpikul ら AJRCCM 2019／Li ら, Crit Care 2020）。</li><li><mark class="hl">ただしこれらの有益と思われる効果は RCT では死亡低下につながらなかった（CENSER）</mark>。観察研究と RCT の双方を組み込んだ系統的レビューでは短期死亡の低下が示された（Li ら 2020）。</li><li>本稿の結論：<strong>早期昇圧薬開始を支持する十分な臨床エビデンスは現時点で欠けている</strong>が、想定される有益な血行動態効果は早期蘇生で考慮すべきであり、さらなる介入研究が必要。</li><li>末梢灌流の指標に基づく輸液蘇生は安全と思われ、正味輸液バランスの減少と関連した（ANDROMEDA-SHOCK／van Genderen 2015）。</li><li>輸液は慎重に使い、<strong>利益／リスク比の絶え間ない再評価を蘇生プロトコルの一部にすべき</strong>。合理的かつ制限的な輸液投与は輸液過剰を減らしうる。</li></ul>
+<p><strong>輸液過剰の評価と害</strong>：体重変化（または正味輸液バランス）で推定でき、しばしば臓器障害の所見（<strong>離脱に関連した心不全、臓器浮腫、腹腔内圧上昇、急性腎障害など</strong>）を伴い、罹病率（<strong>人工呼吸期間と在室日数の延長</strong>）と死亡の増加につながる。</p>
+<p><strong>除水（fluid removal）の実際</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本稿の記述</th></tr></thead>
+<tbody>
+<tr><td>原則</td><td>患者の安定化後に過剰輸液を除去することは合理的に見える</td></tr>
+<tr><td>ガイドライン</td><td><mark class="hl">臨床でどう実行するかについてのガイドラインは欠けている</mark></td></tr>
+<tr><td>よく使われる介入</td><td>利尿薬、腎代替療法</td></tr>
+<tr><td>リスク</td><td>過剰な除水により低容量血症と局所の低灌流が生じうる</td></tr>
+<tr><td>生理学に基づく代替</td><td>安定化した患者での輸液不応の診断は除水開始の指標として成功裏に用いられている（Monnet 2016）。エコーによる除水のガイドは効率を改善した</td></tr>
+<tr><td>持続除水</td><td>腎代替療法を用いた持続的な除水は転帰改善と関連（Hall ら, Crit Care 2020）</td></tr>
+<tr><td>残された課題</td><td>データが乏しく、持続的腎代替療法中の患者・腎障害のない患者の双方でさらなる研究が必要</td></tr>
+</tbody></table></div>
+<h3>10. 進化する概念 ④ 昇圧薬 — 血管緊張に応じた使い方 📈</h3>
+<h4>10-1. 血管緊張を測る指標</h4>
+<ul><li><strong>低い DAP</strong> はしばしば血管拡張の状態を示す。拡張期ショック指数（diastolic shock index：DAP と心拍数の比）は、昇圧薬の早期使用を最適化しうる（Ospina-Tascón ら, Ann Intensive Care 2020）。</li><li><strong>心室動脈カップリング（VAC）</strong>：Ea/Ees 比で評価。ノルアドレナリンの心筋パフォーマンスへの効果の予測とモニタリング、および薬剤誘発性のアンカップリングの検出に使いうる。</li><li><strong>ただしベッドサイドでは使えない</strong>：現時点でこれらのパラメータは複雑なモニタリングとモデリングを要し、ベッドサイドで容易には使えない。</li><li><strong>代替となる実用指標＝Eadyn</strong>：<strong>PPV と SVV の比</strong>は動的動脈エラスタンスを反映し、動脈カテーテルとパルスコンター解析でベッドサイドで得られる。</li><li>用途1：輸液チャレンジで CO を増やしたときに MAP が上昇する患者を同定するのに役立ちうる。</li><li>用途2：<strong>de-escalation 相での昇圧薬離脱の支援</strong>。低血圧を来さずにノルアドレナリンを離脱できる患者を同定しうる。</li><li>結論：血管緊張と VAC の変数はベッドサイドでの輸液・昇圧薬の適正使用を促進する可能性があるが、敗血症性ショック蘇生における有効性を確保するプロトコルを開発するにはさらなる研究が必要。</li></ul>
+<h4>10-2. ノルアドレナリンの静脈系への作用</h4>
+<p>ノルアドレナリンの効果は静脈循環にも及び、平均全身充満圧（mean systemic filling pressure）を上げることで静脈還流と CO を増やす。心筋の α および β アドレナリン受容体への作用は収縮性を高め、静脈還流の増加を促進する。</p>
+<h4>10-3. なぜ MAP を上げても微小循環が良くなるとは限らないか</h4>
+<p>CO と MAP の増加が微小循環灌流の改善にどこまで寄与するかは<strong>可変</strong>であり、<strong>臓器灌流圧の改善</strong>と<strong>微小循環レベルでの駆動圧の潜在的な悪化</strong>のバランスに依存する。本稿はこれを2つの研究で示す。</p>
+<ol><li>ノルアドレナリンで MAP を上げたときの微小循環灌流への効果は、<strong>微小循環のベースラインの状態に依存した</strong>（Dubin ら 2009）。</li><li><strong>最適 MAP は個人間で異なり、既往の高血圧とは独立していた</strong>（Fiorese Coimbra ら, Crit Care Med 2019）。</li></ol>
+<h4>10-4. 昇圧薬テスト（vasopressor test）— 本稿の中心的提案のひとつ</h4>
+<p>&gt; 「したがって、<strong>MAP を上げてその効果を組織灌流でモニタリングする昇圧薬テスト</strong>（CRT、尿量、乳酸、四肢／心筋虚血、不整脈など）は、初期治療で改善しなかった患者の蘇生において論理的な一歩であるように思われる。」</p>
+<p><strong>この概念が最初に導入されたのは ANDROMEDA-SHOCK</strong>（本稿の記述）。具体的な実施内容は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>対象</td><td>既往に高血圧のある患者で、MAP 65 mmHg を目標とした初期治療の後も末梢灌流が改善しない、または乳酸が低下しない患者</td></tr>
+<tr><td>操作</td><td>ノルアドレナリンを増量して MAP 80〜85 mmHg（無作為化群による）に到達させる</td></tr>
+<tr><td>評価</td><td>末梢灌流は1時間後、乳酸は2時間後に効果を判定する</td></tr>
+<tr><td>判定</td><td>目標に到達すれば、より高い MAP を維持する。目標に到達できなければ MAP をベースラインに戻す</td></tr>
+<tr><td>由来</td><td>この 80〜85 mmHg という設定は、より高い MAP を維持した試験（SEPSISPAM: Asfar ら, NEJM 2014）の結果を踏まえたもの</td></tr>
+</tbody></table></div>
+<h4>10-5. MAP 目標のエビデンス（本稿の整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>集団</th><th>本稿が書いた所見</th></tr></thead>
+<tbody>
+<tr><td>SEPSISPAM（Asfar 2014）</td><td>敗血症性ショック</td><td>サブグループ解析で、既往に高血圧のある患者はより高い MAP から利益を得るかもしれない</td></tr>
+<tr><td>Dubin 2009／Fiorese Coimbra 2019</td><td>微小循環研究</td><td>「これは既往の高血圧がない患者にも当てはまる」（＝個人ごとの最適 MAP が存在するという意味）</td></tr>
+<tr><td>65 trial（Lamontagne 2020）</td><td>65歳以上の高齢患者。相対的低血圧（MAP 60〜65 mmHg）に割り付け</td><td>通常ケアと比べて死亡への全体的な有意な効果はなし。ただし慢性高血圧患者のサブグループ解析で有益の可能性</td></tr>
+</tbody></table></div>
+<p>→ 本稿の結論は「したがって、より高い MAP 目標は、すべての慢性高血圧患者に有益とは限らない」。</p>
+<p><strong>注意点（読み手が補うべきこと）</strong>：本稿は SEPSISPAM のサブグループで「何が」改善したのか（アウトカムの種類）を明示していない。65 trial のサブグループについても方向が逆に読めるため、この2文の整合は本文だけでは取れない（→ 批判的吟味 4）。</p>
+<p><strong>本稿自身の総括</strong>：これらの臨床的介入に用いる道具は新しくないが、それが臨床で使われる文脈が変化した。<mark class="hl">しかし転帰指標への効果は確立されていないため、これらは現行ガイドラインの一部ではなく、さらなる研究を要する。</mark></p>
+<h3>11. 進化する概念 ⑤ バソプレシン類縁体とその他の昇圧薬 💊</h3>
+<h4>11-1. バソプレシン類縁体</h4>
+<div class="tw"><table>
+<thead><tr><th>薬剤</th><th>特徴</th><th>本稿が引用した所見</th><th>現時点の位置づけ</th></tr></thead>
+<tbody>
+<tr><td>バソプレシン</td><td>現行の使用は主にノルアドレナリンへの補助。あらかじめ定めた用量に達したときに、あらかじめ定めた用量で追加する</td><td>MAP をさらに上げつつ、追加のアドレナリン負荷を節約する</td><td>現行標準（補助薬）</td></tr>
+<tr><td>テルリプレシン</td><td>V1a 受容体選択性がより高い。半減期が長いため間欠的ボーラス投与も可能</td><td>ノルアドレナリンと比較した試験（Liu ら, 2018）で死亡に差はなく、有害事象は高頻度（テルリプレシン 30% vs ノルアドレナリン 12%）。指趾虚血など</td><td>現時点で使用は推奨されない</td></tr>
+<tr><td>セレプレシン</td><td>テルリプレシンよりさらに選択的な V1a 作動薬</td><td>実験モデルと第IIa相ランダム化試験（Russell ら, Crit Care 2017）で輸液必要量の減少と浮腫形成の減少と関連。しかし第2b/3相（SEPSIS-ACT: Laterre ら, JAMA 2019）でプラセボと同程度（死亡、昇圧薬フリー日数、人工呼吸器フリー日数）。虚血性有害事象はノルアドレナリン単独より多かった</td><td>臨床使用は未承認</td></tr>
+</tbody></table></div>
+<h4>11-2. アンジオテンシンII（ATII）</h4>
+<ul><li>レニン–アンジオテンシン–アルドステロン系においてアンジオテンシンIIは血管収縮作用を持つ。<strong>ATII の相対的欠乏は敗血症性ショックの不良な転帰と関連</strong>。</li><li>敗血症性ショックでの ATII 使用（ATHOS-3: Khanna ら, NEJM 2017）は<strong>血圧を上げ、標準昇圧薬の必要量を減らすが、転帰への効果はない</strong>。</li><li><mark class="hl">患者の 30% もが ATII に反応しなかった。</mark></li><li>興味深いことに post hoc 解析では、腎代替療法を要する急性腎障害があり、レニン高値の患者では、MAP が ATII に反応しなくても有意な死亡ベネフィットがあった（Bellomo ら, AJRCCM 2020）。</li><li>臨床使用の明確な推奨には追加研究が必要。</li></ul>
+<h4>11-3. メチレンブルー（MB）</h4>
+<p><strong>グアニル酸シクラーゼを遮断して一酸化窒素の過剰産生を減らす</strong>ことにより血行動態を改善する。しかし<strong>小規模の研究しか行われておらず、結果は相反する</strong>。したがって<strong>現時点で使用は推奨できない</strong>。</p>
+<p>高用量のアドレナリン作動薬を要する患者におけるこれら薬剤の使用は、臨床研究でさらに評価されるべき。</p>
+<h3>12. 進化する概念 ⑥ 強心薬 ❤️‍🩹</h3>
+<h4>12-1. ドブタミン — 「誰に効くか」を先に決める</h4>
+<ul><li>敗血症性ショックにおける心筋症（cardiomyopathy）は高頻度。これが不適切な組織灌流につながるかどうかは、<strong>収縮性への影響と血管麻痺（後負荷）の状態との相互作用</strong>に依存する（いずれも敗血症過程で誘発される）。</li><li>したがって、<strong>心エコーの反復＋臨床・血行動態・生化学的変数の組み合わせ</strong>が、敗血症性心筋症の検出・モニタリング・治療に決定的。第一選択強心薬はドブタミン（Scheeren ら, Ann Intensive Care 2021）。</li><li><strong>血行動態プロファイリング</strong>を用いた研究（Geri ら, ICM 2019：敗血症性ショックの心血管クラスター）は、強心薬治療から利益を得うる敗血症性心筋症患者の特徴を同定した。</li><li><strong>ドブタミンが有益だったのはこれらの患者の 18%</strong>。</li><li>その特徴は <strong>左室駆出率（LVEF）40% 未満</strong> かつ <strong>大動脈の速度時間積分（VTI）低値</strong>（一回拍出量の指標）。</li><li><strong>有効なドブタミン治療の特徴</strong>：臨床状態の改善とともに <strong>LVEF と VTI の増加</strong>があり、かつ<strong>心拍数が増加しない、あるいはむしろ低下する</strong>こと。</li><li><strong>ネットワークメタ解析</strong>（Belletti ら, J Crit Care 2017）では、<strong>ドブタミンが重症敗血症・敗血症性ショック患者の死亡低下と有意に関連</strong>（ドブタミン vs プラセボの OR 0.30、95%CI 0.09〜0.99）。</li><li><strong>進行中の多施設試験</strong>（ClinicalTrials.gov ID: NCT04166331）が、敗血症性ショックかつ敗血症性心筋症の患者における組織低灌流と関連臓器障害の改善に対するドブタミンの有効性を検討中。</li></ul>
+<h4>12-2. 心機能障害の文脈を外れた場合</h4>
+<p>心機能障害の文脈の外でも、CO を改善すれば組織灌流が改善しうる。</p>
+<ul><li>初期の研究では、既存治療に<strong>低用量（5 µg/kg/分）のドブタミン</strong>を追加すると、大循環だけでなく<strong>微小循環の血流も改善</strong>し、後者は<strong>CO への効果とは独立</strong>していた。</li><li>これはドブタミンの<strong>血管拡張作用</strong>に関連していた可能性がある。</li><li>ただし効果はばらつきうる。大循環／微小循環の血流改善を再現性をもってもたらす単一の薬剤は示されていない。副作用がドブタミンの使用を難しくすることもあり、これが「トライアル（試験投与）アプローチ」の根拠になる。</li></ul>
+<h4>12-3. イノダイレーターテスト（inodilator test）</h4>
+<p>昇圧薬テストと同様の考え方で、ANDROMEDA-SHOCK において敗血症性ショック患者に導入された。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>投与</td><td>ドブタミン 5 µg/kg/分の持続投与を限られた時間行う</td></tr>
+<tr><td>評価</td><td>その後、目標パラメータへの効果を評価する</td></tr>
+<tr><td>判定</td><td>有益であれば投与を継続する</td></tr>
+</tbody></table></div>
+<p><strong>本稿の総括</strong>：ドブタミンは組織灌流に有益な効果を持ちうるが、そのタイミング・用量・敗血症性ショックの特定の血行動態プロファイルにおける転帰指標への効果は、まだ明らかにされていない。</p>
+<h4>12-4. 代替強心薬</h4>
+<p>カルシウム感受性増強薬（レボシメンダン）とホスホジエステラーゼ3阻害薬（ミルリノン、エノキシモン）は強心作用と血管拡張作用を併せ持つ。</p>
+<p><strong>レボシメンダン</strong>：</p>
+<ul><li>明らかな心機能障害のない状態で標準治療にレボシメンダンを追加しても、心筋傷害の生化学的所見がある場合でさえ、罹病率・死亡率の改善とは関連しない（LeoPARDS: Gordon ら, NEJM 2016）。</li><li>これは、心機能への介入は臨床的な問題（すなわち組織灌流の異常）によって引き起こされるべきであり、心筋傷害の存在や低 CO だけを理由にすべきではないことを裏づける。そうでない場合は副作用が利益を上回りうる。</li><li>LeoPARDS では、レボシメンダンは<strong>人工呼吸からの離脱成功の可能性の低下</strong>と<strong>上室性頻脈性不整脈のリスク上昇</strong>と関連した。</li><li><strong>レボシメンダンはドブタミンに対して明確な利益をもたらさない</strong>（Bhattacharjee ら, J Clin Anesth 2017）。</li><li>理論的な利点があるとすれば、<strong>β遮断薬治療が不十分な心機能に寄与している敗血症患者</strong>。</li></ul>
+<p><strong>ホスホジエステラーゼ3阻害薬</strong>：実験研究では有益の可能性が示されているが、<strong>患者の転帰に関する臨床研究は乏しい</strong>。典型的なイノダイレーターの例ではあるが、<strong>長い半減期と MAP への予測不能な影響</strong>が、既に典型的に血管麻痺している敗血症性ショック患者での使用を制限する。</p>
+<p><strong>この節の締め</strong>：現在の研究からは、敗血症性ショック患者における昇圧薬と強心薬の使用は、<strong>適応と有益性についてより深いエビデンスを必要としている</strong>ことが明らかである。</p>
+<h3>13. 進化する概念 ⑦ アドレナリン応答の調節（adrenergic modulation）🧠</h3>
+<p><strong>問題設定</strong>：敗血症性ショックにおける持続的な過アドレナリン反応、およびアドレナリン作動薬の使用は、<strong>血行動態的・微小循環的・代謝的・炎症促進的な有害効果</strong>と関連づけられてきた。アドレナリン応答の調節は、敗血症性ショックのいくつかの生理学的・臨床的転帰指標に好ましい影響を持つ。</p>
+<h4>13-1. デクスメデトミジン（α2 作動薬）</h4>
+<ul><li>ストレスに対する<strong>交感神経反応を減弱</strong>させ、<strong>組織灌流に悪影響を与えずにアドレナリン（エピネフリン）値を低下</strong>させる。</li><li>実験研究では<strong>抗炎症効果</strong>、<strong>微小循環血流の改善</strong>、<strong>外因性乳酸のクリアランス改善</strong>が見出されている。</li><li>臨床研究でも<strong>高乳酸血症のより速い解消</strong>が報告されている（Miyamoto ら, Shock 2018：DESIRE 試験のサブ解析）。</li><li>最近の研究では<strong>ノルアドレナリン必要量を減らしうる</strong>ことも示された（Morelli ら, Crit Care Med 2018 のクロスオーバー試験ほか）。</li><li><mark class="hl">しかし主要な転帰への影響はまだ示されていない。</mark></li></ul>
+<h4>13-2. β遮断薬</h4>
+<ul><li>敗血症におけるβ遮断薬使用を支持するエビデンスは<strong>比較的弱い</strong>。</li><li>実験研究では、心拍数と一部の血行動態・炎症・代謝変数（<strong>血中乳酸の低下</strong>を含む）に好ましい効果。</li><li><strong>エスモロールの内因性心筋機能と血管反応性への効果はなお議論がある</strong>（Levy ら, Crit Care 2021）。</li><li><strong>臨床的な難所</strong>：持続する頻脈が <strong>①代償性のもの（一回拍出量が低い）か ②不適応な交感神経過剰刺激か</strong> を区別すること。前者ではβ遮断薬は有害でありうる。後者では、β遮断薬は心筋の酸素消費を減らし、拡張期充満と全身血流を増やし、VAC を改善しうる。</li><li>進行中の研究がβ遮断薬への良好な反応の最良の予測因子を同定しようとしている。<mark class="hl">その結果が出るまで、敗血症性ショックにおけるβ遮断薬の使用は推奨できない。</mark></li></ul>
+<h3>14. 進化する概念 ⑧ 難治性ショック 🚨</h3>
+<h4>14-1. 定義と認識</h4>
+<p>難治性敗血症性ショック（refractory septic shock）は生命を脅かす状態であり、<strong>血管作動薬治療のエスカレーションが適切な組織灌流を回復させない状態</strong>として最もよく定義される。</p>
+<p>ベッドサイドでは次のように認識できる（Annane ら, Lancet 2005 を引用）：</p>
+<p>&gt; 低容量血症がない状態で低血圧と低灌流が持続し、かつ患者がノルアドレナリン 0.25 µg/kg/分を超えて投与されている。</p>
+<p><strong>適時の認識が持つ意味</strong>：難治性ショックとその誘因を適時に同定することで、重篤な副作用を招いて臨床状態をさらに悪化させるリスクを冒してまで昇圧薬を増量したくなる衝動を減らせる。</p>
+<h4>14-2. 見逃してはならない鑑別</h4>
+<p><strong>高度に低下した昇圧薬反応性</strong>と、<strong>高用量の昇圧薬による左室流出路（LVOT）閉塞のような合併症</strong>を区別することが重要。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl">難治性ショックの診断には常に心エコーを伴わせる（echocardiography should always accompany the diagnosis of refractory shock）。</mark> 高用量昇圧薬による LVOT 閉塞では、昇圧薬の増量は状態を悪化させる。「上げても効かない」を「もっと上げる」で解決しようとする前に、必ず心エコーで見る。</p>
+</div>
+<h4>14-3. Table 3. 難治性敗血症性ショックに寄与しうる因子（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>機序（原表の記載）</th></tr></thead>
+<tbody>
+<tr><td>中枢温 39℃超</td><td>細胞代謝と酸素需要の増加／交感神経性の血管緊張の低下</td></tr>
+<tr><td>80歳超</td><td>老化した内皮細胞と血管平滑筋細胞は、血管緊張の低下およびα作動薬への感受性低下と関連する</td></tr>
+<tr><td>薬剤</td><td>鎮静薬は血管平滑筋への交感神経駆動を減らし、続いて血管緊張が低下する／NO ドナーは血管平滑筋の弛緩を引き起こす</td></tr>
+<tr><td>アシドーシス：pH 7.20 未満</td><td>アシドーシスは血管平滑筋の代謝と収縮性の障害、およびα作動薬とα受容体の共役低下と関連する／アシドーシスは平滑筋細胞に存在する ATP 感受性カリウムチャネルを活性化し、カルシウム流入を妨げる</td></tr>
+<tr><td>高血糖</td><td>インスリン抵抗性と血管平滑筋によるグルコース取り込みの低下が血管緊張を低下させる</td></tr>
+<tr><td>低カルシウム血症</td><td>細胞内カルシウム濃度の低下により平滑筋の収縮性が低下する</td></tr>
+<tr><td>重症疾患関連コルチコステロイド不全（CIRCI）または副腎不全</td><td>コルチゾール低下により血管平滑筋の収縮性が低下し、α作動薬とαアドレナリン受容体の共役が低下する</td></tr>
+<tr><td>バソプレシン欠乏</td><td>バソプレシン介在性の血管平滑筋収縮性の喪失と、α作動薬への感受性低下</td></tr>
+<tr><td>チアミン、ビタミンC欠乏</td><td>α作動薬とαアドレナリン受容体の共役の低下</td></tr>
+</tbody></table></div>
+<p>（原表脚注：NO = nitric oxide）</p>
+<p><strong>旧ノートとの照合結果</strong>：改稿前のノートに列挙されていた9項目は、Table 3 の9因子と過不足なく一致していた。ただし旧ノートは<strong>機序の列を持たず、"相対的副腎不全/副腎不全" と記していた</strong>。原表の記載は "Critical illness-related corticosteroid insufficiency OR adrenal insufficiency" であり、「相対的副腎不全（relative adrenal insufficiency）」という語は原表にはない。CIRCI に統一した。</p>
+<h4>14-4. 補助療法</h4>
+<ul><li><strong>ヒドロコルチゾン</strong>：<strong>特定の患者における有益性は確立されている</strong>（the benefit of hydrocortisone in specific patients has been established）。</li><li><strong>ビタミン類</strong>：<strong>役割はより不明確</strong>（VITAMINS: Fujii ら, JAMA 2020／Chang ら, Chest 2020）。</li><li><strong>非アドレナリン作動性昇圧薬</strong>（バソプレシン、アンジオテンシンII）と<strong>内皮因子を標的とする薬剤</strong>（NO スカベンジャー／阻害薬、メチレンブルー、エンドセリン）は、<strong>有益かもしれない臨床効果を示しているが、転帰への影響は未決定</strong>。</li><li>他の研究は治療の個別化と、患者ごとに異なりうる血管作動薬・ステロイドへの反応の同定に焦点を当てている。</li></ul>
+<h4>14-5. 体外血液浄化療法（ECBPT）</h4>
+<p><strong>理論的な利点</strong>：メディエーターを除去し、免疫の恒常性を確立する。多くの研究が行われてきた（Table 4）。</p>
+<p><strong>しかし本稿の評価は厳しい</strong>：</p>
+<ul><li>敗血症における免疫応答は個体ごとのプロセスであり、<strong>サイトカインプロファイルは敗血症の表現型間で大きく異なる</strong>。したがって ECBPT の成否を予測することは難しい。</li><li><strong>有害事象</strong>：<strong>栄養素・微量元素・薬剤の意図しない除去</strong>が報告されている。</li><li><strong>臨床的有益性はなお controversial</strong> であり、さらなる研究を要する。</li></ul>
+<h4>14-6. Table 4. 敗血症で用いられる体外循環技術（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>技術</th><th>主な原理</th><th>主に除去される成分</th><th>敗血症での選ばれた RCT</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>高容量血液濾過（high volume HF）</td><td>対流</td><td>45 kDa までの炎症促進性・抗炎症性メディエーター</td><td>Joannes-Boyau ら（IVOIRE, ICM 2013）</td><td>死亡ベネフィットなし</td></tr>
+<tr><td>高カットオフ血液濾過（high cut-off HF）</td><td>対流</td><td>65 kDa 超の分子を含む炎症促進性・抗炎症性メディエーター</td><td>Atan ら（CCM 2018）</td><td>ベネフィットなし</td></tr>
+<tr><td>血液吸着（hemoperfusion）</td><td>血液を、メディエーターが吸着される吸着材入りカートリッジまたは血液濾過器に通す（対流と比べてより大きな分子量の除去が可能）</td><td>Cytosorb：ほとんどのサイトカイン、ミオグロビン、PAMPs、DAMPs。ただしエンドトキシンと IL-10 は除かない</td><td>Schädler ら（PLoS One 2017）</td><td>ベネフィットなし</td></tr>
+<tr><td>同上</td><td>同上</td><td>ポリミキシンB固定化線維カラム：エンドトキシン</td><td>Dellinger ら（EUPHRATES, JAMA 2018）</td><td>死亡ベネフィットなし</td></tr>
+<tr><td>同上</td><td>同上</td><td>改良 AN69 膜：サイトカイン、エンドトキシン</td><td>公表された RCT なし</td><td>—</td></tr>
+<tr><td>同上</td><td>同上</td><td>LPS 吸着器：LPS とエンドトキシンの除去</td><td>Lipcsey ら 2020（ASSET, Shock）</td><td>早期中止、死亡ベネフィットなし</td></tr>
+<tr><td>カップルド・プラズマ濾過吸着（CPFA）</td><td>高カットオフフィルタで血漿を血液から分離し、血漿が吸着器を通ってから回路に戻り、全血が従来型 HF を受ける組み合わせ</td><td>炎症促進性・抗炎症性メディエーター</td><td>Garbero ら</td><td>有害事象のため早期中止</td></tr>
+<tr><td>血漿交換（plasmapheresis）</td><td>有害な循環分子の除去、および／または炎症の作用に対抗する保護的な血漿蛋白の補充</td><td>サイトカイン、エンドトキシン、炎症メディエーターの除去と、免疫グロブリン・凝固因子の補充</td><td>Busund ら 2002（ICM）</td><td>28日死亡に有意な効果なし</td></tr>
+<tr><td>アフィニティ・アフェレーシス</td><td>微生物を結合するヘパリンまたはレクチンカラムの使用</td><td>病原体</td><td>これまで完了した RCT なし</td><td>—</td></tr>
+<tr><td>選択的サイトフェレーシス</td><td>活性化白血球を結合する合成生体模倣膜の使用</td><td>活性化白血球</td><td>Tumlin ら（PLoS One 2015）</td><td>死亡ベネフィットなし</td></tr>
+</tbody></table></div>
+<p><strong>共通の潜在的害（原表では最初の行にまとめて記載）</strong>：手技の侵襲性、感染リスク、血行動態不安定、補充療法使用時の輸液過剰、栄養素・微量元素・薬剤の喪失、アルブミン・栄養素・薬剤の喪失、特定薬剤の吸着。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原表に未解決の編集コメントがそのまま印刷されている <mark class="hl">Table 4 の "Potential harm" 列、"High cut-off HF" 行には、共著者間（または編集過程）の未解決の照会文がそのまま公開されている</mark>：「この "Potential Harm" 列には問題があります！上の要素は全ての行に当てはまりうる。各技術について "see above" のようなものを追加してはどうでしょう。これらは以下の全技術に共通のリスクだからです。同意しますか？」。原表をそのまま院内配布資料に転用しない。 ICM のような一流誌でも校正の抜けは起きるという実例でもある。</p>
+</div>
+<h4>14-7. VA-ECMO</h4>
+<p><strong>難治性左室不全を伴う敗血症性ショック患者に対する究極の救済療法</strong>として、静脈-動脈体外膜型人工肺（VA-ECMO）による血行動態補助がありうる。最近の系統的レビュー・メタ解析（Ling ら, Crit Care 2021。個別参加者データのメタ回帰付き）は、とくに LVEF が非常に低い敗血症性ショック患者が利益を得るかもしれないことを示した。</p>
+<p><strong>この節の締め</strong>：本節に列挙した治療の多くは十分な臨床エビデンスを欠くため、<strong>一般的な推奨はできない</strong>。したがってこれらの治療の使用は、目の前の問題と介入の利益・害の見込みとの関係を慎重に考慮して個別化されるべきである。</p>
+<h3>15. Table 1. 血行動態・灌流モニタリングにおける現行実践と進化する概念（原表を日本語化）📋</h3>
+<p>本稿で最も情報密度の高い表。4列（現行の使い方／問題点・欠点／進化する概念／課題と残る問い）が対応する。</p>
+<h4>15-1. 血行動態（Hemodynamics）</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>現行の使い方</th><th>問題点・欠点</th><th>進化する概念</th><th>課題と残る問い</th></tr></thead>
+<tbody>
+<tr><td>動脈血圧</td><td>動脈カテーテル</td><td>侵襲的（重大合併症はまれ）／圧トランスデューサの綿密なレベリングとゼロ点合わせが必要</td><td>非侵襲モニタリング技術</td><td>センサ技術の改善、信号の安定性、測定性能の役割が未確立</td></tr>
+<tr><td>同上</td><td>SSC は MAP 65 mmHg を初期の下限介入閾値として推奨（その後は個別目標）</td><td>初期血圧目標が個別化されていない</td><td>個別化された血圧目標の定義</td><td>低血圧と転帰の因果関係の確立と、最適な個別介入閾値の検討／局所の血圧をモニタリングする方法の必要性／重症患者で血圧の自動調節が疾患ごとにどう影響を受けるかが不明／低血圧の原因ごとに最良の治療介入を決定する必要</td></tr>
+<tr><td>中心静脈圧</td><td>中心静脈カテーテル</td><td>侵襲的／輸液蘇生のガイドとしてしばしば誤用される</td><td>（記載なし）</td><td>（記載なし）</td></tr>
+<tr><td>心拍出量</td><td>肺動脈カテーテル（肺動脈熱希釈法）</td><td>侵襲的</td><td>非侵襲モニタリング技術／ICU 退室後の継続モニタリング（病棟モニタリング）</td><td>センサ技術・信号安定性・測定性能の改善</td></tr>
+<tr><td>同上</td><td>脈波解析（動脈カテーテル）</td><td>血管緊張が著明に変化した患者での測定性能／最適・適切な目標値はなお捉えどころがない</td><td>個別化された目標指向療法（個別化医療）</td><td>目標指向療法に最良の目標変数の同定／適応的な目標指向療法の概念（疾患経過中の血行動態変化への適応）の評価／個別化された目標指向療法が転帰を改善するというエビデンスの必要性</td></tr>
+<tr><td>輸液反応性</td><td>動的な心前負荷変数（PPV、SVV）／PLR／輸液チャレンジ</td><td>大半の ICU 患者では使えない／熟練した実施と連続 CO モニタリングが必要／過剰輸液のリスク</td><td>（記載なし）</td><td>（記載なし）</td></tr>
+<tr><td>心臓の形態と機能</td><td>ベッドサイド心エコー</td><td>術者依存／一度に1人の患者にしか使えない／間欠的</td><td>敗血症の表現型／血行動態クラスター</td><td>初期蘇生の個別化を可能にする血行動態表現型を明らかにする、系統的な臨床アプローチの開発が必要</td></tr>
+<tr><td>同上</td><td>（記載なし）</td><td>（記載なし）</td><td>動的エラスタンス／V–A カップリング</td><td>臨床判断と管理への実際の寄与を確立する必要</td></tr>
+</tbody></table></div>
+<h4>15-2. 灌流（Perfusion）</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>現行の使い方</th><th>問題点・欠点</th><th>進化する概念</th><th>課題と残る問い</th></tr></thead>
+<tbody>
+<tr><td>乳酸</td><td>SSC が推奨する蘇生目標</td><td>由来が複数ある／非低酸素性の原因が臨床実践では優勢になりうる／回復の動態が遅い／輸液ボーラスのような即効性の介入への反応評価には有用でない／輸液投与のトリガーとして誤用されることが多い</td><td>局所／微小循環の評価</td><td>研究環境外ではツールの価値が限られる／ICG・RRI 等の実施・解釈の技術的限界／微小循環解析用ソフトウェアの開発が遅い／微小循環の解析の拡張：赤血球速度、グリコカリックス、微小循環機能障害のパターン</td></tr>
+<tr><td>ScvO₂</td><td>DO₂/VO₂ 関係の指標</td><td>上大静脈領域：鎮静・挿管後に急速に正常化する／高度の微小循環障害でも正常または過正常値を取りうる／それ自体は灌流よりも代謝ストレスを表す／目標として検証した主要試験が陰性だった後、役割について混乱がある</td><td>マルチモーダル評価</td><td>各変数（ScvO₂ と Pv-aCO₂）は異なる生理学的側面を表し、意思決定過程で相補的な情報を与える／生理学的転帰や治療強度への影響はまだ示されていない／意思決定のために変数を組み合わせる最良の方法が不明</td></tr>
+<tr><td>Pv-aCO₂</td><td>全身血流の間接マーカー</td><td>組織低酸素を直接表さない／全身血流が保たれているか高いときには組織低酸素が存在しても正常でありうる／全身血流と微小循環障害の相対的役割について論争がある／CO₂ 含有量と pCO₂ の関係に対する Haldane 効果の影響</td><td>（記載なし）</td><td>（記載なし）</td></tr>
+<tr><td>末梢灌流／CRT</td><td>組織灌流と過アドレナリン状態のマーカー</td><td>CRT 評価の評価者間ばらつき／CRT の最良のカットオフ値への疑問／mottling スコアの反応動態に関する研究がない／肝脾臓灌流との関係が不明</td><td>末梢灌流の連続評価を可能にしうる光学デバイスの開発</td><td>単純さと普遍的な利用可能性が本質的に失われることを考慮したうえで、連続評価が間欠評価より優れているかを、さまざまな側面で示す必要</td></tr>
+</tbody></table></div>
+<p>（原表脚注の略語：SSC = Surviving Sepsis Campaign、MAP = mean arterial pressure、ICU = intensive care unit、PPV = pulse pressure variation、SVV = stroke volume variation、ICG = indocyanine green、RRI = renal resistive index、MC = microcirculation、RBC = red blood cell、ScvO₂ = central venous oxygen saturation、DO₂ = oxygen delivery、VO₂ = oxygen uptake、Pv-aCO₂ = 中心静脈血と動脈血の二酸化炭素分圧の差、CRT = capillary refill time）</p>
+<h3>16. Table 2. 早期蘇生における昇圧薬の即時（または同時）開始の潜在的理由（原表を日本語化）📋</h3>
+<div class="tw"><table>
+<thead><tr><th>問題</th><th>効果</th><th>設定</th><th>昇圧薬早期開始の潜在的利益</th></tr></thead>
+<tbody>
+<tr><td>低血圧の持続時間と転帰</td><td>低血圧の遷延はより悪い臨床転帰と関連する</td><td>臨床</td><td>低血圧の時間を短縮する</td></tr>
+<tr><td>低前負荷／低心筋収縮性</td><td>心拍出量の低下</td><td>臨床／実験</td><td>非ストレス（non-stressed）区画からストレス（stressed）循環区画への血液量の動員／心筋収縮性の増加／心室動脈カップリングの最適化</td></tr>
+<tr><td>低拡張期圧</td><td>心筋灌流の異常</td><td>臨床</td><td>重篤な血管拡張に由来する高度の低血圧は、単純な輸液投与では是正されそうにない</td></tr>
+<tr><td>低い微小循環駆動圧</td><td>対流性の微小循環血流の異常</td><td>臨床</td><td>低血圧の是正は微小循環血流を改善する。ただし、ベースラインの微小循環が既に是正されている場合、昇圧薬の増量は微小循環血流を乱しうる</td></tr>
+<tr><td>脾臓・内臓（splanchnic）血流の異常</td><td>内臓灌流の低下</td><td>実験</td><td>輸液と昇圧薬の早期併用は、輸液蘇生単独と比べて腸間膜血流と組織酸素化の回復に優れうる。ただし、昇圧薬の単独使用は内臓血流を悪化させうる</td></tr>
+<tr><td>あらかじめ定めた固定量の蘇生輸液の使用</td><td>昇圧薬必要量の逆説的な増加</td><td>実験</td><td>ごく早期の昇圧薬開始は、その後の輸液療法の必要性を減らしうる</td></tr>
+</tbody></table></div>
+<p><strong>この表の読み方</strong>：6項目のうち <strong>2項目は実験（experimental）設定のみ</strong>であり、<strong>4項目が臨床</strong>。また、微小循環と内臓血流の2行には、<strong>同じ表の中に逆向きの但し書き</strong>（増量が害になりうる／単独使用は悪化させうる）が併記されている。「早期に始めればよい」という単純な読み方を表自身が禁じている。</p>
+<h3>17. 結論（原文の趣旨をそのまま）📝</h3>
+<p>&gt; 本レビューでは、敗血症性ショック蘇生における現行実践と進化する概念を論じた。血行動態蘇生の柱は総じて変わっていないが、輸液投与と血管作動薬の使用をどう最適化するかについては新しい情報がある。あらゆる領域における確固たるエビデンスの欠如は懸念が高まっており、これがほとんどの介入について強い推奨を行うことを妨げている。 &gt; &gt; したがって、敗血症性ショック患者の個別化と表現型分類に焦点を当てた広範な研究アジェンダが、異なる卓越した研究グループの共同努力によって進められることが不可欠である。</p>
+<h2>🔗 既存ノートとの整合 — 同フォルダの完全版ノートとの役割分担</h2>
+<p>同フォルダには 797行の完全版として <span class="wl">敗血症性ショックの血行動態管理を個別化する — SOSD 4相ごとのモニタリングと治療（総説・CritCare2022）</span>（De Backer ら, Crit Care 2022）がある。<strong>本稿とは軸が違う</strong>ので、対比して読むと役割が明確になる。</p>
+<div class="tw"><table>
+<thead><tr><th>観点</th><th>本稿（Bakker ら, ICM 2021）</th><th>De Backer ら（CritCare 2022）</th></tr></thead>
+<tbody>
+<tr><td>整理の軸</td><td>「現行実践 vs 進化する概念」の2列。時間軸（何が古く何が新しいか）</td><td>「SOSD 4相」。患者の時間経過（今どの相か）</td></tr>
+<tr><td>著者構成</td><td>24名。ANDROMEDA-SHOCK グループが中心（責任著者 Hernandez、筆頭 Bakker）</td><td>9名。De Backer・Vincent らブリュッセル／パリ系</td></tr>
+<tr><td>中心にある問い</td><td>「何が標準で、何がこれからか」</td><td>「相ごとに何を測り、何を投与するか」</td></tr>
+<tr><td>CRT の扱い</td><td>Evolving concept 側。ANDROMEDA-SHOCK を肯定的に引用し、5つの理由を挙げて「重要な目標として考慮すべき」</td><td>Optimization 相の指標のひとつ。CRT 正常例では乳酸標的の蘇生が過剰死亡と関連した（Kattan 2020）という警告も併記</td></tr>
+<tr><td>乳酸の扱い</td><td>「複数の由来を持つ」「回復動態が遅い」「輸液のトリガーとして誤用される」。ただし昇圧薬テストの判定には使う</td><td>「乳酸が下がりきらないことを理由に輸液を追加しない」と明示</td></tr>
+<tr><td>昇圧薬テスト</td><td>ANDROMEDA-SHOCK 由来。MAP 80〜85、1時間後に末梢灌流／2時間後に乳酸</td><td>「MAP チャレンジ」として同趣旨。尿量・意識・皮膚灌流で判定</td></tr>
+<tr><td>難治性ショック</td><td>Table 3 の9因子＋Table 4 の血液浄化＋VA-ECMO で1章分を割く</td><td>高用量昇圧薬を要するショックとして短く扱う</td></tr>
+<tr><td>強心薬</td><td>ドブタミン中心。Geri 2019 の 18%・LVEF 40%未満・低 VTI という表現型ベースの適応を提示</td><td>「低 CO ＋ 収縮能低下 ＋ 組織低灌流が揃ったときだけ」。薬剤選択は3段階提案（エビデンスは最も弱いと自認）</td></tr>
+<tr><td>モニタリング機器</td><td>Table 1 で指標ごとに横断整理（本稿の最大の資産）</td><td>相ごとに割り当て（TPTD／PAC をいつ足すか）</td></tr>
+</tbody></table></div>
+<p><strong>結論の異同</strong>：</p>
+<ul><li><strong>一致している点</strong>：①個別化が必要という総論、②CVP を輸液蘇生のガイドにするのは誤用、③ScvO₂ は単独目標にしない、④昇圧薬の早期開始は血行動態上有利だが死亡は変えていない、⑤SOSD/相の枠組みも各アルゴリズムも RCT で検証されていない。</li><li><strong>強調点が違う点</strong>：本稿は<strong>「新しい概念のカタログ＋研究アジェンダ」</strong>であり、De Backer 2022 は<strong>「今日ベッドサイドで回すループの設計図」</strong>。JC で並べるなら、本稿 → De Backer 2022 の順（何が問題か → どう回すか）。</li><li><strong>CRT についての温度差</strong>：本稿は CRT に肯定的（ANDROMEDA-SHOCK グループ）。De Backer 2022 は CRT を採用しつつ「CRT 正常例に乳酸を追いかけると害」という側面も併記する。<mark class="hl">本稿にはこの Kattan 2020 の警告に相当する記述がない</mark>。両方読んで初めてバランスが取れる。</li></ul>
+<p><strong>その他のノートとの関係</strong></p>
+<ul><li><span class="wl">Vincent流・敗血症性ショックの治し方 — 感染管理と血行動態のSOSDを同時並行で（エディトリアル・ICM2018）</span>：SOSD の出所。本稿は SOSD を1段落で紹介するだけなので、由来はこちら。</li><li><span class="wl">静脈内輸液療法の4フェーズ概念モデル（SOSD）</span>：輸液に限った4相モデル（ROSE との対比）。</li><li><span class="wl">敗血症性ショック蘇生の25年 — 単一固定指標から生理学ガイド・表現型駆動へ（概念的展望2026）</span>：本稿の5年後。本稿が「研究アジェンダ」として挙げた表現型駆動・個別化がその後どう動いたかを見る。</li><li><span class="wl">敗血症性ショックは血管拡張だけではない — 微小循環・代謝・心筋・自律神経（総説・ICM2026）</span>：本稿の「微小循環」節を1本に展開したもの。</li><li><span class="wl">SSCガイドラインと個別化ケアの両立（Vincent Crit Care 2021）</span>：本稿の引用文献8。「SSC の一律推奨と個別化をどう両立するか」という本稿の問題意識の直接の前身。</li><li><span class="wl">連続乳酸値で蘇生を導く根拠は乏しい（エディトリアル・ICM2024）</span>：本稿の乳酸への留保を、3年後にさらに踏み込んで論じたもの。</li><li><span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span>：本稿の「難治性＝ノルアドレナリン 0.25 µg/kg/分超」という定義が、後年どう精緻化されたか。</li><li><span class="wl">「難治性」敗血症性ショックの前に疑うべき可逆的要因（usual suspects フレームワーク・CritCare2026）</span>：本稿 Table 3 の後継にあたる枠組み。</li></ul>
+<h2>🔍 批判的吟味（JC での論点）</h2>
+<ol><li>ナラティブレビューである。 系統的検索なし、選択基準なし、GRADE なし、コンセンサス手続きなし。24名の専門家が各パートを分担執筆したもので、<strong>引用の選択には著者の立場が反映される</strong>。ガイドラインとして扱わない。</li></ol>
+<ol><li>ANDROMEDA-SHOCK の記述が、統計学的には正当化しにくい方向に振れている。 本稿は「CRT を目標とした蘇生が<strong>より低い死亡と関連した</strong>（34.9% vs 43.4%, p = 0.06）」と書く。p = 0.06 は事前に定めた有意水準を満たしておらず、原著の主要評価項目は陰性である。責任著者（Hernandez）を含む主要著者が ANDROMEDA-SHOCK の研究者であることを踏まえると、<mark class="hl">自身の陰性試験を "associated with lower mortality" と表現している構図</mark>になる。「その後のベイズ解析に支持された」という補強も、事後のベイズ再解析は事前分布の選択に依存するため、頻度論の陰性結果を覆すものではない。JC ではここを最初の論点にできる。</li></ol>
+<ol><li>CRT を推す5つの理由のうち、比較試験に裏づけられているのは限られる。 「予後との関連」「反応が速い」「簡便」「資源制約下でも使える」「肝脾臓灌流と平行して変化する」のうち、後の3つは長所ではあるが<strong>転帰改善の根拠にはならない</strong>。一方で本稿自身が Table 1 で「評価者間ばらつき」「最良のカットオフ値への疑問」を未解決として挙げており、<strong>同じ論文の中で推奨と限界が対立している</strong>。当院で標準化するなら Table 1 側の課題（誰がどう測るか）を先に解く必要がある。</li></ol>
+<ol><li>MAP 目標に関する2文の整合が本文だけでは取れない。 ①SEPSISPAM のサブグループで「既往に高血圧のある患者はより高い MAP から利益を得るかもしれない」、②65 trial では相対的低血圧（MAP 60〜65）に割り付けた高齢患者で「慢性高血圧患者のサブグループで有益の可能性」。<strong>①と②は逆向きの示唆</strong>であり、本稿はこれを「したがって高い MAP 目標が全ての慢性高血圧患者に有益とは限らない」と1文でまとめている。また、①のアウトカムが何であったか（死亡か、腎代替療法か）を本稿は明示していない。<strong>サブグループ解析2つを重ねて臨床方針を導くこと自体の危うさ</strong>も論点になる。</li></ol>
+<ol><li>「これは既往の高血圧がない患者にも当てはまる」の根拠が入れ替わっている。 この文に付された引用は Dubin 2009 と Fiorese Coimbra 2019 であり、いずれも微小循環を評価した小規模研究で、死亡をアウトカムとした RCT ではない。直前の文（SEPSISPAM のサブグループで死亡・臓器障害を論じた文脈）と地続きに読むと、<strong>エビデンスの種類が入れ替わったことに気づきにくい</strong>書き方になっている。</li></ol>
+<ol><li>ドブタミンのネットワークメタ解析の効果量が脆い。 OR 0.30、95%CI 0.09〜0.99。上限が 1.00 のすぐ手前にあり、<strong>サンプルが小さいネットワークで生じやすい形</strong>である。この1つの結果をもって「ドブタミンは死亡を減らす」と読むのは危険で、本稿自身も「さらなるエビデンスは進行中の多施設試験（NCT04166331）から期待される」と続けている。</li></ol>
+<ol><li>難治性ショックの閾値 0.25 µg/kg/分が、本稿の別の記述と衝突する。 本稿は同じ 0.25 µg/kg/分を、①バソプレシンを追加すべき「低〜中等量」の下限（0.25〜0.5 µg/kg/分）としても、②難治性ショックの定義（これを<strong>超えて</strong>投与しながら低血圧と低灌流が持続）としても使っている。<mark class="hl">同じ用量が「まだ低〜中等量」であり同時に「難治性の境界」であるという、内的な緊張がある。</mark> 実務では「0.25 で難治性と呼ぶ」より「0.25 を超えたら Table 3 の9因子を回し始める」と読むのが合理的。</li></ol>
+<ol><li>Table 4 に未解決の編集照会がそのまま印刷されている。 「A problem with this "Potential Harm" column! …Agree?」という共著者間（または編集者）のコメントが公開版に残っている。査読と校正を経た一流誌でもこの種の抜けが起きる実例であり、<mark class="hl">原表を検証せずに院内資料へ転載しない</mark>という一般則の裏づけになる。加えて Table 4 のタイトル自体が "Extracorporeal techniques used <strong>is</strong> sepsis"（in の誤り）となっている。</li></ol>
+<ol><li>β遮断薬の節に文の重複がある。 「as in the former context beta blockers could be detrimental <strong>in the former</strong>」と "in the former" が二重になっている。内容の理解を妨げるほどではないが、上記8と併せて校正の粗さを示す。</li></ol>
+<ol><li>モニタリング機器に関する COI の偏り。 24名中19名は COI なしだが、申告のある5名のうち Saugel は血行動態モニタリング企業8社、Ince は舌下微小循環顕微鏡企業の Chief Scientific Officer 兼株主である。本稿の「進化する概念」の相当部分が<strong>微小循環モニタリングとゴール指向療法の拡大</strong>であることを踏まえると、方向性へのバイアスを完全には否定できない。ただし本稿は同時に「機器そのものは転帰を変えられない」と冒頭で明記しており、単純な機器推進ではない。</li></ol>
+<ol><li>「RCT が全て陰性だから個別化が必要」という論理。 本稿の出発点は「生存に有意な効果を示した介入はひとつもない」である。しかし RCT が陰性であることは、そのままでは「サブグループには効く」を意味しない。本稿が挙げる個別化ツール（表現型、微小循環、Eadyn、レニン）は<strong>いずれも前向き検証が未了</strong>であり、本稿もそう明記している。この論理は post hoc なサブグループ探索を正当化しかねない、という点は De Backer 2022 と共通の弱点。</li></ol>
+<ol><li>小児は対象外。 成人のみを扱っており、SSC の小児推奨には触れていない。</li></ol>
+<ol><li>本 PDF に印字されていない情報がある。 巻・号・ページが無い（online-first 版）。また supplementary material は本 PDF に含まれない。旧ノートが記していた「2021 Dec 15, Online ahead of print」という日付は、<mark class="hl">本 PDF 上には印字されていない</mark>（PDF に印字されているのは Received 13 Sep 2021 / Accepted 27 Nov 2021 のみ）。出典不明の日付なので本ノートでは採用しなかった。</li></ol>
+<ol><li><strong>本稿にない一般的背景知識（明示的に分離する）</strong>：以下は本稿の本文には書かれていないが、JC で補うと議論しやすい。①SSC 2021 における CRT の推奨強度（弱い推奨・低い確実性）は本稿に記載がない。②SEPSISPAM の慢性高血圧サブグループで減ったのは腎代替療法の必要性であって死亡ではない、という点は本稿に記載がない。③ANDROMEDA-SHOCK の主要評価項目のハザード比・信頼区間は本稿に記載がない（p 値のみ）。<mark class="hl">いずれも「本稿にはこう書かれていない」という形で確認してから議論に持ち込む。</mark></li></ol>
+<h2>📚 主要引用文献一覧（本文で言及された主要なもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ARDS の現行および進化する標準的ケア（本稿の対になるレビュー）</td><td>Menk M ら. Intensive Care Med. 2020;46:2157–2167</td></tr>
+<tr><td>2</td><td>血行動態モニタリングと支持（「生存に効果を示した介入はない」の根拠）</td><td>Vincent JL, Joosten A, Saugel B. Crit Care Med. 2021;49:1638–1650</td></tr>
+<tr><td>3</td><td>SSC 国際ガイドライン 2021</td><td>Evans L ら. Intensive Care Med. 2021;47:1181–1247</td></tr>
+<tr><td>4</td><td>循環性ショックと血行動態モニタリングのコンセンサス（ESICM タスクフォース）</td><td>Cecconi M ら. Intensive Care Med. 2014;40:1795–1815</td></tr>
+<tr><td>5</td><td>早期の乳酸ガイド療法（多施設オープンラベル RCT）</td><td>Jansen TC ら. Am J Respir Crit Care Med. 2010;182:752–761</td></tr>
+<tr><td>6</td><td>敗血症における乳酸クリアランスの10の落とし穴</td><td>Hernandez G, Bellomo R, Bakker J. Intensive Care Med. 2019;45:82–85</td></tr>
+<tr><td>8</td><td>SSC ガイドラインと個別化ケアの両立</td><td>Vincent JL ら. Crit Care. 2021;25(1):397</td></tr>
+<tr><td>10</td><td>輸液チャレンジ手技が輸液反応性の診断に与える影響（SR/メタ解析）</td><td>Toscani L ら. Crit Care. 2017;21:207</td></tr>
+<tr><td>11</td><td>輸液反応性の予測：アップデート</td><td>Monnet X, Marik PE, Teboul JL. Ann Intensive Care. 2016;6:111</td></tr>
+<tr><td>12</td><td>標準化した敗血症蘇生への心血管反応の不均一性</td><td>Guarracino F, Bertini P, Pinsky MR. Crit Care. 2020;24:99</td></tr>
+<tr><td>13</td><td>ANDROMEDA-SHOCK（末梢灌流 vs 乳酸を目標とした蘇生）</td><td>Hernandez G ら. JAMA. 2019;321:654–664</td></tr>
+<tr><td>17</td><td>人工呼吸患者における輸液反応性予測の心エコー指標の比較（SVC vs IVC）</td><td>Vignon P ら. Am J Respir Crit Care Med. 2017;195:1022–1032</td></tr>
+<tr><td>18</td><td>敗血症における輸液反応性の経時変化（FCREV study）</td><td>Roger C ら. Crit Care. 2019;23:179</td></tr>
+<tr><td>19</td><td>除水を導く PLR テスト</td><td>Monnet X ら. Ann Intensive Care. 2016;6:46</td></tr>
+<tr><td>24</td><td>循環性ショックにおける強心薬の現在の使用</td><td>Scheeren TWL ら. Ann Intensive Care. 2021;11:21</td></tr>
+<tr><td>25</td><td>ノルアドレナリンによる昇圧は微小循環血流を改善しない（前向き研究）</td><td>Dubin A ら. Crit Care. 2009;13:R92</td></tr>
+<tr><td>26</td><td>重症敗血症性ショックにおける短期バソプレシン投与の有益効果</td><td>Patel BM ら. Anesthesiology. 2002;96:576–582</td></tr>
+<tr><td>27</td><td>VASST（バソプレシン vs ノルアドレナリン）</td><td>Russell JA ら. N Engl J Med. 2008;358:877–887</td></tr>
+<tr><td>28</td><td>VANISH（早期バソプレシン vs ノルアドレナリンと腎不全）</td><td>Gordon AC ら. 2016</td></tr>
+<tr><td>33</td><td>敗血症性ショックにおける早期の末梢灌流ガイド輸液療法</td><td>van Genderen ME ら. Am J Respir Crit Care Med. 2015;191:477–480</td></tr>
+<tr><td>34</td><td>ANDROMEDA-SHOCK のベイズ再解析</td><td>Zampieri FG ら. 2020</td></tr>
+<tr><td>44</td><td>SMART（バランス晶質液 vs 生理食塩水）</td><td>Semler MW ら. 2018</td></tr>
+<tr><td>45</td><td>ICU 入室前の早期バランス晶質液が敗血症転帰に与える効果</td><td>Jackson KE ら. Chest. 2021;159:585–595</td></tr>
+<tr><td>46</td><td>輸液のクロール含量と敗血症重症患者の急性腎障害の関連</td><td>Jaynes MP ら. J Crit Care. 2018;44:363–367</td></tr>
+<tr><td>47</td><td>BaSICS（バランス液 vs 生食、および輸液速度）</td><td>Zampieri FG ら. 2021</td></tr>
+<tr><td>49</td><td>昇圧薬開始の遅れは敗血症性ショックの死亡増加と関連</td><td>Colon Hidalgo D ら. J Crit Care. 2020;55:145–148</td></tr>
+<tr><td>50</td><td>敗血症性ショックにおけるノルアドレナリンのごく早期開始（傾向スコア解析）</td><td>Ospina-Tascón GA ら. 2020</td></tr>
+<tr><td>51</td><td>CENSER（敗血症性ショック蘇生における早期ノルアドレナリン・RCT）</td><td>Permpikul C ら. Am J Respir Crit Care Med. 2019;199:1097–1105</td></tr>
+<tr><td>52</td><td>ノルアドレナリン開始のタイミング（SR・メタ解析）</td><td>Li Y, Li H, Zhang D. Crit Care. 2020;24:488</td></tr>
+<tr><td>53</td><td>重症患者におけるリベラル vs 制限的輸液療法</td><td>Silversides JA, Perner A, Malbrain M. Intensive Care Med. 2019;45:1440–1442</td></tr>
+<tr><td>57</td><td>持続的腎代替療法中の除水はより良い転帰と関連（コホート研究）</td><td>Hall A ら. Crit Care. 2020;24:279</td></tr>
+<tr><td>59</td><td>拡張期ショック指数（DSI）と臨床転帰</td><td>Ospina-Tascón GA ら. Ann Intensive Care. 2020;10:41</td></tr>
+<tr><td>62</td><td>心室動脈カップリング指標としての動的動脈エラスタンス（動物実験）</td><td>Monge García MI ら. 2020</td></tr>
+<tr><td>66</td><td>既往高血圧のある敗血症性ショック患者でノルアドレナリンにより昇圧したときの微小循環</td><td>Fiorese Coimbra KT ら. Crit Care Med. 2019;47:1033–1040</td></tr>
+<tr><td>67</td><td>SEPSISPAM（高 MAP 目標 vs 低 MAP 目標）</td><td>Asfar P ら. 2014</td></tr>
+<tr><td>68</td><td>65 trial（高齢重症患者における昇圧薬曝露低減と90日死亡）</td><td>Lamontagne F ら. 2020</td></tr>
+<tr><td>69</td><td>テルリプレシン vs ノルアドレナリン（多施設 RCT）</td><td>Liu ZM ら. 2018</td></tr>
+<tr><td>70</td><td>セレプレシン（選択的 V1A 作動薬）の第IIa相 RCT</td><td>Russell JA ら. Crit Care. 2017;21:213</td></tr>
+<tr><td>71</td><td>SEPSIS-ACT（セレプレシン vs プラセボ、第2b/3相）</td><td>Laterre PF ら. 2019</td></tr>
+<tr><td>72</td><td>ATHOS-3（血管拡張性ショックへのアンジオテンシンII）</td><td>Khanna A ら. 2017</td></tr>
+<tr><td>73</td><td>カテコラミン抵抗性血管拡張性ショックへのアンジオテンシンII投与患者におけるレニンと生存</td><td>Bellomo R ら. Am J Respir Crit Care Med. 2020;202:1253–1261</td></tr>
+<tr><td>78</td><td>敗血症性ショックの心血管クラスター（臨床＋心エコーパラメータの post hoc 解析）</td><td>Geri G ら. Intensive Care Med. 2019;45:657–667</td></tr>
+<tr><td>80</td><td>重症敗血症・敗血症性ショックにおける血管作動薬の死亡への効果（ネットワークメタ解析）</td><td>Belletti A ら. J Crit Care. 2017;37:91–98</td></tr>
+<tr><td>85</td><td>LeoPARDS（敗血症の急性臓器障害予防へのレボシメンダン）</td><td>Gordon AC ら. N Engl J Med. 2016;375:1638–1648</td></tr>
+<tr><td>86</td><td>レボシメンダンはドブタミンに対する死亡ベネフィットをもたらさない（メタ解析）</td><td>Bhattacharjee S ら. J Clin Anesth. 2017;39:67–72</td></tr>
+<tr><td>90</td><td>デクスメデトミジンの乳酸クリアランスへの効果（多施設 RCT のサブ解析）</td><td>Miyamoto K ら. Shock. 2018;50:162–166</td></tr>
+<tr><td>91</td><td>プロポフォールとデクスメデトミジンのノルアドレナリン必要量への影響（クロスオーバー試験）</td><td>Morelli A ら. Crit Care Med. 2018</td></tr>
+<tr><td>93</td><td>高心拍出量型敗血症性ショックにおける早期エスモロールの血行動態・抗炎症効果（パイロット）</td><td>Levy B ら. Crit Care. 2021;25:21</td></tr>
+<tr><td>95</td><td>Septic shock（難治性ショックの 0.25 µg/kg/分という定義の出典）</td><td>Annane D, Bellissant E, Cavaillon JM. Lancet. 2005;365:63–78</td></tr>
+<tr><td>96</td><td>VITAMINS（ビタミンC・ヒドロコルチゾン・チアミン vs ヒドロコルチゾン単独）</td><td>Fujii T ら. 2020</td></tr>
+<tr><td>97</td><td>ヒドロコルチゾン・ビタミンC・チアミン併用療法の RCT</td><td>Chang P ら. Chest. 2020;158:174–182</td></tr>
+<tr><td>102</td><td>EUPHRATES（標的ポリミキシンB血液吸着と28日死亡）</td><td>Dellinger RP ら. JAMA. 2018;320:1455–1463</td></tr>
+<tr><td>103</td><td>新規体外サイトカイン吸着デバイスの IL-6 除去効果（RCT）</td><td>Schädler D ら. PLoS One. 2017;12:e0187015</td></tr>
+<tr><td>104</td><td>高カットオフ vs 標準血液濾過（二重盲検 RCT）</td><td>Atan R ら. Crit Care Med. 2018;46:e988–e994</td></tr>
+<tr><td>105</td><td>IVOIRE（高容量 vs 標準容量血液濾過）</td><td>Joannes-Boyau O ら. Intensive Care Med. 2013;39:1535–1546</td></tr>
+<tr><td>106</td><td>ASSET（Alteco LPS 吸着器によるエンドトキシン除去）</td><td>Lipcsey M ら. Shock. 2020;54:224–231</td></tr>
+<tr><td>107</td><td>重症敗血症・敗血症性ショックにおける血漿交換（RCT）</td><td>Busund R ら. Intensive Care Med. 2002;28:1434–1439</td></tr>
+<tr><td>108</td><td>選択的サイトフェレーシスデバイスの安全性・有効性（多施設 RCT）</td><td>Tumlin JA ら. PLoS One. 2015;10:e0132482</td></tr>
+<tr><td>114</td><td>成人敗血症性ショックにおける VA-ECMO（SR・メタ解析＋個別参加者データメタ回帰）</td><td>Ling RR ら. Crit Care. 2021;25:246</td></tr>
+</tbody></table></div>
+<p>引用文献は全 114 件。上記は本文・表の主張を支える主要なもののみ。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 敗血症性ショック蘇生の柱（輸液・昇圧薬・強心薬）は変わっていない。変わったのは<mark class="hl">「固定した目標値を追う」から「介入して反応を見るテストを回す」へ</mark>という発想であり、そのテスト群（昇圧薬テスト・イノダイレーターテスト・輸液反応性テスト）は<strong>いずれも転帰改善を証明していない</strong>。本稿はガイドラインではなく研究アジェンダである。</p>
+</div>
+<ul><li><strong>現行標準として当院プロトコルに書けるのは5点だけ</strong>：ノルアドレナリン第一選択／MAP 65 mmHg を初期の下限介入閾値に／認知後3時間以内に 30 mL/kg 以上（ただし観察研究のみが根拠で議論あり）／輸液後も灌流異常が残ればドブタミン／ノルアドレナリン 0.25〜0.5 µg/kg/分でバソプレシン追加。</li><li><mark class="hl"><strong>乳酸を輸液追加の引き金にしない</strong></mark>。本稿は乳酸を「由来が複数あり、回復動態が遅く、速効性の介入への反応判定に使えず、輸液のトリガーとして誤用されがち」と位置づける。</li><li>輸液反応者は初期でも 50〜60%、初期輸液後には 25% が既に不応。輸液不応は「輸液の到達目標」ではなく「輸液の絶対的な停止点」。</li><li>CRT は "evolving concept" であって現行標準ではない。ANDROMEDA-SHOCK の 34.9% vs 43.4% は <strong>p = 0.06 で有意ではない</strong>。導入するなら測定手技の標準化から。</li><li>昇圧薬の早期・同時開始は「輸液量・低血圧時間・肺水腫・新規不整脈」を減らす目的で考える。RCT では死亡は減らなかった。</li><li>ドブタミンは全例に効かない。効くのは 18% ——LVEF 40% 未満かつ大動脈 VTI 低値。有効なら LVEF と VTI が上がり、心拍数は上がらないか下がる。</li><li><mark class="hl">ノルアドレナリン 0.25 µg/kg/分を超えたら、増量する前に Table 3 の9因子（39℃超・80歳超・薬剤・pH 7.20未満・高血糖・低Ca・CIRCI・バソプレシン欠乏・チアミン/ビタミンC欠乏）を回し、必ず心エコーで LVOT 閉塞を除外する。</mark></li><li><strong>推奨されないもの（本稿が明記）</strong>：β遮断薬、メチレンブルー、テルリプレシン、セレプレシン。血液浄化は Table 4 の RCT がことごとく陰性で「controversial」。</li><li><strong>VA-ECMO は LVEF が非常に低い難治性例に限った救済</strong>。</li></ul>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックを認知した</td><td>低血圧・組織灌流異常（皮膚・意識・尿量）・乳酸の3つが揃っているか</td><td>ただちに蘇生開始。ノルアドレナリンを第一選択に。MAP 65 mmHg を初期の下限介入閾値とする</td></tr>
+<tr><td>初期輸液をどこまで入れるか</td><td>輸液反応性（PLR・呼気終末閉塞・一回換気量 6〜8 mL/kg への増加・PPV/SVV・SVC 変動）。低容量血症が明らかなら評価不要</td><td>30 mL/kg は目安であって固定値ではない。反応があり臨床・血行動態が改善していれば継続、不応になったらそこが絶対的な停止点</td></tr>
+<tr><td>DAP が非常に低い／血管拡張が強い</td><td>DAP、拡張期ショック指数（DAP/心拍数）</td><td>輸液の効果を待たずに昇圧薬を同時開始することを考慮する（血行動態上の利点。死亡減少の根拠はない）</td></tr>
+<tr><td>MAP 65 に到達したが灌流指標が改善しない</td><td>CRT、尿量、乳酸、四肢・心筋虚血、不整脈</td><td>昇圧薬テスト：MAP を一過性に 80〜85 mmHg へ上げ、末梢灌流は1時間後・乳酸は2時間後に判定。改善すればその MAP を維持、無効なら元に戻す</td></tr>
+<tr><td>灌流が戻らず心機能が疑わしい</td><td>心エコーで LVEF・大動脈 VTI・LVOT</td><td>LVEF 40% 未満かつ VTI 低値ならドブタミンの適応。低容量血症が明らかなら投与しない（血管拡張で低血圧を招く）</td></tr>
+<tr><td>ドブタミンを始めたが効いているか分からない</td><td>イノダイレーターテスト：5 µg/kg/分を限られた時間投与し、目標指標の変化を見る</td><td>有益（LVEF・VTI 増加、心拍数は増えない／下がる）なら継続。無効なら中止</td></tr>
+<tr><td>循環が安定してきた</td><td>体重変化・正味輸液バランス、臓器浮腫、腹腔内圧、AKI、離脱関連心不全</td><td>輸液を制限し、輸液過剰を早期に是正する。除水は輸液不応の確認とエコーでガイドする</td></tr>
+<tr><td>昇圧薬を離脱したい</td><td>動的動脈エラスタンス（PPV/SVV 比）</td><td>低血圧を来さずに離脱できる患者の選別に使える（提案段階）</td></tr>
+<tr><td>ノルアドレナリン 0.25 µg/kg/分を超えて低血圧・低灌流が続く</td><td>低容量血症がないことを確認したうえで、Table 3 の9因子を全部つぶす。必ず心エコーで LVOT 閉塞を除外</td><td>因子を是正する。ヒドロコルチゾンは特定の患者で有益性が確立。ビタミンは不明確</td></tr>
+<tr><td>それでも改善しない</td><td>LVEF が非常に低いか</td><td>非常に低ければ VA-ECMO を救済として検討。血液浄化はエビデンスが乏しく、適応と評価項目を事前に決めない限り使わない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🍽️ 嚥下障害 Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="jc-84ce50dfb9.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🍽️ 嚥下障害 Home</h1>
+  <dl class="cite"><dt>原題</dt><dd>Dysphagia in the ICU — from extubation to oral intake</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/jc-84ce50dfb9.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/jc-84ce50dfb9.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/jc-84ce50dfb9.pdf)</p>
+<p># 🍽️ 嚥下障害 Home</p>
+<p>ICUで獲得される嚥下障害（ICU-Acquired Swallowing Disorders / 抜管後嚥下障害 PED）と、その周辺（誤嚥・気管切開・経鼻胃管・食形態）を束ねる入口です。<mark class="hl"><strong>「抜管したあと、いつ何を食べさせてよいか」という一つの問いに、Vault内のどのノートがどこまで答えているか</strong></mark>を先に掴んでください。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>このHomeの由来 Evernote 由来の <code>ICU獲得性嚥下障害（ICUASD）まとめ</code>（リンク集＋旧メモ）を、2026-08-16 に Home として作り直したものです。<mark class="hl">旧ノートにしか無かった情報（電気刺激の機器開発メモ等）は §7 に保存しています</mark>。</p>
+</div>
+<p>役割分担を先に一行で。==<strong>抜管そのものの可否判断は <span class="wl">🫁 呼吸器 Home</span> と各抜管ノートに、リハビリ全般は <span class="wl">🏃 リハビリ Home</span> に任せ、本Homeは「飲み込めるか・食べさせてよいか」だけを扱います</strong>==。</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院の抜管後プロトコルをこう点検する <strong>① 「むせなければ食べてよい」を捨てる</strong></p>
+<ul><li><mark class="hl"><strong>造影・内視鏡で誤嚥が確認された患者の半数超が無症候（silent aspiration）</strong></mark>（<span class="wl">ICU獲得性嚥下障害 — 有病率3〜62%、3オンス水飲みテストは感度96.5%・特異度48.7%（Concise Definitive Review・CCM2013）</span>）。咳・湿性嗄声の有無でスクリーニングを終える運用は、原理的に取りこぼす</li></ul>
+<p><strong>② 水飲みテストの位置づけを「入口」に固定する</strong></p>
+<ul><li>3オンス（90 mL）水飲みテストは<mark class="hl"><strong>感度96.5%・特異度48.7%</strong></mark>。<mark class="hl">拾い上げには使えるが、不合格の半数は誤嚥していない</mark></li><li><mark class="hl"><strong>不合格＝絶食確定ではなく、STへ回す入口</strong></mark>として設計する。逆に<strong>合格でも silent aspiration は否定できない</strong></li><li><mark class="hl"><strong>この検査は抜管直後の患者では未検証</strong></mark>（混合入院患者での値）。当院で使うならローカルルールとして明文化する</li></ul>
+<p><strong>③ 抜管の可否判断そのものに「飲み込み」を組み込む</strong></p>
+<ul><li>脳損傷患者では<mark class="hl"><strong>抜管失敗の67%が分泌物過多</strong></mark>で、神経学的悪化による失敗はゼロだった（<span class="wl">脳損傷患者の抜管失敗予測スコア — 咳嗽・絞扼反射・嚥下とCRS-R視覚の4因子、失敗の3分の2は分泌物過多（Godet・Anesthesiology2017）</span>）</li><li>同研究で<mark class="hl"><strong>RSBI・呼吸数・P/F・PaCO₂・pH は成功群と失敗群で1つも差がつかなかった</strong></mark>。抜管カンファで呼吸パラメータを並べるのをやめ、<mark class="hl"><strong>気道保護の4項目（咳嗽・絞扼反射・嚥下・追視）を口頭で言い切る</strong></mark>フォーマットにする</li></ul>
+<p><strong>④ 抜管後の吸引体制を「抜管前に」決める</strong></p>
+<ul><li>失敗の主因が分泌物である以上、<mark class="hl"><strong>吸引の頻度・人員・カフアシスト/MI-Eの可否まで決めてから抜管する</strong></mark></li></ul>
+<p><strong>⑤ ST を呼ぶタイミングを分岐として書く</strong></p>
+<ul><li>CCM2013 の Fig.4 は「①覚醒と座位保持 → ②高リスク項目があれば先にST → ③水飲みテスト → ④不合格ならST評価まで絶食」の4段。<mark class="hl"><strong>当院の手順に「②で先にSTを呼ぶ」分岐があるかを確認する</strong></mark></li><li><mark class="hl">米国でも日常的にスクリーニングしている病院は41%のみ</mark>。国家的基準は脳卒中にはあるが<strong>抜管患者には存在しない</strong></li></ul>
+<p><strong>⑥ 経鼻胃管を「無害な回避策」と考えない</strong></p>
+<ul><li>不快感・身体抑制・自己抜去・誤留置という代償がある。<mark class="hl"><strong>外科的経腸栄養チューブも、生存・栄養状態・快適さのいずれについても有益性は証明されていない</strong></mark>（CCM2013）</li></ul>
+<p><strong>⑦ 高齢者では下顎を見る</strong></p>
+<ul><li>下顎可動性のある高齢者は<mark class="hl"><strong>常食摂取 5.3% 対 50.1%、絶食 36.8% 対 2.8%</strong></mark>（<span class="wl">下顎の可動性と高齢者の食形態調整（Wada 2019）</span>）。<mark class="hl">医療者以外でも評価でき、多変量調整後も有意</mark></li></ul>
+<p><strong>⑧ 期待値を下げておく</strong></p>
+<ul><li>嚥下介入で下がるのは肺炎だけ（RR 0.71）。<mark class="hl"><strong>経口摂取の再開時期も誤嚥そのものも動いていない</strong></mark>（<span class="wl">急性期・重症患者の口腔咽頭嚥下障害への介入（システマティックレビュー）</span>）。しかも22試験中19試験が脳卒中で、<mark class="hl">一般ICUは1試験しかない</mark></li></ul>
+<p><strong>⑨ 気管切開患者では「STが来るまで待つ」をやめる</strong></p>
+<ul><li>気切患者の嚥下障害有病率は<mark class="hl"><strong>93%に達しうる</strong></mark>。遷延離脱例の<mark class="hl"><strong>最大41%で抜去が失敗し、その64%が重度嚥下障害を主因とする</strong></mark>（<span class="wl">気管切開患者のケアと人工呼吸離脱・カニューレ抜去 — SKR・SRLF合同の25推奨（専門家コンセンサスGL・AnnIntensiveCare2026）</span> R20）</li><li>==<strong>治療開始が1日遅れるごとに、遷延性嚥下障害または院内死亡の調整OR 1.09（95%CI 1.02〜1.18、P=0.009）</strong>==。脳卒中では嚥下評価が24時間超遅れると誤嚥性肺炎が絶対3%増え、最も遅い群は調整OR 1.98（1.67〜2.35）</li><li>専任の嚥下障害スペシャリストにアクセスできるICUは世界で<mark class="hl">4〜20%</mark>しかない。当院も「STが来るまで絶食」ではなく、<mark class="hl"><strong>訓練を受けたICUスタッフによる早期スクリーニングを先に置く</strong></mark></li></ul>
+<p><strong>⑩ カフは「脱気して食べさせる」方向で設計する</strong></p>
+<ul><li>嚥下造影の後ろ向き比較で不顕性誤嚥は<mark class="hl"><strong>カフ脱気7%（281例）対カフ膨張23%（342例）</strong></mark>。カフ付きチューブに一方弁を足すと液体の penetration–aspiration スコアが半減（同GL R9・R10）</li><li>抜去の関門は24時間キャッピングの完遂ではなく、<mark class="hl"><strong>8時間あたり吸引2回以下かつ重度嚥下障害がないこと</strong></mark>（R23）。胃瘻も一律ではなく栄養状態と嚥下評価で判断する（R21）</li></ul>
+<p><strong>⑪ 胃管は「入れたあと」の確認までを手順にする</strong></p>
+<ul><li>気道誤挿入はカプノグラフィ波形で除外できる（<mark class="hl"><strong>感度100%・特異度95.7〜97.6%、陰性尤度比0</strong></mark>／<span class="wl">経鼻胃管の気道誤挿入はカプノグラフィで除外できる — 508例で感度100%・特異度95.7〜97.6%、陰性尤度比0（多施設前向き診断精度研究・CritCare2026）</span>）。吸引液が引けない<mark class="hl">47%の場面でも使える</mark>のが値打ち</li><li>ただし<mark class="hl"><strong>陰性は「気道ではない」としか言えず、「胃にある」保証はない</strong></mark>（10.8%が食道・噴門直上・小腸・とぐろ巻き）。X線を省く運用にはしない</li></ul>
+</div>
+<h2>🧭 このテーマの位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていること）</strong></li><li>嚥下障害は誤嚥・再挿管・肺炎・在院延長と強く結びつく。抜管後嚥下障害は「肺炎・再挿管・死亡」の複合アウトカムと独立に関連（調整OR 3.31）、院内死亡は HR 3.74（95%CI 2.01〜6.95）</li><li><mark class="hl"><strong>誤嚥例の半数超が無症候</strong></mark>。症状ベースの判断は成立しない</li><li>機序は6つに整理できる（口腔咽頭・喉頭の外傷／神経筋の筋力低下／喉頭感覚の低下／意識・感覚の変容／胃食道逆流／呼吸と嚥下の非同調）</li><li><strong>Unknown（まだ分かっていないこと）</strong></li><li><mark class="hl"><strong>真の有病率が分かっていない</strong></mark>。報告は <strong>3〜62%</strong> と20倍の開き（抜管後に限っても20〜84%）。対象集団・スクリーニング法・診断基準がばらばらなことが原因</li><li><mark class="hl"><strong>標準化された診断基準がない</strong></mark>。修正可能なリスク因子も確立していない</li><li><mark class="hl"><strong>有効性が確立した治療がない</strong></mark>。食形態変更・体位調整・訓練・経管栄養のどれも、強い有効性を示した対照試験がない</li><li><mark class="hl"><strong>「抜管から何時間空けるか」「水飲みテストを何回まで再試行するか」に答えた文献がVault内に無い</strong></mark></li><li><mark class="hl"><strong>回復までの日数</strong>も、<strong>挿管期間で層別した頻度</strong>も、<strong>費用対効果の実データ</strong>も無い</mark></li><li><strong>What's new（新しい潮流）</strong></li><li>抜管の可否そのものを「気道保護能」で見る流れ。<mark class="hl">Godet（2017）と VISAGE（2017）が施設もコホートも違いながら<strong>独立に「視覚（追視）と嚥下」を拾った</strong></mark></li><li>気管切開患者で<strong>発声と嚥下を同時に扱う</strong>動き（スピーチバルブ・ACV）。<mark class="hl">運動中の装着も安全性が検証された</mark></li><li><mark class="hl"><strong>栄養ルートがカニューレ抜去を早める</strong>という新しい角度（間欠的口腔食道経管栄養で30日抜去率 65.7% 対 47.1%）</mark></li><li><mark class="hl"><strong>「気切後の嚥下」を初めて指針の中に組み込んだガイドラインが出た</strong></mark>（SKR・SRLF 2026）。24 PICO のうち<mark class="hl"><strong>強い推奨（GRADE 1）はゼロ</strong></mark>で、嚥下は「専門家を待たず早期開始」の専門家意見どまり。<mark class="hl">エビデンスの薄さをそのまま可視化した点が新しい</mark></li><li>胃管の位置確認が「X線一択」から動きつつある。<mark class="hl">カプノグラフィ（気道誤挿入の除外）と腹部エコー（胃内確認）</mark>という2つの床上手段が前向き多施設研究で検証された</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICUの嚥下障害は、<mark class="hl"><strong>頻度も機序も治療も未確定のまま、重い帰結とだけ強く結びついている</strong></mark>領域である。だからこそ実務の設計は「治す」ではなく <mark class="hl"><strong>「取りこぼさない」と「食べさせる判断を言語化する」</strong></mark> に置くのが妥当。</p>
+</div>
+<ul><li><mark class="hl"><strong>数字が信用できない</strong></mark>のがこの領域の第一の特徴。3〜62%（抜管後は20〜84%）という幅は、病態ではなく<strong>定義とスクリーニング法のばらつき</strong>を映している</li><li><mark class="hl"><strong>症状は使えない</strong></mark>。誤嚥例の半数超が無症候。スクリーニング検査も、感度は高いが特異度が低い（96.5% / 48.7%）</li><li><mark class="hl"><strong>治療の証拠は薄い</strong></mark>。介入で下がったのは肺炎（RR 0.71、低確実性）だけで、経口摂取の再開時期も誤嚥も動いていない。しかも研究の大半は脳卒中で、<strong>一般ICUのRCTは1試験</strong></li><li><mark class="hl"><strong>抜管の失敗も「呼吸」ではなく「分泌物」で起きている</strong></mark>（脳損傷患者で67%）。嚥下は離脱判断の下流ではなく、<strong>同じ問いの一部</strong></li><li><mark class="hl"><strong>動かせるのは「中身」より「早さ」かもしれない</strong></mark>。介入内容の優劣は決着していないが、<mark class="hl">開始が1日遅れるごとに遷延・死亡が調整OR 1.09で増える</mark>（気切GL 2026）。当院で先に手を付けるべきはメニューではなく<strong>着手のタイミング</strong></li><li><mark class="hl"><strong>経管栄養は代償のある回避策</strong></mark>であって、無害な迂回路ではない。<mark class="hl">挿入時の誤挿入（気道・食道・小腸）まで含めて手順に書く</mark>必要がある</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. 何を「嚥下障害」と呼ぶか — 言葉の整理</h3>
+<div class="tw"><table>
+<thead><tr><th>語</th><th>意味</th><th>混同しやすい点</th></tr></thead>
+<tbody>
+<tr><td><strong>嚥下障害（dysphagia）</strong></td><td>口から胃までの経路のどこかで嚥下がうまくいかない状態</td><td>原因は問わない</td></tr>
+<tr><td><strong>誤嚥（aspiration）</strong></td><td>食物・液体・錠剤が<mark class="hl"><strong>声帯を越えて気管に入る</strong></mark></td><td>嚥下障害の結果の一つ。逆流からも起こる</td></tr>
+<tr><td><strong>胃食道逆流</strong></td><td>胃内容が喉頭の高さまで逆流する</td><td>嚥下障害とは別の機序で誤嚥を起こす</td></tr>
+<tr><td><mark class="hl"><strong>silent aspiration</strong></mark></td><td><mark class="hl">誤嚥しているのに咳も違和感も出ない</mark></td><td><mark class="hl"><strong>誤嚥例の半数超</strong>。症状ベースの判断が崩れる理由</mark></td></tr>
+<tr><td><strong>PED（抜管後嚥下障害）</strong></td><td>抜管後に生じる嚥下障害</td><td><mark class="hl">元々あった未診断の嚥下疾患の顕在化、入院理由そのものが原因、との区別は容易でない</mark></td></tr>
+</tbody></table></div>
+<p><strong>評価の道具は3つ</strong></p>
+<div class="tw"><table>
+<thead><tr><th>道具</th><th>何をするか</th><th>実務上の制約</th></tr></thead>
+<tbody>
+<tr><td><strong>BSE（ベッドサイド嚥下評価）</strong></td><td>STが問診・口腔と咳の評価・種々の食形態で試験嚥下</td><td><mark class="hl">感度と判定者間信頼性に批判がある</mark>。米国では6割の施設でこれが唯一の評価</td></tr>
+<tr><td><strong>VFSS（嚥下造影）</strong></td><td>バリウム食を座位で嚥下し透視で録画</td><td>97%超の病院で利用可能だが<mark class="hl"><strong>透視室への搬送が要る</strong></mark></td></tr>
+<tr><td><strong>FEES（嚥下内視鏡）</strong></td><td>径3.4〜3.6 mm のファイバーを鼻から入れ声門周囲を直接観察</td><td><mark class="hl"><strong>ベッドサイドで可能</strong></mark>・誤嚥検出の感度と観察者間一致がやや優れるが、<mark class="hl">利用可能な施設が少なく実施頻度も低い</mark></td></tr>
+</tbody></table></div>
+<h3>2. なぜICUで起こるのか — 機序6つ</h3>
+<p>CCM2013 が整理した6機序。<mark class="hl"><strong>「どれか一つ」ではなく重なる</strong>のが普通</mark>。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>機序</th><th>ベッドサイドで疑う手がかり</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>口腔咽頭・喉頭の<strong>外傷</strong></td><td>挿管が困難だった／チューブ径が大きい／長期挿管</td></tr>
+<tr><td>2</td><td>神経筋の<strong>筋力低下</strong>（CIP/CIM を含む）</td><td>四肢のICU-AW が併存する</td></tr>
+<tr><td>3</td><td><strong>喉頭感覚</strong>の低下</td><td><mark class="hl">silent aspiration の主因</mark></td></tr>
+<tr><td>4</td><td><strong>意識・感覚の変容</strong></td><td>せん妄・鎮静薬の残存</td></tr>
+<tr><td>5</td><td><strong>胃食道逆流</strong></td><td>経鼻胃管留置中・臥位</td></tr>
+<tr><td>6</td><td><strong>呼吸と嚥下の非同調</strong></td><td>頻呼吸・呼吸仕事量が高い</td></tr>
+</tbody></table></div>
+<h3>3. どれだけ起きるのか — 数字が信用できない</h3>
+<div class="tw"><table>
+<thead><tr><th>出典</th><th>集団</th><th>頻度</th></tr></thead>
+<tbody>
+<tr><td>CCM2013（総説）</td><td>抜管生存者</td><td><mark class="hl"><strong>3〜62%</strong>（20倍の開き）</mark></td></tr>
+<tr><td>Skoretz Chest 2010</td><td>ICU全体</td><td>約20%</td></tr>
+<tr><td>Chest2020ノート経由</td><td>抜管後</td><td>20〜84%</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">幅は病態ではなく「測り方」を映している</mark> 対象集団・スクリーニング法・診断基準がばらばら。<mark class="hl"><strong>この数字を根拠に当院の発生率を語ることはできない</strong></mark>。 自施設で語るなら、<strong>分母（抜管例数）とスクリーニング方法を先に固定して測る</strong>しかない。</p>
+</div>
+<h3>4. 転帰との関連 — ただし因果ではない</h3>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>効果量</th><th>注意</th></tr></thead>
+<tbody>
+<tr><td>肺炎・再挿管・死亡の複合</td><td>調整OR <strong>3.31</strong></td><td><mark class="hl">後ろ向き・選択バイアスあり。因果は示されていない</mark></td></tr>
+<tr><td>院内死亡</td><td>HR <strong>3.74</strong>（95%CI 2.01〜6.95）</td><td>同上。<mark class="hl">原疾患により発症率も経過も大きく異なる</mark></td></tr>
+<tr><td>経管栄養日数・人工呼吸期間・ICU/在院日数</td><td>いずれも延長</td><td>関連であって因果ではない</td></tr>
+</tbody></table></div>
+<h3>5. 治療 — 期待値を先に下げる</h3>
+<p>Duncan ら（ICM2020）のSR：<strong>22試験・9介入・1700例</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>結果</th><th>確実性</th></tr></thead>
+<tbody>
+<tr><td>経口摂取再開までの時間</td><td>1試験、MD −4.5日（95%CI −10.6〜1.6）、P=0.15</td><td><mark class="hl">very low</mark></td></tr>
+<tr><td>治療後の誤嚥</td><td>4試験、RR 0.79（0.44〜1.45）、I²=0%、P=0.45</td><td><mark class="hl">low</mark></td></tr>
+<tr><td><mark class="hl"><strong>肺炎</strong></mark></td><td>8試験 n=719、<mark class="hl"><strong>RR 0.71（0.56〜0.89）</strong></mark>、I²=15%、P=0.004</td><td><mark class="hl">low</mark></td></tr>
+</tbody></table></div>
+<div class="call abstract"><span class="lab">重要</span>
+<p><mark class="hl">この表の読み方</mark></p>
+<ul><li><mark class="hl"><strong>動いたのは肺炎だけ</strong></mark>。「食べられるようになる」も「誤嚥が減る」も示されていない</li><li><mark class="hl"><strong>22試験中19試験が脳卒中、一般ICUは1試験のみ</strong></mark>。ICUへの外挿は弱い</li><li>CCM2013 も同様に「<mark class="hl">どの手段も強い有効性を示した対照試験は無い</mark>」と書いており、2013年から2020年で結論は動いていない</li></ul>
+</div>
+<p><strong>2026年のガイドラインが足した一点 — 中身ではなく「早さ」</strong></p>
+<p><span class="wl">気管切開患者のケアと人工呼吸離脱・カニューレ抜去 — SKR・SRLF合同の25推奨（専門家コンセンサスGL・AnnIntensiveCare2026）</span> は、24のPICOに対して<mark class="hl"><strong>強い推奨（GRADE 1）を1つも出せなかった</strong></mark>。それでも嚥下について1つだけ実務を動かす数字を並べている。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>数字</th></tr></thead>
+<tbody>
+<tr><td>抜管後嚥下障害で治療開始が1日遅れるごと</td><td>遷延性嚥下障害または院内死亡の調整OR 1.09（95%CI 1.02〜1.18、P=0.009）</td></tr>
+<tr><td>脳卒中で嚥下評価が24時間超遅れる</td><td>誤嚥性肺炎が絶対3%増、最も遅い群は調整OR 1.98（1.67〜2.35）</td></tr>
+<tr><td>気切患者の嚥下障害有病率</td><td>93%に達しうる</td></tr>
+<tr><td>遷延離脱の気切患者の抜去失敗</td><td>最大41%、うち64%は重度嚥下障害が主因</td></tr>
+<tr><td>専任の嚥下障害スペシャリストにアクセスできるICU</td><td>4〜20%（国際調査）</td></tr>
+<tr><td>カフ脱気下の不顕性誤嚥（嚥下造影・後ろ向き）</td><td>7%（281例）対 カフ膨張23%（342例）</td></tr>
+</tbody></table></div>
+<div class="call tip"><span class="lab">POINT</span>
+<p><mark class="hl">読み方</mark> 推奨 R20 は「専門家の関与を待たず早期に嚥下管理を開始する」という<mark class="hl"><strong>専門家意見どまり</strong></mark>（GRADE評価が付かない）。<mark class="hl">つまり「早く始めよ」はエビデンスではなく合意である</mark>。それでも、介入内容の優劣が決着していない現状では、<mark class="hl"><strong>当院で先に触れるのはメニューではなく着手のタイミング</strong></mark>という判断は合理的。</p>
+</div>
+<h3>6. 抜管の可否と嚥下は同じ問い</h3>
+<p>脳損傷患者140例（Godet・Anesthesiology 2017）で、<mark class="hl"><strong>抜管失敗43例（30.7%）の原因内訳</strong></mark>：</p>
+<div class="tw"><table>
+<thead><tr><th>原因</th><th>n（%）</th></tr></thead>
+<tbody>
+<tr><td><mark class="hl"><strong>分泌物過多</strong></mark></td><td><mark class="hl"><strong>29（67%）</strong></mark></td></tr>
+<tr><td>喘鳴</td><td>6（14%）</td></tr>
+<tr><td>無気肺</td><td>3（7%）</td></tr>
+<tr><td>肺炎</td><td>2（5%）</td></tr>
+<tr><td>誤嚥</td><td>2（5%）</td></tr>
+<tr><td>心原性</td><td>1（2%）</td></tr>
+<tr><td><mark class="hl">神経学的</mark></td><td><mark class="hl"><strong>0</strong></mark></td></tr>
+</tbody></table></div>
+<p>多変量で残った4因子：<mark class="hl">絞扼反射 OR 4.1（1.2–13.7）／咳嗽 3.6（1.4–9.3）／嚥下 3.1（1.2–8.3）／CRS-R視覚 2.3（1.2–4.4）、AUC 0.806</mark>。 一方 <mark class="hl"><strong>RSBI・呼吸数・P/F・PaCO₂・pH はいずれも成功群と失敗群で有意差なし</strong></mark>。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p><mark class="hl">実務への翻訳</mark> <strong>「抜管できるか」と「食べさせてよいか」を別会議にしない。</strong>どちらも「気道を守れるか」という一つの問いの別側面。</p>
+</div>
+<h3>7. 旧ノートから引き継いだメモ（<mark class="hl">出典未確認・要検証</mark>）</h3>
+<div class="call note"><span class="lab">caution</span>
+<p><mark class="hl">ここは Evernote 旧ノートのリンク集から引き継いだ内容で、査読文献で裏を取っていない</mark></p>
+<ul><li><strong>電気刺激による嚥下機能の維持・治療</strong>：兵庫医大の機器開発、<code>gentlestim</code>（https://www.careido.co.jp/products/gentlestim.html ）</li><li>神戸新聞NEXT「のみ込む力を電気で治療、嚥下障害で機器開発、兵庫医大」</li><li><strong>DYnAMICS</strong>（詳細不明・Vault未収載）</li><li><strong>挿管チューブのサイズと嚥下障害（CCM2020）</strong> — <mark class="hl">Vault未収載</mark></li><li>Chest 2020 リスク因子文献（PubMed 32525018）— ==<span class="wl">急性呼吸不全患者の抜管後誤嚥リスク評価アルゴリズム</span> と同一の可能性が高い==</li></ul>
+</div>
+<h3>8. Vaultの穴（<mark class="hl">次に埋めるならここ</mark>）</h3>
+<div class="tw"><table>
+<thead><tr><th>穴</th><th>なぜ要るか</th></tr></thead>
+<tbody>
+<tr><td><mark class="hl"><strong>抜管から経口開始までの時間</strong>を扱った文献</mark></td><td>当院で最も迷う判断。<mark class="hl">2026年の気切GLが「遅れ1日あたり調整OR 1.09」まで示したが、「何時間空けるか」の直接の答えはまだ無い</mark></td></tr>
+<tr><td><mark class="hl"><strong>水飲みテストの再試行回数</strong></mark></td><td>同上</td></tr>
+<tr><td><mark class="hl"><strong>日本の簡易法</strong>（RSST・改訂水飲みテスト）</mark></td><td>米国文献の3オンス法は当院の実務と一致しない</td></tr>
+<tr><td><strong>挿管チューブ径と嚥下障害（CCM2020）</strong></td><td>旧ノートが挙げているがVault未収載</td></tr>
+<tr><td><strong>Brodsky 2020（ICM）・Zuercher 2022</strong></td><td>嚥下障害の新しい総説群。Vault未収載</td></tr>
+<tr><td><mark class="hl"><strong>回復までの日数</strong>の前向きデータ</mark></td><td>CCM2013 が明示的に「本文に無い」としている</td></tr>
+</tbody></table></div>
+<h3>9. 重複・整理の候補</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p><mark class="hl">同一論文が2ノートに分かれている（2組）</mark> <strong>組①</strong>：<span class="wl">経鼻胃管は脳卒中患者の嚥下に影響するか（超音波評価）</span>（217行・完全版）と <span class="wl">経鼻胃管（NGT）が脳卒中患者の嚥下に与える影響</span>（42行）は、<mark class="hl"><strong>同じ Kwak ら AnnRehabilMed 2018;42(4):551-559</strong></mark>。<mark class="hl">前者に統合し、後者を削除するのが妥当</mark>。 <strong>組②</strong>：<span class="wl">経鼻胃管と脳卒中後肺炎（STROKE-INF二次解析）</span> と <span class="wl">経鼻胃管と急性期脳卒中患者の肺炎・予後（Neurology 2016）</span> は、<mark class="hl"><strong>同じ Kalra ら STROKE-INF・Neurology 2016;87:1352-1359</strong></mark>。どちらも概要止まりで、<mark class="hl">調整OR（PSP 1.26／死亡 1.10／90日mRS 0.95）まで同じ内容を二重に持っている</mark>。<mark class="hl">前者に統合するのが妥当</mark>。</p>
+</div>
+<ul><li><span class="wl">急性呼吸不全患者の抜管後誤嚥リスク評価アルゴリズム</span>（23行）と <span class="wl">急性期・重症患者の口腔咽頭嚥下障害への介入（システマティックレビュー）</span>（26行）は<mark class="hl">どちらも抄録止まり</mark>。本Homeが束ねる中核2本なので、<strong>完全版化の優先度は高い</strong></li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

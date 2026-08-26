@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>中心静脈圧（CVP）の訂正（Correction・ICM2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06874-z.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">中心静脈圧（CVP）の訂正（Correction・ICM2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Hamzaoui O, Teboul JL. Correction to: Central venous pressure (CVP). Intensive Care Med. 2022;48:1512. doi:10.1007/s00134-022-06874-z</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2022-09-06）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06874-z" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06874-z</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Correction to: Central venous pressure (CVP)</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06874-z.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06874-z.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06874-z.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>診療を変える内容は1つも含まれない</strong>。本記事は訂正の告知そのもので、臨床データも推奨も持たない。</li><li>実務上の帰結は<strong>書誌管理のみ</strong>。当院の勉強会資料・マニュアル・レジデント講義で Hamzaoui &amp; Teboul の「Central venous pressure (CVP)」を引用している箇所があれば、<mark class="hl"><strong>引用元が「訂正後の版」であることを確認する</strong></mark>。とくに<strong>最終段落（Take-home message にあたる部分）が更新されている</strong>ため、訂正前の版から結論を引くと誤りうる。</li><li>訂正で<strong>追加された Supplementary Table 1（電子付録）</strong>は、元論文本文の「ショック患者の血行動態評価に CVP がなぜ重要か」を支える表として参照されている。<strong>元論文のPDF本体には載っておらず、出版社サイトの電子付録として取りに行く必要がある</strong>。当院で元論文を配布する場合、PDF単体では表が欠ける点に注意する。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：元論文 "Central venous pressure (CVP)"（ICM 2022;48:1498–1500）は、SSCG2016 で「輸液管理のガイドに使わない」と推奨されて以降に関心が薄れた CVP を、<strong>測定の質</strong>と<strong>解釈の枠組み</strong>（右室充満圧としての側面／臓器灌流の下流圧としての側面）から再評価した Special Issue Insight である。</li><li><strong>Unknown（分かっていなかったこと）</strong>：ここでの「未知」は科学的な空白ではなく、<strong>出版プロセス上の欠落</strong>である。元論文は本文中で <code>(Supplementary Table 1)</code> を参照していたにもかかわらず、<strong>その電子付録が初回オンライン公開時に添付されていなかった</strong>。また最終段落にも修正すべき点があった。</li><li><strong>What's new（本記事の新規性・意義）</strong>：<strong>Supplementary Table 1 を電子付録として元論文に追加</strong>し、<strong>最終段落を更新</strong>したことを公式に告知する。著者は誤りを謝罪し、<strong>元論文は訂正済み</strong>である旨が記されている。科学的主張の撤回・数値の訂正ではない。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 元論文「Central venous pressure (CVP)」に<strong>欠落していた Supplementary Table 1 が電子付録として追加され、最終段落が更新された</strong>ことを告知する、<strong>全1ページの訂正記事</strong>。臨床的内容は含まない。</p>
+</div>
+<ul><li>本記事の実質本文は <strong>4文のみ</strong>。全訳すると次の通り。</li></ul>
+<ol><li>Supplementary Table 1 が電子付録ファイルとして元論文に追加された。</li><li>最終段落も更新された。</li><li>著者らはこれらの誤りについて謝罪する。</li><li>元論文は訂正済みである。</li></ol>
+<ul><li><strong>訂正の「中身」は本記事に一切書かれていない</strong>。Supplementary Table 1 に何が書かれているか、最終段落がどう変わったか（訂正前は何だったか）は、<strong>本記事からは分からない</strong>。</li><li>したがって内容を知るには、<strong>訂正後の元論文（doi:10.1007/s00134-022-06835-6）とその電子付録に当たるほかない</strong>。</li><li>元論文の著作権表示は <code>© 2022 Springer-Verlag GmbH Germany, part of Springer Nature, <strong>corrected publication 2022</strong></code> となっており、<strong>手元のPDFが訂正後の版かどうかはこの1行で判別できる</strong>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — Correction（訂正）という文書種別の読み方（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>Correction（訂正）</strong>は、いったん公開された論文に誤りが見つかったときに、<strong>同じ雑誌が独立した1本の記事として発行する告知文</strong>である。独自のDOI・巻・ページを持ち、PubMed にも別レコードとして載る。以下の点を押さえると読み方を誤らない。</p>
+<ul><li><strong>Correction ≠ Retraction（撤回）</strong>。撤回は論文そのものを無効化するが、訂正は<strong>元論文を生かしたまま特定箇所を直す</strong>。本記事は前者ではない。</li><li><strong>Correction ≠ Erratum の厳密な区別</strong>は、近年の Springer Nature では実務上あいまいで、誤りの出所（著者由来／出版社由来）にかかわらず "Correction" の名で統一されつつある。本記事も原因の帰属は書かれておらず、著者が謝罪する形をとっている。</li><li><strong>訂正記事は「何を直したか」を1〜数文で述べるだけで、「どう直したか」の差分を示さないことが多い</strong>。本記事はまさにこの型で、変更前後のテキストは掲載されていない。</li><li><strong>引用する側の実務</strong>：訂正の存在は元論文のDOIを開けば必ず表示される。文献管理ソフト（EndNote 等）で古い版のPDFを保持している場合、<strong>訂正の存在が手元では見えない</strong>。これが訂正記事を別ノートとして残す実務上の理由である。</li></ul>
+<p><strong>元論文のテーマである CVP の基礎</strong>：中心静脈圧（central venous pressure, CVP）は上大静脈〜右房入口部の圧で、①<strong>右室の充満圧</strong>（前負荷の静的指標）と、②<strong>大半の臓器の灌流の下流圧</strong>（平均灌流圧 MPP = MAP − CVP）という2つの顔を持つ。SSCG2016 が「輸液反応性の指標として使わない」と推奨したのは①の用法についてであり、②の用法や右室機能障害の察知としての価値は否定されていない——というのが元論文の骨子である。</p>
+</div>
+<h3>2. 本記事の全文（訳と原文の対応）📄</h3>
+<p>原文は見出しなしの1段落で、次の4文からなる。</p>
+<div class="tw"><table>
+<thead><tr><th>原文（Correction 本文）</th><th>和訳</th></tr></thead>
+<tbody>
+<tr><td>The Supplementary Table 1 was added to the original article as an electronic supplementary file.</td><td>Supplementary Table 1 が、電子付録ファイルとして元論文に追加された。</td></tr>
+<tr><td>The final paragraph has been also updated.</td><td>最終段落も更新された。</td></tr>
+<tr><td>The Authors apologise for these mistakes.</td><td>著者らはこれらの誤りについて謝罪する。</td></tr>
+<tr><td>The original article has been corrected.</td><td>元論文は訂正済みである。</td></tr>
+</tbody></table></div>
+<p>これに加え、体裁上の情報として次が印字されている。</p>
+<ul><li><strong>Correction to:</strong> *Intensive Care Medicine* https://doi.org/10.1007/s00134-022-06835-6（訂正対象の元論文DOI）</li><li><strong>Supplementary Information</strong>：本訂正記事のオンライン版にも補足資料があり、https://doi.org/10.1007/s00134-022-06874-z から入手できる（＝<strong>追加された Supplementary Table 1 は、この訂正記事側からもダウンロードできる</strong>）。</li><li><strong>著者所属</strong>：① Service de Réanimation Polyvalente, Hôpital Antoine Béclère, AP-HP Université Paris-Saclay, Clamart, France（Hamzaoui）／② Université Paris-Saclay, AP-HP, Service de Médecine Intensive-Réanimation, Hôpital de Bicêtre, DMU CORREVE, FHU SEPSIS, Le Kremlin-Bicêtre, France／③ INSERM-UMR_S999 LabEx-LERMIT, Hôpital Marie-Lannelongue, Le Plessis Robinson, France（Teboul）</li><li><strong>Published: 6 September 2022</strong>（元論文の Published は 11 August 2022 なので、<strong>公開から約4週間後の訂正</strong>）</li></ul>
+<p><strong>図表は1点もない</strong>（PDFに埋め込まれた画像は雑誌のロゴ帯のみで、学術的な図ではない）。</p>
+<h3>3. 方法（Methods）📐</h3>
+<p><strong>該当なし。</strong> 本記事は研究論文ではないため、デザイン・対象・介入・アウトカム・統計のいずれも存在しない。この項を空欄にせず明示するのは、ジャーナルクラブで「Methods が読み取れなかったのか、そもそも無いのか」を区別するためである。</p>
+<h3>4. 訂正の内容を、元論文側から補って読む（★本記事本文ではない）🔍</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>ここからは訂正記事の本文ではない <mark class="hl"><strong>以下は「訂正後の元論文PDF（doi:10.1007/s00134-022-06835-6）」を読んで補った内容であり、訂正記事そのものには一切書かれていない</strong></mark>。訂正記事の主張と混同しないこと。また<strong>訂正前の版と一字一句を突き合わせたわけではない</strong>ので、「最終段落がどう変わったか」の差分は依然として不明である。</p>
+</div>
+<p><strong>① Supplementary Table 1 が参照されている位置</strong></p>
+<p>訂正後の元論文の導入部末尾に、次の一文がある。</p>
+<p>&gt; In this article, we underline how important it is to measure CVP to assess at best the hemodynamic status of patients with shock and thus select appropriate therapeutic options (Supplementary Table 1). &gt; （本稿ではショック患者の血行動態を最大限に評価し、適切な治療選択を行ううえで CVP 測定がいかに重要かを強調する〔Supplementary Table 1〕。）</p>
+<p>つまり <strong>Supplementary Table 1 は「CVP の測定値をどう治療選択に結びつけるか」を整理した表</strong>として位置づけられている。この参照が本文にありながら付録が付いていなかったのが、訂正の第一の理由と考えられる。<strong>表の中身そのものはPDF本体には含まれず、電子付録としてのみ提供される</strong>。</p>
+<p><strong>② 「最終段落」に相当する部分</strong></p>
+<p>訂正後の元論文で本文の最後に置かれているのは、<code>Take-home message</code> の段落である。全訳すると次の通り。</p>
+<p>&gt; 中心静脈圧は極めて重要な血行動態指標である。右室機能と平均臓器灌流圧について重要な情報を与えるからである。CVP は輸液反応性の予測には使えない。CVP を正しく解釈するための前提は測定の質であり、誤差の原因は数多く存在する。ショック患者には中心静脈カテーテルの挿入が推奨されているのだから、それを CVP 測定に使って心血管系の状態を最大限に評価しないのは残念なことだろう。</p>
+<p>この段落は、<strong>①右室機能／②平均臓器灌流圧という2つの用途を肯定しつつ、③輸液反応性予測としての使用は明確に否定する</strong>という、元論文全体の主張を過不足なく畳んだ形になっている。訂正でどの語句が変わったかは不明だが、<mark class="hl"><strong>「CVP は輸液反応性の予測には使えない」という一文が最終段落に明記されているのが訂正後の版である</strong></mark>点は、引用時に確認する価値がある。</p>
+<p><strong>③ 元論文の骨子（参考。訂正記事の内容ではない）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>元論文の記載</th></tr></thead>
+<tbody>
+<tr><td>測定機器</td><td>液体充填の中心静脈カテーテル＋電子圧トランスデューサ＋連続波形表示モニタ。カテーテル先端は右房の上流の上大静脈内</td></tr>
+<tr><td>ゼロ点</td><td>右房中点。<strong>胸骨角から垂直に5 cm 下</strong>の点が最も適切。わずかな水平合わせの誤差でも解釈に重大な影響が出る（Fig. 1）</td></tr>
+<tr><td>測定タイミング</td><td>呼気終末（胸腔内圧が最低）。自発呼吸では波形の<strong>最高値</strong>付近、人工呼吸では<strong>最低値</strong>付近。呼気が能動的なら呼気の<strong>早期</strong>で読む</td></tr>
+<tr><td>モニタ平均値の許容</td><td>一回換気量が高くない（6〜8 mL/kg）なら、モニタ表示の平均値でも可。呼気終末値を<strong>1 mmHg</strong> 過大評価するだけ</td></tr>
+<tr><td>PEEP 補正</td><td>PEEP 使用時は呼気終末胸腔内圧が陽性。<strong>PEEP 10 cmH2O で最大 4 mmHg</strong> が胸腔へ伝播しうる。伝播率は「吸気終末CVP − 呼気終末CVP」÷「プラトー圧 − PEEP」で推定しうるが、<strong>PAOP ほどには検証されていない</strong></td></tr>
+<tr><td>右室充満圧としての解釈</td><td>経壁CVPの上昇は右室機能障害を示唆→心エコーで機序を確認。Vieillard-Baron らは<strong>右室拡大＋CVP ≥ 8 mmHg</strong> で右室不全を定義することを提案</td></tr>
+<tr><td>輸液反応性</td><td><strong>予測できない</strong>。CVP は前負荷の静的指標であり、同じ CVP 値が Frank–Starling 曲線上の位置（収縮性）次第で反応性あり／なしのどちらとも両立する</td></tr>
+<tr><td>臓器灌流の下流圧</td><td>平均灌流圧 <strong>MPP = MAP − CVP</strong>。ここでは経壁CVPではなく<strong>実測CVP</strong>を使う。Ostermann らは MAP ではなく MPP が AKI 進行と独立に関連し、<strong>カットオフ 60 mmHg</strong> と報告</td></tr>
+<tr><td>CVP高値の害</td><td>CVP が下げられるなら下げるのが最善（静脈うっ血の低減にもなる）。下げられなければ MAP を上げて MPP を回復させるが、<strong>うっ血自体は防げない</strong>。CVP は肺リンパ管の下流圧でもあり、高値は肺リンパ流と肺水腫の吸収を減らしうる</td></tr>
+</tbody></table></div>
+<h3>5. 既存ノートとの整合 🔗</h3>
+<p>Vault内の関連ノートを照合した結果は次の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>確認項目</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>元論文（doi:10.1007/s00134-022-06835-6）のノートは存在するか</td><td><strong>存在する</strong>。<code>04-論文サマリー/03. 循環器/敗血症・輸液反応性・血行動態モニタリング/CVP・静脈系・前負荷/中心静脈圧（CVP）の測定と解釈（ICM2022）.md</code> が同一論文のノートである</td></tr>
+<tr><td>そのノートは訂正後の内容になっているか</td><td><mark class="hl"><strong>2026-08-15 に解消済み</strong></mark>。かつては本文が「Vieillard-Baron らは右室拡張とCVP≧8mmHg…」で途切れ、臓器灌流の下流圧の節（MPP = MAP − CVP、Ostermann のカットオフ60 mmHg）と訂正後の最終段落を欠いていたが、訂正後版のPDF（<code>corrected publication 2022</code> 表記）と全文照合して完全版化され、Supplementary Table 1 が本PDFに含まれない旨も明記された</td></tr>
+<tr><td>そのノートの由来</td><td>frontmatter に <code>original: "Evernote【ICU】Central venous pressure (CVP)"</code> とあり、<strong>Evernote移行由来の抜き書き</strong>。原著PDFの全文照合を経ていない</td></tr>
+<tr><td>そのノートの <code>doi</code></td><td><mark class="hl"><strong>2026-08-15 に設定済み</strong></mark>（<code>10.1007/s00134-022-06835-6</code>）。あわせて <code>title_en</code> / <code>citation</code>（著者・巻48・ページ1498–1500）も整備された</td></tr>
+<tr><td>本ノートからのリンク</td><td>旧版の本ノートは <code><span class="wl">中心静脈圧（CVP）の解釈と使い方（ICM2022）</span></code> にリンクしていたが、<mark class="hl"><strong>その名前のノートは実在しない</strong></mark>（正しくは「測定と解釈」）。今回の改稿でリンク先を実在するノート名に修正した</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>元論文ノートは解消済み（2026-08-15） 上表で指摘した3点——①doi の追記、②臓器灌流の下流圧の節の追加、③訂正後の最終段落（Take-home message）の反映——は、<code>中心静脈圧（CVP）の測定と解釈（ICM2022）</code> の完全版化（48行→322行）ですべて解消された。あわせて、そのノートには<strong>PEEP伝播率の比が逆向き</strong>（正しくは（吸気終末CVP − 呼気終末CVP）÷（プラトー圧 − PEEP））という誤りもあり、同時に訂正されている。</p>
+</div>
+<h3>6. 批判的吟味（JCでの論点）🧐</h3>
+<ol><li><strong>訂正記事が差分を示さないこと自体が問題である</strong>。「最終段落も更新された（The final paragraph has been also updated）」としか書かれておらず、<strong>訂正前の文言も訂正後の文言も掲げられていない</strong>。読者は自力で訂正後の版を取得して読み比べるしかなく、しかも<strong>訂正前の版はもはや出版社サイトから入手できない</strong>。誤りが結論に関わる部分（最終段落＝Take-home message）であるだけに、差分の非開示は情報の透明性として弱い。</li><li><strong>「これらの誤り（these mistakes）」の帰属があいまい</strong>。付録ファイルが添付されなかったのは、通常は<strong>出版社の製作工程の問題</strong>である。にもかかわらず著者が謝罪する形をとっており、誰の責任だったのかは読み取れない。</li><li><strong>訂正の重大性を読者が評価できない</strong>。もし最終段落の更新が「CVP は輸液反応性の予測には使えない」といった主張の追加・削除に関わるなら臨床的に意味があるが、単なる語句の修正なら意味はない。<strong>同じ1ページの訂正記事でも重みが全く違う</strong>のに、その区別がつかない書き方になっている。</li><li><strong>PDF単体では Supplementary Table 1 が欠ける構造的問題</strong>。訂正後も、元論文のPDFをダウンロードしただけでは表は付いてこない。文献管理ソフト経由で配布する運用では<strong>訂正の効果が読者に届かない</strong>——この点は当院の勉強会資料の作り方に直接効く（PDFを配るなら付録も一緒に配る）。</li><li><strong>公開から訂正までの間隔は約4週間</strong>（元論文 2022-08-11 公開 → 訂正 2022-09-06）。この間に引用・保存された版は訂正前のものである。<mark class="hl"><strong>2022年8月中に保存した手元PDFは訂正前の可能性が高い</strong></mark>という具体的な目安になる。</li><li><strong>ジャーナルクラブ素材としての価値はゼロに近い</strong>。本記事単独では議論する内容がない。<strong>取り上げるなら「元論文＋訂正」をセットにし、テーマは CVP の2つの用途（右室充満圧／臓器灌流の下流圧）の使い分けにする</strong>のが妥当である。</li></ol>
+<h3>7. 主要引用文献一覧 📚</h3>
+<p><strong>本訂正記事が引用している文献</strong>：<strong>元論文1本のみ</strong>。参考文献リストは存在しない。</p>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>Hamzaoui O, Teboul JL. <strong>Central venous pressure (CVP)</strong>. *Intensive Care Med*. 2022;48:1498–1500. doi:10.1007/s00134-022-06835-6</td><td>訂正の対象となる元論文。Special Issue Insight</td></tr>
+</tbody></table></div>
+<p><strong>参考：元論文が引用している主要文献</strong>（本訂正記事の内容ではない。元論文PDFより）</p>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>Cecconi M, et al. FENICE study. *Intensive Care Med*. 2015;41(9):1529–1537</td><td>輸液チャレンジの世界的実態調査。CVP が輸液指標として好まれてきた背景</td></tr>
+<tr><td>Rhodes A, et al. Surviving Sepsis Campaign 2016. *Intensive Care Med*. 2017;43(3):304–377</td><td>CVP を輸液管理のガイドに推奨しないとした版</td></tr>
+<tr><td>de Backer D, Vincent JL. *Crit Care*. 2018;22(1):43</td><td>「CVP を測るべきか — 10の質問への10の答え」</td></tr>
+<tr><td>Magder S. *Crit Care Med*. 2006;34(8):2224–2227</td><td>CVP は有用だが単純ではない、という古典的論説。ゼロ点・呼気終末の議論の出典</td></tr>
+<tr><td>Figg KK, Nemergut EC. *Anesth Analg*. 2009;108(4):1209–1211</td><td>CVP 測定の誤差（水平合わせの重要性）</td></tr>
+<tr><td>Roger C, et al. *Br J Anaesth*. 2017;118(2):223–231</td><td>人工呼吸中のCVP測定手技の比較。モニタ平均値が呼気終末値を1 mmHg過大評価する根拠</td></tr>
+<tr><td>Teboul JL, et al. *Crit Care Med*. 2000;28(11):3631–3636</td><td>過膨張下の充満圧推定。気道内圧の胸腔伝播率の考え方（PAOPで検証）</td></tr>
+<tr><td>Vieillard-Baron A, et al. *Crit Care*. 2020;24(1):630</td><td>敗血症性ショックの右室不全。右室拡大＋CVP ≥ 8 mmHg の定義</td></tr>
+<tr><td>Osman D, et al. *Crit Care Med*. 2007;35(1):64–68</td><td>充満圧は容量負荷への反応を予測できない</td></tr>
+<tr><td>Marik PE, Cavallazzi R. *Crit Care Med*. 2013;41(7):1774–1781</td><td>CVP は輸液反応性を予測するか（更新メタ解析）</td></tr>
+<tr><td>Ostermann M, et al. *BMC Nephrol*. 2017;18(1):151</td><td>低い平均灌流圧が AKI 進行の危険因子。カットオフ 60 mmHg</td></tr>
+<tr><td>Chen CY, et al. *Crit Care*. 2020;24(1):80</td><td>CVP 高値は AKI と死亡の増加に関連（メタ解析）</td></tr>
+<tr><td>Allen SJ, et al. *Crit Care Med*. 1987;15(10):963–970</td><td>肺水腫の吸収と肺リンパ流</td></tr>
+<tr><td>Teboul JL, et al. *Intensive Care Med*. 2016;42(9):1350–1359</td><td>低侵襲血行動態モニタリング。ショック患者への中心静脈カテーテル挿入の推奨</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>Hamzaoui &amp; Teboul の CVP 総説（ICM 2022;48:1498–1500）を引用・配布するときは、「corrected publication 2022」と印字された訂正後の版を使い、電子付録の Supplementary Table 1 も一緒に取る</strong></mark>。訂正記事そのものに臨床的内容はなく、<mark class="hl"><strong>診療は何も変わらない</strong></mark>。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>手元に元論文のPDFがある</td><td>著作権行に <code>corrected publication 2022</code> があるか</td><td>無ければ訂正前の版。出版社サイトから取り直す</td></tr>
+<tr><td>元論文を勉強会で配る</td><td>付録 Supplementary Table 1 が同梱されているか</td><td>PDF本体には含まれない。DOIページから別途取得して添える</td></tr>
+<tr><td>元論文の結論を引用する</td><td>引用箇所が最終段落（Take-home message）か</td><td>訂正で更新された部分。訂正後の版で文言を確認してから引く</td></tr>
+<tr><td>2022年8月中に保存した控えを使う</td><td>元論文の公開は 2022-08-11、訂正は 2022-09-06</td><td>訂正前の可能性が高い。取り直す</td></tr>
+<tr><td>本記事だけをJCで扱いたい</td><td>議論に足る内容があるか</td><td>無い。元論文とセットにし、CVPの2用途（右室充満圧／臓器灌流の下流圧）を論点にする</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

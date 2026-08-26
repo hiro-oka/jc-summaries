@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICU経腸栄養の実践ガイド 10のエキスパートTips（CritCare2021）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-021-03847-4.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICU経腸栄養の実践ガイド 10のエキスパートTips（CritCare2021）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Preiser JC, Arabi YM, Berger MM, Casaer M, McClave S, Montejo-González JC, Peake S, Reintam Blaser A, Van den Berghe G, van Zanten A, Wernerman J, Wischmeyer P. A guide to enteral nutrition in intensive care units: 10 expert tips for the daily practice. Crit Care. 2021;25:424. doi:10.1186/s13054-021-03847-4</dd><dt>掲載誌</dt><dd>Critical Care（2021-12-14）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-021-03847-4" target="_blank" rel="noopener">doi.org/10.1186/s13054-021-03847-4</a>（本文PDFは別途）</dd><dt>原題</dt><dd>A guide to enteral nutrition in intensive care units: 10 expert tips for the daily practice</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-021-03847-4.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-021-03847-4.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-021-03847-4.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<p>① 「48時間以内に少量から」は当院の現行運用と一致する。変える必要はない。 ただし本論文が引用する Cochrane レビューは早期ENの死亡・不耐・肺炎への効果を「very low quality・不確実」と評価している。48時間以内開始の根拠は「害が示されていない」ことと生理学的合理性であって、「予後改善が証明された」ことではない。これは当院で研修医に説明するときの言い方を変えるべき点。→ 現在は <span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span> が CQ1-5 で「48時間以内の開始」を<strong>強い推奨（1B）</strong>に格上げしており、当院はそちらを一次根拠にしてよい。</p>
+<p>② 昇圧薬使用中の判断には、本論文からは数値が得られない。 本論文は「small or moderate doses of vasopressor」としか書かず、<strong>μg/kg/min の閾値をどこにも示していない</strong>。当院プロトコルに数値を書くなら、<span class="wl">救急・集中治療領域の重症患者の栄養療法 — 早期経腸は48時間以内、ノルアドレナリン0.2μg超では遅らせる（総説・外科と代謝栄養2022）</span> のノルアドレナリン 0.2 μg/kg/min を採るのが実務的。本論文からは「ショックがコントロールされているか」「昇圧薬が漸増中か漸減中か」という質的な判断軸だけを採用する。</p>
+<p>③ 定時GRV測定は、この論文を根拠に残さない。 本論文は GRV を「optional・500 mL/6時間」として残す立場だが、これは2021年時点の折衷案である。2024〜2026年の <span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span>・<span class="wl">重症成人への経腸栄養の現代的根拠 — 急性期は「制限量」、高蛋白は優れない（CCM2025）</span>・<span class="wl">重症成人の栄養療法 — 急性期は「制限量」が標準、高蛋白は利益なくAKIでは有害の可能性（総説・NEJM2026）</span> はいずれも定期GRV測定を強く否定している。当院に定時GRVが残っているなら外す議論をしてよい。残すなら「EN開始・増量の局面だけ」に限定する。</p>
+<p>④ リフィーディングの診断閾値を、当院で1つに決める。 本論文は同じ論文の中で「リン30%低下」（抄録）と「リン 0.65 mmol/L 未満または 0.16 mmol/L 超の低下」（本文・Table 1・Fig 2）という<strong>別々の閾値</strong>を出している。当院カルテで「低リン血症＝リフィーディング症候群」と書く運用を止めるなら、<span class="wl">AuSPEN リフィーディング症候群コンセンサス16項目 — start low go slowを否定し50%以上で開始・24〜72時間で目標へ（NutrDiet2025）</span> の3要件（必要量50%以上を24時間投与＋72時間以内にリン30%低下＋電解質異常による症状）を採るのが最も明快。</p>
+<p>⑤ チアミンの用量は本論文をそのまま写さない。 本文・図・図キャプションで 100〜200 mg／300 mg／500〜1000 mg の<strong>3通り</strong>が出てくる（後述）。当院プロトコルは「予防＝100〜200 mg/日 IV を最初の3日」「低リン発生時＝増量」とだけ決め、増量幅は AuSPEN（開始前から7〜10日、IV 100 mg）など格付けのある文献に合わせる。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ASPEN/SCCM（2016）と ESPEN（2019）の2大ガイドラインが存在し、「gut rest より早期の経口・経腸栄養を優先する」「急性期は必要量に満たない投与を許容する」という総論はほぼ一致していた。一方で、昇圧薬使用下のEN、目標到達までの速度、蛋白量、GRVの扱いは、両ガイドラインの間でも推奨とエビデンスの強さがばらついていた。</li><li><strong>Unknown</strong>：ガイドラインは「何を目指すか」は書くが、「明日の朝、この患者に何 mL/h で入れるか」を書かない。臨床医が実際に困る粒度の指示（アクセスの選び方、増量の刻み、不耐と判断する具体的な所見、リフィーディングをどの検査でいつ拾うか）が空白だった。</li><li><strong>What's new</strong>：世界12名の重症栄養の専門家が、<strong>10の実務的な問い</strong>を立て、それぞれに「Suggested answer（専門家としての答え）」と「ASPEN/SCCM の記載」「ESPEN の記載」を横に並べた1枚の表（Table 1）を作った。ガイドラインを置き換えるものではなく、ガイドラインの空白を専門家の臨床経験で埋めるという位置づけ。新規のエビデンスも系統的検索も無く、推奨の格付けも無い。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 10の実務的な問いに、格付けの無い専門家の答えを与えたレビュー。「48時間以内に少量EN」「4週間超なら経皮アクセス」「エネルギーは day 4–7 までは消費量に合わせない」「急性期の蛋白は最大 0.8 g/kg/日、リハビリ期は &gt;1.2 g/kg/日」「リンを毎日測る」「不耐は上部と下部を分けて評価する」の6点が骨格である。</p>
+</div>
+<ul><li>主題は<strong>経腸栄養の実務</strong>であり、静脈栄養・補足的静脈栄養（SPN）の是非は扱わない。</li><li>10の問いは、開始（Q1）→ 昇圧薬下の扱い（Q2）→ アクセス（Q3）→ エネルギー量（Q4）→ 高濃度製剤（Q5）→ 蛋白量（Q6）→ 高蛋白製剤（Q7）→ 微量栄養素（Q8）→ リフィーディング（Q9）→ 消化管不耐（Q10）の順で、<strong>入室直後から数日後までの時間軸にほぼ沿って</strong>並んでいる。</li><li>図は3枚のみ（急性期異化の模式図・増量プロトコルの模式図・不耐スクリーニングのフローチャート）。<strong>表は Table 1 の1枚だけ</strong>で、これが実質的な論文本体である。</li><li>著者らは冒頭で「Tips は一般論であり、個別化が常に必要（our tips are general in nature, and an individualized approach should always be used）」と留保している。</li><li>資金はゼロだが、13名中11名が経腸・静脈栄養製品メーカーからの謝金・研究費を開示している（後述）。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この領域の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 重症病態では、ストレスホルモンと炎症により<strong>異化（catabolism）</strong>が亢進する。肝でのグリコーゲン分解・糖新生が進み、そのために筋の蛋白が分解されてアミノ酸として動員される。インスリン抵抗性が加わって高血糖になる。この状態では<strong>外から糖を入れても内因性の糖新生は止まらない</strong>ため、早期に大量のカロリーを入れると「内因性＋外因性」で供給過剰（overfeeding）になる。これが「急性期は目標量まで入れない」という現代の考え方の生理学的根拠である。</p>
+<p>一方、腸を使わない（gut rest）と、腸絨毛の萎縮・腸細胞のアポトーシス・炎症細胞浸潤・ディスバイオシス（腸内細菌叢の乱れ）・腸管免疫機能の低下が起こる。<strong>腸を使うこと自体に、カロリーとは別の価値がある</strong>というのが早期経腸栄養（EN, enteral nutrition）の論拠。</p>
+<p><strong>用語</strong></p>
+<ul><li><strong>EN</strong>（enteral nutrition, 経腸栄養）／<strong>PN</strong>（parenteral nutrition, 静脈栄養）</li><li><strong>GRV</strong>（gastric residual volume, 胃残量）… 経鼻胃管から吸引して測る胃内の残量。胃排出の代用指標</li><li><strong>EFI</strong>（enteral feeding intolerance, 経腸栄養不耐）… ENの最中に消化管機能障害の所見が出て、ENの減量・中断に至る状態</li><li><strong>IAP</strong>（intra-abdominal pressure, 腹腔内圧）… 通常は膀胱内圧で測る。上昇は腸管の膨満・虚血のサイン</li><li><strong>リフィーディング症候群（RFS）</strong> … 飢餓状態に栄養を再開したときに、糖利用の再開でインスリンが上がり、リン・マグネシウム・カリウムが細胞内へ移動して血中濃度が急落する病態。チアミンも消費される。致死的になりうる</li><li>間接熱量測定（IC, indirect calorimetry） … 呼気ガスから安静時エネルギー消費量を実測する方法</li><li><strong>NUTRIC スコア</strong> … ICU入室時の臨床像から「栄養介入で得をしそうな患者」を層別化する目的で作られたスコア</li><li><strong>PEG / PEGJ</strong> … 経皮内視鏡的胃瘻／胃瘻を経由して空腸まで細いチューブを進めたもの</li><li>等カロリー製剤（isocaloric, 1 kcal/mL）／高濃度製剤（energy-dense, &gt;1 kcal/mL）</li></ul>
+</div>
+<h3>2. 背景と目的（Introduction）</h3>
+<p>重症患者、とくにICU滞在が長期化する患者では、長期の生命維持が必要になり、高度の異化状態を経過する。栄養の重要性は認識が進んでいる。</p>
+<p>栄養実践のうち、「gut rest より早期の経口/経腸栄養を優先すること」と「損失・消費量に見合った量の投与を遅らせることを許容すること」は合意されている一方、他の側面には対立する見解がある。</p>
+<p>国際ガイドラインは近年、ASPEN/SCCM（2016年・Taylor ら, Crit Care Med 2016;44:390-438）と ESPEN（2019年・Singer ら, Clin Nutr 2019;38:48-79）によって更新されたが、<strong>支持するエビデンスのレベルは項目ごとにばらついている</strong>（それを一覧にしたのが Table 1）。</p>
+<p>そこで、世界各地域の重症栄養の専門家グループが委嘱を受け（was commissioned）、早期ENの実務的な側面を議論し、既存ガイドラインを「使い、かつ補完する（to use and to complement）」ためのTipsを、現在の知見と専門家自身の臨床経験に基づいて提示した。</p>
+<p>著者らは目的の記述の直後に、「栄養必要量は重症病態の phase によって変わる。我々のTipsは一般的な性質のもので、常に個別化されたアプローチを用いるべきである」という留保を置いている。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>この論文の性格を取り違えないこと 本稿は系統的レビューでもガイドラインでもなく、文献検索の方法も、合意形成の手続き（Delphi等）も、合意率も、推奨の格付けも記載されていない。Table 1 の「Suggested answer」欄は、<strong>エビデンスの要約ではなく専門家の意見</strong>である。同じ表の右2列（ASPEN/ESPEN）だけが格付きで、引用するときにこの左右の列を混ぜてはいけない。</p>
+</div>
+<h3>3. 10のTips 一覧（Table 1 を1行1項目に整理）</h3>
+<p>原著の Table 1 を、実務で引ける形に組み直した。「根拠の強さ」列は、<strong>Tips 自体には格付けが無い</strong>ため、対応するガイドラインの格付けを転記している。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>問い</th><th>専門家の答え（Suggested answer）</th><th>根拠の強さ（ガイドライン側）</th><th>当院で決めること</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>いつ開始するか</td><td>ICU入室から 24〜48時間以内に開始する</td><td>ASPEN: 推奨・エビデンスの質は very low ／ ESPEN: 早期EN（48時間以内）を遅延ENより推奨、grade B・strong consensus。早期ENを早期PNより推奨、grade a・strong consensus</td><td>48時間以内で既に運用中。研修医への説明を「予後改善の証明あり」から「害の証拠がなく生理学的に合理的」へ改める</td></tr>
+<tr><td>2</td><td>昇圧薬使用中はどうするか</td><td>少量のENを開始する</td><td>ASPEN: 積極的な蘇生中・不安定な患者ではENを保留。血行動態不安定では完全に蘇生されるまで保留（suggestion）。昇圧薬を減量中の患者では慎重に開始/再開を考慮（expert consensus）／ ESPEN: ショックが未コントロールならEN遅延。コントロールされ次第、腸管虚血の徴候に警戒しつつ少量ENを開始（GPP）</td><td><mark class="hl">本論文に μg/kg/min の数値は無い</mark>。当院はノルアドレナリン 0.2 μg/kg/min を目安に採用する（別論文由来）。「漸増中か漸減中か」を判断軸に加える</td></tr>
+<tr><td>3</td><td>経腸アクセスをどう取るか</td><td>短期（4週間未満の見込み）＝経鼻胃管、胃排出遅延があれば幽門後。長期（4週間超）＝経皮アクセス（胃瘻または空腸瘻）</td><td>ASPEN: 大半の重症患者では胃内から開始（expert consensus）。誤嚥高リスクまたは胃内EN不耐では下部消化管へ注入（推奨・質は moderate〜high）／ ESPEN: 胃内アクセスが標準（GPP・strong consensus）。消化管運動改善薬で解決しない胃内不耐では幽門後（grade B・strong consensus）。誤嚥高リスクでは幽門後（主に空腸）を考慮（GPP・strong consensus）</td><td>「4週間」を胃瘻検討のトリガーとして明文化する。PEGサイズは 18〜20 Fr を超えない</td></tr>
+<tr><td>4</td><td>エネルギーはどれだけ入れるか</td><td>早期は消費量以下を許容し、後（4〜7日）に消費量に合わせて増やす</td><td>ASPEN: 低栄養リスク・低重症度（NRS 2002 ≤3 または NUTRIC ≤5）ならICU入院1週目に特別な栄養療法は不要（expert consensus）。ARDS/ALI・人工呼吸72時間以上見込みでは trophic か full のいずれかで開始（質は high）。高栄養リスク（NRS 2002 ≥5 または NUTRIC ≥5）・高度低栄養ではリフィーディングを監視しつつ24〜48時間で目標へ（expert consensus）／ ESPEN: 急性期は低カロリーEN（消費量の70%を超えない、grade B・strong consensus）。day 3 以降に実測消費量の80〜100%まで増量可（grade 0・strong consensus）</td><td><mark class="hl">Tips（day 4–7）は ESPEN（day 3 以降）より保守的</mark>。当院は day 4 以降の増量とし、間接熱量測定が使えるときは実測に合わせる</td></tr>
+<tr><td>5</td><td>高濃度製剤はいつ使うか</td><td>等カロリー製剤を満量で入れられない消化管不耐、輸液制限が必要な患者、経口移行期（間欠投与スケジュール）に使う</td><td>ASPEN: 特記の推奨なし ／ ESPEN: 特記の推奨なし。<mark class="hl">つまり Tip 5 は完全に専門家意見のみ</mark></td><td>「カロリーを稼ぐため」を理由に高濃度製剤を初手で選ばない。輸液制限と不耐の2つに限る</td></tr>
+<tr><td>6</td><td>蛋白はどれだけ入れるか</td><td>早期は低用量（例 0.8 g/kg/日）、後に &gt;1.2 g/kg/日 へ増やす</td><td>ASPEN: 十分な（高用量の）蛋白 1.2〜2.0 g/kg実体重/日を投与、熱傷・多発外傷ではさらに高い可能性（質は very low）／ ESPEN: 重症病態では 1.3 g/kg蛋白等価/日を漸増して投与可（grade 0・strong consensus）</td><td><mark class="hl">ASPEN の下限（1.2）が Tips の上限（&gt;1.2 へ「後で」上げる）とほぼ同値</mark>で、急性期の考え方が食い違う。当院は急性期0.8→安定期1.2〜1.3の二段階を採る</td></tr>
+<tr><td>7</td><td>高蛋白製剤はいつ考慮するか</td><td>後期の安定期に。腎機能・酸塩基平衡をモニタリングしながら</td><td><mark class="hl">Table 1 のこの行には ASPEN・ESPEN の欄が存在しない（＝対応する推奨が無い）</mark>。専門家意見のみ</td><td>使うなら尿素・クレアチニン・base excess の毎日測定をセットにする。base excess 上昇は減量のサイン</td></tr>
+<tr><td>8</td><td>微量栄養素はいつどう始めるか</td><td>チアミンは入室時から。その他はENで十分量が入らないとき</td><td>ASPEN: 特別な栄養療法を要する患者には、安全性が報告された用量の抗酸化ビタミン（E・C）と微量元素（セレン・亜鉛・銅）の併用を提案（質は low）／ ESPEN: 特記の推奨なし</td><td>入室時チアミン 100〜200 mg IV を定型化する。抗酸化カクテルの静注ルーチン化はしない</td></tr>
+<tr><td>9</td><td>リフィーディング症候群をどう拾い、どう対処するか</td><td>EN開始時は血漿リンを1日1回以上測定。低用量EN＋チアミンとリンの補充</td><td>ASPEN: 血清リンを密にモニタし必要時に適切に補充（expert consensus）／ ESPEN: 電解質（K・Mg・リン）を最初の1週間は1日1回以上測定（GPP・合意率92%）。リフィーディング低リン血症（&lt;0.65 mmol/L または &gt;0.16 mmol/L の低下）では電解質を1日2〜3回測定し必要時補充（GPP・合意率100%）。同状態ではエネルギー供給を48時間制限し、その後漸増（grade B・合意率100%）</td><td>リン測定は既に運用中。<mark class="hl">「低リン＝RFS」と書かない</mark>よう診断要件を1本化する</td></tr>
+<tr><td>10</td><td>消化管の忍容性をどう評価するか</td><td>低用量EN開始時に、高GRV（optional・閾値 500 mL/6時間）、嘔吐、疼痛、腹部膨満、腹腔内圧の上昇・上昇傾向、腸蠕動音消失（動的イレウス）を評価する</td><td>ASPEN: <mark class="hl">GRVをルーチンのモニタリングに用いない（suggestion）</mark>。GRVを使い続けるICUでは、他の不耐徴候が無ければ GRV &lt;500 mL でENを止めない（質は low）／ ESPEN: 特記の推奨なし</td><td><mark class="hl">定時GRVは廃止方向。残すのは開始・増量の局面のみ</mark>。不耐は上部（嘔吐・GRV）と下部（膨満・排ガス消失・IAP）を分けて記録する</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Tips とガイドラインが食い違う2か所 <mark class="hl"><strong>GRV</strong>：ASPEN は「ルーチンに使うな」と明言しているのに、Tips は「optional・500 mL/6時間」として残した</mark>。理由は本文で説明されている（GRV に代わる良い指標が無い、RCTのエビデンスは「既に満量ENが確立した内科系患者」に限られる）が、結果として Tips のほうがガイドラインより GRV に寛容である。 <mark class="hl"><strong>急性期の蛋白量</strong>：ASPEN は 1.2〜2.0 g/kg/日、Tips は「早期は 0.8 g/kg/日」</mark>。同じ表の中で、左列の答えと右列の推奨が数値として反対を向いている。Tips 側は本文で「高蛋白の利益は前向きRCTで示されていない」「過剰蛋白の害を示唆する事後解析がある」と根拠を述べており、<strong>ASPEN 2016 からの実質的な引き下げ</strong>と読むべき。</p>
+</div>
+<h3>4. Q1 — いつ開始するか</h3>
+<p>重症病態は代謝・ホルモンの破綻の連鎖を引き起こし、高度のマクロ・微量栄養素の欠乏に至る。早期のEN開始による外因性栄養素の供給は、この異化状態を緩和し、腸絨毛の萎縮、腸細胞のアポトーシス、炎症細胞浸潤、ディスバイオシス、腸管免疫機能の障害を防ぐのに役立つ。早期ENはこれらの病態生理学的連鎖の一部を緩和ないし逆転させうる。</p>
+<p>臨床データも早期EN（ICU入室から24〜48時間以内）を支持してきた。RCTの複数のメタ解析で、早期ENは遅延ENと比べてICU患者の感染性合併症の減少と関連していた。</p>
+<p>しかし著者らは、その臨床データの限界を明示している。</p>
+<div class="tw"><table>
+<thead><tr><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>サンプルサイズ</td><td>いくつかの研究は小規模</td></tr>
+<tr><td>実施時期</td><td>30年以上前に行われたものがあり、ICU管理・栄養療法の標準が現在と異なる</td></tr>
+<tr><td>方法論</td><td>選択バイアス、ランダム化後の頻回の除外、intention-to-treat 原則の不遵守など、内的妥当性を疑わせる限界</td></tr>
+</tbody></table></div>
+<p>そして、最近の Cochrane メタ解析は現在のエビデンスを very low quality と評価し、早期ENが遅延ENと比べて死亡・栄養不耐・消化管合併症・肺炎のリスクに影響するかは<strong>不確実である</strong>と結論した。</p>
+<p>それでも、エビデンスレベルの低さにもかかわらず、最近のガイドラインは大多数のICU患者に対し重症病態から24〜48時間以内の低用量EN開始を推奨している。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>抄録の「safely」という語は本文で裏付けられていない 抄録は「Low-dose enteral nutrition can be safely started within 48 h」と書くが、本文が引用する Cochrane は安全性のアウトカム（不耐・消化管合併症）についても「不確実」と評価している。「安全に開始できる」は専門家の判断であって、引用文献の結論ではない。</p>
+</div>
+<h3>5. Q2 — 昇圧薬使用中のENをどう扱うか</h3>
+<p>ICUで最も判断に迷う場面。著者は Arabi（「昇圧薬使用中の患者にENを与えるべきでない」という論考の著者）と、対立する立場の Wischmeyer（「昇圧薬使用中でもENは与えられる」）の両者が同じ Critical Care Medicine 2020 の誌上討論に登場している構成になっており、Tips はその折衷点にある。</p>
+<p><strong>論点の整理</strong></p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>生理学的な懸念</td><td>昇圧薬使用中の患者では、早期ENの潜在的利益と関連リスク（腸管虚血）を天秤にかける必要がある</td></tr>
+<tr><td>高用量でも可能か</td><td>高用量ノルアドレナリン下でも trickle feeding（ごく少量の持続投与）は可能とするデータがある（心臓術後患者の腸管吸収の検討）</td></tr>
+<tr><td>観察研究の限界</td><td>早期ENと腸管虚血の関連を記述した観察データは複数あるが、これらの研究で昇圧薬と腸管虚血の因果を確立するのは困難</td></tr>
+<tr><td>RCT（NUTRIREA-2）</td><td>人工呼吸＋昇圧薬使用中の成人を、エネルギー消費量に見合う速度の早期PN群と早期EN群にランダム化。主要評価項目の28日死亡に差なし。しかし<strong>早期ENで腸管虚血と急性結腸偽性閉塞（Ogilvie症候群）が4倍に増加</strong></td></tr>
+<tr><td>その解釈</td><td>血行動態が安定するまで<strong>満量のEN</strong>は延期すべき。ただし<strong>より少量のENが最良なのか、ENを一切行わないのが最良なのかは分かっていない</strong></td></tr>
+<tr><td>感染への効果</td><td>11のRCT（n=597）の統合データでは早期ENが感染性合併症を減らす可能性（消化管壁の完全性の保護による推定）。一方、NUTRIREA-2（N=2410）と CALORIES（N=2400）では、3〜5日以内の早期EN対PNで感染率は減らなかった</td></tr>
+<tr><td>進行中の研究</td><td>最初の24時間における「早期 trophic EN」対「ENなし」の比較などが進行中</td></tr>
+</tbody></table></div>
+<p><strong>結論として提示された運用</strong></p>
+<ul><li>ショックがコントロールされ、<strong>少量〜中等量の昇圧薬を要する</strong>患者では、ICU入室48時間以内に低用量ENを行う。</li><li><strong>積極的に蘇生中、または不安定な</strong>患者ではENを遅らせる。</li><li>昇圧薬を要する患者では、ENを<strong>段階的に増量</strong>し、消化管不耐の症状・徴候、および<strong>説明のつかない血行動態の悪化</strong>をモニタリングする。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>「説明のつかない血行動態の悪化」を不耐の徴候に含めている点が実務的 腹部所見が出る前に、昇圧薬需要の増加が腸管虚血の最初のサインになりうる、という読み。ベッドサイドで「EN開始後に昇圧薬が上がった」を偶然と片付けない根拠になる。</p>
+</div>
+<h3>6. Q3 — 経腸アクセスをどう取るか</h3>
+<p>アクセスの決定は、施設の技量（local expertise）、予測される投与期間、胃不全麻痺や消化管通過障害の所見で決まる。</p>
+<p><strong>短期（4週間未満）</strong></p>
+<ul><li>経鼻胃管のベッドサイドでの盲目的挿入で足りることが多い。</li><li>胃内にあることを確認する信頼できる手段：腹部X線、持続 CO2 モニター、間欠吸引に対する食道と気管のコンプライアンスの差。</li></ul>
+<p><strong>幽門後への切り替え</strong></p>
+<ul><li>判断根拠は、認識された不耐または胃排出遅延。</li><li>留置手技：内視鏡的手技、盲目的な corkscrew 法、GPS ガイドまたは光学ガイド付きチューブ。</li><li>磁石誘導型や flanged Tiger tube は避けるべきと明記。</li><li>外科的・放射線科的手技は、手術室・血管造影室への搬送を要する。</li><li>ランダム化試験では、幽門後への切り替えで<strong>肺炎は有意に減る</strong>が、<strong>それ以外のアウトカムの利益はおそらく無い</strong>ため、見解が分かれている。</li></ul>
+<p><strong>経皮アクセス（4週間超）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>適応の起点</td><td>予測される栄養投与期間が<strong>4週間を超える</strong>こと</td></tr>
+<tr><td>PEGのサイズ</td><td><strong>18〜20 French を超えるサイズは避ける</strong>。側壁への捻れで瘻孔径が拡大しやすくなるため</td></tr>
+<tr><td>外科的胃瘻が望ましい状況</td><td>腹水がある、肥満手術後で胃が除外されている、術後の解剖が変化している</td></tr>
+<tr><td>放射線科的留置</td><td>「Introducer」法の変法を用いる</td></tr>
+</tbody></table></div>
+<p><strong>深部空腸アクセス（PEG から PEGJ への変換）</strong></p>
+<ul><li>判断根拠は胃排出遅延の所見。</li><li>新規のPEGなら、<strong>初回留置時にも変換可能</strong>（PEGの長さを短くし、PEG を通してより細い空腸チューブ（J-tube）を小腸へ進める）。</li><li><strong>一体型の PEGJ</strong> を留置するには、<strong>初回留置から7〜10日以上経過した成熟した瘻孔</strong>が必要。一体型は栄養と吸引の両方に使える太い内腔が得られる。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>腹臥位・ECMO・開腹管理中のENは本論文に記載が無い 当院で問題になりやすい「腹臥位療法中にENを続けるか」については、<strong>本論文はどの節でも触れていない</strong>（Q3のアクセスにも Q10 の不耐にも記載なし）。この点は <span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span> の CQ3-9（ECMO・腹臥位・開腹管理）が Background Question として扱っており、そちらを参照する。本ノートで背景として補うのはここまでで、以下は論文本文ではない。</p>
+</div>
+<h3>7. Q4 — エネルギーはどれだけ入れるか</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-021-03847-4" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-021-03847-4）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 重症病態・外傷に対する急性期の異化反応と、蛋白・非蛋白カロリーの必要量（原図・無改変。文献57より改変引用）。左に骨格筋の絵があり、そこから「Glycolysis（解糖）」「Proteolysis（蛋白分解）」の淡赤の楕円が出る。中央上に肝臓の絵があり、「Glycogenolysis（グリコーゲン分解）」「Gluconeogenesis（糖新生）」の茶色の楕円が重なる。肝から上方へ「Acute phase proteins（急性期蛋白）」の白い楕円が伸びる。筋から肝へ向かって「Lactate（乳酸）」「Amino acids（アミノ酸）」の矢印が入り、緑の楕円「Lipolysis（脂肪分解）」から「Glycerol（グリセロール）」が肝へ向かう。右には血管の絵と上向きの太い黄色矢印があり、その頂点に「Hyperglycemia（高血糖）」の黄文字、血管内に「Glucose」の楕円。血管の下に「insulin resistance（インスリン抵抗性）」の白い四角があり、そこから左下の「Whole body protein catabolism（全身の蛋白異化）」の枠へ矢印が戻る。右側に2つの暗赤の円形吹き出しがあり、上は「Lower Early Exogenous Non-Protein Kcal Delivery?（早期の外因性の非蛋白カロリーを減らすべきか）」で高血糖の矢印を指し、下は「Early Protein Delivery May be Essential Due to Catabolism! Start at 0.8 g/kg/d → progressively increased to &gt;1.2 g/kg/d（異化があるため早期の蛋白投与は必須かもしれない。0.8 g/kg/日で開始し漸増して 1.2 g/kg/日超へ）」で全身蛋白異化の枠を指す。図の最下部に赤字で「Body Can Generate 50-75% of Glucose Requirements in Early Acute Phase!（急性期早期には、体は必要な糖の50〜75%を自前で作れる）」。</p>
+</div>
+<p>高エネルギー投与という概念は、大規模RCTで否定された。</p>
+<ul><li>高い経腸エネルギー摂取という戦略は、大規模RCTで<strong>生命予後も長期の機能的アウトカムも改善しなかった</strong>。</li><li>この結果は、重症病態の早期における除脂肪組織の消耗を防ぐうえで、疾患関連の食思不振（anorexia）の寄与は、炎症と不動（mobilization）より小さいことを示唆する。</li></ul>
+<p><strong>むしろ害が出た2つの場面</strong></p>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>循環性ショックから回復中の患者</td><td>早期の目標量までのENは、<strong>わずかだが有意に、致死的になりうる腸管虚血性合併症を増やした</strong>（NUTRIREA-2）</td></tr>
+<tr><td>血清リンの一過性低下の後</td><td>栄養目標の達成を目指す投与戦略は、<strong>早期の栄養制限と比べて死亡を増やした</strong>（Doig 2015・Q9参照）</td></tr>
+</tbody></table></div>
+<p>大規模で異質性の高い集団での利益の欠如と、一部の研究での害のシグナルに基づき、ESPEN ガイドラインは目標量までの早期の急速な増量に反対する立場をとっている。</p>
+<p><strong>個別化は可能か — 現状はいずれも未確立</strong></p>
+<div class="tw"><table>
+<thead><tr><th>アプローチ</th><th>本文の評価</th></tr></thead>
+<tbody>
+<tr><td>NUTRIC スコアによる層別化</td><td>観察研究の解析では有望に見えたが、<strong>PERMIT-RCT の層別サブ解析で否定された（refuted）</strong></td></tr>
+<tr><td>間接熱量測定（IC）</td><td>安静時に燃焼されるエネルギーの正確な推定を与える。しかし <strong>IC ガイド下の栄養療法は、方法論的に健全なエビデンスが無い状況で、アウトカムを説得力をもって改善しなかった</strong></td></tr>
+<tr><td>バイオマーカーによる個別化</td><td>まだ検証されていない</td></tr>
+</tbody></table></div>
+<p><strong>残された空白</strong>：ICUにおける早期栄養介入のインパクトが限定的である一方、ICU内リハビリ期間中およびICU退室後の栄養素供給は未開拓で、機能回復に関連する可能性がある。</p>
+<p><strong>まとめの一文</strong>：エネルギー摂取は早期（4〜7日）はエネルギー消費量より低くし、その後に消費量に合わせて増やす。</p>
+<h3>8. Q5 — 高濃度製剤（energy-dense formula）はいつ使うか</h3>
+<ul><li>等カロリー製剤（1 kcal/mL）が推定または実測のカロリー目標達成のために一般的に処方される。高濃度製剤（&gt;1 kcal/mL）も利用可能で、エネルギーの増加は主に脂質・炭水化物の比率を増やすことで達成される（原文はこの箇所が組版で崩れており「mainly factor, carbohydrate」となっている。文意から fat の誤りと判断される）。</li></ul>
+<p><strong>処方される最も一般的な理由</strong>（＝Tips が認める適応）</p>
+<ol><li>消化管機能障害があり、等カロリー製剤を満量では耐えられない患者でカロリー供給を増やす</li><li>輸液制限が必要な患者</li><li>間欠投与スケジュール（例：夜間のみ）で経口栄養へ移行しつつ十分なエネルギーを確保する場合</li></ol>
+<p><strong>しかし、いくつかの注意点（caveats）がある</strong></p>
+<div class="tw"><table>
+<thead><tr><th>注意点</th><th>機序・根拠</th></tr></thead>
+<tbody>
+<tr><td>胃排出をさらに遅らせうる</td><td>高浸透圧・高脂肪含量が、神経体液性のフィードバック機構（コレシストキニン、GLP-1）を介して、また十二指腸の浸透圧受容体を介して作用する。十二指腸内容が等張になるまで胃排出が抑制される</td></tr>
+<tr><td>下痢を起こしうる</td><td>小腸内での液体分泌の刺激による</td></tr>
+<tr><td>水分と蛋白の投与が減る</td><td>高濃度製剤を低い速度で投与すると、意図せず水分と蛋白の投与量が減る</td></tr>
+<tr><td>アウトカムを改善しない</td><td>大規模研究（TARGET）で、<strong>高濃度製剤による約50%のカロリー供給増</strong>は、1 kcal/mL 製剤と比べて<strong>どの時点の死亡も、臓器サポートも、6か月時点のQOL・機能アウトカムも改善しなかった</strong>。サブグループ解析でも差なし</td></tr>
+<tr><td>害の方向のシグナル</td><td>高濃度EN群では<strong>消化管不耐が増え、血糖値が高かった</strong></td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Vault の TARGET ノートと数値を突き合わせる <span class="wl">TARGET 高カロリー経腸栄養 vs 通常（NEJM2018）</span> によれば、TARGET の90日死亡は 26.8%（523/1948）対 25.7%（505/1966）、相対リスク 1.05（95% CI 0.94〜1.16）、P=0.41。本論文の「did not improve mortality at any time point」はこの数値と整合する。</p>
+</div>
+<h3>9. Q6 — 蛋白はどれだけ入れるか</h3>
+<p><strong>病態生理</strong></p>
+<ul><li>ICU入室時の筋量はICU生存と相関し、<strong>内因性の代謝・アミノ酸のリザーブ</strong>として機能する。</li><li>異化反応により、ICU滞在の最初の10日間で最大 1 kg/日の顕著な筋量喪失が起こり、ICU-acquired weakness と関連する。</li><li><strong>窒素喪失はICU滞在の最初の24時間で4倍に増加</strong>する。</li></ul>
+<p><strong>現状のデータ</strong></p>
+<div class="tw"><table>
+<thead><tr><th>観点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>実際の投与量</td><td>ICU患者は低い蛋白量しか受け取っていない（<strong>最初の2週間で平均 0.6 g/kg/日</strong>）</td></tr>
+<tr><td>観察研究</td><td>より高い蛋白供給は、成人の死亡低下、生化学的アウトカム指標、骨格筋の形態計測的アウトカム、ICU後3か月のQOL改善、入院7日目の握力と筋量の改善と関連</td></tr>
+<tr><td>前向き研究</td><td>臨床的・患者中心・機能的アウトカムへの効果は限定的、あるいは陰性の結果</td></tr>
+<tr><td>RCTの数</td><td><strong>臨床アウトカムを検討した大規模RCTの数は限られている</strong>（と著者自身が認める）</td></tr>
+</tbody></table></div>
+<p><strong>著者の結論</strong>：</p>
+<ul><li>前向きランダム化試験において、臨床的に意味のあるアウトカムの観点から、重症患者に高蛋白摂取を支持するエビデンスは存在しない。</li><li>さらに、成人の前向き試験の事後解析、小児の研究、後ろ向き研究において、<strong>過剰量の蛋白に関連する害がありうる</strong>。</li><li>したがって、低用量（〜0.8 g/kg）で蛋白投与を開始し、目標（&gt;1.2〜1.3 g/kg/日）へ増量するのが慎重な方法かもしれない。</li><li>ただしこの戦略自体は、前向き研究で評価されていない。</li></ul>
+<p><strong>今後の方向</strong></p>
+<ul><li>高蛋白投与の役割は、蛋白供給を特異的に増やす効果を検討する、より大規模で焦点の絞られた臨床試験を要する。</li><li><strong>筋の体積と筋力は必ずしも相関しない</strong>点が重要。</li><li>予備的データでは、神経筋電気刺激と高蛋白補充（1.8 g/kg/日）の併用が short physical performance を有意に改善した（くも膜下出血後の単施設第2相RCT）。</li><li>高用量蛋白と in-bed ergometry（自転車エルゴメーター）の併用が研究中（NCT03021902）。</li></ul>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-021-03847-4" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-021-03847-4）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 経腸栄養の増量、微量栄養素の投与、リフィーディングの管理に関する推奨（原図・無改変。CHUV ローザンヌ病院と Gelderse Vallei 病院より改変引用）。X軸は入室からの日数（0, 1, 2-3, 4-5, 6-7, 8-9 days の任意の例）、Y軸は栄養目標に対する割合（0〜100%）。青いグラデーションの階段状のブロックが「EN feeding progression」として左下から右上へ4段階で上がり、day 1 で約20%、day 2-3 で約40%、day 4-5 で約60%、day 6-7 で約85%、day 8-9 で100%に達する。左側に3つの吹き出しがあり、上から桃色の「Multi-Micronutrients - IV（微量栄養素の多剤混合を静注）」、緑の太い矢印「THIAMINE 100-200 mg IV/day」（矢印は day 4-5 付近まで伸び、矢印内に小さく「If hypoP: ↓EN, add PO4, Mg, K, 300 mg B1」）、下に桃色の「Screen for refeeding syndrome / hypoP（リフィーディング症候群・低リン血症のスクリーニング）」。右上に水色の吹き出しで「MNs included in EN if 1500 ml administered（1500 mL 投与できれば微量栄養素はENに含まれる）」。目標値は最初の3日は性別・身長・体重を用いたコンピュータ・プロトコルで、以降は間接熱量測定または計算で決定し、エネルギー過剰の回避を優先する。プロポフォール・グルコース・クエン酸などの非栄養性エネルギーを含む摂取量を毎時チェックして注入速度を調整する。低リン血症（血清リン 0.65 mmol/L 未満、またはEN開始から72時間以内にベースラインから 0.16 mmol/L 超の低下）の場合は、エネルギー投与量を最大 500 kcal/日 まで減らし、リン・マグネシウム・カリウムを補充し、チアミンを追加ボーラス投与する。</p>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Figure 2 の中でチアミンの用量が食い違っている <mark class="hl">図中の緑の矢印は「300 mg B1」、図のキャプション本文は「500〜1000 mg IV」</mark>。同じ図の中で、同じ場面（低リン血症発生時の追加ボーラス）に3倍前後の開きがある。<mark class="hl">さらに本文 Q9 は予防投与を「100〜200 mg/日を最初の3日」と書き、Q8 は微量栄養素バイアルと合わせて「100〜200 mg」と書く</mark>。<mark class="hl"><strong>当院プロトコルにこの数値をそのまま写してはいけない</strong></mark>。 あわせて、<mark class="hl">図中の「1500 ml administered」は、本文 Q8 の「about 1500 kcal/day is delivered」と単位が違う</mark>（1 kcal/mL 製剤なら一致するが、高濃度製剤では一致しない）。</p>
+</div>
+<h3>10. Q7 — 高蛋白製剤はいつ使うか</h3>
+<ul><li><strong>蛋白/エネルギー比の高い製品</strong>が各種あり、非蛋白カロリーの overfeeding のリスクを抑えつつ蛋白目標と非蛋白カロリー目標を満たす目的で作られている。</li><li>この目的には、<strong>経腸の蛋白補充剤や補助的アミノ酸溶液</strong>（透明な液体のホエイ蛋白製剤など）の使用が提案されている。</li><li>ただし<strong>アミノ酸組成のバランスを保つことが重要</strong>。著しくバランスを欠いた栄養レジメンは患者に代謝的な負荷（metabolic strain）をかける。</li><li>高蛋白製品は重症病態の後期の安定期に使ってよい。ただしこの推奨を支持する、臨床的に意味のあるアウトカムを見た前向きRCTのデータは存在しない（著者が明記）。</li><li>代替案として、ロイシン代謝物 <strong>HMB（hydroxy methyl butyrate）</strong> の追加によるアミノ酸代謝の改善と正味の蛋白分解の抑制。</li></ul>
+<p><strong>高窒素投与時のモニタリング（実務上そのまま使える部分）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>測定項目</th><th>頻度</th><th>異常時の対応</th></tr></thead>
+<tbody>
+<tr><td>血漿尿素</td><td>毎日</td><td>上昇していれば尿中尿素排泄を確認し、蛋白投与を減量、最終的には腎代替療法</td></tr>
+<tr><td>血漿クレアチニン</td><td>毎日</td><td>同上（腎機能の評価）</td></tr>
+<tr><td>Base excess</td><td>毎日</td><td>上昇していれば<strong>常に蛋白投与の減量を考慮する</strong></td></tr>
+</tbody></table></div>
+<p>著者の説明：アシドーシスは重症患者では様々な理由で生じるが、腎の代償機構が限界を超えたときに、余剰の窒素を排泄する能力が損なわれる。</p>
+<h3>11. Q8 — 微量栄養素をいつどう始めるか</h3>
+<ul><li>微量栄養素（MN：微量元素とビタミン）の摂取は、正常な代謝、免疫、抗酸化防御に必須。MNはネットワークとして働き、そのうち24種類は「必須」＝栄養が唯一の供給源である。</li><li>体内の貯蔵量は様々だが、<strong>一般に1週間を超えて正常な代謝を維持するには不十分</strong>。</li><li>MN必要量は、既存の欠乏の有無、入院前の食事摂取、特定の体液喪失、疾患、投与速度に依存する。</li><li>市販の栄養製剤は健常者の必要量（dietary reference intakes, DRI）を、約 1500 kcal/日 が投与される前提で満たすように作られている。しかし<strong>重症患者に特有の必要量は織り込まれていない</strong>。腸管機能と吸収は最初の数日はしばしば消失または低下しており、酸化ストレスは最大である。</li></ul>
+<p><strong>なぜ経腸だけでは足りないのか（本論文の中核の論理）</strong></p>
+<p>ガイドラインは入室48時間以内・安定化後にENを開始し、<strong>3〜4日かけて目標へ増量する</strong>ことを推奨する。その結果、MN供給はほぼゼロから始まり、1週間近く DRI を下回ったままになる。1500 kcal 未満しか受け取らない患者では「永遠に（forever）」下回る。</p>
+<p><strong>血中濃度の測定について</strong></p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>リスクのあるMNの血中濃度測定</td><td>提案されてはいる</td></tr>
+<tr><td>実務上の問題</td><td>結果が間に合わないことが多く、コストがかかる</td></tr>
+<tr><td>短期滞在例</td><td>大半の患者は短期滞在（5日未満）で、遅れて出た異常値に対応する時間が無い</td></tr>
+<tr><td>測定が合理的な場面</td><td>病態と治療に応じて選択したMNについて、<strong>滞在が1週間を超える場合</strong>、とくに<strong>腎代替療法を要する場合</strong></td></tr>
+</tbody></table></div>
+<p><strong>臨床像</strong></p>
+<ul><li>重症患者はしばしばICU入室前の数日に生じた栄養欠損を持って入室し、それがMN欠乏に翻訳される。</li><li><strong>最も早期の顕在化がリフィーディング症候群</strong>で、チアミンが最前線にある。</li><li>後期の合併症は非特異的で、一般に認識されず、「invisible foe（見えない敵）」と呼ばれることがある。MNは免疫防御に必須のため、<strong>感染と創傷治癒の合併症</strong>が最前線に立つ。</li></ul>
+<p><strong>Tips の結論</strong>：早期にはENが日々の必要量も重症病態に伴う増加分もカバーできないため、<strong>PNで用いる用量と同様の量を早期に静脈内投与するのが合理的</strong>（微量元素混合1バイアル＋総合ビタミン＋チアミン 100〜200 mg）。少数の試験では、ENが必要量をカバーできるようになるまで、PNの4〜5倍の用量でMNを静注する戦略が、より良い全体的アウトカムと関連した。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>「4〜5倍」の根拠は2文献のみ 本文で「A few trials have shown」と書かれているとおり、この主張の根拠は2つの文献に限られる。<strong>用量も対象も本文には書かれていない</strong>。当院で抗酸化カクテルの静注をルーチン化する根拠としては弱い。<span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span> は CQ2-8 で「重度の欠乏が疑われない限り、必要量を超える積極的な補充は戒めるべき」と、<strong>逆方向のトーン</strong>を採っている。</p>
+</div>
+<h3>12. Q9 — リフィーディング症候群をどう拾い、どう対処するか</h3>
+<p><strong>定義と機序</strong></p>
+<ul><li>リフィーディング症候群（RFS）は、可変の長さの飢餓の後に栄養素を再導入したときに生じる、致死的になりうる急性の代謝反応で、罹病と死亡の増加につながりうる。</li><li>特徴は電解質シフト。脂質と蛋白をエネルギー源とする異化状態から、<strong>炭水化物代謝への切り替え</strong>によって生じる。グルコースの基質利用がインスリンを上昇させ、<strong>チアミンの枯渇</strong>と、電解質の細胞内移動による血漿リン・マグネシウム・カリウムの低下をもたらす。</li><li>RFSの合併症は非常に重篤であるため、最初の3日間はチアミン 100〜200 mg/日 の静注をルーチンの一部とすべき（liberal administration）。</li></ul>
+<p><strong>頻度</strong></p>
+<div class="tw"><table>
+<thead><tr><th>定義</th><th>頻度</th></tr></thead>
+<tbody>
+<tr><td>RFSの定義が大きくばらつく</td><td><strong>正確な発生率は不明</strong></td></tr>
+<tr><td>低リン血症（カットオフ 0.65 mmol/L）で定義</td><td><strong>34〜40%</strong></td></tr>
+<tr><td>重度の低リン血症（リン &lt;0.32 mmol/L）またはグルコース投与・栄養療法開始後の低下</td><td><strong>4〜10%</strong></td></tr>
+</tbody></table></div>
+<p><strong>予測できないから全例スクリーニングする</strong></p>
+<p>ICU患者を対象に低リン血症を主要基準としてRFSを定義した最近の研究では、<strong>ICU入室時にRFSの臨床的予測因子は同定されなかった</strong>。したがって全ての重症患者をRFSのリスクありとみなし、EN開始時には少なくとも1日1回、血清リンをモニタリングすべきである。この診断基準とリンのモニタリング推奨は、最近 ESPEN の栄養ガイドラインに採用された。</p>
+<p><strong>カロリー制限</strong></p>
+<ul><li>最近の研究は、RFS中の高エネルギー摂取が死亡増加と関連し、カロリー制限がアウトカムを改善することを示した。</li><li>死亡の差は、電解質異常の是正の後、ICU滞在のかなり後になって現れた。複雑な病態生理を示唆する。</li><li>チアミン投与とカロリー制限（500 kcal/日 または推定目標の25%）は、低リン血症/RFS のICU患者に対する頻用される実践であり、少なくとも48時間行う。この考え方は NICE のガイダンスに着想を得ている。</li></ul>
+<p><strong>実践プロトコル（オンラインで公開されているものを紹介）</strong></p>
+<ol><li>入室時のエネルギー目標は予測式に基づく。</li><li><strong>25%刻みの4段階</strong>で推定目標まで増量し、overfeeding を防ぐ。プロポフォールとクエン酸由来の非栄養性エネルギーを含めて計算する。</li><li>間接熱量測定を行って実際のエネルギー消費量に合わせ、新たな目標として設定する。</li><li>EN開始から72時間以内にリフィーディング低リン血症が生じたらカロリー制限を行う。その48時間後に、次の段階（25%）へ進む。</li></ol>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>リフィーディングの診断閾値が抄録と本文で違う <mark class="hl"><strong>抄録は「リンが30%低下したら」と書く</strong>が、本文・Table 1・Fig 2 のいずれにも「30%」は登場しない</mark>。本文側の閾値は一貫して <mark class="hl">「リン &lt;0.65 mmol/L、またはベースラインから 0.16 mmol/L 超の低下」</mark> である。ベースライン 1.0 mmol/L なら 0.16 mmol/L の低下は16%で、<mark class="hl">30%とは一致しない</mark>。<mark class="hl"><strong>旧ノートは抄録の「30%」だけを採っていた</strong></mark>ため、本文の閾値が抜け落ちていた。 あわせて、==Q4 は Doig 2015 を「目標達成戦略が死亡を増やした」と記述するが、同試験の主要評価項目（ICU退室後の生存日数）は有意差なし（39.9日 対 44.8日、差 4.9日、95% CI −2.3〜13.6、p=0.19）で、差が出たのは構成要素の60日生存（78% 対 91%、p=0.002）である==（<span class="wl">重症患者のリフィーディング症候群にカロリー制限は60日生存を改善する — 339例のRCT（Refeeding Syndrome Trial・LancetRespirMed2015）</span>）。本論文の記述は主要評価項目の陰性に触れていない。</p>
+</div>
+<h3>13. Q10 — 消化管不耐をどう評価するか</h3>
+<p><strong>定義の問題</strong></p>
+<ul><li>消化管の（不）忍容性は、ある種の症状・徴候で定義され、「忍容性あり」はそれらの症状・徴候が無いことを意味する。</li><li>「経腸栄養不耐（EFI）」は、通常、一定量のGRVとして定義されている。しかしこれは経管栄養開始後の上部消化管の問題しか捉えておらず、実際には上部と下部の両方が関与しうる（Fig 3）。</li><li>利用可能な研究の大半で、EFI のある患者はENに耐えられる患者より重症度が高かった。EFI は<strong>エピフェノメノン（付随現象）、あるいは疾患重症度のマーカー</strong>である可能性を示唆する。</li><li>一方、複数の研究で、消化管機能障害の一側面としての EFI の発生は、<strong>追加の臓器機能障害として、独立して不良な転帰と関連する</strong>ことが示された。</li></ul>
+<p><strong>GRVをめぐる現在の立ち位置</strong></p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>頻度</td><td>GRV測定で評価される胃の不耐は、ENを受けるICU患者で最も多い消化器症状</td></tr>
+<tr><td>測定をやめた施設</td><td><strong>既にENが確立した患者でGRVガイド下のENに利益が無い</strong>ことを示した研究以降、多くの施設で測定が省略された。<mark class="hl">ただしその研究では、GRVを測定しない患者のほうが嘔吐が多かった</mark></td></tr>
+<tr><td>誤嚥・肺炎との関係</td><td>GRVと気管への胃内容の吸引・肺炎発症との関係は<strong>明確でない</strong></td></tr>
+<tr><td>測定の負担</td><td>GRV測定は時間がかかり、感染リスク（COVID-19）と実践のばらつきを伴う</td></tr>
+<tr><td>現行ガイドライン</td><td>ASPEN は<strong>ルーチンのGRV測定を推奨しない</strong>。ESICM/ESPEN は<strong>EN開始と増量の局面のみに限定する</strong>ことを提案</td></tr>
+<tr><td>なぜ限定なのか</td><td><strong>RCTのエビデンスは、研究組み入れ時点で既に満量のENが確立していた内科系患者についてしか存在しない</strong></td></tr>
+<tr><td>代替指標</td><td><strong>GRVに代わる良いものが無い</strong>。GRVはベッドサイドでの胃排出の代用マーカーとみなしうる</td></tr>
+<tr><td>結論</td><td>したがって施設の制約に応じて GRV は EFI 評価に含めてよく、<strong>GRV 500 mL/6時間 超は介入（ENの遅延・中断、または消化管運動改善薬の投与）の適応</strong>とみなされる。<mark class="hl">ただし消化管運動改善薬が患者にとって重要なアウトカムを改善することは証明されていない</mark></td></tr>
+</tbody></table></div>
+<p><strong>下部消化管の不耐</strong></p>
+<ul><li>上部消化管の不耐が無くても、下部が関与していることはしばしばある。下部の不耐は異なる管理を要する。</li><li>EN中の患者で、腸管麻痺から腸管膨満に至ることは有害な転帰と関連しうる。</li><li>ショック状態で早期の満量ENを受けた患者は、PNと比べて Ogilvie 症候群と腸管虚血をより多く発症した（NUTRIREA-2）。</li><li>EFI と消化管機能障害のモニタリング・管理は、<strong>頑健で再現性のあるマーカーが無く、臨床像が多面的である</strong>ために複雑。</li><li>単一の分かりやすいマーカーで消化管機能障害を確実に検出できるものは無いため、複数の症状・徴候を組み合わせた<strong>複合スコア</strong>が有用でありうる（iSOFA 研究の GIDS など）。</li><li>ベッドサイドでの EFI の定義：EN中に出現した消化管機能障害の所見で、その結果としてENの減量または中止に至るもの。</li></ul>
+<p><strong>最終的に評価すべき項目</strong>（本文の列挙）</p>
+<p>高GRV（optional・閾値 500 mL/6時間）、嘔吐、疼痛、腹部膨満、腹腔内圧の上昇・上昇傾向、消化管の麻痺。</p>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-021-03847-4" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-021-03847-4）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 経腸栄養不耐のスクリーニング（原図・無改変。作成は Reintam Blaser）。上から下へ流れるフローチャート。最上段の緑の枠「No contraindication to start EN（EN開始の禁忌なし）」から下向き矢印で、青の枠「Start EN with slow rate and assess signs of GI dysfunction（低速でENを開始し、消化管機能障害の徴候を評価する）」。そこから3方向に分岐する。左の橙の枠「Gastric Feeding Intolerance?（胃の栄養不耐か）— 胃不全麻痺の徴候：嘔吐、大量のGRV、（局所の）疼痛と膨満、胃が過伸展していれば腹腔内圧上昇」。この枠から右の赤い「YES」を経て、右側3段の桃色の枠へ。1) Stop EN temporarily or keep low rate（ENを一時中止するか低速を維持）、2) Consider prokinetics if persists after 1)（1で持続するなら消化管運動改善薬を考慮）、3) Postpyloric feeding if EFI persists after 1) and 2); and if no bowel distension（1と2で持続し、かつ腸管膨満がなければ幽門後投与）。胃の不耐の枠から下の緑の「NO」を経て、青の枠「Increase EN Reassess（ENを増量し再評価）」へ。中央では濃橙の枠「Small bowel Feeding Intolerance?（小腸の栄養不耐か）」と「Lower Feeding Intolerance?（下部の栄養不耐か）」が並び、そこから右の濃橙の枠「Signs of bowel paralysis（腸管麻痺の徴候）：腹部（腸管）膨満、排ガス・排便の消失、嘔吐、大量のGRV、腹腔内圧の上昇と上昇傾向」へ。その下に桃色の3段：1) Stop EN or keep low rate、2) Consider measuring IAP（腹腔内圧の測定を考慮）、3) Laxatives and prokinetics（下剤と消化管運動改善薬）。下部不耐の枠からは橙の枠「Diarrhea（下痢）」へ分岐し、左の桃色3段へ：1) Keep EN (low rate, if severe)（ENを継続、重症なら低速で）、2) Stop laxatives（下剤を中止）、3) Search trigger, exclude/treat infectious diarrhea（誘因を探し、感染性下痢を除外・治療）。図の脚注：ENの禁忌として提案されるのは、コントロール不良のショック、コントロール不良の低酸素血症とアシドーシス、コントロール不良の上部消化管出血、胃内容吸引 500 mL/6時間 超、腸管虚血、腸閉塞、腹部コンパートメント症候群、遠位の栄養アクセスが無い高排出量瘻。GRV 200〜500 mL は増加とみなしうるが、500 mL 超はEN中止のカットオフとされる。</p>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>下痢と便秘の扱い <strong>下痢</strong>：本文中で下痢が出てくるのは Q5（高濃度製剤が小腸内の液体分泌を刺激して下痢を起こしうる）だけで、<strong>管理法は Fig 3 の中にしか書かれていない</strong>（EN継続・下剤中止・誘因検索と感染性下痢の除外/治療の3点）。 <strong>便秘</strong>：本文には記載が無い。Fig 3 に「排ガス・排便の消失（absent passage）」が腸管麻痺の徴候として、対応に「下剤と消化管運動改善薬」が挙がるのみ。<mark class="hl"><strong>独立した項目としての便秘管理は本論文に無い</strong></mark>。</p>
+</div>
+<h3>14. 結論（Conclusions）</h3>
+<ul><li>重症患者のケアにおける医療的栄養の重要性は、いくら強調してもしすぎることはない。</li><li>ENの管理には、<strong>全てのICU職種が関わる、体系的かつ最新の方法</strong>が必要である。本稿で提案した実践的アプローチと定期的な更新がそこに含まれる。</li><li>ICU職種のコミュニティ全体から、施設ごとに実践の変化を監査する（auditing changes in practice）ことが必要であり、それによってEN提供の安全性と効率が高まる。</li></ul>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<p><strong>① 推奨の格付けが無い</strong></p>
+<p>本稿は Table 1 の左列（Suggested answer）に格付けを与えていない。GRADE も、合意率も、Delphi のラウンド数も記載されていない。<strong>12名がどうやって「答え」に到達したかが読者に検証できない</strong>。ASPEN の expert consensus や ESPEN の GPP ですら「専門家意見である」というラベルが付いているのに対し、Tips にはそのラベルすら無い。引用する側が「これは意見である」と明示する責任を負う。</p>
+<p><strong>② COI が主題と重なっている</strong></p>
+<p>資金は None だが、13名の著者のうち COI「なし」を宣言したのは McClave と Peake の2名のみ。残りは経腸・静脈栄養の製剤メーカー（Nestlé HealthScience、Nutricia/Danone、Fresenius Kabi、Baxter、Abbott、BBraun、DSM ほか）から講演料・コンサルタント料・研究費を受けている。</p>
+<p>これが問題になるのは、<strong>Tips が具体的な製品カテゴリの使用を推奨している</strong>ためである。</p>
+<div class="tw"><table>
+<thead><tr><th>製品カテゴリ</th><th>推奨した節</th><th>開示との重なり</th></tr></thead>
+<tbody>
+<tr><td>高濃度EN製剤</td><td>Q5</td><td>上記メーカーの主力製品</td></tr>
+<tr><td>高蛋白製剤・ホエイ蛋白補充剤・HMB</td><td>Q7</td><td>同上。Q7 は「支持する前向きRCTのデータは存在しない」と本文が認めている</td></tr>
+<tr><td>微量元素・総合ビタミンの静注バイアル</td><td>Q8</td><td>同上。「PNの4〜5倍」の根拠は2文献のみ</td></tr>
+</tbody></table></div>
+<p><strong>③ 自誌・自己引用の構造</strong></p>
+<ul><li>掲載誌は Critical Care で、責任著者 Preiser は同誌に多数の総説を持つ。引用文献にも同誌のものが複数含まれる。</li><li>Reintam Blaser は、本稿が「補完する」としている ESICM 早期経腸栄養ガイドライン（文献5）と ESPEN ICU栄養ガイドライン（文献7）の両方の著者であり、そのことを自ら COI 欄で開示している。Q10（GRV）を執筆したのも同氏。「ガイドラインの空白を埋める」と称しつつ、そのガイドラインの著者が同じ節を書いている構造は、独立した第三者の吟味とは言えない。</li><li>Van den Berghe（Q4 執筆）は EPaNIC の、Casaer（Q4 執筆）も同試験の著者であり、Q4 の「早期の目標到達は害でありうる」という論調はその立場と一致する。</li></ul>
+<p><strong>④ 原著自身の内的不整合（PDFで検算して確認したもの）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>不整合</th><th>詳細</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>チアミン用量が3通り</td><td>Q8「100〜200 mg」／Q9「100〜200 mg/日を最初の3日」／Fig 2 図中「300 mg B1」／Fig 2 キャプション「500〜1000 mg IV」。低リン発生時の追加ボーラスだけで 300 mg と 500〜1000 mg の2つがある</td></tr>
+<tr><td>2</td><td>リフィーディングの閾値が抄録と本文で違う</td><td>抄録「リン30%低下」／本文・Table 1・Fig 2「&lt;0.65 mmol/L または &gt;0.16 mmol/L の低下」。ベースライン 1.0 mmol/L で 0.16 mmol/L は16%であり、30%とは一致しない</td></tr>
+<tr><td>3</td><td>Doig 2015 を2つの文献番号で引用</td><td>文献41 と 文献115 は<strong>同一論文</strong>（Doig GS ら, Restricted versus continued standard caloric intake…）。著者リストの表記だけが違う</td></tr>
+<tr><td>4</td><td>Doig 2015 の結果の記述</td><td>Q4「目標達成戦略が死亡を増やした」。実際は主要評価項目が有意差なし（p=0.19）で、差は構成要素の60日生存（p=0.002）。主要評価項目の陰性に言及していない</td></tr>
+<tr><td>5</td><td>Cochrane の使い方が両方向</td><td>Q1「Cochrane は very low quality・不確実」／Q2「11 RCT（n=597）の統合データ（同じ Cochrane）で早期ENが感染性合併症を減らす可能性」。同じ文献を、根拠が弱いという主張と根拠があるという主張の両方に使っている</td></tr>
+<tr><td>6</td><td>単位の食い違い</td><td>Q8 本文「about 1500 kcal/day が投与されれば DRI を満たす」／Fig 2 図中「1500 ml administered」</td></tr>
+<tr><td>7</td><td>Table 1 の組版崩れ</td><td>Q9 の ESPEN 欄「electrolytes should be measured 23 timesa day」（＝2〜3回/日 の誤植）。Q4 の ESPEN 欄「Increase caloric delivery can be increased up to 80–100%」（重複した動詞）。Q5 本文「the proportion of mainly factor, carbohydrate」（fat の誤り）</td></tr>
+<tr><td>8</td><td>Table 1 の Q7 に格付き欄が無い</td><td>Q6 と Q7 で ASPEN・ESPEN の欄が Q6 側にまとめられ、Q7 単独の推奨は空欄。読者が「Q7 にはガイドラインの裏付けが無い」と気づきにくい</td></tr>
+<tr><td>9</td><td>500 mL/6時間 の意味が3通り</td><td>Fig 3 脚注では<strong>EN開始の禁忌</strong>、本文 Q10 では<strong>介入（遅延・中断・運動改善薬）の適応</strong>、Fig 3 脚注ではさらに<strong>EN中止のカットオフ</strong>。同じ数値が異なる意思決定に使われている</td></tr>
+<tr><td>10</td><td>「up to 1 kg/日 の筋量喪失」</td><td>原文は <code>up to 1 kg per day</code>。「最大で」であって「1 kg 以上」ではない。書き写すときに上限が下限に化けやすい典型</td></tr>
+<tr><td>11</td><td>文献番号の順序の乱れ</td><td>Q8 の「[110, 102–105]」は昇順になっていない</td></tr>
+<tr><td>12</td><td>Q1 の開始時間</td><td>抄録は「48時間以内」、Table 1 は「24〜48時間以内」、本文は両方。当院プロトコルに写すときは 48時間 を採る（ガイドライン側も48時間）</td></tr>
+</tbody></table></div>
+<p><strong>⑤ 「本文に無い」もの</strong></p>
+<p>読者が探しに来るのに本論文が扱っていない項目を明示しておく。</p>
+<div class="tw"><table>
+<thead><tr><th>探しに来る項目</th><th>本論文での扱い</th></tr></thead>
+<tbody>
+<tr><td>昇圧薬の具体的な閾値（μg/kg/min）</td><td><strong>無い</strong>。「small or moderate doses」としか書かれていない</td></tr>
+<tr><td>腹臥位療法中のEN</td><td><strong>無い</strong>（どの節にも記載なし）</td></tr>
+<tr><td>ECMO 中・開腹管理中のEN</td><td><strong>無い</strong></td></tr>
+<tr><td>便秘の管理</td><td><strong>無い</strong>（Fig 3 の「排ガス消失」「下剤」のみ）</td></tr>
+<tr><td>持続投与か間欠投与か</td><td>Q5 の「経口移行期の間欠投与」に触れるのみで、<strong>急性期の投与方法としての比較は無い</strong></td></tr>
+<tr><td>ベッド頭側挙上の角度</td><td><strong>無い</strong></td></tr>
+<tr><td>補足的静脈栄養（SPN）の是非</td><td><strong>無い</strong>（本稿はENの実務に限定）</td></tr>
+<tr><td>血糖管理の目標値</td><td><strong>無い</strong></td></tr>
+<tr><td>プレ/プロ/シンバイオティクス</td><td><strong>無い</strong></td></tr>
+<tr><td>肥満・るい痩患者の体重の使い分け</td><td><strong>無い</strong>（Q6 が「実体重」に言及するのは ASPEN の引用部分のみ）</td></tr>
+<tr><td>小児</td><td><strong>無い</strong>（成人ICUのみ）</td></tr>
+</tbody></table></div>
+<h3>16. その後どうなったか（2021年以降の変化）</h3>
+<p>本稿は2021年の専門家意見であり、その後の大規模RCTとガイドラインで position が動いた項目がある。Vault 内のノートで裏が取れるものだけを挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>本稿（2021）の立場</th><th>その後</th><th>現在の読み</th><th>Vault内の裏付け</th></tr></thead>
+<tbody>
+<tr><td>48時間以内に低用量ENを開始（エビデンスは very low）</td><td>JCCNG 2024 が <strong>CQ1-5「48時間以内の開始」を強い推奨（1）・エビデンスB（中）</strong> に格上げ</td><td><mark class="hl">本稿より現在のほうが根拠が強い</mark>。当院は JCCNG を一次根拠にしてよい</td><td><span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span></td></tr>
+<tr><td>昇圧薬使用中は「少量なら可」。数値は示さず</td><td>JCCNG 2024 は <strong>CQ1-6「血行動態不安定な患者へのENを提案しない」（弱い・D）</strong>。根拠は NUTRIREA-2 を含む2 RCT で、腸間膜虚血が1000人あたり12件増（95% CI 2増〜38増）</td><td>方向は同じだが、<strong>JCCNG のほうが慎重</strong>。当院は数値閾値を別文献から補う</td><td>同上／<span class="wl">ショックを伴う人工呼吸患者の早期経腸栄養vs静脈栄養（NUTRIREA-2）</span>／<span class="wl">救急・集中治療領域の重症患者の栄養療法 — 早期経腸は48時間以内、ノルアドレナリン0.2μg超では遅らせる（総説・外科と代謝栄養2022）</span></td></tr>
+<tr><td>急性期は 0.8 g/kg/日、後に &gt;1.2 g/kg/日 へ</td><td><strong>EFFORT Protein（2023, 1301例）・PRECISe（2024, 935例）・TARGET Protein（3397例）がいずれも高蛋白の優越性を示さず</strong>。重症度が高い患者と RRT 非施行の AKI で害のシグナル。ESPEN 2023 は1週目に 1.3 g/kg/日 まで漸増</td><td><mark class="hl">本稿の「低く始めて後で上げる」は結果的に正しい方向だった</mark>。ただし JCCNG 2024 は CQ1-4 で「&gt;1.2 g/kg/日 を提案する（弱い・D）」と逆方向で、国内外で読みが割れている</td><td><span class="wl">EFFORT Protein trial（重症患者への高蛋白投与・Lancet2023）</span>（Vaultノートは抄録のみで結果未記載）／<span class="wl">重症患者への高蛋白は6か月のQOLをむしろ悪化させる — 2.0対1.3 g毎kg毎日の二重盲検935例（PRECISe・Lancet2024）</span>／<span class="wl">重症成人の栄養療法 — 急性期は「制限量」が標準、高蛋白は利益なくAKIでは有害の可能性（総説・NEJM2026）</span></td></tr>
+<tr><td>エネルギーは day 4–7 まで消費量に合わせない</td><td><strong>NUTRIREA-3（2023）</strong> が急性期の低カロリー・低蛋白を支持し、2026年の NEJM 総説は「急性期は less is more＝制限量が標準」と結論</td><td><mark class="hl">本稿の立場が主流化した</mark></td><td><span class="wl">重症成人の栄養療法 — 急性期は「制限量」が標準、高蛋白は利益なくAKIでは有害の可能性（総説・NEJM2026）</span>／<span class="wl">重症成人への経腸栄養の現代的根拠 — 急性期は「制限量」、高蛋白は優れない（CCM2025）</span>。<mark class="hl">NUTRIREA-3 の単独ノートは Vault 未収載</mark></td></tr>
+<tr><td>GRV は optional で残す（500 mL/6時間）</td><td>JCCNG 2024・CCM 2025・NEJM 2026 総説がいずれも<strong>定期GRV測定を強く非推奨</strong>。GRV 50 mL未満と400 mL超で誤嚥率が同等という研究、REGANE、NUTRIREA-1、7試験1240例のメタ解析が根拠</td><td><mark class="hl">本稿の立場は現在では少数派</mark>。当院で定時GRVを残す根拠にしない</td><td><span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span>／<span class="wl">重症成人への経腸栄養の現代的根拠 — 急性期は「制限量」、高蛋白は優れない（CCM2025）</span>／<span class="wl">胃エコーによる胃残（GRV）評価</span></td></tr>
+<tr><td>リフィーディングは "低用量ENへ減量" で対応</td><td>AuSPEN 2025 が <strong>"start low, go slow" is no longer best practice</strong> と明記し、リスク例でも推定必要量の50%以上で開始・24〜72時間で目標到達を推奨。ただし<strong>ICU患者は既存のICU栄養ガイドラインに従え</strong>と別扱い</td><td><mark class="hl">一般病棟と ICU で運用を書き分ける</mark>。ICUでは本稿・JCCNG の制限的な方針が優先</td><td><span class="wl">AuSPEN リフィーディング症候群コンセンサス16項目 — start low go slowを否定し50%以上で開始・24〜72時間で目標へ（NutrDiet2025）</span>／<span class="wl">リフィーディング症候群を再訪する — 45研究6608例、定義は乱立し発生率0〜80%、発症は栄養開始72時間以内（SR・Nutrition2016）</span></td></tr>
+<tr><td>消化管不耐は複合スコアが有用でありうる</td><td>JCCNG 2024 は CQ3-4（BQ）で「胃残量、胃残の性状、腹部所見、腹部エコー・腹部X線、乳酸値の<strong>組み合わせ</strong>で評価する」と明記</td><td><mark class="hl">本稿の提案が国内ガイドラインに反映された</mark></td><td><span class="wl">日本版重症患者栄養療法ガイドライン2024 — 37 CQ・24推奨の全件整理（JCCNG 2024・JIntensiveCare2025）</span>／<span class="wl">重症患者の経腸栄養不耐（Tatsumi レビュー）</span></td></tr>
+<tr><td>微量栄養素はPNの4〜5倍で静注する戦略が有望</td><td>JCCNG 2024 CQ2-8（BQ）は「重度の欠乏が疑われない限り、必要量を超える積極的な補充は戒めるべき」</td><td><mark class="hl">方向が逆。本稿の推奨を当院プロトコルに入れない</mark></td><td>同上</td></tr>
+<tr><td>高濃度製剤は不耐・輸液制限に限る</td><td>TARGET の6か月転帰（AJRCCM 2020）でも差なし。この点は変わっていない</td><td>本稿の立場のままでよい</td><td><span class="wl">TARGET 高カロリー経腸栄養 vs 通常（NEJM2018）</span></td></tr>
+<tr><td>早期栄養そのものの是非</td><td>FRANS（2022）で早期栄養サポートが28日死亡増加と関連（若年・低SOFAで最強）。Berger と Singer は「早期栄養が悪いのではなく<strong>早く多すぎる</strong>のが悪い」と解釈</td><td>「いつ始めるか」と「どれだけ入れるか」を分けて論じる、という本稿の枠組み自体は維持されている</td><td><span class="wl">FRANS研究の読み方 — 早期栄養が悪いのではなく「早く多すぎる」のが悪い（Comment・CritCare2023）</span></td></tr>
+</tbody></table></div>
+<h3>17. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>5</td><td>ESICM 早期経腸栄養ガイドライン（GRV を開始・増量局面に限定）</td><td>Reintam Blaser A, Starkopf J, Alhazzani W, et al. Intensive Care Med. 2017;43:380-98</td></tr>
+<tr><td>6</td><td>ASPEN/SCCM 成人重症患者の栄養サポートガイドライン（Table 1 の右列）</td><td>Taylor BE, McClave SA, Martindale RG, et al. Crit Care Med. 2016;44:390-438</td></tr>
+<tr><td>7</td><td>ESPEN ICU 臨床栄養ガイドライン（Table 1 の右列）</td><td>Singer P, Reintam Blaser A, Berger MM, et al. Clin Nutr. 2019;38:48-79</td></tr>
+<tr><td>14</td><td>早期EN対遅延EN の Cochrane レビュー（very low quality と評価）</td><td>Fuentes Padilla P, Martinez G, Vernooij RW, et al. Cochrane Database Syst Rev. 2019;2019:10</td></tr>
+<tr><td>18</td><td>高用量ノルアドレナリン下でも trickle feeding が可能とするデータ</td><td>Berger MM, Berger-Gryllaki M, Wiesel PH, et al. Crit Care Med. 2000;28:2217-23</td></tr>
+<tr><td>22</td><td>NUTRIREA-2（ショック＋人工呼吸で早期EN対早期PN。腸管虚血が増加）</td><td>Reignier J, Boisramé-Helms J, Brisard L, et al. Lancet. 2018;391:133-43</td></tr>
+<tr><td>24</td><td>CALORIES（早期EN対PN、N=2400。感染率に差なし）</td><td>Harvey SE, Parrott F, Harrison DA, et al. N Engl J Med. 2014;371:1673-84</td></tr>
+<tr><td>36</td><td>TARGET の6か月アウトカム（100%対70%のカロリー投与）</td><td>Deane AM, Little L, Bellomo R, et al. Am J Respir Crit Care Med. 2020;201:814-22</td></tr>
+<tr><td>40</td><td>TARGET 本体（高濃度EN対通常EN）</td><td>Chapman M, Peake SL, Bellomo R, et al. N Engl J Med. 2018;379:1823-34</td></tr>
+<tr><td>41 / 115</td><td>Refeeding Syndrome Trial（同一論文が2つの文献番号で引用されている）</td><td>Doig GS, Simpson F, Heighes PT, et al. Lancet Respir Med. 2015;3:943-52</td></tr>
+<tr><td>43</td><td>PERMIT の事後解析（NUTRIC による層別化を否定）</td><td>Arabi YM, Aldawood AS, Al-Dorzi HM, et al. Am J Respir Crit Care Med. 2017;195:652-62</td></tr>
+<tr><td>57</td><td>Fig 1 の原図（周術期の代謝・栄養ケア）</td><td>Gillis C, Carli F. Anesthesiology. 2015;123:1455-72</td></tr>
+<tr><td>58</td><td>「最大 1 kg/日 の筋量喪失」の根拠</td><td>Puthucheary ZA, Rawal J, McPhail M, et al. JAMA. 2013;310:1591-600</td></tr>
+<tr><td>88</td><td>神経筋電気刺激＋高蛋白（1.8 g/kg/日）で physical performance 改善</td><td>Badjatia N, Sanchez S, Judd G, et al. Neurocrit Care. 2021;35:46-55</td></tr>
+<tr><td>116</td><td>カロリー制限 500 kcal/日 の着想元（NICE 由来のリフィーディング解説）</td><td>Mehanna HM, Moledina J, Travis J. BMJ. 2008;336:1495-8</td></tr>
+<tr><td>117</td><td>Fig 2 の元になった公開プロトコル</td><td>criticalcarenutritionacademy.eu の Figure-1.pdf</td></tr>
+<tr><td>126</td><td>「GRV は死んだマーカーか、まだ生きているか」（RCT が内科系患者に限られる根拠）</td><td>Elke G, Felbinger TW. Nutr Clin Pract. 2015;30:59-71</td></tr>
+<tr><td>127</td><td>GRV を測定しない戦略の RCT（VAP に差なし。ただし嘔吐は増えた）</td><td>Reignier J, Mercier E, Le Gouge A, et al. JAMA 2013（NUTRIREA-1）</td></tr>
+<tr><td>129</td><td>REGANE 試験（GRV 500 mL 対 200 mL）</td><td>Montejo JC, Minambres E, Bordeje L, et al. Intensive Care Med. 2010;36:1386-93</td></tr>
+<tr><td>131</td><td>GIDS（消化管機能障害スコア）の開発（iSOFA 研究）</td><td>Reintam Blaser A, Padar M, Mändul M, et al. Clin Nutr. 2021;40:4932-40</td></tr>
+<tr><td>136</td><td>重症患者の消化管機能障害のスコーピングレビューと研究アジェンダ</td><td>Reintam Blaser A, Preiser JC, Fruhwald S, et al.（ESICM 代謝・内分泌・栄養部会）</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">この論文は「格付けの無い専門家意見」であり、Table 1 の左列（Suggested answer）と右列（ASPEN/ESPEN）を混ぜて引用してはいけない</mark>。実務で採るべきは3点に絞られる。<mark class="hl">① 48時間以内に低用量ENを開始する（ただし「安全性が証明された」ではなく「害の証拠がなく生理学的に合理的」）。② 急性期のエネルギーは day 4–7 まで消費量に合わせず、蛋白は 0.8 g/kg/日 から始めて安定期に 1.2〜1.3 g/kg/日 へ上げる。③ 経腸栄養不耐は上部（嘔吐・GRV）と下部（膨満・排ガス消失・腹腔内圧）を分けて記録する。</mark></p>
+<p><mark class="hl">一方、この論文をそのまま当院プロトコルに写してはいけない箇所が3つある。</mark> <mark class="hl"><strong>（a）昇圧薬の閾値は本論文に数値が無い</strong>（別文献のノルアドレナリン 0.2 μg/kg/min を使う）。（b）チアミンの用量は本文・図・図キャプションで3通りに食い違っている。（c）リフィーディングの診断閾値は抄録（リン30%低下）と本文（&lt;0.65 mmol/L または &gt;0.16 mmol/L の低下）で別物である。</mark></p>
+<p><mark class="hl">そして GRV を「optional で残す」という2021年の立場は、その後の JCCNG 2024・CCM 2025・NEJM 2026 総説によって覆されている。定時GRV測定を当院に残す根拠として、この論文を引かないこと。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

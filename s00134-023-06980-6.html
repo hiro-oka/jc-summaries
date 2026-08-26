@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>重症患者の凝固障害をどう管理するか — 出血型と血栓型に分けて考える（レビュー・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-06980-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">重症患者の凝固障害をどう管理するか — 出血型と血栓型に分けて考える（レビュー・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Helms J, Iba T, Connors JM, Gando S, Levi M, Meziani F, Levy JH. How to manage coagulopathies in critically ill patients. Intensive Care Med. 2023;49(3):273-290. doi:10.1007/s00134-023-06980-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-02-17）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-06980-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-06980-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>How to manage coagulopathies in critically ill patients</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-06980-6.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-06980-6.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-06980-6.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li>「凝固障害」を一語で扱わず、<mark class="hl">その患者が今どちらのフェノタイプ（出血型／血栓型）にいるかを毎日評価し直す</mark>という本レビューの構図が、そのまま日々の運用に落ちる。同じ外傷患者が入室日は出血型、48時間後には血栓型でありうる。</li><li>大量出血の目標値（Fig. 6）は当院の大量輸血プロトコルの点検表として使える。Hb &gt;7 g/dL・血小板 &gt;50×10⁹/L・PT比 &lt;1.5・APTT比 &lt;1.5・フィブリノゲン &gt;1.5–2 g/L・イオン化Ca &gt;1 mmol/L・体温 &gt;36℃・pH &gt;7.35 の8項目。後半4つ（体温・pH・Ca・K）は「輸血の話」から落ちやすいので、同じチェックリストに並べておく意味がある。</li><li>フィブリノゲンと血小板の目標値は<span class="wl">欧州外傷GL第6版</span>と一致する。ただし本レビューには <strong>TBI患者で血小板 &gt;100×10⁹/L</strong> という上乗せが無い。頭部外傷では外傷GLの方を採る（後述の対比表）。</li><li>血液悪性腫瘍のDICで<mark class="hl">抗線溶薬（TXA）を使わない</mark>という記載は、当院で外傷プロトコルの感覚を血液内科症例に持ち込む事故を防ぐ。同じ「出血型」でも原因で真逆になる。</li><li>敗血症性DICへの抗凝固（ヘパリン・アンチトロンビン・rhTM）は、<mark class="hl">重症度で層別しないと効果が消える</mark>というのが本レビューの結論。予測死亡率 &lt;25%／APACHE II &lt;25／SAPS II &lt;40 の層では、どの薬剤でも上乗せ効果が示されていない。当院で rhTM を検討するときは「凝固障害が持続しているか」「ヘパリンを併用していないか」を先に確認する。</li><li>低カルシウム血症を凝固障害の増悪因子として明示的に扱う点は、大量輸血時の実務チェック項目。Fig. 6 は塩化カルシウム 1 g の考慮まで書き込んでいる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症患者の凝固障害は頻度が高く、多臓器不全（MODS）に至り予後を悪化させる。敗血症誘発性凝固障害（SIC）・外傷誘発性凝固障害（TIC）は代表例で、十分に重症化すれば播種性血管内凝固（DIC）に進展する。原因疾患ごとに病態・病像・治療が異なることも知られていた。</li><li><strong>Unknown</strong>：しかし臨床現場では「凝固障害」が一語で扱われ、原因の違いが治療選択に反映されにくい。同じ患者が経過中に出血型と血栓型の両方を示すことをどう整理するか、そのとき何を根拠に輸血・抗線溶・抗凝固を選ぶかの共通の枠組みが無かった。</li><li><strong>What's new</strong>：本レビューは、原因疾患ではなく<mark class="hl">優勢な臨床フェノタイプ</mark>で2分する枠組みを提示する。すなわち（1）低凝固かつ線溶亢進の<strong>出血型</strong>（外傷・周産期・白血病）と、（2）全身性の凝固優位・線溶抑制の<strong>血栓型</strong>（敗血症・固形癌）。そのうえで、Fig. 4 の「線溶軸×凝固軸」の平面上に治療（補充療法・抗線溶療法 vs 抗凝固療法）を配置し、直近10年の臨床試験（Table 1）と橋渡し研究（Table 2）を一望させる。新しいデータを出す論文ではなく、<mark class="hl">既存のエビデンスを1枚の判断軸に落とす</mark>論文である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 重症患者の凝固障害は、原因疾患で分けるのではなく<strong>「今どちらのフェノタイプか」で分けて扱う</strong>。出血型（低凝固＋線溶亢進）には補充療法とトラネキサム酸、血栓型（凝固優位＋線溶抑制）には抗凝固。ただし同じ患者が時間とともに軸上を移動するため、<strong>その日その日で位置を測り直す</strong>。</p>
+</div>
+<ul><li>「凝固障害（coagulopathy）」は多様な原因による止血の変化・破綻の総称であり、出血・血栓・その両方をきたす。SIC・TIC が代表例で、十分に重症化すれば DIC に進展し MODS に至る。</li><li>どの凝固障害でも、原因疾患の治療が最も重要。それ以外の治療介入はほとんどが支持的で、原因疾患が続く限り部分的にしか効かない。</li><li>出血型のうち非悪性（外傷・周産期）では、初期の線溶亢進が数時間後に「線溶シャットダウン」へ反転する。抗線溶薬の投与窓が狭いのはこのため。</li><li>出血型のうち悪性（白血病・一部の腺癌）では、腫瘍細胞の組織因子（TF）による凝固活性化を tPA 由来の線溶亢進が上回る。APL では診断時〜寛解導入中に 70–80% が DIC を発症する。</li><li>血栓型の代表は敗血症（免疫血栓の脱制御）と固形癌。固形癌の DIC は臨床症状に乏しく、亜急性・慢性に経過することが多い。</li><li>治療の「効くはずが効かなかった」歴史（アンチトロンビン・活性化プロテインC・rhTM）は、<mark class="hl">凝固障害が実際にある患者だけを選べていなかったこと</mark>で説明できる、というのが著者らの読み。</li><li>粘弾性検査は期待されたが、外傷を対象とした ITACTIC 試験では従来型凝固検査のモニタリングを強化した標準プロトコルに勝てなかった。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この論文を読むための用語 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む このレビューは略語を定義せずに走る。先に用語を通しておくと読みやすい。以下は本文の記述と一般的な定義を合わせたもの。</p>
+<ul><li><strong>DIC（播種性血管内凝固）</strong>：全身の微小血管で凝固が活性化し、微小血栓形成と凝固因子・血小板の消費が同時に起きる病態。行き着く先が MODS。</li><li><strong>SIC（敗血症誘発性凝固障害）／TIC（外傷誘発性凝固障害）</strong>：それぞれ敗血症・外傷を原因とする凝固障害。DIC の手前の段階から連続体として捉える。</li><li><strong>TF（組織因子）</strong>：外因系凝固の起点。単球・内皮・腫瘍細胞・損傷組織が発現する。</li><li><strong>tPA（組織プラスミノゲンアクチベータ）</strong>：内皮から放出され、プラスミノゲンをプラスミンに変えて線溶を起こす。</li><li><strong>PAI-1 / TAFI</strong>：線溶を止める側の分子。PAI-1 は tPA を阻害、TAFI はトロンビンで活性化されフィブリンの分解を妨げる。</li><li><strong>TFPI（組織因子経路インヒビター）／アンチトロンビン／プロテインC・S／トロンボモジュリン（TM）</strong>：生理的な抗凝固系。敗血症では枯渇するか活性が落ちる。</li><li><strong>NETs（好中球細胞外トラップ）</strong>：活性化好中球が放出する脱凝縮DNA線維。シトルリン化ヒストンとミエロペルオキシダーゼ・好中球エラスターゼを載せている。</li><li><strong>MVs（マイクロベシクル）</strong>：血小板・単球・好中球が放出するサブミクロンの膜小胞。TF を運び、ホスファチジルセリンを露出して凝固因子の足場になる。</li><li><strong>免疫血栓（immunothrombosis）</strong>：病原体を封じ込めるための生理的な血管内免疫応答としての血栓形成。脱制御されると DIC になる。</li><li><strong>線溶シャットダウン（fibrinolytic shutdown）</strong>：組織損傷から数時間後に線溶が抑制される現象。</li><li><strong>ADAMTS13</strong>：von Willebrand 因子（vWF）の巨大マルチマーを切断する酵素。</li><li><strong>APL（急性前骨髄球性白血病）</strong>：FAB分類の AML-M3。</li><li><strong>粘弾性止血検査（VHA）</strong>：TEG・ROTEM などのポイントオブケア検査。凝血塊の形成速度と強度を経時的に見る。</li></ul>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>凝固障害は重症患者の重篤かつ高頻度の合併症であり、MODS を招いて予後を悪化させる。</li><li>「凝固障害」は総称であり、出血・血栓・その両方をきたしうる。SIC・TIC が例。十分に重症化すればいずれも DIC に発展する（Fig. 1）。</li><li>病態・病像・管理は原因疾患に部分的に依存する（Fig. 2）。DIC およびすべての凝固障害において、<mark class="hl">原因疾患の治療が決定的に重要</mark>である。</li><li>ただし各凝固障害には優勢な臨床フェノタイプがあり、患者は病期・治療介入・時間経過に応じて血栓性と出血性の両方の特徴を示しうる。</li><li>本レビューはこの「優勢なフェノタイプ」で2分し、病態と治療の違いを検討する。</li></ul>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-06980-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-06980-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 「DICと最も高頻度に関連する臨床病態は、出血フェノタイプでも血栓フェノタイプでも発症しうる」。中央に DIC の円を置き、そこから四方に4つの区画が広がる。左上＝LEUKEMIA（白血病）、右上＝TRAUMA AND PERIPARTUM BLEEDING（外傷と周産期出血）、左下＝SOLID CANCER（固形癌）、右下＝SEPSIS（敗血症）。各区画は赤（線溶フェノタイプ）と青灰（血栓フェノタイプ）の2色でグラデーション状に塗り分けられ、白血病と外傷・周産期出血は赤の面積が大きく、固形癌と敗血症は青灰の面積が大きい。敗血症の区画と中央の DIC のあいだには SIC と書かれた青いブリッジがあり、SIC が敗血症から DIC への中間段階であることを示す。四隅にはいずれも Recovery（回復）と書かれ、どの病態からも回復方向の経路があることを示す。凡例は下段に2つ、血管内に血小板血栓を描いた青灰のアイコン＝THROMBOTIC PHENOTYPE、血滴を3つ描いた赤のアイコン＝FIBRINOLYTIC PHENOTYPE。原図・無改変。</p>
+</div>
+<h3>3. 方法（Methods）— 本文に無い</h3>
+<ul><li><mark class="hl">本論文には Methods セクションが存在しない</mark>。文献検索の期間・データベース・選択基準・複数評価者による選別のいずれも記載されていない。</li><li>推奨の強さ・エビデンスの確実性の格付けも自前では行っていない。本文中に現れる「強い推奨・確実性高」といった格付けは、すべて <strong>ESICM の輸血戦略に関する勧告（文献82）からの引用</strong>であって著者らの評価ではない。読むときにこの区別を落とさない。</li><li>事前登録（PROSPERO 等）の記載も無い。</li><li>したがって本レビューの位置づけは「この分野の第一線の7名が、直近10年の主要試験を自分たちの枠組みで並べ直したもの」である。Table 1・Table 2 に何を採用し何を落としたかの基準は示されていない。</li></ul>
+<h3>4. 出血型凝固障害 — 非悪性（外傷・周産期）</h3>
+<ul><li>外傷誘発性・周産期誘発性の凝固障害では、初期の低凝固状態が損傷部位からの出血として現れる。ただし<mark class="hl">外傷直後の循環内では大規模な止血活性化が同時に起きている</mark>（Fig. 3）。この「局所は出血、循環内は凝固活性化」の同時性が TIC の理解の要。</li><li>出血性ショックの初期段階は線溶亢進を伴う。内皮からの tPA 放出がプラスミノゲンをプラスミンに変換するため。</li><li>広範な組織・内皮損傷に続いて DAMPs と炎症性サイトカインが放出され、トロンビン生成・凝血塊形成・内皮症（endotheliopathy）を増幅する。</li><li>血小板が損傷内皮に接着して凝固活性化のための凝固促進性表面を提供し、増幅相では活性化血小板上でトロンビン生成が増幅される。活性化白血球と血小板が<strong>血小板‑白血球凝集塊</strong>を形成し、活性化好中球・マクロファージが細胞外トラップを放出して血小板凝集とトロンビン形成に寄与する。</li><li>出血が続きながらトロンビン生成が進むため凝固因子が消費される。さらに<strong>血小板疲弊（platelet exhaustion）</strong>が凝集能を変化させる。</li><li><strong>臓器別の特殊性</strong>：損傷脳組織は大量の凝固促進性リン脂質とマイクロベシクルを放出する。一方で<strong>脳・膵・肺・泌尿生殖器の損傷は tPA を放出して線溶を活性化</strong>しうる。脳は両方向に効く点に注意。</li><li><strong>妊娠時</strong>：合胞体栄養膜が内皮様の止血機能（TF・プロテインC・プロテインS・プロテインZ・TFPI-2 の高発現）を獲得する。加えて胎盤は正常妊娠中に PAI-1・PAI-2 を放出して線溶を防いでいる。<mark class="hl">合胞体栄養膜の破綻は、大量のTF放出・炎症活性化・線溶亢進を通じて凝固促進的に働く</mark>。</li><li><strong>増悪因子</strong>：制御不能な出血、血圧維持のための灌流増加による希釈、ショックとMODSによる <strong>"lethal triad"（凝固障害・低体温・代謝性アシドーシス）</strong>、クエン酸添加血液製剤による消費と不活化に続く低カルシウム血症。これらが、凝固酵素活性の低下・血小板機能の変化・トロンビン生成の遅延・低フィブリノゲン血症・フィブリン重合の変化・凝血塊強度の低下を説明する。</li><li><strong>血栓型への移行</strong>：出血性ショックが進行すると、<mark class="hl">とくに血液製剤や因子製剤による蘇生の後に</mark>、出血フェノタイプは血栓フェノタイプへ進む。血小板の免疫調節機能の変化が寄与する。</li><li>初期の線溶亢進は組織損傷から数時間後に抑制され、これを「線溶シャットダウン」と呼ぶ。機序は、阻害因子の大量放出・損傷の細胞性副産物・NETs由来の好中球エラスターゼによるプラスミノゲン利用能の低下。</li><li>移行は自動的ではなく、出血性ショックの進行と蘇生という条件付きである点に注意（旧記述はここを無条件の時間経過として書いていた。後述の「批判的吟味」参照）。</li><li><strong>TICにおける脳損傷</strong>：大量のTF曝露、脳内皮由来 vWF の放出、ADAMTS13 によるクリアランス障害を通じて、血栓性病態に寄与しうる。</li></ul>
+<h3>5. 出血型凝固障害 — 悪性疾患</h3>
+<ul><li>白血病・造血器悪性腫瘍・一部の固形癌（前立腺腺癌・膵癌など）では <strong>15–20% が DIC を発症</strong>し、血栓症状より出血症状が優勢となる。</li><li><strong>APL（AML-M3）</strong>では出血合併症が早期死亡の主因であり臨床的特徴。<mark class="hl">患者の 70–80% が診断時または寛解導入療法中に DIC を発症</mark>する。同様の致死的出血がDICとして、単球性白血病や進行腺癌でも起こる。</li><li>治療自体が内皮炎（endothelialitis）を起こしうる：化学療法、造血幹細胞移植、<strong>サイトカイン放出症候群を合併したCAR-T細胞療法</strong>。さらに二次感染がDIC発症に併存的な重要な役割を果たしうる。</li><li>腫瘍細胞は凝固活性化を担う TF、凝固促進蛋白、および IL-1β・TNF-α などの炎症性サイトカインを発現する。後者は内皮のトロンボモジュリンとプロテインC抗凝固経路の活性化をダウンレギュレートする。</li><li><mark class="hl">しかしこれら凝固促進機序は、tPA放出増加による線溶亢進に大きく凌駕される</mark>。この一文が「悪性でも出血型になる」ことの説明。</li><li><strong>線溶の向きは疾患で逆になる</strong>：線溶亢進は APL や DIC で一般的。逆に<strong>低線溶は骨髄増殖性疾患で顕著</strong>であり、血栓リスク増加と整合する。<strong>L-アスパラギナーゼ投与中のALL</strong>でも血栓リスクが上がるが、こちらの機序は<mark class="hl">後天性アンチトロンビン欠乏</mark>である（旧記述はこの機序を落としていた）。</li></ul>
+<h3>6. 血栓型凝固障害 — 敗血症誘発性凝固障害（SIC）</h3>
+<ul><li>敗血症における病原体の宿主侵入を特徴づける全身性炎症が、血管内の凝固促進的な表現型変化を伴う全身性凝固活性化を引き起こし、SIC に至る（Fig. 7）。</li><li>炎症性サイトカインが内皮と単球の TF 発現を誘導して凝固を開始させ、過剰なトロンビン生成がフィブリノゲンを不溶性フィブリン網に変換する。</li><li>加えて、<strong>細菌のポリリン酸</strong>による接触相の直接活性化と反応性線溶の阻害がこの反応を増幅し、過剰なトロンビン産生および／またはフィブリン分解の不全に至る。</li><li>線溶はさらに、阻害因子（PAI-1・TAFI）の産生／活性化亢進と tPA の減少によって障害される。</li><li>凝固の活性化を制限する生理的抗凝固因子（プロテインC・プロテインS・トロンボモジュリン・アンチトロンビン）と TFPI は、枯渇するか活性が低下する。</li><li><strong>免疫血栓</strong>：敗血症では免疫細胞と凝固活性化の相互作用が「immunothrombosis」と呼ばれ、トロンビンと微小血栓を生じる自然免疫の血管内応答を指す。当初は病原体の認識・封じ込め・破壊を可能にする<mark class="hl">有益な宿主防御機構</mark>として記載された。しかし敗血症・敗血症性ショックでは、脱制御された免疫血栓が過剰な凝固活性化を招き、最終的に DIC と重大な組織傷害に至る。</li><li><strong>NETs と MVs の分子的詳細</strong>：</li><li>活性化好中球は凝固促進性 MVs と NETs の双方を放出する。NETs はシトルリン化ヒストンと、ミエロペルオキシダーゼ・好中球エラスターゼなどの蛋白分解酵素を担う脱凝縮DNA線維。</li><li>MVs は血小板・活性化単球・好中球から放出されるサブミクロンの形質膜小胞。内皮と白血球の活性化を惹起し、TF 発現を誘導し、血管壁と心組織で炎症シグナル経路を促進する。ホスファチジルセリンへの曝露は凝固因子の集合を誘導する。</li><li>興味深いことに、<mark class="hl">内皮由来・白血球由来の MVs は線溶促進的な機能も示し、その凝固促進活性を補完する</mark>。方向が一様でない点は、バイオマーカーとしての解釈を難しくする。</li><li>MVs が NETs 上に共局在すると、第XII因子を介した接触相の活性化により血液凝固を促進しうる表面を構成する。</li><li>さらにトロンビン生成は、ヒストンによる血小板依存的な経路と、好中球エラスターゼによる TFPI の蛋白分解を介した経路でも誘導されうる。</li></ul>
+<p class="figref">🖼 原著のFigure 8 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-06980-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-06980-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 8. 「敗血症誘発性凝固障害における治療標的：現在のエビデンスと今後の展望」。血管腔を横断面で描き、上下を内皮細胞層が挟む。左端では細菌が単球のFcγ受容体・TLRに結合し、LPSとサイトカインが放出され、単球上に TF+VIIa が現れる。そこから X→Xa→II→thrombin→fibrin の矢印が下りる。左下に「Anticoagulants」と書かれた青い太矢印が内因系経路（intrinsic pathway、VIIIa-IXa 経由）を指し、抗凝固薬の作用点を示す。中央では好中球の活性化と好中球細胞死から DAMPs が放出され、赤い矢印が中央上部の「Immunothrombosis」に集束する。上部からは「Antithrombin? Thrombomodulin?」と疑問符付きの青矢印が Endothelial damage（内皮傷害）を指し、これらの薬剤の位置づけが未確定であることを示す。右側では好中球が凝集塊（Aggregates）と細胞外トラップを形成し、右端から「DNA-HNE」の矢印が伸びる。中央右下では活性化凝固（Activated coagulation）に TF が寄与し、PAI-1/TAFI が上向きの白矢印で「Fibrinolytic shutdown」を押し上げる。左からは「Plasma Plasminogen」の青矢印が同じ Fibrinolytic shutdown を指し、プラスミノゲン補充が治療標的でありうることを示す。最下部には「Anticoagulants」の矢印と「Loss of anticoagulants（抗凝固因子の喪失）」の文字。原図・無改変。</p>
+</div>
+<h3>7. 血栓型凝固障害 — 固形癌関連凝固障害</h3>
+<ul><li>複数のコホート研究で癌患者の血栓合併症リスクの高さが報告されている。<strong>高リスク腺癌での平均有病率 15%</strong>、癌のない患者と比べた<strong>相対リスク 4〜7</strong>。</li><li>この血栓リスク上昇は、腫瘍型と病期に依存する悪性腫瘍そのものによるものだけでなく、化学療法・免疫療法・手術・留置血管カテーテルといった抗癌治療介入にもよる。<strong>化学療法中の血栓の相対リスクは 6.5 まで上がり</strong>、主因は内皮傷害。</li><li>癌の凝固亢進は通常、TF を介した凝固活性化、凝固の炎症性修飾、線溶の変化、内皮機能障害に続いて起こる。</li><li>機序の内訳：</li><li>内皮傷害時に放出される vWF の血漿レベル上昇が、損傷内皮への血小板凝集を増やす。</li><li>腫瘍細胞・単球・マクロファージ・凝固促進性マイクロベシクルが TF を提示し、凝固亢進に寄与する。</li><li><strong>ムチン産生腫瘍細胞</strong>は第X因子を直接活性化するシステインプロテアーゼを産生しうる。</li><li>癌細胞と、血小板・内皮の P-セレクチン、白血球の L-セレクチンとの相互作用が血小板微小血栓の形成を誘導しうる。</li><li>炎症性サイトカインが凝固促進経路の活性化をさらに悪化させ、化学療法がこれをさらに増幅しうる。</li><li>一部の癌細胞は線溶阻害因子（PAI-1）または活性化因子（tPA・uPA）を発現し、その相対量に応じて<mark class="hl">抗線溶にも線溶亢進にも振れる</mark>。</li><li><strong>癌のDICは敗血症のDICと臨床像が違う</strong>：癌もDICを誘導しうるが、敗血症誘発性DICと異なり、患者は臨床症状に乏しく、血小板と凝固因子の消費の臨床症状は軽度／亜急性／慢性にとどまる。炎症に応じて一部の凝固促進蛋白の産生が代償的に増えるため。固形癌のDICは主に凝固促進活性とフィブリン沈着で特徴づけられ、DICのない患者と比べて血栓合併症のリスクが高い。</li><li><strong>固形腫瘍1117例の大規模前向きコホート</strong>（ISTH診断基準）：</li><li><strong>DIC は 7%</strong>（1117例中）で診断された。</li><li>そのうち <strong>76% が進行期（stage III/IV）</strong>。</li><li><strong>59% が出血合併症、34% が血栓合併症、7% が出血と血栓の両方</strong>を発症した。</li><li>多変量解析でDICと独立に関連したのは、<strong>進行期の癌・乳癌・腫瘍検体における壊死の存在</strong>の3因子。</li><li>より一般には、主に消化管・膵・肺・乳腺・前立腺由来の腺癌がDICと関連する主要な腫瘍であり、膠芽腫やその他の脳腫瘍も関連しうる。</li></ul>
+<h3>8. 管理の総論 — フェノタイプで治療を選ぶ</h3>
+<ul><li>凝固障害の管理は優勢な臨床フェノタイプ／病像に基づくべき。すなわち、低凝固かつ線溶亢進の<strong>出血型</strong>か、全身性の凝固優位・抗線溶の<strong>血栓型</strong>か（Fig. 4）。</li><li>原因疾患の治療を除けば、<mark class="hl">ほとんどの治療介入は支持的で、基礎にある原因疾患のせいで部分的にしか効かない</mark>。</li><li>ただし抗凝固経路と線溶経路は、出血と血栓のあいだの止血バランスを回復させる標的として狙われる。そのバランス自体が治療の経過中にも変化する。</li></ul>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-06980-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-06980-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 「臨床フェノタイプに応じた凝固障害の管理」。縦軸が FIBRINOLYSIS（線溶）で上向き、横軸が COAGULATION（凝固）で右向きの2軸平面。左下隅に FIBRINOLYTIC SHUTDOWN のラベル、背景は左上が赤、右下が濃紺のグラデーションで、白い破線が左下から右上へ弧を描いて2領域を分ける。左上（線溶高値・凝固低値）に赤いバナーの FIBRINOLYTIC PHENOTYPE（血滴のアイコン付き）が置かれ、その下のボックスに「Supplemental therapy（補充療法）：フィブリノゲン製剤／血小板製剤／FFPまたはPCC／赤血球・カルシウム等」と「Antifibrinolytic therapy（抗線溶療法）：トラネキサム酸」が矢印付きで列挙される。右下（凝固高値・線溶低値）には青いバナーの THROMBOTIC PHENOTYPE（血管内血小板血栓のアイコン付き）が置かれ、その上のボックスに「Anticoagulant therapy（抗凝固療法）：ヘパリン類／アンチトロンビン／トロンボモジュリン」が列挙される。左には錠剤瓶、右にはバイアルのイラスト。なお左下のラベルは紙面上 "FIBRNOLYTIC SHUTDOWN" と綴りが1文字欠けている（原図のまま）。原図・無改変。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>状況（今どちらの軸にいるか）</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>出血が主、線溶亢進が疑わしい（外傷・分娩後の初期）</td><td>受傷／分娩からの時間、Fg、血小板、PT/APTT、イオン化Ca、体温、pH</td><td>損傷制御的蘇生＋補充療法。3時間以内ならTXA</td></tr>
+<tr><td>出血が主だが原因が血液悪性腫瘍</td><td>白血病の病型（APLか）、血小板数、Fg</td><td>抗腫瘍治療の開始が最優先。血小板・Fg補充。<mark class="hl">TXAは使わない</mark></td></tr>
+<tr><td>出血が止まったが凝固優位に転じつつある（外傷48時間後など）</td><td>線溶シャットダウンの時期に入っていないか、血栓の徴候</td><td>抗線溶薬をやめる。血栓予防を検討</td></tr>
+<tr><td>血栓型（敗血症・固形癌）で凝固障害が持続</td><td>血小板の推移、INR、重症度（APACHE II・SAPS II）、ヘパリン併用の有無</td><td>LMWHによる薬理学的予防。抗凝固の上乗せは重症層に限定</td></tr>
+<tr><td>血栓型だが重症度が低い（予測死亡率 &lt;25% 等）</td><td>本当に凝固障害があるか</td><td>抗凝固の上乗せは効果が示されていない。予防量にとどめる</td></tr>
+</tbody></table></div>
+<h3>9. 出血型の管理（1）— 出血をコントロールする</h3>
+<ul><li>外傷または周産期における出血型凝固障害の管理には、<strong>循環血液量の蘇生とショックの解除</strong>が必要で、これは損傷制御的蘇生（damage control resuscitation）の一部として行う。</li><li>止血学的な出血管理は、出血速度と凝固検査に応じた<strong>輸血および／または因子製剤による補充療法</strong>からなる（Fig. 5）。</li><li>出血管理アルゴリズムの使用は、外科的・放射線学的介入で出血を止められるようになるまでの、出血性ショックに対する多角的治療計画の一部として決定的に重要（Fig. 6）。</li><li>この患者集団では、赤血球・血小板を含む複数の要素について特定の輸血アルゴリズムが提唱されている。</li></ul>
+<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-06980-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-06980-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 5. 「臨床的に重要な出血の管理」。この図では、出血に対して輸血製剤その他の血行動態サポートを要する患者を「臨床的に重要な出血」としている。最上部の見出し Clinically important bleeding から2本の矢印が左右に分岐する。左列は縦に3つのボックスがプラス記号で連結される。上＝Maintain hemostasis（止血環境の維持）：正常体温・正常カルシウム・正常pH。中＝Consider tranexamic acid administration（外傷から3時間未満）：1 g 負荷、続いて 1 g を8時間かけて投与。下＝Massive transfusion protocol（出血がコントロールできない場合）。右列は1つの大きなボックス Order coagulation tests（凝固検査を出す）で、3項目が入れ子で列挙される。血小板数が 50×10³/mm³ 未満なら血小板製剤 8–10単位。フィブリノゲンが 1.5–2 g/L 未満ならフィブリノゲン製剤 25–50 mg/kg、または代替としてクリオプレシピテート 8–10単位。PT-INR が 1.7 を超えるなら、循環血液量減少があればFFP、DOAC服用中または難治性出血ならPCC。原図・無改変。</p>
+</div>
+<p class="figref">🖼 原著のFigure 6 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-06980-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-06980-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 6. 「成人の大量出血に対する輸血管理」。3列構成。左列は STOP BLEEDING（出血を止める）：止血処置＋止血薬（ビタミンK／PCC、DOACの中和）＋適応があればセルセーバー。その下に TARGETS のボックスがあり、Hb &gt;7 g/dL、血小板 &gt;50×10⁹/L、PT比 &lt;1.5、APTT比 &lt;1.5、フィブリノゲン &gt;1.5–2 g/L、イオン化Ca²⁺ &gt;1 mmol/L の6項目が並び、太い矢印が中央列を指す。中央列は ACTIVE MASSIVE HEMORRHAGE PATHWAY（大量出血の実働パス）：応援要請（輸血検査室への連絡、搬送要員の確保）と生化学・凝固検査のオーダーから始まり、「Order and transfuse」で赤血球（緊急時はO型陰性）とFFPを2:1の比、および血小板を投与。出血が続けば再度検査を出し、2回目の「Order and transfuse」では同じ2:1比に加えて血小板とフィブリノゲン製剤 25–50 mg/kg を、フィブリノゲンが 1.5–2 g/L 未満または粘弾性検査の結果に応じて投与。最後は Repeat biological tests（検査の再検）へ戻る。右列は RESUSCITATE（蘇生）：気道・呼吸・循環＋低体温の予防＋塩化カルシウム 1 g の考慮。その下の TARGETS は体温 &gt;36℃、pH &gt;7.35、正カルシウム血症、正カリウム血症の4項目。原図・無改変。</p>
+</div>
+<ul><li><strong>ESICMの輸血戦略勧告</strong>（文献82、本レビュー著者らの評価ではない）：</li><li>外傷による大量出血のある重症患者には、<strong>高比率輸血戦略（少なくとも 血漿1単位／濃厚赤血球2単位）を提案</strong>する（<mark class="hl">エビデンスの確実性は低い</mark>）。</li><li>非外傷患者については<strong>推奨なし</strong>。</li><li>外傷患者・重症患者のいずれについても、<strong>早期の経験的フィブリノゲン補充に関する専門家推奨は存在しない</strong>。</li><li>大量出血していない患者では、赤血球・血小板いずれについても<strong>制限的輸血戦略が推奨</strong>される。</li><li><strong>急性白血病関連DIC</strong>：抗腫瘍治療の開始後に通常は速やかに軽快するが、血小板減少のため出血合併症にはしばしば輸血支持が必要。</li><li>血小板輸血の閾値は、<strong>非出血例で 20–30×10⁹/L、出血例で 50×10⁹/L</strong> が提唱されている。</li><li><strong>フィブリノゲンは &gt;1.5–2 g/L を維持</strong>する。</li><li><mark class="hl">抗線溶薬はこれらの患者には推奨されない</mark>。二次的な血栓リスク増加のため。<strong>未分画ヘパリンも遺伝子組換え活性化第VII因子（rFVIIa）も推奨されない</strong>。</li><li>遺伝子組換え可溶性トロンボモジュリンは、造血器悪性腫瘍に伴う凝固障害患者でDICを改善し出血症状を緩和しうる（Saito 2007、n=234）。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>同じ「出血型」でも抗線溶薬の可否が真逆になる 外傷・分娩後出血では <mark class="hl">TXA は3時間以内に投与すべき（強い推奨・確実性高／条件付き推奨・確実性高）</mark>。一方、<mark class="hl">血液悪性腫瘍に伴うDICでは TXA は推奨されない</mark>（二次的血栓リスク）。Fig. 4 の「線溶軸が上＝抗線溶療法」という単純な読み方をそのまま持ち込むと事故になる。原因疾患を必ず一段目に置く。</p>
+</div>
+<h3>10. 出血型の管理（2）— 凝固と線溶のバランスを戻す</h3>
+<ul><li>線溶亢進は TIC と周産期出血の発症時にみられる出血・凝固障害への重要な寄与因子。そのため多角的なTIC治療には TXA による補助的抗線溶療法が含まれる。ただし PAI-1 mRNA などの内因性線溶阻害因子も組織損傷後の出血を減らしうる、という留保が付いている。</li><li><strong>CRASH-2</strong>（外傷 20,211例、受傷8時間以内に TXA またはプラセボ）：</li><li>全死因死亡は TXA 群で減少（<strong>14.5% vs プラセボ 16%、相対リスク 0.91、95%CI 0.85–0.97、p = 0.0035</strong>）。</li><li>この結果と整合して、<mark class="hl">ESICM の専門家は外傷による出血のある重症患者に3時間以内の使用を推奨</mark>（強い推奨・確実性高）。試験の投与窓（8時間）と推奨の投与窓（3時間）がずれている点に注意。</li><li><strong>WOMAN試験</strong>（分娩後出血の臨床診断がついた女性 20,060例）：</li><li>TXA は出血による死亡を減少させた（<strong>相対リスク 0.81、95%CI 0.65–1、p = 0.045</strong>）。</li><li><strong>分娩後3時間以内の投与でとくに顕著</strong>（相対リスク 0.69、95%CI 0.52–0.91、p = 0.008）。</li><li>ESICM は「分娩後出血のある重症患者への TXA の早期使用を提案する」（条件付き推奨・確実性高）。</li><li><strong>血液悪性腫瘍での TXA</strong>：多国籍・無作為化・二重盲検・プラセボ対照・並行群間・優越性試験（NCT03136445）が進行中。造血器悪性腫瘍の治療を受けている患者で、TXA が出血・死亡のリスクと血小板輸血の必要性を減らすかを検証している（Estcourt 2019、n=616、Table 1 では「試験終了、結果待ち」）。</li></ul>
+<h3>11. 出血型の管理（3）— 止血療法をどう導くか（粘弾性検査の位置づけ）</h3>
+<ul><li>大出血プロトコルの適用に加えて、止血の破綻の重症度と性質に応じて止血療法の投与タイミングを導くことで、標的を絞った個別化アプローチが可能になりうる。</li><li><strong>ポイントオブケア粘弾性止血検査は従来型凝固検査より効率的と考えられてきた</strong>。</li><li><mark class="hl">しかし出血を伴う外傷患者を対象とした実践的・多施設・無作為化比較試験 ITACTIC では、粘弾性止血検査で導かれた介入は、従来型凝固検査の能動的モニタリングで強化した標準プロトコルと比べてアウトカムを改善できなかった</mark>。</li><li>本レビューはここで議論を止めており、サブグループ（TBI 例で差があったこと等）や検査の使いどころについてはそれ以上踏み込んでいない。</li></ul>
+<h3>12. 血栓型の管理（1）— 血栓合併症を予防する</h3>
+<ul><li>敗血症と固形癌における過剰なトロンビン生成を伴う血栓型凝固障害では、抗凝固が過剰な凝固活性化と免疫血栓の脱制御を予防または是正しうる（Fig. 8）。</li><li><strong>ヘパリン類の薬理</strong>：未分画ヘパリン（UFH）と低分子ヘパリン（LMWH）は、アンチトロンビン依存的に第Xa因子および特定の凝固プロテアーゼ（IXa・XIa・XIIa）の不活化を増強する。UFH はさらにトロンビンも中和する。ヘパリンは免疫調節作用・抗炎症作用も示し、免疫血栓の制御という観点で重要。</li><li><strong>LMWH &gt; UFH</strong>：凝固障害の文脈とは独立に、臨床研究は重症患者において LMWH が UFH より有効で、<mark class="hl">出血合併症を増やさない</mark>ことを示す。したがって欧州・米国のガイドラインはいずれも、重症患者において UFH より LMWH による薬理学的予防を推奨する（<strong>Grade 1B</strong>）。</li><li><strong>敗血症でのヘパリン</strong>：Wang らのものを含む複数のメタアナリシスがヘパリン投与を受けた敗血症患者の死亡減少を報告している。ただし<mark class="hl">この集団では大規模RCTのデータが依然として必要</mark>、と著者らは留保する。</li><li><strong>日本の二重盲検試験（DIC 125例）</strong>：LMWH（FR-860）とヘパリンの有効性を比較し、<strong>改善率は FR-860 で 20.5%、ヘパリン群で 8.2%</strong> と、FR-860 のほうが高い改善率をもたらしうると示唆された。</li><li><strong>生理的凝固阻害因子の臨床試験の歴史</strong>：</li><li>敗血症の実験データでは、凝固阻害因子（アンチトロンビン・プロテインC・TFPI）がエンドトキシン動物の生存を改善する（Table 2）。</li><li><mark class="hl">しかしアンチトロンビンは第III相試験で生存を改善せず、重篤な出血合併症のリスクを増やした</mark>。</li><li><mark class="hl">遺伝子組換えヒト活性化プロテインCは、敗血症患者の生存に対する利益が無く出血リスクが増えたため撤退</mark>した。</li><li><strong>トロンボモジュリン（TM）の生物学</strong>：</li><li>TM は主に内皮細胞が発現する膜貫通型マルチドメイン糖蛋白。トロンビンと複合体を作ることでプロテインCの活性化と、下流の補因子 Va・VIIIa の不活化を可能にし、凝固カスケードの増幅を制限する。</li><li><strong>敗血症性ショックでは内皮の TM 発現がダウンレギュレート</strong>され、プロテインC活性化が障害される。</li><li>rhTM のレクチン様ドメインは抗炎症作用も持つ。補体カスケードと白血球の内皮接着の阻害、LPS の中和、炎症性蛋白 HMGB1 の分解。</li><li><strong>SCARLET試験</strong>：</li><li>rhTM とプラセボを比較した国際無作為化比較試験。<mark class="hl">この規模で敗血症かつ凝固障害の患者のみを組み入れた最初の試験</mark>。</li><li>凝固障害の定義：<strong>血小板減少または24時間で30%を超える血小板減少、かつ INR &gt;1.4</strong>。</li><li><strong>全解析対象集団（n=800）では28日死亡の有意な減少は観察されなかった</strong>。</li><li>しかし rhTM は、<mark class="hl">初回投与時点で凝固障害が持続していたサブグループ</mark>（無作為化から投与までの間に凝固障害が是正されなかった患者）と、<mark class="hl">血栓予防としてのヘパリン併用を受けていなかったサブグループ</mark>でより有効だった。</li><li>これらの結果はフランス人患者のコホート（n=149）を対象とした事後解析で確認された。</li><li>rhTM は敗血症性ショック誘発性DICに対する潜在的に有望な治療のままである。ただし<mark class="hl">日本のガイドラインでも単独では推奨されていない</mark>。</li><li><strong>層別化の失敗という総括</strong>：</li><li>抗凝固治療を投与する患者の層別化の欠如が、大規模臨床試験の一部の失敗の原因である。</li><li>たとえば無作為化臨床試験の事後解析では、<mark class="hl">最も重症度の低い患者（予測死亡率 &lt;25%、APACHE II スコア &lt;25、または SAPS II &lt;40）は、ヘパリン・アンチトロンビン・APC・rhTM のいずれの治療からも利益を受けない</mark>。凝固障害を持っていないからである。</li><li>実際、敗血症性ショックにおける生理的凝固阻害因子による治療は、<mark class="hl">重症（DIC）状態の患者だけが利益を得られる可能性がある</mark>。局所の免疫血栓は生理的な免疫防御応答に関与しうるため。</li><li><strong>「適応的止血（adaptive hemostasis）」という概念</strong>：</li><li>敗血症性凝固障害では、抗凝固治療は病原体と適応的宿主応答のあいだの微妙なバランスを変えるために投与される。</li><li>適応的凝固の活性化は宿主防御機構（免疫血栓）の本質的な一部だが、その脱制御された過剰な活性化は有害である。</li><li>したがって、<mark class="hl">凝固の活性化状態が有害（過剰）と見なされるか有益（制御下）と見なされるかで、敗血症・敗血症性ショックの患者を区別する必要がある</mark>。前者は抗凝固治療から利益を得られるが、後者は得られない。</li><li><strong>固形癌のDICへの抗凝固</strong>：癌関連凝固障害はより頻繁に軽度または亜急性・慢性の病像と関連するが、終末期の固形腫瘍はDICの主要な原因の一つ。日本の2つの大規模入院患者データベース研究が、stage IV 固形腫瘍関連DIC患者におけるアンチトロンビンまたは rhTM の効果を評価したが、<mark class="hl">どちらも対照群と比較して死亡減少を示せなかった</mark>（rhTM 1,979例 vs 対照 7,916例／アンチトロンビン群を含む919例）。</li><li><strong>第XI因子（FXI）という次の標的</strong>：</li><li>接触相（内因系）経路が血栓の成長で重要な役割を果たすため、抗凝固薬による出血リスク増加を伴わずに抗血栓効果を得る興味深い代替は、この経路を阻害することである。</li><li><strong>FXI は生理的止血には概ね必須ではない</strong>。したがって FXI 阻害が潜在的な抗血栓標的として同定されている。</li><li>開発中の戦略：FXI の肝合成を減らすアンチセンスオリゴヌクレオチド（ASO）、抗体やアプタマーによる FXI の活性化・活性の阻害、低分子による FXI 活性部位への可逆的結合。</li><li><mark class="hl">これらの新規治療は敗血症誘発性凝固障害ではまだ評価されていない</mark>。</li></ul>
+<h3>13. 血栓型の管理（2）— 凝固と線溶のバランスを戻す</h3>
+<ul><li>過剰な凝固活性化の予防を狙う抗凝固治療に加えて、敗血症性凝固障害に続発して凝固因子とアンチトロンビンが極端に低値の患者では、血漿蛋白の補充が出血リスクを減らし、<mark class="hl">ヘパリンの有効性を高める</mark>と考えられる。</li><li><strong>小児の臨床試験（El-Nawawy 2021、n=80）</strong>：敗血症または敗血症性ショックに non-overt DIC（pre-DIC）を合併した小児 80例。<strong>新鮮凍結血漿＋低用量ヘパリン＋トラネキサム酸の早期併用</strong>が、生存の改善とDICへの進展の予防に関連し、<mark class="hl">出血リスクを増やさなかった</mark>。</li><li><strong>成人での血漿交換</strong>：最近発表された2つの成人研究が、早期の血漿交換によって敗血症性凝固障害をもたらす凝固促進因子と抗凝固因子の不均衡を減らせることを示した（Weng 2021 の RCT n=112、Stahl 2020 の単施設研究 n=31）。</li><li><strong>プラスミノゲン枯渇という新しい標的</strong>（Barbosa da Cruz 2019 の概念実証研究）：</li><li>敗血症性ショック患者で、<mark class="hl">NETs の DNA に結合したエラスターゼがプラスミノゲンを分解し、プラスミン形成を減らし、線溶を低下させる</mark>ことが示された。</li><li>この低線溶が、MODS の原因となるDICの発生で主要な役割を果たす。</li><li>プラスミノゲンは損傷血管内皮から放出される tPA によりプラスミンに変換される。しかし<mark class="hl">循環プラスミノゲン濃度が血栓の内因性溶解能を律速する</mark>。</li><li>これらの患者ではプラスミノゲン濃度の劇的な低下も観察され、一部は線溶におけるプラスミンへの変換（消費）による。</li><li>しかし敗血症性DICでは、低線溶に伴う微小血栓の残存には別の説明が必要。検出される主要な機能的プラスミノゲン欠乏は、主に NETs の DNA 結合エラスターゼによる蛋白分解に関連しうる。</li><li><mark class="hl">遊離エラスターゼと異なり、DNA結合エラスターゼは主要な阻害因子である α1-プロテイナーゼインヒビターに抵抗性</mark>であり、そのためプラスミノゲンをプラスミン生成能を失った断片に切断できる。</li><li>したがって<strong>線溶不全は敗血症性DICにおけるもう一つの興味深い治療経路</strong>である。</li><li><strong>シベレスタット</strong>：この文脈で、選択的好中球エラスターゼ阻害薬であるシベレスタットが日本で使用可能。ARDS とDICを合併した患者での使用が報告されており、対照群と比べてアウトカムの改善を示した（Hayakawa 2010、シベレスタット34例 vs 対照133例の後ろ向き解析）。</li></ul>
+<h3>14. 結論（著者らの言葉）</h3>
+<ul><li>凝固障害は集中治療で高頻度の合併症であり、予後を大きく損なうため医師の特別な注意に値する。</li><li>原因疾患が通常、凝固障害の特異的な臨床像・生物学的所見を規定する一方で、<mark class="hl">臨床像は疾患の時間経過と治療介入に応じて変化する</mark>。</li></ul>
+<h3>Table 1. 敗血症・外傷／周産期・悪性腫瘍関連凝固障害における直近の臨床試験</h3>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>試験（文献）</th><th>デザイン</th><th>比較</th><th>対象</th><th>主要アウトカム</th><th>n</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>敗血症</td><td>Weng J 2021</td><td>RCT</td><td>血漿交換（TPE）40例／ヘパリン 36例／SHAM 36例</td><td>敗血症関連DIC</td><td>TPEの有効性</td><td>112</td><td>TPEは28日累積生存率を上げる</td></tr>
+<tr><td>敗血症</td><td>El-Nawawy AA 2021</td><td>前向き介入・非盲検RCT</td><td>群1（血漿輸注＋低用量UFH＋TXA）vs 群2（対照）</td><td>証明された重症敗血症／敗血症性ショックで non-overt DIC</td><td>死亡</td><td>80</td><td>群2で死亡率が有意に高い</td></tr>
+<tr><td>敗血症</td><td>Stahl K 2020</td><td>前向き単施設</td><td>TPE vs 新鮮凍結血漿</td><td>発症12時間未満の早期敗血症性ショックで高用量ノルアドレナリン（&gt;0.4 μg/kg/分）を要する</td><td>微小循環の凝固不均衡へのTPEの効果</td><td>31</td><td>TPEは凝固促進因子の除去と抗凝固因子の補充により微小循環の凝固不均衡を部分的に減弱</td></tr>
+<tr><td>敗血症</td><td>Vincent JL 2019（SCARLET）</td><td>二重盲検RCT・第3相</td><td>rhTM vs プラセボ</td><td>敗血症関連凝固障害の成人</td><td>28日全死因死亡</td><td>800</td><td>rhTMは28日全死因死亡を有意に減らさない</td></tr>
+<tr><td>敗血症</td><td>Levi M 2020</td><td>上記の事後・サブグループ解析</td><td>rhTM vs プラセボ</td><td>ベースラインの凝固バイオマーカー（プロトロンビンフラグメント1.2・TAT複合体・Dダイマー）で層別</td><td>28日全死因死亡</td><td>800</td><td>ベースラインのトロンビン生成バイオマーカーが高い患者はrhTMで死亡が低い</td></tr>
+<tr><td>敗血症</td><td>François B 2021</td><td>SCARLETの事後解析</td><td>rhTM vs プラセボ</td><td>敗血症関連凝固障害の成人</td><td>28日全死因死亡</td><td>149</td><td>ヘパリン併用のない持続性SACの患者はrhTMから利益を得うる</td></tr>
+<tr><td>敗血症</td><td>Hayakawa M 2010</td><td>後ろ向き</td><td>シベレスタット34例 vs 対照133例</td><td>ARDSとDICを合併した敗血症患者</td><td>生存</td><td>167</td><td>シベレスタットは生存を改善</td></tr>
+<tr><td>外傷・周産期</td><td>Hazelton 2022</td><td>前向き観察</td><td>全血 vs 成分輸血（BCT）</td><td>蘇生中に全血または成分輸血を受けた外傷患者</td><td>死亡</td><td>1,623</td><td>全血は死亡の48%減少と関連</td></tr>
+<tr><td>外傷・周産期</td><td>Crombie 2022</td><td>多施設・優越性RCT</td><td>病院前のPRBC–凍結乾燥血漿 vs 0.9%食塩水</td><td>出血性ショックと低血圧（収縮期血圧&lt;90 mmHgまたは橈骨動脈拍動触知不能）の16歳以上の外傷</td><td>エピソード死亡または乳酸クリアランス不良の複合</td><td>432</td><td>PRBC-LyoPlas は0.9%食塩水に優越しなかった</td></tr>
+<tr><td>外傷・周産期</td><td>Moore 2018</td><td>単施設RCT</td><td>血漿 vs 生理食塩水</td><td>都市部level 1外傷センターへの迅速な地上搬送中の出血性ショックの18歳以上</td><td>28日全死因死亡</td><td>144</td><td>病院前血漿は生存の利益と関連しなかった</td></tr>
+<tr><td>外傷・周産期</td><td>Sperry 2018</td><td>多施設・クラスター優越性RCT</td><td>融解血漿 vs 標準治療の蘇生</td><td>航空搬送中で出血性ショックのリスクがある18歳以上の外傷</td><td>30日全死因死亡</td><td>501</td><td>30日死亡は血漿群で有意に低い（23.2% vs 33.0%、p=0.03）</td></tr>
+<tr><td>外傷・周産期</td><td>Moore 2020</td><td>病院前血漿RCT参加2施設の患者</td><td>病院前血漿77例 vs 対照83例</td><td>外傷性出血性ショックの成人</td><td>低カルシウム血症</td><td>160</td><td>病院前血漿は低カルシウム血症と関連し、それが生存低下と大量輸血を予測する</td></tr>
+<tr><td>外傷・周産期</td><td>Holcomb 2015（PROPPR）</td><td>第3相・多施設RCT</td><td>血漿・血小板・赤血球 1:1:1（338例）vs 1:1:2（342例）</td><td>12のlevel I外傷センターに到着した重症外傷</td><td>24時間・30日全死因死亡</td><td>680</td><td>1:1:1 と 1:1:2 で24時間・30日死亡に有意差なし</td></tr>
+<tr><td>外傷・周産期</td><td>WOMAN Trial 2017</td><td>二重盲検RCT</td><td>TXA vs プラセボ</td><td>分娩後出血の女性</td><td>分娩後出血による死亡リスク</td><td>20,060</td><td>TXA投与で出血による死亡が有意に減少</td></tr>
+<tr><td>外傷・周産期</td><td>CRASH-2 2010</td><td>RCT</td><td>TXA vs プラセボ</td><td>成人外傷</td><td>4週以内の院内死亡</td><td>20,211</td><td>TXAで全死因死亡が有意に減少</td></tr>
+<tr><td>血液腫瘍</td><td>Estcourt LJ 2019</td><td>多国籍・二重盲検・並行群間・優越性RCT</td><td>TXA vs プラセボ</td><td>強力化学療法／幹細胞移植を受け5日以上の高度血小板減少が見込まれる造血器悪性腫瘍</td><td>最初の30日以内の死亡またはWHO grade 2以上の出血の割合</td><td>616</td><td>試験終了・結果待ち</td></tr>
+<tr><td>血液腫瘍</td><td>Saito H 2007</td><td>多施設・二重盲検・並行群間RCT</td><td>rhTM vs 低用量ヘパリン</td><td>造血器悪性腫瘍または感染に伴うDIC</td><td>有効性と安全性</td><td>234</td><td>rhTMはDICを有意に改善し出血症状を緩和</td></tr>
+<tr><td>血液腫瘍</td><td>Taniguchi K 2021</td><td>日本の全国観察研究</td><td>rhTM 1,979例 vs 対照 7,916例</td><td>DICを発症した stage IV 固形腫瘍</td><td>28日院内死亡</td><td>9,895</td><td>28日死亡に有意差なし</td></tr>
+<tr><td>血液腫瘍</td><td>Taniguchi K 2020</td><td>日本の全国観察研究</td><td>アンチトロンビン vs 対照</td><td>stage IV 固形腫瘍関連DIC</td><td>28日院内死亡</td><td>919</td><td>28日死亡に有意差なし</td></tr>
+</tbody></table></div>
+<h3>Table 2. 敗血症・外傷誘発性凝固障害における直近の橋渡し／実験研究</h3>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>研究</th><th>対象・モデル</th><th>比較</th><th>目的</th><th>n</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>外傷</td><td>Starr NE 2020</td><td>外傷（ヒト血液検体）</td><td>なし</td><td>外傷後の血小板凝集の評価</td><td>外傷458例＋健常30名</td><td>損傷とショックは血小板凝集能検査で異なるパターンを与える</td></tr>
+<tr><td>外傷</td><td>Moore HB 2015</td><td>ラット出血性ショックモデル</td><td>生理食塩水 vs 血小板除去血漿</td><td>血漿蘇生で線溶亢進が減弱し食塩水で増悪するかの検証</td><td>12</td><td>血漿は食塩水より優れた蘇生輸液で、線溶亢進を減弱し全身灌流を改善</td></tr>
+<tr><td>外傷</td><td>Moore HB 2014</td><td>外傷（ヒト血液検体）</td><td>なし</td><td>外傷患者の線溶の評価</td><td>180</td><td>線溶の分布はシャットダウン64%・生理的18%・線溶亢進18%</td></tr>
+<tr><td>敗血症</td><td>Bianchini E 2022</td><td>敗血症（ヒト血液検体）</td><td>DIC vs 非DIC</td><td>血漿ZPI抗原レベルの評価</td><td>100</td><td>敗血症では好中球エラスターゼがZPI（プロテインZ依存性プロテアーゼインヒビター）の不活化に関与</td></tr>
+<tr><td>敗血症</td><td>Clere-Jehl R 2021</td><td>敗血症（ヒト血液検体＋マウスモデル）</td><td>DIC vs 非DIC</td><td>循環IFN-αの検討と内皮STAT1の役割</td><td>65</td><td>I型IFNは敗血症性ショック誘発性DICの病因的役割を担い、内皮STAT1は治療標的になりうる</td></tr>
+<tr><td>敗血症</td><td>Stiel L 2019</td><td>敗血症（ヒト血液検体）</td><td>DIC vs 非DIC</td><td>ショック誘発性DICでのNET形成の検討</td><td>患者6＋健常対照3</td><td>敗血症性ショック誘発性DIC患者で循環NETsを直接可視化</td></tr>
+<tr><td>敗血症</td><td>Barbosa da Cruz D 2019</td><td>敗血症（ヒト血液検体）</td><td>DIC vs 非DIC</td><td>NETs上のHNEがプラスミノゲン分解経路を介して線溶機構を直接妨げる可能性</td><td>DIC 7例＋健常10名</td><td>DIC合併敗血症性ショックではプラスミノゲン濃度が低く、NETs由来のHNE–DNA複合体がプラスミノゲンを不活性断片に分解するため、フィブリン上でのプラスミン生成能が低下</td></tr>
+<tr><td>敗血症</td><td>Helms J 2017</td><td>ラット敗血症モデル</td><td>DIC vs 非DIC</td><td>rhTMが過剰な免疫血栓を制御できるかの検討</td><td>40</td><td>トロンボモジュリンは凝固促進応答とNETosisを制限し、免疫血栓中の止血制御を少なくとも部分的に回復</td></tr>
+<tr><td>敗血症</td><td>Delabranche X 2017</td><td>敗血症（ヒト血液検体）</td><td>DIC vs 非DIC</td><td>NETosisと敗血症性ショック誘発性DICの関連の検討</td><td>20</td><td>NETosisは敗血症性ショック誘発性DICと有意に相関</td></tr>
+<tr><td>敗血症</td><td>Stiel L 2016</td><td>敗血症（ヒト血液検体）</td><td>DIC vs 非DIC</td><td>敗血症性ショック誘発性DICにおける自然免疫細胞としての好中球活性化の寄与の検討</td><td>100</td><td>NEUT側方蛍光光は好中球活性化とDICの正確なバイオマーカー</td></tr>
+</tbody></table></div>
+<h2>🔍 ICUの凝固障害を1枚で引く（本文由来／本文外を分けて記載）</h2>
+<h3>A. 本レビューが扱う4病態の対比（すべて本文由来）</h3>
+<div class="tw"><table>
+<thead><tr><th></th><th>外傷・周産期</th><th>白血病・APL</th><th>敗血症（SIC）</th><th>固形癌</th></tr></thead>
+<tbody>
+<tr><td>優勢フェノタイプ</td><td>出血型</td><td>出血型</td><td>血栓型</td><td>血栓型</td></tr>
+<tr><td>凝固の向き</td><td>局所は低凝固、循環内は活性化</td><td>TFによる活性化はあるが線溶に凌駕される</td><td>全身性の凝固優位</td><td>TF介在性の凝固亢進</td></tr>
+<tr><td>線溶の向き</td><td>初期は亢進、数時間後にシャットダウン</td><td>亢進（APL・DICで一般的）</td><td>抑制（PAI-1・TAFI増、tPA減）</td><td>PAI-1優位なら抑制、tPA/uPA優位なら亢進</td></tr>
+<tr><td>DICの頻度</td><td>記載なし</td><td>造血器・一部固形癌で15–20%、APLでは70–80%</td><td>記載なし（SICからDICへ進展）</td><td>ISTH基準で1117例中7%</td></tr>
+<tr><td>中心機序</td><td>tPA放出・DAMPs・血小板疲弊・希釈・lethal triad・低Ca</td><td>腫瘍TF＋tPA放出増加</td><td>免疫血栓の脱制御・NETs・MVs・抗凝固因子の枯渇</td><td>腫瘍TF・vWF・セレクチン・ムチン由来プロテアーゼ</td></tr>
+<tr><td>主たる治療</td><td>補充療法＋TXA（3時間以内）</td><td>抗腫瘍治療＋補充療法（TXAは不可）</td><td>原因治療＋LMWH予防、重症層に抗凝固上乗せ</td><td>原因治療（AT・rhTMは死亡を減らさず）</td></tr>
+<tr><td>抗線溶薬</td><td>使う</td><td><mark class="hl">使わない</mark></td><td>記載なし</td><td>記載なし</td></tr>
+<tr><td>抗凝固薬</td><td>記載なし（出血制御が優先）</td><td>UFHもrFVIIaも推奨されない</td><td>LMWH（Grade 1B）。上乗せは層別化が前提</td><td>AT・rhTMともに死亡を減らさなかった</td></tr>
+</tbody></table></div>
+<h3>B. ICUで実際に鑑別に挙がる原因（<mark class="hl">本レビューは扱っていない</mark>ものを含む）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この表の後半は本論文の記述ではない 依頼された「原因別の検査所見パターン」は、<mark class="hl">本レビュー本文には存在しない</mark>。本論文が扱うのは外傷・周産期・血液悪性腫瘍・敗血症・固形癌の5つだけで、<mark class="hl">HIT・TMA（TTP/HUS）・肝不全・希釈性凝固障害・抗凝固薬による凝固障害は本文中に一度も登場しない</mark>（"HIT"・"thrombotic microangiopathy"・"vitamin K" の語は本文0回、"liver"/"hepatic" はFXIの肝合成の文脈で1回のみ）。以下の表は、本論文由来の行と、Vault内の他ノート由来の行を明示して分けたもの。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>原因</th><th>PT/INR</th><th>APTT</th><th>血小板</th><th>フィブリノゲン</th><th>Dダイマー</th><th>決め手</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>敗血症性DIC</td><td>延長</td><td>延長</td><td>低下</td><td><mark class="hl">必ずしも低下しない</mark></td><td>上昇</td><td>経時トレンド。急性期反応でFgは上がりうる</td><td>[[敗血症のフィブリノゲンは下がるとは限らない — DIC解釈は時相で読む（Correspondence・ICM2024）\</td><td>ICM2024 Correspondence]]（同じ著者グループ）</td></tr>
+<tr><td>外傷性凝固障害（TIC）</td><td>延長</td><td>延長</td><td>低下</td><td>低下</td><td>上昇</td><td>受傷からの時間。初期は線溶亢進、数時間後にシャットダウン</td><td>本論文＋[[外傷性凝固障害（TIC）を理解する — 血小板疲弊・線溶亢進から遅発性の凝固亢進へ（Understanding the Disease・ICM2022）\</td><td>ICM2022]]</td></tr>
+<tr><td>白血病関連DIC（APL）</td><td>延長</td><td>延長</td><td>高度低下</td><td>低下</td><td>上昇</td><td>病型（APLか）。診断時〜寛解導入中に70–80%</td><td>本論文</td></tr>
+<tr><td>固形癌関連DIC</td><td>軽度延長</td><td>軽度延長</td><td>軽度低下</td><td>変動</td><td>上昇</td><td>症状に乏しく亜急性・慢性。stage III/IVが76%</td><td>本論文</td></tr>
+<tr><td>TMA（TTP・HUS）</td><td><mark class="hl">正常</mark></td><td><mark class="hl">正常</mark></td><td>低下</td><td>正常</td><td>正常〜軽度上昇</td><td>破砕赤血球＋LDH上昇。ADAMTS13活性 &lt;5–10% でTTP確定</td><td><mark class="hl">本論文に記載なし</mark>。[[ICUの血小板減少 — DICとTMA（TTP・HUS）を素早く見分ける（エディトリアル・CritCare2018）\</td><td>CritCare2018]]</td></tr>
+<tr><td>HIT</td><td>正常</td><td>正常</td><td>低下（通常 &gt;20×10⁹/L）</td><td>正常</td><td>上昇しうる</td><td>ヘパリン曝露からの日数＋4Tsスコア。血栓型</td><td><mark class="hl">本論文に記載なし</mark>。<span class="wl">ヘパリン起因性血小板減少症（HIT） — 中止だけでは足りず治療用量の代替抗凝固へ（4Tスコア・Clinical Practice・NEJM2015）</span></td></tr>
+<tr><td>肝不全（再バランス止血）</td><td>延長</td><td>延長</td><td>低下</td><td>低下</td><td>上昇</td><td>抗凝固因子も同時に低下しており、PT延長＝出血傾向ではない</td><td><mark class="hl">本論文に記載なし</mark>。<span class="wl">肝疾患における出血と血栓症 — 再バランス止血の病態と管理</span></td></tr>
+<tr><td>希釈性凝固障害</td><td>延長</td><td>延長</td><td>低下</td><td>低下</td><td>変動</td><td>輸液・輸血量と時間経過。本論文では外傷の増悪因子として1行のみ</td><td>本論文（増悪因子として言及のみ、独立項目としては扱わない）</td></tr>
+<tr><td>抗凝固薬（VKA・DOAC）</td><td>VKAで延長</td><td>DOACで延長しうる</td><td>正常</td><td>正常</td><td>正常</td><td>服薬歴。Fig 5 は「DOACならPCC」、Fig 6 は「ビタミンK/PCC、DOACの中和」とだけ記す</td><td>本論文（図中のみ、本文の解説なし）。詳細は<span class="wl">DOAC服用患者の周術期管理 レビュー（JAMA2024）</span>・<span class="wl">抗凝固薬関連出血の中和はどこへ向かうか — アンデキサネット撤退後に残るのは4F-PCCとイダルシズマブ（総説・FrontCardiovascMed2026）</span></td></tr>
+</tbody></table></div>
+<h3>C. 目標値の照合 — 本レビュー vs 欧州外傷ガイドライン第6版（いずれも2023年）</h3>
+<p>原論文の Fig. 5・Fig. 6 と、欧州外傷GL第6版（Rossaint R, et al. Crit Care. 2023;27:80）の推奨本文を突き合わせた。<mark class="hl">2つの2023年文献のあいだで大きな食い違いは無いが、3点だけずれる</mark>。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本レビュー（Helms 2023、Fig 5/6）</th><th>欧州外傷GL第6版（CritCare2023）</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>フィブリノゲン補充の閾値</td><td>&lt;1.5–2 g/L</td><td>Clauss法で ≤1.5 g/L、または粘弾性検査で機能的欠乏（Grade 1C）</td><td>一致</td></tr>
+<tr><td>フィブリノゲンの初回投与量</td><td>製剤 25–50 mg/kg、またはクリオ 8–10単位</td><td>3–4 g（＝単一ドナー由来クリオ 15–20単位相当）（Grade 2C）</td><td>実質一致（体重70 kgなら 1.75–3.5 g）</td></tr>
+<tr><td>フィブリノゲンの目標</td><td>&gt;1.5–2 g/L</td><td>&gt;1.5–2.0 g/L</td><td>一致</td></tr>
+<tr><td>血小板の閾値・目標</td><td>&lt;50×10⁹/L で輸血、目標 &gt;50×10⁹/L</td><td>出血継続中は &gt;50×10⁹/L、<mark class="hl">TBI では &gt;100×10⁹/L</mark>（Grade 2C）</td><td><mark class="hl">ずれ①</mark>：本レビューにTBIの上乗せが無い</td></tr>
+<tr><td>血小板の初回投与量</td><td>8–10単位</td><td>4–8単位または1アフェレーシスパック（Grade 2B）</td><td><mark class="hl">ずれ②</mark>：本レビューのほうが多い</td></tr>
+<tr><td>FFP/赤血球比</td><td>赤血球:FFP = 2:1</td><td>FFP/pRBC ≥1:2、またはフィブリノゲン製剤＋pRBC の二択（Grade 1C）</td><td>一致</td></tr>
+<tr><td>PT/INR による血漿投与のトリガー</td><td>Fig 5：PT-INR &gt;1.7 で FFP（循環血液量減少時）または PCC（DOAC・難治性出血）</td><td>PT and/or APTT &gt;正常の1.5倍でFFPを追加（Grade 1C）</td><td><mark class="hl">ずれ③</mark>：本レビューのほうが緩い。しかも同じ論文の Fig 6 の目標は「PT比 &lt;1.5」で、Fig 5 のトリガーと整合しない</td></tr>
+<tr><td>トラネキサム酸</td><td>3時間以内、1 g 負荷＋1 g を8時間</td><td>3時間以内、1 g を10分で＋1 g を8時間（Grade 1A）</td><td>一致</td></tr>
+<tr><td>イオン化カルシウム</td><td>&gt;1 mmol/L、CaCl₂ 1 g を考慮</td><td>正常範囲に維持、塩化カルシウムで補正（Grade 1C）</td><td>一致</td></tr>
+<tr><td>ヘモグロビン</td><td>&gt;7 g/dL</td><td>70–90 g/L</td><td>一致</td></tr>
+</tbody></table></div>
+<p><strong>実務上の帰結</strong>：頭部外傷を伴う出血では外傷GLの 100×10⁹/L を採る。本レビューの Fig 5/6 は「非TBIの成人大量出血」の枠と読むのが安全。</p>
+<h3>D. 血小板輸血の閾値 — Vault内で数字が食い違う</h3>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>本レビュー</th><th>Vault内の他ノート</th><th>解釈</th></tr></thead>
+<tbody>
+<tr><td>予防的（出血なし・化学療法後の血小板減少）</td><td>20–30×10⁹/L（急性白血病関連DIC）</td><td><strong>10×10⁹/L</strong>（3 RCT・499例で 10 と 20–30 に出血の差なし）— [[血小板輸血をどう使うか — 閾値10万でなく1万、輸血反応の最多原因、制限的方針を支持（How I Treat・Blood2022）\</td><td>Blood2022 How I Treat]]</td><td>前提が違う。本レビューは<mark class="hl">DICを合併した白血病</mark>に限った数字（APL診療の文献22に依拠）。単なる骨髄抑制性血小板減少では 10×10⁹/L が現在の標準</td></tr>
+<tr><td>出血あり</td><td>50×10⁹/L</td><td>同（外傷GLも &gt;50×10⁹/L）</td><td>一致</td></tr>
+<tr><td>大量出血</td><td>&gt;50×10⁹/L を目標</td><td>同</td><td>一致</td></tr>
+</tbody></table></div>
+<p><mark class="hl">どちらも消さずに使い分ける</mark>。「DICがあるか」「今出血しているか」の2問で閾値が決まる。</p>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<p><strong>方法論</strong></p>
+<ul><li><mark class="hl">ナラティブレビューであり、系統的レビューでもガイドラインでもない</mark>。Methods セクションが存在せず、文献の検索・選択の基準が示されていない。Table 1・Table 2 に何を入れ何を落としたかは著者らの裁量。</li><li><strong>推奨の強さは自前では評価していない</strong>。本文に出てくる格付け（「強い推奨・確実性高」など）はすべて ESICM の輸血勧告（文献82）または既存ガイドラインからの引用。「本レビューが推奨した」と読むのは誤り。</li><li>一次データは無い。新規性は枠組みの提示にある。</li></ul>
+<p><strong>利益相反</strong></p>
+<ul><li><mark class="hl">7名中6名に、止血診断薬・血液製剤・凝固因子製剤メーカーとの金銭関係がある</mark>。とくに Diagnostica Stago（止血検査試薬）は責任著者 JH と FM の両方に、Octapharma（血漿分画製剤）は FM と JHL に、旭化成ファーマ（rhTM トロンボモジュリンアルファの製造元）は TI と ML に関係している。</li><li><mark class="hl">rhTM に紙面を最も多く割き、SCARLET が主要評価項目で陰性だったにもかかわらず「潜在的に有望な治療のまま」と結論している</mark>点は、この開示と重ねて読む必要がある。ただし著者らは同じ段落で「日本のガイドラインでも単独では推奨されていない」と明記しており、留保は付けている。</li><li>シベレスタットの記載（日本でのみ使用可能・後ろ向き167例）も、根拠の強度に対して扱いが厚い。</li></ul>
+<p><strong>内的不整合・誤植（PDF紙面で確認したもの）</strong></p>
+<ol><li><mark class="hl">Fig 5 の血漿投与トリガー（PT-INR &gt;1.7）と Fig 6 の目標値（PT比 &lt;1.5）が整合しない</mark>。同じ論文の隣り合う2図で、血漿を入れ始める点と目指す点が逆転している。</li><li><strong>本文の表参照が2か所で誤っている</strong>。「遺伝子組換えヒト活性化プロテインCは…撤退した（Table 1）」とあるが、<mark class="hl">Table 1 に活性化プロテインCの行は無い</mark>。同様に「凝固阻害因子（アンチトロンビン・プロテインC・TFPI）がエンドトキシン動物の生存を改善する（Table 2）」とあるが、<mark class="hl">Table 2 にその行も無い</mark>（Table 2 の敗血症動物実験は rhTM のラットモデル1件のみ）。</li><li><strong>図番号の参照ミス</strong>。「Guiding hemostatic therapies」節の冒頭で「止血療法の投与タイミングを導く（Fig. 7）」とあるが、<mark class="hl">Fig. 7 は敗血症誘発性凝固障害の病態生理の図</mark>であり、止血療法のタイミングとは無関係。文脈からは Fig. 5 または Fig. 6 を指すはず。</li><li><strong>Fig 4 の綴り誤り</strong>：左下のラベルが "FIBRNOLYTIC SHUTDOWN"（I が欠落）。</li><li><strong>著者所属の誤り</strong>：Gando S の所属5が "Sapporo Higashi Tokushukai Hospital, Sapporo, USA" となっている（Japan の誤り。同じ著者の所属6は正しく Japan）。</li><li><strong>WOMAN試験の統計表記</strong>：RR 0.81、95%CI 0.65–1、p = 0.045。<mark class="hl">95%CI の上限が 1 に丸められており、p&lt;0.05 との整合が紙面上は読み取りづらい</mark>（原著 Lancet 2017 の 0.65–1.00 をそのまま転記したもの。誤りではないが、JC で「CIが1を含んでいるのに有意？」と必ず問われる箇所）。</li><li><strong>用語のぶれ</strong>：本文は El-Nawawy 試験の対象を "pre-DIC" と書き、Table 1 は同じ試験を "non-overt DIC" と書く。同義として使っているが定義は示されない。</li></ol>
+<p><strong>内容上の弱点</strong></p>
+<ul><li><mark class="hl">「how to manage」という表題に対して、扱う病態が5つに限られる</mark>。ICU で「凝固障害」として相談が来る原因のうち、HIT・TMA（TTP/HUS）・肝不全・ビタミンK欠乏・抗凝固薬関連は本文で扱われない。DIC を中心に据えた総説であり、鑑別の総説ではない。</li><li><strong>診断の議論がほぼ無い</strong>。ISTH DICスコアは固形癌コホートの診断基準として1回名前が出るだけで、スコアの構成も SIC スコアも提示されない。「出血型か血栓型か」をどの検査値で判定するかは、Fig 5・Fig 6 の閾値から逆算するしかない。</li><li><strong>粘弾性検査の扱いが薄い</strong>。ITACTIC が陰性だったことを1文で述べて終わり、では何を使えばよいのかが示されない。Fig 6 は「粘弾性検査の結果に応じて」フィブリノゲンを投与すると書いており、<mark class="hl">本文の懐疑と図の推奨が噛み合っていない</mark>。</li><li><strong>投与量の根拠が示されない</strong>。フィブリノゲン 25–50 mg/kg、血小板 8–10単位、クリオ 8–10単位といった数値は図中にのみ現れ、本文に出典も導出も無い。</li><li><strong>敗血症の項に治療の実務が薄い</strong>。SIC の病態生理（NETs・MVs・エラスターゼ）に大きく紙面を割く一方、「今日の敗血症性DIC患者に何をするか」は「LMWHで予防、重症なら抗凝固を検討」に収束する。橋渡し研究の比重が臨床判断の比重を上回っている。</li><li><strong>小児のデータが1件（El-Nawawy、n=80）だけ紛れ込む</strong>。成人ICUの総説の中で、この試験だけが小児であることは本文では強調されない（Table 1 の対象欄からも読み取りにくい）。</li><li><strong>推奨の時間軸</strong>：CRASH-2 は受傷8時間以内の登録で有効性を示したのに、推奨は3時間以内。この乖離（8時間の試験から3時間の推奨が出る理由＝3時間以降はむしろ有害という CRASH-2 のサブグループ解析）を本文は説明しない。</li></ul>
+<p><strong>旧ノート（69行）との差分で見つかったこと</strong></p>
+<ul><li>旧ノートは PDF 1–5ページのみを読んで作られており、<mark class="hl">表題の "how to manage" が指す管理の章（276–290頁）が丸ごと欠落</mark>していた。輸血閾値・TXA・抗凝固・SCARLET・ITACTIC・Table 1/2・Fig 4–8 のすべてが未収載。今回すべて補った。</li><li>旧ノートは「出血型は時間とともに血栓型へ移行する」と無条件に書いていたが、<mark class="hl">原文は「出血性ショックが進行するにつれて、とくに血液製剤・因子製剤による蘇生の後に」という条件付き</mark>である。時間経過だけで自動的に移行するわけではない。</li><li>旧ノートは L-アスパラギナーゼによる血栓リスクの機序（<mark class="hl">後天性アンチトロンビン欠乏</mark>）を落としていた。</li><li>旧ノートは COI・資金源・投稿履歴を一切記載していなかった。COI は本レビューの読み方に直結するため必須。</li><li>事実の誤りそのものは見つからなかった。旧ノートの問題は誤読ではなく<mark class="hl">網羅範囲</mark>だった。</li></ul>
+<h3>16. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>CRASH-2 trial collaborators 2010</td><td>外傷20,211例、受傷8時間以内のTXAで全死因死亡が減少（14.5% vs 16%）</td><td>Lancet</td></tr>
+<tr><td>WOMAN Trial Collaborators 2017</td><td>分娩後出血20,060例、TXAで出血死が減少（RR 0.81）。3時間以内で顕著</td><td>Lancet</td></tr>
+<tr><td>Vincent JL, et al. 2019（SCARLET）</td><td>敗血症関連凝固障害800例、rhTMは28日死亡を有意に減らさず</td><td>JAMA</td></tr>
+<tr><td>François B, et al. 2021</td><td>SCARLETフランスコホート149例の事後解析。持続性凝固障害・ヘパリン非併用で利益の可能性</td><td>—</td></tr>
+<tr><td>Levi M, et al. 2020</td><td>SCARLETのバイオマーカー層別事後解析。トロンビン生成マーカー高値で死亡低下</td><td>—</td></tr>
+<tr><td>Baksaas-Aasen K, et al.（ITACTIC）</td><td>外傷出血で粘弾性検査ガイドは標準プロトコルに勝てず</td><td>Intensive Care Med</td></tr>
+<tr><td>Holcomb JB, et al. 2015（PROPPR）</td><td>1:1:1 vs 1:1:2、24時間・30日死亡に差なし（n=680）</td><td>JAMA</td></tr>
+<tr><td>Sperry JL, et al. 2018（PAMPer）</td><td>航空搬送中の融解血漿で30日死亡 23.2% vs 33.0%（n=501）</td><td>N Engl J Med</td></tr>
+<tr><td>Crombie N, et al. 2022（RePHILL）</td><td>病院前 PRBC–LyoPlas は生理食塩水に優越せず（n=432）</td><td>Lancet Haematol</td></tr>
+<tr><td>Vlaar APJ, et al.（ESICM輸血勧告）</td><td>重症患者の輸血戦略に関するESICMの推奨（文献82）</td><td>Intensive Care Med</td></tr>
+<tr><td>Saito H, et al. 2007</td><td>rhTM vs 低用量ヘパリン（n=234）。DIC改善・出血症状緩和</td><td>J Thromb Haemost</td></tr>
+<tr><td>Taniguchi K, et al. 2020/2021</td><td>日本の全国DB。stage IV固形腫瘍DICでAT・rhTMとも28日死亡に差なし</td><td>—</td></tr>
+<tr><td>Barbosa da Cruz D, et al. 2019</td><td>NETs上のDNA結合エラスターゼがプラスミノゲンを分解し線溶不全を招く</td><td>Blood</td></tr>
+<tr><td>Hayakawa M, et al. 2010</td><td>ARDS＋DICでシベレスタットが生存を改善（後ろ向き167例）</td><td>—</td></tr>
+<tr><td>Moore HB, et al. 2014</td><td>外傷180例の線溶分布：シャットダウン64%・生理的18%・線溶亢進18%</td><td>J Trauma Acute Care Surg</td></tr>
+<tr><td>Kleinveld DJB, Hamada SR, Sandroni C 2022</td><td>外傷誘発性凝固障害（本レビュー文献2）</td><td>Intensive Care Med</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">「凝固障害」で止めずに、目の前の患者が今「出血型（低凝固＋線溶亢進）」か「血栓型（凝固優位＋線溶抑制）」かを毎日言語化してからオーダーを出す</mark>。出血型なら補充療法＋3時間以内のTXA、血栓型ならLMWH予防と、凝固障害が持続している重症例に限った抗凝固の上乗せ。ただし<mark class="hl">同じ患者が数時間から数日で軸上を移動する</mark>（外傷の線溶シャットダウン、蘇生後の血栓型への転換）ので、<mark class="hl">昨日のフェノタイプでオーダーを続けない</mark>。</p>
+<p>そして<mark class="hl">原因疾患を必ず一段目に置く</mark>。同じ「出血型」でも、外傷ではTXAが標準、<mark class="hl">血液悪性腫瘍のDICではTXAは推奨されない</mark>。フェノタイプは治療の軸を決めるが、原因疾患が禁忌を決める。</p>
+<p>数値の持ち帰り：<mark class="hl">血小板 &gt;50×10⁹/L（TBIなら外傷GLの &gt;100×10⁹/L）、フィブリノゲン &gt;1.5–2 g/L、イオン化Ca &gt;1 mmol/L、体温 &gt;36℃、pH &gt;7.35</mark>。この5つは大量出血のたびに口に出して確認する。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

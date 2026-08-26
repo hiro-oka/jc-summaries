@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>早産児のCPAPを2週間延長すると6か月時の肺胞容積が増える（RCT 100例・AJRCCM2025）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="rccm.202411-2169OC.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">早産児のCPAPを2週間延長すると6か月時の肺胞容積が増える（RCT 100例・AJRCCM2025）</h1>
+  <dl class="cite"><dt>出典</dt><dd>McEvoy CT, MacDonald KD, Go MA, Milner K, Harris J, Schilling D, Olson M, Tiller C, Slaven JE, Bjerregaard J, Vu A, Martin A, Mamidi R, Schelonka RL, Morris CD, Tepper RS. Extended Continuous Positive Airway Pressure in Preterm Infants Increases Lung Growth at 6 Months: A Randomized Controlled Trial. Am J Respir Crit Care Med. 2025;211(4):610-618. doi:10.1164/rccm.202411-2169OC</dd><dt>掲載誌</dt><dd>American Journal of Respiratory and Critical Care Medicine（2025-04-01）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1164/rccm.202411-2169OC" target="_blank" rel="noopener">doi.org/10.1164/rccm.202411-2169OC</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Extended Continuous Positive Airway Pressure in Preterm Infants Increases Lung Growth at 6 Months: A Randomized Controlled Trial</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/rccm.202411-2169OC.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/rccm.202411-2169OC.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/rccm.202411-2169OC.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で何が変わるか（結論：成人ICUの診療は変わらない）</p>
+<ul><li><strong>成人ICUの診療プロトコルを変える論文ではない</strong>。対象は在胎24週超〜32週以下の早産児で、介入は「NICUで安定した児の鼻CPAPをさらに2週間続ける」というもの。当院のICU・SDUに直接の適用先はない。</li><li><strong>読む価値は概念にある</strong>。成人肺では機械的伸展はVILI（人工呼吸器誘発肺傷害）の主犯として「害」の側にあるが、<strong>発達途上の肺では慢性的な伸展が肺胞の成長刺激になりうる</strong>。同じ物理刺激が発達段階で正反対の意味を持つ、という対比は肺保護換気を教えるときの良い素材になる（→ <span class="wl">ドライビングプレッシャーと経肺圧 ― 安全な人工呼吸の指標（Anesthesiology2019）</span>、<span class="wl">メカニカルパワーと死亡率（ICM2018）</span>）。</li><li>「生涯早期の肺機能はそのまま推移する（tracking）」という視点は、当院で成人COPD患者を診るときの背景理解として持っておく価値がある。目の前の40歳の低いFEV1が、40年前のNICUに起源を持つ可能性がある（→ <span class="wl">COPD レビュー（NEJM 2019）</span>）。</li><li><strong>新生児科・NICUとの接点として保持する</strong>。当院NICUがCPAP離脱基準の見直しを議論する場面があれば、一次資料として提示できる。ただし<mark class="hl">単施設100例・生理学的アウトカムのみ・効果推定値がすべて境界的であり、この1本でプロトコルを変える段階ではない</mark>。</li><li><strong>JC教材としての使い方</strong>：「有意差はあるが95%CI下限が0に近い」「主要アウトカムが代替指標」「対照群の22%がクロスオーバーした」という3点が揃っており、<mark class="hl"><strong>批判的吟味の練習題材として非常に良い</strong></mark>。当科の若手向けJCで扱う価値がある。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：早産児の呼吸窮迫に対する早期の鼻CPAPは標準治療であり（Cochrane 2021）、FRCを増やしガス交換を改善し、挿管とBPD（気管支肺異形成症）を減らす。動物実験では慢性CPAPが肺容量を増やすことが示され、フェレット・非ヒト霊長類モデルでは肺胞数の増加まで報告されている。著者ら自身のパイロットRCT（Lam 2020, J Pediatr）では、2週間のCPAP延長が<strong>NICU入院中の</strong>肺容量を増やすことを示していた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：<mark class="hl">安定した早産児におけるCPAPの<strong>至適継続期間</strong>は不明</mark>。歴史的には、鼻中隔破綻・栄養不耐・親子の絆形成の阻害といった有害事象を避けるため、新生児科医は安定したらできるだけ早くCPAPを切ってきた。そして何より、NICU内で得られた肺容量の増加が退院後も持続するのかは誰も確かめていなかった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：退院後の外来（修正6か月）で測った肺胞容積（VA）が、CPAPを2週間延長した群で有意に大きいことを、盲検化された評価者による生理学的測定で初めて示した。副次の肺拡散能（DLCO）と努力呼気流量（FEF）も増加。「機械的伸展が肺の成長を刺激し、その効果が治療終了後も残る」という仮説を、ヒト早産児のRCTで支持した最初の報告。著者らは「非薬物的で安全な肺成長促進療法になりうる」と結論している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで NICUで呼吸が安定した早産児100例を、<strong>CPAPをさらに2週間続ける群（eCPAP）</strong> と 基準を満たした時点でCPAPを中止して室内気にする群（dCPAP） に無作為化したところ、<strong>修正6か月時の肺胞容積が調整平均で82.1 mL大きく</strong>（500.2 vs 418.1 mL、P=0.033）、拡散能と努力呼気流量も増えた。ただし効果推定値の95%CI下限はいずれも0の近くにあり、臨床アウトカム（喘鳴）には差がつかなかった。</p>
+</div>
+<ul><li><strong>デザイン</strong>：研究者主導・単施設RCT（Oregon Health &amp; Science University のレベルIV NICU）。2020年1月〜2023年1月に組み入れ。<strong>100例</strong>（89妊娠）を割り付け（eCPAP 54例／dCPAP 46例）。</li><li><strong>対象</strong>：出生時在胎 <strong>24週超〜32週以下</strong>で、臨床上24時間以上のCPAPを要した児。同意取得後、CPAP呼吸安定基準を12時間以上満たし、修正在胎（PMA）35週未満の時点で割り付け。</li><li><strong>介入</strong>：eCPAP＝バブルCPAP 5 cmH2O をさらに<strong>2週間</strong>継続／dCPAP＝安定基準を満たした時点でCPAP中止・室内気へ。</li><li><strong>主要アウトカム</strong>：修正6か月時の肺胞容積（VA）（single breath hold法、外来・鎮静下）。<strong>評価者・統計解析者は盲検</strong>（NICU内の盲検化は倫理的・実務的に不可能）。</li><li>主要結果（調整平均、VA/DLCOは eCPAP n=47 vs dCPAP n=46）：VA <strong>500.2 vs 418.1 mL</strong>（差 82.1、95%CI 8.3–155.9、<strong>P=0.033</strong>、+19.6%）。</li><li><strong>副次（同 n）</strong>：DLCO 3.4 vs 2.8 mL/分/mmHg（差 0.6、95%CI 0.1–1.1、<strong>P=0.018</strong>、+21.4%）。</li><li>副次・努力呼気流量（n=38 vs 38）：FEF50 <strong>500.6 vs 437.9 mL/秒</strong>（差 62.7、95%CI 4.5–121.0、P=0.039）／FEF25–75 <strong>452.0 vs 394.4 mL/秒</strong>（差 57.5、95%CI 1.3–113.8、P=0.046）。FEF75（P=0.064）とFVC（P=0.427）は有意差なし。</li><li><strong>NICU内のFRC</strong>：割付時 41.0 vs 44.5 mL（eCPAPの方が低い）→ 2週間後 57.5 vs 50.1 mL（<strong>P&lt;0.01</strong>）。逆転している。</li><li><strong>臨床アウトカム（探索的）</strong>：喘鳴の発生 43.4%（23/53）vs 56.5%（26/46）、P=0.20 で有意差なし。</li><li><strong>治療失敗</strong>（14日中9日未満しか割付治療を継続できなかった例）：eCPAP 3.7%（2/54）vs dCPAP 22%（10/46）、P&lt;0.05。dCPAP群の10例は呼吸窮迫でCPAPに戻された。</li><li><strong>安全性</strong>：重篤有害事象は2件（dCPAP群の声帯麻痺、eCPAP群の敗血症による挿管）でいずれも研究と無関係。eCPAP群で<strong>鼻中隔破綻・栄養不耐によるCPAP中止はゼロ</strong>（軽度の鼻粘膜発赤3例のみ）。初回授乳・全量授乳までの時間、BPD発生率、退院時PMAに群間差なし。</li><li><strong>著者の結論</strong>：安定した早産児でCPAPを延長することは、<strong>肺の成長を促す非薬物的で安全な治療戦略になりうる</strong>。多施設プラグマティック試験が必要。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 早産児の肺発達とCPAPの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>早産（preterm birth）</strong> は米国の出生の10%を占め、<strong>肺発達異常の最も一般的な原因</strong>である。ヒトの肺は在胎36週頃から生後2〜3年にかけて肺胞が爆発的に増える「肺胞期」にあり、この時期に早産で生まれると肺胞の数と表面積の獲得が途中で止まる。</p>
+<p><strong>BPD（bronchopulmonary dysplasia、気管支肺異形成症）</strong>：早産児の慢性肺疾患。本研究ではJobe &amp; Bancalari（2001）の定義を用いている。本研究の対象は比較的軽症で、BPDは eCPAP 7.4%・dCPAP 6.5% にとどまった。</p>
+<p>鼻CPAP（continuous positive airway pressure）：鼻プロングから持続的に陽圧をかけ、肺を膨らませたまま保つ。挿管・人工呼吸を避けるための標準治療で、急性期には<strong>FRC（機能的残気量）</strong> を増やしガス交換を改善する。本研究のNICUは<strong>バブルCPAP</strong>（水柱で圧を作る方式。Fisher &amp; Paykel社の装置、Hudson社の鼻プロング、チンストラップ併用、8Frの経口胃管で胃の減圧）を一貫して使用している。</p>
+<p><strong>本研究が測っている4つの指標</strong>：</p>
+<ul><li><strong>VA（alveolar volume、肺胞容積）</strong>：ガス交換に関与する肺の容積。ヘリウム希釈で測る。<strong>肺実質がどれだけ育ったかの指標</strong>。本研究の主要アウトカム。</li><li><strong>DLCO（一酸化炭素肺拡散能）</strong>：肺胞から毛細血管へガスが移る能力。<strong>肺胞と肺血管床の発達の指標</strong>。VAと同一の手技で同時に得られる。</li><li><strong>FEF（forced expiratory flow、努力呼気流量）</strong>：FEF50＝呼出量50%時点の流量、FEF25–75＝25〜75%区間の平均流量、FEF75＝75%時点の流量。<strong>気道機能の指標</strong>で、末梢気道ほど後半（FEF75）に反映される。</li><li><strong>FRC（機能的残気量）</strong>：安静呼気位で肺に残る空気の量。本研究ではNICU内で窒素洗い出し法により測定。</li></ul>
+<p><strong>なぜこれが問題か</strong>：乳児期の気道機能低下は、縦断コホートで<strong>成人期まで持続する呼吸器罹病の増加</strong>と関連する。生涯早期の低い肺機能はそのまま推移（track）して成人期も低いままとなり、COPDの重要な決定因子になりうる。したがって「生涯早期の肺機能を底上げできれば、一生の肺機能の軌跡を持ち上げられるかもしれない」というのが本研究の大きな動機である。</p>
+<p><strong>測定の難しさ</strong>：乳児は指示に従えないため、外来検査は<strong>抱水クロラール 50〜100 mg/kg の経口鎮静下</strong>で行う。VA/DLCOは「肺容量を30 cmH2Oまで上げてから4秒間の呼吸休止を誘発し、その間のCOとHeの濃度変化から算出する」という著者ら独自の手法（induced respiratory pause technique）。FEFはraised-volume rapid thoracic compression（高肺気量からの急速胸郭圧迫法） で3回測定する。<mark class="hl">いずれも市販されておらず、限られた研究施設でしか実施できない</mark>。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p><strong>この論文が埋めようとした空白</strong></p>
+<ul><li>早産は米国の出生の10%を占め、<strong>肺発達異常の最も一般的な原因</strong>であり、生涯にわたる呼吸器への影響がありうる（引用1, 2）。</li><li>NICU退院後、早産児は満期産児と比べて<strong>喘鳴・喘息・呼吸器疾患による入院のリスクが高い</strong>（1, 2）。</li><li>乳児期に評価すると、早産児は<strong>FEF手技とDLCOで気道と肺実質の両方の機能障害</strong>を示す（3, 4）。</li><li>乳児期の気道機能低下は、縦断コホートで<strong>22歳・36歳時点まで持続する呼吸器罹病の増加</strong>と関連する（5, 6）。</li><li>生涯早期の低い肺機能はそのまま推移し、COPDの重要な決定因子になりうる（2, 7, 8）。</li><li>早期の鼻CPAPは呼吸窮迫のある早産児の急性期管理の標準治療（9）。CPAPは急性にFRCを増やしガス交換を改善し、侵襲的人工呼吸を避けて肺傷害とBPDの発症を最小化する（10–12）。</li><li>著者らを含む複数のグループが、<strong>幼若動物で慢性CPAPが肺容量を増やす</strong>ことを示していた（13, 14）。</li><li>著者らのパイロットRCT（15）では、回復期の安定した早産児で2週間のeCPAPがdCPAPに比べNICU内の肺容量を増やすことを示していた。</li></ul>
+<p><strong>仮説</strong>：CPAPはNICU内で肺傷害を最小化するだけでなく、慢性的な機械的伸展そのものが肺の成長と発達を刺激し、その効果はNICU治療終了後も持続するのではないか。</p>
+<p><strong>目的</strong>：eCPAP vs dCPAP で、修正6か月時のVA（主要）、<strong>DLCOとFEF</strong>（副次）、NICU内のFRC（副次）を比較する。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>At a Glance Commentary（原文の要旨欄・訳） <strong>この分野で既に分かっていること</strong>：早期の鼻CPAPは呼吸窮迫のある早産児の急性期管理の標準治療である。しかし<strong>安定した早産児におけるCPAPの至適期間は不明</strong>であり、CPAPによる機械的伸展は、早産児で障害されている肺の成長と発達を刺激するかもしれない。 <strong>この研究が加えたこと</strong>：安定した早産児で鼻バブルCPAPの期間を延長すると、<strong>肺と血管の両方の成長を刺激しうる</strong>ことを、修正6か月頃の生理学的肺機能検査で示した。NICUでのCPAP延長は、肺の成長と機能を促す非薬物的で安全な治療になりうる。</p>
+</div>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：研究者主導・<strong>単施設RCT</strong>。Oregon Health &amp; Science University（OHSU）のレベルIV NICUで実施。主要アウトカムの肺機能検査はOHSUの研究用乳児肺機能検査室で修正6か月頃に実施。プロトコルはOHSU施設内倫理委員会の承認を受け、全参加者から書面同意を取得。独立したデータ安全性モニタリング委員会（DSMB）が6か月ごとに安全性をレビュー。</li><li><strong>登録</strong>：ClinicalTrials.gov <strong>NCT04295564</strong>。組み入れ期間は2020年1月〜2023年1月。</li><li><strong>組み入れ基準</strong>：出生時在胎 <strong>24週超〜32週以下</strong>、臨床上24時間以上のCPAPを要した児（初期呼吸補助または抜管後のいずれでも可）。</li><li><strong>割り付けのタイミング</strong>：同意取得後、CPAP呼吸安定基準を12時間以上満たし、かつ修正在胎（PMA）35週未満の時点。</li><li><strong>除外基準</strong>：同意時点の除外基準はFigure 1（CONSORT）に記載。奇形26例、子宮内発育不全（IUGR）16例、不当重量児1例、意思疎通が不安定8例、三胎2組、複雑な母体既往3例。</li><li><strong>介入</strong>：</li><li><strong>eCPAP群</strong>：バブルCPAP（5 cmH2O）を<strong>さらに2週間（14日間）継続</strong>。2週間という期間はパイロットRCT（15）と同じ設定。</li><li><strong>dCPAP群</strong>：安定基準を満たした時点で<strong>CPAPを中止し室内気へ</strong>（＝OHSUの通常診療）。</li><li><strong>主要アウトカム</strong>：<strong>修正6か月時のVA</strong>（single breath hold法）。</li><li>副次アウトカム：<strong>DLCO</strong>、<strong>FEF</strong>（FEF50を主に規定）、NICU内のFRC（割付時と2週間治療終了時の2点）。</li><li><strong>探索的アウトカム</strong>：<strong>喘鳴の発生</strong>（修正12か月まで毎月の標準化呼吸器問診票）。</li></ul>
+<h4>ランダム化とマスキング</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>割り付け</td><td>データセンターで REDCap による置換ブロックランダム化</td></tr>
+<tr><td>層別化</td><td>分娩時在胎週数（29週未満／29週以上）</td></tr>
+<tr><td>双胎の扱い</td><td>同一治療群に割り付け（第1子をランダム化し、第2子は同じ群に割り当て。引用20に基づく親の選好を反映）</td></tr>
+<tr><td>NICU内の盲検化</td><td>不可能。dCPAP群に治療を行わないままHudsonプロングを留置し続けることは倫理的にも実務的にも不可能なため。ただしREDCapが臨床チームにランダム化スキーマを伏せる</td></tr>
+<tr><td>退院後の盲検化</td><td>退院から12か月までの全アウトカム評価者が盲検。外来肺機能測定を監督する小児呼吸器科医（K.D.M.）、呼吸器問診票の実施者を含む</td></tr>
+<tr><td>解析者の盲検化</td><td>統計担当（J.E.S.）は治療割付を伏せたまま全アウトカムを解析</td></tr>
+</tbody></table></div>
+<h4>CPAP呼吸安定基準（OHSUの公表基準・全項目）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>基準</th></tr></thead>
+<tbody>
+<tr><td>CPAP圧</td><td>5 cmH2O</td></tr>
+<tr><td>酸素需要</td><td>なし（室内気）</td></tr>
+<tr><td>呼吸数</td><td>70回/分未満</td></tr>
+<tr><td>陥没呼吸スコア</td><td>1以下</td></tr>
+<tr><td>無呼吸・徐脈・低酸素</td><td>直近6時間で、自然回復する無呼吸（20秒未満）・徐脈（100 bpm未満）・SpO2低下（86%未満）が1時間あたり3回未満</td></tr>
+<tr><td>平均SpO2</td><td>直近24時間の90%以上の時間で86%超</td></tr>
+<tr><td>併存病態</td><td>動脈管開存症・敗血症の治療中でない</td></tr>
+<tr><td>ケア時の耐容</td><td>通常ケア中のCPAP離脱（最大15分）に耐えられる</td></tr>
+</tbody></table></div>
+<h4>治療期間中の運用</h4>
+<ul><li>割付前に<strong>非鎮静下でFRCを測定</strong>（NICUベッドサイド）。その後REDCapで割り付け。</li><li>研究スタッフが<strong>毎日臨床状態を確認</strong>し、治療期間から退院までのデータを収集。</li><li><strong>治療失敗の事前定義</strong>：14日間の治療期間のうち<strong>割付治療を継続できた日が9日未満</strong>。</li><li>dCPAP群は所定の呼吸窮迫徴候が出ればCPAPに戻す。eCPAP群は<strong>著明な鼻中隔破綻または腹部膨満</strong>が生じればCPAPを外す。いずれも<strong>5日以内に安定すれば割付群に戻す</strong>（オンライン補遺Table E1）。</li><li>FRCは治療期間終了時に再測定。<strong>CPAP装着中はFRCを測れない</strong>ため、eCPAP群は2週間終了時にCPAPを外して直ちに測定した。</li></ul>
+<h4>測定手技</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>手技</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>VA・DLCO</td><td>誘発呼吸休止法（肺容量30 cmH2Oまで挙上 → 4秒間の呼吸休止 → 受動呼出中のCOとHe濃度から算出）</td><td>BTPS条件に補正、ヘモグロビンで調整、10%以内に収まる2〜3回の平均を採用</td></tr>
+<tr><td>FEF</td><td>raised-volume rapid thoracic compression（高肺気量からの急速胸郭圧迫法）を3回</td><td>著者らの既報手技（22, 25, 26）</td></tr>
+<tr><td>FRC</td><td>窒素洗い出し法（SensorMedics 2600、ベッドサイド）</td><td>授乳から30分以上あけ、標準の受け入れ基準に従う</td></tr>
+<tr><td>鎮静</td><td>経口抱水クロラール 50〜100 mg/kg</td><td>外来検査時。鎮静中はバイタルサインを監視</td></tr>
+<tr><td>検査の質管理</td><td>盲検化された訓練済み呼吸療法士（C.T. または J.B.）が受け入れ可能性・再現性・完全性をレビュー</td><td>呼吸器感染があった場合は3週間以上あけて実施</td></tr>
+</tbody></table></div>
+<h4>呼吸器問診票（探索的アウトカム）</h4>
+<ul><li>修正12か月まで<strong>毎月</strong>、標準化された呼吸器問診票を実施（26, 30）。</li><li><strong>喘鳴の定義</strong>：主養育者からの以下いずれかの肯定回答。①親による喘鳴の報告、②医療者による喘鳴・喘鳴性気管支炎・喘息の診断、③気管支拡張薬またはステロイドの使用（Table E2）。</li><li>事前規定として、<strong>修正4か月以降に1回以上問診票が完了した児のみ</strong>を呼吸器臨床アウトカムの解析に含めた。</li></ul>
+<h4>サンプルサイズ設計</h4>
+<ul><li>仮説：<strong>eCPAP群のVAが12%高い</strong>（引用31 Assaf 2015に基づく）。</li><li>前提：ANCOVAモデル、Assaf論文の対照群とCPAP群を合わせた<strong>平均VA 642 mL（SD 189）</strong>、共変量は検査時の性別と身長（VAに対する決定係数の推定値0.63）。</li><li>結果：<strong>外来検査時に1群34例</strong>で、12%の差（効果量0.42）を α=0.05・<strong>検出力80%</strong> で検出できる。</li><li>「12%」を意味のある差とした根拠：BPDを発症した早産児はVAとDLCOが満期産児より10〜15%低いという著者らの既報（4）。</li><li>NICUでの割り付け目標を100例としたのは、<strong>NICU入院中の脱落10%＋退院から追跡までの脱落15%</strong>を見込んだため（早産児の脆弱性、追跡時の鎮静の必要性、呼吸器感染後3週間待つ必要を考慮）。</li></ul>
+<h4>統計解析</h4>
+<ul><li><strong>すべてintention-to-treat</strong>。盲検化された統計家（J.E.S.）が実施。</li><li>背景比較：連続変数は<strong>t検定</strong>（非正規分布はWilcoxon検定）、カテゴリ変数は<strong>カイ二乗検定</strong>（期待度数5未満のセルが20%超ならFisher正確検定）。</li><li>主要解析：一般化線形混合モデル（GLMM）。分娩時在胎週数（層別化変数）で調整し、<strong>双胎組をランダム効果</strong>として扱う。肺機能は身長と性別に強く依存するため、<strong>検査時の身長と性別を共変量</strong>として調整。</li><li>副次（DLCO、FEF50、FRC）も同一アプローチ。FRCは2時点（割付時と14日後）を同モデルで解析。</li><li>喘鳴は<strong>ロジスティック回帰</strong>（同様のGLMM）で在胎週数を調整。</li><li>欠測は<strong>多重代入（10,000回）</strong>で補い、主解析を再実行。</li><li><strong>per-protocol解析</strong>（14日中9日以上割付治療を受けた児のみ）も同一手法で実施。</li><li>解析ソフト：<strong>SAS 9.4</strong>。すべての解析上の前提を検証したと記載。</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1164/rccm.202411-2169OC" target="_blank" rel="noopener">原論文（doi.org/10.1164/rccm.202411-2169OC）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. CONSORT図（原図・無改変。©American Thoracic Society）。スクリーニングから外来検査までの流れ。上から「276例スクリーニング」→「108例同意」→「100例登録」→左にeCPAP 54例・右にdCPAP 46例と分岐し、それぞれ外来検査まで下る縦型フロー。右側に脱落理由が枝分かれで並ぶ。</p>
+</div>
+<h4>Figure 1 の各ボックス（原図の文言を表に起こす）</h4>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>ボックスの文言</th><th>数</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>在胎32週以下でスクリーニングされた児（1施設）</td><td>276</td></tr>
+<tr><td>2（除外・右枝）</td><td>スクリーニング不通過・除外</td><td>168</td></tr>
+<tr><td>2a</td><td>同意を辞退</td><td>57</td></tr>
+<tr><td>2b</td><td>組み入れ基準を満たさず</td><td>60</td></tr>
+<tr><td>2b内訳</td><td>奇形26／IUGR 16／不当重量児1／意思疎通が不安定8／三胎2組／複雑な母体既往3</td><td>—</td></tr>
+<tr><td>2c</td><td>他施設へ転院</td><td>6</td></tr>
+<tr><td>2d</td><td>修正在胎35週未満までに安定基準を満たさず</td><td>40</td></tr>
+<tr><td>2e</td><td>ランダム化の目標例数に達したため同意を取得せず</td><td>5</td></tr>
+<tr><td>3</td><td>同意取得</td><td>108</td></tr>
+<tr><td>3（脱落・右枝）</td><td>修正在胎35週未満までに安定基準を満たさず4／転院4（1組の双胎を含む）</td><td>8</td></tr>
+<tr><td>4</td><td>登録（89妊娠）</td><td>100</td></tr>
+<tr><td>5（左）</td><td>eCPAPへ割り付け（46妊娠）</td><td>54</td></tr>
+<tr><td>5（右）</td><td>dCPAPへ割り付け（43妊娠）</td><td>46</td></tr>
+<tr><td>6（左・脱落）</td><td>退院後に染色体変異（ARID1B）が判明しPIが中止1／てんかんで鎮静不能1</td><td>2</td></tr>
+<tr><td>7（左）</td><td>修正6か月時の主要アウトカムVA・副次DLCOの対象</td><td>52</td></tr>
+<tr><td>7（左・脱落）</td><td>親が鎮静を拒否3（1組の双胎を含む）</td><td>3</td></tr>
+<tr><td>8（左）</td><td>修正6か月時にVA・DLCOを実施</td><td>49</td></tr>
+<tr><td>9（左）</td><td>技術的に受け入れ可能なVA・DLCOが得られた</td><td>47</td></tr>
+<tr><td>7–9（右）</td><td>対象46 → 実施46 → 技術的に受け入れ可能46</td><td>46</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1 と本文の数が微妙に合わない 本文（Results）は eCPAP群でVA未完了の7例を「ARID1B 1例、てんかんで鎮静不能1例、<strong>鎮静を拒否した母親3人（うち1人は双胎）＝4児</strong>、技術的に受け入れ不能<strong>1例</strong>」と説明している。一方Figure 1 は「鎮静拒否3」「52→49→47（＝技術的不能2）」と書いており、内訳が1例ずつずれている。合計はどちらも7で一致するので結論には影響しないが、<mark class="hl">原図と本文のどちらかに誤植がある</mark>。JCで数を追うときはこの点に注意。</p>
+</div>
+<h3>4. 患者背景（Table 1）👶</h3>
+<h4>Table 1. 母体・児の背景（原表を日本語化）</h4>
+<p><strong>母体（n=89）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>eCPAP（n=46）</th><th>dCPAP（n=43）</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）、平均（SD）</td><td>30.9（5.8）</td><td>31.5（6.3）</td></tr>
+<tr><td>妊娠回数、中央値（25–75パーセンタイル）</td><td>2（1–3）</td><td>2（1–3）</td></tr>
+<tr><td>人種：アメリカ先住民・アラスカ先住民</td><td>2（4.3%）</td><td>1（2.3%）</td></tr>
+<tr><td>人種：アジア系</td><td>2（4.3%）</td><td>2（4.7%）</td></tr>
+<tr><td>人種：黒人・アフリカ系アメリカ人</td><td>1（2.2%）</td><td>4（9.3%）</td></tr>
+<tr><td>人種：ハワイ先住民・太平洋諸島系</td><td>0（0%）</td><td>0（0%）</td></tr>
+<tr><td>人種：白人</td><td>37（80.4%）</td><td>34（79.1%）</td></tr>
+<tr><td>人種：不明・未報告</td><td>2（4.3%）</td><td>1（2.3%）</td></tr>
+<tr><td>人種：複数</td><td>2（4.3%）</td><td>1（2.3%）</td></tr>
+<tr><td>民族：非ヒスパニック</td><td>38（82.6%）</td><td>35（81.4%）</td></tr>
+<tr><td>民族：ヒスパニック</td><td>8（17.4%）</td><td>8（18.6%）</td></tr>
+<tr><td>公的保険</td><td>17（37.0%）</td><td>22（51.2%）</td></tr>
+<tr><td>高卒以下</td><td>13（28.3%）</td><td>16（37.2%）</td></tr>
+<tr><td>妊婦健診受診</td><td>46（100%）</td><td>43（100%）</td></tr>
+<tr><td>双胎</td><td>8（17.4%）</td><td>3（7.0%）</td></tr>
+<tr><td>母の喘息既往</td><td>11（23.9%）</td><td>7（16.3%）</td></tr>
+<tr><td>喫煙歴あり</td><td>16（34.8%）</td><td>16（37.2%）</td></tr>
+<tr><td>今回の妊娠中に喫煙</td><td>3（6.5%）</td><td>5（11.6%）</td></tr>
+<tr><td>妊娠高血圧腎症</td><td>15（32.6%）</td><td>17（39.5%）</td></tr>
+<tr><td>出生前ステロイド投与</td><td>39（84.8%）</td><td>36（83.7%）</td></tr>
+<tr><td>帝王切開</td><td>31（67.4%）</td><td>29（67.4%）</td></tr>
+<tr><td>研究施設で出生</td><td>41（89.1%）</td><td>40（93.0%）</td></tr>
+<tr><td>出生時在胎週数（週）、平均（SD）</td><td>30.2（1.8）</td><td>30.2（2.0）</td></tr>
+<tr><td>在胎29週未満</td><td>12（26.1%）</td><td>12（27.9%）</td></tr>
+</tbody></table></div>
+<p><strong>登録児（n=100）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>eCPAP（n=54）</th><th>dCPAP（n=46）</th></tr></thead>
+<tbody>
+<tr><td>女児</td><td>19（35.2%）</td><td>24（52.2%）</td></tr>
+<tr><td>出生体重（g）、平均（SD）</td><td>1,420（328）</td><td>1,434（359）</td></tr>
+<tr><td>サーファクタント投与</td><td>14（25.9%）</td><td>17（37.0%）</td></tr>
+<tr><td>NICUで1時間超の人工呼吸</td><td>19（41.3%）</td><td>20（37%）</td></tr>
+<tr><td>割付時PMA（週）、平均（SD）</td><td>32.4（0.9）</td><td>32.4（0.8）</td></tr>
+<tr><td>割付時体重（g）、平均（SD）</td><td>1,579（258）</td><td>1,582（243）</td></tr>
+<tr><td>割付時身長（cm）、平均（SD）</td><td>41.4（1.8）</td><td>41.1（2.0）</td></tr>
+<tr><td>2週間の治療期間中のカフェイン投与</td><td>44（81%）</td><td>40（87%）</td></tr>
+<tr><td>割付治療の失敗</td><td>2（3.7%）</td><td>10（22%）、P&lt;0.01</td></tr>
+<tr><td>割付時FRC（mL）、平均（SE）</td><td>41.0（1.5）</td><td>44.5（1.4）</td></tr>
+<tr><td>2週間治療終了時FRC（mL）、平均（SE）</td><td>57.5（1.7）</td><td>50.1（1.6）、P&lt;0.01</td></tr>
+</tbody></table></div>
+<p><strong>VA・DLCO検査を完了した児</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>eCPAP（n=47）</th><th>dCPAP（n=46）</th></tr></thead>
+<tbody>
+<tr><td>女児</td><td>16（34.0%）</td><td>24（52.2%）</td></tr>
+<tr><td>出生体重（g）、平均（SD）</td><td>1,422（305）</td><td>1,434（359）</td></tr>
+<tr><td>白人</td><td>37（78.7%）</td><td>33（71.7%）</td></tr>
+<tr><td>非ヒスパニック</td><td>34（72.3%）</td><td>37（80.4%）</td></tr>
+<tr><td>分娩時在胎29週未満</td><td>12（25.5%）</td><td>13（28.3%）</td></tr>
+<tr><td>双胎由来の児</td><td>14（29.8%）</td><td>6（13.0%）、P&lt;0.05</td></tr>
+<tr><td>割付時PMA（週）、平均（SD）</td><td>32.4（0.8）</td><td>32.4（0.8）</td></tr>
+<tr><td>外来検査時の修正月齢（か月）、平均（SD）</td><td>7.3（1.5）</td><td>7.0（1.3）</td></tr>
+<tr><td>外来検査時身長（cm）、平均（SD）</td><td>67.5（2.8）</td><td>67.2（3.1）</td></tr>
+<tr><td>外来検査時体重（kg）、平均（SD）</td><td>8.0（1.0）</td><td>7.8（1.0）</td></tr>
+</tbody></table></div>
+<p><strong>原表の注</strong>：治療失敗は「14日間の治療期間中、割付治療を継続できた日が9日未満」と事前定義。FRCの群間比較は、双胎組の相関を考慮し、出生時在胎週数（層別化変数）・性別・割付時身長で調整した多変量混合線形モデルによる。割付時FRCは52例・46例で、治療終了時FRCは51例・45例で完了（調整平均±SE で表示）。</p>
+<p><strong>本文中の補足</strong>：最も在胎週数が小さかったのは eCPAP群 25.7週、dCPAP群 24.7週。両群とも約25%が在胎29週未満。両群とも割付時PMAは32.4週で体重・身長も同等。BPD（Jobe &amp; Bancalari定義）の発生は 7.4% vs 6.5% で差なし。<strong>初回授乳・全量授乳までの時間、退院時PMAにも群間差なし</strong>。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Table 1 に内部矛盾がある（%の入れ違いと思われる） 「NICUで1時間超の人工呼吸」の行は <strong>eCPAP 19（41.3%）／dCPAP 20（37%）</strong> と印刷されているが、19/54＝35.2%、20/46＝43.5% であり計算が合わない。19/46＝41.3%、20/54＝37.0% なので、<mark class="hl"><strong>2列のパーセンテージが入れ替わっている可能性が高い</strong></mark>。他の行（サーファクタント 14/54＝25.9%、17/46＝37.0%）は正しく計算されているため、この行だけの誤植と考えられる。JCで「人工呼吸歴の不均衡」を論じるときは分母を自分で確認すること。</p>
+</div>
+<p><strong>背景の不均衡で注目すべき3点</strong></p>
+<ol><li><strong>双胎の偏り</strong>：eCPAP群に双胎が多い（母体8組 vs 3組、検査完了児で14例 vs 6例、P&lt;0.05）。双胎は同一群に割り付けられるため、<strong>独立でない観測が eCPAP群に集中</strong>している。解析ではランダム効果で対処しているが、有効サンプルサイズは名目より小さい。</li><li><strong>性別の偏り</strong>：女児が eCPAP 35.2% vs dCPAP 52.2%。男児の方が肺容量は大きい傾向があるため、<strong>未調整なら eCPAP群に有利に働く</strong>。本研究は性別を共変量に入れて調整済み。</li><li><strong>割付時FRCの偏り</strong>：eCPAP群の方が<strong>低い</strong>（41.0 vs 44.5 mL）。これは eCPAP群に不利な方向の不均衡であり、結果を保守的にする。</li></ol>
+<h3>5. NICU内のFRC — 2週間で逆転する（Figure 2）📈</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1164/rccm.202411-2169OC" target="_blank" rel="noopener">原論文（doi.org/10.1164/rccm.202411-2169OC）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. NICU内のFRC（原図・無改変。©American Thoracic Society）。横軸は2時点（Randomization、Two Weeks）、縦軸はFRC 38〜60 mL。緑丸＝eCPAP（n=52）、橙丸＝dCPAP（n=46）で、各点に平均±SEのエラーバーが付く。星1つは2週時点での群間差 P&lt;0.01。</p>
+</div>
+<p><strong>図が眼に浮かぶレベルの説明</strong></p>
+<ul><li>左端（Randomization）では<strong>橙（dCPAP）の点が緑（eCPAP）より上にある</strong>（約44 vs 約42 mL）。エラーバーは重なっており、<strong>開始時点では dCPAP群の方がむしろFRCが大きい</strong>。</li><li>右端（Two Weeks）では<strong>2本の線が交差して逆転</strong>する。緑（eCPAP）は約57 mLまで急峻に立ち上がり、橙（dCPAP）は約49.5 mLまでの緩やかな上昇にとどまる。</li><li><strong>2本の線の傾きの差</strong>がこの図の主張そのもの。両群とも成長に伴いFRCは増えるが、<strong>eCPAP群の増え方が明らかに急</strong>。</li><li>右上の星1つは<strong>2週時点の群間差が P&lt;0.01</strong> であることを示す。</li><li>調整平均（Table 1）では 41.0 → 57.5 mL（eCPAP、+16.5 mL）、44.5 → 50.1 mL（dCPAP、+5.6 mL）。<strong>増加量の差は約11 mL</strong>。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この測定には構造的な非対称がある <strong>CPAP装着中はFRCを測定できない</strong>ため、eCPAP群は2週間終了時に<strong>CPAPを外して直ちに</strong>FRCを測っている。原文は「immediately measured」とだけ書いており、<mark class="hl">CPAP離脱から測定までの正確な時間や、圧の急性効果が抜けきったかの検証は記載されていない</mark>。急性のリクルートメント効果が残っていた可能性は本文からは排除できない。ただし、修正6か月の外来検査（CPAP終了から約5か月後）でもVAの差が残っていることが、この懸念に対する最も強い反論になっている。</p>
+</div>
+<h3>6. 主要アウトカム VA と副次 DLCO（Figure 3A・3B）🫧</h3>
+<p><strong>VA・DLCOは93/98例（適格例の95%）で測定できた</strong>。同意撤回はゼロ、追跡不能もゼロ。</p>
+<ul><li><strong>VA</strong>：eCPAP 500.2（SE 24.9）mL vs dCPAP 418.1（23.4）mL。調整平均差 82.1 mL（95%CI 8.3–155.9）、P=0.033、%変化 <strong>+19.6%</strong>。</li><li><strong>DLCO</strong>：eCPAP 3.4（0.2）mL/分/mmHg vs dCPAP 2.8（0.1）mL/分/mmHg。調整平均差 0.6（95%CI 0.1–1.1）、P=0.018、%変化 <strong>+21.4%</strong>。</li><li><strong>多重代入したデータでも同様の結果・同様の有意性</strong>が得られた。</li></ul>
+<p><strong>解釈のポイント</strong></p>
+<ul><li>VAは<strong>肺実質（肺胞）の量</strong>、DLCOは肺胞と肺血管床のガス交換能を反映する。両方が同方向に増えたことから、著者らは「肺だけでなく<strong>血管の成長も刺激された</strong>」と論じている（At a Glance Commentary の "lung and blood vessel growth"）。</li><li>ただし<mark class="hl">VAとDLCOは同一の手技（同じ1回の呼吸休止）から算出される</mark>。原文自身が "Both measurements are obtained from the same lung function maneuver" と明記している。<strong>独立した2つの証拠ではなく、1つの測定の2つの読み出し</strong>である点はJCで押さえておきたい。</li><li>DLCOをVAで割った <strong>DLCO/VA（KCO）</strong> は本文に記載がない。もしDLCOの増加が単にVAの増加に比例しているだけなら「血管も育った」とは言い切れないが、<mark class="hl"><strong>この検証は論文本文では行われていない</strong></mark>。</li></ul>
+<h3>7. その他の副次アウトカム — 努力呼気流量（Figure 3C・Table 2）💨</h3>
+<p><strong>FEFは76例（各群38例）で測定できた</strong>。</p>
+<h4>Table 2. 外来肺機能検査（VA・DLCO・努力呼気流量）（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>eCPAP 調整平均（SE）</th><th>dCPAP 調整平均（SE）</th><th>調整平均差（95%CI）eCPAP−dCPAP</th><th>%変化</th><th>調整P値</th></tr></thead>
+<tbody>
+<tr><td>肺胞容積 VA（mL）（n=47 vs 46）</td><td>500.2（24.9）</td><td>418.1（23.4）</td><td>82.1（8.3〜155.9）</td><td>19.6%</td><td>0.0334</td></tr>
+<tr><td>DLCO（mL/分/mmHg）（n=47 vs 46）</td><td>3.4（0.2）</td><td>2.8（0.1）</td><td>0.6（0.1〜1.1）</td><td>21.4%</td><td>0.0179</td></tr>
+<tr><td>FEF50（mL/秒）（n=38 vs 38）</td><td>500.6（18.2）</td><td>437.9（17.9）</td><td>62.7（4.5〜121.0）</td><td>14.3%</td><td>0.0387</td></tr>
+<tr><td>FEF25–75（mL/秒）（n=38 vs 38）</td><td>452.0（17.4）</td><td>394.4（17.4）</td><td>57.5（1.3〜113.8）</td><td>14.6%</td><td>0.0464</td></tr>
+<tr><td>FEF75（mL/秒）（n=38 vs 38）</td><td>249.5（13.0）</td><td>210.5（13.0）</td><td>39.0（−3.1〜81.0）</td><td>18.5%</td><td>0.0638</td></tr>
+<tr><td>FVC（mL）（n=38 vs 38）</td><td>325.8（11.7）</td><td>312.8（11.3）</td><td>12.9（−24.2〜50.1）</td><td>4.2%</td><td>0.4273</td></tr>
+</tbody></table></div>
+<p><strong>原表の注</strong>：P値と95%CIは、双胎組の相関を考慮し、出生時在胎週数（層別化変数）・性別・外来検査時身長で調整した多変量混合線形モデルによる。FEFは eCPAP群38例・dCPAP群38例で完遂。</p>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1164/rccm.202411-2169OC" target="_blank" rel="noopener">原論文（doi.org/10.1164/rccm.202411-2169OC）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 外来検査時の肺胞容積・DLCO・努力呼気流量（原図・無改変。©American Thoracic Society）。A・B は棒2本ずつ、C は4指標×2群の棒グラフ。緑＝eCPAP、橙＝dCPAP、エラーバーは平均±SE。</p>
+</div>
+<p><strong>図が眼に浮かぶレベルの説明</strong></p>
+<ul><li><strong>パネルA（左上）</strong>：縦軸 Alveolar Volume（mL）0〜600。緑（eCPAP, n=47）が約490、橙（dCPAP, n=46）が約415。上部に「星1つ p=0.033」。棒の高さの差は目視で明らかだが、エラーバーはわずかに接近して見える。</li><li><strong>パネルB（右上）</strong>：縦軸 Lung Diffusion Capacity（mL/分/mmHg）0〜4。緑が約3.4、橙が約2.8。上部に「星1つ p=0.018」。エラーバーは重ならない。</li><li><strong>パネルC（下段）</strong>：縦軸 Forced Expiratory Flows and Volumes（Mean ± SE）0〜600、横軸に FEF50（mL/秒）・FEF25–75（mL/秒）・FEF75（mL/秒）・FVC（mL） の4群が並ぶ。各群で緑（n=38）が左、橙（n=38）が右。</li><li>FEF50：緑約500 vs 橙約435 → 星1つ</li><li>FEF25–75：緑約455 vs 橙約390 → 星1つ</li><li>FEF75：緑約252 vs 橙約210 → 星2つ（凡例では<strong>星2つ＝p=0.06</strong>、つまり<strong>有意差なし</strong>を示す記号として使われている）</li><li>FVC：緑約328 vs 橙約313 → 記号なし（有意差なし）</li><li>図中の凡例に「星1つ p&lt;0.05」「星2つ p=0.06」と明記されている。<mark class="hl">星2つが「より強い有意」ではなく「有意に届かなかった」を意味する、やや紛らわしい記法</mark>なので読み違えに注意。</li></ul>
+<p><strong>解釈のポイント</strong></p>
+<ul><li>FVCに差がない（+4.2%、P=0.43）のにFEFは増えている。FVC（努力肺活量）は「気道を空にしたときの容量」であり、これが増えていないのに流量だけ増えるということは、<strong>容積の増加ではなく気道径・気道コンダクタンスの改善</strong>を示唆する。著者らはこれを「気道機能の改善」と表現している。</li><li>一方でVA（500 mL）とFVC（326 mL）が大きく食い違う点は原文で説明されていない。VAは30 cmH2Oまで膨らませた高肺気量からの測定、FVCは努力呼出による測定で、測定条件が異なるためと考えられるが、<mark class="hl"><strong>この差の解釈は論文本文には記載がない</strong>（以下は一般的な生理学的背景であり、論文の主張ではない）</mark>。</li><li>末梢気道を反映するFEF75は P=0.064 で有意に届かなかった。効果の方向は同じ（+18.5%）だが、n=38ずつでは検出力が足りない。</li></ul>
+<p><strong>per-protocol解析</strong>：VA・DLCO・FEFのいずれについても、14日中9日以上割付治療を受けた児に限った解析でも同様に有意差が示された（オンライン補遺 Table E3）。ITT解析の結果と方向・有意性が一致している。</p>
+<h3>8. 探索的アウトカム — 喘鳴の発生 🌬️</h3>
+<ul><li>修正12か月まで毎月の標準化呼吸器問診票を、<strong>適格99例全員</strong>で実施（1例はARID1B変異の判明によりPIが中止）。<strong>両群とも問診票の実施回数の中央値は12回</strong>。</li><li>喘鳴の発生：eCPAP 23/53（43.4%）vs dCPAP 26/46（56.5%）、P=0.20。</li><li>差は<strong>13.1パーセントポイント</strong>あり方向はeCPAP有利だが、<strong>統計学的有意差には達しなかった</strong>。著者らは「おそらくサンプルサイズが小さいため」と述べている。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本研究で唯一の臨床アウトカムには差がついていない <mark class="hl">「肺胞容積が82 mL大きい」ことが「その子の呼吸器の予後が良くなる」ことを意味するかは、この論文では示されていない</mark>。喘鳴（parent-reported）はP=0.20で有意差なし。VA・DLCO・FEFはすべて<strong>生理学的代替指標</strong>であり、本研究のデザインはそもそも臨床アウトカムを検出する検出力で設計されていない（サンプルサイズはVAの12%差で計算）。著者らも「臨床的呼吸器アウトカムと神経発達アウトカムを評価するには十分な検出力を持つ多施設試験が必要」と明記している。</p>
+</div>
+<h3>9. 安全性 🛡️</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>eCPAP群</th><th>dCPAP群</th></tr></thead>
+<tbody>
+<tr><td>重篤有害事象</td><td>敗血症による挿管 1例</td><td>声帯麻痺 1例</td></tr>
+<tr><td>（いずれも研究とは無関係と判定）</td><td>—</td><td>—</td></tr>
+<tr><td>介入と関連の可能性がある有害事象：新生児無呼吸</td><td>0</td><td>5</td></tr>
+<tr><td>同：新生児呼吸不全</td><td>0</td><td>4</td></tr>
+<tr><td>同：新生児多呼吸</td><td>0</td><td>2</td></tr>
+<tr><td>軽度の鼻粘膜発赤</td><td>3例</td><td>—</td></tr>
+<tr><td>鼻中隔破綻によるCPAP中止</td><td>0例</td><td>—</td></tr>
+<tr><td>栄養不耐によるCPAP中止</td><td>0例</td><td>—</td></tr>
+<tr><td>呼吸窮迫症状によるCPAP再装着</td><td>—</td><td>10例（22%）</td></tr>
+</tbody></table></div>
+<ul><li>有害事象の<strong>不均衡はすべて dCPAP群側</strong>（無呼吸5、呼吸不全4、多呼吸2）。つまり「CPAPを続けたことによる害」ではなく「<strong>CPAPを切ったことによる呼吸イベント</strong>」が観察されている。</li><li>新生児科医が歴史的に恐れてきた鼻中隔破綻・栄養不耐・親子の絆形成の阻害（引用33）について、本研究では<strong>eCPAP群での治療失敗がゼロ</strong>であり、両群とも<strong>同じPMAで全量経口哺乳と退院を達成</strong>している。</li><li>dCPAP群のCPAP再装着率22%は、他のCPAP離脱試験（19, 34, 35）で報告されている率よりは低いと著者らは述べている。</li></ul>
+<h3>10. 考察 — 著者らの主張と先行研究の位置づけ 💬</h3>
+<p><strong>本研究の主張</strong></p>
+<ul><li>本RCTは「NICUでの eCPAP が肺の成長を刺激し、その効果は<strong>退院後も持続する</strong>」という仮説を確認した。</li><li>主要生理学的アウトカムのVAが有意に大きく、これはNICU内で2週間治療終了時に示されたFRCの有意な増加と整合する。</li><li>持続する肺容量の増加に加え、DLCOとFEFの増加も仮説と整合する。</li><li>唯一の臨床アウトカムである喘鳴は 43.4% vs 56.5% だったが有意差に届かなかった（サンプルサイズが小さいため）。</li></ul>
+<p><strong>歴史的文脈</strong></p>
+<ul><li>早産後は挿管・侵襲的人工呼吸ではなく<strong>早期CPAP</strong>が標準治療（9）。</li><li>歴史的に新生児科医は、鼻中隔破綻・栄養不耐・家族の絆形成の阻害といった有害事象を避けるため、<strong>臨床的に安定した早産児のCPAPを速やかに離脱させてきた</strong>（33）。</li><li>本RCTでは eCPAP群に鼻中隔破綻・栄養不耐による治療失敗はなく、両群とも同じPMAで全量経口哺乳と退院に到達した。</li><li>割付治療に失敗した児は<strong>dCPAP群で有意に多く</strong>、事前定義の呼吸窮迫増悪基準に該当してCPAPへ戻された。ただしその割合は<strong>他のCPAP離脱試験より低かった</strong>（19, 34, 35）。</li></ul>
+<p><strong>先行の生体内研究</strong></p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>モデル</th><th>介入</th><th>所見</th><th>限界</th></tr></thead>
+<tbody>
+<tr><td>Zhang 1996（14）</td><td>幼若動物</td><td>CPAP 5 cmH2O を1〜2週間 vs sham</td><td>肺容量が増加。圧–容量曲線と組織像から、大きくなった肺は構造的に正常で気腫ではない</td><td>満期産動物であり、新生児期ではない時期の投与</td></tr>
+<tr><td>Xue 2008（13）</td><td>フェレット</td><td>慢性CPAP</td><td>気道平滑筋の収縮性が in vivo・in vitro とも低下</td><td>同上</td></tr>
+<tr><td>Assaf 2015（31）</td><td>ヒト早産児（横断）</td><td>NICUでのCPAP治療歴</td><td>退院後の乳児期にVAとDLCOが高い</td><td>観察研究・横断的</td></tr>
+<tr><td>McEvoy 2025（36）</td><td>アカゲザル（中等度早産モデル）</td><td>CPAP 5 cmH2O を9日間 vs sham</td><td>肺胞数が増加</td><td>動物モデル</td></tr>
+</tbody></table></div>
+<p>これらを合わせて著者らは「動物モデルとヒトの先行研究は、本RCTの結果（eCPAPが早産ヒト児の肺成長と発達を刺激する）を支持する」と結論している。</p>
+<h3>11. 強みと限界（著者の記載）⚖️</h3>
+<p><strong>強み（原文の記載）</strong></p>
+<ul><li><strong>RCTデザイン</strong>であること。</li><li><strong>コホート保持率が非常に高い</strong>（同意撤回ゼロ・追跡不能ゼロ、VA/DLCOは適格例の95%で取得）。</li><li><strong>盲検化された外来肺機能検査</strong>を完遂したこと。</li><li><strong>毎月の呼吸器問診票の完了率が高い</strong>（両群とも中央値12回）。</li><li>自施設NICUが<strong>CPAPの適用と離脱基準を一貫して運用</strong>していること。</li><li><strong>親からの離脱申し出がゼロ</strong>であったこと。</li><li>パイロット試験の所見（2週間のeCPAPがFRCを増やす）を<strong>本試験で再現</strong>できたこと。</li><li>VA・DLCOの<strong>革新的な測定法</strong>（4, 23, 24, 31）により、退院後の肺成長・発達を群間比較できたこと。</li><li>raised-volume rapid thoracic compression によるFEF測定で、気道機能の改善を評価できたこと。</li></ul>
+<p><strong>限界（原文の記載）</strong></p>
+<ul><li><strong>単施設RCT</strong>であり、他のNICUへの一般化可能性に限りがある。</li><li>用いた肺機能測定法は<strong>軽度の鎮静を要し、市販されていない</strong>（＝他施設で再現しにくい）。</li><li><mark class="hl"><strong>最も重症の呼吸障害を持つ早産児は含まれていない</strong></mark>。修正在胎35週未満までにCPAP呼吸安定基準を満たせなかったためであり、<strong>重症例に本結果は当てはまらない可能性がある</strong>。</li><li>臨床アウトカムの喘鳴は<strong>医療者の評価ではなく親の報告</strong>によるため、正確性に影響した可能性がある。ただし両群とも盲検化された担当者が同一の標準化問診票を毎月実施しているため、著者らは eCPAP の潜在的臨床効果の評価を歪めたとは考えていない。</li><li>今後は<strong>プラグマティックな多施設試験</strong>が必須。①ランダム化される児の多様性を高める、②BPDリスクが最も高い極低出生体重児など最も恩恵を受けそうな集団を大きく含める、③<strong>臨床的呼吸器アウトカムと神経発達アウトカム</strong>を評価するのに十分な検出力を持たせる、の3点が挙げられている。</li></ul>
+<p><strong>結論（原文）</strong>：NICUでCPAPを使用している安定した早産児において、2週間のCPAP延長は、NICU退院後の修正6か月頃に評価した肺胞容積・肺拡散能・努力呼気流量を有意に増加させた。CPAPの延長は、早産後の肺成長と発達を促す非薬物的で安全な治療戦略になりうる。今後は<strong>至適な期間と圧</strong>の検討、および長期の縦断追跡（肺機能軌跡と長期呼吸器健康を改善するか）が必要である。</p>
+<h2><span class="sec-emoji">🧾</span>🔍 既存ノートとの整合・旧記述の訂正</h2>
+<p>本ノートは2026-08-03に抄録＋PDF冒頭4ページのみから作られた概要版を、<strong>PDF全文（9ページ・図表含む）で全面改稿</strong>したもの。PDFを正として、以下の食い違いを訂正した。</p>
+<div class="tw"><table>
+<thead><tr><th>旧ノートの記述</th><th>PDF本文（正）</th><th>影響</th></tr></thead>
+<tbody>
+<tr><td>主要結果の表を 「eCPAP（n=54）／dCPAP（n=46）」 の見出しで提示</td><td>Table 2 の調整平均は VA・DLCO が n=47 vs 46、FEF が n=38 vs 38</td><td><mark class="hl">最も重要な訂正</mark>。効果推定値の分母が違っており、精度の解釈が変わる</td></tr>
+<tr><td>対象は「在胎 24週超32週未満」</td><td>「&gt;24 かつ ≤32週」（Methods・Figure 1・Results いずれも「32週以下」）</td><td>境界例の扱いが異なる</td></tr>
+<tr><td>「臨床上 24時間を超える CPAPを要した児」</td><td>「24時間以上（≥24 h）」</td><td>軽微</td></tr>
+<tr><td>「多重比較の調整については抽出範囲では確認できていない」</td><td>全文を読んでも多重比較調整の記載はない（＝調整していない）</td><td>保留を確定に更新</td></tr>
+<tr><td>「CPAP延長の不利益（授乳の遅れ・退院の遅れ・鼻中隔損傷・親子の分離）は抽出範囲外」</td><td>本文に記載あり：初回授乳・全量授乳までの時間、退院時PMAに差なし。鼻中隔破綻・栄養不耐によるCPAP中止ゼロ、軽度鼻粘膜発赤3例のみ</td><td>旧ノートの「不明」は解消。安全性はむしろ良好</td></tr>
+<tr><td>「NICU内での他の治療（酸素投与・栄養など）が影響した可能性は排除できない」</td><td>BPD発生率（7.4% vs 6.5%）・授乳・退院PMAに差なし。むしろdCPAP群の22%がCPAPに戻された（クロスオーバー）ことが効果を希釈する方向に働く</td><td>懸念の中身が変わる</td></tr>
+<tr><td>「修正6か月時」</td><td>原文の表現は "about 6 months corrected age"。実際の検査時修正月齢は平均 7.3 / 7.0 か月</td><td>タイトル・原文表現は維持するが、実測は約7か月</td></tr>
+<tr><td>（記載なし）</td><td>NICU内FRC（副次）：割付時 41.0 vs 44.5 → 2週後 57.5 vs 50.1 mL、P&lt;0.01</td><td>追加</td></tr>
+<tr><td>（記載なし）</td><td>FEF75（P=0.064）とFVC（P=0.427）は有意差なし、%変化列（VA +19.6%、DLCO +21.4%）</td><td>追加。有意でない副次があることは重要</td></tr>
+<tr><td>（記載なし）</td><td>治療失敗 3.7% vs 22%（P&lt;0.05）、喘鳴 43.4% vs 56.5%（P=0.20）、有害事象、per-protocol解析、多重代入10,000回</td><td>追加</td></tr>
+<tr><td>（記載なし）</td><td>背景の不均衡：双胎（14 vs 6例、P&lt;0.05）、女児（34.0% vs 52.2%）、割付時FRC（eCPAPが低い）</td><td>追加。内的妥当性の論点</td></tr>
+<tr><td>frontmatter <code>category: 99. その他</code></td><td>保存フォルダは <code>04. 呼吸器</code>。カテゴリとフォルダが不一致だった</td><td><code>04. 呼吸器</code> に訂正</td></tr>
+<tr><td>「本ノートの制約：PDF 1〜4ページに基づく」</td><td>全文を読んだためこの警告は削除</td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>ファイル名の検証</strong>：<code>早産児のCPAPを2週間延長すると6か月時の肺胞容積が増える（RCT 100例・AJRCCM2025）</code> は、①介入（2週間延長）②アウトカムと時点（6か月時の肺胞容積が増える）③デザインとn（RCT 100例）④誌略＋発行年（AJRCCM2025）のいずれもPDFの記載と一致する。<strong>事実誤りはないためファイル名は変更しない</strong>（<code>title_ja</code> も完全一致を維持）。</p>
+<p><strong>他ノートとの結論の食い違い</strong>：Vault内に早産児・NICU領域のRCTノートは他になく、直接矛盾する既存ノートはない。ただし==成人の人工呼吸ノート群（<span class="wl">メカニカルパワーと死亡率（ICM2018）</span>、<span class="wl">VILIを避けるためにパワーをどう最適化するか — DP≤15・Pplat≤27から始める（エディトリアル・CritCare2019）</span>、<span class="wl">ドライビングプレッシャーと経肺圧 ― 安全な人工呼吸の指標（Anesthesiology2019）</span>）とは「機械的伸展の意味」が正反対==である。成人では伸展＝VILIの原因で最小化すべきものだが、本論文の発達期の肺では伸展＝成長刺激として肯定的に扱われている。対立ではなく、対象（成熟肺 vs 発達途上の肺）と圧のレベル（高い駆動圧 vs 5 cmH2Oの持続的低圧）が異なるため両立する。JCで扱うときはこの前提の違いを明示すること。</p>
+<h2><span class="sec-emoji">🔬</span>🧪 批判的吟味（JCでの論点）</h2>
+<p><strong>① 効果推定値がすべて境界的</strong></p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>95%CI下限</th><th>下限が0からどれだけ離れているか</th></tr></thead>
+<tbody>
+<tr><td>VA</td><td>8.3 mL</td><td>点推定82.1の約10%</td></tr>
+<tr><td>DLCO</td><td>0.1</td><td>点推定0.6の約17%</td></tr>
+<tr><td>FEF50</td><td>4.5 mL/秒</td><td>点推定62.7の約7%</td></tr>
+<tr><td>FEF25–75</td><td>1.3 mL/秒</td><td>点推定57.5の約2%</td></tr>
+</tbody></table></div>
+<p>P値も0.018〜0.046。わずかな解析の選択（共変量の入れ替え、双胎の扱い、外れ値1例）で有意性が消えうる脆弱さがある。有意な副次4つのうち3つは下限が0の目前にある。</p>
+<p><strong>② 多重性の未調整</strong></p>
+<ul><li>副次アウトカムとして DLCO・FEF50・FEF25–75・FEF75・FVC・FRC が検定され、さらに探索的に喘鳴も検定されている。<strong>本文に多重比較調整の記載はない</strong>。</li><li>主要アウトカム（VA）は1つなので主結論は多重性の影響を受けないが、<mark class="hl">副次の「DLCOもFEFも増えた」という補強論法は、調整すれば弱まる可能性がある</mark>。</li></ul>
+<p><strong>③ 主要アウトカムが代替指標である</strong></p>
+<ul><li>VAは肺実質の量を測る生理学的指標であり、患者にとってのアウトカム（喘鳴・入院・喘息発症・運動耐容能）ではない。</li><li>唯一の臨床アウトカム（喘鳴）は<strong>有意差なし</strong>（43.4% vs 56.5%、P=0.20）。</li><li>「82 mLのVA増加」の臨床的意義を裏づける根拠は、BPD児のVA/DLCOが満期産児より10〜15%低いという既報（4）との照合のみ。<mark class="hl">この閾値は予後との関連から導かれたものではなく、群間差の記述統計に由来する</mark>。</li></ul>
+<p><strong>④ サンプルサイズ設計の前提が実測とずれている</strong></p>
+<ul><li>設計時の想定平均VAは Assaf 2015 に基づき <strong>642 mL（SD 189）</strong>。</li><li>実測は eCPAP 500.2 / dCPAP 418.1 mL で、<mark class="hl"><strong>想定より 22〜35% 低い</strong></mark>。</li><li>想定と実測がずれると、「12%の差」に相当する絶対値も変わる（642の12%＝77 mL、418の12%＝50 mL）。実測差82.1 mLは絶対値では想定に近いが、<strong>相対差は19.6%と想定の12%を大きく上回っている</strong>。事前の効果量想定が保守的だったのか、対照群が想定より小さかったのか、本文からは判別できない。</li></ul>
+<p><strong>⑤ 対照群の22%がクロスオーバーしている</strong></p>
+<ul><li>dCPAP群の10例（22%）が呼吸窮迫でCPAPに戻された。<strong>ITT解析ではこれらは dCPAP群のまま</strong>。</li><li>クロスオーバーは通常<strong>群間差を縮める方向（バイアス・トゥ・ザ・ヌル）</strong>に働くため、真の効果はもう少し大きい可能性がある。</li><li>一方で、<strong>per-protocol解析でも同様に有意</strong>であったと記載されている（Table E3）。ただしper-protocol解析はランダム化の利点を失うため、これをもって「頑健」と言い切るのは慎重であるべき。</li></ul>
+<p><strong>⑥ 双胎の集中と有効サンプルサイズ</strong></p>
+<ul><li>双胎は同一群に割り付ける設計のため、eCPAP群に双胎由来の児が偏った（14例 vs 6例、P&lt;0.05）。</li><li><strong>同一妊娠の児は肺の成長も遺伝的・環境的に相関する</strong>ため、名目上のn=47は独立な47ではない。GLMMのランダム効果で対処しているが、<strong>有効サンプルサイズは名目より小さい</strong>。</li><li>eCPAP群 54例は46妊娠から、dCPAP群 46例は43妊娠から。妊娠単位で見ると 46 vs 43 であり、<strong>独立単位の差は名目より小さい</strong>。</li></ul>
+<p><strong>⑦ VA と DLCO は独立した2つの証拠ではない</strong></p>
+<ul><li>原文が明記するとおり<strong>同一手技（同一の呼吸休止）から算出される</strong>。「肺実質も血管床も育った」という主張は、<strong>1回の測定を2通りに読んでいる</strong>にすぎない。</li><li><strong>DLCO/VA（KCO）が示されていない</strong>ため、「拡散能の増加が肺胞容積の増加を超えているのか（＝真に血管が増えたのか）」を読者が検証できない。</li></ul>
+<p><strong>⑧ FRC測定の非対称</strong></p>
+<ul><li>eCPAP群だけ「CPAPを外して直ちに測定」している。<mark class="hl">CPAP離脱から測定までの時間、および急性のリクルートメント効果が抜けたかの検証は本文に記載がない</mark>。</li><li>ただし修正6か月（CPAP終了から約5か月後）のVAの差がこの懸念に対する反証として機能している。</li></ul>
+<p><strong>⑨ 外部妥当性の限界が大きい</strong></p>
+<ul><li>単施設、<strong>バブルCPAPを一貫使用する施設固有の運用</strong>、独自の安定基準、<strong>市販されていない鎮静下の乳児肺機能測定</strong>。</li><li>修正在胎35週未満までに安定基準を満たせなかった児（スクリーニングで40例）は除外されており、<mark class="hl"><strong>最も恩恵を受けそうな重症例が体系的に外れている</strong></mark>。</li><li>参加者の約80%が白人であり、多様性も限られる。</li></ul>
+<p><strong>⑩ 原著内部の数の不整合が2か所ある</strong></p>
+<ul><li>Figure 1 と本文で、eCPAP群の非完遂7例の内訳が1例ずつずれている（鎮静拒否3 vs 4、技術的不能2 vs 1）。</li><li>Table 1 の「NICUで1時間超の人工呼吸」の行で、パーセンテージが2列で入れ替わっているとみられる。</li><li>いずれも結論を変えるものではないが、<mark class="hl"><strong>査読・校正の精度にわずかな不安を残す</strong></mark>。</li></ul>
+<p><strong>⑪ 未解決の重要な問い</strong></p>
+<ul><li><strong>至適期間はどれだけか</strong>（2週間はパイロット試験の踏襲であり、最適化されていない）。</li><li><strong>至適な圧はいくらか</strong>（5 cmH2O 固定）。</li><li><strong>神経発達アウトカム</strong>への影響（未評価）。</li><li>6か月時点のVAの差が<strong>学童期・成人期の肺機能軌跡まで残るか</strong>（未評価）。</li><li>CPAP延長に伴う<strong>入院コスト・看護負担・在院日数</strong>（退院時PMAに差はないが、詳細な医療資源の比較は本文にない）。</li></ul>
+<h2><span class="sec-emoji">📖</span>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>早期の肺発達が生涯の呼吸器健康と疾患に及ぼす影響</td><td>Stocks J, et al. *Lancet Respir Med* 2013;1:728–742</td></tr>
+<tr><td>2</td><td>乳幼児・小児の肺機能軌跡 — 生涯の肺の健康の航路を決める</td><td>Jordan BK, McEvoy CT. *Pediatrics* 2020;146:e20200417</td></tr>
+<tr><td>4</td><td>乳幼児期の慢性肺疾患における肺実質の成長（VA・DLCOが満期産児より10〜15%低い）</td><td>Balinotti JE, et al. *Am J Respir Crit Care Med* 2010;181:1093–1097</td></tr>
+<tr><td>5</td><td>乳児期の気道機能低下と22歳時の肺機能</td><td>Stern DA, et al. *Lancet* 2007;370:758–764</td></tr>
+<tr><td>6</td><td>喘息の胎児期起源 — 出生から36歳までの縦断研究</td><td>Guerra S, et al. *Am J Respir Crit Care Med* 2020;202:1646–1655</td></tr>
+<tr><td>8</td><td>小児期の肺機能は成人のCOPDと喘息COPDオーバーラップを予測する</td><td>Bui DS, et al. *Am J Respir Crit Care Med* 2017;196:39–46</td></tr>
+<tr><td>9</td><td>早産児への予防的・超早期CPAP（Cochraneレビュー）</td><td>Subramaniam P, et al. *Cochrane Database Syst Rev* 2021;10:CD001243</td></tr>
+<tr><td>11</td><td>超早産児における早期CPAP vs サーファクタント（SUPPORT試験）</td><td>Finer NN, et al. *N Engl J Med* 2010;362:1970–1979</td></tr>
+<tr><td>12</td><td>超早産児の出生時の鼻CPAP vs 挿管（COIN試験）</td><td>Morley CJ, et al. *N Engl J Med* 2008;358:700–708</td></tr>
+<tr><td>13</td><td>フェレット肺の慢性CPAP拡張は気道平滑筋収縮性を低下させる</td><td>Xue Z, et al. *J Appl Physiol* 2008;104:610–615</td></tr>
+<tr><td>14</td><td>伸展による未熟肺の成長（CPAP 5 cmH2O・1〜2週で肺容量増加、気腫ではない）</td><td>Zhang S, et al. *J Appl Physiol* 1996;81:1471–1476</td></tr>
+<tr><td>15</td><td>本試験の先行パイロットRCT（2週間のeCPAPがNICU内の肺容量を増やす）</td><td>Lam R, et al. *J Pediatr* 2020;217:66–72.e1</td></tr>
+<tr><td>19</td><td>在胎30週未満の早産児のCPAP離脱法（多施設RCT）</td><td>Todd DA, et al. *Arch Dis Child Fetal Neonatal Ed* 2012;97:F236–F240</td></tr>
+<tr><td>20</td><td>多胎とその親は同一群への割り付けを選好する</td><td>Bernardo J, et al. *J Perinatol* 2015;35:208–213</td></tr>
+<tr><td>21</td><td>新生児の鼻CPAPにはチンストラップが必要（非ヒト霊長類モデル）</td><td>MacDonald KD, et al. *Pediatr Pulmonol* 2020;55:1087–1088</td></tr>
+<tr><td>23</td><td>健常乳幼児の single breath-hold CO拡散能測定</td><td>Castillo A, et al. *Pediatr Pulmonol* 2006;41:544–550</td></tr>
+<tr><td>25</td><td>乳児の努力呼気流量と容量 — 正常値と肺成長</td><td>Jones M, et al. *Am J Respir Crit Care Med* 2000;161:353–359</td></tr>
+<tr><td>29</td><td>乳児のFRC測定のための bias flow 窒素洗い出し法（ERS/ATSタスクフォース）</td><td>Morris MG, et al. *Eur Respir J* 2001;17:529–536</td></tr>
+<tr><td>31</td><td>サンプルサイズ設計の根拠。BPDのない早産児の肺実質発達（CPAP治療歴とVA・DLCO）</td><td>Assaf SJ, et al. *Pediatr Pulmonol* 2015;50:1313–1319</td></tr>
+<tr><td>32</td><td>BPDの定義</td><td>Jobe AH, Bancalari E. *Am J Respir Crit Care Med* 2001;163:1723–1729</td></tr>
+<tr><td>33</td><td>早産児におけるCPAPの継続期間（早期離脱の慣行とその根拠）</td><td>Bamat N, et al. *Semin Fetal Neonatal Med* 2016;21:189–195</td></tr>
+<tr><td>36</td><td>鼻CPAPは中等度早産アカゲザルモデルで肺胞数を増やす</td><td>McEvoy CT, et al. *Eur Respir J* 2025（オンライン先行 2025年1月16日）doi:10.1183/13993003.00727-2024</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 NICUで安定した早産児のCPAPを2週間延長すると、修正6か月時の肺胞容積が調整平均で82.1 mL（+19.6%）大きくなり（500.2 vs 418.1 mL、P=0.033）、拡散能と努力呼気流量も増える。<mark class="hl">「発達途上の肺では、慢性的な機械的伸展が成長刺激になる」— 成人肺での伸展＝害という常識と正反対の現象</mark>である。</p>
+<p>ただし ==効果推定値の95%CI下限はいずれも0の目前にあり、唯一の臨床アウトカム（喘鳴）は有意差なし（43.4% vs 56.5%、P=0.20）<mark class="hl">。単施設100例・鎮静下の非市販測定・重症例を除外という制約もある。</mark>成人ICUの診療は本論文で何も変わらない。多施設プラグマティック試験の結果が出るまで、これは「概念実証」として読む論文である。==</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>成人ICUで人工呼吸の設定を考えている</td><td>対象は発達途上の肺か、成熟肺か</td><td>成熟肺なら本論文は適用外。伸展はVILIの原因として最小化する（DP・メカニカルパワーの既存ノートへ）</td></tr>
+<tr><td>教育で「伸展は害か益か」を議論したい</td><td>肺の発達段階と圧のレベル</td><td>発達期の低圧持続（5 cmH2O）＝成長刺激、成熟肺の高い駆動圧＝傷害、と前提を分けて説明する</td></tr>
+<tr><td>NICUのCPAP離脱基準の話題が出た</td><td>対象児が本試験の適格条件（在胎24週超〜32週以下・安定基準を35週PMA未満で充足）に合うか</td><td>合っていても単施設100例の代替アウトカムであることを添えて提示。プロトコル変更の根拠にはしない</td></tr>
+<tr><td>本論文を批判的吟味の教材にしたい</td><td>論点を3つに絞る</td><td>①95%CI下限が0に近い ②主要が代替指標で臨床アウトカムは有意差なし ③対照群の22%がクロスオーバー</td></tr>
+<tr><td>早産歴のある成人COPD患者を診ている</td><td>生涯早期の肺機能の tracking を知っているか</td><td>「低い肺機能はそのまま推移する」という背景理解として保持する（本論文はその介入可能性を示唆したにとどまる）</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

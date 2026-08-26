@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>感染か定着か無菌性炎症か — 宿主応答プロファイリングという第3の軸（総説・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07108-6.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">感染か定着か無菌性炎症か — 宿主応答プロファイリングという第3の軸（総説・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Jeffrey M, Denny KJ, Lipman J, Conway Morris A. Differentiating infection, colonisation, and sterile inflammation in critical illness: the emerging role of host-response profiling. Intensive Care Med. 2023;49(7):760-771. doi:10.1007/s00134-023-07108-6</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-06-21）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07108-6" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07108-6</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Differentiating infection, colonisation, and sterile inflammation in critical illness: the emerging role of host-response profiling</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07108-6.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07108-6.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07108-6.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で何を変えるか／変えないか</p>
+<ul><li><strong>分子診断を導入する前に「陽性の扱い方」を文書で決める</strong>。この総説が示す最大の実務リスクは、mNGSや多項目PCRを入れると検出率が跳ね上がり（喀痰 39%→96%、尿 32%→100%）、<mark class="hl">陽性所見をそのまま治療適応と読むと抗菌薬使用がむしろ増える</mark>ことである。導入時は「検出＝起因菌ではない」を明記した運用ルールとレポート様式を先に作る。</li><li><strong>Table 1 の3×3マトリクスを、当院の抗菌薬開始・中止のカンファ用フォーマットとしてそのまま使える</strong>。縦軸＝微生物学（絶対的病原体の多量発育／閾値下発育または非病原性菌／陰性）、横軸＝宿主応答（強い／中間・非特異的／低い）の9マス。原著は「毎日のレビューの一部として適用し、患者は病態と検査の進行に伴いマス間を移動する」と明記している。1回の判定で固定しない。</li><li><strong>中央列（PCT 0.5〜1.9 ng/mL、またはCRP・白血球・発熱のみ、または画像上の疑い）に大多数の患者が入る</strong>ことを前提に運用設計する。原著自身が「中央の列が患者の大多数を含む」と書いている。ここでの分岐は検査ではなく<strong>リスク評価</strong>で決まる（ショック・SOFA 2点以上の悪化・免疫抑制があれば広域、なければ watch and wait）。</li><li><strong>PCTとCRPは「開始の根拠」ではなく「中止の根拠」に寄せる</strong>。原著は両者とも開始よりも早期中止のエビデンスのほうが良好、と明言している。当院の運用も de-escalation 側に重心を置く。</li><li><strong>PCT高値を機械的に感染と読まない</strong>。Table 1 の脚注は、PCTが<strong>最近の大手術・外傷・重症熱傷・心原性ショック</strong>でも上昇すると注記している。術後ICUとICU外心停止後の症例では特に注意。</li><li><strong>宿主応答プロファイリング（SeptiCyte等）は現時点で当院の導入対象ではない</strong>。ただし「そのうち製品として売り込まれてくる」領域なので、評価軸（感度と特異度のどちらを犠牲にした検査か・検証集団は自施設に似ているか・アウトカム改善の証拠はあるか）を今のうちに共有しておく。</li><li><strong>診断スチュワードシップという言葉を院内に入れる</strong>。原著は抗菌薬スチュワードシップと並んで、検査の出し方そのものを管理する diagnostic stewardship を最後の提言に置いている。血液培養・呼吸器検体の出し方のルール作りは当院でも着手できる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：重症患者の大多数は入室理由にかかわらず全身性炎症の所見を呈する。感染による炎症と無菌性組織傷害による炎症は、肉眼所見・細胞レベル・生化学のいずれでも重なる。臨床所見、病原体の定量、血漿バイオマーカー（CRP・PCT）という既存3手段はいずれも不完全である。</li><li><strong>Unknown（分かっていなかったこと）</strong>：無菌性炎症を伴う「定着」と、真の「感染」を分けるゴールドスタンダードが存在しない。高感度分子診断（mNGS・シンドロミックPCR）が普及したとき、その大量の陽性所見をどう解釈すべきかの枠組みもない。</li><li><strong>What's new（本総説の新規性・意義）</strong>：①「定着と感染は二値ではなく dysbiosis の進展という連続体」という再概念化を提示。②現行診断で使える<strong>判断マトリクス（Table 1）</strong>と、仮想の新規宿主応答マーカーが入ったときのマトリクス（Table 2）を対比して提示。③トランスクリプトミクス・プロテオミクス・機能的免疫アッセイという3系統の宿主応答技術を臨床応用の観点でレビューし、実装障壁（Box 2の7項目）まで列挙した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 抗菌薬を要するのは「感染」だけなのに、ICUでは感染・定着・無菌性炎症が見分けられない。分子診断の高感度化はこの問題を<strong>悪化させる</strong>。感染の定義そのものが宿主免疫応答である以上、宿主応答を測ることが第3の軸になりうる — ただし現時点でその多くは開発段階を出ていない。</p>
+</div>
+<ul><li><strong>感染の定義</strong>：微生物がその微生物に不寛容な空間に侵入し、過剰増殖するか毒素を放出して宿主を傷害し、炎症反応を惹起する。それが十分に重篤なら臓器障害（＝敗血症）に至る。つまり感染は<strong>病原体の存在だけでは定義できず、宿主応答が必須要素</strong>である。</li><li><strong>問題の構造</strong>：重症患者は入室理由を問わず全身性炎症を呈し、同時に急速に dysbiosis を来して病原体優位のマイクロバイオーム（pathobiome）が粘膜臓器に出現する。炎症と細菌叢シフトが同時に起きるため、真の感染の同定が難しい。</li><li><strong>mNGSの衝撃</strong>：疑い例における陽性率は、培養で血液 <strong>7.9%</strong>・喀痰 39%・尿 32% に対し、mNGSでは 41%・96%・100% に上昇する。ほぼすべての粘膜臓器検体で微生物が同定されるため、定着を不要に治療する問題が悪化しうる。</li><li><strong>血液培養の実態</strong>：全体で陽性は約 <strong>10%</strong>。報告される偽陽性率は 0.3〜5.5% で、低有病率集団では診断性能が悪い。</li><li><strong>定量培養の閾値</strong>：肺では洗浄液 <strong>10⁴ CFU/mL</strong>、気管吸引液・喀痰 10⁵〜10⁶ CFU/mL が一般的なカットオフ。組織学的ゴールドスタンダードと比べ感度が最適でなく、希釈や併用抗菌薬による発育抑制を考慮していない。</li><li><strong>提案されたマトリクス</strong>：Surviving Sepsis Campaign 2021 のリスクベース処方を組み込んだ3×3の判断マトリクス（Table 1）を「現時点で最適な実践」として提示。ゴールドスタンダード不在のため、<strong>中央列が患者の大多数</strong>を占める。</li><li><strong>宿主応答の不均一性</strong>：病原体特異的応答は、現時点ではドメイン・界レベル（細菌／真菌／ウイルス）までしか同定できていない。マイクロバイオーム、宿主ゲノム、免疫能、感染臓器・コンパートメント、そして「時間」が不均一性を生む。</li><li><strong>トランスクリプトミクス</strong>：4つの代表的検査（FAIM3:PLAC8 比、SeptiCyte、Sepsis Metascore、IMX-BVN-2）を比較。単純な2遺伝子比から29遺伝子ニューラルネットワークまで、<strong>精度と解釈可能性のトレードオフ</strong>がある。</li><li><strong>mNGS＋宿主応答の統合</strong>：気管吸引液で規則ベースモデル（RBM）＋12遺伝子分類器が<strong>感度100%・特異度87.5%</strong>、敗血症で mNGS＋宿主分類器が感度99%・特異度78%。いずれも前向き検証が未了。</li><li><strong>発症前診断</strong>：VAP発症の<strong>2日前</strong>、術後感染の3日前に宿主応答シグネチャが検出できたとの報告がある。</li><li><strong>機能的免疫アッセイ</strong>：好中球CD64は、より大規模な試験で一貫してCRP・PCTを上回った唯一の新規マーカー。熱傷敗血症での好中球自発遊走パターンは<strong>感度80%・特異度77%</strong>。</li><li><strong>結論</strong>：最終的な感染診断ツールは、宿主免疫応答の評価と高感度病原体検出を<strong>組み合わせた</strong>ものになる可能性が高い。ただし「臨床応用可能なアッセイのほとんどは、まだ開発段階を越えていない」と原著は締めくくっている。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 感染・定着・無菌性炎症の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>感染（infection）</strong>：微生物が本来そこにいるべきでない空間に入り込み、増殖または毒素産生によって宿主組織を傷害し、免疫応答を引き起こした状態。臓器障害まで至れば<strong>敗血症（sepsis）</strong>と呼ぶ。 <strong>定着（colonisation）</strong>：微生物がそこに「いる」だけで、宿主組織の傷害も特異的免疫応答も起こしていない状態。喀痰から緑膿菌が生えても、それが定着なら抗菌薬は不要。 <strong>無菌性炎症（sterile inflammation）</strong>：微生物なしに起こる炎症。外傷・膵炎・大手術・熱傷・心停止後などで、傷害された自己組織から出る分子が免疫を叩き起こす。発熱・白血球上昇・CRP上昇は感染とまったく同じに見える。</p>
+<p><strong>なぜ同じに見えるのか（機序）</strong>：病原体側の分子パターンを <strong>PAMPs</strong>（pathogen-associated molecular patterns：微生物に高度に保存された分子モチーフ）、自己組織由来の分子パターンを DAMPs（damage-associated molecular patterns：ヒストン、HMGB1＝high mobility group box protein 1、アデノシンなど）と呼ぶ。両者は同じ受容体 PRRs（pattern recognition receptors：パターン認識受容体）に結合し、同じシグナル伝達機構を使って同じ炎症カスケードを回す。だから膵炎や外傷は「感染そっくりの免疫応答」を作る。ここが鑑別困難の生物学的な根っこである。</p>
+<p><strong>dysbiosis（ディスバイオーシス）</strong>：正常な細菌叢バランスが崩れること。重症患者では急速に起こり、病原体優位の細菌叢＝<strong>pathobiome（パソバイオーム）</strong>が出現する。代謝ストレス下で微生物が病原性の高い表現型へシフトすることも知られる。dysbiosis は必ずしも感染に至らないが、感染リスクは上げる。</p>
+<p><strong>本総説の中核となる発想の転換</strong>：従来「無菌のはずの場所に病原体が侵入したら感染」と考えてきたが、粘膜臓器に正常細菌叢があると分かった以上その定義は成り立たない。ならば<strong>定着と感染は白黒2つの状態ではなく、dysbiosis の進展度という一本の連続体上にある</strong>と捉え直そう、というのが著者らの提案である。</p>
+<p><strong>主な略語</strong>：<strong>PCT</strong>＝プロカルシトニン、CRP＝C反応性蛋白、WCC＝白血球数、CPIS＝clinical pulmonary infection score（人工呼吸器関連肺炎の臨床スコア）、mNGS＝メタゲノム次世代シーケンシング、LRTI＝下気道感染症、VAP＝人工呼吸器関連肺炎、AUROC＝ROC曲線下面積、FIA＝functional immune assay（機能的免疫アッセイ）、RBM＝rule-based model（規則ベースモデル）、PTM＝post-translational modification（翻訳後修飾）。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p>原著イントロダクションの論理は4段構えである。</p>
+<ol><li><strong>感染は宿主応答を含んで定義される</strong>。微生物が不寛容な空間に入り、過剰増殖するか毒素を放出して宿主を傷害し、炎症応答を惹起する。その応答が十分に重篤なら臓器不全＝敗血症になる。</li><li><strong>感染の巨視的・細胞的・生化学的特徴は、無菌性組織傷害による炎症と重なる</strong>。しかも重症患者の大多数は、入室の理由にかかわらず全身性炎症の所見を呈する。</li><li><strong>重症患者は急速に dysbiosis を来す</strong>。明らかな感染がなくても、粘膜臓器に病原体優位のマイクロバイオームが出現する。したがって定着と感染の区別は困難である。</li><li><strong>高感度分子病原体検出は抗菌薬処方の改善に期待がかかる一方、問題を悪化させうる</strong>。ほぼすべての粘膜臓器検体で微生物が同定されてしまうためである。</li></ol>
+<p>そのうえで著者らは、抗菌薬は感染に対しては救命的である一方、不適切な投与は有意な害と関連する、と両側を明示する。ゆえに「無菌性炎症を伴う定着」と「感染」を分けることが、便益最大化と害の最小化に決定的だと位置づける。</p>
+<p>本総説の目的は3つに整理される。①現行の臨床アプローチの整理、②宿主-病原体応答の理解と不均一性の源の概観、③宿主応答をプロファイルする各技術のレビューと、それが将来どう臨床使用可能なツールになりうるかの検討。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（NARRATIVE REVIEW と誌面に明記）。</li><li><strong>検索戦略・組み入れ基準・スクリーニング手順・バイアスリスク評価</strong>：本文に記載がない。系統的レビューではないため、引用文献79件がどう選ばれたかは追跡できない。</li><li><strong>エビデンスの統合方法</strong>：定量的統合（メタ解析）は行っていない。個々の研究の報告値をそのまま引用・並置する形式。</li><li><strong>提案物（Table 1・Table 2）の作り方</strong>：著者らが「we propose」と述べる専門家意見である。デルファイ法などの合意形成プロセスは踏んでいない。Table 1 のリスク層別（ショック・SOFA 2点以上の悪化・免疫抑制）だけは Surviving Sepsis Campaign 2021 に由来すると明示されている。</li><li><strong>患者データ・倫理</strong>：一次データの収集はなく、該当なし。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>方法論上の読み方（1点目） <mark class="hl">Table 1 と Table 2 は「研究結果」ではなく著者4名の提案である</mark>。妥当性の検証も、アウトカム改善の証明もされていない。当院で採用するなら「合議のフォーマット」としてであって、「検証済みアルゴリズム」としてではない。</p>
+</div>
+<h3>4. 現行アプローチとその限界 🔬</h3>
+<p>原著が挙げる既存手段は、①臨床所見の評価、②病原体密度の判定、③血漿バイオマーカーの3つ。いずれも不完全で、感染と無菌性炎症を判別する能力に欠ける、というのが結論である。</p>
+<h4>Table A. 現行手段と限界（本文記述を整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>手段</th><th>原著の記述</th><th>限界</th></tr></thead>
+<tbody>
+<tr><td>臨床所見</td><td>定着は全身性炎症がないときに最も容易に区別できる</td><td>重症患者では炎症の有病率が高く、その状況は臨床上まれ</td></tr>
+<tr><td>CPIS等のスコア</td><td>主観性を減らすことはできる</td><td>診断性能は中等度（modest）</td></tr>
+<tr><td>血漿バイオマーカー（CRP・PCT）</td><td>一般的に使われている</td><td>感染と無菌性炎症を区別する能力は不完全。両者とも抗菌薬の開始よりも早期中止のエビデンスのほうが良好</td></tr>
+<tr><td>同定された微生物の種類</td><td>定着が一般的な部位からの「非病原性」菌は解釈の助けになる（肺・腸・膀胱の Candida、肺の Enterococcus）</td><td>免疫抑制患者では解釈が難しい。無菌部位培養（血液・髄液）から皮膚常在菌が出た場合も解釈困難</td></tr>
+<tr><td>培養の偽陽性・偽陰性</td><td>血液培養陽性は約10%。報告される偽陽性率 0.3〜5.5%</td><td>ICUでの真の疫学は検査実践と症例定義に強く影響されるため解明が難しい。低有病率集団では診断性能が悪い</td></tr>
+<tr><td>病原体の定量</td><td>大量発育＝感染と仮定する。肺では洗浄液 10⁴ CFU/mL、気管吸引液・喀痰 10⁵〜10⁶ CFU/mL が一般的カットオフ</td><td>組織学的ゴールドスタンダードと比べ感度が最適でない。希釈や併用抗菌薬による発育抑制を考慮していない</td></tr>
+</tbody></table></div>
+<h4>mNGSは何を変えるのか — 数値の正確な出所</h4>
+<p>原著は「mNGSのインパクトに文脈を与えるため」として、疑い感染例における血液・喀痰・尿の培養陽性率と mNGS 陽性率を並べている。</p>
+<div class="tw"><table>
+<thead><tr><th>検体</th><th>培養での陽性率</th><th>mNGSでの陽性率</th><th>出典（原著の引用番号）</th></tr></thead>
+<tbody>
+<tr><td>血液</td><td>7.9%</td><td>41%</td><td>文献4（Geng S ら, Int J Infect Dis 2021。重症患者の血液）</td></tr>
+<tr><td>喀痰</td><td>39%</td><td>96%</td><td>文献5（Zhou JJ ら, Front Cell Infect Microbiol 2022。ICU／非ICUの肺感染）</td></tr>
+<tr><td>尿</td><td>32%</td><td>100%</td><td>文献6（Duan W ら, Front Public Health 2022。腎移植レシピエントの反復性尿路感染）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この表の読み方（2点目・重要） 3行は<strong>同一コホートの直接比較ではなく、対象も国も設定も異なる3つの別研究</strong>である。とくに尿の「32%→100%」は<mark class="hl">腎移植レシピエントの反復性尿路感染という高度に選択された集団</mark>の値であり、当院の一般ICU患者にそのまま外挿できない。数値のインパクトが強いだけに、引用するときは必ず出典の集団を添える。</p>
+</div>
+<ul><li>著者らはこの節を「著者ら自身が Table 1 のマトリクスを現時点で最適な実践として提案する」で締める。根拠として Surviving Sepsis Campaign 2021 が提唱するリスクベースの抗菌薬処方を組み込んだと述べている。</li><li>同時に、「根本的な困難は、<strong>無菌性炎症を伴う定着と感染を鑑別するゴールドスタンダードが存在しないこと</strong>」であり、「そのため Table 1 の中央列が患者の大多数を含み、結果として抗菌薬処方に影響する」と明記する。</li></ul>
+<h3>5. Table 1 — 現行診断での判断マトリクス（原表を日本語化）</h3>
+<p>縦軸が微生物学、横軸が宿主応答の3×3。原表のセル文言をすべて起こす。</p>
+<h4>列（宿主応答）の定義</h4>
+<div class="tw"><table>
+<thead><tr><th>列</th><th>原文の定義</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>左：特異的マーカー高値</td><td>Elevated specific marker（PCT &gt;2 ng/mL）または frank clinical/radiological evidence of infection（例：膿、画像上の膿瘍）</td><td>感染の明白な証拠がある</td></tr>
+<tr><td>中：中間的マーカー／非特異的マーカー高値／臨床・画像上の疑い</td><td>Intermediate specific marker（PCT 0.5-1.9 ng/mL）または Elevated non-specific marker（CRP／白血球数／発熱）または clinical/radiological suspicion of infection（例：肺浸潤影、膵周囲の液体貯留）</td><td>疑わしいが決め手がない</td></tr>
+<tr><td>右：臨床的疑いが低くマーカーも上昇なし</td><td>Low clinical suspicion and no markers elevated</td><td>感染を積極的に疑う理由がない</td></tr>
+</tbody></table></div>
+<h4>行（微生物学）の定義</h4>
+<div class="tw"><table>
+<thead><tr><th>行</th><th>原文の定義</th></tr></thead>
+<tbody>
+<tr><td>上</td><td>Obligate pathogen at high growth（絶対的病原体が多量発育）</td></tr>
+<tr><td>中</td><td>Obligate pathogen at sub-threshold growth または Non-pathogenic organism（絶対的病原体が閾値下発育、または非病原性菌）</td></tr>
+<tr><td>下</td><td>Negative microbiology（微生物学的検査が陰性）</td></tr>
+</tbody></table></div>
+<h4>9マスの判定と行動</h4>
+<div class="tw"><table>
+<thead><tr><th>微生物学 ＼ 宿主応答</th><th>左：特異的マーカー高値／明白な感染所見</th><th>中：中間・非特異的マーカー／臨床・画像上の疑い</th><th>右：疑い低くマーカー上昇なし</th></tr></thead>
+<tbody>
+<tr><td>絶対的病原体が多量発育</td><td>感染。標的抗菌薬</td><td>感染。標的抗菌薬</td><td>定着。抗菌薬の適応なし（除菌を検討する場合を除く）</td></tr>
+<tr><td>閾値下発育または非病原性菌</td><td>感染。起因菌は不確実。広域抗菌薬</td><td>可能性のある感染。高リスクなら広域抗菌薬、低リスクなら watch and wait</td><td>定着。抗菌薬の適応なし</td></tr>
+<tr><td>微生物学的検査が陰性</td><td>感染。起因菌は不確実。広域抗菌薬</td><td>可能性のある感染。高リスクなら広域抗菌薬、低リスクなら watch and wait</td><td>感染・定着いずれの証拠もなし</td></tr>
+</tbody></table></div>
+<p><strong>原表の脚注（そのまま）</strong></p>
+<ul><li>略語：PCT＝procalcitonin、CRP＝C-reactive protein、WCC＝white cell count。</li><li>適用条件：現行の診断法でICUにおける感染と定着を鑑別するアプローチ。微生物学と宿主応答を<strong>同時に評価</strong>し、曖昧な症例は臨床的リスク評価で裁定する。患者は病態と検査の進行に伴いカテゴリ間を移動することが想定され、<strong>毎日のレビューの一部として適用されるべき</strong>である。</li><li>星1つ：PCTは<strong>最近の大手術、外傷、重症熱傷、心原性ショック</strong>の状況でも上昇しうる。</li><li>星2つ：高リスクとは、<strong>ショックの存在、臓器障害の悪化（例：SOFAスコアの2点以上の上昇）、または免疫抑制</strong>によって示される。</li></ul>
+<h4>判断の流れ（表で表現）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>検体から絶対的病原体が多量に生えた</td><td>宿主応答（PCT・CRP・発熱・画像・膿の有無）</td><td>マーカーか明白な所見があれば標的治療。何もなければ定着として治療しない（除菌の適応がある場合のみ別途検討）</td></tr>
+<tr><td>閾値下発育または非病原性菌が出た</td><td>宿主応答の強さ</td><td>強ければ「起因菌不明の感染」として広域。中間ならリスク評価へ。低ければ定着として治療しない</td></tr>
+<tr><td>培養がすべて陰性</td><td>宿主応答の強さ</td><td>強ければ「起因菌不明の感染」として広域。中間ならリスク評価へ。低ければ感染・定着いずれの証拠もなしと判断</td></tr>
+<tr><td>中間帯（中央列）に落ちた</td><td>ショックの有無／SOFA 2点以上の悪化／免疫抑制の有無</td><td>1つでもあれば高リスク＝広域抗菌薬。なければ低リスク＝watch and wait</td></tr>
+<tr><td>翌日</td><td>上記をもう一度全部</td><td>マス間の移動を前提に再判定する（1回で固定しない）</td></tr>
+</tbody></table></div>
+<h3>6. 宿主-病原体相互作用 — なぜ無菌性炎症が感染そっくりに見えるのか 🧬</h3>
+<ul><li>病原微生物は、宿主免疫系の<strong>直接的および間接的な活性化</strong>を介して臓器障害を起こす。</li><li><strong>PAMPs</strong>（高度に保存された微生物モチーフ）が宿主細胞上の <strong>PRRs</strong> に認識されて免疫系が活性化する。</li><li>続いて起こる炎症応答が組織傷害を生み、<strong>DAMPs</strong> が放出される。DAMPsはヒストン、HMGB1、アデノシンといった宿主分子で、細胞外環境に放出されると強力な免疫活性化因子として働き、最初の炎症応答を永続化させる。</li><li><strong>PAMPsとDAMPsはどちらもPRRsを介し、類似のシグナル伝達機構を使う</strong>。結果として同じ免疫応答と炎症カスケードが回る。</li><li>膵炎や外傷といった非感染性侵襲による組織傷害も DAMPs を放出する。<strong>共通経路があるために、無菌性侵襲が感染への免疫応答を模倣する</strong>。これが両者の鑑別を困難にしている。</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07108-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07108-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 宿主応答に影響する因子の図解（原図・無改変。©Springer / 図はBioRender.comで作成） 中央に人体の全身像。周囲から線が引かれ、宿主応答の不均一性を生む因子が配置されている。</p>
+</div>
+<p>原著は「単一の病原体に対してすら宿主間で不均一な応答が生じうる」ことをこの図で示している。図中の全ラベルを起こすと以下になる。</p>
+<div class="tw"><table>
+<thead><tr><th>図中の位置</th><th>ラベル（原文）</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>左上（砂時計アイコン）</td><td>Time since onset of infection and stage of illness</td><td>感染発症からの経過時間と病期</td></tr>
+<tr><td>右上（高齢者と杖のアイコン）</td><td>Age and comorbid conditions</td><td>年齢と併存疾患</td></tr>
+<tr><td>左中上（肺の拡大円）</td><td>Site of infection and pathogen(s) involved</td><td>感染部位と関与する病原体</td></tr>
+<tr><td>右中上（DNA二重らせん）</td><td>Genetic polymorphisms</td><td>遺伝的多型</td></tr>
+<tr><td>左中（腸管への線）</td><td>Alteration in mucosal barrier function and microbe or toxin translocation</td><td>粘膜バリア機能の変化と、微生物または毒素のトランスロケーション</td></tr>
+<tr><td>右中（腸管内細菌の拡大円）</td><td>Altered microbiome (e.g. critical illness, antimicrobials)</td><td>変化したマイクロバイオーム（重症病態、抗菌薬などによる）</td></tr>
+<tr><td>左下（注射器とワクチンバイアル）</td><td>Prior immune exposure and vaccination status</td><td>過去の免疫暴露とワクチン接種状況</td></tr>
+<tr><td>左最下（肝臓・薬剤ボトル・錠剤・細胞）</td><td>Immunocompetence (e.g. drugs, haematological malignancy, solid organ transplant, immunoparesis of critical illness)</td><td>免疫能（薬剤、血液悪性腫瘍、固形臓器移植、重症病態による免疫麻痺）</td></tr>
+<tr><td>右下（骨髄の拡大パネル）</td><td>Local, systemic and bone marrow immune responses to infection</td><td>感染に対する局所・全身・骨髄の免疫応答</td></tr>
+<tr><td>右下パネル内</td><td>HSC → Stem cell → Neutrophils → Emergency granulopoiesis（赤枠）</td><td>造血幹細胞から好中球への経路と緊急顆粒球産生</td></tr>
+<tr><td>右下パネル内</td><td>Stem cell → Lymphocyte → Decreased lymphopoiesis（白枠）</td><td>リンパ球産生の低下</td></tr>
+</tbody></table></div>
+<p>図の要点は、<strong>骨髄レベルで好中球産生は亢進し（emergency granulopoiesis）、リンパ球産生は低下する</strong>という、感染時の骨髄応答の非対称性まで含めて描いていることである。末梢血のトランスクリプトームを測るとき、この骨髄由来の細胞組成変化そのものがシグナルの実体になりうる点は、後の分類器の解釈にも効いてくる。</p>
+<h3>7. 不均一性を生む4つの源 🌐</h3>
+<h4>7-1. 病原体特異的応答</h4>
+<ul><li>宿主応答の病原体特異的な差異は同定されているが、<strong>これまでのところドメインおよび界（domain and kingdom）の分類学的階層に限られる</strong>。つまり「細菌か、真菌か、ウイルスか」レベルであって、菌種レベルではない。</li><li>患者のトランスクリプショナル応答には共通要素と特異的要素の両方があり、<strong>細菌感染と真菌感染</strong>、<strong>細菌感染とウイルス感染</strong>を区別できる。</li><li>広いカテゴリ間の差もある。グラム陽性菌とグラム陰性菌の間では、<strong>微小循環の変化</strong>、<strong>サイトカインプロファイル</strong>、遺伝子発現プロファイルに差がある。</li><li>特定の病原体に対する応答の不均一性は、<strong>重複感染、マイクロバイオームの差、遺伝的背景、免疫能、感染臓器・体腔</strong>から生じうる。</li></ul>
+<h4>7-2. マイクロバイオーム</h4>
+<ul><li>dysbiosis の発生はしばしば臨床的に明らかな感染に先行する。</li><li>病原体の増殖を許すだけでなく、<strong>マイクロバイオームの変化が免疫系をより過剰な応答へと prime する</strong>可能性があり、宿主組織傷害と敗血症のリスクを増やす。</li><li>重症病態は粘膜バリアと内皮機能も破綻させ、病原体トランスロケーションのリスクを上げる。</li><li><strong>dysbiosis をどう管理すべきかは未確定</strong>。感受性のある集団で病原微生物の負荷を減らす戦略（<strong>選択的消化管除菌 SDD</strong>）は罹病率・死亡率の低減に有望性を示した。プロバイオティクスなど他のアプローチは結果がまちまち（mixed results）。</li></ul>
+<h4>7-3. 宿主ゲノム</h4>
+<ul><li>宿主ゲノムの差異は、感染に対する感受性と、感染関連の終末臓器障害の差と関連する。</li><li>特筆すべきは、<strong>感染による死亡は心疾患や悪性腫瘍による死亡よりも遺伝率が高い</strong>という知見。ただし遺伝因子が感染死亡に及ぼすインパクトの絶対的な大きさについては議論が続いている、と原著は留保する。</li><li>最近の系統的レビューは敗血症リスクに関連する遺伝子多型を同定しており、そのなかに<strong>PRRsの8つのバリアント</strong>が含まれる。</li><li><strong>TNF-α などのサイトカインや凝固因子の遺伝的多型</strong>も、感染とその後の敗血症への個人差を説明しうる。</li></ul>
+<h4>7-4. 宿主免疫能</h4>
+<ul><li>免疫能の差は感染への感受性と臨床経過を変え、<strong>診断目的の宿主応答プロファイリングを交絡させるリスク</strong>がある。</li><li>免疫不全患者はより広範な病原体のリスクにさらされ、低病原性の微生物ですら生命を脅かす臓器障害を起こしうる。</li><li>さらに、免疫応答を立ち上げる能力が低下しているために<strong>感染の臨床所見自体が目立たなくなる</strong>。</li><li>興味深い逆説として、感染感受性が高いにもかかわらず、<strong>固形臓器移植後の免疫抑制患者の死亡率は免疫正常患者より高くなく、場合によっては低い</strong>（潜在的交絡因子を調整後も）。</li><li>免疫抑制は、もともと免疫正常だった宿主における<strong>敗血症の合併症</strong>でもある。敗血症から回復期にある患者は反復感染のリスクが高い。機序は複数あり、<strong>炎症誘発性の細胞アナジーとアポトーシス</strong>、および治療誘発性の免疫抑制（例：グルココルチコイド療法）を含む。</li></ul>
+<h4>7-5. 感染と宿主応答のコンパートメント化</h4>
+<ul><li>感染の起源臓器（肺、腹腔、尿路、髄膜、原発性菌血症）によって院内死亡率が異なる。</li><li><strong>どの組織特異的免疫細胞（例：肺胞マクロファージ）が関与するか</strong>によって、トランスクリプトーム応答と免疫応答も異なりうる。</li><li>以上の結果として、「敗血症は感染に対する共通の定型的な宿主応答である」という考えは、<strong>明確な表現型（フェノタイプ）やサブクラスの存在を認める方向</strong>へ移行しつつある。サブクラスは臨床データまたは -omic データ（トランスクリプトーム、メタボローム、プロテオーム）で特徴づけられる。</li><li>ただし<strong>敗血症サブクラスは一貫して同定するのが難しい</strong>。上記の不均一性に加え、もう一つの理由が<strong>タイミング</strong>である。時系列解析では、感染に対する免疫細胞の転写が経時的に動的かつ急速にシフトすることが示されている。</li></ul>
+<h3>8. 宿主応答を測る技術の全体像 🧪</h3>
+<p>生物学と計算科学の進歩により、微生物の存在に対する宿主の特異的免疫応答を特徴づけるツールが生まれた。原著はこれを<strong>トランスクリプトミクス／プロテオミクス／機能的免疫アッセイ</strong>の3つに分類する。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07108-6" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07108-6）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 免疫細胞が病原体に遭遇したときの応答と、その検出法（原図・無改変。©Springer / 図はBioRender.comで作成） 上段が患者体内で起こる免疫生物学的応答、下段がそれをどう測るか。原図では「アッセイ可能な応答」が太字、「進行中のプロセス」が斜体で書き分けられている。</p>
+</div>
+<p>図中の全要素を起こす。</p>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>図中の要素（原文）</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>左端</td><td>Immune cells encounter pathogens and signalling is triggered</td><td>免疫細胞が病原体に遭遇しシグナル伝達が始まる（細胞の内部に受容体と核が描かれている）</td></tr>
+<tr><td>上段・起点</td><td>Immuno-biological response</td><td>免疫生物学的応答（ここから3方向に分岐）</td></tr>
+<tr><td>上段・経路1（斜体）</td><td>Signalling via pre-formed proteins</td><td>既存タンパクを介したシグナル伝達 → 翻訳後修飾へ</td></tr>
+<tr><td>上段・経路2（斜体）</td><td>Transcription factor activation</td><td>転写因子の活性化 → Gene transcription（遺伝子転写・DNAとmRNAのアイコン）</td></tr>
+<tr><td>上段・経路3（斜体）</td><td>Release of pre-formed stores</td><td>既存貯蔵分の放出 → 分泌される炎症性タンパクへ</td></tr>
+<tr><td>転写の下流（斜体）</td><td>Translation to protein</td><td>タンパクへの翻訳</td></tr>
+<tr><td>上段・帰結1</td><td>Post-translational modifications (e.g. phosphorylation)</td><td>翻訳後修飾（例：リン酸化）</td></tr>
+<tr><td>上段・帰結2</td><td>secreted inflammatory proteins</td><td>分泌される炎症性タンパク（青い粒子として描画）</td></tr>
+<tr><td>上段・右端</td><td>Immune cell function</td><td>免疫細胞機能（血管内皮を遊走する細胞として描画）</td></tr>
+<tr><td>下段・見出し</td><td>Assay 'read-out' for response</td><td>応答のアッセイ読み出し</td></tr>
+<tr><td>下段・左</td><td>Gene expression profiling (e.g. whole transcriptome sequencing or targeted RT-PCR)</td><td>遺伝子発現プロファイリング（全トランスクリプトーム配列決定または標的RT-PCR）。ヒートマップとして描画</td></tr>
+<tr><td>下段・中</td><td>Protein detection (e.g. immunoassay, phospho-state assay)</td><td>タンパク検出（イムノアッセイ、リン酸化状態アッセイ）。96ウェルプレートとして描画</td></tr>
+<tr><td>下段・右</td><td>Immune function assays (e.g. phagocytosis, transmigration, cell-surface protein expression)</td><td>免疫機能アッセイ（貪食能、遊走能、細胞表面タンパク発現）。抗体・貪食細胞・トランスウェルとして描画</td></tr>
+</tbody></table></div>
+<p>この図の含意は、<strong>同じ「宿主応答」でも測る階層が違えば別の情報を見ている</strong>ということである。転写（mRNA）は「これから作るもの」、タンパク検出は「今あるもの」、機能アッセイは「実際にできること」を見る。後述するPCTの例（第12節）はこの階層のズレを最も鮮明に示す。</p>
+<h3>9. トランスクリプトーム応答と分類器 🧬</h3>
+<ul><li><strong>臨床導入が最も近いのはトランスクリプトーム診断</strong>である。原著は「感染と無菌性炎症の鑑別においてPCTより良好な性能を持つトランスクリプトーム診断がすでに開発中であり、ここで論じる新規宿主応答診断のうち<strong>最初に臨床実践に入る可能性が高い</strong>」と明言する。</li><li>同時に強い警告を置いている。「シーケンシングと機械学習という複雑さの印象は<strong>優れたマーケティングになる</strong>が、重大な課題を覆い隠す。だから臨床医はこれらの診断の強みと弱みを理解しておくことが重要である」。</li><li><strong>トランスクリプトミクスとは</strong>：静的なDNAとタンパク発現の間を橋渡しするmRNAを配列決定し、細胞シグナルのパターンを同定すること。このパターンは急速に形成され、<strong>臨床的に明らかな感染に数日先行する</strong>。</li><li>全トランスクリプトームの配列決定は診断シグネチャの同定に有用だが、<strong>臨床使用可能な検査にするには診断価値のある少数の遺伝子の発現を測ることが必要</strong>。いったん開発されれば<strong>所要時間は1時間まで短縮できる</strong>。</li><li><strong>トレードオフ</strong>：予測モデルはしばしば精度のために解釈可能性（透明性）を犠牲にする。</li></ul>
+<h4>Table 3. 開発中のトランスクリプトーム宿主応答診断（原表を日本語化・数値は原文どおり）</h4>
+<div class="tw"><table>
+<thead><tr><th>診断法</th><th>対象集団</th><th>測定時期</th><th>スコアの形</th><th>検証時の性能</th><th>遺伝子</th></tr></thead>
+<tbody>
+<tr><td>FAIM3:PLAC8</td><td>市中肺炎（CAP）または敗血症が疑われるICU入室</td><td>ICU入室後48時間以内</td><td>遺伝子発現比</td><td>CAP：感度 97.1%、特異度 28.6%／敗血症：AUROC 0.69–0.78</td><td>FAIM3、PLAC8</td></tr>
+<tr><td>SeptiCyte LAB &amp; RAPID</td><td>敗血症が疑われるICU入室</td><td>ICU入室後24〜48時間以内</td><td>2つの対数化した遺伝子発現比の和</td><td>LAB：感度 99%、特異度 56%、AUROC 0.68–0.89／RAPID：AUROC 0.82–0.85</td><td>CEACAM4、LAMP1、PLAC8、PLA2G7</td></tr>
+<tr><td>Sepsis Metascore</td><td>敗血症が疑われるICU入室／ICU内二次感染／新生児敗血症</td><td>ICU入室期間を通じて</td><td>感染 z スコア</td><td>敗血症：AUROC 0.80–0.82／二次感染：0.68–0.84（時期を合わせたベースラインを使用）／新生児敗血症：AUROC 0.92</td><td>11遺伝子セット</td></tr>
+<tr><td>IMX-BVN-2</td><td>細菌・ウイルス感染または敗血症が疑われる救急外来受診</td><td>救急外来にて</td><td>グレード化した尤度帯を持つニューラルネットワーク出力</td><td>細菌感染：AUROC 0.89／ウイルス感染：AUROC 0.83</td><td>29遺伝子セット</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Table 3 を読むときの落とし穴（3点目） <mark class="hl">原表には検証コホートの症例数（n）が一切書かれていない</mark>。感度・特異度・AUROCだけが並ぶ。母数が分からない性能値は、当院での採用判断の根拠にならない。数値を引用するときは必ず一次文献（本ノート末尾の引用文献一覧）まで戻ること。<strong>「n が書かれていない」ことは本文にも明記されていないので、これは本ノートによる指摘である</strong>。</p>
+</div>
+<h4>各検査の詳細（本文記述）</h4>
+<ul><li><strong>FAIM3:PLAC8 比</strong>：最も単純な形。発現が強く逆方向に動く2遺伝子の比で、市中肺炎を非感染性炎症から区別する。PCTを含む複数の血漿バイオマーカーより良好な性能。CAP以外を起源とする敗血症でも検証されたが、<strong>高い感度が低い特異度と引き換えになっており、抗菌薬処方へのインパクトは限定的</strong>になる（感度97.1%・特異度28.6%）。</li><li><strong>SeptiCyte</strong>：やや複雑で、2つの比を組み合わせる。FAIM3:PLAC8と比べ<strong>感度を落とさずに特異度を改善</strong>した（感度99%・特異度56%）。SeptiCyte LAB（検査時間6時間）として商業化されており、短縮版の PLAC8/PLA2G7 比が SeptiCyte RAPID（検査時間1時間）である。</li><li><strong>Sepsis Metascore</strong>：11遺伝子シグネチャ。複数のデータセットで検証され、敗血症を非感染性炎症（SIRS、外傷、重症病態）から区別する。スコアは「<strong>感染 z スコア</strong>」＝陽性側と陰性側の遺伝子発現の幾何平均の差であり、直感的でない。一方で複数の検証セットを持つこと、ICU入室時だけでなく複数時点で使えることが魅力である。</li><li><strong>IMX-BVN-2</strong>：レビュー中で最も複雑。<strong>29遺伝子を用いるニューラルネットワーク分類器</strong>で、救急外来受診患者の細菌・ウイルス感染を同定する。診断性能は良好でPCTに対する優越性が示唆されるが、原著は明確に留保する — 訓練データにおいて判定を行う臨床医がPCTの結果を見ることができたため、慎重に解釈すべきである。出力は0から1のスコアで、ニューラルネットワークが算出し透明性はほとんどない。解釈可能性を改善するため、感染の尤度に対応するカットオフが定義されている。</li></ul>
+<h4>遺伝子セットの導出方法 — データ駆動 vs 生物学駆動</h4>
+<div class="tw"><table>
+<thead><tr><th>方式</th><th>やり方</th><th>長所</th><th>短所</th></tr></thead>
+<tbody>
+<tr><td>データ駆動（data-driven）</td><td>統計的アプローチ。感染患者を最もよく判別する遺伝子を同定する</td><td>判別性能を直接最適化できる</td><td>同定された遺伝子が機序的に妥当に見えても、病態生理学的関連は仮定できない</td></tr>
+<tr><td>生物学駆動（biology-driven）</td><td>生物学的に意味のある細胞集団やパスウェイから出発する</td><td>theragnostic testing（診断と同時に疾患修飾治療を導く検査）の可能性がある</td><td>開発が難しい</td></tr>
+</tbody></table></div>
+<p><strong>生物学駆動の実例（Reyes らの研究）</strong>：敗血症で拡大する新しい単球サブタイプ <strong>MS1</strong> を同定した。MS1は、非合併感染症患者や非敗血症ICU患者と比べて敗血症で増加し、LPS刺激で誘導可能である。MS1マーカー遺伝子を用いてRNAseqデータからその存在量を推定する方法は敗血症の同定には有望だったが、感染と無菌性炎症の鑑別にはあまり有効でなかった。さらに彼らは MS1マーカー遺伝子＋PLAC8＋CLU（後2者はデータ駆動で同定）というハイブリッド分類器を提案し、FAIM3:PLAC8比やSeptiCyteと同等の性能を達成した。</p>
+<p><strong>機械学習由来の検査を評価するときの注意</strong>：従来のバイオマーカーのように精度だけを見てはいけない。<strong>バイアス-バリアンストレードオフ</strong>を考える必要がある。バイアスとはモデルの予測が真値からどれだけ離れているか、バリアンスとは異なる訓練データを使ったら予測がどれだけ変わるかである。この2つはU字カーブを描く。すなわち精度を上げると一般化可能性がしばしば下がる。</p>
+<h3>10. Table 2 — 仮想の新規宿主応答マーカーが入ったらどう変わるか（原表を日本語化）</h3>
+<p>Table 2 は「もし理想的な新規宿主応答マーカーが手に入ったら、判断がどう変わるか」を示す<strong>思考実験のマトリクス</strong>である。Table 1（現行のベストプラクティス）と対比して読むよう原著が指示している。</p>
+<h4>列（宿主応答）の定義</h4>
+<div class="tw"><table>
+<thead><tr><th>列</th><th>原文の定義</th></tr></thead>
+<tbody>
+<tr><td>左</td><td>novel host marker(s) of infection positive（新規宿主マーカーが陽性）</td></tr>
+<tr><td>中</td><td>Novel host marker negative but clinical/radiological suspicion of infection（新規宿主マーカーは陰性だが臨床的・画像的に感染を疑う）</td></tr>
+<tr><td>右</td><td>Low clinical suspicion and no markers elevated（臨床的疑いが低くマーカー上昇なし）</td></tr>
+</tbody></table></div>
+<h4>9マスの判定と行動</h4>
+<div class="tw"><table>
+<thead><tr><th>微生物学 ＼ 宿主応答</th><th>左：新規マーカー陽性</th><th>中：新規マーカー陰性だが臨床・画像上の疑いあり</th><th>右：疑い低くマーカー上昇なし</th></tr></thead>
+<tbody>
+<tr><td>絶対的病原体が多量発育</td><td>感染。標的抗菌薬</td><td>可能性のある感染。高リスクなら標的抗菌薬、低リスクなら watch and wait</td><td>定着。抗菌薬の適応なし（除菌を検討する場合を除く）</td></tr>
+<tr><td>閾値下発育または非病原性菌</td><td>感染。起因菌は不確実。広域抗菌薬</td><td>定着。watch and wait</td><td>定着。抗菌薬の適応なし</td></tr>
+<tr><td>微生物学的検査が陰性</td><td>感染。起因菌は不確実。広域抗菌薬</td><td>感染・定着いずれも考えにくい。watch and wait。抗菌薬の閾値を高くする</td><td>感染・定着いずれの証拠もなし</td></tr>
+</tbody></table></div>
+<p><strong>原表の脚注（そのまま）</strong>：分子微生物学的検査の急速な進歩は、<strong>陽性だが臨床的に曖昧な微生物検出の割合を著しく増加させる</strong>。不適切な抗菌薬使用の増加を避けるため、新規宿主応答マーカーはこれらの検出の解釈において有望である。星1つ：高リスクとは、ショックの存在、臓器障害の悪化（例：SOFAスコアの2点以上の上昇）、または免疫抑制によって示される。</p>
+<h4>Table 1 と Table 2 の差分（何が減るのか）</h4>
+<div class="tw"><table>
+<thead><tr><th>マス</th><th>Table 1（現行）</th><th>Table 2（新規マーカーあり）</th><th>変化</th></tr></thead>
+<tbody>
+<tr><td>多量発育 × 中間帯</td><td>感染。標的抗菌薬</td><td>可能性のある感染。高リスクのみ標的抗菌薬、低リスクは watch and wait</td><td>一部で抗菌薬を回避できる</td></tr>
+<tr><td>閾値下・非病原性 × 中間帯</td><td>可能性のある感染。高リスクは広域</td><td>定着。watch and wait</td><td>広域抗菌薬がまるごと不要になる</td></tr>
+<tr><td>培養陰性 × 中間帯</td><td>可能性のある感染。高リスクは広域</td><td>感染・定着いずれも考えにくい。抗菌薬の閾値を高くする</td><td>培養陰性例の広域抗菌薬が減る</td></tr>
+<tr><td>中間帯以外の6マス</td><td>—</td><td>—</td><td>変化なし</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>差分の解釈（4点目） Table 2 で変わるのは<strong>中央列の3マスだけ</strong>である。そして原著自身が「中央列が患者の大多数を含む」と書いている以上、<mark class="hl">新規宿主応答マーカーの臨床的価値は「大多数の患者の抗菌薬判断を動かすかどうか」に集約される</mark>。裏を返せば、中央列で決着をつけられない検査には導入する意味がほとんどない。当院で新しい感染診断法の売り込みを受けたときの第1の質問は、「<strong>中間帯の患者で決着がつくのか</strong>」であるべきである。</p>
+</div>
+<h3>11. 宿主トランスクリプトーム × マイクロバイオームシーケンシングの統合 🔗</h3>
+<ul><li>宿主応答診断と mNGS による微生物検出を統合するのは有望である。微生物検出率が劇的に増える状況で抗菌薬使用を抑える助けになりうるからである。ただし<strong>前節の分類器よりも実用化からは遠い</strong>。</li><li><strong>mNGSはシンドロミックPCRパネル検査と違い、検体中に存在するすべての微生物を検出しうる</strong>。このアプローチは下気道感染症（LRTI）診断のための気管吸引液、および重症成人の敗血症に適用されている。</li><li><strong>重要な革新は規則ベースモデル（RBM）の適用</strong>である。mNGS結果に対し、既知の病原性で重みづけしたうえで存在量の多い微生物を同定することで、病原体と常在菌を区別する。</li></ul>
+<h4>統合モデルの性能（数値は原文どおり）</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>手法</th><th>性能</th></tr></thead>
+<tbody>
+<tr><td>気管吸引液（LRTI）</td><td>RBM単独</td><td>正確度 95.5%</td></tr>
+<tr><td>血液培養との比較</td><td>RBM単独</td><td>正確度 78%</td></tr>
+<tr><td>微生物学的検査陰性のLRTI（臨床的に判定）</td><td>RBM</td><td>推定病原体を 62% で検出</td></tr>
+<tr><td>培養陰性の敗血症</td><td>RBM</td><td>推定病原体を 42% で検出</td></tr>
+<tr><td>LRTI</td><td>RBM ＋ 12遺伝子宿主応答分類器</td><td>感度 100%、特異度 87.5%</td></tr>
+<tr><td>LRTI除外ツールとして使った場合</td><td>同上</td><td>LRTIなし群で抗菌薬使用日数 38%削減（推定値）</td></tr>
+<tr><td>敗血症</td><td>mNGS ＋ 宿主応答分類器</td><td>感度 99%、特異度 78%</td></tr>
+</tbody></table></div>
+<ul><li><strong>RBMの弱点</strong>として原著が挙げるのは、①培養での<strong>複数菌増殖</strong>の同定、②血液からの呼吸器ウイルスの同定 の2点。</li><li><strong>気管吸引液の宿主応答プロファイリング</strong>では、<strong>自然免疫応答の亢進</strong>と、酸化ストレス応答およびMHCクラスII受容体シグナル伝達経路の抑制が同定された。ウイルス感染では、IFN誘導性の抗ウイルス蛋白である RSAD2 と OAS3 が細菌感染と比べて亢進していた。</li><li><strong>敗血症では好中球脱顆粒と自然免疫シグナル伝達の亢進</strong>が同定された。ウイルス性敗血症では<strong>インターフェロンシグナル伝達の亢進</strong>が見られ、有効なウイルス特異的分類器が開発された。</li><li>原著は明記する — <strong>両統合モデルとも前向き検証を要する</strong>。</li></ul>
+<h4>Box 1（原文）— 宿主トランスクリプトームとマイクロバイオームの同時評価でできる可能性のあること</h4>
+<ol><li>培養陰性例において起因菌を同定する</li><li>常在菌または定着菌である可能性が高い微生物を同定する</li><li>微生物学的検査が陰性であっても、感染に対する特異的な宿主応答を同定する</li><li>免疫応答が細菌を標的にしているのかウイルスを標的にしているのかを示す</li><li>感染を正確に<strong>除外</strong>できる患者の割合を増やす</li><li>臨床徴候が現れる前に感染の証拠を同定する</li></ol>
+<h3>12. 発症前（pre-symptomatic）の感染同定 ⏱️</h3>
+<ul><li>感染特異的な宿主応答シグネチャは<strong>臨床症状の出現前に同定できる</strong>。</li><li><strong>Tsitsiklis らの研究</strong>：COVID-19に合併するVAPの発症前の宿主応答を検討した。二次性肺炎の臨床的認識の<strong>2日前</strong>に、細菌感染と一致する宿主応答の変化（好中球脱顆粒、抗原提示、TLR＝Toll様受容体シグナル伝達、サイトカインシグナル伝達）を示した。</li><li><strong>さらに重要な所見</strong>：同じ経路が、<strong>挿管直後</strong>、および VAP を発症しなかった患者と比べてVAP発症の最大2週間前には抑制されていた。</li><li>この知見は先行データと整合する。すなわち、入室中にVAPリスクの高い患者を同定する宿主応答障害の存在と、COVID-19におけるVAPの臨床的認識前の検出である。</li><li>原著の解釈：これらは<strong>コンパートメント特異的な宿主応答シグネチャの重要性</strong>と、<strong>同じ経路が異なる時点で異なる方向に動く</strong>（素因としての抑制と、感染時の亢進）というダイナミクスの重要性を強調する。</li><li><strong>待機手術患者</strong>でも、臨床的認識の<strong>3日前</strong>に発症前の宿主応答シグネチャが同定されている。血液由来の遺伝子シグネチャは、感染を非感染性の全身性炎症から区別し、さらに敗血症を非合併感染症から区別することができた。</li></ul>
+<h3>13. タンパクとプロテオミクス 🧫</h3>
+<ul><li><strong>CRPとPCTは炎症性宿主応答の典型的バイオマーカー</strong>だが、感染と無菌性炎症を区別することはできない。</li><li><strong>好中球表面のCD64発現は、より大規模な試験でこれらより一貫して良好な性能を示した唯一の新規マーカー</strong>である（詳細は機能的免疫アッセイの節）。</li><li><strong>肺胞サイトカイン</strong>も、肺炎を非感染性炎症から区別する点で有望性を示しており、サイトカイン応答の顕著なコンパートメント化が見られる。しかし この検査を臨床実践に実装しても抗菌薬処方は変わらなかった。原著はこの失敗を重く扱い、「臨床的意思決定にインパクトを与えられなかったことは、<strong>臨床医の間での馴染みのなさ</strong>という新技術に共通の課題を浮き彫りにする」と述べる。</li><li><strong>全プロテオーム解析</strong>という新しいアプローチ。高スループットのタンデム質量分析でプロテオーム解析をスケールさせた研究が、ICU入室敗血症患者を健常ボランティア・待機手術患者・非感染患者と比較して数千のタンパクを検討し、<strong>一貫して同定された差次的存在量タンパクは14個</strong>だった。ただし診断性能はまだ検討されていない。</li><li>全プロテオーム解析は、従来のバイオマーカーより<strong>トランスクリプトミクスに類似性が高い</strong>新興領域である。トランスクリプトーム・マイクロバイオームとの統合（マルチオミクス）が、感染に特異的な宿主炎症応答を同定する新規手法を提供する。</li><li><strong>翻訳後修飾（PTM）</strong>：細胞内シグナル伝達はしばしばタンパクの翻訳後修飾（アミノ酸へのアセチル基・リン酸基・メチル基の付加や除去）によって実現される。側鎖の変化はタンパクの機能・可溶性・輸送・局在を変える。病原体への曝露はタンパク側鎖に急速かつ広範な変化を誘導する（例：黄色ブドウ球菌に曝露した好中球のリン酸化の変化）。多くの応答は複数の刺激に共通するが、特異的なシグナル伝達応答を同定できれば感染の正確な同定につながる可能性がある。PTM検出の診断ツールとしての可能性は<strong>がん領域では注目されているが、感染領域では未開拓</strong>である。</li></ul>
+<h3>14. マルチオミクスのデータセット間の関係 — PCTを例に 🧠</h3>
+<ul><li>mRNAはタンパクをコードするが、<strong>タンパクの存在量とそれをコードするmRNAの存在量の間には一貫した乖離がある</strong>。</li><li>測定上の技術的困難も無視すべきでないが、ある研究者らは、<strong>ゲノム・トランスクリプトーム・プロテオームの間の情報の流れは、コンピュータにおけるハードディスク → RAM → キャッシュメモリのメモリ階層に類似</strong>しており、関連はするが機能的に異なる記録が生じると仮説を立てている。</li><li><strong>PCTを例にすると</strong>：PCTは <strong>CALC-I 遺伝子</strong>にコードされ、切断されて N-プロカルシトニン、カルシトニンカルボキシペプチド-1（CCP-I）、カルシトニン（CT）を形成する。敗血症ではCALC-Iが組織で広範に発現するためPCT産生が増える。</li><li>ここに階層のズレが現れる。<strong>血中のCALC-I遺伝子発現を測ってもこれを反映しない可能性があり</strong>、実際 CALC-I は本総説がレビューした宿主応答分類器のいずれにも含まれていない。さらに、PCTとN-プロカルシトニンは血清中で有意に上昇したままだが、<strong>それはCT（カルシトニン）値の上昇には翻訳されない</strong>。</li><li>原著の結語：これらの例は、<strong>-omic データのスナップショットから複雑で動的なシステムを理解することの難しさ</strong>を示す。これらのデータセットは非同義的（non-synonymous）で、直感に反する相互作用を持つ。<strong>我々の理解に対する知的謙虚さが不可欠である</strong>。</li></ul>
+<h3>15. 機能的免疫アッセイ（FIAs）🔬</h3>
+<p>FIAs は多様な検査群である。原著は、感染と無菌性炎症を鑑別しうる感染特異的宿主応答の同定に可能性のある3つを論じる。</p>
+<h4>15-1. 好中球CD64発現</h4>
+<ul><li>CD64は<strong>IgG受容体</strong>で、好中球上での発現は多様な炎症メディエータによる刺激後に増加する。</li><li>発現増加は<strong>感染 vs 無菌性炎症</strong>の鑑別で診断的有用性を示しており、<strong>ICU入室時に最良の性能</strong>を示す。一方、後から発生するICU獲得感染ではより控えめな性能である。</li><li>測定には<strong>フローサイトメトリー</strong>が必要。ポイントオブケア型フローサイトメーターは次第に利用可能になっているが、この検査はまだ一般的には提供されていない。</li></ul>
+<h4>15-2. 好中球の遊走（transmigration）</h4>
+<ul><li>細胞遊走は宿主免疫応答の重要な機能的構成要素である。顕微鏡とタイムラプス撮影で細胞遊走は定量化できる。</li><li>好中球の遊走パターンの解析により、<strong>自発的遊走（spontaneous migration）という独特の表現型</strong>が明らかになった。これは<strong>敗血症を伴う熱傷患者に特異的</strong>で、敗血症を伴わない熱傷患者ではまれにしか観察されなかった。</li><li>このパターンは<strong>しばしば敗血症の臨床的認識の1〜2日前に出現</strong>した。</li><li>性能：重症熱傷患者における敗血症同定について<strong>感度80%、特異度77%</strong>。</li></ul>
+<h4>15-3. 肺の生体内顕微鏡観察（intravital microscopy）</h4>
+<ul><li>顕微鏡の小型化により、臨床使用可能な<strong>生体内内視鏡顕微鏡</strong>が開発された。</li><li>ある研究グループはこれを<strong>蛍光プローブの投与と組み合わせ、肺胞内の細菌を可視化</strong>した。</li><li><strong>限界は侵襲性と部位特異性</strong>である。</li></ul>
+<h3>16. 宿主応答診断の課題と限界 ⚠️</h3>
+<p>原著が挙げる課題は3層に分かれる。</p>
+<p><strong>① 生物学的不均一性</strong></p>
+<ul><li>感染に対する宿主応答には<strong>有意な個人間変動</strong>が存在する（Fig. 1）。</li><li>応答は<strong>一次感染と二次感染</strong>とで、また<strong>先行する侵襲の種類（外傷、手術など）</strong>によって明らかに異なる。</li><li><strong>重複感染のインパクトは未解明</strong>のままである。</li><li>これら不均一な条件が診断性能に与える影響の同定は決定的に重要であり、<strong>個々の患者のベースラインとの比較が必要になるかもしれない</strong>。</li></ul>
+<p><strong>② 機械学習モデルに固有の問題</strong></p>
+<ul><li>CRPとPCTの生物学的含意と限界はよく知られており、臨床判断に組み込まれている。<strong>複雑なモデルから出るスコアには、推論の基盤となる生物学的根拠がない</strong>。</li><li>機械学習のバイアスもよく認識されている。害を避けるため、開発者と臨床医は、<strong>モデルが何を分類しているのかを明確にし、多様な訓練データを使い、解釈可能性と既知の知識との比較を通じて意思決定を検査し、実装後の性能を監視しなければならない</strong>。</li></ul>
+<p><strong>③ 臨床的便益への翻訳</strong></p>
+<ul><li>最終的に結果は臨床的便益に翻訳されなければならない。ここが重大な課題になりうる。</li><li><strong>明確に定義された臨床的役割を持たないトランスクリプトーム宿主応答診断が急速に増殖し、しかも現行実践に対する利得がしばしば限界的である場合、便益そのものが損なわれかねない</strong>。</li><li>逆に、<strong>不透明・時間がかかる・高価な検査は広範な採用に至らない</strong>。</li><li>提言：開発者と臨床医は<strong>最も頑健で、解釈可能で、アクセスしやすいもの</strong>を優先すべきである。また、<strong>特定の臨床問題に焦点を当てること</strong>が歓迎される（例：重症病態と無菌性炎症のなかでの二次感染の同定、非細菌性敗血症のような治療を変える病態）。臨床医は -omics と機械学習が導入する概念に慣れ、開発者と協働して頑健な検証と効果的な実装を確保すべきである。その手段として、適応的臨床試験への組み込み、実装後モニタリング、診断スチュワードシップが挙げられている。</li></ul>
+<h4>Box 2（原文）— トランスクリプトーム・プロテオーム・機能的免疫アッセイの臨床実装への障壁</h4>
+<ol><li>関連する機序、疾患表現型、治療標的の解明</li><li>結果の解析と解釈に伴う<strong>金銭的・時間的・計算資源的コスト</strong>の削減</li><li>患者間・検査室間・バッチ間の比較を可能にする<strong>アッセイの標準化</strong></li><li>頑健な精度管理、測定誤差の同定と報告</li><li>サンプリングと処理の過程における<strong>細胞ストレスの影響の最小化</strong></li><li>動的で不均一な患者群における「<strong>正常値</strong>」の定義</li><li>臨床実践でこれらのパラメータを日常的に評価できるよう、適切な技術プラットフォームを広く利用可能にすること</li></ol>
+<h3>17. 結論（原文の要旨）📝</h3>
+<ul><li>全身性に炎症を起こした重症患者において感染を診断することは困難である。</li><li>分子病原体検査の登場は微生物検出の感度向上をもたらす一方、<strong>感染を無菌性炎症および定着から区別するうえでさらなる困難をもたらしうる</strong>。</li><li>侵入微生物に対する宿主応答は、感染および敗血症を定義し、したがって診断するうえで決定的である。この応答には微生物特異的な側面と、無菌性侵襲による宿主組織傷害と重なる側面の両方がある。</li><li>宿主応答は、<strong>基礎の遺伝型、免疫能、併用薬剤、患者の内因性微生物叢</strong>を含む多数の因子によって修飾される。したがって感染の特異的な宿主マーカーの同定は困難である。</li><li>宿主応答は、転写・プロテオーム・機能プロファイリングという多様なモダリティで、血液または感染部位から採取した検体を用いて調べられる。</li><li>利用可能なすべての転写産物やタンパクの無偏りなプロファイルを得ることが可能になり、単一細胞レベルまで分解できるようになってきたが、<strong>臨床使用可能なツールは最も情報量の多いマーカーに絞り込み、複雑で熟練した解析を要さずに、再現性と信頼性のある結果を短時間で返す必要がある</strong>。</li><li><strong>有望な技術がいくつかあるものの、臨床応用可能なアッセイのほとんどはまだ開発段階を越えておらず、臨床的意思決定に対するインパクトは不確実なままである。</strong></li></ul>
+<h2>🔍 旧記述とPDF全文の照合 — 見つかった食い違い</h2>
+<p>本ノートは2026-07-31に抄録と導入部分のみから作成された概要ノートだった（旧85行）。今回、原著PDF全文（12ページ・61,919字）と1項目ずつ照合した結果は以下のとおりである。<strong>PDFを正とし、旧記述との差を明記する。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>旧ノートの記述</th><th>PDF本文</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>mNGSの3行表（血液 7.9%→41%／喀痰 39%→96%／尿 32%→100%）</td><td>数値はすべて一致</td><td>数値は正しい。ただし出典が文献4・5・6の3つの別研究であることが旧ノートに書かれておらず、同一集団の比較のように読める。尿の値は腎移植レシピエントの反復性UTIという特殊集団 → 文脈の欠落を補正した</td></tr>
+<tr><td>「血液培養は約10%で陽性」「偽陽性率 0.3〜5.5%」</td><td>一致</td><td>正しい</td></tr>
+<tr><td>定量培養「洗浄液 10⁴、気管吸引液・喀痰 10⁵〜10⁶ CFU/mL」</td><td>一致</td><td>正しい</td></tr>
+<tr><td>「CRP・PCTは開始より早期中止のエビデンスが良好」</td><td>一致</td><td>正しい</td></tr>
+<tr><td>「Table 1 の中央の列が大多数の症例を含む」</td><td>一致</td><td>正しい</td></tr>
+<tr><td>「Table 1 の判断マトリクスの内容は抽出範囲外」（警告コールアウト）</td><td>3×3の全セルとPCT閾値・リスク定義が本文にある</td><td>記載漏れ → 第5節で全セルを収録。警告コールアウトは削除</td></tr>
+<tr><td>「宿主応答プロファイリングの各技術の具体的な性能は抽出範囲外」</td><td>Table 3 に4検査の感度・特異度・AUROCがある。統合モデル、CD64、好中球遊走の数値もある</td><td>記載漏れ → 第9・11・15節で全数値を収録</td></tr>
+<tr><td>「宿主応答プロファイリングは臨床実装された診断法ではない」</td><td>不正確。SeptiCyte LAB（6時間）・SeptiCyte RAPID（1時間）は「商業化されている（being commercialized）」と明記。肺胞サイトカイン検査は臨床実践に実装され、RCTで抗菌薬処方が変わらなかった。CD64はフローサイトメトリーで測定可能だが「まだ一般的には提供されていない」</td><td>旧記述の誤り。正確には「臨床応用可能なアッセイのほとんどは開発段階を越えていない」（原文）であって、「実装ゼロ」ではない。商業製品は既に存在し、実装されて失敗した例まである → 第9・13節で修正</td></tr>
+<tr><td>「現時点で宿主応答プロファイリングは実用段階にない」（臨床への示唆）</td><td>同上</td><td>同じ誤りの再掲。実装済みだがアウトカムを変えられなかったという、より厳しい事実に置き換えた</td></tr>
+<tr><td>「PCTが上昇する非感染性状況」への言及なし</td><td>Table 1 脚注に「最近の大手術・外傷・重症熱傷・心原性ショック」と明記</td><td>記載漏れ → 実践への示唆に追加</td></tr>
+<tr><td>「Table 2」への言及なし</td><td>新規宿主応答マーカーがあった場合の対比マトリクスが存在</td><td>記載漏れ → 第10節を新設。差分は中央列3マスのみという重要な含意を追加</td></tr>
+<tr><td>「Box 1・Box 2」への言及なし</td><td>統合診断でできること6項目、実装障壁7項目</td><td>記載漏れ → 第11・16節に収録</td></tr>
+<tr><td>「発症前診断」への言及なし</td><td>VAP 2日前、術後感染 3日前、VAP発症の最大2週間前の経路抑制</td><td>記載漏れ → 第12節を新設</td></tr>
+<tr><td>「IMX-BVN-2 の PCT 優越性」への言及なし</td><td>訓練データで判定医がPCTを見られたため慎重解釈と原著が留保</td><td>記載漏れ → 第9節に収録。原著の慎重さを再現</td></tr>
+<tr><td>frontmatter の doi・published・journal・title_en</td><td>すべてPDFと一致（ICM 2023;49(7):760-771）</td><td>修正不要</td></tr>
+</tbody></table></div>
+<h2>🧪 既存ノートとの整合</h2>
+<ul><li><span class="wl">感染症・敗血症のバイオマーカーをベッドサイドでどう使うか（ナラティブレビュー・ICM2023）</span>：本総説の文献11がこのノートの原著（Póvoa P, Coelho L, Dal-Pizzol F ら, Intensive Care Med 2023;49:142）である。本総説はCRP・PCTの詳細を意図的にそちらへ委譲している。<strong>2本は同じ号周辺の姉妹関係にあり、セットで読むのが正しい</strong>。矛盾はない。</li><li><span class="wl">プロカルシトニンの敗血症・細菌感染バイオマーカーとしての位置づけ</span> および <span class="wl">救急外来の敗血症でプロカルシトニンは感度0.62・特異度0.80 — 除外には使えない（11研究7937例のSR・MA・CHESTCritCare2025）</span>：PCT単独では除外に使えないという結論は、本総説の「感染と無菌性炎症を区別する能力は不完全」「開始より中止のエビデンスが良好」と完全に整合する。本総説はさらに<strong>PCT &gt;2 / 0.5-1.9 という運用上の帯</strong>を与えている点で実務的に一歩進んでいる。</li><li><span class="wl">敗血症の過剰炎症と免疫麻痺は単球の転写プログラムが違う（単一細胞RNA-seq・CritCare2026）</span>：本総説が紹介する <strong>MS1単球</strong>（Reyes ら, Nat Med 2020）の系譜にある研究。本総説は「MS1は敗血症の同定には有望だが、感染と無菌性炎症の鑑別にはあまり有効でなかった」と評価しており、単球サブセットを見つけること自体は鑑別診断の解決にならないという留保として読み合わせるべきである。</li><li><span class="wl">敗血症を抵抗性・耐性・障害の3軸で測る — 90日死亡と独立に関連したのは障害シグネチャだけ（前向きコホート・ICM2026）</span>：本総説が言う「敗血症サブクラス／表現型」の系譜。本総説は「サブクラスは一貫して同定するのが難しい。理由の一つはタイミングである」と述べており、こちらのノートの3軸モデルもタイミング依存性の検証が課題として残る。</li><li><span class="wl">敗血症の精密医療 — TIGRIS試験と標的治療の再興（総説・JAACC2026）</span>：本総説が言う theragnostic testing（診断と治療標的を同時に示す検査）の実例が TIGRIS の系譜である。<strong>生物学駆動の遺伝子セット導出</strong>が精密医療につながるという本総説の主張と方向が一致する。</li><li><span class="wl">市中発症敗血症の血液培養陽性は14%、耐性菌は稀 — 培養陰性のほうが死亡が高い（米国201病院147061例・CCM2023）</span>：本総説の「血液培養陽性は約10%」と近い水準（対象が市中発症に限られるため14%とやや高い）。<strong>培養陰性のほうが死亡が高い</strong>という所見は、本総説のTable 1「培養陰性 × 宿主応答高値＝感染、起因菌不明、広域抗菌薬」というマスの臨床的重みを裏づける。矛盾はない。</li><li><span class="wl">人工呼吸患者の呼吸器マイクロバイオーム（ICM2020）</span> および <span class="wl">VAPの精密医療はまだ届いていない — マイクロバイオーム・迅速PCR・短期治療・標的予防の現在地（What's New・ICM2026）</span>：dysbiosis と pathobiome の概念、および「精密医療はまだ届いていない」という評価は本総説と完全に整合する。<strong>2026年のノートが2023年の本総説から3年経っても結論が変わっていない</strong>ことは、この領域の進歩の遅さを示す重要な観察である。</li><li><span class="wl">VAP診断における気管支鏡の位置づけ（Lasting Legacy・ICM2022）</span>：本総説の定量培養カットオフ（洗浄液 10⁴ CFU/mL）はこのノートと同じ根拠（Chastre &amp; Fagon）に立つ。</li><li><span class="wl">デキサメサゾン・トシリズマブがCOVID-19のCRP・PCTの二次感染検出能を低下させる（CritCare2021）</span>：本総説が言う「治療誘発性の免疫抑制（グルココルチコイド療法）」が宿主応答プロファイリングを交絡させるという指摘の、実データによる具体例。<strong>ステロイド投与下ではバイオマーカーの解釈が変わる</strong>という点で強く補完し合う。</li><li><span class="wl">敗血症の血液培養診断の体制と実践 — 24時間微生物検査は12%しかない（CritCare2025）</span>：本総説の「ICUでの偽陽性・偽陰性の真の疫学は検査実践と症例定義に強く影響されるため解明が難しい」という主張の裏づけ。検査体制そのものが診断性能を規定する。</li><li><span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span>：本総説のTable 1が採用したリスクベース処方（ショック・臓器障害の悪化・免疫抑制）の出典。<strong>Table 1 は SSCG 2021 の推奨をマトリクス化したものと位置づけられる</strong>。</li><li><span class="wl">重症患者の抗真菌薬スチュワードシップ — BDGは除外に使う（What's New・ICM2023）</span>：本総説が「肺・腸・膀胱の Candida は定着として扱いうる」と述べる点と、BDGを除外に使うという方針は同じ思想（陽性を治療適応と読まない）である。</li><li><span class="wl">ICUの抗菌薬最適使用の全体像 — 経験的治療・PK PD・de-escalation・期間短縮・スチュワードシップ（総説・CritCare2025）</span> および <span class="wl">Less is more 重症は抗菌薬の白紙委任状ではない — ベッドサイド8項目と短期投与の日数（Less is more連載・ICM2020）</span>：本総説は「何を治療するか」の入口を扱い、これらは「どう投与し、いつやめるか」を扱う。組み合わせて初めてスチュワードシップの全体が閉じる。</li><li><strong>矛盾は検出されなかった</strong>。ただし旧版の本ノートが持っていた「宿主応答プロファイリングは臨床実装されていない」という記述だけは、上記の複数ノート（とくにVAP精密医療のノートが挙げる迅速PCRの実装状況）と整合しない粗さがあり、今回修正した。</li></ul>
+<h2>🧐 批判的吟味（JCでの論点）</h2>
+<p><strong>1. Table 1・Table 2 は検証されていない専門家提案である</strong> 著者らは「we propose」と書いており、デルファイもコンセンサス会議も経ていない。3×3のマス目という形式は説得的に見えるが、<strong>各マスの判定が正しいことを示すデータは提示されていない</strong>。とくに「絶対的病原体の多量発育 × 臨床的疑い低い」＝定着として治療しない、という判断は、実務では相当な勇気を要する。この提案でアウトカムが改善するかは未検証である。</p>
+<p><strong>2. mNGSの3つの数値は異なる集団の寄せ集めである</strong> 血液（重症患者）・喀痰（ICUおよび非ICUの肺感染）・尿（腎移植レシピエントの反復性UTI）と、対象がまったく異なる3研究（いずれも中国）の値を並べている。原著自身は「文脈を与えるため（to give context）」と限定的に書いているが、<strong>表として引用されると同一比較のように見える</strong>。尿の「100%」は最も極端な集団の値であり、一般ICUの数字ではない。</p>
+<p><strong>3. 重要な主張の一部がプレプリントに依拠している</strong> SeptiCyte RAPID の検証（文献56）は <strong>medRxiv のプレプリント</strong>、全プロテオーム解析（文献69）も <strong>medRxiv</strong>、COVID-19のVAP前宿主応答（文献58）は Research Square のプレプリントである。本総説が「臨床導入が最も近い」と評価するSeptiCyte RAPIDの検証データが査読を経ていない点は、JCで必ず指摘すべきである。</p>
+<p><strong>4. Table 3 に検証コホートの症例数がない</strong> 感度・特異度・AUROCが並ぶが、<strong>nが一つも書かれていない</strong>。感度99%・特異度56%（SeptiCyte LAB）という値が何例に基づくのか、AUROCの範囲（0.68–0.89）が何コホートの幅なのかが表から読み取れない。診断検査のレビューとしては物足りない。</p>
+<p><strong>5. 感度と特異度のトレードオフの臨床的意味が定量されていない</strong> FAIM3:PLAC8 は感度97.1%・特異度28.6%。原著は「抗菌薬処方へのインパクトを制限する」と正しく指摘するが、<strong>その検査を使ったら抗菌薬使用が何%変わるのかは示していない</strong>。唯一の推定値は「LRTIなし群で抗菌薬日数38%削減」だが、これも著者らの推定であって実測ではない。</p>
+<p><strong>6. 実装して失敗した先例（肺胞サイトカイン）の扱いが軽い</strong> 肺胞サイトカイン検査は VAPrapid2 という RCT として実装され、<strong>抗菌薬処方を変えられなかった</strong>。原著はこれを「臨床医の馴染みのなさ」に帰しているが、<strong>検査そのものの臨床的有用性が不足していた可能性</strong>は十分検討されていない。しかも文献67（診断精度の原著）には本総説の責任著者 Conway Morris 自身が共著者として入っており、自著の実装失敗の解釈が寛容に流れていないかは論点になる。</p>
+<p><strong>7. 引用の不整合が複数ある</strong> ①免疫不全患者に関する記述の引用が本文中で上付きの「31」となっているが、文献31は細菌感染とウイルス感染の統合的宿主遺伝子発現診断（Sweeney ら, Sci Transl Med 2016）であり、内容が対応しない。文献書式も他の箇所（角括弧）と異なる。②プロテオーム解析を「Yuxin and colleagues」と紹介しているが、文献69の筆頭著者は <strong>Mi Y</strong>（Yuxin は名であり姓ではない）。<strong>姓ではなく名で著者を呼んでいる</strong>。③黄色ブドウ球菌曝露時の好中球リン酸化の記述に付された文献71は、実際にはC5aによる好中球ファゴソーム成熟障害の研究である。編集・校正の甘さが目立つ。</p>
+<p><strong>8. 「連続体」という再概念化の運用上の帰結が示されていない</strong> 定着と感染を連続体として捉え直すという中心的主張は魅力的だが、<strong>その連続体上のどこで抗菌薬を始めるのかという閾値の議論には踏み込んでいない</strong>。Table 1 は結局3×3の離散カテゴリであり、連続体の思想が形式に反映されていない。</p>
+<p><strong>9. コスト・実現可能性の議論が定性的にとどまる</strong> Box 2 の障壁2に「金銭的・時間的・計算資源的コスト」とあるが、<strong>具体的な金額も検査単価も示されていない</strong>。mNGSやトランスクリプトーム検査を導入すべきかを議論する材料としては不十分である。</p>
+<p><strong>10. ナラティブレビューであることの限界</strong> 検索戦略も組み入れ基準も記載がない。<strong>引用79件がどう選ばれたかは追跡できず</strong>、著者らの関心に沿った選択的引用の可能性を排除できない。とくに宿主応答診断に否定的なデータがどれだけ網羅されたかは検証できない。</p>
+<p><strong>11. 当院に持ち帰る際の最大の論点</strong> 新規宿主応答マーカーの価値は Table 2 の<strong>中央列3マス</strong>にしか現れない。したがって「この検査は中間帯の患者で決着をつけられるのか」「決着した結果として抗菌薬日数・耐性菌・死亡がどう変わるのか」の2点を満たさない製品は、どれほどAUROCが高くても導入する意味がない。<strong>AUROCではなく、意思決定変化とアウトカムで評価すること。</strong></p>
+<h2>📚 主要引用文献一覧（本ノートで数値を引いた文献）</h2>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>重症患者の血液における病原体検出のmNGS（血液 培養7.9%→mNGS 41%）</td><td>Geng S, Mei Q, Zhu C ら. Int J Infect Dis. 2021;103:81-87</td></tr>
+<tr><td>5</td><td>ICU／非ICU患者の肺感染に対するmNGSの診断価値（喀痰 39%→96%）</td><td>Zhou JJ, Ding WC, Liu YC ら. Front Cell Infect Microbiol. 2022;12:936</td></tr>
+<tr><td>6</td><td>腎移植レシピエントの反復性尿路感染におけるmNGS（尿 32%→100%）</td><td>Duan W, Yang Y, Zhao J ら. Front Public Health. 2022;10:2517</td></tr>
+<tr><td>9</td><td>VAPにおけるCPISの診断・転帰代替指標としての位置づけ</td><td>Zilberberg MD, Shorr AF. Clin Infect Dis. 2010;51:S131-S135</td></tr>
+<tr><td>11</td><td>感染・敗血症のバイオマーカーをベッドサイドでどう使うか</td><td>Póvoa P, Coelho L, Dal-Pizzol F ら. Intensive Care Med. 2023;49:142</td></tr>
+<tr><td>19</td><td>敗血症バイオマーカーの再評価（可溶性マーカーの系統的レビュー・CD64の評価）</td><td>Pierrakos C, Velissaris D, Bisdorff M ら. Crit Care. 2020;24:1-15</td></tr>
+<tr><td>20</td><td>外科系ICUにおける血液培養の利用と診断収率</td><td>Kseibi E, Naesah N, Hajja A, Kseibi F. Crit Care Med. 2022;50:339</td></tr>
+<tr><td>21</td><td>入院患者の2回目以降の血液培養における菌血症検出</td><td>Zanella MC, De Lorenzi-Tognon M, Fischer A ら. JAMA Netw Open. 2022;5:e228065</td></tr>
+<tr><td>22</td><td>人工呼吸器関連肺炎（定量培養カットオフの根拠）</td><td>Chastre J, Fagon JY. Am J Respir Crit Care Med. 165:867-903（本総説の文献リストは2012年と記載。当該巻号は2002年刊であり誤記の可能性）</td></tr>
+<tr><td>23</td><td>Surviving Sepsis Campaign 2021（Table 1 のリスクベース処方の出典）</td><td>Evans L, Rhodes A, Alhazzani W ら. Crit Care Med. 2021;49:E1063-E1143</td></tr>
+<tr><td>31</td><td>統合的宿主遺伝子発現診断による細菌感染とウイルス感染の頑健な分類</td><td>Sweeney TE, Wong HR, Khatri P. Sci Transl Med. 2016;8:346</td></tr>
+<tr><td>52</td><td>敗血症の重症患者を同定する診断的遺伝子セットの検証（複数分類器の外部検証）</td><td>Maslove DM, Shapira T, Tyryshkin K ら. J Crit Care. 2019;49:92-98</td></tr>
+<tr><td>56</td><td>SeptiCyte RAPID の検証（AUROC 0.82–0.85・検査時間1時間）</td><td>Balk R, Esper AM, Martin GS ら. medRxiv 2023（プレプリント）</td></tr>
+<tr><td>57</td><td>29遺伝子mRNA宿主応答アッセイ IMX-BVN-2（細菌 AUROC 0.89・ウイルス 0.83）</td><td>Bauer W, Kappert K, Galtung N ら. 2021</td></tr>
+<tr><td>58</td><td>COVID-19における二次性細菌性肺炎に先行する免疫シグナル障害と肺マイクロバイオーム変化（VAPの2日前）</td><td>Tsitsiklis A, Zha BS, Byrne A ら. Res Sq 2021（プレプリント）</td></tr>
+<tr><td>59</td><td>遺伝子発現シグネチャによる術後感染・敗血症の発症前診断（3日前）</td><td>Lukaszewski RA, Jones HE, Gersuk VH ら. Intensive Care Med. 2022;48:1133-1143</td></tr>
+<tr><td>61</td><td>ICU入室時に市中肺炎を診断する分子バイオマーカー FAIM3:PLAC8（感度97.1%・特異度28.6%）</td><td>Scicluna BP, Klein Klouwenberg PMC, Van Vught LA ら. Am J Respir Crit Care Med. 2015;192:826-835</td></tr>
+<tr><td>62</td><td>敗血症と感染陰性の全身性炎症を区別する分子宿主応答アッセイ SeptiCyte（感度99%・特異度56%）</td><td>McHugh L, Seldon TA, Brandon RA ら. 2015</td></tr>
+<tr><td>63</td><td>敗血症と無菌性炎症の時系列マルチコホート解析による頑健な診断遺伝子セット Sepsis Metascore</td><td>Sweeney TE, Shidham A, Wong HR, Khatri P. Sci Transl Med. 2015;7:287ra71</td></tr>
+<tr><td>64</td><td>細菌性敗血症の免疫細胞シグネチャ（MS1単球サブタイプ）</td><td>Reyes M, Filbin MR, Bhattacharyya RP ら. Nat Med. 2020;26:333-340</td></tr>
+<tr><td>65</td><td>重症成人の下気道感染症診断における宿主応答と無偏り微生物検出の統合（感度100%・特異度87.5%・抗菌薬日数38%削減）</td><td>Langelier C, Kalantar KL, Moazed F ら. Proc Natl Acad Sci USA. 2018;115:E12353-E12362</td></tr>
+<tr><td>66</td><td>重症成人前向きコホートにおける敗血症診断のための統合的宿主-微生物血漿メタゲノミクス（感度99%・特異度78%）</td><td>Kalantar KL, Neyton L, Abdelghany M ら. Nat Microbiol. 2022;7(11):1805-1816</td></tr>
+<tr><td>67</td><td>人工呼吸器関連肺炎の除外における肺の宿主炎症メディエータの診断精度</td><td>Hellyer TP, Morris AC, McAuley DF ら. Thorax. 2015;70:41-47</td></tr>
+<tr><td>68</td><td>疑いVAPにおけるバイオマーカー誘導型抗菌薬スチュワードシップ VAPrapid2（RCT。抗菌薬処方は変わらず）</td><td>Hellyer TP, McAuley DF, Walsh TS ら. Lancet Respir Med. 2020;8</td></tr>
+<tr><td>69</td><td>高スループット質量分析による敗血症血漿プロテオームのマッピング（14の差次的存在量タンパク）</td><td>Mi Y, Burnham KL, Charles PD ら. medRxiv 2022（プレプリント）</td></tr>
+<tr><td>71</td><td>C5aは好中球のファゴソーム成熟をリン酸化プロテオームのリモデリングを介して障害する</td><td>Wood AJT, Vassallo AM, Ruchaud-Sparagano MH ら. JCI Insight. 2020</td></tr>
+<tr><td>73</td><td>mRNAとタンパク存在量の乖離（コンピュータの情報検索過程からの洞察）</td><td>Wang D. Comput Biol Chem. 2008;32:462-468</td></tr>
+<tr><td>75</td><td>重症熱傷後の敗血症における好中球の自発的遊走パターン（感度80%・特異度77%）</td><td>Jones CN, Moore M, Dimisko L ら. PLoS ONE. 2014;9:e114509</td></tr>
+<tr><td>76</td><td>リピドAを標的とする局所投与蛍光ペプチドによるヒト肺内グラム陰性菌のin situ同定</td><td>Akram AR, Chankeshwara SV, Scholefield E ら. Sci Transl Med. 2018</td></tr>
+<tr><td>77</td><td>医療における機械学習のバイアス軽減</td><td>Vokinger KN, Feuerriegel S, Kesselheim AS. Commun Med. 2021;1(1):1-3</td></tr>
+<tr><td>78</td><td>診断エラーを防ぐための診断スチュワードシップ</td><td>Morgan DJ, Malani PN, Diekema DJ. JAMA. 2023</td></tr>
+<tr><td>79</td><td>新生児敗血症診断における Sepsis Metascore の検証（AUROC 0.92）</td><td>Sweeney TE, Wynn JL, Cernada M ら. J Pediatric Infect Dis Soc. 2018;7:129</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 抗菌薬を要するのは感染だけだが、ICUでは感染・定着・無菌性炎症を分けるゴールドスタンダードが存在しない。だから<mark class="hl">高感度分子診断で「陽性」を増やすほど、抗菌薬は減るのではなく増える危険がある</mark>。感染の定義そのものが宿主応答である以上、微生物学と宿主応答を<strong>同時に、毎日</strong>見るしかない。</p>
+</div>
+<ul><li><strong>今日から使えること</strong>：Table 1 の3×3マトリクスを毎日の抗菌薬レビューのフォーマットにする。縦軸＝微生物学（多量発育／閾値下・非病原性／陰性）、横軸＝宿主応答（PCT &gt;2または明白な感染所見／PCT 0.5-1.9・CRP・発熱・画像上の疑い／疑い低い）。<mark class="hl">患者はマス間を移動するので、1回の判定で固定しない</mark>。</li><li><strong>中間帯の裁定はリスク評価で行う</strong>。ショック、SOFA 2点以上の悪化、免疫抑制のいずれかがあれば広域、なければ watch and wait。</li><li><strong>PCT高値を機械的に感染と読まない</strong>。大手術・外傷・重症熱傷・心原性ショック後は上昇する。</li><li><strong>新しい感染診断法の売り込みには2つだけ聞く</strong>：①中間帯の患者で決着がつくのか、②抗菌薬日数・耐性菌・死亡が変わるのか。AUROCは答えにならない。</li><li><strong>宿主応答プロファイリングの現在地は「商業製品は既にあるが、臨床応用可能なアッセイのほとんどは開発段階を越えていない」</strong>（原文）。SeptiCyte は市販されており、肺胞サイトカイン検査は実装されたうえで抗菌薬処方を変えられなかった。<mark class="hl">「まだ無い」のではなく「あっても効果が示せていない」</mark>というのが正確な理解である。</li><li><strong>最も期待できる方向</strong>：mNGSによる高感度検出と宿主応答分類器の統合（LRTIで感度100%・特異度87.5%、敗血症で感度99%・特異度78%）。ただしいずれも前向き検証が未了。</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

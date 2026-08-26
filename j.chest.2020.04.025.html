@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PLRで輸液反応性を確かめてから輸液すると72時間バランスが1.37L減る — ITTでは有意差消失（FRESH・Chest2020）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="j.chest.2020.04.025.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">PLRで輸液反応性を確かめてから輸液すると72時間バランスが1.37L減る — ITTでは有意差消失（FRESH・Chest2020）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Douglas IS, Alapat PM, Corl KA, et al. Fluid Response Evaluation in Sepsis Hypotension and Shock: A Randomized Clinical Trial. Chest. 2020;158(4):1431-1445. DOI: 10.1016/j.chest.2020.04.025</dd><dt>掲載誌</dt><dd>Chest（2020-04-27）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.chest.2020.04.025" target="_blank" rel="noopener">doi.org/10.1016/j.chest.2020.04.025</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Fluid Response Evaluation in Sepsis Hypotension and Shock: A Randomized Clinical Trial</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/j.chest.2020.04.025.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/j.chest.2020.04.025.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/j.chest.2020.04.025.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わらないこと（デバイスは導入しない）</strong>：本試験の介入はバイオリアクタンス（Cheetah NICOM／Starling SV）による1回拍出量測定が前提。当院に同機種はなく、外部検証では <strong>NICOM の PLR 反応性判定 AUC は 0.5（P=.77）</strong> とほぼ無価値だった報告がある。<strong>「FRESHが良かったからバイオリアクタンスを買う」という論法は取らない</strong></li><li><strong>変わること（手順の型は輸入できる）</strong>：介入群がやっていたのは「輸液や昇圧薬を足したくなった <strong>その瞬間に、まず反応性を測る</strong>」という手順。当院ではこれをエコー（LVOT VTI）または既設の動脈圧波形（PPV/SVV、条件を満たす症例のみ）で置き換えられる。判定閾値は本試験と同じ <strong>SV 10%以上の増加</strong></li><li><strong>1回量は 500 mL・最大2回まで、そこで昇圧薬に切り替え</strong>：本試験のアルゴリズムは「反応性あり→500 mLボーラス→再評価→まだ低灌流なら500 mL→追加が2Lを超えるなら昇圧薬を開始／増量」。当院の輸液チャレンジは <span class="wl">輸液チャレンジの4要素を事前に決める — TROL（エディトリアル・CritCare2020）</span> に合わせて <strong>4 mL/kg・10分</strong>を採るが、「合計2Lを超えたら昇圧薬に振る」という<strong>上限のルール</strong>は本試験から輸入する価値がある</li><li><strong>反応性が無いときに何をするかまで書く</strong>：介入群のアルゴリズムは「SV変化 &lt;10% → 輸液せずノルアドレナリンで MAP≧65 を確保」まで規定していた。<strong>当院のプロトコルも「陰性のときの一手」を書いておく</strong>。書いていないと、陰性でも結局輸液が入る</li><li><strong>期待値の設定</strong>：この試験で減ったのは <strong>72時間の輸液バランス 1.37 L</strong> であって、死亡ではない。RRT・人工呼吸の導入率は下がったが、非盲検・小規模・事後の統計上の弱さがある。<mark class="hl">「輸液が減る」と「転帰が良くなる」は分けて説明する</mark></li><li><strong>初期蘇生の 30 mL/kg は本試験の対象外</strong>：組み入れは「1Lの輸液に反応しない低血圧」からで、登録時点で既に平均 2.4 L（32.5 mL/kg）が入っている。<strong>最初の1Lをためらう根拠にはならない</strong></li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：正の輸液バランスは重症敗血症の死亡と関連する（VASST の後付け解析、CCM 2011;39:259-265／大規模観察研究 ICM 2017;43:625-632 では輸液バランス 1L増加ごとに死亡が 2.3%（95%CI 2〜2.5%、P=0.0003）増える）。一方、PLR による輸液反応性の<strong>診断精度</strong>は確立していた（メタ解析：感度 86%（95%CI 79-92）、特異度 92%（95%CI 88-96）、AUC 0.95（95%CI 0.92-0.98））。SSCG 2016 も初期輸液後は動的指標で導くことを推奨していた</li><li><strong>Unknown（分かっていなかったこと）</strong>：<strong>診断精度が高いことと、それで治療を導けば転帰が良くなることは別問題</strong>。PLRガイド蘇生を通常ケアと比較した多施設RCTは存在せず、単施設の後ろ向き研究（J Crit Care 2017;42:42-46）と実行可能性試験（CHEST 2015;148:1462-1469、Crit Care Expl 2019;1:e0015）しかなかった</li><li><strong>What's new（本試験の新規性）</strong>：<strong>PLR誘発の1回拍出量変化で輸液・昇圧を導く戦略を、通常ケアと比較した初の多施設RCT</strong>。修正ITT解析で72時間（またはICU退室時）の輸液バランスが 1.37 L 少なく、副次のRRT導入率・人工呼吸導入率も低かった。ただし ==全ランダム化例を含めた ITT の感度分析では主要評価項目の差が消える（−0.48 L、95%CI −1.82〜0.85、P=0.479）==</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症性低血圧・ショックで、輸液や昇圧薬を足す前に毎回PLRで1回拍出量の変化を測り、反応するときだけ輸液する戦略は、<strong>修正ITT解析で72時間の輸液バランスを 1.37 L（95%CI 0.21〜2.53 L）減らした</strong>。しかし<strong>割付後の脱落が多く、全例を含む ITT では主要評価項目の有意差は消える</strong>。デバイス企業がスポンサーで、著者2名は同社社員である。</p>
+</div>
+<ul><li>デザイン：米英13施設・前向き・<strong>非盲検</strong>・2:1割付RCT（介入:通常ケア）。2016年10月〜2019年2月に登録。事前計画のサンプルサイズは120例</li><li>対象：ERを受診した敗血症・敗血症性ショックで、<strong>1Lの輸液に反応しない低血圧</strong>（輸液後もMAP&lt;65 mmHg、またはMAP≧65を保つのに昇圧薬が必要）、到着後24時間以内に登録、ICU（または72時間アルゴリズムを維持できる部署）に入室する成人</li><li>介入：輸液または昇圧薬を足す臨床判断が生じるたびに、<strong>非侵襲的バイオリアクタンス（Cheetah 社 Starling SV／NICOM）でPLR前後の1回拍出量（SV）を測定</strong>。SV変化 &gt;10% なら 500 mL ボーラス、&lt;10% なら輸液せずノルアドレナリンを調整。72時間またはICU退室まで継続</li><li>対照：通常ケア（<strong>モニタの使用有無を含め、内容は主治医・施設の慣例に一任。論文に規定なし</strong>）</li><li>主要評価項目：<strong>72時間またはICU退室時点（早い方）の輸液バランス</strong></li><li>主要結果（修正ITT、介入83例 vs 通常41例）：<strong>0.65 ± 2.85 L vs 2.02 ± 3.44 L、差 −1.37 L（95%CI −2.53〜−0.21）、P=.021</strong></li><li>副次：RRT導入 <strong>5.1%（4/79）vs 17.5%（7/40）</strong>、差 −12.4%（95%CI −0.27〜−0.01）、P=.042／人工呼吸導入 <strong>17.7%（14/79）vs 34.1%（14/41）</strong>、差 −16.42%（95%CI −0.33〜0.00）、P=.044</li><li>有意差がつかなかった副次：ICU在室日数（3.31 vs 6.22日、P=.113）、30日間の人工呼吸時間（P=.079）、昇圧薬使用時間（P=.426）、<strong>72時間のクレアチニン変化（0.13 vs 0.04 mg/dL、P=.453 — 介入群のほうが数値上は上昇幅が大きい）</strong></li><li>安全性（ITT、102例 vs 48例）：死亡 19.6% vs 20.8%（差 −1.2%、95%CI −15.1〜12.6）、重篤な治療関連有害事象・MACE・ICU再入室・在院日数のいずれも有意差なし</li><li>最大の弱点：<strong>割付後に介入群の13%・通常群の15%が介入を受けず、さらに介入群7例がプロトコルを離脱。ITT感度分析で主要評価項目の有意差は消失する</strong></li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>輸液反応性（fluid responsiveness）</strong>とは「輸液を入れたら心拍出量（CO）が意味のある幅で増える状態」を指す。Frank–Starling曲線の立ち上がり部分にいれば増え、平坦部にいれば増えない。血圧・心拍数・CVP・尿量といった<strong>静的指標では、この位置を当てられない</strong>。</p>
+<p><strong>PLR（passive leg raising、受動的下肢挙上）</strong>は、半坐位から上半身をフラットにし下肢を約45°挙上する体位変換で、下肢と腹腔の静脈血 <strong>約300 mL を一時的に中心循環へ移す</strong>「可逆的な自己輸血」。輸液を実際に入れずに前負荷を増やせるのが利点で、戻せば元に戻る。判定には血圧ではなく <strong>SV または CO の変化</strong>を使い、<strong>10〜15%以上の増加</strong>で「反応性あり」とする。効果は1分程度で最大となり数分で消えるため、<strong>秒単位で追従できる連続モニタが要る</strong>。</p>
+<p><strong>バイオリアクタンス（bioreactance）</strong>は、胸部に貼った電極から微弱な交流電流を流し、血流に伴う<strong>位相のずれ</strong>からSVを推定する完全非侵襲の技術。本試験で使われた Cheetah Medical 社の <strong>NICOM</strong> とその後継 <strong>Starling SV</strong> がこれにあたる。侵襲的カテーテルが不要で、強い呼吸性変動や心房細動でも使えるとメーカーは説明する。ただし後述のとおり、経肺熱希釈法を基準にした外部検証では機種によって成績が大きく違う。</p>
+<p><strong>なぜ輸液を減らしたいのか</strong>：敗血症では血管透過性が亢進しており、反応性のない患者に輸液を入れても心拍出量は増えず、静水圧だけが上がって間質浮腫（肺・腎・腸管）を作る。正の輸液バランスは死亡・RRT・人工呼吸と関連する。一方で低灌流を放置すれば臓器障害が進む。<strong>「入れる／入れない」を毎回その場で決める道具</strong>が求められていた。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>敗血症性ショックにおける輸液と昇圧薬の使い分けは依然として議論が続いている。初期輸液 30 mL/kg の後、なお循環不全がある患者にどう輸液するかについて、ガイドラインは輸液反応性の確認を勧めてきたが、<strong>その勧めを支える介入研究の根拠は乏しかった</strong>。</p>
+<p>抄読会スライドが整理した論理の流れは次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>主張</th><th>根拠として引かれたもの</th></tr></thead>
+<tbody>
+<tr><td>①</td><td>過剰輸液は有害であり、輸液量の適正化が重要</td><td>VASST後付け解析（CCM 2011;39:259-265）、大規模観察研究（ICM 2017;43:625-632、1L増ごとに死亡 2.3%増）</td></tr>
+<tr><td>②</td><td>「必要なときだけ輸液する」制限戦略で輸液量は減らせる</td><td>多施設RCT（CLASSIC）</td></tr>
+<tr><td>③</td><td>輸液反応性の指標としてPLRは精度が高い</td><td>PLRメタ解析（CCM 2016;44:981-991、感度86%・特異度92%・AUC 0.95）</td></tr>
+<tr><td>④</td><td>では、輸液の必要がある患者にPLRを指標として輸液したら、さらに輸液を減らせるか</td><td>未検証 → 本試験</td></tr>
+</tbody></table></div>
+<p><strong>リサーチクエスチョン</strong>（原著の Research question）：敗血症性ショック患者において、輸液反応性の動的評価で導いた蘇生は転帰を改善するか。</p>
+<p><strong>主要な臨床アウトカム</strong>：72時間またはICU退室時（早い方）の正の輸液バランス。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>デザイン</h4>
+<ul><li>前向き・多施設・<strong>非盲検</strong>・並行群間ランダム化比較試験</li><li>施設：米国・英国の<strong>13病院</strong></li><li>割付：<strong>介入群 : 通常ケア群 = 2 : 1</strong></li><li>層別化：<strong>施設</strong>と<strong>登録ウィンドウ（病院到着から6時間以内／6〜12時間／12時間超）</strong>の2因子。最小ブロックサイズは3の倍数で、電子的に割付を決定</li><li>登録期間：2016年10月〜2019年2月</li></ul>
+<h4>組み入れ基準</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ERを受診した敗血症または敗血症性ショック（SIRS 2項目以上該当、または感染によると考えられる症状）</td></tr>
+<tr><td>2</td><td>1Lの輸液に反応しない低血圧 — 輸液後もMAP&lt;65 mmHg、または MAP≧65 mmHg を保つために昇圧薬を要する</td></tr>
+<tr><td>3</td><td>病院到着後24時間以内に研究登録できる</td></tr>
+<tr><td>4</td><td>ICU入室患者（72時間のアルゴリズムを維持できるならステップダウンユニットやER観察床でも可）</td></tr>
+<tr><td>5</td><td>患者本人または代諾者から同意が取得できる</td></tr>
+</tbody></table></div>
+<h4>除外基準</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>主病態</td><td>主な入室理由が感染症以外（脳卒中・ACS・肺水腫・喘息・重篤な不整脈・薬物中毒・外傷・熱傷）</td></tr>
+<tr><td>心血管</td><td>大動脈弁閉鎖不全・大動脈の異常・ASD/VSD などの既往</td></tr>
+<tr><td>出血</td><td>活動性出血による循環破綻／輸血が禁忌</td></tr>
+<tr><td>輸液歴</td><td>研究登録前に3L以上の輸液が入っている</td></tr>
+<tr><td>経過</td><td>早急な手術が必要／他病棟からの転棟・他院からの転院／ランダム化後1時間以内にプロトコル通りにできない／治療アルゴリズムからの逸脱</td></tr>
+<tr><td>治療方針</td><td>DNAR／他の高度な蘇生プロトコルが並行している</td></tr>
+<tr><td>測定の可否</td><td>PLRが行えない（硬膜外カテーテル挿入中・腹腔内高血圧など）／静脈ルートが取れない／センサーの潤滑剤にアレルギー／SV評価に別のモニタ（SVV・PPV）を使っている</td></tr>
+<tr><td>その他</td><td>24時間以内の痙攣／DKA・HHS／囚人・18歳未満・妊婦／医師の判断による除外</td></tr>
+</tbody></table></div>
+<p>除外基準の設計そのものが結果の読み方を左右する。<strong>登録前に3L以上入っている患者は除外</strong>されているため、本試験の対象は「初期蘇生の途中で、まだ大量には入っていない」集団である。また <strong>PLRが行えない患者（腹腔内高血圧など）は最初から除外</strong>されている点は、実地でPLRを使う際の制約とそのまま重なる（<span class="wl">腹腔内圧上昇下ではPLRが当てにならない（EEO・ミニ輸液負荷は有効・CritCare2026）</span>）。</p>
+<h4>介入群のアルゴリズム（原図の各ボックスを表に起こす）</h4>
+<p>トリガー：<strong>輸液または血管作動薬を足す臨床判断が生じたとき</strong>。具体的には MAP&lt;65 mmHg、収縮期血圧&lt;90 mmHg、血圧が急速に低下傾向、尿量低下、その他ボーラスや昇圧薬の適応と考えられる状況。昇圧薬の<strong>減量</strong>は医師の裁量だが、<strong>再増量はこのPLRアルゴリズムを起動する</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>判定</th><th>次の一手</th><th>さらにその次</th></tr></thead>
+<tbody>
+<tr><td>PLRを行わない判断</td><td>経過観察</td><td>—</td></tr>
+<tr><td>SV変化 &lt;10%（反応性なし）</td><td>輸液せず、MAP≧65 を目標にノルアドレナリンを開始・調整</td><td>初期量 &gt;0.05 µg/kg/min、またはベースの2倍以上に増量したら → PLRを再評価。そうでなければ経過観察</td></tr>
+<tr><td>SV変化 &gt;10%（反応性あり）</td><td>500 mL ボーラスを1回投与し、MAP・収縮期血圧を再評価</td><td>灌流が十分なら経過観察。低灌流が持続するなら → PLR再評価 → もう1回 500 mL</td></tr>
+<tr><td>2回目のボーラス後も低灌流が持続</td><td>追加輸液量が2Lを超えるなら昇圧薬を開始または増量</td><td>以後もPLRに戻る</td></tr>
+</tbody></table></div>
+<p>継続期間：<strong>72時間、またはICU退室まで</strong>。</p>
+<p>測定機器：Cheetah Medical 社の <strong>Starling SV</strong>（NICOM の後継機）。介入群では病院到着から機器装着まで平均 6.8 ± 4.5 時間（中央値 5.6、Q1-Q3 4.2-7.7）かかっている。</p>
+<h4>対照群</h4>
+<ul><li><strong>通常ケア</strong>。主治医・施設の慣例に従う</li><li><mark class="hl">論文には対照群の管理内容の規定がなく、どのモニタを使っていたか（そもそも輸液反応性を評価していたかどうかも）不明</mark></li><li>蘇生以外（抗菌薬・ソースコントロール）については<strong>両群ともプロトコルを設けず</strong>、主治医・施設の慣例に従うと記載されている</li></ul>
+<h4>アウトカム</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>項目</th></tr></thead>
+<tbody>
+<tr><td>主要</td><td>72時間後またはICU退室時（早い方）の輸液バランス</td></tr>
+<tr><td>副次（正式検定の対象）</td><td>新規のRRT導入／新規の人工呼吸導入／ICU在室日数／30日間の人工呼吸使用時間／昇圧薬使用時間／クレアチニン値の推移</td></tr>
+<tr><td>探索的</td><td>ループ利尿薬の使用／退院先</td></tr>
+<tr><td>安全性</td><td>重篤な治療関連有害事象／ICU再入室／在院日数／MACE／死亡率</td></tr>
+</tbody></table></div>
+<p><strong>当初「key secondary endpoint」はクレアチニン値の変化だったが、中間解析の後にRRT導入率へ変更された。</strong>あわせて、当初計画にあった平均輸液量・有害事象発生率・ICU再入室・30日死亡・退院先・ICU退室時の平均バランス差が副次評価項目から削除されている。</p>
+<h4>統計</h4>
+<ul><li>解析集団：<strong>修正ITT（mITT）</strong> = 72時間以上モニタを受けた、または72時間以内にICUを退室した患者</li><li>サンプルサイズ：通常ケア群の輸液バランスを 3L、介入の治療効果を <strong>−2L</strong>、標準偏差を 3L と想定し、α=0.05 で <strong>計120例</strong>と算出（抄読会スライドは検出力を「7%」と記載しているが、これは明らかな誤記で、原著の値は未確認）</li><li>両側有意水準 0.05</li><li>欠損値：線形回帰による多重代入法。調整因子は治療群・年齢・性別・民族・人種・SIRS該当数・身長・体重・qSOFA</li><li><strong>登録90例の時点で中間解析</strong></li><li>副次評価項目は多重性のリスクを抑えるため<strong>階層的に</strong>mITTで検定（両側 &lt;0.05）</li><li>安全性は<strong>ITT</strong>で解析</li></ul>
+<h3>4. 結果 — 患者の流れ（CONSORT）</h3>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>介入群</th><th>通常ケア群</th></tr></thead>
+<tbody>
+<tr><td>適格性評価</td><td>5,535例</td><td></td></tr>
+<tr><td>除外</td><td>5,383例（組み入れ基準を満たさない 5,015、参加拒否 60）</td><td></td></tr>
+<tr><td>ランダム化</td><td>104例</td><td>48例（計152例）</td></tr>
+<tr><td>割付どおりの治療を受けた</td><td>94例</td><td>41例</td></tr>
+<tr><td>受けなかった</td><td>14例（13%）</td><td>7例（15%）</td></tr>
+<tr><td>受けなかった理由</td><td>ランダム化エラー1、組み入れ基準#4を満たさず3、除外#5が3、除外#24が1、除外#8が2、除外#27が1、即時同意撤回2</td><td>組み入れ基準#4を満たさず4、#1を満たさず2、除外#2に該当1</td></tr>
+<tr><td>追跡不能</td><td>0</td><td>0</td></tr>
+<tr><td>介入中止</td><td>7例（除外#26）</td><td>0</td></tr>
+<tr><td>解析（mITT）</td><td>83例</td><td>41例</td></tr>
+<tr><td>安全性解析（ITT）</td><td>102例</td><td>48例</td></tr>
+</tbody></table></div>
+<p>抄読会スライドの読み解きによれば、介入を受けられなかった主因は「ICUに入室しなかった」「緊急手術」「DKA」「DNAR」「臨床医判断」で、通常ケア群では「ICUに入室せず」「主病態が感染以外」「大動脈の異常」であった。</p>
+<h4>この図の数が合わない点（原著の内的不整合）</h4>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>記載</th><th>検算</th></tr></thead>
+<tbody>
+<tr><td>除外の内訳</td><td>総数 5,383 に対し、内訳は 5,015 + 60 = 5,075</td><td>308例分の理由が図に書かれていない</td></tr>
+<tr><td>介入群の割付内訳</td><td>割付 104、受けた 94、受けなかった 14</td><td>94 + 14 = 108 で割付数を4例超過する</td></tr>
+<tr><td>介入群「受けなかった」の内訳</td><td>総数 14 に対し、1+3+3+1+2+1+2 = 13</td><td>1例分が内訳に無い</td></tr>
+<tr><td>介入群の解析数</td><td>受けた 94 − 中止 7 = 87、しかし解析は 83</td><td>4例分の脱落が図に現れない</td></tr>
+<tr><td>ITT集団</td><td>ランダム化 152 に対し ITT は 102 + 48 = 150</td><td>「即時同意撤回 2例」を除いた数と整合する（104 − 2 = 102）。ここは説明がつく</td></tr>
+</tbody></table></div>
+<h3>5. 結果 — ベースライン</h3>
+<h4>Table 1. 患者背景（mITT）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群（N=83）</th><th>通常ケア群（N=41）</th></tr></thead>
+<tbody>
+<tr><td>年齢, 歳（平均±SD）</td><td>61.8 ± 16.9</td><td>62.7 ± 15.0</td></tr>
+<tr><td>年齢, 中央値（Q1, Q3）</td><td>65.0（48.0, 75.0）</td><td>63.0（55.0, 74.0）</td></tr>
+<tr><td>女性, %（n/N）</td><td>61.4（51/83）</td><td>31.7（13/41）</td></tr>
+<tr><td>男性, %（n/N）</td><td>38.6（32/83）</td><td>68.3（28/41）</td></tr>
+<tr><td>ヒスパニック系, %</td><td>19.3（16/83）</td><td>12.2（5/41）</td></tr>
+<tr><td>白人, %</td><td>73.5（61/83）</td><td>75.6（31/41）</td></tr>
+<tr><td>黒人, %</td><td>20.5（17/83）</td><td>22.0（9/41）</td></tr>
+<tr><td>アジア系, %</td><td>3.6（3/83）</td><td>2.4（1/41）</td></tr>
+<tr><td>感染が判明または推定, %</td><td>100.0（83/83）</td><td>100.0（41/41）</td></tr>
+<tr><td>SIRS該当項目数（平均±SD）</td><td>2.7 ± 0.7</td><td>2.8 ± 0.8</td></tr>
+<tr><td>BMI, kg/m²（平均±SD）</td><td>26.6 ± 5.7（83）</td><td>25.3 ± 6.0（39）</td></tr>
+<tr><td>qSOFA（平均±SD）</td><td>1.9 ± 0.7（82）</td><td>2.1 ± 0.7（40）</td></tr>
+<tr><td>細菌性敗血症, %</td><td>75.9（63/83）</td><td>80.5（33/41）</td></tr>
+<tr><td>ウイルス性, %</td><td>7.2（6/83）</td><td>4.9（2/41）</td></tr>
+<tr><td>真菌性, %</td><td>1.2（1/83）</td><td>2.4（1/41）</td></tr>
+<tr><td>その他, %</td><td>15.7（13/83）</td><td>12.2（5/41）</td></tr>
+<tr><td>ベースライン乳酸, mmol/L（平均±SD）</td><td>3.6 ± 3.2（66）</td><td>3.8 ± 3.6（33）</td></tr>
+<tr><td>同・中央値（Q1, Q3）</td><td>2.5（1.6, 3.8）</td><td>2.0（1.5, 5.7）</td></tr>
+</tbody></table></div>
+<p><strong>性別の分布が大きく偏っている</strong>（女性 61.4% vs 31.7%）。抄読会スライドはこれを有意差ありとし、2:1割付の小規模試験で生じた偶然の不均衡と解釈している。年齢は約62歳と比較的若く、乳酸中央値は 2.0〜2.5 mmol/L と高くない。</p>
+<h4>既往歴（mITT・主なもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>既往</th><th>介入群（N=83）</th><th>通常ケア群（N=41）</th></tr></thead>
+<tbody>
+<tr><td>心筋梗塞</td><td>12.0%（10/83）</td><td>4.9%（2/41）</td></tr>
+<tr><td>高血圧</td><td>50.6%（42/83）</td><td>61.0%（25/41）</td></tr>
+<tr><td>心不整脈</td><td>18.1%（15/83）</td><td>14.6%（6/41）</td></tr>
+<tr><td>うっ血性心不全</td><td>24.1%（20/83）</td><td>22.0%（9/41）</td></tr>
+<tr><td>冠動脈疾患</td><td>16.9%（14/83）</td><td>26.8%（11/41）</td></tr>
+<tr><td>肝機能障害</td><td>19.3%（16/83）</td><td>14.6%（6/41）</td></tr>
+<tr><td>糖尿病</td><td>34.9%（29/83）</td><td>26.8%（11/41）</td></tr>
+<tr><td>腎機能障害</td><td>45.8%（38/83）</td><td>53.7%（22/41）</td></tr>
+<tr><td>免疫不全・免疫抑制療法</td><td>14.5%（12/83）</td><td>17.1%（7/41）</td></tr>
+<tr><td>COPD・喘息</td><td>21.7%（18/83）</td><td>31.7%（13/41）</td></tr>
+<tr><td>悪性腫瘍</td><td>25.3%（21/83）</td><td>26.8%（11/41）</td></tr>
+</tbody></table></div>
+<p>原表の注記は「両群間に統計学的有意差（P&lt;0.05）はなかった」とする。<strong>腎機能障害の既往が半数近くを占める</strong>集団で、主要な副次評価項目がRRT導入率であることは覚えておく必要がある。心房細動の有無や心機能（EF）は記載されていない。</p>
+<h3>6. 結果 — 介入の実施状況（Table 2）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群（N=83）</th><th>通常ケア群（N=41）</th></tr></thead>
+<tbody>
+<tr><td>病院到着から登録までの時間, h（平均±SD）</td><td>5.2 ± 4.2</td><td>4.4 ± 2.8</td></tr>
+<tr><td>同・中央値（Q1, Q3）</td><td>3.6（2.8, 5.9）</td><td>3.3（2.5, 5.5）</td></tr>
+<tr><td>到着から登録までの輸液量, L（平均±SD）</td><td>2.4 ± 0.6</td><td>2.2 ± 0.7</td></tr>
+<tr><td>同・中央値（Q1, Q3）</td><td>2.5（2.0, 2.8）</td><td>2.2（1.5, 2.5）</td></tr>
+<tr><td>同・体重あたり（スライドの換算）</td><td>32.5 mL/kg</td><td>29.9 mL/kg</td></tr>
+<tr><td>到着から Starling 装着までの時間, h（平均±SD）</td><td>6.8 ± 4.5</td><td>—</td></tr>
+<tr><td>総評価回数（平均±SD）</td><td>6.3 ± 4.0</td><td>—</td></tr>
+</tbody></table></div>
+<h4>PLRの実施回数と陽性率</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>回数・割合</th></tr></thead>
+<tbody>
+<tr><td>治療目的のPLR</td><td>計 382回</td></tr>
+<tr><td>最初の24時間</td><td>67.3%（257/382）、うち陽性 41.6%（107/257）</td></tr>
+<tr><td>24〜48時間</td><td>24.1%（92/382）、うち陽性 43.5%（40/92）</td></tr>
+<tr><td>48〜72時間</td><td>6.5%（25/382）、うち陽性 60.0%（15/25）</td></tr>
+<tr><td>観察のみのPLR</td><td>計 141回</td></tr>
+<tr><td>最初の24時間</td><td>26.2%（37/141）、うち陽性 37.8%（14/37）</td></tr>
+<tr><td>24〜48時間</td><td>39.0%（55/141）、うち陽性 45.5%（25/55）</td></tr>
+<tr><td>48〜72時間</td><td>27.7%（39/141）、うち陽性 33.3%（13/39）</td></tr>
+<tr><td>モニタ期間中に輸液状態が変化した患者</td><td>69.9%（58/83）</td></tr>
+<tr><td>初回PLRが陽性だった患者</td><td>42.2%（35/83）</td></tr>
+<tr><td>少なくとも1回は反応性ありだった患者</td><td>81.9%（68/83）</td></tr>
+<tr><td>すべての測定で反応性ありだった患者</td><td>12.0%（10/83）</td></tr>
+<tr><td>一度も反応性を示さなかった患者</td><td>18.1%（15/83）</td></tr>
+</tbody></table></div>
+<p>ここにも内的不整合がある。治療目的PLRは 257 + 92 + 25 = <strong>374回</strong>で総数 382 に 8回足りず、観察のみPLRは 37 + 55 + 39 = <strong>131回</strong>で総数 141 に 10回足りない。時間帯の割合も合計 97.9%・92.9% にしかならない。</p>
+<p>臨床的に重要なのは、<strong>登録時点（1L以上入っている）でも初回PLR陽性は 42.2% にとどまり、一度も反応性を示さない患者が18.1%いた</strong>こと。裏返せば、通常ケア群では<strong>この4割強にしか意味のない輸液</strong>が、残りにも入っていた可能性がある。</p>
+<h3>7. 結果 — 主要評価項目</h3>
+<h4>72時間またはICU退室時の輸液バランス（mITT）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群（N=83）</th><th>通常ケア群（N=41）</th><th>差（95%CI）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>輸液バランス, L（平均±SD）</td><td>0.65 ± 2.85</td><td>2.02 ± 3.44</td><td>−1.37（−2.53〜−0.21）</td><td>.021</td></tr>
+<tr><td>同・中央値（Q1, Q3）</td><td>0.53（−0.84, 2.53）</td><td>1.22（−0.03, 3.73）</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>24時間ごとの投与量（登録後、mL）</h4>
+<div class="tw"><table>
+<thead><tr><th>区間</th><th>介入群</th><th>通常ケア群</th><th>差（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>0〜24時間（平均±SD, n）</td><td>2030.30 ± 1524.26（83）</td><td>2389.05 ± 1794.47（41）</td><td>−358.75（−970.10, 252.60）</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>1750.00（812.00, 3050.00）</td><td>1973.00（1185.00, 2938.00）</td><td>—</td></tr>
+<tr><td>25〜48時間（平均±SD, n）</td><td>730.73 ± 839.56（74）</td><td>1357.92 ± 1505.70（38）</td><td>−627.19（−1065.89, −188.49）</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>515.50（0.00, 1052.00）</td><td>842.50（20.00, 2500.00）</td><td>—</td></tr>
+<tr><td>49〜72時間（平均±SD, n）</td><td>425.17 ± 647.40（64）</td><td>809.94 ± 1190.93（36）</td><td>−384.77（−748.96, −20.58）</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>99.00（0.00, 521.50）</td><td>106.00（0.00, 1181.50）</td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>差が最も大きいのは25〜48時間</strong>の区間で、最初の24時間の差（−359 mL）は信頼区間が0をまたぐ。つまり <strong>本介入が効いたのは初期蘇生そのものではなく、「蘇生が一段落した後も惰性で続く輸液」を止めた部分</strong>である。これは <span class="wl">ICUにおけるプロトコール化された利尿（de-resuscitation）</span> や <span class="wl">蘇生とde-resuscitationの進歩 — ROSE・GDFT・fluid stewardship・輸液蓄積症候群（CurrOpinCritCare2025）</span> が扱う「optimization/stabilization 期の輸液」と同じ土俵である。</p>
+<p>なお3区間の投与量を合計すると介入群 3,186 mL、通常ケア群 4,557 mL で、差は 1,371 mL となり、主要評価項目の差 −1.37 L とほぼ完全に一致する。<strong>両群で尿量・除水量に差がなかったことを示唆する</strong>（後述のとおり通常ケア群のほうが利尿薬使用は多かった）。</p>
+<h3>8. 結果 — 副次評価項目（Table 3・mITT）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群</th><th>通常ケア群</th><th>差（95%CI）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>RRT導入, %（n/N）</td><td>5.1（4/79）</td><td>17.5（7/40）</td><td>−12.4%（−0.27〜−0.01）</td><td>.042</td></tr>
+<tr><td>人工呼吸導入, %（n/N）</td><td>17.7（14/79）</td><td>34.1（14/41）</td><td>−16.42%（−0.33〜0.00）</td><td>.044</td></tr>
+<tr><td>ICU在室日数, 日（平均±SD, n）</td><td>3.31 ± 3.51（74）</td><td>6.22 ± 10.72（35）</td><td>−2.91（−6.67〜0.85）</td><td>.113</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>2.09（0.85, 3.75）</td><td>2.90（1.27, 3.80）</td><td>—</td><td>—</td></tr>
+<tr><td>人工呼吸使用時間（30日間）, h（平均±SD, n）</td><td>46.99 ± 52.33（14）</td><td>119.42 ± 134.90（14）</td><td>−72.43（−154.08〜9.22）</td><td>.079</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>20.47（6.23, 59.04）</td><td>75.60（10.49, 213.63）</td><td>—</td><td>—</td></tr>
+<tr><td>昇圧薬使用時間, h（平均±SD, n）</td><td>40.74 ± 51.23（55）</td><td>55.64 ± 87.42（26）</td><td>−14.91（−52.50〜22.68）</td><td>.426</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>20.98（7.62, 45.27）</td><td>30.85（13.75, 47.60）</td><td>—</td><td>—</td></tr>
+<tr><td>クレアチニンのベースライン→72時間の変化, mg/dL</td><td>0.13 ± 1.10（79）</td><td>0.04 ± 0.97（34）</td><td>0.09（−0.34〜0.52）</td><td>.453</td></tr>
+<tr><td>中央値（Q1, Q3）</td><td>0.00（−0.19, 0.23）</td><td>−0.11（−0.39, 0.12）</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>クレアチニン値は透析導入例を除外し、透析施行時は直前の値を採用してベースラインから評価している。</p>
+<h4>探索的評価項目</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群</th><th>通常ケア群</th><th>差（95%CI）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>ループ利尿薬使用（0〜24時間）</td><td>6.0%（5/83）</td><td>9.8%（4/41）</td><td>−3.7%（−14.2〜6.7）</td><td>.451</td></tr>
+<tr><td>ループ利尿薬使用（24〜48時間）</td><td>3.6%（3/83）</td><td>12.2%（5/41）</td><td>−8.6%（−19.4〜2.2）</td><td>.067</td></tr>
+<tr><td>ループ利尿薬使用（48〜72時間）</td><td>6.0%（5/83）</td><td>7.3%（3/41）</td><td>−1.3%（−10.8〜8.2）</td><td>.783</td></tr>
+<tr><td>自宅退院, %（n/N）</td><td>63.9（53/83）</td><td>43.9（18/41）</td><td>+20.0%（1.6〜38.3）</td><td>.035</td></tr>
+<tr><td>その他の退院先</td><td>36.1%（30/83）</td><td>56.1%（23/41）</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>利尿薬の使用はむしろ通常ケア群に多い（有意差なし）。それでもバランスは介入群のほうが少なく、<strong>差は「出した量」ではなく「入れた量」で説明できる</strong>。</p>
+<h3>9. 結果 — 安全性（ITT・102例 vs 48例）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群</th><th>通常ケア群</th><th>差（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>重篤な治療関連有害事象（72時間まで）</td><td>10.2%（10/98）</td><td>13.3%（6/45）</td><td>−3.1%（−14.7〜8.5）</td></tr>
+<tr><td>同（1週間まで）</td><td>10.2%（10/98）</td><td>15.6%（7/45）</td><td>−5.4%（−17.5〜6.8）</td></tr>
+<tr><td>同（30日まで）</td><td>10.2%（10/98）</td><td>15.6%（7/45）</td><td>−5.4%（−17.5〜6.8）</td></tr>
+<tr><td>ICU再入室 0回</td><td>94.9%（93/98）</td><td>97.8%（44/45）</td><td>−2.9%（−9.0〜3.2）</td></tr>
+<tr><td>在院日数, 日（平均±SD）</td><td>9.1 ± 8.3（102）</td><td>10.2 ± 10.7（48）</td><td>−1.14（−4.31〜2.02）</td></tr>
+<tr><td>在院日数（死亡例を除く）, 日</td><td>10.4 ± 8.7（81）</td><td>11.1 ± 11.5（38）</td><td>−0.76（−4.53〜3.01）</td></tr>
+<tr><td>死亡率</td><td>19.6%（20/102）</td><td>20.8%（10/48）</td><td>−1.2%（−15.1〜12.6）</td></tr>
+<tr><td>MACE（72時間まで）</td><td>6.1%（6/98）</td><td>8.9%（4/45）</td><td>−2.8%（−12.3〜6.8）</td></tr>
+<tr><td>MACE（1週間まで）</td><td>6.1%（6/98）</td><td>11.1%（5/45）</td><td>−5.0%（−15.3〜5.3）</td></tr>
+<tr><td>MACE（30日まで）</td><td>7.1%（7/98）</td><td>11.1%（5/45）</td><td>−4.0%（−14.5〜6.5）</td></tr>
+<tr><td>MACEまたは死亡</td><td>19.6%（20/102）</td><td>22.9%（11/48）</td><td>−3.3%（−17.5〜10.9）</td></tr>
+<tr><td>強心薬使用</td><td>4.1%（4/98）</td><td>4.4%（2/45）</td><td>−0.4%（−7.5〜6.8）</td></tr>
+<tr><td>登録後72時間の総輸液量, mL</td><td>4025.77 ± 3089.30（94）</td><td>4466.39 ± 3343.04（44）</td><td>−440.62（−1586.33〜705.09）</td></tr>
+<tr><td>登録前を含む72時間の総輸液量, mL</td><td>6398.56 ± 3112.45（94）</td><td>6591.73 ± 3393.57（44）</td><td>−193.16（−1350.53〜964.20）</td></tr>
+<tr><td>登録前を含む72時間のバランス, mL</td><td>3681.70 ± 3849.26（94）</td><td>3929.45 ± 3476.81（44）</td><td>−247.75（−1597.12〜1101.61）</td></tr>
+<tr><td>同（透析例を除く）, mL</td><td>3846.79 ± 3817.28（95）</td><td>4216.43 ± 3386.2（44）</td><td>−369.64（−1699.31〜960.02）</td></tr>
+</tbody></table></div>
+<p><strong>この安全性表は、主要結果の解釈を大きく揺さぶる。</strong>ITT集団で見ると、登録後72時間の総輸液量の差は −441 mL で信頼区間が0をまたぎ、<strong>登録前の輸液を含めた72時間のバランス差はわずか −248 mL</strong>（95%CI −1597〜1102）になる。mITT の主要評価項目で見えた 1.37 L の差は、<strong>解析集団の選び方に大きく依存している</strong>。</p>
+<p>なお、介入群では「MACEまたは死亡」（20/102）が死亡（20/102）と同数で、30日MACE 7例が全員死亡例に含まれる計算になる。通常ケア群は 11/48 と 10/48 で1例だけ増える。数として成立はするが、確認しておくべき組み合わせである。</p>
+<h3>10. 結果 — 感度分析（ここが本試験の急所）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>介入群（N=102）</th><th>通常ケア群（N=48）</th><th>差（95%CI）</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>72時間またはICU退室時の輸液バランス, L</td><td>1.35 ± 3.76</td><td>1.84 ± 3.51</td><td>−0.48（−1.82, 0.85）</td><td>0.479</td></tr>
+</tbody></table></div>
+<p><strong>介入に至らなかった患者を含めたITT解析では、主要評価項目の有意差が消失する。</strong>効果量は −1.37 L から −0.48 L へ3分の1近くまで縮み、信頼区間は0を大きくまたぐ。</p>
+<p>原表は「Mean ± SE」と表記しているが、n=102 で SE が 3.76 になることは統計的にありえず、<strong>実際には SD の表示と考えるほかない</strong>（原著の表ラベルの誤り）。</p>
+<p>また、抄読会スライドは「治療効果の大きさは女性のほうが高い」と原著が述べている一方で、<strong>詳細な数値の記載はなく、副次評価項目を性別ごとに探索しても有意差はなかった</strong>としている。ベースラインで女性が介入群に偏っていたことと合わせて読む必要がある。</p>
+<h3>11. 著者の考察（原著の主張）</h3>
+<p>抄読会スライドが要約した原著の Discussion は次のとおり。</p>
+<ul><li>PLRを指標に輸液を行うことで、有意に輸液バランスを減らせた。72時間で 1.37 L の制限に相当する</li><li>非侵襲的バイオリアクタンスは、数分かけて平均SVを算出するため、強い呼吸性変動や心房細動のような不整脈があっても信頼できる。侵襲的カテーテルによるCOやドプラエコーに対して妥当性が検証されている</li><li>通常ケア群では利尿薬使用もRRTも多いが、それを考慮してもPLR群のほうが輸液を制限できている</li><li>制限できた量（1.37 L）に比して得られた治療効果が大きいことから、効果は<strong>体液制限そのものよりも、生理的効果を得るための「タイミングと投与量」</strong>に関係している可能性がある</li><li>介入群ではクレアチニン上昇も少なく、不要で有害な輸液・昇圧薬を減らすことが血行動態の最適化に有効である</li><li>死亡率とMACEは減少傾向だったが、サンプルサイズが不足している</li></ul>
+<p><strong>結論</strong>：PLRに基づく輸液戦略は体液バランスの増加を抑え、副次評価項目ではRRT・人工呼吸の導入を減らし、探索的評価項目では自宅退院を増やした。</p>
+<h4>考察と表の食い違い</h4>
+<p>「介入群でCre上昇も少ない」という考察は、<strong>Table 3 の数値と方向が逆である</strong>。実際にはベースラインから72時間のクレアチニン変化は介入群 +0.13 mg/dL、通常ケア群 +0.04 mg/dL で、<strong>数値上は介入群のほうが上昇幅が大きく、P=.453 で差もない</strong>。RRT導入率が下がったこととクレアチニン推移が改善しないことは両立しうるが（RRT開始は臨床判断であり、腎機能そのものの指標ではない）、<strong>考察の書きぶりは表を超えている</strong>。</p>
+<h3>12. 原著の限界（著者の記載）</h3>
+<ul><li><strong>非盲検試験</strong>であり、ホーソン効果が混入する</li><li>2:1割付のため性別の分布が異なる（介入群に女性が多い）。性差で重症度や治療反応性が異なる可能性</li><li>死亡率についてはサンプルサイズが不足</li></ul>
+<h3>13. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「輸液を減らせた」と「転帰が良くなった」は別物として読む 本試験が示したのは <mark class="hl"><strong>72時間の輸液バランスというプロセス指標が 1.37 L 減ったこと</strong></mark> である。RRT・人工呼吸の導入率低下は<strong>副次評価項目</strong>で、しかも <mark class="hl"><strong>どちらも「臨床医が始めるかどうかを決める」アウトカム</strong></mark> であり、<strong>非盲検試験では介入群と分かっている医師の判断が直接入り込む</strong>。死亡・MACE・在院日数はいずれも差がなく、<mark class="hl"><strong>この試験から「PLRガイドで転帰が良くなる」とは言えない</strong></mark>。</p>
+</div>
+<h4>① 解析集団の選び方が結論を作っている（最重要）</h4>
+<ul><li>割付後に介入群の13%・通常ケア群の15%が割付治療を受けず、さらに介入群7例がプロトコルを離脱。<strong>mITT 83/104（80%）でしか主要解析が行われていない</strong></li><li><strong>ITT感度分析では −0.48 L（95%CI −1.82〜0.85、P=0.479）と有意差が消える</strong></li><li>脱落理由（ICU非入室・緊急手術・DKA・DNAR・臨床医判断）は<strong>予後と無関係ではない</strong>。介入群でのみ7例の「プロトコル逸脱による中止」が起きていることは、<strong>逸脱が転帰の悪い患者に偏った可能性</strong>を排除できない</li><li>非盲検＋mITT＋アウトカムが臨床医の裁量に依存、という組み合わせは、内的妥当性への疑義として最も重い</li></ul>
+<h4>② 対照群が定義されていない</h4>
+<ul><li>「通常ケア」の内容が論文に規定されていない。<strong>モニタの使用有無すら不明</strong>で、対照群でも輸液反応性を評価していた可能性がある</li><li>差が縮む方向にも広がる方向にも効きうる。<strong>何と何を比べたのかが確定しない</strong></li></ul>
+<h4>③ 事前計画からの変更</h4>
+<ul><li><strong>key secondary が中間解析後にクレアチニン変化→RRT導入率へ変更</strong>された。変更後の指標は「臨床医が決める」性質を持つ</li><li>当初の副次評価項目のうち、平均輸液量・有害事象発生率・ICU再入室・30日死亡・退院先・ICU退室時の平均バランス差が<strong>削除</strong>された。削除された項目の多くは最終的に「安全性」「探索的」として報告されているが、<strong>格下げされた項目が有意差なし、格上げされた項目が有意差あり</strong>という並びになっている</li><li>想定した治療効果 −2L（SD 3L）は過大で、実際の効果量（mITTでも −1.37 L）を上回る</li></ul>
+<h4>④ デバイス企業のスポンサーシップ</h4>
+<ul><li><strong>資金提供は Cheetah Medical 社</strong>。試験に使われた NICOM／Starling SV の製造販売元である</li><li><strong>著者2名（Sahatjian、Hansell）は同社の社員</strong></li><li>スポンサーは<strong>着想・デザイン・原稿作成に関与</strong>し、<strong>デバイス関連有害事象の判定</strong>にも関わったとされる</li><li>主要評価項目が「輸液バランス」という<strong>メーカーにとって都合よく動かしやすいプロセス指標</strong>であること、非盲検であること、mITTを採用したことは、いずれも<strong>効果を出しやすい方向に働く設計上の選択</strong>である。この3つが同時に成立している試験は、結果を割り引いて読む</li><li>同じ「機器メーカーとの距離」の問題は <span class="wl">輸液チャレンジの4要素を事前に決める — TROL（エディトリアル・CritCare2020）</span> にもある（Vincent は *Critical Care* の編集長で自誌に掲載、機器メーカーとの関係の開示がない）。<strong>輸液反応性の領域は、モニタを売る側と使う側の距離が近い</strong>ことを前提に読む</li></ul>
+<h4>⑤ デバイスそのものの妥当性 — 機種で結論が変わる</h4>
+<p>抄読会スライドは、独立した施設（Monnet／Teboul のグループ）による2本の検証研究を並べている。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>機器</th><th>n</th><th>基準法</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Kupersztych-Hagege E, et al. *Br J Anaesth*. 2013;111(6):961-6</td><td>NICOM</td><td>48（SAPS II 51±17、人工呼吸83%、敗血症性ショック83%）</td><td>経肺熱希釈法（CI ≧15%増を反応性ありと判定）</td><td>NICOMはPICCOよりCIを 0.9 L 低く表示。PLRによる輸液反応性判定の AUC 0.50（P=.77） ＝ ほぼ判別能なし</td></tr>
+<tr><td>Galarza L, et al. *Br J Anaesth*. 2018;121(3):567-573</td><td>Starling SV</td><td>32（SAPS II 59±10、人工呼吸81%、敗血症性ショック72%）</td><td>パルス式希釈法（CI ≧10%増を反応性ありと判定）</td><td>熱希釈法との相関係数 0.59（P&lt;.001）、PLR誘発 CI ≧10% に対する AUC 0.88（P=0.06）</td></tr>
+</tbody></table></div>
+<p>2018年の論文は「NICOM の最小応答時間は30秒、Starling SV は8秒であるため、PLRが誘発する短時間のCI変化の捉え方が違った可能性がある」と説明し、技術的理由から30秒と8秒の直接比較はできなかったとしている。<strong>同じ論文の筆頭著者に、前の論文には無かったCOIが新たに発生している点にもスライドは触れている。</strong></p>
+<p>結論として、<mark class="hl"><strong>臨床で使う機種によって値の信頼性・解釈が変わる</strong></mark>。FRESH が使ったのは Starling SV であり、<strong>NICOM の検証結果をそのまま FRESH に当てはめることも、その逆もできない</strong>。Vault内の <span class="wl">バイオリアクタンスによる輸液反応性の動的評価（Cheetah）</span> はメーカー資料に基づくノートなので、この2本と併せて読む。</p>
+<h4>⑥ 集団の重症度が読めない</h4>
+<ul><li>APACHE II／SOFA の記載がなく、qSOFA（1.9〜2.1）と乳酸中央値（2.0〜2.5 mmol/L）しか手がかりがない</li><li>死亡率 20% は敗血症性ショックとしてはやや低め。<strong>「ショック」というより「低血圧を伴う敗血症」に近い集団</strong>の可能性がある</li><li>心房細動の有無・EF などベースの心機能が不明。バイオリアクタンスの精度に直結する情報が欠けている</li></ul>
+<h4>⑦ 記載されていないこと</h4>
+<div class="tw"><table>
+<thead><tr><th>読者が探すが本文（および入手できたスライド）に無いもの</th><th>なぜ重要か</th></tr></thead>
+<tbody>
+<tr><td>RRTの開始基準・除水量</td><td>主要な副次評価項目がRRT導入率。開始基準がなければ「臨床医の判断」以上のことは言えない。ICUでの除水量も不明</td></tr>
+<tr><td>対照群のモニタリング内容</td><td>比較対象が定義されない</td></tr>
+<tr><td>PLR実施者・トレーニング・体位の標準化</td><td>PLRは手技依存性が高い</td></tr>
+<tr><td>女性で治療効果が大きい理由・その効果量</td><td>記載なしとスライドが明記</td></tr>
+<tr><td>原著の参考文献リスト</td><td>原著PDF未入手のため本ノートには収載できていない</td></tr>
+</tbody></table></div>
+<h4>⑧ 数値の内的不整合（本改稿で検算して見つけたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>不整合</th></tr></thead>
+<tbody>
+<tr><td>CONSORT・除外内訳</td><td>5,383 に対し内訳合計 5,075（308例分が不明）</td></tr>
+<tr><td>CONSORT・介入群</td><td>割付104に対し「受けた94＋受けなかった14」＝108</td></tr>
+<tr><td>CONSORT・介入群の内訳</td><td>「受けなかった14」の内訳合計が13</td></tr>
+<tr><td>CONSORT・解析数</td><td>94 − 中止7 = 87 に対し解析は83</td></tr>
+<tr><td>Table 2・治療目的PLR</td><td>382回に対し時間帯別の合計は374回（割合合計97.9%）</td></tr>
+<tr><td>Table 2・観察目的PLR</td><td>141回に対し時間帯別の合計は131回（割合合計92.9%）</td></tr>
+<tr><td>Table 3・人工呼吸</td><td>差の95%CIが −0.33〜0.00 と上限が帰無値に接しているのに P=.044</td></tr>
+<tr><td>感度分析表</td><td>「Mean ± SE」と表示されているが値はSDと考えるほかない</td></tr>
+<tr><td>抄読会スライドの記載</td><td>検出力「7%」（原著の値は未確認。明らかな誤記）</td></tr>
+</tbody></table></div>
+<h4>⑨ 旧ノートの記述で本改稿が正した点</h4>
+<div class="tw"><table>
+<thead><tr><th>旧記述</th><th>検証結果</th></tr></thead>
+<tbody>
+<tr><td>「主要評価（72時間またはICU退室時の輸液バランス）：介入群で有意に低値」とだけ書き、ITT感度分析に触れていない</td><td>ITTでは −0.48 L（95%CI −1.82〜0.85、P=0.479）で有意差消失。この試験の解釈を決める情報が欠落していた</td></tr>
+<tr><td>「腎代替療法の必要性：5.1% vs 17.5%（P=.04）」「人工呼吸の必要性：17.7% vs 34.1%（P=.04）」</td><td>数値は正しい（抄録の表記が P=.04、原表は .042 と .044）。ただし分母は 79/40 および 79/41 で mITT の 83/41 と異なる点が欠落していた</td></tr>
+<tr><td>「結論：…安全で、正味輸液バランスを低下させ、腎・呼吸不全リスクを低減した」</td><td>これは原著の Interpretation の直訳。RRT導入率・人工呼吸導入率という「臨床医が決めるアウトカム」を非盲検で測った副次評価項目であることが書かれていない</td></tr>
+<tr><td>資金源・COIの記載なし</td><td>Cheetah Medical 社が資金提供、著者2名が同社社員、スポンサーが着想・デザイン・原稿作成に関与。主題と開示先が完全に重なる</td></tr>
+<tr><td>ファイル名に誌略・年がなく、内容も疑問形のまま</td><td>Chest 2020 を明記し、結論と留保を含む名称に改名</td></tr>
+<tr><td>「※元ノートは本文がテンプレートのみ（記載なし）。以下はWebSearch補足。」</td><td>抄読会スライドという一次に近い資料がアーカイブに存在していた。本改稿で全面的に置き換えた</td></tr>
+</tbody></table></div>
+<h3>14. 既存ノートとの整合 — 輸液を「減らす」研究群の中での位置</h3>
+<h4>Table. 「輸液を減らす」介入RCTの並び</h4>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>介入</th><th>主要評価項目</th><th>結果</th><th>転帰への影響</th></tr></thead>
+<tbody>
+<tr><td>FRESH（本試験・Chest2020）</td><td>PLR誘発SV変化で輸液・昇圧を判断</td><td>72時間の輸液バランス</td><td>mITTで −1.37 L（P=.021）。ITTでは有意差なし</td><td>死亡差なし。RRT・人工呼吸の導入は副次で低下</td></tr>
+<tr><td><span class="wl">敗血症性ショックの輸液制限は90日死亡を減らさない（CLASSIC・NEJM2022）</span></td><td>蘇生後の輸液を制限</td><td>90日死亡</td><td>輸液量は減ったが死亡は変わらない</td><td>なし</td></tr>
+<tr><td><span class="wl">敗血症性ショックの輸液制限は1年後の生存・QOL・認知機能も変えない（CLASSIC 1年追跡・ICM2023）</span></td><td>同上・1年追跡</td><td>生存・QOL・認知</td><td>変わらない</td><td>なし</td></tr>
+<tr><td><span class="wl">RIFTS 重症敗血症・敗血症性ショックへの輸液制限（CCM2019）</span></td><td>輸液制限</td><td>—</td><td>輸液は減る</td><td>死亡改善は示せず</td></tr>
+<tr><td><span class="wl">REVERSE-AKI 制限的輸液管理の実現可能性RCT（ICM2021）</span></td><td>AKI患者の制限的輸液</td><td>実行可能性</td><td>バランスは減る</td><td>検出力なし</td></tr>
+</tbody></table></div>
+<p><mark class="hl"><strong>「輸液は減らせる」は繰り返し再現されているが、「だから死亡が減る」はどの試験でも示せていない。</strong></mark>FRESHもこの列に並ぶ。</p>
+<h4>ガイドラインの現在地</h4>
+<p><span class="wl">敗血症・敗血症性ショックの国際ガイドライン2026 — 全129推奨、強い推奨は18だけ（SSC2026・CCM2026）</span> は、この領域を次のように整理している。</p>
+<div class="tw"><table>
+<thead><tr><th>推奨</th><th>内容</th><th>強さ・確実性</th><th>前版からの変化</th></tr></thead>
+<tbody>
+<tr><td>推奨48</td><td>自由か制限かは「どちらでもよい」</td><td>条件付き</td><td>「エビデンス不十分」から条件付き推奨へ</td></tr>
+<tr><td>推奨49</td><td>身体所見や静的指標単独より、動的指標で初期輸液蘇生を導くことを提案</td><td>条件付き・low</td><td>確実性が very low → low に格上げ</td></tr>
+</tbody></table></div>
+<p>SSC2026 の独自メタ解析（18 RCT）では、動的指標による輸液ガイドは <strong>死亡 RR 0.91（95%CI 0.79-1.06、moderate）</strong>、<strong>RRT RR 0.75（95%CI 0.58-0.98、moderate、6試験）</strong>、人工呼吸器フリー日数 +0.79日（95%CI −1.28〜+2.86、very low）。<strong>FRESHはこのRRTの解析に含まれている可能性が高い</strong>（Vault内で確認できたのは推奨49の記述までで、個別試験リストまでは追えていない）。ガイドラインは「大半が100例未満の単施設研究」と注記しており、<strong>FRESHは多施設という点でこの中では例外的に大きい</strong>。判定閾値も「輸液チャレンジまたはPLRでSVなどが10〜15%増加」と、本試験と同じ枠組みである。</p>
+<h4>手技の型としての整合</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>FRESH（本試験）</th><th><span class="wl">輸液チャレンジの4要素を事前に決める — TROL（エディトリアル・CritCare2020）</span></th><th><span class="wl">血行動態評価による容量状態の把握（ICM2022）</span></th></tr></thead>
+<tbody>
+<tr><td>前負荷を増やす手段</td><td>PLR（自己輸血・約300 mL相当）</td><td>実際の輸液チャレンジ</td><td>輸液チャレンジ</td></tr>
+<tr><td>1回量</td><td>陽性なら500 mL・最大2回</td><td>200 mL／本文の至適量は約4 mL/kg</td><td>4 mL/kg・10分</td></tr>
+<tr><td>判定</td><td>SV変化 &gt;10%</td><td>CO 10%以上の増加</td><td>同等</td></tr>
+<tr><td>陰性のときの一手</td><td>ノルアドレナリンで MAP≧65</td><td>記載なし（中止基準としてCVP上昇）</td><td>—</td></tr>
+<tr><td>上限</td><td>追加が2Lを超えたら昇圧薬へ</td><td>Limits（CVPの過度な上昇）</td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>FRESHの価値は「測る道具」ではなく「陰性のときに何をするか、どこで打ち切るかまでアルゴリズムに書いた」点にある</strong>、と読むのが実務的である。</p>
+<p>その他の関連：<span class="wl">受動的下肢挙上（PLR）テストと輸液反応性の予測</span>（手技そのもの）、<span class="wl">敗血症性ショックにおける輸液反応性の持続時間（FCREV study）</span>（反応性は一過性という論点）、<span class="wl">輸液反応性予測の来歴 — 静的指標の敗北から動的テストへ（Lasting Legacy・ICM2022）</span>（本ノートを一次データ源として参照している）、<span class="wl">晶質液はバランス製剤か生理食塩水か（SALT-ED・SMART・NEJM2018）</span>（「何を入れるか」はFRESHの守備範囲外で、本試験は輸液の種類を規定していない）。</p>
+<h3>15. その後どうなったか</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>2020年時点（本試験）</th><th>その後</th><th>Vault内の裏づけ</th></tr></thead>
+<tbody>
+<tr><td>動的指標で輸液を導くことの推奨</td><td>SSCG2016 は推奨するが根拠は弱い</td><td>SSC2026 推奨49で確実性が very low → low に格上げ（条件付き推奨のまま）</td><td>あり</td></tr>
+<tr><td>動的指標ガイドでRRTは減るか</td><td>FRESHの副次で 5.1% vs 17.5%</td><td>SSC2026 の6試験メタ解析で RR 0.75（95%CI 0.58-0.98）</td><td>あり</td></tr>
+<tr><td>動的指標ガイドで死亡は減るか</td><td>差なし（検出力不足）</td><td>SSC2026 の18試験メタ解析でも RR 0.91（95%CI 0.79-1.06）で有意差なし</td><td>あり</td></tr>
+<tr><td>輸液を制限すれば死亡が減るか</td><td>未検証</td><td>CLASSIC（NEJM2022）・1年追跡（ICM2023）で否定的</td><td>あり</td></tr>
+<tr><td>バイオリアクタンスの精度</td><td>メーカーは妥当性検証済みと主張</td><td>独立検証で機種差が大きい（NICOM AUC 0.50／Starling SV AUC 0.88）</td><td>本ノート内に収載（原著はVault未収載）</td></tr>
+<tr><td>Chest誌上の反響</td><td>—</td><td>2020年10月号（158:1319-1320）、2020年12月号（158:2706-2707）、2021年3月号（159:1300）、2021年7月号（160:e91-e92）に関連する書簡・コメントが4件掲載されている</td><td>本文未入手・Vault未収載</td></tr>
+</tbody></table></div>
+<h3>16. 主要な引用文献一覧</h3>
+<p>原著の参考文献リストは未入手のため、<strong>抄読会スライドが提示した文献</strong>を挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>Surviving Sepsis Campaign 2016. *Intensive Care Med*. 2017;43:304-377</td><td>初期輸液30 mL/kg と、以後の動的指標による評価を推奨</td></tr>
+<tr><td>Boyd JH ら. *Crit Care Med*. 2011;39:259-265</td><td>VASST後付け解析。正の輸液バランスと死亡の関連</td></tr>
+<tr><td>*Intensive Care Med*. 2017;43:625-632</td><td>2013年の重症敗血症・敗血症性ショック 23,513例の観察研究。輸液バランス1L増ごとに死亡が2.3%（95%CI 2〜2.5%、P=0.0003）増加</td></tr>
+<tr><td>*Curr Opin Crit Care*. 2015;21:388-394</td><td>輸液反応性テスト（輸液チャレンジ・ミニ輸液・PPV/SVV・EEO・PLR・Eadyn）の総覧</td></tr>
+<tr><td>Monnet X, Teboul JL. *Critical Care*. 2015;19:18</td><td>PLRの総説。約300 mLの自己輸血に相当</td></tr>
+<tr><td>Cherpanath TGV ら. *Crit Care Med*. 2016;44:981-991</td><td>PLRのメタ解析。感度86%（95%CI 79-92）、特異度92%（95%CI 88-96）、AUC 0.95（95%CI 0.92-0.98）</td></tr>
+<tr><td>Latham HE ら. *J Crit Care*. 2017;42:42-46</td><td>カンザスの単施設後ろ向き研究。NICOMでSVガイド蘇生を行った群と通常ケア群の比較</td></tr>
+<tr><td>*CHEST*. 2015;148(6):1462-1469</td><td>PLRガイド蘇生の実行可能性・安全性</td></tr>
+<tr><td>*Crit Care Explor*. 2019;1:e0015</td><td>PLRを主要評価に用いた先行RCT</td></tr>
+<tr><td>Kupersztych-Hagege E ら. *Br J Anaesth*. 2013;111(6):961-6</td><td>バイオリアクタンス（NICOM）はCOとPLRの効果推定に信頼できない</td></tr>
+<tr><td>Galarza L ら. *Br J Anaesth*. 2018;121(3):567-573</td><td>Starling SV によるPLRの血行動態評価。AUC 0.88</td></tr>
+<tr><td>CLASSIC trial</td><td>輸液制限戦略の多施設RCT（本ノートは <span class="wl">敗血症性ショックの輸液制限は90日死亡を減らさない（CLASSIC・NEJM2022）</span> を参照）</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 FRESHは、<mark class="hl"><strong>PLR誘発の1回拍出量変化で輸液を導けば72時間の輸液バランスが 1.37 L 減ることを、多施設RCTで初めて示した</strong></mark>試験である。しかし ==<strong>全ランダム化例を含むITT解析では主要評価項目の有意差が消え（−0.48 L、P=0.479）、死亡・MACE・在院日数はいずれも変わらない</strong><mark class="hl">。低下したRRT・人工呼吸の導入率は、</mark><strong>非盲検試験で臨床医が開始を決めるアウトカム</strong><mark class="hl">であり、しかも </mark><strong>デバイス企業が資金提供し著者2名が同社社員でスポンサーが原稿作成に関与した試験</strong>==である。</p>
+<p>明日から変えることは機器の購入ではなく手順である。<mark class="hl"><strong>輸液を足したくなったその場でSVの変化を測り、10%増えなければ輸液せず昇圧薬に振る。合計2Lを超えたら昇圧薬へ切り替える。この2行をプロトコルに書く</strong></mark>。当院はバイオリアクタンスを持たないので、<mark class="hl"><strong>測定はエコー（LVOT VTI）または条件を満たす症例の動脈圧波形で代替する</strong></mark>。そして説明のときは、<mark class="hl"><strong>「輸液が減る」と「転帰が良くなる」を必ず分けて言う</strong></mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

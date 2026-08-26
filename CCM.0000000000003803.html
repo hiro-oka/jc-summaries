@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症予測の機械学習アラートは臨床医に響かなかった — 有用と答えたのは看護師42%・医師16%（EWS 2.0・CCM2019）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000003803.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症予測の機械学習アラートは臨床医に響かなかった — 有用と答えたのは看護師42%・医師16%（EWS 2.0・CCM2019）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Ginestra JC, Giannini HM, Schweickert WD, Meadows L, Lynch MJ, Pavan K, Chivers CJ, Draugelis M, Donnelly PJ, Fuchs BD, Umscheid CA. Clinician Perception of a Machine Learning–Based Early Warning System Designed to Predict Severe Sepsis and Septic Shock. Crit Care Med. 2019;XX:00–00. DOI: 10.1097/CCM.0000000000003803</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2019-11-05）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000003803" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000003803</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Clinician Perception of a Machine Learning–Based Early Warning System Designed to Predict Severe Sepsis and Septic Shock</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000003803.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000003803.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000003803.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>RRS・バイタル自動収集（PrimeGaia）に、この論文をどう使うか この論文は「アラートが当たるか」ではなく「アラートを現場がどう受け取るか」のデータである。当院が予測アラートを載せる前に、ここで失敗している4点をそのまま設計項目に変換できる。</p>
+<ol><li>「誰に鳴らすか」は Penn の方が当院の想定より手厚い。それでも医師の受容は16%だった。</li></ol>
+<p>Penn は ①担当看護師に EHR アラート ②担当医／APP にテキスト ③rapid response coordinator にテキスト、の三方向に同時配信し、しかも coordinator が「チームが受け取ったことの確認」と「直ちにベッドサイド評価を完了させること」まで担保していた。当院で検討している通知設計より人手をかけている。それでも医師が「有用」と答えたのは6時間時点で16%。<mark class="hl">通知経路を増やしても受容は上がらない。上げるのは「鳴った後の型」のほうだ</mark>。</p>
+<ol><li>鳴った後の標準アクションを、導入前に表にして配る。</li></ol>
+<p>Penn の考察は「アラート後に実施すべきアクション項目が確立していなかったこと」を受容不良の一因として著者自身が挙げている。当院版はここを先に埋める。</p>
+<div class="tw"><table>
+<thead><tr><th>アラートを受けたら</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>一次受け（病棟看護師）が10分以内に</td><td>実測バイタル1セット再検・意識レベル・尿量・皮膚所見</td><td>異常が再現しなければ「監視強化」で終了し、記録に残す</td></tr>
+<tr><td>再検で NEWS または qSOFA が上昇</td><td>乳酸・血算・血液培養の要否、感染源の見当</td><td>担当医コール。RRT起動基準に達すればRRT</td></tr>
+<tr><td>再検で異常なし・患者は安定</td><td>「予測アラートである」ことの再確認</td><td><mark class="hl">終了ではなく「6時間後に再評価」を必ず予約する</mark>。ここを空欄にすると空振り体験だけが蓄積する</td></tr>
+<tr><td>同一患者に24時間で3回以上</td><td>アラート時間比率（累積）</td><td>プロアクティブラウンドの優先対象に格上げ</td></tr>
+</tbody></table></div>
+<ol><li>「予測」と「検知」の違いを、導入教育の中心に置く。</li></ol>
+<p>Penn の受容不良の第1原因は、臨床医が予測ツールを検知ツールと誤解し、ベッドサイドで異常が見つからないと「誤作動」と判断したことだった。EWS 2.0 は重症敗血症・敗血症性ショック発症の<strong>中央値5〜6時間前</strong>（症例によっては数日前）に鳴っている。<mark class="hl">「今は正常に見えるのが正常である」</mark>という説明を、導入時の周知メールではなく、病棟ごとの対面説明で繰り返す。</p>
+<ol><li>「なぜ鳴ったか」を画面に出す。</li></ol>
+<p>改善要望48件のうち<strong>44%が「発火要因の透明性」</strong>を求めていた。当院で予測モデルを載せるなら、寄与した変数（どのバイタル・どの検査値が押し上げたか）をアラート画面に併記することを要件定義に入れる。院内には既に <span class="wl">深層学習でICU退室後1年までの死亡を予測しSHAPで説明する（JIPAD・透明なcAI開発の枠組み・AnaesthCritCarePainMed2022）</span> という説明可能AIの実装例があり、同じ枠組みを流用できる。</p>
+<ol><li>職種差を前提に運用を組む（当院で一番使える発見）。</li></ol>
+<p>看護師は有用42%・管理変更30%、医師は有用16%・管理変更9%。ところが医師が管理を変えた10件のうち<strong>5件はICU転棟</strong>だった。<mark class="hl">看護師は小さく頻繁に動き、医師はほとんど動かないが動くときは大きい</mark>。したがって一次受けは看護師、医師には「一次受けが上げてきたときだけ」通知する二段構えが実装として自然。ただし看護師側の業務が増えるので、<span class="wl">連続バイタル監視は間欠EWSより早く気づくが感度は同等でアラートは7倍（VSI・1529入院・JMedSyst2023）</span> で議論した「一次受けをICU／RRT側の集中モニタ担当に置く」案と、どちらが当院の人員で回るかを急変ワーキングで詰める。</p>
+<ol><li>経営戦略会議での言い方を決めておく。</li></ol>
+<p>「AIを入れれば早期発見できる」は本論文の射程を超える。<mark class="hl">本論文が示したのは「予測特性が良好でも、導入5か月後の現場は動かない」という一点に尽きる</mark>。導入提案では効果指標を「アラート精度」や「臨床医の満足度」ではなく、予期せぬICU入室・院内心停止といった転帰側に置く（VSI論文と同じ結論）。そして初年度の目標を「受容の獲得」に設定し、達成基準を「一次受けの応答率」「再評価予約の実施率」という運用指標にする。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：SIRS ベースの敗血症検知ツールは診断精度が良好で、検査実施の頻度・時間、ケアのエスカレーションを改善した。同じ Penn グループの EWS 1.0（SIRS ベース）は死亡率低下の非有意な傾向を示した。ML アルゴリズムによる敗血症性ショック予測は後ろ向き検証で良好な精度を示している。</li><li><strong>Unknown</strong>：ML 予測ツールの<strong>前向き大規模実装</strong>の報告は少ない。とくに、臨床医がそうしたツールをどう受け止めるか（受容・信頼・行動変容）は報告がなかった。</li><li><strong>What's new</strong>：<mark class="hl">ML ベース敗血症予測アラートに対する臨床医の受け止めを報告した最初の研究</mark>。予測特性が良好（陽性尤度比13、PPV 29%、NPV 97%）でも、現場の受け止めは全般に不良で、新情報をもたらすことも管理を変えることも稀だった。しかも看護師と医師で受け止めが系統的に食い違った。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 非ICU病棟に展開した機械学習ベースの敗血症予測アラート（EWS 2.0）について、362件のアラートを対象に臨床医に2回アンケートしたところ、アラートを「有用」と答えたのは6時間時点で看護師42%・医師16%、「管理を変えた」と答えたのは看護師30%・医師9%にとどまった。<strong>患者転帰は本論文では一切測定されていない</strong>。</p>
+</div>
+<ul><li><strong>これは受容の調査であって有効性の検証ではない</strong>。死亡・ICU入室・敗血症進展といった患者アウトカムはこの論文に存在しない。前後比較による転帰解析は「H. M. Giannini, unpublished observations, 2019」として言及されるだけで、<mark class="hl">本論文からは読めない</mark>。</li><li>デザインは前向き観察研究＝<strong>Web アンケート</strong>。質的インタビューでも mixed methods でもない。自由記載欄はあるが、主題化の手続きは「テーマをレビューして一部をカテゴリに再コード化した」という一文のみ。</li><li><strong>有用性と行動変容は別物</strong>。看護師は有用42%に対し管理変更30%、医師は有用16%に対し管理変更9%。しかも医師の管理変更10件中5件がICU転棟であり、頻度は低いが内容は重い。</li><li>アラート疲労は設計思想として明示的に登場するが、測定はされていない。閾値を「システム全体で1日約10件」に設定した理由として「偽陽性がアラート疲労を悪化させアラートへの信頼を損なう」ことを著者らが挙げている。ただし本研究にアラート疲労の尺度は無い。</li><li><strong>偽陽性率の直接記載は無く、PPV 29% から逆算するのみ</strong>。しかもこの PPV は2015年の後ろ向き検証コホートの値で、<mark class="hl">実装後の実測 PPV は本論文に報告されていない</mark>。</li><li>「誰に鳴らすか」は三方向（看護師のEHRアラート・医師のテキスト・rapid response coordinator のテキスト）と明確に定義されていた一方、<strong>鳴った後に何をするかの標準アクションは定義されていなかった</strong>（著者自身が考察で認めている）。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 敗血症の「検知」と「予測」は別物である 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>敗血症検知システム（detection）</strong> は、すでに現れている異常（発熱・頻脈・頻呼吸・白血球異常＝SIRS基準など）を電子カルテから自動で拾い、臨床医に知らせる仕組み。鳴った時点で患者には何らかの所見があるので、ベッドサイドに行けば「確かに変だ」と確認できる。</p>
+<p><strong>敗血症予測システム（prediction）</strong> は、まだ基準を満たしていない段階で、将来重症化する確率が高い患者を統計モデルで指し示す。鳴った時点では患者は見た目に安定していることが多い。<mark class="hl">この差が本研究の核心である</mark>。臨床医が予測システムを検知システムだと思って対応すると、「行ってみたが何もなかった＝誤作動」という体験が積み上がる。</p>
+<p><strong>主な用語</strong></p>
+<ul><li><strong>SIRS（全身性炎症反応症候群）</strong>：体温・心拍数・呼吸数・白血球数の4項目のうち2項目以上の逸脱。第一世代の敗血症検知ツールが使った基準。</li><li><strong>ランダムフォレスト（random forest）</strong>：多数の決定木を作って多数決を取る機械学習手法。個々の木は解釈できるが、数百本の平均としての予測理由は言語化しにくく、いわゆる「ブラックボックス」になりやすい。</li><li><strong>陽性尤度比（LR+）</strong>：検査陽性が事前確率をどれだけ引き上げるかの指標。10を超えると「強い」とされる。本ツールは13。</li><li><strong>PPV（陽性的中率）</strong>：アラートが鳴った患者のうち、実際に対象疾患だった割合。本ツールは29%＝<mark class="hl">鳴った10件のうち約7件は重症敗血症・敗血症性ショックに至らない</mark>。</li><li><strong>NPV（陰性的中率）</strong>：鳴らなかった患者のうち対象疾患でなかった割合。本ツールは97%。有病率が低い集団では NPV は自然に高くなる点に注意。</li><li><strong>アラート疲労（alert fatigue）</strong>：警告が頻繁に、かつ多くは空振りで鳴ることで、臨床医が警告全般に鈍感になり無視するようになる現象。</li><li><strong>rapid response coordinator</strong>：Penn の運用で、アラートが臨床チームに届いたことを確認し、直ちにベッドサイド評価が完了するよう管理する担当者。当院のRRS運用でいえばRRTの窓口役に近い。</li></ul>
+</div>
+<h3>2. 背景と目的</h3>
+<ul><li>敗血症は入院患者の主要な死因。院内発症の敗血症の死亡率は、入院時に既に存在した敗血症の2〜3倍高い。認知の遅れが救命的介入を遅らせ、ショック・臓器不全・死亡への進行リスクを高める。</li><li>多くの病院が EHR ベースの敗血症サーベイランス／アラートを構築してきた。第一世代は SIRS を標的とし、診断検査の頻度と実施までの時間、ケアのエスカレーションを改善した。</li><li>Penn グループの <strong>EWS 1.0</strong>（SIRS ベースの自動検知）は、死亡率低下の<strong>非有意な傾向</strong>を示した（Umscheid 2015, J Hosp Med）。</li><li>近年は臨床基準が明らかになる前に高リスク患者を同定する<strong>予測ツール</strong>が開発されている。ICU患者の敗血症性ショック予測 ML は後ろ向き検証で良好な精度を示すが、<strong>前向き実装の転帰報告はほとんど無い</strong>。小規模な非学術病院で敗血症関連死亡の改善（McCoy 2017）、小規模RCTでICU患者の在院日数短縮と死亡改善（Shimabukuro 2017）の報告があるのみ。</li><li><strong>目的</strong>：非ICU患者に大規模前向き実装した ML 敗血症予測ツール <strong>EWS 2.0</strong> に対する臨床医の受け止めを記述する。</li><li>前提となる問題意識：著者らは EWS 1.0 について、管理変更（早期敗血症ケアと記録の増加）が観察されたにもかかわらず、<mark class="hl">有用と感じた医療者は少数だった</mark>と既に報告している（Guidi 2015, Ann Am Thorac Soc）。その受容の低さを<strong>アラート疲労</strong>で説明できると仮説していた。ML 予測ツールでは、さらに<strong>複雑さと不透明さ</strong>が受容を制限しうると考えた。</li></ul>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：前向き観察研究（アンケート調査）。単一施設。</li><li><strong>セッティング</strong>：フィラデルフィアの多病院学術医療システムのうち、<strong>782床のフラッグシップ学術病院</strong>。EWS 1.0 と同じ施設。アラート件数が多く研究チームが常駐できることから選定。</li><li><strong>対象（研究の被験者）</strong>：アラートが発火した患者を担当していたベッドサイド臨床医。<strong>看護師（registered nurses）</strong> と 医療者（providers＝医師または advanced practitioner） の2群。</li><li><strong>対象（アラートを受けた患者）</strong>：2016年11〜12月の非ICU入院患者。</li><li><strong>倫理</strong>：Penn IRB が Quality Improvement に該当すると判定。回答は完全に任意。</li></ul>
+<h4>3-1. EWS 2.0 のアルゴリズム</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>手法</td><td>ランダムフォレスト分類器</td></tr>
+<tr><td>学習データ</td><td>2011年7月〜2014年6月に3つの都市部急性期病院を退院した成人 <strong>n = 162,212</strong></td></tr>
+<tr><td>陽性例の定義</td><td>ICD-9 <strong>995.92（重症敗血症）</strong> または <strong>785.52（敗血症性ショック）</strong> のコードがあり、かつ<strong>血液培養陽性</strong>、かつ<strong>乳酸 &gt; 2.2 mmol/L または収縮期血圧 &lt; 90 mmHg</strong>。<strong>n = 943</strong></td></tr>
+<tr><td>time zero</td><td>上記事象のうち最も早いものを敗血症発症時刻とした</td></tr>
+<tr><td>学習対象</td><td><strong>非ICU患者のみ</strong>（導出集団に ICU 患者は含まれない）</td></tr>
+<tr><td>閾値設定</td><td>病院システム全体で<strong>1日およそ10アラート</strong>になるよう事前に設定。目的は「対応可能なワークロード」と「アラート疲労を悪化させ信頼を損なう偽陽性の最小化」。EWS 1.0 は1日約6件だった</td></tr>
+<tr><td>後ろ向き検証</td><td>2015年10〜12月の入院患者 <strong>n = 10,448</strong>、スクリーン陽性 <strong>314</strong></td></tr>
+<tr><td>検証成績</td><td>「重症敗血症または敗血症性ショック」に対し <strong>陽性尤度比 13</strong>、<strong>PPV 29%</strong>、<strong>NPV 97%</strong></td></tr>
+<tr><td>稼働開始</td><td><strong>2016年6月16日</strong></td></tr>
+</tbody></table></div>
+<ul><li>展開前に、システム内の臨床医へ情報提供メールで EWS 2.0 を周知した（対面教育の記載は無い）。</li><li><mark class="hl">アルゴリズムの妥当性検証そのものは別稿（H. M. Giannini, unpublished observations, 2019）とされ、本論文では査読済み文献として参照できない</mark>。</li></ul>
+<h4>3-2. アラートの宛先と、鳴った後の運用</h4>
+<div class="tw"><table>
+<thead><tr><th>宛先</th><th>通知手段</th><th>期待される役割</th></tr></thead>
+<tbody>
+<tr><td>担当看護師</td><td>EHR ベースのアラート</td><td>ベッドサイド評価</td></tr>
+<tr><td>担当医／advanced practitioner</td><td>テキストメッセージ</td><td>ベッドサイド評価</td></tr>
+<tr><td>rapid response coordinator</td><td>テキストメッセージ</td><td>臨床チームがアラートを受領したことの確認と、<strong>直ちにベッドサイド評価が完了すること</strong>の担保</td></tr>
+</tbody></table></div>
+<ul><li>アラートの中身は「EWS 2.0 が当該患者で発火した」旨に加え、<strong>直近の関連検査データ</strong>と <strong>48時間分のバイタルサイン推移</strong>。</li><li><mark class="hl">鳴った後にどの検査を出す・どの治療を始めるといった標準アクションは定義されていない</mark>。この点は考察で著者自身が受容不良の一因として挙げている（後述）。</li></ul>
+<h4>3-3. アンケートの設計と実施</h4>
+<ul><li><strong>質問票2種</strong>（Web ベース、REDCap で管理）。EWS 1.0 評価に用いた既存質問票を改変し、集中治療・一般内科の指導医、内科レジデント、看護師からなる学際チームのフィードバックで反復的に洗練。</li><li>形式：カテゴリ質問と <strong>5段階リッカート尺度</strong>、自由記載欄付き。</li><li>評価した4領域：①患者の状態 ②アラート時点で新たに判明した情報 ③アラートが管理を変えたか、どう変えたか ④アラートが有用だったか／ケアを改善したか。</li><li><strong>第1回調査</strong>：16項目。アラートから<strong>6時間以内</strong>。全アラートについて rapid response coordinator が担当看護師と担当医を質問票に誘導し、機密扱いで独立に回答させた。</li><li><strong>第2回調査</strong>：11項目。第1回に回答した臨床医へ、アラートの<strong>48時間後</strong>にメールでリンクを送付。第1回の一部の質問に加え、48時間の臨床経過を経た時点での患者像とアラートの有用性・影響を尋ねた。未回答者には12〜24時間後に最大2回、メールまたはテキストでリマインド。</li><li><strong>実施期間</strong>：2016年11月7日〜12月19日の<strong>連続6週間</strong>。<mark class="hl">EWS 2.0 のシステム全体展開から5か月後</mark>（＝新奇性が薄れた定常運用状態での測定）。</li></ul>
+<h4>3-4. 解析</h4>
+<ul><li>リッカート尺度は <strong>1・2 を否定、3 を中立、4・5 を肯定</strong>にまとめた。</li><li>自由記載はテーマをレビューし、一部を対応するカテゴリ回答に再コード化。</li><li>結果は各群（医療者・看護師）内の総回答数に対する百分率。群間比較は <strong>χ² 検定</strong>と両側 Fisher 正確検定を適宜使用。<strong>p &lt; 0.05 を有意</strong>とし、有意なもののみ報告。</li><li><mark class="hl">多重比較の調整、サンプルサイズ設計、事前登録の記載は無い</mark>。</li></ul>
+<h3>4. 結果 — 回答状況</h3>
+<ul><li>6週間で <strong>362件の EWS 2.0 アラート</strong>が発火。<strong>中央値 8件/日</strong>（IQR 7–10、範囲 4–15）。</li><li>第1回調査の潜在回答数は <strong>724</strong>（1アラートにつき看護師1・医療者1）。287件が 252名の個々の臨床医から回収（全体回答率 <strong>40%</strong>）。</li><li>看護師 <strong>180件（回答率 50%）</strong></li><li>医療者 <strong>107件（回答率 30%）</strong></li><li>第2回調査：第1回に回答した者のうち、看護師 <strong>43名（24%）</strong>、医療者 44名（41%） が回答（全体 <strong>30%</strong>）。</li><li>第2回の回答者77名のうち、<strong>49名（64%、医療者33名・看護師16名）</strong> が「当該患者と十分な継続性があり、正確に回答できる」と申告。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>第2回調査の解釈上の制約 看護師の第2回回答率は24%と低く、そのうち「十分な継続性あり」は16名（第2回回答者43名の37%）。<mark class="hl">後述の「48時間後に敗血症だと考えた看護師は6%（1名）」「48時間後にアラート原因を敗血症と答えた看護師は0%」という印象的な数字は、実質16〜17名の回答から出ている</mark>。職種間の差の頑健性はここで大きく落ちる。</p>
+</div>
+<h3>5. 結果 — アラート時点の所見と印象</h3>
+<h4>Table 1. EWS 2.0 アラート後の臨床的印象</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>医療者 n（%）</th><th>看護師 n（%）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td><strong>アラートにより新たな臨床所見が得られた</strong></td><td>14（13）</td><td>43（24）</td><td>0.03</td></tr>
+<tr><td>バイタルサインの変化</td><td>10（71）</td><td>39（91）</td><td></td></tr>
+<tr><td>新しい症状</td><td>6（43）</td><td>3（7）</td><td></td></tr>
+<tr><td>身体所見</td><td>2（14）</td><td>2（5）</td><td></td></tr>
+<tr><td>検査所見</td><td>0（0）</td><td>7（16）</td><td></td></tr>
+<tr><td><strong>アラート前、患者は敗血症だと思っていた</strong></td><td></td><td></td><td>&lt; 0.001</td></tr>
+<tr><td>はい</td><td>40（38）</td><td>21（12）</td><td></td></tr>
+<tr><td>たぶん</td><td>29（27）</td><td>49（28）</td><td></td></tr>
+<tr><td>いいえ</td><td>37（35）</td><td>106（60）</td><td></td></tr>
+<tr><td><strong>アラート後6時間以内、患者は敗血症だと思った</strong></td><td></td><td></td><td>&lt; 0.001</td></tr>
+<tr><td>はい</td><td>42（40）</td><td>23（13）</td><td></td></tr>
+<tr><td>たぶん</td><td>28（26）</td><td>54（31）</td><td></td></tr>
+<tr><td>いいえ</td><td>36（34）</td><td>99（56）</td><td></td></tr>
+<tr><td><strong>アラート後48時間、患者は敗血症だったと思う</strong></td><td></td><td></td><td>0.06</td></tr>
+<tr><td>はい</td><td>8（26）</td><td>1（6）</td><td></td></tr>
+<tr><td>たぶん</td><td>4（13）</td><td>0（0）</td><td></td></tr>
+<tr><td>いいえ</td><td>19（61）</td><td>15（94）</td><td></td></tr>
+<tr><td><strong>アラートは「重症化するだろう」という予測に影響したか</strong></td><td></td><td></td><td>0.30</td></tr>
+<tr><td>予測は変わらない</td><td>66（62）</td><td>99（55）</td><td></td></tr>
+<tr><td>予測が上がった</td><td>13（12）</td><td>24（13）</td><td></td></tr>
+<tr><td>新たに重症である</td><td>1（1）</td><td>4（2）</td><td></td></tr>
+<tr><td>依然として重症である</td><td>24（22）</td><td>47（26）</td><td></td></tr>
+<tr><td>重症化が進行している</td><td>3（3）</td><td>5（3）</td><td></td></tr>
+</tbody></table></div>
+<p>原表脚注：新たな臨床所見は複数選択可のため合計が100%を超えうる。48時間時点の敗血症評価は医療者 n = 44、看護師 n = 43、その他の設問は医療者 n = 107、看護師 n = 180。結果は各項目の回答数を回答者総数で除したもの。</p>
+<p><strong>本文が強調している点</strong></p>
+<ul><li>アラートとその後の患者評価が<strong>新しい情報をもたらすことは稀</strong>だった（医療者13%、看護師24%、p = 0.03）。</li><li><strong>アラート時点で「敗血症あり」とする認識が職種間で乖離</strong>（医療者40% vs 看護師13%、p &lt; 0.001）。</li><li>アラート後も<strong>大半の臨床医は「重症化する」という見込みを変えなかった</strong>（医療者62%、看護師55%）。</li><li>48時間時点では両群とも「敗血症だった」とする割合が下がった（医療者26%、看護師6%）。</li></ul>
+<h3>6. 結果 — アラートが鳴った理由をどう解釈したか</h3>
+<h4>Table 2. アラート発火原因として認識されたもの</h4>
+<div class="tw"><table>
+<thead><tr><th>発火原因</th><th>第1回・医療者（n = 107）</th><th>第1回・看護師（n = 180）</th><th>第2回・医療者（表頭 n = 44）</th><th>第2回・看護師（表頭 n = 43）</th></tr></thead>
+<tbody>
+<tr><td>敗血症</td><td>42（40）</td><td>37（21）</td><td>13（39）</td><td>0（0）</td></tr>
+<tr><td>脱水</td><td>15（14）</td><td>24（14）</td><td>6（18）</td><td>3（18）</td></tr>
+<tr><td>癌</td><td>10（9）</td><td>13（7）</td><td>5（15）</td><td>1（6）</td></tr>
+<tr><td>感染症だが敗血症ではない</td><td>4（4）</td><td>11（6）</td><td>1（3）</td><td>0（0）</td></tr>
+<tr><td>出血</td><td>3（3）</td><td>5（3）</td><td>1（3）</td><td>1（6）</td></tr>
+<tr><td>不整脈</td><td>3（3）</td><td>8（5）</td><td>0（0）</td><td>1（6）</td></tr>
+<tr><td>呼吸器の問題</td><td>3（3）</td><td>2（1）</td><td>0（0）</td><td>0（0）</td></tr>
+<tr><td>術後の状態</td><td>3（3）</td><td>8（5）</td><td>1（3）</td><td>3（18）</td></tr>
+<tr><td>末期臓器不全</td><td>2（2）</td><td>7（4）</td><td>2（6）</td><td>0（0）</td></tr>
+<tr><td>薬剤の影響</td><td>1（1）</td><td>3（2）</td><td>0（0）</td><td>1（6）</td></tr>
+<tr><td>疼痛・不安</td><td>1（1）</td><td>4（2）</td><td>0（0）</td><td>0（0）</td></tr>
+<tr><td>心原性ショック</td><td>0（0）</td><td>0（0）</td><td>2（6）</td><td>0（0）</td></tr>
+<tr><td>肺塞栓</td><td>0（0）</td><td>0（0）</td><td>0（0）</td><td>0（0）</td></tr>
+<tr><td>その他</td><td>5（5）</td><td>9（5）</td><td>0（0）</td><td>1（6）</td></tr>
+<tr><td><strong>臨床的変化が無く、なぜ鳴ったか分からない</strong></td><td>12（11）</td><td>37（21）</td><td>2（6）</td><td>6（35）</td></tr>
+<tr><td>臨床的変化はあったが、なぜ鳴ったか分からない</td><td>2（2）</td><td>7（4）</td><td>0（0）</td><td>0（0）</td></tr>
+</tbody></table></div>
+<p>原表脚注：第1回はアラートから6時間以内、第2回は48時間後に回答。末期臓器不全には肝硬変・末期腎不全・透析・移植拒絶・補助人工心臓を含む。その他にはデコンディショニング・心停止・輸血反応・電解質異常・血管迷走神経反射・一過性低血圧の単回測定を含む。四捨五入のため合計は100%にならない。</p>
+<ul><li>敗血症が主因とされたのは全体の約3分の1（医療者40%、看護師21%、p &lt; 0.001）、次いで脱水（両群14%）。</li><li><mark class="hl">医療者の11%、看護師の21%が「臨床的変化が無く、なぜ鳴ったのか分からない」と回答</mark>。第2回では看護師の35%がこう答えた。</li><li>医療者の「敗血症が原因」という印象は時間で安定（6時間40% → 48時間39%）だったのに対し、看護師は48時間時点で<strong>0%</strong>に落ちた（6時間21% → 48時間0%、p &lt; 0.05、補足表1）。</li></ul>
+<h3>7. 結果 — 管理は変わったか</h3>
+<h4>Table 3. EWS 2.0 が患者ケアに与えた影響</h4>
+<div class="tw"><table>
+<thead><tr><th>管理の変化</th><th>医療者（n = 107）</th><th>看護師（n = 178）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td><strong>何らかの管理変更があった</strong></td><td>10（9）</td><td>54（30）</td><td>&lt; 0.001</td></tr>
+<tr><td>ベッドサイドラウンドの頻度を増やした</td><td>6（60）</td><td>32（59）</td><td></td></tr>
+<tr><td>バイタルサイン測定の頻度を増やした</td><td>1（10）</td><td>19（35）</td><td></td></tr>
+<tr><td>新たな診断検査をオーダーした</td><td>0（0）</td><td>25（46）</td><td></td></tr>
+<tr><td>新たな治療介入を開始した</td><td>0（0）</td><td>5（9）</td><td></td></tr>
+<tr><td>新たな診断を考慮した</td><td>0（0）</td><td>14（26）</td><td></td></tr>
+<tr><td>ケアのゴールに関する話し合いを開始した</td><td>1（10）</td><td>1（2）</td><td></td></tr>
+<tr><td>RRT（rapid response）を起動した</td><td>0（0）</td><td>3（6）</td><td></td></tr>
+<tr><td>患者をICUへ転棟させた</td><td>5（50）</td><td>6（11）</td><td></td></tr>
+</tbody></table></div>
+<p>原表脚注：複数選択可のため合計は100%を超えうる。下位項目の分母は「何らかの変更あり」と答えた者（医療者10名、看護師54名）。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>この表の読み方 — 頻度と重みは逆向き 医療者が管理を変えたのはわずか <strong>10件（9%）</strong> だが、そのうち 5件（50%）がICU転棟である。看護師は <strong>54件（30%）</strong> で管理を変えたが、その中身はラウンド頻度・バイタル頻度・検査オーダーといった低コストな監視強化が中心で、ICU転棟は6件（11%）。<mark class="hl">看護師は小さく頻繁に、医師は稀に大きく動く</mark>。RRS の通知設計はこの非対称性を前提に組むべきである。</p>
+</div>
+<h3>8. 結果 — 全体的な印象（Figure 1・Figure 2）</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000003803" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000003803）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. EWS 2.0 アラートの有用性に関する、医療者と看護師の初回および遅延時点の受け止め。上段が Provider Responses、下段が Nurse Responses。各行は横一本の積み上げ帯グラフで、左から順に濃い灰色が Unhelpful（リッカートの「非常に有用でない」＋「有用でない」の合計）、薄い灰色が Neither（「有用でも有用でなくもない」）、白が Helpful（「非常に有用」＋「有用」の合計）。図の下端に左向き矢印「Negative」、中央に「Neutral」、右向き矢印「Positive」の軸ラベルが置かれ、帯の中心が中立位置に揃うよう配置されている。数値は帯の中に白抜きまたは黒文字で表示。医療者はアラート時点が 33／51／16%、48時間後が 18／52／30%。看護師はアラート時点が 22／36／42%、48時間後が 31／25／44%。At the time of alert はアラート後6時間以内に提出された第1回調査、Forty-eight hours after alert はアラートから48時間以上経過して提出された第2回調査を指す。原図・無改変</p>
+</div>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000003803" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000003803）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. EWS 2.0 が患者ケアに与えた影響に関する、医療者と看護師の初回および遅延時点の受け止め。Figure 1 と同じ形式の積み上げ帯グラフで、濃い灰色が Didn't Improve Care（「明らかにケアを改善しなかった」＋「おそらく改善しなかった」）、薄い灰色が Maybe Improved Care、白が Improved Care（「明らかに改善した」＋「おそらく改善した」）。医療者はアラート時点が 54／35／11%、48時間後が 58／30／12%。看護師はアラート時点が 36／31／33%、48時間後が 25／38／38%。<mark class="hl">医療者の帯は2時点とも中立位置より大きく左（否定側）に寄っており、看護師の帯は右（肯定側）に寄る。この視覚的な左右の分離が、本論文の中心的なメッセージを一枚で表している</mark>。原図・無改変</p>
+</div>
+<ul><li>有用性：アラート後6時間で「有用」と答えたのは看護師42%、医療者16%（p &lt; 0.001）。</li><li>医療者の「有用」は48時間後に <strong>30%</strong> とほぼ倍増したが、<strong>統計学的に有意ではなかった</strong>（補足表1）。</li><li>看護師の評価は時間で安定（有用：6時間42% → 48時間44%、有用でない：6時間22% → 48時間31%）。</li><li>ケア改善：看護師の方が「ケアを改善した」と答えやすく、6時間時点で医療者11% vs 看護師33%（p &lt; 0.001）、48時間時点で医療者12% vs 看護師38%（p = 0.05）。</li></ul>
+<p><strong>自由記載</strong></p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>回答者数</th><th>内訳</th></tr></thead>
+<tbody>
+<tr><td>有用な点を挙げた</td><td>26名</td><td>チーム内コミュニケーションの改善 <strong>73%</strong>／モニタリング頻度の増加 <strong>46%</strong>／診断検査を促した 23%／介入を促した <strong>2%</strong></td></tr>
+<tr><td>有用でない点を挙げた</td><td>19名</td><td>既知の臨床的異常で発火する <strong>37%</strong>／患者が臨床的に安定している 21%／資源の無駄遣い 16%／発火が遅すぎる 16%／無関係な臨床的異常 11%</td></tr>
+<tr><td>改善の提案</td><td>48件</td><td><strong>発火要因の透明性を求めるもの 44%</strong>（最多）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「介入を促した 2%」の重み 有用と答えた26名のうち、<strong>アラートが治療的介入を促したと答えたのは1名（2%）</strong>にすぎない。有用性の中身の大半は「コミュニケーションが良くなった」「よく見るようになった」であり、<mark class="hl">治療行動の前倒しという、予測アラートに期待される本来の効果はほとんど報告されていない</mark>。</p>
+</div>
+<h3>9. 考察 — 著者による解釈</h3>
+<h4>9-1. 職種間の乖離</h4>
+<ul><li>看護師は患者が敗血症だと考えにくく、48時間時点ではアラートを敗血症に帰属させた看護師は皆無だった。看護師は最も患者に近い医療者であり敗血症の徴候に最初に気づく立場でもあることから、この評価の差は<strong>敗血症認知の改善余地</strong>を示すと同時に、<strong>客観的な自動監視システムの重要性</strong>を示唆しうる、と著者らは述べる。</li><li>敗血症を疑うことは少ないにもかかわらず、看護師の方が管理変更と好意的評価を報告しやすかった。著者らは「EWS 2.0 が両群に<strong>異なる利益と予後情報</strong>をもたらした」と解釈する。</li><li>敗血症リスクに関する印象が職種で食い違っている以上、<strong>多職種間コミュニケーションの改善</strong>（有用と答えた者の73%が挙げた点）はとくに重要かもしれない、とする。</li></ul>
+<h4>9-2. EWS 2.0 は EWS 1.0 より受けが悪かった</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>EWS 1.0（SIRS検知）</th><th>EWS 2.0（ML予測）</th></tr></thead>
+<tbody>
+<tr><td>管理を変えた・看護師</td><td>56%</td><td><strong>30%</strong></td></tr>
+<tr><td>管理を変えた・医療者</td><td>44%</td><td><strong>9%</strong></td></tr>
+<tr><td>有用・看護師</td><td>40%</td><td>42%（6時間）／44%（48時間）</td></tr>
+<tr><td>有用・医療者</td><td>33%</td><td><strong>16%（6時間）／30%（48時間）</strong></td></tr>
+<tr><td>ケアを改善した・看護師</td><td>35%</td><td>33%</td></tr>
+<tr><td>ケアを改善した・医療者</td><td>24%</td><td><strong>11%</strong></td></tr>
+</tbody></table></div>
+<ul><li>看護師の評価は両システムでほぼ同等だが、<mark class="hl">医療者は EWS 2.0 を明確に低く評価した</mark>。著者らは「予測型アラートに対する受容が、悪化を検知するアラートに対する受容よりも一般に低いことを反映しているのかもしれない」と述べる。</li></ul>
+<h4>9-3. 受容不良の4つの障壁（著者の整理）</h4>
+<div class="tw"><table>
+<thead><tr><th>障壁</th><th>内容</th><th>著者の考察</th></tr></thead>
+<tbody>
+<tr><td>① アラート時点で患者が比較的安定している</td><td>EWS 2.0 は重症敗血症・敗血症性ショック発症の<strong>中央値5〜6時間前</strong>、症例によっては<strong>数日前</strong>に発火する</td><td>多くの臨床医が EWS 2.0 を従来型の検知ツールと誤解し、悪化の証拠が見つからないと発火を誤りまたは無益と切り捨てたと推測。<mark class="hl">「直ちにベッドサイド評価」という運用の期待自体が、この誤解を助長した可能性がある</mark>。予測アラートの最適なリードタイムは未解明</td></tr>
+<tr><td>② 臨床医自身の判断への自信</td><td>EWS 2.0 の PPV は肺癌低線量CT・デジタルマンモグラフィといった広く受け入れられているスクリーニングと同等だが、リスク患者を同定する能力が臨床医を上回るとは限らない。実際、<strong>アラートが鳴った患者のほぼ半数で臨床医は既に敗血症を疑っていた</strong></td><td>予測アラートの有用性は「<strong>まだ高リスクと見なされていない高リスク患者</strong>」という比較的小さな標的集団に限られうる。どの患者部分集団が最も恩恵を受けるかを同定する研究が必要</td></tr>
+<tr><td>③ MLアルゴリズムの不透明性</td><td>ML は「ブラックボックスモデル」と呼ばれる。数百の変数を取り込みうるため予測に寄与した因子を意味ある物語に落とし込めない。さらに ML はこれまで当該転帰と関連づけられてこなかった変数を重要と判定するため、予測が臨床的に直感に反しうる</td><td>困難ではあるが、アルゴリズム設計と発火要因の透明性がリスク評価を臨床医の視点から正当化する助けになる</td></tr>
+<tr><td>④ アラート後の確立したアクション項目の欠如</td><td><mark class="hl">重症敗血症・敗血症性ショックの臨床的発症「前」の高リスク患者に、どんな管理変更を行うべきかが不明</mark></td><td>監視強化を含め、臨床的に明らかになる前に実施すれば転帰を改善しそうな介入はいくつか考えられるが、<strong>その有効性と費用対効果のデータは乏しい</strong>。不要なコスト・不適切な検査・抗菌薬適正使用の悪化を避けるための研究が必要</td></tr>
+</tbody></table></div>
+<h4>9-4. 限界（著者の記載）</h4>
+<ul><li>第1回調査の回答率は Web ベースの臨床医調査として想定される範囲だが、<strong>非回答者バイアスは除外できない</strong>。</li><li>48時間時点の低い回答率と、臨床医が申告した継続性の限界が、<strong>第2回調査結果の解釈を制限する</strong>。</li><li>ただしバイアスの方向は不明。満足している臨床医も不満な臨床医も、どちらも回答しやすい可能性があるため。</li></ul>
+<h4>9-5. 次の一手（著者の提案）</h4>
+<ul><li>重症敗血症・敗血症性ショックを予測するシステムは、<strong>臨床医の受け止めを織り込んだ反復的な開発プロセス</strong>を必要とする。</li><li><strong>検知システムとは別物である予測システムの役割と有用性</strong>を臨床医に馴染ませる、周到な導入キャンペーンが重要。</li><li><mark class="hl">アラートがリスク予測を伝える最適な手段なのかは疑問が残る</mark>。RRT 起動のトリガーとしてではなく、申し送りや診断的意思決定の際の客観的リスク評価に用いる縦断的リスク層別化ツールとして最も有用かもしれない。</li><li>最適なリードタイム、および高リスクと予測されたがまだ発症していない患者に対する最も費用対効果の高い介入を決める研究が必要。</li><li>将来の予測システムは、EHR からリアルタイムの敗血症関連オーダーをスクリーニングして「臨床医が既に気づいている患者」を除き、見逃されるリスク患者に的を絞ることで強化されうる。</li><li>信頼され採用されるためには、ML 予測システムは<strong>正確であると同時に解釈可能</strong>でなければならない。解釈可能性には透明性が必要で、理想的にはインタラクティブな説明とデータ可視化によってブラックボックスの複雑な論理を翻訳する。</li></ul>
+<h4>9-6. 結論（原文）</h4>
+<p>臨床医の EWS 2.0 に対する受け止めは混在しており、全般に不良だった。優れた予測特性にもかかわらず、EWS 2.0 のアラートが新しい臨床情報をもたらすことも管理を変えることも稀だった。アラートが鳴った患者が比較的安定していたことがアラートへの懐疑と対応の不確実さにつながった可能性がある。解釈を助ける説明が与えられなければ、臨床医は自分の臨床的直感より複雑な予測アルゴリズムを信頼することが難しいかもしれない。</p>
+<h3>10. 批判的吟味（JCでの論点）</h3>
+<h4>10-1. まず射程を確定する — これは有効性の研究ではない</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>患者転帰はこの論文に存在しない <mark class="hl">死亡・ICU入室率・敗血症進展率・抗菌薬投与までの時間、いずれも本論文では測定されていない</mark>。冒頭に置かれた「アルゴリズムの妥当性検証は優れた予測特性を示した」「導入前後比較で臨床プロセスと患者転帰への影響を解析した」はいずれも H. M. Giannini, unpublished observations, 2019 への言及であり、<mark class="hl">本論文の読者が検証できる形では提示されていない</mark>。したがって本論文から「MLアラートは患者を救う／救わない」という結論を引き出すことはできない。引けるのは「導入5か月後の現場は、このアラートを有用と感じておらず、行動もほとんど変えていない」という一点である。</p>
+</div>
+<h4>10-2. PPV と偽陽性の扱い</h4>
+<ul><li><strong>偽陽性率という言葉での記載は無い</strong>。示されるのは後ろ向き検証の <strong>PPV 29%</strong> のみで、そこから「鳴った10件のうち約7件は重症敗血症・敗血症性ショックに至らない」と逆算できる。</li><li><strong>実装後の実測 PPV は本論文に無い</strong>。閾値・患者集団・EHR運用が2015年の検証コホートと同一である保証はなく、実運用の空振り率は不明のまま。</li><li>1日中央値8件のアラートに PPV 29% を当てはめると、<strong>1日あたり約5.7件、6週間で約257件が空振り</strong>という規模感になる（本論文には無い、こちらの試算）。自由記載の「既知の異常で鳴る 37%」「患者が安定している 21%」「資源の無駄 16%」という不満はこの規模と整合する。</li><li>ただし、<mark class="hl">予測ツールにおける「偽陽性」の定義自体が論点である</mark>。5〜6時間先を予測するツールでは、アラートを受けて対処した結果として敗血症に至らなかった症例も「偽陽性」に計上されうる（予防のパラドックス）。著者らはこの点に触れていない。</li></ul>
+<h4>10-3. アラート疲労は「語られている」が「測られていない」</h4>
+<ul><li>閾値を1日約10件に設定した理由として「アラート疲労を悪化させアラートへの信頼を損なう偽陽性の最小化」が明示され、EWS 1.0 の受容不良の仮説としても登場する。</li><li>しかし <mark class="hl">本研究にアラート疲労の測定尺度は無い</mark>。「1日に何件のアラートを受けたか」「他のEHRアラートを合わせて1勤務あたり何件か」「アラートを無視した回数」といったデータは収集されていない。</li><li>したがって、観察された受容不良のうちどれだけがアラート疲労で、どれだけが予測／検知の誤解によるものかを本論文から分離することはできない。著者は後者（誤解）を主因として推している。</li></ul>
+<h4>10-4. 原著の内的不整合（数値を検算した結果）</h4>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>記載</th><th>検算・食い違い</th></tr></thead>
+<tbody>
+<tr><td>48時間後に「有用」と答えた医療者</td><td>Results 本文・Figure 1 ともに <strong>30%</strong></td><td><mark class="hl">Discussion では「42% nurses and 32% providers at 48 hr」と <strong>32%</strong> に書かれている</mark></td></tr>
+<tr><td>48時間後に「有用」と答えた看護師</td><td>Results 本文「helpful: 42% at 6 hr, <strong>44%</strong> at 48 hr」、Figure 1 も <strong>44%</strong></td><td><mark class="hl">同じ Discussion の一文で <strong>42%</strong> に書かれている</mark></td></tr>
+<tr><td>Table 1 の48時間時点の分母</td><td>脚注は「医療者 n = 44、看護師 n = 43」</td><td>実際の回答数合計は医療者 8＋4＋19 = <strong>31</strong>、看護師 1＋0＋15 = <strong>16</strong>。百分率も 31・16 を分母に計算されている（8/31 = 26%、19/31 = 61%、1/16 = 6%、15/16 = 94%）。<mark class="hl">脚注の n と計算上の分母が一致しない</mark></td></tr>
+<tr><td>Table 2 の第2回列の分母</td><td>表頭は「医療者 n = 44、看護師 n = 43」</td><td>列の回答数合計は医療者 <strong>33</strong>、看護師 <strong>17</strong>。13/33 = 39%、6/17 = 35% と、こちらも表頭の n では百分率が再現しない。<mark class="hl">「十分な継続性あり」と答えた49名（医療者33・看護師16）に近いが、看護師は16と17で揺れる</mark></td></tr>
+<tr><td>Table 3 の看護師の分母</td><td><strong>n = 178</strong>（他のすべての表では 180）</td><td>2名減っている理由の説明が無い</td></tr>
+<tr><td>「臨床医はほぼ半数の患者で既に敗血症を疑っていた」（Discussion）</td><td>「almost half」</td><td>Table 1 の「アラート前に敗血症と思っていた」の Yes＋Maybe は<strong>医療者 65%（38＋27）、看護師 40%（12＋28）</strong>。両群を合算すると（40＋29＋21＋49）/287 = <strong>48%</strong>。<mark class="hl">「ほぼ半数」は職種を合算した値であり、本論文の中心的主張である職種差をこの一文だけが潰している</mark></td></tr>
+</tbody></table></div>
+<h4>10-5. デザイン上の限界（著者が書いていないもの）</h4>
+<ul><li><strong>単一施設・単一EHR・6週間・2016年</strong>。Penn 独自の rapid response coordinator という人的資源を前提とした運用であり、この体制が無い施設に一般化できない。</li><li><strong>アンケートの回答単位が混在している</strong>。第1回は「アラート単位」（287件の回答が252名から）だが、35件は同一人物の重複回答であり、<strong>クラスタ相関を無視して個々の回答を独立に扱っている</strong>。χ² 検定の前提が厳密には満たされていない。</li><li><strong>多重比較の調整が無い</strong>。Table 1〜3 と補足表で多数の職種間比較を行い、p &lt; 0.05 のものだけを報告している。</li><li><strong>サンプルサイズ設計・事前登録の記載が無い</strong>。QI 判定のため IRB 審査も経ていない。</li><li><strong>非回答者の属性データが一切無い</strong>（職位・経験年数・病棟）。回答率が看護師50% vs 医療者30% と大きく違い、<mark class="hl">職種間の差の一部が「どの層が答えたか」の違いである可能性を排除できない</mark>。</li><li><strong>第2回調査で回答率が逆転している</strong>（看護師24% vs 医療者41%）が、この逆転についての解釈が書かれていない。</li><li><strong>アンケート項目の妥当性検証が無い</strong>。EWS 1.0 用の質問票を専門家の反復レビューで改変したという記述のみで、心理測定学的な検証（信頼性係数など）は報告されていない。</li><li><strong>自由記載の分析手法が質的研究の水準に達していない</strong>。「テーマをレビューし、一部をカテゴリに再コード化した」という一文のみ。コーダー間一致率、コーディング枠組み、飽和の判断はいずれも無い。<mark class="hl">本研究を mixed methods と呼ぶのは無理がある</mark>。</li></ul>
+<h4>10-6. COI と資金源をどう読むか</h4>
+<ul><li><strong>著者らは EWS 2.0 の開発者本人</strong>である（Chivers は PhD のデータサイエンティスト、Draugelis も University of Pennsylvania Health System 所属で、アルゴリズム開発側）。自作ツールの評価という構図は本来バイアスの温床だが、<mark class="hl">本論文の結論は自作ツールに対して明確に否定的であり、開発者バイアスが働いた形跡は見られない</mark>。むしろ「自分たちのツールが受け入れられなかった」ことを正面から報告した点は評価してよい。</li><li>Schweickert の Arjo（患者移送・衛生機器メーカー）は本主題と直接の利害が薄い。Umscheid の PCORI 諮問パネル・Northwell Health 謝金も同様。</li><li>資金は NIH（NCRR／NCATS）の機関支援のみで、<mark class="hl">アラートベンダー・EHRベンダーからの資金は無い</mark>。この点は <span class="wl">連続バイタル監視は間欠EWSより早く気づくが感度は同等でアラートは7倍（VSI・1529入院・JMedSyst2023）</span>（商用アルゴリズムと商用デバイスを評価）と対照的で、本論文の方が利害から遠い。</li><li>自己引用：EWS 1.0 の開発（引用9）と EWS 1.0 の受容調査（引用27）を自グループ論文で参照しており比較の軸になっているが、参考文献33件のうち自グループは2件で、偏りとまでは言えない。</li></ul>
+<h4>10-7. 「本文に無い」と明記しておくべきこと</h4>
+<div class="tw"><table>
+<thead><tr><th>読者が探すもの</th><th>本論文での扱い</th></tr></thead>
+<tbody>
+<tr><td>患者アウトカム（死亡・ICU入室・敗血症発症率）</td><td><mark class="hl">無い</mark>。別稿（未発表）として言及されるのみ</td></tr>
+<tr><td>実装後の実測 PPV・感度・特異度・偽陽性件数</td><td><mark class="hl">無い</mark>。示されるのは実装前の後ろ向き検証値のみ</td></tr>
+<tr><td>アルゴリズムの査読済み妥当性検証</td><td><mark class="hl">無い</mark>（unpublished observations）</td></tr>
+<tr><td>アラート疲労の定量指標</td><td><mark class="hl">無い</mark></td></tr>
+<tr><td>1日に臨床医が受ける他のEHRアラート件数</td><td><mark class="hl">無い</mark></td></tr>
+<tr><td>アラートに対する応答時間・ベッドサイド評価の実施率</td><td><mark class="hl">無い</mark>。rapid response coordinator が担保する運用だったが、実際の遵守率は報告されていない</td></tr>
+<tr><td>非回答者の属性</td><td><mark class="hl">無い</mark></td></tr>
+<tr><td>費用・人的コスト</td><td><mark class="hl">無い</mark>。考察で「費用対効果のデータが乏しい」と述べるにとどまる</td></tr>
+<tr><td>患者・家族の視点</td><td><mark class="hl">無い</mark></td></tr>
+</tbody></table></div>
+<h3>11. Vault内の関連研究との突き合わせ</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本論文（EWS 2.0・CCM2019）</th><th><span class="wl">連続バイタル監視は間欠EWSより早く気づくが感度は同等でアラートは7倍（VSI・1529入院・JMedSyst2023）</span></th><th>突き合わせ</th></tr></thead>
+<tbody>
+<tr><td>測っているもの</td><td>臨床医の<strong>受け止め</strong></td><td>アルゴリズムの<strong>検出性能</strong></td><td>両者は補完関係。性能が良くても受容されないことを本論文が、受容以前に性能が伸びないことを VSI 論文が示す</td></tr>
+<tr><td>空振りの規模</td><td>PPV 29%（実装前の後ろ向き値）</td><td>PPV 0.007（連続）／0.048（間欠）、NNE 151／21</td><td><mark class="hl">VSI の空振りは桁違いに悪い</mark>。ただし VSI は「急変」という発生率の低い転帰を分母にしており、直接比較はできない</td></tr>
+<tr><td>アラート量</td><td>中央値 8件/日（782床＋システム全体で10件目標）</td><td>0.99件/患者/日（連続）＝40床病棟で1日約40件</td><td><mark class="hl">Penn の設計は「病院全体で1日10件」という極端に絞った閾値。当院が PrimeGaia を連続化するなら Penn の40倍規模のアラートを扱うことになる</mark></td></tr>
+<tr><td>提案される使い方</td><td>RRT起動のトリガーではなく、申し送り・診断的意思決定を支える<strong>縦断的リスク層別化</strong></td><td>個々のアラートではなく<strong>アラート時間比率</strong>でラウンド対象を選ぶ</td><td><mark class="hl">両論文が独立に同じ結論に到達している。「鳴らして呼ぶ」から「傾斜を見て回る」への転換</mark></td></tr>
+<tr><td>一次受け</td><td>看護師・医師・RRTコーディネーターの三方向同時</td><td>提案：RRT／ICU側の集中モニタ担当に一元化</td><td>本論文は「三方向に鳴らしても医師は動かない」ことの実データ。VSI論文の一元化案を後押しする</td></tr>
+</tbody></table></div>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本論文</th><th>他のVault内ノート</th></tr></thead>
+<tbody>
+<tr><td>仮想シナリオでの受容 vs 実運用での受容</td><td>実運用で「有用」16〜42%、「管理を変えた」9〜30%</td><td><span class="wl">AIによるICP上昇予測に臨床医はどう反応するか ICP-AId国際調査（236名・ICM2025）</span> は仮想シナリオで 84.7% が「動く」と回答</td><td><mark class="hl">仮想調査と実運用のあいだに大きな乖離がある。院内でアンケートを取って導入根拠にする場合、この乖離を必ず割り引く</mark></td></tr>
+<tr><td>説明可能性</td><td>改善要望の44%が発火要因の透明性を要求</td><td><span class="wl">深層学習でICU退室後1年までの死亡を予測しSHAPで説明する（JIPAD・透明なcAI開発の枠組み・AnaesthCritCarePainMed2022）</span></td><td>要求されているものの実装例が既にVault内にある</td></tr>
+<tr><td>予測AIから行動可能なAIへ</td><td>「鳴った後に何をするか」が未定義</td><td><span class="wl">集中治療における人工知能の未来 — 予測AIから行動可能なAIへ（What's New・ICM2023）</span></td><td>本論文はその転換が必要な理由の実証データ</td></tr>
+<tr><td>臨床医の技能とAIの関係</td><td>臨床医は自分の判断への自信からアラートを軽視</td><td><span class="wl">臨床でAIを監督する教育戦略 — deskilling・never-skillingを防ぐ（NEJM2025）</span></td><td>本論文は「過信による無視」の側、NEJM論文は「依存による技能喪失」の側。<mark class="hl">同じ導入の両端のリスク</mark></td></tr>
+<tr><td>普及の障壁</td><td>不透明性・アクション未定義・患者の安定</td><td><span class="wl">AIがICUで普及しない3つの理由</span></td><td>3つの理由と本論文の4障壁を突き合わせると院内資料が作れる</td></tr>
+<tr><td>バイオマーカーとの対比</td><td>「仕組み」で早期に気づく方向</td><td><span class="wl">救急外来の敗血症でプロカルシトニンは感度0.62・特異度0.80 — 除外には使えない（11研究7937例のSR・MA・CHESTCritCare2025）</span></td><td>単独バイオマーカーが除外に使えない以上、早期認知はシステム側に寄る</td></tr>
+<tr><td>早期警告スコアの古典</td><td>ML 予測</td><td><span class="wl">MEWS・早期警告スコアと迅速対応チーム（IHI）</span>／<span class="wl">NEWSは非待機の外科系入院でも内科系と同等以上に識別する — ただし「術後」は同定できていない（Kovacs・BJS2016）</span></td><td>手計算スコアの延長線上にMLがある。<mark class="hl">本論文は「複雑にすると受容が下がる」ことを示した</mark></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>同一論文の重複ノートがVault内にある <span class="wl">敗血症予測の機械学習早期警告システムに対する臨床医の認識（CCM）</span> は<strong>本論文とまったく同じ論文</strong>（Ginestra 2019, Crit Care Med, DOI 10.1097/CCM.0000000000003803）を扱っており、Evernote 移行時に別のノート（<code>【ICU】Early warningにMachine_Learning使った研究 急変</code>）から生成されたものと見られる。<mark class="hl">内容も抄録の要約でほぼ同一</mark>。<code>_カタログ/📋 本当に読むべき論文リスト（2026-08-15 選定）</code> でも重複疑いとして既に指摘されている。統合すべきだが、<mark class="hl">本改稿では統合を実施していない</mark>（判断は本人に委ねる）。</p>
+</div>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>引用</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>米国の敗血症発生率と傾向を臨床データと請求データで比較</td><td>Rhee C, et al. JAMA 2017;318:1241–1249</td></tr>
+<tr><td>2</td><td>敗血症関連入院の転帰と資源利用（入院時存在・重症度・病院種別）</td><td>Jones SL, et al. Med Care 2016;54:303–310</td></tr>
+<tr><td>3</td><td>Surviving Sepsis Campaign のパフォーマンス指標と転帰の関連（7.5年）</td><td>Levy MM, et al. Intensive Care Med 2014;40:1623–1633</td></tr>
+<tr><td>4</td><td>敗血症性ショックで有効な抗菌薬開始までの低血圧持続時間が生存の決定因子</td><td>Kumar A, et al. Crit Care Med 2006;34:1589–1596</td></tr>
+<tr><td>5</td><td>一般病棟で敗血症患者を同定する</td><td>Bhattacharjee P, Edelson DP, Churpek MM. Chest 2017;151:898–907</td></tr>
+<tr><td>9</td><td><strong>EWS 1.0 の開発・実装・影響</strong>（自グループ・SIRSベース、死亡低下の非有意な傾向）</td><td>Umscheid CA, et al. J Hosp Med 2015;10:26–31</td></tr>
+<tr><td>22</td><td>敗血症性ショックのリアルタイム早期警告スコア TREWScore</td><td>Henry KE, et al. Sci Transl Med 2015;7:299ra122</td></tr>
+<tr><td>23</td><td>ML ベース重症敗血症予測アルゴリズムの生存・在院日数への効果（<strong>小規模RCT</strong>）</td><td>Shimabukuro DW, et al. BMJ Open Respir Res 2017;4:e000234</td></tr>
+<tr><td>26</td><td>ML 敗血症予測による死亡・在院日数・再入院の削減（<strong>小規模非学術病院</strong>）</td><td>McCoy A, Das R. BMJ Open Qual 2017;6:e000158</td></tr>
+<tr><td>27</td><td><strong>EWS 1.0 に対する臨床医の受け止め</strong>（自グループ・本論文の直接の比較対象）</td><td>Guidi JL, et al. Ann Am Thorac Soc 2015;12:1514–1519</td></tr>
+<tr><td>28</td><td>REDCap（本研究のデータ収集基盤）</td><td>Harris PA, et al. J Biomed Inform 2009;42:377–381</td></tr>
+<tr><td>29</td><td>低線量CTによる肺癌スクリーニング（PPV比較の参照）</td><td>Humphrey LL, et al. Ann Intern Med 2013;159:411–420</td></tr>
+<tr><td>30</td><td>デジタルマンモグラフィの国内ベンチマーク（PPV比較の参照）</td><td>Sprague BL, et al. Radiology 2017;283:59–69</td></tr>
+<tr><td>31</td><td><strong>医療における機械学習の意図せぬ帰結</strong>（ブラックボックス問題の出典）</td><td>Cabitza F, Rasoini R, Gensini GF. JAMA 2017;318:517–518</td></tr>
+<tr><td>18</td><td>病棟の臨床的悪化予測における ML 手法と従来型回帰の多施設比較</td><td>Churpek MM, et al. Crit Care Med 2016;44:368–374</td></tr>
+<tr><td>32・33</td><td>Web ベース臨床医調査の回答率（限界の議論の根拠）</td><td>Beebe TJ, et al. Health Serv Res 2018;53(Suppl 1):3070–3083／Cunningham CT, et al. BMC Med Res Methodol 2015;15:32</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 陽性尤度比13・PPV 29% という「良好な」予測特性を持つ機械学習敗血症アラートを非ICU病棟に5か月運用しても、有用と答えたのは看護師42%・医師16%、管理を変えたのは看護師30%・医師9%にとどまった。しかも<strong>患者転帰はこの論文では一切測定されていない</strong>。 <mark class="hl">当院でPrimeGaiaに予測アラートを載せるなら、モデルの精度を上げる前に「一次受けは誰か」「鳴って異常が無かったときに何をするか」「なぜ鳴ったかを画面にどう出すか」の3点を先に決める。この3つが空欄のまま導入すれば、Penn とまったく同じ結果になる。</mark> そして経営戦略会議では「AIで早期発見できる」と説明しない。<mark class="hl">予測アラートの成否を決めるのはアルゴリズムではなく運用設計であり、初年度のKPIはアラート精度でも満足度でもなく、一次受けの応答率と再評価の実施率に置く。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

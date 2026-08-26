@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SOFA-1とSOFA-2の敗血症診断は89.6%一致 — だが食い違う1割にも高い死亡があり移行期は両方計算する（MIMIC-IV・eICU・Amsterdam 74615例・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06070-1.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">SOFA-1とSOFA-2の敗血症診断は89.6%一致 — だが食い違う1割にも高い死亡があり移行期は両方計算する（MIMIC-IV・eICU・Amsterdam 74615例・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Zhu H, Li P, Wang B, Fu H, Guo Y, Han Z, Huang S, Xie Y, He J, Zheng S, Shen X. Impact of the updated SOFA-2 score on sepsis diagnosis and prognosis: a retrospective multicenter cohort study. Crit Care. 2026;30:338. DOI: 10.1186/s13054-026-06070-1</dd><dt>掲載誌</dt><dd>Critical Care（2026-05-06）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06070-1" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06070-1</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Impact of the updated SOFA-2 score on sepsis diagnosis and prognosis: a retrospective multicenter cohort study</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-026-06070-1.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-026-06070-1.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-026-06070-1.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当面は「SOFA-1とSOFA-2を両方出す」が本論文の結論</strong>。SOFA-2に一本化すると、SOFA-1でだけ敗血症と判定される患者（全体の3.54%、ICU死亡8.31%）を取りこぼす。逆にSOFA-1のままだとSOFA-2でだけ拾える患者（6.84%、ICU死亡9.23%）を逃す。どちらの「取りこぼし群」も、両スコアで陰性の患者（6.71%）より有意に死亡が高い</li><li><strong>食い違いの正体は呼吸と腎の2臓器</strong>。当院で影響が大きいのは (1) SpO2/FiO2 での代替判定とHFNC・NPPVを高度呼吸補助に含めた点（SOFA-2で新たに拾える）、(2) 尿量を体重あたり（mL/kg/h）に変えた点（体重の大きい患者でオリグリアを拾いやすく、逆に小柄な患者ではSOFA-1より鈍くなる）</li><li><strong>ノルアドレナリン低用量例のスコアが1点下がる</strong>。0.1 µg/kg/min 以下はSOFA-1で3点、SOFA-2で2点。ノルアドを少量で長く使う当院の運用では、ΔSOFA≧2の到達が遅れる方向に働く。敗血症性ショックのフラグ立てを心血管サブスコアだけに依存しない</li><li><strong>JIPAD入力・院内QIへの含意</strong>：SOFA-2はSpO2・FiO2・体重・尿量の時間分解能を要求する。血ガスを撮らない患者でもSpO2/FiO2が使えるのは電子カルテ自動計算にとって追い風だが、体重が未入力だと腎サブスコアが計算できない。<mark class="hl">移行前に「体重・尿量・FiO2の入力率」を先に点検する</mark></li><li><strong>本研究は米国・オランダのDBで、日本のデータではない</strong>。日本のOneICUコホート（<span class="wl">SOFA-2はSOFA-1と識別能がほぼ同じ — 日本のOneICU 6.7万例で外部検証（CritCare2026）</span>）と結論の向きは揃っており、「識別能はほぼ同じ・患者の振り分けは変わる」という点で一致している</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：Sepsis-3（2016年）は「感染疑い＋SOFAの急性増加2点以上」で敗血症を定義する。そのSOFAは1996年に作られたもの（本論文ではSOFA-1と呼称）で、当時のICU診療を前提としており、現代の診療（HFNC・NPPVの普及、KDIGO基準の尿量閾値、SpO2/FiO2の活用）とのズレが指摘されてきた。2025年10月にSOFA-2が公表され、6臓器すべてが改訂された</li><li><strong>Unknown</strong>：SOFA-2をSepsis-3の「臓器障害」の物差しとして採用したときに、敗血症と診断される患者集団がどれだけ変わるのか。診断のタイミングは早まるのか。予後予測性能は上がるのか。SOFA-2は重症度スコアとして開発・検証されたが、<mark class="hl">「敗血症の診断基準として使ったときの挙動」は誰も評価していなかった</mark></li><li><strong>What's new</strong>：米国・オランダの大規模ICU-DB 3つ・感染疑い74,615例で、同じ生データにSOFA-1基準とSOFA-2基準を独立に当てて敗血症を判定し直した最初の研究。一致率89.62%だが、SOFA-2だけが拾う6.84%とSOFA-1だけが拾う3.54%が存在し、どちらも両陰性群より死亡が高い。食い違いの主因は呼吸・腎。SOFA-2は23.12%で診断が早く（SOFA-1が早いのは15.64%）、予後予測AUROCは数値上わずかに高いが有意差なし。著者らは「即時全面置換は時期尚早、両方を計算・報告する移行戦略を」と結論した</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 同じICU患者データにSOFA-1基準とSOFA-2基準を当てると、敗血症の診断は<strong>89.62%一致する</strong>が、残りの1割は「片方でしか敗血症にならない患者」で、そのどちらの群も両スコア陰性群より明らかに死亡が高い。<strong>SOFA-2への即時全面置換は取りこぼしを生むため、当面は両方を並走させるべき</strong>である。</p>
+</div>
+<ul><li><strong>対象</strong>：MIMIC-IV v3.1（米国BIDMC単施設、2008–2022）、eICU-CRD v2.0（米国208病院、2014–2015）、AmsterdamUMCdb v1.0（オランダ、2003–2016）の3データベース。ICU入室総数318,423例から、ICU入室72時間以内に感染疑いのあった成人を抽出し、最終解析コホート74,615例（MIMIC-IV 48,460／eICU-CRD 19,384／AmsterdamUMCdb 6,771）</li><li><strong>方法</strong>：各患者について1時間刻みでSOFA-1とSOFA-2を計算し、Sepsis-3の「感染疑いの前48時間〜後24時間の窓でΔSOFA≧2」をそれぞれ独立に判定。4群に分けた（両陽性／SOFA-2のみ／SOFA-1のみ／両陰性）</li><li><strong>一致率</strong>：89.62%（両陽性45.17%＝33,701例、両陰性44.45%＝33,165例）。SOFA-2のみ陽性6.84%（5,103例）、SOFA-1のみ陽性3.54%（2,646例）</li><li><strong>不一致の原因</strong>：SOFA-2のみ群では呼吸（43.2–61.6%）と腎（32.1–56.8%）が主因。SOFA-1のみ群では呼吸・腎に加えて心血管が寄与</li><li><strong>診断の早さ</strong>：両陽性33,701例のうち61.24%は同時刻に診断。SOFA-2が先行23.12%（平均6.9時間早い）、SOFA-1が先行15.64%（平均6.0時間早い）。時間差の中央値は0.0時間</li><li><strong>予後（主要アウトカム＝ICU死亡）</strong>：両陽性15.63%＞SOFA-2のみ9.23%＞SOFA-1のみ8.31%＞両陰性6.71%。不一致2群はいずれも両陰性群より有意に高い（P=2.87×10⁻¹⁵、P=.002）が、不一致2群どうしには差がない</li><li><strong>予測モデル</strong>：XGBoostが最良。内部交差検証のAUROCはSOFA-2 0.736 対 SOFA-1 0.728（DeLong P=.386）、外部検証（eICU-CRD）で0.743 対 0.720（P=.375）。いずれも有意差なし。較正はSOFA-2がやや良好（Brierスコア0.0942 対 0.0973）</li><li><strong>結論</strong>：SOFA-1とSOFA-2は高い一致を示すが、それぞれが固有の高死亡リスク群を拾う。専門家による検証済みの新しい敗血症診断基準が確立するまで、両スコアを併用する移行戦略が推奨される</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・スコアの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>SOFA（Sequential Organ Failure Assessment）スコア</strong>は、1996年にVincentらが欧州集中治療医学会の敗血症関連問題ワーキンググループとして発表した臓器障害の点数表である。呼吸・凝固・肝・心血管・中枢神経・腎の6臓器を各0〜4点で採点し、合計0〜24点で表す。もともとは「敗血症患者の臓器障害を記述する」ための道具であり、予後予測モデルとして作られたものではない。</p>
+<p><strong>Sepsis-3（2016年）</strong> は、それまでのSIRS基準を捨て、敗血症を「感染に対する制御不能な宿主反応によって引き起こされる、生命を脅かす臓器障害」と定義し直した。そして臓器障害を操作的に「SOFAスコアの急性増加が2点以上」と定めた。つまりSepsis-3は、SOFAという物差しに乗っかっている定義である。したがって<mark class="hl">SOFAの中身が変われば、「誰が敗血症か」が変わる</mark>。</p>
+<p><strong>SOFA-2（2025年10月公表）</strong> は、その30年ぶりの改訂版である。6臓器すべてに手が入ったが、特に大きいのは次の2つ。</p>
+<ul><li><strong>呼吸</strong>：動脈血ガスがなくても採点できるよう <strong>SpO2/FiO2 比</strong>を代替指標として導入。また高度呼吸補助の定義を広げ、<strong>HFNC（高流量鼻カニュラ）とNPPV（非侵襲的陽圧換気）</strong> を含めた。ただし3点以上を付けるには「高度呼吸補助を実際に使っていること」が必要になり、酸素化の悪さだけでは高得点にならない</li><li><strong>腎</strong>：尿量の閾値を絶対量（mL/日）から <strong>体重標準化（mL/kg/h、KDIGO基準に整合）</strong> に変更し、評価窓も短くした。腎代替療法（RRT）を受けている患者は最高点とする</li></ul>
+<p><strong>本論文が問うていること</strong>：SOFA-2は「重症度スコア」としては開発・検証されたが、これをSepsis-3の臓器障害の物差しに差し替えたとき、敗血症と診断される患者はどう変わるのか。誰が新たに拾われ、誰がこぼれ落ちるのか。診断は早まるのか。予後予測は良くなるのか。</p>
+<p><strong>用語</strong>：AUROC＝ROC曲線下面積（識別能。0.5がでたらめ、1.0が完璧）。DeLong検定＝2つのAUROCの差を統計的に比較する手法。Brierスコア＝予測確率の較正の良さ（小さいほど良い）。SHAP＝機械学習モデルの各特徴量が予測にどれだけ寄与したかを分解する手法。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>敗血症は世界的な死亡原因の主要因であり続けている（Rudd 2020, Lancet）。Sepsis-3は敗血症を「感染疑い＋SOFAスコアの急性2点以上の増加」として操作化した。しかし1996年に作られたSOFA-1の構成要素と、現代のICU診療下での臓器障害との間には乖離があるという証拠が蓄積してきた。この不整合は、<mark class="hl">早期の敗血症や非典型的な敗血症を検出するSepsis-3の感度を下げている可能性がある</mark>。</p>
+<p>そこで2025年10月、現代の臨床実践との橋渡しのためSOFA-2が公表された。SOFA-1と比べて6臓器すべてに更新が入り、特に呼吸と腎の評価が大きく変わった。呼吸ではSpO2/FiO2比とNPPVが組み込まれ、腎では体重標準化した尿量閾値が採用された。これらの更新は、SOFA-2がSOFA-1に取って代わるにつれ、敗血症の検出とリスク層別化を実質的に変えうる。</p>
+<p>一方で、そもそもオリジナルのSOFAを敗血症サーベイランスに運用すること自体の難しさが以前から指摘されてきた（Rhee &amp; Klompas, CCM 2021 ほか）。SOFA-2を敗血症検出に採用したときの臨床的インパクトと予後妥当性は未評価のままである。</p>
+<p><strong>本研究の4つの目的</strong>：</p>
+<ol><li>SOFA-1とSOFA-2の診断一致度</li><li>どちらか片方でしか検出されない不一致例の臨床像</li><li>SOFA-2が早期診断をもたらす可能性</li><li>両基準の死亡予測性能</li></ol>
+<h3>3. 方法（Methods）</h3>
+<h4>デザイン</h4>
+<p>多施設・後ろ向きコホート研究。各患者について、同一の臨床データストリームにSOFA-1基準とSOFA-2基準を<strong>独立に適用</strong>して敗血症の有無を判定するという設計。同じ患者を2つの物差しで測り直す「基準間比較」であり、治療介入の比較ではない。STROBE声明に準拠。</p>
+<h4>データソース（3つの公開ICUデータベース）</h4>
+<div class="tw"><table>
+<thead><tr><th>データベース</th><th>施設・地域</th><th>期間</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td>MIMIC-IV v3.1</td><td>Beth Israel Deaconess Medical Center（米国ボストン）単施設</td><td>2008–2022</td><td>単一学術センターの包括的データ。微生物検査も揃う</td></tr>
+<tr><td>eICU-CRD v2.0</td><td>米国208病院</td><td>2014–2015</td><td>範囲が広いが、施設間で記録の質が不均一</td></tr>
+<tr><td>AmsterdamUMCdb v1.0</td><td>Amsterdam University Medical Centers（オランダ）</td><td>2003–2016</td><td>心臓血管外科など予定術後入室の割合が高い</td></tr>
+</tbody></table></div>
+<p>比較可能性を高めるため、3データベースに標準化されたデータ処理ワークフロー（変数抽出の統一、単位変換の一貫化、欠測処理の調和）を適用した。解析は<strong>ICU入室後72時間以内</strong>の敗血症検出に限定した。</p>
+<h4>対象（組み入れ・除外・n）</h4>
+<p>18歳以上の成人で感染疑いのある患者。Fig. 1のフローに従い、ICU入室総数318,423例（MIMIC-IV 94,458／eICU-CRD 200,859／AmsterdamUMCdb 23,106）から出発。</p>
+<ul><li>除外1：感染疑いなし 231,458例 → 感染疑いあり 86,965例</li><li>除外2：12,350例（18歳未満14例、ICU滞在24時間未満12,336例）</li><li><strong>最終解析コホート 74,615例</strong>（MIMIC-IV 48,460／eICU-CRD 19,384／AmsterdamUMCdb 6,771）</li></ul>
+<h4>SOFAスコアの計算と群定義</h4>
+<p>SOFA-1・SOFA-2ともにそれぞれのコンセンサス指針どおりに操作化し、ICU入室時点から<strong>1時間分解能</strong>で計算した。欠測した生理学的変数は last observation carried forward（直前値の繰り越し）で補完し、それ以前の値もない場合は当該サブスコアを0とした（SOFA基準に準拠）。</p>
+<p><strong>敗血症の検出</strong>：Sepsis-3に従い、感染疑いの発生時点を基準に<strong>前48時間から後24時間</strong>の窓の中で、SOFA合計点が<strong>2点以上急性増加</strong>したことをもって敗血症とした。増加分は「その時点のスコア − その時点までに観察された累積最小スコア」で計算した。既知の既存臓器障害がない患者ではベースラインSOFAを0と仮定した。</p>
+<p><strong>群定義</strong>（相互排他的な4群）：</p>
+<ol><li><strong>Concordant Positive（両陽性）</strong>：SOFA-1・SOFA-2の両方で検出</li><li><strong>SOFA-2 Only</strong>：SOFA-2でのみ検出</li><li><strong>SOFA-1 Only</strong>：SOFA-1でのみ検出</li><li><strong>Concordant Negative（両陰性）</strong>：どちらでも検出されず</li></ol>
+<h4>アウトカム</h4>
+<ul><li><strong>主要</strong>：ICU死亡</li><li><strong>副次</strong>：院内死亡、28日生存</li><li>そのほか診断一致度と、敗血症検出のタイミング（感染窓の中でΔSOFA≧2を最初に満たした時刻）を評価</li></ul>
+<p>両陽性群はさらに、2基準の検出タイミングの前後関係で3つのサブグループに分類した：「SOFA-2 Earlier」「Simultaneous」「SOFA-1 Earlier」。SOFAは1時間分解能で計算しているため、<strong>同一時間内での検出を「同時」と定義</strong>した。</p>
+<h4>臓器別寄与解析</h4>
+<p>どの臓器系が診断の食い違いを駆動しているかを同定するため、臓器レベルの寄与解析を行った。SOFA-2 Only群の各患者について、<strong>SOFA-2による診断時点</strong>で臓器ごとに急性障害スコアの差を計算する：</p>
+<p>Δdiff(臓器) = ΔSOFA-2(臓器) − ΔSOFA-1(臓器)</p>
+<p>Δdiff &gt; 0 であれば、その臓器についてSOFA-2のほうが急性障害を高く採点していることになり、検出の食い違いへの「寄与臓器」とみなした。たとえば腎であれば、SOFA-2診断時点で Δdiff(腎) = ΔSOFA-2(腎) − ΔSOFA-1(腎) を計算し、正であれば腎が食い違いに寄与したと判定する。SOFA-1 Only群についてはSOFA-1診断時点で同じ手順を逆向きに適用した。</p>
+<h4>統計解析</h4>
+<ul><li>連続変数：中央値（四分位範囲）または平均（標準偏差）。Shapiro-Wilk検定で非正規分布が示されたためKruskal-Wallis検定で比較</li><li>カテゴリ変数：頻度で報告し、カイ二乗検定で比較</li><li>全体推定値はデータベース横断でプールして算出</li><li>生存アウトカム：Kaplan-Meier曲線とlog-rank検定</li><li>多変量Cox比例ハザードモデルで死亡のハザード比（HR）を推定。データベース内モデルは年齢・性別で調整、プールモデルはさらにデータベースで調整（データベース間の異質性を考慮）</li><li>両側P&lt;.05を有意とした</li><li>解析環境：Python v3.12（SciPy v1.14、lifelines v0.29、scikit-learn v1.5）</li></ul>
+<h4>予測モデリング</h4>
+<p>敗血症患者におけるSOFA-1・SOFA-2の予後価値をさらに比較するため、それぞれの基準で定義された敗血症コホートにおいてICU死亡を予測する機械学習モデルの性能を評価した。どちらかの基準で敗血症となった患者を全て含めた。</p>
+<ul><li><strong>開発→外部検証</strong>のフレームワーク</li><li><strong>訓練コホート</strong>：MIMIC-IV と AmsterdamUMCdb の敗血症陽性患者（合計 n=29,241）</li><li>5つのモデル（ロジスティック回帰、ランダムフォレスト、Gradient Boosting、XGBoost、LightGBM）を訓練し、<strong>5分割層化交差検証</strong>で内部検証。交差検証の平均AUROCが最も高いモデルを最良モデルとして選択</li><li><strong>外部検証</strong>：独立した多施設コホート eICU-CRD（n=12,209）。モデル開発・選択には一切使用していない</li><li>性能評価はAUROC。SOFA-1とSOFA-2のAUROCの対比較には<strong>DeLong検定</strong>を使用</li><li>特徴量重要度は<strong>SHAP値</strong>で解析</li><li>較正は較正曲線とBrierスコアで評価</li></ul>
+<h3>4. 結果1 — SOFA-1とSOFA-2の診断一致度</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06070-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06070-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. コホート選択と患者層別のフロー図。上段に3つのデータベースが横並びで置かれ、左からMIMIC-IV v3.1（米国ボストン、2008–2022、n=94,458）、eICU-CRD（米国208病院、2014–2015、n=200,859）、AmsterdamUMCdb（オランダ・アムステルダム、2003–2016、n=23,106）。3本の矢印が中央に集まり「Total ICU admissions n=318,423」の箱へ。そこから下向きの矢印が伸び、右側に分岐する横矢印で「Excluded（n=231,458）No suspected infection」の灰色の箱が示される。本流はさらに下って「Patients with suspected infection n=86,965」。次の分岐で「Excluded（n=12,350）Age&lt;18 years（n=14）、ICU length of stay&lt;24 hours（n=12,336）」が右に外れ、本流は「Final analysis cohort n=74,615」に至る。その下に楕円で「Sepsis-3 diagnosis assessment — SOFA-1（1996）vs SOFA-2（2025）criteria」が置かれ、そこから4本の矢印が下向きに扇状に広がって4つの最終群の箱に分かれる。左から Concordant Positive（n=33,701、45.17%）、SOFA-2 Only（n=5,103、6.84%）、SOFA-1 Only（n=2,646、3.54%）、Concordant Negative（n=33,165、44.45%）。原図・無改変。</p>
+</div>
+<h4>フロー図の各ボックスを表に起こす</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>内容</th><th>n</th></tr></thead>
+<tbody>
+<tr><td>データ源1</td><td>MIMIC-IV v3.1（米国ボストン、2008–2022）</td><td>94,458</td></tr>
+<tr><td>データ源2</td><td>eICU-CRD（米国208病院、2014–2015）</td><td>200,859</td></tr>
+<tr><td>データ源3</td><td>AmsterdamUMCdb（オランダ、2003–2016）</td><td>23,106</td></tr>
+<tr><td>合算</td><td>ICU入室総数</td><td>318,423</td></tr>
+<tr><td>除外1</td><td>感染疑いなし</td><td>231,458</td></tr>
+<tr><td>残存</td><td>感染疑いのある患者</td><td>86,965</td></tr>
+<tr><td>除外2a</td><td>18歳未満</td><td>14</td></tr>
+<tr><td>除外2b</td><td>ICU滞在24時間未満</td><td>12,336</td></tr>
+<tr><td>最終</td><td>解析コホート</td><td>74,615</td></tr>
+<tr><td>判定</td><td>Sepsis-3診断評価（SOFA-1（1996）対 SOFA-2（2025）基準）</td><td>—</td></tr>
+<tr><td>群1</td><td>Concordant Positive（両陽性）</td><td>33,701（45.17%）</td></tr>
+<tr><td>群2</td><td>SOFA-2 Only</td><td>5,103（6.84%）</td></tr>
+<tr><td>群3</td><td>SOFA-1 Only</td><td>2,646（3.54%）</td></tr>
+<tr><td>群4</td><td>Concordant Negative（両陰性）</td><td>33,165（44.45%）</td></tr>
+</tbody></table></div>
+<h4>一致度</h4>
+<p>解析コホート74,615例のうち、<strong>89.62%（両陽性45.17%＋両陰性44.45%）が両スコアで一致して分類された</strong>。SOFA-2はSOFA-1が見逃した5,103例（6.84%）を追加で検出し、逆にSOFA-1はSOFA-2が見逃した2,646例（3.54%）を追加で検出した。この分布パターンは、地域と症例構成が異なるにもかかわらず3データベースすべてで一貫していた。</p>
+<h4>群別のベースライン像（MIMIC-IV）</h4>
+<p>敗血症診断後24時間の値でまとめられている。両陽性群が最も重症であり、2つの不一致群はそれより軽く、互いにはよく似ている。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>両陽性</th><th>SOFA-2 Only</th><th>SOFA-1 Only</th><th>P</th></tr></thead>
+<tbody>
+<tr><td>乳酸（mmol/L）</td><td>2.32</td><td>1.80</td><td>1.82</td><td>7.76×10⁻⁴¹</td></tr>
+<tr><td>人工呼吸</td><td>55.4%</td><td>38.6%</td><td>32.4%</td><td>4.20×10⁻¹⁰³</td></tr>
+<tr><td>昇圧薬使用</td><td>27.0%</td><td>14.8%</td><td>9.8%</td><td>1.69×10⁻⁷⁴</td></tr>
+<tr><td>ICU滞在（日）</td><td>6.59</td><td>5.74</td><td>5.54</td><td>2.95×10⁻¹⁷</td></tr>
+</tbody></table></div>
+<p>同様のパターンが eICU-CRD と AmsterdamUMCdb でも観察された。</p>
+<h3>5. 結果2 — 一致例における診断タイミングの比較</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06070-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06070-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 3データベース横断でみたSOFA-2とSOFA-1の診断一致度とタイミングの違い。3枚のパネルが横並び。(A)「Patient Distribution by Diagnostic Group」は4本の縦棒グラフで、左から Concordant Positive 33,701（45.17%、濃緑）、SOFA-2 Only 5,103（6.84%、橙）、SOFA-1 Only 2,646（3.54%、薄緑）、Concordant Negative 33,165（44.45%、灰）。両端の2本が突出して高く、中央の2本が低い。(B)「Concordant Positive Timing」は両陽性群内のタイミング別3本の棒で、SOFA-2 Earlier 7,792（23.12%、赤）、Simultaneous 20,640（61.24%、紫）、SOFA-1 Earlier 5,269（15.64%、緑）。中央のSimultaneousが最も高い。(C)「Time-Difference Distribution」は横軸に時間差（−30時間〜+30時間、SOFA-2検出時刻からSOFA-1検出時刻を引いた値）、縦軸に患者数をとったヒストグラム。0時間に2万例超の突出した紫の柱が立ち（軸は途中で省略記号により圧縮されている）、その左右になだらかな裾が広がる。左側（赤、SOFA-2が早い側）の裾のほうが右側（緑、SOFA-1が早い側）よりわずかに厚い。右上に「Median: 0.0h」、右側の注記に「SOFA-2 earlier: 23.12%（mean 6.9h）」「SOFA-1 earlier: 15.64%（mean 6.0h）」と記載。原図・無改変。</p>
+</div>
+<p>両スコアの診断一致度が高かったため、次に診断のタイミングが違うかを検討した。両陽性の33,701例における時間的整合は以下のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>タイミング</th><th>n</th><th>割合</th><th>平均リードタイム</th></tr></thead>
+<tbody>
+<tr><td>SOFA-2が先行</td><td>7,792</td><td>23.12%</td><td>6.9時間</td></tr>
+<tr><td>同時（同一時間内）</td><td>20,640</td><td>61.24%</td><td>—</td></tr>
+<tr><td>SOFA-1が先行</td><td>5,269</td><td>15.64%</td><td>6.0時間</td></tr>
+</tbody></table></div>
+<p>全体の時間差の中央値は0.0時間。データベース別では、MIMIC-IVとeICU-CRDでSOFA-2が先行する頻度が高かったが、AmsterdamUMCdbでは差が消えていた。</p>
+<div class="tw"><table>
+<thead><tr><th>データベース</th><th>SOFA-2が先行</th><th>SOFA-1が先行</th></tr></thead>
+<tbody>
+<tr><td>MIMIC-IV</td><td>25.67%</td><td>14.94%</td></tr>
+<tr><td>eICU-CRD</td><td>20.68%</td><td>16.98%</td></tr>
+<tr><td>AmsterdamUMCdb</td><td>15.79%</td><td>16.24%</td></tr>
+</tbody></table></div>
+<p>先行の「幅」を比べるため平均リードタイムを計算したところ、両スコアで同程度だった（6.9時間 対 6.0時間）。つまり<strong>SOFA-2は「早く診断される患者の割合」は増やすが、「どれだけ早いか」は変えていない</strong>。</p>
+<h3>6. 結果3 — 診断の食い違いに寄与した臓器</h3>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06070-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06070-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 不一致検出に寄与した臓器系。上段(A)がSOFA-2 Only群、下段(B)がSOFA-1 Only群で、それぞれ左からMIMIC-IV、eICU-CRD、Amsterdam UMCの3枚が横並び。縦軸に6臓器（上から Respiratory、Renal、Cardiovascular、CNS、Coagulation、Hepatic）、横軸に「Positive Contribution（%）」を0〜70でとった横棒グラフ。凡例は濃紺が「Primary Contributing Organs（主要寄与臓器）」、ベージュが「Other Organs（その他）」で、各パネルで上位2〜3臓器が濃紺に塗られている。(A)ではRespiratoryとRenalの2本が長く濃紺、他は短い。(B)ではパネルごとに濃紺になる臓器が入れ替わり、Amsterdam UMCではRespiratoryとCardiovascularが長い。各棒の右端に数値ラベルが付く。パーセントの合計が100%を超えるのは、1人の患者が複数臓器で寄与しうるため。原図・無改変。</p>
+</div>
+<h4>(A) SOFA-2 Only群（SOFA-2でだけ敗血症になった患者）</h4>
+<div class="tw"><table>
+<thead><tr><th>臓器</th><th>MIMIC-IV（n=2,721）</th><th>eICU-CRD（n=2,006）</th><th>AmsterdamUMCdb（n=373）</th></tr></thead>
+<tbody>
+<tr><td>呼吸</td><td>49.4%</td><td>61.6%</td><td>43.2%</td></tr>
+<tr><td>腎</td><td>41.9%</td><td>32.1%</td><td>56.8%</td></tr>
+<tr><td>心血管</td><td>9.0%</td><td>7.1%</td><td>20.9%</td></tr>
+<tr><td>中枢神経</td><td>15.6%</td><td>2.8%</td><td>1.3%</td></tr>
+<tr><td>凝固</td><td>3.9%</td><td>2.0%</td><td>4.8%</td></tr>
+<tr><td>肝</td><td>1.1%</td><td>0.9%</td><td>0.3%</td></tr>
+</tbody></table></div>
+<p><strong>呼吸（43.2–61.6%）と腎（32.1–56.8%）が圧倒的な主因</strong>である。</p>
+<ul><li><strong>呼吸</strong>：SOFA-2はSpO2/FiO2比を導入し、高度呼吸補助にHFNCとNPPVを含めた。SpO2/FiO2の代替基準を満たした患者は米国のデータベースで多く（MIMIC-IV 51.5%、eICU-CRD 55.8%）、HFNC/NPPVの使用率は49.4–87.1%だった。つまり<strong>「血ガスは撮っていないがSpO2は低い」「挿管はしていないがHFNC/NPPVを使っている」患者を、SOFA-2は新たに拾えるようになった</strong></li><li><strong>腎</strong>：SOFA-2は体重標準化した尿量閾値とより短い評価窓を採用しており、乏尿の検出感度が上がる。<strong>特に体重の大きい患者で効く</strong>（同じ絶対尿量でも、体重で割ると閾値を下回りやすくなるため）</li></ul>
+<h4>(B) SOFA-1 Only群（SOFA-1でだけ敗血症になった患者）</h4>
+<div class="tw"><table>
+<thead><tr><th>臓器</th><th>MIMIC-IV（n=1,162）</th><th>eICU-CRD（n=1,362）</th><th>AmsterdamUMCdb（n=122）</th></tr></thead>
+<tbody>
+<tr><td>呼吸</td><td>24.7%</td><td>24.6%</td><td>59.8%</td></tr>
+<tr><td>腎</td><td>27.7%</td><td>40.7%</td><td>4.9%</td></tr>
+<tr><td>心血管</td><td>12.0%</td><td>16.5%</td><td>32.0%</td></tr>
+<tr><td>中枢神経</td><td>3.7%</td><td>3.1%</td><td>0.0%</td></tr>
+<tr><td>凝固</td><td>1.5%</td><td>0.6%</td><td>1.6%</td></tr>
+<tr><td>肝</td><td>3.4%</td><td>3.7%</td><td>0.8%</td></tr>
+</tbody></table></div>
+<p>呼吸・腎に加えて<strong>心血管</strong>が寄与している。3つの機序が明快に示されている。</p>
+<div class="tw"><table>
+<thead><tr><th>臓器</th><th>SOFA-1でだけ点が付く仕組み</th><th>具体的な数字</th></tr></thead>
+<tbody>
+<tr><td>呼吸</td><td>SOFA-1はPaO2/FiO2の悪化だけで高い点を付けられるが、SOFA-2は3点以上を付けるのに高度呼吸補助の同時使用を要求する</td><td>高度呼吸補助の使用率はSOFA-1 Only群で44.2–69.7%と、SOFA-2 Only群の58.4–87.7%より低い</td></tr>
+<tr><td>腎</td><td>SOFA-1の絶対尿量閾値のほうが、SOFA-2の体重標準化閾値より緩い患者がいる</td><td>SOFA-1の閾値を満たしたのは7.6–24.1%、SOFA-2の閾値は3.8–10.0%のみ</td></tr>
+<tr><td>心血管</td><td>ノルアドレナリン低用量例のスコアがSOFA-2で1点下がる</td><td>昇圧薬使用率21.9–58.2%。ノルアド投与例のうち54–74%が0.1 µg/kg/min以下で、SOFA-1では3点だがSOFA-2では2点</td></tr>
+</tbody></table></div>
+<p>この心血管の項目は臨床的に見落としやすい。<mark class="hl">少量のノルアドレナリンで血圧を維持している患者は、SOFA-2ではΔSOFA≧2に到達しにくくなる</mark>。</p>
+<h3>7. 結果4 — 診断群別の生存解析</h3>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06070-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06070-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 診断一致群別の臨床アウトカム。(A)は4群のICU死亡率を縦棒で示し、左から Concordant Positive、SOFA-2 Only、SOFA-1 Only、Concordant Negative の順に並ぶ。棒の上に有意差の記号（有意差なしは「ns」、星1つがP&lt;.05、星2つがP&lt;.01、星3つがP&lt;.001）が架橋線とともに付されている。(B)は院内死亡率が利用可能だったMIMIC-IVとeICU-CRDのプールコホートでの同様の4本の棒グラフ。(C)は28日生存のKaplan-Meier曲線で、横軸に診断からの日数、縦軸に生存割合をとり、4群の曲線が上から順に Concordant Negative、SOFA-1 Only と SOFA-2 Only（ほぼ重なる中間の位置）、Concordant Positive（最下段）と並ぶ。原図・無改変。</p>
+</div>
+<h4>ICU死亡（主要アウトカム、3データベースのプール）</h4>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>ICU死亡率</th><th>両陰性群との比較</th></tr></thead>
+<tbody>
+<tr><td>Concordant Positive</td><td>15.63%</td><td>—</td></tr>
+<tr><td>SOFA-2 Only</td><td>9.23%</td><td>P=2.87×10⁻¹⁵</td></tr>
+<tr><td>SOFA-1 Only</td><td>8.31%</td><td>P=.002</td></tr>
+<tr><td>Concordant Negative</td><td>6.71%</td><td>基準</td></tr>
+</tbody></table></div>
+<p><strong>不一致2群はいずれも両陰性群より有意に高い死亡率を示した</strong>。これが本論文の中核的所見である。「片方のスコアでしか敗血症にならない患者」は無視してよい存在ではない。</p>
+<h4>院内死亡（MIMIC-IVとeICU-CRDのプール）</h4>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>院内死亡率</th></tr></thead>
+<tbody>
+<tr><td>Concordant Positive</td><td>20.84%</td></tr>
+<tr><td>SOFA-2 Only</td><td>14.25%</td></tr>
+<tr><td>SOFA-1 Only</td><td>13.95%</td></tr>
+<tr><td>Concordant Negative</td><td>10.36%</td></tr>
+</tbody></table></div>
+<p>SOFA-2 Only群とSOFA-1 Only群の間に差はない（P=.470）が、いずれも両陰性群より高い（ともにP&lt;.001）。</p>
+<h4>データベース別と AmsterdamUMCdb の例外</h4>
+<p>MIMIC-IVとeICU-CRDでは、不一致2群はいずれもICU死亡・院内死亡ともに両陰性群より高かった（すべてP&lt;.001）。しかしAmsterdamUMCdb（院内死亡は利用不可）では、いずれの不一致群も両陰性群とICU死亡に有意差がなかった（SOFA-2 Only P=.230、SOFA-1 Only P=.374）。</p>
+<p>AmsterdamUMCdbはICU滞在期間が他の2コホートより有意に長い。そこで<strong>診断後7日間の短期生存</strong>に絞ると（診断基準の予後への影響をより反映する窓）、プールコホートと一致した死亡パターンが観察された（SOFA-2 Only群 10.5% 対 両陰性群 6.8%、P=.018）。</p>
+<h4>28日生存とCoxモデル</h4>
+<p>プールした28日Kaplan-Meier解析では、不一致2群は両陽性群と両陰性群の<strong>中間の生存曲線</strong>を示した。SOFA-2 Only群とSOFA-1 Only群の間に28日生存の有意差はなかった。</p>
+<p>SOFA-2 Only群を基準としたデータベース別多変量Coxモデルでは、両陽性群は3データベースすべてで有意に高い死亡リスクを示した。一方<strong>SOFA-1 Only群はどのデータベースでもSOFA-2 Only群と死亡リスクに統計学的有意差がなかった</strong>。年齢・性別・データベースで調整したプールCoxモデルでも同じパターンだった。</p>
+<h3>8. 結果5 — SOFA-1とSOFA-2の予後予測性能</h3>
+<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06070-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06070-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 5. SOFAベース機械学習モデルのICU死亡予測性能（データベース横断）。(A)「Training Set（MIIV+AUMC）: Model Comparison」は5つのモデル（Logistic Regression、Random Forest、Gradient Boosting、XGBoost、LightGBM）ごとにSOFA-1（濃灰）とSOFA-2（橙）のAUCを2本並べた縦棒グラフ。縦軸は0.50〜0.85。各ペアの上に差分（デルタ）が注記されている。(B)「External Validation（eICU）: ROC Curves」は横軸偽陽性率・縦軸真陽性率のROC曲線2本で、橙のSOFA-2曲線が濃灰のSOFA-1曲線をやや上回って推移し、対角の破線が参照線。凡例にSOFA-1（AUC=0.720）、SOFA-2（AUC=0.743）。(C)「SHAP Summary on eICU（SOFA-2, XGBoost）」は蜂群プロットで、上から sofa2_max24h、sofa2_cardio_max24h、sofa2_t24h、sofa2_cardio_mean24h、sofa2_resp_max24h、sofa2_cns_max24h、sofa2_mean24h、sofa2_coag_mean24h、sofa2_renal_mean24h、sofa2_cns_mean24h、sofa2_resp_mean24h、Sum of 12 other features の順に並び、横軸SHAP値は−1.0〜+1.5。上位ほど点の散らばりが広い。(D)「Calibration on eICU（Best Model Each）」は横軸に平均予測確率、縦軸に観測頻度をとった較正曲線で、橙のSOFA-2が対角の理想線に近く、濃灰のSOFA-1は高確率域で下方に外れる。右下にBrierスコア（SOFA-1: 0.0973、SOFA-2: 0.0942）。原図・無改変。</p>
+</div>
+<p>SOFAは重症度の連続指標であり、予後評価にも価値がある。更新された基準がこの予測能力を高めるかを評価するため、動的なSOFA-1・SOFA-2スコアに基づく5つの機械学習モデルでICU死亡を予測し比較した。</p>
+<h4>訓練セット（MIMIC-IV＋AmsterdamUMCdb、n=29,241）でのモデル別AUC</h4>
+<div class="tw"><table>
+<thead><tr><th>モデル</th><th>SOFA-1</th><th>SOFA-2</th><th>差</th></tr></thead>
+<tbody>
+<tr><td>Logistic Regression</td><td>0.708</td><td>0.722</td><td>+0.014</td></tr>
+<tr><td>Random Forest</td><td>0.724</td><td>0.731</td><td>+0.007</td></tr>
+<tr><td>Gradient Boosting</td><td>0.724</td><td>0.733</td><td>+0.009</td></tr>
+<tr><td>XGBoost</td><td>0.728</td><td>0.736</td><td>+0.008</td></tr>
+<tr><td>LightGBM</td><td>0.720</td><td>0.727</td><td>+0.007</td></tr>
+</tbody></table></div>
+<p><strong>5モデルすべてでSOFA-2が数値上わずかに上回った</strong>が、差はいずれも0.014以下である。</p>
+<h4>最良モデル（XGBoost）での比較</h4>
+<div class="tw"><table>
+<thead><tr><th>検証</th><th>SOFA-1</th><th>SOFA-2</th><th>DeLong P</th></tr></thead>
+<tbody>
+<tr><td>内部5分割交差検証</td><td>0.728（95%CI 0.717–0.734）</td><td>0.736（95%CI 0.727–0.743）</td><td>.386</td></tr>
+<tr><td>外部検証（eICU-CRD、n=12,209）</td><td>0.720（95%CI 0.710–0.738）</td><td>0.743（95%CI 0.729–0.757）</td><td>.375</td></tr>
+</tbody></table></div>
+<p><strong>いずれも統計学的有意差なし</strong>。95%信頼区間も大きく重なっている。</p>
+<h4>特徴量重要度と較正</h4>
+<p>SHAP解析では、<strong>心血管サブスコアと呼吸サブスコアが死亡予測に強く寄与</strong>していた。上位特徴量は sofa2_max24h（24時間最大の合計点）、sofa2_cardio_max24h、sofa2_t24h と続く。</p>
+<p>較正解析では、SOFA-2ベースのモデルは確率域全体にわたって信頼できるリスク推定を提供し、<strong>SOFA-1ベースのモデルより良好な較正</strong>を達成した（Brierスコア 0.0942 対 0.0973）。予測値と観測値の一致が改善していることを示す。</p>
+<h3>9. 考察</h3>
+<h4>主要所見の整理</h4>
+<p>本多施設研究で、SOFA-1とSOFA-2は敗血症検出において高い一致を示した一方、それぞれが<strong>臨床的に意味のある不一致サブグループ</strong>を同定し、その死亡率はどちらのスコアでも検出されなかった患者より有意に高かった。</p>
+<p>SOFA-1とSOFA-2の検出差は、主に<strong>呼吸と腎の構成要素の更新</strong>に帰せられる。具体的には、SOFA-2は</p>
+<ul><li>PaO2/FiO2の代替としてSpO2/FiO2に基づく呼吸評価を組み込んだ</li><li>高度呼吸補助の定義をHFNCとNPPVを含むよう拡張した</li><li>軽度呼吸障害の基準を改訂した</li><li>腎ではKDIGO基準に整合する体重標準化尿量閾値を採用し、RRTを受けている患者には最高点を割り当てた</li></ul>
+<p>これらの変更により、SOFA-2はSOFA-1が見逃した患者を追加で同定でき、プール解析では早期診断の割合が高く、予後性能はおおむね同等だった。</p>
+<h4>SOFA-1が拾ってSOFA-2が拾わない患者をどう考えるか</h4>
+<p>しかしSOFA-1もまた、実質的な死亡率をもつ臨床的に意味のあるサブグループを同定した。この食い違いは腎・呼吸の更新基準の差に一部起因しうる。</p>
+<ul><li><strong>腎</strong>：SOFA-2はRRTを受けている患者に最高点を割り当てるが、<mark class="hl">RRT導入は施設によって判断が異なる治療決定である</mark>（＝スコアが治療方針に依存してしまう）。加えて体重標準化尿量閾値も腎の分類差に寄与しうる</li><li><strong>呼吸</strong>：低いSOFAスコアに関する改訂基準は、<strong>早期の呼吸不全に対する感度を下げる</strong>可能性があり、これは認識されないままだと実質的な死亡と関連することが知られている</li></ul>
+<p>総合すると、SOFA-2は追加の患者を同定しプールした診断タイミング解析で有利なパターンを示したものの、<strong>SOFA-1の診断カバー範囲を完全には包含していない</strong>。したがって<strong>SOFA-1の即時かつ完全な置換は時期尚早であり、両スコアを計算・報告する移行戦略のほうが賢明</strong>だと著者らは結論する。</p>
+<h4>感染疑いの定義の非統一とその検証</h4>
+<p>eICU-CRDでは微生物データが208病院のうち22病院（10.6%）でしか電子的に報告されていない。標準的な「培養＋抗菌薬」の定義をコホート全体に適用することは不可能で、この小さなサブセットに限定すると統計的検出力と多施設代表性の両方が大きく損なわれる。</p>
+<p>そこで既報の多データベース研究に倣い、eICU-CRDでは<strong>感染関連ICDコード＋抗菌薬投与</strong>で感染疑いを同定する実際的なアプローチを採用した（MIMIC-IVとAmsterdamUMCdbでは標準の培養＋抗菌薬定義を使用）。</p>
+<p>この方法論的適応の妥当性を、ICDと微生物データの両方をもつMIMIC-IVで検証した結果：</p>
+<ul><li>ICD定義の感染の<strong>87.4%</strong>が標準の培養＋抗菌薬定義も満たした</li><li>ICD定義の敗血症の<strong>88.2%</strong>が同様に満たした</li></ul>
+<p>さらに感度分析として、主解析の混合定義アプローチと培養ベースアプローチをデータベース横断で比較したところ、2つの定義は一致度・診断タイミング・死亡アウトカムのいずれも同様のパターンを示し、感染定義の相違が主要結果に実質的な影響を与えていないことが確認された。</p>
+<h4>早期認識の意義と限界</h4>
+<p>早期の敗血症認識は臨床的に重要である。先行研究では<strong>治療の遅れ1時間ごとに死亡リスクが相対的に4〜9%増加する</strong>とされる（Kumar 2006, Seymour 2017）。両陽性患者のうちSOFA-2が23.12%で早期同定に成功した（SOFA-1は15.64%）。しかし<mark class="hl">この時間的優位性が意味のある臨床的利益に translate するかは未証明である</mark>。前向き研究がその患者アウトカムへの影響を評価する必要がある。</p>
+<h4>AmsterdamUMCdb の乖離をどう読むか</h4>
+<p>AmsterdamUMCdbコホートは他の2コホートと比べていくつかの点で異なる傾向を示した。診断タイミングと予測モデル性能（AUROC）については、MIMIC-IVとeICU-CRDがともにSOFA-2で早期診断・高AUROCへの一貫した傾向を示したのに対し、AmsterdamUMCdbでは差が消えた。ただしこれらの所見に統計学的有意差がないことから、この乖離パターンは主要所見の根本的な矛盾を構成しないと著者らは述べる。</p>
+<p>最も顕著な乖離は、4診断群のICU死亡・28日死亡の生存解析で観察された。しかし診断後7日間に解析を限定すると、3データベースすべてで死亡軌跡が一致した。この時間的区別は臨床的に意味がある。<strong>短期死亡のほうが、敗血症診断基準と早期管理の急性期の帰結を反映しやすい</strong>からである。</p>
+<p>AmsterdamUMCdbで観察された長期の食い違いは、初発の敗血症イベントよりも<strong>競合リスク</strong>に起因する可能性が高い。この集団は重症の心血管・呼吸器合併症の有病率が高く、術後入室の割合が実質的に大きい。28日やICU滞在全体といった長い追跡期間では、競合死亡リスクが敗血症定義に関連する予後差を徐々に減弱させ、覆い隠しうる。加えてAmsterdamUMCdbの不一致サブグループのサンプルサイズは他の2コホートに比べほぼ10分の1であり、この不釣り合いに小さいサンプルは、主解析で見られた有意な予後の分離を捉える検出力を本質的に減じている。</p>
+<h3>10. 限界（著者の記載）</h3>
+<ol><li><strong>データの不完全性・誤り</strong>：標準化されたデータクリーニングを適用したが、後ろ向き解析の記録には不完全・誤りが残りうる。SOFA計算と敗血症検出に影響しうる</li><li><strong>変数の完備率がデータベース間で異なる</strong>：SOFA-2の計算に必要ないくつかの変数がeICU-CRDでMIMIC-IV・AmsterdamUMCdbより不完全だった。これによりeICU-CRDでSOFA-2が臓器障害を正確に捉える能力が制限され、<strong>SOFA-1とSOFA-2の一致度がこのデータベースで低くなった一因</strong>になっている可能性</li><li><strong>ベースラインSOFA=0の仮定</strong>：既存臓器障害の記載がない患者ではベースラインを0とした。後ろ向き研究では標準的だが、<strong>慢性障害のある患者でΔSOFAを過大評価しうる</strong></li><li><strong>感染疑いの定義が3データベースで同一にできなかった</strong>：eICU-CRDでは微生物データが不完全で、ICDコード＋抗菌薬で定義した。定義の甘い患者や軽症感染を含めた一方、培養＋抗菌薬定義なら同定されたが適切にコード化されていない患者を除外した可能性があり、選択バイアス・誤分類を導入しうる</li><li>多様な医療環境での前向き多施設研究が、SOFA-2の臨床応用のさらなる検証と洗練のために必要</li></ol>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>読むときに引っかかるべき点</p>
+<ul><li><strong>「一致率89.62%」は分母の取り方に依存する</strong>。この89.62%は両陽性45.17%と両陰性44.45%の和であり、<mark class="hl">半分近くを占める「両陰性」が一致率を押し上げている</mark>。敗血症と判定された患者だけを分母にすると、両陽性33,701/（33,701+5,103+2,646）＝81.3% まで一致率は下がる。「9割一致するから大差ない」と読むのは早い</li><li><strong>参照基準がない</strong>。この研究には「本当に敗血症だったのか」を判定する外部の真値が存在しない。SOFA-2 Only群とSOFA-1 Only群のどちらが「正しく拾えている」のかは、この設計では原理的に決められない。死亡率が高いことは「重症だった」ことは示すが、「敗血症だった」ことの証明ではない</li></ul>
+</div>
+<ul><li><strong>不一致群の死亡率の差は臨床的に小さい</strong>。SOFA-2 Only 9.23% 対 SOFA-1 Only 8.31%（差0.92ポイント）、両陰性 6.71%。統計的には有意でも、両陰性群との差は2.5ポイント前後にとどまる。しかもP値の桁が大きく違う（2.87×10⁻¹⁵ 対 .002）のは主に群サイズの差（5,103例 対 2,646例）を反映しており、効果量の差ではない</li><li><strong>AUROCの差はすべて有意でない</strong>。0.736 対 0.728（P=.386）、0.743 対 0.720（P=.375）。著者は本文とAbstractで「numerically higher」と正しく留保しているが、Discussionでは「favorable patterns」と表現がやや前のめりになる。<mark class="hl">SOFA-2が予後予測で優れているという主張は本研究からはできない</mark>。較正（Brier 0.0942 対 0.0973）の差もごく小さい</li><li><strong>AUROC 0.73〜0.74という水準そのものが低い</strong>。ICU死亡の識別能としては、SOFA単独の従来報告（0.70前後）と大差なく、SOFA-2への改訂が予測性能を実質的に押し上げていないことを示している。SOFA-2の眼目は予後予測ではなく臓器障害の記述精度にあるので、これは必ずしも欠点ではないが、「新しいスコアだから予測が良くなる」という期待は裏切られる</li><li><strong>欠測をLOCF＋ゼロ埋めで処理している</strong>。SOFAサブスコアの元値がなければ0とみなす運用は、<mark class="hl">測定していない臓器を「正常」と扱うことになる</mark>。SOFA-2はSpO2・FiO2・体重・時間尿量とSOFA-1より多くの変数を要求するため、欠測が多いデータベース（eICU-CRD）ではSOFA-2側が系統的に低く出る方向のバイアスがかかる。著者も限界2で認めているが、これは「SOFA-2の性能」ではなく「データの性能」を測っている部分がある</li><li><strong>ベースラインSOFA=0の仮定は、慢性臓器障害のある患者でΔSOFAを膨らませる</strong>。特にSOFA-2はRRT施行例に腎の最高点を与えるため、維持透析患者が入室初日に「敗血症」と判定されやすくなる構造的な問題を抱える。実際に既存ノート（<span class="wl">末期腎不全ではSOFAの識別能が落ち死亡を過大評価する — AUROC 0.789対0.846（JIPAD 128134例・TherApherDial2023）</span>）が指摘した問題は、SOFA-2でむしろ悪化する方向である</li><li><strong>RRT導入は治療決定であってスコアではない</strong>。著者自身が考察で触れているとおり、施設ごとの導入閾値の違いがそのままスコアの差になる。国際比較・施設間ベンチマークにSOFA-2を使うときの汚染源になる</li><li><strong>eICU-CRDのデータは2014–2015年、AmsterdamUMCdbは2003–2016年</strong>。HFNCが本格普及する前後の時期を含んでおり、「SOFA-2がHFNC/NPPVを高度呼吸補助に含めたことの影響」は現代のコホートでは本研究より大きく出る可能性がある。逆にSpO2/FiO2の記録密度は当時のほうが低い</li><li><strong>診断タイミングの解釈に注意</strong>。時間差の中央値は0.0時間であり、大多数（61.24%）は同時刻に診断されている。平均リードタイムも6.9時間 対 6.0時間とほぼ同じ。「SOFA-2で早く診断できる」は、<strong>「早く診断される患者の割合が7.5ポイント多い」であって、「全体として早く診断できる」ではない</strong></li><li><strong>AmsterdamUMCdbの説明が事後的</strong>。生存解析で結果が再現しなかったことに対し、7日以内に窓を絞る・競合リスクを持ち出す・検出力不足を挙げるという3つの説明が後付けで並ぶ。7日ウィンドウは事前規定された解析ではない</li><li><strong>中国のグループが米欧のデータベースで解析している</strong>。中国の実臨床データは含まれておらず、また日本のデータも含まれていない。地域の診療パターン（HFNC使用率、RRT導入閾値、昇圧薬の用量選好）に強く依存する所見であることを踏まえると、外的妥当性の検討は各国のコホートで必要である</li></ul>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>Sepsis-3 の本体。敗血症を「感染＋SOFA急性2点増加」と定義</td><td>Singer M, et al. JAMA. 2016;315:801–10</td></tr>
+<tr><td>4</td><td>Sepsis-3 の臨床基準の評価（qSOFAを含む）</td><td>Seymour CW, et al. JAMA. 2016;315:762–74</td></tr>
+<tr><td>5</td><td>敗血症性ショックの新定義の開発</td><td>Shankar-Hari M, et al. JAMA. 2016;315:775–87</td></tr>
+<tr><td>6</td><td>SOFAスコアの原典（1996年）</td><td>Vincent JL, et al. Intensive Care Med. 1996;22:707–10</td></tr>
+<tr><td>7</td><td>重症患者の臓器障害評価の改訂（SOFA-2に関する論説）</td><td>Seymour CW. JAMA. 2025;334:2075–7</td></tr>
+<tr><td>9</td><td>「SOFAを更新すべき時が来たのでは」という問題提起</td><td>Moreno R, et al. Crit Care. 2023;27:15</td></tr>
+<tr><td>10</td><td>SOFA-2スコアの開発と検証（本論文が評価している対象）</td><td>Ranzani OT, et al. JAMA. 2025;334:2090</td></tr>
+<tr><td>11</td><td>SOFA-2開発の理論的根拠と方法論のコンセンサス声明</td><td>Moreno R, et al. JAMA Netw Open. 2025;8:e2545040</td></tr>
+<tr><td>12</td><td>SpO2/FiO2 と PaO2/FiO2 の比較（急性肺傷害・ARDS）</td><td>Rice TW, et al. Chest. 2007;132:410–7</td></tr>
+<tr><td>13</td><td>SOFA呼吸項でのSpO2/FiO2代替の導出と検証</td><td>Pandharipande PP, et al. Crit Care Med. 2009;37:1317–21</td></tr>
+<tr><td>16</td><td>重症患者における乏尿の臨床的意義（大規模観察DB）</td><td>Vincent J-L, et al. Crit Care. 2020;24:171</td></tr>
+<tr><td>17</td><td>敗血症関連AKIのADQIコンセンサス</td><td>Zarbock A, et al. Nat Rev Nephrol. 2023;19:401–17</td></tr>
+<tr><td>19</td><td>電子カルテデータにSepsis-3を適用する際の約束と落とし穴</td><td>Rhee C, Klompas M. Crit Care Med. 2021;49:1983–6</td></tr>
+<tr><td>22</td><td>SOFA計算のよくあるバリエーションが敗血症の把握に与える影響</td><td>Alrawashdeh M, et al. Crit Care Med. 2024;52:1380–90</td></tr>
+<tr><td>24</td><td>MIMIC-IV データベース</td><td>Johnson AEW, et al. Sci Data. 2023;10:1</td></tr>
+<tr><td>25</td><td>eICU Collaborative Research Database</td><td>Pollard TJ, et al. Sci Data. 2018;5:180178</td></tr>
+<tr><td>26</td><td>AmsterdamUMCdb</td><td>Thoral PJ, et al. Crit Care Med. 2021;49:e563–77</td></tr>
+<tr><td>32</td><td>AUROCの対比較（DeLong検定）</td><td>DeLong ER, et al. Biometrics. 1988;44:837–45</td></tr>
+<tr><td>33</td><td>SHAP（モデル予測の統一的解釈手法）</td><td>Lundberg SM, Lee S-I. NeurIPS. 2017:4768–77</td></tr>
+<tr><td>34</td><td>KDIGO 急性腎障害診療ガイドライン</td><td>Khwaja A. Nephron Clin Pract. 2012;120:c179–84</td></tr>
+<tr><td>42</td><td>敗血症性ショックで有効な抗菌薬開始までの低血圧持続時間が生存を決める</td><td>Kumar A, et al. Crit Care Med. 2006;34:1589–96</td></tr>
+<tr><td>43</td><td>敗血症の義務化された救急ケアにおける治療までの時間と死亡</td><td>Seymour CW, et al. N Engl J Med. 2017;376:2235–44</td></tr>
+<tr><td>44</td><td>臓器障害の急性度とSepsis-3基準の予測妥当性の関係</td><td>Gadrey SM, et al. Crit Care Explor. 2020;2:e0199</td></tr>
+<tr><td>45</td><td>日本のICUにおける敗血症の年齢別疫学とアウトカム（DPC全国データ）</td><td>Kobayashi H, et al. J Intensive Care. 2025;13:66</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 同じICU患者データにSOFA-1とSOFA-2を当てると敗血症診断の89.62%は一致するが、SOFA-2だけが拾う6.84%（ICU死亡9.23%）とSOFA-1だけが拾う3.54%（ICU死亡8.31%）が残り、どちらも両陰性群（6.71%）より有意に死亡が高い。食い違いの主因は呼吸（SpO2/FiO2とHFNC・NPPVの導入）と腎（体重標準化尿量）で、加えてノルアドレナリン0.1 µg/kg/min以下はSOFA-1の3点からSOFA-2の2点へ下がる。予後予測のAUROCは0.736 対 0.728（内部）・0.743 対 0.720（外部）でいずれも有意差なし。</p>
+<p><mark class="hl">SOFA-2に一本化するのではなく、当面はSOFA-1とSOFA-2の両方を計算・記録し、どちらかで敗血症基準を満たした患者は「敗血症として扱う」運用にする。</mark> <mark class="hl">特にHFNC/NPPV使用例と少量ノルアドレナリン使用例は、スコアの切り替えで判定が反転しうるため、スコアだけに依存せずベッドサイドの臨床判断を優先する。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>感染症・敗血症のバイオマーカーをベッドサイドでどう使うか（ナラティブレビュー・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06956-y.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">感染症・敗血症のバイオマーカーをベッドサイドでどう使うか（ナラティブレビュー・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Póvoa P, Coelho L, Dal-Pizzol F, Ferrer R, Huttner A, Conway Morris A, Nobre V, Ramirez P, Rouze A, Salluh J, Singer M, Sweeney DA, Torres A, Waterer G, Kalil AC. How to use biomarkers of infection or sepsis at the bedside: guide to clinicians. Intensive Care Med. 2023;49:142-153. doi:10.1007/s00134-022-06956-y</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-01-02）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06956-y" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06956-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>How to use biomarkers of infection or sepsis at the bedside: guide to clinicians</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06956-y.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06956-y.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06956-y.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院で何を変えるか／変えないか</p>
+<ul><li><strong>「抗菌薬を始める根拠」にPCT・CRPを使わない、を明文化する</strong>。この総説の Fig. 2 は、アルゴリズム図の中と脚注の2箇所で「CRP・PCTを抗菌薬開始の唯一の基準に使うな／開始の判断を導くために使うな」と繰り返し警告している。ベースライン値は「あとで動態を見るため」に採るのであって、始めるかどうかを決めるために採るのではない。当院のオーダーセットの説明文もこの語順で書くべき。</li><li><strong>中止判断は「日数」と「動態」の二重トリガーで運用する</strong>。原著が推奨する形は、3〜5日投与した時点で臨床再評価し、改善していれば「<strong>5日間投与＋PCTが80〜90%超低下 and/or CRPが50%超低下</strong>」または「バイオマーカーによらず7日間投与」のいずれか早いほうで中止、というもの（Fig. 2）。この2本立ては当院の抗菌薬中止カンファにそのまま持ち込める。</li><li><strong>適用外を先に決めておく</strong>。Fig. 2 のアルゴリズムは、<strong>免疫抑制患者</strong>と長期投与を要する感染（感染性心内膜炎・黄色ブドウ球菌菌血症・骨髄炎）には適用しないと明記されている。図をそのまま貼ると必ずこの例外が抜けるので、掲示物には例外を先頭に書く。</li><li><strong>PCTとCRPは「どちらが優れているか」で議論しない</strong>。原著が挙げる唯一の頭対頭RCT（Oliveira 2013）では、期間ガイドとしてCRPはPCTに非劣性で、罹病率・死亡率にも差がなかった。<strong>当院にPCTがない場面ではCRP比で代用できる</strong>という結論のほうが実務的価値が高い。</li><li><strong>CRPは「比（CRP-ratio）」で見る</strong>。Day 0 の値を1として日々の比を追い、Day 4 に 0.4未満まで落ちれば fast、0.4〜0.8 なら slow、0.8超で高止まりなら nonresponse、いったん0.8未満に下がってから再上昇すれば biphasic。後2者は死亡が有意に高い。当院の回診で「CRPが下がってきた」と言う代わりに、この4分類の語彙を使う。</li><li><strong>PCTは腎機能とRRTで動くことを申し送りに書く</strong>。Table 2 は腎不全でPCTが上昇、腎代替療法（RRT）で低下すると明示している。透析・CHDF中の患者でPCTの解釈を誤らないための注意書きが要る。</li><li><strong>ステロイド・好中球減少下ではPCTが偽陰性になりやすく、CRPは影響を受けない</strong>（Table 2）。免疫抑制患者ではCRP側を主軸にする。</li><li><strong>二次感染（2nd hit）ではバイオマーカーの上がりが鈍る</strong>。原著は、二次感染時のピークがCRPで初回の約70%、<mark class="hl">PCTでは初回の約10%</mark>にとどまると表で示している。ICU滞在後半の「熱は出たがPCTが上がらない」を陰性所見として扱わない。</li><li><strong>BDGは「除外」に使い、「開始」には使わない</strong>。侵襲性カンジダ症の有病率が5%未満の集団ではNPV 95%超だがPPVは10〜15%しかない。一方、BDGガイドで経験的抗真菌薬を早期に開始したCandiSep試験は生存利益を示せず抗真菌薬の大幅な過剰使用を招いた。逆にBDGガイドで経験的抗真菌薬を早期に中止した2件のRCTは安全で投与期間を短縮した。<mark class="hl">当院で使うなら「やめる側」の運用に限る</mark>。</li><li><strong>迅速抗原検査の陰性を除外根拠にしない</strong>。インフルエンザ抗原（感度0.69）・SARS-CoV-2抗原（感度0.70）・肺炎球菌尿中抗原（感度0.72）はいずれも特異度は高いが感度が低い。「陰性だから違う」は成立しない。</li><li><strong>CDIはGDH＋トキシンA/Bの2段階で、単独使用しない</strong>。CDI有病率5%の状況ではGDH単独のPPVは34〜38%にとどまる。GDH陽性・トキシン陰性の解釈は診療科間で事前に合意しておく（原著自身が本文と表で解釈を書き分けている。下記「批判的吟味」参照）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：敗血症は「感染に対する制御不能な宿主応答による生命を脅かす臓器障害」（Sepsis-3）と定義される。過去数十年で250を超えるバイオマーカーが同定・評価されてきた。日常臨床では PCT と CRP が最もよく使われ、抗菌薬適正使用（antibiotic stewardship）の道具として期待されてきた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：それだけの数がありながら、<strong>敗血症と「敗血症様症候群」を正確に区別できるバイオマーカーは1つもない</strong>。カットオフ値も定まらず（PCTで報告値は0.5〜2 μg/L、CRPで2〜10 mg/dL）、どの局面でどう使えば診療が改善するのかが臨床医に共有されていなかった。</li><li><strong>What's new（本総説の新規性・意義）</strong>：性能の一覧ではなく「<strong>使い方の指南</strong>」に振り切った点。①病原体特異的バイオマーカー（抗原検査・真菌抗原）の統合診断性能を1枚の表にまとめ、②PCTとCRPの生物学・干渉因子・動態を対比表にし、③抗菌薬をいつ止めるかを決めるフローチャート（Fig. 2）を数値付きで提示した。中心的な主張は「単回値ではなく動態（kinetics）」と「単独の検査として使うな」の2点である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 250を超えるバイオマーカーがあっても、敗血症と敗血症様症候群を分けられるものは1つもない。それでもバイオマーカーは使える — ただし<strong>始める根拠ではなく、やめる根拠として、単回値ではなく動態で</strong>。</p>
+</div>
+<ul><li><strong>バイオマーカーの3つの役割</strong>：①感染の指標、②制御不能な宿主応答の指標、③治療への反応の指標。加えて患者リスクの予後予測を助ける。</li><li><strong>公表データが支持する用途は3つだけ</strong>：①病原体同定、②臨床診断、③抗菌薬治療の最適化。</li><li><strong>ベッドサイドの情報は3つのベクトルの交差</strong>（Fig. 1）：全身症状／臓器障害／微生物学的証明。前2者は敗血症に特異的でも感度が高くもない。微生物学的証明は確定まで<strong>少なくとも2〜3日</strong>かかり、抗菌薬投与下の培養では感度が高くない。結果として敗血症症例の約40〜50%が培養陰性とされる。</li><li><strong>バイオマーカーの分類</strong>（Fig. 1 の表）：予後的（prognostic）／予測的（predictive）／セラノスティック（theranostic）。<strong>予後的マーカーは臨床的有用性が限られ、主な使い道は治験の対象濃縮（trial enrichment）</strong>である、と原著は明言している。</li><li><strong>PCTの診断性能</strong>：3件のメタ解析で感度77〜85%・特異度75〜83%。<strong>合意されたカットオフ値は存在しない</strong>（報告は0.5〜2 μg/L）。</li><li><strong>CRPの診断性能</strong>：2件のメタ解析で感度78〜80%・特異度60〜61%。カットオフは2〜10 mg/dLとばらつく。</li><li><strong>CAPTAIN研究の逆説</strong>：53種のバイオマーカーを比較したところ、<strong>どの単独マーカーもどの組み合わせも、CRP単独に勝てなかった</strong>。しかもCRPはPCTより良かった。</li><li><strong>予測（発症前）ではCRPが優る</strong>：ICU獲得感染症では<strong>1日あたりのCRP最大上昇 4.1 mg/dL超</strong>（とくに絶対値 8.7 mg/dL超を伴うとき）が発症を精度よく予測した。BioVAP研究でもCRPとその傾き（slope）はVAP発症の良好な予測因子だったが、PCTの動態では同じ所見が得られなかった。</li><li><strong>治療反応の評価にはCRP比（CRP-ratio）</strong>：Day 0 を1とした比。Day 4 に 0.4未満＝fast／0.4〜0.8＝slow／0.8超で持続＝nonresponse／いったん低下後に再上昇＝biphasic の4パターン。fast と slow は nonresponse・biphasic より有意に死亡が低い。</li><li><strong>PCTガイド抗菌薬治療</strong>：重症患者を対象としたRCTは<strong>少なくとも18件</strong>あり、安全で投与期間が短縮、一部のRCTでは死亡も低下。最近のSR・MAでは投与期間が1日短縮し生存が改善、とくにプロトコル遵守率が高くないRCTと、PCTをCRPと併用した場合に顕著だった。</li><li><strong>ただし「alert PCT」戦略は失敗した</strong>：PCT 1 ng/mL以上かつ1日10%超の低下がない状態を警告とみなして診断・治療を強化する戦略のRCTは、<strong>死亡改善なし</strong>で、広域抗菌薬使用量の増加・抗菌薬日数の増加・人工呼吸期間とICU滞在の延長という代償を伴った。</li><li><strong>CRPガイドはPCTガイドに非劣性</strong>（唯一の頭対頭RCT）。ただし単施設で、<strong>バイオマーカー値によらず最長7日</strong>という上限が設けられていた。</li><li><strong>旧世代RCTのバイアス</strong>：初期の試験では対照群が「当時の標準治療」で治療され、今日の基準では過剰に長期だった。そのため「バイオマーカー戦略が曝露を減らす」という結論には偏りが入りうる。近年の試験は<strong>より短い固定期間</strong>を対照に置いている。</li><li><strong>著者らの提案は「ダブルトリガー」</strong>：臨床経過に加えて、①事前規定アルゴリズムに沿ったバイオマーカーの低下、または②5〜7日間の投与完了、の<strong>どちらか早いほう</strong>で中止する（Fig. 2）。</li><li><strong>バイオマーカーのパネル化は効かない</strong>：敗血症バイオマーカーは互いに強く相関するため、組み合わせても診断精度が上がらない。一方、<strong>臨床データと組み合わせたアルゴリズム</strong>は救急外来で有望（NPV 100%・PPV 93%、ただし158例・全例がSIRS 2項目以上）。</li><li><strong>Take-home（原著の囲み）</strong>：連続測定は単回値より情報量が多い。<mark class="hl">バイオマーカーは単独の検査として使ってはならず、徹底した臨床評価と、そのマーカーの生物学・干渉因子・強み・限界の包括的知識と常に併せて用いる</mark>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 敗血症バイオマーカーの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>敗血症（sepsis）</strong>：感染に対する制御不能な宿主応答によって生じる、生命を脅かす臓器障害（Sepsis-3、2016）。「感染＋臓器障害」であって、「感染＋熱」ではない。</p>
+<p><strong>バイオマーカー（biomarker）</strong>の定義：客観的に測定される生物学的特性で、生理的・病的過程の代替指標（surrogate marker）、あるいは薬剤の作用の指標として用いられるもの。</p>
+<p><strong>CRP（C-reactive protein、C反応性蛋白）</strong>：急性期蛋白の一種（ペントラキシン族）。<strong>肝臓でのみ</strong>、サイトカイン（とくにインターロイキン6）に反応して合成される。刺激から4〜6時間で上昇を始め、8時間ごとに倍増し、36〜50時間でピーク、半減期19時間。</p>
+<p><strong>PCT（procalcitonin、プロカルシトニン）</strong>：カルシトニンの前駆体であるプロホルモン（ホルモカイン）。<strong>ほぼすべての臓器とマクロファージ</strong>が産生する。刺激から3〜4時間で上昇を始め、約24時間でピーク、半減期22〜35時間。糸球体濾過量と腎代替療法の影響を受ける。</p>
+<p><strong>なぜ「動態」なのか</strong>：どちらも「炎症があること」を示すだけで、「その炎症が感染由来かどうか」は示さない。単回値では手術・外傷・膵炎などの無菌性炎症と区別できない。しかし<strong>治療を始めたあとに下がるかどうか</strong>は、その炎症源に治療が効いているかを反映する。だから単回値より動態が使える、というのが本総説の骨格である。</p>
+<p><strong>theranostic（セラノスティック）</strong>：therapy（治療）＋diagnostic（診断）の造語。「その患者が特定の治療から利益を得るかを見分ける能力」＝精密医療の道具としてのバイオマーカー。治療の選択・用量・期間を導く用途を指す。</p>
+<p><strong>主な略語</strong>：<strong>BDG</strong>＝(1,3)-β-D-グルカン、GM＝ガラクトマンナン、GDH＝グルタミン酸脱水素酵素、CDI＝*Clostridioides difficile* 感染症、VAP＝人工呼吸器関連肺炎、CAP＝市中肺炎、BSI＝血流感染、SIRS＝全身性炎症反応症候群、SOFA＝sequential organ failure assessment、ICT＝免疫クロマトグラフィー検査、EIA＝酵素免疫測定、FIA＝蛍光免疫測定、ODI＝光学密度指数、PPV/NPV＝陽性的中率／陰性的中率。</p>
+</div>
+<h3>2. 背景と目的 — 3つのベクトルという整理 🧭</h3>
+<p>敗血症の診断・管理と抗菌薬適正使用にあたって、臨床医は異なる情報源からのデータを組み合わせている。原著はそれを<strong>3つのベクトルの交差</strong>として図式化した（Fig. 1）。</p>
+<div class="tw"><table>
+<thead><tr><th>ベクトル</th><th>内容</th><th>バイオマーカーが足せる情報</th><th>限界</th></tr></thead>
+<tbody>
+<tr><td>全身症状（systemic manifestations）</td><td>発熱・頻脈・白血球増多など非特異的な感染徴候</td><td>宿主応答バイオマーカー（CRP・PCT）</td><td>敗血症に特異的でも感度が高くもない</td></tr>
+<tr><td>臓器障害（organ dysfunction）</td><td>SOFAで捉える臓器不全</td><td>腎障害バイオマーカー等</td><td>同上（特異的でも高感度でもない）</td></tr>
+<tr><td>微生物学的証明（microbiological documentation）</td><td>培養・抗原検査・核酸検査</td><td>病原体特異的バイオマーカー（Table 1）</td><td>確定まで少なくとも2〜3日。抗菌薬投与下では感度低下。敗血症の約40〜50%が培養陰性</td></tr>
+</tbody></table></div>
+<p>さらに原著は、敗血症のバイオマーカーを<strong>予後的・予測的・セラノスティック</strong>の3種に分類する。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06956-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06956-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 敗血症アプローチの3つのベクトルと、バイオマーカーの3分類（原図・無改変。©Springer） 図の上半分：中央上に赤い血管断面（赤血球・白血球・桿菌が描かれた模式図）があり、そこから「SEPSIS」の文字とともに<strong>3本の黄色い矢印</strong>が下向き・左下・右下へ伸びる。矢印の先はそれぞれ青い円形アイコン。左＝細菌様の放射状アイコンに黄色い枠のラベル「UNSPECIFIC SIGNS OF INFECTION（非特異的な感染徴候）」、中央＝顕微鏡アイコンにラベル「MICROBIOLOGIC DOCUMENTATION（微生物学的証明）」、右＝心臓に稲妻が走るアイコンにラベル「ORGAN DYSFUNCTION（臓器障害）」。3方向へ同時に広がる構図が「1本では決まらない」ことを視覚化している。 図の下半分：青いヘッダ（Biomarkers／Comments）を持つ3行の表が置かれ、行見出しは青文字で Prognostic／Predictive／Theranostic。内容は下記の日本語表のとおり。</p>
+</div>
+<h4>Figure 1 下段の表（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>原文の説明</th></tr></thead>
+<tbody>
+<tr><td>予後的（Prognostic）</td><td>敗血症の経過中に事象や転帰が起こる可能性を評価する。臨床的有用性は限られる。治験の対象濃縮（trial enrichment）に有用</td></tr>
+<tr><td>予測的（Predictive）</td><td>敗血症の初期の臨床的疑い（検査前確率）に対して、価値ある情報（検査後確率）を加える。敗血症の診断と治療反応のモニタリングに有用でありうる</td></tr>
+<tr><td>セラノスティック（Theranostic）</td><td>特定の治療から利益を得る特定の患者を同定する能力（精密医療）</td></tr>
+</tbody></table></div>
+<p>原著は図の脚注で「<strong>予測（prediction）には、臨床的に疑われる前（発症前・presymptomatic）に敗血症の発生を予測する能力と、治療への反応を同定する能力の双方を含む</strong>」と補足し、「この目的では単回値より動態のほうが情報量が多い」と明記する。さらに、治療反応の評価に有用なバイオマーカーが満たすべき条件として、①治療が成功すれば低下しベースラインに戻り、治療抵抗性なら高いままか上昇すること、②臨床経過を評価できるだけの大きな変動幅をもつこと、③敗血症が長引いても「枯渇（exhaustion）」や「疲労（fatigue）」の挙動を示さないこと、を挙げている。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー（narrative review）。系統的レビューではなく、検索式・スクリーニング過程・バイアスリスク評価は記載されていない。GRADE等による推奨の格付けも行っていない。</li><li><strong>対象範囲</strong>：重症患者における感染・敗血症のバイオマーカーのうち、①病原体特異的バイオマーカー、②2つの宿主応答バイオマーカー（PCT・CRP）に限定。250超のバイオマーカーの網羅的レビューは別稿（Pierrakos, Crit Care 2020）に譲ると明記している。</li><li><strong>著者構成</strong>：15名。ポルトガル・デンマーク・ブラジル・スペイン・スイス・英国・フランス・オーストラリア・米国の集中治療／感染症／呼吸器の専門家による国際的な執筆陣。Conceptualization は Póvoa と Kalil。</li><li><strong>提示物</strong>：Figure 2点（概念図・アルゴリズム図）、Table 2点（病原体特異的マーカーの統合診断性能／宿主応答マーカーの対比）、引用78件、ESM（臨床シナリオ例）。</li><li><strong>利益相反</strong>：責任著者 Póvoa は Gilead・Pfizer・Mundipharma から講演料、MSD・Sanofi からコンサルティング料、<strong>Abionic（バイオマーカー企業）から無制限研究助成</strong>を受けている。Singer は Biomerieux・Radiometer・Abbott・Roche Diagnostics 等の診断薬企業と広範な関係がある。Ferrer は Thermofisher（PCT測定系のメーカー）等から講演料等。バイオマーカーの使用を推奨する総説として、診断薬企業との関係の申告は読む側が意識しておくべき点である（下記「批判的吟味」参照）。</li></ul>
+<h3>4. 臨床医が答えるべき6つの問い ❓</h3>
+<p>Surviving Sepsis Campaign ガイドラインが認識するとおり、敗血症を疑ったとき臨床医が答えるべき問いは以下の順に立つ。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>問い</th><th>バイオマーカーの寄与</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>感染の可能性はどれくらいか</td><td>検査前確率に検査後確率を足す（predictive）。ただし単独では決まらない</td></tr>
+<tr><td>2</td><td>重症度はどれくらいで、敗血症性ショックへ進展するリスクはどれくらいか</td><td>予後的（prognostic）。臨床的有用性は限定的</td></tr>
+<tr><td>3</td><td>最も可能性の高い病原体は何か</td><td>病原体特異的バイオマーカー（Table 1）</td></tr>
+<tr><td>4</td><td>最も適切な抗菌薬治療は何か</td><td>どの抗原検査も抗菌薬感受性の情報を与えない</td></tr>
+<tr><td>5</td><td>患者は改善しているか、していなければなぜか</td><td>動態（CRP比・PCT低下率）。本総説の中心</td></tr>
+<tr><td>6</td><td>いつ抗菌薬を中止できるか</td><td>ダブルトリガー戦略（Fig. 2）。最もエビデンスが厚い用途</td></tr>
+</tbody></table></div>
+<p>原著はこの一覧の直後に、「臨床医はこれらの問いにバイオマーカーの助けを借りて答えようとするが、<strong>敗血症管理におけるバイオマーカーの性能は最適とは言えない（suboptimal）</strong>ことを認識することが重要である」と釘を刺している。</p>
+<h3>5. 病原体特異的バイオマーカー 🦠</h3>
+<p><strong>核酸検出</strong>：微生物核酸の検出は一般化しつつあるが、感染症一般、とくに細菌感染症の管理における位置づけは<strong>依然として不確実で、標準化もされていない</strong>。</p>
+<p><strong>迅速抗原検査の一般論</strong>：大半は免疫クロマトグラフィー法（ICT）に基づき、ベッドサイド利用の可能性がある。市中肺炎（CAP）ではインフルエンザ・SARS-CoV-2の呼吸器抗原検査と、肺炎球菌・レジオネラの尿中抗原検査が使われる。<strong>特異度は高いが感度は低〜中等度</strong>で、自動読み取りによる改善はあっても、陰性を除外結果として確実に扱うことはできない。</p>
+<p><strong>レジオネラ</strong>：抗原検査は *Legionella pneumophila* 血清群1（LP1）を検出する。これがレジオネラ症の主因ではあるが、<strong>他の血清群・菌種では偽陰性</strong>が生じる。</p>
+<p><strong>肺炎球菌</strong>：診断精度は血清型に強く依存する。<strong>13価多糖体結合型ワクチン導入後の抗原シフト</strong>により感度低下が指摘されている。</p>
+<p><strong>多重検査</strong>：単一検体で複数病原体を同時検査する迅速診断（mariPOC など）は現状ごくわずか。<strong>いずれの抗原検査も抗菌薬感受性の情報を与えない</strong>。</p>
+<p><strong>CDI</strong>：有症状患者で、便検体の<strong>GDH</strong>と遊離トキシンA・Bを迅速酵素免疫測定する2段階アルゴリズムで診断する。CDI有病率が低い状況では陽性的中率が低いため、いずれの検査も単独使用は避けるべき。GDH検査は高感度で、陽性ならより特異的なトキシンA/B検出検査と組み合わせる。GDH陽性・トキシンA/B陰性の患者は慎重な評価が必要で、下痢患者で検出閾値未満のトキシン量のCDI、あるいは非毒素産生性（non-toxigenic） *C. difficile* の保菌を意味しうる（※本文の記述。Table 1 の脚注は同じ状況を「毒素産生性（toxigenic）の保菌」と書いており、原著内で矛盾している。下記「批判的吟味」参照）。</p>
+<p><strong>BDG（(1,3)-β-D-グルカン）</strong>：真菌細胞壁由来の構造多糖を標的とする汎真菌血清バイオマーカー。侵襲性カンジダ症の検出に広く使われる。<strong>高感度・低特異度</strong>のため、有病率の低いICUでは侵襲性カンジダ症の除外（rule-out）に有用。</p>
+<ul><li>ただし最近のRCT（CandiSep）は、<strong>侵襲性カンジダ症の低〜中リスクの重症敗血症患者において、BDGガイド下の抗真菌薬早期開始が生存利益を示せず</strong>、しかも抗真菌薬の大幅な過剰使用という代償を伴った。</li><li>BDG は、<strong>非HIV患者でニューモシスチス肺炎の可能性が低〜中等度の場合、診断の陰性的中率が高い</strong>。</li><li><strong>特異度とPPVは、検査を繰り返すこと、またはカットオフ値を上げることで高められる</strong>。</li></ul>
+<p><strong>GM（ガラクトマンナン）</strong>：血清と気管支肺胞洗浄（BAL）で測定でき、侵襲性肺アスペルギルス症（IPA）の診断に高い特異度を示す。<strong>非好中球減少患者では、BAL液のGM検査のほうが血清より感度が高い</strong>。重症患者におけるIPAの診断基準で中心的役割を果たす。BAL検体用の迅速ベッドサイド Aspergillus ラテラルフロー検査が開発され、研究が進行中（ISRCTN 43895480）。</p>
+<p><strong>クリプトコッカス抗原</strong>：血清中の検出はHIV患者で中枢神経症状があるときクリプトコッカス髄膜炎を高度に予測する。</p>
+<p><strong>病原体特異的バイオマーカーによるアルゴリズム</strong>：<strong>2件のRCT</strong>が、侵襲性カンジダ症疑いの重症患者における経験的抗真菌薬の中止をBDGでガイドする戦略を検討し、安全であり抗真菌薬の投与期間短縮と関連した。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>BDGは「開始」と「中止」で結論が逆になる 同じBDGでも、<mark class="hl"><strong>早期開始のガイドに使ったRCTは生存利益なし＋抗真菌薬の過剰使用、早期中止のガイドに使った2件のRCTは安全＋期間短縮</strong></mark>という正反対の結果になっている。「BDG陽性だから抗真菌薬を始める」は本総説の支持するところではない。</p>
+</div>
+<h3>6. Table 1. 重症患者の日常診療で使われる主な病原体特異的バイオマーカー（原表を日本語化）</h3>
+<div class="tw"><table>
+<thead><tr><th>バイオマーカー</th><th>測定法</th><th>診断対象</th><th>検体（カットオフ）</th><th>感度（95%CI）</th><th>特異度（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>インフルエンザA/B 抗原</td><td>EIA・ICT・FIA</td><td>インフルエンザ肺炎</td><td>鼻腔スワブ／他の呼吸器検体</td><td>0.69（0.64–0.74）</td><td>0.97（0.96–0.98）</td></tr>
+<tr><td>SARS-CoV-2 抗原</td><td>ICT・FIA</td><td>SARS-CoV-2肺炎</td><td>鼻腔スワブ／他の呼吸器検体</td><td>0.70（0.69–0.71）</td><td>0.98（0.98–0.98）</td></tr>
+<tr><td>肺炎球菌 尿中抗原</td><td>ICT・FIA</td><td>肺炎球菌性肺炎</td><td>尿</td><td>0.72（0.62–0.80）</td><td>0.83（0.65–0.93）</td></tr>
+<tr><td>レジオネラ 尿中抗原</td><td>EIA・ICT・FIA</td><td>レジオネラ症</td><td>尿</td><td>0.79（0.71–0.85）</td><td>1.00（0.99–1.00）</td></tr>
+<tr><td>GDH</td><td>EIA</td><td>CDI</td><td>未固形便</td><td>0.94（0.89–0.97）</td><td>0.90（0.88–0.92）</td></tr>
+<tr><td>トキシンA/B</td><td>EIA</td><td>CDI</td><td>未固形便</td><td>0.83（0.76–0.88）</td><td>0.99（0.98–0.99）</td></tr>
+<tr><td>BDG（Fungitell）</td><td>プロテアーゼ酵素前駆体比色法</td><td>侵襲性カンジダ感染</td><td>血清（80 pg/mL超）</td><td>0.81（0.74–0.86）</td><td>0.60（0.49–0.71）</td></tr>
+<tr><td>BDG（同上）</td><td>同上</td><td>ニューモシスチス肺炎</td><td>血清（80 pg/mL超）</td><td>0.91（0.87–0.94）</td><td>0.79（0.72–0.84）</td></tr>
+<tr><td>GM</td><td>EIA</td><td>侵襲性肺アスペルギルス症</td><td>血清（ODI 0.5以上）</td><td>0.74（0.64–0.82）</td><td>0.85（0.77–0.90）</td></tr>
+<tr><td>GM</td><td>EIA</td><td>同上</td><td>血清（ODI 1以上）</td><td>0.79（0.60–0.91）</td><td>0.88（0.78–0.94）</td></tr>
+<tr><td>GM</td><td>EIA</td><td>同上</td><td>BAL（ODI 0.5以上）</td><td>0.79（0.65–0.88）</td><td>0.84（0.74–0.91）</td></tr>
+<tr><td>GM</td><td>EIA</td><td>同上</td><td>BAL（ODI 1.0以上）</td><td>0.90（0.77–0.96）</td><td>0.94（0.88–0.97）</td></tr>
+<tr><td>クリプトコッカス抗原</td><td>EIA・ICT</td><td>クリプトコッカス髄膜炎</td><td>血清</td><td>0.99（0.88–1.00）</td><td>0.95（0.88–0.98）</td></tr>
+<tr><td>クリプトコッカス抗原</td><td>EIA・ICT</td><td>同上</td><td>髄液</td><td>0.99（0.96–1.00）</td><td>0.99（0.97–1.00）</td></tr>
+</tbody></table></div>
+<p>（クリプトコッカス抗原の信頼区間上限は原表では「100」と印字されている。ここでは他行と単位を揃えて 1.00 と表記した。）</p>
+<h4>Table 1 の Comments 欄（原表の注釈を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>バイオマーカー</th><th>注釈（原表 Comments）</th></tr></thead>
+<tbody>
+<tr><td>インフルエンザA/B 抗原</td><td>感度は測定法（FIA ＞ ICT ＞ EIA）と対象集団によって変わる。ICTは迅速。統合感度・特異度はICTのみについて提示</td></tr>
+<tr><td>SARS-CoV-2 抗原</td><td>鼻腔スワブ（他の呼吸器検体より）、有症状患者（無症状より）、高ウイルス量（RT-PCRのCt値25以下）で感度が高い。迅速</td></tr>
+<tr><td>肺炎球菌 尿中抗原</td><td>感度は血清型に依存。FIA ＞ ICT、血液・胸水培養陽性の肺炎で感度が高い。抗菌薬曝露は感度に影響しない。偽陽性：小児の肺炎球菌定着、ワクチン接種（48時間）、既往感染（数か月）。15分で結果。肺炎球菌性髄膜炎疑いでは髄液にも使える</td></tr>
+<tr><td>レジオネラ 尿中抗原</td><td>主にLP1を検出するため、LP1によるレジオネラ症では感度がより高い 0.84（0.75–0.90）。FIA ＞ ICT ＞ EIA、重症レジオネラ症で感度が高い。抗菌薬曝露は感度に影響しない。結果はICT/FIA 15分、EIA 90分</td></tr>
+<tr><td>GDH</td><td>CDI有病率が低いとき（5%）、PPV 34〜38%・NPV 100%。迅速</td></tr>
+<tr><td>トキシンA/B</td><td>CDI有病率が低いとき（5%）、PPV 69〜81%・NPV 99%。30分で結果。GDHとトキシンA/Bの両方を含む検査キットが複数ある。GDH陽性・トキシンA/B陰性は、GDHの偽陽性、トキシンA/Bの偽陰性、検出閾値未満のトキシン量のCDI、または<strong>毒素産生性 *C. difficile* の保菌</strong>を意味しうる</td></tr>
+<tr><td>BDG（侵襲性カンジダ）</td><td>血液培養より24〜72時間早く陽性化。低下は緩徐で、血液培養陽性後最長7週間持続しうる。感度は菌種依存（*C. parapsilosis* で低い）。有病率5%未満では PPV 10〜15%・NPV 95%超。特異度とPPVは、連続2検体陽性・カットオフ引き上げ・マンナンや *C. albicans* 発芽管特異抗体との併用で高められる。グルカンフリーの実験器具が必要。偽陽性の原因は多数（真菌定着、重度粘膜炎、消化管の破綻、輸血、アルブミン、免疫グロブリン、血液透析・血液濾過、手術用ガーゼ、βラクタム系抗菌薬、経腸栄養、グラム陽性菌血症、検体汚染）が、理論上ほど頻繁ではない</td></tr>
+<tr><td>BDG（ニューモシスチス肺炎）</td><td>HIV患者で感度が高い 0.94（0.91–0.96）、非HIV患者 0.86（0.78–0.91）。低〜中等度の検査前確率（非HIVで20%以下、HIVで50%以下）では NPV 95%以上。可能性が高い患者では、BDG陰性で除外はできない</td></tr>
+<tr><td>GM</td><td>カットオフを上げる（ODI 1以上）と感度と特異度がともに上がる。非好中球減少の重症患者では偽陰性が多い（インフルエンザ関連肺アスペルギルス症を除く）。偽陽性の原因：腸管粘膜炎、βラクタム系抗菌薬。BAL検体のGMは、非好中球減少の重症患者では血清GMより有用</td></tr>
+<tr><td>クリプトコッカス抗原</td><td>すべてのクリプトコッカス血清型を検出。クリプトコッカス髄膜炎の症状があるHIV成人では、血清抗原陰性で髄膜炎を除外しうる。ポイントオブケアのラテラルフローICTで10分</td></tr>
+</tbody></table></div>
+<p><strong>参照基準（原表の脚注）</strong>：レジオネラ症＝培養陽性かつ/またはPCRかつ/または血清学。CDI＝細胞毒性中和試験。BDGの侵襲性カンジダ症＝カンジダ症リスクのあるICU集団で評価、参照基準はEORTC/MSGのproven invasive candidiasis基準。ニューモシスチス肺炎＝喀痰の細胞学的染色（2研究のみPCR）。GM＝侵襲性アスペルギルス症が疑われる免疫能低下患者で評価、参照基準はEORTC/MSGのproven/probable基準。クリプトコッカス抗原＝中枢神経症状のあるHIV陽性患者で評価、参照基準は髄液真菌培養。</p>
+<h3>7. 宿主応答バイオマーカー① プロカルシトニン（PCT）🧪</h3>
+<p><strong>生物学</strong>：カルシトニンの前駆体であるプロホルモン。<strong>ほぼすべての臓器とマクロファージ</strong>が産生する。炎症刺激後3〜4時間で上昇を始め、約24時間でピーク、半減期は22〜35時間。糸球体濾過量と腎代替療法の影響を受ける。</p>
+<h4>7-1. 敗血症の予測（発症前）</h4>
+<ul><li>PCTは<strong>VAPの領域で最も研究されたバイオマーカー</strong>である。</li><li>単回・連続いずれの測定も、<strong>VAPの予測と診断に有用でないこと</strong>が複数の観察研究で示されている。</li><li>重症患者におけるPCT動態の研究では<strong>診断精度が不良</strong>で、治療開始のガイドとしての影響も小さかった。</li><li>したがって、選択された状況で抗菌薬使用の減少と関連するとはいえ、<strong>ICUで敗血症を予測する用途でのPCTの有用性は限定的</strong>である。</li></ul>
+<h4>7-2. 敗血症の診断</h4>
+<ul><li><strong>合意されたカットオフ値は存在しない</strong>。公表研究はカットオフを報告していないか、<strong>0.5〜2 μg/L</strong>の値を用いている。</li><li><strong>多数の非感染性炎症状態でもPCT血清値は上昇する</strong>。</li><li>PCTの敗血症診断に関する<strong>3件の独立したメタ解析</strong>で、感度77〜85%・特異度75〜83%。</li><li>敗血症を疑う患者ではPCTがCRPより優れる可能性はあるが、<strong>PCTを抗菌薬処方のガイドに使うべきではない</strong>。</li><li><strong>2016年 IDSA/ATS ガイドライン</strong>と<strong>2017年 ERS/ESICM/ESCMID/ALAT ガイドライン</strong>は、いずれもVAPの診断にPCTを使うことを推奨していない。</li><li><strong>重症CAPにおけるインフルエンザの細菌共感染</strong>：予備的研究は、インフルエンザ確定例でPCTが細菌共感染の除外に高いNPVを提供しうると示唆したが、<strong>他の研究では再現されていない</strong>。インフルエンザ以外のウイルス感染も含め、広く使うにはさらなる研究が必要。</li><li>最近のメタ解析では、<strong>PCTはCAPの早期には感度を欠き、その時点でウイルス感染と細菌感染を確実には区別できない</strong>。</li></ul>
+<h4>7-3. 治療反応の評価</h4>
+<p>敗血症の診断がつき抗菌薬が開始されて<strong>約48〜72時間後</strong>に、臨床経過を評価して次の問いを立てる。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>問い</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>患者は臨床的に改善しているか</td></tr>
+<tr><td>2</td><td>改善していないなら、未検出の敗血症合併症（膿胸・肺膿瘍など）、二次感染（同一部位または別部位）、不十分または不適切な抗菌薬治療のいずれによるものか</td></tr>
+<tr><td>3</td><td>それとも非感染性の原因によるものか</td></tr>
+</tbody></table></div>
+<ul><li>VAP患者では、<strong>発症時と治療Day 4のPCT</strong>が生存を予測し、転帰良好群と不良群を区別できた。</li><li><strong>抗菌薬治療Day 4にPCTが高値のまま持続すること</strong>は、感染コントロール失敗を示唆した。</li><li>実臨床では、<strong>抗菌薬治療のDay 3/Day 4にバイオマーカーが持続高値の患者</strong>は治療失敗を疑い、積極的な診断的・治療的アプローチを促すべきである。</li><li>ただし、診断を強化するタイミングを決める単独基準としてバイオマーカーを用いることには慎重であるべき。</li><li><strong>「alert PCT」（PCT 1 ng/mL以上かつ1日10%超の低下がない）</strong>の概念に基づく臨床アルゴリズムをRCTで検証したところ、<strong>死亡改善はなく</strong>、代償として広域抗菌薬消費の増加・抗菌薬投与日数の増加・人工呼吸期間の延長・ICU滞在の延長を招いた。</li></ul>
+<h4>7-4. PCTガイド抗菌薬治療</h4>
+<ul><li>抗菌薬適正使用の一戦略は「固定の長期投与を固定の短期投与に変える」ことだが、より広まりつつあるのは<strong>バイオマーカーで投与期間を個別化する</strong>アプローチである。個々の患者の治療反応を取り込み、抗菌薬中止を実際の臨床経過に合わせる。</li><li>当初はこの方法が抗菌薬を節減するか不明だったが、<strong>PCTで全体の抗菌薬使用が減ることを支持するエビデンスが増えている</strong>。</li><li>重症患者におけるPCTガイド抗菌薬治療のRCTは<strong>少なくとも18件</strong>あり、この戦略が安全で、投与期間が短く、一部のRCTでは死亡を低下させるという強いエビデンスがある。</li><li><strong>主な批判</strong>：初期RCTの対照群で、抗菌薬の投与期間が推奨より長かったこと。</li><li>最近のSR・MA（Pepper, Chest 2019）は、重症患者におけるPCTガイド戦略の死亡と投与期間への影響を、企業スポンサー・アルゴリズム遵守・CRPの同時利用可能性といった因子とともに評価した。全体として、<strong>PCTガイド戦略は抗菌薬投与期間を1日短縮し、生存を改善した</strong>。とくにプロトコル遵守率が高くないRCTと、PCTがCRPと併用された場合に顕著だった。</li></ul>
+<h3>8. 宿主応答バイオマーカー② CRP 🩸</h3>
+<p><strong>生物学</strong>：<strong>肝臓でのみ</strong>、サイトカイン（とくにIL-6）に反応して合成される急性期蛋白。炎症刺激後4〜6時間で上昇を開始、8時間ごとに倍増、36〜50時間でピーク、半減期19時間。免疫抑制（ステロイド・好中球減少）の影響を受けず、腎不全・腎代替療法の影響も受けず、肝硬変の有無で有意な差もない。</p>
+<h4>8-1. 敗血症の予測（発症前）</h4>
+<ul><li>ICU獲得敗血症の発症前数日間のCRP動態は、<strong>1日あたりのCRP最大上昇が 4.1 mg/dL超</strong>（とくに絶対濃度 8.7 mg/dL超を伴うとき）で発症を精度よく予測した。</li><li>市中発症の<strong>血流感染（BSI）</strong>の大規模研究でも同様の所見が得られ、確定診断に先立つ3日間にわたってCRP濃度が上昇し始めていた。</li><li><strong>BioVAP多施設研究</strong>：非感染性理由で侵襲的人工呼吸を受けている患者のVAP診断前の動態を調べ、<strong>CRPとCRPの傾き（slope）がVAP発症の良好な予測因子</strong>であることを見出した。PCTの動態ではこの所見が得られなかった。</li><li>ただし<strong>2016年 IDSA/ATS</strong> と 2017年 ERS/ESICM/ESCMID/ALAT の両ガイドラインは、VAPの診断にはPCTもCRPもいかなるバイオマーカーも推奨していない。</li></ul>
+<h4>8-2. 敗血症の診断</h4>
+<ul><li>敗血症を疑う患者における<strong>CRP単回測定の価値は、2件のメタ解析（うち1件は成人限定）で一貫して示されなかった</strong>。感度78〜80%・特異度60〜61%。</li><li>臨床研究におけるCRPの精度のばらつきは、<strong>典型的に2〜10 mg/dLの範囲で異なるカットオフ</strong>が用いられていることにも影響されている。</li><li>一方、最近の前向き観察研究 <strong>CAPTAIN研究</strong>は、敗血症と非敗血症性SIRSの鑑別における53種のバイオマーカーの性能を評価し、いかなる単独バイオマーカーも組み合わせも、CRP単独に勝らず、CRPはPCTより優れていた。</li><li><strong>CAPの診断</strong>：胸部X線は最初の24〜72時間に浸潤影を示さないことがあり診断は難しい。CAPと臨床診断された患者にCTを施行して肺炎の有無を確認した研究では、<strong>CRP著高値は胸部X線偽陰性患者でCAPの良い予測因子</strong>であり、逆にCRP低値は胸部X線偽陽性患者でCAPの除外に有用だった。PCTは偽陽性・偽陰性いずれの識別も不良だった。</li></ul>
+<h4>8-3. 治療反応の評価 — CRP比（CRP-ratio）</h4>
+<ul><li>CRPはVAP・BSI・CAPなど複数の重症感染症で治療反応の評価が広く研究されており、<strong>抗菌薬処方後の軌跡が臨床経過・予後と相関する</strong>。</li><li><strong>相対的なCRP変化（CRP比）＝各日のCRP濃度をDay 0（D0）の値で割った比</strong>を使うほうが、絶対的なCRP変化より情報量が多い。</li><li><strong>CRP比の急峻な低下は敗血症の消退の代替指標</strong>、<strong>持続高値または上昇は治療抵抗性の敗血症を示唆</strong>する。</li><li>微生物学的に証明されたVAP患者では、<strong>Day 4に初期値の0.6を超えるCRP</strong>が転帰不良のマーカーだった。BSI・重症CAP・院内肺炎・敗血症でも同様の結果が観察されている。</li></ul>
+<h4>CRP比による治療反応の4パターン（原著の定義）</h4>
+<div class="tw"><table>
+<thead><tr><th>パターン</th><th>定義</th><th>転帰</th></tr></thead>
+<tbody>
+<tr><td>速い反応（fast response）</td><td>CRP比がDay 4までに 0.4未満へ急速に低下</td><td>死亡が有意に低い</td></tr>
+<tr><td>遅い反応（slow response）</td><td>CRP比が持続的に低下し、Day 4の値が 0.4超 0.8未満</td><td>死亡が有意に低い</td></tr>
+<tr><td>無反応（nonresponse）</td><td>CRP比が 0.8超で持続（ときに上昇すら）</td><td>死亡が有意に高い</td></tr>
+<tr><td>二相性（biphasic response）</td><td>初期にCRP比が 0.8未満へ低下したのち、閾値を超えて二次的に再上昇</td><td>死亡が有意に高い</td></tr>
+</tbody></table></div>
+<p>重症CAP・VAP・BSIにおいて、fast と slow のパターンを示した患者は、nonresponse または biphasic の患者より<strong>有意に死亡が低かった</strong>。</p>
+<ul><li><strong>RCTは存在しない</strong>が、<strong>2017年 ERS/ESICM/ESCMID/ALAT ガイドライン</strong>は、治療反応の評価におけるバイオマーカーの付加価値、すなわちCRP比とCRP比の反応パターンの同定を認めている。</li></ul>
+<h4>8-4. CRPガイド抗菌薬治療</h4>
+<ul><li>CRPガイド戦略を評価したRCTは<strong>少ない</strong>（とくにICU患者で）。</li><li><strong>最初のRCTはPCTガイド戦略とCRPガイド戦略の頭対頭比較</strong>で、<strong>期間ガイドとしてCRPはPCTに非劣性</strong>、罹病率・死亡率にも差がなかった。ただしこの単施設RCTでは、バイオマーカー値によらず抗菌薬の最長投与期間が7日に設定されていた。現時点で、抗菌薬投与期間について両バイオマーカーの性能を比較した唯一のRCTである。</li><li>その後の観察研究・ランダム化研究でも、CRPガイド戦略はPCTガイドや固定期間（短期コース）と比較して、<strong>敗血症・敗血症性ショックの臨床経過の改善（または悪化）を反映する能力にも、抗菌薬曝露の低減にも実質的な差はなかった</strong>。</li></ul>
+<h4>8-5. ダブルトリガー戦略という提案</h4>
+<ul><li>初期の試験では対照群が標準診療で治療されていた。多くの原発巣について治療期間のエビデンスが乏しかったため、これらの対照群は<strong>今日では過剰に長期と見なされる治療</strong>を受けており、「バイオマーカー戦略が抗菌薬曝露を減らす」という結論にバイアスが入りうる。</li><li>この限界を克服するため、近年の試験は<strong>より短い固定期間の対照</strong>を用いている。</li><li>個別化するなら、<strong>固定期間とバイオマーカーガイドを組み合わせた「ダブルトリガー（double trigger）」戦略</strong>になる。数日間の治療後、臨床経過に加えて、①事前規定アルゴリズムに沿ったバイオマーカー（CRPまたはPCT）の低下、または②5〜7日間（full days）の抗菌薬治療の完了、のどちらか早いほうで抗菌薬を中止しうる（Fig. 2）。</li><li>この個別化戦略は複数のRCTで評価され、<strong>固定期間と比較してバイオマーカーガイドが安全に治療期間を短縮できる</strong>ことが示されている。</li></ul>
+<h3>9. Table 2. 重症患者の日常診療で使われる主な宿主応答バイオマーカー（原表を日本語化）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>CRP</th><th>PCT</th></tr></thead>
+<tbody>
+<tr><td>性質</td><td>急性期蛋白（ペントラキシン）</td><td>ホルモカイン</td></tr>
+<tr><td>正常値</td><td>0.08 mg/dL（中央値）</td><td>1 ng/mL未満</td></tr>
+<tr><td>最大ピーク</td><td>50 mg/dL超（基準値の1000倍超）</td><td>100 ng/mL超（基準値の10,000倍超）</td></tr>
+<tr><td>産生源</td><td>肝臓</td><td>ほぼすべての細胞とマクロファージ</td></tr>
+<tr><td>侵襲後に上昇し始めるまで</td><td>4〜6時間</td><td>3〜4時間</td></tr>
+<tr><td>ピーク濃度までの時間</td><td>36〜50時間</td><td>約24時間</td></tr>
+<tr><td>半減期</td><td>19時間</td><td>22〜35時間</td></tr>
+<tr><td>ステロイド</td><td>影響なし</td><td>偽陰性が多い</td></tr>
+<tr><td>免疫抑制</td><td>影響なし</td><td>偽陰性が多い</td></tr>
+<tr><td>好中球減少</td><td>影響なし</td><td>偽陰性が多い</td></tr>
+<tr><td>腎不全</td><td>影響なし</td><td>上昇（2段階の上向き矢印）</td></tr>
+<tr><td>腎代替療法</td><td>影響なし</td><td>低下（2段階の下向き矢印）</td></tr>
+<tr><td>慢性肝不全</td><td>低下（正常の70%）</td><td>影響なし</td></tr>
+<tr><td>急性肝不全</td><td>CRPの上昇なし</td><td>影響なし</td></tr>
+<tr><td>二次感染（2nd hit）</td><td>低下（初回エピソードの70%）</td><td>大きく低下（初回エピソードの10%）</td></tr>
+<tr><td>細菌感染 vs ウイルス感染の鑑別</td><td>不良（poor）</td><td>不良（poor）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>二次感染ではPCTが「上がらない」ことがある Table 2 の最下段付近が実務上いちばん重要である。ICU滞在後半の二次感染（2nd hit）では、<mark class="hl"><strong>PCTのピークは初回エピソードの約10%にとどまる</strong></mark>。「PCTが上がらないから感染ではない」という推論は、二次感染の場面では成立しない。CRPでも初回の約70%までしか上がらない。</p>
+</div>
+<h3>10. Figure 2. バイオマーカーガイド抗菌薬治療のユーザーズガイド 🧭</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06956-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06956-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. バイオマーカーガイド抗菌薬治療のユーザーズガイド（原図・無改変。©Springer） 縦方向のフローチャート。青枠の角丸ボックスが上から下へ黒い太矢印で連結され、4段目で「Yes」「No」の2分岐に分かれる。最下段は左右2つのボックス。図の直下に、青いアスタリスク付きの注記が独立して置かれている。Salluh, Crit Care 2014;18:142 を改変したもの。</p>
+</div>
+<h4>Figure 2 の全ボックスの文言（原図の全テキストを表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>位置</th><th>ボックスの文言（原文の日本語訳）</th></tr></thead>
+<tbody>
+<tr><td>① 対象（最上段）</td><td>細菌感染が疑われるまたは確定した非免疫抑制の成人で、より長い抗菌薬治療を要する病態（例：感染性心内膜炎、黄色ブドウ球菌菌血症、骨髄炎）を伴わない者</td></tr>
+<tr><td>② 起点</td><td>SOFAの急性の2点以上の上昇、またはショック</td></tr>
+<tr><td>③ 初期対応</td><td>・培養を採取する ・ショックがあれば1時間以内に適切な抗菌薬治療を開始する ・敗血症であれば3時間以内に適切な抗菌薬治療を開始する ・ベースラインのCRPまたはPCTを採取する（注記付き）</td></tr>
+<tr><td>④ 再評価</td><td>毎日の患者再評価。抗菌薬治療の丸3〜5日後に再評価する ・感染の臨床所見・検査所見が進行性に改善し、かつ持続する感染巣がなく、かつ ・SOFAが低下している（2点以上）</td></tr>
+<tr><td>分岐</td><td>④を満たす → Yes（左へ）／満たさない → No（右へ）</td></tr>
+<tr><td>⑤ Yes：中止</td><td>以下のときに抗菌薬を中止する ・抗菌薬治療の丸5日間かつ、PCTが80〜90%超低下 かつ/または CRPが50%超低下 ・バイオマーカーによらず、抗菌薬治療の丸7日間</td></tr>
+<tr><td>⑥ No：原因検索</td><td>・診断関連：感染の鑑別診断を考慮し、臨床・検査・画像の再評価を行う ・薬剤関連：抗菌薬のカバー不足、投与経路、感染巣における抗菌薬濃度 ・持続する感染巣、多剤耐性菌、重複する院内感染、非細菌性感染 ・臨床的に安定していれば、丸7日後に抗菌薬中止を考慮する（臨床的・検査的な悪化をモニタリングする）</td></tr>
+<tr><td>図下の注記</td><td>CRPまたはPCTの値を、抗菌薬治療を開始する唯一の基準として用いてはならない</td></tr>
+</tbody></table></div>
+<p><strong>図の脚注（原文の要旨）</strong>：敗血症を疑う重症患者への抗菌薬開始は、<strong>バイオマーカー値にかかわらず</strong>行うべきである。ただしそれを毎日再評価する。最適な治療期間の判断には、臨床経過・臓器障害の経過（SOFA）・バイオマーカーの動態・抗菌薬治療の期間を用いる。CRPとPCTの閾値は目安・方向づけとしてのみ用いるべき。これらの推奨は、免疫抑制患者にも、心内膜炎や骨髄炎のように長期抗菌薬治療を要する感染症患者にも適用されない。</p>
+<h3>11. 将来展望 🔭</h3>
+<ul><li><strong>複数バイオマーカーを組み合わせた診断パネルは、敗血症診断において個々のバイオマーカーより一貫して優れることが示されていない</strong>。理由は、敗血症バイオマーカーが通常<strong>互いに強く相関している</strong>ため、組み合わせても診断精度が向上しないことにある。</li><li>パネルの診断精度はさらに、<strong>個々の測定結果をどう重みづけるか</strong>、パネル全体が敗血症ありと示すために何項目の陽性が必要かに依存する。パネルは、1項目の陽性だけを要求すれば比較的高感度に、全項目の陽性を要求すれば比較的高特異度になる。解釈の仕方次第で性能が変わる。</li><li>一方、<strong>バイオマーカーと臨床データを組み合わせたアルゴリズム</strong>は、救急外来で敗血症患者を同定する用途で有望である。</li><li>臨床変数とバイオマーカーパネルを組み合わせたあるアルゴリズムは、<strong>158例のコホートで NPV 100%・PPV 93%</strong> を主張した。2つの限界があると原著は指摘する：①研究参加者全員がSIRS基準を2項目以上満たしていたため、SIRS陰性の敗血症でこのアルゴリズムがどう機能するかは不明。②このアルゴリズムの結果が返ってくる速さが記述されていない。</li></ul>
+<h3>12. 結論 📝</h3>
+<p>原著の結論を要約すると次のとおり。</p>
+<ul><li>現在の敗血症バイオマーカーから、<strong>転帰を改善する治療経路を駆動する臨床的に有用なマーカー</strong>へ進むには、アプローチの大きな転換が必要である。</li><li><strong>単施設・単一次元の研究では、ほとんど進展をもたらさない</strong>と考えられる。</li><li>必要なのは、<strong>最先端のオミクス・バイオインフォマティクス・機械学習アルゴリズムを用いた大規模多施設コホート研究</strong>であり、特定の臨床エンドタイプにおける介入への異なる反応を予測するバイオマーカーを同定することである。</li><li>既存ツールを多施設・多職種の協働で組み合わせることが、臨床実装可能な新規バイオマーカー発見の最も有効な道である。</li><li><strong>それまでの間</strong>、敗血症バイオマーカーは、臨床医がベッドサイドで患者ケアを最適化するために追加情報を必要とするときの、<strong>有用な補助的道具</strong>でありうる。</li><li>連続測定は単回値より情報量が多く、<strong>バイオマーカーは単独の検査として使ってはならず、常に徹底した臨床評価と、そのバイオマーカーの生物学・干渉因子・強み・限界の包括的知識と併せて用いる</strong>。</li></ul>
+<h2>🔗 既存ノートとの整合</h2>
+<h3>旧版ノート（概要版）との差分 — PDF照合で判明した点</h3>
+<div class="tw"><table>
+<thead><tr><th>旧版の記述</th><th>原著PDF</th><th>扱い</th></tr></thead>
+<tbody>
+<tr><td>Citation を <code>2023;49(2):142-153</code> と記載</td><td>PDF 1ページ目のヘッダは <code>Intensive Care Med (2023) 49:142–153</code>。号数は印字されていない</td><td>巻とページのみに訂正（号を削除）</td></tr>
+<tr><td>「微生物学的証明は最終確定まで通常2〜3日かかる」</td><td>原文は "often takes at least 2–3 days"＝「しばしば少なくとも2〜3日」</td><td>「少なくとも2〜3日」に訂正。旧版は下限を平均値のように読ませていた</td></tr>
+<tr><td>Table 1 の統合診断性能・PCT/CRP各論・抗菌薬中止アルゴリズムは「抽出範囲外」として未収載（旧版の警告コールアウト）</td><td>原著 145–153頁に全て掲載</td><td>本改稿で全数値を収載。旧版の警告コールアウトは削除</td></tr>
+<tr><td>「GDH陽性・トキシンA/B陰性は…非毒素産生性 *C. difficile* の保菌を意味しうる」</td><td>本文（143頁）は "non-toxigenic"。Table 1 の Comments（144頁）は "toxigenic carriage" と書いており原著内で矛盾</td><td>本文の記述を採り、原著内の不一致を明記（下記「批判的吟味」）</td></tr>
+<tr><td>「バイオマーカーは予後的・予測的・セラノスティックに分類できる」（分類名のみ）</td><td>Fig. 1 下段の表に各分類の定義と用途が明記（予後的＝臨床的有用性は限られ、治験の対象濃縮に有用）</td><td>定義を追加。予後的マーカーの臨床的有用性が限定的という原著の評価は旧版に欠けていた</td></tr>
+<tr><td>抗真菌薬に関し「BDGガイド下の早期開始は生存を改善しない」のみ記載</td><td>BDGガイドの早期中止を検討した2件のRCTが安全・期間短縮を示したことも記載あり（146頁）</td><td>開始／中止で結論が逆であることを追加</td></tr>
+</tbody></table></div>
+<p><strong>旧版に明確な数値の誤りは見つからなかった</strong>。旧版はPDFの1〜5ページのみを根拠にしており、その範囲では記述はPDFと一致していた。問題は誤りではなく<strong>未収載（欠落）</strong>であり、本改稿はそこを埋めている。</p>
+<h3>姉妹ノート <span class="wl">感染か定着か無菌性炎症か — 宿主応答プロファイリングという第3の軸（総説・ICM2023）</span> との対比</h3>
+<p>両者は同じ2023年の *Intensive Care Medicine* に載ったナラティブレビューで、著者も一部重複する（<strong>Andrew Conway Morris</strong> が本論文の共著者であり、姉妹論文の責任著者）。ただし役割が違う。</p>
+<div class="tw"><table>
+<thead><tr><th>観点</th><th>本論文（Póvoa 2023, 142–153頁）</th><th>姉妹論文（Jeffrey 2023, 760–771頁）</th></tr></thead>
+<tbody>
+<tr><td>立ち位置</td><td>今日使えるものの使い方。既存の抗原検査・PCT・CRPを、どの局面でどう読むか</td><td>明日の枠組み。感染／定着／無菌性炎症を分ける第3の軸として宿主応答プロファイリングを提案</td></tr>
+<tr><td>中心的主張</td><td>単回値より動態。単独の検査として使うな</td><td>定着と感染は二値ではなく dysbiosis の連続体。分子診断の高感度化は問題を悪化させる</td></tr>
+<tr><td>分子診断の扱い</td><td>「位置づけは依然不確実で標準化もされていない」と一言</td><td>mNGSの陽性率上昇（喀痰 39%→96%、尿 32%→100%）を主要論点として詳述</td></tr>
+<tr><td>具体的なアウトプット</td><td>数値入りの抗菌薬中止アルゴリズム（Fig. 2）</td><td>3×3の判断マトリクス（Table 1）</td></tr>
+<tr><td>培養陰性の割合</td><td>敗血症の約40〜50%が培養陰性</td><td>血液培養の陽性率は全体で約10%</td></tr>
+<tr><td>PCT/CRPの評価</td><td>開始には使えないが中止には使える。CRP比の4パターンを推奨</td><td>両者とも「開始より中止のエビデンスのほうが良好」と同旨</td></tr>
+<tr><td>結論の異同</td><td>一致：既存バイオマーカーは単独で感染を確定できず、de-escalation 側に重心を置く。相違：本論文は既存ツールの運用最適化で止め、姉妹論文は「新しい軸（宿主応答プロファイリング）が要る」と踏み込む</td></tr>
+</tbody></table></div>
+<p><strong>読む順序</strong>：ベッドサイドの運用を決めるなら本論文（Fig. 2 をそのまま使える）。分子診断の導入を検討するなら姉妹論文（Table 1 のマトリクスと Box 2 の実装障壁）。本論文は姉妹論文の引用文献の1つであり、姉妹論文の「現行3手段はいずれも不完全」という前提の根拠になっている。</p>
+<h3>本文に無い事項（当院で別途確認が必要なもの）</h3>
+<ul><li><strong>日本の保険適用・保険点数</strong>：PCT・プレセプシン・BDG・GMの本邦での算定要件や測定頻度の制限は、<mark class="hl">本論文には一切記載がない</mark>。ポルトガル・英国・スペイン・ブラジル等の著者による国際的総説であり、日本の診療報酬体系は扱っていない。当院での運用設計時は院内の検査部・医事課に別途確認する。</li><li><strong>プレセプシン（presepsin）</strong>：本論文の本文では扱われていない（引用文献32のタイトルに現れるのみ）。</li><li><strong>具体的なPCT測定系（機種・試薬）ごとの性能差</strong>：記載なし。</li><li><strong>小児</strong>：CRPのメタ解析の1件が「成人限定ではない」と注記されるのみで、小児の推奨は扱っていない。</li><li><strong>ESM（補足資料）の臨床シナリオ</strong>：原著は「バイオマーカーを用いた敗血症の臨床シナリオ例はESMを参照」としているが、本ノートが参照したPDFにESMは含まれていない。</li></ul>
+<h2>🔍 批判的吟味（JCでの論点）</h2>
+<ol><li><strong>原著内の矛盾①：GDH陽性・トキシン陰性の解釈</strong>。本文143頁は「non-toxigenic（非毒素産生性）*C. difficile* の保菌」と書き、Table 1 の Comments 欄（144頁）は同じ状況を「toxigenic（毒素産生性）*C. difficile* の保菌」と書く。正反対の記述である。臨床的には後者（毒素産生株の保菌でトキシンが検出閾値未満）のほうが整合的で、Table 1 は「検出閾値未満のCDI」と「毒素産生株の保菌」を並べているので文脈も通る。本文側が誤植である可能性が高い。JCで指摘する価値がある。</li></ol>
+<ol><li><strong>原著内の矛盾②：CRPと肝硬変</strong>。本文148頁は「CRPは肝硬変の有無で有意に差がない」と書くが、Table 2 は「慢性肝不全でCRPは正常の70%に低下」と書く。慢性肝不全と肝硬変が同義でないと言えばそれまでだが、読者が同じものと受け取る書き方になっている。当院で肝硬変患者のCRPをどう読むかを決める際に問題になる。</li></ol>
+<ol><li><strong>アルゴリズム（Fig. 2）の閾値に一次エビデンスの裏づけが示されていない</strong>。「PCT 80〜90%超低下」「CRP 50%超低下」「丸5日／丸7日」という具体的な数字が、どのRCTのどの結果から導かれたのかは本文にも図の脚注にも書かれていない。図は2014年の Salluh らの論考（Crit Care 18:142）の改変と記されるだけである。原著自身が脚注で「閾値は目安・方向づけとしてのみ用いるべき」と留保しているのは誠実だが、<mark class="hl">裏を返せばこのアルゴリズムは前向きに検証されていない専門家意見である</mark>。当院で採用する場合も「暫定プロトコル」として導入し、遵守率と転帰を記録するのが筋である。</li></ol>
+<ol><li><strong>PCTガイドのメタ解析の所見が直感に反する</strong>。Pepper らのSR・MAは「プロトコル遵守率が高くないRCTで、より顕著に生存が改善した」と報告している。遵守が悪いほど効果が大きいというのは、通常であれば「効果は介入そのものではなく別の要因（施設の一般的な診療の質、対照群の設定、出版バイアス）に由来する」ことを疑わせる所見である。原著はこれを額面どおりに紹介しているが、JCではここを掘る価値がある。</li></ol>
+<ol><li><strong>CRPガイドとPCTガイドの「非劣性」の根拠が薄い</strong>。唯一の頭対頭RCT（Oliveira 2013）は単施設で、しかもバイオマーカーによらず最長7日という天井が設けられていた。天井が効いているなら、比較されているのは「バイオマーカーの性能」ではなく「7日ルールの下でのわずかな上乗せ」でしかない。原著自身が "very important" として付記しており、この留保を落として「CRPで代用できる」と読むのは誤読である。</li></ol>
+<ol><li><strong>CAPTAIN研究の逆説をどう受け止めるか</strong>。53種のバイオマーカーを比較して「CRP単独に勝るものがない」という結果は、バイオマーカー開発全体への痛烈な所見である。にもかかわらず本総説の結論は「オミクス・機械学習による大規模研究が必要」で、新技術への期待に着地している。CAPTAINの含意は「もっと多くのマーカーを測っても駄目」であり、結論との整合が弱い。</li></ol>
+<ol><li><strong>利益相反の重み</strong>。責任著者はバイオマーカー企業（Abionic）から無制限研究助成を受け、共著者の Singer は Biomerieux・Roche Diagnostics 等と、Ferrer は Thermofisher 等と広範な関係をもつ。バイオマーカーの使用法を推奨する総説であることを踏まえると、この申告は軽くない。もっとも本総説の実質的な主張は「PCTを開始判断に使うな」「パネル化は効かない」といった抑制的な方向であり、記述が商業的に偏っているとは読めない。この点は公平に評価してよい。</li></ol>
+<ol><li><strong>ナラティブレビューであることの限界</strong>。検索式・選択基準・バイアスリスク評価が一切示されていない。Table 1 の統合診断性能も、どのメタ解析から引いたかが表の脚注に部分的にしか書かれていない（参照基準は書かれているが、統合の対象研究数・n は示されていない）。Table 1 の感度・特異度の「n」は本文にも表にも記載がなく、本ノートでも補えない。</li></ol>
+<ol><li><strong>VAPに関するガイドラインとの整合</strong>。本総説はVAPの予測でCRPの動態が有用と紹介する一方、2016 IDSA/ATS と 2017 ERS/ESICM/ESCMID/ALAT の両ガイドラインがVAP診断にいかなるバイオマーカーも推奨していないことを2度にわたって明記している。「予測（発症前）」と「診断」を分けているのが著者の立場だが、ベッドサイドでこの2つを分けて運用するのは容易でない。</li></ol>
+<ol><li><strong>alert PCT 戦略の失敗が示すもの</strong>。PCTを「診断強化のトリガー」に使ったRCTは、死亡を改善せず広域抗菌薬・抗菌薬日数・人工呼吸期間・ICU滞在をすべて悪化させた。バイオマーカーは「増やす方向」に使うと害になり、「減らす方向」に使うと益がある、という非対称性がこの総説の隠れた背骨である。この非対称性は原著が明示的に定式化していないが、Fig. 2 の設計思想そのものである。</li></ol>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Sepsis-3 定義</td><td>Singer M, et al. *JAMA*. 2016;315:801-810</td></tr>
+<tr><td>2</td><td>培養陰性 vs 培養陽性の重症敗血症の特徴と転帰</td><td>Phua J, et al. *Crit Care*. 2013;17:R202</td></tr>
+<tr><td>3</td><td>2017年ICU感染の有病率と転帰（EPIC III）</td><td>Vincent JL, et al. *JAMA*. 2020;323:1478-1487</td></tr>
+<tr><td>4</td><td>BioVAP研究：VAP診断予測におけるバイオマーカー動態</td><td>Póvoa P, et al. *Ann Intensive Care*. 2016;6:32</td></tr>
+<tr><td>5</td><td>CAPTAIN研究：53バイオマーカーでも早期敗血症は検出できない</td><td>Parlato M, et al. *Intensive Care Med*. 2018;44:1061-1070</td></tr>
+<tr><td>6</td><td>重症CAPにおけるCRP比の反応パターン</td><td>Coelho LM, et al. *Crit Care*. 2012;16:R53</td></tr>
+<tr><td>8</td><td>CRP比とVAPの消退（4パターンの原典）</td><td>Póvoa P, et al. *Eur Respir J*. 2005;25:804-812</td></tr>
+<tr><td>9</td><td>PCTガイドによる抗菌薬期間短縮のRCT（SAPS）</td><td>de Jong E, et al. *Lancet Infect Dis*. 2016;16:819-827</td></tr>
+<tr><td>10</td><td>敗血症バイオマーカー250超のレビュー</td><td>Pierrakos C, et al. *Crit Care*. 2020;24:287</td></tr>
+<tr><td>11</td><td>SSCG 2021</td><td>Evans L, et al. *Intensive Care Med*. 2021;47:1181-1247</td></tr>
+<tr><td>15</td><td>急性市中下気道感染におけるPOCTの診断精度</td><td>Gentilotti E, et al. *Clin Microbiol Infect*. 2022;28:13-22</td></tr>
+<tr><td>16</td><td>ESCMID CDI診断ガイダンス改訂</td><td>Crobach MJ, et al. *Clin Microbiol Infect*. 2016;22(Suppl 4):S63-81</td></tr>
+<tr><td>17</td><td>真菌感染症の診断（ATSガイドライン支持SR・MA）</td><td>Haydour Q, et al. *Ann Am Thorac Soc*. 2019;16:1179-1188</td></tr>
+<tr><td>18</td><td>CandiSep試験：BDGガイドの早期抗真菌薬開始は生存を改善せず</td><td>Bloos F, et al. *Intensive Care Med*. 2022;48:865-875</td></tr>
+<tr><td>19</td><td>ニューモシスチス肺炎に対する血清BDGの診断精度SR・MA</td><td>Del Corpo O, et al. *Clin Microbiol Infect*. 2020;26:1137-1143</td></tr>
+<tr><td>21</td><td>クリプトコッカス抗原（血清・髄液）のSR・MA</td><td>Temfack E, et al. *Clin Infect Dis*. 2021;72:1268-1278</td></tr>
+<tr><td>22</td><td>BDGガイドによる経験的抗真菌薬の早期中止RCT①</td><td>Rouzé A, et al. *Intensive Care Med*. 2017;43:1668-1677</td></tr>
+<tr><td>23</td><td>BDGガイドによる経験的抗真菌薬の中断RCT②</td><td>De Pascale G, et al. *Crit Care*. 2020;24:550</td></tr>
+<tr><td>24</td><td>PCTの生物学（感染に対する全身性炎症反応のマーカー）</td><td>Reinhart K, et al. *Intensive Care Med*. 2000;26:1193-1200</td></tr>
+<tr><td>31</td><td>PCTとCRPの細菌感染マーカーとしてのSR・MA</td><td>Simon L, et al. *Clin Infect Dis*. 2004;39:206-217</td></tr>
+<tr><td>32</td><td>PCTとプレセプシンの敗血症診断価値SR・MA</td><td>Kondo Y, et al. *J Intensive Care*. 2019;7:22</td></tr>
+<tr><td>33</td><td>PCTの敗血症診断マーカーとしてのSR・MA</td><td>Wacker C, et al. *Lancet Infect Dis*. 2013;13:426-435</td></tr>
+<tr><td>35</td><td>IDSA/ATS HAP/VAPガイドライン 2016</td><td>Kalil AC, et al. *Clin Infect Dis*. 2016;63:e61-e111</td></tr>
+<tr><td>36</td><td>ERS/ESICM/ESCMID/ALAT HAP/VAPガイドライン 2017</td><td>Torres A, et al. *Eur Respir J*. 2017;50:1700582</td></tr>
+<tr><td>40</td><td>PCTでウイルス性肺炎と細菌性肺炎は区別できない（SR・MA）</td><td>Kamat IS, et al. *Clin Infect Dis*. 2020;70:538-542</td></tr>
+<tr><td>45</td><td>「alert PCT」戦略のRCT：死亡改善なし・広域抗菌薬増加</td><td>Jensen JU, et al. *Crit Care Med*. 2011;39:2048-2058</td></tr>
+<tr><td>46</td><td>PCTによる抗菌薬期間短縮のRCT</td><td>Nobre V, et al. *Am J Respir Crit Care Med*. 2008;177:498-505</td></tr>
+<tr><td>47</td><td>PCTガイド中止と死亡のSR・MA（1日短縮・生存改善）</td><td>Pepper DJ, et al. *Chest*. 2019;155:1109-1118</td></tr>
+<tr><td>53</td><td>CRP日次モニタリングによるICU獲得感染の早期同定（4.1 mg/dL・8.7 mg/dLの原典）</td><td>Póvoa P, et al. *Crit Care*. 2006;10:R63</td></tr>
+<tr><td>54</td><td>市中発症BSI前のCRPとアルブミンの動態（デンマーク住民ベース）</td><td>Garvik OS, et al. *Epidemiol Infect*. 2020;148:e38</td></tr>
+<tr><td>55</td><td>PCTとCRPの敗血症診断精度SR・MA</td><td>Tan M, et al. *J Cell Biochem*. 2019;120:5852-5859</td></tr>
+<tr><td>57</td><td>CAP疑いへの早期胸部CT（CRPによる偽陽性・偽陰性の識別）</td><td>Claessens YE, et al. *Am J Respir Crit Care Med*. 2015;192:974-982</td></tr>
+<tr><td>62</td><td>PCT vs CRP ガイドの頭対頭RCT（唯一の直接比較）</td><td>Oliveira CF, et al. *Crit Care Med*. 2013;41:2336-2343</td></tr>
+<tr><td>64</td><td>CRPガイド vs 7日 vs 14日（グラム陰性菌血症）</td><td>von Dach E, et al. *JAMA*. 2020;323:2160-2169</td></tr>
+<tr><td>65</td><td>臨床＋CRPプロトコル vs バイオマーカーなしのベストプラクティス</td><td>Borges I, et al. *Crit Care*. 2020;24:281</td></tr>
+<tr><td>66</td><td>PRORATA試験</td><td>Bouadma L, et al. *Lancet*. 2010;375:463-474</td></tr>
+<tr><td>70</td><td>STOP-IT試験（腹腔内感染の短期治療）</td><td>Sawyer RG, et al. *N Engl J Med*. 2015;372:1996-2005</td></tr>
+<tr><td>71</td><td>グラム陰性菌血症 7日 vs 14日</td><td>Yahav D, et al. *Clin Infect Dis*. 2019;69:1091-1098</td></tr>
+<tr><td>73</td><td>DURAPOP試験（術後腹腔内感染の短期治療）</td><td>Montravers P, et al. *Intensive Care Med*. 2018;44:300-310</td></tr>
+<tr><td>74</td><td>Fig. 2 の原型（PCTで抗菌薬期間を導く）</td><td>Salluh JI, et al. *Crit Care*. 2014;18:142</td></tr>
+<tr><td>78</td><td>救急外来でのバイオマーカー＋臨床アルゴリズム（NPV 100%・PPV 93%・158例）</td><td>Mearelli F, et al. *Crit Care Med*. 2018;46:1421-1429</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>バイオマーカーは抗菌薬を「始める根拠」ではなく「やめる根拠」として使う。読むのは単回値ではなく動態である。</strong></mark> 250超のバイオマーカーがあっても敗血症と敗血症様症候群を分けられるものは1つもない（原著の中心的主張）。それでも、<strong>丸5日投与した時点でPCTが80〜90%超低下、かつ/またはCRPが50%超低下していれば中止、そうでなくても丸7日で中止</strong>というダブルトリガーは、今日から使える具体的な運用である。ただし<mark class="hl">免疫抑制患者と、心内膜炎・黄色ブドウ球菌菌血症・骨髄炎には適用しない</mark>。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>敗血症を疑った（SOFA 2点以上の急性上昇またはショック）</td><td>バイオマーカーの値は見ない</td><td>培養採取。ショックなら1時間以内、敗血症なら3時間以内に抗菌薬開始。同時にCRPまたはPCTのベースラインを採る（開始判断のためではなく、あとで動態を見るため）</td></tr>
+<tr><td>抗菌薬開始から丸3〜5日</td><td>①感染の臨床・検査所見が進行性に改善しているか ②持続する感染巣がないか ③SOFAが2点以上低下しているか</td><td>3つとも満たす → 中止フェーズへ／満たさない → 原因検索へ</td></tr>
+<tr><td>3つとも満たす（改善している）</td><td>丸5日投与済みか。PCTが80〜90%超低下、かつ/またはCRPが50%超低下しているか</td><td>満たせば中止。満たさなくても丸7日でバイオマーカーによらず中止</td></tr>
+<tr><td>満たさない（改善していない）</td><td>診断は正しいか（鑑別・再画像）／薬剤は適切か（カバー・経路・感染巣濃度）／持続感染巣・耐性菌・重複院内感染・非細菌性感染はないか</td><td>原因を1つずつ潰す。臨床的に安定していれば丸7日での中止を考慮し、悪化をモニタリングする</td></tr>
+<tr><td>Day 3/Day 4 にPCT・CRPが高値のまま</td><td>治療失敗を疑う局面。ただしバイオマーカー単独を診断強化の基準にしない</td><td>積極的な診断的・治療的アプローチ（膿胸・膿瘍・二次感染の検索）。「alert PCT」で機械的に広域化しない（RCTで死亡改善なし・害あり）</td></tr>
+<tr><td>ICU後半に発熱、PCTが上がらない</td><td>二次感染（2nd hit）ではPCTのピークが初回の約10%、CRPで約70%にとどまる</td><td>PCT非上昇を陰性所見として扱わない。臨床評価と画像・培養で判断する</td></tr>
+<tr><td>免疫抑制患者・ステロイド投与中・好中球減少</td><td>PCTは偽陰性が多い（Table 2）。CRPは影響を受けない</td><td>CRP側を主軸に読む。Fig. 2 のアルゴリズムは適用外</td></tr>
+<tr><td>腎不全・RRT中</td><td>PCTは腎不全で上昇、RRTで低下</td><td>PCTの絶対値を額面どおりに読まない。CRPを併用する</td></tr>
+<tr><td>侵襲性カンジダ症を疑う（低〜中リスク）</td><td>BDGは有病率5%未満でNPV 95%超・PPV 10〜15%</td><td>除外に使う。BDG陽性を経験的抗真菌薬の開始根拠にしない。すでに経験的投与中なら中止のガイドに使う</td></tr>
+<tr><td>迅速抗原検査が陰性（インフルエンザ・SARS-CoV-2・肺炎球菌）</td><td>感度は0.69〜0.72と低い</td><td>除外根拠にしない。臨床像とその他の検査で判断する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

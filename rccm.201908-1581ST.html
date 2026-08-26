@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>成人市中肺炎の診断と治療 — 16のPICO、HCAPを廃止しMRSA・緑膿菌は地域検証したリスク因子で判断（ATS・IDSA2019）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="rccm.201908-1581ST.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">成人市中肺炎の診断と治療 — 16のPICO、HCAPを廃止しMRSA・緑膿菌は地域検証したリスク因子で判断（ATS・IDSA2019）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Metlay JP, Waterer GW, Long AC, Anzueto A, Brozek J, Crothers K, et al. Diagnosis and treatment of adults with community-acquired pneumonia. An official clinical practice guideline of the American Thoracic Society and Infectious Diseases Society of America. Am J Respir Crit Care Med. 2019;200(7):e45–e67. DOI: 10.1164/rccm.201908-1581ST</dd><dt>掲載誌</dt><dd>American Journal of Respiratory and Critical Care Medicine（2019-10-01）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1164/rccm.201908-1581ST" target="_blank" rel="noopener">doi.org/10.1164/rccm.201908-1581ST</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official Clinical Practice Guideline of the American Thoracic Society and Infectious Diseases Society of America</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/rccm.201908-1581ST.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/rccm.201908-1581ST.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/rccm.201908-1581ST.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li>重症CAPの線引きを ATS/IDSA 2007 基準に固定する。このガイドラインは「major 1つ or minor 3つ以上」を採用し、検査の要否・抗菌薬レジメン・MRSA/緑膿菌カバーの3つすべての分岐点にこの1つの定義を使っている。<mark class="hl">院内で重症CAPの定義が複数走っていると、このガイドラインは実装できない</mark></li><li><strong>重症CAP・挿管例では気管内吸引痰を挿管直後に必ず提出する</strong>。喀痰培養より収率が高く、強い推奨。当院のICU入室セットに組み込む価値がある</li><li>重症CAPには肺炎球菌・レジオネラの尿中抗原に加えて、レジオネラの下気道検体培養（選択培地）またはNAATを足す。尿中抗原単独ではないところが2019年版の要点</li><li>HCAP（医療介護関連肺炎）という区分での広域抗菌薬選択をやめる。当院に残っていれば削除する。代わりに必要なのは「当院のCAP患者のうちMRSA・緑膿菌が何%を占めるか」という自前のデータ</li><li><strong>MRSA・緑膿菌の経験的カバーは2条件でしか始めない</strong>。①過去（特に気道から）の分離歴、②直近90日の入院＋非経口抗菌薬 かつ 地域検証済みリスク因子。<mark class="hl">後者は「入院」と「非経口抗菌薬」のANDであって、どちらか一方ではない</mark></li><li><strong>48時間でのデエスカレーションをセットで運用する</strong>。培養陰性かつ改善していれば標準CAPレジメンに戻す。広域を「始める」ことより「やめる」ことのほうがエビデンスは強い</li><li><strong>MRSA鼻腔スワブ（迅速PCR）の陰性を降圧材料に使う</strong>。特に非重症CAPで、陰性ならMRSAカバーを控えてよいと明記されている。当院で運用可能かは検査部と要相談</li><li><strong>抗菌薬は臨床安定を確認したうえで最低5日</strong>。当院の「とりあえず7日」があれば見直す。MRSA・緑膿菌が絡む場合のみ7日</li><li>症状が5〜7日で消えた症例に退院時フォローの胸部画像を撮らない。ただし喫煙者・元喫煙者は肺がん検診の適応で拾う</li><li><mark class="hl"><strong>ステロイドだけは2019年の推奨をそのまま使ってはいけない</strong></mark>。本ガイドラインは重症CAPにも「ルーチンには使わない（条件付き）」だったが、<span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>で強い推奨に反転した。詳細は後述の「その後どうなったか」</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ATS/IDSA の前回CAPガイドラインは2007年で、ナラティブ形式だった。重症CAPの定義（major 2項目・minor 9項目）はこの2007年版で作られ、各国のコホートで検証されてきた。2005年の ATS/IDSA HAP/VAP ガイドラインで導入された HCAP（healthcare-associated pneumonia）という区分が、耐性菌カバーの根拠として広く使われていた。</li><li><strong>Unknown</strong>：①HCAP は本当に耐性菌を予測するのか、②プロカルシトニンで抗菌薬開始を差し控えられるのか、③CAPにステロイドを使うべきか、④治療期間はどこまで短くできるのか、⑤回復後の胸部画像フォローは要るのか。いずれも2007年版が扱っていないか、当時のデータでは決着していなかった。</li><li><strong>What's new</strong>：ATS と IDSA が GRADE / PICO 形式に移行し、<strong>16の臨床疑問</strong>に絞って推奨を出した。最大の変更は HCAP という区分の廃止（強い推奨・moderate）で、代わりに「過去の分離歴」と「直近90日の入院＋非経口抗菌薬」という2つのリスク因子を、<mark class="hl">各施設が自分の疫学データで検証したうえで使う（local validation）</mark>という枠組みを提示した。加えて、プロカルシトニンでの抗菌薬差し控えを強い推奨で否定し、ステロイドのルーチン使用を否定し、回復後の胸部画像フォローを否定し、外来のマクロライド単剤を強い推奨から条件付きに格下げした。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 16のPICOに GRADE で答えた ATS/IDSA の公式CAPガイドライン。HCAP という区分を廃止し、MRSA・緑膿菌の経験的カバーを「地域で検証したリスク因子がある場合のみ」に絞ったうえで、48時間でのデエスカレーションを前提に置いたのが最大の変更点。</p>
+</div>
+<ul><li>対象は「画像で確認された肺炎の臨床診断がついた時点から、抗菌薬終了とフォロー画像まで」。診断基準そのものと肺炎の予防は意図的に対象外。</li><li>対象患者は米国内の成人で、免疫不全がなく、最近の海外渡航（特に新興呼吸器病原体の流行地域）がない者。先天性・後天性免疫不全、薬剤性好中球減少、化学療法中、CD4低値のHIV、固形臓器・骨髄移植は除外。</li><li>重症度の区分は<strong>ATS/IDSA 2007 の重症CAP基準</strong>（major 1つ or minor 3つ以上）をそのまま採用。「外来／一般病棟／ICU」という療養場所ではなく、生理学的な重症度で分ける。</li><li>検査は<strong>重症CAPと、MRSA・緑膿菌のリスクがある入院例に集中</strong>させ、それ以外ではルーチンに出さない。この結果、2007年版より「培養を出す患者の割合」は増えている（広域抗菌薬の使い過ぎを是正するための意図的な選択で、高品質エビデンスに基づくものではないと著者自身が明記）。</li><li>治療は外来（併存症の有無で2分）／入院・非重症／入院・重症の3層。入院例では<strong>βラクタム＋マクロライド</strong>または<strong>呼吸器キノロン単剤</strong>（非重症）、βラクタム＋マクロライドまたはβラクタム＋呼吸器キノロン（重症）。重症CAPでキノロン単剤は推奨されない。</li><li><strong>プロカルシトニン</strong>の値がどうであれ、画像で確認されたCAPには経験的抗菌薬を開始する（強い推奨・moderate）。</li><li><strong>ステロイド</strong>は非重症CAPで強い推奨により否定（high）、重症CAPと重症インフルエンザ肺炎では条件付きで否定。難治性敗血症性ショックについては Surviving Sepsis Campaign の推奨を endorse。</li><li><strong>治療期間</strong>は臨床安定の指標に従い、<strong>最短でも合計5日</strong>（強い推奨・moderate）。</li><li><strong>回復後のフォロー胸部画像</strong>は、5〜7日で症状が消えた例ではルーチンには撮らない（条件付き・low）。</li><li>著者らの総括は率直で、「強い推奨を出せるだけ十分に研究された臨床疑問がいかに少ないかは、依然として期待外れである（how few key clinical questions have been studied adequately）」と本文が明記している。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — このガイドラインを読む前に押さえること 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む CAP（community-acquired pneumonia／市中肺炎）とは、病院の外で獲得した肺炎。本ガイドラインは「臨床症状＋画像での浸潤影」で診断がついた成人を対象とする。外来でCAPが画像なしに診断されることは多いが、身体所見だけでは診断精度が低いことが分かっているため、本文が引用する研究は画像基準で定義されたCAPに限定されている。</p>
+<p><strong>GRADE と PICO</strong>。GRADE（Grading of Recommendations, Assessment, Development, and Evaluation）は、エビデンスの質と推奨の強さを別々に評価する国際標準の枠組み。PICO は Patient / Intervention / Comparison / Outcome の頭字語で、「AはBより良いか」という比較可能な形に臨床疑問を落とし込む。本ガイドラインは2007年版のナラティブ形式からこの形式に切り替えた。</p>
+<p>強い推奨と条件付き推奨の読み分け。本文の言葉づかいが明示的で、「We recommend …」で始まる文が<strong>強い推奨</strong>、「We suggest …」で始まる文が<strong>条件付き推奨</strong>。エビデンスの質は high / moderate / low / very low の4段階で、推奨の強さとは独立している。<mark class="hl">質が very low でも、害の予防や救命という帰結が大きい場合には GRADE のルール上、強い推奨を出してよい</mark>。本ガイドラインの Q1・Q2 は、まさに very low quality の強い推奨である。</p>
+<p>HCAP（healthcare-associated pneumonia／医療介護関連肺炎）。2005年の ATS/IDSA HAP/VAP ガイドラインで導入された区分で、ナーシングホーム入居、直近90日以内の2日以上の入院、在宅点滴療法、慢性透析、在宅創傷ケア、耐性菌を持つ同居家族、のいずれかがあれば耐性菌リスクが高いとみなす、という考え方。この区分が今回廃止される。</p>
+<p><strong>PSI と CURB-65</strong>。いずれも診断時点の情報から30日死亡を予測する予後モデル。PSI（Pneumonia Severity Index）は変数が多いが低リスク群を大きく取れて判別能が高い。CURB-65 は confusion・urea・respiratory rate・blood pressure・年齢65以上の5項目で簡便。<mark class="hl">どちらも「入院が要るか」を判断するためのもので、「ICUが要るか」を判断するために作られたものではない</mark>。</p>
+<p><strong>デエスカレーション</strong>。広域の経験的抗菌薬で開始し、培養結果と臨床経過を見て48時間で狭域に戻すこと。本ガイドラインは、広域を「始める根拠」より「やめる根拠」のほうがエビデンスが強い、という非対称性を明示的に利用して推奨を組み立てている。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>前回のATS/IDSA CAPガイドライン（2007年、Mandell ら, Clin Infect Dis 2007;44:S27–S72）から10年以上が経過し、ガイドライン作成プロセスと臨床データの双方が変わった。ATS と IDSA はナラティブ形式から GRADE 形式への移行に合意し、PICO 形式で答える一連の疑問として本ガイドラインを構成した。</p>
+<p><strong>スコープを意図的に狭めている点が重要</strong>。対象は「肺炎の臨床診断がついた時点（＝肺炎の症状・徴候と画像での確認）から、抗菌薬終了とフォロー胸部画像まで」。診断基準そのものと肺炎の予防（ワクチンを含む）は扱わない。</p>
+<p><strong>取り上げたPICOは網羅ではない</strong>と著者自身が断っている。CAPは病原体の幅も宿主反応も極めて不均一であり、選ばれた16問はパネルが優先度が高いと判断した中核的な疑問にすぎない。しかも各疑問を系統的レビューで検討した結果、エビデンス基盤が不十分であることが多く、臨床判断と経験の重要性が変わらないことが強調されている。</p>
+<p><strong>病原体の前提</strong>。伝統的にCAPの主要細菌は Streptococcus pneumoniae、Haemophilus influenzae、Mycoplasma pneumoniae、Staphylococcus aureus、Legionella 属、Chlamydia pneumoniae、Moraxella catarrhalis。肺炎球菌結合型ワクチンの普及で微生物学は変化しており、ウイルスの役割の認識も高まっている。しかし、細菌とウイルスはしばしば共存し、発症時点で「ウイルス単独」と判定できるほど正確かつ迅速な検査は存在しないため、推奨はすべて「まず細菌感染または重複感染を想定して経験的に治療する」立場に立つ。</p>
+<p><strong>緑膿菌の扱い</strong>。ESBL産生菌などの他の多剤耐性腸内細菌科細菌もCAPを起こしうるが、頻度が低く、緑膿菌向けの戦略で実質的にカバーされるため、本文書で「P. aeruginosa」と言うときは同様の多剤耐性グラム陰性桿菌も指している。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>方法論の詳細とCOI管理の手順はオンライン補遺</strong>に置かれており、本体には要約のみ。</li><li><strong>PICOの選定</strong>：最も重要な管理上の意思決定を優先順位付けし、文書全体の長さと推奨数を減らして可読性・実用性を最大化する、という制約とのバランスで確定した。</li><li><strong>エビデンス評価</strong>：GRADE 標準に従い、各PICOに high / moderate / low / very low の質を割り当てた。</li><li><strong>推奨の強さ</strong>：質に基づいて strong / conditional を割り当てた。ただし、害の予防や救命など帰結が大きい場合には、low / very low の質でも GRADE のルール上許容される範囲で強い推奨を出した。それ以外で low / very low に基づき、かつ標準治療とはみなせないものは条件付き推奨とした。</li><li><strong>文言の規約</strong>：強い推奨は「We recommend …」、条件付き推奨は「We suggest …」で始まる。</li><li><strong>抗菌薬の記載形式</strong>：外来・入院の抗菌薬選択については、すべての選択肢についてペアワイズのPICOを設定したうえで、PICO形式を保持せず「優先順位のない選択肢のリスト」として要約している。つまり抗菌薬レジメン間に優劣は付けられていない。</li><li><strong>各Questionの構成</strong>：Recommendation → Summary of the evidence → Rationale for the recommendation → Research needed in this area の4節。研究課題を毎回明示するのが本ガイドラインの特徴。</li></ul>
+<h3>4. 全推奨の一覧（16のPICO・1行1項目）</h3>
+<p>原文の推奨文をすべて拾った。1つのQuestionが複数の推奨に分かれる場合は枝番を振っている。</p>
+<div class="tw"><table>
+<thead><tr><th>PICO</th><th>推奨（要約）</th><th>強さ</th><th>エビデンスの質</th></tr></thead>
+<tbody>
+<tr><td>1-1</td><td>外来のCAP成人に喀痰グラム染色・培養をルーチンに行わないことを推奨</td><td>強い（recommend not）</td><td>very low</td></tr>
+<tr><td>1-2</td><td>入院CAP成人のうち重症CAPに分類される者（特に挿管例）では治療前の下気道検体グラム染色・培養を推奨</td><td>強い</td><td>very low</td></tr>
+<tr><td>1-3</td><td>入院CAP成人でMRSAまたは緑膿菌に対して経験的治療を行っている者では治療前グラム染色・培養を推奨</td><td>強い</td><td>very low</td></tr>
+<tr><td>1-4</td><td>入院CAP成人で過去にMRSAまたは緑膿菌に感染した既往（特に気道感染）がある者では治療前グラム染色・培養を推奨</td><td>条件付き</td><td>very low</td></tr>
+<tr><td>1-5</td><td>入院CAP成人で直近90日以内に入院し非経口抗菌薬を受けた者（入院中か否かを問わない）では治療前グラム染色・培養を推奨</td><td>条件付き</td><td>very low</td></tr>
+<tr><td>1-6</td><td>上記以外の入院CAP成人全般については、ルーチンの喀痰グラム染色・培養を行うことも行わないことも推奨しない（2007年版の立場を維持）</td><td>推奨なし（委員会投票）</td><td>—</td></tr>
+<tr><td>2-1</td><td>外来のCAP成人に血液培養を採取しないことを推奨</td><td>強い（recommend not）</td><td>very low</td></tr>
+<tr><td>2-2</td><td>入院CAP成人に血液培養をルーチンには採取しないことを提案</td><td>条件付き</td><td>very low</td></tr>
+<tr><td>2-3</td><td>入院CAP成人のうち重症CAPに分類される者では治療前血液培養を推奨</td><td>強い</td><td>very low</td></tr>
+<tr><td>2-4</td><td>入院CAP成人でMRSAまたは緑膿菌に経験的治療を行っている者では治療前血液培養を推奨</td><td>強い</td><td>very low</td></tr>
+<tr><td>2-5</td><td>入院CAP成人でMRSAまたは緑膿菌の感染既往（特に気道）がある者では治療前血液培養を推奨</td><td>条件付き</td><td>very low</td></tr>
+<tr><td>2-6</td><td>入院CAP成人で直近90日以内に入院し非経口抗菌薬を受けた者では治療前血液培養を推奨</td><td>条件付き</td><td>very low</td></tr>
+<tr><td>3-1</td><td>CAP成人に肺炎球菌尿中抗原をルーチンに検査しないことを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>3-2</td><td>ただし重症CAP成人では肺炎球菌尿中抗原を検査することを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>3-3</td><td>CAP成人にレジオネラ尿中抗原をルーチンに検査しないことを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>3-4</td><td>ただしレジオネラのアウトブレイクとの関連や最近の旅行など疫学的要因がある場合は検査を提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>3-5</td><td>ただし重症CAP成人ではレジオネラ尿中抗原を検査することを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>3-6</td><td>重症CAP成人ではレジオネラ尿中抗原に加えて、下気道検体を選択培地でのレジオネラ培養またはレジオネラ核酸増幅検査に提出することを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>4</td><td>地域でインフルエンザが流行している時期には、迅速インフルエンザ分子検査（核酸増幅検査）による検査を推奨。迅速抗原検査より優先される</td><td>強い</td><td>moderate</td></tr>
+<tr><td>5</td><td>臨床的に疑われ画像で確認されたCAP成人には、初回の血清プロカルシトニン値にかかわらず経験的抗菌薬治療を開始すべきことを推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>6-1</td><td>入院の要否判断では、臨床判断に加えて検証済みの予後予測ルール、優先的にはPSIを用いることを推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>6-2</td><td>CURB-65 を用いることを提案（PSIより下位の選択肢として）</td><td>条件付き</td><td>low</td></tr>
+<tr><td>7-1</td><td>昇圧薬を要する低血圧、または人工呼吸を要する呼吸不全がある患者はICUへ直接入室させることを推奨</td><td>強い</td><td>low</td></tr>
+<tr><td>7-2</td><td>昇圧薬も人工呼吸も要さない患者では、IDSA/ATS 2007 の minor criteria と臨床判断を併せて、より高い治療強度（ICU・step-down・テレメトリー）の要否を判断することを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>8-1</td><td>併存症も耐性菌リスクもない健常な外来成人：アモキシシリン 1 g 1日3回を推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>8-2</td><td>同：ドキシサイクリン 100 mg 1日2回</td><td>条件付き</td><td>low</td></tr>
+<tr><td>8-3</td><td>同：マクロライド。ただし肺炎球菌のマクロライド耐性率が25%未満の地域に限る</td><td>条件付き</td><td>moderate</td></tr>
+<tr><td>8-4</td><td>併存症のある外来成人：アモキシシリン・クラブラン酸またはセフェム系 ＋ マクロライドの併用</td><td>強い</td><td>moderate</td></tr>
+<tr><td>8-5</td><td>同：アモキシシリン・クラブラン酸またはセフェム系 ＋ ドキシサイクリンの併用</td><td>条件付き</td><td>low</td></tr>
+<tr><td>8-6</td><td>同：呼吸器キノロン単剤</td><td>強い</td><td>moderate</td></tr>
+<tr><td>9-1a</td><td>入院・非重症CAPでMRSA・緑膿菌リスクなし：βラクタム ＋ マクロライドの併用</td><td>強い</td><td>high</td></tr>
+<tr><td>9-1b</td><td>同：呼吸器キノロン単剤</td><td>強い</td><td>high</td></tr>
+<tr><td>9-1c</td><td>同：マクロライドとキノロンの双方に禁忌がある場合、βラクタム ＋ ドキシサイクリン</td><td>条件付き</td><td>low</td></tr>
+<tr><td>9-1d</td><td>同：βラクタム単剤をルーチンには用いないことを提案（推奨ブロック外の本文中の提案）</td><td>条件付き（等級記載なし）</td><td>—</td></tr>
+<tr><td>9-2a</td><td>入院・重症CAPでMRSA・緑膿菌リスクなし：βラクタム ＋ マクロライドの併用</td><td>強い</td><td>moderate</td></tr>
+<tr><td>9-2b</td><td>同：βラクタム ＋ 呼吸器キノロンの併用</td><td>強い</td><td>low</td></tr>
+<tr><td>9-2c</td><td>同：キノロン単剤およびβラクタム＋ドキシサイクリンは重症CAPでは十分に検討されておらず経験的治療として推奨しない</td><td>記載（等級なし）</td><td>—</td></tr>
+<tr><td>10</td><td>誤嚥性肺炎が疑われる入院例に、肺膿瘍または膿胸が疑われる場合を除いて、標準的CAP治療を超える嫌気性菌カバーをルーチンに追加しないことを提案</td><td>条件付き</td><td>very low</td></tr>
+<tr><td>11-1</td><td>広域抗菌薬選択の根拠としての HCAP という区分の使用を廃止することを推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>11-2</td><td>MRSAまたは緑膿菌への経験的カバーは、その病原体について地域で検証されたリスク因子がある場合にのみ行うことを推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>11-3</td><td>既発表のリスク因子に基づき現在経験的カバーを行っているが自施設の疫学データがない場合、培養を採取しつつ経験的カバーを継続し、最初の数日以降の治療継続を正当化できるか判断することを推奨</td><td>強い</td><td>low</td></tr>
+<tr><td>12-1</td><td>非重症CAP成人にステロイドをルーチンには使用しないことを推奨</td><td>強い（recommend not）</td><td>high</td></tr>
+<tr><td>12-2</td><td>重症CAP成人にステロイドをルーチンには使用しないことを提案</td><td>条件付き</td><td>moderate</td></tr>
+<tr><td>12-3</td><td>重症インフルエンザ肺炎の成人にステロイドをルーチンには使用しないことを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>12-4</td><td>CAPかつ難治性敗血症性ショックの患者については Surviving Sepsis Campaign のステロイド推奨を endorse する</td><td>endorse（等級なし）</td><td>—</td></tr>
+<tr><td>13-1</td><td>インフルエンザ陽性の入院CAP成人には、発症からの経過日数にかかわらずオセルタミビル等の抗インフルエンザ治療を行うことを推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>13-2</td><td>インフルエンザ陽性の外来CAP成人にも、発症からの経過日数にかかわらず抗インフルエンザ治療を行うことを提案</td><td>条件付き</td><td>low</td></tr>
+<tr><td>14</td><td>臨床的・画像的にCAPでインフルエンザ陽性の成人には、入院・外来を問わず標準的な抗菌薬治療を初期に処方することを推奨</td><td>強い</td><td>low</td></tr>
+<tr><td>15</td><td>抗菌薬の投与期間は検証済みの臨床安定の指標に従って決め、安定に到達するまで、かつ合計で最低5日間は継続することを推奨</td><td>強い</td><td>moderate</td></tr>
+<tr><td>16</td><td>症状が5〜7日以内に消失したCAP成人に、フォローの胸部画像をルーチンには撮らないことを提案</td><td>条件付き</td><td>low</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>一覧を読むときの注意</p>
+<ul><li><mark class="hl">「recommend not（強い推奨で否定）」と「suggest not（条件付きで否定）」と「推奨を出さない」は別物</mark>。1-6 は「行うことも行わないことも推奨しない」という明示的な no recommendation で、否定ではない。</li><li><mark class="hl"><strong>Q1・Q2 の強い推奨はエビデンスの質が very low</strong></mark>。GRADE の例外規定を使っており、「強い推奨だから根拠が固い」と読むと誤る。</li><li><mark class="hl">9-1d と 9-2c と 12-4 と 15の「MRSA・緑膿菌なら7日」は、推奨ブロックの外に書かれている</mark>。等級が付いていない記述であり、他の推奨と同列に扱えない。</li><li><mark class="hl"><strong>抗菌薬レジメンの列挙には優先順位がない</strong></mark>（本文が「in no order of preference」と明記）。強さ・質が同じなら、どれを選ぶかは患者ごとのリスク・ベネフィット評価。</li></ul>
+</div>
+<h3>5. Question 1 — 喀痰グラム染色・培養</h3>
+<p><strong>推奨</strong>：外来ではルーチンに行わない（強い・very low）。入院例では、①重症CAP（特に挿管例、強い・very low）、②a. MRSA/緑膿菌に経験的治療中（強い・very low）、b. MRSA/緑膿菌の感染既往（特に気道、条件付き・very low）、c. 直近90日以内に入院し非経口抗菌薬を受けた（条件付き・very low）に該当すれば、治療前の下気道検体を提出する。</p>
+<p><strong>エビデンス</strong>。原因菌を同定しようとする論拠は5つ挙げられている。①耐性菌が同定されうる、②治療を狭域化できる、③レジオネラのように公衆衛生上の意味を持つ病原体がある、④初期治療が失敗したときに調整できる、⑤CAPの疫学は常に変化しており継続的評価が要る。しかしこれらに対して、ルーチンの微生物検査が個々の患者の転帰を改善するという高品質のエビデンスは欠けている。喀痰グラム染色・培養単独を評価した研究も、他の検査と組み合わせた研究も、転帰の改善を示さなかった。</p>
+<p>収率の問題が大きい。妥当な喀痰検体を得ること自体が患者側の要因で難しい。検査性能は菌種、抗菌薬の先行投与、セッティングによって変わる。数字として挙げられているのは、抗菌薬未投与の菌血症性肺炎球菌肺炎では、良質な喀痰の鏡検・培養で86%に肺炎球菌が検出されるという上限に近い値。</p>
+<p><strong>論拠</strong>。ルーチン培養を支持するエビデンスの欠如と、抗菌薬適正使用を進めたいという要求とを秤にかけ、委員会は投票により、入院CAP成人全般については2007年版の「推奨も反対もしない」立場を維持することにした。培養するかどうかは、臨床像・地域の起因菌・院内の抗菌薬適正使用プロセスに基づいて個々の臨床医が決める。</p>
+<p>そのうえで2つの状況を特定した。<strong>重症CAPの入院例</strong>と、<strong>MRSA・緑膿菌の強いリスク因子がある場合</strong>（ただし地域データで既にこれらの病原体がCAPでほとんど検出されないと示されている場合を除く）。挿管を要する重症CAPでは、挿管後速やかに気管内吸引液などの下気道検体をグラム染色・培養に出すべきとされる。理由は2つで、これらの患者はMRSA・緑膿菌による肺炎の可能性が高いこと、気管内吸引液は喀痰培養より微生物の収率が高いこと。</p>
+<p>MRSA・緑膿菌のリスクがある場合には、<strong>経験的治療を拡大するときもしないときも</strong>喀痰培養を出すよう推奨している。拡大した場合は陰性結果でデエスカレーションでき、拡大しなかった場合は陽性結果で治療を調整できる。個々のリスク因子は多数報告されているが多くは関連が弱く施設間でばらつく。<strong>最も一貫して強いリスク因子はMRSAまたは緑膿菌の感染既往</strong>であり、次いで直近90日の入院＋非経口抗菌薬。これらの推奨は高品質エビデンスに基づくものではなく、抗菌薬使用の改善と、臨床医が自施設の病原体分布・耐性パターンを理解することへの委員会の期待を反映したもの、と自ら述べている。</p>
+<p><strong>必要な研究</strong>：CAPの起因菌を同定する迅速・低コスト・高感度・高特異度の検査。新規検査は「検査戦略が治療決定と患者転帰に与える影響」を評価する高品質研究で検証されるべき。</p>
+<h3>6. Question 2 — 血液培養</h3>
+<p><strong>推奨</strong>：外来では採取しない（強い・very low）。入院例でもルーチンには採取しない（条件付き・very low）。ただし①重症CAP（強い・very low）、②a. MRSA/緑膿菌に経験的治療中（強い・very low）、b. 感染既往（条件付き・very low）、c. 直近90日の入院＋非経口抗菌薬（条件付き・very low）では治療前に採取する。</p>
+<p><strong>エビデンス</strong>。血液培養の有無で患者転帰を比較した高品質研究はない。大規模観察研究1本で入院時の血液培養採取と死亡率低下の関連が示され、後続の小規模観察研究3本でも入院24時間以内の血液培養と院内死亡の同様の関連が見られたが、<strong>いずれも統計学的に有意ではなかった</strong>。</p>
+<p>収率は低い。非重症CAP成人での血液培養陽性率は、外来で2%、入院で9%。血液培養が経験的治療の適切な変更につながることはまれで、皮膚常在菌の混入が偽陽性を生む。CAPの病原体として認識されていないコアグラーゼ陰性ブドウ球菌などが生えると、不適切な抗菌薬使用と薬剤有害事象のリスクにつながる。入院CAP成人の研究では、血液培養が在院日数と抗菌薬投与期間の有意な延長と関連していた。ただしこれらは観察研究であり、関連が因果か、重症度を含む未測定交絡かは不明。</p>
+<p><strong>論拠</strong>。追加の診断情報は治療決定の質を上げうるが、ルーチン採取の支持は臨床的有益性を示す研究の質の低さで減じられる。ルーチン採取は偽陽性を生み、不要な抗菌薬使用と在院延長を招きうる。一方、重症CAPでは頻度の低い病原体のカバーが遅れると重大な帰結を招くため、結果が24〜48時間以内に返る場合の血液培養の潜在的利益は格段に大きい。MRSA・緑膿菌リスクがある場合の論拠は喀痰培養と同じ。</p>
+<h3>7. Table 1 — 重症CAPの定義（IDSA/ATS 2007基準）</h3>
+<p>原表の全項目。<strong>major 1つ、または minor 3つ以上</strong>を満たせば重症CAP。</p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>基準</th></tr></thead>
+<tbody>
+<tr><td>Minor</td><td>呼吸数 30回/分 超</td></tr>
+<tr><td>Minor</td><td>PaO2/FIO2 比 250 未満</td></tr>
+<tr><td>Minor</td><td>多葉性浸潤影</td></tr>
+<tr><td>Minor</td><td>錯乱・失見当識</td></tr>
+<tr><td>Minor</td><td>尿毒症（BUN 20 mg/dL 超）</td></tr>
+<tr><td>Minor</td><td>白血球減少（白血球数 4,000/μL 未満）。感染そのものによるものに限る（化学療法によるものは含めない）</td></tr>
+<tr><td>Minor</td><td>血小板減少（血小板数 100,000/μL 未満）</td></tr>
+<tr><td>Minor</td><td>低体温（深部体温 36℃ 未満）</td></tr>
+<tr><td>Minor</td><td>積極的な輸液蘇生を要する低血圧</td></tr>
+<tr><td>Major</td><td>昇圧薬を要する敗血症性ショック</td></tr>
+<tr><td>Major</td><td>人工呼吸を要する呼吸不全</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この定義を使うときの落とし穴</p>
+<ul><li><mark class="hl"><strong>minor は9項目、major は2項目</strong></mark>。数え落としが起きやすいのは低体温と血小板減少。</li><li><mark class="hl">白血球減少は「感染単独による」ものに限る</mark>という限定が原表の脚注に付いている。化学療法中の患者は本ガイドラインの対象外でもある。</li><li><mark class="hl">「積極的な輸液蘇生を要する低血圧」（minor）と「昇圧薬を要する敗血症性ショック」（major）は別項目</mark>。昇圧薬まで行けば major 1つで重症CAP確定になる。</li></ul>
+</div>
+<p><strong>性能</strong>。メタ解析では「major 1つ or minor 3つ以上」でICU入室の予測に<strong>プール感度84%・特異度78%</strong>。major を除いて「minor 3つ以上」だけにするとプール感度56%・特異度91%。</p>
+<h3>8. Table 2 — 2007年版との違い（原表の全7項目）</h3>
+<div class="tw"><table>
+<thead><tr><th>推奨項目</th><th>2007年 ATS/IDSA</th><th>2019年 ATS/IDSA</th></tr></thead>
+<tbody>
+<tr><td>喀痰培養</td><td>主に重症例で推奨</td><td>重症例に加えて、MRSAまたは緑膿菌に経験的治療を行うすべての入院例で推奨</td></tr>
+<tr><td>血液培養</td><td>主に重症例で推奨</td><td>重症例に加えて、MRSAまたは緑膿菌に経験的治療を行うすべての入院例で推奨</td></tr>
+<tr><td>マクロライド単剤</td><td>外来に対して強い推奨</td><td>耐性率に基づく外来への条件付き推奨</td></tr>
+<tr><td>プロカルシトニンの使用</td><td>扱っていない</td><td>初期の抗菌薬治療の要否判断には推奨しない</td></tr>
+<tr><td>ステロイドの使用</td><td>扱っていない</td><td>使用しないことを推奨。難治性敗血症性ショックでは考慮されうる</td></tr>
+<tr><td>HCAP という区分の使用</td><td>2005年 ATS/IDSA HAP/VAPガイドラインで導入されたものを受け入れていた</td><td>この区分の廃止を推奨。MRSAまたは緑膿菌のカバー要否の判断には、地域疫学と検証済みリスク因子を重視。培養陰性時のデエスカレーションをより強調</td></tr>
+<tr><td>重症CAPの標準的経験的治療</td><td>βラクタム＋マクロライド と βラクタム＋キノロン を同等に扱っていた</td><td>双方とも許容されるが、βラクタム＋マクロライドを支持するエビデンスのほうが強い</td></tr>
+<tr><td>フォロー胸部画像のルーチン使用</td><td>扱っていない</td><td>撮らないことを推奨。肺がん検診の対象になりうる患者では臨床的適応に従って実施</td></tr>
+</tbody></table></div>
+<p>（原表は「Recommendation」列に8行を並べており、上表はそれを日本語化したもの。表題は7項目のように読めるが実際は8行ある。）</p>
+<h3>9. Question 3 — 尿中抗原検査</h3>
+<p><strong>推奨</strong>：肺炎球菌尿中抗原はルーチンには行わない（条件付き・low）が、重症CAPでは行う（条件付き・low）。レジオネラ尿中抗原もルーチンには行わない（条件付き・low）が、①アウトブレイクとの関連や最近の旅行など疫学的要因がある場合（条件付き・low）、②重症CAP（条件付き・low）では行う。さらに重症CAPでは、レジオネラ尿中抗原に加えて下気道検体の選択培地培養またはレジオネラ核酸増幅検査を行う（条件付き・low）。</p>
+<p><strong>エビデンス</strong>。Falguera らのRCTは177例を、肺炎球菌・レジオネラの尿中抗原結果に基づく病原体標的治療と、経験的なガイドライン準拠治療に無作為化した。標的治療群88例のうち<strong>25%で尿中抗原が陽性</strong>となり標的治療を受けたが、死亡・臨床的再燃・ICU入室・在院日数・抗菌薬投与期間のいずれにも統計学的な差はなかった。より広い微生物検査（喀痰・血液培養）を含みレジオネラ尿中抗原のみを用いた262例の第2のRCTでも、死亡・治療失敗率・在院日数を含めて臨床転帰は同等だった。</p>
+<p>観察研究は方向が異なる。肺炎球菌尿中抗原検査の導入前後2期間で費用と抗菌薬選択を比較した研究では差がなかった。一方、Costantini らは肺炎球菌・レジオネラ尿中抗原を受けた患者で<strong>院内死亡のオッズが57%低い</strong>（背景・臨床因子で調整、統計学的に有意）と報告し、Uematsu らは尿中抗原検査を受けた患者で<strong>30日死亡のオッズが25%低い</strong>（在院日数への影響はなし）と報告した。ただしいずれの研究も、死亡の利益が検査結果の直接の帰結なのか、他の良質な診療プロセスの代理指標にすぎないのかを区別していない。</p>
+<p><strong>論拠</strong>。RCTは尿中抗原検査の利益を示していない。むしろ、尿中抗原陽性に反応して治療を狭めることが臨床的再燃のリスクを高めうるという懸念も提起されている。しかし大規模観察研究では死亡率低下と関連しており、重症例に限って検査を推奨する。米国では過去10年でレジオネラ感染が増加しており、特に重症例でこの診断の重要性が高い。共通感染源によるアウトブレイクの状況では特にそうだが、<strong>大半の症例は既知のアウトブレイクに関連せず散発性である</strong>点も明記されている。</p>
+<p><strong>必要な研究</strong>：喀痰・尿・血液向けの新しい核酸増幅システム。治療決定・臨床転帰への影響と、追加症例の予防・一次予防戦略という公衆衛生上の利益の双方を評価すべき。迅速・低コストのゲノム配列検出アッセイの登場にも言及。</p>
+<h3>10. Question 4 — インフルエンザ検査</h3>
+<p><strong>推奨</strong>：地域でインフルエンザウイルスが流行している時期には、<strong>迅速インフルエンザ分子検査（核酸増幅検査）</strong>での検査を推奨する。迅速インフルエンザ診断検査（抗原検査）より優先される（強い・moderate）。</p>
+<p><strong>エビデンス</strong>。CAP成人におけるインフルエンザ検査が転帰に与える影響を評価した研究は、著者らは1本も同定できなかった。対照的に、インフルエンザ様疾患を持つ患者を含む一般集団でのインフルエンザ検査の重要性については相当な文献がある。本ガイドラインの推奨は、IDSA インフルエンザ診療ガイドラインの検査推奨と整合させたもの。</p>
+<p><strong>論拠</strong>。抗ウイルス治療の利益が、インフルエンザ活動性が高い時期の検査を支持する。活動性が低い時期は検査を考慮してもよいがルーチンには行わなくてよい。この検査推奨は、<strong>院内では治療上の意味と感染制御上の意味の双方を持つ</strong>。</p>
+<h3>11. Question 5 — プロカルシトニン</h3>
+<p><strong>推奨</strong>：臨床的に疑われ画像で確認されたCAPの成人には、初回の血清プロカルシトニン値にかかわらず経験的抗菌薬治療を開始すべき（強い・moderate）。</p>
+<p><strong>エビデンス</strong>。プロカルシトニンが肺炎（ウイルス性・細菌性の双方がありうる）と急性気管支炎・上気道感染（ほぼウイルス性）を区別できるかを見た研究は複数ある。しかし本ガイドラインの問いは「<strong>臨床的にCAPと確定した患者の中で</strong>、プロカルシトニンがウイルス性と細菌性を区別し、初期抗菌薬の要否を導けるか」である。</p>
+<p>一部の研究者は 0.1 μg/L 未満はウイルス感染の可能性が高く、0.25 μg/L 超は細菌性肺炎の可能性が高いと提案してきた。しかし入院CAP患者を対象とした最近の研究は、ウイルス性と細菌性を判別できるプロカルシトニンの閾値を同定できなかった（ただし高い値ほど細菌感染の確率が高いという相関は強かった）。細菌感染検出のプロカルシトニンの感度は報告により38%から91%と幅があり、この検査単独でCAP患者への抗菌薬差し控えを正当化できないことを示している。</p>
+<p><strong>論拠</strong>。プロカルシトニンは下気道感染での抗菌薬開始の指標として使われてきたが、それらの研究の多くは画像で確認された肺炎に限定されていない。プロカルシトニンが低いCAP患者の一部が抗菌薬なしで安全に治療されているのは事実だが、<strong>それは小さなサブグループにすぎず</strong>、この戦略を広く用いる安全性には懸念が残る。</p>
+<p><strong>必要な研究</strong>：ウイルスがCAPの重要な原因であるという疫学的証拠を踏まえ、抗菌薬を安全に差し控えられる状況を正確に同定できる迅速検査（POCTを含む）の検証。</p>
+<h3>12. Question 6・7 — 療養場所の決定</h3>
+<p>Q6（入院か外来か）：臨床判断に加えて、検証済みの予後予測ルール、優先的には <strong>PSI</strong> を用いることを推奨（強い・moderate）。<strong>CURB-65</strong> はそれより下位の選択肢として提案（条件付き・low）。</p>
+<p>PSI と CURB-65 はいずれも、免疫正常の肺炎患者で診断時点の人口統計学的・臨床的変数から30日死亡を予測するモデルとして開発された。CURB-65 と比べて PSI はより大きな割合を低リスクと判定し、死亡予測の判別能が高い。</p>
+<p>2本の多施設クラスター無作為化試験が、PSI の使用により<strong>外来治療できる患者の割合を安全に増やせる</strong>ことを示した。これらとさらに1本のRCTが、死亡やその他の臨床的に重要な転帰を悪化させずにPSIで初期の治療場所を決められる安全性を支持する。3本の前後比較研究と1本の前向き対照観察研究も同方向。</p>
+<p>ただし<strong>臨床的重症度だけが入院の必要性を決めるわけではない</strong>。経口摂取が保てない、薬物乱用歴、認知機能障害、重い併存疾患、機能状態の低下といった医学的・心理社会的な外来治療の禁忌がある。またPSIは<strong>若年患者の重症度を過小評価</strong>しうるし、連続変数の解釈を単純化しすぎる（例：収縮期血圧90 mmHg未満はベースラインや実測値にかかわらず一律に異常とされる）。したがって意思決定の補助として使い、臨床判断と併用すべきである。</p>
+<p>CURB-65 については、初期治療場所の判断補助としての有効性の証拠がPSIより少ない。電子的に算出したCURB-65に P/F 300未満・胸水なし・ATS minor criteria 3項目未満を組み合わせた前後比較対照介入研究では、外来治療の使用は有意には増えなかった。CURB-65 が2点未満の49例で入院と外来を比較したRCTもあるが、検出力が乏しく、しかも外来治療群には毎日の訪問看護と通常は入院に限られる非経口抗菌薬が含まれていた。CURB-65 に条件付き推奨を与えたのは、有効性・安全性のエビデンスが乏しいにもかかわらず<strong>PSIより簡便</strong>という点を考慮したため。</p>
+<p><strong>Q7（一般病棟かICU等か）</strong>：昇圧薬を要する低血圧、または人工呼吸を要する呼吸不全がある患者はICUへ直接入室させることを推奨（強い・low）。それ以外では IDSA/ATS 2007 の minor criteria と臨床判断を併用して治療強度を決めることを提案（条件付き・low）。</p>
+<p>PSI と CURB-65 は、入院した患者に必要なケアのレベルを選ぶために設計されたものではない。より高い治療強度の必要性を予測するモデルとして ATS 2001、IDSA/ATS 2007、SMART-COP、SCAP score がある。これらは死亡以外の転帰を用いる場合、PSI や CURB-65 より総合的な精度が高い。</p>
+<p><strong>SMART-COP</strong> は昇圧薬または人工呼吸を要する患者を同定する検証済みルールで、8項目からなる。IDSA/ATS 2007 の minor criteria 9項目とは<strong>5項目が重複</strong>する（低酸素、錯乱、呼吸数、多葉性の画像所見、収縮期血圧低値）。3項目以上を閾値としたICU入室予測のプール感度79%・特異度64%。ただしアルブミン・PaO2・pH を使うため、リアルタイムの臨床判断に普遍的に利用できるわけではない。ICU入室予測について、ある比較研究は IDSA/ATS minor criteria と SMART-COP の同等性を報告し、別の研究は IDSA/ATS minor criteria の有意に優れた性能を報告した。重症度ツールを治療強度の判断補助として使うことの有効性・安全性を評価した無作為化研究は存在しない。</p>
+<p><strong>論拠</strong>。病棟入院後にICUへ転棟した患者は、救急外来からICUへ直接入室した患者より死亡率が高い。これは肺炎の進行によるところもあるが、認識されなかった重症肺炎の「ミストリアージ」も一因でありうる。医師の判断単独が、重症度ツールを併用した判断と同等とは考えにくい。2007年 IDSA/ATS 基準を他のスコアより優先するのは、すぐ得られる重症度パラメータで構成されており、上記の他のスコアより正確だから。</p>
+<h3>13. Table 3 — 外来CAPの初期治療（原表）</h3>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>レジメン</th></tr></thead>
+<tbody>
+<tr><td>併存症も MRSA・緑膿菌のリスク因子もない</td><td>アモキシシリン 1 g 1日3回 ／ ドキシサイクリン 100 mg 1日2回 ／ マクロライド（地域の肺炎球菌マクロライド耐性率が25%未満の場合のみ）：アジスロマイシン 初日500 mg 以後250 mg 1日1回、クラリスロマイシン 500 mg 1日2回、クラリスロマイシン徐放 1,000 mg 1日1回</td></tr>
+<tr><td>併存症あり</td><td>併用療法：アモキシシリン・クラブラン酸（500/125 mg 1日3回、875/125 mg 1日2回、2,000/125 mg 1日2回のいずれか）またはセフェム系（セフポドキシム 200 mg 1日2回、セフロキシム 500 mg 1日2回） ＋ マクロライドまたはドキシサイクリン 100 mg 1日2回 ／ または単剤療法：呼吸器キノロン（レボフロキサシン 750 mg 1日1回、モキシフロキサシン 400 mg 1日1回、ゲミフロキサシン 320 mg 1日1回）</td></tr>
+</tbody></table></div>
+<p><strong>併存症の定義</strong>（原表脚注）：慢性の心疾患・肺疾患・肝疾患・腎疾患、糖尿病、アルコール依存、悪性腫瘍、無脾。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原表脚注のAND/OR構造に注意 リスク因子の脚注は「prior respiratory isolation of MRSA or P. aeruginosa OR recent hospitalization AND receipt of parenteral antibiotics (in the last 90 d)」である。<mark class="hl">「過去の気道分離歴」は単独でリスク因子だが、「直近の入院」と「非経口抗菌薬」は両方揃って初めてリスク因子になる</mark>。「入院歴があるから」だけでMRSA・緑膿菌をカバーするのは、このガイドラインの読み違いになる。</p>
+</div>
+<h3>14. Question 8 — 外来の経験的治療</h3>
+<p><strong>エビデンス</strong>。CAP成人の抗菌薬レジメンのRCTは、症例数が少なく、死亡や入院に至る治療失敗といった重要な転帰がまれにしか起きないため、あるレジメンの優越性も同等性もほとんど示せていない。既発表の試験のいくつかは、もはや使えない薬剤（ケトライド系など）を対照にしている。この不足は2014年のコクランレビューでも指摘されていた。</p>
+<p>著者らは<strong>外来CAPの2レジメンを比較したRCT 16本</strong>を同定した。各群のメタ解析は、比較されたどのレジメン間にも関連する転帰の差を示さなかった。2008年の外来CAP抗菌薬治療のメタ解析でも同様の所見。</p>
+<p>委員会は、入院CAP患者に投与された経口抗菌薬のデータを外来に外挿することを検討し、入院患者のほうが一般にリスクが高く重症であるため、間接的ではあるが妥当と判断した。観察データは、レジオネラとグラム陰性桿菌（外来ではまれ）を除いて入院CAPと外来CAPの起因菌が同じであることを示唆している。</p>
+<p>高用量経口アモキシシリンは入院CAPで有効性が示されている。アモキシシリン・クラブラン酸も外来・入院の双方で支持がある。経口ドキシサイクリンの肺炎に対するデータは限られており、大半は少数例。静注ドキシサイクリン 100 mg 1日2回はCAP患者65例で静注レボフロキサシン 500 mg 1日1回と遜色なく、非盲検無作為化試験ではドキシサイクリンがより速い反応と抗菌薬変更の少なさに関連した。</p>
+<p><strong>論拠</strong>。併存症のない患者にはアモキシシリン 1 g 8時間ごと、またはドキシサイクリン 100 mg 1日2回。アモキシシリンの推奨は、非定型病原体をカバーしないと推定されるにもかかわらず入院CAPで有効性を示した複数の研究に基づき、長い安全性の実績もある。ドキシサイクリンの推奨は臨床試験データが限られるが、最も一般的な関連菌を含む広い作用スペクトラムに基づく。一部の専門家は経口ドキシサイクリンの初回を200 mgとすることを推奨しているが、それが転帰改善と関連するかを評価したデータはない。</p>
+<p><strong>マクロライド単剤の格下げ</strong>が2019年版の変更点の1つ。併存症のない患者であっても、外来CAPのマクロライド単剤に強い推奨を与えなかった。根拠は、マクロライド耐性肺炎球菌でのマクロライド治療失敗の研究群と、米国の肺炎球菌分離株のマクロライド耐性率が30%超（その多くが高度耐性）であること。ただしマクロライド耐性が低いと記録されている地域で、代替治療に禁忌がある場合には、マクロライド単剤も選択肢になる。</p>
+<p><strong>併存症のある患者に広域を使う理由</strong>は2つ明示されている。①初期の経験的レジメンが不十分だった場合に転帰が悪化しやすい、②医療との接触歴や抗菌薬曝露歴により耐性菌のリスク因子を持つことが多い。加えて、β-ラクタマーゼをしばしば産生する H. influenzae・M. catarrhalis に加え、COPD などの併存症がある患者では S. aureus とグラム陰性桿菌がCAPの原因としてより一般的である。</p>
+<p>βラクタムまたはセフェム系とマクロライドまたはドキシサイクリンの併用は、マクロライド耐性・ドキシサイクリン耐性の肺炎球菌（肺炎球菌のβラクタム耐性は依然として少ないため）、β-ラクタマーゼ産生 H. influenzae、多くの腸内グラム陰性桿菌、大半のメチシリン感受性 S. aureus、M. pneumoniae と C. pneumoniae を効果的にカバーする。</p>
+<p>選択肢間に優先順位はなく、選択は個々の患者のリスク・ベネフィット評価を要する。<strong>地域の疫学データ</strong>と、<strong>選択ごとのリスクを高める個別因子</strong>を秤にかける。挙げられているのは、記録されたβラクタムまたはマクロライドのアレルギー、心不整脈（マクロライド）、血管疾患（キノロン）、C. difficile 感染の既往。キノロンの有害事象への懸念にもかかわらず、パネルは併存症のある外来CAP成人にキノロンを使うことは正当化されると判断した。理由は、外来CAP・入院CAPの多数の研究での成績、CAPの主要細菌における非常に低い耐性率、定型・非定型双方のカバー、経口バイオアベイラビリティ、単剤療法の利便性、重篤な有害事象の相対的なまれさ。ただし FDA のサイトにまとめられているとおり、キノロン関連有害事象の報告は増加している。</p>
+<p><strong>先行抗菌薬曝露の扱い</strong>：従来のガイドラインの慣行を踏襲し、上記のいずれかのクラスに最近曝露した患者には<strong>別のクラス</strong>の抗菌薬で治療することを推奨。初期レジメンへの耐性リスクが高まるため。また、MRSA・緑膿菌の重大なリスク因子を持つ患者が外来で管理されることは多くないものの、そうした患者ではこれらの病原体をカバーする抗菌薬が必要になりうる。</p>
+<p><strong>必要な研究</strong>：外来CAP治療の頭対頭の前向きRCT（治療失敗、再診の必要性、入院、通常活動への復帰までの時間、有害事象を含む）。外来肺炎の病原体分布と感受性のモニタリング。<strong>レファムリンとオマダサイクリンは外来でのさらなる検証が必要</strong>とされている。</p>
+<h3>15. Table 4 — 入院CAPの初期治療（原表を全セル日本語化）</h3>
+<p>行は重症度、列は耐性菌リスクの状況。</p>
+<div class="tw"><table>
+<thead><tr><th></th><th>標準レジメン</th><th>MRSA の気道分離歴あり</th><th>緑膿菌の気道分離歴あり</th><th>直近の入院＋非経口抗菌薬＋地域検証済みのMRSAリスク因子</th><th>直近の入院＋非経口抗菌薬＋地域検証済みの緑膿菌リスク因子</th></tr></thead>
+<tbody>
+<tr><td>非重症の入院肺炎</td><td>βラクタム＋マクロライド、または呼吸器キノロン</td><td>MRSAカバーを追加し、培養・鼻腔PCRを採取してデエスカレーションまたは治療継続の必要性の確認に用いる</td><td>緑膿菌カバーを追加し、培養を採取してデエスカレーションまたは治療継続の必要性の確認に用いる</td><td>培養は採取するが、培養が陽性でない限りMRSAカバーは行わない。迅速鼻腔PCRが使えるなら、陰性であればMRSAへの経験的追加治療を行わず、陽性であればカバーを追加して培養を採取する</td><td>培養は採取するが、緑膿菌カバーは培養が陽性の場合にのみ開始する</td></tr>
+<tr><td>重症の入院肺炎</td><td>βラクタム＋マクロライド、またはβラクタム＋キノロン</td><td>MRSAカバーを追加し、培養・鼻腔PCRを採取してデエスカレーションまたは治療継続の必要性の確認に用いる</td><td>緑膿菌カバーを追加し、培養を採取してデエスカレーションまたは治療継続の必要性の確認に用いる</td><td>MRSAカバーを追加し、鼻腔PCRと培養を採取してデエスカレーションまたは治療継続の必要性の確認に用いる</td><td>緑膿菌カバーを追加し、培養を採取してデエスカレーションまたは治療継続の必要性の確認に用いる</td></tr>
+</tbody></table></div>
+<p><strong>用量（原表脚注）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>薬剤群</th><th>具体名と用量</th></tr></thead>
+<tbody>
+<tr><td>βラクタム（入院・標準）</td><td>アンピシリン・スルバクタム 1.5〜3 g 6時間ごと ／ セフォタキシム 1〜2 g 8時間ごと ／ セフトリアキソン 1〜2 g 1日1回 ／ セフタロリン 600 mg 12時間ごと</td></tr>
+<tr><td>マクロライド（入院・標準）</td><td>アジスロマイシン 500 mg 1日1回 ／ クラリスロマイシン 500 mg 1日2回</td></tr>
+<tr><td>呼吸器キノロン</td><td>レボフロキサシン 750 mg 1日1回 ／ モキシフロキサシン 400 mg 1日1回</td></tr>
+<tr><td>MRSAカバー（2016 ATS/IDSA HAP/VAPガイドライン準拠）</td><td>バンコマイシン 15 mg/kg 12時間ごと（血中濃度で調整） ／ リネゾリド 600 mg 12時間ごと</td></tr>
+<tr><td>緑膿菌カバー（同上）</td><td>ピペラシリン・タゾバクタム 4.5 g 6時間ごと ／ セフェピム 2 g 8時間ごと ／ セフタジジム 2 g 8時間ごと ／ イミペネム 500 mg 6時間ごと ／ メロペネム 1 g 8時間ごと ／ アズトレオナム 2 g 8時間ごと</td></tr>
+</tbody></table></div>
+<p><strong>緑膿菌カバーの脚注に明記された限定</strong>：上記のレジメンは <strong>ESBL産生腸内細菌科細菌のカバーを含まない</strong>。ESBLは、患者個別または地域の微生物学的データに基づく場合にのみ考慮すべきである。</p>
+<p><strong>非重症と重症で分岐が変わる唯一の列</strong>が、「直近の入院＋非経口抗菌薬＋地域検証済みリスク因子」。非重症では培養を出すだけで広域は始めない（MRSAは鼻腔PCR陰性なら控える）。重症では広域を始めて48時間で降ろす。これがこのガイドラインの実装上の要点である。</p>
+<h3>16. Question 9 — 入院の経験的治療</h3>
+<p><strong>9.1（非重症・MRSA/緑膿菌リスクなし）</strong>：βラクタム＋マクロライド（強い・high）、または呼吸器キノロン単剤（強い・high）。マクロライドとキノロンの双方に禁忌がある場合の第3の選択肢としてβラクタム＋ドキシサイクリン 100 mg 1日2回（条件付き・low）。</p>
+<p><strong>エビデンス</strong>。βラクタム＋マクロライド vs キノロン単剤の入院成人RCTの大半は非劣性試験としてデザインされ、症例数が限られていた。これらは両者の臨床転帰が同様であることを示唆する。<strong>16 RCT・4,809例の系統的レビュー</strong>では、キノロン単剤のほうが臨床的失敗・治療中止・下痢が有意に少なかったが、死亡率は全体に低く、群間で有意差はなかった。20の実験的・観察的研究の別の系統的レビューでは、βラクタム＋マクロライド併用またはキノロン単剤は、βラクタム単剤より死亡率が低い傾向にあった。</p>
+<p>（注：アジスロマイシンは非経口製剤があるが、クラリスロマイシンには非経口製剤がないことが本文に明記されている。）</p>
+<p>第3の選択肢のドキシサイクリンは、マクロライドまたはキノロンへのアレルギー・禁忌が記録されている場合、もしくはそれらの薬剤で臨床的に失敗した場合の代替。<strong>オマダサイクリン</strong>（新しいテトラサイクリン系）は非重症CAP成人でモキシフロキサシン単剤と同等と最近報告され、テトラサイクリン耐性下でも有効だが、<strong>単一の公表報告にすぎず安全性情報も確立が不十分</strong>なため、委員会は代替選択肢として掲載しないと決めた。</p>
+<p><strong>βラクタム単剤について</strong>。CAP 580例のRCTは、βラクタム単剤が入院CAPでβラクタム＋マクロライドに劣る可能性を排除できなかった。Nie らはコホート研究4本と後ろ向き観察研究12本を同定し、βラクタム＋マクロライドがβラクタム単剤より死亡率を下げると報告。Horita らは、βラクタム＋マクロライド併用が全死因死亡を減らしうるが、<strong>主に重症CAP患者においてである</strong>と示した。したがって著者らは「βラクタム単剤を、キノロン単剤やβラクタム＋マクロライド併用より優先してルーチンに用いるべきではない」と提案している。この提案は Summary of the evidence 節の中に置かれており、推奨ブロックに等級付きで掲載されていない。</p>
+<p><strong>9.2（重症・MRSA/緑膿菌リスクなし）</strong>：βラクタム＋マクロライド（強い・moderate）、またはβラクタム＋呼吸器キノロン（強い・low）。薬剤と用量は9.1と同じ。</p>
+<p><strong>エビデンス</strong>。重症CAPで治療選択肢を評価したRCTは存在せず、エビデンスは重症度の定義が異なる観察研究から来ている。Sligl らは<strong>ほぼ10,000例の重症CAP患者</strong>の観察研究メタ解析で、マクロライドを含むレジメン（多くはβラクタムとの併用）が、マクロライドを含まないレジメンより死亡を有意に減らす（相対リスクで18%、絶対リスクで3%）と報告した。マクロライドの死亡利益は主に重症CAP患者を多く含むコホートで観察されている。Vardakas らの系統的レビューは、βラクタム＋キノロン vs βラクタム＋マクロライドの比較について観察研究17本を見出し、RCTは1本も無かった。βラクタム＋キノロンはβラクタム＋マクロライドより死亡率が高いという結果だったが、研究の全体的な質が低いと判断され、決定的な推奨には至らなかった。</p>
+<p><strong>論拠</strong>。臨床試験のデータがないため、重症CAPの病原体の疫学データと、レジメンを比較した観察研究を考慮した。結果として、重症CAPにはβラクタム＋マクロライドまたはβラクタム＋呼吸器キノロンの併用が第一選択とする。キノロン単剤とβラクタム＋ドキシサイクリンは重症CAPで十分に研究されておらず、重症CAP成人への経験的治療としては推奨されない。</p>
+<p><strong>必要な研究</strong>：重症肺炎で死亡リスクが最も高い患者を対象に、βラクタム＋マクロライドとβラクタム＋呼吸器キノロンの利益とリスクを評価する設計の良いRCT。重症CAPでのキノロン単剤の研究も必要。</p>
+<h3>17. Question 10 — 誤嚥性肺炎への嫌気性菌カバー</h3>
+<p><strong>推奨</strong>：誤嚥性肺炎が疑われる場合でも、<strong>肺膿瘍または膿胸が疑われる場合を除き</strong>、嫌気性菌カバーをルーチンに追加しないことを提案（条件付き・very low）。</p>
+<p><strong>エビデンス</strong>。誤嚥はありふれた事象で、<strong>成人の半数もが睡眠中に誤嚥している</strong>。そのため誤嚥性肺炎の真の発生率は定量が難しく、誤嚥性肺炎を他の肺炎と切り分ける定義も存在しない。肺炎による入院の5〜15%が誤嚥に関連しているという推計があり、ナーシングホームや長期療養施設からの入院集団ではこの割合が高い。</p>
+<p>胃内容物を誤嚥した患者は誤嚥性肺臓炎（aspiration pneumonitis）とみなされる。その多くは24〜48時間以内に症状が消退し、抗菌薬なしの支持療法だけで済む。</p>
+<p>1970年代の誤嚥性肺炎の微生物学的研究では嫌気性菌の分離率が高かったが、これらの研究はしばしば<strong>経気管採痰</strong>を用い、<strong>病期の後期の患者</strong>を評価しており、この2点が嫌気性菌を同定しやすくしていた可能性がある。入院患者の急性誤嚥イベントに関する複数の研究は、嫌気性菌が病因で大きな役割を果たしていないことを示唆する。</p>
+<p>C. difficile 感染（クリンダマイシンの使用としばしば関連）の増加を踏まえると、経験的な嫌気性菌カバー（クリンダマイシンまたはβラクタム・β-ラクタマーゼ阻害薬）を追加するかは重要な問いである。しかし、嫌気性菌カバーの有無で治療レジメンを比較した臨床試験は存在しない。最近の研究の大半は小規模・後ろ向きで、微生物学的パターンと治療レジメンについての観察データを提供するにとどまる。</p>
+<h3>18. Question 11 — HCAPの廃止とMRSA・緑膿菌</h3>
+<p><strong>推奨</strong>：①広域抗菌薬選択の根拠としての HCAP という区分の使用を廃止することを推奨（強い・moderate）。②MRSAまたは緑膿菌への経験的カバーは、<strong>地域で検証されたリスク因子</strong>がある場合にのみ行うことを推奨（強い・moderate）。③既発表のリスク因子に基づいて現在カバーしているが自施設の疫学データがない場合、培養を採取しつつ経験的カバーを継続し、最初の数日以降の継続を正当化できるか判断することを推奨（強い・low）。</p>
+<p><strong>HCAPとは何だったか</strong>。2005年 ATS/IDSA の HAP/VAP ガイドラインで、独自の抗菌薬治療を要する独立した臨床区分として導入された。定義は、耐性菌のリスク因子とされる次のいずれかを持つ患者：ナーシングホームその他の長期療養施設への入居、直近90日以内の2日超の入院、在宅点滴療法、慢性透析、在宅創傷ケア、耐性菌を保菌している家族。導入の根拠は、CAP患者の一部の集団で標準的第一選択抗菌薬に感受性のない病原体（特にMRSAと緑膿菌）の有病率が高いという研究だった。</p>
+<p><strong>廃止の根拠</strong>。その後の多くの研究が、HCAPを定義する因子は、大半のセッティングで耐性菌の高い有病率を予測しないことを示した。さらに、広域抗菌薬（特にバンコマイシンと抗緑膿菌βラクタム）の使用が有意に増加し、患者転帰の明らかな改善は伴わなかった。</p>
+<p><strong>代替として何を使うか</strong>。耐性菌のリスク因子を同定した研究は多数あり、MRSAと緑膿菌でリスク因子が異なる場合もある。しかし個々のリスク因子の多くはこれらの病原体との関連が弱い。最も一貫して強い個別リスク因子は、①これらの菌の過去の分離（特に気道からの分離）、②<strong>直近の入院と非経口抗菌薬への曝露</strong>。</p>
+<p>MRSAまたは緑膿菌を、広域治療を正当化できるだけの十分に高い陽性的中率で同定できる検証済みスコアリングシステムは存在しない。スコア開発と検証は、研究集団ごとにMRSA・緑膿菌の有病率が異なることで複雑化する。さらに、患者転帰の改善や広域抗菌薬の過剰使用の削減を示したスコアリングシステムは1つもない。</p>
+<p><strong>デエスカレーションのエジデンスのほうが強い</strong>という非対称性を著者らは明示している。広域治療を要する高リスク患者を同定する特定のリスク因子セットの使用を支持するエビデンスは限られているが、いったん広域治療を開始した後のデエスカレーションについては、より強いエビデンス基盤がある。無作為化前向き研究はないものの、最近の観察研究・後ろ向き研究は、微生物学的結果でMRSA・緑膿菌が検出されない場合の48時間でのデエスカレーションが安全であり、抗菌薬投与期間・在院日数・広域治療の合併症を減らすという強い証拠を提供する。この結果は、大半が肺炎である重症敗血症患者の後ろ向き研究、および前向き無作為化（非盲検）研究、さらに敗血症成人のデエスカレーションの最近のメタ解析によっても補強される。</p>
+<p><strong>「local validation（地域検証）」とは</strong>。臨床医は、自施設のCAP患者でMRSAや緑膿菌が実際に多いのか、感染のリスク因子が何であるかを、<strong>病院または診療圏レベルで</strong>自前のデータとして得る必要がある。この推奨の根拠は、高品質の転帰研究の欠如、大半のセンターでMRSA・緑膿菌の有病率が非常に低いこと、そしてCAP治療における抗MRSA薬・抗緑膿菌薬の使用が有意に増えていること。地域の有病率データが現時点でない施設も、MRSA・緑膿菌のリスク因子がある場合に喀痰・血液培養を採るという推奨を採用すれば、時間をかけてデータを生成できる。分母は「培養を出した患者」ではなく「CAPの全症例数」で計算せよ、と明記されている。</p>
+<p><strong>MRSA鼻腔スワブ</strong>。迅速MRSA鼻腔検査を支持するデータは頑健で、鼻腔スワブが陰性なら、特に非重症CAPでは、MRSA肺炎の治療は概ね差し控えてよい。ただし<strong>陽性的中率はそれほど高くない</strong>ため、陽性の場合はMRSAカバーを開始すべきだが、血液・喀痰培養を提出し、培養が陰性ならデエスカレーションする。この後者の戦略（陽性スワブに直面してのデエスカレーション）は、CAPの重症度と病原体としてのMRSAの地域有病率に応じて変わる。</p>
+<p><strong>基本原則2つ</strong>が明示されている。①<strong>重症と非重症の区別を従来どおり維持する</strong>。不十分な経験的治療のリスクが重症CAPで格段に大きいため。重症度は IDSA/ATS 2007 基準による生理学的障害の程度で定義される。②過去1年以内に気道からMRSAまたは緑膿菌が同定されていれば、CAP発症時にこれらの病原体が同定されるリスクは非常に高いという十分なエビデンスがある。したがってこれだけで、血液・喀痰培養と、標準CAP病原体カバーに加えたこれらの病原体への経験的治療を推奨する十分な適応となり、培養陰性なら48時間でデエスカレーションする。MRSA・緑膿菌の経験的治療推奨は 2016年 IDSA/ATS HAP/VAPガイドラインのものを endorse している。</p>
+<p>直近の入院＋非経口抗菌薬の扱いは重症度で分かれる。<strong>非重症CAP</strong>では微生物学的検査のみを行い経験的広域治療は行わない。<strong>重症CAP</strong>では微生物学的検査に加えて、標準CAP病原体カバーに広域の経験的治療を追加し、培養陰性かつ改善していれば48時間でデエスカレーションする。</p>
+<p><strong>著者らの正直な限界表明</strong>：「我々が代替として提案するMRSA・緑膿菌へのアプローチは、高品質な研究に基づいていない。そのような研究が存在しないためである」。施設間でMRSA・緑膿菌の有病率が大きく異なるため、いかなる知見の一般化も極めて困難、と述べている。</p>
+<h3>19. Question 12 — ステロイド</h3>
+<p><strong>推奨</strong>：非重症CAP成人にステロイドをルーチンには使用しないことを<strong>推奨</strong>（強い・high）。重症CAP成人にはルーチンには使用しないことを提案（条件付き・moderate）。重症インフルエンザ肺炎の成人にもルーチンには使用しないことを提案（条件付き・low）。CAPかつ難治性敗血症性ショックの患者については Surviving Sepsis Campaign の推奨を endorse する。</p>
+<p><strong>エビデンス</strong>。CAP治療でのステロイドのRCT 2本が、死亡・在院日数・臓器不全のいずれかの有意な減少を示した。しかし1本目は死亡利益の大きさが他の研究で再現されておらず、真の効果を過大評価している懸念がある。2本目は<strong>群間でベースラインの腎機能に差があった</strong>。他のRCTは臨床的に重要なエンドポイントに有意差を示さず、解熱までの時間など臨床的安定の指標には差が見られたものの、死亡・在院日数・臓器不全の差には転化しなかった。</p>
+<p>メタ解析の結果は割れている。一部のメタ解析は重症CAPでの死亡利益を示したが、示さないメタ解析もある。しかも<strong>用いられた重症度の定義に一貫性がなかった</strong>。</p>
+<p><strong>害</strong>。ヒドロコルチゾン換算1日240 mg 程度の用量で、治療を要する高血糖の有意な増加と、<strong>二次感染率の上昇の可能性</strong>。ステロイド群で死亡が過剰であることを示した研究は報告されていない（後述の批判的吟味を参照）。</p>
+<p><strong>インフルエンザ肺炎</strong>については、主に小規模の後ろ向き研究からなるメタ解析が、<strong>ステロイドを受けた患者で死亡が増加しうる</strong>ことを示唆する。著者らは、これが細菌性肺炎と対照的に、インフルエンザ防御における自然免疫の重要性を反映している可能性を指摘している。</p>
+<p><strong>論拠</strong>。非重症CAPでは死亡・臓器不全に関してステロイドの利益を示唆するデータがなく、重症CAPでもデータは限られている。ヒドロコルチゾン換算1日240 mg までを最長7日という用量域でのリスクは主に高血糖だが、<strong>再入院率が高い可能性</strong>もあり、その後30〜90日の合併症増加というより一般的な懸念も提起されている。少なくとも1本の大規模試験（NCT01283009）が完了しているが未報告で、どのサブグループがステロイドの利益を得るかをさらに明らかにしうる、と述べている。</p>
+<p><strong>併存疾患のためのステロイド使用は妨げない</strong>ことが明記されている。COPD、喘息、自己免疫疾患など、ステロイドが治療の一部として支持される病態での臨床的に適切な使用を、本推奨が上書きする意図はない。</p>
+<p><strong>必要な研究</strong>：包含・除外基準が明確に定義され、複数の関連臨床転帰を測定する大規模多施設RCT。起因菌を広く定義し、病原体特異的な適応・禁忌（特に肺炎球菌とインフルエンザ）があるかを明らかにすべき。</p>
+<h3>20. Question 13・14 — インフルエンザ陽性例の治療</h3>
+<p><strong>Q13（抗ウイルス薬）</strong>：インフルエンザ陽性の入院CAP成人には、<strong>診断前の罹病期間にかかわらず</strong>オセルタミビル等の抗インフルエンザ治療を推奨（強い・moderate）。外来では同じことを提案（条件付き・low）。</p>
+<p>インフルエンザ肺炎の成人における抗インフルエンザ薬の効果を評価した臨床試験はない。複数の観察研究が、インフルエンザ陽性のCAP入院患者でオセルタミビル治療が死亡リスク低下と関連することを示唆する。症状発現または入院から2日以内の治療が最良の転帰をもたらしうるが、症状発現から<strong>4〜5日後まで利益がありうる</strong>。外来でのインフルエンザ薬使用は症状持続期間と下気道合併症の可能性を減らし、<strong>症状発現後48時間以内の投与で最も利益が大きい</strong>。</p>
+<p>外来のCAP＋インフルエンザ陽性例を特異的に評価した研究は同定できなかったが、入院データと、肺炎のないインフルエンザ患者の外来データ（症状消退までの時間と入院予防の改善）に基づいて、同じ推奨を出している。</p>
+<p><strong>Q14（抗菌薬）</strong>：臨床的・画像的にCAPでインフルエンザ陽性の成人には、入院・外来を問わず<strong>標準的な抗菌薬治療を初期に処方することを推奨</strong>（強い・low）。</p>
+<p>細菌性肺炎はインフルエンザ感染と同時に起こることも、一次インフルエンザから回復しつつある患者で症状の悪化として後から現れることもある。インフルエンザと細菌性肺炎で入院した患者の10%もが感染の結果として死亡する。2009年 H1N1 パンデミックの剖検シリーズでは、死亡例の約30%に細菌の重複感染の証拠が見つかった。</p>
+<p>インフルエンザ肺炎に伴う細菌感染で最も多いのは <strong>S. aureus</strong>、次いで S. pneumoniae、H. influenzae、A群レンサ球菌。この病原体スペクトラムを考えると、初期治療にはCAPで一般に推奨される薬剤が適切。MRSAのリスク因子と経験的カバーの要否は、本文書の前段の推奨に従う。急速進行性の重症MRSA肺炎が、特に先行するインフルエンザの状況で、それまで健康だった若年患者に起こることが記述されているが、通常は鼻腔または喀痰で容易に同定される。</p>
+<p><strong>論拠</strong>。細菌重複感染がインフルエンザの一般的かつ重篤な合併症であること、およびインフルエンザ陽性のCAP患者で細菌重複感染を除外できないこと。プロカルシトニンなどのバイオマーカーが低ければ細菌感染の可能性は下がるが、個々の患者で細菌性肺炎を完全に除外できるほどの精度はなく、特に重症CAPではそうである。強い推奨としたのは、CAP患者で適切な抗菌薬治療を遅らせた場合の治療失敗のリスクが大きいため。ただし、CAPかつインフルエンザ陽性で、細菌病原体の証拠がなく（プロカルシトニン低値を含む）、早期に臨床的に安定した患者では、48〜72時間での抗菌薬の早期中止を考慮しうる、と本文が明記している。</p>
+<h3>21. Question 15 — 治療期間</h3>
+<p><strong>推奨</strong>：抗菌薬の投与期間は検証済みの臨床安定の指標（バイタルサイン異常の消失＝心拍数・呼吸数・血圧・酸素飽和度・体温、経口摂取が可能、精神状態が正常）に従って決め、患者が安定に到達するまで、かつ<strong>合計で最低5日間</strong>継続する（強い・moderate）。</p>
+<p><strong>エビデンス</strong>。投与期間を扱った無作為化試験は少なく、質の高いプラセボ対照試験は主に入院例に限られる。それらの試験で示されたのは、①静注アモキシシリン3日で臨床的に改善した患者で、経口アモキシシリンをさらに5日追加してもプラセボと差がない、②静注セフロキシム2日後の経口セフロキシム5日と8日で差がない、③レボフロキサシン 750 mg 1日1回を5日と、500 mg 1日1回を10日で同様、④静注セフトリアキソン5日と10日で同様。複数の最近のメタ解析も5〜7日の短期治療の有効性を示している。</p>
+<p><strong>プロカルシトニンによる期間短縮</strong>については留保が付く。プロカルシトニン誘導パスウェイと連続測定で投与期間を短縮できることを示した研究は複数あるが、それらの多くで平均治療期間が現在の米国の標準診療や本ガイドラインの推奨を大幅に超えていた。加えて、ウイルスと細菌の同時感染時や、レジオネラ・マイコプラズマなど重要な病原体ではプロカルシトニンが上昇しない可能性も指摘されている。したがって連続プロカルシトニン測定が有用なのは、CAPの平均在院日数が通常診療（5〜7日）を超えるセッティングに限られる可能性が高い。</p>
+<p><strong>臨床安定の評価</strong>。標準的な期間で反応しない患者がいることは認識されている。臨床改善の判定基準は複数開発され臨床試験で検証されており、バイタルサイン異常の消失・経口摂取能・正常な精神状態が含まれる。5日以内に臨床安定に到達しないことは、より高い死亡率と不良な転帰に関連する。そのような失敗があれば、現行治療に耐性の病原体、肺炎の合併症（膿胸・肺膿瘍）、あるいは別の感染源・炎症源の評価を促すべきである。臨床安定の評価を診療に導入すると、転帰を悪化させずに抗菌薬投与期間が短縮された。すべての臨床医がCAPの通常診療の一部として臨床安定の評価を用いるべきである。</p>
+<p><strong>より長い期間が推奨される場合</strong>は2つ。①<strong>髄膜炎・心内膜炎その他の深部感染を合併した肺炎</strong>、②本ガイドラインでカバーされない頻度の低い病原体（Burkholderia pseudomallei、結核菌、風土病性真菌など）。</p>
+<p><strong>論拠</strong>。5日未満を支持する最近のデータは乏しいため、リスク・ベネフィットの観点から5日未満で臨床安定に達しても最低5日は治療する。大半の患者は最初の48〜72時間以内に臨床安定に到達するため、合計5日の治療が大半の患者に適切である。非経口から経口へ切り替えるときは、<strong>同一薬剤または同一薬剤クラス</strong>を用いるべき。</p>
+<p>5日を支持する研究の大半が重症CAPを含まないことは認めたうえで、感染性合併症のない重症CAP患者にもこの結果は当てはまると考えると述べている。MRSAまたは緑膿菌が疑われる／証明されたCAPの治療期間は7日とすべきと考えており、2016年 HAP/VAPガイドラインと整合する（この7日は「we believe」として書かれており、等級付きの推奨ではない）。</p>
+<h3>22. Question 16 — フォロー胸部画像</h3>
+<p><strong>推奨</strong>：症状が5〜7日以内に消失したCAP成人に、フォローの胸部画像をルーチンには撮らないことを提案（条件付き・low）。</p>
+<p><strong>エビデンス</strong>。肺炎患者の再撮影の臨床的有用性のデータは限られている。利用可能なデータの大半は、肺炎治療時に認識されなかった肺悪性腫瘍を再撮影で検出できるかを評価したもの。<strong>CAP回復期患者での悪性腫瘍の報告率は1.3%〜4%</strong>。予期しない非悪性の病変を含めると異常所見の率は5%に達しうる。報告されたシリーズでの悪性腫瘍患者はほぼ全員が喫煙者または元喫煙者だった。</p>
+<p>より長期の研究では、<strong>退役軍人省システムのCAP生存者の9.2%</strong>（男性が大半で喫煙率が高い集団）が新たにがんと診断され、<strong>診断までの平均期間は297日</strong>。しかしそのうち退院から90日以内に診断されたのは27%にすぎず、退院後のルーチンのフォローの収率が低いことを示唆する。</p>
+<p><strong>論拠</strong>。利用可能なデータは再撮影の陽性収率が<strong>0.2%〜5.0%</strong>の範囲であることを示唆する。ただしこれらの研究で新たな異常が見つかった患者の多くは、現在または過去の喫煙者として肺がん検診の基準を満たす。</p>
+<h3>23. Conclusions（著者らの総括）</h3>
+<ul><li>新しいデータを踏まえてCAP患者の治療を最適化する推奨が改訂された。<strong>推奨の実装には医療の質改善の手法が不可欠</strong>。</li><li>「標準治療についての強い推奨を許すほど十分に研究された重要な臨床疑問がいかに少ないかは、依然として期待外れである」と明記。各章の「必要な研究」がその答えとなることを期待している。</li><li>耐性菌の増加への懸念は大きいが、大半のCAP患者は数十年使われてきたレジメンで適切に治療できる。一方、重い併存症を持ち医療・抗菌薬との接触が頻繁なCAP患者のサブセットは増えており、一部のセッティングではMRSA・緑膿菌の感染率が経験的治療を正当化するほど高い。</li><li>微生物学的検査は、CAP患者に対して「より迅速な標的治療」または「不要な治療の安全なデエスカレーション」という証明された利益をもたらす、迅速・正確・安価な検査をまだ実現していない。例外はMRSAとインフルエンザの迅速検査。それまで多くの患者の治療は経験的なままである。</li><li>2019年版は微生物学的検査のために気道検体をルーチンに採取することを推奨する患者の割合を有意に増やした。この判断は高品質エビデンスではなく、HCAP区分の導入以来生じた抗MRSA薬・抗緑膿菌薬の過剰使用を是正したいという意図に主に基づくと自ら明記している。</li><li>同様に、マクロライド単剤への支持撤回も、高品質の臨床研究ではなく集団レベルの耐性データに基づくと認めている。</li><li>「経験的治療のワンサイズ・フィッツ・オールのスキーマを作ることは不可能」であり、臨床医は地域の耐性菌のスペクトラムと頻度を考慮して、いかなるアプローチも自分で検証しなければならない。</li></ul>
+<h3>24. その後どうなったか（2019年以降・Vault内で裏が取れるものだけ）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>ATS/IDSA 2019 の立場</th><th>その後（Vault収載ノート）</th></tr></thead>
+<tbody>
+<tr><td>重症CAPへのステロイド</td><td>ルーチンには使わないことを提案（条件付き・moderate）</td><td>反転した。<span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>は重症細菌性CAPへのステロイド投与を強い推奨（院内死亡 RR 0.62、95%CI 0.45–0.85、確実性 moderate）。<span class="wl">非ウイルス性市中肺炎へのステロイドは短期死亡と挿管を減らす（30RCT・7519例のSR・MA・ICM2025）</span>は28〜30日死亡 RR 0.82（0.74–0.91、moderate）、侵襲的人工呼吸 RR 0.63（0.48–0.82、high）、介入を要する高血糖 RR 1.32（1.12–1.56、moderate）。2019年版の「未報告の大規模試験（NCT01283009）」への言及は、この10年でステロイドの結論が動くことを著者らが予期していた証拠でもある</td></tr>
+<tr><td>非重症CAPへのステロイド</td><td>使わないことを強い推奨（high）</td><td>変わっていない。2024・2025年の推奨も対象は重症例に限られる</td></tr>
+<tr><td>ウイルス性肺炎へのステロイド</td><td>重症インフルエンザ肺炎では使わないことを提案（条件付き・low）</td><td>ICM2025のSR・MAは「非ウイルス性」CAPに限定されており、ウイルス性は依然として別扱い</td></tr>
+<tr><td>重症CAPの表現型による層別化</td><td>扱っていない</td><td><span class="wl">高炎症型の重症市中肺炎で表現型は転帰もステロイド反応性も変えなかった — 120例の2群クラスター解析（Scientific Letter・ICM2026）</span>で、高炎症型でも転帰・ステロイド反応性は変わらなかった</td></tr>
+<tr><td>βラクタム＋マクロライド</td><td>重症CAPで強い推奨。βラクタム＋キノロンより証拠が強い</td><td><span class="wl">重症市中肺炎（sCAP）の国際ガイドライン — 8つの臨床疑問、マクロライド併用・ショック時のステロイド（ERS ESICM ESCMID ALAT・ERJ2023）</span>も同方向（キノロンよりマクロライドの追加を提案・条件付き）。一方 <span class="wl">市中肺炎へのβラクタム＋マクロライド併用は死亡を減らさない — 重症例でも同等（傾向スコア2784例・BMCInfectDis2026）</span>の日本の傾向スコア解析2,784例では死亡の絶対差 0.00%（95%CI −3.73〜3.71）。ただしCURB-65 ≥3 のサブグループは29例 vs 29例で、検出力不足であり「差がない」証明にはなっていない</td></tr>
+<tr><td>プロカルシトニン</td><td>抗菌薬「開始」の差し控えには使わない（強い・moderate）</td><td>役割が「終了」に移った。<span class="wl">重症市中肺炎管理のガイドライン（ICM2023）</span>はPCTによる治療期間短縮を提案（low）。ただし臨床安定が得られ5〜7日で済むならPCTは有用でない可能性も併記</td></tr>
+<tr><td>誤嚥への嫌気性菌カバー</td><td>膿瘍・膿胸を除きルーチンには不要（条件付き・very low）</td><td><span class="wl">誤嚥性肺炎ガイドライン フランス感染症学会2025 — 診断はCT＋誤嚥リスク、第一選択はAMPC・CVAで5日間、メトロニダゾール併用は不要（IDNow2025）</span>も同方向。ICM2023 sCAP ガイドラインも good practice statement として同じ立場</td></tr>
+<tr><td>治療期間</td><td>臨床安定＋最低5日（強い・moderate）</td><td><span class="wl">D-PRISM 72か国1296人の調査 — 3割が画像所見を肺炎診断に必須と考えず、抗菌薬は5〜7日が最頻（CritCare2024）</span>で、実臨床の最頻も5〜7日</td></tr>
+<tr><td>HCAPの廃止</td><td>廃止を強い推奨（moderate）</td><td>以後のCAP・sCAPガイドラインで復活していない</td></tr>
+<tr><td>レジオネラ診断</td><td>重症CAPで尿中抗原＋下気道培養/NAAT（条件付き・low）</td><td><span class="wl">重症レジオネラ症 — ICU入室で死亡40%、UAT陰性でも否定できずPCRを重ねる、治療はレボフロキサシンかアジスロマイシン（総説・AnnIntensiveCare2024）</span>で、尿中抗原陰性でも否定できずPCRを重ねる、という方向にさらに強まった</td></tr>
+<tr><td>重症CAPの定義</td><td>ATS/IDSA 2007（major 1 or minor 3以上）に一本化</td><td>統一されていない。SCCM2024 は ATS/IDSA 2007・CAPE COD 基準・PSI IV/V・CURB-65 ≥3 を並記するだけで、どれを使うか指定していない</td></tr>
+<tr><td>実装ツール</td><td>本文書はフローチャートを持たない</td><td><span class="wl">市中肺炎の臨床パスウェイ — 重症度判定・検査・初期抗菌薬とMRSA緑膿菌リスク（IDSAパスウェイ・2019）</span>が本ガイドラインをフローチャート・表に落とし込んだ実装文書。ウイルス陽性かつ細菌重複感染の疑いが低ければPCT ≤0.25 を根拠に抗菌薬を控えることを考慮、という本体には無い上乗せ（enhancement）を含む</td></tr>
+</tbody></table></div>
+<p><strong>Vault未収載</strong>：本ガイドラインを紹介した JAMA 2020 の記事本文（旧ノートが指していたもの）。オンライン補遺（Executive Summary、CAP微生物学の詳細、GRADE手順、COI管理手順）。</p>
+<h3>25. 旧ノートの記述はどこまで裏が取れたか</h3>
+<p>改稿前の本ノートは27行で、内容は「JAMAの記事ページのクリップ」だった。PDFとの照合結果は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>旧記述</th><th>判定</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>対象論文は JAMA 掲載の「Diagnosis and Treatment of Adults With Community-Acquired Pneumonia」（Guidelines/Review）、2020年</td><td><strong>誤り（対象論文を差し替えた）</strong></td><td>手元PDFは Metlay JP, Waterer GW ら, Am J Respir Crit Care Med. 2019;200(7):e45–e67, DOI 10.1164/rccm.201908-1581ST。ATS 2019年5月承認・IDSA 2019年8月承認の<strong>公式診療ガイドライン本体</strong>。誌名・年・区分がいずれも旧記述と異なる</td></tr>
+<tr><td>「本文の詳細な推奨内容はキャプチャされていない」「ガイドライン本体の推奨内容は含まれていない」</td><td><strong>旧ノートについては正しい</strong></td><td>旧ノートは実質的に推奨をひとつも記載していなかった。本改稿で全推奨を収載した</td></tr>
+<tr><td>「CAPにおけるコルチコステロイドの位置づけが取り上げられている」</td><td><strong>本ガイドラインでも該当あり</strong></td><td>Question 12 が丸ごとステロイド。ただし旧ノートが指した JAMA 2020-02-06 の Review 記事そのものは本PDFから確認できず<strong>未検証</strong></td></tr>
+<tr><td>「CAP治療の新規抗菌薬レファムリン（lefamulin）」</td><td><strong>本ガイドラインでも該当あり</strong></td><td>Question 9 の「必要な研究」で、レファムリン（新規プルーロムチリン系）が入院CAP成人でモキシフロキサシンに非劣性と最近示された、と記載。ただし旧ノートが指した JAMA の Opinion 記事は<strong>未検証</strong></td></tr>
+<tr><td>記事ページURL（jamanetwork.com の article-abstract/2760882）</td><td><strong>未検証</strong></td><td>本PDFからは確認できない。旧クリップの記載をそのまま残す</td></tr>
+<tr><td>frontmatter の <code>journal: JAMA</code> / <code>published: 2020</code></td><td><strong>誤り。修正した</strong></td><td>AJRCCM / 2019-10-01 に訂正</td></tr>
+<tr><td>原文PDF/図表は 08-Archive/Evernote/Inbox由来/ICU/_resources に保管</td><td><strong>保管場所が異なる</strong></td><td>実際の所在は <code>08-Archive/Evernote/NeuroICU/_resources/【ER】【ICU】市中肺炎ガイドライン2019_ATS.resources/</code></td></tr>
+</tbody></table></div>
+<h3>26. 批判的吟味（JCでの論点）</h3>
+<ol><li>強い推奨とエビデンスの質の乖離が大きい。 Q1・Q2 の中核的な推奨は very low quality の strong recommendation である。GRADE の例外規定に沿っているとはいえ、本文書の推奨の相当部分は「委員会の意向」であり「データ」ではない。著者ら自身が Q1 で「これらの推奨は高品質エビデンスに基づかず、抗菌薬使用を改善したいという委員会の願望を反映する」と明記し、Conclusions でも「培養を出す患者を増やす判断は高品質エビデンスではなく、HCAP以来の広域抗菌薬過剰使用を是正する意図に基づく」と繰り返している。<strong>JCではここを最初に押さえるべき</strong>。</li></ol>
+<ol><li>HCAPの廃止は正しいが、代替案のエビデンスはHCAPより弱い。 HCAPの廃止は「HCAPが耐性菌を予測しない」という高品質の転帰研究に基づく強い推奨。しかし代わりに提示された「地域検証したリスク因子」というアプローチは、著者自身が「高品質な研究に基づいていない。そのような研究が存在しないため」と書いている。エビデンスが強いのは「否定」の側であって「代替」の側ではない。実装する側は、この非対称性を理解したうえで自施設のデータを取りにいく必要がある。</li></ol>
+<ol><li>「検証済みリスク因子」を持つ施設がどれだけあるか。 地域検証（local validation）を要求する推奨は理屈としては正しいが、CAPの全症例を分母にしてMRSA・緑膿菌の頻度を算出している施設は現実にはほとんどない。著者らは「培養推奨を採用すれば時間をかけてデータを生成できる」と述べるが、それは「データが揃うまでは既発表のリスク因子で暫定運用する」ことを意味し、廃止したはずのHCAP的運用が事実上続く余地を残す。</li></ol>
+<ol><li>重症CAPの定義が2007年版のまま。 本ガイドラインの Table 1 のタイトルは「<strong>2007 IDSA/ATS Criteria</strong>」であり、12年間更新されていない。しかもその性能は、ICU入室予測で「minor 3つ以上」単独だと<strong>感度56%</strong>にすぎない。この定義が検査・抗菌薬・MRSAカバーの3つすべての分岐点になっている以上、定義の限界はガイドライン全体に伝播する。</li></ol>
+<ol><li>ステロイドの節に内的な緊張がある。 「ステロイド群で死亡が過剰であることを示した研究は報告されていない」という一文の直後の段落で、<strong>インフルエンザ肺炎ではステロイドで死亡が増えうる</strong>とするメタ解析を引いている。前者はCAP全般のRCT、後者はインフルエンザの後ろ向き研究という文脈の違いはあるが、抜き書きすると矛盾して読める箇所。加えて、本節は「少なくとも1本の大規模試験が完了しているが未報告」と述べており、<strong>著者ら自身が結論の暫定性を明示していた</strong>。実際その後、SCCM 2024 で推奨が反転している。</li></ol>
+<ol><li>等級のない記述が推奨と同列に読まれやすい。 ①「βラクタム単剤をルーチンに用いるべきでない」（Q9.1）、②「キノロン単剤とβラクタム＋ドキシサイクリンは重症CAPには推奨しない」（Q9.2）、③「MRSA・緑膿菌なら7日」（Q15）、④「SSCのステロイド推奨を endorse」（Q12）。いずれも推奨ブロックの外にあり、強さもエビデンスの質も付いていない。実装文書に落とすときに等級付き推奨と混ぜないこと。</li></ol>
+<ol><li>Table 2（2007年版との差分）が推奨を単純化しすぎている。 ステロイドの行は「Recommended not to use.」と1行にまとめているが、実際は重症度別に強さも質も異なる3本の推奨がある。喀痰・血液培養の行も「重症例＋MRSA/緑膿菌に経験的治療中の入院例」しか書いておらず、条件付き推奨である「感染既往」と「直近90日の入院＋非経口抗菌薬」が落ちている。要約表だけを読んで実装すると推奨を取りこぼす。</li></ol>
+<ol><li>数値の内的不一致（軽微）。 Q16 の Summary は悪性腫瘍の報告率を「1.3%〜4%」、非悪性を含めて「5%に達しうる」としているが、Rationale は「陽性収率0.2%〜5.0%」と書いており、下限0.2%の出所が Summary に無い。</li></ol>
+<ol><li>Q3 の推奨に重複がある。 「レジオネラ尿中抗原をルーチンには行わない、ただし重症CAPは除く」（3-5）と、「重症CAPではレジオネラ尿中抗原と下気道培養/NAATを行うことを提案」（3-6）は、尿中抗原の部分が二重に書かれている。実装時は3-6のほうを採る（下気道検体が加わるため）。</li></ol>
+<ol><li>COIの読みどころ。 資金はATSとIDSAのみで企業資金はない。開示ありは5名（Anzueto、Dean、Flanders、Long、Metersky）で、共同筆頭・共同議長の Metlay・Waterer を含む10名が「関連する商業的関係なし」と申告している点は、ガイドラインとしては健全。ただし注意すべき重なりが1つある。Dean は Cempra と Paratek の諮問委員を務めており、Paratek はオマダサイクリンの開発企業である。本ガイドラインは Q9 でオマダサイクリンを「単一報告にすぎず安全性情報も不十分」として<strong>代替選択肢に載せないと決めており</strong>、開示先に不利な方向の判断になっている。同様にレファムリンも「必要な研究」に置くにとどめた。COIが推奨を歪めた形跡は本文からは読み取れない。もう1点、Long（方法論担当）の開示が大麻関連3社（Aurora Cannabis、Canopy Growth、Cronos Group）の保有で、CAPの主題とは無関係。</li></ol>
+<p><strong>11. 本文に書かれていないこと</strong>（読者が探して見つからない項目）。</p>
+<ul><li><strong>日本の疫学・保険適用への言及は一切ない</strong>。「米国内で最近の海外渡航がない成人」と明示的にスコープを限っている。マクロライド耐性率25%という閾値も、耐性率30%超という米国データも、そのまま日本に持ち込めない。</li><li><strong>肺炎の予防（ワクチン）と、肺炎そのものの診断基準</strong>は明示的に対象外。</li><li><strong>免疫不全患者、小児、渡航歴のある患者</strong>は対象外。</li><li><strong>COVID-19 は当然ながら存在しない</strong>（2019年9月の文書）。</li><li><strong>ウイルス性肺炎の多項目PCRパネル</strong>の位置づけは扱われていない（ICM2023 の sCAP ガイドラインが引き継いだ論点）。</li><li><strong>腹臥位・HFNC・NIV といった呼吸管理</strong>は完全に対象外。ICU入室の判断までで、そこから先の管理には触れない。</li><li><strong>図（Figure）が1枚もない</strong>。表4つだけの文書である。</li></ul>
+<h3>27. 主要な引用文献一覧</h3>
+<p>本文で推奨の根拠として名前を挙げて論じられているもの（本ノートは参考文献リストを読んでいないため、本文中で著者名・内容が特定できるものに限る）。</p>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・出典</th></tr></thead>
+<tbody>
+<tr><td>前版のATS/IDSA CAPガイドライン</td><td>Mandell LA, Wunderink RG, Anzueto A, Bartlett JG, Campbell GD, Dean NC, et al. Clin Infect Dis. 2007;44:S27–S72</td></tr>
+<tr><td>GRADE の PICO 枠組み</td><td>Guyatt GH, Oxman AD, Kunz R, Atkins D, Brozek J, Vist G, et al. J Clin Epidemiol. 2011;64:395–400</td></tr>
+<tr><td>病歴・身体所見だけではCAPを診断できない</td><td>Metlay JP, Kapoor WN, Fine MJ. JAMA. 1997;278:1440–1445</td></tr>
+<tr><td>尿中抗原に基づく標的治療 vs 経験的治療のRCT（177例）</td><td>Falguera M ら（本文引用28）</td></tr>
+<tr><td>肺炎球菌・レジオネラ尿中抗原と院内死亡57%低下</td><td>Costantini ら（本文引用27）</td></tr>
+<tr><td>尿中抗原と30日死亡25%低下</td><td>Uematsu ら（本文引用7）</td></tr>
+<tr><td>重症CAP基準のICU入室予測性能（メタ解析）</td><td>本文引用62・63</td></tr>
+<tr><td>SMART-COP</td><td>本文引用60</td></tr>
+<tr><td>キノロン単剤 vs βラクタム＋マクロライドの系統的レビュー（16 RCT・4,809例）</td><td>本文引用104</td></tr>
+<tr><td>βラクタム単剤 vs βラクタム＋マクロライドのコホート・観察研究統合</td><td>Nie ら（本文引用108）</td></tr>
+<tr><td>βラクタム＋マクロライドの死亡低下は主に重症CAP</td><td>Horita ら（本文引用109）</td></tr>
+<tr><td>重症CAPでのマクロライド含有レジメンの死亡低下（約10,000例のメタ解析）</td><td>Sligl ら（本文引用111）</td></tr>
+<tr><td>βラクタム＋キノロン vs βラクタム＋マクロライドの系統的レビュー（観察研究17本）</td><td>Vardakas ら（本文引用112）</td></tr>
+<tr><td>オマダサイクリン vs モキシフロキサシンの非劣性</td><td>本文引用106</td></tr>
+<tr><td>レファムリン vs モキシフロキサシンの非劣性</td><td>本文引用110</td></tr>
+<tr><td>2005年 ATS/IDSA HAP/VAP ガイドライン（HCAP導入元）</td><td>本文引用122</td></tr>
+<tr><td>2016年 IDSA/ATS HAP/VAP ガイドライン（MRSA・緑膿菌の用量の出典）</td><td>本文引用166</td></tr>
+<tr><td>IDSA インフルエンザ診療ガイドライン</td><td>本文引用33</td></tr>
+<tr><td>Surviving Sepsis Campaign（難治性敗血症性ショックのステロイド）</td><td>本文引用169</td></tr>
+<tr><td>未報告の大規模ステロイド試験</td><td>clinicaltrials.gov NCT01283009</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ATS/IDSA 2019 の実装で明日変わるのは3つ。<mark class="hl">①HCAPという区分で広域抗菌薬を選ぶのをやめ、MRSA・緑膿菌は「過去の気道分離歴」または「直近90日の入院＋非経口抗菌薬（AND）」の2条件だけで始めて48時間で降ろす</mark>。<mark class="hl">②重症CAP（ATS/IDSA 2007のmajor1つ or minor3つ以上）では挿管直後の気管内吸引痰・血液培養・肺炎球菌尿中抗原・レジオネラ尿中抗原＋下気道培養/NAATをセットで出す</mark>。<mark class="hl">③抗菌薬は臨床安定を確認したうえで最低5日、症状が5〜7日で消えたらフォロー胸部画像は撮らない</mark>。 ただし<mark class="hl"><strong>ステロイドだけは2019年版に従ってはいけない</strong></mark>。当時は重症CAPでも「ルーチンには使わない（条件付き）」だったが、SCCM 2024で強い推奨に反転している（院内死亡 RR 0.62）。 そして本文書全体を読むときの姿勢として、<mark class="hl">「強い推奨」の多くが very low quality に乗っており、著者自身が「委員会の意向であってデータではない」と明記している</mark>ことを忘れないこと。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

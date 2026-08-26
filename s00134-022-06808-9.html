@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>血行動態評価による容量状態の把握（ICM2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-022-06808-9.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">血行動態評価による容量状態の把握（ICM2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>De Backer D, Aissaoui N, Cecconi M, Chew MS, Denault A, Hajjar L, Hernandez G, Messina A, Myatra SN, Ostermann M, Pinsky MR, Teboul JL, Vignon P, Vincent JL, Monnet X. How can assessing hemodynamics help to assess volume status? Intensive Care Med. 2022;48:1482-1494. doi:10.1007/s00134-022-06808-9</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2022-08-10）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">doi.org/10.1007/s00134-022-06808-9</a>（本文PDFは別途）</dd><dt>原題</dt><dd>How can assessing hemodynamics help to assess volume status?</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-022-06808-9.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-022-06808-9.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-022-06808-9.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「輸液を入れるか」は3段階で決める</strong>。①引き金（組織低灌流の徴候）があるか → ②利益とリスクの釣り合いはどうか → ③そのうえで輸液反応性を評価する。この順序を守る。<mark class="hl">輸液反応性が「あるから入れる」のではなく、①②を通過した患者にだけ③を測る</mark></li><li><strong>引き金に乳酸単独を使わない</strong>。本文は CRT延長・皮膚の網状皮斑（mottling）・静脈血酸素飽和度低下・静脈–動脈 PCO₂ 較差の開大を「優れた引き金」とし、乳酸は単独では不十分と明記する（消退が遅く、他因子でも上がるため）。当院の敗血症バンドルで「乳酸が下がらない＝輸液追加」という反射を作らない</li><li><strong>CVPは「捨てる」のではなく「両端だけ使う」</strong>。低値＝低〜正常容量で輸液は概ね忍容される／高値＝高〜正常容量あるいは右室不全で輸液が有害になりうる。7〜15 mmHg の中間帯は情報価値が低い、と割り切って読む</li><li><strong>輸液チャレンジの手順を紙に固定する</strong>。4 mL/kg の晶質液を10分で投与し、<strong>投与終了時点で</strong> CO（またはVTI）と CVP を同時に読む。CO +10%以上かつCVPほぼ不変＝陽性、CO不変でCVP +3 mmHg＝陰性。5〜10分後には効果が消えうるので測定を遅らせない</li><li><strong>PPVを表示している患者では「使えない条件」を毎回チェックする</strong>。自発呼吸・不整脈・右室不全＝偽陽性、低一回換気量・低肺コンプライアンス・極端な頻呼吸＝偽陰性。低換気量なら一回換気量チャレンジ（6→8 mL/kg）に切り替える</li><li><strong>PACのCOで動的テストをしない</strong>。半連続COは直前3〜5分の平均値なので、PLRやEEOの数十秒の変化を捉えられない。PLR／EEOを回すならエコーVTIか校正済みパルス波形解析（経肺熱希釈）を使う</li><li><strong>エコーは「入れてよいか」だけでなく「入れてはいけないか」を見る道具として使う</strong>。急性肺性心（acute cor pulmonale）が見えたら輸液は禁忌、というのが本文の明示的な使い方</li><li><strong>除水期（de-escalation）は「行き過ぎ」を最大リスクとして設計する</strong>。強制除水では12%の症例で速度低下または中止が必要だった、というデータを共有し、除水前に前負荷反応性がある患者を除外する運用を検討する</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：輸液は不足でも過剰でも死亡増加と関連する。敗血症の現行ガイドラインは初期3時間以内に晶質液30 mL/kg以上を提案している。輸液過剰の害（浮腫、右室不全、臓器灌流圧低下、腹腔内圧上昇、腎機能障害）は広く認識されている。前負荷の静的指標（CVP・PAOP）は輸液反応性の予測に向かない。</li><li><strong>Unknown（分かっていなかったこと）</strong>：「容量状態（volume status）」を単一の指標で定義することはできず、各モニタリング手法が容量状態のどの側面を測っているのか、どう組み合わせれば臨床判断になるのかが整理されていなかった。制限 vs リベラルの固定レジメンを比較したRCTは差を示せず、そもそも「個別化しないこと」が失敗の原因ではないかという疑問が残っていた。</li><li><strong>What's new（本総説の新規性・意義）</strong>：容量状態を「血管内の圧」「血管内の容積」「過剰の帰結（血管外肺水分量 EVLW・静脈うっ滞）」の3層に分解し、各モニタリング手法をこの座標系に配置した（Fig 1・Fig 2）。そのうえで、<strong>輸液の意思決定を「引き金 → 利益/リスク → 輸液反応性 → 輸液チャレンジと耐容性の評価」という順序</strong>にまとめ（Fig 4）、エコーの所見を「低容量／輸液反応性／正常容量／高容量・前負荷増加」の4列で対比する一覧表（Fig 3）を提示した。結論は<strong>固定レジメンではなく個別化</strong>である。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 容量状態を測る単一の指標は存在しない。<strong>圧・容積・血管外肺水分量・静脈うっ滞を組み合わせて「輸液の効きそうさ」と「輸液の耐えられそうさ」を別々に評価し</strong>、引き金 → 利益/リスク → 反応性 → チャレンジの順で個別化するのが、固定的な制限／リベラル戦略より望ましい。</p>
+</div>
+<ul><li><strong>「容量状態」と「輸液反応性」は別物である</strong>。血管内総容量が保たれていても、血管トーヌス低下（敗血症・麻酔）で平均体循環圧（Pms）が下がれば輸液反応性は出る。逆に血液プーリングで総血液量が増えていても輸液反応性がありうる。だから総血液量を測ること自体の臨床的価値は限定的で、<strong>輸液反応性（fluid responsiveness）と輸液耐容性（fluid tolerance）を推定するほうが有用</strong>、というのが本総説の出発点。</li><li>輸液の一次目標は<strong>心拍出量（CO）の増加</strong>であり、血圧の上昇は動脈エラスタンス次第で変動する。輸液は Pms を上げ、Pms の上昇が右房圧の上昇を上回るときにのみ静脈還流とCOが有意に増える（＝心室が前負荷反応性であるとき）。</li><li><strong>前負荷の推定が容量評価の基礎</strong>だが、臨床で使えるのは心室の「寸法」と「圧」だけで、いずれも不完全。曲線的な圧–容積関係のため、<strong>容積指標は低容量の検出に感度が高く、圧指標は高容量（hypervolemia）の検出に感度が高い</strong>。拡張機能が悪い患者では圧–容積関係が上方にシフトし傾きが急になるため、同じ容量変化でより大きな圧上昇が生じる。</li><li><strong>CVP</strong>：極端値だけが役に立つ。低値＝容量は低いか正常で輸液は忍容されやすい。高値＝容量は高いか正常、あるいは右室が不全で輸液は有害になりうる。<strong>中央付近（7〜15 mmHg）は情報が乏しい</strong>。加えて「CVPが上がるのにCOが改善しない」という<strong>変化のパターン</strong>は輸液が耐えられていないことを示す。</li><li><strong>肺動脈カテーテル（PAC）</strong>：左右の圧とCOを同時に得て血行動態プロファイルを包括的に描ける。PAOPは（極端値を除き）輸液反応性の予測には向かないが、<strong>輸液による肺水腫リスクの指標</strong>として有用。ただし閾値は血管リモデリングと毛細血管透過性に左右される。PACのCOは信頼できるが間欠的で、半連続測定は直前3〜5分の平均を反映するため、<strong>PLRやEEOのような動的テストには使えない</strong>。</li><li><strong>経肺熱希釈</strong>：胸腔内血液量（＝ほぼ心腔容積＝前負荷の妥当な代替）、EVLW、COを測る。静的指標なので前負荷反応性は反映しない。<strong>容積測定は高容量の検出が不得手</strong>だが、CVPと組み合わせると改善する。EVLWは肺の水浸しの程度を表し、死亡の独立予測因子。校正済みパルス波形解析によるCOはPLR・EEOに最適。</li><li><strong>心エコー</strong>：容積・圧・CO・機能を推定し、血行動態フェノタイプを短時間で判別する。<strong>急性肺性心（輸液は禁忌）を容易に見つけられる</strong>のが大きな利点。限界は充満圧推定の精度が低いこと、描出不良、そして連続ではなく間欠的であること。</li><li><strong>肺エコーは容量状態ではなく肺水腫の程度を評価する</strong>。Bラインは間質性肺水腫を示すが定量は容易でない。輸液投与中や人工呼吸離脱中にBライン数を経時的に数える使い方が示されている。</li><li><strong>静脈エコー</strong>：IVC径と呼吸性変動に、肝静脈・門脈・（場合により）腎静脈の血流パターンを組み合わせて静脈うっ血の程度を評価する。ただし静脈うっ滞の所見は高容量だけでなく<strong>右室機能障害や胸腔内圧上昇でも生じる</strong>。</li><li><strong>輸液の適応は3段階</strong>。①引き金（組織低灌流の徴候）→ ②利益/リスクの評価 → ③輸液反応性の評価、という順序。引き金として優れるのは CRT延長・皮膚mottling・静脈血酸素飽和度低下・静脈–動脈PCO₂較差の開大で、<strong>乳酸単独では不十分</strong>。灌流指標が正常化した患者で蘇生を継続すると生存が悪化したという報告がある。</li><li><strong>輸液反応性の予測</strong>：静的指標の単一値は（極端値を除き）役に立たない。PLRは約300 mLの輸液負荷を可逆的に再現するが、<strong>血圧や脈圧では判定できずCO（またはその代替）で測る必要がある</strong>。PPVは自発呼吸・不整脈・右室不全で偽陽性、低一回換気量・低肺コンプライアンス・極端な頻呼吸で偽陰性になる。低換気量下では一回換気量チャレンジ（6→8 mL/kg）が限界を回避する。呼気終末閉塞（EEO）の診断閾値はCO +5%と低く、多くの測定手法の最小検出可能変化に近い。</li><li><strong>輸液チャレンジの実施法</strong>：4 mL/kg の晶質液を10分で投与すると、より遅い速度や少量投与に比べて最も多くの反応者を同定できる。効果判定は<strong>投与終了時点</strong>で行う（5〜10分後には消えうる）。CO +10%以上かつCVPほぼ不変＝陽性、CO不変でCVP +3 mmHg上昇＝陰性、両者とも有意でない＝判定不能。ミニ輸液チャレンジ（50〜100 mLを1分）は慎重に扱う。</li><li><strong>戦略</strong>：固定的な制限／リベラルではなく個別化する。前負荷反応性のない患者では輸液を控え、リスクが高すぎる患者では避ける。ノルアドレナリンの早期開始は<strong>ストレス血液量（stressed volume）を増やす</strong>ため輸液の効果を増強し、総輸液量を減らしうる。除水期は「行き過ぎ」が最大のリスクで、不足too littleも過剰too muchも死亡増加と関連する。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 容量評価の生理学（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>容量状態（volume status）</strong> という言葉は日常的に使われるが、実は測れる単一の量ではない。血管内の血液は2つの状態に分けて考える。</p>
+<p><strong>アンストレス容量（unstressed volume）</strong>＝血管の中にあるが血管壁を押し広げるほどではなく、測定可能な血管拡張圧を生まない部分。血管の形状は変わるが伸展はしていない。 <strong>ストレス容量（stressed volume）</strong>＝血管を拡張させ、<strong>平均体循環圧（mean systemic pressure, Pms）</strong> を上昇させる部分。Pms は静脈還流の「上流の圧」である。</p>
+<p>各血管床はアンストレス容量を満たすまでの必要量が異なるため、<strong>血液が体内のどこに分布しているかで、ストレス／アンストレスの比率が大きく変わる</strong>。例えば内臓（splanchnic）循環はアンストレス容量が大きく、低容量血症の早期（代償期）には内臓から中心コンパートメントへ血液が移動して Pms を保つ。逆に敗血症や麻酔で血管トーヌスが下がると、<strong>総血液量が保たれていても Pms は著しく下がる</strong>。血液プーリングで総血液量が増えていても、なお輸液反応性がありうる。</p>
+<p>したがって「総血液量を測る」ことは臨床判断に直結しない。代わりに次の2つを別々に見積もる。</p>
+<ul><li><strong>輸液反応性（fluid responsiveness）</strong>＝輸液を入れたらCOが増えるか。フランク・スターリング曲線の傾きが立っている（前負荷依存）位置にいるか。</li><li><strong>輸液耐容性（fluid tolerance）</strong>＝輸液を入れて害が出ないか。EVLW・静脈うっ滞・腹腔内圧・右室機能などが決める。</li></ul>
+<p><strong>用語の整理</strong></p>
+<ul><li><strong>CO（cardiac output）</strong>：心拍出量。輸液の一次目標はこれを増やすこと</li><li><strong>CVP（central venous pressure）</strong>：中心静脈圧。右室前負荷のマーカー</li><li><strong>PAOP（pulmonary artery occlusion pressure）</strong>：肺動脈閉塞圧（＝楔入圧）。左房圧の代替で、肺水腫リスクの指標</li><li><strong>EVLW（extravascular lung water）</strong>：血管外肺水分量。経肺熱希釈で測る、肺の「水浸し」の量</li><li><strong>PLR（passive leg raising）</strong>：受動的下肢挙上。約300 mLの輸液負荷を可逆的に再現するテスト</li><li><strong>PPV / SVV</strong>：脈圧変動／一回拍出量変動。人工呼吸による心肺相互作用を利用した動的指標</li><li><strong>EEO（end-expiratory occlusion）</strong>：呼気終末閉塞テスト。数秒間換気を止めてCOの反応を見る</li><li><strong>VTIlvot</strong>：左室流出路の速度時間積分。心エコーでの一回拍出量の代替</li><li><strong>VExUS的な静脈評価</strong>：IVC径＋肝静脈・門脈・腎静脈のドプラ波形で静脈うっ血を段階評価する考え方（本文はVExUSという語は使わず「venous ultrasound」として記述）</li></ul>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p>重症患者における輸液管理は、①出血性ショックでの欠乏の補充、②敗血症や高リスク手術における組織灌流改善のための心前負荷の最適化、③輸液過剰患者からの除水、という広い幅を持つ。</p>
+<p>実験的敗血症では輸液が生存期間を延ばす。しかし輸液は<strong>適正な用量（volume・輸液種類・投与速度で定義される）</strong>で投与されるべきで、不足も過剰もいずれも死亡増加と関連する。敗血症患者に対する現行ガイドラインは初期3時間以内に晶質液を最低30 mL/kg 投与することを提案している。この一律の計算式は多くの患者で妥当かもしれないが、<strong>輸液量と死亡の関連がより強く出る最重症の患者</strong>では、個別化のほうが望ましい可能性が高い。輸液戦略の調整では、重症度に加えて心機能や輸液耐容性に影響する諸因子を考慮すべきである。</p>
+<p>輸液管理はショックの各段階で変わる。輸液投与は主に <strong>salvage（救命）</strong> 期と <strong>optimization（最適化）</strong> 期に行われ、除水は <strong>stabilization（安定化）</strong> 期と <strong>de-escalation（離脱）</strong> 期に検討される。各段階で、低容量血症の存在と輸液の必要性、輸液への反応、除水の必要性をモニタリング機器が示唆すべきである。</p>
+<h3>3. 方法（本総説の性格）📐</h3>
+<ul><li><strong>デザイン</strong>：Intensive Care Medicine の招待総説（REVIEW）。系統的レビューでもメタ解析でもなく、<strong>推奨の格付け（GRADE等）を伴わない専門家によるナラティブ総説</strong>である。文献検索式・選択基準・エビデンス評価の手続きは本文に記載されていない。</li><li><strong>対象</strong>：重症患者（ICU）における輸液管理全般。ショックの4病型を細かく分けず、輸液の意思決定という横断的な軸で整理している。</li><li><strong>構成</strong>：①容量状態と輸液療法の生理学的概念 → ②輸液に何を期待するか → ③輸液の望ましくない効果 → ④モニタリング手法（血漿・血液量／CVP／PAC／経肺熱希釈／心エコー／肺エコー／静脈エコー）→ ⑤血液量・EVLW・輸液反応性の統合 → ⑥輸液蘇生はいつ適応か → ⑦輸液反応性をどう予測するか → ⑧輸液チャレンジの実施法 → ⑨どの戦略か → ⑩結論。</li><li><strong>図表</strong>：Figure 1〜4 の4点。Figure 3 はページをまたぐ大型の一覧表（3枚組）。</li><li><strong>利益相反</strong>：多くの著者がモニタリング機器メーカー（Edwards Lifesciences、Getinge、Philips、Baxter、Masimo、Vygon 等）との関係を申告している。<strong>機器を用いたモニタリングを推奨する総説であることと併せて読む必要がある</strong>（Aissaoui、Hajjar、Hernandez、Myatra、Vincent は利益相反なしと申告）。</li></ul>
+<h3>4. 輸液に何を期待するのか 💧</h3>
+<p>輸液の一次目標は <strong>COの増加</strong> である。動脈圧の上昇は一定せず、<strong>動脈エラスタンス（arterial elastance）に依存する</strong>。</p>
+<p>機序は単純である。輸液は Pms（静脈還流の上流圧）を上げる。これが有意な静脈還流とCOの増加につながるのは、<strong>心室が前負荷反応性であるとき</strong>だけである。その場合にのみ Pms の上昇が右房圧の上昇を上回るからである。ただしベッドサイドで Pms を日常的に推定することは行われていない。</p>
+<p><strong>容量への反応は一定しない</strong>ため、血行動態モニタリング機器の主要な目的は、①輸液反応性の評価を助けること、②投与後に輸液の有効性を評価すること、の2つに置かれるべきである。</p>
+<h3>5. 輸液には望ましくない効果がある ⚠️</h3>
+<p>輸液蘇生は輸液過剰（fluid overload）に寄与しうる。血管拡張による血管床の拡大、毛細血管漏出、そして<strong>輸液ボーラスの血行動態効果が一過性である</strong>ことが、輸液投与が頻回に繰り返される理由を説明する。加えて、投与総量のかなりの部分を占めるのは維持輸液であり、これは特に初期の最適化期を過ぎた後に効いてくる。<strong>輸液の利益が乏しい患者では、蘇生目的でない輸液にも注意を払う必要がある</strong>。</p>
+<p>高容量血症（hypervolemia）が引き起こすことの整理：</p>
+<div class="tw"><table>
+<thead><tr><th>経路</th><th>起こること</th><th>臨床的帰結</th></tr></thead>
+<tbody>
+<tr><td>血管内圧の上昇</td><td>浮腫の形成が促進される</td><td>全身・肺の浮腫</td></tr>
+<tr><td>肺動脈圧の上昇</td><td>右室後負荷が増える</td><td>右室不全に寄与する</td></tr>
+<tr><td>CVPの上昇（直接）</td><td>臓器灌流圧＝平均動脈圧 − CVP が下がる</td><td>臓器灌流の悪化</td></tr>
+<tr><td>CVPの上昇（間接）</td><td>間質圧が上がり、臓器灌流圧＝平均動脈圧 − 間質圧 が下がる</td><td>臓器灌流の悪化</td></tr>
+<tr><td>輸液の過剰</td><td>腹腔内圧上昇</td><td>腹腔内高血圧、腎機能障害</td></tr>
+</tbody></table></div>
+<p>輸液過剰の害はよく認識されている。ただし著者らは慎重な留保を置く。<strong>コホート研究では因果（過剰輸液が害を引き起こす）と関連（重症な患者ほど多く輸液される）を切り分けることがほとんどできない</strong>。制限 vs リベラルの輸液蘇生を比較したRCTはアウトカムの差を示せなかったが、著者らはその多くが「患者の必要に応じて個別化するのではなく固定レジメンに基づいていた」ために失敗する運命にあったと評価している。</p>
+<p>要約すると、<strong>輸液の有効性は一定せず、有害な効果は深刻</strong>である。したがって血行動態モニタリングは、輸液療法の有益な効果と有害な効果の<strong>両方</strong>を評価するために使われるべきである。</p>
+<h3>6. モニタリング手法が測っているもの 🔬</h3>
+<p>既存のモニタリング手法は、容積と圧を推定するとともに、容量過剰の帰結である EVLW や静脈うっ滞を推定することで容量状態を評価する。<strong>これらの変数のどれ一つとして容量状態を厳密に定義しない</strong>。すべてが心機能・血管透過性・胸腔内圧の影響を受ける。さらに、それぞれが容量状態の異なる側面を探っているため、組み合わせると相補的な情報が得られる（Fig 1）。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06808-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 容量状態に応じた血管内圧・血管外肺水分量・静脈うっ滞指標の相互関係（原図・無改変。©Springer / Intensive Care Medicine 2022） 横軸に Volume（容量）、縦軸に Pressure（圧）を取る。図の背景は左から <strong>Hypovolemia（低容量）／Normal volume status（正常）／Hypervolemia（高容量）</strong> の3帯に区切られる。 圧–容積関係は<strong>2本の曲線</strong>として描かれ、いずれも右上がりの上に凸ではなく下に凸（curvilinear）で、右へ行くほど急峻になる。右下のラベルが <strong>Normal cardiac function</strong>（正常心機能：立ち上がりが遅く、右端まで圧が上がらない）、中央上のラベルが <strong>Impaired cardiac function</strong>（心機能低下：曲線が左上にシフトし、より少ない容量で圧が急上昇する）。 グラフの上に2本の横長のバーが重なる。上段が <strong>Venous stasis（静脈うっ滞）</strong>、その下が <strong>EVLW（血管外肺水分量）</strong>。どちらも左（低容量）で白く、右（高容量）に向かって青が濃くなるグラデーションで、「容量が増えるほど出現する」ことを表す。ただし各バーの中に注記があり、Venous stasis のバーには <strong>Impaired cardiac function / Increased intrathoracic pressure</strong>、EVLW のバーには <strong>Impaired cardiac function / Increased permeability</strong> と書かれている。これらの条件があると、<strong>より低い容量状態でも青（陽性）に振れる</strong>＝うっ滞や肺水分の増加が前倒しで出現する、という意味である。 <strong>読み方</strong>：同じ「容量」でも、心機能・透過性・胸腔内圧という3つの修飾因子によって、圧も EVLW も静脈うっ滞も別々にずれる。だから単一指標で容量状態を決められない。</p>
+</div>
+<p><strong>前負荷の推定が容量状態測定の要（cornerstone）</strong> である。輸液の前後で心前負荷を評価することが重要なのは、それが輸液の有効性とリスクの両方を反映するからである。生理学的には心室前負荷は拡張末期の<strong>圧・容積・心室コンプライアンス</strong>で決まるが、臨床では心室の寸法と圧しか前負荷マーカーとして使われていないため、<strong>ベッドサイドの前負荷推定はすべて不完全</strong>である。</p>
+<p>ここが本総説で最も臨床に効く一節である。拡張末期圧と容積の関係が曲線的であることから、</p>
+<ul><li><strong>容積測定（volumetric measurements）は低容量状態の検出により感度が高い</strong></li><li><strong>圧測定（pressure measurements）は高容量（hypervolemia）の検出により感度が高い</strong></li></ul>
+<p>さらに、拡張機能が悪い患者では圧–容積関係が<strong>上方にシフトし、傾きがより急</strong>になるため、同じ容量変化がより大きな圧上昇を伴う。</p>
+<p><strong>高容量の検出も同じく必須</strong>である。蘇生期には、たとえ前負荷反応性の徴候があっても、高容量の徴候があれば輸液投与を思いとどまらせる。離脱期には、高容量の徴候が除水の引き金になりうる。</p>
+<p>高容量の検出には心前負荷指標が使えるが、重要な留保が2つある。</p>
+<ul><li><strong>浮腫があることは輸液の必要性を否定しない</strong></li><li><strong>水分バランスの増加が必ずしも血液量の増加を伴うわけではない</strong></li></ul>
+<p>したがって他の変数も考慮すべきで、EVLW と静脈うっ滞の指標が有用かもしれない。</p>
+<h3>7. 血漿量・血液量の測定 🧪</h3>
+<p>血漿量は歴史的に各種の色素で測定され、あるいはヘマトクリットの変化から推定されてきた。これらの測定は総血液量を特徴づけることはできるが、<strong>有効循環血液量と総血液量の関係は一定しない</strong>。低容量血症での静脈収縮、炎症状態での静脈拡張という代償機構が同時に働くためである。その結果、<strong>総血液量がどうであれ患者は輸液反応性でありうる</strong>（＝輸液が適応になりうる）。バイオインピーダンス／バイオリアクタンスによる胸腔内血液量の測定は ESM で論じられており、本文には詳細がない。</p>
+<h3>8. 中心静脈圧（CVP）🩸</h3>
+<p>CVPは輸液蘇生のガイドとして2通りに使われる。</p>
+<p><strong>① 容量状態のマーカーとして。</strong> ただし CVP と容量状態の結びつきは単純ではない。CVP は静脈コンプライアンス、胸腔内圧・心膜圧、心機能にも左右されるからである。</p>
+<p><strong>② 前負荷反応性の指標として。</strong> CVPが輸液に対するCOの反応を予測する能力は疑問視されてきた。<strong>極端値だけがこの目的に役立つ</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>CVPの値</th><th>意味</th><th>輸液に対する判断</th></tr></thead>
+<tbody>
+<tr><td>低値</td><td>容量状態は低いか正常</td><td>輸液は概ね忍容されるだろう</td></tr>
+<tr><td>中央値（7〜15 mmHg）</td><td>情報が乏しい（grey zone）</td><td>単独では判断材料にならない</td></tr>
+<tr><td>高値</td><td>容量状態は高いか正常、あるいは右室が不全</td><td>輸液は潜在的に有害</td></tr>
+</tbody></table></div>
+<p>さらに <strong>CVPの「変化」も情報を持つ</strong>。COの改善を伴わないCVPの上昇は、<strong>輸液が耐えられていない</strong>ことを示す。</p>
+<p>著者らの結論は明快で、完璧からは程遠いものの、CVPは「複雑だが情報を持つ変数」として理解されるべきであり、<strong>限界を認識したうえで、ショック患者におけるルーチン測定は推進されるべき</strong>である、としている。</p>
+<h3>9. 肺動脈カテーテル（PAC）🫀</h3>
+<p>PACは左右の血管内圧とCO測定を組み合わせ、血行動態プロファイルの包括的な特徴づけを可能にする。右室容積の測定については ESM に譲られている。</p>
+<p><strong>PAOP（肺動脈閉塞圧）</strong> は輸液蘇生のガイドに役立ちうる。CVPと同様に、PAOPによる輸液反応性の予測は（極端値を除いて）疑問視されている。一方で、<strong>PAOPは輸液による肺水腫のリスク評価に役立つ</strong>。ただし浮腫が生じる閾値は血管リモデリングと毛細血管透過性に依存する。</p>
+<p>PAOP測定は胸腔内圧の影響を受けるが、補正することができ、<strong>経壁PAOP（transmural PAOP）は容量状態と心機能のみに影響される</strong>。</p>
+<p>PACによるCO測定は信頼できるが<strong>間欠的</strong>である。「半連続（semi-continuous）」測定は<strong>直前3〜5分のCOの平均値</strong>を反映する。したがって PAC は後述の動的テスト（PLR・EEO）による輸液反応性評価には適さない。</p>
+<p>逆に PAC は、混合静脈血酸素飽和度と二酸化炭素由来の指標により、<strong>組織酸素化の包括的で信頼できる評価</strong>を提供する。これらは中心静脈血では信頼性が落ちる。</p>
+<h3>10. 経肺熱希釈 🌡️</h3>
+<p>経肺熱希釈は胸腔内血液量、EVLW、COの測定を可能にする。</p>
+<ul><li><strong>胸腔内血液量</strong>は大部分が心腔の容積を表すため、<strong>心前負荷の妥当な代替</strong>として使える（詳細はESM）。</li><li>ただし<strong>あらゆる静的な前負荷マーカーと同様、前負荷反応性を適切には反映しない</strong>。</li><li><strong>容積測定は高容量の検出が得意ではない</strong>が、CVPと組み合わせて解析することで改善される。</li></ul>
+<p><strong>EVLW</strong> は肺の水浸し（lung flooding）の程度を反映し、<strong>死亡の独立予測因子</strong>である。EVLWが上昇する経路は2つある。</p>
+<div class="tw"><table>
+<thead><tr><th>EVLW上昇の経路</th><th>上流の原因</th></tr></thead>
+<tbody>
+<tr><td>肺の濾過部位における血管内圧の上昇</td><td>心機能障害、または中心血液量の増加</td></tr>
+<tr><td>肺毛細血管透過性の亢進</td><td>炎症・敗血症・ARDS など</td></tr>
+</tbody></table></div>
+<p><strong>容積測定・EVLW・CVPの3つを組み合わせると、これらの選択肢を切り分けられる</strong>（Fig 2）。</p>
+<p>経肺熱希釈デバイスのもう一つの利点は、<strong>パルス波形解析による校正済みのCO推定</strong>であり、PLRやEEOのような輸液反応性テストに最適である。</p>
+<h3>11. 心エコー 🫀</h3>
+<p>心エコーは血管内の容積と圧、さらにCOと心機能を推定できる。複数の指標で輸液反応性も同定できる。重症患者では血行動態フェノタイプを迅速に判別でき、機械的循環補助の患者で特に有用である。また容量過剰の患者を同定できる（Fig 3）。</p>
+<p><strong>重要な利点として、輸液投与が禁忌となる急性肺性心（acute cor pulmonale）を容易に同定できる</strong>。</p>
+<p>心エコーは容量状態を評価する優れたツールであるが、限界が3つ明記されている。</p>
+<ol><li><strong>充満圧の推定精度が高くない</strong>。半定量的な評価、あるいは経時的な比較に向く</li><li>経胸壁アプローチでは描出不良の患者がいる</li><li>血行動態評価が<strong>連続ではなく間欠的</strong>である</li></ol>
+<h3>12. 肺エコー 🫁</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>誤解しやすい点 <mark class="hl">肺エコーは容量状態を評価しているのではなく、「肺水腫の程度」を評価している</mark>。Bラインは間質性肺水腫の存在を示すが、その定量は常に容易とは限らない。</p>
+</div>
+<p>肺エコーは経時的に施行することで、<strong>輸液投与中</strong>あるいは<strong>人工呼吸離脱中</strong>のBライン数を数えて肺水腫の発生を検出する使い方ができる。</p>
+<h3>13. 静脈エコー 🩻</h3>
+<p>静脈エコーは静脈うっ血の程度を評価する（Fig 3）。下大静脈の径（およびその呼吸性変動）の推定に、<strong>肝静脈・門脈、場合により腎静脈の血流パターン</strong>を組み合わせる。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>静脈うっ滞の所見は「高容量」の同義語ではない <mark class="hl">静脈うっ滞の指標は高容量血症で観察されうるが、右室機能障害や胸腔内圧が上昇した状態でも同様に現れる</mark>。所見だけで除水を決めない。</p>
+</div>
+<p>このアプローチは主に心臓手術後で報告されてきたが、近年のデータは他の患者集団でも有効でありうることを示唆している。大腿静脈の超音波評価も有用でありうる（右室機能障害を伴うCOVID-19患者での報告がある）。</p>
+<h3>14. 血液量・EVLW・輸液反応性をどう統合するか 🧭</h3>
+<p>患者の病態を考慮し、複数の測定を組み合わせて血行動態プロファイルを正確に評価することが重要である。ある患者は血管透過性亢進の結果として<strong>血液量は正常なのにEVLWが上昇</strong>していることがあり、別の患者は<strong>高容量血症に伴うEVLW上昇</strong>を呈することがある。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06808-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 容量状態とEVLW測定の統合的解釈（原図・無改変。©Springer / Intensive Care Medicine 2022） 最上段の1ボックス <strong>EVLW</strong> から2本に分岐し、左が <strong>Normal</strong>、右が <strong>Increased</strong>。それぞれの下に <strong>Blood volume</strong> のボックスがあり、そこから <strong>Low / Normal / Increased</strong> の3本に分岐する。合計6通りの解釈が最下段に並ぶ。EVLWは経肺熱希釈だけでなく肺エコー、あるいはX線でも推定できる、と原キャプションは明記している。血液量は容積測定・圧測定・その両方の組み合わせで推定できる。</p>
+</div>
+<h4>Figure 2 の全ボックスを表に起こす（原図の文言を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>EVLW</th><th>血液量（Blood volume）</th><th>解釈</th></tr></thead>
+<tbody>
+<tr><td>正常</td><td>低い</td><td>純粋な低容量血症（pure hypovolemia）</td></tr>
+<tr><td>正常</td><td>正常</td><td>正常（normal）</td></tr>
+<tr><td>正常</td><td>増加</td><td>軽度の高容量血症＋正常心機能</td></tr>
+<tr><td>増加</td><td>低い</td><td>低容量血症＋透過性亢進</td></tr>
+<tr><td>増加</td><td>正常</td><td>正常容量＋透過性亢進および／または心機能低下</td></tr>
+<tr><td>増加</td><td>増加</td><td>高容量血症および／または心機能低下</td></tr>
+</tbody></table></div>
+<p>さらに著者らは、<strong>肺や末梢にある程度の浮腫があっても、患者はなお輸液から利益を得うる</strong>と明記する。ただしこうした患者では利益/リスクのプロファイルが有利でないかもしれないため、<strong>輸液投与に先立って輸液反応性があるかを判定することが決定的に重要</strong>である。加えて、こうした患者では輸液反応性についてより特異的な閾値を考慮することも興味深い、としている。</p>
+<h3>15. Figure 3 — エコーによる容量状態の評価（4列対比の一覧表）🖼️</h3>
+<p>Figure 3 は本総説で最も実用的な図で、<strong>「低容量（Hypovolemia）／輸液反応性（Fluid responsiveness）／正常容量（Normovolemia）／高容量・心前負荷増加（Hypervolemia / Increased cardiac preload）」の4列</strong>に、各エコー指標の所見を配置している。<strong>低容量と輸液反応性を別の列として分けている点が本図の要である</strong>。</p>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06808-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3（1/3）. 人工呼吸患者（MECHANICALLY VENTILATED PATIENTS）と自発呼吸患者（SPONTANEOUSLY BREATHING PATIENTS）（原図・無改変。©Springer / Intensive Care Medicine 2022） 上段の青いヘッダーが「MECHANICALLY VENTILATED PATIENTS」、下段が「SPONTANEOUSLY BREATHING PATIENTS」。左端の紫の列が「Echocardiographic indices」、以降オレンジ〜黄のグラデーションで4列（低容量／輸液反応性／正常容量／高容量）が並ぶ。各セルに実際のMモード・ドプラ画像が貼られている。</p>
+</div>
+<h4>Table 3-1. 人工呼吸患者（原図の文言を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>エコー指標</th><th>低容量（Hypovolemia）</th><th>輸液反応性（Fluid responsiveness）</th><th>正常容量（Normovolemia）</th><th>高容量／前負荷増加</th></tr></thead>
+<tbody>
+<tr><td>上大静脈（SVC）の形状・サイズ・呼吸性変動</td><td>三角形の血管で、有意な呼吸性変動</td><td>三角形の血管で、有意な呼吸性変動（注1）</td><td>三角形の血管で、呼吸性変動はわずか</td><td>円形で拡張した血管、呼吸性変動はわずか</td></tr>
+<tr><td>下大静脈（IVC）の形状・サイズ・呼吸性変動</td><td>楕円形の血管、前後径が小さい（10 mm未満）で有意な呼吸性変動</td><td>有意な呼吸性変動（注2）</td><td>呼吸性変動はわずか</td><td>円形で拡張（径 23 mm超）、呼吸性変動はわずか</td></tr>
+<tr><td>大動脈血流の呼吸性変動（大動脈最大血流速度 peak Ao、左室流出路のVTIlvot）</td><td>peak Ao と VTIlvot の有意な呼吸性変動</td><td>peak Ao（注2）と VTIlvot の有意な呼吸性変動</td><td>peak Ao と VTIlvot の呼吸性変動はわずか</td><td>peak Ao・VTIlvot に呼吸性変動なし</td></tr>
+</tbody></table></div>
+<p><strong>注1（原図の脚注・星1つ）</strong>：カットオフは試験ごとに異なる。ある大規模多施設研究では、<strong>ΔSVC ≥21%</strong> で <strong>感度 61%（95%CI 57–66%）、特異度 84%（95%CI 81–87）</strong>。ここでの「陽性反応」の定義は、受動的下肢挙上に対する左室流出路パルスドプラの速度時間積分が<strong>10%以上増加</strong>すること。</p>
+<p><strong>注2（原図の脚注・星2つ）</strong>：カットオフは試験ごとに異なる。ある大規模多施設研究では、<strong>Δpeak Ao ≥8%</strong> で <strong>感度 55%（95%CI 50–59%）、特異度 70%（95%CI 66–75）</strong>。陽性反応の定義は上と同じ。</p>
+<p><strong>注3（原図の脚注・星3つ）</strong>：カットオフは試験ごとに異なる。ある大規模多施設研究では、<strong>ΔIVC ≥10%</strong> で <strong>感度 79%（95%CI 75–83%）、特異度 64%（95%CI 59–69）</strong>。陽性反応の定義は上と同じ。</p>
+<h4>Table 3-2. 自発呼吸患者（原図の文言を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>エコー指標</th><th>低容量</th><th>輸液反応性</th><th>正常容量</th><th>高容量／前負荷増加</th></tr></thead>
+<tbody>
+<tr><td>IVC径の形状・サイズ・呼吸性変動</td><td>吸気で完全虚脱、および／または呼気終末IVC径が13 mm未満</td><td>ΔIVC 50%超</td><td>呼気終末IVC径が13 mm超20 mm未満で、吸気時虚脱が50%未満</td><td>円形で拡張し、IVC径 23 mm超、吸気時虚脱なし（可能ならsniff testでも虚脱しない）</td></tr>
+</tbody></table></div>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06808-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3（2/3）. 全患者共通（ALL PATIENTS）— 左室の視覚的評価・左室拡張末期面積・左室充満圧・PLRによるVTIlvotの変化（原図・無改変。©Springer / Intensive Care Medicine 2022）</p>
+</div>
+<h4>Table 3-3. 全患者共通（原図の文言を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>エコー指標</th><th>低容量</th><th>輸液反応性</th><th>正常容量</th><th>高容量／前負荷増加</th></tr></thead>
+<tbody>
+<tr><td>左室の視覚的評価</td><td>「kissing papillary muscle」＝収縮末期の左室内腔の閉塞</td><td>（記載なし）</td><td>（記載なし）</td><td>拡大した左室、またはballooningした左室</td></tr>
+<tr><td>左室拡張末期面積（LVEDA）</td><td>LVEDA 10 cm²未満、または LVEDAI 5 cm²/m²未満</td><td>（記載なし）</td><td>（記載なし）</td><td>LVEDA 20 cm²超</td></tr>
+<tr><td>左室充満圧（視覚的・定性的評価）</td><td>（記載なし）</td><td>（記載なし）</td><td>（記載なし）</td><td>心房中隔の持続的な膨隆（continuous bulging of interatrial septum）</td></tr>
+<tr><td>僧帽弁パルスドプラ（左室EF低下例・心筋症例）</td><td>（記載なし）</td><td>（記載なし）</td><td>年齢相応の正常な僧帽弁流入パターン</td><td>拘束型パターン（E/A 2超かつ DTE 150 ms未満）</td></tr>
+<tr><td>組織ドプラ（DTI、左室EFが保たれている例）</td><td>（記載なし）</td><td>（記載なし）</td><td>平均 E/E' 8未満</td><td>平均 E/E' 14超</td></tr>
+<tr><td>PLRによるVTIlvotの変化</td><td>PLR中にVTIlvotが著明に増加（12%を大きく超える）</td><td>PLR中にVTIlvotが増加（12%以上）</td><td>PLR中のVTIlvot増加はわずか</td><td>PLR中にVTIlvotの変化なし</td></tr>
+</tbody></table></div>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06808-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3（3/3）. 静脈エコー（VENOUS ULTRASOUND）— 肝静脈・門脈・腎静脈ドプラと大腿静脈ドプラ（原図・無改変。©Springer / Intensive Care Medicine 2022）</p>
+</div>
+<h4>Table 3-4. 静脈エコー（原図の文言を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>エコー指標</th><th>低容量</th><th>輸液反応性</th><th>正常容量</th><th>高容量／前負荷増加</th></tr></thead>
+<tbody>
+<tr><td>肝静脈ドプラ</td><td>（記載なし）</td><td>（記載なし）</td><td>S波 &gt; D波</td><td>S波 &lt; D波、またはS波の逆転</td></tr>
+<tr><td>門脈ドプラ</td><td>（記載なし）</td><td>（記載なし）</td><td>拍動性の低い連続波形</td><td>拍動性の増加、あるいはドプラ信号の周期的な逆転</td></tr>
+<tr><td>腎静脈ドプラ</td><td>（記載なし）</td><td>（記載なし）</td><td>連続した単相性の血流</td><td>拡張期のみの血流</td></tr>
+<tr><td>大腿静脈ドプラ</td><td>（記載なし）</td><td>（記載なし）</td><td>連続した血流で、呼吸性変動は消失〜わずか</td><td>拍動性の増加、あるいはドプラ信号の周期的な逆転</td></tr>
+</tbody></table></div>
+<p><strong>この一覧表の読み方</strong>：低容量と輸液反応性の列は所見が重なる（SVCもIVCも「有意な呼吸性変動」）。一方で<strong>正常容量と高容量の列は、静脈エコー・充満圧・LVEDAで明確に分かれる</strong>。つまりエコーは「輸液が効くか」よりも「輸液を止めるべきか」の判別で情報量が大きい。また、低容量・輸液反応性の列は静脈エコーの行では<strong>すべて空欄</strong>である＝静脈エコーは低容量の診断には使えない、というのが図の含意である。</p>
+<h3>16. 輸液蘇生はいつ適応になるか 🚦</h3>
+<p>いくつかの前提条件が満たされる必要がある。<strong>順序が重要</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>① 引き金（trigger）</td><td>輸液投与の引き金があること（＝組織低灌流の徴候）。そしてその解決策として、輸液によるCO増加が想定されること</td></tr>
+<tr><td>② 利益/リスク</td><td>輸液の潜在的な利益とリスクを慎重に評価すること</td></tr>
+<tr><td>③ 輸液反応性</td><td>上記2段階を経た後にはじめて、輸液反応性を評価すること</td></tr>
+</tbody></table></div>
+<p><strong>引き金の選択が決定的である。</strong> 理想的には、治療に速やかに反応する組織低灌流の指標であるべき（輸液が組織灌流に与える影響の詳細は ESM）。</p>
+<div class="tw"><table>
+<thead><tr><th>引き金の候補</th><th>本文の評価</th></tr></thead>
+<tbody>
+<tr><td>毛細血管再充満時間（CRT）の延長</td><td>優れた引き金</td></tr>
+<tr><td>皮膚のmottling（網状皮斑）</td><td>優れた引き金</td></tr>
+<tr><td>静脈血酸素飽和度の低下</td><td>優れた引き金</td></tr>
+<tr><td>静脈–動脈PCO₂較差の開大</td><td>優れた引き金</td></tr>
+<tr><td>乳酸値の上昇</td><td>単独では不十分。高乳酸血症は消退に時間がかかり、他の因子にも左右される</td></tr>
+<tr><td>低血圧</td><td>しばしば使われるが、血管拡張状態では輸液後にCOが増えても圧の反応は極めて変動が大きい</td></tr>
+</tbody></table></div>
+<p>灌流指標が正常化した患者で蘇生努力を継続することは、<strong>生存の悪化と関連していた</strong>（ANDROMEDA-SHOCK の事後解析）。</p>
+<p><strong>利益/リスクの釣り合い</strong>では、次を考慮する。</p>
+<ul><li><strong>すでに投与された輸液量</strong>（数リットルを投与済みの患者では、陽性反応が得られる可能性は低くなる）</li><li><strong>潜在的リスク</strong>：右室機能障害、重度の低酸素血症、静脈うっ血、腹腔内高血圧</li></ul>
+<p>適切な引き金があり、利益/リスク比が潜在的に良好であるときに、実行可能な限り<strong>輸液投与に先立って</strong>輸液反応性を評価すべきである。</p>
+<h3>17. 輸液反応性をどう予測するか 📈</h3>
+<p>フランク・スターリング曲線の傾きにばらつきがあるため、<strong>心前負荷マーカーの単一値は前負荷反応性を示さない</strong>。例外は高値と低値のときだけである。これに対し<strong>動的アプローチ</strong>は、自発的あるいは誘発された心前負荷の変化がCO（またはその代替）に及ぼす効果を観察する。動的テストは2つのカテゴリに分けられる。</p>
+<h4>17-1. 輸液チャレンジを模倣する方法</h4>
+<p>最も単純な方法は輸液ボーラスを投与してCOへの効果を測ることだが、繰り返すと輸液過剰を招きうる。</p>
+<p><strong>PLR（受動的下肢挙上）テスト</strong>は、<strong>約300 mLの輸液負荷の血行動態効果を再現</strong>し、しかも<strong>可逆的</strong>である。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>PLRを血圧で判定してはいけない <mark class="hl">PLRの効果は、血圧の変化、あるいは脈圧（一回拍出量と最もよく相関する指標）の変化を観察することでは信頼できる判定ができない</mark>。COまたはその代替で測る。</p>
+</div>
+<p>PLRの効果測定に使える手法と、その但し書き：</p>
+<div class="tw"><table>
+<thead><tr><th>測定手法</th><th>本文の位置づけ</th><th>但し書き</th></tr></thead>
+<tbody>
+<tr><td>食道ドプラ</td><td>当初から用いられた信頼できる手法</td><td>—</td></tr>
+<tr><td>心エコー</td><td>当初から用いられた信頼できる手法</td><td>精度（VTIの最小検出可能変化）に注意</td></tr>
+<tr><td>パルス波形／パルス輪郭解析</td><td>当初から用いられた信頼できる手法。精度が高く最も適する</td><td>—</td></tr>
+<tr><td>呼気終末二酸化炭素（EtCO₂）</td><td>挿管患者ではPLRおよび輸液投与時のCO変化を評価できる</td><td>換気が安定していることが条件</td></tr>
+<tr><td>バイオリアクタンス</td><td>PLR中のCO変化を適切に検出しうる</td><td>適切なバージョンのソフトウェアを使うことが条件。結果はさらなる検証を要する</td></tr>
+<tr><td>脈波（プレチスモグラフィ）信号振幅</td><td>PLRの効果を測定できる</td><td>血管運動トーヌスが同時に変化しないことが条件</td></tr>
+</tbody></table></div>
+<p>これら代替測定の重要な限界は<strong>精度の低さ</strong>である。PLR中のCO変化は、<strong>その手法の最小有意変化（least significant change）より大きくなければならない</strong>。したがってパルス波形輪郭解析のような、より精度の高い手法のほうが適する。</p>
+<h4>17-2. 心肺相互作用を用いるテストと指標</h4>
+<p><strong>脈圧変動（PPV）と一回拍出量変動（SVV）</strong></p>
+<p>人工呼吸中の一回拍出量の周期的変動は前負荷反応性を反映しうる。<strong>PPVが最初に用いられ</strong>、現在ほとんどのベッドサイドモニタが表示している。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>PPVが使えない条件を毎回確認する <mark class="hl">PPVの本質的な限界は、偽陽性・偽陰性を生む臨床状況が多数あることである</mark>。 <strong>偽陽性</strong>：自発呼吸、不整脈、右室不全 <strong>偽陰性</strong>：低一回換気量、低肺コンプライアンス、極端に高い呼吸数</p>
+</div>
+<p><strong>一回換気量チャレンジ（tidal volume challenge）</strong> は、一回換気量が8 mL/kg未満の場合のPPVの限界を回避する。<strong>一回換気量を6から8 mL/kgへ一過性に増加させ、同時にPPVの変化を測定する</strong>。プレッシャーサポート換気では<strong>シ（sigh）マニューバ</strong>も使える。理論的には、これらのテストは<strong>急性肺性心で偽陽性</strong>となりうるため、心エコーで除外すべきである。</p>
+<p>パルス波形解析や心エコーのように一心拍ごとに一回拍出量を評価する手法ではSVVを測れる。しかし<strong>避けられない測定誤差が、一回拍出量を直接推定する利点を上回る</strong>ため、<strong>成人ではPPVが優先される</strong>。<strong>小児では血管のエラスタンスが低いためSVVのほうがPPVより成績がよい</strong>。</p>
+<p><strong>呼吸性閉塞テスト</strong></p>
+<p>呼吸性閉塞テストは人工呼吸を数秒間中断してCOの反応を測るものである。脈圧では変動が弱く一過性であるため効果の測定が難しい。当初はパルス波形輪郭解析によるCO測定で記述された。</p>
+<ul><li><strong>呼気終末閉塞（EEO）テストの診断閾値はCO 5%増加と低く</strong>、多くのCO測定手法の最小検出可能変化に近い。</li><li>心エコーを用いる場合、<strong>呼気終末ポーズ（前負荷依存ではCOを増加させる）に加えて吸気終末ポーズ（前負荷依存ではCOを低下させる）を組み合わせる</strong>と診断閾値が上がり、VTI測定誤差の影響が小さくなる。</li><li>脈波信号の灌流指数（perfusion index）の変化でもEEOの効果を検出しうる。</li></ul>
+<p><strong>大静脈の呼吸性変動</strong></p>
+<p>大静脈サイズの呼吸性変動は、静脈還流の呼吸性変化を反映する。SVCとIVCの径の呼吸性変動は心エコーで容易に推定できる。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>当初の記述対象</td><td>人工呼吸患者</td></tr>
+<tr><td>自発呼吸患者への適用</td><td>IVCの変動は自発呼吸患者にも適用されたが、成績は悪く、従来想定されていたより高いカットオフを使う必要があった</td></tr>
+<tr><td>SVC vs IVC</td><td>SVCの呼吸性変動のほうが輸液反応性の診断予測に優れる。ただしSVCは経食道心エコーを要する</td></tr>
+<tr><td>実務上の結論</td><td>限界を踏まえ、IVCの変動は他の手法と併用して使うべき</td></tr>
+</tbody></table></div>
+<h3>18. 輸液チャレンジの実施法 💉</h3>
+<p>COの有意な反応が起こりそうだと確認できたら、輸液ボーラスを用いて容量負荷の効果を実際に検証すべきである。<strong>輸液チャレンジは輸液を投与する最も安全な方法</strong>である。この手法は40年以上前に Max Harry Weil が記述し、近年洗練された。その骨格は、<strong>少量の輸液を短時間で投与し、安全上の限界をあらかじめ定義し、評価のための重要エンドポイントを決めておく</strong>ことである。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>本文の記述</th></tr></thead>
+<tbody>
+<tr><td>投与量と速度</td><td>晶質液 4 mL/kg を10分かけて投与しCOの変化を評価すると、より遅い速度やより少量に比べて最も多くの輸液反応者を同定できる</td></tr>
+<tr><td>評価する変数</td><td>理想的にはCOまたはその代替。心拍数や動脈圧では、CO反応者の一部を同定し損ねることがしばしばある</td></tr>
+<tr><td>測定のタイミング</td><td>輸液投与の終了時点で測定する。効果は投与終了後5〜10分で消失しうる</td></tr>
+<tr><td>安全上の限界</td><td>CVPが最もよく使われる指標。輸液チャレンジの解釈は前負荷の変化を考慮すべきで、それはCVPの変化で最もよく追跡できる</td></tr>
+</tbody></table></div>
+<h4>輸液チャレンジの判定（本文の定義）</h4>
+<div class="tw"><table>
+<thead><tr><th>判定</th><th>COの変化</th><th>CVPの変化</th></tr></thead>
+<tbody>
+<tr><td>陽性（positive）</td><td>10%以上の増加</td><td>変化はごくわずか</td></tr>
+<tr><td>陰性（negative）</td><td>変化なし</td><td>3 mmHgの上昇</td></tr>
+<tr><td>判定不能（indefinite）</td><td>有意でない変化</td><td>有意でない変化</td></tr>
+</tbody></table></div>
+<p>輸液への耐容性は、肺水腫や静脈うっ滞といった他の因子も考慮に入れうる（Fig 4）。</p>
+<p><strong>ミニ輸液チャレンジ（mini-fluid challenge）</strong> は、晶質液 50〜100 mL を1分かけて投与し、その後のより大きなボーラスへの反応を予測するものである。輸液投与を抑えられる可能性はあるが、著者らは<strong>慎重に扱うべき</strong>とする。理由は2つ。</p>
+<ol><li>スターリング関係が曲線的であるため、<strong>最初のボーラスがその後のボーラスへの反応を予測しないことがある</strong></li><li>輸液量が前負荷、ひいてはCOの変化を引き起こすのに不十分な場合があり、<strong>偽陰性</strong>を生む</li></ol>
+<p>要約すると、輸液チャレンジの手技は標準化されるべきである。少量の輸液を短時間で投与し、①一回拍出量とCOの増加という初期反応、②投与中の輸液への耐容性、③初期効果の消退、を評価する。</p>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-022-06808-9" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-022-06808-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 最適化された輸液管理（原図・無改変。©Springer / Intensive Care Medicine 2022） 原キャプション訳：最適な輸液管理は、適応（引き金）の定義、輸液反応性の予測、そして輸液への反応の評価に基づく。反応の評価は灌流の改善という観点だけでなく、輸液への耐容性も考慮する。略語：CRT＝毛細血管再充満時間、CO＝心拍出量、CVP＝中心静脈圧、EVLW＝肺水腫（経肺熱希釈や肺エコーなど各種の方法で推定される）、VS＝静脈うっ滞。</p>
+</div>
+<h4>Figure 4 の全ボックスを表に起こす（原図の文言を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>階層</th><th>ボックスの文言</th><th>分岐</th></tr></thead>
+<tbody>
+<tr><td>1段目</td><td>輸液投与の適応（引き金：低灌流の徴候、頻脈、低CO など）</td><td>「なし（Absent）」→ 左へ／「あり（Present）」→ 下へ</td></tr>
+<tr><td>1段目・左</td><td>待って再評価する（Wait and reevaluate）</td><td>終端</td></tr>
+<tr><td>2段目</td><td>輸液反応性を評価する（Assess fluid responsiveness）</td><td>「なし（Absent）」→ 右へ／あれば下へ</td></tr>
+<tr><td>2段目・右</td><td>別の血行動態的介入を行う（Alternative hemodynamic intervention）</td><td>終端</td></tr>
+<tr><td>3段目</td><td>輸液の有効性を評価する（輸液チャレンジ：4 mL/kg または 250 mL を10分で）</td><td>4通りに分岐</td></tr>
+<tr><td>4段目・分岐1</td><td>COが上昇し、CVP／EVLW／VSの変化はごくわずか</td><td>判定：輸液への最適な反応（緑）→ 輸液投与を継続してよい</td></tr>
+<tr><td>4段目・分岐2</td><td>COは不変で、CVP／EVLW／VSの変化はごくわずか</td><td>判定：輸液への反応は不確実（黄）→ 輸液投与を継続してよい</td></tr>
+<tr><td>4段目・分岐3</td><td>COは上昇するが、CVP／EVLW／VSも上昇</td><td>判定：利益/リスクが不確実（橙）→ さらなる輸液投与は慎重に</td></tr>
+<tr><td>4段目・分岐4</td><td>COは不変で、CVP／EVLW／VSが上昇</td><td>判定：輸液が耐えられていない（赤）→ 輸液投与を中止する（STOP）</td></tr>
+</tbody></table></div>
+<p><strong>読み方の要点</strong>：4段目の4通りは「効いたか（CO）」×「耐えられたか（CVP/EVLW/VS）」の2×2である。分岐2が「継続してよい」に分類されているのは、耐容性が保たれている以上、次のボーラスで反応が出る余地が残るという判断である。分岐3の「COは上がったがうっ血指標も上がった」が最も判断が難しい枠で、原図は「継続」でも「中止」でもなく<strong>慎重に</strong>と表現している。</p>
+<h3>19. どの輸液戦略を採るか 🧮</h3>
+<p>固定的な輸液レジメン（制限的あるいはリベラル）を使う代わりに、<strong>患者の状態と血行動態測定に応じて輸液管理を個別化する</strong>ほうが適切かもしれない。このアプローチは輸液の潜在的な利益を活かしつつ、無益な輸液投与を防ぐ。</p>
+<p><strong>投与側の個別化</strong></p>
+<ul><li>salvage 期と stabilization 期に適切な用量を与える</li><li><strong>前負荷反応性のない患者では輸液投与を控える</strong></li><li>輸液投与のリスクが高すぎると思われる患者では輸液を避ける</li><li><strong>血管拡張の程度も考慮に入れる</strong>。ノルアドレナリンの早期投与は<strong>ストレス血液量を増加させる</strong>ため、輸液の効果を増強し、投与輸液量の削減に役立ちうる</li></ul>
+<p><strong>除水側（de-escalation 期）の個別化</strong></p>
+<p>除水は患者の血行動態状態に合わせて調整すべきである。<strong>除水の最も重要なリスクは、目標を超えて行き過ぎることであり、中心血液量の減少が過剰になってCOと血圧が低下すること</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>報告</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>RADAR-2（無作為化試験）</td><td>達成された陰性水分バランスはあらかじめ定めた目標を大きく下回った。患者の状態が陰性バランス達成の実行可能性を制限していることを示す</td></tr>
+<tr><td>強制除水（forced fluid removal）の研究</td><td>12%の患者で除水速度を下げるか、あるいは中止する必要があった</td></tr>
+<tr><td>除水速度と死亡</td><td>不足も過剰も、いずれも死亡増加と関連していた。個別化の必要性を示す</td></tr>
+</tbody></table></div>
+<p><strong>では、除水への耐容性不良を予測する警告因子は何か。</strong> 著者らは、<strong>除水に先立って前負荷反応性のある患者を除外すること</strong>が、安全に除水できる候補を選ぶ選択肢になりうると述べるが、<strong>どの変数を用いて強制除水を適応・中止すべきかを特徴づけるには、さらなる研究が必要である</strong>と明確に留保している。</p>
+<h3>20. 結論（原文の結論部）🏁</h3>
+<ul><li>輸液管理は<strong>個別化されるべき</strong>である</li><li>モニタリングツールは輸液管理のすべての段階で有用である。蘇生期には容量状態の評価に、離脱期には除水のガイドに使える</li><li>血行動態プロファイルを特徴づけるには<strong>複数手法の組み合わせが推奨される</strong></li><li>輸液反応性を同定する手法の選択は患者の状態に依存し、<strong>これもまた個別化されるべき</strong>である</li></ul>
+<h2>🔄 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>改稿前の本ノートの記述</th><th>PDF本文（正）</th><th>対応</th></tr></thead>
+<tbody>
+<tr><td>内容</td><td>「元ノートは書誌情報のみのテンプレート状態で、本文の要点は未記載」</td><td>13ページ・図4点の総説。本文全体が存在する</td><td>全面改稿。本文・図4点をすべて反映した</td></tr>
+<tr><td><code>title</code></td><td><code>title: 血行動態評価による容量状態の把握 ICM2022</code>（<code>title_ja</code> ではない・括弧なしでファイル名と不一致）</td><td>—</td><td><code>title_ja</code> に変更し、ファイル名と完全一致させた。<code>title_en</code> を追加</td></tr>
+<tr><td><code>citation</code></td><td><code>"How can assessing hemodynamics help to assess volume status? Intensive Care Medicine (2022)"</code>（著者・DOIなし）</td><td>著者15名、DOI 10.1007/s00134-022-06808-9</td><td>著者・DOI入りに修正</td></tr>
+<tr><td><code>doi</code></td><td>欠落</td><td>10.1007/s00134-022-06808-9</td><td>追加</td></tr>
+<tr><td>出典の記載</td><td>「SpringerLink」からのクリップと記載</td><td>原著PDF（Springer版）を照合済み</td><td>原PDFを <code>_attachments/</code> にコピーして埋め込み</td></tr>
+<tr><td>巻・ページ</td><td>記載なし</td><td>48:1482-1494（1ページ目ヘッダに印字）</td><td>補完。印字が無いのは号のみ</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>同一DOIのノートが同フォルダにもう1件ある <mark class="hl">同じフォルダの <code>輸液蘇生はいつ行うべきか（Volume assessment・ICM2022）</code> は、DOI 10.1007/s00134-022-06808-9 ＝ <strong>本論文と同一の総説</strong>である</mark>（<code>_カタログ/改稿ワークリスト.tsv</code> が別コピーのPDF <code>s00134-022-06808-9.pdf</code> を紐づけている）。同ノートは本総説の「When is fluid resuscitation indicated?」の節だけを本人がSlack投稿用にまとめたメモで、内容は本ノートの § 16 に完全に含まれる。<strong>統合または相互参照の整理が必要</strong>（本改稿では他ノートに手を触れない方針のため、リンクを張るにとどめた）。</p>
+</div>
+<p><strong>同フォルダ・関連フォルダのノートとの関係</strong></p>
+<ul><li>CVPの解釈については <span class="wl">CVPの忘れられた有用性（ICM2023）</span>、<span class="wl">CVPの現在の使い方と展望（Intensive Care Medicine 2025）</span>、<span class="wl">中心静脈圧（CVP）の測定と解釈（ICM2022）</span>、<span class="wl">CVPを測定する意義（輸液ガイドとしての10の質問, PulmCCM）</span> が本ノートの § 8 を補完する。本総説の「極端値だけ使う・変化を見る」という立場はこれらと矛盾しない。</li><li>ストレス容量・Pms の生理は <span class="wl">Volume（前負荷）と心拍出量・静脈還流の関係（Magderレビュー）</span>、<span class="wl">平均体循環充満圧（Pmsf）Part1</span>、<span class="wl">輸液の生理学を蘇生に使う — 等浸透圧の原則・Starling則の改訂・stressed volume（Concise Definitive Review・CCM2023）</span> に詳しい。</li><li>「輸液反応性だけを見て静脈うっ血を見ない」という問題提起は <span class="wl">fluid tolerance（輸液耐容性）という新概念 — 反応性だけを見て静脈うっ血を見ない蘇生への異議（ポジションペーパー・JCritCare2022）</span> が同年に独立して提示しており、本総説の Fig 4（CO×CVP/EVLW/VS の2×2）と同じ方向を向く。</li><li>静脈うっ血の評価は <span class="wl">VExUSを読み解く — 静脈うっ血をPOCUSで評価する実践ガイド・判定基準と落とし穴（UltrasoundJ2024）</span>、<span class="wl">静脈うっ血の生理学とVExUSスコア（PulmCCM 2021）</span>、<span class="wl">心腎症候群におけるVExUS — うっ血評価・利尿ガイド・AKIと予後予測のアップデートレビュー（JCM2025）</span> が本ノートの § 13・Table 3-4 を詳細化する。</li><li>動的テストの各論は <span class="wl">受動的下肢挙上（PLR）テストと輸液反応性の予測</span>、<span class="wl">EtCO2変化によるPLR輸液反応性予測（メタ解析・CritCare2022）</span>、<span class="wl">人工呼吸器を使って輸液反応性を予測する — Vtチャレンジ・EEO・PEEPテスト（エディトリアル・ICM2024）</span>、<span class="wl">低一回換気量下の輸液反応性 PPV・PLR・IVCDV・Vtチャレンジ（Crit Care2021）</span>、<span class="wl">PEEPを5cmH2Oまで下げて心係数が8.6%超増えれば輸液反応性あり（PEEP-test・64例・CritCare2023）</span> を参照。</li><li>IVCの扱いについて、本総説は「他の手法と併用せよ」とするが、<span class="wl">IVCは虚脱率に限って使うのが現実的（Correspondence・ICM2024）</span> はさらに用途を絞り込む立場を取る。本総説の Table 3-1・3-2 のカットオフ（径10 mm未満・13 mm未満・23 mm超、ΔIVC 50%超／10%以上）と対比して読むとよい。</li><li>PPVの限界と、限界を無視した研究をメタ解析に混ぜることの問題は <span class="wl">PPV・SVVのメタ解析に生理学的限界を無視した研究を混ぜるな（Matters Arising・CritCare2023）</span> が扱う。本総説 § 17-2 の偽陽性・偽陰性リストと同じ論点である。</li><li>輸液チャレンジの実施法は <span class="wl">輸液チャレンジの4要素を事前に決める — TROL（エディトリアル・CritCare2020）</span>（本総説の引用文献23そのもの）と <span class="wl">重症患者の輸液チャレンジ 2000-2021の変遷（SR, Crit Care2022）</span> が対応する。</li><li>動的指標の歴史的経緯は <span class="wl">輸液反応性予測の来歴 — 静的指標の敗北から動的テストへ（Lasting Legacy・ICM2022）</span> が同じ2022年のICMに載っており、本総説 § 17 の前提を成す。</li><li>PACの位置づけは <span class="wl">現代の肺動脈カテーテル Part 1 — 挿入手技と波形解析、呼吸周期・気道内圧との干渉（総説・JClinMonitComput2022）</span>、<span class="wl">肺動脈カテーテルの使用頻度は施設で0〜60%と幅がある — 傾向スコア調整後に死亡差なし（JIPAD 59922例・CritCare2023）</span> を併読。</li><li>COモニタの精度（本総説 § 17-1 の「最小有意変化」の議論）は <span class="wl">敗血症性ショックの心拍出量モニターは何を届けているか — 26研究1323例でpooled PE 49%（SRメタ解析・CritCare2025）</span> が定量的に裏づける。</li><li>除水の各論は <span class="wl">ショック離脱期の輸液除去 ESICMガイドライン Part3（13RCT・3推奨・ICM2025）</span>、<span class="wl">重症患者の輸液デエスカレーション — リンパ排液の限界を知って除水を設計する（総説・AnnIntensiveCare2026）</span>、<span class="wl">蘇生とde-resuscitationの進歩 — ROSE・GDFT・fluid stewardship・輸液蓄積症候群（CurrOpinCritCare2025）</span> を参照。</li><li>灌流の引き金（乳酸 vs CRT）については <span class="wl">乳酸値（Lactate）の意義と限界</span>、<span class="wl">ショックの臨床徴候はどこまで使えるか — 10徴候の系統的レビュー（Letter・ICM2023）</span> が本ノート § 16 の表を補強する。</li><li>モニタリング全体の枠組みは <span class="wl">循環性ショックと血行動態モニタリングに関するコンセンサス（ESICM・ICM2014）</span> と <span class="wl">循環性ショックと血行動態モニタリング ESICMガイドライン2025（50推奨・ICM2025）</span> を、本総説の前後の到達点として並べて読める。</li><li>エコーによる統合的判断のプロトコル化は <span class="wl">重症患者の輸液投与をエコーで判断する 5ステップ（CCE・LUS・VExUS・ICM2025）</span> と <span class="wl">エコーで輸液反応性を読む — 入れない・入れる・任意の3分類（エディトリアル・ICM2024）</span> が本ノート § 15 の実務版にあたる。</li><li>圧と血流の関係の生理は <span class="wl">圧容量関係と時変エラスタンスで重症患者の循環を読む — Ea Ees 心室動脈カップリング（Concise Definitive Review・CCM2024）</span>、動脈エラスタンスの臨床的意味（§ 4）は <span class="wl">動脈圧波形と血圧モニタリング（ICM2022）</span>・<span class="wl">動脈ラインとカフの血圧が乖離したとき</span> を参照。</li></ul>
+<h2>🔍 批判的吟味（JCでの論点）</h2>
+<p><strong>① 総説の方法論が示されていない</strong> 系統的レビューではなく、検索式・選択基準・エビデンスの格付けがない。推奨の強さも確実性も記載されない。したがって本文中の「優れた引き金である」「〜が推奨される」といった表現は、<strong>専門家パネルの合意ではなく著者らの見解</strong>として読む必要がある。GRADE付きの推奨が必要なら ESICM ガイドライン（2025）に当たるべきである。</p>
+<p><strong>② 利益相反の集中</strong> 著者15名のうち10名がモニタリング機器メーカー（Edwards Lifesciences が最多、ほかに Getinge、Philips、Baxter、Masimo、Vygon、Intelomed 等）との関係を申告している。<strong>「複数の手法を組み合わせよ」という結論は、機器の使用を増やす方向に働く</strong>。一方で本総説はCVPやエコーといった低コストの手法も同等に扱っており、単純な機器推奨ではない点は公平に見るべきである。</p>
+<p><strong>③ Figure 3 の脚注に内部矛盾がある</strong> 脚注は3つ（星1つ＝ΔSVC ≥21%、星2つ＝Δpeak Ao ≥8%、星3つ＝ΔIVC ≥10%）定義されているが、<mark class="hl">図の本体でIVCの「輸液反応性」セルに付いている星印は<strong>星2つ</strong>であり、ΔIVCの脚注（星3つ）はどのセルからも参照されていない</mark>。IVC行に付くべきは星3つ（ΔIVC ≥10%）であり、<strong>組版時の付け違いと考えられる</strong>。実際の数値を使う際は、IVC＝ΔIVC ≥10%（感度79%・特異度64%）、大動脈血流＝Δpeak Ao ≥8%（感度55%・特異度70%）と読み替える必要がある。JCで数値を引用するときはこの点に注意する。</p>
+<p><strong>④ Figure 3 の脚注が引く文献番号が本文の番号と一致しない</strong> 脚注はいずれも「(27)」を出典として挙げるが、本文の文献リストの27番は Jozwiak らのEVLWの予後研究であり、記述されている多施設エコー研究は <strong>29番（Vignon P, et al. AJRCCM 2016）</strong>である。図の作成段階での番号ずれと考えられる。</p>
+<p><strong>⑤ Figure 3 に示された感度・特異度はいずれも高くない</strong> ΔSVC ≥21%：感度61%・特異度84%／Δpeak Ao ≥8%：感度55%・特異度70%／ΔIVC ≥10%：感度79%・特異度64%。<strong>単独で意思決定に足りる精度の指標は一つもない</strong>。しかも「陽性反応」の参照基準はPLRに対するVTIlvot 10%以上の増加であって、実際の輸液投与に対するCO増加ではない。本文が「IVCは他の手法と併用せよ」と書くのはこの精度を踏まえてのことである。</p>
+<p><strong>⑥ Figure 4 の輸液チャレンジ量が本文と一致しない</strong> 本文は「晶質液 4 mL/kg を10分で」と書くが、Figure 4 のボックスは「<strong>4 mL/kg または 250 mL を10分で</strong>」となっている。250 mL は体重62.5 kg 相当の値で、本文には根拠の記載がない。実務では体重換算を優先すべきである。</p>
+<p><strong>⑦ 閾値の多くが「試験ごとに異なる」と明記されている</strong> Figure 3 の脚注は3か所すべてで「Cut offs vary in the different trials」と断っている。<strong>本ノートに転記した数値も、そのまま自施設の判断基準に固定してはならない</strong>というのが著者らの意図である。</p>
+<p><strong>⑧ Fig 3 の「低容量」列と「輸液反応性」列が実質的に重複する</strong> SVC・IVC・大動脈血流のいずれの行でも、両列に「有意な呼吸性変動」と書かれている。図は容量状態と輸液反応性を分けて示す意図だが、<strong>呼吸性変動系の指標では両者を区別できない</strong>ことが図自身から読み取れる。区別できるのは PLR による VTIlvot 変化（低容量では「12%を大きく超える」、輸液反応性では「12%以上」）で、これも境界が曖昧である。</p>
+<p><strong>⑨ 「制限 vs リベラルのRCTは失敗する運命だった」という主張は検証されていない</strong> 著者らは、固定レジメンを比較したRCTが差を示せなかったのは個別化していないためだと論じるが、<strong>個別化戦略を固定戦略と比較した大規模RCTは本文中に提示されていない</strong>。したがって「個別化のほうがよい」という結論は、<mark class="hl">本総説の時点では生理学的合理性に基づく提案であって、アウトカム改善が示されたものではない</mark>。</p>
+<p><strong>⑩ 「輸液耐容性」の閾値が定義されていない</strong> Fig 4 は「CVP／EVLW／VSの上昇」を耐容性の判定に使うが、<strong>どれだけ上がったら「上昇」とみなすのかの数値基準が示されていない</strong>（CVPの +3 mmHg は輸液チャレンジの陰性判定の基準であって耐容性の基準ではない）。ベッドサイドで運用可能なプロトコルにするには、施設ごとに閾値を決める必要がある。</p>
+<p><strong>⑪ 除水の適応・中止基準は未解決と著者自身が認めている</strong> 「前負荷反応性のある患者を除水前に除外する」という提案はあるが、それを検証した研究は Monnet ら（文献76）の1本にとどまり、著者らは「どの変数を使うべきかを特徴づけるにはさらなる研究が必要」と明記している。<strong>除水の部分は本総説で最も根拠が薄い領域</strong>である。</p>
+<p><strong>⑫ ESM（電子付録）に主要な内容が逃がされている</strong> 右室容積、経肺熱希釈の胸腔内血液量の詳細、バイオインピーダンス／バイオリアクタンス、輸液が組織灌流に与える影響、といった臨床的に重要な項目が本文ではなく ESM に置かれている。<strong>本ノートはESMを含まない</strong>ので、これらについては本文の一文以上の情報を持たない。</p>
+<h2>📚 主要な引用文献一覧（本文で名指しされた主要研究）</h2>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>敗血症・敗血症性ショック管理の国際ガイドライン2021（初期3時間で晶質液30 mL/kg以上を提案）</td><td>Evans L, et al. Intensive Care Med 2021</td></tr>
+<tr><td>6</td><td>ショックの4段階（salvage / optimization / stabilization / de-escalation）</td><td>Vincent JL, De Backer D. N Engl J Med 2013</td></tr>
+<tr><td>7</td><td>低容量血症の理解（ストレス／アンストレス容量、Pms）</td><td>Perner A, De Backer D. Intensive Care Med 2014</td></tr>
+<tr><td>8</td><td>動的動脈エラスタンスによる、容量負荷に対する動脈圧反応の予測</td><td>Monge García MI, et al. Crit Care 2011</td></tr>
+<tr><td>9</td><td>PLRと容量負荷がヒトのショックでPmsと静脈還流に及ぼす効果</td><td>Guerin L, et al. Crit Care 2015</td></tr>
+<tr><td>10</td><td>輸液チャレンジ中の平均体循環充満圧の変化（術後ICU患者）</td><td>Cecconi M, et al. Intensive Care Med 2013</td></tr>
+<tr><td>11</td><td>循環性ショックにおける晶質液の血行動態効果の持続時間</td><td>Nunes T, et al. Ann Intensive Care 2014</td></tr>
+<tr><td>13</td><td>「fluid overload」という語を避けるべき理由</td><td>Vincent JL, Pinsky MR. Crit Care 2018</td></tr>
+<tr><td>17</td><td>敗血症初期管理における少量 vs 多量輸液のSR・メタ解析・TSA</td><td>Meyhoff TS, et al. Chest 2020</td></tr>
+<tr><td>20</td><td>CVPで輸液管理をガイドすべきか — 10の質問への10の答え</td><td>De Backer D, Vincent JL. Crit Care 2018</td></tr>
+<tr><td>21</td><td>心充満圧は容量負荷への血行動態反応の予測に適さない</td><td>Osman D, et al. Crit Care Med 2007</td></tr>
+<tr><td>22</td><td>PPVの臨床的妥当性 — グレーゾーン・アプローチ</td><td>Biais M, et al. Crit Care 2014</td></tr>
+<tr><td>23</td><td>輸液チャレンジ（実施法の標準化）</td><td>Vincent JL, Cecconi M, De Backer D. Crit Care 2020</td></tr>
+<tr><td>25</td><td>過膨張のある人工呼吸患者での心充満圧の推定（経壁PAOP）</td><td>Teboul JL, et al. Crit Care Med 2000</td></tr>
+<tr><td>26</td><td>経肺熱希釈の利点と限界</td><td>Monnet X, Teboul JL. Crit Care 2017</td></tr>
+<tr><td>27</td><td>EVLWはARDS患者の独立した予後因子</td><td>Jozwiak M, et al. Crit Care Med 2013</td></tr>
+<tr><td>29</td><td>人工呼吸患者における輸液反応性予測のためのエコー指標の比較（Fig 3の感度・特異度の出典）</td><td>Vignon P, et al. Am J Respir Crit Care Med 2016</td></tr>
+<tr><td>32</td><td>急性右室不全の診断・病因・管理（state-of-the-art）</td><td>Vieillard-Baron A, et al. Intensive Care Med 2018</td></tr>
+<tr><td>33</td><td>ドプラ心エコー指標はPAOP予測に特異的だが感度は高くない</td><td>Mercado P, et al. Crit Care Med 2021</td></tr>
+<tr><td>36</td><td>肺エコーによる離脱誘発性肺水腫の診断</td><td>Ferre A, et al. Intensive Care Med 2019</td></tr>
+<tr><td>37</td><td>POCUSによる全身うっ血の定量 — VEXUSグレーディングの開発</td><td>Beaubien-Souligny W, et al. Ultrasound J 2020</td></tr>
+<tr><td>43</td><td>乳酸を標的とした蘇生戦略は、CRT正常の敗血症性ショックで死亡が高い可能性（ANDROMEDA-SHOCK 事後解析）</td><td>Kattan E, et al. Ann Intensive Care 2020</td></tr>
+<tr><td>44</td><td>集中治療における輸液チャレンジの実態（FENICE study）</td><td>Cecconi M, et al. Intensive Care Med 2015</td></tr>
+<tr><td>45</td><td>輸液反応性の予測 — 何が新しいか</td><td>Monnet X, Shi R, Teboul JL. Ann Intensive Care 2022</td></tr>
+<tr><td>46</td><td>輸液反応性予測のためのPLR — SR・メタ解析</td><td>Monnet X, Marik P, Teboul JL. Intensive Care Med 2016</td></tr>
+<tr><td>47</td><td>EtCO₂は動脈圧より容量反応性の予測に優れる</td><td>Monnet X, et al. Intensive Care Med 2013</td></tr>
+<tr><td>52</td><td>経胸壁心エコーが検出できる最小のCO変化はどれくらいか</td><td>Jozwiak M, et al. Crit Care 2019</td></tr>
+<tr><td>53</td><td>動脈脈圧の呼吸性変化の臨床応用（PPVの初出）</td><td>Michard F, et al. Am J Respir Crit Care Med 1999</td></tr>
+<tr><td>54</td><td>人工呼吸下の動脈脈圧変動</td><td>Teboul JL, Monnet X, Chemla D, Michard F. Am J Respir Crit Care Med 2019</td></tr>
+<tr><td>55</td><td>一回換気量チャレンジ後のPPV・SVVの変化は低換気量下でも輸液反応性を予測する</td><td>Myatra SN, et al. Crit Care Med 2017</td></tr>
+<tr><td>56</td><td>PPVによる輸液反応性予測 — 一回換気量の影響</td><td>De Backer D, Heenen S, Piagnerelli M, Koch M, Vincent JL. Intensive Care Med 2005</td></tr>
+<tr><td>57</td><td>プレッシャーサポート換気中の輸液反応性評価を高めるsighマニューバ</td><td>Messina A, et al. Crit Care 2019</td></tr>
+<tr><td>58</td><td>人工呼吸中の小児では大動脈血流の呼吸性変動が輸液反応性を予測</td><td>Durand P, et al. Intensive Care Med 2008</td></tr>
+<tr><td>59</td><td>呼気終末閉塞による容量反応性の予測（EEOの初出）</td><td>Monnet X, et al. Crit Care Med 2009</td></tr>
+<tr><td>60</td><td>食道ドプラは呼気終末・吸気終末閉塞テストで輸液反応性を予測できる</td><td>Depret F, et al. Crit Care Med 2019</td></tr>
+<tr><td>63</td><td>人工呼吸中の敗血症患者でIVC径の呼吸性変化が輸液反応性予測に有用</td><td>Barbier C, et al. Intensive Care Med 2004</td></tr>
+<tr><td>64</td><td>自発呼吸患者でのIVC呼吸性変動 — 慎重な使用が必要</td><td>Muller L, et al. Crit Care 2012</td></tr>
+<tr><td>65</td><td>自発呼吸患者でIVCの呼吸性変動は輸液反応性を予測するか</td><td>Airapetian N, et al. Crit Care 2015</td></tr>
+<tr><td>66</td><td>4 mL/kg の輸液チャレンジを10分 vs 20分で行う薬力学的解析（多施設クロスオーバーRCT）</td><td>Messina A, et al. J Clin Monit Comput 2021</td></tr>
+<tr><td>67</td><td>輸液チャレンジの用量別の血行動態効果（準無作為化比較試験）</td><td>Aya HD, et al. Crit Care Med 2017</td></tr>
+<tr><td>68</td><td>100 mLコロイドを1分で投与した後の大動脈血流増加は輸液反応性を予測する（mini-fluid challenge study）</td><td>Muller L, et al. Anesthesiology 2011</td></tr>
+<tr><td>70</td><td>ヒト敗血症性ショックにおけるノルアドレナリンのPmsと静脈還流への効果</td><td>Persichini R, et al. Crit Care Med 2012</td></tr>
+<tr><td>71</td><td>敗血症性ショックにおけるノルアドレナリン超早期開始の効果（傾向スコア解析）</td><td>Ospina-Tascón GA, et al. Crit Care 2020</td></tr>
+<tr><td>72</td><td>保存的輸液投与とde-resuscitationの実行可能性（RADAR-2 無作為化試験）</td><td>Silversides JA, et al. Intensive Care Med 2022</td></tr>
+<tr><td>73</td><td>AKIを伴う重症患者での強制除水（12%で減速・中止が必要）</td><td>Ganter CC, et al. Acta Anaesthesiol Scand 2012</td></tr>
+<tr><td>74</td><td>除水強度と死亡（輸液過剰の重症患者）</td><td>Murugan R, et al. Crit Care 2018</td></tr>
+<tr><td>75</td><td>CVVHDF中の正味除水速度と死亡の関連（RENAL試験の二次解析）</td><td>Murugan R, et al. JAMA Netw Open 2019</td></tr>
+<tr><td>76</td><td>除水をガイドするためのPLRテスト</td><td>Monnet X, et al. Ann Intensive Care 2016</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">「容量状態」を一発で測る指標は存在しない。輸液の判断は「効くか（輸液反応性）」と「耐えられるか（輸液耐容性）」を別々に評価して初めて成立する。</mark></p>
+<ul><li><mark class="hl">輸液を入れる前に、①引き金（低灌流の徴候。乳酸単独は不可）→ ②利益/リスク → ③輸液反応性、の順で確認する。反応性は最後に測る</mark></li><li><mark class="hl">CVPは中間帯（7〜15 mmHg）では判断材料にならない。使うのは低値・高値の両端と、「CVPが上がるのにCOが上がらない＝耐えられていない」という変化のパターンである</mark></li><li><mark class="hl">輸液チャレンジは 4 mL/kg を10分。判定は投与終了時点で行う（効果は5〜10分で消えうる）。CO +10%以上でCVPほぼ不変なら陽性、CO不変でCVP +3 mmHgなら陰性</mark></li><li><mark class="hl">PLRは血圧や脈圧では判定できない。COまたはVTIで測る。PACの半連続COは直前3〜5分の平均値なので、PLR・EEOには使えない</mark></li><li><mark class="hl">容積指標は「低容量の検出」に、圧指標は「高容量の検出」に感度が高い。方向を取り違えない</mark></li><li><mark class="hl">肺エコーは容量ではなく肺水腫を、静脈エコーはうっ血を見ている。静脈うっ滞は右室不全や胸腔内圧上昇でも出るので、所見だけで除水を決めない</mark></li><li><mark class="hl">固定的な制限／リベラルではなく個別化する。ただし「個別化が予後を改善する」ことは本総説の時点で証明されていない（生理学的合理性に基づく提案である）</mark></li></ul>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ショックがあり輸液を検討している</td><td>組織低灌流の引き金があるか（CRT延長・mottling・ScvO₂低下・Pv-aCO₂較差開大）。乳酸単独は引き金にしない</td><td>引き金がなければ「待って再評価」。引き金があれば次へ</td></tr>
+<tr><td>引き金がある</td><td>利益/リスク：既投与量は何リットルか。右室機能障害・重度低酸素血症・静脈うっ血・腹腔内高血圧はないか</td><td>リスクが高すぎれば輸液を避け、昇圧薬など別の血行動態介入へ</td></tr>
+<tr><td>利益がリスクを上回りそう</td><td>輸液反応性を評価する。人工呼吸・洞調律・Vt 8 mL/kg以上ならPPV、それ以外はPLRまたはEEO</td><td>反応性がなければ輸液せず、別の介入へ</td></tr>
+<tr><td>Vtが8 mL/kg未満でPPVが使えない</td><td>一回換気量チャレンジ（6→8 mL/kgへ一過性に増やす）でPPVの変化を見る。PSVならsighマニューバ</td><td>急性肺性心は偽陽性の原因になるためエコーで除外する</td></tr>
+<tr><td>PLRを行う</td><td>血圧・脈圧では判定しない。CO・VTIlvot・EtCO₂（換気安定時）で測る。変化がその手法の最小有意変化を超えているか</td><td>超えていなければ「判定不能」として扱い、より精度の高い手法へ</td></tr>
+<tr><td>反応性がありそう</td><td>輸液チャレンジ：晶質液 4 mL/kg を10分。投与終了時点でCOとCVPを同時に読む</td><td>CO +10%以上＋CVPほぼ不変＝陽性、継続してよい</td></tr>
+<tr><td>CO不変でCVP +3 mmHg</td><td>輸液が耐えられていない</td><td>輸液を中止する</td></tr>
+<tr><td>COは上がったがCVP／EVLW／静脈うっ滞も上がった</td><td>利益/リスクが不確実</td><td>さらなる輸液は慎重に。次のボーラスの前に再評価する</td></tr>
+<tr><td>CVPが7〜15 mmHgで判断に迷う</td><td>CVPの絶対値では決まらない。容積指標（経肺熱希釈）、EVLW、エコー所見を組み合わせる</td><td>EVLW上昇＋血液量正常なら透過性亢進を疑い、輸液よりも他の介入へ</td></tr>
+<tr><td>離脱期で除水を検討している</td><td>除水前に前負荷反応性があるかを確認する。除水中はCO・血圧の低下を監視する</td><td>前負荷反応性があれば除水候補から外す。速度低下・中止の閾値を事前に決めておく</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

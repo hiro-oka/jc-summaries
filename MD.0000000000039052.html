@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>湾岸6か国の結核研究30年を書誌計量で地図化する（書誌計量分析・Medicine2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="MD.0000000000039052.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">湾岸6か国の結核研究30年を書誌計量で地図化する（書誌計量分析・Medicine2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Abdelwahab SI, Taha MME, Albasheer O, Alharbi A, Ahmed AA, Abdelmola A, Ali SA, El Hassan LAM, Darraj M, Mohamed AH, Yassin A, Hakami N. Tuberculosis research advances and future trends: A bibliometric knowledge mapping approach. Medicine (Baltimore). 2024;103:30(e39052). DOI: 10.1097/MD.0000000000039052</dd><dt>掲載誌</dt><dd>Medicine (Baltimore)（2024-07-26）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/MD.0000000000039052" target="_blank" rel="noopener">doi.org/10.1097/MD.0000000000039052</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Tuberculosis research advances and future trends: A bibliometric knowledge mapping approach</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/MD.0000000000039052.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/MD.0000000000039052.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/MD.0000000000039052.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li>この論文でICUの診療は変わらない。患者アウトカムのデータは一切なく、臨床行動を変える性質の論文ではない。結核の診断・治療・隔離のプロトコルにこの論文から書き足せるものはない</li><li>使い道は3つに限られる</li><li><strong>文献探索の道具立て</strong>：MeSH Browserで同義語を洗い出し → Scopusの <code>TITLE-ABS-KEY(...) AND LIMIT-TO(AFFILCOUNTRY, ...) AND LIMIT-TO(DOCTYPE,"ar")</code> で絞る → CSV/BibTeXで書き出し → biblioshiny（R）とVOSviewerに読ませる、という手順がそのまま再利用できる。当院ICUのテーマ（RRS、腹臥位療法、せん妄など）で「この領域は誰が・どこで・いつから研究しているか」を10分で俯瞰したいときの型</li><li><strong>投稿先の当たりをつける</strong>：Table 7 の「その領域で実際に載っている雑誌 × 掲載数 × CiteScore」の並べ方は、自分の論文（JIPAD誤嚥性肺炎、DKA）の投稿先候補を機械的に列挙するのに使える</li><li><strong>共同研究先の可視化</strong>：共著ネットワークのtotal link strengthで「この国・機関はどこと組んでいるか」を見る発想は、JIPADのような多施設事業の連携図をつくるときの下敷きになる</li><li>逆に、この論文を読んだうえで注意すべきは「publication countはニーズでも質でもない」ということ。サウジの論文数が多いのは大学と研究費が多いからで、結核の疫学的重要度の順位ではない。院内で「論文数」を指標に議論するときの反例として使える</li><li>実務上の位置づけ：ジャーナルクラブの題材としては、臨床的示唆ではなく「書誌計量という手法の読み方・騙され方」を学ぶ回に向く</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：結核は COVID-19 流行前まで単一感染症として世界最多の死因であり、世界人口の約4分の1が結核菌に感染している。WHOのEnd TB戦略は2015年比で2035年までに死亡95%減・罹患90%減を掲げ、SDGsは2030年までの結核撲滅を目標に置く。湾岸協力会議（GCC）6か国は巡礼・出稼ぎ・中継貿易で人の流れが極端に多く、罹患率が国ごとに大きく違う。GCC各国の保健当局は2010年末に「自国民の新規塗抹陽性を10万人あたり1未満に下げる」目標を採択している</li><li><strong>Unknown</strong>：そのGCC地域で、結核研究が実際に「誰によって・どこで・何について・どう変化しながら」行われてきたのかを、地域全体で通しで見た計量的な記述はなかった。個々の国の疫学報告はあっても、研究産出・共同研究構造・テーマの時間発展を横断的に地図化したものがない</li><li><strong>What's new</strong>：Scopus収載の1993–2022年の30年分、原著論文1999本を対象に、国・機関・著者・雑誌・キーワードの5軸で産出と協働を計量し、共語分析・テーマ地図・テーマ進化で研究テーマの移り変わりを示した。直近の伸びが deep learning・chest X-ray・molecular docking・COVID-19併存・risk factors・Mycobacterium bovis に集中していること、GCC域内協力が想像以上に薄い（オマーン–クウェート間は共著ゼロ）ことを可視化した</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで GCC6か国の結核研究30年分1999本をScopusから抽出して計量したところ、<strong>産出はサウジアラビア（1352本）に集中し、国際共著は50.25%と高い一方で域内協力は極端に薄く</strong>、研究テーマの重心は結核菌・抗結核薬から deep learning・胸部X線・分子ドッキング・COVID-19併存へ移っていた。</p>
+</div>
+<ul><li>対象は Scopus のみ、英語のみ、原著論文（article）のみ、1993–2022年の30年間。検索式は MeSH Browser で作った同義語（tuberculosis OR "MYCOBACTERIUM TUBERCULOSIS" OR "Koch's Disease"）を TITLE-ABS-KEY に当て、所属国を GCC6か国に限定</li><li>総量：<strong>1999本／820誌／著者9462人</strong>。1本あたり著者7.06人、平均被引用14.84回、参照文献総数60,620件、論文の平均年齢8.95年</li><li>伸び：年平均成長率 <strong>7.76%</strong>。年次と論文数の線形回帰で R = 0.836（有意）</li><li>国別：サウジ1352本・被引用28,056回で圧倒的1位。以下 UAE 238、クウェート217、カタール189、オマーン117、バーレーン41。ただし人口100万人あたりに直すとカタール84.56本が1位、クウェート60.48本が2位、サウジは42.98本で3位に落ちる</li><li>機関：160機関が関与。最多は King Saud University（サウジ、518本）。上位20機関のうち15機関（75%）がサウジ。域外からは University of Sydney と London School of Hygiene and Tropical Medicine が最大の寄与</li><li>協働：国際共著率 <strong>50.25%</strong>、単著論文は154本のみ。GCCと共著関係を持つ国は180か国とされる。総リンク強度はサウジが2388で最大。域内ではUAE–サウジの26が最強、<strong>オマーン–クウェートは0（共著ゼロ）</strong></li><li>分野：medicine が52%、生化学・遺伝学・分子生物学10%、免疫学・微生物学8.27%、薬理・毒性学8%。社会科学・経営・経済はほぼ不在</li><li>雑誌：最多は Saudi Medical Journal（92本）、次いで Annals of Saudi Medicine（45本）。CiteScoreは0.9〜10.8とばらつく</li><li>キーワード：著者キーワード約3936語のうち、10回以上共起するのは39語のみ。最頻出は saudi arabia（55回）、pulmonary tuberculosis（53回）、molecular docking（36回）、diagnosis（35回）</li><li>テーマ進化：1993–2011（結核菌・肺結核・気管支鏡・クローン病）→ 2012–2019（薬剤耐性・分子ドッキング・メタ解析・潜在結核）→ 2020–2022（histopathology・deep learning が新規に出現）</li><li>著者らの結論：GCCの結核研究は量的には多く、今後は深層学習・胸部X線・分子ドッキング・COVID-19併存・危険因子・M. bovis が伸びる。GCC域内を統合した結核対策プログラムの構築が急務</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 書誌計量分析とは何をする研究か 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 書誌計量分析（bibliometric analysis）は、論文そのものを読むのではなく、論文の「メタデータ」（著者・所属・国・雑誌・年・キーワード・引用関係）を集計してその研究分野の地形図を描く手法。臨床研究でいう「患者」にあたるのが「論文1本」で、アウトカムにあたるのが「論文数」「被引用数」「共著関係の強さ」になる。</p>
+<p>本論文で出てくる用語を先に押さえておく。</p>
+<div class="tw"><table>
+<thead><tr><th>用語</th><th>意味</th><th>本論文での使われ方</th></tr></thead>
+<tbody>
+<tr><td>Scopus</td><td>Elsevier社の多分野文献データベース。所属機関・国での絞り込み（AFFILCOUNTRY）ができる</td><td>唯一のデータ源。PubMed や Web of Science は使っていない</td></tr>
+<tr><td>MeSH</td><td>米国国立医学図書館の統制語彙（階層化された医学件名標目）</td><td>検索の同義語（Koch's Disease など）を作るために参照</td></tr>
+<tr><td>VOSviewer</td><td>ライデン大学 CWTS 製の書誌マッピングソフト。共著・共起のネットワーク図を描く</td><td>版1.6.16を使用。国・著者・キーワードのネットワーク図（Fig 5, 6, 8）</td></tr>
+<tr><td>biblioshiny</td><td>R パッケージ bibliometrix のGUI。テーマ地図・テーマ進化・トレンドトピックを出す</td><td>3フィールドプロット（Fig 3）、トレンド（Fig 4）、テーマ地図（Fig 10）、テーマ進化（Fig 11）</td></tr>
+<tr><td>link / total link strength</td><td>VOSviewerの指標。2つの要素が同じ論文に共に現れた回数の総和</td><td>国の協働の強さ、キーワードの共起の強さ</td></tr>
+<tr><td>共語分析（co-word analysis）</td><td>同じ論文に一緒に出てくるキーワードの組を数えて、概念の塊を見つける</td><td>Fig 8（共起ネットワーク）、Fig 9（概念構造地図）</td></tr>
+<tr><td>SCP / MCP</td><td>Single Country Publication（全著者が同一国）／ Multiple Country Publication（複数国の共著）。MCP-ratio = MCP ÷ 総数</td><td>国際共同研究の割合の指標（Table 4）</td></tr>
+<tr><td>h-index</td><td>「h回以上引用された論文がh本ある」を満たす最大のh。Hirschが2005年に提唱</td><td>著者の影響力指標（Table 6）</td></tr>
+<tr><td>CiteScore</td><td>Scopus版のインパクト指標。Impact Factor（Clarivate／Web of Science）の代替</td><td>雑誌ランキングの評価軸（Table 7）</td></tr>
+<tr><td>対応分析（multiple correspondence analysis）</td><td>多変量の大規模データを2〜3次元の平面に落とし、距離で類似度を表す社会学系の手法</td><td>概念構造地図（Fig 9）の作図に使用</td></tr>
+</tbody></table></div>
+<p>臨床側の前提も1つ。GCC（Gulf Cooperation Council＝湾岸協力会議）はサウジアラビア、UAE、クウェート、カタール、オマーン、バーレーンの6か国。低蔓延国の基準は「人口100万人・年あたり結核届出100件未満」、前排除は10件未満、排除は1件未満とされる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>結核は Mycobacterium tuberculosis による空気感染性疾患で、COVID-19 流行前は単一の感染性病原体としては HIV/AIDS を上回る世界最大の死因だった。罹患者の約90%は成人で、女性より男性が多い。治療も予防も可能な疾患であり、その実現にはユニバーサル・ヘルス・カバレッジが要る。貧困・HIV感染・低栄養・喫煙・糖尿病といった決定因子への多部門介入で新規感染と発病を減らせる。</p>
+<p>GCC諸国が問題になる理由は地理と人の流れにある。世界の中央に位置し、宗教・商用・観光で膨大な数の旅行者が通過する。WHOの2016年 Global TB Report では GCC 加盟国の負担は100万人あたり6.8〜200件と大きく開いていた。域内で最も多い菌種は M. tuberculosis だが、M. riyadhense、M. fortuitum、M. chlonae も検出されている。</p>
+<p>各国の状況として本文が挙げるのは以下。</p>
+<div class="tw"><table>
+<thead><tr><th>国</th><th>届出率（100万人・年あたり）</th><th>本文の位置づけ</th></tr></thead>
+<tbody>
+<tr><td>バーレーン</td><td>100</td><td>低蔓延国に分類</td></tr>
+<tr><td>サウジアラビア</td><td>89</td><td>低蔓延国に分類</td></tr>
+<tr><td>オマーン</td><td>79</td><td>低蔓延国に分類</td></tr>
+<tr><td>クウェート</td><td>200</td><td>低蔓延国に含まれない</td></tr>
+<tr><td>カタール</td><td>190</td><td>低蔓延国に含まれない</td></tr>
+<tr><td>UAE</td><td>6.8</td><td>低蔓延国に含まれない（本文の分類。数値とは矛盾する）</td></tr>
+</tbody></table></div>
+<p>いずれの国も直近3年で有意な改善を示していない。カタールでは2021年に2020年比で10万人あたり6件（16.67%増）の増加があり、この状況が3年間変わっていない。著者らは、カタールをはじめ GCC の多くの国が2035年までの前排除に到達しないだろうと述べる。</p>
+<p>薬剤耐性の状況：GCC加盟国のMDR-TB有病率は全体で4%だが地理的変動が大きい。カタールでは移民の影響を受けた研究で1.2%。サウジの最近のデータでは系統発生的分布は混合しており、単剤耐性60.8%、多剤耐性25.49%、複数剤耐性（poly-resistant）13.73%。</p>
+<p>危険因子としては、GCC加盟国は糖尿病の年齢調整有病率が高く結核獲得リスクを押し上げること、HIV患者の結核獲得リスクは一般人口の10倍であることが挙げられる。サウジは低蔓延国でありながら、出稼ぎ労働者とマッカ・マディーナへの巡礼者という2つの流入経路を抱え、薬剤耐性結核は非サウジ国籍でより多いという世界的パターンと同じ傾向を示す。</p>
+<p>対策側：GCC保健当局は2010年末（結核の「排除期」）に、自国民の新規塗抹陽性を10万人あたり1未満に下げる目標を採択。BCG接種率はカタール99%、サウジ98%（WHO推計）。DOTS（直接監視下短期化学療法）の100%カバー、サーベイランス強化、高リスク集団の積極的発見、接触者検診、潜在結核治療の開始、薬剤耐性結核プログラムの実施、外国生まれの人々へのケア提供、アドボカシー・コミュニケーション・動員などが用いられてきた。診断はWHO推奨に沿って迅速検査と標準検査を併用し、潜在感染診断にはツベルクリン反応が広く使われ、想定外のアウトブレイク検出には全ゲノムシーケンスが用いられている。</p>
+<p>GCC諸国の保健システムは概して財源が潤沢で、国家結核プログラム・検診・治療は表向き無償で提供される。それでも、外国生まれ（とくに非正規滞在）の脆弱集団がユニバーサル・ヘルス・カバレッジの対象から外れるという重大な穴が残る。</p>
+<p>以上を踏まえた本研究の目的は、Scopusのデータを使って GCC の結核研究における主題領域と最も引用された文献を同定し、上位の機関・雑誌・地域・著者をランク付けし、GCC-TB研究コミュニティの社会ネットワーク構造を描き出すこと。研究トレンドは年次論文数・3フィールドプロット・トレンドテーマ情報で評価する。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：書誌計量分析。介入なし、患者データなし。解析単位は「Scopus収載の原著論文1本」</li><li><strong>データ源</strong>：Scopus 単独（Elsevier）。著者らは多分野をカバーし複雑なキーワード検索を組めることを選定理由に挙げる。PubMed、Web of Science、Google Scholar は使っていない</li><li><strong>対象期間</strong>：1993–2022年の30年間</li><li><strong>検索式</strong>（誌面掲載のまま）：<code>(TITLE-ABS-KEY(tuberculosis OR "MYCOBACTERIUM TUBERCULOSIS" OR "Koch's Disease")) AND (LIMIT-TO(AFFILCOUNTRY, "Saudi Arabia" OR "Kuwait" OR "United Arab Emirates" OR "Qatar" OR "Oman" OR "Bahrain")) AND (LIMIT-TO(DOCTYPE, "ar")) AND (LIMIT-TO(LANGUAGE, "English")) AND (LIMIT-TO(PUBYEAR, -1993–2022))</code></li><li><strong>組み入れ・除外</strong>：原著論文（article）のみ組み入れ。英語以外の言語は除外。総説・レター・会議録・症例報告など article 以外の文献型は除外。検索戦略と組み入れ基準は PRISMA のガイドラインに従ったと記載</li><li><strong>抽出形式</strong>：CSV および BibTeX（本文表記は "CVS and Bib"）で書き出し</li><li><strong>解析ツール</strong>：</li><li>Scopus Analytics および IBM SPSS version 23（誌面表記は "IBM SPPS"）でパフォーマンス・産出分析</li><li>VOSviewer version 1.6.16（ライデン大学 CWTS）で共著・共起ネットワーク</li><li>R パッケージ bibliometrix の biblioshiny でテーマ地図・テーマ進化・トレンドトピック</li><li><strong>統計</strong>：論文数を従属変数、年を独立変数とする線形回帰。相関係数とその統計的有意性を算出</li><li><strong>ネットワーク指標の定義</strong>：VOSviewer上の解析対象を "items" と呼び、任意の2要素（著者・国・キーワード）を結ぶ曲線がリンク。リンクに付く数値が link strength で、大きいほど結びつきが強い。共起分析における link strength は「2つのキーワードが共に出現した雑誌数」、共著分析では「2つの国または研究者がともに関与した論文数」と定義されている</li><li><strong>倫理</strong>：書誌計量研究は通常ヒト被験者や個人データを扱わず公開情報に依拠するため、倫理審査は不要と判断</li><li><strong>再現性</strong>：独立に同じ収集・解析を繰り返すことで検証できるとし、データは著者への請求で入手可能と記載</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/MD.0000000000039052" target="_blank" rel="noopener">原論文（doi.org/10.1097/MD.0000000000039052）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 研究デザインと検索戦略。左から右へ3つの緑色のボックスが太い矢印でつながれたフローチャート。左のボックスは準備段階で「1. 概念化（Conceptualization）／2. 研究目的の設定（Setting research objectives）／3. MeSH browser を用いた検索語の生成（Generating search terms using MeSH browser）」の3項目。太い右向き矢印で右上のボックスへ進み、そこには「1. データベースの選択と検索（Database Selection and search）／2. データの検証とエクスポート（Data verification and export, CVS, Blib）（n = 1999）」の2項目。ここから太い下向き矢印で右下のボックスへ進み、「1. パフォーマンス分析（Performance analysis）／2. トレンドトピック（Trend topics）／3. 知識構造（Knowledge structure）／4. テーマ進化（Thematic Evolution）」の4項目が並ぶ。つまり「準備 → 抽出（1999本）→ 4種類の解析」という3段構えで、選別による除外件数を示すPRISMA型のフロー（記録数、重複除去、スクリーニング除外、適格性除外）は含まれていない。原図・無改変</p>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>方法セクションに残った未来形の記述 2.1 Study design の段落は「A systematic search will be conducted...」「Data will be analyzed...」「Descriptive statistics and network analysis will be employed...」と、すべて未来形で書かれている。プロトコル段階の原稿がそのまま本文に残ったものと考えられ、実際に何を行ったかの記述としては機能していない。査読・編集の粗さを示す痕跡として、批判的吟味の際に押さえておきたい。</p>
+</div>
+<h3>4. 結果 — 全体像と産出</h3>
+<p>30年間（1993–2022年）で、GCC6か国の研究者が関与した結核の原著論文は <strong>1999本</strong>。820の情報源（雑誌）に掲載され、<strong>9462人</strong>の研究者が関与した（1本あたり7.06人）。GCCの研究者は参考文献として <strong>60,620件</strong> を引用している。文書の年平均成長率は <strong>7.76%</strong>。年次と論文数の線形回帰では <strong>R = 0.836</strong> で統計的に有意（誌面の表記は "R = 0.836; P-value; .05" と組版が崩れているが、文脈上 P &lt; .05 の意）。</p>
+<h4>Table 1. TB-GCC研究の主要情報</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>対象期間</td><td>1993–2022</td></tr>
+<tr><td>情報源（雑誌）数</td><td>820</td></tr>
+<tr><td>文献数</td><td>1999</td></tr>
+<tr><td>年平均成長率</td><td>7.76%</td></tr>
+<tr><td>文献の平均年齢</td><td>8.95年</td></tr>
+<tr><td>1文献あたり平均被引用数</td><td>14.84</td></tr>
+<tr><td>参照文献総数</td><td>60,620</td></tr>
+<tr><td>Keywords Plus（ID）</td><td>12,540</td></tr>
+<tr><td>著者キーワード（DE）</td><td>3939</td></tr>
+<tr><td>著者数</td><td>9462</td></tr>
+<tr><td>単著文献の著者数</td><td>125</td></tr>
+<tr><td>単著文献数</td><td>154</td></tr>
+<tr><td>1文献あたり共著者数</td><td>7.06</td></tr>
+<tr><td>国際共著率</td><td>50.25%</td></tr>
+</tbody></table></div>
+<h4>Table 2. GDP・人口との関係でみた論文数</h4>
+<div class="tw"><table>
+<thead><tr><th>GCC</th><th>平均人口</th><th>論文数</th><th>100万人あたり論文数</th><th>平均GDP（10億USD）</th><th>10億USDあたり論文数</th><th>被引用数</th></tr></thead>
+<tbody>
+<tr><td>サウジアラビア</td><td>31,459,000</td><td>1352</td><td>42.98</td><td>607.29</td><td>2.23</td><td>28,056</td></tr>
+<tr><td>UAE</td><td>8,901,000</td><td>238</td><td>26.74</td><td>323.86</td><td>0.73</td><td>4283</td></tr>
+<tr><td>クウェート</td><td>3,588,000</td><td>217</td><td>60.48</td><td>132.53</td><td>1.64</td><td>4594</td></tr>
+<tr><td>カタール</td><td>2,235,000</td><td>189</td><td>84.56</td><td>134.00</td><td>1.41</td><td>3831</td></tr>
+<tr><td>オマーン</td><td>3,952,000</td><td>117</td><td>29.61</td><td>63.82</td><td>1.83</td><td>2730</td></tr>
+<tr><td>バーレーン</td><td>1,390,000</td><td>41</td><td>29.50</td><td>28.86</td><td>1.42</td><td>2089</td></tr>
+</tbody></table></div>
+<p>絶対数ではサウジが群を抜くが、著者らも指摘するとおり、これはGDP（平均607.29億ドル＝6072億USD規模）と強く関係する。人口100万人あたりに換算するとカタールが84.56本で首位、クウェート60.48本が2位で、サウジは42.98本の3位に下がる。研究費効率（10億USDあたり論文数）ではサウジ2.23が最も高く、UAEは0.73で最も低い。被引用数の順位は論文数の順位とおおむね一致し、最多はサウジ（28,056回）、次いでクウェート（4594回）。</p>
+<p>なお、TB研究の分布自体はGCC域内に閉じず、ほぼ世界中に広がっている（原著Figure 2の世界地図。青の濃さが論文数の多さを表す）。</p>
+<h4>Table 3. 論文数の多いGCC所在機関（上位20）</h4>
+<div class="tw"><table>
+<thead><tr><th>機関</th><th>国</th><th>論文数</th></tr></thead>
+<tbody>
+<tr><td>King Saud University</td><td>サウジ</td><td>518</td></tr>
+<tr><td>Kuwait University</td><td>クウェート</td><td>171</td></tr>
+<tr><td>King Faisal Specialist Hospital and Research Centre</td><td>サウジ</td><td>150</td></tr>
+<tr><td>King Abdulaziz University</td><td>サウジ</td><td>143</td></tr>
+<tr><td>Hamad Medical Corporation</td><td>カタール</td><td>102</td></tr>
+<tr><td>United Arab Emirates University</td><td>UAE</td><td>79</td></tr>
+<tr><td>Imam Abdulrahman Bin Faisal University</td><td>サウジ</td><td>63</td></tr>
+<tr><td>King Khalid University Hospital</td><td>サウジ</td><td>62</td></tr>
+<tr><td>Ministry of Health Saudi Arabia</td><td>サウジ</td><td>62</td></tr>
+<tr><td>King Saud bin Abdulaziz University for Health Sciences</td><td>サウジ</td><td>62</td></tr>
+<tr><td>King Khalid University</td><td>サウジ</td><td>57</td></tr>
+<tr><td>Jazan University</td><td>サウジ</td><td>55</td></tr>
+<tr><td>King Abdullah University of Science and Technology</td><td>サウジ</td><td>52</td></tr>
+<tr><td>King Abdulaziz Medical City - Riyadh</td><td>サウジ</td><td>52</td></tr>
+<tr><td>Alfaisal University</td><td>サウジ</td><td>45</td></tr>
+<tr><td>Hamad General Hospital</td><td>カタール</td><td>42</td></tr>
+<tr><td>King Fahad Medical City</td><td>サウジ</td><td>41</td></tr>
+<tr><td>University of Hail</td><td>サウジ</td><td>39</td></tr>
+<tr><td>Ministry of Health Oman</td><td>オマーン</td><td>38</td></tr>
+<tr><td>Umm Al-Qura University</td><td>サウジ</td><td>36</td></tr>
+</tbody></table></div>
+<p>合計160機関が GCC の結核関連知識の発信に関与した。上位20機関のうち15機関（75%）がサウジの機関である。GCC域外からの寄与では University of Sydney（豪州）と London School of Hygiene and Tropical Medicine（英国）が最大。研究資金は国内外の159の資金源から得られており、最大の支援者は King Saud University。</p>
+<h3>5. 3フィールドプロット — 国・キーワード・所属の対応</h3>
+<p>原著Figure 3は、左に国、中央に著者キーワード、右に所属機関を配置し、3者の対応を帯でつないだサンキー型の図（3フィールドプロット）。</p>
+<p>読み取られた内容は以下。</p>
+<ul><li>所属機関の上位ではサウジがクウェート・オマーン・カタールを上回る</li><li>GCCの結核研究に大きく寄与している国外パートナーは、エジプト、エチオピア、オランダ、米国、パキスタン、英国、インド</li><li>インドとの共同研究は、インドが結核の高蔓延国であることが背景</li><li>英国・米国は高度な研究リソースの供給元として機能</li><li>他のアラブ諸国の参加も目立つ。言語的・文化的な近さと、湾岸以外のアラブ諸国出身の研究者が多数在籍することが理由と考察されている</li><li>中央のキーワード側で多くの国に共通するのは、原因菌、治療抵抗性、肺結核、危険因子、分子ドッキング</li></ul>
+<h3>6. トレンドトピック — 30年でテーマはどう動いたか</h3>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/MD.0000000000039052" target="_blank" rel="noopener">原論文（doi.org/10.1097/MD.0000000000039052）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 過去15年間のトレンドトピック（図の横軸は1995年から2021年まで伸びている）。縦軸に用語（Term）、横軸に年（Year）を取り、各用語について「出現年の中央値」を丸で、その用語が使われた期間を水平の細い線分で示したbibliometrixのトレンド図。丸の大きさは用語頻度（Term frequency）で、凡例は100・200・300・400の4段階。縦軸は上から下へ、中央値が新しい用語ほど上に来るよう並ぶ。最上部にあるのが deep learning と chest x-ray（いずれも2021年前後、丸は小さい）、続いて molecular docking、covid-19、risk factors、mycobacterium bovis、bovine tuberculosis、isoniazid、rifampicin、tb、mycobacterium tuberculosis、prevalence、antitubercular、oman、antimycobacterial activity、antimicrobial、tuberculosis（丸が最大で400付近、中央値は2016年前後）、pulmonary tuberculosis（丸が大きく2016年付近）、children、sudan、antimycobacterial、inflammatory bowel disease、saudi arabia、hiv、epidemiology、rheumatoid arthritis、extra-pulmonary tuberculosis、aids、diagnosis、m. tuberculosis、pulmonary、incidence、miliary tuberculosis、sarcoidosis、resistance、abdominal、magnetic resonance imaging、crohn's disease、meningitis、serodiagnosis、abscess、laparoscopy、lymphadenopathy、kuwait、spinal tuberculosis、abdominal tuberculosis、isoniazid resistance、travel、bronchoscopy、middle east、hemodialysis、computed tomography、ct（最下部、1999年前後）。全体として、1990年代後半から2000年代前半は画像診断（ct、computed tomography）・内視鏡的手技（bronchoscopy、laparoscopy）・部位別結核（spinal、abdominal、miliary）が中心で、2010年代前半に疫学・診断・鑑別（sarcoidosis、crohn's disease、rheumatoid arthritis）へ移り、2010年代後半に薬剤耐性と創薬（isoniazid、rifampicin、antitubercular）、2020年以降に人工知能と画像（deep learning、chest x-ray）とCOVID-19が立ち上がる、という重心移動が一目で分かる。原図・無改変</p>
+</div>
+<p>著者らは、deep learning、chest x-ray、molecular docking、COVID-19、risk factors、Mycobacterium bovis の6語が現在のトレンドと強く結びついていると述べ、その具体例を挙げている。</p>
+<ul><li>新規作用機序の抗結核薬探索の重要性。トリプトファン合成酵素は結核菌の増殖・生存に必要なトリプトファン生合成経路の最終段階を触媒する、遺伝学的に検証済みの酵素であり、モデルベースの薬理学的アッセイ・ドッキング・生物学的評価・分子動力学シミュレーションを組み合わせた阻害剤探索が、中国・パキスタン・サウジの共同研究として行われた</li><li>同様の創薬共同研究はエジプト–サウジ間、南アフリカ–サウジ間でも行われている</li><li>深層学習による胸部X線からの信頼性の高い結核診断はカタールで実施された</li><li>深層学習を用いた結核検出のための画像強調に関する国際研究は、サウジと他のアジア諸国によって実施された</li></ul>
+<h3>7. 共同研究 — 共著分析</h3>
+<p>WHOの枠組みでは、患者中心の統合的な治療と予防に焦点を当てつつ、研究努力を通じて結核に取り組むことが不可欠な構成要素とされる。協調的な研究行動は、結核・併存疾患・健康関連危険因子に対する包括的で人中心のサービスを各国が導入・拡大するのを支援することを目指す。この協働の想定利用者は、保健省・関連省庁の職員、政策立案者、国際的な技術・資金提供機関、研究者、NGO・市民社会組織、プライマリケア提供者、専門医療従事者、そして公私両セクターで結核と併存疾患への対応を支えるコミュニティヘルスワーカーとされている。</p>
+<p>数字は以下。</p>
+<ul><li>単著論文は <strong>154本</strong>（全1999本のうち7.7%）</li><li>1論文あたり共著者数 7.06、国際共著率 <strong>50.25%</strong></li><li>GCC諸国と共同研究を行った国は <strong>180か国</strong></li></ul>
+<h4>Table 4. 共著分析（VOSviewer指標とbibliometrix指標）</h4>
+<div class="tw"><table>
+<thead><tr><th>GCC</th><th>Links</th><th>Total link strength</th><th>SCP</th><th>MCP</th><th>MCP-ratio</th></tr></thead>
+<tbody>
+<tr><td>サウジアラビア</td><td>96</td><td>2388</td><td>526</td><td>247</td><td>0.32</td></tr>
+<tr><td>UAE</td><td>96</td><td>892</td><td>163</td><td>82</td><td>0.335</td></tr>
+<tr><td>クウェート</td><td>60</td><td>162</td><td>245</td><td>142</td><td>0.184</td></tr>
+<tr><td>カタール</td><td>94</td><td>557</td><td>86</td><td>33</td><td>0.277</td></tr>
+<tr><td>オマーン</td><td>97</td><td>651</td><td>37</td><td>19</td><td>0.339</td></tr>
+<tr><td>バーレーン</td><td>90</td><td>395</td><td>9</td><td>8</td><td>0.236</td></tr>
+</tbody></table></div>
+<p>サウジは域内・国際の双方で最も強い結びつき（総リンク強度2388）を持ち、SCP・MCPともに最大。一方、国際共同研究の「割合」で見ると最も高いのはオマーン（MCP-ratio 0.339）で、次いでUAE（0.335）。クウェートは総リンク強度が162と極端に低く、MCP-ratioも0.184で最低であり、国内完結型の研究が中心であることが読み取れる。</p>
+<h4>Table 5. GCC域内の共同研究（リンク強度）</h4>
+<div class="tw"><table>
+<thead><tr><th>From</th><th>To</th><th>リンク強度</th></tr></thead>
+<tbody>
+<tr><td>サウジ</td><td>UAE</td><td>26</td></tr>
+<tr><td>サウジ</td><td>オマーン</td><td>19</td></tr>
+<tr><td>サウジ</td><td>カタール</td><td>12</td></tr>
+<tr><td>サウジ</td><td>バーレーン</td><td>11</td></tr>
+<tr><td>サウジ</td><td>クウェート</td><td>4</td></tr>
+<tr><td>オマーン</td><td>UAE</td><td>9</td></tr>
+<tr><td>UAE</td><td>クウェート</td><td>8</td></tr>
+<tr><td>カタール</td><td>オマーン</td><td>7</td></tr>
+<tr><td>カタール</td><td>UAE</td><td>6</td></tr>
+<tr><td>バーレーン</td><td>オマーン</td><td>6</td></tr>
+<tr><td>カタール</td><td>バーレーン</td><td>5</td></tr>
+<tr><td>オマーン</td><td>クウェート</td><td>4</td></tr>
+<tr><td>バーレーン</td><td>UAE</td><td>4</td></tr>
+<tr><td>カタール</td><td>クウェート</td><td>2</td></tr>
+<tr><td>バーレーン</td><td>クウェート</td><td>0</td></tr>
+</tbody></table></div>
+<p>域内協力の最頻はUAE–サウジの26。著者らが「意外なことに」と書いているとおり、<strong>オマーン–クウェート間の共著は0</strong>（Table 5の表記はバーレーン–クウェート行が0。本文では「オマーンとクウェートの間に協力が見られなかった」と記述されており、表と本文で対象ペアがずれている）。域内15ペアの合計リンク強度は123にすぎず、国際共著率50.25%という数字と比べると、GCC域内の横のつながりは極端に細い。</p>
+<p>機関単位で最も協働的なのは College of Medicine, Alfaisal University（リヤド、サウジ）、次いで Arabian Gulf University（マナーマ、バーレーン）。</p>
+<p>研究者単位では、原著Figure 6のオーバーレイ可視化（フレームの大きさが共著論文数、色が協働の時期）から以下が読み取られている。</p>
+<ul><li>最も協働的な研究者は <strong>Mustafa, A.S.</strong>（クウェート大学医学部微生物学教室）。各種の国際機関と結核ワクチンの研究を行ってきた</li><li>2位は <strong>Haque, S.</strong>（Jazan University 看護学部、サウジ）。結核に関するエビデンスに基づく医療と薬剤耐性結核菌を扱ってきた</li><li>フレームの黄色は最近になって協働を始めた研究者を示す。オマーンの <strong>Al-abri, S.</strong>（オマーン保健省）が近年、他国の多くの研究者と協力を開始した例として挙げられている</li></ul>
+<h3>8. 主題領域</h3>
+<p>原著Figure 7は主題領域別の論文比率を示す円グラフ。</p>
+<div class="tw"><table>
+<thead><tr><th>主題領域</th><th>比率</th></tr></thead>
+<tbody>
+<tr><td>Medicine（医学）</td><td>52%</td></tr>
+<tr><td>Biochemistry, Genetics and Molecular Biology</td><td>10%</td></tr>
+<tr><td>Immunology and Microbiology</td><td>8.27%</td></tr>
+<tr><td>Pharmacology and Toxicology</td><td>8%</td></tr>
+<tr><td>Chemistry / Agricultural and Biological Sciences / Multidisciplinary / Computer Science / Materials Science / Chemical Engineering / Engineering / Physics and Astronomy / Mathematics</td><td>各1〜2%</td></tr>
+<tr><td>その他の主題領域</td><td>5%</td></tr>
+</tbody></table></div>
+<p>医学・免疫学・微生物学・薬理学が中心なのは当然として、著者らは「意思決定のビジネス的側面を最も検討し得るのは社会科学研究のはずだが、ビジネス・社会科学・経営学・経済学の領域はこの現象で立ち遅れている」と指摘している。</p>
+<p>獣医学・医学の交点として本文が挙げるのはラクダ科動物の話題。サウジの研究で、ラクダ科動物が M. tuberculosis、M. bovis、M. caprae、M. microti と関連づけられた。ウシ型結核は主に M. bovis が原因で、非加熱の牛乳・乳製品の摂取や、感染動物に近接した際の飛沫により人に伝播しうる。生の状態で飲まれることの多いラクダ乳から M. bovis が分離されており、結核感染源になり得る。とくに取扱者における公衆衛生上のリスクが問題で、健康安全対策と動物サーベイランスによる低減が必要とされる。</p>
+<h3>9. 主要な研究者</h3>
+<h4>Table 6. GCC-TBの上位研究者</h4>
+<div class="tw"><table>
+<thead><tr><th>順位</th><th>氏名</th><th>Scopus ID</th><th>所属</th><th>国</th><th>TB論文数</th><th>全論文数</th><th>被引用数</th><th>h-index</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Mustafa, A.S.</td><td>7101901642</td><td>Kuwait University</td><td>クウェート</td><td>71</td><td>189</td><td>5083</td><td>41</td></tr>
+<tr><td>2</td><td>Ahmed, S.</td><td>7401991435</td><td>Kuwait University</td><td>クウェート</td><td>45</td><td>240</td><td>5029</td><td>41</td></tr>
+<tr><td>3</td><td>Memish, A.Z.</td><td>7005059350</td><td>Ministry of Health</td><td>サウジ</td><td>39</td><td>787</td><td>122,566</td><td>112</td></tr>
+<tr><td>4</td><td>Pain, A.</td><td>7004341451</td><td>King Abdullah University of Science and Technology</td><td>サウジ</td><td>36</td><td>220</td><td>18,873</td><td>58</td></tr>
+<tr><td>5</td><td>Mokaddas, E.</td><td>6701763960</td><td>Kuwait National TB Control Laboratory</td><td>クウェート</td><td>28</td><td>113</td><td>2404</td><td>31</td></tr>
+<tr><td>6</td><td>Al-Attiyah, R.</td><td>6602527023</td><td>Kuwait University</td><td>クウェート</td><td>27</td><td>63</td><td>1665</td><td>25</td></tr>
+<tr><td>7</td><td>Ameni, G.</td><td>55666866600</td><td>United Arab Emirates University</td><td>UAE</td><td>25</td><td>174</td><td>3186</td><td>30</td></tr>
+<tr><td>8</td><td>Haque, S.</td><td>35793732800</td><td>Jazan University</td><td>サウジ</td><td>22</td><td>251</td><td>3304</td><td>25</td></tr>
+<tr><td>9</td><td>Varghese, B.</td><td>54986957400</td><td>King Faisal Specialist Hospital and Research Centre</td><td>サウジ</td><td>22</td><td>27</td><td>382</td><td>12</td></tr>
+<tr><td>10</td><td>Al-Hajoj, S.</td><td>6505831108</td><td>King Faisal Specialist Hospital and Research Centre</td><td>サウジ</td><td>21</td><td>51</td><td>1701</td><td>17</td></tr>
+</tbody></table></div>
+<p>上位3名はクウェート、サウジ、UAEの所属。このリストの50%は7機関のみに所属しており、3名（Mustafa A.S.、Ahmed S.、Al-Attiyah R.）がクウェート大学、2名（Varghese B.、Al-Hajoj S.）が King Faisal Specialist Hospital and Research Centre に所属する。カタール・オマーン・バーレーンからは上位10名に誰も入らなかったが、各国内で最も生産的な研究者は Khan, F.Y.（カタール）、Al-Abri, S.（オマーン）、Alasfoor, D.（バーレーン）とされる。</p>
+<p>ランキングは論文数で決めているが、著者らは h-index の位置づけを補足している。h-indexは2005年にJorge Hirschが個々の研究者の貢献を測る指標として作ったもので、量と影響力を1つの値にまとめるため分野内・分野間の直接比較を可能にする。h-indexで見ると最も傑出しているのは <strong>Memish, A.Z.（h-index 112）</strong> であり、結核論文数では3位だが、全論文787本・総被引用122,566回と桁が違う。</p>
+<h3>10. 雑誌 — どこに載っているか</h3>
+<p>著者らは、この分析によって GCC-TB の論文を掲載する雑誌が特定でき、研究者が投稿先を狙えるようになると述べる。雑誌の影響力指標としては、Journal Citation Report が提供する Impact Factor（IF）が最も有名だが、IFはClarivate Analytics（旧Thomson Reuters）が管理する Web of Science の拡張科学引用索引でのみ用いられる。本研究では Scopus（Elsevier）の <strong>CiteScore</strong> をIFの代替として採用している。</p>
+<h4>Table 7. 主要な掲載誌（上位10誌）</h4>
+<div class="tw"><table>
+<thead><tr><th>雑誌</th><th>論文数</th><th>被引用数</th><th>総リンク強度</th><th>CiteScore</th></tr></thead>
+<tbody>
+<tr><td>Saudi Medical Journal</td><td>92</td><td>189</td><td>49</td><td>2.1</td></tr>
+<tr><td>Annals of Saudi Medicine</td><td>45</td><td>6</td><td>26</td><td>2.2</td></tr>
+<tr><td>International Journal of Tuberculosis and Lung Disease</td><td>35</td><td>5</td><td>41</td><td>4.5</td></tr>
+<tr><td>PLOS One</td><td>35</td><td>0</td><td>30</td><td>5.6</td></tr>
+<tr><td>International Journal of Mycobacteriology</td><td>33</td><td>8</td><td>16</td><td>2.2</td></tr>
+<tr><td>Medical Principles and Practice</td><td>27</td><td>0</td><td>69</td><td>3.8</td></tr>
+<tr><td>International Journal of Infectious Diseases</td><td>25</td><td>9</td><td>8</td><td>10.8</td></tr>
+<tr><td>Antimicrobial Agents and Chemotherapy</td><td>22</td><td>19</td><td>9</td><td>9.3</td></tr>
+<tr><td>BMJ Case Reports</td><td>22</td><td>7</td><td>0</td><td>0.9</td></tr>
+<tr><td>Scandinavian Journal of Immunology</td><td>17</td><td>4</td><td>72</td><td>5.5</td></tr>
+</tbody></table></div>
+<p>著者らは「上位10誌のCiteScoreは0.9から10.8の範囲にあり、これらが評価の高い、よく知られた、高インパクトの雑誌であって結核研究の進展に大きく貢献してきたことを示している」と結論しているが、CiteScore 0.9 の雑誌を「高インパクト」と呼ぶのは無理がある。また、論文数の順位と CiteScore の順位はほとんど連動していない（最多掲載の Saudi Medical Journal は CiteScore 2.1、CiteScore最高の International Journal of Infectious Diseases は25本で7位）。</p>
+<h3>11. 著者キーワードと概念構造地図</h3>
+<p>著者キーワードの共起分析は、同じ論文に一緒に現れるキーワードと、より頻繁に現れるキーワードを調べるもの。本研究では索引キーワード（Keywords Plus）ではなく著者キーワードに重点を置いた。</p>
+<ul><li>解析対象となった著者キーワードは <strong>3936語</strong>（Table 1では3939語と記載されており、本文と表が3語ずれる）</li><li>共起の最小回数を10回に設定したとき、条件を満たしたのは <strong>39語のみ</strong></li><li>最小8回では <strong>77語</strong>、最小5回では <strong>157語</strong>、最小3回では <strong>384語</strong></li><li>データクレンジング後、原著Figure 8には39項目が表示されている（著者キーワードの共起のオーバーレイ可視化）</li></ul>
+<p>重複や類似語も処理された。本文には「TBはTBの短縮形である。したがってそれらの語のうち1つだけが使われた」という明らかに壊れた文があるが、意図は "tuberculosis" と "TB" のような表記ゆれの統合であると読める。</p>
+<h4>Table 8. 最頻出の著者キーワード（表題は「44 author keywords」だが実際は39語）</h4>
+<div class="tw"><table>
+<thead><tr><th>キーワード</th><th>出現数</th><th>総リンク強度</th></tr></thead>
+<tbody>
+<tr><td>saudi arabia</td><td>55</td><td>70</td></tr>
+<tr><td>pulmonary tuberculosis</td><td>53</td><td>30</td></tr>
+<tr><td>molecular docking</td><td>36</td><td>25</td></tr>
+<tr><td>diagnosis</td><td>35</td><td>37</td></tr>
+<tr><td>covid-19</td><td>30</td><td>26</td></tr>
+<tr><td>hiv</td><td>29</td><td>35</td></tr>
+<tr><td>isoniazid</td><td>29</td><td>35</td></tr>
+<tr><td>epidemiology</td><td>27</td><td>39</td></tr>
+<tr><td>rifampicin</td><td>25</td><td>26</td></tr>
+<tr><td>drug resistance</td><td>24</td><td>42</td></tr>
+<tr><td>risk factors</td><td>21</td><td>28</td></tr>
+<tr><td>uveitis</td><td>21</td><td>16</td></tr>
+<tr><td>oman</td><td>20</td><td>26</td></tr>
+<tr><td>mdr-tb</td><td>19</td><td>23</td></tr>
+<tr><td>prevalence</td><td>18</td><td>27</td></tr>
+<tr><td>treatment</td><td>17</td><td>15</td></tr>
+<tr><td>children</td><td>15</td><td>23</td></tr>
+<tr><td>qatar</td><td>15</td><td>22</td></tr>
+<tr><td>kuwait</td><td>15</td><td>15</td></tr>
+<tr><td>mycobacterium bovis</td><td>15</td><td>7</td></tr>
+<tr><td>antitubercular</td><td>15</td><td>6</td></tr>
+<tr><td>incidence</td><td>14</td><td>33</td></tr>
+<tr><td>pharmacokinetics</td><td>13</td><td>13</td></tr>
+<tr><td>antimycobacterial activity</td><td>13</td><td>5</td></tr>
+<tr><td>resistance</td><td>12</td><td>14</td></tr>
+<tr><td>pulmonary</td><td>12</td><td>13</td></tr>
+<tr><td>sudan</td><td>12</td><td>12</td></tr>
+<tr><td>pneumonia</td><td>12</td><td>11</td></tr>
+<tr><td>abscess</td><td>12</td><td>9</td></tr>
+<tr><td>pleural effusion</td><td>12</td><td>7</td></tr>
+<tr><td>antimycobacterial</td><td>12</td><td>5</td></tr>
+<tr><td>case report</td><td>11</td><td>12</td></tr>
+<tr><td>bovine tuberculosis</td><td>11</td><td>9</td></tr>
+<tr><td>cytotoxicity</td><td>11</td><td>7</td></tr>
+<tr><td>miliary tuberculosis</td><td>11</td><td>5</td></tr>
+<tr><td>computed tomography</td><td>10</td><td>10</td></tr>
+<tr><td>diabetes</td><td>10</td><td>10</td></tr>
+<tr><td>synthesis</td><td>10</td><td>9</td></tr>
+<tr><td>latent tuberculosis infection</td><td>10</td><td>7</td></tr>
+</tbody></table></div>
+<p>キーワード群は薬剤耐性とMDR-TBに言及している。著者らは、薬剤耐性が結核治療プロセスでますます重大な問題になりつつあり、いかなる創薬プログラムも既存耐性を持つ臨床分離株の割合を考慮する必要があること、新規薬剤候補や新レジメンの設計では排出ポンプの亢進や透過性低下といった非特異的な耐性機序も考慮しなければならないことを強調している。</p>
+<p>なお、出現数10回の閾値で「sudan（スーダン）」が12回入っているのが目を引く。GCC所属で結核研究を行う研究者にスーダン出身者が多い（本論文の著者にも Abdelwahab、Taha、El Hassan などスーダン系の名が並ぶ）ことの反映と読める。臨床キーワードとしては uveitis（ぶどう膜炎、21回）、pleural effusion（胸水、12回）、miliary tuberculosis（粟粒結核、11回）といった肺外結核の語がまとまって上位に来ており、湾岸地域の結核診療では肺外病変の比重が高いことを示唆する。</p>
+<p>原著Figure 9の概念構造地図は、Scopus由来の書誌情報に階層的確率的クラスタリング（Hierarchical Stochastic Clustering）を適用した共語分析の結果。多重対応分析（multiple correspondence analysis）で、多変数の大規模データを低次元空間に変換し、平面上の距離でキーワード間の類似度を表す。中心に近いキーワードほど近年注目が集まっているものであり、周縁に向かうほど研究テーマは狭くなるか、他のテーマへの移行を意味する。3つの文書グループが同定された。</p>
+<div class="tw"><table>
+<thead><tr><th>クラスタ</th><th>中身</th><th>解釈</th></tr></thead>
+<tbody>
+<tr><td>赤</td><td>サウジ・カタール・オマーンにおける危険因子と罹患率の研究。pneumonia も含まれる</td><td>三角形の広がりを持つ。結核性肺炎は他の肺炎に紛れて誤診されやすく、より危険な段階まで進行しうる</td></tr>
+<tr><td>青</td><td>結核とCOVID-19の交差流行</td><td>GCCの研究者と世界の研究者の双方が注目</td></tr>
+<tr><td>（もう1群）</td><td>遺伝子多型と結核リスクの関係を扱うメタ解析群</td><td>とくにサウジのJazan University の研究者が多数実施</td></tr>
+</tbody></table></div>
+<h3>12. テーマ地図</h3>
+<p class="figref">🖼 原著のFigure 10 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/MD.0000000000039052" target="_blank" rel="noopener">原論文（doi.org/10.1097/MD.0000000000039052）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 10. テーマ地図（thematic map）。横軸が関連度（Relevance degree, Centrality）、縦軸が発展度（Development degree, Density）で、破線の十字により4象限に分かれる。左上が Niche Themes、右上が Motor Themes、右下が Basic Themes、左下が Emerging or Declining Themes。各象限に配置された語群は以下のとおり。右上のMotor Themesには「oman／children／abscess」の淡紫の小さな円。右上寄りで縦軸の中央付近（Motor と Basic の境界上）に「tuberculosis／saudi arabia／pulmonary tuberculosis」の大きな緑の円があり、この図で最大のクラスタ。右下のBasic Themesには「mycobacterium tuberculosis／isoniazid／rifampicin」の赤い円と、中央寄りに「bovine tuberculosis／mycobacterium bovis」の淡青の円、およびほぼ中心線上に「antitubercular」。左上のNiche Themesには「molecular docking／antimycobacterial／cytotoxicity」の淡青の円と、その下に「antimycobacterial activity」、さらに左に数字の「1」とラベルされた小さな橙の点。左下のEmerging or Declining Themesには「uveitis」の淡紫の小さな円のみ。原図・無改変</p>
+</div>
+<p>著者らの読み方は以下。</p>
+<ul><li>主題の大半は、高い中心性を持ちながら密度の低い2群、すなわち <strong>motor themes（推進テーマ）</strong> と <strong>basic themes（基本テーマ）</strong> に分かれる。基本テーマと推進テーマはいずれも有望であり、研究者が取り組んで成果を出しやすい</li><li>GCC-TB文献は、専門的テーマ（niche）と推進テーマが扱う話題については詳細に踏み込んでいる。ただしGCC-TBの場合、それらの課題は検討はされているものの完全には成熟していない</li><li>研究量の蓄積と、さらなる努力の必要性の双方によって、この問題は「新興（emergent）」から「基本（basic）」へ移行しつつある。その一例が "anti-tubercular" という語で、新興テーマであると同時に基本テーマの1つでもある。したがって、より多くの研究が強く望まれる</li><li>クラスタリングはトピッククラスタを形成してネットワーククラスタを整理し、その進化を追跡することで研究分野がどう生まれ発展するかを理解するための手法</li><li><strong>基本テーマ</strong> に含まれるのは M. tuberculosis、isoniazid、rifampicin、bovine TB、M. bovis。これは従来薬による結核治療の話題であり、結核菌のこれら薬剤への耐性と関係している可能性がある。結核菌の耐性の台頭は世界的に確立した現象であり、疾患拡散のホットスポットである。極めて厳格で有効な対策が存在するにもかかわらず、高病原性疾患の絶えず変化する動態のために脅威は持続する</li><li><strong>ニッチテーマ</strong> では、GCC-TB研究は結核の新薬発見とその細胞毒性評価に焦点を当てている。これらのアラブ諸国の研究者は分子ドッキング技術を用いて前進している</li></ul>
+<h3>13. テーマ進化</h3>
+<p class="figref">🖼 原著のFigure 11 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/MD.0000000000039052" target="_blank" rel="noopener">原論文（doi.org/10.1097/MD.0000000000039052）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 11. テーマ進化（thematic evolution）。3つの時間区分を左から右に並べたサンキー図。区分は 1993–2011、2012–2019、2020–2022 で、各区分の縦棒がその時期の主要キーワードを表し、灰色の帯が時期をまたぐテーマの継承を示す。左端（1993–2011）は上から crohn's disease（橙）、mycobacterium tuberculosis（緑、この時期で最大）、pulmonary tuberculosis（赤）、tuberculosis（青）、bronchoscopy（桃）の5項目。中央（2012–2019）は上から tuberculosis、isoniazid、docking、m. tuberculosis、molecular docking、infection control、infections、meta-analysis、pulmonary tuberculosis、latent tuberculosis infection、oman、antimycobacterial、antitubercular、mycobacterium、bovine tuberculosis、antimycobacterial activity、diabetes の17項目に細分化される。右端（2020–2022）は上から tuberculosis（緑、大）、mycobacterium tuberculosis（赤、大）、antitubercular（橙）、mycobacterium bovis（桃）、histopathology（淡青）、rifampicin（紫）、bovine tuberculosis（淡緑）、deep learning（灰）、uveitis（黄）の9項目で、上位2つが大半を占める。帯の流れを追うと、mycobacterium tuberculosis が全期間を通じて太い幹として続き、中間期に molecular docking・meta-analysis・latent tuberculosis infection といった枝が一斉に開き、最終期にはそれらが再び tuberculosis と mycobacterium tuberculosis に収束しつつ、histopathology と deep learning が新しい細い枝として出現している。原図・無改変</p>
+</div>
+<p>著者らの記述をそのまま追うと以下。</p>
+<ul><li>1993年以降のGCC-TB文献の主題発展を、著者キーワードを用いて示した。2か所の時間的区切りにより3つの時間区分を作り、biblioshiny で主題展開を作図した。問題の進行についてより現実的な像を保つため、時代の区切り方は研究者の判断による</li><li>第1区分は1993–2011年、第2区分は2012–2019年、第3区分は2020–2022年</li><li>結核研究の主要な焦点は一貫して原因菌だった</li><li>1993–2011年には、Crohn病、M. tuberculosis、肺結核、気管支鏡が研究に含まれ始めた。結核が広がっていない地域では腸結核がCrohn病と誤診される可能性がある。その結果、M. tuberculosis に関する研究は2022年まで増加傾向を示している</li><li>2012年以降、GCC-TB研究は劇的に進展した。結核菌の抗菌薬耐性が、多くの研究者を新規治療の探索と最先端の創薬手法の採用へ駆り立てた</li><li>2020年以降、疾患そのもの・原因・治療に関する研究領域は再び減少した。しかし histopathology と deep learning という新しい領域が出現した。深層学習アルゴリズムの1つである畳み込みニューラルネットワーク（CNN）は画像分類で大きな有望性を示し、科学界に広く受け入れられている</li></ul>
+<h3>14. 考察</h3>
+<p>著者らの考察の骨子は次のとおり。</p>
+<ul><li>GCC-TBは研究テーマとしてますます盛んになっている。サウジが最多で、UAE、クウェート、カタール、オマーン、バーレーンが続く</li><li>サウジが突出する理由は複数ある。出稼ぎ労働者を通じた結核の拡散への懸念に加え、最大のリスクはマッカとマディーナというイスラム世界の聖地を訪れる巡礼者の膨大な数である。巡礼者は年間を通じて集まるが、とくにラマダーンとズルヒッジャ月に集中する</li><li>高蔓延国と国境を接する低蔓延国では、隣接地域の状況が変化し、それが国内の他地域へ広がりうる</li><li>サウジは他のGCC諸国と比べて大学・研究センターが多く、膨大な研究産出を可能にしている。大学・研究所のレベルでサウジが優位に立っている</li><li>潜在結核感染（とくに高蔓延国からの移民におけるもの）をよりよく管理し、有効な併存疾患の管理策を開発し、結核排除の取り組みを統合できる <strong>強固なGCC共通の結核プログラムを確立する緊急の必要がある</strong></li><li>WHOのSDGsは2030年までの結核撲滅を含む。世界の新規結核患者の60%は、インド、インドネシア、中国、ナイジェリア、パキスタン、南アフリカという上位6つの高蔓延国で発生している。2015年時点で結核は世界の死因上位10位に入っていた</li><li>WHOの野心的な目標が現実になるには、政府の強いコミットメントと賢明な研究投資が要る。さらに、薬剤耐性結核の拡散は結核対策の重大な脅威であり、念頭に置く必要がある</li><li>ハッジやウムラのような大規模イベントは、流行およびパンデミックの脅威を持つ疾患の拡散を高める。多段階の協力、徹底したサーベイランス、リファレンス検査室でのスクリーニング強化が必要</li><li>結核管理のためのGCC戦略計画が策定され、共同研究の奨励を含むいくつかの主要構成要素が盛り込まれている</li><li>世界とGCCを最も強く結びつけているのはサウジ。UAEとサウジの共同頻度が最も高い。意外なことに、オマーンとクウェートはGCC-TBで共同研究をしていない</li></ul>
+<h3>15. 限界（著者らの記載）</h3>
+<ul><li>研究トレンドの可視化にあたり <strong>Scopusデータベースのみ</strong> を考慮した。これが本研究の主要な欠点</li><li>タイトル・抄録・キーワードに含まれる語句での検索は、範囲を狭めるため、類似の焦点を持つ研究や、わずかに異なる語を使った研究を取りこぼした可能性がある。一部の論文が検索結果から漏れた可能性が高い</li><li>データ検索を <strong>英語で書かれた論文に限定</strong> した。著者らは「重要な研究は世界的な可視性と注目を最大化するために英語の雑誌に投稿されるはずだ」という論理でこの選択を正当化しているが、英語バイアスは限界として認めている</li><li>著者キーワードの共起分析では、かなりの数の論文が「雑誌側が提供した著者キーワードのデータ」を含んでいた</li><li>本研究では通常の書誌計量的解析手法を用いてGCC-TB文献から知見を導いた。今後の研究では、書誌計量分析と他の種類の文献評価（システマティックレビュー等）を組み合わせるとよい</li></ul>
+<h3>16. 結論（著者ら）</h3>
+<p>GCC諸国における結核関連の論文数は多い。現在の傾向は、GCCの研究者が deep learning、chest X-ray、molecular docking、COVID-19併存、危険因子、M. bovis にますます焦点を当てていることを示す。本研究はGCC諸国の結核研究の現状と将来動向について、包括的かつ最新の概観を提供した。GCC諸国の研究者は、本研究で挙げた主導的著者との連携を検討すべきである。同様に、主要な組織や国も互いに提携しうる。出版はGCC-TB研究の発展に大きく寄与する権威ある雑誌で行うことができる。</p>
+<h3>17. 批判的吟味（JCでの論点）</h3>
+<p><strong>手法上の限界</strong></p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>何が問題か</th><th>JCでの詰め方</th></tr></thead>
+<tbody>
+<tr><td>データ源がScopus単独</td><td>PubMed・Web of Science・Embaseを併用していない。書誌計量では最低2つのDBを突き合わせて重複と欠落を評価するのが標準。著者ら自身が「主要な欠点」と認めている</td><td>「もしPubMedを足したら1999本がいくつになるか」を著者は検証していない。数字の安定性が不明</td></tr>
+<tr><td>文献型を article のみに限定</td><td>総説・レター・症例報告・会議録を除外。だが Table 7 には BMJ Case Reports が22本入っており、症例報告誌が上位に来ている。除外基準と結果が整合しない</td><td>Scopusの DOCTYPE タグ付けに依存した除外が実質的に機能していない可能性</td></tr>
+<tr><td>英語限定</td><td>アラビア語文献を全て除外。著者らは「重要な研究は英語誌に出る」と正当化するが、地域の結核対策文献はまさに現地語で出る類のもの</td><td>地域の公衆衛生実務を反映しない偏りが構造的に入る</td></tr>
+<tr><td>所属国での絞り込み</td><td>AFFILCOUNTRY による抽出は「著者の1人がその国に所属していれば計上」される。Table 2の国別論文数の合計は2154本で、総数1999本を上回る（多国籍共著の重複計上）。この点の説明が本文にない</td><td>「サウジ1352本」は「サウジの研究者が関与した論文」であって「サウジで行われた研究」ではない</td></tr>
+<tr><td>PRISMA準拠の主張</td><td>「検索戦略と組み入れ基準はPRISMAのガイドラインに従った」と書くが、Figure 1 は3ボックスの概念図であり、記録数・重複除去・スクリーニング除外・適格性除外の件数を示すPRISMAフロー図ではない</td><td>PRISMA準拠の主張は形式的にすぎない</td></tr>
+<tr><td>統計解析の記述</td><td>線形回帰の結果が "R = 0.836; P-value; .05" と組版崩れのまま印刷されている。回帰係数・切片・95%CIは示されない</td><td>年次と論文数に相関があるのは自明（研究数は世界的に増える）。この回帰から何が言えるのかが不明</td></tr>
+<tr><td>未来形のまま残った方法記述</td><td>2.1 Study design が全文未来形。プロトコル原稿の残骸</td><td>編集・査読プロセスの粗さ</td></tr>
+</tbody></table></div>
+<p><strong>内的な数値の不整合</strong></p>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>記述A</th><th>記述B</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>著者キーワード数</td><td>Table 1：3939語</td><td>本文7章：3936語</td><td>3語のずれ</td></tr>
+<tr><td>Table 8 の表題と中身</td><td>表題「最頻出の44の著者キーワード」</td><td>実際に掲載されているのは39語</td><td>本文も「39語」と述べており、表題が誤り</td></tr>
+<tr><td>協働国数</td><td>4章：GCCと共同した国は180か国</td><td>6章：著者らは157か国に所属</td><td>世界の国連加盟国は193。180・157いずれも定義が不明</td></tr>
+<tr><td>共著ゼロのペア</td><td>本文：オマーンとクウェートの間に協力なし</td><td>Table 5：リンク強度0はバーレーン–クウェート行。オマーン–クウェートは4</td><td>本文と表が食い違う</td></tr>
+<tr><td>雑誌ランキングの記述</td><td>本文で Medical Principles and Practice が5位（27本）と6位（25本）に二重登場</td><td>Table 7 では6位が International Journal of Infectious Diseases（25本）</td><td>本文の記述が表と一致しない</td></tr>
+<tr><td>Figure番号</td><td>考察で「TB-GCC研究の世界分布は Figure 1 に示す」</td><td>世界地図は Figure 2</td><td>参照ミス</td></tr>
+<tr><td>低蔓延国の分類</td><td>「低蔓延国はバーレーン（100/100万）、オマーン（79）、サウジ（89）のみ」</td><td>同じ段落でUAEは6.8/100万と記載</td><td>低蔓延の基準は100未満。6.8のUAEを低蔓延から除外するのは矛盾。バーレーンの100もちょうど閾値上</td></tr>
+<tr><td>Table 7 の被引用数</td><td>PLOS One は35本掲載で被引用0、Medical Principles and Practice は27本で被引用0</td><td>平均被引用は14.84（Table 1）</td><td>この列が何を数えているのか（VOSviewer上の局所引用か）が定義されず、額面通りには読めない</td></tr>
+<tr><td>ツール名</td><td>"IBM SPPS"、"CVS and Bib"、検索式の "(PUBYEAR,-1993–2022)"</td><td>正しくは SPSS、CSV、PUBYEAR の範囲指定</td><td>校正の粗さ</td></tr>
+</tbody></table></div>
+<p><strong>論理・解釈上の弱点</strong></p>
+<ul><li>論文数を研究の「重要性」や「必要性」の代理指標として扱っている。実際には研究費・大学数・人口・英語出版習慣に強く規定される量であり、結核の疾病負荷とは別物。サウジの1352本は疾病負荷の順位ではない</li><li>「上位10誌のCiteScoreは0.9〜10.8で、いずれも高インパクト誌」という主張は、下限0.9の存在によって成立しない</li><li>「GCCの研究者は本研究の主導的著者と連携を検討すべき」という結論は、書誌計量の結果から導かれる推奨ではなく自己言及的。責任著者の所属（Jazan University）が Table 3 と Table 6 の双方に登場する点も含め、著者の利害から独立した推奨とは言いがたい</li><li>テーマ地図の解釈で「主題の大半は高い中心性と低い密度を持つ motor themes と basic themes に分かれる」と書くが、motor themes は定義上「高中心性かつ高密度」の象限である。象限の定義そのものが誤って説明されている</li><li>「2020年以降、疾患・原因・治療の研究領域は再び減少した」という記述は、対象期間が2022年で切れているため、Scopusへの収載遅れ（indexing lag）と区別できない。期間終端のアーティファクトの可能性が排除されていない</li><li>対象期間30年（1993–2022）に対し、Figure 4のキャプションは「過去15年のトレンドトピック」となっており、図の横軸は1995年から2021年まで伸びている。キャプションと図が一致しない</li></ul>
+<p><strong>それでも残る価値</strong></p>
+<ul><li>GCC域内の共著が極端に薄いという発見（15ペアの合計リンク強度123に対し、国際共著率50.25%）は、データの粗さを差し引いても方向性としては信頼できる。「湾岸の各国はそれぞれ欧米・南アジアと組んでおり、互いには組んでいない」という構図は、著者らが結論で挙げる「統合されたGCC結核プログラムの必要性」を裏づける</li><li>テーマ進化の3区分（原因菌 → 薬剤耐性・創薬 → 深層学習・画像）は、結核研究に限らず多くの感染症領域で観察される流れであり、当院で扱うテーマの将来を考える際の類型として使える</li></ul>
+<h3>18. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>サウジアラビアの結核に関する公衆衛生的視点（GCCの罹患率・耐性・移民の記述の主要出典）</td><td>Saati AA, et al. Int J Environ Res Public Health. 2021;18:10042</td></tr>
+<tr><td>WHO Global Tuberculosis Report 2016（届出率の出典）</td><td>WHO. Global tuberculosis report. Meeting report. 2016</td></tr>
+<tr><td>結核とCOVID-19の相互作用のレビュー</td><td>Visca D, Ong C, Tiberi S, et al. Pulmonology. 2021;27:151–65</td></tr>
+<tr><td>Global TB Report 2020 と対策の考察</td><td>Chakaya J, Khan M, Ntoumi F, et al. Int J Infect Dis. 2021;113:S7–S12</td></tr>
+<tr><td>潜在結核の世界有病率のシステマティックレビュー・メタ解析</td><td>Cohen A, Mathiasen VD, Schön T, Wejse C. Eur Respir J. 2019;54:1900655</td></tr>
+<tr><td>VOSviewerのソフトウェア原著</td><td>Van Eck N, Waltman L. Scientometrics. 2010;84:523–38</td></tr>
+<tr><td>bibliometrix（R Package）を用いた書誌計量分析の方法論</td><td>Derviş H. J Scientometric Res. 2019;8:156–60</td></tr>
+<tr><td>本研究が手法の型として参照した先行書誌計量研究（船舶代替燃料）</td><td>Moshiul AM, Mohammad R, Hira FA, Maarop N. Sustainability. 2022;14:4947</td></tr>
+<tr><td>PubMed・Scopus・Web of Science・Google Scholarの比較</td><td>Falagas ME, Pitsouni EI, Malietzis GA, Pappas G. FASEB J. 2008;22:338–42</td></tr>
+<tr><td>Impact FactorとCiteScoreの異同</td><td>Fernandez-Llimos F. Pharm Pract (Granada). 2018;16:1282</td></tr>
+<tr><td>CiteScoreの進展・応用・限界</td><td>Teixeira da Silva JA. Publishing Res Quarterly. 2020;36:459–68</td></tr>
+<tr><td>h-indexを用いた書誌計量（低炭素電力への移行）</td><td>Wang L, Wei Y-M, Brown MA. Appl Energy. 2017;205:57–68</td></tr>
+<tr><td>カタールにおける薬剤耐性結核の経験</td><td>Ali M, Howady F, Munir W, et al. Libyan J Med. 2020;15:1744351</td></tr>
+<tr><td>結核薬剤耐性が抗結核薬創薬をどう形づくったか</td><td>Bhagwat A, Deshpande A, Parish T. Front Cell Infect Microbiol. 2022;12:974101</td></tr>
+<tr><td>深層学習・セグメンテーション・可視化による胸部X線からの結核検出（カタール）</td><td>Rahman T, Khandakar A, Kadir MA, et al. IEEE Access. 2020;8:191586–601</td></tr>
+<tr><td>深層学習による結核検出のための画像強調</td><td>Munadi K, Muchtar K, Maulina N, Pradhan B. IEEE Access. 2020;8:217897–907</td></tr>
+<tr><td>結核菌エノイルACP還元酵素（InhA）を標的とする新規トリアゾール（エジプト–サウジ共同）</td><td>El Sawy MA, Elshatanofy MM, El Kilany Y, et al. Int J Mol Sci. 2022;23:4706</td></tr>
+<tr><td>Buddleja saligna由来五環性トリテルペンの抗抗酸菌活性・ドッキング（南ア–サウジ共同）</td><td>Singh A, Venugopala KN, Khedr MA, et al. J Biomol Struct Dyn. 2017;35:2654–64</td></tr>
+<tr><td>結核ワクチン開発の概観（最も協働的な研究者 Mustafa の代表作）</td><td>Whitlow E, Mustafa AS, Hanif SNM. Vaccines. 2020;8:586</td></tr>
+<tr><td>GCCの結核臨床分離株における薬剤耐性の有病率（2002–2013の文献レビュー）</td><td>Areeshi MY, Bisht SC, Mandal RK, Haque S. J Infect Dev Ctries. 2014;8:1137–47</td></tr>
+<tr><td>オマーンにおける結核排除は夢か現実か</td><td>Al Yaquobi F, Al-Abri S, Al-Abri B, et al. Eur Respir J. 2018;51:1702027</td></tr>
+<tr><td>オマーンにおける結核菌系統の動態（2009–2018）</td><td>Al-Mahrouqi S, Ahmed R, Al-Azri S, et al. Pathogens. 2022;11:541</td></tr>
+<tr><td>結核菌による肺炎</td><td>Wei M, Yongjie Z, Zhuoyu Q, et al. Microbes Infect. 2020;22:278–84</td></tr>
+<tr><td>結核とCOVID-19の交差するパンデミック（集団・個人レベルの影響）</td><td>Dheda K, Perumal T, Moultrie H, et al. Lancet Respir Med. 2022;10:603–22</td></tr>
+<tr><td>ラクダ科動物の人獣共通感染症（M. bovis とラクダ乳）</td><td>Al-Salihi KA. J Camelid Sci. 2018;11:1–20</td></tr>
+<tr><td>ハッジ・ウムラと顧みられない熱帯病</td><td>Almutairi MM, Alsalem WS, Hassanain M, Hotez PJ. PLoS Negl Trop Dis. 2018;12:e0006539</td></tr>
+<tr><td>WHO 結核と併存疾患に対する協調行動の枠組み</td><td>World Health Organization. Framework for Collaborative Action on Tuberculosis and Comorbidities. 2022</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 GCC6か国の結核研究30年分1999本を Scopus から計量すると、産出はサウジ（1352本）に集中し国際共著率は50.25%と高い一方、<mark class="hl">域内15ペアの共著リンク強度は合計123しかなく、湾岸各国は互いにではなく域外とだけ組んでいる</mark>。研究テーマの重心は原因菌・抗結核薬から deep learning・胸部X線・分子ドッキング・COVID-19併存へ移った。</p>
+<p><mark class="hl">この論文でICUの診療は1つも変わらない。持ち帰るのは臨床知識ではなく、「MeSHで同義語を作る → データベースを絞る → CSVで出す → VOSviewer/biblioshiny に読ませる」という10分で分野を俯瞰する手順と、論文数を重要性の代理指標にしてはいけないという戒めの2つだけである。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>16 ICUのクラスターRCTでは予後因子の45%が偏る — 家族支援の「効果なし」は本当に効果なしか（エディトリアル・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-026-08538-8.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">16 ICUのクラスターRCTでは予後因子の45%が偏る — 家族支援の「効果なし」は本当に効果なしか（エディトリアル・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Martín Delgado MC, van Mol MMC, Poole D. Family support in intensive care: beyond no effect trials and the hidden challenges of cluster randomization. Intensive Care Med. 2026;52:1765-1768. doi:10.1007/s00134-026-08538-8</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-06-30）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08538-8" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08538-8</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Family support in intensive care: beyond no effect trials and the hidden challenges of cluster randomization</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-026-08538-8.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-026-08538-8.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-026-08538-8.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>家族ケアの施策を「効果なし試験が出たからやめる」という論法で止めない。</strong> 本編集の中心的な主張は、16 ICU（8 ICU/群）というクラスター数では予後因子の偏りが統計的に十分起こりうるため、<mark class="hl">FICUS の陰性結果は「効果がない」の証明にはならない</mark> ということ。Hotel ICU の家族ケア施策を院内で守る際の論拠として直接使える</li><li><strong>一方で、この編集は「家族支援に効果がある」とも言っていない。</strong> 主張は「陰性の確からしさが低い」であって「陽性である」ではない。院内資料で「ICMの編集が家族支援を支持した」と書くのは誤読になる</li><li><strong>当院で家族ケアの効果検証をするなら、ユニット単位のクラスター割付は最初から避ける。</strong> 単一ICUで期間前後比較をするか、家族（個人）単位で割り付ける。本編集の図が示すのは、<mark class="hl">同じ2000人でも個人割付なら59%のシミュレーションで完全にバランスが取れるのに、16センター割付では1回もバランスが取れなかった</mark> という差</li><li><strong>介入の「実施密度」を最初から測る設計にする。</strong> 本編集が FICUS の最大の弱点として挙げたのは、介入の delivery と uptake の情報が乏しく、実装忠実度（implementation fidelity）の検討ができなかったこと。当院の家族面談・家族ナース施策も、「何回・誰が・何分」を記録しないと後で効果を語れない</li><li><strong>家族支援を ICU 滞在中だけで完結させない。</strong> 本編集は、FICUS の支援が主に ICU 在室中に提供されたことを挙げ、退室後・死別後まで延ばす必要があるかもしれないと述べる（著者の推測）。当院の退室後訪問はこの方向と一致する</li><li><strong>多職種の幅を広げる。</strong> 心理士・ソーシャルワーカーの関与が限定的だった点を著者らは弱点として挙げている。ICU 内の看護師だけで家族支援を完結させる設計は、この批判をそのまま受ける</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：ICU 入室は患者だけでなく家族にとっても強いストレスであり、PICS-F（集中治療後症候群・家族）を引き起こす。有病率は家族の 20〜40%、不安 40〜70%、抑うつ 10〜35%、PTSD／急性ストレス 30〜55%。家族中心ケア、柔軟な面会、先行的コミュニケーション、意思決定への参加は心理的苦痛を減らす。一方で、お悔やみの手紙や緩和ケア主導の情報提供面談は PTSD 症状を増やすことがあり、看護師ファシリテーターは有意な効果を示さなかった</li><li><strong>Unknown（分かっていなかったこと）</strong>：構造化された多要素の家族支援パスウェイが、家族の長期メンタルヘルスと家族機能を本当に改善するのか。そして陰性に終わった大規模クラスターRCTの結果を、どこまで「効果がない」と読んでよいのか</li><li><strong>What's new（本編集の新規性・意義）</strong>：①FICUS 試験（16 スイス ICU・885 家族・1年追跡・全アウトカム有意差なし）を「なぜ効かなかったか」の観点で整理した。②<mark class="hl">著者ら独自の1000回シミュレーションで、クラスター数が少ないほどランダム化後の共変量の偏りが劇的に大きくなることを定量化した</mark>。8 ICU/群という設計では、陰性結果を「効果なし」と断定できないという方法論上の警告を、数字で提示した点が新しい</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 家族支援の大規模クラスターRCT（FICUS）が全アウトカムで陰性に終わったが、<strong>16 クラスター（8 ICU/群）というランダム化単位の少なさでは予後因子の偏りが日常的に起こる</strong>ため、この陰性結果は「効果がないことの証明」ではなく <strong>false no effect の可能性を排除できない</strong>、というのが本編集の中心的主張である。</p>
+</div>
+<ul><li><strong>PICS-F は稀ではない</strong>。家族の 20〜40% に生じ、ICU 滞在が長い場合や患者が死亡した場合はさらに高い。不安 40〜70%、抑うつ 10〜35%、PTSD／急性ストレス 30〜55%、死別例の複雑性悲嘆 20〜50%</li><li>影響は心理面にとどまらず、<strong>介護負担・欠勤・経済的困窮・生活の大幅な変化</strong>という社会経済的領域に及ぶ。しかも介護者は患者のリハビリと意思決定に中心的な役割を担うため、<strong>家族の苦痛が患者の回復を悪化させうる</strong></li><li><strong>効く介入と効かない介入がある</strong>。効くとされるのは Caregiver Pathway のような構造化フォローアップ、認知行動療法や対処スキル訓練、家族のケア参加・柔軟な面会・先行的コミュニケーション・意思決定への参加。逆に <strong>お悔やみの手紙と緩和ケア主導の情報・情緒支援面談は PTSD 症状を増やしうる</strong>。看護師ファシリテーターは有意な効果なし</li><li><strong>FICUS 試験</strong>：訓練を受けた ICU 家族ナースが、家族ケアパスウェイ（関わりと連絡調整、心理教育・関係性中心のケア、構造化された多職種コミュニケーション）を提供。スイスの成人 ICU 16 施設・885 家族。ICU 入室時・退室時・3・6・12か月で家族機能／レジリエンス／生活満足度／QOL／苦痛／不安／抑うつ／PTSD を評価。<strong>介入群と通常ケア群に差はなかった</strong></li><li>著者らは FICUS を <strong>「効かなかった理由が分からないまま残された」</strong> と評する。挙げるのは、①標準的コミュニケーションに対する上乗せ価値が不明確、②実装忠実度の情報が乏しく検討不能、③多様な ICU で文化・行動変容を持続させる難しさ、④心理士・ソーシャルワーカーなど多職種の関与が限定的、⑤支援が主に ICU 在室中に限られた、の5点（いずれも<strong>著者の推測であり本編集が検証したものではない</strong>）</li><li><strong>本編集の核心</strong>：クラスターRCT の妥当性は、両群の予後関連因子がバランスすることに依存し、それは<strong>十分な数のクラスターがランダム化されたときにのみ成り立つ</strong>。FICUS は 8 ICU/群。この規模では、センターレベル特性（スタッフ配置・組織文化・資源）と患者ケースミックスの両方に意味のある偏りが統計的に起こりうる</li><li>著者らは <strong>1000回のシミュレーション</strong>（総 N=2000 固定、予後変数20個＝連続10・二値10）で、4／16／80／160 センターのクラスター割付と個人割付を比較。<strong>|SMD|&gt;0.10 を超える変数の割合</strong>は、<mark class="hl">16 センターでは中央値およそ45%、完全バランス（偏り変数ゼロ）が達成されたシミュレーションは0%</mark>。一方 <strong>個人割付では 59% のシミュレーションで完全バランス</strong>が達成された</li><li>著者らは「ランダム化」という語が高い証拠性を連想させることを警戒し、<strong>8 ICU/群のクラスター試験に払うべき慎重さは、8人/群の個人ランダム化試験と同程度だ</strong>と述べる（=これは著者のレトリックであり、図のシミュレーションが示した内容とは別物）</li><li><strong>調整で救えるか</strong>：測定された共変量での調整は適切だが、FICUS では利用可能な変数が限られていた。センター間の異質性（組織・ケア提供の次元）を捉える共変量は包括的に測定すること自体が難しい</li><li><strong>結論</strong>：重要な臨床疑問に適切で野心的なデザインで挑んだ研究だが、<strong>クラスター数の少なさが陰性所見への信頼を下げる</strong>。有効性を決定的に否定するのではなく、残余の不均衡・文脈要因・未測定の影響という代替説明が依然として妥当であるため、慎重な解釈が求められる</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — PICS-F とクラスターランダム化の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>PICS-F（post intensive care syndrome family／集中治療後症候群・家族）</strong>とは、患者本人ではなく<strong>家族</strong>に生じる、ICU 入室後の心理的・身体的・社会経済的な後遺障害の総称。不安・抑うつ・PTSD・複雑性悲嘆に加え、睡眠障害、疲労、侵入的記憶、過覚醒、集中困難、介護負担、欠勤、経済的困窮までを含む。</p>
+<p><strong>クラスターランダム化比較試験（cluster randomized controlled trial, cRCT）</strong>とは、患者や家族という個人ではなく、病棟・ICU・病院といった「集団（クラスター）」単位でランダムに介入群と対照群に割り付ける試験デザイン。「同じ ICU の中で一部の家族にだけ家族ナースを付ける」ことは現実的に不可能で、隣のベッドの家族に情報が伝わってしまう（<strong>コンタミネーション＝汚染</strong>）ため、ユニット単位の介入ではこの方法が使われる。</p>
+<p>ただしここに固有の弱点がある。ランダム化が偶然の偏りを打ち消してくれるのは<strong>割り付ける単位の数が多いとき</strong>であって、割り付ける単位が 16 個しかなければ、コイントスを16回しただけで表裏の均衡を期待するのと同じことになる。しかも ICU 単位で割り付けると、患者の重症度だけでなく <strong>スタッフ配置・組織文化・資源</strong> といったセンターレベルの特性ごと丸ごと片側に寄る。</p>
+<p><strong>SMD（standardized mean difference／標準化平均差）</strong>は、単位の違う変数（年齢と性別、mmHg と %）を同じ物差しで比較できるようにした偏りの指標。<strong>|SMD| &gt; 0.10 は傾向スコアマッチングで慣習的に使われる「バランスが取れていない」の閾値</strong>である。</p>
+<p><strong>解析単位と割付単位のずれ</strong>：FICUS では割り付けたのは ICU（16個）だが、解析したのは家族（885人）。885 という大きな数字が「ランダム化された数」と錯覚させるが、実際にランダム化されたのは 16 である。本編集はここを最大の争点にしている。</p>
+</div>
+<h3>2. 背景 — PICS-F の規模と社会経済的な広がり 🫁</h3>
+<p>ICU 入室は患者と家族の双方にとって強いストレスであり、しばしばトラウマ的な体験になる。家族においては PICS-F につながりうる。PICS-F は ICU 滞在をはるかに超えて持続する、心理的・身体的・社会経済的な帰結を広く含む病態である。</p>
+<p>原文が挙げる有病率（<strong>丸めずにそのまま</strong>）：</p>
+<h4>Table A. 本編集が示す PICS-F の頻度（原文の数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>頻度</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>PICS-F 全体</td><td>家族のおよそ <strong>20〜40%</strong></td><td>ICU 滞在が長期化した場合、患者が死亡した場合はさらに高い</td></tr>
+<tr><td>不安症状</td><td><strong>40〜70%</strong></td><td>—</td></tr>
+<tr><td>抑うつ</td><td><strong>10〜35%</strong></td><td>—</td></tr>
+<tr><td>PTSD または急性ストレス症状</td><td><strong>30〜55%</strong></td><td>—</td></tr>
+<tr><td>複雑性悲嘆（死別例）</td><td><strong>20〜50%</strong></td><td>死別の状況における</td></tr>
+</tbody></table></div>
+<p>よくみられる症状として、情緒的苦痛、睡眠障害、疲労、侵入的記憶、過覚醒、集中困難が挙げられる。心理的影響を超えて、<strong>介護者負担、欠勤、経済的困窮、生活様式の大きな変化</strong>という社会的・経済的領域にも影響が及ぶ。</p>
+<p>重要な点として、<strong>この苦痛は患者の回復を負の方向に左右しうる</strong>。介護者はリハビリテーションと意思決定において決定的な役割を担うからである。</p>
+<h3>3. 背景の続き — 効く介入と、害になりうる介入 💧</h3>
+<p>予防戦略は必須であり、家族中心ケアモデルに基づくものが増えている。本編集が「効果的」として挙げるのは以下。</p>
+<h4>Table B. 本編集が整理する家族支援介入の方向性</h4>
+<div class="tw"><table>
+<thead><tr><th>介入</th><th>本編集での位置づけ</th><th>引用</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>Caregiver Pathway（構造化フォローアップ）</td><td>長期の PTSD・不安・抑うつを<strong>減らしうる</strong>（特に ICU 生存者の介護者で）</td><td>文献5（Watland, ICM 2025）</td><td>原文は "could reduce" と留保付き</td></tr>
+<tr><td>認知行動療法・対処スキル訓練</td><td>アウトカムを改善する</td><td>記載なし</td><td>本編集は個別の引用を付していない</td></tr>
+<tr><td>家族のケアへの参加</td><td>心理的苦痛を一貫して減らす</td><td>文献6（ESICM 終末期・緩和ケアGL, ICM 2024）</td><td>—</td></tr>
+<tr><td>柔軟な面会方針</td><td>同上</td><td>文献6</td><td>—</td></tr>
+<tr><td>先行的コミュニケーション</td><td>同上</td><td>文献6</td><td>—</td></tr>
+<tr><td>意思決定への参加</td><td>同上</td><td>文献6</td><td>—</td></tr>
+<tr><td><strong>お悔やみの手紙</strong></td><td>PTSD 症状を<strong>増やしうる</strong></td><td>文献7（Kentish-Barnes, ICM 2017）</td><td>「すべての介入が有益なわけではない」の例</td></tr>
+<tr><td><strong>緩和ケア主導の情報・情緒支援面談</strong></td><td>PTSD 症状を<strong>増やしうる</strong></td><td>文献8（Carson, JAMA 2016）</td><td>同上</td></tr>
+<tr><td>看護師ファシリテーター</td><td><strong>有意な効果を示さない</strong></td><td>文献9（Kentish-Barnes, ICM 2024）</td><td>—</td></tr>
+</tbody></table></div>
+<p>これらの知見が示すのは、<strong>標的を絞った個別化された介入、高リスク介護者の早期同定、構造化されたフォローアッププログラム</strong>の必要性である（文献10）。加えて、ICU 環境の改善と医療従事者の支援も、これらの実践を持続させ、家族の well-being と患者アウトカムの双方を高めるための鍵である（文献11）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「家族支援＝善」という素朴な前提は、この段落で否定されている <mark class="hl">お悔やみの手紙と緩和ケア主導の家族面談は、善意の介入でありながら PTSD 症状を増やしうる</mark>。当院で「家族に何かしてあげよう」という発想で新しい施策を足すとき、<mark class="hl">害の可能性を最初に検討していない施策は、この2つの試験と同じ轍を踏む</mark> 。</p>
+</div>
+<h3>4. 方法（Methods）📐 — この編集は何を「した」のか</h3>
+<p>本稿は原著研究ではなく <strong>EDITORIAL</strong> である。したがって PICO 構造を持たない。それでも、本編集には著者らが自ら実施した<strong>シミュレーション研究が1つ</strong>含まれており、そこだけは方法として読める。</p>
+<ul><li><strong>本編集の構成</strong>：①PICS-F の背景整理（文献1〜11のレビュー）→ ②FICUS 試験（文献12）の紹介 → ③「なぜ効かなかったか」の考察（著者の意見）→ ④クラスターランダム化の方法論的批判（本編集の核）→ ⑤結論</li><li><strong>Figure 1 のシミュレーション設計</strong>（図キャプションに記載された内容がすべて）：</li><li><strong>反復回数</strong>：1000 シミュレーション</li><li><strong>総サンプルサイズ</strong>：N = 2000（<strong>固定</strong>）</li><li><strong>予後変数</strong>：20 個（<strong>連続変数10・二値変数10</strong>）</li><li><strong>割付デザイン</strong>：クラスター単位（<strong>4／16／80／160 クラスター</strong>、1:1 割付）または個人単位（individual randomized controlled trial）</li><li><strong>評価指標</strong>：各シミュレーションデータセットで、治療群と対照群を比較して20共変量それぞれの標準化平均差を計算し、|SMD| &gt; 0.10 を超えた共変量の割合（%） を1シミュレーションの要約値とする</li><li><strong>表示</strong>：デザインごとに、この割合の分布を箱ひげ図で示す。箱の中の水平線＝中央値、箱の上下＝四分位範囲（IQR）、ひげ＝IQR の1.5倍まで、それを超える点＝外れ値。金色のダイヤは「シミュレーションレベルの中央値」とされる（キャプションの原文どおり）。さらに注記ラベルとして、<strong>どの共変量も閾値を超えなかったシミュレーションの割合</strong>（＝偏りリスクのゼロ膨張）を各デザインに付す</li><li><strong>補足資料</strong>：SM-Table 1 と SM-Figs. 1–4 が、この問題の大きさをさらに示すとされる（本 PDF には含まれない。オンライン補足資料であり、本ノートは未確認）</li><li><strong>統計解析の詳細（乱数生成の方法、共変量の相関構造、ICC の設定など）は本文・キャプションのいずれにも記載が無い</strong>。再現に必要な情報は本編集内では与えられていない</li><li><strong>データ利用可能性</strong>：原文の記載は "No applicable"（ "Not applicable" の誤植とみられる）。<strong>シミュレーションコードの公開はされていない</strong></li></ul>
+<h3>5. FICUS 試験について本編集が伝えている範囲 📋</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>ここは「本編集が書いた範囲」に限定した記述である FICUS の詳細（各アウトカムの点推定値・信頼区間・n・脱落）は<strong>本編集の本文には一切書かれていない</strong>。数値が必要なら原著（ICM 2026;52:637-650）に当たること。当Vaultには既存ノートがある。</p>
+</div>
+<ul><li><strong>介入</strong>：多要素介入（multicomponent intervention）。家族ケアパスウェイであり、その中で<strong>特別な訓練を受けた ICU 家族ナース（specially trained ICU family nurses）</strong> が家族と関わり、連絡調整（liaise）を行い、心理教育的（psychoeducational）かつ関係性中心（relationship-focused）のケアを提供し、構造化された多職種間コミュニケーションを促進した</li><li><strong>参加者</strong>：スイスの成人 ICU 16 施設から組み入れられた、重症患者の<strong>家族 885 名</strong></li><li><strong>アウトカム</strong>：家族機能（family functioning）、レジリエンス、生活満足度、QOL、苦痛（distress）、不安、抑うつ、心的外傷後ストレス</li><li><strong>評価時点</strong>：<strong>ICU 入室時、ICU 退室時、その後3・6・12か月</strong></li><li><strong>結果</strong>：介入群と通常ケア群のあいだに差は認められなかった</li><li><strong>先行研究との整合</strong>：この結果は、看護師主導ないしファシリテーター型の家族中心介入の先行試験と概ね一致しており、それらの多くも長期メンタルヘルスアウトカムの改善を示せていない（文献5, 13, 14）</li><li><strong>著者ら（FICUS 側）の主張</strong>：この "no effect" の所見にもかかわらず、原著の著者らは<strong>より強力で持続的な家族支援を提唱</strong>しており、これは構造化された多要素パスウェイの有益性を示唆するエビデンスと整合するとしている（文献12, 13, 15）</li></ul>
+<h3>6. なぜ効かなかったのか — 本編集が挙げる5つの仮説 🔍</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>ここから先は「エビデンス」ではなく「著者の意見」である 本節の5点は、いずれも <mark class="hl">本編集が検証したものではなく、著者らの推測（"may have"／"might be required"）</mark> である。原文も断定していない。院内資料に引くときは「ICMの編集がこう推測している」と書くこと。</p>
+</div>
+<p>原文の言葉：「しかしこの研究は、なぜこの複雑な介入が測定可能な便益を生まなかったのかという問いに答えないまま残している」。</p>
+<h4>Table C. 「効かなかった理由」として本編集が挙げる5点（すべて著者の推測）</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>指摘</th><th>原文の論拠</th><th>検証可能性</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>標準的コミュニケーションへの上乗せ価値が不明確</strong></td><td>家族とのコミュニケーションは標準的ケアと認識されているが、臨床実践では必ずしも十分かつ一貫して提供されていない。ゆえに本研究の介入の付加価値は不確かなまま</td><td>対照群の実際のコミュニケーション量が測られていれば検証可能。本編集は測られていないと述べる</td></tr>
+<tr><td>2</td><td><strong>実装忠実度（implementation fidelity）の情報が乏しい</strong></td><td>忠実度は介入効果に影響しえたが、Riguzzi らは<strong>介入の実施状況（delivery）と受容（uptake）についての情報を限定的にしか提供していない</strong>ため、実装要因の役割について結論を出せない</td><td>原著の補足資料に記載があるかは本編集の範囲外</td></tr>
+<tr><td>3</td><td><strong>多様な ICU で文化・行動変容を持続させることの困難</strong></td><td>構造化された支援があっても、多様な ICU 環境をまたいで持続的な文化的・行動的変化を達成することは依然として難しい</td><td>定性的主張。定量的裏づけは示されていない</td></tr>
+<tr><td>4</td><td><strong>多職種チームの関与が限定的</strong></td><td><strong>心理士・ソーシャルワーカーを含む広い多職種チームの関与が限定的</strong>であったことが、利用可能な家族支援を制約した可能性</td><td>原著の介入記述に依存</td></tr>
+<tr><td>5</td><td><strong>支援が ICU 在室中に偏っていた</strong></td><td>家族支援は主に ICU 滞在中に提供された。アウトカムを動かすには、<strong>退室後や死別後にまで及ぶ、より持続的で個別化されたアプローチ</strong>が必要かもしれない</td><td>文献5（Caregiver Pathway）が退室後まで伸ばした設計であることと整合する</td></tr>
+</tbody></table></div>
+<p>同時に本編集は FICUS を<strong>称賛</strong>している。「Riguzzi らは、多数の ICU をリクルートし多職種の参加を調整するという、集中治療研究では稀な、並外れた努力に対して称えられるべきである」。また「著者らは自らの所見が先行文献と整合すること、そして仮説生成的（hypothesis-generating）にとどまることを適切に認めている」と評価する。</p>
+<h3>7. 本編集の核心 — クラスター数が少ないと何が起きるか 📐</h3>
+<p>原文の論理を順に追う。</p>
+<ol><li><strong>cRCT とは何か</strong>：クラスターRCT は個人ではなく集団をランダム化する。典型的には、<strong>介入がユニットレベルで提供される場合にコンタミネーションを最小化するため</strong>である</li><li><strong>妥当性の条件</strong>：その妥当性は、<strong>予後に関連する因子について両群のバランスを達成すること</strong>に依存する</li><li><strong>病院ベースの cRCT で問題になる因子</strong>：患者レベルの特性に加え、<strong>スタッフ配置（staffing）、組織文化（organizational culture）、資源の利用可能性（resource availability）</strong> というセンターレベルの決定因子が含まれる</li><li><strong>前提が成り立つ条件</strong>：この仮定が成り立つのは、主として十分な数のクラスターがランダム化されたときである</li><li><strong>FICUS の実態</strong>：本研究でランダム化されたのは <strong>1群あたりわずか8 ICU</strong>。このように限られたクラスター数では、センターレベル特性と患者ケースミックスの両方において、意味のある不均衡が統計的に起こりうる</li><li><strong>観察された不整合</strong>：SAPS II スコアが同程度であるのに、無視できない死亡率の差が併存している ことは、重症度の捕捉、ケースミックスの構成、ケア提供、あるいはその他のセンターレベルの影響について疑問を提起する。これらのいずれもが家族の心理的負担を形づくりうるし、少数クラスターでのランダム化に内在する限界を反映している</li><li><strong>結論</strong>：現行の方法論的水準に沿って注意深くデザインされた試験であるにもかかわらず、<strong>false no effect（偽の「効果なし」）の可能性は排除できない</strong></li><li><strong>核心的な区別</strong>：<strong>ランダム化の単位（ICU）と解析の単位（家族）の区別</strong> が鍵である。「ランダム化された」という語はしばしば高い証拠的確信を含意するが、<strong>1群8人・計16人しかいない個人ランダム化試験にも同程度の慎重さが必要になるはずである</strong></li></ol>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>8番目の主張は「レトリック」であって図が示した内容ではない 「16 ICU の cRCT ≒ 16 人の個人 RCT」という比喩は直感的に強いが、<mark class="hl">本編集自身の Figure 1 はこれを裏づけていない</mark> 。図の "Individual RCT" は <strong>N=2000 の個人割付</strong>であり、16 人の個人割付ではない。図が実際に示すのは「同じ 2000 人でも、割付単位が 16 になると偏りが激増する」であって、「16 クラスター＝16 人と等価」ではない。JC ではここを区別して読むこと。</p>
+</div>
+<h3>8. Figure 1 の読み方 🖼️</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-026-08538-8" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-026-08538-8）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Residual covariate imbalance according to randomized units（原図・無改変。©Springer-Verlag GmbH Germany, part of Springer Nature 2026） 副題：2000 participants; 1000 simulations; 20 prognostic variables。縦軸 Variables with |SMD| &gt; 0.10 (%)（0〜100）、横軸 Randomized units（4 centres／16 centres／80 centres／160 centres／Individual RCT）。箱の色は左から赤・橙・青・緑・濃灰。各箱の左下に「◯% = 0」の白抜きラベル。金色のダイヤはキャプションで「シミュレーションレベルの中央値」と定義されている。</p>
+</div>
+<h4>Table D. Figure 1 の全ボックスを数値化</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この表の中央値・IQR・ひげは<strong>図から目視で読み取った近似値</strong>である <mark class="hl">本文にもキャプションにも数値は印字されていない</mark>。数値として印字されているのは各箱に付された「◯% = 0」のラベルだけであり、そこは正確に転記した。目視値には「≈」を付す。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>割付デザイン</th><th>箱の色</th><th>中央値（%）</th><th>IQR（%）</th><th>ひげの範囲（%）</th><th>外れ値の位置（%）</th><th><strong>完全バランス達成率（印字）</strong></th></tr></thead>
+<tbody>
+<tr><td>4 centres</td><td>赤</td><td>≈70</td><td>≈60–75</td><td>≈40–95</td><td>≈35</td><td><strong>0% = 0</strong></td></tr>
+<tr><td><strong>16 centres</strong>（FICUS 相当）</td><td>橙</td><td><strong>≈45</strong></td><td>≈35–50</td><td>≈16–70</td><td>≈10／≈75／≈85</td><td><strong>0% = 0</strong></td></tr>
+<tr><td>80 centres</td><td>青</td><td>≈20</td><td>≈10–25</td><td>≈0–45</td><td>≈50／≈55</td><td><strong>1% = 0</strong></td></tr>
+<tr><td>160 centres</td><td>緑</td><td>≈10</td><td>≈8–15</td><td>≈0–20</td><td>≈25／≈30／≈35／≈40</td><td><strong>6% = 0</strong></td></tr>
+<tr><td>Individual RCT（N=2000）</td><td>濃灰</td><td><strong>≈0</strong></td><td>≈0–5</td><td>≈0–10</td><td>≈15</td><td><strong>59% = 0</strong></td></tr>
+</tbody></table></div>
+<h4>この図から読み取るべきこと</h4>
+<div class="tw"><table>
+<thead><tr><th>読みどころ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>単調な改善</strong></td><td>ランダム化される単位の数が増えるほど、不均衡の<strong>典型的な大きさ（中央値）</strong>も<strong>ばらつき（箱とひげの幅）</strong>も減る。これはキャプションが明示している結論</td></tr>
+<tr><td><strong>FICUS の位置</strong></td><td>FICUS は 16 センター＝橙の箱。20 の予後変数のうち**中央値でおよそ9個（45%）が</td><td>SMD</td><td>&gt;0.10 を超える**。しかも1000回中1回も「全変数がバランスした」シミュレーションは起きていない（0%）</td></tr>
+<tr><td><strong>80 でも足りない</strong></td><td>80 センターでも中央値 ≈20%（20個中4個）、完全バランス達成はわずか 1%</td></tr>
+<tr><td><strong>160 でようやく</strong></td><td>160 センターで中央値 ≈10%、それでも完全バランスは 6%</td></tr>
+<tr><td><strong>個人割付の圧倒的優位</strong></td><td>同じ N=2000 でも、個人割付なら中央値 ≈0%、<strong>59% のシミュレーションで完全にバランス</strong>する。この対比が本編集の主張の全て</td></tr>
+<tr><td><strong>外れ値の意味</strong></td><td>16 センターの上方外れ値は ≈85%。すなわち<strong>20変数のうち17個が偏る</strong>という事態が現実に起こりうる</td></tr>
+</tbody></table></div>
+<h4>判断の流れ — この図を自分の研究設計に適用する</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ユニット単位の介入を評価したい</td><td>コンタミネーションは本当に避けられないか</td><td>避けられるなら<strong>個人割付</strong>にする（図の右端）</td></tr>
+<tr><td>コンタミネーションが避けられない</td><td>参加ユニット数はいくつ確保できるか</td><td>20 未満なら、陰性結果を「効果なし」と結論しない設計にする（仮説生成と位置づける）</td></tr>
+<tr><td>ユニット数を増やせない</td><td>事前にセンターレベル共変量（スタッフ比・組織文化・資源）を測っているか</td><td>測っていないなら<strong>調整はできない</strong>。測定計画を先に作る</td></tr>
+<tr><td>すでに陰性結果が出た</td><td>ベースライン表の</td><td>SMD</td><td>を全変数で計算したか</td><td>0.10 超が多数なら、結論は「効果なし」ではなく「判定不能」</td></tr>
+<tr><td>単一施設で試したい</td><td>期間前後比較の交絡（季節・スタッフ交代・他施策）を書き出したか</td><td>交絡が列挙できるなら<strong>中断時系列</strong>が現実的</td></tr>
+</tbody></table></div>
+<h3>9. 調整で救えるか 🧮</h3>
+<p>原文の記述はきわめて短いが、重要である。</p>
+<ul><li><strong>この異質性に対処するには、測定された共変量での調整が適切である</strong>（adjustment for measured covariates is appropriate）</li><li><strong>しかし、利用可能な変数は限られた集合だけだった</strong>（only a limited set of variables was available）</li><li><strong>頑健な調整には、センター間の異質性を捉えうる共変量が必要になる</strong>。それには<strong>組織的次元とケア提供の次元（organizational and care-delivery dimensions）</strong>が含まれるが、<mark class="hl">これらを包括的に測定することは困難である</mark></li></ul>
+<p>つまり本編集は、「統計的調整で後から救えばよい」という反論を先回りして塞いでいる。<strong>測っていないものは調整できず、そしてセンターレベルの異質性は測ること自体が難しい</strong>というのが論旨である。</p>
+<h3>10. 結論部（原文の構造をそのまま） 🎯</h3>
+<p>原文の結論は3文で構成される。</p>
+<ol><li><strong>評価</strong>：この研究は、適切かつ野心的なデザインを用いて重要な臨床疑問に取り組んでいる</li><li><strong>限界</strong>：それにもかかわらず、ランダム化されたクラスター数の少なさが、陰性所見への信頼を低下させる</li><li><strong>方法論以外の要因</strong>：方法論的考慮を超えて、本編集で論じたいくつかの因子 — <strong>標準的コミュニケーションに対する付加価値の限定性、多職種関与の制限、介入が主に ICU 内の時間枠にとどまったこと</strong> — もまた、便益が観察されなかったことに寄与した可能性がある</li><li><strong>最終判断</strong>：有効性を決定的に排除するのではなく、この結果は<strong>慎重な解釈を要する</strong>。残余の不均衡、文脈的因子、未測定の影響が、依然として妥当な代替説明として残っているからである</li></ol>
+<h2>🔗 既存ノートとの整合</h2>
+<p>当Vault の家族ケア関連ノートと、本編集の主張を突き合わせる。</p>
+<div class="tw"><table>
+<thead><tr><th>既存ノート</th><th>そのノートの結論</th><th>本編集との関係</th></tr></thead>
+<tbody>
+<tr><td>ICUの家族支援介入は満足度を上げてもPICS-Fは減らせない（FICUS原著・ICM2026）</td><td>全アウトカムで1年間まったく動かなかった。それでも同じ試験で満足度とコミュニケーションの質は改善</td><td><strong>同じ試験を扱う対の論文</strong>。本編集は「動かなかった」という読みそのものに疑義を呈する。ただし本編集は「満足度とコミュニケーションの質が改善した」という点に一言も触れていない。原著ノートのほうが情報として広い</td></tr>
+<tr><td>家族の面会が予後を悪くするのではなく、重症だから家族が来る（Correspondence・ICM2022）</td><td>「家族が来ると予後が悪い」は因果ではなく重症度が両方を引き起こす構造の写し絵。面会の効果は<strong>家族側アウトカムをランダム化された設計で</strong>見よ</td><td><strong>本編集は、その「ランダム化された設計」にも落とし穴があると付け加える</strong>。ICM2022 ノートが「観察研究の交絡」を扱ったのに対し、本編集は「クラスターRCT の残余不均衡」を扱う。2本を並べると「観察研究もクラスターRCTも、少数ユニットでは同じ穴に落ちる」という一続きの教訓になる</td></tr>
+<tr><td>パンデミック下でICUを家族面会に開く理由と方法（CritCare2021）</td><td>データはゼロの手順書。借りるのは骨格であって効果の主張ではない</td><td><strong>方向は一致</strong>。本編集も「効果の証明」と「実践の設計」を分けて考えることを求めている。ただし本編集は面会方針そのものには踏み込まず、<strong>柔軟な面会は心理的苦痛を一貫して減らす</strong>側に分類している（文献6を引用）</td></tr>
+<tr><td>ICU家族への4ステップ伴走はPTSD症状を6か月後に減らす（Caregiver Pathway RCT・ICM2025）</td><td>退室後まで伸ばした構造化フォローで PTSD 症状が減った</td><td>本編集は同じ文献5を、前半では「効果的」、後半では「長期メンタルヘルスの改善を示せなかった試験群」に<strong>両方</strong>分類している（下記の内的不整合を参照）。当Vaultノートは「減らせた」側の読みを採る</td></tr>
+<tr><td>多職種による家族支援介入は…（PARTNER 段階的ウェッジRCT・NEJM2018）</td><td>心理症状は改善しないがコミュニケーションの質を上げ ICU 滞在を短縮</td><td>本編集は文献14 としてこれを「長期メンタルヘルスを改善できなかった先行試験」に分類。<strong>当Vaultノートの読み（心理症状は動かないがプロセスは動く）と一致</strong></td></tr>
+<tr><td>看護師ファシリテーターはなぜ効かなかったか（質的研究・ICM2024）</td><td>役割の曖昧さと縄張りが効かなかった原因</td><td>本編集は文献9（Kentish-Barnes の RCT 本体）を「有意な効果なし」として引用するのみで、<strong>なぜ効かなかったかの質的解明には触れていない</strong>。当Vaultノートのほうが原因究明では踏み込んでいる</td></tr>
+<tr><td>家族中心のケア ガイドライン（新生児・小児・成人ICU）</td><td>SCCM 版ガイドライン（当Vaultノートは <strong>2017年版</strong>）</td><td>本編集が引用しているのは 2024年改訂版（Hwang DY, et al. CCM 2025;53(2):e465-e482） 。<strong>当Vault のガイドラインノートは1世代古い</strong>。改訂版の取り込みが未了である点は要対応</td></tr>
+</tbody></table></div>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>本編集そのものの弱点 — ここが JC の議論の中心になる <mark class="hl"><strong>本編集は「効果がある」とは一度も言っていない。「効果がないとは言えない」と言っている</strong></mark> 。この2つを混同すると、家族支援の推進派にも慎重派にも都合よく引用されてしまう。</p>
+</div>
+<h3>論点1. シミュレーションの再現性が担保されていない</h3>
+<ul><li>1000回・N=2000・20変数（連続10/二値10）という設計は書かれているが、<strong>乱数生成の手続き、共変量間の相関構造、クラスター内相関（ICC）の設定、クラスターサイズの均等性</strong>はいずれも記載が無い</li><li><strong>コードもデータも公開されていない</strong>（Data availability は "No applicable"）</li><li>クラスター割付シミュレーションで最も結果を左右するのは <strong>ICC</strong> だが、その値が示されていないため、この図の「16 センターで45%」という数字がどの前提の下で成り立つのかを読者が検証できない</li><li>一方で、この図の<strong>定性的な結論</strong>（単位数が増えるほど偏りが減る）は統計学の初歩から明らかであり、そこに疑いはない</li></ul>
+<h3>論点2. 「バランスしていないこと」と「バイアスが生じること」は同じではない</h3>
+<ul><li>ランダム化されている限り、<strong>期待値としての推定量は不偏</strong>である。個々の試験で偏りが出ることと、推定量が系統的に偏ることは別問題</li><li>|SMD|&gt;0.10 は<strong>傾向スコアマッチングの慣習的閾値</strong>であって、クラスターRCT の妥当性を判定するために作られた基準ではない。本編集自身がキャプションでその出自を明記している</li><li>より正確な批判は「偏りが起きる」ではなく「<strong>分散が大きくなり、検出力が落ちる</strong>」 である。本編集はこの区別に踏み込んでいない</li><li>実務上は「少数クラスターの cRCT の信頼区間は見た目より広く扱うべき」という結論になり、それは本編集の慎重論と同じ方向を向く</li></ul>
+<h3>論点3. 「SAPS II が同等なのに死亡率が違う」の裏づけが無い</h3>
+<ul><li>本編集は SAPS II と死亡率の不整合を、少数クラスターの偏りの傍証として持ち出す</li><li>しかし <mark class="hl"><strong>その数値は本編集の本文に一切書かれていない</strong></mark> 。何%対何%なのか、統計的にどうなのかは原著に当たらないと分からない</li><li>「appreciable（無視できない）」という主観的な形容だけで論拠にしている点は、方法論の厳密さを説く編集としては弱い</li></ul>
+<h3>論点4. 「効かなかった5つの理由」は事後的で反証不能</h3>
+<ul><li>5点はいずれも FICUS の陰性結果を見てから構成された事後解釈である</li><li>特に「介入の付加価値が標準ケアに対して不明確」という指摘は、<strong>もし FICUS が陽性だったら誰も言わなかった</strong> 種類の批判である</li><li>反証可能な形にするなら「対照群の家族面談回数・所要時間を測る」「fidelity スコアを事前定義する」という設計の提案になるはずだが、本編集はそこまで具体化していない</li></ul>
+<h3>論点5. Section Editor が自誌の論文に編集を書く構造</h3>
+<ul><li>3著者のうち<strong>2名（Martín Delgado, Poole）が Intensive Care Medicine の Section Editor</strong></li><li>「本論文の査読・採択プロセスには関与していない」と明記されており手続的には適切</li><li>ただし、<mark class="hl"><strong>自誌に載せた原著を自誌の Section Editor が方法論的に批判する</strong></mark> という構図そのものは、JC で一度触れておく価値がある。原著の著者側には反論の機会が与えられていない</li></ul>
+<h3>論点6. 実務への含意が「もっと大きな試験を」で止まっている</h3>
+<ul><li>「クラスターを増やせ」は正しいが、<strong>家族ケア研究で 80〜160 施設を集めることは現実的にほぼ不可能</strong>である</li><li>本編集は<strong>代替デザイン（段階的ウェッジ、中断時系列、個人割付＋コンタミネーション測定、ベイズ的解析）を一つも提案していない</strong></li><li>批判は精密だが、次にどうするかの処方箋が無い 。JC ではここを補うのが有益（当Vaultの <span class="wl">医師をコーチングすると過剰治療患者のDNI-DNACPR記載が増える（CODE段階的ウェッジRCT・ICM2024）</span> は段階的ウェッジの実例）</li></ul>
+<h3>論点7. 原著の内的不整合・誤植（本編集の中で見つかったもの）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>箇所</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>本文2段落目 vs 巻頁</td><td>「<strong>In the current issue of ICM</strong>, Riguzzi et al. [12]」と書かれているが、文献12 は <strong>ICM 2026;52(4):637–650</strong>、本編集は <strong>ICM 2026;52:1765–1768</strong>。印字上は同一号ではない</td></tr>
+<tr><td>2</td><td>文献5 の二重の使われ方</td><td>前半では「効果的な介入」として「Caregiver Pathway は長期 PTSD・不安・抑うつを減らしうる[5]」と引用。後半では「長期メンタルヘルスアウトカムの改善を<strong>示せなかった</strong>先行試験[5, 13, 14]」に<strong>同じ文献5</strong>を含めている。同一文献を正反対の方向で引用</td></tr>
+<tr><td>3</td><td>文献13 の性質</td><td>文献13（Bienvenu OJ, CCM 2025;53(3):e728–e729）は<strong>2ページの論説・コメンタリー</strong>であり試験ではない。それを「previous <strong>trials</strong> of nurse-led or facilitated, family-focused interventions [5, 13, 14]」に含めている</td></tr>
+<tr><td>4</td><td>文献13 の二重の使われ方</td><td>その文献13 を、直後の文では「<strong>構造化された多要素パスウェイの有益性を示唆するエビデンス</strong>[12, 13, 15]」としても引用している。「効かなかった証拠」と「効く証拠」の両方に同じ番号</td></tr>
+<tr><td>5</td><td>Fig 1 キャプション</td><td>「The horizontal line within each box represents the <strong>median</strong>」と「The gold diamond indicates the <strong>median</strong> simulation-level value」が併記されている。2つの異なる図形要素を同じ「中央値」と定義しており、金ダイヤが何を表すのか特定できない（平均の誤記の可能性）</td></tr>
+<tr><td>6</td><td>Fig 1 のラベル配置</td><td>「0% = 0」「1% = 0」「6% = 0」「59% = 0」のラベルが<strong>各箱の中央下ではなく左側にずれて</strong>配置されている。目視ではどの箱に対応するのか一瞬迷う</td></tr>
+<tr><td>7</td><td>Fig 1 と本文の対応</td><td>本文の「16 participants (8 per arm)」という比喩は、<strong>図の Individual RCT（N=2000）とは別物</strong>。図は比喩を裏づけていない（論点は上記セクション7の warning 参照）</td></tr>
+<tr><td>8</td><td>Data availability</td><td>原文は「<strong>No applicable</strong>」。"Not applicable" の誤植</td></tr>
+<tr><td>9</td><td>図の配置</td><td>Figure 1 の画像とキャプションは <strong>2ページ目</strong>にあるが、本文で「Figure 1 illustrates…」と初出するのは <strong>3ページ目</strong>。図が初出参照より前に置かれている</td></tr>
+<tr><td>10</td><td>受理日と対象論文の公開日</td><td>本編集の Received は <strong>2026年5月3日</strong>、対象の文献12 は <strong>Epub 2026年5月18日</strong>。編集が対象論文のオンライン公開より前に受理されている（依頼原稿として通常のことだが、「current issue」表記と併せると読者を混乱させる）</td></tr>
+</tbody></table></div>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>PICS-F の総説</td><td>Smith AC, et al. Crit Care Clin. 2025;41(1):73-88</td></tr>
+<tr><td>2</td><td>PICS-F の包括的レビュー（当Vaultにノートあり）</td><td>Shirasaki K, Hifumi T, Nakanishi N, et al. Acute Med Surg. 2024;11(1):e939</td></tr>
+<tr><td>3</td><td>PICS が患者と介護者にもたらす負担のナラティブレビュー</td><td>Schembari G, et al. J Clin Med. 2024;13(19):5881</td></tr>
+<tr><td>4</td><td><strong>SCCM 成人ICU 家族中心ケアガイドライン 2024</strong>（当Vaultは2017年版のみ）</td><td>Hwang DY, Oczkowski SJW, et al. Crit Care Med. 2025;53(2):e465-e482</td></tr>
+<tr><td>5</td><td>Caregiver Pathway 介入の長期成績 RCT（当Vaultにノートあり）</td><td>Watland S, et al. Intensive Care Med. 2025;51(11):2042-2053</td></tr>
+<tr><td>6</td><td><strong>ESICM 終末期・緩和ケアガイドライン</strong>（当Vaultにノートあり）</td><td>Kesecioglu J, Rusinova K, et al. Intensive Care Med. 2024;50(11):1740-1766</td></tr>
+<tr><td>7</td><td>お悔やみの手紙が悲嘆症状に与える効果の RCT（<strong>PTSD 症状を増やしうる</strong>）</td><td>Kentish-Barnes N, et al. Intensive Care Med. 2017;43(4):473-484</td></tr>
+<tr><td>8</td><td>慢性重症患者家族への緩和ケア主導面談の RCT（<strong>同上</strong>）</td><td>Carson SS, Cox CE, et al. JAMA. 2016;316(1):51-62（Erratum: JAMA. 2017;317(20):2134）</td></tr>
+<tr><td>9</td><td>看護師ファシリテーターの RCT（<strong>有意差なし</strong>。当Vaultに関連する質的研究ノートあり）</td><td>Kentish-Barnes N, Azoulay E, et al. Intensive Care Med. 2024;50(5):712-724</td></tr>
+<tr><td>10</td><td>患者安全とアウトカム — PICS の予防から治療まで</td><td>Giménez-Esparza C, et al. Med Intensiva (Engl Ed). 2025;49(4):224-236</td></tr>
+<tr><td>11</td><td>重症疾患後のアウトカム</td><td>Herridge MS, Azoulay É. N Engl J Med. 2023;388(10):913-924</td></tr>
+<tr><td>12</td><td><strong>本編集の対象論文＝FICUS のメンタルヘルス・家族機能アウトカム</strong>（当Vaultにノートあり）</td><td>Riguzzi M, Jeitziner MM, et al. Intensive Care Med. 2026;52(4):637-650</td></tr>
+<tr><td>13</td><td>家族介護者のメンタルヘルス改善介入への論説</td><td>Bienvenu OJ. Crit Care Med. 2025;53(3):e728-e729</td></tr>
+<tr><td>14</td><td><strong>PARTNER 試験</strong>（当Vaultにノートあり）</td><td>White DB, Angus DC, et al. N Engl J Med. 2018;378(25):2365-2375</td></tr>
+<tr><td>15</td><td><strong>FICUS 本体（主論文）</strong></td><td>Naef R, Jeitziner MM, et al. JAMA Intern Med. 2025;185(9):1138-1149</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl"><strong>8 ICU/群のクラスターRCT が出した「差なし」は、「効果がない」の証明にはならない</strong></mark> 。本編集の1000回シミュレーションでは、16 センター割付だと <strong>20 の予後因子のうち中央値で45%が |SMD|&gt;0.10 を超えて偏り、完全にバランスした試行は1000回中0回</strong>だった。一方で同じ 2000 人を<strong>個人割付</strong>すれば <strong>59% の試行で完全バランス</strong>する。 <strong>家族ケアの是非を、この1本の陰性試験で決めてはならない。</strong></p>
+</div>
+<ul><li><mark class="hl"><strong>ランダム化された数を数えるとき、解析対象の人数（885）ではなく割付単位の数（16）を見る</strong></mark> 。「randomized」という語の証拠的な重みは、割付単位の数で決まる</li><li><strong>本編集は家族支援を擁護していない</strong>。「陰性の確からしさが低い」と言っているだけで、有効性の主張はしていない。<mark class="hl">院内資料で「ICM の編集が家族支援を支持」と書くのは誤読</mark></li><li><strong>善意の家族支援が害になった前例が2つある</strong>（お悔やみの手紙・緩和ケア主導面談。いずれも PTSD 症状を増やしうる）。新しい施策を足すときは、<mark class="hl">効果だけでなく害の可能性を先に検討する</mark></li><li><strong>当院で家族ケアの効果を検証するなら、ユニット単位のクラスター割付を最初から避ける</strong>。個人割付か、段階的ウェッジか、中断時系列。16 ユニット規模の cRCT を組んだ時点で、結果が陰性でも陽性でも解釈が濁る</li><li><strong>介入の delivery と uptake を記録しない施策は、後から効果を語れない</strong>。FICUS の最大の弱点は実装忠実度の情報が乏しかったこと。何回・誰が・何分を残す</li><li><strong>測っていないものは調整できない</strong>。センターレベルの異質性（スタッフ配置・組織文化・資源）は測定自体が難しい。事後の統計調整に頼る設計は成立しない</li><li><strong>PICS-F は家族の20〜40%に生じ、不安は40〜70%に及ぶ</strong>。介入の効果が証明できないことと、問題が存在しないことは別である</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

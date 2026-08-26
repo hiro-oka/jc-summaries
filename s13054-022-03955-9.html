@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>重症AKIの初回モダリティ CRRT対IHD — CRRTのほうが60日死亡が高い方向、軽症ほど差が大きい（AKIKI・IDEAL-ICU二次解析・IPTW・CritCare2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-022-03955-9.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">重症AKIの初回モダリティ CRRT対IHD — CRRTのほうが60日死亡が高い方向、軽症ほど差が大きい（AKIKI・IDEAL-ICU二次解析・IPTW・CritCare2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Gaudry S, Grolleau F, Barbar S, Martin-Lefevre L, Pons B, Boulet É, et al. Critical Care. 2022;26:93. doi:10.1186/s13054-022-03955-9</dd><dt>掲載誌</dt><dd>Critical Care（2022-04-04）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-022-03955-9" target="_blank" rel="noopener">doi.org/10.1186/s13054-022-03955-9</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Continuous renal replacement therapy versus intermittent hemodialysis as first modality for renal replacement therapy in severe acute kidney injury: a secondary analysis of AKIKI and IDEAL-ICU studies</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-022-03955-9.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-022-03955-9.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-022-03955-9.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「CRRTのほうが安全」という前提は、この論文では支持されなかった</strong>。543例のうちCRRT先行269例・IHD先行274例で、IPTW後の60日死亡はCRRT 54.4%・IHD 46.5%、weighted HR 1.26（95%CI 1.01–1.60）。方向は<strong>IHD有利</strong>である。</li><li>ただし<mark class="hl"><strong>これは無作為化試験ではなく、モダリティは主治医が選んでいる</strong></mark>。当院で「だからIHDに切り替える」と読むのは行き過ぎで、正しい読み方は「CRRTを既定にする強い根拠は、この解析からは出てこない」まで。</li><li><strong>当院で実務的に効くのは、比較的軽症のAKI-RRT症例</strong>。SOFA 3–10 の層でのみIHD有利が出ており（weighted HR 1.82、95%CI 1.01–3.28）、重症層（SOFA 13–23）では weighted HR 0.83（95%CI 0.56–1.23）で差がない。<strong>「血行動態が不安定だからCRRT」は妥当だが、「軽症だが腎だけ悪いのでとりあえずCRRT」は再考の余地がある</strong>。</li><li><strong>副次アウトカムで一貫していたのは人工呼吸器・昇圧薬のフリー日数</strong>。IPTW後で ventilator-free days 差 −1.9日（95%CI −3.4 〜 −0.1）、vasopressor-free days 差 −2.1日（95%CI −4.1 〜 −0.1）といずれもCRRT群が少ない。<strong>離床・CT・手術など「機械から外せること」の価値を、モダリティ選択のときに明示的に議論する</strong>。</li><li><strong>前提として、この研究のIHDは「対策を打ったIHD」である</strong>：等容量開始、透析液温の低下、重炭酸緩衝液、Na プロファイリング（透析液 Na⁺ &gt; 145 mmol/L）、初回除水は控えめ。<mark class="hl">当院でIHDを重症患者に使うなら、この5点をセットで運用しない限り本論文の成績は再現できない</mark>。</li><li><strong>看護体制の話でもある</strong>。フランスではICU看護師がIHDを回すので1日3人に同じ機械を使える。当院の体制でIHDを増やせるかは、機械よりも「誰が回すか」で決まる。災害・パンデミック時の機器不足の備えとして、この論点は残しておく価値がある。</li><li>供給量の議論は <span class="wl">PIRRT（延長間欠的腎代替療法）の処方の仕方（Perspective・CritCare2023）</span> と合わせて読む。中間形態（PIRRT／SLED）は本研究には<strong>1例も含まれていない</strong>。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：CRRTとIHDは重症AKIの2大モダリティ。Cochrane のメタ解析（15 RCT・1550例、2007年）は死亡・腎回復のいずれもモダリティ間で差なしと結論し、血行動態不安定・低血圧・昇圧薬増量の頻度にも差を示さなかった。KDIGO は血行動態不安定例へCRRTを<strong>弱い推奨</strong>、フランス（SRLF/SFAR）の勧告は両者を<strong>等価</strong>としている。</li><li><strong>Unknown（分かっていなかったこと）</strong>：これらの根拠は10年以上前の試験に基づく。当時のRCTは死亡率が両群とも65%超（Vinsonneau 2006, Lancet）だったのに対し、近年のRRTタイミングRCTでは43〜58%まで下がっている。<strong>集中治療の質が上がった現在でも「モダリティは生存に無関係」と言えるのか</strong>は検証されていなかった。加えてCOVID期のRRT機器不足で、IHDを重症患者に安全に使えるかを再評価する実務的必要が生じた。</li><li><strong>What's new（本研究の新規性・意義）</strong>：RRT開始タイミングのRCT 2本（AKIKI・IDEAL-ICU）の<strong>早期開始群だけ</strong>を取り出し、「重症AKI確認から12時間以内にIHDかCRRTのいずれかへ無作為化された試験」を<strong>エミュレート</strong>した。543例・IPTW解析で、CRRT先行は60日死亡が高い方向（weighted HR 1.26、95%CI 1.01–1.60）を示し、その差は<strong>軽症層で駆動されていた</strong>。著者自身は「予期しなかった仮説を生成するもの」と位置づけ、<mark class="hl">非劣性を検証する新規RCTを提案している</mark>。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 重症AKIの初回RRTモダリティを傾向スコアで比較したところ、<strong>CRRT先行は60日死亡がIHD先行より高い方向（weighted HR 1.26、95%CI 1.01–1.60）</strong> で、差はSOFA 3–10 の比較的軽症な層に集中していた。ただし<strong>二次解析であり、著者自身が「仮説生成的」と明記している</strong>。</p>
+</div>
+<ul><li><strong>デザイン</strong>：AKIKI（NEJM 2016）とIDEAL-ICU（NEJM 2018）の統合データを用いた二次解析。両試験の<strong>早期RRT開始群</strong>に割り付けられた患者のみを対象とし、target trial emulation の枠組みで「重症AKI確認後12時間以内にIHDまたはCRRTへ無作為化」という仮想試験を模した。</li><li><strong>群の定義</strong>：ITT解析を模して、<strong>最初に受けたRRTモダリティ</strong>で群を決めた（以後の切り替えは問わない）。</li><li><strong>n</strong>：合計 543例（AKIKI 304例、IDEAL-ICU 239例）。<strong>CRRT先行 269例、IHD先行 274例</strong>。</li><li><strong>交絡調整</strong>：主解析は<strong>IPTW（逆確率重み付け）</strong>。事前指定の共変量で傾向スコアをロジスティック回帰により推定。感度分析として<strong>施設をランダム効果に入れた混合効果モデル＋オーバーラップ重み付け（OW）</strong>。</li><li><strong>主要アウトカム</strong>：RRT開始日から起算した<strong>60日全生存</strong>。</li><li><strong>主要結果（IPTW後）</strong>：60日死亡率 CRRT 54.4% 対 IHD 46.5%、<strong>weighted HR 1.26（95%CI 1.01–1.60）</strong>、log-rank p=0.049。weighted ARD 7.9%（95%CI −0.7 〜 16.1%）、weighted RMST 33.9日 対 37.4日（差 3.5日、95%CI 0.9〜8.0）。</li><li><strong>副次</strong>：院内死亡・ICU死亡・28日RRT非依存生存・28日腎回復・RRTフリー日数・ICU在室日数はいずれも有意差なし。<strong>人工呼吸器フリー日数（weighted 差 −1.9日、95%CI −3.4 〜 −0.1）と昇圧薬フリー日数（weighted 差 −2.1日、95%CI −4.1 〜 −0.1）はCRRT群で有意に少なかった</strong>。</li><li><strong>異質性</strong>：SOFA三分位で層別。<strong>SOFA 3–10 では IHD有利（weighted HR 1.82、95%CI 1.01–3.28、log-rank p&lt;0.01）</strong>。SOFA 10–13（weighted HR 1.28、95%CI 0.79–2.07）と SOFA 13–23（weighted HR 0.83、95%CI 0.56–1.23）では差の証拠なし。</li><li><strong>著者の結論</strong>：CRRTを初回モダリティにすることは、生存でも腎回復でも利益をもたらさないようであり、<strong>重症度が低い患者ではむしろ不利な転帰と関連していた可能性</strong>がある。最適なRRT技術という積年の難問を解くには、<strong>前向きの非劣性RCT</strong>が必要である。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 重症AKIとRRTモダリティの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>AKI（acute kidney injury／急性腎障害）</strong> は重症患者の経過をしばしば合併し、罹病率・死亡率の上昇と結びつく。治療は保存的管理と、適切なタイミングでの <strong>RRT（renal replacement therapy／腎代替療法）</strong> で成り立つ。</p>
+<p>ICUで使うRRTの2大モダリティは次の2つ（本論文の定義）。</p>
+<ul><li><strong>IHD（intermittent hemodialysis／間欠的血液透析）</strong>：1回数時間のセッションを断続的に行う。溶質除去が速く、電解質・酸塩基の是正が早い。1台の機械で<strong>1日に複数（通常3人）</strong>の患者を治療できる。</li><li><strong>CRRT（continuous renal replacement therapy／持続的腎代替療法）</strong>：24時間連続で回す。本論文では<strong>血液濾過（hemofiltration）</strong>を伴う形式を指している。除水がゆっくりで、溶質濃度の変化も緩やか（fluid shift が小さい）。</li></ul>
+<p><strong>なぜ論争になるのか</strong>：CRRTは除水が緩徐なぶん血行動態が安定しやすい、というのが多くの集中治療医がCRRTを好む理由である。一方でCRRTは1台につき1人を占有するため、機器・回路・人手の負担が大きい。<strong>この「生理学的な利点」と「資源の負担」のトレードオフ</strong>が、COVID期の機器不足で先鋭化した。</p>
+<p><strong>本論文で出てくる用語</strong></p>
+<ul><li><strong>SOFA スコア（Sequential Organ Failure Assessment）</strong>：臓器障害の重症度指標。本論文では総SOFA（0〜24）と、呼吸・心血管・肝（ビリルビン）・血小板（凝固）・意識（Glasgow）・腎の各サブスコアを使う。</li><li><strong>IPTW（inverse probability of treatment weighting／逆確率重み付け）</strong>：観察データで「治療を受ける確率（傾向スコア）」の逆数で重み付けし、群間の背景を揃える手法。ここでの狙いは、<mark class="hl">「不安定な患者ほどCRRTを選ぶ」という適応交絡（confounding by indication）を打ち消すこと</mark>である。</li><li><strong>SMD（standardized mean difference／標準化平均差）</strong>：群間バランスの指標。<strong>10%未満</strong>なら臨床的に意味のあるバランスが取れたとみなす。</li><li><strong>オーバーラップ重み付け（overlap weighting, OW）</strong>：傾向スコアが極端な症例の影響を抑える重み付け。本研究では<strong>片方のモダリティしか提供していない施設</strong>があり、傾向スコア法の前提である<strong>positivity（陽性性）仮定</strong>が破れうるため、施設をランダム効果に入れた第2の傾向スコアモデルで感度分析した。</li><li><strong>RMST（restricted mean survival time／制限付き平均生存時間）</strong>：追跡期間（ここでは60日）内の平均生存時間。比例ハザード仮定に依存せず、「日数」という直感的な単位で差を出せる。</li><li><strong>SLED（sustained low efficiency dialysis）</strong>：IHDとCRRTの中間にあたるハイブリッド療法。<mark class="hl">本研究では1例も使われていない</mark>。</li><li><strong>Kt/V</strong>：透析量の指標。本研究のIHDでは<strong>週3.9</strong>が推奨された。CRRTは<strong>排液量 20〜25 mL/kg/h</strong> が推奨された。</li><li><strong>AKIKI／IDEAL-ICU</strong>：どちらも「RRTを早く始めるか待つか」を比較したフランスの多施設RCT。AKIKIは重症AKI全般（NEJM 2016）、IDEAL-ICUは敗血症性ショック＋AKI（NEJM 2018）。<strong>モダリティの選択は各施設の医師裁量に委ねられていた</strong>（フランスの勧告に沿う形で）。この「裁量」こそが本研究のデータ源であり、同時に最大の弱点でもある。</li></ul>
+</div>
+<h3>2. 背景と目的 🫘</h3>
+<p><strong>論争の構図</strong>。CRRTはIHDよりも除水が緩徐で溶質濃度の制御も緩やかであり、そのぶん血行動態が安定すると考えられてきた。これが「少なくともICU滞在の初期はCRRTを」と多くの集中治療医が考える理由である（本文の引用文献6は国際調査）。</p>
+<p><strong>COVIDが持ち込んだ実務的圧力</strong>。COVID危機はRRT機器の不足を露呈させた。対策として一部の当局は<strong>CRRTを1日12時間だけ回して同じ機械を1日に2人へ使う</strong>運用を提案した。しかし著者らはより単純な代替として、<strong>IHDなら同じ機械で通常3人を治療できる</strong>点を挙げる。そのうえで、IHDは単純な工夫で忍容性を確保できると述べる：</p>
+<ul><li><strong>等容量での開始（isovolemic initiation）</strong></li><li><strong>透析液温の低下</strong></li><li><strong>重炭酸緩衝液の優先使用</strong></li><li><strong>Na プロファイリング（透析液 Na⁺ &gt; 145 mmol/L）</strong></li><li><strong>初回除水を控えめにする</strong></li></ul>
+<p><strong>時代の変化</strong>。集中治療の質向上によって近年の予後は明らかに改善している。15年前にIHDとCRRTを比較した大規模RCT（Vinsonneau 2006, Lancet）では両群とも死亡率がかなり高かったのに対し、両モダリティが併用された近年のRRTタイミングRCTでは死亡率が43〜58%にとどまる。<strong>この差が、モダリティの影響を再評価する根拠になる</strong>と著者は主張する。</p>
+<p><strong>目的</strong>：AKIKIとIDEAL-ICUの2つのデータセットを統合し、<strong>初回モダリティとしてIHDを選ぶかCRRTを選ぶかが、重症AKIの重症患者の生存に影響するかを評価する</strong>。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：2つのオープンラベル・プラグマティック多施設RCT（AKIKI、IDEAL-ICU）の<strong>二次解析</strong>。両試験ともRRTの早期開始戦略と待機戦略を比較したもの。</li><li><strong>対象の選び方</strong>：<strong>早期戦略に割り付けられた患者のみ</strong>を組み入れた。早期群では重症AKIの確認から12時間未満でRRTが始まるため、<strong>ベースライン特性が大きく変化する前の時点</strong>で患者集団を評価でき、測定可能な交絡として扱える、というのが著者の論理。</li><li>補足：ランダム化からRRT開始までの中央値は AKIKI 2時間（IQR 1〜3）、IDEAL-ICU 3時間（IQR 2〜4）。</li><li><mark class="hl">待機群を含めなかった理由は、待機群ではRRT開始が早期群より48〜52時間遅れ、その間に病態が変わるため主要な交絡を除去できないから</mark>（著者は限界のセクションで明示）。</li><li><strong>target trial emulation</strong>：「重症AKI確認後12時間以内にIHDかCRRTのいずれかへ無作為化される試験」を模した。<strong>ITT解析を模すため、群は最初に受けたモダリティで確定</strong>した。</li><li><strong>介入（実際の診療）</strong>：両試験ともモダリティ選択は医師裁量で、ICU滞在中の切り替えも許容。<strong>SLEDなどのハイブリッド機器は使われていない</strong>。研究者には現行ガイドラインの遵守が推奨された。IHD・CRRTとも生体適合性膜のダイアライザを全施設で使用。透析液・補充液の緩衝剤は重炭酸を推奨。<strong>IHDはKt/V 週3.9、CRRTは排液量 20〜25 mL/kg/h</strong>。</li><li><strong>主要アウトカム</strong>：<strong>RRT開始日から死亡または60日目までの60日生存</strong>。</li><li><strong>副次アウトカム</strong>：ICU退室時・退院時の状態、<strong>28日までの腎回復</strong>（RRT中止かつ自然尿量が利尿薬なしで24時間 1000 mL超、利尿薬ありで 2000 mL超と定義）、<strong>28日時点のRRT非依存での生存</strong>、ICU在室日数、28日時点のRRTフリー日数・人工呼吸器フリー日数・昇圧薬フリー日数。</li><li><strong>統計解析</strong></li><li>主解析は<strong>IPTW</strong>。傾向スコアはロジスティック回帰（従属変数＝初回RRTモダリティ）で推定。</li><li><strong>共変量（すべてアウトカム解析の前に事前指定）</strong>：年齢、性別、体重、併存疾患（心不全、高血圧、糖尿病、肝硬変、呼吸器疾患、癌、AIDS、臓器移植）、免疫抑制薬の使用、重症度（呼吸SOFA、心血管SOFA、ビリルビンSOFA、血小板SOFA、GlasgowSOFA、腎SOFA、総SOFA）、血漿尿素濃度、pH、ICU入室前の血漿クレアチニン濃度、<strong>試験（AKIKI か IDEAL-ICU か）</strong>。</li><li>連続変数の非線形効果には多項式を用い、重み付け後のバランスを改善しなければ非線形項は除外。</li><li>バランス評価は<strong>SMD</strong>。<strong>10%未満</strong>を臨床的に意味あるバランスとした。</li><li>効果指標は重み付け集団全体の平均処置効果（ATE）として、HR・RR・絶対リスク差（ARD）・平均差（MD）。生存は<strong>重み付きKaplan–Meier推定</strong>、平均生存時間は<strong>RMST</strong>。</li><li><strong>感度分析（positivity 対策）</strong>：一部の施設は片方のモダリティしか提供していなかった。そこで<strong>施設をランダム効果に入れた混合効果ロジスティック回帰</strong>で第2の傾向スコアを作り、<strong>オーバーラップ重み付け（OW）</strong>で効果推定を行った。</li><li>IPTW解析における施設由来の残差交絡は追加の予後モデルで検討し、<strong>施設による交絡はごくわずかと予想された</strong>（Additional file 1: Table S1, Figure S2）。</li><li>positivity 仮定と群間バランスは、両群の傾向スコア分布のプロットでさらに評価（Figures S3, S4）。</li><li><strong>95%信頼区間はブートストラップで推定</strong>。</li><li><strong>欠測</strong>：約5%の患者に1つ以上の予測変数の欠測（Figure S5）。連鎖方程式による多重代入（MICE）で<strong>5組の代入データセット</strong>を作り、個別に解析して Rubin's rules で統合。代入モデルにはアウトカムと上記のすべての交絡因子を投入。</li><li><strong>異質性評価</strong>：同じ手法で、<strong>SOFAスコアのベースラインリスク三分位</strong>で層別。</li><li><strong>ソフトウェア</strong>：R 4.0.0 以降。</li></ul>
+<h3>4. 患者フロー（Figure 1）📊</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03955-9" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03955-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Study flowchart（原図・無改変。© Gaudry et al., Critical Care 2022, CC BY 4.0） 左がAKIKI（619例）、右がIDEAL-ICU（488例）。それぞれ待機戦略への割付、RRT未施行、モダリティ未報告を除外して、下段で2試験を合流させ CRRT群 269例・IHD群 274例に分ける。最下段が60日転帰。</p>
+</div>
+<p><strong>フローチャートの全数値（原図を表に起こしたもの）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>AKIKI（左枝）</th><th>IDEAL-ICU（右枝）</th><th>合計</th></tr></thead>
+<tbody>
+<tr><td>元のRCT登録数</td><td>619例</td><td>488例</td><td>1107例</td></tr>
+<tr><td>待機戦略へ無作為化（除外）</td><td>308例</td><td>242例</td><td>550例</td></tr>
+<tr><td>RRTを一度も開始せず（除外）</td><td>6例</td><td>7例</td><td>13例</td></tr>
+<tr><td>初回RRTモダリティが未報告（除外）</td><td>1例</td><td>0例</td><td>1例</td></tr>
+<tr><td><strong>本解析に組み入れ</strong></td><td><strong>304例</strong></td><td><strong>239例</strong></td><td><strong>543例</strong></td></tr>
+<tr><td>うち CRRT を受けた</td><td>132例</td><td>137例</td><td><strong>269例</strong></td></tr>
+<tr><td>うち IHD を受けた</td><td>172例</td><td>102例</td><td><strong>274例</strong></td></tr>
+</tbody></table></div>
+<p><strong>60日転帰（原図下段）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>群</th><th>n</th><th>60日以内に死亡</th><th>60日を通じて生存</th><th>60日以内に追跡不能</th></tr></thead>
+<tbody>
+<tr><td>CRRT群</td><td>269</td><td>146</td><td>116</td><td>7</td></tr>
+<tr><td>IHD群</td><td>274</td><td>127</td><td>141</td><td>6</td></tr>
+<tr><td>合計</td><td>543</td><td>273（50%）</td><td>257</td><td>13（2%）</td></tr>
+</tbody></table></div>
+<p><strong>読み方のポイント</strong>：AKIKIではIHDが多数派（172/304＝56.6%）、IDEAL-ICUではCRRTが多数派（137/239＝57.3%）である。試験によってモダリティの分布が逆転しているため、<strong>傾向スコアモデルに「試験」を共変量として入れたのは妥当</strong>である。</p>
+<h3>5. ベースライン特性（Table 1）🧾</h3>
+<p><strong>重み付け前の群間差</strong>。IHD群のほうが高血圧の既往が多く、血清クレアチニンが高く、凝固SOFAが高かった。逆に<strong>CRRT群は心血管SOFAと総SOFAが高かった</strong>（＝より不安定な患者にCRRTが選ばれていた）。<mark class="hl">これが本研究で最も警戒すべき適応交絡である</mark>。</p>
+<h4>Table 1. ベースライン特性（原表を日本語化・全数値）</h4>
+<p>平均（SD）または n（%）。SMD は標準化平均差（%）。重み付け後のnは重みの合計（CRRT 268.2、IHD 271.9）。</p>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>全体（n=543）</th><th>CRRT（n=269）</th><th>IHD（n=274）</th><th>SMD(%) 重み付け前</th><th>CRRT 重み付け後（n=268.2）</th><th>IHD 重み付け後（n=271.9）</th><th>SMD(%) 重み付け後</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>66.5 (13.3)</td><td>66.2 (13.4)</td><td>66.8 (13.3)</td><td>4.4</td><td>66.5 (13.4)</td><td>66.7 (13.2)</td><td>1.5</td><td>0.87</td></tr>
+<tr><td>女性</td><td>200 (36.8%)</td><td>101 (37.6%)</td><td>99 (36.1%)</td><td>2.9</td><td>97.4 (36.3%)</td><td>101.2 (37.2%)</td><td>1.9</td><td>0.83</td></tr>
+<tr><td>ICU入室前の血清Cr（µmol/L）</td><td>86.2 (34.1)</td><td>84.6 (36.7)</td><td>87.8 (31.3)</td><td>9.4</td><td>86.6 (33.8)</td><td>86.8 (32.1)</td><td>0.6</td><td>0.95</td></tr>
+<tr><td>慢性腎臓病</td><td>54 (9.9%)</td><td>23 (8.6%)</td><td>31 (11.3%)</td><td>9.3</td><td>24.3 (9.1%)</td><td>30.6 (11.3%)</td><td>7.2</td><td>0.43</td></tr>
+<tr><td>慢性高血圧</td><td>301 (55.4%)</td><td>136 (50.6%)</td><td>165 (60.2%)</td><td>19.5</td><td>148.4 (55.4%)</td><td>153.3 (56.4%)</td><td>2.0</td><td>0.82</td></tr>
+<tr><td>糖尿病</td><td>109 (20.1%)</td><td>55 (20.4%)</td><td>54 (19.7%)</td><td>1.8</td><td>53.7 (20.0%)</td><td>53.5 (19.7%)</td><td>0.9</td><td>0.92</td></tr>
+<tr><td>うっ血性心不全</td><td>43 (7.9%)</td><td>22 (8.2%)</td><td>21 (7.7%)</td><td>1.9</td><td>21.6 (8.1%)</td><td>22.2 (8.2%)</td><td>0.4</td><td>0.97</td></tr>
+<tr><td>肝硬変</td><td>53 (9.8%)</td><td>27 (10.0%)</td><td>26 (9.5%)</td><td>1.8</td><td>26.3 (9.8%)</td><td>25.1 (9.2%)</td><td>2.0</td><td>0.82</td></tr>
+<tr><td>呼吸器疾患</td><td>62 (11.4%)</td><td>30 (11.2%)</td><td>32 (11.7%)</td><td>1.7</td><td>30.4 (11.3%)</td><td>31.3 (11.5%)</td><td>0.5</td><td>0.95</td></tr>
+<tr><td>癌</td><td>89 (16.4%)</td><td>48 (17.8%)</td><td>41 (15.0%)</td><td>7.8</td><td>43.2 (16.1%)</td><td>43.2 (15.9%)</td><td>0.6</td><td>0.95</td></tr>
+<tr><td>AIDS</td><td>5 (0.9%)</td><td>3 (1.1%)</td><td>2 (0.7%)</td><td>4.0</td><td>3.1 (1.1%)</td><td>4.0 (1.5%)</td><td>2.8</td><td>0.79</td></tr>
+<tr><td>免疫抑制薬</td><td>32 (5.9%)</td><td>21 (7.8%)</td><td>11 (4.0%)</td><td>16.1</td><td>15.3 (5.7%)</td><td>14.0 (5.2%)</td><td>2.4</td><td>0.79</td></tr>
+<tr><td>臓器移植</td><td>5 (0.9%)</td><td>4 (1.5%)</td><td>1 (0.4%)</td><td>11.7</td><td>2.6 (1.0%)</td><td>2.6 (1.0%)</td><td>&lt;0.1</td><td>0.99</td></tr>
+<tr><td><strong>総SOFA（0〜24）</strong></td><td>11.4 (3.2)</td><td><strong>11.7 (3.1)</strong></td><td>11.1 (3.3)</td><td><strong>18.6</strong></td><td>11.5 (3.2)</td><td>11.4 (3.2)</td><td>1.8</td><td>0.84</td></tr>
+<tr><td>腎SOFA</td><td>3.7 (1.1)</td><td>3.6 (1.1)</td><td>2.9 (1.2)</td><td>4.4</td><td>3.7 (1.1)</td><td>3.7 (1.1)</td><td>0.4</td><td>0.97</td></tr>
+<tr><td><strong>心血管SOFA</strong></td><td>4.4 (1.3)</td><td><strong>4.6 (1.1)</strong></td><td>4.3 (1.4)</td><td><strong>24.6</strong></td><td>4.5 (1.2)</td><td>4.4 (1.3)</td><td>2.5</td><td>0.78</td></tr>
+<tr><td>肝SOFA</td><td>1.8 (1.1)</td><td>1.8 (1.1)</td><td>1.8 (1.1)</td><td>4.0</td><td>1.8 (1.1)</td><td>1.8 (1.1)</td><td>3.1</td><td>0.73</td></tr>
+<tr><td>神経SOFA</td><td>2.2 (1.5)</td><td>2.2 (1.5)</td><td>2.3 (1.5)</td><td>6.8</td><td>2.2 (1.5)</td><td>2.2 (1.5)</td><td>0.4</td><td>0.96</td></tr>
+<tr><td>凝固SOFA</td><td>3.2 (1.6)</td><td>3.0 (1.6)</td><td>3.3 (1.6)</td><td>17.3</td><td>3.2 (1.6)</td><td>3.1 (1.6)</td><td>2.1</td><td>0.81</td></tr>
+<tr><td>体重（kg）</td><td>82.0 (21.9)</td><td>81.1 (21.9)</td><td>83.0 (21.9)</td><td>8.8</td><td>83.0 (23.5)</td><td>82.3 (21.9)</td><td>3.3</td><td>0.73</td></tr>
+<tr><td>血清Cr（µmol/L）</td><td>286.6 (126.9)</td><td>273.7 (122.5)</td><td>299.3 (130.0)</td><td>20.3</td><td>287.5 (129.1)</td><td>290.2 (124.0)</td><td>2.1</td><td>0.82</td></tr>
+<tr><td>血清尿素（mmol/L）</td><td>19.8 (9.1)</td><td>19.4 (9.0)</td><td>20.3 (9.2)</td><td>10.1</td><td>19.8 (9.0)</td><td>20.0 (9.0)</td><td>1.5</td><td>0.87</td></tr>
+<tr><td>血清K（mmol/L）</td><td>4.38 (0.77)</td><td>4.41 (0.78)</td><td>4.35 (0.76)</td><td>8.3</td><td>4.38 (0.77)</td><td>4.38 (0.79)</td><td>0.5</td><td>0.96</td></tr>
+<tr><td>動脈血pH</td><td>7.30 (0.10)</td><td>7.30 (0.10)</td><td>7.30 (0.09)</td><td>4.3</td><td>7.30 (0.10)</td><td>7.30 (0.10)</td><td>1.3</td><td>0.89</td></tr>
+</tbody></table></div>
+<p><strong>原表の注</strong>：表中の特性はすべてAKIKIまたはIDEAL-ICUへの組み入れ時、あるいはRRT開始前に測定された。ICU入室前の血清クレアチニンは、ICU滞在前12か月間の測定値、またはMDRD式による推定値を用いた。</p>
+<p><strong>バランスの結果</strong>：重み付け前は高血圧（SMD 19.5%）、免疫抑制薬（16.1%）、臓器移植（11.7%）、総SOFA（18.6%）、心血管SOFA（24.6%）、凝固SOFA（17.3%）、血清Cr（20.3%）、血清尿素（10.1%）で 10% を超える不均衡があった。<strong>IPTW後はすべての事前指定交絡因子でSMDが10%未満</strong>となり、p値もすべて 0.43 以上になった。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>臨床上の要注意ポイント <mark class="hl"><strong>バランスが取れたのは「測った変数」だけである</strong></mark>。著者自身が限界として挙げるとおり、<strong>体液過剰（fluid overload）は正確な評価が難しく、測定されていない</strong>。CRRTが選ばれる最大の実務的理由の一つが体液過剰であることを考えると、<mark class="hl">残差交絡が結果の方向をそのまま説明しうる</mark>。IPTW後のSMDが揃っていることは「未測定交絡がない」ことの証明にはならない。</p>
+</div>
+<p><strong>原表の内的不整合（JCで指摘すべき点）</strong>：腎SOFAの行は CRRT 3.6 (1.1)、IHD 2.9 (1.2) と<strong>0.7の差</strong>が記載されているのに、SMD は 4.4% とされている。SD が約1.1でこの差なら SMD は60%前後になるはずで、<strong>表の数値のいずれかが誤植と考えられる</strong>（重み付け後は両群とも 3.7 (1.1) で整合的）。また各サブスコアの範囲が「1 to 5」と記載されているが、標準的なSOFAサブスコアは0〜4であり、原表の表記が一般的な定義と一致していない。</p>
+<h3>6. 主要アウトカム — 60日生存（Figure 2）📉</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03955-9" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03955-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. Primary outcome: probability of survival in the unweighted sample (A) and in the IPTW sample (B)（原図・無改変。© Gaudry et al., Critical Care 2022, CC BY 4.0） 上下2段のKaplan–Meier曲線。横軸は「RRT開始からの日数」（0〜60日）、縦軸は生存確率（0.00〜1.00）。青がIHD、赤がCRRT。<strong>開始直後から青（IHD）が上に離れ、その差は60日まで縮まらない</strong>。曲線の右下に HR と log-rank の p、その下に number at risk 表。</p>
+</div>
+<p><strong>Aパネル：重み付けなし</strong></p>
+<ul><li>60日追跡を通じて <strong>273例（50%）が死亡</strong>（CRRT群 146例、IHD群 127例）。<strong>13例（2%）が追跡不能</strong>。</li><li>Kaplan–Meier による60日死亡率：<strong>CRRT 54.7% 対 IHD 46.5%</strong></li><li><strong>HR 1.27（95%CI 1.00 〜 1.61）</strong>、log-rank <strong>p=0.049</strong></li><li><strong>ARD 8.1%（95%CI −0.5 〜 16.7%）</strong> ← 有意でない</li><li><strong>RMST：CRRT 33.6日 対 IHD 37.4日（差 3.8日、95%CI 0.9 〜 8.0）</strong></li></ul>
+<p><strong>Bパネル：IPTW後</strong></p>
+<ul><li>重み付けKaplan–Meier による60日死亡率：<strong>CRRT 54.4% 対 IHD 46.5%</strong></li><li><strong>weighted HR 1.26（95%CI 1.01 〜 1.60）</strong>、log-rank <strong>p=0.049</strong></li><li><strong>weighted ARD 7.9%（95%CI −0.7 〜 16.1%）</strong> ← 有意でない</li><li><strong>weighted RMST：CRRT 33.9日 対 IHD 37.4日（weighted RMST差 3.5日、95%CI 0.9 〜 8.0）</strong></li></ul>
+<h4>Figure 2 の number at risk（原図を表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>パネル</th><th>群</th><th>0日</th><th>10日</th><th>20日</th><th>30日</th><th>40日</th><th>50日</th><th>60日</th></tr></thead>
+<tbody>
+<tr><td>A（重み付けなし）</td><td>IHD</td><td>274</td><td>206</td><td>177</td><td>156</td><td>151</td><td>146</td><td>142</td></tr>
+<tr><td>A（重み付けなし）</td><td>CRRT</td><td>269</td><td>187</td><td>155</td><td>142</td><td>130</td><td>125</td><td>117</td></tr>
+<tr><td>B（IPTW）</td><td>IHD</td><td>272</td><td>204</td><td>175</td><td>155</td><td>150</td><td>145</td><td>142</td></tr>
+<tr><td>B（IPTW）</td><td>CRRT</td><td>268</td><td>188</td><td>156</td><td>144</td><td>132</td><td>126</td><td>119</td></tr>
+</tbody></table></div>
+<p><strong>重要な読み方</strong>：<mark class="hl">重み付けをしても効果推定値がほとんど動かなかった（HR 1.27 → 1.26）</mark>。これは「測った交絡因子では説明できない差である」ことを意味するが、同時に「重み付けによる補正の余地がほとんどなかった」とも読める。</p>
+<p><strong>感度分析（OW）</strong>：オーバーラップ重み付けによる主要エンドポイントの解析は補足資料（Additional file 1: Figure S1）に示され、<strong>効果量の大きさは変わらなかった</strong>と本文に記載されている。数値は本文には示されていない。</p>
+<h3>7. 副次アウトカム（Table 2）📋</h3>
+<h4>Table 2. CRRT対IHDの副次アウトカムへの平均処置効果（原表を日本語化・全数値）</h4>
+<p>平均（SD）または n（%）。結果は代入データセット間でプールされている。RR＝リスク比。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>CRRT群（n=269）</th><th>IHD群（n=274）</th><th>RR または 差（95%CI）</th><th>weighted RR または weighted 差（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>院内死亡</td><td>146 (54.2%)</td><td>132 (48.3%)</td><td>1.12（0.95 〜 1.32）</td><td>1.13（0.94 〜 1.34）</td></tr>
+<tr><td>ICU死亡</td><td>130 (48.3%)</td><td>114 (41.6%)</td><td>1.16（0.96 〜 1.40）</td><td>1.14（0.93 〜 1.39）</td></tr>
+<tr><td>28日時点のRRT非依存での生存</td><td>117 (43.5%)</td><td>132 (48.0%)</td><td>0.91（0.75 〜 1.10）</td><td>0.92（0.75 〜 1.13）</td></tr>
+<tr><td>28日時点の腎回復</td><td>123 (45.7%)</td><td>134 (48.9%)</td><td>0.93（0.78 〜 1.12）</td><td>1.00（0.83 〜 1.21）</td></tr>
+<tr><td>28日時点のRRTフリー日数</td><td>11.5 (12.0)</td><td>13.4 (12.6)</td><td>−1.9（−3.9 〜 0.2）</td><td>−1.6（−3.9 〜 0.4）</td></tr>
+<tr><td><strong>28日時点の人工呼吸器フリー日数</strong></td><td>8.0 (10.0)</td><td>9.9 (10.8)</td><td><strong>−1.9（−3.7 〜 −0.2）</strong></td><td><strong>−1.9（−3.4 〜 −0.1）</strong></td></tr>
+<tr><td><strong>28日時点の昇圧薬フリー日数</strong></td><td>11.6 (11.7)</td><td>14.1 (12.3)</td><td><strong>−2.5（−4.5 〜 −0.5）</strong></td><td><strong>−2.1（−4.1 〜 −0.1）</strong></td></tr>
+<tr><td>28日時点のICUフリー日数</td><td>6.0 (8.6)</td><td>7.7 (9.5)</td><td>−1.6（−3.2 〜 −0.1）</td><td>−1.4（−3.1 〜 0.2）</td></tr>
+<tr><td>ICU在室日数</td><td>14.2 (15.4)</td><td>14.4 (20.8)</td><td>−0.2（−3.8 〜 2.5）</td><td>0.1（−3.0 〜 2.6）</td></tr>
+</tbody></table></div>
+<p><strong>本文の記述との照合</strong>：本文は「IPTW解析でICU死亡・院内死亡に群間差はなく、28日RRT非依存生存、28日腎回復、28日RRTフリー日数、28日ICUフリー日数、ICU在室日数についても同様であった。ただし<strong>28日時点の人工呼吸器フリー日数と昇圧薬フリー日数はIHD群のほうが有意に多かった</strong>」と述べており、表と一致している。ICUフリー日数は<strong>重み付けなしでは有意（−1.6、−3.2 〜 −0.1）だが重み付け後は非有意（−1.4、−3.1 〜 0.2）</strong>になる点に注意。</p>
+<p><strong>臨床的な意味</strong>：<mark class="hl">死亡以外で唯一一貫して差が出たのが「機械から外れていられる日数」</mark>である。CRRTは24時間ベッドに縛るため、離床・リハビリ・検査・手術の機会を奪う。著者はこの点を、軽症層でIHDが有利だった理由の説明として使っている。</p>
+<p><strong>モダリティの切り替え</strong>：CRRT先行の269例のうち <strong>56例（20.8%）が平均6.4日目にIHDへ切り替え</strong>、IHD先行の274例のうち <strong>48例（17.5%）が平均5.7日目にCRRTへ切り替え</strong>た。<mark class="hl">つまり約2割がクロスオーバーしており、これはITT様の解析としては効果を希釈する方向に働く</mark>。</p>
+<h3>8. 重症度による異質性 — SOFA三分位別（Figure 3）🔍</h3>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03955-9" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03955-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. Treatment effect heterogeneity assessment: probability of survival in the unweighted samples (A) and in the IPTW samples (B) stratified by thirds of baseline risk (SOFA score)（原図・無改変。© Gaudry et al., Critical Care 2022, CC BY 4.0） 2行×3列の6枚のKaplan–Meier曲線。上段A＝重み付けなし、下段B＝IPTW後。左列 SOFA 3〜10未満、中列 SOFA 10〜13未満、右列 SOFA 13〜23。青がIHD、赤がCRRT。<strong>左列だけ青と赤が明瞭に離れ、中列はわずか、右列では逆に赤（CRRT）がやや上</strong>になる。各パネル内にHRとlog-rank p、下に number at risk。</p>
+</div>
+<h4>Figure 3 の効果量（原図を表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>層（SOFA）</th><th>パネルA：HR（95%CI）重み付けなし</th><th>A：log-rank p</th><th>パネルB：weighted HR（95%CI）</th><th>B：log-rank p</th></tr></thead>
+<tbody>
+<tr><td>3以上10未満（軽症三分位）</td><td>2.27（1.36 〜 3.79）</td><td>p&lt;0.01</td><td><strong>1.82（1.01 〜 3.28）</strong></td><td><strong>p&lt;0.01</strong></td></tr>
+<tr><td>10以上13未満（中間三分位）</td><td>1.35（0.89 〜 2.05）</td><td>p=0.15</td><td>1.28（0.79 〜 2.07）</td><td>p=0.39</td></tr>
+<tr><td>13以上23以下（重症三分位）</td><td>0.84（0.59 〜 1.20）</td><td>p=0.33</td><td>0.83（0.56 〜 1.23）</td><td>p=0.29</td></tr>
+</tbody></table></div>
+<p>※ HR は CRRT を分子、IHD を基準としたもの。HR&gt;1 は CRRT の死亡が多いことを示す。</p>
+<h4>Figure 3 の number at risk（原図を表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>パネル</th><th>層</th><th>群</th><th>0日</th><th>10日</th><th>20日</th><th>30日</th><th>40日</th><th>50日</th><th>60日</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>SOFA 3–10</td><td>IHD</td><td>81</td><td>65</td><td>61</td><td>57</td><td>56</td><td>54</td><td>52</td></tr>
+<tr><td>A</td><td>SOFA 3–10</td><td>CRRT</td><td>58</td><td>35</td><td>31</td><td>27</td><td>25</td><td>25</td><td>25</td></tr>
+<tr><td>A</td><td>SOFA 10–13</td><td>IHD</td><td>93</td><td>74</td><td>65</td><td>58</td><td>56</td><td>55</td><td>54</td></tr>
+<tr><td>A</td><td>SOFA 10–13</td><td>CRRT</td><td>104</td><td>79</td><td>64</td><td>59</td><td>54</td><td>53</td><td>48</td></tr>
+<tr><td>A</td><td>SOFA 13–23</td><td>IHD</td><td>100</td><td>67</td><td>51</td><td>41</td><td>39</td><td>37</td><td>36</td></tr>
+<tr><td>A</td><td>SOFA 13–23</td><td>CRRT</td><td>107</td><td>73</td><td>60</td><td>56</td><td>51</td><td>47</td><td>44</td></tr>
+<tr><td>B</td><td>SOFA 3–10</td><td>IHD</td><td>79</td><td>62</td><td>57</td><td>54</td><td>50</td><td>48</td><td>47</td></tr>
+<tr><td>B</td><td>SOFA 3–10</td><td>CRRT</td><td>49</td><td>31</td><td>28</td><td>24</td><td>22</td><td>22</td><td>22</td></tr>
+<tr><td>B</td><td>SOFA 10–13</td><td>IHD</td><td>94</td><td>75</td><td>61</td><td>55</td><td>53</td><td>53</td><td>52</td></tr>
+<tr><td>B</td><td>SOFA 10–13</td><td>CRRT</td><td>106</td><td>83</td><td>69</td><td>65</td><td>57</td><td>51</td><td>46</td></tr>
+<tr><td>B</td><td>SOFA 13–23</td><td>IHD</td><td>98</td><td>63</td><td>50</td><td>39</td><td>37</td><td>35</td><td>34</td></tr>
+<tr><td>B</td><td>SOFA 13–23</td><td>CRRT</td><td>109</td><td>79</td><td>59</td><td>56</td><td>50</td><td>47</td><td>44</td></tr>
+</tbody></table></div>
+<p><strong>層別のn（重み付けなし）</strong>：軽症層 139例（IHD 81・CRRT 58）、中間層 197例（IHD 93・CRRT 104）、重症層 207例（IHD 100・CRRT 107）。合計 543例。</p>
+<p><strong>読み取れること</strong></p>
+<ol><li><strong>軽症層ではCRRTが少数派</strong>（58/139＝41.7%）で、重症層では多数派（107/207＝51.7%）。臨床現場の選好がそのまま出ている。</li><li><strong>軽症層のCRRT群は60日時点で25例しか残っていない</strong>（58例中）。<mark class="hl">つまりHR 1.82 を支えているイベント数は非常に少ない</mark>。</li><li><strong>重症層では方向が逆転</strong>（HR 0.83、0.84）しているが有意ではない。著者は「重症例では疾患そのものの重症度がモダリティの効果を覆い隠した可能性がある」と説明する。</li></ol>
+<h3>9. 考察 — 著者の解釈 💬</h3>
+<p><strong>著者の要約</strong>：CRRTは60日以内の生存が短く、人工呼吸・昇圧薬の期間が長いことと関連していた。この関連は傾向スコア法による交絡調整後も持続した。さらに補足解析により、この差は主として<strong>CRRTに割り当てられた軽症患者の転帰が悪かったこと</strong>の結果であることが示された。</p>
+<p><strong>ガイドラインとの対立</strong>：本研究では<strong>最重症患者においてRRTモダリティの選択が生存アウトカムに影響しなかった</strong>。これは、こうした患者にCRRTを推奨する一部の一般的見解やガイドラインと矛盾する。著者は「モダリティの予後への影響が疾患重症度に覆い隠された可能性」を説明として挙げる。一方、軽症患者はIHDから有意に（p&lt;0.01）恩恵を受けた。この恩恵は、<strong>RRTセッションが短いために患者を看護ケア・早期離床・医療処置（CTや手術室など）のために動かせること</strong>で説明されうるとしている。</p>
+<p><strong>ガイドラインの現状</strong>：</p>
+<ul><li><strong>KDIGO</strong> はCRRTを支持する<strong>弱い推奨</strong>を出している。</li><li><strong>フランスの勧告（SRLF/SFAR/GFRUP/SFD, 2015）</strong> は2つの技術の<strong>等価性</strong>を明記している。</li><li><strong>Cochrane のメタ解析（15 RCT・1550例、2007年）</strong> は死亡・腎回復についてCRRTがIHDと異ならないと結論した。</li><li>ただし<strong>Mehta 2001（Kidney Int）はCRRTのほうが死亡が高いと報告している</strong>。</li><li><strong>個別患者データメタ解析（Wang 2018, NDT）</strong> は、CRRTを初回モダリティとした場合、28日までのRRT中止までの時間が長かったと報告している。</li></ul>
+<p><strong>血行動態安定性の神話</strong>：一部のキーオピニオンリーダーは、血行動態が不安定な患者でCRRTが優れているという<strong>主張されているが証明されていない</strong>優位性を理由にCRRTを支持し続けている。しかしこの主張はCochraneメタ解析の結論に支持されない。同メタ解析では、<strong>血行動態不安定・低血圧の発生や昇圧薬の増量の必要性についてモダリティ間に差がなかった</strong>。したがって「重症患者にIHDは怖い」という恐れを支持するエビデンスは存在しない、と著者は述べる。</p>
+<p><strong>時代効果</strong>：Cochraneメタ解析に含まれた研究は10年以上前に発表されたもので、その後の重症患者の予後は著明に改善し（引用文献10, 11）、RRTのモダリティと適応も洗練された。CRRTとIHDを比較した最大の多施設RCT（2006年発表）では死亡率が両群とも65%超だったが、両手法が使われた近年のRRT適応RCTでは死亡率は43〜58%であった。</p>
+<p><strong>「第1回目のセッション」という選び方の意味</strong>：著者は、<strong>初回セッションこそ患者が最も不安定な時点</strong>であり、この時点に焦点を当てた解析はむしろCRRTに有利に働くはずだ、と論じる。<strong>それにもかかわらず逆方向の関連が見つかったことが、結論を強める</strong>という論法である。</p>
+<p><strong>臨床決定は転帰データだけで決まらない</strong>：最適なRRTモードを選ぶ臨床判断は、転帰データだけでなく、<strong>実行可能性、機器の可用性、IHDに習熟した看護師の存在</strong>（フランスのICUではこれが当てはまる）といった要因にも依存する、と著者は明記している。</p>
+<h3>10. 著者が挙げた限界（原文の8点をそのまま）⚠️</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>著者の対応・言い訳</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>2つの大規模RCTの高品質データを用いたとはいえ、<strong>本研究自体はRCTではない</strong>。未知・未測定の交絡によるバイアスがありえた</td><td>観察データから推論を引くための頑健な手法を適用した結果、既知の臨床的に関連する予後変数はすべて群間で均衡した（Figures S3, S6）</td></tr>
+<tr><td>2</td><td>AKIKI・IDEAL-ICUの<strong>早期群のみ</strong>を解析した</td><td>ICU入室からRRT開始までの時間は短く、先行RCTと同様であり、開始理由も同様だった。早期群のみを考えることの利点は、無作為化直後（2〜3時間）にRRTが始まるためベースライン特性が大きく変化しにくいこと。待機群を含めると48〜52時間遅れるため主要な交絡を除去できない</td></tr>
+<tr><td>3</td><td><strong>CRRT群はベースラインの心血管SOFAと総SOFAが高かった</strong></td><td>傾向スコア解析という高品質な方法論を用いたが、<strong>交絡因子は残存しうる</strong>。例えば<strong>体液過剰は正確な評価が難しく、影響を及ぼした可能性がある</strong></td></tr>
+<tr><td>4</td><td>HRとRMST差は大きな治療効果を示したが、<strong>統計学的有意性がわずかなイベント数に依存しており結果が脆弱（fragile）でありうる</strong></td><td>集中治療試験の系統的レビューでは、死亡差が統計学的に有意だった試験の fragility index の中央値は4（IQR 1–20）であった（引用文献31）</td></tr>
+<tr><td>5</td><td><strong>60日生存をARDで評価すると、CRRTと高い死亡率の関連の有意性は失われた</strong></td><td>ARDの解析の検出力不足の帰結にすぎない可能性がある。ARDは特定の時点の生存を評価するのに対し、RMST差とHRはベースラインから60日目までに蓄積したすべての情報を活用する</td></tr>
+<tr><td>6</td><td><strong>RRTセッション中の低血圧・不整脈・昇圧薬増加といった即時の有害事象を評価していない</strong></td><td>（対応の記載なし）</td></tr>
+<tr><td>7</td><td><strong>CRRTがIHDに対して体液管理で持つ潜在的な利点を評価していない</strong></td><td>体液バランスに影響されうる患者中心アウトカム（ICU・入院期間）はRRTモダリティによって差がなかった</td></tr>
+<tr><td>8</td><td><strong>相当な割合（ほぼ20%）の患者がモダリティを切り替えた</strong></td><td>研究目的は初回RRTモダリティの予後への影響の評価であり、この初回モダリティは両群ともほぼ6日という長期間継続された</td></tr>
+</tbody></table></div>
+<p><strong>著者の結論（原文の慎重さのまま）</strong>：「RRTタイミングに関する2つの大規模多施設RCTの本二次解析において、初回モダリティとしてのCRRTは60日以内の生存でも腎回復でも何らかの利益をもたらさず、重症度が低い患者ではより不良な転帰と関連している可能性がある。<strong>我々の結果は、単に予期しなかった仮説を生成するもの、およびRRTモダリティを比較する新たな大規模RCTを実施する原動力とみなされるべきである</strong>。」</p>
+<h2>🔗 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本論文（Gaudry 2022）</th><th>Vault内の他ノート</th><th>整合／不整合</th></tr></thead>
+<tbody>
+<tr><td>モダリティと死亡</td><td>CRRT先行で60日死亡が高い方向（weighted HR 1.26、95%CI 1.01–1.60）</td><td>敗血症関連AKIのJIPAD 756例PSマッチでは死亡に差なし／ブラジル10施設195例の1年死亡・QOLも差なし／インド90例では死亡同等</td><td><strong>方向が異なる</strong>。本論文だけが「差あり」を報告している。他の観察研究・小規模RCTは「差なし」で一致</td></tr>
+<tr><td>モダリティと腎回復</td><td>28日腎回復に差なし（weighted RR 1.00、95%CI 0.83–1.21）</td><td>ATN・RENAL二次解析では調整後の28日RRT依存に差なし（SHR 0.96、95%CI 0.84–1.10）だが、生存者に限るとCRRT先行で依存が低い（OR 0.54、95%CI 0.37–0.80）</td><td><strong>主解析どうしは整合</strong>。ただしATN・RENALの「生存者限定」の所見とは方向が逆で、生存者バイアスの扱いが論点になる</td></tr>
+<tr><td>重症度による異質性</td><td>軽症層でIHD有利、重症層で差なし</td><td>機械学習でRRTの効果が患者ごとに真逆になりうることを示したJIPADレジストリ研究がある</td><td><strong>概念的に整合</strong>。「平均効果ではなく誰に効くか」を問う流れは共通する</td></tr>
+<tr><td>中間モダリティ（PIRRT／SLED）</td><td>本研究には<strong>1例も含まれていない</strong></td><td>PIRRTの処方レビューはPIRRTとCRRTで死亡・腎回復に有意差を示すエビデンスはないとする</td><td>本研究はPIRRTの位置づけには何も言えない</td></tr>
+<tr><td>開始タイミング</td><td>本研究は早期開始群のみを扱う</td><td>AKIKI 2（Lancet 2021）はさらに待機を延長しても利益がないことを示す</td><td>開始タイミングとモダリティは別の軸。混同しない</td></tr>
+</tbody></table></div>
+<p><strong>Vault内の記述で訂正が必要な点</strong>：現状、複数のノート（PIRRT処方レビュー、ブラジル1年転帰、腎・電解質Home）が本研究を「モダリティ間で差なし」の系譜として引用している。<mark class="hl">本研究は主要アウトカムで有意差（CRRT不利）を報告しており、この分類は誤りである</mark>。Homeおよび引用側ノートの記述を「モダリティ間で差なし」から「唯一CRRT不利の方向を報告した二次解析。ただしRCTではない」へ改める必要がある。</p>
+<p>関連ノート：<span class="wl">重症AKIの初回モダリティと治療プロトコル — 28日RRT依存に差はないが、生存者ではCRRT先行が有利（ATN・RENAL統合IPD・CritCare2022）</span>、<span class="wl">敗血症関連AKIで間欠的RRTと持続的RRTに死亡率の差はない（JIPAD 756例・PSマッチ・JAClinRep2025）</span>、<span class="wl">持続的RRTと間欠的RRTでICU生存者の1年死亡もQOLも変わらない（ブラジル10施設195例・JICM2024）</span>、<span class="wl">AKIのRRTモダリティ比較 — CRRT・IHD・SLEDで死亡は同等、腎回復はCRRTが良好（インド90例・前向き・RomJInternMed2023）</span>、<span class="wl">PIRRT（延長間欠的腎代替療法）の処方の仕方（Perspective・CritCare2023）</span>、<span class="wl">RRTの効果は患者によって真逆だった — 機械学習で見えた「効く群」と「害になる群」（JIPADレジストリ・CCM2026）</span>。</p>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<p><strong>1. これは「モダリティのRCT」ではない — ここが最大の論点</strong> AKIKIとIDEAL-ICUが無作為化したのは<strong>RRTの開始タイミング</strong>であって、モダリティではない。モダリティは主治医が選んでいる。したがって本研究の設計は<strong>観察研究</strong>であり、target trial emulation という枠組みを使っても、その事実は変わらない。<strong>タイトルに「versus」とあるが、比較の根拠は無作為化ではなく傾向スコアである</strong>。</p>
+<p><strong>2. 適応交絡は打ち消せたのか</strong></p>
+<ul><li><strong>打ち消せた側の証拠</strong>：IPTW後、事前指定のすべての共変量でSMD&lt;10%、p値も0.43以上。傾向スコアの分布は十分に重なっている（Figure S3）。施設由来の残差交絡は追加の予後モデルで小さいと示された。OWによる感度分析でも効果量は変わらなかった。</li><li><strong>打ち消せていない可能性</strong>：<mark class="hl"><strong>体液過剰が測定されていない</strong></mark>。これはCRRTを選ぶ最大の実務的理由の一つであり、かつ独立した予後因子でもある。著者自身が限界として明記している。ほかに、乳酸値、昇圧薬の実投与量、換気設定、血行動態の推移といった「不安定さ」の直接指標も傾向スコアモデルに入っていない（心血管SOFAは代理でしかない）。</li><li><strong>JCでの問い</strong>：「IPTW後にSMDが揃った」ことは、未測定交絡がないことの証明になるか。ならない。E-value のような感度分析（どれほどの強さの未測定交絡があれば HR 1.26 が説明できるか）が提示されていれば議論しやすかった。</li></ul>
+<p><strong>3. 統計学的有意性が極端に境界的である</strong></p>
+<ul><li>主要解析：weighted HR 1.26、<strong>95%CI下限 1.01</strong>、log-rank <strong>p=0.049</strong></li><li>重み付けなし：HR 1.27、<strong>95%CI下限 1.00</strong></li><li><strong>ARDでは有意でない</strong>（weighted 7.9%、95%CI −0.7 〜 16.1%）</li></ul>
+<p>つまり、<mark class="hl">同じデータから3つの指標を出して、2つは辛うじて有意、1つは非有意</mark>。著者は「ARDは検出力が低い」と説明するが、<strong>指標によって結論が変わることそのものが結果の脆弱性を示している</strong>。著者も fragility を限界5・6番目で認めている。</p>
+<p><strong>4. 軽症層のサブグループ解析の信頼性</strong></p>
+<ul><li>軽症層は<strong>139例のみ</strong>（CRRT 58例）。60日時点でCRRT群のat riskは25例。</li><li><strong>weighted HR 1.82 の95%CIは 1.01 〜 3.28</strong> と極めて広い。</li><li><mark class="hl">CI下限が1.01であるのに log-rank p&lt;0.01 と記載されているのは整合しにくい</mark>。CIは重み付きCox（ブートストラップCI）、pはlog-rank検定と、<strong>別の検定から出た数値を並べている</strong>ためと考えられるが、原文には説明がない。JCではここを突く。</li><li>そもそも<strong>三分位による層別は事前指定だが、交互作用の検定は報告されていない</strong>。「軽症で効いて重症で効かない」は交互作用の主張だが、それを支持する統計量が示されていない。</li></ul>
+<p><strong>5. 「差がない」を「同等」と読み替えない</strong></p>
+<ul><li>副次アウトカム（院内死亡・ICU死亡・腎回復など）で有意差が出なかったことは、<mark class="hl"><strong>同等性の証明ではない</strong></mark>。院内死亡の weighted RR は 1.13（95%CI 0.94 〜 1.34）で、<strong>CI上限は34%の相対増加を許容している</strong>。</li><li>逆に、重症層の weighted HR 0.83（95%CI 0.56 〜 1.23）も「重症ではCRRTでもIHDでもよい」の証明ではなく、単に検出力不足である可能性が高い。</li><li><strong>著者自身は最終行で「非劣性RCTが必要」と書いており、この論文で決着したとは主張していない</strong>。</li></ul>
+<p><strong>6. 20%のクロスオーバー</strong> CRRT→IHDが20.8%（平均6.4日）、IHD→CRRTが17.5%（平均5.7日）。ITT様の解析なので<strong>効果は希釈される方向</strong>であり、真の効果はより大きい可能性もある。ただし切り替えの理由（血行動態の改善か、悪化か）が報告されておらず、<strong>切り替えが転帰と相関する交絡（time-varying confounding）</strong>を評価できない。</p>
+<p><strong>7. 原著内の数値の不整合</strong></p>
+<ul><li><strong>腎SOFA行のSMD</strong>：CRRT 3.6 (1.1) 対 IHD 2.9 (1.2) で SMD 4.4% は計算が合わない（60%前後になるはず）。誤植と考えられる。</li><li><strong>RMST差の信頼区間</strong>：重み付けなしが 3.8日（95%CI 0.9 〜 8.0）、重み付け後が 3.5日（95%CI 0.9 〜 8.0）と<strong>点推定は違うのにCIが完全に同じ</strong>。転記ミスの可能性がある。</li><li><strong>28日RRT非依存生存</strong>：IHD 132/274 は 48.2% だが表は 48.0% と記載。</li><li><strong>SOFAサブスコアの範囲</strong>：原表は「1 to 5」だが、標準的なSOFAサブスコアは0〜4。</li></ul>
+<p><strong>8. 外的妥当性 — 日本のICUにそのまま持ち込めるか</strong></p>
+<ul><li><mark class="hl"><strong>この研究のIHDは、フランスのICUで、ICU看護師が回し、5つの忍容性対策を課したうえでのIHDである</strong></mark>。日本のICUではCRRTが約9割を占め、ICU看護師がIHDを日常的に回す体制は一般的でない。<strong>同じ成績が出る保証はない</strong>。</li><li>著者自身が「実行可能性、機器の可用性、IHDに習熟した看護師の存在」に依存すると明記している。</li><li>対象は<strong>重症AKI確認後12時間以内にRRTを開始した患者</strong>に限られる。待機してから開始する患者、慢性腎不全の急性増悪、術後の一時的なAKIには当てはまらない。</li></ul>
+<p><strong>9. 何を検証すべきか（次の研究）</strong> 著者の提案どおり、<strong>事前に定めたRRT適応のもとで大規模にモダリティを無作為化する非劣性RCT</strong>が必要。加えて、①セッション中の急性有害事象（低血圧・不整脈・昇圧薬増加）の系統的記録、②体液バランスの定量、③PIRRT／SLEDを第3群に置くこと、が本研究の限界から導かれる設計上の要件になる。</p>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症患者におけるAKIの疫学（多国籍 AKI-EPI 研究）</td><td>Hoste EAJ, et al. Intensive Care Med. 2015;41(8):1411–23.</td></tr>
+<tr><td>2</td><td>急性腎障害の総説</td><td>Ronco C, Bellomo R, Kellum JA. Lancet. 2019;394(10212):1949–64.</td></tr>
+<tr><td>3</td><td>AKIを伴う重症患者のRRTの現状（CRRTを支持する見解）</td><td>Bagshaw SM, et al. Intensive Care Med. 2017;43(6):841–54.</td></tr>
+<tr><td>4</td><td>ICU患者におけるCRRT対IHD：死亡と腎回復への影響</td><td>Truche AS, et al. Intensive Care Med. 2016;42(9):1408–17.</td></tr>
+<tr><td>5</td><td>RRTモダリティの選択とAKI後の透析依存（SR・メタ解析）</td><td>Schneider AG, et al. Intensive Care Med. 2013;39(6):987–97.</td></tr>
+<tr><td>6</td><td>ICU患者のRRT管理に関する国際調査（CRRT選好の実態）</td><td>Legrand M, et al. Intensive Care Med. 2013;39(1):101–8.</td></tr>
+<tr><td>7</td><td>COVID-19患者に対する腎代替療法の不足の切迫</td><td>Goldfarb DS, et al. Clin J Am Soc Nephrol. 2020;15:880–2.</td></tr>
+<tr><td>8</td><td>COVID-19関連AKI：第1波からの教訓（CRRTの12時間運用の提案）</td><td>Wald R, Bagshaw SM. J Am Soc Nephrol. 2021;32(1):4–6.</td></tr>
+<tr><td>9</td><td>重症患者におけるIHDの血行動態忍容性：診療ガイドラインの有用性</td><td>Schortgen F, et al. Am J Respir Crit Care Med. 2000;162(1):197–202.</td></tr>
+<tr><td>10</td><td>ARDS患者の死亡率低下（ARDS Network 試験の解析）</td><td>Zhang Z, et al. Crit Care Med. 2019;47(3):315–23.</td></tr>
+<tr><td>11</td><td>米国ICU入室患者の院内死亡の変化（1988–2012）</td><td>Zimmerman JE, Kramer AA, Knaus WA. Crit Care. 2013;17(2):R81.</td></tr>
+<tr><td>12</td><td>多臓器不全を伴う急性腎不全へのCVVHDF対IHD（最大規模RCT・2006年）</td><td>Vinsonneau C, et al. Lancet. 2006;368(9533):379–85.</td></tr>
+<tr><td>13</td><td><strong>AKIKI</strong>：ICUにおけるRRT開始戦略</td><td>Gaudry S, et al. N Engl J Med. 2016;375(2):122–33.</td></tr>
+<tr><td>14</td><td><strong>STARRT-AKI</strong>：AKIにおけるRRT開始のタイミング</td><td>STARRT-AKI Investigators. N Engl J Med. 2020;383(3):240–51.</td></tr>
+<tr><td>15</td><td><strong>IDEAL-ICU</strong>：AKIと敗血症を伴う患者のRRTのタイミング</td><td>Barbar SD, et al. N Engl J Med. 2018;379(15):1431–42.</td></tr>
+<tr><td>16</td><td>フランス（SRLF・SFAR・GFRUP・SFD）の成人・小児ICUにおけるRRT勧告（両者を等価とする）</td><td>Vinsonneau C, et al. Ann Intensive Care. 2015;5(1):58.</td></tr>
+<tr><td>17</td><td><strong>KDIGO 急性腎障害ガイドライン</strong>（CRRTを弱く推奨）</td><td>KDIGO. Acute Kidney Injury Guideline.</td></tr>
+<tr><td>18</td><td>ATS/ERS/ESICM/SCCM/SRLF 公式声明：ICU患者の急性腎不全の予防と管理</td><td>Brochard L, et al. Am J Respir Crit Care Med. 2010;181(10):1128–55.</td></tr>
+<tr><td>19</td><td>因果的治療効果推定における傾向スコアの層別化と重み付け</td><td>Lunceford JK, Davidian M. Stat Med. 2004;23(19):2937–60.</td></tr>
+<tr><td>20</td><td>傾向スコアのフルマッチングによる二値アウトカムの治療効果推定</td><td>Austin PC, Stuart EA. Stat Methods Med Res. 2017;26(6):2505–25.</td></tr>
+<tr><td>21</td><td>傾向スコアマッチング標本における共変量分布のバランス診断</td><td>Austin PC. Stat Med. 2009;28(25):3083–107.</td></tr>
+<tr><td>22</td><td>因果効果のコホート研究における共変量バランスの指標</td><td>Franklin JM, et al. Stat Med. 2014;33(10):1685–99.</td></tr>
+<tr><td>23</td><td>IPTW使用時のベストプラクティス</td><td>Austin PC, Stuart EA. Stat Med. 2015;34(28):3661–79.</td></tr>
+<tr><td>24</td><td>観察研究における調整済み制限付き平均生存時間（RMST）</td><td>Conner SC, et al. Stat Med. 2019;38(20):3832–60.</td></tr>
+<tr><td>25</td><td>極端な傾向スコアへの対処：オーバーラップ重み</td><td>Li F, Thomas LE, Li F. Am J Epidemiol. 2019;188(1):250–7.</td></tr>
+<tr><td>26</td><td><strong>AKIKI 2</strong> 研究プロトコル</td><td>Gaudry S, et al. Trials. 2019;20:726.</td></tr>
+<tr><td>27</td><td>AKI患者への間欠的対持続的RRTの無作為化臨床試験</td><td>Lins RL, et al. Nephrol Dial Transplant. 2009;24(2):512–8.</td></tr>
+<tr><td>28</td><td><strong>Cochrane メタ解析</strong>：成人急性腎不全への間欠的対持続的RRT（15 RCT・1550例）</td><td>Rabindranath K, et al. Cochrane Database Syst Rev. 2007;3:CD003773.</td></tr>
+<tr><td>29</td><td>急性腎不全への持続的対間欠的透析のRCT（<strong>CRRTで死亡が高いと報告</strong>）</td><td>Mehta RL, et al. Kidney Int. 2001;60(3):1154–63.</td></tr>
+<tr><td>30</td><td>RRT強度と透析非依存への回復（SR・個別患者データメタ解析）</td><td>Wang Y, et al. Nephrol Dial Transplant. 2018;33(6):1017–24.</td></tr>
+<tr><td>31</td><td>集中治療試験における終末期意思決定の過少報告（fragility index の出典）</td><td>Messika J, et al. Am J Respir Crit Care Med. 2017;197:263–6.</td></tr>
+</tbody></table></div>
+<p><strong>補足資料（Additional file 1）の構成</strong>：Table S1（IPTW前後の予後スコアと施設効果のバランス）、Table S2（OW後の両群のベースライン特性）、Figure S1（OW標本での生存確率）、Figure S2（施設ごとの治療割付ランダム効果と予後ランダム効果の関連を示すバブルプロット）、Figure S3（元標本とIPTW標本の傾向スコア分布）、Figure S4（施設をランダム効果に含めた傾向スコアの、元標本とOW標本での分布）、Figure S5（元標本の各変数の欠測割合）、Figure S6（重み付けなし・IPTW・OW各標本での交絡因子ごとのSMD）。<mark class="hl">本ノートは本文とFigure 1〜3、Table 1〜2に基づいており、Additional file 1 の中身は本文の記述以上には確認していない</mark>。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 重症AKIの初回RRTモダリティをIPTWで比較すると、<mark class="hl"><strong>CRRT先行は60日死亡が高い方向（weighted HR 1.26、95%CI 1.01–1.60）で、差はSOFA 3–10 の比較的軽症な層に集中していた</strong></mark>。 <mark class="hl"><strong>ただしこれはRCTではなく二次解析であり、「CRRTのほうが安全」という前提が支持されなかった、までしか言えない</strong></mark>。著者自身が「予期しない仮説の生成」と位置づけ、非劣性RCTを求めている。 <mark class="hl"><strong>「差がなかった」副次アウトカムを「同等」と読み替えない</strong></mark>。院内死亡の weighted RR は 1.13（95%CI 0.94–1.34）で、34%の相対増加までが区間に入っている。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>重症AKIでRRT開始を決めた</td><td>血行動態（昇圧薬量・変動）と体液過剰の程度</td><td>不安定・著明な体液過剰ならCRRT。この論文はそれを否定していない</td></tr>
+<tr><td>腎障害が主体で他臓器は比較的落ち着いている（SOFA 3–10 相当）</td><td>離床・検査・手術の予定があるか。IHDを安全に回す体制（等容量開始・低温透析液・重炭酸・Naプロファイリング・控えめ除水）があるか</td><td>体制があるならIHDを積極的に検討する。「軽症だがとりあえずCRRT」は再考する</td></tr>
+<tr><td>最重症（SOFA 13 以上相当）</td><td>本論文では weighted HR 0.83（95%CI 0.56–1.23）で差の証拠なし</td><td>モダリティは生存では決められない。実行可能性・人員・機器で決める</td></tr>
+<tr><td>CRRTで開始したが安定してきた</td><td>人工呼吸器・昇圧薬から離脱できているか。離床の機会を逃していないか</td><td>本研究では約2割が平均6.4日目にIHDへ切替。切替の検討を日次で回す</td></tr>
+<tr><td>機器・人員が逼迫している（災害・パンデミック）</td><td>IHDを回せる看護師がいるか</td><td>本論文はIHDへ寄せる運用を支持する方向。ただし忍容性対策5点をセットで</td></tr>
+<tr><td>上記のいずれでもPIRRT／SLEDを考えたい</td><td>本研究にはSLEDが1例も含まれない</td><td>この論文からは何も言えない。PIRRTのノートを参照する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

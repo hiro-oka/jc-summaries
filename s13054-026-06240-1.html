@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AECOPDの離脱予測は横隔膜移動距離が最良 — 感度0.85・特異度0.85・AUC 0.92（SR・メタ解析23研究2000例・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-026-06240-1.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">AECOPDの離脱予測は横隔膜移動距離が最良 — 感度0.85・特異度0.85・AUC 0.92（SR・メタ解析23研究2000例・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Zhou X, Xu Y, Yan Q, Chen R, Lv X, Wang Z. Crit Care. 2026;30:407. doi:10.1186/s13054-026-06240-1</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06240-1" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06240-1</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Predictive value of diaphragmatic ultrasound for weaning outcomes in mechanically ventilated patients with acute exacerbation of chronic obstructive pulmonary disease: a systematic review and meta-analysis</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-026-06240-1.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-026-06240-1.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-026-06240-1.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>対象を限定して使う。</strong> 本研究は「侵襲的人工呼吸を受けた AECOPD」に限定した初めての診断精度メタ解析である。当院で横隔膜エコーを離脱判断の議論に持ち込むなら、COPD急性増悪でSBTに難渋している症例が第一候補になる。混合ICU集団のデータをそのまま当てはめてよいという根拠は、本論文からは得られない。</li><li><strong>数字を「抜管の可否」の閾値にしない。</strong> 統合の見かけの精度は高い（DE で AUC 0.92）が、23研究中20研究がカットオフを自分のデータから事後的に決めている。著者自身が結論で「外部検証済みの診断精度ではなく apparent prognostic performance である」と明記している。既存の <span class="wl">横隔膜エコーは抜管失敗を予測できない（多施設研究 Chest2019）</span> と真正面から矛盾する点も、そのまま受け止める必要がある。</li><li><strong>測るなら移動距離（DE）を第一に。</strong> 4指標の中で感度・特異度がともに0.85と最もバランスがよく、陽性でも陰性でも事後確率を大きく動かす（事前35%→陽性76%／陰性9%）。厚み分画（DTF）は感度0.84・特異度0.77で陰性の除外に寄り、収縮速度（DCV）は AUC 0.70 で単独使用に値しない。</li><li><strong>D-RSBI は「リスクの高い人を拾う」用途に。</strong> 特異度0.88・LR+ 6.26 と陽性の説得力が高い一方、感度0.74で見落としが出る。SBTを通過した後の「この人は本当に大丈夫か」という問いに向いており、「異常がないから抜管してよい」という使い方には向かない。</li><li><strong>測定条件を院内で固定してから使う。</strong> 本研究の異質性の主因は測定タイミングとSBTモード、そして事後カットオフである。当院で導入するなら、まず <span class="wl">重症患者の横隔膜超音波コンセンサス EXODUS（Delphi 2022）</span> に沿って撮り方を揃え、施設の値を蓄積するのが先になる。</li><li><strong>単独指標に賭けない。</strong> 著者らも「咳嗽力、分泌物量、意識、肺エアレーション、心機能、体液バランスがいずれも離脱転帰の決定因子である」と述べ、多角的評価の一部として位置づけている。当院の抜管前チェックリストは咳嗽力を筆頭に置く方針（Chest2019由来）を変える必要はない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：AECOPDでは離脱失敗率が20〜30%と高く、失敗と再挿管はICU滞在の延長・人工呼吸器関連肺炎・横隔膜機能障害の悪化・死亡率上昇につながる。慢性の肺過膨張により横隔膜は短縮・平坦化して機械的に不利な位置に置かれ、急性増悪では内因性PEEP（PEEPi）が吸気の閾値負荷をさらに増す。横隔膜エコー（DE・DTF・DCV・D-RSBI）は非侵襲・実時間・再現可能なベッドサイド評価として普及したが、SBTのモード・測定タイミング・カットオフの違いから研究ごとに結果が食い違っていた。</li><li><strong>Unknown（分かっていなかったこと）</strong>：既存のシステマティックレビューはいずれも原因の異なる混合ICU集団を対象にしており、AECOPDに限定した診断精度の統合値は存在しなかった。混合集団から得た推定値と閾値がAECOPDにそのまま移せるのかも不明だった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：AECOPDに限定し、DE・DTF・DCV・D-RSBI を共通の疾患特異的な枠組みで横並び比較した初のメタ解析。23研究2,000例（成功1,310例・失敗690例）で、DE が感度0.85・特異度0.85・AUC 0.92 と最も高くバランスがよいこと、D-RSBI は特異度0.88でリスク同定向きであること、DCV は AUC 0.70 で単独使用に耐えないことを示した。同時に、20研究が事後カットオフを用いていることを根拠に、これらを「外部検証済みの診断精度」ではなく「見かけの予後予測能」と自ら位置づけた点が、この論文の誠実さであり最大の読みどころである。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで AECOPD 23研究2,000例の統合で、横隔膜移動距離（DE）は感度0.85・特異度0.85・<strong>AUC 0.92</strong> と4指標中最良だった。ただし23研究中20研究が自分のデータから事後的にカットオフを決めており、著者自身がこれを外部検証済みの診断精度ではなく「見かけの予後予測能」と位置づけている。</p>
+</div>
+<ul><li><strong>デザイン</strong>：8データベースを2026年4月5日まで検索した診断精度のシステマティックレビュー・メタ解析。二変量ランダム効果モデルで感度・特異度を統合し、SROC曲線下面積（AUC）で全体の判別能を要約した</li><li><strong>組み入れ</strong>：484件から重複159件を除いた325件を一次選抜、全文評価86件、最終的に<strong>23研究2,000例</strong>（離脱成功1,310例・失敗690例、失敗率34.5%）</li><li><strong>地域の偏り</strong>：<strong>21研究が中国・2研究がエジプト</strong>。前向き16研究（コホート14・ケースコントロール1・観察1）、後ろ向き7研究</li><li><strong>14種類の指標</strong>が同定されたが、量的統合に足るデータがあったのは<strong>4指標のみ</strong>（DE・DTF・DCV・D-RSBI）</li><li><strong>DE（16研究1,344例）</strong>：感度 0.85（95%CI 0.78–0.90）／特異度 0.85（0.77–0.91）／LR+ 5.73（3.62–9.07）／LR− 0.18（0.11–0.27）／DOR 32.38（14.87–70.50）／<strong>AUC 0.92（0.89–0.94）</strong></li><li><strong>DTF（13研究1,229例）</strong>：感度 0.84（0.77–0.90）／特異度 0.77（0.67–0.85）／LR+ 3.74（2.51–5.56）／LR− 0.20（0.14–0.29）／DOR 18.55（10.25–33.59）／AUC 0.88（0.85–0.91）</li><li><strong>D-RSBI（8研究723例）</strong>：感度 0.74（0.61–0.83）／<strong>特異度 0.88（0.73–0.95）</strong>／LR+ 6.26（2.78–14.11）／LR− 0.30（0.21–0.43）／DOR 20.92（9.36–46.79）／AUC 0.85（0.82–0.88）</li><li><strong>DCV（4研究365例）</strong>：感度 0.69（0.57–0.79）／特異度 0.64（0.55–0.71）／LR+ 1.89（1.51–2.38）／LR− 0.49（0.35–0.69）／DOR 3.87（2.29–6.55）／AUC 0.70（0.66–0.74）</li><li><strong>Fagan（事前確率35%）</strong>：DE 陽性76%・陰性9%／DTF 陽性67%・陰性10%／D-RSBI 陽性77%・陰性14%／DCV 陽性50%・陰性21%</li><li><strong>異質性</strong>：DE・DTF・D-RSBI で大きい（例：DTF の特異度 I² = 92.88%）。Spearman の閾値効果は4指標いずれも有意でなかったが、著者は「検出力不足で除外はできない」と留保している</li><li><strong>メタ回帰</strong>：DE でのみ<strong>研究デザインが有意</strong>（前向きは後ろ向きより DOR が高い。β = 1.388、相対DOR 4.01、95%CI 1.55–10.36、P = 0.004）。他の共変量・他の指標では有意な関連なし</li><li><strong>バイアス</strong>：QUADAS-2 の index test ドメインで<strong>23研究中20研究が高リスク</strong>（事後カットオフ）。Deeks 検定は有意でない（DE 0.94／DTF 1.00／DCV 0.82／D-RSBI 0.60）が、著者は検出力不足を明記</li><li><strong>著者の結論</strong>：横隔膜エコーは離脱の予後情報を与えうるが、<strong>単独で離脱を決める根拠にはならない</strong>。多施設外部検証と、エコー主導の管理が患者アウトカムを改善するかを見る介入試験が必要</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — AECOPDの離脱と横隔膜エコーの基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>AECOPD（COPD急性増悪）</strong> では、気流制限と動的肺過膨張により呼気終末肺気量が増え、肺胞内に陽圧が残る。これが<strong>内因性PEEP（PEEPi、intrinsic PEEP／auto-PEEP）</strong>で、自発呼吸に移った患者は吸気を始める前にまずこの圧を打ち消さなければならない。つまり「吸い始めるための入場料」が発生し、吸気仕事量が跳ね上がる。</p>
+<p>同時に、慢性の過膨張は横隔膜を押し下げて短縮・平坦化させる。筋は最適長より短い状態では張力を出しにくいため（長さ–張力関係）、AECOPD患者の横隔膜は<strong>負荷が増えているのに出力が落ちている</strong>という二重の不利を負う。さらに人工呼吸中の廃用によって <strong>VIDD（ventilator-induced diaphragmatic dysfunction、人工呼吸器誘発性横隔膜機能障害）</strong> が加わる。著者はこの「横隔膜が出せる最大圧」と「負荷を打ち消すのに必要な圧」の差を <strong>横隔膜ポンプ予備能（diaphragmatic pump reserve）</strong> と呼び、離脱可否の本質はこの予備能があるかどうかだと整理している。</p>
+<p><strong>SBT（spontaneous breathing trial、自発呼吸トライアル）</strong> は人工呼吸の補助を外して患者が自力で呼吸できるかを試す標準的な手続きで、Tピース・CPAP・低圧のプレッシャーサポート（PSV）のいずれかで行われる。従来の離脱予測指標である <strong>RSBI（rapid shallow breathing index、浅速呼吸指数＝呼吸数÷一回換気量）</strong> や最大吸気圧（MIP）、血液ガスは、呼吸系全体の性能を見るもので、横隔膜そのものの収縮力を分離して測れない。</p>
+<p>横隔膜エコーは4つの指標を与える。</p>
+<ul><li><strong>DE（diaphragmatic excursion、横隔膜移動距離）</strong>：右季肋下から肝臓を音響窓にして M-mode で横隔膜ドームの上下動を記録し、吸気の下降幅を mm で測る。「どれだけ動いたか」</li><li><strong>DTF（diaphragm thickening fraction、横隔膜厚み分画）</strong>：側胸部の接合部帯（zone of apposition）で筋層の厚みを呼気終末と吸気終末に測り、（吸気厚−呼気厚）÷呼気厚×100 を % で表す。「どれだけ縮んだか」</li><li><strong>DCV（diaphragmatic contraction velocity、横隔膜収縮速度）</strong>：移動距離を吸気時間で割った cm/s。「どれだけ速く動いたか」</li><li><strong>D-RSBI（diaphragmatic RSBI）</strong>：RSBI の一回換気量を DE に置き換えた指数（呼吸数÷DE、単位は breaths·min⁻¹·cm⁻¹）。補助呼吸筋の代償で一回換気量が保たれていても、横隔膜の動きが乏しければ高値になる</li></ul>
+<p>診断精度メタ解析で使う統計用語も押さえておく。<strong>LR+（陽性尤度比）</strong> は「陽性だったときに疾患のオッズを何倍にするか」、<strong>LR−（陰性尤度比）</strong> は「陰性だったときに何倍にするか」。<strong>DOR（診断オッズ比）= LR+ ÷ LR−</strong> で、大きいほど判別能が高い。<strong>SROC（summary ROC）曲線</strong>は研究ごとの感度・特異度の組をつないだ要約曲線で、その下面積が AUC。<strong>Fagan ノモグラム</strong>は事前確率と尤度比から事後確率を読む図である。<strong>QUADAS-2</strong> は診断精度研究のバイアス評価ツールで、患者選択・index test（検査そのもの）・参照基準・フローとタイミングの4領域を low／high／unclear で評価する。</p>
+<p>⚠️ <strong>この節の位置づけ</strong>：PEEPi と長さ–張力関係、VIDD、横隔膜ポンプ予備能、RSBI・MIP の限界、4指標の定義、統計用語のうち、論文本文に明記されているのは PEEPi・過膨張による横隔膜の短縮平坦化・VIDD・ポンプ予備能の定義・4指標の名称と略語・AUC の解釈基準（0.80以上=良好／0.70–0.79=中等度／0.70未満=不良）である。プローブの当て方、音響窓、接合部帯の解剖、DTF の計算式、SBTのモードの具体、Fagan・QUADAS-2 の手順は<strong>初学者向けに補った一般的背景知識</strong>であり、本論文の記述ではない。以降のセクション（2以降）は、明記しない限りすべて論文本文の内容である。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p>AECOPD は気道機能の急速な悪化と呼吸症状の増悪を特徴とする重篤な臨床状態であり、COPD患者のICU入室と死亡の主要因、かつ世界の医療システムに大きな経済的負担を課している。重症のAECOPDはしばしば侵襲的人工呼吸を必要とするが、その後の離脱過程が大きな臨床課題として残る。著者は先行文献を引いて「呼吸ケアの進歩にもかかわらず、AECOPD患者の離脱失敗率は依然として高く <strong>20%から30%</strong> の範囲にある」と述べる。離脱失敗とそれに続く再挿管は、ICU滞在の延長、人工呼吸器関連肺炎のリスク上昇、横隔膜機能障害の悪化、死亡率上昇をもたらす。</p>
+<p>一般ICU集団と異なり、AECOPD患者では離脱時に「上昇した呼吸仕事量」と「制限された横隔膜ポンプ能力」の不均衡がとりわけ顕著である。横隔膜機能障害は、この集団における離脱失敗の鍵となる機械的決定因子として蓄積したエビデンスが指摘してきた。重要なのは、COPD患者の横隔膜機能障害が<strong>急性増悪の前から既に存在しうる</strong>という点である。慢性の肺過膨張は横隔膜の形状を変え、短縮・平坦化させることで機械的に不利な位置に置き、吸気圧を生む効率を下げる。急性増悪では重度の気流制限と動的過膨張が呼気終末肺気量をさらに増やし、PEEPi を生じる。したがって自発呼吸へ移行する際、患者は PEEPi という閾値負荷を打ち消すために相当な吸気努力を要し、吸気の呼吸仕事量が著明に増大する。</p>
+<p>ここで著者は、<strong>補助呼吸筋の動員が診断解釈を歪めうる</strong>という重要な指摘を置いている。補助呼吸筋の動員増加は横隔膜の寄与低下を部分的に代償して換気を維持しうるが、同時に「横隔膜固有の機能」と「呼吸全体の性能」の直接的な関係を弱め、横隔膜エコー指標の診断的解釈に影響しうる。さらに、既存の横隔膜障害と急性の機械的不利に、人工呼吸中の廃用性萎縮による VIDD が重なる。</p>
+<p>従来の離脱予測指標（RSBI、血液ガス、酸素化指数、MIP、従来型SBT）はいずれも呼吸機能全体を評価するもので、横隔膜の収縮能と予備能を直接かつ動的に定量できず、感度・特異度が最適でないため臨床的有用性が限られる。これに対し横隔膜エコーは非侵襲・実時間・再現可能なベッドサイド画像技術として呼吸筋機能評価に応用が広がってきた。複数の研究がこれらの指標を離脱転帰の有用な予測因子と示唆してきたが、SBTのモダリティ・測定タイミング・カットオフ値の違いによって個々の臨床試験の結果はしばしば食い違う。</p>
+<p>先行のシステマティックレビュー・メタ解析は横隔膜エコーの離脱予測を評価してきたが、いずれも呼吸不全の原因が多様な<strong>混合ICU集団</strong>を主に含んでいた。侵襲的人工呼吸を受けた AECOPD 患者に特化して横隔膜エコーの診断精度を統合したメタ解析は存在しない。異質な集団から導いた診断精度の推定値が AECOPD にそのまま適用できるかも不明である。そこで本研究は、AECOPD における横隔膜エコーの診断性能を定量し、疾患特異的なエビデンスを提供することを目的とした。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：診断精度のシステマティックレビュー・メタ解析。PRISMA 2020 声明と PRISMA-DTA 拡張に準拠して実施・報告</li><li><strong>事前登録</strong>：研究開始前に PROSPERO へ前向き登録（<strong>CRD420261282089</strong>）</li><li><strong>検索</strong>：8データベース（PubMed、Web of Science、Embase、Cochrane Library、中国知網 CNKI、万方 Wanfang、維普 VIP、中国生物医学文献データベース CBM）。各データベースの創刊から <strong>2026年4月5日</strong> まで</li><li><strong>検索概念</strong>：COPD／AECOPD、横隔膜超音波、人工呼吸、人工呼吸器離脱の4概念。統制語と自由語を組み合わせ各データベースに適合させた。横隔膜超音波に対応する単一の MeSH が存在しないため、横隔膜関連語と超音波関連語を組み合わせた。PubMed の主要 MeSH は "Pulmonary Disease, Chronic Obstructive"、"Diaphragm"、"Ultrasonography"、"Respiration, Artificial"、"Ventilator Weaning"。完全な検索式は Appendix 1</li><li><strong>補足検索</strong>：組み入れ研究とレビュー論文の参考文献リストを手作業でスクリーニング、Web of Science で前方引用検索、ClinicalTrials.gov と WHO ICTRP を検索して進行中・未報告の研究を同定</li><li><strong>組み入れ基準</strong>（すべて満たすこと）：</li></ul>
+<ol><li>デザイン＝前向き／後ろ向きコホート、ケースコントロール、横断研究、診断精度研究のいずれかの<strong>原著臨床研究</strong></li><li>対象＝<strong>侵襲的人工呼吸を受け離脱評価を受けた成人 AECOPD 患者</strong></li><li>Index test ＝横隔膜機能評価に用いた横隔膜超音波（DE、DTF、その他の関連指標）</li><li>参照基準＝離脱成功／離脱失敗が明確に報告されていること</li><li>データ十分性＝診断閾値が報告され、<strong>2×2 分割表を抽出または再構成できる</strong>こと</li></ol>
+<ul><li><strong>除外基準</strong>：非AECOPD集団／AECOPDデータを分離抽出できない混合集団、侵襲的人工呼吸を受けていないか離脱・抜管評価を受けていない、横隔膜超音波を用いていないか明確な閾値の報告がない、離脱関連アウトカムの報告なし、AUC・群間差・相関のみで2×2表を構成できない、レビュー・メタ解析・ガイドライン・専門家合意・エディトリアル・レター・学会抄録・症例報告・動物実験・重複出版</li><li><strong>データ抽出</strong>：2名（Xiaoqing Zhou、Yingnan Xu）が独立に標準化フォームで実施。第一著者・出版年・国・デザイン・対象・サンプルサイズ・超音波指標・診断カットオフ・測定タイミング・参照基準・診断データを抽出。真陽性・偽陽性・偽陰性・真陰性は直接抽出できないときは報告された感度・特異度・サンプルサイズ・転帰データから再構成。不一致は討議または第3のレビュアー（Zhen Wang）が調停</li><li><strong>質評価</strong>：<strong>QUADAS-2</strong>（RevMan 5.4 上で実装）を2名が独立に適用。バイアスリスクは患者選択・index test・参照基準・フローとタイミングの4領域、適用可能性の懸念は前3領域で評価</li><li><strong>統計解析</strong>：Stata 19（StataCorp, College Station, TX）</li><li>感度と特異度は<strong>二変量ランダム効果モデル</strong>で統合（感度と特異度の相関を内在的に扱う）</li><li>2×2表から LR+・LR−・DOR を算出して統合</li><li>SROC 曲線を構築し AUC を算出。判定基準は事前規定で <strong>AUC ≥ 0.80 を良好、0.70–0.79 を中等度、&lt; 0.70 を不良</strong></li><li><strong>Fagan ノモグラム</strong>で統合尤度比から事後確率を推定</li><li><strong>メタ回帰</strong>（十分な研究数と共変量データがある指標のみ）：共変量は研究デザイン（前向き対後ろ向き）・離脱失敗の定義・診断閾値の3つを個別のモデルに投入。参照カテゴリは後ろ向き研究、および離脱失敗の定義にSBT失敗を含めない研究。閾値は単位を揃えて連続変数として解析。SBTプロトコル・測定タイミング・人工呼吸期間・COPD重症度・人工呼吸器設定は候補共変量としたが、報告が不完全・不統一、定義が非標準的、または研究数が少なすぎるため解析しなかった。研究数と共変量データの制約から、メタ回帰は探索的なものと位置づけられた</li><li><strong>異質性</strong>：Cochran の Q 検定と I² 統計量。<strong>Q 検定 P &lt; 0.10 または I² ≥ 50% を実質的異質性</strong>と判定。フォレストプロットの点推定と95%CIの分布も視覚的に点検</li><li><strong>閾値効果</strong>：感度と偽陽性率（1−特異度）の間の Spearman 相関。P &lt; 0.05 で有意な閾値効果とし、カットオフのばらつきが研究間異質性に寄与した可能性を示すものとした</li><li><strong>頑健性</strong>：leave-one-out 感度分析（各研究を順に除外して統合値を再計算）</li><li><strong>出版バイアス</strong>：Deeks のファンネルプロット非対称性検定。<strong>P &lt; 0.10</strong> で有意な非対称性</li></ul>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06240-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06240-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 研究選択のフロー図（原図・無改変。©Zhou et al. Crit Care 2026） PRISMA形式の4段構成。左端に Identification／Screening／Eligibility／Included の4つのラベルが縦に並ぶ。各ボックスの文言は下表に起こした。</p>
+</div>
+<h4>Figure 1 の全ボックス（原図を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>ボックスの内容</th><th>n</th></tr></thead>
+<tbody>
+<tr><td>Identification</td><td>検索戦略で同定した研究：PubMed 22／Cochrane 14／Embase 95／Web of Science 26／CBM 62／CNKI 70／Wanfang 118／VIP 77</td><td>484</td></tr>
+<tr><td>Identification</td><td>その他の情報源から同定した追加記録</td><td>0</td></tr>
+<tr><td>Identification</td><td>重複除去後の記録</td><td>325</td></tr>
+<tr><td>Screening</td><td>スクリーニングした記録</td><td>325</td></tr>
+<tr><td>Screening（除外）</td><td>学会抄録 14／基礎研究 2／レター・症例報告・書籍章 7／レビュー 52／関連のない研究 164</td><td>計 239</td></tr>
+<tr><td>Eligibility</td><td>適格性を全文評価した論文</td><td>86</td></tr>
+<tr><td>Eligibility（除外）</td><td>2×2表データが不完全または抽出不能 32／不適切な index test 8／不適切な研究タイプ 2／不適切な研究群 6／不適切な参加者 15</td><td>計 63</td></tr>
+<tr><td>Included</td><td>質的統合に組み入れた研究</td><td>23</td></tr>
+<tr><td>Included</td><td>量的統合（メタ解析）に組み入れた研究</td><td>23</td></tr>
+</tbody></table></div>
+<p>内訳の検算はすべて合う。484 − 159（重複）＝ 325、325 − 239 ＝ 86、86 − 63 ＝ 23。除外内訳も 14+2+7+52+164 ＝ 239、32+8+2+6+15 ＝ 63 で一致する。</p>
+<h3>4. 組み入れ研究の特徴（Table 1）📋</h3>
+<p>23研究、総計2,000例。<strong>離脱成功 1,310例・離脱失敗 690例</strong>（失敗率 34.5%）。地域は<strong>中国21研究・エジプト2研究</strong>。デザインは前向きコホート14、前向きケースコントロール1、前向き観察研究1、後ろ向きコホート7。評価された指標は多様だが、主に DE・DTF・D-RSBI・DCV で、DE と DTF が最も頻繁に評価されていた。</p>
+<h4>Table 1（前半）研究の基本情報とサンプル構成（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究（年）</th><th>国</th><th>デザイン</th><th>成功 n</th><th>失敗 n</th><th>男／女（成功）</th><th>男／女（失敗）</th><th>指標</th></tr></thead>
+<tbody>
+<tr><td>Qu 2025</td><td>中国</td><td>後ろ向きコホート</td><td>156</td><td>44</td><td>67／89</td><td>18／26</td><td>1, 2, 3, 4</td></tr>
+<tr><td>Abbas 2018</td><td>エジプト</td><td>前向きコホート</td><td>37</td><td>13</td><td>27／10</td><td>7／6</td><td>2, 4</td></tr>
+<tr><td>Sun 2026</td><td>中国</td><td>前向きコホート</td><td>84</td><td>36</td><td>49／35</td><td>23／13</td><td>2, 3, 5</td></tr>
+<tr><td>Zhang 2020</td><td>中国</td><td>前向きコホート</td><td>25</td><td>12</td><td>18／7</td><td>9／3</td><td>2</td></tr>
+<tr><td>Fayed 2016</td><td>エジプト</td><td>前向きコホート</td><td>82</td><td>30</td><td>74／8</td><td>23／7</td><td>3</td></tr>
+<tr><td>Kang 2024</td><td>中国</td><td>前向きケースコントロール</td><td>121</td><td>42</td><td>55／66</td><td>18／24</td><td>4, 6, 7</td></tr>
+<tr><td>Luo 2022</td><td>中国</td><td>前向き観察研究</td><td>15</td><td>15</td><td>13／2</td><td>12／3</td><td>2, 4, 8, 9, 10</td></tr>
+<tr><td>Luo 2023</td><td>中国</td><td>前向きコホート</td><td>47</td><td>21</td><td>30／17</td><td>13／8</td><td>2, 3, 4</td></tr>
+<tr><td>Lu 2021</td><td>中国</td><td>前向きコホート</td><td>46</td><td>74</td><td>48／26</td><td>31／15</td><td>2, 11</td></tr>
+<tr><td>Liu 2024</td><td>中国</td><td>前向きコホート</td><td>32</td><td>28</td><td>13／19</td><td>12／16</td><td>2, 3, 4</td></tr>
+<tr><td>Chen 2023</td><td>中国</td><td>前向きコホート</td><td>51</td><td>32</td><td>26／25</td><td>18／14</td><td>2, 3</td></tr>
+<tr><td>Song 2021</td><td>中国</td><td>前向きコホート</td><td>31</td><td>19</td><td>16／15</td><td>13／6</td><td>2</td></tr>
+<tr><td>Lu 2016</td><td>中国</td><td>後ろ向きコホート</td><td>25</td><td>18</td><td>全体で 28／15</td><td>同左</td><td>3</td></tr>
+<tr><td>Zhang 2023</td><td>中国</td><td>後ろ向きコホート</td><td>43</td><td>41</td><td>26／17</td><td>25／16</td><td>3, 6</td></tr>
+<tr><td>Ren 2023</td><td>中国</td><td>後ろ向きコホート</td><td>69</td><td>27</td><td>43／26</td><td>16／11</td><td>11, 12</td></tr>
+<tr><td>Dou 2018</td><td>中国</td><td>前向きコホート</td><td>48</td><td>28</td><td>記載なし</td><td>記載なし</td><td>4</td></tr>
+<tr><td>Chen 2024</td><td>中国</td><td>後ろ向きコホート</td><td>70</td><td>22</td><td>37／33</td><td>14／8</td><td>2, 3, 13</td></tr>
+<tr><td>Wang 2025</td><td>中国</td><td>後ろ向きコホート</td><td>50</td><td>26</td><td>24／26</td><td>14／12</td><td>2, 3, 4</td></tr>
+<tr><td>Zhou 2024</td><td>中国</td><td>前向きコホート</td><td>97</td><td>31</td><td>66／31</td><td>22／9</td><td>2, 3, 14</td></tr>
+<tr><td>Ren 2022</td><td>中国</td><td>後ろ向きコホート</td><td>80</td><td>24</td><td>57／23</td><td>11／13</td><td>2, 11</td></tr>
+<tr><td>Wu 2016</td><td>中国</td><td>前向きコホート</td><td>19</td><td>26</td><td>12／7</td><td>17／9</td><td>2, 11</td></tr>
+<tr><td>Liang 2022</td><td>中国</td><td>前向きコホート</td><td>40</td><td>41</td><td>25／15</td><td>25／16</td><td>2, 3</td></tr>
+<tr><td>Jin 2019</td><td>中国</td><td>前向きコホート</td><td>42</td><td>40</td><td>22／20</td><td>23／17</td><td>3, 6</td></tr>
+<tr><td><strong>合計</strong></td><td>—</td><td>—</td><td><strong>1,310</strong></td><td><strong>690</strong></td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 1（後半）年齢・人工呼吸期間・離脱失敗の定義（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究（年）</th><th>年齢 成功</th><th>年齢 失敗</th><th>人工呼吸期間 成功</th><th>人工呼吸期間 失敗</th><th>離脱／抜管失敗の定義</th></tr></thead>
+<tbody>
+<tr><td>Qu 2025</td><td>53.25 ± 4.65</td><td>54.24 ± 4.63</td><td>71.10 ± 6.36 時間</td><td>67.95 ± 6.17 時間</td><td>(1) 抜管後48時間以内の再挿管またはNIV開始、(2) SBT失敗、(3) 抜管後48時間以内の死亡</td></tr>
+<tr><td>Abbas 2018</td><td>61.45 ± 7.67</td><td>63.07 ± 7.03</td><td>記載なし（48時間超の人工呼吸が適格条件）</td><td>同左</td><td>SBT中または終了時の人工呼吸再開、48時間以内の再挿管、抜管後48時間以内のNIV使用</td></tr>
+<tr><td>Sun 2026</td><td>47.38 ± 5.26</td><td>47.89 ± 4.77</td><td>55（36.25–72.75）時間</td><td>87（68.25–113.75）時間</td><td>抜管後48時間以内の再挿管、侵襲的または非侵襲的換気、呼吸不全による死亡</td></tr>
+<tr><td>Zhang 2020</td><td>74.5 ± 7.5</td><td>73.5 ± 8.6</td><td>77（46–108）時間</td><td>88（63–122）時間</td><td>いかなる換気補助もなしに48時間以上自発呼吸を維持できないこと</td></tr>
+<tr><td>Fayed 2016</td><td>62.41 ± 12.99</td><td>63.13 ± 9.13</td><td>記載なし</td><td>記載なし</td><td>いかなる換気補助もなしに48時間以上自発呼吸を維持できないこと</td></tr>
+<tr><td>Kang 2024</td><td>69.89 ± 5.62</td><td>71.67 ± 4.41</td><td>69.14 ± 18.84 時間</td><td>95.00 ± 14.33 時間</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Luo 2022</td><td>77.20 ± 9.53</td><td>74.33 ± 9.73</td><td>5.13 ± 1.96 日</td><td>3.93 ± 1.28 日</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Luo 2023</td><td>59.36 ± 9.45</td><td>58.97 ± 9.80</td><td>記載なし</td><td>記載なし</td><td>抜管後48時間以内の侵襲的または非侵襲的換気補助の必要、または48時間以内の死亡</td></tr>
+<tr><td>Lu 2021</td><td>48.4 ± 5.6</td><td>47.1 ± 6.7</td><td>4.6 ± 0.1 時間</td><td>4.4 ± 0.2 時間</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Liu 2024</td><td>58.31 ± 4.46</td><td>57.54 ± 4.27</td><td>記載なし</td><td>記載なし</td><td>離脱後48時間以内の再挿管またはNIV、SBT失敗、離脱後48時間以内の死亡のいずれか</td></tr>
+<tr><td>Chen 2023</td><td>72.91 ± 9.64</td><td>73.02 ± 10.24</td><td>9.57 ± 3.98 日</td><td>12.68 ± 4.85 日</td><td>離脱後48時間以内に自発呼吸を維持できず侵襲的または非侵襲的換気を要する、または48時間以内の死亡</td></tr>
+<tr><td>Song 2021</td><td>68.45 ± 7.08</td><td>70.63 ± 5.06</td><td>89.45 ± 13.88 時間</td><td>96.57 ± 10.56 時間</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Lu 2016</td><td>72.76 ± 11.34</td><td>73.72 ± 9.55</td><td>8.25 ± 4.54 時間</td><td>9.78 ± 3.36 時間</td><td>SBT失敗、抜管後48時間以内の侵襲的または非侵襲的換気の必要、または抜管後48時間以内の死亡</td></tr>
+<tr><td>Zhang 2023</td><td>66.33 ± 7.44</td><td>68.51 ± 5.66</td><td>9.78 ± 3.36 時間</td><td>8.93 ± 3.43 日</td><td>離脱後48時間以内の人工呼吸の必要または死亡</td></tr>
+<tr><td>Ren 2023</td><td>71.85 ± 13.28</td><td>73.28 ± 17.79</td><td>記載なし</td><td>記載なし</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Dou 2018</td><td>65 ± 10</td><td>66 ± 10</td><td>記載なし（48時間以上の人工呼吸が適格条件）</td><td>同左</td><td>SBT中の人工呼吸再開、抜管後48時間以内の再挿管、抜管後48時間以内のNIV使用</td></tr>
+<tr><td>Chen 2024</td><td>66.78 ± 6.14</td><td>71.43 ± 5.06</td><td>記載なし（48時間以上が適格条件）</td><td>同左</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Wang 2025</td><td>56.68 ± 6.41</td><td>55.48 ± 7.59</td><td>記載なし（48時間以上が適格条件）</td><td>同左</td><td>呼吸不全その他の合併症による換気補助の再開、または抜管後48時間以内の死亡</td></tr>
+<tr><td>Zhou 2024</td><td>73.65 ± 6.83</td><td>74.25 ± 7.18</td><td>7.21 ± 2.18 日</td><td>8.37 ± 2.55 日</td><td>SBT失敗、または抜管後48時間以内の人工呼吸の必要</td></tr>
+<tr><td>Ren 2022</td><td>75.11 ± 12.22</td><td>74.11 ± 15.59</td><td>記載なし（48時間以上が適格条件）</td><td>同左</td><td>SBT失敗、またはSBTを通過したにもかかわらず抜管後48時間以内の再挿管・人工呼吸</td></tr>
+<tr><td>Wu 2016</td><td>52.9 ± 6.24</td><td>52.3 ± 6.17</td><td>4.34 ± 0.94 日</td><td>4.31 ± 0.97 日</td><td>離脱後48時間以内の侵襲的または非侵襲的換気の再導入、あるいは死亡</td></tr>
+<tr><td>Liang 2022</td><td>50.12 ± 2.36</td><td>49.96 ± 2.34</td><td>81.12 ± 5.23 時間</td><td>80.89 ± 5.16 時間</td><td>SBT失敗、換気中止・抜管後48時間以内の侵襲的または非侵襲的換気補助の必要、または死亡</td></tr>
+<tr><td>Jin 2019</td><td>68.24 ± 3.50</td><td>68.20 ± 3.48</td><td>8.34 ± 2.78 日</td><td>8.37 ± 2.75 日</td><td>離脱後48時間以内の人工呼吸の再開または死亡</td></tr>
+</tbody></table></div>
+<h4>Table 1 脚注の指標コード（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>コード</th><th>指標</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Excursion-Time Index（移動距離–時間指数）</td></tr>
+<tr><td>2</td><td>DE（横隔膜移動距離）</td></tr>
+<tr><td>3</td><td>DTF（横隔膜厚み分画）</td></tr>
+<tr><td>4</td><td>D-RSBI</td></tr>
+<tr><td>5</td><td>DE + DTF + RSBI</td></tr>
+<tr><td>6</td><td>DTF-RSBI</td></tr>
+<tr><td>7</td><td>D-RSBI + DTF-RSBI + Cr/CysC</td></tr>
+<tr><td>8</td><td>DE + BNP</td></tr>
+<tr><td>9</td><td>DE + CRP/ALB</td></tr>
+<tr><td>10</td><td>D-RSBI + BNP + CRP/ALB</td></tr>
+<tr><td>11</td><td>DCV（横隔膜収縮速度）</td></tr>
+<tr><td>12</td><td>DCV + CRP/ALB</td></tr>
+<tr><td>13</td><td>APACHE II + 最大経横隔膜圧 + DE + DTF + 心拍出量</td></tr>
+<tr><td>14</td><td>DE + DTF + 25(OH)D3 + NT-proBNP</td></tr>
+</tbody></table></div>
+<p>脚注はさらに、研究センター・登録期間・適格基準・ベースライン特性・報告データに基づいて患者集団の重複の可能性を評価し、<strong>組み入れ研究は独立した患者コホートを代表すると判断した</strong>と述べている。データは原著の記載に従い平均±標準偏差または中央値（四分位範囲）で提示されている。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>表の数値そのものに整合しない箇所がある</p>
+<ul><li><strong>Lu 2021 の成功例数と失敗例数が入れ替わっている疑いが濃い。</strong> 成功46例・失敗74例と記載されるのに、性別欄は成功群「48／26」（計74）、失敗群「31／15」（計46）である。<mark class="hl">サンプルサイズ欄と性別欄のどちらかが誤っており、原著に当たらないと判定できない</mark>。仮に記載どおりなら失敗率62%で、著者自身が背景に書いた20〜30%から大きく外れる</li><li><strong>人工呼吸期間の単位が乱れている。</strong> Zhang 2023 は同一行で成功「9.78 ± 3.36 時間」・失敗「8.93 ± 3.43 日」と単位が異なり、しかも成功側の数値は Lu 2016 の失敗側「9.78 ± 3.36 時間」と完全に一致する。Lu 2021 の「4.6 ± 0.1 時間／4.4 ± 0.2 時間」、Lu 2016 の「8.25 ± 4.54 時間」も、48時間以上の人工呼吸を前提とする本レビューの文脈では成立しない</li><li>これらは統合解析の入力（2×2表）そのものではないため統合値には直接効かないが、<mark class="hl"><strong>データ抽出の精度に対する信頼を下げる</strong></mark>。他の21研究では性別の内訳が例数と一致することを確認した</li></ul>
+</div>
+<h3>5. 方法論的質（QUADAS-2）🔎</h3>
+<p>全体としてバイアスリスクは低〜高、適用可能性の懸念は最小限だった。<strong>全23研究が、患者選択・index test・参照基準の3領域すべてで適用可能性の懸念「低」</strong>と判定されており、この点で臨床疑問への当てはまりはよい。バイアスリスクは患者選択と index test の2領域に集中した。</p>
+<h4>QUADAS-2 の判定内訳（本文の記述を表に起こした）</h4>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>低リスク</th><th>不明</th><th>高リスク</th><th>高／不明の主な理由</th></tr></thead>
+<tbody>
+<tr><td>患者選択</td><td>8</td><td>13</td><td>2</td><td>連続的登録か無作為登録かを明示していない、選択的登録を否定できない</td></tr>
+<tr><td>Index test</td><td>2</td><td>1</td><td><strong>20</strong></td><td>診断閾値を事前規定せず、研究ごとのROC曲線または Youden 指数から<strong>事後的に</strong>決めている</td></tr>
+<tr><td>参照基準</td><td>20</td><td>3</td><td>0</td><td>—</td></tr>
+<tr><td>フローとタイミング</td><td>23</td><td>0</td><td>0</td><td>—</td></tr>
+<tr><td>適用可能性（患者選択）</td><td>23</td><td>0</td><td>0</td><td>—</td></tr>
+<tr><td>適用可能性（index test）</td><td>23</td><td>0</td><td>0</td><td>—</td></tr>
+<tr><td>適用可能性（参照基準）</td><td>23</td><td>0</td><td>0</td><td>—</td></tr>
+</tbody></table></div>
+<p>各行の合計はいずれも23で整合する。著者は「エビデンス基盤の臨床的適用可能性は良好だが、連続登録の報告不足と、データ主導・非事前規定の閾値の広範な使用が主要な方法論的限界を構成する」とまとめている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. QUADAS-2 に基づくバイアスリスクと適用可能性の懸念の要約（原図・無改変。©Zhou et al. Crit Care 2026） 左が Risk of Bias、右が Applicability Concerns の100%積み上げ横棒。行は上から Patient Selection／Index Test／Reference Standard／Flow and Timing。凡例は赤＝High、黄＝Unclear、緑＝Low。左パネルの Index Test 行は<strong>ほぼ全幅が赤</strong>（20/23）で、この図の視覚的中心になっている。Patient Selection 行は赤が短く（2/23）黄が過半（13/23）。Reference Standard は黄が3/23で残り緑。Flow and Timing は全幅が緑。右パネルは<strong>4行すべてが全幅の緑</strong>（Flow and Timing 行は適用可能性の評価対象外のため空欄）。</p>
+</div>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-026-06240-1" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06240-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 組み入れ23研究の研究別バイアスリスク・適用可能性評価（原図・無改変。©Zhou et al. Crit Care 2026） 縦に研究名、横に7列（Risk of Bias 4領域＋Applicability Concerns 3領域）を並べた信号機式のマトリクス。各セルは緑のプラス（低）、黄のクエスチョン（不明）、赤のマイナス（高）で示される。研究ごとのセル記号は掲載解像度では確実に判読できないため、個々のセルの転記は行わない。領域ごとの集計は上表のとおり。</p>
+</div>
+<h3>6. 統合された診断能の全体像 📊</h3>
+<p>量的統合は DE・DTF・DCV・D-RSBI の4指標について、<strong>離脱失敗の予測</strong>という向きで行われた。指標あたりの組み入れコホート数は4〜16、累積症例数は365〜1,344例。統合感度は0.69〜0.85、統合特異度は0.64〜0.88、統合DORは3.87〜32.38、SROC由来のAUCは0.70〜0.92の範囲だった。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 離脱失敗予測に対する横隔膜超音波指標の統合診断能（原図・無改変。©Zhou et al. Crit Care 2026） 1行1指標の横並び表と小さなフォレストが交互に並ぶ横長の図。左から「Diaphragmatic ultrasound parameter／Number of studies／Number of patients／Sensitivity（フォレスト）／(95% CI)／Specificity（フォレスト）／(95% CI)／DOR（フォレスト）／(95% CI)／AUC of SROC（フォレスト）／(95% CI)」の11列。行ラベルは上から DE／DTF／DCV／D-RSBI。各フォレストは赤い四角の点推定と青い水平線の95%CI。感度・特異度の軸は0.4〜1.0、DORの軸は1・5・20・100の対数目盛、AUCの軸は0.4〜1.0。</p>
+</div>
+<h4>Table. 4指標の統合診断能（本文の記載に基づく正しい対応）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>研究数</th><th>症例数</th><th>感度（95%CI）</th><th>特異度（95%CI）</th><th>LR+（95%CI）</th><th>LR−（95%CI）</th><th>DOR（95%CI）</th><th>AUC（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>DE（移動距離）</td><td>16</td><td>1,344</td><td>0.85（0.78–0.90）</td><td>0.85（0.77–0.91）</td><td>5.73（3.62–9.07）</td><td>0.18（0.11–0.27）</td><td>32.38（14.87–70.50）</td><td><strong>0.92（0.89–0.94）</strong></td></tr>
+<tr><td>DTF（厚み分画）</td><td>13</td><td>1,229</td><td>0.84（0.77–0.90）</td><td>0.77（0.67–0.85）</td><td>3.74（2.51–5.56）</td><td>0.20（0.14–0.29）</td><td>18.55（10.25–33.59）</td><td>0.88（0.85–0.91）</td></tr>
+<tr><td>D-RSBI</td><td>8</td><td>723</td><td>0.74（0.61–0.83）</td><td><strong>0.88（0.73–0.95）</strong></td><td>6.26（2.78–14.11）</td><td>0.30（0.21–0.43）</td><td>20.92（9.36–46.79）</td><td>0.85（0.82–0.88）</td></tr>
+<tr><td>DCV（収縮速度）</td><td>4</td><td>365</td><td>0.69（0.57–0.79）</td><td>0.64（0.55–0.71）</td><td>1.89（1.51–2.38）</td><td>0.49（0.35–0.69）</td><td>3.87（2.29–6.55）</td><td>0.70（0.66–0.74）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Figure 4 の DTF 行と DCV 行は入れ替わっている 掲載された Figure 4 は、行ラベル「DTF」に <strong>4研究・365例・感度0.69・特異度0.64・DOR 3.87</strong> を、行ラベル「DCV」に <strong>13研究・1,229例・感度0.84・特異度0.77・DOR 18.55</strong> を割り当てている。これは本文の記述（DTF は13研究、DCV は4研究）と<strong>正反対</strong>である。奇妙なことに、<mark class="hl">AUC 列だけは正しい</mark>（DTF行 0.88、DCV行 0.70）。</p>
+<p>どちらが正しいかは Table 1 から検算できる。指標コード 3（DTF）を持つ研究は Qu 2025・Sun 2026・Fayed 2016・Luo 2023・Liu 2024・Chen 2023・Lu 2016・Zhang 2023・Chen 2024・Wang 2025・Zhou 2024・Liang 2022・Jin 2019 の<strong>13研究で総計1,229例</strong>、コード 11（DCV）は Lu 2021・Ren 2023・Ren 2022・Wu 2016 の<strong>4研究で総計365例</strong>。<mark class="hl">本文が正しく、Figure 4 の行ラベルと数値の対応が5列にわたって崩れている</mark>。</p>
+<p>実害は大きい。この図だけを見た読者は「DTF は4研究365例しかない弱い指標、DCV は13研究1,229例の中心的指標」と正反対に理解する。<mark class="hl"><strong>JCでこの図を引用するときは必ず本文の数値に置き換える</strong></mark>。</p>
+</div>
+<h3>7. DE（横隔膜移動距離）の診断能 📏</h3>
+<p>16研究が DE の離脱失敗予測能を評価した。統合感度 <strong>0.85（95%CI 0.78–0.90）</strong>、統合特異度 <strong>0.85（95%CI 0.77–0.91）</strong>。統合 LR+ は 5.73（3.62–9.07）、統合 LR− は 0.18（0.11–0.27）。統合 DOR は 32.38（14.87–70.50）、SROC の AUC は <strong>0.92（0.89–0.94）</strong> で、高い判別能を示した。</p>
+<p>事前確率35%とした Fagan ノモグラムでは、DE 陽性で離脱失敗の事後確率は <strong>76%</strong> に上昇し、陰性では <strong>9%</strong> に低下した。ただし感度・特異度・LR+・LR− のいずれにも実質的な異質性があった（I² = <strong>75.70%／83.85%／72.19%／80.32%</strong>）。95%予測輪郭が比較的広いことも研究間のばらつきの大きさを示した。著者は「DE は評価した指標の中で事後確率を最も大きくかつバランスよく動かしたが、実質的異質性のため統合値の解釈は慎重であるべき」と結んでいる。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 5. 離脱失敗予測に対する横隔膜移動距離の診断精度（原図・無改変。©Zhou et al. Crit Care 2026） 5パネル構成。<strong>A</strong> は感度（左）と特異度（右）の2本のフォレストプロットで、16研究が Liang 2022 から Qu 2025 まで縦に並び、最下段に赤い菱形の COMBINED が置かれる。赤い破線は統合値の位置を示す縦線。<strong>B</strong> は同じ形式で陽性尤度比（DLR POSITIVE、対数軸 1.0〜1000.0）と陰性尤度比（DLR NEGATIVE、軸 0.0〜1.0）。<strong>C</strong> は診断オッズ比のフォレスト（対数軸 2〜1000）。<strong>D</strong> は SROC 曲線で、観測データの丸、赤い菱形の要約点（SENS 0.85、SPEC 0.85）、実線のSROC曲線、破線の95%信頼輪郭、点線の95%予測輪郭が重ねられ、点線の予測輪郭が右下へ大きく広がっている。<strong>E</strong> は Fagan ノモグラムで、左軸が事前確率、中央が尤度比、右軸が事後確率。赤い実線が陽性、水色の破線が陰性の経路を描く。</p>
+<p>各研究の点推定値は掲載画像の解像度（JPEG圧縮）では確実に判読できないため転記しない。判読できた統合行と異質性統計のみ下表に起こした。</p>
+</div>
+<h4>Figure 5 の統合行と異質性統計（判読できた値のみ）</h4>
+<div class="tw"><table>
+<thead><tr><th>パネル</th><th>統合値（95%CI）</th><th>Q</th><th>df</th><th>P</th><th>I²（95%CI）</th></tr></thead>
+<tbody>
+<tr><td>A 感度</td><td>0.85（0.78–0.90）</td><td>61.72</td><td>15</td><td>0.00</td><td>75.70（63.93–87.47）</td></tr>
+<tr><td>A 特異度</td><td>0.85（0.77–0.91）</td><td>92.88</td><td>15</td><td>0.00</td><td>83.85（76.83–90.88）</td></tr>
+<tr><td>B 陽性尤度比</td><td>5.73（3.62–9.07）</td><td>判読不能</td><td>15</td><td>0.00</td><td>72.19（〜89.58）</td></tr>
+<tr><td>B 陰性尤度比</td><td>0.18（0.11–0.27）</td><td>76.23</td><td>15</td><td>0.00</td><td>80.32（71.32–89.33）</td></tr>
+<tr><td>C 診断オッズ比</td><td>32.38（14.87–70.50）</td><td>7.5 × 10⁵</td><td>15</td><td>0.00</td><td><strong>100.00（100.00–100.00）</strong></td></tr>
+<tr><td>E Fagan</td><td>事前35% → 陽性76%／陰性9%</td><td>—</td><td>—</td><td>—</td><td>LR+ は図中で「6」と丸められて表示</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>DOR の I² が 100.00% であることに本文は一切触れていない Figure 5C の下部には Q = 7.5 × 10⁵、df = 15、P = 0.00、==<strong>I² = 100.00（100.00–100.00）</strong><mark class="hl">と印字されている。本文が報告する異質性は感度・特異度・LR+・LR− の4つだけで、</mark>DOR の異質性には触れていない==。一方で著者は leave-one-out の結果をもって「統合推定値は安定かつ頑健」と述べている。<strong>「どの1研究を抜いても値が動かない」ことと「研究間のばらつきが極端に大きい」ことは両立する</strong>——前者は影響力のある1研究がないことしか示さない。JC ではこの2つを混同しないよう確認したい。</p>
+</div>
+<h3>8. DTF（横隔膜厚み分画）の診断能 📐</h3>
+<p>13研究が DTF を評価した。統合感度 <strong>0.84（95%CI 0.77–0.90）</strong>、統合特異度 <strong>0.77（95%CI 0.67–0.85）</strong>。統合 LR+ 3.74（2.51–5.56）、LR− 0.20（0.14–0.29）。統合 DOR 18.55（10.25–33.59）、AUC <strong>0.88（0.85–0.91）</strong>。</p>
+<p>事前確率35%を仮定すると、DTF 陽性で事後確率は <strong>67%</strong> に上がり、陰性では <strong>10%</strong> に下がる。感度と特異度の異質性はかなり大きく（I² = <strong>70.81% と 92.88%</strong>）、LR+ と LR− も同様だった（I² = <strong>88.97% と 67.87%</strong>）。予測輪郭も広い。著者は「DTF は離脱失敗の確率に臨床的に意味のある変化をもたらす、とりわけ陰性の場合にそうである。ただしその性能は単独の診断検査として使えるほど一貫していない」と評価している。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 6. 離脱失敗予測に対する横隔膜厚み分画の診断精度（原図・無改変。©Zhou et al. Crit Care 2026） Figure 5 と同一の5パネル構成（A 感度・特異度のフォレスト、B 陽性・陰性尤度比、C 診断オッズ比、D 95%信頼輪郭と予測輪郭を伴う SROC、E 事前確率35%の Fagan ノモグラム）。13研究が縦に並ぶ。特異度側の I² が 92.88% と本図の中で最も高く、フォレストの点推定が左右に大きく散らばるのが視覚的な特徴。</p>
+</div>
+<h3>9. DCV（横隔膜収縮速度）の診断能 ⏱️</h3>
+<p>4研究のみが DCV を評価した。統合感度 <strong>0.69（95%CI 0.57–0.79）</strong>、統合特異度 <strong>0.64（95%CI 0.55–0.71）</strong>。統合 LR+ 1.89（1.51–2.38）、LR− 0.49（0.35–0.69）。統合 DOR 3.87（2.29–6.55）、AUC <strong>0.70（0.66–0.74）</strong> で、判別能は限定的〜中等度にとどまった。</p>
+<p>事前確率35%で、DCV 陽性の事後確率は <strong>50%</strong>、陰性では <strong>21%</strong>。感度に中等度の異質性（I² = 49.91%）がある一方、特異度・LR+・LR− はいずれも <strong>I² = 0%</strong> だった。ただし著者は「研究が4本しかないため、これらの異質性推定値自体が不正確である」と明記している。事後確率の変化が小さいことから、DCV 単独の臨床的価値は限定的であり、より大規模な前向きコホートでの検証が必要と結論している。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 7. 離脱失敗予測に対する横隔膜収縮速度の診断精度（原図・無改変。©Zhou et al. Crit Care 2026） Figure 5・6 と同一構成だが、<strong>D パネルの SROC には95%信頼輪郭のみが描かれ、予測輪郭がない</strong>（研究数4では推定できないため。キャプションも "with its 95% confidence contour" と単数形で他図と書き分けている）。フォレストは4行のみで、曲線は左上隅へあまり膨らまず、対角線に近い。E の Fagan では陽性線と陰性線の傾きがともに浅く、事前35%からの移動幅が小さいことが一目で分かる。</p>
+</div>
+<h3>10. D-RSBI（横隔膜浅速呼吸指数）の診断能 🔁</h3>
+<p>8研究が D-RSBI を評価した。統合感度 <strong>0.74（95%CI 0.61–0.83）</strong>、統合特異度 <strong>0.88（95%CI 0.73–0.95）</strong>。統合 LR+ <strong>6.26（2.78–14.11）</strong>、LR− 0.30（0.21–0.43）。統合 DOR 20.92（9.36–46.79）、AUC <strong>0.85（0.82–0.88）</strong>。</p>
+<p>事前確率35%で、D-RSBI 陽性の事後確率は <strong>77%</strong>（4指標中で最も高い）、陰性では <strong>14%</strong>。感度・特異度ともに実質的な異質性があり（I² = <strong>81.14% と 91.30%</strong>）、LR+・LR− も同様（I² = <strong>76.09% と 83.96%</strong>）。著者は「D-RSBI は陰性で離脱失敗を除外するよりも、陽性で離脱失敗の確率を上げる用途に向く。ただし実質的異質性と、測定・計算法の標準化の必要性が臨床応用を制限する」とまとめている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 8. 離脱失敗予測に対する横隔膜浅速呼吸指数の診断精度（原図・無改変。©Zhou et al. Crit Care 2026） Figure 5・6 と同一の5パネル構成。8研究が縦に並ぶ。B パネルの陽性尤度比のフォレストは対数軸上で右へ大きく振れる研究があり、統合CIの上限が14.11まで伸びていることに対応する。E の Fagan では陽性の赤い線が最も急峻に立ち上がる（事前35%→事後77%）。</p>
+</div>
+<h3>11. 報告されたカットオフ値（Table 2）📌</h3>
+<h4>Table 2. 組み入れ研究で報告された横隔膜超音波指標の診断カットオフ（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>カットオフを報告した研究数</th><th>中央値［IQR］</th><th>カットオフの範囲</th></tr></thead>
+<tbody>
+<tr><td>DE</td><td>11／16</td><td>11.50［10.80–11.85］mm</td><td>9.55–17.20 mm</td></tr>
+<tr><td>DTF</td><td>8／12</td><td>29.77［29.00–30.00］%</td><td>28.59–42.48%</td></tr>
+<tr><td>DCV</td><td>3／4</td><td>1.46［1.31–1.47］cm/s</td><td>1.31–1.47 cm/s</td></tr>
+<tr><td>D-RSBI</td><td>6／8</td><td>1.81［1.69–1.90］breaths·min⁻¹·cm⁻¹</td><td>1.13–1.97 breaths·min⁻¹·cm⁻¹</td></tr>
+</tbody></table></div>
+<p>脚注：N は各指標のメタ解析に組み入れた研究の総数。IQR はカットオフ値の第25–75百分位。研究レベルの詳細は Appendix 2。</p>
+<p>この表には2つの問題がある。第一に、<strong>DTF の分母が12になっている</strong>。本文でも Table 1 の指標コード集計でも DTF は13研究であり、DE（11/16）・DCV（3/4）・D-RSBI（6/8）はいずれも本文と整合するのに、DTF だけ1研究少ない。第二に、組み入れ基準の(5)は「診断閾値が報告されていること」を必須としているのに、<strong>DE で5研究、DTF で4〜5研究、DCV で1研究、D-RSBI で2研究がカットオフを報告していない</strong>ことになる。2×2表を再構成するには閾値が必要なはずで、基準と実データが噛み合っていない。</p>
+<p>本文に書かれていないこと：<strong>陽性の向きが指標ごとに明示されていない</strong>。統合はすべて「離脱失敗の予測」として行われているため、DE・DTF・DCV はカットオフ未満が陽性、D-RSBI はカットオフ超が陽性に当たるはずだが、論文本文はこれを明文化していない。</p>
+<h3>12. 異質性・閾値効果・メタ回帰 🔬</h3>
+<p>指標別解析全体で実質的な統計学的異質性が観察され、SROC の予測輪郭の広さにそれが反映されていた。とくに DE・DTF・D-RSBI で顕著だった。</p>
+<p><strong>閾値効果</strong>：感度のロジットと偽陽性率（1−特異度）のロジットの Spearman 相関を検討した。DE・DTF・D-RSBI のいずれでも有意な閾値効果は検出されなかった（Spearman の ρ = <strong>−0.235／0.121／0.190</strong>、P = <strong>0.381／0.694／0.651</strong>）。DCV では相関係数が高かったものの（ρ = <strong>0.800</strong>）有意には達しなかった（P = <strong>0.200</strong>）。著者は「Spearman 相関は研究数が少ないと検出力が限られる。とくに4コホートしかない DCV ではそうである。したがってこれらの所見は閾値関連の異質性を否定しない」と明確に留保している。報告されたカットオフのばらつきと、事後的・研究特異的な閾値選択の広範な使用は、依然として異質性の妥当な寄与因子である。</p>
+<p><strong>メタ回帰</strong>（DE・DTF・D-RSBI について単変量で実施。DCV は4コホートしかないため未実施）：共変量は研究デザイン、離脱失敗の定義、報告された診断カットオフの3つで、それぞれ別モデルに投入した。カットオフは連続変数として log DOR との線形関連を探索したが、これは感度と特異度のトレードオフを見る閾値効果解析とは別物である。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>共変量</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>DE</td><td>研究デザイン（前向き対後ろ向き）</td><td><strong>有意</strong>。前向き研究のほうが DOR が高い（β = 1.388、相対DOR 4.01、95%CI 1.55–10.36、P = 0.004）</td></tr>
+<tr><td>DE</td><td>離脱失敗の定義</td><td>有意な関連なし</td></tr>
+<tr><td>DE</td><td>報告された診断カットオフ</td><td>有意な関連なし</td></tr>
+<tr><td>DTF</td><td>3共変量すべて</td><td>有意な関連なし</td></tr>
+<tr><td>D-RSBI</td><td>3共変量すべて</td><td>有意な関連なし</td></tr>
+<tr><td>DCV</td><td>—</td><td>研究数4のため実施せず</td></tr>
+</tbody></table></div>
+<p>著者は「カットオフに統計学的有意な関連がなかったことを、閾値関連の異質性の否定と解釈すべきではない」と繰り返し注意している。理由として、探索的解析で研究数が少ないこと、研究レベルの集計データを用いていること、閾値選択と他の研究特性の交絡が影響しうることを挙げる。詳細は Appendix 3。</p>
+<p>さらに著者は、事後的・データ主導のカットオフの使用は「個々の研究レベルでの閾値関連の変動」を意味する——同じデータから作動閾値を選び、そのデータで性能を推定しているため——と述べ、この<strong>研究内</strong>の閾値効果は研究<strong>間</strong>の Spearman 相関や集計レベルのメタ回帰では十分に捉えられないと指摘している。この一節は本論文の自己批判として最も鋭い部分である。</p>
+<p>異質性のその他の要因として著者が挙げるもの：SBTプロトコルの相違（プレッシャーサポート／CPAP／Tピース。残存する換気補助が DE・DCV・D-RSBI の測定に影響しうる。とくに呼吸負荷が変化する AECOPD で顕著）、SBT開始・終了・抜管決定に対する測定タイミングの相違、人工呼吸期間、人工呼吸器設定、COPD重症度と表現型、急性増悪の原因、呼吸筋力低下、術者経験、プローブ位置、測定手技。そして<strong>離脱失敗の定義の不統一</strong>（SBT失敗、再挿管、NIVや高流量鼻カニュラの開始、気管切開、異なる追跡期間内の死亡）。これらの多くは報告が不十分・不統一で、サブグループ解析やメタ回帰で信頼性をもって検討できなかった。結果として「研究デザインが DE の異質性の一部を説明しうるものの、観察された異質性の相当部分は説明されないまま残った」。</p>
+<h3>13. 感度分析（leave-one-out）🧷</h3>
+<p>臨床的・方法論的多様性と、一部の指標でコホート数が少なくメタ回帰やサブグループ解析ができなかったことを踏まえ、統合値の安定性を leave-one-out 感度分析で評価した。DE・DTF・DCV・D-RSBI のいずれでも、再計算した統合 DOR は反復を通じて安定していた。DE・DTF・D-RSBI では点推定値が元の統合値の周囲に近接して集まり、全体の所見が単一の研究に駆動されていないことを確認した。DCV は研究数が少ないため予想どおり変動が大きかったが、どの1研究を除外しても全体の解釈は変わらなかった。</p>
+<p>著者はこの結果を「ベッドサイド横隔膜エコーの非標準化された臨床実践を反映すると思われる統計学的異質性にもかかわらず、統合診断精度の推定値は安定かつ頑健である」と要約している。ただし考察では自ら、「leave-one-out は結果が1つの影響力あるデータセットに依存していないことしか示さず、<strong>大多数の組み入れ研究が共有する系統的バイアス、とくに事後的な閾値選択には対処できない</strong>」と補足している。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 9. 統合診断オッズ比に対する leave-one-out 感度分析（原図・無改変。©Zhou et al. Crit Care 2026） A が DE、B が DTF、C が DCV、D が D-RSBI の4パネル。各パネルは、除外した研究名を縦軸に並べ、その研究を抜いたときの統合DORと95%CIを横方向に描く。A・B・D では点が縦にほぼ一直線に揃うのに対し、C（DCV）だけは点が左右に振れて縦の直線が崩れる。研究数の差がそのまま図の見た目に出ている。</p>
+</div>
+<h3>14. 出版バイアス（Deeks 検定）📉</h3>
+<p>Deeks のファンネルプロット非対称性検定で評価した。P値は <strong>DE 0.94、DTF 1.00、DCV 0.82、D-RSBI 0.60</strong> で、いずれも統計学的有意に達しなかった。ただし著者は「Deeks 検定は組み入れ研究が10未満のとき検出力が限られる。したがって DCV（n = 4）と D-RSBI（n = 8）ではとりわけ慎重に解釈すべきであり、有意でないことを出版バイアスがないことの証拠と解釈してはならない。出版バイアスや small-study effects の可能性は否定できない」と明記している。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 10. Deeks のファンネルプロット非対称性検定（原図・無改変。©Zhou et al. Crit Care 2026） A が DE（P = 0.94）、B が DTF（P = 1.00）、C が DCV（P = 0.82）、D が D-RSBI（P = 0.60）の4パネル。横軸が診断オッズ比（対数目盛）、縦軸が有効サンプルサイズの平方根の逆数（1/√ESS）。各研究が点で打たれ、回帰直線が重ねられる。ESS は effective sample size（有効サンプルサイズ）の略。</p>
+</div>
+<h3>15. 考察 — 指標ごとの成績の生理学的解釈 🧠</h3>
+<p>著者は各指標の相対的な成績が AECOPD の生理から説明できると論じる。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>生理学的な意味</th><th>精度が高い／低い理由として著者が挙げるもの</th></tr></thead>
+<tbody>
+<tr><td>DE</td><td>横隔膜ドームの変位を反映し、<strong>横隔膜収縮・呼吸負荷・肺過膨張を統合</strong>した量になる</td><td>統合量であることが、比較的高くバランスのとれた診断能を部分的に説明しうる。ただし人工呼吸モード・プレッシャーサポート量・PEEP 設定の影響も受ける</td></tr>
+<tr><td>DTF</td><td>能動的な横隔膜の肥厚と<strong>収縮予備能をより直接反映</strong>する</td><td>横隔膜が薄いため、小さな絶対的測定誤差が百分率表現で増幅され、精度が制限されうる</td></tr>
+<tr><td>DCV</td><td>時間成分を組み込むが、<strong>収縮と呼吸ドライブの両方を反映</strong>しうる</td><td>低値は収縮の弱さを示す一方、<strong>高値は収縮予備能ではなく神経ドライブの亢進を反映</strong>しうる。この両義性と研究数の少なさが成績の悪さを部分的に説明しうる</td></tr>
+<tr><td>D-RSBI</td><td>補助呼吸筋の動員で一回換気量が一時的に保たれても、RSBI は安心させる値を示しうる。<strong>一回換気量を DE に置き換える</strong>ことで、横隔膜の動きが制限されているのに速く呼吸している患者を同定しうる</td><td>比較的高い特異度は、D-RSBI 高値が「横隔膜由来の離脱失敗リスクが高い患者の同定」に向き、リスクの広範な除外には向かないことを示唆する</td></tr>
+</tbody></table></div>
+<p>著者はこの節の最後に重要な留保を置いている。「これらの考察は疾患特異的な評価を支持するが、横隔膜エコーが AECOPD で他の重症患者集団より優れた性能を発揮することを立証するものではない」。生理学的なもっともらしさと実証を混同しない姿勢である。</p>
+<h3>16. 先行研究との突き合わせ — Vivier らとの矛盾をどう説明するか ⚖️</h3>
+<p>本研究の所見は「横隔膜エコーが許容できる精度で離脱転帰を予測しうる」とする先行メタ解析と概ね一致する。Song らはプレッシャーサポート下のSBTで D-RSBI が従来型 RSBI より高い AUC を示したと報告し、最近の D-RSBI メタ解析は統合感度 <strong>0.88</strong>、特異度 <strong>0.82</strong>、AUC <strong>0.93</strong> を報告している。</p>
+<p>一方、Fossat らは DE・DTF・呼吸数・補助呼吸筋活動が7日抜管成功を RSBI や D-RSBI より良く判別し、後者2つは自らのコホートでは予測的でなかったと報告した。さらに決定的なのは、<strong>Vivier らが事前規定の方法論を用いた前向き多施設研究で「横隔膜エコーは離脱失敗を予測しない」と結論した</strong>ことである。本研究の DE の統合 AUC 0.92 とは正面から食い違う。</p>
+<p>著者はこの不一致の説明として、<strong>組み入れ研究における事後的な閾値選択の優勢</strong>を第一に挙げる。<strong>23研究のうち20研究が、研究ごとのROC曲線または Youden 指数から診断カットオフを事後的に導いており、事前規定の閾値を評価したのは3研究のみ</strong>。同一のデータセットで最適閾値を選び、その性能を推定すれば、感度・特異度・AUC は膨らむ。とりわけ小規模・単施設の導出コホートではそうである。対照的に、事前規定の定義を用いた多施設研究は、再現性と移植可能性のより厳格な評価を与える。</p>
+<p>集団とアウトカム定義の相違も寄与しうる。Vivier らはSBTを完遂した後の<strong>再挿管高リスクの混合ICU集団</strong>を評価したのに対し、本レビューは AECOPD に限定し、より広く可変的に定義された離脱転帰を評価した研究を含む。COPD特有の生理学的特徴が超音波計測と離脱転帰の関連を修飾しうるが、著者は「これは<strong>もっともらしい説明であって、AECOPD で性能が優れることの証拠ではない</strong>」と明確に線を引いている。</p>
+<p>著者は事前規定閾値を用いた研究のみに限定した感度分析の実行可能性も検討したが、<strong>適格な3研究は同一の超音波指標を評価した研究数が足りず、指標別の二変量／階層的SROCモデルを信頼性をもって構築できなかった</strong>。したがって事後閾値選択の研究を除外しても統合性能が保たれるかは不明のままである。著者は「Vivier らの陰性所見は、固定閾値を独立集団に前向きに適用したときに達成しうる精度を、本研究の統合値が<strong>過大に述べている</strong>可能性を補強する。したがって統合推定値は、外部検証済みの診断精度ではなく、主として閾値を生成した研究群から導かれた apparent performance（見かけの性能）とみなすべきである」と結論している。</p>
+<h3>17. 限界と今後の課題 🚧</h3>
+<p>著者が自ら挙げた限界：</p>
+<ol><li><strong>エビデンス基盤が小規模・単施設の観察研究中心</strong>であり、その大半が閾値を事後選択し、地理的に中国に集中している。楽観的な精度推定のリスクを高め、提案されたカットオフの移植可能性を制限する</li><li><strong>DCV と D-RSBI を評価したコホート数の少なさ</strong>が、それらの統合値の精度と信頼性を下げている</li><li><strong>個別患者データがない</strong>ため、患者レベルの調整と効果修飾因子（COPD重症度・表現型、人工呼吸期間、人工呼吸器設定、増悪の原因、超音波測定タイミング、抜管後の呼吸補助）の詳細な評価ができなかった</li><li><strong>研究レベル変数の報告が不十分・不統一</strong>で、観察された異質性の相当部分が説明されないまま残った</li><li><strong>事前規定閾値の研究に限定した感度分析が実行できず</strong>、事後閾値選択が統合値をどれだけ膨らませたかは不明</li><li><strong>どの指標についても普遍的な臨床閾値を支持するエビデンスはなく</strong>、報告されたカットオフ範囲は暫定的なものであって決定的な判断限界ではない</li></ol>
+<p>地理的集中についても独立した段落を割いている。23研究中21が中国、2がエジプトであり、統合値は限られた地理的環境の患者集団・診療慣行・医療システムを主に反映する。術者の訓練と経験、超音波の取得・計測プロトコル、評価タイミング、鎮静の実践、SBTモダリティ、離脱手順、抜管準備基準の地域・施設間差が、横隔膜計測と最適閾値に影響しうる。抜管後の予防的NIVや高流量酸素の使用、再挿管の施設閾値、離脱失敗の定義も観察される診断能に影響する。COPD重症度、併存疾患パターン、紹介経路、ICU入室慣行、離脱失敗のベースラインリスクの差も予測値を変えうる。</p>
+<p>今後の研究に求めるもの：前向き多施設・多国籍デザイン、標準化された超音波取得・報告プロトコル、盲検化された読影、<strong>前向きに事前規定した閾値</strong>、離脱失敗の一貫した定義（<span class="wl">重症患者の横隔膜超音波コンセンサス EXODUS（Delphi 2022）</span> が強調するとおり）。そして<strong>閾値の導出と外部検証は別々の集団で行うこと</strong>。さらに、横隔膜エコーが確立された臨床変数を超える上乗せの予後情報を与えるか、超音波ガイド下の多角的離脱戦略が患者にとって重要なアウトカムを改善するかを評価すべきである。</p>
+<p>予後的な観点からは、D-RSBI 高値は不利な負荷–能力バランスを示しうるし、SBT成功後に異常な横隔膜エコー所見があれば離脱失敗の高リスクが残る患者を同定しうる。しかし<strong>そうして同定した高リスク患者が、監視の強化・抜管後呼吸補助・気道管理・離脱計画の変更から利益を得るかは不明</strong>であり、前向き介入試験による評価を要する。著者は「現在のエビデンスは横隔膜エコーを主として予後判定・リスク層別化のツールとして支持するが、超音波所見に基づいて離脱管理を変えることが患者アウトカムを改善することは立証していない」とし、離脱失敗は多因子性であり横隔膜機能障害は寄与因子の一つにすぎない（咳嗽力、気道分泌物量、神経学的状態、肺エアレーション、心機能、体液バランスがいずれも決定因子である）と述べている。</p>
+<h2>🔍 既存ノートとの整合</h2>
+<div class="tw"><table>
+<thead><tr><th>既存ノート</th><th>本論文との関係</th><th>具体的な突き合わせ</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">横隔膜エコーは抜管失敗を予測できない（多施設研究 Chest2019）</span></td><td><strong>正面から矛盾する</strong>。本論文もこの矛盾を認識し、1節を割いて説明している</td><td>Vivier らはフランス3 ICU の混合集団191例で、<strong>事前規定</strong>のカットオフ（DE &lt; 10 mm、DTF &lt; 30%）を用い、機能不全の割合が成功群と失敗群で 46% 対 51%（P = .55）／71% 対 68%（P = .73）と差がないことを示した。本論文の DE 統合 AUC 0.92 との落差の説明として、本論文は「20/23研究が事後カットオフ」「集団とアウトカム定義の相違」を挙げる。注目すべきは DTF のカットオフである。Vivier の 30% は本論文の中央値 29.77% とほぼ同一なのに、結論は正反対になる。同じ閾値で結果が割れるという事実は、閾値そのものより測定条件と集団が効いていることを示唆する</td></tr>
+<tr><td><span class="wl">難治性ウィーニングは多臓器の問題 — 統合エコー評価がAUROC 0.88で単独指標を上回る（WEAN-US・前向き観察・CritCare2026）</span></td><td><strong>相補的</strong>。方向は一致</td><td>WEAN-US は難治性ウィーニング89例で心・肺・横隔膜・末梢筋を統合して AUROC 0.88、単独最良は 0.773 にとどまった。本論文の「横隔膜エコーは多角的評価の一部として位置づけるべき」という結論と整合する。一方、本論文の DE 単独 AUC 0.92 は WEAN-US の統合モデル 0.88 を上回っており、単独指標が統合モデルを超えるという逆転が起きている。両者の対象（AECOPD 対 難治性ウィーニング全般）とカットオフの決め方（事後 対 LASSO＋交差検証）の差を踏まえて読む必要がある</td></tr>
+<tr><td><span class="wl">重症患者の横隔膜超音波コンセンサス EXODUS（Delphi 2022）</span></td><td><strong>部分的に不整合</strong>。本論文自身が今後の標準化の指針として EXODUS を引用している</td><td>EXODUS は横隔膜機能不全の移動距離カットオフを<strong>安静換気で2 cm（20 mm）未満</strong>で合意した。本論文の DE カットオフは中央値 11.50 mm、範囲 9.55–17.20 mm で、全研究が EXODUS の 20 mm を下回る。また EXODUS は<strong>厚み分画のカットオフに合意できなかった</strong>が、本論文は DTF 中央値 29.77% を暫定値として提示している。ただし本論文自身が「普遍的な臨床閾値を支持するエビデンスはない」と述べており、この点では EXODUS と姿勢が一致する</td></tr>
+<tr><td><span class="wl">呼吸筋の超音波評価 横隔膜エコーと非同調（ICM2020）</span></td><td><strong>数値が更新される</strong></td><td>ICM2020 が引用した混合ICU集団のメタ解析（10研究）は DE で<strong>感度 75%（65–85）・特異度 75%（60–85）</strong>、DTF で AUROC 0.87・DOR 21（11–40）だった。本論文の AECOPD 限定の統合は <strong>DE 感度0.85・特異度0.85・AUC 0.92</strong>、<strong>DTF AUC 0.88・DOR 18.55</strong> で、DTF はほぼ変わらないのに DE だけが大きく上振れしている。ICM2020 が指摘した「測定タイミングで AUROC が 0.61（SBT前・Kim）から 0.88（2時間SBT開始30分後・Farghaly）まで激変する」という論点は、本論文が測定タイミングを共変量として解析できなかったことでそのまま残っている。D-RSBI については ICM2020 の Spadaro 2016（AUROC 0.89 対 RSBI 0.72）と本論文の統合 AUC 0.85 は同じ方向で整合する</td></tr>
+<tr><td><span class="wl">ICUでの横隔膜エコーの実践（How I do it・ICM2024）</span></td><td><strong>姿勢は一致、数字はずれる</strong></td><td>ICM2024 も「SBT実施や抜管の意思決定に横隔膜エコーはまだ推奨できない」という慎重姿勢を採り、本論文の「単独で離脱を決める根拠にしない」と同じ結論に立つ。ただし ICM2024 の機能不全カットオフ（安静換気で移動距離 &lt; 10〜15 mm）は本論文の中央値 11.50 mm と重なる</td></tr>
+<tr><td><span class="wl">横隔膜機能不全の主犯は人工呼吸器ではない — VIDDから重症病態関連へ（ナラティブレビュー・CritCare2026）</span></td><td><strong>背景の理解を補強</strong></td><td>本論文はイントロで横隔膜機能障害を VIDD（廃用性萎縮）と慢性過膨張による機械的不利の重ね合わせとして説明している。VIDD の相対的な位置づけが近年見直されつつあることを踏まえると、本論文のイントロはやや古典的な枠組みに寄っている</td></tr>
+<tr><td><span class="wl">人工呼吸からの離脱 ATS・ACCP臨床実践ガイドライン（Executive Summary・AJRCCM2017）</span> ／ <span class="wl">韓国集中治療医学会・人工呼吸離脱ガイドライン2024 — 9つのPICOと12推奨（AcuteCritCare2024）</span></td><td><strong>ガイドラインは横隔膜エコーを推奨していない</strong></td><td>いずれのガイドラインも離脱判断の必須項目として横隔膜エコーを位置づけていない。本論文の結論（補助的ツール）はこの立場と矛盾しない</td></tr>
+</tbody></table></div>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<p><strong>1. 事後カットオフが結論の骨格を蝕んでいる — しかも著者がそれを認めている</strong></p>
+<p>23研究中20研究が、自分のデータからROC曲線または Youden 指数でカットオフを決めている。閾値の選択と性能の推定を同じデータで行えば、感度・特異度・AUC はすべて楽観に振れる。これは「バイアスがあるかもしれない」という程度の話ではなく、<strong>この統合値が何を推定しているのかが定義できない</strong>という問題である。著者は結論で「apparent prognostic performance であって externally validated diagnostic accuracy ではない」と明記しており、この誠実さは評価すべきだが、<strong>そうであるならタイトルの "Predictive value" と抄録の AUC 0.92 は、単独で引用されたときに誤読を招く</strong>。</p>
+<p><strong>2. 図と本文が食い違っている（Figure 4）</strong></p>
+<p>行ラベル DTF と DCV に対して、研究数・症例数・感度・特異度・DOR の5列が入れ替わっている。AUC 列だけは正しい。Table 1 の指標コードから検算すると本文が正しい。査読と校正を通り抜けた明白な誤りであり、この図をスライドに貼ると結論が反転する。</p>
+<p><strong>3. Table 2 の DTF の分母が本文と合わない</strong></p>
+<p>本文・Table 1 では13研究、Table 2 では12研究。他の3指標は整合するのに DTF だけずれる。どの1研究が落ちたのかは本文からは追えない。</p>
+<p><strong>4. 組み入れ基準と Table 2 が矛盾する</strong></p>
+<p>基準(5)は「診断閾値が報告され、2×2表を抽出または再構成できること」を必須とした。ところが Table 2 は、DE 16研究中11、DTF 12研究中8、DCV 4研究中3、D-RSBI 8研究中6しかカットオフを報告していないと示す。<strong>閾値なしにどうやって2×2表を作ったのか</strong>が説明されていない。感度・特異度から再構成したのであれば、その研究の閾値は原著に書かれていたはずである。</p>
+<p><strong>5. DOR の I² が 100% であることを本文が報告していない</strong></p>
+<p>Figure 5C は Q = 7.5 × 10⁵、I² = 100.00（100.00–100.00）と印字する。本文が報告する異質性は感度・特異度・LR+・LR− のみで、DOR の異質性には触れない。にもかかわらず leave-one-out の安定性を根拠に「頑健」と述べる。極端な異質性と leave-one-out の安定性は両立する——後者は「1本抜いても動かない」ことしか示さないからである。</p>
+<p><strong>6. Vivier らの引用番号が誤っている</strong></p>
+<p>考察は Vivier らの多施設研究を <strong>[59]</strong> として引用するが、参考文献[59]は Dres M ら（*Am J Respir Crit Care Med.* 2017;195:57–66、四肢筋力低下と横隔膜筋力低下の共存）である。Vivier E らの *Chest.* 2019;155:1131–9 は <strong>[61]</strong> に掲載されており、[61] は本文中で一度も引用されていない。本論文の議論の中核をなす引用でこの誤りが起きている。</p>
+<p><strong>7. 事前確率35%の根拠が本文に書かれていない</strong></p>
+<p>Fagan ノモグラムはすべて事前確率35%で計算されている。統合コホートの離脱失敗率は 690/2,000 = 34.5% でほぼ一致するため、そこから採った可能性が高いが、<strong>本文はそう説明していない</strong>。かつ、イントロが引用する AECOPD の離脱失敗率は 20〜30% であり、統合コホートの 34.5% はその上限を超えている。事前確率が20%なら DE 陽性の事後確率は約59%、25%なら約66%まで下がる。<strong>事前確率の設定次第で「陽性なら76%」という数字は容易に崩れる</strong>。</p>
+<p><strong>8. データ抽出の精度に疑問符がつく箇所がある</strong></p>
+<p>Lu 2021 の成功／失敗例数と性別内訳が矛盾する（46対74と記載しつつ、性別合計は74対46）。Zhang 2023 は同一行で人工呼吸期間の単位が時間と日で混在し、その時間側の数値が Lu 2016 の別セルの値と完全に一致する。他の21研究では性別合計が例数と一致することを確認したので、これは全体の破綻ではないが、2,000例の2×2表を再構成した作業の精度を読者が確認する手段はない。</p>
+<p><strong>9. 地理的集中は「限界」以上の問題になりうる</strong></p>
+<p>21/23研究が中国、2研究がエジプト。欧州・北米・日本のデータはゼロである。中国語データベース4つ（CNKI・Wanfang・VIP・CBM）から327件を検索しているのに対し、PubMed は22件、Cochrane は14件しか拾えていない。検索式そのものが中国文献に偏っていた可能性を検討する価値がある。加えて、地域による出版慣行の差と陽性所見の選択的報告は、Deeks 検定では捉えられない。</p>
+<p><strong>10. 「離脱失敗」の定義が研究ごとに違うまま統合されている</strong></p>
+<p>Table 1 を通読すると、SBT失敗を含めるもの、抜管後48時間のみを見るもの、NIV使用を失敗に数えるもの、死亡を含めるものが混在する。<strong>SBT失敗と抜管後失敗は病態が異なる</strong>（WEAN-US は前者を心肺相互作用、後者を神経筋の持久力と分けた）。これらを一つの参照基準として扱うことが、統合値の意味を曖昧にしている。メタ回帰で「離脱失敗の定義」は有意でなかったが、著者自身が探索的で検出力不足と認めている。</p>
+<p><strong>11. 4指標を比較しているが、統計的な比較はしていない</strong></p>
+<p>「DE が最良」という結論は、4つの独立した統合値を並べて目視で比較したものである。<strong>指標間の AUC 差を検定していない</strong>し、同一患者で4指標を測った研究に限った直接比較（within-study comparison）も行っていない。DE 16研究と DCV 4研究では組み入れられた研究集団そのものが違う。異なる研究集団から得た AUC を並べて優劣を語ることの限界は、本文では明示されていない。</p>
+<p><strong>12. 抄録と本文に校正漏れがある</strong></p>
+<p>抄録の Methods は "After methodological quality was appraised with the QUADAS-2 tool." と主節を欠く文で終わる。考察冒頭は "synthesizes evidence across multiple diaphragmatic suggests that..." と語が脱落している。結論に影響しないが、査読・校正の水準を推し量る材料にはなる。</p>
+<p><strong>13. 検査の「陽性」の向きが明文化されていない</strong></p>
+<p>すべての解析が「離脱失敗の予測」として行われる以上、DE・DTF・DCV はカットオフ未満、D-RSBI はカットオフ超が陽性のはずだが、本文にその明記がない。読者は文脈から推定するしかない。診断精度研究の報告としては基本的な記載漏れである。</p>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>番号</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>AECOPD の離脱失敗率20〜30%の根拠（離脱過程における超音波の有用性のスコーピングレビュー）</td><td>Sepúlveda P, Gallardo A, Arriagada R, Souza B, Patroniti N, Battaglini D. *Br J Anaesth.* 2025;135:1441–55</td></tr>
+<tr><td>10</td><td>従来型 RSBI の原典</td><td>Yang KL, Tobin MJ. *N Engl J Med.* 1991;324:1445–50</td></tr>
+<tr><td>17</td><td>離脱成功の予測因子としての横隔膜エコー（混合ICU集団のシステマティックレビュー・メタ解析）</td><td>Parada-Gereda HM, Tibaduiza AL, Rico-Mendoza A, Molano-Franco D, Nieto VH, Arias-Ortiz WA, et al. *Crit Care.* 2023;27:174</td></tr>
+<tr><td>19</td><td>報告基準 PRISMA 2020</td><td>Page MJ, Moher D, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. *BMJ.* 2021;372:n160</td></tr>
+<tr><td>20</td><td>診断精度レビューの報告基準 PRISMA-DTA</td><td>McInnes MDF, Moher D, Thombs BD, McGrath TA, Bossuyt PM, et al. *JAMA.* 2018;319:388–96</td></tr>
+<tr><td>54</td><td>離脱転帰予測に対する横隔膜エコーの診断精度（先行メタ解析）</td><td>Le Neindre A, Philippart F, Luperto M, Wormser J, Morel-Sapene J, Aho SL, et al. *Int J Nurs Stud.* 2021;117:103890</td></tr>
+<tr><td>55</td><td>PSV下のSBTにおける D-RSBI（RSBI より高い AUC）</td><td>Song J, Qian Z, Zhang H, Wang M, Yu Y, Ye C, et al. *BMC Pulm Med.* 2022;22:337</td></tr>
+<tr><td>56</td><td>D-RSBI のメタ解析（統合感度0.88・特異度0.82・AUC 0.93）</td><td>Parada-Gereda HM, Molano-Franco D, Peña-López LA, Pérez-Terán P, Masclans JR. *Aust Crit Care.* 2025;38:101266</td></tr>
+<tr><td>57</td><td>横隔膜エコーは RSBI の精度を改善するか（DE・DTF・呼吸数・補助筋活動が RSBI・D-RSBI に優った）</td><td>Fossat G, Daillet B, Desmalles E, Boulain T. *Aust Crit Care.* 2022;35:233–40</td></tr>
+<tr><td>58</td><td>肺と横隔膜のエコーによる離脱成功予測</td><td>Tenza-Lozano E, Llamas-Alvarez A, Jaimez-Navarro E, Fernández-Sánchez J. *Crit Ultrasound J.* 2018;10:12</td></tr>
+<tr><td>59</td><td>離脱時点における四肢筋力低下と横隔膜筋力低下の共存とその影響</td><td>Dres M, Dubé BP, Mayaux J, Delemazure J, Reuter D, Brochard L, et al. *Am J Respir Crit Care Med.* 2017;195:57–66</td></tr>
+<tr><td>60</td><td>ICUにおける横隔膜機能障害のスクリーニングと追跡（パイロット研究）</td><td>Mariani LF, Bedel J, Gros A, Lerolle N, Milojevic K, Laurent V, et al. *J Intensive Care Med.* 2016;31:338–43</td></tr>
+<tr><td>61</td><td><strong>横隔膜エコーは抜管失敗を予測できない（多施設研究）</strong>。考察で誤って[59]として引用されているもの</td><td>Vivier E, Muller M, Putegnat JB, Steyer J, Barrau S, Boissier F, et al. *Chest.* 2019;155:1131–9</td></tr>
+<tr><td>62</td><td>離脱を早めるための医学的栄養療法</td><td>De Rosa S, Rauseo M, Umbrello M, Lassola S, Battaglini D. *Anesthesiology.* 2025;143:737–49</td></tr>
+<tr><td>68</td><td>重症患者の横隔膜エコー計測に関する専門家合意（EXODUS Delphi）</td><td>Haaksma ME, Smit JM, Boussuges A, Demoule A, Dres M, Ferrari G, et al. *Crit Care.* 2022;26:99</td></tr>
+</tbody></table></div>
+<p>補遺（オンライン）：Appendix 1 = PubMed の検索式、Appendix 2 = 研究別のカットオフ値、Appendix 3 = 異質性の要因に関する単変量メタ回帰の詳細。いずれも本体PDFには収載されていない。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 AECOPD 23研究2,000例の統合で、<mark class="hl"><strong>横隔膜移動距離（DE）が感度0.85・特異度0.85・AUC 0.92 と4指標中で最良</strong></mark>、D-RSBI は特異度0.88でリスク同定向き、DCV は AUC 0.70 で単独使用に値しない。ただし<mark class="hl"><strong>23研究中20研究が自分のデータから事後的にカットオフを決めており、著者自身がこれを「見かけの予後予測能」と呼んでいる</strong></mark>。<mark class="hl"><strong>横隔膜エコーは離脱の可否を決める道具ではなく、リスクを層別する道具として、咳嗽力・分泌物・意識・心機能と併せて使う</strong></mark>。</p>
+</div>
+<h4>判断の流れ</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>AECOPD で48時間以上の人工呼吸、離脱を検討</td><td>通常の離脱基準（酸素化・循環・意識・原因病態の改善）</td><td>基準を満たせば SBT へ。横隔膜エコーは離脱可否の入口条件にしない</td></tr>
+<tr><td>SBT を実施する</td><td>SBTのモードと測定タイミングを施設で固定できているか</td><td>固定できていなければ、まずエコー所見を判断に使わない。撮って記録するだけにとどめる</td></tr>
+<tr><td>SBT に難渋する／失敗した</td><td>なぜ失敗したかの原因検索</td><td>横隔膜エコー（DE を第一に）＋肺エコー＋心エコーの多角的評価。単独指標で結論しない</td></tr>
+<tr><td>DE が低い（研究のカットオフ中央値は 11.50 mm、範囲 9.55–17.20 mm）</td><td>その値がどの条件で測られたか（補助の有無・体位・タイミング）</td><td>離脱失敗リスクが上がる情報として扱う。ただし施設の事前確率が20%台なら事後確率は6割前後にとどまる</td></tr>
+<tr><td>D-RSBI が高い（中央値 1.81 breaths·min⁻¹·cm⁻¹）</td><td>補助呼吸筋の動員で一回換気量が保たれていないか</td><td>特異度0.88・LR+ 6.26。陽性の説得力は高い。抜管後の呼吸補助の準備と監視強化を検討する</td></tr>
+<tr><td>D-RSBI や DE が正常</td><td>咳嗽力・分泌物量・意識・心機能・体液バランス</td><td>エコーが正常でも抜管の安全は保証されない。感度は0.74〜0.85にとどまり、離脱失敗は多因子性である</td></tr>
+<tr><td>抜管の可否を最終決定する</td><td>咳嗽力を筆頭に、多角的評価の総合</td><td>エコー所見を単独の決定根拠にしない。EXODUS 準拠の撮り方で記録を蓄積し、施設の閾値を将来検証する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

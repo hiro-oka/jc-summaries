@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>中国の病院・ICU構造因子と患者アウトカム — 公立病院とICU病床割合2%以上で死亡が低い（NCIS 2820病院・GLMM・CritCare2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s13054-022-03892-7.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">中国の病院・ICU構造因子と患者アウトカム — 公立病院とICU病床割合2%以上で死亡が低い（NCIS 2820病院・GLMM・CritCare2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Li Z, Ma X, Gao S, et al; China National Critical Care Quality Control Center Group. Crit Care. 2022;26:24. doi:10.1186/s13054-022-03892-7</dd><dt>掲載誌</dt><dd>Critical Care（2022-01-21）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-022-03892-7" target="_blank" rel="noopener">doi.org/10.1186/s13054-022-03892-7</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Association between hospital and ICU structural factors and patient outcomes in China: a secondary analysis of the National Clinical Improvement System Data in 2019</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s13054-022-03892-7.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s13054-022-03892-7.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s13054-022-03892-7.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>経営提案・病床設計への落とし込み（生態学的関連であることを常に前置きしたうえで）</p>
+<ul><li><strong>「ICU病床が病院総病床の何%か」を経営指標として持ち出す根拠になる</strong>。本研究で死亡と最も強く関連した構造因子は、専従医の数でも看護配置でもなく <strong>ICU病床÷病院総病床が2%以上か否か</strong>（β = −0.027、95%CI −0.034〜−0.019、p&lt;0.001）だった。当院で「ICUを何床にするか」を議論するとき、<strong>分子（ICU床数）ではなく分母（病院総床数）との比</strong>で語る枠組みが取れる。ただし後述のとおり β の単位が本文に明示されておらず、効果の大きさを断言してはならない。</li><li><strong>著者自身が「拡張の判断は比だけで決めるな」と釘を刺している</strong>。ICU稼働率・患者の重症度・手術室など他部門の能力を合わせて考えるべき、と Discussion に明記されている。経営会議で本研究を引くときは、この留保も一緒に出したほうが提案の信頼性が上がる。</li><li><strong>看護配置は「1床あたり看護師が何人いるか」の総量で効いた</strong>。bed-to-nurse ratio（ICU総病床数 ÷ ICU常勤換算看護師数）が 0.5 以上（＝1床あたり看護師2人未満）の施設で死亡が高かった（β = 0.009、95%CI 0.001〜0.017、p=0.027）。当院の議論は診療報酬上の「常時2対1」というシフト比で行われがちだが、本研究の指標は <strong>年間の常勤換算総数 ÷ 病床数</strong> という別物である。両者を混同しないこと。</li><li><strong>専従医対病床比・個室数・ECMO保有は、いずれも4つのアウトカムすべてで有意でなかった</strong>。設備投資（ECMO・個室）を「死亡が下がるから」で正当化する根拠には<strong>ならない</strong>。当院で ECMO や個室を推すときは、死亡以外のアウトカム（適応症例の受け入れ、感染対策、家族ケア）で語る必要がある。</li><li><strong>JIPADで同じ解析ができるかを見積もる材料になる</strong>。本研究が使った構造変数10個のうち、JIPAD／日本のQI体系で再現しやすいもの・しにくいものを後段の表に整理した。<mark class="hl"><strong>ICU病床÷病院総病床の比は、JIPADの施設票かDPC側の施設情報を突き合わせれば取得できる可能性が高く、日本での再現の最有力候補である</strong></mark>（実際に Sasabuchi ら CCM2015 が同じ比で日本のデータを解析している）。</li><li><strong>医療の質としては、VAP・CRBSI・CAUTIの3つを「構造で説明できるか」という問いの立て方が参考になる</strong>。当院の感染サーベイランスの数値を、単に経時比較するのではなく <strong>構造因子で説明を試みる</strong> という分析設計は、そのまま院内QIの企画に流用できる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：ICUの構造・組織・ケアプロセスがICUのパフォーマンスを左右することは広く知られている（引用文献1〜3）。ICUの構造因子は国・地域で大きく異なることも知られている（引用文献4、5）。しかし関連研究の大半は欧米で行われてきた（引用文献6、7）。</li><li><strong>Unknown（分かっていなかったこと）</strong>：中国のICU構造因子に関するエビデンスはほとんどなかった（引用文献8）。先行研究は広東省の集中治療資源の記述（引用文献9）や北京の人工呼吸診療の評価（引用文献10）にとどまり、<strong>調査対象地域に限定され症例数が小さく、それらの資源がケア提供・治療パターン・患者アウトカムと関連するかどうかも不明</strong>だった。</li><li><strong>What's new（本研究の新規性・意義）</strong>：<strong>中国でICU患者のケアとアウトカムにおける病院レベル・ユニットレベルの差を報告した最初の全国規模の報告</strong>であると著者らは述べている。全国31省・2820病院の2019年通年データを用い、10個の構造・プロセス変数と4つのアウトカム（ICU死亡・VAP・CRBSI・CAUTI）の調整済み関連を一度に提示した。特定の構造因子（病院の所有形態、病院種別、ICU病床割合、bed-to-nurse比）がアウトカムと関連することを示し、<strong>構造を変えることが改善の余地になりうる</strong>と結論した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 中国の全国QIデータベース（NCIS）に登録された <strong>2820病院の2019年通年データ</strong>を、一般化線形混合モデル（GLMM）で解析した横断的な生態学的研究。<strong>公立病院であること</strong>と <strong>ICU病床が病院総病床の2%以上であること</strong>がICU死亡の低さと、<strong>bed-to-nurse比 0.5以上（＝1床あたり看護師2人未満）</strong>が死亡の高さと関連した。一方で <strong>専従医対病床比・ICU個室数・ECMO保有は4つのアウトカムのいずれとも関連しなかった</strong>。</p>
+</div>
+<ul><li><strong>デザイン</strong>：全国規模・横断的（2019年1年分）の多施設観察データベース研究。二次解析</li><li><strong>母集団</strong>：中国本土31省の登録病院 12,436施設（三次 2749・二次 9687）のうち、China-NCCQC が選定し自発的に参加した <strong>2820施設</strong>（三次 1383＝49.04%、二次 1437＝50.96%）。<strong>一次医療機関は重症患者をほとんど扱わないため対象外</strong>、ICUがない病院も除外、ICU病床5床以下も除外</li><li><strong>アウトカム4つ</strong>：ICU死亡率（%）／VAP（人工呼吸器1000日あたり）／CRBSI（カテーテル1000日あたり）／CAUTI（カテーテル1000日あたり）</li><li><strong>記述統計</strong>：ICU死亡率中央値 <strong>8.02%</strong>（IQR 3.78〜14.35）、VAP <strong>5.58</strong>（1.55〜11.67）、CRBSI <strong>0.63</strong>（0〜2.01）、CAUTI <strong>1.42</strong>（0.37〜3.40）</li><li><strong>ICU死亡に関連した因子</strong>：公立病院 <strong>β = −0.018</strong>（−0.031〜−0.005、p=0.006）／ICU病床割合 ≥2% <strong>β = −0.027</strong>（−0.034〜−0.019、p&lt;0.001）／bed-to-nurse比 ≥0.5 <strong>β = 0.009</strong>（0.001〜0.017、p=0.027）／APACHE II ≥15 の患者割合 ≥50% <strong>β = 0.04</strong>（0.033〜0.047、p&lt;0.001）</li><li><strong>VAPに関連した因子</strong>：公立病院のみ <strong>β = −0.036</strong>（−0.054〜−0.018、p&lt;0.001）</li><li><strong>CRBSIに関連した因子</strong>：公立病院 <strong>β = −0.008</strong>（−0.014〜−0.002、p=0.011）／二次病院 <strong>β = 0.005</strong>（0.001〜0.009、p=0.010）</li><li><strong>CAUTIに関連した因子</strong>：二次病院のみ <strong>β = 0.010</strong>（0.002〜0.018、p=0.015）</li><li><strong>有意でなかった構造因子</strong>：病院種別（死亡・VAP）、専従医対病床比（4アウトカムすべて）、ICU個室数（すべて）、ECMO保有（すべて）、6時間SSCバンドル遵守率（すべて）、抗菌薬投与前微生物検査率（すべて）</li><li><strong>著者の結論</strong>：病院の所有形態・病院種別・ICU病床割合・bed-to-nurse比という特定の構造因子がICU患者アウトカムと関連していた。これらの観察は、中国および同様の医療環境をもつ他の発展途上国における集中治療提供の質のギャップを埋める政策・介入に役立ちうる</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — ICUの「構造・プロセス・アウトカム」という考え方（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>医療の質を測る古典的な枠組みが「構造（structure）・プロセス（process）・アウトカム（outcome）」の3分法</strong>である。構造＝設備・人員・組織（ICU病床数、専従医の人数、看護師配置、個室の有無、ECMOの保有）。プロセス＝実際に行われた診療行為（敗血症バンドルを守ったか、抗菌薬の前に培養を採ったか）。アウトカム＝患者に起きた結果（死亡、感染症の発生）。本研究は <strong>構造とアウトカムの関連</strong>を主題にし、プロセス（バンドル遵守率・培養実施率）は<strong>調整変数（controlling factors）として投入</strong>している。</p>
+<p>本研究で使われる用語を初出で定義しておく。</p>
+<ul><li><strong>NCIS（National Clinical Improvement System）</strong>：中国の全国臨床改善システム。ICU情報を報告する国家データベース。運営は <strong>China-NCCQC（China National Critical Care Quality Control Centre、中国国家重症医学医療質量管理控制中心）</strong>。2012年に中国衛生部が北京協和医院に設置を認可し、2015年に「重症医療の質改善プログラム」が始まった。本研究はそのプログラムの一部</li><li><strong>三次・二次・一次病院（3-tier system）</strong>：中国の病院は医療提供・医学教育・研究の能力で3層に格付けされる。<strong>三次病院</strong>は欧米の tertiary referral hospital に相当し、総合的・紹介型で専門医療を担い、複数地域のハブになる。<strong>二次病院</strong>は欧米の regional / district hospital に相当し、中規模都市・県・区に属する。<strong>一次病院</strong>は一次予防を担う機関で、重症患者を受け入れることはまれ（そのため本研究の対象外）</li><li><strong>公立病院と民間病院</strong>：中国の病院は所有形態と経済類型で公立と民間に分かれる。<strong>公立病院は非営利で国から財政補助を受け、医療価格が厳しく制限されている</strong>。<strong>民間病院は原則として営利で、政府の監督下で損益に責任を負い、医療価格を独自に決められる</strong>。1980年以降に登場し、2001年以後に大規模に発展、<strong>2015年に施設数が公立を上回った</strong>。2019年時点で民間 22,424施設に対し公立は 11,930施設まで減っている（引用文献11）</li><li><strong>ICU-hospital bed percentage（ICU病床割合）</strong>：ICU総病床数 ÷ 病院総病床数。本研究の中心的な構造変数の1つ</li><li><strong>physician-to-bed ratio（専従医対病床比）</strong>：ICU医師総数 ÷ ICU病床数。値が<strong>大きい</strong>ほど手厚い</li><li><strong>bed-to-nurse ratio（病床対看護師比）</strong>：ICU病床総数 ÷ ICUで働く常勤換算（FTE）正看護師総数。<strong>値が大きいほど看護配置は薄い</strong>（分子が病床、分母が看護師なので、直感と逆向きになる点に注意）。0.5 は「1床あたり看護師2人」に相当する</li><li><strong>APACHE II スコア</strong>：Acute Physiology and Chronic Health Evaluation II。重症度スコア。本研究では「入室24時間後にAPACHE II ≥15 だった患者の割合(%)」を施設単位の重症度指標として使う</li><li><strong>VAP / CRBSI / CAUTI</strong>：人工呼吸器関連肺炎／カテーテル関連血流感染／カテーテル関連尿路感染。ICUの医療関連感染の代表3つで、いずれもQI指標として国際的に使われる</li><li><strong>GLMM（generalized linear mixed model、一般化線形混合モデル）</strong>：施設が地域・都市に入れ子になっている（クラスター構造）ときに、そのクラスター内の類似性を<strong>変量効果</strong>として吸収する回帰モデル。本研究は「地域」と「所在地」の2つの変量切片を置いた</li></ul>
+<p><strong>なぜ構造因子を調べるのか</strong>：診療行為（プロセス）を1つずつ改善するのは現場の努力に依存するが、構造は<strong>政策・予算・人事で一括して変えられる</strong>。構造とアウトカムの関連が示せれば、それは「どこに投資すればよいか」の地図になる。著者らが「Modifying structural factors is a potential opportunity（構造因子の修正は改善の機会になりうる）」と結論するのはこの文脈である。</p>
+</div>
+<h3>2. 背景と目的 🌏</h3>
+<p>医療提供はICUにおいて困難かつ複雑である。ICUの構造・ICUの組織・ケアプロセスを含むいくつかの因子がICUのパフォーマンスに影響しうる（引用文献1〜3）。ICUにおけるケアの質を扱った文献は多いにもかかわらず、<strong>そうした因子の影響はいまだ論争的であり、ケア構成要素の入念な評価が必要</strong>である、と著者らは書き出す。</p>
+<p>ICUの構造因子が国・地域によって異なることはよく知られている（引用文献4、5）。しかし関連研究の大半は西洋諸国で行われてきた（引用文献6、7）。中国のICUの構造因子に関するエビデンスはほとんどない（引用文献8）。<strong>中国は広大な地理と不均衡な経済発展のため、全国規模でICU患者に最適かつ公平な管理戦略を提供することに依然として課題を抱えている</strong>。先行研究には広東省の集中治療資源の記述（引用文献9）、北京のICUにおける人工呼吸の診療・アウトカム・費用の評価（引用文献10）があるが、<strong>いずれも調査が実施された地域に限定され、サンプルサイズが小さい</strong>。またそれらの資源がICUのケア提供・治療パターン・患者アウトカムと関連するかどうかも明らかでなかった。加えて、需要の増大と費用の上昇が、増え続ける患者集団に高品質で手の届く集中治療を届けることへの重大な挑戦となっている。<strong>ICUの組織を最適化することは、患者アウトカムと資源利用を改善する潜在的な機会である</strong>。</p>
+<p><strong>目的</strong>：中国における病院・ICUの構造因子と患者アウトカムを調査すること。さらに、<strong>ICUの構造的資源と人員配置レベルを中心とする潜在的な構造因子</strong>に着目して、これらの変数と患者アウトカムの関連を同定すること。</p>
+<p><strong>事前の仮説</strong>：<mark class="hl">著者らは「政府出資（government-funded）・三次・十分な設備・十分な人員配置の病院に入室した患者は、地域・疾患重症度・その他の交絡因子を調整した後で、ICU死亡およびVAP・CRBSI・CAUTIの発生リスクが低い」と仮説を立てた</mark>。後述のとおり、この仮説は<strong>部分的にしか支持されなかった</strong>（設備＝ECMO・個室、人員＝医師配置は有意でなかった）。</p>
+<h3>3. 方法（Methods）📐</h3>
+<ul><li><strong>デザイン</strong>：2019年の全国規模・観察的データベース研究（nationwide, observational database study）。既存データベースの<strong>二次解析</strong>であり、横断的（cross-sectional）</li><li><strong>データ源</strong>：National Clinical Improvement System（https://ncisdc.medidata.cn/login.jsp）。収集主体は <strong>China-NCCQC</strong>（中国のICU質管理を統括する公的な国家部門）。2012年に中国衛生部が北京協和医院に設置を承認、2015年に「Quality Improvement of Critical Care Program」を開始。本研究はそのプログラムの一部で、データ使用許可を China-NCCQC から取得</li><li><strong>対象施設の選定基準</strong></li><li>参加は<strong>自発的（voluntarily participated）</strong>で、China-NCCQC が選定した三次・二次病院</li><li>(1) <strong>ICUが5床超であること</strong></li><li>(2) 質管理項目として評価される疾患（VAP・CRBSI・CAUTI等）を診断・治療できる能力があること</li><li><strong>ICUのない病院は除外</strong></li><li><strong>一次病院は重症患者をほとんど受け入れないため、研究の範囲に含めない</strong></li><li>中国本土31省・直轄市・自治区が対象。<strong>香港・台湾・マカオのデータは含まない</strong></li><li><strong>母集団の規模</strong>：2019年時点で全国に登録病院 <strong>12,436施設</strong>（三次 2749、二次 9687）。うち本解析に組み入れられたのは <strong>2820施設</strong>（三次 1383、二次 1437）。<mark class="hl">つまり全国の登録病院の約22.7%、三次病院の50.3%・二次病院の14.8%にあたる自発参加施設</mark></li><li><strong>構造因子の定義根拠</strong>：China-NCCQC が公表した「National Clinical Quality Control Indicators for Critical Care Medicine (2015 Edition)」（引用文献12）に従う</li><li><strong>病院特性</strong>：地域（華東・華中・華西・東北）／所在地（大都市／その他都市・農村部）／種別（二次・三次）／所有形態（民間・公立）／ICU病床割合（ICU総病床数÷病院病床数）</li><li><strong>ICU特性</strong>：専従医対病床比（ICU医師総数÷ICU病床数）／bed-to-nurse比（ICU病床総数÷ICU常勤換算正看護師総数）／個室数（single rooms）／ECMO機器の保有</li><li><strong>調整用に収集した因子</strong>：APACHE II ≥15 の患者割合(%)／<strong>6時間SSC（Surviving Sepsis Campaign）バンドル遵守率</strong>／抗菌薬投与前の微生物検査実施率</li><li><strong>6時間SSCバンドルの3要素（本文の定義そのまま）</strong></li></ul>
+<ol><li>初回高乳酸血症の患者における<strong>乳酸再測定の完遂</strong></li><li>輸液蘇生後に平均動脈圧（MAP）≤65 mmHg の患者における<strong>昇圧薬による蘇生の完遂</strong></li><li>乳酸 ≥4 mmol/L の患者における<strong>中心静脈圧（CVP）と中心静脈血酸素飽和度（ScvO2）の測定完遂</strong></li></ol>
+<ul><li><strong>微生物検査率の定義</strong>：（抗菌薬投与前に微生物検査を受けた患者数）÷（同期間に抗菌薬を投与された患者数）</li><li><strong>アウトカムの定義</strong></li><li><strong>ICU死亡率(%)</strong> ＝ ICUで死亡した患者数 ÷ 同期間にICUに入室した患者数</li><li><strong>VAP発生率（人工呼吸器1000日あたり）</strong> ＝ VAPを発症した患者数 ÷ 同期間に人工呼吸を受けた患者数</li><li><strong>CRBSI発生率（カテーテル1000日あたり）</strong> ＝ CRBSIを発症した患者数 ÷ 同期間に中心静脈カテーテルを留置された患者数</li><li><strong>CAUTI発生率（カテーテル1000日あたり）</strong> ＝ CAUTIを発症した患者数 ÷ 同期間に尿道カテーテルを留置された患者数</li><li>感染の詳細な定義は Additional file 1 の Table S1（引用文献13に基づく）</li><li><strong>データ収集</strong>：2019年1月1日〜12月31日。各施設の訓練を受けた独立研究コーディネーターがウェブ入力。<strong>範囲チェック（range checks）</strong>で範囲外・不整合の入力を検出して修正を促し、<strong>論理チェック（predefined logical checks）</strong>で誤り・非論理的入力を検出。<strong>月1回のデータ品質会議</strong>で全施設の登録記録とレジストリデータをレビュー</li><li><strong>統計解析</strong>：SAS 9.4（SAS Institute Inc., Cary, NC, USA）</li><li>正規分布データは平均±標準偏差、Studentのt検定</li><li>非正規分布データは中央値（IQR）、ノンパラメトリックのMann–Whitney U検定</li><li>多変量解析は <strong>generalized linear mixed models（GLMM）</strong>。<strong>地域（region）と所在地（location）の効果を表すために2つの変量切片モデル（two random intercept models）</strong>を使用。同じ地域・都市の患者は測定されない共通の特性をもちうる、という前提を置いた</li><li><strong>混合効果モデルはアウトカムごとに別々に実行</strong>（4本のモデル）</li><li><strong>共変量の選び方</strong>：先行文献と単変量解析に基づいて重要と考えられた因子を候補とした。加えて患者変数（APACHE II ≥15 の割合）とプロセス因子（6時間SSCバンドル遵守率、抗菌薬前微生物検査率）もモデルに投入</li><li><strong>結果の表現</strong>：p値と <strong>β（95%CI）</strong></li><li><strong>欠測</strong>：変数ごとの欠測率は <strong>0〜12.02%</strong>。完全観測は <strong>2387件（84.65%）</strong>。<strong>リストワイズ削除（listwise deletion）</strong>で処理</li><li>全検定は両側、p&lt;0.05 を統計学的有意とした</li><li><strong>倫理</strong>：STROBEガイドラインに準拠して報告。ヘルシンキ宣言（2013年改訂）に従う。北京協和医院中央IRB承認（No. SK1828）、個別同意免除。<strong>識別可能な情報・保護対象保健情報は解析データセットに含まれない</strong></li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Methodsの最大の穴 — βの単位が定義されていない <mark class="hl"><strong>本文には GLMM の分布族（family）とリンク関数の記載が一切なく、アウトカム変数がどのスケール（0〜1の割合か、0〜100の%か）でモデルに入ったのかも書かれていない</strong></mark>。したがって「β = −0.027」が臨床的にどれだけの差なのかを、論文だけからは確定できない。 ICU死亡率の中央値が 8.02%（＝割合で 0.0802）であること、APACHE II高値割合のβが 0.04 と比較的大きいことから、<strong>0〜1の割合スケールに恒等リンクを当てた線形混合モデル</strong>と解釈するのが桁として最も整合的である（そう読めば ICU病床割合≥2% は絶対リスク −2.7%ポイントに相当する）。しかし<strong>これはあくまで読者側の推定であり、本文の記載ではない</strong>。JCで効果の大きさを語るときは必ずこの留保を付けること。</p>
+</div>
+<h3>4. 結果① 病院の構造特性（Table 1）🏥</h3>
+<p>31省の 2820施設が解析対象。三次 1383（49.04%）、二次 1437（50.96%）。<strong>ICU病床割合を除くすべての病院特性で、三次病院と二次病院の間に有意差があった</strong>。</p>
+<h4>Table 1. 病院の特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>区分</th><th>全体 n(%)</th><th>三次病院 n(%)</th><th>二次病院 n(%)</th><th>χ²</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>地域</td><td>華東（Eastern China）</td><td>889(31.52)</td><td>399(28.85)</td><td>490(34.10)</td><td>84.441</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>華中（Central China）</td><td>659(23.37)</td><td>270(19.52)</td><td>389(27.07)</td><td></td><td></td></tr>
+<tr><td></td><td>華西（Western China）</td><td>1083(38.40)</td><td>570(41.21)</td><td>513(35.70)</td><td></td><td></td></tr>
+<tr><td></td><td>東北（North-eastern China）</td><td>189(6.70)</td><td>144(10.41)</td><td>45(3.13)</td><td></td><td></td></tr>
+<tr><td>所在地</td><td>大都市</td><td>532(18.87)</td><td>353(25.52)</td><td>179(12.46)</td><td>77.773</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>その他都市・農村部</td><td>2288(81.13)</td><td>1030(74.48)</td><td>1258(87.54)</td><td></td><td></td></tr>
+<tr><td>所有形態</td><td>民間</td><td>246(8.72)</td><td>80(5.78)</td><td>166(11.55)</td><td>29.440</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>公立</td><td>2574(91.28)</td><td>1303(94.22)</td><td>1271(88.45)</td><td></td><td></td></tr>
+<tr><td>病院の病床数</td><td>中央値(Q1,Q3)</td><td>730(491,1195)</td><td>1124(762,1672)</td><td>506(360,707)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;500</td><td>773(27.41)</td><td>102(7.38)</td><td>671(46.69)</td><td>960.486</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>500–1000</td><td>1181(41.88)</td><td>512(37.02)</td><td>669(46.56)</td><td></td><td></td></tr>
+<tr><td></td><td>&gt;1000</td><td>866(30.71)</td><td>769(55.60)</td><td>97(6.75)</td><td></td><td></td></tr>
+<tr><td>ICUの病床数</td><td>中央値(Q1,Q3)</td><td>12(8,20)</td><td>18(12,30)</td><td>9(6,12)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;10</td><td>958(33.97)</td><td>218(15.76)</td><td>740(51.50)</td><td>654.300</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>10–15</td><td>842(29.86)</td><td>356(25.74)</td><td>486(33.82)</td><td></td><td></td></tr>
+<tr><td></td><td>&gt;15</td><td>1020(36.17)</td><td>809(58.50)</td><td>211(14.68)</td><td></td><td></td></tr>
+<tr><td>ICU病床割合(%)</td><td>&lt;2%</td><td>1708(60.57)</td><td>855(61.82)</td><td>853(59.36)</td><td>1.789</td><td><strong>0.181</strong></td></tr>
+<tr><td></td><td>≥2%</td><td>1112(39.43)</td><td>528(38.18)</td><td>584(40.64)</td><td></td><td></td></tr>
+</tbody></table></div>
+<p><strong>読み取りどころ</strong></p>
+<ul><li>参加施設の <strong>91.28% が公立</strong>、<strong>81.13% が大都市以外</strong>。民間病院は 246施設（8.72%）しかなく、後述のとおり本研究で最も強い所見の1つ（公立で死亡・VAP・CRBSIが低い）は<strong>この小さい群との比較で得られている</strong></li><li><strong>地域の偏り</strong>：華西が最多（38.40%）で、東北は 6.70% と少ない。ただし三次病院に限れば華西 41.21%、東北 10.41% と分布が異なる</li><li><strong>ICU病床割合の中央値は 1.77%（IQR 1.29〜2.42）</strong>。中国の「重症医学科建設管理指南」が推奨するのは <strong>2〜8%</strong>（引用文献17）で、<mark class="hl"><strong>60.57%の施設が推奨の下限すら満たしていない</strong></mark></li><li><strong>ICU病床割合だけが三次と二次で差がない</strong>（p=0.181）。つまり「三次だから ICU の相対的な容量が大きい」わけではなく、三次病院は病院自体が大きい（中央値1124床）ぶん ICU も大きい（中央値18床）が、<strong>比は同じ</strong>という構図</li></ul>
+<h3>5. 結果② ICUの構造特性（Table 2）🩺</h3>
+<p><strong>これらの特性はすべて三次と二次で有意差があった</strong>（専従医対病床比の p=0.0210 を含む）。</p>
+<h4>Table 2. ICUの特性（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>区分</th><th>全体</th><th>三次病院</th><th>二次病院</th><th>χ²</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>医師数</td><td>中央値(Q1,Q3)</td><td>7(5,11)</td><td>10(7,17)</td><td>6(4,7)</td><td></td><td></td></tr>
+<tr><td>専従医対病床比</td><td>中央値(Q1,Q3)</td><td>0.60(0.44,0.78)</td><td>0.58(0.44,0.75)</td><td>0.60(0.44,0.80)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;0.6</td><td>1425(50.53)</td><td>730(52.78)</td><td>695(48.36)</td><td>5.330</td><td>0.0210</td></tr>
+<tr><td></td><td>≥0.6</td><td>1395(49.47)</td><td>653(47.22)</td><td>742(51.64)</td><td></td><td></td></tr>
+<tr><td>看護師数</td><td>中央値(Q1,Q3)</td><td>21(14,36)</td><td>34(21,57)</td><td>16(11,22)</td><td></td><td></td></tr>
+<tr><td>bed-to-nurse比</td><td>中央値(Q1,Q3)</td><td>0.55(0.44,0.71)</td><td>0.52(0.42,0.68)</td><td>0.58(0.48,0.75)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;0.5</td><td>1000(35.46)</td><td>590(42.66)</td><td>410(28.53)</td><td>60.858</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>≥0.5</td><td>1820(64.54)</td><td>793(57.34)</td><td>1027(71.47)</td><td></td><td></td></tr>
+<tr><td>ICU個室数</td><td>中央値(Q1,Q3)</td><td>2(1,4)</td><td>3(2,6)</td><td>1(1,2)</td><td></td><td></td></tr>
+<tr><td></td><td>≤1</td><td>1140(40.43)</td><td>335(24.22)</td><td>805(56.02)</td><td>294.537</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>&gt;1</td><td>1680(59.57)</td><td>1048(75.78)</td><td>632(43.98)</td><td></td><td></td></tr>
+<tr><td>ECMO</td><td>中央値(Q1,Q3)</td><td>0(0,0)</td><td>0(0,1)</td><td>0(0,0)</td><td></td><td></td></tr>
+<tr><td></td><td>0台</td><td>2370(84.04)</td><td>956(69.13)</td><td>1414(98.40)</td><td>448.161</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>≥1台</td><td>450(15.96)</td><td>427(30.87)</td><td>23(1.60)</td><td></td><td></td></tr>
+<tr><td>入室24時間後 APACHE II ≥15 の割合(%)</td><td>中央値(Q1,Q3)</td><td>58.91(35.12,76.30)</td><td>59.28(37.30,76.26)</td><td>58.06(33.33,76.58)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;50%</td><td>1342(47.59)</td><td>619(44.76)</td><td>723(50.31)</td><td>8.499</td><td>0.003</td></tr>
+<tr><td></td><td>≥50%</td><td>1478(52.41)</td><td>764(55.24)</td><td>714(49.69)</td><td></td><td></td></tr>
+<tr><td>6時間SSCバンドル遵守率(%)</td><td>中央値(Q1,Q3)</td><td>80.00(50.00,100)</td><td>82.85(55.94,100)</td><td>75.00(42.86,100)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;90%</td><td>1936(68.65)</td><td>722(52.21)</td><td>935(65.07)</td><td>47.572</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>≥90%</td><td>884(31.35)</td><td>661(47.79)</td><td>502(34.93)</td><td></td><td></td></tr>
+<tr><td>抗菌薬前微生物検査率(%)</td><td>中央値(Q1,Q3)</td><td>91.67(71.47,100)</td><td>94.53(78.87,100)</td><td>88.14(63.44,100)</td><td></td><td></td></tr>
+<tr><td></td><td>&lt;90%</td><td>1485(52.66)</td><td>622(44.97)</td><td>863(60.06)</td><td>63.692</td><td>&lt;0.001</td></tr>
+<tr><td></td><td>≥90%</td><td>1335(47.34)</td><td>761(55.03)</td><td>574(39.94)</td><td></td><td></td></tr>
+</tbody></table></div>
+<p><strong>読み取りどころ</strong></p>
+<ul><li><strong>専従医対病床比の中央値 0.60</strong>（＝ICU 1床あたり医師0.6人）。三次 0.58 に対し<strong>二次 0.60 とわずかに二次のほうが高い</strong>。「三次のほうが手厚い」という直感と逆になっている（ただし絶対数は三次10人 vs 二次6人）</li><li><strong>bed-to-nurse比の中央値 0.55</strong>（＝1床あたり看護師約1.8人）。<strong>64.54%の施設が 0.5 以上＝1床あたり看護師2人未満</strong>。三次 0.52 に対し二次 0.58 で、<strong>二次病院のほうが看護配置が薄い</strong></li><li><strong>ECMOを保有するICUは 450（15.96%）のみ</strong>。二次病院に限れば <strong>1.60%（23施設）</strong>で、実質的に三次病院の設備である</li><li><strong>APACHE II ≥15 の患者割合の中央値は 58.91%</strong> で、三次（59.28%）と二次（58.06%）で中央値はほとんど変わらない。<mark class="hl">つまり「三次のほうが重症患者を多く診ている」という前提は、この指標では裏付けられていない</mark>（Discussion では「急性・重症疾患は二次より三次で治療される傾向がある」と述べており、Table 2 の数字とやや齟齬がある）</li><li><strong>6時間SSCバンドル遵守率の中央値は 80.00%</strong>（IQR 50.00〜100）と施設間のばらつきが極めて大きい</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>Table 2 の 6時間SSCバンドル行は内部で数が合っていない <mark class="hl">6時間SSCバンドル遵守率の行だけ、三次＋二次の実数が全体と一致しない</mark>。&lt;90% は全体 <strong>1936</strong> に対し 三次722＋二次935＝<strong>1657</strong>、≥90% は全体 <strong>884</strong> に対し 三次661＋二次502＝<strong>1163</strong>。全体側（1936＋884＝2820）も列側（722＋661＝1383、935＋502＝1437）もそれぞれ整合しているので、<strong>「全体」列か「三次・二次」列のどちらかが誤植である可能性が高い</strong>。他の行（APACHE II、bed-to-nurse、微生物検査率など）ではすべて実数が一致するため、この行に固有の問題である。<strong>JCで表を引用するときはこの行の数値をそのまま使わないこと。</strong></p>
+</div>
+<h3>6. 結果③ ICU患者アウトカム（Table 3）📉</h3>
+<p><strong>VAPを除くすべてのアウトカムで三次と二次に有意差があった</strong>。</p>
+<h4>Table 3. ICU患者のアウトカム（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>n</th><th>全体 中央値(Q1,Q3)</th><th>三次病院 中央値(Q1,Q3)</th><th>二次病院 中央値(Q1,Q3)</th><th>χ²</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>ICU死亡率(%)</td><td>2707</td><td><strong>8.02(3.78, 14.35)</strong></td><td>8.94(4.49, 15.23)</td><td>7.14(3.29, 13.33)</td><td>23.650</td><td>&lt;0.001</td></tr>
+<tr><td>VAP（人工呼吸器1000日あたり）</td><td>2546</td><td><strong>5.58(1.55, 11.67)</strong></td><td>5.63(2.20, 10.57)</td><td>5.44(0, 13.74)</td><td>2.805</td><td>0.094</td></tr>
+<tr><td>CRBSI（カテーテル1000日あたり）</td><td>2481</td><td><strong>0.63(0, 2.01)</strong></td><td>0.83(0, 1.98)</td><td>0(0, 2.06)</td><td>46.890</td><td>&lt;0.001</td></tr>
+<tr><td>CAUTI（カテーテル1000日あたり）</td><td>2548</td><td><strong>1.42(0.37,3.40)</strong></td><td>1.32(0.45, 2.77)</td><td>1.64(0, 4.44)</td><td>6.803</td><td>0.010</td></tr>
+</tbody></table></div>
+<p><strong>読み取りどころ</strong></p>
+<ul><li><strong>アウトカムごとに n が異なる</strong>（2707／2546／2481／2548）。欠測のためであり、モデルはリストワイズ削除なのでさらに減る（完全観測 2387件＝84.65%）</li><li><strong>粗の三次 vs 二次は方向が一致しない</strong>。死亡は三次のほうが<strong>高く</strong>（8.94% vs 7.14%）、CRBSIも三次のほうが<strong>高い</strong>（0.83 vs 0）が、CAUTIは三次のほうが<strong>低い</strong>（1.32 vs 1.64）。調整後（Fig 3, 4）は CRBSI・CAUTI とも「二次で高い」に反転しており、<strong>粗と調整の結果が食い違っている</strong>（CRBSI で特に顕著）</li><li><strong>二次病院のCRBSI中央値が 0</strong>、VAP・CAUTI の Q1 も 0。<mark class="hl"><strong>サーベイランス自体が行われていない、あるいはゼロ報告が多い可能性がある</strong></mark>。この点は本文で議論されていない</li><li><mark class="hl">本文の Results 本文では中央値の括弧内を「95%CI」と表記しているが、Table 3 の見出しは「Q1, Q3」であり、<strong>これは四分位範囲（IQR）であって信頼区間ではない</strong>。本文側の誤記である</mark></li></ul>
+<h3>7. 結果④ 構造因子とアウトカムの調整済み関連（GLMM／Fig 1〜4）📊</h3>
+<p>4つのアウトカムそれぞれについて、同じ10変数を投入した GLMM を実行し、フォレストプロットで提示している。<strong>以下の4表は Fig 1〜4 の全数値をそのまま起こしたもの</strong>（丸めなし）。</p>
+<h4>7-1. ICU死亡率（Fig 1）</h4>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03892-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03892-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 病院・ICU構造因子がICU死亡に及ぼす調整済み効果（GLMM）。原図・無改変。©Li et al., Crit Care 2022（CC BY 4.0） 左列に変数名（対比の向きを括弧内に明示）、中央に <strong>β の点推定（青い四角）と95%CIのひげ</strong>、右に数値とp値を並べた縦型フォレストプロット。中央の縦線が <strong>β=0</strong>（効果なし）。横軸目盛りは −0.04 から 0.06。<strong>ひげが縦線をまたげば有意でない</strong>という読み方をする。原図の「β (95%CI)」見出しには黄色のマーカー跡が残っているが、これは本Vaultに保管されていたPDFに読者が付けた注釈であり、原著の一部ではない。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>変数（対比の向き）</th><th>β（95%CI）</th><th>p値</th><th>解釈</th></tr></thead>
+<tbody>
+<tr><td>病院所有形態（公立 vs 民間）</td><td><strong>−0.018（−0.031, −0.005）</strong></td><td><strong>0.006</strong></td><td>公立で死亡が低い</td></tr>
+<tr><td>病院種別（二次 vs 三次）</td><td>−0.006（−0.015, 0.002）</td><td>0.13</td><td>有意でない</td></tr>
+<tr><td>ICU病床割合（≥2% vs &lt;2%）</td><td><strong>−0.027（−0.034, −0.019）</strong></td><td><strong>&lt;0.001</strong></td><td><strong>本研究で最も強い構造因子</strong></td></tr>
+<tr><td>専従医対病床比（≥0.8 vs &lt;0.8）</td><td>−0.003（−0.011, 0.005）</td><td>0.494</td><td>有意でない</td></tr>
+<tr><td>bed-to-nurse比（≥0.5 vs &lt;0.5）</td><td><strong>0.009（0.001, 0.017）</strong></td><td><strong>0.027</strong></td><td>看護配置が薄いと死亡が高い</td></tr>
+<tr><td>ICU個室数（≥1 vs 0）</td><td>−0.001（−0.009, 0.007）</td><td>0.717</td><td>有意でない</td></tr>
+<tr><td>ECMO（≥1台 vs 0台）</td><td>−0.003（−0.014, 0.008）</td><td>0.639</td><td>有意でない</td></tr>
+<tr><td>APACHE II ≥15 の患者割合（≥0.5 vs &lt;0.5）</td><td><strong>0.04（0.033, 0.047）</strong></td><td><strong>&lt;0.001</strong></td><td>重症度。10変数中で最大の係数</td></tr>
+<tr><td>6時間SSCバンドル遵守率（≥90% vs &lt;90%）</td><td>−0.005（−0.013, 0.002）</td><td>0.165</td><td>有意でない</td></tr>
+<tr><td>抗菌薬前微生物検査率（≥90% vs &lt;90%）</td><td>0.005（−0.002, 0.013）</td><td>0.149</td><td>有意でない</td></tr>
+</tbody></table></div>
+<h4>7-2. VAP発生率（Fig 2）</h4>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03892-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03892-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 病院・ICU構造因子がVAP発生率に及ぼす調整済み効果（GLMM）。原図・無改変。©Li et al., Crit Care 2022（CC BY 4.0） Fig 1 と同一の様式。横軸目盛りは −0.06 から 0.04。<strong>有意なのは所有形態の1行のみ</strong>で、他の9行はひげがすべて0線をまたいでいる。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>変数（対比の向き）</th><th>β（95%CI）</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>病院所有形態（公立 vs 民間）</td><td><strong>−0.036（−0.054, −0.018）</strong></td><td><strong>&lt;0.001</strong></td></tr>
+<tr><td>病院種別（二次 vs 三次）</td><td>0.006（−0.005, 0.017）</td><td>0.266</td></tr>
+<tr><td>ICU病床割合（≥2% vs &lt;2%）</td><td>−0.002（−0.013, 0.009）</td><td>0.706</td></tr>
+<tr><td>専従医対病床比（≥0.8 vs &lt;0.8）</td><td>0.005（−0.005, 0.016）</td><td>0.305</td></tr>
+<tr><td>bed-to-nurse比（≥0.5 vs &lt;0.5）</td><td>0.001（−0.010, 0.011）</td><td>0.914</td></tr>
+<tr><td>ICU個室数（≥1 vs 0）</td><td>0.004（−0.007, 0.015）</td><td>0.447</td></tr>
+<tr><td>ECMO（≥1台 vs 0台）</td><td>−0.004（−0.019, 0.010）</td><td>0.558</td></tr>
+<tr><td>APACHE II ≥15 の患者割合（≥0.5 vs &lt;0.5）</td><td>−0.002（−0.012, 0.008）</td><td>0.663</td></tr>
+<tr><td>6時間SSCバンドル遵守率（≥90% vs &lt;90%）</td><td>0.003（−0.007, 0.013）</td><td>0.596</td></tr>
+<tr><td>抗菌薬前微生物検査率（≥90% vs &lt;90%）</td><td>0.009（−0.001, 0.019）</td><td>0.076</td></tr>
+</tbody></table></div>
+<p><strong>注目点</strong>：<strong>VAPの係数は所有形態が −0.036 と、4つのアウトカムを通じて最大の絶対値</strong>である。一方で <strong>ICU個室数はVAPに対して有意でない</strong>（0.004、p=0.447）。個室化が交差感染を減らすという期待はこのデータでは支持されていない。</p>
+<h4>7-3. CRBSI発生率（Fig 3）</h4>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03892-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03892-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 病院・ICU構造因子がCRBSI発生率に及ぼす調整済み効果（GLMM）。原図・無改変。©Li et al., Crit Care 2022（CC BY 4.0） 横軸目盛りは −0.02 から 0.015。<strong>係数の絶対値が4つのアウトカム中で最も小さく</strong>、ひげも短い。有意なのは所有形態と病院種別の2行。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>変数（対比の向き）</th><th>β（95%CI）</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>病院所有形態（公立 vs 民間）</td><td><strong>−0.008（−0.014, −0.002）</strong></td><td><strong>0.011</strong></td></tr>
+<tr><td>病院種別（二次 vs 三次）</td><td><strong>0.005（0.001, 0.009）</strong></td><td><strong>0.010</strong></td></tr>
+<tr><td>ICU病床割合（≥2% vs &lt;2%）</td><td>0.001（−0.003, 0.004）</td><td>0.74</td></tr>
+<tr><td>専従医対病床比（≥0.8 vs &lt;0.8）</td><td>0.002（−0.002, 0.004）</td><td>0.263</td></tr>
+<tr><td>bed-to-nurse比（≥0.5 vs &lt;0.5）</td><td>0.002（−0.002, 0.006）</td><td>0.282</td></tr>
+<tr><td>ICU個室数（≥1 vs 0）</td><td>−0.002（−0.006, 0.002）</td><td>0.269</td></tr>
+<tr><td>ECMO（≥1台 vs 0台）</td><td>0.002（−0.003, 0.007）</td><td>0.493</td></tr>
+<tr><td>APACHE II ≥15 の患者割合（≥0.5 vs &lt;0.5）</td><td>−0.001（−0.004, 0.002）</td><td>0.571</td></tr>
+<tr><td>6時間SSCバンドル遵守率（≥90% vs &lt;90%）</td><td>0.001（−0.002, 0.005）</td><td>0.51</td></tr>
+<tr><td>抗菌薬前微生物検査率（≥90% vs &lt;90%）</td><td>0.001（−0.002, 0.004）</td><td>0.608</td></tr>
+</tbody></table></div>
+<p><strong>注目点</strong>：専従医対病床比の行は <strong>β=0.002 に対し95%CIが（−0.002, 0.004）</strong>と、点推定が区間の中央から外れている。他の行はおおむね対称なので、<strong>この行は誤植の可能性がある</strong>（本来 −0.002〜0.006 か、点推定が 0.001 か）。</p>
+<h4>7-4. CAUTI発生率（Fig 4）</h4>
+<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1186/s13054-022-03892-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-022-03892-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. 病院・ICU構造因子がCAUTI発生率に及ぼす調整済み効果（GLMM）。原図・無改変。©Li et al., Crit Care 2022（CC BY 4.0） 横軸目盛りは −0.03 から 0.02。<strong>有意なのは病院種別の1行のみ</strong>。所有形態は CAUTI では有意にならず（p=0.216）、他の3アウトカムと異なる挙動を示す。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>変数（対比の向き）</th><th>β（95%CI）</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>病院所有形態（公立 vs 民間）</td><td>−0.008（−0.020, 0.005）</td><td>0.216</td></tr>
+<tr><td>病院種別（二次 vs 三次）</td><td><strong>0.01（0.002, 0.018）</strong></td><td><strong>0.015</strong></td></tr>
+<tr><td>ICU病床割合（≥2% vs &lt;2%）</td><td>−0.003（−0.011, 0.004）</td><td>0.395</td></tr>
+<tr><td>専従医対病床比（≥0.8 vs &lt;0.8）</td><td>0.001（−0.007, 0.008）</td><td>0.942</td></tr>
+<tr><td>bed-to-nurse比（≥0.5 vs &lt;0.5）</td><td>0.003（−0.005, 0.011）</td><td>0.461</td></tr>
+<tr><td>ICU個室数（≥1 vs 0）</td><td>−0.001（−0.009, 0.006）</td><td>0.703</td></tr>
+<tr><td>ECMO（≥1台 vs 0台）</td><td>0.001（−0.009, 0.012）</td><td>0.793</td></tr>
+<tr><td>APACHE II ≥15 の患者割合（≥0.5 vs &lt;0.5）</td><td>−0.004（−0.011, 0.003）</td><td>0.268</td></tr>
+<tr><td>6時間SSCバンドル遵守率（≥90% vs &lt;90%）</td><td>0.002（−0.006, 0.009）</td><td>0.629</td></tr>
+<tr><td>抗菌薬前微生物検査率（≥90% vs &lt;90%）</td><td>0.006（−0.001, 0.013）</td><td>0.071</td></tr>
+</tbody></table></div>
+<h4>7-5. 40セルを1枚に — 構造因子×アウトカムの一覧</h4>
+<div class="tw"><table>
+<thead><tr><th>構造因子</th><th>ICU死亡</th><th>VAP</th><th>CRBSI</th><th>CAUTI</th></tr></thead>
+<tbody>
+<tr><td>公立（vs 民間）</td><td><strong>↓ 有意</strong></td><td><strong>↓ 有意</strong></td><td><strong>↓ 有意</strong></td><td>有意でない</td></tr>
+<tr><td>二次（vs 三次）</td><td>有意でない</td><td>有意でない</td><td><strong>↑ 有意</strong></td><td><strong>↑ 有意</strong></td></tr>
+<tr><td>ICU病床割合 ≥2%</td><td><strong>↓ 有意（最強）</strong></td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>専従医対病床比 ≥0.8</td><td>有意でない</td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>bed-to-nurse比 ≥0.5</td><td><strong>↑ 有意</strong></td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>ICU個室数 ≥1</td><td>有意でない</td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>ECMO ≥1台</td><td>有意でない</td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>APACHE II ≥15 割合 ≥50%</td><td><strong>↑ 有意（最大係数）</strong></td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>6時間SSCバンドル ≥90%</td><td>有意でない</td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+<tr><td>抗菌薬前微生物検査 ≥90%</td><td>有意でない</td><td>有意でない</td><td>有意でない</td><td>有意でない</td></tr>
+</tbody></table></div>
+<p><strong>40セル中、有意だったのは7セル</strong>。10個の構造・プロセス変数のうち <strong>半分（専従医比・個室・ECMO・SSCバンドル・微生物検査率）は4アウトカムすべてで有意でなかった</strong>。</p>
+<h3>8. 考察 — 著者らの解釈 💬</h3>
+<h4>8-1. 所有形態（公立 vs 民間）</h4>
+<p>死亡・VAP・CRBSIのいずれも民間病院で高かった。著者らが挙げる説明は次のとおり。</p>
+<ul><li>公立病院は<strong>非営利で国から財政補助を受け、医療価格が厳しく制限される</strong>。民間病院は<strong>営利で損益に責任を負い、医療価格を独自に決める</strong></li><li>中国では1980年に民間病院が登場し、2001年以後に大規模に発展。<strong>2015年に施設数が公立を上回り</strong>、2019年には民間 22,424 vs 公立 11,930 となった（引用文献11）</li><li>施設数が増えたにもかかわらず、民間病院は中国の社会的・医療的文脈でなお課題を抱える。<strong>発展期間が相対的に短いため小規模・専門特化になりやすく、最大の課題は質の高い医師の確保と公的保険適用の欠如</strong>である</li><li>公立病院は一般により多くの病床・スタッフ・三次医療能力をもち、患者のニーズに応えるだけの医療人材・機器・資源を配分できる（引用文献19）</li><li>北京の最近の研究では、<strong>公立病院の技術的効率・純技術的効率・規模の効率がいずれも民間より高かった</strong>（引用文献20）</li><li>公立病院は一般に評判（reputation）がよく、評判は病院のパフォーマンスと効率にも影響する</li><li><strong>結論</strong>：民間病院の急速な発展に伴い、民間病院におけるICU患者のケアの質とアウトカムをさらに改善する対策が必要である</li></ul>
+<h4>8-2. 病院種別（三次 vs 二次）</h4>
+<ul><li>三次病院のICU患者は二次病院より <strong>CAUTI発生率が低かった</strong>。多変量解析でも「二次病院で治療されること」がCAUTI高発生と関連</li><li>説明として、<strong>院内感染の臨床ケア・診断プロトコル・評価・治療の違い</strong>が挙げられる</li><li>近年の研究でも二次病院で死亡率が高いという観察がある（引用文献21のワシントン州の敗血症死亡比較、引用文献22の韓国NHISコホート）</li><li>これらの合併症は <strong>患者のケースミックスとケアの質の複合効果</strong>を反映している、と著者らは述べる</li><li><strong>二次病院のICUスタッフに対する集中的な訓練と技術支援を実施し、ケアとアウトカムのギャップと変動を狭めるべき</strong>である</li></ul>
+<h4>8-3. ICU病床割合（≥2%）</h4>
+<ul><li>ICU病床割合 2%超が <strong>ICU死亡率の低さと独立に関連</strong>し、これは同時期の研究（引用文献23：Sasabuchi Y, Yasunaga H, et al. Crit Care Med. 2015 の「ICU-to-hospital bed ratio と重症患者の volume-outcome 関係」）と一致する</li><li>先行研究では、<strong>大規模病院とICU稼働率の高い病院ほどICU病床を増やしやすく、小規模病院と稼働率の低い病院は翌年にICU病床を追加しにくい</strong>（引用文献24）</li><li><strong>ICU稼働率が高いとき、ICU病床比が低いとICU入室の遅延を生じ、それが患者アウトカムに影響しうる</strong>というのが著者らの機序仮説</li><li><mark class="hl"><strong>著者ら自身が「この結果は注意して解釈すべき」と明記している</strong></mark>。ICU拡張の判断には、ICU病床稼働率・患者の重症度・他部門（例：手術室）の能力といった因子の組み合わせを考慮すべきである</li></ul>
+<h4>8-4. 看護配置（bed-to-nurse比）</h4>
+<ul><li>看護スタッフ数が多いほど院内死亡が低いという報告は多数ある（引用文献7、22、25、26）。本研究も同様の傾向を示した</li><li><strong>bed-to-nurse比 0.5超のICUの患者は有意に死亡が高かった</strong>。bed-to-nurse比はICUと一般病棟の看護配置指標として広く使われ、<strong>値が大きいほど配置が悪い</strong></li><li>ICU患者は疾患の性質、持続的な侵襲的モニタリングの必要性、多臓器サポートの必要性から<strong>看護ケアへの依存度が高い</strong></li><li>看護配置と死亡の関係を媒介する変数として推定されるのは、<strong>医師との協働の不足・過大な業務量・医療エラーの増加・実施されずに終わった看護（missed nursing care）</strong>である（引用文献3、27）</li><li>ICU看護師の重要な役割の1つは<strong>患者モニタリング</strong>。24時間ベッドサイドにおり、問題の早期発見に最重要である。モニタリングの失敗は気胸や予期せぬ抜管といった生命を脅かす合併症を招き、迅速な認識と治療を要する（引用文献28）。看護師不足は監視の不足につながり、患者状態の変化の早期認識を妨げうる（引用文献25）</li><li><strong>著者らの3つの留保</strong></li></ul>
+<ol><li>この所見は、<strong>中国および他の低・中所得国における看護師対患者比の低さ</strong>という文脈で考えるべき</li><li>本研究で使った平均的な bed-to-nurse比は、<strong>看護師数と患者数が絶えず変動する実際のユニットの看護師対患者比とは等しくない</strong></li><li><strong>看護スタッフの質（教育課程・上級研修）</strong>がICU死亡の交絡因子でありうる</li><li>看護配置がICU患者アウトカムに与える<strong>動的な影響</strong>を調べるには、より高度な研究デザインと解析手法を用いた将来研究が必要である</li></ol>
+<h4>8-5. 中国の集中治療の現状についての著者らの記述</h4>
+<ul><li>中国の人口は急速に高齢化しており、今後数十年でさらに加速する。同時に病院数と病院規模も漸増している。高齢社会はICU入室とICU需要の増加を招きうる</li><li>中国本土の集中治療医学は<strong>なお発展段階</strong>にあり、ICU病床数と収容能力、臨床医の人員配置、<strong>呼吸療法士などの重症ケア技術者</strong>、ICU機器などで先進国と大きな差がある（引用文献13〜16）</li><li><strong>病院病床の急速な拡大は、ICU病床の深刻な不足と不釣り合いだった</strong></li><li>中国の「重症医学科建設管理指南」が推奨するICU：病院病床比は <strong>2〜8%</strong>（引用文献17）。この割合は多くの先進国より相対的に低いにもかかわらず、<strong>多数の病院がこの推奨を満たしていなかった</strong>（引用文献18）</li></ul>
+<h3>9. 限界（著者らが挙げた4つ）⚠️</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>二次データの利用</strong></td><td>患者レベルの特性や、制御されていない交絡因子（スタッフの教育水準、ICU病床稼働率など）といった必須変数が得られない。この方法論的問題を減らすため、APACHE IIスコアで疾患重症度を調整したGLMMを用いた（引用文献29、30）</td></tr>
+<tr><td>2</td><td><strong>1年分のみ</strong></td><td>2019年の1年分しか報告・要約していないため、構造因子と健康アウトカムの関係を<strong>連続的・動的に解析できない</strong></td></tr>
+<tr><td>3</td><td><strong>観察研究</strong></td><td>選択バイアスを受けやすい。<strong>横断的（cross-sectional）な研究デザインのため因果関係は導けない</strong></td></tr>
+<tr><td>4</td><td><strong>リストワイズ削除</strong></td><td>欠測処理にリストワイズ削除を用いたため、パラメータ推定にバイアスが生じうる（引用文献31）</td></tr>
+</tbody></table></div>
+<p>著者らはこれらを認めたうえで、<strong>病院・ICUの構造因子という非患者因子が有害アウトカムの低減に必要であることを強調する点で意義がある</strong>とし、<strong>全国行政データを使ったことで一般化可能性を改善した</strong>（先行研究の多くは特定地域・特定病院のデータだった）と主張する。結果は中国と、同様の医療環境をもつ他国の集中治療の発展に重要な含意をもちうる、と締める。</p>
+<h3>10. 結論（原文の記載）🏁</h3>
+<p><strong>特定の構造因子、すなわち病院の所有形態・病院種別・ICU病床割合・bed-to-nurse比が、ICU患者アウトカムと関連していた。これらの観察は、中国および他の発展途上国における集中治療提供の現在の質のギャップを埋めるための政策と介入に役立ちうる。</strong></p>
+<h2>🔄 旧記述とPDFの照合（本ノート改稿時に修正した点）</h2>
+<p>本ノートは2026-08-15にPDF全文と1つずつ突き合わせて全面改稿した。<strong>旧記述で誤っていた／不足していた点</strong>を以下に残す（同じ誤りを再生産しないため）。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧ノートの記述</th><th>PDFの記載（正）</th><th>種別</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>「<strong>全</strong>2820病院のデータを National Clinical Improvement System から収集」</td><td>2019年時点の全国登録病院は <strong>12,436施設</strong>（三次2749・二次9687）。うち <strong>China-NCCQC が選定し自発的に参加した2820施設</strong>が解析対象。全数ではなく約22.7%</td><td><strong>事実誤認</strong>（「全」は誤り）</td></tr>
+<tr><td>2</td><td>ファイル名・<code>original</code> 欄に「<strong>GEEしている</strong>」</td><td>用いたのは <strong>generalized linear mixed models（GLMM）</strong>で、地域と所在地の<strong>2つの変量切片</strong>を置いた。GEE（一般化推定方程式）ではない</td><td><strong>手法の誤り</strong>（Evernote時代の付記に由来）</td></tr>
+<tr><td>3</td><td>「解析：一般化線形混合モデル（GLMM）で構造因子とアウトカムの関連を分析」</td><td>正しい。ただしアウトカムごとに<strong>4本のモデルを別々に</strong>走らせたこと、SAS 9.4 を使ったことが欠落</td><td>不足</td></tr>
+<tr><td>4</td><td>効果量の記載が<strong>一切ない</strong></td><td>β・95%CI・p値が Fig 1〜4 に計40セル。本ノートに全数を転記した</td><td><strong>重大な不足</strong></td></tr>
+<tr><td>5</td><td>「死亡率、VAP・CRBSI・CAUTI の発生率」とだけ記載</td><td>記述統計（死亡8.02%、VAP 5.58、CRBSI 0.63、CAUTI 1.42）と各アウトカムのn（2707/2546/2481/2548）が欠落</td><td>不足</td></tr>
+<tr><td>6</td><td>frontmatter に <code>doi</code> フィールドなし（citation 内にのみ）</td><td><code>doi: 10.1186/s13054-022-03892-7</code> を追加。PDFカタログとの重複照合キーになる</td><td>不足</td></tr>
+<tr><td>7</td><td><code>title_en</code> なし</td><td>追加</td><td>不足</td></tr>
+<tr><td>8</td><td>ファイル名に誌略・年がない（<code>（2019 NCIS）</code>）</td><td><code>（NCIS 2820病院・GLMM・CritCare2022）</code> にリネーム</td><td>規約違反</td></tr>
+<tr><td>9</td><td>一次病院の除外・ICU5床超という組み入れ基準の記載なし</td><td>Methods に明記されている</td><td>不足</td></tr>
+<tr><td>10</td><td>「多施設観察研究」</td><td>正しいが、<strong>横断的（cross-sectional）で因果を導けない</strong>という著者自身の限界記述が欠落していた</td><td>不足</td></tr>
+<tr><td>11</td><td>「原文PDF/図表は旧アーカイブに保管」</td><td>Raw source は旧アーカイブのまま保持し、本Vaultには<strong>コピー</strong>を <code>_attachments/</code> に置き、図はPyMuPDFで抽出して埋め込んだ</td><td>運用の改善</td></tr>
+</tbody></table></div>
+<p><strong>旧ノートで正しかった点</strong>：発行年2022、雑誌 Critical Care、2820病院という数、China National Critical Care Quality Control Center Group による研究であること、GLMMを使ったこと（解析行のみ）。</p>
+<h2>🇯🇵 JIPADで同じ解析ができるか（外的妥当性とデータ再現性）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>ここから先は論文本文にない検討である <mark class="hl"><strong>以下の日本・JIPADに関する記述は本論文には一切書かれていない</strong></mark>。本Vaultの読者（聖路加ICU）の文脈で有用と判断して付した検討であり、<strong>著者らの主張ではない</strong>。論文の内容と混同しないこと。</p>
+</div>
+<h3>構造変数ごとの再現可能性の見積もり</h3>
+<div class="tw"><table>
+<thead><tr><th>本研究の構造変数</th><th>定義</th><th>日本での取得可能性（本ノートの見立て）</th></tr></thead>
+<tbody>
+<tr><td>病院の所有形態（公立／民間）</td><td>国からの財政補助の有無・営利性</td><td>取得は容易だが、<strong>中国の公立／民間の対比は日本の公的／医療法人の対比と意味が違う</strong>。中国の民間病院は「小規模・専門特化・公的保険適用なし」が課題とされており、日本の民間病院とは別物</td></tr>
+<tr><td>病院種別（三次／二次）</td><td>中国の3層格付け</td><td>日本には同じ格付けがない。救命救急センター・特定機能病院・地域医療支援病院などで近似することになるが、<strong>一対一の対応はない</strong></td></tr>
+<tr><td><strong>ICU病床割合（ICU床÷病院総床）</strong></td><td>比</td><td><strong>最も再現しやすい</strong>。施設票あるいはDPCの施設情報から算出可能。実際に引用文献23（Sasabuchi ら CCM2015）が日本のデータで同じ比を解析している</td></tr>
+<tr><td>専従医対病床比</td><td>医師数÷ICU床数</td><td>JIPADの施設情報および先行研究で扱われている。既に日本では<strong>時刻を区切った比</strong>（平日10時など）が院内死亡と関連することが示されている</td></tr>
+<tr><td>bed-to-nurse比</td><td>ICU床数÷FTE看護師数</td><td><strong>定義に注意が必要</strong>。日本の議論は診療報酬上のシフト比（常時2対1など）で行われるのに対し、本研究の指標は年間の常勤換算総数ベース。どちらで議論しているかを明示しないと比較にならない</td></tr>
+<tr><td>ICU個室数</td><td>個室の数</td><td>施設調査で取得可能</td></tr>
+<tr><td>ECMO保有</td><td>台数</td><td>取得可能。ただし日本では保有率が中国（15.96%）よりはるかに高いと考えられ、<strong>分散が小さく検出力が出ない可能性</strong>がある</td></tr>
+<tr><td>APACHE II ≥15 の患者割合</td><td>施設単位の重症度指標</td><td>JIPADは患者単位のAPACHE II／III-j／SOFAを持つので、<strong>施設単位に集計すれば再現できる。むしろ日本のほうが精度が高い</strong></td></tr>
+<tr><td>6時間SSCバンドル遵守率</td><td>3項目の完遂率</td><td>全国的な定期収集はない。<strong>再現は困難</strong></td></tr>
+<tr><td>抗菌薬前微生物検査率</td><td>培養実施率</td><td>同上。個別施設のQIとしてなら測定可能</td></tr>
+<tr><td>VAP／CRBSI／CAUTI</td><td>感染サーベイランス</td><td>JANIS等で別系統の収集がある。<strong>JIPADと直接結合されていない</strong>ため、本研究と同じ「1つのデータベース内で構造と感染を突き合わせる」形は取りにくい</td></tr>
+</tbody></table></div>
+<p><strong>まとめ</strong>：<mark class="hl"><strong>日本で最も再現性が高いのは「ICU病床割合」「専従医対病床比」「施設単位の重症度」の3つで、感染アウトカムとプロセス指標は別系統のデータとの連結が必要になる</strong></mark>。JIPAD×DPC連結が進めば、病院総病床数・所有形態を DPC 側から、重症度とアウトカムを JIPAD 側から取る設計が可能になる。</p>
+<h3>外的妥当性で特に注意すべき3点</h3>
+<ol><li><strong>医療提供体制の前提が違う</strong>。中国では公立が非営利かつ価格統制下にあり、民間が営利で保険適用が限られる。日本は公私を問わず国民皆保険下にあり、<strong>「所有形態でアウトカムが変わる」という本研究の最大の所見は、そのまま日本には持ち込めない</strong></li><li><strong>資源の水準が違う</strong>。ICU病床割合の中央値 1.77%、ECMO保有 15.96%、bed-to-nurse比 0.55 という水準は、日本のICUとは分布が異なる。<mark class="hl"><strong>分布が違えば、同じ変数でも「どこに閾値を置くと差が出るか」が変わる</strong></mark></li><li><strong>アウトカムがICU死亡である</strong>。日本のJIPAD研究では院内死亡が主要アウトカムとして使われることが多く、ICU死亡は退室のタイミング（時間外退室・下り搬送）に左右される。<strong>両者を並べて比較しない</strong></li></ol>
+<h2>🔬 批判的吟味（JCでの論点）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この研究の性質 — 生態学的研究であって、個々の患者への因果ではない <mark class="hl"><strong>本研究の観察単位は「施設」であり、曝露もアウトカムも施設単位の集計値である</strong>。したがって得られたのは「施設レベルの関連」にすぎず、「ある患者を専従医の多いICUに入れたら死亡が下がる」という個人レベルの因果を意味しない</mark>（<strong>生態学的誤謬</strong>）。著者ら自身も「横断的デザインのため因果関係は導けない」と明記している。経営会議で使うときは、<strong>「投資の方向を示す地図」であって「効果の保証」ではない</strong>と言い切ること。</p>
+</div>
+<p><strong>1. βの単位が定義されていない（最大の弱点）</strong> 分布族・リンク関数・アウトカムのスケールが本文にない。β = −0.027 が「絶対リスク −2.7%ポイント」なのか「−0.027%ポイント」なのかで、臨床的意味は100倍違う。<strong>効果の大きさを議論できない論文</strong>になっている。ORでもRRでもなく β を提示した理由も説明されていない。</p>
+<p><strong>2. 記述統計のカットオフとモデルのカットオフが食い違う</strong> Table 2 は専従医対病床比を <strong>&lt;0.6 / ≥0.6</strong> で二分しているのに、Fig 1〜4 のモデルは <strong>≥0.8 vs &lt;0.8</strong> を対比している。カットオフを変えた理由も、0.8 を選んだ根拠も本文にない。<strong>変更した閾値で有意にならなかった</strong>という結果なので、閾値選択が結論を左右した可能性は排除できない。同様に bed-to-nurse比は記述もモデルも 0.5 で揃っている。</p>
+<p><strong>3. 民間病院がわずか246施設（8.72%）</strong> 本研究で最も一貫した所見（公立で死亡・VAP・CRBSIが低い）は、<strong>全体の1割にも満たない民間群との比較</strong>で得られている。しかも民間病院は「小規模・専門特化」であることが Discussion で述べられており、<strong>病院規模・診療科構成による強い交絡</strong>が疑われる。所有形態が独立した因子なのか、規模の代理変数なのかは判別できない。</p>
+<p><strong>4. 二次病院のCRBSI中央値が 0 である</strong> サーベイランスが機能していない可能性を検討せずに「二次病院でCRBSIが高い」と結論している。<strong>アウトカムの測定バイアス（報告の質の施設間差）</strong>が構造因子と相関していれば、観測された関連はそのまま「報告の癖の違い」でありうる。<strong>QI研究で最も起きやすい落とし穴</strong>であり、本研究はこれに触れていない。</p>
+<p><strong>5. 粗の結果と調整後の結果が逆転している</strong> CRBSI は粗では三次のほうが高い（0.83 vs 0）のに、調整後は二次で高い（β=0.005、p=0.010）。死亡も粗では三次のほうが高い（8.94% vs 7.14%）が、調整後は種別が有意でなくなる。<strong>どの共変量がこの反転を生んだかの説明がない</strong>（Simpsonのパラドックス的な構図）。段階的にモデルを提示していないため追跡できない。</p>
+<p><strong>6. 共変量選択が「先行文献と単変量解析に基づく」とだけ書かれている</strong> どの変数がどの基準（例：単変量 p&lt;0.10）で採用されたかが記載されておらず、<strong>再現不能</strong>である。10変数が4モデルすべてで同一なのは救いだが、選択過程はブラックボックス。</p>
+<p><strong>7. リストワイズ削除で15.35%を捨てている</strong> 欠測率は変数によって最大12.02%。著者ら自身が限界として挙げているとおり、<strong>欠測が構造因子と関連していれば（例：小規模施設ほど未報告）バイアスは系統的</strong>になる。多重代入を使わなかった理由の説明はない。</p>
+<p><strong>8. Table 2 のSSCバンドル行の数値不整合</strong> 前述のとおり三次＋二次が全体と一致しない。<strong>査読・校正で拾われるべき誤りが残っている</strong>という事実自体が、他の数値の信頼性にもわずかな影を落とす。</p>
+<p><strong>9. Results本文で IQR を「95%CI」と表記している</strong> Table 3 の見出しは Q1, Q3 なので四分位範囲である。<strong>用語の取り違え</strong>。</p>
+<p><strong>10. 有意でなかったことを「関連がない」と読んではいけない</strong> 専従医対病床比・個室・ECMO・SSCバンドル遵守率・微生物検査率は4アウトカムすべてで有意でなかったが、これは <strong>① 曝露の測り方が粗い（年間平均、時刻の区別なし）、② 曝露の分散が小さい、③ アウトカムが死亡という粗い指標</strong>のいずれでも説明できる。日本のJIPAD研究で「平日10時の集中治療医対病床比だけが有意」という結果が出ていることは、<strong>測り方を細かくすると見えてくるものがある</strong>ことの傍証になる。</p>
+<p><strong>11. 参加が自発的である</strong> 質管理に前向きな施設ほど参加しやすい。<strong>参加施設は全国平均より良い成績である可能性が高く</strong>、施設間の分散も実際より小さく見積もられている可能性がある。</p>
+<p><strong>12. プロセス指標を「調整変数」に置いたことの意味</strong> 6時間SSCバンドル遵守率と微生物検査率は、構造の<strong>下流</strong>にあるプロセスである（構造が良ければプロセスが良くなり、その結果アウトカムが良くなる）。これを共変量として調整すると、<strong>構造の効果の一部が吸収されて過小評価される</strong>（中間変数への過剰調整）。この点は本文で議論されていない。</p>
+<h2>📚 主要引用文献一覧（本文が明示的に論拠として使ったもの）</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>看護師配置レベルと院内死亡の関連（開頭術患者、韓国国民健康保険データ）。看護配置と死亡を媒介する変数の議論に使用</td><td>Kim Y, Kim SY, Lee K. BMC Nurs. 2020;19:36</td></tr>
+<tr><td>7</td><td>病院・ICUの組織因子が重症患者のアウトカムに及ぼす影響（EPIC拡張研究）。西洋での先行研究の代表</td><td>Sakr Y, Moreira CL, Rhodes A, et al. Crit Care Med. 2015;43(3):519–26</td></tr>
+<tr><td>9</td><td>広東省の集中治療資源、2005〜2015年の3回の調査。中国の先行研究（地域限定）</td><td>Wu JF, Pei F, Ouyang B, et al. Crit Care Med. 2017;45(12):e1218–25</td></tr>
+<tr><td>10</td><td>北京における急性期人工呼吸の記述・費用・アウトカム。中国の先行研究（地域限定）</td><td>Ye Y, Zhu B, Jiang L, et al. Crit Care Med. 2017;45(7):1160–7</td></tr>
+<tr><td>11</td><td>2019年 中国衛生統計公報。登録病院12,436施設、民間22,424 vs 公立11,930の出典</td><td>National Health Commission of the People's Republic of China. 2020</td></tr>
+<tr><td>12</td><td>本研究の構造指標の定義根拠（2018年中国のSSC 1時間バンドル遵守の報告）</td><td>Wang L, Ma X, He H, et al. Ann Transl Med. 2021;9(4):278</td></tr>
+<tr><td>13</td><td>中国の全国QIプログラムがICUに与えた効果（586病院の対照付き前後コホート）。アウトカム定義の出典でもある</td><td>He H, Ma X, Su L, et al. Crit Care. 2020;24(1):73</td></tr>
+<tr><td>14</td><td>アジア各国・地域の集中治療病床数</td><td>Phua J, Faruq MO, Kulkarni AP, et al. Crit Care Med. 2020;48(5):654–62</td></tr>
+<tr><td>15</td><td>ヨーロッパの集中治療病床数のばらつき</td><td>Rhodes A, Ferdinande P, Flaatten H, et al. Intensive Care Med. 2012;38(10):1647–53</td></tr>
+<tr><td>16</td><td>北米学術医療センターの集中治療組織の記述</td><td>Pastores SM, Halpern NA, Oropello JM, et al. Crit Care Med. 2015;43(10):2239–44</td></tr>
+<tr><td>17</td><td><strong>中国の「重症医学科建設管理指南」。ICU：病院病床比 2〜8% を推奨</strong></td><td>China's Ministry of Health. 2009</td></tr>
+<tr><td>20</td><td>北京の公立病院と民間病院の技術的効率の比較研究</td><td>Jing R, Xu T, Lai X, et al. Int J Environ Res Public Health. 2019;17(1)</td></tr>
+<tr><td>21</td><td>ワシントン州における三次・非三次病院の院内敗血症死亡率の比較</td><td>Salvatierra GG, Gulek BG, Erdik B, et al. J Emerg Med. 2018;54(6):785–92</td></tr>
+<tr><td>22</td><td>集中治療医と看護スタッフが重症患者死亡に与える影響（韓国NHISコホート 2011–2015）</td><td>Lee SH, Hong JH, Kim YS, et al. Yonsei Med J. 2021;62(1):50–8</td></tr>
+<tr><td><strong>23</strong></td><td><strong>重症患者における volume-outcome 関係を ICU：病院病床比との関連で解析（日本のデータ）。本研究のICU病床割合の所見が一致すると引用</strong></td><td><strong>Sasabuchi Y, Yasunaga H, Matsui H, et al. Crit Care Med. 2015;43(6):1239–45</strong></td></tr>
+<tr><td>24</td><td>米国における成人ICU病床供給の病院レベルの変化</td><td>Wallace DJ, Seymour CW, Kahn JM. Crit Care Med. 2017;45(1):e67–76</td></tr>
+<tr><td>25</td><td>人工呼吸中の重症小児における bed-to-nurse比と院内死亡（全国population-based研究）</td><td>Jung M, Park H, Kang D, et al. Ann Intensive Care. 2020;10(1):159</td></tr>
+<tr><td>26</td><td>人工呼吸を受けた高齢者の30日死亡に対する集中治療看護の影響</td><td>Kelly DM, Kutney-Lee A, McHugh MD, et al. Crit Care Med. 2014;42(5):1089–95</td></tr>
+<tr><td>27</td><td>低・中所得国の急性期における看護配置の影響（系統的レビュー）</td><td>Assaye AM, Wiechula R, Schultz TJ, Feo R. JBI Evid Synth. 2021;19(4):751–93</td></tr>
+<tr><td>28</td><td>ICUにおけるスタッフ資源・業務量と患者死亡（多施設観察研究）</td><td>Neuraz A, Guerin C, Payet C, et al. Crit Care Med. 2015;43(8):1587–94</td></tr>
+<tr><td>31</td><td>欠測データの予防と取り扱い（リストワイズ削除のバイアスの根拠）</td><td>Kang H. Korean J Anesthesiol. 2013;64(5):402–6</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 中国2820病院の全国QIデータで、ICU死亡と関連した構造因子は <strong>公立病院（β = −0.018）</strong>、<strong>ICU病床が病院総病床の2%以上（β = −0.027、最強）</strong>、<strong>bed-to-nurse比 0.5以上＝1床あたり看護師2人未満（β = 0.009）</strong> の3つ。<mark class="hl"><strong>専従医対病床比・個室・ECMO保有は4つのアウトカムすべてで有意でなかった</strong></mark>。</p>
+<p><mark class="hl"><strong>ただし本文にリンク関数もアウトカムのスケールも書かれていないため、βの臨床的な大きさは論文から確定できない。「どの方向に効いたか」までで止めて読むこと。</strong></mark></p>
+<p><mark class="hl"><strong>施設単位の生態学的関連であり、個々の患者への因果ではない。経営提案では「投資の方向を示す地図」として引用し、「効果の保証」として引用しない。</strong></mark></p>
+</div>
+<h4>判断の流れ（この論文をどう使うか）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ICU病床数の拡張を経営に提案したい</td><td>自院のICU病床÷病院総病床は何%か。稼働率・重症度・手術室の能力はどうか</td><td>2%という参照値を出発点にする。ただし著者自身の「比だけで決めるな」という留保を必ず併記する</td></tr>
+<tr><td>看護配置の増員を提案したい</td><td>「常時2対1」というシフト比の話か、「1床あたりFTE看護師数」の話か</td><td>指標を明示して混同を避ける。本研究が示したのは後者。前者の議論には別の根拠が要る</td></tr>
+<tr><td>ECMOや個室の投資を正当化したい</td><td>死亡率を根拠にしようとしていないか</td><td>本研究では有意でない。適応症例の受け入れ・感染対策・家族ケアなど別のアウトカムで論じる</td></tr>
+<tr><td>専従医の増員を提案したい</td><td>年間平均の比で語っていないか</td><td>本研究の粗い比では有意にならなかった。日本のデータでは時刻を区切った比（平日日勤帯）で差が出ている。時間帯を分けて示す</td></tr>
+<tr><td>自院の感染率を他施設と比べたい</td><td>相手施設のサーベイランスの精度は分かるか</td><td>二次病院のCRBSI中央値が0という本研究の数字は、報告の癖の差の可能性を示唆する。比較の前に定義と捕捉率を揃える</td></tr>
+<tr><td>日本で同じ解析をしたい</td><td>どの変数がJIPAD／DPCで取れるか</td><td>ICU病床割合・専従医対病床比・施設単位の重症度は再現しやすい。感染アウトカムとプロセス指標は別系統データとの連結が要る</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

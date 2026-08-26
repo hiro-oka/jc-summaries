@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>敗血症性ショックの上室性不整脈にプロパフェノン vs アミオダロン（RCT・ICM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s00134-023-07208-3.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">敗血症性ショックの上室性不整脈にプロパフェノン vs アミオダロン（RCT・ICM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Balik M, Maly M, Brozek T, et al. Propafenone versus amiodarone for supraventricular arrhythmias in septic shock: a randomised controlled trial. Intensive Care Med. 2023;49:1283-1292. doi:10.1007/s00134-023-07208-3</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2023-09-12）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-023-07208-3" target="_blank" rel="noopener">doi.org/10.1007/s00134-023-07208-3</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Propafenone versus amiodarone for supraventricular arrhythmias in septic shock: a randomised controlled trial</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s00134-023-07208-3.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s00134-023-07208-3.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s00134-023-07208-3.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>この論文で当院の治療を変える必要はない</strong>。主要アウトカムの筆頭である「24時間後の洞調律率」は 72.8% vs 67.3%、p = 0.4 で差がない。優越したのは「ランダム化からカルディオバージョンまでの時間」と「再発の少なさ」で、いずれも副次的な性質である。</li><li>それでも<strong>押さえる価値がある3点</strong>：①アミオダロン以外に「血行動態的に安全」と前向きに示された選択肢が1つ増えた、②左房容積係数（LAVI）で薬剤選択が分かれうる、③抗不整脈薬の前に心エコーで前負荷を最適化し電解質を補正する、という手順が明文化された。</li><li><strong>当院で真似できるのは「薬」ではなく「手順」</strong>。本試験はランダム化前に必ず心エコーを行い、前負荷最適化と電解質補正（K・Mg・Ca）を済ませてから抗不整脈薬に進んでいる。ベースラインの K 4.3 mmol/L、Mg 1.22 mmol/L、イオン化 Ca 1.05 mmol/L という「整えてから始める」水準は、当院のプロトコル化にそのまま使える。</li><li><strong>リズムコントロールの目標値</strong>：心拍数 80〜110/分、平均灌流圧 70 mmHg 超。血行動態不安定（灌流圧および／または心拍出量の低下）でDCカルディオバージョンを適応とする。この2つの数字は当院の指示簿にも書ける具体値。</li><li><strong>適用範囲の限定を必ずセットで覚える</strong>：左室駆出率（EF）35% 超、ノルアドレナリン 1.0 µg/kg/min 以下、1度を超える房室ブロックの既往なし、ペースメーカ非依存、Maze術後でない、慢性持続性・永続性AFでない。当院で最も判断に迷う「EF 25% の敗血症性ショックのAF」には本試験は答えていない。</li><li><strong>LAVI ≥ 40 mL/m²（左房拡大）ならアミオダロン寄り</strong> という所見は当院のPOCUS運用と接続する。ただし後述のとおり本文図では p = 0.052 であり、有意水準を満たしていない探索的所見として扱う。</li><li><strong>日本での実務上の制約は本文に記載がない</strong>。静注プロパフェノン製剤の国内での入手可否・保険適用については、この論文には一切書かれていない（チェコの2施設の試験である）。当院で検討する場合は薬剤部への確認が別途必要で、本論文を根拠に「使える」と読んではいけない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong></li><li>上室性不整脈（SVA）は重症患者の 8〜25%（重症度による）に発生し、死亡率の 2〜5倍の上昇と関連する。</li><li>血行動態が不安定な新規発症SVAでは即時のDCカルディオバージョンを要しうるが、二相性除細動は 71% のセッションで即時に洞調律を回復させる一方、心房細動（AF）の早期再発率が高い。抗不整脈薬の併用で洞調律維持率は敗血症性ショック患者で最大 89% に達しうる。</li><li>抗不整脈療法の主軸はアミオダロンで、他剤に比べ心抑制作用が少ないことから選好されてきた。しかし多臓器の副作用があり、甲状腺・肺・肝疾患があって左室収縮機能が正常な患者への使用は現行の循環器ガイドラインに支持されていない（そのガイドライン自体、重症患者にそのまま適用できない）。</li><li>1C群薬は CAST 試験（心疾患集団での長期使用における転帰不良）と用量依存性心毒性の症例報告により忌避されてきた。</li><li><strong>Unknown（分かっていなかったこと）</strong></li><li>プロパフェノンとアミオダロンを敗血症性ショックの SVA で<strong>直接比較した臨床試験がなかった</strong>。同一著者らの後ろ向きパイロット研究（Balik M, et al. J Crit Care 2017;41:16-23）が、プロパフェノンは血行動態に有害な影響なく洞調律回復でアミオダロンより良好で短期・長期転帰にも利益がありうると示唆していたにとどまる。</li><li>プロパフェノンはフレカイニド・エンカイニドと異なり、β遮断薬の化学的基盤であるプロパンジオールアミン由来で、急速脱分極相（phase 0）に作用し、ごくわずかにβアドレナリン受容体にも作用する。フレカイニドと比べて死亡率との関連を示す証拠はないが、敗血症性ショックという文脈での安全性は未検証だった。</li><li><strong>What's new（本研究の新規性・意義）</strong></li><li>敗血症性ショック＋新規発症SVA＋EF 35% 超の 209例を、二重盲検（黒色シリンジ）でプロパフェノン群とアミオダロン群に 1:1 割付した<strong>初の直接比較RCT</strong>。</li><li>24時間後の洞調律率は差がない（72.8% vs 67.3%、p = 0.4）。一方でランダム化からカルディオバージョンまでの中央値は 3.7時間 vs 7.3時間（p = 0.02）とプロパフェノンが速く、不整脈再発は 52% vs 76%（p &lt; 0.001）と少なかった。</li><li><strong>心エコー管理下でのプロパフェノンの血行動態安全性が示された</strong>：薬剤誘発性不整脈ゼロ、伝導障害ゼロ、昇圧薬減量の推移に群間差なし。これは「1C群薬は重症患者に危険」という前提に対する前向きデータである。</li><li>左房拡大（LAVI ≥ 40 mL/m²）例ではアミオダロンのほうがリズムコントロールが良好という<strong>主結果と逆向きの所見</strong>が出た（ただし本文図では p = 0.052）。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症性ショックで EF 35% 超・新規発症の上室性不整脈をもつ 209例の二重盲検RCT。<strong>24時間後の洞調律率は 72.8%（プロパフェノン）vs 67.3%（アミオダロン）で差がなかった（p = 0.4）</strong>。ただしカルディオバージョンまでの時間は <strong>3.7 vs 7.3時間（p = 0.02）</strong> とプロパフェノンが速く、不整脈再発は <strong>52% vs 76%（p &lt; 0.001）</strong> と少なかった。両薬とも血行動態は安全で、死亡・在院期間などの臨床転帰に差はない。</p>
+</div>
+<ul><li><strong>主要アウトカム①（24時間後の洞調律）は陰性</strong>：プロパフェノン 77名（72.8%）vs アミオダロン 71名（67.3%）、p = 0.4。</li><li><strong>主要アウトカム②（洞調律回復までの時間）は陽性</strong>：中央値 3.7時間（95%CI 2.3–6.8）vs 7.3時間（95%CI 5–11）、p = 0.022。単変量Cox解析で、アミオダロンを与えた場合の「発症から6時間を超えてSVAが遷延する」ハザード比は <strong>1.57（95%CI 1.06–2.31）、p = 0.03</strong>。</li><li><strong>主要アウトカム③（不整脈再発）も陽性</strong>：54名（51.9%）vs 80名（76.2%）、p &lt; 0.001。再発が3回を超えた患者は 9名（16.7%）vs 31名（38.8%）、p = 0.006。</li><li>ただし<strong>再発によるDCカルディオバージョンの実施率には差がない</strong>：21名（20.2%）vs 29名（27.6%）、p = 0.2。</li><li><strong>不整脈発症からカルディオバージョンまでの時間で見ると差は消える</strong>：8.5時間（3.3–23.7）vs 11.1時間（5–22.2）、p = 0.2。有意になったのは「ランダム化から」を起点にしたときだけ。</li><li><strong>左房拡大（LAVI ≥ 40 mL/m²、n = 37）ではアミオダロンが良好</strong>（本文 p = 0.05、原図 p = 0.052）。<strong>左房非拡大（LAVI &lt; 40 mL/m²、n = 133）ではプロパフェノンが良好</strong>（本文 p = 0.01、原図 p = 0.0095）。</li><li><strong>血行動態安全性は両群とも良好</strong>：薬剤誘発性不整脈なし、伝導障害なし、抗不整脈薬投与中の昇圧薬減量の推移に群間差なし。24時間時点のノルアドレナリン離脱は 71.6%（73名）vs 65.7%（65名）、p = 0.4。</li><li><strong>臨床転帰に差なし</strong>：ICU死亡 38名（36.5%）vs 43名（41%）、院内・3か月・12か月死亡も有意差なし。ICU退室時の洞調律 61.5% vs 55.2%（p = 0.4）、退院時 76.5% vs 70.5%（p = 0.4）、1年後 74% vs 76%（p = 0.8）。</li><li><strong>ICU在室日数はプロパフェノン群のほうが長い</strong>：16日（12–18）vs 11日（9–14）、<strong>p = 0.03</strong>。著者はアミオダロン群の（有意でない）高い死亡率とプロパフェノン群の有意に高いBMIに帰している。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>上室性不整脈（SVA, supraventricular arrhythmia）</strong> とは、His束より上（心房・房室接合部）を起源とする頻脈性不整脈の総称で、本試験では<strong>心房細動（AF）・心房粗動（flutter）・上室頻拍（SVT）</strong> の3つを指す。本試験の内訳は AF 158名（75.6%）、粗動 41名（19.6%）、SVT 10名（4.8%）だった。</p>
+<p><strong>なぜ敗血症性ショックで問題になるのか</strong>。心房が細動すると、①心房収縮による心室充満（atrial kick、通常は1回拍出量の 15〜30%）が失われ、②心拍数が上がることで拡張期が短縮して充満時間が減る。前負荷依存性が高まっている敗血症性ショックでは、この2つがそのまま心拍出量と灌流圧の低下として現れる。実際、重症患者のSVAは死亡率の 2〜5倍上昇と関連する。</p>
+<p><strong>「レートコントロール」と「リズムコントロール」</strong>。前者は心房細動のまま心拍数だけ下げる（β遮断薬・ジルチアゼムなど）。後者は洞調律に戻す（DCカルディオバージョン・抗不整脈薬）。本試験は後者、しかも<strong>抗不整脈薬2剤の比較</strong>である。</p>
+<p><strong>アミオダロン</strong>：Vaughan Williams III群（K チャネル遮断＋多チャネル作用）。心抑制作用が比較的少ないためICUで第一選択とされてきたが、甲状腺・肺・肝への長期毒性がある。 <strong>プロパフェノン</strong>：Vaughan Williams <strong>1C群</strong>（Na チャネル遮断、脱分極相 phase 0 に作用）。1C群は CAST 試験（エンカイニド／フレカイニドで死亡増加）以来「使ってはいけない薬」の代名詞になっていた。ただしプロパフェノンは化学構造が <strong>プロパンジオールアミン</strong>（β遮断薬の基本骨格）由来で、ごくわずかにβ遮断作用も持つ点でフレカイニドと異なる。1C群共通の懸念は<strong>陰性変力作用</strong>（心収縮力の低下）で、だからこそ本試験は EF 35% 以下を除外している。</p>
+<p><strong>LAVI（indexed end-systolic left atrial volume, 左房収縮末期容積係数）</strong>：左房容積を体表面積で割った指標（mL/m²）。慢性的な左房圧上昇・線維化を反映し、値が大きいほど「心房のリモデリングが進んでいる＝洞調律に戻しても維持しにくい」。本試験では 40 mL/m² を境に層別している。 <strong>TAPSE（tricuspid annular plane systolic excursion）</strong>：三尖弁輪の収縮期移動距離。右室収縮能の簡便な指標で、15 mm 未満で低下とみなす。 <strong>DCカルディオバージョン</strong>：同期下の直流通電。二相性波形で即時成功率 71%（ただし早期再発が多い）。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<ul><li>SVAは重症患者の <strong>8〜25%</strong>（重症度による）に発生し、<strong>死亡率の 2〜5倍の上昇</strong>と関連する。</li><li>血行動態的に不安定な新規発症SVAでは、心拍出量と灌流圧を確保するため<strong>即時のDCカルディオバージョン</strong>を要しうる。二相性モダリティは <strong>71% のセッション</strong>で即時に洞調律を回復させたが、AFの早期再発率が高い。抗不整脈薬の併用でこの効果は改善しうるとされ、敗血症性ショック患者で洞調律維持率は最大 89% という報告がある。</li><li>抗不整脈療法の主軸は<strong>アミオダロン</strong>で、他剤に比べ心抑制作用が少ないことから選好される。しかしその広範な使用は多臓器の副作用と対照的である。甲状腺・肺・肝疾患があり左室収縮機能が正常な患者への使用は、現行の循環器ガイドライン（2016 ESC／2020 ESC AFガイドライン）に支持されていない。ただし著者はそのガイドライン自体、重症患者にそのまま適用できないと注釈している。</li><li><strong>1C群薬</strong>の使用は、心疾患集団での長期使用時の転帰不良を示した CAST 試験と、用量依存的な心毒性を示す少数の症例報告により忌避されてきた。</li><li>しかしプロパフェノンはフレカイニド・エンカイニドと異なり、β遮断薬の化学的基盤である<strong>プロパンジオールアミン由来</strong>で、急速脱分極相（phase 0）に作用し、ごくわずかにβアドレナリン受容体にも作用する（Stoschitzky K, et al. Europace 2016 が 1C群かつ II群の効果を示している）。プロパフェノンはフレカイニドと比べて死亡率との関連を示す証拠がない。</li><li>先行する<strong>後ろ向きパイロット研究</strong>（Balik M, et al. J Crit Care 2017）で、プロパフェノンはSVAの各種サブグループで血行動態への有害な影響なく洞調律回復においてアミオダロンより良好で、短期・長期転帰にも利益がありうると示唆されていた。</li><li><strong>研究目的</strong>：敗血症性ショックの重症患者において、アミオダロンと比較したプロパフェノンの<strong>有効性と血行動態安全性</strong>を評価すること。</li></ul>
+<h3>3. 方法（Methods）📐</h3>
+<h4>デザインと設定</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>前向き・二重盲検・並行群間ランダム化比較試験</td></tr>
+<tr><td>施設</td><td>プラハの大学病院 2施設（General University Hospital／Kralovske Vinohrady University Hospital）</td></tr>
+<tr><td>登録期間</td><td>2017年10月23日 〜 2022年7月2日（COVID-19パンデミックのため延長）</td></tr>
+<tr><td>最終追跡受診</td><td>2023年3月3日</td></tr>
+<tr><td>登録</td><td>NCT03029169（2017年1月24日）。プロトコル論文 BMJ Open 2019;9:e031678</td></tr>
+<tr><td>プロトコル変更</td><td>登録開始後に大きな変更はなかったと明記</td></tr>
+<tr><td>倫理</td><td>第1医学部・General University Hospital 倫理委員会（No. 1691/16S-IV）、第3医学部・Kralovske Vinohrady 倫理委員会（No. EK-VP/39t0t201）。同意は患者の近親者から書面で取得</td></tr>
+<tr><td>データ公開</td><td>匿名化データセットは著者への合理的請求で入手可能</td></tr>
+</tbody></table></div>
+<h4>対象（組み入れ・除外）</h4>
+<ul><li><strong>組み入れ</strong>：<strong>16〜85歳</strong>の成人で、Sepsis-3（2016年定義）の敗血症性ショックがあり、持続する新規発症SVA または 既知の発作性SVA を有する患者。</li><li>SVAは<strong>12誘導心電図</strong>（最も不安定な患者では5誘導解析）で確認。<strong>ランダム化前の不整脈持続時間に制限は設けていない</strong>。</li><li><strong>除外基準</strong>（本文に列挙されたもの）</li><li>重度左室収縮不全（<strong>EF &lt; 35%</strong>）</li><li>1度を超える房室ブロックの既往</li><li>高用量昇圧薬療法（<strong>ノルアドレナリン &gt; 1.0 µg/kg/min</strong>）</li><li>ペースメーカ依存</li><li>Maze術後</li><li>（フローチャートに追加で）敗血症性ショックの不在、慢性持続性AF、別試験への参加、アミオダロンまたはプロパフェノンへの不耐</li><li><strong>慢性持続性・永続性AFのみを除外した理由</strong>：リズムコントロールを目指す際に<strong>左房機能を回復させる余地があるかどうか</strong>による、と明記されている。</li></ul>
+<h4>登録・ランダム化・介入</h4>
+<ul><li>スクリーニングされた患者に<strong>心エコー</strong>を実施し、<strong>前負荷の最適化</strong>と電解質補充を導いた。除外基準に該当せずSVAが持続していれば、非盲検チームのリサーチナースがランダム化した。</li><li>電子症例報告書（eCRF）が <strong>1:1</strong> で割付。</li><li><strong>プロパフェノン群</strong>：静注プロパフェノン <strong>70 mg ボーラス</strong> → 400〜840 mg/24時間の持続投与（黒色シリンジ）。</li><li><strong>アミオダロン群</strong>：静注アミオダロン <strong>300 mg ボーラス</strong> → 600〜1,800 mg/24時間の持続投与（黒色シリンジ）。</li><li><strong>盲検化の方法</strong>は「黒色シリンジ」による遮蔽。用量域が両群で大きく異なるため、投与速度からの推測余地は残る（後述の批判的吟味を参照）。</li><li><strong>リズムコントロールの目標</strong>：<strong>心拍数 80〜110/分</strong>、平均灌流圧 70 mmHg 超。血行動態不安定（灌流圧および／または心拍出量の低下）でDCカルディオバージョンを適応とした。</li><li><strong>モニタリング</strong>：抗不整脈薬持続投与中は<strong>12時間ごとに12誘導心電図</strong>で伝導時間を監視。心エコーはカルディオバージョンまで／カルディオバージョン1時間後／4時間後／血行動態不安定時に反復。</li><li>試験薬投与前（ランダム化と点滴開始の間）に自然にカルディオバージョンした患者も、相応にモニタリングし <strong>ITT解析に含めた</strong>。</li></ul>
+<h4>アウトカム</h4>
+<p><strong>主要アウトカム</strong>（洞調律回復の有効性として、以下を評価）</p>
+<ol><li>試験薬注入開始の <strong>24時間後に洞調律であった患者の割合</strong></li><li><strong>最初の洞調律回復までの時間</strong></li><li><strong>不整脈再発のあった患者の割合</strong></li><li>さらに「<strong>ICU退室時・退院時・ランダム化1年後まで洞調律を維持した患者の割合</strong>」も主要アウトカムの評価項目として本文に記載されている</li></ol>
+<p>→ 主要アウトカムは<strong>全ランダム化例で評価（ITT解析）</strong>。</p>
+<p><strong>事前規定の主要アウトカムのサブグループ解析</strong></p>
+<ul><li>(a) 左房収縮末期容積係数 <strong>LAVI ≥ 40 mL/m² の有無</strong></li><li>(b) <strong>中等度〜重度の右室（RV）機能不全の有無</strong>（中等度〜重度RV拡大＋TAPSE &lt; 15 mm ＋肺高血圧（肺動脈収縮期圧 PAPs &gt; 40 mmHg））</li></ul>
+<p><strong>副次アウトカム</strong></p>
+<ul><li>電気的カルディオバージョンを受けた患者、または<strong>盲検解除して代替抗不整脈薬を投与した患者（クロスオーバー）の累積割合</strong></li><li><strong>ICU死亡・院内死亡・1年死亡</strong>、洞調律の有無、心電図伝導異常、昇圧薬の推移、ICU在室日数</li></ul>
+<h4>解析</h4>
+<ul><li>解析はすべて <strong>R 4.2.2／RStudio 2022.12.0</strong> で実施。</li><li><strong>サンプルサイズ設計</strong>：パイロット後ろ向き研究のデータに基づき、<strong>不整脈発症から24時間以内のカルディオバージョン確率をアミオダロン 75%、プロパフェノン 90% と仮定</strong>。割付比 1:1、α = 0.05、検出力 0.8。→ 各群 100例、計 200例が必要と算出し、脱落 10% を見込んで登録した。</li><li>連続変数は Shapiro–Wilk 検定で正規性を検定し、正規分布でなかったため<strong>中央値と四分位範囲</strong>で表現。二値データは実数と頻度。</li><li>連続変数は <strong>Wilcoxon 検定</strong>、カテゴリ変数は <strong>カイ二乗検定または Fisher 正確検定</strong>。</li><li>主要・副次アウトカムは<strong>カイ二乗検定、時間-イベント解析（Kaplan–Meier ＋ log-rank 検定）、単変量 Cox 回帰</strong>で解析。</li><li>安全性パラメータは <strong>B スプラインを用いた線形混合効果モデル</strong>で群間比較。</li><li>p &lt; 0.05 を有意とし、<mark class="hl"><strong>多重検定に対する p 値の調整は行っていない</strong></mark>（本文に明記）。</li></ul>
+<h3>4. 患者フロー（Figure 1）🔀</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07208-3" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07208-3）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Flow chart of the trial（原図・無改変。©Springer-Verlag GmbH Germany 2023） スクリーニング 458名から除外 249名を経て 209名をランダム化。左枝がプロパフェノン（n = 104）、右枝がアミオダロン（n = 105）。各群の下に「実際に投与された数」「投与されなかった理由」「盲検解除の内訳」が並び、最下段が解析集団。</p>
+</div>
+<h4>Table. CONSORTフローの全数値（原図を表に起こす）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>スクリーニング</td><td>458名</td></tr>
+<tr><td>除外</td><td>249名</td></tr>
+<tr><td>ランダム化</td><td>209名</td></tr>
+<tr><td>├ プロパフェノン群</td><td>104名</td></tr>
+<tr><td>└ アミオダロン群</td><td>105名</td></tr>
+</tbody></table></div>
+<p><strong>除外理由の内訳（249名・原図の記載順）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>除外理由</th><th>n</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックの不在</td><td>140</td></tr>
+<tr><td>重度左室収縮不全</td><td>87</td></tr>
+<tr><td>慢性持続性AF</td><td>84</td></tr>
+<tr><td>ノルアドレナリン &gt; 1.0 µg/kg/min</td><td>61</td></tr>
+<tr><td>1度を超える房室ブロック</td><td>32</td></tr>
+<tr><td>Maze術後</td><td>30</td></tr>
+<tr><td>ペースメーカ依存</td><td>24</td></tr>
+<tr><td>他試験への参加</td><td>22</td></tr>
+<tr><td>アミオダロンまたはプロパフェノンへの不耐</td><td>16</td></tr>
+</tbody></table></div>
+<p>&gt; 理由の合計は 496 で、除外総数 249 を大きく超える。<strong>1人が複数の除外理由をもつ（非排他的な集計）</strong>と読むほかない。</p>
+<p><strong>割付後の内訳</strong></p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>プロパフェノン</th><th>アミオダロン</th></tr></thead>
+<tbody>
+<tr><td>試験薬を受けた（Received）</td><td>97名</td><td>101名</td></tr>
+<tr><td>自然カルディオバージョンのため未投与</td><td>6名</td><td>3名</td></tr>
+<tr><td>死亡のため未投与</td><td>1名</td><td>1名</td></tr>
+<tr><td>血行動態不安定による盲検解除・変更なし</td><td>4名</td><td>2名</td></tr>
+<tr><td>血行動態不安定による盲検解除・クロスオーバー</td><td>3名（→アミオダロン）</td><td>6名（→プロパフェノン）</td></tr>
+<tr><td>最終（フロー最下段）</td><td>103名</td><td>104名</td></tr>
+</tbody></table></div>
+<h4>患者背景の記述（Results 本文）</h4>
+<ul><li>敗血症の主な感染源：<strong>呼吸器 66.5%、腹部 18.7%、尿路 5.3%、創部 4.8%、軟部組織 2.9%、神経系感染 1%</strong>。</li><li>不整脈は <strong>ICU入室から中央値 53時間（12.8–115.7）</strong>後に発生し、患者は<strong>発症から中央値 1.5時間（0.5–4.6）</strong>で抗不整脈療法を受けた。</li><li><strong>カルディオバージョンは抗不整脈療法開始から中央値 6時間（1.8–15.6）</strong>で達成された。</li><li><strong>11名（プロパフェノン 7名、アミオダロン 4名）は抗不整脈薬を受けなかった</strong>（早期の自然カルディオバージョンまたは死亡 2名）。ITT解析には含めた。</li><li>ランダム化 209名のうち<strong>一度もカルディオバージョンしなかったのは 8名（3.8%、アミオダロン 5名・プロパフェノン 3名）</strong>のみで、レートコントロール下のSVAにとどまった。</li><li><strong>抗不整脈薬持続投与の期間は中央値 109.5時間（46.8–186.2）</strong>。</li></ul>
+<h3>5. ベースライン特性（Table 1）📋</h3>
+<h4>Table 1. 患者背景（原表を日本語化。中央値（IQR）または n（%））</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>全体（n = 209）</th><th>プロパフェノン（n = 104）</th><th>アミオダロン（n = 105）</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>67 (12)</td><td>70 (61, 74)</td><td>70 (62, 78)</td></tr>
+<tr><td>女性</td><td>80 (38.3%)</td><td>42 (40.4%)</td><td>38 (36.2%)</td></tr>
+<tr><td>BMI</td><td>29 (25, 33)</td><td>30 (26, 35)</td><td>28 (24, 31)</td></tr>
+<tr><td>SOFA</td><td>10 (8, 12)</td><td>10 (8, 12)</td><td>10 (9, 12)</td></tr>
+<tr><td>APACHE II</td><td>25 (20, 30)</td><td>26 (20, 30)</td><td>25 (20, 30)</td></tr>
+<tr><td>発作性SVAの既往</td><td>37 (17.7%)</td><td>23 (22.1%)</td><td>14 (13.3%)</td></tr>
+<tr><td>組み入れ前の電気的カルディオバージョン</td><td>26 (12.4%)</td><td>14 (13.5%)</td><td>12 (11.4%)</td></tr>
+<tr><td>不整脈型：心房細動</td><td>158 (75.6%)</td><td>78 (75%)</td><td>80 (76.2%)</td></tr>
+<tr><td>不整脈型：心房粗動</td><td>41 (19.6%)</td><td>20 (19.2%)</td><td>21 (20%)</td></tr>
+<tr><td>不整脈型：上室頻拍</td><td>10 (4.8%)</td><td>6 (5.8%)</td><td>4 (3.8%)</td></tr>
+<tr><td>左室駆出率 EF（%）</td><td>55 (48, 68)</td><td>54 (47, 68)</td><td>56 (49, 68)</td></tr>
+<tr><td>LAVI（mL/m²）</td><td>31 (26, 39)</td><td>31 (26, 40)</td><td>30 (25, 38)</td></tr>
+<tr><td>右室機能不全</td><td>61 (37.9%)</td><td>36 (34.6%)</td><td>25 (23.8%)</td></tr>
+<tr><td>ノルアドレナリン（n = 206）（µg/kg/min）</td><td>0.3 (0.15, 0.45)</td><td>0.3 (0.15, 0.41)</td><td>0.28 (0.15, 0.48)</td></tr>
+<tr><td>アルギニン・バソプレシン（n = 55）（IU/h）</td><td>2 (2, 3)</td><td>2 (2, 3.75)</td><td>2 (1, 2.4)</td></tr>
+<tr><td>ドブタミン（n = 11）（µg/kg/min）</td><td>3 (2.75, 3)</td><td>3 (2.5, 3)</td><td>2.75 (2.75, 4)</td></tr>
+<tr><td>カリウム（mmol/L）</td><td>4.3 (4, 4.6)</td><td>4.3 (4, 4.62)</td><td>4.2 (4, 4.5)</td></tr>
+<tr><td>カルシウム（mmol/L）</td><td>1.91 (1.78, 2.05)</td><td>1.9 (1.77, 2.02)</td><td>1.92 (1.8, 2.08)</td></tr>
+<tr><td>イオン化カルシウム（mmol/L）</td><td>1.05 (0.95, 1.12)</td><td>1.05 (0.93, 1.12)</td><td>1.05 (0.97, 1.12)</td></tr>
+<tr><td>マグネシウム（mmol/L）</td><td>1.22 (1, 1.56)</td><td>1.27 (1.03, 1.55)</td><td>1.22 (0.95, 1.57)</td></tr>
+<tr><td>ヘモグロビン（g/L）</td><td>101 (89, 118)</td><td>100 (88, 116)</td><td>104 (92, 121)</td></tr>
+<tr><td>白血球（10³/µL）</td><td>17.4 (12.6, 24.9)</td><td>18 (13, 25)</td><td>16 (12, 23)</td></tr>
+<tr><td>動脈 pH</td><td>7.36 (7.3, 7.41)</td><td>7.36 (7.31, 7.4)</td><td>7.36 (7.29, 7.42)</td></tr>
+<tr><td>動脈 pO₂（kPa）</td><td>10.9 (9.7, 13.4)</td><td>11 (9, 14)</td><td>11 (10, 13)</td></tr>
+<tr><td>動脈 pCO₂（kPa）</td><td>6.4 (5.6, 8)</td><td>6 (5, 8)</td><td>7 (6, 8)</td></tr>
+<tr><td>動脈 BE（mmol/L）</td><td>1.7 (−2.8, 5.5)</td><td>0 (−3, 5)</td><td>3 (−3, 6)</td></tr>
+<tr><td>動脈 HCO₃⁻（mmol/L）</td><td>27 (23, 31)</td><td>26 (22, 31)</td><td>28 (23, 31)</td></tr>
+<tr><td>動脈乳酸（mmol/L）</td><td>2.6 (2.2, 3.6)</td><td>2.55 (2.18, 3.53)</td><td>2.6 (2.2, 3.7)</td></tr>
+<tr><td>体温（℃）</td><td>36.9 (36.4, 37.5)</td><td>37 (36.5, 37.6)</td><td>36.8 (36.2, 37.5)</td></tr>
+<tr><td>CRP（mg/L）</td><td>202 (111, 314)</td><td>202 (116, 314)</td><td>187 (108, 314)</td></tr>
+<tr><td>プロカルシトニン（nmol/mL）</td><td>3.8 (1.02, 17.2)</td><td>3.1 (0.9, 15.7)</td><td>4.2 (1.1, 19.9)</td></tr>
+</tbody></table></div>
+<p><strong>読み方のポイント</strong></p>
+<ul><li>対象は <strong>SOFA 10・APACHE II 25</strong> の重症敗血症性ショックだが、<strong>EF 中央値 55%</strong>（IQR 48–68）と心収縮能は保たれた集団である。除外基準の EF &lt; 35% が効いている。</li><li><strong>ノルアドレナリン中央値 0.3 µg/kg/min</strong>。除外の上限が 1.0 µg/kg/min なので、最重症のショックは含まれない。</li><li><strong>LAVI 中央値 31 mL/m²</strong> で、層別閾値の 40 mL/m² を下回る集団が多数派（78.2%）。</li><li>著者が「群間で臨床的に意味のある差」と認めたのは <strong>BMI（30 vs 28、p = 0.012）だけ</strong>。</li><li>数値上は他にも偏りがある。<strong>右室機能不全 34.6% vs 23.8%</strong>（プロパフェノン群に多い）、<strong>発作性SVAの既往 22.1% vs 13.3%</strong>（同）。いずれも本文で議論されていない。</li><li>右室機能不全の「全体 61(37.9%)」は 61/209 = 29.2% と合わない。分母は右室評価が可能だった症例（約161例）と推測されるが、<strong>本文に分母の説明がない</strong>。</li><li>年齢行は全体列が「67 (12)」（平均±SD の形式）で、群別列は中央値（IQR）と<strong>表記が混在</strong>している。</li></ul>
+<h3>6. 主要アウトカム ⏱️</h3>
+<h4>6-1. 24時間後の洞調律（主要アウトカム①）— 差なし</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>プロパフェノン</th><th>アミオダロン</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>24時間後に洞調律</td><td>77名（72.8%）</td><td>71名（67.3%）</td><td>p = 0.4</td></tr>
+</tbody></table></div>
+<ul><li><strong>これが筆頭の主要アウトカムであり、陰性である</strong>。事前に仮定した「90% vs 75%」という 15ポイントの差に対し、観察された差は 5.5ポイントにとどまった。</li><li>実数と割合が、示されたどの分母とも整合しない。ランダム化例（104／105）なら 77/104 = 74.0%、71/105 = 67.6%。解析集団（103／104）なら 74.8%、68.3%。<strong>論文の 72.8%／67.3% はいずれとも一致しない</strong>（72.8% は 75/103、67.3% は 70/104 に相当する）。分母が明記されていないため検算できない。</li></ul>
+<h4>6-2. カルディオバージョンまでの時間（主要アウトカム②）— プロパフェノンが速い</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>プロパフェノン</th><th>アミオダロン</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>ランダム化からカルディオバージョンまで（中央値・95%CI）</td><td>3.7時間（2.3–6.8）</td><td>7.3時間（5–11）</td><td>p = 0.022（log-rank）</td></tr>
+<tr><td>不整脈発症からカルディオバージョンまで（中央値・IQR）</td><td>8.5時間（3.3–23.7）</td><td>11.1時間（5, 22.2）</td><td>p = 0.2</td></tr>
+</tbody></table></div>
+<ul><li>単変量Cox解析：<strong>発症から6時間を超えてSVAが遷延するハザード比は、アミオダロンでプロパフェノンに対し 1.57（95%CI 1.06–2.31）、p = 0.03</strong>。</li><li><strong>起点を変えると有意差が消える</strong>点は解釈上きわめて重要。「ランダム化から」では p = 0.022 だが、「不整脈発症から」では 8.5 vs 11.1時間で p = 0.2 である。</li></ul>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07208-3" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07208-3）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 未カルディオバージョン患者割合のKaplan–Meier曲線（0〜6時間、log-rank p = 0.022）（原図・無改変。©Springer-Verlag GmbH Germany 2023） 縦軸は「カルディオバージョンしていない患者の割合」（1.00 → 0.00）、横軸は時間（0〜6時間）。赤がアミオダロン、青がプロパフェノン。青が一貫して下方（＝速く洞調律に戻る）。破線は 0.50 との交点で、青は 3.7時間で 50% を下回る。赤は6時間時点でもおよそ 0.57 にとどまり、<strong>プロットされた6時間の窓内では中央値に到達していない</strong>（報告された 7.3時間は図の右端より外側）。</p>
+</div>
+<h4>Table. Figure 2 の number at risk（原図の全数値）</h4>
+<div class="tw"><table>
+<thead><tr><th>時間（h）</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
+<tbody>
+<tr><td>アミオダロン</td><td>105</td><td>89</td><td>80</td><td>75</td><td>70</td><td>66</td><td>60</td></tr>
+<tr><td>プロパフェノン</td><td>104</td><td>78</td><td>68</td><td>57</td><td>51</td><td>46</td><td>44</td></tr>
+</tbody></table></div>
+<p>&gt; 著者は Discussion で「プロパフェノン有利の差が最大になるのは<strong>治療4〜8時間の間</strong>」とし、この時間帯が心エコーで左房機能の回復を評価し、リズムコントロール戦略を決める窓になりうると述べている。</p>
+<h4>6-3. 不整脈再発（主要アウトカム③）— プロパフェノンが少ない</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>プロパフェノン</th><th>アミオダロン</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>投与中に1回以上の不整脈エピソード</td><td>54名（51.9%）</td><td>80名（76.2%）</td><td>p &lt; 0.001</td></tr>
+<tr><td>再発が3回を超えた患者</td><td>9名（16.7%）</td><td>31名（38.8%）</td><td>p = 0.006</td></tr>
+<tr><td>再発によるDCカルディオバージョン</td><td>21名（20.2%）</td><td>29名（27.6%）</td><td>p = 0.2</td></tr>
+</tbody></table></div>
+<ul><li>「3回超の再発」の割合（16.7%／38.8%）は、<strong>再発があった患者（54名／80名）を分母</strong>にしている（9/54 = 16.7%、31/80 = 38.8%）。ランダム化全体を分母にした割合ではない。</li><li><strong>再発は減ったが、再発に対するDC通電の実施率は変わらなかった</strong>（p = 0.2）。臨床的な手間の削減にまでは結びついていない。</li></ul>
+<h4>6-4. 長期の洞調律維持（主要アウトカム④）</h4>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>プロパフェノン</th><th>アミオダロン</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>ICU退室時に洞調律</td><td>64名（61.5%）</td><td>58名（55.2%）</td><td>p = 0.4</td></tr>
+<tr><td>退院時に洞調律</td><td>76.5%</td><td>70.5%</td><td>p = 0.4</td></tr>
+<tr><td>1年後に洞調律を維持</td><td>74%（28名）</td><td>76%（22名）</td><td>p = 0.8</td></tr>
+</tbody></table></div>
+<ul><li><strong>1年時点の分母は極端に小さい</strong>。28名 ÷ 0.74 ≒ 38名、22名 ÷ 0.76 ≒ 29名で、<strong>評価できたのは両群あわせて 70名弱</strong>。ランダム化 209名の3分の1である。</li><li>さらに <strong>1年時点の不整脈の有無は、多くの場合 12誘導心電図ではなく電話での確認</strong>で判定されたと限界に明記されている。抗不整脈薬の記録は ICU退室時が最後。</li><li>Discussion より：<strong>プロパフェノン群の 27%、アミオダロン群の 25% が、1年時点で慢性SVAを有していた</strong>。これは組み入れ時の発作性SVA既往率（17.7%）より高い。著者は「敗血症性ショックによる心筋ストレスが慢性不整脈の発生に及ぼす長期的影響の確認にはさらなる研究が必要」としている。</li></ul>
+<h3>7. サブグループ解析 — 左房径で薬が入れ替わる 🫀</h3>
+<h4>7-1. LAVI 測定法の検証</h4>
+<ul><li>標準化された心電図同期バイプレーン法：<strong>77名（45.3%）、30 mL/m²（23–38）</strong></li><li>心尖部四腔像のモノプレーン法：<strong>93名（54.7%）、33 mL/m²（26–40）</strong></li><li>両者に有意差なし（<strong>p = 0.06</strong>）→ 統合して層別に使用（合計 170名）。</li></ul>
+<h4>7-2. 層別の結果</h4>
+<div class="tw"><table>
+<thead><tr><th>サブグループ</th><th>n（%）</th><th>有利な薬剤</th><th>本文の p値</th><th>原図の p値</th></tr></thead>
+<tbody>
+<tr><td>LAVI ≥ 40 mL/m²（左房拡大あり）</td><td>37（21.8%）</td><td>アミオダロン</td><td>p = 0.05</td><td>p = 0.052</td></tr>
+<tr><td>LAVI &lt; 40 mL/m²（左房拡大なし）</td><td>133（78.2%）</td><td>プロパフェノン</td><td>p = 0.01</td><td>p = 0.0095</td></tr>
+</tbody></table></div>
+<ul><li>抄録の数値：<strong>左房拡大例のカルディオバージョンまでの時間は、アミオダロン 6.4時間（95%CI 3.5–14.1）vs プロパフェノン 18時間（95%CI 2.8–24.7）、p = 0.05</strong>。</li><li>左房拡大例における「1回以上の再発」は <strong>プロパフェノン 65.2%（15名）vs アミオダロン 78.6%（11名）、p = 0.5</strong> で有意差なし。</li><li><strong>右室機能不全のサブグループ</strong>：中等度〜重度RV機能不全の基準を満たしたのは <strong>61名（37.9%）</strong>。プロパフェノンは最初の6時間のカルディオバージョンで有意でないが優位（p = 0.16）。</li></ul>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-023-07208-3" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07208-3）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. LAVI 別の未カルディオバージョン患者割合（A: LAVI ≥ 40 mL/m²、B: LAVI &lt; 40 mL/m²、0〜48時間、Kaplan–Meier／log-rank）（原図・無改変。©Springer-Verlag GmbH Germany 2023） 左パネルA（左房拡大あり）では赤（アミオダロン）が下方に位置し、およそ6時間で 50% を下回るのに対し、青（プロパフェノン）は 18時間まで到達しない。図中の p は <strong>0.052</strong>。右パネルB（左房非拡大）では逆に青が下方で、青はおよそ3〜4時間、赤はおよそ8時間で 50% を切る。図中の p は <strong>0.0095</strong>。</p>
+</div>
+<h4>Table. Figure 3 の number at risk（原図の全数値）</h4>
+<p><strong>パネルA：LAVI ≥ 40 mL/m²（n = 37）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>時間（h）</th><th>0</th><th>6</th><th>12</th><th>18</th><th>24</th><th>30</th><th>36</th><th>42</th><th>48</th></tr></thead>
+<tbody>
+<tr><td>アミオダロン</td><td>14</td><td>8</td><td>4</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>プロパフェノン</td><td>23</td><td>16</td><td>11</td><td>11</td><td>7</td><td>5</td><td>5</td><td>5</td><td>5</td></tr>
+</tbody></table></div>
+<p><strong>パネルB：LAVI &lt; 40 mL/m²（n = 133）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>時間（h）</th><th>0</th><th>6</th><th>12</th><th>18</th><th>24</th><th>30</th><th>36</th><th>42</th><th>48</th></tr></thead>
+<tbody>
+<tr><td>アミオダロン</td><td>69</td><td>40</td><td>27</td><td>20</td><td>16</td><td>13</td><td>12</td><td>11</td><td>9</td></tr>
+<tr><td>プロパフェノン</td><td>64</td><td>26</td><td>17</td><td>9</td><td>7</td><td>4</td><td>4</td><td>3</td><td>2</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>このサブグループを鵜呑みにしない パネルAのアミオダロン群は <strong>開始時 14名</strong>、18時間の時点で <strong>1名</strong>しか残っていない。この規模で描かれた曲線から中央値と95%CI（3.5–14.1時間）を読むのは相当に不安定である。しかも図中の p は 0.052 で、<mark class="hl"><strong>「左房拡大ならアミオダロン」を有意な所見として当院の運用に落とし込むことはできない</strong></mark>。仮説として持ち帰る水準にとどめる。</p>
+</div>
+<h3>8. 副次アウトカムと安全性 🛡️</h3>
+<h4>8-1. 介入の内容（Table 2）</h4>
+<h4>Table 2. 上室性不整脈と介入の特性（原表を日本語化。中央値（IQR））</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>プロパフェノン（n = 104）</th><th>アミオダロン（n = 105）</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>ICU入室から不整脈発症まで（h）</td><td>57 (22, 135)</td><td>46 (7, 104)</td><td>0.13</td></tr>
+<tr><td>不整脈発症から抗不整脈薬開始まで（h）</td><td>1.5 (0.5, 5.5)</td><td>1.5 (0.5, 4.5)</td><td>0.7</td></tr>
+<tr><td>不整脈発症からカルディオバージョンまで（h）</td><td>8.5 (3.3, 23.7)</td><td>11.1 (5, 22.2)</td><td>0.2</td></tr>
+<tr><td>ランダム化からカルディオバージョンまで（h）＊</td><td>3.7 (2.3, 6.8)</td><td>7.3 (5, 11)</td><td>0.02＊＊</td></tr>
+<tr><td>抗不整脈薬投与の期間（h）</td><td>114 (46, 206)</td><td>101 (48, 171)</td><td>0.5</td></tr>
+<tr><td>抗不整脈薬の累積量（mL）</td><td>736 (295, 1204)</td><td>648 (281, 1091)</td><td>記載なし</td></tr>
+<tr><td>抗不整脈薬の累積量（mg）</td><td>2576 (1033, 4214)</td><td>3240 (1405, 5455)</td><td>記載なし</td></tr>
+<tr><td>洞調律の達成</td><td>95 (91.3%)</td><td>93 (88.6%)</td><td>0.5</td></tr>
+<tr><td>組み入れ後の電気的カルディオバージョン</td><td>42 (40.4%)</td><td>34 (32.4%)</td><td>0.2</td></tr>
+<tr><td>ICU在室日数（日）</td><td>16 (12, 18)</td><td>11 (9, 14)</td><td>0.03</td></tr>
+</tbody></table></div>
+<p>＊Kaplan–Meier 解析による中央値と 95%CI ／ ＊＊log-rank 検定</p>
+<p><strong>注目点</strong></p>
+<ul><li><strong>累積投与量</strong>：プロパフェノン 2,576 mg（1,033–4,214）、アミオダロン 3,240 mg（1,405–5,455）。中央値 114時間／101時間の投与に対する量で、いずれもプロトコルの日量域と整合する。</li><li><strong>電気的カルディオバージョンの実施はプロパフェノン群のほうが数値上多い</strong>（40.4% vs 32.4%、p = 0.2）。つまり「カルディオバージョンまでの時間」は薬理学的復調だけでなく<strong>通電による復調も含んだ複合的な指標</strong>である。</li><li><strong>ICU在室日数はプロパフェノン群が 5日長い</strong>（16 vs 11日、p = 0.03）。この試験で有意差がついた数少ない臨床転帰の1つが、プロパフェノンに不利な方向である。</li></ul>
+<h4>8-2. クロスオーバーと追加薬</h4>
+<ul><li><strong>209名中 15名（7.2%）が盲検解除</strong>された。理由は、①難治性で血行動態を破綻させる不整脈によるクロスオーバー（プロパフェノン→アミオダロン <strong>3名</strong>、アミオダロン→プロパフェノン 6名）、②ストレス心筋症のため薬剤変更なく中断（プロパフェノン 4名、アミオダロン 2名）。</li><li>追加抗不整脈薬の使用に群間の有意差なし。試験薬終了時にメトプロロールへ移行した患者は <strong>30名（28.8%）vs 20名（19.2%）、p = 0.10</strong>。</li></ul>
+<h4>8-3. 血行動態安全性</h4>
+<ul><li>解析は<strong>両薬剤の血行動態安全性を確認</strong>した。<strong>薬剤誘発性の不整脈はなかった</strong>。</li><li><strong>抗不整脈薬投与中の昇圧薬の減量幅に群間差はなかった</strong>。</li><li>ノルアドレナリンからの離脱：</li><li><strong>24時間時点</strong>：プロパフェノン <strong>71.6%（73名）</strong> vs アミオダロン 65.7%（65名）、p = 0.4</li><li><strong>28日時点</strong>：プロパフェノン <strong>88.1%（52名）</strong> vs アミオダロン 81%（47名）、p = 0.3</li><li><strong>伝導障害も薬剤関連不整脈もなかった</strong>（心エコー管理下での投与）。著者はこれを「CAST 試験由来の偏見と用量依存性毒性の症例報告にもかかわらず、β遮断薬誘導体であるプロパフェノンの血行動態安全性を証明した」と表現している。</li></ul>
+<h4>8-4. 死亡と転帰</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>プロパフェノン</th><th>アミオダロン</th><th>p値</th></tr></thead>
+<tbody>
+<tr><td>ICU死亡</td><td>38名（36.5%）</td><td>43名（41%）</td><td>p = 0.06（本文表記）</td></tr>
+<tr><td>院内死亡</td><td>有意差なし（ESM 3, e-Fig. 8）</td><td>—</td><td>—</td></tr>
+<tr><td>3か月死亡</td><td>有意差なし（ESM 3, e-Fig. 8）</td><td>—</td><td>—</td></tr>
+<tr><td>12か月死亡</td><td>有意差なし（ESM 3, e-Fig. 9）</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<ul><li><strong>ICU退室時の洞調律の有無は長期転帰に影響しなかった</strong>（p = 0.65、e-Fig. 10 ESM 3）。リズムコントロールの成否が予後に翻訳されなかった、という重要な陰性所見である。</li><li>本文の p = 0.06 という表記は、示された実数（38/104 vs 43/105）から単純なカイ二乗検定で再計算すると <strong>p ≒ 0.5</strong> となり整合しない。Discussion でも「ICU・院内・長期死亡はいずれもプロパフェノン群で有意でなく低かった」と述べられており、<strong>印字された p 値のほうが誤植の可能性が高い</strong>。</li></ul>
+<h3>9. 考察（著者の主張）💭</h3>
+<ul><li>本盲検RCTは、敗血症性ショック患者でプロパフェノンによるリズムコントロール戦略をアミオダロン対照で前向きに検証した。</li><li><strong>プロパフェノンは洞調律をより速く回復させたが、両群でDCカルディオバージョンの実施率が同等であったため、24時間時点の洞調律率に有意差はつかなかった</strong>。</li><li>結果は<strong>心房細動・心房粗動・上室頻拍・発作性SVAの既往の有無のいずれでも変わらなかった</strong>（e-Tables 3–6, ESM 2）。</li><li>プロパフェノンは再発が少なく、右室機能不全例でも（有意ではないが）良好だった。<strong>対照的に、左房拡大例ではアミオダロンのほうがリズムコントロールが良好</strong>だった。</li><li><strong>心エコー管理下で投与したときの両薬の血行動態安全性プロファイルは優れており、伝導障害も薬剤関連不整脈もなかった</strong>。</li><li>プロパフェノンでのより早いカルディオバージョンは循環器領域では既知（Chevalier P, et al. JACC 2003 のメタ解析、Bonora A, et al. Intern Emerg Med 2017 の傾向スコアマッチング）。<strong>プロパフェノン有利の差が最大になるのは治療4〜8時間の間</strong>で、これは心エコーで左房機能の回復を評価しリズムコントロール戦略を決めるための時間窓になりうる。</li><li>死亡率はプロパフェノン群で有意でないが低かった。<strong>検出力不足の可能性</strong>を著者自ら挙げ、その理由として「後ろ向きパイロット研究では重度左室機能不全例がアミオダロン群に多く含まれ、再発SVAが多く死亡率を押し上げていた（＝効果量を過大評価した）」ことを指摘している。</li><li>さらに、リズムコントロール療法の成功率が高かったため<strong>難治性の急性発症SVA群が非常に小さくなり、統計評価に非対称性が生じた</strong>。クロスオーバー例はプロパフェノン側の患者プールを増やし、<strong>2剤の未報告の相乗効果</strong>を表していた可能性がある。</li><li>検体数不足の可能性にもかかわらず、<strong>fragility 解析</strong>（e-Table 7, ESM 2）はプロパフェノン群のより安定したリズムコントロールという結論を支持した。</li><li>本試験は<strong>β遮断薬の有益性の研究</strong>（Balik 2012、Morelli A, et al. JAMA 2013 のエスモロール試験）に、心エコーによる血行動態評価と禁忌の考慮を加えた形で貢献しうる。<strong>プロパフェノン投与前には、重度左室収縮機能障害と伝導障害の既往を除外すべき</strong>である。</li><li>1年時点で慢性SVAを有していたのはプロパフェノン群 27%、アミオダロン群 25%。組み入れ時に除外しなかった発作性非持続性SVAの頻度より高い。</li></ul>
+<h3>10. 著者が挙げた限界 ⚠️</h3>
+<ol><li><strong>無投薬の対照群がない</strong>。急性期患者の自然カルディオバージョン率を考えると、薬理学的介入を行わない第3群があれば抗不整脈療法の利益をより確かに示せた。</li><li><strong>バソプレシンの交絡</strong>。非常に高用量のノルアドレナリン投与例は除外したが、併用された（抗不整脈作用をもちうる）アルギニン・バソプレシンの影響は除外できない。ただし両群でバソプレシンの使用率に差はなかった。</li><li><strong>敗血症性ショックの複雑な治療に伴う多数の共変量の影響</strong>は、広範なベースラインデータで群間差が最小であっても完全には除外できない。</li><li><strong>プロパフェノン群のICU在室日数が長い</strong>のは、アミオダロン群の（有意でない）高い死亡率と、プロパフェノン群の有意に高いBMIの組み合わせに帰しうる（e-Fig. 7, ESM 3）。</li><li><strong>抗不整脈薬の用量は標準化されておらず</strong>、個々の反応と血行動態に応じて調整されたため、結果は用量で補正されていない。</li><li><strong>リズムコントロール vs レートコントロールの優越性を検証する設計ではない</strong>。カルディオバージョンによる血行動態上の効果は転帰データに翻訳されなかった。血行動態不安定時には多くの患者が心房収縮の回復から利益を得うるが、24時間の主要評価項目はそれを反映しない可能性がある。</li><li><strong>1年追跡時の不整脈の有無は、多くの場合 12誘導心電図ではなく電話での確認</strong>によって検証された。抗不整脈薬の最終記録はICU退室時。</li><li><strong>Sepsis-3（2016年）の敗血症性ショック基準の適用は特異度を上げる代わりに感度を欠く</strong>可能性がある。より軽症の敗血症患者でリズムコントロール戦略が有益である可能性は排除できない。</li></ol>
+<h2>🔍 既存ノートとの整合</h2>
+<ul><li><span class="wl">敗血症性ショックの頻脈にランジオロールは無効で有害の可能性（JAMA2023）</span> とは<strong>戦略が異なる</strong>。ランジオロール試験は「レートコントロール」（心拍数を下げる）を検証して陰性〜有害の可能性を示した。本試験は「リズムコントロール」（洞調律に戻す）を前提に、その手段としての抗不整脈薬2剤を比べている。<strong>両者は競合ではなく別の問い</strong>であり、「レートかリズムか」という上位の問いには本試験は答えていない（著者自身が限界6として明記）。</li><li><span class="wl">敗血症性ショックの新規発症心房細動にランジオロールをどう使うか — ボーラスなし1γ開始・初期目標HR 110未満、55項目中39項目が合意（欧州Delphi・CritCare2026）</span> の「初期目標 HR 110/分未満」と、本試験の「HR 80〜110/分」という目標帯は整合する。<strong>上限 110/分は当院で共通の運用値として扱える</strong>。</li><li><span class="wl">ICUの心房細動は6人に1人 — 新規発症13.3%、死亡41.2%対25.2%だが調整後HR 1.38で有意差なし（AFIB-ICU 44施設1415例・CCM2023）</span> は、AF自体が独立した死亡因子とは言い切れないことを示した。本試験でも<strong>洞調律の達成が転帰に翻訳されなかった</strong>（ICU退室時の洞調律の有無は長期転帰に影響せず、p = 0.65）ことは、この方向と一致する。</li><li><span class="wl">心房細動ガイドライン2023 ACC・AHA — 急性疾患・術後のAFは5年で42〜68%再発、敗血症中の抗凝固の利益は不確実（JACC2023）</span> の「急性疾患時のAFは長期に再発する」という指摘は、本試験の<strong>1年時点で 25〜27% が慢性SVA</strong>という所見と符合する。</li><li><span class="wl">心房細動の管理 2024 ESCガイドライン — ICU・周術期に関わる推奨を全件転記（EHJ2024）</span> は本論文の後に出た版であり、本論文が参照している 2016/2020 ESC ガイドラインより新しい。<strong>推奨を確認するときは 2024 版を正とする</strong>。</li><li><strong>旧版のこのノートとの食い違い</strong>（PDF全文照合により訂正した点は後述の「改稿での訂正点」に一覧）。</li></ul>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<p><strong>① 主要アウトカムが複数あり、陰性のものが筆頭にある</strong> 主要アウトカムは①24時間後の洞調律率 ②洞調律回復までの時間 ③再発率 に加え、本文では④ICU退室時・退院時・1年時点の洞調律維持率も主要評価に含めると記載されている。<strong>このうち有意だったのは②と③のみ</strong>。しかも著者は「<strong>多重検定の調整は行っていない</strong>」と明記している。4つ以上の主要評価項目を α = 0.05 のまま検定すれば、少なくとも1つが偶然有意になる確率は相当に高い。抄録の結論が②③を前面に出す構成になっている点は、読み手が意識して割り引く必要がある。</p>
+<p><strong>② サンプルサイズ設計の前提が現実から大きく外れた</strong> 設計時の仮定は「24時間以内のカルディオバージョン率 アミオダロン 75% / プロパフェノン 90%」。実測は <strong>67.3% / 72.8%</strong> で、想定 15ポイント差に対し実測 5.5ポイント差。<strong>主要アウトカム①に対して本試験は明確に検出力不足</strong>である。この仮定は同一著者らの後ろ向きパイロット研究に由来し、著者自身がそのパイロットは重度左室機能不全例がアミオダロン群に偏っていたと認めている（＝効果量が水増しされていた）。「200例で足りる」という計算の土台が崩れている。</p>
+<p><strong>③ 実数と割合が整合しない箇所がある</strong></p>
+<ul><li>24時間後の洞調律：77名（72.8%）／71名（67.3%）。ランダム化例（104/105）でも解析集団（103/104）でも、この実数から当該の割合は出ない。</li><li>抄録は「209名中 <strong>200名（96%）</strong> が試験薬を投与された」とするが、Figure 1 では投与例は <strong>97 + 101 = 198名</strong>、Results 本文は「11名が抗不整脈薬を受けなかった」（209 − 11 = 198）と述べる。200 と 198 が食い違う。</li><li>「一度もカルディオバージョンしなかったのは 8名のみ」なら復調は 201名（96.2%）のはずだが、Table 2 の「洞調律の達成」は 95 + 93 = <strong>188名（90.0%）</strong>。<strong>この2つも食い違う</strong>。</li></ul>
+<p>数値の整合性が複数箇所で崩れており、査読・校正の水準に疑問が残る。</p>
+<p><strong>④ 「速い」は起点の取り方に依存する</strong> 有意差がついた 3.7 vs 7.3時間は「<strong>ランダム化から</strong>」の時間である。「<strong>不整脈発症から</strong>」で測った Table 2 の 8.5 vs 11.1時間は p = 0.2 で有意差がない。臨床的に意味があるのは後者（患者が不整脈に晒された総時間）に近い。抄録は前者だけを載せている。</p>
+<p><strong>⑤ 「カルディオバージョン」に通電が混ざっている</strong> 組み入れ後の電気的カルディオバージョンは <strong>プロパフェノン 40.4% vs アミオダロン 32.4%</strong>（p = 0.2）で、数値上はプロパフェノン群のほうが多い。つまり「速く洞調律に戻った」の一部は通電によるもので、<strong>純粋な薬理学的復調率の比較ではない</strong>。プロトコル上、通電の適応判断（血行動態不安定）は担当医の裁量に委ねられている。</p>
+<p><strong>⑥ サブグループの p 値の丸め</strong> 左房拡大例の解析は、<strong>原図では p = 0.052</strong>（有意水準未達）だが、抄録・本文では <strong>p = 0.05</strong> と表記されている。左房非拡大例も原図 p = 0.0095 が本文 p = 0.01。後者は無害な丸めだが、前者は有意水準をまたぐ方向の丸めであり、「左房拡大ならアミオダロン」という臨床メッセージの根拠が実際より強く見える。さらにこのサブグループはアミオダロン群わずか 14名で、18時間の時点で 1名しか残っていない。</p>
+<p><strong>⑦ 盲検化の実効性</strong> 黒色シリンジで薬剤を遮蔽しているが、<strong>用量域が 400〜840 mg/24h（プロパフェノン）と 600〜1,800 mg/24h（アミオダロン）</strong>と大きく異なり、シリンジ交換頻度や滴定パターンから群を推測できた可能性は残る。DCカルディオバージョンの適応判断が担当医の裁量である以上、この点は主要アウトカム②③に直接影響しうる。</p>
+<p><strong>⑧ ベースラインの偏りが議論されていない</strong> 著者は「臨床的に意味のある差は BMI のみ」とするが、<strong>右室機能不全 34.6% vs 23.8%</strong>、<strong>発作性SVA既往 22.1% vs 13.3%</strong> という偏りがある。いずれもプロパフェノン群に多く、方向としては（発作性SVA既往は再発しやすい方向、RV機能不全は復調しにくい方向）プロパフェノンに不利にも有利にも働きうる。Table 1 に p 値の列が示されておらず、読者が検証できない。</p>
+<p><strong>⑨ 唯一有意だった臨床転帰はプロパフェノンに不利</strong> ICU在室日数 <strong>16日 vs 11日、p = 0.03</strong>。著者は「アミオダロン群で死亡が多い（＝早くICUを離れる）」ことと BMI 差で説明するが、これは<strong>事後的な説明</strong>である。死亡率に差がない以上、5日の在室延長は無視できない。</p>
+<p><strong>⑩ 外的妥当性の枠が狭い</strong> 2施設（プラハ）、EF &gt; 35%、ノルアドレナリン ≤ 1.0 µg/kg/min、ペースメーカ非依存、AVブロックなし。除外理由の内訳を見ると <strong>重度左室収縮不全 87名、ノルアドレナリン高用量 61名</strong> が実際に弾かれている。<strong>当院で最も判断に迷う「心機能が悪い／昇圧薬が多い敗血症性ショックのAF」は、この試験の対象外である</strong>。</p>
+<p><strong>⑪ 登録期間の長さ</strong> 2017年10月から2022年7月まで（COVID-19により延長）の4年9か月。この間に敗血症診療そのもの（SSCG 2021 の公表を含む）が変化しており、時期による診療実践の差が残差交絡になりうる。</p>
+<p><strong>⑫ 1年アウトカムの追跡率</strong> 1年時点で洞調律を評価できたのは概算で両群あわせて 70名弱（ランダム化 209名の3分の1）。ICU死亡だけで 81名いることを考えれば脱落は当然だが、<strong>この分母で「1年後 74% vs 76%、p = 0.8」を語る意味は乏しい</strong>。</p>
+<h2>📚 主要引用文献一覧</h2>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>重症患者における心房細動の管理</td><td>Arrigo M, et al. Crit Care Res Prac 2014;2014:840615</td></tr>
+<tr><td>2</td><td>敗血症の重症患者における新規発症AFの発生率・予測因子・転帰（コホート）</td><td>Klein Klouwenberg PM, et al. Am J Respir Crit Care Med 2016</td></tr>
+<tr><td>3</td><td>敗血症患者の新規発症AFの発生率・危険因子・転帰（システマティックレビュー）</td><td>Kuipers S, et al. Crit Care 2014;18:688</td></tr>
+<tr><td>4</td><td>心臓外科ICUの新規発症AFに対する電気的カルディオバージョンの成績（即時成功71%）</td><td>Arrigo M, et al. Crit Care Med 2015;43:2354-2359</td></tr>
+<tr><td>5</td><td>本試験のパイロット：敗血症性ショックのSVAに対するプロパフェノン（アミオダロン・メトプロロールとの比較・後ろ向き）</td><td>Balik M, et al. J Crit Care 2017;41:16-23</td></tr>
+<tr><td>6</td><td>重症患者の新規発症AFの管理（システマティック・ナラティブレビュー）</td><td>O'Bryan LJ, et al. BMJ Open 2020;10:e034774</td></tr>
+<tr><td>9</td><td>2020 ESC 心房細動診断・管理ガイドライン</td><td>Hindricks G, et al. Eur Heart J 2021;42:373-498</td></tr>
+<tr><td>10</td><td>ICUにおける急性心房細動の管理：国際調査</td><td>Wetterslev M, et al. Acta Anaesthesiol Scand 2022;66:375-385</td></tr>
+<tr><td>12</td><td>2016 ESC 心房細動管理ガイドライン</td><td>Kirchhof P, et al. Eur Heart J 2016;37:2893-2962</td></tr>
+<tr><td>13</td><td>CAST 試験：エンカイニド・フレカイニド・プラセボの死亡率と罹病率</td><td>Echt DS, et al. N Engl J Med 1991;324:781-788</td></tr>
+<tr><td>14</td><td>発症早期AFのカルディオバージョン：アミオダロン vs プラセボ vs 1C群薬（メタ解析）</td><td>Chevalier P, et al. J Am Coll Cardiol 2003;41:255-262</td></tr>
+<tr><td>18</td><td>プロパフェノンは1C群かつII群（β遮断）の抗不整脈作用を示す</td><td>Stoschitzky K, et al. Europace 2016;18:568-571</td></tr>
+<tr><td>20</td><td>AFカルディオバージョン後の洞調律維持のための抗不整脈薬（Cochrane）</td><td>Valembois L, et al. Cochrane Database Syst Rev 2019;9:CD005049</td></tr>
+<tr><td>21</td><td>本試験のプロトコル論文</td><td>Balik M, et al. BMJ Open 2019;9:e031678</td></tr>
+<tr><td>22</td><td>Sepsis-3：敗血症・敗血症性ショックの第3国際コンセンサス定義</td><td>Singer M, et al. JAMA 2016;315:801-810</td></tr>
+<tr><td>25</td><td>発症早期AFの薬理学的カルディオバージョン：アミオダロン vs 1C群薬（傾向スコアマッチング）</td><td>Bonora A, et al. Intern Emerg Med 2017;12:853-859</td></tr>
+<tr><td>26</td><td>カルディオバージョン後の左房機械的機能障害とAF持続期間の関係</td><td>Manning WJ, et al. J Am Coll Cardiol 1994;23:1535-1540</td></tr>
+<tr><td>27</td><td>電気的カルディオバージョン後の洞調律維持を予測する経胸壁心エコー指標（CAPRAF）</td><td>Grundvold I, et al. Cardiology 2008;111:30-35</td></tr>
+<tr><td>30</td><td>敗血症性ショックへのエスモロールによる心拍数制御（RCT）</td><td>Morelli A, et al. JAMA 2013;310:1683-1691</td></tr>
+<tr><td>31</td><td>AFのレートコントロール vs リズムコントロール（AFFIRM）</td><td>Wyse DG, et al. N Engl J Med 2002;347:1825-1833</td></tr>
+<tr><td>32</td><td>心臓外科術後AFのレート vs リズムコントロール</td><td>Gillinov AM, et al. N Engl J Med 2016;374:1911-1921</td></tr>
+<tr><td>33</td><td>再発性持続性AFのレート vs リズムコントロール（RACE）</td><td>Van Gelder IC, et al. N Engl J Med 2002;347:1834-1840</td></tr>
+<tr><td>34</td><td>敗血症性ショックでのβ遮断薬による血行動態最適化に反対する立場</td><td>McLean AS, et al. Intensive Care Med 2016;42:1610-1612</td></tr>
+<tr><td>35</td><td>分布性ショックにおけるバソプレシン併用とAF発生の関連（SR・メタ解析）</td><td>McIntyre WF, et al. JAMA 2018;319:1889-1900</td></tr>
+<tr><td>36</td><td>重症患者の新規発症AF：レートよりリズムコントロールか</td><td>Balik M. Int J Cardiol 2018;266:147-148</td></tr>
+</tbody></table></div>
+<h2>🔧 改稿での訂正点（旧版 → PDF照合後）</h2>
+<p>本ノートは 2026-08-01 の初版が「PDF 1〜5ページのみ・抄録ベース」で書かれていたため、2026-08-15 に<strong>PDF全文（10ページ）を精読して全面改稿</strong>した。旧版から訂正・追加した主な点：</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>旧版の記述</th><th>PDFの正しい記述</th></tr></thead>
+<tbody>
+<tr><td>号数</td><td><code>49(11):1283-1292</code></td><td>紙面表記は <code>49:1283–1292</code>。号数は紙面に印字されていないため削除</td></tr>
+<tr><td>主要アウトカムの数</td><td>「3つ」</td><td>3つ＋「ICU退室時・退院時・1年時点の洞調律維持率」も主要評価に含まれる</td></tr>
+<tr><td>ランダム化の内訳</td><td>記載なし</td><td>スクリーニング 458名、除外 249名、プロパフェノン 104名／アミオダロン 105名</td></tr>
+<tr><td>「200名（96%）が投与」</td><td>そのまま記載</td><td>Figure 1 では 97 + 101 = 198名。本文の「11名が未投与」とも 198。抄録の 200 と食い違う</td></tr>
+<tr><td>除外基準</td><td>4項目</td><td>＋敗血症性ショックの不在、慢性持続性AF、他試験参加、両薬への不耐（各人数もフローに記載）</td></tr>
+<tr><td>洞調律回復までの時間</td><td>「p = 0.02」のみ</td><td>Table 2 が p = 0.02、本文が p = 0.022。さらに「発症からカルディオバージョンまで」は 8.5 vs 11.1時間で p = 0.2（有意差なし）</td></tr>
+<tr><td>効果量</td><td>記載なし</td><td>単変量Cox：HR 1.57（95%CI 1.06–2.31）、p = 0.03（アミオダロンで6時間超のSVA遷延）</td></tr>
+<tr><td>左房拡大サブグループ</td><td>「p = 0.05」</td><td>原図の p は 0.052。本文・抄録の 0.05 は有意水準をまたぐ丸め</td></tr>
+<tr><td>左房非拡大サブグループ</td><td>記載なし</td><td>n = 133（78.2%）でプロパフェノン有利、本文 p = 0.01（原図 p = 0.0095）</td></tr>
+<tr><td>再発の詳細</td><td>総数のみ</td><td>＋3回超の再発 9名（16.7%）vs 31名（38.8%）、p = 0.006／再発によるDC通電 20.2% vs 27.6%、p = 0.2</td></tr>
+<tr><td>有害事象・安全性</td><td>「抽出範囲外」と明記</td><td>薬剤誘発性不整脈ゼロ、伝導障害ゼロ、昇圧薬減量に群間差なし。ノルアドレナリン離脱 24h 71.6% vs 65.7%（p = 0.4）、28日 88.1% vs 81%（p = 0.3）</td></tr>
+<tr><td>死亡</td><td>「抽出範囲外」</td><td>ICU死亡 38名（36.5%）vs 43名（41%）（本文 p = 0.06 だが実数から再計算すると p ≒ 0.5）。院内・3か月・12か月も有意差なし</td></tr>
+<tr><td>ICU在室日数</td><td>記載なし</td><td>16日（12–18）vs 11日（9–14）、p = 0.03。プロパフェノン群のほうが長い（唯一有意な臨床転帰）</td></tr>
+<tr><td>クロスオーバー</td><td>記載なし</td><td>15名（7.2%）が盲検解除。P→A 3名、A→P 6名、変更なし中断 4名／2名（ストレス心筋症）</td></tr>
+<tr><td>サンプルサイズ設計</td><td>記載なし</td><td>アミオダロン 75%／プロパフェノン 90% を仮定、α 0.05・検出力 0.8 で各群100例。実測 67.3%／72.8% で仮定が大きく外れた</td></tr>
+<tr><td>多重比較</td><td>記載なし</td><td>p値は多重検定で調整していない（本文明記）</td></tr>
+<tr><td>1年アウトカム</td><td>記載なし</td><td>74%（28名）vs 76%（22名）、p = 0.8。電話確認が主体。慢性SVAは 27% vs 25%</td></tr>
+<tr><td>図</td><td>なし</td><td>Figure 1（CONSORT）、Figure 2（0–6時間KM）、Figure 3（LAVI別KM）を原図のまま埋め込み、number at risk を全数表化</td></tr>
+<tr><td>「本ノートの制約」警告</td><td>「Results本文は抽出範囲外」</td><td>全文精読により解消。警告を削除</td></tr>
+</tbody></table></div>
+<p>日本での静注プロパフェノン製剤の入手可否・保険適用については、<strong>本論文に記載がない</strong>（旧版でも触れていなかったが、明示的に「本文に無い」と記録しておく）。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 敗血症性ショック＋EF 35%超＋新規発症の上室性不整脈という限定された集団で、<strong>プロパフェノンは24時間後の洞調律率をアミオダロンより高めなかった（72.8% vs 67.3%、p = 0.4）</strong>。速さ（3.7 vs 7.3時間、p = 0.022）と再発の少なさ（52% vs 76%、p &lt; 0.001）で勝ったが、==<strong>死亡は変わらず、ICU在室はむしろ5日長かった（16 vs 11日、p = 0.03）</strong>==。<strong>この試験は「アミオダロンをやめる理由」にはならない</strong>。</p>
+</div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>当院に持ち込むときの安全条件 プロパフェノンは1C群の<strong>陰性変力作用</strong>をもつ薬であり、本試験が安全性を示したのは <mark class="hl"><strong>EF 35%超・ノルアドレナリン 1.0 µg/kg/min以下・房室ブロックなし・ペースメーカ非依存・Maze術後でない患者に、心エコー管理下で投与した場合に限られる</strong></mark>。除外理由の実数（重度左室収縮不全 87名、高用量ノルアドレナリン 61名）が示すとおり、当院で最も判断に迷う低心機能・高用量昇圧薬の症例は<strong>そもそもこの試験に入っていない</strong>。なお日本での静注製剤の入手可否・保険適用は本論文に記載がない。</p>
+</div>
+<h4>判断の流れ（本試験の枠内で読むとき）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックで新規SVAが出た</td><td>まず血行動態が破綻しているか</td><td>破綻していれば即時DCカルディオバージョン（本試験も通電を排除していない）</td></tr>
+<tr><td>薬を足す前</td><td>心エコーで前負荷、K・Mg・イオン化Ca</td><td>前負荷最適化と電解質補正が先。本試験はこれを済ませてからランダム化している</td></tr>
+<tr><td>抗不整脈薬を選ぶ</td><td>EF、ノルアドレナリン量、房室伝導、Maze/ペースメーカ</td><td>EF 35%以下・ノルアド 1.0 µg/kg/min超・AVブロックのいずれかがあれば本試験の外。プロパフェノンの根拠はない</td></tr>
+<tr><td>上記の条件を満たす</td><td>LAVI（左房容積係数）</td><td>LAVI &lt; 40 mL/m² ならプロパフェノンが速い可能性（n = 133、p = 0.01）。LAVI ≥ 40 は探索的（n = 37、原図 p = 0.052）でアミオダロン寄り</td></tr>
+<tr><td>投与中</td><td>12時間ごとの12誘導心電図で伝導時間</td><td>目標は HR 80〜110/分、平均灌流圧 70 mmHg超。血行動態不安定なら通電</td></tr>
+<tr><td>4〜8時間後</td><td>心エコーで左房機能の回復</td><td>著者が「戦略を決める窓」と呼ぶ時間帯。ここでリズム維持を続けるか判断する</td></tr>
+<tr><td>洞調律に戻った</td><td>転帰が変わったと期待してよいか</td><td>本試験では ICU退室時の洞調律の有無は長期転帰に影響しなかった（p = 0.65）。過度な期待はしない</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

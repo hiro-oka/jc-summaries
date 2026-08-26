@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>電子カルテデータをend-to-endで解析するオープンソース基盤ehrapy — AnnData構造でOMOP対応・品質管理から因果推論まで（NatMed2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="s41591-024-03214-0.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">電子カルテデータをend-to-endで解析するオープンソース基盤ehrapy — AnnData構造でOMOP対応・品質管理から因果推論まで（NatMed2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Heumos L, Ehmele P, Treis T, Upmeier zu Belzen J, Roellin E, May L, Namsaraeva A, Horlava N, Shitov VA, Zhang X, Zappia L, Knoll R, Lang NJ, Hetzel L, Virshup I, Sikkema L, Curion F, Eils R, Schiller HB, Hilgendorff A, Theis FJ. An open-source framework for end-to-end analysis of electronic health record data. Nat Med. 2024;30(11):3369-3380. doi:10.1038/s41591-024-03214-0</dd><dt>掲載誌</dt><dd>Nature Medicine（2024-09-12）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1038/s41591-024-03214-0" target="_blank" rel="noopener">doi.org/10.1038/s41591-024-03214-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>An open-source framework for end-to-end analysis of electronic health record data</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/s41591-024-03214-0.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/s41591-024-03214-0.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/s41591-024-03214-0.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>JIPAD × DPC 連結にこの枠組みをどう使うか <strong>① 「連結したあと何をするか」の解析基盤が、本論文でそのまま埋まる。</strong> <span class="wl">★JIPAD Home</span> にある通り、JIPAD×DPC連結アプリは2025年に開発完了し、5施設パイロット（広島大・堺市立総合医療センター・弘前大・<strong>聖路加</strong>・東北大）のデータ収集が終わって処理中。次に来るのが <strong>ICU質指標の自動算出</strong> だが、<mark class="hl">「連結したテーブルをどの構造に置き、どの手順で品質管理し、どうやって結果を他施設と共有するか」は未定義</mark>。ehrapy はその空白を埋める既製の答えを提示している。しかも <span class="wl">重症治療のデータ共有・ハーモナイゼーション24原則 — SCCM Data Science Campaignの系統的レビューと修正Delphi（CCM2025）</span> が「原則」として言葉で示したもの（共通データモデル、メタデータとprovenance、データ品質の限界の透明な文書化、FAIR）を、<strong>動くコードに落としたもの</strong>として読める。SCCM原則＝WHAT、ehrapy＝HOW という対応。</p>
+<p><strong>② データモデルは OMOP CDM を入口に、実体は AnnData に置く。</strong> ehrapy の入出力モジュールは <strong>OMOP・CSV・SQL データベース</strong>（Pandas経由）のリーダを持ち、読み込むと <strong>AnnData（h5ad / Zarr）</strong> オブジェクトになる。AnnData は <code>X</code>（データ行列）・<code>obs</code>（患者/入室単位のメタデータ）・<code>var</code>（変数側のメタデータ、欠測率など）・<code>obsm</code>/<code>varm</code>（PCA・UMAP等の埋め込み）・<code>obsp</code>（患者間の連結行列）・<code>uns</code>（非構造メタデータ）を<strong>次元を常に揃えたまま1ファイルに同梱</strong>する。<mark class="hl">JIPAD側の入室情報を <code>obs</code>、DPC側の診療行為・病名・コストを変数として <code>X</code>/<code>layers</code> に載せる設計が素直</mark>。「行＝入室（visit）、列＝測定量」という ehrapy の規約は、JIPADの1入室1レコードとそのまま一致する。標準としては <strong>OMOP CDM・HL7・FHIR・openEHR</strong> と互換と明記されている。</p>
+<p><strong>③ 再現性の担保方法まで具体的に真似できる。</strong> 著者らは解析本体（https://github.com/theislab/ehrapy ・Apache 2.0・PyPI配布）と<strong>再現用リポジトリを分離</strong>している：<strong>https://github.com/theislab/ehrapy-reproducibility</strong> に、図表を再現する <strong>Jupyter notebook</strong> と <mark class="hl">全パッケージのバージョンを固定した Conda 環境定義</mark> が入っている。JIPAD二次利用研究（40件超）で「どの解析コードで、どのバージョンで、どの前処理で出した数字か」を問われる場面が必ず来る。<strong>論文＝結果、別リポジトリ＝環境固定つきノートブック</strong>という二本立てを、JIPAD×DPCの最初の論文でそのまま採用したい。AnnData がプラットフォーム非依存に保存・読み出しできるため、<strong>中間生成物ごと共有できる</strong>のが従来のCSV+Rスクリプト運用との最大の差。</p>
+<p><strong>④ 「連結したら見えてしまうバイアス」を先に測る道具が入っている。</strong> JIPAD×DPC連結は施設ごとに入力方式が違う（FileMaker手入力が残る施設あり＝<span class="wl">★JIPAD Home</span> 記載の課題）。ehrapy の <strong>CohortTracker</strong>（tableone + participant flow diagram）は、<mark class="hl">絞り込みのたびに集団の年齢・人種等の分布がどう動いたかを追跡して図にする</mark>。本論文の糖尿病130病院データの例では、Medicare受給者に絞った瞬間に60歳超へ分布が寄り白人比率が上がることを検出している。<strong>「除外基準を1つ足すたびに集団がどう歪むか」を figure にできる</strong>のは、多施設DBの限界を透明に書く（＝SCCM原則）ための実務的な武器。</p>
+<p><strong>⑤ 因果推論を「連結データの目玉」に据えられる。</strong> DPC連結の価値は薬剤・処置・コストが入ること。ehrapy の causal モジュールは <strong>dowhy</strong> ベースで、①因果グラフの明示 →②推定可能性の同定 →③効果推定 →④<strong>反証（refutation）とsensitivity analysis</strong> の4段階を強制する。本論文では小児肺炎で薬剤クラス→ICU在室日数の因果効果を推定し、プラセボ処置・ランダム共通原因・未観測共通原因による反証を行っている。<mark class="hl">「連結できたので回帰しました」ではなく「因果グラフを描いて反証まで回しました」を最初から標準手順にする</mark> ことが、<span class="wl">因果の言葉と関連の言葉をどう使い分けるか — 問いが因果なら causal language が必要（BMJ2026）</span> とも整合する。</p>
+<p><strong>⑥ ただし当院/JIPADで採用する前の留保。</strong> ehrapy は <strong>GPU非対応</strong>で、依存ライブラリ（NumPy/scikit-learn等）の制約をそのまま継承する。ベンチマークは UKB の 261変数×488,170 visit を <strong>8スレッド1CPU・最大60GBメモリ</strong>で回した規模で、JIPAD 64万例なら Dask のout-of-core実装が要る（チュートリアルでは 50,000患者×1,000変数のin-memory約2GB → out-of-core 200MB未満）。<mark class="hl">筆頭著者の所属企業製ライブラリ（Bionty）依存という COI も踏まえ、「JIPADの正式基盤」ではなく「二次利用解析の推奨ツールチェーンの一案」として提案するのが現実的</mark>。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="tw"><table>
+<thead><tr><th></th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>Known（既知）</strong></td><td>医療のデジタル化でEHRの大規模蓄積は常態化した。EHRデータから疾患予測・集団健康・最適治療方針・臨床試験シミュレーション・患者層別化ができることは示されてきた。一方でEHRは非標準フォーマット（HL7・FHIR、CSV/XML/JSON/RDB）に散らばり、選択バイアス・フィルタリングバイアス・サーベイランスバイアス・情報/コーディングバイアス・脱落/交絡バイアス、そして MCAR/MAR/MNAR の欠測に晒される。オミクス分野には Bioconductor や scverse という共同体標準があるが、<strong>EHRには無い</strong></td></tr>
+<tr><td><strong>Unknown（未解明）</strong></td><td>異種混在（デモグラ・検査・バイタル・診断・薬剤・画像・自由文・オミクス）のEHRを、<strong>探索的に</strong>扱える拡張可能な共通基盤が存在しない。既存のEHR前処理ワークフローは、異種データ非対応・文書不足・パッケージ化されていない・探索的可視化ができない、のいずれかに該当し、多くはベンダー固有の商用解。結果としてEHRは特定の1つの研究設問のためだけに使われ、品質問題を抱えたまま機械学習に投入されがち</td></tr>
+<tr><td><strong>What's new（新規性）</strong></td><td><strong>ehrapy</strong>（EHR Analysis in Python）を提示。単一細胞解析の <strong>AnnData</strong> 構造と <strong>scanpy</strong> を EHR に転用し、データ読込→品質管理→欠測補完→エンコード→正規化→統合→次元圧縮→クラスタリング→<strong>統計比較・生存解析・因果推論・軌跡推論</strong>まで <strong>100以上の合成可能な関数</strong>を1つのオブジェクト上で回す。ベンダーロックインなし、Apache 2.0、20以上の公開EHRデータセット同梱。<strong>6つの実証</strong>（小児肺炎の層別化／肝酵素バイオマーカー×生存／薬剤クラス→在室日数の因果効果／UKBの心筋梗塞リスク多モダリティ予測／COVID-19胸部X線の擬似時間による重症度軌跡／糖尿病130病院データのバイアス検出と是正）で汎用性を示した</td></tr>
+</tbody></table></div>
+<h2>📌 全体要約</h2>
+<ul><li><strong>ehrapy</strong> は EHR・疫学データの<strong>探索的解析</strong>のためのモジュール式オープンソース Python フレームワーク。ベクトル化（構造化テーブル）できるデータならどのEHRにも適用できる。</li><li>中核は <strong>AnnData</strong>。データ行列とその注釈（観測＝患者/入室、変数＝測定量）を常に次元を揃えて保持し、途中結果（PCA・UMAP・近傍グラフ・統計結果）をすべて同じオブジェクトに書き戻す。<strong>h5ad / Zarr でプラットフォーム非依存に保存・共有</strong>できる。</li><li><strong>6つのユースケース</strong>で実証：①PIC（中国・小児ICU）で「詳細不明の肺炎」を4群に層別化、②肝酵素（AST/ALT/GGT）を生存と紐づけてバイオマーカー化、③薬剤クラスのICU在室日数への因果効果を dowhy ベースで定量、④UK Biobank で心筋梗塞リスクを多モダリティ統合し <strong>C-index 0.81</strong>、⑤COVID-19 胸部X線 192枚を擬似時間で重症度軌跡に並べる、⑥糖尿病130病院10万件超で選択・サーベイランス・正規化・補完・予測の各バイアスを検出し Fairlearn で緩和。</li><li><strong>標準との互換</strong>：OMOP CDM・HL7・FHIR・openEHR、および一般的な表形式。<strong>オントロジー</strong>は Bionty 経由で Human Phenotype・Phecodes・Phenotype and Trait・Drug・Mondo・Human Disease に対応。自由文からの医学用語抽出は <strong>MedCAT</strong>。</li><li>著者らの結論：<mark class="hl">ehrapy が EHR解析パイプラインを標準化し、EHR版「アトラス」やクエリ→参照マッピング、さらに医療基盤モデル（foundation model）の土台になる</mark>。将来は CELLxGENE / UCSC Cell Browser のような対話的EHRエクスプローラを構想。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. ehrapy が束ねているツール群（名称・用途・入手先）</h3>
+<p>再現・移植する際に「どのライブラリに依存しているか」がそのまま検証可能性になるため、原著記載を転記する。</p>
+<div class="tw"><table>
+<thead><tr><th>層</th><th>ツール／手法</th><th>用途</th><th>入手先・出典</th></tr></thead>
+<tbody>
+<tr><td><strong>本体</strong></td><td><strong>ehrapy</strong></td><td>EHR解析フレームワーク本体（100以上の合成可能関数）。Apache 2.0、PyPI配布</td><td>https://github.com/theislab/ehrapy ／ 文書・チュートリアル https://ehrapy.readthedocs.io</td></tr>
+<tr><td><strong>再現性</strong></td><td><strong>ehrapy-reproducibility</strong></td><td>本論文の解析・図を再現する <strong>Jupyter notebook</strong> ＋ <strong>全バージョンを固定した Conda 環境</strong>。ベンチマークコードも同梱</td><td>https://github.com/theislab/ehrapy-reproducibility</td></tr>
+<tr><td><strong>データ構造</strong></td><td><strong>AnnData</strong></td><td><code>X</code>／<code>layers</code>／<code>obs</code>／<code>var</code>／<code>obsm</code>／<code>varm</code>／<code>obsp</code>／<code>uns</code> を次元整合のまま保持。h5ad・Zarr で保存</td><td>scverse エコシステム。R・Julia・JavaScript のリーダも存在</td></tr>
+<tr><td>大規模化</td><td><strong>Dask</strong></td><td>out-of-core（メモリに載らないデータ）計算。正規化・PCA等が対応</td><td>例：50,000患者×1,000変数で in-memory 約2GB → out-of-core <strong>200MB未満</strong></td></tr>
+<tr><td>不揃い時系列</td><td><strong>Awkward Array</strong></td><td>次元が揃わない ragged データの格納</td><td>—</td></tr>
+<tr><td>疎行列/密行列</td><td>SciPy sparse ／ NumPy</td><td>効率的格納／汎用</td><td>—</td></tr>
+<tr><td><strong>入出力</strong></td><td>OMOP リーダ・CSV・SQL（Pandas経由）</td><td>読込。20以上の公開EHRデータセットを同梱（パーキンソン病・乳癌・慢性腎臓病ほか）</td><td>ehrapy <code>data</code> モジュール</td></tr>
+<tr><td><strong>オントロジー</strong></td><td><strong>Bionty</strong></td><td>メタデータをオントロジーにマッピング（Human Phenotype／Phecodes／Phenotype and Trait／Drug／Mondo／Human Disease）</td><td>https://github.com/laminlabs/bionty-base <mark class="hl">（筆頭著者の勤務先 LaminLabs 製＝COI）</mark></td></tr>
+<tr><td><strong>自由文</strong></td><td><strong>MedCAT</strong>（Medical Concept Annotation Toolkit）</td><td>自由文ノートからの医学概念抽出</td><td>Kraljevic et al. Artif Intell Med 2021</td></tr>
+<tr><td><strong>コホート追跡</strong></td><td><strong>CohortTracker</strong></td><td>フィルタ操作ごとの集団の変化を追跡。<strong>tableone</strong> で要約統計、<strong>participant flow diagram</strong> で可視化</td><td>tableone: Pollard et al. JAMIA Open 2018</td></tr>
+<tr><td><strong>品質管理</strong></td><td>欠測率算出／Winsorization／feature clipping／<strong>bias検出</strong>（対相関・標準化平均差・カテゴリ度数差・特徴量重要度）／<strong>Little's MCAR test</strong>／特徴量要約</td><td>前処理前の点検</td><td>Little RJA（1988）実装</td></tr>
+<tr><td><strong>欠測補完</strong></td><td>Explicit／Simple（平均・中央値・最頻値）／<strong>KNN</strong>／<strong>MissForest</strong>／<strong>MICE</strong></td><td>単一補完は分散を過小評価するため、MCAR/MAR では多重補完を推奨</td><td>MICE実装は <strong>miceforest</strong>（https://github.com/AnotherSamWilson/miceforest ）</td></tr>
+<tr><td><strong>エンコード</strong></td><td>One-Hot／Label Encoding</td><td>カテゴリ→数値</td><td>scikit-learn</td></tr>
+<tr><td><strong>正規化</strong></td><td>Log／Max-Abs／Min-Max／Power transformation／Quantile／Robust scaling／Scaling／Offset to positive</td><td>異種分布の整列</td><td>—</td></tr>
+<tr><td><strong>バッチ補正</strong></td><td><strong>ComBat</strong></td><td>データセットシフト（施設間差）の補正。パラメトリック／ノンパラメトリック経験ベイズ</td><td>scanpy 実装</td></tr>
+<tr><td><strong>埋め込み</strong></td><td>t-SNE／<strong>UMAP</strong>／Force-directed graph／Diffusion maps／密度計算</td><td>低次元表現</td><td>scanpy 実装</td></tr>
+<tr><td><strong>クラスタリング</strong></td><td><strong>Leiden</strong>／階層クラスタリング（デンドログラム）</td><td>患者層別化</td><td>scanpy 実装</td></tr>
+<tr><td><strong>特徴量ランキング</strong></td><td>scanpy <code>rank_genes_groups</code> を拡張（数値＝t検定、<strong>カテゴリ＝g検定</strong>）／特徴量重要度（線形回帰・SVM・ランダムフォレスト）</td><td>群間マーカー抽出</td><td>多重比較は Benjamini-Hochberg</td></tr>
+<tr><td><strong>データセット統合</strong></td><td>scanpy <code>ingest</code></td><td>注釈済み参照データからラベル・埋め込みを新データへ転移</td><td>—</td></tr>
+<tr><td><strong>生存解析</strong></td><td><strong>lifelines</strong> ベース：OLS／GLM／<strong>Kaplan-Meier</strong>／<strong>Cox比例ハザード</strong>／log-rank検定／GLM比較</td><td>生存・時間依存アウトカム</td><td>Davidson-Pilon, JOSS 2019</td></tr>
+<tr><td><strong>軌跡推論</strong></td><td><strong>Diffusion Pseudotime</strong>／<strong>PAGA</strong>。scverse互換のため CellRank も利用可</td><td>スナップショットの時間的順序づけ</td><td>scanpy 実装</td></tr>
+<tr><td><strong>因果推論</strong></td><td><strong>dowhy</strong> ベース：①因果グラフ指定 →②効果の同定 →③効果推定（マッチング・操作変数・回帰）→④<strong>sensitivity analysis と反証テスト</strong></td><td>介入効果の定量</td><td>—</td></tr>
+<tr><td><strong>公平性</strong></td><td><strong>Fairlearn</strong>（ThresholdOptimizer）</td><td>予測モデルのバイアス緩和</td><td>https://github.com/fairlearn</td></tr>
+<tr><td><strong>深層学習連携</strong></td><td><strong>scvi-tools</strong>（AnnData→PyTorch/Jax のデータローダ）／<strong>pathml</strong>（病理全スライド画像）</td><td>医療基盤モデル開発への橋渡し</td><td>—</td></tr>
+<tr><td><strong>画像特徴</strong></td><td>事前学習 <strong>DenseNet</strong>（TorchXRayVision 系）</td><td>胸部X線の生画像を特徴ベクトル化</td><td>Cohen et al.</td></tr>
+<tr><td>基盤ライブラリ</td><td>matplotlib／seaborn／NumPy／numba／SciPy／scikit-learn／pandas</td><td>—</td><td><mark class="hl">GPU非対応、Python↔C 変換コストによる性能損失は継承</mark></td></tr>
+</tbody></table></div>
+<h3>2. ユースケース①〜③：PIC（小児ICU）データベース</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>データベース</td><td><strong>PIC</strong>（Paediatric Intensive Care、浙江大学医学院附属児童病院・単施設）</td></tr>
+<tr><td>期間・規模</td><td>2010〜2018年、<strong>13,499入院／12,881名</strong>の小児</td></tr>
+<tr><td>収録内容</td><td>デモグラフィック、診断、医師記録（自由文）、バイタル、検査、細菌検査、薬剤、水分バランス等</td></tr>
+<tr><td>全患者のICD章</td><td>最多は Malformations（n=4,053）、Perinatal（1,864）、<strong>Respiratory（1,276）</strong>、Digestive（985）、Nervous（931）、Neoplasm（851）、Cardiovascular（837）</td></tr>
+<tr><td>呼吸器カテゴリ</td><td>「Influenza and pneumonia」が最多（<strong>n=984</strong>）</td></tr>
+<tr><td>解析対象</td><td><strong>youths（生後13か月〜18歳）の「詳細不明の肺炎（unspecified pneumonia）」265名／277入院</strong>。新生児（0〜28日）・乳児（29日〜12か月）は病態が異なるため除外</td></tr>
+<tr><td>背景</td><td>男児 <strong>61%</strong>、平均年齢 <strong>54か月</strong>（中央値38か月）、平均在室 <strong>15日</strong>（中央値7日）</td></tr>
+<tr><td>入室ユニット</td><td>PICU 152／GICU 118／SICU 4／CICU 3</td></tr>
+<tr><td>欠測率</td><td>検査値は概ね <strong>12〜14%</strong>。ただし <strong>PCT 24.5%</strong>、<strong>CRP 16.8%</strong>。<strong>バイタルサインは44〜54%</strong></td></tr>
+</tbody></table></div>
+<p><strong>Leiden クラスタリングで得た4つの表現型</strong>（UMAP＋kNNグラフ、t検定＋g検定で特徴づけ）</p>
+<div class="tw"><table>
+<thead><tr><th>表現型</th><th>n</th><th>主な特徴（原著記載の代表値）</th></tr></thead>
+<tbody>
+<tr><td><strong>Sepsis-like pneumonia</strong></td><td>28</td><td>死亡増加（<strong>43%</strong>、95%CI 23–62%、adj. P ≤ 5.04×10⁻³）。多臓器障害（Cre 52.74±23.71 μmol/L、Alb 33.40±6.78 g/L）。PCT 1.42±2.03 ng/mL、血小板低下 159.30±142.00×10⁹/L、K低下 3.14±0.54 mmol/L</td></tr>
+<tr><td><strong>Severe pneumonia with co-infection</strong></td><td>74</td><td>ICU在室延長（15.01±29.24日、adj. P ≤ 3.59×10⁻⁴）。CRP 50.60±37.58 mg/L、好中球 13.01±6.98×10⁹/L。喀痰から細菌＋真菌検出（26%、95%CI 16–36%）。抗真菌薬 15%（7–23%）、カテコラミン 45%（33–56%）</td></tr>
+<tr><td><strong>Mild bacterial pneumonia</strong></td><td>78</td><td>喀痰培養陽性だが炎症マーカー（PCT 1.42±2.03 ng/mL、CRP 50.60±37.58 mg/L）は相対的に低い。抗菌薬投与 <strong>80%</strong>（70–89%）、追加薬剤（電解質・抗凝固・循環作動薬）82%（73–91%）</td></tr>
+<tr><td><strong>Viral pneumonia</strong></td><td>97</td><td>在室短い（adj. P ≤ 8.00×10⁻⁶）。非ウイルス病原体の検出なし、リンパ球高値 4.11±2.49×10⁹/L、PCT 低値。カテコラミン 15%（8–23%）、抗菌薬 41%（31–51%）、抗真菌薬 <strong>0%</strong>（0–0%）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>原著内の数値の食い違いと採用値 ==4群の n は 28+74+78+97 = <strong>277</strong>＝「入院（admission）数」に一致し、患者数265とは一致しない<mark class="hl">。ehrapy の規約どおり<strong>観測単位が visit（入室）</strong>であるためと解される。本ノートは <strong>Fig.2e 記載の n（28／74／78／97）を採用</strong>した。 一方 <strong>Fig.3b の Kaplan-Meier 曲線の凡例では n が異なる</strong>（viral 94／mild 58／sepsis-like 28／severe <strong>25</strong>）。生存解析に投入できた症例のみに縮小したためと考えられるが、</mark>原著に明示的な説明はない==。したがって「群サイズ」を引用するときは Fig.2e の値、「生存解析の対象数」を引用するときは Fig.3b の値、と使い分ける必要がある。 個々の平均±SDの値（例：PCT 1.42±2.03、血小板 159.30±142.00）は<strong>複数の群の記述で同一の数値が繰り返し登場</strong>しており、群別平均ではなく<strong>全体の記述統計</strong>を併記したものと読める。群間比較として引用するのは避ける。</p>
+</div>
+<p><strong>生存解析（ユースケース②）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>4群のKaplan-Meier比較（多変量log-rank）</td><td><strong>P ≤ 1.09×10⁻¹⁸</strong>。sepsis-like と severe with co-infection で生存低下</td></tr>
+<tr><td><strong>GGT</strong> 基準値外</td><td>生存低下（<strong>P ≤ 1.4×10⁻²</strong>、58.01±2.03 U/L）</td></tr>
+<tr><td><strong>ALT</strong> 基準値外</td><td>生存低下（<strong>P ≤ 2.9×10⁻²</strong>、43.59±38.02 U/L）</td></tr>
+<tr><td><strong>AST</strong> 基準値外</td><td>生存低下（<strong>P ≤ 4.8×10⁻⁴</strong>、78.69±60.03 U/L）</td></tr>
+<tr><td><strong>ビリルビン</strong></td><td><mark class="hl">有意差なし</mark>（P ≤ 2.1×10⁻¹、12.57±21.22 mg/dL）</td></tr>
+</tbody></table></div>
+<p><strong>因果推論：薬剤クラス → ICU在室日数（ユースケース③）</strong></p>
+<p>因果グラフは手動構築。<strong>交絡/中間変数</strong>＝年齢、肝障害（AST・ALT・GGT）、高度炎症（CRP・PCT）。<strong>介入</strong>＝ステロイド、カルバペネム、ペニシリン、セファロスポリン、抗真菌薬、抗ウイルス薬。<strong>アウトカム</strong>＝ICU在室日数。</p>
+<div class="tw"><table>
+<thead><tr><th>薬剤クラス</th><th>在室日数への推定因果効果の向き</th></tr></thead>
+<tbody>
+<tr><td>抗ウイルス薬</td><td><strong>短縮</strong></td></tr>
+<tr><td>ステロイド</td><td><strong>短縮</strong></td></tr>
+<tr><td>カルバペネム</td><td><strong>短縮</strong></td></tr>
+<tr><td>抗真菌薬</td><td>ほぼ影響なし</td></tr>
+<tr><td>ペニシリン</td><td><strong>延長</strong></td></tr>
+<tr><td>セファロスポリン</td><td><strong>延長</strong></td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>数値の扱い <mark class="hl">効果量（日数）は Fig.4c の棒グラフにしか示されておらず、軸の範囲が −4 〜 +4 日であること以外は本文に数値が無い。個別の推定値は「原図参照」とし、本ノートでは補完しない。</mark> 著者ら自身の限界の記載：SOFAスコアや肺炎起因菌が因果グラフに入っていない（データ制約）。過学習・過剰解釈のリスクがあるため、<strong>プラセボ処置・ランダム共通原因・未観測共通原因</strong>による反証を実施した。ペニシリン／セファロスポリンで在室が延びたのは、耐性・第一選択としての使用・初期重症度の高さ・併存症・施設プロトコルに由来する<strong>データセット固有の所見の可能性がある</strong>と明記。</p>
+</div>
+<h3>3. ユースケース④：UK Biobank における心筋梗塞リスク</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>コホート</td><td>UK Biobank <strong>502,359名</strong>、<strong>22アセスメントセンター</strong></td></tr>
+<tr><td>モダリティ被覆</td><td>遺伝 97%、身体計測 93%。代謝・網膜画像・プロテオミクスは少数</td></tr>
+<tr><td>解析対象</td><td>全モダリティが揃う <strong>29,216名</strong>（欠測10%超の特徴量は除外、残りは補完。サンプリング後1年以内のイベント発生者は除外）</td></tr>
+<tr><td>特徴量セット</td><td>冠動脈疾患の <strong>polygenic risk score（660万バリアント）</strong>／<strong>NMR代謝物 80特徴</strong>／<strong>網膜OCT由来 81特徴</strong>／<strong>Framingham Risk Score</strong> の臨床予測子（年齢・性・BMI・血圧・喫煙・コレステロール）</td></tr>
+<tr><td>エンドポイント</td><td>心筋梗塞（phecode へのマッピングで定義）。イベント初発年齢を time-to-event、死亡日または最終記録日を打ち切り</td></tr>
+<tr><td>発生</td><td>男性 <strong>15%</strong>、女性 <strong>7%</strong></td></tr>
+<tr><td>品質管理の実例</td><td>網膜画像で Birmingham センターだけ独立クラスタ → <strong>撮像プロセスのアーチファクト</strong>と判断して除外</td></tr>
+</tbody></table></div>
+<p><strong>Cox比例ハザードモデルの予測性能（C-index）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>特徴量セット</th><th>C-index</th></tr></thead>
+<tbody>
+<tr><td>遺伝（PRS）のみ</td><td><strong>0.63</strong></td></tr>
+<tr><td>遺伝 + 年齢 + 性</td><td><strong>0.76</strong></td></tr>
+<tr><td>臨床予測子（Framingham）</td><td><strong>0.77</strong></td></tr>
+<tr><td>画像 + 臨床予測子</td><td><strong>0.81</strong></td></tr>
+<tr><td>全特徴量の組み合わせ</td><td><strong>0.81</strong></td></tr>
+<tr><td>（参考）先行研究の UKB「主要心血管イベント」モデル</td><td>0.72</td></tr>
+</tbody></table></div>
+<ul><li><strong>代謝物（metabolomics）の追加は予測性能を改善しなかった</strong>。遺伝データは採血年齢に依存せず他モダリティで代替されにくいため寄与した、と解釈。</li><li>誤差棒は 95%CI（n = 29,216）。</li></ul>
+<h3>4. ユースケース⑤：COVID-19 胸部X線の重症度軌跡</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>データ</td><td><strong>BrixIA</strong> データセット、<strong>192枚</strong>の胸部X線（放射線科医が6領域で採点した重症度アノテーション付き）</td></tr>
+<tr><td>手法</td><td>事前学習 <strong>DenseNet</strong> で生画像を埋め込み → 近傍グラフ → <strong>UMAP</strong> → <strong>fate mapping／擬似時間（pseudotime）</strong></td></tr>
+<tr><td>結果</td><td>normal → mild → moderate → severe → critical の連続軌跡を再構成。<strong>「normal」ラベルの画像は健常群内に留まる</strong>（頑健性の傍証）。ズーム倍率等の不均一性があっても順序づけできた</td></tr>
+<tr><td>限界（著者記載）</td><td><mark class="hl">擬似時間は「並べる」だけで、個々の患者の将来を予測するものではない</mark>。画像でどの特徴が軌跡を駆動しているかの解釈は困難で、セグメンテーションの併用が必要</td></tr>
+</tbody></table></div>
+<h3>5. ユースケース⑥：バイアスの検出と緩和（糖尿病130病院データ）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>データ</td><td><strong>Diabetes 130-US Hospitals</strong>（Fairlearn 版）。1999〜2008年の10年、<strong>130病院</strong>、<strong>47特徴</strong>、<strong>101,766 入院</strong>、最大14日分の入院診療</td></tr>
+<tr><td>もとの目的</td><td>HbA1c測定と早期再入院の関連の探索</td></tr>
+<tr><td>集団構成</td><td>白人とアフリカ系米国人が大半。アジア系・ヒスパニック系は少数</td></tr>
+</tbody></table></div>
+<div class="tw"><table>
+<thead><tr><th>バイアスの種類</th><th>ehrapy が検出したこと</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td><strong>選択・サーベイランスバイアス</strong></td><td>CohortTracker が、Medicare受給者に絞った時点で年齢分布が60歳超に寄り白人比が上昇することを可視化</td><td>—</td></tr>
+<tr><td><strong>サーベイランスバイアス</strong></td><td>HbA1c が測定されたのは入院患者の <strong>18.4%</strong> のみ。緊急入院で紹介入院より高頻度</td><td>18.4%</td></tr>
+<tr><td><strong>正規化バイアス</strong></td><td>投薬数を個別に正規化すると年齢群間の差が残るが、<strong>年齢群をgroup keyとして同時に正規化すると差が消える</strong></td><td>—</td></tr>
+<tr><td><strong>欠測・補完バイアス（MCAR）</strong></td><td>Little's test で MCAR を確認（<strong>P ≤ 0.01×10⁻²</strong>、原著表記のまま）。平均補完は位置は保つが<strong>分散を過小評価</strong>：SD <strong>8.1 → 6.8</strong></td><td>SD 8.1→6.8</td></tr>
+<tr><td><strong>欠測・補完バイアス（MAR）</strong></td><td>平均補完は位置も分散も歪める：平均 <strong>16.02 → 14.66</strong>、SD <strong>5.72</strong></td><td>—</td></tr>
+<tr><td><strong>多重補完（MissForest, MAR）</strong></td><td>平均 <strong>16.04</strong>、SD <strong>6.45</strong> ＝ 原データに近い</td><td>—</td></tr>
+<tr><td><strong>予測モデルのバイアス</strong></td><td>30日未満再入院をロジスティック回帰で予測（3小群を統合、Unknown/Invalid の性別は除外、バランス調整アンダーサンプリングで<strong>各5,677例</strong>）。<strong>balanced accuracy 0.59</strong>。'Other' と 'Unknown' で偽陰性率が最も高く選択率が最も低い＝バイアスあり</td><td>—</td></tr>
+<tr><td><strong>緩和（Fairlearn ThresholdOptimizer）</strong></td><td>選択率：Other <strong>0.32 → 0.38</strong>、Unknown <strong>0.23 → 0.42</strong>。偽陰性率：Other <strong>0.48 → 0.42</strong>、Unknown <strong>0.61 → 0.45</strong></td><td>—</td></tr>
+</tbody></table></div>
+<h3>6. スケーラビリティ（ベンチマーク）</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>ベンチマークデータ</td><td>UKB のサブセット：<strong>261特徴 × 488,170 visit</strong>（欠測70%超の特徴は除去）。20%・30%・50%・全量でパイプライン実行</td></tr>
+<tr><td>パイプライン内容</td><td>QC指標算出 → 欠測率による変数フィルタ → 最近傍補完 → 正規化 → 次元圧縮 → クラスタリング</td></tr>
+<tr><td>実行環境</td><td><strong>単一CPU・8スレッド・最大60GBメモリ</strong>（詳細な時間/メモリは Supplementary Table 1 ＝原表参照）</td></tr>
+<tr><td>out-of-core</td><td>Dask 実装。<strong>50,000患者×1,000特徴で in-memory 約2GB → out-of-core 200MB未満</strong>。全ての高負荷アルゴリズムへの対応は開発中</td></tr>
+<tr><td>制約</td><td><mark class="hl">GPU非対応。依存ライブラリ由来の性能損失を継承</mark></td></tr>
+</tbody></table></div>
+<h3>7. データの入手先（Data availability）</h3>
+<div class="tw"><table>
+<thead><tr><th>データセット</th><th>入手先</th></tr></thead>
+<tbody>
+<tr><td>PIC database</td><td>https://physionet.org/content/picdb/1.1.0 （credentialed user のみ）</td></tr>
+<tr><td>BrixIA 画像</td><td>https://github.com/BrixIA/Brixia-score-COVID-19</td></tr>
+<tr><td>UK Biobank</td><td>申請制。本研究の <strong>application number 49966</strong></td></tr>
+<tr><td>Diabetes 130-US Hospitals</td><td>https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008</td></tr>
+</tbody></table></div>
+<h2>✅ Take home</h2>
+<ul><li><strong>ehrapy</strong> は、単一細胞解析で確立した <strong>AnnData ＋ scanpy</strong> の設計をEHRに移植した、探索的解析のためのオープンソースPython基盤（Nat Med 2024;30(11):3369-3380、Apache 2.0）。</li><li><strong>「行＝患者の入室（visit）、列＝測定量」＋注釈同梱</strong>という1つのオブジェクトに、品質管理・補完・正規化・統合・次元圧縮・クラスタリング・統計比較・生存解析・因果推論・軌跡推論を全部書き戻す。<mark class="hl">中間生成物ごと h5ad / Zarr で共有できる</mark>のが従来のCSV+スクリプト運用との最大の差。</li><li><strong>入口は OMOP CDM・CSV・SQL</strong>。標準としては <strong>OMOP CDM・HL7・FHIR・openEHR</strong> と互換を明記。オントロジーは Bionty（Human Phenotype／Phecodes／Drug／Mondo／Human Disease ほか）、自由文は MedCAT。</li><li><strong>再現性の担保は「本体リポジトリ」と「再現用リポジトリ」の二本立て</strong>。後者に <strong>Jupyter notebook ＋ 全バージョン固定の Conda 環境</strong>が入っている（theislab/ehrapy-reproducibility）。JIPAD×DPC の最初の論文でそのまま真似できる型。</li><li><strong>バイアスを測る道具が標準装備</strong>：CohortTracker（フィルタごとの集団変化＋flow diagram）、Little's MCAR test、MissForest/MICE、bias検出関数、Fairlearn連携。「多施設DBの限界を透明に文書化する」という <span class="wl">重症治療のデータ共有・ハーモナイゼーション24原則 — SCCM Data Science Campaignの系統的レビューと修正Delphi（CCM2025）</span> の原則を、実行可能な手順に落とせる。</li><li><strong>因果推論は dowhy ベースで「グラフ→同定→推定→反証」の4段が強制される</strong>。DPC連結で薬剤・処置・コストが入るJIPADにとって、これが最も価値の高いモジュール。</li><li>留保：<strong>GPU非対応</strong>、大規模データは Dask のout-of-core前提、そして <mark class="hl">筆頭著者がオントロジー基盤 Bionty を作る LaminLabs の従業員という COI</mark>。JIPADの「正式基盤」ではなく「二次利用解析の推奨ツールチェーンの一案」として扱うのが妥当。</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

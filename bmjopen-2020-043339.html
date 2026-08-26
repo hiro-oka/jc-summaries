@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>観察研究の因果的主張は2割が不整合 — 目的と結論の食い違い（BMJ掲載60編のレビュー・BMJOpen2021）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="bmjopen-2020-043339.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">観察研究の因果的主張は2割が不整合 — 目的と結論の食い違い（BMJ掲載60編のレビュー・BMJOpen2021）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Olarte Parra C, Bertizzolo L, Schroter S, Dechartres A, Goetghebeur E. Consistency of causal claims in observational studies: a review of papers published in a general medical journal. BMJ Open. 2021;11:e043339. doi:10.1136/bmjopen-2020-043339</dd><dt>掲載誌</dt><dd>BMJ Open（2021-05-20）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1136/bmjopen-2020-043339" target="_blank" rel="noopener">doi.org/10.1136/bmjopen-2020-043339</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Consistency of causal claims in observational studies: a review of papers published in a general medical journal</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/bmjopen-2020-043339.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/bmjopen-2020-043339.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/bmjopen-2020-043339.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<p>この論文は病棟プロトコルを変える論文ではない。<strong>変わるのは「文章の書き方」と「原稿の読み方」</strong>である。用途は3つに分かれる。</p>
+<h3>用途1 — 抄録指導での添削の型（他人の原稿を直すとき）</h3>
+<p>学会抄録・英文抄録の指導では、次の順で見れば足りる。本研究が示したのは「不整合は方法の欄でも結果の欄でもなく、<strong>目的と結論の2か所で起きる</strong>」ことなので、まずこの2文だけを抜き出して並べる。</p>
+<div class="tw"><table>
+<thead><tr><th>手順</th><th>何をするか</th><th>判定の根拠</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>抄録から Objective の1文と Conclusion の1文だけを抜き出し、上下に並べる</td><td>原著が「抄録を分類できる情報は主にこの2つの小見出しにあった。design・setting・participants は目的に対してそれほど有用でなかった」と明記している</td></tr>
+<tr><td>2</td><td>それぞれの動詞・名詞を、後述の因果ラダー（原著 Table 4）で「因果／文脈次第／非因果」に色分けする</td><td>判定の単位は文全体ではなく語</td></tr>
+<tr><td>3</td><td>2つの色が違えば不整合。同じ色なら整合</td><td>原著 Table 2 の2×2</td></tr>
+<tr><td>4</td><td>結論に「〜すべき」「〜を検討すべき」「〜を推進する根拠となる」が入っていたら、目的の色に関係なく因果と扱う</td><td>原著「明示的な因果語がなくても、テイクホームメッセージが所見に基づく介入を促していれば因果的結論は暗黙に含まれる」</td></tr>
+<tr><td>5</td><td>不整合なら、動かすのは結論ではなく目的のほうを先に検討する</td><td>目的を「関連」に薄めても方法が因果的なら、隠しただけになる（Type II error。後述）</td></tr>
+</tbody></table></div>
+<p>指導で最も使う一言は「<strong>その結論、目的で約束した以上のことを言っていませんか</strong>」。逆向き（目的で因果を宣言して結論で逃げる）も同数ではないが起きる（12編中3編）。</p>
+<h3>用途2 — 自分の原稿のセルフチェック（JIPAD・DPC・レジストリ研究を出すとき）</h3>
+<p>当科から出るのは大半が後ろ向き観察研究・レジストリ研究であり、この論文の対象そのものである。投稿前に自分でやること。</p>
+<ul><li><strong>目的と結論を1枚に並べる</strong>。同じ画面に置かないと食い違いに気づけない。原著の12編中12編すべてが、この2か所のミスマッチだった。</li><li><strong>方法が因果的なら、目的も因果的に書く</strong>。共変量調整・傾向スコア・DAG・媒介解析・人口寄与危険度・target trial emulation を使っているのに目的が「関連を検討する」であれば、それは整合ではなく隠蔽である。原著は「一貫して非因果的」と分類された19編のうち <strong>11編（半数超）で、抄録は関連の言葉で慎重に書かれているのに本文では因果的手法を使い、残差交絡・生物学的妥当性・用量反応を論じていた</strong>ことを見つけている。</li><li><strong>「関連を認めた → したがって推進すべき」の飛躍を消す</strong>。これが最も多い不整合パターンで、原著 Table 1 の Inconsistent 区分12例のうち4例がこの形だった。</li><li><strong>因果語を避けることは解決ではない</strong>。原著は Hernán の議論を引いて「希望する因果的な答えについて意図的に因果的記述を避けることは、曖昧さと不自然な報告をもたらす」と明言する。正しい姿勢は、推定できるデータに基づく指標と、目標とする因果効果との<strong>隔たりの意味と大きさを率直に議論する</strong>こと。</li><li><strong>査読は直してくれない前提で書く</strong>。不整合12編のうち11編（92%）は投稿時点ですでに不整合で、査読を通ってそのまま掲載された。</li></ul>
+<h3>用途3 — JCで他人の論文を読むときの引っかかり</h3>
+<p>抄録の言葉と本文の方法が食い違っているところが、その論文の弱点である。JCでは次を最初に確認する。</p>
+<div class="tw"><table>
+<thead><tr><th>引っかかるポイント</th><th>具体的に見る場所</th><th>Vault内の実例</th></tr></thead>
+<tbody>
+<tr><td>抄録は「関連」なのに方法が因果的（調整・傾向スコア・DAG）</td><td>Methods の調整変数、Discussion の残差交絡の記述</td><td><span class="wl">外傷性脳損傷（TBI）患者の気管切開 — 31.8%に実施・施設間で7.9〜50.2%のばらつき、晩期は転帰不良と関連するが因果は未証明（CENTER-TBI 1358例・ICM2020）</span>。多変量調整で晩期気管切開と6か月 GOSE 不良の関連（OR 1.69）を出しながら、結論は「causality remains unproven」と明記。原著の分類でいえば「非因果的な言葉づかい＋因果的手法」の典型で、11/19 群にあたる</td></tr>
+<tr><td>記述研究なのに、結論で原因を名指ししている</td><td>Conclusion と Discussion の冒頭</td><td><span class="wl">日本の敗血症は入院の4.9%・死亡は1000入院あたり7.8 — 発生は増え院内死亡率は下がった（DPC 5049万入院・JaSA・CritCare2021）</span>。発生と死亡の推移を記述する研究でありながら、死亡率改善の理由として「ガイドラインの普及」を挙げている。同じDPCを使った別研究（J-SSCG 2020 の遵守率は低い）と正面から食い違い、因果の裏づけが無い</td></tr>
+<tr><td>結論に「〜すべき」「〜を考慮すべき」が入っている</td><td>Conclusion の最後の1文</td><td>原著 Table 1 の Inconsistent 区分にそのまま並んでいる型</td></tr>
+<tr><td>抄録の効果の大きさと、本文のニュアンスが違う</td><td>抄録 vs Take-home box vs 本文</td><td>CENTER-TBI では2ページ目のボックスが「a trend of a better outcome」と書く一方、抄録と Table 4 では有意（OR 1.69、p=0.018）だった</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>JCで最も注意すべき読み違い <mark class="hl">「著者が因果語を使っていない」ことは「著者が因果を主張していない」ことを意味しない。</mark> 本研究は、慎重に関連の言葉で書かれた抄録の裏で因果的手法が使われている例を、19編中11編で見つけている。<mark class="hl">逆に、因果語を使っていることは、それだけでは欠陥ではない。</mark> 問われるのは、その因果的主張を支える仮定（交換可能性・未測定交絡なし・移送可能性）が論じられているかである。</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：観察データから因果的結論を導きたい誘惑は普遍的である。先行研究（Cofield 2010、Adams 2017）は「観察研究に因果語は不適切」「RCTだけが因果推論を許す」という立場から因果語の有無を数えてきた。Haber ら（2018）は、論文の因果的主張の強さとSNS上の記述が半数の事例で食い違い、メディア側が強いことを示した。Lederer ら（2019）は呼吸器・睡眠・集中治療の雑誌の編集者として、因果研究の報告ガイドを出している。</li><li><strong>Unknown</strong>：一流総合誌に実際に載っている観察研究が、抄録のなかで因果の言葉をどれだけ一貫して使えているか。またその不整合が、投稿時点から存在するのか査読・編集の過程で生じるのか。</li><li><strong>What's new</strong>：*The BMJ* 2018年掲載の適格な観察研究60編について、抄録の小見出しごとに因果的主張の有無を2名が独立に判定し、全体を3分類した。不整合は20%（12編）で、その11編（92%）は投稿時点ですでに不整合だった。加えて、本文まで見ると「一貫して非因果的」19編のうち11編が実際には因果的手法を用いていた。因果語を避けることが解決にならないという主張を、実際の掲載論文で裏づけた点が新しい。あわせて、因果を示唆する語・示唆しない語のリスト（Table 4）と、誤分類の代償を整理した Type I／Type II の枠組み（Table 3）を提供している。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで *The BMJ* 2018年の観察研究60編のうち、<strong>抄録の因果的言語が不整合だったのは12編（20%）で、その内訳は「目的は関連・結論は因果」9編と「目的は因果・結論は関連」3編</strong>。不整合の11/12（92%）は投稿時点で既に存在し、査読では直っていない。</p>
+</div>
+<ul><li>母集団は *The BMJ* 2018年の原著論文151編。うち抄録の study design 欄でコホートまたは縦断研究と記述されたもの60編（40%）が適格。</li><li>分類は3つ。<strong>一貫して因果的（consistently causal）29編＝48%／不整合（inconsistent）12編＝20%／一貫して非因果的（consistently not causal）19編＝32%</strong>。合計で80%が一貫していた。</li><li>不整合12編の内訳は、<strong>目的が関連の評価・結論が因果的所見が9/12、その逆が3/12</strong>。つまり不整合は例外なく目的と結論のミスマッチだった。</li><li>不整合12編のうち <strong>11編が投稿時点でも不整合</strong>。唯一の例外1編は、投稿時に「impact（影響）」と書かれていた目的が、掲載版で「association（関連）」に置き換わっていた。ただし方法は調整ハザード比と傾向スコアマッチングのままで、<strong>言葉だけが因果を隠す方向に薄まっていた</strong>。</li><li>本文まで読むと、<strong>「一貫して非因果的」19編のうち11編は因果的手法を用い、残差交絡・生物学的妥当性・用量反応を論じていた</strong>。抄録の慎重さは、必ずしも研究の狙いを反映していない。</li><li>不整合12編の方法は、<strong>11/12が調整推定値を提示</strong>、<strong>8/12（67%）がアウトカム回帰（主にCox比例ハザード）</strong>、<strong>3/12（25%）が（傾向スコア）マッチング</strong>。</li><li>著者の結論は、何が因果的主張にあたるのか・関与する仮定をどう正当化し議論するのかについて、著者向けのさらなるガイダンスが必要、というもの。あわせて因果語の候補リスト（Table 4）を提案し、コンセンサス会議による包括的な用語集の出発点にしてほしいとしている。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この論文を読むための用語 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>因果的主張（causal claim）</strong>：曝露を変えればアウトカムが変わる、という主張。「AとBが一緒に動く」（関連）とは別物。 <strong>estimand</strong>：その研究が推定しようとしている量の定義。誰に・何を・何と比べて・いつからいつまで測るのかを含む。ICH E9(R1) がこの概念を導入した。 <strong>ITT／per-protocol／as-treated</strong>：intention-to-treat は割り付けどおりに解析する方法。per-protocol はプロトコルを守った人だけ、as-treated は実際に受けた治療で分類する方法。ICH E9(R1) は ITT を超えた因果的 estimand の重要性を強調している。 <strong>交絡（confounding）</strong>：曝露とアウトカムの両方に影響する第三の因子によって、見かけの関連が生じること。<strong>残差交絡（residual confounding）</strong> は調整しきれずに残った交絡。 <strong>DAG（directed acyclic graph、有向非巡回グラフ）</strong>：変数間の因果の向きを矢印で描いた図。何を調整すべきかを図から決めるための道具。 <strong>傾向スコア（propensity score）</strong>：背景因子から「その治療を受ける確率」を推定した値。これで揃えて比べる。 <strong>潜在アウトカム（potential outcomes）</strong>：同じ人が治療を受けた場合と受けなかった場合の両方の結果を想定する枠組み。因果効果はその差として定義される。 <strong>交換可能性（exchangeability）</strong>：治療群と非治療群を入れ替えても結果の分布が変わらない、という仮定。ランダム化はこれを担保する。 <strong>移送可能性（transportability）</strong>：ある集団で得た効果を別の集団に当てはめてよいか、という性質。 <strong>target trial emulation</strong>：観察データを使って「もし理想的なRCTを組んだら」という設計を明示的に模倣する手法。 <strong>spin</strong>：得られた結果より強く・都合よく見えるように書く報告上の歪み。 <strong>メタリサーチ（research on research）</strong>：研究論文そのものを対象にした研究。本論文がこれにあたる。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>原著の序論は、次の順で議論を組み立てている。</p>
+<p><strong>（1）誘惑は消えない。</strong> 多くの研究者は「関連は因果ではない」と認めながら、観察データから因果的結論を導きたい誘惑に駆られる。理由は単純で、因果推論こそがほとんどの臨床研究・公衆衛生研究の究極の目標だからである。</p>
+<p><strong>（2）ゴールドスタンダードはRCTだが、RCTには適用範囲がある。</strong> RCTが交絡バイアスを避ける独自の能力を持つことから、因果的主張を正当化するには経験的研究がランダム化研究から導かれねばならない、という要求が生まれた。しかしRCTは主に治療・介入の効果を評価するためのもので、介入ではない予後因子・危険因子の評価には容易に適応できない。</p>
+<p><strong>（3）RCTを超えて治療効果のエビデンスを求める理由が4つある。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>理由</th><th>原著の記述</th></tr></thead>
+<tbody>
+<tr><td>実行可能性・倫理・適時性</td><td>多くの状況でRCTは実行可能でも倫理的でも適時でもなく、当時のCOVID-19危機のように、しばらくは観察データしか得られないことがある</td></tr>
+<tr><td>実世界の文脈の広さ</td><td>観察研究はRCTより広い実世界の文脈を扱う。RCTは実験のコストとリスクから、重大な併存疾患のない高リスク患者を研究しがちで、この選択が対象集団への一般化を難しくする</td></tr>
+<tr><td>長期の意図しない副作用</td><td>高度に選択された集団と通常短い追跡期間のため、RCTは（長期の）意図しない副作用の評価には不適切</td></tr>
+<tr><td>非遵守</td><td>RCTは治療の非遵守にも悩まされ、解析を複雑にする。治療別の集団はランダム化の恩恵を失う</td></tr>
+</tbody></table></div>
+<p><strong>（4）だから ICH E9 が estimand を持ち出した。</strong> ICH E9 ガイドラインは、intention-to-treat を超えた因果的 estimand（per-protocol、as-treated 解析など）の重要性を強調している。</p>
+<p><strong>（5）因果語を避けるのは解決ではない。</strong> 希望する因果的な答えについて意図的に因果的記述を避けることは、曖昧さと不自然な報告をもたらす。代わりに著者は、推定できるデータに基づく指標と、目標とする因果効果との間にある意味と大きさの隔たりを率直に議論すべきである。論拠は、文脈における追加の仮定とともに研究デザインを考慮することになる。</p>
+<p><strong>（6）統計科学の進歩がそれを可能にした。</strong> 潜在アウトカム・有向非巡回グラフ・傾向スコアなど数十年の進歩により、ランダム化試験では到達できない結果に、正当化された因果的解釈を与えることができる。</p>
+<p><strong>目的</strong>：*The BMJ* 2018年に掲載された曝露とアウトカムを扱う研究論文について、報告のなかの記述が因果的言語（あるいはその欠如）を混乱した形で提示していないかを調べる。焦点は *The BMJ* の読者がこれらの論文から受け取る因果的メッセージ、とりわけ抄録から受け取るメッセージである。抄録における因果的記述の一貫性、それが全文の反映であるかどうか、査読の結果として事前に変更が加えられていたかどうかを評価する。</p>
+<h3>3. 先行研究との違い（原著 Introduction 後半）</h3>
+<div class="tw"><table>
+<thead><tr><th>先行研究</th><th>何をしたか</th><th>本研究との違い</th></tr></thead>
+<tbody>
+<tr><td>Cofield ら 2010（Obes Facts）</td><td>栄養・肥満の観察研究における因果語の使用を評価</td><td>すべての観察研究において因果語は不適切とみなし、あるかないかだけを数えた。本研究は「避けること自体が解決にならない」と主張する点で立場が異なる</td></tr>
+<tr><td>Adams ら 2017（J Exp Psychol Appl）</td><td>人々がニュースの因果的表現をどう理解するかを検討</td><td>RCTのみが因果推論を許すと考えた</td></tr>
+<tr><td>Haber ら 2018（PLoS One）</td><td>論文の因果的主張の調子と強さが、SNSでの記述と一致するかを検討</td><td>半数の事例でメディアのほうが強い因果的記述をしていた。明確な科学的メッセージの重要性を強調</td></tr>
+<tr><td>Lederer ら 2019（Ann Am Thorac Soc）</td><td>呼吸器・睡眠・集中治療の雑誌の編集者による、因果研究の報告ガイド</td><td>因果語を避けるよう求めて問題を回避するのではなく、妥当な因果的主張を保証する要素（因果推論の簡潔な説明、交絡因子の定義、DAGによる交絡の同定、p値の誤解と、p値が関連の大きさ・方向・臨床的重要性を反映しないこと）を提供</td></tr>
+</tbody></table></div>
+<p>集中治療領域の読者にとっては、Lederer らのガイドが最も直接使える参照文献であり、本論文の結論も「Lederer らが呼吸器・睡眠・集中治療の雑誌向けに出したのと同様のガイダンスが、他の疾患領域にも必要だ」という形で締められている。</p>
+<h3>4. 方法（Methods）</h3>
+<h4>4-1. サンプリングと組み入れ基準</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>デザイン</td><td>一般医学誌に掲載された観察研究のレビュー（メタリサーチ）</td></tr>
+<tr><td>データソース</td><td>*The BMJ* に2018年に掲載された、曝露とアウトカムの関係を記述するコホート研究およびその他の縦断研究。加えて、投稿版の原稿と査読者レポートにアクセスできた</td></tr>
+<tr><td>同定の手順</td><td>第一著者（COP）が、*The BMJ* 2018年の全原著論文のうち、抄録の study design 欄でコホートまたは縦断研究と記述されたものを同定</td></tr>
+<tr><td>組み入れの手がかり</td><td>抄録の当該欄に「cohort」「longitudinal」「registry-based」といった記述があるもの</td></tr>
+<tr><td>「observational」とだけ書かれた論文</td><td>横断研究ではなく追跡期間を示唆していれば組み入れ</td></tr>
+<tr><td>除外</td><td>ケースコホート（case cohort）と記述された論文。解釈と解析が、曝露とアウトカムの関係を追跡付きで評価する他の研究と異なるため</td></tr>
+<tr><td>主要アウトカム</td><td>因果的言語の使い方が「不整合」な研究論文の割合</td></tr>
+</tbody></table></div>
+<h4>4-2. 掲載版の抄録の評価（分類の中核）</h4>
+<ul><li>評価者は <strong>2名（COP、LB）が独立に</strong>、適格論文の掲載版抄録をスクリーニングした。</li><li>抄録の<strong>小見出しごと</strong>（objective／design／setting／participants／outcome／results／conclusion）に、（暗黙のものを含む）因果的主張があるかを <strong>yes／no／unclear</strong> の3択で判定した。</li><li>各小見出しを評価したのち、各評価者が論文の抄録の主要な主張について、全体を <strong>consistently causal／inconsistent／consistently not causal</strong> のいずれかに総合評価した。</li><li>独立評価ののち2名の総合評価を比較し、不一致があれば <strong>第3の評価者（EG）に諮って合意に達した</strong>。</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>評価者間の一致率は報告されていない 独立2名＋不一致時の第3者調停という手続きは書かれているが、<mark class="hl">κ係数などの評価者間一致率は本文のどこにも報告されていない</mark>。何件で不一致が生じ、どちらの方向に調停されたのかも示されていない。判定が主観に依存する研究であるだけに、<mark class="hl">この欠落は結果の再現性を評価するうえで痛い</mark>。</p>
+</div>
+<h4>4-3. 掲載版の全文の評価</h4>
+<p>適格論文60編すべてについて、掲載版の全文をさらに評価し、適用された統計手法とそれ以上の因果的主張を同定した。とくに、因果的な狙いを支持する、あるいは損なう記述を探した — 交絡調整、残差交絡の議論、交換可能性、移送可能性の問題である。この評価では論文を2名の評価者（COP、LB）にランダムに振り分けた。各論文について、著者が統計手法と交絡調整の方法（もしあれば）を記述した箇所を抽出し、次いで結果と結論を要約する文を抽出して因果的主張を浮かび上がらせた。</p>
+<h4>4-4. 投稿時の抄録版の評価</h4>
+<ul><li>対象は「不整合」と判定された論文に限る。投稿から掲載までの間に、不整合な因果語の使用につながる変更が加えられたかを見るため。</li><li>このサブセットについて、*The BMJ* の原稿追跡システムから<strong>投稿版の原稿と、対応する査読者コメント</strong>を入手した。</li><li>掲載版と最初の投稿版の抄録を比較し、因果的主張に関わる同じ文言が投稿版にも現れていたか、査読者・編集者のコメントの結果として変更が生じたかを、査読レポートの記載に照らして同定した。</li><li>同じ2名（COP、LB）が独立に投稿版の抄録を評価。小見出しごとに掲載版と内容が異なるかを判定し、差異があった箇所では因果的主張の有無を yes／no／unclear で判定した。ここでの小見出しには <strong>title（表題）が加わる</strong>（title／objective／design／setting／participants／outcome／results／conclusion）。全体評価は掲載版と同じ3分類で行い、不一致時は第3評価者（EG）が調停した。</li></ul>
+<h4>4-5. 患者・市民参画（PPI）</h4>
+<p>患者はデザイン・解析・解釈に関与しておらず、本研究の参加者でもない。方法論的研究（research on research）だからである。ただし著者は、因果的記述と曖昧な言語の使用に対する患者の意見は重要であり、患者と協働したこの領域の研究がさらに必要だと述べている。</p>
+<h3>5. 因果ラダー — 語をどう格付けするか（原著 Table 4 の全件転記）</h3>
+<p>原著が提供する唯一の「階梯」がこれである。<strong>4つの区分</strong>からなり、うち3つが語のレベル分け、1つは語ではなく研究の作り方から因果的意図を読み取るための手がかりである。リストは本研究で拾った表現と、引用文献（とくに Hernán 2018 と Thapa ら 2020）に依拠している。</p>
+<h4>Table 4. 因果を示唆する語・示唆しない語と、因果的な狙いを示す研究要素（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>語・要素（原文）</th><th>日本語の目安</th></tr></thead>
+<tbody>
+<tr><td><strong>因果関係を表す語</strong>（使うなら仮定の明示、理想的には批判的評価が必要）</td><td>Affect</td><td>影響する</td></tr>
+<tr><td></td><td>Attributable</td><td>帰属できる</td></tr>
+<tr><td></td><td>Benefit</td><td>便益・利益</td></tr>
+<tr><td></td><td>Cause／Causal pathway</td><td>原因／因果経路</td></tr>
+<tr><td></td><td>Contribute</td><td>寄与する</td></tr>
+<tr><td></td><td>Determinant</td><td>決定因子</td></tr>
+<tr><td></td><td>Effect</td><td>効果</td></tr>
+<tr><td></td><td>Efficacy</td><td>有効性</td></tr>
+<tr><td></td><td>Impact</td><td>影響・インパクト</td></tr>
+<tr><td></td><td>Improve</td><td>改善する</td></tr>
+<tr><td></td><td>Leads to</td><td>〜をもたらす</td></tr>
+<tr><td></td><td>Mediates</td><td>媒介する</td></tr>
+<tr><td></td><td>Responsible for</td><td>〜の責を負う</td></tr>
+<tr><td></td><td>Results in</td><td>〜という結果になる</td></tr>
+<tr><td></td><td>Safety</td><td>安全性</td></tr>
+<tr><td><strong>文脈によっては因果を示唆しうる語</strong></td><td>Independently associated</td><td>独立して関連する</td></tr>
+<tr><td></td><td>Induce</td><td>誘発する</td></tr>
+<tr><td></td><td>Higher (lower) probability</td><td>高い（低い）確率</td></tr>
+<tr><td></td><td>Modify</td><td>修飾する</td></tr>
+<tr><td></td><td>Risk (factor)</td><td>リスク（因子）</td></tr>
+<tr><td></td><td>Trajectory／(quantitatively) decompose</td><td>軌跡／（定量的に）分解する</td></tr>
+<tr><td><strong>因果効果の示唆を避ける表現</strong></td><td>Association</td><td>関連</td></tr>
+<tr><td></td><td>Correlation</td><td>相関</td></tr>
+<tr><td></td><td>Less (more) likely／Link</td><td>より起こりにくい（起こりやすい）／つながり</td></tr>
+<tr><td></td><td>Predict</td><td>予測する</td></tr>
+<tr><td></td><td>Pattern</td><td>パターン</td></tr>
+<tr><td><strong>因果的な狙いを示す研究要素</strong>（語ではなく作り方）</td><td>Adjusting for confounders</td><td>交絡因子の調整</td></tr>
+<tr><td></td><td>Discussing biological plausibility, dose-response and/or temporal relationship</td><td>生物学的妥当性・用量反応・時間的関係の議論</td></tr>
+<tr><td></td><td>Discussing 'unmeasured confounders' assumption</td><td>「未測定交絡なし」の仮定の議論</td></tr>
+<tr><td></td><td>Mediation analysis</td><td>媒介解析</td></tr>
+<tr><td></td><td>Propensity score adjustment／(propensity score) matching</td><td>傾向スコア調整／傾向スコアマッチング</td></tr>
+<tr><td></td><td>Providing estimates of (population) attributable risks</td><td>（人口）寄与危険度の推定値の提示</td></tr>
+<tr><td></td><td>Suggesting／Recommending intervention</td><td>介入の示唆・推奨</td></tr>
+<tr><td></td><td>Target trial emulation design</td><td>ターゲット試験模倣デザイン</td></tr>
+<tr><td></td><td>Using directed acyclic graphs to identify confounders and mediators</td><td>DAGによる交絡因子・媒介因子の同定</td></tr>
+<tr><td></td><td>Using negative controls</td><td>陰性対照の使用</td></tr>
+<tr><td></td><td>Using instrumental variables</td><td>操作変数の使用</td></tr>
+</tbody></table></div>
+<p>原著の本文はこの表について、「effect」「impact」「determinant of」のような語は不可避的に因果の方向を指し示すため、<strong>その使用には少なくとも必要な仮定を述べること、理想的には批判的に評価することが伴うべきだ</strong>と述べている。また、結論の因果性に不確かさがあるなら、研究した曝露に介入せよという示唆はトーンダウンさせるべきであり、研究の究極の因果的な狙いを隠すのではなく、対応するエビデンスのレベルを明示することを推奨している。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>このリストは完成品ではない 原著自身が「これは出発点としての提案であり、さらなる研究がこれを検証・妥当化しうる」「研究コミュニティに広く認知された因果的言語の定義が必要だ」と書いている。抄録でも「'cause' という自明な語を超えた表現のリストを提供し、より包括的な用語集の着想になれば」という言い方にとどめている。</p>
+</div>
+<h3>6. 原著は「強さ」を連続的に格付けしてはいない（本文に無いこと）</h3>
+<p>本論文に <strong>associated with ＜ linked to ＜ leads to ＜ causes のような連続的な強度スケールは存在しない</strong>。実際に行われた格付けは次の3段階のみである。</p>
+<div class="tw"><table>
+<thead><tr><th>階層</th><th>単位</th><th>取りうる値</th></tr></thead>
+<tbody>
+<tr><td>語のレベル</td><td>単語・表現</td><td>上表の3区分（因果／文脈次第／非因果）＋研究要素</td></tr>
+<tr><td>抄録の小見出しのレベル</td><td>objective・design・setting・participants・outcome・results・conclusion（投稿版では title を加える）</td><td>因果的主張あり／なし／不明（yes／no／unclear）の2値＋不明</td></tr>
+<tr><td>抄録全体のレベル</td><td>抄録1本</td><td>consistently causal／inconsistent／consistently not causal の3分類</td></tr>
+</tbody></table></div>
+<p>原著は限界の節で、この粗さを自ら認めている。「最適な結論は、研究を因果という観点で白か黒かに単純にラベルづけするべきではない。本研究では短い記述に対して便宜的に限られた数の分類を用いた。<strong>実際には、観察された関連に基づいて、潜在的な因果関係への連続的な確信度が生じるだろう</strong>」。したがって、<mark class="hl">「動詞の強さの階梯」を求めてこの論文を読むと、期待した粒度のものは載っていない</mark>。得られるのは語の3区分と、目的・結論の整合という2点である。</p>
+<h3>7. 結果 — 掲載版抄録の分類</h3>
+<p>2018年に *The BMJ* に掲載された研究論文は151編。うち <strong>60編（40%）</strong> が本研究の組み入れ適格だった。</p>
+<h4>Table（本文の数値をまとめた表）</h4>
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>編数</th><th>割合</th><th>分類の中身</th></tr></thead>
+<tbody>
+<tr><td>掲載された研究論文（分母）</td><td>151</td><td>—</td><td>2018年の *The BMJ* 原著論文すべて</td></tr>
+<tr><td>適格な観察研究</td><td>60</td><td>151の40%</td><td>コホート・縦断・レジストリ基盤。ケースコホートは除外</td></tr>
+<tr><td>一貫して因果的（consistently causal）</td><td>29</td><td>48%</td><td>因果的言語を一貫して用いている</td></tr>
+<tr><td>不整合（inconsistent）</td><td>12</td><td>20%</td><td>主に目的と結論のミスマッチ</td></tr>
+<tr><td>うち 目的＝関連・結論＝因果</td><td>9</td><td>12編中9</td><td>慎重に始めて因果で締める型</td></tr>
+<tr><td>うち 目的＝因果・結論＝関連</td><td>3</td><td>12編中3</td><td>因果で始めて関連に逃げる型</td></tr>
+<tr><td>一貫して非因果的（consistently not causal）</td><td>19</td><td>32%</td><td>予測を狙う研究、または因果的性質を（暗黙にも）示唆せずに関連を報告する研究</td></tr>
+</tbody></table></div>
+<p>数値の整合を検算すると、29＋12＋19＝60、48%＋20%＋32%＝100%、60/151＝39.7%、11/12＝91.7%、いずれも本文の記載と合う。</p>
+<p>原著は Table 1 に、評価対象となった掲載版抄録からの抜粋例を示している。各行が同一研究からの記述にあたり、第1列が割り当てられた区分、最終列がその抄録がその区分に属すると判断された理由である。<strong>評価は因果的主張一般に関わるため、対応する研究の個別の主題を指す語は記述から取り除かれている</strong>（だから例文が「…」だらけになっている）。示されている例は網羅的な一覧ではなく、異なる区分に属する記述の言い回しの違いを示すために選ばれている。示された記述は抄録の objective と conclusion の小見出しに対応するもので、抄録を分類するための情報は主にこの2つの小見出しに見つかった。design・setting・participants といった他の小見出しはこの目的にはそれほど有用でなかったが、それらも評価はされている。</p>
+<h3>8. Table 1 — 実際の言い回しの全件（原表を日本語化して全27例を転記）</h3>
+<p>原文の抜粋を訳出する。丸括弧内が語の直訳、「…」は原著が主題語を伏せた箇所である。</p>
+<h4>8-1. 一貫して因果的（consistently causal）— 8例</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>抄録の目的</th><th>抄録の結論</th><th>原著のコメント</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>'…の有効性（effectiveness）を評価する…'</td><td>'…の直接的な影響（direct impact）のエビデンスはほとんど見つからなかった'</td><td>関連を論じる際、effect・contribution・role といった語は cause に近く、（direct）impact や effect はその帰結にあたる（コメントは1〜4に共通）</td></tr>
+<tr><td>2</td><td>'…における…の効果（effect）を判定する'</td><td>'…はリスクをもたらした（has led to risk）'</td><td>同上</td></tr>
+<tr><td>3</td><td>'…の寄与（contributions）を記述する'</td><td>'…における重要な役割（an important role）'</td><td>同上</td></tr>
+<tr><td>4</td><td>'…のインパクト（impact）を評価する'</td><td>'…のインパクトは…である'</td><td>同上</td></tr>
+<tr><td>5</td><td>'…への遵守を改善することが…かを検討する'</td><td>'…の改善による有益な効果（beneficial effect）'</td><td>「遵守を改善する」という行動をとることを評価し、その効果が有益であると結論している</td></tr>
+<tr><td>6</td><td>'…リスクを減らすことにおける…の便益（benefit）'</td><td>'…は見落とされてきたリスク因子（overlooked risk factor）である'</td><td>ある介入がアウトカムのリスクをどう減らせるかを評価し、それを「見落とされたリスク因子」とラベルづけしている</td></tr>
+<tr><td>7</td><td>'…のアウトカムと安全性（safety）を判定する'</td><td>'…は…と少なくとも同等に有効（effective）かつ安全（safe）である'</td><td>ある介入が比較対照と同程度に安全だと評価・判定している</td></tr>
+<tr><td>8</td><td>'この共同の関連を…のみ・…のみ・両者の交互作用へと定量的に分解する（quantitatively decompose）'</td><td>'…の過剰リスク…これらの所見は、…のほとんどの症例が…によって予防できたであろうことを示唆する'</td><td>直接効果と間接効果、すなわち媒介解析への関心を示唆し、それに応じて結論している</td></tr>
+</tbody></table></div>
+<h4>8-2. 一貫して非因果的（関連の記述）— 5例</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>抄録の目的</th><th>抄録の結論</th><th>原著のコメント</th></tr></thead>
+<tbody>
+<tr><td>9</td><td>'…は…と比べて…と関連する（is associated with）'</td><td>'…は…と比べて…と関連する'</td><td>因果とも予測ともラベルづけせずに関連を記述している</td></tr>
+<tr><td>10</td><td>'…の推移（trends）を記述する'</td><td>'…の研究期間中、率は高く、最も高い率は…対…であった'</td><td>頻度の記述にとどめている（コメントは10・11に共通）</td></tr>
+<tr><td>11</td><td>'…がどれくらいの頻度で起きるかを評価する'</td><td>'…人の成人のうち1人が…であった'</td><td>同上</td></tr>
+<tr><td>12</td><td>'…の間の関連（association）を検討する'</td><td>'…を増加させうる。これらの所見の確認が、望ましくは介入的な設定で必要である'</td><td>関連の性質を確かめるためのさらなる研究を示唆している（コメントは12・13に共通）</td></tr>
+<tr><td>13</td><td>'…と比べて…は…と関連する'</td><td>'…の効果（effects）を検討するには、長期追跡を伴う追加研究が必要である'</td><td>同上</td></tr>
+</tbody></table></div>
+<h4>8-3. 一貫して非因果的（予測）— 2例</h4>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>抄録の目的</th><th>抄録の結論</th><th>原著のコメント</th></tr></thead>
+<tbody>
+<tr><td>14</td><td>'…のアウトカムを信頼性高く推定する実用的な予測ツール群を開発し妥当性検証する'</td><td>'…予測モデルはアウトカムを信頼性高く推定する'</td><td>予測モデルの開発と妥当性検証を記述している（コメントは14・15に共通）</td></tr>
+<tr><td>15</td><td>'…アルゴリズムを前向きに妥当性検証する'</td><td>'…を正確に分類した'</td><td>同上</td></tr>
+</tbody></table></div>
+<h4>8-4. 不整合（inconsistent）— 12例</h4>
+<p>原表ではセルが結合されており、目的側または結論側の1つの記述が複数行にまたがっている。ここでは各ペアに展開した。<strong>この12例は、不整合と判定された12編と数が一致し、9対3の内訳も一致する。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>抄録の目的</th><th>抄録の結論</th><th>型</th></tr></thead>
+<tbody>
+<tr><td>16</td><td>'…の安全性（safety）を評価する'</td><td>'…と関連する（associated with）'</td><td>目的を因果的に述べ、結論では関連の記述にとどめる（16〜18に共通）</td></tr>
+<tr><td>17</td><td>'…の効果（effect）を解析する'</td><td>'…と関連する'</td><td>同上</td></tr>
+<tr><td>18</td><td>'…の決定的な決定因子（critical determinant）…'</td><td>'…と関連する'</td><td>同上</td></tr>
+<tr><td>19</td><td>'…との関連（association with）…'</td><td>'…は安全（safe）である'</td><td>目的は関連の探索とだけ述べ、結論で因果的主張を提示する（19〜23に共通）</td></tr>
+<tr><td>20</td><td>'…との関連…'</td><td>'…は長期生存に実質的な効果（no substantial effect）を持たなかった'</td><td>同上</td></tr>
+<tr><td>21</td><td>'…との関連…'</td><td>'…は…によって決定されていた（was determined by）…大部分は…によって説明されうる'</td><td>同上</td></tr>
+<tr><td>22</td><td>'…との関連…'</td><td>'…はリスクが低下した最も安全な薬剤（the safest drug）であることがわかった'</td><td>同上</td></tr>
+<tr><td>23</td><td>'…との関連…'</td><td>'これらの結果は…の便益（benefit）を強調している'</td><td>同上</td></tr>
+<tr><td>24</td><td>'…との関連…'</td><td>'…これらのリスク因子すべてに取り組めば（tackling）実質的に…しうる'</td><td>目的も結論も関連の評価であるかのように述べながら、所見を踏まえて行動をとることを示唆している（24〜27に共通）</td></tr>
+<tr><td>25</td><td>'…との関連…'</td><td>'…これらの患者における…予防戦略を対象化（Targeting）することを考慮すべきである'</td><td>同上</td></tr>
+<tr><td>26</td><td>'…との関連…'</td><td>'…に系統的に対処することは、…の発生率を減らす重要な公衆衛生戦略になりうる'</td><td>同上</td></tr>
+<tr><td>27</td><td>'…との関連…'</td><td>'…本所見は、そうしたガイドラインの下方修正（downward revision）を後押しする'</td><td>同上</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>24〜27 の型がいちばん危ない <mark class="hl">16〜23 は語を見れば気づける。しかし 24〜27 は、結論の文中に因果を表す単語が1つも入っていない。</mark> 入っているのは「取り組む」「対象化する」「対処する」「下方修正を後押しする」という<strong>行動の推奨</strong>だけである。原著の主張の核心はここで、<mark class="hl">明示的な因果語がなくても、テイクホームメッセージが提示した所見に基づく介入を促していれば、因果的結論は暗黙に含まれている</mark>。査読・自己点検では、結論の最後の1文が「だから何をせよ」で終わっていないかを機械的に見るのが最も速い。</p>
+</div>
+<h3>9. Table 2 — 目的×結論の2×2（判定表そのもの）</h3>
+<p>原著は、目的と結論のミスマッチが「一貫」と「不整合」をどう分けるかを2×2に整理している。<strong>この表がそのまま添削の判定表として使える。</strong></p>
+<h4>Table 2. 抄録の目的と結論における（不）整合の例（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th></th><th>結論＝因果的</th><th>結論＝非因果的</th></tr></thead>
+<tbody>
+<tr><td><strong>目的＝因果的</strong></td><td><strong>整合（Consistent）</strong>&lt;br&gt;'…の有効性を評価する' ＋ '…の直接的な影響のエビデンスはほとんど見つからなかった'&lt;br&gt;'…リスクを減らすことにおける…の便益' ＋ '…は見落とされてきたリスク因子である'</td><td><strong>不整合（Inconsistent）</strong>&lt;br&gt;'…の安全性を評価する' ＋ '…と関連する'&lt;br&gt;'…の効果を解析する' ＋ '…と関連する'&lt;br&gt;'…決定的な決定因子…' ＋ '…と関連する'</td></tr>
+<tr><td><strong>目的＝非因果的</strong></td><td><strong>不整合（Inconsistent）</strong>&lt;br&gt;'…との関連…' ＋ '…は安全である'&lt;br&gt;'…との関連…' ＋ '…は長期生存に実質的な効果を持たなかった'&lt;br&gt;'…との関連…' ＋ '…これらのリスク因子すべてに取り組めば実質的に…しうる'&lt;br&gt;'…との関連…' ＋ '…に系統的に対処することは、…の発生率を減らす重要な公衆衛生戦略になりうる'</td><td><strong>整合（Consistent）</strong>&lt;br&gt;'…の推移を記述する' ＋ '…研究期間中、率は高く、最も高い率は…対…であった'&lt;br&gt;'…がどれくらいの頻度で起きるかを評価する' ＋ '…人の成人のうち1人が…であった'&lt;br&gt;'…のアウトカムを信頼性高く推定する実用的な予測ツール群を開発し妥当性検証する' ＋ '…予測モデルはアウトカムを信頼性高く推定する'</td></tr>
+</tbody></table></div>
+<h3>10. 自分の原稿に当てる判定フロー（Table 2 と Table 4 を作業手順に落としたもの）</h3>
+<p>原著の Table 2・Table 4 と本文の記述を、投稿前の作業として使える形に組み替えた。<strong>この表は原著には存在せず、本Vault固有の付加である。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>目的（Objective）に使った語</th><th>目的の格付け</th><th>使ってよい結論の語</th><th>使ってはいけない結論の語</th><th>追加で必要になること</th></tr></thead>
+<tbody>
+<tr><td>effect／impact／efficacy／effectiveness／safety／benefit／determinant／contribution／cause／improve／leads to／mediates／attributable</td><td>因果的</td><td>effect／impact／beneficial／safe／risk factor／prevented by／role — つまり因果語のまま結論する</td><td>「〜と関連した」だけで終える（＝逃げ）</td><td>交絡調整の方法、未測定交絡の議論、感度分析。仮定を述べ、理想的には批判的に評価する</td></tr>
+<tr><td>association／correlation／predict／pattern／trends／how often／link</td><td>非因果的</td><td>「〜と関連した」「〜の率は〜だった」「〜人に1人」「モデルは〜を正確に推定した」</td><td>safe／effect／determined by／safest／benefit／attributable。<strong>および「〜すべき」「〜を対象化する」「〜に対処する」「ガイドラインを見直す根拠となる」といった行動の推奨</strong></td><td>関連の性質を確かめる追加研究の必要性を書くのは可（Table 1 の #12・#13 が整合例）</td></tr>
+<tr><td>develop and validate a prediction model／prospectively validate an algorithm</td><td>予測（非因果）</td><td>「信頼性高く推定した」「正確に分類した」</td><td>「〜を減らせる」「〜を予防できる」（＝予測から介入への飛躍）</td><td>較正・判別・外的妥当性の報告</td></tr>
+<tr><td>independently associated／risk factor／higher probability／modify／induce／decompose</td><td>文脈次第（要注意）</td><td>文脈を明示したうえで、目的と同じ格付けの語</td><td>目的で曖昧にしたまま結論だけ因果に振る</td><td>何をもって independent と言うのか（調整変数）を明示。曖昧なら因果側に倒して扱う</td></tr>
+</tbody></table></div>
+<p>判断に迷ったときの原著の指針は明快である。「<strong>因果的結論を導くという究極の狙いについて透明であり、そこに届かなかったと認めるほうが、混乱を生むよりよい。</strong>」</p>
+<h3>11. 結果 — 掲載版の全文の評価（抄録だけを見ていては分からないこと）</h3>
+<p>オンライン補足資料の Table A に、60編それぞれについて、掲載版の抄録と全文に見られた記述（用いられた統計手法、および因果的な狙いを示唆する／しない考慮）が示されている。各行が異なる研究にあたり、論文は対応する抄録が割り当てられた区分ごとにグループ化され、因果的／非因果的な文言が太字で強調され、最終列の Comment に因果的言語の一貫性についての短い説明が付されている。</p>
+<p>見つかったことは3つである。</p>
+<div class="tw"><table>
+<thead><tr><th>抄録の分類</th><th>全文で何が見つかったか</th><th>数</th></tr></thead>
+<tbody>
+<tr><td>一貫して因果的</td><td>すべての論文が全文でも因果的言語を用い、因果的記述を含んでいた</td><td>29編すべて</td></tr>
+<tr><td>一貫して非因果的</td><td>抄録は関連の言葉で慎重に書かれているのに、著者は因果的手法を用い、残差交絡・生物学的妥当性・用量反応関係を論じて因果的な狙いを示唆していた</td><td>19編中11編（半数超）</td></tr>
+<tr><td>不整合のうち「目的＝因果・結論＝関連」の3編</td><td>全文で残差交絡の懸念を論じており、それが結論をトーンダウンさせた理由を説明していた</td><td>3編すべて</td></tr>
+</tbody></table></div>
+<p>不整合12編の方法は次のとおりである。</p>
+<div class="tw"><table>
+<thead><tr><th>方法</th><th>編数</th><th>割合</th></tr></thead>
+<tbody>
+<tr><td>調整推定値を提示していた</td><td>11／12</td><td>—</td></tr>
+<tr><td>アウトカム回帰モデル（主にCox比例ハザードモデル）</td><td>8／12</td><td>67%</td></tr>
+<tr><td>（傾向スコア）マッチング</td><td>3／12</td><td>25%</td></tr>
+</tbody></table></div>
+<p>8＋3＝11 で、調整推定値を出していた11編と一致する。残り1編は調整をしていなかったことになる。</p>
+<h3>12. 結果 — 投稿版との比較（査読は何を変えたか）</h3>
+<p>掲載版で「不整合」と分類された12編のうち、<strong>11/12（92%）は投稿時点でも不整合</strong>と分類された。</p>
+<p>投稿版が異なる型の関連を記述していたのは<strong>1編のみ</strong>である。この1編の経緯は次のようになっている。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>目的の記述</th><th>結論の記述</th><th>方法</th></tr></thead>
+<tbody>
+<tr><td>投稿版</td><td>ある介入の「<strong>impact（影響）</strong>」を評価する ＝ 因果的</td><td>その介入がアウトカムと「independently associated（独立して関連する）」＝ 保守的</td><td>調整済み効果推定値の提示、傾向スコアマッチングを用いた感度分析</td></tr>
+<tr><td>掲載版</td><td>「impact」が「<strong>association（関連）</strong>」に置換 ＝ 非因果的</td><td>同じ（independently associated）</td><td>変わらず。調整ハザード比を提示し、傾向スコアマッチングに依拠</td></tr>
+</tbody></table></div>
+<p>原著の評価は、この置換によって「<strong>抄録の目的と結論の両方が関連を記述することになった一方で、著者は依然として調整ハザード比を提示し傾向スコアマッチングに頼っていたため、抄録は因果的な狙いについてより不明瞭になった</strong>」というものである。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この1例の含意 — 編集過程が因果的意図を隠した <mark class="hl">査読・編集の介入が起きた唯一の例で、その介入は不整合を直したのではなく、因果的な狙いを見えなくする方向に働いた。</mark> 「impact」を「association」に書き換えても方法は因果的なままであり、読者から見れば研究の狙いが分からなくなっただけである。<mark class="hl">これは後述の Type II error（真の因果的目的・結果を、因果語を避けることで隠す）そのものにあたる</mark>。「とりあえず association に直しておく」という査読対応が最も安全だという通念は、この論文の立場からは誤りである。</p>
+</div>
+<h3>13. 考察 — 主要所見と、誤分類の代償（Table 3）</h3>
+<p><strong>主要所見</strong>：観察研究を報告する掲載版の研究抄録の大多数（80%）は、抄録内で因果的言語を一貫して用いていた。それでもなお 20% の抄録は、鍵となる「効果」の因果的性質について不整合なメッセージを含んでいた。不整合は2方向に現れた — 因果性への意図的な探求が批判なき非因果的結論に終わるものと、慎重に表現された単なる関連が、曝露とアウトカムの関連に基づいて行動し介入せよという推奨で終わるものである。</p>
+<p>言葉を超えて、読者は記述された統計手法と論文で明示された仮定から、求められている解釈について多くを学べる。個別の事例ごとに、たとえば「未測定交絡なし」といった追加の仮定がこれらのアプローチから導かれる因果的評価を正当化するかどうかを評価できる。補足資料に示したような鍵となる要素を同定することが、因果推論が可能かどうかの判断を助ける。疑わしければ感度分析が求められる。</p>
+<p>「一貫して因果的」な論文の全文を評価したとき、著者はしばしばこれらの仮定を議論し、感度分析を実施していた。「不整合」「一貫して非因果的」と分類された論文でもそうだった。これらの論文では、研究の観察的性質のため、あるいは特定の交絡因子が測定されていないために、残差交絡への懸念があった。そのため抄録の目的が、そうした懸念や限界を抄録で明示する代わりに、因果的な狙いを示唆することを避けていた。</p>
+<h4>Table 3. 因果効果の割り当てを誤ったときの代償（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th></th><th><strong>真の姿：因果的</strong></th><th><strong>真の姿：因果的でない</strong></th></tr></thead>
+<tbody>
+<tr><td><strong>報告：因果的</strong></td><td>真の因果効果が発見されている。これに基づいて行動する推奨が検討されてよい。因果推論を意図した研究の文脈における言語</td><td><strong>Type I error</strong>：因果効果は存在しないのに主張されている。目的・能力が関連を見つけることであったのに、因果的言語が用いられたり行動をとる示唆がなされたりしている</td></tr>
+<tr><td><strong>報告：因果的でない</strong></td><td><strong>Type II error</strong>：因果的言語を避けることによって、真の因果的目的・結果を隠している</td><td>目的が予測または関連の探索であるときに、因果的言語が用いられていない</td></tr>
+</tbody></table></div>
+<p>原著の政策的含意の節は、この表を「行動するとき／しないときのリスクの型を認識するため」の道具と位置づけている。不確かさに直面したとき、Type I と Type II のエラー率の正当化できるバランスが行動の自然な指針になる。エラーのコストは文脈で重みづけられねばならない。たとえば臨床試験では、大きなコストで役に立たない新薬を導入することを避けるため Type I error の制御が強調される。スクリーニングプログラムでは異なる重みづけが典型的で、偽陽性は追跡検査で捕まえられるが、偽陰性は永遠に失われる。COVID-19 パンデミックのような危機では、長期のランダム化試験が実現する前に行動しなければならず、観察データからできるだけ多くを学ぶことが否定しがたく重要になる。</p>
+<p><strong>政策的含意</strong>：観察データ資源が豊富になるにつれ、実世界エビデンスへの要請と歩調を合わせて観察データからの因果推論の手法が急増した。新しい機会は新しい課題と、エビデンスについて明確で十分に裏づけられた記述を行う責任をもたらす。ICH E9 と FDA が提案する新たなガイドラインに動機づけられ、Hernán らは「実世界の設定におけるランダム化比較試験の解析のためのガイドライン開発」というプロジェクトに着手している。そうした取り組みは、RCTの有無にかかわらず、文脈における因果的解釈を許す因果的手法の根底にある仮定を明示し議論する方向への転換を支持する。その間も、観察研究における無批判で曖昧な表現は依然として広く見られる。将来の治療決定を支える最良のエビデンスを探す者にとって、最も役立つのは観察研究の透明な報告である。</p>
+<h3>14. 考察 — 先行研究との比較、強みと弱み</h3>
+<p><strong>先行研究との比較</strong>：Cofield らは栄養学の観察研究で因果語の使用を評価したが、観察研究という性質ゆえに不適切とみなし、著者が因果語を含めたかどうかだけに焦点を当てた。本論文の立場は違う。<strong>明示的な因果的用語を単に避けることは真の解決ではない</strong>。それらが無くても、テイクホームメッセージが提示された所見に基づく介入を促していれば、因果的結論は暗黙に含まれている。不整合を避けることは重要だが、同じくらい、一貫した因果的言語の使用が空虚でないことを信頼できねばならない。そのためには手法と、因果的主張を妥当化する仮定をより深く見る必要がある。</p>
+<p><strong>強みと弱み</strong>：正確な抄録は重要である。わずか数段落のなかで著者はデザイン・方法・結果の鍵となる要素を要約し、結論に至る。多くの読者は抄録しか読まない。しかし力のある抄録は読者への扉を開き、研究の舞台を整える。抄録は主要所見を聴衆に伝えるとともに、読者に全文を読ませる動機を与えるという異なる役割を、簡潔さの制約のなかで果たす。これは、抄録のあらゆる語が必要であることを保証するよう著者に特段の注意を要求する。以上すべてが、抄録の評価を意味あるものにすると同時に困難にもしている。</p>
+<p>さらなる研究として、抄録と全文で提示された因果的主張が、適用されたデザインと手法によってどう支えられているかを探ることが必要である。それには用いられた手法を評価し、根底にある仮定が満たされたかどうかを評価することが含まれる。</p>
+<p>原著が自ら挙げる限界（Strengths and limitations ボックスと本文から）：</p>
+<div class="tw"><table>
+<thead><tr><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>単一誌</td><td>単一の雑誌の観察研究を評価したことで、この文脈での因果的主張の不整合な使用を指摘できたが、より一般的な有病率は推定できない</td></tr>
+<tr><td>抄録中心</td><td>多くの読者が抄録から読み始めるため明確なメッセージが特に重要だとして、抄録に焦点を当てた</td></tr>
+<tr><td>手法の妥当性には踏み込まない</td><td>因果的言語の使用そのものに焦点を当て、具体的な手法には踏み込まないことで、当該設定で因果推論を正当化する根底の仮定の妥当性についての議論を回避した</td></tr>
+<tr><td>仮定が満たされたかの議論を落としている可能性</td><td>評価を因果的言語の一貫性に限定したことで、因果推論を可能にする根底の仮定がどの程度満たされたかの議論を見落としたかもしれない。これには個別事例ごとの主題知識が必要である</td></tr>
+<tr><td>「見かけの不整合」が不整合でない可能性</td><td>明確な因果的な狙いがありながら著者が仮定は満たされないと考えた場合、因果的主張は不適切だと判断して結論を因果ではなく関連の言葉で表現したのかもしれない。<strong>もしそうなら、見かけの不整合はもはや成立しない</strong></td></tr>
+<tr><td>一方で、不当な因果的主張は spin</td><td>逆に、不当な因果的主張は spin（報告上の歪み）の一形態とみなせる</td></tr>
+<tr><td>分類の粗さ</td><td>短い記述に対して便宜的に限られた数の分類を用いた。実際には潜在的な因果関係への連続的な確信度が生じるだろう</td></tr>
+</tbody></table></div>
+<p><strong>投稿版との比較ができたこと自体は強み</strong>である。掲載版と投稿版の抄録を比較したことで、査読プロセスの結果として因果的主張がなされたか否かを同定できた。</p>
+<h3>15. 結論（原著 Conclusion）</h3>
+<p>要するに、著者らが見つけたのは、<strong>関連の言葉で慎重に表現された研究のなかに、因果的メッセージが埋め込まれている</strong>ということである。何が因果的記述にあたるのかについて、Lederer らが呼吸器・睡眠・集中治療の雑誌向けに発表したものと同様の、著者向けのさらなるガイダンスが必要である。他の疾患領域についても同様のガイダンスが待たれる。スクリーニングした *The BMJ* の抄録から、明確な解釈をもつ表現のリストを提供した。これは、たとえばコンセンサス会議から導かれうる、より包括的な用語集の着想になりうる。著者と査読者のあいだにそうした意識と特段の注意があれば、構想された介入について利用可能な最良のエビデンスを伝えるという役割に資する、というのが著者らの主張である。</p>
+<h3>16. 本文に無いこと（探しても載っていない項目）</h3>
+<ul><li><strong>評価者間一致率</strong>。独立2名評価＋第3者調停という手続きは書かれているが、κ係数も、不一致の件数も、調停の方向も報告されていない。</li><li><strong>動詞の強度スケール</strong>。associated with ＜ linked to ＜ leads to ＜ causes のような連続的な階梯は作られていない（第6節）。</li><li><strong>60編の論文名・DOI</strong>。個別研究は匿名化されており、Table 1 では主題語が伏せられている。補足資料の Table A に60編分の記述が載るが、本 PDF 本体には含まれない。</li><li><strong>時系列の変化</strong>。2018年の1年分のみで、経年で改善しているかは分からない。</li><li><strong>雑誌間・領域間の比較</strong>。単一誌なので、集中治療領域の雑誌がどうかは本研究からは言えない。</li><li><strong>査読者コメントの内容分析</strong>。査読レポートは入手しているが、査読者が因果的言語を指摘したかどうかの体系的な集計は示されていない。示されているのは「変更が査読者コメントの結果かどうか」の判定のみである。</li><li><strong>「不整合」が読者の解釈に与える影響</strong>。読者がどう誤解するかは測定されていない。</li><li><strong>本研究自身の因果的言語</strong>。メタリサーチである本論文の抄録が、自らの基準に照らしてどう分類されるかは論じられていない。</li></ul>
+<h3>17. 批判的吟味（JCでの論点）🧐</h3>
+<p><strong>（1）「2割」は 15% かもしれない。</strong> 不整合12編のうち3編は「目的＝因果・結論＝関連」の型だが、原著自身が Results で「これら3編の全文では著者が残差交絡の懸念を論じており、それが結論をトーンダウンさせた理由を説明している」と書き、Limitations で「もしそうなら、見かけの不整合はもはや成立しない」と認めている。この3編を外せば <strong>9/60＝15%</strong> になる。抄録の「20%」という数字は、著者自身が留保をつけた3編を含んだ値である。JCで最初に置くべき論点はここである。</p>
+<p><strong>（2）Discussion の「uncriticised」が Results と食い違う。</strong> Discussion は不整合の1方向を「因果性への意図的な探求が <strong>批判なき（uncriticised）</strong> 非因果的結論に終わる」と書く。しかし Results は、まさにその3編について「残差交絡の懸念を論じていた」と書いている。論じているなら「批判なき」ではない。<strong>同じ3編を、Results は擁護し Discussion は非難している。</strong></p>
+<p><strong>（3）「主に（mainly）」という語が実態と合っていない。</strong> 抄録は「投稿版・掲載版の双方に見られた不整合は、<strong>主に</strong>目的と結論のミスマッチによる」と書く。しかし Results の内訳は 9/12＋3/12＝12/12 であり、<strong>全例</strong>が目的と結論のミスマッチである。「主に」ではなく「すべて」が正しい。数値としては軽微だが、この論文自身が言葉の精度を主題にしていることを思えば皮肉な瑕疵である。</p>
+<p><strong>（4）分類の単位が途中で入れ替わっている。</strong> 総合評価は「抄録の主要な主張」に対して定義されている。ところが投稿版比較の唯一の例外1編では、掲載版の目的も結論も association なのに（＝規則どおりなら consistently not causal になるはずなのに）、<strong>調整ハザード比と傾向スコアマッチングという方法を根拠に</strong>不整合の12編に留め置かれている。抄録の語で判定するのか、方法まで含めて判定するのかが一定していない。強みの節が「具体的な手法には踏み込まないことで仮定の妥当性の議論を回避した」と書いているのとも整合しない。</p>
+<p><strong>（5）評価者間一致率が無い。</strong> yes／no／unclear の3択が7〜8個の小見出しに対して行われ、そこから3分類の総合評価が導かれる。判定の主観性が高い設計であるにもかかわらず、κ も不一致件数も報告されていない。第3評価者（EG）は上席著者でもあり、調停が特定の方向に偏った可能性を読者は検証できない。</p>
+<p><strong>（6）COIの位置が主題と重なる。</strong> 共著者の Sara Schroter は BMJ Publishing Group の常勤職員であり、評価対象は *The BMJ* の掲載論文、データ源は *The BMJ* の原稿追跡システムである。「自誌の掲載論文の質を、自誌の職員が入ったチームが、自誌の非公開データを使って評価し、自誌グループの雑誌（BMJ Open）に発表した」構図になる。本人は分類作業（COP・LB が実施）には入っておらず、貢献は着想と執筆・編集にとどまると明記されているので直接の評価バイアスは生じにくいが、<strong>掲載誌の選定と、結論の穏当さ（「著者向けのガイダンスが必要」であって「編集方針を変えよ」ではない）には、この位置関係を頭に置いて読む価値がある</strong>。データへのアクセスも守秘契約下で第一著者にのみ与えられ、投稿版データは「confidential submission data」として公開されない。<strong>第三者が検証できない部分が残る。</strong></p>
+<p><strong>（7）*The BMJ* は最良の環境である。</strong> *The BMJ* は統計査読が厚く、報告ガイドラインの遵守を強く求める雑誌である（<span class="wl">統計査読でよく指摘される12項目 — BMJ統計編集者からのクリスマスリスト（BMJ2022）</span> を出しているのと同じ雑誌である）。そこで20%（あるいは15%）という数字が出るということは、<strong>査読体制がより薄い雑誌ではもっと高いと考えるのが自然</strong>である。単一誌という限界は「一般化できない」だけでなく「<strong>この値は下限とみるべき</strong>」という方向を持っている。</p>
+<p><strong>（8）Table 4 の組版に不備がある。</strong> 原表の「Specific expressions avoiding suggestions of causal effects」の3番目の項目が <code>Less (more) likely link</code> という1つの箇条書きになっている。これは "Less (more) likely" と "Link" という別々の2項目が、箇条書き記号の脱落で1行に融合したものと読める。同様に「Words that could suggest causality in a given context」の最後が <code>Trajectory (quantitatively) decompose</code> となっているが、Table 1 では '(quantitatively) decompose' が独立した目的の表現として登場しており、"Trajectory" と "(quantitatively) decompose" の2項目とみるのが自然である。<strong>語の定義を主題にした論文の語リストに、区切りの脱落がある。</strong></p>
+<p><strong>（9）'Safety' が因果語リストに入っていることの実務的な重さ。</strong> Table 4 は Safety を明確な因果語に分類している。集中治療領域の観察研究では「〜の安全性を検討した」という目的設定が非常に多い。この論文の基準に従えば、<strong>安全性を目的に掲げた時点で因果的主張をしていることになり、結論を「関連」で締めれば不整合と判定される</strong>（Table 1 の #16 がまさにこれ）。当科から出す原稿でも真っ先に当たる項目である。</p>
+<p><strong>（10）2018年という時点。</strong> 対象は2018年掲載分であり、その後 target trial emulation の普及、ICH E9(R1) の正式発効（2020年2月）、STROBE の運用強化などが進んでいる。現在の *The BMJ* で同じ調査をすれば数字は変わりうる。本研究はその後追試されていない（Vault 未収載）。</p>
+<h3>18. その後どうなったか（Vault内で裏が取れる範囲）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本論文（2021）</th><th>その後</th><th>Vault内の裏づけ</th></tr></thead>
+<tbody>
+<tr><td>因果語を避けるべきか</td><td>避けることは解決でない。因果を問うなら因果語を使い、仮定を議論せよ</td><td>同じ主張が *The BMJ* 本誌の解説として展開され、「問いが因果なら causal language が必要」と定式化された</td><td><span class="wl">因果の言葉と関連の言葉をどう使い分けるか — 問いが因果なら causal language が必要（BMJ2026）</span>。本論文が実証データ、こちらが規範。2本セットで読むと説得力が増す</td></tr>
+<tr><td>統計査読で何を見るか</td><td>本論文は言語の一貫性のみを扱う</td><td>BMJ の統計編集者が査読で頻出する12項目を提示。第1日（研究疑問の明確化）と第12日（報告ガイドライン・過剰解釈の回避）が本論文の主題と直結する</td><td><span class="wl">統計査読でよく指摘される12項目 — BMJ統計編集者からのクリスマスリスト（BMJ2022）</span>。同ノートには本Vaultの改稿で見つかった原著の瑕疵11件と12項目の対応表がある。瑕疵の大半が第12日（報告の不完全さ）と第2日（推定値・信頼区間）に集中し、第1日（estimand の定義）の不備が下流で分母・起点・サブグループ定義の取り違えとして表面化する構造だった。<strong>本論文が言う「目的と結論のミスマッチ」は、その第1日の不備が抄録の表層に出たもの</strong>と読める</td></tr>
+<tr><td>報告ガイドライン</td><td>本論文は STROBE 等に触れていない</td><td>CONSORT は2025年に改訂。観察研究側の運用も強化</td><td><span class="wl">CONSORT 2025 — RCT報告ガイドラインの改訂（JAMA2025）</span></td></tr>
+<tr><td>観察データから因果を出す手法</td><td>傾向スコア・DAG・潜在アウトカムに言及</td><td>実務的なチュートリアルが整備</td><td><span class="wl">傾向スコア重み付けと多重代入を組み合わせる — SMC-FCSとブートストラップCIの実務チュートリアル（ClinEpidemiol2022）</span>、<span class="wl">メンデルランダム化で敗血症の因果を切り分ける — 相関するバイオマーカーから治療標的へ（Understanding the Disease・ICM2022）</span></td></tr>
+<tr><td>集中治療領域でのガイド</td><td>Lederer ら2019を紹介</td><td>Vault未収載（Ann Am Thorac Soc 2019;16:22–8）。当科の観察研究投稿時の参照文献候補</td><td>—</td></tr>
+<tr><td>追試</td><td>—</td><td>本研究の追試・他誌での再現は Vault 未収載</td><td>—</td></tr>
+</tbody></table></div>
+<h3>19. 改稿前の記述との食い違い（PDF照合で判明）📌</h3>
+<p>旧ノート（26行、PDF 1〜4ページのみに基づくと自ら注記していた）と PDF 紙面の突き合わせで、次の食い違い・欠落が見つかった。PDF を正とする。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧ノートの記述</th><th>PDF紙面</th><th>種類</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>書誌に「<strong>投稿版と出版版の両方にアクセス</strong>」とだけ書き、全編で比較したかのように読める</td><td>投稿版の原稿と査読レポートを入手して比較したのは、<strong>「不整合」と判定された12編に限る</strong>（Assessment of initially submitted abstract version）。60編全部ではない</td><td>範囲の限定が落ちている</td></tr>
+<tr><td>2</td><td>「不整合の主因は目的と結論の食い違い」とだけ記載</td><td>内訳は<strong>目的＝関連・結論＝因果が9/12、その逆が3/12</strong>。合計12/12で、全例がこの型</td><td>分子・分母の欠落</td></tr>
+<tr><td>3</td><td>「12編中11編（92%）は投稿時点ですでに不整合」で止まり、残る1編に触れていない</td><td>残る1編では、投稿時の目的 'impact' が掲載版で 'association' に置換されていた。方法は調整HR＋傾向スコアマッチングのままで、<strong>編集過程が因果的な狙いを見えにくくした</strong>。査読が整合を回復させた例ではない</td><td>重要な例外の欠落。方向を誤読させる</td></tr>
+<tr><td>4</td><td>「本ノートの制約：結果の詳細な内訳、考察は抽出範囲外」</td><td>全文評価の結果が丸ごと落ちていた。<strong>「一貫して非因果的」19編のうち11編は、実際には因果的手法を用い残差交絡・生物学的妥当性・用量反応を論じていた</strong>。本研究で最も実務的に効く所見</td><td>主要所見の欠落</td></tr>
+<tr><td>5</td><td>「著者らが提供した因果的言語の表現リストの中身は抽出範囲外」</td><td>Table 4 に全件が載っている（因果語15項目／文脈次第6項目／非因果5項目／因果的な狙いを示す研究要素11項目）</td><td>道具の欠落</td></tr>
+<tr><td>6</td><td>Table 3（Type I／Type II error の枠組み）への言及なし</td><td>誤分類の代償を2×2で整理した表があり、政策的含意の節がこれを行動指針として使っている</td><td>枠組みの欠落</td></tr>
+<tr><td>7</td><td>Table 1・Table 2 の実例に言及なし</td><td>Table 1 に27例、Table 2 に2×2の実例が載っており、そのまま添削の判定表として使える</td><td>実例の欠落</td></tr>
+<tr><td>8</td><td>方法欄に評価者数・判定手続きの記載なし</td><td><strong>独立2名（COP・LB）＋不一致時に第3評価者（EG）で合意</strong>。小見出しごとに yes／no／unclear。ただし一致率の報告は無い</td><td>手続きの欠落</td></tr>
+<tr><td>9</td><td>抽出の欄に除外基準の記載なし</td><td><strong>ケースコホートは除外</strong>。「observational」とだけ書かれたものは、横断でなく追跡を示唆する場合のみ組み入れ</td><td>除外基準の欠落</td></tr>
+<tr><td>10</td><td>60編について「うち適格な研究」とのみ</td><td>151編中60編＝<strong>40%</strong></td><td>割合の欠落</td></tr>
+<tr><td>11</td><td>不整合12編の解析手法に言及なし</td><td><strong>11/12が調整推定値、8/12（67%）がアウトカム回帰（主にCox）、3/12（25%）が傾向スコアマッチング</strong></td><td>数値の欠落</td></tr>
+<tr><td>12</td><td>COI・資金源の記載なし</td><td><strong>Sara Schroter は BMJ Publishing Group 常勤職員</strong>。資金は EU Horizon 2020 Marie Skłodowska-Curie 助成 no. 676207。主題（*The BMJ* 掲載論文の評価）と開示先が重なる</td><td>COI の欠落</td></tr>
+<tr><td>13</td><td>frontmatter に <code>updated</code> なし、ジャーナルクラブタグなし、PDF 埋め込みなし</td><td>—</td><td>体裁</td></tr>
+</tbody></table></div>
+<p>なお、旧ノートに<strong>事実として誤っている記述は無かった</strong>。問題は範囲の限定漏れ（#1）と、主要所見・道具の丸ごとの欠落（#4〜#7）である。</p>
+<h3>20. 主要な引用文献一覧</h3>
+<p>原著が本文で実質的に依拠している文献を、内容とともに挙げる。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>因果と関連 — 木を見て森を見ず</td><td>Begg MD, March D. Am J Public Health. 2018;108:620</td></tr>
+<tr><td>2</td><td>疫学研究における因果効果の定義</td><td>Hernán MA. J Epidemiol Community Health. 2004;58:265–71</td></tr>
+<tr><td>3</td><td>予測不能性のパラドックス — ランダム化研究と非ランダム化研究の実証的比較のレビュー</td><td>Kunz R, Oxman AD. BMJ. 1998;317:1185–90</td></tr>
+<tr><td>4</td><td>JAMA 系雑誌における因果関係の言語の使用</td><td>Ruich P. 2017</td></tr>
+<tr><td>5</td><td>肥満・栄養の観察研究における因果語の使用</td><td>Cofield SS, Corona RV, Allison DB. Obes Facts. 2010;3:353–6</td></tr>
+<tr><td>6</td><td>出版のための執筆において因果的言語に正直であること（Table 4 の主要な典拠の1つ）</td><td>Thapa DK, Visentin DC, Hunt GE, et al. J Adv Nurs. 2020;76:1285–8</td></tr>
+<tr><td>7</td><td>前立腺・肺・大腸・卵巣がんスクリーニング試験における健康ボランティア効果</td><td>Pinsky PF, Miller A, Kramer BS, et al. Am J Epidemiol. 2007;165:874–81</td></tr>
+<tr><td>8</td><td>ICH E9(R1) — 臨床試験における estimand と感度分析（FDA）</td><td>Permutt T, Scott J, FDA. 2017</td></tr>
+<tr><td>9</td><td>ICH E9(R1) addendum（EMA、2020年2月）</td><td>European Medicines Agency. 2020</td></tr>
+<tr><td>10</td><td>The C-Word — 科学的婉曲表現は観察データからの因果推論を改善しない（本論文の思想的な柱。Table 4 の主要な典拠）</td><td>Hernán MA. Am J Public Health. 2018;108:616–9</td></tr>
+<tr><td>11</td><td>健康の社会的不平等をなくすための批判的道具としての因果的思考</td><td>Glymour MM, Hamad R. Am J Public Health. 2018;108:623</td></tr>
+<tr><td>12</td><td>因果効果を計算することと推定すること</td><td>Green MJ. Am J Public Health. 2018;108:e4–5</td></tr>
+<tr><td>13</td><td>Causal Inference: What If（因果推論の標準教科書）</td><td>Hernán M, Robins J. Chapman &amp; Hall/CRC, 2020</td></tr>
+<tr><td>14</td><td>因果的な問いの立て方と、原理に基づく統計的な答え</td><td>Goetghebeur E, le Cessie S, De Stavola B, et al. Stat Med. 2020;39:4922–48</td></tr>
+<tr><td>15</td><td>ニュース見出しの因果的・相関的表現を読者はどう理解するか</td><td>Adams RC, Sumner P, Vivian-Griffiths S, et al. J Exp Psychol Appl. 2017;23:1–14</td></tr>
+<tr><td>16</td><td>SNSで共有された学術論文とメディア記事における因果的言語と推論の強さ（CLAIMS）</td><td>Haber N, Smith ER, Moscoe E, et al. PLoS One. 2018;13:e0196346</td></tr>
+<tr><td>17</td><td>交絡の制御と因果推論研究の結果報告 — 呼吸器・睡眠・集中治療の雑誌の編集者による著者向けガイダンス（<strong>集中治療領域で最も使える参照文献</strong>）</td><td>Lederer DJ, Bell SC, Branson RD, et al. Ann Am Thorac Soc. 2019;16:22–8</td></tr>
+<tr><td>18</td><td>予測モデルと因果推論研究の開発・報告に関する方法論的ガイダンスと期待</td><td>Harhay MO, Au DH, Dell SD, et al. Ann Am Thorac Soc. 2020;17:679–82</td></tr>
+<tr><td>19</td><td>疫学データからの因果効果の推定</td><td>Hernán MA, Robins JM. J Epidemiol Community Health. 2006;60:578–86</td></tr>
+<tr><td>20</td><td>主要評価項目が統計学的に有意でないRCTの報告と解釈（spin の古典）</td><td>Boutron I, Dutton S, Ravaud P, et al. JAMA. 2010;303:2058</td></tr>
+<tr><td>21</td><td>卵巣がんバイオマーカー評価における spin・解釈バイアスの蔓延</td><td>Ghannad M, Olsen M, Boutron I, et al. J Clin Epidemiol. 2019;116:9–17</td></tr>
+<tr><td>22</td><td>実世界設定におけるRCT解析のガイドライン開発（Hernán らのPCORIプロジェクト）</td><td>PCORI. —</td></tr>
+<tr><td>23</td><td>Twitter メッセージからの健康関連因果関係の自然言語処理による抽出</td><td>Doan S, Yang EW, Tilak SS, et al. BMC Med Inform Decis Mak. 2019;19:79</td></tr>
+<tr><td>24</td><td>公衆衛生における因果性 — 一語では足りない</td><td>Chiolero A. Am J Public Health. 2019;109:1319–20</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">抄録の Objective の1文と Conclusion の1文を並べて、どちらか一方だけに因果の語（effect・impact・safety・benefit・determinant）が入っていたら、それが不整合である。</mark> *The BMJ* 掲載の観察研究60編でこれが12編（20%）に起き、<mark class="hl">その11/12（92%）は投稿時点から存在して査読を素通りした</mark>。<mark class="hl">内訳は「目的は関連・結論は因果」が9編、その逆が3編。</mark> <mark class="hl">いちばん危ないのは、結論に因果語が1語も無いのに「〜すべき」「〜を対象化する」と行動を推奨している型</mark>（原著 Table 1 で4例）。<mark class="hl">明示的な因果語がなくても、所見に基づく介入を促した時点で因果的結論を主張している。</mark> <mark class="hl">そして、因果語を避けることは解決ではない。</mark> 「一貫して非因果的」と分類された19編のうち<mark class="hl">11編は、実際には交絡調整・傾向スコア・用量反応の議論という因果的手法を使っていた</mark>。言葉だけ薄めるのは Type II error（因果的目的の隠蔽）である。<mark class="hl">方法が因果的なら目的も因果的に書き、推定できる指標と目標とする因果効果の隔たりを本文で率直に議論する</mark>のが正しい。 <mark class="hl">明日から変わる行動：当科の抄録指導と自分の投稿前チェックで、目的と結論の2文だけを抜き出して並べる工程を必ず入れる。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

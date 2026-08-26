@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>POCUSガイド蘇生はショックの28日死亡を減らす — 18RCTのSR・メタ解析（CCM2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="CCM.0000000000006399.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">POCUSガイド蘇生はショックの28日死亡を減らす — 18RCTのSR・メタ解析（CCM2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Basmaji J, Arntfield R, Desai K, Lau VI, Lewis K, Rochwerg B, Fiorini K, Honarmand K, Slessarev M, Leligdowicz A, Park B, Prager R, Wong MYS, Jones PM, Ball IM, Orozco N, Meade M, Thabane L, Guyatt G. The Impact of Point-of-Care Ultrasound-Guided Resuscitation on Clinical Outcomes in Patients With Shock: A Systematic Review and Meta-Analysis. Crit Care Med. 2024;52(11):1661-1673. doi:10.1097/CCM.0000000000006399</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2024-09-18）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000006399" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000006399</a>（本文PDFは別途）</dd><dt>原題</dt><dd>The Impact of Point-of-Care Ultrasound-Guided Resuscitation on Clinical Outcomes in Patients With Shock: A Systematic Review and Meta-Analysis</dd></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006399.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/CCM.0000000000006399.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/CCM.0000000000006399.pdf)</p>
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院のPOCUS運用にどう落とすか</p>
+<ul><li><strong>「POCUSで死亡が減る」と言い切らない</strong>。28日死亡は RR 0.88（95%CI 0.78–0.99）だが、<strong>CI上限は0.99で1.00に張り付き</strong>、GRADE確実性は Moderate（不精確性で1段階格下げ）。17 RCT・2163例と規模が小さく、1例を除きすべて単施設。院内で推進根拠として使うなら「有望なシグナル」までにとどめる。</li><li><strong>教育の建て付けを「量を変える」から「速さと標的を変える」へ</strong>。本研究の最重要所見は、POCUSが<strong>医師の処方変更回数を減らす</strong>一方で、実際に投与された輸液量・強心薬量はほとんど変わらないこと。著者らは「POCUSは蘇生を速めることでアウトカムを改善しているのではないか」と推測している（乳酸クリアランス改善＋昇圧薬期間短縮＝ショック離脱が速い）。当院のPOCUS講習で「エコーを見て輸液量を加減する」という説明のしかたを見直す材料になる。</li><li>昇圧薬期間 −0.73日（95%CI −1.16〜−0.30日、Moderate）を当院のアウトカム指標にする。ICU在室日数・在院日数はいずれも差がないので、<strong>在室短縮ではなく「昇圧薬離脱の早さ」を追う</strong>のが本研究と整合する。当院の敗血症性ショック症例で昇圧薬投与時間を電子カルテから拾えば、導入前後比較の指標になる。</li><li>「診断的心エコー依頼が減る（RR 0.74）」を院内の費用対効果の根拠に使うのは危険。この数字は <strong>545例の単一RCT 1本のみ</strong>、しかも使い捨てプローブによる持続経食道モニタリング（ImaCor社デバイス）の試験に由来する。当院の経胸壁POCUSに外挿できない。著者ら自身が indirectness で格下げしている。</li><li><strong>CT件数は減らない（RR 1.10、Low）</strong>。「POCUSを入れればCTが減る」という説明は本研究では支持されない。</li><li><strong>術者要件・スキャン頻度・タイミングは本研究では決められない</strong>。18 RCTの大半がこれらを報告しておらず、著者らは「エビデンス不足で検討できなかった」と明記している。当院でPOCUSプロトコルを作るなら、<strong>この3点は自分たちで決めて実測する</strong>しかない（誰が撮るか／初期何時間で何回撮るか／再評価のトリガーは何か）。</li><li><strong>害のシグナルは検出されていない</strong>（著者ら明記）。既にPOCUSが手技ガイドなどで日常に入っている当院のような環境では、ショック管理への継続使用を支持するというのが著者らの実務的な結論。一方で<strong>基盤も訓練体制もない環境への一斉導入は慎重に</strong>、とも書いている。</li><li><strong>当院で「POCUS」と呼ぶ範囲を定義しておく</strong>。本研究のPOCUS定義は「治療にあたる臨床医自身が、ベッドサイドで取得し、解釈し、直ちに管理決定へ統合すること」。撮影者と読影者が分かれる運用はこの定義から外れる。「誰が撮るか」を院内で議論するときの出発点になる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていたこと）</strong>：ショック管理は「診断」と「動的介入」を同時に迫られ、判断の誤差許容幅が狭い。POCUSは無痛・無被曝で有害事象リスクが低く、心臓・肺・血管・腹部という複数臓器を一度に評価でき、心タンポナーデのような<strong>治療可能な病態</strong>を露出させうる。外傷の迅速評価や手技ガイドとして超音波は既に急性期医療に組み込まれている。</li><li><strong>Unknown（分かっていなかったこと）</strong>：これら理論的な利点にもかかわらず、POCUSが患者にとって重要なアウトカムを変えるのかは不確実なままだった。POCUSは各科の教育カリキュラムに急速に組み込まれつつあり、「管理決定・医療資源利用・患者アウトカム」への影響を整理する必要が高まっていた。</li><li><strong>What's new（本研究の新規性・意義）</strong>：診断技術の評価に特化した「アウトカムの階層」（Guyatt らの1986年のフレームワーク）に沿って、POCUSを包括的に評価した初の系統的レビュー。①医師の意思決定が変わるか → ②実際に投与される治療・実施される検査が変わるか → ③患者にとって重要なアウトカムが変わるか、を順に評価した。18 RCTを統合し、28日死亡 RR 0.88（0.78–0.99）／昇圧薬期間 −0.73日／RRT必要性 RR 0.80（0.63–1.02）／乳酸クリアランス改善を示した一方で、<strong>輸液量・強心薬量は変わらない</strong>という一見矛盾した所見を明確に示した。同時に、術者の習熟度・頻度・タイミングという「実装に最も必要な情報」がエビデンス上ほぼ空白であることを可視化した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ショック患者へのPOCUSガイド蘇生は、28日死亡・昇圧薬期間・RRTの必要性をおそらく減らし、乳酸クリアランスを改善する。ただし<strong>投与された輸液量や強心薬量はほとんど変わっておらず</strong>、効いている機序は「量の最適化」ではなく「蘇生の迅速化」である可能性が高い。<strong>エビデンスの土台は小規模・ほぼ単施設のRCT群</strong>であり、術者要件・頻度・タイミングは未解決のまま。</p>
+</div>
+<ul><li><strong>目的</strong>：成人ショック患者において、POCUSガイド蘇生が臨床アウトカムに与える影響を明らかにする。</li><li><strong>検索</strong>：MEDLINE、Embase、および灰色文献（未発表資料）を、<strong>開始時点から2023年12月まで</strong>。言語制限なし。</li><li><strong>組入</strong>：ショック患者の蘇生をPOCUSでガイドすることを検討した<strong>RCT</strong>（パイロット／実行可能性試験を含む）。結果として18 RCTが適格。</li><li><strong>医師の意思決定</strong>：POCUSは輸液・血管作動薬の処方<strong>計画をわずかに変える</strong>（Moderate）。ただしこれは545例の単一RCT 1本のみに基づく。</li><li><strong>実際の治療</strong>：投与輸液量は6時間 −0.39L（Low）、24時間 −0.62L（High）、72時間 −0.18L（Moderate）で、いずれも<strong>「ほとんど、あるいはまったく差がない」と判定</strong>。強心薬投与も RR 0.99（0.84–1.17、High）で差なし。</li><li><strong>診断検査</strong>：CT件数は RR 1.10（0.73–1.66、Low）で変わらない可能性。<strong>診断的経胸壁心エコー（TTE）はおそらく減る</strong> RR 0.74（0.57–0.96、Moderate）。ただし単一RCT由来。</li><li><strong>死亡</strong>：28日死亡 RR 0.88（95%CI 0.78–0.99）、絶対差 1000人あたり41人減、17 RCT・2163例、確実性 Moderate（不精確性で格下げ）。組み入れ研究が報告した死亡の時点は<strong>28〜30日</strong>。</li><li><strong>臓器補助</strong>：昇圧薬総投与期間 −0.73日（95%CI −1.16〜−0.30日、Moderate）。RRT実施 <strong>RR 0.80（0.63–1.02、Low）</strong>。人工呼吸の実施 RR 0.88（0.67–1.15）、人工呼吸期間・RRT期間はいずれも Very low で不確実。</li><li><strong>代替アウトカム</strong>：乳酸クリアランスは6時間 <strong>+7.07%（0.13–14.02、High）</strong>、24時間 +15.40%（3.4–27.4、High）。28日AKI は RR 0.71（0.45–1.13、Very low）。</li><li><strong>医療資源</strong>：ICU入室 RR 1.28（0.70–2.35）、入院 RR 0.98（0.88–1.09）、ICU在室日数 0日差、在院日数 −0.21日。いずれも<strong>差なし</strong>。</li><li><strong>結論</strong>：ショックにおけるPOCUSガイド蘇生は、患者と医療システムの双方にとって重要な利益をもたらしうる。ただしエビデンス不足のため、術者の習熟度の閾値・スキャンの頻度・タイミングが患者アウトカムに与える影響は検討できなかった。</li><li><strong>害</strong>：レビューを通じて<strong>POCUSによる害のエビデンスは一切見つからなかった</strong>。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — ショックとPOCUSの基礎（初学者向け）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ショック</strong>とは、循環が組織の酸素需要を満たせなくなった状態。血圧低下（例：収縮期血圧 100 mmHg未満）や乳酸上昇として現れる。厄介なのは、<strong>原因を突き止めながら同時に治療を始めなければならない</strong>点にある。心原性なのか、循環血液量減少なのか、閉塞性（心タンポナーデ・肺塞栓）なのか、分布性（敗血症）なのかで、輸液を入れるべきか止めるべきかが正反対になる。しかも判断は時間に追われた状況で下され、間違えたときの余地が小さい。</p>
+<p>POCUS（point-of-care ultrasound、ポイントオブケア超音波）とは、治療にあたっている臨床医自身が、ベッドサイドで超音波を当て、その場で解釈し、直ちに管理の判断に組み込む使い方を指す。放射線科や循環器内科に依頼して後で報告書を読むのとは、<strong>「誰が撮り、いつ判断に反映するか」が決定的に違う</strong>。本研究はこの定義を採用しており、POCUSで見るのは心臓だけではなく、肺・血管・腹部も含む。</p>
+<p><strong>POCUSがショックで何を教えてくれるか</strong>（初学者向けの整理）</p>
+<ul><li><strong>原因の同定</strong>：心嚢液貯留（タンポナーデ）、右室内の血栓、著明な左室収縮不全、大動脈瘤、腹腔内出血など、<strong>見つければ介入が変わる病態</strong></li><li><strong>昇圧薬を使うか</strong>：びまん性収縮不全があれば強心薬・昇圧薬の方向へ</li><li><strong>輸液を入れるか／入れて大丈夫か</strong>：<strong>輸液反応性</strong>（入れれば心拍出量が増えるか）と輸液耐容性（入れても肺水腫やうっ血を起こさないか）は別物で、POCUSは両方に手がかりを与える</li></ul>
+<p><strong>本論文で繰り返し出てくる用語</strong>（初出の定義）</p>
+<ul><li><strong>IVF</strong>：IV fluid＝静脈内輸液。<strong>MV</strong>：mechanical ventilation＝人工呼吸。RRT：renal replacement therapy＝腎代替療法。AKI：急性腎障害。TTE／TEE：経胸壁／経食道心エコー。</li><li><strong>RR（risk ratio、リスク比）</strong>：介入群の発生割合÷対照群の発生割合。1.0が「差なし」。<strong>RD（risk difference、リスク差）</strong>：両群の発生割合の引き算。MD（mean difference、平均差）：連続変数の差。</li><li><strong>I²統計量</strong>：研究間のばらつき（異質性）のうち、偶然では説明できない割合。高いほど「研究ごとに結果が食い違っている」。</li><li><strong>GRADE</strong>：エビデンスの確実性を High／Moderate／Low／Very low の4段階で評価する体系。RCTは High から出発し、<strong>バイアスリスク・不精確性・非一貫性・非直接性</strong>に問題があれば段階的に格下げする。</li><li><strong>非直接性（indirectness）</strong>：得られたエビデンスが、知りたい患者・介入・アウトカムとずれていること。本研究では「単一デバイスの単一試験しかない」「代替指標である」といった理由で頻繁に使われている。</li></ul>
+<p><strong>なぜ「POCUSは有用に決まっている」で済まないのか</strong>（一般的な方法論の背景知識。論文本文の記述ではない） 診断技術は「情報が増える」ことと「患者が良くなる」ことの間に長い因果の鎖がある。情報が増えても、①医師の判断が変わらなければ、②判断が変わっても実際の治療が変わらなければ、③治療が変わっても患者の転帰が変わらなければ、意味はない。本研究が<strong>この鎖を3段階に分けて別々に評価している</strong>のはそのためで、実際に「判断は変わったが投与量は変わらなかった」という結果が出ている。</p>
+</div>
+<h3>2. 背景と目的 🫁</h3>
+<p><strong>ショック管理の難しさ</strong>：診断と動的な介入を同時に行う必要があるため、急性期の現場では手強い課題になる。さらに、切迫した状況で下される時間依存性の臨床判断には<strong>誤差の許容幅が狭い</strong>。この複雑さに対処するため、医師は蘇生の判断を導く血行動態ツールに頼ってきた。</p>
+<p><strong>POCUSが期待される理由</strong>：診断と管理を改善しうるとして、急性期医療の医師に広く採用されてきた。臨床医はPOCUSを用いて、①管理の変更に患者がどう反応するかをリアルタイムで評価し、②血管作動薬の投与を導き、③他の診断検査の必要性を判断し、④介入可能な病態（例：心タンポナーデ）を明らかにできる。ショックの影響を受ける複数の臓器系（心臓・肺・腹部・循環系）を評価でき、患者の生理をより広く理解できる。加えて、POCUSは<strong>無痛・無被曝で、有害事象リスクが低い</strong>。外傷患者の焦点化評価や手技ガイドとして超音波技術が既に急性期医療に埋め込まれていることもあり、POCUSはショック管理の有望なツールとして良い位置にある。</p>
+<p><strong>それでも残る不確実性</strong>：これら理論上の利点にもかかわらず、<strong>患者にとって重要なアウトカムへのPOCUSの影響は不確実</strong>なままである。POCUSの使用が広まり、多様な診療科の教育カリキュラムに組み込まれつつある今、患者管理の決定・医療資源の利用・患者重要アウトカムへの影響を扱う差し迫った必要性がある。</p>
+<p><strong>目的</strong>：この知識のギャップを埋めるため、著者らは<strong>アウトカムの階層に沿って</strong>、ショックを伴う重症患者におけるPOCUSガイド蘇生の影響を要約する系統的レビューを実施し、POCUSに関する既存知識を統合し、さらなる研究が必要な領域を特定した。</p>
+<h3>3. 方法（Methods）📐</h3>
+<h4>3-1. デザインと事前登録</h4>
+<ul><li><strong>準拠</strong>：Cochrane Handbook for Systematic Reviews and Interventions に従い、<strong>PRISMA ガイドライン</strong>（www.prisma-statement.org）に沿って報告（eAppendix 1）。</li><li><strong>事前登録</strong>：<strong>データ抽出前にプロトコルを登録</strong>。PROSPERO ID は紙面に <code>CRD4202016000</code> と印字。事後のプロトコル変更とその根拠は eAppendix 2 に要約されている（本文には内容の記載なし）。</li></ul>
+<h4>3-2. PICO（対象・介入・比較）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>比較の枠組み</strong></td><td>POCUSガイド蘇生 vs POCUSガイドなし蘇生または通常ケア。治療の修正とアウトカムへの影響を比較</td></tr>
+<tr><td><strong>対象（P）</strong></td><td><strong>原因を問わず、ショックまたは収縮期低血圧（例：収縮期血圧 100 mmHg未満）を呈する成人</strong></td></tr>
+<tr><td><strong>介入（I）</strong></td><td>POCUSガイド蘇生。<strong>POCUSの定義＝治療にあたる臨床医がベッドサイドで超音波を取得・解釈し、直ちに臨床統合して管理決定に反映すること</strong></td></tr>
+<tr><td><strong>POCUSの用途</strong></td><td>①ショックの原因への介入（心嚢液貯留、右室内の血栓など）②血管作動薬の投与（びまん性収縮不全の同定）③輸液投与（輸液反応性と輸液耐容性の判定）</td></tr>
+<tr><td><strong>対象臓器</strong></td><td>心臓、肺、血管、腹部構造</td></tr>
+<tr><td><strong>モダリティ</strong></td><td>経食道 または 経胸壁・経腹</td></tr>
+<tr><td><strong>リスクの幅</strong></td><td>表在超音波は<strong>事実上リスクなし</strong>、経食道モダリティは<strong>低リスク</strong></td></tr>
+<tr><td><strong>比較（C）</strong></td><td>POCUSを用いない管理。<strong>他の形のガイド治療や通常ケアを含む</strong></td></tr>
+<tr><td><strong>研究デザイン</strong></td><td>RCT（パイロット・実行可能性試験を含む）。加えて<strong>対照群のあるコホート研究、患者が自身の対照となる前後比較研究も組入基準に含めた</strong></td></tr>
+<tr><td><strong>除外</strong></td><td>スコーピングレビュー、系統的レビュー、実験／動物研究、メタ解析、非研究論文。ただし<strong>これらの参考文献はスクリーニングして他の適格研究を探した</strong></td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>「事前基準を置かなかった」ことがこの論文の性格を決めている 著者らは <strong>実践パターンの異質性を見越して、POCUSの包括性・術者の習熟度・タイミング・スキャン頻度について事前基準を設けなかった</strong> と明記している。この設計判断のおかげで18 RCTを集められた一方で、<strong>統合された「POCUS」の中身は試験ごとに大きく異なる</strong>。心臓だけの試験、IVCだけの試験、肺だけの試験、持続経食道モニタリングの試験が同じプールに入っている。結論の「POCUS」を、自施設の具体的な運用にそのまま読み替えられないのはこのためである。</p>
+</div>
+<h4>3-3. アウトカムの階層（3段階）</h4>
+<p>著者らは Guyatt らの「診断技術の臨床評価のフレームワーク」（CMAJ 1986）に沿って、POCUSを<strong>3層の階層</strong>で評価した。</p>
+<div class="tw"><table>
+<thead><tr><th>階層</th><th>問い</th><th>具体的なアウトカム</th></tr></thead>
+<tbody>
+<tr><td><strong>第1層：医療者の治療的意思決定</strong></td><td>POCUSは医師の判断を変えるか</td><td>輸液を投与する決定、血管作動薬を変更する決定、診断検査の計画の変更</td></tr>
+<tr><td><strong>第2層：実際に施行された蘇生治療</strong></td><td>判断の変化は実際の治療に反映されるか</td><td>6・24・72時間時点の総輸液量、投与された血管作動薬、実施された診断検査</td></tr>
+<tr><td><strong>第3層：患者にとって重要なアウトカム</strong></td><td>患者の転帰は変わるか</td><td>死亡、ICU・入院への入室（救急外来で治療された患者のサブセット）と在室・在院日数、臓器維持療法（人工呼吸・RRT・血管作動薬）の実施と期間、臓器障害（AKI）</td></tr>
+</tbody></table></div>
+<h4>3-4. 検索・選択・抽出</h4>
+<ul><li><strong>検索</strong>：医療情報専門家（A.I.＝謝辞の Alla Iansavitchene）の指導のもと、<strong>MEDLINE、Embase、灰色文献</strong>を 2023年12月まで検索。言語による制限なし。検索語は <code>point-of-care ultrasound</code>、<code>echocardiography</code>、<code>shock</code>、<code>hypotension</code>。最終的な検索戦略は eAppendix 3。</li><li><strong>スクリーニング</strong>：<strong>Covidence</strong> を用いて2段階。第1段階で2名（J.B. と K.D.）が独立にタイトル・抄録をレビューし、適格の可能性がある論文を全文レビューへ。第2段階で全文をレビュー。両段階の不一致は第3のレビュアー（V.L.）が解決。</li><li><strong>データ抽出</strong>：試行済みの標準化フォームを用い、<strong>2名（J.B. と K.D.）が独立・重複して抽出</strong>。抽出項目は研究デザイン、患者数、POCUSスキャンと対照の特性、関連アウトカムデータ。不一致は議論で解決し、必要なら第三者（V.L.）が調停。</li><li><strong>欠測アウトカムへの対応</strong>：<strong>2〜4週ごとに最大3回まで著者に連絡</strong>。実際には6名の著者に連絡し、4名が欠測アウトカムデータの提供または結果の明確化に応じた。</li></ul>
+<h4>3-5. 統計解析</h4>
+<ul><li><strong>ソフトウェア</strong>：<strong>RevMan version 5.3</strong>（Cochrane Collaboration, Oxford）。</li><li><strong>モデル</strong>：<strong>逆分散・変量効果モデル</strong>（inverse variance random-effects models）。</li><li><strong>データ変換</strong>：連続アウトカムでは<strong>中央値を平均に、四分位範囲をSDに変換</strong>。SDが欠測のときは、p値、または本レビュー内の他研究からのプールSD推定値を用いて補完した。</li><li><strong>効果指標</strong>：連続アウトカムは<strong>平均差（MD）</strong>、二値アウトカムはリスク差（RD）とリスク比（RR）を95%CIとともに提示。</li><li><strong>異質性の評価</strong>：<strong>フォレストプロットの目視、均質性のカイ二乗検定、I²統計量</strong>の3つ。</li><li><strong>出版バイアス</strong>：<strong>フォレストプロットの目視</strong>と、10 RCT超のアウトカムについて Egger 検定。</li><li><strong>サブグループ解析</strong>：<strong>事後（post hoc）の判断</strong>として、使用されたPOCUSプロトコル別のサブグループ解析を実施。議論のうえ、プロトコルを次の4類型に分類した。</li></ul>
+<ol><li><strong>経胸壁心臓評価</strong>（心臓単独、心臓＋肺、心臓＋肺＋血管の組み合わせ）</li><li><strong>経食道心臓評価</strong></li><li><strong>下大静脈（IVC）評価のみ</strong></li><li><strong>肺評価のみ</strong></li></ol>
+<p>サブグループ効果がバイアスリスクによるものか、POCUSプロトコルが重要な異質性を説明するのかを検討。<strong>交互作用 p &lt; 0.1</strong> で潜在的に有意なサブグループ効果には、<strong>ICEMAN 基準</strong>（Instrument to assess the Credibility of Effect Modification Analyses）を用いて信頼性を評価した。</p>
+<h4>3-6. バイアスリスクと確実性評価（GRADE）</h4>
+<ul><li><strong>バイアスリスク</strong>：Cochrane Risk of Bias 2.0（ランダム化試験用）。結果は eTable 3。</li><li><strong>確実性</strong>：<strong>GRADE</strong> システム。RCTは High から出発し、バイアスリスク・不精確性・非一貫性・非直接性に限界があれば格下げする。</li><li><strong>本研究に特徴的な工夫（certainty target）</strong>：臨床アウトカム・蘇生治療・診断検査については、「患者と医療システムが重要と感じるであろう最小の差」に対して確実性を評価した。この閾値はチームメンバーが<strong>議論を通じて決定</strong>した（Table 1）。乳酸クリアランスと臨床医の意思決定の変化については、「ゼロでない効果（non-null effect）が存在するかどうか」に対して確実性を評価した。</li><li><strong>非ランダム化研究（NRS）</strong>：RCTのエビデンスが低確実性のとき、補完的・逐次的エビデンスとして報告する意図があった。しかし実際にはNRSを使わなかった。RCTからのエビデンスを強化しなかったためである。</li></ul>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Table 1. アウトカムごとの確実性ターゲット（原表を日本語化） この表を読まないと、本論文の「High certainty なのに little to no difference」という一見奇妙な判定が理解できない。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>アウトカムの階層</th><th>アウトカム</th><th>確実性ターゲット（重要と考える最小差）</th></tr></thead>
+<tbody>
+<tr><td><strong>死亡</strong></td><td>28日死亡</td><td>1000人あたり5人の差</td></tr>
+<tr><td><strong>ICU・入院の資源利用</strong></td><td>ICU入室</td><td>1000人あたり50人の差</td></tr>
+<tr><td></td><td>ICU在室日数</td><td>1日の差</td></tr>
+<tr><td></td><td>入院</td><td>1000人あたり50人の差</td></tr>
+<tr><td></td><td>在院日数</td><td>1日の差</td></tr>
+<tr><td><strong>臓器維持療法</strong></td><td>人工呼吸の実施</td><td>1000人あたり50人の差</td></tr>
+<tr><td></td><td>人工呼吸の期間</td><td>0.5日の差</td></tr>
+<tr><td></td><td>血管作動薬の投与期間</td><td>0.5日の差</td></tr>
+<tr><td></td><td>腎代替療法の実施</td><td>1000人あたり10人の差</td></tr>
+<tr><td></td><td>腎代替療法の期間</td><td>1日の差</td></tr>
+<tr><td><strong>代替臨床アウトカム</strong></td><td>急性腎障害</td><td>1000人あたり50人の差</td></tr>
+<tr><td></td><td>6時間乳酸クリアランス率</td><td>ゼロでない効果</td></tr>
+<tr><td></td><td>24時間乳酸クリアランス率</td><td>ゼロでない効果</td></tr>
+<tr><td><strong>蘇生治療・診断検査の施行</strong></td><td>6時間の輸液投与量</td><td>0.5 L の差</td></tr>
+<tr><td></td><td>24時間の輸液投与量</td><td>1 L の差</td></tr>
+<tr><td></td><td>72時間の輸液投与量</td><td>2 L の差</td></tr>
+<tr><td></td><td>強心薬投与</td><td>1000人あたり50人の差</td></tr>
+<tr><td></td><td>診断的CT件数</td><td>1000人あたり10件少ない差</td></tr>
+<tr><td></td><td>診断的経胸壁心エコー件数</td><td>1000人あたり25件少ない差</td></tr>
+<tr><td><strong>医師の管理の変化</strong></td><td>輸液処方の変更</td><td>ゼロでない効果</td></tr>
+<tr><td></td><td>強心薬・昇圧薬処方の変更</td><td>ゼロでない効果</td></tr>
+</tbody></table></div>
+<p><strong>この表の読み方</strong>：たとえば24時間輸液量の確実性ターゲットは <strong>1 L</strong> である。統合結果は「0.62 L 少ない（95%CI 0.35–0.89 L 少ない）」で、CIの全体が 1 L 以内に収まっている。したがって「1 L 以上の差はない」ことにHigh certainty で自信が持てる、という判定になる。「差が0である」ことを高確実性で示したのではなく、「臨床的に重要な差はない」ことを高確実性で示している。ここを読み違えると論文の主張を取り違える。</p>
+<h3>4. 結果① 研究選択の流れ（Figure 1・PRISMA）📊</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000006399" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000006399）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. PRISMA フロー図（原図・無改変。©Society of Critical Care Medicine / Wolters Kluwer Health） 左端に Identification／Screening／Eligibility／Included の4つの縦帯があり、上から下へ矢印で流れる。右側に除外の枝が2本伸びる、標準的なPRISMAレイアウト。</p>
+</div>
+<h4>Figure 1 の全数値（原図を表に起こす）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>ボックスの文言</th><th>n</th></tr></thead>
+<tbody>
+<tr><td><strong>Identification</strong></td><td>データベース検索で同定された記録</td><td>9340</td></tr>
+<tr><td></td><td>他の情報源から同定された追加記録</td><td>1</td></tr>
+<tr><td><strong>Screening</strong></td><td>重複除去後の記録</td><td>6436</td></tr>
+<tr><td></td><td>スクリーニングされた記録</td><td>6436</td></tr>
+<tr><td></td><td>除外された記録</td><td>6175</td></tr>
+<tr><td><strong>Eligibility</strong></td><td>適格性を評価した全文論文</td><td>261</td></tr>
+<tr><td></td><td>除外された全文論文</td><td>243</td></tr>
+<tr><td><strong>Included</strong></td><td>統合に組み入れられた研究</td><td><strong>18</strong></td></tr>
+</tbody></table></div>
+<h4>全文除外243件の内訳（原図の右下ボックス）</h4>
+<div class="tw"><table>
+<thead><tr><th>除外理由</th><th>n</th></tr></thead>
+<tbody>
+<tr><td>アウトカムが不適</td><td>101</td></tr>
+<tr><td>比較対照が不適</td><td>38</td></tr>
+<tr><td>患者集団が不適</td><td>30</td></tr>
+<tr><td>オリジナル研究でない</td><td>26</td></tr>
+<tr><td>介入が不適</td><td>20</td></tr>
+<tr><td>ランダム化されていない研究で、RCTからのエビデンスを改善しなかったもの</td><td>14</td></tr>
+<tr><td>重複論文</td><td>9</td></tr>
+<tr><td>研究デザインが不適</td><td>4</td></tr>
+<tr><td>撤回論文</td><td>1</td></tr>
+<tr><td><strong>合計</strong></td><td><strong>243</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 本文とFigure 1の数値が一致しない 本文（RESULTS 冒頭）は <mark class="hl">「当初の8536件の引用のうち、261件の全文を評価し、18 RCTを組み入れた」</mark> と書いている。しかし Figure 1 は検索同定 9340＋1件、重複除去後 6436件である。<strong>8536という数字は図のどのボックスにも現れない</strong>。261 → 18 の下流は本文と図で一致しており（6436−6175＝261、261−243＝18、除外理由の合計も243で整合）、<strong>齟齬は上流の件数のみ</strong>。系統的レビューとしては報告の不整合であり、JCで指摘すべき点。</p>
+</div>
+<h4>組み入れ研究の特性（本文の記述）</h4>
+<ul><li><strong>大半の研究は、原因を問わないショックのICU患者を登録</strong>していた（eTable 1）。</li><li>大半の研究は、少なくとも心血管評価を含むPOCUSプロトコルを実施していた。</li><li>大半の研究は、術者の特性・POCUS評価の頻度・タイミングを報告していなかった（eTable 2）。</li><li>術者特性を報告した研究では、POCUSの正式なトレーニングを受けた、独立して免許を持つ医師がスキャンを実施していた。</li><li><strong>バイアスリスク</strong>：<strong>大半の適格研究は低バイアスリスクと判断</strong>（eTable 3）。</li><li><strong>出版バイアス</strong>：<strong>アウトカムは出版バイアスの低リスクと判断</strong>（具体的なEgger検定のp値は本文に記載なし）。</li></ul>
+<h3>5. 結果② 医師の意思決定への影響（Table 2）🧠</h3>
+<p>POCUSガイド蘇生は、蘇生開始からの最初の72時間における輸液処方の変更を、おそらくわずかに減らす（患者あたり0.6回少ない、95%CI 0.91回少ない〜0.29回少ない、Moderate certainty）。さらに、<strong>強心薬処方の増量の変更をわずかに減らし</strong>（患者あたり0.4回少ない、95%CI 0.54回少ない〜0.26回少ない、Moderate）、<strong>昇圧薬の変更もわずかに減らす</strong>（患者あたり0.10回少ない、95%CI 0.17回少ない〜0.03回少ない、Moderate）。</p>
+<h4>Table 2. 医師の管理の変化に対するPOCUSの影響（GRADE Summary of Findings・原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>研究結果と測定</th><th>対照（POCUSなし）</th><th>POCUS群</th><th>差（95%CI）</th><th>確実性</th><th>平易な要約</th></tr></thead>
+<tbody>
+<tr><td>輸液処方の変更</td><td>545例・1 RCT</td><td>患者あたり平均1.6回</td><td>患者あたり平均1.0回</td><td>0.6回少ない（0.91少ない〜0.29少ない）</td><td>Moderate（重大な非直接性）</td><td>POCUSガイド蘇生はおそらく輸液処方をわずかに変える</td></tr>
+<tr><td>強心薬処方の変更：開始または増量</td><td>545例・1 RCT</td><td>0.7回</td><td>0.3回</td><td>0.4回少ない（0.54少ない〜0.26少ない）</td><td>Moderate（重大な非直接性）</td><td>おそらく強心薬の開始・増量をわずかに変える</td></tr>
+<tr><td>強心薬処方の変更：中止または減量</td><td>545例・1 RCT</td><td>0.7回</td><td>0.6回</td><td>0.1回少ない（0.3少ない〜0.1多い）</td><td>Moderate（重大な非直接性）</td><td>強心薬の中止・減量にはおそらくほとんど差がない</td></tr>
+<tr><td>昇圧薬処方の変更：開始または増量</td><td>545例・1 RCT</td><td>0.2回</td><td>0.1回</td><td>0.1回少ない（0.17少ない〜0.03少ない）</td><td>Moderate（重大な非直接性）</td><td>おそらく昇圧薬の開始・増量をわずかに変える</td></tr>
+<tr><td>昇圧薬処方の変更：中止または減量</td><td>545例・1 RCT</td><td>0.5回</td><td>0.4回</td><td>0.1回少ない（0.25少ない〜0.05多い）</td><td>Moderate（重大な非直接性）</td><td>昇圧薬の中止・減量にはおそらくほとんど差がない</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ Table 2 の5行すべてが「545例の単一RCT」に由来する 本論文の「POCUSは医師の意思決定を変える」という主張の<strong>全量が、たった1本のRCT（545例）に依存している</strong>。しかもその試験は、後述するとおり使い捨てプローブによる持続経食道心エコーモニタリング（ImaCor社デバイス）を用いた試験であり、当院で行う経胸壁POCUSとは介入の実体が異なる。著者らが5行すべてを<strong>「重大な非直接性」で Moderate に格下げ</strong>しているのはこのためである。<mark class="hl">「POCUSは判断を変える」を一般論として引用するのは、この論文の記述を超える</mark>。</p>
+</div>
+<p><strong>方向の解釈</strong>：POCUS群のほうが<strong>処方の変更回数が少ない</strong>。「POCUSを見て頻繁に手を入れる」のではなく、手を入れる回数が減る。著者らは考察で「意思決定への自信が増したためかもしれない」と推測している。</p>
+<h3>6. 結果③ 蘇生治療と診断検査への影響（Table 3）💧</h3>
+<h4>輸液量</h4>
+<p>POCUSガイド蘇生は、投与輸液量に<strong>ほとんど、あるいはまったく差をもたらさない可能性がある</strong>。</p>
+<ul><li><strong>6時間</strong>：<strong>0.39 L 少ない</strong>（95%CI 0.65 L 少ない〜0.14 L 少ない）、Low certainty（eFig. 1、7 RCT・918例）</li><li><strong>24時間</strong>：<strong>0.62 L 少ない</strong>（95%CI 0.89 L 少ない〜0.35 L 少ない）、High certainty（eFig. 2、11 RCT・935例）</li><li><strong>72時間</strong>：<strong>0.18 L 少ない</strong>（95%CI 0.68 L 少ない〜0.31 L 多い）、Moderate certainty（eFig. 3、3 RCT・775例）</li></ul>
+<p>輸液投与について、<strong>信頼できるサブグループ効果のエビデンスは見つからなかった</strong>（eTable 4）。</p>
+<h4>強心薬</h4>
+<p>強心薬投与にはほとんど、あるいはまったく効果がない可能性がある：RR 0.99（95%CI 0.84–1.17）、RD 1.5%、High certainty（eFig. 4、6 RCT・1128例）。著者らは、組み入れ研究における強心薬投与の観察期間が6〜72時間にわたっていたと報告している。</p>
+<h4>診断検査</h4>
+<ul><li><strong>CT件数</strong>：RR 1.10（95%CI 0.73–1.66）、RD 2.4%、Low certainty。ほとんど、あるいはまったく効果がない可能性。</li><li><strong>診断的経胸壁心エコー（TTE）件数</strong>：RR 0.74（95%CI 0.57–0.96）、RD −9.2%、Moderate certainty。<strong>おそらく減らす</strong>。</li><li><strong>著者らの注記</strong>：TTE件数のデータは、ImaCor社（Garden City, NY）の血行動態TEEデバイスを用いた持続経食道モニタリングの研究に由来する。</li></ul>
+<h4>Table 3. 蘇生治療と診断検査に対するPOCUSの影響（GRADE SoF・原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>研究結果と測定</th><th>対照（POCUSなし）</th><th>POCUS群</th><th>差（95%CI）</th><th>確実性</th><th>平易な要約</th></tr></thead>
+<tbody>
+<tr><td>6時間の累積輸液量</td><td>918例・7 RCT</td><td>2.28 L</td><td>1.89 L</td><td>0.39 L 少ない（0.65少ない〜0.14少ない）</td><td>Low（重大な非一貫性・重大な不精確性）</td><td>6時間の輸液量をほとんど、あるいはまったく減らさない可能性</td></tr>
+<tr><td>24時間の累積輸液量</td><td>935例・11 RCT</td><td>3.83 L</td><td>3.21 L</td><td>0.62 L 少ない（0.89少ない〜0.35少ない）</td><td><strong>High</strong></td><td>24時間の輸液量にほとんど、あるいはまったく差をもたらさない</td></tr>
+<tr><td>72時間の累積輸液量</td><td>775例・3 RCT</td><td>5.10 L</td><td>4.91 L</td><td>0.18 L 少ない（0.68少ない〜0.31多い）</td><td>Moderate（重大な非直接性）</td><td>72時間の輸液量にほとんど、あるいはまったく差をもたらさない</td></tr>
+<tr><td>強心薬投与</td><td>RR 0.99（0.84–1.17）／1128例・6 RCT</td><td>1000人あたり289人</td><td>1000人あたり289人</td><td>1000人あたり3人少ない（46少ない〜49多い）</td><td><strong>High</strong></td><td>強心薬投与にほとんど、あるいはまったく差をもたらさない</td></tr>
+<tr><td>診断的CT件数</td><td>RR 1.10（0.73–1.66）／273例・1 RCT</td><td>1000人あたり237件</td><td>1000人あたり261件</td><td>1000人あたり24件多い（64少ない〜156多い）</td><td>Low（きわめて重大な不精確性）</td><td>診断的CT件数にほとんど、あるいはまったく差をもたらさない可能性</td></tr>
+<tr><td>診断的経胸壁心エコー件数</td><td>RR 0.74（0.57–0.96）／545例・1 RCT</td><td>1000人あたり354件</td><td>1000人あたり262件</td><td>1000人あたり92件少ない（152少ない〜14少ない）</td><td>Moderate（重大な非直接性）</td><td><strong>おそらく診断的TTEの件数を減らす</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>⚠️ 「High certainty」を「効果がある」と読まない 24時間輸液量は 0.62 L 少ない（95%CI 0.35–0.89 L 少ない）で、95%CIがゼロをまたいでいない。統計学的には「有意差あり」である。それでも判定は「ほとんど、あるいはまったく差がない（High certainty）」になる。理由は Table 1 の確実性ターゲットが <strong>1 L</strong> であり、<strong>CI全体が 1 L 未満に収まっているから</strong>である。同じ論理で、6時間輸液量（差 0.39 L、CI 0.14–0.65 L）はターゲット 0.5 L を CIがまたぐため不精確性で格下げされ Low になっている。<mark class="hl">この論文の「High certainty」は「差がゼロだと確信している」ではなく「臨床的に重要な差はないと確信している」という意味である</mark>。</p>
+</div>
+<h3>7. 結果④ 臨床アウトカムへの影響（Table 4）❤️</h3>
+<h4>7-1. ショック解除の代替アウトカム</h4>
+<ul><li><strong>6時間乳酸クリアランス</strong>：MD +7.07%（95%CI 0.13–14.02）、High certainty（eFig. 5、6 RCT・621例）。本文はこれを「<strong>些細な差（trivial difference）</strong>」と表現している。</li><li><strong>24時間乳酸クリアランス</strong>：MD +15.40%（95%CI 3.4–27.4）、High certainty（eFig. 6、4 RCT・293例）。</li><li><strong>28日AKI</strong>：RR 0.71（95%CI 0.45–1.13）、RD −11.8%、Very low certainty（eFig. 7、2 RCT・148例）。POCUSはAKIリスクを減らすかもしれないが、エビデンスは不確実なまま。</li></ul>
+<h4>7-2. 臓器維持療法</h4>
+<ul><li><strong>RRT実施（28日）</strong>：RR 0.80（95%CI 0.63–1.02）、RD −5.8%、Low certainty（eFig. 8、4 RCT・813例）。</li><li><strong>RRT期間</strong>：0.85日短い（95%CI 5.09日短い〜3.40日長い）、Very low certainty（eFig. 9、2 RCT・112例）。<strong>効果は不確実</strong>。RRT期間について信頼できるサブグループ効果は見つからなかった（eTable 4）。</li><li><strong>血管作動薬の総投与期間</strong>：0.73日短い（95%CI 1.16日短い〜0.30日短い）、Moderate certainty（eFig. 10、5 RCT・449例）。<strong>おそらく短縮する</strong>。</li><li><strong>人工呼吸の実施</strong>：RR 0.88（95%CI 0.67–1.15）、RD −5.8%、Moderate certainty（eFig. 11、2 RCT・311例）。<strong>ほとんど、あるいはまったく減らさない</strong>。</li><li><strong>人工呼吸の期間</strong>：バイアスリスク（POCUSプロトコルではない）が、研究間の異質性の一部を説明する「きわめて信頼できるサブグループ」であった（eTable 4）。ただし<strong>重要な未説明の異質性が残った</strong>。低バイアスリスク研究に限定すると、効果は不確実：0.19日短い（95%CI 0.96日短い〜0.58日長い）、Very low certainty（eFig. 12、6 RCT・1000例）。</li></ul>
+<h4>7-3. ICU・入院の資源利用</h4>
+<ul><li><strong>ICU入室</strong>（救急外来受診のショック患者のサブセット）：RR 1.28（95%CI 0.70–2.35）、RD 3.3%、Low certainty。<strong>ほとんど、あるいはまったく増やさない可能性</strong>。</li><li><strong>ICU在室日数</strong>：ここでもバイアスリスク（POCUSプロトコルではない）がきわめて信頼できるサブグループであったが、<strong>重要な未説明の異質性が残った</strong>。低バイアスリスク研究に限ると 0日の差（95%CI 1.00日短い〜0.99日長い）、Low certainty（eFig. 13、7 RCT・1037例）。</li><li><strong>入院</strong>：RR 0.98（95%CI 0.88–1.09）、RD −1.8%。<strong>減らさない可能性</strong>。</li><li><strong>在院日数</strong>：<strong>バイアスリスクが「中等度に信頼できる」サブグループ</strong>であったが、重要な未説明の異質性が残った。低バイアスリスク研究に限ると 0.21日短い（95%CI 0.84日短い〜0.43日長い）、Moderate certainty（eFig. 14、5 RCT・1160例）。</li></ul>
+<h4>7-4. 死亡</h4>
+<p><strong>POCUSガイド蘇生は、おそらく死亡リスクを減らす</strong>：RR 0.88（95%CI 0.78–0.99）、RD −4.3%、Moderate certainty（eFig. 15）。<strong>同定された研究は死亡を28〜30日の時点で報告していた</strong>。</p>
+<h4>Table 4. 臨床アウトカムに対するPOCUSの影響（GRADE SoF・原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>研究結果と測定</th><th>対照（POCUSなし）</th><th>POCUS群</th><th>差（95%CI）</th><th>確実性</th><th>平易な要約</th></tr></thead>
+<tbody>
+<tr><td><strong>28日死亡</strong></td><td>RR 0.88（0.78–0.99）／<strong>2163例・17 RCT</strong></td><td>1000人あたり342人</td><td>1000人あたり297人</td><td>1000人あたり41人少ない（79少ない〜3少ない）</td><td><strong>Moderate（重大な不精確性）</strong></td><td>POCUSガイド蘇生はおそらく28日死亡を減らす</td></tr>
+<tr><td>ICU入室</td><td>RR 1.28（0.70–2.35）／273例・1 RCT</td><td>119人</td><td>152人</td><td>1000人あたり33人多い（36少ない〜160多い）</td><td>Low（きわめて重大な不精確性）</td><td>ICU入室をほとんど、あるいはまったく増やさない可能性</td></tr>
+<tr><td>ICU在室日数</td><td>1037例・7 RCT</td><td>5.78日</td><td>5.78日</td><td>0日短い（1.00短い〜0.99長い）</td><td>Low（重大な非一貫性・重大な不精確性）</td><td>ICU在室日数を短縮しない可能性</td></tr>
+<tr><td>入院</td><td>RR 0.98（0.88–1.09）／273例・1 RCT</td><td>837人</td><td>820人</td><td>1000人あたり17人少ない（100少ない〜75多い）</td><td>Low（きわめて重大な不精確性）</td><td>入院をほとんど、あるいはまったく減らさない可能性</td></tr>
+<tr><td>在院日数</td><td>1160例・5 RCT</td><td>9.93日</td><td>9.72日</td><td>0.21日短い（0.84短い〜0.43長い）</td><td>Moderate（重大な非一貫性）</td><td>在院日数をおそらく短縮しない</td></tr>
+<tr><td>人工呼吸の実施</td><td>RR 0.88（0.67–1.15）／311例・2 RCT</td><td>385人</td><td>338人</td><td>1000人あたり46人少ない（127少ない〜58多い）</td><td>Low（きわめて重大な不精確性）</td><td>人工呼吸の実施をほとんど、あるいはまったく減らさない可能性</td></tr>
+<tr><td>人工呼吸の期間</td><td>1000例・6 RCT</td><td>3.85日</td><td>3.66日</td><td>0.19日短い（0.96短い〜0.58長い）</td><td>Very low（重大な非一貫性・きわめて重大な不精確性）</td><td>人工呼吸期間への効果は不確実</td></tr>
+<tr><td><strong>血管作動薬の投与期間</strong></td><td>449例・<strong>5 RCT</strong></td><td>1.97日</td><td>1.24日</td><td><strong>0.73日短い（1.16短い〜0.30短い）</strong></td><td><strong>Moderate（重大な不精確性）</strong></td><td>POCUSはおそらく血管作動薬の投与期間を短縮する</td></tr>
+<tr><td><strong>RRTの実施</strong></td><td>RR 0.80（0.63–1.02）／813例・4 RCT</td><td>254人</td><td>199人</td><td>1000人あたり51人少ない（97少ない〜8多い）</td><td><strong>Low（重大な非直接性・重大な不精確性）</strong></td><td>表の平易な要約欄は「おそらくRRTを受けるリスクを減らす」と記載</td></tr>
+<tr><td>RRTの期間</td><td>112例・2 RCT</td><td>4.63日</td><td>3.78日</td><td>0.85日短い（5.09短い〜3.40長い）</td><td>Very low（重大な非直接性・非一貫性・きわめて重大な不精確性）</td><td>RRT期間への効果は不確実</td></tr>
+<tr><td>28日AKI</td><td>RR 0.71（0.45–1.13）／148例・2 RCT</td><td>417人</td><td>296人</td><td>1000人あたり121人少ない（229少ない〜54多い）</td><td>Very low（重大な非直接性・きわめて重大な不精確性）</td><td>28日AKIリスクを減らすかもしれない</td></tr>
+<tr><td>6時間乳酸クリアランス率</td><td>621例・6 RCT（高値が良い）</td><td>31.62%</td><td>36.55%</td><td>7.07%高い（0.13高い〜14.02高い）</td><td><strong>High</strong></td><td>乳酸クリアランスをわずかに高める</td></tr>
+<tr><td>24時間乳酸クリアランス率</td><td>293例・4 RCT（高値が良い）</td><td>32.83%</td><td>48.26%</td><td>15.40%高い（3.4高い〜27.4高い）</td><td><strong>High</strong></td><td>乳酸クリアランスをわずかに高める</td></tr>
+</tbody></table></div>
+<div class="call note"><span class="lab">補足</span>
+<p>KEY POINTS（原文の要旨欄・全訳） <strong>Question</strong>：ショック患者において、医師の管理・蘇生療法・診断検査・臨床アウトカムを変えるという点で、POCUSの治療的インパクトはどれほどか。 <strong>Findings</strong>：このメタ解析において、ショック患者の蘇生に用いられたとき、POCUSは医師の管理に影響し、一部の診断検査の必要性を減らし、乳酸クリアランスを改善し、血管作動薬の投与期間・腎代替療法の必要性・28日時点の死亡をおそらく減らした。 <strong>Meaning</strong>：ショック患者の蘇生をPOCUSで導くことは、患者と医療システムにとって重要な利益をもたらしうる。</p>
+</div>
+<h3>8. サブグループ・異質性・出版バイアスの扱い 🔬</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>本文に書かれていること</th><th>本文に書かれていないこと</th></tr></thead>
+<tbody>
+<tr><td><strong>異質性の指標</strong></td><td>フォレストプロットの目視、均質性のカイ二乗検定、I²統計量で評価したと<strong>方法に記載</strong></td><td><strong>I²の実測値は本文・Table 1〜4 のどこにも1つも印字されていない</strong>。eFig. 1〜15 を見ないと確認できない</td></tr>
+<tr><td><strong>サブグループ（POCUSプロトコル別）</strong></td><td>事後の判断。経胸壁心臓／経食道心臓／IVC単独／肺単独の4類型。交互作用 p&lt;0.1 なら ICEMAN で信頼性評価</td><td><strong>交互作用のp値も各サブグループの効果推定値も本文には無い</strong>（eTable 4）。輸液量とRRT期間については「信頼できるサブグループ効果なし」とだけ記載</td></tr>
+<tr><td><strong>サブグループ（バイアスリスク別）</strong></td><td>人工呼吸期間・ICU在室日数で「きわめて信頼できる」、在院日数で「中等度に信頼できる」サブグループ。<strong>いずれも低バイアスリスク研究に限定した推定値を採用</strong>。ただし重要な未説明の異質性が残存</td><td><strong>28日死亡についてバイアスリスク別サブグループを行ったかどうかの記載が無い</strong>。死亡は全17 RCTのプール推定値で報告されている</td></tr>
+<tr><td><strong>出版バイアス</strong></td><td>フォレストプロットの目視＋<strong>10 RCT超のアウトカムでEgger検定</strong>。「アウトカムは出版バイアスの低リスク」と判断</td><td><strong>Egger検定のp値は1つも報告されていない</strong>。ファンネルプロットも掲載されていない</td></tr>
+<tr><td><strong>Trial Sequential Analysis（TSA）</strong></td><td>—</td><td><strong>TSAは実施されていない。本文中にTSAへの言及が一切無い</strong></td></tr>
+</tbody></table></div>
+<h3>9. 考察 — 著者らの解釈 💭</h3>
+<h4>主要所見のまとめ（著者の言葉）</h4>
+<p>本系統的レビューに基づけば、POCUSはおそらく輸液投与と血管作動薬処方に関する医師の判断に影響する（Table 2）が、これらの差は輸液・強心薬の実際の投与における大きな差には結びつかなかった。POCUSは<strong>医師が依頼する診断的心エコーの件数を減らすかもしれない</strong>（Table 3）。絶対差9%は資源利用を意味あるかたちで減らしコスト削減につながりうるが、既存のエビデンスは、持続モニタリングを提供する使い捨てTEEプローブを用いた単一研究に由来する。臨床アウトカムについては、POCUSガイド蘇生はおそらく乳酸クリアランスを改善し、血管作動薬の投与期間・RRTの必要性・28日死亡を減らす（Table 4）。さらに重症AKIのリスクを減らすかもしれない（Very low certainty）。一方、人工呼吸・RRTの必要性と期間、ICU・入院の必要性と在室・在院日数に影響するというエビデンスは見つからなかった。</p>
+<h4>「判断は変わるのに投与量は変わらない」をどう説明するか</h4>
+<p>著者らはこの一見矛盾した所見に、明示的に<strong>推測（speculation）</strong>として説明を与えている。</p>
+<ol><li><strong>意思決定への自信が増したためか</strong>、POCUSを用いた臨床医は輸液・血管作動薬処方の変更回数が少なかった。</li><li>しかし<strong>投与量の差は両群で些細だった</strong>。ひとつの説明は、十分な時間があれば、患者のショック生理の推移そのものが、POCUSの有無にかかわらず臨床医に同じ管理判断を促したのではないか、というもの。</li><li>これは、POCUSで蘇生早期（6・24時間）にはわずかに輸液が少なくなり、72時間ではその差が消えたことを説明しうる。</li><li>著者らは「POCUSは蘇生の努力を早めることで臨床アウトカムを改善しているのではないか」と推測する。乳酸クリアランスの改善と血管作動薬期間の短縮は、ショック解除がより速いことを示唆し、この推測を支持しうる。</li><li>その結果として、ショック生理の速やかな是正が、腎臓のような虚血に弱い臓器の障害を減らし、RRTの必要性と死亡を減らしている可能性がある。</li></ol>
+<h4>今後の研究への含意（著者の提案）</h4>
+<ul><li><strong>どの患者コホートが最も利益を得るかがまだ決まっていない</strong>。未分化ショック、混合型ショック、至適蘇生の時間窓が狭くなるような併存症（例：心機能障害）を持つ患者が、より大きな利益を得るのかは未解明。これらの生理学的プロファイルは、迅速な診断と競合する蘇生戦略の点で臨床医を悩ませるため、<strong>POCUSの治療的ポテンシャルをよりよく示せるかもしれない</strong>。</li><li>術者の専門性・タイミング・頻度の報告不足が結果の一般化可能性を制限している。教育カリキュラムと診療ガイドラインに情報を与えるため、今後の研究は臨床医に必要な最低限の習熟レベルと、POCUS評価の至適な頻度・タイミングを検討すべきである。</li></ul>
+<h4>実装への含意（著者の提案）</h4>
+<ul><li>本レビューはPOCUS使用による害のエビデンスを一切見出さなかった。</li><li>手技ガイドなど他の目的でPOCUSが既に統合されている急性期医療の環境では、ショック管理を導くためのPOCUSの継続使用を本結果は支持する。</li><li>一方、必要な基盤や訓練を欠く環境へのPOCUSの広範な導入には、より慎重なアプローチが必要。そうした文脈での費用対効果については論じられず、<strong>有用性と経済的影響の継続的評価が必要</strong>。</li></ul>
+<h3>10. 著者が明記した限界（5点）⚠️</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>タイミング・頻度・術者経験に基づくPOCUSガイド蘇生の比較ができなかった</strong></td><td>実装に最も必要な情報が空白のまま</td></tr>
+<tr><td>2</td><td><strong>一部のサブグループ効果を検討できなかった</strong>（例：心不全などの併存症を持つ患者は複数の研究で除外されていた）</td><td>併存症を持つ患者への外挿が難しい</td></tr>
+<tr><td>3</td><td><strong>一部のプール推定値は不精確性と低い確実性に制限された</strong></td><td>効果の大きさが定まらない</td></tr>
+<tr><td>4</td><td><strong>単一の研究を除き、すべてのエビデンスが単施設研究に由来した</strong></td><td>一般化可能性と小規模研究効果の懸念</td></tr>
+<tr><td>5</td><td><strong>非直接性への懸念のため、POCUSによる潜在的なコスト削減に関する結論は限定的</strong></td><td>費用対効果の主張はできない</td></tr>
+</tbody></table></div>
+<h3>11. 結論（原文の CONCLUSIONS）</h3>
+<p>POCUSガイド蘇生は、血管作動薬と輸液投与に関する医師の判断に影響し、乳酸クリアランス率を改善し、一部の診断検査（例：TTE）の必要性、血管作動薬の投与期間、RRTの必要性、死亡リスクをおそらく減らす。今後の研究では、臨床的利益を得るための最低限の習熟度の閾値の決定、他の血行動態ガイドツールと比較したPOCUSの費用対効果の検討、特定の患者サブグループへの影響の探索が必要である。</p>
+<h2>🔍 旧記述との照合（PDF精読で訂正した点）</h2>
+<p>改稿前のこのノートはPDFの1〜2ページ（抄録・KEY POINTS・Methods冒頭）のみに基づいており、本文（3〜10ページ）とTable 1〜4、Figure 1を反映していなかった。PDF全文と1つずつ照合した結果、以下を訂正した。<strong>すべてPDFの記載を正とした</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>旧ノートの記述</th><th>PDFの記載（正）</th><th>影響</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>28日死亡の確実性を <strong>low〜moderate</strong> と記載</td><td><strong>Table 4：Moderate（重大な不精確性）</strong></td><td>抄録の「low to moderate certainty」は死亡・昇圧薬期間・RRTの<strong>3つをまとめた範囲表現</strong>。個々のアウトカムに割り当てるのは誤り</td></tr>
+<tr><td>2</td><td>RRTの確実性を <strong>low〜moderate</strong> と記載</td><td><strong>Table 4：Low（重大な非直接性・重大な不精確性）</strong></td><td>RRTは3つのうち最も確実性が低い</td></tr>
+<tr><td>3</td><td>血管作動薬期間の確実性を <strong>low〜moderate</strong> と記載</td><td><strong>本文・Table 4：Moderate（重大な不精確性）</strong></td><td>同上</td></tr>
+<tr><td>4</td><td>乳酸クリアランスは「改善（確実性 high）」とのみ記載</td><td><strong>6時間 +7.07%（95%CI 0.13–14.02）、24時間 +15.40%（95%CI 3.4–27.4）、いずれもHigh</strong>。ただし本文は6時間の所見を「<strong>些細な差（trivial difference）</strong>」と表現</td><td>数値が欠落していた。また「High certainty」は<strong>ゼロでない効果の存在</strong>に対する確実性であり、効果量が大きいという意味ではない</td></tr>
+<tr><td>5</td><td>「実際の輸液投与はほとんど変化しない（low〜high）」とのみ記載</td><td><strong>6時間 −0.39 L（Low）、24時間 −0.62 L（High）、72時間 −0.18 L（Moderate）</strong>。24時間は95%CIがゼロをまたがない</td><td>数値と、確実性ターゲット（Table 1）による判定ロジックが欠落していた</td></tr>
+<tr><td>6</td><td>強心薬「変化しない（high）」</td><td><strong>RR 0.99（95%CI 0.84–1.17）、6 RCT・1128例、High</strong></td><td>数値が欠落していた</td></tr>
+<tr><td>7</td><td>CT「変わらないかもしれない（low）」</td><td><strong>RR 1.10（95%CI 0.73–1.66）、273例・1 RCT、Low</strong>。方向はむしろ<strong>増加側</strong></td><td>「1 RCTのみ」という重大な制約が欠落していた</td></tr>
+<tr><td>8</td><td>診断的心エコー「おそらく減る（moderate）」</td><td><strong>RR 0.74（95%CI 0.57–0.96）、545例・1 RCT、Moderate</strong>。<strong>データは ImaCor社の使い捨てTEEプローブによる持続モニタリング研究1本のみ</strong></td><td>「循環器科への依頼が減る」という当院向けの示唆を、この制約なしに書いていた</td></tr>
+<tr><td>9</td><td>「AKIリスク・人工呼吸期間・RRT期間は不確実」とのみ記載</td><td><strong>AKI RR 0.71（0.45–1.13）2 RCT・148例／人工呼吸期間 −0.19日 6 RCT・1000例／RRT期間 −0.85日 2 RCT・112例、すべてVery low</strong></td><td>数値と症例数が欠落</td></tr>
+<tr><td>10</td><td>「ICU・入院入室、ICU・在院日数、人工呼吸の必要はほとんど差なし（low〜moderate）」</td><td><strong>ICU入室 RR 1.28（0.70–2.35）Low／入院 RR 0.98（0.88–1.09）Low／ICU在室 0日差 Low／在院 −0.21日 Moderate／人工呼吸実施 RR 0.88（0.67–1.15）Low</strong></td><td>数値が欠落。また Table 4 と本文で確実性の記載が食い違う項目がある（下記の批判的吟味を参照）</td></tr>
+<tr><td>11</td><td>「適格RCT 18件」とのみ記載し、各アウトカムの寄与研究数を書いていなかった</td><td><strong>死亡は 17 RCT・2163例</strong>、昇圧薬期間は <strong>5 RCT・449例</strong>、RRTは <strong>4 RCT・813例</strong> など<strong>アウトカムごとに大きく異なる</strong></td><td>「18 RCT」という数字だけでは、個々の結論の頑健さを誤認する</td></tr>
+<tr><td>12</td><td>「組入＝RCT（パイロット・実行可能性研究も含む）」</td><td>組入基準には<strong>対照群のあるコホート研究と前後比較研究も含めていた</strong>が、<strong>NRSはRCTのエビデンスを強化しなかったため使用しなかった</strong>。結果として18 RCTのみ</td><td>設計の意図が抜けていた</td></tr>
+<tr><td>13</td><td>バイアスリスク評価・サブグループ・異質性・出版バイアスは「本ノートに反映していない」と記載</td><td><strong>Cochrane RoB 2.0／大半が低バイアスリスク（eTable 3）／POCUSプロトコル別の事後サブグループとICEMAN／Egger検定（10 RCT超のみ）／出版バイアス低リスクと判断</strong> — いずれも本文に記載あり</td><td>精読で反映可能だった</td></tr>
+<tr><td>14</td><td>I² について言及なし</td><td><strong>方法にI²を用いると記載があるが、本文・全表に I² の実測値は1つも印字されていない</strong>（eFig.のみ）</td><td>「無い」ことを明記する必要がある</td></tr>
+<tr><td>15</td><td>Trial Sequential Analysis について言及なし</td><td><strong>TSAは実施されていない（本文に一切の言及なし）</strong></td><td>「無い」ことを明記</td></tr>
+<tr><td>16</td><td>frontmatter の <code>pdf:</code> が Desktop の原ファイル名のままで、Vault内に添付が無かった</td><td><code>_attachments/CCM.0000000000006399_POCUS-SHOCK.pdf</code> にコピーし冒頭に埋め込み</td><td>ノートから原文をすぐ開ける</td></tr>
+<tr><td>17</td><td>Figure 1（PRISMA）が未掲載</td><td><strong>9340＋1件同定 → 6436件（重複除去後）→ 261件全文 → 18 RCT</strong>。除外243件の内訳あり</td><td>原図を抽出して掲載。<strong>本文の「8536件」と図が一致しない</strong>ことも判明</td></tr>
+</tbody></table></div>
+<p><strong>検証したが訂正不要だった項目</strong>：タイトル（英文・和文）、掲載誌（Critical Care Medicine）、発行年（2024）、巻号・ページ（紙面のランニングヘッドに「November 2024 • Volume 52 • Number 11」、ページ 1661–1673 が印字されており、52(11):1661-1673 は正しい）、DOI（10.1097/CCM.0000000000006399）、PROSPERO ID（紙面表記 <code>CRD4202016000</code> のまま）、ファイル名の「18RCT」（Figure 1 と本文で一致・正しい）、ファイル名の「28日死亡」（Table 4 のアウトカム名が "Mortality at 28 d" であり、RR 0.88（0.78–0.99）も正しい）。したがって<strong>ファイル名は変更しない</strong>。ただし本文は「組み入れ研究が報告した死亡の時点は28〜30日」と明記しており、厳密には28日死亡と30日死亡の混合である点を本文に追記した。</p>
+<h2>🧪 批判的吟味（JCでの論点）</h2>
+<h3>A. 「死亡を減らす」という主張はどこまで強いか</h3>
+<ol><li><strong>95%CIの上限が0.99</strong>。RR 0.88（0.78–0.99）は、<strong>1.00にわずか0.01しか余裕がない</strong>。著者ら自身が不精確性で Moderate へ格下げしている。</li><li><strong>17 RCT・2163例</strong>という規模は、死亡をアウトカムとするメタ解析としては小さい。<strong>1試験あたり平均127例</strong>。</li><li><strong>1試験を除きすべて単施設研究</strong>（著者ら明記）。単施設・小規模・陽性という組み合わせは、<strong>小規模研究効果（small-study effects）</strong>の典型的な布置である。</li><li>Egger検定は「10 RCT超のアウトカム」に対して実施したと書かれ、死亡は17 RCTなので対象になるはずだが、p値もファンネルプロットも提示されていない。「出版バイアスの低リスクと判断した」という結論文だけが置かれている。</li><li>Trial Sequential Analysis が行われていない。したがって「必要情報量に達したか」を評価できず、有意になった時点でのランダム誤差による過大評価（early stopping に類する現象）を排除できない。（※TSAの必要性は一般的な方法論の議論であり、本論文本文の記述ではない。）</li><li><strong>死亡の時点が28日と30日の混在</strong>。Table 4 は "Mortality at 28 d" と表示しているが、本文は「28〜30日の時点で報告されていた」と書いている。</li></ol>
+<h3>B. バイアスリスクの扱いが、アウトカムごとに一貫していない</h3>
+<p>これが本論文で<strong>最も指摘しやすい弱点</strong>である。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>バイアスリスク別サブグループの扱い</th><th>報告された推定値</th></tr></thead>
+<tbody>
+<tr><td>人工呼吸の期間</td><td>「きわめて信頼できるサブグループ」と判定</td><td><strong>低バイアスリスク研究に限定</strong>した推定値を採用</td></tr>
+<tr><td>ICU在室日数</td><td>「きわめて信頼できるサブグループ」と判定</td><td><strong>低バイアスリスク研究に限定</strong>した推定値を採用</td></tr>
+<tr><td>在院日数</td><td>「中等度に信頼できるサブグループ」と判定</td><td><strong>低バイアスリスク研究に限定</strong>した推定値を採用</td></tr>
+<tr><td><strong>28日死亡</strong></td><td><strong>記載なし</strong></td><td><strong>全17 RCTのプール推定値</strong></td></tr>
+</tbody></table></div>
+<p>つまり、差が出なかった3つのアウトカムでは高バイアスリスク研究を落として推定し直しているのに、差が出た死亡では全研究をプールした推定値がそのまま採用されている。これが意図的な選択なのか、単に死亡ではサブグループ効果が検出されなかったのかは、<strong>本文からは判断できない</strong>。JCではここを問うべきである。</p>
+<p>加えて、<strong>「大半の研究が低バイアスリスク」という判定自体に疑問がある</strong>。POCUSの介入は<strong>臨床医の盲検化が原理的に不可能</strong>であり、輸液・昇圧薬の増減という主観的な共介入が結果を規定する。RoB 2.0 の「意図した介入からの逸脱」ドメインで低リスクとされる根拠は、eTable 3 を見ないと検証できない。</p>
+<h3>C. 「医療システムの利益」は1本の試験に乗っている</h3>
+<ul><li>Table 2（医師の意思決定・5行すべて）と、Table 3の診断的TTE削減は、いずれも545例の単一RCTに由来する。</li><li>しかもその試験の介入は、ImaCor社の使い捨てプローブによる持続経食道心エコーモニタリングであり、一般的なPOCUS（間欠的な経胸壁スキャン）とは介入の実体が異なる。著者らも「絶対差9%は資源利用を意味あるかたちで減らしうるが、エビデンスは単一研究に由来する」と自ら留保している。</li><li>同様に、<strong>CT件数・ICU入室・入院は273例の単一RCT</strong>に由来する。</li><li>「POCUSは判断を変え、心エコー依頼を減らす」という命題を、当院の経胸壁POCUS運用の根拠として引用してはならない。</li></ul>
+<h3>D. 本文中の数値と表の数値が一致しない箇所がある</h3>
+<p>PDFを1つずつ突き合わせると、本文に書かれたリスク差（RD）と、Table 3・4 の絶対効果推定値が食い違う箇所が複数ある。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>本文中のRD</th><th>Table の絶対差</th><th>差</th></tr></thead>
+<tbody>
+<tr><td>28日死亡</td><td>RD −4.3%</td><td>1000人あたり41人少ない（−4.1%）</td><td>0.2ポイント</td></tr>
+<tr><td>RRT実施</td><td>RD −5.8%</td><td>1000人あたり51人少ない（−5.1%）</td><td>0.7ポイント</td></tr>
+<tr><td>人工呼吸の実施</td><td>RD −5.8%</td><td>1000人あたり46人少ない（−4.6%）</td><td>1.2ポイント</td></tr>
+<tr><td>28日AKI</td><td>RD −11.8%</td><td>1000人あたり121人少ない（−12.1%）</td><td>0.3ポイント</td></tr>
+<tr><td><strong>強心薬投与</strong></td><td><strong>RD 1.5%（増加方向）</strong></td><td><strong>1000人あたり3人少ない（−0.3%、減少方向）</strong></td><td><strong>符号が逆</strong></td></tr>
+<tr><td>入院</td><td>RD −1.8%</td><td>1000人あたり17人少ない（−1.7%）</td><td>0.1ポイント</td></tr>
+<tr><td>診断的CT／診断的TTE／ICU入室</td><td>2.4% ／ −9.2% ／ 3.3%</td><td>24件多い ／ 92件少ない ／ 33人多い</td><td>一致</td></tr>
+</tbody></table></div>
+<p>さらに、Table 4 の絶対リスクの列と「差」の列が算術的に合わない行がある。</p>
+<ul><li><strong>28日死亡</strong>：対照 342/1000、POCUS 297/1000 → 引き算では <strong>45人少ない</strong>。しかし「差」欄は 41人少ない。RR 0.88 × 342 ＝ 301 なので、297 という数字が RR とも「差」とも整合しない。</li><li><strong>RRT実施</strong>：対照 254/1000、POCUS 199/1000 → 引き算では <strong>55人少ない</strong>。しかし「差」欄は 51人少ない。RR 0.80 × 254 ＝ 203。同じ型の不整合。</li><li><strong>6時間乳酸クリアランス</strong>：対照 31.62%、POCUS 36.55% → 引き算では <strong>4.93%高い</strong>。しかし「差」欄のプールMDは 7.07%高い（変量効果モデルの重み付けによる差と考えれば説明可能だが、表からは読み取れない）。</li></ul>
+<p><strong>組版上の誤り</strong>も複数ある。Table 2・3・4 の絶対効果の2列が、いずれも "Without POCUS-Guided Resuscitation" という同じ見出しになっている（本来は「POCUSなし」と「POCUSあり」）。上のこのノートの表では、RRと差の向きから左＝対照・右＝POCUS群と判定して日本語化した。また Table 4 の6時間乳酸クリアランスの行の平易な要約が「24 hr」と書かれている（6時間の行なのに24時間と表記）。Table 3 の脚注には表中に登場しない MV・RRT の略語定義が残っている。</p>
+<h3>E. 本文と表で「確実性」の記載が食い違う</h3>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>本文（RESULTS）の記載</th><th>Table 4 の記載</th></tr></thead>
+<tbody>
+<tr><td><strong>入院</strong></td><td>「moderate certainty」</td><td><strong>Low（きわめて重大な不精確性）</strong></td></tr>
+<tr><td><strong>人工呼吸の実施</strong></td><td>「moderate certainty」</td><td><strong>Low（きわめて重大な不精確性）</strong></td></tr>
+<tr><td><strong>RRTの実施</strong></td><td>本文「may reduce … <strong>low certainty</strong>」</td><td>確実性欄は <strong>Low</strong> だが、平易な要約欄は「<strong>probably reduces</strong>（おそらく減らす）」＝ Moderate 相当の言い回し</td></tr>
+</tbody></table></div>
+<p>GRADE の作法では確実性と言い回しは1対1に対応する（High＝断定、Moderate＝probably/likely、Low＝may、Very low＝uncertain）。<strong>この3箇所は対応が崩れている</strong>。特にRRTは、<strong>同じ表の中で確実性欄と要約欄が矛盾している</strong>。JCで「この論文はRRTについて何と言っているのか」と問うと、答えが割れる。</p>
+<h3>F. 引用研究数が本文と表で合わない箇所がある</h3>
+<p>本文は各アウトカムに寄与した研究を文献番号で列挙している。ほとんどはTableの研究数と一致するが、<strong>2箇所で合わない</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>本文の文献番号</th><th>本文の文献数</th><th>Table の研究数</th></tr></thead>
+<tbody>
+<tr><td><strong>28日死亡</strong></td><td>(7–19, 22, 23)</td><td><strong>15</strong></td><td><strong>17 RCT</strong></td></tr>
+<tr><td><strong>血管作動薬の投与期間</strong></td><td>(7, 9, 11, 16, 18, 19)</td><td><strong>6</strong></td><td><strong>5 RCT</strong></td></tr>
+<tr><td>6時間輸液量</td><td>(8, 9, 12, 16, 18, 21, 23)</td><td>7</td><td>7 ✓</td></tr>
+<tr><td>24時間輸液量</td><td>(7, 11–14, 16, 18, 19, 21, 23, 24)</td><td>11</td><td>11 ✓</td></tr>
+<tr><td>72時間輸液量</td><td>(16–18)</td><td>3</td><td>3 ✓</td></tr>
+<tr><td>強心薬投与</td><td>(8, 9, 14, 16, 17, 21)</td><td>6</td><td>6 ✓</td></tr>
+<tr><td>6時間乳酸クリアランス</td><td>(7, 10, 12, 16, 18, 23)</td><td>6</td><td>6 ✓</td></tr>
+<tr><td>24時間乳酸クリアランス</td><td>(7, 12, 23, 24)</td><td>4</td><td>4 ✓</td></tr>
+<tr><td>28日AKI</td><td>(12, 19)</td><td>2</td><td>2 ✓</td></tr>
+<tr><td>RRT実施</td><td>(11, 16, 17, 19)</td><td>4</td><td>4 ✓</td></tr>
+<tr><td>RRT期間</td><td>(17, 19)</td><td>2</td><td>2 ✓</td></tr>
+<tr><td>人工呼吸の実施</td><td>(9, 18)</td><td>2</td><td>2 ✓</td></tr>
+<tr><td>人工呼吸の期間</td><td>(9, 12, 13, 16, 17, 22)</td><td>6</td><td>6 ✓</td></tr>
+<tr><td>ICU在室日数</td><td>(8, 9, 12, 13, 16, 17, 22)</td><td>7</td><td>7 ✓</td></tr>
+<tr><td>在院日数</td><td>(8, 17, 18, 22, 23)</td><td>5</td><td>5 ✓</td></tr>
+</tbody></table></div>
+<p>最も重要な主要アウトカム（死亡）で、本文の引用が2本足りない。どの試験が含まれているかを本文だけからは確定できない。</p>
+<p>また、組み入れられた18 RCTのうち、文献20（Sricharoenchai、Intensive Care Medicine Experimental の学会抄録）は、本文のどのアウトカムの引用リストにも現れない。文献22（Yin W ら 2021）は<strong>掲載誌名が記載されておらず、灰色文献と推測される</strong>。</p>
+<h3>G. 「POCUS」が何を指しているかが試験ごとにばらばら</h3>
+<p>事前基準を置かなかった結果、統合されたのは以下が混在したプールである。</p>
+<div class="tw"><table>
+<thead><tr><th>プロトコルの型</th><th>代表例（文献番号）</th></tr></thead>
+<tbody>
+<tr><td>心臓（経胸壁）中心</td><td>7、14、15、21</td></tr>
+<tr><td>心肺（心臓＋肺）</td><td>16、24</td></tr>
+<tr><td>IVC 単独</td><td>10、19</td></tr>
+<tr><td>肺単独</td><td>13</td></tr>
+<tr><td>持続経食道モニタリング</td><td>17</td></tr>
+<tr><td>未分化低血圧への包括的プロトコル</td><td>8（SHoC-ED）</td></tr>
+</tbody></table></div>
+<p>（※上表は各文献のタイトルから判断できる範囲で整理したもので、<strong>論文本文にこの対応表は無い</strong>。正確な分類は eTable 2 を参照する必要がある。）</p>
+<p>このプールから出た「RR 0.88」を、<strong>自施設の特定のPOCUS運用に読み替えることはできない</strong>。著者らが事後にプロトコル別サブグループ解析を行ったのはこのためだが、<strong>その結果は本文に数値として提示されていない</strong>（eTable 4）。</p>
+<h3>H. 対照群が「通常ケア」であることの意味</h3>
+<p>対照は「POCUSなしの管理（<strong>他の形のガイド治療または通常ケアを含む</strong>）」と定義されている。ここにはEGDT（early goal-directed therapy）を対照とした試験（文献9、14、23）と、<strong>単なる通常ケアを対照とした試験</strong>が混在する。EGDTは既に否定された戦略なので、EGDTを対照にした試験でPOCUS群が勝つことと、標準的な現代の蘇生を対照にして勝つことは、意味が異なる。この層別も本文には無い。</p>
+<h3>I. JCでそのまま使える問い（5つ）</h3>
+<ol><li>28日死亡の95%CI上限が0.99であることを、当院の意思決定でどう扱うか。「有効」と読むか「有望だが未確定」と読むか。</li><li>なぜ人工呼吸期間・ICU在室日数・在院日数では低バイアスリスク研究に絞り、死亡では全研究をプールしたのか。死亡も低バイアスリスク研究に絞ったらどうなるか。</li><li>「判断は変わるが投与量は変わらない」のに死亡が減る、という因果の筋道は納得できるか。著者の「蘇生の迅速化」仮説は検証されているか（されていない。speculation と明記されている）。</li><li>心エコー依頼の削減（RR 0.74）を、持続TEEの単一試験から当院の経胸壁POCUSへ外挿してよいか。</li><li>本文の「8536件」とFigure 1の「9340＋1件／6436件」の不一致、確実性の本文・表の食い違い、Table 4の算術不整合をどう評価するか。これらは結論を変えないが、<strong>報告の質</strong>をどう見るか。</li></ol>
+<h2>📚 主要引用文献一覧</h2>
+<h3>方法論の枠組み</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>3</td><td><strong>診断技術の臨床評価のフレームワーク</strong>。本レビューの「アウトカムの階層」の出典</td><td>Guyatt GH, Tugwell PX, Feeny DH, et al. *CMAJ* 1986;134:587-594</td></tr>
+<tr><td>4</td><td><strong>ICEMAN</strong>：RCT・メタ解析における効果修飾解析の信頼性を評価する手法</td><td>Schandelmaier S, Briel M, Varadhan R, et al. *CMAJ* 2020;192:E901-E906</td></tr>
+<tr><td>5</td><td><strong>Cochrane Risk of Bias 2.0</strong>（ランダム化試験のバイアスリスク評価）</td><td>Higgins JPT, Savović J, Page MJ, et al. Cochrane Handbook v6.4, 2023</td></tr>
+<tr><td>6</td><td><strong>GRADE guidelines 1</strong>：エビデンスプロファイルと Summary of Findings 表</td><td>Guyatt G, Oxman AD, Akl EA, et al. *J Clin Epidemiol* 2011;64:383-394</td></tr>
+</tbody></table></div>
+<h3>背景</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>敗血症性ショックの血行動態管理</td><td>Lipcsey M, Castegren M, Bellomo R. *Minerva Anestesiol* 2015;81:1262-1272</td></tr>
+<tr><td>2</td><td><strong>ACCP／SRLF による重症超音波の能力に関するステートメント</strong></td><td>Mayo PH, Beaulieu Y, Doelken P, et al. *Chest* 2009;135:1050-1060</td></tr>
+</tbody></table></div>
+<h3>組み入れられた18 RCT（文献7〜24）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>試験の内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>7</td><td>重症敗血症・敗血症性ショックの心エコーガイド血行動態管理（RCT）</td><td>Alhabashy WS, et al. *Anaesth Pain Intensive Care* 2021;25:722-732</td></tr>
+<tr><td>8</td><td><strong>SHoC-ED</strong>：救急外来の未分化低血圧にPOCUSは転帰を改善するか（国際多施設RCT）</td><td>Atkinson PR, Milne J, Diegelmann L, et al. *Ann Emerg Med* 2018;72:478-489</td></tr>
+<tr><td>9</td><td>EGDT vs プロトコル化蘇生ケア（敗血症性ショック早期管理）</td><td>Elsayed AA, Elhamid Ahmed RA, Beshey BN. *Egypt J Anaesth* 2022;38:58-63</td></tr>
+<tr><td>10</td><td>CVP と IVC 変動の輸液反応性評価の比較（敗血症性ショック）</td><td>Garg M, Sen J, Goyal S, et al. *Indian J Crit Care Med* 2016;20:708-713</td></tr>
+<tr><td>11</td><td>ICU早期の多焦点ショック超音波診断プロトコルのルーチン実施（RCT）</td><td>Gerges M, El-Azab A, Abdelaziz E, et al. *Crit Care Shock* 2023;26:143-156</td></tr>
+<tr><td>12</td><td>IVC変動＋中心静脈-動脈CO2較差による輸液蘇生ガイド</td><td>He Z, Yang X, Yang C, et al. *Zhonghua Wei Zhong Bing Ji Jiu Yi Xue* 2022;34:18-22</td></tr>
+<tr><td>13</td><td>簡易肺エコープロトコルによる輸液蘇生の終点決定</td><td>Ismail RM, Dahroug AH, Zaytoun TM. *Egypt J Chest Dis Tuberc* 2019;68:102-107</td></tr>
+<tr><td>14</td><td>心エコーガイド蘇生 vs EGDT（敗血症性ショック・実行可能性RCT）</td><td>Lanspa MJ, Burk RE, Wilson EL, et al. *J Intensive Care* 2018;6:1-8</td></tr>
+<tr><td>15</td><td>PLR＋経胸壁心エコーによる早期輸液蘇生の臨床的価値</td><td>Li G, Wei F, Zhang G, et al. *Zhonghua Wei Zhong Bing Ji Jiu Yi Xue* 2019;31:413-417</td></tr>
+<tr><td>16</td><td>焦点化心肺超音波の敗血症性ショック転帰への効果</td><td>Li L, Ai Y, Wang X, et al. *J Int Med Res* 2021;49:3000605211013176</td></tr>
+<tr><td>17</td><td><strong>使い捨てTEEプローブによる持続血行動態モニタリング（RCT）</strong>。<strong>Table 2 の全行と診断的TTE削減の出典</strong></td><td>Merz TM, Cioccari L, Frey PM, et al. *Intensive Care Med* 2019;45:1093-1102</td></tr>
+<tr><td>18</td><td>超音波ガイド輸液蘇生（敗血症性低灌流・敗血症性ショック）</td><td>Musikatavorn K, Plitawanon P, Lumlertgul S, et al. *West J Emerg Med* 2021;22:369-378</td></tr>
+<tr><td>19</td><td>IVC吸気時虚脱率のEGDTへの臨床応用（敗血症性ショック）</td><td>Qi B, Yang W, Zhang H, et al. *Chin J Resp Crit Care Med* 2020;19:246-250</td></tr>
+<tr><td>20</td><td>動的超音波ガイド vs 静的CVPガイド輸液蘇生（<strong>学会抄録</strong>。本文のどのアウトカムにも引用されていない）</td><td>Sricharoenchai T, Saisirivechakun P. *Intensive Care Med Exp* 2019, p 55</td></tr>
+<tr><td>21</td><td>拡張焦点化経胸壁心エコープロトコルの敗血症性ショックへの影響</td><td>Wang X, Liu D, Zhang H, et al. *Zhonghua Yi xue Za Zhi* 2011;91:1879-1883</td></tr>
+<tr><td>22</td><td>ICUにおける重症超音波指向のショック治療（RCT。<strong>掲載誌の記載なし</strong>）</td><td>Yin W, Qin Y, Zou T, et al. 2021</td></tr>
+<tr><td>23</td><td><strong>CCUGDT</strong>：重症超音波ゴール指向 vs EGDT（敗血症性ショック）</td><td>Yu K, Zhang S, Chen N, et al; CCUGDT Study Group. *Intensive Care Med* 2022;48:121-123</td></tr>
+<tr><td>24</td><td>IVC径＋肺エコーBラインスコアによる輸液蘇生ガイド</td><td>Zhuang Y, Dai L, Cheng L, et al. *Zhonghua Wei Zhong Bing Ji Jiu Yi Xue* 2020;32:1356-1360</td></tr>
+</tbody></table></div>
+<p><strong>この一覧から読み取れること</strong>：18 RCTのうち、中国語誌が4本（12、15、21、24）、エジプト系誌が3本（7、9、13）、インド・タイ誌が各1本（10、18）を占め、欧米の主要誌に載った試験は SHoC-ED（8、Ann Emerg Med）、Merz（17、ICM）、Lanspa（14、J Intensive Care）、Yu（23、ICM）の4本にとどまる。著者らが「1本を除きすべて単施設」と書いた限界は、この一覧と整合する。</p>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 <mark class="hl">POCUSガイド蘇生は、ショックの28日死亡・昇圧薬期間・RRT必要性を「おそらく」減らすが、輸液量も強心薬量も変えていない。効いているとすれば「量の最適化」ではなく「ショック解除の速さ」である。</mark></p>
+</div>
+<ul><li><mark class="hl">28日死亡 RR 0.88（95%CI 0.78–0.99）は上限が0.99・確実性Moderate・17 RCT 2163例・1本を除き単施設。当院で「POCUSは死亡を減らす」と断言する根拠にはまだ足りない。</mark></li><li>最も再現性が高い所見は、乳酸クリアランス改善（High certainty、6時間 +7.07%／24時間 +15.40%）と昇圧薬期間 −0.73日（Moderate）。当院で追うならこの2つ。</li><li><mark class="hl">「心エコー依頼が減る（RR 0.74）」も「医師の判断が変わる」も、545例の単一RCT（使い捨てTEEによる持続モニタリング）1本だけに乗っている。当院の経胸壁POCUSへの外挿は不可。</mark></li><li>ICU在室日数・在院日数・人工呼吸の実施・CT件数は変わらない。「POCUSで在院日数が減る」は本研究では支持されない。</li><li>本研究が答えていない最大の問い＝「誰が、どのくらいの頻度で、いつスキャンするか」。事前基準を置かず、大半の試験が術者・頻度・タイミングを報告していないため、著者ら自身が「検討できなかった」と明記している。当院でプロトコルを作るならここは自前で決めて実測する。</li><li>害のエビデンスはゼロ。既にPOCUSが日常に入っている施設では継続使用が支持される、というのが著者らの実務的な着地点。</li></ul>
+<h4>判断の流れ（当院でこの論文をどう使うか）</h4>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ショック患者を診た</td><td>POCUSが即座に使える環境か（機器・術者）</td><td>使えるなら早期に心臓・肺・IVC・腹部を評価する。害のエビデンスは無い</td></tr>
+<tr><td>POCUSで所見が出た</td><td>介入可能な病態か（心嚢液・右室血栓・著明な収縮不全など）</td><td>原因への直接介入を優先。本研究の利益はここに最も集中していると考えられる</td></tr>
+<tr><td>輸液を入れるか迷う</td><td>輸液反応性と輸液耐容性を分けて評価したか</td><td>POCUSで判断は変わりうるが、<strong>総投与量が大きく変わることは期待しない</strong>。72時間では差が消える</td></tr>
+<tr><td>効果を院内で測りたい</td><td>何を指標にするか</td><td><strong>昇圧薬投与時間</strong>と<strong>6・24時間乳酸クリアランス</strong>。ICU在室日数・在院日数は変わらないので指標に使わない</td></tr>
+<tr><td>心エコー依頼を減らしたい</td><td>根拠は何か</td><td>本研究の RR 0.74 は持続TEEの単一試験由来。<strong>経胸壁POCUSの根拠としては使えない</strong>。自院データで検証する</td></tr>
+<tr><td>プロトコルを作る</td><td>術者要件・頻度・タイミングをどう決めるか</td><td>本研究には答えが無い。自分たちで定義し、導入前後で実測する</td></tr>
+</tbody></table></div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
