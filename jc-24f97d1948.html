@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🔁 PICSとICU退室後のフォロー Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="jc-24f97d1948.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🔁 PICSとICU退室後のフォロー Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/jc-24f97d1948.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/jc-24f97d1948.html</code></pre>
+<p>📄 PDF：[開く／ダウンロード](https://hiro-oka.github.io/jc-summaries/jc-24f97d1948.pdf)</p>
+<p># 🔁 PICSとICU退室後のフォロー Home</p>
+<p><strong>ICUを出たあとに何が残るか、そこに何が効くか</strong>。PICS・PICS-F の測り方、介入の成否、退室後の再入室と長期予後を扱う。関連60件。 ICU内の環境と体験は <span class="wl">🏨 Hotel ICU・人間的ケア Home</span>、せん妄そのものは <span class="wl">🌀 せん妄 Home</span> に任せる。</p>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>PICSは「症候群」ではなく「傘」として捉える</strong>。身体・精神・認知に加え、骨・嚥下・内分泌代謝・睡眠・疲労・疼痛まで（<span class="wl">ICU患者の長期予後 PICS最新知見（Rousseau 2021）</span>）。<mark class="hl">上流のPIICS（ICU在室中に進行する免疫・代謝の状態）と下流のPICS（退室後の機能障害）を混同しない</mark>（<span class="wl">PIICSはPICSの上流にある免疫・代謝の病態 — 診断基準は未確立、症候群から測れるエンドタイプへ（Understanding the Disease・ICM2026）</span>）</li><li><strong>尺度は7領域それぞれ1つに固定する</strong>：身体＝MRC score／認知＝MoCA／精神＝HADS／ADL＝Barthel Index／QOL＝EQ-5D-5L／睡眠＝PSQI（<span class="wl">PICS評価尺度の推奨20種類 — 754研究のスコーピングレビュー＋修正デルファイ（日本集中治療医学会PICS委員会・CritCare2023）</span>）</li><li><strong>ICU退室時に MRC sum score を測って記録するまでをICUの仕事に含める</strong>。<mark class="hl">重度の筋力低下は「ICUで獲得されるもの」ではなく「重篤疾患そのものの一部」</mark>（<span class="wl">重症疾患関連筋力低下（CIW）— ICUから地域までの診断・治療・長期転帰（総説・CritCare2023）</span>）</li><li><strong>患者向けの単発介入に投資しない</strong>。ICUダイアリー・VR動画・退室後の多職種コンサルテーションはいずれも陰性か有害だった（後述の対立の表）</li><li><strong>予算と人員は「退室後に何かをする」より「ICU滞在中の上流対策」に回す</strong>。<mark class="hl">下流介入（集中治療医主導フォローアップ外来 Suivi-Rea・Webベース認知訓練 IMPROVE・家族向けVR・お悔やみの手紙）はことごとく無効か有害</mark>で、確実に効くのは ABCDEFバンドル・せん妄予防・早期離床（24〜72時間以内）・身体抑制と深鎮静の削減・音光睡眠環境という<strong>在室中の手当て</strong>だった（<span class="wl">集中治療後症候群（PICS）の全体像 — ICU-AW 25〜75%・PTSD 20%と、効かなかったフォローアップ介入（総説・SingaporeMedJ2026）</span>）。<mark class="hl">「ルーチンのフォローアップと紹介するだけの紹介は、健康状態を記録するだけでアウトカムを改善しない」</mark></li><li><strong>退室後ケアは「外来を作るか」ではなく「どこで途切れているか」で点検する</strong>。ESICM 4セクション合同の BEYOND PICS は、B（退室前から始める）／E（早期フォローと公平なアクセス）／Y（患者・家族の目で回復を定義する）／O（多領域の継続評価とリハビリ）／N（ネットワーク化）／D（改善を回す）の6文字で退室後ケアの穴を探す<strong>組織設計の物差し</strong>である（<span class="wl">BEYOND PICS — ICU退室後の回復を6本柱で組み立てる概念枠組み（ESICM4セクション・CritCare2026）</span>）。<mark class="hl">バンドルでもガイドラインでもなく、臨床介入は何一つ規定しない</mark>。当院に当てると強いのは B（ABCDEF・早期離床・音光睡眠環境）と Y（患者体験）、弱いのは <mark class="hl">E（退室後に最初に接触する窓口が制度として無い）・N（退室サマリーにICU滞在の要約とPICSリスクが載らず、病棟・かかりつけ医に情報が渡らない）・O（入室前のベースライン機能を記録していない＝新規障害と元からの障害を区別できない）</mark> の3本。動かす順は<strong>外来の新設ではなく</strong>、①退室サマリーへのPICSリスク記載、②既にある <span class="wl">ICU退室後訪問 立ち上げ設計</span>、③ICU改善アンケート（PREMs 相当）を <strong>B → E → D の1本の線</strong>につなぎ直すところから。<mark class="hl">ただしこの枠組みは expert-informed であって consensus-based でも妥当性検証済みでもなく、枠組み自身が引く退室後フォローの検証（コクラン・Suivi-Rea・O'Neill JAMA2026 の遠隔リハビリ）はいずれも陰性か相反する</mark>＝「回復を1本の連続体として組織する」ことが正しくても「post-ICUクリニックを作れば長期アウトカムが良くなる」とはまだ言えない</li><li><strong>抜管後嚥下障害を拾う導線を作る</strong>。抜管後嚥下障害は 36〜44%、<mark class="hl">6か月後もなお23%に残る</mark>（同総説）。抜管後チェックリストにベッドサイド嚥下スクリーニングを1項目足し、陽性はSTへ回す</li><li><strong>家族には「複数接点の伴走」と「柔軟な面会」を置く</strong>。4ステップ伴走で6か月PTSD症状 IES-R −6.8点（<span class="wl">ICU家族への4ステップ伴走はPTSD症状を6か月後に減らす — 患者が生存した家族では1年後もIES-R 10点差（Caregiver Pathway RCT・ICM2025）</span>）、柔軟面会で<mark class="hl">1年時PTSD有病率 30.5%→21%</mark>（<span class="wl">柔軟な面会は家族のPTSD症状を1年後も減らす（ICU Visits試験12か月解析・ICM2024）</span>）</li><li><strong>PICS-F 対策は「役割を足す」より「家族が既にやっている対処を言語化して後押しする」</strong>。せん妄下の家族は、患者を支えながら同時に自分の苦痛を情報探索・回避・肯定的再評価で処理していた（<span class="wl">ICUせん妄に患者と家族はどう対処しているか — 10質的研究のメタ統合、家族が最大の対処資源（MMSR・CritCare2026）</span>）。<mark class="hl">情報が不足すると能動的な関与が「受動的な信頼」に退行し、過剰な介護役割を引き受けた家族は情緒的疲弊のリスクを負う</mark>＝<strong>情報提供は家族の対処能力そのものを底上げする介入</strong>。家族へのせん妄評価参加（FAM-CAM）も、患者のためだけでなく<mark class="hl">家族自身の PICS-F 予防</mark>として提案できる。<strong>ただし質的研究10本の統合であり効果は未検証</strong></li><li><strong>早期離床の効果は「患者と家族のペア」で評価する</strong>。個人の不安・抑うつはどの時点でも減らないが、<mark class="hl">6か月時点の同時発症は 54.8%→32.5%</mark>（<span class="wl">早期離床は患者と家族の「ペア」の心を6か月時点で救う — 同時発症 32.5%対54.8%（RCT二次解析・CritCare2026）</span>）</li><li><strong>早期離床・栄養のプロトコルを「一律の到達目標」から「その日の生物学的準備状態で強度を決める条件分岐」へ書き換える</strong>。EFFORT Protein・TARGET Protein・PRECISe・TEAM が示したのは <mark class="hl">介入の無効ではなく「一律に強く与える設計」の誤り</mark> で、高蛋白は転帰を改善せず、早期・高強度離床は全患者群で回復を早めず<mark class="hl">糖尿病のような脆弱な集団ではむしろ害になりうる</mark>（<span class="wl">ICU-AW研究の新時代 — 機序の解明から「意味のある回復」へ（エディトリアル・ICM2026）</span>）。リハビリと栄養は足し算ではなく、生物学的準備状態・疾患経過・表現型に成否が左右される<strong>適応的治療</strong>として扱う</li><li><strong>回復のゴールを「生存」から「自律・認知・日常生活への意味ある参加」に置き直す</strong>。同アジェンダでは<mark class="hl">Delphiパネルの43%を患者・家族が占め</mark>、ICU退室後のケアは「終点」ではなく<strong>連続体</strong>として構想し直すことが求められた（<span class="wl">ICU-AW研究の新時代 — 機序の解明から「意味のある回復」へ（エディトリアル・ICM2026）</span>）。<mark class="hl">退室後フォローで誰が・いつ・何を測るかを先に決め</mark>、項目は <span class="wl">重症患者の身体リハビリ試験に必須の8アウトカム — PRACTICEコアアウトカムセット（AnnalsATS2024）</span> に合わせておく</li><li><strong>高蛋白栄養にしない</strong>。2.0 g/kg/日は 180日 EQ-5D-5L を −0.05 悪化させた（<span class="wl">重症患者への高蛋白は6か月のQOLをむしろ悪化させる — 2.0対1.3 g毎kg毎日の二重盲検935例（PRECISe・Lancet2024）</span>）。<mark class="hl">「短期の合併症が減った」は2年後の生き方を何も保証しない</mark>（<span class="wl">栄養試験に必要なのは長期の機能予後 — EPaNIC 2年追跡が示したこと（エディトリアル・ICM2024）</span>）</li><li><strong>明日から変えられるのは3つ</strong>（<span class="wl">重症疾患後の機能・筋肉の回復 — 「一律に強く与える」が効かない理由と4フェーズ個別化戦略（総説・AnnIntensiveCare2026）</span>）。①栄養プロトコルに <mark class="hl">蛋白 1.3 g/kg/日 を上限</mark> と明記し、<mark class="hl">AKI では高蛋白を避ける</mark> を明文化する（EFFORT Protein の AKI 事後解析 311例で60日死亡の調整 HR 1.39、PRECISe で 2.0 g/kg/日 が30・90・180日の EQ-5D-5L を悪化）。②リハ指示簿を <mark class="hl">「◯分／日」から「到達 IMS レベル＋忍容性」へ</mark> 書き換える（TEAM の target trial emulation で、<mark class="hl">IMS 2 止まりの患者への20分超セッションは28日死亡増と関連し、IMS 4＝立位に届くと害シグナルが消える</mark>）。③<mark class="hl">糖尿病患者に強化離床を一律適用しない</mark>（TEAM の事前規定層別解析＝対象の21%で180日死亡が3倍超）。ただし <mark class="hl">4フェーズ戦略も ready-to-feed／ready-to-train 指標も前向き検証を経ていない概念枠組み</mark> である</li><li><strong>離床は「量を増やす」ではなく「その日どの高さまで起こせたか」で管理する</strong>。敗血症・急性呼吸不全で人工呼吸中の非フレイル患者169例のRCTは、開始を約16時間早め（30.0対45.9時間）セッション数と治療時間を2.75倍（11回・330分 対 4回・120分）にしたうえで、==ICU退室時 FSS-ICU 23.60対22.24（P=0.44）、12か月までの EQ-5D・SF-36 PCS/MCS・HADS・IES-R-K・MoCA-BLIND・PICS質問票も全て有意差なし==（<span class="wl">早期離床の量を2.75倍にしても機能は改善しない — 韓国5施設169例、12か月まで全アウトカム差なし（EVER・ICM2026）</span>）。差がついたのは post hoc の <strong>step≥4（立ち上がり以上）到達群だけ</strong>（FSS-ICU 30.6対23.3、P&lt;0.01）で、これは因果ではなく予後の反映かもしれない。実務は2つ変える。①リハ記録の項目を「実施時間・回数」から <mark class="hl">その日の最高到達レベル（ベッド上受動／ベッド上自動／端座位／立位・移乗／歩行）</mark> へ寄せる。②伸ばす手当ては人員増ではなく、<mark class="hl">止めている側（鎮静深度・循環・酸素化・立位補助機器）</mark> に置く。<mark class="hl">当院のように通常ケアで既に端座位まで出せている施設では「プロトコル化して量を増やす」の増分はほぼ無い</mark>（EVERの通常ケア群も51.3%が端座位・立ち上がりまで到達していた）</li><li><strong>より重い示唆は「強度」ではなく「連続性」</strong>。退院後リハのRCT（Walsh・Gruther・iRehab）は主要評価項目がいずれも陰性だった一方、<mark class="hl">ICU・病棟・在宅を貫く統合テレヘルス（ブラジル1,916例）はQOL・人工呼吸期間・90日死亡を動かした</mark>（<span class="wl">重症疾患後の機能・筋肉の回復 — 「一律に強く与える」が効かない理由と4フェーズ個別化戦略（総説・AnnIntensiveCare2026）</span>）。失敗していたのは介入の強度ではなく <mark class="hl">ICU→病棟→在宅の連続性</mark> ＝当院では <span class="wl">🏨 Hotel ICU・人間的ケア Home</span> のICU退室後訪問・PICS外来と、在宅の適応身体活動（APA）・栄養フォローを<strong>1本の線</strong>として設計し直す入口になる。<mark class="hl">ただしブラジル試験の効用改善は生存者内では観察されず（0.60 対 0.59）、極めて高いベースライン死亡率が外挿を制限する</mark></li><li><strong>退室後5日以内の緊急再入室を質指標として追う</strong>。緊急ICU再入室は2.9%で、<mark class="hl">院内死亡3.8倍・在院日数3.1倍、半数は退室後5日以内</mark>（<span class="wl">緊急ICU再入室は2.9% — 院内死亡3.8倍・在院日数3.1倍、半数は退室後5日以内（JIPAD 69594件・日集中医誌2025）</span>）</li><li><strong>言語障壁のある患者・家族に追加の手当てをする</strong>。<mark class="hl">同じICUで治療されたスペイン語話者は9か月後の認知障害が55%（英語話者34%）</mark>（<span class="wl">ICU生存者の9か月後の認知機能は「話す言語」で違う — 認知障害 55%対34%（前向きコホート・CritCare2026）</span>）</li><li><strong>退室後に「何が見えていたか」を聞き取る</strong>。妄想的記憶は38.5%に生じ、<mark class="hl">その約6割はせん妄と診断されていない</mark>（<span class="wl">ICUの妄想的記憶は1年後までPTSD症状を引きずる — 完全健忘は7人に1人、女性と深鎮静日数が関連（多施設縦断コホート426例・ICM2025）</span>）</li></ul>
+</div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：PICSは高頻度で持続する。頻度の目安は <mark class="hl">ICU-AW 25〜75%（人工呼吸患者）・抜管後嚥下障害 36〜44%（6か月後も23%）・抑うつ 25〜46%・不安 30%・PTSD 約20%</mark>（<span class="wl">集中治療後症候群（PICS）の全体像 — ICU-AW 25〜75%・PTSD 20%と、効かなかったフォローアップ介入（総説・SingaporeMedJ2026）</span>）。<mark class="hl">当院の実測でも、第1波の重症COVID-19生存者18例のうち1年後も67%がPICSを抱え、28%は3領域すべてを併存していた</mark>（<span class="wl">COVID-19重症生存者のPICSは1年後も67% — 身体56%・精神50%・認知33%、3領域併存28%（聖路加国際病院・前向きコホート18例・CCE2021）</span>）。ARDS後は肺よりも神経・筋・脳が障害される。長期予後を決めているのは<strong>ICU入室前の併存症</strong>であることが多い。</li><li><strong>まだ決着していないこと</strong>：①退室後フォローの有効な形（後述）、②PerCI・CCIの定義（<mark class="hl">標準化された定義がなく、同じ言葉が違う意味で使われている</mark>）、③認知障害への介入（<span class="wl">敗血症生存者への急性期後介入とフォローアップは効くのか — 14研究38万例の系統的レビュー、認知障害への介入だけがゼロ（CritCare2025）</span> で<mark class="hl">認知障害への介入だけが研究ゼロ</mark>）、④PIICSの診断基準、⑤<mark class="hl">領域横断のコアアウトカムセットが無い</mark>（尺度が不統一で研究間の比較ができない。小児では100種類超が使われている）、⑥退室後・回復期の栄養管理ガイドラインが存在しない、⑦<mark class="hl">どの患者が構造化されたフォローから最も利益を得るか</mark>（<span class="wl">BEYOND PICS — ICU退室後の回復を6本柱で組み立てる概念枠組み（ESICM4セクション・CritCare2026）</span> が N の柱の最重要リサーチクエスチョンとして挙げた。「どのモデルが有効か」より先に「誰に」が決まっていない）。</li><li><strong>最近変わったこと</strong>：<strong>介入研究が軒並み陰性に終わり、問いが「何を足すか」から「どう実装するか」へ移った</strong>。<span class="wl">看護師ファシリテーターはなぜ効かなかったか — 役割の曖昧さと縄張り（質的研究・ICM2024）</span> は<mark class="hl">「良い介入が効かない」原因は介入の中身ではなく実装にありうる</mark>と示し、新しい役割を作るなら部門長の関与・役割定義・縄張りの整理・担い手の心理的支援を<strong>先に</strong>設計せよと説く。もう一つは <span class="wl">重症患者の身体リハビリ試験に必須の8アウトカム — PRACTICEコアアウトカムセット（AnnalsATS2024）</span> で、<mark class="hl">身体リハの試験に認知・精神・フレイルが必須アウトカムとして入った</mark>。さらに ICU-AW 研究アジェンダそのものが「機序を記述する」段階から <mark class="hl">「機序を使って個別化する」段階</mark> へ移り、回復のゴールが生存から自律・認知・日常生活への参加へ置き直された（<span class="wl">ICU-AW研究の新時代 — 機序の解明から「意味のある回復」へ（エディトリアル・ICM2026）</span>）。<mark class="hl">その「なぜ効かなかったか」を栄養と運動で1つの概念に束ねたのが</mark> <span class="wl">重症疾患後の機能・筋肉の回復 — 「一律に強く与える」が効かない理由と4フェーズ個別化戦略（総説・AnnIntensiveCare2026）</span> で、鍵は <strong>feeding responsiveness／exercise responsiveness</strong>（筋そのものが同化抵抗性・ミトコンドリア機能不全を抱えるため投与量を上げても応答が返らない）。処方の軸が「暦日」から<strong>生物学的準備状態</strong>へ、そして単一フェーズの強度から <mark class="hl">ICU・病棟・在宅を貫く連続性</mark> へ移った。</li><li><strong>さらに 2026年8月、介入側と枠組み側の両方から同じ形の答えが出た</strong>。介入側の <span class="wl">早期離床の量を2.75倍にしても機能は改善しない — 韓国5施設169例、12か月まで全アウトカム差なし（EVER・ICM2026）</span> は、<mark class="hl">「より早く・より多く」を実際に達成したうえで ICU退室時から12か月まで全アウトカムが陰性</mark> であることを示し、TEAM に続いて<strong>量を増やす設計の限界を確定</strong>させた（残った仮説は post hoc の step≥4 到達＝投与量ではなく<strong>抗重力の高さ</strong>）。枠組み側の <span class="wl">BEYOND PICS — ICU退室後の回復を6本柱で組み立てる概念枠組み（ESICM4セクション・CritCare2026）</span> は、退室後ケアを「介入の足し算」ではなく <mark class="hl">B→E→Y→O→N→D の連続体のどこが切れているか</mark> という<strong>組織設計の問題</strong>として定式化した。<mark class="hl">2つを並べると論調は一致する。効かないのは「退室後に何かを足す」型の介入であり、残る仕事は「足す」ことではなく「途切れているところを継ぐ」ことと「誰に・どの高さまで」を決めること</mark>である。</li></ul>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>退室後フォロー外来・コンサルは有効か</td><td><span class="wl">敗血症生存者への急性期後介入とフォローアップは効くのか — 14研究38万例の系統的レビュー、認知障害への介入だけがゼロ（CritCare2025）</span>（退院後リハへの接続とテレヘルス調整は期待できる）／<span class="wl">BEYOND PICS — ICU退室後の回復を6本柱で組み立てる概念枠組み（ESICM4セクション・CritCare2026）</span>（post-ICUクリニックを回復ネットワークの主要な構成要素と位置づける。<mark class="hl">ただし著者自身が「頑健なエビデンスは限定的、ときに相反する」と明記し、どのモデルが有効かではなく「どの患者が利益を得るか」を先に研究せよと結ぶ</mark>）</td><td><span class="wl">ICU退室後の多職種コンサルテーションは1年後の予後を悪くした（Suivi-Rea RCT 540例・ICM2024）</span>／<span class="wl">集中治療後症候群（PICS）の全体像 — ICU-AW 25〜75%・PTSD 20%と、効かなかったフォローアップ介入（総説・SingaporeMedJ2026）</span>（Suivi-Rea・IMPROVE・PAIN-COVID・家族向けVR・お悔やみの手紙が軒並み陰性か有害）</td><td><strong>「会う場を作る」だけの介入はしない</strong>。期待できるのは<mark class="hl">「退院後リハビリへの確実な接続」と「継続的なケアコーディネーション」</mark>という具体的な機能。ただし14研究しかなく全て高所得国・バイアスリスク中等度以上。<mark class="hl">資源は下流ではなく在室中の上流対策（ABCDEF・せん妄予防・早期離床・抑制と深鎮静の削減）に置く</mark>のが2026年時点の総説の結論。<mark class="hl">BEYOND PICS は「点検の物差し」としては採用し、「外来を新設する根拠」としては採用しない</mark></td></tr>
+<tr><td>家族支援介入は効くか</td><td><span class="wl">ICU家族への4ステップ伴走はPTSD症状を6か月後に減らす — 患者が生存した家族では1年後もIES-R 10点差（Caregiver Pathway RCT・ICM2025）</span>／<span class="wl">柔軟な面会は家族のPTSD症状を1年後も減らす（ICU Visits試験12か月解析・ICM2024）</span></td><td><span class="wl">ICUの家族支援介入は満足度を上げてもPICS-Fは減らせない — 16施設885家族を1年追跡し全アウトカムで有意差なし（FICUSクラスターRCT・ICM2026）</span>／<span class="wl">多職種による家族支援介入は家族の心理症状を改善しないがコミュニケーションの質を上げICU滞在を短縮する（PARTNER 段階的ウェッジRCT・NEJM2018）</span></td><td><strong>「専門役割を1つ足す」型は効かず、「接点を複数置く／面会を開く」型は効いている</strong>。<mark class="hl">満足度とコミュニケーションの改善は心理症状の改善を意味しない</mark></td></tr>
+<tr><td>ICUダイアリー・VRは有効か</td><td>通説・体験談</td><td><span class="wl">ICUダイアリーは3か月後のPTSD症状を減らさない（多施設RCT 657例・JAMA2019）</span>／<span class="wl">ICU専用VR動画は退院後のPTSD・不安・抑うつを改善しない（三群国際RCT・CritCare2026）</span></td><td><strong>導入を予後改善で正当化しない</strong>。やるなら<mark class="hl">患者・家族の体験の価値として位置づける</mark></td></tr>
+<tr><td>リハビリはQOLを上げるか</td><td>早期離床の推奨（RCT 40件超・国際GL 8つ以上）</td><td><span class="wl">ICUリハビリで QOL が改善するのは併存疾患2つ以上の患者だけ — 4RCT 810例の個別患者データ統合（CCM2023）</span>／<span class="wl">神経筋電気刺激（NMES）はICU-AWを減らす — 18RCTの更新メタ解析（CCM2023）</span>（QOL・在室日数・死亡は動かない）／<span class="wl">早期離床の量を2.75倍にしても機能は改善しない — 韓国5施設169例、12か月まで全アウトカム差なし（EVER・ICM2026）</span>（<mark class="hl">量を2.75倍にしてもICU退室時から12か月まで全て差なし</mark>）</td><td><strong>対象を絞り、量ではなく到達段階で期待値を設定する</strong>。<mark class="hl">Functional Comorbidity Index 2以上の患者</mark>でSF-36 PCSが最小重要差を超える。全員に同じ効果を約束しない。<mark class="hl">「時間・回数を増やす」型の強化は、通常ケアで既に端座位まで出せている施設では伸びしろが無い</mark></td></tr>
+</tbody></table></div>
+<h2>📌 まずこの9本</h2>
+<ol><li><span class="wl">ICU患者の長期予後 PICS最新知見（Rousseau 2021）</span> — 「傘」としての全体像</li><li><span class="wl">PICS評価尺度の推奨20種類 — 754研究のスコーピングレビュー＋修正デルファイ（日本集中治療医学会PICS委員会・CritCare2023）</span> — <mark class="hl">院内で尺度を決めるための1本</mark></li><li><span class="wl">COVID-19重症生存者のPICSは1年後も67% — 身体56%・精神50%・認知33%、3領域併存28%（聖路加国際病院・前向きコホート18例・CCE2021）</span> — 当院の実測値</li><li><span class="wl">BEYOND PICS — ICU退室後の回復を6本柱で組み立てる概念枠組み（ESICM4セクション・CritCare2026）</span> — <mark class="hl">退室後ケアの穴を6文字で点検する組織設計の物差し</mark>（枠組みであってエビデンスではない）</li><li><span class="wl">ICU退室後の多職種コンサルテーションは1年後の予後を悪くした（Suivi-Rea RCT 540例・ICM2024）</span> — <mark class="hl">「会う場を作る」だけでは足りない</mark></li><li><span class="wl">ICU家族への4ステップ伴走はPTSD症状を6か月後に減らす — 患者が生存した家族では1年後もIES-R 10点差（Caregiver Pathway RCT・ICM2025）</span> — 効いた形</li><li><span class="wl">柔軟な面会は家族のPTSD症状を1年後も減らす（ICU Visits試験12か月解析・ICM2024）</span></li><li><span class="wl">重症疾患関連筋力低下（CIW）— ICUから地域までの診断・治療・長期転帰（総説・CritCare2023）</span> — 退室時にMRCを測る</li><li><span class="wl">看護師ファシリテーターはなぜ効かなかったか — 役割の曖昧さと縄張り（質的研究・ICM2024）</span> — <mark class="hl">新しい役割を作る前に読む</mark></li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🏨 Hotel ICU・人間的ケア Home</span> — ICU内の環境と体験</li><li><span class="wl">🌀 せん妄 Home</span> — 認知障害の上流</li><li><span class="wl">😌 鎮静深度と鎮静薬の選択 Home</span> — 深鎮静日数という修正可能因子</li><li><span class="wl">🧓 フレイルと高齢重症患者 Home</span> — 長期予後を決める入室前の状態</li><li><span class="wl">🏨 HDU・SDU（中間治療室）と病床機能 Home</span> — 退室先と再入室</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🫧 気道管理と挿管 Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button><a class="jcbtn" href="jc-113a1ca7c8.pdf" download>⬇︎ PDF をダウンロード</a></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🫧 気道管理と挿管 Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 🫧 気道管理と挿管 Home</p>
+<p>ICUと救急での気管挿管を<strong>手順として安全にする</strong>ための束。前酸素化・導入薬・デバイス・撤退基準・挿管後の循環・挿管タイミングを扱う。関連95件。 抜管側は <span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span>、非侵襲呼吸補助の選択は <span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span>。</p>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>器具ではなくバンドルで安全にする</strong>。前・中・後の15項目を全例に回すだけで、生命を脅かす合併症は 34%→21%、初回成功率は +16.2%（<span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>）。<mark class="hl">デバイスの議論より先に、この型を全員が同じ手順で回す</mark></li><li><strong>重症患者の挿管は「解剖」ではなく「生理」で難しくなる</strong>。手順書に書く7点：チーム3名・チェックリスト・血行動態最適化・NIV前酸素化・頭部挙上30度・初回からビデオ喉頭鏡・挿管後の心肺管理（<span class="wl">生理学的困難気道の挿管 — 国際デルファイ53項目の合意（SOCCA・ICM2024）</span>）</li><li><strong>前酸素化はNIV。可能ならHFNCを併用する</strong>（マスクを外している無呼吸の間も酸素が途切れない・<span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>）。NIVが使えないならPEEPバルブ付きBVMか全開流量のリザーバーマスク。<mark class="hl">ただしBVMの「PEEP」は二人法の密着シールと十分な新鮮ガス流量がなければ存在しない</mark>（<span class="wl">NIVが使えないときの前酸素化 — BVM＋PEEPは代替になるがPEEP上乗せの臨床的根拠はない（著者回答・ICM2026）</span>）</li><li><strong>肥満患者は「見えにくい」より「もたない」</strong>。FRCが小さく酸素消費が大きいので安全無呼吸時間が極端に短い。NIV前酸素化の恩恵は3倍以上（<span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span>）</li><li><strong>初回からビデオ喉頭鏡＋スタイレット＋筋弛緩薬</strong>。スタイレットで初回成功 71.5%→78.2%（NNT 15・外傷は増えない）、筋弛緩薬で 69.6%→80.9%（OR 2.37・ビデオ喉頭鏡でも同じ）</li><li><strong>昇圧薬は「合併症への対応」ではなく「手順の一部」として最初から手元に置く</strong>。ICU緊急挿管の<mark class="hl">46%（2例に1例）で挿管後15分以内に循環が崩れる</mark>。救急外来で挿管前30分ずっと正常血圧だった患者でも23%がSBP 90を切り、その中央値は挿管後11分（<span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span>／<span class="wl">救急外来の緊急挿管で正常血圧例の23%が挿管後低血圧を起こす — 院内死亡33%対21%、調整OR 1.9（336例・JCritCare2012）</span>）</li><li><strong>挿管そのものを血行動態の介入として設計する</strong>。挿管前の頻脈＋ぎりぎりの血圧は「安定」ではなく代償性のサイン。虚脱は3つの機序が累積して起こる——①導入薬による交感神経遮断（1分未満）、②無呼吸によるアシドーシス（pH 7.2未満で心筋収縮力と昇圧薬反応性が落ちる）、③陽圧換気による静脈還流低下と右室後負荷上昇。予防バンドルは、プロポフォールを外す・昇圧薬をつないでから導入する・NIVで前酸素化する・挿管直後はPEEP 5〜6 cmH₂Oから漸増する（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>）</li><li><strong>導入時のフェンタニル上乗せは「効く前提」で足さない</strong>。追加しても初回挿管成功は変わらず（RR 1.03・確実性moderate）、<mark class="hl">「挿管しやすくするため」という理由づけは成立しない</mark>。循環不安定は RR 1.41（95%CI 0.83–2.40）で有意ではないが、低リスクバイアス2試験だけなら RR 1.74（1.26–2.39）と害の方向。<strong>ショックや前負荷依存の例では減量・省略を選択肢に持つ</strong>（<span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span>）</li><li><strong>挿管前の輸液ボーラスをルーチンにしない</strong>。500 mL前投与でも循環虚脱は減らない（20% vs 18%）。<mark class="hl">減らすべきは反射的なフラッシュで、準備すべきは昇圧薬と前酸素化の設計</mark>（<span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE trial</span>）</li><li><strong>輪状軟骨圧迫をルーチンにしない</strong>。63年経っても誤嚥低減を示す頑健なデータは存在しない（<span class="wl">迅速導入気管挿管における輪状軟骨圧迫の役割 — 誤嚥を減らす証拠はなく、正しく当てられてもいない（CurrAnesthesiolRep2024）</span>）</li><li><strong>撤退基準を数字で決めておく</strong>：挿管3回・声門上器具2回まで。<mark class="hl">ただしこれはSpO₂ 95%以上が保たれている間だけ有効な条件付きの数字</mark>（<span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span>）。1手技につき best effort 1回で次へ移る</li><li><strong>困難は予測できても除外できない前提で全例に備える</strong>。救助器具を可視化し、2術者で役割を固定する（<span class="wl">困難挿管への私のアプローチ — 解剖学的困難と生理学的困難を分けて備える（エディトリアル・CritCare2019）</span>）。modified LEMON は「困難を当てる」道具ではなく<mark class="hl">「困難でないことを確認する」道具</mark>（NPV 98%・PPV 9%）</li><li><strong>緊急挿管には指導医が立ち会う</strong>。合併症 21.7%→6.1%（死亡と離脱日数は不変・<span class="wl">緊急挿管に指導医が立ち会うと合併症が6.1%対21.7%に減る — 死亡と人工呼吸器離脱日数は不変（322例・前向きコホート・Anesthesiology2008）</span>）</li><li><strong>エアロゾル感染症が疑われる患者では、手順を「感染防護込み」に組み替える</strong>。液体不透過性PPEと着脱プロトコルを施設で決め、可能なら陰圧室で行う。覚醒下挿管とHFNO・フェイスマスク換気・ネブライザー・ジェット換気は避け、十分な筋弛緩を効かせた修正RSI＋ビデオ喉頭鏡で一度で入れる。挿管は最も経験のある術者が担当し（研修目的で任せない）、レスキューは声門上器具と外科的輪状甲状靱帯切開を優先、抜管も挿管と同じ防護下で行う（<span class="wl">COVID-19下の手術室気道管理 — 全インド困難気道学会（AIDAA）コンセンサス、HFNO・マスク換気・ジェット換気は避ける（IJA2020）</span>／<span class="wl">COVID-19患者の困難気道管理 — SAMステートメント、覚醒下挿管とエアロゾル産生手技の再考（AnesthAnalg2021）</span>／<span class="wl">COVID-19疑い患者の麻酔管理 — 陰圧室・RSI・HFNCは使わない、挿管は最も経験のある者が（韓国麻酔科学会・KJA2020）</span>）</li></ul>
+</div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：挿管の危険は「入らないこと」ではなく <strong>「入れる過程で生理が崩れること」</strong>。前酸素化・筋弛緩・スタイレット・ビデオ喉頭鏡・チェックリストの積み上げが初回成功率を上げる。挿管後低血圧は例外ではなく既定の合併症。</li><li><strong>まだ決着していないこと</strong>：①導入薬（後述の対立。ケタミン対エトミデートに加え、<mark class="hl">オピオイドを足すかどうかも未決着</mark>）、②挿管のタイミング（とくに低酸素性呼吸不全）、③ビデオ喉頭鏡が患者転帰まで変えるか、④生理学的困難気道の「血行動態最適化」の具体手順。</li><li><strong>最近変わったこと</strong>：<strong>「解剖学的困難気道」から「生理学的困難気道」へ</strong>枠組みが移り、SOCCA・SAMがコンセンサスを出した。装備の議論（どの喉頭鏡か）より<strong>手順と役割の議論</strong>が前に出ている。もう一つは前酸素化で、NIV＋HFNCの併用と病院前NIV（挿管 10.8%→5.2%、NNT 18）が実装段階に入った。 さらに、導入薬の議論は「どの薬か」から<strong>アウトカムの定義そのもの</strong>へ移りつつある。「循環不安定」の定義次第で同じデータが RR 1.83 と 0.43 に割れる（交互作用 P=0.004）ことが示され、<mark class="hl">定義を揃えないまま次のRCTを積んでも決着しない</mark>（<span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span>）。</li></ul>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>導入薬はケタミンかエトミデートか</td><td><span class="wl">重症患者の挿管導入薬 — ケタミンを第一に、エトミデートは死亡リスク、プロポフォールは循環虚脱（Concise Definitive Review・CCM2025）</span>（消去法でケタミン第一）／<span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span></td><td><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span>／<span class="wl">敗血症の救急外来挿管ではケタミンのほうが挿管後低血圧が多い — 74%対50%、傾向スコア調整OR 2.7（NEAR 531例・AcadEmergMed2020）</span>／<span class="wl">敗血症患者への単回エトミデートは死亡と関連しない — eICU 2014例で院内死亡37.2%対37.8%（後ろ向きコホート・CCM2013）</span></td><td><strong>「どちらが生存を良くするか」で薬を選ぶ根拠はない</strong>。EvKの優位は7日で消える。<mark class="hl">ケタミンでも循環虚脱は起こる</mark>前提で、薬の選択より<strong>昇圧薬を手元に置くこと</strong>を標準化する。<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span> も未決着としたうえで、外すべき薬としてプロポフォールを名指しする（n=2365のRCTで28日死亡は同等、循環虚脱はケタミン22.1%対17.0%、リスク差5.1、95%CI 1.9–8.3）</td></tr>
+<tr><td>導入にオピオイド（フェンタニル）を足すか</td><td><span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span>（5RCT 515例で循環不安定 RR 1.41・95%CI 0.83–2.40、I² 60%、確実性very low＝<strong>害を否定できていない</strong>。低リスクバイアス2試験だけなら RR 1.74・1.26–2.39）</td><td>同メタ解析の初回挿管成功は RR 1.03（確実性moderate）で<strong>差がない</strong>＝「入れやすくするため」の上乗せは根拠を欠く。交感神経刺激の緩和を狙う従来の実践（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>）とは噛み合わない</td><td><strong>TSAの必要情報量5586例に対し9.2%しか集まっていない</strong>＝現時点で賛否どちらの主張も証拠が足りない。実務では<mark class="hl">ショック・前負荷依存の例で減量または省略</mark>を既定の選択肢に置き、足すなら昇圧薬を先につないでおく。<mark class="hl">最大の教訓は薬でなく測り方</mark>で、「循環不安定」の定義次第で RR 1.83 と 0.43 に割れる（交互作用 P=0.004）ため、他試験の数字を横並びにする前に定義を確認する</td></tr>
+<tr><td>挿管は早いほうがよいか</td><td><span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span>／<span class="wl">COVID-19重症患者における挿管までの時間と予後</span>（48時間超でHR 2.45）</td><td><span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span>／<span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span></td><td><strong>コホートの入り口を先に見る</strong>。<span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span> が要点。<mark class="hl">「挿管された患者だけ」のコホートなら「遅い挿管は死亡が高い」は割り引いて読む</mark>。実務では ROX指数など客観指標で議論の卓上に載せる時刻を決める</td></tr>
+<tr><td>ビデオ喉頭鏡は標準か</td><td><span class="wl">ビデオ喉頭鏡は挿管失敗を減らす — 222RCT 26149例、失敗RR 0.41〜0.51（Cochrane改訂版・BJA2022）</span>／<span class="wl">心停止患者の挿管はビデオ喉頭鏡が有利 — 初回成功率78%対70%（JEAN-2・3360例・Resuscitation2019）</span></td><td><span class="wl">ICU挿管におけるビデオ喉頭鏡vs直視型（RCT・JAMA2017）</span>／<span class="wl">救急外来でビデオ喉頭鏡は声門視野を改善する — 良好視野80%→93%、直視で不良だった78%が改善（198例・AnnEmergMed2010）</span>（<mark class="hl">測ったのは「見え方」だけ</mark>）</td><td><strong>「見え方」「初回成功」「患者転帰」を混ぜない</strong>。初回からVLを既定にする根拠は十分だが、<mark class="hl">転帰改善まで主張しない</mark>。<span class="wl">ビデオ喉頭鏡は新たな標準か（DEVICE試験へのエディトリアル・NEJM2023）</span> を併読する</td></tr>
+</tbody></table></div>
+<h2>📌 まずこの8本</h2>
+<ol><li><span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span> — <mark class="hl">明日から手順書を作れる1本</mark></li><li><span class="wl">生理学的困難気道の挿管 — 国際デルファイ53項目の合意（SOCCA・ICM2024）</span> — 7点セットの根拠</li><li><span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span> — 昇圧薬を手順に組み込む理由</li><li><span class="wl">重症患者の挿管導入薬 — ケタミンを第一に、エトミデートは死亡リスク、プロポフォールは循環虚脱（Concise Definitive Review・CCM2025）</span></li><li><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span> — 4と並べて読む</li><li><span class="wl">挿管困難は予測できても除外できない — 挿管困難の既往LR+ 16〜19、上唇咬み試験3度LR+ 14（62研究33,559例のRCEレビュー要約・AEM2019）</span></li><li><span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span> — 撤退の物差し</li><li><span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span> — <mark class="hl">挿管タイミングの論文に騙されないため</mark></li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> — 抜管と再挿管</li><li><span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> — 挿管を避ける選択肢と前酸素化</li><li><span class="wl">📈 昇圧薬の選択と開始タイミング Home</span> — 挿管後低血圧への備え</li><li><span class="wl">🔊 POCUS・重症エコー Home</span> — 気道POCUSと胃内容の評価</li><li><span class="wl">🧫 VAPと抗菌薬の期間 Home</span> — 挿管後の肺炎予防</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
