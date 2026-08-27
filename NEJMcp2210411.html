@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SIAD（抗利尿不適切症候群）の診断と治療 — 水制限の失敗は事前に予測でき、次の一手は尿素かトルバプタン（Clinical Practice・NEJM2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">SIAD（抗利尿不適切症候群）の診断と治療 — 水制限の失敗は事前に予測でき、次の一手は尿素かトルバプタン（Clinical Practice・NEJM2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Adrogué HJ, Madias NE. The Syndrome of Inappropriate Antidiuresis. N Engl J Med. 2023;389(16):1499-1509. DOI: 10.1056/NEJMcp2210411</dd><dt>掲載誌</dt><dd>New England Journal of Medicine（2023-10-19）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1056/NEJMcp2210411" target="_blank" rel="noopener">doi.org/10.1056/NEJMcp2210411</a>（本文PDFは別途）</dd><dt>原題</dt><dd>The Syndrome of Inappropriate Antidiuresis</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わること①：水制限の「やってみて様子を見る」をやめる</strong>。この総説は水制限の失敗を<strong>投与前に予測する3指標</strong>を明示している（尿量 1.5 L/日未満・尿浸透圧 500 mOsm/kg 超・尿Na＋尿K の和が血清Naを超える）。ICUで低Na血症を見つけたら、水制限を始める前にこの3つを取ってカルテに残す。1つでも該当すれば「水制限単独では上がらない」と初日に判断し、次の一手（尿素かトルバプタン）を並行して準備する。</li><li><strong>変わること②：3%食塩水はボーラスだが、固定量では投与しない</strong>。ガイドラインの100〜150 mLボーラスをそのまま反復すると過剰補正が起こる（実データで4.5〜28%）。本論文が推す個別化は「投与前に予測式で見積もる」こと。ベースラインNaと総体液量（性・体重・体脂肪で変わる）を式に入れてから初回量を決める。</li><li><strong>変わること③：食塩錠＋フロセミドを反射的に選ばない</strong>。EFFUSE-FLUID試験で7日目に差が出ても28日目には消え、AKIと低K血症だけが増えた。高血圧・心不全・前立腺肥大があるなら選択肢から外す。当院の高齢入院患者はこの3つのどれかを持っていることが多い。</li><li><strong>変わらないこと：重症症状（傾眠・痙攣・心肺不全・昏睡）には3%食塩水ボーラスと専門科コンサルト</strong>。ここは既存の運用のまま。ただし頭蓋内疾患（SAH・頭部外傷）に伴う低Na血症は、症状の軽重にかかわらず緊急扱いに入る点を再確認する。<strong>SAHには水制限が禁忌</strong>である点も表2に明記されている。</li><li><strong>持ち帰りの運用案</strong>：低Na血症の初期セットに「血清浸透圧・尿浸透圧・尿Na・尿K・早朝コルチゾール・TSH・尿酸・BUN」を束ねたオーダーセットを作る。Hyponatremia Registry ではこの必須検査が完了していたのは診断例のわずか21%だった。当院で同じ穴が空いていないかを1か月分のカルテで点検する価値がある。</li><li><strong>ICU固有の注意</strong>：術後・疼痛・悪心・オピオイド・全身麻酔はいずれも一過性SIADを起こす。原因が取り除かれた瞬間に水利尿（尿量 100 mL/時超）へ転じ、そこで一気に過剰補正が起こる。<mark class="hl">原因薬剤を止めた日・術後回復期こそ、Naを頻回に測る日である</mark>。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：低Na血症は最も多い電解質異常で、SIADは低張性低Na血症の最多原因である。診断は除外診断であり、euvolemic hypotonic hyponatremia の確認と、続発性副腎不全・重症甲状腺機能低下症の除外を要する。重症症状には高張食塩水、慢性期には水制限が第一選択という枠組み自体は2013年の米国expert panel勧告と2014年の欧州ガイドラインで確立している。</li><li><strong>Unknown</strong>：慢性低Na血症と骨折・死亡の関連が因果かどうか。低Na血症を是正すると長期予後が改善するかどうか。緊急時に「ガイドラインの固定量ボーラス」と「予測式に基づく個別化投与」のどちらが優れるか（前向き比較が存在しない）。トルバプタン・尿素・エンパグリフロジンの長期比較（有効性・安全性・コスト）。低用量トルバプタン（7.5 mg）の位置づけ。</li><li><strong>What's new</strong>：2020〜2023年に出た二次治療のRCTを一望にまとめ、<strong>治療アルゴリズムを1枚の図に落とした</strong>こと。とくに（1）水制限単独のRCT（46例）で4日目の上昇がわずか3 mmol/Lにとどまったという「効かなさ」の定量化、（2）EFFUSE-FLUID試験による食塩錠＋フロセミドの28日目無効とAKI・低K血症の害、（3）エンパグリフロジンの2本のRCT（87例並行・14例クロスオーバー）、の3点が新しい。加えて<strong>過剰補正の原因を「3%食塩水の入れすぎ」と「水利尿への転換」の2つに分けて対処法を書き分けた</strong>のは、実務者にとって最も使える整理である。</li><li><strong>Vault内の関連ノートとの対比</strong>：</li><li><span class="wl">SIAD（ADH不適合分泌症候群）の病態から治療まで — 水制限は約半数で失敗、トルバプタン・尿素・SGLT2阻害薬（総説・EndocrRev2023）</span> と結論は完全に一致する（水制限は約半数で失敗する／次の一手は尿素・トルバプタン・SGLT2阻害薬）。ただし<strong>役割が違う</strong>。EndocrRev版は102ページの本格総説で、SIADの分子病態・AVP生理・疫学を深く掘る「病態の教科書」であり、当該ノートはAbstractとIntroduction冒頭から作られているため治療の各論は載っていない。本NEJM版は<strong>病態は最小限にして、外来と病棟でそのまま使える診断アルゴリズムと治療アルゴリズム、薬剤ごとの用量・有効性・副作用・禁忌の一覧を出す「実装の教科書」</strong>である。病態を知りたいときはEndocrRev、明日のオーダーを決めるときは本論文、という使い分けになる。</li><li><span class="wl">低ナトリウム血症の診断と治療 レビュー（JAMA2022）</span> は本論文と<strong>著者が重なる</strong>（Adrogué・Madias が共著）。JAMA版は低Na血症全体（低張・等張・高張、体液量3分類のすべて）を扱う広い総説で、本論文はそのうちSIADだけに絞って治療の各論を厚くしたもの。数値と補正上限の枠組みは両者で整合している。</li><li><span class="wl">SALSA試験 症候性低Na血症への高張食塩水ボーラス vs 持続投与（JAMA2021）</span> は本論文の引用文献28にあたる。本論文は SALSA を含む2試験の高い過剰補正率（17%・28%）について、<strong>「循環血液量減少の患者が多く混じっており、輸液後に水利尿が出たせいだろう」と留保を付けている</strong>。SALSAノート単独で読むより、この留保を添えて読むほうが正確である。</li><li><span class="wl">重症低Na血症に高張食塩水＋先制デスモプレシン — 過剰補正が27.1%から6.8%に減る（4病院184例・Kidney360 2025）</span> とは<strong>評価が食い違う</strong>。Kidney360の観察研究は先制デスモプレシンで過剰補正が27.1%→6.8%に減ると報告するが、本論文は「デスモプレシンのRCTは存在せず、後ろ向き研究では一貫した利益がなく、溢水・入院延長・検査増加・低Na悪化という害の報告がある」と慎重である。<strong>先制投与を当院の標準にするには根拠がまだ足りない</strong>、という読みが妥当。</li><li><span class="wl">くも膜下出血後の低ナトリウム血症の診断と管理</span> とは、SAHの扱いで補完関係にある。本論文はSAH患者の最大56%にSIADが生じること、SAHでは水制限が禁忌であること、頭蓋内疾患に伴う低Na血症はすべて緊急治療の対象になることを述べる。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで SIADは除外診断であり、必要な血液・尿検査を最後まで揃えることが出発点である。<strong>慢性期の治療は水制限から始めるが、尿浸透圧が高い患者では効かないと投与前に分かる。次の一手は食塩錠＋フロセミドではなく、尿素かトルバプタンである。</strong></p>
+</div>
+<ul><li>低Na血症（血清Na 135 mmol/L未満）は最も多い電解質異常で、成人の約5%、入院患者の35%が該当する。軽症（130〜134）・中等症（125〜129）・重症（125未満）に分け、外来・入院とも約70%は軽症。軽症でも入院期間延長・再入院・医療資源消費・死亡と関連する。</li><li>65歳超の入院患者の40%が低Na血症をもち、その25〜40%がSIADに帰属される。高齢者では悪性腫瘍・肺疾患・中枢神経疾患と原因薬剤が重なり、加齢自体もGFR低下・腎プロスタグランジン減少・AVP応答亢進で水利尿を損なう。低塩・低蛋白の食事もこれに加わる。</li><li>診断には「低張性であること」「体液量が正常であること」「尿の自然排泄Naが30 mmol/L超・尿浸透圧が100 mOsm/kg超であること」の確認と、<strong>続発性副腎不全・重症甲状腺機能低下症の除外</strong>が要る。血清AVPやコペプチンの測定は診断に不要。</li><li>原因は多岐にわたる。Hyponatremia Registry では悪性腫瘍24%・薬剤18%・肺疾患11%・中枢神経疾患9%。抗うつ薬（とくにSSRI）が薬剤の筆頭で、痩せた高齢女性でリスクが高い。17〜60%は原因不明にとどまる。</li><li>緊急治療の対象は「重症症状」「中等症症状＋進行リスクが高い状況」「頭蓋内疾患を伴うすべての低Na血症」。3%食塩水100〜150 mLをボーラスで2〜3回まで反復し、1〜2時間で4〜6 mmol/Lの上昇を目指す。24時間で10 mmol/L、48時間で18 mmol/Lが上限（ODS高リスクでは任意の24時間で8 mmol/L）。</li><li>過剰補正の経路は2つある。（a）3%食塩水を入れすぎる、（b）原因が取り除かれて水利尿（尿量100 mL/時超）に転じる。(a) には予測式による個別化、(b) にはデスモプレシンで対応するが、後者のエビデンスは弱い。起きてしまったら3%食塩水中止・5%ブドウ糖液・デスモプレシン救済。</li><li>緊急治療を要するのは低Na血症全体の5%未満。残りは原因治療が主体で、多くは外来で扱う。ただし血清Na 120 mmol/L未満、または原因疾患の入院治療が必要な場合は入院。</li><li>慢性期の治療手段は5つ（水制限・食塩錠±フロセミド・尿素・トルバプタン・エンパグリフロジン）。水制限は安全・安価だが効果は乏しく、遵守も難しい。食塩錠＋フロセミドは28日目には差が消え、AKIと低K血症を増やす。尿素とトルバプタンが実質的な二次治療で、トルバプタンは唯一病態そのもの（V2受容体）に作用する。</li><li>症例のまとめとして著者は、<strong>尿素15 g 1日2回＋水制限1500 mL/日</strong>を第一に、代替としてトルバプタン7.5 mg/日を挙げる。食塩錠＋フロセミドは高血圧と前立腺肥大があるため避ける。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 血清Na濃度は「浸透圧的に活性なNaとKの総量 ÷ 総体液量」の比でおおよそ決まる。したがって低Na血症は、ほとんどの場合「Naが足りない」のではなく「水が多い」状態である。</p>
+<p>体から余分な水を捨てる働きを<strong>水利尿（aquaresis）</strong>という。これはNaを捨てる利尿（natriuresis）とは別物で、電解質を伴わない自由水だけを排泄する働きを指す。水利尿を止めているのが<strong>アルギニン・バソプレシン（AVP、旧称ADH）</strong>で、集合管の<strong>V2受容体</strong>に結合して水チャネルを立ち上げ、水を再吸収させる。</p>
+<p>AVPの分泌には正当な引き金が2つある。（1）浸透圧刺激（血漿が濃くなった）、（2）血行動態刺激（有効循環血液量が減った）。脱水でも心不全でも肝硬変でも、AVPが出るのは体にとって理屈が通っている。</p>
+<p><strong>SIAD（syndrome of inappropriate antidiuresis）とは、この2つの引き金がないのにAVPが出ている状態</strong>を指す。だから抗利尿が「不適切（inappropriate）」なのであり、体液量は正常（euvolemic）である。旧称のSIADH（inappropriate antidiuretic hormone secretion）が SIAD に改まったのは、AVPの上昇を伴わない病型（V2受容体の機能獲得型変異による腎性SIAD）が見つかったためである。</p>
+<p>AVPと無関係に水利尿が損なわれることもある。低溶質摂取（捨てるための溶質が足りない）、急性腎障害、慢性腎臓病のG3〜G5期がこれにあたる。まれに、水利尿の能力を上回るほど水を飲むだけでも低Na血症になる。いずれにせよ、<strong>水の摂取が腎と腎以外からの水の喪失を上回らなければ低Na血症は起こらない</strong>。</p>
+<p>症状は「どれだけ速く」「どれだけ低く」「どれだけ長く」で決まる。発症48時間未満の急性SIADの症状は脳浮腫そのもので、脱力・頭痛から痙攣・昏睡まで幅がある。48時間以上の慢性SIADでは脳が容積を調節して浮腫を戻すため症状が乏しく、高度でも悪心・嘔吐・頭痛・混乱・せん妄、まれに痙攣にとどまる。認知機能低下・歩行障害・転倒・骨粗鬆症・脆弱性骨折といった慢性SIADの表れは、<strong>加齢のせいだと誤って片づけられやすい</strong>。</p>
+<p>治療で最も恐れる合併症が<strong>浸透圧性脱髄症候群（ODS）</strong>である。慢性低Na血症を速く戻しすぎると、橋中心部や橋外の構造が脱髄し、腱反射亢進・偽性球麻痺・パーキンソニズム・閉じ込め症候群・死に至る。頻度はまれだが不可逆になりうるため、補正には上限が設けられている。</p>
+</div>
+<h3>2. 症例提示（原文どおり）</h3>
+<p>&gt; 85歳男性。年に一度の健診で血清ナトリウム値128 mmol/Lが判明した。本人は「頭の回転が鈍い」感じと歩行の不安定さを自覚している。既往は本態性高血圧と前立腺肥大。内服はアムロジピン、フィナステリド、タムスロシン。血圧は136/68 mmHgで起立性変化なし、その他の身体所見に特記事項はない。 &gt; &gt; 再検査では血清ナトリウム127 mmol/L、血清浸透圧260 mOsm/kg H₂O、クレアチニン0.8 mg/dL（70.7 μmol/L）、血中尿素窒素8 mg/dL（2.9 mmol/L）、尿酸4 mg/dL（0.24 mmol/L）。尿浸透圧645 mOsm/kg H₂O、尿ナトリウム95 mmol/L。 &gt; &gt; <strong>この患者をどう評価し、どう治療すべきか。</strong></p>
+<p>読みどころは3点ある。（a）血清浸透圧260で低張が確定している。（b）BUN・クレアチニン・尿酸がいずれも低め〜低正常で、これは体液量正常（euvolemia）を支持する所見である。（c）尿浸透圧645という高値は、後述する<strong>水制限が奏効しないことの予測因子（500 mOsm/kg超）</strong>にそのまま該当する。「頭の回転が鈍い」「歩行が不安定」は加齢のせいにされがちな慢性SIADの典型的な表れでもある。</p>
+<h3>3. The Clinical Problem — 疫学と病態</h3>
+<h4>3-1. 頻度と重症度区分</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>数値</th></tr></thead>
+<tbody>
+<tr><td>低Na血症の定義</td><td>血清Na 135 mmol/L未満</td></tr>
+<tr><td>成人全体の有病率</td><td>約5%</td></tr>
+<tr><td>入院患者の有病率</td><td>35%</td></tr>
+<tr><td>軽症</td><td>130〜134 mmol/L</td></tr>
+<tr><td>中等症</td><td>125〜129 mmol/L</td></tr>
+<tr><td>重症</td><td>125 mmol/L未満</td></tr>
+<tr><td>軽症が占める割合</td><td>外来・入院とも約70%</td></tr>
+<tr><td>65歳超の入院患者の低Na血症</td><td>40%</td></tr>
+<tr><td>そのうちSIADに帰属される割合</td><td>25〜40%</td></tr>
+<tr><td>軽症でも関連する不利益</td><td>入院期間延長、再入院、医療資源消費、死亡</td></tr>
+</tbody></table></div>
+<h4>3-2. なぜ水が余るのか</h4>
+<p>血清Na濃度は「浸透圧的に活性なNaとKの含量 ÷ 総体液量」に近似する。低Na血症は通常、これらの陽イオンに比して水が過剰であることを反映し、最も多いのは腎の電解質フリー水排泄（水利尿）が損なわれる病態である。</p>
+<p>水利尿の障害は主にAVP分泌の増加による。AVPは集合管のV2受容体を活性化して水貯留を促す。AVPの生理的な引き金は浸透圧刺激（高張）と血行動態刺激（有効循環血液量の低下）の2つ。</p>
+<div class="tw"><table>
+<thead><tr><th>病態</th><th>AVPが出る理由</th><th>体液量</th></tr></thead>
+<tbody>
+<tr><td>循環血液量減少に伴う低Na血症</td><td>有効循環血液量の低下（正当な刺激）</td><td>減少</td></tr>
+<tr><td>心不全など体液量過剰の病態</td><td>有効循環血液量の低下（正当な刺激）</td><td>増加</td></tr>
+<tr><td>SIAD</td><td>浸透圧刺激も血行動態刺激もないのにAVPが分泌される</td><td>正常</td></tr>
+<tr><td>低溶質摂取・AKI・CKD（G3〜G5）</td><td>AVPとは独立に水利尿が障害される</td><td>病態による</td></tr>
+<tr><td>過剰な水分摂取</td><td>水利尿の能力を超える摂取（まれ）</td><td>正常〜増加</td></tr>
+</tbody></table></div>
+<p>病態がどれであれ、<strong>水の摂取が腎および腎以外の経路からの水の喪失を上回らない限り低Na血症は生じない</strong>。</p>
+<h4>3-3. 高齢者に多い理由</h4>
+<p>高齢で低Na血症全般とSIADの有病率が上がる背景は4つ重なっている。</p>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>併存疾患</td><td>悪性腫瘍、肺疾患、中枢神経疾患がSIADを準備する</td></tr>
+<tr><td>薬剤</td><td>SIADを誘発する薬剤の使用が多い</td></tr>
+<tr><td>加齢による腎の変化</td><td>GFR低下、腎プロスタグランジン減少、浸透圧刺激・非浸透圧刺激に対するAVP応答の亢進</td></tr>
+<tr><td>食習慣</td><td>高齢者に多い低塩・低蛋白の食事が水利尿を損なう</td></tr>
+</tbody></table></div>
+<p>この土台の上では、<strong>水分摂取がわずかに増えるだけで低Na血症のリスクが上乗せされる</strong>。</p>
+<h4>3-4. 症状の出かた</h4>
+<div class="tw"><table>
+<thead><tr><th>病型</th><th>定義</th><th>機序</th><th>症状</th></tr></thead>
+<tbody>
+<tr><td>急性SIAD</td><td>低Na血症の発症から48時間未満</td><td>脳浮腫</td><td>軽度・非特異的（脱力、頭痛）から重篤（痙攣、昏睡）まで</td></tr>
+<tr><td>慢性SIAD</td><td>発症から48時間以上</td><td>脳の容積調節が脳浮腫を戻す</td><td>通常はごく軽微。高度になると悪心、嘔吐、頭痛、混乱、せん妄、まれに痙攣</td></tr>
+<tr><td>慢性SIADのその他の表れ</td><td>—</td><td>—</td><td>認知機能低下、歩行異常、転倒、骨粗鬆症、脆弱性骨折（加齢のせいと誤認されやすい）</td></tr>
+</tbody></table></div>
+<h3>4. Strategies and Evidence — 診断</h3>
+<h4>4-1. 診断アルゴリズム（Figure 1 の全ステップを表に起こす）</h4>
+<p>SIADの診断は、体液量正常の低張性低Na血症であることを臨床的に確認したうえでの<strong>除外診断</strong>である。身体所見だけで体液量を評価する感度・特異度は低いため、欧州ガイドラインは尿浸透圧と尿Naの測定を優先する。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>ステップ</th><th>実施すること</th><th>押さえておく注意点</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>低Na血症を確認</td><td>病歴聴取と身体診察</td><td>—</td></tr>
+<tr><td>2</td><td>低張性であることを確認</td><td>高血糖その他の非低張性低Na血症を除外</td><td>非低張性には次の3つがある。高張性（転位性）低Na血症＝高血糖や高張マンニトールの貯留／等張性低Na血症＝Naを含まない等張液（灌流液など）の貯留／偽性低Na血症＝高度な高蛋白血症や極端な高中性脂肪血症で生じる測定上のアーチファクト</td></tr>
+<tr><td>3</td><td>体液量が正常であることを確認</td><td>循環血液量減少と体液量過剰の除外</td><td>循環血液量減少と体液量正常の区別は、とくに高齢者で難しい。BUN・血清クレアチニン・BUN／クレアチニン比が低値〜低正常であること、血清尿酸が低値であることが体液量正常を支持する。体液量の判断に迷いが残るなら、等張食塩水を1〜2 L投与して尿量と血清Naの反応を見ると決着がつくことがある</td></tr>
+<tr><td>4</td><td>自然排泄Naと尿濃縮の不適切さを確認</td><td>尿Na 30 mmol/L超、尿浸透圧 100 mOsm/kg H₂O超（尿比重 1.003超）</td><td>尿Naは食塩摂取量を反映する。摂取がごく少ない患者では尿Naが30 mmol/L未満になりうる。腎機能が正常であること、直近で利尿薬を使っていないことも確認する</td></tr>
+<tr><td>5</td><td>内分泌疾患を除外</td><td>続発性副腎不全（早朝血清コルチゾール正常、判断に迷えばコルチコトロピン刺激試験正常）、重症甲状腺機能低下症（TSH正常）</td><td>SIADは除外診断であり、この2つの除外は必須。血清AVPまたはその代替であるコペプチンの測定は、SIADの診断には不要</td></tr>
+<tr><td>6</td><td>原因を探す</td><td>原因となりうる薬剤の使用歴、基礎疾患の手がかりを病歴から拾う。画像は臨床的手がかりに応じて</td><td>—</td></tr>
+<tr><td>7</td><td>手がかりがないとき</td><td>頭部と胸部のCT。陰性なら腹部・骨盤CTを考慮</td><td>画像検索について定まったガイドラインはなく、これは専門家の意見である。原因が見つからなければ特発性SIADとする</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>診断に必要な検査が実際には取られていない Hyponatremia Registry では、SIADと診断された患者のうち<strong>診断に必須の血液・尿検査が完了していたのはわずか21%</strong>だった。<mark class="hl">「SIADと書かれているが、副腎不全も甲状腺機能低下症も除外されていない」カルテは珍しくない</mark>。診断を引き継ぐときは、まず検査が揃っているかを見る。</p>
+</div>
+<h4>4-2. 原因の一覧（Table 1 の全項目）</h4>
+<div class="tw"><table>
+<thead><tr><th>カテゴリ</th><th>原因</th><th>詳細と頻度</th></tr></thead>
+<tbody>
+<tr><td>悪性腫瘍</td><td>肺・縦隔、上咽頭、消化管、泌尿生殖器</td><td>最も多いのは小細胞肺癌（悪性腫瘍によるSIADの約25%）、次いで頭頸部癌、嗅神経芽細胞腫。一部の腫瘍ではAVPの異所性産生が証明されている（小細胞肺癌とその転移巣、嗅神経芽細胞腫）。腫瘍が縮小するとSIADは戻りうる</td></tr>
+<tr><td>肺疾患</td><td>感染症、喘息、急性呼吸不全</td><td>原因を問わず肺炎で最も多い。陽圧換気でも生じる</td></tr>
+<tr><td>中枢神経疾患</td><td>占拠性病変、感染症、脳血管障害、頭部外傷、下垂体手術、急性精神病</td><td>くも膜下出血患者の最大56%、経蝶形骨洞下垂体手術の最大35%で発症する。まれだが治療可能な急速進行性認知症である抗LGI1抗体辺縁系脳炎では60〜90%にSIADが生じる</td></tr>
+<tr><td>薬剤</td><td>AVP放出の刺激薬（オピオイド、イホスファミド、MDMA＝いわゆる「エクスタシー」、ビンクリスチン、白金製剤）／AVP作用の増強薬（NSAIDs）／AVPアナログ（デスモプレシン、オキシトシン）／V2受容体の刺激薬（SSRI、ハロペリドール、カルバマゼピン、シクロホスファミド、クロルプロパミド）</td><td>MDMA中毒はAVP刺激に加え、特徴的な高体温を避けられると信じて過剰に飲水するため重症低Na血症になりうる。夜尿（夜間多尿）に処方されるデスモプレシンは重症低Na血症を起こし、時に浸透圧性脱髄症候群に至る。抗うつ薬は最も多い原因のひとつで、とくに痩せた高齢女性でリスクが高い（SSRIで最も高く、ミルタザピンで最も低い）。高用量の静注シクロホスファミドは、出血性膀胱炎予防のために大量の輸液を行うと重症低Na血症を招きうる</td></tr>
+<tr><td>その他</td><td>運動関連、疼痛、ストレス、高度の悪心、全身麻酔、術後状態、V2受容体遺伝子の機能獲得型変異（腎性SIAD）</td><td>運動関連低Na血症の予防には、選手が口渇に応じてのみ飲水し、運動中に体重を増やさないことが要る。術後の低Na血症は疼痛・ストレス・悪心・麻酔・オピオイド・低張輸液の複合効果を反映する。遺伝性SIADの大半はV2受容体（遺伝子はX染色体上）の持続的活性化によるもので、バプタン類には反応しない</td></tr>
+<tr><td>特発性</td><td>—</td><td>有病率の報告幅が広い（症例の17〜60%）。高齢者で最も多く報告される。特発性に見えた症例が後に潜在腫瘍によると判明することもある</td></tr>
+</tbody></table></div>
+<p>補足すべき点が3つある。</p>
+<ul><li><strong>原因は1つとは限らない</strong>。複数が同時に存在することが多い。</li><li><strong>薬剤との因果は「中止して低Na血症が戻ること」で確定する</strong>。</li><li>原因が特定されない割合は17〜60%と幅があり、これは<strong>検索をどこまでやるかと患者年齢に依存する</strong>（高齢者ほど不明が多い）。</li></ul>
+<p>Hyponatremia Registry における主要カテゴリの相対頻度は、悪性腫瘍24%、特定の薬剤18%、肺疾患11%、中枢神経疾患9%であった。</p>
+<h3>5. Strategies and Evidence — 緊急治療</h3>
+<h4>5-1. 誰を緊急治療の対象にするか</h4>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>具体例</th></tr></thead>
+<tbody>
+<tr><td>重症症状がある</td><td>傾眠、痙攣、心肺の異常（cardiorespiratory distress）、昏睡</td></tr>
+<tr><td>中等症の症状があり、臨床像から進行リスクが高い</td><td>嘔吐、混乱があり、かつ術後状態や運動関連である</td></tr>
+<tr><td>頭蓋内疾患を伴う低Na血症のすべて</td><td>くも膜下出血、頭部外傷。脳浮腫の増悪が破局的になりうるため</td></tr>
+</tbody></table></div>
+<p>このような患者は通常は急性低Na血症だが、急性増悪した慢性低Na血症や、極端な慢性低Na血症のこともある。</p>
+<h4>5-2. 投与法：伝統的な持続投与から、ボーラス反復へ</h4>
+<div class="tw"><table>
+<thead><tr><th>方式</th><th>投与</th><th>目標</th><th>補正上限</th></tr></thead>
+<tbody>
+<tr><td>伝統的方式</td><td>3%食塩水をゆっくり持続投与</td><td>数時間かけて血清Naを1〜2 mmol/L/時上昇</td><td>24時間で8〜10 mmol/L、48時間で18〜25 mmol/L</td></tr>
+<tr><td>現行の迅速方式（米国・アイルランド専門家パネル）</td><td>3%食塩水100 mLを静注ボーラス、必要に応じて2〜3回反復</td><td>1〜2時間で4〜6 mmol/L上昇（脳浮腫の臨床症状を戻すのに十分な量）</td><td>最初の24時間で10 mmol/L、最初の48時間で18 mmol/L</td></tr>
+<tr><td>現行の迅速方式（欧州ガイドライン）</td><td>3%食塩水150 mLを静注ボーラス、必要に応じて2〜3回反復</td><td>同上</td><td>同上</td></tr>
+</tbody></table></div>
+<h4>5-3. 補正上限とODSリスク</h4>
+<p>補正上限が設けられているのは、慢性低Na血症を急速に補正すると浸透圧性脱髄症候群（ODS）のリスクが上がるためである。ODSはまれだが破局的になりうる合併症で、橋中心部または橋外の構造を侵し、腱反射亢進・偽性球麻痺・パーキンソニズム・閉じ込め症候群・死を起こしうる。</p>
+<div class="tw"><table>
+<thead><tr><th>患者群</th><th>補正上限</th></tr></thead>
+<tbody>
+<tr><td>ODS低リスク（ガイドライン）</td><td>最初の24時間で10 mmol/L、最初の48時間で18 mmol/L</td></tr>
+<tr><td>ODS高リスク（ガイドライン）</td><td>任意の24時間で8 mmol/L</td></tr>
+<tr><td>ODS低リスク（より厳格な専門家の推奨）</td><td>任意の24時間で8 mmol/L</td></tr>
+<tr><td>ODS高リスク（より厳格な専門家の推奨）</td><td>任意の24時間で6 mmol/L</td></tr>
+</tbody></table></div>
+<p>ODS高リスクとされるのは次の5つである。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>ODS高リスク因子</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>慢性低Na血症で血清Na 110 mmol/L未満</td></tr>
+<tr><td>2</td><td>アルコール使用障害</td></tr>
+<tr><td>3</td><td>肝疾患または肝移植</td></tr>
+<tr><td>4</td><td>カリウム欠乏</td></tr>
+<tr><td>5</td><td>低栄養</td></tr>
+</tbody></table></div>
+<p>低Na血症が急性であると判明している場合（術後発症など）は、補正上限を守る必要はない。しかし<strong>低Na血症の持続時間は通常は確定できない</strong>。運動関連低Na血症であっても、もともと慢性低Na血症があった可能性は否定できない。</p>
+<p>緊急治療には厳密なモニタリングが必要で、可能なら集中治療室で行い、専門家（集中治療医、腎臓内科医、内分泌内科医）にコンサルトする。</p>
+<h4>5-4. ボーラス投与のエビデンスと落とし穴</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>デザイン・対象</th><th>主な結果</th></tr></thead>
+<tbody>
+<tr><td>非ランダム化研究（引用27）</td><td>重症症状のあるSIAD患者に3%食塩水100 mLボーラス。対照は歴史的比較群（持続投与）</td><td>6時間時点の血清Na上昇はボーラス群6 mmol/L対持続投与群3 mmol/L。同じ時間区間で神経学的改善もボーラス群で大きかった。過剰補正はボーラス群4.5%対持続投与群0%。Na再低下療法（sodium-relowering therapy）はボーラス群23%対持続投与群0%</td></tr>
+<tr><td>小規模研究2本（引用28・29。1本はSALSA試験）</td><td>1回150 mLのボーラス法</td><td>過剰補正が17%と28%、Na再低下療法が41%と28%と高率。ただし<strong>両研究には循環血液量減少の参加者が多く含まれ、輸液で volume が満たされた後に水利尿が生じた可能性がある</strong></td></tr>
+</tbody></table></div>
+<h4>5-5. 過剰補正の2つの経路と対処</h4>
+<p>過剰補正には機序の異なる2つの経路がある。区別して対処しないと防げない。</p>
+<div class="tw"><table>
+<thead><tr><th>経路</th><th>なぜ起こるか</th><th>予防・対処</th></tr></thead>
+<tbody>
+<tr><td>（a）3%食塩水の入れすぎ</td><td>固定量のボーラスを反復するため。<strong>同じ投与量でも血清Naの動きはベースラインNa値と総体液量（性・体重・体脂肪で変わる）に依存する</strong></td><td>予測式による個別化。任意の溶液1 Lを、他の出入りがない条件で投与したときの血清Na変化を予測する式：<strong>血清Naのベースラインからの変化 ＝ ｛（輸液のNa＋K）−ベースライン血清Na｝ ÷（総体液量＋1）</strong>。この式は抗利尿が続いているSIAD患者について検証されており、24時間時点の実測値は予測値とよく一致する</td></tr>
+<tr><td>（b）水利尿への転換</td><td>原因薬剤の中止や一過性SIAD（術後状態など）の解消により、尿量が100 mL/時を超える水利尿が始まる</td><td>水利尿が血清Naに与える影響は簡便な水喪失の式で定量できる。デスモプレシンを先制的（水利尿を見込んで）または反応的（水利尿が起きてから）に用いる方法がある</td></tr>
+</tbody></table></div>
+<p>デスモプレシンの位置づけは慎重に読む必要がある。<strong>この文脈でのランダム化試験は存在しない</strong>。後ろ向き研究では一貫した利益は示されておらず、溢水・入院期間延長・検査の増加・低Na血症の悪化といった合併症の可能性が報告されている。</p>
+<p>過剰補正が起きてしまったら緊急対応が要る。（1）3%食塩水を中止する、（2）5%ブドウ糖液を投与する、（3）救済治療としてデスモプレシンを投与する。</p>
+<p>もう1つ見落とされやすい点として、<strong>カリウムの貯留は血清Naを上げる</strong>。低Na血症の治療中にカリウムを補充するときは、過剰補正を避けるために特別な注意が要る。</p>
+<h3>6. Strategies and Evidence — 非緊急治療</h3>
+<h4>6-1. 治療の枠組み</h4>
+<p>低Na血症患者のうち、緊急治療を要するほど重症な症状をもつのは5%未満である。大多数では原因（複数のこともある）への対処が治療の中心で、通常は外来で行う。例外は、（a）低Na血症の原因疾患の管理のために入院している患者、（b）血清Naが120 mmol/L未満の患者である。</p>
+<p>後者について著者は重要な指摘をしている。<strong>血清Naが120 mmol/L未満なのに重篤な症状がないということは、脳の容積適応が相当に進んでいる証拠である</strong>。したがってODSのリスクを最小化するため、治療中は血清Naを厳密にモニタリングする。原因が可逆的（薬剤の影響や肺炎など）なら、低Na血症は数日以内に解消する。</p>
+<h4>6-2. 補正すると何が良くなるのか</h4>
+<div class="tw"><table>
+<thead><tr><th>エビデンス</th><th>内容</th><th>留保</th></tr></thead>
+<tbody>
+<tr><td>観察研究（中等症・重症の慢性SIAD）</td><td>Na値の補正と、神経認知機能・運動機能・気分の改善との関連</td><td>併存疾患の治療など、他の診療要素による交絡がありうる</td></tr>
+<tr><td>ランダム化比較試験（限定的）</td><td>Na値の上昇に伴い、SF-12（12項目短縮版健康調査票、QOL評価ツール）の身体的コンポーネントスコアが改善</td><td>データは限られる</td></tr>
+<tr><td>観察研究（慢性SIAD＋軽症〜中等症低Na血症）</td><td>血清Na上昇と骨芽細胞機能マーカーの上昇が関連</td><td>骨折発生率への影響は不明</td></tr>
+</tbody></table></div>
+<p>これらの観察は、<strong>SIAD患者ではどの程度の低Na血症であっても、合理的な範囲で補正を試みることを支持する</strong>。</p>
+<h4>6-3. 治療法の一覧（Table 2 の全項目）</h4>
+<p>##### 水制限（第一選択）</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>機序</td><td>電解質フリー水の摂取と総体液量を減らす。<strong>水だけでなくすべての飲水を対象に含めること</strong></td></tr>
+<tr><td>量</td><td>中等度：1.5 L/日未満。厳格：1 L/日未満</td></tr>
+<tr><td>有効性</td><td>第一選択治療。遵守が難しく、そのためしばしば無効</td></tr>
+<tr><td>有害事象</td><td>口渇の増強。カロリー摂取が不足することがある</td></tr>
+<tr><td>補足</td><td>安価で安全。ベースラインでの失敗予測因子は、尿量1.5 L/日未満、尿浸透圧500 mOsm/kg H₂O超、尿Naと尿Kの和が血清Na値を上回ること。<strong>くも膜下出血をはじめとする頭蓋内病変では禁忌</strong></td></tr>
+</tbody></table></div>
+<p>エビデンス：慢性SIAD患者46例（一過性・可逆性の原因は除外済み）を対象に、水制限（飲水を1 L/日に制限）と低Na血症の無治療とを比較したランダム化比較試験では、水制限で血清Naはわずかに上昇した（4日目で3 mmol/L対1 mmol/L、30日目で4 mmol/L対1 mmol/L）。<strong>4日目に血清Naが5 mmol/L以上上昇した患者はそれぞれ17%と4%にとどまった</strong>。</p>
+<p>##### 塩化ナトリウム補充</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>機序</td><td>体内Na含量を増やし、電解質フリー水の摂取を減らし、水排泄を増やす</td></tr>
+<tr><td>量</td><td>2〜5 g/日（1錠500 mg）。水利尿を高めるため、フロセミド20 mg 1日2回または同等のループ利尿薬と併用されることが多い</td></tr>
+<tr><td>有効性</td><td>長期有効性は限定的</td></tr>
+<tr><td>有害事象</td><td>体内Na含量が増えるため、Naと体液の過剰のリスク。フロセミド併用でカリウム欠乏が起こりうる</td></tr>
+<tr><td>補足</td><td>安価。厳格な水制限に食塩＋フロセミドを追加しても、血清Na補正に持続的な利益はない。<strong>高血圧、心不全その他のNa貯留性病態では禁忌</strong></td></tr>
+</tbody></table></div>
+<p>エビデンス2本。</p>
+<ul><li>慢性SIAD患者83例の後ろ向き研究：食塩錠を服用した患者（中央値5 g/日）の血清Na平均上昇は5.2 mmol/L、非服用患者では3.1 mmol/L。</li><li>EFFUSE-FLUID試験（オープンラベル・ランダム化比較試験、SIAD患者92例）：食塩錠＋フロセミド＋厳格な水制限と、水制限単独とを比較。<strong>7日目にはわずかにNa値が高かったが、28日目には差がなかった。さらに食塩＋フロセミドの追加は急性腎障害と低K血症のリスクを高めた</strong>。</li></ul>
+<p>##### 尿素</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>機序</td><td>浸透圧利尿によって電解質フリー水の排泄を増やす。Na排泄を減らす</td></tr>
+<tr><td>量</td><td>15〜60 g/日を経口または経腸で、中等度の水制限と併用。尿素30 g（500 mOsm）は、尿浸透圧500 mOsm/kg H₂Oのとき水排泄を1 L増やす</td></tr>
+<tr><td>有効性</td><td>観察研究で短期・長期の有効性が報告されている</td></tr>
+<tr><td>有害事象</td><td>悪心、下痢、苦味。血清Naの過度に速い補正はまれで、浸透圧性脱髄症候群の報告はない</td></tr>
+<tr><td>補足</td><td>果汁やシロップに溶かすと飲みやすくなる（欧州ガイドラインにレシピの記載あり）。米国ではシトラス風味の製剤（ure-Na）が入手できる。当初は欧州で用いられたが、近年は世界的に処方されている。<strong>循環血液量減少、腎不全、肝不全では禁忌</strong></td></tr>
+</tbody></table></div>
+<p>エビデンス：2日から1年までの小規模観察研究で、中等度の水制限（飲水1〜1.5 L/日）に尿素を追加した外来・入院患者のNa値改善が示されている。後ろ向き研究では、尿素のみで治療した12例で血清Naが4日間に6 mmol/L上昇し、過剰補正やその他の重篤な有害事象は生じなかった。尿素は<strong>腎性SIADの管理にも有効に使われている</strong>。</p>
+<p>なお、SIAD患者は蛋白摂取が少ないことが多く、蛋白摂取を増やすこと（体重1 kgあたり約1 gまで）は尿素療法を模倣して低Na血症を和らげる可能性があるが、この効果を裏づけるデータはない。</p>
+<p>##### トルバプタン</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>機序</td><td><strong>病態生理そのものに作用する唯一の治療</strong>。競合的なV2受容体拮抗薬</td></tr>
+<tr><td>量</td><td>15〜60 mg/日を経口、中等度の水制限と併用。血清Naの厳密なモニタリング（6〜8時間ごと、ODSリスクによってはさらに頻回）と用量調整のため、開始は入院下で行う。血清Naの過度に速い補正のリスクを減らすため、初期の用量調整期には水制限を併用しない。開始量としては7.5 mg/日が15 mg/日と同等に有効と考えられる</td></tr>
+<tr><td>有効性</td><td>短期・長期とも高い有効性。水利尿反応と血清Na上昇は低Na血症の重症度と直接相関する</td></tr>
+<tr><td>有害事象</td><td>多尿と口渇の増強。実臨床では血清Naの過度に速い補正が13〜25%に生じる（ベースライン血清Na 125 mmol/L未満の患者に限られるようである）。浸透圧性脱髄症候群の散発例あり。7.5 mg用量では慢性SIADでの過度に速い補正は認められていない</td></tr>
+<tr><td>補足</td><td>FDAは30日超の使用（主要試験の期間に基づく）と肝疾患患者への使用について警告している。欧州ガイドラインは、血清Naの過度に速い補正と肝毒性のリスクから推奨していない。<strong>肝毒性は低Na血症に対するトルバプタン試験では観察されていないが、多発性嚢胞腎の進行抑制を目的に高用量を用いた試験で可逆性の肝毒性が報告された</strong>。国によってはコストが使用の障壁になる</td></tr>
+</tbody></table></div>
+<p>エビデンス：低Na血症に対するトルバプタンの2本のランダム化プラセボ対照試験に含まれたSIAD患者110例のサブセット解析。トルバプタン群はプラセボ群より血清Naの上昇が大きかった。血清Naの1日平均AUCは、トルバプタン群でベースラインから4日目まで5.3 mmol/L、ベースラインから30日目まで8.1 mmol/L、プラセボ群でそれぞれ0.5 mmol/L、1.9 mmol/L。トルバプタン群では水制限の必要が少なく、入院期間も短かった。ただし口渇と口腔乾燥が多く、<strong>低Na血症の過剰補正がトルバプタン群の5.9%に生じた</strong>。これらの試験のオープンラベル延長では、トルバプタンの連日投与は4年にわたり有効性を保った。</p>
+<p>トルバプタンは高張食塩水との併用が禁忌である。また、血清Na 120 mmol/L未満の患者では安全性情報が限られるため慎重投与とされる。<strong>腎性SIADには無効</strong>である。</p>
+<p>##### エンパグリフロジン（新しい選択肢）</p>
+<p>SGLT2阻害薬であるエンパグリフロジンは、糖尿によって浸透圧利尿を促すことでSIADの治療に有用でありうる。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>デザイン・対象</th><th>主な結果</th></tr></thead>
+<tbody>
+<tr><td>ランダム化比較試験（引用49）</td><td>87例。水制限1 L/日＋エンパグリフロジン 対 水制限単独</td><td>5日目の血清Na上昇はエンパグリフロジン群10 mmol/L対水制限単独群7 mmol/L。重篤な有害事象の頻度に大きな差はなかったが、エンパグリフロジンは一過性の腎機能障害4例、低Na血症の過剰補正2例と関連（プラセボ群ではそれぞれ0例、1例）</td></tr>
+<tr><td>ランダム化クロスオーバー試験（4週間、引用50）</td><td>14例</td><td>エンパグリフロジンで血清Naが4.1 mmol/L上昇。プラセボでは上昇なし</td></tr>
+</tbody></table></div>
+<h4>6-4. 治療アルゴリズム（Figure 2 の全ボックスを表に起こす）</h4>
+<p><strong>分岐1：重症症状／中等症症状＋進行リスク高／頭蓋内疾患のいずれかがあるか。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>分岐</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>はい（緊急治療）</td><td>3%食塩水ボーラス。ガイドラインに従って低Na血症を補正する。目標は1〜2時間で4〜6 mmol/L。補正上限は、ODS低リスクなら最初の24時間で10 mmol/L・最初の48時間で18 mmol/L、ODS高リスクなら任意の24時間で8 mmol/L。専門家にコンサルトする</td></tr>
+<tr><td>いいえ</td><td>水制限へ進む</td></tr>
+</tbody></table></div>
+<p><strong>緊急治療後の3つの帰結。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>帰結</th><th>対応</th></tr></thead>
+<tbody>
+<tr><td>低Na血症が補正された</td><td>水制限を励行する。長期治療の必要性を再評価する</td></tr>
+<tr><td>過剰補正された（補正上限を超えた）</td><td>3%食塩水を中止する。5%ブドウ糖液を投与する。デスモプレシンを非経口投与する</td></tr>
+<tr><td>補正不足（目標に到達しない）</td><td>投与した3%食塩水の量が、患者のベースライン血清Na値と総体液量に照らして十分だったかを再評価する</td></tr>
+</tbody></table></div>
+<p><strong>分岐2：一過性のSIADか。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>分岐</th><th>次の一手</th><th>その後</th></tr></thead>
+<tbody>
+<tr><td>はい</td><td>原因薬剤を服用していれば、安全であれば中止する。原因疾患が特定されていれば治療する</td><td>低Na血症が補正されたか。されていれば追加治療は不要。されていなければ慢性SIADの治療へ</td></tr>
+<tr><td>いいえ</td><td>水制限 → 補正されなければ食塩錠＋フロセミド</td><td>慢性SIADの治療へ</td></tr>
+</tbody></table></div>
+<p><strong>分岐3：慢性SIADの治療。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>食塩錠＋フロセミド</td><td>この選択は潜在的な禁忌（高血圧、体液過剰、低K血症、前立腺肥大）を踏まえて重みづけする</td></tr>
+<tr><td>補正されない場合</td><td>尿素またはトルバプタン。選択は地域での入手性、経験、コスト、禁忌に依存する（尿素の禁忌は循環血液量減少・腎不全・肝不全、トルバプタンの禁忌は肝疾患）</td></tr>
+<tr><td>併用</td><td>中等度の水制限</td></tr>
+<tr><td>継続判断</td><td>長期治療の必要性を再評価する</td></tr>
+</tbody></table></div>
+<h3>7. Areas of Uncertainty</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>現状</th></tr></thead>
+<tbody>
+<tr><td>慢性低Na血症と有害転帰（骨折・死亡リスク上昇）の関連は因果か</td><td>不確実。ただし因果を支持する証拠もある。高齢ラットに慢性SIADを実験的に誘導すると、骨密度低下・サルコペニア・心筋症・性腺機能低下が生じた</td></tr>
+<tr><td>低Na血症を戻すと長期転帰が改善するか</td><td>不確実。観察研究のメタ解析では、入院中に低Na血症が改善した患者は改善しなかった患者より院内死亡・退院後死亡が実質的に少なかった。しかし併存疾患や治療の他の側面による交絡は除外できない</td></tr>
+<tr><td>緊急時の高張食塩水は、ガイドラインの固定量ボーラスと予測式に基づく個別化のどちらがよいか</td><td>前向き研究が必要</td></tr>
+<tr><td>低用量トルバプタンの位置づけ</td><td>より少ない開始量の有効性・安全性に関する報告は有望であり、さらなる検討に値する</td></tr>
+<tr><td>トルバプタン・尿素・エンパグリフロジン（および他のSGLT2阻害薬）の比較</td><td>有効性・安全性・コストについて長期のランダム化試験が必要</td></tr>
+</tbody></table></div>
+<h3>8. Guidelines</h3>
+<p>低Na血症（SIADによるものを含む）の診断と管理については、<strong>米国・アイルランドの専門家パネルの勧告（Verbalis JG, et al. Am J Med. 2013）と欧州ガイドライン（Spasovski G, et al. Nephrol Dial Transplant. 2014）</strong>が既に公表されている。著者は「我々の推奨はこれらのガイドラインと整合している」と明記している。</p>
+<p>つまり本論文は新しいガイドラインを立てるものではなく、<strong>既存の2つのガイドラインを土台に、2020年以降の二次治療のRCTを織り込んで実装可能な形に落としたもの</strong>と読むべきである。</p>
+<h3>9. Conclusions and Recommendations — 症例への回答</h3>
+<p>著者は冒頭の85歳男性について、次のように結論している。</p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>著者の判断</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>診断</td><td>SIADに合致する低Na血症</td><td>低張性、体液量正常を支持する検査所見、不適切な尿濃縮と自然排泄Na</td></tr>
+<tr><td>確定に要る検査</td><td>続発性副腎不全と重症甲状腺機能低下症を除外する検査</td><td>SIADは除外診断</td></tr>
+<tr><td>原因検索</td><td>SIADと関連する薬剤を服用しておらず、他に明らかな原因もないため、胸部と頭部のCTを実施する。陰性なら特発性と考える</td><td>手がかりがないときの専門家の意見</td></tr>
+<tr><td>水制限単独の見通し</td><td>高い尿浸透圧（645 mOsm/kg）から、水制限単独では反応が乏しいと予測される</td><td>水制限失敗の予測因子（尿浸透圧500超）に該当</td></tr>
+<tr><td>食塩錠＋フロセミド</td><td>推奨しない</td><td>高血圧と前立腺肥大があるため</td></tr>
+<tr><td>第一の推奨</td><td><strong>尿素15 gを1日2回（経口尿素製剤）＋水制限1500 mL/日</strong></td><td>ただしこのアプローチを支持するランダム化試験のデータはない、と著者自身が明記</td></tr>
+<tr><td>代替</td><td>トルバプタンの長期使用、開始量7.5 mg/日</td><td>ただしコストが一部の患者では障壁になりうる</td></tr>
+<tr><td>共通</td><td>治療中は血清Na値を厳密にモニタリングする</td><td>—</td></tr>
+</tbody></table></div>
+<h3>10. Key Clinical Points（原文の要点ボックス）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>要点</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>低Na血症は最も多い電解質異常である。通常はNaとKの含量に比した水の過剰によって生じる</td></tr>
+<tr><td>2</td><td>SIADは低Na血症の頻度の高い原因であり、浸透圧刺激も血行動態刺激もない状況下での抗利尿ホルモン分泌の増加が、腎による水貯留と水の過剰をもたらす</td></tr>
+<tr><td>3</td><td>SIADの表れは、発症の速さ、重症度、持続時間に依存する。症状は軽度・非特異的（脱力、頭痛）から重篤で生命を脅かすもの（痙攣、昏睡）まで幅がある</td></tr>
+<tr><td>4</td><td>SIADの原因には悪性腫瘍、薬剤、肺疾患、中枢神経疾患、術後状態、高度の悪心、ストレスが含まれる。原因が特定できないことも多い</td></tr>
+<tr><td>5</td><td>重篤な症状を伴うSIADでは、脳浮腫を戻すために3%食塩水による緊急治療を行う。専門家へのコンサルトが妥当である</td></tr>
+<tr><td>6</td><td>SIADの管理戦略には、可能な場合の原因疾患の是正または軽減、水制限、しばしばフロセミドを併用する塩化ナトリウム補充、尿素またはトルバプタンによる治療が含まれる</td></tr>
+</tbody></table></div>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>エビデンスの階層が薄い</strong>。治療推奨の骨格を支えるのは、水制限のRCT（46例）、EFFUSE-FLUID（92例）、トルバプタンのサブセット解析（110例）、エンパグリフロジンのRCT（87例と14例）である。いずれも小規模で、しかも<strong>死亡・骨折・入院といった患者中心のアウトカムではなく血清Na値を評価している</strong>。「Naが上がる」ことと「患者が良くなる」ことの間の橋は、本論文自身が Areas of Uncertainty で認めるとおり架かっていない。</li><li><strong>著者自身の最終推奨がRCTに支えられていない</strong>。症例に対する第一推奨（尿素15 g×2＋水制限1500 mL/日）について、著者は「データは得られていない（data from randomized trials are not available to support this approach）」と明言する。尿素のエビデンスは12例の後ろ向き研究と小規模観察研究のみである。<strong>Clinical Practiceという定型の中では最も推奨度の低い一手が第一選択に置かれている</strong>という構図は、JCで議論に値する。</li><li><strong>ボーラス投与の比較試験が非ランダム化である</strong>。中核となる引用27は歴史的対照との比較であり、時代効果・診療の変化を分離できない。ボーラス群で神経学的改善が大きかったという結果も、この設計では因果と読めない。</li><li><strong>SALSAを含む2試験の高過剰補正率への留保が事後的である</strong>。本論文は「循環血液量減少の参加者が多かったせいだろう」と説明するが、これは著者による事後的な解釈であって、当該試験が検証した仮説ではない。ボーラス法の過剰補正リスクを過小評価する方向に働きうる。</li><li><strong>補正上限に2つの異なる数値が併記されたまま残る</strong>。ガイドライン（低リスク24時間10 mmol/L）と「他の専門家」の推奨（低リスクでも8 mmol/L、高リスクは6 mmol/L）が並記され、どちらを採るべきかの判断材料は示されない。実務では施設ごとに1つに決めるほかない。</li><li><strong>デスモプレシンの評価が本Vault内の他ノートと食い違う</strong>。本論文は「RCTがなく、後ろ向き研究では一貫した利益がない」と抑制的だが、Kidney360 2025の観察研究は先制投与で過剰補正が大きく減ると報告する。<strong>同じ方向のデータをどちらの態度で受け取るかの差</strong>であり、JCの論点になる。</li><li><strong>予測式の適用範囲が限定的である</strong>。Adrogué–Madias式は「他の水・電解質の出入りがない」という仮定の下で成り立つ。式が検証されているのは「抗利尿が続いているSIAD患者」に限られており、水利尿に転じた患者や輸液・経口摂取が並行している実際のICU患者にそのまま当てはまるわけではない。</li><li><strong>一過性SIADかどうかを最初に見分ける方法が示されていない</strong>。治療アルゴリズムは「Transient SIAD?」で大きく分岐するが、この判断を何で行うかは書かれていない。実務ではここが最も迷うところである。</li><li><strong>コストと入手性が推奨の決定因子として残る</strong>。尿素製剤（ure-Na）は米国での入手を前提に書かれ、トルバプタンはコストが障壁と繰り返される。日本の診療報酬と保険適用（トルバプタンのSIADに対する適応の扱いを含む）は本論文の射程外であり、当院での実装には別途の確認が要る。</li></ul>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>本論文と同じ著者による低Na血症の総合レビュー（Vault内にノートあり）</td><td>Adrogué HJ, Tucker BM, Madias NE. Diagnosis and management of hyponatremia. JAMA. 2022;328(3):280-91.</td></tr>
+<tr><td>SIADの病態から治療までの大型総説（Vault内にノートあり）</td><td>Warren AM, Grossmann M, Christ-Crain M, Russell N. Syndrome of inappropriate antidiuresis: from pathophysiology to management. Endocr Rev. 2023;44(5):819-61.</td></tr>
+<tr><td>米国・アイルランド専門家パネルの勧告（補正上限の正本の一方）</td><td>Verbalis JG, Goldsmith SR, Greenberg A, et al. Diagnosis, evaluation, and treatment of hyponatremia: expert panel recommendations. Am J Med. 2013;126(10 Suppl 1):S1-S42.</td></tr>
+<tr><td>欧州ガイドライン（補正上限の正本のもう一方）</td><td>Spasovski G, Vanholder R, Allolio B, et al. Clinical practice guideline on diagnosis and treatment of hyponatraemia. Nephrol Dial Transplant. 2014;29(Suppl 2):i1-i39.</td></tr>
+<tr><td>SIADの古典的レビュー</td><td>Ellison DH, Berl T. The syndrome of inappropriate antidiuresis. N Engl J Med. 2007;356:2064-72.</td></tr>
+<tr><td>著者らによる低Na血症の古典</td><td>Adrogué HJ, Madias NE. Hyponatremia. N Engl J Med. 2000;342:1581-9.</td></tr>
+<tr><td>低Na血症の難しさを論じた総説（予測式・水喪失式の出典）</td><td>Adrogué HJ, Madias NE. The challenge of hyponatremia. J Am Soc Nephrol. 2012;23:1140-8.</td></tr>
+<tr><td>Hyponatremia Registry（必須検査の実施率21%）</td><td>Greenberg A, Verbalis JG, Amin AN, et al. Current treatment practice and outcomes: report of the hyponatremia registry. Kidney Int. 2015;88:167-77.</td></tr>
+<tr><td>Hyponatremia Registry（原因の内訳）</td><td>Verbalis JG, Greenberg A, Burst V, et al. Diagnosing and treating the syndrome of inappropriate antidiuretic hormone secretion. Am J Med. 2016;129(5):537.e9-537.e23.</td></tr>
+<tr><td>ボーラス対持続投与の非ランダム化比較</td><td>Garrahy A, Dineen R, Hannon AM, et al. Continuous versus bolus infusion of hypertonic saline in the treatment of symptomatic hyponatremia caused by SIAD. J Clin Endocrinol Metab. 2019;104:3595-602.</td></tr>
+<tr><td>SALSA試験（Vault内にノートあり）</td><td>Baek SH, Jo YH, Ahn S, et al. Risk of overcorrection in rapid intermittent bolus vs slow continuous infusion therapies of hypertonic saline for patients with symptomatic hyponatremia: the SALSA randomized clinical trial. JAMA Intern Med. 2021;181:81-92.</td></tr>
+<tr><td>固定量ボーラスの過剰補正・補正不足</td><td>Pelouto A, Refardt JC, Christ-Crain M, Zandbergen AAM, Hoorn EJ. Overcorrection and undercorrection with fixed dosing of bolus hypertonic saline for symptomatic hyponatremia. Eur J Endocrinol. 2023;188:322-30.</td></tr>
+<tr><td>高張食塩水＋デスモプレシン戦略</td><td>Sood L, Sterns RH, Hix JK, Silver SM, Chen L. Hypertonic saline and desmopressin: a simple strategy for safe correction of severe hyponatremia. Am J Kidney Dis. 2013;61:571-8.</td></tr>
+<tr><td>重症低Na血症の治療（より厳格な補正上限の出典）</td><td>Sterns RH. Treatment of severe hyponatremia. Clin J Am Soc Nephrol. 2018;13:641-9.</td></tr>
+<tr><td>慢性SIADに対する水制限のRCT（46例）</td><td>Garrahy A, Galloway I, Hannon AM, et al. Fluid restriction therapy for chronic SIAD; results of a prospective randomized controlled trial. J Clin Endocrinol Metab. 2020;105(12):dgaa619.</td></tr>
+<tr><td>EFFUSE-FLUID試験（食塩錠＋フロセミド）</td><td>Krisanapan P, Vongsanim S, Pin-On P, Ruengorn C, Noppakun K. Efficacy of furosemide, oral sodium chloride, and fluid restriction for treatment of syndrome of inappropriate antidiuresis (SIAD): an open-label randomized controlled study (the EFFUSE-FLUID trial). Am J Kidney Dis. 2020;76:203-12.</td></tr>
+<tr><td>尿素による低Na血症治療（12例）</td><td>Rondon-Berrios H, Tandukar S, Mor MK, et al. Urea for the treatment of hyponatremia. Clin J Am Soc Nephrol. 2018;13:1627-32.</td></tr>
+<tr><td>トルバプタンのSIADサブセット解析（110例）</td><td>Verbalis JG, Adler S, Schrier RW, et al. Efficacy and safety of oral tolvaptan therapy in patients with the syndrome of inappropriate antidiuretic hormone secretion. Eur J Endocrinol. 2011;164:725-32.</td></tr>
+<tr><td>トルバプタンの長期（オープンラベル延長）</td><td>Berl T, Quittnat-Pelletier F, Verbalis JG, et al. Oral tolvaptan is safe and effective in chronic hyponatremia. J Am Soc Nephrol. 2010;21:705-12.</td></tr>
+<tr><td>超低用量トルバプタン</td><td>Hanna RM, Velez JC, Rastogi A, et al. Equivalent efficacy and decreased rate of overcorrection in patients with syndrome of inappropriate secretion of antidiuretic hormone given very low-dose tolvaptan. Kidney Med. 2019;2:20-8.</td></tr>
+<tr><td>エンパグリフロジンのRCT（87例）</td><td>Refardt J, Imber C, Sailer CO, et al. A randomized trial of empagliflozin to increase plasma sodium levels in patients with the syndrome of inappropriate antidiuresis. J Am Soc Nephrol. 2020;31:615-24.</td></tr>
+<tr><td>エンパグリフロジンのクロスオーバー試験（14例）</td><td>Refardt J, Imber C, Nobbenhuis R, et al. Treatment effects of the SGLT2 inhibitor empagliflozin on chronic syndrome of inappropriate antidiuresis: results of a randomized, double-blind, placebo-controlled, crossover trial. J Am Soc Nephrol. 2023;34:322-32.</td></tr>
+<tr><td>低Na血症改善と死亡減少のメタ解析</td><td>Corona G, Giuliani C, Verbalis JG, Forti G, Maggi M, Peri A. Hyponatremia improvement is associated with a reduced risk of mortality: evidence from a meta-analysis. PLoS One. 2015;10(4):e0124105.</td></tr>
+<tr><td>低Na血症と骨密度・骨折のシステマティックレビュー</td><td>Murthy K, Ondrey GJ, Malkani N, et al. The effects of hyponatremia on bone density and fractures: a systematic review and meta-analysis. Endocr Pract. 2019;25:366-78.</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 SIADは除外診断である。<mark class="hl">「SIAD」と書く前に、尿浸透圧・尿Na・早朝コルチゾール・TSHが揃っているかを確認する</mark>（Hyponatremia Registry では揃っていたのは21%だけだった）。</p>
+<p>そして<mark class="hl">水制限を始める前に、その水制限が効かないことを予測する3指標——尿量1.5 L/日未満・尿浸透圧500 mOsm/kg超・尿Na＋尿Kの和が血清Naを超える——を取ってカルテに残す</mark>。1つでも該当すれば、<mark class="hl">水制限単独で粘らず、初日に次の一手（尿素またはトルバプタン）の準備を始める</mark>。慢性SIADの水制限は4日目でわずか3 mmol/Lしか上げない。</p>
+<p>二次治療で<mark class="hl">食塩錠＋フロセミドを反射的に選ばない</mark>。EFFUSE-FLUID試験で28日目には差が消え、AKIと低K血症だけが残った。高血圧・心不全・前立腺肥大があるなら最初から外す。</p>
+<p>緊急時は3%食塩水100〜150 mLボーラスで1〜2時間に4〜6 mmol/Lを目指すが、<mark class="hl">固定量を漫然と反復しない</mark>。過剰補正の経路は「入れすぎ」と「水利尿への転換」の2つであり、前者には投与前の予測式、後者には<mark class="hl">原因薬剤を止めた日・術後回復期のNa頻回測定</mark>で備える。</p>
+<p><mark class="hl">頭蓋内疾患（SAH・頭部外傷）に伴う低Na血症は、症状が軽くても緊急治療の対象であり、かつ水制限は禁忌</mark>である。ここを取り違えると脳浮腫が悪化する。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
