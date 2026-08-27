@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICUの公開データベースは敗血症AI研究に耐えるか — MIMIC-IV・eICU-CRD・AmsterdamUMCdbの欠損と用語ゆれ（CCM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICUの公開データベースは敗血症AI研究に耐えるか — MIMIC-IV・eICU-CRD・AmsterdamUMCdbの欠損と用語ゆれ（CCM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Jegou J, Manolescu I, Ruckly S, Timsit JF, Thy M. ICU Open-Access Databases for Artificial Intelligence in Sepsis: Balancing Innovation With Data Quality Challenges. Crit Care Med. 2026;54. DOI: 10.1097/CCM.0000000000007319</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2026-08-24）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000007319" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000007319</a>（本文PDFは別途）</dd><dt>原題</dt><dd>ICU Open-Access Databases for Artificial Intelligence in Sepsis: Balancing Innovation With Data Quality Challenges</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>診療そのものは変わらない</strong>。これは臨床試験ではなく、ICU研究のインフラ（公開データベース）の品質監査である。変わるのは「他施設のAI論文をどう読むか」と「自分たちのデータをどう設計するか」の2点</li><li><strong>敗血症AI論文の読み方が1つ決まる</strong>：どのデータベースを使ったかを見て、「敗血症の発症時刻をどう定義したか」を必ず確認する。MIMIC-IV・eICU-CRD・AmsterdamUMCdb のいずれにも敗血症診断の臨床的タイムスタンプは存在しない。したがって "早期抗菌薬" "1時間バンドル" 系のAI研究の結論は、すべて著者が組んだ導出定義（培養提出＋抗菌薬継続＋SOFA 2点上昇）の上に乗っている。導出定義が書かれていない論文は、時間の議論を信用しない</li><li><strong>欠損を正常値で埋めた研究は臓器障害を過小評価する</strong>。著者が最も強く警告している点。ビリルビンやGCSが欠測のときに「正常」とみなすと SOFA が下がり、同じ患者が敗血症と判定されたりされなかったりする。当院で予測モデルを検討するときも、欠測の扱いを先に決めて明文化する</li><li><strong>自院データにも同じ穴が開く</strong>。体重の外れ値（MIMIC-IVでは400 kg超が1,997例、20,000 kgが2例）、単位のゆれ（grams と g、po と oral）、死亡フラグの重複（退院区分・死亡日時・死亡日が食い違う）は、電子カルテ由来データなら当院でも必ず起きる。RRS・バイタル自動収集（PrimeGaia）由来のデータを解析に回す前に、Figure 1 の10項目をそのまま前処理チェックリストとして使える</li></ul>
+<p><strong>JIPADとの対比（構造がほぼ裏返しになっている）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>観点</th><th>MIMIC-IV / eICU-CRD / AmsterdamUMCdb</th><th>JIPAD</th></tr></thead>
+<tbody>
+<tr><td>由来</td><td>電子カルテの二次利用（生ログをそのまま公開）</td><td>前向きレジストリ（定義付き項目を各施設が入力）</td></tr>
+<tr><td>変数定義</td><td>データベースごとにスキーマが違い、標準化された辞書はない</td><td>JIPADデータ辞書 v3.7.2（2025-09-30・194ページ）が正本。ANZICS APD Data Dictionary v6.1 に準拠</td></tr>
+<tr><td>用語ゆれ</td><td>本論文の中核的問題（MIMIC-IVで薬剤名5,162種・大文字小文字ゆれ4,735件）</td><td>構造的に起きにくい。本論文でも eICU-CRD のゆれが少ない理由を「ドロップダウン入力だから」と説明しており、レジストリ方式の強みと一致</td></tr>
+<tr><td>規模</td><td>20,109〜139,367例（単一施設または2年間の多施設）</td><td>167施設・640,000例超（2025年10月時点）。FY2023年次レポートは129施設109,652例</td></tr>
+<tr><td>粒度</td><td>検査値・薬剤投与・微生物が時系列で入っている（eICU-CRDは検査行だけで3,913万行）</td><td>入室後24時間の生理学的最悪値が中心。時系列の投薬・培養・投与時刻は持たない</td></tr>
+<tr><td>人種構成</td><td>白人が65〜78%（AmsterdamUMCdbは人種データなし）</td><td>日本人集団。海外モデルの外的妥当性を検証する側に立てる</td></tr>
+<tr><td>アクセス</td><td>Physionet＋CITI認証で誰でも数日〜数週で入手（AmsterdamUMCdbは管理者承認が追加で必要）</td><td>二次利用は申請承認制・非公開。2020年開始で40件超の研究</td></tr>
+</tbody></table></div>
+<ul><li><strong>示唆1：JIPADは「用語ゆれ」の問題を最初から回避している</strong>。本論文が突きつけているのは、EHRの生ログを公開しただけのデータベースの前処理コストの大きさで、定義辞書を先に置くレジストリ方式の価値をむしろ裏書きしている。JIPAD論文で「変数定義はデータ辞書 v3.7.2 に準拠」と書けることは、査読上の強みとして明示してよい</li><li><strong>示唆2：JIPADの弱点は本論文の裏返しで「粒度」にある</strong>。敗血症の発症時刻・抗菌薬の投与時刻・逐次SOFAは JIPAD 単体では原理的に計算できない。<mark class="hl">ここが JIPAD×DPC連結（5施設パイロット：広島大・堺市立・弘前大・聖路加・東北大）が効いてくる場所</mark>で、薬剤・処置の日単位情報を足すことで time-to-antibiotics 系の質指標に近づける。本論文は「連結が必要な理由」を海外データベース側から説明してくれる引用文献として使える</li><li><strong>示唆3：国際比較・フェデレーテッド解析の論拠になる</strong>。3データベースの敗血症診断割合は16.5%・13.3%・2.6%と6倍違い、著者はこれを真の有病率差ではなくコーディング慣行の差と解釈している。同じ理屈で、JIPADの敗血症割合を海外データベースと単純比較することはできない。JIPADが国際共同に加わる意味は「日本のcase-mixを出すこと」であって「数字を並べること」ではない、と整理できる</li><li><strong>示唆4：ICU質指標セット（Kumasawa J, Okamoto H, et al. J Intensive Care 2026 in press）の議論に直結する</strong>。本論文の Table 2 は「敗血症の主要指標を各データベースで実際に計算できるか」を feasibility として書き下したもので、質指標を定義するときの実現可能性チェックの型として流用できる</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：MIMIC-IV・eICU-CRD・AmsterdamUMCdb・HiRID の4大公開ICUデータベースは、AIによる敗血症研究の主要な素材になっている。Sauer らの系統的レビュー（Crit Care Med 2022）はこれら4つの構造と粒度の違いを比較し、臨床家・データサイエンティスト向けの選択ガイドを示した</li><li><strong>Unknown</strong>：Sauer らのレビューは構造と粒度の比較にとどまり、<strong>敗血症に固有のデータ品質の問題</strong>（抗菌薬投与の記録・血行動態サポート・死亡指標・診断タイムスタンプ）は検討していなかった。AIモデルの出力の信頼性は入力データの正確さ・完全性・標準化に依存するのに、その入力側が敗血症診療の再構成に耐えるかは検証されていなかった</li><li><strong>What's new</strong>：3つのデータベースに実際に構造化クエリを投げ、欠損率・重複コード・用語ゆれ・死亡指標の食い違いを数値化した。①MIMIC-IVは投与経路49%・用量58%が欠測、微生物の量的情報が99.9%欠測、診断ラベルが17,557種で近似重複174種以上、②eICU-CRDは1.9%の入院に診断がなく、ICU死亡と院内死亡が7,319滞在で食い違う、③AmsterdamUMCdbは構造的整合性は最も高いが61.4%の入院に診断がなく英語とオランダ語が混在する、④<strong>3つとも敗血症の診断時刻を持たない</strong>。さらに「AI研究の前に確認すべき10の落とし穴」を図として提示した</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 敗血症AI研究の土台になっている3つの公開ICUデータベースを実際に叩いてみると、<strong>欠損・重複・用語ゆれ・人種の偏りが構造的に存在し、とりわけ3つとも敗血症の発症時刻を持たないため、早期介入の解析は必ず導出定義に依存する</strong>。</p>
+</div>
+<ul><li><strong>対象</strong>：MIMIC-IV（単一施設・2008〜2019・65,366例）、eICU-CRD（多施設・2014〜2015・139,367例）、AmsterdamUMCdb（単一施設・2003〜2016・20,109例）</li><li><strong>方法</strong>：完全性・内的整合性・用語標準化・構造的冗長性の4次元を定義し、構造化クエリによる定量評価＋近似重複語の手動セマンティックレビュー＋データベース間の構造比較を組み合わせた</li><li><strong>診断コーディング</strong>：診断ラベルの種類は MIMIC-IV 17,557、eICU-CRD 393、AmsterdamUMCdb 443。診断がまったく無い入院は 0.03% / 2% / 61%。敗血症診断のある入院は 16.5% / 13.3% / 2.6% と6倍の開きがあるが、著者はこれを有病率の差ではなくコーディング慣行と記録の完全性の差と解釈している</li><li><strong>薬剤</strong>：MIMIC-IV は処方（用量・投与形態・頻度・期間）が全て揃う唯一のデータベースだが、実投与テーブル（emar_detail）では用量58%・投与経路49%が欠測。eICU-CRD は処方テーブル自体を持たない。eMARシステムは2011年以降の導入で、ICU患者の53.1%では利用できない</li><li><strong>微生物</strong>：培養菌名は3つとも利用可能。MIMIC-IV の "quantity" 属性は99.9%欠測。感受性の解釈欄には R/I/S に加えて定義されていない D・Z・N が混入する</li><li><strong>検査値</strong>：完全性は高い（MIMIC-IV 99.1%・eICU-CRD 99.1%の入院で利用可能）。行数は MIMIC-IV 4,282,501 に対し eICU-CRD 39,132,531</li><li><strong>死亡指標</strong>：MIMIC-IV では退院区分が "DIED" なのに死亡日時・死亡日が無い入院が158件。eICU-CRD ではICU死亡と院内死亡が食い違う滞在が7,319件</li><li><strong>SOFA</strong>：3つとも6臓器分の変数は揃うが、検査値・酸素化・昇圧薬の時刻合わせが必要。欠測を暗黙に正常とみなすと臓器障害が系統的に過小評価され、機械学習のラベルにノイズが乗る</li><li><strong>人口構成</strong>：MIMIC-IV・eICU-CRD とも白人が65.1%・77.5%を占め、AmsterdamUMCdb は人種データを持たない。女性比率は44.2% / 46.2% / 34.1%。小児が含まれるのは eICU-CRD のみ</li><li><strong>結論</strong>：公開ICUデータベースは敗血症研究にとって価値ある資源だが、厳密な前処理なしにAIに投入すべきではなく、標準化されたデータ収集の整備が必要である</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 公開ICUデータベースとは何か（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>公開ICUデータベース（open-access ICU database）</strong> とは、実在のICUの電子カルテ（EHR）から個人識別情報を除いたうえで、研究者が申請すれば入手できる形で公開された患者単位のデータセットを指す。集中治療領域のAI研究の大半はこの3つ（＋HiRID）の上に建っている。</p>
+<ul><li><strong>MIMIC-IV（Medical Information Mart for Intensive Care IV）</strong>：米国 Beth Israel Deaconess Medical Center 単一施設。2008〜2019年。ICUだけでなく病院全体のデータを含む。PhysioNet 上で公開され、CITI 認証を取れば誰でも入手できる。最新版は2024年10月</li><li><strong>eICU-CRD（eICU Collaborative Research Database）</strong>：米国の遠隔ICUプログラム（Philips eICU）に参加する多数の病院から集めた多施設データ。2014〜2015年の2年分。最新版は2019年4月。時刻は実時刻ではなく入室からのオフセット（分）で記録される</li><li><strong>AmsterdamUMCdb</strong>：オランダ・アムステルダム大学医療センター単一施設。2003〜2016年。欧州の DANS リポジトリで公開され、CITI 認証に加えて管理者の個別承認が要る。タイムスタンプはミリ秒単位という高精度だが、自由記載欄にオランダ語が混じる。最新版は2020年2月</li><li><strong>HiRID</strong>：スイスの高時間分解能ICUデータセット。本研究では選定基準の説明に登場するが、解析対象からは外れている</li></ul>
+<p><strong>CITI認証</strong>：米国発の研究倫理eラーニング。"Data or Specimens Only Research" のコースを修了すると、PhysioNet の credentialed access（資格審査付きアクセス）が申請できる。数日から数週間かかる。</p>
+<p><strong>敗血症の定義（Sepsis-3）</strong>：感染が疑われる状況で SOFA スコアが2点以上上昇したとき、その最初の時点を敗血症発症とする。つまり<strong>敗血症の判定には「感染の疑い」と「臓器障害」の両方に時刻が要る</strong>。この論文の核心はここにあり、3つのデータベースはどれもその時刻を直接は持っていない。</p>
+<p><strong>SOFA（Sequential Organ Failure Assessment）</strong>：呼吸（Pao2/Fio2）・凝固（血小板）・肝（ビリルビン）・循環（平均動脈圧と昇圧薬用量）・中枢神経（GCS）・腎（クレアチニン／尿量）の6臓器を各0〜4点で評価する。<strong>用量が要る</strong>のが循環系で、昇圧薬の用量が欠測すると点数が付けられない。</p>
+<p><strong>eMAR（electronic Medication Administration Record）</strong>：看護師が実際に投与した薬剤を記録する電子システム。処方（prescription）ではなく投与（administration）を捉えるため、time-to-antibiotics の議論には eMAR 側のデータが要る。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>敗血症は感染に対する制御不能な宿主反応によって生じる生命を脅かす症候群であり、世界のICUにおける主要な死因であり続けている。AIの登場により、大規模EHRデータセットを用いてフェノタイプをモデル化し、転帰を予測し、治療戦略を評価する研究が急増した。人口統計・検査値・生理学的パラメータという幅広い特徴量が使えることがその推進力になっている。</p>
+<p>公開ICUデータベースは、入手しやすさ・コホートの大きさ・詳細な縦断的臨床情報から、この分野の中心的資源になった。これらを用いた出版数の増加自体が、臨床研究における重要性を裏づけている。AIは敗血症のリスク因子同定や最適治療戦略の探索に用いられてきた（強化学習によるAI Clinician、OVISS試験の昇圧薬開始タイミング、機械学習由来の敗血症バンドルなど）。</p>
+<p>しかし敗血症のAI研究は方法論的に不均一であり、モデル出力の信頼性は入力データの正確さ・完全性・標準化に根本的に依存する。Sauer らは4つの主要な成人重症患者向け公開データベース（MIMIC-IV、AmsterdamUMCdb、eICU-CRD、HiRID）をレビューし、構造と粒度の違いを示したが、<strong>敗血症に関連したデータ品質の問題は検討しなかった</strong>。</p>
+<p>そこで著者らは、ガイドラインに沿った敗血症診療を再現するために不可欠な変数について、完全性・内的整合性・用語の一貫性・構造的冗長性という観点から MIMIC-IV・eICU-CRD・AmsterdamUMCdb の品質と使い勝手を調べることを目的とした。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：記述的比較デザイン。データの完全性・用語の一貫性・構造的整合性・臨床的な使い勝手を評価する。抗菌薬投与・血行動態サポート・死亡指標といった敗血症関連変数に重点を置く</li><li><strong>対象（データベース選定）</strong>：以下5つの基準で3つを選定した</li></ul>
+<ol><li>適切なデータ利用契約のもとで公開されていること</li><li>ICU由来の構造化EHRを含むこと</li><li>敗血症管理を研究するのに十分な臨床的粒度があること</li><li>詳細なドキュメントと活発な研究コミュニティがあること</li><li>AIモデルへの統合の可能性があること</li></ol>
+<p>3つは構造・標準化の水準・文脈（単一施設か多施設か、言語）が互いに異なっており、データ品質の比較分析に適していると判断された</p>
+<ul><li><strong>評価する4つのデータ品質指標</strong>（臨床情報学とデータサイエンスの原則に基づいて著者が定義）</li></ul>
+<ol><li><strong>データの完全性</strong>：診断・薬剤投与・微生物結果など主要変数の欠測割合</li><li><strong>内的整合性</strong>：処方用量と投与用量の一致、連結されたフィールド間の論理関係</li><li><strong>用語の標準化</strong>：単位、ICD-9/10 コード、自由記載の医学用語の統一性</li><li><strong>冗長性と機能的依存</strong>：同じ情報が別の形で繰り返されていないか、同一の臨床概念が複数のフィールドやテーブルにまたがって格納されていないか</li></ol>
+<p>加えて、敗血症診療の中核（抗菌薬投与の時刻と内容、輸液蘇生、血行動態サポート）を再構成するのに必要な情報にアクセスできるかを評価した</p>
+<ul><li><strong>評価方法</strong>：4段階の混合手法</li></ul>
+<ol><li>主要テーブルについて欠測値・ユニーク値・フィールド完全性を定量評価。診断名・薬剤名・処置記述のユニーク数から不均一性を推定</li><li>列間の冗長性と依存を検討（item と itemid のような機能的関係を同定）</li><li>医学概念の軽量なセマンティックレビュー。近似重複語（"grams" と "g" など）を手動で点検し、データ調和とAI学習用ラベル付けへの影響を評価</li><li>3データベース横断の構造レビュー。テーブル構成・コーディング体系・入力方法（手入力かドロップダウンか）の違いを評価</li></ol>
+<ul><li><strong>主要・副次アウトカム</strong>：仮説検定を伴う試験ではないため、事前定義された主要アウトカムはない。報告される量は欠測率・ユニーク値数・不整合件数といった記述統計に限られる</li><li><strong>解析・限界</strong>：統計的推論・サンプルサイズ計算・事前登録はない。詳細な方法は補遺に、解析スクリプトは GitHub（JoanneJegou/BachelorThesis）に公開されている。著者自身が挙げる限界は、①対象を3データベースに絞ったこと、②AmsterdamUMCdb のオランダ語という言語的制約、③これらのデータベースを使った既存研究の著者全員に連絡を取り、どのようなデータ管理を行ったかを確認することはできなかったこと</li></ul>
+<h3>4. 結果① データベースの基本特性</h3>
+<p>3つのデータベースは規模・構造・ガバナンスが実質的に異なっていた。MIMIC-IV と AmsterdamUMCdb は大学病院由来の単一施設データベース、eICU-CRD は複数病院を集約した多施設データベースである。</p>
+<ul><li><strong>MIMIC-IV</strong>：65,366例、85,242入院、94,458 ICU滞在（2008〜2019年）</li><li><strong>eICU-CRD</strong>：139,367例、166,355入院、200,859 ICU滞在（2014〜2015年）と最大</li><li><strong>AmsterdamUMCdb</strong>：20,109例、23,106入院（2003〜2016年）。ICU滞在数は利用不可</li></ul>
+<p>人口統計は概ね比較可能だった。年齢中央値は MIMIC-IV・eICU-CRD ともに65歳。eICU-CRD では再同定を防ぐため最高年齢が "&gt; 89" と表示される。<strong>MIMIC-IV には体重が400 kgを超える非現実的な患者が1,997例おり、そのうち2例は20,000 kg と記録されていた</strong>。この2つのデータベースは白人が優勢（65.1%と77.5%）で、AmsterdamUMCdb は人種データを提供していない。小児が含まれるのは eICU-CRD のみである。</p>
+<p>女性比率は MIMIC-IV 44.2%、eICU-CRD 46.2%に対し AmsterdamUMCdb は34.1%。人口統計の欠測は全体に限定的だが、AmsterdamUMCdb では性別が2.15%欠測していた。ICU在室日数の平均は3.63日・6.78日・4.63日。複数回の入院は珍しくなく、MIMIC-IV で11,743例、eICU-CRD で38,483例、AmsterdamUMCdb で2,320例が該当した。</p>
+<p>著者は、これらの構造的差異が一般化可能性とアルゴリズムのバイアスに影響すると述べている。</p>
+<h4>Table 1. 3データベースの利用可能データの比較（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>データの詳細</th><th>MIMIC-IV</th><th>eICU-CRD</th><th>AmsterdamUMCdb</th></tr></thead>
+<tbody>
+<tr><td>アクセス経路</td><td>PhysioNet</td><td>PhysioNet</td><td>DANS</td></tr>
+<tr><td>資格審査付きアクセス</td><td>あり</td><td>あり</td><td>なし</td></tr>
+<tr><td>CITI認証</td><td>必要</td><td>必要</td><td>必要</td></tr>
+<tr><td>データベース管理者の承認</td><td>不要</td><td>不要</td><td>必要</td></tr>
+<tr><td>データベースの性格</td><td>単一施設 2008–2019（ICU以外も含む）</td><td>多施設 2014–2015</td><td>単一施設 2003–2016</td></tr>
+<tr><td>最新版の公開時期</td><td>2024年10月</td><td>2019年4月</td><td>2020年2月</td></tr>
+<tr><td>患者数</td><td>65,366</td><td>139,367</td><td>20,109</td></tr>
+<tr><td>ICU滞在数</td><td>94,458</td><td>200,859</td><td>利用不可</td></tr>
+<tr><td>入院数</td><td>85,242</td><td>166,355</td><td>23,106</td></tr>
+<tr><td>複数回入院した患者数</td><td>11,743</td><td>38,483</td><td>2,320</td></tr>
+<tr><td>ICU平均在室日数（日）</td><td>3.6</td><td>6.8</td><td>4.6</td></tr>
+<tr><td>年齢中央値（IQR）</td><td>65（53–76）</td><td>65（52–76）</td><td>利用不可</td></tr>
+<tr><td>年齢の欠測</td><td>0</td><td>84</td><td>0</td></tr>
+<tr><td>女性の割合</td><td>44%</td><td>46%</td><td>34%</td></tr>
+<tr><td>性別の欠測</td><td>0%</td><td>0.07%</td><td>2%</td></tr>
+<tr><td>白人の割合</td><td>65%</td><td>78%</td><td>利用不可</td></tr>
+<tr><td>診断の行数</td><td>1,524,373</td><td>200,859</td><td>91,279</td></tr>
+<tr><td>診断名のユニーク数</td><td>17,557</td><td>393</td><td>443</td></tr>
+<tr><td>検出された不整合</td><td>181</td><td>1</td><td>2</td></tr>
+<tr><td>診断のない入院</td><td>24（0.03%）</td><td>3,243（2%）</td><td>14,185（61%）</td></tr>
+<tr><td>敗血症診断のある入院</td><td>14,040（17%）</td><td>22,109（13%）</td><td>603（3%）</td></tr>
+<tr><td>処方：用量</td><td>あり</td><td>なし</td><td>あり</td></tr>
+<tr><td>処方：投与形態</td><td>あり</td><td>なし</td><td>なし</td></tr>
+<tr><td>処方：頻度</td><td>あり</td><td>なし</td><td>なし</td></tr>
+<tr><td>処方：期間</td><td>あり</td><td>なし</td><td>なし</td></tr>
+<tr><td>投与：用量</td><td>あり（58%欠測）</td><td>あり</td><td>あり</td></tr>
+<tr><td>投与：投与形態</td><td>あり（49%欠測）</td><td>あり</td><td>利用不可</td></tr>
+<tr><td>投与：頻度</td><td>あり</td><td>あり</td><td>なし</td></tr>
+<tr><td>投与：期間</td><td>あり</td><td>あり</td><td>あり</td></tr>
+</tbody></table></div>
+<p>原表の注記：この表は「診断がまったく記録されていない入院」と「敗血症診断が同定された入院」の乖離を示している。</p>
+<h3>5. 結果② 診断コーディングと敗血症の同定</h3>
+<p>診断のコーディング慣行はデータベース間で大きく異なり、敗血症症例の同定に影響していた。</p>
+<ul><li><strong>MIMIC-IV</strong>：1,524,373件の診断エントリが17,557種類の診断ラベルに対応。標準化されたコード体系を用いているが、ICD-9 と ICD-10 が併存することで冗長性が生じ、同一の臨床実体を指す複数のコードが存在する</li><li><strong>eICU-CRD</strong>：構造化された診断テーブルに記録され、200,859 ICU滞在に対して3,933種類の診断文字列が存在する（本文の記載。Table 1 では393と記載されており食い違う）。MIMIC-IV より少ないが、書式と用語の不均一性は依然として認められる</li><li><strong>AmsterdamUMCdb</strong>：91,279件の診断レコードが443種類のラベルに対応。しかし<strong>23,106入院のうち14,185（61.4%）に診断が記録されていない</strong>という大きな制約があり、特定の臨床コホートの同定を著しく妨げる</li></ul>
+<p>診断ベースで敗血症関連入院を同定すると、MIMIC-IV 14,040件（16.5%）、eICU-CRD 22,109件（13.3%）、AmsterdamUMCdb 603件（2.6%）となった。著者はこの差を、真の疾患有病率の差ではなく、診断コーディング慣行と記録の完全性の差を反映したものと解釈している。</p>
+<p>さらに、ICDコードに付随する診断タイムスタンプは<strong>後ろ向きに付与されたもの</strong>であり、実際にいつ診断が下されたか（とりわけ敗血症について）を確定する用途には使えない。</p>
+<h3>6. 結果③ 用語の変動とデータ書式</h3>
+<p>複数のデータ領域で用語と書式の不均一性が観察された。</p>
+<p>MIMIC-IV の17,557種類の診断ラベルには、<strong>同一の臨床状態を指す近似重複が174種類以上</strong>含まれていた。不整合の型は、句読点の違い、語順の変動、わずかな文字列の差である。</p>
+<p>薬剤関連の変数は、非標準的な略語を伴って特に高い変動を示した。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>MIMIC-IV（pharmacy テーブル）</th><th>eICU-CRD（medication テーブル）</th></tr></thead>
+<tbody>
+<tr><td>薬剤名のユニーク数</td><td>5,162</td><td>1,411</td></tr>
+<tr><td>大文字小文字の不整合</td><td>4,735</td><td>127</td></tr>
+<tr><td>スペースの違い</td><td>184</td><td>17</td></tr>
+<tr><td>誤字（typographical variants）</td><td>232超</td><td>48</td></tr>
+<tr><td>投与頻度の書式</td><td>90種類</td><td>533種類の変異</td></tr>
+<tr><td>用量の単位</td><td>78種類</td><td>記載なし</td></tr>
+</tbody></table></div>
+<p>単位の不均一性も薬剤用量変数にまたがって観察された。"grams" と "g"、"re" と "rectal"、"tab" と "tablet"、"po" と "oral" のように等価な単位や投与経路が別のエントリとして記録されており、定量解析の前に調和が必要になる。</p>
+<h3>7. 結果④ データの完全性</h3>
+<p>敗血症の診断と管理に関わる変数の可用性は、しばしば不揃いだった。</p>
+<ul><li><strong>診断時刻</strong>：MIMIC-IV は診断の時刻を提供していない</li><li><strong>eMAR</strong>：投薬エラーを減らし与薬ラウンドを効率化するための薬剤管理システムだが、導入は2011年以降で、<strong>ICU患者の53.1%では利用できない</strong></li><li><strong>微生物</strong>：培養菌名フィールドは3つとも利用可能。MIMIC-IV の microbiologyevents テーブルには "quantity" 属性があるが<strong>99.9%が欠測</strong>。この変数は培養陽性の判定には不要だが、菌の発育の定量評価を不可能にする。感受性の interpretation 属性には標準的な "R"（耐性）・"I"（中間）・"S"（感受性）に加えて <strong>"D"・"Z"・"N" という値が混入しており、ドキュメントに定義がない</strong>。AmsterdamUMCdb では言語の不均一性が病原体の自動分類の障壁になる</li><li><strong>薬剤投与</strong>：投与時刻は3つともほぼ完全だが、内容の欠測は大きい。MIMIC-IV の emar_detail テーブルでは<strong>用量が58%欠測</strong>しており用量反応解析を制限し、<strong>投与経路が49%欠測</strong>している。これらは投与された薬剤量の決定と、抗菌薬治療を評価する研究での静注と経口の区別に重要である</li><li><strong>輸液</strong>：注入量は3つとも利用可能だが、単位の調和が必要</li><li><strong>検査値</strong>：比較的完全。MIMIC-IV で84,469入院（99.1%）、eICU-CRD で164,924入院（99.1%）に検査データがある。データ量は大きく異なり、MIMIC-IV の4,282,501行に対し eICU-CRD は39,132,531行</li></ul>
+<h3>8. 結果⑤ 構造的冗長性とデータの依存関係</h3>
+<p>構造的冗長性は特に AmsterdamUMCdb で観察された。一部のテーブルには、同一の概念をテキストラベルと数値識別子の両方で表現する属性のペアが含まれていた。こうした機能的依存はクエリの構築を簡単にする一方、テーブル内に重複情報を持ち込む。</p>
+<p>この冗長性が解析に必ず悪影響を及ぼすわけではないが、<strong>片方のフィールドだけが更新されて対応するフィールドが更新されないと不整合が生じうる</strong>。したがって前処理の段階で、標準化された識別子フィールドを慎重に選ぶ必要がある。</p>
+<p>これらの不整合は補遺 Supplementary Table 1 に MIMIC-IV と eICU-CRD について示されている。AmsterdamUMCdb についてはオランダ語のため、すべての解析を正確に実施することはできなかった。</p>
+<h3>9. 結果⑥ 導出変数への影響 — 敗血症の発症時刻という不在</h3>
+<p>データベースは豊富な臨床情報を含むにもかかわらず、<strong>どれも敗血症の臨床的発症について信頼できるタイムスタンプを直接には提供していない</strong>。診断コードは後ろ向きに付与されるため、発症時刻の決定には使えない。したがって敗血症のタイミングに関する解析は、感染指標と臓器障害変数の組み合わせに基づく<strong>導出定義（derived definitions）</strong> に依存することになる。</p>
+<p>こうした導出構成物の信頼性は、検査測定・微生物結果・昇圧薬や抗菌薬といった治療データの完全性と時間的整合性に依存する。薬剤用量情報の欠測、用語の不整合、記録慣行のばらつきは、SOFAスコア・推定される敗血症発症時刻・早期治療バンドルの遵守といった導出変数の正確さに影響しうる。さらにイベントの時刻は、事務的なコーディングではなく操作的定義（例：培養と時間的に関連した臓器障害）に依拠せざるをえない。</p>
+<h3>10. 結果⑦ SOFAスコア算出の実現可能性</h3>
+<p>3つのデータベースはいずれも SOFA の6臓器成分を計算するための変数を含んでいた。ただし実装には、検査値・酸素化パラメータ・昇圧薬投与の時間的整合が必要になる。</p>
+<ul><li><strong>MIMIC-IV</strong>：昇圧薬投与のタイムスタンプは極めて完全（欠測0.5%未満）だが、用量の精度が時に欠ける。Fio2 と Pao2 は独立して記録されるため、両者を対応づける仮定が必要。ビリルビンとGCSの欠測には補完戦略が要る</li><li><strong>eICU-CRD</strong>：時刻オフセットが提供されるため逐次計算がしやすい可能性があるが、ICU死亡と院内死亡のエンドポイントを区別しなければならない</li><li><strong>AmsterdamUMCdb</strong>：ミリ秒単位のタイムスタンプがあり精密な時間モデリングが可能だが、一部のテキストフィールドは翻訳が必要</li></ul>
+<p>データセット横断で共通する問題として、<strong>欠測データが暗黙のうちに正常値として扱われうる</strong>点がある。これは臓器障害の系統的な過小評価を生み、敗血症発症を予測するよう学習させた機械学習モデルにラベルノイズを持ち込む。著者は具体例を挙げている。感染が疑われ、Pao2 と Fio2 の測定時刻がずれており、昇圧薬用量やビリルビンが欠測している患者では、解析上の仮定（欠測を正常と補完するかどうか）次第で、同一患者が敗血症発症の基準（感染の疑いの文脈で SOFA が2点以上上昇した最初の時点）を満たしたり満たさなかったりする。</p>
+<h4>Table 2. 一般的な敗血症の定義・臨床指標を各データベースで実装できるか（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>敗血症の臨床上の要点</th><th>必要なデータ要素</th><th>MIMIC-IV</th><th>eICU-CRD</th><th>AmsterdamUMCdb</th><th>解析上の仮定に伴うリスク</th></tr></thead>
+<tbody>
+<tr><td>SOFAスコア（6臓器すべて）</td><td>Pao2、Fio2、人工呼吸、血小板、ビリルビン、平均動脈圧、昇圧薬用量、GCS、クレアチニン／尿量</td><td>利用可能だが検査値と昇圧薬用量の時刻がずれる。一部で昇圧薬用量フィールドが欠測。GCSも時に不完全</td><td>利用可能。昇圧薬曝露は記録されるが用量の粒度は不定。ICU／院内転帰の不一致がある</td><td>利用可能。構造的整合性は高い。一部の変数はコード化テーブルに埋め込まれ、自由記載は言語の壁がある</td><td>中〜高（欠測検査値を正常とする、昇圧薬強度を推定する、時刻を手作業で合わせる）</td></tr>
+<tr><td>敗血症イベント</td><td>血液培養、4日以上の抗菌薬、前後2日以内の臓器障害</td><td>血液培養と抗菌薬は利用可能。抗菌薬の経路・用量の欠測が曝露評価に影響しうる</td><td>抗菌薬と培養は構造化が良好。オフセット時刻は生理学的発症と一致しない可能性</td><td>抗菌薬は詳細。敗血症診断の有病割合は最低。診断コーディングの粒度が低い</td><td>中（感染疑いの操作的定義が必要。抗菌薬の連続性に関する仮定が必要）</td></tr>
+<tr><td>臓器障害発症の時刻</td><td>1時間ごとの検査値、昇圧薬開始、酸素化指標</td><td>明示的な発症変数なし。検査値・昇圧薬の時系列から再構成が必要。ICDコーディングは後ろ向き</td><td>診断入力のオフセットはあるが生理学的発症ではない。臓器障害は仮定を置けば計算可能</td><td>ミリ秒タイムスタンプが利用可能。構造化されているが一部の変数は間接的にコード化</td><td>高（導出構成物であり、時刻の欠測と測定頻度に敏感）</td></tr>
+<tr><td>抗菌薬までの時間</td><td>正確な投与タイムスタンプと投与経路</td><td>開始・終了時刻は利用可能。ただし dose_given と route が一部で50%超欠測。タイムスタンプの欠測は最小</td><td>タイムスタンプとオフセットが利用可能。medication テーブルは比較的完全</td><td>薬剤投与時刻は詳細。単位が時に非標準</td><td>低〜中（用量が欠測すると用量の妥当性が不明。投与経路の誤分類がありうる）</td></tr>
+<tr><td>早期輸液蘇生</td><td>注入量、患者体重、タイムスタンプ</td><td>注入時刻はある。まれに極端な体重の外れ値（400 kg超）があり清掃が必要</td><td>注入データは利用可能。小児が含まれるためコホート限定が複雑</td><td>注入データは構造化。極端な身体計測値の外れ値は少ない</td><td>中（外れ値の除去と体重の妥当性確認が必要）</td></tr>
+<tr><td>培養陽性の判定</td><td>培養結果、菌名、感受性の解釈（R/I/S）</td><td>解釈コードに未定義の値が含まれる。微生物の "quantity" は99.9%欠測だが陽性判定には不要</td><td>菌名フィールドは構造化。自由記載の変異は少ない</td><td>英語とオランダ語が混在した菌名。翻訳が必要</td><td>中（菌名の調和とコンタミネーションの除外が必要）</td></tr>
+</tbody></table></div>
+<p>原表の注記：「敗血症イベント」とは、利用可能な縦断的臨床データを用いて、感染疑いと急性臓器障害を伴う臨床的に同定可能なエピソードを再構成することを指す。この再構成の実現可能性は、関連変数の可用性・完全性・時間分解能に依存する。</p>
+<h3>11. 結果⑧ 死亡指標</h3>
+<p>死亡は MIMIC-IV と eICU-CRD で複数の非等価な変数によって表現されていた。</p>
+<ul><li><strong>MIMIC-IV</strong>：退院区分が "DIED" であるにもかかわらず、対応する deathtime（死亡時刻）や date-of-death（死亡日）のエントリを持たない入院が158件あった</li><li><strong>eICU-CRD</strong>：ICU死亡フィールドと院内死亡フィールドが食い違う ICU滞在が7,319件あった</li><li><strong>AmsterdamUMCdb</strong>：スキーマ上、異なるテーブルに等価な属性が存在する冗長性が認められた</li></ul>
+<p>こうした不一致は、転帰モデリングにおけるエンドポイント定義を変えてしまいうる。</p>
+<h4>Table 3. データ品質評価の4つの主要次元における比較結果（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>次元</th><th>MIMIC-IV</th><th>eICU-CRD</th><th>AmsterdamUMCdb</th></tr></thead>
+<tbody>
+<tr><td>データの冗長性と機能的依存</td><td>ICD-9とICD-10の間の冗長性と誤字変異、17,000超の診断文字列／死亡指標の重複（deathtime、dod、discharge_location）／pharmacy識別子の繰り返し／item と itemid の間の機能的依存</td><td>52行で stoptime が starttime より前／複数の死亡フィールドで値が不整合／unit と hospital の退院指標が重複／大文字小文字とスペースの誤りはない</td><td>テキスト識別子とコード識別子が冗長／item と itemid が厳密に等価／drugitems テーブル間の重複／不整合は最小限</td></tr>
+<tr><td>用語と書式の不整合</td><td>薬剤名の高い変動（大文字小文字の誤り4,735件、誤字232件超）、頻度の書式90種類、用量単位78種類／非標準的な句読点とスペース</td><td>ドロップダウン入力のため不整合は少ない／それでも薬剤名の誤字48件／頻度書式の変異533種類／施設間の広い不均一性</td><td>drugitems の非標準的な単位／言語の壁により評価が限定的</td></tr>
+<tr><td>欠測または不完全なデータ</td><td>微生物の quantity が99.9%欠測／薬剤の投与経路が50%超欠測／ICU滞在の11.5%で診断が欠如／53.1%の患者で eMAR が利用不可</td><td>入院の1.9%で診断が欠測／完全性は高いが自由記載欄には依然として欠測がある</td><td>入院の61.4%で診断なし／薬剤フィールドで単位が欠測</td></tr>
+<tr><td>時間的・構造的な不均一性</td><td>敗血症診断の時刻がない／タイムスタンプの論理が不整合／死亡タイムスタンプが不整合</td><td>テーブル間でオフセットが異なる／診断のオフセットはあるが臨床的な決定時刻としては信頼できない／ICU死亡と院内死亡の間に不整合</td><td>タイムスタンプは初回入室からのミリ秒／敗血症診断の時刻がない／オランダ語エントリによる構造的差異</td></tr>
+</tbody></table></div>
+<h3>12. 結果⑨ AI研究の前に確認すべき10の落とし穴（Figure 1）</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007319" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007319）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 公開ICUデータベースをAI研究に用いる際の適切性に影響する制約。最上段の青いボックスが図の題（公開ICUデータベースの制約とAI研究における適切性への影響）で、そこから下向きの矢印が3つの群を縦につなぐ。1段目は赤の見出し「データ品質の問題」で、その下にピンク色の4枚のカードが横に並ぶ。1つ目「データの冗長性と機能的依存」＝同じ情報が複数の場所に格納される、テーブル間で連結されたフィールドは更新時に整合性の問題を生みうる。2つ目「用語と書式の不整合」＝大文字小文字・句読点・スペース・略語・語順の違い、同じ疾患や薬剤を表す複数の書き方。3つ目「欠測または不完全なデータ」＝重要フィールド（微生物・薬剤など）の空値の割合、診断や治療のフィールドが空欄またはプレースホルダに置き換えられている。4つ目「時間的・構造的な不均一性」＝同一データセット内でのICD-9とICD-10の併用、データ入力の慣行のばらつき（手入力かドロップダウンか）。2段目はオレンジの見出し「一般化可能性と文脈の制約」で、その下にオレンジ色の3枚のカード。5つ目「一般化可能性の限界」＝単一施設（MIMIC-IVとAmsterdamUMCdb）と多施設（eICU-CRD）の違い、施設固有の診療慣行が結果を偏らせうる、母集団の代表性。6つ目「言語とローカライズの壁」＝一部の臨床内容がオランダ語（AmsterdamUMCdb）でアクセス性を制限する。7つ目「非標準的な略語と用語」＝統一されていない医学語彙の使用、自然言語処理や機械学習モデルでの誤分類のリスク。3段目は緑の見出し「コホート定義と前処理の必要性」で、その下に緑色の3枚のカード。8つ目「診断」＝自由記載や多様なコードの手作業でのフィルタリングが必要、コホート定義がデータベース間で調和していない。9つ目「データ清掃と調和の必要性」＝信頼できるAIの結果のためには前処理が不可欠、単位・用語・変数名の意味的正規化が必要。10つ目「人による監督は依然として不可欠」＝曖昧または不整合なエントリの解釈には専門家の関与が必要、AIパイプラインでの盲目的な使用は誤解を招くまたは偏った結果につながりうる。原図・無改変。</p>
+</div>
+<h3>13. 考察</h3>
+<p>著者らの解析は、構造的不整合・欠測データ・コーディングの冗長性という有意なデータ品質の問題を明らかにし、これは Sauer らの先行系統的レビューと整合していた。3つとも敗血症診断の時刻という決定的な情報を欠いており、早期介入戦略の解析を妨げる。データセット間で敗血症の割合が大きく異なることは、診断情報の欠落・不完全さから生じる潜在的な制約を浮き彫りにする。記録されたデータの不整合、とりわけ死亡指標の不整合もまた、頑健な転帰解析を妨げる。</p>
+<p><strong>データラベリングの前提としての不整合検出</strong>：文字列の列で不整合を検出することは、データラベリングの土台であるため決定的に重要である。ラベリングとは、AIモデルが理解し利用できるように、データに文脈と分類を与える意味のあるラベルを割り当てることを指す。ラベル付きデータはデータ要素や転帰の分類を可能にし、AIアルゴリズムが学習する道しるべになる。医療データの完全な解析には、各フィールドの妥当性を担保するために医療専門職の関与が必要である。</p>
+<p><strong>同じ概念に別の表記があること自体は必ずしも問題ではない</strong>。それが問題になるかどうかは、研究者の目的とデータの解析方法に大きく依存する。人間の専門家はこれらを容易に等価と認識できるが、自動化されたシステムやスクリプトは、明示的に指示されない限り認識できない。したがってこれらのデータベースを扱う研究者は、そうした変異の存在を意識しておくことが重要である。差異が同一の基礎概念を指しうると認識することが、誤解釈の防止とより正確な結果につながる。大規模臨床データベースを用いる解析パイプラインには、徹底したデータ清掃と標準化の工程が必要である。医療専門職による確認と臨床研究は依然として必要であり、<strong>敗血症管理のために開発されたAIツールは診療ガイドラインを置き換えるものではなく、あくまで支援するものであるべきだ</strong>と著者は述べている。</p>
+<p><strong>人種構成の偏りとアルゴリズム公平性</strong>：3つとも白人が優勢であり、これがAIモデルにバイアスを持ち込みうる。医療者は患者の特性に応じて判断と意思決定を適応させることを学ぶ。さらに、意図的であれ社会的偏見やステレオタイプによるものであれ、医療専門職によって行われるマイノリティへの差別と医療格差がデータに反映されうる。このバイアスがAIモデルに「学習」され、格差が再生産されうる。医療におけるAIの利用はデータバイアスの問題を提起し、AIの公平性はその普及に対する挑戦となる。人種・民族は、患者の多様性が予測モデルにとって深く関連することの明白な例である。Chen らのアルゴリズム公平性の研究が示すように、The Cancer Genome Atlas における代表性の欠如（白人患者が82.0%）は、そのデータで学習したモデルがマイノリティにとってより悪い転帰をもたらすことにつながる。したがってAIモデルを適用する研究では、研究集団のプロフィールを描き出すことが不可欠であり、そこにアルゴリズムが持ちうるバイアスとモデルの妥当性の両方がかかっている。結果を一般化された応用に対して当然のものと受け取ってはならない。なお民族・人種情報の取得方法は米国とEUで異なり、AmsterdamUMCdb には人種も民族も記載されていない。</p>
+<p><strong>プレースホルダの誤読</strong>：米国と欧州における医療の公開法制と義務の解釈は、主として個人識別可能データの非開示に置かれている。データは完全に匿名化されているが、"—" のようなプレースホルダはソフトウェアやモデルによって欠測値と誤解釈されうる。さらに、ある列における情報の不在を示す非欠測値もまた考慮に入れる必要がある。</p>
+<p><strong>アクセスの障壁</strong>：これらのデータベースへのアクセスには相当な遅延と事務手続きが伴う。MIMIC-IV と eICU-CRD の取得には CITI 認証（データや検体のみを用いる研究に関するコースを含む）の修了が必要で、コースの空きと審査プロセス次第で数日から数週間かかる。加えて AmsterdamUMCdb は管理者による追加の承認を要し、アクセスまでの期間がさらに延びる。これらのデータベースをAI研究に用いるには法的・倫理的基準の遵守が必要であり、CITI 認証は研究者が人格の尊重・善行・正義といった倫理研究の原則を理解していることを担保する。さらに利用者はデータ利用契約に署名し、責任者を指名して意図する研究を記述したうえで資格審査付きアクセスを得なければならない。</p>
+<p><strong>著者が挙げる限界</strong>：①対象を3データベースに限定したこと、②AmsterdamUMCdb における言語の制約、③これらのデータベースに基づくすべての研究の著者に連絡を取り、指摘した限界のすべてを考慮したデータ管理が行われたかを分析することはできなかったこと。</p>
+<h3>14. 結論（著者による）</h3>
+<p>公開ICUデータベースは敗血症研究にとって価値ある資源を提供するが、信頼できるAIの結果を担保するにはデータ品質の限界に対処しなければならない。今後の課題は、データコーディングの一貫性を改善し、人口統計上の多様性を高め、決定的な臨床変数を正確かつ完全に捕捉することで、AIベース研究におけるこれらのデータベースの使い勝手を高めることである。</p>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<p><strong>内的整合性の問題（この論文自身の数字が食い違う）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>箇所</th><th>記載A</th><th>記載B</th><th>論点</th></tr></thead>
+<tbody>
+<tr><td>eICU-CRD の診断名ユニーク数</td><td>本文「3,933 distinct diagnosis strings」</td><td>Table 1「393」</td><td>一桁違う。どちらが正しいか判断できない。データ品質を論じる論文としては痛い</td></tr>
+<tr><td>MIMIC-IV の診断欠如</td><td>Table 1「24件（0.03%）」</td><td>Table 3「ICU滞在の11.5%で診断が欠如」</td><td>分母が入院か ICU滞在かで異なるが、その説明がない</td></tr>
+<tr><td>MIMIC-IV の近似重複</td><td>本文・抄録「174種類以上」</td><td>Table 1「検出された不整合 181」</td><td>定義の違いが説明されていない</td></tr>
+<tr><td>MIMIC-IV の投与経路欠測</td><td>本文・抄録「49%」</td><td>Table 3「50%超」・Table 2「50%超」</td><td>丸め方が統一されていない</td></tr>
+</tbody></table></div>
+<ul><li><strong>記述研究であり、影響の大きさは測っていない</strong>。「欠損が58%ある」ことは示されたが、それが実際にAIモデルの識別能や較正をどれだけ劣化させるかは検証されていない。たとえば同じコホートを異なる欠測補完で構築し、SOFAや敗血症発症判定がどれだけ変わるかを定量した感度分析があれば、主張はずっと強くなった。著者自身も具体例を「a practical example」として言葉で述べるにとどめている</li><li><strong>データ品質評価の枠組みが自前</strong>。Kahn らの harmonized data quality assessment terminology（conformance / completeness / plausibility）のような既存フレームワークに準拠していない。「臨床情報学とデータサイエンスの原則に基づいて定義した」とあるが、指標の選択と閾値の根拠は示されていない</li><li><strong>手動セマンティックレビューの再現性が担保されていない</strong>。著者自身が "lightweight semantic review" と呼んでおり、何件を誰が何人でレビューしたか、一致率はどうだったかの記載がない。「誤字232件超」「大文字小文字の誤り4,735件」がどのアルゴリズムまたは目視で数えられたかが読み取れない</li><li><strong>敗血症有病割合の差の解釈は仮説にとどまる</strong>。16.5% / 13.3% / 2.6% の差を「コーディング慣行の差であって真の有病率差ではない」と断じているが、eICU-CRD は米国の多施設（軽症も含む遠隔ICUプログラム参加病院）、MIMIC-IV は米国の三次医療単施設、AmsterdamUMCdb はオランダの大学病院ICUであり、<strong>case-mix が本当に違う可能性を排除する解析はしていない</strong>。AmsterdamUMCdb の61.4%が診断なしという事実は、分子ではなく分母の問題である可能性が高いが、それ自体は検証されていない</li><li><strong>HiRID が落ちている</strong>。選定基準の説明にも倫理声明にも HiRID が登場するのに、解析対象は3つである。除外理由が本文に明記されていない</li><li><strong>バージョンの古さ</strong>。eICU-CRD の最終版は2019年4月、AmsterdamUMCdb は2020年2月であり、2026年の論文としてはデータベース側が更新されていないことをむしろ問題として扱ってもよかった。逆に MIMIC-IV は2024年10月版で、著者がどのバージョンを解析したかは明示されていない</li><li><strong>起源が学士論文である</strong>。解析コードのリポジトリ名が BachelorThesis であり、著者貢献の記載でも第一著者と最終著者が原稿を書き、他3名がデータキュレーションとレビューに関与した構成になっている。これは研究の質を否定するものではないが、監査の網羅性（たとえば MIMIC-IV の全テーブルを見たのか、敗血症関連のテーブルだけか）の限界として読む必要がある</li><li><strong>Table 1 の「資格審査付きアクセス」の表記が紛らわしい</strong>。AmsterdamUMCdb は「credential access: No」だが「管理者の承認: Yes」となっており、実際にはアクセスがより厳しいのに No と読めてしまう</li><li><strong>提言のレベルにとどまる</strong>。「標準化されたデータ収集が必要」という結論は正しいが、具体的にどの標準（OMOP CDM、FHIR、Sepsis-3 の操作的定義の統一など）を採るべきかの議論がない。ここは JC で議論を広げられる余白である</li><li><strong>それでも実務的価値は高い</strong>。Figure 1 の10項目は、公開データベースを使う研究者にとって、そのまま前処理のチェックリストとして機能する。「これらのデータベースを使う論文を査読するときに何を確認するか」という観点で、本論文の Table 2 と Figure 1 は当面使える</li></ul>
+<h3>16. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>Surviving Sepsis Campaign 2021 ガイドライン（敗血症の定義と管理の前提）</td><td>Evans L, Rhodes A, Alhazzani W, et al. Intensive Care Med 2021;47:1181–1247</td></tr>
+<tr><td>公開データベースが集中治療研究に果たした貢献（スコーピングレビュー）</td><td>Kallout J, Lamer A, Grosjean J, et al. J Med Internet Res 2025;27:e57263</td></tr>
+<tr><td>AI Clinician（強化学習が敗血症の最適治療戦略を学習する）</td><td>Komorowski M, Celi LA, Badawi O, et al. Nat Med 2018;24:1716–1720</td></tr>
+<tr><td>OVISS（敗血症性ショックにおける最適なバソプレシン開始タイミング・強化学習）</td><td>Kalimouttou A, Kennedy JN, Feng J, et al. JAMA 2025;333:1688</td></tr>
+<tr><td>機械学習由来の敗血症バンドル</td><td>Kalimouttou A, Lerner I, Cheurfa C, et al. Intensive Care Med 2023;49:26–36</td></tr>
+<tr><td>早期オンダンセトロン使用と敗血症リスク（MIMIC-IV二次利用の例）</td><td>Liu X, Liu E, Kou Q. BMJ Open 2025;15:e087613</td></tr>
+<tr><td>敗血症関連AKIの早期予測モデル</td><td>Zhao CC, Nan ZH, Li B, et al. BMJ Open 2025;15:e088404</td></tr>
+<tr><td>機械学習によるICU循環不全の早期予測（HiRID由来）</td><td>Hyland SL, Faltys M, Hüser M, et al. Nat Med 2020;26:364–373</td></tr>
+<tr><td>公開データベース研究と従来型ICU研究の書誌計量比較</td><td>Ke Y, Yang R, Liu N. J Med Internet Res 2024;26:e48330</td></tr>
+<tr><td>敗血症における臨床意思決定支援AI</td><td>Wu M, Du X, Gu R, et al. Front Med 2021;8:665464</td></tr>
+<tr><td>MIMIC-II（公開ICUデータベースの原点）</td><td>Saeed M, Villarroel M, Reisner AT, et al. Crit Care Med 2011;39:952–960</td></tr>
+<tr><td>MIMIC-IV データセット記述論文</td><td>Johnson AEW, Bulgarelli L, Shen L, et al. Sci Data 2023;10:1</td></tr>
+<tr><td>AmsterdamUMCdb データセット記述論文（SCCM/ESICM合同データサイエンスタスクフォース）</td><td>Thoral PJ, Peppink JM, Driessen RH, et al. Crit Care Med 2021;49:e563–e577</td></tr>
+<tr><td>eICU-CRD データセット記述論文</td><td>Pollard TJ, Johnson AEW, Raffa JD, et al. Sci Data 2018;5:180178</td></tr>
+<tr><td>HiRID（高時間分解能ICUデータセット）</td><td>Faltys M, Zimmermann M, Lyu X, et al. PhysioNet</td></tr>
+<tr><td>公開ICUデータセットの系統的レビューと比較（本論文の直接の先行研究）</td><td>Sauer CM, Dam TA, Celi LA, et al. Crit Care Med 2022;50:e581–e588</td></tr>
+<tr><td>医療AIにおけるアルゴリズム公平性</td><td>Chen RJ, Wang JJ, Williamson DFK, et al. Nat Biomed Eng 2023;7:719–742</td></tr>
+<tr><td>人種・民族に基づく平等データの収集と利用に関する指針（EU）</td><td>European Commission, Directorate General for Justice and Consumers. 2021</td></tr>
+<tr><td>HIPAA（米国の医療情報の取り扱い）</td><td>ASPE. Health Insurance Portability and Accountability Act of 1996</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 MIMIC-IV・eICU-CRD・AmsterdamUMCdb はいずれも<strong>敗血症の発症時刻を持たない</strong>。<mark class="hl">公開ICUデータベースを使った「早期抗菌薬」「1時間バンドル」系のAI論文を読むときは、結論より先に「敗血症発症をどう導出したか」と「欠測をどう扱ったか」の2行を探し、そこが書かれていない論文の時間に関する主張は採用しない。</mark> 併せて、<mark class="hl">JIPADのように定義辞書を先に置くレジストリは用語ゆれの問題を構造的に回避できている一方、時系列の粒度が足りない。この論文はその弱点を埋める JIPAD×DPC連結の必要性を、海外データベース側から裏づける引用文献として使える。</mark></p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>コミュニケーション・ファシリテーターは家族のうつを減らさない — ICU入室から3か月間の伴走でもHADS-うつ差 −0.07（RCT 449例・CCM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">コミュニケーション・ファシリテーターは家族のうつを減らさない — ICU入室から3か月間の伴走でもHADS-うつ差 −0.07（RCT 449例・CCM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Creutzfeldt CJ, Brumback LC, Im J, et al. Facilitating Communication for Family Members of Critically Ill Patients During and Following a Hospital Stay: A Randomized Controlled Trial. Crit Care Med. 2026;54. DOI: 10.1097/CCM.0000000000007268</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2026-07-22）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000007268" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000007268</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Facilitating Communication for Family Members of Critically Ill Patients During and Following a Hospital Stay: A Randomized Controlled Trial</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「専任の伝え役を1人置けば家族の心理症状が減る」という設計は、当院でも採らない</strong>。本試験は449例・4年をかけて、ICU入室から退院後3か月まで訓練を受けた看護師が伴走しても、家族のうつ（HADS-うつ）が6か月間で 0.07点しか動かなかったことを示した。専任人員を新設する費用対効果の根拠にはならない。</li><li><strong>一方で「関係性」と「ゴール一致」は動いた</strong>。QUAL-E（Fam）関係性は +0.187点（95%CI 0.035〜0.339, p=0.0162）、ゴール一致ケアは OR 1.544（95%CI 0.999〜2.387, p=0.0504）。効果量は小さいが方向は一貫している。ICU意思決定支援・倫理プロジェクトで目標に置くべきは「うつの減少」ではなく、<strong>この2つ（家族が支えられ・情報を得て・関与できていると感じるか／患者の希望と実際の治療が一致しているか）</strong>である。</li><li><strong><span class="wl">ICテンプレート改訂</span> に入れるべき具体項目</strong>：本試験の介入は3成分（①コミュニケーションとgoals-of-care討議、②対立の調停と問題解決、③自己効力感の支援）で構成される。当院のICテンプレートに、(a)「患者本人が今選ぶとしたら、延命重視か苦痛緩和重視か」と (b)「実際に今受けている治療はどちらか」を<strong>分けて記録する2問</strong>（本試験のゴール一致ケアの測定法そのもの）を入れると、ゴール一致を面談ごとに可視化できる。「わからない」も選択肢として残し、不一致と同じく要フォローとして扱う。</li><li><strong><span class="wl">多職種カンファ</span> での使い方</strong>：忠実度評価では共感・支持は96%の会話で実施できたのに、自己効力感の支援は64%、調停のモデリングは39%にとどまった。<strong>難しいのは共感ではなく「家族が自分で医療者に伝えられるようにすること」と「対立の場に立つこと」</strong>。当院の家族対応の振り返りも、共感の有無ではなくこの2点でチェックすると学習点が出る。</li><li><strong>役割を「専任者」でなく「ベッドサイド」に埋め込む</strong>。著者自身が今後の方向として「ベッドサイド臨床医への統合」を挙げている。前身のフランス版試験の質的研究（<span class="wl">看護師ファシリテーターはなぜ効かなかったか — 役割の曖昧さと縄張り（質的研究・ICM2024）</span>）は、外付けのファシリテーターが役割の曖昧さと縄張り争いに巻き込まれたことを示した。当院で導入するなら、新職種ではなく<strong>受け持ち看護師とICU倫理係の日常業務のなかに3成分を組み込む</strong>設計にする。</li><li><strong>アウトカム設計を変える</strong>。院内で家族支援の取り組みを評価するとき、HADSやIES-Rのような遠位アウトカムは介入以外の要因（患者の死・介護負担・社会的役割の喪失）に支配されて動かない。著者が推す <strong>Feeling Heard and Understood（聞いてもらえた・理解された、と感じたか）</strong> のような近位・プロセス指標を、当院のICU改善アンケート（<span class="wl">Hotel ICU</span>）に1〜2問足すほうが実務的である。</li><li><strong>対象の選び方を「重症度」から「緩和ケアニーズ」へ</strong>。本試験は APACHE II ≧13 や2年生存中央値の慢性疾患という重症度基準で家族を組み入れた。著者はこれを限界として挙げ、緩和ケアニーズのチェックリストで拾うべきだったと述べる。当院で家族支援の対象を絞るなら、<strong>重症度スコアではなく「意思決定が難航している」「代理決定者が複数で意見が割れている」「予後の理解にずれがある」といったニーズ側の引き金</strong>を使う。</li><li><strong>30日再入院の解釈に注意</strong>：介入群で再入院が有意に多かった（13% vs 7%, p=0.02）が、これは介入群で死亡が少なかった（＝生きて再入院しうる人が多かった）ことの裏返しの可能性が高い。当院のQI指標でも、再入院率を単独で「悪化」と読まない。生存を考慮した ICU-free days／hospital-free days を併記する。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ICU家族の30〜70%にうつ・不安・PTSD症状が生じる。医療チームとのコミュニケーション不良がこれを悪化させ、望まない高強度の「デフォルト治療」につながる。しかし家族支援介入はこれまで結果がまちまちで、しかもそのほとんどが「ICU滞在中」に限定されていた（PARTNER・Four Supports・緩和ケア主導家族面談など）。</li><li><strong>Unknown</strong>：支援をICUの外へ、すなわち急性期病棟・退院後の在宅／転院先まで<strong>3か月間延長</strong>すれば、家族の長期的な心理的苦痛を減らせるのか。同じ介入を米国とフランスで並行実施する2本立てのプロトコル（Contemp Clin Trials 2021）が組まれており、フランス版は2024年に報告済み。本論文はその米国版である。</li><li><strong>What's new</strong>：449例・505家族の多施設RCT。ICU退室後も3か月伴走する「コミュニケーション・ファシリテーター（訓練を受けた元ICU看護師）」は、<strong>主要アウトカムである家族のうつ（HADS-うつ）を6か月間で改善しなかった</strong>（差 −0.071、95%CI −0.695〜0.553、p=0.82）。不安・PTSD症状・ICU-free days・hospital-free days も差がなかった。ただし医療チームとの関係性（p=0.0162）とゴール一致ケア（p=0.0504）は介入群でわずかに良かった。コミュニケーション支援単独では家族の情動的苦痛を減らせない、という近年の一連の陰性試験に本試験も連なる。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ICU入室から退院後3か月まで訓練された看護師が家族に伴走しても、<strong>6か月間の家族のうつ症状はまったく変わらなかった（差 −0.07点、95%CI −0.70〜0.55）</strong>。医療チームとの関係性とゴール一致ケアだけがわずかに改善した。</p>
+</div>
+<ul><li><strong>デザイン</strong>：米国ワシントン州シアトルの単一医療システム内3病院（大学病院・郡立病院・地域病院）で行われた多施設RCT。患者単位で1:1ランダム化、病院で層別、ブロックサイズ2〜8。</li><li><strong>対象</strong>：18歳以上・英語話者・家族がいるICU患者で、①2年生存中央値相当の慢性の生命を制限する疾患（Dartmouth Atlas の9疾患をICD-10で定義）、または②院内死亡リスク15%超の急性重症疾患（APACHE II ≧13 など）。患者449例（介入225／対照224）、家族505人（介入264／対照241）。</li><li><strong>介入</strong>：研究職に転じた元ICUベッドサイド看護師が「コミュニケーション・ファシリテーター」として、平均14時間の訓練を受けたうえで、ICUでは48時間ごと、急性期病棟では72時間ごと、退院後1か月は週1回、その後は月2回、ランダム化から計3か月間、家族・患者・臨床チームと対面・電話・ビデオ会議で関わる。患者が3か月以内に死亡した場合は死後1か月間フォロー。社会的認知理論（自己効力感）と愛着理論に基づく。</li><li><strong>対照</strong>：同じ時点（1・3・6か月）で研究コーディネーターが同じデータ収集を行う。COVID-19期（2020年4月以降）は移行期（ランダム化後1〜2日、急性期転棟後1〜2日、退院後1〜2日）にもコーディネーターが連絡し質問に答えた。</li><li><strong>主要アウトカム</strong>：家族の自己申告によるうつ症状（HADS-うつ、7項目・0〜21点）を ランダム化時・1・3・6か月で測定。</li><li><strong>主要結果</strong>：HADS-うつは両群とも時間とともに低下（対照 7.2±4.6 → 5.9±4.1、介入 7.2±4.2 → 5.9±4.5）。6か月にわたる平均差は <strong>−0.071（95%CI −0.695〜0.553、p=0.8236）</strong> で有意差なし。</li><li><strong>副次結果</strong>：HADS-不安 −0.086（−0.706〜0.534、p=0.7854）、QUAL-E完遂感 +0.019（−0.163〜0.200、p=0.8407）、<strong>QUAL-E関係性 +0.187（0.035〜0.339、p=0.0162）</strong>、QUAL-E準備 +0.459（−0.012〜0.931、p=0.0561）、<strong>ゴール一致ケア OR 1.544（0.999〜2.387、p=0.0504）</strong>。すべて期待された方向だが効果量は小さい。</li><li><strong>医療資源・安全性</strong>：ICU-free days・hospital-free days は介入群でやや多いが有意差なし。退院後30日以内の再入院は介入群で有意に多かった（13% vs 7%、差 0.07、95%CI 0.01〜0.12、p=0.02）。死亡は介入群で少ない傾向（6か月 36% vs 40%、差 −0.05、95%CI −0.14〜0.04、p=0.30）。</li><li><strong>忠実度</strong>：介入群の20%無作為抽出（45例中44例、家族54人、録音366件）で、共感・支持は96%、自己効力感戦略は64%、調停のモデリングは39%の会話で確認された。</li><li><strong>結論</strong>：死亡または重度障害の可能性が高い重症患者の家族に対し、ICU滞在中と退院後にコミュニケーション・ファシリテーターを関与させても、うつ症状は減らなかった。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>PICS-F（Post-Intensive Care Syndrome - Family）</strong>：ICU患者の家族に生じるうつ・不安・心的外傷後ストレス症状の総称。ICU入室中から退院後数か月〜数年にわたって続く。原因は患者の生死をめぐる不確実性、代理意思決定の重圧、生活と社会的役割の喪失、介護負担など複合的である。 <strong>代理意思決定者（surrogate decision-maker, SDM）</strong>：患者本人が意思表示できないとき、患者の価値観に照らして治療方針を決める役割を担う家族等。米国では法定近親者（legal next of kin, LNOK）の順位が定められている。 <strong>ゴール一致ケア（goal-concordant care）</strong>：患者本人の価値観・治療の希望・望む生活の質に沿った医療が実際に提供されている状態。「何を望むか」と「何を受けているか」の一致で測る。定義が研究間で統一されていないことが、この分野の測定上の弱点になっている。 <strong>HADS（Hospital Anxiety and Depression Scale）</strong>：うつ7項目・不安7項目の計14項目からなる自記式尺度。各項目0〜3点、サブスケールごとに0〜21点で、高いほど症状が強い。身体疾患の影響を受けにくいよう設計されており、身体症状の項目を含まない。本試験ではうつサブスケールが主要アウトカム。 <strong>IES-6（Impact of Events Scale-6）</strong>：PTSD症状を6項目で測る短縮版尺度。本試験ではランダム化時には測定せず、1・3・6か月のみ測定した。 <strong>QUAL-E（Fam）</strong>：重症患者の家族の「ケアの体験の質」を測る17項目の妥当性検証済み尺度。本試験は3つの下位尺度、①完遂感（Sense of Completion、3項目の平均、1〜5点）、②医療者との関係性（Relationship to Healthcare Providers、4項目の平均、1〜5点）、③準備の課題（Preparation Issues、4項目の合計、4〜20点）を用いた。いずれも高いほど良い。 <strong>ICU-free days／hospital-free days</strong>：一定期間内で「生存かつICU外／病院外」の日数。死亡を0日として扱うため、死亡と入院期間を1つの指標にまとめられる、実務的で患者中心のアウトカム。 <strong>社会的認知理論（Social Cognitive Theory）</strong>：行動変容の鍵を、自己効力感（できるという確信）・結果期待・行動能力に置く理論（Bandura）。本試験の介入は、家族が「医療チームに自分から伝えられる」自己効力感を高めることを狙う。 <strong>愛着理論（attachment theory）</strong>：対人関係のスタイル（安心型・不安型・回避型など）を記述する理論。本試験ではファシリテーターが家族一人ひとりの対人コミュニケーションのスタイルを見立て、それに合わせて関わり方を調整するために用いた。 <strong>APACHE II</strong>：急性期の生理学的異常・年齢・慢性疾患から重症度を点数化するスコア（0〜71点）。本試験の対象患者の平均は25±7点で、かなり重症の集団である。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>米国では年間500万人以上がICUに入室し、高齢化と集中治療の有効性・利用可能性の向上によりこの数は増え続けている。高度に技術化され専門分化した生命維持治療は生存率を改善した一方で、<strong>ケアの断片化</strong>をもたらした。患者と家族は、初回入院中にも退院後の急性期後施設でも、医療チームとケアの場を何度も渡り歩くことになる。</p>
+<p>代理意思決定者はしばしば次の作業に苦しむ。すなわち、goals-of-care の幅を見渡すこと、患者の価値観・目標と治療を突き合わせること、その目標を臨床医に伝えること、そして困難な医学的決断を下すことである。ICU家族にはうつ・不安・心的外傷後ストレスの症状が多く、家族と医療チームのコミュニケーション不良が、もともと過酷な体験をさらに悪化させる。これらが重なった結果として苦痛が生じ、しばしば望まれていない可能性のある高強度の「デフォルト」ケアに帰結する。</p>
+<p>これまでの家族・代理決定者支援介入は主にICU滞在中に焦点を当ててきたが、結果はまちまちであった。本研究の「コミュニケーション・ファシリテーター」は、介入をICU入院中<strong>および</strong>入院後にまで及ぼすことで、この限界に対処する。社会的認知理論と先行研究（Curtis らの 2016年 AJRCCM 試験）に基づき、ICU看護師が専門的訓練を受けて家族のコミュニケーションを支援し、患者の目標に沿ったケアを前に進められるようにする。</p>
+<p>仮説は、この介入が家族の長期的な心理的苦痛を減らし、ゴール一致ケアを支え、生活の質を改善し、患者中心の医療資源利用を促す、というものであった。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>デザイン</h4>
+<p>ワシントン州の単一医療システム内の3病院（大学病院・郡立病院・地域病院）で実施された多施設ランダム化比較試験。3病院はすべて同一の電子カルテ（EHR）を使用する。試験デザインは既報のプロトコル論文（Contemp Clin Trials 2021;107:106465）で記述されており、米国版とフランス版の2本立てのRCTとして計画された。ClinicalTrials.gov に NCT03721952 として登録。University of Washington Human Subjects Division（STUDY00005360、初回承認2018年10月29日）の承認を受け、データ安全性モニタリング委員会の監督下で実施された。</p>
+<h4>対象（組み入れ・除外・n・施設・期間）</h4>
+<p><strong>患者の適格基準</strong>：①18歳以上、②英語話者、③協力可能な家族がいる、④生存中央値2年相当の慢性の生命を制限する疾患を有して入院、および／または院内死亡リスク15%超の急性重症疾患。</p>
+<ul><li>慢性の生命を制限する疾患は、Dartmouth Atlas Project が終末期ケア研究で用いた9つの慢性疾患に対応するICD-10コードで定義した。</li><li>急性重症疾患は APACHE II ≧13、および／または当該入院中の死亡リスクが15%を超えると予測される診断名で定義した。</li></ul>
+<p><strong>家族の適格基準</strong>：患者本人が可能なら患者が指名し、不可能ならEHRまたは法定近親者から特定。18歳以上で、患者のケアに関与していると認識される家族または友人。<strong>1患者あたりの参加家族数に上限は設けなかった</strong>（最大4人）。</p>
+<p><strong>フロー</strong>（Fig. 1）：適格性を評価された患者2823例のうち1806例が除外され、1017例が組み入れ対象となった。拒否568件（内訳として収集された理由は患者2件・家族426件分）を経て589例が同意し、140例（ランダム化前に家族が撤退、ベースライン質問票未返却）がランダム化されず、最終的に <strong>449例の患者と505人の家族</strong>がランダム化された（介入225例／264人、対照224例／241人）。登録期間は2019年4月16日〜2023年3月4日。</p>
+<h4>介入・比較</h4>
+<p><strong>介入群</strong>：社会的認知理論に基づき、自己効力感・結果期待・行動能力を行動変容の鍵となる標的とする。加えて愛着理論を用いて家族の対人コミュニケーションのスタイルを見立て、一人ひとりに合わせてコミュニケーションを調整した。</p>
+<ul><li>ファシリテーターは<strong>研究職に転じた元ICUベッドサイド看護師</strong>。専門訓練を受け、必要に応じて臨床チームとやり取りするが、臨床チームの一員ではない。</li><li>訓練は平均14時間の講義と実践セッションで、goals-of-care、愛着理論、調停（mediation）、自己効力感を含む臨床コミュニケーション技術を扱った。年1回および新メンバー参加時に追加訓練を実施。</li><li>介入のモニタリングとして、週1回の多職種チーム会議と、研究心理学者が率いる月1回のケースレビューを実施。</li><li>ファシリテーターは実施チェックリスト（週次報告・月次評価）を記入した。チェックリストは介入3成分（①コミュニケーションとgoals-of-care討議、②対立の調停と問題解決、③自己効力感）それぞれの活動を含む。</li><li><strong>接触スケジュール</strong>：ICUでは最低48時間ごと、急性期病棟では72時間ごと、退院後1か月は週1回、その後は月2回、ランダム化から計3か月間（最初の再入院が最も起きやすい時期）。患者が3か月以内に死亡した場合は死後1か月間。ファシリテーターの臨床判断でより頻回にすることもでき、家族が希望する接触量も尊重された。</li><li>接触手段は対面・電話・ビデオ会議。相手は患者・家族・臨床医（医師・看護師・ソーシャルワーカー等）。</li></ul>
+<p><strong>対照群</strong>：介入群と同じ時点（ランダム化後1・3・6か月）で研究コーディネーターが同じデータ収集活動を行うが、ファシリテーターは関与しない。ただし COVID-19 パンデミック下（2020年4月以降）の特殊事情に鑑み、対照群にも移行の節目（ランダム化後1〜2日、急性期病棟転棟後1〜2日、退院後1〜2日）に研究コーディネーターが連絡し、家族の質問に答え、それぞれのケアの場の適切な資源につないだ。</p>
+<h4>ランダム化</h4>
+<p>家族がベースライン質問票を完了した後に、患者を単位として1:1で割り付けた。家族は患者の下にクラスター化され、患者と同じ群に割り付けられた。病院で層別し、ブロックサイズは2〜8の可変ブロックとした。</p>
+<h4>主要・副次アウトカム</h4>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>指標</th><th>測定時点</th></tr></thead>
+<tbody>
+<tr><td>主要</td><td>HADS-うつ（7項目、0〜21点）</td><td>ランダム化時・1・3・6か月</td></tr>
+<tr><td>心理症状</td><td>HADS-不安（7項目、0〜21点）</td><td>ランダム化時・1・3・6か月</td></tr>
+<tr><td>心理症状</td><td>IES-6（PTSD症状、6項目）</td><td>1・3・6か月（ランダム化時は未測定）</td></tr>
+<tr><td>ゴール一致</td><td>ゴール一致ケア（2問から作る二値変数）</td><td>ランダム化時・1・3・6か月</td></tr>
+<tr><td>生活の質</td><td>QUAL-E（Fam）完遂感（3項目の平均、1〜5）</td><td>ランダム化時・1・3・6か月</td></tr>
+<tr><td>生活の質</td><td>QUAL-E（Fam）関係性（4項目の平均、1〜5）</td><td>ランダム化時・1・3・6か月</td></tr>
+<tr><td>生活の質</td><td>QUAL-E（Fam）準備（4項目の合計、4〜20）</td><td>ランダム化時・1・3・6か月</td></tr>
+<tr><td>医療資源</td><td>ICU-free days／hospital-free days</td><td>1・3・6か月時点</td></tr>
+<tr><td>医療資源</td><td>退院後30日以内の再入院</td><td>—</td></tr>
+<tr><td>安全性</td><td>患者死亡</td><td>1・3・6か月時点</td></tr>
+</tbody></table></div>
+<p><strong>ゴール一致ケアの測定法</strong>（本試験の要）は2問からなる。第1問は「もし患者が今この時点で選ぶとしたら、痛みや不快が増えてもできる限り延命することを重視した治療の道筋を望むか、それとも長く生きられなくなるとしても痛みや不快をできる限り和らげることに焦点を当てたケア計画を望むか」。第2問は同じ2択で現在受けている治療をどう認識しているかを尋ねる。両方が「苦痛緩和」または両方が「延命」なら一致（1）、片方が「苦痛緩和」で他方が「延命」なら不一致（0）、いずれかまたは両方が「わからない／不確か」でも不一致（0）とした。両問とも未回答、または一方が未回答でもう一方が「わからない／不確か」以外なら欠測扱い。</p>
+<p><strong>患者死亡</strong>は安全性アウトカムとして、EHR記録・家族報告・ワシントン州の死亡証明書から研究完了時に取得した。</p>
+<h4>データ収集</h4>
+<p>家族にはランダム化時・1・3・6か月に質問票の記入を依頼した。全時点で全アウトカムを測定したが、IES-6のみランダム化時は実施していない。<strong>患者が6か月以内に死亡した場合</strong>、家族には死後4〜6週に「死別後（after-death）」質問票が送られ、残りの時点には「死後（post-death）」版が使われた。これらの版では項目が現在形から過去形に変更され（例：「医療チームはあなたを関与させてくれますか」→「関与させてくれましたか」）、内容の妥当性に配慮して、現在のゴール一致ケアや現在のケアに対する家族の体験の質は含めなかった。質問票は対面・電話・オンラインのいずれでも回答可能とし、未回答者には次の測定時点までの間に最大4回のリマインドを行った。患者のEHRデータは自動化された方法で抽出した。</p>
+<h4>解析（統計・サンプルサイズ・事前登録・限界）</h4>
+<p><strong>Intention-to-treat</strong>の原則に従った。主要アウトカム（1・3・6か月のHADS-うつ）は、<strong>入れ子のランダム効果をもつ線形混合効果モデル</strong>でモデル化した（1患者あたり複数の家族から複数時点の測定が得られるため）。固定効果は介入・時点・病院・ランダム化時のHADS-うつ。時点の主効果により1・3・6か月で平均反応が異なることを許すが、介入効果は各時点で同じと仮定する。病院はランダム化が病院で層別されたため、ランダム化時の測定値は精度向上のために含めた。介入効果は介入項の係数（6か月にわたる平均反応の差）で定量化した。</p>
+<p>他の調査アウトカムも同様。ただし IES-6 はランダム化時の測定値を含めず、二値アウトカムであるゴール一致ケアは一般化線形混合効果モデルでモデル化しオッズ比で定量化した。時間と介入の交互作用を入れて介入効果が時間で異なるかを探索したが、<strong>時間による介入効果の違いを示す証拠は得られなかった</strong>（結果は非提示）。</p>
+<p><strong>感度分析</strong>：多くの患者が結局1人の家族しか登録しなかったこと、および事前計画の全家族（最大4人）を含む混合モデルが「情報のあるクラスターサイズ（informative cluster size）」によりバイアスを受けうることから、患者あたり1人（無作為選択）のみのモデルも当てはめた。加えて、欠測データには連鎖方程式による多重代入（MICE、完全条件付き指定に基づく）を用いた。</p>
+<p>医療資源利用と安全性アウトカムは家族レベルで測定されず欠測もないため、病院で調整した線形回帰（頑健標準誤差）でモデル化し、介入効果は平均差（ICU-free days・hospital-free days）または割合の差（再入院・死亡）で定量化した。</p>
+<p><strong>サンプルサイズ</strong>：脱落20%を見込み、完全データ300人を得るために376例の患者（家族数は無制限）をランダム化する計画であった。300人あれば、HADS-うつの2群平均差 <strong>0.93点以上</strong>を検出力80%・両側有意水準0.05で検出できると見積もった。この計算は、患者あたり家族1人（各群150人）、HADS-うつのSD 4.2、HADS-うつの3回測定（1・3・6か月）、級内相関0.2を仮定している。実際には COVID-19 による対面接触・追跡の制限で20%を超える欠測が予想されたため、当初の n=376 から目標を引き上げた（Fig. 1 脚注）。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007268" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007268）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. コミュニケーション・ファシリテーター試験の CONSORT ダイアグラム（スクリーニング・登録・割り付け・追跡）。上から下へ流れる縦の主軸に中央のボックスが並び、左右の脇に除外・拒否・未回答の理由ボックスが枝分かれして配置されている。左上に青字で「ENROLLMENT」、その下に登録開始日 2019年4月16日・登録終了日 2023年3月4日が青字で示される。主軸の最上段は「適格性評価 n=2823例」、そこから右へ太い矢印で「除外 n=1806」の内訳ボックスが伸びる。次段は「組み入れ対象 n=1017」、ここから左へ「拒否 n=568（患者2件・家族426件分の理由を収集）」のボックスが伸びる。次段は「同意・登録 n=589」、右へ「未ランダム化 n=140（ランダム化前に家族が撤退、ベースライン質問票未返却）」。中央に青字で「ALLOCATION」、その右に二重枠のボックス「ランダム化 患者449例・家族505人」が置かれ、そこから左右に太い分岐矢印が下りる。左枝が「コミュニケーション・ファシリテーター介入 患者225例」→「参加家族 264人」、右枝が「通常ケア／資源対照 患者224例」→「参加家族 241人」。左下に青字で「FOLLOW-UP: FAMILY PARTICIPANT SURVEY」。以降は左右2列で1・3・6か月の質問票完了数のボックスが縦に並び、それぞれの外側に未完了理由（撤退・不完全・無回答／拒否・未送付）のボックスが対応して置かれる。原図・無改変。</p>
+</div>
+<p><strong>Figure 1 の各ボックスの文言（表に起こしたもの）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>中央（主軸）</th><th>脇のボックス（理由の内訳）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>適格性評価 n=2823例</td><td>除外 n=1806：患者の改善・転棟・退院 703／法定近親者が不在・応答なし 639／患者が生命維持治療中止・comfort care 142／患者死亡 118／適格期間の超過・その他の除外 70／臨床医が患者または家族を除外 68／競合する研究に登録済み 54／法定近親者が身体的・精神的に適格でない 12</td></tr>
+<tr><td>2</td><td>組み入れ対象 n=1017</td><td>拒否 n=568（患者2件・家族426件の理由を収集）：家族 無回答（受動的拒否）127／家族 手一杯・時間がない 115／家族 必要ない 59／家族 研究への参加は不可 43／家族 関心がない 35／家族 その他・不明 32／家族 プライバシーへの懸念 15／患者 家族の関与を望まない 1／患者 必要ない 1</td></tr>
+<tr><td>3</td><td>同意・登録 n=589</td><td>未ランダム化 n=140：家族がランダム化前に撤退し、ベースライン質問票が返却されなかった 140</td></tr>
+<tr><td>4</td><td>ランダム化 患者449例・家族505人（脚注：COVID-19による対面接触・追跡の制約から20%を超える欠測を見込み、当初のn=376から症例数を増やした）</td><td>—</td></tr>
+<tr><td>5</td><td>介入 患者225例 → 参加家族264人／対照 患者224例 → 参加家族241人</td><td>—</td></tr>
+<tr><td>6</td><td>1か月質問票完了：介入 n=206（80%）／対照 n=160（69%）</td><td>介入の未完了理由：撤退4／不完全1／無回答・拒否50／未送付（連絡先誤り・事務手続きの誤り）3。対照：撤退4／不完全7／無回答・拒否65／未送付5</td></tr>
+<tr><td>7</td><td>3か月質問票完了：介入 n=189（74%）／対照 n=157（68%）</td><td>介入：撤退2／不完全4／無回答・拒否64／未送付1。対照：撤退3／不完全4／無回答・拒否73／未送付2</td></tr>
+<tr><td>8</td><td>6か月質問票完了：介入 n=199（77%）／対照 n=146（64%）</td><td>介入：撤退0／不完全0／無回答・拒否58／未送付1。対照：撤退2／不完全5／無回答・拒否77／未送付4</td></tr>
+</tbody></table></div>
+<h3>4. 結果 — 参加者の背景</h3>
+<p>2019年4月〜2023年2月（Fig. 1 では2019年4月16日〜2023年3月4日）に、適格患者2823例のうち449例がランダム化された（介入225、対照224）。家族505人のうち264人が介入、241人が対照に割り付けられた。</p>
+<p>患者449例のうち40%が女性、82%が白人、平均年齢は55歳（範囲18〜95歳）。患者背景は両群で概ね似ていたが、<strong>女性の割合が対照群で少なかった（35% vs 45%）</strong>。家族回答者は71%が女性、78%が白人、平均年齢53歳（範囲19〜92歳）。</p>
+<h4>Table 1. コミュニケーション・ファシリテーター試験における患者背景</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>対照 n=224</th><th>介入 n=225</th><th>全体 n=449</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>55 ± 18</td><td>55 ± 18</td><td>55 ± 18</td></tr>
+<tr><td>女性</td><td>78（35%）</td><td>102（45%）</td><td>180（40%）</td></tr>
+<tr><td>ヒスパニック系</td><td>13（5.8%）</td><td>18（8.0%）</td><td>31（6.9%）</td></tr>
+<tr><td>不明</td><td>12（5.4%）</td><td>17（7.6%）</td><td>29（6.5%）</td></tr>
+<tr><td>人種：アジア系</td><td>8（3.6%）</td><td>4（1.8%）</td><td>12（2.7%）</td></tr>
+<tr><td>人種：黒人</td><td>8（3.6%）</td><td>14（6.2%）</td><td>22（4.9%）</td></tr>
+<tr><td>人種：先住民</td><td>5（2.2%）</td><td>6（2.7%）</td><td>11（2.4%）</td></tr>
+<tr><td>人種：太平洋諸島系</td><td>3（1.3%）</td><td>2（0.9%）</td><td>5（1.1%）</td></tr>
+<tr><td>人種：白人</td><td>186（83.0%）</td><td>180（80.0%）</td><td>366（81.5%）</td></tr>
+<tr><td>人種：その他・混血・不明</td><td>14（6.3%）</td><td>19（8.4%）</td><td>33（7.3%）</td></tr>
+<tr><td>慢性疾患：予後不良のがん</td><td>25（11.2%）</td><td>20（8.9%）</td><td>45（10.0%）</td></tr>
+<tr><td>慢性疾患：慢性肺疾患</td><td>33（14.7%）</td><td>26（11.6%）</td><td>59（13.1%）</td></tr>
+<tr><td>慢性疾患：冠動脈疾患</td><td>38（17.0%）</td><td>34（15.1%）</td><td>72（16.0%）</td></tr>
+<tr><td>慢性疾患：うっ血性心不全</td><td>55（24.6%）</td><td>53（23.6%）</td><td>108（24.1%）</td></tr>
+<tr><td>慢性疾患：末梢血管疾患</td><td>26（11.6%）</td><td>12（5.3%）</td><td>38（8.5%）</td></tr>
+<tr><td>慢性疾患：末期肝疾患</td><td>25（11.2%）</td><td>19（8.4%）</td><td>44（9.8%）</td></tr>
+<tr><td>慢性疾患：臓器障害を伴う糖尿病</td><td>17（7.6%）</td><td>22（9.8%）</td><td>39（8.7%）</td></tr>
+<tr><td>慢性疾患：腎不全</td><td>39（17.4%）</td><td>32（14.2%）</td><td>71（15.8%）</td></tr>
+<tr><td>慢性疾患：認知症</td><td>8（3.6%）</td><td>15（6.7%）</td><td>23（5.1%）</td></tr>
+<tr><td>急性疾患：ARDS（P/F比 300未満の中等症・重症低酸素血症）</td><td>45（20.1%）</td><td>56（24.8%）</td><td>101（22.5%）</td></tr>
+<tr><td>急性疾患：外傷性脳損傷</td><td>27（12.1%）</td><td>40（17.8%）</td><td>67（14.9%）</td></tr>
+<tr><td>急性疾患：血管性・非外傷性脳損傷</td><td>73（32.6%）</td><td>65（28.9%）</td><td>138（30.7%）</td></tr>
+<tr><td>急性疾患：急性呼吸不全</td><td>177（79.0%）</td><td>174（77.3%）</td><td>351（78.2%）</td></tr>
+<tr><td>急性疾患：COVID-19陽性</td><td>28（12.5%）</td><td>28（12.4%）</td><td>56（12.5%）</td></tr>
+<tr><td>適格時のICU：内科・循環器ICU</td><td>74（33.0%）</td><td>70（31.1%）</td><td>144（32.1%）</td></tr>
+<tr><td>適格時のICU：外科ICU</td><td>74（33.0%）</td><td>66（29.3%）</td><td>140（31.2%）</td></tr>
+<tr><td>適格時のICU：神経ICU</td><td>39（17.4%）</td><td>55（24.4%）</td><td>94（20.9%）</td></tr>
+<tr><td>適格時のICU：その他</td><td>37（16.5%）</td><td>34（15.1%）</td><td>71（15.8%）</td></tr>
+<tr><td>APACHE II</td><td>25 ± 7</td><td>24 ± 7</td><td>25 ± 7</td></tr>
+<tr><td>不明</td><td>3（1.3%）</td><td>0（0%）</td><td>3（0.7%）</td></tr>
+<tr><td>病院：郡立</td><td>167（74.6%）</td><td>165（73.3%）</td><td>332（73.9%）</td></tr>
+<tr><td>病院：大学</td><td>45（20.1%）</td><td>46（20.4%）</td><td>91（20.3%）</td></tr>
+<tr><td>病院：地域</td><td>12（5.4%）</td><td>14（6.2%）</td><td>26（5.8%）</td></tr>
+<tr><td>患者あたり家族1人のみ登録</td><td>210（93.8%）</td><td>191（84.9%）</td><td>401（89.3%）</td></tr>
+</tbody></table></div>
+<h4>Table 2. 家族の背景</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>対照 n=241</th><th>介入 n=264</th><th>全体 n=505</th></tr></thead>
+<tbody>
+<tr><td>年齢（歳）</td><td>53 ± 14</td><td>54 ± 15</td><td>53 ± 15</td></tr>
+<tr><td>不明</td><td>8（3.3%）</td><td>4（1.4%）</td><td>12（2.4%）</td></tr>
+<tr><td>女性</td><td>175（73%）</td><td>183（69%）</td><td>358（71%）</td></tr>
+<tr><td>ヒスパニック系</td><td>21（8.7%）</td><td>23（8.7%）</td><td>44（8.9%）</td></tr>
+<tr><td>人種：白人</td><td>190（79%）</td><td>205（78%）</td><td>395（78%）</td></tr>
+<tr><td>人種：黒人</td><td>7（2.9%）</td><td>16（6.1%）</td><td>23（4.6%）</td></tr>
+<tr><td>人種：アジア系</td><td>5（2.1%）</td><td>7（2.7%）</td><td>12（2.4%）</td></tr>
+<tr><td>人種：先住民</td><td>9（3.7%）</td><td>7（2.7%）</td><td>16（3.2%）</td></tr>
+<tr><td>人種：太平洋諸島系</td><td>4（1.7%）</td><td>2（0.8%）</td><td>6（1.2%）</td></tr>
+<tr><td>人種：その他・混血・不明</td><td>26（10.8%）</td><td>27（10.2%）</td><td>53（10.5%）</td></tr>
+<tr><td>学歴：中学卒以下</td><td>1（0.4%）</td><td>0（0%）</td><td>1（0.2%）</td></tr>
+<tr><td>学歴：高校中退</td><td>7（2.9%）</td><td>6（2.3%）</td><td>13（2.6%）</td></tr>
+<tr><td>学歴：高卒・GED</td><td>29（12%）</td><td>29（11%）</td><td>58（11%）</td></tr>
+<tr><td>学歴：専門学校・大学中退</td><td>103（43%）</td><td>121（46%）</td><td>224（44%）</td></tr>
+<tr><td>学歴：4年制大学卒</td><td>55（23%）</td><td>52（20%）</td><td>107（21%）</td></tr>
+<tr><td>学歴：大学院中退</td><td>9（3.7%）</td><td>11（4.2%）</td><td>20（4.0%）</td></tr>
+<tr><td>学歴：大学院修了</td><td>37（15%）</td><td>45（17%）</td><td>82（16%）</td></tr>
+<tr><td>就業：フルタイム</td><td>105（44%）</td><td>133（50%）</td><td>238（47%）</td></tr>
+<tr><td>就業：パートタイム</td><td>27（11%）</td><td>23（8.7%）</td><td>50（9.9%）</td></tr>
+<tr><td>就業：失業</td><td>20（8.3%）</td><td>18（6.8%）</td><td>38（7.5%）</td></tr>
+<tr><td>就業：障害</td><td>20（8.3%）</td><td>12（4.5%）</td><td>32（6.3%）</td></tr>
+<tr><td>就業：退職</td><td>50（21%）</td><td>56（21%）</td><td>106（21%）</td></tr>
+<tr><td>続柄：配偶者・パートナー</td><td>80（33%）</td><td>88（33%）</td><td>168（33%）</td></tr>
+<tr><td>続柄：子</td><td>62（26%）</td><td>71（27%）</td><td>133（26%）</td></tr>
+<tr><td>続柄：きょうだい</td><td>32（13%）</td><td>32（12%）</td><td>64（13%）</td></tr>
+<tr><td>続柄：親</td><td>50（21%）</td><td>58（22%）</td><td>108（21%）</td></tr>
+<tr><td>続柄：その他の親族</td><td>10（4.1%）</td><td>8（3.0%）</td><td>18（3.6%）</td></tr>
+<tr><td>続柄：友人</td><td>5（2.1%）</td><td>3（1.1%）</td><td>8（1.6%）</td></tr>
+<tr><td>患者と同居</td><td>115（48%）</td><td>115（44%）</td><td>230（46%）</td></tr>
+</tbody></table></div>
+<h3>5. 結果 — 主要アウトカム（HADS-うつ）</h3>
+<p>対照群では224例の患者に紐づく家族241人のうち、ベースライン240人（99.6%）、1か月160人（66.4%）、3か月157人（65.1%）、6か月145人（60.2%）がHADS-うつを回答した。介入群では225例に紐づく家族264人のうち、ベースライン263人（99.6%）、1か月206人（78.0%）、3か月189人（71.6%）、6か月199人（75.4%）が回答した。</p>
+<p>HADS-うつは時間とともに低下した（対照 7.2±4.6 → 5.9±4.1、介入 7.2±4.2 → 5.9±4.5）。6か月にわたる介入と対照の差は <strong>−0.071（95%CI −0.695〜0.553、p=0.8236）</strong> で有意差はなかった。患者あたり家族1人に限定した解析、および多重代入を用いた解析でも結果は同様であった。</p>
+<p>事前のサンプルサイズ計算で検出を狙った差は 0.93点であり、得られた95%信頼区間の上限（0.553）はそれを大きく下回る。つまり本試験は、<strong>臨床的に意味があると想定した大きさの効果を否定できる精度をもっていた</strong>。</p>
+<h3>6. 結果 — 副次アウトカム</h3>
+<p>副次アウトカムに対する介入の効果はいずれも期待された方向にあったが、p値が0.05未満または0.05に近かったのは2つのみで、しかも効果量は小さかった。</p>
+<ul><li><strong>ゴール一致ケア</strong>：介入群のほうがゴール一致の報告が多かった（OR 1.544、95%CI 0.999〜2.387、p=0.0504）。</li><li><strong>医療チームとの関係性（QUAL-E Fam）</strong>：介入群のほうが良好（平均差 0.187、95%CI 0.035〜0.339、p=0.0162）。</li></ul>
+<h4>Table 3. 家族回答による調査アウトカムに対する介入の効果</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム／時点</th><th>対照（224例に紐づく家族241人）</th><th>介入（225例に紐づく家族264人）</th><th>平均差（介入−対照）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td><strong>HADS-うつ（主要）</strong></td><td></td><td></td><td>−0.071（−0.695〜0.553）</td><td>0.8236</td></tr>
+<tr><td>ベースライン</td><td>7.2（4.6）n=240</td><td>7.2（4.2）n=263</td><td></td><td></td></tr>
+<tr><td>1か月</td><td>6.4（4.4）n=160</td><td>6.5（4.3）n=206</td><td></td><td></td></tr>
+<tr><td>3か月</td><td>6.3（4.3）n=157</td><td>5.9（4.1）n=189</td><td></td><td></td></tr>
+<tr><td>6か月</td><td>5.9（4.1）n=145</td><td>5.9（4.5）n=199</td><td></td><td></td></tr>
+<tr><td><strong>HADS-不安</strong></td><td></td><td></td><td>−0.086（−0.706〜0.534）</td><td>0.7854</td></tr>
+<tr><td>ベースライン</td><td>10.4（4.8）n=240</td><td>10.5（4.7）n=263</td><td></td><td></td></tr>
+<tr><td>1か月</td><td>8.2（4.5）n=160</td><td>8.4（4.3）n=206</td><td></td><td></td></tr>
+<tr><td>3か月</td><td>8.4（4.8）n=157</td><td>8.2（4.4）n=189</td><td></td><td></td></tr>
+<tr><td>6か月</td><td>8.1（4.8）n=146</td><td>7.9（4.6）n=199</td><td></td><td></td></tr>
+<tr><td><strong>QUAL-E（Fam）完遂感</strong></td><td></td><td></td><td>0.019（−0.163〜0.200）</td><td>0.8407</td></tr>
+<tr><td>ベースライン</td><td>3.4（1.3）n=236</td><td>3.3（1.3）n=259</td><td></td><td></td></tr>
+<tr><td>1か月</td><td>3.7（1.2）n=162</td><td>3.8（1.0）n=203</td><td></td><td></td></tr>
+<tr><td>3か月</td><td>4.0（1.0）n=111</td><td>3.9（1.0）n=137</td><td></td><td></td></tr>
+<tr><td>6か月</td><td>4.0（0.9）n=91</td><td>4.0（1.0）n=136</td><td></td><td></td></tr>
+<tr><td><strong>QUAL-E（Fam）関係性</strong></td><td></td><td></td><td>0.187（0.035〜0.339）</td><td>0.0162</td></tr>
+<tr><td>ベースライン</td><td>4.0（0.8）n=238</td><td>4.0（0.9）n=259</td><td></td><td></td></tr>
+<tr><td>1か月</td><td>3.9（0.9）n=162</td><td>4.1（0.8）n=204</td><td></td><td></td></tr>
+<tr><td>3か月</td><td>3.5（1.2）n=108</td><td>3.9（1.0）n=132</td><td></td><td></td></tr>
+<tr><td>6か月</td><td>3.5（1.1）n=84</td><td>3.6（1.1）n=127</td><td></td><td></td></tr>
+<tr><td><strong>QUAL-E（Fam）準備</strong></td><td></td><td></td><td>0.459（−0.012〜0.931）</td><td>0.0561</td></tr>
+<tr><td>ベースライン</td><td>13.5（3.0）n=241</td><td>13.3（3.3）n=262</td><td></td><td></td></tr>
+<tr><td>1か月</td><td>13.5（3.2）n=163</td><td>13.9（3.2）n=207</td><td></td><td></td></tr>
+<tr><td>3か月</td><td>13.3（3.2）n=112</td><td>14.0（3.2）n=137</td><td></td><td></td></tr>
+<tr><td>6か月</td><td>13.6（3.4）n=92</td><td>14.0（3.2）n=137</td><td></td><td></td></tr>
+<tr><td><strong>ゴール一致ケア</strong>（頻度、%）</td><td></td><td></td><td>OR 1.544（0.999〜2.387）</td><td>0.0504</td></tr>
+<tr><td>ベースライン</td><td>123（53%）n=232</td><td>136（52%）n=261</td><td></td><td></td></tr>
+<tr><td>1か月</td><td>91（57%）n=160</td><td>126（63%）n=200</td><td></td><td></td></tr>
+<tr><td>3か月</td><td>62（57%）n=108</td><td>89（65%）n=137</td><td></td><td></td></tr>
+<tr><td>6か月</td><td>54（59%）n=92</td><td>84（64%）n=131</td><td></td><td></td></tr>
+</tbody></table></div>
+<p>尺度の注記：HADS-うつ・HADS-不安はいずれも7項目・各0〜3点・合計21点満点で、高いほど症状が強い。合計点は有効回答数で重みづけし、7項目中4項目以上の回答があるものを解析対象とした。QUAL-E完遂感は「違いをもたらせたか」「大切なことを言えたか」「大切な人と意味のあるやりとりができたか」の3項目、関係性は「支えられている」「情報を得ている」「関与できている」を含む4項目、準備は将来への備えの感覚に関する4項目。2項目以上の回答があれば、回答数で重みづけした平均（完遂感・関係性）または合計（準備）を用いた。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007268" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007268）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 家族回答による調査アウトカムの経時変化。ベースライン（0M）と1・3・6か月（1M・3M・6M）における主要・副次アウトカムの平均値と、その平均の標準誤差1つ分のエラーバーを示す。実線に三角のマーカーが介入群（赤）、破線に丸のマーカーが対照群（青）。左に大きく1枚、右に6枚を2段3列で並べた計7枚のパネルからなる。左の大パネルは HADS-うつで、縦軸5.5〜7.5点、両群ともベースライン約7.2から6か月の約5.9へ低下し、2本の線は交差しながらほぼ重なる（介入群が3か月でやや低く、6か月で一致する）。右上段は左から HADS-不安（縦軸8〜10点台、両群ともベースライン約10.4から急落し以後横ばい）、IES-6（縦軸8〜11点、1か月では対照が約10.6と介入の約9.4より高いが、3〜6か月で近づき最終的に介入が下回る）、QUAL-E（Fam）完遂感（縦軸3.4〜4.0、両群とも上昇し重なる）。右下段は左から QUAL-E（Fam）関係性（縦軸3.4〜4.0台、対照が3か月で3.5付近まで落ち込むのに対し介入は3.9付近を保ち、両群の差が最も目立つパネル）、QUAL-E（Fam）準備（縦軸13.2〜14.0、介入が1か月以降13.9〜14.0で高値を保ち、対照は13.2〜13.6で推移）、Goal Concordant Care（縦軸0.50〜0.70の割合、両群ともベースライン約0.52から上昇し、介入が3〜6か月で0.64〜0.65、対照が0.57〜0.59）。原図・無改変。</p>
+</div>
+<p>なお IES-6（PTSD症状）は Figure 2 にパネルとして示されているが、Table 3 には数値が掲載されていない。図の上では1か月時点で対照群のほうが高く（約10.6 vs 約9.4）、以後両群が接近して6か月では介入群がやや下回るが、統計量は本文にも表にも示されていない。</p>
+<h3>7. 結果 — 医療資源利用と安全性</h3>
+<p>ICU-free days と hospital-free days の平均は介入群で対照群より多かったが、統計学的に有意ではなかった。退院後30日以内に再入院した参加者の割合は <strong>介入群で有意に高かった（13% vs 7%、p=0.02）</strong>。</p>
+<p>患者死亡は介入群で少なかった。ランダム化後1か月以内で 24% vs 31%、3か月以内で 33% vs 38%、6か月以内で 36% vs 40%。いずれも統計学的に有意ではなかったが、著者は「95%信頼区間から、本集団において最大0.15、すなわち絶対差15%に及ぶ割合の差を否定できない」と明記している。</p>
+<h4>Table 4. 患者の医療資源利用および安全性アウトカムに対する介入の効果（患者449例）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>対照 n=224</th><th>介入 n=225</th><th>効果（平均差または割合の差）</th><th>95%CI</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>ICU-free days：1か月以内</td><td>19（12）</td><td>20（11）</td><td>1</td><td>−1.1〜3.1</td><td>0.35</td></tr>
+<tr><td>ICU-free days：3か月以内</td><td>58（38）</td><td>62（35）</td><td>4</td><td>−2.7〜11.0</td><td>0.24</td></tr>
+<tr><td>ICU-free days：6か月以内</td><td>114（81）</td><td>122（77）</td><td>8</td><td>−6.2〜22.9</td><td>0.26</td></tr>
+<tr><td>hospital-free days：1か月以内</td><td>6（9）</td><td>7（9）</td><td>1</td><td>−0.8〜2.5</td><td>0.30</td></tr>
+<tr><td>hospital-free days：3か月以内</td><td>40（33）</td><td>41（33）</td><td>1</td><td>−4.6〜7.7</td><td>0.63</td></tr>
+<tr><td>hospital-free days：6か月以内</td><td>94（74）</td><td>98（73）</td><td>4</td><td>−9.3〜18.0</td><td>0.53</td></tr>
+<tr><td>初回入院退院後30日以内の再入院</td><td>15（0.07）</td><td>30（0.13）</td><td>0.07</td><td>0.01〜0.12</td><td>0.02</td></tr>
+<tr><td>死亡：1か月以内</td><td>69（0.31）</td><td>55（0.24）</td><td>−0.06</td><td>−0.15〜0.02</td><td>0.13</td></tr>
+<tr><td>死亡：3か月以内</td><td>84（0.38）</td><td>75（0.33）</td><td>−0.04</td><td>−0.13〜0.05</td><td>0.35</td></tr>
+<tr><td>死亡：6か月以内</td><td>90（0.40）</td><td>80（0.36）</td><td>−0.05</td><td>−0.14〜0.04</td><td>0.30</td></tr>
+</tbody></table></div>
+<p>すべての解析は頑健標準誤差を用いた線形回帰に基づき、ランダム化が病院で層別されたため初回入院のケアを提供した病院で調整している。日数のアウトカムは平均（SD）、二値のアウトカムは n（割合）。「ICU free」は患者が生存し丸1日ICU外にいた日、「hospital free」は生存し丸1日病院外にいた日と定義した。</p>
+<h3>8. 結果 — 介入の忠実度</h3>
+<p>介入群から無作為に選ばれた45例のうち、1例を除くすべてでファシリテーターと家族の会話の録音が入手できた（除外された1例は録音が1件あったが復元不能であった）。残る44例では家族54人分・<strong>366件の録音</strong>が得られた。独立した評価者が、週次チェックリストの並行版を用いて各会話における介入活動の実施をコード化した。</p>
+<p>3つの介入成分はすべて、頻度に差はあるものの全録音会話にわたって実施されていた。</p>
+<div class="tw"><table>
+<thead><tr><th>介入成分</th><th>録音会話で確認された割合</th></tr></thead>
+<tbody>
+<tr><td>共感と支持（empathy and support）</td><td>96%</td></tr>
+<tr><td>自己効力感を高める方略</td><td>64%</td></tr>
+<tr><td>調停（mediation）のモデリング</td><td>39%</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>忠実度の読み方 「介入が効かなかった」のか「介入が届かなかった」のかを分ける情報がここにある。<mark class="hl">共感・支持は96%届いていたのに、自己効力感の支援は3分の2、調停のモデリングは3分の1強にとどまった</mark>。もし効くとしたら後者2つの成分だったのだとすれば、本試験は介入の<strong>理論そのものではなく、その実装の濃度</strong>を検証したことになる。</p>
+</div>
+<h3>9. 考察（著者の解釈）</h3>
+<p>この多施設・単一医療システムのRCTにおいて、重症患者家族に対するコミュニケーション・ファシリテーターは、主要アウトカムである6か月間の家族のうつ症状を対照と比べて改善しなかった。この所見は、重篤な疾患をもつ患者とその家族に対する支持的・コミュニケーション基盤の緩和ケア介入に関する近年の報告と一致している。著者はここから、研究デザインの改善余地として <strong>①介入の焦点の精緻化、②適切で反応性のあるアウトカムの選択、③介入から最も利益を得やすい集団の同定</strong> の3点を挙げる。</p>
+<h4>9-1. なぜ心理症状が動かなかったのか</h4>
+<p>家族がICUにいるという体験は深く苦痛に満ちており、持続する心理的影響は複数の要因に由来する。すなわち、続く不確実性、大切な人あるいは以前の社会的役割の喪失による情緒的緊張、そして介護者の負担である。将来の介入は、より厳密な心理的支援、たとえば具体的なコーピング戦略や、患者と家族の<strong>二者（dyadic）支援</strong>を必要とするかもしれない。近年の文献は、がん領域における早期からの統合的緩和ケアの有益な効果が、参加者の適応的なコーピング技能の使用の改善によって説明されうることを示唆している。またコーピング戦略の使用は、ICU代理決定者における心的外傷後ストレス症状の軽減を予測する因子である。</p>
+<p>疾患や疾患の軌跡が異なれば、必要な介入も異なる可能性がある。たとえばICU代理決定者の長期心理アウトカムは、大切な人が死亡したかどうかで異なり、また重症急性脳損傷の患者家族とそれ以外でも異なる。</p>
+<h4>9-2. アウトカムの選び方</h4>
+<p>緩和ケアの文脈で、介入に対する患者・家族中心の体験を測る適切なアウトカムを選ぶことは難しい。うつや不安といった心理アウトカムは、患者・家族にとって重要であることが広く受け入れられている一方で、<strong>介入の活動とは独立した多くの要因の影響を受け</strong>、介入期間中に変化させることが困難でありうる。介入の具体的な活動と結びついた、より近位で過程中心のアウトカムのほうが反応性のある指標になりうる。著者は例として <strong>Feeling Heard and Understood 質問票</strong>を挙げ、これならファシリテーター介入が患者・家族中心のコミュニケーションを実際に変えたかどうかをより直接的に評価できるとする。</p>
+<h4>9-3. ゴール一致ケアという概念の扱いにくさ</h4>
+<p>ゴール一致ケアとは、患者個人の価値観・治療の希望・健康と生活の質について望む結果を反映した医学的治療である。本試験の介入は、家族の自己効力感を高めることで時間をかけてゴール一致を実現させることを狙って設計された。ベースラインにおけるゴール一致ケアの割合は先行研究と同程度であったが、設問の正確な文言と回答の解釈は研究間で少しずつ異なる。介入群でゴール一致が6か月かけて対照よりわずかに増えたという観察は「正しい方向への一歩」ではあるものの、<strong>6か月間の欠測回答の多さと、ゴール一致に普遍的な定義が存在しないこと</strong>を踏まえて慎重に解釈する必要がある。医学的意思決定における基礎的概念としての重要性を考えれば、その最適な測定法を確立するさらなる研究が必要である。</p>
+<h4>9-4. ケアの連続体と再入院の読み方</h4>
+<p>重症疾患は患者がICUを出た時点で終わるわけではなく、疾患の連続体を通じたコミュニケーションとケアの統合を改善しようとする試みや提言は繰り返されてきた。本試験は、介入が家族と医療者の関係を改善しうることを示唆する。QUAL-E関係性の治療効果は小さかったが、これは介入の目標を反映した近位・過程中心のアウトカムの一例である。</p>
+<p>再入院割合の解釈は難しい。この指標はランダム化時点ではなく退院時点という<strong>ランダム化後の変数</strong>に依存し、さらに生存状況にも依存するからである。たとえば介入群で退院後30日以内の再入院割合が高かったことは、介入群で死亡した参加者の割合が対照群より小さかったことに帰せられうる。hospital-free days・ICU-free days は死亡を織り込める点、および実務的で患者中心である点で優れている。</p>
+<h3>10. 限界（著者が挙げた6点）</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>限界</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>一般化可能性</td><td>単一の医療システムからの募集であり、他のICU・病院・地域に一般化できない可能性がある</td></tr>
+<tr><td>2</td><td>欠測</td><td>医療資源利用のアウトカムは全参加者で得られたが、調査アウトカムには相当な欠測があった。欠測への対処は結論を変えなかったが、それらはデータが「ランダムに欠測している」と仮定するものであり、欠測によるバイアスを否定できない</td></tr>
+<tr><td>3</td><td>対象の選び方</td><td>重症度と死亡リスクという伝統的な指標で参加者を募集した。緩和ケアニーズのチェックリストなどの評価ツールのほうが、介入から最も利益を得やすい「満たされないニーズをもつ家族」を同定できたかもしれない</td></tr>
+<tr><td>4</td><td>対照群の性質</td><td>「通常ケア」ではなく、対照群の家族にも入院中および退院後に研究コーディネーターとつながる機会が提供されており、これがアウトカムに影響した可能性がある</td></tr>
+<tr><td>5</td><td>COVID-19</td><td>試験期間がCOVID-19パンデミックと重なり、重症疾患のプロセスに関わるすべての人に追加の情緒的ストレスが加わった。したがって本試験は、通常（非COVID-19）条件下での介入効果を検証できていない可能性がある</td></tr>
+<tr><td>6</td><td>介入期間と担い手</td><td>重症患者家族が抱える持続的な困難を考えれば、理想的な介入期間は3か月より長いかもしれない。また、介入の焦点（家族と医療チームのコミュニケーション、およびゴール一致ケアを進める力）が、長期の家族の苦痛に対して従来考えられていたよりも小さな役割しか果たしていない可能性がある。看護師ファシリテーターに加えて、ソーシャルワーク・スピリチュアルケア・メンタルヘルスの専門職を含む多職種チームであれば、多様な苦痛の源に個別に対応できたかもしれない</td></tr>
+</tbody></table></div>
+<h3>11. 結論（原著）</h3>
+<p>専門的訓練を受けた「コミュニケーション・ファシリテーター」は、家族ケアパートナーの長期的な心理的苦痛を改善しなかったが、ゴール一致とヘルスケアチームとの関係を改善しうる。今後の研究では、①介入の届け方を洗練すること（期間の調整、コーピング技能や実務的支援への焦点化、ベッドサイド臨床医を通じた通常ケアへの統合）、②支援介入によって現実的に動かしうる、より近位で過程中心のアウトカムを測定すること、③重症度ではなく緩和ケアニーズに基づいて患者を同定すること、が考えられる。</p>
+<h3>12. 批判的吟味（JCでの論点）</h3>
+<ul><li><strong>主要アウトカムの選択が介入と噛み合っていない</strong>。介入の3成分（コミュニケーション、調停、自己効力感）はいずれも「家族と医療チームの相互作用」に働きかけるものであり、うつ症状はそこから何段階も下流にある。著者自身が考察でこれを認め、Feeling Heard and Understood のような近位指標を推している。JCでは「なぜ設計段階でこの不整合が見過ごされたのか」「PARTNER試験（NEJM 2018）で同じことが起きたのに、なぜ再びHADSを主要アウトカムに置いたのか」を議論する価値がある。</li><li><strong>ベースラインのHADS-うつが 7.2点と、そもそも高くない</strong>。HADS-うつのカットオフは通常8点（境界域）・11点（臨床的うつ）とされる。本試験の対象家族の平均は境界域をわずかに下回っており、しかも両群とも自然経過で 5.9点まで下がっている。<strong>床効果に近い状態で介入の上乗せ効果を検出しようとした</strong>ことになる。介入すべきは平均ではなく、ベースラインで高得点の部分集団だった可能性がある（そのような事前設定のサブグループ解析は報告されていない）。</li><li><strong>対照群が「通常ケア」ではない</strong>。COVID-19下で対照群にも移行の節目ごとに研究コーディネーターが接触し、質問に答え資源につないだ。これは事実上の「弱い介入」であり、群間差を縮める方向に働く。原著の対照群名も Fig. 1 では「Usual Care / Resource Control」と、資源提供を含むことが明示されている。</li><li><strong>欠測が非対称かつ大きい</strong>。6か月時点の回答率は介入群 75.4%、対照群 60.2% と15ポイント差がある。介入群のほうが研究に留まりやすかったのは自然だが、これは<strong>両群で残った回答者の性質が異なる</strong>ことを意味する。多重代入は「ランダムに欠測」を仮定するが、たとえば対照群で最も苦しんでいる家族ほど回答をやめた（あるいはその逆）なら、この仮定は破れる。特に QUAL-E関係性の6か月は 対照 n=84 vs 介入 n=127 と大きく開いており、最も差が出た指標ほど欠測の非対称が大きいという構図になっている。</li><li><strong>QUAL-E関係性の差は「介入群が上がった」のではなく「対照群が落ちた」ことによる</strong>。Table 3 を追うと、介入群は 4.0 → 4.1 → 3.9 → 3.6 とゆるやかに低下するのに対し、対照群は 4.0 → 3.9 → 3.5 → 3.5 と3か月で急落する。すなわち介入は関係性を改善したというより、<strong>時間とともに関係が薄れていくのを部分的に食い止めた</strong>と読むほうが正確である。</li><li><strong>ゴール一致ケアの測定法自体が粗い</strong>。延命重視か苦痛緩和重視かの2択に押し込み、「わからない」を不一致に含める。実臨床の目標は時間経過で変わり、両者の混合であることが普通である。OR 1.544 の下限が 0.999 とちょうど1をかすめている点も含め、この指標だけで「ゴール一致が改善した」と語るのは危うい。</li><li><strong>多重比較の扱いが述べられていない</strong>。副次アウトカムは HADS-不安・IES-6・QUAL-E 3尺度・ゴール一致ケア・ICU-free days・hospital-free days・再入院・死亡（3時点ずつ）と多数あり、p&lt;0.05 を2つ拾っているが、多重性の調整に関する記述がない。QUAL-E関係性の p=0.0162 も、調整すれば残らない水準である。</li><li><strong>IES-6の結果が表にない</strong>。Methods で副次アウトカムとして明記され、Figure 2 にパネルもあるのに、Table 3 には行がなく、本文にも点推定値も信頼区間も示されない。図の上では1か月時点で介入群のほうが約1.2点低く見えるだけに、数値の非提示は選択的報告の疑いを招く。</li><li><strong>Fig. 1 の内部で数値が合わない箇所がある</strong>。拒否は n=568 と記載されるが、内訳として列挙された理由の合計は428件（患者2件＋家族426件）にとどまる。「Reasons collected（理由が得られたもの）」との注記はあるが、残り140件の性質は不明である。また6か月質問票の完了数が、Fig. 1 では対照 n=146（64%）、Table 3 の HADS-うつでは n=145、HADS-不安では n=146 と揺れている。</li><li><strong>再入院の増加を「害」と読むべきか</strong>。介入群で30日再入院が有意に多い（13% vs 7%）。著者は「介入群で死亡が少なかったことの裏返し」と説明するが、これは事後の説明であり検証されていない。別の解釈として、ファシリテーターが家族に「気になったら受診を」と促した結果、受診閾値が下がった可能性もある。もし介入が積極的治療への回帰を促したのなら、ゴール一致ケアの改善という主張と緊張関係に立つ。</li><li><strong>死亡の差を「有意でない」で片付けてよいか</strong>。6か月死亡は 36% vs 40% で、著者自身が「絶対差15%に及ぶ差を否定できない」と書いている。安全性アウトカムでこれだけの不確実性が残るのは、本試験が死亡を検出するようには設計されていないためである。方向としては介入群で死亡が少ないが、これを利益と読むのも害の否定と読むのも、いずれも根拠が足りない。</li><li><strong>ランダム化後の背景に不均衡がある</strong>。患者の女性割合が 対照35% vs 介入45% と10ポイント違い、患者あたり家族1人のみの登録も 対照93.8% vs 介入84.9% と差がある。後者は介入群でクラスターサイズが大きいことを意味し、「情報のあるクラスターサイズ」に対する感度分析が置かれた理由でもある。</li><li><strong>外的妥当性の狭さ</strong>。参加者の82%が白人、家族の78%が白人、全員が英語話者で、73.9%が郡立病院1施設からの登録である。日本のICU、とりわけ家族構成・意思決定文化・面会運用が異なる環境にそのまま当てはめられない。ただし「専任の伝え役を置いても家族のうつは動かない」という陰性の知見は、資源投入の判断に関しては保守的に働くため、当院の意思決定にも参考になる。</li><li><strong>フランス版試験との関係</strong>。同一プロトコルの2本立てで実施されたフランス版（Kentish-Barnes ら、ICM 2024;50:712-724）も陰性であり、その質的研究は看護師ファシリテーターが役割の曖昧さと縄張り争いに直面したことを報告している。<strong>2つの国で独立に同じ結果が出たこと</strong>は、「外付けのファシリテーターという実装形態」自体の限界を示す強い証拠と読める。</li></ul>
+<h3>13. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>4</td><td>ICU患者家族の心的外傷後ストレス症状のリスク（FAMIREAの原点）</td><td>Azoulay E, et al. Am J Respir Crit Care Med 2005;171:987-994</td></tr>
+<tr><td>5</td><td>一般ICU生存者のうつ（システマティックレビュー）</td><td>Davydow DS, et al. Intensive Care Med 2009;35:796-809</td></tr>
+<tr><td>6</td><td>重症急性脳損傷患者の代理決定者は6か月間 不安とうつが持続する</td><td>Wendlandt B, et al. J Pain Symptom Manage 2022;63:e633-e639</td></tr>
+<tr><td>9</td><td>重篤疾患入院患者のgoals-of-care討議を促す介入のRCT</td><td>Curtis JR, Lee RY, Brumback LC, et al. JAMA 2023;329:2028-2037</td></tr>
+<tr><td>10</td><td>代理決定者に対する Four Supports 介入のRCT</td><td>Butler RA, et al. Am J Respir Crit Care Med 2025;211:370-380</td></tr>
+<tr><td>11</td><td>長期人工呼吸患者の代理決定者向けウェブ意思決定支援ツールのRCT</td><td>Cox CE, White DB, Hough CL, et al. Ann Intern Med 2019;170:285-297</td></tr>
+<tr><td>12</td><td>慢性重症疾患患者家族への緩和ケア主導の家族面談のRCT</td><td>Carson SS, Cox CE, et al. JAMA 2016;316:51-62</td></tr>
+<tr><td>13</td><td>ケアパスウェイ介入はICU生存者の家族介護者のPICSを減らしうる</td><td>Watland S, et al. Crit Care Med 2025;53:e555-e566</td></tr>
+<tr><td>14</td><td>本試験のプロトコル論文（米国・フランスの2試験）</td><td>Curtis JR, Kentish-Barnes N, Brumback LC, et al. Contemp Clin Trials 2021;107:106465</td></tr>
+<tr><td>15</td><td>看護師ファシリテーターのRCT（フランス版・姉妹試験）</td><td>Kentish-Barnes N, Azoulay E, Reignier J, et al. Intensive Care Med 2024;50:712-724</td></tr>
+<tr><td>16</td><td>自己効力感 — 行動変容の統一理論</td><td>Bandura A. Psychol Rev 1977;84:191-215</td></tr>
+<tr><td>17</td><td>コミュニケーション・ファシリテーターの先行RCT（家族の苦痛と終末期治療強度）</td><td>Curtis JR, Treece PD, Nielsen EL, et al. Am J Respir Crit Care Med 2016;193:154-162</td></tr>
+<tr><td>26</td><td>集中治療の現場でのファシリテーター介入の実装に関する視点</td><td>Im J, Blakeney EA, Dotolo D, et al. J Pain Symptom Manage 2025;69:361-369.e4</td></tr>
+<tr><td>28</td><td>HADS の原典</td><td>Zigmond AS, Snaith RP. Acta Psychiatr Scand 1983;67:361-370</td></tr>
+<tr><td>29</td><td>IES-6（PTSD反応の簡易尺度）</td><td>Thoresen S, et al. Soc Psychiatry Psychiatr Epidemiol 2010;45:405-412</td></tr>
+<tr><td>31</td><td>患者の治療目標と一致しない医療 — 1年の資源利用と生存</td><td>Teno JM, Fisher ES, Hamel MB, et al. J Am Geriatr Soc 2002;50:496-500</td></tr>
+<tr><td>32</td><td>QUAL-E（Fam）の妥当性検証</td><td>Steinhauser KE, et al. J Pain Symptom Manage 2014;48:1168-1181</td></tr>
+<tr><td>33</td><td>hospital-free days は実務的で患者中心のアウトカム</td><td>Auriemma CL, Taylor SP, Harhay MO, et al. Am J Respir Crit Care Med 2021;204:902-909</td></tr>
+<tr><td>37</td><td>看護師主導の家族支援介入 FICUS クラスターRCT</td><td>Naef R, Jeitziner MM, et al. JAMA Intern Med 2025;185:1138-1149</td></tr>
+<tr><td>39</td><td>早期緩和ケアの効果はコーピング戦略で説明されうる</td><td>Greer JA, Jacobs JM, El-Jawahri A, et al. J Clin Oncol 2018;36:53-60</td></tr>
+<tr><td>42</td><td>ICU代理決定者のコーピング戦略とPTSD症状</td><td>Petrinec AB, et al. Crit Care Med 2015;43:1205-1212</td></tr>
+<tr><td>44</td><td>緩和ケア介入の心理的苦痛への効果（系統的レビュー・メタ解析）</td><td>Nowels MA, et al. J Pain Symptom Manage 2023;65:e691-e713</td></tr>
+<tr><td>45</td><td>Feeling Heard and Understood — 入院緩和ケアの患者報告品質指標</td><td>Gramling R, et al. J Pain Symptom Manage 2016;51:150-154</td></tr>
+<tr><td>46</td><td>ゴール一致ケアの概念モデルと測定</td><td>Sanders JJ, Curtis JR, Tulsky JA. J Palliat Med 2018;21:S17-S27</td></tr>
+<tr><td>47</td><td>ICUにおけるゴール一致ケア — 今後の研究の概念枠組み</td><td>Turnbull AE, Hartog CS. Intensive Care Med 2017;43:1847-1849</td></tr>
+<tr><td>49</td><td>ゴール一致ケア — 聖杯を探して</td><td>Halpern SD. N Engl J Med 2019;381:1603-1606</td></tr>
+<tr><td>52</td><td>ICU後のケアの断片化を減らす解決策（臨床医と患者の視点）</td><td>Leggett N, et al. Chest 2024;166:95-106</td></tr>
+<tr><td>53</td><td>重症急性脳損傷患者家族の緩和ケアニーズとメンタルヘルス</td><td>Plinke WV, Buchbinder SA, Brumback LC, et al. JAMA Netw Open 2023;6:e239949</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ICU入室から退院後3か月まで訓練を受けた看護師が伴走しても、<mark class="hl">重症患者家族のうつ症状は6か月間まったく変わらなかった（差 −0.07点、95%CI −0.70〜0.55）</mark>。動いたのは医療チームとの関係性（+0.19点）とゴール一致ケア（OR 1.54）だけである。<mark class="hl">家族支援の目標を「うつを減らす」から「聞いてもらえたと感じられるか」「本人の希望と実際の治療が一致しているか」に置き換え、専任の伝え役を新設するのではなく、その3成分（対話・調停・自己効力感の支援）を受け持ち看護師と多職種カンファの日常業務に埋め込む</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

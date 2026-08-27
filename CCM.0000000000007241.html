@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ICU医療者の4人に1人が「不適切な治療」と感じている — 複数人が一致した患者は6か月死亡3.86倍（PICNL-ICU・CCM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">ICU医療者の4人に1人が「不適切な治療」と感じている — 複数人が一致した患者は6か月死亡3.86倍（PICNL-ICU・CCM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Hesselink G, Ramakers B, Fikkers BG, Jongstra R, van Dijk D, Vloet L, Bakhshi-Raiez F, Benoit DD, Zegers M, on behalf of the PICNL-ICU Study Group. Crit Care Med. 2026;54. DOI: 10.1097/CCM.0000000000007241</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2026-06-12）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000007241" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000007241</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Perceived Inappropriateness of Intensive Care Treatment Among Clinicians: A Cross-Sectional Nationwide Survey on the Prevalence, Associated Factors, and Outcomes</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>「不適切だと感じる」を個人の弱さではなく、チームの構造シグナルとして扱う。</strong> 本研究の最大の主張はここにある。医療者が「この治療は不適切だ」と感じることは、主観的な不快感（subjective discomfort）として片づけるのではなく、team reflection と open dialogue によって扱うべき正当な倫理的懸念（legitimate ethical concern）である、というのが著者らの結論。当院の<strong>倫理係</strong>の役割は「困った事例の相談窓口」から「感じられた不適切さを可視化し、チームで検討の場に載せる仕組み」へ拡張できる。</li><li><strong>看護師の感覚を意思決定の入口に据える。</strong> 看護師であること自体が PIC のリスクを1.78倍にする（aOR 1.78、95%CI 1.37–2.33）。理由は看護師が過敏だからではなく、患者・家族に最も近く、苦痛の持続を目撃しながら治療方針への影響力が限られているからだと著者らは解釈している。当院の<strong>多職種カンファ</strong>では「看護師が不適切さを感じているか」を毎回の定型の問いとして入れる価値がある。本研究では単一医療者のみが PIC を報告した患者の64%が看護師で、その多くは他職種と共有されないまま終わっていた。</li><li><strong>「終末期の話を避ける文化」が最大の修正可能因子。</strong> EOL の意思決定を避ける文化は PIC を1.92倍（95%CI 1.51–2.45）に増やす。これは病床数や施設の性格と違い、明日から変えられる変数である。逆に多職種間の相互尊重（mutual respect）は保護的（aOR 0.84、95%CI 0.70–1.00）。当院で「先送りされている方針決定」が何件あるかを、週1回のカンファで名指しして数える運用が考えられる。</li><li><strong>PIC は予後マーカーとして使える — ただし「トリガー」としてであって「判定」としてではない。</strong> 複数の医療者が同一患者に PIC を報告した場合、6か月死亡は3.86倍（95%CI 1.23–12.16）、複合エンドポイント（死亡・重度フレイル・自宅に戻れない）は2.91倍（95%CI 1.14–7.42）。単一の医療者だけの報告では有意な関連はなかった。当院に落とすなら「2人以上が不適切さを表明した患者は、48時間以内にゴール・オブ・ケアの再確認カンファを行う」という<strong>閾値ルール</strong>が実装しやすい。</li><li><strong>ICテンプレート改訂への具体的な示唆。</strong> PIC の理由の第2位は「治療量と期待される転帰の不釣り合い」（66%）で、その内訳は「ICU後のQOLに不釣り合い」が72%、「生存に不釣り合い」が56%。つまり現場が気にしているのは死ぬかどうかより<strong>どう生きて帰るか</strong>である。当院のICテンプレートで「生存率」だけを説明している箇所があれば、退院後のADL・フレイル・自宅復帰の見込みを並べて説明する構成に改める根拠になる。</li><li><strong>Time-limited trial（TLT）を明文化する。</strong> 単変量解析では「時間・強度を区切った試験的治療（time/intensity-limited trials）を使う文化」が PIC を減らしていた（OR 0.63、95%CI 0.48–0.81）。多変量では脱落したが、著者らは Implications で TLT を推奨手段として明示している。当院では <span class="wl">終末期における時間制限つき治療トライアル（TLT）— 5要素と家族面談の進め方（コメンタリー・JAMA2011）</span> の5要素を、入室時の方針記載欄に組み込む形が現実的。</li><li><strong>治療制限の記載があっても不適切さの感覚は消えない。</strong> PIC を報告された患者の63.5%に治療制限（DNAR・人工呼吸・RRT の差し控え／中止指示）がすでに存在していた（非PIC群17.7%、p&lt;0.001）。事前指示を書くこと自体はゴールではなく、それを日々の実際の治療内容へ翻訳できているかが問われる。<strong>「制限を書いたのに治療は続いている」状態こそが PIC の温床</strong>という読みは、当院の記載監査の設計に直結する。</li><li><strong>小規模ユニット・SDU運用への含意。</strong> ICU 病床数が多いほど PIC は少ない（aOR 0.97/床、95%CI 0.94–0.99）。著者らはケースミックス（小規模ICUは内科系・高齢・フレイル患者の比率が高い）と、step-down unit の有無など患者を移す組織的な余力の差で説明している。当院の SDU 運用は、PIC を減らす組織的インフラとしても位置づけられる。</li><li><strong>効果が確認された介入は「構造化された倫理的検討」。</strong> 著者らが引く2つの介入試験は、いずれも本Vaultに既存ノートがある：医師コーチング（<span class="wl">医師をコーチングすると過剰治療患者のDNI-DNACPR記載が増える（CODE段階的ウェッジRCT・ICM2024）</span>）と、構造化モラルケース検討（Kok らの並行群間クラスターRCT、CCM 2023）。倫理係の年間計画に「相談を待つ」以外の定期開催型プログラムを1本置く根拠になる。</li><li><strong>一方で当院で急いで変えなくてよいこと。</strong> 6か月後の患者報告アウトカム（EQ-5D index、フレイル、健康の許容度、ICU入室の後悔）は PIC 群と非 PIC 群で差がなかった。医療者が「不適切」と感じた患者の大多数が、6か月後には満足できるQOLを報告し、ICU入室を後悔していない。<strong>医療者の感覚を患者の後悔の代理指標として扱ってはいけない。</strong> PIC は死亡・重度障害の予測には使えるが、「この患者はICUに来るべきでなかった」という結論の根拠にはならない。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ICU医療者が「不適切な医療を提供している」と感じる現象（perceived inappropriateness of care, PIC）は以前から知られ、組織風土・倫理風土の不備と関連し、モラルディストレスや離職意向を高めることが示されてきた。基準となるのは Piers らの APPROPRICUS 研究（欧州・イスラエル、JAMA 2011）と Anstey らのカリフォルニア研究（Crit Care 2015）で、いずれも同様の手法で約1/4の医療者が PIC を報告していた。</li><li><strong>Unknown</strong>：これらのデータはいずれも10年以上前の単一時点調査であり、Choosing Wisely（北米）や ESICM の終末期・緩和ケアガイドライン（2024）が普及した現在の実態を反映していない可能性がある。また PIC が患者の長期予後を予測するのかは、ほとんど検証されていなかった。</li><li><strong>What's new</strong>：オランダ全国47 ICU・1058人の医療者を対象とした単日横断調査で、（1）PIC の有病割合は26%と10年以上前とほぼ同一で、政策的な後押しにもかかわらず減っていないこと、（2）看護師であることと「終末期の意思決定を避ける文化」がリスク因子、病床数と多職種間の相互尊重が保護因子であること、（3）複数の医療者が一致して PIC を報告した患者は6か月死亡が3.86倍と、PIC が予後マーカーとして機能することを、レジストリ（NICE）連結と患者アンケートで初めて同時に示した。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで オランダ全国47 ICU の医療者1058人のうち <strong>26%（276人）が調査当日に「不適切な医療を提供している」と感じており</strong>、その理由の最多は「この患者にかけている費用は医療システムの他の場所でもっと有効に使える」（70%）という分配的正義の問題だった。<strong>複数の医療者が同じ患者について PIC を報告した場合、その患者の6か月死亡は3.86倍</strong>であり、PIC は主観的な不快感ではなく予後マーカーとして扱うべきである。</p>
+</div>
+<ul><li><strong>デザイン</strong>：2024年11月5日 8:00 から11月6日 8:00 までの24時間を切り取った単日横断調査。オランダの成人ICU 69施設に依頼し、47施設が参加。医療者アンケート（1477人が対象、1085人回収、うち1058人が PIC 算出可能＝回収率72%）と、当日入室していた患者525人のレジストリデータ、さらに6か月後の患者アンケート（適格397人中215人回答、54.2%）を連結</li><li><strong>PIC の定義</strong>：医療の提供が医療者個人の価値観または専門職としての判断と衝突する患者ケア状況。Piers らの定義（APPROPRICUS）を踏襲し、Figure 1 に示す8つの記述文のいずれかに当てはまる場合とした</li><li><strong>有病割合</strong>：医療者の26%（276/1058）が少なくとも1人の患者について PIC を報告。看護師は178/787（23%）、医師は98/271（36%）。ただし PIC「率」（担当患者数で割った値）は看護師19% vs 医師8%（p&lt;0.001）と逆転する — 医師は中央値5人（IQR 3–7）、看護師は中央値1人（IQR 1–1）を担当しているため</li><li><strong>患者側から見た割合</strong>：525人中143人（27%）について PIC が報告された。ICU 638床の22%（95%CI 19–26%）に相当</li><li><strong>理由の上位3つ</strong>（259枚の PIC 質問票ベース）：①この患者にかかる費用は他で有効活用できる 181件（70%）、②治療量と期待される転帰の不釣り合い 172件（66%）、③他の患者のほうがICU治療から利益を得る 142件（55%）。①③はいずれも分配的正義（distributive injustice）に属し、ほぼ常に他の理由と併記されていた（93%・96%）</li><li><strong>不釣り合いの中身</strong>：172件のうち61%が「治療が過剰」、2%が「治療が不足」。不釣り合いの対象は ICU 後のQOL 124件（72%）、生存 97件（56%）。医師は看護師より「不釣り合い」を理由に挙げることが有意に多かった（59% vs 31%、p&lt;0.001）</li><li><strong>一致度</strong>：PIC を報告された143人のうち81人（57%）は1人の医療者のみ（うち64%が看護師、36%が医師）。62人（43%）は複数の医療者が報告し、その44%で看護師と医師の双方が同じ見解を共有していた</li><li><strong>関連因子（多変量）</strong>：リスク＝看護師であること（aOR 1.78、95%CI 1.37–2.33、p&lt;0.001）、終末期の意思決定を避ける文化（aOR 1.92、95%CI 1.51–2.45、p&lt;0.001）。保護＝ICU 稼働病床数（aOR 0.97/床、95%CI 0.94–0.99、p&lt;0.01）、多職種チーム内の相互尊重（aOR 0.84、95%CI 0.70–1.00、p=0.045）。施設間のばらつきは小さい（ランダム効果の共分散推定値 0.12）</li><li><strong>アウトカム</strong>：複数医療者による PIC は6か月死亡と独立に関連（aOR 3.86、95%CI 1.23–12.16、p=0.02）。複合エンドポイント（死亡・自宅に戻れない・重度フレイル CFS≥7）も同様（aOR 2.91、95%CI 1.14–7.42、p=0.03）。単純比較では PIC 患者の39%が6か月以内に死亡（非 PIC 群15%、p&lt;0.001）</li><li><strong>患者報告アウトカムには差がない</strong>：6か月後のフレイル、EQ-5D index、健康の許容度、「もう一度ICUを選ぶか」のいずれも群間差なし</li><li><strong>著者の結論</strong>：PIC は ICU で依然として一般的であり、支持的な倫理的職場環境と逆相関する。主観的不快感として退けず、チームによる振り返りと開かれた対話に値する正当な倫理的懸念として、また不良な患者予後の予後マーカーとして扱うべきである</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>PIC（perceived inappropriateness of care／医療者が感じる医療の不適切さ）</strong> とは、「いま自分が提供している医療は、自分の専門職としての判断や個人的信念と食い違っている」と医療者が感じている状態を指す。重要なのは、これが「医学的に無益（futile）」という客観的判定ではなく、あくまで<strong>医療者の側の知覚</strong>だという点である。だから同じ患者について、ある看護師は不適切と感じ、担当医は感じない、ということが普通に起こる。本研究の143例のうち57%が「1人だけが感じた」ケースだった。</p>
+<p>PIC が問題視されるのは2つの理由からである。第一に、感じている本人への影響 — 不適切だと思う医療を毎日提供し続けることは<strong>モラルディストレス（moral distress）</strong> を生み、燃え尽きと離職意向を高める。第二に、患者への影響 — もし医療者の直感が集団として当たっているなら、PIC は「この患者は過剰な治療を受けている」という早期警告になりうる。本研究はこの第二の側面を、6か月後のアウトカムで検証した点が新しい。</p>
+<p>本研究で使われる主な尺度は以下の通り。</p>
+<ul><li><strong>EDMCQ（Ethical Decision-Making Climate Questionnaire）</strong>：ICU の倫理的意思決定風土を自己評価する検証済み尺度。全7領域あるが、本研究は回答負担を減らすため4領域のみ使用した。F3「終末期の意思決定を避ける文化」、F4「多職種チーム内の相互尊重」、F5「終末期ケアと意思決定への看護師の積極的関与」、F7「倫理的気づきの実践と文化」。</li><li><strong>Job Strain Scale（Karasek &amp; Theorell）</strong>：仕事の要求度（job demand、0–3点）・裁量度（job control、0–5点）・社会的支援（social support、0–4点）の3下位尺度で職業性ストレスを測る古典的尺度。</li><li><strong>APACHE-IV</strong>：入室時の生理学的異常・年齢・慢性疾患から重症度を算出するスコア。値が高いほど重症で予測死亡率が高い。</li><li><strong>CFS（Clinical Frailty Scale）</strong>：1（極めて健常）〜9（終末期）の9段階でフレイルを評価する尺度。本研究では入室前 CFS≥5 を「フレイルあり」、6か月後 CFS≥7 を「重度フレイル」と定義した。</li><li><strong>EuroQol-5D（EQ-5D）</strong>：移動・身の回り管理・普段の活動・痛み／不快感・不安／ふさぎ込みの5次元からQOLを測り、0〜1の index score に換算する尺度。1が完全な健康。</li><li><strong>NICE レジストリ（National Intensive Care Evaluation）</strong>：オランダの全国 ICU 症例登録。日本の JIPAD に相当する位置づけで、併存疾患・入室形態・治療制限などが登録されている。</li><li><strong>Time-limited trial（TLT）</strong>：あらかじめ期間と評価時点を決めて治療を試行し、期限に達したら継続か中止かを再決定する方法。「やってみないと分からない」状況で、際限のない継続を防ぐ枠組み。</li></ul>
+</div>
+<h3>2. 背景と目的</h3>
+<p>ICU の治療選択肢は拡大し続けているが、集中治療は労働集約的で高コストであり、しばしば患者の長期予後は不確実なままである。この複雑な環境で、ICU 医療者はしばしば倫理的ジレンマに直面する。とりわけ、自分が不適切だと考える医療を提供しているときに。</p>
+<p>先行研究は PIC が ICU で高頻度であり、組織的・倫理的風土の不備と関連することを示してきた。そしてこれらの状況は医療者のモラルディストレスにつながり、職業からの離脱意向を高める。</p>
+<p>「適切な集中治療（appropriate ICU care）」という概念への注目は高まっている。その背景には、治療は生存だけでなく、患者にとって意味のある長期アウトカムに焦点を当てるべきであり、期待される利益に比例したものであるべきだ、という患者・家族・医療者の間で広がる認識がある。この転換は北米の Choosing Wisely や、ESICM の ICU における終末期・緩和ケアガイドライン（ICM 2024）といった取り組みに反映されている。</p>
+<p>にもかかわらず、PIC の有病割合・関連因子・帰結についての最新の知見は限られている。既存データは10年以上前に欧州・イスラエル・米国の医療者を対象に行われた単一時点有病割合調査に基づく。これらの知見は現在の実態、とりわけオランダのように「治療は期待される利益に比例すべきであり、非比例的あるいは無益な介入は避けるべきだ」と国の政策プログラムが強調している医療環境を反映していない可能性がある。さらに、PIC が有害な患者アウトカムを予測する潜在的価値はほとんど未探索であり、そうした知見は PIC の臨床的妥当性を裏づけ、倫理的に複雑な状況を航行する ICU チームを支援しうる。</p>
+<p>したがって本研究の目的は3つ。第一に（主要目的）、ICU 医療者における PIC の有病割合と理由を明らかにすること。第二に、組織的・個人的・職業的・仕事関連の因子との関連を評価すること。第三に、PIC が ICU 入室後6か月の有害アウトカムと関連するかを検討すること。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>デザイン・セッティング・対象</h4>
+<ul><li><strong>デザイン</strong>：単日横断調査。オランダ全国の成人 ICU で働く看護師と医師が対象</li><li><strong>補完データ</strong>：調査当日に ICU で治療を受けていた患者について、人口統計・臨床・アウトカムデータをレジストリと6か月後のフォローアップ調査で収集</li><li><strong>調査期間</strong>：2024年11月5日 8:00 から11月6日 8:00 までの24時間</li><li><strong>倫理</strong>：Radboud UMC 研究倫理委員会承認（"Prevalentie van ervaren niet-passende zorg op de intensive care in Nederland"、登録番号 2024-17280、2024年5月13日）。ヘルシンキ宣言と GCP に準拠</li></ul>
+<h4>手順</h4>
+<p>全 ICU の部門長に連絡し、研究目的を説明して参加を依頼した。同意が得られた施設では、現地研究者（医師・看護師または質管理担当者）を1名指名してもらい、参加者のスクリーニングとリクルートを担当させた。</p>
+<p>現地研究者は、調査当日に患者ケアを提供していた全適格医療者と、当日 ICU に入室していた全患者について、研究 ID 番号と人口統計情報（年齢・性別・職種）を含むコード化されたリストを作成した。<strong>これらのリストはデータ収集と解析の後に破棄された。</strong> 医療者にはオンライン質問票へのリンクを含む招待メールが送られ、未回答者には1週間後にリマインダーが送られた。</p>
+<p>6か月後、適格患者（参加 ICU で調査当日に治療を受け、生存しており、国外在住でなく、自宅または電子メールアドレスがある者）に郵送で連絡した。オンライン質問票へのQRコードを含む情報レターと、印刷版の質問票、返信用封筒（研究代表者 G.H. 宛）を同封。郵送先住所がない場合は、質問票リンクを含むメールで連絡した。必要に応じて家族が回答を補助してよいこととした。未回答者には2週間後と4週間後にリマインダーを送付。</p>
+<h4>質問票（4種類）</h4>
+<p>いずれも既存の検証済みオランダ語訳（Piers らのもの）に基づく。医師5名・看護師2名・患者代表2名からなるテストパネルのフィードバックを受けて、オランダの ICU 文脈に合うよう軽微な文言調整を行った。パネルはウェブ版のユーザビリティと技術的機能も事前テストした。インフォームド・コンセントは最初の設問で取得した。</p>
+<div class="tw"><table>
+<thead><tr><th>質問票</th><th>回答者</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>ICU 質問票</td><td>各施設の現地研究者</td><td>ユニットの特性、入室に関する実践、倫理的支援体制、終末期ケアの実践</td></tr>
+<tr><td>医療者質問票</td><td>調査当日の全適格医療者</td><td>人口統計、job strain（高い要求と限られた裁量・社会的支援によって生じる心理社会的ストレス）、倫理的職場環境の認識。加えて当日の担当患者数と、そのうち不適切な医療を受けていると考えられる患者数</td></tr>
+<tr><td>PIC 質問票</td><td>不適切と判断した患者ごとに医療者が記入</td><td>あらかじめ定めた記述文で、その医療者が「不適切」と考えるに至った理由を評価</td></tr>
+<tr><td>患者質問票</td><td>6か月後の患者本人（必要時は家族が補助）</td><td>人口統計、QOL（EQ-5D）、ICU 入室前と6か月後のフレイル（CFS）、ICU 治療の転帰の許容度。PIC についても医療者質問票と類似の記述文で測定</td></tr>
+</tbody></table></div>
+<p>質問票の回答は、医療者と患者それぞれに固有の研究 ID 番号を介して該当患者のデータと連結され、<strong>同一患者に対する複数医療者の PIC 判断の一致度</strong>を評価できるようにした。</p>
+<h4>レジストリデータ</h4>
+<p>入室中の全患者について、臨床データ（併存疾患、APACHE-IV など）と ICU ケアのデータ（入室形態、治療制限など）をオランダの NICE レジストリから収集した。各 ICU 患者に割り当てられた固有番号により、仮名化した状態で臨床データを追跡できる。データへのアクセスと利用の許可は NICE レジストリの規定に従って取得した。ICU 入室後6か月以内の死亡（あり／なし）については、現地研究者が臨床記録と管理記録を確認したうえで研究 ID に紐づけて提供した。<strong>匿名化された死亡データの利用については、倫理委員会がインフォームド・コンセントの必要性を免除した。</strong></p>
+<h4>統計解析</h4>
+<ul><li><strong>PIC 率の定義</strong>：（全医療者について、各医療者が報告した PIC 患者数の総和）÷（全医療者について、その医療者が担当した患者総数の総和）。医師と看護師で担当患者数が大きく違うため、この分母の取り方が結果の読み方を左右する</li><li>サブグループ比較にはパラメトリック・ノンパラメトリック検定を適宜使用</li><li>関連変数は二値化し、解析用に合成スコアを作成</li><li><strong>PIC 率の関連因子</strong>：単変量回帰の後、ICU・医療者・仕事関連の特性を含む階層的多変量モデルを構築。クラスタリングを考慮して ICU のランダム効果を投入</li><li><strong>アウトカムとの関連</strong>：特定の患者について<strong>2人以上</strong>の医療者が報告した PIC と、6か月後の2つのアウトカム（死亡、複合アウトカム）との関連を検定する別の多変量モデルを構築。「2人以上」という閾値は、判断の一致（concordant clinical judgment）に基づいて患者レベルの関連を評価するために採用した</li><li><strong>感度分析</strong>：PIC の閾値を「1人以上」とした場合と「2人以上」とした場合とで、患者レベルの特性とアウトカムの差を検討</li><li><strong>複合エンドポイント</strong>：死亡、自宅に住んでいない、または重度フレイル（CFS≥7）のいずれかに該当</li><li>独立変数間の多重共線性は分散拡大係数（VIF）で評価。最終モデルは有意水準5%のステップワイズ後方選択で構築</li><li>ソフトウェア：Microsoft Excel および SPSS Version 25</li></ul>
+<h3>4. 結果 — 参加 ICU と研究集団</h3>
+<p>招待した69 ICU のうち47施設が参加した（Figure 2）。調査当日に勤務していた医療者は合計1477人で、全員が質問票の送付対象となった。参加 ICU 内での回答率の中央値（IQR）は全体81%（67–92%）、看護師78%（62–95%）、医師90%（68–100%）だった。</p>
+<p>調査当日、参加 ICU で治療を受けていた患者は525人。適格患者397人のうち215人が質問票に回答した（回答率54.2%）。</p>
+<p>看護師は医師と、人口統計（年齢・性別・信仰）、勤続年数、仕事の要求度、倫理的風土の認識において有意に異なっていた。回答者と非回答者の間では、医療者の性別・職種にも、患者の性別・年齢にも統計学的有意差はなかった。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007241" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007241）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. ICU と医療者の選定プロセス。縦一列に並んだ実線のボックスが本流で、右向きの矢印で除外理由が枝分かれする典型的なフローチャート。最上段「参加を依頼した69 ICU」から右へ「22 ICU を除外：反応なし 15、時間・キャパシティ・優先度がない 6、研究目的への賛同が得られない 1」が分岐する。次段「47 ICU が参加し ICU 質問票に回答」→「調査当日に勤務し医療者質問票を受け取った医療者 1477人」。ここから右へ「392人を除外（質問票を開かなかった、または同意しなかった）」が分岐し、本流は「医療者質問票を返送した 1085人」へ。さらに右へ「27人を除外（不適切さの知覚に関する回答が欠測）」が分岐し、「PIC 率を算出できる回答を完了した 1058人」に至る。ここで下向きに3本の矢印が扇状に分かれ、左のボックスが「782人が『不適切な医療を受けている患者はいない』と回答」、右のボックスが「276人が1人以上の患者について不適切な医療を受けていると報告」。右のボックスからさらに下へ矢印が伸び、最下段の大きなボックスに「返送された PIC 質問票 259枚」と、その下に PIC 症例 143例の内訳が4行で列挙される：看護師または医師1人が報告 81例、少なくとも看護師1人と医師1人が報告 36例、複数の看護師が報告 19例、複数の医師が報告 7例。原図・無改変。</p>
+</div>
+<p>Figure 2 の各ボックスを表に起こすと次の通り。</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>人数・施設数</th><th>除外（内訳）</th></tr></thead>
+<tbody>
+<tr><td>参加依頼した ICU</td><td>69施設</td><td>22施設除外（反応なし 15、時間・キャパシティ・優先度なし 6、研究目的への賛同なし 1）</td></tr>
+<tr><td>参加し ICU 質問票に回答</td><td>47施設</td><td>—</td></tr>
+<tr><td>調査当日勤務・質問票送付</td><td>1477人</td><td>392人除外（質問票を開かない／同意なし）</td></tr>
+<tr><td>医療者質問票を返送</td><td>1085人</td><td>27人除外（PIC に関する回答が欠測）</td></tr>
+<tr><td>PIC 率算出可能</td><td>1058人</td><td>—</td></tr>
+<tr><td>PIC 患者なしと回答</td><td>782人</td><td>—</td></tr>
+<tr><td>PIC 患者1人以上と報告</td><td>276人</td><td>—</td></tr>
+<tr><td>返送された PIC 質問票</td><td>259枚</td><td>41人は医療者質問票で PIC を報告したが PIC 質問票を記入しなかった</td></tr>
+<tr><td>PIC 症例</td><td>143例</td><td>内訳：単独（看護師または医師1人）81例／看護師1人以上＋医師1人以上 36例／複数の看護師 19例／複数の医師 7例</td></tr>
+</tbody></table></div>
+<h3>5. 結果 — PIC の有病割合</h3>
+<p>PIC 率を算出できる回答を提供した1058人の医療者のうち、<strong>276人（26%）が少なくとも1人の患者について PIC を報告した</strong>（Figure 2）。</p>
+<div class="tw"><table>
+<thead><tr><th>職種</th><th>人数</th><th>担当患者数 中央値（IQR）</th><th>PIC を報告した人数（%）</th><th>PIC 率</th></tr></thead>
+<tbody>
+<tr><td>看護師</td><td>787人</td><td>1人（1–1）</td><td>178人（23%）</td><td>19%</td></tr>
+<tr><td>医師</td><td>271人</td><td>5人（3–7）</td><td>98人（36%）</td><td>8%</td></tr>
+<tr><td>全体</td><td>1058人</td><td>—</td><td>276人（26%）</td><td>—</td></tr>
+</tbody></table></div>
+<p>看護師の PIC 率は医師より有意に高かった（19% vs 8%、p&lt;0.001）。ここで「PIC を報告した医療者の割合」は医師のほうが高い（36% vs 23%）のに、「PIC 率」は看護師のほうが高いという一見矛盾する結果が生じるのは、医師が中央値5人を担当しているため、1人でも PIC 患者がいれば「報告者」にカウントされるからである。<strong>分母を担当患者数に揃えると、看護師のほうが目の前の患者を不適切と感じる頻度が2倍以上高い。</strong></p>
+<p>PIC 率は ICU 経験年数のレベル間で概ね均等に分布しており、最も高かったのは経験3〜6年の層だった（Supplement 5）。</p>
+<h3>6. 結果 — 医療者が挙げた PIC の理由</h3>
+<p>235人の医療者が259枚の PIC 質問票を記入した（Figure 2）。41人は医療者質問票で PIC を報告したが、PIC 質問票は記入しなかった。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007241" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007241）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 医療者が報告した PIC の理由とその割合。横棒グラフで、左側に理由の記述文と該当件数（N）、横軸は「報告された PIC 状況全体に占める割合（%）」で0から80まで10刻み。棒は上から件数の多い順に並ぶ淡いグレーの水平バー。上から順に、「ICU にかかる費用は他でもっと有効に使える（N=181）」が約70%で最長、「治療量と期待される転帰の不釣り合い（N=172）」が約66%、「他の患者のほうが ICU 治療から利益を得る（N=142）」が約55%、「患者の持続的な非アドヒアランス（N=65）」が約25%、「患者または家族に不正確な情報が与えられている（N=44）」が約17%、「患者の治療に関する意思は分かっているが尊重されていない（N=37）」が約14%、「重要な当事者が意思決定に関与していない（N=31）」が約12%、「患者が質の高い医療を受けられていない（N=30）」が約12%。上位3本と下位5本の間に明確な段差があり、分配的正義と不釣り合いに理由が集中していることが視覚的に分かる。原図・無改変。</p>
+</div>
+<p>理由の表：</p>
+<div class="tw"><table>
+<thead><tr><th>順位</th><th>理由</th><th>件数</th><th>割合</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>この患者にかかる費用は医療システムの他の場所でもっと有効に使える</td><td>181</td><td>70%</td></tr>
+<tr><td>2</td><td>提供している医療の量が期待される転帰と不釣り合い</td><td>172</td><td>66%</td></tr>
+<tr><td>3</td><td>他の患者のほうが ICU 治療からより利益を得る</td><td>142</td><td>55%</td></tr>
+<tr><td>4</td><td>患者の持続的な非アドヒアランスを目撃している</td><td>65</td><td>25%</td></tr>
+<tr><td>5</td><td>ICU または紹介元の医療者による正確な情報提供が欠けている</td><td>44</td><td>17%</td></tr>
+<tr><td>6</td><td>患者の意思が無視されている</td><td>37</td><td>14%</td></tr>
+<tr><td>7</td><td>医療者・患者・家族のいずれかが意思決定に参加していない</td><td>31</td><td>12%</td></tr>
+<tr><td>8</td><td>患者ケアの質が低い</td><td>30</td><td>12%</td></tr>
+</tbody></table></div>
+<p>最多の理由（1位、70%）は<strong>分配的正義（distributive justice）</strong> に属し、ほぼ全例（93%）で他の理由と併記されていた。</p>
+<p>2位の「不釣り合いな医療」（66%）の内訳は、そのうち61%が「医療の量が過剰」、2%が「不足」と認識されていた。何に対して不釣り合いかを見ると、大多数が <strong>ICU 後の期待QOLに対して不釣り合い</strong>（124件、72%）、次いで<strong>生存に対して不釣り合い</strong>（97件、56%）だった。医師（83/140、59%）は看護師（89/292、31%）より、不釣り合いな医療を PIC の理由として挙げることが有意に多かった（p&lt;0.001）。</p>
+<p>3位の「他の患者のほうが利益を得る」（142件、55%）も、ほぼ全例（96%）で他の理由と併記されていた。医療者が最も高頻度に報告した組み合わせは、「不釣り合いな医療」と、前述の分配的正義に関する2つの理由の併記だった。</p>
+<h3>7. 結果 — 同一患者を担当する医療者間の一致</h3>
+<p>調査当日 ICU で治療を受けていた525人のうち、<strong>143人（27%）について PIC が報告された</strong>（Figure 2）。これは ICU 638床の22%（95%CI 19–26%）に相当する。</p>
+<div class="tw"><table>
+<thead><tr><th>一致の状況</th><th>患者数</th><th>割合</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>単一の医療者のみが報告</td><td>81人</td><td>57%</td><td>報告者は看護師64%、医師36%</td></tr>
+<tr><td>複数の医療者が報告</td><td>62人</td><td>43%</td><td>このうち44%で看護師と医師の双方が同じ見解</td></tr>
+</tbody></table></div>
+<p>つまり <strong>PIC の過半数は「1人の胸の内にとどまっている」</strong>。そしてその大半は看護師である。著者らはこの高い単独報告の比率を、同一患者について他の医療者が異なる評価をしていることの表れとして、PIC の本質的な主観性（inherent subjective nature）を示すものと解釈している。</p>
+<h3>8. 結果 — PIC と関連する組織的・個人的・職業的・仕事関連因子</h3>
+<p>多変量解析の結果は次の通り（Table 3）。</p>
+<h4>Table 3. PIC と関連する因子の単変量・多変量（調整）解析</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>OR（95%CI）</th><th>p</th><th>調整OR（95%CI）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td><strong>個人（医療者）</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>年齢（歳）</td><td>0.99（0.98–1.00）</td><td>0.21</td><td>—</td><td>—</td></tr>
+<tr><td>女性</td><td>1.43（1.11–1.84）</td><td>&lt;0.01</td><td>—</td><td>—</td></tr>
+<tr><td><strong>職業的</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>看護師（参照：医師）</td><td>2.45（1.93–3.13）</td><td>&lt;0.001</td><td>1.78（1.37–2.33）</td><td>&lt;0.001</td></tr>
+<tr><td>ICU 勤務年数</td><td>1.00（0.99–1.01）</td><td>0.95</td><td>—</td><td>—</td></tr>
+<tr><td><strong>仕事関連（Job Strain Scale 下位尺度）</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>仕事の要求度</td><td>1.01（0.86–1.18）</td><td>0.93</td><td>—</td><td>—</td></tr>
+<tr><td>仕事の裁量度</td><td>0.86（0.76–0.96）</td><td>0.01</td><td>—</td><td>—</td></tr>
+<tr><td>社会的支援</td><td>0.87（0.71–1.07）</td><td>0.18</td><td>—</td><td>—</td></tr>
+<tr><td><strong>倫理的風土（EDMCQ 下位尺度）</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>多職種チーム内の相互尊重</td><td>0.77（0.65–0.91）</td><td>&lt;0.01</td><td>0.84（0.70–1.00）</td><td>0.045</td></tr>
+<tr><td>倫理的気づきの実践と文化</td><td>0.55（0.41–0.72）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td>終末期ケアと意思決定への看護師の関与</td><td>0.76（0.59–0.99）</td><td>0.04</td><td>—</td><td>—</td></tr>
+<tr><td>終末期の意思決定を避ける文化</td><td>2.36（1.88–2.96）</td><td>&lt;0.001</td><td>1.92（1.51–2.45）</td><td>&lt;0.001</td></tr>
+<tr><td>時間・強度を区切った試験的治療の使用</td><td>0.63（0.48–0.81）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td><strong>組織的</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>大学病院（参照：非大学病院）</td><td>0.79（0.42–1.46）</td><td>0.45</td><td>—</td><td>—</td></tr>
+<tr><td>稼働 ICU 病床数</td><td>0.97（0.95–1.00）</td><td>0.02</td><td>0.97（0.94–0.99）</td><td>&lt;0.01</td></tr>
+<tr><td>登録 ICU 看護師数</td><td>1.00（0.99–1.00）</td><td>0.18</td><td>—</td><td>—</td></tr>
+<tr><td>ICU 医師数</td><td>0.97（0.93–1.02）</td><td>0.20</td><td>—</td><td>—</td></tr>
+<tr><td>ICU レジデント・フェロー数</td><td>0.98（0.96–1.01）</td><td>0.20</td><td>—</td><td>—</td></tr>
+<tr><td>若手医師が24時間365日 ICU 内またはオンコール</td><td>0.67（0.43–1.05）</td><td>0.08</td><td>—</td><td>—</td></tr>
+<tr><td>患者ケアの倫理的ジレンマへの支援体制</td><td>0.72（0.45–1.15）</td><td>0.17</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>（多変量解析後に統計学的有意 p&lt;0.05 だった因子のみ調整OR を表示。多変量モデルには単変量で p≤0.2 の因子、または重要と判断された因子を投入）</p>
+<p>ICU 間の PIC 率のばらつきは低〜中等度（ランダム効果の共分散推定値 0.12）で、参加 ICU 間で医療の適切性の認識は比較的均質だったことを示す。</p>
+<p>読み取りのポイントを2つ。第一に、<strong>「倫理的ジレンマへの支援体制がある」ことは単変量でも有意でなかった</strong>（OR 0.72、95%CI 0.45–1.15、p=0.17）。倫理コンサルテーションの窓口を置くこと自体では PIC は減らない。効いていたのは日々の風土の側（相互尊重・倫理的気づき・終末期の話を避けないこと）である。第二に、単変量では強く効いていた「倫理的気づきの実践と文化」（OR 0.55）や「TLT の使用」（OR 0.63）が多変量では脱落している。これらが「終末期の意思決定を避ける文化」と強く相関する同じ構成概念の別の側面である可能性が高い。</p>
+<h3>9. 結果 — PIC のある患者群とない患者群の違い</h3>
+<p>複数の医療者から PIC を報告された患者は、そうでない患者と比べて、緊急入室（p&lt;0.001）、ICU での急性腎不全（p&lt;0.001）、より高い APACHE-IV 重症度スコア（p=0.04）、長い ICU 滞在（p&lt;0.001）、1つ以上の治療制限の記載（p&lt;0.001）の頻度が高かった。</p>
+<p><strong>6か月以内に死亡した患者の割合は、PIC 群で実質的に高かった（39% vs 15%、p&lt;0.001）。</strong> 一方、6か月後の患者報告フレイル、QOL、健康の許容度、ICU 入室の振り返っての再考のいずれにも群間差はなかった。</p>
+<h4>Table 2. 患者背景（n = 525）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>調査当日 ICU 在室（n=525）</th><th>2人以上が PIC 報告（n=62）</th><th>0〜1人のみ（n=463）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td><strong>個人</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>女性</td><td>186/525（35.4%）</td><td>22/62（35.5%）</td><td>164/463（35.4%）</td><td>0.99</td></tr>
+<tr><td>年齢（歳、平均±SD）</td><td>61.8±15.6</td><td>61.3±16.0</td><td>61.8±15.6</td><td>0.80</td></tr>
+<tr><td>信仰あり</td><td>78/208（37.5%）</td><td>9/16（56.3%）</td><td>69/173（39.9%）</td><td>0.29</td></tr>
+<tr><td>移民（またはその子）</td><td>27/207（13.0%）</td><td>3/15（20.0%）</td><td>24/191（12.6%）</td><td>0.42</td></tr>
+<tr><td><strong>ICU 入室前</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>介護施設入所</td><td>8/208（3.8%）</td><td>1/16（6.3%）</td><td>7/193（3.6%）</td><td>0.48</td></tr>
+<tr><td>CFS 中央値（IQR）</td><td>3（2–4）</td><td>3（2–5）</td><td>3（2–4）</td><td>0.32</td></tr>
+<tr><td>入室24時間以内の心肺蘇生</td><td>32/518（6.2%）</td><td>6/62（9.7%）</td><td>26/456（5.7%）</td><td>0.22</td></tr>
+<tr><td><strong>ICU 滞在</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>急性腎不全</td><td>73/518（14.1%）</td><td>18/62（29.0%）</td><td>55/456（12.1%）</td><td>&lt;0.001</td></tr>
+<tr><td>緊急入室</td><td>385/518（74.3%）</td><td>57/62（91.9%）</td><td>328/456（71.9%）</td><td>&lt;0.001</td></tr>
+<tr><td>入室形態：内科系</td><td>304/518（58.7%）</td><td>46/62（74.2%）</td><td>258/456（56.6%）</td><td>&lt;0.01</td></tr>
+<tr><td>入室形態：緊急手術</td><td>72/518（13.9%）</td><td>11/62（17.7%）</td><td>61/456（13.4%）</td><td>0.35</td></tr>
+<tr><td>入室形態：予定手術</td><td>142/518（27.4%）</td><td>5/62（8.1%）</td><td>137/456（30.0%）</td><td>&lt;0.001</td></tr>
+<tr><td>ICU 在室日数 中央値（IQR）</td><td>3（1–13）</td><td>7（2–21）</td><td>3（1–11）</td><td>&lt;0.001</td></tr>
+<tr><td>在院日数 中央値（IQR）</td><td>12（5–30）</td><td>17（5–38）</td><td>11（5–27）</td><td>0.21</td></tr>
+<tr><td>ICU 再入室</td><td>30/518（5.8%）</td><td>7/62（11.3%）</td><td>23/456（5.0%）</td><td>0.05</td></tr>
+<tr><td>併存疾患1つ以上</td><td>216/518（41.7%）</td><td>33/62（53.2%）</td><td>183/456（40.1%）</td><td>0.05</td></tr>
+<tr><td>人工呼吸</td><td>286/518（55.2%）</td><td>33/62（53.2%）</td><td>253/456（55.5%）</td><td>0.74</td></tr>
+<tr><td>APACHE-IV（平均±SD）</td><td>61.6±28.3</td><td>69.1±30.7</td><td>60.5±27.8</td><td>0.04</td></tr>
+<tr><td>治療制限あり</td><td>102/438（23.3%）</td><td>34/53（63.5%）</td><td>68/385（17.7%）</td><td>&lt;0.001</td></tr>
+<tr><td><strong>ICU 入室6か月後</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>CFS 中央値（IQR、患者報告）</td><td>3（2–4）</td><td>3（3–6）</td><td>3（2–4）</td><td>0.33</td></tr>
+<tr><td>死亡</td><td>92/525（17.5%）</td><td>24/62（38.7%）</td><td>68/463（14.7%）</td><td>&lt;0.001</td></tr>
+<tr><td>EQ-5D index score 中央値（IQR）</td><td>0.9（0.7–1.0）</td><td>0.8（0.8–1.0）</td><td>0.9（0.7–1.0）</td><td>0.69</td></tr>
+<tr><td>介護施設在住</td><td>15/209（7.2%）</td><td>3/16（18.8%）</td><td>12/194（6.2%）</td><td>0.09</td></tr>
+<tr><td>健康状態が許容できないと感じる</td><td>13/233（5.6%）</td><td>1/20（5.0%）</td><td>12/213（5.6%）</td><td>1.00</td></tr>
+<tr><td>振り返って ICU を再度選ばない</td><td>17/213（8.0%）</td><td>6/45（13.3%）</td><td>11/168（6.5%）</td><td>0.14</td></tr>
+</tbody></table></div>
+<p>治療制限は「蘇生・人工呼吸・腎代替療法の差し控えまたは中止に関する、入室前から存在する、あるいは ICU で確立された指示」と定義されている。併存疾患は COPD、慢性心血管疾患、免疫疾患、糖尿病、慢性腎疾患、悪性腫瘍、血液悪性腫瘍、肝硬変、慢性透析、AIDS を指す。入室前 CFS は ICU で医療者が評価・報告したもので、欠測分は6か月後の患者報告 CFS で補完した（n=146）。</p>
+<p>この表で最も目を引くのは<strong>予定手術後患者の比率の落差</strong>（8.1% vs 30.0%）と、<strong>治療制限の記載率の落差</strong>（63.5% vs 17.7%）である。前者は PIC が「予定された、限られた期間の ICU 管理」ではほとんど起きないことを示し、後者は「すでに制限が書かれている患者ほど PIC が起きている」という逆説を示す。</p>
+<h4>Table 1. 医療者背景（n = 1085）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>看護師</th><th>医師</th><th>p</th></tr></thead>
+<tbody>
+<tr><td><strong>個人</strong></td><td></td><td></td><td></td></tr>
+<tr><td>年齢（歳、中央値・IQR）</td><td>38（29–52）</td><td>37（30–47）</td><td>0.11</td></tr>
+<tr><td>女性</td><td>603/808（74.6%）</td><td>136/277（49.1%）</td><td>&lt;0.001</td></tr>
+<tr><td>パートナーと同居</td><td>622/801（77.7%）</td><td>229/277（82.7%）</td><td>0.08</td></tr>
+<tr><td>子どもあり</td><td>452/800（56.5%）</td><td>143/277（51.6%）</td><td>0.16</td></tr>
+<tr><td>信仰あり</td><td>282/788（35.8%）</td><td>60/271（22.1%）</td><td>&lt;0.001</td></tr>
+<tr><td>治療決定において信仰が重要</td><td>122/808（15.1%）</td><td>25/277（9.0%）</td><td>0.01</td></tr>
+<tr><td><strong>職業的</strong></td><td></td><td></td><td></td></tr>
+<tr><td>シニア</td><td>786/808（97.3%）</td><td>129/277（46.6%）</td><td>&lt;0.001</td></tr>
+<tr><td>ICU 勤務年数（中央値・IQR）</td><td>9（3–22）</td><td>4（1–13）</td><td>&lt;0.001</td></tr>
+<tr><td><strong>Job Strain Scale 下位尺度（中央値・IQR）</strong></td><td></td><td></td><td></td></tr>
+<tr><td>仕事の要求度（0–3）</td><td>0（0–1）</td><td>0（0–1）</td><td>&lt;0.001</td></tr>
+<tr><td>仕事の裁量度（0–5）</td><td>4（4–5）</td><td>5（4–5）</td><td>0.40</td></tr>
+<tr><td>社会的支援（0–4）</td><td>4（4–4）</td><td>4（4–4）</td><td>0.90</td></tr>
+<tr><td><strong>倫理的風土（EDMCQ 下位尺度、中央値・IQR）</strong></td><td></td><td></td><td></td></tr>
+<tr><td>F4. 多職種チーム内の相互尊重（5件法）</td><td>4（4–4）</td><td>4（4–5）</td><td>&lt;0.001</td></tr>
+<tr><td>F7. 倫理的気づきの実践と文化（4件法）</td><td>3（3–4）</td><td>4（3–4）</td><td>&lt;0.001</td></tr>
+<tr><td>F5. 終末期ケアと意思決定への看護師の積極的関与（4件法）</td><td>4（3–4）</td><td>4（3–4）</td><td>0.08</td></tr>
+<tr><td>F3. 終末期の意思決定を避ける文化（4件法）</td><td>2（2–3）</td><td>2（2–2）</td><td>&lt;0.001</td></tr>
+</tbody></table></div>
+<p>「シニア」は、研修医・レジデントおよび ICU 専門看護師の研修生と対比した区分。倫理的風土の4項目すべてで、看護師は医師より悪い評価をしている（相互尊重は同じ中央値4だが分布が違い有意差あり、倫理的気づきは看護師3・医師4、終末期の意思決定を避ける文化は看護師のほうが高い）。<strong>同じユニットで働いていても、看護師と医師では見えている倫理的風土が体系的に違う。</strong></p>
+<h3>10. 結果 — PIC と6か月後の有害アウトカムの関連</h3>
+<p>複数の医療者による PIC は、6か月後の ICU 後死亡リスク上昇と独立に関連していた（aOR 3.86、95%CI 1.23–12.16、p=0.02）。同時に、既存または ICU で確立された治療制限（aOR 3.97、95%CI 1.43–11.00、p&lt;0.01）、入室前のフレイル（aOR 3.76、95%CI 1.37–10.29、p=0.01）、より高い APACHE-IV スコア（aOR 1.04、95%CI 1.02–1.06、p&lt;0.001）も独立した関連因子だった。同じ4変数が、複合アウトカムの達成リスク上昇とも独立に関連していた。</p>
+<h4>Table 4. ICU 入室6か月後の患者アウトカムに関連する因子</h4>
+<p><strong>死亡（単変量・多変量）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>OR（95%CI）</th><th>p</th><th>調整OR（95%CI）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>女性</td><td>1.33（0.84–2.10）</td><td>0.23</td><td>—</td><td>—</td></tr>
+<tr><td>年齢（歳）</td><td>1.04（1.02–1.05）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td>大学病院での治療</td><td>0.94（0.53–1.65）</td><td>0.83</td><td>—</td><td>—</td></tr>
+<tr><td>複数医療者による PIC</td><td>3.93（2.22–6.93）</td><td>&lt;0.001</td><td>3.86（1.23–12.16）</td><td>0.02</td></tr>
+<tr><td>ICU 入室24時間以内の心肺蘇生</td><td>2.70（1.25–5.82）</td><td>0.01</td><td>—</td><td>—</td></tr>
+<tr><td>緊急 ICU 入室</td><td>4.95（2.23–11.00）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td>併存疾患1つ以上</td><td>2.20（1.39–3.50）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td>APACHE-IV スコア</td><td>1.03（1.02–1.04）</td><td>&lt;0.001</td><td>1.04（1.02–1.06）</td><td>&lt;0.001</td></tr>
+<tr><td>入室前フレイル（CFS≥5）</td><td>4.13（1.84–9.25）</td><td>&lt;0.001</td><td>3.76（1.37–10.29）</td><td>0.01</td></tr>
+<tr><td>ICU での人工呼吸</td><td>1.34（0.84–2.13）</td><td>0.22</td><td>—</td><td>—</td></tr>
+<tr><td>ICU 在室日数</td><td>1.01（1.00–1.02）</td><td>0.04</td><td>—</td><td>—</td></tr>
+<tr><td>在院日数</td><td>1.00（1.00–1.01）</td><td>0.27</td><td>—</td><td>—</td></tr>
+<tr><td>治療制限あり</td><td>6.79（4.02–11.47）</td><td>&lt;0.001</td><td>3.97（1.43–11.00）</td><td>&lt;0.01</td></tr>
+<tr><td>ICU 再入室</td><td>2.15（0.95–4.87）</td><td>0.07</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>複合エンドポイント（死亡・自宅に住んでいない・重度フレイル CFS≥7 のいずれか）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>OR（95%CI）</th><th>p</th><th>調整OR（95%CI）</th><th>p</th></tr></thead>
+<tbody>
+<tr><td>女性</td><td>1.32（0.87–2.02）</td><td>0.20</td><td>—</td><td>—</td></tr>
+<tr><td>年齢（歳）</td><td>1.03（1.01–1.05）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td>大学病院での治療</td><td>0.88（0.58–1.60）</td><td>0.88</td><td>—</td><td>—</td></tr>
+<tr><td>複数医療者による PIC</td><td>3.80（2.19–6.59）</td><td>&lt;0.001</td><td>2.91（1.14–7.42）</td><td>0.03</td></tr>
+<tr><td>ICU 入室24時間以内の心肺蘇生</td><td>2.29（1.08–4.83）</td><td>0.03</td><td>—</td><td>—</td></tr>
+<tr><td>緊急 ICU 入室</td><td>2.94（1.62–5.36）</td><td>&lt;0.001</td><td>—</td><td>—</td></tr>
+<tr><td>併存疾患1つ以上</td><td>1.81（1.19–2.75）</td><td>0.01</td><td>—</td><td>—</td></tr>
+<tr><td>APACHE-IV スコア</td><td>1.03（1.02–1.03）</td><td>&lt;0.001</td><td>1.02（1.00–1.03）</td><td>0.01</td></tr>
+<tr><td>入室前フレイル（CFS≥5）</td><td>3.36（1.74–6.47）</td><td>&lt;0.001</td><td>2.26（1.02–4.99）</td><td>0.04</td></tr>
+<tr><td>ICU での人工呼吸</td><td>1.08（0.71–1.64）</td><td>0.73</td><td>—</td><td>—</td></tr>
+<tr><td>ICU 在室日数</td><td>1.02（1.01–1.03）</td><td>&lt;0.01</td><td>—</td><td>—</td></tr>
+<tr><td>在院日数</td><td>1.01（1.00–1.01）</td><td>0.04</td><td>—</td><td>—</td></tr>
+<tr><td>治療制限あり</td><td>6.51（4.05–10.92）</td><td>&lt;0.001</td><td>3.88（1.77–8.50）</td><td>&lt;0.001</td></tr>
+<tr><td>ICU 再入室</td><td>1.87（0.85–4.12）</td><td>0.12</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>多変量モデルには単変量で p≤0.2 の共変量を投入したが、年齢・慢性併存疾患1つ以上・緊急 ICU 入室・ICU 再入室は APACHE-IV との重複を避け、モデルの過剰適合リスクを減らすために除外されている。<strong>論文の脚注には「1人の医療者による PIC、あるいは多数の医療者による PIC は、死亡とも複合エンドポイントとも統計学的有意な関連がなかった」と明記されている。</strong> つまり効いているのは「複数（2人以上）が一致する」という条件そのものである。</p>
+<h3>11. 考察（著者らの論点）</h3>
+<h4>有病割合は10年以上変わっていない</h4>
+<p>オランダの ICU 医療者の4人に1人が、調査当日に不適切な医療を提供していると報告した。これは10年以上前の研究の有病割合と極めて近い。著者らは、これが「一定割合を不適切と知覚する医療者側の安定した傾向」を反映している可能性を認めつつ、適切な集中治療への国際的注目の高まりと、過去10年の終末期実践・緩和ケアの集中治療医学への強い統合を考えると、この持続的な傾向は注目に値する（remarkable）と述べている。</p>
+<h4>分配的正義と比例性 — 2つのレベルの倫理的緊張</h4>
+<p>多くの医療者が分配的正義と ICU 医療の比例性への懸念を表明した。著者らはこれが2つのレベルの倫理的緊張を浮き彫りにすると論じる。ベッドサイドでは、患者のニーズと合致していないと感じる医療を提供することで、医療者は道徳的に妥協させられた（morally compromised）と感じうる。より広くは、医療システムと社会がどのように希少資源に優先順位をつけ配分するか、現在の実践が公平性・アクセス可能性・持続可能性の原則に合致しているかという省察を促す。</p>
+<h4>PIC の主観性と職種差</h4>
+<p>単一の医療者が報告した PIC 症例の割合が高いこと（57%）は、他の医療者が同一患者について異なる評価をしていることと合わせて、PIC の本質的な主観性を浮き彫りにする。さらに、医師と看護師の間で観察された判断と理由づけの相違は、倫理的知覚が職業上の役割と責任によって形づくられるという先行研究の結論を裏づける。</p>
+<p>注目すべきは、<strong>医師のほうが看護師より頻繁に「不釣り合いな医療」と判断していた</strong>ことである。医師は治療決定を下す権限を与えられているのだから、これは注目に値する。著者らはこれが<strong>臨床上の責任（自分が期待され、あるいは求められていること）と道徳的信念（正しいと感じること）の間の、より深い緊張</strong>を示している可能性を指摘する。それでも、残りの症例のほぼ半数は複数の医療者が PIC を報告しており、これは孤立した不快感ではなく、より深く集合的な倫理的懸念の存在を示す。</p>
+<h4>倫理的風土の役割</h4>
+<p>PIC は複数の因子と関連していた。第一に、ICU 間の倫理的風土の差である。倫理的ジレンマについての開かれた対話を支持し、相互尊重を促進する風土は、こうした知覚に対して保護的に見える。しかし、オランダの ICU に倫理支援体制が広く存在するにもかかわらず PIC が高頻度であり続けることは、<strong>形式的な仕組みだけでは十分でない可能性</strong>を示唆する。</p>
+<p>さらに、終末期ケアの意思決定が避けられている ICU で働くことは PIC のリスクを高めるように見える。看護師が医師より倫理的風土をネガティブに、とくに終末期の意思決定について、認識していることは以前にも観察されており、これは治療決定への影響力が限られたまま長引く苦痛を目撃する経験を反映している可能性がある。</p>
+<p>第二に、PIC は職種と関連していた。看護師で PIC 率が高い理由としては、患者・家族との物理的・心理的近さが苦痛への感受性を高めることが挙げられる。第三に、PIC は小規模 ICU でより多かった。著者らはこれを、大規模ユニットとの症例構成（case mix）の違いによるものと考えている。小規模 ICU は典型的に内科系患者の割合が高く、しばしばより高齢でフレイルであり、治療の適切性についての疑問が生じやすい。またこうした環境は、組織的な余力（例：step-down unit の存在）や患者を移す柔軟性が乏しいため、PIC を生じやすい可能性がある。</p>
+<h4>予後不良指標と事前指示</h4>
+<p>治療の適切性は、予後不良の指標をもつ患者や ICU 滞在が長引いた患者でより頻繁に疑問視された。<strong>事前指示が存在していてもそうだった。</strong> これは事前指示を実践へ翻訳することの継続的な難しさを反映している。</p>
+<p>共有された PIC と6か月後の ICU 後死亡・複合エンドポイントとの関連は先行研究と一致し、PIC を不釣り合いな医療の潜在的マーカーとして、実質的な長期の有害転帰を伴うものとして認識することの重要性を強調する。</p>
+<p>しかし著者らは重要な留保を置く。<strong>ICU 入室から6か月後には、PIC 症例を含む圧倒的多数の患者が満足できるQOLを報告し、自分の健康を許容できると考え、ICU 入室を後悔していない。</strong> これは PIC を予測マーカーとして扱うことの複雑さを示す。死亡のようなハードエンドポイントを超えたところでは、その価値は不確実なままである。</p>
+<h3>12. 研究の限界（著者らによる）</h3>
+<ol><li><strong>研究デザインが因果推論と時間的一般化可能性を制限する。</strong> 単日横断調査であるため、PIC が予後を悪くしているのか、予後の悪い患者に PIC が生じているのかは区別できない</li><li><strong>EDMCQ の7次元すべてを含めていない。</strong> 回答者の負担は減ったが、倫理的風土因子と PIC の間の潜在的に重要な関連を見逃した可能性がある</li><li><strong>欠測していた医療者報告 CFS スコアを、6か月後に収集した患者報告データで補完した。</strong> これは想起バイアスや ICU 入室前フレイル状態の認識の齟齬をもたらした可能性がある。2つの情報源の間には中等度だが有意な相関が認められた（Spearman rho = 0.32、p=0.01）</li><li><strong>回答バイアス。</strong> PIC への懸念が強い医療者ほど参加した可能性がある。また一定割合の患者が調査に回答しておらず、その見解は参加者と異なる可能性があり、患者報告アウトカムの代表性に影響しうる</li><li><strong>1患者あたりの PIC 評価回数が検証されていない。</strong> 人員配置・複数のシフト・高い回答率から、すべての患者が複数の医療者に評価されたことが示唆されるものの、調査は正確な評価回数を確認していない。したがって<strong>確認バイアス（ascertainment bias）は否定できない</strong></li></ol>
+<h3>13. 実践・政策・研究への含意（著者らの提言）</h3>
+<ul><li><strong>システム的介入が PIC を減らしうる。</strong> 出発点は ICU における倫理的気づきの強化と多職種協働</li><li><strong>構造化されたモラルディスカッション（structured moral deliberation）、CRM（crew resource management）、倫理的意思決定のコーチング</strong>が、共有された道徳的理解を育みうる</li><li><strong>PIC は主観的不快感として退けるべきではなく</strong>、チームによる振り返りと倫理的対話を通じて探索し、意思決定を支えるべきである</li><li><strong>患者・家族との目標と制限についての早期の会話</strong>が、医療を患者の価値観に合わせ、不必要な治療を防ぐ</li><li><strong>Time-limited trial</strong> が、期待される転帰に比例しなくなった、あるいは患者の目標・価値観と合わなくなった ICU 治療の延長リスクを減らしうる</li><li><strong>公共キャンペーン</strong>が、ICU 治療の限界と長期的帰結についての社会的認識を高め、ICU 医療への期待を再較正するのに役立ちうる</li><li><strong>今後の研究</strong>：有病割合・要因・アウトカムのさらなる研究による文脈横断的な比較。トレンド・医療者への長期的影響・介入のインパクトを同定する縦断研究。量的手法と質的手法の組み合わせによる、寄与する患者因子（年齢・併存疾患・予後）と文脈的側面（家族からの圧力・病床不足・事前指示の課題）の深い理解</li></ul>
+<h3>14. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>数字の内的整合性に2か所の疑問がある <strong>① 「44%で看護師と医師が一致」の分母が合わない。</strong> 本文は「62人（43%）で複数の医療者が PIC を報告し、そのうち44%で少なくとも1人の看護師と1人の医師が同じ見解を共有していた」と述べる。しかし Figure 2 の内訳は「少なくとも看護師1人と医師1人が報告 36例／複数の看護師 19例／複数の医師 7例」で、36+19+7 = 62 となる。36/62 = 58%であって44%ではない。<mark class="hl">本文と図のどちらが正しいのかを、JCでは必ず確認したい</mark>（Supplement を見ないと解けない）。もし58%が正なら「職種を越えた一致」はより強いシグナルになる。 <strong>② Table 4 のラベルが Methods と食い違う。</strong> Methods は一貫して「特定の患者について2人以上（≥2）の医療者が報告した PIC」を閾値としているが、Table 4 の行ラベルは "PIC, reported by more than two clinicians"（2人を超える＝3人以上）と印字されている。おそらくラベルの誤記だが、これは主要結果 aOR 3.86 の定義そのものに関わる。</p>
+</div>
+<ul><li><strong>因果の向きが分からない。</strong> 「不適切だと感じられた患者が死ぬ」のか「死にそうな患者を不適切だと感じる」のか、横断デザインでは切り分けられない。実際 PIC 群は APACHE-IV が高く（69.1 vs 60.5）、緊急入室が多く（91.9% vs 71.9%）、急性腎不全が多く（29.0% vs 12.1%）、治療制限が多い（63.5% vs 17.7%）。つまり<strong>医療者は重症で予後不良な患者を正しく見分けているだけかもしれない</strong>。PIC の「追加的な」予測価値がどれほどあるのかは、この論文からは分からない</li><li><strong>推定の精度が低い。</strong> 主要結果の95%CI は 1.23–12.16 と一桁分の幅がある。イベント数は PIC 群の死亡24人にすぎず、多変量モデルには4変数（PIC・APACHE-IV・フレイル・治療制限）が入っている。EPV（1変数あたりのイベント数）の観点でぎりぎりであり、点推定値3.86を額面通り受け取るべきではない</li><li><strong>「複数（≥2）」という閾値は事後的に見える。</strong> 著者らは「一致した臨床判断に基づく」と説明し、感度分析（≥1 vs ≥2）も行っているが、脚注では「1人による PIC も、多数による PIC も有意な関連はなかった」と述べられている。<strong>≥2 だけが有意という結果は、閾値選択による偽陽性の可能性を残す。</strong> JC では「なぜ2人なのか」を問う価値がある</li><li><strong>PIC 率の分母の設計が職種比較を難しくしている。</strong> 医師は同じ24時間で5人を評価し、看護師は1人を評価する。看護師の「1人の患者を1日中見た上での判断」と、医師の「5人を横断的に見た上での判断」は、質的に異なる情報に基づいている。19% vs 8% という差の一部は、この観察密度の違いで説明できるかもしれない</li><li><strong>理由の1位が「費用」であることの解釈には注意がいる。</strong> 「この患者にかかる費用は他でもっと有効に使える」という記述文への同意は、経済的資源配分についての意見であって、目の前の患者への医学的判断ではない。93%が他の理由と併記されていたことから著者らはこれを「分配的正義への懸念」として扱っているが、<strong>この設問がベッドサイドの臨床判断を測っているのか、医療政策への一般的な不満を測っているのかは曖昧</strong>である。JC で議論する価値がある論点</li><li><strong>回答バイアスの方向が読みにくい。</strong> 著者らは「PIC への懸念が強い医療者ほど参加した」可能性を挙げるが（＝過大評価）、逆に多忙で疲弊した医療者ほど回答しなかった可能性もある（＝過小評価）。回答率72%は横断調査としては非常に高く、この点は本研究の強みである</li><li><strong>患者側の代表性が弱い。</strong> 患者質問票の回答は適格397人中215人（54.2%）。しかも PIC 群のサブグループは n=16〜20 程度しかない（Table 2 の信仰・介護施設・EQ-5D の分母を見ると明らか）。「6か月後のQOLに差がない」という重要な陰性所見は、<strong>検出力不足で説明できてしまう</strong></li><li><strong>オランダという文脈の特殊性。</strong> 治療の比例性を国の政策プログラムが強調しており、安楽死・医師幇助死が合法な国でもある。この文脈で「PIC が10年間減っていない」ことの意味は、日本にそのまま移せない。むしろ、当院のような「終末期の議論がまだ制度化されていない」環境では、PIC がより高い可能性も、逆に「不適切さを言語化する枠組みがない」ために報告されにくい可能性もある</li><li><strong>強み。</strong> 全国規模（69施設中47施設）、高い回答率（72%）、レジストリ連結による客観的な重症度・アウトカムデータ、患者報告アウトカムの併用、施設ランダム効果を入れた階層モデル、そして先行研究（APPROPRICUS）と同じ検証済み質問票を使ったことによる時系列比較の可能性 — これらは PIC 研究として現時点で最も堅牢な部類に入る</li></ul>
+<h3>15. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>本研究のベースとなった欧州・イスラエル ICU の PIC 調査（APPROPRICUS）</td><td>Piers RD, Azoulay E, Ricou B, et al. JAMA 2011;306:2694–2703</td></tr>
+<tr><td>カリフォルニア成人 ICU における医療の適切性の知覚</td><td>Anstey MH, Adams JL, McGlynn EA. Crit Care 2015;19:51</td></tr>
+<tr><td>欧州 ICU における不適切な医療 — 看護師・若手医師・シニア医師の見解の対立</td><td>Piers RD, Azoulay E, Ricou B, et al. Chest 2014;146:267–275</td></tr>
+<tr><td>過剰な医療を受けていると知覚された患者のアウトカム（68 ICU・DISPROPRICUS）</td><td>Benoit DD, Jensen HI, Malmgren J, et al. Intensive Care Med 2018;44:1039–1049</td></tr>
+<tr><td>過剰な医療を受けていると知覚された患者のアウトカム — 75歳未満 vs 75歳以上</td><td>Piers RD, Banner-Goodspeed V, Åkerman E, et al. Chest 2023;164:656–666</td></tr>
+<tr><td>EDMCQ の理論枠組みと自己評価ツールの検証</td><td>Van den Bulcke B, Piers R, Jensen HI, et al. BMJ Qual Saf 2018;27:781–789</td></tr>
+<tr><td>欧州・米国 ICU における倫理的意思決定風土の認識 — 看護師と医師の差</td><td>Jensen HI, Hebsgaard S, Hansen TCB, et al. Crit Care Med 2019;47:1716–1723</td></tr>
+<tr><td>ICU 医師と看護師の倫理的風土・協働に関する認識の違い</td><td>Porter LL, Simons KS, van der Hoeven H, et al. Intensive Care Med 2023;49:600–601</td></tr>
+<tr><td>医師コーチングによる過剰治療患者の倫理的意思決定改善（CODE 段階的ウェッジRCT）</td><td>Benoit DD, De Pauw A, Jacobs C, et al. Intensive Care Med 2024;50:1635–1646</td></tr>
+<tr><td>構造化モラルケース検討の燃え尽き・モラルディストレス・チーム風土への効果（並行群間クラスターRCT）</td><td>Kok N, Zegers M, Teerenstra S, et al. Crit Care Med 2023;51:1294–1305</td></tr>
+<tr><td>ESICM 終末期・緩和ケアガイドライン</td><td>Kesecioglu J, Rusinova K, Alampi D, et al. Intensive Care Med 2024;50:1740–1766</td></tr>
+<tr><td>Choosing Wisely 集中治療領域トップ5リスト（ATS/AACN/ACCP/SCCM 政策声明）</td><td>Halpern SD, Becker D, Curtis JR, et al. Am J Respir Crit Care Med 2014;190:818–826</td></tr>
+<tr><td>世界の ICU における終末期実践のばらつき（Ethicus-2）</td><td>Avidan A, Sprung CL, Schefold JC, et al. Lancet Respir Med 2021;9:1101–1110</td></tr>
+<tr><td>重症患者における time-limited trial の文献レビュー</td><td>Kruser JM, Nadig NR, Viglianti EM, et al. Chest 2024;165:881–891</td></tr>
+<tr><td>進行した内科疾患の重症患者における TLT の評価と非有益な ICU 治療の削減</td><td>Chang DW, Neville TH, Parrish J, et al. JAMA Intern Med 2021;181:786–794</td></tr>
+<tr><td>ICU 入室1年後の新規の身体・精神・認知の問題（前向き多施設研究）</td><td>Geense WW, Zegers M, Peters MAA, et al. Am J Respir Crit Care Med 2021;203:1512–1521</td></tr>
+<tr><td>ICU 看護師と医師の終末期ケアの視点 — 協働・モラルディストレス・倫理的風土</td><td>Hamric AB, Blackhall LJ. Crit Care Med 2007;35:422–429</td></tr>
+<tr><td>非有益な治療に関連するモラルディストレスの制度的因子についての医療者の認識</td><td>Brender TD, Axelrod JK, Weiss Goitiandia S, et al. JAMA Netw Open 2025;8:e2516089</td></tr>
+<tr><td>ICU における事前指示の実践への翻訳</td><td>Baumann SM, Kruse NJ, Kliem PSC, et al. J Intensive Care 2023;11:53</td></tr>
+<tr><td>Job Strain Scale の原典</td><td>Karasek R, Theorell T. Healthy Work: Stress, Productivity and the Reconstruction of Working Life. Basic Books, 1990</td></tr>
+<tr><td>オランダの ICU 入退室の意思決定における倫理的問題（質的研究）</td><td>Oerlemans AJM, van Sluisveld N, van Leeuwen ESJ, et al. BMC Med Ethics 2015;16:9</td></tr>
+<tr><td>Step-down unit のケアが ICU 退室後アウトカムに与える影響</td><td>Lekwijit S, Chan CW, Green LV, et al. Crit Care Explor 2020;2:e0114</td></tr>
+<tr><td>欧州における集中治療の経済的持続可能性</td><td>Cecconi M, Spies CD, Moreno R. Intensive Care Med 2024;50:136–140</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 オランダ全国47 ICU・1058人の医療者の<strong>26%が調査当日に「不適切な医療を提供している」と感じており、その割合は10年以上前とほぼ変わっていない</strong>。リスクを高めるのは看護師であること（aOR 1.78）と<mark class="hl">終末期の意思決定を避ける文化</mark>（aOR 1.92）、下げるのは多職種間の相互尊重（aOR 0.84）と病床数。倫理コンサルテーション窓口の有無は無関係だった（OR 0.72、p=0.17）。 <mark class="hl">複数の医療者が同じ患者について「不適切」と表明したら、それを個人の感情の問題として流さず、48時間以内にゴール・オブ・ケアの再確認を行う</mark>（6か月死亡が3.86倍、複合アウトカムが2.91倍のシグナルであり、1人だけの報告では有意な関連はない）。 ただし6か月後の患者本人のQOL・フレイル・ICU入室の後悔には群間差がない。<mark class="hl">医療者が感じた「不適切さ」は死亡・重度障害の予測には使えるが、「この患者はICUに来るべきでなかった」の根拠にはならない</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

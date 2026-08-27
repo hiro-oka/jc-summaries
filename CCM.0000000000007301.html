@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>遠隔ICU（TCC）の請求はパンデミックで急増したがcritical care全体のごく一部 — 恩恵が要る地方・小規模病院ほど使われない（Medicare 1332万入院・CCM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">遠隔ICU（TCC）の請求はパンデミックで急増したがcritical care全体のごく一部 — 恩恵が要る地方・小規模病院ほど使われない（Medicare 1332万入院・CCM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Ofoma UR, Graves JM, Waken RJ, Drewry AM, Subramanian S, Scott B, Udeh C, Herasevich V, Joynt Maddox KE. Telemedicine Critical Care Billing For Hospitalized Medicare Fee-For-Service Beneficiaries, 2018–2024. Crit Care Med. 2026;54. DOI: 10.1097/CCM.0000000000007301</dd><dt>掲載誌</dt><dd>Critical Care Medicine（2026-08-07）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1097/CCM.0000000000007301" target="_blank" rel="noopener">doi.org/10.1097/CCM.0000000000007301</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Telemedicine Critical Care Billing For Hospitalized Medicare Fee-For-Service Beneficiaries, 2018–2024</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院の日常診療は変わらない</strong>。本研究は米国の診療報酬請求（レセプト）データの記述であり、遠隔ICUの臨床的有効性も費用対効果も検証していない。治療方針を変える根拠にはならない。</li><li><strong>変わるのは「制度設計をどう読むか」の視点</strong>。支払いを認めた月（2020年3月）に請求が跳ね上がり、その後ほぼ横ばいで定着した。<mark class="hl">支払いが付けば行動は即座に変わるが、支払いだけでは普及の裾野は広がらない</mark>、という政策実装の教訓として読める。</li><li><strong>日本の制度との対比</strong>。米国のcritical care請求は医師個人が「重症患者に費やした時間」を分単位でCPTコード（99291/99292）として請求する出来高制で、遠隔で行った場合は修飾子（modifier 95/GT）や専用コード（G0508/G0509）を付ける。日本の特定集中治療室管理料は施設基準を満たしたICU病床の1日あたり包括評価であり、「誰が・遠隔で・何分」を捉える仕組みがそもそも異なる。したがって本研究の数字を日本の普及率としてそのまま読み替えることはできない。</li><li><strong>日本の遠隔ICUに関する診療報酬上の評価の有無・要件・算定実績は本論文の範囲外</strong>である。本論文は米国Medicareのデータのみを扱っており、日本の制度・普及度について何も述べていない。当院で遠隔ICUの導入可否を議論する際は、日本の最新の点数表と国内データ（JIPAD等）に当たる必要がある。</li><li><strong>示唆として最も使えるのは「請求データでは実態が測れない」という限界のほう</strong>。ユニット単位の包括契約で遠隔ICUを受けている病院は患者単位の請求が立たず、この研究の分子に入らない。当院で遠隔支援やRRSの成果を測る際も、<mark class="hl">算定件数を活動量の代理指標にすると実態を取り逃がす</mark>。</li><li>併せて読むと立体的になるノート：<span class="wl">遠隔ICUの毎日ラウンドはSBT実施日を27%から51%に倍増させたが離脱成功率は変えない（ERIC二次解析・段階的ウェッジ・CritCare2026）</span>（遠隔ICUのプロセス改善効果）、<span class="wl">平日10時の集中治療医対病床比が院内死亡を下げる（JIPAD 46503例・65ICU・JICM2024）</span>（人的資源とアウトカム）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：COVID-19パンデミック前、米国の遠隔ICU（TCC）導入は低調だった。2018年時点でTCC導入を報告した病院は20%、2019年のtelestroke導入は27%にとどまる。2020年3月にCMSが緊急措置で遠隔医療の支払いを大幅に拡大し、外来のテレヘルスが爆発的に増えたことは既に複数の研究で示されている。</li><li><strong>Unknown</strong>：入院中の重症患者に対する遠隔集中治療が、支払い拡大後に実際にどれだけ請求されたのか。誰が（どの診療科が）、どんな患者に、どんな病院で請求したのか。外来のデータは豊富だが、<mark class="hl">入院患者の遠隔医療についての全国規模・患者単位のデータは存在しなかった</mark>。</li><li><strong>What's new</strong>：Medicare FFSの悉皆レセプト（1332万入院・1360万件のcritical care請求）で、パンデミック前・中・後のTCC請求を患者単位で初めて記述した。①請求は2020年3月に急増しその後定着したが、critical care請求全体に占める割合は依然として小さい、②請求主体は集中治療専門医だけでなく神経系・呼吸器・NP/PAなど多様化し、4分の1超が非集中治療科、③本来最も恩恵を受けるはずの小規模・地方・critical access病院ほど請求が少なかった、という3点。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 米国Medicare FFSの全国レセプトで、遠隔集中治療（TCC）の請求は2020年3月の支払い拡大を境に約8倍に跳ね上がりパンデミック後も定着したが、<strong>critical care請求全体に占める割合はごく一部にとどまり</strong>、しかも<strong>小規模・地方・critical access病院という「最も遠隔ICUを必要とするはずの施設」ほど請求が少なかった</strong>。</p>
+</div>
+<ul><li><strong>デザイン</strong>：連続横断研究。2018年1月〜2024年9月のMedicare出来高払い（FFS）100%レセプトを、American Hospital Association（AHA）年次調査2019/2020年版と連結。</li><li><strong>対象</strong>：18歳以上のMedicare Part A・B FFS受給者で、急性期病院の入院請求または救急部門のレベニューコードを持つ外来請求に、critical careの医師請求（CPT 99291/99292、またはG0508/G0509）が同時に立っているもの。</li><li><strong>期間区分</strong>：パンデミック前（2018年1月〜2020年2月）／パンデミック期（2020年3月〜2022年12月）／パンデミック後（2023年1月〜2024年9月）。</li><li><strong>主要な数字</strong>：</li><li>パンデミック前 critical care請求 4,671,331件中 TCC 7,269件（論文表記 0.002%）</li><li>パンデミック開始以降 critical care請求 8,964,606件中 TCC 108,411件（論文表記 0.01%）</li><li>期間全体で 13,320,486入院のうち 78,789入院（0.6%）にTCC請求あり</li><li>初めてTCCを請求した病院の発生数：前 16.3施設/月 → パンデミック期 35.1施設/月 → 後 19.2施設/月</li><li><strong>患者側</strong>：TCC請求群はCOVID-19診断が多く（7.1% vs 4.3%）、それ以外は非TCC群と大きく変わらない。多変量では女性（IRR 1.12）、micropolitan居住（IRR 4.36）、rural居住（IRR 2.14）、中西部居住（IRR 1.90）、85歳以上（IRR 1.26）でTCC請求が多かった。</li><li><strong>請求医側</strong>：パンデミック期のTCC請求は内科／集中治療科が46.0%（49,826件）で最多、次いで神経系（神経内科・血管神経・神経集中治療）が21.6%（23,443件）。対して対面のcritical care請求は救急医が28.8%で最多。<mark class="hl">TCC請求の4分の1超が非集中治療科から出ている</mark>。</li><li><strong>病院側</strong>：4,449施設中2,019施設（45.4%）が期間中に1件以上のTCC請求を持つ。多変量で請求が多いのはminor teaching（aOR 1.21）とsafety-net（aOR 1.33）。少ないのは小規模（aOR 0.39）・中規模（aOR 0.67）・政府立（aOR 0.70）・営利（aOR 0.58）・rural（aOR 0.70）・critical access（aOR 0.59）病院。</li><li><strong>著者の結論</strong>：TCC請求はパンデミックで大きく増えて定着したが総量としては小さく、診療科間・病院種別間のばらつきが大きい。臨床的・経済的な帰結の評価は今後の課題。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 米国の「遠隔集中治療」と「請求コード」の仕組み 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む この論文は米国の診療報酬請求（レセプト）データの研究である。日本の読者が読むうえで、①遠隔集中治療という診療形態、②米国の支払い制度、の2つを押さえておかないと数字の意味が取れない。以下、初出の略語をすべて定義しながら整理する。</p>
+</div>
+<h4>1-1. 遠隔集中治療（TCC / tele-ICU）とは何か</h4>
+<p><strong>TCC（telemedicine critical care、遠隔集中治療）</strong> は、ICUの患者を離れた場所にいる集中治療医が遠隔で支援する診療形態を指す。パンデミック前から確立していた入院患者向け遠隔医療は2つで、脳卒中疑い患者を神経内科医が遠隔評価する <strong>telestroke</strong> と、この TCC である。</p>
+<p>TCCの提供モデルは時代とともに変わってきた。</p>
+<div class="tw"><table>
+<thead><tr><th>世代</th><th>形</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td>レガシー型</td><td>病室に固定設置したカメラ・マイクと遠隔センターを常時接続</td><td>設備投資が大きい。ユニット全体を24時間・または時間帯を決めて監視する契約が多い</td></tr>
+<tr><td>オンデマンド型</td><td>移動式の遠隔医療カート、あるいはタブレット端末を必要時に患者のもとへ持ち込む</td><td>専用設備への依存が小さく、導入が速い。コンサルテーション（依頼を受けて意見を返す）型の運用に向く</td></tr>
+</tbody></table></div>
+<p>パンデミック期に急速に広がったのは後者のオンデマンド型で、著者らはこれが「集中治療科以外の診療科（感染症科・腎臓内科・ホスピタリスト・NP/PA）まで遠隔で重症患者を診るようになった」背景だと説明している。COVID-19の病室にカートやタブレットを置けば、コンサルタントが入室せずに患者を目視診察でき、感染曝露を減らし、逼迫していた個人防護具を節約できた。</p>
+<h4>1-2. Medicare と「出来高払い（FFS）」</h4>
+<p><strong>Medicare</strong> は米国の公的医療保険で、主に65歳以上と一部の障害者・末期腎不全患者が対象。本研究が使うのは <strong>FFS（Fee-For-Service、出来高払い）</strong> の部分で、政府が直接、実施された診療行為ごとに支払う。これに対し民間保険会社が運営する <strong>Medicare Advantage</strong> は本研究の対象外である（後述の限界）。</p>
+<p>FFSは請求の建て付けが2つに分かれる。</p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>誰への支払いか</th><th>何を単位にするか</th><th>本研究での役割</th></tr></thead>
+<tbody>
+<tr><td><strong>Part A</strong></td><td>病院（施設）</td><td>入院1件を診断群分類（DRG）で包括評価</td><td>入院episodeの特定、疾患名（DRG）の把握</td></tr>
+<tr><td><strong>Part B</strong></td><td>医師・診療提供者（個人）</td><td>個々の医療行為を <strong>CPTコード</strong> 単位で出来高請求</td><td><mark class="hl">TCCの検出はここで行う</mark></td></tr>
+</tbody></table></div>
+<p>つまり米国では、同じ1入院に対して「病院への包括支払い（Part A）」と「医師個人の技術料（Part B）」が別々に立つ。TCCは医師の行為なので Part B の請求から拾い、それを日付範囲で Part A の入院に紐づける、という設計になっている。</p>
+<h4>1-3. critical care をどう請求するか — CPT 99291 / 99292</h4>
+<p>米国では、集中治療そのものが <strong>時間ベースの出来高コード</strong> として存在する。</p>
+<div class="tw"><table>
+<thead><tr><th>コード</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>CPT 99291</td><td>critical care、最初の30〜74分</td></tr>
+<tr><td>CPT 99292</td><td>critical care、追加の30分ごと</td></tr>
+</tbody></table></div>
+<p>これは「その医師が、重篤な患者のために実際に費やした時間」を請求する仕組みである。<mark class="hl">日本の特定集中治療室管理料が「施設基準を満たしたICU病床に何日入っていたか」という施設・日単位の包括評価であるのと、発想が根本的に違う</mark>。本研究が「critical care請求 1,360万件」と数えているのは、患者数でも入院数でもなく、この医師請求の件数である。</p>
+<h4>1-4. 「遠隔でやった」ことをどう記録するか — 修飾子とGコード</h4>
+<p>CPTコードは診療内容を表すが、それだけでは対面か遠隔かが分からない。そこで <strong>modifier（修飾子）</strong> を付ける。</p>
+<div class="tw"><table>
+<thead><tr><th>記号</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>modifier 95</td><td>リアルタイムの音声・映像双方向通信で提供された同期型遠隔医療</td></tr>
+<tr><td>modifier GT</td><td>双方向の音声・映像通信システム経由</td></tr>
+<tr><td>CPT G0508</td><td>遠隔のcritical careコンサルテーション（初回）</td></tr>
+<tr><td>CPT G0509</td><td>遠隔のcritical careコンサルテーション（2回目以降）</td></tr>
+</tbody></table></div>
+<p>本研究の <strong>TCCの定義</strong> は、「CPT 99291/99292 に modifier 95 または GT が付いたもの」または「G0508/G0509 そのもの」である。したがってこの研究が測っているのは <mark class="hl">遠隔集中治療の「診療実態」ではなく「請求行為」</mark> であり、著者自身もこの点を繰り返し断っている。</p>
+<h4>1-5. 2020年3月に何が起きたか</h4>
+<p>2020年3月、<strong>CMS（Centers for Medicare and Medicaid Services、メディケア・メディケイドサービスセンター）</strong> が公衆衛生上の緊急事態への対応として規制の適用免除（waiver）を出し、同時に米国議会が <strong>CARES法（Coronavirus Aid, Relief, and Economic Security Act）</strong> を成立させた。これにより、</p>
+<ul><li>遠隔医療に対する医師への支払いが引き上げられた</li><li>州境を越えて他州の患者を診ることが認められた</li><li>遠隔医療を提供できる職種の範囲が広がった</li><li>各州がMedicaid（低所得者向け公的保険）の給付対象に遠隔医療を含めた</li></ul>
+<p>つまり、<strong>それまで償還されなかった遠隔集中治療が、この月を境に請求できるようになった</strong>。本研究の期間区分（前／中／後）がすべて2020年3月を起点にしているのはこのためである。</p>
+<h4>1-6. 病院を分類する米国特有の用語</h4>
+<p>結果を読むうえで必要な、病院側の分類語も先に定義しておく。</p>
+<div class="tw"><table>
+<thead><tr><th>用語</th><th>定義（本研究での）</th></tr></thead>
+<tbody>
+<tr><td>critical access hospital</td><td>地方の小規模病院に対する連邦の特別指定。病床数などに上限があり、包括でなく費用ベースで償還される</td></tr>
+<tr><td>safety-net hospital</td><td>低所得・無保険患者を多く受け入れる病院。本研究では Medicare Impact file の high-DSH（Disproportionate Share Hospital）状態で定義</td></tr>
+<tr><td>major teaching</td><td>医学部との提携があり、かつ Council of Teaching Hospitals に加盟</td></tr>
+<tr><td>minor teaching</td><td>医学部との提携はあるが Council of Teaching Hospitals には非加盟</td></tr>
+<tr><td>high-dual status</td><td>Medicare受給者のうちMedicaid重複加入者の割合が上位5分の1</td></tr>
+<tr><td>high-minority status</td><td>Medicare受給者のうち黒人・ヒスパニックの割合が上位5分の1</td></tr>
+<tr><td>CBSA分類</td><td>metropolitan（人口5万人以上の都市圏）／micropolitan（1万〜4万9999人の都市圏）／rural（それ以外）</td></tr>
+<tr><td>HHI（Herfindahl-Hirschman Index）</td><td>市場競争度の指標。市場シェアの二乗和で、0（完全競争）〜10,000（完全独占）</td></tr>
+</tbody></table></div>
+<h3>2. 背景と目的</h3>
+<p>COVID-19パンデミックは米国の医療提供体制、とりわけ重症患者を診る能力に甚大な負荷をかけた。2023年4月時点で米国の死者は100万人を超え、人種・地理による医療アクセスとアウトカムの深い不平等を露呈させた。感染急拡大の局面では、COVID-19が確定または疑われる重症患者がICU病床の30%超を占め、ICUは機能不全に陥り、機器・病床・人員のすべてが不足した。</p>
+<p>遠隔医療はこの資源逼迫に対する主要な解決策候補として浮上し、公衆衛生上の緊急事態宣言後に急速に利用が増えた。しかしパンデミック前の導入率は低く、2019年にtelestrokeを利用できた米国の病院は27%、2018年にTCC導入を報告した病院は20%にとどまっていた。</p>
+<p>2020年3月のCMSによる支払い拡大は、理論上は「常勤の集中治療医が稀な小規模・地方・資源に乏しい病院の患者に、集中治療へのアクセスを広げる」ことを意図していた。重症患者の遠隔医療に広く償還を認めたことは、医療政策上の重大な転換である。</p>
+<p>しかし著者らが指摘するとおり、<strong>入院中の重症患者に対するTCC請求を患者単位で全国規模に記述した研究は、これまで存在しなかった</strong>。外来のテレヘルスについてはデータが豊富だが（引用21〜25）、入院患者の遠隔医療についてのデータは乏しい。</p>
+<p>財政的インセンティブ導入後の請求の変化を理解することは、①技術進歩が診療とコストに与える影響を政策立案者と臨床リーダーが把握するため、②患者・提供者単位のばらつきから実装の障壁を読み取り、アクセス格差の縮小と将来のパンデミック・災害への備えにつなげるため、に不可欠である——というのが本研究の動機である。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong></li></ul>
+<p>連続横断研究（serial cross-sectional study）。同一集団を追跡するコホートではなく、期間ごとに「その時点の断面」を繰り返し切り出して比較する設計。</p>
+<ul><li><strong>データソース</strong></li></ul>
+<p>2018〜2024年のMedicare FFSデータを、AHA年次調査データベース（2019年版・2020年版）と連結。Medicareデータは <strong>Virtual Research Data Center（VRDC）</strong> から取得しており、FFSレセプトの100%（悉皆）を含む。年齢・性別・人種などの人口統計、併存疾患、入退院日、ICU入室、転帰、そして臨床病態の同定に用いるDRGコードが利用可能。</p>
+<ul><li><strong>対象（組み入れ）</strong></li></ul>
+<p>18歳以上のMedicare Part A・B FFS受給者による <strong>critical care encounter</strong>。定義は「適格病院での入院請求、または救急部門のレベニューセンターコードを持つ外来請求」であって、かつ「同時期にMedicare Part Bのcritical care医師請求（CPT 99291/99292、またはG0508/G0509）が少なくとも1件立っている」もの。受給者IDと日付範囲で突合した。 <mark class="hl">同一患者が複数回登場しうる</mark>（各入院を独立に評価しているため）。</p>
+<ul><li><strong>対象（病院側）</strong></li></ul>
+<p>CMS認証番号を持つ短期一般病院またはcritical access hospitalのうち、2019年版または2020年版のAHA調査で病院特性が欠測でないもの。</p>
+<ul><li><strong>曝露（TCC）の同定</strong></li></ul>
+<p>Part B医師請求で、CPT 99291/99292 に HCPCS修飾子95（同期型・リアルタイム双方向音声映像）またはGT修飾子が付いたもの、あるいは明示的な遠隔CPTコード G0508（初回）・G0509（2回目以降）。Part Bの利用請求が Part A請求の期間内に収まるものを紐づけた。請求医の専門科は、CMSのNational Provider Identifier（NPI）と、National Plan and Provider Enumeration System 上のCMS定義の専門科・taxonomyコードで同定（補足Table 1）。</p>
+<ul><li><strong>期間区分</strong></li></ul>
+<p>パンデミック前：2018年1月〜2020年2月／パンデミック期：2020年3月〜2022年12月／パンデミック後：2023年1月〜2024年9月。</p>
+<ul><li><strong>患者側の変数</strong></li></ul>
+<p>年齢、性別、人種区分（Research Triangle Institute race code：American Indian/Alaska Native、Asian/Pacific Islander、黒人/アフリカ系米国人、ヒスパニック、非ヒスパニック白人、その他、不明）、Medicaid重複加入（dual enrollee）状態、居住地域（CBSA：metropolitan／micropolitan／rural）、社会的脆弱性指標（social vulnerability index）四分位、居住地域ブロック、DRG（敗血症・心不全・急性心筋梗塞・急性呼吸不全・脳卒中）、COVID-19診断。</p>
+<ul><li><strong>病院側の変数</strong></li></ul>
+<p>AHA調査で病院自身が報告したTCC提供能力、病床規模（小 &lt;100床／中 100–399床／大 ≥400床）、開設主体、教育病院区分、地域ブロック、locality（CBSA）、ヘルスシステム所属、ICU能力（ICU病床を1床以上持つか）、critical access hospital指定、high-dual status、high-minority status、safety-net status、市場競争度（HHI）。</p>
+<ul><li><strong>主要アウトカム</strong></li></ul>
+<p>TCC請求の受領と関連する、患者・請求医・病院レベルの特性。介入・比較群を割り付ける研究ではないため、いわゆる臨床アウトカム（死亡・在院日数など）は評価していない。</p>
+<ul><li><strong>統計解析</strong></li></ul>
+<ol><li>病院特性の比較（TCC請求のあった病院 vs なかった病院）：t検定・カイ二乗検定。</li><li>期間中に「1件でもTCC encounterがあるか」のオッズを病院特性で推定：ロジスティック回帰。</li><li>病院encounterあたりのTCC請求率：<strong>多変量負の二項回帰</strong>を <strong>一般化推定方程式（GEE）</strong> で当てはめ、病院内クラスタリング（同一病院内の類似性）を調整。</li></ol>
+<ul><li>有意水準は両側 p&lt;0.05。SAS 9.4 と R 4.4.1 を使用。</li><li>居住郡の同定に必要なFIPSコードが欠測・不正だった請求（n=101,955、受給者請求の0.5%未満）は回帰分析から除外。</li><li>ヘルシンキ宣言に準拠。Washington University School of Medicine IRB（No. 202204019、2022年4月5日承認）、匿名化データのため同意免除。</li></ul>
+<h3>4. 結果1 — 時系列：2020年3月に跳ね、その後は横ばい</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007301" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007301）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 2018年1月〜2024年9月の月別 critical care encounter と TCC encounter。上段A：横軸は月（2018年1月〜2024年9月）、灰色の棒がFFS Medicare受給者のcritical care encounter数（左縦軸 0〜500,000）、黒い折れ線が同じ月のTCC請求の割合（右縦軸 0〜5%）。図の背景は薄い水色の帯でパンデミック期（2020年3月〜2022年12月）を示し、その左が Pre-pandemic、右が Post-Pandemic とラベルされている。灰色の棒は月35万〜45万件前後で推移し、2020年11月〜2021年1月に約50万件のピークを作る。黒い折れ線はパンデミック前はほぼ底を這っており、2020年3月から立ち上がって0.5%前後に達し、以後2024年9月まで0.6〜0.7%付近でほぼ平坦に推移する。下段B：横軸は同じ月、縦軸は「その月に初めてTCCを請求した病院の数」（0〜100超）。パンデミック前は月10〜30施設で推移し、2020年4月に100施設超の突出したピークを作り、その後急速に減衰しつつ月20〜35施設で推移、パンデミック後は月15〜20施設程度に落ち着く。原図・無改変。</p>
+</div>
+<p>請求されたTCCの利用は2020年3月に増加し、2024年9月まで基準値より高い水準を保ったが、<mark class="hl">その後の継続的な伸びは乏しかった</mark>（Fig. 1A）。</p>
+<div class="tw"><table>
+<thead><tr><th>期間</th><th>critical care請求（件）</th><th>うちTCC請求（件）</th><th>論文表記の割合</th></tr></thead>
+<tbody>
+<tr><td>パンデミック前（2018/1–2020/2）</td><td>4,671,331</td><td>7,269</td><td>0.002%</td></tr>
+<tr><td>パンデミック開始以降（2020/3–2024/9）</td><td>8,964,606</td><td>108,411</td><td>0.01%</td></tr>
+</tbody></table></div>
+<p>TCC請求の立ち上がりは、<strong>早期採用（early adopter）病院</strong>——2020年3月より前にTCC請求の実績があった病院——のほうが、<strong>後発（late adopter）病院</strong>——初回のTCC請求が2020年3月以降だった病院——より高かった（補足Figure）。</p>
+<p>初めてTCC encounterを請求した病院の累積発生は、</p>
+<ul><li>パンデミック前：<strong>16.3施設/月</strong></li><li>パンデミック期：<strong>35.1施設/月</strong></li><li>パンデミック後：<strong>19.2施設/月</strong></li></ul>
+<p>2020年3月に急峻な立ち上がりがあり、その後は研究期間を通じて新規TCC請求が着実に積み上がった（Fig. 1B）。</p>
+<h3>5. 結果2 — 患者特性：COVID-19以外は「ほとんど同じ患者」</h3>
+<p>研究期間中、13,320,486件のユニークな入院episodeがあり、そのうち <strong>78,789件（0.6%）</strong> にTCC請求が付随していた（補足Table 2）。</p>
+<p>TCC請求のあった入院は、</p>
+<ul><li>非ヒスパニック白人の受給者が多い（77.0% vs 75.5%）</li><li>Medicaid重複加入者が少ない（32.7% vs 28.0%）</li><li>最多のDRGは両群とも敗血症</li><li>COVID-19コードを持つ受給者の割合が高い（<strong>7.1% vs 4.3%</strong>、補足Table 3）</li></ul>
+<p>つまり <strong>COVID-19が多いこと以外は、TCC群と非TCC群の患者像は概ね似ている</strong>。「特別に重い患者だけに遠隔集中治療が使われた」わけではない、という読み方になる。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007301" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007301）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 2020年3月〜2024年9月の critical care encounter（A・上段）と TCC encounter（B・下段）における上位診断。いずれもパレート図で、水色の棒が各診断の件数（左縦軸）、黒い折れ線と点が累積割合（右縦軸 0〜100%）を表す。A（critical care、左縦軸は0〜6,000,000）の並びは左から 呼吸不全（J96x）約580万件、敗血症（A41x）約260万件、COVID-19（U071）約130万件、心房細動（I48x）、脳梗塞（I63x）、急性腎障害（N17x）、急性心筋梗塞（I21x）、心不全（I50x）、心停止（I46x）、肺炎（J18x）、消化管出血（K92x）、意識障害（R41x）。累積線は上位12診断で約55%に達する。B（TCC、左縦軸は0〜20,000超）の並びは左から 呼吸不全（J96x）約28,000件、脳梗塞（I63x）約13,000件、COVID-19（U071）約8,000件、敗血症（A41x）約5,000件、意識障害（R41x）、肺炎（J18x）、急性腎障害（N17x）、心房細動（I48x）、心停止（I46x）、消化管出血（K92x）、急性心筋梗塞（I21x）。GIは gastrointestinal（消化管）の略。原図・無改変。</p>
+</div>
+<p>個別診断コードで見ると、対面のcritical care encounterでは呼吸不全・敗血症・COVID-19が上位を占めたのに対し、<strong>TCC encounterでは呼吸不全・脳梗塞・COVID-19が上位</strong>だった（Fig. 2）。<mark class="hl">脳梗塞が2位に来ているのは、TCCの一部がtelestroke的な神経系の遠隔コンサルトを含んでいることを強く示唆する</mark>（後述の請求医専門科でも神経系が21.6%を占める）。逆に敗血症は対面では2位だがTCCでは4位に落ちる。</p>
+<h4>Table 1. 請求単位で見た受給者特性（2018年1月〜2024年9月）</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>非TCC</th><th>TCC</th><th>IRR（95% CI）</th></tr></thead>
+<tbody>
+<tr><td>全体（件）</td><td>29,940,160</td><td>115,680</td><td></td></tr>
+<tr><td><strong>人種・民族</strong></td><td></td><td></td><td></td></tr>
+<tr><td>非ヒスパニック白人</td><td>21,754,663（72.7%）</td><td>89,396（77.3%）</td><td>基準</td></tr>
+<tr><td>黒人/アフリカ系米国人</td><td>4,036,090（13.5%）</td><td>13,497（11.7%）</td><td>0.95（0.87–1.04）</td></tr>
+<tr><td>ヒスパニック</td><td>2,327,821（7.8%）</td><td>7,510（6.5%）</td><td>0.96（0.87–1.05）</td></tr>
+<tr><td>その他</td><td>260,690（0.9%）</td><td>769（0.7%）</td><td>—</td></tr>
+<tr><td><strong>女性</strong></td><td>14,291,422（47.7%）</td><td>58,116（50.2%）</td><td><strong>1.12（1.05–1.19）</strong></td></tr>
+<tr><td><strong>年齢</strong></td><td></td><td></td><td></td></tr>
+<tr><td>64歳未満</td><td>5,386,579（18%）</td><td>16,778（14.5%）</td><td><strong>0.86（0.80–0.94）</strong></td></tr>
+<tr><td>65–74歳</td><td>10,530,998（35.2%）</td><td>40,609（35.1%）</td><td>基準</td></tr>
+<tr><td>75–84歳</td><td>9,184,268（30.7%）</td><td>38,732（33.5%）</td><td><strong>1.13（1.05–1.23）</strong></td></tr>
+<tr><td>85歳以上</td><td>4,838,315（16.2%）</td><td>19,561（16.9%）</td><td><strong>1.26（1.16–1.38）</strong></td></tr>
+<tr><td><strong>Medicaid重複加入</strong></td><td>19,565,290（65.3%）</td><td>80,624（69.7%）</td><td><strong>0.89（0.84–0.95）</strong></td></tr>
+<tr><td><strong>居住locality</strong></td><td></td><td></td><td></td></tr>
+<tr><td>都市（urban）</td><td>25,076,523（83.9%）</td><td>76,950（66.6%）</td><td>基準</td></tr>
+<tr><td>micropolitan</td><td>2,775,581（9.3%）</td><td>27,152（23.5%）</td><td><strong>4.36（4.06–4.68）</strong></td></tr>
+<tr><td>rural</td><td>2,042,386（6.8%）</td><td>11,415（9.9%）</td><td><strong>2.14（1.97–2.33）</strong></td></tr>
+<tr><td><strong>社会的脆弱性指標 四分位</strong></td><td></td><td></td><td></td></tr>
+<tr><td>1（最も低い）</td><td>3,730,723（12.5%）</td><td>11,082（9.6%）</td><td>基準</td></tr>
+<tr><td>2</td><td>7,205,795（24.1%）</td><td>30,207（26.1%）</td><td><strong>1.47（1.34–1.62）</strong></td></tr>
+<tr><td>3</td><td>8,586,766（28.7%）</td><td>33,257（28.8%）</td><td><strong>1.19（1.08–1.30）</strong></td></tr>
+<tr><td>4（最も高い）</td><td>10,371,206（34.7%）</td><td>40,971（35.5%）</td><td>1.01（0.92–1.11）</td></tr>
+<tr><td><strong>居住地域</strong></td><td></td><td></td><td></td></tr>
+<tr><td>北東部</td><td>5,919,801（19.8%）</td><td>16,622（14.4%）</td><td>基準</td></tr>
+<tr><td>南部</td><td>12,104,914（40.5%）</td><td>66,469（57.5%）</td><td><strong>0.76（0.69–0.84）</strong></td></tr>
+<tr><td>中西部</td><td>5,742,390（19.2%）</td><td>15,125（13.1%）</td><td><strong>1.90（1.74–2.08）</strong></td></tr>
+<tr><td>西部</td><td>6,127,385（20.5%）</td><td>17,301（15.0%）</td><td><strong>1.21（1.10–1.33）</strong></td></tr>
+</tbody></table></div>
+<p>IRR＝incidence rate ratio（発生率比）。TCC＝telemedicine critical care。</p>
+<p>多変量解析でTCC請求と関連したのは、女性（IRR 1.12; 95% CI, 1.05–1.19）、micropolitan郡の居住（IRR 4.36; 4.06–4.68）、rural郡の居住（IRR 2.14; 1.97–2.33、いずれも都市郡を基準）、中西部居住（IRR 1.90; 1.74–2.08、北東部を基準）、85歳以上（IRR 1.26; 1.16–1.38、65–74歳を基準）。逆にTCC請求が少なかったのはMedicaid重複加入者（IRR 0.89; 0.84–0.95）と64歳未満（IRR 0.86; 0.80–0.94）だった。</p>
+<h3>6. 結果3 — 請求医の専門科：集中治療科だけの話ではなくなった</h3>
+<p class="figref">🖼 原著のFigure 3 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1097/CCM.0000000000007301" target="_blank" rel="noopener">原論文（doi.org/10.1097/CCM.0000000000007301）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 2020年3月の前後で見た、請求医のtaxonomyコード別 critical care／TCC 請求の構成比。左パネルが「2020年3月以降」、右パネルが「2020年3月以前」で、各パネル内に2本の積み上げ棒（左＝Critical Care、右＝TCC）が並び、縦軸は全体に占める割合（0〜100%）。2020年3月以降のCritical Careの棒は下から Surgery/Critical Care、Pulmonary Disease、Internal Medicine/Critical Care（約25〜40%帯の大きな塊）、Internal Medicine、Hospitalist、Emergency Medicine（約45〜72%帯の最大の塊）、Cardiovascular Disease、All Other、Advanced Practice Provider の順。同時期のTCCの棒は下から Surgery/Critical Care、Pulmonary Disease、Neurology/Vascular/Neurocritical Care（約8〜33%帯の大きな塊）、Internal Medicine/Critical Care（約33〜80%帯の最大の塊）、Internal Medicine、Hospitalist、Anesthesia/Critical Care、All Other、Advanced Practice Provider。2020年3月以前のTCCの棒では Internal Medicine/Critical Care が約45〜85%帯とさらに大きく、Neurology/Vascular/Neurocritical Care が約10〜45%帯を占め、Neurosurgery の薄い層があり、Advanced Practice Provider の層は見当たらない。原図・無改変。</p>
+</div>
+<p>パンデミック期のTCC請求は <strong>内科／集中治療科（internal medicine/critical care）が最多で 49,826 encounter・46.0%</strong>、次いで <strong>神経系（神経内科・血管神経・神経集中治療）が 23,443 encounter・21.6%</strong>（Fig. 3、補足Table 4）。</p>
+<p>対照的に、<strong>対面のcritical care請求では救急医が最多で 5,842,784件・28.8%</strong>、次いで内科／集中治療科が 4,787,133件・23.6% だった。</p>
+<p>パンデミック期のTCC請求量で上位に入った専門科は、上記に加えて呼吸器内科、内科、<strong>advanced practice provider（NP/PAなどの上級実践看護職・診療補助職）</strong>、麻酔科集中治療、外科集中治療、ホスピタリスト。</p>
+<p>著者は考察で、<mark class="hl">TCC請求の25%超が非集中治療科から出ている</mark> ことを、オンデマンド型（移動カート・タブレット）の普及によりコンサルテーション型の遠隔診療が容易になった証左として挙げている。パンデミック中には感染症科、腎臓内科、ホスピタリスト、advanced practice providerによる遠隔の重症患者診療が報告されている（引用35〜40）。</p>
+<h3>7. 結果4 — 病院特性：最も必要な施設ほど使っていない</h3>
+<p>4,449施設のうち <strong>2,019施設（45.4%）</strong> が研究期間中に1件以上のTCC請求患者を持っていた（Table 2）。</p>
+<p>TCC請求のあった病院は、</p>
+<ul><li>ICU能力を持つ割合が高い（73.6% vs 38.8%）</li><li>総病床規模が大きい（400床以上が19.2% vs 3.5%）</li><li>ICU病床数が多い（平均 37.4床 vs 8.7床）</li><li>ヘルスシステムに所属している（80.6% vs 54.2%）</li><li>minor teaching（51.8% vs 29.7%）</li><li>非営利（71.7% vs 54.5%）</li><li>metropolitan（都市）立地（74.5% vs 47.8%）</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>請求データと自己申告の食い違い <mark class="hl">AHA調査（2019年または2020年）で「TCC提供能力あり」と回答した病院は、TCC請求のあった病院のうち18%、なかった病院のうち6.9%にすぎなかった</mark>。つまり実際にTCCを請求している病院の8割超は、調査上は「TCC能力なし」と答えている。請求ベースの指標と施設自己申告の指標が大きくずれており、どちらか一方だけでは遠隔ICUの普及を測れないことを示している。</p>
+</div>
+<p>ICU市場の競争度（HHI）には差がなかった（TCC請求あり 平均1148.9［SD 988.8］ vs なし 1134.6［997.9］、p=0.39）。</p>
+<h4>Table 2. TCC請求の有無別に見た病院特性（2018年1月〜2024年9月）</h4>
+<div class="tw"><table>
+<thead><tr><th>特性</th><th>TCC請求なし（n=2,430）</th><th>TCC請求あり（n=2,019）</th><th>OR（95% CI）</th></tr></thead>
+<tbody>
+<tr><td><strong>ICU能力</strong></td><td></td><td></td><td></td></tr>
+<tr><td>あり</td><td>942（38.8%）</td><td>1,485（73.6%）</td><td>基準</td></tr>
+<tr><td>なし</td><td>1,488（61.2%）</td><td>534（26.5%）</td><td><strong>0.60（0.51–0.72）</strong></td></tr>
+<tr><td>ICU病床数、平均（SD）</td><td>8.7（21）</td><td>37.4（56.9）</td><td><strong>1.06（1.02–1.09）</strong>（ICU病床10床あたり）</td></tr>
+<tr><td>TCC提供能力あり（AHA自己申告）</td><td>167（6.9%）</td><td>363（18%）</td><td>—</td></tr>
+<tr><td><strong>病床規模</strong></td><td></td><td></td><td></td></tr>
+<tr><td>100床未満</td><td>1,691（69.6%）</td><td>637（31.6%）</td><td><strong>0.39（0.26–0.58）</strong></td></tr>
+<tr><td>100–399床</td><td>655（27%）</td><td>994（49.2%）</td><td><strong>0.67（0.47–0.95）</strong></td></tr>
+<tr><td>400床以上</td><td>84（3.5%）</td><td>388（19.2%）</td><td>基準</td></tr>
+<tr><td><strong>ヘルスシステム所属</strong></td><td></td><td></td><td></td></tr>
+<tr><td>あり</td><td>1,318（54.2%）</td><td>1,627（80.6%）</td><td>基準</td></tr>
+<tr><td>なし</td><td>1,112（45.8%）</td><td>392（19.4%）</td><td><strong>0.47（0.40–0.56）</strong></td></tr>
+<tr><td><strong>教育病院区分</strong></td><td></td><td></td><td></td></tr>
+<tr><td>major teaching</td><td>40（1.7%）</td><td>194（9.6%）</td><td>1.55（0.97–2.47）</td></tr>
+<tr><td>minor teaching</td><td>721（29.7%）</td><td>1,045（51.8%）</td><td><strong>1.21（1.03–1.43）</strong></td></tr>
+<tr><td>非教育病院</td><td>1,669（68.7%）</td><td>780（38.6%）</td><td>基準</td></tr>
+<tr><td><strong>地域</strong></td><td></td><td></td><td></td></tr>
+<tr><td>中西部</td><td>872（35.9%）</td><td>471（23.3%）</td><td><strong>0.52（0.43–0.64）</strong></td></tr>
+<tr><td>北東部</td><td>274（11.3%）</td><td>271（13.4%）</td><td><strong>0.54（0.42–0.69）</strong></td></tr>
+<tr><td>南部</td><td>811（33.4%）</td><td>844（41.8%）</td><td>1.03（0.84–1.25）</td></tr>
+<tr><td>西部</td><td>473（19.5%）</td><td>433（21.5%）</td><td>基準</td></tr>
+<tr><td><strong>開設主体</strong></td><td></td><td></td><td></td></tr>
+<tr><td>政府立</td><td>698（28.7%）</td><td>267（13.2%）</td><td><strong>0.70（0.57–0.86）</strong></td></tr>
+<tr><td>営利</td><td>408（16.8%）</td><td>305（15.1%）</td><td><strong>0.58（0.48–0.71）</strong></td></tr>
+<tr><td>非営利</td><td>1,324（54.5%）</td><td>1,447（71.7%）</td><td>基準</td></tr>
+<tr><td><strong>立地</strong></td><td></td><td></td><td></td></tr>
+<tr><td>metropolitan</td><td>1,161（47.8%）</td><td>1,504（74.5%）</td><td>基準</td></tr>
+<tr><td>micropolitan</td><td>412（17%）</td><td>331（16.4%）</td><td><strong>1.31（1.07–1.59）</strong></td></tr>
+<tr><td>rural</td><td>857（35.3%）</td><td>184（9.1%）</td><td><strong>0.70（0.55–0.89）</strong></td></tr>
+<tr><td>critical access hospital</td><td>1,085（44.7%）</td><td>246（12.2%）</td><td><strong>0.59（0.47–0.73）</strong></td></tr>
+<tr><td>high-dual status</td><td>562（23.1%）</td><td>328（16.3%）</td><td><strong>0.73（0.60–0.89）</strong></td></tr>
+<tr><td>high-minority status</td><td>447（18.4%）</td><td>443（21.9%）</td><td><strong>0.77（0.63–0.94）</strong></td></tr>
+<tr><td>safety-net status</td><td>178（7.3%）</td><td>610（30.2%）</td><td><strong>1.33（1.04–1.70）</strong></td></tr>
+<tr><td>HHI、平均（SD）</td><td>1,134.6（997.9）</td><td>1,148.9（988.8）</td><td>—</td></tr>
+</tbody></table></div>
+<p>OR＝オッズ比。TCC請求あり・なしの比較のp値はHHI（p=0.392）を除きすべて&lt;0.0001。</p>
+<p>多変量解析では、TCC請求のオッズが低かったのは、小規模（aOR 0.39; 95% CI, 0.26–0.58）・中規模（aOR 0.67; 0.47–0.95）病院（大規模を基準）、政府立（aOR 0.70; 0.57–0.86）・営利（aOR 0.58; 0.48–0.71）病院（非営利を基準）、北東部（aOR 0.54; 0.42–0.69）・中西部（aOR 0.52; 0.43–0.64）（西部を基準）、rural病院（aOR 0.70; 0.55–0.89、metropolitanを基準）、ヘルスシステム非所属（aOR 0.47; 0.40–0.56）、ICU能力なし（aOR 0.60; 0.51–0.72）、critical access hospital（aOR 0.59; 0.47–0.73）、high-dual status病院（aOR 0.73; 0.60–0.89）。逆に高かったのはminor teaching病院（aOR 1.21; 1.03–1.43、非教育病院を基準）、micropolitan立地（aOR 1.31; 1.07–1.59）、safety-net病院（aOR 1.33; 1.04–1.70）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>患者の居住地と病院の所在地が逆を向いている 患者単位では micropolitan居住（IRR 4.36）・rural居住（IRR 2.14）でTCC請求が <strong>多い</strong> のに、病院単位では rural病院（aOR 0.70）・critical access hospital（aOR 0.59）で <strong>少ない</strong>。矛盾ではなく、<mark class="hl">「地方に住む患者が（地方の病院ではなく）都市部やmicropolitanの病院に運ばれて、そこでTCCを受けている」</mark> 可能性を示す。著者もrural病院が重症患者を大規模紹介病院へ転院搬送していた可能性に言及している。「遠隔医療が地方の病院に集中治療を届けた」というストーリーは、少なくともこのデータからは支持されない。</p>
+</div>
+<h3>8. 考察（著者の論点）</h3>
+<p>著者は考察を4つの柱で構成している。</p>
+<h4>8-1. 支払い政策への「機敏な反応」</h4>
+<p>2020年3月の連邦・州の政策変更——CMSの規制免除とCARES法——の直後にTCC請求が明瞭に増加した。これらの緊急政策には、遠隔医療への支払い改善、州外患者の診療容認、提供者種別の拡大、州によるMedicaid給付への遠隔医療の組み入れが含まれる。この立ち上がりは外来テレヘルスで観察された増加とよく似ている。著者はこの結果を「規制免除と財政的インセンティブが、利用のみならず <strong>請求行動</strong> にどう影響したかを説明するもの」と位置づけている。</p>
+<h4>8-2. 相対的には激増、絶対的には小さいまま</h4>
+<p>パンデミック中の相対的増加は大きかったが、critical care請求全体に占めるTCCの割合は小さいままで、しかも安定していた。既存のTCCインフラを持つ病院ほど割合が高かった。著者はこれを「患者特性・病院資源・地域の受け入れ能力に基づく <strong>選択的な実装</strong> であって、対面診療の広範な代替ではない」と解釈している。</p>
+<h4>8-3. 提供者の多様化とオンデマンド型モデル</h4>
+<p>遠隔医療モデルは固定設置カメラのレガシー型から、移動カートやタブレットを必要時に持ち込むオンデマンド型へと進化した。この適応性の高いコンサルテーション型モデルが、パンデミック中の迅速な実装と、感染症科・腎臓内科・ホスピタリスト・advanced practice providerによる遠隔診療提供を可能にした。本研究でTCC請求の25%超が非集中治療科から出ていることがこれを裏づける。</p>
+<p>パンデミック期には、COVID-19病室に置かれたカートやタブレットが隔離を維持したまま患者のビデオ診察を可能にし、コンサルタントが入室せずに必要な助言を提供でき、曝露を抑え、逼迫していた個人防護具の節約にもつながった。</p>
+<h4>8-4. 「最も恩恵を受けるはずの病院」が使っていない</h4>
+<p>支払い拡大の意図は、常勤の集中治療医を持たない小規模病院を支え、重症患者を大都市圏へ転院させられない状況を補うことにあった。同時に、逼迫した大都市圏の大病院も、人員・資源の負荷対応や曝露リスクのない遠隔評価に対して償還を受けられるようになった。</p>
+<p>しかし本研究の結果は逆だった。<strong>小規模・地方の病院——TCCを受け取ることで最も利益を得るはずの施設——のほうが、都市部の病院よりTCC請求を受けた患者が少なかった</strong>。著者は2つの解釈を挙げる。</p>
+<ol><li>地方病院はより重症の患者を大規模紹介病院へ転院搬送することで対応していた可能性</li><li>しかしこの結果はパンデミック前のTCC導入状況（引用15）とも一致するため、<mark class="hl">「遠隔医療が、米国の地方病院の患者に集中治療医の恩恵を届けるという潜在能力を、十分には果たせていない」可能性のほうが高い</mark></li></ol>
+<p>対応策として、<strong>NETCCN（National Emergency Tele-Critical Care Network、国家緊急遠隔集中治療ネットワーク）</strong> のために開発された、シンプルだが堅牢なモバイル中心の技術プラットフォームが、地方の遠隔医療インフラ需要に応える一歩になりうると述べている。</p>
+<h4>8-5. 市場競争度は効かなかった</h4>
+<p>先行研究では、ICU市場の集中度がTCCサービス導入と関連しうる（競争の激しい市場では差別化・競争上の位置取りのためにTCCを導入する）と示唆されていた。しかし本研究ではTCC請求の有無で HHI に差がなく、<strong>市場競争度はTCC請求に有意な影響を与えていなかった</strong>。著者は、市場競争よりも制度的・地域的・政策的要因のほうがTCC請求の普及を駆動した可能性が高いと結論する。</p>
+<h3>9. 著者が挙げた限界</h3>
+<ol><li><strong>行政データ固有の限界</strong>。データの忠実度・完全性に限界がある。Medicare FFS受給者のみを対象とし、ICD-10-CM診断コードとCPTコードを要求したため、コーディングの誤り・不足の影響を受ける。</li></ol>
+<p>データベースには以下の情報が <strong>含まれない</strong>：TCCサービスの範囲（どのICU・どの患者集団をカバーしたか）、提供のタイミング（時間帯、平日か週末か）、入院のどの段階でTCCが提供されたか（早期か後期か）、遠隔集中治療医の役割の性質（必須のカバレッジか、コンサルテーション的な助言か）。TCCプログラムの実装属性のデータもない。</p>
+<ol><li><strong>請求は診療実態を反映しない</strong>。ヘルスシステムや医師が、パンデミック初期に追加された遠隔医療の請求コード・修飾子を採用しなかった可能性、あるいは <mark class="hl">患者単位では請求しないTCCサービス（ユニット全体を対象とする契約型のTCCカバレッジなど）に依存していた可能性</mark> がある。著者は「本研究は診療提供そのものではなく、TCC <strong>請求パターン</strong> を示すものとして解釈すべき」と明記している。</li><li><strong>アウトカムとの関連は一切見ていない</strong>。TCCの請求実務が患者アウトカムの差と関連するかについて、本研究は何も明らかにしない。</li></ol>
+<p>これらの限界にもかかわらず、著者の知る限り本研究は「大規模な全国データセットを用いて患者単位でTCC請求を検討した初めての研究」である。</p>
+<h3>10. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>論文中の数値表記に内部矛盾がある 抄録・本文・KEY POINTSはいずれも「TCCはcritical care請求の 0.002% から 0.01% へ増えた」と記す。しかし論文自身が示す実数から計算すると、</p>
+<ul><li>パンデミック前：7,269 ÷ 4,671,331 = <strong>0.156%</strong></li><li>パンデミック以降：108,411 ÷ 8,964,606 = <strong>1.21%</strong></li></ul>
+<p>となり、<mark class="hl">報告されている「0.002%」「0.01%」は割合（分数）の値をそのまま % 記号を付けて書いてしまったもの</mark> と考えられる（0.00156→0.002、0.0121→0.01）。Figure 1A の月次曲線が右縦軸で0.6〜0.7%付近を這っていることとも、%表記のままでは桁が合わない。<strong>JCでは「本当は約0.16%→約1.2%、約8倍」と読み替えて議論するのが妥当</strong>。抄録の「remained low」という結論自体は1.2%でも変わらないが、桁を2つ間違えたまま引用すると誤伝播する。</p>
+</div>
+<p><strong>その他の吟味点</strong></p>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>中身</th><th>JCでどう扱うか</th></tr></thead>
+<tbody>
+<tr><td>分母と分子の単位が混在</td><td>Table 1 は「請求（bill）単位」（非TCC 29,940,160件 vs TCC 115,680件）、Table 2 は「病院単位」（4,449施設）、本文の一部は「入院（hospitalization）単位」（13,320,486件、うち0.6%）。抄録の割合は「critical care請求件数」ベース</td><td>数字を引用するとき <mark class="hl">どの単位の話かを必ず明示する</mark>。特に「0.6%」（入院単位）と「1.2%」（請求単位）を混同しない</td></tr>
+<tr><td>Table 1 と本文の dual enrollee が食い違う</td><td>本文は「Medicaid重複加入が少ない（32.7% vs 28.0%）」（補足Table 2＝入院単位）、Table 1 は非TCC 65.3% vs TCC 69.7%（請求単位）。<strong>割合の水準も方向も逆</strong>。しかも Medicare FFS受給者のdual率が65〜70%というのは一般的な水準（おおむね2割前後）より明らかに高い</td><td>ラベリングまたは集計単位の問題を疑う。この変数を根拠に格差を論じるのは避けるべき</td></tr>
+<tr><td>「TCC請求あり病院」の定義が極端に緩い</td><td>研究期間6年9か月の間に <strong>1件でも</strong> TCC請求があれば「あり」に分類。この定義で45.4%の病院が「あり」になる</td><td>「米国の病院の45%が遠隔ICUを持つ」とは読めない。<mark class="hl">実際にはTCC能力を自己申告した病院は18%にすぎない</mark></td></tr>
+<tr><td>請求≠診療の乖離が定量的に示されている</td><td>TCC請求のあった病院のうちAHA調査でTCC能力ありと答えたのは18%、なかった病院でも6.9%が「あり」と回答</td><td>双方向にずれている。<mark class="hl">請求データも施設調査も、単独では遠隔ICUの普及を測れない</mark> という重要な方法論的知見として扱える</td></tr>
+<tr><td>ユニット包括契約型が構造的に見えない</td><td>従来型のtele-ICU（ベンダーとの契約でユニット全体を24時間監視）は患者単位のPart B請求が立たないため、本研究の分子に入らない</td><td><mark class="hl">レガシー型tele-ICUを持つ大病院ほど「請求ゼロ」に見えうる</mark> という系統的バイアス。著者も限界2で認めている</td></tr>
+<tr><td>患者居住地と病院所在地の方向が逆</td><td>rural居住 IRR 2.14 だが rural病院 aOR 0.70</td><td>転院搬送の可能性 vs 地方病院の未導入。データからはどちらとも決められない</td></tr>
+<tr><td>交絡調整の程度が浅い</td><td>患者側モデルは人口統計・居住地中心で、重症度（APACHE等）・併存疾患スコア・入院時の病態が入っていない</td><td>「TCC群と非TCC群の患者像は似ている」という記述も、記述統計の比較にすぎない</td></tr>
+<tr><td>病院特性は2019/2020年で固定</td><td>AHA調査は2019年版・2020年版のみ。研究期間は2018〜2024年</td><td>期間中に病床規模・所属・教育区分が変わった病院は誤分類される。パンデミック前後で病院が変化した可能性の高い時期だけに影響が読めない</td></tr>
+<tr><td>Medicare Advantageを除外</td><td>現在は米国Medicare受給者の半数超がMedicare Advantage</td><td><mark class="hl">FFSのみの結果を米国全体の遠隔ICU利用として一般化できない</mark></td></tr>
+<tr><td>高齢者中心の集団</td><td>Medicare受給者が対象なので、64歳未満は障害・末期腎不全など特殊な理由での加入者</td><td>若年重症患者への一般化不可</td></tr>
+<tr><td>アウトカムがない</td><td>死亡・在院日数・転院・コストのいずれも評価していない</td><td><mark class="hl">「遠隔ICUを増やすべきか」という問いには、この論文だけでは答えられない</mark></td></tr>
+<tr><td>多重比較の扱い</td><td>患者側・病院側で多数の変数を検定し、有意水準はp&lt;0.05のみ。多重性の調整は記載なし</td><td>境界域の結果（micropolitan病院 aOR 1.31、safety-net aOR 1.33、high-minority aOR 0.77 など、95% CI下限/上限が1に近いもの）は慎重に</td></tr>
+<tr><td>因果推論の設計ではない</td><td>連続横断デザインで、2020年3月前後の比較に差分の差分（DID）や中断時系列（ITS）といった準実験デザインを適用していない</td><td>政策効果の推定としては記述にとどまる。<mark class="hl">「CMSの支払い拡大がTCCを増やした」は時間的一致に基づく解釈であって因果効果の推定ではない</mark></td></tr>
+<tr><td>表の丸め</td><td>Table 2 の ICU能力：あり 73.6% + なし 26.5% = 100.1%</td><td>単なる丸め誤差だが、表の検算習慣として指摘に値する</td></tr>
+</tbody></table></div>
+<h3>11. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>5</td><td>病院占床率とICU転棟遅延・院内死亡の関連。本論文筆頭著者の先行研究</td><td>Ofoma UR, et al. J Crit Care 2020;58:48–55</td></tr>
+<tr><td>13</td><td>telestroke誘導のt-PA投与患者における脳卒中診断の正確性</td><td>Agrawal K, et al. J Stroke Cerebrovasc Dis 2016;25:2942–2946</td></tr>
+<tr><td>14</td><td>米国病院のtelestroke能力の評価（2019年時点27%の根拠）</td><td>Richard JV, et al. JAMA Neurol 2020;77:1035–1037</td></tr>
+<tr><td>15</td><td>遠隔集中治療を導入した米国急性期病院の特性（2018年時点20%の根拠。本論文の直接の先行研究）</td><td>Ofoma UR, et al. Crit Care Explor 2021;3:e0468</td></tr>
+<tr><td>16</td><td>COVID-19に対するtele-ICU——全国の普及率と遠隔集中治療提供病院の特性</td><td>Williams D, et al. J Rural Health 2021;37:133–141</td></tr>
+<tr><td>18</td><td>CMS「Medicare遠隔医療 提供者向けファクトシート」2020年（支払い拡大の一次資料）</td><td>U.S. CMS, 2020</td></tr>
+<tr><td>19</td><td>CARES法（S.3548）本文</td><td>US Congress, 2020</td></tr>
+<tr><td>23</td><td>パンデミック中の米国における遠隔医療利用と外来診療のばらつき</td><td>Patel SY, et al. Health Aff 2021;40:349–358</td></tr>
+<tr><td>26</td><td>AHA Hospital Statistics 2020年版（病院特性データの出所）</td><td>American Hospital Association, 2020</td></tr>
+<tr><td>28</td><td>局所病院市場構造の可変半径指標（HHIの方法論）</td><td>Phibbs CS, Robinson JC. Health Serv Res 1993;28:313–324</td></tr>
+<tr><td>29</td><td>米国病院の教育病院区分と死亡の関連（teaching status分類の根拠）</td><td>Burke LG, et al. JAMA 2017;317:2105–2113</td></tr>
+<tr><td>31</td><td>全国ICU遠隔医療調査——検証と結果（レガシー型tele-ICUの記述）</td><td>Lilly CM, et al. Chest 2012;142:40–47</td></tr>
+<tr><td>32</td><td>ICU遠隔医療のケアモデル</td><td>Caples SM. Crit Care Clin 2019;35:479–482</td></tr>
+<tr><td>37</td><td>入院患者への遠隔腎臓内科診療——提供者の視点と臨床アウトカム</td><td>Androga LA, et al. Clin J Am Soc Nephrol 2022;17:655–662</td></tr>
+<tr><td>38</td><td>バーチャル・ホスピタリスト——COVID-19危機下の重要なイノベーション</td><td>Bloom-Feshbach K, et al. J Gen Intern Med 2021;36:1771–1774</td></tr>
+<tr><td>43</td><td>COVID-19隔離患者との院内コミュニケーションのための遠隔医療</td><td>Fang J, et al. West J Emerg Med 2020;21:801–806</td></tr>
+<tr><td>44</td><td>技術と災害——NETCCN（国家緊急遠隔集中治療ネットワーク）の進化</td><td>Pamplin JC, et al. Crit Care Med 2021;49:1007–1014</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 米国では2020年3月に遠隔集中治療（TCC）が償還対象になった途端に請求が約8倍へ跳ね上がり、パンデミック後も定着した。しかし <mark class="hl">critical care請求全体に占める割合は依然ごく一部で、しかも小規模・地方・critical access病院という「最も遠隔ICUを必要とする施設」ほど請求が少なかった</mark>。 <strong>支払いを付けるだけでは、遠隔ICUは必要なところに届かない。</strong> 当院で遠隔支援やRRSの成果を測るときも、<mark class="hl">算定件数を活動量の代理指標にしない</mark>（ユニット包括契約型の遠隔ICUがこの研究の分子から丸ごと抜け落ちているのと同じ取り逃がしが起きる）。なお本研究はアウトカムを一切見ていないため、遠隔ICUの是非を論じる根拠にはならない。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
