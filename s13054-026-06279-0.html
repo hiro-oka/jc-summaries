@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SOFA-2の再分類は本当に予後情報を足しているのか — 欠測30.2%対0.26%の非対称・IPWの不明瞭・マッチングの恒等式という3つの異議（Matters Arising・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">SOFA-2の再分類は本当に予後情報を足しているのか — 欠測30.2%対0.26%の非対称・IPWの不明瞭・マッチングの恒等式という3つの異議（Matters Arising・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Kuzukıran Kocataş D. SOFA-2 reclassification: data availability and incremental prognostic value. Crit Care. 2026;30:438. DOI: 10.1186/s13054-026-06279-0</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-20）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06279-0" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06279-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>SOFA-2 reclassification: data availability and incremental prognostic value</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>今すぐ変わること：なし。</strong> これは臨床介入の話ではなく、SOFA-2への移行に伴う「スコアの読み方」と「レジストリ解析の作法」への注文である。</li><li><strong>ただしデータの取り方は今日から変えられる。</strong> このレターの中核は「SOFA-1の呼吸サブスコアは30.2%の入室で計算不能、SOFA-2は0.26%」という、Ono らの補足表1に載っていた非対称そのものである。当院のICUデータでも同じ検証をしておく価値がある。血液ガスを引かなかった日が、SOFA-1では0点、SOFA-2では酸素投与様式から有点になる。<mark class="hl"><strong>「測っていない」を「正常（0点）」に潰す運用を続けたまま2つのスコアを比べると、差の一部は病態ではなく記録行為を測ってしまう。</strong></mark></li><li><strong>SOFA-2移行時の当院ルール案</strong>：① 欠測は0点ではなく「欠測」として残し、0点との区別がつくフィールドを持つ ② 呼吸・脳の2成分は「原法SOFAが計算できた入室」と「できなかった入室」を分けて集計する ③ 腎代替療法は「腎目的」「非腎目的（体外循環・中毒・除水目的など）」を記録する（SOFA-2の腎の除外規定を後から適用できるようにするため）。</li><li><strong>JIPAD・院内DBでの研究計画への含意</strong>：スコアの改訂を扱う解析では、「定義が変わったことによる再分類」と「必要なデータが変わったことによる再分類」を分離する設計を最初から入れる。分けられない解析は、査読でここを突かれる。</li><li><strong>経営・QI指標としてのSOFA</strong>：重症度調整の基盤スコアを差し替えると、施設の見かけの成績が動く。移行期に施設間比較や年次比較を出すときは、両スコアを併記する。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：SOFA-2 は30年ぶりの改訂スコアで、複数の外部検証で識別能は SOFA-1 と同等〜わずかに優位と報告されている。Ono らは OneICU 13万4528入室で、総点分布はほぼ同じでも患者単位では別カテゴリに振り分けられること（dSOFA のズレ）を示し、ズレの向きと死亡率が結びつくことを2本の鏡像的な完全一致マッチングで示した。</li><li><strong>Unknown</strong>：その「ズレ」が、① スコア定義の違いなのか、必要データの入手可能性の違いなのか、② 逆確率重み付け（IPW）で何を推定したかったのか、③ 2つのスコアを併用すると予測が実際に良くなるのか（上乗せの予後的価値）。</li><li><strong>What's new</strong>：本レターは、Ono らの補足資料に埋もれていた欠測率（呼吸 30.2% 対 0.26%、脳 12.9% 対 2.8%）を前面に出し、<mark class="hl"><strong>dSOFA は介入でも治療でもなく2つの決定論的スコアの引き算にすぎない</strong></mark>という一点から、IPW とマッチングの解釈をともに問い直す。特に3点目は決定的で、SOFA-2 を7.41点に固定すれば SOFA は 10.2 / 7.4 / 4.7 に分かれるほかない — これは発見ではなく恒等式である、と指摘する。</li><li><strong>Vault内の関連ノートとの対比</strong>：<span class="wl">SOFAとSOFA-2は同じ患者を別の重症度に振り分ける — 患者単位の再分類とスコア間のズレ（OneICU 13万4528例・CritCare2026）</span> の当Vaultノートは、批判的吟味の節で「マッチしたのはスコアだけで年齢も併存症も治療も揃っていない」「呼吸サブスコアの欠測が方向性を作りうる」と、本レターとほぼ同じ2点を独自に挙げていた。<mark class="hl">本レターはそこに「補足表1の実数（30.2%対0.26%）」と「IPWの推定対象が未特定」という2つの具体を足し、当Vaultの読みを一次資料で裏づけた形になる。</mark> 一方、欠測が重症度スコアの成績を歪める現象そのものは <span class="wl">欠測値がAPACHE IIIとJRODのSMRを押し上げる — 血ガスとアルブミンを測らない施設ほど成績が悪く見える（JIPAD 61357例・JCritCare2024）</span> が日本のレジストリで先に示しており、結論は完全に整合する。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで Ono らの SOFA / SOFA-2 再分類研究に対し、<strong>「観察されたズレの一部は病態ではなくデータの入手可能性の差である」「IPW の推定対象が特定されていない」「完全一致マッチングの結果は dSOFA の定義から導かれる恒等式であって上乗せの予後的価値の証明ではない」</strong>という3点を指摘するレター。原著の主要所見そのものは支持している。</p>
+</div>
+<ul><li>著者はトルコ・アンカラの集中治療医による単著。新規データはなく、原著の本文と補足資料（Supplementary Table 1、Supplementary Fig. 9、Supplementary Methods）を精読した上での指摘。</li><li><strong>第1の指摘（データの入手可能性）</strong>：呼吸成分に必要な全変数が欠けていた入室は、原法SOFAで 40,576件（30.2%）、SOFA-2 で 354件（0.26%）。脳成分は 12.9% 対 2.8%。未測定成分には測定が得られるまで0点が割り当てられていた。SpO₂/FiO₂ 代替と GCS運動成分の利用は SOFA-2 の意図された長所だが、その長所ゆえに「定義の違い」と「必要データの違い」が混ざる。</li><li><strong>提案する感度分析</strong>：完全ケース解析は選択バイアスを持つので不適。代わりに、<mark class="hl">原法SOFAに必要な測定が「あった入室」と「なかった入室」に分けて、呼吸・脳のサブスコア遷移を別々に提示する</mark>。腎については「非腎目的の腎代替療法」に関する SOFA-2 の規定が適用されていないので、該当入室数の報告と RRT 例を除外した感度分析を求める。</li><li><strong>第2の指摘（IPW）</strong>：多項傾向スコアモデルに入れた変数と、重み付け比較の推定対象（target estimand）が明示されていない。バランスプロット（補足図9）に並ぶ昇圧薬・呼吸補助・機械的循環補助・腎代替療法は、そもそも SOFA / SOFA-2 のサブスコア定義に直接寄与する変数であり、dSOFA の分類そのものに寄与する。それらで条件付けると推定対象の解釈が難しくなる。</li><li><strong>第3の指摘（マッチング）</strong>：dSOFA = SOFA-2 − SOFA という定義上、SOFA-2 を固定すれば dSOFA の変動は原法SOFA の逆向きの変動そのもの。実際、SOFA-2 マッチ群では SOFA-2 が3群とも 7.41 で、原法SOFA は 10.2 / 7.4 / 4.7。マッチ解析は「片方のスコアで同じ重症度でも、もう片方のスコアと死亡について不均一」であることは示すが、それは上乗せの予後的価値とは別物。</li><li><strong>著者が求める検証</strong>：SOFA ベースと SOFA-2 ベースの事前規定モデルを比較し、ズレの情報を足したときに識別能・較正・全体の予測誤差が改善するかを適切な検証下で直接評価すること。「相補性（complementarity）」が予後の話なのか臨床記述の話なのかを区別すべきだと述べる。</li><li><strong>結論</strong>：SOFA-2 が臓器障害の分類を意味ある形で変えることは説得的に示された。残る課題は上の3点。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この論争が何をめぐっているか 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>SOFA（Sequential Organ Failure Assessment）</strong> は1994年に提唱された臓器障害スコア。呼吸・凝固（止血）・肝・循環・中枢神経・腎の6臓器を各0〜4点で採点し、合計0〜24点で重症度を表す。Sepsis-3 の敗血症定義（感染＋SOFA 2点以上の急上昇）にも組み込まれ、臨床試験の組み入れ基準・レジストリの重症度調整・ICUの質評価にまで使われている。 <strong>SOFA-2</strong> は2025年に JAMA で発表された30年ぶりの改訂版（日本からは JIPAD が開発・検証コホートに参加）。主な変更は、① 呼吸を PaO₂/FiO₂ だけでなく <strong>SpO₂/FiO₂</strong>（動脈血ガス不要）でも採点できるようにした ② 神経を GCS 合計から <strong>GCS運動成分</strong>中心にした ③ 循環をノルアドレナリン換算の<strong>用量</strong>で刻み、体外循環補助に最高点を置いた ④ 腎で尿量・腎代替療法の扱いを整理した、など。狙いは「日常的に取れているデータで、より正確に臓器障害を測る」こと。 <strong>dSOFA</strong> は Ono らが定義した指標で、<strong>dSOFA = SOFA-2 − SOFA</strong>。プラスなら SOFA-2 の方が高く採点し、マイナスなら原法SOFA の方が高く採点している。Ono らは ≤ −2 を Negative、−2 &lt; dSOFA &lt; 2 を Minimal、≥ 2 を Positive と3分した。 <strong>完全一致マッチング（exact matching）</strong> は「SOFA-2 が7点の人には7点の人を」と点数値そのものを揃えて群を作る方法。揃えた変数の分布は完全に一致するが、揃えていない変数（年齢・併存症・治療）は釣り合わない。 <strong>逆確率重み付け（IPW / IPTW）</strong> は、各患者が実際に受けた「曝露」を受ける確率（傾向スコア）の逆数で重み付けし、擬似的に曝露群と非曝露群の背景を揃える手法。本来は治療効果の推定に使う。 ここで問題になるのは、<mark class="hl"><strong>dSOFA は「治療」ではなく、同じ患者データから機械的に計算される2つの数の引き算にすぎない</strong></mark>という点である。因果推論の道具立て（傾向スコア・IPW・マッチング）を、介入でないものに当てはめたときに何を推定したことになるのか — 本レターの通奏低音はこれである。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>著者は冒頭で、Ono らの研究を <strong>「大規模多施設 OneICU コホートにおける、入室時点での原法SOFA と SOFA-2 の再分類、およびスコア不一致と ICU 死亡の関連を検討したもの」</strong> と要約し、<strong>サンキー図とヒートマップによるサブスコア遷移の提示は、SOFA-2 への移行が臓器障害の分類をどう変えうるかについて価値ある洞察を与える</strong>と、明確に評価している。</p>
+<p>その上で、<strong>これらの所見から「上乗せの予後的価値（incremental prognostic value）」を読み取る際には、3つの論点の明確化が必要である</strong>と述べる。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>論点</th><th>一言でいうと</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>2つのスコア間での構成要素データの入手可能性の差</td><td>欠測の非対称が再分類を作っていないか</td></tr>
+<tr><td>2</td><td>逆確率重み付けの仕様</td><td>何をモデルに入れ、何を推定したのか</td></tr>
+<tr><td>3</td><td>完全一致マッチング解析の予後的解釈</td><td>恒等式を発見と読んでいないか</td></tr>
+</tbody></table></div>
+<h3>3. 第1の論点 — 欠測ではなく「非対称な欠測」が問題</h3>
+<h4>3-1. 補足表1が示していた実数</h4>
+<p>著者はまず、<strong>問題は「一部の構成要素データが欠けていたこと」そのものではなく、「2つのスコアのあいだで、データの入手可能性が実質的に異なっていたこと」だ</strong>と論点を組み替える。</p>
+<div class="tw"><table>
+<thead><tr><th>構成要素</th><th>原法SOFA：必要変数がすべて欠けていた入室</th><th>SOFA-2：同</th></tr></thead>
+<tbody>
+<tr><td>呼吸</td><td>40,576件（30.2%）</td><td>354件（0.26%）</td></tr>
+<tr><td>神経</td><td>12.9%</td><td>2.8%</td></tr>
+</tbody></table></div>
+<p>（Ono らの Supplementary Table 1 より。分母は 13万4528入室）</p>
+<p>そして Supplementary Methods によれば、<strong>未測定の構成要素には、測定値が得られるまで0点が割り当てられていた</strong>。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「測っていない」と「正常」を同じ0点に潰すと何が起きるか 呼吸で 30.2% 対 0.26%、実に100倍以上の開きがある。原法SOFA は動脈血ガス（PaO₂/FiO₂）を要求するため、血液ガスを引かなかった入室では呼吸サブスコアが0点になる。一方 SOFA-2 は SpO₂/FiO₂ で代替できるので、同じ患者に点が付く。<mark class="hl"><strong>この差はそのまま「SOFA-2 の方が高い＝Positive dSOFA」の方向に効く。</strong></mark> つまり Positive dSOFA の一部は、臓器障害の実体ではなく「採血をしなかった」という記録行為の写しでありうる。</p>
+</div>
+<h4>3-2. それは SOFA-2 の欠点ではなく長所である、という留保</h4>
+<p>著者はここで慎重に留保する。<strong>PaO₂/FiO₂ が得られないときに SpO₂/FiO₂ を使えること、条件が整えば GCS の運動成分を使えることは、日常的に得られる臨床データをよりよく活用するための意図された長所（deliberate advantage）である。</strong></p>
+<p>しかし長所であることと、比較解析でバイアス源になることは両立する。<strong>この特性ゆえに、観察された再分類は、スコアの定義の違いだけでなく、2つのスコアが要求するデータの違いをも反映しうる。</strong></p>
+<h4>3-3. 情報のある欠測（informative missingness）</h4>
+<p>さらに一段深い指摘。<strong>測定の実践は重症度や臓器補助の必要性に応じて変わりうるため、観察された差は「情報を持つ測定パターン（informative measurement patterns）」を反映しうる。</strong></p>
+<p>血液ガスを引くかどうかは無作為ではない。重症なら引く、軽症なら引かない。人工呼吸中なら引く、酸素マスクだけなら引かない。したがって欠測は「たまたま無い」のではなく、重症度そのものと相関している。</p>
+<p>著者は <strong>原著者が未測定成分を限界として認めていることを認めた上で、「重要な懸念は、データの入手可能性の差が2つのスコアに等しく影響しないことである」</strong> と書く。原著の限界の記述は「欠測がある」で止まっており、「欠測が非対称である」ところまで踏み込んでいない、という指摘である。</p>
+<h4>3-4. では何をすべきか — 提案する感度分析</h4>
+<p>著者は、安直な解決策を先に潰す。<strong>完全ケース解析（complete-case analysis）はそれ自体が選択バイアスを受けやすい。</strong> 血液ガスを引かれた患者だけを残せば、コホートが重症側に偏る。</p>
+<p>代わりの提案：</p>
+<div class="tw"><table>
+<thead><tr><th>対象</th><th>提案する提示の仕方</th><th>何が分かるか</th></tr></thead>
+<tbody>
+<tr><td>呼吸・神経のサブスコア遷移</td><td>原法SOFA に必要な測定が「あった入室」と「なかった入室」に<strong>分けて別々に</strong>提示する</td><td>定義の違いによる再分類と、非対称なデータ可用性による再分類の相対的寄与を切り分けられる</td></tr>
+<tr><td>腎</td><td>「非腎目的（non-renal use）の腎代替療法」に関する SOFA-2 の規定が適用されていないので、<strong>影響を受けた入室数を報告</strong>し、<strong>RRT を受けた患者を除外した感度分析</strong>を行う</td><td>腎の再分類にこの改変がどれだけ効いたかが分かる</td></tr>
+</tbody></table></div>
+<p>腎の点は見落とされやすい。SOFA-2 では、腎代替療法が腎不全以外の目的（体外循環回路・中毒・除水など）で行われている場合には腎サブスコアの最高点を与えない、という規定がある。Ono らはこれを適用していないと明記しており、その分だけ SOFA-2 側の腎サブスコアが高く出る方向に働く。実際、原著の Figure 4 では <strong>腎サブスコアが6臓器のうち最も dSOFA カテゴリ間の差が大きかった</strong>（Negative 2.5弱 対 Minimal 1.1 対 Positive 0.6）。</p>
+<h3>4. 第2の論点 — IPW は何を推定していたのか</h3>
+<h4>4-1. モデルの変数と推定対象が不明</h4>
+<p><strong>dSOFA カテゴリにまたがる逆確率重み付けに用いられた変数と、重み付け比較の推定対象（target estimand）が十分に特定されていない。</strong></p>
+<p>Supplementary Fig. 9 は、重み付け前後のバランスを、以下について提示している。</p>
+<ul><li>人口統計学的特性</li><li>重症度の指標</li><li>昇圧薬</li><li>呼吸補助</li><li>機械的循環補助</li><li>腎代替療法</li></ul>
+<p>しかし著者は問う。<strong>このバランスプロットで評価された変数が、多項傾向スコアモデルに投入された変数と同一なのかどうかが不明である。</strong></p>
+<h4>4-2. なぜこの区別が重要か — 循環論法の危険</h4>
+<p>ここが本レターで最も鋭い指摘のひとつ。</p>
+<p><strong>これらの臓器補助・血管作動薬の変数の一部は、SOFA あるいは SOFA-2 のサブスコアの定義に直接寄与しており、したがって dSOFA の分類にも直接寄与する。</strong></p>
+<ul><li>昇圧薬 → SOFA-1 の循環サブスコア（使用の有無で3点以上）と SOFA-2 の循環サブスコア（ノルアドレナリン換算量で刻む）の<strong>両方の入力</strong></li><li>腎代替療法 → 両スコアの腎サブスコアの入力</li><li>機械的循環補助 → SOFA-2 の循環サブスコア最高点の入力</li><li>呼吸補助 → SOFA-2 の呼吸サブスコアの入力</li></ul>
+<p>つまり dSOFA の値は、これらの変数の関数として決まっている部分がある。</p>
+<div class="tw"><table>
+<thead><tr><th>ケース</th><th>起きること</th><th>著者の要求</th></tr></thead>
+<tbody>
+<tr><td>これらの変数を傾向スコアモデルに<strong>含めた</strong>場合</td><td>dSOFA の分類に寄与する変数で条件付けることになり、推定対象の解釈が難しくなる</td><td>変数の測定タイミングと役割を明示すべき</td></tr>
+<tr><td><strong>含めなかった</strong>場合</td><td>補足図9のバランス評価は、モデルと無関係な変数について行われたことになる</td><td>バランス評価の基礎となる変数集合を明確化すべき</td></tr>
+</tbody></table></div>
+<h4>4-3. そもそも dSOFA は治療ではない</h4>
+<p><strong>dSOFA は治療でも介入でもなく、2つの決定論的スコアの差である。</strong> したがって、重み付け比較の目的と、それに与える解釈を明示的に述べるべきである、と著者は言う。</p>
+<p>傾向スコアは本来「もし全員がこの治療を受けたら／受けなかったら」という反実仮想を扱う道具である。しかし「もしこの患者の dSOFA が +2 でなく −2 だったら」という反実仮想は、患者データが同じである限り成立しない。dSOFA を変えるには患者の生理学的値そのものを変えるしかない。</p>
+<p>著者は、傾向スコア重み付けを使うときの報告項目として Austin &amp; Stuart（Stat Med 2015）を引き、以下を挙げる。</p>
+<ul><li>モデルに含めた変数</li><li>推定対象（target estimand）</li><li>極端な重みの分布と取り扱い</li><li>有効サンプルサイズ（effective sample size）</li></ul>
+<p>そして締めくくる。<strong>測定された特性のバランスが取れたとしても、重み付けはそれ自体では、データ可用性の差異から生じる分類の問題を解決できない。</strong></p>
+<h3>5. 第3の論点 — マッチング解析は恒等式を確認しただけではないか</h3>
+<h4>5-1. 代数的な必然</h4>
+<p><strong>互いに鏡像をなす完全一致マッチング解析は、スコアの不一致と死亡の関連を示しているが、両スコアの併用が上乗せの予後的価値をもたらすことを直接には立証していない。</strong></p>
+<p>理由は単純である。<strong>dSOFA が SOFA-2 − SOFA と定義されている以上、SOFA-2 の値を固定したときの dSOFA の変動は、必然的に原法SOFA の逆向きの変動そのものである。</strong></p>
+<p>Ono らの数値がそれを示す。</p>
+<div class="tw"><table>
+<thead><tr><th>SOFA-2 でマッチした3群</th><th>Negative dSOFA</th><th>Minimal dSOFA</th><th>Positive dSOFA</th></tr></thead>
+<tbody>
+<tr><td>SOFA-2 平均（点）</td><td>7.41</td><td>7.41</td><td>7.41</td></tr>
+<tr><td>原法SOFA 平均（点）</td><td>10.2</td><td>7.4</td><td>4.7</td></tr>
+</tbody></table></div>
+<p>SOFA-2 を 7.41 に固定して dSOFA で3分すれば、原法SOFA は 10.2 / 7.4 / 4.7 に分かれる<strong>しかない</strong>。同じ代数的関係は、原法SOFA でマッチしたときの SOFA-2 についても成り立つ。</p>
+<h4>5-2. それでも情報価値はある、という公平な評価</h4>
+<p>著者は原著を切り捨てない。<strong>これらの所見は、一方のスコアで同じ重症度に割り当てられた入室が、他方のスコアと死亡に関して不均一なままでありうることを示している。その点でマッチング解析は有益（informative）である。</strong></p>
+<p>つまり「SOFA-2 が7点」というラベルの内側に、死亡率9.0%の患者群と5.0%の患者群が同居している — この事実自体は臨床的に意味がある。</p>
+<h4>5-3. しかし「上乗せの予後的価値」を言うには別の検証が要る</h4>
+<p><strong>上乗せの予後的価値を主張するには、スコアの不一致という情報が、どちらか一方のスコア単独を超えて予測を改善するかどうかを直接評価する必要がある。</strong></p>
+<p>著者が提案する具体的な検証設計：</p>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>①</td><td>SOFA に基づく事前規定モデルと、SOFA-2 に基づく事前規定モデルを立てる</td></tr>
+<tr><td>②</td><td>そこにスコア不一致の情報を足す</td></tr>
+<tr><td>③</td><td><strong>識別能（discrimination）・較正（calibration）・全体の予測誤差（overall prediction error）</strong>が改善するかを、適切な検証（validation）の下で評価する</td></tr>
+</tbody></table></div>
+<p>引用されているのは Steyerberg ら（Epidemiology 2010）の予測モデル性能評価の枠組みである。ここで「識別能だけでなく較正と全体の予測誤差も」と指定されているのが要点で、AUROC の微増だけでは足りない、という含意がある。</p>
+<h4>5-4. 「相補性」の2つの意味を区別せよ</h4>
+<p>最後に、原著が用いる「complementarity（相補性）」という言葉の曖昧さを突く。</p>
+<div class="tw"><table>
+<thead><tr><th>相補性の意味</th><th>必要な検証</th></tr></thead>
+<tbody>
+<tr><td><strong>予後的相補性</strong> — 2つを併用すると予測が良くなる</td><td>上の①〜③（識別能・較正・予測誤差の直接比較）</td></tr>
+<tr><td><strong>臨床的相補性</strong> — 臓器障害をより包括的に記述できる</td><td>スコア不一致を<strong>独立した臨床的基準（clinical reference）</strong>に照らして評価する、または<strong>臨床判断への影響</strong>という観点で評価する</td></tr>
+</tbody></table></div>
+<p><strong>現行のマッチング解析は、予後的相補性と臨床的相補性を区別していない。</strong></p>
+<h3>6. 結論部 — 何は認め、何を求めているか</h3>
+<p>著者の締めくくりは、評価と要求が明確に分かれている。</p>
+<ul><li><strong>認めていること</strong>：<strong>本研究は、SOFA-2 が臓器障害の分類に意味のある変化をもたらすことを説得的に示している（convincingly demonstrates）。</strong></li><li><strong>求めていること</strong>：以下の3つに取り組む追加解析があれば、SOFA と SOFA-2 の不一致を考慮することが追加的な予後的・臨床的価値を持つかどうかを判断できる。</li></ul>
+<ol><li>データ可用性の差（differential data availability）への対処</li><li>重み付け戦略の明確化</li><li>上乗せの予後的性能の直接評価</li></ol>
+<h3>7. 批判的吟味（JCでの論点）</h3>
+<h4>論点1：レターの3点はどれも正しい。では原著の価値は残るか</h4>
+<p>3つの指摘はいずれも技術的に妥当で、反論しにくい。特に第3点（恒等式）は数学的に争えない。しかし著者自身が認めるとおり、<strong>「同じ SOFA-2 スコアの内側に死亡率の異なる集団が同居している」という記述的事実</strong>は残る。JC での問いは「その事実は臨床を変えるか」。当Vaultの原著ノートも、著者自身が「actionable かは不明」と明記していることを引いている。移行期に両スコアを併記する運用の根拠としては十分だが、dSOFA を新しいリスク指標として使う根拠にはならない。</p>
+<h4>論点2：この批判は「SOFA-2 が悪い」ではなく「SOFA-1 との比較が難しい」</h4>
+<p>読み違えやすい点。呼吸欠測 30.2% 対 0.26% は、<strong>SOFA-2 が実装として優れている</strong>ことの証拠でもある。日常データで9割以上の入室が採点できるスコアと、3割が採点できないスコアを比べているのだから、SOFA-2 の実用性はむしろ支持される。レターが問題にしているのは、<mark class="hl">その優位性を「再分類の大きさ」や「不一致と死亡の関連」という形で語ると、実装の差と病態の差が混ざる</mark>という一点である。SOFA-2 の採用可否の議論と、dSOFA の解釈の議論は分けるべき。</p>
+<h4>論点3：Received から Accepted まで2日</h4>
+<p>2026-08-15 受理申請、2026-08-17 受理。Matters Arising としては極めて速い。原著が 2026-08-11 オンライン公開なので、公開4日後に投稿され、その2日後に受理されている。査読の厚みは限定的と見るべきで、内容の妥当性は読み手が自分で確かめる必要がある。もっとも指摘内容は補足資料の実数と代数的事実に依拠しており、検証は容易である。</p>
+<h4>論点4：ChatGPT 利用の開示</h4>
+<p>著者は英文校正と原稿構成に ChatGPT を用いたことを Acknowledgements で開示し、科学的内容・数値・引用の検証責任は自分にあると明記している。単著のレターとしては誠実な運用で、今後の投稿での書き方の参考になる。</p>
+<h4>論点5：レター自身の限界 — 提案はしているが実行はしていない</h4>
+<p>新規データはなく、提案された感度分析（測定あり／なしの層別提示、RRT 除外解析、モデル比較）はいずれも原著者側のデータがないと実行できない。したがって本稿は「原著者への宿題リスト」であり、それ以上ではない。<mark class="hl">本PDFの時点で Ono らからの返信は同梱されていない。</mark> 返信が出たら追記する価値がある。</p>
+<h4>論点6：当院・JIPAD の解析にそのまま返ってくる指摘</h4>
+<p>第1・第2の指摘は、レジストリで重症度スコアの改訂を扱うすべての解析に当てはまる。JIPAD は SOFA-2 の開発・検証コホートに参加しており、今後 SOFA-1 から SOFA-2 への移行影響を JIPAD で解析する場面は必ず来る。そのとき <strong>「欠測を0点に潰していないか」「傾向スコアモデルにスコアの構成要素そのものを入れていないか」</strong> は、査読で最初に問われる。設計段階で潰しておくべき論点である。</p>
+<h3>8. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>本レターの対象論文。OneICU 13万4528入室での SOFA / SOFA-2 の患者単位再分類と不一致</td><td>Ono S, Uchino S, Kumaido Y, et al. Crit Care. 2026. DOI: 10.1186/s13054-026-06241-0</td></tr>
+<tr><td>2</td><td>傾向スコアを用いた逆確率重み付け（IPTW）のベストプラクティス。報告すべき項目（変数・推定対象・極端な重み・有効サンプルサイズ）の典拠</td><td>Austin PC, Stuart EA. Stat Med. 2015;34(28):3661–79. DOI: 10.1002/sim.6607</td></tr>
+<tr><td>3</td><td>予測モデルの性能評価の枠組み。識別能・較正・全体の予測誤差を並べて評価する考え方の典拠</td><td>Steyerberg EW, Vickers AJ, Cook NR, et al. Epidemiology. 2010;21(1):128–38. DOI: 10.1097/EDE.0b013e3181c30fb2</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論</p>
+<ol><li><mark class="hl"><strong>SOFA-1 と SOFA-2 を比べるときは、まず「どちらが計算できたか」を数えること。</strong></mark> Ono らの補足表1では、呼吸サブスコアを計算できなかった入室が原法SOFA で 30.2%、SOFA-2 で 0.26%、神経で 12.9% 対 2.8%。未測定は0点に潰されていた。再分類の一部は病態ではなく記録行為である。</li><li><mark class="hl"><strong>当院・JIPAD のデータで SOFA-2 移行を扱うなら、欠測を「0点」ではなく「欠測」として残す設計を先に入れる。</strong></mark> これがないと、どんな解析も「血ガスを引く習慣」を測ってしまう。</li><li><strong>dSOFA は治療ではない。</strong> 2つの決定論的スコアの引き算に傾向スコア・IPW を当てるなら、モデルの変数・推定対象・極端な重み・有効サンプルサイズを明示しないと、何を推定したのか読者に伝わらない。しかもスコアの構成要素（昇圧薬・RRT・呼吸補助）をモデルに入れると、dSOFA の分類そのもので条件付けることになる。</li><li><strong>SOFA-2 を 7.41 点に固定すれば SOFA が 10.2 / 7.4 / 4.7 に分かれるのは、発見ではなく恒等式。</strong> 「2つを併用すると予後予測が良くなる」と言うには、識別能・較正・予測誤差を直接比べる別の解析が要る。</li><li><strong>それでも「同じ SOFA-2 スコアの内側に死亡率の違う集団が同居する」という記述的事実は残る。</strong> 移行期に両スコアを併記する運用の根拠にはなる。dSOFA を新しいリスク指標として使う根拠にはならない。</li></ol>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
