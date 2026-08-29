@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Vieux T, Marjanovic N, Maia IWA, Boyaci Dundar N, Mikkelsen S, Lassen A, Dominguez Bencomo AI, Xu J, Landoni G, Robinson A, Freund Y. Prehospital airway and ventilatory management: a collaborative and narrative review. Intensive Care Med. 2026. DOI: 10.1007/s00134-026-08532-0</dd><dt>掲載誌</dt><dd>Intensive Care Medicine（2026-07-02）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1007/s00134-026-08532-0" target="_blank" rel="noopener">doi.org/10.1007/s00134-026-08532-0</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Prehospital airway and ventilatory management: a collaborative and narrative review</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>当院ICUの中の運用は本稿で変わらない</strong>。舞台は救急車内・現場・ヘリであり、ICU内の挿管手順そのものを書き換える論文ではない。ただし「装備と時間が制限された場所での気道管理」という枠組みは、当院の<strong>院内搬送（CT室・血管撮影室・MRI）</strong>と<strong>RRSコール先の一般病棟</strong>にそのまま移せる</li><li><strong>最も移植価値が高いのは「挿管する前に生理を整える」の3点セット</strong>。① ramped position（外耳道と胸骨切痕を水平に合わせる）を肥満例で標準化する、② NIVによる前酸素化を第一選択にする、③ 導入から喉頭鏡までの間にバッグバルブマスク換気を入れる。いずれも当院で追加コストなしに実行でき、<span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span> と同じ方向を向いている</li><li><strong>NIVが用意できない場面の代替が明記された</strong>。リザーバーマスクを「フラッシュレート（50 L/分超）」で流す方法。院内搬送の直前や病棟の急変現場で、NIVを組み立てる時間がないときの現実解として院内の急変マニュアルに1行書ける</li><li><strong>挿管後低血圧の予測3因子は当院のチェックリストに使える</strong>。65歳超・挿管前収縮期血圧130 mmHg未満・挿管前SpO2 90%未満。この3つのうち2つ以上が当てはまるなら、昇圧薬をあらかじめ手元に準備してから導入する運用にできる（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span> のバンドルと整合する）</li><li><strong>搬送中の酸素残量計算はそのまま当院の院内搬送に効く</strong>。HFNCを付けたまま検査室へ出すと、FiO2 1.0・60 L/分ではEボンベが11分しか持たない。当院で「HFNCのまま搬送してよいか」を判断するとき、本稿の表2・表3を根拠として使える。人工呼吸器搬送（分時換気量10 L/分）ならFiO2 0.5でEボンベ約3時間で、桁が2つ違う</li><li><strong>DNI（挿管しない方針）患者の呼吸困難緩和にHFNCを位置づける材料になる</strong>。会話とケアの継続ができる点でマスクNIVより優れるという主張は、当院の<span class="wl">🕊️ 終末期・治療差し控えと意思決定 Home</span>の運用に接続できる</li><li><strong>ドクターカー・ドクターヘリからの引き継ぎ時の申し送り項目を決められる</strong>。挿管の試行回数・声門上デバイスの有無・波形カプノグラフィで確認したか・導入薬と筋弛緩薬の種類と時刻の4点は、到着時に必ず聞き取る形にすると、覚醒下麻痺（awareness with paralysis）と鎮痛鎮静の空白を防げる</li><li><strong>一方で、日本の病院前システムには直輸入できない部分が大きい</strong>。本稿の推奨の多くは医師が現場に出る欧州型を前提にしており、救急救命士による薬剤を用いた迅速導入気管挿管（RSI）は日本では実施できない。「声門上デバイスを一次選択にする」という記述は、むしろ日本の現行運用を裏づける方向に読むのが妥当</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known（既に分かっていること）</strong>：気管挿管は確実な気道確保の標準であり、適応が正しく術者が訓練されていれば救命的である。病院前の初回成功率は院内より低く、挿管後低血圧と低酸素血症が予後を悪化させる。ビデオ喉頭鏡は初回成功率を上げ、波形カプノグラフィが食道挿管の唯一の参照基準である。NIVは急性心原性肺水腫とCOPD増悪で挿管と死亡を減らす</li><li><strong>Unknown（まだ分かっていないこと）</strong>：病院前挿管が「誰に」利益をもたらすかの患者選択基準。外傷・重症頭部外傷での病院前挿管の是非（観察研究の結論が割れている）。病院前HFNOの有効性（症例報告と小規模シリーズしかない）。病院前でのHFNO失敗の予測因子。ロクロニウムとサクシニルコリンのどちらを選ぶべきか（CURASMURは非劣性を示せなかった）</li><li><strong>What's new（本稿が付け加えたもの）</strong>：① 適応・タイミング・生理最適化・手技・挿管後管理・NIV／HFNOまでを1本のアルゴリズム（Figure 1）に統合したこと、② 病態別の初期人工呼吸設定を実務レベルの数値表（Table 1）にしたこと、③ HFNOと搬送人工呼吸の酸素消費とボンベ残時間を実測可能な計算表（Table 2・Table 3）にしたこと、④ 中毒による昏睡例では「挿管しない」方針が妥当になりうると、GCS 8点未満という古典的トリガーの相対化を明示したこと</li><li><strong>Vault内の関連ノートとの対比</strong>：本総説への応答である <span class="wl">病院前NIVは有効性から実装へ — 早期NIVで挿管が10.8%から5.2%へ、RR 0.49・NNT 18（Correspondence・ICM2026）</span> は「病院前NIVの efficacy はもう決着している。論点は実装（10分以内の開始・10〜15分での再評価・事前の失敗基準）だ」と主張しており、本稿の慎重な書きぶり（bilevel NIVでは挿管・死亡の減少を示したRCTはない）より一段強い。導入薬については、本稿が引くRSI Trialは「ケタミンで循環虚脱が多い」とするのに対し、Vault内の <span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span> は生存でケタミン優位を示しており、方向が食い違う。<span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span> が両者を整合させる位置にある</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 病院前の気道・換気管理を「適応 → タイミング → 生理の最適化 → 手技 → 失敗時のエスカレーション → 挿管後管理」と「NIV／HFNO」の2本の道に整理し、<strong>手技の巧拙よりも挿管前の生理最適化と、失敗を織り込んだ段取りが転帰を決める</strong>と論じたナラティブレビュー。</p>
+</div>
+<ul><li>病院前の気道・換気管理は救急医療で最も頻度が高く、かつ失敗の代償が大きい業務のひとつ。救急システムは国によって救急救命士主体から医師同乗型まで大きく異なり、実践と転帰の不均一性の主要因になっている</li><li>気管挿管は依然として確実な気道確保の標準だが、「挿管そのもの」ではなく「患者選択」が転帰を決める。外傷6467例の因果モデリング研究では、機械学習によるリスク層別化に沿って行った病院前挿管は30日生存を改善したが、無差別に行った場合は改善しなかった</li><li>出血性ショックでは計算が逆転する。陽圧換気が静脈還流と心拍出量を減らすため、循環優先（circulation-first）で止血と輸血を先行させ、気道閉塞が主たる生命の脅威でない限り高度気道確保を後回しにする</li><li>中毒による昏睡でGCS 8点未満というだけの理由で挿管する運用は疑問視されている。急性呼吸窮迫も脳病変の疑いもない中毒昏睡例では、非侵襲的な気道管理と厳密な監視が妥当な代替になりうる</li><li>挿管前の生理最適化（体位・血行動態安定化・前酸素化）が「過小評価されている決定因子」であるというのが本稿の中心主張。PREOXI試験では二相性NIVによる前酸素化が重篤な脱飽和を減らし、PreVent試験では導入から喉頭鏡までのバッグバルブマスク換気が低酸素血症を減らした</li><li>病院前の初回挿管失敗率はCURASMUR試験で23.2%。失敗すると合併症率が19.6%から28.4%へ上がる（OR 1.44）。初回成功率はシステムにより約59%から95%超までばらつく</li><li>失敗時は段階的エスカレーションを事前に決めておく。ビデオ喉頭鏡 → 声門上デバイス → 外科的気道確保（メス・気管フック・ブジー・気管チューブ）</li><li>院外心停止では声門上デバイスが気管挿管の妥当な一次選択になる。4RCT・13,412例のメタ解析でROSC率が高く挿管までの時間が短く、30日神経学的生存は同等</li><li>NIV（主にCPAPとBiPAP）は急性心原性肺水腫とCOPD増悪で確立した役割を持ち、病院前CPAPは挿管率と死亡率を下げる。ただし病院前の bilevel NIV で挿管・死亡の減少を示したRCTはまだない</li><li>HFNOは院内では強いエビデンスがあるが、病院前データは症例報告と小規模シリーズに限られ、酸素消費量と電源の制約がルーチン使用を妨げている</li><li>どのモードであれ、非侵襲的サポートが必要な挿管を遅らせてはならない、というのが結論の芯</li></ul>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-026-08532-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-026-08532-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Visual abstract. 表題は「急性呼吸窮迫における病院前の気道管理と換気」。上段の Background 欄に「急性呼吸窮迫は病院前で頻度が高く生命を脅かす病態であり、環境の制約・限られた資源・術者経験のばらつきが気道管理を難しくしている。救急システムは救急救命士主体から医師主導型まで国により大きく異なり、実践と転帰の不均一性を生んでいる」。その下の Objective 欄（濃紫の帯）に「路傍から回転翼機まで（From roadside to rotorcraft）：本レビューは病院前呼吸ケアの現実的制約を扱い、現在の知見と今後の研究課題を実務的に統合する」。以下、番号を振った5枚のカードが並ぶ。カード1「病院前の気道管理は挿管だけではない — 生理・タイミング・状況が重要」（気道確保の側面図と肺のイラスト）。カード2「挿管する前に最適化する：前酸素化・体位・デバイス・薬剤すべてが挿管の安全性向上に寄与する」（マスク換気・ramped positionの体位・モニタ・輸液のイラスト）。カード3「ひとつの気道戦略で全部は賄えない — 外傷・心停止・中毒・肥満・ヘリ搬送・緩和ケアはそれぞれ個別の対応を要する」（6つの状況アイコンが気道の周囲に円環状に配置）。カード4「挿管が失敗したとき、準備が命を救う：構造化されたレスキュー経路と声門上デバイスが不可欠」（失敗した喉頭鏡 → チェックリスト → 声門上デバイスへ矢印）。カード5「NIVは効くが、エスカレーションを遅らせてはならない：CPAP・BiPAPには確立した役割がある」（NIVマスク・HFNCカニュラと上向きの矢印）。最下部に書誌情報とICMのロゴ</p>
+</div>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 病院前気道管理という「別世界」🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む 病院前の気道管理は、ICUや救急外来と「同じ手技を場所を変えてやる」ものではない。照明・吸引・酸素・人手・モニタ・薬剤・退避経路のすべてが制限され、患者の背景情報も乏しい。そのうえ、どの職種がどこまでやれるかが国によって違う。この2つ（環境の制約と制度の違い）を押さえないと、海外の推奨をそのまま読み違える。</p>
+</div>
+<h4>1-1. 用語の整理</h4>
+<div class="tw"><table>
+<thead><tr><th>略語</th><th>正式名称</th><th>意味（初学者向け）</th></tr></thead>
+<tbody>
+<tr><td>EMS</td><td>emergency medical services</td><td>救急医療サービス。救急車・救急救命士・ドクターカー等を含む病院前医療の総体</td></tr>
+<tr><td>HEMS</td><td>helicopter emergency medical service</td><td>ドクターヘリ。医師が搭乗する救急ヘリコプター搬送</td></tr>
+<tr><td>RSI</td><td>rapid sequence intubation</td><td>迅速導入気管挿管。鎮静薬と筋弛緩薬をほぼ同時に静注し、換気を挟まずに短時間で挿管する手順</td></tr>
+<tr><td>RSA</td><td>rapid sequence airway</td><td>迅速導入気道確保。RSIと同じ薬剤を使いながら、気管挿管ではなく声門上デバイスを一次的に留置する戦略</td></tr>
+<tr><td>SGA</td><td>supraglottic airway</td><td>声門上デバイス。ラリンゲアルマスクや食道閉鎖式エアウェイなど、声門の上に留置して換気する器具</td></tr>
+<tr><td>FONA</td><td>front-of-neck access</td><td>頸部前面からの気道確保。輪状甲状膜切開など</td></tr>
+<tr><td>VL / DL</td><td>videolaryngoscopy / direct laryngoscopy</td><td>ビデオ喉頭鏡／直達喉頭鏡</td></tr>
+<tr><td>NIV</td><td>non-invasive ventilation</td><td>非侵襲的換気。マスク越しに陽圧をかける呼吸補助の総称（日本のNPPVとほぼ同義）</td></tr>
+<tr><td>NIPPV</td><td>non-invasive positive-pressure ventilation</td><td>非侵襲的陽圧換気。NIVとほぼ同義で本稿では前酸素化の文脈で使われる</td></tr>
+<tr><td>CPAP / BiPAP</td><td>continuous / bilevel positive airway pressure</td><td>持続気道陽圧／二相性陽圧。前者は吸気も呼気も同じ圧、後者は吸気圧と呼気圧を別に設定する</td></tr>
+<tr><td>HFNO / HFNC</td><td>high-flow nasal oxygen / cannula</td><td>高流量鼻カニュラ酸素。加温加湿したガスを高流量で鼻から流す</td></tr>
+<tr><td>ACPE</td><td>acute cardiogenic pulmonary edema</td><td>急性心原性肺水腫</td></tr>
+<tr><td>AECOPD</td><td>acute exacerbation of COPD</td><td>慢性閉塞性肺疾患の急性増悪</td></tr>
+<tr><td>TBI</td><td>traumatic brain injury</td><td>外傷性脳損傷</td></tr>
+<tr><td>ROSC</td><td>return of spontaneous circulation</td><td>自己心拍再開</td></tr>
+<tr><td>DNI</td><td>do-not-intubate</td><td>挿管しない方針</td></tr>
+<tr><td>PBW</td><td>predicted body weight</td><td>予測体重。身長と性別から算出する、人工呼吸の一回換気量設定の基準</td></tr>
+<tr><td>ZEEP</td><td>zero end-expiratory pressure</td><td>呼気終末陽圧をゼロにすること</td></tr>
+</tbody></table></div>
+<h4>1-2. 救急システムの2類型 — 推奨を読むときの前提</h4>
+<p>本稿が繰り返す「システムによって違う」は、大きく2類型に整理できる（引用文献1のDickによる古典的整理）。</p>
+<div class="tw"><table>
+<thead><tr><th>類型</th><th>現場に出る職種</th><th>気道管理の実力</th><th>代表</th></tr></thead>
+<tbody>
+<tr><td>アングロ・アメリカ型</td><td>救急救命士（パラメディック）が中心</td><td>施設・地域により薬剤使用権限が異なる。声門上デバイスが主力になりやすい</td><td>米国・英国・豪州</td></tr>
+<tr><td>フランコ・ジャーマン型</td><td>医師が現場に出る（SAMU・Notarzt）</td><td>RSIを含む高度気道管理が現場で可能</td><td>フランス・ドイツ</td></tr>
+</tbody></table></div>
+<p>本稿の著者陣はフランス・ブラジル・トルコ・デンマーク・スペイン・中国・イタリア・米国にまたがり、両類型が混ざっている。<strong>「声門上デバイスを一次選択にしてよい」という記述は、パラメディック主体のシステムにとっての現実解</strong>として書かれており、医師が現場に出るシステムでの推奨とは温度が違う。日本は救急救命士主体（薬剤を用いたRSIは実施できない）＋ドクターカー・ドクターヘリの併存という中間型で、読み替えが要る。</p>
+<h4>1-3. なぜ「挿管前」がそんなに重要か</h4>
+<p>挿管そのもの（喉頭鏡を入れてチューブを通す動作）は数十秒だが、その前後で患者は2つの生理学的な崖に近づく。</p>
+<ol><li><strong>低酸素の崖</strong>。無呼吸になった瞬間から、体内の酸素の在庫（主に機能的残気量に溜まった酸素）を消費し始める。在庫が小さい（肥満・妊娠・腹腔内圧上昇）か、消費が速い（敗血症・発熱）か、シャントがある（肺炎・肺水腫）と、崖は一気に近づく。だから前酸素化と体位は「準備」ではなく「治療」である</li><li><strong>循環の崖</strong>。鎮静薬は交感神経のトーンを落とし、陽圧換気は胸腔内圧を上げて静脈還流を減らす。もともと前負荷が枯れている（出血・脱水・敗血症）患者では、この2つが同時に来て血圧が落ちる。重症患者の25〜43%で挿管周辺期に低血圧が起こる</li></ol>
+<p>この2つの崖を、挿管の腕前で埋めることはできない。埋められるのは準備だけ、というのが本稿の一貫した論調である。</p>
+<h3>2. 背景と目的</h3>
+<p>早期の気道・換気管理は決定的に重要で、適切な支援が遅れれば低酸素血症・呼吸不全・心停止へ急速に進行しうる。病院前は救急外来やICUと比べて、資源の制限・環境の制約・時間的圧迫・診断ツールへのアクセス制限という固有の困難がある。気管挿管とNIVはいずれも広く使われているが、その適応・タイミング・転帰への影響は依然として議論があり、エビデンスは院内研究からの外挿か、不均一な病院前コホートに由来することが多い。</p>
+<p>本総説の目的は、成人の病院前気道・換気管理（気管挿管戦略、NIV、特殊な臨床状況）を批判的に概観し、臨床実践に資する情報を提供するとともに、今後の研究の優先順位を示すこと。</p>
+<h3>3. 方法（ナラティブレビューとしての構成）</h3>
+<p>系統的検索式・データベース・選択基準・バイアス評価の記載はない。ICM の "collaborative and narrative review" 形式で、複数国の執筆者が領域を分担し、69本の文献を引きながら合意的な記述を組み立てている。構成は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>セクション</th><th>扱う範囲</th></tr></thead>
+<tbody>
+<tr><td>気管挿管の適応と戦略</td><td>外傷・TBI・出血性ショック・心停止・中毒昏睡・タイミング</td></tr>
+<tr><td>前酸素化と生理の最適化</td><td>体位・血行動態・鎮静薬・筋弛緩薬・前酸素化・挿管後鎮痛鎮静</td></tr>
+<tr><td>有害事象と合併症低減</td><td>挿管後低血圧・初回失敗・術者経験・デバイス選択・確認方法</td></tr>
+<tr><td>失敗後のレスキュー戦略</td><td>声門上デバイス・RSA・外科的気道確保</td></tr>
+<tr><td>侵襲的換気</td><td>肺保護換気と病態別設定（Table 1）</td></tr>
+<tr><td>NIVとHFNO</td><td>適応・禁忌・エビデンス・実務的制約（Table 2・Table 3）・安全性</td></tr>
+<tr><td>特殊状況</td><td>緩和／長期人工呼吸・HEMS・肥満／COPD／神経障害・長時間搬送</td></tr>
+</tbody></table></div>
+<h3>4. 気管挿管の適応と戦略</h3>
+<h4>4-1. 臨床的適応の枠組み</h4>
+<p>気管挿管は確実な気道確保の gold standard であり続けるが、技術的難度が高くリスクを伴うため、手技の複雑さ・患者の生理・利用可能な資源の3つを天秤にかける必要がある。適応は大きく2つに分けられる。</p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>即時（immediate）</td><td>気道閉塞、無呼吸、難治性低酸素血症、気道保護の破綻</td></tr>
+<tr><td>予測（anticipated）</td><td>臨床的悪化が見込まれる場合（気道の進行性障害、神経学的悪化など）</td></tr>
+</tbody></table></div>
+<h4>4-2. 外傷</h4>
+<p>気道の障害は外傷患者の死因として主要かつ予防可能なもので、<strong>気道管理の失敗は「防ぎえた外傷死」の8〜15%を占める</strong>。</p>
+<ul><li>外傷6467例の因果モデリング研究（Nelsonら, Lancet Respir Med 2026）：機械学習によるリスク層別化に基づいて行った病院前挿管は30日生存を改善したが、無差別に適用した場合は改善しなかった</li><li>傾向スコアマッチした840例の研究（Clavierら, Eur J Emerg Med 2025）：ICU死亡率に全体としての変化はなかった</li><li>著者らの結論：<strong>転帰を左右するのは挿管という手技ではなく患者選択である</strong></li></ul>
+<h4>4-3. 外傷性脳損傷（TBI）</h4>
+<p>TBIでは低酸素血症と低血圧が独立に転帰を悪化させるため、能動的に防がねばならない。</p>
+<ul><li>中等症〜重症TBI 882例（ProTECT III の二次解析, Prehosp Emerg Care 2017）：病院前挿管群で良好な神経学的転帰が57.3%、非挿管群46.0%（P = 0.003）。死亡率は13.8%対19.5%（OR 0.53、95%CI 0.36–0.78）</li><li>ただし著者らは、歴史的に単独の挿管トリガーとされてきた<strong>GCS 8点未満は、誤嚥リスク・酸素化障害・生存利益のいずれも信頼して判別しない</strong>と明言する</li><li>評価に加えるべき要素：神経学的悪化の「軌跡」、受傷機転、血行動態と酸素化の状態、そして現場の作業環境</li></ul>
+<h4>4-4. 出血性ショック — 循環優先（circulation-first）</h4>
+<p>出血性ショックでは、リスク・ベネフィットの計算が意味のあるレベルで反転する。</p>
+<ul><li>機序：陽圧換気は静脈還流と心拍出量を減らす。循環血液量が減っている状況では、これが心血管虚脱の引き金になる</li><li>Chouら（J Trauma Acute Care Surg 2016）：出血性ショック患者への現場挿管は有意に高い死亡率と関連していた</li><li>Trauma Hemostasis and Oxygenation Research Network の推奨：<strong>気道閉塞が主たる生命の脅威でない限り、止血と血液製剤によるバランス蘇生を高度気道確保より先に行う</strong></li></ul>
+<h4>4-5. 内因性疾患 — 心停止と中毒昏睡</h4>
+<ul><li><strong>心停止</strong>は病院前挿管の最多の適応で、院外の高度気道確保介入の52〜55%を占める。ただし、声門上デバイスやバッグマスク換気と比べた臨床的利益は不確実なまま</li><li><strong>中毒が疑われる昏睡</strong>では適応が最近になって覆されつつある。Freundら（JAMA 2023）は、急性呼吸窮迫も脳病変の疑いもない中毒昏睡例において、非侵襲的な気道管理戦略が良好な転帰と関連することを示した。厳密な監視と watchful waiting が、系統的な早期挿管の妥当な代替になりうる</li></ul>
+<h4>4-6. 挿管のタイミング</h4>
+<p>「挿管するかどうか」と同じくらい「いつ挿管するか」が重要である。病院前挿管は院内より成功率が低く合併症率が高い。したがって鍵となる問いは、<strong>即時の気道確保が必要なのか、搬送中は安全に換気できるのか</strong>であり、搬送時間・重症度・臨床経過の軌跡から判断する。</p>
+<p>実行可能なら、路上より救急車内での挿管が望ましい（照明・吸引・酸素へのアクセスが良い、Garnerら Emerg Med J 2026）。</p>
+<h3>5. 前酸素化と生理の最適化</h3>
+<p>挿管前の生理最適化は病院前気道ケアの決定的な、しかし頻繁に過小評価される要素であり、体位・血行動態安定化・前酸素化を含む。<strong>体位は基礎であり、初回成功率に直接影響する</strong>。</p>
+<h4>5-1. 挿管周辺期の血行動態</h4>
+<ul><li>重症患者の<strong>25〜43%で低血圧が起こる</strong>（PrePARE試験、INTUBE研究）</li><li>鎮静薬の選択が効く。RSI Trial では、ケタミンがエトミデートより心血管虚脱を多く起こし、特に敗血症性ショックで顕著だった。死亡率に差はなかった</li><li><strong>ルーチンのオピオイド前投与は避けるのが無難</strong>。6,708例の系統的レビューでは結果が割れており、バイアスリスクの低い唯一のRCTでは挿管後低血圧の増加が報告された（OR 2.15、95%CI 1.22–3.78）</li></ul>
+<h4>5-2. 筋弛緩薬</h4>
+<p>筋弛緩薬は挿管条件と初回成功率を改善し、RSIの中核要素である。</p>
+<ul><li>サクシニルコリンとロクロニウムが最も広く使われ、SCCMガイドラインはサクシニルコリンの禁忌がなければどちらでもよいと提案している</li><li>ただし院外RCTのCURASMURでは、<strong>ロクロニウムはサクシニルコリンに対する初回成功率の非劣性を示せなかった（74.6%対79.4%）</strong></li><li>薬剤選択は、サクシニルコリンの禁忌と、病院前では拮抗薬（スガマデクス）の入手が限られることを踏まえて決める</li></ul>
+<h4>5-3. 挿管後の鎮痛鎮静 — 覚醒下麻痺を防ぐ</h4>
+<p>挿管成功後は速やかに鎮痛と鎮静を確保しなければならない。RSIを受けた患者は<strong>覚醒下麻痺（awareness with paralysis）と挿管後の鎮痛鎮静不足のリスク</strong>にさらされる。特に長時間作用型の筋弛緩薬を用いたときに問題になる。鎮静は目標を定めて滴定し、その降圧作用をあらかじめ見込んでおく。維持鎮静薬の選択は臨床的文脈に従う。</p>
+<h4>5-4. 前酸素化 — 何を第一選択にするか</h4>
+<p>低酸素血症に寄与する因子は複数ある。無呼吸時間、前酸素化、試行回数、挿管後の換気設定。初期の前酸素化戦略が鍵になる。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>第一選択</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>自発呼吸があり機材がある</td><td>二相性の非侵襲的陽圧換気（NIPPV）</td><td>PREOXI試験：緊急挿管中の重篤な脱飽和を有意に減らした。特に肥満例と急性低酸素性呼吸不全（挿管前に既に低酸素）で顕著</td></tr>
+<tr><td>NIPPVが使えない</td><td>リザーバーマスクを「フラッシュレート」で</td><td>50 L/分を超える流量で流す方法。病院前での現実的な解として提案されている</td></tr>
+<tr><td>導入から喉頭鏡までの間</td><td>バッグバルブマスク換気を入れる</td><td>PreVent試験：換気しない場合と比べて低酸素血症を有意に減らした</td></tr>
+</tbody></table></div>
+<p>なお著者らは、<strong>NIPPVによる前酸素化は多くの病院前システムでまだルーチンになっていない</strong>と指摘している。</p>
+<h3>6. 有害事象と合併症を減らす戦略</h3>
+<p>挿管周辺期の有害事象は病院前で高頻度に起こり、予後に直接影響する。</p>
+<h4>6-1. 挿管後低血圧と挿管周辺期心停止</h4>
+<p>大規模な病院前重症患者搬送コホート（Elmerら, Prehosp Emerg Care 2020）では次の数字が出ている。</p>
+<div class="tw"><table>
+<thead><tr><th>事象</th><th>頻度</th></tr></thead>
+<tbody>
+<tr><td>挿管後低血圧</td><td>15%</td></tr>
+<tr><td>挿管周辺期心停止</td><td>5%</td></tr>
+</tbody></table></div>
+<p>挿管後低血圧は生存退院率の低下と独立に関連した。最も強い3つの予測因子は次のとおりで、そのまま準備のチェック項目に使える。</p>
+<div class="tw"><table>
+<thead><tr><th>予測因子</th><th>閾値</th></tr></thead>
+<tbody>
+<tr><td>年齢</td><td>65歳超</td></tr>
+<tr><td>挿管前の収縮期血圧</td><td>130 mmHg未満</td></tr>
+<tr><td>挿管前の低酸素</td><td>SpO2 90%未満</td></tr>
+</tbody></table></div>
+<h4>6-2. 初回試行の失敗が何を増やすか</h4>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>CURASMUR試験の値</th></tr></thead>
+<tbody>
+<tr><td>病院前の初回試行失敗率</td><td>23.2%</td></tr>
+<tr><td>初回失敗例の合併症率</td><td>28.4%</td></tr>
+<tr><td>初回成功例の合併症率</td><td>19.6%</td></tr>
+<tr><td>対応するオッズ比</td><td>OR 1.44</td></tr>
+</tbody></table></div>
+<p>初回成功率はシステム間で大きくばらつき、<strong>約59%から95%超まで</strong>の幅がある。これは術者の経験・訓練・作業条件の違いを反映する。失敗の予測因子は、困難気道の解剖、気道の汚染（血液・分泌物）、外傷、環境の制約。</p>
+<h4>6-3. デバイスと確認</h4>
+<ul><li>現行ガイドライン（DAS 2025）は<strong>ビデオ喉頭鏡を第一選択</strong>とし、初回成功率を最大化することを推奨する。ただしEMSでの普及は不均一で、医師が乗るシステムやHEMSでは定着している一方、地上の資源制約下のシステムでは直達喉頭鏡がなお一般的</li><li>気道アジャンクトは手元に置き、先回りして使う。<strong>ブジー</strong>は単施設試験では困難気道での初回成功率を改善したが、より大規模な多施設試験ではスタイレットと比べて全体としての利益は示されなかった</li><li>チューブ位置の確認は<strong>連続波形カプノグラフィ</strong>で行う。認識されない食道挿管を除外するための参照基準はこれしかない</li></ul>
+<h3>7. 挿管失敗後のレスキュー戦略</h3>
+<p>病院前気道管理には、各段階に事前定義されたバックアップを備えた構造化エスカレーション戦略が要る。最終手段は外科的気道確保である。</p>
+<h4>7-1. 声門上デバイス（SGA）の3つの役割</h4>
+<div class="tw"><table>
+<thead><tr><th>役割</th><th>場面</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>① レスキュー</td><td>挿管失敗後、バッグバルブマスク換気で酸素化を保てないとき</td><td>外科的気道確保への信頼できる橋渡しになる</td></tr>
+<tr><td>② 心停止の一次デバイス</td><td>院外心停止</td><td>4RCT・n = 13,412 の2024年系統的レビュー／メタ解析：SGAはROSC率が高く気道確保までの時間が短い。30日神経学的生存は同等</td></tr>
+<tr><td>③ 薬剤併用の一次戦略（RSA）</td><td>心停止以外の選択された患者</td><td>導入薬を使ったうえで気管挿管ではなくSGAを一次留置する。高い初回成功率が得られる</td></tr>
+</tbody></table></div>
+<p>RSAは、気管挿管の経験を積みにくいパラメディック主体のシステムで特に意義がある。<strong>SGAファースト戦略が臨床的に正当化できる一次選択になりうる</strong>、というのが著者らの立場である。</p>
+<h4>7-2. 外科的気道確保（FONA）</h4>
+<p>バッグバルブマスク換気と声門上デバイスの両方で酸素化を確保できないときは、遅滞なく頸部前面からの気道確保を考慮する。</p>
+<ul><li>準備は気道管理プロセスの<strong>早期に始める</strong>。器材の準備と、失敗を認知的に先取りしておくことの両方を含む</li><li>現行の推奨は、慣れた器材を使う単純で再現性のある手技：<strong>メス・気管フック・ブジー・気管チューブ</strong></li></ul>
+<h3>8. 侵襲的換気 — 病態別の初期設定</h3>
+<p>気道確保後の人工呼吸は肺保護の原則（一回換気量6〜8 mL/kg PBW、プラトー圧30 cmH2O未満、酸素化に応じたPEEPとFiO2の滴定）に従い、基礎病態に合わせて調整する。換気は連続波形カプノグラフィで監視し、呼気終末CO2の35〜45 mmHgを目標にする。</p>
+<h4>Table 1. 臨床的文脈別の実務的な初期人工呼吸設定</h4>
+<div class="tw"><table>
+<thead><tr><th>パラメータ</th><th>標準肺保護（ROSC後を含む）</th><th>心停止（CPR中）</th><th>急性右心不全・広範囲肺塞栓</th><th>COPD・重症喘息</th><th>心原性肺水腫</th><th>外傷性脳損傷</th></tr></thead>
+<tbody>
+<tr><td>一回換気量</td><td>6〜8 mL/kg PBW</td><td>6 mL/kg PBW（PBW不明なら500〜600 mL）</td><td>約8 mL/kg PBW</td><td>6〜8 mL/kg PBW（喘息は8〜10まで可）</td><td>6〜8 mL/kg PBW</td><td>6〜8 mL/kg PBW</td></tr>
+<tr><td>PEEP（cmH2O）</td><td>5以上</td><td>0</td><td>最小限3〜5、高PEEPを避ける</td><td>低め0〜5（外因性PEEPはauto-PEEPの80%以下）</td><td>5〜10（左室の前負荷・後負荷を下げる）</td><td>5（頭蓋内圧上昇時は慎重に）</td></tr>
+<tr><td>FiO2</td><td>SpO2 92〜96%へ滴定</td><td>100%</td><td>初期は100%</td><td>SpO2 88〜92%へ滴定</td><td>SpO2 92%以上へ滴定</td><td>SpO2 94%以上へ滴定</td></tr>
+<tr><td>呼吸数（/分）</td><td>15〜25</td><td>10</td><td>15〜20</td><td>10〜14</td><td>15〜20</td><td>PaCO2 35〜45に合わせて調整</td></tr>
+<tr><td>吸気時間・I:E比</td><td>約1秒・1:2</td><td>約1秒・1:2</td><td>約1秒・1:2</td><td>I:E 1:3〜1:4</td><td>約1秒・1:2</td><td>約1秒・1:2</td></tr>
+<tr><td>吸気流量（L/分）</td><td>40〜60</td><td>40〜60</td><td>40〜60</td><td>60〜100</td><td>40〜60</td><td>40〜60</td></tr>
+<tr><td>PaCO2目標（mmHg）</td><td>35〜45</td><td>CPR中は優先事項ではない</td><td>60以下、アシドーシスを避ける（肺血管抵抗が上がる）</td><td>許容的高炭酸ガス血症（pH 7.20超）</td><td>35〜45</td><td>35〜45（頭蓋内圧上昇時は32〜35）</td></tr>
+</tbody></table></div>
+<p>補足（原表の脚注）：ROSC後は肺保護設定を維持しつつ、高酸素を避けるようFiO2を滴定し、正常炭酸ガス血症を目標にする。PBW＝予測体重、ZEEP＝呼気終末陽圧ゼロ、PVR＝肺血管抵抗、LV＝左室、ICP＝頭蓋内圧。</p>
+<p>読み方の要点は3つある。<strong>心停止中のPEEPが0</strong>なのは、CPR中の静脈還流を最大化するためであり、ROSC後は直ちに5以上へ戻す。<strong>右心不全・肺塞栓で高PEEPを避ける</strong>のは、肺胞の過膨張が肺血管抵抗を上げて右室後負荷を悪化させるため。<strong>COPD・喘息で外因性PEEPをauto-PEEPの80%以下に抑える</strong>のは、内因性PEEPを打ち消して吸気トリガーを助ける目的の範囲を超えると、動的過膨張をさらに進めてしまうため。</p>
+<h3>9. 非侵襲的換気と高流量鼻カニュラ酸素</h3>
+<p>急性呼吸不全の初期管理では、ガス交換と呼吸メカニクスの早期安定化が中心的な優先事項になる。過去20年でNIVの臨床的有効性が示され、救急領域に広く普及した。</p>
+<p>並行してHFNOがこの10年で、肺炎やARDSを含む急性低酸素性呼吸不全に対する有効な呼吸補助として登場した。HFNOは加温加湿した酸素を高流量で送り、安定した吸入酸素濃度と低いレベルの気道陽圧を生む。同じ流量の従来型酸素と比べて快適性が改善しうるが、50 L/分のような高流量は低流量酸素より忍容性が劣ることもある。</p>
+<p>こうして非侵襲的呼吸補助を病院前という早い段階で開始することへの関心が高まり、業務範囲の枠組みの拡大と技術の進歩により、地域によってはBLS（一次救命処置）レベルでも導入が進んでいる。</p>
+<h4>9-1. 適応と禁忌</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>NIV（CPAP・BiPAP）</th><th>HFNO</th></tr></thead>
+<tbody>
+<tr><td>確立した適応</td><td>急性心原性肺水腫、COPD増悪</td><td>（病院前では確立した適応なし）</td></tr>
+<tr><td>考慮される適応</td><td>重度の呼吸困難・頻呼吸・呼吸仕事量増加の徴候</td><td>急性低酸素性呼吸不全（肺炎、早期ARDS、間質性肺疾患、免疫不全）。従来型酸素で酸素化が足りない、あるいは密着型NIVインターフェースの忍容性が悪いとき</td></tr>
+<tr><td>生理学的作用</td><td>肺胞リクルート、心原性肺水腫での前負荷・後負荷の軽減、高炭酸ガス血症性呼吸不全での呼吸筋仕事量の軽減</td><td>酸素化改善を保ちつつ快適性を維持し、搬送中の会話も可能</td></tr>
+<tr><td>絶対禁忌</td><td>呼吸停止、気道保護ができない、重度の血行動態不安定、誤嚥リスクを伴う意識障害、顔面外傷、上気道閉塞、活動性の嘔吐</td><td>定義が曖昧。即時の気道確保を要する重度呼吸窮迫、意識障害</td></tr>
+<tr><td>相対禁忌</td><td>強い不穏、協力が得られない、分泌物過多、気胸のリスク、即時挿管の必要</td><td>—</td></tr>
+<tr><td>実務上の制限</td><td>バッテリー寿命、人工呼吸器の性能</td><td>酸素流量と電源要件が成人の病院前でのルーチン使用を制限する</td></tr>
+</tbody></table></div>
+<p><strong>重要な但し書き</strong>：これらの禁忌は「持続的なNIV」に対するものであって、<strong>挿管前の短時間の前酸素化には当てはまらない</strong>。誤嚥リスクを伴う意識障害は、有効な前酸素化の利益と天秤にかける必要がある。非侵襲的陽圧換気は重症患者にとって最も有効な前酸素化戦略だからである。PREOXI試験でもPreVent試験（導入時のバッグマスク換気）でも、誤嚥リスクの有意なシグナルは認められなかった。</p>
+<h4>9-2. 病院前でのエビデンス</h4>
+<div class="tw"><table>
+<thead><tr><th>介入・病態</th><th>エビデンスの現状</th></tr></thead>
+<tbody>
+<tr><td>病院前CPAP・急性心原性肺水腫</td><td>結論の出ない研究もあるが、メタ解析で<strong>挿管率と死亡率の両方の低下</strong>が確認されている</td></tr>
+<tr><td>病院前 bilevel NIV・急性心不全</td><td>データの一貫性が乏しい。臨床的改善の報告はあるが、<strong>挿管または死亡のリスク低下を示したRCTはない</strong></td></tr>
+<tr><td>病院前NIV・COPD増悪</td><td>データはさらに限られる。非無作為化または小規模研究が主体で、予後アウトカムについての結論は出ていない</td></tr>
+<tr><td>病院前HFNO</td><td>極めて限定的。症例報告と小規模シリーズのみ。院内での確立した利益を踏まえ、臨床的に適応があり技術的制約が許すときに考慮しうる、という書きぶりにとどまる</td></tr>
+</tbody></table></div>
+<h4>9-3. 実務的な制約と失敗の原因 — 酸素とバッテリー</h4>
+<p>主要な制限は技術的なものである。NIVもHFNOも、機器の特性をチームが十分に理解している必要がある。酸素供給は事前に見積もり、慎重に監視する。設定と呼吸不全の重症度によっては酸素消費が相当量になり、標準的な酸素ボンベを急速に空にしうる。</p>
+<p>##### Table 2. HFNO搬送時の酸素消費とボンベ残時間の実務的見積もり</p>
+<div class="tw"><table>
+<thead><tr><th>HFNO流量（L/分）</th><th>FiO2 1.0での1時間あたり酸素消費（L）</th><th>Eボンベ1本（約660 L）の持続時間</th><th>1時間に要するEボンベ本数</th><th>5 L・200 barボンベ1本（約1000 L）の持続時間</th><th>1時間に要する5 L・200 barボンベ本数</th></tr></thead>
+<tbody>
+<tr><td>30</td><td>1800</td><td>22分</td><td>3</td><td>33分</td><td>2</td></tr>
+<tr><td>40</td><td>2400</td><td>16分30秒</td><td>4</td><td>25分</td><td>3</td></tr>
+<tr><td>50</td><td>3000</td><td>13分</td><td>5</td><td>20分</td><td>3</td></tr>
+<tr><td>60</td><td>3600</td><td>11分</td><td>6</td><td>17分</td><td>4</td></tr>
+</tbody></table></div>
+<p>原表の前提：FiO2 = 1.0（最悪条件・純酸素消費が最大）で計算。FiO2 1.0では設定流量がそのまま純酸素消費になる（60 L/分の流量＝60 L/分の酸素）。FiO2が下がれば純酸素消費は比例して減る（純酸素消費＝流量 × FiO2。FiO2 0.5・60 L/分なら約30 L/分）。ボンベ容量はEボンベ約660 L（米英標準）、5 L・200 barボンベ約1000 L（欧州標準）。推定搬送時間に最低30分の安全余裕を足すこと。</p>
+<p>##### Table 3. 搬送中の人工呼吸における酸素消費とボンベ残時間</p>
+<div class="tw"><table>
+<thead><tr><th>FiO2</th><th>純酸素（L/分）</th><th>1時間あたり酸素消費（L）</th><th>Eボンベ1本（約660 L）の持続時間</th><th>5 L・200 barボンベ1本（約1000 L）の持続時間</th></tr></thead>
+<tbody>
+<tr><td>0.30</td><td>1.1</td><td>68</td><td>約10時間</td><td>約15時間</td></tr>
+<tr><td>0.40</td><td>2.4</td><td>144</td><td>約4時間30分</td><td>約7時間</td></tr>
+<tr><td>0.50</td><td>3.7</td><td>220</td><td>約3時間</td><td>約4時間30分</td></tr>
+<tr><td>0.60</td><td>4.9</td><td>296</td><td>約2時間15分</td><td>約3時間25分</td></tr>
+<tr><td>0.80</td><td>7.5</td><td>448</td><td>約1時間28分</td><td>約2時間13分</td></tr>
+<tr><td>1.0</td><td>10.0</td><td>600</td><td>約1時間06分</td><td>約1時間40分</td></tr>
+</tbody></table></div>
+<p>原表の前提：空気・酸素ブレンダを備えたタービン式搬送用人工呼吸器（Hamilton T1、Weinmann Medumat、Dräger Oxylog 3000+ など）、設定固定（一回換気量500 mL、呼吸数20/分、分時換気量10 L/分）、計算式は 純酸素消費＝分時換気量 ×（FiO2 − 0.21）÷ 0.79。<strong>タービンを持たない純空気圧駆動の人工呼吸器には当てはまらない</strong>（駆動ガスとして追加の酸素を消費し、持続時間が大幅に短くなる）。ここでも最低30分の安全余裕を足す。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>桁が2つ違うことを覚えておく 同じEボンベ1本で、<mark class="hl">FiO2 0.5の人工呼吸搬送は約3時間持つのに対し、HFNO 50 L/分は13分しか持たない</mark>。HFNCを付けたまま検査室や他院へ出すという判断は、酸素残量の計算を先にしない限り成立しない。バッテリーも同様で、HFNOは加温加湿のために信頼できる電源または外部バッテリーを要し、これがないと生理学的利益が失われるばかりか<strong>有害になりうる</strong>。</p>
+</div>
+<p>NIVでは、バッテリー寿命と人工呼吸器の性能が搬送前に必ず確認すべき決定的パラメータになる。機器によっては残バッテリーや酸素供給に動作が強く依存する。</p>
+<p>失敗の予測因子については、病院前での堅固なエビデンスがないためHFNO特異的なものは定義されていない。それでも、NIVまたはHFNOの失敗を示す確立した臨床指標（持続する低酸素血症、呼吸数の改善が得られない、臨床的悪化の徴候）を綿密に監視し、該当すれば治療失敗を疑って速やかにエスカレーションを考慮する。</p>
+<h4>9-4. 患者安全上の論点と合併症</h4>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>侵襲的気道確保の遅れ</td><td>最も重要な安全上の懸念。低酸素血症の悪化・意識状態の変化・進行性の呼吸窮迫がある患者で、非侵襲的サポートに依存し続けると必要な挿管が遅れる。継続的な臨床再評価と明確なエスカレーション基準が必須。監視項目は呼吸数・酸素化・意識レベル・患者–人工呼吸器相互作用</td></tr>
+<tr><td>患者–人工呼吸器相互作用</td><td>BiPAPはCPAPより高い術者の習熟を要する。不穏のある患者では有効なトリガーが得られにくく、非同調・無効換気・インターフェースからのリーク・オートトリガーを招く。<strong>持続する不穏はNIVの禁忌とみなし、ケアのエスカレーションを促すべき</strong></td></tr>
+<tr><td>インターフェース関連</td><td>マスクの不適合、エアリーク、皮膚圧迫損傷、忍容性の低さ。長時間搬送や不穏例で顕著。HFNOは一般に忍容性が良いが、搬送中に鼻カニュラが外れて酸素供給が落ちうる</td></tr>
+<tr><td>治療の中断</td><td>内部バッテリーを持つ携帯型HFNOがない場合、患者移乗時の一時中断で脱飽和が起こりうる。タービン駆動のNIV人工呼吸器のほうが継続性に優れる</td></tr>
+<tr><td>胃膨満と誤嚥</td><td>非挿管患者に陽圧をかけるときは考慮する。特に意識障害や気道保護反射の低下がある場合。ただし病院前CPAP研究では、心停止や気胸などの重大合併症は稀で、NIV自体に明確に帰属できるものではなかった</td></tr>
+<tr><td>エアロゾル</td><td>非侵襲的呼吸補助はエアロゾル産生を増やす。呼吸器感染症が疑われる患者では感染管理上の懸念となり、適切な個人防護具が推奨される。搬送車両内でのエアロゾル拡散は実験的に示されている</td></tr>
+<tr><td>車内の酸素濃度上昇</td><td>高流量酸素を投与すると搬送車両内の環境酸素濃度が上がりうる。換気の悪い環境では安全閾値を急速に超えることが実験的に示されており、十分な換気と連続的な酸素モニタリングが要る。酸素富化は<strong>火災リスクを高める</strong>という点で、患者にも医療者にも重要な安全上の考慮事項になる</td></tr>
+</tbody></table></div>
+<h3>10. 特殊な状況</h3>
+<h4>10-1. 緩和的換気・長期人工呼吸</h4>
+<p>病院前チームは、DNI（挿管しない方針）の指示や快適さを優先する治療選好を持つ患者に遭遇する機会が増えている（進行COPD、心不全、悪性腫瘍、重度のフレイル）。この文脈で非侵襲的呼吸補助は二重の役割を担いうる。</p>
+<div class="tw"><table>
+<thead><tr><th>役割</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>時間を区切った治療的トライアル</td><td>急性心原性肺水腫やCOPD増悪など、可逆性のありうる病態に対して</td></tr>
+<tr><td>緩和的介入</td><td>生存の延長ではなく症状緩和を目的として</td></tr>
+</tbody></table></div>
+<p>病院前の臨床医は、既存の事前指示を考慮し、治療の上限（treatment ceiling）を決めるにあたって介護者と対話すべきである。</p>
+<p><strong>緩和的な場面ではHFNOがNIVより望ましいことが多い</strong>。搬送中の会話・快適さ・介護者との交流を保てるためで、マスク型NIVは逆にインターフェースの不快感と非同調により苦痛を増やしうる。DNI患者において、HFNOは侵襲的換気の負担を避けつつ強い呼吸困難を和らげる適切な戦略になりうる。</p>
+<h4>10-2. ドクターヘリ（HEMS）— 高度の生理学</h4>
+<p>HEMS搬送の主要な生理学的課題は、高度による大気圧の低下に由来し、2つの帰結を持つ。</p>
+<div class="tw"><table>
+<thead><tr><th>法則</th><th>現象</th><th>気道・換気への影響と対処</th></tr></thead>
+<tbody>
+<tr><td>ドルトンの法則</td><td>高度が上がると酸素分圧が漸減する</td><td>肺胞酸素分圧が下がり組織への酸素供給が損なわれる。航空搬送する全患者に飛行高度に応じて増やしたFiO2で酸素を投与する。既存の呼吸不全・貧血・血行動態不安定・心筋虚血がある患者は中等度の高度でも低酸素のリスクが高い</td></tr>
+<tr><td>ボイルの法則</td><td>大気圧が下がると体腔内と機材内のガス体積が膨張する</td><td>気胸の悪化、肺嚢胞の破裂、胃膨満による横隔膜圧迫。<strong>挿管患者では気管チューブのカフ内容量が高度とともに増えるため、空気ではなく生理食塩水で充填する</strong></td></tr>
+</tbody></table></div>
+<p>高度が一回換気量に及ぼす影響は人工呼吸器に依存する。</p>
+<div class="tw"><table>
+<thead><tr><th>人工呼吸器の型</th><th>高度上昇時の挙動</th><th>対処</th></tr></thead>
+<tbody>
+<tr><td>圧補正のないデバイス</td><td>送気される一回換気量が増える（1500 mで約20%増）。医原性の過換気のリスク</td><td>設定を下げる必要がある</td></tr>
+<tr><td>現代の圧補正型</td><td>自動的に調整される</td><td><strong>一律に設定換気量を下げると、かえって意図しない低換気を招く</strong></td></tr>
+</tbody></table></div>
+<p>いずれにせよ、換気は使用機器に合わせて調整し、上昇時と下降時に監視する。</p>
+<p>狭く騒音の大きい機内は評価と手技を制限する。<strong>エンジン稼働中は心肺の聴診が不可能</strong>で、気管挿管・胸腔ドレナージ・中心静脈確保を機内で安全に行うのは難しい。したがって、現場出動（一次搬送）では必要な介入を離陸前に地上で完了させる。施設間（二次）搬送では紹介元施設で患者を安定化させ、機内での合併症を防ぐために<strong>挿管・ドレナージ・血管確保の閾値を下げる</strong>。</p>
+<h4>10-3. 特殊な患者集団</h4>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>難しさの機序</th><th>対処</th></tr></thead>
+<tbody>
+<tr><td>肥満</td><td>上気道の脂肪組織が解剖学的指標を覆い隠す、頸椎可動域の低下、開口制限。機能的残気量が減り酸素消費が増えるため脱飽和が速い</td><td><strong>ramped position（外耳道と胸骨切痕を一直線に合わせる）を系統的に用いる</strong>。声門視野と初回成功率が改善する</td></tr>
+<tr><td>COPD</td><td>非侵襲的陽圧換気は増悪時に安全かつ有効で、死亡と挿管の必要性の両方を減らす</td><td>挿管が適応となる場合、陽圧換気開始後の<strong>圧損傷（barotrauma）を先回りして想定する</strong>。特に重度のエアトラッピングや肺嚢胞性病変がある患者で</td></tr>
+<tr><td>神経学的障害（TBI・脳卒中・意識低下）</td><td>気道障害のリスクが上がるため通常は挿管の適応となる。ただし系統的な病院前挿管のエビデンスは不確実なまま</td><td>意識がなければ挿管する。頸椎損傷が疑われる／確定している場合は慎重に扱い、<strong>スタイレットやブジーなどのアジャンクトを併用したビデオ喉頭鏡</strong>を用いる</td></tr>
+</tbody></table></div>
+<p>著者らは加えて、<strong>治療が無益と判断される頭蓋内出血の患者では、個々の患者のケアと臓器提供のプロセスが衝突しうるという倫理的葛藤</strong>が生じうる、と一言添えている。</p>
+<h4>10-4. 長時間搬送</h4>
+<ul><li>地方では都市部より救急搬送時間が有意に長く、人工呼吸中の患者は搬送中の合併症リスクが特に高い</li><li>長時間搬送が見込まれる場合、専門的または十分に訓練されたチームの同乗が有害事象の減少と関連しうる。理由は、換気・血行動態パラメータを搬送条件によりよく適合させられるためと考えられる</li><li>人口密度の低い地域で高度気道管理のスキルを維持するには、救急隊員への継続的な専門教育プログラムへのアクセスが要る</li><li>長時間搬送が予想される場合、<strong>救急救命士の救急車と医師の乗る救急車がランデブーする</strong>という選択肢がありうる</li></ul>
+<h3>11. Figure 1 — 病院前の気道・換気管理 決定アルゴリズム</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1007/s00134-026-08532-0" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-026-08532-0）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 「急性呼吸窮迫における病院前の気道・換気管理の決定アルゴリズム」。上端の紫の帯に「病院前（prehospital）で急性呼吸窮迫または気道障害のある成人」という入口ボックスがあり、下向きの矢印で判断ボックス「即時に生命を脅かす気道または呼吸の破綻があるか（閉塞・無呼吸・難治性低酸素血症・気道保護の喪失）」へ入る。左に赤い「Yes」タブが出て左枝（赤系）の「気管挿管」へ、右に青い「No」タブが出て右枝（青系）の「非侵襲的呼吸補助」へ分岐する。左枝は上から順に3つの淡赤ボックス（生理の最適化 → 導入と喉頭鏡の間のバッグバルブマスク換気 → ビデオ喉頭鏡での初回試行と波形カプノグラフィでの確認）が縦に並び、その下で青ボックス「FAILURE レスキュー手順」へ落ちる。レスキューは横並びの3ボックス（ビデオ喉頭鏡の再試行・声門上デバイス・緊急頸部前面アクセス）で、その右隣に破線枠のボックス「挿管の権限を持たないパラメディック主体のシステムでは声門上デバイスを一次デバイスに（RSA）」が並ぶ。左枝の末尾は淡赤ボックス「挿管後は肺保護換気（表1）、鎮痛と鎮静、低血圧と低酸素の回避」。右枝は判断ボックス「心原性肺水腫またはCOPD増悪か」から Yes で「NIV：CPAPまたはBiPAP」、No で「HFNO（物流が許せば）」へ分かれ、合流して「禁忌の確認、悪化または失敗ならエスカレーション」→「監視：呼吸数・SpO2・意識・呼吸仕事量」→「悪化または失敗：気管挿管へ進む」と下る。右枝の末尾から左枝の「気管挿管」ボックスへ向かって、中央に縦置きの赤い帯「Escalate to intubation（挿管へエスカレーション）」が左向き矢印で戻る。図の下端には紫の帯「決定の修飾因子（全体を通じて適用）：HEMS・高度／肥満／頸椎／緩和・DNI／長時間搬送」と、灰色の注記「文脈別の注：出血性ショック＝循環優先（気道が主たる脅威でない限り挿管を遅らせる）、呼吸窮迫を伴わない中毒昏睡の疑い＝即時挿管ではなく監視を考慮、院外心停止＝声門上デバイスが妥当な一次選択」が置かれる</p>
+</div>
+<h4>11-1. Figure 1 の各ボックスを表に起こす</h4>
+<div class="tw"><table>
+<thead><tr><th>段</th><th>枝</th><th>ボックスの文言</th></tr></thead>
+<tbody>
+<tr><td>入口</td><td>共通</td><td>病院前で急性呼吸窮迫または気道障害のある成人</td></tr>
+<tr><td>判断1</td><td>共通</td><td>即時に生命を脅かす気道または呼吸の破綻があるか（閉塞・無呼吸・難治性低酸素血症・気道保護の喪失）→ Yesなら左（挿管）、Noなら右（非侵襲）</td></tr>
+<tr><td>1</td><td>左・挿管</td><td>まず生理を最適化する：ramped position、前酸素化（NIPPVを優先、使えなければフラッシュレートのリザーバーマスク）、血行動態の最適化、鎮静薬の選択、筋弛緩薬（RSI）</td></tr>
+<tr><td>2</td><td>左・挿管</td><td>導入から喉頭鏡までの間にバッグバルブマスク換気を行う</td></tr>
+<tr><td>3</td><td>左・挿管</td><td>初回試行はビデオ喉頭鏡で。留置後は波形カプノグラフィで位置を確認する</td></tr>
+<tr><td>4</td><td>左・失敗</td><td>FAILURE（失敗）レスキュー手順へ</td></tr>
+<tr><td>4a</td><td>左・失敗</td><td>ビデオ喉頭鏡を再試行（再酸素化してから、試行回数を制限する）</td></tr>
+<tr><td>4b</td><td>左・失敗</td><td>声門上デバイス</td></tr>
+<tr><td>4c</td><td>左・失敗</td><td>緊急頸部前面アクセス（メスとブジー）</td></tr>
+<tr><td>4d</td><td>左・並列</td><td>挿管の権限を持たないパラメディック主体のシステムでは、声門上デバイスを一次デバイスとする（RSA）</td></tr>
+<tr><td>5</td><td>左・挿管後</td><td>挿管後は肺保護換気（表1）、鎮痛と鎮静、低血圧と低酸素の回避</td></tr>
+<tr><td>判断2</td><td>右・非侵襲</td><td>心原性肺水腫またはCOPD増悪か</td></tr>
+<tr><td>1a</td><td>右・Yes</td><td>NIV：CPAPまたはBiPAP（リクルート、前負荷・後負荷の軽減、呼吸仕事量の低下）</td></tr>
+<tr><td>1b</td><td>右・No</td><td>HFNO（物流が許せば）：肺炎、ARDS、その他の低酸素性脱飽和</td></tr>
+<tr><td>2</td><td>右</td><td>禁忌を確認する。悪化または失敗ならエスカレーションする</td></tr>
+<tr><td>3</td><td>右</td><td>監視：呼吸数、SpO2、意識、呼吸仕事量</td></tr>
+<tr><td>4</td><td>右</td><td>悪化または失敗：気管挿管へ進む（左枝の挿管ボックスへ戻る）</td></tr>
+<tr><td>修飾</td><td>全体</td><td>決定の修飾因子（全体を通じて適用）：HEMS・高度、肥満、頸椎、緩和・DNI、長時間搬送</td></tr>
+<tr><td>注1</td><td>全体</td><td>出血性ショック＝循環優先（気道が主たる脅威でない限り挿管を遅らせる）</td></tr>
+<tr><td>注2</td><td>全体</td><td>呼吸窮迫を伴わない中毒昏睡の疑い＝即時挿管ではなく監視を考慮</td></tr>
+<tr><td>注3</td><td>全体</td><td>院外心停止＝声門上デバイスが妥当な一次選択</td></tr>
+</tbody></table></div>
+<h3>12. 結論（著者らの言葉）</h3>
+<p>成人の病院前気道・換気管理は救急医療で最も技術的・臨床的に要求の高い領域のひとつである。成功には手技の熟達だけでなく、病院前という環境の制約に適応した系統的で先取り的なアプローチが要る。</p>
+<ul><li>気管挿管は、適切な適応で、十分に訓練された術者が行う限り、確実な気道確保の標準であり続ける</li><li>挿管前の生理最適化（前酸素化・血行動態の安定化・体位）は、転帰を左右する決定的な、しかし頻繁に過小評価される因子である</li><li>挿管が失敗するか即座に達成できない場合に備え、声門上デバイスと外科的気道確保を含む構造化エスカレーション戦略を利用可能にし、かつ<strong>訓練しておく（rehearsed）</strong></li><li>心停止では声門上デバイスが気管挿管の妥当な一次代替であり、パラメディック主体のシステムではRSAが実務的な一次戦略になりうる</li><li>非侵襲的呼吸補助、特にCPAPとBiPAPは、急性心原性肺水腫とCOPD増悪の病院前管理で確立した役割を持つ</li><li>HFNOは快適性と酸素化の点で理論的な利点を持つ新興のモダリティだが、病院前のエビデンスは限られ、物流上の制約がルーチン使用を大きく制限する</li><li>モダリティを問わず、非侵襲的サポートが必要な挿管を遅らせてはならない</li></ul>
+<h3>13. 批判的吟味（JCでの論点）</h3>
+<h4>13-1. 方法論の透明性</h4>
+<ul><li><strong>系統的検索の記載がない</strong>。ナラティブレビューとして正当な形式ではあるが、69本の引用がどう選ばれたかは追跡できない。同じ論点について反対方向の結果を出した研究が漏れていないかを読者が検証できない</li><li><strong>構造化抄録のラベルが内容と一致していない</strong>。抄録の "Methods:" 欄には適応と生理最適化の知見が、"Results:" 欄には失敗時の戦略とNIV／HFNOの推奨が書かれている。方法も結果も存在しないナラティブレビューに構造化抄録の枠を当てはめた結果で、抄録だけを読むと研究デザインを誤認しかねない</li><li><strong>表1の数値に個別の出典がない</strong>。病態別の初期人工呼吸設定は実務的に有用だが、各セルの根拠は示されておらず、専門家の合意として読むべきものである</li></ul>
+<h4>13-2. エビデンスの質と一貫性</h4>
+<ul><li><strong>外傷での病院前挿管について、引用された2研究が別方向を向いている</strong>。Nelsonらの因果モデリング研究（6467例）は層別化すれば30日生存が改善するとし、Clavierらの傾向スコアマッチ研究（840例）はICU死亡に変化なしとする。いずれも観察デザインで、適応交絡（挿管される患者はもともと重い）を完全には除去できない。「患者選択が転帰を決める」という結論自体は妥当だが、その選択規則はまだ外的妥当性が検証されていない機械学習モデルに依存している</li><li><strong>TBIの数字はランダム化の結果ではない</strong>。良好神経学的転帰57.3%対46.0%、死亡13.8%対19.5%（OR 0.53）は ProTECT III（プロゲステロンのRCT）の二次解析であり、病院前挿管を無作為割付したものではない</li><li><strong>導入薬の記述がVault内の他ノートと食い違う</strong>。本稿はRSI Trialを引いて「ケタミンはエトミデートより心血管虚脱が多い、特に敗血症性ショックで」とするが、EvK試験は7日生存でケタミン優位（85.1%対77.3%、28日では差消失）を示していた。ネットワークメタ解析（9RCT・4672例）では死亡同等・ケタミンで循環虚脱がOR 1.44多いとされ、本稿の記述はこの方向と整合するが、<strong>「循環虚脱」と「生存」という別のアウトカムで結論が逆に見える構造</strong>をJCでは明示的に扱う価値がある</li><li><strong>筋弛緩薬の推奨とエビデンスにねじれがある</strong>。SCCMガイドラインは「どちらでもよい」とするが、唯一の院外RCTであるCURASMURではロクロニウムが非劣性を示せなかった（74.6%対79.4%）。本稿はこのねじれを指摘したうえで結論を出さず、「禁忌と拮抗薬の入手可能性で決めよ」と実務的に処理している。JCでは「非劣性が示せなかった＝劣る、ではない」という点も含めて議論できる</li><li><strong>ブジーの記述が両論併記のまま</strong>。単施設試験（Driverら 2018）では困難気道で有利、多施設試験（Driverら 2021）では差なし。本稿はどちらを採るかを示していない</li></ul>
+<h4>13-3. 数値と単位の内的整合</h4>
+<ul><li><strong>表2の「1時間あたり酸素消費」は流量を60倍した値</strong>（30 L/分 → 1800 L/時）で、算術的には正しい。ただし「Eボンベ1本の持続時間」欄は660 L ÷ 消費で計算されており、30 L/分で22分、60 L/分で11分と整合する。一方「1時間に要するEボンベ本数」は切り上げで、30 L/分なら3本（660×3 = 1980 L ≒ 1800 L）と読める。実務では継ぎ目のロスがあるため、この本数は下限と考えるべき</li><li><strong>表2は「FiO2 1.0」という最悪条件での計算</strong>である。実際の搬送でFiO2 0.5なら消費は半分になり、Eボンベ1本で30 L/分なら約44分持つ。表の数字をそのまま「HFNCは搬送に使えない」と読むと過剰に保守的になる。逆に、FiO2を下げれば持つという前提で出発して、途中で酸素化が悪化してFiO2を上げざるを得なくなる事態が最も危険である</li><li><strong>表3の脚注が重要</strong>。タービンを持たない純空気圧駆動の人工呼吸器では駆動ガスとして酸素を追加消費するため、この表は適用できない。手持ちの搬送用人工呼吸器がどちらかを知らないと表が使えない</li></ul>
+<h4>13-4. 一般化可能性</h4>
+<ul><li><strong>日本の制度に直接は載らない</strong>。救急救命士による薬剤を用いたRSIは日本では実施できず、「生理を最適化してからRSI」という左枝の大半は、ドクターカー・ドクターヘリが関与する場面に限られる。むしろ本稿の「心停止では声門上デバイスが対等」「パラメディック主体ではSGAファーストが正当化される」という記述が、日本の現行運用を支持する側の材料になる</li><li><strong>小児が対象外</strong>。成人に限定すると明記されており、小児の病院前気道管理は別の議論になる</li><li><strong>HFNOの推奨が実質的にエビデンス不在</strong>。著者ら自身が「症例報告と小規模シリーズのみ」と認めており、それでも適応と禁忌の表を作っている。実務ガイドとしての利便性と、エビデンスの薄さを読者に誤認させるリスクの両方がある。ここは著者らも Evidence gaps として結論に明記している</li></ul>
+<h3>14. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>救急システムの2類型（アングロ・アメリカ型 対 フランコ・ジャーマン型）</td><td>Dick WF. Prehosp Disaster Med 2003;18(1):29–35</td></tr>
+<tr><td>5</td><td>重症外傷6467例の因果モデリング。リスク層別化した病院前麻酔・挿管は30日生存を改善</td><td>Nelson AP, et al. Lancet Respir Med 2026;14(3):256–266</td></tr>
+<tr><td>8</td><td>出血性ショック外傷での病院前挿管 対 院内挿管、傾向スコアマッチ840例</td><td>Clavier T, et al. Eur J Emerg Med 2025;32(6):421</td></tr>
+<tr><td>9</td><td>ProTECT III 二次解析。病院前挿管と良好転帰・低死亡の関連（882例）</td><td>Denninghoff KR, et al. Prehosp Emerg Care 2017;21(5):539–544</td></tr>
+<tr><td>11</td><td>出血性ショックでの現場挿管は死亡率が高い</td><td>Chou D, et al. J Trauma Acute Care Surg 2016;80(2):278–282</td></tr>
+<tr><td>12</td><td>出血性ショックの気道・換気戦略「挿管するか否か」</td><td>Hudson AJ, et al. J Trauma Acute Care Surg 2018;84:S77–82</td></tr>
+<tr><td>13</td><td>院外心停止での声門上デバイス 対 気管挿管、4RCT・13,412例のメタ解析・TSA</td><td>Forestell B, et al. Crit Care Med 2024;52(2):e89–99</td></tr>
+<tr><td>14</td><td>院外心停止でのバッグマスク換気 対 気管挿管の神経学的転帰（CAAM試験）</td><td>Jabre P, et al. JAMA 2018;319(8):779–787</td></tr>
+<tr><td>15</td><td>中毒昏睡患者への非侵襲的気道管理のRCT（NICO試験）</td><td>Freund Y, et al. JAMA 2023;330(23):2267–2274</td></tr>
+<tr><td>16</td><td>病院前挿管の場所（路上 対 車内）と合併症率・時間の関連</td><td>Garner AA, et al. Emerg Med J 2026;43(4):245–251</td></tr>
+<tr><td>19</td><td>INTUBE研究。重症患者の挿管周辺期心血管虚脱</td><td>Russotto V, et al. Am J Respir Crit Care Med 2022;206(4):449–458</td></tr>
+<tr><td>20</td><td>RSI Trial。重症成人の挿管におけるケタミン 対 エトミデート</td><td>Casey JD, et al. N Engl J Med 2025</td></tr>
+<tr><td>21</td><td>緊急挿管でのオピオイド前投与と血行動態、6,708例の系統的レビュー</td><td>Von Hellmann R, et al. Eur J Emerg Med 2025</td></tr>
+<tr><td>22</td><td>CURASMUR試験。院外RSIでのロクロニウム 対 サクシニルコリン</td><td>Guihard B, et al. JAMA 2019;322(23):2303–2312</td></tr>
+<tr><td>23</td><td>SCCM 重症成人のRSI診療ガイドライン</td><td>Acquisto NM, et al. Crit Care Med 2023;51(10):1411–1430</td></tr>
+<tr><td>26</td><td>PREOXI試験。緊急挿管の前酸素化におけるNIV</td><td>Gibbs KW, et al. N Engl J Med 2024;390(23):2165–2177</td></tr>
+<tr><td>27</td><td>病院前の前酸素化にフラッシュレート酸素のリザーバーマスクを使う</td><td>Robinson AE, et al. Prehosp Emerg Care 2024;28(2):215–220</td></tr>
+<tr><td>29</td><td>PreVent試験。導入から喉頭鏡までのバッグマスク換気</td><td>Casey JD, et al. N Engl J Med 2019</td></tr>
+<tr><td>30</td><td>病院前外傷ケアにおける挿管後低血圧の頻度と予測因子</td><td>Elmer J, et al. Prehosp Emerg Care 2020;24(4):461–469</td></tr>
+<tr><td>31</td><td>CURASMUR二次解析。院外初回挿管失敗の頻度・合併症・関連因子</td><td>Nicol T, et al. Prehosp Emerg Care 2022;26(2):280–285</td></tr>
+<tr><td>34</td><td>病院前RSIの初回通過失敗の予測因子・保護因子（系統的レビュー・メタ解析）</td><td>Hayes-Bradley C, et al. Br J Anaesth 2024;132(5):918–935</td></tr>
+<tr><td>35</td><td>DAS 2025 予期せぬ困難挿管ガイドライン（成人）</td><td>Ahmad I, et al. Br J Anaesth 2026;136(1):283–307</td></tr>
+<tr><td>36</td><td>ブジー 対 スタイレット、困難気道の単施設RCT</td><td>Driver BE, et al. JAMA 2018;319(21):2179–2189</td></tr>
+<tr><td>37</td><td>BOUGIE試験。重症患者でのブジー 対 スタイレット（多施設RCT）</td><td>Driver BE, et al. JAMA 2021;326(24):2488–2497</td></tr>
+<tr><td>38</td><td>認識されない食道挿管を防ぐコンセンサスガイドライン（PUMA）</td><td>Chrimes N, et al. Anaesthesia 2022;77(12):1395–1415</td></tr>
+<tr><td>45</td><td>ERS/ATS 急性呼吸不全に対するNIV診療ガイドライン</td><td>Rochwerg B, et al. Eur Respir J 2017;50(2)</td></tr>
+<tr><td>46</td><td>成人におけるHFNCの診療ガイドライン</td><td>Rochwerg B, et al. Intensive Care Med 2020;46(12):2226–2237</td></tr>
+<tr><td>48</td><td>重症患者の挿管に対する前酸素化戦略のネットワークメタ解析</td><td>Pitre T, et al. Lancet Respir Med 2025;13(7):585–596</td></tr>
+<tr><td>49</td><td>病院前NIVの系統的レビュー・ネットワークメタ解析・IPDメタ解析</td><td>Goodacre S, et al. Acad Emerg Med 2014;21(9):960–970</td></tr>
+<tr><td>51</td><td>病院前救急でのNIVの系統的レビュー・メタ解析</td><td>Scquizzato T, et al. Prehosp Emerg Care 2023;27(5):566–574</td></tr>
+<tr><td>53</td><td>航空搬送における加温高流量鼻酸素の「酸素の経済学」</td><td>Inkrott JC, White JR. Air Med J 2021;40(6):380–384</td></tr>
+<tr><td>59</td><td>DNI status の緩和的救急患者でHFNC 対 従来型酸素の呼吸困難緩和（クロスオーバーRCT）</td><td>Ruangsomboon O, et al. Ann Emerg Med 2020;75(5):615–626</td></tr>
+<tr><td>61</td><td>HEMS搬送における人工呼吸の国際調査</td><td>Hilbert-Carius P, et al. Scand J Trauma Resusc Emerg Med 2020;28(1):112</td></tr>
+<tr><td>62</td><td>ヘリ機内 対 地上での気管挿管の有効性（系統的レビュー・メタ解析）</td><td>Kolaparambil Varghese LJ, et al. Scand J Trauma Resusc Emerg Med 2024;32(1):40</td></tr>
+<tr><td>66</td><td>頸椎損傷が疑われる／確定した患者の気道管理ガイドライン（DAS他6学会合同）</td><td>Wiles MD, et al. Anaesthesia 2024;79(8):856–868</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 病院前気道管理の転帰を決めるのは喉頭鏡の腕ではなく、<mark class="hl">挿管する前に「体位・血行動態・前酸素化」の3つを整えたかどうか</mark>である。当院で明日から変えられるのは、<mark class="hl">院内搬送とRRS現場で「NIVによる前酸素化（使えなければリザーバーマスクをフラッシュレート）＋ ramped position ＋ 導入から喉頭鏡までのバッグバルブマスク換気」を標準手順として文書化すること</mark>、そして<mark class="hl">65歳超・挿管前収縮期血圧130 mmHg未満・SpO2 90%未満のうち2つ以上が当てはまるなら昇圧薬を手元に置いてから導入する</mark>という一行を挿管チェックリストに足すこと。HFNCを付けたまま検査室へ出すときは、<mark class="hl">FiO2 1.0・50 L/分ならEボンベ1本が13分しか持たない</mark>ことを計算してから動く。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
