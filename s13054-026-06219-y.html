@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PMXは「EAA 0.60〜0.89＋多臓器不全」だけに効く — Tigris試験への10の問いに研究者自身が答える（Q&amp;A・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">PMXは「EAA 0.60〜0.89＋多臓器不全」だけに効く — Tigris試験への10の問いに研究者自身が答える（Q&amp;A・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Legrand M, Neyra J, Tomlinson G, Kellum J. Polymyxin B hemoadsorption in endotoxic septic shock: ten questions on the Tigris trial. Crit Care. 2026 (Article in Press). DOI: 10.1186/s13054-026-06219-y</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-27）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06219-y" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06219-y</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Polymyxin B hemoadsorption in endotoxic septic shock: ten questions on the Tigris trial</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>今日の診療は変わらない</strong>。Tigris が支持したのは「エンドトキシン活性測定（EAA）0.60以上0.90未満」という<strong>バイオマーカーの窓</strong>に入った症例だけであり、当院を含む本邦の多くの施設では <strong>EAA が保険収載されておらず測定できない</strong>。EAA を測らずに Tigris を根拠として PMX-DHP を回すことは、この論文の主張そのものに反する。</li><li><strong>本邦の PMX-DHP は「エンドトキシン血症を伴うグラム陰性桿菌感染症」で保険収載され、1994年から使われてきた</strong>が、その運用は EAA ではなくリムルス法（エンドトキシン濃度）に基づく。Tigris の選択基準（EAA 0.60〜0.89 という<strong>活性の中間帯</strong>）とは測っているものが違う。「濃度が高いから回す」は Tigris の論理ではない。</li><li><strong>当院で今できる最も現実的な行動は「回す症例を減らす方向の合意」</strong>。Tigris の10の問いを読んだうえでの落とし所は次の3点になる。①難治性ショックだから反射的に回す、という運用はやめる。②回すなら<strong>ソースコントロールが達成済みまたは予定されている</strong>、<strong>昇圧薬依存が持続</strong>、<strong>SOFA &gt;11 または MODS &gt;9 の多臓器不全</strong>という3条件を満たす症例に絞る。③血行動態の改善を効果判定の指標にしない（Tigris で MAP もノルアドレナリン換算量も動いていない）。</li><li><strong>手技は Tigris のとおりに固定できる</strong>：<strong>2時間×2セッション、22〜24時間間隔、血流量 80〜100 mL/分、ダブルルーメンカテーテル、未分画ヘパリン</strong>。CRRT 併用例は<strong>各セッションの2時間だけ CRRT を中断し、終了後に再開</strong>する。回路への直列組み込みはしない。</li><li><strong>効果判定は臓器不全の解除で見る</strong>。Tigris が示した機序仮説は「血圧が上がる」ではなく「臓器不全が解ける」。人工呼吸・臓器サポートからの離脱、ICU退室の早さを追う指標に切り替える。ただしこれは著者自身が仮説生成的と断っている。</li><li><strong>導入検討の前提コスト</strong>：EAA が即日返ってくる体制と、体外循環を回せる人員が要る。著者も「体外循環療法の体制が既にある施設でしか現実的に実施できない」と書いている。当院で新規導入を議論するなら、まず<strong>EAA が測れないという一点</strong>が越えられるかから始まる。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：エンドトキシン（グラム陰性菌細胞壁のリポ多糖）は自然免疫活性化の<strong>上流の駆動因子</strong>として生物学的に妥当な標的で、ベッドサイドで EAA により定量できる。PMX（ポリミキシンB固定化繊維カラム、トレミキシン／Toraymyxin）はポリスチレン誘導体繊維に固定化したポリミキシンBでエンドトキシンを選択的に吸着する。しかし先行3RCT（EUPHAS・ABDO-MIX・EUPHRATES）は<strong>結果が食い違い</strong>、SSC ガイドラインは血液浄化・エンドトキシン除去療法を日常使用として推奨していない。敗血症性ショックの薬物治療で「臓器不全が確立した後に経過を変えた」と示されたのはドロトレコギンアルファただ1つで、それも後の試験で有効性・安全性が確認できず<strong>販売中止</strong>になった。</li><li><strong>Unknown</strong>：EUPHRATES の事後解析が拾った「EAA 0.60〜0.89 かつ重度臓器不全」というサブグループは、<strong>本物の治療可能表現型なのか、サブグループ解析のノイズなのか</strong>。そして、対象が稀な集団で従来型（頻度論的）の大規模RCTが現実的に不可能なとき、<strong>何をもって「証明した」と言えるのか</strong>。</li><li><strong>What's new</strong>：Tigris は上記サブグループを<strong>前向きに事前規定</strong>し、EUPHRATES の該当コホートを <strong>75%重みの情報事前分布</strong>として借用するベイズ流第3相として実施され、<strong>28日死亡で有益の事後確率 95.3%（APACHE-II 調整オッズ比 0.67、95%信用区間 0.39〜1.08）</strong>、<strong>90日で 99.4%（オッズ比 0.54、95%信用区間 0.32〜0.87）</strong>、絶対リスク減少はそれぞれ約10%・約15%を報告した。本稿はその設計判断（非盲検・1%の組入率・ベイズ流・共変量調整・75%という重み・信用区間が1をまたぐこと・効果の時間的拡大・血行動態が動かないこと・手技の標準化・過去の陰性試験との整合）を<strong>10の問いに分解して研究者自身が答えた</strong>もの。査読往復と臨床医・試験家から繰り返し出た疑問がそのまま問いになっている。</li><li><strong>Vault内の関連ノートとの対比</strong>：<span class="wl">エンドトキシン性敗血症性ショックへのPMX-HA 患者選択と実施の20項目コンセンサス（CritCare2026）</span> は Tigris の結果を<strong>前提として</strong>実装手順（36時間以内開始・2回×120分・EAA 0.60〜0.90未満）を定めた文書であり、本稿はその前段の「Tigris は何を証明し何を証明していないか」を扱う。両者は矛盾せず入れ子になっている。一方 <span class="wl">敗血症・敗血症性ショックの国際ガイドライン2026 — 全129推奨、強い推奨は18だけ（SSC2026・CCM2026）</span> は血液浄化を「行わないことを提案」としており、著者らも<strong>Tigris はこの立場を非選択集団については覆さない</strong>と明記している。<span class="wl">敗血症の精密医療 — TIGRIS試験と標的治療の再興（総説・JAACC2026）</span> と <span class="wl">敗血症治療は表現型別の上乗せ療法へ — treatable trait 11分類とバイオマーカー閾値（総説・JIntensiveCare2026）</span> は Tigris を「患者選択が本体だった」実例として引く立場で、本稿はその選択が<strong>どう作られたか</strong>の内側を開示している。他方 <span class="wl">心臓手術中の血液吸着はCSA-AKIを減らさない（TSA併用メタ解析・CritCare2026）</span> や <span class="wl">ECMO中の血液吸着は死亡を減らさない（RCTに限れば死亡増・13研究8151例・CritCare2026）</span> は非選択集団での血液吸着が一貫して無効であることを示しており、「効かないのは吸着そのものではなく相手の選び方だ」という本稿の主張の裏返しにあたる。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで Tigris 試験の研究者自身が、非盲検・157例・ベイズ流という設計の急所を10の問いに分解して答えた文書であり、<strong>結論は「PMX が敗血症性ショックに効く」ではなく「EAA 0.60〜0.89 かつ多臓器不全という狭い表現型でだけ、効いた可能性が高い」</strong>である。同時に、28日の推論が事前分布の重みに依存する一方で90日の推論は依存しないこと、有益の機序が血行動態ではなく臓器不全の解除らしいことを、著者ら自身が留保つきで開示している。</p>
+</div>
+<ul><li><strong>論文の性格</strong>：新規データはない。<strong>Tigris の共著者4名による自己解説</strong>であり、著者自ら「独立した評価ではなく我々自身の説明である」と冒頭に書いている。利益相反も重く、統計解析者はメーカーから報酬を受け、最終著者はメーカー従業員かつ株主。</li><li><strong>Q1（非盲検）</strong>：体外循環はシャム機器なしに盲検化できない。緩和策は①施設の試験チームと標準治療を指示する臨床チームの運用上の分離、②主要評価項目が<strong>生死という客観指標</strong>であること。ただし共介入（臓器サポートの増減・RRT開始時期・人工呼吸と昇圧薬の強度・ICU退室時期・生命維持治療の差し控え）が結果に影響しうることは否定しない。実際のデータは<strong>28日時点で生命維持中の患者が対照群 21.4% 対 PMX群 13.8%</strong> と対照群のほうが多く、非盲検の残余バイアスはむしろ<strong>帰無仮説側に働く方向</strong>だった。</li><li><strong>Q2（14,890例スクリーニングで157例＝1%）</strong>：1%という数字は<strong>誤解を招く</strong>。臨床的に適格だったのは328例のみで、除外の主因はエンドトキシン状態ではなく<strong>重症度基準</strong>（昇圧薬依存の敗血症性ショック、MODS &gt;9 または SOFA &gt;11）。EAA を測った328例のうち <strong>0.60未満87例・0.90以上42例・EAA 非反応5例</strong>、残る <strong>194例が 0.60〜0.89 の窓</strong>で、うち<strong>157例が無作為化</strong>された。Tigris 4施設での並行研究 <strong>Eden</strong> では、敗血症性ショック患者の <strong>21%</strong> がエンドトキシン性敗血症性ショック（ESS）の全基準を満たした。21% と約2% の差は分母の違い（全スクリーニング例 vs 確立した敗血症性ショックのコホート）。<strong>ESS は稀ではないが、ありふれてもいない</strong>。</li><li><strong>Q3（ベイズ流の意味と必要症例数）</strong>：頻度論は「効果がないと仮定したとき、これ以上に極端な結果が観測される確率」を答え、ベイズ流は「事前情報と観測データを合わせたとき治療が有益である確率」を答える。<strong>「95.3%の確率で PMX は有益」という直接的な確率表現はベイズ流でしか出せない</strong>。頻度論で同じ問いに答えるには、<strong>対照群死亡45%から10%の死亡減を検出するのに n=592</strong>（片側 α 0.05、検出力80%）が必要で、Tigris は<strong>157例＝約4分の1</strong>で解釈可能な答えに到達した。情報事前分布を用いない（無情報事前分布の）ベイズ解析でも <strong>28日で約80%、90日で98%超</strong>の有益の事後確率が出る。</li><li><strong>Q4（APACHE-II 調整）</strong>：無作為化試験での強い予後共変量の調整は、割付の不均衡の補正ではなく<strong>検出力を上げる事前規定の戦略</strong>。統計解析計画で試験開始前に固定済みで、<strong>非調整解析・別の調整解析も定性的に一致</strong>する。FDA の3つのガイダンス文書（ベイズ流の枢要試験への使用、共変量調整、医療機器試験のベイズ統計）が想定する設計そのものである。</li><li><strong>Q5（なぜ重み75%か）</strong>：事前規定。EUPHRATES の治療可能コホート（実数 n=179）を割り引き、<strong>有効事前サンプルサイズ約134</strong>にした。<strong>勝者の呪い</strong>（陽性だから選ばれたサブグループは真の効果を過大評価しがち）への対処。28日死亡の有益の事後確率は<strong>重み72%以上なら95%を超え、100%重みで97.1%</strong>。90日死亡は<strong>無情報事前分布でも98%超</strong>で、事前分布に依存しない。</li><li><strong>Q6（信用区間が1.0をまたぐのに95.3%）</strong>：事後分布を4区画に割ると <strong>P(OR&lt;0.39)=2.5%／P(0.39&lt;OR&lt;1.00)=92.8%／P(1.00&lt;OR&lt;1.08)=2.2%／P(OR&gt;1.08)=2.5%</strong>。両側95%信用区間は中央2区画（92.8+2.2）で1.0をまたぐが、有益の確率は下側2区画（2.5+92.8）＝95.3%。<strong>片側の有益確率が95.0〜97.5%の間にあるとき必ずこうなる</strong>。片側検定で p&lt;0.05 だが両側では届かない状況の類似物。</li><li><strong>Q7（28日→90日で差が拡大）</strong>：28日生存者のうち ICU に残っていたのは<strong>対照群 21.4% 対 PMX群 13.8%</strong>。そのうち対照群では<strong>90日までに1人も退室できず（6例中5例が死亡）</strong>、PMX群は<strong>9例中6例が生存</strong>。<strong>28日の ICU-free 生存は 52.8% 対 43.1%</strong>。機序は血行動態の安定化ではなく<strong>臓器不全の解除</strong>とみられる。ICU 入室1週以降の死亡の多くは臓器不全が解けない患者での生命維持治療の差し控えに続いて起こるため、28日と90日の死亡差は<strong>臓器サポートから離脱できるまで回復した患者の割合の差</strong>を反映する。著者は仮説生成的と明記。</li><li><strong>Q8（エンドトキシンが原因なら、なぜ血行動態が動かないのか）</strong>：Tigris では<strong>最初の3日間の MAP とノルアドレナリン換算量に意味のある差がなかった</strong>のに、28日・90日死亡は低かった。過去10年の敗血症性ショック試験の一貫したメッセージ（CLOVERS・ARISE FLUIDS など蘇生の強度を変えても生存は改善しない）と整合し、<strong>動脈圧は重症度のマーカーであって修飾可能な媒介因子ではない</strong>。エンドトキシンは数時間ではなく数週で解けていく臓器障害経路の上流に位置する。なお血行動態の推移は<strong>生存者の Day 0〜3 でしか評価されていない</strong>。</li><li><strong>Q9（手技）</strong>：<strong>2時間の血液灌流を22〜24時間間隔で2回</strong>、ダブルルーメンカテーテル経由で<strong>血流量 80〜100 mL/分</strong>、<strong>未分画ヘパリン</strong>で抗凝固。2回固定なのは<strong>カラムの吸着容量</strong>が単回2時間でほぼ飽和し、1セッションあたりの吸着量が<strong>約10〜20 µg</strong>に上限づけられるため。CRRT 施行中の患者は<strong>各セッションの2時間だけ CRRT を中断</strong>し終了後に再開。EUPHRATES と完全に一致させたのは、Q3 のベイズ流借用の前提条件だから。</li><li><strong>Q10（先行陰性試験との整合）</strong>：<strong>EUPHAS</strong>（64例・腹部敗血症性ショック・EAA非使用・早期中止）は血行動態と生存の改善を報告、<strong>ABDO-MIX</strong>（243例・腹膜炎由来・EAA非使用・約3分の1が予定2回のカラムを完遂せず・対照群死亡20%未満）は中立、<strong>EUPHRATES</strong>（450例・最大）は主要評価項目で陰性。ネットワークメタ解析はエビデンスの確実性を<strong>低い</strong>と判定。<strong>EUPHRATES を除きどの試験もエンドトキシン除去が効きうるサブグループを前向きに定義していなかった</strong>。EUPHRATES も EAA 0.60以上を要件としたが<strong>17%が EAA 0.90以上</strong>で、臓器不全の重症度を制限していなかった。EAA 0.90以上で効かないのは、エンドトキシン負荷が <strong>4000 pg/mL 超（成人平均で 20 µg 超）</strong>でカラムの吸着容量（2時間で約10〜20 µg）を超えるためと説明される。</li><li><strong>著者らが導く3つの実務的含意</strong>：①多臓器不全を伴う敗血症性ショックで補助的体外循環療法を検討するなら <strong>EAA 測定を考慮</strong>する。②<strong>PMX は ESS（EAA 0.60〜0.89＋昇圧薬依存＋多臓器不全）に限って使う</strong>、より低い EAA・より軽い重症度に外挿しない。③EAA 0.90以上には Tigris の結果は適用されず、さらなる研究が必要。</li><li><strong>ガイドラインとの関係</strong>：SSC ガイドラインは現時点で敗血症への血液浄化・エンドトキシン除去の日常使用を推奨していない。ただしこれは <strong>Tigris 報告前に策定された</strong>もの。<strong>Tigris は非選択集団についてこの立場を覆さない</strong>。覆すのではなく、<strong>バイオマーカーで定義された狭いエンドタイプ</strong>を切り出したのだ、というのが著者の自己規定である。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>エンドトキシン（内毒素）</strong> とは、グラム陰性菌の細胞壁外膜を構成する<strong>リポ多糖（LPS）</strong>のこと。菌が死んだり増殖したりする過程で血中に放出され、単球・マクロファージの TLR4 を介して自然免疫を一気に立ち上げる。敗血症で起こる炎症カスケードの<strong>最も上流に近い引き金</strong>の1つであり、だからこそ「取り除けば下流が止まるのではないか」という発想が30年以上続いてきた。</p>
+<p><strong>PMX（polymyxin B hemoadsorption、ポリミキシンB血液吸着）</strong> は、抗菌薬ポリミキシンBを<strong>ポリスチレン誘導体繊維に固定化</strong>したカラム（トレミキシン／Toraymyxin）に血液を通す体外循環治療である。ポリミキシンBは LPS に直接結合する性質を持つため、繊維上に固定したまま血中エンドトキシンを物理的に吸着できる。全身投与ではないので、ポリミキシンBの腎毒性・神経毒性を回避できる。日本では <strong>PMX-DHP</strong> として1994年から保険診療下で使われており、欧州では CE マークを取得している。</p>
+<p><strong>EAA（Endotoxin Activity Assay、エンドトキシン活性測定）</strong> は、患者の全血中の好中球にエンドトキシン–抗体複合体を作用させ、生じる化学発光（呼吸バースト）の強さから<strong>エンドトキシン活性を0〜1の連続値</strong>で表すベッドサイド迅速検査。従来のリムルス試験が「エンドトキシンの<strong>濃度</strong>」を測るのに対し、EAA は「好中球がどれだけ活性化されているか＝<strong>生物学的活性</strong>」を見る。<mark class="hl">本邦では EAA が保険収載されておらず、この違いが Tigris の国内適用における最大の障壁になる</mark>。</p>
+<p><strong>なぜ「窓」なのか（0.60〜0.89 の意味）</strong>：EAA が低すぎる（0.60未満）と、そもそも取り除くべき標的が乏しい。高すぎる（0.90以上）と、エンドトキシン量が<strong>カラム1本の吸着容量（2時間で約10〜20 µg）を超える</strong>うえ、EAA 値と実際のエンドトキシン濃度の相関も飽和して信頼性が落ちる。したがって中間帯だけが「取り除ける量のエンドトキシンが、意味のある量だけ存在している」領域になる。</p>
+<p><strong>エンリッチメント（濃縮）</strong> という試験デザインの語も押さえておきたい。<strong>予測的エンリッチメント（predictive enrichment）</strong> ＝治療標的が実際に存在する患者だけを入れること（ここでは EAA が窓に入っていること）。<strong>予後的エンリッチメント（prognostic enrichment）</strong> ＝イベント（死亡）が十分起こる重症度の患者だけを入れること（ここでは MODS &gt;9 または SOFA &gt;11）。Tigris はこの2つを同時に効かせている。</p>
+<p><strong>ベイズ流（Bayesian）試験</strong>：頻度論が「効果がゼロだと仮定したときのデータの珍しさ（p値）」を計算するのに対し、ベイズ流は<strong>事前分布（既知の情報）＋観測データ → 事後分布</strong>を計算し、「治療が有益である確率は何%か」を直接答える。Tigris では EUPHRATES の該当サブグループが事前分布の材料になっている。</p>
+<p><strong>信用区間（credible interval）</strong> はベイズ流の区間推定で、頻度論の信頼区間（confidence interval）と数値は似ていても意味が違う。「真のオッズ比がこの範囲に入る確率が95%」と読んでよいのが信用区間である。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>敗血症性ショックは ICU 死亡の主要因であり続けている。<strong>30年にわたる無作為化試験にもかかわらず、臓器不全が確立した後にその軌跡を変えたと示された特異的薬物療法は1つしかない</strong>。それがドロトレコギンアルファ（活性化プロテインC）で、いったん承認されたものの、その後の試験で安全性と有効性が確認できず<strong>撤回</strong>された（Ranieri ら、NEJM 2012）。</p>
+<p>この空白の中で、エンドトキシンは生物学的に妥当な標的として残ってきた。上流の自然免疫活性化の駆動因子であり、しかも EAA でベッドサイド定量が可能という、<strong>標的があることを確かめてから治療できる</strong>数少ない対象である。</p>
+<p>ところが先行3RCT は結果が食い違った。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>対象・規模</th><th>エンドトキシン測定</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>EUPHAS（Cruz ら、JAMA 2009）</td><td>腹部敗血症性ショック 64例</td><td>使用せず</td><td>血行動態・生存の改善を報告。早期中止</td></tr>
+<tr><td>ABDO-MIX（Payen ら、ICM 2015）</td><td>腹膜炎由来の敗血症性ショック 243例</td><td>使用せず</td><td>中立。約3分の1が予定2回のカラムを完遂せず。対照群死亡20%未満</td></tr>
+<tr><td>EUPHRATES（Dellinger ら、JAMA 2018）</td><td>敗血症性ショック＋エンドトキシン高値 450例</td><td>EAA 0.60以上を要件</td><td>主要評価項目（28日死亡）で陰性</td></tr>
+</tbody></table></div>
+<p>EUPHRATES の事後解析（Klein ら、ICM 2018）が、<strong>EAA 0.60〜0.89 かつ重度臓器障害</strong>という生物学的に筋の通ったサブグループで生存利益がありそうだと同定した。ここには予測的エンリッチメント（標的の存在）と予後的エンリッチメント（十分なイベント率＝死亡）の両方が効いている。</p>
+<p><strong>Tigris はこの仮説をベイズ流第3相の枠組みで前向きに検証するために設計された</strong>。EUPHRATES の治療可能サブグループのデータを借用して検出力を上げつつ、独立した新規集団での確認を要求する構造である（Figure 1）。</p>
+<p>公表された結果は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>時点</th><th>有益の事後確率</th><th>APACHE-II 調整オッズ比（95%信用区間）</th><th>絶対リスク減少</th></tr></thead>
+<tbody>
+<tr><td>28日死亡</td><td>95.3%</td><td>0.67（0.39〜1.08）</td><td>約10%</td></tr>
+<tr><td>90日死亡</td><td>99.4%</td><td>0.54（0.32〜0.87）</td><td>約15%</td></tr>
+</tbody></table></div>
+<p>本稿の目的は、この試験の方法論と結果を<strong>問答形式</strong>で論じることにある。著者らは冒頭で立場を明示している。<strong>「我々は Tigris の研究者として書いており、これは独立した評価ではなく、試験の根拠・設計・解釈についての我々自身の説明である」</strong>。10の問いは、査読の往復で出たものと、臨床医・試験家から繰り返し寄せられたものから作られている。</p>
+<h3>3. 方法（この文書自体の性格）</h3>
+<ul><li><strong>デザイン</strong>：Q&amp;A形式の解説・議論記事（debate article）。システマティックレビューでもメタ解析でも新規解析でもない。</li><li><strong>対象データ</strong>：既発表の Tigris 本報（Neyra JA ら、Lancet Respir Med 2026;14:443–52）とその補遺。すべて公開済みで、本稿で新たなデータは生成されていない。</li><li><strong>問いの由来</strong>：出版前の査読交換、および臨床医・試験家から繰り返し提起された疑問。</li><li><strong>著者の立ち位置</strong>：全員が Tigris の共著者。<strong>独立した評価ではない</strong>と自己申告。ただし「エビデンスが最も反論を受けやすい箇所も含めて、推論を透明に示す」ことを目的に掲げている。</li><li><strong>倫理</strong>：該当なし（既発表試験データに基づく解説）。</li><li><strong>限界（構造的なもの）</strong>：査読の往復から生まれた問いに、当事者が答える形式である以上、<strong>問いの選び方と答え方の両方に当事者の視点が入る</strong>。読者側で「答えられていない問い」を補って読む必要がある（§14 を参照）。</li></ul>
+<h3>4. Question 1 — 非盲検試験の結果は、共介入の差やアウトカム判定のバイアスで説明できないか</h3>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. Tigris 試験の精密エンリッチメント戦略とベイズ流設計。パネルAが Tigris のエンリッチメント戦略（EUPHRATES 全体集団から EAA 0.60〜0.89 かつ MODS &gt;9 の治療可能コホートを切り出し、それを Tigris の適格基準として前向きに事前規定する流れ）、パネルBが事前規定の APACHE-II 調整ベイズモデル（EUPHRATES 治療可能サブグループ由来の事前情報と、新規に無作為化した Tigris コホートのデータを結合する構造）を示す。※本 PDF は最終校正前の Accepted Manuscript 版で、図の凡例のみが収載され図版そのものは含まれていない。</p>
+</div>
+<p><strong>著者の回答の骨子</strong>：血管アクセス・回路・2回のカラムセッションを要する体外循環療法は、<strong>シャム（偽）機器なしには盲検化できない</strong>。そしてシャム機器を用いること自体が別の倫理的・実務的問題を生む。</p>
+<p><strong>EUPHRATES と Tigris が講じた2つの緩和策</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>緩和策</th><th>内容</th><th>何を防ぐか</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>施設の<strong>試験実施チーム</strong>を、標準治療をオーダーする<strong>臨床チーム</strong>から運用上分離した</td><td>試験担当者が治療内容を動かすこと</td></tr>
+<tr><td>2</td><td>主要評価項目を <strong>28日・90日死亡</strong>という客観的で生死確認により判定される指標にした</td><td>判定バイアス（adjudication bias）</td></tr>
+</tbody></table></div>
+<p><strong>著者が認めている限界</strong>：生死は判定バイアスを受けないが、非盲検の割付は<strong>共介入を通じて</strong>結果に影響しうる。著者が具体的に挙げている経路は次の5つである。</p>
+<ol><li>臓器サポートの強化または縮小</li><li>腎代替療法の開始時期</li><li>人工呼吸・昇圧薬の強度</li><li>ICU 退室のタイミング</li><li>生命維持治療を差し控える決定</li></ol>
+<p>著者は <strong>「非盲検デザインが転帰に影響しえないとは主張しない。客観的な死亡エンドポイントが重要なバイアス経路を1つ取り除いたと言っているだけである」</strong> と書いている。この留保は原文どおりに読むべきところである。</p>
+<p><strong>そのうえでのデータ的反論</strong>：そうした共介入の差が実際に起こった証拠はない。むしろ、<strong>28日時点で ICU で生命維持を受け続けていた患者は対照群 21.4%、PMX群 13.8%</strong> と対照群のほうが多かった。もし非盲検デザインの残余効果があったとすれば、それは<strong>帰無仮説の方向（差を小さく見せる方向）に働いた</strong>ことになる。</p>
+<h3>5. Question 2 — 約15,000例をスクリーニングして157例。1%の組入率は一般化可能性を損なわないか</h3>
+<p><strong>著者の回答</strong>：1%という見出しの数字は<strong>誤解を招く</strong>。それは患者特性というより<strong>試験のロジスティクス</strong>を反映している。</p>
+<p><strong>スクリーニングから無作為化までの流れ</strong>（原文の記述を表に起こす）：</p>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>人数</th><th>内訳・理由</th></tr></thead>
+<tbody>
+<tr><td>スクリーニング</td><td>14,890例</td><td>—</td></tr>
+<tr><td>臨床的に適格</td><td>328例</td><td>除外の主因は<strong>エンドトキシン状態ではなく重症度基準</strong>（昇圧薬依存の敗血症性ショック、MODS &gt;9 または SOFA &gt;11）</td></tr>
+<tr><td>EAA 0.60未満</td><td>87例</td><td>標的が乏しい</td></tr>
+<tr><td>EAA 0.90以上</td><td>42例</td><td>吸着容量を超える</td></tr>
+<tr><td>EAA 非反応（non-responder）</td><td>5例</td><td>測定不能</td></tr>
+<tr><td><strong>EAA 0.60〜0.89 の窓</strong></td><td><strong>194例</strong></td><td>適格な表現型</td></tr>
+<tr><td><strong>無作為化</strong></td><td><strong>157例</strong></td><td>194例のうち</td></tr>
+</tbody></table></div>
+<p><strong>Eden 研究による対比</strong>：Tigris の4施設で並行実施された Eden 研究では、<strong>敗血症性ショック患者の21%</strong>がエンドトキシン性敗血症性ショック（ESS）の全基準を満たした。21% と Tigris の約2% の差は、<strong>分母が違う</strong>ことに由来する。Tigris の分母は「スクリーニングされた全患者」（大半は重症度基準で除外されるか、そもそも EAA を測られていない）であるのに対し、Eden は同じ基準を「敗血症性ショックが確立したコホート」に当てはめており、<strong>リスク集団における有病割合</strong>を与える。</p>
+<p>著者の結論：<strong>ESS はありふれてはいないが、稀でもない</strong>。低い無作為化割合は、真の集団有病率よりも患者選択と試験のロジスティクスを反映している。</p>
+<p><strong>一般化可能性についての著者自身の認否</strong>：厳格な適格基準は「高EAA＋臓器不全」という表現型を鋭くし内的妥当性を強めた一方で、<strong>すべての敗血症患者への一般化可能性を必然的に制限し、エビデンスの適用範囲を敗血症性ショックの精密に定義された部分集合に限定する</strong>。含意は明快である — <strong>Tigris は非選択の敗血症性ショックにおける PMX を認可するものではなく、前向きに定義された「高EAA＋臓器不全」表現型を満たす患者においてのみである</strong>。</p>
+<p>さらに、<strong>EAA 0.90以上（Tigris のスクリーニング対象の13%）</strong>、すなわちエンドトキシン負荷が最も高く用量調整戦略のほうが有効かもしれない患者群は<strong>研究されておらず</strong>、今後の重要な標的として残る。</p>
+<h3>6. Question 3 — ベイズ流推論は頻度論とどう違うのか。頻度論の試験なら何例必要だったのか</h3>
+<p>著者は <strong>「これらは Tigris が提起する最も重大な方法論的問いである」</strong> と位置づけている。</p>
+<p><strong>両者が答えている問いの違い</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>枠組み</th><th>立てている問い</th><th>出せる表現</th></tr></thead>
+<tbody>
+<tr><td>頻度論</td><td>治療効果がないと仮定したとき、観測された結果と同等以上に極端な結果が得られる確率はいくらか</td><td>「他にありえた試験結果」についての確率</td></tr>
+<tr><td>ベイズ流</td><td>治療効果についての事前情報と観測データを結合したとき、治療が有益である確率はいくらか</td><td><strong>「PMX が有益である確率は 95.3% である」という直接的な確率表現</strong></td></tr>
+</tbody></table></div>
+<p>著者は<strong>どちらの枠組みも正当</strong>だが<strong>答えている問いが違う</strong>と明記したうえで、上のような直接的な確率表現はベイズ流でしか出せないと述べる。</p>
+<p><strong>3つの具体的な対比</strong>：</p>
+<p><strong>その1 — 必要症例数</strong>。頻度論設計の Tigris は EUPHRATES からの情報借用なしにゼロから始めることになり、単独で成立する検出力が必要になる。<strong>対照群死亡率45%から10%の死亡減を検出するのに必要な症例数は n=592</strong>（片側 α 0.05、検出力80%）。同じ集団を研究した唯一の先行試験に紐づけた情報事前分布を事前規定することで、<strong>Tigris は157例の新規患者で解釈可能な答えに到達した — 従来型設計の約4分の1</strong>である。著者の主張は「適格患者が稀なとき、頻度論の必要症例数はしばしば実現不可能であり、構造化された事前情報の借用が確定的な答えへの実行可能な経路を与える」というもので、REMAP-CAP の IL-6 受容体拮抗薬試験・シンバスタチン試験が引用されている。</p>
+<p><strong>その2 — プラットフォーム試験との等価性</strong>。もし EUPHRATES が EAA 0.90以上の組入れをやめ、EAA 0.60〜0.89 かつ MODS &gt;9 の患者の組入れを継続していれば（エンリッチメント相）、近年成功しているプラットフォーム試験（PANTHER、脳内出血の低侵襲血腫除去試験など）に似た構造になっていた。その場合、治療効果は<strong>エンリッチメント前後の両相にまたがる EAA 定義サブグループの全患者から</strong>推定できたはずである。<strong>このようにプールすることは、試験の第1部から事前分布を作って100%の重みを置き、第2部で更新することと等価</strong>である（Tigris はこれを25%割り引いた）。</p>
+<p><strong>その3 — 事前分布に依存しない結果</strong>。情報事前分布を用いないベイズ解析でも、有益の事後確率は <strong>28日で約80%、90日で98%超</strong>になる。すなわち <strong>90日の結果は事前分布からの借用に依存しない</strong>。</p>
+<h3>7. Question 4 — 無作為化試験でなぜ APACHE-II で調整するのか。調整が結果を作ったのではないか</h3>
+<p><strong>著者の回答</strong>：無作為化試験における強い予後共変量の調整は、<strong>無作為化後の不均衡の補正ではなく、検出力を改善するための事前規定の戦略</strong>である。主要解析はベースライン APACHE-II で治療効果を調整した。APACHE-II はこの集団で死亡と強く関連する。主要ロジスティック回帰モデルで APACHE-II を条件づけることで、<strong>ベッドサイドで臨床的に意味のある条件付き効果</strong>により近い推定値が得られる。</p>
+<p><strong>規制上の位置づけ</strong>：情報事前分布を通じて外部情報を借用するベイズ解析に、事前規定の共変量調整を組み合わせる設計は、<strong>FDA の3つのガイダンス文書</strong>が示唆する効率的な設計そのものである。うち後2者は、枢要試験の主要推論を支えるベイズ手法の使用を扱い、<strong>先行試験からの情報借用を明示的に想定</strong>したうえで、事前分布・成功基準・解析モデル・動作特性を<strong>事前に規定すること</strong>を強調している。</p>
+<p><strong>「調整が結果を作った」という懸念が成立しない2つの理由</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>理由</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>調整変数とモデルが<strong>試験開始前</strong>に統計解析計画で固定されていた</td><td>好都合な共変量を後から探した post-hoc ではない</td></tr>
+<tr><td>2</td><td><strong>非調整解析と別の調整解析も、調整解析と定性的に一致した推定値</strong>を与えた</td><td>調整の有無で結論が反転しない</td></tr>
+</tbody></table></div>
+<p>著者の結論：<strong>調整は患者個別の治療効果により近いものを与えるのであって、効果を作り出すのではない</strong>。読者にとっての含意は「事前規定の調整解析は、より信頼できない推定ではなく、より信頼できる推定である」。</p>
+<h3>8. Question 5 — なぜ EUPHRATES 由来の事前分布に 75% の重みだったのか。50% でも 100% でもなく</h3>
+<p><strong>著者の回答</strong>：<strong>すべての情報事前分布には判断が入っており、それは透明であるべきだ</strong>という前置きから始まる。</p>
+<p><strong>75%という重みの意味</strong>：事前規定であり、EUPHRATES の治療可能コホートの情報を<strong>意図的に割り引く</strong>もの。結果として<strong>有効事前サンプルサイズは約134</strong>となり、実際のコホート（n=179）より小さくなる。</p>
+<p><strong>アダプティブ試験とのアナロジー（と、その不完全さ）</strong>：EUPHRATES の治療可能コホートが<strong>中間解析</strong>の役割を、Tigris が<strong>確証的継続</strong>の役割を果たす、と読むことができる。ただし著者はこのアナロジーが<strong>不完全</strong>であることを明記する — 真のアダプティブ・エンリッチメント試験ではエンリッチメント規則が<strong>前向きに固定</strong>されるのに対し、ここでは<strong>規則が第1のデータセットから学習され、事前分布の集団は事後的（post-hoc）に同定された</strong>。したがって著者は「直観の補助として提示するのであって、等価であるという主張ではない」と述べる。</p>
+<p><strong>この区別が割引に反映されている</strong>：もし Tigris が真のアダプティブ試験であったなら、利益を示したサブグループを<strong>割引なしで</strong>保持できたはずである。これが成り立つのは、両試験が適格基準（昇圧薬依存の敗血症性ショック、MODS &gt;9 または SOFA &gt;11、EAA 0.60〜0.89）を共有しているからで、<strong>唯一の違いは EAA の範囲が EUPHRATES では事後的に定義され、Tigris では事前規定だったこと</strong> — その差が25%の割引に相当する。</p>
+<p><strong>勝者の呪い（winner's curse）</strong>：Tigris は陽性のサブグループシグナルに基づいて進められたため、そのシグナルは<strong>陽性であるがゆえに選ばれた効果は真の利益を過大評価しがち</strong>という偏りを負う。そのような事前分布をバイアスのない Tigris データと結合するとき、<strong>割引はまさにこれを緩和するためにある</strong>。</p>
+<p><strong>25%が最適だと主張はしない</strong>、と著者は明記する。ただし3つの根拠で擁護できるとする。</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>擁護の根拠</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>試験開始前に固定</strong>された（事前規定）</td></tr>
+<tr><td>2</td><td>結論は <strong>重み 0〜100% の全域</strong>にわたって報告されている</td></tr>
+<tr><td>3</td><td><strong>事前分布–データ間の矛盾（prior-data conflict）診断で不整合は見つからなかった</strong></td></tr>
+</tbody></table></div>
+<p>加えて、<strong>Tigris の28日死亡率は EUPHRATES の治療可能サブグループの死亡率に近く</strong>、効果量の一貫性を支持する。</p>
+<p><strong>重みに対する感度</strong>（この Q&amp;A で最も実務的な数値）：</p>
+<div class="tw"><table>
+<thead><tr><th>評価項目</th><th>事前分布の重みへの依存</th></tr></thead>
+<tbody>
+<tr><td><strong>28日死亡</strong></td><td>有益の事後確率は<strong>重み72%以上のとき95%を超える</strong>。<strong>100%重みで97.1%</strong></td></tr>
+<tr><td><strong>90日死亡</strong></td><td>本質的に不変。<strong>無情報事前分布でも有益の事後確率は98%超</strong></td></tr>
+</tbody></table></div>
+<p>著者の要約：<strong>75%の重みづけは妥当かつ事前規定であり、28日の推論の強さは重みに依存するが、90日の推論は依存しない</strong>。</p>
+<h3>9. Question 6 — 28日のオッズ比の信用区間が1.0を含むのに、有益の事後確率が95.3%なのはなぜか</h3>
+<p><strong>著者の回答</strong>：この見かけ上の不整合はベイズ流試験の報告で混乱を招きうる、と認めたうえで、事後分布を4つの区画に分けて説明する。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 死亡に対するオッズ比の事後分布（PMX 対 標準治療）。事後分布は4区画に分割される — (a) P(OR&lt;0.39)=2.5%、(b) P(0.39&lt;OR&lt;1.00)=92.8%、(c) P(1.00&lt;OR&lt;1.08)=2.2%、(d) P(OR&gt;1.08)=2.5%。両側95%信用区間は (b)+(c) にあたるため1.0を含みうるが、有益の確率 (a)+(b) は95%を超える。片側の有益の事後確率が95.0%と97.5%の間にあるときに必ずこうなる。※本 PDF は Accepted Manuscript 版のため図版そのものは収載されておらず、凡例のみが与えられている。</p>
+</div>
+<p><strong>4区画の内訳</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>区画</th><th>範囲</th><th>事後確率</th></tr></thead>
+<tbody>
+<tr><td>(a)</td><td>OR &lt; 0.39</td><td>2.5%</td></tr>
+<tr><td>(b)</td><td>0.39 &lt; OR &lt; 1.00</td><td>92.8%</td></tr>
+<tr><td>(c)</td><td>1.00 &lt; OR &lt; 1.08</td><td>2.2%</td></tr>
+<tr><td>(d)</td><td>OR &gt; 1.08</td><td>2.5%</td></tr>
+</tbody></table></div>
+<ul><li><strong>両側95%信用区間 = (b)+(c) = 95.0%</strong> → 0.39〜1.08 となり <strong>1.0 をまたぐ</strong></li><li><strong>有益の確率 = (a)+(b) = 95.3%</strong> → <strong>1.0 を下回る側の合計</strong></li><li><strong>OR 1.0 を超える側 = (c)+(d) = 4.7%</strong></li></ul>
+<p>著者の説明：<strong>片側の有益の事後確率が 95.0% と 97.5% の間にあるときは必ずこの現象が起こる</strong>。28日死亡がまさにそれだった。等裾（equal-tailed）区間の上限が 1.0 をわずかに越えて 1.08 まで伸びる一方、累積の有益確率は 95.3% になる。</p>
+<p><strong>これは何の類似物か</strong>：<strong>片側検定が p&lt;0.05 に達しながら両側検定では達しない状況の類似物</strong>である。そして著者は、<strong>臨床的に関連する問い — PMX は標準治療より良いか — は片側の問いであり、この試験はそれに答えている</strong>と主張する。</p>
+<p><strong>誤って有益と結論する確率</strong>：付録の事前規定の誤り率解析は安心できるもので、<strong>28日で誤って利益ありと結論する確率は1%未満</strong>であった。</p>
+<h3>10. Question 7 — 28日から90日にかけて死亡差が拡大したのは、生物学的に妥当か、偶然か</h3>
+<p><strong>著者の回答</strong>：重症疾患の試験で治療効果が時間とともに拡大することは<strong>珍しくない</strong>。関連する観察が2つある。</p>
+<p><strong>観察その1 — 機序は血行動態の安定化ではなく臓器不全の解除らしい</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>対照群</th><th>PMX群</th></tr></thead>
+<tbody>
+<tr><td>28日時点で生存かつ ICU に残っていた割合</td><td>21.4%</td><td>13.8%</td></tr>
+<tr><td>そのうち90日までの転帰</td><td><strong>6例中5例が死亡・90日前に退室した患者は皆無</strong></td><td><strong>9例中6例が生存</strong></td></tr>
+<tr><td>28日時点の ICU-free 生存</td><td>43.1%</td><td>52.8%</td></tr>
+</tbody></table></div>
+<p>（ICU-free 生存の2値は原文で「52.8% vs 43.1%」と記載され、文脈上前者が PMX 群を指す）</p>
+<p>これらのシグナルは、死亡以外の面でも <strong>PMX の利益が「急性の血行動態変化」ではなく「臓器機能の回復 — 人工呼吸・臓器サポートからのより大きな解放、生存者のより早い退室」を通じて働く</strong>ことを示唆する。ただし著者は「多くの試験と同様、Tigris は利益の<strong>確率</strong>を推定するよう設計されており、その<strong>機序</strong>を推定するようには設計されていない。機序は今後の研究が扱わねばならない」と明記する。</p>
+<p><strong>観察その2 — 遅い死亡の性質</strong>：ICU 入室後1週を超えてからの死亡の多くは、<strong>臓器不全が解けていない患者で生命維持治療を制限した後に起こる</strong>。したがって28日と90日の間の死亡差は、<strong>臓器サポートから離脱できるまで回復した患者の割合の差</strong>を反映する。この「短期の差が、重症病態が解けるにつれてより明瞭な長期の差へ成熟する」パターンは、近年の他の ICU 試験とも整合する（Friedrich ら、CCM 2023）。</p>
+<p><strong>予想される反論への応答</strong>：非盲検であるがゆえに、差の拡大は生物学ではなく<strong>治療決定の差</strong>を反映しているのではないか、という指摘はありうる。これに対し著者は、<strong>臓器障害の非解消と生命維持治療を制限する決定は対立しない</strong>と答える — 治療制限は恣意的ではなく<strong>非解消に続いて</strong>起こるので、死亡の差と治療制限の差は<strong>同じ「臓器不全の解除の差」の2つの表れ</strong>である、と。それでも著者はこの機序を<strong>仮説生成的</strong>として提示する、と締めくくっている。</p>
+<h3>11. Question 8 — エンドトキシンがショックの原因なら、なぜ介入は血行動態に有意な効果を示さなかったのか</h3>
+<p><strong>著者の回答</strong>：この所見は<strong>長年の前提から外れる</strong>、という認識から始まる。従来の研究は PMX を<strong>難治性ショックに対する救済療法</strong>と位置づけ、エンドトキシン除去が血圧を上げ昇圧薬量を減らすことを期待していた。</p>
+<p><strong>Tigris で起きたこと</strong>：<strong>平均動脈圧（MAP）とノルアドレナリン換算量は最初の3日間で意味のある差を示さなかった</strong>。にもかかわらず28日・90日死亡は PMX 群で低かった。</p>
+<p><strong>この乖離は驚くにあたらない、と著者は言う</strong>。過去10年の敗血症性ショック試験から得られた一貫したメッセージは、<strong>蘇生の強度を変えても生存は改善しない</strong>というものである。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>比較</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>CLOVERS（NEJM 2023）</td><td>昇圧薬優先戦略 対 輸液優先戦略</td><td>死亡に差なし</td></tr>
+<tr><td>ARISE FLUIDS（NEJM 2026）</td><td>制限的輸液蘇生 対 自由な輸液蘇生</td><td>死亡に差なし</td></tr>
+</tbody></table></div>
+<p>輸液戦略試験や早期目標指向型治療（EGDT）試験と合わせると、これらのデータは <strong>敗血症性ショックにおける動脈圧が、転帰の修飾可能な媒介因子というより主として重症度のマーカーである</strong>ことを示唆する。</p>
+<p>対照的に、<strong>エンドトキシンは、数時間ではなく数週間かけて解けていく臓器障害経路の上流に位置する</strong>。</p>
+<p><strong>方法論上の注記</strong>：血行動態の推移は<strong>生存者の Day 0〜3 でしか評価されていない</strong>。したがって血行動態のエンドポイントは、エンドトキシン標的治療を判定するうえでの重要度が相対的に低い、というのが著者の整理である。</p>
+<h3>12. Question 9 — PMX はどう実施され、用量と抗凝固はどう選ばれ、既に RRT 中の患者では何をしたのか</h3>
+<p><strong>著者の回答</strong>：治療は <strong>EUPHRATES の治療可能コホートのシグナルを生んだ介入と厳密に一致するよう標準化</strong>された。これは Q3 のベイズ流借用の<strong>前提条件</strong>である。</p>
+<p><strong>プロトコルの実際</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>セッション数・時間</td><td><strong>2時間の血液灌流を2回</strong></td></tr>
+<tr><td>間隔</td><td><strong>約22〜24時間</strong></td></tr>
+<tr><td>血流量</td><td><strong>80〜100 mL/分</strong></td></tr>
+<tr><td>アクセス</td><td>ダブルルーメンカテーテル</td></tr>
+<tr><td>抗凝固</td><td><strong>未分画ヘパリン</strong>（EUPHRATES と Tigris で一貫）</td></tr>
+<tr><td>CRRT 併用時</td><td><strong>各 PMX セッションの2時間だけ CRRT を中断し、終了後に再開</strong></td></tr>
+</tbody></table></div>
+<p><strong>なぜ2回固定なのか</strong>：カラムの吸着容量による。<strong>単回の2時間セッションで飽和に近づく</strong>ため、<strong>1セッションあたりの吸着エンドトキシン量は約10〜20 µg に上限づけられる</strong>（Foster &amp; Kellum、Int J Mol Sci 2023）。</p>
+<p><strong>適用範囲の限定</strong>：Tigris の結果は<strong>この特定の再現可能な手技 — 未分画ヘパリンで抗凝固した2時間×2回の固定セッションを約1日あけて 80〜100 mL/分 で実施し、併用 CRRT はセッション中だけ中断する — に適用される</strong>。</p>
+<p><strong>実装コストについての著者の認否</strong>：これを日常診療に翻訳するには<strong>軽くない資源負担</strong>が伴う。<strong>PMX は、体外循環療法の体制が既に整い、EAA を適時に測定できる施設で最も実施しやすい</strong>。</p>
+<p><strong>EAA 0.90以上への外挿不可</strong>：EAA 0.90以上の患者は、<strong>2セッションの course の容量を超えるエンドトキシン負荷</strong>を持ちうるため、標準化されたスケジュールでは不十分かもしれない。<strong>セッション追加や間隔短縮といった強化レジメンが必要かもしれないが、Tigris では検討されていない</strong> — 治療を EUPHRATES に揃える必要があったためである。</p>
+<h3>13. Question 10 — 過去の陰性試験とメタ解析と、Tigris はどう折り合うのか</h3>
+<p><strong>著者の回答</strong>：PMX は30年以上研究されてきており、試験の記録は<strong>表面上は矛盾している</strong>。</p>
+<p><strong>先行3試験の再整理</strong>（原文の記述を表に起こす）：</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>規模・対象</th><th>EAA による選択</th><th>結果</th><th>著者が指摘する問題点</th></tr></thead>
+<tbody>
+<tr><td>EUPHAS</td><td>64例・腹部敗血症性ショック</td><td>なし</td><td>血行動態と生存の改善</td><td><strong>早期中止</strong>。EAA 非使用</td></tr>
+<tr><td>ABDO-MIX</td><td>243例・腹膜炎関連敗血症性ショック</td><td>なし</td><td>中立</td><td><strong>約3分の1が予定2回のカラムを完遂せず</strong>。重症度が EUPHAS や Tigris よりはるかに低く、<strong>対照群死亡率は20%未満</strong></td></tr>
+<tr><td>EUPHRATES</td><td>450例・最大の PMX 無作為化研究</td><td><strong>EAA 0.60以上を要件</strong></td><td>主要評価項目で全体として陰性</td><td><strong>17%が EAA 0.90以上</strong>。<strong>臓器不全の重症度を制限していなかった</strong></td></tr>
+</tbody></table></div>
+<p>さらに、その後のネットワークメタ解析（Chen ら、CCM 2023）はエビデンスの総体を<strong>確実性が低い</strong>と判定した。</p>
+<p><strong>折り合わせる概念</strong>：<strong>EUPHRATES を部分的に除けば、どの先行試験もエンドトキシン除去が妥当に効きうるサブグループを前向きに定義していなかった</strong>。EUPHAS と ABDO-MIX はエンドトキシン活性を測定せず、<strong>腹部敗血症であることが十分な代替指標になると誤って仮定していた</strong>。EUPHRATES は EAA 0.60以上を要件としたが、17%が 0.90以上であり、臓器不全の重症度を制限しなかった。<strong>事後解析で切り出された治療可能コホート（EAA 0.60〜0.89、MODS &gt;9）こそ、Tigris が事前規定して確認したものである</strong>。</p>
+<p><strong>EAA 0.90以上で効かない理由（数値による説明）</strong>：この群ではカラムが飽和し、<strong>圧倒的なエンドトキシン負荷 — 4000 pg/mL 超（成人平均で 20 µg 超）、おそらくはそれよりはるかに多い — が PMX カラムの吸着能（2時間で約10〜20 µg）を超える</strong>ため。</p>
+<p><strong>試験間のパターンは矛盾ではなく情報である</strong>：集団が非選択的であるか、治療可能範囲の外の患者を含むとき、<strong>平均効果は希釈され、時に帰無に近づく</strong>。治療可能エンドタイプに限定（濃縮）すると<strong>利益が現れる</strong>。これは腫瘍学において、バイオマーカーによる濃縮が反応性サブグループを分離した途端に、無差別な生物学的治療の試験が陽性に転じたのと<strong>同じ論理</strong>である。</p>
+<p><strong>重要な歴史的補足</strong>：<strong>エンドトキシンの正確なシグナル伝達経路が解明されたのは、PMX が開発された後だった</strong>。また、<strong>ESS と非 ESS は臨床所見を共有するため、臨床的表現型分類だけでは選択に不十分</strong>である。</p>
+<p><strong>著者が導く3つの含意</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>多臓器不全を伴う敗血症性ショックで補助的体外循環療法を検討する場合、EAA 検査を考慮すべき</strong></td></tr>
+<tr><td>2</td><td><strong>PMX は ESS — EAA 0.60〜0.89、昇圧薬依存の敗血症性ショック、多臓器不全 — にのみ使用すべきで、より低い EAA・より軽い重症度に外挿してはならない</strong></td></tr>
+<tr><td>3</td><td><strong>EAA 0.90以上の患者は標準化プロトコル下で利益を得なかったため、Tigris の所見は適用されず、さらなる研究が必要</strong></td></tr>
+</tbody></table></div>
+<p><strong>ガイドラインとの関係</strong>：臨床医は Tigris を <strong>Surviving Sepsis Campaign ガイドライン（Prescott ら、2026）と照らして</strong>読むべきである。同ガイドラインは現時点で敗血症に対する血液浄化・エンドトキシン除去療法の日常使用を推奨していない。ただし<strong>これらの推奨は Tigris の報告前に策定されたため、その所見をまだ組み込んでいない</strong>。<strong>Tigris は非選択の患者についてその立場を覆すものではない</strong>。むしろ、<strong>補助的 PMX を考慮しうる、狭くバイオマーカーで定義されたエンドタイプ — 昇圧薬依存の敗血症性ショックかつ多臓器不全かつ EAA 0.60〜0.89 — を同定するものである</strong>。</p>
+<h3>14. 結論（著者による）</h3>
+<p>著者らの結論は3文にまとめられる。</p>
+<ol><li><strong>Tigris は、ポリミキシンB血液吸着によるエンドトキシン除去が、精密に定義された ESS 患者のサブグループにおいて死亡を減らすという、これまでで最も方法論的に厳密なエビデンスを提供する</strong>。</li><li><strong>残された不確実性は主に2点</strong> — 利益の<strong>機序</strong>（最も妥当なのは臓器不全の解除）と、<strong>厳格な組入基準の外に落ちる患者の管理</strong>。</li><li><strong>Tigris は、精密医療が集中治療において方法論的に扱えるものになりつつあることを示す</strong> — バイオマーカーに紐づけ予後的に濃縮した適格基準と、ベイズ流の事前分布とを組み合わせれば、<strong>小さな重症患者集団でも難しい問いに答えを出せる</strong>。この雛形をより広く採用する意思が分野にあるかどうかは、次世代の敗血症試験が向き合わねばならない問いである。</li></ol>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>読むときに外してはいけない前提 <mark class="hl">本稿は独立した批判的吟味ではなく、試験研究者4名による自己解説である</mark>。しかも統計解析者はメーカー（Spectral Medical）から解析の報酬を受け、最終著者は同社の従業員かつ株主である。著者らはこれを冒頭と利益相反欄で明示しており、その透明性自体は評価に値するが、<mark class="hl">「10の問い」の選定と回答の重心が当事者側にあることを差し引いて読む必要がある</mark>。</p>
+</div>
+<p><strong>論点1 — 事前分布の循環性は本当に解消されているか</strong>。事前分布は、全体として陰性だった EUPHRATES の<strong>事後解析で見つかったサブグループ</strong>から作られている。著者は「勝者の呪い」を認め、25%の割引でこれを緩和したと説明するが、<strong>割引率25%に理論的な最適性の主張はない</strong>（著者自身が「25%が形式的に最適だとは主張しない」と書く）。事前分布–データ間の矛盾診断で不整合がなかったことは擁護材料になるが、<strong>サブグループ選択の段階で入り込んだバイアスの大きさそのものを測る手段ではない</strong>。JC では「なぜ50%ではないのか」「重み72%を割った瞬間に28日の結論が95%を割ることの意味」を突いてよい。</p>
+<p><strong>論点2 — 28日と90日でエビデンスの質が違う</strong>。著者自身が明示している。<strong>28日の推論は事前分布の重みに依存し、90日は依存しない</strong>（無情報事前分布でも98%超）。したがって「28日の 95.3%」は借用の産物である度合いが高く、<strong>Tigris のデータ単独が語っているのは主に90日の結果</strong>である。この非対称性は、宣伝的な引用（「有益の確率95.3%」）では消えやすい。逆に言えば、Tigris を支持する側にとっては<strong>90日を前面に出すほうが論理的に強い</strong>。</p>
+<p><strong>論点3 — 「片側の問いである」という主張は妥当か</strong>。Q6 の説明は数学的には完全に正しい。ただし<strong>片側で判断してよい根拠は「臨床的関心が片側だから」という規範的判断</strong>であって、統計から導かれるものではない。PMX には体外循環に伴う害（回路トラブル、抗凝固に伴う出血、カテーテル関連合併症、CRRT 中断）がありうる以上、<strong>害の方向も臨床的関心の対象</strong>である。この論文には有害事象の記載がなく（本報にあるとしても本稿には引かれていない）、<strong>害の側の議論が Q&amp;A の10問に1つも入っていない</strong>のは、10の問いの選び方として指摘できる欠落である。</p>
+<p><strong>論点4 — 機序の説明が循環していないか</strong>。Q7 で著者は「差の拡大は臓器不全の解除で説明でき、生命維持治療の制限は非解消に続くのだから両者は同じことの2つの表れだ」と論じる。これは<strong>非盲検下の治療制限の差という交絡を、生物学的説明に読み替える</strong>構図でもある。著者自身が「仮説生成的」と断っているとおり、<strong>この論法だけでは共介入バイアスを排除できない</strong>。しかも根拠となる数字は<strong>対照群6例・PMX群9例</strong>という極めて小さい分母から出ている（「6例中5例死亡」「9例中6例生存」）。JC ではここが最も脆い箇所である。</p>
+<p><strong>論点5 — 血行動態が動かないことをどう受け取るか</strong>。Q8 の説明（動脈圧は重症度のマーカーであって媒介因子ではない）は、CLOVERS・ARISE FLUIDS の結果と整合し説得力がある。ただし<strong>エンドトキシンが本当に除去されたことを示す薬力学的指標（治療後の EAA の推移、エンドトキシン濃度の低下）が本稿には示されていない</strong>。「血行動態は動かないが死亡は減った」という主張を支えるには、<strong>標的が実際に減ったという証拠</strong>が要る。<strong>血行動態の評価が生存者の Day 0〜3 に限られている</strong>点も、非生存者を除いた選択的な観察である。</p>
+<p><strong>論点6 — 一般化可能性の実務的な帰結</strong>。著者は誠実に「非選択の敗血症性ショックには適用されない」と繰り返す。裏を返せば、<strong>Tigris の適応患者は、あるスクリーニング母集団の 1〜2%、確立した敗血症性ショックに限っても 21%</strong> である。<mark class="hl">この狭さは臨床導入の障壁そのものであり、「EAA を測れる体制」を持たない施設にとっては、この論文の結論は実質的に適用不能である</mark>。本邦では EAA が保険収載されておらず、リムルス法によるエンドトキシン<strong>濃度</strong>測定で代替せざるを得ないが、<strong>EAA が測っているのは好中球の活性化度であって濃度ではない</strong>。この乖離を無視して Tigris を引用することは、この論文自身の論理に反する。</p>
+<p><strong>論点7 — SSC ガイドラインとの緊張</strong>。著者は「Tigris は非選択集団についてガイドラインの立場を覆さない」と明確に述べる。この自制は評価できるが、同時に「ガイドラインは Tigris 前に作られた」と付言しており、<strong>次版での格上げを期待する含意</strong>が読み取れる。GRADE の枠組みで単一の非盲検157例試験（しかも事前分布を借用）がどの程度エビデンスの確実性を押し上げるかは別問題であり、<strong>ネットワークメタ解析が「低い確実性」と判定した状況を Tigris 単独が反転させるとは限らない</strong>。</p>
+<p><strong>論点8 — 答えられていない問い</strong>。10問には入っていないが JC で出すべき問いを挙げる。①有害事象と回路関連合併症の頻度は。②2セッションで足りたことをどう検証したのか（治療後の EAA は下がったのか）。③157例の群別の実数（各群の n、死亡数）はいくつか — 本稿には絶対数がほとんど出てこない。④ソースコントロールの達成割合とタイミングは両群で同等だったか。⑤費用対効果は（EAA 測定＋カラム2本＋体外循環の人的コスト）。⑥追試の計画はあるか、EAA 0.90以上を対象とする用量強化試験は動いているか。</p>
+<h3>16. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ドロトレコギンアルファの敗血症性ショックへの効果（承認後に有効性を確認できず撤回）</td><td>Ranieri VM ら. N Engl J Med. 2012;366:2055–64</td></tr>
+<tr><td>2</td><td>ポリミキシンB血液灌流とエンドトキシン除去の文献レビュー</td><td>Cruz DN, de Cal M, Piccinni P, Ronco C. Contrib Nephrol. 2010;167:77–82</td></tr>
+<tr><td>3</td><td>敗血症性ショックにおけるエンドトキシンの役割</td><td>Kellum JA, Ronco C. Crit Care. 2023;27:400</td></tr>
+<tr><td>4</td><td><strong>EUPHAS</strong> — 腹部敗血症性ショックへの早期ポリミキシンB血液灌流（64例・早期中止）</td><td>Cruz DN ら. JAMA. 2009;301:2445–52</td></tr>
+<tr><td>5</td><td><strong>ABDO-MIX</strong> — 腹膜炎による敗血症性ショックへの早期ポリミキシンB血液灌流（243例・中立）</td><td>Payen DM ら. Intensive Care Med. 2015;41:975–84</td></tr>
+<tr><td>6</td><td><strong>EUPHRATES</strong> — エンドトキシン高値の敗血症性ショックへの標的化ポリミキシンB血液灌流と28日死亡（450例・陰性）</td><td>Dellinger RP ら. JAMA. 2018;320:1455–63</td></tr>
+<tr><td>7</td><td><strong>EUPHRATES 事後解析</strong> — 極端なエンドトキシン血症を伴わない患者での効果（EAA 0.60〜0.89 の窓の起源）</td><td>Klein DJ ら. Intensive Care Med. 2018;44:2205–12</td></tr>
+<tr><td>8</td><td><strong>Tigris 本報</strong> — 多施設・非盲検・ベイズ流・無作為化対照第3相</td><td>Neyra JA ら. Lancet Respir Med. 2026;14:443–52</td></tr>
+<tr><td>9</td><td>エンドトキシン性敗血症性ショックの診断と治療（カラム吸着容量 約10〜20 µg の根拠）</td><td>Foster DM, Kellum JA. Int J Mol Sci. 2023;24:16185</td></tr>
+<tr><td>10</td><td>REMAP-CAP — COVID-19 重症患者への IL-6 受容体拮抗薬（ベイズ流プラットフォーム試験の成功例）</td><td>REMAP-CAP Investigators, Gordon AC ら. N Engl J Med. 2021;384:1491–502</td></tr>
+<tr><td>11</td><td>REMAP-CAP — COVID-19 重症患者へのシンバスタチン</td><td>REMAP-CAP Investigators, Hills TE ら. N Engl J Med. 2023;389:2341–54</td></tr>
+<tr><td>12</td><td>PANTHER 試験（プラットフォーム試験の例）</td><td>panthertrial.org（2026年7月9日閲覧）</td></tr>
+<tr><td>13</td><td>脳内出血に対する早期低侵襲血腫除去の試験（ベイズ流アダプティブ設計の例）</td><td>Pradilla G ら. N Engl J Med. 2024;390:1277–89</td></tr>
+<tr><td>14</td><td>FDA ガイダンス — 医薬品・生物学的製剤の臨床試験におけるベイズ手法の使用</td><td>FDA; 2026</td></tr>
+<tr><td>15</td><td>FDA ガイダンス — 無作為化臨床試験における共変量調整</td><td>FDA; 2024</td></tr>
+<tr><td>16</td><td>FDA ガイダンス — 医療機器臨床試験におけるベイズ統計の使用</td><td>FDA; 2020</td></tr>
+<tr><td>17</td><td>ベイズ解析の意義とは何か</td><td>Goligher EC, Harhay MO. Am J Respir Crit Care Med. 2024;209:485–7</td></tr>
+<tr><td>18</td><td>臨床研究のためのベイズ統計</td><td>Goligher EC, Heath A, Harhay MO. Lancet. 2024;404:1067–76</td></tr>
+<tr><td>19</td><td>重症患者を組み入れる臨床試験における治療効果の指標としての死亡（効果が時間とともに拡大する現象）</td><td>Friedrich JO ら. Crit Care Med. 2023;51:222–30</td></tr>
+<tr><td>20</td><td><strong>CLOVERS</strong> — 敗血症性低血圧への早期の制限的輸液 対 自由な輸液</td><td>NHLBI PETAL Network, Shapiro NI ら. N Engl J Med. 2023;388:499–510</td></tr>
+<tr><td>21</td><td><strong>ARISE FLUIDS</strong> — 早期敗血症性ショックにおける昇圧薬 対 輸液</td><td>ARISE FLUIDS Investigators, Peake SL ら. N Engl J Med. 2026</td></tr>
+<tr><td>22</td><td>重症感染症・敗血症・敗血症性ショックへの血液浄化のネットワークメタ解析（確実性は低いと判定）</td><td>Chen J-J, Lai P-C, Lee T-H, Huang Y-T. Crit Care Med. 2023;51:1777–89</td></tr>
+<tr><td>23</td><td><strong>SSC 2026</strong> — 敗血症・敗血症性ショックの国際ガイドライン</td><td>Prescott HC ら. Intensive Care Med. 2026</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 Tigris が示したのは「PMX が敗血症性ショックに効く」ではなく、<mark class="hl"><strong>EAA 0.60〜0.89 かつ昇圧薬依存 かつ SOFA &gt;11（または MODS &gt;9）という狭いエンドタイプでだけ効いた可能性が高い</strong></mark>、である。しかも<mark class="hl"><strong>28日の「有益確率95.3%」は EUPHRATES 由来の事前分布に依存し（重み72%未満で95%を割る）、事前分布に依存しないのは90日の結果のほうだ</strong></mark>と、研究者自身が書いている。</p>
+<p>当院での行動変容は1つに絞れる — <mark class="hl"><strong>EAA を測れない以上、Tigris を根拠に PMX-DHP を回すことはできない。「難治性ショックだから回す」という反射をやめ、回すなら『ソースコントロール達成または予定＋昇圧薬依存の持続＋多臓器不全』の3条件で絞り、効果判定は血圧ではなく臓器不全の解除で見る</strong></mark>。血行動態は Tigris でも動いていない。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
