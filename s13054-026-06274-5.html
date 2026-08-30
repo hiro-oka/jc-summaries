@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>公開ICUデータベース研究の構造的偏り — 4648本の書誌計量でMIMICが84.6%・中国が65.6%（書誌計量分析・CritCare2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">公開ICUデータベース研究の構造的偏り — 4648本の書誌計量でMIMICが84.6%・中国が65.6%（書誌計量分析・CritCare2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Kokoefer A, Deribe AG, Zimmermann G, et al. Structural imbalances in open-access critical care research: a bibliometric analysis of abstracts from ICU database studies, 2018–2025. Crit Care. 2026. DOI: 10.1186/s13054-026-06274-5</dd><dt>掲載誌</dt><dd>Critical Care（2026-08-19）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1186/s13054-026-06274-5" target="_blank" rel="noopener">doi.org/10.1186/s13054-026-06274-5</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Structural imbalances in open-access critical care research: a bibliometric analysis of abstracts from ICU database studies, 2018–2025</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>臨床プロトコルは何も変わらない</strong>。これは診療の論文ではなく、我々が日々読んでいる「MIMICで◯◯を予測した」系論文の生態系そのものを測った論文である。変わるのは<strong>論文の読み方と、JIPADに関わる立ち位置の説明の仕方</strong>。</li><li><strong>MIMIC由来の予測モデル論文を読むときの既定の姿勢</strong>：この分野の4,648本のうち MIMIC-III/IV が84.6%、米国由来DBが98.1%。MIMIC は Beth Israel Deaconess Medical Center <strong>単施設</strong>のデータであり、治療強度・人工呼吸プロトコル・鎮静慣行・輸血閾値・患者背景はすべて米国の診療文化を反映する。<mark class="hl">当院に外挿する前に、必ず「この閾値・この係数は日本のICUで再現するのか」を問う</mark>。著者らも「独立した構造的に異なるデータセットで検証すると性能が劣化することが繰り返し報告されている」と明記している。</li><li><strong>AUROC 0.798 が相場だと知っておく</strong>：抽出できた1,263本の中央値 AUROC は 0.798（平均0.790、範囲0.511–1.000）、最頻域は 0.75–0.85。<mark class="hl">0.90 を超える非選択ICU死亡予測は、まず情報漏洩・過学習・アウトカム定義の甘さを疑う</mark>。逆に 0.80 前後は「この領域では普通」であって売り文句にならない。</li><li><strong>JIPADを育てる意義がデータで裏づけられた</strong>：欧州3DB（AmsterdamUMCdb・HiRID・SICdb）の合計シェアはわずか1.9%。日本のICUデータベースは本解析の対象6DBにすら入っていない（公開アクセス型ではないため）。中国が65.6%を占める理由の一つとして著者らが挙げるのが「<strong>比較可能な国内ICUデータセットが無いこと</strong>」であり、これは裏返せば <strong>JIPADという国内レジストリを持つ日本の相対的な強み</strong>である。JIPAD×DPC連結のような「日本の診療文化と医療制度を反映した解析」は、この構造的偏りに対する直接の解答になる。</li><li><strong>JIPAD側の戦略示唆</strong>：SICdb がオーストリア中央住民登録と連結して<strong>退院後数年の長期死亡</strong>を扱える点を「MIMIC/eICU に無い独自価値」として著者らが強調している。JIPAD も同じく、DPC連結による<strong>入院前後・退院後の追跡</strong>が MIMIC に対する差別化軸になりうる。「MIMICの日本版」を目指すのではなく、<mark class="hl">MIMICにできないことをやるDB</mark>として位置づけるほうが引用も国際協働も呼び込める。</li><li><strong>院内の研究指導での使い方</strong>：「MIMICで解析して論文を書く」は参入障壁が低く、若手の最初の論文としては有効。ただし本論文が指摘する「パイプラインを一度作れば、バイオマーカーや対象サブグループを差し替えるだけで低コストに次の論文が量産できる」構造にそのまま乗ると、業績は増えても臨床知識は増えない。<mark class="hl">指導するなら「外部検証を最初から設計に入れる」ことを条件にする</mark>（MIMIC で開発 → eICU-CRD または JIPAD で検証、という形）。</li><li><strong>査読・抄録審査を頼まれたときのチェック</strong>：①単一DBのみか、独立データセットで検証しているか ②アウトカムは死亡だけか ③解析コードを公開しているか（先行研究では90%超が解析スクリプトを非公開）。この3点は本論文が field 全体の弱点として名指ししたもので、そのまま査読コメントに使える。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：MIMIC を中心とする公開ICUデータベース（open access database, OAD）が過去10年で集中治療研究を一変させたこと、MIMIC ベース研究が急増していること、外部検証が乏しいことは、個別には指摘されてきた。Kallout らのスコーピングレビュー（JMIR 2025）が4DB・1,307本を2022年8月まで手作業でマッピングしたのが最も近い先行研究。</li><li><strong>Unknown</strong>：MIMIC-IV 公開（2023年 Sci Data 掲載）以降の時期を含め、成人向けOAD全体を横断して、<strong>どのDBが産出を牽引しているか／どの国が恩恵を受けているか／どのML手法と臨床アウトカムが支配的か／引用インパクトと掲載誌の質はどうか／欧州データセットは比例的に貢献しているか</strong>を、ネットワーク解析まで含めて定量化した研究は無かった。</li><li><strong>What's new</strong>：2018–2025年の4,648本を対象に、①年次産出の45倍増（42本→1,907本）②MIMIC-III+MIMIC-IV で全DB帰属の84.6%・米国由来DBで98.1%③中国が65.6%・米国10.6%・欧州合計5.4%④欧州3DBは合計1.9%⑤ロジスティック回帰が38.5%で最頻⑥後ろ向き観察研究67.9%、敗血症の死亡予測が主題⑦AUROC中央値0.798で、AUROCと引用インパクトに意味のある相関なし（Spearman ρ=0.05, p=0.10）を示した。抽出は DeepSeek API による半自動パイプラインで行い、手作業コーディング110本を基準に検証（マクロ平均F1 0.88）。</li><li><strong>Vault内の関連ノートとの対比</strong>：<span class="wl">ICUの公開データベースは敗血症AI研究に耐えるか — MIMIC-IV・eICU-CRD・AmsterdamUMCdbの欠損と用語ゆれ（CCM2026）</span> が「同じ3つのDBの<strong>中身</strong>（欠損・用語ゆれ）が敗血症AI研究に耐えるか」を問うたのに対し、本論文は同じDB群の<strong>外側の生態系</strong>（誰が・どれを・何のために使い、どう引用されているか）を測っている。両者は結論の向きが一致する — 前者は「DBの中身が構造的に不均質だから単一DB由来のモデルは危うい」と言い、本論文は「その単一DBに研究の84.6%が集中している」と言う。合わせて読むと、<mark class="hl">MIMIC由来モデルの外挿リスクは「データ品質」と「研究集中」の二重の理由で高い</mark>。方法論の型としては <span class="wl">湾岸6か国の結核研究30年を書誌計量で地図化する（書誌計量分析・Medicine2024）</span> と同じ書誌計量だが、本論文は国×DB・DB×ML手法の二部グラフまで踏み込んでいる点が新しい。RCTとの対比では <span class="wl">集中治療RCTの数十年史 — ランダム化エビデンスは何を変え、何を正し、何が問いとして残るか（ナラティブレビュー・ICM2026）</span> が「ランダム化が何を変えたか」を語るのに対し、本論文は「後ろ向きDB研究が何を増やしたか（そして知識を増やしたとは限らない）」を語る補完関係にある。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 公開ICUデータベースを使った研究は2018年の42本から2025年の1,907本へ<strong>45倍</strong>に増えたが、その中身は <strong>MIMIC-III/IV に84.6%・米国由来DBに98.1%・中国に65.6%</strong>が集中し、後ろ向き観察デザイン（67.9%）でロジスティック回帰（38.5%）を使い敗血症の死亡を予測する、という<strong>きわめて均質な塊</strong>になっている。</p>
+</div>
+<ul><li>対象は PubMed と Web of Science から抽出した2018–2025年の原著論文 <strong>4,648本</strong>。6つの公開成人ICUデータベース（MIMIC-III、MIMIC-IV、eICU-CRD、AmsterdamUMCdb、HiRID、SICdb）のいずれかをタイトルまたは抄録で言及したもの。</li><li>年次論文数は 42（2018）→130→151→330→483→585→1,010→<strong>1,907（2025）</strong>。2021年以降に非線形の加速があり、MIMIC-IV の普及と時期的に一致する。</li><li>DB帰属（多ラベル、計4,618件）は <strong>MIMIC-IV 2,520件（54.6%）／MIMIC-III 1,386件（30.0%）／eICU-CRD 624件（13.5%）</strong>。欧州3DBは AmsterdamUMCdb 51件（1.1%）、HiRID 19件（0.4%）、SICdb 18件（0.4%）で<strong>合計1.9%</strong>。</li><li>国別は <strong>中国3,048本（65.6%）</strong>、米国493本（10.6%）、韓国64本（1.4%）、ドイツ60本（1.3%）、英国56本（1.2%）。欧州合計で約5.4%。</li><li>ML手法は帰属3,553件中、<strong>ロジスティック回帰1,369件（38.5%）</strong>、ニューラルネットワーク553件（15.6%）、勾配ブースティング490件（13.8%）、ランダムフォレスト341件（9.6%）、LASSO 312件（8.8%）。強化学習はわずか35本。</li><li>研究デザインは後ろ向き観察3,154本（67.9%）、予測モデリング1,682本（36.2%、後ろ向きと重複）、意思決定支援302本（6.5%）、DB特性記述77本（1.7%）。</li><li>臨床トピックは<strong>死亡予測2,416本（52.0%）</strong>が最多、疾患では敗血症965本（20.8%）、AKI 563本（12.1%）。死亡×敗血症の共起が639本で最大クラスタ。</li><li>引用は中央値5.0回／論文（年あたり1.50回）。76.4%がオープンアクセス、49.3%が SCImago Q1 誌。<strong>AUROC と引用インパクトに意味のある相関なし</strong>（Spearman ρ=0.05、p=0.10）。</li><li>AUROC を抽出できた1,263本の中央値は <strong>0.798</strong>（平均0.790、範囲0.511–1.000）。DB間で臨床的に意味のある差は無かった。</li><li>コホート規模の中央値は <strong>2,684例</strong>（IQR 1,043–7,473）。500例未満の疾患サブグループから、敗血症のように5万例を超える「DBほぼ全体」まで右に大きく裾を引く。</li><li>結論として著者らは3つの優先課題を挙げる：<strong>(i) 予測モデル論文の標準としての系統的な複数データセット外部検証、(ii) 訓練・国際協働・資金誘導による欧州OADの普及、(iii) 死亡・敗血症・ロジスティック回帰というパラダイムを超えたトピックの多様化</strong>（長期アウトカム、臨床意思決定支援、稀な症候群）。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この分野の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>公開アクセス型ICUデータベース（open access database, OAD）</strong>とは、実際のICU入室患者の電子カルテ由来データを匿名化し、データ利用契約（data use agreement）を結べば世界中の誰でもダウンロードして解析できる形で公開したデータセットのことである。バイタル、人工呼吸器設定、検査値、投薬記録、看護記録などが患者単位・時系列で入っている。</p>
+<p>本論文が扱う6つは次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>略称</th><th>正式名・出自</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td>MIMIC-III</td><td>Medical Information Mart for Intensive Care III（MIT／Beth Israel Deaconess Medical Center、2016年公開）</td><td>最も長く使われてきた標準データセット。単施設・米国</td></tr>
+<tr><td>MIMIC-IV</td><td>同 IV（2023年 Sci Data 掲載、v3.1 は2024年10月11日公開）</td><td>救急部門・波形・放射線をモジュール分割。技術的な参入障壁を大きく下げた</td></tr>
+<tr><td>eICU-CRD</td><td>eICU Collaborative Research Database（2018年公開）</td><td>米国の<strong>多施設</strong>遠隔ICUネットワーク由来。MIMIC の単施設性を補う位置づけ</td></tr>
+<tr><td>AmsterdamUMCdb</td><td>オランダ Amsterdam UMC（2021年公開）</td><td>欧州で最も情報量の豊かな集中治療データセットの一つ</td></tr>
+<tr><td>HiRID</td><td>High time-resolution ICU dataset（スイス、2021年公開）</td><td><strong>時間解像度が突出</strong>。生理学的信号解析に向く</td></tr>
+<tr><td>SICdb</td><td>Salzburg Intensive Care Database（オーストリア、2023年公開、v1.0.8 は2024年9月）</td><td>オーストリア中央住民登録と連結し、<strong>退院後数年の長期死亡</strong>まで追える。MIMIC・eICU に無い機能</td></tr>
+</tbody></table></div>
+<p><strong>書誌計量分析（bibliometrics）</strong>とは、個々の研究の科学的内容を統合するのではなく、論文数・引用関係・著者や国のネットワークといった「研究活動そのもののパターン」を定量的に測って研究領域の構造と動態を描く手法である。系統的レビューが「何が分かったか」を答えるのに対し、書誌計量は「誰が・何を・どれくらい・どう繋がって研究しているか」を答える。</p>
+<p><strong>AUROC</strong>（area under the receiver operating characteristic curve、ROC曲線下面積）は予測モデルの<strong>識別能</strong>の指標で、0.5がコイン投げ、1.0が完全。ICU死亡予測では0.75–0.85が典型的な範囲。識別能が高くても<strong>較正</strong>（予測確率が実際の発生率と合っているか）が良いとは限らない点に注意。</p>
+<p><strong>SCImago Journal Rank（SJR）四分位</strong>は掲載誌の被引用に基づく格付けで、分野内で上位25%が Q1。本論文では Impact Factor が全コーパス分は入手できなかったため、掲載誌の質の代理指標として使われている。</p>
+<p><strong>外部検証（external validation）</strong>とは、あるデータで作ったモデルを、<strong>別の独立したデータセット</strong>で性能評価すること。同じデータ内で分割する内部検証と違い、施設・国・診療文化が変わっても通用するかを試せる。本論文の中心的な問題意識はここにある。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>ICUは現代医療で最もデータの豊かな環境である。重症患者の連続モニタリングは、バイタル、人工呼吸器パラメータ、検査値、投薬記録、看護記録にわたる膨大な構造化・非構造化データを生む。計算資源の増大、機械学習の進歩、電子カルテの普及という3つの流れが合流し、これらのデータストリームが大規模臨床研究の資源に変わった。大規模ICUデータセットを使った後ろ向き観察研究は、稀な事象、治療のばらつき、経時的傾向、サブグループ解析といった、前向きRCTの手が届かない問いを扱える。</p>
+<p>この文脈での画期は、<strong>公開・匿名化されたICUデータベースの登場</strong>だった。2000年代初頭に MIT で PhysioNet を通じて公開された MIMIC（Medical Information Mart for Intensive Care）に始まり、データ利用契約のもとでキュレーション済みの集中治療データを共有するという発想は、複数の国際データセットへと広がった。現在、研究者は MIMIC-III、MIMIC-IV、eICU-CRD、AmsterdamUMCdb、HiRID、SICdb にアクセスできる。これらの OAD は集中治療医学と臨床情報学における数千本の論文の実証的基盤となっている。</p>
+<p>先行研究として最も近いのは Kallout らのスコーピングレビュー（J Med Internet Res 2025;27:e57263）で、2022年8月までに公開された4DB・<strong>1,307本</strong>を、2名の査読者による手作業スクリーニングとデータ抽出で系統的にマッピングした。ただしネットワーク解析や引用インパクト・掲載誌の質といった書誌計量指標には及んでいない。他の書誌計量研究は MIMIC ベース研究の急増を記述し、方法論研究は独立ICUデータベース間の外部検証の乏しさを指摘してきたが、いずれも部分像にとどまる。</p>
+<p>結果として、<strong>現存する成人ICU向けOAD全体</strong>を、<strong>MIMIC-IV 以降の時期</strong>まで含めて、<strong>協働ネットワーク・引用インパクト・掲載誌特性</strong>という構造次元とともに包括的に扱った書誌計量分析は存在しなかった。以下の問いが未解決のまま残っていた。</p>
+<div class="tw"><table>
+<thead><tr><th>未解決の問い</th><th>本研究の対応する目的</th></tr></thead>
+<tbody>
+<tr><td>どのOADが論文産出を牽引し、それはどう推移したか</td><td>(i) 全体および個別DBごとの時系列的な産出の増加を定量化する</td></tr>
+<tr><td>どの国・どの施設がOADベース研究の恩恵を最も受けているか</td><td>(ii) 地理的分布と国際協働のパターンを特徴づける</td></tr>
+<tr><td>どのML手法と臨床エンドポイントが文献を支配しているか</td><td>(iii) ML手法と研究デザインの分布を解析する／(iv) 支配的な臨床研究テーマを同定する</td></tr>
+<tr><td>異なる医療システム・患者集団を代表する欧州データセットは、比例的に貢献しているか</td><td>(v) 報告されたモデル性能（AUROC）とコホート規模を副次エンドポイントとして探索する</td></tr>
+</tbody></table></div>
+<p>著者らは本解析を、「OADベース集中治療研究の現状と将来軌道を評価するための、データ駆動のベースライン」と位置づけている。</p>
+<h3>3. 方法（Methods）</h3>
+<h4>3.1 デザインと報告基準</h4>
+<p>定量的横断書誌計量分析。<strong>BIBLIO報告フレームワーク</strong>（Zupic &amp; Cater, Organ Res Methods 2015）と、bibliometrix ツールに付随する <strong>Aria &amp; Cuccurullo の方法論的勧告</strong>（J Informetr 2017）に従う。この解析は研究領域を定量的に地図化する — 出版パターン、引用関係、著者・国のネットワークを測る — ものであり、個々の研究の科学的内容を統合するものではなく、領域の構造とダイナミクスを特徴づける。患者データへのアクセスは無く、倫理審査は不要とされた。</p>
+<p>著者らは重要な自己限定を明示している。組み入れスクリーニングが構造化データベースクエリとタイトル／抄録レベルの抽出に依拠し、全文の2名査読者スクリーニングを行っていないため、<strong>本研究は完全な系統的レビューの PRISMA 基準をすべて満たさず、一貫して「抄録の書誌計量分析」として報告される</strong>。</p>
+<h4>3.2 対象データベースの選定</h4>
+<p>検索戦略に含めるデータベースは、公開されている成人ICUデータセットに関する<strong>2つの先行系統的レビュー</strong>に従って選定された。</p>
+<div class="tw"><table>
+<thead><tr><th>先行レビュー</th><th>同定されたDB</th></tr></thead>
+<tbody>
+<tr><td>Sauer et al. 2022（Crit Care Med 2022;50:e581-8）</td><td>患者レベルの公開成人集中治療DB <strong>4つ</strong> — AmsterdamUMCdb、eICU-CRD、HiRID、MIMIC-IV</td></tr>
+<tr><td>Jagesar et al. 2025（J Crit Care 2025;90:155205、同一グループ・共著者一部重複による更新版）</td><td>公開成人ICUデータセット <strong>7つ</strong> — 上記に加えて SICdb（v1.0.8、2024年9月、ザルツブルク大学病院）、NWICU（Northwestern ICU database、v0.1.0、2024年11月、シカゴ）、ZFPH（Zigong Fourth People's Hospital 感染症患者DB、v1.1、2022年、四川）</td></tr>
+</tbody></table></div>
+<p>Jagesar らはさらに2つの候補DBを除外している。<strong>RICD</strong>（Russian Intensive Care Dataset）は無償で利用できない（ライセンス費用が約21,500ユーロ）ため、浙江省人民医院の中国重症DBは入院識別子に未解決の技術的問題があったためである。</p>
+<p>両レビューで同定された7DBのうち、本解析は <strong>MIMIC-III、MIMIC-IV、eICU-CRD、AmsterdamUMCdb、HiRID、SICdb の6つ</strong>を含めた。NWICU と ZFPH の除外理由は2つ。</p>
+<ul><li><strong>NWICU</strong> は2024年11月に公開されたばかりで、検索が2025年末で締め切られた本コーパスでは検出される見込みが薄い。</li><li><strong>ZFPH</strong> は中国の単一病院の感染症患者のみ（n=2,740、2019–2020年）をカバーし、一般成人ICUデータベースというより症候群限定データセットである。加えて、ZFPH を含めると MIMIC-IV のような大規模一般入室DBに対して一般ICU入室動向のベースライン分母を不適切に歪め、実際の研究量を反映するのではなくトピック分布解析を交絡させてしまう。</li></ul>
+<h4>3.3 組み入れ・除外基準</h4>
+<div class="tw"><table>
+<thead><tr><th></th><th>基準</th></tr></thead>
+<tbody>
+<tr><td>組み入れ</td><td>(i) 原著雑誌論文（PubMed の Journal Article 出版タイプ）／(ii) 対象6OADの少なくとも1つをタイトルまたは抄録で言及／(iii) ICU・intensive care・critical care のいずれかの語で集中治療の文脈が示されている／(iv) 2018–2025年の出版／(v) PubMed および／または Web of Science に収載</td></tr>
+<tr><td>除外</td><td>(i) レビュー・エディトリアル・レター・コメンタリー／(ii) タイトル・抄録にOADの言及が無い／(iii) OADを用いた一次データ解析を伴わない純粋な方法論論文／(iv) 解析期間外の出版／(v) 査読を経ていない学会抄録・プレプリント</td></tr>
+</tbody></table></div>
+<p>解析開始を2018年に置いた理由は、MIMIC-III 公開（2016年）の後、かつ eICU-CRD 公開（2018年）と重なる時期であり、<strong>対象となる主要DBがすべて公開され、広範な二次利用が始まった時点</strong>にあたるためである。</p>
+<h4>3.4 検索戦略</h4>
+<p>PubMed/MEDLINE と Web of Science（WoS）を2018年1月〜2025年12月で検索。PubMed は Entrez API 経由で、DB識別子・ICU文脈フィルタ・出版タイプフィルタを Boolean で組み合わせた。実際のクエリは次のとおり。</p>
+<ul><li>PubMed：<code>(("MIMIC"[Title/Abstract] OR "Medical Information Mart for Intensive Care"[Title/Abstract]) OR ("eICU"[Title/Abstract]) OR ("SICdb"[Title/Abstract] OR "Salzburg Intensive Care Database"[Title/Abstract]) OR ("AmsterdamUMCdb"[Title/Abstract]) OR ("HiRID"[Title/Abstract])) AND ("ICU"[Title/Abstract] OR "Intensive Care"[Title/Abstract]) AND ("Journal Article"[Publication Type]) AND 2018/01/01:2025/12/31[dp]</code></li><li>WoS：<code>(ALL=(MIMIC) OR ALL=("Medical Information Mart") OR ALL=(SICdb) OR ALL=("Salzburg Intensive Care Database") OR ALL=(AmsterdamUMCdb) OR ALL=(HiRID)) AND (ALL=(ICU) OR ALL=(intensive care) OR ALL=(critical care))</code></li></ul>
+<p>WoS のクエリには日付フィルタが組み込まれていないため、解析期間は WoS のインターフェース側で適用した。WoS のデータセットは主に2025年10月までをカバーし、2025年後半の early access 論文が少数含まれる。PubMed のデータセットは2026年4月まで伸びるため、<strong>2026年に割り当てられた約55本は年次解析から除外</strong>して比較可能性を保った。両DBの結果を XML（PubMed）と BibTeX（WoS）で出力し、統合して主に DOI で重複排除（フォールバックとしてタイトル＋年のマッチング）。<strong>最終コーパスは 4,648本のユニーク論文</strong>。</p>
+<p>著者らは検索の非対称性を自ら指摘している。PubMed はタイトル／抄録を検索したのに対し、WoS は ALL フィールド（キーワードや参考文献も索引される）を検索しており、この広いスコープと「MIMIC」というフリーテキスト語の使用が偽陽性レコードを招きうる。これは集中治療の文脈語を必須としたことと、対象DBが同定できないレコードにフラグを立てる後続のAIスクリーニング段階で緩和された。Embase は検索していない。スクリーニングは独立した完全手作業レビューではなく自動パイプラインに依拠したため、<strong>重複排除前ヒット数・除外重複・スクリーニング済みレコードを示す PRISMA型フロー図は本デザインには適用されない</strong>。</p>
+<p>重複排除以外に、対応する解析の前に<strong>3つの事前規定されたフィールドレベルのデータ品質フィルタ</strong>が適用された。</p>
+<div class="tw"><table>
+<thead><tr><th>フィルタ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>AUROC</td><td>数値としてパースできない、または論理的範囲（0.50–1.00）を外れる値は AUROC 解析から除外</td></tr>
+<tr><td>患者数</td><td>報告患者数が10未満のものは抽出エラーとみなしコホート規模解析から除外</td></tr>
+<tr><td>国</td><td>国が確定できないレコードは地理的可視化から除外</td></tr>
+</tbody></table></div>
+<h4>3.5 データ抽出 — 半自動AIパイプライン</h4>
+<p>古典的な書誌計量メタデータ（著者、所属、掲載誌、被引用数）はDBエクスポートから直接抽出した。一方、<strong>内容に依存する変数</strong>（使用DB、ML手法、研究デザイン、臨床アウトカム、AUROC、患者数）は <strong>DeepSeek API（DeepSeek-V2、DeepSeek AI、中国）</strong> を使った半自動パイプラインで抽出された。多ラベルの True/False フィールドを持つ構造化JSONスキーマにより、複数DBや複数ML手法の併用が漏れなく捕捉される（例：MIMIC-IV と eICU-CRD の両方を使う論文は両方のフィールドが True になる）。地理的割当は、全著者の所属文字列を1つのテキストブロックに結合した別のAPI呼び出しで行った。</p>
+<p>実際に使われたシステムプロンプトも論文中に開示されている。主抽出は「与えられた論文をレビューし、json [field_name:answer, ...] で問い合わせに最も当てはまる回答を返す。偽または null ならフィールドをスキップする。回答選択肢が括弧内にある場合は厳密にそれに従う。db_used については各データベースを明示的に true か false でマークする」という趣旨。地理特化の二次プロンプトは「タイトル・抄録・所属に基づいて研究者の主たる国または研究実施地を抽出し、キー country を持つ有効なJSON形式のみで応答する。国が合理的に判定できない場合は null を出力する。証拠なしに推測しない」という趣旨である。</p>
+<p>いずれも DeepSeek-V2 を DeepSeek API 経由で使用したが、<strong>モデルの temperature・バッチ処理・レート制限パラメータは抽出時点で記録されておらず、著者らはこれを厳密な再現性に対する限界として明示的に認めている</strong>。抽出パイプライン全体は Supplementary Material S1 として報告されている。</p>
+<p>抽出は、全文が入手可能な場合でも<strong>タイトルと抄録に限定</strong>された。理由は、長い入力テキストに伴う LLM の誤読リスクを減らすためである（Liu らの "lost-in-the-middle" 効果、Trans Assoc Comput Linguist 2024）。数値フィールドは自動品質フィルタを通し、AUROC は 0.50–1.00 の外なら NaN に、報告患者数が10未満なら抽出アーチファクトとして除外した。<strong>AUROC の抽出は抄録中に最初に現れた数値を採用</strong>している。</p>
+<h4>3.6 抽出信頼性の検証</h4>
+<p>抽出の信頼性を定量化するため、PubMed 由来・WoS 由来の両方から<strong>無作為に110本</strong>を抽出し、人間のレビュアーが全構造化フィールドについて独立にコーディングして DeepSeek 出力と比較した。各フィールドについて報告されたのは次の3指標である。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td>カバレッジ</td><td>手作業で値が入ったフィールドのうち、DeepSeek も値を返した割合</td></tr>
+<tr><td>厳密精度（strict accuracy）</td><td>手作業で値が入った全フィールドのうち、手作業基準と完全一致した割合</td></tr>
+<tr><td>緩和精度（relaxed accuracy）</td><td>多ラベルフィールドでの部分的なラベル重複、AUROC・患者数での近い数値許容を認めた一致（丸めや部分値報告を考慮）</td></tr>
+</tbody></table></div>
+<h4>3.7 引用・掲載誌指標</h4>
+<p>被引用数、オープンアクセス状況、掲載誌レベルの質指標は、<strong>OpenAlex API</strong> 経由で全コーパスについて取得し、掲載誌名と出版年で <strong>SCImago Journal &amp; Country Rank</strong> データベースに突合した。</p>
+<ul><li>OpenAlex から：総被引用数、年あたり被引用（被引用数÷OpenAlex割当出版年からの経過年数）、オープンアクセスフラグとカテゴリ（gold／green／hybrid／bronze／diamond／closed）、DOAJ 収載状況</li><li>SCImago から：突合した出版年における掲載誌の SJR 四分位、SJR値、2年被引用／論文、H-index</li></ul>
+<p>原理的に1誌が主題カテゴリをまたいで複数の四分位に該当しうるため、その誌・年について SCImago が報告する<strong>最良の四分位値</strong>を採用した。Journal Impact Factor 自体は全コーパス分が入手できず報告されていない。SCImago 由来指標が一貫して掲載誌の質の代理指標として使われている。<strong>1,197本（25.8%）は SCImago の誌・年レコードに突合できず、四分位層別解析から除外</strong>された。</p>
+<h4>3.8 統計・ネットワーク解析</h4>
+<p>記述解析と性能解析は R（v4.3、bibliometrix v4.0.1）と Python で実施。算出された指標は年次論文数（全体およびDB別）、国レベルの産出、ML手法の頻度である。<strong>NetworkX と Pyvis を用いて4つのネットワーク解析</strong>を構築した。</p>
+<div class="tw"><table>
+<thead><tr><th>ネットワーク</th><th>型</th><th>何を見るか</th></tr></thead>
+<tbody>
+<tr><td>(i) DB × ML手法 共起</td><td>二部グラフ</td><td>どのDBでどの手法が使われるか</td></tr>
+<tr><td>(ii) 国 × DB</td><td>二部グラフ</td><td>どの国がどのDBを使うか</td></tr>
+<tr><td>(iii) 国際共著</td><td>一部グラフ</td><td>国どうしの協働構造</td></tr>
+<tr><td>(iv) 臨床トピック共起</td><td>—</td><td>どの臨床テーマが一緒に扱われるか</td></tr>
+</tbody></table></div>
+<p>ノードサイズは言及頻度に対して対数スケール、エッジ重みは共起数を反映。大陸レベルの集約は標準化された国→大陸辞書を用いた。</p>
+<h3>4. 結果 — 全体の伸びと抽出パイプラインの妥当性</h3>
+<p>最終コーパスは2018–2025年に出版された <strong>4,648本</strong>の原著論文。年次論文数は次のとおり増加した。</p>
+<div class="tw"><table>
+<thead><tr><th>年</th><th>総数</th><th>MIMIC-IV</th><th>MIMIC-III</th><th>eICU-CRD</th><th>欧州OAD計</th></tr></thead>
+<tbody>
+<tr><td>2018</td><td>42</td><td>—</td><td>39</td><td>5</td><td>0</td></tr>
+<tr><td>2019</td><td>130</td><td>3</td><td>113</td><td>19</td><td>1</td></tr>
+<tr><td>2020</td><td>151</td><td>14</td><td>125</td><td>22</td><td>1</td></tr>
+<tr><td>2021</td><td>330</td><td>74</td><td>230</td><td>47</td><td>4</td></tr>
+<tr><td>2022</td><td>483</td><td>228</td><td>205</td><td>63</td><td>10</td></tr>
+<tr><td>2023</td><td>585</td><td>381</td><td>188</td><td>68</td><td>22</td></tr>
+<tr><td>2024</td><td>1,010</td><td>374</td><td>267</td><td>195</td><td>32</td></tr>
+<tr><td>2025</td><td>1,907</td><td>1,446</td><td>219</td><td>205</td><td>18</td></tr>
+</tbody></table></div>
+<p>7年間で <strong>45倍</strong>の増加である（Table 1／欧州OADは AmsterdamUMCdb・HiRID・SICdb の合算、多ラベル帰属あり）。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 2018–2025年の年次論文産出。青い縦棒が年ごとの総論文数（左軸）、色付きの折れ線が MIMIC-IV・MIMIC-III・eICU-CRD それぞれのDB別論文数（右軸）を示す。2021年以降に明瞭な変曲点があり、MIMIC-IV が広く利用可能になった時期と一致する。年次の値は PMID から年への近似的割当に基づく。（本ノートには図の画像を掲載していない — accepted manuscript 版PDFに図の画像が含まれておらず、かつライセンスが CC BY-NC-ND のため改変・再配布に制限がある）</p>
+</div>
+<p>AI抽出パイプラインは手作業コーディングした110本の参照標準に対して検証され、フィールド横断で<strong>マクロ平均 precision 0.88、recall 0.89、F1 0.88</strong> を得た。中核となる構造変数は信頼性高く抽出された（F1：使用DB 0.91、ML手法 0.90、研究クラス 0.95、患者数 0.90）が、<strong>AUROC が最弱のフィールド（F1 0.77）</strong>であり、これが AUROC を探索的・副次エンドポイントとして扱う根拠になっている。</p>
+<p>コーパスの成長軌跡は非線形で、2021年以降に指数関数的加速を示した。著者らはこの変曲点が <strong>MIMIC-IV Version 3.1 の広範な利用可能化（2024年10月11日公開）</strong> と、COVID-19 パンデミック後のAI駆動医学研究の全般的な活発化 — 大規模臨床データセットによる迅速なエビデンス生成の価値への世界的な認識の高まり — に時期的に一致すると述べている。</p>
+<p>なお2018年時点で MIMIC-III はすでに42本の研究産出を生んでいた。つまり<strong>真のゼロベースラインではない</strong>点は、45倍という数字を読むうえで押さえておくべきである。</p>
+<h3>5. 結果 — データベース帰属の分布</h3>
+<p>4,648本にわたって、合計 <strong>4,618件のDB帰属</strong>が同定された（多ラベルのため、複数DBの併用により総和がコーパス規模を超えうる／実際にはやや下回っている）。</p>
+<div class="tw"><table>
+<thead><tr><th>データベース</th><th>帰属数（n）</th><th>シェア（%）</th></tr></thead>
+<tbody>
+<tr><td>MIMIC-IV</td><td>2,520</td><td>54.6</td></tr>
+<tr><td>MIMIC-III</td><td>1,386</td><td>30.0</td></tr>
+<tr><td>eICU-CRD</td><td>624</td><td>13.5</td></tr>
+<tr><td>AmsterdamUMCdb</td><td>51</td><td>1.1</td></tr>
+<tr><td>HiRID</td><td>19</td><td>0.4</td></tr>
+<tr><td>SICdb</td><td>18</td><td>0.4</td></tr>
+</tbody></table></div>
+<p>（Table 2、n=4,618帰属、多ラベル）</p>
+<p><strong>米国由来DBの合計は全帰属の98.1%</strong>。欧州3DBの合計はわずか <strong>1.9%</strong> である。</p>
+<p>時系列でみると <strong>MIMIC-III から MIMIC-IV への漸進的な置換</strong>が進んでいる。MIMIC-IV は2022年に年次帰属で初めて MIMIC-III を上回り、2025年にはその年の論文の <strong>75.8%</strong> を占めた。eICU-CRD は解析期間を通じて緩やかだが着実な増加を示した。欧州DB（AmsterdamUMCdb 2021年、HiRID 2021年、SICdb 2023年に初出）は絶対数が低いまま推移している。</p>
+<h3>6. 結果 — 地理的分布と国際協働</h3>
+<p>地理的解析は、<strong>科学的産出の極端な集中</strong>を明らかにした。</p>
+<div class="tw"><table>
+<thead><tr><th>順位</th><th>国</th><th>論文数（n）</th><th>シェア（%）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>中国</td><td>3,048</td><td>65.6</td></tr>
+<tr><td>2</td><td>米国</td><td>493</td><td>10.6</td></tr>
+<tr><td>3</td><td>韓国</td><td>64</td><td>1.4</td></tr>
+<tr><td>4</td><td>ドイツ</td><td>60</td><td>1.3</td></tr>
+<tr><td>5</td><td>英国</td><td>56</td><td>1.2</td></tr>
+<tr><td>6</td><td>カナダ</td><td>43</td><td>0.9</td></tr>
+<tr><td>7</td><td>オランダ</td><td>40</td><td>0.9</td></tr>
+<tr><td>8</td><td>台湾</td><td>39</td><td>0.8</td></tr>
+<tr><td>9</td><td>フランス</td><td>31</td><td>0.7</td></tr>
+<tr><td>10</td><td>スペイン</td><td>28</td><td>0.6</td></tr>
+</tbody></table></div>
+<p>（Table 3、割合はコーパス総数 n=4,648 に対する。11位以下は各国0.6%未満）</p>
+<p>中国の伸びの軌跡はとりわけ顕著で、2020年以前の控えめな寄与から、<strong>2021年以降ほぼ指数関数的に成長</strong>し、分野全体の加速を牽引した。対照的に米国の産出はより緩やかに増え、欧州の産出は着実に増えたものの同等の段階的加速は示さなかった。欧州諸国の合計はコーパス全体の約 <strong>5.4%</strong> である。</p>
+<p>国際共著ネットワーク（Figure 2）では、最も頻繁な二国間協働は <strong>中国–米国</strong>だった。ただし中国の寄与のうち国際共著論文の割合は比較的低く、<strong>おおむね国内完結型の研究構造</strong>であることが示唆される。</p>
+<p>国×DB のネットワークでは、コーパス全体で最も強い結合が <strong>中国 → MIMIC-IV（共起2,037件、コーパス全体の43.8%）</strong>、次いで中国 → MIMIC-III（816件）、米国 → MIMIC-IV（336件）だった。欧州諸国、とくにオランダとドイツは、欧州DBを利用する傾向が相対的に高かった。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 上位20か国の国際共著ネットワーク（共有論文数2件以上のエッジを表示）。ノードサイズは論文数に対して対数スケール。中国（赤）と米国（青）が中心のハブを形成し、欧州諸国（緑）は英国・ドイツ・オランダの周囲にクラスタを作る。太い赤のエッジが支配的な中国–米国の協働を示す。</p>
+</div>
+<h3>7. 結果 — 機械学習手法と研究デザイン</h3>
+<p>4,648本のうち <strong>1,572本（33.8%）</strong>が同定可能なML手法を少なくとも1つ含み、合計 <strong>3,553件の手法帰属</strong>が得られた。</p>
+<div class="tw"><table>
+<thead><tr><th>ML手法</th><th>帰属数（n）</th><th>シェア（%）</th></tr></thead>
+<tbody>
+<tr><td>ロジスティック回帰</td><td>1,369</td><td>38.5</td></tr>
+<tr><td>ニューラルネットワーク</td><td>553</td><td>15.6</td></tr>
+<tr><td>勾配ブースティング</td><td>490</td><td>13.8</td></tr>
+<tr><td>ランダムフォレスト</td><td>341</td><td>9.6</td></tr>
+<tr><td>LASSO回帰</td><td>312</td><td>8.8</td></tr>
+<tr><td>サポートベクターマシン</td><td>151</td><td>4.3</td></tr>
+<tr><td>線形回帰</td><td>109</td><td>3.1</td></tr>
+<tr><td>決定木</td><td>106</td><td>3.0</td></tr>
+<tr><td>k近傍法</td><td>87</td><td>2.4</td></tr>
+</tbody></table></div>
+<p><strong>強化学習は、臨床意思決定支援における理論的な重要性にもかかわらず、わずか35本</strong>でしか同定されなかった。</p>
+<p>中核ML手法以外では、生存時間解析の頻度の高さを反映して <strong>Cox比例ハザード回帰</strong>が目立ち、後ろ向きコホートの交絡に対処するための<strong>傾向スコア法</strong>も併せて多く用いられていた。</p>
+<p>DB × ML手法の二部ネットワークでは、単独で最も強い結合が <strong>MIMIC-IV × ロジスティック回帰（830件）</strong>だった。</p>
+<div class="tw"><table>
+<thead><tr><th>順位</th><th>データベース</th><th>ML手法</th><th>共起数（n）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>MIMIC-IV</td><td>ロジスティック回帰</td><td>830</td></tr>
+<tr><td>2</td><td>MIMIC-III</td><td>ロジスティック回帰</td><td>420</td></tr>
+<tr><td>3</td><td>MIMIC-IV</td><td>勾配ブースティング</td><td>301</td></tr>
+<tr><td>4</td><td>MIMIC-III</td><td>ニューラルネットワーク</td><td>300</td></tr>
+<tr><td>5</td><td>MIMIC-IV</td><td>LASSO回帰</td><td>249</td></tr>
+<tr><td>6</td><td>eICU-CRD</td><td>ロジスティック回帰</td><td>240</td></tr>
+<tr><td>7</td><td>MIMIC-IV</td><td>ニューラルネットワーク</td><td>192</td></tr>
+<tr><td>8</td><td>MIMIC-IV</td><td>ランダムフォレスト</td><td>188</td></tr>
+<tr><td>9</td><td>MIMIC-III</td><td>勾配ブースティング</td><td>183</td></tr>
+<tr><td>10</td><td>MIMIC-III</td><td>ランダムフォレスト</td><td>145</td></tr>
+</tbody></table></div>
+<p>（Table 4、二部共起ネットワークからの上位10ペア。多ラベル設計のため1本の論文が複数ペアに寄与しうる）</p>
+<p><strong>MIMIC-III のほうがニューラルネットワークとの結合が相対的に強い</strong>（300件、MIMIC-IV の192件に対して）ことについて著者らは、当時支配的だった MIMIC-III の上で高度な深層学習アーキテクチャが開発され、その後 MIMIC-IV が広く使われるようになった移行期を反映している可能性を挙げている。</p>
+<p>研究デザインの分類は次のとおり。</p>
+<div class="tw"><table>
+<thead><tr><th>デザイン</th><th>本数</th><th>割合（%）</th></tr></thead>
+<tbody>
+<tr><td>後ろ向き観察研究</td><td>3,154</td><td>67.9</td></tr>
+<tr><td>予測モデリング</td><td>1,682</td><td>36.2</td></tr>
+<tr><td>意思決定支援</td><td>302</td><td>6.5</td></tr>
+<tr><td>データベース特性記述</td><td>77</td><td>1.7</td></tr>
+</tbody></table></div>
+<p>これらのカテゴリは実質的に重なる（大半の予測研究は同時に後ろ向きでもあるため、合計は100%を超える）。</p>
+<h3>8. 結果 — 臨床研究テーマ</h3>
+<p>臨床研究トピックでは、<strong>死亡予測が支配的</strong>で 2,416本（コーパスの52.0%）に現れた。</p>
+<div class="tw"><table>
+<thead><tr><th>臨床トピック</th><th>本数</th><th>割合（%）</th></tr></thead>
+<tbody>
+<tr><td>死亡予測</td><td>2,416</td><td>52.0</td></tr>
+<tr><td>敗血症</td><td>965</td><td>20.8</td></tr>
+<tr><td>急性腎障害（AKI）</td><td>563</td><td>12.1</td></tr>
+<tr><td>一般ICUアウトカム・予後</td><td>311</td><td>6.7</td></tr>
+<tr><td>ICU在室日数</td><td>182</td><td>3.9</td></tr>
+<tr><td>心不全</td><td>160</td><td>3.4</td></tr>
+<tr><td>急性冠症候群</td><td>124</td><td>2.7</td></tr>
+<tr><td>急性膵炎</td><td>119</td><td>2.6</td></tr>
+<tr><td>人工呼吸</td><td>96</td><td>2.1</td></tr>
+</tbody></table></div>
+<p>臨床トピック共起ネットワークでは、<strong>死亡 × 敗血症の共起（639本）</strong>を中心とする支配的クラスタが同定され、AKI、心不全、人工呼吸に副次クラスタが形成された。</p>
+<h3>9. 結果 — モデル性能（AUROC）とコホート規模</h3>
+<p>品質フィルタ後に AUROC を抽出できたのは <strong>1,263本</strong>（生の抽出は1,976件。パースできない値・パースの問題で684件、範囲外の結果で29件を除外）。分布は左に歪み、最頻域は 0.75–0.85 だった。<strong>中央値 AUROC 0.798</strong>（平均0.790、範囲0.511–1.000）。MIMIC-IV、MIMIC-III、eICU-CRD の間で、中央値 AUROC に臨床的に意味のある差は認められなかった。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 3. 抽出可能な値をもつ全論文（n=1,263）の報告 AUROC の分布。ヒストグラムのビン幅は 0.016 AUROC単位、重ねた曲線はカーネル密度推定（Silverman バンド幅）。赤い破線の縦線が中央値（0.798）、オレンジの点線が平均（0.790）を示す。最頻域 0.80–0.84 の左に歪んだ分布は、不均一なICU集団における死亡予測モデルに特徴的である。</p>
+</div>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Supplementary Figure S1. 公開DB別に層別した AUROC。箱ひげ図は中央値（赤線）、四分位範囲（箱）、1.5×IQR のひげを示し、個々のデータ点をジッタ表示で重ねている。各箱の下の n は AUROC を抽出できた論文数。HiRID（n=2）は網羅性のために含めているが統計的に解釈できない。より大きなDB間で臨床的に意味のある中央値 AUROC の差は観察されなかった。</p>
+</div>
+<p>患者数データは <strong>3,347本から3,659コホート観測</strong>分が抽出できた（一部の論文は複数コホートを寄与）。論文あたり1値が必要な解析では大きいほうのコホートを採用した。補足 Table S2 に主要臨床アウトカム別の層別コホート規模が報告されている。<strong>コホート規模の中央値は2,684例</strong>（IQR 1,043–7,473）。算術平均は少数の極端な外れ値によって著しく膨らんでおり、最高値を手作業で確認したところ、これらは抽出エラーであることが確認された（検証サブスタディで定量化された患者数エラー率と整合）。分布は強く右に歪み、<strong>500例未満の小さな疾患特異的サブグループから、敗血症のような一般的な症候群での5万例超（DBのほぼ全体を使う）まで</strong>にわたる。</p>
+<h3>10. 結果 — 引用インパクトと掲載誌の質</h3>
+<p>引用データは OpenAlex 経由で <strong>4,648本すべて</strong>について入手できた。</p>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>被引用数 中央値</td><td>5.0回／論文（平均17.2、強く右に歪んだ分布）</td></tr>
+<tr><td>年あたり被引用 中央値</td><td>1.50</td></tr>
+<tr><td>オープンアクセス</td><td>3,551/4,648（76.4%）</td></tr>
+<tr><td>うち DOAJ 収載誌</td><td>2,701（全コーパスの58.1%）</td></tr>
+<tr><td>最頻のOAカテゴリ</td><td>gold open access</td></tr>
+<tr><td>SCImago 四分位が判定できた論文</td><td>3,451（74.2%、1,197本は未突合）</td></tr>
+<tr><td>Q1 誌</td><td>2,291（全コーパスの49.3%）</td></tr>
+<tr><td>Q2 誌</td><td>932（20.1%）</td></tr>
+<tr><td>Q3 誌</td><td>153（3.3%）</td></tr>
+<tr><td>Q4 誌</td><td>20（0.4%）</td></tr>
+</tbody></table></div>
+<p>年あたり被引用は四分位を通じて単調に減少し（Q1 &gt; Q2 &gt; Q3 &gt; Q4）、SCImago 四分位が恣意的な分類ではなく掲載誌レベルの可視性の実質的な差を捉えていることと整合的だった。</p>
+<p>報告されたモデル性能と科学的インパクトを直接関連づけるため、有効な AUROC 抽出と突合できた引用データの両方をもつ <strong>1,230本</strong>について、AUROC を年あたり被引用に対してプロットした（Figure 4）。<strong>両者に意味のある相関は無かった（Spearman ρ = 0.05、p = 0.10）</strong>。高い AUROC を報告した論文が、より速く引用を蓄積するわけでもその逆でもない。著者らは、この分野の引用インパクトが報告されたモデル性能の大きさではなく、<strong>トピックのタイミング、掲載誌のリーチ、データベースの馴染み深さ</strong>といった別の要因に主に駆動されていることを示唆し、これは記述されたテーマの均質性と整合するパターンだと述べている。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 4. AUROC を引用インパクト（年あたり被引用）に対してプロットしたもの。有効な AUROC 抽出と突合済み OpenAlex 引用データの両方をもつ1,230本について、データベース群（MIMIC-IV／MIMIC-III・eICU-CRD／欧州OAD）で色分けしている。破線は年あたり被引用のビン内における AUROC の中央値。AUROC と引用インパクトは意味のある相関を示さず（Spearman ρ = 0.05、p = 0.10）、この分野での引用の蓄積が報告されたモデル性能とはおおむね独立であることを示す。</p>
+</div>
+<h3>11. 結果 — AI抽出パイプラインの検証（Table 5）</h3>
+<p>手作業でコーディングした参照標準110本に対する検証結果は次のとおり。各フィールドについてラベルレベルの precision・recall・F1 を、DeepSeek 出力と手作業参照の比較で算出した。多ラベルフィールド（DB、ML手法、その他の統計手法）は独立ラベルの集合として扱った。AUROC の一致は許容差0.02、患者数は数値許容差2%を用いた。</p>
+<div class="tw"><table>
+<thead><tr><th>フィールド</th><th>Precision</th><th>Recall</th><th>F1</th><th>フィールド型</th></tr></thead>
+<tbody>
+<tr><td>使用データベース</td><td>0.98</td><td>0.85</td><td>0.91</td><td>多ラベル</td></tr>
+<tr><td>機械学習手法</td><td>0.83</td><td>0.99</td><td>0.90</td><td>多ラベル</td></tr>
+<tr><td>研究クラス</td><td>0.94</td><td>0.97</td><td>0.95</td><td>多ラベル</td></tr>
+<tr><td>その他の統計手法</td><td>0.75</td><td>0.95</td><td>0.83</td><td>多ラベル</td></tr>
+<tr><td>患者数</td><td>0.97</td><td>0.84</td><td>0.90</td><td>数値（許容差2%）</td></tr>
+<tr><td>AUROC</td><td>0.82</td><td>0.72</td><td>0.77</td><td>数値（許容差0.02）</td></tr>
+<tr><td>マクロ平均</td><td>0.88</td><td>0.89</td><td>0.88</td><td>—</td></tr>
+</tbody></table></div>
+<h3>12. 考察 — 45倍の成長は何によって起きたか</h3>
+<p>2018年から2025年にかけての年次論文の45倍増は、OADベース集中治療研究を臨床医学で最も急成長している領域の一つに位置づける。この成長は単なる漸増ではなく、2021年から明瞭な加速を示し、MIMIC-IV の公開と広範な採用に時期的に一致した。主要DB公開後の同様の出版の波は以前にも記述されており、2016年の MIMIC-III 公開も続く数年の産出急増を触媒した。<strong>MIMIC-IV のモジュール型アーキテクチャ</strong>（救急部門データ、波形、放射線を別モジュールに分ける）は、深いバイオインフォマティクスの専門知識を持たない研究者にとっての技術的障壁を下げ、寄与者の裾野を大きく広げたと考えられる。Ke ら（J Med Internet Res 2024）は書誌計量的比較において、OADベース研究が従来型のICU試験デザインより速く成長することを確認している。</p>
+<p>本解析は先行研究に対して複数の点で比較の射程を広げている。</p>
+<div class="tw"><table>
+<thead><tr><th>先行研究</th><th>何をしたか</th><th>本研究との違い</th></tr></thead>
+<tbody>
+<tr><td>Ke et al. 2024</td><td>自然言語処理でOADベース研究と従来型ICU研究のトピック分布を比較</td><td>ネットワーク構造・地理的協働・引用インパクトは解析していない</td></tr>
+<tr><td>Zhang et al. 2025（Comput Biol Med）</td><td>MIMIC エコシステムに特化して世界的協働を地図化</td><td>eICU-CRD や本研究が扱う欧州DBを含んでいない</td></tr>
+<tr><td>Kallout et al. 2025（JMIR、スコーピングレビュー）</td><td>2022年8月までの4DB・1,307本を手作業でスクリーニング。<strong>中央値 Impact Factor 3.8、中央値 AUROC 0.840</strong> を報告</td><td>規模（4,648 vs 1,307）、期間（2025年まで、MIMIC-IV 後の加速を捕捉）、DBの幅、解析手法が異なる</td></tr>
+</tbody></table></div>
+<p>Kallout らの所見（中央値 AUROC 0.840）は、方法論の違いにもかかわらず本研究（0.798）と広く整合的である。検証済みの半自動LLM抽出パイプラインを完全手作業の2名査読者コーディングの代わりに用い、ネットワーク解析と引用インパクト・掲載誌の質の指標を組み合わせたアプローチは、この文献に対してこれまで報告されていなかった。</p>
+<p>OADの利用可能性と認知の高まり、新しいデータセットの公開に加え、<strong>COVID-19パンデミック</strong>も OAD 研究を加速させた。パンデミックは大規模臨床データセットからの迅速なエビデンス統合をめぐる世界的な切迫感を生み、デジタルヘルス基盤への投資を加速した。MIMIC 自体は COVID-19 特異的なコホートを含まないが、2020–2022年の間に高まったデータ駆動型臨床研究への制度的欲求と、パンデミック下で臨床研究を実施する困難の増大が、観察された2021年以降の加速に寄与したと推定される。</p>
+<h3>13. 考察 — 単一データセット支配のリスク</h3>
+<p>MIMIC-III と MIMIC-IV の合計シェアである<strong>全DB帰属の84.6%</strong>は、世界の集中治療情報学における単一の米国データセットのほぼ独占的な位置を浮き彫りにする。著者らはこの集中が実質的な科学的リスクを伴うと述べる。</p>
+<ul><li>MIMIC は <strong>Beth Israel Deaconess Medical Center という単施設のデータベース</strong>であり、一つの大規模米国学術病院の治療文化、患者背景、資源配分を反映する。</li><li>eICU-CRD と合わせると<strong>米国由来DBが全帰属の98.1%</strong>。得られるエビデンス基盤は単施設支配であるだけでなく、根本的に米国中心である。<strong>治療強度、人工呼吸プロトコル、鎮静慣行、輸血閾値、患者背景</strong>はいずれも米国の臨床実践を反映する。</li><li>職員配置比、利用可能な資源、臨床ガイドラインが異なる<strong>欧州・アジア・低中所得国の医療システムへの一般化可能性は前提にできない</strong>。</li><li>経験的な裏づけもある。外部検証研究は、MIMIC で訓練されたモデルを独立した構造的に異なるデータセットで検証すると<strong>性能が劣化する</strong>ことを一貫して記録してきた（Nestor et al., Proc Mach Learn Res 2019）。</li><li><mark class="hl">この懸念は頻繁に議論されてきたにもかかわらず、構造的に異なるデータセット横断でモデルを検証した研究は相対的にごく少ない</mark>。米国中心のICUシステムを超えて所見が本当に一般化するかは不確かなままである。</li></ul>
+<p><strong>再現性</strong>についても2段構えの問題が指摘される。<strong>MIMIC Code Repository</strong>（J Am Med Inform Assoc 2018）は標準化されたコホート抽出を可能にした画期的な一歩だった。しかし共有された抽出コードがあってさえ、研究グループ間の除外基準や変数定義の微妙な違いが異質な研究集団を生み、研究間比較を複雑にする。さらに<strong>解析コード</strong>については、Andries ら（Stud Health Technol Inform 2024）が、これらのDBを使った研究の <strong>90%超がデータ管理・解析スクリプトを共有していない</strong>と報告している。これは公表されたコホートと結果の独立検証を制約し、前述の定義の異質性を増幅する。</p>
+<h3>14. 考察 — 中国の65.6%をどう読むか</h3>
+<p>著者らは「OADベース集中治療研究における中国の強い寄与は予想していたが、中国だけで世界の論文産出の65.6%を占めることにはいくらか驚いた」と率直に書いている。これは本解析で最も際立った地理的結果であり、Zhang ら（2025）の所見および医療AI研究のより広い動向と一致する。Qiu ら（NEJM AI 2025）は最近、<strong>中国の医療AI論文が2022–2023年に初めて米国の産出を上回り、年平均成長率21.0%対9.9%</strong>であったと記録している。</p>
+<p>OADベース集中治療研究における中国の優位の主な駆動要因として著者らが挙げるのは次の3つ。</p>
+<div class="tw"><table>
+<thead><tr><th>駆動要因</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>生物医学情報学プログラムの急拡大</td><td>人材と技術基盤の供給側の拡大</td></tr>
+<tr><td>出版数を学術的昇進に結びつける制度的インセンティブ構造</td><td>量が評価に直結する</td></tr>
+<tr><td><strong>比較可能な国内ICUデータセットの不在</strong></td><td>国際的に利用可能なOADが魅力的な研究手段になる</td></tr>
+</tbody></table></div>
+<p>ただし著者らは<strong>より批判的な読み方も必要</strong>だと続ける。コーパスで観察されたテーマ・方法論の均質性 — 後ろ向きの MIMIC-IV コホートで敗血症死亡をロジスティック回帰でモデル化し、AUROC が 0.75–0.80 前後に集まる — は、<strong>産出量そのものが第一目的になっている出版景観と整合する</strong>。いったん MIMIC-IV（あるいは他のどのOADでも）でのコホート抽出と統計モデリングのパイプラインが確立すれば、<strong>バイオマーカーを、検査パラメータを、対象サブグループを差し替えるだけで、限界費用ほぼゼロでもう一本の出版可能な原稿ができる</strong>。論文間の高いテーマ重複は、出版インセンティブと確立したワークフローの再利用の容易さを部分的に反映している可能性がある。著者らは慎重に「このダイナミクスは個々の研究を無効にするものではないが、この分野の急速な拡大が臨床知識の相応の進歩に翻訳されているかどうかの省察を求める」と書いている。</p>
+<p>さらに、<strong>MIMIC のデータアクセスポリシーの最近の変更</strong>（中国の機関に所属する研究者のアクセスを制限）が、ここで記述された景観に新しい力学を持ち込む。倫理の観点からは、機関の地理に基づくアクセス制限は世界の研究参加における公平性の問題を提起する。しかし実務的には、この変化は本解析が求める多様化をまさに加速しうる — 現在OADベース出版の65.6%を占め、圧倒的に MIMIC-IV に依存している中国の研究グループが、欧州OADを含む代替データセットに次第に向かい、今後数年でこの分野の地理的・DB的分布を作り変える可能性がある。</p>
+<h3>15. 考察 — 欧州DBの1.9%は「質の問題」ではない</h3>
+<p>現時点で欧州OAD（AmsterdamUMCdb、HiRID、SICdb）の合計シェアがわずか1.9%であることには文脈づけが要る、と著者らは主張する。<strong>これらは周辺的な資源ではない</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>DB</th><th>固有の価値</th></tr></thead>
+<tbody>
+<tr><td>AmsterdamUMCdb</td><td>欧州で最も情報量の豊かな集中治療データセットの一つ</td></tr>
+<tr><td>HiRID</td><td>生理学的信号解析に対して比類のない時間解像度</td></tr>
+<tr><td>SICdb</td><td><strong>オーストリア中央住民登録との連結により長期死亡データを統合</strong>し、退院後数年に及ぶアウトカム解析が可能。MIMIC にも eICU-CRD にも無い機能</td></tr>
+</tbody></table></div>
+<p>低い採用率は科学的な質ではなく、主に<strong>これらのDBの新しさ</strong>を反映する。AmsterdamUMCdb と HiRID は2021年に、SICdb は2023年に初めて公開された。MIMIC の各版で観察された <strong>2〜4年の採用ラグ</strong>は、欧州DBの利用が今後数年で実質的に伸びることを予測させる。この移行を、対象を絞った訓練、ドキュメンテーションの改善、<strong>INDICATE EUプロジェクト（DIGITAL-2023-CLOUD-AI-04）</strong>のような国際共同研究プログラムを通じて能動的に加速することが、まさにこの加速のための制度的枠組みを提供する。</p>
+<h3>16. 考察 — なぜロジスティック回帰が38.5%なのか</h3>
+<p>「AI」「深層学習」研究としばしば自称される分野で、ロジスティック回帰が全ML手法言及の38.5%を占めることは、<strong>実務的な現実</strong>を反映している。</p>
+<ul><li>ロジスティック回帰は<strong>解釈可能な出力</strong>（オッズ比、信頼区間）を生み、臨床誌の査読の期待に合致する。</li><li>二値のICUアウトカムに対する性能は、しばしばより複雑なアルゴリズムと同等である。</li></ul>
+<p>この観察は、ML手法間・DB間で中央値の識別能に臨床的に意味のある差が無かったという本研究の探索的 AUROC 解析に支持される。これは <strong>Sauer ら（Crit Care Med 2022）が「データセットの選択と特徴量エンジニアリングのほうが、アルゴリズムの選択よりモデル性能への影響が大きい」と示した</strong>ことと整合する。</p>
+<p>AUROC の扱いについて著者らは自らの選択を弁護している。抽出は抄録中で最初に出会った数値を保持しており、多モデル比較では最良モデルを表さないかもしれない。しかしこの制限は意図的な信頼性上の選択だった。抽出変数（使用DB、ML手法、研究デザイン、臨床アウトカム）は構造化抄録・非構造化抄録のいずれでも慣例的に報告されるのに対し、細かい方法論的詳細は主に全文に存在する。短く一様に構造化された入力に抽出を限定することは、<strong>入力長が増え関連情報が文脈窓の先頭・末尾から離れるほど LLM の抽出性能が劣化する</strong>という証拠（"lost-in-the-middle" 効果）と整合する精度保持の意図があった。加えて、AUROC 解析の目的は各論文の到達可能な最良性能を推定することではなく、<strong>著者自身が抄録で前面に出すことを選んだ単一の統計量</strong>（一般に研究の見出し的結果を最も代表する値）を捉えることだった。最良の報告 AUROC を抽出すれば、多モデル・多サブグループ比較にわたって上方への選択バイアスが入り、実際に読者に伝えられたものではなく事後探索を反映してしまうため、採用されなかった。</p>
+<p>観察された <strong>中央値 AUROC 0.798 は中等度〜良好な識別能</strong>にあたり（Steyerberg et al., Epidemiology 2010）、多数の未測定交絡因子がアウトカムに影響する不均一なICU集団での死亡予測として想定される水準である。最頻域 0.75–0.85 の左に歪んだ分布は、大半の論文が許容できるが傑出はしないモデル性能を報告していることを示唆し、<mark class="hl">非選択ICU死亡予測において0.90を超える非常に高い AUROC は稀であり、精査に値する</mark>。</p>
+<p>興味深いことに、複数のICUデータセットが利用可能であるにもかかわらず、独立コホート横断でモデルを検証する研究は相対的にごく少ない。<strong>複数OADの同時利用可能性は理論上、データセット横断検証のための前例のない基盤を作り出しているのに、この機会は現在ごく少数の論文でしか活用されていない</strong>。</p>
+<h3>17. 限界（著者自身の記載）</h3>
+<p>著者らは3つの限界を詳細に論じている。いずれも所見の解釈を規定する。</p>
+<p><strong>第一に、最も根本的な限界は、内容に依存する変数がすべて全文ではなくタイトルと抄録から抽出されたことである。</strong> 関心のある中核変数、とくに<strong>研究デザイン、外部検証の有無、報告アウトカムの完全な集合</strong>は、しばしば全文の方法・結果セクションにしか記述されず、抄録には全く現れないことがある。Table 5 の検証サブスタディはこの懸念を解消しない。その参照標準自体が人間のレビュアーによって<strong>抄録から</strong>コーディングされたものであり、したがって抽出パイプラインが抄録の記述をどれだけ忠実に再現するかを定量化するだけで、<strong>抄録が背後の研究を完全に代表しているかどうかは確立しない</strong>。抄録で系統的に過少報告される変数は、このコーパスでは結果的に過小評価される。その過小評価の大きさは定量化されていない。</p>
+<p>これは<strong>外部検証に最も直接に当てはまる</strong>。データセット横断検証が稀にしか見られないという本研究の観察は、<mark class="hl">「著者が抄録で何を前面に出しているか」についての言明として読むべきであり、この分野における外部検証の実施率を測定したものではない</mark>。同じ留保が、程度は小さいものの、研究デザインとアウトカム分類にも当てはまる。このギャップの定量化には、無作為サブサンプルの全文判定を抄録レベルのコーディングと突き合わせる作業が必要であり、著者らはこれをこの研究系列の自然な次のステップとみなしている。</p>
+<p><strong>第二に、AUROC の扱いは2つの関連する制約を受ける。</strong> ①抽出は抄録で最初に出会った AUROC 値を保持しており、著者らはこれを「著者自身が前面に出すことを選んだ統計量」と解釈しているが、この仮定は抄録だけからは検証できず、多モデル・多サブグループ比較では最初に言及された値が著者の強調ではなく報告順序を反映しているかもしれない。②AUROC は検証サブスタディで最も信頼性の低いフィールドだった（recall 0.72、F1 0.77）。この程度の測定誤差を考えると、<strong>報告 AUROC と引用インパクトの相関の不在（Figure 4）は、ノイズによる減衰と確実には区別できない</strong>。著者らはこの解析と Figure 4 を、真の帰無関連の証拠ではなく<strong>探索的・仮説生成的</strong>なものとして提示し、すべての AUROC ベースの結果はそのように読まれるべきだとしている。</p>
+<p><strong>第三に、国の帰属は論文の全著者の所属文字列をプールして導出され、論文ごとに単一の主たる国を割り当てている。</strong> このアプローチは論文における国の参加を捉えるが、<strong>参加と研究リーダーシップを区別できない</strong> — 筆頭著者・最終著者・責任著者の国を同定していないためである。大規模な国際著者リストをもつ論文は、どこで構想され資金提供され主導されたかに関わらず1か国に帰属される。この限界は本解析の「構造的不均衡」という枠組みに直接関わる。<mark class="hl">報告された国別シェア、とくに中国に帰属された65.6%は、科学的リーダーシップの尺度ではなく、OADベース論文への「国としての参加」のシェアとして解釈されるべきである</mark>。筆頭・責任著者の所属に基づくリーダーシップ加重解析は本研究の価値ある補完となるが、ここでは提供されていない。</p>
+<h3>18. 結論（原著）</h3>
+<p>OADベース集中治療研究は指数関数的に成長しており、2018年から2025年で年次論文が45倍に増加した。この成長は<strong>単一のデータベース（MIMIC-IV）と単一の国（中国）によって構造的に支配</strong>され、後ろ向き研究デザイン、敗血症における死亡エンドポイント、好まれるML手法としてのロジスティック回帰によって特徴づけられる均質なエビデンス群を生み出している。得られるエビデンス基盤は米国の臨床実践に強く偏っており、<strong>現地での検証なしに他の医療システムへ確実に転移するとは限らない</strong>。欧州DB（AmsterdamUMCdb、HiRID、SICdb）は、補完的な臨床プロファイル、固有のデータ機能、欧州医療システムの重要な代表性を提供するにもかかわらず、全DB帰属の1.9%と著しく未活用のままである。</p>
+<p>この分野の方法論的均質性とデータセット横断外部検証の乏しさは、公表所見の一般化可能性と臨床応用の潜在力を制約する。エビデンスに基づく3つの優先課題が浮かび上がる。</p>
+<div class="tw"><table>
+<thead><tr><th>優先課題</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>(i)</td><td>すべての予測モデリング論文の方法論的標準としての、系統的なデータセット横断外部検証</td></tr>
+<tr><td>(ii)</td><td>訓練・国際協働・資金インセンティブを通じた、欧州OAD採用の的を絞った促進</td></tr>
+<tr><td>(iii)</td><td>死亡・敗血症・ロジスティック回帰というパラダイムを超えた、長期アウトカム・臨床意思決定支援・稀な症候群研究へのトピックの多様化</td></tr>
+</tbody></table></div>
+<p>本解析は、欧州およびその他の未活用OADの採用を高めることを目的とした施策を評価するための定量的ベースラインを提供し、最終的にはより多様なエビデンス基盤と、集中治療研究の世界的な一般化可能性の向上に寄与しうる。</p>
+<h3>19. 批判的吟味（JCでの論点）</h3>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>何が問題か</th><th>どう読むか</th></tr></thead>
+<tbody>
+<tr><td><strong>抄録だけから内容変数を取っている</strong></td><td>研究デザイン・外部検証の有無・アウトカムの全集合は、しばしば全文の方法・結果にしか書かれない。検証サブスタディの参照標準も<strong>抄録から</strong>人間がコーディングしたもので、「抄録が研究を代表しているか」は検証していない</td><td>「外部検証が稀」という最も強いメッセージは、<strong>実施率ではなく抄録での可視性</strong>の話。過小評価の大きさは未定量。この一点で本論文の中心的主張は自己申告的に弱い</td></tr>
+<tr><td><strong>国の帰属が「参加」であって「主導」でない</strong></td><td>全著者の所属をプールして1論文1か国を割り当てるため、国際著者リストの論文がどこで構想・資金提供・主導されたかに関係なく1か国に落ちる</td><td>中国65.6%は「中国の研究者が著者に入っている論文の割合」に近い。<strong>リーダーシップ加重の解析がないため、「中国が支配している」という表現は強すぎる</strong>可能性がある。著者ら自身がそう認めている</td></tr>
+<tr><td><strong>AUROC の抽出信頼性が低い（F1 0.77、recall 0.72）</strong></td><td>抄録で最初に出た数値を採るルールは、多モデル比較では報告順序を拾っているだけかもしれない</td><td>「AUROC と引用に相関なし（ρ=0.05, p=0.10）」は<strong>測定誤差による希釈と区別できない</strong>。著者らも探索的・仮説生成的と明言。JCでこの図を「性能は評価されていない証拠」として使うのは行き過ぎ</td></tr>
+<tr><td><strong>利益相反の方向が結論と一致している</strong></td><td>AK と NR は SICdb の共同開発者。5名が欧州OAD普及を目的とする EU 助成 INDICATE プロジェクトに関与、OK は icudata4eu に所属</td><td>「欧州DBをもっと使え」という提言は、著者らの制度的利害と同じ向き。<strong>主張自体はデータで支持されているが、提言部分の熱量は割り引いて読む</strong></td></tr>
+<tr><td><strong>検索の非対称性</strong></td><td>PubMed はタイトル／抄録、WoS は ALL フィールド（キーワード・参考文献も索引）を検索。「MIMIC」というフリーテキスト語は偽陽性を招く</td><td>著者らはICU文脈語の必須化とAIスクリーニングで緩和したと述べるが、<strong>偽陽性率は定量化されていない</strong>。Embase 未検索、PRISMA型フロー図なし</td></tr>
+<tr><td><strong>成長の変曲点の説明に時系列の齟齬</strong></td><td>本文は「2021年以降の加速」の変曲点が「MIMIC-IV v3.1 の広範な利用可能化（2024年10月11日公開）と時期的に一致する」と書く</td><td><mark class="hl">2021年の変曲点を2024年公開のバージョンで説明するのは時系列が合わない</mark>。MIMIC-IV の初期版（2020年ごろから PhysioNet で利用可能、正式論文は2023年 Sci Data）を指すべきところの記述の混乱と思われる。accepted manuscript 版であることも踏まえて注意して読む箇所</td></tr>
+<tr><td><strong>同じ文の重複</strong></td><td>結果セクションに「MIMIC-IV first exceeded MIMIC-III in annual attributions in 2022 and accounted for 75.8% of that year's publications」がほぼ同内容で連続して現れる</td><td>未編集版（unedited accepted manuscript）のため。最終版では整理される見込み</td></tr>
+<tr><td><strong>Table 1 と Table 2 の整合</strong></td><td>Table 1 の DB別年次合計（MIMIC-IV = 3+14+74+228+381+374+1,446 = 2,520）は Table 2 と一致する。MIMIC-III も 39+113+125+230+205+188+267+219 = 1,386 で一致</td><td><mark class="hl">ここは検算が通る</mark>。一方 2024年に MIMIC-IV が374と前年381から減り、2025年に1,446へ跳ねるのは不自然で、PMIDから年への「近似的割当」（Figure 1 注記）の影響を疑う</td></tr>
+<tr><td><strong>「45倍」の基準年</strong></td><td>2018年の42本は真のゼロベースラインではなく、MIMIC-III がすでに産出していた時点の値</td><td>著者ら自身が明記している。分母が小さい時期を起点にした倍率であることを踏まえる</td></tr>
+<tr><td><strong>ML手法が同定できたのは33.8%だけ</strong></td><td>4,648本中1,572本しかML手法が抽出できていない</td><td>ロジスティック回帰38.5%などの割合は、<strong>「ML手法が抄録から読み取れた論文の中での」割合</strong>である。コーパス全体に対する割合ではない点を混同しない</td></tr>
+<tr><td><strong>SCImago 未突合が25.8%</strong></td><td>1,197本が四分位層別解析から落ちている</td><td>Q1 が49.3%という数字は全コーパス基準で計算されているため、突合できた3,451本の中では66.4%（2,291/3,451）が Q1 になる。<strong>どちらの分母で語るかで印象が変わる</strong></td></tr>
+<tr><td><strong>「量産構造」の指摘に定量的裏づけがない</strong></td><td>「パイプラインを作れば変数を差し替えて次の論文が作れる」という最も刺激的な主張は、テーマ・手法の均質性からの推論であって、直接測定されていない</td><td>説得力はあるが<strong>データではなく解釈</strong>。JCでは「著者の見立て」として扱うのが公平</td></tr>
+</tbody></table></div>
+<h3>20. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>内容</th><th>著者・雑誌・年</th></tr></thead>
+<tbody>
+<tr><td>3</td><td>公開ICUデータセットの系統的レビューと比較。対象4DBを同定。データセット選択と特徴量エンジニアリングがアルゴリズム選択より性能に効くことを示した</td><td>Sauer CM, Dam TA, Celi LA, et al. Crit Care Med. 2022;50(6):e581-e588</td></tr>
+<tr><td>6</td><td>MIMIC-III の原著（自由にアクセスできる集中治療データベース）</td><td>Johnson AE, Pollard TJ, Shen L, et al. Sci Data. 2016;3:160035</td></tr>
+<tr><td>7</td><td>MIMIC-IV の原著（自由にアクセスできる電子カルテデータセット）</td><td>Johnson AEW, Bulgarelli L, Shen L, et al. Sci Data. 2023;10(1):1</td></tr>
+<tr><td>8</td><td>eICU Collaborative Research Database の原著</td><td>Pollard TJ, Johnson AEW, Raffa JD, et al. Sci Data. 2018;5:180178</td></tr>
+<tr><td>9</td><td>AmsterdamUMCdb — ICU患者データを責任をもって共有する例</td><td>Thoral PJ, Peppink JM, Driessen RH, et al. Crit Care Med. 2021;49(6):e563-e577</td></tr>
+<tr><td>10</td><td>HiRID、高時間解像度ICUデータセット（v1.1.1）</td><td>Faltys M, Zimmermann M, Lyu X, et al. PhysioNet. 2021</td></tr>
+<tr><td>11</td><td>SICdb（Salzburg Intensive Care database）の紹介</td><td>Rodemund N, Wernly B, Jung C, Cozowicz C, Koköfer A. Intensive Care Med. 2023;49(6):700-702</td></tr>
+<tr><td>12</td><td>集中治療におけるビッグデータ活用 — 新しい欧州データセットの探索（SICdb 詳細）</td><td>Rodemund N, Wernly B, Jung C, Cozowicz C, Koköfer A. Sci Data. 2024;11(1):320</td></tr>
+<tr><td>13</td><td><strong>最も近い先行研究</strong>。公開DBの集中治療研究への寄与を扱ったスコーピングレビュー。4DB・1,307本、中央値IF 3.8・中央値AUROC 0.840</td><td>Kallout J, Lamer A, Grosjean J, et al. J Med Internet Res. 2025;27:e57263</td></tr>
+<tr><td>14</td><td>オープンソース集中治療データベース利用の機会と課題（スコーピングレビュー）</td><td>Rockenschaub P, Rodrigues J, Celi LA, et al. BMC Med Inform Decis Mak. 2024;24(1):338</td></tr>
+<tr><td>15</td><td>BIBLIO報告フレームワークの基礎となる書誌計量手法</td><td>Zupic I, Cater T. Organ Res Methods. 2015;18(3):429-472</td></tr>
+<tr><td>16</td><td>bibliometrix — 包括的な科学地図化のためのRツール（本研究の解析基盤）</td><td>Aria M, Cuccurullo C. J Informetr. 2017;11(4):959-975</td></tr>
+<tr><td>17</td><td>公開ICUデータセットの系統的レビュー更新版。7DBを同定し SICdb・NWICU・ZFPH を追加</td><td>Jagesar AR, Dam TA, Struja T, et al. J Crit Care. 2025;90:155205</td></tr>
+<tr><td>18</td><td>OpenAlex — 学術成果・著者・掲載誌・機関・概念の完全公開インデックス</td><td>Priem J, Piwowar H, Orr R. arXiv:2205.01833. 2022</td></tr>
+<tr><td>19</td><td>SJR2 指標 — 掲載誌の科学的威信の測定</td><td>Guerrero-Bote VP, Moya-Anegón F. J Informetr. 2012;6(4):674-688</td></tr>
+<tr><td>20</td><td><strong>"Lost in the Middle"</strong> — 言語モデルが長い文脈をどう使うか。抽出を抄録に限定した根拠</td><td>Liu NF, Lin K, Hewitt J, et al. Trans Assoc Comput Linguist. 2024;12:157-173</td></tr>
+<tr><td>21</td><td>公開DB研究と従来型ICU研究の機械学習による比較。OAD研究のほうが速く成長</td><td>Ke Y, Yang R, Liu N. J Med Internet Res. 2024;26:e48330</td></tr>
+<tr><td>22</td><td>MIMIC を用いた集中治療情報学の世界的協働の書誌計量分析（2004–2024）</td><td>Zhang X, Kong W, Shi R, et al. Comput Biol Med. 2025;195:110670</td></tr>
+<tr><td>23</td><td>非定常な健康記録における特徴量頑健性 — <strong>MIMIC訓練モデルの外部検証での性能劣化</strong></td><td>Nestor B, McDermott MBA, Boag W, et al. Proc Mach Learn Res. 2019;106:381-405</td></tr>
+<tr><td>24</td><td>MIMIC Code Repository — 集中治療研究における再現性を可能にする</td><td>Johnson AE, Stone DJ, Celi LA, Pollard TJ. J Am Med Inform Assoc. 2018;25(1):32-39</td></tr>
+<tr><td>25</td><td><strong>公開ICUデータベース研究の90%超がデータ管理・解析スクリプトを公開していない</strong></td><td>Andries C, Quindroit P, Popoff B, et al. Stud Health Technol Inform. 2024;316:388-392</td></tr>
+<tr><td>26</td><td>中国の医療AIの全体像。中国の医療AI論文が2022–2023年に初めて米国を上回る（年成長率21.0%対9.9%）</td><td>Qiu Y, Ma W, Wang H, Tham YC, Wong TY. NEJM AI. 2025;2(7)</td></tr>
+<tr><td>28</td><td><strong>連合データアクセスと連合学習</strong> — データ共有・AIモデル開発・集中治療における学習の改善</td><td>van Genderen ME, Cecconi M, Jung C. Intensive Care Med. 2024;50:974-977</td></tr>
+<tr><td>29</td><td>予測モデルの性能評価（AUROC 0.798 を「中等度〜良好」と位置づける根拠）</td><td>Steyerberg EW, Vickers AJ, Cook NR, et al. Epidemiology. 2010;21(1):128-138</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 公開ICUデータベース研究は7年で45倍に増えたが、その <strong>84.6%が MIMIC（米国の単施設DB）・98.1%が米国由来DB・65.6%が中国からの論文</strong>で、後ろ向きに敗血症の死亡をロジスティック回帰で予測し AUROC 0.798 前後を報告する、という均質な塊になっている。<mark class="hl">MIMIC由来の予測モデル論文を読むときは、閾値も係数も「米国1施設の診療文化の産物」と見なし、日本のデータで検証されるまで当院のプロトコルに落とさない</mark>。 そして裏返しの示唆として、<mark class="hl">「比較可能な国内ICUデータセットが無い」ことが中国をMIMICに向かわせた最大の理由の一つである以上、JIPADを育て、DPC連結で MIMIC にできない長期・制度横断のアウトカムを扱うことが、この構造的偏りに対する日本からの最も具体的な答えになる</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
