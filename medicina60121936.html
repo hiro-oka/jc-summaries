@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>VV-ECMOの再循環 — 測り方・規定因子・減らす介入（総説・Medicina2024）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">VV-ECMOの再循環 — 測り方・規定因子・減らす介入（総説・Medicina2024）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Gagliardi V, Gagliardi G. Recirculation in Veno-Venous Extracorporeal Membrane Oxygenation. Medicina (Kaunas). 2024;60(12):1936. doi:10.3390/medicina60121936</dd><dt>原著</dt><dd><a href="https://doi.org/10.3390/medicina60121936" target="_blank" rel="noopener">doi.org/10.3390/medicina60121936</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Recirculation in Veno-Venous Extracorporeal Membrane Oxygenation</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>当院の運用に直接効く5点</p>
+<p><strong>1. SvO₂ に肺動脈カテーテルの血を使ってはいけない — ここが最大の実務ポイント</strong> 本論文が明示している通り、<mark class="hl"><strong>VV-ECMO 中の肺動脈血は「混合静脈血」ではない</strong></mark>。ECMO は右房に酸素化血を返しているので、肺動脈まで到達した血液には<strong>すでに ECMO が送った血が混ざっている</strong>。一般 ICU の感覚で Swan-Ganz の SvO₂ を式に入れると、分子（脱血側SO₂ − SvO₂）が小さくなり、<strong>再循環を過小評価する</strong>。 当院講義が「SvO₂ は CV カテの SO₂ で代用」としているのは、本論文でいう <strong>CVL 法</strong>にあたる。これは正式に認められた実務上の第一選択であり、「本当は PA から採りたいが仕方なく代用している」のではない。</p>
+<p><strong>2. 当院のカニュラ間距離の指示は、文献の推奨と一致している</strong> 本論文は「脱血と送血のカニュラは <strong>最低 10〜13 cm 離す</strong>」と述べる。当院講義 p87 の「10〜13cm以上」と同じ値。既存の指示をそのまま維持してよい。</p>
+<p><strong>3. ECMO 血流量は心拍出量のおよそ 2/3 という目安がある</strong> 心拍出量が体外血流量に近づくと再循環が増え、心拍出量が体外血流量より大きいと再循環は減る。ただし<strong>どちらも低酸素になりうる</strong>（前者は再循環、後者は肺前シャント）。この論文は実務上 <strong>ECMO 血流量 ≒ CO の 2/3</strong> を推奨している。当院ガイドの「維持期 3.0〜4.0 L/min」を、患者の心拍出量と併せて読む視点が加わる。</p>
+<p><strong>4. 大腿脱血カニュラの先端位置には理由がある</strong> 先端は右房-IVC 接合部の近く、<strong>側孔は肝内 IVC に置く</strong>。肝実質に囲まれたこの部分が<strong>最も虚脱しにくく</strong>、陰圧がかかっても側孔が塞がりにくいため。カニュラを引いて距離を稼ぐときの限界がここで決まる。送血カニュラは SVC-右房接合部。</p>
+<p><strong>5. 再循環が疑わしいとき、輸血や流量アップより先に見るもの</strong> 胸腔内圧の上昇（胸壁コンプライアンス低下・肺過膨張）は静脈還流を妨げ、<strong>送った血を脱血側へ優先的に向かわせて再循環を増やす</strong>。腹腔内圧上昇は IVC を圧迫し、脱血そのものを減らす。<mark class="hl">人工呼吸器設定と腹部の評価が、再循環対策の一部になる</mark>。</p>
+<p>関連：<span class="wl">22 循環｜VV-ECMO 実戦管理ガイド</span>（§4-3 に R率の計算機を実装済み）</p>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>3行で位置づける <strong>Known（既に分かっていたこと）</strong> 再循環は VV-ECMO で必発の現象であり、難治性低酸素の主要な原因のひとつ。飽和度から R率を算出する式は古くから知られ、カニュラを離すことが基本対策であることも合意されている。</p>
+<p><strong>Unknown（分かっていなかったこと）</strong> <mark class="hl"><strong>再循環の「正しい閾値」も、「正確な測り方」も、いまだ標準化されていない</strong></mark>。許容範囲は経験的に 10〜30% とされるが根拠は弱く、報告される実測値は 2〜57% と大きくばらつく。式の入力である SvO₂ をどう得るかにも決定版がない。</p>
+<p><strong>What's new（本レビューの意義）</strong> 再循環という<strong>単一のテーマだけ</strong>を、①定量法（式・超音波希釈・熱希釈・リチウム希釈）②規定因子③減らす介入、の3軸で網羅的に整理した点。とくに <mark class="hl"><strong>式の弱点が SvO₂ の取得にあること</strong></mark> を正面から扱い、CVL 法と SvO₂ 法（Van Heijst 法）を並べて限界まで書いている。</p>
+</div>
+<h2>📌 全体要約</h2>
+<ul><li><strong>再循環とは</strong>：送血カニュラから戻した酸素化血が、右房を経て体循環へ向かわず、<strong>そのまま脱血カニュラに吸い込まれてしまう</strong>現象。その分だけ体外循環の酸素運搬が空回りし、難治性低酸素の原因になる。</li></ul>
+<ul><li><strong>基本の計算式</strong>は飽和度3つから求める：</li></ul>
+<p><code>再循環率（%）＝ (脱血側SO₂ − SvO₂) ÷ (送血側SO₂ − SvO₂) × 100</code> 脱血側SO₂ ＝ SvO₂ なら 0%、脱血側SO₂ ＝ 送血側SO₂ なら 100%。</p>
+<ul><li><mark class="hl"><strong>この式の最大の弱点は SvO₂ の取得</strong></mark>。VV-ECMO 中の肺動脈血には ECMO が返した酸素化血が混入しており、<strong>通常の混合静脈血飽和度は使えない</strong>。代替は2つ:</li><li><strong>CVL 法</strong>：SVC または IVC の中心静脈カテーテルから採血。簡便だが真の混合静脈血ではなく、SVC と IVC の酸素含量差を考慮できない</li><li><strong>SvO₂ 法（Van Heijst 法）</strong>：sweep gas を一時停止し、人工呼吸器で ECMO 使用時と同等の SaO₂ を得たうえで脱血カニュラの血を測る。正確だが、<mark class="hl"><strong>ECMO 依存度の高い患者では危険で実施しにくい</strong></mark></li></ul>
+<ul><li><strong>許容範囲は経験的におよそ 10〜30%</strong>。ただし<strong>標準化された閾値は定義されていない</strong>。報告値の幅は 2〜57%。ある観察研究では中央値 14〜16%、最大約 58%、35% を超えたのは全測定の 13〜14% にとどまった。</li></ul>
+<ul><li><strong>直接測定法</strong>（いずれも普及途上）：</li><li><strong>超音波希釈法</strong>：送血側に生理食塩水をボーラス投与し、脱血側で2つ目の希釈曲線を検出。2曲線の面積比で算出。ELSA モニタが製品化されているが臨床では広く使われていない</li><li><strong>熱希釈法</strong>：温度-時間曲線の面積比。再循環率 40% 以下なら心拍出量も臨床的に許容できる値が得られる</li><li><strong>リチウム希釈法</strong>：ex vivo で検証済みだが、リチウムの体内蓄積という制約がある</li></ul>
+<ul><li><strong>再循環を増やす因子</strong>：カニュラ先端が近い／ポンプ回転数が高い／心拍出量が体外血流量に近い／胸腔内圧が高い。<strong>カニュラ径を大きくすると</strong>同じ流量をより低い回転数で得られ、脱血側の陰圧が浅くなるため<strong>再循環は減りうる</strong>。</li></ul>
+<ul><li><strong>減らす介入</strong>：カニュラを離す（10〜13 cm 以上）／脱血カニュラを追加する（VV-V）／送血カニュラの向きを三尖弁へ向ける（χ配置）／<strong>二腔カニューレ（DLC）</strong>／静脈-右室送血。<mark class="hl"><strong>DLC が最も有効とされる</strong></mark>が、誤位置で再循環が約 50% まで跳ね上がる、血管穿孔・血栓・出血のリスクがある、といった代償を伴う。</li></ul>
+<ul><li><strong>結論</strong>：再循環は頻度が高く、多因子性で、しかも<strong>動的に変わる</strong>。現状では数学的近似に頼らざるを得ず、直接測定法もカニュラ戦略も、臨床での有効性・安全性のデータはまだ限られている。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — 再循環とは何が起きているのか（初学者向け）</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>この現象を一言で VV-ECMO は、患者の静脈から血を抜き（脱血）、人工肺で酸素を載せて、また静脈に戻す（送血）装置です。<strong>入口も出口も静脈</strong>であることが VA-ECMO との決定的な違いで、そのために「せっかく酸素化した血を、体に配る前に自分でもう一度吸い込んでしまう」ことが起こり得ます。これが<strong>再循環</strong>です。</p>
+<p>たとえば血流量 4 L/min で回していても、そのうち 1.7 L/min が右房を素通りして脱血口へ戻っているなら、<strong>実際に患者の酸素化に貢献しているのは 2.3 L/min だけ</strong>ということになります。ポンプの表示は 4 L/min のままなので、<strong>モニタを見ているだけでは気づけません</strong>。</p>
+<p>再循環が起きると二重に損をします。第一に、体循環へ届く酸素化血が減ります。第二に、脱血される血の酸素飽和度が高くなるため、<strong>人工肺の入口と出口の酸素分圧差が縮まり、膜のガス交換効率そのものも落ちます</strong>。</p>
+</div>
+<p>論文の Figure 1 は、この現象を模式的に示しています。図の読み方は次の通りです。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1 — 再循環の模式図 下大静脈側に置かれた<strong>脱血カニュラ</strong>と、上大静脈側から右房に向かう<strong>送血カニュラ</strong>が描かれています。本来、送血カニュラから出た酸素化血（明るい色）は右房から<strong>三尖弁を通って</strong>右室・肺循環・体循環へ向かうはずです。</p>
+<p>ところが図では、送血ジェットの一部が三尖弁に到達せず、<strong>下向きに U ターンして脱血カニュラの吸い込み口へ直接引き込まれる</strong>流れとして描かれています。この「三尖弁に到達しなかった分」が再循環です。</p>
+<p><strong>実践的な読み方</strong>：2本のカニュラ先端の位置関係と、送血ジェットの向きが三尖弁を向いているかどうか——この2つがすべてを決めている、と読み取ってください。</p>
+</div>
+<h3>2. なぜ再循環の定量が重要なのか</h3>
+<p>論文は冒頭で、再循環の定量が<strong>体外循環の酸素運搬を評価するために不可欠</strong>だと述べています。</p>
+<p>再循環が酸素運搬を減らす経路は2つあります。</p>
+<div class="tw"><table>
+<thead><tr><th>経路</th><th>何が起きるか</th></tr></thead>
+<tbody>
+<tr><td><strong>① 送る血が減る</strong></td><td>一定量の血液がガス交換に参加しないまま循環するため、患者に届く酸素化血の絶対量が減る</td></tr>
+<tr><td><strong>② 膜の効率が落ちる</strong></td><td>脱血される血の酸素飽和度が上がる ＝ 人工肺の中での酸素濃度勾配が縮まる。同じ人工肺・同じ sweep gas でも、載せられる酸素の量が減る</td></tr>
+</tbody></table></div>
+<p>ただし論文は同時に、<strong>その定量が難しい</strong>ことも率直に認めています。「再循環分画の決定は体外循環の酸素運搬を評価するために必要だが、その量を定量することは困難でありうる」。</p>
+<h3>3. 方法（Data Collection）</h3>
+<ul><li><strong>検索先</strong>：PubMed</li><li><strong>検索語</strong>："Recirculation in Veno venous ECMO"</li><li><strong>ヒット数</strong>：54件</li><li><strong>除外</strong>：小児集団を扱った論文／再循環を主題としていない論文</li><li><strong>採用基準</strong>：最も関連が深く、包括的で、新しい論文。臨床研究・前臨床研究・レビューをいずれも含む</li><li><strong>対象</strong>：成人</li></ul>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>デザイン上の限界 系統的レビューではなく<strong>ナラティブレビュー</strong>です。検索語は1つのみ、単一データベース、選択基準は「最も関連が深く、包括的で、新しい」という定性的なもので、<mark class="hl"><strong>選択バイアスの評価も、質の評価も行われていません</strong></mark>。数値を引用するときは、その数値がどの原著から来ているかを確認する必要があります。</p>
+</div>
+<h3>4. 再循環量の計算 — 飽和度から求める方法</h3>
+<h4>4-1. まず定性的な兆候から</h4>
+<p>論文は、式に入る前に<strong>採血ひとつで得られる兆候</strong>を3段階で挙げています。</p>
+<p><strong>第一に、脱血カニュラの飽和度（SpreO₂）と患者の静脈血飽和度を比べる。</strong> 再循環がなければ、この2つは近い値になります。再循環が起きると、<strong>脱血カニュラで検出される酸素飽和度が再循環の量に比例して上昇</strong>します。</p>
+<p><strong>第二に、SpreO₂ と SaO₂ の推移を並べて見る。</strong> SaO₂ が下がっている状況で SpreO₂ が上がっていれば、臨床的に意味のある再循環を示唆します。<mark class="hl"><strong>とくに SpreO₂ が SaO₂ を上回った場合</strong></mark>——これは重度の再循環で起こる状況です。</p>
+<p><strong>第三に、介入の効果判定にも使える。</strong> 再循環を減らす介入が奏功すれば、<strong>SaO₂ の上昇と SpreO₂ の低下が同時に起こります</strong>。</p>
+<h4>4-2. 計算式</h4>
+<p>より正確に求めるには、<strong>酸素含量に基づき、酸素飽和度で表現した</strong>次の式を使います。</p>
+<pre><code>再循環率（%） ＝ (SpreO₂ − SvO₂) ÷ (SpostO₂ − SvO₂) × 100</code></pre>
+<div class="tw"><table>
+<thead><tr><th>記号</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td><strong>SpreO₂</strong></td><td>脱血カニュラに入る血液の酸素飽和度</td></tr>
+<tr><td><strong>SpostO₂</strong></td><td>送血カニュラから出ていく血液の酸素飽和度</td></tr>
+<tr><td><strong>SvO₂</strong></td><td><mark class="hl"><strong>体外循環に入る直前</strong></mark>の静脈血の酸素飽和度（ECMO で酸素化される前）</td></tr>
+</tbody></table></div>
+<p><strong>SpreO₂ と SpostO₂ は、人工肺の入口・出口それぞれの血液ガス分析で直接測定できます。</strong></p>
+<p>境界条件も明示されています。</p>
+<ul><li><strong>SpreO₂ ＝ SvO₂ のとき、再循環分画は 0%</strong>（脱血しているのは純粋に患者の静脈血）</li><li><strong>SpreO₂ ＝ SpostO₂ のとき、再循環は 100%</strong>（脱血しているのは送ったばかりの血そのもの）</li></ul>
+<h4>4-3. この式の弱点 — SvO₂ をどう得るか</h4>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>ここが本論文でいちばん重要な指摘 「この手法の主たる限界は SvO₂ の決定である。実のところ、<strong>これは通常 Swan-Ganz カテーテルを肺動脈に留置して得られる混合静脈血飽和度には対応しない</strong>。この部位からの血液サンプルには、ECMO 回路によって再注入された酸素化血が含まれるからである。」</p>
+<p><mark class="hl"><strong>VV-ECMO 中の肺動脈血は、定義上すでに「ECMO で処理された血」を含んでいる</strong></mark>。VV-ECMO は右房に返しているので、右房 → 右室 → 肺動脈という経路上、ECMO の送血が必ず混ざります。一般 ICU の「混合静脈血 ＝ 全身から戻った血の代表値」という前提が、VV-ECMO では成立しません。</p>
+</div>
+<p>提案されている解決策は2つです。</p>
+<div class="tw"><table>
+<thead><tr><th>方法</th><th>内容</th><th>長所</th><th>短所</th></tr></thead>
+<tbody>
+<tr><td><strong>CVL 法</strong></td><td><strong>上大静脈または下大静脈</strong>に留置した中心静脈カテーテルから静脈血飽和度を測定する</td><td>容易に測定できる</td><td>混合静脈血飽和度には対応しない。<mark class="hl"><strong>SVC と IVC の酸素含量の差を考慮できない</strong></mark></td></tr>
+<tr><td><strong>SvO₂ 法</strong>（Van Heijst らの提案）</td><td>①<strong>ECMO の sweep gas 流量を一時的に止める</strong> ②人工呼吸器で、ECMO 補助時と同等の動脈血酸素飽和度が得られるまで調整する ③このとき脱血カニュラ内の血液の酸素飽和度が、<strong>真の混合静脈血飽和度の正確な推定値</strong>になる</td><td>正確</td><td><mark class="hl"><strong>実施が困難で、潜在的に危険</strong></mark>。とくにガス交換を体外循環に大きく依存している患者は、ECMO 循環の中断に耐えられない可能性がある</td></tr>
+</tbody></table></div>
+<p><strong>なぜ SvO₂ 法が成立するのか</strong>（原理）：sweep gas を止めれば人工肺でのガス交換が止まるため、再循環している血も「酸素化されていない静脈血」と同じ飽和度になります。つまり脱血される血のすべてが同じ飽和度になり、その値がそのまま真の静脈血飽和度を表す、という理屈です。</p>
+<h3>5. 直接測定法 — 式を使わずに測る</h3>
+<h4>5-1. 超音波希釈法</h4>
+<p><strong>迅速・簡便・信頼性が高く、非侵襲</strong>でありうる方法として挙げられていますが、<strong>術者依存性がある</strong>という留保が付いています。</p>
+<p><strong>原理</strong>：体外循環内の血液について、超音波の伝播速度と希釈の性質を解析します。<strong>生理食塩水の注入に対する超音波速度の変化</strong>を検出する仕組みです。超音波流量センサーを脱血カニュラと送血カニュラに装着します。</p>
+<p><strong>測定の流れ</strong>：</p>
+<ol><li>送血カニュラに生理食塩水をボーラス投与する</li><li>超音波の速度特性が変化し、<strong>「希釈曲線」</strong>が発生する</li><li>再循環した生理食塩水が<strong>2つ目の希釈曲線</strong>を作り、脱血カニュラ上の超音波プローブがこれを検出する</li></ol>
+<p><strong>計算</strong>：2つの曲線下面積（AUC）の比として求めます。</p>
+<pre><code>R ＝ AUC（送血カニュラ）÷ AUC（脱血カニュラ）× 100%</code></pre>
+<ul><li><strong>脱血カニュラで希釈曲線が検出されなければ、再循環はゼロ</strong></li><li><strong>脱血側と送血側で同じ希釈曲線が検出されれば、再循環は 100%</strong></li></ul>
+<p><strong>検証状況</strong>：動物モデルで、血流量を段階的に上げながら CVL 法・SvO₂ 法と比較した前臨床研究があります。結果は、<mark class="hl"><strong>超音波希釈法による再循環率は、CVL 法よりも SvO₂ 法に近かった</strong></mark>。</p>
+<p><strong>ELSA モニタ</strong>（Transonic 社）が製品化されており、送血カニュラへの生理食塩水ボーラス投与により<strong>採血なしで</strong>再循環を定量できます。超音波を再現性のある手法にしうる標準化された方法として期待されていますが、<mark class="hl"><strong>臨床では広く使われておらず、結果の妥当性検証にはさらなる研究が必要</strong></mark>です。</p>
+<h4>5-2. 熱希釈法</h4>
+<p><strong>前提として重要な事実</strong>：<mark class="hl"><strong>VV-ECMO 下では、心拍出量測定のための熱希釈法は信頼できません</strong></mark>。冷却指示薬の一部が体外循環に引き込まれてしまうためです。</p>
+<p>しかしこの性質を逆手に取れば、再循環の測定に使えます。<strong>送血カニュラにボーラスを注入し、脱血カニュラで温度-時間曲線を測定する</strong>——非侵襲的に再循環を定量しうる方法です。</p>
+<p><strong>前臨床の ex vivo 研究</strong>では、心拍出量と再循環分画の<strong>両方</strong>を同時に評価する改変熱希釈法が検討されました。結果は、<mark class="hl"><strong>再循環分画が 40% 以下であれば、臨床的に許容できる心拍出量の値が得られる</strong></mark>というものでした。</p>
+<p><strong>方法</strong>：回路に沿って2つの熱電対を配置します（1つは送血カニュラ、もう1つは脱血カニュラ）。再循環分画は温度曲線の曲線下面積の比として算出します。</p>
+<pre><code>R ＝ AUC（送血カニュラ）÷ AUC（脱血カニュラ）× 100%</code></pre>
+<p><strong>留保</strong>：これらの結果を確認するには、<strong>さらなる in vivo 研究が必要</strong>です。</p>
+<h4>5-3. リチウム希釈法</h4>
+<p><strong>ex vivo で試験・検証済み</strong>です。既知量の塩化リチウムを送血カニュラに注入し、<strong>脱血側と送血側の両方でリチウム濃度を測定</strong>。再循環分画は両カニュラのリチウム濃度比として推定します。</p>
+<p><strong>制約</strong>：<mark class="hl"><strong>リチウムが血中に蓄積する</strong></mark>という重要な限界があります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>3つの直接測定法の比較</p>
+<div class="tw"><table>
+<thead><tr><th>手法</th><th>指示薬</th><th>検証段階</th><th>主な制約</th></tr></thead>
+<tbody>
+<tr><td><strong>超音波希釈法</strong></td><td>生理食塩水</td><td>動物モデルで CVL 法・SvO₂ 法と比較済み。ELSA モニタとして製品化</td><td>術者依存性。臨床で普及していない</td></tr>
+<tr><td><strong>熱希釈法</strong></td><td>冷却指示薬</td><td>ex vivo のみ</td><td>in vivo 検証が未了。R &gt; 40% では心拍出量が信頼できない</td></tr>
+<tr><td><strong>リチウム希釈法</strong></td><td>塩化リチウム</td><td>ex vivo で検証済み</td><td>体内へのリチウム蓄積</td></tr>
+</tbody></table></div>
+<p><mark class="hl"><strong>3つとも、日常臨床で使える段階には達していません</strong></mark>。だからこそ、飽和度3つを使う数学的近似が現状の実務の中心にあります。</p>
+</div>
+<h3>6. 再循環を左右する因子</h3>
+<p>論文は再循環に影響する因子を、まず一覧として挙げています——<strong>カニュレーション構成、カニュラの位置とサイズ、再注入される血流の向き、ECMO 血流量、ポンプ回転数、胸腔内圧・腹腔内圧、患者の体位（頭頸部の回旋など）、容量状態、心拍出量</strong>。</p>
+<h4>6-1. カニュレーション構成・位置・カニュラ径</h4>
+<p><strong>大腿静脈脱血 - 内頸静脈送血の構成（＝当院の標準）では、ある程度の再循環は避けられません。</strong> 送血ジェットが脱血ポートの方向を向いているためです。</p>
+<ul><li><strong>2本のポートが近いほど再循環分画が高く</strong>、離れた配置なら減らせる</li><li><mark class="hl"><strong>相対的に大きな脱血カニュラを使うと、同じ血流量をより低いポンプ回転数で得られる</strong></mark>。その結果、脱血カニュラ内の陰圧が浅くなり、再循環を減らせる可能性がある</li></ul>
+<div class="call tip"><span class="lab">POINT</span>
+<p>「カニュラ径を上げる」という選択肢 再循環対策というと「カニュラを離す」ばかりが議論されますが、<strong>脱血カニュラを1サイズ上げる</strong>という手も原理的には有効です。同じ流量を低い回転数で得られる ＝ 吸い込む力が弱くなる ＝ 送血を引き寄せにくくなる、という理屈です。</p>
+</div>
+<h4>6-2. ポンプ回転数・体外血流量・心拍出量</h4>
+<p><strong>ポンプ回転数と再循環には直接的な相関があります。回転数が高いほど再循環が多い。</strong></p>
+<p>心拍出量（CO）との関係はより複雑です。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>再循環</th><th>ただし</th></tr></thead>
+<tbody>
+<tr><td><strong>CO が体外血流量に近い</strong></td><td><strong>増える</strong></td><td>体外循環で酸素化される静脈血の割合が減り、全身の低酸素につながる</td></tr>
+<tr><td><strong>CO が体外血流量より大きい</strong></td><td><strong>減る</strong></td><td>こちらも体外循環で酸素化される静脈血の割合が減るため、やはり全身の低酸素につながりうる</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>どちらに振れても低酸素になりうる <mark class="hl"><strong>「再循環が少ない ＝ 良い」ではありません</strong></mark>。心拍出量が高くて再循環が少ない状況では、体外循環での酸素運搬（DO₂）は増えうるものの、<strong>高い心拍出量と低いポンプ流量のミスマッチが肺前シャントを生み、難治性低酸素につながる</strong>と論文は指摘しています。</p>
+<p>この不整合を避けるため、臨床実務では <mark class="hl"><strong>ECMO 血流量を心拍出量のおよそ 2/3 にする</strong></mark> ことが推奨されています。</p>
+<p>つまり再循環は<strong>動的なプロセス</strong>であり、<strong>心拍出量と ECMO 血流量の比を考えることが必要</strong>です。だからこそ「再循環は繰り返し評価しなければならない」と論文は結んでいます。</p>
+</div>
+<h4>6-3. 胸腔内圧・心内圧・腹腔内圧</h4>
+<p><strong>胸腔内圧が上がると：</strong> 胸腔内容積の増加と胸壁コンプライアンスの低下により、中心静脈圧・心膜内圧・胸腔内圧が上昇し、左右の心拍出量が減少します。胸腔内圧が著しく高いと<strong>心臓への静脈還流が障害され</strong>、その結果、<mark class="hl"><strong>再注入された血流が優先的に脱血カニュラの方向へ向かい、再循環分画が増加します</strong></mark>。極端な場合には、静脈還流の重度の低下により <strong>ECMO 血流そのものが停止</strong>しうる。</p>
+<p><strong>腹腔内圧が上がると：</strong> IVC が有意に圧迫され、脱血が制限されます。極端な場合には ECMO 補助が停止しうる。この状況では<strong>再循環はむしろ減少しますが</strong>、回路への流量低下により<strong>全身の酸素化は悪化</strong>します。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Table 1 — 再循環に影響する因子（論文の表を日本語化）</p>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>論文の記述</th></tr></thead>
+<tbody>
+<tr><td><strong>カニュラ径</strong></td><td>相対的に大きな脱血カニュラは、より低いポンプ回転数で同じ血流量を維持でき、脱血カニュラ内の陰圧が浅くなるため、再循環を減らす可能性がある</td></tr>
+<tr><td><strong>カニュラ構成と位置</strong></td><td>2つのポートが近いほど再循環分画が高く、離れた配置なら再循環を減らせる</td></tr>
+<tr><td><strong>ポンプ回転数</strong></td><td>回転数が高いほど再循環が多い</td></tr>
+<tr><td><strong>体外血流量と心拍出量</strong></td><td>心拍出量が体外血流量に近いと再循環が増え、心拍出量が体外血流量より大きいと再循環が減る</td></tr>
+<tr><td><strong>胸腔内圧</strong></td><td>胸腔内圧が著しく高いと静脈還流が障害され、再注入血流が優先的に脱血カニュラへ向かうため、再循環分画が増える</td></tr>
+</tbody></table></div>
+<p><strong>表の読み方</strong>：5因子のうち、<mark class="hl"><strong>ベッドサイドで即座に動かせるのはポンプ回転数だけ</strong></mark>です。カニュラ径・構成は導入時の決定、胸腔内圧は人工呼吸器設定を介した間接的な操作になります。だからこそ「まず流量を落としてみる」が実務上の第一手になります。</p>
+</div>
+<h3>7. 再循環を減らす介入</h3>
+<h4>7-1. カニュラの位置を変える</h4>
+<p><strong>大腿-頸静脈構成において、ポート間に保つべき標準的な距離は定義されていません。</strong> 臨床的に意味のある再循環が検出された場合、解決策のひとつは<strong>どちらかのカニュラを引き抜いて距離を広げる</strong>ことです。</p>
+<p>論文が挙げる具体的な位置：</p>
+<div class="tw"><table>
+<thead><tr><th>カニュラ</th><th>推奨位置</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td><strong>大腿脱血カニュラ</strong></td><td>先端は<strong>右房-IVC 接合部</strong>の近く、<strong>側孔は肝内 IVC</strong> に位置させる</td><td>肝実質に囲まれたこの部分が<strong>最も虚脱しにくく</strong>、ポンプ回転数による陰圧がかかっても側孔が閉塞しにくい。<mark class="hl">ただしこの条件が、脱血カニュラを引き抜ける範囲を制限する</mark></td></tr>
+<tr><td><strong>送血カニュラ</strong></td><td><strong>上大静脈と右房の接合部</strong></td><td>—</td></tr>
+</tbody></table></div>
+<p><strong>距離の目安</strong>：<mark class="hl"><strong>脱血カニュラと送血カニュラは最低 10〜13 cm 離して配置する</strong></mark>ことが、公表されている文献で推奨されています。</p>
+<p><strong>両大腿カニュレーションの場合</strong>：脱血カニュラ先端を下大静脈に、送血カニュラ先端を右房に置くことが推奨されます。</p>
+<p><strong>代替の位置取り</strong>：文献には、<strong>脱血カニュラを SVC に位置させる</strong>ことがカニュラの改造や追加穿刺なしで可能だとする報告もあります。この代替位置は、<mark class="hl"><strong>血管内容量が少ない患者や、胸腔内圧・腹腔内圧が高い患者でも十分な補助を提供できる</strong></mark>という利点があります。この手技の要点は、<strong>希釈超音波モニタリングを使って最も再循環の低い位置を同定できる</strong>点にあります。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>カニュラを操作するときは 「カニュラを操作している間は、血流を注意深く監視すべきである」と論文は明記しています。位置を動かすことは脱血不良を招きうるためです。</p>
+</div>
+<h4>7-2. 脱血カニュラを追加する（VV-V ECMO）</h4>
+<p><strong>2本目の脱血カニュラを追加すると、より低いポンプ回転数で同等の血流量を達成でき、その結果、静脈側の陰圧が浅くなります。</strong></p>
+<p><strong>両大静脈脱血の VV-V ECMO</strong>（左鎖骨下静脈から上肢側の2本目の脱血カニュラを挿入）は、難治性低酸素を呈する VV-ECMO 患者において、<mark class="hl"><strong>安全かつ有効に酸素飽和度を改善しうる</strong></mark>ことが示されています。酸素化が改善するのは、<strong>同じポンプ回転数でより高い流量が得られ、しかも再循環が増えないため</strong>です。</p>
+<p><strong>合併症</strong>：解剖学的構造の損傷、カニュラ関連感染リスクの増加。後者は、カニュラ挿入部の密閉ドレッシングを無菌的手技で維持すれば最小化しうる。</p>
+<h4>7-3. 送血カニュラの形状を変える</h4>
+<p>送血カニュラの<strong>形状と向き</strong>を変えることで再循環を減らせることが示されています。</p>
+<p><strong>方法① 縫合による湾曲</strong>：カニュラに縫合を用いて湾曲を作り、<strong>送血ジェットを三尖弁の方向へ向ける</strong>。再循環が減少し、同時に動脈血酸素化の改善が観察されました。</p>
+<p><strong>方法② χ（カイ）配置</strong>：湾曲させた送血カニュラを三尖弁に向け、かつ<strong>脱血カニュラの遠位先端を SVC-右房接合部に置く</strong>組み合わせ。小規模のランダム化比較試験で検討され、全身の酸素化改善と関連していました。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>χ配置の解釈上の注意（論文自身の留保） この研究で使われた脱血カニュラには<strong>複数の側孔</strong>がありました。<mark class="hl"><strong>脱血カニュラの側孔の形状・数・間隔・サイズの違いが、体外式人工肺の性能改善に寄与した可能性がある</strong></mark>——つまり、効果が「カニュラの向き」によるものか「側孔の設計」によるものか、この研究では分離できていません。</p>
+<p><strong>さらなる限界</strong>：送血カニュラの改造は、カニュラを三尖弁を通して留置した場合、<strong>三尖弁損傷や三尖弁逆流</strong>を招きうる。</p>
+</div>
+<h4>7-4. 両大静脈二腔カニューレ（DLC）</h4>
+<p><mark class="hl"><strong>カニュラ設計における最も重要な進歩のひとつであり、再循環を減らす方法として最も有効と考えられています。</strong></mark></p>
+<p><strong>設計の変遷</strong>：</p>
+<ul><li><strong>1980年代の原型</strong>：単一大静脈（unicaval）設計。先端は右房で終わり、<strong>脱血ポートと送血ポートが比較的近接</strong>していた</li><li><strong>現行の Wang-Zwische 二腔カニューレ</strong>：<strong>両大静脈（bicaval）設計</strong>。遠位先端は IVC に位置し、<strong>脱血ポートは SVC と IVC の両方</strong>にあり、<strong>送血ジェットは三尖弁に向けられている</strong></li></ul>
+<p><strong>成績</strong>：再循環は <mark class="hl"><strong>急性期には 2% という低さ</strong></mark> まで報告されています。ただし <mark class="hl"><strong>VV-ECMO 療法が数日にわたると 40% まで上昇した</strong></mark> という報告もあります。</p>
+<p><strong>利点</strong>：単一の血管アクセスで済む。</p>
+<p><strong>欠点</strong>：</p>
+<div class="tw"><table>
+<thead><tr><th>問題</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>誤位置のリスクが高い</strong></td><td>再循環を著しく増やし、補助の有効性を損なう。動物モデルでは再循環率が<mark class="hl"><strong>約 50%</strong></mark>まで上昇したと報告。<mark class="hl"><strong>初回挿入後の調整は、送血ジェットの向きを適切に保つため、必ず心エコーガイド下で行うべき</strong></mark></td></tr>
+<tr><td><strong>心血管穿孔</strong></td><td>リスク増加が指摘されている</td></tr>
+<tr><td><strong>出血と血栓</strong></td><td>カニュラの側孔が<strong>非生理的な壁面せん断応力</strong>を生み、血小板活性化と止血障害を引き起こす</td></tr>
+</tbody></table></div>
+<p><strong>側孔設計の研究</strong>：IVC と SVC の逆流が、収縮後期と拡張後期にカニュラ側孔の位置で最大の壁面せん断応力を生じさせることが同定されました。最も性能が良かったのは、<mark class="hl"><strong>SVC 側に 3 個、IVC 側に 16 個の側孔を持つ DLC</strong></mark> で、再循環を起こさずに平均壁面せん断応力を有意に低減できました。</p>
+<h4>7-5. 静脈-右室（V-RV）カニュレーション</h4>
+<p>従来の大腿-頸静脈構成の変法で、<strong>IVC からの脱血を維持しつつ、送血カニュラを三尖弁を越えて右室内に留置</strong>します。頸静脈から経皮的に行います。</p>
+<p><strong>成績</strong>：イヌモデルの研究で、有意に少ない再循環を示しました。</p>
+<p><strong>問題</strong>：送血カニュラを右室内に留置することは、<mark class="hl"><strong>心内膜損傷と不整脈</strong></mark>と関連することが判明しています。こうした損傷を減らすには<strong>専用カテーテルの開発が必要</strong>である、と論文は述べています。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Table 2 — 再循環を減らす介入（論文の表を日本語化）</p>
+<div class="tw"><table>
+<thead><tr><th>介入</th><th>論文の記述</th></tr></thead>
+<tbody>
+<tr><td><strong>カニュラ位置の変更</strong></td><td>どちらかのカニュラを引き抜き、脱血カニュラと送血カニュラの距離を広げる</td></tr>
+<tr><td><strong>脱血カニュラの追加</strong></td><td>2本目の脱血カニュラを追加すると、より低いポンプ回転数で同等の血流量が得られ、静脈側の陰圧が浅くなる</td></tr>
+<tr><td><strong>送血カニュラ形状の操作</strong></td><td>送血カニュラの形状と向きを変えることで再循環を減らせることが示されている</td></tr>
+<tr><td><strong>両大静脈二腔カニューレ（DLC）</strong></td><td>カニュラ設計における最も重要な進歩のひとつ。再循環の低減に有効で、この点では最も効果的な方法と考えられている</td></tr>
+<tr><td><strong>静脈-右室カニュレーション</strong></td><td>IVC からの脱血を維持し、頸静脈から経皮的に、送血カニュラを三尖弁を越えて右室に留置する</td></tr>
+</tbody></table></div>
+<p><strong>表の読み方</strong>：<mark class="hl">上から下へ行くほど侵襲的・専門的になり、同時にエビデンスの質は下がります</mark>。当院で現実に取りうるのは最上段（カニュラを離す）で、これは当院講義の指示とも一致しています。DLC 以下は導入時の戦略選択の問題であり、進行中の症例で切り替える性質のものではありません。</p>
+</div>
+<h3>8. 結論と今後の方向</h3>
+<p><strong>結論（論文の記述）</strong>：</p>
+<ul><li>再循環は VV 体外循環療法中に生じる、<strong>頻度が高く、多因子性で、動的な</strong>現象である</li><li><strong>重度の難治性低酸素</strong>につながりうるため、その認識と管理は基本的な関心事である</li><li><mark class="hl"><strong>現時点では、再循環の正確な量を定量することは困難であり、その測定は主に数学的近似によって行われている</strong></mark></li><li>再循環を系統的・直接的に臨床測定する方法の研究は増えているが、<strong>臨床実践での使用を検証・標準化するにはさらなるヒト研究が必要</strong></li><li>再循環を最小化する代替カニュレーション戦略やデバイスが提案されているが、<mark class="hl"><strong>その有効性と安全性に関するデータはいまだ限られている</strong></mark></li></ul>
+<p><strong>今後の方向</strong>：</p>
+<ul><li><strong>ELSA モニタ</strong>のさらなる研究——再循環を再現性をもって定量できる非侵襲デバイスとして</li><li><strong>二腔カニューレの正しい位置決め</strong>の研究、および心エコー・透視といった異なるデバイスを用いた<strong>標準化された手技の定義</strong>。これによりデバイス関連合併症を減らせる可能性がある</li></ul>
+<h2>🔍 批判的吟味（ジャーナルクラブでの論点）</h2>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>議論すべき5点</p>
+</div>
+<p><strong>1. ナラティブレビューであり、系統性がない</strong> 検索は PubMed のみ、検索語は "Recirculation in Veno venous ECMO" の1つだけ、54件から「最も関連が深く、包括的で、新しい」ものを定性的に選んでいます。<mark class="hl"><strong>質評価もバイアス評価も行われていません</strong></mark>。数値を引用するときは、必ず原著を確認する必要があります。</p>
+<p><strong>2. 「許容範囲 10〜30%」の根拠が薄い</strong> 論文は「経験的な許容範囲はおよそ 10〜30% だが、標準化された閾値は定義されていない」と書きつつ、この範囲を単一の観察研究（Gehron ら）に帰しています。一方で同じ段落に「報告されている再循環の程度は 2% から 57% まで変動する」ともあります。<mark class="hl"><strong>この範囲を「正常値」として使うことはできません</strong></mark>。臨床判断は R率の絶対値ではなく、<strong>有効流量（血流量 ×（1 − R））が患者の必要量を満たしているか</strong>で行うべきです。</p>
+<p><strong>3. 数値の出典に不整合の疑いがある</strong> Gehron らの報告として「中央値 14〜16%」「最大約 58%」「35% 超は全測定の 13〜14% のみ」が引用されていますが、参考文献リストでは Gehron 2023 の掲載誌が *J. Clin. Med.* 2023, <strong>4</strong>, 416 と記載されています。J Clin Med の 2023 年は Volume 12 のはずで、<mark class="hl"><strong>巻号の記載が不正確</strong></mark>です。原著に当たる際は注意が必要です。</p>
+<p><strong>4. 「SvO₂ 法」は実行可能性に重大な疑問がある</strong> Van Heijst らの方法は理論的には正確ですが、<strong>sweep gas を止める</strong>ことが前提です。論文自身が「ECMO 循環の中断に耐えられない可能性がある」と警告しています。<mark class="hl"><strong>最も正確な方法が、最も測りたい患者（重症例）では使えない</strong></mark> という構造的な問題があり、これは本テーマ全体の根本的な制約です。実務では精度の劣る CVL 法を使わざるを得ません。</p>
+<p><strong>5. 介入のエビデンスレベルが総じて低い</strong></p>
+<ul><li>χ配置：<strong>小規模 RCT</strong> 1件。しかも側孔設計の交絡を論文自身が認めている</li><li>VV-V（脱血カニュラ追加）：<strong>単施設後ろ向き研究</strong></li><li>V-RV：<strong>イヌモデル</strong>のみ</li><li>DLC の側孔最適化：<strong>数理モデル</strong></li><li>「DLC が最も有効」という評価は、<mark class="hl"><strong>直接比較試験ではなく、記述的な位置づけ</strong></mark>にとどまります</li></ul>
+<div class="call note"><span class="lab">補足</span>
+<p>JC で投げかけたい問い</p>
+<ul><li>当院で「再循環が疑わしい」と判断したとき、R率を計算しているか。していないなら、何を根拠に判断しているか</li><li>CVL 法で SvO₂ を代用するとき、SVC と IVC のどちらから採っているか。統一されているか</li><li>「流量を上げても酸素化が改善しない」を再循環の兆候として認識できているか</li><li>心拍出量と ECMO 血流量の比（2/3 の目安）を意識したことがあるか</li></ul>
+</div>
+<h2>📚 主要な引用文献</h2>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td><strong>Abrams D, Bacchetta M, Brodie D.</strong> Recirculation in Venovenous Extracorporeal Membrane Oxygenation. *ASAIO J.* 2015;61:115-121</td><td>本レビューが繰り返し引用する再循環の基本文献。定量の困難さ、DLC の心血管穿孔リスクの出典</td></tr>
+<tr><td><strong>van Heijst AF, et al.</strong> Recirculation in Double Lumen Catheter Veno-Venous ECMO Measured by an Ultrasound Dilution Technique. *ASAIO J.* 2001;47:372-376</td><td><mark class="hl"><strong>SvO₂ 法（sweep gas を止めて真の SvO₂ を得る方法）の原典</strong></mark>。超音波希釈法の原理も</td></tr>
+<tr><td><strong>Gehron J, et al.</strong> The Impact of Recirculation on Extracorporeal Gas Exchange and Patient Oxygenation during VV-ECMO. *J Clin Med.* 2023</td><td>許容範囲 10〜30%、中央値 14〜16%、ECMO 血流量 ＝ CO の 2/3 推奨、圧の影響——数値の主要な出典</td></tr>
+<tr><td><strong>Conrad SA, Wang D.</strong> Evaluation of Recirculation During VV-ECMO Using CFD Incorporating Fluid-Structure Interaction. *ASAIO J.* 2021;67:943-953</td><td>再循環 2〜57% の変動幅、DLC の急性期成績。<span class="wl">VV-ECMOの再循環を左右する因子 — CFDで血流比・SVCカニュラ位置・返血の向きが20%超を占めた（ASAIOJ2021）</span> と同じ研究群</td></tr>
+<tr><td><strong>Palmér O, et al.</strong> Cannula Design and Recirculation During VV-ECMO. *ASAIO J.* 2016;62:737-742</td><td>超音波希釈法 vs CVL 法 vs SvO₂ 法の動物モデル比較。CVL 法の限界の出典</td></tr>
+<tr><td><strong>Bonacchi M, et al.</strong> A novel strategy to improve systemic oxygenation in VV-ECMO: The "χ-configuration". *J Thorac Cardiovasc Surg.* 2011;142:1197-1204</td><td>χ配置の小規模 RCT</td></tr>
+<tr><td><strong>Dave SB, et al.</strong> Outcomes following additional drainage during VV-ECMO: A single-center retrospective study. *Perfusion.* 2024</td><td>VV-V（脱血カニュラ追加）の臨床成績</td></tr>
+<tr><td><strong>Berger D, et al.</strong> Modified Thermodilution for Simultaneous Cardiac Output and Recirculation Assessment in VV-ECMO. *Anesthesiology.* 2024;140:1002-1015</td><td>改変熱希釈法。R ≤ 40% なら心拍出量も許容できる</td></tr>
+<tr><td><strong>Togo K, et al.</strong> Optimal drainage cannula position in dual cannulation for VV-ECMO. *Int J Artif Organs.* 2018;41:867-871</td><td>両大腿カニュレーションの位置推奨</td></tr>
+<tr><td><strong>Ko UW, et al.</strong> Alternative position of cannulae in VV-ECMO for maintaining sufficient flow support. *Gen Thorac Cardiovasc Surg.* 2023;71:369-372</td><td>脱血カニュラを SVC に置く代替位置</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>5行で持ち帰る</p>
+<p><strong>1.</strong> 再循環率は飽和度3つで計算できる：<mark class="hl"><strong>R ＝ (脱血側SO₂ − SvO₂) ÷ (送血側SO₂ − SvO₂)</strong></mark>。脱血側 ＝ SvO₂ なら 0%、脱血側 ＝ 送血側なら 100%。</p>
+<p><strong>2.</strong> <mark class="hl"><strong>SvO₂ に肺動脈カテーテルの血を使ってはいけない</strong></mark>。VV-ECMO 中の肺動脈血には ECMO が返した酸素化血が混ざっている。実務では CVL 法（SVC または IVC の CV カテ）で代用し、その値が近似であることを承知しておく。</p>
+<p><strong>3.</strong> 許容範囲はおよそ 10〜30% とされるが、<mark class="hl"><strong>標準化された閾値は存在しない</strong></mark>。R率そのものより、<strong>有効流量（血流量 ×（1 − R））が足りているか</strong>で判断する。</p>
+<p><strong>4.</strong> 再循環を増やすのは、<mark class="hl"><strong>カニュラが近い・回転数が高い・胸腔内圧が高い</strong></mark>。心拍出量との比も効き、ECMO 血流量は <strong>CO の約 2/3</strong> が目安。人工呼吸器設定も再循環対策の一部になる。</p>
+<p><strong>5.</strong> 減らす手は、当院で取りうる順に <strong>カニュラを 10〜13 cm 以上離す → 脱血カニュラの追加 → 送血の向きを三尖弁へ → DLC</strong>。DLC が最も有効とされるが、<mark class="hl"><strong>誤位置で再循環が約 50% に跳ね上がる</strong></mark>ため、調整は必ず心エコーガイド下で行う。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
