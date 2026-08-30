@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>成人ARDSへの体外肺補助 — VV-ECMOは重症例で死亡を下げ、ECCO2Rはルーチン適応にならない（総説・NEJMEvid2022）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">成人ARDSへの体外肺補助 — VV-ECMOは重症例で死亡を下げ、ECCO2Rはルーチン適応にならない（総説・NEJMEvid2022）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Munshi L, Brodie D, Fan E. Extracorporeal support for acute respiratory distress syndrome in adults. NEJM Evid 2022;1(10):EVIDra2200128. DOI: 10.1056/EVIDra2200128</dd><dt>掲載誌</dt><dd>NEJM Evidence（2022-09-27）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1056/EVIDra2200128" target="_blank" rel="noopener">doi.org/10.1056/EVIDra2200128</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Extracorporeal Support for Acute Respiratory Distress Syndrome in Adults</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>導入判断の言語を統一する</strong>：「酸素化が悪いから」ではなく、<mark class="hl">P/F &lt;80 が最適管理（腹臥位トライアルを含む）後も持続</mark>、または <mark class="hl">pH &lt;7.25 が Pplat &lt;30 の枠内で是正できない</mark> の2枚看板で相談を上げる。この2行はカルテの相談テンプレートにそのまま書ける。</li><li><strong>導入前チェックの「時計」を意識する</strong>：挿管からの日数は候補性そのものを左右する。Pplat &gt;30 かつ FiO₂ &gt;90% を7日超えて曝露した症例は相対禁忌。<mark class="hl">「まだ持ちこたえているから明日相談」を繰り返すと、相談した時には適応外になっている</mark>。</li><li><strong>導入後の人工呼吸器は「肺を休ませる設定」に切り替える</strong>：Pplat &lt;25 cmH₂O・PEEP ≥10 cmH₂O・呼吸回数 4〜10/分（または自発）・FiO₂ は可能な限り低く。導入直後にこの4行を指示簿へ書き込むルールにする。</li><li><strong>抗凝固の初期目標を1つに決める</strong>：UFH で aPTT 40〜55秒 または 抗Xa 0.2〜0.3 IU/mL。当院ではどちらをモニタとするかを事前に決め、出血高リスク例では中断・減量を「例外」ではなく「選択肢」として明文化する。</li><li><strong>離脱を毎日議題にする</strong>：多職種ラウンドの定型項目に「離脱可否」を入れる。基準は FiO₂ ≤60%・PEEP ≤10・PaO₂ ≥70 mmHg を、換気 ≤6 mL/kg PBW・Pplat ≤28・RR ≤28 で満たせるか。</li><li><strong>ECCO₂R は導入しない</strong>：本総説の結論は「ほとんどの場合、高品質な臨床試験の中に限る」。当院で CO₂ だけが問題の症例に体外補助を持ち出す理由はない。</li><li><strong>症例数の壁を直視する</strong>：年30例以上の施設は年6例未満より死亡率が低い。当院単独の年間症例数を踏まえ、<mark class="hl">「自施設で回すか、搬送するか」を平時に決めておく</mark>（搬送・出張カニュレーションの安全性は複数研究で示されている）。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症ARDSでは肺保護換気が予後を改善する。一方で最重症例では圧・量を制限した換気とガス交換の維持が両立しない層が存在し、ECMO はそこを埋める補助手段として1972年以降試みられてきた。CESAR（2009）と H1N1 パンデミックが現代のVV-ECMOを臨床の道具にした。</li><li><strong>Unknown</strong>：EOLIA（2018）が主要評価項目で有意差を示さなかったため、「誰に・いつ始めるか」「ECMO中の最適な換気・抗凝固・輸血・離脱」がいずれも未確定のまま残った。ECCO₂R の役割も定まっていなかった。</li><li><strong>What's new</strong>：本総説は、EOLIA の事後ベイズ解析・個別患者データメタ解析・ネットワークメタ解析までを含めた「EOLIA後」のエビデンス全体を1枚に統合し、<mark class="hl">VV-ECMO は厳選された重症ARDSで死亡を下げる／ECCO₂R はルーチン適応にならない</mark> という2本の結論を明示した。さらに ELSO 2021 ガイドラインに基づく適応・禁忌・管理数値を Figure 4 に一覧化し、「現在の推奨」と「不確実な領域」を並置した点が実務的に新しい。</li><li><strong>Vault内の関連ノートとの対比</strong>：</li><li><span class="wl">ARDS 60年の体外肺補助 — VV-ECMOは重症例で確立、ECCO2Rは研究の場に留める（ナラティブレビュー・ICM2026）</span> は本総説の4年後の続編にあたり、結論（VV-ECMOは確立／ECCO₂Rは研究へ差し戻し）は完全に一致する。違いは換気目標の粒度で、ICM2026 は「PEEP 10 下で駆動圧 15 cmH₂O 以下」まで踏み込み near-apneic 換気のRCT待ちを明記する。本総説はまだ Pplat &lt;25・RR 4〜10 という ELSO 2021 の枠に留まる。<mark class="hl">実務では新しい ICM2026 の駆動圧目標を上乗せして使うのが妥当</mark>。</li><li><span class="wl">豪州・NZのVV-ECMOガイドライン — EOLIA基準なら条件付き推奨、ECMO中の腹臥位はルーチンでは推奨しない（GRADE・パート1・CritCareResusc2026）</span> は同じ結論を GRADE で条件付き推奨に格上げしたうえで、ECMO中の腹臥位を否定し、生存者QOL（6か月で54%が死亡または中等度〜重度障害）を家族説明の必須項目に据えた。本総説は QOL を「ARDS生存者と同等かむしろ良好」と控えめに評価しており、<mark class="hl">予後説明のトーンが両者で食い違う</mark>。家族説明では厳しいほう（豪NZ）の数字を用意しておくほうが安全。</li><li><span class="wl">EOLIAのベイズ流Post hoc解析（重症ARDSへのECMO・JAMA2018）</span> は本総説が「追加の支持」として引く根拠そのもの。RR&lt;1 の事後確率が事前分布によらず 89〜99% である一方、死亡率20%以上の改善確率は 0〜48% にとどまるという二面性は、本総説の「highly selected patients で改善する」という慎重な言い回しの裏付けになっている。</li><li><span class="wl">急性呼吸不全に対するVV-ECMO（Eddy Fanら専門家レビュー ICM2016）</span> は同じ Fan による EOLIA 前の専門家レビュー。輸血閾値 Hb 70 g/L・脱血 29〜31 Fr など本総説が触れない実務値を持っており、<mark class="hl">本ノートと2本セットで読むと導入から離脱までの数値が埋まる</mark>。</li><li>ECCO₂R については <span class="wl">REST試験 ECCO2Rによる低一回換気量とARDS90日死亡（JAMA2021）</span> と <span class="wl">ECCO2R療法の適応と実践（欧州エキスパート合意 2020）</span> があり、本総説の否定的評価はREST の結果を根拠にしている点で一貫する。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 現代のエビデンス全体（CESAR・EOLIA・ベイズ再解析・個別患者データメタ解析）を統合すると、<strong>VV-ECMO は厳選された重症ARDS患者で死亡を減らす</strong>。その主たる機序はガス交換の代行そのものより、<strong>侵襲的人工呼吸の害（VILI）を回避できること</strong>にある。一方 <strong>ECCO₂R は現時点でルーチン適応がなく、原則として臨床試験の枠内に留めるべき</strong>である。</p>
+</div>
+<ul><li>ARDSはBerlin定義で軽症（P/F 200〜300、死亡27%）・中等症（100〜200、32%）・重症（&lt;100、45%）に分かれ、重症の一部では圧・量を制限した換気とガス交換維持が両立しない</li><li>ECLSは大きく ECMO（酸素化＋CO₂除去）と ECCO₂R（CO₂除去のみ）に分かれる。VV-ECMOでは酸素化は血流量に、CO₂除去はスイープガス流量に依存する</li><li>CESAR（n=180）は6か月無障害生存を63% vs 47%（RR 0.69、95%CI 0.05〜0.97）と改善させたが、ECMO割付の75%しか実際にECMOを受けず、対照群の70%しか肺保護換気を受けていない点が批判された</li><li>EOLIA（240例で早期中止）は60日死亡 35% vs 46%（P=0.09）で主要評価項目は有意差なし。ただし治療失敗（死亡またはECMOへのクロスオーバー）は 35% vs 58%（P&lt;0.001）</li><li>個別患者データメタ解析（429例）では90日死亡 36%（77/214）vs 48%（103/215）、RR 0.75（95%CI 0.60〜0.94）</li><li>ECCO₂R の3RCT（計531例）統合では死亡 37%（97/261）vs 34%（91/265）、RR 1.19（95%CrI 0.70〜2.29）。頭蓋内外の出血は ECCO₂R 群で多い（RR 3.00、95%CrI 0.41〜20.51）</li><li>合併症はELSO登録7579例で出血23%・血栓25%、神経合併症は約10%。出血は血栓より死亡と強く関連する</li><li>施設症例数は予後に効く。年30例以上の施設は年6例未満より死亡率が低い</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ARDS</strong>は、肺自体（肺炎・誤嚥）または全身（敗血症・外傷）の侵襲によって肺の毛細血管透過性が亢進し、心原性でない肺水腫・肺胞への滲出・サーファクタント枯渇が起こる病態。結果としてびまん性肺胞傷害となり、ガス交換障害と肺コンプライアンス低下（＝硬い肺）が生じる。 <strong>Berlin定義</strong>は低酸素の程度で3段階に分ける。P/F比（PaO₂/FIO₂）が200〜300 mmHgで軽症、100〜200で中等症、100未満で重症。死亡率はそれぞれ27%・32%・45%と段階的に上がる。 <strong>VILI（ventilator-induced lung injury）</strong>＝陽圧換気そのものが肺を傷つける現象。過伸展（volutrauma）、周期的虚脱・再開通（atelectrauma）、それらが誘発する炎症（biotrauma）を含む。だから ARDS の管理は「原因疾患の治療＋VILIを最小化する支持療法」に集約される。鎮静深度・筋弛緩・不動化といった支持療法由来の医原性合併症も同時に減らす必要がある。 <strong>肺保護換気</strong>＝気道内圧と換気量を制限する戦略（1回換気量 4〜8 mL/kg 予測体重、プラトー圧 30 cmH₂O 以下）。ARDSNet 以来これが標準。 <strong>ECLS（extracorporeal life support）</strong>＝血液を体外に取り出し、人工肺（membrane lung）でガス交換して戻す一群の技術。<strong>ECMO</strong> は酸素化とCO₂除去の両方を担い、<strong>ECCO₂R</strong> はCO₂除去に特化する。 <strong>VV（venovenous）</strong>は静脈から脱血し静脈へ返血する構成で呼吸補助専用。<strong>VA（venoarterial）</strong>は動脈へ返血し循環も支える。本総説は呼吸補助（VV-ECMO と ECCO₂R）に絞っている。 <strong>ultra-lung-protective ventilation</strong>＝体外補助でCO₂を肩代わりさせることで、通常の肺保護換気（6 mL/kg）よりさらに低い換気量（3〜4 mL/kg）や低い圧まで下げる戦略。「肺を休ませる（lung rest）」考え方。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>ARDS管理の中心は原疾患治療と支持療法であり、その支持療法の主役である陽圧換気が同時に VILI という害をもたらす。したがって ARDS 管理の焦点は「気道内圧と換気量を最小化すること」に置かれてきた。</p>
+<p>しかし、現行の標準治療の枠内では圧・量制限換気を提供できない、あるいは肺傷害の重症度ゆえに十分なガス交換を維持できない一群が存在する。ECMO は障害された肺を部分的または完全にバイパスして、ガス交換（高CO₂血症と低酸素血症の是正）を支えると同時に、より低侵襲な人工呼吸を可能にする。</p>
+<p>著者らが強調する視点の転換は次の点にある。ECMO は当初「極端なガス交換障害に対する救済策」として始まったが、VILI の害についての理解が深まるにつれ、<strong>主たる利益の機序は「VILIを軽減し、人工呼吸の侵襲度をさらに下げ、自己肺が治る時間を稼ぐこと」にある</strong>と理解されるようになった。本総説の目的は、この視点から呼吸補助目的の ECLS のエビデンスを整理することにある。</p>
+<h3>3. ECLSとは何か（What Is ECLS?）</h3>
+<h4>Figure 1 の内容（ECLSの適応分類）</h4>
+<p>原図は「Extracorporeal Life Support」を頂点に、4つの臨床状況とモダリティ・目的を対応させた分岐図。内容を表に起こす。</p>
+<div class="tw"><table>
+<thead><tr><th>臨床状況</th><th>モダリティ</th><th>目的</th></tr></thead>
+<tbody>
+<tr><td>心不全（Cardiac Failure）</td><td>V-A ECMO</td><td>心不全に対する血行動態補助</td></tr>
+<tr><td>心呼吸不全（Cardiorespiratory Failure）</td><td>V-VA ECMO</td><td>心・呼吸両方に対する血行動態＋呼吸補助</td></tr>
+<tr><td>呼吸不全（重度低酸素血症）</td><td>V-V ECMO</td><td>酸素化とCO₂除去</td></tr>
+<tr><td>呼吸不全（重度高CO₂血症）</td><td>V-V または A-V ECCO₂R</td><td>CO₂除去</td></tr>
+</tbody></table></div>
+<p>出典は ELSO の Maastricht Treaty（体外生命維持の用語統一に関するポジションペーパー、Conrad SA ら、Am J Respir Crit Care Med 2018;198:447-451）。</p>
+<h4>VV-ECMO の構成</h4>
+<ul><li>典型的には<strong>2本のシングルルーメン大口径カニュラを2つの中心静脈に留置</strong>する。片方（例：大腿静脈）から脱血し、ポンプで人工肺へ送り、そこでガス交換した血液をもう一方（例：内頸静脈）から静脈系へ返す</li><li>あるいは<strong>脱血・返血の両ルーメンを持つダブルルーメンカニュラ</strong>を1本の大静脈（典型的には右内頸静脈）に留置する</li></ul>
+<h4>生理学（ここが実務の要）</h4>
+<div class="tw"><table>
+<thead><tr><th>パラメータ</th><th>何で決まるか</th><th>実務上の意味</th></tr></thead>
+<tbody>
+<tr><td>酸素化</td><td><strong>血流量（blood flow rate）依存</strong></td><td>SpO₂ が上がらないときにまず触るのはポンプ流量。脱血不良・再循環がないかを疑う</td></tr>
+<tr><td>CO₂除去</td><td><strong>スイープガス流量（sweep flow）依存</strong></td><td>PaCO₂ が高いときはスイープを上げる。血流量を上げる必要はない</td></tr>
+</tbody></table></div>
+<h4>ECCO₂R の構成と位置づけ</h4>
+<ul><li><strong>VV型</strong>（ポンプあり）と<strong>AV型</strong>（動静脈、ポンプ不要）がある。AV型は膜への血流を自己心拍出量に依存する</li><li>酸素化を追加する必要がなく、CO₂除去のみが目的のときに用いる</li><li>CO₂除去は効率が高いため、<strong>より細いカニュラと低い血流量</strong>で足りる</li><li>ARDS における想定用途は、既に肺保護換気を受けている患者でさらに1回換気量・プラトー圧・駆動圧を下げにくい場合に、それを可能にすること（＝ultra-lung-protective ventilation の実現手段）</li></ul>
+<h3>4. 呼吸不全に対するECMOの歴史</h3>
+<div class="tw"><table>
+<thead><tr><th>年</th><th>出来事</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1972</td><td>成人急性呼吸不全に対するECMO初の成功例</td><td>Hill JD ら（外傷後呼吸不全＝shock-lung syndrome、Bramson膜型肺）N Engl J Med 1972;286:629-634</td></tr>
+<tr><td>1979</td><td>呼吸不全に対する初のECMO対照試験（VA構成）</td><td>Zapol WM ら JAMA 1979。従来治療群・ECMO群ともに<strong>死亡率90%超</strong>。ECMOへの熱意を大きく削いだ</td></tr>
+<tr><td>1990年代〜2000年代</td><td>技術と選択の改善</td><td>VV構成の採用、ポンプと人工肺の進歩、コーティング回路（ヘパリン結合回路により抗凝固必要量が低下）、患者選択の改善、より早期のカニュレーション</td></tr>
+<tr><td>2009</td><td>2つの節目</td><td>CESAR試験の発表と、インフルエンザA(H1N1)パンデミックでのVV-ECMOの世界的急拡大</td></tr>
+</tbody></table></div>
+<p>初期のECMOは「他の介入が失敗したときの救済手段」として、しかもVILIの概念がまだ乏しい時代に、重症ARDSの経過の後半で使われていた点を著者らは強調する。</p>
+<h3>5. エビデンス — VV-ECMO</h3>
+<h4>5-1. CESAR試験（Peek GJ ら、Lancet 2009;374:1351-1363）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>対象</td><td>重症だが可逆的な急性呼吸不全（Murray score &gt;3.0、または pH &lt;7.20）</td></tr>
+<tr><td>n</td><td>180例（Figure 2 では「180 patients enrolled」）</td></tr>
+<tr><td>介入</td><td>ECMOセンターへ搬送しECMO検討 vs 搬送せず（ECMOなしで呼吸不全管理）</td></tr>
+<tr><td>主要評価項目</td><td>6か月時点の障害なし生存</td></tr>
+<tr><td>結果</td><td><strong>63% vs 47%</strong>、相対リスク 0.69（95%CI 0.05〜0.97）</td></tr>
+<tr><td>批判</td><td>①ECMO割付患者のうち<strong>実際にECMOを受けたのは75%のみ</strong> ②対照群で経過中いずれかの時点でも肺保護換気を受けたのは<strong>70%のみ</strong>。すなわち両群の管理差がECMO以外の要因で結果に影響した可能性がある</td></tr>
+</tbody></table></div>
+<p>著者らはこの試験が熱意を高めた一方、懐疑派がさらなるエビデンスを求めたと総括する。</p>
+<h4>5-2. H1N1パンデミック（2009）</h4>
+<ul><li>ある報告では重症ARDS患者の<strong>75%がICU生存</strong>した</li><li>しかし ECMO にアクセスできない他の地域でも、他の救済戦略を用いて概ね同様の患者集団で同様の生存率が得られた。したがって「改善はモダリティのせいか、患者集団・疾患の違いか、ICUケア全体の変化か」が問われた</li><li>パンデミック後、英国の観察研究（H1N1でECMOを受けた患者 vs ECMOなしで管理された患者のマッチング）は<strong>生存改善</strong>を示した</li><li>フランスの傾向スコアマッチング研究は<strong>相反する結果</strong>。ただし<strong>最も利益を得たはずの部分集団がマッチコホートから除外</strong>されていた</li><li>2017年の ATS／ESICM／SCCM 合同ガイドラインは、重症ARDSに対するVV-ECMOの是非について<strong>推奨を出すにはさらなるエビデンスが必要</strong>とした</li></ul>
+<h4>5-3. EOLIA試験（Combes A ら、N Engl J Med 2018;378:1965-1975）</h4>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>組み入れ基準（Figure 2 記載）</td><td>重症ARDS：<strong>P/F &lt;50 mmHg が3時間超</strong>、<strong>または P/F &lt;80 mmHg が6時間超</strong>、<strong>または pH &lt;7.25 かつ PaCO₂ &gt;50 mmHg が6時間超</strong></td></tr>
+<tr><td>介入</td><td>人工呼吸開始7日以内のECMO vs 従来型人工呼吸のみ</td></tr>
+<tr><td>前提管理</td><td>無作為化前に<strong>筋弛緩と腹臥位を用いることが推奨</strong>された（CESARへの批判に応えた設計）</td></tr>
+<tr><td>予定n／実際</td><td>予定331例／<strong>240例で早期中止</strong>（帰無仮説を棄却できない＝futility のため）。ただし Figure 2 は「249 patients enrolled」と記載</td></tr>
+<tr><td>60日死亡</td><td><strong>35%（ECMO）vs 46%（対照）、P=0.09</strong>（有意差なし）</td></tr>
+<tr><td>主要な副次評価項目：治療失敗</td><td>死亡（ECMO群）または死亡もしくはECMOへのクロスオーバー（対照群）＝<strong>35% vs 58%、P&lt;0.001</strong></td></tr>
+<tr><td>クロスオーバー</td><td>対照群のうち厳格な基準を満たしてECMOへ移行した群は、ECMO群として登録された患者よりさらに死亡率が高かった</td></tr>
+<tr><td>合併症</td><td>両群で有意差なし。例外は<strong>ECMO群で輸血を要する出血が多かった</strong>こと</td></tr>
+</tbody></table></div>
+<p>著者らの解釈：EOLIA の結果は「重症型ARDSにおいて<strong>早期VV-ECMOが死亡を減らす役割を持ちうる</strong>」ことを示唆する。</p>
+<h4>5-4. EOLIA後の統合エビデンス（Figure 2 の下段）</h4>
+<p>CESAR と EOLIA を合わせた429例の個別患者データメタ解析（Combes A ら、Intensive Care Med 2020;46:2048-2057）の数値：</p>
+<div class="tw"><table>
+<thead><tr><th>解析</th><th>定義</th><th>効果推定値</th></tr></thead>
+<tbody>
+<tr><td><strong>統合90日死亡</strong></td><td>全体</td><td><strong>36%（77/214、ECMO群）vs 48%（103/215、CMV群）、RR 0.75（95%CI 0.60〜0.94）</strong></td></tr>
+<tr><td>Per-protocol解析</td><td>無作為化で割り付けられた治療を実際に受けた患者のみ</td><td>RR 0.75（95%CI 0.60〜0.94）</td></tr>
+<tr><td>As-treated解析</td><td>割付にかかわらずECMOを受けた患者 vs 受けなかった患者</td><td>RR 0.86（95%CI 0.68〜1.09）</td></tr>
+<tr><td>90日治療失敗</td><td>ECMO群は死亡、対照群は死亡またはECMOへのクロスオーバー</td><td><strong>RR 0.65（95%CI 0.52〜0.80）</strong></td></tr>
+<tr><td>クロスオーバー率</td><td>対照群からECMO群へ</td><td><strong>17%</strong></td></tr>
+</tbody></table></div>
+<p>これに加えて、ベイズ流の再解析（Goligher EC ら、JAMA 2018;320:2251-2259）、研究レベルのメタ解析（Munshi L ら、Lancet Respir Med 2019;7:163-172）、ネットワークメタ解析（Sud S ら、Am J Respir Crit Care Med 2021;203:1366-1377）が<strong>いずれも重症ARDSにおけるVV-ECMOの利益を支持</strong>した。</p>
+<h3>6. エビデンス — ECCO₂R</h3>
+<p>前提として、従来の肺保護換気の目標値（<strong>1回換気量 4〜8 mL/kg 予測体重、プラトー圧 30 cmH₂O</strong>）でも、<strong>重症ARDS患者の最大3分の1では依然として傷害的でありうる</strong>（Terragni PP ら、Am J Respir Crit Care Med 2007;175:160-166）。ECCO₂R が換気の侵襲度をどこまで下げられるかは、どれだけCO₂を除去できるか＝傷害された自己肺への依存をどれだけ減らせるかに規定される。</p>
+<p>ECCO₂R を評価した無作為化比較試験は3本。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>年</th><th>n</th><th>組み入れ</th><th>介入</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>Morris ら（Am J Respir Crit Care Med 1994;149:295-305）</td><td>1994</td><td>40</td><td>ARDS で PaO₂ &lt;50 mmHg が、FIO₂ 1.00・PEEP &gt;5 cmH₂O・PaCO₂ 30〜45 で2時間（fast entry）、または FIO₂ 0.60・PEEP &gt;5・Qs/Qt &gt;0.3・PaCO₂ 30〜45・ICU滞在48時間超で12時間（slow entry）</td><td>AV-ECCO₂R＋圧規定逆比換気 vs 従来型人工呼吸</td><td><strong>生存に差なし</strong></td></tr>
+<tr><td>Xtravent（Bein T ら、Intensive Care Med 2013;39:847-856）</td><td>2013</td><td>79</td><td>ARDS で P/F &lt;200 mmHg が24時間超、高PEEP（≥12 cmH₂O）下の肺保護換気中</td><td>AV-ECCO₂R＋1回換気量3 mL/kg vs 標準治療（6 mL/kg）</td><td><strong>28日・60日の死亡と人工呼吸器非装着日数に差なし</strong>。探索的解析で <strong>P/F &lt;150 mmHg のより重症な低酸素群では60日時点の人工呼吸期間が有意に短縮</strong></td></tr>
+<tr><td>REST（McNamee JJ ら、JAMA 2021;326:1013-1023）</td><td>2021</td><td>412</td><td>ARDS で P/F &lt;150 mmHg、低酸素発症から48時間以内</td><td>シングルカニュラ（ダブルルーメン）VV-ECCO₂R＋超低換気量（約3 mL/kg） vs 標準治療</td><td>目標1120例に達する前に <strong>futility と実行可能性のため早期中止</strong>。<strong>90日死亡に差なし</strong>、28日人工呼吸器非装着日数は <strong>ECCO₂R群でむしろ少ない</strong>。<strong>頭蓋内出血を含む出血が ECCO₂R 群で多い</strong></td></tr>
+</tbody></table></div>
+<h4>Figure 3 の統合結果（3試験・計531例）</h4>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>ECCO₂R群</th><th>対照群</th><th>効果推定値</th></tr></thead>
+<tbody>
+<tr><td>統合死亡</td><td>37%（97/261）</td><td>34%（91/265）</td><td><strong>RR 1.19（95%CrI 0.70〜2.29）</strong></td></tr>
+<tr><td>頭蓋内・頭蓋外出血の発生</td><td>ECCO₂R群で高い</td><td>—</td><td><strong>RR 3.00（95%CrI 0.41〜20.51）</strong></td></tr>
+</tbody></table></div>
+<p>（統合死亡データは D. McAuley との私信により入手、と原図に注記あり。CrI＝credible interval、ベイズ流の信用区間）</p>
+<h3>7. ARDSにおける臨床使用（Clinical Use for ARDS）</h3>
+<p>著者らの結論部分。ここが実務判断の骨格になる。</p>
+<ul><li><strong>ECCO₂R には現時点で ARDS 患者へのルーチン使用の役割はない</strong>。特定の部分集団や臨床状況における可能性は不明のままで、進行中および計画中の臨床試験の対象である</li><li><strong>VV-ECMO は、選択された集団において重症ARDSの管理に役割を持つ</strong></li><li><strong>位置づけの変化</strong>：VV-ECMOは「難治性ガス交換障害による死を防ぐための救済戦略」から、「<strong>従来のエビデンスに基づく戦略が失敗しつつある重症ARDSにおける、肺保護換気への早期のアジュバント</strong>」へと移行した</li></ul>
+<h4>Table 1. 適応と禁忌（ELSO 2021 ガイドライン、Tonna JE ら、ASAIO J 2021;67:601-610 に基づく）</h4>
+<p><strong>成人VV-ECMOの一般的適応（重症急性呼吸不全）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>適応</th><th>閾値・条件</th></tr></thead>
+<tbody>
+<tr><td>低酸素性呼吸不全</td><td><strong>P/F &lt;80 mmHg</strong>。ただし<strong>腹臥位のトライアルを含む最適な内科的管理の後</strong>であること</td></tr>
+<tr><td>高CO₂血症性呼吸不全</td><td><strong>pH &lt;7.25</strong>。ただし従来型人工呼吸の目標値（<strong>プラトー圧 &lt;30 cmH₂O</strong>）を用いた最適管理の後であること</td></tr>
+<tr><td>肺移植へのブリッジ</td><td>選択された候補者</td></tr>
+</tbody></table></div>
+<p><strong>重症急性呼吸不全の具体的な病態（VV-ECMOが検討されうる状況）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>病態</th></tr></thead>
+<tbody>
+<tr><td>急性呼吸窮迫症候群（ARDS）</td></tr>
+<tr><td>重症喘息</td></tr>
+<tr><td>重症胸部外傷</td></tr>
+<tr><td>びまん性肺胞出血</td></tr>
+<tr><td>気管支胸膜瘻</td></tr>
+<tr><td>肺移植へのブリッジ</td></tr>
+<tr><td>急性好酸球性肺炎</td></tr>
+<tr><td>重症の吸入傷害</td></tr>
+</tbody></table></div>
+<p><strong>VV-ECMOの相対禁忌</strong></p>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>出血関連</td><td>中枢神経系出血／全身性出血／抗凝固の禁忌</td></tr>
+<tr><td>不良な候補者</td><td>破局的な中枢神経系傷害（例：低酸素性脳症）／高齢</td></tr>
+<tr><td>長期の傷害的換気</td><td><strong>プラトー圧 &gt;30 cmH₂O かつ FIO₂ &gt;90% への曝露が7日超</strong></td></tr>
+</tbody></table></div>
+<p><strong>特殊集団（歴史的には高リスクとされたが、原疾患に対する専門的サポートを持つ専門施設ではECMOが実施可能）</strong></p>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>現在の考え方</th></tr></thead>
+<tbody>
+<tr><td>出血リスクが高い患者</td><td>外傷、びまん性肺胞出血／肺出血などでもVV-ECMOは成功例がある。<strong>抗凝固の慎重な調節と、時に中断</strong>することで良好な結果が得られている</td></tr>
+<tr><td>妊婦</td><td>産科集団でも成功例がある。ハイリスク産科・集中治療医・産科麻酔科が関与する専門施設でのケアが望ましく、<strong>在胎週数と患者の状態に応じてカニュレーション前に分娩を行うかを判断</strong>する</td></tr>
+<tr><td>免疫不全患者</td><td>歴史的には予後不良とされたが、近年のデータでは<strong>選択された患者（ステロイド誘発性、後天性免疫不全、移植後）で予後が改善</strong>。<strong>癌患者は重症ARDSで予後不良の傾向</strong>があり、呼吸不全の可逆性を考慮して症例ごとに評価する</td></tr>
+</tbody></table></div>
+<h3>8. 患者選択・予後因子・長期転帰</h3>
+<h4>予後不良と一貫して関連する因子</h4>
+<div class="tw"><table>
+<thead><tr><th>因子</th><th>補足</th></tr></thead>
+<tbody>
+<tr><td>高齢</td><td>—</td></tr>
+<tr><td>免疫不全状態</td><td>ただし後述のとおり内訳で差がある</td></tr>
+<tr><td>導入時点で不全に陥っている臓器の数</td><td>—</td></tr>
+<tr><td>ECMO導入前の侵襲的人工呼吸の期間</td><td><mark class="hl">「相談が遅れる」ことがそのまま予後因子になる</mark></td></tr>
+<tr><td>肺コンプライアンス障害の重症度</td><td>—</td></tr>
+</tbody></table></div>
+<p>参照されている予後スコアは RESP score（Schmidt M ら、Am J Respir Crit Care Med 2014;189:1374-1382）と PRESERVE score（Schmidt M ら、Intensive Care Med 2013;39:1704-1713）。</p>
+<h4>免疫不全の内訳（Schmidt M ら、Am J Respir Crit Care Med 2018;197:1297-1307）</h4>
+<ul><li><strong>治療関連の免疫不全</strong>は<strong>癌患者よりも良好な転帰</strong></li><li>免疫不全コホート内では、<strong>免疫不全の期間が短いこと</strong>と<strong>ベースラインで血小板減少がないこと</strong>が良好な転帰と関連</li></ul>
+<h4>候補性判断の主観性</h4>
+<p>相対禁忌のリストがある以上、ECMO候補性の判断には<strong>主観が入り、施設内・施設間でばらつく</strong>。回路の在庫状況や施設固有の候補性基準がその主観の一部を駆動している、と著者らは率直に述べる。</p>
+<h4>長期転帰</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>CESAR</td><td>6か月時点のQOLは従来型人工呼吸のみの患者と<strong>同等またはそれ以上</strong></td></tr>
+<tr><td>PRESERVE関連</td><td>ECMOでARDSを生き延びた患者も、ECMOなしのARDS生存者と同様に<strong>6か月時点で不安・抑うつ・PTSDが持続</strong></td></tr>
+<tr><td>系統的レビュー（Kurniawati ER ら、Qual Life Res 2021;30:2123-2135）</td><td>8研究・<strong>VV-ECMO生存者265例</strong>。健康関連QOLは低下し、<strong>身体的・心理的な障害</strong>を伴う。ただし従来治療のARDS生存者と比較すると<strong>同等またはむしろ良好</strong></td></tr>
+</tbody></table></div>
+<p>著者らは「ECMOを受けた患者のほうが良い可能性」とその機序の確認は<strong>今後の研究課題</strong>であると明記している。長期転帰のデータそのものが乏しい（paucity of data）点も強調される。</p>
+<h3>9. 合併症</h3>
+<p>主要な合併症は<strong>出血・血栓・カニュラや回路に関連する機械的合併症</strong>の3本柱。とくに<strong>出血はECMO関連の罹病と死亡の主因</strong>。</p>
+<h4>出血が起きる機序（4つが重なる）</h4>
+<ol><li>血栓予防のための<strong>全身抗凝固</strong></li><li><strong>非内皮面への血小板の粘着</strong></li><li><strong>凝固カスケードの活性化</strong></li><li><strong>消費性凝固障害による血小板減少</strong></li></ol>
+<p>好発部位：<strong>カニュレーション部位・消化管・肺・中枢神経系</strong>。</p>
+<h4>ELSO国際登録の頻度（Nunez JI ら、Intensive Care Med 2022;48:213-224、VV-ECMO 7579例）</h4>
+<div class="tw"><table>
+<thead><tr><th>イベント</th><th>頻度</th><th>内訳</th></tr></thead>
+<tbody>
+<tr><td>出血合併症</td><td><strong>23%</strong></td><td>出血のみ 15%／出血＋血栓 8%</td></tr>
+<tr><td>血栓</td><td><strong>25%</strong></td><td>血栓のみ 17%／血栓＋出血 8%</td></tr>
+<tr><td>—</td><td>—</td><td><strong>出血イベントは血栓イベントより死亡率が高い</strong></td></tr>
+</tbody></table></div>
+<p>血栓イベントはトロンビン生成による回路・カニュラ・関連血管内の血栓形成に起因する。</p>
+<h4>機械的・デバイス関連合併症</h4>
+<p>カニュレーション部位の出血、挿入に伴う血管損傷、カニュラ遠位の血流うっ滞による深部静脈血栓、下肢虚血、回路への意図しない空気混入による空気塞栓。回路不全は人工肺への血栓蓄積で起こりうる。<strong>破局的な人工肺不全・ポンプ不全・カニュラ移動による出血・大量空気塞栓は稀だが致死的になりうる</strong>。これらを最小化する重要な安全策は、<strong>経験あるベッドサイドチームによるカニュラと人工肺の綿密なモニタリング</strong>である。</p>
+<h4>神経合併症</h4>
+<p>VV-ECMOに伴う神経合併症の頻度は<strong>約10%</strong>（Shoskes A ら、Crit Care Med 2020;48:1799-1808）。最も重篤なのは<strong>虚血性または出血性脳卒中</strong>。</p>
+<h4>Table 2. ECMO合併症（原表を日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>系統</th><th>合併症</th></tr></thead>
+<tbody>
+<tr><td>血液</td><td>出血 — 全身抗凝固、血小板粘着、消費性凝固障害／血栓 — トロンビン生成、カニュレーション部位でのうっ滞／人工肺・血流による血管内溶血</td></tr>
+<tr><td>機械的（カニュラ）</td><td>カニュラ挿入による血管損傷（解離・出血・空気塞栓）／下肢虚血／カニュレーション部位より遠位の深部静脈血栓／カニュラの移動・逸脱／カテーテル関連血流感染／気胸</td></tr>
+<tr><td>機械的（回路）</td><td>回路不全：人工肺への血栓蓄積／回路不全：空気塞栓（回路への意図しない空気混入）</td></tr>
+<tr><td>中枢神経系</td><td>虚血性脳卒中／頭蓋内出血／痙攣／せん妄</td></tr>
+<tr><td>感染</td><td>カテーテル関連血流感染／カニュラ刺入部の皮膚・軟部組織感染</td></tr>
+<tr><td>ARDS関連臓器障害</td><td>急性腎障害／全身性炎症反応／critical care polyneuropathy と筋力低下</td></tr>
+</tbody></table></div>
+<h3>10. 組織体制と集約化（Regionalization）</h3>
+<ul><li>CESAR と H1N1 以降、世界中で新規ECMOプログラムが急増した</li><li>ECMO患者の管理の複雑さを考えれば当然だが、<strong>症例数の多い施設のほうが患者の転帰が良い</strong></li><li>具体的閾値：<strong>年間30例以上</strong>の施設は、<strong>年6例未満</strong>の施設より死亡率が低い（Barbaro RP ら、Am J Respir Crit Care Med 2015;191:894-901）</li><li>望ましい形は、<strong>地域内の病院ネットワークがECMOセンターと提携し、明確な紹介基準を持つこと</strong></li><li><strong>モバイルECMO回収チーム</strong>（出張カニュレーション）は、実行可能性・安全性・有効性が示されており、<strong>ECMOセンターで最初からケアされた場合と転帰に差がない</strong></li><li>多くのECMOセンターが ELSO レジストリ（https://www.elso.org）にデータを提供しており、現在の診療実態と転帰の関連についての知見源になっている</li></ul>
+<h3>11. 呼吸器パンデミック下のECMO</h3>
+<ul><li>ECMOは2009年のH1N1パンデミックと MERS-CoV アウトブレイクでガス交換補助の重要なモダリティだった</li><li>COVID-19では、ICU入室から呼吸不全増悪までの時間、感染伝播の機序、ICU管理のベストプラクティスの理解が急がれ、それにより<strong>比較的統一されたECMO紹介ガイドライン</strong>が確立された</li><li>パンデミック特有の課題として、<strong>ICUベッド・人的資源・ECMOという救命資源の公正な配分</strong>が加わった</li></ul>
+<h4>COVID-19特有の凝固の問題</h4>
+<ul><li>初期の症例集積は、COVID-19患者で<strong>出血と血栓の両方の頻度が高い</strong>という凝固異常を示した。抗凝固を要するECMO患者では特に難題</li><li>重症COVID-19関連ARDSは、<strong>早期の凝固亢進期</strong>（von Willebrand因子と第VIII因子活性の上昇による、と現在は考えられている）に続いて、<strong>出血リスクが高まる時期</strong>が来るという二相性で特徴づけられる。後者は<strong>重度の後天性von Willebrand症候群と血小板機能異常</strong>に帰せられている</li></ul>
+<h4>スコアの外的妥当性</h4>
+<p><strong>従来のECMO候補性判定スコアはCOVID-19患者に適用したとき性能が劣った</strong>。著者らはここから、「<strong>新しい呼吸器疾患のアウトブレイクでは、過去の集団から導出したECMO特異的ツールを再評価・再検証する必要がある</strong>」という一般則を引き出している。</p>
+<h4>COVID-19のECMO予後因子（Tran A ら、系統的レビュー・メタ解析）</h4>
+<p>カニュレーション前の因子で死亡と関連したもの：<strong>高齢／男性／慢性肺疾患／症状持続期間が長い／侵襲的人工呼吸期間が長い／PaCO₂が高い／駆動圧が高い／アウトブレイク前のECMO症例数が少ない施設でのケア</strong>。</p>
+<h4>COVID-19の主要データ</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>Barbaro RP ら（Lancet 2021、ELSOレジストリ・<strong>4812例</strong>）</td><td>90日死亡は<strong>早期採用施設（2020年5月1日以前）で37%</strong>、<strong>後期採用施設（2020年5〜12月）で59%</strong>。COVID-19患者集団の変化やECMO使用基準の変化を反映している可能性はあるが、<strong>経験の乏しい施設が急速にECMOを開始したことの反映</strong>でもありうる</td></tr>
+<tr><td>Urner M ら（BMJ 2022;377:e068723、国際観察コホート <strong>7345例</strong>中 <strong>844例がECMO</strong>）</td><td><strong>P/F &lt;80 mmHg の患者で、従来型人工呼吸のみと比較して60日死亡の絶対リスクが7.1パーセントポイント減少</strong>（95%CI 8.2〜6.1 と紙面表記）</td></tr>
+</tbody></table></div>
+<h4>需要が供給を上回るとき</h4>
+<p>確立した専門施設でECMOの需要が供給を上回る状況が生じた場合、紹介の判断は「<strong>経験の乏しい施設でのECMOの転帰</strong>」と「<strong>ECMOはないが従来型人工呼吸の経験がある施設に患者を留める場合の転帰</strong>」を天秤にかける必要がある、と著者らは述べる。</p>
+<h3>12. 現在の推奨と一般的実践（Figure 4 左列）</h3>
+<p>Figure 4 は「Current Recommendations and Common Practices」と「Some Areas of Uncertainty」の2列構成。左列（推奨・実践）の内容は Tonna 2021（ELSO）・Kalbhenn 2020・Hodgson 2021 に基づく。<strong>ここが明日の管理に直接効く部分</strong>。</p>
+<div class="tw"><table>
+<thead><tr><th>管理項目</th><th>推奨・一般的実践</th></tr></thead>
+<tbody>
+<tr><td><strong>VV-ECMO候補性</strong></td><td>最適管理後も持続する重症ARDS／可逆的な病態／疾患経過の早期／回復の見込みが良好</td></tr>
+<tr><td><strong>カニュレーション（自施設 vs 出張）</strong></td><td>候補となりうる患者は<strong>早期に転送</strong>する。不安定すぎる場合は、モバイルECMOプログラムが利用可能なら<strong>遠隔地でのカニュレーション</strong>を検討</td></tr>
+<tr><td><strong>ECMOチームの多職種ラウンド</strong></td><td>毎日、臨床状態・回路・合併症・<strong>離脱の準備性</strong>・人工呼吸器管理をレビューする。構成は「技術的トラブルシューティングができるECMO専門医＋ベッドサイド看護師＋ECMOスペシャリスト」。必要に応じて呼吸療法士・薬剤師・理学療法士を加える</td></tr>
+<tr><td><strong>人工呼吸器設定（lung rest）</strong></td><td><mark class="hl"><strong>吸気プラトー圧 &lt;25 cmH₂O</strong>／<strong>PEEP ≥10 cmH₂O</strong>／<strong>呼吸回数 4〜10回/分または自発</strong>／<strong>FIO₂ は可能な限り低く</strong></mark></td></tr>
+<tr><td><strong>抗凝固とモニタリング</strong></td><td><mark class="hl"><strong>未分画ヘパリンで aPTT 40〜55秒、または抗Xa活性 0.2〜0.3 IU/mL を目標</strong></mark></td></tr>
+<tr><td><strong>理学療法・リハビリ</strong></td><td>覚醒している患者に対し、経験あるスタッフのもとで理学療法を行う。カニュラ刺入部の綿密なモニタリングを伴う</td></tr>
+<tr><td><strong>離脱の準備性（readiness to wean）</strong></td><td><mark class="hl"><strong>FIO₂ ≤60%、PEEP ≤10 cmH₂O、PaO₂ ≥70 mmHg</strong></mark> を、<mark class="hl"><strong>1回換気量 ≤6 mL/kg 予測体重・プラトー圧 ≤28 cmH₂O・呼吸回数 ≤28回/分・許容できるpHとPaCO₂（動脈血ガス）</strong></mark> の換気設定で満たせること</td></tr>
+<tr><td><strong>その他のICU管理上の考慮</strong></td><td>薬物モニタリング：ECMOによる<strong>薬物クリアランスの変化の可能性</strong>を確認する</td></tr>
+<tr><td><strong>ECMOのfutility</strong></td><td>ARDSが意味のある回復の見込みのない不可逆的な傷害へ進行することがある。現地の法に従い、「futility」による中止を<strong>代諾者（SDM）と話し合う</strong>。理想的には<strong>ECMOカニュレーション前に説明しておく</strong></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>数値の読み違いに注意 Figure 4 の凡例では「PL」を plateau pressure（プラトー圧）と定義している。本文中の「Inspiratory PL &lt;25 cm H₂O」は<strong>吸気プラトー圧 25 cmH₂O 未満</strong>の意味で読む。経肺圧（transpulmonary pressure）と取り違えないこと。 また、離脱準備性の「Ventilation: ≤6 mL/kg PBW, PL ≤28 cmH₂O」は<strong>離脱後に自己肺だけで許容できるかを判定する条件</strong>であり、ECMO中の lung rest 目標（Pplat &lt;25）とは別の数値である。<mark class="hl">導入中は25未満、離脱判定は28以下</mark> と使い分ける。</p>
+</div>
+<h3>13. 不確実な領域と今後の研究（Figure 4 右列）</h3>
+<p>原図の右列に列挙された未解決課題。<strong>ここに載っている項目は、当院で独自ルールを作っても「エビデンスがない領域」だと自覚して運用する</strong>べきもの。</p>
+<div class="tw"><table>
+<thead><tr><th>領域</th><th>具体的な不確実性</th></tr></thead>
+<tbody>
+<tr><td>導入閾値</td><td>ECMO前の人工呼吸期間、ARDSの重症度をどこで切るか</td></tr>
+<tr><td>特殊集団</td><td>免疫不全患者</td></tr>
+<tr><td>資源配分</td><td>需要が供給を上回るときの crisis standards of care と最適候補者への配分</td></tr>
+<tr><td>モバイルECMO</td><td>その安全性と転帰</td></tr>
+<tr><td>人員配置</td><td>スタッフィング比率</td></tr>
+<tr><td>ECMO中の人工呼吸</td><td>最適な換気戦略</td></tr>
+<tr><td>併用療法</td><td>ECMO中の腹臥位・iNO などアジュバント併用の有効性</td></tr>
+<tr><td>酸素目標</td><td>ECMO中の動脈血酸素の閾値（低酸素・高酸素の両方向）の短期・長期転帰</td></tr>
+<tr><td>抗凝固</td><td>最適な薬剤とモニタリング法</td></tr>
+<tr><td><strong>輸血</strong></td><td><strong>輸血閾値</strong>（本総説は具体的な数値目標を示していない）</td></tr>
+<tr><td>離脱</td><td>自発的な離脱トライアルの方法</td></tr>
+<tr><td>薬物動態</td><td>ECMO中の薬物動態</td></tr>
+<tr><td>リハビリ</td><td>ECMO中の理学療法の安全性と実行可能性</td></tr>
+<tr><td>futility</td><td>ECMOのfutilityの判定法</td></tr>
+<tr><td>長期転帰</td><td>QOL・神経学的回復・障害・ADL・復職・費用対効果</td></tr>
+</tbody></table></div>
+<p>本文で追加的に挙げられた研究の方向性：</p>
+<ul><li><strong>ARDSのサブフェノタイプ</strong>の存在が、全患者に一律の治療アルゴリズムを適用することの有効性を制限してきた。患者クラスターの理解が進めば、サブフェノタイプに応じた治療のマッチングが可能になるかもしれない</li><li><strong>重症ARDSからの回復が不十分な患者に対する肺移植へのブリッジ</strong>としてのECMO。COVID-19パンデミック中に世界各地で成功例が報告されたが、<strong>最適な候補者・タイミング・自己肺の回復を待つ期間は未定義</strong></li><li>今後の臨床試験は<strong>長期の患者報告アウトカムと経済分析</strong>を標準的なコアアウトカムセットの一部として組み込むべき</li><li>ELSO や International ECMO Network といった国際研究コラボレーションが鍵</li><li>ECLSの臨床試験は<strong>実行可能性が主要な障壁</strong>であるため、<strong>レジストリ組み込み型RCT</strong>や<strong>ベイズ流アダプティブ・プラットフォーム試験</strong>などの革新的試験デザインが有用でありうる</li><li><strong>実世界データ＋現代的な因果推論の枠組み（target trial emulation など）</strong>が、臨床試験が実行不可能な場面での補完となる</li></ul>
+<h3>14. 結論（著者らの言葉）</h3>
+<ul><li><strong>ECCO₂R はほとんどの場合、質の高い臨床試験に限定すべき</strong></li><li><strong>VV-ECMO のエビデンスは、厳選された成人重症急性呼吸不全患者において死亡率を改善することを示唆する。その主たる機序は侵襲的人工呼吸に伴う潜在的な害の軽減である</strong></li><li>現代ECMOに関する最近の文献の総体は、<strong>専門施設における選択された患者での使用を支持する</strong></li><li>最適な候補者・導入閾値・管理上の考慮については、<strong>多くの疑問が残っている</strong></li></ul>
+<h3>15. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この総説をそのまま鵜呑みにしない 以下は本ノート作成時に原著紙面から拾った不整合・限界。JCで指摘できる形にしてある。</p>
+</div>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>内容</th><th>議論の仕方</th></tr></thead>
+<tbody>
+<tr><td><strong>CESARの信頼区間が異常</strong></td><td>「相対リスク 0.69、95%CI 0.05〜0.97」と印字されている。点推定値0.69が区間 0.05〜0.97 のほぼ上端にあり、対数尺度で見ても明らかに非対称。原著Lancet論文の表記をそのまま引用したもの</td><td>数値の引用としては正しいが、<strong>CESARの効果推定の精度を語る根拠には使えない</strong>。CESARは「搬送戦略の試験」であってECMOそのものの試験ではない、という本質的限界と合わせて論じる</td></tr>
+<tr><td><strong>EOLIAのn が本文と図で食い違う</strong></td><td>本文は「予定331例のうち<strong>240例</strong>で中止」、Figure 2 は「<strong>249 patients</strong> enrolled」</td><td>実際のEOLIAは249例がランダム化されている。総説内の内的不整合。JCでは「一次資料に当たる」原則の実例として使える</td></tr>
+<tr><td><strong>EOLIAの高CO₂基準の表記</strong></td><td>Figure 2 は「pH &lt;7.25 with PaCO₂ <strong>&gt;50</strong> mmHg for &gt;6 hours」。原著EOLIAの基準は PaCO₂ <strong>≥60</strong> mmHg</td><td><mark class="hl">導入基準として使うなら図の数値ではなく原著（およびANZガイドラインが再掲した基準）を採る</mark>。<span class="wl">豪州・NZのVV-ECMOガイドライン — EOLIA基準なら条件付き推奨、ECMO中の腹臥位はルーチンでは推奨しない（GRADE・パート1・CritCareResusc2026）</span> では PaCO₂ ≥60 で記載されている</td></tr>
+<tr><td><strong>Urner研究のCIの符号が落ちている</strong></td><td>「7.1 percentage point (95% CI, 8.2 to 6.1) absolute reduction」。減少量の区間なので本来 −8.2〜−6.1</td><td>印刷上の問題。方向は本文で "reduction" と明記されているので解釈は変わらないが、数値をそのまま引用するときは注意</td></tr>
+<tr><td><strong>As-treated解析では有意差が消える</strong></td><td>Per-protocol RR 0.75（0.60〜0.94）に対し、as-treated RR 0.86（0.68〜1.09）</td><td><mark class="hl">「ECMOを受けた人 vs 受けなかった人」で見ると有意差が消える</mark>。クロスオーバーした対照群患者（17%）が最重症であることを踏まえた解釈が必要で、これは「早期に決める」ことの重要性の裏返しでもある</td></tr>
+<tr><td><strong>主要エビデンスの実質は2試験＋その再解析</strong></td><td>統合429例（CESAR 180＋EOLIA 249）。ベイズ再解析・IPDメタ解析・研究レベルメタ解析・ネットワークメタ解析はいずれも<strong>同じ2試験を素材にしている</strong></td><td>「4つの独立した解析が支持した」ではなく「<strong>同じデータを4つの方法で見た</strong>」と正確に述べる。相互に独立した確証ではない</td></tr>
+<tr><td><strong>著者の利益相反構造</strong></td><td>Munshi・Fan は EOLIA の IPD メタ解析（Combes 2020）とVV-ECMOの系統的レビュー（Munshi 2019）の著者本人。Brodie は ECMO 分野の主要な提唱者</td><td>分野の第一人者による総説の常として、<strong>自身が生成したエビデンスを自身で評価している</strong>。結論の方向性は現時点の他ガイドライン（ANZ・ELSO）と整合的なので大きな懸念ではないが、留保のトーンの弱さは割り引いて読む</td></tr>
+<tr><td><strong>推奨数値のエビデンスレベルが表示されない</strong></td><td>Pplat &lt;25、PEEP ≥10、RR 4〜10、aPTT 40〜55秒、抗Xa 0.2〜0.3 はいずれも Figure 4 に「current recommendations and common practices」として並べられているだけで、<strong>GRADE等の確実性評価がない</strong></td><td>しかも同じ図の右列に「ECMO中の最適な換気戦略」「最適な抗凝固薬とモニタリング」が<strong>不確実な領域</strong>として挙がっている。<mark class="hl">つまり左列の数値は「専門家の合意」であって「エビデンス」ではない</mark>。この自己矛盾めいた構造こそ本総説の正直な現状認識であり、当院でプロトコル化する際も「暫定値」として扱う</td></tr>
+<tr><td><strong>輸血閾値が示されない</strong></td><td>本総説は輸血閾値を「不確実な領域」に置くだけで数値を示さない</td><td>実務ではどこかで決めざるを得ない。<span class="wl">急性呼吸不全に対するVV-ECMO（Eddy Fanら専門家レビュー ICM2016）</span> は Hb 70 g/L を挙げており、<span class="wl">ECMO中の輸血管理 — ELSOのHb目標に確たる根拠はなく、VAはVVより輸血量が多い（レビュー・AnnBlood2023）</span> はELSOのHb目標に確たる根拠がないことを示す。<mark class="hl">「7 g/dL を既定とし、根拠が薄いことを承知で使う」という運用が現実解</mark></td></tr>
+<tr><td><strong>公表から4年が経過している</strong></td><td>2022年9月の総説。以降、ARDSの新定義、ATS 2024ガイドライン更新、ANZガイドライン（2026）、ICM 2026 の60周年レビューが出ている</td><td>==本ノート単独ではなく <span class="wl">ARDS 60年の体外肺補助 — VV-ECMOは重症例で確立、ECCO2Rは研究の場に留める（ナラティブレビュー・ICM2026）</span> と並べて読む。骨格は本総説、最新の数値は ICM2026==</td></tr>
+</tbody></table></div>
+<h3>16. ベッドサイドの判断表（本総説の内容を実務の順に並べ替えたもの）</h3>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>重症ARDSでP/Fが80を切ってきた</td><td>腹臥位・筋弛緩を含む最適管理を実施済みか。挿管からの日数は何日か</td><td>未実施なら先に実施。実施済みでP/F &lt;80が持続するならECMOチームに相談を上げる</td></tr>
+<tr><td>pHが7.25を切る高CO₂血症</td><td>プラトー圧 &lt;30 cmH₂O の枠内で是正を試みたか</td><td>従来設定の最適化で是正できないならVV-ECMOの適応</td></tr>
+<tr><td>ECMOを迷っている（まだ持ちこたえている）</td><td>Pplat &gt;30 かつ FIO₂ &gt;90% での曝露が何日続いているか</td><td>7日を超えると相対禁忌に入る。<mark class="hl">迷う段階で相談する。決めてから相談では遅い</mark></td></tr>
+<tr><td>免疫不全患者</td><td>免疫不全の原因（治療関連か癌か）、免疫不全の期間、ベースラインの血小板</td><td>治療関連・短期間・血小板正常なら候補になりうる。癌患者は可逆性を踏まえ症例ごとに判断</td></tr>
+<tr><td>出血リスクが高い（外傷・肺胞出血）</td><td>出血源が制御可能か、専門的サポートがあるか</td><td>絶対禁忌ではない。抗凝固の慎重な調節・一時中断を前提に専門施設で実施</td></tr>
+<tr><td>妊婦</td><td>在胎週数、母体の状態</td><td>高リスク産科・産科麻酔と協働し、カニュレーション前に分娩するかを先に決める</td></tr>
+<tr><td>ECMO導入直後</td><td>人工呼吸器設定が lung rest になっているか</td><td>Pplat &lt;25・PEEP ≥10・RR 4〜10・FIO₂ 最小に切り替える</td></tr>
+<tr><td>SpO₂が上がらない</td><td>ポンプ流量、脱血不良、再循環</td><td><strong>酸素化は血流量依存</strong>。流量を上げる方向で対応する</td></tr>
+<tr><td>PaCO₂が高い</td><td>スイープガス流量</td><td><strong>CO₂除去はスイープ依存</strong>。スイープを上げる。血流量を上げる必要はない</td></tr>
+<tr><td>抗凝固をどこに置くか</td><td>出血リスクの評価</td><td>UFH で aPTT 40〜55秒 または 抗Xa 0.2〜0.3 IU/mL。出血例では中断・減量も選択肢</td></tr>
+<tr><td>急にガス交換が悪化した／溶血がある</td><td>回路・人工肺の血栓、カニュラ移動、空気混入</td><td>回路トラブルを疑う。<mark class="hl">経験あるチームによるカニュラ・人工肺の綿密なモニタリングが唯一の安全策</mark></td></tr>
+<tr><td>肺が改善してきた</td><td>FIO₂ ≤60%・PEEP ≤10・PaO₂ ≥70 を、VT ≤6 mL/kg PBW・Pplat ≤28・RR ≤28・許容pHで満たせるか</td><td>満たせば離脱を検討する。毎日の多職種ラウンドの定型項目にする</td></tr>
+<tr><td>回復の見込みが立たない</td><td>不可逆的な傷害へ進行していないか</td><td>futility の議論を代諾者と行う。<mark class="hl">理想はカニュレーション前にこの話をしてある状態</mark></td></tr>
+<tr><td>CO₂だけが問題（酸素化は保たれている）</td><td>ECCO₂R を検討したくなる場面</td><td><mark class="hl">ルーチン適応はない。使うなら臨床試験の枠内</mark></td></tr>
+<tr><td>自施設で回すか転送するか</td><td>自施設の年間ECMO症例数</td><td>年30例以上と年6例未満で死亡率が違う。平時に方針を決め、モバイルECMOの選択肢も含めて紹介基準を整えておく</td></tr>
+</tbody></table></div>
+<h3>17. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>著者・雑誌・年</th><th>DOI</th></tr></thead>
+<tbody>
+<tr><td>ARDS総説</td><td>Thompson BT ら、N Engl J Med 2017;377:562-572</td><td>10.1056/NEJMra1608077</td></tr>
+<tr><td>Berlin定義</td><td>Ranieri VM ら、JAMA 2012;307:2526-2533</td><td>—</td></tr>
+<tr><td>VILI総説</td><td>Slutsky AS, Ranieri VM、N Engl J Med 2013;369:2126-2136</td><td>10.1056/NEJMra1208707</td></tr>
+<tr><td>ATS/ESICM/SCCM ARDS人工呼吸ガイドライン</td><td>Fan E ら、Am J Respir Crit Care Med 2017;195:1253-1263</td><td>10.1164/rccm.201703-0548ST</td></tr>
+<tr><td>ARDSNet 低換気量試験</td><td>Brower RG ら、N Engl J Med 2000;342:1301-1308</td><td>10.1056/NEJM200005043421801</td></tr>
+<tr><td>成人ARDSへのECMO（総説）</td><td>Brodie D, Bacchetta M、N Engl J Med 2011;365:1905-1914</td><td>10.1056/NEJMct1103720</td></tr>
+<tr><td>呼吸不全に対するECLS（総説）</td><td>Brodie D, Slutsky AS, Combes A、JAMA 2019;322:557-568</td><td>10.1001/jama.2019.9302</td></tr>
+<tr><td>ELSO Maastricht Treaty（用語統一）</td><td>Conrad SA ら、Am J Respir Crit Care Med 2018;198:447-451</td><td>10.1164/rccm.201710-2130CP</td></tr>
+<tr><td>成人急性呼吸不全へのECMO初の成功例（1972）</td><td>Hill JD ら、N Engl J Med 1972;286:629-634</td><td>10.1056/NEJM197203232861204</td></tr>
+<tr><td>初のECMO対照試験（両群死亡90%超）</td><td>Zapol WM ら、JAMA 1979;242:2193-2196</td><td>10.1001/jama.1979.03300200023016</td></tr>
+<tr><td><strong>CESAR試験</strong></td><td>Peek GJ ら、Lancet 2009;374:1351-1363</td><td>10.1016/S0140-6736(09)61069-2</td></tr>
+<tr><td>H1N1へのECMO（豪NZ）</td><td>Davies A ら、JAMA 2009;302:1888-1895</td><td>10.1001/jama.2009.1535</td></tr>
+<tr><td><strong>EOLIA試験</strong></td><td>Combes A ら、N Engl J Med 2018;378:1965-1975</td><td>10.1056/NEJMoa1800385</td></tr>
+<tr><td><strong>IPDメタ解析（429例）</strong></td><td>Combes A ら、Intensive Care Med 2020;46:2048-2057</td><td>10.1007/s00134-020-06248-3</td></tr>
+<tr><td>H1N1・ECMOセンター紹介と死亡（英国）</td><td>Noah MA ら、JAMA 2011;306:1659-1668</td><td>10.1001/jama.2011.1471</td></tr>
+<tr><td>H1N1・傾向スコアマッチング（仏）</td><td>Pham T ら、Am J Respir Crit Care Med 2013;187:276-285</td><td>10.1164/rccm.201205-0815OC</td></tr>
+<tr><td><strong>EOLIAベイズ再解析</strong></td><td>Goligher EC ら、JAMA 2018;320:2251-2259</td><td>10.1001/jama.2018.14276</td></tr>
+<tr><td>VV-ECMO系統的レビュー・メタ解析</td><td>Munshi L ら、Lancet Respir Med 2019;7:163-172</td><td>10.1016/S2213-2600(18)30452-1</td></tr>
+<tr><td>肺保護戦略のネットワークメタ解析</td><td>Sud S ら、Am J Respir Crit Care Med 2021;203:1366-1377</td><td>10.1164/rccm.202008-3039OC</td></tr>
+<tr><td>低換気量下でも起こる tidal hyperinflation</td><td>Terragni PP ら、Am J Respir Crit Care Med 2007;175:160-166</td><td>10.1164/rccm.200607-915OC</td></tr>
+<tr><td>ECCO₂R＋逆比換気RCT（1994）</td><td>Morris AH ら、Am J Respir Crit Care Med 1994;149:295-305</td><td>10.1164/ajrccm.149.2.8306022</td></tr>
+<tr><td><strong>Xtravent試験</strong></td><td>Bein T ら、Intensive Care Med 2013;39:847-856</td><td>10.1007/s00134-012-2787-6</td></tr>
+<tr><td><strong>REST試験</strong></td><td>McNamee JJ ら、JAMA 2021;326:1013-1023</td><td>10.1001/jama.2021.13374</td></tr>
+<tr><td><strong>ELSO VV-ECMO管理ガイドライン（Figure 4 の根拠）</strong></td><td>Tonna JE ら、ASAIO J 2021;67:601-610</td><td>10.1097/MAT.0000000000001432</td></tr>
+<tr><td>RESPスコア</td><td>Schmidt M ら、Am J Respir Crit Care Med 2014;189:1374-1382</td><td>10.1164/rccm.201311-2023OC</td></tr>
+<tr><td>PRESERVEスコアと長期転帰</td><td>Schmidt M ら、Intensive Care Med 2013;39:1704-1713</td><td>10.1007/s00134-013-3037-2</td></tr>
+<tr><td>免疫不全患者の6か月転帰</td><td>Schmidt M ら、Am J Respir Crit Care Med 2018;197:1297-1307</td><td>10.1164/rccm.201708-1761OC</td></tr>
+<tr><td>VV-ECMO生存者のQOL系統的レビュー</td><td>Kurniawati ER ら、Qual Life Res 2021;30:2123-2135</td><td>10.1007/s11136-021-02834-0</td></tr>
+<tr><td>VV-ECMOの合併症（総説）</td><td>Teijeiro-Paradis R, Gannon WD, Fan E、Crit Care Med 2022</td><td>10.1097/CCM.0000000000005673</td></tr>
+<tr><td><strong>ELSO登録の出血・血栓（7579例）</strong></td><td>Nunez JI ら、Intensive Care Med 2022;48:213-224</td><td>10.1007/s00134-021-06593-x</td></tr>
+<tr><td>VA vs VV の脳損傷（神経合併症約10%）</td><td>Shoskes A ら、Crit Care Med 2020;48:1799-1808</td><td>10.1097/CCM.0000000000004618</td></tr>
+<tr><td><strong>施設症例数と死亡（年30例以上 vs 6例未満）</strong></td><td>Barbaro RP ら、Am J Respir Crit Care Med 2015;191:894-901</td><td>10.1164/rccm.201409-1634OC</td></tr>
+<tr><td>ECMO搬送100例</td><td>Biscotti M ら、Ann Thorac Surg 2015;100:34-39</td><td>10.1016/j.athoracsur.2015.02.037</td></tr>
+<tr><td>COVID-19のモバイルECMOと搬送チームのリスク</td><td>Javidfar J ら、ASAIO J 2022;68:163-167</td><td>10.1097/MAT.0000000000001602</td></tr>
+<tr><td>COVID-19のECMO凝固異常（Figure 4 の根拠の1つ）</td><td>Kalbhenn J ら、Perfusion 2021;36:592-602</td><td>10.1177/02676591211001791</td></tr>
+<tr><td>ECMO研究のコアアウトカムセット</td><td>Hodgson CL ら、Crit Care Med 2021;49:e1252-e1254</td><td>10.1097/CCM.0000000000005110</td></tr>
+<tr><td>MERS-CoVへのECMO</td><td>Alshahrani MS ら、Ann Intensive Care 2018;8:3</td><td>10.1186/s13613-017-0350-x</td></tr>
+<tr><td><strong>COVID-19 VV-ECMOの比較有効性（7345例）</strong></td><td>Urner M ら、BMJ 2022;377:e068723</td><td>10.1136/bmj-2021-068723</td></tr>
+<tr><td><strong>COVID-19 ELSOレジストリ（4812例・早期 vs 後期採用施設）</strong></td><td>Barbaro RP ら、Lancet 2021;398:1230-1238</td><td>10.1016/S0140-6736(21)01960-7</td></tr>
+<tr><td>COVID-19のECMO配給を論じるべきか</td><td>Supady A ら、Lancet Respir Med 2021;9:326-328</td><td>10.1016/S2213-2600(21)00131-4</td></tr>
+<tr><td>COVID-19 ARDSは別のアプローチが要るか</td><td>Fan E ら、Lancet Respir Med 2020;8:816-821</td><td>10.1016/S2213-2600(20)30304-0</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 VV-ECMOは「酸素化を代行する装置」ではなく「<mark class="hl">肺を休ませてVILIを止め、自己肺が治る時間を買う装置</mark>」である。だから導入したその瞬間に人工呼吸器を lung rest 設定へ切り替えることが、ECMOを回すこと自体と同じくらい治療の本体になる。 <mark class="hl">明日の朝いちばんに指示簿へ書くべき4行は、<strong>プラトー圧 &lt;25 cmH₂O・PEEP ≥10 cmH₂O・呼吸回数 4〜10回/分・FIO₂ は可能な限り低く</strong></mark>。 <mark class="hl">抗凝固は <strong>UFHで aPTT 40〜55秒 または 抗Xa 0.2〜0.3 IU/mL</strong> を初期目標に置き、出血高リスクなら減量・中断を最初から選択肢として明文化する</mark>。 <mark class="hl">離脱は毎日議題にする。<strong>FIO₂ ≤60%・PEEP ≤10・PaO₂ ≥70 mmHg</strong> を <strong>VT ≤6 mL/kg PBW・Pplat ≤28・RR ≤28・許容pH</strong> の換気で満たせたら、その日が離脱を検討する日</mark>。 そして数値の使い分けを間違えない。<mark class="hl">ECMO中の肺休息は Pplat 25未満、離脱可否の判定は Pplat 28以下</mark>。前者は「肺を守る目標」、後者は「自己肺が引き受けられるかの試験条件」である。 なお、これらの数値はいずれも ELSO 2021 に基づく専門家の合意であって、同じ図の右列で「最適な換気戦略」も「最適な抗凝固」も<strong>未解決</strong>と明記されている。<strong>暫定値として使い、症例ごとに毎日見直す</strong>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

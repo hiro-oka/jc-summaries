@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>救急外来からのECMO紹介と導入 — VVは数時間、VAは数分の勝負（ナラティブレビュー・AJEM2025）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">救急外来からのECMO紹介と導入 — VVは数時間、VAは数分の勝負（ナラティブレビュー・AJEM2025）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Condella A, Lentz S, Upchurch C, Badulak J, Long B, Gottlieb M. Extracorporeal membrane oxygenation (ECMO): A narrative review for the emergency clinician. Am J Emerg Med. 2025;96:6-14. DOI: 10.1016/j.ajem.2025.06.007</dd><dt>掲載誌</dt><dd>American Journal of Emergency Medicine（2025-10-01）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.ajem.2025.06.007" target="_blank" rel="noopener">doi.org/10.1016/j.ajem.2025.06.007</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Extracorporeal membrane oxygenation (ECMO): A narrative review for the emergency clinician</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わらないこと</strong>：ECMOの適応判断そのものは変わらない。この総説は米国救急医向けで、新しいエビデンスを出しているわけではなく、既知の試験（EOLIA・ARREST・PRAGUE-OHCA・INCEPTION）の再整理である</li><li><strong>変わりうること①「紹介の閾値」</strong>：著者らの立場は「迷ったら紹介する（err on the side of referral）」。理由は、紹介すればECMO専門医と最低限の議論ができ、その間も情報収集を続けられるから。適応判断を救急側で完結させない、という考え方は救急外来と当科の間の運用にそのまま持ち込める</li><li><strong>変わりうること②「時間軸を2つに分ける」</strong>：VV-ECMOの紹介は数時間かけて進む議論、VA-ECMO（とくに心停止）は数分で流量を確立しないと神経学的転帰が落ちる。同じ「ECMOコール」でも急ぎ方がまったく違うことを、救急外来と共有しておく価値がある</li><li><strong>すぐ使える具体策（当院の現行手順と照合が必要）</strong>：①VA-ECMOが視野に入った時点で<mark class="hl">右橈骨動脈</mark>にAラインを取り、SpO2プローブも右上肢か耳朶・鼻翼に置く（脳灌流側を見るため）②ECMOカニュレーション部位（右内頸・大腿静脈・大腿動脈）を潰さない末梢静脈路を先に確保し、中心静脈路は左内頸を選ぶ③導入直後の低血圧に塩化カルシウムを準備しておく</li><li><strong>決めておくべきこと</strong>：救急外来でカニュレーションするのか、ICU・カテ室へ搬送してから入れるのか。図1はこの分岐を「ECMOチームがカニュレーション計画を決める」1ステップで表現している。当院でどちらを既定にするかを事前に決めておかないと、コール時に議論が始まる</li><li><strong>転用しにくい点</strong>：米国では灌流技師（perfusionist）がベッドサイドに来る前提で書かれている。当院の体制に読み替えが必要</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：VV-ECMOは最重症ARDSで確立した救済治療であり、ECPRは適切に選ばれた患者で神経学的に良好な生存を増やしうる。VA-ECMOは可逆性のある心原性ショック・心停止に用いる。いずれも導入の早さが転帰と関連する</li><li><strong>Unknown</strong>：ECPRのRCTのメタ解析は、含める試験と解析方法で有意にも非有意にもなる。救急外来でカニュレーションすることが搬送後カニュレーションより優れるかを直接比較したデータはない。救急外来カニュレーション例に限った合併症率も分かっていない</li><li><strong>What's new</strong>：新しいエビデンスではなく、<strong>救急医の動線に沿った再配列</strong>が新しい。①施設を「ECPR可能」「VA-ECMO可能だがECPR体制なし」「ECMO非対応」の3層に分けて、それぞれ知るべき適応を変える②救急外来滞在時間を横軸に、適応評価→カニュレーション準備→周術期生命維持→導入後モニタリングの4段階に切る（図2）③カニュラのサイズ・部位・遠位灌流カテーテルまで、救急医が手を出せる範囲を明示した</li><li><strong>Vault内の関連ノートとの対比</strong>：</li><li><span class="wl">急性呼吸不全に対するVV-ECMO（Eddy Fanら専門家レビュー ICM2016）</span> と守備範囲が最も重なるが、あちらはICU入室後の管理（抗凝固・輸血・リハ・futility）が主で、こちらは<strong>紹介するかどうかを決める30分</strong>が主。相補的で矛盾しない</li><li><span class="wl">ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</span> とは<strong>トーンが食い違う</strong>。CCM2024は INCEPTION（30日生存 20%対16%）を前面に出し「年12例超・60分以内カニュレーション」という体制の閾値を条件に置いた。本レビューは肯定的なメタ解析（180日 32.4%対19.7%）を先に置き、否定的なメタ解析を後に添える書き方で、体制の数値基準は示さない。<mark class="hl">ECPRを「やるか」の判断材料としてはCCM2024のほうが厳しく、当院の意思決定にはそちらを軸にすべき</mark></li><li><span class="wl">成人ARDSへの体外肺補助 — VV-ECMOは重症例で死亡を下げ、ECCO2Rはルーチン適応にならない（総説・NEJMEvid2022）</span> と VV-ECMO の閾値が<strong>一部食い違う</strong>。本レビューは ELSO の「P/F &lt;80 または pH &lt;7.25 かつ PaCO2 ≥60」を紹介の目安に採り、表1にはより厳しい EOLIA 基準（P/F &lt;50 が3時間超 等）を併記する。どちらを当院の「相談する線」にするかは決めておく必要がある</li><li><span class="wl">EOLIAのベイズ流Post hoc解析（重症ARDSへのECMO・JAMA2018）</span> とは<strong>数値が食い違う</strong>。本レビューのEOLIA記載は群が入れ替わっている疑いが濃い（後述の批判的吟味を参照）。EOLIAの数字を引くときは本ノートではなくあちらを使う</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで 救急医がECMOについて知っておくべきことは「機械の操作」ではなく<strong>紹介の判断と時間軸</strong>であり、VV-ECMOは数時間かけて相談する治療、VA-ECMO・ECPRは数分で流量を立てないと意味を失う治療だと切り分けたうえで、迷ったら紹介する側に倒せ、というのが本レビューの主張である。</p>
+</div>
+<ul><li><strong>対象読者</strong>：ECMO対応施設・非対応施設のいずれで働く救急医も。非対応施設なら「どこへ、いつ相談するか」、対応施設なら「救急外来で入れるか、運んでから入れるか」を判断できるようになることがゴール</li><li><strong>方法</strong>：Embase・MEDLINE・Google Scholar（関連上位200件）を設立時から2025年2月1日まで検索。英語文献に限定し、系統的レビュー・メタ解析→RCT→前向き→後ろ向き→症例報告→他の総説の順で優先採用。最終的に94本を採用</li><li><strong>背景の数字</strong>：院外心停止（OHCA）に対する通常CPRの生存退院率は 9.9%、非ショッカブル波形でCPR 15分超なら1%未満。ECPR基準を満たす患者をECPRに割り付けた試験では、30日時点の神経学的に良好な生存が 20〜43%（通常CPRは 7〜18%）。ELSOレジストリのECPR 21,037例（院内＋院外）の病院生存率は 31%</li><li><strong>生理</strong>：ECMOは体外の人工肺で血液を酸素化・換気する。血液透析やECCO2Rと違い、ガス交換や心拍出の相当部分を担うために高流量が要る。遠心ポンプが非拍動流を作り、膜型肺でO2が入りCO2が出る。CO2除去はガス流量（sweep）で、酸素化は膜へ流すガスの酸素分画（FdO2）で調節する</li><li><strong>VVとVAの決定的な違い</strong>：VV-ECMOは脱血も送血も静脈系で完結するため<strong>直接の血行動態補助はない</strong>（透析やアフェレーシスと同じく体循環と直列）。血行動態への効果は酸塩基の改善・肺血管抵抗の低下・右室負荷の軽減という二次的なものに限られる。VA-ECMOは静脈から動脈へ流すため人工的な心拍出を作り、自己心肺と<strong>並列</strong>の第2の循環（dual circulation）ができる。両者が出会う点が blood flow mixing point で、ECMO流量と自己心拍出の比で移動する</li><li><strong>VV-ECMOの紹介適応</strong>：人工呼吸を最適化しても難治性の低酸素血症・高炭酸ガス血症。最多はARDS。まれに重積喘息（生存・離脱とも80%超と報告）、中枢気道の断裂・閉塞、大量誤嚥、有毒ガス吸入</li><li><strong>VA-ECMOの紹介適応</strong>：可逆性のある心原性ショック（心筋梗塞、心原性ショックを伴う肺塞栓、心筋炎、たこつぼ心筋症、難治性VT/VF＝electrical storm、β遮断薬・Ca拮抗薬中毒）と、難治性心停止に対するECPR、偶発性低体温</li><li><strong>患者選択の2軸</strong>：①原疾患が可逆的か、②ECMOを経て受け入れられる機能的転帰で生存しうるか。ECMOは臓器を支えるだけで原疾患を治さない。回復の見込みも移植・耐久型補助（LVAD等）への橋渡しの見込みもなければ、離脱の出口がない</li><li><strong>導入の3ステップ</strong>：①人と物を集める（最低限、カニュレーション術者と灌流技師）②アクセスを作る（脱血＝大腿静脈 18〜29 Fr、VV送血＝右内頸 15〜23 Fr、VA送血＝大腿動脈 15〜23 Fr）③流量を立てながら血行動態を管理する</li><li><strong>導入直後に見る合併症</strong>：出血、下肢虚血（単施設720例で20%超に合併症、うち軽度下肢虚血 9.4% が最多）、カニュラ位置異常、低血圧、低酸素、脱血不良（chugging／chattering／low-flow）、回路への空気混入</li><li><strong>結論</strong>：若く、他に臓器障害がなく、単一臓器不全の患者が最も利益を得やすい。ECMO対応施設かどうかで救急医が持つべき知識は変わる。可逆性が分からないなら紹介側に倒す</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む <strong>ECMO（extracorporeal membrane oxygenation）</strong> は、患者の血液を体外へ引き出し、人工肺（膜型肺）でガス交換させて戻す装置である。透析やCO2除去だけの装置と違い、ガス交換や心拍出の「相当な割合」を肩代わりするため、太いカニュラと高い血流量が必要になる。 <strong>ECLS（extracorporeal life support）</strong> はより広い言葉で、体外循環で臓器を支える治療全般を指す。ECMOはその一部という関係にある。 回路の構成要素は3つ。<strong>脱血カニュラ</strong>（患者→回路）、<strong>遠心ポンプ</strong>（回転数＝RPM を上げると流量が増えるが、実際の流量は回路全体の抵抗で決まる）、<strong>膜型肺</strong>（ここで酸素が血中へ拡散し、二酸化炭素が抜ける）。 調整できるつまみは3つ。<strong>血流量（flow）</strong> ＝主に酸素化を規定する。<strong>sweep（スイープ）</strong> ＝膜型肺に流すガスの流量で、主にCO2除去を規定する。<strong>FdO2</strong> ＝膜型肺へ流すガスの酸素分画で、膜型肺から血液へ渡る酸素の濃度を規定する（人工呼吸器のFiO2に相当するECMO側の設定）。 <strong>VV（veno-venous）</strong> は静脈から脱血し静脈へ返す。血液は体循環と直列に流れるので、心拍出を代替しない。呼吸不全が対象。 <strong>VA（veno-arterial）</strong> は静脈から脱血し動脈へ返す。心肺を迂回して人工的な心拍出を作る。循環不全・心停止が対象。救急外来で入れる場合はほぼ末梢（大腿動脈送血）で、血液は大動脈を逆行して左室へ向かう。 <strong>ECPR（extracorporeal cardiopulmonary resuscitation）</strong> は、心肺蘇生を続けながらVA-ECMOを導入すること。 <strong>EOLIA試験</strong> は重症ARDSへのVV-ECMOの代表的RCT、<strong>ARREST試験</strong> と <strong>PRAGUE-OHCA試験</strong> は難治性OHCAへのECPRの代表的RCTである。 <strong>ELSO（Extracorporeal Life Support Organization）</strong> はECMOの国際学会兼レジストリで、患者選択基準やガイドラインを公開している（www.elso.org）。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>救急外来でのECMO使用は限られているが、従来治療に反応しない患者に対する集中治療の中でECMOの役割が広がるにつれて増えている。院外心停止（OHCA）の一部では、救急外来での即時カニュレーションによるECPRを支持するエビデンスがある。</p>
+<p>数字で見ると次のようになる。</p>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>転帰</th></tr></thead>
+<tbody>
+<tr><td>OHCAに通常CPR（全体）</td><td>生存退院率 約 9.9%</td></tr>
+<tr><td>OHCAに通常CPR（非ショッカブル波形・CPR 15分超）</td><td>生存率 1%未満</td></tr>
+<tr><td>ECPR基準を満たしECPRに割り付け</td><td>30日・神経学的に良好な生存 20〜43%</td></tr>
+<tr><td>同じ基準で通常CPRに割り付け</td><td>同 7〜18%</td></tr>
+<tr><td>ELSOレジストリのECPR 21,037例（院内＋院外）</td><td>病院生存率 31%</td></tr>
+</tbody></table></div>
+<p>ただしOHCA全体のうちECPRの適格基準を満たすのはごく一部にとどまる。</p>
+<p>重症患者が救急外来に滞留する場面では、ECMO対応施設の救急医は緊急カニュレーションの適応（難治性低酸素血症・高炭酸ガス血症へのVV、心原性ショック・心停止へのVA）を自ら考える必要がある。非対応施設の救急医は、これらの病態でどこへ紹介するかを、病院前のメディカルコントロールの文脈も含めて知っておく必要がある。ECMOの成否は<strong>適応が発生した時点からの介入の時間</strong>と結びついており、救急医はその時間に影響を与えられる特異な立場にある。</p>
+<p>著者らは「訓練を受けていない臨床医にとってECMOの血行動態・呼吸への影響と合併症の重大さは気後れさせるものだが、人工呼吸と循環虚脱を日常的に扱う救急医にとって、その裏にある生理は馴染みのあるものだ」と述べ、救急外来でのECMOを「進行した侵襲的生命維持技術を病初期に使う機会」と位置づけている。</p>
+<p><strong>目的</strong>：①ECMOが呼吸・心肺不全を安定化させる機序、②緊急ECMO紹介の適応、③ECMO対応施設または搬送チームのある地域で救急外来からECMOを開始する際の実務要件を、救急医の視点で整理すること。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー</li><li><strong>検索</strong>：Embase、MEDLINE、Google Scholar（関連する上位200件）。キーワードは "emergency department"、"extracorporeal membrane oxygenation"、"ECMO"、"ECLS"、"ECPR" の組み合わせ</li><li><strong>期間</strong>：各データベースの収載開始から 2025年2月1日まで</li><li><strong>対象文献の種類</strong>：症例報告・症例集積、後ろ向き・前向き研究、RCT、系統的レビュー・メタ解析、他のナラティブレビュー。ガイドラインと採用論文の引用文献も参照</li><li><strong>言語</strong>：英語に限定。救急医学・集中治療領域の文献に焦点</li><li><strong>採否</strong>：著者間の合意で決定。系統的レビュー・メタ解析を最優先し、以下RCT→前向き→後ろ向き→症例報告→他のナラティブレビューの順</li><li><strong>限界の明示</strong>：焦点を絞ったナラティブレビューであるため、PRISMA準拠と事前登録は適用しないと明記</li><li><strong>採用数</strong>：94本</li></ul>
+<h3>4. ECMOの生理と作用機序</h3>
+<p>体外に置いた人工肺で血液を酸素化・換気する。透析や単独のCO2除去と比べ、ガス交換や心拍出の相当な割合を支えるには高い血流量が要る。そのため患者と機械の間に太い血管アクセスを確保する必要があり、ECPRでは通常、超音波ガイド下に経皮的に確保する。回路内の遠心ポンプが体外へ非拍動流を作り、膜型肺で酸素が血中へ、二酸化炭素が血中から拡散して、血液が体へ戻る。</p>
+<p>流量の制御には注意が要る。灌流技師はポンプ回転数を上げ下げして流量を増減させるが、<strong>実測される流量は回路全体の抵抗に依存する</strong>。したがって回転数の変更に対する流量の応答は、患者の生理と回路の機械的構成の調整によって変わる。ガス側では sweep（膜型肺を通すガス流量）が主にCO2除去を、FdO2 が膜型肺を介して拡散する酸素の分画を決める。</p>
+<h4>VV-ECMO：直列の循環</h4>
+<p>VV-ECMOの流れは静脈系の中で完結するため、<strong>直接の血行動態補助はない</strong>。血液の循環は体の自然な循環と直列で、血液透析やアフェレーシスと同じ関係にある。結果として、VV-ECMOは主に酸素と二酸化炭素のガス交換に作用し、一次性の呼吸不全が適応となる。血行動態への効果は二次的なもので、酸塩基平衡の改善、肺血管抵抗の低下、右室への仕事量の減少を介する。</p>
+<p>移植を除くVV-ECMOの紹介理由として最も多いのはARDSである。VV-ECMOの第一の目的は、崩れたガス交換を是正するとともに、傷害的な人工呼吸設定による肺障害の悪化を避け、原因への直接治療（抗菌薬・ステロイド・気管支拡張薬など）が効くまでの時間を稼ぐことにある。</p>
+<h4>VA-ECMO：並列の循環と mixing point</h4>
+<p>VA-ECMOは静脈系から動脈系へ流すことで、自己心が作れない人工的な心拍出を供給する。救急外来で導入されるVA-ECMOはほとんどが末梢カニュレーションであり、送血カニュラは大腿動脈に置かれ、血液はECMO回路から大動脈を逆行して左室方向へ向かう。その結果、自己の心肺と<strong>並列</strong>に、ポンプとガス交換を持つ第2の循環ができる。この現象を dual circulation と呼び、自己肺と膜型肺のそれぞれの寄与によってガス交換が異なる2つの血流領域が生じる。両者が出会う場所が <strong>blood flow mixing point</strong> で、ECMO流量の変化と、ECMO回路に捕捉されない自己心拍出の寄与によって移動する。</p>
+<p>VA-ECMOの適応は一次性の心不全（心原性ショック・心停止）で、原因が可逆的であるものである（表1）。</p>
+<p>経過が長くなれば、順行性の自己心拍出が十分あって停滞・血栓形成・左室拡張を防げているかを厳密にモニターする必要がある。ただし著者らは、<strong>この問題は急性期の救急医にとっての当面の関心事ではない</strong>と明記している。</p>
+<h4>出血と血栓のバランス</h4>
+<p>ECMO中の患者は凝固と出血の両方のリスクを負う。血管内カニュラの存在と、血流が異物と持続的に接触することが血栓形成のリスクを上げる。持続的抗凝固はこのリスクを軽減でき、VA-ECMOでは必要になることが多い。一方でECMOそのものが<strong>消費性凝固障害</strong>を起こし、出血リスクを上げる。重症患者に共通する他の止血異常とあわせて、抗凝固は個々の患者に合わせて調整する必要がある。</p>
+<h4>ECMOで支えられないもの</h4>
+<p>心血管系・呼吸系の不全がすべてECMOの対象になるわけではない。著者らは<strong>重症の血液分布異常性ショック（distributive shock）</strong> を明示的に対象外の例として挙げている。また、患者選択と導入が最適でも、ECMOが提供できる補助の量は個々の回路と患者の生理で決まっており、難治性の心不全・肺不全では最大限のECMO補助をもってしても救命できない場合がある。</p>
+<h3>5. 紹介の全体フロー（図1）</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.ajem.2025.06.007" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.ajem.2025.06.007）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 救急医によるECMO紹介のフローチャート。左上の大きな箱「救急医がECMO適応の可能性を判断する（アスタリスク付き）」から2本の矢印が出る。上向き右の矢印には「ECMO非対応施設」と付され、右上の箱「地域・施設のTransfer Centerに連絡しECMOセンターへコンサルト」へ向かう。そこから下へ2本、「ECMO受け入れ不可」の灰色矢印が中央の灰色の箱「標準治療を継続」へ、「ECMO受け入れ可」の黒矢印が右の箱「ECMOセンターへ搬送」へ向かう。左下向きの矢印には「ECMO対応施設」と付され、箱「ECMOチームに連絡」へ。そこからも「ECMO受け入れ不可」の灰色矢印が「標準治療を継続」へ戻り、「ECMO受け入れ可」の黒矢印が下の箱「カニュレーションと以後の管理の計画を決める」へ向かう。最後に右向きの2本の黒矢印が「カニュレーションのため手術室・カテ室・ICUへ搬送」と「救急外来でカニュレーション」に分岐する。右下には破線で囲まれた凡例「ECMOの適応となりうる病態」があり、VV＝急性呼吸不全としてARDSと重積喘息、VA＝急性循環不全として心停止（肺塞栓・重症低体温・心毒性中毒・急性冠症候群）と心原性ショック（可逆性のあるもの）を挙げ、末尾に「これより頻度の低い適応もありうる」と注記されている。原図・無改変</p>
+</div>
+<p>このフローの読みどころは3つある。第一に、分岐の起点が「ECMO適応かどうか」ではなく<strong>自施設がECMO対応かどうか</strong>であること。第二に、非対応施設からのルートは Transfer Center 経由でECMOセンターへコンサルトする形に固定されていること。第三に、対応施設でも「救急外来でカニュレーション」と「他部門へ搬送してカニュレーション」の2択が最後に残ること。</p>
+<div class="tw"><table>
+<thead><tr><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>ECMO非対応施設</td><td>地域の搬送調整窓口とECMOセンターの連絡先を把握しているか</td><td>Transfer Center 経由でECMOセンターにコンサルト</td></tr>
+<tr><td>ECMOセンターに断られた</td><td>断られた理由（可逆性か、機能的転帰か、キャパシティか）</td><td>標準治療を継続。可逆性の判断が変われば再相談</td></tr>
+<tr><td>ECMO対応施設・受け入れ可</td><td>誰がカニュレーションするか、どこで入れるか</td><td>ECMOチームとカニュレーション計画を決める</td></tr>
+<tr><td>救急外来で入れることになった</td><td>術者・灌流技師の到着時間、清潔野・画像・スペース</td><td>図2の準備列に移る</td></tr>
+</tbody></table></div>
+<h3>6. ECMO適応となりうる病態（表1）</h3>
+<h4>Table 1. ECMO紹介の適応となりうる病態</h4>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>病態</th><th>注釈</th></tr></thead>
+<tbody>
+<tr><td>VV-ECMO</td><td>急性呼吸窮迫症候群（ARDS）</td><td>EOLIA基準：人工呼吸を最適化しても P/F &lt;50 が3時間超、または P/F &lt;80 が6時間超、または pH &lt;7.25 かつ PaCO2 ≥60 mmHg が6時間超（Combes NEJM 2018）</td></tr>
+<tr><td>VV-ECMO</td><td>重積喘息</td><td>カニュレーションが必要になることはまれ。ただし重症高炭酸ガス血症の症例集積では良好な転帰の報告がある（Yeo, Crit Care 2017）</td></tr>
+<tr><td>VA-ECMO</td><td>心原性ショック</td><td>原因は多様（心筋炎、心筋症、開心術後、先天性心疾患、肺塞栓、急性心筋梗塞、毒物曝露）。可逆性が高いもの、あるいは耐久型機械的補助・移植への計画的な橋渡しとして理想的（Rao, Circ Heart Fail 2018）</td></tr>
+<tr><td>VA-ECMO</td><td>重症低体温</td><td>偶発性低体温による循環虚脱で良好な転帰（ICE-CRASH研究 Takauji, Resuscitation 2023／Austin, Ann Thorac Surg 2020）</td></tr>
+<tr><td>VA-ECMO</td><td>心停止</td><td>早期に導入するほど転帰がよく、ECPRプログラムを持つ施設への病院前搬送を支持する（Lamhaut 2017／CHEER試験 Stub 2015／ARREST試験 Yannopoulos, Lancet 2020）</td></tr>
+</tbody></table></div>
+<h3>7. ECMO患者選択の全体的な考え方</h3>
+<p>患者を評価するとき、臨床医は2つの軸で患者側の因子を考える。</p>
+<ol><li><strong>原疾患が可逆的である可能性</strong></li><li><strong>ECMO補助の後、受け入れられる機能的転帰で生存する可能性</strong></li></ol>
+<p>第1の軸の背景にあるのは、ECMOで治療される患者は治療期間中ずっと資源集約的な侵襲的生命維持のもとで入院し続けなければならず、ECMO固有の合併症に加えて院内感染などの合併症のリスクにさらされ続けるという事実である。ECMOは心不全・呼吸不全を支えるが、<strong>原疾患を治療しない</strong>。そのため、ECMOに乗っている時間によって自己臓器機能が回復する見込みが妥当にある患者、あるいは移植や耐久型機械的循環補助（LVADなど）の候補となる可能性が高いことが分かっている患者において最も適切とされる。</p>
+<p>著者らが挙げる3つの症例像は、この2軸の使い方をそのまま示している。</p>
+<div class="tw"><table>
+<thead><tr><th>症例</th><th>判断</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>進行転移性肺癌で治療選択肢が尽きており、人工呼吸下でも悪化する呼吸不全</td><td>多くのECMOセンターは不適切と判断する</td><td>原疾患が可逆的でも回復可能でもない。希少な資源を使い続け、合併症にさらされ、脱カニュレーションへの道筋がない</td></tr>
+<tr><td>肺癌の既往があり寛解中、急性の吸入傷害による呼吸不全</td><td>VV-ECMOがより適切でありうる</td><td>呼吸不全が進行性疾患によるものではなく可逆的でありうる。治療後のベースライン肺機能が正常範囲なら特に</td></tr>
+<tr><td>交通外傷後の肺挫傷で悪化する呼吸不全の若年挿管患者</td><td>VV-ECMOを検討しうる</td><td>肺傷害は回復する可能性が高い</td></tr>
+<tr><td>同じ患者に、同じ外傷による明らかな壊滅的神経学的損傷がある</td><td>VV-ECMOは推奨されない</td><td>呼吸不全を支えても患者の転帰が意味のある形で変わる見込みが乏しい</td></tr>
+</tbody></table></div>
+<p>ECMO対応施設は紹介の組み入れ・除外基準を持っており、対応施設で働く救急医はそれを参照する方法を知っておくべきである。対応施設外で働くなら、ELSOがエビデンスに基づく患者選択基準の資料を www.elso.org で公開している。基準は絶対的なものから相対的なものまで幅があり、新しいエビデンス、施設の経験、地域のキャパシティ（パンデミック下など）によって変わりうる。</p>
+<p>そして著者らの立場が最も明確に出るのがここである。組み入れ・除外基準を広くとっても、しばしば限られた情報しかない中でECMO適応を考えるのは難しい。しかし<strong>紹介する側に倒しておけば、少なくともその患者が候補かどうかを判断できるECMO専門医と議論できる</strong>。救急医は、ECMOチームが人員と機材を調整している間も情報を集め続けることで評価を助けられる。</p>
+<h3>8. VV-ECMOの適応</h3>
+<p>救急外来における急性呼吸不全には多様な治療手段があり、多くの患者は人工呼吸へエスカレートせずに支えられる。挿管され、最大限の人工呼吸補助にもかかわらず難治性の低酸素血症・高炭酸ガス血症がある患者では、体外補助がさらに呼吸不全を代償できる可能性がある。VV-ECMOはガス交換を提供しつつ、さらなる人工呼吸器関連肺傷害を避け、支持療法・原因治療が効くまでの時間を作る。</p>
+<p>これらの患者はARDSの基準を満たすことが多い（急性発症の重症低酸素血症または高炭酸ガス血症、びまん性の肺浸潤影、主として心不全に起因しない病態）。VV-ECMOは数十年にわたりARDSで用いられ、COVID-19パンデミックで一段と注目を集めた。</p>
+<h4>エビデンスの整理</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>CESAR試験（2009・RCT）</td><td>VV-ECMOへの関心が大きく高まる契機となったランドマーク試験</td></tr>
+<tr><td>EOLIA試験（RCT）</td><td>60日死亡に統計学的有意差なし。RR 0.76、95%CI 0.55–1.04。対照群の28%がECMOへクロスオーバー</td></tr>
+<tr><td>CESAR＋EOLIAのプール解析（メタ解析）</td><td>ECMO検討群のITT解析で90日死亡が対照群より有意に低下。RR 0.75、95%CI 0.6–0.94</td></tr>
+<tr><td>EuroECMO-COVID（欧州観察研究・1215例）</td><td>COVID-19によるARDSでVV-ECMOの中央値期間 15日、院内生存 50%（602/1215）。挿管後4日以上のカニュレーション遅延が院内死亡と独立して関連（調整ハザード比 1.35、95%CI 1.12–1.62）</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>EOLIAの数値が本文と一致しない 本レビューは EOLIA の60日死亡を「ECMOを受けなかった患者で35%、ECMOを受けた患者で46%」と記載しているが、同じ文で RR 0.76（ECMO有利の方向）を併記しており、<mark class="hl">内的に矛盾している</mark>。原著EOLIA（NEJM 2018）の実際の値はECMO群35%・対照群46%であり、本レビューの群の記載が入れ替わっている可能性が高い。JCでEOLIAの数字を引く際はこのノートではなく原著か <span class="wl">EOLIAのベイズ流Post hoc解析（重症ARDSへのECMO・JAMA2018）</span> を参照すること。</p>
+</div>
+<h4>紹介の閾値</h4>
+<p>ELSOは、最適な内科的管理にもかかわらず <strong>P/F &lt;80</strong> または <strong>重症高炭酸ガス血症（pH &lt;7.25 かつ PaCO2 ≥60 mmHg）</strong> の患者ではVV-ECMOを検討するよう推奨している。ここでの「最適な内科的管理」には人工呼吸設定の最適化、腹臥位、筋弛緩が含まれる。</p>
+<p>著者らは実務上の注意を添えている。重症低酸素血症の患者がこれらの治療を試している間に救急外来に何時間もとどまるのは望ましくない。それでも救急医にとってこの基準値は、ECMOセンターへの転院や院内ECMOコンサルトを求める際の<strong>交渉の材料</strong>として価値がある、という位置づけである。加えて早期紹介の利益を支持するエビデンスがあり、上記のEuroECMO-COVIDの aHR 1.35 がそれを示している。</p>
+<h4>心停止・血行動態不安定を伴う場合</h4>
+<p>ARDSの一部は急速に低酸素血症が進み、救急外来で血行動態不安定や心停止に至る。これらの患者は緊急のVV-ECMOカニュレーションの候補になりうるが、心停止後の心不全が肺不全に加わっているかどうかが問題になり、ECMOコンサルタントにとって判断が難しくなる。救急医は<strong>POCUSでショックの原因を性状評価する</strong>ことでこの問いに答える助けになる。</p>
+<p>もう1つ、心停止後の神経学的状態の不確実性もコンサルタントの検討事項になる。心停止の持続時間とCPRの質（救急外来内でのCPRであれば質は高い可能性が高い）に関する情報が、カニュレーションの遅れを避けるうえで有用である。</p>
+<h4>重積喘息とまれな適応</h4>
+<p>ARDSより頻度は低いが、緊急VV-ECMO紹介のもう1つの適応が重積喘息である。人工呼吸下でも低酸素血症・高炭酸ガス血症が続く重積喘息をVV-ECMOで管理した患者のコホートは小さいが、利用可能なエビデンスでは<strong>生存と離脱成功が80%超</strong>と良好である。これらの患者は圧損傷（barotrauma）と動的過膨張（dynamic hyperinflation）のリスクがあり、これらは血行動態不安定を引き起こしうる。これらを評価し治療することが、VV補助が必要なのかVA補助が必要なのかをコンサルタントが区別する助けになる。</p>
+<p>ベッドサイドでのECMOカニュレーションが可能な施設では、可逆性のある原因による急性重症呼吸不全のまれなシナリオでも紹介を検討してよい。症例報告としては中枢気道の断裂・閉塞、大量誤嚥、有毒ガス吸入が挙げられている。</p>
+<h3>9. VA-ECMOの適応</h3>
+<p>VA-ECMOは静脈系と動脈系の間に血流を作り、心臓と肺を迂回する。血行動態が破綻した患者が高頻度に受診する救急外来では、多くの患者にとって潜在的な治療となりうる。ただしVA-ECMOが血行動態を支える能力には限界がある。</p>
+<h4>時間軸で適応が変わる</h4>
+<p>VA-ECMO紹介の適否は<strong>血行動態破綻のタイムラインに依存する</strong>。VV-ECMOの紹介は、患者が低酸素血症・高炭酸ガス血症ではあるが重篤な血行動態不安定はないという状況で、数時間かけて進むことが多い。これに対しVA-ECMOでは、心停止に至るまで血行動態が破綻した患者は、神経学的転帰を最適化するために<strong>数分以内にVA-ECMO流量を確立していなければならない</strong>。</p>
+<p>この時間枠のため、救急医にとってVA-ECMOの適応は、働く施設によって3つに分岐する。</p>
+<div class="tw"><table>
+<thead><tr><th>施設タイプ</th><th>救急医が知っておくべきこと</th></tr></thead>
+<tbody>
+<tr><td>心停止患者にVA-ECMOカニュレーションを行える施設（ECPR可能）</td><td>ECPRの組み入れ・除外基準。院外心停止患者が来院時点で即時カニュレーションの候補になりうる。救急外来内で発生した院内心停止も候補</td></tr>
+<tr><td>VA-ECMOは可能だがECPR対応の体制がない施設</td><td>心原性ショックへのVA-ECMO紹介の適応。ECPRの適応は相対的に優先度が下がる</td></tr>
+<tr><td>ECMO非対応施設</td><td>ECPRの適応に精通する必要は薄い（心停止患者は搬送に耐えない）。心原性ショックの紹介と、Impella・IABPなど他の一時的補助への院内紹介</td></tr>
+</tbody></table></div>
+<p>ECPRは脳卒中やSTEMIと同様に、病院前あるいはトリアージの段階で起動できる<strong>協調した多職種対応</strong>を必要とする。ECPR対応施設は組み入れ・除外基準を持つガイドラインを備えており、地域の救急隊員と救急医の双方が熟知しているべきである。</p>
+<h4>ECPRのRCTとメタ解析</h4>
+<p>難治性OHCAに対するECPRの試験結果は一致していない。</p>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>PRAGUE-OHCA（単施設RCT）</td><td>神経学的に良好な生存 31.5%（ECMO群）対 22.0%（標準戦略群）、オッズ比 1.63、95%CI 0.93–2.85。統計学的有意差なし</td></tr>
+<tr><td>ARREST（単施設RCT）</td><td>生存 43%（ECMO群）対 7%（標準ACLS群）、ハザード比 0.16、95%CI 0.06–0.41。累積生存の有意な利益あり</td></tr>
+<tr><td>これら2試験のメタ解析</td><td>180日時点で神経学的に良好な転帰を伴う生存が ECPR群 32.4% 対 標準治療群 19.7%、絶対差 12.7%、95%CI 2.6–22.7%、p = 0.015</td></tr>
+<tr><td>ECPRのRCTを対象とした別のメタ解析（Gomes, Intern Emerg Med 2023）</td><td>生存 26.4% 対 17.2%、RR 1.47、95%CI 0.91–2.40、p = 0.12／神経学的に良好な転帰 28.3% 対 18.6%、RR 1.48、95%CI 0.88–2.49、p = 0.23。いずれも有意差なし</td></tr>
+</tbody></table></div>
+<p>著者らの総括は「難治性OHCAでECPRが成功するには、効率的なカニュレーションと十分に組織化されたケアシステムが必須である」というものである。そして<strong>重症低体温による心停止は、この要件に対して最も頑健な適応</strong>でありうる。これらの患者は長い down-time を経てもECPRで良好な転帰をとりうるからである。</p>
+<h4>心停止に至っていない心原性ショック</h4>
+<p>心停止ではないが可逆性のある原因による難治性心原性ショックの患者では、VA-ECMOが適応となりうる。これも時間依存性の治療であり、救急医は紹介を求めるべきである。</p>
+<ul><li><strong>心筋梗塞</strong>：心原性ショックの一般的な原因で、VA-ECMOで安定化した後に複数の介入が可能になりうる</li><li><strong>その他の適応となりうる病態</strong>：心肺虚脱を伴う肺塞栓、心筋炎、たこつぼ心筋症（stress cardiomyopathy）、難治性心室頻拍・心室細動などの不安定な不整脈（electrical storm と呼ばれることがある）</li><li><strong>薬物過量による心原性ショック</strong>（β遮断薬・カルシウム拮抗薬の過量など）：頻度は低いが、VA-ECMOでの転帰は比較的良好</li></ul>
+<h4>ECMOがない施設の代替手段</h4>
+<p>ECMOのない施設の救急医でも、循環器の専門医の支援があれば Impella や大動脈内バルーンパンピング（IABP）といった他の一時的機械的循環補助にアクセスできる場合がある。著者らは、ECMOのための転院をなお検討中であっても、これらの治療が利用可能で適切なら<strong>院内紹介を遅らせるべきではない</strong>と述べる。患者は転院前に他のデバイスで安定化することで利益を得られるし、多くの場合は他のデバイスだけで完全に支えられる。たとえば孤立性の左室不全なら Impella で十分な血行動態補助が得られる可能性があり、両心室不全ならVA-ECMOがなお必要になる可能性が高い。</p>
+<h3>10. 救急外来でのECMO導入（図2）</h3>
+<p>救急外来で患者にECMOを開始するには、救急医は①必要な人員と物品を集め、②カニュレーションのためのアクセス確立を補助できるよう準備し、③ECMO回路で流量が得られるにつれて血行動態を管理する必要がある。</p>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.ajem.2025.06.007" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.ajem.2025.06.007）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 救急外来におけるECMO導入のプロセスフロー。上端に右向きの太い矢印「救急外来での経過時間」が置かれ、時間の流れを表す。表は縦にVV-ECMO行（薄い青）とVA-ECMO行（薄いオレンジ）の2段、横に4つの列で構成される。左から「ECMO適格性の評価」、黒地に白抜きの縦帯「ECMOチームに連絡 — 迷ったら紹介せよ」、「カニュレーションの準備」、そして「救急外来でベッドサイドカニュレーションを行う場合」という上位見出しの下に「導入前後の生命維持管理」と「導入後のモニタリング」の2列。VV行の適格性欄は、急性であること（慢性の基礎肺疾患たとえば悪性腫瘍の進行によらない）、重症であること（P/F &lt;100、たとえば FiO2 100%でSpO2 &lt;92%、または pH &lt;7.25 かつ pCO2 &gt;60 が最大限の管理にもかかわらず持続）、可逆性のある原因（ARDS、吸入傷害、肺炎、重積喘息など）の3項目。VA行は、急性であること（慢性の基礎心疾患の進行によらない。ただし移植・LVADの候補である場合を除く）、重症であること（ACLS・強心薬・他の機械的循環補助を含む最大限の管理に難治性のショック）、可逆性のある原因（急性冠症候群、肺塞栓、低体温、心毒性中毒）の3項目。準備列はVVが静脈路の最適化（有効な末梢静脈路2本以上、可能なら左内頸に中心静脈カテーテル）と代理意思決定者の同定、VAが可能なら右橈骨動脈ラインの確保と、その場でカニュレーションするなら血液製剤の準備。生命維持列はVVが人工呼吸の最適化・支持療法の継続（昇圧薬、吸入血管拡張薬、筋弛緩）・導入時低血圧への塩化カルシウム、VAが支持療法の継続（昇圧薬、強心薬、輸液）・ECMOチーム到着待ちの間の通常の蘇生の継続・導入時低血圧への塩化カルシウムと必要に応じ炭酸水素ナトリウム。モニタリング列はVVがECMOチームと相談しながらの血液ガス採取とpCO2の監視、VAがSpO2と動脈圧波形の拍動性の監視・カニュラ位置確認へのPOCUSの活用・平均血圧目標と流量および持続するVF/VTへの追加除細動についてのECMOチームとの意思疎通。原図・無改変</p>
+</div>
+<p>図2で救急医が最も見るべきは、<strong>適格性評価の3項目が VV も VA も同じ形（急性であること・重症であること・可逆性のある原因）で書かれている</strong>点である。そのうえで、閾値だけがモダリティごとに変わる。</p>
+<h4>10.1 人員と物品</h4>
+<p>ECMO対応施設でもECMOの人員体制はさまざまで、理想は<strong>1回のコンサルトまたは通知で速やかに起動できる、形式化された多職種ECMOチーム</strong>である。最低限、患者にはベッドサイドに<strong>カニュレーション術者と灌流技師</strong>が必要になる。術者はカニュラ留置の訓練を受けた者なら誰でもよく、多くは外科医、集中治療医、インターベンション循環器医、または救急医である。これらの臨床医はECMO起動時に院内にいるとは限らず、<strong>その到着予想時間を院内・院外いずれの紹介判断でも考慮に入れる</strong>必要がある。</p>
+<p>物品としては、潜在的に2か所となるカニュレーション部位の清潔野、中心静脈アクセス、留置位置確認のための画像モダリティ（POCUSまたは透視）が必要になる。救急医は既存の診療環境を知っているため、機材を置く台や、長い清潔なガイドワイヤーとECMO回路を扱うためのベッドの頭側・足側の十分なスペースといった物理的な必要を先回りして手配し、手技を円滑にできる。人員と物品がすべてベッドサイドに集まり、同意が確認されたらカニュレーションを開始できる。</p>
+<h4>10.2 血管アクセス</h4>
+<p>ECMOの血管アクセスには、中心静脈への太い脱血カニュラと、構成に応じて静脈（VV）または動脈（VA）への送血カニュラの留置が必要である。救急外来でのベッドサイドカニュレーションでは、脱血または送血のいずれか一方を担う<strong>シングルルーメンカニュラ</strong>を用いることが多い。カニュレーション部位は内頸静脈と大腿血管が候補になる。</p>
+<p>カニュラの径は、患者の体格に基づく「最低限有効なECMO流量」を確保できる太さが必要で、理想的には「最も高い有効流量」まで許容できる太さがよいが、体型と血管径で制限されうる。</p>
+<div class="tw"><table>
+<thead><tr><th>構成</th><th>カニュラ</th><th>部位</th><th>径</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>VV・VA共通（緊急）</td><td>脱血</td><td>大腿静脈</td><td>18〜29 Fr</td><td>先端は構成により右房内または右房を越える位置</td></tr>
+<tr><td>VV</td><td>送血</td><td>右内頸静脈</td><td>15〜23 Fr</td><td>大腿静脈に置いてより太い径を使うこともできるが、感染リスクが高くなりうる</td></tr>
+<tr><td>VA</td><td>送血</td><td>大腿動脈</td><td>15〜23 Fr</td><td>脱血と<strong>対側</strong>に置くと単一肢の血流停滞を避けられ、好ましいことがある</td></tr>
+</tbody></table></div>
+<p>いずれも最終的なサイズは患者側の因子とECMOチームの好みで変わる。</p>
+<p><strong>救急医が先回りできること</strong>が明確に列挙されている。</p>
+<ol><li>薬剤投与用の静脈路と、モニタリング用の動脈路を確保する</li><li>ECMOチームが適応を検討し、ECMO固有の物品を集めている間に、追加の清潔な血管アクセスをチームと相談しながら確保する</li><li>ECMOが必要になる患者は、一般的なカニュレーション部位とは<strong>別の</strong>アクセスを持っているのが理想である。そうすれば手技によって薬剤投与が中断されない</li><li>十分な末梢静脈カテーテルを確保するか、<strong>左内頸静脈</strong>の中心静脈アクセスを検討する</li><li>VA-ECMOの可能性がある患者、または血行動態が不安定な患者では、モニタリング用に<strong>右橈骨動脈</strong>ラインを置く</li></ol>
+<p>薬剤投与とモニタリングのアクセスが確立したら、救急医はカニュレーション用のアクセス確保を助けられる。これはECMO術者と紹介時点で相談したうえで行う。両者が適切と合意すれば、救急医が清潔操作で右内頸静脈、総大腿静脈、総大腿動脈のアクセスを取り、これらをECMOのガイドワイヤー留置に使うことができる。ECMO術者はガイドワイヤー上で段階的拡張（serial dilation）を行い、ECMOカニュラを留置する。<strong>カニュラ挿入時には通常ヘパリンのボーラス投与が行われ、これは手技前に救急医が指示できる</strong>。</p>
+<p>ECMOカニュラの留置は速やかに行われうる。あるシステムでは患者到着からECMO流量開始まで平均10分未満と報告されている。カニュレーション時間はとりわけECPRで重要で、救急外来到着からポンプ開始までの時間が短いほど転帰が改善することが示されている。ECPR対応施設の救急医は、ECPRの教育とシミュレーションに寄与できる特異な立場にある。一部のプログラムでは<strong>カニュレーション全体を救急医が行っている</strong>。</p>
+<p>VA-ECMOでカニュレーションされる患者では、総大腿動脈に送血カニュラを置いた同側下肢の<strong>浅大腿動脈に遠位灌流カテーテル</strong>を留置し、下肢へ順行性の血流を送って肢虚血を避けることが多い。これはECMOチームがベッドサイドで、あるいは血管外科の指導下に透視下で置かれうる。</p>
+<h4>10.3 流量の確立</h4>
+<p>脱血・送血のカニュラが留置されたら、術者はカニュラとECMO回路の <strong>wet connection</strong>（回路に空気を巻き込まないように接続する操作）を行う。接続が確認されたら、術者は灌流技師に流量開始を依頼する。灌流技師はECMOポンプの回転数（RPM）を上げ、得られた実測流量を注意深く監視する。</p>
+<p>VV-ECMOでは、回路からの流量が患者の自己心拍出に追いつくにつれて低酸素血症が改善するはずである。VA-ECMOでは流量が心臓と肺の両方を迂回するため、血行動態が改善するはずである。</p>
+<p>流量開始後のモニタリングには、VV・VAいずれでも動脈ラインが有用である。</p>
+<ul><li><strong>VV-ECMO</strong>：動脈ラインにより血液ガスを頻回に確認し、低酸素血症の改善を追うとともに、<strong>急速なpCO2の低下を避ける</strong>。これは sweep（膜型肺のガス流量＝膜型肺の換気）を積極的に上げすぎた場合に起こりうるもので、神経学的損傷と関連しうる</li><li><strong>VA-ECMO</strong>：血流が非拍動性になりうるため、動脈ライン留置か、LVAD患者と同様の用手血圧計を用いたドプラ測定が必要になる。平均動脈圧に加えて<strong>拍動性</strong>を分ごとに評価でき、これが大動脈弁の開放と左室駆出が続いているかの評価を助けるため、迅速な動脈ライン留置が望ましい</li><li><strong>動脈ラインとSpO2プローブの位置</strong>：動脈ラインは理想的には右上肢（右橈骨動脈など）に、パルスオキシメータのプローブも可能な限り右上肢または頭部（耳朶や鼻翼）に置く。これらの領域は腕頭動脈、次いで総頸動脈から灌流されるため、dual circulation が作る血液混合点に対して<strong>左室より近位の自己肺循環</strong>をモニターできる</li><li><strong>血圧目標</strong>：VA-ECMO流量が確立した後、ELSOガイドラインは昇圧薬を調整して平均動脈圧を 60 mmHg 以上・80 mmHg 未満に保つことを推奨している</li></ul>
+<p>人工呼吸中の患者は、カニュレーション後に設定の調整が必要になる。</p>
+<div class="tw"><table>
+<thead><tr><th>構成</th><th>人工呼吸設定</th></tr></thead>
+<tbody>
+<tr><td>VV-ECMO</td><td>圧損傷・無気肺損傷・容量損傷を最小化するため、きわめて低い量と圧の「rest settings」に置くのが通常。ただしECMO中の最適設定を導くエビデンスはなお限られる</td></tr>
+<tr><td>VA-ECMO（肺傷害の所見がない）</td><td>より通常に近い設定にとどまってよいが、高酸素と低酸素の両方を避けるよう厳重に監視する</td></tr>
+</tbody></table></div>
+<h3>11. 合併症を先回りする</h3>
+<p>経皮的ECMOカニュレーションは多数の合併症を生じうる（表2）。単施設で720例のカニュレーション例を検討したレビューでは、合併症は<strong>20%超</strong>の患者に生じ、最多は<strong>軽度の下肢虚血で 9.4%</strong> であった。他に頻度の高いカニュレーション合併症として、出血、血管穿孔、カニュラ位置異常がある。血栓塞栓症も一般的な合併症で、動脈カニュラを持つ患者ではこのリスク軽減のため抗凝固の継続が必要である。ECMOカニュレーションが視野に入る患者を診る臨床医は、とりわけVA-ECMOカニュレーションで<strong>相当量の輸血の必要</strong>に備え、カニュラを置いた肢の神経血管モニタリングを厳重に行うべきである。</p>
+<h4>脱血不良（chugging／chattering／low-flow）</h4>
+<p>カニュレーション直後、患者は<strong>脱血不良</strong>、すなわち静脈圧と返血量のミスマッチを起こしうる。これは「chugging（チャギング）」「chattering（チャタリング）」と呼ばれ、極端な場合には「low-flow イベント」となる。原因は2つある。</p>
+<ol><li><strong>血管内容量の不足</strong></li><li><strong>胸腔内圧または腹腔内圧の上昇による外部からの圧迫</strong></li></ol>
+<p>ECMOチームと相談のうえ、救急医は上記のとおり血液製剤の輸血または晶質液の投与に備えるとともに、<strong>気胸、心タンポナーデ、腹部コンパートメント症候群を評価</strong>すべきである。加えて、咳嗽やこわばりへの対処と、興奮による酸素需要の増加への対処のために、鎮静の増量が必要になる患者もいる。</p>
+<h4>再循環・differential oxygenation・空気混入</h4>
+<ul><li><strong>再循環（recirculation）</strong>：VV-ECMOで酸素化された血液がそのまま脱血カニュラに引き込まれる現象。低酸素血症の原因になる</li><li><strong>末梢VA-ECMOの differential oxygenation</strong>：「differential hypoxemia」あるいは「North-South syndrome」と呼ばれることがあるが、著者らは<strong>これらの呼称は正確性に劣る</strong>と注記している。これも低酸素血症の原因になる</li><li>上記2つはいずれも<strong>経過の後期に起こることが多い</strong></li><li><strong>回路への空気混入（air entrainment）</strong>：頻度は低いが急性に起こりうる重大な合併症。①ポンプ前の回路自体の偶発的な破綻、②血液透析カテーテルやイントロデューサーシースなどキャップが外れた血管アクセスポイント、のいずれかを介して起こりうる。ECMOコンソールが気泡検出を表示し、大量の場合は膜型肺そのものに空気が観察されうる。回路機能を回復させるため緊急に脱気（de-airing）手技を行う</li></ul>
+<p>ECMO術者または灌流技師は、カニュレーション後に救急外来にとどまる患者のケアに引き続き密接に関与し、これらの合併症の管理を助けるべきである。</p>
+<h4>Table 2. 救急外来でのECMOカニュレーション後に予期すべき合併症</h4>
+<div class="tw"><table>
+<thead><tr><th>合併症</th><th>徴候・症状</th><th>VA-ECMOでの対応</th><th>VV-ECMOでの対応</th></tr></thead>
+<tbody>
+<tr><td>出血</td><td>カニュレーション部位の外出血、あるいは硬く増大する血腫／腹部膨満の増強／low-flowイベント</td><td>大量輸血プロトコル／CT撮影／IVRまたは外科的介入</td><td>必要に応じ輸血／抗凝固の中止／CT撮影</td></tr>
+<tr><td>下肢虚血</td><td>遠位ドプラ信号の消失／肢の色調変化</td><td>最適なカニュラサイズの選択／遠位灌流カテーテル留置／血管専門医コンサルト</td><td>頻度は低い。血管専門医コンサルト、抗凝固の最適化</td></tr>
+<tr><td>カニュラ位置異常</td><td>low-flowイベント／再循環（VVのみ）</td><td>画像診断（超音波・ポータブルX線）／ECMOチームによるカニュラ位置調整</td><td>画像診断（超音波・ポータブルX線）／ECMOチームによるカニュラ位置調整</td></tr>
+<tr><td>低血圧</td><td>動脈ラインで平均動脈圧 65 mmHg 未満（VV）または脈圧 0 mmHg（VA）</td><td>ECMO流量の増加（ECMOチームの指示で）／上記に準じた輸血／輸液／昇圧薬／出血の評価</td><td>慎重な輸液／昇圧薬</td></tr>
+<tr><td>低酸素</td><td>右上肢からの検体で SpO2 &lt;90% または PaO2 &lt;60 mmHg</td><td>胸部画像（X線・超音波）／人工呼吸器とECMOのFdO2の最適化</td><td>再循環の評価／流量の増加（ECMOチームの指示で）／発熱・興奮のコントロール／chugging・low-flowイベントへの対処</td></tr>
+</tbody></table></div>
+<p>（略語：IVR＝interventional radiology、FdO2＝ECMO回路のガス中酸素分画で灌流技師または臨床医が調節する）</p>
+<h3>12. 今後の方向性</h3>
+<p>ECMOは適応も使用も世界的に増え続けており、関連技術は軽量・可搬・普遍的に適合するシステムへ向かっている。とりわけECPRの研究は増え続け、適切な患者集団で良好な転帰を支持しており、病院前プログラムを含む新しいECPRプログラムの創設につながっている。この状況の変化のなかで、ECPR対応施設で働く救急医、あるいはECMO対応化を検討するあらゆる病院の医師は、カニュレーションのための紹介に精通し、カニュレーション中の患者の蘇生を主導しうる立場にあるべきである。</p>
+<h3>13. 結論（著者らのまとめ）</h3>
+<ul><li>救急医はVV-ECMOとVA-ECMOの機能と適応を知っておくべきで、その必要度は救急外来が置かれた施設のECMO対応能力に依存する</li><li>紹介にあたっては呼吸不全・心不全の<strong>可逆性</strong>を考慮すべきであり、分からなければ紹介する側に倒すべきである</li><li><strong>若く、他に問題のない、単一臓器不全の患者</strong>が最もECMOの利益を得やすい</li><li>救急外来でのカニュレーションは多職種の協調を必要とするが、人員と物品がそろえば速やかに実施できる</li><li>技術の進歩に伴い、ECMOの適応と、救急外来ないし病院前でECMOを開始する能力は拡大していく可能性が高い</li></ul>
+<h3>14. 批判的吟味（JCでの論点）</h3>
+<ol><li><strong>EOLIAの群が入れ替わっている疑い</strong>（最大の瑕疵）。本文は「60日死亡 35%（ECMOなし）対 46%（ECMOあり）、RR 0.76、95%CI 0.55–1.04」と記述する。RR 0.76 はECMO群のリスクが対照の0.76倍という意味なので、35% がECMO群でなければ計算が合わない（46×0.76 ≒ 35）。原著EOLIAの実際の値はECMO群35%・対照群46%である。<strong>査読を通過した総説にこの誤りが残っている</strong>ことは、ナラティブレビューの数値を孫引きしない理由として十分である</li><li><strong>VV-ECMOの閾値が2つ併記されたまま統合されていない</strong>。本文はELSO基準（P/F &lt;80、または pH &lt;7.25 かつ PaCO2 ≥60）、表1はEOLIA基準（P/F &lt;50 が3時間超、P/F &lt;80 が6時間超、pH &lt;7.25 かつ PaCO2 ≥60 が6時間超）、図2はさらに別の「P/F &lt;100（例：FiO2 100%で SpO2 &lt;92%）」を挙げる。<strong>同じ論文の中で3つの閾値が流通している</strong>。著者らはこれらの関係（相談の閾値／導入の閾値／評価開始の閾値）を説明していない</li><li><strong>ECPRのメタ解析が2つ引かれ、結論が逆なのに解釈が与えられていない</strong>。1つは180日で有意（32.4%対19.7%、p = 0.015）、もう1つは非有意（生存 RR 1.47、p = 0.12）。含めた試験、per-protocol か ITT か、アウトカムの時点のいずれが差を生んだのかを本文は説明せず、肯定的なほうを先に置いている。<strong>読者はECPRを実際より確実な治療と受け取りかねない</strong></li><li><strong>ARREST試験の解釈に注意</strong>。単施設・n が小さく（早期中止）、HR 0.16 という効果量は他のどの試験でも再現されていない。この総説は ARREST を「有意な累積生存利益」として提示するが、INCEPTION（30日生存 20%対16%、p = 0.52）に触れていない。<span class="wl">ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</span> が対比した4試験のうち2つしか登場しない</li><li><strong>合併症データが単施設720例の1本に依存</strong>。しかもこの研究（Rupprecht, Heart Lung Vessel 2015）は救急外来でのカニュレーションに限ったものではない。救急外来カニュレーション例の合併症率は本レビューからは分からない</li><li><strong>「到着から流量開始まで平均10分未満」は Minnesota の1プログラム</strong>（Yannopoulos, JAHA 2016）の数字であり、ARREST試験を出した同じ施設である。一般化はできない</li><li><strong>重積喘息の「生存・離脱80%超」は症例集積とレジストリ由来</strong>で、出版バイアス・生存者バイアスがかかりうる。分母がどれだけ選ばれているかは記載がない</li><li><strong>推奨の強さの根拠が示されない</strong>。ELSOのMAP目標（60 mmHg 以上・80 mmHg 未満）も、rest settings も、遠位灌流カテーテルも、支持するRCTはない。著者ら自身「ECMO中の最適な人工呼吸設定を導くエビデンスは限られる」と留保しているが、他の数値には同様の留保が付いていない</li><li><strong>米国の医療体制が前提</strong>。灌流技師のベッドサイド常駐、Transfer Center 経由の地域搬送調整、ECMOセンターの分布はいずれも米国のもので、日本の施設にそのまま持ち込めない。図1の左右2ルートは、日本では「近隣のECMOセンターに直接電話する」形に置き換わる</li><li><strong>ナラティブレビューの方法論的限界を著者らが明示している</strong>。PRISMA非準拠、事前登録なし、英語限定、Google Scholar は上位200件のみ、採否は著者の合意。94本という採用数の割に、除外された文献の数と理由は示されていない</li><li><strong>図2の「迷ったら紹介せよ」は資源制約を捨象している</strong>。紹介を増やせばECMOセンター側の相談件数が増える。断られた場合の標準治療への戻り方（誰がいつ判断を打ち切るか）は図1で「標準治療を継続」の1箱で済まされている</li></ol>
+<h3>15. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>重症ARDSへのVV-ECMO（EOLIA試験）</td><td>Combes A, Hajage D, Capellier G, et al. N Engl J Med. 2018;378(21):1965-75. doi:10.1056/NEJMoa1800385</td></tr>
+<tr><td>重症成人呼吸不全へのECMO搬送戦略（CESAR試験）</td><td>Peek GJ, Mugford M, Tiruvoipati R, et al. Lancet. 2009;374(9698):1351-63. doi:10.1016/S0140-6736(09)61069-2</td></tr>
+<tr><td>重症ARDSへのECMO：系統的レビューと個別患者データメタ解析（90日死亡 RR 0.75）</td><td>Combes A, Peek GJ, Hajage D, et al. Intensive Care Med. 2020;46(11):2048-57. doi:10.1007/s00134-020-06248-3</td></tr>
+<tr><td>COVID-19 ECMO 1215例の院内・6か月転帰（EuroECMO-COVID）</td><td>Lorusso R, De Piero ME, Mariani S, et al. Lancet Respir Med. 2022. doi:10.1016/S2213-2600(22)00403-9</td></tr>
+<tr><td>難治性VFのOHCAへの早期ECMO（ARREST試験）</td><td>Yannopoulos D, Bartos J, Raveendran G, et al. Lancet. 2020;396(10265):1807-16. doi:10.1016/S0140-6736(20)32338-2</td></tr>
+<tr><td>難治性OHCAへの搬送中ECPRと即時侵襲的評価（PRAGUE-OHCA試験）</td><td>Belohlavek J, Smalcova J, Rob D, et al. JAMA. 2022;327(8):737-47. doi:10.1001/jama.2022.1025</td></tr>
+<tr><td>難治性OHCAへのECPRのRCTの系統的レビュー・メタ解析（有意差なし）</td><td>Gomes DA, Presume J, Ferreira J, et al. Intern Emerg Med. 2023;18(7):2113-20. doi:10.1007/s11739-023-03357-x</td></tr>
+<tr><td>成人のECPR：エビデンスと含意</td><td>Abrams D, MacLaren G, Lorusso R, et al. Intensive Care Med. 2022;48(1):1-15. doi:10.1007/s00134-021-06514-y</td></tr>
+<tr><td>VV-ECMOで支持される成人患者の管理（ELSOガイドライン）</td><td>Tonna JE, Abrams D, Brodie D, et al. ASAIO J. 2021;67(6):601-10. doi:10.1097/MAT.0000000000001432</td></tr>
+<tr><td>成人心臓患者へのVA-ECMO（ELSO暫定ガイドライン）</td><td>Lorusso R, Shekar K, MacLaren G, et al. ASAIO J. 2021;67(8):827-44. doi:10.1097/MAT.0000000000001510</td></tr>
+<tr><td>ELSO ECLS 国際統計サマリー（ECPR 21,037例・病院生存 31%）</td><td>Extracorporeal Life Support Organization, 2025（2025年6月5日アクセス）</td></tr>
+<tr><td>重積喘息へのECMO（ELSOレジストリ解析）</td><td>Yeo HJ, Kim D, Jeon D, Kim YS, Rycus P, Cho WH. Crit Care. 2017;21(1):297. doi:10.1186/s13054-017-1886-8</td></tr>
+<tr><td>重積喘息による成人呼吸不全へのECLS</td><td>Mikkelsen ME, Woo YJ, Sager JS, Fuchs BD, Christie JD. ASAIO J. 2009;55(1):47-52</td></tr>
+<tr><td>心原性ショック・心停止へのVA-ECMO</td><td>Rao P, Khalpey Z, Smith R, Burkhoff D, Kociol RD. Circ Heart Fail. 2018;11(9):e004905</td></tr>
+<tr><td>重症偶発性低体温の心停止・循環不安定へのECMO（ICE-CRASH研究・日本）</td><td>Takauji S, Hayakawa M, Yamada D, et al. Resuscitation. 2023;182:109663</td></tr>
+<tr><td>偶発性低体温へのECLSの転帰（系統的レビュー）</td><td>Austin MA, Maynes EJ, O'Malley TJ, et al. Ann Thorac Surg. 2020;110(6):1926-32</td></tr>
+<tr><td>目撃なし低体温心停止のECLS復温の転帰</td><td>Podsiadło P, Darocha T, Svendsen Ø, et al. Artif Organs. 2021;45(3):222-9</td></tr>
+<tr><td>難治性VFへのMinnesota式高度灌流・再灌流戦略（到着から流量まで10分未満）</td><td>Yannopoulos D, Bartos JA, Martin C, et al. J Am Heart Assoc. 2016;5(6). doi:10.1161/JAHA.116.003732</td></tr>
+<tr><td>OHCAへのECPRで良好な機能的転帰と関連する予後因子（系統的レビュー・メタ解析）</td><td>Tran A, Rochwerg B, Fan E, et al. Resuscitation. 2023;193:110004</td></tr>
+<tr><td>ECPRのシミュレーション訓練で救急医が迅速・安全に導入できる</td><td>Whitmore SP, Gunnerson KJ, Haft JW, et al. Resuscitation. 2019;138</td></tr>
+<tr><td>経皮的ECMOカニュレーションの落とし穴（720例・合併症20%超）</td><td>Rupprecht L, Lunz D, Philipp A, Lubnow M, Schmid C. Heart Lung Vessel. 2015;7(4):320-6</td></tr>
+<tr><td>VA-ECMOの赤血球輸血（多施設後ろ向き）</td><td>Raasveld SJ, Karami M, Schenk J, et al. Transfusion. 2023. doi:10.1111/trf.17505</td></tr>
+<tr><td>心補助目的の経皮的ECMOカニュレーション後の早期血管合併症</td><td>Avalli L, Sangalli F, Migliari M, et al. Minerva Anestesiol</td></tr>
+<tr><td>ECMO中の回路内空気の管理（単施設経験）</td><td>Chan KM, Wan WTP, Ling L, So JMC, Wong CHL, Tam SBS. ASAIO J. 2022;68(3):e39-43</td></tr>
+<tr><td>VA-ECMO中の酸素化の最適化（differential oxygenation）</td><td>Winiszewski H, Guinot PG, Schmidt M, et al. Crit Care. 2022;26(1):226. doi:10.1186/s13054-022-04102-0</td></tr>
+<tr><td>COVID-19重症例でのECMO開始の遅れと不良転帰</td><td>Li X, Hu M, Zheng R, et al. Front Med (Lausanne). 2021;8:716086</td></tr>
+<tr><td>新設ECPRプログラムの最初の結果と転帰</td><td>Djordjevic I, Gaisendrees C, Adler C, et al. Perfusion. 2022;37(3):249-56</td></tr>
+<tr><td>救急医によるショック原因診断のRUSH検査の精度</td><td>Ghane MR, Gharib M, Ebrahimi A, et al. J Emerg Trauma Shock. 2015;8(1):5-10</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 救急外来のECMOは「機械を知っているか」ではなく「<mark class="hl">いつ・誰に電話するか</mark>」で決まる。VV-ECMOの相談は数時間かけてよいが、VA-ECMO・ECPRは<mark class="hl">数分以内に流量が立たなければ意味を失う</mark>——この時間軸の違いを救急外来と共有し、可逆性が分からないときは<mark class="hl">紹介する側に倒す</mark>のが本レビューの中核である。 明日から変えられる具体策は3つ。①VA-ECMOが視野に入った時点で<mark class="hl">右橈骨動脈にAライン、SpO2プローブは右上肢か耳朶・鼻翼</mark>（脳灌流側を見るため）。②カニュレーション部位（右内頸・大腿静脈・大腿動脈）を潰さない末梢静脈路を先に確保し、中心静脈路は<mark class="hl">左内頸</mark>を選ぶ。③自院として<mark class="hl">救急外来で入れるのか、搬送してから入れるのか</mark>を平時に決めておく。 ただし本レビューの数値をそのまま引かないこと。<mark class="hl">EOLIAの群が入れ替わっている疑いが濃く</mark>、VV-ECMOの閾値も本文・表1・図2で3種類が併存している。当院の適応の線引きには、体制の閾値まで踏み込んだ <span class="wl">ECPR は「手技」ではなく「システム」— 高volume・高プロトコル化の施設でのみ生存が改善する（Concise Definitive Review・CCM2024）</span> と、EOLIA周辺の数値を正確に整理した <span class="wl">成人ARDSへの体外肺補助 — VV-ECMOは重症例で死亡を下げ、ECCO2Rはルーチン適応にならない（総説・NEJMEvid2022）</span> を軸にする。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>

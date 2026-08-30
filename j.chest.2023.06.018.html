@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>VV-ECMOの離脱は標準化されていない — 39文献のスコーピングレビューが描く実践のばらつきと研究の空白（CHEST2023）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">VV-ECMOの離脱は標準化されていない — 39文献のスコーピングレビューが描く実践のばらつきと研究の空白（CHEST2023）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Teijeiro-Paradis R, Dawit TC, Munshi L, Ferguson ND, Fan E. Liberation From Venovenous Extracorporeal Membrane Oxygenation for Respiratory Failure: A Scoping Review. CHEST. 2023;164(5):1184-1203. DOI: 10.1016/j.chest.2023.06.018</dd><dt>掲載誌</dt><dd>CHEST（2023-11-01）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.chest.2023.06.018" target="_blank" rel="noopener">doi.org/10.1016/j.chest.2023.06.018</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Liberation From Venovenous Extracorporeal Membrane Oxygenation for Respiratory Failure: A Scoping Review</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み <strong>この論文で当院の何が変わるか</strong></p>
+<ul><li>本レビュー自体は新しい閾値を1つも出さない。変わるのは「誰がどう決めるか」の枠組みのほう。現状の当院のVV-ECMO離脱は本文でいう clinician-guided iterative reduction（担当医が血ガスを見ながら少しずつsweep gasを下げる）に相当する。これは39文献中の多数派だが、著者らは「readiness の見落とし・不安全な離脱試行・ECMO期間の延長」という3つのリスクを負う方式だと名指ししている</li><li>導入すべきは<strong>離脱トライアルの手順書化</strong>。人工呼吸のSBTと同じ構造にする：①毎日のスクリーニング（安全チェック）→ ②sweep gas をゼロにする → ③あらかじめ決めた中止基準に当たったら戻す。手順書化した3研究（Pratt・Gannon・Teijeiro）はいずれも安全・実行可能で、うち1本ではECMO期間が短縮した</li><li>手順書に書き込む最小要素は4つ。(a) トライアル開始のスクリーニング基準、(b) トライアル中の人工呼吸器設定を誰がどう動かすか、(c) 中止基準（数値で）、(d) 観察時間。当院で決め切るべきは特に (d) で、文献の幅は30分〜24時間と桁が違う</li></ul>
+<p><strong>変わらないこと・変えてはいけないこと</strong></p>
+<ul><li>「この数字なら抜いてよい」という外部検証済みの閾値は存在しない。EtCO2/PaCO2 比も Cilley 試験（酸素負荷試験）も、検証コホートでは感度・特異度が落ちた。予測指標を単独の判断根拠にしない</li><li>離脱を早めることそのものが目的ではない。トライアル終了時に高い呼吸努力（大きなVT・強い食道内圧スイング）が残っているなら、脱カニュレーション後にVILIを作りうる。著者らの立場は「覚醒・離床・リハビリという測定可能な利益があるならECMO延長は正当化される。単に『もう少し肺が良くなるかも』というだけの延長は正当化されない」</li></ul>
+<p><strong>回診での運用</strong></p>
+<ul><li>ECMO回診の定型項目に「今日、離脱トライアルの安全スクリーニングを通るか？ 通らないなら理由はどれか（原疾患未解決／重感染／循環不安定／換気設定が非保護的）」を入れる。通らない理由を毎日1つに言語化すると、difficult liberation と prolonged liberation の切り分けが記録として残る</li><li>トライアル中に測るものを固定する：VT/PBW、呼吸数、プラトー圧、PEEP、FIO2、血ガス（15分値）、EtCO2/PaCO2 比、可能なら P0.1 か食道内圧スイング。姉妹論文 <span class="wl">VV-ECMOの安全な離脱はSGOT中の一回換気量と吸気努力で予測できる — VT・HR・換気比・食道内圧スイングの4指標（観察研究83例・CHEST2021）</span> の4指標がそのまま観測項目になる</li><li>脱カニュレーション「成功」の定義を当院で1つに決めて記録する（例：48時間以内の再カニュレーションまたは呼吸・循環サポート増加がないこと）。定義を決めないと自施設の成績を後から評価できない、というのが本レビューの実務的な最大の指摘</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：重症ARDSに対するVV-ECMOは死亡を減らす。適応と患者選択（誰に導入するか）は EOLIA 以降の再解析やメタ解析で相当に洗練された。人工呼吸の離脱については、臨床医は readiness を過小評価しがちで、プロトコル化した離脱は臨床医の裁量に勝り、単独の予測指標はトライアルそのものに勝らない、という30年分の知見がある</li><li><strong>Unknown</strong>：その「出口」側、すなわちVV-ECMOをいつどう外すかは、ほとんど研究されてこなかった。長く回せばVILIは避けられるが出血・溶血・回路トラブルは増える。この trade-off の最適点は未定義のまま</li><li><strong>What's new</strong>：1,467件から39件を拾い上げ、離脱を5つの局面（現行戦略／離脱開始基準／トライアルの実施／脱カニュレーション基準／転帰の予測因子）に分けて全載した初めての地図。結論は「実践は不均一で、臨床医の好みに強く左右される」。加えて Figure 2 として、各局面ごとに「今わかっていること」と「知識の空白（research gap）」を対にした1枚の図を提示した</li></ul>
+<p><strong>Vault内の関連ノートとの対比 — どれが地図で、どれが閾値か</strong></p>
+<ul><li>本レビュー（CHEST2023）＝<strong>地図</strong>。トロントの Teijeiro-Paradis／Munshi／Ferguson／Fan グループが、離脱という領域の全体像と空白を描いた。閾値は1つも出さない</li><li><span class="wl">VV-ECMOの安全な離脱はSGOT中の一回換気量と吸気努力で予測できる — VT・HR・換気比・食道内圧スイングの4指標（観察研究83例・CHEST2021）</span>＝<strong>同じグループが出した具体的な閾値</strong>。VT/PBW 7.8 mL/kg・心拍数110/分・換気比2.3・食道内圧スイング16 cmH2O。本レビューの Table 4 に「安全な離脱（safe liberation）」の予測因子としてそのまま収載されており、地図の中の1点にあたる。単施設・イベント7件・外部検証なしという限界も本レビューが指摘する「予測因子の脆弱さ」の実例そのもの</li><li><span class="wl">長期VV-ECMO管理を6つの相に分ける — 超肺保護から脱カニュレーション後まで相ごとの目標・設定・移行基準（概念フレームワーク・CritCare2026）</span>＝<strong>地図の空白を埋めにいった提案</strong>。本レビューが「離脱までの中間期は誰も書いていない」と指摘した部分に、6相の枠組みと相ごとの目標値を当てた。ただし本人たちが認めるとおり閾値の多くは恣意的で、本レビューのいう「エビデンス不足」の状況は変わっていない</li><li><span class="wl">成人ARDSへの体外肺補助 — VV-ECMOは重症例で死亡を下げ、ECCO2Rはルーチン適応にならない（総説・NEJMEvid2022）</span>＝<strong>入口の総説</strong>。誰に導入するかの議論であり、本レビューはその続きの「どう出るか」を担当する。入口の証拠の厚さと出口の薄さの落差が、本レビューの存在理由</li><li><span class="wl">ECMO weaning（ELSO）と離脱プロトコル</span>＝当院で参照してきた ELSO 由来の手順（サポート30%未満で試行、フロー1Lまで漸減、sweep gas off で60分観察）。本レビューは ELSO 2021ガイドライン（Tonna ら）を Table 2 に収載し、「標準化の要素が入ったのはこのアップデートが初めて」と評価しつつ、観察時間は2〜3時間以上と記載しており、当院メモの60分とは食い違う。<mark class="hl">どちらが正しいという根拠は無い</mark>ため、当院で1つに決める必要がある</li><li><span class="wl">VV-ECMOからの離脱 How I wean</span>＝Vasques／Gattinoni らの手技記述。本レビュー Table 2 の Vasques ら（酸素負荷試験→脱酸素チャレンジ→CO2チャレンジの3段構え）に対応する。本レビューはこれを「fixed reduction 型」の一例として位置づけ、two-step 型（Gannon・Teijeiro）と並置している</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで VV-ECMOからの離脱について報告された39文献を並べたところ、<strong>離脱開始の基準・sweep gas の落とし方・トライアルの長さ・脱カニュレーションの基準・成功の定義まで、ほぼすべてが研究ごとに異なっていた</strong>。標準化されたトライアルは安全で実行可能だが、それが臨床医の裁量より優れるかを比較した試験はまだ無い。</p>
+</div>
+<ul><li>1,467件をスクリーニングし39件を採用。内訳は離脱戦略を報告した18件（RCT 2件・観察コホート14件・症例集積2件）、実践のばらつきを調べた横断調査2件、離脱開始基準を提案した4件、脱カニュレーション転帰を定義した2件、レビュー13件。</li><li>離脱戦略は大きく2つ。①臨床医主導の漸減（clinician-guided iterative reduction）＝多数派、②標準化された離脱トライアル（standardized liberation trial）＝Pratt・Gannon・Teijeiro・Lazzari の4研究。</li><li>標準化トライアルはさらに2型に分かれる。<strong>two-step 型</strong>（基準を満たしたら現在のsweep gasからいきなり0 L/minへ）と <strong>fixed reduction 型</strong>（20分ごとに33%ずつなど時間刻みで段階的に落とす）。</li><li>標準化トライアルを採用した施設では、通常より高いECMOサポートレベルから脱カニュレーションに至っており、1研究ではECMO期間が短縮した。人工呼吸の離脱で見られた「臨床医は readiness を過小評価する」現象と同型と著者らは解釈している。</li><li>離脱開始の基準に「ECMOサポートのレベルそのもの」を明示していた研究は39件中わずか7件。ガス交換も呼吸メカニクスも完全にECMO依存の患者にトライアルをかけてしまう危険が残る。</li><li>予測指標は EtCO2/PaCO2 比（Lazzari）と酸素負荷試験＝Cilley 試験（Hartley）が代表だが、いずれも検証コホートで感度・特異度が落ちた。「単独の予測指標はトライアルそのものに勝らない」という人工呼吸離脱の教訓がここでも当てはまる。</li><li>脱カニュレーション成功の定義すら統一されていない（48時間生存のみ／再カニュレーションと支持療法増加の複合など）。しかも再カニュレーションは、そもそも2回目のECMOを提供しない施設が多いため指標として信頼性が低い。</li><li>抗凝固の中止タイミングや脱カニュレーション前の凝固最適化について論じた文献は、39件中1つも無かった。</li><li>臨床医が直面する状況を4つに分類：simple／difficult／prolonged（28日超）／unweanable（一方向脱カニュレーション）。この層別化の定義も転帰への影響も未検証。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — VV-ECMOの「離脱」で何が起きているのか 🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む VV-ECMO（venovenous extracorporeal membrane oxygenation、静脈脱血・静脈返血の体外式膜型人工肺）は、重症ARDSで肺がガス交換を担えないあいだ、体外の膜型肺が代わりに酸素化とCO2除去を引き受ける装置である。回路には2つの独立した「つまみ」がある。</p>
+<ul><li><strong>血流量（blood flow）</strong>：ポンプが回す血液量（L/min）。主に酸素化を規定する。多く回すほど酸素化に寄与するが、脱血不良・溶血・回路負荷が増える</li><li><strong>sweep gas flow（SGF、スイープガス流量）</strong>：膜型肺の外側を吹き抜けるガスの流量（L/min）。主にCO2除去を規定する。膜の血液側と気相側のCO2分圧勾配を維持する役割で、SGFを0にすればCO2除去はほぼゼロになる</li><li>膜に流すガスの酸素濃度は <strong>FdO2</strong>（fraction of delivered oxygen）と表記され、人工呼吸器側の FIO2 とは別物である</li></ul>
+<p>離脱の生理学的な核心はここにある。<strong>血流を保ったままSGFをゼロにすれば、回路は回り続けたまま「ガス交換の仕事だけ」が患者の肺に戻る</strong>。回路凝血を防ぐため血流は止めない。これがVV-ECMOにおける「ECMOなし試験」＝自発呼吸トライアル（SBT）の等価物である。</p>
+<p>本論文はさらに用語を3つに切り分けている（人工呼吸離脱の議論を踏襲した整理）。</p>
+<div class="tw"><table>
+<thead><tr><th>用語</th><th>定義</th><th>位置づけ</th></tr></thead>
+<tbody>
+<tr><td>daily optimization（日々の最適化）</td><td>十分な肺回復が得られたと判断する前段階での、臨床所見に基づくサポート調整。ECMOサポートを上げることも含む</td><td>離脱ではない。日常管理</td></tr>
+<tr><td>liberation（離脱）</td><td>十分な肺回復が達成されたとの判断のもと、患者をVV-ECMOから切り離すことを目的にECMOと人工呼吸の設定を調整すること</td><td>離脱の本体</td></tr>
+<tr><td>liberation trial（離脱トライアル）</td><td>離脱の最終段階。ECMOを外した状態を試す（自発呼吸トライアルの模倣）</td><td>離脱の最後の1歩</td></tr>
+</tbody></table></div>
+<p>なぜ weaning（漸減）ではなく liberation（離脱）なのか。人工呼吸の領域では、支持を少しずつ緩やかに減らしていく weaning は大多数の患者における実際の離脱像を捉え損ねる、という証拠が積み上がっている（Ely 1996、Esteban 1995、Hall &amp; Wood 1987）。多くの患者は「徐々に減らす」のではなく「ある時点で外せる」。著者らはこの語彙をECMOに持ち込んでいる。</p>
+<p>トレードオフも押さえる。ECMOを長く回せば超低容量換気を維持できてVILI（ventilator-induced lung injury、人工呼吸器誘発性肺傷害）を避けられるが、出血・血栓・溶血・回路トラブル・コストが積み上がる。逆に早すぎる離脱は、再カニュレーション・傷害的な人工呼吸・VILIを招く。<strong>この trade-off の最適点はどこか、というのが未解決の核心</strong>である。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>VV-ECMOは重症ARDSの死亡を減らす。資源集約的で合併症リスクもあるため、患者選択（誰に導入するか）は広範に洗練されてきた。しかし、いったん導入した患者をどう効果的に離脱させるかは研究が乏しい。</p>
+<p>適時の離脱ができれば、ECMO期間・ECMO関連合併症・費用のいずれも減ると期待される。一方で早すぎる離脱は再カニュレーションの必要、傷害的な人工呼吸、VILIにつながる。長く回してVILIを緩和することと、患者が回復するにつれ高まるECMO関連合併症への曝露との間のトレードオフは、定義されないままである。</p>
+<p>本スコーピングレビューの目的は、呼吸不全に対するVV-ECMOからの離脱に用いられている定義・プロトコル・戦略を概観し、既存の知識の空白を明らかにすること。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：スコーピングレビュー。プロトコルは Open Science Framework に事前登録（DOI: 10.17605/OSF.IO/UH9ND）</li><li><strong>データベース</strong>：MEDLINE（1946年〜2022年5月）、EMBASE（1947年〜2022年5月）。検索式は e-Appendix 1</li><li><strong>対象</strong>：呼吸不全で回復への橋渡しとしてVV-ECMOを受けた患者に関する文献</li><li><strong>スクリーニング</strong>：2名（R.T.-P., T.C.D.）が独立実施。不一致は第3者（E.F.）が最終判断</li><li><strong>組み入れ基準</strong>：以下のいずれかを提供している文献 — ①VV-ECMO離脱の開始基準、②離脱プロトコル、③脱カニュレーション成功または失敗の定義</li><li><strong>含めた研究デザイン</strong>：RCT、観察研究、ナラティブレビュー、ガイドライン、エディトリアル、コメンタリー</li><li><strong>除外</strong>：単一症例報告、全文が入手できない文献</li><li><strong>統合の枠組み</strong>：人工呼吸離脱のエビデンス整理の原則にならい、離脱を5つの下位テーマに分けた</li></ul>
+<ol><li>現在用いられている離脱戦略</li><li>離脱の readiness を定義する基準</li><li>離脱トライアルの実施方法</li><li>脱カニュレーションに進む基準</li><li>脱カニュレーション転帰（成功／失敗／unsafe liberation）を予測するパラメータ</li></ol>
+<ul><li>最後に、人工呼吸離脱の原則を指針として離脱へのアプローチを構築し、既存の知識の空白を明示した（Figure 2）</li><li><strong>解析</strong>：スコーピングレビューであるため、効果量の統合（メタ解析）は行わない。バイアスリスクの形式的評価も行っていない</li></ul>
+<h3>4. 結果 — 文献の選択（Figure 1）</h3>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2023.06.018" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2023.06.018）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. PRISMAフロー図。左側に Identification／Screening／Eligibility／Included の4段階ラベルが縦に並ぶ。上段左のボックスがデータベース検索（MEDLINE・EMBASE）で1,467件、上段右がレビュー参考文献・グレイリテラチャーからの追加12件。両者が中央の「重複除去後1,136件」に合流し、そこからスクリーニング1,136件、右へ除外1,027件が枝分かれする。除外理由は右側に箇条書きで列挙。次段が全文評価109件で、右へ除外70件が枝分かれし、その理由も右に列挙。最下段が統合に含めた39件で、その内訳が右側に5行で示される。原図・無改変</p>
+</div>
+<h4>Table 1a. 文献選択の内訳（Figure 1 の数値をすべて表に起こしたもの）</h4>
+<div class="tw"><table>
+<thead><tr><th>段階</th><th>件数</th><th>内訳</th></tr></thead>
+<tbody>
+<tr><td>データベース検索で同定</td><td>1,467</td><td>MEDLINE・EMBASE</td></tr>
+<tr><td>他の情報源から追加</td><td>12</td><td>レビューの参考文献、グレイリテラチャー</td></tr>
+<tr><td>重複除去後</td><td>1,136</td><td>—</td></tr>
+<tr><td>スクリーニング実施</td><td>1,136</td><td>—</td></tr>
+<tr><td>スクリーニングで除外</td><td>1,027</td><td>VA-ECMOまたはECPR 494件／動物モデル 20件／ECMOに関する研究でない 59件／重複 133件／離脱と無関係 316件／学会抄録 5件</td></tr>
+<tr><td>全文評価</td><td>109</td><td>—</td></tr>
+<tr><td>全文評価で除外</td><td>70</td><td>離脱の側面を記載していない 43件／全文入手不可 12件／VA-ECMO 9件／重複または単一症例報告 5件／英語でない 1件</td></tr>
+<tr><td>統合に採用</td><td>39</td><td>離脱戦略を報告 18件／実践のばらつきを調べた横断調査 2件／離脱 readiness 基準を提案 4件／脱カニュレーション転帰（成功・失敗）を定義 2件／離脱の諸側面を記述したレビュー 13件</td></tr>
+</tbody></table></div>
+<p>補足の内訳。</p>
+<ul><li>離脱戦略を報告した18件の内訳：RCT 2件（Combes＝EOLIA、Peek＝CESAR）、観察コホート研究14件、症例集積2件</li><li>そのうち11件は離脱に特化した目的（離脱戦略の検証、離脱転帰の予測）を持つ</li><li>覚醒・抜管下のVV-ECMOを扱ったのは1件のみ（Gurnani）</li><li>ステップごとの標準化トライアル手順を記述したのは9件（Table 2）</li><li>離脱トライアル前の人工呼吸器最適化（FIO2 を上げるなど）に言及したのは6件</li><li>呼吸メカニクスを報告したのは7件（Table 3）</li><li><strong>離脱トライアル前の sweep gas 流量または血流量を検討していたのはわずか7件</strong></li><li>離脱トライアルの readiness の予測因子を報告したのは3件</li><li>脱カニュレーション転帰（成功・失敗）の予測を検討したのは3件（Table 4）</li><li>脱カニュレーション成功・失敗を明示的に定義したのは4件</li><li>COVID-19患者を含む観察研究は7件</li></ul>
+<h3>5. 結果 — 各研究の離脱戦略（Table 1）</h3>
+<p>原表は1つの大きな表だが、読みやすさのため「戦略と離脱開始基準」「脱カニュレーション基準と転帰」の2つに分けて日本語化した。SGF＝sweep gas flow、PBW＝predicted body weight（予測体重）、ECBF＝extracorporeal blood flow（体外血流量）。</p>
+<h4>Table 1b. 離脱戦略と離脱開始基準（原著 Table 1 前半）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>n</th><th>離脱戦略・トライアル</th><th>離脱開始（readiness）の基準</th></tr></thead>
+<tbody>
+<tr><td>Combes（EOLIA・RCT）</td><td>124</td><td>臨床医が readiness を判断。SGFを0 L/minまで段階的に漸減（1時間以上）</td><td>肺コンプライアンス改善に見合う臨床的・画像的・血ガス的改善</td></tr>
+<tr><td>Peek（CESAR・RCT）</td><td>68</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（時間の指定なし）</td><td>肺コンプライアンスと胸部画像の改善所見</td></tr>
+<tr><td>Gannon</td><td>26</td><td>毎日の標準化 readiness 評価＋標準化離脱トライアル（30分）</td><td>筋弛緩オフ／循環安定／SGF 3 L/min未満／FIO2 60%未満／PEEP 15 cmH2O以下／SpO2 90%超・PaO2 60 mmHg超・pH 7.35超／呼吸数35回/分未満</td></tr>
+<tr><td>Teijeiro</td><td>31</td><td>毎日の標準化 readiness 評価＋標準化離脱トライアル（120分）</td><td>原疾患治療12時間以上／筋弛緩オフ24時間以上／ECBF 5 L/min以下／PaO2 60 mmHg超かつFIO2 60%以下／SGF 4 L/min以下・pH 7.25超／VT 9 mL/kg PBW未満／PEEP 20 cmH2O未満／循環安定／SAS 2-4／120分以内に搬送・処置の予定なし</td></tr>
+<tr><td>Pratt</td><td>180</td><td>毎日の標準化 readiness 評価（呼吸療法士が実施）＋標準化離脱トライアル（4時間）</td><td>pH 7.30超／PaO2 55 mmHg超／人工呼吸器FIO2 40%以下／VT 4 mL/kg IBW以上</td></tr>
+<tr><td>Al-Fares</td><td>83</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（時間は可変）</td><td>原疾患と肺機能の改善（ガス交換・呼吸系コンプライアンス・画像で評価）／臨床医によるリスク・ベネフィット評価</td></tr>
+<tr><td>Thiara</td><td>87</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（4〜24時間）</td><td>ECBF 2.5 L/min未満／低い換気サポートでの安全な換気</td></tr>
+<tr><td>Na</td><td>93</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（2時間）</td><td>SGF 1 L/min以下で血ガスが範囲内／許容できる人工呼吸器設定／最高気道内圧30 cmH2O以下／FIO2 60%以下</td></tr>
+<tr><td>Belliato</td><td>18</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（6〜12時間）</td><td>原疾患の病理学的所見の消退／画像上の改善／呼吸メカニクスの改善／PEEP 10〜15 cmH2O未満／循環安定</td></tr>
+<tr><td>Fisser</td><td>227</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（30分以上）</td><td>原疾患の消退／循環安定／FIO2 0.4以下でSpO2 90%以上／PEEP 10 cmH2O以下／呼吸数30回/分以下／VT 5 mL/kg超／ECBF 約1.5 L/min</td></tr>
+<tr><td>Hartley</td><td>253</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（時間の指定なし）</td><td>VTが2〜3 mL/kg PBW超まで改善</td></tr>
+<tr><td>Gurnani（覚醒ECMO）</td><td>62</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（24時間）</td><td>胸部X線での含気改善／適切な血ガス／正常なSpO2／活動耐容能</td></tr>
+<tr><td>Masi</td><td>51</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（時間の指定なし）</td><td>人工呼吸器FIO2 60%以下／VT 6 mL/kg PBW以上／呼吸数28回/分以下／プラトー圧28 cmH2O以下</td></tr>
+<tr><td>Lazzari</td><td>664（前向き26＋後ろ向き638）</td><td>毎日の標準化 readiness 評価＋標準化離脱トライアル（時間の指定なし）</td><td>前向きコホート：プレッシャーサポートによる補助換気／食道内圧スイング15 cmH2O以下／呼吸数30回/分以下／PaO2 70 mmHg以上かつFIO2 60%以下／PaCO2 60 mmHg以下・pH 7.25超。後ろ向きコホート：原疾患の消退／プレッシャーサポート下の自発呼吸／循環安定</td></tr>
+<tr><td>Reeb</td><td>8</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（4時間）</td><td>肺コンプライアンス改善／FIO2 50%未満／PEEP 5 cmH2O未満／プラトー圧30 cmH2O未満／VT 4 mL/kg PBW超</td></tr>
+<tr><td>Seiler</td><td>12</td><td>臨床医判断。SGFを0 L/minまで段階的に漸減（最低1時間）</td><td>PaO2・PaCO2・pH が生理的範囲内</td></tr>
+</tbody></table></div>
+<h4>Table 1c. 脱カニュレーション基準と離脱の転帰（原著 Table 1 後半）</h4>
+<div class="tw"><table>
+<thead><tr><th>研究</th><th>脱カニュレーションに進む基準</th><th>転帰</th></tr></thead>
+<tbody>
+<tr><td>Combes（EOLIA）</td><td>PaO2 70 mmHg超／FIO2 60%未満／プラトー圧30 cmH2O未満／心エコーで重度急性肺性心の所見なし</td><td>人工呼吸期間 22日（IQR 11-34）</td></tr>
+<tr><td>Peek（CESAR）</td><td>適切なガス交換／最高圧30 cmH2O未満／FIO2 60%未満</td><td>人工呼吸期間 23.9±20.4日／ECMO期間 9日（IQR 6-16）</td></tr>
+<tr><td>Gannon</td><td>SpO2 88%超／呼吸数35回/分未満／心拍数の持続的20%以上の変化なし／収縮期血圧が180 mmHg以上または90 mmHg以下へ持続変化しない／SGFを0にして3分以上の無呼吸なし</td><td>再カニュレーション 14例中1例（7.1%）／脱カニュレーション後死亡 14例中3例（21%）／脱カニュレーションから抜管まで 9日（IQR 2-20）／人工呼吸器フリー日数中央値 11.5日（IQR 4-14）／ECMOフリー日数中央値 14日（IQR 8-22）</td></tr>
+<tr><td>Teijeiro</td><td>呼吸窮迫の所見なし／PaO2 60 mmHg・SpO2 88%以上・FIO2 60%以下／PEEP 20 cmH2O未満／pH 7.25以上／VT 9 mL/kg PBW未満／循環安定／SAS 2-4。脱カニュレーション失敗の定義＝脱カニュレーション後48時間以内の再カニュレーションまたは換気・循環サポートの持続的増加</td><td>脱カニュレーション失敗 19例中2例（10%）／再カニュレーション 19例中1例（5%）／脱カニュレーション後死亡 19例中4例（23%）／脱カニュレーションから抜管まで 11日（IQR 2-25）／人工呼吸期間 43日（IQR 22-58）／ECMO期間 14日（IQR 9-28）</td></tr>
+<tr><td>Pratt</td><td>SpO2 88%以上／PaO2 55 mmHg以上／pH 7.30以上／呼吸数35回/分以下／循環安定</td><td>再カニュレーション 82例中3例（3.7%）／脱カニュレーション後死亡 180例中10例（5.5%）／人工呼吸期間 15日（IQR 9-31）／ECMO期間 5.5日（IQR 3-11）</td></tr>
+<tr><td>Al-Fares</td><td>脱カニュレーション失敗の定義＝脱カニュレーション後48時間以内の再カニュレーションまたは換気・循環サポートの何らかの増加</td><td>脱カニュレーション失敗 83例中21例（25%）／再カニュレーション 83例中2例（2%）／脱カニュレーション後死亡 83例中3例（3%）／人工呼吸期間 23日（IQR 15-34、後ろ向き）・16日（IQR 9-38、前向き）／ECMO期間 12日（IQR 12-28、後ろ向き）・11日（IQR 7-20、前向き）</td></tr>
+<tr><td>Thiara</td><td>低いSGFで呼吸仕事量の増加がないこと</td><td>再カニュレーション 87例中0例／脱カニュレーション後死亡 87例中24例（28%）／脱カニュレーションから抜管まで 7日（IQR 3-15）／人工呼吸期間 16日（IQR 9-28）／ECMO期間 9日（IQR 6-14）</td></tr>
+<tr><td>Na</td><td>pH 7.35以上／30分以内にP/F比 150 mmHg以上／呼吸数30回/分未満／SpO2 90%以上／循環安定。成功の定義＝脱カニュレーション後24時間を超えて再カニュレーションなしに生存</td><td>脱カニュレーション失敗 93例中0例／再カニュレーション 93例中0例／脱カニュレーション後死亡 93例中17例（18%）／人工呼吸期間 21日（IQR 11-32）／ECMO期間 10日（IQR 5-22）</td></tr>
+<tr><td>Belliato</td><td>許容できる換気負荷／循環安定／ガス交換の妥当性</td><td>再カニュレーション 15例中0例／脱カニュレーション後死亡 15例中1例（7%）／ECMO期間 11日（IQR 7-15）</td></tr>
+<tr><td>Fisser</td><td>自覚的呼吸困難なし／呼吸数35回/分超でない／SpO2 90%超／心拍数120回/分以下／血ガスの悪化なし</td><td>記載なし</td></tr>
+<tr><td>Hartley</td><td>記載なし</td><td>ECMO期間 9日（IQR 6-14）</td></tr>
+<tr><td>Gurnani（覚醒ECMO）</td><td>安静時6 L/min未満または労作時15 L/min未満の酸素投与／SGFオフに耐え、かつ歩行できること</td><td>脱カニュレーション後死亡 62例中9例（14%）／カニュレーションから抜管まで 6日（IQR 4-11）／ECMO期間 33日（IQR 20-75）</td></tr>
+<tr><td>Masi</td><td>PaO2 60 mmHg以上／PaCO2 50 mmHg以下またはpH 7.36以上／FIO2 60%以下／肺保護換気。conventional weaning＝自己肺の酸素化が回復。facilitated weaning＝離脱トライアル失敗、または離脱基準を満たさないまま離脱</td><td>脱カニュレーション失敗（Al-Fares の定義を後付けで適用）facilitated weaning 18例中13例・conventional weaning 16例中2例／再カニュレーション 34例中0例／脱カニュレーション後死亡 34例中3例（11%）／脱カニュレーションから抜管まで conventional 5日（IQR 4-11）・facilitated 26日（IQR 13-36）／人工呼吸期間 conventional 21日（IQR 14-31）・facilitated 55日（IQR 16-36）／非保護的換気（プラトー圧30 cmH2O以上または駆動圧15 cmH2O超）の期間 conventional 1日（IQR 0-2）・facilitated 6日（IQR 4-10）／ECMO期間 conventional 10日（IQR 7-14）・facilitated 24日（IQR 16-43）</td></tr>
+<tr><td>Lazzari</td><td>前向き：食道内圧スイング15 cmH2O以下／呼吸数30回/分以下／PaO2 70 mmHg以上かつFIO2 60%以下／PaCO2 60 mmHg以下・pH 7.25超。後ろ向き：FIO2 60%でSpO2 88%以上／P0.1 10 cmH2O以下／呼吸数35回/分以下／明らかな呼吸窮迫の徴候なし／pH 7.35以上</td><td>ECMO期間 10日（IQR 6-18）</td></tr>
+<tr><td>Reeb</td><td>SGF 0 L/minで4時間経過後に満足できる血ガス</td><td>再カニュレーション 8例中0例／脱カニュレーション後死亡 8例中3例（25%）／人工呼吸期間 17日（IQR 10-19）／ECMO期間 9.5日（IQR 5-16）</td></tr>
+<tr><td>Seiler</td><td>SGF 0 L/minで満足できる血ガス</td><td>再カニュレーション 7例中4例（28日以内ではない）／脱カニュレーション後死亡 7例中1例（14%）／人工呼吸期間 17日（IQR 10-19）／ECMO期間 32±14日（回復例）・98±50日（移植例）</td></tr>
+</tbody></table></div>
+<p>この表から直接読める不揃いを3点だけ挙げる。</p>
+<ul><li>離脱トライアルの時間：30分（Gannon）／120分（Teijeiro）／4時間（Pratt・Reeb）／1時間以上（Combes・Seiler）／2時間（Na）／4〜24時間（Thiara）／6〜12時間（Belliato）／24時間（Gurnani）／30分以上（Fisser）／指定なし（Peek・Al-Fares・Hartley・Masi・Lazzari）。<strong>同じ手技に対して桁が2つ違う</strong></li><li>離脱開始時の許容ECMOサポート：SGF 3 L/min未満（Gannon）／4 L/min以下（Teijeiro）／1 L/min以下（Na）／ECBF 5 L/min以下（Teijeiro）／2.5 L/min未満（Thiara）／約1.5 L/min（Fisser）。多くの研究はサポートレベルを一切指定していない</li><li>脱カニュレーション失敗率：0%（Na 93例）から25%（Al-Fares 83例）まで。ただし定義が違うため直接比較できない</li></ul>
+<h3>6. 結果 — 標準化された離脱プロトコルの実例（Table 2）</h3>
+<p>原著 Table 2 は、文献に報告されたステップ記述型のプロトコル10件を並べたもの。FdO2＝膜に流すガスの酸素分画、FdCO2＝膜に流すガスのCO2分画。</p>
+<h4>Table 2a. Shekar ら（血流量の日々の漸減を主役にする方式）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>毎日の血流量ダウンタイトレーション・チャレンジ。300 mL/min刻みで下げ、超肺保護換気とSpO2 88%以上（FdO2 100%、人工呼吸器FIO2 50%）を保てる最低の血流量を同定</td></tr>
+<tr><td>2</td><td>酸素負荷チャレンジ（人工呼吸器FIO2 100%）。PEEP 10 cmH2O以下でPaO2 250 mmHg超を目標</td></tr>
+<tr><td>3</td><td>FdO2 と SGF を段階的に漸減。プラトー圧24 cmH2O以下、PEEP 10 cmH2O以上を目標。あるいは単純にSGFを0 L/minにする</td></tr>
+</tbody></table></div>
+<p>備考：提唱される利点は、体外血流量を動的に調整することでより積極的な水分制限が可能になり、肺回復を早めること。欠点は抗凝固の最適化が必須になること。</p>
+<h4>Table 2b. Kimmoun ら（心拍出量に対する血流量比で管理する方式）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>心エコーで測定した心拍出量に基づきECMO血流量を毎日最適化。血流量／心拍出量比 0.7以上を目標</td></tr>
+<tr><td>2</td><td>SGFを調整してPaCO2 40〜45 mmHgに</td></tr>
+<tr><td>3</td><td>治療開始48時間後から、プラトー圧25 cmH2O以下を目標にVTを毎日増やす</td></tr>
+<tr><td>4</td><td>VT 5 mL/kg PBW超かつ呼吸数15回/分超になったら、SGFを0 mL/minまで漸減。P/F比150 mmHg超・FIO2 60%未満・PaCO2 50 mmHg未満・プラトー圧25 cmH2O以下を目標</td></tr>
+</tbody></table></div>
+<p>備考：ステップ4の目標をSGF 0 L/minで12〜24時間維持できたら離脱を検討する。7日経っても離脱が進まない場合、または難治性低酸素血症（FdO2 100%・FIO2 50%でP/F比150未満）やプラトー圧25 cmH2O超のときはECMO下で腹臥位とする。</p>
+<h4>Table 2c. Broman ら（カロリンスカ方式・CO2を吹き戻す）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>カロリンスカのアプローチ</td></tr>
+<tr><td>2</td><td>VTが回復し始めた時点でweaningを開始する</td></tr>
+<tr><td>3</td><td>毎日設定するpHとPaCO2の目標に合わせてSGFを調整</td></tr>
+<tr><td>4</td><td>SGFが2 L/min以下になったら、ガス混合にCO2を漸増して加え、FdCO2 が37.5 mmHg相当になるまでを上限とする</td></tr>
+<tr><td>5</td><td>膜前後のPCO2差が1.5〜3 mmHg未満になったら、人工呼吸器FIO2 35〜55%でSGFを0 L/minにする</td></tr>
+</tbody></table></div>
+<h4>Table 2d. Grant ら（マイアミ大方式・24〜48時間刻み）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>正常炭酸ガス血症かつFIO2 50%未満でSpO2 90%超、PEEP 10 cmH2O以下、VT 6〜8 mL/kg IBW、最高吸気圧30 cmH2O未満、プラトー圧25 cmH2O以下、分時換気量100 mL/kg/分を目標とする呼吸数、血流量4〜5 L/min、SGF 3〜4 L/min、FdO2 100%</td></tr>
+<tr><td>2</td><td>FdO2 を21%まで漸減、SpO2 90%超を目標</td></tr>
+<tr><td>3</td><td>血流量を3〜4 L/minまで24〜48時間かけて漸減</td></tr>
+<tr><td>4</td><td>続く24〜48時間でSGFを1 L/min未満まで漸減、正常炭酸ガス血症を目標</td></tr>
+</tbody></table></div>
+<p>備考：肺保護的な換気設定のもと、血流量3〜4 L/min未満・SGF 1 L/min未満で正常炭酸ガス血症かつSpO2 90%超であることが基準。</p>
+<h4>Table 2e. Vasques ら（酸素チャレンジ→脱酸素チャレンジ→CO2チャレンジの3段構え）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>離脱評価の前提条件：楽に呼吸できている、筋弛緩オフ、循環安定、P0.1 5 cmH2O未満</td></tr>
+<tr><td>2</td><td>酸素負荷試験。人工呼吸器FIO2 100%でPaO2 225 mmHg超を目標</td></tr>
+<tr><td>3</td><td>ECMO脱酸素チャレンジ。人工呼吸器FIO2 を60%へ下げたうえで、FdO2 を5分ごとに段階的に低下（100→60→30→21%）。失敗基準を監視</td></tr>
+<tr><td>4</td><td>ECMO CO2チャレンジ。血流量を固定したまま、SGFを5〜10分ごとに33%ずつ減らして0 L/minへ。失敗基準を監視</td></tr>
+</tbody></table></div>
+<p>備考：失敗基準は SpO2 88%未満、呼吸数35回/分超、P0.1 10 mmHg超、食道内圧スイング15 cmH2O超、呼吸窮迫、循環不安定。</p>
+<h4>Table 2f. Combes ら（ELSO以前の代表的な手順）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>自己肺機能の回復（FIO2 60%未満、SGF 8 L/min未満、VT 4.5 mL/kg PBW以上、プラトー圧25 cmH2O以下、駆動圧14 cmH2O以下）</td></tr>
+<tr><td>2</td><td>人工呼吸器をVT 6 mL/kg PBW、呼吸数28回/分以下、PEEP 6〜14 cmH2O、FIO2 60%以下に設定し、プラトー圧28 cmH2O以下を目標</td></tr>
+<tr><td>3</td><td>SGFをオフにし、FIO2 60%以下でSpO2 90%以上を目標</td></tr>
+</tbody></table></div>
+<p>備考：SGFオフのまま1〜12時間経過後、PaO2 60 mmHg以上かつFIO2 60%以下でSaO2 90%以上、PaCO2 50 mmHg以下またはpH 7.36以上（呼吸数28回/分以下）、プラトー圧28 cmH2O以下、急性肺性心の徴候なし、を満たせば脱カニュレーションを検討。</p>
+<h4>Table 2g. Tonna ら（ELSO 2021ガイドライン）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>weaningトライアル開始の十分条件：FIO2 60%以下、PEEP 10 cmH2O以下、PaO2 70 mmHg以上、VT 6 mL/kg PBW以下、呼吸数28回/分以下、プラトー圧28 cmH2O以下、過剰な呼吸仕事量なしに患者の状態に見合うpHが得られる血ガス、画像の改善</td></tr>
+<tr><td>2</td><td>ventilator challenge（人工呼吸器チャレンジ）：VTを1 mL/kg刻みで6 mL/kg PBWまで自由化し、プラトー圧28 cmH2O以下を目標</td></tr>
+<tr><td>3</td><td>FdO2 を100%から21%へ20%刻みで段階的に低下、または血流量を1〜1.5 L/minまで低下。SpO2 92%超またはPaO2 70 mmHg以上を目標</td></tr>
+<tr><td>4</td><td>SGFを0.5〜1 L/min刻みで1 L/minまで段階的に低下</td></tr>
+<tr><td>5</td><td>過剰な呼吸仕事量なしに、患者の状態に見合うpHを維持</td></tr>
+</tbody></table></div>
+<p>備考：SGF中止に2〜3時間以上耐えられれば脱カニュレーションを検討する。<strong>標準化の要素がガイドラインに入ったのは、このELSOアップデートが初めて</strong>である。</p>
+<h4>Table 2h. Gannon ら（two-step 型・ECMO-free trial）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ECMO-free trial の安全スクリーニングを実施。SGF 3 L/min以下</td></tr>
+<tr><td>2</td><td>人工呼吸器のFIO2 を60%に設定</td></tr>
+<tr><td>3</td><td>ECMO-free trial：FdO2 を50%にして5分待ち、その後SGFを0 L/minにする</td></tr>
+</tbody></table></div>
+<p>備考：自発呼吸トライアルを模した実用的な離脱トライアル。中止基準は SpO2 88%以下、呼吸数35回/分以上、心拍数の20%以上の持続的な増減、収縮期血圧180 mmHg以上または90 mmHg以下、SGFオフ後3分間の自発呼吸なし。</p>
+<h4>Table 2i. Teijeiro ら（two-step 型・詳細な中止基準）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>標準化離脱トライアルの適格性スクリーニング基準を実施</td></tr>
+<tr><td>2</td><td>鎮静と人工呼吸を最適化</td></tr>
+<tr><td>3</td><td>SGFを0 L/minにする</td></tr>
+</tbody></table></div>
+<p>中止基準は4カテゴリに分かれる。</p>
+<div class="tw"><table>
+<thead><tr><th>カテゴリ</th><th>具体的な中止基準</th></tr></thead>
+<tbody>
+<tr><td>呼吸仕事量の増加</td><td>VTが9 mL/kg PBW超へ増加／著明な息切れの訴えと、発汗・補助呼吸筋使用・鼻翼呼吸を伴う呼吸窮迫の所見、または血行動態変化、あるいはその両方</td></tr>
+<tr><td>低酸素血症</td><td>SpO2 88%未満が5分超／SpO2 88%超の維持にFIO2 60%超を要する／15分後の血ガスでFIO2 60%下のPaO2 60 mmHg未満／SpO2 88%超の維持にPEEP 20 cmH2O超を要する</td></tr>
+<tr><td>呼吸性アシドーシス</td><td>15分後の血ガスでpH 7.25未満（PCO2 60 mmHg超の有無を問わない）</td></tr>
+<tr><td>循環不安定</td><td>昇圧薬なしで平均動脈圧65 mmHg未満が5分超／収縮期血圧180 mmHg超が5分超持続</td></tr>
+<tr><td>神経学的変化</td><td>神経学的所見の変化</td></tr>
+</tbody></table></div>
+<h4>Table 2j. Lazzari ら（fixed reduction 型・20分ごとに33%）</h4>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>weaning基準：プレッシャーサポートによる補助換気、食道内圧の一回換気性スイング15 cmH2O以下、呼吸数30回/分以下、pH 7.25超、PaCO2 60 mmHg以下、PaO2 70 mmHg以上、FIO2 60%以下</td></tr>
+<tr><td>2</td><td>SGFを元の値から20分ごとに33%ずつ、3段階で減量</td></tr>
+<tr><td>3</td><td>各20分間隔の終わりにweaning基準を測定</td></tr>
+</tbody></table></div>
+<p>備考：段階的減量型の標準化離脱トライアル。中止基準は、SGFを減らすたびにweaning基準を満たさなくなった場合。</p>
+<h3>7. 結果 — 離脱トライアル中の呼吸パラメータ（Table 3）</h3>
+<p>7研究が、離脱トライアルの前後・成功例と失敗例で呼吸パラメータを報告している。POcc＝呼気終末閉塞時の気道内圧、PES＝一回換気性の食道内圧スイング、P0.1＝吸気開始100 msの気道内圧。値は中央値（IQR）。空欄は当該研究で報告なし。</p>
+<h4>Table 3a. トライアル前（成功＝脱カニュレーションに至った試行）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>Gannon (26)</th><th>Teijeiro (31)</th><th>Masi (51)</th><th>Lazzari 前向き (26)</th><th>Lazzari 後ろ向き (638)</th></tr></thead>
+<tbody>
+<tr><td>SGF, L/min</td><td>2 (2-3)</td><td>3 (2-4)</td><td>1 (0.5-1)</td><td>1.6 (0.3-3)</td><td>0.5 (0.5-1)</td></tr>
+<tr><td>SpO2, %</td><td>98 (95-100)</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>プラトー圧, cmH2O</td><td>24.5 (20-28)</td><td>26 (24-29)</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>PEEP, cmH2O</td><td>10 (10-12)</td><td>10 (10-14)</td><td>—</td><td>12 (11-14)</td><td>10 (5-10)</td></tr>
+<tr><td>VT, mL/kg PBW</td><td>4.1 (3.5-6.0)</td><td>6 (5-8)</td><td>—</td><td>5.71 (5.24-7.2)</td><td>7.9 (6.2-9.9)</td></tr>
+<tr><td>呼吸数, 回/分</td><td>21 (20-25)</td><td>26 (26-36)</td><td>—</td><td>16 (11-20)</td><td>19 (15-24)</td></tr>
+<tr><td>FIO2</td><td>0.5 (0.5-0.5)</td><td>0.5 (0.4-0.5)</td><td>—</td><td>0.4 (0.35-0.45)</td><td>0.30 (0.3-0.4)</td></tr>
+<tr><td>PaO2, mmHg</td><td>92 (70-131)</td><td>—</td><td>—</td><td>85 (71-105)</td><td>91 (80-114)</td></tr>
+<tr><td>PaCO2, mmHg</td><td>44 (41-49)</td><td>—</td><td>—</td><td>42 (41-46)</td><td>45 (41-49)</td></tr>
+<tr><td>pH</td><td>7.42 (7.39-7.46)</td><td>—</td><td>—</td><td>7.38 (7.36-7.41)</td><td>7.40 (7.38-7.43)</td></tr>
+<tr><td>POcc, cmH2O</td><td>—</td><td>-19 (-27 〜 -11)</td><td>—</td><td>-6 (3-7)（食道内圧スイング）</td><td>—</td></tr>
+<tr><td>P0.1, cmH2O</td><td>—</td><td>-5 (-6 〜 -3)</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 3b. トライアル後（成功＝脱カニュレーションに至った試行）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>Gannon</th><th>Teijeiro</th><th>Al-Fares (83)</th><th>Fisser (221)</th><th>Hartley (253)</th><th>Masi</th></tr></thead>
+<tbody>
+<tr><td>SpO2, %</td><td>96 (92-98)</td><td>—</td><td>97 (95-97)</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>プラトー圧, cmH2O</td><td>—</td><td>29 (24-32)</td><td>25 (22-29)</td><td>—</td><td>—</td><td>25 (22-26)</td></tr>
+<tr><td>PEEP, cmH2O</td><td>—</td><td>10 (10-14)</td><td>10 (10-10)</td><td>—</td><td>10 (8-21)</td><td>10 (7-12)</td></tr>
+<tr><td>VT, mL/kg PBW</td><td>—</td><td>7 (6-9)</td><td>7.1 (6.0-9.2)</td><td>—</td><td>540 (430-690) mL</td><td>5.8 (5.5-6.1)</td></tr>
+<tr><td>呼吸数, 回/分</td><td>23 (21-26)</td><td>27 (22-35)</td><td>22 (18-28)</td><td>15 (13-22)</td><td>—</td><td>—</td></tr>
+<tr><td>FIO2</td><td>—</td><td>0.5 (0.4-0.6)</td><td>0.5 (0.4-0.5)</td><td>—</td><td>0.35 (0.3-0.4)</td><td>0.5 (0.4-0.5)</td></tr>
+<tr><td>PaO2, mmHg</td><td>97 (70-129)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>84 (76-104)</td></tr>
+<tr><td>PaCO2, mmHg</td><td>48 (42-54)</td><td>—</td><td>41 (35-45)</td><td>41 (38-47)</td><td>—</td><td>41 (37-44)</td></tr>
+<tr><td>pH</td><td>7.41 (7.36-7.45)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>7.42 (7.36-7.44)</td></tr>
+<tr><td>POcc／PES, cmH2O</td><td>—</td><td>-25 (-28 〜 -15)</td><td>-9 (7-13)（PES）</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>P0.1, cmH2O</td><td>—</td><td>-3 (-5 〜 -3)</td><td>-3.1 (-4 〜 -2.5)</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 3c. トライアル前（失敗＝SGFを再開した試行）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>Gannon</th><th>Teijeiro</th><th>Masi</th><th>Lazzari 前向き</th><th>Lazzari 後ろ向き</th></tr></thead>
+<tbody>
+<tr><td>SGF, L/min</td><td>2 (2-3)</td><td>3 (2-4)</td><td>1 (0.5-1)</td><td>2.5 (1.2-4.7)</td><td>1 (0.5-1.5)</td></tr>
+<tr><td>SpO2, %</td><td>95 (94-97)</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>プラトー圧, cmH2O</td><td>26 (24-27)</td><td>29 (25-34)</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>PEEP, cmH2O</td><td>10 (10-12)</td><td>10 (10-12)</td><td>—</td><td>13 (12-14)</td><td>10 (5-10)</td></tr>
+<tr><td>VT, mL/kg PBW</td><td>4.4 (3.3-6.1)</td><td>6 (5-7)</td><td>—</td><td>5.02 (3.8-6)</td><td>7.72 (6-9.5)</td></tr>
+<tr><td>呼吸数, 回/分</td><td>24 (17-26)</td><td>26 (19-30)</td><td>—</td><td>14 (10-21)</td><td>21 (16-27)</td></tr>
+<tr><td>FIO2</td><td>0.5 (0.4-0.6)</td><td>0.4 (0.4-0.5)</td><td>—</td><td>0.4 (0.4-0.5)</td><td>0.3 (0.3-0.4)</td></tr>
+<tr><td>PaO2, mmHg</td><td>81 (79-99)</td><td>—</td><td>—</td><td>78 (75-89)</td><td>84 (73-105)</td></tr>
+<tr><td>PaCO2, mmHg</td><td>43 (42-53)</td><td>—</td><td>—</td><td>43 (40-47)</td><td>46 (42-51)</td></tr>
+<tr><td>pH</td><td>7.43 (7.38-7.46)</td><td>—</td><td>—</td><td>7.38 (7.36-7.42)</td><td>7.39 (7.36-7.42)</td></tr>
+<tr><td>POcc, cmH2O</td><td>—</td><td>-29 (-37 〜 -17)</td><td>—</td><td>-7 (3-8)（食道内圧スイング）</td><td>—</td></tr>
+<tr><td>P0.1, cmH2O</td><td>—</td><td>-6 (-8 〜 -4)</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<h4>Table 3d. トライアル後（失敗＝SGFを再開した試行）</h4>
+<div class="tw"><table>
+<thead><tr><th>変数</th><th>Gannon</th><th>Teijeiro</th><th>Al-Fares</th><th>Fisser</th><th>Masi</th></tr></thead>
+<tbody>
+<tr><td>プラトー圧, cmH2O</td><td>—</td><td>34 (31-38)</td><td>32 (31-33)</td><td>—</td><td>31 (29-34)</td></tr>
+<tr><td>PEEP, cmH2O</td><td>—</td><td>10 (10-12)</td><td>8 (7-15)</td><td>—</td><td>5 (5-8)</td></tr>
+<tr><td>VT, mL/kg PBW</td><td>—</td><td>7 (6-8.5)</td><td>8.2 (8.1-9)</td><td>—</td><td>5.6 (4.8-5.9)</td></tr>
+<tr><td>呼吸数, 回/分</td><td>30 (24-35)</td><td>30 (27-35)</td><td>35 (36-39)</td><td>19 (15-25)</td><td>—</td></tr>
+<tr><td>FIO2, %</td><td>—</td><td>60 (50-65)</td><td>40 (30-40)</td><td>—</td><td>50 (40-60)</td></tr>
+<tr><td>PaO2, mmHg</td><td>—</td><td>—</td><td>—</td><td>—</td><td>82 (71-96)</td></tr>
+<tr><td>PaCO2, mmHg</td><td>—</td><td>—</td><td>40 (35-43)</td><td>43.9 (39-48)</td><td>47 (42-55)</td></tr>
+<tr><td>pH</td><td>—</td><td>—</td><td>—</td><td>—</td><td>7.35 (7.27-7.38)</td></tr>
+<tr><td>POcc, cmH2O</td><td>—</td><td>-33 (-44 〜 -28)</td><td>-18 (-25 〜 -7)（PES）</td><td>—</td><td>—</td></tr>
+<tr><td>P0.1, cmH2O</td><td>—</td><td>-8 (-11 〜 -6)</td><td>-4.7 (-5.3 〜 -4.1)</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>注記：Masi らのトライアルは facilitated weaning と conventional weaning に分けられており、失敗例のデータは facilitated weaning 群のもの。Lazzari らは前向きコホート（n=26）と後ろ向きコホート（n=638）を含む。</p>
+<p>この4つの表を並べると、成功例と失敗例を分けているのは酸素化ではなく<strong>呼吸努力の指標</strong>であることが読み取れる。Teijeiro のデータでは、トライアル後のプラトー圧が成功29 vs 失敗34 cmH2O、POcc が -25 vs -33 cmH2O、P0.1 が -3 vs -8 cmH2O。Al-Fares でもプラトー圧25 vs 32、VT 7.1 vs 8.2 mL/kg、食道内圧スイング -9 vs -18。一方でPaCO2 は成功41 vs 失敗40（Al-Fares）とほぼ差がない。<strong>同じPaCO2 を、より大きな呼吸努力で買っているかどうか</strong>が分かれ目になる。</p>
+<h3>8. 結果 — 離脱転帰の予測因子（Table 4）</h3>
+<div class="tw"><table>
+<thead><tr><th>転帰</th><th>研究（n）</th><th>予測因子</th><th>推定値</th></tr></thead>
+<tbody>
+<tr><td>安全な離脱</td><td>Al-Fares（28）</td><td>SGF 0 L/min後4時間以内のVT（未調整）</td><td>OR 2.1（95%CI 1-4.4、p=.05、1 mL/kg PBWあたり）。最適カットオフ 7.8 mL/kg PBW、感度100%、特異度71.4%、AUC 0.813</td></tr>
+<tr><td>安全な離脱</td><td>Al-Fares（28）</td><td>SGF 0 L/min後4時間以内の心拍数（未調整）</td><td>OR 1.09（95%CI 1.0-1.1、p=.02）。最適カットオフ 110回/分、感度71.4%、特異度85.7%、AUC 0.82</td></tr>
+<tr><td>安全な離脱</td><td>Al-Fares（28）</td><td>SGF 0 L/min後4時間以内の換気比（未調整）</td><td>OR 5.07（95%CI 1.2-21.3、p=.03）。最適カットオフ 2.3、感度71.4%、特異度85.7%、AUC 0.82</td></tr>
+<tr><td>安全な離脱</td><td>Al-Fares（28）</td><td>SGF 0 L/min後4時間以内の食道内圧スイング（未調整）</td><td>OR 1.28（95%CI 1-1.5、p=.02）。最適カットオフ 16、感度71.4%、特異度100%、AUC 0.77</td></tr>
+<tr><td>安全な離脱</td><td>Al-Fares（55）</td><td>脱カニュレーション1時間前のVT（年齢とSOFAで調整）</td><td>OR 1.58（95%CI 1.05-2.40、p=.03）</td></tr>
+<tr><td>安全な離脱</td><td>Al-Fares（55）</td><td>脱カニュレーション1時間前の心拍数（年齢とSOFAで調整）</td><td>OR 1.08（95%CI 1.02-1.15、p=.01）</td></tr>
+<tr><td>安全な離脱</td><td>Al-Fares（55）</td><td>脱カニュレーション1時間前の換気比（年齢とSOFAで調整）</td><td>OR 2.7（95%CI 0.94-7.95、p=.06）</td></tr>
+<tr><td>weaning成功</td><td>Lazzari（26・前向き）</td><td>SGF 0 L/min前の EtCO2/PaCO2 比</td><td>最適カットオフ 0.84以上、感度91.7%、特異度80%、AUC 0.87（95%CI 0.71-1）、陽性尤度比 4.6、正しく分類できた患者 86%</td></tr>
+<tr><td>weaning成功</td><td>Lazzari（638・後ろ向き）</td><td>SGF 0 L/min前の EtCO2/PaCO2 比（未調整）</td><td>OR 4.1（95%CI 1.3-12.2、p=.015）。最適カットオフ 0.83以上、感度54%、特異度66%、AUC 0.58（95%CI 0.53-0.63）、陽性尤度比 1.6、正しく分類できた患者 58%</td></tr>
+<tr><td>weaning成功</td><td>Lazzari（638）</td><td>SGF 0 L/min時点の EtCO2/PaCO2 比（未調整）</td><td>OR 13.1（95%CI 4-44、p&lt;.001）</td></tr>
+<tr><td>weaning成功</td><td>Lazzari（638）</td><td>SGF 0 L/min時点の P/F比（未調整）</td><td>OR 1.06（95%CI 1.04-1.07、p&lt;.001）</td></tr>
+<tr><td>脱カニュレーション</td><td>Hartley（253）</td><td>脱カニュレーション前48時間以内の酸素負荷試験によるPaO2（Cilley 試験）</td><td>最適カットオフ 232 mmHg、感度74%、特異度70%、AUC 0.77（95%CI 0.73-0.81）、正しく分類できた患者 10%</td></tr>
+<tr><td>脱カニュレーション</td><td>Hartley（253）</td><td>初回の酸素負荷試験陽性から12時間以内のECMO分時換気量</td><td>4.82±3.43 L/min vs 1.66±2.26 L/min、AUC 0.88（95%CI 0.88-0.89）</td></tr>
+<tr><td>脱カニュレーション</td><td>Hartley（253）</td><td>ECMO分時換気量を含む複合基準</td><td>酸素負荷試験：AUC 0.89（95%CI 0.88-0.89）、OR 1.006（95%CI 1.004-1.009）／呼気分時換気量：AUC 0.89（95%CI 0.88-0.89）、OR 1.02（95%CI 1.01-1.03）／補正呼気分時換気量：AUC 0.90（95%CI 0.89-0.90）、OR 0.99（95%CI 0.99-1）</td></tr>
+</tbody></table></div>
+<p>Lazzari の EtCO2/PaCO2 比は、前向きの26例ではAUC 0.87と優秀だったが、638例の後ろ向きコホートではAUC 0.58まで落ちた。Hartley の Cilley 試験も感度74%・特異度70%だが「正しく分類できた患者は10%」と報告されている。著者らはこの2点をもって、両指標の readiness 予測因子としての有用性は検証コホートで感度・特異度を欠いた、と結論している。</p>
+<h3>9. 考察 — 臨床医が直面する4つのシナリオ</h3>
+<p>人工呼吸離脱の分類（simple／difficult／prolonged weaning）にならい、著者らはECMO離脱を4つに層別する。</p>
+<div class="tw"><table>
+<thead><tr><th>シナリオ</th><th>内容</th><th>臨床医の対応</th></tr></thead>
+<tbody>
+<tr><td>simple liberation</td><td>肺回復の徴候が速やかに現れ、どの離脱戦略を使っても短期間で離脱できる患者</td><td>戦略の違いが結果に出ない群</td></tr>
+<tr><td>difficult liberation</td><td>肺回復の徴候が遅れる、ECMO最適化中に呼吸不全が再燃する（人工呼吸器関連肺炎の重畳など）、または離脱試行に複数回失敗した患者</td><td>低いレベルの体外サポートしか要していなくても、重畳した侵襲の消退やさらなる肺回復を待ってECMOを延長することを選ぶ</td></tr>
+<tr><td>prolonged liberation</td><td>長期のECMOサポート（28日超）の後も、増大した死腔換気を相殺するために低レベルの体外サポートを要し続ける患者</td><td>回復・意思決定・移植を待つあいだ、理学療法などケアの他の側面を可能にするためにECMOを延長することを選ぶ</td></tr>
+<tr><td>unweanable／one-way decannulation</td><td>長期の体外サポートにもかかわらず離脱に足る肺回復に到達せず、肺移植の候補でもない患者</td><td>脱カニュレーション失敗時に再カニュレーションを提供しないという前提での意思決定</td></tr>
+</tbody></table></div>
+<p>人工呼吸と同様、ECMO期間・離脱試行までの時間・試行回数は転帰と関連する可能性が高い。観察研究では、ECMO導入前の人工呼吸期間がECMO期間と関連することが示されている。VILIへの曝露が大きいほど肺回復までの時間が長くなる、という仮説である。ただしデータが乏しく研究結果に一貫性がないため、長期ECMO（ELSO定義で28日以上）の臨床的意味（生存・機能的転帰）は不明のままである。</p>
+<p>ECMO期間・離脱試行回数、あるいはその両方は、肺回復の遅れを表現型として簡便に同定する手段になりうるが、転帰との関連はさらなる検討を要する。</p>
+<h3>10. 考察 — 現行の離脱戦略</h3>
+<p>横断調査2件（Marhong の国際調査、Swol の EuroELSO 2019 Weaning Survey）が、実践のばらつきを裏づけている。</p>
+<ul><li>急性呼吸不全の患者では、一般にECMOからの離脱が人工呼吸からの離脱より優先される。ただし慢性呼吸器疾患（bridge to decision／移植）の患者では、人工呼吸からの離脱が優先されることがある</li><li>多くのECMOセンターは、カニュレーション直後は圧規定換気と鎮静を用い、駆動圧のコントロールを狙う</li><li>患者が回復し始めると、ECMOの日々の最適化により鎮静中断と補助換気・自発換気が可能になり、横隔膜の廃用性萎縮を防げる</li></ul>
+<p>制御換気から自発換気へ移行する局面では、肺保護パラメータの遵守と、過剰な呼吸ドライブ・呼吸努力の綿密なモニタリングがVILI予防に不可欠となる。ECMOと人工呼吸を最適化しながら呼吸ドライブ・努力を監視する手段としては、P0.1（吸気開始100 msの気道内圧）、呼気終末閉塞圧（POcc）、一回換気中の食道内圧、横隔膜電気活動（EAdi）、自発呼吸下のプラトー圧がある。ただしこれらには3つの限界がある — 普及していないこと、ECMOからの移行や離脱に役立つというエビデンスが乏しいこと、意思決定を導くエビデンスに基づくカットオフ値が存在しないこと。</p>
+<p>歴史的に（そしてプロトコル化されたアプローチを採用していない多くの施設では）、ECMO離脱は「臨床医が readiness を判断し、続いてECMOサポートをゆっくり反復的に減らし、離脱トライアルを行う」という形をとる。トライアルの長さも終点も、一般に主治医の裁量に委ねられている。こうした非プロトコル化アプローチは、readiness の見落とし・不安全な離脱試行・ECMO期間の延長を招くリスクがある。</p>
+<p>標準化の要素がガイドラインに入ったのは、ELSOガイドラインの最近のアップデート（Tonna 2021）が最初である。この推奨では、患者が一連の臨床基準を満たした時点で readiness ありと判断し、続いて体外血流量とSGFの段階的減量で換気予備能・酸素化予備能を試し、ventilator challenge（VTの自由化）と離脱トライアルを行う。</p>
+<p>標準化アプローチ（readiness を同定する実用的基準、自発呼吸トライアルを模した離脱トライアル、トライアルの開始・中止基準）は、近年になって安全かつ実行可能であることが示された。さらに、標準化離脱トライアルの採用により、日常診療で用いられるより高いレベルのECMOサポートから脱カニュレーションに至っており、ECMO期間の短縮も報告されている。これは人工呼吸で見られたのと同じく、機械的サポートからの readiness を過小評価しているという証拠かもしれない、と著者らは述べる。</p>
+<h3>11. 考察 — 離脱の readiness を定義する基準</h3>
+<p>観察研究もRCTも、肺の改善という主観的な所見と、自分たちで選んだ換気パラメータを readiness の定義に用いていた。こうしたパラメータが不均一になるのは、<strong>肺の改善（lung improvement）の臨床的定義が存在しない</strong>からである。実際には、患者の臨床経過における恣意的なマイルストーンの達成（原疾患の消退、VTの回復、など）を寄せ集めたものになっている。</p>
+<p>付随する留意点が2つ。</p>
+<ul><li>画像上の改善と臨床的改善のあいだにはタイムラグがある</li><li>ECMOサポートが呼吸パラメータに与える影響が可変である（同じVTでも、どれだけECMOに支えられているかで意味が変わる）</li></ul>
+<p>そして、離脱の readiness を評価する基準にECMOサポートのレベルそのものを明示的に含めていた研究は、ごくわずかしかない。血流量やSGFに「これを超えていたら失敗が予想される」という上限を設けることで、ガス交換パラメータと呼吸メカニクスが完全にECMO依存の患者に離脱トライアルをかけてしまうことを防げる（エビデンスの確実性は低く、推奨レベルは専門家意見）。</p>
+<p>十分な肺回復を予測するために臨床で用いられているパラメータは2つ。</p>
+<ul><li><strong>酸素負荷試験（Cilley 試験）</strong>：人工呼吸器のFIO2 を100%に上げ、PaO2 の変化の大きさを観察する</li><li><strong>EtCO2/PaCO2 比</strong>：離脱トライアル前の呼気終末CO2分圧と動脈血CO2分圧の比。死腔換気の指標</li></ul>
+<p>死腔換気（EtCO2/PaCO2 比）が離脱失敗の機序として重要であることは臨床研究で強調されてきたが、両パラメータの readiness 予測因子としての有用性は、検証コホートで試したときの感度・特異度の欠如によって損なわれている。</p>
+<h3>12. 考察 — 離脱トライアルの実施</h3>
+<p>十分な肺回復を達成した患者を同定したあと、離脱トライアルはECMOなしで酸素化と換気を維持できる能力を試す。トライアルに進む判断には、現在の臨床状態と臨床経過の方向性を考慮する。<strong>急性または重畳した肺傷害の再燃が疑われる場合、離脱トライアルは高い呼吸努力を介して肺傷害を誘発しうる</strong>。</p>
+<p>離脱トライアルは、回路凝血を避けるため血流量を一定に保ったまま、酸素化器を通るガス流を数時間から数日間止めることからなる。ECMOサポートを減らしてガス流を止める手順は臨床実践でばらつきがあり、2群に分けられる。</p>
+<p><strong>（A）臨床医主導の反復的なECMOサポート減量</strong></p>
+<p>血ガス値に応じて臨床医が反復的にサポートを調整する。ECMOなしでもガス交換が達成できると臨床医が考えた時点でSGFをオフにする。この反復的減量は時間がかかり、しかも「適切なガス交換」や「安全な人工呼吸」の閾値が臨床医ごとに違うため、相当な不均一性を伴う。</p>
+<p><strong>（B）標準化された離脱トライアル</strong></p>
+<p>プロトコル化により主観性を減らす。客観的な臨床パラメータで十分な肺回復のある患者を同定し、標準化された手順に沿ってSGFを中止し、トライアルの持続時間と成功・失敗の基準をプロトコル化する。さらに2型に分かれる。</p>
+<div class="tw"><table>
+<thead><tr><th>型</th><th>手順</th><th>該当研究</th></tr></thead>
+<tbody>
+<tr><td>two-step liberation trial（2段階型）</td><td>ステップ1で離脱基準の充足を確認し、ステップ2で適格基準を満たした時点のサポートレベルからSGFを一気に0 L/minにする（例：4 L/min → 0 L/min）。安全策として、SGF停止前に血流量を2.5 L/min未満、またはFdO2 を50%未満に下げる操作をステップ2に加えることもできる</td><td>Pratt、Gannon、Teijeiro</td></tr>
+<tr><td>fixed reduction in ECMO support trial（段階的減量型）</td><td>時間刻みでSGFを段階的に減らす（例：20分ごとに33%減）。SGFが中止されるまで繰り返す</td><td>Thiara、Lazzari、Shekar、Kimmoun、Vasques、Combes</td></tr>
+</tbody></table></div>
+<p>標準化離脱トライアルは実行可能であることが示されたが、トライアルの最適な持続時間と、脱カニュレーション前に必要な観察時間は未定義のままである。</p>
+<p><strong>離脱中の人工呼吸管理には標準化がない。</strong>一般に換気目標は肺保護パラメータ内に収められる（低い一回換気量、プラトー圧30 cmH2O以下、FIO2 60%以下）が、離脱トライアル中に人工呼吸を最適化する介入は不均一である。多くのECMOセンターがECMO中に超低容量換気を目標とするため、離脱時には肺の虚脱・無気肺・人工呼吸器非同調が起こりやすい。ventilator challenge test は無気肺に対抗し、離脱試行前に換気を最適化することを狙う。その他、離脱前に換気を最適化する方策として報告されているのは、利尿、気管支鏡、代替換気モード（NAVA＝neurally adjusted ventilatory assist、HFPV＝high-frequency percussive ventilation）である。</p>
+<p><strong>awake ECMO</strong>（人工呼吸からの離脱をECMOからの離脱より優先する戦略）は、安全で実行可能な代替戦略と思われる。患者は肺回復の証拠を示し、かつ抜管基準を満たしたうえで人工呼吸から離脱する。抜管後、生理学的パラメータと酸素投与下で身体活動に耐える能力を目標にECMOサポートを調整し、その後SGFをオフにし、脱カニュレーション前に患者は歩行できなければならない。報告された転帰は優秀だったが、用いられたカニュレーション戦略（右房-肺動脈ダブルルーメンカニューレ）と、著しく長いECMO期間によって、この結果への楽観は制限されうる。</p>
+<p>標準化アプローチは安全かつ実行可能であり、近い将来に標準診療になる可能性が高い。ただし標準化アプローチと通常診療の有効性・安全性を比較する試験の結果は未発表である（ClinicalTrials.gov: NCT05486559、The ECMO-free trial）。</p>
+<h3>13. 考察 — 脱カニュレーションに進む基準</h3>
+<p>脱カニュレーションの可否は3つを考慮して決める。①離脱トライアルへの臨床的反応、②トライアル終了時に必要とした呼吸サポートのレベル、③ECMO継続に対する患者の耐容性（出血・溶血・酸素化器機能不全）。</p>
+<p>脱カニュレーションに進むための最適な呼吸サポートレベルを定義したガイドラインが無いため、実践には相当な不均一性がある（Table 3）。</p>
+<p>著者らは2つの専門家意見を明示的に述べている（いずれもエビデンスの確実性は低い）。</p>
+<ul><li>ECMOオフで適切なガス交換を維持するのに必要な呼吸サポートのレベルが患者にリスクをもたらす場合（VILI、高FIO2、鎮静継続の必要）、覚醒・可動性・理学療法を可能にしつつさらなる肺回復を待つためにECMOを延長することは正当化されうる</li><li>しかし、ケアの他の側面（覚醒・可動性・理学療法）で測定可能な利点を提供しないまま、「さらなる肺回復」という前提だけでECMOを延長することは正当化されない</li></ul>
+<p>ARDSの経過のかなり後になっても換気必要量が高いままであることの意味は不明である。しかし臨床実践では、ECMOからの離脱は高い呼吸仕事量によってしばしば制限される。高い呼吸仕事量は脱カニュレーション後のICU滞在期間と人工呼吸期間の延長と関連することが示されているが、機能的転帰と死亡への影響は不明である。より強いエビデンスが得られるまで、脱カニュレーションに進む基準は不均一で、臨床医の好みに大きく左右されるままになる。</p>
+<p><strong>one-way decannulation</strong> は、予測される臨床転帰が不良（消退しない臓器不全など）または特定の臨床的特徴のために、脱カニュレーション失敗時に再カニュレーションを提供しないと決めた状況を指す。臨床医は脱カニュレーション試行前に臨床状態をさらに最適化する（追加の除水、理学療法、栄養）ことを選び、最適な条件が満たされたと考えるまでECMOを延長することがある。しかしこの群に異なる離脱アプローチを支持するエビデンスは存在しない。再カニュレーションの決定には相当な倫理的含意があるが、本レビューの範囲外である。</p>
+<p><strong>VV-ECMO中の抗凝固実践は不均一であり、抗凝固の中止のタイミングや脱カニュレーション前の最適化については、組み入れた文献のいずれでも論じられていなかった。</strong></p>
+<h3>14. 考察 — 脱カニュレーション転帰の予測因子</h3>
+<p>脱カニュレーション成功（または失敗）の定義は、研究間でも臨床実践でも一貫していない。定義は「脱カニュレーション後48時間を超える生存」から、「再カニュレーション、脱カニュレーション後48時間以内の換気または循環サポートの増加、あるいはその両方」といった複合エンドポイントまで幅がある。</p>
+<p>脱カニュレーション転帰には2つの根本的な弱点がある。</p>
+<ul><li><strong>頑健性を欠き、患者中心のアウトカムではない</strong>。多くの場合、脱カニュレーションは他の機械的サポートへの移行にすぎず、早期離脱の利益や不利益を反映しない</li><li><strong>再カニュレーションを単独のエンドポイントとするのは信頼性を欠く</strong>。複雑な臨床経過をたどった患者に2回目のECMOを提供しない施設が多いため</li></ul>
+<p>脱カニュレーション転帰（unsafe liberation）と関連する現行のパラメータは、SGF停止後4時間以内の換気比・食道内圧スイング・一回換気量・心拍数、脱カニュレーション時のより高いPaCO2 と呼吸数、ICU入室時およびECMO 1日目前の血小板数である。血小板数はおそらく疾患重症度のマーカーにすぎず、その効果推定値はデータ駆動型の回帰によって水増しされている。</p>
+<p>しかし驚くべきことではないが、<strong>現在の脱カニュレーション転帰を規定しているのは酸素化ではなく死腔換気に関連する因子</strong>である。死腔換気の増大は呼吸仕事量増大の強力な駆動因子で、ARDSから回復しつつある患者ではよく見られる。死腔換気の増大は高い一回換気量・呼吸数・呼吸努力に翻訳される。傷害された、あるいは炎症のある肺では、これらはおそらくVILIを誘発する。ただしARDSの後期におけるその影響はより不明瞭である。</p>
+<p>Masi らは、標準的な離脱基準を満たさなかった患者（facilitated weaning）を高強度の人工呼吸（腹臥位を含む）へ脱カニュレーションしたところ、離脱基準を満たしてから脱カニュレーションした患者（conventional weaning）と死亡・機能的転帰が同等だったことを示した。単施設・後ろ向きという限界はあるが、これは仮説生成的なデータであり、追加研究の指針になりうる。</p>
+<h3>15. 考察 — 今後の方向性と提案されたアプローチ（Figure 2）</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.chest.2023.06.018" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chest.2023.06.018）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. VV-ECMOと人工呼吸で支持された呼吸不全患者に対する離脱への臨床的アプローチの提案図。3列構成。左列が「State of the evidence（エビデンスの現状）」、中央列が「Liberation from V-V ECMO（VV-ECMOからの離脱）」、右列が「Knowledge base gaps（知識基盤の空白）」。中央列には上から6つの淡青のボックスが縦の矢印で連結され、Patient characteristics（患者特性）→ Current liberation strategies（現行の離脱戦略）→ Identification of lung recovery（肺回復の同定）→ Criteria for attempting liberation（離脱試行の基準）→ Performing liberation trials（離脱トライアルの実施）→ Criteria to proceed with decannulation（脱カニュレーションに進む基準）と並ぶ。左列の各ボックスからは中央のボックスへ点線の矢印が入り、中央の各ボックスからは右列の空白ボックスへ点線の矢印が出る。左列の一部の項目は「Evidence from mechanical ventilation（人工呼吸からのエビデンス）」と斜体で明示され、人工呼吸離脱からの類推であることが区別されている。原図・無改変</p>
+</div>
+<p>Figure 2 の全内容を表に起こす。左列＝現状の証拠、中央列＝離脱の各局面、右列＝知識の空白。</p>
+<div class="tw"><table>
+<thead><tr><th>局面（中央列）</th><th>中央列の内容</th><th>エビデンスの現状（左列）</th><th>知識の空白（右列）</th></tr></thead>
+<tbody>
+<tr><td>患者特性</td><td>臨床医が直面しうるシナリオ：simple liberation／difficult liberation（複数回の離脱試行など）／prolonged liberation（28日超など）／unweanable・one-way decannulation</td><td>人工呼吸からのエビデンス：人工呼吸期間および離脱試行回数と死亡の関連</td><td>ECMO装着期間は離脱と関連するか／各層をどう定義するか／これらの臨床シナリオは患者転帰に影響するか／シナリオごとに離脱アプローチを変えるべきか</td></tr>
+<tr><td>現行の離脱戦略</td><td>臨床医主導のECMOサポート反復減量／標準化離脱トライアル</td><td>臨床実践における離脱戦略の不均一性。人工呼吸からのエビデンス：機械的サポートからの readiness の過小評価</td><td>人工呼吸より先にECMOから離脱すべきか／標準化離脱トライアルはECMO期間を短縮するか</td></tr>
+<tr><td>肺回復の同定</td><td>臨床経過における恣意的なマイルストーンの達成／画像と臨床の改善のタイムラグ／肺メカニクスとECMOサポートの複雑な相互作用</td><td>肺回復を定義する臨床基準の不均一性</td><td>離脱中の酸素負荷チャレンジと死腔換気測定の役割は何か</td></tr>
+<tr><td>離脱試行の基準</td><td>原疾患の部分的または完全な消退／重畳感染の所見がない／酸素化と換気のECMO依存度の低下／安全な換気パラメータ／循環安定</td><td>離脱を試行する臨床基準の不均一性</td><td>患者を試験すべき最小のECMOサポートレベルは何か／自発呼吸をしている必要があるか／離脱試行に必要な最小のPEEPとFIO2 は何か</td></tr>
+<tr><td>離脱トライアルの実施</td><td>臨床医主導のECMOサポート反復減量／標準化離脱トライアル（two-step 型／fixed reduction 型）</td><td>標準化離脱トライアルは安全で実行可能。人工呼吸からのエビデンス：標準化アプローチは臨床医主導の離脱戦略に優る</td><td>標準化離脱トライアルは臨床医主導の離脱に優るか／離脱トライアルの最適な持続時間は何か／トライアル中の呼吸サポートをどう最適化すべきか／トライアル中にどの呼吸・非呼吸パラメータを監視すべきか</td></tr>
+<tr><td>脱カニュレーションに進む基準</td><td>考慮すべきもの：患者の臨床経過の方向性、トライアル終了時の呼吸サポートのレベル／脱カニュレーション後の呼吸サポートのエスカレーションを監視</td><td>脱カニュレーションに進む情報に基づく基準が無いことによる臨床実践の不均一性</td><td>トライアル終了時に許容できる呼吸サポートの上限は何か／トライアル終了時の高い呼吸努力は何を意味するか／トライアル終了時の呼吸パラメータは機能的転帰や生存と関連するか／one-way decannulation を受ける患者では脱カニュレーション基準を変えるべきか</td></tr>
+</tbody></table></div>
+<p>人工呼吸離脱から得られたエビデンスは3つを示してきた。①臨床医は機械的サポートからの readiness を過小評価する傾向がある、②標準化されたプロトコルは臨床医主導の離脱より優れる傾向がある、③どの単一の予測因子も離脱テストそのものより優れた性能を示さない。これらは人工呼吸の離脱戦略を形づくり、人工呼吸期間の短縮と患者転帰の改善につながった。VV-ECMOからの離脱も同じ方向に進むのが論理的である。</p>
+<p>ECMO実施件数が増え続けるなか、安全で適時の離脱は優先事項になる。著者らは、離脱へのアプローチを標準化し、統一された患者中心のアウトカムを定義することに努力を向けるべきだと述べる。標準化と、ECMO抜去後のサポートのエスカレーションおよび機能的転帰のデータ収集が、離脱戦略の有効性を理解し、脱カニュレーションの成功（または失敗）を定義し、離脱失敗の高リスク表現型を同定し、離脱失敗に系統的にアプローチするための鍵である。</p>
+<h3>16. 研究の限界（著者の記載）</h3>
+<ul><li>一般的な目的が「エビデンスの現状の広範な概観」であったため、離脱の一部の側面の細部には踏み込んでいない</li><li>検索戦略は索引付き文献を含む大規模データベース2つに限られた</li><li>公共領域の他の形態（ブログ、ポッドキャスト、アプリケーション、動画、施設の標準手順書）にあるECMO離脱の情報はレビューしていない</li><li>一部の文献は主にCOVID-19患者を含んでいた（7件）。COVID-19 ARDSを別種のARDSと考える根拠は無いが、パンデミックは集中治療に前例のない課題をもたらし、組み入れた文献に反映された離脱実践は現在または将来の状況に一般化できない可能性がある</li></ul>
+<h3>17. 批判的吟味（JCでの論点）</h3>
+<p><strong>設計上の限界</strong></p>
+<ul><li>スコーピングレビューであり、系統的レビューではない。<strong>バイアスリスクの形式的評価がなく、エビデンスの質のグレーディングもない</strong>。RCT（EOLIA・CESAR）と8例の症例集積（Reeb）が同じ表に並んでいるのはそのため。表を読むときは「離脱に特化して設計された研究」と「離脱は付随記載にすぎない研究」を区別する必要がある。前者は11件しかない</li><li>検索は2022年5月まで。ELSO 2021ガイドラインは含まれるが、それ以降のVV-ECMO離脱の文献（ANZガイドライン、長期管理の相分けフレームワークなど）は反映されていない</li><li>灰色文献・施設SOPを除外したことは著者も認めるが、この領域はまさに「施設のSOPに実践が閉じ込められている」領域である。除外によって不均一性が過小評価されている可能性も、逆に「文献に書かれていないだけで実践は収斂している」可能性も、どちらも否定できない</li></ul>
+<p><strong>データの読み方の注意</strong></p>
+<ul><li>Table 1 の脱カニュレーション失敗率（0%〜25%）を横並びで比較してはいけない。定義が違うためで、Na（0/93）は「24時間を超えて再カニュレーションなしに生存」という緩い定義、Al-Fares（21/83）は「48時間以内の再カニュレーションまたはサポートの何らかの増加」という厳しい定義を使っている。<strong>分母の定義が違う数字を並べた表は、そのまま施設比較に使えない</strong></li><li>Masi の facilitated weaning 群の失敗率13/18（72%）は、著者らが Al-Fares の定義を後付けで当てはめて算出したもので、原論文が報告した数字ではない。表の脚注に明記されている</li><li>Table 3 の Hartley の VT が「540 (430-690)」となっているのは mL単位（mL/kg PBWではない）。単位が混在しているので読み違えやすい</li><li>Table 3 の POcc／食道内圧スイングは、研究によって符号（負値／正値）の付け方が異なる。Teijeiro は負値、Al-Fares と Lazzari は正値で報告している</li></ul>
+<p><strong>内的な緊張</strong></p>
+<ul><li>著者らは「標準化トライアルは通常より高いECMOサポートレベルからの脱カニュレーションを可能にした」と肯定的に述べるが、これは Gannon（26例）と Teijeiro（31例）という小規模単施設研究の観察である。<strong>同じ論文が「予測因子は検証コホートで性能が落ちる」と警告しているのだから、この観察にも同じ懐疑を向けるべき</strong>である</li><li>「早期離脱が良い」という前提そのものが検証されていない。Masi のデータは、離脱基準を満たさないまま抜いても（高強度換気に耐えるなら）死亡と機能的転帰は変わらなかったことを示唆する。これは「基準を厳しくすることに意味があるのか」という逆向きの問いを立てる</li><li>著者らのグループ（トロント）の自験研究が Table 1・Table 2・Table 3・Table 4 のすべてに登場する（Teijeiro、Al-Fares）。スコーピングレビューの性質上避けられないが、提案されたアプローチが自グループの手法に寄っている可能性は読者側で割り引く</li></ul>
+<p><strong>臨床への持ち帰りにあたっての限界</strong></p>
+<ul><li>本レビューはプロトコルを1つに決めてくれない。決めるのは各施設である。それを「不親切」と読むか「まだ決められる段階ではないという正直な報告」と読むかは、読み手次第</li><li>進行中のRCT（NCT05486559、The ECMO-free trial）の結果が出るまで、標準化トライアルが臨床医主導に優るという主張は人工呼吸からの類推にとどまる</li></ul>
+<h3>18. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>重症ARDSへのECMOのRCT（EOLIA）。本レビュー Table 1 の離脱戦略の出典</td><td>Combes A, et al. Extracorporeal membrane oxygenation for severe acute respiratory distress syndrome. N Engl J Med. 2018;378(21):1965-1975</td></tr>
+<tr><td>CESAR試験</td><td>Peek GJ, et al. CESAR: conventional ventilatory support vs extracorporeal membrane oxygenation for severe adult respiratory failure. BMC Health Serv Res. 2006;6:163</td></tr>
+<tr><td>呼吸療法士による毎日の readiness 評価。ECMO期間短縮を示した</td><td>Pratt EH, et al. A daily, respiratory therapist assessment of readiness to liberate from venovenous extracorporeal membrane oxygenation in patients with acute respiratory distress syndrome. Crit Care Explor. 2021;3(12):e0584</td></tr>
+<tr><td>安全な離脱の予測因子（VT・吸気努力）。本レビュー Table 4 の中核</td><td>Al-Fares AA, et al. Achieving safe liberation during weaning from VV-ECMO in patients with severe ARDS: the role of tidal volume and inspiratory effort. Chest. 2021;160(5):1704-1713</td></tr>
+<tr><td>プロトコル化した毎日の readiness 評価の安全性・実行可能性（two-step 型）</td><td>Gannon WD, et al. Safety and feasibility of a protocolized daily assessment of readiness for liberation from venovenous extracorporeal membrane oxygenation. Chest. 2021;160(5):1693-1703</td></tr>
+<tr><td>COVID-19 ARDSでの標準化離脱トライアル（two-step 型）</td><td>Teijeiro-Paradis R, et al. Standardized liberation trials in patients with COVID-19 ARDS treated with venovenous extracorporeal membrane oxygenation: when ready, let them breathe. Intensive Care Med. 2021;47(12):1494-1496</td></tr>
+<tr><td>離脱時の呼吸パラメータと人工呼吸期間・ICU滞在の関連</td><td>Thiara S, et al. Association of respiratory parameters at venovenous extracorporeal membrane oxygenation liberation with duration of mechanical ventilation and ICU length of stay. Crit Care Explor. 2022;4(5):e0689</td></tr>
+<tr><td>EtCO2/PaCO2 比を離脱の指針とする研究（fixed reduction 型・前向き26例＋後ろ向き638例）</td><td>Lazzari S, et al. End-tidal to arterial Pco2 ratio as guide to weaning from veno-venous extracorporeal membrane oxygenation. Am J Respir Crit Care Med. 2022;206(8):973-980</td></tr>
+<tr><td>酸素負荷試験（Cilley 試験）による脱カニュレーション readiness の予測</td><td>Hartley EL, et al. Prediction of readiness to decannulation from venovenous extracorporeal membrane oxygenation. Perfusion. 2020;35(1_suppl):57-64</td></tr>
+<tr><td>難治性weaning群を高強度換気へ脱カニュレーションした後ろ向き比較</td><td>Masi P, et al. Short and long-term outcomes of patients with COVID-19-associated acute respiratory distress syndrome and difficult veno-venous-ECMO weaning. Crit Care. 2021;25(1):337</td></tr>
+<tr><td>覚醒・抜管下VV-ECMOの転帰</td><td>Gurnani PK, et al. Outcomes of extubated COVID and non-COVID patients receiving awake venovenous extracorporeal membrane oxygenation. ASAIO J. 2022;68(4):478-485</td></tr>
+<tr><td>ELSOのVV-ECMO管理ガイドライン。標準化要素を初めて盛り込んだ</td><td>Tonna JE, et al. Management of adult patients supported with venovenous extracorporeal membrane oxygenation (VV ECMO): guideline from the Extracorporeal Life Support Organization (ELSO). ASAIO J. 2021;67(6):601-610</td></tr>
+<tr><td>「How I wean」の代表的手技記述（酸素チャレンジ→脱酸素→CO2チャレンジ）</td><td>Vasques F, Romitti F, Gattinoni L, Camporota L. How I wean patients from veno-venous extra-corporeal membrane oxygenation. Crit Care. 2019;23(1):316</td></tr>
+<tr><td>カロリンスカ方式のweaning</td><td>Broman LM, et al. Weaning from veno-venous extracorporeal membrane oxygenation: how I do it. J Thorac Dis. 2018;10(suppl 5):S692-S697</td></tr>
+<tr><td>マイアミ大のweaningプロトコルと文献レビュー</td><td>Grant AA, et al. A weaning protocol for venovenous extracorporeal membrane oxygenation with a review of the literature. Artif Organs. 2018;42(6):605-610</td></tr>
+<tr><td>血流量の日々の漸減という代替パラダイム</td><td>Shekar K, Buscher H, Brodie D. Protocol-driven daily optimisation of venovenous extracorporeal membrane oxygenation blood flows: an alternate paradigm? J Thorac Dis. 2020;12(11):6854-6860</td></tr>
+<tr><td>ECMO中の人工呼吸に関する国際調査（実践のばらつき）</td><td>Marhong JD, et al. Mechanical ventilation during extracorporeal membrane oxygenation. An international survey. Ann Am Thorac Soc. 2014;11(6):956-961</td></tr>
+<tr><td>EuroELSO 2019 Weaning Survey（抜管が先か脱カニュレーションが先か）</td><td>Swol J, et al. Extubate before venovenous extracorporeal membranous oxygenation decannulation or decannulate while remaining on the ventilator? The EuroELSO 2019 Weaning Survey. ASAIO J. 2021;67(4):e86-e89</td></tr>
+<tr><td>VV-ECMO離脱の標準化を求めるエディトリアル</td><td>Madahar P, Burkart KM, Brodie D. Standardizing the approach to liberation from venovenous extracorporeal membrane oxygenation. Chest. 2021;160(5):1583-1584</td></tr>
+<tr><td>人工呼吸離脱の国際観察研究（WEAN SAFE）。4シナリオ分類の下敷き</td><td>Pham T, et al. Weaning from mechanical ventilation in intensive care units across 50 countries. Lancet Respir Med. 2023;11(5):465-476</td></tr>
+<tr><td>自発呼吸可能な患者を同定することで人工呼吸期間が短縮</td><td>Ely EW, et al. Effect on the duration of mechanical ventilation of identifying patients capable of breathing spontaneously. N Engl J Med. 1996;335(25):1864-1869</td></tr>
+<tr><td>人工呼吸離脱の4方法の比較</td><td>Esteban A, et al. A comparison of four methods of weaning patients from mechanical ventilation. N Engl J Med. 1995;332(6):345-350</td></tr>
+<tr><td>予測指標を意思決定に用いることの是非を問うRCT</td><td>Tanios MA, et al. A randomized, controlled trial of the role of weaning predictors in clinical decision making. Crit Care Med. 2006;34(10):2530-2535</td></tr>
+<tr><td>呼気終末閉塞圧による呼吸ドライブ・吸気努力の推定</td><td>Telias I, et al. Airway occlusion pressure as an estimate of respiratory drive and inspiratory effort during assisted ventilation. Am J Respir Crit Care Med. 2020;201(9):1086-1098</td></tr>
+<tr><td>ARDSにおける死腔率と死亡の関連（死腔換気の重要性の原典）</td><td>Nuckton TJ, et al. Pulmonary dead-space fraction as a risk factor for death in the acute respiratory distress syndrome. N Engl J Med. 2002;346(17):1281-1286</td></tr>
+<tr><td>進行中のRCT（標準化トライアル vs 通常診療）</td><td>The ECMO-free trial. ClinicalTrials.gov: NCT05486559</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 VV-ECMOの離脱は、<mark class="hl">導入基準がこれだけ精緻化された今もなお、実質的に「担当医の勘」で運用されている領域</mark>である。39文献を並べると、離脱開始基準・sweep gas の落とし方・トライアルの長さ・脱カニュレーション基準・成功の定義まで、ほぼすべてが研究ごとに違っていた。 <mark class="hl">明日の実務で変えるべきは1つ。「臨床医が血ガスを見ながら少しずつ下げる」のをやめ、人工呼吸のSBTと同じ形の離脱トライアルを手順書にすること</mark>。①毎日の安全スクリーニング（原疾患の消退・重感染なし・循環安定・肺保護的換気・ECMOサポートが一定以下）→ ②血流量を保ったまま sweep gas をゼロにする → ③あらかじめ数値で決めた中止基準に当たったら戻す。<mark class="hl">当院で今すぐ決め切るべきは「観察時間」で、文献の幅は30分から24時間まである（ELSOは2〜3時間以上）。決めないままだと自施設の成績を後から評価できない</mark>。 <mark class="hl">見るべきは酸素化ではなく呼吸努力である</mark>。トライアル成功例と失敗例を分けていたのはPaCO2 ではなく、プラトー圧（29 vs 34 cmH2O）、P0.1（-3 vs -8 cmH2O）、食道内圧スイング（-9 vs -18 cmH2O）、VT（7.1 vs 8.2 mL/kg PBW）だった。<mark class="hl">同じPaCO2 をより大きな努力で買っている患者は、抜いた後にVILIを作る</mark>。 <mark class="hl">そして「抜かない」という判断の基準も1つに定める</mark>。覚醒・離床・理学療法という測定可能な利益があるならECMO延長は正当化される。<mark class="hl">「もう少し肺が良くなるかもしれない」だけの延長は、著者らが明確に正当化されないと述べている</mark>。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
