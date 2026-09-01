@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🌀 せん妄 Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🌀 せん妄 Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 🌀 せん妄 Home</p>
+<p>評価・予防・治療・長期転帰を扱う。関連46件。 睡眠環境・音・面会は <span class="wl">🏨 Hotel ICU・人間的ケア Home</span>、鎮静薬の選択は <span class="wl">😌 鎮静深度と鎮静薬の選択 Home</span> に任せ、ここでは<strong>せん妄そのものへの介入</strong>に絞る。</p>
+<h2>📖 3分概観（ブログ版）</h2>
+<p>_最終更新: 2026-09-01 ／ このHomeが束ねる関連ノート: 56本_</p>
+<p>ICUせん妄の現在地は、一行で言えます。<mark class="hl">「効く薬は無い。効くのは、毎シフト測ること・原因を潰すこと・鎮静と不動と隔離を減らすことだけ」</mark>。人工呼吸＋ショックの患者では今も約48%に起こるありふれた臓器障害なのに、それを消す薬は2026年時点で存在しません。薬を出す唯一の理由は有意な興奮（RASS +2〜+4）の短期コントロールであり、それすらせん妄の期間も重症度も変えません。主戦場はとっくに薬からケアの運用——ABCDEFバンドルと環境——に移っています。そして長期の害の本体は「死ぬこと」ではなく「脳が戻らないこと」です。</p>
+<h3>このテーマの流れ</h3>
+<p>出発点は「測れるようにした」ことでした。CAM-ICU（検証研究で感度93〜100%・特異度98〜100%、1分未満で施行可能）とICDSCの登場で、せん妄は「ICUではよくあること」から検証済みツールで追える臓器障害になりました。BRAIN-ICU（821例）は退院3か月後に26%がアルツハイマー病相当、40%が中等度外傷性脳損傷相当の認知スコアを示すことを明らかにし、せん妄がその最も強い独立予測因子でした。</p>
+<p>次に来たのが薬物への期待と挫折です。予防はHOPE-ICU・REDUCE（1,789例）が陰性。治療はMIND-USA（566例）が陰性で、AID-ICUも主要アウトカムは陰性でした。2025年のベイズ＋頻度論メタ解析（12RCT・治療7試験1,767例／予防5試験2,509例）が現時点の総括で、「治療」は弱く支持、「予防」は支持しない——予防目的の抗精神病薬はここで終わった、と読んでよい状況です。</p>
+<p>2026年には「では抗精神病薬とデクスメデトミジンのどちらがましか」を頭対頭で比べたRCT（188例・単施設）も出ましたが、せん妄・昏睡のない日数は両群とも中央値3日で動かず、差がついたのは安全性（有害事象17.0% vs 2.1%でデクスメデトミジンが不利）だけでした。<mark class="hl">薬の選択を変えてもせん妄そのものは変わらない</mark>という結論が、また一つ積み上がった形です。</p>
+<p>薬が沈む一方で浮上したのが運用です。ICU Liberation Collaborative（68施設15,226例）で、ABCDEFバンドルの完全実施はせん妄aOR 0.60・7日以内死亡aHR 0.32・身体抑制aOR 0.37と関連し、しかも<mark class="hl">実施割合に比例して効く</mark>という用量反応関係を示しました。ただしその勾配が見えるのは短期指標までです。MIND-USA の二次縦断解析に付されたエディトリアル（ICM2026）は、ABCDE遵守が高いほど良かったのは12か月時点の手段的ADLと健康関連QOLだけで、認知機能・基本的ADL・PTSD症状・長期生存は動かなかったと報告しました。ただしこの研究の遵守率中央値は97%で、比べていたのは「非常に高い」対「ほぼ完璧」です。「バンドルは長期に効かない」ではなく「この設計では差を検出できない」と読むのが正しく、日々の運用を変える根拠にはなりません。PADIS 2025 Focused Updateは強い推奨ゼロ・条件付き3つ（デクスメデトミジン優先・強化リハ・メラトニン）・推奨不能2つという慎ましい着地で、「不安」が新領域に加わりました。最近の総説は「次の一手は薬ではなくICUという環境そのものの再設計」とまで踏み込んでいます。</p>
+<h3>結論が出ていること／いないこと</h3>
+<p><strong>決着済み</strong>：せん妄は測れる（CAM-ICU／ICDSC）。抗精神病薬はせん妄の期間も重症度も変えず、予防に効く薬は無い。バンドルは実施割合に比例して短期転帰（せん妄・人工呼吸・ICU再入室・院内死亡）を改善する。死亡との関連は退院後30日程度で消えるが、認知機能障害・遂行機能障害・IADL依存・睡眠障害は12か月以降も残る。</p>
+<p><strong>未決着</strong>：①非薬物的介入の効果（15RCT 2,812例で有意差なし——ただし統合できたのは6試験だけで、「効かない」ではなく「検出できる試験がまだ無い」）、②睡眠覚醒調節薬（ラメルテオン等）の位置づけ、③メラトニンの真の効果（バイアスリスクで層別すると効果が消える）、④MIND-USAとAID-ICUで90日死亡だけが食い違う理由（著者自身も特定できていない）、⑤バンドル遵守が長期転帰（認知・PTSD・生存）まで動かすか（短期の用量反応は確立しているが、12か月の陽性所見はIADLとHRQoLだけで、しかも遵守率97%という圧縮された曝露範囲での検出力不足が疑われる）。</p>
+<p>Vault内でも、ハロペリドール投与日にせん妄が消退しにくいという観察データ（適応交絡で説明可能）、メラトニンの2つのメタ解析、非薬物介入の陰性SRと質的研究の統合で結論が割れており、いずれも本文の対照表に整理してあります。</p>
+<h3>✅ 3行まとめ</h3>
+<ul><li>毎シフトCAM-ICU／ICDSCで測り、意識変容を見たら6項目（低血糖・高血糖・高CO₂・高Na・ミダゾラム・セフェピム）を洗う</li><li>薬は有意な興奮（RASS +2〜+4）の短期コントロールだけ。静注ハロペリドールを最短期間で。予防投与はしない</li><li>ABCDEFバンドルの実施割合を質指標として追い、退室時に妄想的記憶を聞き、本人と家族に「あれはせん妄だった」と説明する</li></ul>
+<h3>❓ セルフチェック（想起用）</h3>
+<ol><li>ICUせん妄に抗精神病薬を使ってよい唯一の状況は何ですか。その薬はせん妄の何を変えませんか。</li><li>ABCDEFバンドル完全実施と関連したせん妄のaORと7日以内死亡のaHRは。この研究の最重要の所見は何ですか。</li><li>家族への長期予後の説明で、死亡ではなく何を軸に据えるべきですか。その理由は。</li></ol>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>ICUせん妄に「効く薬」は無い</strong>。効くのは<mark class="hl">毎シフト測ること・原因を潰すこと・鎮静と不動と隔離を減らすこと</mark>だけ（<span class="wl">ICUせん妄レビュー（ICM 2021）</span>）</li><li><strong>薬を出す唯一の理由は「有意な興奮（RASS +2〜+4）を抑えること」</strong>。静注ハロペリドールは症状制御の第一選択であり続けるが、<mark class="hl">せん妄の重症度も期間も変えない</mark>ので最短期間で止める（<span class="wl">せん妄に薬物治療は必要か（Salluh, ICM 2019）</span>）</li><li><strong>予防目的の抗精神病薬は使わない</strong>。ベイズ＋頻度論メタ解析は「治療」を支持し「予防」を支持しない（<span class="wl">ハロペリドールはせん妄「治療」を支持し「予防」を支持しない — ベイズ＋頻度論メタ解析（12RCT・CritCare2025）</span>）</li><li><strong>確立したせん妄の「治療」としてデクスメデトミジンを流さない</strong>。オランザピンとの頭対頭RCTでも、せん妄・昏睡のない日数は動かない一方、<mark class="hl">有害事象は17.0% vs 2.1%でDEXが不利</mark>（低血圧・徐脈・呼吸抑制）。低用量で覚醒を保つ設計は併用鎮静薬を54.3%に増やす（<span class="wl">ICUせん妄にオランザピンか低用量デクスメデトミジンか — せん妄・昏睡なし日数は同じ3日、有害事象はDEX 17.0% vs OLZ 2.1%（単施設RCT188例・AJRCCM2026）</span>）</li><li><strong>意識変容を見たら6項目を洗う</strong>：低血糖・高血糖・高CO₂・高Na・ミダゾラム・セフェピム（<span class="wl">敗血症関連脳症（SAE）の診断と管理 — 多モーダル評価とミダゾラム・セフェピムの神経毒性（総説・CritCare2023）</span>）</li><li><strong>ABCDEFバンドルの実施割合を質指標として追う</strong>。完全実施でせん妄 aOR 0.60、7日以内死亡 aHR 0.32、身体抑制 0.37。<mark class="hl">割合に比例して効く</mark>（<span class="wl">ABCDEFバンドルは実施割合に比例して転帰を改善する（ICU Liberation Collaborative 15226例・CCM2019）</span>）</li><li><strong>ただしバンドルの遵守率を磨いてもPICSは防げない、と期待値を置き直す</strong>。MIND-USAの二次縦断解析では、ABCDE遵守が高いほど良かったのは12か月時点の手段的ADLと健康関連QOLだけで、認知機能・基本的ADL・PTSD症状・長期生存は動かなかった（<span class="wl">ABCDEバンドルの遵守はPICSを完全には防げない — 12か月のIADLとQOLはわずかに改善、認知・生存は動かず（エディトリアル・ICM2026）</span>）。<mark class="hl">ただし遵守率中央値97%＝「非常に高い」対「ほぼ完璧」の比較であり、「効かない」ではなく「差を検出できない設計だった」と読む</mark>。日々の運用（SAT/SBTのペア実施・浅い鎮静・せん妄評価・早期離床）は変えない。変えるのは家族・病棟への説明で、「バンドルを完璧に回せばせん妄後の認知障害が防げる」とは言わない</li><li><strong>身体抑制は「頻度」ではなく「運用」を点検する</strong>。豪NZでは決定の63%が看護師単独、35%は署名済み医師指示なし、家族通知は38%のみ（<span class="wl">ANZICSにおける身体抑制の現状（ICM2020）</span>）。当院で決めるのは<strong>指示・記録・家族通知・解除の再評価時刻</strong></li><li><strong>退室時に「何が見えていたか」を聞く</strong>。妄想的記憶は38.5%に生じ、<mark class="hl">そのうち約6割はせん妄と診断されていない</mark>。この群だけがPTSD症状を3か月6.7%→12か月18.1%へ増やす（<span class="wl">ICUの妄想的記憶は1年後までPTSD症状を引きずる — 完全健忘は7人に1人、女性と深鎮静日数が関連（多施設縦断コホート426例・ICM2025）</span>）</li><li><strong>解離しうる薬剤は投与前に必ず説明する</strong>。患者が覚えているのは投与量ではなく「予告のない幻覚」と「頭に置かれた手」（<span class="wl">ICUベッドからの恐怖と洞察 患者体験談（ICM 2021）</span>）</li><li><strong>家族にせん妄評価を担ってもらう</strong>。「説明を受ける人」から「毎日評価する人」に変えると家族満足度が7〜9点上がり、<mark class="hl">言語障壁がある家族ほど効果が大きい</mark>（<span class="wl">家族にせん妄評価をしてもらうと家族の満足度が上がる — 言語障壁がある家族ほど効果が大きい（前向きコホート・ICM2026）</span>）</li><li><strong>家族に「見守り方」を具体的に3つ渡す</strong>。せん妄の最中でも患者は能動的に対処しており、<mark class="hl">家族はその最大の対処資源</mark>（<span class="wl">ICUせん妄に患者と家族はどう対処しているか — 10質的研究のメタ統合、家族が最大の対処資源（MMSR・CritCare2026）</span>）。①そばにいて手に触れ落ち着いた声で話す ②日付・場所・今起きていることを繰り返し伝える ③家から見慣れた物を持ってくる。<mark class="hl">併せて「訂正しない・否定しない・議論しない」を必ず書く</mark>（指示がないと家族は否定してしまう）。<strong>質的研究10本の統合で効果は未検証</strong>なので、指標は実施率までにとどめる</li><li><strong>回復期の患者本人にせん妄を説明する</strong>。患者側で最も一貫していた対処は<mark class="hl">自分に何が起きたのかを理解しようとすること</mark>で、説明がないと「自分は気が狂った」と受け取って症状を否認する。ICU退室時の説明に「あなたが見たものはせん妄で、精神の病気ではない」の一文を入れる（同上）</li><li><strong>家族への説明に使える長期像</strong>：死亡との関連は退院後30日程度で消えるが、<mark class="hl">認知機能障害・遂行機能障害・IADL依存・睡眠障害は12か月以降も残る</mark>（<span class="wl">ICUせん妄の長期転帰 — 死亡との関連は短期、認知障害は年単位で残る（What's New・ICM2023）</span>）</li></ul>
+</div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：せん妄は測れる（CAM-ICU・ICDSC）。抗精神病薬はせん妄の期間も重症度も変えない。予防に効く薬はない。ABCDEFバンドルは実施割合に比例して<strong>短期</strong>転帰を改善する。長期の害は「死ぬこと」ではなく<strong>「脳が戻らないこと」</strong>。</li><li><strong>まだ決着していないこと</strong>：①非薬物的介入の効果（<mark class="hl">15RCT2812例しか存在せず、統合できたのは6試験だけ</mark>——「効果がない」ではなく「効果を検出できる試験がまだ無い」）、②睡眠覚醒調節薬（ラメルテオン・スボレキサント・レンボレキサント）の位置づけ、③メラトニンの真の効果、④MIND-USAとAID-ICUで90日死亡だけが食い違う理由（<mark class="hl">著者自身も特定できていない</mark>）、⑤バンドル遵守が長期転帰まで動かすか（<span class="wl">ABCDEバンドルの遵守はPICSを完全には防げない — 12か月のIADLとQOLはわずかに改善、認知・生存は動かず（エディトリアル・ICM2026）</span>。12か月で動いたのはIADLとHRQoLだけで、せん妄の減少がバンドルの中心的な機序であるにもかかわらず持続的な認知面の利益は示されなかった。ただし遵守率97%で曝露範囲が圧縮されており、第2種の過誤が濃厚）。</li><li><strong>最近変わったこと</strong>：<span class="wl">PADISガイドライン Focused Update — 不安が新領域、デクスメデトミジン・強化リハ・メラトニンを条件付き推奨（CCM2025）</span> が出たが、<mark class="hl">強い推奨はゼロ、条件付き3つ、推奨不能2つ</mark>。「不安」が新領域として加わった。もう一つは<strong>表現型化</strong>の試み（自然言語処理で行動障害を3型に分けるなど）だが、<span class="wl">自然言語処理で行動障害を3つの表現型に分ける — 興奮型は死亡が高い（2931例・CritCare2023）</span> は<mark class="hl">抄録のORだけを引用してはいけない</mark>典型例。</li></ul>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>ハロペリドールを使うか</td><td><span class="wl">ハロペリドールはせん妄「治療」を支持し「予防」を支持しない — ベイズ＋頻度論メタ解析（12RCT・CritCare2025）</span>（治療方向にはベイズで支持）</td><td><span class="wl">ハロペリドール・クロニジンを投与した日はせん妄が翌日に消退しにくい（3614例前向きコホート・ICM2021）</span>（投与日はOR 0.47で消退しにくい）</td><td><strong>矛盾ではなく適応交絡</strong>。<mark class="hl">「重症のせん妄ほど薬が使われる」</mark>で説明でき、著者自身も仮説生成と断っている。この1本で処方をやめる根拠にはしないが、<mark class="hl">「効いている実感」を疑う材料としては十分</mark></td></tr>
+<tr><td>非薬物的介入は効くか</td><td>ガイドライン・総説は非薬物優先。<span class="wl">ICUせん妄は前進したのか足踏みなのか — 診断ツールは頭打ち、次の一手はICUそのものの再設計（ナラティブレビュー・MedSci2025）</span> は「次の一手は薬でなく環境」と踏み込む</td><td><span class="wl">重症患者のせん妄への非薬物的介入 — 15RCT2812例で発生率・持続時間とも有意差なし（SR・メタ解析・ICM2019）</span></td><td><strong>「陰性」ではなく「未検証」と読む</strong>。統合できたのは6試験だけ。非薬物介入をやめる根拠にはならない。<mark class="hl">環境介入は Tier 1（今日できる運用）と Tier 3（建築）を分けて提案する</mark>＝前者は既製チェックリストで回せるが、後者はエビデンス未確立</td></tr>
+<tr><td>メラトニンを使うか</td><td><span class="wl">ICUにおけるメラトニン使用の系統的レビュー・メタ解析（2025）</span>（RR 0.72・100人に9人）</td><td><span class="wl">メタ解析が食い違うとき — 統合推定値の先を読む（バイアスリスク層別でメラトニンの効果は消える・CritCare2026）</span></td><td><strong>害が無いので夜間・低用量は許容するが、効果を期待しない</strong>。<mark class="hl">バイアスリスクで層別すると効果は消える</mark>。PADIS 2025 も条件付き推奨どまり</td></tr>
+<tr><td>90日死亡は動くか</td><td>MIND-USA と AID-ICU の食い違い（<span class="wl">ハロペリドールとせん妄 — MIND-USAとAID-ICUで死亡だけが食い違う（What's New・ICM2023）</span>）</td><td>両試験とも主要アウトカムは陰性・安全性は同等</td><td><strong>死亡の食い違いを根拠に処方を決めない</strong>。抗精神病薬を選ぶならハロペリドールが最も根拠を持つ、というところまで</td></tr>
+</tbody></table></div>
+<h2>📌 まずこの8本</h2>
+<ol><li><span class="wl">ICUせん妄レビュー（ICM 2021）</span> — <mark class="hl">この領域で1本だけ読むならこれ</mark></li><li><span class="wl">せん妄に薬物治療は必要か（Salluh, ICM 2019）</span> — 薬を出す唯一の理由</li><li><span class="wl">ハロペリドールはせん妄「治療」を支持し「予防」を支持しない — ベイズ＋頻度論メタ解析（12RCT・CritCare2025）</span></li><li><span class="wl">ABCDEFバンドルは実施割合に比例して転帰を改善する（ICU Liberation Collaborative 15226例・CCM2019）</span> — 質指標の置き方</li><li><span class="wl">ICUせん妄の長期転帰 — 死亡との関連は短期、認知障害は年単位で残る（What's New・ICM2023）</span> — 家族への説明に使える</li><li><span class="wl">ICUの妄想的記憶は1年後までPTSD症状を引きずる — 完全健忘は7人に1人、女性と深鎮静日数が関連（多施設縦断コホート426例・ICM2025）</span></li><li><span class="wl">敗血症関連脳症（SAE）の診断と管理 — 多モーダル評価とミダゾラム・セフェピムの神経毒性（総説・CritCare2023）</span> — 6項目チェックリスト</li><li><span class="wl">ANZICSにおける身体抑制の現状（ICM2020）</span> — <mark class="hl">院内の運用を点検する視点</mark></li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">😌 鎮静深度と鎮静薬の選択 Home</span> — せん妄の最大の修正可能因子</li><li><span class="wl">🏨 Hotel ICU・人間的ケア Home</span> — 睡眠・音・光・面会</li><li><span class="wl">🔁 PICSとICU退室後のフォロー Home</span> — 認知障害とPTSDの追跡</li><li><span class="wl">🧓 フレイルと高齢重症患者 Home</span> — せん妄の最大のリスク集団</li><li><span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> — SATとの協調</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
