@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🌬️ 人工呼吸からの離脱・抜管 Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🌬️ 人工呼吸からの離脱・抜管 Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 🌬️ 人工呼吸からの離脱・抜管 Home</p>
+<p>SBTの手技から抜管の可否判断、抜管後の呼吸補助、横隔膜、気管切開とカニューレ抜去まで。関連87件。 挿管そのものは <span class="wl">🫧 気道管理と挿管 Home</span>、抜管後の嚥下は <span class="wl">🍽️ 嚥下障害 Home</span>、非侵襲換気の使い分けは <span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span>。</p>
+<h2>📖 3分概観（ブログ版）</h2>
+<p>_最終更新: 2026-09-02 ／ このHomeが束ねる関連ノート: 94本_</p>
+<p>人工呼吸からの離脱は、ICUの仕事の中では珍しく「骨格が固まった」領域です。毎日スクリーニングし、通ったらSBT（自発呼吸トライアル）、SBT中のパフォーマンスで抜管可否を決める——この流れ自体はもう議論になりません。SBTはPSV（PEEPなし）で30分、抜管後の既定はHFNC、高リスクにはNIVを重ねる。そして大事な前提がひとつ。抜管後の呼吸補助が動かすのは<mark class="hl">再挿管であって死亡ではない</mark>、ということです。いま研究の最前線は、SBTの「あと」ではなく「まえ」——調節換気からいつ降りるか、そして肺だけでなく横隔膜をどう守るか——に移っています。もうひとつ、2026年に<strong>抜管の手順そのものを国際的に標準化する動き</strong>（PUMAガイドライン）が出ました。「抜管できるか」だけでなく<mark class="hl">「いま再挿管するとして、それは速く確実か」</mark>をもう1問足す、という発想です。</p>
+<h3>このテーマの流れ</h3>
+<p>長らく論争だったのは「SBTは厳しくやるべきか」でした。Tピースは抜管後の負荷を忠実に再現する厳しい試験、PSVは易しい試験。直感的には厳しい試験を通った患者のほうが安全に思えますが、SR・メタ解析と2025年の総説（AnnIntensiveCare2025）が出した答えは逆でした。Tピースは再挿管を減らさず、PSVのほうが合格しやすく抜管成功が6%高い（NNT 22）。再挿管は多因子性で、SBTの厳しさより「抜管後に何を流すか」のほうが効くからです。</p>
+<p>その「抜管後」も決着がつきました。ネットワークメタ解析でHFNCはCOT（通常酸素）に比べ再挿管をRR 0.54で減らし（GRADE high）、HIGH-WEAN試験（JAMA 2019）は高リスク患者（65歳超・慢性心疾患・慢性肺疾患）でNIVを1日12時間以上＋合間HFNCとすることで7日再挿管を18.2%から11.8%に下げました。実際JIPADでも、抜管後の呼吸補助は5年でNIV（6.7→3.9%）からHFNC（15.9→28.0%）へ置き換わっています。</p>
+<p>最近の転換は2つあります。ひとつは「肺を守る」から「肺と横隔膜を同時に守る」へ。横隔膜機能不全の主犯は人工呼吸器（VIDD）ではなく、ICU入室時点で既に約60%に存在する重症病態側の臓器不全だという見方に変わり、呼気終末閉塞を1回かけてPocc・P0.1を読むという実務の入口ができました。もうひとつは離脱の起点の前倒しです。調節換気から補助換気への切り替えをP/F 250まで待つ運用は、150で動く運用より抜管が平均2.3日遅い——離脱の起点は「SBTをいつやるか」より前、「調節換気をいつ降りるか」にあるという指摘です。気管切開の世界でも、カニューレ抜去をキャップ試験ではなく吸引回数（24時間で8時間あたり2回以下）で決めるREDECAP（NEJM 2020）が離脱を13日から6日に縮め、実務を変えました。</p>
+<h3>結論が出ていること／いないこと</h3>
+<p><strong>決着済み</strong>：SBTはPSV・PEEPなし・30分（Tピースは失敗の代償が大きい患者に限る）。抜管後の既定はHFNC、高リスクはNIV併用。カフリークテストは「抜管の可否」ではなく「抜管前にステロイドを打つか」を決める検査。24時間超の人工呼吸例は夜間に抜管しない。そして再挿管率の目標を5〜10%に置かない——JIPAD 95施設の解析では13.8%を超えて初めてSMRが悪化しており、低すぎる目標はむしろ抜管を遅らせます。</p>
+<p><strong>未決着</strong>：気管切開の至適時期はVault内でも結論が割れています（遅いほど院内死亡が段階的に増える vs 早期化は手技を増やすだけで転帰を改善しない）。現時点の折り合いは「高リスク群（STePスコア7点以上）に限れば早期が有利」という読みです。横隔膜エコーも集団依存で、一般ICUのSBT通過例では抜管予測に使えない一方、AECOPDでは移動距離がAUC 0.92と別評価。離脱に使うモード（PAV/PAV+ か PSV か）も決着していません。むしろ2026年2月に<strong>同じ問いを扱ったメタ解析が2週間差で2本出て、結論が正反対になりました</strong>。一方（JAnesthAnalgCritCare2026・7RCT 1059例）は離脱成功も死亡も人工呼吸期間も同等で<mark class="hl">差がついたのは再挿管だけ（RR 0.64、GRADEは低）</mark>、もう一方（FrontMed2026・7RCT 1103例）は逆に<mark class="hl">離脱成功だけが有意（RR 1.12、95%CI 1.02–1.23）で再挿管は中立（RR 0.87）</mark>。どちらも「7RCT・約1,100例・PROMIZINGを含む」と称しているのに組入試験の顔ぶれが違い、それだけで結論が反転しています。<mark class="hl">どちらか一方を採るのではなく、「離脱成功も再挿管も、有意になったり消えたりする程度の効果しかない」と読むのが妥当</mark>です。ほかに横隔膜保護換気の目標値と実装、難治性ウィーニングの定義と介入、抜管前の経腸栄養中止、カニューレ抜去の標準プロトコル（SKR・SRLF合同GLは24設問に強い推奨がひとつも出せず）が残っています。</p>
+<h3>✅ 3行まとめ</h3>
+<ul><li>SBTはPSVでPEEPなし・30分。抜管後の既定はHFNC、高リスク（65歳超・慢性心疾患・慢性肺疾患）は48時間NIV（1日12時間以上）＋合間HFNC</li><li>再挿管率5〜10%を目標にしない。警戒線は13.8%、必ず人工呼吸期間とセットで見る</li><li><mark class="hl">効いたのは紙ではなく役割</mark>。回診で受け持ち看護師がSAT・SBTのPASS/FAILを声に出す運用で、人工呼吸期間は6.06日から3.25日へ</li></ul>
+<h3>❓ セルフチェック（想起用）</h3>
+<ol><li>SBTの第一選択の手技・PEEP・時間は？ あえてTピースを選ぶのはどんな患者ですか？</li><li>抜管後のHFNCがCOTに比べて減らすアウトカムとそのRRは？ 逆に「動かない」アウトカムは何ですか？</li><li>高リスク患者の3条件と、その患者の抜管直後48時間の呼吸補助の具体的処方を言えますか？</li></ol>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>調節換気が48時間を超えたら、補助換気への切り替えは「迷ったら早め」</strong>。切り替えをP/F 250まで待つ運用は、150で動く運用より<mark class="hl">抜管成功が平均2.3日遅れる</mark>（死亡は同等）。<mark class="hl">初回切替の54%が失敗しても、早い閾値のほうが最終的に有利だった</mark>（<span class="wl">調節換気から補助換気へいつ切り替えるか — PF比150超で切り替えるほうが250超まで待つより抜管が2.3日早い（ターゲット試験エミュレーション・CritCare2026）</span>）。ただしMIMIC-IV単施設の後ろ向きデータで、<mark class="hl">推論に耐えるのは9戦略中3つ・患者の22%が全9戦略の基準を同時に満たす</mark>という戦略分離の弱さがある。<mark class="hl">プロトコルの数値にはせず「迷ったら早めに補助換気へ」という方向づけとして使う</mark></li><li><strong>SBTはPSVでPEEPなしを第一選択に、30分</strong>（<span class="wl">SBTはどう行うべきか — PSVでPEEPなしを第一選択に（AnnIntensiveCare2025）</span>／<span class="wl">自発呼吸トライアル（SBT）手技の比較（SR・MA）</span>）。<mark class="hl">Tピースという「より厳しいSBT」は再挿管リスクを減らさない</mark>。抜管成功はPSが6%高い（NNT 22）。重度左室機能低下・神経筋疾患・気道確保困難など<strong>失敗の代償が大きい患者</strong>に限りTピースを選ぶ</li><li><strong>離脱の「モード」を議論する前に、補助量と毎日のSBTを確認する</strong>。PAV/PAV+ とPSVを比べたメタ解析が2026年2月に2本出たが、<mark class="hl">結論が正反対で、しかもどちらも患者が受け取る利益（生きて帰る・早く抜ける）を動かしていない</mark>。①7RCT 1059例では離脱成功 RR 1.08（1.00–1.16）・死亡 RR 0.95・人工呼吸期間 MD −8.21時間が同等で、有意差は<mark class="hl">再挿管 RR 0.64（0.42–0.97）だけ・GRADEは low</mark>（<span class="wl">PAVはPSVより再挿管を36%減らすが離脱成功は同等 — 7RCT 1059例、確信度は低〜中（SR・メタ解析・JAnesthAnalgCritCare2026）</span>）。②7RCT 1103例では逆に<mark class="hl">離脱成功 RR 1.12（1.02–1.23）だけが有意で、再挿管 0.87・ICU死亡 0.90・院内死亡 0.90・ICU滞在 MD 0.15日・離脱期間 MD −0.01時間はすべて中立</mark>（<span class="wl">PAV+はPSVより離脱成功を12%増やすが再挿管・死亡は同等 — 7RCT 1103例、有意性は小規模試験とSBT試験が支える（SR・メタ解析・FrontMed2026）</span>）。<mark class="hl">当院の離脱プロトコルは変えない。モード選択の議論が出たら「どのモードか」ではなく「補助が過剰になっていないか・毎日SBTを回せているか」を先に確認する</mark></li><li><strong>PAV+ の話が出たら、まず機種と対象を確認する</strong>。PAV+ は Puritan Bennett 840／980 系の専用モードで全ベッドで選べるわけではなく、仮に使うなら「全例で標準モードを差し替える」ではなく<strong>非同調が問題になっている患者（とくにCOPD）に、特定のベッドで</strong>という運用になる。<mark class="hl">呼吸ドライブが不安定な患者（重症の中枢神経障害・深鎮静下）と大きなリークがある患者は避ける</mark>——PAV+ は患者自身の努力を増幅する仕組みなので、努力そのものが破綻していると土台が崩れる</li><li><strong>抜管失敗の先読みを「気道」と「離脱」に分ける</strong>。咳嗽・分泌物・カフリークは気道の問題、SBT・水分バランス・心機能・横隔膜は離脱の問題。<mark class="hl">混ぜて議論した瞬間に何が足りないか分からなくなる</mark>（<span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span>）</li><li><strong>カフリークテストは高リスク例に絞る</strong>。これは「抜管してよいか」を決める検査ではなく <strong>「抜管前にステロイドを打つか」を決める検査</strong>。不合格なら抜管4時間以上前にステロイド（<span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span>）</li><li><strong>抜管後の既定はHFNC</strong>。COTに比べ再挿管をRR 0.54で減らす（GRADE high）。<mark class="hl">死亡は動かない。動くのは再挿管だけ</mark>（<span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span>）</li><li><strong>高リスク（65歳超・慢性心疾患・慢性肺疾患）は抜管直後48時間、NIVを1日12時間以上＋合間をHFNC 50 L/分</strong>。7日再挿管 18.2%→11.8%（<span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span>）</li><li><strong>横隔膜エコーで抜管可否を決めない</strong>。SBTを通過した患者では成功群と失敗群が分かれない（<span class="wl">横隔膜エコーは抜管失敗を予測できない（多施設研究 Chest2019）</span>）。使うのは<mark class="hl">「なぜ離脱できないのか」を切り分けるとき</mark></li><li><strong>再挿管率の目標を5〜10%に置かない</strong>。JIPAD 95施設で<mark class="hl">13.8%を超えて初めてSMRが悪化した</mark>（<span class="wl">最適な再挿管率は5〜10%ではない — 13.8%を超えて初めてSMRが悪化（JIPAD 21443例・95施設・ChestCritCare2025）</span>）。低すぎる目標は抜管を遅らせる</li><li><strong>24時間を超えて人工呼吸を要した患者は夜間に抜管しない</strong>（死亡オッズ約2.5倍・<span class="wl">心臓手術後の夜間抜管は予後を悪化させるか</span>）。24時間以内に抜管できる患者は昼夜で差がない</li><li><strong>SBTに1回失敗したら「もう一度SBT」ではなく「多臓器を測り直す」</strong>。入り口の重症度（SAPS II・SOFA・P/F）は離脱失敗をまったく予測しない（<span class="wl">難治性ウィーニングは多臓器の問題 — 統合エコー評価がAUROC 0.88で単独指標を上回る（WEAN-US・前向き観察・CritCare2026）</span>）。<mark class="hl">胸部エコーで胸水を1項目として見る</mark>（SBT失敗例の18%に中等量以上・コストゼロ）</li><li><strong>カニューレ抜去はキャップ試験ではなく吸引回数で決めてよい</strong>：24時間で8時間あたり2回以下。離脱13日→6日（<span class="wl">気管切開チューブからの離脱は吸引回数で決めてよい — 離脱13日から6日へ（REDECAP・NEJM2020）</span>）</li><li><strong>カフを脱気できるなら人工呼吸中でもスピーチバルブを早期に着ける</strong>。運動中も外す必要はない（<span class="wl">気管切開が発声と嚥下に与える影響を減らす — スピーチバルブとACV（What's New・ICM2023）</span>／<span class="wl">気管切開患者はスピーチバルブを着けたまま運動してよい — EITで安全性を検証したランダム化クロスオーバー試験（CritCare2025）</span>）</li><li><strong>SAT・SBTは回診で受け持ち看護師が声に出す</strong>。「今日のSATとSBTはPASSかFAILか、FAILならなぜか」。<mark class="hl">効いたのは紙ではなく役割</mark>（<span class="wl">標準化された回診ツールでSAT・SBTを協調させる — 人工呼吸期間は平均6.06日から3.25日へ（QI前後比較・CritCareNurse2022）</span>）</li></ul>
+</div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：毎日スクリーニング → SBT → SBT中のパフォーマンスで抜管可否を判断、という骨格。SBTはPSVでよく30分で足りる。抜管後の呼吸補助が動かすのは再挿管であって死亡ではない。大多数は初回SBTで抜管できる。</li><li><strong>まだ決着していないこと</strong>：①気管切開の至適時期（後述の対立）、②横隔膜保護換気の目標値と実装、③難治性ウィーニングの定義と介入、④抜管前に経腸栄養を止めるべきか、⑤カニューレ抜去の標準プロトコル（<mark class="hl">SKR・SRLF合同GLは24設問に強い推奨がひとつも出せなかった</mark>）、⑥離脱モードの選択（PAV/PAV+ か PSV か。<mark class="hl">2026年2月に2週間差で出た2本のメタ解析が正反対の結論を出した</mark>。片方は再挿管だけ有意 RR 0.64・GRADE low、もう片方は離脱成功だけ有意 RR 1.12 で再挿管は中立。<mark class="hl">どちらでも唯一の大規模・低バイアス試験 PROMIZING は中立</mark>）、⑦抜管前のsigh付加が抜管後の臨床アウトカムを変えるか（心臓外科192例の第2相で抜管後S/F 338→380・重症呼吸不全21.9%→8.4%だが、<mark class="hl">検出力は酸素化10%差だけで両群とも低酸素閾値より十分上＝今日プロトコルは変えない</mark>。むしろ<mark class="hl">対照群の37.5%が救済リクルートメントを要した</mark>事実のほうが当院で確かめる価値がある）。</li><li><strong>最近変わったこと</strong>：<strong>「肺を守る」から「肺と横隔膜を同時に守る」へ</strong>（<span class="wl">肺と横隔膜を同時に守る換気 — 呼吸努力は強すぎても弱すぎても害、Poccで安全域に収める（LDP換気・ナラティブレビュー・ICM2026）</span>）。呼気終末閉塞を1回かけてPocc・P0.1を読むという実務の入口ができた。もう一つは<strong>横隔膜機能不全の犯人像の変更</strong>——人工呼吸器が作る病気（VIDD）ではなく、<mark class="hl">ICU入室時点で既に約60%に存在する重症病態の臓器不全</mark>（<span class="wl">横隔膜機能不全の主犯は人工呼吸器ではない — VIDDから重症病態関連へ（ナラティブレビュー・CritCare2026）</span>）。そして「努力を抑える」より先に<strong>「同調させる」</strong>（リバーストリガー OR 15）。</li></ul>
+<p>3つ目は<strong>抜管そのものの手順化</strong>——<span class="wl">抜管は挿管と同じ重さで評価・戦略・準備する — PUMA国際ガイドライン10推奨と抜管アルゴリズム（Anaesthesia2026）</span> が、これまで施設ごとの流儀だった抜管を「挿管と同じ重さで評価・戦略・準備する」枠組みに載せた。<mark class="hl">問うべきは「抜管できるか」ではなく「いま再挿管するとして rapid &amp; reliable か」</mark>で、答えが「いいえ」なら覚醒下抜管→気道交換カテーテル（AEC）→気管切開へ物差しを上げる。</p>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>気管切開は早いほうがよいか</td><td><span class="wl">気管切開が遅いほど院内死亡が段階的に増える — 6日以内を基準に14日超でOR 2.26（JIPAD 1538例・46ICU・JIntensiveCare2022）</span>（遅いほど死亡増）</td><td><span class="wl">気管切開の最新知見レビュー（ICM2019）</span>（<mark class="hl">早期化は手技の数を増やすだけで転帰を改善しない</mark>）</td><td><strong>全体平均と高リスク群を分けて読む</strong>。<span class="wl">敗血症の早期気管切開が有効なのは高リスク群だけ — STePスコア7点以上で死亡28.0%対36.1%（JIPAD・PSM・RespirCare2026）</span> が折り合いをつけている。まず自施設の実施率を出す（<span class="wl">外傷性脳損傷（TBI）患者の気管切開 — 31.8%に実施・施設間で7.9〜50.2%のばらつき、晩期は転帰不良と関連するが因果は未証明（CENTER-TBI 1358例・ICM2020）</span> は<mark class="hl">患者ではなく施設が決めている</mark>と読む）</td></tr>
+<tr><td>横隔膜エコーは離脱予測に使えるか</td><td><span class="wl">AECOPDの離脱予測は横隔膜移動距離が最良 — 感度0.85・特異度0.85・AUC 0.92（SR・メタ解析23研究2000例・CritCare2026）</span></td><td><span class="wl">横隔膜エコーは抜管失敗を予測できない（多施設研究 Chest2019）</span>／<span class="wl">呼吸筋の超音波評価 横隔膜エコーと非同調（ICM2020）</span>（抜管予測目的は推奨できないと明記）</td><td><strong>集団が違う</strong>。一般ICUのSBT通過例では使わない。AECOPDという特定集団では別評価。<mark class="hl">厚みは「薄ければ萎縮」は言えるが「厚ければ無事」は言えない</mark>（陰性的中率17%）</td></tr>
+<tr><td>再挿管率は低いほど良いか</td><td>「5〜10%が最適」という通念</td><td><span class="wl">最適な再挿管率は5〜10%ではない — 13.8%を超えて初めてSMRが悪化（JIPAD 21443例・95施設・ChestCritCare2025）</span></td><td><strong>低すぎる目標は抜管の遅れを生む</strong>。QIとして追うなら13.8%を上限の警戒線にし、同時に人工呼吸期間を見る</td></tr>
+<tr><td>PAV+ はPSVより良い離脱モードか</td><td><span class="wl">PAV+はPSVより離脱成功を12%増やすが再挿管・死亡は同等 — 7RCT 1103例、有意性は小規模試験とSBT試験が支える（SR・メタ解析・FrontMed2026）</span>（離脱成功 RR 1.12・再挿管は中立）</td><td><span class="wl">PAVはPSVより再挿管を36%減らすが離脱成功は同等 — 7RCT 1059例、確信度は低〜中（SR・メタ解析・JAnesthAnalgCritCare2026）</span>（再挿管 RR 0.64・離脱成功は中立）</td><td><strong>どちらも採らない</strong>。2週間差で出た2本が同じ問いに逆の答えを出しており、原因は組入基準と重み付け（前者は学会抄録 Salama 2018 と SBT試験 Teixeira 2015 を含み、後者は Elganady 2014 を含む）。<mark class="hl">前者は重みの52.4%をSBT用途の2試験が占め、Salama を1本抜くと有意性が消える</mark>。読み方は「離脱成功も再挿管も、有意になったり消えたりする程度の効果しかない」。<mark class="hl">死亡・ICU滞在・離脱期間はどちらでも中立</mark></td></tr>
+<tr><td>SBTの機会を増やせば離脱は進むか</td><td><span class="wl">標準化された回診ツールでSAT・SBTを協調させる — 人工呼吸期間は平均6.06日から3.25日へ（QI前後比較・CritCareNurse2022）</span></td><td><span class="wl">遠隔ICUの毎日ラウンドはSBT実施日を27%から51%に倍増させたが離脱成功率は変えない（ERIC二次解析・段階的ウェッジ・CritCare2026）</span></td><td><strong>「SBTを行う日」を増やすだけでは足りない</strong>。<mark class="hl">結果に効いたのは「その場で抜管まで進める役割設計」</mark>。プロセス指標だけを目標にしない</td></tr>
+</tbody></table></div>
+<h2>📌 まずこの10本</h2>
+<ol><li><span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span> — <mark class="hl">回診の議論の立て方が変わる</mark></li><li><span class="wl">SBTはどう行うべきか — PSVでPEEPなしを第一選択に（AnnIntensiveCare2025）</span></li><li><span class="wl">自発呼吸トライアル（SBT）手技の比較（SR・MA）</span> — PS vs Tピースの決着</li><li><span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span></li><li><span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span> — 抜管後に何を流すか</li><li><span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span> — 高リスク例の具体手順</li><li><span class="wl">最適な再挿管率は5〜10%ではない — 13.8%を超えて初めてSMRが悪化（JIPAD 21443例・95施設・ChestCritCare2025）</span> — 質指標の置き方</li><li><span class="wl">横隔膜機能不全の主犯は人工呼吸器ではない — VIDDから重症病態関連へ（ナラティブレビュー・CritCare2026）</span></li><li><span class="wl">気管切開チューブからの離脱は吸引回数で決めてよい — 離脱13日から6日へ（REDECAP・NEJM2020）</span></li><li><span class="wl">標準化された回診ツールでSAT・SBTを協調させる — 人工呼吸期間は平均6.06日から3.25日へ（QI前後比較・CritCareNurse2022）</span> — <mark class="hl">明日から運用を変えられる1本</mark></li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🫧 気道管理と挿管 Home</span> — 再挿管になったときの気道戦略</li><li><span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> — 抜管後のNIV・HFNCの使い分け</li><li><span class="wl">🍽️ 嚥下障害 Home</span> — 抜管後の経口摂取と誤嚥</li><li><span class="wl">😌 鎮静深度と鎮静薬の選択 Home</span> — SATとSBTの協調</li><li><span class="wl">🎚️ ARDSの換気設定（駆動圧・PEEP） Home</span> — 補助換気に移る前の設定</li><li><span class="wl">🏃 リハビリ Home</span> — 早期離床と呼吸筋</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
