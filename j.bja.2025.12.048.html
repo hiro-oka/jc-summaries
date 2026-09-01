@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>PEEPの決め方を段階的に整理する — リクルータビリティ評価→手法選択→安全閾値（ΔP15・PLins20）の3ステップ（総説・BJA2026）</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">PEEPの決め方を段階的に整理する — リクルータビリティ評価→手法選択→安全閾値（ΔP15・PLins20）の3ステップ（総説・BJA2026）</h1>
+  <dl class="cite"><dt>出典</dt><dd>Servetti A, Battaglini D, Patroniti NA, Al Sharie S, Jouryyeh B, Al-Husinat L, Marini JJ, Rocco PRM. Optimising positive end-expiratory pressure in acute respiratory distress syndrome: a narrative review of approaches to titration. Br J Anaesth. 2026;136(5):1472-1481. DOI: 10.1016/j.bja.2025.12.048</dd><dt>掲載誌</dt><dd>British Journal of Anaesthesia（2026-01-27）</dd><dt>原著</dt><dd><a href="https://doi.org/10.1016/j.bja.2025.12.048" target="_blank" rel="noopener">doi.org/10.1016/j.bja.2025.12.048</a>（本文PDFは別途）</dd><dt>原題</dt><dd>Optimising positive end-expiratory pressure in acute respiratory distress syndrome: a narrative review of approaches to titration</dd></dl>
+</header>
+<div class="wrap">
+<h2>🏥 聖路加ICUでの実践への示唆</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>病棟プロトコルへの落とし込み</p>
+<ul><li><strong>変わること①：PEEPを決める前に「リクルータビリティを測る」工程を挟む</strong>。挿管直後にPEEPを5→15 cmH2Oへ1ステップ上げ、コンプライアンス・酸素化・PaCO2の3つを見る。3つとも良い（またはCO2が悪化しない）なら高PEEPの利益が期待でき、反応しないなら過膨張側のリスクが勝つ。手順が短く、特別な機器が要らないので当直帯でも回せる。</li><li><strong>変わること②：滴定の終点を「酸素化が良くなったか」から「安全閾値を割っていないか」に置き換える</strong>。本総説のアルゴリズムが示す到達点は ΔP ≤15 cmH2O・吸気終末経肺圧 &lt;20 cmH2O・血行動態安定の3つ。酸素化はここに入っていない。</li><li><strong>変わること③：PEEPを上げた後に必ず循環を評価してから確定する</strong>。血圧・心拍出量が落ちたら、PEEPを下げる／一回換気量を下げる／輸液・昇圧薬で循環を整えるのいずれかを行い、リクルータビリティから測り直す。「酸素化が上がったから成功」で終わらせない。</li><li><strong>変わらないこと</strong>：VT 6 mL/kg 予測体重の肺保護換気は前提のまま。PEEP/FIO2表を捨てろとは言っておらず、表は出発点として使い、そこからΔPと循環で微調整する位置づけ。</li><li><strong>当院での現実的な組み合わせ</strong>：ΔP（吸気ポーズ＋呼気ポーズで測る）＋肺エコーが最も導入コストが低い。食道バルーンは腹腔内圧上昇・高度肥満・胸壁コンプライアンス異常の症例に絞って使う。EITが使えない環境では、LUSがCTの代用として妥当という位置づけが本総説の主張。</li><li><strong>教育での使い方</strong>：Figure 2（下記）をそのまま研修医レクチャーのフロー図として使える。ボックスごとの文言は本文の表に起こしてある。</li></ul>
+</div>
+<h2>🧭 この論文の位置づけ（Known / Unknown / What's new）</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>リサーチ・イン・コンテキスト</p>
+<ul><li><strong>Known</strong>：ALVEOLI・LOVS・EXPRESS の3大RCTはいずれも高PEEP戦略で酸素化と肺メカニクスを改善したが、死亡を減らさなかった。ΔPは生存の強い予測因子であり（Amato 2015）、リクルータビリティが高い患者に限れば高PEEPの利益が出るというメタ解析の示唆がある。</li><li><strong>Unknown</strong>：どの滴定手法を第一選択にすべきか。ΔP最小化・経肺圧・EITのいずれも、死亡を主要評価項目とした決定的なRCTで優越性を示していない。安全閾値（ΔP 15、PLins 20）の妥当性も前向きに検証されていない。</li><li><strong>What's new</strong>：既存の7手法（酸素化／コンプライアンス／ΔP／食道内圧／CT／EIT／肺エコー）を利点・限界の対比表にまとめ、さらに「リクルータビリティ評価 → 手法選択 → 適用と監視 → 安全性評価 → 分岐」という段階的アルゴリズム（Fig 2）に統合した点。個々の手法の新規データではなく、<mark class="hl">実装の順序</mark>を示したことが本総説の付加価値。</li><li><strong>Vault内の関連ノートとの対比</strong>：<span class="wl">ARDS60年でPEEPとリクルートメントはこう変わった — まずリクルータビリティ、次に肺ストレス内でのPEEP滴定（総説・ICM2026）</span> と結論の骨格は一致する（まずリクルータビリティ、次に安全域内で滴定）。ただしICM2026は「コンプライアンスやΔPの改善を根拠にPEEPを決めるのはやめよ（tidal recruitmentが逆向きに見せる）」と踏み込むのに対し、本総説はΔP最小化を主要手法の一つとして推奨側に残しており、<mark class="hl">同じ落とし穴を限界として言及するにとどまる</mark>。この温度差がJCの論点になる。</li><li>リクルータビリティの実測法は <span class="wl">ARDSの肺リクルータビリティ予測 R／I ratio（AJRCCM2020）</span> が原典。本総説はR/I比を「二値分類ではなく連続量として読む」立場を明示しており、原典の0.5カットオフ運用より一歩進んでいる。</li><li>経肺圧の目標値は <span class="wl">EPVent-2（食道内圧ガイドPEEP・JAMA2019）</span>（主要評価項目で差なし）と <span class="wl">食道内圧ガイドPEEPとARDS生存（EPVent-2二次解析・AJRCCM2021）</span> を踏まえる必要があり、本総説の「生存利益の可能性を示唆」という記述は再解析側に寄っている。</li></ul>
+</div>
+<h2>📌 全体要約</h2>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>ひとことで ARDSのPEEP設定には7つの手法があるが、どれも単独では不十分で、<strong>「リクルータビリティを測る → 手法を選ぶ → 適用して反応を見る → 安全閾値（ΔP ≤15 cmH2O・吸気終末経肺圧 &lt;20 cmH2O・血行動態安定）で止める」という段階的な流れ</strong>に落とし込むのが現時点の最適解、というのが本総説の主張である。</p>
+</div>
+<ul><li>ARDS肺は不均一で、換気に使える部分（baby lung）はごく一部。だから「全員に同じPEEP」も「全員に高PEEP」も成立しない。</li><li>酸素化ベースの滴定は最も普及しているが、酸素化の改善は肺メカニクスの改善を意味しない。心拍出量の変化やシャント分布の変化だけでPaO2/FIO2は動く。</li><li>コンプライアンス最大／ΔP最小の滴定は生理学的に筋が通り、ΔPは生存と強く関連する。ただし自発呼吸・体動・鎮静深度で測定が揺れ、全体指標なので局所の虚脱と過膨張が同時にあっても見分けられない。</li><li>食道内圧（経肺圧）は胸壁の影響を切り離せる唯一のベッドサイド法。腹腔内圧上昇・体液過剰・高度肥満で価値が高い。目標は呼気終末経肺圧 0〜5（近年のデータでは 0〜2）cmH2O、吸気終末経肺圧 &lt;20 cmH2O。</li><li>画像はCTが基準（形態とリクルータビリティ、focal か non-focal か）、EITがリアルタイムの局所監視、LUSが可搬・反復可能な代用。胸部X線はPEEP滴定には使えない（合併症の発見に用途を限定すべき）。</li><li>ベッドサイドでのリクルータビリティ評価は、R/I比（PEEP 15→5 cmH2Oの単一ステップ）と、挿管直後にPEEP 5→15 cmH2Oへ1ステップ上げてコンプライアンス・酸素化・CO2の反応を見る簡便法の2つが提示されている。</li><li>統合戦略（生理指標＋画像＋連続モニタリング）が最も有望というのが結論。ただしこのアルゴリズム自体は前向き検証を経ていない。</li></ul>
+<h2>📖 詳細</h2>
+<h3>1. まず前提 — この病態・治療の基礎（初めての人にも）🧩</h3>
+<div class="call abstract"><span class="lab">要旨</span>
+<p>5分で背景を掴む ARDS（急性呼吸窮迫症候群）では、びまん性の炎症・肺水腫・サーファクタント機能不全によって肺胞が虚脱しやすくなり、ガス交換が破綻する。<strong>PEEP（呼気終末陽圧）</strong>は呼気の終わりに気道内を陽圧に保つ設定で、狙いは2つある。①すでに開いている肺胞を開いたまま保つこと、②虚脱して空気の入っていない領域を再び開かせること（リクルートメント）。虚脱と再開通が呼吸ごとに繰り返されること（cyclic recruitment-derecruitment）は人工呼吸器関連肺傷害（VILI）の主要機序の一つで、適切なPEEPはこれを減らす。 ただしARDS肺は均一ではない。健常に近い領域と、完全に潰れた領域と、その中間が混在する。換気に実際に使えるのは肺全体のごく一部で、これを <strong>baby lung</strong> と呼ぶ。同じ圧をかけても、開く領域と、すでに開いていて伸ばされるだけの領域が同時に生じる。ここに「PEEPを上げれば良い／下げれば良い」という単純な答えが存在しない理由がある。 覚えておく用語は次のとおり。<strong>駆動圧 ΔP</strong>＝プラトー圧 − 総PEEP。呼吸器系コンプライアンス Crs ＝ VT／ΔP なので、VTを固定すればΔPの最小化とコンプライアンスの最大化は同じことを指す。<strong>経肺圧 PL</strong>＝気道内圧 Paw − 胸腔内圧 Ppl で、肺そのものにかかっている圧。胸腔内圧は食道内圧 Poes で代用する。<strong>pendelluft</strong> は、時定数の違う領域どうしで肺内のガスが行き来する現象で、局所の過膨張・周期的虚脱・不均一性を増やして肺傷害を悪化させうる。適切なPEEPは局所メカニクスを均一化してpendelluftを減らすが、不足でも過剰でも悪化させる。 歴史的な出発点は Suter ら（NEJM 1975）の「best PEEP」概念で、コンプライアンスが最大になる圧を最適とする考え方。この50年、方法は増えたが問いは変わっていない。</p>
+</div>
+<h3>2. 背景と目的</h3>
+<p>高PEEP vs 低PEEPを比較した3つの大規模RCTの結果が、この総説の出発点になっている。</p>
+<div class="tw"><table>
+<thead><tr><th>試験</th><th>戦略</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>ALVEOLI（Brower NEJM 2004）</td><td>肺保護的VT下で高PEEP vs 低PEEP</td><td>酸素化は改善したが死亡は減らない</td></tr>
+<tr><td>LOVS（Meade JAMA 2008）</td><td>リクルートメント手技＋高PEEPのopen-lung戦略</td><td>酸素化改善・低酸素血症減少、生存利益なし</td></tr>
+<tr><td>EXPRESS（Mercat JAMA 2008）</td><td>プラトー圧28〜30 cmH2Oを目標にPEEPを個別化</td><td>肺メカニクス・酸素化は改善、死亡は不変</td></tr>
+</tbody></table></div>
+<p>著者らの読み方は「高PEEPの効果はリクルータビリティに依存する。だから固定的な高PEEP／低PEEP戦略ではなく個別化滴定が要る」というもの。メタ解析（Santa Cruz ら Cochrane 2021、Briel ら JAMA 2010）では、肺保護換気と組み合わせた高PEEP戦略が中等症〜重症ARDSの死亡を改善し、リクルータビリティが高い患者では生存改善と救済療法の必要性低下が示される一方、軽症ARDSでは利益がないとされる。</p>
+<p>PEEP滴定の目標は「肺胞を安定化させ、酸素化を改善し、VILIを最小化する圧を見つけること」。ARDSの不均一性がこれを難しくしている。</p>
+<p>歴史的には酸素化（PaO2/FIO2）の改善を指標に段階的にPEEPを上げてきた。しかし酸素化は肺メカニクスの不完全な代替指標であり、PEEPがガス交換を改善しながら同時にリクルート不能な領域を過膨張させ、VILIリスクを上げていることがありうる。この限界への対応として、コンプライアンス・ΔP・経肺圧といった生理指標と、CT・EIT・LUSといった画像が登場した。</p>
+<p><strong>本総説の目的</strong>は、これらの手法を生理学的基盤・臨床応用・VILI最小化の観点から批判的に評価すること。</p>
+<h3>3. 方法（Methods）</h3>
+<ul><li><strong>デザイン</strong>：ナラティブレビュー。系統的レビューではない。</li><li><strong>対象文献</strong>：71編を引用。検索データベース・検索期間・検索式・組み入れ／除外基準・エビデンスの質評価はいずれも記載がない。</li><li><strong>アウトカム</strong>：定量的統合（メタ解析）は行っていない。手法ごとの利点・限界の定性的整理と、統合アルゴリズムの提案が成果物。</li><li><strong>成果物</strong>：Table 1（7手法の利点・限界の対比表）、Figure 1（食道内圧ガイド滴定の解剖＋6ステップ手順）、Figure 2（生理＋画像統合アルゴリズム）。</li><li><strong>限界（構造上のもの）</strong>：推奨の強さは著者らの判断に依存し、閾値の多くに個別の出典が付いていない。</li></ul>
+<h3>4. 酸素化ベースのPEEP滴定</h3>
+<p>最も古く、最も広く使われている方法。PaO2 または PaO2/FIO2 の改善を指標にPEEPを段階的に調整する。</p>
+<p><strong>限界は4つに整理できる。</strong></p>
+<ol><li><strong>酸素化の改善は肺メカニクスの改善・肺保護を意味しない</strong>。不均一なARDSでは、もともと十分に含気していた領域でのリクルートによって酸素化だけが良く見え、重度に障害された領域は虚脱したまま残ることがある。</li><li><strong>過剰なPEEPは過膨張と換気血流不均衡を起こす</strong>。この場合もガス交換は見かけ上改善しうるが、メカニクス上の利益はない。</li><li><strong>PaO2の変化は肺胞リクルートメント以外の要因でも動く</strong>。肺内シャントと心拍出量の影響が大きい。心拍出量が増えると、換気されているが灌流が乏しかった肺胞の灌流が改善してシャントが減り、換気血流比が上がる。これは構造的なリクルートメントではなく血流の再分布にすぎないが、見かけ上PaO2/FIO2は上がる。逆に高PEEPは虚脱肺胞の再開通でシャントを減らす一方、心拍出量を下げて全身への酸素供給を損ないうる。PEEP・血行動態・酸素化は絡み合っている。</li><li><strong>固定のPEEP/FIO2表は個体差を吸収できない</strong>。低いPEEPでリクルートできる患者もいれば高い圧を要する患者もおり、一律のプロトコルは過少リクルートか過膨張のどちらかを生む。</li></ol>
+<p>対応策として、酸素化ガイドの滴定にコンプライアンス・プラトー圧・ΔPを組み合わせることが推奨される。ガス交換が満足できる水準に達した後、プラトー圧や推定経肺圧を使って肺のストレス・ストレインを最小化する方向にPEEPをさらに調整する、という二段構えである。</p>
+<h4>R/I比（recruitment-to-inflation ratio）— ベッドサイドでリクルータビリティを測る</h4>
+<p>標準的な人工呼吸器のデータだけで、どれだけの肺が高PEEPで再開通しうるかを推定する方法。</p>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>何をするか</th><th>何を読むか</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>PEEPを15→5 cmH2Oへ単一ステップで下げる</td><td>標準化された single-breath release manoeuvre</td></tr>
+<tr><td>2</td><td>呼気量を測る</td><td>新しい平衡（低PEEP）に達するまでに吐き出された量＝高PEEPが保持していた肺容量＝リクルート量</td></tr>
+<tr><td>3</td><td>低PEEP側でΔPを測る</td><td>脱リクルートによって加わった弾性負荷の増加分</td></tr>
+<tr><td>4</td><td>R/I比を計算する</td><td>リクルート量 ÷ 低PEEPでの一回換気による inflation volume</td></tr>
+</tbody></table></div>
+<p>ΔPの読み方が要点になる。<strong>ΔPが大きく増えたなら多くの肺単位が虚脱したことを意味し、ほとんど変わらないならメカニクスが保たれていて含気の喪失が限定的だったことを意味する。</strong></p>
+<p>R/I比の解釈について、本総説は明確に立場を取っている。<mark class="hl">二値の分類器ではなく連続量として読むべき</mark>である。低い値はリクルートの余地が乏しく高PEEPでの過膨張リスクが大きいことを、中〜高の値はリクルートによる利益の可能性が大きいことを示す。連続量として扱うほうが、患者間にリクルータビリティのスペクトラムが存在するという実データに合う。標準的な人工呼吸器の測定値だけで完結するため、簡便・再現性がある・非侵襲という利点がある。</p>
+<h4>さらに簡便な方法 — 挿管直後の1ステップ試験</h4>
+<p>臨床的視点としてもう一つ、Heunks らの方法が紹介されている。<strong>挿管後できるだけ早く、PEEPを約5から15 cmH2Oへ1ステップで上げ、コンプライアンス・酸素化・CO2の変化を観察する。</strong></p>
+<div class="tw"><table>
+<thead><tr><th>反応</th><th>解釈</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>コンプライアンスと酸素化が改善し、CO2が悪化しない</td><td>中〜高リクルータビリティ</td><td>高PEEPの利益を安全に受けられる可能性が高い</td></tr>
+<tr><td>上記の反応が乏しい（non-responder）</td><td>低リクルータビリティ</td><td>過膨張と有害事象のリスク。高PEEPを続けない</td></tr>
+</tbody></table></div>
+<h3>5. コンプライアンス／駆動圧ベースのPEEP滴定</h3>
+<p><strong>基本原理</strong>：VTを一定に保ったまま、呼吸器系コンプライアンス（Crs）が最大になる、言い換えればΔPが最小になるPEEPを探す。Crs ＝ VT／ΔP、ΔP ＝ プラトー圧 − 総PEEP。</p>
+<p>リクルート可能な肺では、同じVTのままPEEPを段階的に上げていくと虚脱肺胞が再開通してCrsが上がりΔPが下がる。これはリクルートが完了するまで続く。その点を超えてさらにPEEPを上げると、すでに開いている肺単位が過膨張してコンプライアンスは下がりΔPは上がる。<strong>この折り返し点、つまりVT一定条件で最も高いコンプライアンス／最も低いΔPを与えるPEEPが生理学的に「最適」</strong>とされる。最大のリクルートを最小の動的ストレインで得ている状態だからである。</p>
+<p>実際の手順は、PEEPを小刻みに変えながらコンプライアンス・ΔP・ガス交換を監視し、<strong>コンプライアンスが上がらなくなる、あるいはΔPが上がり始めたら、その1つ手前のPEEPを採用する</strong>というもの。固定のPEEP/FIO2表と違い、個体差にも時間経過にも適応する。ARDSが進展するとリクルータビリティは変わるため、再評価が必要になる。この方法は酸素化改善・生理学的死腔の減少・VILIリスク低下と関連づけられている。</p>
+<p><strong>なぜΔPなのか（機序）</strong>：ΔPは baby lung にかかる周期的ストレスを反映し、ARDSにおける生存の強い予測因子として確立している。生理学的根拠は肺のストレス−ストレイン関係にある。ストレスは肺組織にかかる圧、ストレインは機能的残気量ないし呼気終末肺容量に対する容量変化の比。ΔPが高いとストレスもストレインも増え、肺胞過膨張・圧外傷・周期的な虚脱と再開通を通じてVILIを招く。<strong>ΔPを1 cmH2O下げるごとに死亡が下がることが示されており</strong>、ΔPの低下は換気の均一化と局所的な機械的傷害の抑制につながる。</p>
+<p>臨床上、ΔPを下げる手段はVTを減らすかPEEPを調整するかの2つ。肺保護換気ではVTは予測体重あたり約6 mL/kgに固定されるため、<strong>PEEPが実質的に唯一の変数になる</strong>。最適PEEPは、酸素化と血行動態を損なわない範囲で最もΔPが低くなる水準と定義される。ΔPの最小化は胸腔内圧を下げることで静脈還流を保ち心拍出量を支える、という循環面の利益も期待される。</p>
+<p><strong>限界（JCで押さえるべき点）</strong></p>
+<ul><li>自発呼吸努力・体動・鎮静深度の変動で測定値が揺れる。</li><li>正確なΔP測定には吸気終末ポーズと呼気終末ポーズの両方、そして自発努力がないことが必要。</li><li>コンプライアンスもΔPも<strong>全体指標</strong>であり、局所の不均一性を分解できない。一部が虚脱したまま、別の一部が過膨張していても、数字は一つしか出ない。</li><li>胸壁メカニクスが異常な患者や胸腔内圧が高い患者では、ΔPが経肺圧を適切に反映しないことがある。この場合は食道内圧測定のほうが正確。</li><li><mark class="hl">PEEPを下げた後にΔPが下がった場合、それはメカニクスの改善ではなく tidal recruitment（一回換気ごとのリクルート）の結果かもしれない。低いΔPが常により安全な換気を意味するわけではない。</mark></li></ul>
+<p>EITのような局所モニタリングと組み合わせると、換気の均一性を確認しながら局所ストレスを抑えるPEEP選択ができる、というのが著者らの提案である。</p>
+<h3>6. 食道内圧ガイドのPEEP滴定</h3>
+<p>遠位食道に留置したバルーンカテーテルで食道内圧（Poes）を測り、胸腔内圧（Ppl）の代用とする。経肺圧 PL ＝ 気道内圧 Paw − Ppl。胸腹部メカニクスが障害された患者、すなわち腹腔内圧上昇や著明な体液過剰がある患者で特に価値が高い。こうした症例では気道内圧だけを見ても真の肺ストレスは分からない。</p>
+<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.bja.2025.12.048" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.bja.2025.12.048）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 1. 食道内圧ガイドPEEP滴定の解剖学的基盤と臨床ワークフロー。左（a）は上半身の線画で、鼻から食道バルーン付きカテーテルが挿入され、先端側のバルーンが胃の手前の遠位食道に位置する様子を示す。引き出し線でカテーテル・食道・気管（気道内圧 Paw）・肺・食道バルーン（食道内圧 Poes）・胃がラベルされ、肺の脇に「PL ＝ Paw − Poes（経肺圧）」の式が置かれている。図の下部、青いボックスに滴定目標が2行で示される（呼気終末経肺圧 PLexp ＝ 0〜2 cmH2O、吸気終末経肺圧 PLins &lt; 20 cmH2O）。右（b）は6つの青いボックスを上から下へ矢印でつないだ手順で、1 食道バルーンを挿入する、2 位置を確認しPoesを較正する、3 呼気終末でPawとPoesを測定する、4 PL ＝ Paw − Poes を計算する、5 PLexp が 0〜2 cmH2O になるようPEEPを調整する、6 PLins が 20 cmH2O 未満に保たれていることを確認する、の順に並ぶ。原図・無改変。</p>
+</div>
+<p><strong>肥満患者についての重要な生理的注意</strong>：肥満患者は胸腔内圧が高く機能的残気量が低いが、<strong>一回換気量の範囲での胸壁コンプライアンスは変わっていないことが多い</strong>。過剰な胸腹部の質量は、胸壁の弾性そのものを変えるのではなく、ベースラインの胸腔内圧を押し上げているからである。肺保護換気で用いるVTの範囲では胸壁の圧−容量関係はほぼ直線のまま保たれる。したがって肥満で測定Crsが下がるのは、胸壁が硬くなったからではなく、肺容量が減っていることと、呼気終末に虚脱する肺単位を再開通させるための余分な圧が必要になることによる。Poesを測ることで、肺由来の成分と胸壁由来の成分を分離できる。</p>
+<p><strong>目標値</strong>：呼気終末経肺圧 PLexp を 0〜5 cmH2O に保って肺胞虚脱を防ぎ、吸気終末経肺圧 PLinsp は 20 cmH2O 未満に保って過膨張を避ける。近年のデータでは PLexp 0〜2 cmH2O というより狭い目標のほうが適切である可能性が示されている。また、直接測定した Poes よりも、エラスタンス比を用いて算出した PLinsp のほうが信頼できる推定になりうる。これらの閾値はコンプライアンス・体格・重症度によってさらに個別化しうる。</p>
+<p><strong>この方法でしか見えないもの</strong>：胸壁が硬い（胸腔内圧が高い）ために、プラトー圧が低く見えて「安全な換気」に見えるのに、実際には経肺圧が低すぎて多くの肺単位が虚脱したままである、という状況がありうる。Poesモニタリングはこの状況を検出し、経肺圧を陽性にしてリクルートを維持するために高いPEEPが必要であることを示してくれる。</p>
+<p><strong>臨床試験</strong>：EPVent と EPVent-2 は経肺圧ガイド戦略を経験的高PEEPと比較し、酸素化とコンプライアンスの改善を示し、中等症〜重症ARDSでの死亡改善の可能性を示唆した、と本総説は記述している（この記述の読み方は §11 参照）。</p>
+<p><strong>限界</strong></p>
+<ul><li>バルーンの正しい留置・較正・信号品質の継続的な検証が必要。</li><li>位置異常、バルーンの過少／過剰充填、咳嗽・嚥下・体動などで測定誤差が生じ、不適切なPEEP設定につながる。</li><li>したがって指導と経験が必須。</li><li>胸腹部コンプライアンスが比較的保たれている患者では有用性が限定的。</li><li>機器コスト・入手性・訓練された人員が障壁で、資源の限られた環境では実装が難しい。</li><li>コンプライアンス監視やΔP最小化と併用したときに最も有効。コンプライアンスは全体、Poesは局所の胸腔内圧という補完関係にある。EITと組み合わせれば局所換気・リクルート・過膨張をリアルタイムに可視化できる。</li></ul>
+<h4>Table 1. PEEP滴定手法のまとめ（原表の日本語化）</h4>
+<div class="tw"><table>
+<thead><tr><th>手法</th><th>主な利点</th><th>主な限界</th></tr></thead>
+<tbody>
+<tr><td>酸素化ベース</td><td>簡便で広く利用可能。重度低酸素血症の初期管理に有用</td><td>肺メカニクスとの相関が乏しい。リクルート不能領域の過膨張を招きうる</td></tr>
+<tr><td>コンプライアンスベース</td><td>個別化され生理学的根拠がある。動的な肺メカニクスの変化に適応する</td><td>自発呼吸の影響を受ける。局所ではなく全体のメカニクスを反映する</td></tr>
+<tr><td>駆動圧ベース</td><td>生存と強く関連。肺のストレスとストレインを標的にする</td><td>正確なプラトー圧が必要。局所の過膨張や虚脱を検出できない</td></tr>
+<tr><td>食道内圧ガイド</td><td>胸壁メカニクスを考慮できる。経肺圧を標的にでき、滴定の精度が上がる</td><td>技術的に難しく侵襲的。機器と訓練された人員が必要</td></tr>
+<tr><td>胸部CT</td><td>肺形態とリクルータビリティ評価のゴールドスタンダード。高分解能の解剖学的情報</td><td>放射線被曝。搬送に伴う物流上・安全上の制約でベッドサイド性に乏しい</td></tr>
+<tr><td>EIT</td><td>リアルタイム・ベッドサイドで局所の換気とリクルートを監視できる</td><td>空間分解能が限られる。肥満・浮腫で精度低下。解釈に専門性を要する</td></tr>
+<tr><td>肺エコー</td><td>ベッドサイド・反復可能・被曝なし。含気低下・虚脱・リクルートを検出できる</td><td>術者依存。深部肺領域の評価が限られる</td></tr>
+</tbody></table></div>
+<h3>7. 画像による補助 — リクルートメント評価の道具</h3>
+<p>ARDSの不均一性ゆえに、局所の肺メカニクスとリクルート可能性を評価する道具が要る。CT・EIT・LUSは含気とリクルータビリティについて詳細な情報を与える。胸部X線は限定的な情報しか与えず、資源制約下での経時的モニタリングに使い道が限られる。</p>
+<h4>7-1. 胸部CT</h4>
+<p>肺形態とリクルータビリティ評価の基準（reference standard）。高分解能・三次元の可視化が得られる。</p>
+<p>定量CTによりリクルート可能な肺容量を推定できる。<strong>non-focal ARDS（びまん性）はリクルータビリティが高く高PEEPの利益を受けやすい。focal ARDS（限局性）はリクルートしにくく、保存的な換気戦略のほうが反応が良い。</strong> PEEP 5 cmH2O において、non-focal ARDS は focal ARDS よりΔPもCrsも高い。non-focal ARDS では、肺実質がリクルート可能であればPEEPを15 cmH2Oまで上げるとΔPとエラスタンスの両方が有意に下がる。focal ARDS ではこの改善は見られない。</p>
+<p>限界は、重症患者の搬送リスク、反復撮影による被曝、定量解析の処理に時間がかかること。これらのために定量CTの使用は主に研究に限られる。ただし<strong>半定量的・視覚的なCT評価は実用的</strong>で、肺領域を well-aerated／poorly aerated／consolidated に分類することでベッドサイドの判断に役立つ。</p>
+<h4>7-2. 胸部X線</h4>
+<p>可搬性とアクセス性は残るが、PEEP滴定には大きな限界がある。空間分解能が低く二次元投影であるため、無気肺・胸水・浸潤影の鑑別が困難で、局所のリクルートや過膨張は評価できない。PEEPを変えたときの含気の微細な変化は多くの場合検出できず、X線濃度はリクルート評価に対する感度も特異度も欠く。連続撮影で得られるのは静的で間接的な情報にとどまり、体位・撮影条件・観察者間変動の影響を受ける。<strong>現在の実践では、その用途は個別化PEEP滴定の指針ではなく、肺葉性無気肺・気胸・胸水といった合併症の同定に限定すべき</strong>である。</p>
+<h4>7-3. EIT（電気インピーダンス・トモグラフィ）</h4>
+<p>非侵襲・被曝なしで、換気分布をリアルタイムにベッドサイドで評価できる。胸郭周囲に配置した電極がインピーダンス変化を検出し、それが局所の含気の変化に対応する。静的な画像モダリティと違い、<strong>PEEPがリクルートと過膨張に及ぼす影響を呼吸ごとに追える</strong>。</p>
+<p><strong>GI指数（global inhomogeneity index）</strong>は、ピクセルレベルのインピーダンス変化を全体の変化と比較することで換気分布を定量する。GIが高い＝換気が不均一で、しばしば局所の虚脱か過膨張が原因。GIを最小化するように人工呼吸器設定を調整すると換気は均一化しうるが、<mark class="hl">リクルータビリティが低い患者でGI最小化を追うと気道内圧が上がり、かえってVILIを悪化させうる</mark>。</p>
+<p>臨床データ：EITガイドのPEEP滴定は従来法と比べて酸素化・コンプライアンス・離脱成功を改善する。死亡に対する利益は未証明だが、ΔPとメカニカルパワーの低下は観察されている。中等症〜重症ARDSではEITガイドPEEPが生存改善と弾性動的パワーの低下に関連したという報告がある。最近の前向き研究でも、従来法と比べて局所のリクルートを高め過膨張を減らすことが確認された。</p>
+<p>限界は、<strong>解釈プロトコルが標準化されていないこと</strong>と、胸壁の厚みや浮腫によって信号の到達が制限されること。それでも安全性・ベッドサイド性・連続的な局所情報という利点から採用は広がっている。</p>
+<h4>7-4. 肺エコー（LUS）</h4>
+<p>被曝なしでリアルタイムに撮像でき、反復評価が可能。同時に心エコーで右室機能を評価してPEEPの血行動態への影響を監視できるという利点もある。</p>
+<p><strong>所見の読み方</strong>：A-lineは正常含気、B-lineは間質ないし肺胞の液体貯留、consolidation は組織様パターン（しばしば air bronchogram を伴う）として現れる。胸水は横隔膜上の無〜低エコー領域として見える。</p>
+<p><strong>PEEP滴定への使い方</strong>：複数の胸部領域をPEEP変更の前後でスキャンし、高い圧で再含気する虚脱領域と、過膨張のリスクがある領域を同定する。<strong>リクルートは典型的には、癒合したB-lineや consolidation が正常ないし部分的含気のパターンへ変換されることで示される。</strong> あらかじめ決めた肺区域ごとに含気を定量するスコアリングシステムが複数あり、リクルートメント手技や段階的PEEP変更の効果を追える。LUS所見はCTによる含気評価とよく相関し、CTが実施できない環境での実用的な代替となる。</p>
+<p>限界は術者依存性、深部肺領域の評価の制限、肥満・浮腫での精度低下。病的パターンと正常変異・アーチファクトを区別するには専用の訓練が必要。それでもCTやEITへのアクセスが限られる場合、あるいは迅速で反復的な撮像が必要な場合に特に価値がある。コンプライアンスやΔPといった生理指標と組み合わせることで、リクルートを最適化しつつ過膨張を最小化する滴定ができる。</p>
+<h3>8. 各モダリティの比較と統合アプローチ</h3>
+<p>3つの画像モダリティは互いに補完的である。</p>
+<div class="tw"><table>
+<thead><tr><th>モダリティ</th><th>得意なこと</th><th>最適な使いどころ</th></tr></thead>
+<tbody>
+<tr><td>胸部CT</td><td>精密な形態学的・容積的解析</td><td>ベースラインのフェノタイプ分類と早期のリクルートメント評価</td></tr>
+<tr><td>EIT</td><td>換気分布の動的・リアルタイム監視</td><td>換気戦略の連続的評価</td></tr>
+<tr><td>肺エコー</td><td>可搬・被曝なしのベッドサイド含気評価。アーチファクトと半定量スコアでリクルートと過膨張を動的に評価</td><td>経時的な反復評価、資源の限られた環境</td></tr>
+</tbody></table></div>
+<p>選択は患者の安定性・利用可能な資源・臨床目的で決まる。実践的には多モダリティの組み合わせが有利で、たとえば<strong>初回のCTで肺形態を把握して早期の換気戦略を決め、その後はEITで連続的にPEEP滴定への反応を追う</strong>という使い方になる。</p>
+<p>統合の根拠として挙げられているデータは次のとおり。ヘリウム希釈法（EELV・メカニクス）とEITを併用し、過膨張と虚脱の両方が最小になるようPEEPを設定すると、膨張の均一性とリクルートが改善する。EITガイドPEEPのRCTでは、従来法と比べて酸素化・コンプライアンスの優越、ΔPの低下、臓器機能の改善が報告されている。CT研究は肺形態とリクルータビリティをメカニクス上の反応に結びつけている。低資源の画像手段であってもメカニクスと組み合わせれば個別化滴定は可能。画像由来のリクルータビリティ指標をベッドサイドの機械的指標に対応づけられることも示されている。</p>
+<h3>9. 統合アルゴリズム — 研修医に渡せる段階的手順</h3>
+<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。<a href="https://doi.org/10.1016/j.bja.2025.12.048" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.bja.2025.12.048）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<div class="call note"><span class="lab">図の解説</span>
+<p>Figure 2. 生理学的指標と画像を統合した個別化PEEP滴定のアルゴリズム。上から下へ4つの青い長方形が矢印でつながり、その途中に青い菱形の判断ノードが入る。最上段は「リクルータビリティの評価」（R/I比、PaO2/FIO2、CT・EIT・LUS、血行動態）。次が「PEEP滴定手法の選択」（酸素化、コンプライアンス・駆動圧、食道内圧＝経肺圧、画像ガイド）。次が「PEEPの適用と反応の監視」（酸素化、呼吸メカニクス、血行動態）。その下の菱形が「安全性の評価」（駆動圧、過膨張、血行動態）で、菱形の右側に安全閾値が3項目（駆動圧 15 cmH2O以下、吸気側経肺圧 20 cmH2O未満、血行動態の安定）が並記される。菱形から左向きに「No」の矢印が伸び、左側のボックス「安全閾値を満たさない場合：PEEPを下げる・一回換気量を調整する・またはその両方／輸液や昇圧薬で血行動態を最適化する／リクルータビリティと安全閾値を再評価する」に至る。菱形から下向きに「Yes」の矢印が伸び、最下段のボックス「安全閾値をすべて満たす場合：EIT・LUS・CT・駆動圧でリクルートと過膨張のバランスを取る／肺保護戦略を維持する／必要に応じて微調整する」に至る。原図・無改変。</p>
+</div>
+<p>このフローを表に起こすと次のようになる。研修医への説明はこの順で行う。</p>
+<div class="tw"><table>
+<thead><tr><th>ステップ</th><th>状況</th><th>確認すること</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>ARDSと診断し人工呼吸を開始した</td><td>リクルータビリティ（R/I比、PaO2/FIO2、CT・EIT・LUSのいずれか）と血行動態</td><td>リクルートの余地があるかを先に判定する。ここを飛ばして数値目標に入らない</td></tr>
+<tr><td>2</td><td>リクルータビリティが分かった</td><td>使える道具は何か（人工呼吸器のみ／食道バルーン／EIT／エコー）</td><td>滴定手法を選ぶ。酸素化、コンプライアンス・ΔP、経肺圧、画像ガイドのいずれか</td></tr>
+<tr><td>3</td><td>PEEPを設定した</td><td>酸素化、呼吸メカニクス、血行動態</td><td>反応を監視する。3つとも見る（酸素化だけを見ない）</td></tr>
+<tr><td>4</td><td>反応が出そろった</td><td>ΔP ≤15 cmH2O か。吸気側経肺圧 &lt;20 cmH2O か。血行動態は安定か</td><td>安全性を評価する。この3項目が判定基準</td></tr>
+<tr><td>5a</td><td>安全閾値を満たさない</td><td>どの閾値が破れているか</td><td>PEEPを下げる／VTを調整する／その両方。輸液・昇圧薬で循環を整える。そのうえでステップ1へ戻り再評価する</td></tr>
+<tr><td>5b</td><td>安全閾値をすべて満たす</td><td>局所のリクルートと過膨張のバランス（EIT・LUS・CT・ΔP）</td><td>肺保護戦略を維持し、必要に応じて微調整する。ARDSの経過に応じて再評価する</td></tr>
+</tbody></table></div>
+<p>要点は、<strong>リクルートの追求より安全閾値が優先される</strong>という順序である。酸素化が改善していても閾値を割っていれば戻る。逆に閾値を満たしていれば、そこから先はリクルートと過膨張のバランスを画像とΔPで詰めていく。</p>
+<h3>10. 結論（著者らの言葉）</h3>
+<p>有効なPEEP滴定はARDSにおける肺保護換気の要であり、肺胞の安定性を保ちながら過膨張とVILIを最小化することを目指す。酸素化ベースの方法は簡便さとアクセス性から広く使われ続けているが、肺メカニクスの複雑さを捉えられないことが多い。コンプライアンスガイド、ΔP最小化、食道内圧モニタリングといった生理学的により洗練された方法は個別化の度合いが高いが、技術的な課題とモニタリング要件に制約される。CTとEITを含む放射線学的手法は肺リクルートについて視覚的な洞察を与え、より精緻な換気調整をしばしば可能にする。<strong>生理学的測定・画像・連続モニタリングを統合する多モダリティのアプローチが、PEEPの個別化にとって最も有望</strong>である。ベッドサイド技術と臨床研究の進歩が、個別化PEEP滴定の実行可能性と有効性をさらに高めるだろう。</p>
+<h3>11. 批判的吟味（JCでの論点）</h3>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>この総説を読むときに引いて見るべき点 <mark class="hl">安全閾値「ΔP ≤15 cmH2O」は Figure 2 にのみ登場し、本文中に定義も出典も置かれていない。</mark> ΔPと死亡の連続的な関係（1 cmH2Oごとの改善）を本文で説明しておきながら、図では二値の閾値に切り替わっており、この15という数字がどこから来たのかは読者には辿れない。JCで「なぜ15なのか」と問われたら、本総説だけでは答えられない。</p>
+</div>
+<ol><li><strong>EPVent と EPVent-2 の扱いが甘い</strong>。本文は「EPVent と EPVent-2 は経験的高PEEPと比較して酸素化とコンプライアンスを改善し、中等症〜重症ARDSで死亡改善の可能性を示唆した」と書く。しかし EPVent-2 の主要報告（Beitler JAMA 2019）は参考文献リストに含まれておらず、収載されているのは risk-based かつ機序に基づく再解析（Sarge AJRCCM 2021、ref 42）と、原 EPVent（Talmor NEJM 2008、ref 27）である。EPVent-2 本体は主要評価項目で差を示していない。<mark class="hl">「死亡改善の可能性」は再解析に基づく主張であり、一次アウトカムの結果ではない。</mark> この区別が本文からは読み取れない。</li><li><strong>メタ解析の記述が本文内で振れている</strong>。3大RCTを「生存利益なし」と説明した直後に「メタ解析は一貫して高PEEP戦略が中等症〜重症ARDSの死亡を改善することを示す」と続く。後者は Briel 2010 のサブグループ解析に基づくもので、確証的な検定ではない。強さの表現が段落間で揃っていない。</li><li><strong>ΔP最小化を推奨側に残していることの是非</strong>。本総説自身が「PEEPを下げた後のΔP低下は tidal recruitment に由来しうるので、低いΔPが常に安全とは限らない」と書いている。この限界は <span class="wl">ARDS60年でPEEPとリクルートメントはこう変わった — まずリクルータビリティ、次に肺ストレス内でのPEEP滴定（総説・ICM2026）</span> では「コンプライアンス／ΔPの反応でPEEPを決めるのはやめる」という結論にまで進む。同じ事実から結論の強さが分かれており、<mark class="hl">どちらの立場を取るかがJCの実質的な論点になる。</mark></li><li><strong>アルゴリズム自体が未検証</strong>。Figure 2 は前向きに検証されておらず、比較対照もない。どの手法を第一選択にするかの優先順位も示されず、「使える道具で選べ」という以上の指針がない。施設のリソースが結果を決めてしまう構造は残ったままである。</li><li><strong>リクルータビリティ評価の安全性に触れていない</strong>。PEEPを5→15 cmH2Oに1ステップで上げる方法も、15→5に落とすR/I比の測定も、循環抑制を起こしうる。Figure 2 では血行動態を評価項目に入れているが、<strong>手技そのものの中止基準は示されていない</strong>。血行動態が不安定な症例でこの評価をしてよいかの記述がない。</li><li><strong>経肺圧の目標値が本文と図で食い違って見える</strong>。本文は PLexp 0〜5 cmH2O を基本としつつ「近年のデータではより狭い 0〜2 が適切かもしれない」と留保付きで述べるが、Figure 1 は 0〜2 を確定した目標として提示する。図だけを見た読者は留保を受け取れない。</li><li><strong>編集上の瑕疵がある</strong>。CTの節の冒頭は「高分解能かつ三次元の可視化と、放射線被曝を提供する（providing high-resolution and three-dimensional visualisation, and radiation exposure）」となっており、利点の列挙に欠点が混入している。また肺エコーのアーチファクト解釈の根拠として引かれた ref 66 は、脳波（EEG）の正常変異とアーチファクトに関する論文（Epileptic Disorders 2023）であり、<mark class="hl">引用が対象領域と一致していない</mark>。</li><li><strong>扱われていない領域</strong>：腹臥位療法下でのPEEP設定、VV-ECMO併用時のPEEP、自発呼吸がある状況でのPEEP滴定、右室保護の観点。ref 69（Boesing CritCare 2024）で触れられるにとどまり、本文での議論はない。</li><li><strong>ナラティブレビューであることの限界</strong>：検索式・組み入れ基準・エビデンス格付けがない。7手法の並べ方や「有望」という評価は著者らの判断であり、体系的な重み付けではない。著者に EIT・経肺圧研究の当事者が含まれる点も踏まえて読む。</li></ol>
+<h3>12. 主要な引用文献一覧</h3>
+<div class="tw"><table>
+<thead><tr><th>内容</th><th>文献</th></tr></thead>
+<tbody>
+<tr><td>高PEEP vs 低PEEP（酸素化改善・死亡不変）</td><td>Brower RG, et al. ALVEOLI. N Engl J Med 2004;351:327-36（ref 2）</td></tr>
+<tr><td>open-lung戦略（RM＋高PEEP）</td><td>Meade MO, et al. LOVS. JAMA 2008;299:637-45（ref 5）</td></tr>
+<tr><td>プラトー圧28-30目標のPEEP個別化</td><td>Mercat A, et al. EXPRESS. JAMA 2008;299:646-55（ref 6）</td></tr>
+<tr><td>高PEEPのメタ解析（リクルータブル肺で生存改善）</td><td>Briel M, et al. JAMA 2010;303:865-73（ref 8）</td></tr>
+<tr><td>高PEEPのCochraneレビュー</td><td>Santa Cruz R, et al. Cochrane Database Syst Rev 2021;3:CD009098（ref 7）</td></tr>
+<tr><td>ART試験（高圧RM＋滴定PEEPで死亡増加）</td><td>ART Investigators. JAMA 2017;318:1335-45（ref 18）</td></tr>
+<tr><td>駆動圧と生存</td><td>Amato MB, et al. N Engl J Med 2015;372:747-55（ref 32）</td></tr>
+<tr><td>肺保護換気の原典</td><td>Amato MB, et al. N Engl J Med 1998;338:347-54（ref 33）</td></tr>
+<tr><td>best PEEP＝コンプライアンス最大</td><td>Suter PM, et al. N Engl J Med 1975;292:284-9（ref 30）</td></tr>
+<tr><td>R/I比の原典</td><td>Chen L, et al. Am J Respir Crit Care Med 2020;201:178-87（ref 28）</td></tr>
+<tr><td>挿管直後のPEEP 5→15 単一ステップ試験</td><td>Heunks L, Piquilloud L, Demoule A. Crit Care 2023;27:415（ref 29）</td></tr>
+<tr><td>食道内圧ガイド換気（EPVent）</td><td>Talmor D, et al. N Engl J Med 2008;359:2095-104（ref 27）</td></tr>
+<tr><td>EPVent-2 の risk-based 再解析</td><td>Sarge T, et al. Am J Respir Crit Care Med 2021;204:1153-63（ref 42）</td></tr>
+<tr><td>呼吸メカニクスの分割と転帰</td><td>Chen L, et al. Intensive Care Med 2022;48:888-98（ref 41）</td></tr>
+<tr><td>best PEEP探索の総説（Holy Grail）</td><td>Gattinoni L, Marini JJ. Intensive Care Med 2022;48:728-31（ref 20）</td></tr>
+<tr><td>リクルータビリティ評価はPEEP設定に役立つか</td><td>Gattinoni L, Collino F, Camporota L. Intensive Care Med 2024;50:749-51（ref 31）</td></tr>
+<tr><td>PEEP最適化の生理・ベッドサイド法</td><td>Battaglini D, Roca O, Ferrer R. Intensive Care Med 2024;50:762-5（ref 4）</td></tr>
+<tr><td>ヘリウム希釈＋EITでのPEEP評価</td><td>Mauri T, et al. Intensive Care Med 2016;42:1576-87（ref 37）</td></tr>
+<tr><td>EIT早期個別化PEEPのRCT</td><td>He H, et al. Crit Care 2021;25:230（ref 53）</td></tr>
+<tr><td>EIT＋PV曲線PEEP滴定（重症ARDS）</td><td>Zhao Z, et al. Ann Intensive Care 2019;9:7（ref 55）</td></tr>
+<tr><td>EITガイドPEEPでメカニカルパワー低下</td><td>Jimenez JV, et al. Crit Care 2023;27:21（ref 56）</td></tr>
+<tr><td>GI指数の原典</td><td>Zhao Z, et al. BMC Res Notes 2014;7:82（ref 50）</td></tr>
+<tr><td>GI指数はPEEP必要量を過大評価する</td><td>Heines SJH, et al. BMC Anesthesiol 2022;22:258（ref 52）</td></tr>
+<tr><td>肥満・非肥満での呼吸メカニクス</td><td>Beloncle FM, et al. Crit Care 2023;27:343（ref 38）</td></tr>
+<tr><td>BMI別の完全気道閉塞の頻度</td><td>Coudroy R, et al. Anesthesiology 2020;133:867-78（ref 39）</td></tr>
+<tr><td>重症度別のPEEPベッドサイド選択</td><td>Chiumello D, et al. Crit Care Med 2014;42:252-64（ref 12）</td></tr>
+<tr><td>駆動圧 vs 酸素化ベースPEEP滴定の生理学的比較</td><td>Coppola S, et al. Crit Care 2025;29:289（ref 17）</td></tr>
+<tr><td>EIT／呼吸メカニクスによる個別化PEEPとR/I比</td><td>Pavlovsky B, et al. Ann Intensive Care 2024;14:1（ref 16）</td></tr>
+<tr><td>CTからベッドサイドへのリクルートメント評価</td><td>Giovanazzi S, et al. Crit Care 2025;29:64（ref 64）</td></tr>
+<tr><td>腹臥位・ECMO併用時のPEEP管理</td><td>Boesing C, et al. Crit Care 2024;28:277（ref 69）</td></tr>
+</tbody></table></div>
+<h2>✅ Take home message</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論 ARDSのPEEPは「良い数字を探す」のではなく「<mark class="hl">危ない状態を除外しながら決める</mark>」。<mark class="hl">明日からの手順は、①挿管直後にPEEPを5→15 cmH2Oへ1ステップ上げ、コンプライアンス・酸素化・PaCO2の3つでリクルータビリティを判定する、②使える道具（ΔP／食道内圧／エコー）で滴定する、③ΔP ≤15 cmH2O・吸気終末経肺圧 &lt;20 cmH2O・血行動態安定の3つを満たすまで戻る、の3段階</mark>。<mark class="hl">酸素化の改善は成功の証拠にならない</mark>（心拍出量とシャント分布だけでもPaO2/FIO2は動く）。逆に、<mark class="hl">低いΔPも常に安全の証拠ではない</mark>（tidal recruitment が同じ見た目を作る）。7つの手法はどれも単独では足りず、<mark class="hl">リクルータビリティを先に測ることだけが全員に共通する出発点</mark>である。</p>
+</div>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
