@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>💧 敗血症の初期蘇生 Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">💧 敗血症の初期蘇生 Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 💧 敗血症の初期蘇生 Home</p>
+<p>敗血症・敗血症性ショックの最初の数時間から数日をどう設計するか。<strong>何を入れるか（晶質液かアルブミンか）・どれだけ入れるか・いつ輸液から昇圧薬へ切り替えるか・いつ引き算に移るか</strong>を扱う。関連25件。 血行動態の「測り方」は <span class="wl">🌊 輸液反応性と血行動態モニタリング Home</span>、薬剤選択は <span class="wl">📈 昇圧薬の選択と開始タイミング Home</span> に任せる。</p>
+<h2>📖 3分概観（ブログ版）</h2>
+<p>_最終更新: 2026-08-28 ／ このHomeが束ねる関連ノート: 26本_</p>
+<p>敗血症の初期蘇生は、この10年で「正解の量を探す」時代から「相（フェーズ）を管理する」時代に移りました。結論から言うと、現在地は4点です。①既定の晶質液はバランス製剤にする、②初期のボーラスは250〜500 mLに割って1回ごとに再評価する、③低血圧が続くなら輸液の上乗せではなく昇圧薬へ移る、④蘇生が終わったら「脱蘇生」の相へ意識的に切り替える。「たくさん入れるほど良い」も「絞るほど良い」も大規模RCTで否定され、残っているのは「入れすぎない」という運用上の要請だけです。</p>
+<h3>このテーマの流れ</h3>
+<p>出発点は「何を入れるか」でした。2018年のSMART・SALT-ED（NEJM）が生理食塩水とバランス晶質液を比較し、SMARTではMAKE30が15.4%→14.3%（NNT 94）、SALT-EDでは主要評価項目は陰性で、動いたのは副次のMAKE30だけ（4.7% vs 5.6%、調整OR 0.82）。差は小さいけれどコストも手間も同じ——だから「腎臓を守るために替えます」と説明するのではなく、<mark class="hl">既定値そのものをバランス製剤に入れ替える</mark>のが正しい運用です。生食が残る場面は頭蓋内圧亢進と致死的高K血症の2つだけです。</p>
+<p>次の転換点は「どれだけ入れるか」。2022年のCLASSIC（NEJM・1,554例）は、ICUでの輸液を中央値1,798 mL vs 3,811 mLまで絞っても90日死亡は42.3% vs 42.1%と全く動かないことを示し、1年追跡（ICM2023）でも生存・QOL・認知機能に差はありませんでした。一方で初期の30 mL/kgを支持するのは観察研究（CCM2019）のみで、2025年のESICMガイドラインPart 2は「初期に晶質液を最大30 mL/kgまで」を提案しつつ、確実性はvery lowと明示しています。</p>
+<p>アルブミンは2026年のメタ解析（7 RCT・3,273例）で、敗血症性ショックに限ればRR 0.90（95%CI 0.83–0.99）と死亡減少方向が出ました。ただし重みの約半分はALBIOSのpost hocサブグループで、GRADEは低。「効きそうだが、どれだけ効くかは不明」で止めるのが正確な読み方です。そして論点はいま「相の管理」へ移っています。ROSEモデル（蘇生・最適化・安定化・脱蘇生）を5ステップに落とした運用指針（2026）が出る一方、J-SSCG 2020の実装研究（DPC 21万例・CritCare2025）は、ガイドラインを出しても遵守率が3%ポイントも動かないことを示しました。推奨の中身より実装が課題、というのがこの領域のもう一つの現在地です。</p>
+<h3>結論が出ていること／いないこと</h3>
+<p><strong>決着済み</strong>：既定の晶質液はバランス製剤でよい（SMART・SALT-ED）。輸液を制限しても死亡は減らないが増えもしない（CLASSIC 90日・1年）。頭部外傷に低張液（乳酸リンゲルを含む）は入れない。</p>
+<p><strong>未決着</strong>：①30 mL/kgという初期量の是非（支持は観察研究のみ・GL推奨もvery low）、②アルブミンの適応と効果量（CI上限0.99・必要情報量の63%止まり）、③脱蘇生をいつ始めるか（死亡を減らしたRCTは存在しない）、④肝硬変合併例のアルブミン開始日と終了日（<mark class="hl">HRS-1に限れば2026年の総説が「血管収縮薬でMAPを上げている場面でアルブミンを漫然と足さない、POCUSで見れば最大2/3は正常〜過剰volemia、体液過剰なら利尿薬を足してよい」まで踏み込みました</mark>。ただしこれは肝硬変＋敗血症全体への答えではありません）。なお「30 mL/kg支持 vs CLASSIC」はVault内で割れて見えますが矛盾ではありません——CLASSICが制限したのは初期1L投与後のICUでの追加輸液で、救急外来の初期投与そのものではないからです。</p>
+<h3>✅ 3行まとめ</h3>
+<ul><li>既定はバランス晶質液。ボーラスは250〜500 mLに割り、「合計何mL」ではなく「次の250 mLに反応するか」で判断する</li><li>低血圧が続くなら追加の晶質液ではなく昇圧薬へ。アルブミンは第一選択にしない</li><li>輸液制限それ自体を目標にしない。目的は過剰投与の回避で、蘇生が終わったら脱蘇生の相をチームで言語化する</li></ul>
+<h3>❓ セルフチェック（想起用）</h3>
+<ol><li>CLASSIC試験の制限群・標準群のICU内輸液量（中央値）と90日死亡率はそれぞれいくつだったか？</li><li>生理食塩水をあえて選ぶ2つの場面は何か？また既定をバランス製剤にする根拠となる試験と主要な数字は？</li><li>ESICM 2025ガイドラインPart 2が提案する敗血症の初期輸液量と、そのエビデンスの確実性は？</li></ol>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>既定の晶質液はバランス製剤にする</strong>。生理食塩水は「頭蓋内圧亢進」と「致死的高K血症」の2場面に限定する（<span class="wl">バランスウォーター（晶質液の歴史とバランス輸液）</span>）。<mark class="hl">個々の患者に「腎臓を守るために替えます」と説明できるほどの差ではない</mark>ので、説明ではなく<strong>既定値の入れ替え</strong>として運用する（<span class="wl">晶質液はバランス製剤か生理食塩水か（SALT-ED・SMART・NEJM2018）</span>）。敗血症だけを取り出した2026年のメタ解析（7RCT・6,861例）は死亡 RR 0.92（95%CI 0.86–0.98、NNT 32）・AKI RR 0.86・高Cl血症 RR 0.68 とこの既定値を追認するが、<mark class="hl">死亡の有意性は固定効果モデルの選択に依存し、ランダム効果で再計算すると RR 0.91（0.82–1.01）で消える</mark>ため、ベッドサイドでは「生食は死亡を増やす」ではなく「Cl負荷を下げると高Cl血症とAKIは確実に減り、死亡も同方向だが未確定」と言う（<span class="wl">敗血症の輸液は緩衝晶質液が生食に勝る — 7RCT 6,861例で死亡RR 0.92・AKI RR 0.86、ただし有意性は固定効果モデルに依存（SR・メタ解析・FrontMed2026）</span>）</li><li><strong>ボーラスは250〜500 mLに割り、1回ごとに再評価する</strong>。「合計何mL入れたか」ではなく「次の250 mLに反応するか」で判断する（<span class="wl">敗血症性ショックの輸液制限と脱蘇生を5ステップで実行する — 救急外来から使うROSEモデル運用指針（レビュー・CurrEmergHospMedRep2026）</span>）</li><li><strong>低血圧が続くなら、追加の晶質液ではなく昇圧薬に移る</strong>。同じ総量でも「輸液で粘る」か「早く昇圧薬へ移る」かは別の判断</li><li><strong>輸液制限それ自体を目標にしない</strong>。制限しても90日死亡も1年後の生存・QOL・認知機能も変わらない（<span class="wl">敗血症性ショックの輸液制限は90日死亡を減らさない（CLASSIC・NEJM2022）</span>／<span class="wl">敗血症性ショックの輸液制限は1年後の生存・QOL・認知機能も変えない（CLASSIC 1年追跡・ICM2023）</span>）。<strong>絞る目的は転帰改善ではなく、過剰投与を避けること</strong></li><li><strong>アルブミンを第一選択の蘇生液にしない</strong>。敗血症性ショックに限れば死亡を10%減らす方向だが、効果量は全く定まっていない（<span class="wl">敗血症性ショックへのアルブミン蘇生は死亡を10%減らす（頻度論・ベイズ併用メタ解析 2026）</span>）。使うなら「晶質液で足りないとき」の位置づけにとどめる</li><li><strong>肝硬変・HRS-1 では「肝硬変＋AKIならまずアルブミン25 g×3」の反射をやめる</strong>。<mark class="hl">POCUSで見ると「HRS疑い」の最大2/3は正常〜過剰volemia</mark>で、血管収縮薬でMAPが上がっている場面にアルブミンを足す利益は示されていない（<span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span>）。<mark class="hl">体液過剰でMAPが上がって尿が出始めた例には、むしろフロセミドを上乗せしてよい</mark>（後ろ向き26例、尿量中央値 2072 mL/日、73%でCrの傾きが安定〜改善）</li><li><strong>頭部外傷には低張液（乳酸リンゲルを含む）を入れない</strong>。TBIで害だったのはアルブミンではなく低張性だった可能性が高い（<span class="wl">外傷性脳損傷におけるアルブミン使用の再評価 — 害はアルブミンではなく低張性か（JIntensiveCare2025）</span>）</li><li><strong>蘇生が終わったら「脱蘇生」の相に切り替える</strong>。ROSEの4相（蘇生・最適化・安定化・脱蘇生）を相ごとに言語化してチームで共有する</li><li><strong>AKI併発例で輸液を絞る運用は多施設で回せる</strong>。ただし<mark class="hl">絞れば転帰が良くなる証拠ではない</mark>（<span class="wl">REVERSE-AKI 制限的輸液管理の実現可能性RCT（ICM2021）</span>）</li></ul>
+</div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：初期晶質液はバランス製剤を既定にしてよい（SMART・SALT-ED）。輸液を制限しても死亡は減らないが増えもしない（CLASSIC 90日・1年）。したがって<strong>「入れるほど良い」も「絞るほど良い」も否定された</strong>。残るのは「入れすぎない」という運用上の要請だけ。</li><li><strong>まだ決着していないこと</strong>：①アルブミンの適応（敗血症性ショック限定でRR 0.90、ただし重みの約半分は ALBIOS の post hoc サブグループ1つ）、②30 mL/kg という初期量の是非（支持は観察研究のみ）、③脱蘇生をいつ始めるか（死亡を減らしたRCTは存在しない）、④肝硬変合併例でのアルブミンの開始日と終了日（<mark class="hl">HRS-1では「漫然と続けない・体液過剰なら利尿薬」まで来たが、開始日と終了日そのものの答えではない</mark>）。</li><li><strong>最近変わったこと</strong>：論点が「どれだけ入れるか」から <strong>「どの相にいるかをチームで共有できているか」</strong> に移った。ROSEモデルのような相分けの運用指針が出てきたが、<mark class="hl">これらは著者の提案であってガイドラインではない</mark>（推奨の格付けもエビデンスレベルも無い）。もう一つの変化は<strong>実装のエビデンス</strong>で、<span class="wl">J-SSCG 2020は診療をほとんど変えなかった — 26 CQの遵守率と施設間差（DPC 21万例・CritCare2025）</span> が「ガイドラインを出しても診療は変わらない」ことを21万例で示した。</li></ul>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>初期30 mL/kg は要るか</td><td><span class="wl">敗血症で30mL_kg輸液が不足すると予後悪化（CCM 2019）</span>（不足例で予後悪化）</td><td><span class="wl">敗血症性ショックの輸液制限は90日死亡を減らさない（CLASSIC・NEJM2022）</span>（制限しても死亡不変）</td><td><strong>矛盾ではない</strong>。CCM2019は観察研究で適応交絡を排除できず、CLASSICが制限したのは「ICU入室後の追加輸液」で初期30 mL/kg 自体ではない。救急外来の初期投与は現行どおり、ICU入室後の上乗せは再評価してから</td></tr>
+<tr><td>アルブミンを使うか</td><td><span class="wl">敗血症性ショックへのアルブミン蘇生は死亡を10%減らす（頻度論・ベイズ併用メタ解析 2026）</span>（RR 0.90・効く確率94.7%）</td><td><span class="wl">肝硬変＋敗血症性低血圧に20%アルブミンは血圧を速く戻すが肺合併症が増える — 生存は変わらず（ALPS RCT 100例・JHepatol2022）</span>（血圧は戻るが肺合併症増・生存不変）</td><td><strong>「効きそうだが量は不明」で止める</strong>。CI上限0.99、必要情報量の63%、GRADE低。第一選択にはせず、晶質液で足りない例に限る</td></tr>
+<tr><td>肝硬変合併敗血症のアルブミン</td><td><span class="wl">肝硬変合併敗血症のアルブミン投与は「いつ始めるか」で効果が変わる（MIMIC-IV 2265例・周辺構造モデル・CritCare2023）</span>（第1週のみ HR 0.72）</td><td>ALPS RCT（100例・生存不変）</td><td><strong>観察データへの因果推論であることを忘れない</strong>。「使うか」ではなく「今日がその日か・どこで止めるか」の問題として扱い、漫然と続けない。==2026年のHRS-1総説はさらに踏み込み、血管収縮薬＋アルブミンの根拠だった研究が非ランダム化・HRS-1が n=16 のみ・HRS-2混在という弱いものだったと指摘し、<strong>アルブミンで血清アルブミンを正常化させた試験ではむしろ肺水腫が増えた</strong>とする==（<span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span>）。ALPS の「肺合併症増」と同じ向き</td></tr>
+<tr><td>ガイドラインは診療を変えるか</td><td><span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span>（推奨を整備）</td><td><span class="wl">J-SSCG 2020は診療をほとんど変えなかった — 26 CQの遵守率と施設間差（DPC 21万例・CritCare2025）</span>（遵守率の変化は3%ポイント未満）</td><td><strong>推奨の内容より実装が課題</strong>。とくにICU入室（強い推奨）の遵守率が39〜41%で、施設間ICCが80%超＝<mark class="hl">患者ではなく施設で決まっている</mark>。当院で追うべきはこの指標</td></tr>
+</tbody></table></div>
+<h2>📌 まずこの8本</h2>
+<ol><li><span class="wl">敗血症性ショックの輸液制限は90日死亡を減らさない（CLASSIC・NEJM2022）</span> — この領域の基準点。「絞れば良くなる」を否定した</li><li><span class="wl">敗血症性ショックの輸液制限は1年後の生存・QOL・認知機能も変えない（CLASSIC 1年追跡・ICM2023）</span> — 長期でも決着しないことを示した</li><li><span class="wl">晶質液はバランス製剤か生理食塩水か（SALT-ED・SMART・NEJM2018）</span> — 既定の晶質液を決める根拠と、その差の小ささ</li><li><span class="wl">敗血症性ショックへのアルブミン蘇生は死亡を10%減らす（頻度論・ベイズ併用メタ解析 2026）</span> — 「効きそうだが量は不明」の読み方の見本</li><li><span class="wl">敗血症性ショックの輸液制限と脱蘇生を5ステップで実行する — 救急外来から使うROSEモデル運用指針（レビュー・CurrEmergHospMedRep2026）</span> — 相分けを運用に落とす枠組み</li><li><span class="wl">SSCG2021 敗血症診療ガイドライン（ICM2021）</span> — 推奨の現在地</li><li><span class="wl">J-SSCG 2020は診療をほとんど変えなかった — 26 CQの遵守率と施設間差（DPC 21万例・CritCare2025）</span> — <mark class="hl">院内で本当に効く介入は何かを考えるための1本</mark></li><li><span class="wl">敗血症でのアルブミンと酸塩基平衡 — Stewart法と伝統的緩衝塩基を統合する（ナラティブレビュー・JCM2026）</span> — 血ガスの読み違いを防ぐ</li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🌊 輸液反応性と血行動態モニタリング Home</span> — 「入れるか」を決める測り方（PLR・EEO・エコー）はこちら</li><li><span class="wl">📈 昇圧薬の選択と開始タイミング Home</span> — 輸液から昇圧薬へ切り替えたあとの薬剤選択</li><li><span class="wl">🚰 AKIと腎代替療法の開始時期 Home</span> — 輸液バランスと腎機能の関係</li><li><span class="wl">🧴 ステロイドをいつ使うか Home</span> — 難治性ショックの補助療法</li><li><span class="wl">📊 重症度スコアと予後予測 Home</span> — LAR・SOFA・SMRの扱い</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+</body>
+</html>
