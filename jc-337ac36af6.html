@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🫧 気道管理・挿管・麻酔 Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff;cursor:zoom-in}
+.jc figure.origfig img:hover{outline:2px solid var(--teal)}
+.jc img.flow{cursor:zoom-in}
+/* 図の拡大表示（クリックで原寸に近いサイズ・もう一度クリックか Esc で閉じる） */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,20,26,.88);display:none;
+  align-items:center;justify-content:center;overflow:auto;padding:24px;box-sizing:border-box}
+.lb.on{display:flex}
+.lb img{max-width:calc(100vw - 48px);max-height:calc(100vh - 48px);width:auto;height:auto;
+  background:#fff;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,.5);cursor:zoom-out;margin:auto}
+.lb.full{align-items:flex-start;justify-content:flex-start}
+.lb.full img{max-width:none;max-height:none;cursor:zoom-out}
+.lb .lbcap{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;text-align:center;
+  color:#dfe8ec;font-size:12.5px;background:linear-gradient(0deg,rgba(10,20,26,.9),transparent)}
+.lb .lbx{position:fixed;top:12px;right:16px;color:#fff;font-size:26px;line-height:1;cursor:pointer;
+  background:rgba(0,0,0,.35);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+@media print{.lb{display:none!important}}
+/* 📄 PDF ボタン（ページ右上）: ブラウザの印刷ダイアログを開き「PDF に保存」で手元に落とす。URL 末尾 #pdf で自動的に開く */
+.pdf-btn{position:fixed;top:14px;right:14px;z-index:20;font:inherit;font-size:12.5px;font-weight:700;color:#fff;
+  background:var(--teal);border:none;border-radius:20px;padding:7px 15px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pdf-btn:hover{background:var(--teal-ink)}
+.theme-toggle{right:112px}
+@media print{.pdf-btn{display:none!important}}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🫧 気道管理・挿管・麻酔 Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/jc-113a1ca7c8.html) ／ 下の枠でURLをワンクリックコピー</p>
+<pre><code>https://hiro-oka.github.io/jc-summaries/jc-113a1ca7c8.html</code></pre>
+<p># 🫧 気道管理・挿管・麻酔 Home</p>
+<p>ICUと救急、そして手術室を貫く<strong>気道管理と周術期管理</strong>の束。旧「🫧 気道管理と挿管 Home」と「💉 麻酔関連 Home」をこの1本に統合した。中心は気管挿管を<strong>手順として安全にする</strong>話（前酸素化・導入薬・デバイス・撤退基準・挿管後の循環・タイミング）で、そこに手術室と周術期という文脈（ACC/AHAガイドラインの周術期心血管管理、JIPADの本邦周術期転帰、COVID期の手術室運用、気道確保デバイスのRCT）を接続する。院内搬送・RRS現場・病院前・手術室・術後ICUまで、患者が気道と循環をどこで管理されていても同じ思想で読めるようにするのが狙い。関連112件。 抜管側は <span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span>、非侵襲呼吸補助の選択は <span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span>。</p>
+<h2>📖 3分概観（ブログ版）</h2>
+<p>_最終更新: 2026-09-11 ／ このHomeが束ねる関連ノート: 112本_</p>
+<p>重症患者の気管挿管でいちばん怖いのは、実は「入らないこと」ではありません。<strong>入れる過程で生理が崩れること</strong>です。ICUの緊急挿管では2例に1例、46%で挿管後15分以内に循環が破綻します。救急外来で挿管前30分ずっと血圧が正常だった患者でさえ、23%が挿管後にSBP 90を切り、その中央値は挿管後わずか11分です。一方で、初回成功率を押し上げる手立ては出そろっていて、前酸素化はNIV、筋弛緩薬は毎回、スタイレットはルーチン、ビデオ喉頭鏡は初回から、というところまでは大きな異論がありません。それでも導入薬の選択と挿管のタイミングだけは、いまだに決着していない——これがこのテーマの現在地です。だからこの領域の実務的な結論は、<mark class="hl">「どの薬・どの器具を選ぶか」ではなく「どの手順を全員で同じように回すか」</mark>に寄っています。</p>
+<h3>このテーマの流れ</h3>
+<p>もともと気道管理は麻酔科の世界で育った学問で、関心はずっと「解剖学的に入れにくい患者をどう当てるか」にありました。Mallampati分類、LEMON、上唇咬み試験——予測スコアが次々に作られた時代です。ところが検証してみると、挿管困難の既往のLR+は16〜19と高い一方、modified LEMONはPPVが9%しかなくNPVが98%。つまりこれらは「困難を当てる道具」ではなく<mark class="hl">「困難でないことを確認する道具」</mark>でした。困難は予測できても除外できない、という前提が共有されたのが第一の転換点です。</p>
+<p>第二の転換点は2010年前後、フランスのMontpellierグループが持ち込んだ「バンドル」でした。前・中・後の15項目を全例に回すだけで、生命を脅かす合併症が34%→21%に、外部検証では初回成功率が+16.2%動いた。器具ではなく手順が結果を変えることが示され、以後は個々のRCT（STYLETO、PrePARE、EvK、Lascarrou 2017）がこの土台の上に積まれていきます。この時期に「輸液ボーラスの前投与は効かない（500 mLでも循環虚脱20%対18%）」「輪状軟骨圧迫は63年経っても誤嚥低減の頑健なデータがない」といった、<mark class="hl">やらないことを決める知見</mark>も固まりました。</p>
+<p>そして2020年代、枠組みそのものが「解剖学的困難気道」から<strong>生理学的困難気道</strong>へ移ります。SAM（2021）とSOCCA国際デルファイ（2024）がコンセンサスを出し、チーム3名・チェックリスト・血行動態最適化・NIV前酸素化・頭部挙上30度・初回からビデオ喉頭鏡・挿管後の心肺管理という7点が手順書の骨格になりました。SCCMは2023年にRSIの診療ガイドラインを出しましたが、10のPICOで強い推奨に達したのは「鎮静薬を使うなら筋弛緩薬も使う」の1点だけ。前酸素化はデバイスではなく重症度で分け（P/F&lt;150ならNIPPV、喉頭鏡操作が難しそうならHFNO）、エトミデートを死亡や副腎抑制を理由に避ける必要はない、という整理になっています。</p>
+<p>第三の転換点は、同じ枠組みが<strong>病院の外へ、そして手術室へ</strong>広がったことです。2026年のICMナラティブレビューが、適応・タイミング・生理の最適化・手技・失敗時のエスカレーション・挿管後管理・NIV／HFNOを1本のアルゴリズムにまとめました。ここでも前面に出たのは器具ではなく手順で、「体位・血行動態・前酸素化の3つを整えてから喉頭鏡を持つ」が中心主張です。病院前の初回失敗率は23.2%（CURASMUR）、失敗すると合併症が19.6%から28.4%へ増え（OR 1.44）、初回成功率はシステムによって59%から95%超までばらつきます。<mark class="hl">同じ患者でも、どのチームがどの手順で当たるかで結果が変わる</mark>というこの領域の性格が、いちばん露骨に出るのが病院前です（<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）。</p>
+<p>同じ「解剖より生理」という物差しは、実は手術室にも先に存在していました。2024年のACC/AHA周術期心血管管理ガイドラインが掲げる思想は1行で言えます——<mark class="hl">手術という事実そのものを検査の理由にしない。非手術患者と同じ適応で心血管の評価と治療を行う</mark>。術前のリスク評価はMACE 1%で線を引き、機能的能力は麻酔科医の主観ではなくDASIで測り、術中はMAP 65 mmHg以上を「下回らせない」ことだけがClass 1という、気道管理と同じ「閾値は決まっているが目標値の根拠は薄い」構造がここにも現れます。日本発のJIPADデータは、この周術期リスクに本邦の実数（予定外ICU入室1.9%、周術期心停止は緊急1.74%対予定0.17%）を与えました。気道管理と周術期管理は別々の学問ではなく、<mark class="hl">「状況」ではなく「生理」でリスクを測る</mark>という同じ発想が手術室からICU、そして病院前まで貫いている——これがこのHomeを1本に統合した理由です。</p>
+<h3>結論が出ていること／いないこと</h3>
+<p><strong>決着しているもの</strong>：バンドルとチェックリストが合併症を減らすこと。前酸素化はNIVが第一で、重度低酸素ならHFNC併用（OPTINIV）。筋弛緩薬で初回成功が69.6%→80.9%（OR 2.37）、スタイレットで71.5%→78.2%（NNT 15、外傷は増えない）。カプノグラフィを5〜7呼吸ぶん必ず確認すること（NAP4でICU気道関連死の74%に不使用が寄与）。指導医の立ち会いで合併症21.7%→6.1%。撤退基準を数字で持つこと（挿管3回・声門上器具2回、ただしSpO₂ 95%以上が保たれている間だけ有効な条件付きの数字）。周術期では、予防的な冠動脈血行再建はルーチンでは無益、手術当日のβ遮断薬開始は有害、抗凝固のルーチンブリッジングは有害、術中の低血圧（MAP 65未満が約15分）は害と結びつくこと。</p>
+<p><strong>割れているもの</strong>：①導入薬。ケタミンかエトミデートかは、ネットワークメタ解析（9RCT 4672例）で死亡同等・ケタミンで循環虚脱OR 1.44、EvKの7日生存の優位も28日で消えます。オピオイド上乗せも5RCT 515例でTSA必要情報量の9.2%しか集まっておらず未決着で、しかも「循環不安定」の定義次第で同じデータがRR 1.83と0.43に割れます（交互作用 P=0.004）。②挿管のタイミング。COVID-19では「遅延は死亡を増やす」と「関連しない」が並存しますが、<mark class="hl">「挿管された患者だけ」のコホートは割り引いて読む</mark>必要があります。ROX指数を「閾値を下回ったら2時間以内に挿管する」という決定ルールとして運用した場合の30日死亡はRR 0.76と推定されましたが、これもMIMIC-IVの観察データを使ったエミュレーションで、RCTと同列には置けません。③ビデオ喉頭鏡が「見え方」「初回成功」を超えて患者転帰まで変えるか——心停止中の挿管に絞ったILCORの系統的レビュー（16研究）では、RCT 3本331例で初回成功 RR 0.88・全体成功 RR 1.00と差がなく、ROSC・生存・神経学的転帰を報告したRCTは1本もありません。観察研究29,595例の大半はビデオ有利ですが確実性はすべて very low で、全研究で一貫したのは食道挿管の減少だけです（観察研究 5.6% 対 1.4%、RCT 4.3% 対 0.0%）。④術中血圧の目標値の上限をどこに置くか——下限（MAP 65未満を下回らせない）はClass 1で決着していますが、HISTAP試験でMAP 80前後を狙うと腎障害は減っても死亡は動かず、代わりに昇圧薬と輸血が増えるという代償が示されました。</p>
+<h3>✅ 3行まとめ</h3>
+<ul><li>器具の議論より先にバンドルを回す。前酸素化はNIV（＋可能ならHFNC）、筋弛緩薬とスタイレットは毎回、ビデオ喉頭鏡は初回から、カプノグラフィで確認。周術期も同じで、検査を増やす前に「その検査が方針を変えるか」を問う。</li><li>挿管も手術も血行動態の介入として設計する。昇圧薬は合併症への対応ではなく手順の一部として導入前に手元へつなぎ、術中はMAP 65 mmHg以上を死守する（80以上を狙うのは輸液反応性を評価できる体制があるときだけ）。</li><li>導入薬とタイミング、術中血圧の上限目標は未決着。薬や数値で勝負せず、崩れる前提で備え、撤退基準（3回・2回、SpO₂ 95%以上が条件）を先に決めておく。</li></ul>
+<h3>❓ セルフチェック（想起用）</h3>
+<ol><li>ICUの緊急挿管後、何%の患者が15分以内に循環破綻を起こしますか。救急外来で挿管前に正常血圧だった患者では何%で、そのタイミングの中央値は何分後ですか。</li><li>modified LEMONのPPVとNPVはそれぞれ何%で、この道具は「困難を当てる」「困難でないことを確認する」のどちらに使うべきですか。</li><li>HISTAP試験で術中MAP目標を80に上げたとき、減ったのはどのアウトカムで、動かなかったのはどれですか。その代償として何が増えましたか。</li></ol>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>A. ICU・救急の気管挿管</p>
+<ul><li><strong>器具ではなくバンドルで安全にする</strong>。前・中・後の15項目を全例に回すだけで、生命を脅かす合併症は 34%→21%、初回成功率は +16.2%（<span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>）。<mark class="hl">デバイスの議論より先に、この型を全員が同じ手順で回す</mark></li><li><strong>重症患者の挿管は「解剖」ではなく「生理」で難しくなる</strong>。手順書に書く7点：チーム3名・チェックリスト・血行動態最適化・NIV前酸素化・頭部挙上30度・初回からビデオ喉頭鏡・挿管後の心肺管理（<span class="wl">生理学的困難気道の挿管 — 国際デルファイ53項目の合意（SOCCA・ICM2024）</span>）</li><li><strong>前酸素化はNIV。可能ならHFNCを併用する</strong>（マスクを外している無呼吸の間も酸素が途切れない・<span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>）。NIVが使えないならPEEPバルブ付きBVMか全開流量のリザーバーマスク。<mark class="hl">ただしBVMの「PEEP」は二人法の密着シールと十分な新鮮ガス流量がなければ存在しない</mark>（<span class="wl">NIVが使えないときの前酸素化 — BVM＋PEEPは代替になるがPEEP上乗せの臨床的根拠はない（著者回答・ICM2026）</span>）。設定は <strong>FiO₂ 100%・吸気圧 10 cmH₂O 以上・呼気圧 5 cmH₂O 以上・呼吸回数 10回/分 以上</strong> を導入の3〜5分前から喉頭鏡操作の開始まで。PREOXI試験で挿管中の低酸素 18.5%→8.1%、心停止 1.1%→0.2%、誤嚥は増えない（0.9%対1.4%）。<mark class="hl">低酸素のない患者・脳症で挿管する患者でも同じ方向に効く</mark>ので「低酸素例だけの手段」にしない（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>）</li><li><strong>導入から喉頭鏡までの45〜90秒は「換気しない時間」ではない</strong>。禁忌がなければバッグマスクで陽圧換気を続ける。PreVent試験（401例）で低酸素 22.8%→10.9%、誤嚥は増えなかった（2.5%対4.0%）。<mark class="hl">「RSIだから換気しない」という教え方は外す</mark>。一方で<strong>無呼吸酸素化（経鼻15 L/分・HFNC 60 L/分）は最低SpO₂も低酸素発生率も動かさない</strong>（各2〜3RCT・計356例）ので、これで前酸素化のNIVを省かない（同上）</li><li><strong>肥満患者は「見えにくい」より「もたない」</strong>。FRCが小さく酸素消費が大きいので安全無呼吸時間が極端に短い。NIV前酸素化の恩恵は3倍以上（<span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span>）</li><li><strong>初回からビデオ喉頭鏡＋スタイレット＋筋弛緩薬</strong>。スタイレットで初回成功 71.5%→78.2%（NNT 15・外傷は増えない）、筋弛緩薬で 69.6%→80.9%（OR 2.37・ビデオ喉頭鏡でも同じ）。ビデオ喉頭鏡はDEVICE試験で初回成功 85.1%対70.8%（絶対差 14.3%）、<mark class="hl">効果は挿管経験の少ない術者ほど大きい</mark>＝研修医の1本目こそビデオ喉頭鏡にする。スタイレットはSTYLETO試験で 78.2%対71.5% なので<strong>気管チューブ単独では入れない</strong>。ブジーはスタイレットと同等（BOUGIE −2.6 pp）で、声門視野が不良なときの手札に温存してよい（同上）</li><li><strong>ビデオ喉頭鏡は「見える」を自動的に「入る」に変換しない</strong>。チューブの形をブレード湾曲に合わせ、<mark class="hl">屈曲点をカフ上1 cm に置くと初回通過成功が 68% から 92% に上がる</mark>（<span class="wl">ビデオ喉頭鏡での気管チューブ最適湾曲法（RCT, JCMC2022）</span>）。器具を導入するより先に、この形状の教育を先に済ませる</li><li><strong>昇圧薬は「合併症への対応」ではなく「手順の一部」として最初から手元に置く</strong>。ICU緊急挿管の<mark class="hl">46%（2例に1例）で挿管後15分以内に循環が崩れる</mark>。救急外来で挿管前30分ずっと正常血圧だった患者でも23%がSBP 90を切り、その中央値は挿管後11分（<span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span>／<span class="wl">救急外来の緊急挿管で正常血圧例の23%が挿管後低血圧を起こす — 院内死亡33%対21%、調整OR 1.9（336例・JCritCare2012）</span>）。<strong>手術室の予定手術ですら60%が挿管後低血圧を起こす</strong>（<span class="wl">全身麻酔でも挿管後低血圧は60%に起こる — 血管外科1395例でICU滞在延長OR 2.55・術後人工呼吸OR 2.43（後ろ向き・JIntensiveCareMed2016）</span>）ので、この手順は救急・ICUに限らない</li><li><strong>挿管後低血圧のリスクは3項目で先読みできる</strong>。65歳超・挿管前の収縮期血圧130 mmHg未満・挿管前SpO₂ 90%未満。<mark class="hl">2つ以上当てはまるなら昇圧薬をつないでから導入する</mark>（<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）</li><li><strong>院内搬送とRRSコール先にも同じ型を持ち込む</strong>。CT室・血管撮影室・MRI・一般病棟は、装備と時間が制限された場所での気道管理という点で病院前と同じ枠組みで扱える。ramped position（外耳道と胸骨切痕を水平に合わせる）、NIVによる前酸素化、導入から喉頭鏡までのバッグバルブマスク換気の3点は追加コストなしで標準化できる（同上）</li><li><strong>挿管そのものを血行動態の介入として設計する</strong>。導入薬による交感神経遮断（1分未満）、無呼吸によるアシドーシス（pH 7.2未満で心筋収縮力と昇圧薬反応性が落ちる）、陽圧換気による静脈還流低下と右室後負荷上昇——3つの機序が累積する。予防バンドルは、プロポフォールを外す・昇圧薬をつないでから導入する・NIVで前酸素化する・挿管直後はPEEP 5〜6 cmH₂Oから漸増する（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>）</li><li><strong>導入時のフェンタニル上乗せは「効く前提」で足さない</strong>。追加しても初回挿管成功は変わらず（RR 1.03・確実性moderate）、<mark class="hl">「挿管しやすくするため」という理由づけは成立しない</mark>。<strong>ショックや前負荷依存の例では減量・省略を選択肢に持つ</strong>（<span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span>）</li><li><strong>挿管前の輸液ボーラスをルーチンにしない</strong>。500 mL前投与でも循環虚脱は減らない（20% vs 18%）。<mark class="hl">減らすべきは反射的なフラッシュで、準備すべきは昇圧薬と前酸素化の設計</mark>（<span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE trial</span>）。陽圧換気併用下で追試したPREPARE II（1,067例・11ICU）でも低血圧・昇圧薬使用・心停止のいずれも予防しなかった（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>）</li><li><strong>輪状軟骨圧迫をルーチンにしない</strong>。63年経っても誤嚥低減を示す頑健なデータは存在しない（<span class="wl">迅速導入気管挿管における輪状軟骨圧迫の役割 — 誤嚥を減らす証拠はなく、正しく当てられてもいない（CurrAnesthesiolRep2024）</span>）</li><li><strong>撤退基準を数字で決めておく</strong>：挿管3回・声門上器具2回まで。<mark class="hl">ただしこれはSpO₂ 95%以上が保たれている間だけ有効な条件付きの数字</mark>（<span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span>）。1手技につき best effort 1回で次へ移る</li><li><strong>困難は予測できても除外できない前提で全例に備える</strong>。救助器具を可視化し、2術者で役割を固定する（<span class="wl">困難挿管への私のアプローチ — 解剖学的困難と生理学的困難を分けて備える（エディトリアル・CritCare2019）</span>）。modified LEMON は「困難を当てる」道具ではなく<mark class="hl">「困難でないことを確認する」道具</mark>（NPV 98%・PPV 9%）</li><li><strong>緊急挿管には指導医が立ち会う</strong>。合併症 21.7%→6.1%（死亡と離脱日数は不変・<span class="wl">緊急挿管に指導医が立ち会うと合併症が6.1%対21.7%に減る — 死亡と人工呼吸器離脱日数は不変（322例・前向きコホート・Anesthesiology2008）</span>）</li><li><strong>エアロゾル感染症が疑われる患者では、手順を「感染防護込み」に組み替える</strong>。液体不透過性PPEと着脱プロトコルを施設で決め、可能なら陰圧室で行う。覚醒下挿管とHFNO・フェイスマスク換気・ネブライザー・ジェット換気は避け、十分な筋弛緩を効かせた修正RSI＋ビデオ喉頭鏡で一度で入れる。挿管は最も経験のある術者が担当し（研修目的で任せない）、レスキューは声門上器具と外科的輪状甲状靱帯切開を優先、抜管も挿管と同じ防護下で行う（<span class="wl">COVID-19下の手術室気道管理 — 全インド困難気道学会（AIDAA）コンセンサス、HFNO・マスク換気・ジェット換気は避ける（IJA2020）</span>／<span class="wl">COVID-19患者の困難気道管理 — SAMステートメント、覚醒下挿管とエアロゾル産生手技の再考（AnesthAnalg2021）</span>／<span class="wl">COVID-19疑い患者の麻酔管理 — 陰圧室・RSI・HFNCは使わない、挿管は最も経験のある者が（韓国麻酔科学会・KJA2020）</span>）</li></ul>
+</div>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>B. 手術室・周術期</p>
+<ul><li><strong>手術という事実そのものを検査の理由にしない</strong>。非手術患者と同じ適応で心血管の評価と治療を行う。リスクの線引きは MACE 1%、機能的能力は麻酔科医の主観ではなく DASI で構造化評価（閾値 34以下または4 METs未満）、65歳以上は中等度以上リスク手術の前にフレイルを評価する（30日死亡の相対危険3.71）（<span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>）</li><li><mark class="hl">やらない推奨を明文化する</mark>：無症状・低リスク手術のECG、安定患者のルーチン左室機能評価、機能的能力良好かつ低リスクでのルーチン負荷試験とCCTA、ルーチンの侵襲的冠動脈造影（いずれも 3: No benefit）。負荷試験は「未診断の冠動脈疾患を見つけるため」ではなく「血行再建で予後が変わる患者を見つけるため」にだけ行う（同上）</li><li><strong>SGLT2阻害薬は手術3〜4日前に中止する</strong>（Class 1、エルツグリフロジンは4日以上）。スタチンは継続・β遮断薬は継続だが<mark class="hl">手術当日の新規開始は3: Harm</mark>。<mark class="hl">抗凝固のルーチンブリッジングは3: Harm</mark>、DOACは時間で切る（同上）</li><li><mark class="hl">術中は MAP 60〜65 mmHg 以上または収縮期血圧 90 mmHg 以上を維持する（Class 1）。術後低血圧の治療も Class 1</mark>。これより高い目標を日常的に狙う根拠はない（POISE-3・単施設RCTがいずれも陰性）（同上）。<strong>ただし高血圧の既往がある高リスク待機的大腹部手術で、観血的動脈圧＋連続血行動態モニタリング＋プロトコル化輸液が敷ける体制なら、MAP目標を80前後に上げると腎障害（AKIN 1・2度）が33.7%→23.5%に減る</strong>（RR 0.70）。<mark class="hl">死亡・心血管イベントは動かず、代償としてノルアドレナリン持続22.5%→40.3%・赤血球輸血6.7%→11.8%が増える</mark>ので、輸液反応性を評価できないまま昇圧薬だけで数字を作らない（<span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>）</li><li><strong>非心臓手術後の心筋障害（MINS）は約20%に発生し、80〜90%が無症状</strong>。中等度以上リスク手術を受けた高リスク患者で術後24時間・48時間のトロポニン測定（2b）、<mark class="hl">拾ったら外来フォローへ確実に渡す（2a）</mark>。測る対象と陽性時の対応を同時に決めなければ検査が増えるだけになる（<span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>）</li><li><strong>本邦の周術期転帰を家族説明と病床計画に使う</strong>。予定手術後の予定外ICU入室は1.9%（最多は呼吸器合併症、死亡が最も高いのは循環器合併症・院内死亡3.3%・在院日数中央値21日、<span class="wl">予定手術後の予定外ICU入室は1.9% — 呼吸器合併症が最多・循環器合併症が最も死亡が高い（JIPAD 2666例・AnesthAnalg2025）</span>）。<mark class="hl">周術期心停止は緊急手術1.74%対予定手術0.17%で約10倍の差</mark>（<span class="wl">周術期心停止は緊急手術で1.74%・予定手術で0.17% — 原因も予後も別物（JIPAD 874例・95施設・BJA2025）</span>）</li><li><strong>気道確保の器具は「見える」を「入る」に自動変換しない</strong>。ビデオ喉頭鏡を入れただけでは初回成功率は上がらない（67.7%対70.3%・<span class="wl">ICU挿管におけるビデオ喉頭鏡vs直視型（RCT・JAMA2017）</span>）。差を作るのはチューブ形状と屈曲点である</li><li><strong>困難気道の訴訟例は準備不足を映す鏡</strong>。76%に予測因子があり、半数は2つ以上。多くがcan't intubate, can't oxygenateで、外科的気道確保が40%で遅延していた（<span class="wl">困難気道 ― 医療訴訟（closed claims）から学ぶ</span>）</li></ul>
+</div>
+<h2>📋 早見表</h2>
+<div class="tw"><table>
+<thead><tr><th>判断項目</th><th>当院標準または推奨</th><th>外部基準・根拠</th><th>動かすときの考え方</th></tr></thead>
+<tbody>
+<tr><td>前酸素化</td><td>NIV（PS 10／PEEP 5／FiO₂ 100%）3〜5分、可能ならHFNC併用</td><td>PREOXI・OPTINIV（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>）</td><td>NIV不可ならPEEPバルブ付きBVM（二人法）かリザーバーマスク全開流量に格下げ（<span class="wl">NIVが使えないときの前酸素化 — BVM＋PEEPは代替になるがPEEP上乗せの臨床的根拠はない（著者回答・ICM2026）</span>）</td></tr>
+<tr><td>導入〜喉頭鏡までの換気</td><td>禁忌なければバッグマスクで陽圧換気を継続</td><td>PreVent試験（低酸素22.8%→10.9%）</td><td>誤嚥高リスク（フルストマック）では省略も選択肢。無呼吸酸素化だけでの代替は不可</td></tr>
+<tr><td>導入薬</td><td>ケタミン第一を既定にしつつ、循環虚脱リスクを常に想定</td><td>NMA（9RCT4672例）死亡同等・ケタミン循環虚脱OR 1.44（<span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span>）</td><td>ショック・前負荷依存例ではフェンタニル上乗せを減量／省略。プロポフォールは避ける</td></tr>
+<tr><td>撤退基準</td><td>挿管3回・声門上器具2回まで</td><td>AIDAA 2016（<span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span>）</td><td>SpO₂ 95%以上が保たれている間だけ有効。割ったら数を数えず次の一手（声門上器具→外科的気道）へ</td></tr>
+<tr><td>挿管後低血圧の予防</td><td>65歳超・SBP&lt;130・SpO₂&lt;90%の2つ以上で昇圧薬を先につなぐ</td><td>病院前コホート（Elmerら）（<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）</td><td>輸液ボーラスの前投与では代替できない（PrePARE・PREPARE II）</td></tr>
+<tr><td>術中血圧（周術期）</td><td>MAP 60〜65 mmHg以上／SBP 90 mmHg以上を「下回らせない」（Class 1）</td><td>ACC/AHA 2024（<span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>）</td><td>高血圧の既往がある高リスク待機大腹部手術＋連続モニタリング＋プロトコル化輸液がある場合のみMAP 80前後を検討（<span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>）</td></tr>
+<tr><td>SGLT2阻害薬の休薬</td><td>手術3〜4日前に中止（エルツグリフロジンは4日以上）</td><td>ACC/AHA 2024 Class 1</td><td>コスト低・見逃すと致命的なので、根拠の強さによらずClass 1のまま運用する</td></tr>
+<tr><td>MINSのサーベイランス</td><td>中等度以上リスク手術＋高リスク患者で術後24・48時間トロポニン</td><td>ACC/AHA 2024（2b）</td><td>測る対象と陽性時の対応（外来フォロー2a）を同時に決めてから始める</td></tr>
+</tbody></table></div>
+<h2>① 気道管理の考え方 — 解剖学的困難気道から生理学的困難気道へ</h2>
+<p>気道管理という学問は、もともと「解剖学的に入れにくい患者をどう当てるか」に関心が集中していました。Mallampati分類、LEMON、上唇咬み試験——挿管困難を事前に予測するスコアが次々と作られましたが、実際に検証すると性能は思ったほど高くありません。62研究33,559例（すべて手術室・直視型喉頭鏡）を要約すると、挿管困難の既往はLR+ 16〜19、上唇咬み試験3度はLR+ 14と、いずれも事前確率10%を6割超まで押し上げます。しかし<mark class="hl">どのスコアもLR−が0.5を大きく下回らず、「困難ではない」と自信を持って除外できるスコアは存在しません</mark>（<span class="wl">挿管困難は予測できても除外できない — 挿管困難の既往LR+ 16〜19、上唇咬み試験3度LR+ 14（62研究33,559例のRCEレビュー要約・AEM2019）</span>）。同じ問題意識でmodified LEMONを3,923例で検証すると、陰性的中率98.2%（直視型）・99.0%（ビデオ喉頭鏡）に対し陽性的中率は8.9%・11.6%しかありません。<mark class="hl">これはmodified LEMONが「困難を当てる」道具ではなく「困難でないことを確認する」道具であることを意味します</mark>（<span class="wl">modified LEMON基準で挿管困難を予測する — 感度86%・陰性的中率98%（JEAN-2・3923例・AJEM2015）</span>）。</p>
+<p>_図: 解剖学的困難気道と生理学的困難気道を対比させる図。左側に解剖学的評価（Mallampati・LEMON・上唇咬み試験）の（Codex 生成の概念図）_</p>
+<p>2019年のエディトリアルはこの限界を踏まえ、<mark class="hl">困難挿管は予測できないという前提に立ち、高リスク例だけ身構えるのではなく全例で救助器具を可視化し、2術者で役割を固定し、1手技につきbest effort 1回で次へ移る</mark>という運用に転換しました。困難を解剖学的困難（ビデオ喉頭鏡・初回ブジー・第3術者）と生理学的困難（前酸素化・血行動態最適化）に分けて備える発想もここで整理されています（<span class="wl">困難挿管への私のアプローチ — 解剖学的困難と生理学的困難を分けて備える（エディトリアル・CritCare2019）</span>）。手術室の外という条件も、この問題をさらに複雑にします。装備と応援が限られた環境そのものが「状況的困難気道」を作り出すため、解剖学的評価だけでは不十分という指摘です（<span class="wl">手術室外の緊急気道管理 — 解剖学的だけでなく「生理学的・状況的」困難気道に備える（レビュー・AnesthAnalg2021）</span>）。</p>
+<p>2021年のSAMコンセンサスと2024年のSOCCA国際デルファイ（53項目）は、この流れを制度化したものです。<mark class="hl">重症患者の挿管は「解剖」ではなく「生理」で難しくなる</mark>という前提のもと、チーム3名・チェックリスト・血行動態最適化・NIV前酸素化・頭部挙上30度・初回からビデオ喉頭鏡・挿管後の心肺管理という7点を手順書の骨格に据えました（<span class="wl">生理学的困難気道の挿管 — 国際デルファイ53項目の合意（SOCCA・ICM2024）</span>／<span class="wl">生理学的困難気道の評価と管理 — SAMコンセンサス、既存の国際ガイドラインに欠けていた視点（AnesthAnalg2021）</span>）。SCCMが2023年に出したRSI診療ガイドラインは、この枠組みをGRADEで棚卸しした1本です。10のPICOを検討して強い推奨に達したのは「鎮静薬を使うなら筋弛緩薬も使う」の1点だけで、前酸素化のデバイス選択（P/F&lt;150ならNIPPV、喉頭鏡操作が難しそうならHFNO）や導入薬の選択はいずれも条件付きの提案にとどまります（<span class="wl">重症成人のRSI（迅速導入気管挿管） — SCCM診療ガイドライン、10のPICOに推奨1・提案7・ベストプラクティス2（CCM2023）</span>）。困難気道全般のガイドライン群（DAS 2015・ASA 2022・AIDAA 2016・中国救急コンセンサス2017）は、この生理学的枠組みが定着する前の世代のものですが、<mark class="hl">「いつ止めるか」を数字と条件で書き切った点</mark>で今も現役です（<span class="wl">予期せぬ困難挿管のDASガイドライン2015 — 困難の認識と「宣言」、試行回数の制限、立ち止まって考える時間（BJA2015）</span>／<span class="wl">困難気道管理のASAガイドライン2022 — 時間経過の意識と試行回数の制限、抜管の推奨を強化（Anesthesiology2022）</span>／<span class="wl">中国救急気道管理コンセンサス — 換気と酸素化を最優先、CHANNELフローで初期対応を組む（コンセンサス・JThoracDis2017）</span>）。緊急気道管理でのPOCUSは、この評価をベッドサイドで補う道具として位置づけられます——皮膚〜喉頭蓋距離27.5mm（困難喉頭鏡）、CTMの同定とマーキング、胃前庭部断面積3.6 cm²（誤嚥リスク）、single air-filled structure（気管内確認）の4つが実用的な指標です（<span class="wl">緊急気道管理におけるハンドヘルドPOCUS（CHEST2021）</span>）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>落とし穴 「困難気道スコアが陰性だから安全」という読み方は禁物です。modified LEMONの陽性的中率は9〜12%しかなく、<mark class="hl">陰性でも生理学的困難（低酸素・低血圧・アシドーシス）は別に評価しないと見落とします</mark>。</p>
+</div>
+<p>妊娠患者はこの2種類の困難が重なりやすい集団です。最大の懸念は「予期されなかった困難」であり、対策の本体は器具選びではなく組織の準備（局所麻酔の優先、簡潔な失敗時アルゴリズム）にあります（<span class="wl">妊娠中の困難挿管 — 最大の懸念は「予期されなかった困難」、局所麻酔優先と簡潔な失敗時アルゴリズムで備える（総説・CurrOpinAnaesthesiol2011）</span>）。資源の限られたICUでは、この枠組みをどこまで削れるかが現実的な問いになります。40研究のシステマティックレビューは、<mark class="hl">ビデオ喉頭鏡・HFNC・試行回数の上限が落ち、MACOCHA・スニッフィング位・チェックリスト・カプノグラフィだけが残った</mark>という取捨を示しており、その順位づけ自体が高所得国のガイドラインの優先順位を逆照射します（<span class="wl">資源の限られたICUの気道管理プロトコル — 40研究のシステマティックレビュー（AnnMedSurg2022）</span>）。</p>
+<h2>② 挿管を安全にする手順 — バンドルとチェックリスト</h2>
+<p>2010年前後、フランスのMontpellierグループが気道管理に持ち込んだ発想は単純です——<mark class="hl">器具を変えるより先に、手順を固定する</mark>。前・中・後の15項目からなるバンドルを全例に回すだけで、生命を脅かす合併症は34%から21%に減り、外部検証では初回成功率が+16.2%動きました。このバンドルには、前酸素化・体位・血行動態の最適化・チェックリスト・複数名でのチーム編成・カプノグラフィによる確認・挿管後の再評価が含まれます（<span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>）。</p>
+<p>_図: ICUの気管挿管バンドル（前・中・後の15項目）の全体像（出典 <span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>）_</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: ICUにおける気道管理アルゴリズム。緑＝成功、赤＝失敗で色分けされ、失敗時の対応が破線枠で示される（出典 <span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>）_</p>
+<p>チェックリストという道具立てそのものの効果も、167論文を対象にしたスコーピングレビューで裏づけられています。<mark class="hl">有意になったアウトカムの90.3%が改善方向</mark>でしたが、この数字の分母は「有意差が出た比較」だけであり、バイアスリスク評価は定義上一切行われていません。それでも<mark class="hl">介入後にデータを見て改良を加えた施設はわずか8件</mark>という指摘は重要で、<mark class="hl">チェックリストは配って終わりではなく、運用しながら直し続けるものだ</mark>という教訓を残します（<span class="wl">ICUのチェックリスト167論文のスコーピングレビュー — 臨床アウトカムの90%が改善、ただし介入後データで改良した施設は8件だけ（CritCare2023）</span>）。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>当院での運用 バンドルの価値は個々の項目の強さではなく「全員が同じ順番で回すこと」にあります。器具の議論（どのビデオ喉頭鏡か）は、バンドルが定着してから始めるのが順序として正しい選択です。</p>
+</div>
+<p>重症患者の気管挿管を対象にしたRCTの系統的レビューは、この領域でどれだけ質の高い比較試験が積み上がっているかを俯瞰する1本です（<span class="wl">重症患者の気管挿管 RCTの系統的レビュー（CritCare2018）</span>）。手術室外の緊急RSIを対象にした前向き観察（208例）では、麻酔科医と非麻酔科医のあいだで低酸素19.2%・低血圧17.8%といった合併症頻度に差が見られず、<mark class="hl">「誰が挿管するか」より「どの手順で挿管するか」が結果を左右する</mark>という、この章全体の主張を裏づける観察になっています（<span class="wl">手術室外の緊急RSI 208例 — 低酸素19.2%・低血圧17.8%、麻酔科医と非麻酔科医で差なし（前向き観察・EMJ2004）</span>）。同じ発想は救急医療の体制設計にも及び、<mark class="hl">CHANNEL（Crash airway・Hypoxemia・Artificial airway・Neck mobility・Narrowing・Evaluation）</mark>というフローで初期対応を組む中国の救急気道管理コンセンサスも、換気と酸素化を最優先に置く点でバンドルの思想を共有しています（<span class="wl">中国救急気道管理コンセンサス — 換気と酸素化を最優先、CHANNELフローで初期対応を組む（コンセンサス・JThoracDis2017）</span>）。</p>
+<h2>③ 前酸素化 — 何を、どれだけの時間、どう当てるか</h2>
+<p>前酸素化の役割は「酸素飽和度を上げること」ではなく、<mark class="hl">安全無呼吸時間を延ばして、術者に喉頭鏡操作の時間的余裕を与えること</mark>です。この生理を最初に押さえておかないと、デバイス選択が目的化してしまいます。</p>
+<p>低酸素血症が強い患者では、NIVによる前酸素化にHFNCを併用するOPTINIV試験の発想が有用です。NIV（PS 10／PEEP 5／FiO₂ 100%）による4分間の前酸素化に、HFNC（60 L/分・FiO₂ 100%）を併用すると、<mark class="hl">マスクを外している無呼吸の間も酸素供給が途切れません</mark>（<span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>）。NIVが使えない場面での代替は、PEEPバルブ付きBVMか全開流量のリザーバーマスクですが、<mark class="hl">BVMの「PEEP」は二人法の密着シールと十分な新鮮ガス流量がなければ存在しない</mark>という著者自身の回答があり、単に器具にPEEPバルブを付けただけで安心してはいけません（<span class="wl">NIVが使えないときの前酸素化 — BVM＋PEEPは代替になるがPEEP上乗せの臨床的根拠はない（著者回答・ICM2026）</span>）。</p>
+<p>無呼吸酸素化（経鼻カニューラ15 L/分やHFNC 60 L/分を喉頭鏡操作中も流し続ける手法）は、直感的には効きそうに見えますが、<mark class="hl">各2〜3RCT・計356例のメタ解析では最低SpO₂も低酸素発生率も動かしません</mark>。HFNCによる無呼吸酸素化を標準治療と比較した別の研究でも、<mark class="hl">ICU滞在を1.8日短縮する一方、重症低酸素を減らせるのは軽症低酸素例だけ</mark>という限定的な効果にとどまります（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>／<span class="wl">挿管時の無呼吸酸素化にHFNCは標準治療に非劣性 — ICU滞在を1.8日短縮、軽症低酸素例でのみ重症低酸素を減らす（7研究956例・SciRep2020）</span>）。<mark class="hl">無呼吸酸素化はNIV前酸素化の「代わり」にはならず、あくまで上乗せの手段</mark>です。</p>
+<p>導入から喉頭鏡までの45〜90秒も、単なる「準備時間」ではありません。禁忌がなければこの間もバッグマスクで陽圧換気を続けるべきで、PreVent試験（401例）では低酸素発生率が22.8%から10.9%に下がり、誤嚥は増えませんでした（2.5%対4.0%）。<mark class="hl">「RSIだから換気しない」という古い教え方は、この試験結果と矛盾します</mark>（同上）。</p>
+<p>肥満患者はこの前酸素化の効果が特に大きく出る集団です。<mark class="hl">肥満患者の挿管が危険な理由は「見えにくい」ことより「もたない」こと</mark>——FRCがBMI 5ごとに5〜15%減り、酸素消費が300〜400 mL/分と大きいため、安全無呼吸時間が極端に短くなります。この生理を踏まえると、NIV前酸素化の恩恵は非肥満患者の3倍以上に達します（<span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span>）。</p>
+<p>病院前・院内搬送という文脈でも前酸素化の重要性は変わりません。早期NIVを標準酸素療法と比較したCorrespondenceでは、病院前・救急外来・一般病棟を含む「ICU入室前」の早期NIVが気管挿管を10.8%から5.2%に減らしました（RR 0.49、NNT 18）。<mark class="hl">「efficacyはもう決着していて、論点は実装（誰が・どこで・いつ始めるか）に移った」</mark>という一段強い立場です（<span class="wl">病院前NIVは有効性から実装へ — 早期NIVで挿管が10.8%から5.2%へ、RR 0.49・NNT 18（Correspondence・ICM2026）</span>）。</p>
+<h3>主要試験（前酸素化・導入前後の換気）</h3>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>・2016</td><td>重症低酸素血症の挿管例</td><td>NIV前酸素化＋HFNC併用 vs NIV単独</td><td>マスク離脱中も酸素供給が継続、酸素化が改善</td><td>重度低酸素例はHFNC併用を既定にする</td></tr>
+<tr><td>PreVent（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>内）・401例</td><td>重症患者の挿管</td><td>導入〜喉頭鏡の陽圧換気 vs 換気なし</td><td>低酸素 22.8%→10.9%、誤嚥は不変</td><td>「RSIは換気しない」を撤回する根拠</td></tr>
+<tr><td>無呼吸酸素化メタ解析（同上）・計356例</td><td>挿管全般</td><td>経鼻15L/分またはHFNC60L/分の無呼吸酸素化</td><td>最低SpO₂・低酸素発生率とも不変</td><td>NIV前酸素化を省く代替にはならない</td></tr>
+<tr><td><span class="wl">挿管時の無呼吸酸素化にHFNCは標準治療に非劣性 — ICU滞在を1.8日短縮、軽症低酸素例でのみ重症低酸素を減らす（7研究956例・SciRep2020）</span>・7研究956例</td><td>挿管全般</td><td>HFNC無呼吸酸素化 vs 標準治療</td><td>ICU滞在1.8日短縮、重症低酸素は軽症例のみ減少</td><td>上乗せ手段としての位置づけを支持</td></tr>
+<tr><td><span class="wl">病院前NIVは有効性から実装へ — 早期NIVで挿管が10.8%から5.2%へ、RR 0.49・NNT 18（Correspondence・ICM2026）</span></td><td>ICU入室前の呼吸不全</td><td>早期NIV vs 標準酸素療法</td><td>挿管 10.8%→5.2%（RR 0.49、NNT 18）</td><td>病院前・一般病棟でも前酸素化の思想を前倒しできる</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>落とし穴 無呼吸酸素化を導入していると「前酸素化はできている」と錯覚しがちです。無呼吸酸素化はNIV前酸素化の代替ではなく、あくまで上乗せです。</p>
+</div>
+<h2>④ 導入薬とタイミングの科学 — 薬で勝負しない理由</h2>
+<p>導入薬の選択は、この領域でもっとも臨床医の関心を集めながら、もっとも決着していない論点です。<mark class="hl">重症患者の挿管導入薬はケタミンを第一とするのが総説の立場ですが、その理由は「循環に優しいから」ではなく、「エトミデートに死亡シグナルがあり、プロポフォールに循環虚脱シグナルがあるから」という消去法</mark>です（<span class="wl">重症患者の挿管導入薬 — ケタミンを第一に、エトミデートは死亡リスク、プロポフォールは循環虚脱（Concise Definitive Review・CCM2025）</span>）。</p>
+<p>ところが、この消去法自体が単純ではありません。9RCT 4672例のネットワークメタ解析では、<mark class="hl">エトミデートとケタミンは緊急挿管の死亡で区別できず（OR 0.96、95%CI 0.80–1.16、中等度の確実性）、「どちらが生存を良くするか」で薬を選ぶ根拠はない</mark>一方、<mark class="hl">ケタミンは循環虚脱がOR 1.44多い</mark>という結果が出ています（<span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span>）。ケタミンとエトミデートを直接比較したEvK試験では、==7日生存はケタミン85.1%対エトミデート77.3%（差−7.8、p=0.005）でしたが、28日生存では66.8%対64.1%（p=0.24）と差が消えました<mark class="hl">。</mark>短期の優位が長期まで続かないという典型例==です（<span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span>）。観察研究でも、ケタミンは救急外来挿管全般で挿管周辺期低血圧が18.3%対12.4%（調整OR 1.4）多く（<span class="wl">ケタミンはエトミデートより挿管周辺期低血圧が多い — 18.3%対12.4%、調整OR 1.4（NEAR 6806例・AcadEmergMed2020）</span>）、<mark class="hl">敗血症例に限ると74%対50%（調整OR 2.7）とさらに差が開きます</mark>（<span class="wl">敗血症の救急外来挿管ではケタミンのほうが挿管後低血圧が多い — 74%対50%、傾向スコア調整OR 2.7（NEAR 531例・AcadEmergMed2020）</span>）。一方でエトミデートの副腎抑制・死亡への懸念は、eICU 2,014例の後ろ向きコホートで否定されています（院内死亡37.2%対37.8%、補正後subhazard ratio 0.91）（<span class="wl">敗血症患者への単回エトミデートは死亡と関連しない — eICU 2014例で院内死亡37.2%対37.8%（後ろ向きコホート・CCM2013）</span>）。</p>
+<h3>主要試験（導入薬の比較）</h3>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span>・2026</td><td>9RCT・4672例</td><td>ケタミン vs エトミデート</td><td>死亡OR 0.96（同等）、循環虚脱OR 1.44（ケタミンで多い）</td><td>薬の選択を死亡率で決める根拠はない</td></tr>
+<tr><td><span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span>・2022</td><td>ICU挿管例</td><td>ケタミン vs エトミデート</td><td>7日生存85.1%対77.3%（有意）→28日66.8%対64.1%（有意差消失）</td><td>短期アウトカムの優位を長期の結論に外挿しない</td></tr>
+<tr><td><span class="wl">ケタミンはエトミデートより挿管周辺期低血圧が多い — 18.3%対12.4%、調整OR 1.4（NEAR 6806例・AcadEmergMed2020）</span>・2020</td><td>NEAR 6806例</td><td>ケタミン vs エトミデート</td><td>挿管周辺期低血圧18.3%対12.4%（調整OR 1.4）</td><td>ケタミンでも循環虚脱は起こる前提で備える</td></tr>
+<tr><td><span class="wl">敗血症の救急外来挿管ではケタミンのほうが挿管後低血圧が多い — 74%対50%、傾向スコア調整OR 2.7（NEAR 531例・AcadEmergMed2020）</span>・2020</td><td>NEAR敗血症531例</td><td>ケタミン vs エトミデート</td><td>挿管後低血圧74%対50%（調整OR 2.7）</td><td>敗血症例では薬の選択より昇圧薬の準備を優先する</td></tr>
+<tr><td><span class="wl">敗血症患者への単回エトミデートは死亡と関連しない — eICU 2014例で院内死亡37.2%対37.8%（後ろ向きコホート・CCM2013）</span>・2013</td><td>eICU 2014例</td><td>単回エトミデート使用 vs 非使用</td><td>院内死亡37.2%対37.8%（差なし）</td><td>エトミデート回避の根拠として死亡は使えない</td></tr>
+<tr><td>（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>内引用RCT・n=2365）</td><td>挿管全般</td><td>プロポフォール vs ケタミン</td><td>28日死亡は同等、循環虚脱はケタミン22.1%対プロポフォール17.0%（リスク差5.1）</td><td>プロポフォールを導入薬の選択肢から外す根拠</td></tr>
+</tbody></table></div>
+<p>オピオイド（フェンタニル）の上乗せも、薬というより「測り方」の問題として整理し直す必要があります。5RCT 515例のSRメタ解析では、<mark class="hl">初回挿管成功はRR 1.03で差がなく「入れやすくするため」という上乗せの理由づけは成立しません</mark>。挿管周辺期循環不安定はRR 1.41（95%CI 0.83–2.40、確実性very low）で有意ではありませんが、<mark class="hl">低リスクバイアスの2試験に限るとRR 1.74（1.26–2.39）と害の方向に振れます</mark>。TSA（trial sequential analysis）の必要情報量5586例に対し、現状は9.2%しか集まっていません。==最大の教訓は薬の優劣ではなく測り方で、「循環不安定」の定義次第で同じデータがRR 1.83と0.43に割れる（交互作用P=0.004）==という指摘です（<span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span>）。</p>
+<p>輸液ボーラスの前投与は、この薬理学的な議論とは別の切り口で「効かない手段」として決着しています。==500 mLをルーチンで前投与しても循環虚脱は減りません（20%対18%、p=0.76）==（<span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE trial</span>）。陽圧換気併用下で追試したPREPARE II（1,067例・11ICU）でも、低血圧・昇圧薬使用・心停止のいずれも予防できませんでした。<mark class="hl">減らすべきなのは反射的なフラッシュであって、準備すべきは昇圧薬と前酸素化の設計</mark>という結論は変わりません（<span class="wl">挿管前の輸液ボーラスは心血管虚脱を防ぐか — PREPARE II 試験プロトコル（BMJOpen2020）</span>）。輪状軟骨圧迫（Sellick法）も同じ運命をたどっており、<mark class="hl">出発点が26例中23例という症例集積で、63年経っても誤嚥低減を示す頑健なデータは存在しません</mark>（<span class="wl">迅速導入気管挿管における輪状軟骨圧迫の役割 — 誤嚥を減らす証拠はなく、正しく当てられてもいない（CurrAnesthesiolRep2024）</span>）。筋弛緩薬の使用実態には国による差があり、ブラジルICUの全国調査では毎回使う医師はわずか40.7%にとどまります（<span class="wl">ブラジルICUの挿管実態調査 — 筋弛緩薬をほぼ毎回使う医師は40.7%だけ（565名・全国調査・RevBrasTerIntensiva2020）</span>）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>落とし穴 「ケタミンにすれば循環が安全」という単純化は誤りです。ケタミンでも循環虚脱は起こり、敗血症例ではむしろ頻度が高いという観察があります。薬の選択より、昇圧薬を手元に置くことが安全域を作ります。</p>
+</div>
+<h2>⑤ デバイスと手技 — ビデオ喉頭鏡・スタイレット・チューブ形状・固定</h2>
+<p>ビデオ喉頭鏡は、この10年で最も議論された気道デバイスですが、<mark class="hl">「見え方」「初回成功」「患者転帰」という3つのアウトカムを混同してはいけません</mark>。222RCT 26,149例のCochrane改訂版メタ解析では、ビデオ喉頭鏡は挿管失敗のリスクを下げます（失敗RR 0.41〜0.51、<span class="wl">ビデオ喉頭鏡は挿管失敗を減らす — 222RCT 26149例、失敗RR 0.41〜0.51（Cochrane改訂版・BJA2022）</span>）。心停止患者を対象にしたJEAN-2（3,360例）では初回成功率78%対70%（調整OR 1.33）とビデオ喉頭鏡が優位でした（<span class="wl">心停止患者の挿管はビデオ喉頭鏡が有利 — 初回成功率78%対70%（JEAN-2・3360例・Resuscitation2019）</span>）。一方でICU挿管を対象にした371例のRCTでは、<mark class="hl">初回成功率67.7%対70.3%と差が出ませんでした</mark>（<span class="wl">ICU挿管におけるビデオ喉頭鏡vs直視型（RCT・JAMA2017）</span>）。救急外来を対象にした198例の研究は、良好視野が80%から93%へ改善し、直視で見えなかった40例の78%を救ったことを示しましたが、<mark class="hl">この研究が測ったのは「見え方」だけで、初回成功率も合併症も患者転帰も測っていません</mark>（<span class="wl">救急外来でビデオ喉頭鏡は声門視野を改善する — 良好視野80%→93%、直視で不良だった78%が改善（198例・AnnEmergMed2010）</span>）。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 標準喉頭鏡（左）とビデオ喉頭鏡（右）。ブレード形状はほぼ同一で、ハンドル部にカメラが内蔵される（出典 <span class="wl">救急外来でビデオ喉頭鏡は声門視野を改善する — 良好視野80%→93%、直視で不良だった78%が改善（198例・AnnEmergMed2010）</span>）_</p>
+<p>この矛盾を解く鍵は、<mark class="hl">器具そのものではなくチューブの形状</mark>にあります。チューブの形をブレードの湾曲に合わせ、屈曲点をカフ上1 cmに置くと、初回通過成功が68%から92%に上がりました（300例・3群比較・<span class="wl">ビデオ喉頭鏡での気管チューブ最適湾曲法（RCT, JCMC2022）</span>）。<mark class="hl">JAMA2017が差を出せなかったのは、この形状の最適化を介入に含めていなかったからと読めます</mark>。器具の議論より先に、形状と屈曲点の教育を済ませるべきだという当院の運用は、この読み替えから導かれています。人間工学の工夫としては、McGRATHの持ち手を60度折るとチューブ送達の難度・試行回数・術者の右腕の無理な動きが減りますが、<mark class="hl">時間短縮は4.4秒で著者自身が臨床的に無意味と認めており、初回成功率も両群100%</mark>でした。<mark class="hl">プロトコル変更ではなく手技のコツとして教育に組み込むのが妥当</mark>で、困難気道やICU緊急挿管での有効性は未検証です（<span class="wl">McGrath挿管時のスタイレット屈曲角度の有効性（RCT）</span>）。DEVICE試験（85.1%対70.8%、絶対差14.3%）へのエディトリアルは、<mark class="hl">「効果は挿管経験の少ない術者ほど大きい」という交互作用を指摘</mark>しており、研修医の1本目こそビデオ喉頭鏡にするという当院の方針の根拠になっています（<span class="wl">ビデオ喉頭鏡は新たな標準か（DEVICE試験へのエディトリアル・NEJM2023）</span>）。</p>
+<p>心停止という文脈に絞ると、この3つのアウトカムの乖離がさらに際立ちます。ILCOR が委嘱した系統的レビュー（16研究）は、RCT 3本331例で初回成功 RR 0.88（95%CI 0.63–1.22）・全体成功 RR 1.00（0.90–1.12）と差を示さず、ROSC・生存・神経学的良好生存をアウトカムに含めた RCT は1本も存在しないことを明らかにしました。観察研究12本29,595例の大半はビデオ喉頭鏡有利（JEAN-2 はこの群の主要寄与研究で、初回成功の重み11.34%・食道挿管の重み34.11%）ですが、全研究で方向が一致したのは食道挿管の減少だけです（観察研究5本6,178例で 5.6% 対 1.4%、RCT 1本で 4.3% 対 0.0%）。確実性は全アウトカムで very low。当院の運用に効くのは、ビデオ喉頭鏡を「生存を改善する器具」ではなく「食道挿管という致命的合併症を減らす器具」として位置づけ直すことと、急変記録に喉頭鏡の種類・施行者の経験・試行回数・食道挿管の有無を残すことです（<span class="wl">心停止中の挿管でビデオ喉頭鏡は食道挿管を減らすが生存は変えない — RCT3本331例で初回成功RR 0.88、観察研究29,595例は有利（ILCOR系統的レビュー・Resuscitation2026）</span>）。</p>
+<h3>主要試験（デバイス・手技）</h3>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">ビデオ喉頭鏡は挿管失敗を減らす — 222RCT 26149例、失敗RR 0.41〜0.51（Cochrane改訂版・BJA2022）</span>・2022</td><td>222RCT 26,149例</td><td>ビデオ喉頭鏡 vs 直視型</td><td>挿管失敗RR 0.41〜0.51</td><td>総体としてはビデオ喉頭鏡が有利</td></tr>
+<tr><td><span class="wl">心停止患者の挿管はビデオ喉頭鏡が有利 — 初回成功率78%対70%（JEAN-2・3360例・Resuscitation2019）</span>・2019</td><td>JEAN-2 3,360例</td><td>ビデオ喉頭鏡 vs 直視型</td><td>初回成功78%対70%（調整OR 1.33）</td><td>心停止では第一デバイスにしてよい</td></tr>
+<tr><td><span class="wl">心停止中の挿管でビデオ喉頭鏡は食道挿管を減らすが生存は変えない — RCT3本331例で初回成功RR 0.88、観察研究29,595例は有利（ILCOR系統的レビュー・Resuscitation2026）</span>・2026</td><td>16研究（RCT 3本331例・観察研究13本29,595例）</td><td>心停止中のビデオ喉頭鏡 vs 直視型（ILCOR系統的レビュー）</td><td>RCTは初回成功 RR 0.88・全体成功 RR 1.00で差なし、ROSC・生存を報告したRCTはゼロ。食道挿管は観察研究で 5.6% 対 1.4%</td><td>心停止では転帰改善の根拠がなく、根拠は食道挿管の減少。確実性は very low</td></tr>
+<tr><td><span class="wl">ICU挿管におけるビデオ喉頭鏡vs直視型（RCT・JAMA2017）</span>・2017</td><td>371例・フランス7施設</td><td>ビデオ喉頭鏡 vs 直視型</td><td>初回成功67.7%対70.3%（差なし）</td><td>器具単独では変わらない</td></tr>
+<tr><td><span class="wl">救急外来でビデオ喉頭鏡は声門視野を改善する — 良好視野80%→93%、直視で不良だった78%が改善（198例・AnnEmergMed2010）</span>・2010</td><td>198例</td><td>ビデオ喉頭鏡 vs 直視型</td><td>良好視野80%→93%</td><td>「見え方」のみで転帰は未測定</td></tr>
+<tr><td><span class="wl">ビデオ喉頭鏡での気管チューブ最適湾曲法（RCT, JCMC2022）</span>・2022</td><td>300例・3群比較</td><td>チューブ屈曲点をカフ上1cmに最適化</td><td>初回通過成功68%→92%</td><td>器具より形状の最適化が効く</td></tr>
+<tr><td><span class="wl">気管挿管のスタイレット使用 STYLETO trial</span>・2021</td><td>ICU挿管例</td><td>スタイレットルーチン使用 vs 非使用</td><td>初回成功71.5%→78.2%（NNT 15、外傷不変）</td><td>スタイレットを毎回使う根拠</td></tr>
+<tr><td><span class="wl">ICU挿管で筋弛緩薬は初回成功率を上げる — 80.9%対69.6%、傾向スコアマッチングOR 2.37、ビデオ喉頭鏡でも同じ（解析664例・AnnalsATS2015）</span>・2015</td><td>664例</td><td>筋弛緩薬使用 vs 非使用</td><td>初回成功80.9%対69.6%（OR 2.37）</td><td>ビデオ喉頭鏡使用時も同じ効果</td></tr>
+</tbody></table></div>
+<p>チューブそのものの固定法にも根拠があります。専用ファスナー（Hollister AnchorFast Guard）はテープに比べ複合合併症が7.8%対17.2%（p=0.014）に減り、1000人工呼吸日あたりでは22.0対52.6でした。<mark class="hl">死亡と人工呼吸期間は変わりません</mark>（<span class="wl">気管チューブ固定は専用ファスナーがテープに勝る — 複合合併症7.8%対17.2%・1000人工呼吸日あたり22.0対52.6、死亡と人工呼吸期間は変わらない（ETTS・単施設RCT298例・CritCare2019）</span>）。挿管後の胃管挿入も手技次第で成功率が変わり、側臥位＋スロートパック併用で初回成功が87.5%対68.75%に上がります（<span class="wl">挿管患者の胃管挿入は側臥位＋スロートパック併用が有利 — 初回成功87.5%対68.75%（RCT 160例・AJMS2024）</span>）。気管チューブのカフリークとチューブ交換は、<mark class="hl">チューブ交換を「新規挿管」として準備する</mark>という発想でベッドサイド機材（ビデオ喉頭鏡・チューブエクスチェンジャー・声門上器具・メス・波形ETCO2）を揃えておくのが実務的です（<span class="wl">気管チューブのカフリークとチューブ交換の実際</span>）。分離肺換気が必要な場面では、Arndt気管支ブロッカーの盲目的挿入法（GEB・輪状軟骨圧迫を利用した手技）が、胸部外科の応援に入るときの手札になります（<span class="wl">Arndt気管支ブロッカーの盲目的挿入法（GEB・輪状軟骨圧迫、Medicine 2016）</span>）。</p>
+<p>_図: 気管チューブの屈曲点をカフ上1cmに合わせた形（成功率92%）と、そうでない従来の形（成功率68%）を並べて比較する図。（Codex 生成の概念図）_</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>当院での運用 器具の導入（ビデオ喉頭鏡の機種変更など）より先に、チューブ形状と屈曲点（カフ上1 cm）の教育を済ませます。研修医の1本目は必ずビデオ喉頭鏡にします。</p>
+</div>
+<h2>⑥ 挿管周辺期の循環管理 — 挿管は血行動態の介入である</h2>
+<p>挿管を「気道の手技」としてだけ見ていると、この領域の最大のリスクを見落とします。<mark class="hl">重症患者の気管挿管は、気道の手技である前に血行動態の介入です</mark>。導入前の頻脈と「ぎりぎりの正常血圧」は安定ではなくアドレナリン依存のサインであり、導入薬はその最後の支えを1分足らずで奪います。循環虚脱は3つの機序が累積して起こります——①導入薬による交感神経遮断（1分未満）、②無呼吸によるアシドーシス（pH 7.2未満で心筋収縮力と昇圧薬反応性が落ちる）、③陽圧換気による静脈還流低下と右室後負荷上昇です（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>）。</p>
+<p>_図: 挿管周辺期の循環虚脱に至る3つの機序を横並びの矢印で示す図。①導入薬による交感神経遮断（時計アイコンで「1分未満」）②無（Codex 生成の概念図）_</p>
+<p>この生理を裏づける疫学データは一貫しています。ICUチームが行う緊急挿管の<mark class="hl">46%（2例に1例）で、挿管後15分以内に循環が崩れます</mark>（4施設479例・調整OR 2.00・<span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span>）。救急外来では、挿管前30分間ずっと血圧が正常だった患者ですら、<mark class="hl">4人に1人（23%）が挿管後60分以内にSBP 90 mmHgを切ります。中央値は挿管後わずか11分</mark>で、院内死亡は33%対21%（調整OR 1.9）です（<span class="wl">救急外来の緊急挿管で正常血圧例の23%が挿管後低血圧を起こす — 院内死亡33%対21%、調整OR 1.9（336例・JCritCare2012）</span>）。高齢者ではこのリスクがさらに上乗せされます（3%対1%、調整OR 2.6・<span class="wl">高齢者は救急外来の挿管後に低血圧を起こしやすい — 3%対1%、調整OR 2.6（JEAN 13施設1903例・IntJEmergMed2013）</span>）。<mark class="hl">挿管後低血圧はERとICUだけの話ではありません</mark>。手術室で麻酔科医が予定手術に対して行う挿管でも、この定義では60%に起こり、調整後もICU滞在延長（OR 2.55）と術後人工呼吸（OR 2.43）に関連します（<span class="wl">全身麻酔でも挿管後低血圧は60%に起こる — 血管外科1395例でICU滞在延長OR 2.55・術後人工呼吸OR 2.43（後ろ向き・JIntensiveCareMed2016）</span>）。挿管前後の循環破綻はICU死亡・28日死亡と独立に関連し、<mark class="hl">導入薬としてのプロポフォールが修正可能な因子として名指しされました</mark>。破綻の定義は収縮期血圧65未満が1回、90未満が30分以上、昇圧薬の新規開始または増量、15 mL/kgの輸液ボーラス、心停止のいずれかです（<span class="wl">挿管前後の循環破綻とICU予後（PRF導入の影響・CCM2022）</span>）。</p>
+<p>病院前の予測研究は、この循環破綻を先読みする手がかりを与えます。<mark class="hl">65歳超・挿管前の収縮期血圧130 mmHg未満・挿管前SpO₂ 90%未満</mark>という3項目が挿管後低血圧の最強の予測因子で、2つ以上該当すれば挿管周辺期心停止が5%に達しました（Elmerらの病院前搬送コホート、<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）。この3項目を予防バンドルに落とし込むと、<mark class="hl">プロポフォールを外す・昇圧薬をつないでから導入する・NIVで前酸素化する・挿管直後はPEEP 5〜6 cmH₂Oから漸増する</mark>という具体的な手順になります（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>）。パラセタモール（アセトアミノフェン）による誘発性低血圧も、循環動態の脆弱な重症患者では見落とされがちな要因として、看護の視点から早期発見と予防が論じられています（<span class="wl">パラセタモール誘発性低血圧 — 看護の視点から早期発見と予防を考える（ナラティブレビュー・NursingOpen2022）</span>）。</p>
+<h3>主要試験・観察研究（挿管周辺期の循環）</h3>
+<div class="tw"><table>
+<thead><tr><th>研究・年</th><th>対象・n</th><th>定義・介入</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span>・2015</td><td>4施設479例</td><td>挿管後15分以内の低血圧</td><td>発生率46%、重大な罹病・死亡と関連（調整OR 2.00）</td><td>昇圧薬を手順の一部として標準化する根拠</td></tr>
+<tr><td><span class="wl">救急外来の緊急挿管で正常血圧例の23%が挿管後低血圧を起こす — 院内死亡33%対21%、調整OR 1.9（336例・JCritCare2012）</span>・2012</td><td>336例</td><td>挿管前正常血圧例の挿管後低血圧</td><td>発生率23%、中央値11分後、院内死亡33%対21%</td><td>「事前に安定＝安全」という前提を崩す</td></tr>
+<tr><td><span class="wl">全身麻酔でも挿管後低血圧は60%に起こる — 血管外科1395例でICU滞在延長OR 2.55・術後人工呼吸OR 2.43（後ろ向き・JIntensiveCareMed2016）</span>・2016</td><td>血管外科1395例</td><td>予定手術の挿管後低血圧</td><td>発生率60%、ICU滞在延長OR 2.55</td><td>手術室の予定手術にも同じ手順を持ち込む根拠</td></tr>
+<tr><td><span class="wl">高齢者は救急外来の挿管後に低血圧を起こしやすい — 3%対1%、調整OR 2.6（JEAN 13施設1903例・IntJEmergMed2013）</span>・2013</td><td>JEAN13施設1903例</td><td>高齢者の挿管後低血圧</td><td>3%対1%（調整OR 2.6）</td><td>高齢者は特に事前の昇圧薬準備を優先</td></tr>
+<tr><td><span class="wl">挿管前後の循環破綻とICU予後（PRF導入の影響・CCM2022）</span>・2022</td><td>ICU挿管例</td><td>循環破綻の操作的定義</td><td>プロポフォールが修正可能な独立因子</td><td>導入薬の選択から外す根拠の1つ</td></tr>
+<tr><td><span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE trial</span>・2019</td><td>重症成人</td><td>輸液500 mL前投与 vs 非投与</td><td>循環虚脱20%対18%（差なし）</td><td>輸液ボーラスのルーチン化を否定</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>落とし穴 挿管後低血圧を「合併症が起きてから対応するもの」と捉えると手遅れになります。<mark class="hl">46%という頻度は「例外」ではなく「既定」</mark>で、昇圧薬を導入前に手元へつなぐ手順の一部として標準化しておく必要があります。</p>
+</div>
+<h2>⑦ 挿管のタイミングをどう決めるか</h2>
+<p>挿管のタイミングを論じた研究を読むときに最初に確かめるべきは、<mark class="hl">統計手法ではなくコホートの入り口</mark>です。「このコホートは挿管された患者だけか」がイエスなら、「遅い挿管は死亡が高い」という結論は割り引いて読む必要があります（<span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span>）。この原則を踏まえてCOVID-19の文献を見ると、結論は真っ二つに割れています。CIBERESUCICOVIDのPSマッチ614例では、<mark class="hl">挿管遅延が院内死亡を27.3%から37.1%に増やし、特にHFNC先行例で顕著</mark>でした（<span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span>）。別の解析でも、<mark class="hl">最初の呼吸補助から48時間を超えた挿管が、傾向スコア調整後も院内死亡を約2.5倍に増やす（HR 2.45）</mark>という結果が示されています（<span class="wl">COVID-19重症患者における挿管までの時間と予後</span>／<span class="wl">挿管までの時間とCOVID-19重症患者の死亡・肺後遺症（González 2022）</span>）。一方でアトランタ4病院175例の後ろ向きコホートでは、<mark class="hl">ICU入室から挿管までの時間（&lt;8／8–24／≥24時間）と院内死亡に関連はありません</mark>でした（38.2%／31.6%／38.1%、p=0.7）（<span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span>）。36施設のPSマッチ122例では、<mark class="hl">初日からHFNOを選ぶことで人工呼吸器フリー日を8日増やし、ICU在室を8日縮められるが、死亡は1ミリも動かない</mark>という、挿管回避のメリットが「死亡」ではなく「侵襲を避けられること」に限定される結果も出ています（<span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span>）。単施設75例の研究レターは調整なしのため、<mark class="hl">「挿管を早くすべきか遅くすべきか」の答えにはなりません</mark>（<span class="wl">COVID-19 ARDSにおける早期挿管と晩期挿管の呼吸メカニクス</span>）。重症COVIDの挿管回避という文脈では、HFNCよりCPAPが優る可能性がRECOVERY-RSで示されています（<span class="wl">重症COVIDの挿管回避はHFNCよりCPAP（RECOVERY-RS・JAMA2022）</span>）。</p>
+<p>敗血症性ショックでは、<mark class="hl">早期挿管の割合が施設間で4.5%から47%まで大きくばらつき</mark>、全体では24%でした（30 ICU・859例・<span class="wl">敗血症性ショックの挿管はいつ誰がするのか — 早期挿管24%だが施設間で4.5〜47%とばらつく（30 ICU 859例・AnnIntensiveCare2020）</span>）。<mark class="hl">同じ重症度でも「いつ挿管するか」の判断は施設文化に大きく依存する</mark>という現実は、統一されたトリガー基準が必要という主張を裏づけます。低酸素性呼吸不全一般でも同じ構図が確認されていて、MIMIC-IVとAmsterdamUMCdbの4,726例で17種類の閾値（P:F・S:F・ROX・HACOR・FLORALI基準など）を評価すると、<mark class="hl">どの閾値を満たしても3時間以内に挿管される確率は34%以下</mark>で、臨床試験基準（FLORALI）を満たしても9〜13%にとどまりました。さらに<mark class="hl">黒人・アジア系は白人と比べて閾値到達後の挿管確率が有意に低く（OR 0.75・0.6）</mark>、非医学的要因が判断に影響しうることも示されています（<span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span>）。ROX指数（SpO₂/FiO₂÷呼吸数）は、この判断を客観化する数少ない道具の1つで、<mark class="hl">HFNC開始12時間後に4.88以上なら挿管リスクは低く、3.85未満なら挿管を議論の卓上に載せる</mark>という目安が示されています（<span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>）。HFNCと従来型酸素療法の比較でも、<mark class="hl">挿管は減らすが死亡は変えない（OR 0.52・0.34–0.79）</mark>という2本のメタ解析が一致しており、NIVとの優劣比較はGRADE「非常に低い」で判定できません（<span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span>／<span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span>）。</p>
+<p><mark class="hl">予測が当たることと、その予測で挿管を決めてよいことは別</mark>という点に、観察データから初めて踏み込んだのが2026年のターゲットトライアルエミュレーションです。MIMIC-IVでHFNCを開始した1,651例に「ROXが閾値を初めて下回った時点から2時間以内に挿管する」という決定ルールを当てはめると、30日死亡は通常ケア26.9%（95%CI 24.7–29.2）に対しROX&lt;3.85で20.5%（17.1–24.1）、リスク差 −6.5ポイント、RR 0.76（0.66–0.86）と推定されました。閾値を4.88にしてもRR 0.74、時間可変閾値でもRR 0.79で方向は同じです。タイミング論として重要なのは、<mark class="hl">30日挿管の累積発生率が通常ケアとほとんど変わらなかったこと（21.5%対22.0%）</mark>——死亡が減ったとすれば「挿管を増やしたから」ではなく「挿管を早めたから」という説明になり、上のCIBERESUCICOVIDなど「遅延は害」という観察研究群と同じ向きを指します。ただし<mark class="hl">これはMIMIC-IVという単一施設の電子カルテを使った因果推論であって、RCTと同列には置けません</mark>。ROX&lt;4.88の戦略では73.7%がプロトコル非順守で人工的に打ち切られており、著者ら自身が「仮説生成であり、現時点で挿管判断そのものに使うべきではない」と明記しています（<span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>）。当院でも、ROXは呼吸努力・意識・循環動態と併せた総合判断の一材料という位置づけを変えず、パイロットRCT（ROX-1, NCT04707729）の結果が出た段階でプロトコル化の是非を再検討する材料にします。</p>
+<p>腹臥位療法も、ARDSの基準を満たさない低酸素性呼吸不全に対して挿管を26%減らす（RR 0.74、NNT約12）ことが示されていますが、<mark class="hl">対象の95%はCOVID-19肺炎で、死亡は不変</mark>です。「挿管が減る」を「挿管を遅らせてよい」と読み替えないことが重要です（<span class="wl">ARDS以外の低酸素性呼吸不全でも腹臥位は挿管を26%減らす — 死亡は減らない（SR・メタ解析・ClinRespirJ2026）</span>）。市中肺炎に対するステロイドも、侵襲的人工呼吸のリスクを下げます（RR 0.63、確実性high・<span class="wl">非ウイルス性市中肺炎へのステロイドは短期死亡と挿管を減らす（30RCT・7519例のSR・MA・ICM2025）</span>）。ARDSを生理学で個別化する総説は、<mark class="hl">同じPplat・同じPEEP・同じSpO₂が、気道閉塞・胸膜圧・リクルータビリティ・自発努力の有無で意味を変える</mark>とし、挿管の判断を鎮静スケールではなくP0.1やΔPoccといった呼吸ドライブの指標で行うべきだと主張します（<span class="wl">ARDSを生理学で個別化する挿管から離脱までの実践（ナラティブレビュー・ICM2026）</span>）。iCOREレジストリ（10,832例・9ICU）は、この判断の重さを数字で示しています——<mark class="hl">ICU患者の半数が入室24時間以内に低酸素性呼吸不全となり、その76%が挿管され、重症AHRF例のICU死亡は47%に達します</mark>（<span class="wl">ICU患者の半数が24時間以内に低酸素性呼吸不全 — 76%が挿管・重症例のICU死亡47%（iCORE 10832例・9ICU・CCM2026）</span>）。</p>
+<h3>主要試験・観察研究（挿管のタイミング）</h3>
+<div class="tw"><table>
+<thead><tr><th>研究・年</th><th>対象・n</th><th>比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span>・2022</td><td>PSマッチ614例</td><td>早期 vs 遅延挿管</td><td>院内死亡27.3%対37.1%</td><td>遅延は害という立場</td></tr>
+<tr><td><span class="wl">COVID-19重症患者における挿管までの時間と予後</span>・2022</td><td>CARDS IMV例</td><td>48時間超 vs 以内の挿管</td><td>HR 2.45（院内死亡増）</td><td>48時間を目安にする根拠</td></tr>
+<tr><td><span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span>・2020</td><td>175例</td><td>&lt;8/8–24/≥24時間</td><td>院内死亡差なし（p=0.7）</td><td>タイミング単独では説明できない</td></tr>
+<tr><td><span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span>・2021</td><td>PSマッチ122例</td><td>HFNO継続 vs 早期挿管</td><td>人工呼吸器フリー日+8日、死亡不変</td><td>挿管回避の利益は「侵襲回避」に限定</td></tr>
+<tr><td><span class="wl">敗血症性ショックの挿管はいつ誰がするのか — 早期挿管24%だが施設間で4.5〜47%とばらつく（30 ICU 859例・AnnIntensiveCare2020）</span>・2020</td><td>30ICU 859例</td><td>施設間比較</td><td>早期挿管割合4.5〜47%</td><td>施設文化への依存が大きい</td></tr>
+<tr><td><span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span>・2023</td><td>MIMIC-IV＋AmsterdamUMCdb 4,726例</td><td>17閾値到達後3時間以内のIMV確率</td><td>最大34%、FLORALI基準は9〜13%</td><td>単一閾値だけでは挿管判断を説明できない</td></tr>
+<tr><td><span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>・2026</td><td>MIMIC-IV HFNC開始1,651例</td><td>ROX閾値を下回ったら2時間以内に挿管 vs 通常ケア</td><td>30日死亡26.9%→20.5%、RR 0.76（0.66–0.86）。30日挿管率は21.5%対22.0%でほぼ同じ</td><td>死亡減少は「挿管を増やした」のではなく「早めた」ことで説明されうる。<mark class="hl">観察データのエミュレーションで仮説生成段階</mark></td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>落とし穴 COVID-19の挿管タイミング研究を横並びにするときは、必ず<mark class="hl">「挿管された患者だけのコホートか」を先に確認</mark>してください。それを怠ると、正反対の結論のどちらが正しいかを誤って判断します。</p>
+</div>
+<h2>⑧ 困難気道の予測とマネジメント — エスカレーションの型</h2>
+<p>困難気道の管理で最も重要なのは、<mark class="hl">「いつ止めて次の一手に移るか」をあらかじめ数字で決めておくこと</mark>です。AIDAA 2016ガイドラインは、挿管3回・声門上器具2回までという撤退基準を打ち出しましたが、<mark class="hl">これはSpO₂ 95%以上が保たれている間だけ有効な条件付きの数字</mark>です（<span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span>）。DASガイドライン2015は、<mark class="hl">困難の「認識」と「宣言」</mark>を明示的な手順として組み込み、試行回数の制限と「立ち止まって考える時間」を確保することを求めます（<span class="wl">予期せぬ困難挿管のDASガイドライン2015 — 困難の認識と「宣言」、試行回数の制限、立ち止まって考える時間（BJA2015）</span>）。ASA 2022ガイドラインはこの流れを引き継ぎ、<mark class="hl">時間経過の意識と試行回数の制限に加え、抜管の推奨を強化</mark>しました（<span class="wl">困難気道管理のASAガイドライン2022 — 時間経過の意識と試行回数の制限、抜管の推奨を強化（Anesthesiology2022）</span>）。DASガイドラインは2025年に10年ぶりの全面改訂を迎え、Plan A（気管挿管）→B（声門上器具）→C（フェイスマスク換気）→D（緊急輪状甲状膜切開）という骨格を維持しつつ、<mark class="hl">挿管3回＋熟練者1回（3+1）・SAD3回までという試行回数を数字で明確化</mark>し、<mark class="hl">eFONAの切開方法（縦切開か横切開か）を輪状甲状膜の触知可否によらず縦切開に統一</mark>して、意思決定をクライシスの前に済ませる方向へ踏み込みました（<span class="wl">予期せぬ困難気管挿管のDAS 2025ガイドライン — 3+1回の試行制限とeFONA垂直切開の既定化、生理学的困難気道を明記（BJA2026）</span>）。</p>
+<p>_図: 困難気道のエスカレーションを縦のフローで示す図。上から「マスク換気」→「声門上器具（best effort 1回）」→「（Codex 生成の概念図）_</p>
+<p>これらのガイドラインが実際にどこで機能しなかったかを示すのが、困難気道の医療訴訟（closed claims）分析です。<mark class="hl">1993–1999年の93例と2000–2012年の102例を比較すると、後期のほうが死亡・脳障害の割合が高く（OR 5.5）</mark>、手術室外（PACU・ICU・病棟・ED）での困難気道が増えていました。76%に予測因子があり、半数は2つ以上該当していたにもかかわらず対応が遅れ、外科的気道確保が40%で遅延していたことが明らかになっています（<span class="wl">困難気道 ― 医療訴訟（closed claims）から学ぶ</span>）。<mark class="hl">ガイドラインの存在と、それが現場で実行されることは別問題である</mark>という重い教訓です。緊急輪状甲状膜穿刺・切開は、この最終段階の技術で、cannot oxygenateへの対処として6〜7名のタスクチームで臨むことが推奨されます（<span class="wl">緊急輪状甲状膜穿刺・切開 — CVCIではなくcannot oxygenateへの対処、6〜7名のタスクチームで臨む（総説・日臨麻会誌2014）</span>）。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>当院での運用 困難気道の訓練は「器具の使い方」だけでなく「宣言のタイミング」と「応援要請の閾値」を含めて行います。closed claimsの教訓は、<mark class="hl">技術の欠如より「早く助けを呼べなかったこと」が転帰を悪化させる</mark>ことを示しています。</p>
+</div>
+<p>ここまでは<strong>麻酔導入後に困難が判明した場合</strong>（unanticipated）の話だが、<strong>あらかじめ困難が予測できている場合</strong>（anticipated）には、麻酔導入前に気道を確保してしまうという選択肢がある。DASの覚醒下気管挿管（ATI）ガイドラインは、<mark class="hl">酸素化・表面麻酔・鎮静・手技の4要素（sTOP）</mark>という共通言語で手順を体系化し、<mark class="hl">試行回数を3回＋経験者1回（3＋1）</mark>に制限し、麻酔導入は<mark class="hl">「視認」と「カプノグラフィ」の二点チェック</mark>で気管チューブ位置を確認してから行うことを推奨する。ATI:FBとATI:VLの成功率・安全性は同等（各98.3%）で、不成功は1〜2%にとどまり気道レスキューや死亡に至ることはまれだが、英国でも実施率はわずか0.2%と低い（<span class="wl">成人の覚醒下気管挿管（ATI）のDASガイドライン — sTOP（鎮静・表面麻酔・酸素化・手技）と3+1回で安全域を作る（Anaesthesia2020）</span>）。不成功時の既定は延期で、DAS2015のunanticipatedアルゴリズムに合流する構造になっており、<mark class="hl">「予測された困難」と「予測されなかった困難」のガイドラインは互いに接続している</mark>。</p>
+<h2>⑨ 病院前・院内搬送・特殊環境での気道管理</h2>
+<p>装備と時間が制限された環境での気道管理は、ICU内の緊急挿管と同じ生理学的枠組みで扱えますが、<mark class="hl">その枠組みが実行される確率そのものが場所によって変わる</mark>という特徴があります。2026年のICMナラティブレビューは、適応・タイミング・生理の最適化・手技・失敗時のエスカレーション・挿管後管理を1本のアルゴリズムに統合しました。病院前の初回失敗率は23.2%（CURASMUR）、失敗すると合併症が19.6%から28.4%へ増え（OR 1.44）、<mark class="hl">初回成功率はシステムによって59%から95%超までばらつきます</mark>。院外心停止では声門上デバイスが妥当な一次選択で、4RCT 13,412例でROSC率が高く30日神経学的生存は挿管と同等でした。中毒昏睡はGCS 8点未満だけを理由に挿管せず、出血性ショックでは循環を優先します（<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）。</p>
+<p><mark class="hl">院内搬送とRRSコール先にも同じ型を持ち込めます</mark>。CT室・血管撮影室・MRI・一般病棟は、装備と時間が制限された場所という点で病院前と同じ枠組みで扱え、ramped position（外耳道と胸骨切痕を水平に合わせる）、NIVによる前酸素化、導入から喉頭鏡までのバッグバルブマスク換気の3点は追加コストなしで標準化できます。NIVを組み立てる時間がない場面の代替は、リザーバーマスクのフラッシュレート（50 L/分超）です（同上）。インド三次救急のED挿管実態調査では、初回成功78.3%・15分以内の有害事象58.4%・挿管後心停止5%という数字が報告されており、<mark class="hl">「有害事象の頻度」自体はこの領域の標準的なリスク水準として読める</mark>資料です（<span class="wl">インド三次救急のED挿管実態 — 初回成功78.3%、15分以内の有害事象58.4%、挿管後心停止5%（166例・前向き観察・TurkJEmergMed2022）</span>）。</p>
+<p>エアロゾル産生手技という文脈では、感染防護そのものが手順の一部として組み込まれます。COVID-19パンデミック期に各国の麻酔科学会が相次いで出した提言群は、<mark class="hl">液体不透過性PPE・陰圧室・覚醒下挿管の回避・十分な筋弛緩を効かせた修正RSI・最も経験のある術者による一度での挿管</mark>という共通の骨格を持ちます（<span class="wl">COVID-19下の手術室気道管理 — 全インド困難気道学会（AIDAA）コンセンサス、HFNO・マスク換気・ジェット換気は避ける（IJA2020）</span>／<span class="wl">COVID-19患者の困難気道管理 — SAMステートメント、覚醒下挿管とエアロゾル産生手技の再考（AnesthAnalg2021）</span>／<span class="wl">COVID-19疑い患者の麻酔管理 — 陰圧室・RSI・HFNCは使わない、挿管は最も経験のある者が（韓国麻酔科学会・KJA2020）</span>／<span class="wl">COVID-19重症患者の気管挿管に関する中国麻酔学会の専門家推奨 — 覚醒下挿管は避け修正RSI、十分な筋弛緩を確保する（コンセンサス・ChinMedSciJ2020）</span>／<span class="wl">新型コロナウイルス感染患者の周術期管理 — 中国麻酔学会合同タスクフォースの提言（Anesthesiology2020）</span>／<span class="wl">インド麻酔科学会のCOVID-19勧告 — 麻酔科医が患者と自らを守るための位置づけ声明（IJA2020）</span>）。イタリアのCOVID-19アウトブレイクの実務報告は、<mark class="hl">医療崩壊下では手技そのものより計画・訓練・チームワークという非技術的側面が結果を左右した</mark>という現場の声を伝えています（<span class="wl">イタリアのCOVID-19アウトブレイク — 臨床実践からの提言（Anaesthesia2020）</span>）。<mark class="hl">現在の運用に直接使う場面は限られますが、次のパンデミックで手術室・ICUの運用を組み直すときの雛形として、これらのノートは残しています</mark>。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>当院での運用 RRS現場・院内搬送での気道管理は「病院前の縮小版」として設計します。ramped position・NIV前酸素化・搬送前のBVM換気の3点は、追加の物品なしで標準化できます。</p>
+</div>
+<h2>⑩ 挿管後の合併症とケア — VAP・気管切開・再挿管</h2>
+<p>挿管という行為そのものが、気道の細菌叢を変えます。人工呼吸患者の気道細菌叢は挿管した時点から多様性が落ち始め、<mark class="hl">VAPでは単一菌の優占へ、ARDSでは腸管由来菌（Enterobacteriaceae）の増加へ</mark>、それぞれ違う方向に偏っていきます（<span class="wl">人工呼吸患者の呼吸器マイクロバイオーム — 挿管後にα多様性が落ち、VAPは単一菌の優占、ARDSは腸内細菌の肺内増加が特徴（ナラティブレビュー・ICM2021）</span>）。挿管する場所とタイミングもVAPリスクを左右し、<mark class="hl">ICU外で挿管され24時間を超えてICU入室を待った患者はVAPが約3.3倍多く（調整OR 3.294）、多剤耐性Acinetobacterが目立ちました</mark>（<span class="wl">ICU外での挿管と24時間超のICU入室遅れはVAPの独立危険因子 — 調整OR 3.29、多剤耐性Acinetobacterが目立つ（前向き100例・ClinRespirJ2018）</span>）。意識障害患者（GCS 8以下）への挿管後4時間以内のセフトリアキソン2g単回投与は、<mark class="hl">早期VAPを22.4%から2.8%に減らしました（傾向スコア調整OR 0.11）が、対照は歴史的コホートであり、死亡は不変</mark>です（<span class="wl">意識障害患者への挿管時セフトリアキソン2g単回投与で早期VAPは22.4%から2.8%へ — 対照は歴史的コホート、死亡は不変（傾向スコア調整・Chest2013）</span>）。カフ圧の自動個別化と声門下吸引を組み合わせたシステムは、<mark class="hl">主要評価項目のDay 3気管内定着こそ動きませんでしたが、カフ圧の安全域逸脱を大きく減らしました</mark>（<span class="wl">カフ圧の自動個別化と声門下吸引はVAPを半減させたが主要評価項目のDay3気管内定着は動かなかった（MICROINHALO・ICM2026）</span>）。詳細は <span class="wl">🧫 VAPと抗菌薬の期間 Home</span> に委ねます。</p>
+<p>再挿管率は、単独の数字ではなく「どこから悪化するか」で読む指標です。JIPAD 95施設21,443例の解析では、<mark class="hl">従来の「至適5〜10%」という基準は棄却され、13.8%を超えて初めてSMR（標準化死亡比）が悪化する</mark>ことが示されました。日本の再挿管率は5.7%です（<span class="wl">最適な再挿管率は5〜10%ではない — 13.8%を超えて初めてSMRが悪化（JIPAD 21443例・95施設・ChestCritCare2025）</span>）。術後再挿管に限ると発生率は6.26%で、<mark class="hl">PaCO2・ビリルビン・BUNが上げ、BMIと白血球最低値が下げる</mark>という、入室24時間以内に揃う指標だけで予測できることが示されています（<span class="wl">術後再挿管は6.26% — PaCO2・ビリルビン・BUNが上げ、BMIと白血球最低値が下げる（JIPAD 13219例・IntensiveCritCareNurs2025）</span>）。離脱モードの選択も再挿管に影響しますが、<mark class="hl">2つの2026年メタ解析で結論が割れており</mark>、この議論の本体は <span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> にあります（<span class="wl">PAVはPSVより再挿管を36%減らすが離脱成功は同等 — 7RCT 1059例、確信度は低〜中（SR・メタ解析・JAnesthAnalgCritCare2026）</span>／<span class="wl">PAV+はPSVより離脱成功を12%増やすが再挿管・死亡は同等 — 7RCT 1103例、有意性は小規模試験とSBT試験が支える（SR・メタ解析・FrontMed2026）</span>）。気管チューブに装着する高流量酸素インターフェースは、<mark class="hl">呼気ポートの細さと流量で決まる用量依存のPEEP様効果</mark>を生みますが、<mark class="hl">本邦で入手しやすい14.6mm品ではPEEPが1cmH2O未満</mark>にとどまるという実務的な注意点があります（<span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span>）。気管切開の至適時期は、<mark class="hl">早期化しても死亡・入院期間・ICU滞在を改善しない</mark>ため未解決のままで、晩期群の大半が切らずに離脱したことから、問いは「いつ切るか」より「切らずに済むか」に近いという整理です（<span class="wl">気管切開の最新知見レビュー（ICM2019）</span>）。</p>
+<p>患者体験に目を向けると、挿管患者のwell-beingと安心感を測る初めてのスケール（TOURS Scale）が元患者との共同開発で作られています（<span class="wl">挿管患者のwell-beingと安心感を4項目で測る TOURS Scale — 元患者と共同開発（CritCare2026）</span>）。呼吸理学療法の実施内容は施設でバラバラで、目的は排痰が98%と一致する一方、<mark class="hl">6割が「人員で内容が変わる」と回答</mark>しており、挿管後のケアが「何をするか」より「誰がいるか」で決まっている実態が示されています（<span class="wl">挿管された肺炎患者への呼吸理学療法は施設でバラバラ — 目的は排痰98%、6割が人員で内容が変わると回答（豪州ICU調査・JEvalClinPract2017）</span>）。非挿管患者の睡眠評価に使うRCSQ日本語版（J-RCSQ）は、<mark class="hl">非挿管ICU患者でのみ検証されており、挿管患者への外挿は検証されていません</mark>（<span class="wl">RCSQ日本語版（J-RCSQ）は非挿管ICU患者でPSGの代替になる — α0.911・睡眠効率とr0.602（NursOpen2019）</span>）。非挿管ICU患者の過活動型せん妄にデクスメデトミジンを使う初の二重盲検RCTでは、<mark class="hl">興奮は約1時間短縮しますが、せん妄期間と挿管は変わりません</mark>（<span class="wl">非挿管ICU患者の過活動型せん妄にデクスメデトミジン — 興奮は約1時間短縮するがせん妄期間と挿管は変わらない（4D二重盲検RCT・ICM2025）</span>、詳細は <span class="wl">😴 鎮静鎮痛・せん妄（PADIS） Home</span>）。日本のICUでは、<mark class="hl">persistent critical illnessの発症点（欧米ではICU 5〜16日目に観察される）が28日目まで観察されず</mark>、長期在室でも急性期管理の質が転帰を左右し続けることが示唆されています（<span class="wl">日本のICUではpersistent critical illnessの発症点が観察されない（JIPAD 28万例・101ICU・LancetRegHealthWP2025）</span>）。</p>
+<h2>⑪ 大量喀血の気道管理</h2>
+<p>大量喀血は、この領域で唯一「量」ではなく「窒息を防げているか」で重症度を判断する主題です。<mark class="hl">死因は失血ではなく窒息であり、中枢気道の死腔はわずか150 mLしかありません</mark>（<span class="wl">大量喀血のマネジメント 参考ガイドラインと初期対応（Chest2020）</span>／<span class="wl">喀血患者をどう管理するか — 中枢気道の死腔は150mLしかない、24時間量より出血速度（How I Do It・JBronchol2002）</span>）。救急外来での評価と管理は、気道確保・出血側肺の隔離・CTAとBAE（気管支動脈塞栓術）という3本柱で進みます（<span class="wl">大量喀血の救急外来での評価と管理 — 気道確保・出血側肺の隔離・CTAとBAE（ナラティブレビュー・AmJEmergMed2021）</span>）。気管切開・挿管歴のある患者の反復する少量喀血は、<mark class="hl">証明されるまで気管腕頭動脈瘻（TIF）として扱う</mark>必要があります。TIFは診断が遅れれば分単位で失血・窒息に至り、緊急外科修復の生存率は25〜50%にとどまります（<span class="wl">気管腕頭動脈瘻を被覆ステント＋凍結保存動脈同種移植で治療した1例 — 単回挿管後の発症、緊急止血から12時間後に外科的再建（症例報告・AnnVascSurg2006）</span>）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>落とし穴 大量喀血で「出血量」を重症度の物差しにすると判断を誤ります。少量でも窒息が進行していれば緊急気道確保が必要で、判断は<mark class="hl">「気道を守れているか」</mark>で行います。</p>
+</div>
+<h2>⑫ 麻酔・周術期管理 — 周術期心血管ガイドラインとJIPADの本邦データ</h2>
+<p>手術室と周術期という文脈は、気道管理と同じ「解剖より生理」「状況より個別の評価」という思想を、循環管理という別の切り口で体現しています。<mark class="hl">この章の中心は1本のガイドラインです</mark>——2024年のACC/AHA周術期心血管管理ガイドライン（9学会合同・92ページ・約70推奨）は、2014年版を完全に置き換え、<mark class="hl">手術という事実そのものを検査の理由にしない。非手術患者と同じ適応で心血管の評価と治療を行う</mark>という思想を明文化しました（<span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>）。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 周術期心臓評価へのステップワイズ・アプローチ。「どこまで検査を積むか」ではなく「どこで止めて手術に進んでよいか」を示す1枚のフローチャート（出典 <span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>）_</p>
+<p><strong>術前評価</strong>の骨格は「その検査が方針を変えるか」を先に問うことです。リスクの線引きはMACE 1%（1%未満が低リスク、1%以上がelevated risk）、機能的能力はDASIで構造化評価し（閾値34以下または4 METs未満）、<mark class="hl">麻酔科医の主観評価はアウトカムと関連しませんでした</mark>（METS study）。65歳以上は中等度以上リスク手術の前にフレイルを評価します（30日死亡の相対危険3.71）。<mark class="hl">やらない推奨</mark>として、無症状・低リスク手術のECG、安定患者のルーチン左室機能評価、機能的能力良好かつ低リスクでのルーチン負荷試験とCCTA、ルーチンの侵襲的冠動脈造影がいずれも3: No benefitに指定されました。負荷試験は「未診断の冠動脈疾患を見つけるため」ではなく「血行再建で予後が変わる患者を見つけるため」にだけ行います。術前バイオマーカーはBNP・NT-proBNPが2a、トロポニンが2bですが、<mark class="hl">高値だったときに何をすれば予後が改善するかを示した研究はありません</mark>（同上）。</p>
+<p><strong>薬剤の休薬と継続</strong>では、<mark class="hl">SGLT2阻害薬の手術3〜4日前中止がClass 1</mark>（エルツグリフロジンは4日以上）に格上げされました。スタチンは継続・適応があれば開始（1）、β遮断薬は継続（1）ですが<mark class="hl">手術当日の開始は3: Harm</mark>です。メトホルミンは継続（2a）、クロニジンの新規開始は3: No benefit。<mark class="hl">抗凝固のルーチンブリッジングは3: Harmに格下げ</mark>され、ワルターゼ超高リスク血栓症例のみ2aで、DOACは時間で切る運用（PAUSE由来）になりました。GLP-1受容体作動薬については<mark class="hl">本ガイドラインはCOR・LOE付きの推奨を1つも作っておらず</mark>、本文でASAコンセンサス（週1回製剤は1週間超前、1日1回製剤は前日）を紹介しているだけです。PCI後の待機期間は、バルーン単独14日超（1）、ACSへのDES-PCIは12か月以上（1）、慢性冠動脈疾患へのDES-PCIは6か月以上（2a）で、<mark class="hl">ステント留置後30日以内に抗血小板薬を中断する待機手術は3: Harm</mark>です（同上）。</p>
+<p><strong>術中・術後の血圧</strong>は、<mark class="hl">MAP 60〜65 mmHg以上または収縮期血圧90 mmHg以上を維持することがClass 1</mark>（術後低血圧の治療もClass 1）です。これより高い目標（MAP 80など）を狙う根拠はなく、POISE-3と単施設RCTがいずれも陰性でした。<mark class="hl">このClass 1は「下回らせるな」であって「65を目標にせよ」ではありません</mark>。65を目標にすると閾値を下回る時間が増えます（同上）。ところが2026年、この「目標値の上限は根拠がない」という現状に一石を投じたのがHISTAP試験です。<mark class="hl">60歳以上・慢性高血圧・待機的大腹部手術という限定条件で、観血的動脈圧＋連続血行動態モニタリング＋プロトコル化輸液を敷いた上なら、術中MAP目標を80以上に置くと術後7日以内の主要臓器障害＋30日死亡が48.9%→38.1%（RR 0.78、NNT 10）に減ります</mark>。しかし<mark class="hl">内訳で有意差が付いたのはAKIN 1・2度の腎障害だけで、30日死亡（1.9%対2.5%）・心血管・呼吸・敗血症・神経のいずれも動きません</mark>でした。実測は「65対80」ではなく「77対88」の比較であり、<mark class="hl">この11 mmHgの差を作るためにノルアドレナリン持続が22.5%→40.3%、赤血球輸血が6.7%→11.8%に増えています</mark>——腎を10人に1人守る代わりに、6人に1人が余分な昇圧薬を、20人に1人が余分な輸血を受けます（<span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>）。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 術中の時点別MAP分布。対照群（水色）は73〜76 mmHg付近で推移し、介入群（オレンジ）は全時点で86〜89 mmHgを維持、両群の箱がほとんど重ならない（出典 <span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>）_</p>
+<p><strong>MINSと術後新規心房細動</strong>では、非心臓手術後の心筋障害は約20%に発生し、30日死亡は約10%、<mark class="hl">80〜90%が無症状</mark>です。中等度以上リスク手術を受けた高リスク患者で術後24時間・48時間のトロポニン測定（2b）、<mark class="hl">拾ったら外来フォローへ確実に渡す（2a）</mark>——測る対象と陽性時の対応を同時に決めなければ検査が増えるだけになります。術後新規心房細動は30日以内の脳卒中を62%、死亡を44%増やし、<mark class="hl">非心臓手術後（HR 2.00）は心臓手術後（HR 1.20）より脳卒中との関連が強い</mark>。CIEDは術後、退院前に必ず設定を戻します（Class 1）（<span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>）。</p>
+<p>本邦の周術期転帰は、この議論に実数を与えます。<mark class="hl">予定手術後の予定外ICU入室は1.9%（141,969例中2,666例）で、最多は呼吸器合併症、死亡が最も高いのは循環器合併症</mark>でした（院内死亡3.3%、在院日数中央値21日、<span class="wl">予定手術後の予定外ICU入室は1.9% — 呼吸器合併症が最多・循環器合併症が最も死亡が高い（JIPAD 2666例・AnesthAnalg2025）</span>）。<mark class="hl">周術期心停止は緊急手術1.74%対予定手術0.17%で約10倍の差</mark>があり、緊急手術の最多術式は急性大動脈解離修復（16.0%）、次いでその他の心血管（15.6%）、破裂性大動脈瘤（12.1%）でした（<span class="wl">周術期心停止は緊急手術で1.74%・予定手術で0.17% — 原因も予後も別物（JIPAD 874例・95施設・BJA2025）</span>）。<mark class="hl">同じ「周術期心停止」という指標でも、緊急と予定は原因も予後も別物であり、1つの指標で並べて語ってはいけません</mark>。</p>
+<p>免疫代謝という新しい切り口も、この章の到達点を示す材料です。周術期・集中治療における免疫代謝のナラティブレビューは、<mark class="hl">免疫細胞は「何を燃やすか」で炎症性にも抗炎症性にもなる（代謝可塑性）という機序の地図を描きましたが、提示された介入（免疫栄養・ケトン食・メトホルミン・麻酔法の選択）はすべて仮説段階か試験進行中</mark>で、今日の診療を変える根拠にはなりません。周術期の高血糖は糖尿病患者の最大95%・非糖尿病患者の最大60%に起こり、<mark class="hl">逆説的に非糖尿病患者が同程度の高血糖をきたすと術後合併症リスクはさらに高い</mark>という指摘があります。免疫栄養は「良さそうだから足す」ものではなく、<mark class="hl">REDOXS試験で早期グルタミンが死亡増加と関連した「害の領域」として見る</mark>べきだという整理です（<span class="wl">周術期・集中治療における免疫代謝 — 免疫細胞は代謝を切り替えて戦う、ただし今日の診療を変える介入はまだない（ナラティブレビュー・BJA2026）</span>）。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>当院での運用 周術期の心血管管理は、気道管理と同じ「その検査・その目標値が患者を変えるか」という問いで運用します。SGLT2阻害薬の休薬とMINSのフォロー体制は、根拠の強さによらず即実装できる低コストの項目です。</p>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>導入薬はケタミンかエトミデートか</td><td><span class="wl">重症患者の挿管導入薬 — ケタミンを第一に、エトミデートは死亡リスク、プロポフォールは循環虚脱（Concise Definitive Review・CCM2025）</span>（消去法でケタミン第一）／<span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span></td><td><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span>／<span class="wl">敗血症の救急外来挿管ではケタミンのほうが挿管後低血圧が多い — 74%対50%、傾向スコア調整OR 2.7（NEAR 531例・AcadEmergMed2020）</span>／<span class="wl">敗血症患者への単回エトミデートは死亡と関連しない — eICU 2014例で院内死亡37.2%対37.8%（後ろ向きコホート・CCM2013）</span></td><td><strong>「どちらが生存を良くするか」で薬を選ぶ根拠はない</strong>。EvKの優位は7日で消える。<mark class="hl">ケタミンでも循環虚脱は起こる</mark>前提で、薬の選択より<strong>昇圧薬を手元に置くこと</strong>を標準化する。<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span> も未決着としたうえで、外すべき薬としてプロポフォールを名指しする（n=2365のRCTで28日死亡は同等、循環虚脱はケタミン22.1%対17.0%、リスク差5.1、95%CI 1.9–8.3）</td></tr>
+<tr><td>導入にオピオイド（フェンタニル）を足すか</td><td><span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span>（5RCT 515例で循環不安定 RR 1.41・95%CI 0.83–2.40、I² 60%、確実性very low＝<strong>害を否定できていない</strong>。低リスクバイアス2試験だけなら RR 1.74・1.26–2.39）</td><td>同メタ解析の初回挿管成功は RR 1.03（確実性moderate）で<strong>差がない</strong>＝「入れやすくするため」の上乗せは根拠を欠く。交感神経刺激の緩和を狙う従来の実践（<span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span>）とは噛み合わない</td><td><strong>TSAの必要情報量5586例に対し9.2%しか集まっていない</strong>＝現時点で賛否どちらの主張も証拠が足りない。実務では<mark class="hl">ショック・前負荷依存の例で減量または省略</mark>を既定の選択肢に置き、足すなら昇圧薬を先につないでおく。<mark class="hl">最大の教訓は薬でなく測り方</mark>で、「循環不安定」の定義次第で RR 1.83 と 0.43 に割れる（交互作用 P=0.004）ため、他試験の数字を横並びにする前に定義を確認する</td></tr>
+<tr><td>挿管は早いほうがよいか</td><td><span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span>／<span class="wl">COVID-19重症患者における挿管までの時間と予後</span>（48時間超でHR 2.45）</td><td><span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span>／<span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span></td><td><strong>コホートの入り口を先に見る</strong>。<span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span> が要点。<mark class="hl">「挿管された患者だけ」のコホートなら「遅い挿管は死亡が高い」は割り引いて読む</mark>。実務では ROX指数など客観指標で議論の卓上に載せる時刻を決める</td></tr>
+<tr><td>ビデオ喉頭鏡は「見え方」を超えて優れているか</td><td><span class="wl">ビデオ喉頭鏡は挿管失敗を減らす — 222RCT 26149例、失敗RR 0.41〜0.51（Cochrane改訂版・BJA2022）</span>／<span class="wl">心停止患者の挿管はビデオ喉頭鏡が有利 — 初回成功率78%対70%（JEAN-2・3360例・Resuscitation2019）</span>／<span class="wl">ビデオ喉頭鏡での気管チューブ最適湾曲法（RCT, JCMC2022）</span>（チューブ形状最適化で68%→92%）／<span class="wl">McGrath挿管時のスタイレット屈曲角度の有効性（RCT）</span></td><td><span class="wl">ICU挿管におけるビデオ喉頭鏡vs直視型（RCT・JAMA2017）</span>（371例。初回成功67.7%対70.3%で差なし）／<span class="wl">救急外来でビデオ喉頭鏡は声門視野を改善する — 良好視野80%→93%、直視で不良だった78%が改善（198例・AnnEmergMed2010）</span>（<mark class="hl">測ったのは「見え方」だけ</mark>）／<span class="wl">心停止中の挿管でビデオ喉頭鏡は食道挿管を減らすが生存は変えない — RCT3本331例で初回成功RR 0.88、観察研究29,595例は有利（ILCOR系統的レビュー・Resuscitation2026）</span>（ILCOR系統的レビュー。RCT 3本331例で初回成功 RR 0.88・全体成功 RR 1.00、ROSC・生存・神経学的転帰を報告したRCTはゼロ）</td><td><strong>器具の問題ではなく手技の問題</strong>。<mark class="hl">「ビデオ喉頭鏡を使う」ではなく「ビデオ喉頭鏡用のチューブ形状を使う」と書き分ける</mark>。JAMA2017が差を出せなかったのは、形状の最適化を介入に含めていなかったからと読める。<span class="wl">ビデオ喉頭鏡は新たな標準か（DEVICE試験へのエディトリアル・NEJM2023）</span> を併読し、<mark class="hl">「見え方」「初回成功」「患者転帰」を混ぜない</mark>。当院の教育では、器具の導入より形状と屈曲点（カフ上1 cm）を先に教える</td></tr>
+<tr><td>術中血圧をどこに置くか</td><td><span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>（MAP 60〜65 mmHg以上・収縮期90 mmHg以上の維持がClass 1。POISE-3と単施設RCTは高い目標で陰性）</td><td><span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>（限定条件下でMAP 80前後がAKIを減らす、RR 0.78）</td><td><mark class="hl">目標は閾値より上に置くべきだが、どこに置くかの根拠は限定的な条件下でしか出ていない</mark>。当院では原則「MAP 65を下回らせない」と書き、<mark class="hl">高血圧の既往がある高リスク待機大腹部手術で連続血行動態モニタリングとプロトコル化輸液が敷ける場合に限り</mark>「80前後」を麻酔科と申し合わせる。輸液評価の手段がないまま昇圧薬だけで数字を作らない</td></tr>
+<tr><td>SGLT2阻害薬の術前中止はClass 1に値するか</td><td><span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span>（術前3〜4日中止がClass 1）</td><td><span class="wl">術前SGLT2阻害薬は正常血糖の代謝性アシドーシスを増やす — 22.6%対8.1%（術後ICU 155例・後ろ向き・BMCEndocrDisord2022）</span>（==SGLT2i群は31例・イベント7例、p = 0.047の境界域、透析患者の割合が揃わず残余交絡あり==）</td><td>推奨の強さと根拠の強さが釣り合っていない典型。<mark class="hl">ただし中止のコストが極めて低いため、当院ではClass 1のまま術前チェックリストに載せる</mark>。説明では「エビデンスが強いから」ではなく「見逃すと致命的で、止めるコストが小さいから」と言う</td></tr>
+<tr><td>MINSを拾いに行くか</td><td>同ガイドライン（術後トロポニン監視が2b、外来フォローが2a、抗血栓療法が2b）</td><td>同ガイドライン自身の記述（MANAGE試験は両群の約半数が試験薬を中止し主要アウトカムを事後変更。前向き研究ではMINS患者の3分の1未満しかGDMTが強化されず）</td><td><mark class="hl">サーベイランスより事後対応のほうが推奨クラスが高いという珍しい構造</mark>。「測る対象」と「陽性時に誰が何をするか」を同時に決める。決めずに測り始めると検査が増えるだけになる</td></tr>
+</tbody></table></div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：挿管の危険は「入らないこと」ではなく<strong>「入れる過程で生理が崩れること」</strong>。前酸素化・筋弛緩・スタイレット・ビデオ喉頭鏡・チェックリストの積み上げが初回成功率を上げる。挿管後低血圧は例外ではなく既定の合併症で、手術室の予定手術でも60%に起こる。周術期では、予防的冠動脈血行再建・手術当日のβ遮断薬開始・抗凝固ルーチンブリッジングがいずれも無益または有害と決着した。</li><li><strong>まだ決着していないこと</strong>：①導入薬（ケタミン対エトミデートに加え、<mark class="hl">オピオイドを足すかどうかも未決着</mark>）、②挿管のタイミング（とくに低酸素性呼吸不全。ROX閾値を決定ルールとして運用した場合の30日死亡RR 0.76という推定は出たが、<mark class="hl">MIMIC-IVの観察データのエミュレーションで前向き試験は進行中</mark>）、③ビデオ喉頭鏡が患者転帰まで変えるか（心停止中に限れば、ILCORの系統的レビューがRCT 3本331例で差を示さず確実性 very low）、④生理学的困難気道の「血行動態最適化」の具体手順、⑤術中血圧の目標値の上限（下限はClass 1で決着済み）。<mark class="hl">RCTが1本も無い項目</mark>が3つ残る——<strong>筋弛緩薬を使うか否か（ER・ICUのRCTはゼロで手術室の1,150例からの外挿）、予防的昇圧薬（完了したRCTはゼロ）、気管チューブのサイズ（比較試験なし。人工呼吸を受けるICU患者の最大半数に声帯損傷が起こるのに）</strong>。導入薬を加えたこの4つが証拠の空白地帯で、<mark class="hl">毎回悩む項目ほど根拠が薄い</mark>。周術期側では、<mark class="hl">GLP-1受容体作動薬の休薬期間にCOR付きの推奨が1つも無い</mark>まま処方数だけが増えており、免疫代謝の介入候補（免疫栄養・ケトン食・メトホルミン）はすべて仮説段階にとどまる。</li><li><strong>最近変わったこと</strong>：<strong>「解剖学的困難気道」から「生理学的困難気道」へ</strong>枠組みが移り、SOCCA・SAMがコンセンサスを出した。装備の議論（どの喉頭鏡か）より<strong>手順と役割の議論</strong>が前に出ている。前酸素化ではNIV＋HFNCの併用と病院前NIV（挿管10.8%→5.2%、NNT 18）が実装段階に入った。導入薬の議論は「どの薬か」から<strong>アウトカムの定義そのもの</strong>へ移りつつあり、「循環不安定」の定義次第で同じデータがRR 1.83と0.43に割れる（交互作用P=0.004）ことが示された。周術期側では、<mark class="hl">MINSが独立した章として初めてガイドライン化され（2024）、抗凝固ブリッジングが3: Harmに格下げされ、SGLT2阻害薬の術前3〜4日中止がClass 1に入った</mark>。2025年にはJIPADの本邦データが周術期転帰に2本付き、2026年にはHISTAP試験が「術中血圧の上限」という長年の空白に、限定条件付きながら初めて数字を与えた。</li></ul>
+</div>
+<h2>🔬 研究のタネ（聖路加）</h2>
+<div class="call note"><span class="lab">question</span>
+<p>このテーマで著者たちが繰り返し残している問い</p>
+<ul><li>単施設・小規模の観察研究や概念実証試験が多く、大規模多施設RCTでの確認が必要と著者自身が明記する（<span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>、<span class="wl">気管チューブ固定は専用ファスナーがテープに勝る — 複合合併症7.8%対17.2%・1000人工呼吸日あたり22.0対52.6、死亡と人工呼吸期間は変わらない（ETTS・単施設RCT298例・CritCare2019）</span>）</li><li>ナラティブレビュー・ガイドラインは系統的検索やエビデンス格付けを欠き、推奨の多くが専門家合意（Grade D）にとどまる（<span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>、<span class="wl">成人の覚醒下気管挿管（ATI）のDASガイドライン — sTOP（鎮静・表面麻酔・酸素化・手技）と3+1回で安全域を作る（Anaesthesia2020）</span>）</li><li>日本人・自施設のデータが存在せず、海外の手術室・欧米コホートをそのまま集中治療に外挿している（<span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span>、<span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span>）</li><li>観察研究では適応交絡・重症度調整の不足が結果の解釈を弱め、施設間ばらつきの機序も未解明のまま残る（<span class="wl">救急外来の緊急挿管で正常血圧例の23%が挿管後低血圧を起こす — 院内死亡33%対21%、調整OR 1.9（336例・JCritCare2012）</span>、<span class="wl">ICU挿管で筋弛緩薬は初回成功率を上げる — 80.9%対69.6%、傾向スコアマッチングOR 2.37、ビデオ喉頭鏡でも同じ（解析664例・AnnalsATS2015）</span>）</li><li>アウトカムが代理指標・短期評価にとどまり、機序（副腎抑制等）や長期予後は検証されていない（<span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span>、<span class="wl">カフ圧の自動個別化と声門下吸引はVAPを半減させたが主要評価項目のDay3気管内定着は動かなかった（MICROINHALO・ICM2026）</span>）</li></ul>
+</div>
+<div class="tw"><table>
+<thead><tr><th>#</th><th>研究案</th><th>データ源</th><th>由来ノート</th><th>実現性</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>HFNC/NIV使い分け・挿管閾値など気道管理方針の施設間ばらつきを可視化する</td><td>JIPAD</td><td><span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span>、<span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span>ほか3本</td><td>◎</td></tr>
+<tr><td>2</td><td>気管切開・再挿管の定義カットオフを変えた感度解析でSMR・死亡への影響の頑健性を検証する</td><td>JIPAD</td><td><span class="wl">気管切開の最新知見レビュー（ICM2019）</span>、<span class="wl">最適な再挿管率は5〜10%ではない — 13.8%を超えて初めてSMRが悪化（JIPAD 21443例・95施設・ChestCritCare2025）</span></td><td>◎</td></tr>
+<tr><td>3</td><td>挿管・抜管・気管切開のタイミングと死亡・費用の関連をDPCの処置日付で再構成し検証する</td><td>JIPAD×DPC</td><td><span class="wl">COVID-19重症患者における挿管までの時間と予後</span>、<span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span>ほか4本</td><td>○</td></tr>
+<tr><td>4</td><td>導入薬選択（ケタミン/エトミデート/プロポフォール）の施設間ばらつきと死亡・循環虚脱の関連を施設固定効果で検証する</td><td>JIPAD×DPC</td><td><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span>、<span class="wl">敗血症患者への単回エトミデートは死亡と関連しない — eICU 2014例で院内死亡37.2%対37.8%（後ろ向きコホート・CCM2013）</span>ほか1本</td><td>○</td></tr>
+<tr><td>5</td><td>JIPADに無い治療制限・長期転帰・費用をDPCで補い、終末期実践・退院後経過を検証する</td><td>JIPAD×DPC</td><td><span class="wl">日本のICUではpersistent critical illnessの発症点が観察されない（JIPAD 28万例・101ICU・LancetRegHealthWP2025）</span></td><td>○</td></tr>
+<tr><td>6</td><td>挿管バンドル・チェックリスト（前酸素化・スタイレット・数値基準）の遵守率と合併症発生率を電子カルテから記述監査する</td><td>聖路加</td><td><span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span>、<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>ほか5本</td><td>◎</td></tr>
+<tr><td>7</td><td>挿管後低血圧（PIH）の発生率・深さ・持続時間をPrimeGaia高頻度バイタルで定量記述する</td><td>聖路加</td><td><span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span>、<span class="wl">全身麻酔でも挿管後低血圧は60%に起こる — 血管外科1395例でICU滞在延長OR 2.55・術後人工呼吸OR 2.43（後ろ向き・JIntensiveCareMed2016）</span>ほか2本</td><td>◎</td></tr>
+<tr><td>8</td><td>NIV/HFNC併用前酸素化・条件付き輸液ボーラスの標準実装を導入し前後比較する</td><td>聖路加</td><td><span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>、<span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE trial</span></td><td>◎</td></tr>
+<tr><td>9</td><td>挿管困難予測因子（modified LEMON・上唇咬み試験等）の自施設的中率・外的妥当性を検証する</td><td>聖路加</td><td><span class="wl">挿管困難は予測できても除外できない — 挿管困難の既往LR+ 16〜19、上唇咬み試験3度LR+ 14（62研究33,559例のRCEレビュー要約・AEM2019）</span>、<span class="wl">modified LEMON基準で挿管困難を予測する — 感度86%・陰性的中率98%（JEAN-2・3923例・AJEM2015）</span></td><td>◎</td></tr>
+<tr><td>10</td><td>ビデオ喉頭鏡・スタイレット使用と初回成功率・合併症の関連を後ろ向きに検証する</td><td>聖路加</td><td><span class="wl">心停止患者の挿管はビデオ喉頭鏡が有利 — 初回成功率78%対70%（JEAN-2・3360例・Resuscitation2019）</span>、<span class="wl">気管挿管のスタイレット使用 STYLETO trial</span>ほか2本</td><td>○</td></tr>
+<tr><td>11</td><td>困難気道シミュレーション訓練（eFONA・CVF宣言基準）を導入し所要時間・成功率を前後比較する</td><td>聖路加</td><td><span class="wl">予期せぬ困難気管挿管のDAS 2025ガイドライン — 3+1回の試行制限とeFONA垂直切開の既定化、生理学的困難気道を明記（BJA2026）</span>、<span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span></td><td>◎</td></tr>
+</tbody></table></div>
+<p><strong>このテーマの空白</strong>：挿管手技のプロセス詳細（前酸素化法・導入薬選択・デバイス）はJIPADに存在せず、全国規模で気道管理の質を検証した研究はまだ無い。治療制限・退院後の長期予後（QOL・生存）、副腎抑制などの機序評価、日本人特有の疫学（肥満・妊産婦・小児の気道管理）は材料の中で繰り返し「データが無い」と指摘されている。</p>
+<h2>🗺️ 小分類マップ</h2>
+<p><strong>手順・バンドル・チェックリスト</strong></p>
+<ul><li><span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span> — <mark class="hl">この領域の中核</mark></li><li><span class="wl">生理学的困難気道の挿管 — 国際デルファイ53項目の合意（SOCCA・ICM2024）</span> ／ <span class="wl">生理学的困難気道の評価と管理 — SAMコンセンサス、既存の国際ガイドラインに欠けていた視点（AnesthAnalg2021）</span></li><li><span class="wl">困難挿管への私のアプローチ — 解剖学的困難と生理学的困難を分けて備える（エディトリアル・CritCare2019）</span></li><li><span class="wl">手術室外の緊急気道管理 — 解剖学的だけでなく「生理学的・状況的」困難気道に備える（レビュー・AnesthAnalg2021）</span></li><li><span class="wl">重症成人の気道管理のベストプラクティス（エディトリアル・ICM2025）</span> ／ <span class="wl">重症患者の気管挿管 RCTの系統的レビュー（CritCare2018）</span></li><li><span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span> — <mark class="hl">25年分のRCTを「利益あり／なし／さらなる証拠が必要」の3分類に仕分けた1本</mark></li><li><span class="wl">資源の限られたICUの気道管理プロトコル — 40研究のシステマティックレビュー（AnnMedSurg2022）</span> — <mark class="hl">価値は結論ではなく「削られた項目」にある</mark></li><li><span class="wl">ICUのチェックリスト167論文のスコーピングレビュー — 臨床アウトカムの90%が改善、ただし介入後データで改良した施設は8件だけ（CritCare2023）</span></li></ul>
+<p><strong>ガイドライン・撤退基準（気道管理）</strong></p>
+<ul><li><span class="wl">重症成人のRSI（迅速導入気管挿管） — SCCM診療ガイドライン、10のPICOに推奨1・提案7・ベストプラクティス2（CCM2023）</span> — <mark class="hl">RSIの論点をGRADEで棚卸しした1本</mark></li><li><span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span></li><li><span class="wl">予期せぬ困難挿管のDASガイドライン2015 — 困難の認識と「宣言」、試行回数の制限、立ち止まって考える時間（BJA2015）</span></li><li><span class="wl">成人の覚醒下気管挿管（ATI）のDASガイドライン — sTOP（鎮静・表面麻酔・酸素化・手技）と3+1回で安全域を作る（Anaesthesia2020）</span> — DAS2015の「対」にあたる、予測された困難気道への麻酔導入前の対処</li><li><span class="wl">困難気道管理のASAガイドライン2022 — 時間経過の意識と試行回数の制限、抜管の推奨を強化（Anesthesiology2022）</span></li><li><span class="wl">予期せぬ困難気管挿管のDAS 2025ガイドライン — 3+1回の試行制限とeFONA垂直切開の既定化、生理学的困難気道を明記（BJA2026）</span> — DAS2015の後継版。試行回数・eFONA手技を刷新</li><li><span class="wl">中国救急気道管理コンセンサス — 換気と酸素化を最優先、CHANNELフローで初期対応を組む（コンセンサス・JThoracDis2017）</span></li><li><span class="wl">緊急輪状甲状膜穿刺・切開 — CVCIではなくcannot oxygenateへの対処、6〜7名のタスクチームで臨む（総説・日臨麻会誌2014）</span></li><li><span class="wl">困難気道 ― 医療訴訟（closed claims）から学ぶ</span></li></ul>
+<p><strong>困難気道の予測</strong></p>
+<ul><li><span class="wl">挿管困難は予測できても除外できない — 挿管困難の既往LR+ 16〜19、上唇咬み試験3度LR+ 14（62研究33,559例のRCEレビュー要約・AEM2019）</span></li><li><span class="wl">modified LEMON基準で挿管困難を予測する — 感度86%・陰性的中率98%（JEAN-2・3923例・AJEM2015）</span></li><li><span class="wl">緊急気道管理におけるハンドヘルドPOCUS（CHEST2021）</span></li><li><span class="wl">妊娠中の困難挿管 — 最大の懸念は「予期されなかった困難」、局所麻酔優先と簡潔な失敗時アルゴリズムで備える（総説・CurrOpinAnaesthesiol2011）</span></li></ul>
+<p><strong>前酸素化</strong></p>
+<ul><li><span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span></li><li><span class="wl">NIVが使えないときの前酸素化 — BVM＋PEEPは代替になるがPEEP上乗せの臨床的根拠はない（著者回答・ICM2026）</span></li><li><span class="wl">挿管時の無呼吸酸素化にHFNCは標準治療に非劣性 — ICU滞在を1.8日短縮、軽症低酸素例でのみ重症低酸素を減らす（7研究956例・SciRep2020）</span></li><li><span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span></li><li><span class="wl">病院前NIVは有効性から実装へ — 早期NIVで挿管が10.8%から5.2%へ、RR 0.49・NNT 18（Correspondence・ICM2026）</span></li></ul>
+<p><strong>導入薬・筋弛緩薬</strong></p>
+<ul><li><span class="wl">重症患者の挿管導入薬 — ケタミンを第一に、エトミデートは死亡リスク、プロポフォールは循環虚脱（Concise Definitive Review・CCM2025）</span></li><li><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span></li><li><span class="wl">緊急挿管の導入薬 ケタミンは7日生存でエトミデートに勝るが28日では差が消える — 85.1%対77.3%（EvK・ICM2022）</span></li><li><span class="wl">ケタミンはエトミデートより挿管周辺期低血圧が多い — 18.3%対12.4%、調整OR 1.4（NEAR 6806例・AcadEmergMed2020）</span> ／ <span class="wl">敗血症の救急外来挿管ではケタミンのほうが挿管後低血圧が多い — 74%対50%、傾向スコア調整OR 2.7（NEAR 531例・AcadEmergMed2020）</span></li><li><span class="wl">敗血症患者への単回エトミデートは死亡と関連しない — eICU 2014例で院内死亡37.2%対37.8%（後ろ向きコホート・CCM2013）</span></li><li><span class="wl">重症患者の挿管導入にフェンタニルを足す是非は未決着 — 5RCT 515例、挿管周辺期の循環不安定RR 1.41・95%CI 0.83–2.40、確実性very low（SRメタ解析・JIntensiveCare2026）</span></li><li><span class="wl">ICU挿管で筋弛緩薬は初回成功率を上げる — 80.9%対69.6%、傾向スコアマッチングOR 2.37、ビデオ喉頭鏡でも同じ（解析664例・AnnalsATS2015）</span></li><li><span class="wl">ブラジルICUの挿管実態調査 — 筋弛緩薬をほぼ毎回使う医師は40.7%だけ（565名・全国調査・RevBrasTerIntensiva2020）</span></li><li><span class="wl">迅速導入気管挿管における輪状軟骨圧迫の役割 — 誤嚥を減らす証拠はなく、正しく当てられてもいない（CurrAnesthesiolRep2024）</span></li></ul>
+<p><strong>デバイス・手技</strong></p>
+<ul><li><span class="wl">ビデオ喉頭鏡は挿管失敗を減らす — 222RCT 26149例、失敗RR 0.41〜0.51（Cochrane改訂版・BJA2022）</span> ／ <span class="wl">ICU挿管におけるビデオ喉頭鏡vs直視型（RCT・JAMA2017）</span> ／ <span class="wl">ビデオ喉頭鏡は新たな標準か（DEVICE試験へのエディトリアル・NEJM2023）</span></li><li><span class="wl">心停止患者の挿管はビデオ喉頭鏡が有利 — 初回成功率78%対70%（JEAN-2・3360例・Resuscitation2019）</span> ／ <span class="wl">救急外来でビデオ喉頭鏡は声門視野を改善する — 良好視野80%→93%、直視で不良だった78%が改善（198例・AnnEmergMed2010）</span></li><li><span class="wl">心停止中の挿管でビデオ喉頭鏡は食道挿管を減らすが生存は変えない — RCT3本331例で初回成功RR 0.88、観察研究29,595例は有利（ILCOR系統的レビュー・Resuscitation2026）</span> — 心停止中に絞ったILCORの系統的レビュー。RCTは差を示さず、一貫するのは食道挿管の減少だけ</li><li><span class="wl">気管挿管のスタイレット使用 STYLETO trial</span> ／ <span class="wl">McGrath挿管時のスタイレット屈曲角度の有効性（RCT）</span> ／ <span class="wl">ビデオ喉頭鏡での気管チューブ最適湾曲法（RCT, JCMC2022）</span></li><li><span class="wl">気管チューブ固定は専用ファスナーがテープに勝る — 複合合併症7.8%対17.2%・1000人工呼吸日あたり22.0対52.6、死亡と人工呼吸期間は変わらない（ETTS・単施設RCT298例・CritCare2019）</span> ／ <span class="wl">挿管患者の胃管挿入は側臥位＋スロートパック併用が有利 — 初回成功87.5%対68.75%（RCT 160例・AJMS2024）</span></li><li><span class="wl">気管チューブのカフリークとチューブ交換の実際</span> — チューブ交換を「新規挿管」として準備するためのベッドサイド機材リスト</li><li><span class="wl">Arndt気管支ブロッカーの盲目的挿入法（GEB・輪状軟骨圧迫、Medicine 2016）</span> — 分離肺換気のデバイス。胸部外科の応援に入るときの手技</li></ul>
+<p><strong>感染防護下の気道管理（エアロゾル産生手技）</strong></p>
+<ul><li><span class="wl">COVID-19下の手術室気道管理 — 全インド困難気道学会（AIDAA）コンセンサス、HFNO・マスク換気・ジェット換気は避ける（IJA2020）</span> — 推奨と非推奨が最も具体的な1本</li><li><span class="wl">COVID-19患者の困難気道管理 — SAMステートメント、覚醒下挿管とエアロゾル産生手技の再考（AnesthAnalg2021）</span></li><li><span class="wl">COVID-19重症患者の気管挿管に関する中国麻酔学会の専門家推奨 — 覚醒下挿管は避け修正RSI、十分な筋弛緩を確保する（コンセンサス・ChinMedSciJ2020）</span> ／ <span class="wl">新型コロナウイルス感染患者の周術期管理 — 中国麻酔学会合同タスクフォースの提言（Anesthesiology2020）</span></li><li><span class="wl">COVID-19疑い患者の麻酔管理 — 陰圧室・RSI・HFNCは使わない、挿管は最も経験のある者が（韓国麻酔科学会・KJA2020）</span></li><li><span class="wl">インド麻酔科学会のCOVID-19勧告 — 麻酔科医が患者と自らを守るための位置づけ声明（IJA2020）</span></li><li><span class="wl">イタリアのCOVID-19アウトブレイク — 臨床実践からの提言（Anaesthesia2020）</span> — 手技ではなく計画・訓練・チームワークという非技術的側面に重点</li></ul>
+<p><strong>再挿管率・気管切開（抜管側との境界）</strong></p>
+<ul><li><span class="wl">最適な再挿管率は5〜10%ではない — 13.8%を超えて初めてSMRが悪化（JIPAD 21443例・95施設・ChestCritCare2025）</span></li><li><span class="wl">術後再挿管は6.26% — PaCO2・ビリルビン・BUNが上げ、BMIと白血球最低値が下げる（JIPAD 13219例・IntensiveCritCareNurs2025）</span></li><li><span class="wl">PAVはPSVより再挿管を36%減らすが離脱成功は同等 — 7RCT 1059例、確信度は低〜中（SR・メタ解析・JAnesthAnalgCritCare2026）</span></li><li><span class="wl">PAV+はPSVより離脱成功を12%増やすが再挿管・死亡は同等 — 7RCT 1103例、有意性は小規模試験とSBT試験が支える（SR・メタ解析・FrontMed2026）</span></li><li><span class="wl">気管切開の最新知見レビュー（ICM2019）</span></li></ul>
+<p><strong>挿管周辺期の循環</strong></p>
+<ul><li><span class="wl">重症患者の気管挿管は血行動態の介入である — 相ごとの脆弱性と予防バンドル（総説・JIntensiveCare2026）</span></li><li><span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span></li><li><span class="wl">救急外来の緊急挿管で正常血圧例の23%が挿管後低血圧を起こす — 院内死亡33%対21%、調整OR 1.9（336例・JCritCare2012）</span></li><li><span class="wl">全身麻酔でも挿管後低血圧は60%に起こる — 血管外科1395例でICU滞在延長OR 2.55・術後人工呼吸OR 2.43（後ろ向き・JIntensiveCareMed2016）</span></li><li><span class="wl">高齢者は救急外来の挿管後に低血圧を起こしやすい — 3%対1%、調整OR 2.6（JEAN 13施設1903例・IntJEmergMed2013）</span></li><li><span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE trial</span> ／ <span class="wl">気管挿管前の輸液ボーラスと循環虚脱 PrePARE試験</span> ／ <span class="wl">挿管前の輸液ボーラスは心血管虚脱を防ぐか — PREPARE II 試験プロトコル（BMJOpen2020）</span></li><li><span class="wl">挿管前後の循環破綻とICU予後（PRF導入の影響・CCM2022）</span> ／ <span class="wl">パラセタモール誘発性低血圧 — 看護の視点から早期発見と予防を考える（ナラティブレビュー・NursingOpen2022）</span></li></ul>
+<p><strong>挿管のタイミング</strong></p>
+<ul><li><span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span> — <mark class="hl">この領域の論文を読む前に読む1本</mark></li><li><span class="wl">ARDSを生理学で個別化する挿管から離脱までの実践（ナラティブレビュー・ICM2026）</span></li><li><span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span></li><li><span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span> — ROXを予測スコアではなく「挿管を決めるルール」として運用したらどうなるかの推定。<mark class="hl">挿管の総数は変わらずタイミングだけが早まる</mark>という構図</li><li><span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span> ／ <span class="wl">COVID-19重症患者における挿管までの時間と予後</span> ／ <span class="wl">挿管までの時間とCOVID-19重症患者の死亡・肺後遺症（González 2022）</span></li><li><span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span> ／ <span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span> ／ <span class="wl">COVID-19 ARDSにおける早期挿管と晩期挿管の呼吸メカニクス</span></li><li><span class="wl">敗血症性ショックの挿管はいつ誰がするのか — 早期挿管24%だが施設間で4.5〜47%とばらつく（30 ICU 859例・AnnIntensiveCare2020）</span></li><li><span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span></li><li><span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span> ／ <span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span> ／ <span class="wl">重症COVIDの挿管回避はHFNCよりCPAP（RECOVERY-RS・JAMA2022）</span></li><li><span class="wl">ARDS以外の低酸素性呼吸不全でも腹臥位は挿管を26%減らす — 死亡は減らない（SR・メタ解析・ClinRespirJ2026）</span></li><li><span class="wl">非ウイルス性市中肺炎へのステロイドは短期死亡と挿管を減らす（30RCT・7519例のSR・MA・ICM2025）</span></li></ul>
+<p><strong>挿管後の合併症</strong></p>
+<ul><li><span class="wl">意識障害患者への挿管時セフトリアキソン2g単回投与で早期VAPは22.4%から2.8%へ — 対照は歴史的コホート、死亡は不変（傾向スコア調整・Chest2013）</span></li><li><span class="wl">カフ圧の自動個別化と声門下吸引はVAPを半減させたが主要評価項目のDay3気管内定着は動かなかった（MICROINHALO・ICM2026）</span></li><li><span class="wl">ICU外での挿管と24時間超のICU入室遅れはVAPの独立危険因子 — 調整OR 3.29、多剤耐性Acinetobacterが目立つ（前向き100例・ClinRespirJ2018）</span></li><li><span class="wl">挿管患者のwell-beingと安心感を4項目で測る TOURS Scale — 元患者と共同開発（CritCare2026）</span></li><li><span class="wl">挿管された肺炎患者への呼吸理学療法は施設でバラバラ — 目的は排痰98%、6割が人員で内容が変わると回答（豪州ICU調査・JEvalClinPract2017）</span></li><li><span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span></li></ul>
+<p><strong>実態調査・体制</strong></p>
+<ul><li><span class="wl">緊急挿管に指導医が立ち会うと合併症が6.1%対21.7%に減る — 死亡と人工呼吸器離脱日数は不変（322例・前向きコホート・Anesthesiology2008）</span></li><li><span class="wl">手術室外の緊急RSI 208例 — 低酸素19.2%・低血圧17.8%、麻酔科医と非麻酔科医で差なし（前向き観察・EMJ2004）</span></li><li><span class="wl">インド三次救急のED挿管実態 — 初回成功78.3%、15分以内の有害事象58.4%、挿管後心停止5%（166例・前向き観察・TurkJEmergMed2022）</span></li></ul>
+<p><strong>病院前・院内搬送の気道管理</strong></p>
+<ul><li><span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span> — <mark class="hl">この節の中核</mark></li><li><span class="wl">病院前NIVは有効性から実装へ — 早期NIVで挿管が10.8%から5.2%へ、RR 0.49・NNT 18（Correspondence・ICM2026）</span></li></ul>
+<p><strong>大量喀血の気道管理</strong></p>
+<ul><li><span class="wl">大量喀血のマネジメント 参考ガイドラインと初期対応（Chest2020）</span> — <mark class="hl">死因は失血ではなく窒息</mark></li><li><span class="wl">大量喀血の救急外来での評価と管理 — 気道確保・出血側肺の隔離・CTAとBAE（ナラティブレビュー・AmJEmergMed2021）</span></li><li><span class="wl">喀血患者をどう管理するか — 中枢気道の死腔は150mLしかない、24時間量より出血速度（How I Do It・JBronchol2002）</span></li><li><span class="wl">気管腕頭動脈瘻を被覆ステント＋凍結保存動脈同種移植で治療した1例 — 単回挿管後の発症、緊急止血から12時間後に外科的再建（症例報告・AnnVascSurg2006）</span></li></ul>
+<p><strong>麻酔・周術期管理（旧「麻酔関連 Home」を統合）</strong></p>
+<ul><li><span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span> — <mark class="hl">この章の中心。1本で1,800行超、推奨全件とアルゴリズムが転記されている</mark></li><li><span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span></li><li><span class="wl">予定手術後の予定外ICU入室は1.9% — 呼吸器合併症が最多・循環器合併症が最も死亡が高い（JIPAD 2666例・AnesthAnalg2025）</span></li><li><span class="wl">周術期心停止は緊急手術で1.74%・予定手術で0.17% — 原因も予後も別物（JIPAD 874例・95施設・BJA2025）</span></li><li><span class="wl">周術期・集中治療における免疫代謝 — 免疫細胞は代謝を切り替えて戦う、ただし今日の診療を変える介入はまだない（ナラティブレビュー・BJA2026）</span></li></ul>
+<p><strong>周辺（非挿管患者・長期在室・その他）</strong></p>
+<ul><li><span class="wl">非挿管ICU患者の過活動型せん妄にデクスメデトミジン — 興奮は約1時間短縮するがせん妄期間と挿管は変わらない（4D二重盲検RCT・ICM2025）</span> — 詳細は <span class="wl">😴 鎮静鎮痛・せん妄（PADIS） Home</span></li><li><span class="wl">RCSQ日本語版（J-RCSQ）は非挿管ICU患者でPSGの代替になる — α0.911・睡眠効率とr0.602（NursOpen2019）</span> — 非挿管例が対象</li><li><span class="wl">日本のICUではpersistent critical illnessの発症点が観察されない（JIPAD 28万例・101ICU・LancetRegHealthWP2025）</span></li><li><span class="wl">人工呼吸患者の呼吸器マイクロバイオーム — 挿管後にα多様性が落ち、VAPは単一菌の優占、ARDSは腸内細菌の肺内増加が特徴（ナラティブレビュー・ICM2021）</span></li><li><span class="wl">CKDの発症を防ぎ腎の健康を保つ — KDIGO Controversies Conference（KidneyInt2025）</span> — 気道管理とは直接関係しない（腎の一次予防）。本体は <span class="wl">🫘 腎・電解質 Home</span></li></ul>
+<h2>📌 まずこの10本</h2>
+<ol><li><span class="wl">ICUでの気管挿管を改善する（総説・ICM2022）</span> — <mark class="hl">明日から手順書を作れる1本</mark></li><li><span class="wl">生理学的困難気道の挿管 — 国際デルファイ53項目の合意（SOCCA・ICM2024）</span> — 7点セットの根拠</li><li><span class="wl">ICU挿管後の低血圧は46%に起こり重大な罹病・死亡と関連する — 4施設479例、調整OR 2.00（多施設コホート・JCritCare2015）</span> — 昇圧薬を手順に組み込む理由</li><li><span class="wl">重症患者の挿管導入薬 — ケタミンを第一に、エトミデートは死亡リスク、プロポフォールは循環虚脱（Concise Definitive Review・CCM2025）</span></li><li><span class="wl">緊急挿管の導入薬をネットワークメタ解析で並べる — エトミデートとケタミンは死亡同等、ケタミンで循環虚脱がOR 1.44多い（9RCT4672例・NMA・CritCare2026）</span> — 4と並べて読む</li><li><span class="wl">挿管困難は予測できても除外できない — 挿管困難の既往LR+ 16〜19、上唇咬み試験3度LR+ 14（62研究33,559例のRCEレビュー要約・AEM2019）</span></li><li><span class="wl">成人の予期せぬ困難気管挿管の管理 AIDAA 2016ガイドライン — 挿管3回・SAD 2回まで、SpO2 95%以上が撤退の物差し（IndianJAnaesth2016）</span> — 撤退の物差し</li><li><span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span> — <mark class="hl">挿管タイミングの論文に騙されないため</mark></li><li><span class="wl">非心臓手術の周術期心血管管理 — 推奨全件とアルゴリズムを転記（ACC・AHAガイドライン・Circulation2024）</span> — <mark class="hl">手術室の思想を1本で押さえる</mark>。時間がなければTop Take-Home Messagesだけでも効く</li><li><span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span> — 術中血圧の「上限」に初めて数字を与えた1本</li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> — 抜管と再挿管</li><li><span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> — 挿管を避ける選択肢と前酸素化</li><li><span class="wl">📈 昇圧薬の選択と開始タイミング Home</span> — 挿管後低血圧・術中血圧管理への備え</li><li><span class="wl">🔊 POCUS・重症エコー Home</span> — 気道POCUSと胃内容の評価</li><li><span class="wl">🧫 VAPと抗菌薬の期間 Home</span> — 挿管後の肺炎予防</li><li><span class="wl">🍬 内分泌代謝・血糖 Home</span> — SGLT2阻害薬の周術期血糖管理、GLP-1受容体作動薬</li><li><span class="wl">🩸 血液・抗凝固・輸血 Home</span> — 抗凝固薬の中和とDOACの周術期管理</li><li><span class="wl">❤️ 循環器 Home</span> — 弁膜症・心不全・肺高血圧そのものの管理</li><li><span class="wl">🏨 HDU・SDU（中間治療室）と病床機能 Home</span> — 予定外ICU入室2,666例をどの病床機能で受けるか</li><li><span class="wl">😴 鎮静鎮痛・せん妄（PADIS） Home</span> — 非挿管患者のせん妄管理</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+<button class="pdf-btn" onclick="window.print()" title="印刷ダイアログで「PDF に保存」を選ぶ">📄 PDF</button>
+<div class="lb" id="lb" role="dialog" aria-label="図の拡大表示"><span class="lbx" title="閉じる（Esc）">×</span><img alt=""><div class="lbcap"></div></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var im=lb.querySelector('img'), cap=lb.querySelector('.lbcap');
+  function close(){lb.classList.remove('on','full'); im.removeAttribute('src'); document.body.style.overflow='';}
+  function open(src,text){im.src=src; cap.textContent=text||''; lb.classList.add('on'); lb.classList.remove('full'); document.body.style.overflow='hidden';}
+  document.querySelectorAll('.jc figure.origfig img, .jc img.flow').forEach(function(el){
+    el.addEventListener('click',function(){
+      var fc=el.closest('figure'); var t=fc&&fc.querySelector('figcaption')?fc.querySelector('figcaption').textContent:(el.alt||'');
+      open(el.currentSrc||el.src, t+'　（クリックで原寸⇄全体表示、背景クリックか Esc で閉じる）');
+    });
+  });
+  im.addEventListener('click',function(e){e.stopPropagation(); lb.classList.toggle('full');});
+  lb.addEventListener('click',function(e){ if(e.target!==im) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
+})();
+if(location.hash==='#pdf'){window.addEventListener('load',function(){setTimeout(function(){window.print();},500);});}
+</script>
+</body>
+</html>
