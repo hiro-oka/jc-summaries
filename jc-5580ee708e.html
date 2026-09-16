@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🧴 ステロイドをいつ使うか Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff;cursor:zoom-in}
+.jc figure.origfig img:hover{outline:2px solid var(--teal)}
+.jc img.flow{cursor:zoom-in}
+/* 図の拡大表示（クリックで原寸に近いサイズ・もう一度クリックか Esc で閉じる） */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,20,26,.88);display:none;
+  align-items:center;justify-content:center;overflow:auto;padding:24px;box-sizing:border-box}
+.lb.on{display:flex}
+.lb img{max-width:calc(100vw - 48px);max-height:calc(100vh - 48px);width:auto;height:auto;
+  background:#fff;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,.5);cursor:zoom-out;margin:auto}
+.lb.full{align-items:flex-start;justify-content:flex-start}
+.lb.full img{max-width:none;max-height:none;cursor:zoom-out}
+.lb .lbcap{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;text-align:center;
+  color:#dfe8ec;font-size:12.5px;background:linear-gradient(0deg,rgba(10,20,26,.9),transparent)}
+.lb .lbx{position:fixed;top:12px;right:16px;color:#fff;font-size:26px;line-height:1;cursor:pointer;
+  background:rgba(0,0,0,.35);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+@media print{.lb{display:none!important}}
+/* 📄 PDF ボタン（ページ右上）: ブラウザの印刷ダイアログを開き「PDF に保存」で手元に落とす。URL 末尾 #pdf で自動的に開く */
+.pdf-btn{position:fixed;top:14px;right:14px;z-index:20;font:inherit;font-size:12.5px;font-weight:700;color:#fff;
+  background:var(--teal);border:none;border-radius:20px;padding:7px 15px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pdf-btn:hover{background:var(--teal-ink)}
+.theme-toggle{right:112px}
+@media print{.pdf-btn{display:none!important}}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🧴 ステロイドをいつ使うか Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 🧴 ステロイドをいつ使うか Home</p>
+<p>敗血症性ショック・重症市中肺炎・ARDS・COVID-19・抜管前後の喉頭浮腫という異なる病態で、同じ「ステロイド」という薬をどう使い分けるかを一冊にまとめたHomeです。関連46件（完全版28本・概要18本）を統合し、症候群ごとの適応・用量・タイミング・漸減・相互作用と、副腎機能不全そのものの機序までを扱います。ARDSの換気設定など本体治療は各カテゴリHomeに委ね、ここは「ステロイドを打つか・いつ・どれだけ」の判断に絞ります。</p>
+<h2>📖 3分概観（ブログ版）</h2>
+<p>_最終更新: 2026-09-17 ／ このHomeが束ねる関連ノート: 47本_</p>
+<p>「重症患者にステロイドは効くのか」という数十年来の問いは、いま「どの症候群に・どの薬を・どう使うか」という問いに置き換わっています。2026年時点の現在地をひとことで言えば——<mark class="hl">唯一の「強い推奨」は重症市中肺炎（院内死亡 RR 0.62・NNT 17）</mark>。敗血症性ショックでは死亡を変えず、ショック離脱と人工呼吸離脱をそれぞれ約1日早める薬。COVID-19はデキサメタゾン6 mg/日で決着済み。そしてインフルエンザ肺炎には使わない。「ステロイド」を1つの治療として扱わず、症候群別に4つの別の治療として扱う——これがこのHomeの結論です。そして<mark class="hl">「誰に使うか」を副腎機能検査で決める道は、機序のレベルで閉じています</mark>。</p>
+<h3>このテーマの流れ</h3>
+<p>ステロイドは半世紀にわたり「重症感染・ARDSに効くはず／いや有害だ」の間を揺れてきました。流れを変えた最初の大型試験が2018年のADRENAL（3,658例）です。ヒドロコルチゾン200 mg/日の持続静注は90日死亡を変えませんでした（27.9% vs 28.6%）が、ショック離脱・人工呼吸離脱・ICU退室を早めました。「死なせない薬」ではなく「離脱を早める薬」という位置づけが、ここで初めてはっきりしました。</p>
+<p>2020年が転換点です。RECOVERY試験がCOVID-19でデキサメタゾン6 mg/日の死亡減少を示し、WHO REACTメタ解析（OR 0.66・40%→32%相当）が追認。同じ年にDEXA-ARDS（277例）が非COVID ARDSでもデキサメタゾン20→10 mgで60日死亡21% vs 36%（絶対15.3%減）を報告しました。2023年にはCAPE CODが重症市中肺炎でヒドロコルチゾンの28日死亡半減（11.9%→6.2%）を示し、これらを受けて2024年のSCCM焦点更新が「敗血症性ショック・ARDSは条件付き、重症CAPは強い推奨」と整理。2026年にはATS単独のCAPガイドラインが重症CAPへの投与を正式に打ち出し（RR 0.62・NNT 17）、Pneumonia誌の総説が薬剤選択・用量・漸減・相互作用という「どう使うか」を6領域にまとめました。問いの重心は「効くか」→「誰に効くか」→「どう使うか」へと確実に移っています。</p>
+<h3>結論が出ていること／いないこと</h3>
+<p>決着済み：重症CAPには使う（唯一の強い推奨）。COVID-19は低用量デキサメタゾンで足り、高用量が優れる証拠はない。敗血症性ショックでは死亡改善を期待せず、目的をショック・呼吸器離脱に置く。効かないからと高用量を上乗せするのは有害（非改善COVID-ARDSで90日死亡35%→51%）。<mark class="hl">インフルエンザ肺炎には使わない</mark>。</p>
+<p>もうひとつ決着したこと：<mark class="hl">投与対象を副腎機能検査で選ぶのは不適切</mark>。重症では分布容積の増大とCBG低下で総コルチゾールの増分が構造的に潰れるため、250 µg コシントロピン負荷のΔコルチゾール &lt;9 µg/dL は「ステロイドを使う／使わない」の選別に使えません（FrontEndocrinol2024）。判断はSSC 2021どおり血行動態（NAdまたはAd ≥0.25 µg/kg/min が4時間以上）で行い、ショックの無い敗血症には使いません（HYPRESS 380例で二次感染と高血糖だけが増えた）。</p>
+<p>未決着：①表現型でステロイド反応性を選べるか（ICM2026の120例クラスター解析は否定的——治療失敗21% vs 22%でほぼ同一）、②短期コース後の漸減の要否（Pneumonia2026総説は同じ1本の中で4か所の記載が食い違い、CAPE CODは漸減あり・REMAP-CAPは漸減なしで死亡中立。当院は「10日以内は漸減しない」を既定に）、③非COVIDウイルス性肺炎、④投与終了のタイミング、⑤高齢者の長期フレイルへの影響（OPTPRESS事後解析は関連を示すが因果は証明できない）。なお「SCCMは敗血症性ショックに条件付き推奨、ADRENALとIPDメタ解析は死亡改善なし」は矛盾ではありません。推奨の根拠が死亡ではなくショック離脱とSOFA改善だからです。</p>
+<h3>✅ 3行まとめ</h3>
+<ul><li>症候群別に4治療：重症CAP・敗血症性ショック＝ヒドロコルチゾン200 mg/日、COVID-19＝デキサ6 mg×最長10日、非COVID ARDS＝デキサ20→10 mg、インフルエンザ＝使わない</li><li>早期（診断6時間以内、遅くとも72時間以内）・低用量で始め、効かないからと高用量を足さない（90日死亡が増える）</li><li>投与対象は血行動態と病因で選ぶ。副腎機能検査（コシントロピン負荷）では選べない</li></ul>
+<h3>❓ セルフチェック（想起用）</h3>
+<ol><li>この領域で唯一「強い推奨」なのはどの病態か。その死亡のRRとNNTは？</li><li>ADRENAL試験でヒドロコルチゾンが変えなかったものと変えたものを、数字を添えて言えるか？</li><li>デキサメタゾンを完遂しても改善しないCOVID-ARDSに高用量ステロイドを追加すると、90日死亡はどうなるか？</li><li>コシントロピン負荷試験でステロイドの適応を決められないのはなぜか。代わりに何をトリガーにするか？</li></ol>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>重症市中肺炎（インフルエンザを除く）には投与する</strong>。<mark class="hl">この領域で唯一の「強い推奨」</mark>（院内死亡 RR 0.62・NNT 17・<span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>／<span class="wl">市中肺炎の診断と管理 — 4つのPICO、肺エコーは胸部X線の代替可・臨床安定なら5日未満・重症CAPにステロイド（ATS単独ガイドライン・AJRCCM2026）</span>）</li><li><strong>「ステロイド」を1つの治療として扱わず、<mark class="hl">症候群別に4つの別治療</mark> として扱う</strong>（<span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span>）。①重症CAP・敗血症性ショック＝<strong>ヒドロコルチゾン 200 mg/日</strong>（持続静注、または50 mg 6時間ごと）②COVID-19＝<strong>デキサメタゾン 6 mg/日×最長10日</strong>（漸減不要）③非COVID ARDS＝<strong>デキサメタゾン 20 mg/日×5日 → 10 mg/日×5日</strong>（DEXA-ARDS）④<mark class="hl">インフルエンザ肺炎＝使わない</mark>。薬・用量・期間が症候群ごとに違うので、指示簿では必ず適応名とセットで書く</li><li><mark class="hl"><strong>漸減の要否は、この総説だけでは決められない</strong></mark>（本文・Table 1・Fig 1・結論部で記載が食い違う。詳細は「💊 どう使うか」の章）。当院で決めるなら「10日以内のコースは漸減しない」を既定にし、例外を明文化する</li><li><strong>敗血症性ショックでは「予後を良くする薬」として使わない</strong>。90日死亡は変わらない（27.9% vs 28.6%）。<mark class="hl">目的はショック離脱（約1日）・人工呼吸離脱（約1日）に置く</mark>（<span class="wl">敗血症性ショックのステロイド（ADRENAL trial）</span>）。<mark class="hl">SCCMの条件付き推奨の根拠も死亡ではなくショック離脱とSOFA改善</mark></li><li><strong>「CIRCIかどうか」を検査で決めない</strong>。ランダムコルチゾール &lt;10 µg/dL や 250 µg コシントロピン負荷のΔコルチゾール &lt;9 µg/dL は診断基準だが、重症では分布容積増大とCBG低下で総コルチゾールの増分が構造的に潰れる。<mark class="hl">負荷試験の結果でヒドロコルチゾンを投与する／しないを決めない</mark>（<span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>）</li><li><strong>投与判断は血行動態で行う</strong>。SSC 2021 と同じく「<strong>ノルアドレナリンまたはアドレナリン ≥0.25 µg/kg/min が投与開始から4時間以上続く</strong>」をトリガーにする（体重60 kgなら NAd 15 µg/min 相当）。<mark class="hl">敗血症でもショックが無ければ使わない</mark>（HYPRESS 380例：ショック移行 21.2% 対 22.9% で不変、二次感染と高血糖だけが増える）</li><li><strong>ARDSでは「症候群への治療」ではなく病因・病期で使い分ける</strong>。COVIDと重症CAPは強い推奨、<mark class="hl">インフルエンザは非推奨</mark>（<span class="wl">ARDSのステロイドは病因と時期で使い分ける — COVIDと重症CAPは強い推奨、インフルエンザは非推奨（ナラティブレビュー・ICM2026）</span>）</li><li><strong>ARDSではステロイド単独で考えず、補助療法の束の中で「今どの時期か」を先に言う</strong>。腹臥位・筋弛緩・ステロイド・保守的輸液・吸入血管拡張薬は、<mark class="hl"><strong>経過軸で適応も狙いも入れ替わる</strong></mark>（<span class="wl">ARDSの補助療法は「効くか」ではなく「誰に・いつ・何を狙うか」 — 腹臥位・筋弛緩・ステロイド・保守的輸液・吸入血管拡張薬を経過軸で整理（Understanding the Disease・ICM2026）</span>、詳細は「🌬️ ARDS」の章）。<mark class="hl">効かないものをやめる <strong>de-adoption</strong> を明示的な作業として置く</mark>（足す議論だけでカンファを終えない）</li><li><strong>「どの薬か」より「どう投与するか」</strong>。早期（診断6時間以内、遅くとも72時間以内）に開始し、<mark class="hl">受容体をほぼ飽和させる初回ボーラス（メチルプレドニゾロン換算 約80〜100 mg）→持続</mark>（<span class="wl">ARDSに対する持続グルココルチコイド治療の薬理学的原則（ICM2020）</span>）</li><li><strong>高用量にしない</strong>。COVID-19では<mark class="hl">低用量で十分で、高用量が優れる証拠はない</mark>（<span class="wl">重症COVID-19へのステロイド投与と死亡率（WHO REACTメタ解析）</span>）</li><li><strong>効かないときに足さない</strong>。デキサメタゾンを完遂しても改善しないCOVID-ARDSに高用量を上乗せすると<mark class="hl">90日死亡が35%→51%に増える</mark>（<span class="wl">デキサメタゾン後の非改善COVID-ARDSへの高用量ステロイド追加は90日死亡を増やす（383例・PSオーバーラップ重みづけ・CCM2023）</span>）</li><li><strong>治療に反応しない遷延ARDSでは肺生検を選択肢に入れる</strong>。<mark class="hl">約半数（57%）がDAD以外の診断で、37%はステロイドが効く病態（最多は器質化肺炎21.6%）</mark>（<span class="wl">遷延ARDSの外科的肺生検でステロイド反応性病態が高頻度（CCM2018）</span>）</li><li><strong>カフリークテスト不合格なら、抜管の4時間以上前から複数回</strong>。<mark class="hl">1時間前の単回では足りない</mark>（<span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span>）</li><li><strong>IPF急性増悪にシクロフォスファミドを上乗せしない</strong>（3か月死亡 45% vs 31%・<span class="wl">シクロフォスファミドは特発性肺線維症急性増悪の死亡率を上げる（EXAFIP・Lancet2022）</span>）。<mark class="hl">ステロイドパルスも低用量に勝らない</mark>（院内死亡50.6% vs 47.0%、<span class="wl">特発性間質性肺炎の急性増悪にステロイドパルスは低用量に勝らない — 院内死亡50.6%対47.0%、OR 0.86（DPC 17317例・AnnClinEpidemiol2023）</span>）</li><li><strong>中止の仕方は「漸減が安全」とは限らない</strong>。CIRCI総説が並べた後ろ向き2研究では、<mark class="hl">漸減群のほうが血行動態不安定が多かった</mark>（21.9% 対 10.7%／17.1% 対 2.2%）。重症例ほど漸減されるという交絡が強くプロトコル化はしないが、「漸減しているから安心」とは考えない</li><li><strong>投与中はCOVID-19関連肺アスペルギルス症（CAPA）を意識する</strong>（<span class="wl">デキサメタゾンはCOVID-19関連肺アスペルギルス症のリスクを3倍に上げる — OR 3.110・CAPA発生率9%の522例コホート（CritCare2022）</span>）。<mark class="hl">CAPA診断後もステロイド・IL-6阻害薬をルーチンに中止しない</mark>（<span class="wl">COVID-19関連肺アスペルギルス症の診断はBALが要 — CT・血清バイオマーカーは頼れず死亡率約50%、ステロイド継続を推奨（GRADE専門家パネル28名・ICM2021）</span>）</li><li><strong>高齢の敗血症性ショック生存者では、ステロイド使用と90日フレイルの関連を意識する</strong>（aOR 1.72）が、<mark class="hl">交絡（重症度が高い患者ほどステロイドが使われる）を除ききれない事後解析であり、これだけで投与を控える根拠にはしない</mark>（<span class="wl">敗血症性ショックを生き延びた高齢者の3人に2人が90日後にフレイル — 前フレイル・SOFA・ステロイドが独立予測因子（OPTPRESS post hoc・CCM2026）</span>）</li></ul>
+</div>
+<h2>📋 早見表</h2>
+<p><strong>症候群別レジメン早見表</strong>（<span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span> を土台に、各RCTの数値で裏づけ）</p>
+<div class="tw"><table>
+<thead><tr><th>症候群</th><th>当院標準または推奨</th><th>外部基準</th><th>動かすときの考え方</th></tr></thead>
+<tbody>
+<tr><td>重症市中肺炎</td><td>ヒドロコルチゾン 200 mg/日（持続 or 50 mg 6時間ごと）4〜7日→漸減</td><td>ATS2026「強い推奨」（RR 0.62・NNT 17）／SCCM2024「強い推奨」（RR 0.62）</td><td>インフルエンザ関連が判明したら中止を検討。非重症例には広げない（RR 0.88・有意差なし）</td></tr>
+<tr><td>敗血症性ショック</td><td>ヒドロコルチゾン 200 mg/日（持続静注）、NAd/Ad ≥0.25 µg/kg/min が4時間以上続くのが開始トリガー</td><td>SCCM2024「条件付き推奨」（ICU/短期死亡 RR 0.93）／SSC2021</td><td>ショックの無い敗血症には使わない（HYPRESS）。フルドロコルチゾン併用は難治性のみの選択肢に留める</td></tr>
+<tr><td>COVID-19（酸素または人工呼吸）</td><td>デキサメタゾン 6 mg/日×最長10日、漸減不要</td><td>RECOVERY（RR 0.83、人工呼吸中 RR 0.64）／WHO REACT（OR 0.66）</td><td>酸素不要例には使わない（RR 1.19で害の可能性）。改善しないからと高用量を足さない（90日死亡35%→51%）</td></tr>
+<tr><td>非COVID ARDS</td><td>デキサメタゾン 20 mg/日×5日→10 mg/日×5日</td><td>DEXA-ARDS（60日死亡 絶対15.3%減）／SCCM2024「条件付き推奨」（28日死亡 RR 0.82）</td><td>病因・病期を先に確認。インフルエンザ由来・発症14日超は避ける</td></tr>
+<tr><td>インフルエンザ肺炎</td><td>使わない</td><td>傾向スコアマッチ研究でICU死亡 HR 1.32</td><td>難治性敗血症性ショック・COPD/喘息増悪・副腎不全の合併時のみ例外として検討</td></tr>
+<tr><td>抜管前（高リスク＋CLT不合格）</td><td>抜管の4時間以上前から複数回投与、1時間前の単回は無効</td><td>ATS/CHEST2017（PES RR 0.35）／François 2007（PLE 3% vs 22%）</td><td>全例投与はしない。CLT高リスク例に絞る</td></tr>
+</tbody></table></div>
+<p><strong>CIRCI診断カットオフ表</strong>（<span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>）</p>
+<div class="tw"><table>
+<thead><tr><th>検査</th><th>カットオフ</th><th>投与判断に使えるか</th><th>頻度（参考）</th></tr></thead>
+<tbody>
+<tr><td>ランダム総コルチゾール</td><td>&lt;10 µg/dL</td><td>推奨されない（分布容積・CBGの変化で構造的に歪む）</td><td>ICU一般 25.3%</td></tr>
+<tr><td>250 µg コシントロピン負荷60分後Δコルチゾール</td><td>&lt;9 µg/dL</td><td><mark class="hl">使えない</mark>（本Homeの中心的結論）</td><td>重症COVID-19 22.9%／心原性ショック 42%／担癌＋重症敗血症 59%</td></tr>
+<tr><td>1 µg 低用量負荷試験・遊離コルチゾール・唾液コルチゾール・単独ACTH</td><td>—</td><td>いずれも推奨されない（2017年SCCM）</td><td>—</td></tr>
+<tr><td>実際の投与トリガー</td><td>NAd/Ad ≥0.25 µg/kg/min が4時間以上</td><td><mark class="hl">これで判断する</mark>（血行動態基準）</td><td>—</td></tr>
+</tbody></table></div>
+<h2>🧬 薬理の基盤 — 力価・受容体飽和・投与設計</h2>
+<p>ステロイドの効果は「どの分子か」ではなく「受容体部位でどれだけの曝露をどれだけ続けられたか」でほぼ説明できます。まずこの土台を押さえないと、あとの症候群別の用量・タイミングの意味が分かりません。</p>
+<p>グルココルチコイド受容体（GR）への相対受容体親和性（RRA）は、ヒドロコルチゾンを1とすると<mark class="hl">ヒドロコルチゾン9・メチルプレドニゾロン42・デキサメタゾン100</mark>という比になります（デキサメタゾン基準100）。力価が低い薬は高用量・高頻度で補えるという意味で、「どの薬を選ぶか」自体は決定的ではありません。決定的なのは、<strong>メチルプレドニゾロン換算で約80〜100 mgの単回投与</strong>があれば、細胞質のGRαをほぼ完全に飽和できるという事実です。ゲノム作用（遺伝子発現を介した抗炎症効果）は結合後 約30分で発現し、非ゲノム作用（膜受容体を介した速い作用）は数分で立ち上がりますが、より高い濃度を要します（<span class="wl">ARDSに対する持続グルココルチコイド治療の薬理学的原則（ICM2020）</span>）。</p>
+<p>_図: グルココルチコイドの血中濃度—時間曲線。間欠投与では無曝露の時間帯が生じる（出典 <span class="wl">ARDSに対する持続グルココルチコイド治療の薬理学的原則（ICM2020）</span>）_</p>
+<p>投与様式の違いはここから生まれます。8時間・24時間ごとの間欠投与は、薬効が切れる「無曝露の時間帯」を作ってしまいます。<strong>初回ボーラス＋持続投与</strong>は最も安定して高い曝露を保つ様式で、持続を採用したRCTのほうが間欠ボーラスより人工呼吸離脱が速く、人工呼吸器フリー日数も多いという一貫した傾向があります。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 初回ボーラス＋持続投与のプロトコル設計（出典 <span class="wl">ARDSに対する持続グルココルチコイド治療の薬理学的原則（ICM2020）</span>）_</p>
+<p>タイミングも同じ論理で説明できます。個別患者データメタ解析では、<strong>早期（72時間未満、理想は診断6時間以内）</strong>に開始した群のほうが、遅延（7日以降）開始群より抜管までのハザード比が大きく（3.48 対 2.06）、しかも早期群のほうが<strong>低用量</strong>（1 対 2 mg/kg/日）で足りています。有効性の指標としては、院内死亡の相対リスク <strong>0.65（95%CI 0.50–0.85）、救命NNT 7.2</strong>という数字が示されており、市中肺炎領域ではARDSへの進展そのものを予防する効果（0.4% 対 3.0%、RR 0.27）まで報告されています。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>抜管＝中止ではない 急な中止は約1/3の症例でリバウンド炎症・再燃を招きます。Steinberg試験では抜管48時間以内の中止で1/4が再燃し、60日死亡が9倍に増えました（p=0.001）。段階的な漸減はHPA軸の回復を待つための手続きであって、単なる形式ではありません。</p>
+</div>
+<p>安全性の面では、初回ボーラス後 約36時間以内の一過性高血糖を除けば、神経筋力低下・消化管出血・院内感染の明確な増加はみられていません。ここまでが「薬剤に依存しない」設計原則です。</p>
+<p>一方で、「薬剤の種類は本当にどうでもよいのか」という問いにも一石が投じられています。<span class="wl">ARDSのステロイドは「種類」で結果が変わるか — 低用量メチルプレドニゾロンが最適の可能性（Commentary・JIntensiveCare2023）</span>は、「ステロイドの効果は種類によらず一定（class effect）」という前提そのものに疑問を呈しました。著者ら自身の先行ネットワークメタ解析のrank probabilityでは、人工呼吸器フリー日数の観点で<strong>低用量メチルプレドニゾロンが最適でありうる</strong>と示唆され、4RCTの個別データ解析でも低用量メチルプレドニゾロンが死亡減少と関連するという結果が出ています。日本集中治療医学会のARDS診療ガイドラインは低用量を「メチルプレドニゾロン換算 1〜2 mg/kg」と定義しており、<mark class="hl">旧版の「ステロイドを行わない」という推奨から大きく転換</mark>しています。ただしこれはCommentaryであり、rank probabilityという性質上「直接比較の効果推定ではない」ことに注意が必要です。薬剤を切り替える根拠としては弱く、<mark class="hl">「今の低用量戦略の中でメチルプレドニゾロンを選ぶことは支持されうる」程度に留めるのが適切</mark>です。</p>
+<h2>💉 敗血症性ショック — 「死なせない薬」ではなく「離脱を早める薬」</h2>
+<p>敗血症性ショックでステロイドを考えるときにまず立てるべき問いは「死亡を減らせるか」ではありません。<strong>血行動態の破綻からどれだけ早く離脱できるか</strong>、という問いです。この視点の転換が起きた経緯を、主要試験の表で追ってみます。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">敗血症性ショックのステロイド（ADRENAL trial）</span>・2018</td><td>人工呼吸中の敗血症性ショック n=3,658</td><td>ヒドロコルチゾン200 mg/日 持続静注（最大7日、漸減なし）vs プラセボ</td><td>90日死亡 27.9% vs 28.6%（OR 0.95、p=0.50）。ショック離脱・人工呼吸離脱・ICU退室は有意に早い（各約1日）</td><td>「死なせない薬」ではなく「離脱を早める薬」という位置づけを確立</td></tr>
+<tr><td>APROCCHSS（<span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>内に引用）・2018</td><td>敗血症性ショック n=1,241</td><td>ヒドロコルチゾン＋フルドロコルチゾン50 µg/日 併用・分割ボーラス vs プラセボ</td><td>90日死亡 43.0% vs 49.1%（p=0.03）</td><td>ADRENALと異なり有意に死亡減少。フルドロコルチゾン併用・分割投与・より重症な患者層が候補説明</td></tr>
+<tr><td>CORTICUS（同上に引用）・2008</td><td>敗血症性ショック n=499</td><td>ヒドロコルチゾン vs プラセボ</td><td>28日死亡 34.3% vs 31.5%（p=0.51）</td><td>有意差なし。3大RCTの不一致の起点</td></tr>
+<tr><td><span class="wl">敗血症性ショックへのヒドロコルチゾンは死亡を減らさない（個々患者データメタ解析・NEJMEvid2023）</span>・2023</td><td>17試験の個々患者データ n=7,882（90日死亡は7試験 n=5,929）</td><td>ヒドロコルチゾン vs プラセボ（個々患者データ統合）</td><td>90日死亡 周辺RR 0.93（95%CI 0.82–1.04、p=0.22）で有意差なし。フルドロコルチゾン併用群のみ RR 0.86（0.79–0.92）</td><td>昇圧薬非投与日数は明確に増加（+1.24日、確実性高）。併用の有無で推定値が分かれる点が最重要</td></tr>
+<tr><td><span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>・2024</td><td>ガイドライン（22名のパネル、<span class="wl">SCCM 2024年ステロイド焦点更新の補足資料 — パネル22名・COI管理・GRADE手順・フォレストプロット（SDC・CCM2024）</span>にGRADE手順を記録）</td><td>ステロイド投与を提案</td><td>ICU/短期死亡 RR 0.93（0.88–0.98）／7日ショック離脱 RR 1.24（1.11–1.38、確実性high）。高用量・短期間（400 mg/日超を3日未満）は強く否定</td><td>推奨の根拠は死亡ではなくショック離脱とSOFA改善</td></tr>
+</tbody></table></div>
+<p>三大RCT（ADRENAL・APROCCHSS・CORTICUS）の不一致は、CIRCI総説の著者らが「APROCCHSSの患者が最も重症」「投与方法が持続 vs 分割ボーラス」「フルドロコルチゾン併用の有無」の3点で説明を試みています。ただしこれは仮説であり、<mark class="hl">投与判断に直接使ってよい根拠ではありません</mark>。フルドロコルチゾン併用は「NAdが0.5 µg/kg/minを超えて上がり続ける例」に限った議論に留めるのが安全です。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>実務での置き所 「敗血症性ショックにステロイドを使うか」の答えは、<mark class="hl">「死亡を減らすため」ではなく「ショック・人工呼吸からの離脱を早めるため」</mark>と説明するのが証拠に忠実です。開始トリガーはSSC 2021と同じ血行動態基準（NAd/Ad ≥0.25 µg/kg/min が4時間以上）。ショックの無い敗血症には使いません——HYPRESS試験（380例）ではショックへの進行が21.2% vs 22.9%で変わらず、二次感染と高血糖だけが増えました。</p>
+</div>
+<p>開始トリガーを「昇圧薬の量と時間」ではなく「2剤目を足す瞬間」に置く実践も出ています。ノルアドレナリン0.25 µg/kg/分で血圧80/50 mmHgにとどまる症例に、集中治療医と薬剤師が別々に回答したCCMの実践コラムでは、2人ともバソプレシンとステロイドの同時追加を選びました。薬剤師はヒドロコルチゾン50 mg 6時間ごとを2剤目の昇圧薬と同時に開始し、高血糖を監視してショック回復期に中止、集中治療医は50 mg 6時間ごとまたは100 mg 8時間ごとを、昇圧薬2剤以上またはノルアドレナリン単剤0.2〜0.3 µg/kg/分超の間続け、漸減せずに中止としています。「短期投与は漸減しない」という点は2人で一致し、ADRENALの投与法（漸減なし）とも合います（<span class="wl">敗血症性ショックを手術室まで持たせる実践 — 0.25γで単剤を諦めバソプレシン0.03→0.06とステロイドを同時に足す（CLINICIANS CORNER・CCM2026）</span>）。ただし2人の個人的プラクティスで推奨度は付かず、筆頭著者には昇圧薬関連企業のCOIがあるので、SSCの「0.25 µg/kg/分以上が4時間」という基準を置き換える根拠にはしません。昇圧薬側の組み立ては<span class="wl">📈 昇圧薬の選択と開始タイミング Home</span>を参照してください。</p>
+<p>より広い視点で敗血症性ショック管理を俯瞰した<span class="wl">敗血症性ショック管理の課題（ナラティブレビュー）</span>は、10名の専門家パネルがステロイドを含む9つの論点（血行動態目標・輸液・昇圧薬・強心薬・β遮断薬・微小循環・ステロイド・血液浄化とビタミンC・LMICでの実践）を挙げ、「ガイドラインは枠組みを与えるが、研究の解釈と結果の適用には課題が残る」と総括しています。ステロイドに限らず、<mark class="hl">慎重な臨床評価に基づく個別化治療が必要</mark>という結論です。</p>
+<p>なお、ビタミンC・ヒドロコルチゾン・チアミンを組み合わせるいわゆる「Marikカクテル（HAT療法）」（<span class="wl">重症敗血症へのビタミンC・ヒドロコルチゾン・チアミン Marik（Chest2016）</span>）は単施設の後ろ向き前後比較研究として大きな注目を集めましたが、<mark class="hl">本Vaultのノートは対象・デザインの記載までで途切れており、具体的な死亡率の数値は記録されていません</mark>。捏造を避けるため、この治療の効果について本Homeで数値を示すことはできません。判断が必要な場合は原著（Marik, Chest 2016）を直接確認してください。</p>
+<h2>🫁 重症市中肺炎（sCAP）— この領域で唯一の「強い推奨」</h2>
+<p>sCAPは「病原体量」ではなく「宿主の制御不全な全身炎症」で転帰が決まる病態だという理解が、この10年で定着しました（<span class="wl">重症市中肺炎（sCAP）の最新概念と論争点 — 分子診断・抗菌薬期間・ステロイド（総説・ICM2026）</span>）。米国の疫学ではCAP入院が成人10万人あたり約650人、sCAPは約145人で、30日死亡は約30%・1年死亡は47%に達します。この「制御不全な炎症」という理解が、抗菌薬を早く・狭く・短くする方向と、免疫調節（ステロイド）をどの表現型に当てるかという方向の両方を導いています。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>CAPE COD（<span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span>に引用）・2023</td><td>重症CAP n=795</td><td>ヒドロコルチゾン200 mg/日 4〜7日＋7日漸減 vs プラセボ</td><td>28日死亡 11.9%→6.2%（NNT 17.5）</td><td>sCAPステロイドの推奨を動かした中核試験</td></tr>
+<tr><td>REMAP-CAP CAP domain（同上に引用）・2025</td><td>sCAP</td><td>ヒドロコルチゾン漸減なし固定7日 vs 非投与</td><td>死亡に有意差なし、昇圧薬期間はわずかに短縮</td><td>CAPE CODと直接矛盾はしないが「漸減が寄与したか」は未証明</td></tr>
+<tr><td><span class="wl">市中肺炎の診断と管理 — 4つのPICO、肺エコーは胸部X線の代替可・臨床安定なら5日未満・重症CAPにステロイド（ATS単独ガイドライン・AJRCCM2026）</span>・2026</td><td>RCT15本のメタ解析（重症例のプール）</td><td>ステロイド vs 非投与</td><td>全体 死亡6.1% vs 9.1%（RR 0.68、NNT 34）／<strong>重症CAPに限ると9.8% vs 15.1%（RR 0.62、95%CI 0.41–0.94、NNT 17）</strong>。非重症は有意差なし（RR 0.88）</td><td><mark class="hl">この領域唯一の「強い推奨」</mark>。有害事象は全体でRR 1.2と有意差なし</td></tr>
+<tr><td><span class="wl">非ウイルス性市中肺炎へのステロイドは短期死亡と挿管を減らす（30RCT・7519例のSR・MA・ICM2025）</span>・2025</td><td>非ウイルス性CAP入院例 n=7,519（30RCT）</td><td>ステロイド（プレドニゾン換算29〜100 mg/日）vs 非投与</td><td>短期死亡 RR 0.82（0.74–0.91、確実性moderate）／<strong>侵襲的人工呼吸の必要性 RR 0.63（0.48–0.82、確実性high）</strong></td><td>最も確実性が高い所見は「死亡」ではなく「挿管回避」</td></tr>
+<tr><td><span class="wl">重症市中肺炎（sCAP）の国際ガイドライン — 8つの臨床疑問、マクロライド併用・ショック時のステロイド（ERS ESICM ESCMID ALAT・ERJ2023）</span>・2023</td><td>8つのPICO</td><td>「ショックがある場合にコルチコステロイドを提案」</td><td>条件付き推奨・低い質</td><td>「ショックがあるとき」に限定。ルーチンではない</td></tr>
+<tr><td><span class="wl">高炎症型の重症市中肺炎で表現型は転帰もステロイド反応性も変えなかった — 120例の2群クラスター解析（Scientific Letter・ICM2026）</span>・2026</td><td>CRP &gt;150 mg/L のsCAP n=120</td><td>教師なしクラスター解析で2表現型に分割</td><td>治療失敗21% vs 22%でほぼ同一。ステロイドの効き方も両群で変わらない</td><td>「炎症で選んだ後、さらに表現型で選り分ける必要はない」</td></tr>
+</tbody></table></div>
+<p>3試験の三つ巴（CAPE COD陽性・REMAP-CAP中立・ESCAPe陰性）をどう読むかが実務の分岐点です。8試験の個別患者データメタ解析では<strong>ベースラインCRP &gt;204 mg/L の患者に効果が限局</strong>するという知見があり、<mark class="hl">「炎症が強い患者ほど反応する」という仮説はまだ生きています</mark>。ただし直後で紹介した120例のクラスター解析は、炎症の強い患者を集めた<strong>後</strong>でさらに表現型を分けても差が出ないことを示しており、<mark class="hl">「入口の炎症基準で選ぶところまでが実務的な限界」</mark>と読むのが妥当です。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: sCAPの病態理解の変遷 — 病原体量から宿主炎症制御不全へ（出典 <span class="wl">重症市中肺炎（sCAP）の最新概念と論争点 — 分子診断・抗菌薬期間・ステロイド（総説・ICM2026）</span>）_</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 高炎症型sCAP内の2クラスター（若年・女性・併存症なし群 vs 高齢・多併存症群）の特徴比較（出典 <span class="wl">高炎症型の重症市中肺炎で表現型は転帰もステロイド反応性も変えなかった — 120例の2群クラスター解析（Scientific Letter・ICM2026）</span>）_</p>
+<p>ATS単独ガイドライン（2026）は、ステロイド以外にも肺エコーを胸部X線の代替として容認し、臨床安定なら抗菌薬期間を5日未満（最短3日）に短縮するなど、CAP診療全体を「より短く、より的を絞る」方向へ動かしています。ただし<mark class="hl">10推奨のうち8つが条件付きで、質は「低い」または「非常に低い」</mark>という限界を伴います。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「ショックがあるとき」という条件を外さない ERS/ESICM/ESCMID/ALATガイドラインの推奨は「ショックがある場合」に限定された条件付き推奨です。sCAPと診断されただけでルーチンに投与する根拠にはなりません。</p>
+</div>
+<h2>🌬️ ARDS（非COVID）— 病期・病因・表現型で使い分ける</h2>
+<p>ARDSのステロイドを理解する鍵は、「効くか効かないか」の二分法を捨てることです。<span class="wl">ARDSのステロイドは病因と時期で使い分ける — COVIDと重症CAPは強い推奨、インフルエンザは非推奨（ナラティブレビュー・ICM2026）</span>が整理するように、ARDSは滲出相（発症72時間以内）→増殖相（4〜10日、最大3週）→線維化相（10〜14日以降）と病期が移行し、<mark class="hl">ステロイドの作用点は前半に集中</mark>しています。これが「時期依存性」の生物学的説明です。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">ARDSに対するデキサメタゾン（DEXA-ARDS試験・LancetRespMed2020）</span>・2020</td><td>中等症〜重症ARDS（発症24時間以内）n=277</td><td>デキサメタゾン20 mg/日×5日→10 mg/日×5日 vs 対照</td><td>28日VFD 12.3日 vs 7.5日（+4.8日）。60日死亡 21% vs 36%（絶対−15.3%）</td><td>非COVID ARDSステロイドの中核試験。非盲検・低登録率で早期中止という限界あり</td></tr>
+<tr><td><span class="wl">成人ARDS管理のATSガイドライン更新 — ステロイド・VV-ECMO・筋弛緩・PEEP（AJRCCM2024）</span>・2024</td><td>ARDS全般</td><td>ステロイド・VV-ECMO・筋弛緩・高PEEP（RM無し）を条件付きで推奨</td><td>4推奨中4つが条件付き</td><td>長時間リクルートメント手技は「強く反対」（2017年版から反転）</td></tr>
+<tr><td><span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>・2024</td><td>ARDS重症例</td><td>ステロイド投与を提案</td><td>28日死亡 RR 0.82（0.72–0.95、確実性moderate）</td><td>分子種・用量・期間について特定の推奨は出せず</td></tr>
+<tr><td><span class="wl">遷延ARDSの外科的肺生検でステロイド反応性病態が高頻度（CCM2018）</span>・2018</td><td>遷延ARDS（治療無反応）n=51（外科的肺生検）</td><td>生検所見に基づく治療変更</td><td>DAD以外の診断57%、うちステロイド反応性病態37%（最多は器質化肺炎21.6%）。反応性群は院内死亡37% vs 65%</td><td>生検前に反応性を予測できる指標はない。合併症12%、生検起因死ゼロ</td></tr>
+</tbody></table></div>
+<p>ステロイドを単独の治療として考えるのではなく、ARDSの補助療法という束の中に置き直す視点も重要です。<span class="wl">ARDSの補助療法は「効くか」ではなく「誰に・いつ・何を狙うか」 — 腹臥位・筋弛緩・ステロイド・保守的輸液・吸入血管拡張薬を経過軸で整理（Understanding the Disease・ICM2026）</span>は、腹臥位（強い証拠・使用にばらつき）、筋弛緩と保守的輸液（証拠は割れるが広く使用）、<mark class="hl">ステロイド（証拠も使用も割れる）</mark>、吸入血管拡張薬（証拠は乏しいが使用が続く）という4群に補助療法を分類し、経過軸では早期損傷（0〜48時間＝腹臥位・筋弛緩・選択的ステロイド）→確立期（2〜7日＝保守的輸液・選択的ステロイド）→遷延期（7日超＝表現型分類・臨床試験）→回復期（数週＝de-escalation）という位置づけを示しています。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: ARDSステロイドの病因・時期・表現型による使い分けを俯瞰したビジュアルアブストラクト（出典 <span class="wl">ARDSのステロイドは病因と時期で使い分ける — COVIDと重症CAPは強い推奨、インフルエンザは非推奨（ナラティブレビュー・ICM2026）</span>）_</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: ARDS補助療法4種類の経過軸（早期損傷・確立期・遷延期・回復期）への配置（出典 <span class="wl">ARDSの補助療法は「効くか」ではなく「誰に・いつ・何を狙うか」 — 腹臥位・筋弛緩・ステロイド・保守的輸液・吸入血管拡張薬を経過軸で整理（Understanding the Disease・ICM2026）</span>）_</p>
+<p>より広くARDS管理全体を俯瞰した<span class="wl">ARDSの内科的マネジメント — 定義・フェノタイプ・換気設定と非換気治療の到達点（ナラティブレビュー・ICM2026）</span>は、潜在クラス分析による高炎症型（全体の約30%、IL-6・IL-8高値、昇圧薬需要大、死亡率高）に言及しつつ、<mark class="hl">「臨床試験外での表現型に基づくステロイド判断は現時点で推奨されない」</mark>と明記しています。同総説がステロイドについて特に強調するのは、Meduriらの4RCT個別患者データメタ解析が示した「早期（&lt;72時間）開始・低用量メチルプレドニゾロン1 mg/kg/日・7日以上・漸減」という設計で人工呼吸期間と院内死亡が減るという知見と、DEXA-ARDSが<mark class="hl">非盲検・症例集積不良で早期中止</mark>（計画の88%）という限界を抱えたまま結果が出ている、という2点の緊張関係です。GuARDS・CORT-E2という後続試験が進行中で、決着はまだ先です。</p>
+<p>_図: ARDSの病期（滲出相・増殖相・線維化相）とステロイドが効きうる時間窓の関係。横軸を発症からの日数（0〜21日）、縦軸に（Codex 生成の概念図）_</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>病因を先に確認する ARDSと診断されたら、まず「COVID由来か・重症CAP由来か・インフルエンザ由来か」を確認してください。<mark class="hl">COVIDと重症CAPは強い推奨、インフルエンザは非推奨</mark>という差は「ARDSだから」ではなく病因由来です。</p>
+</div>
+<h2>🦠 COVID-19 — 決着したレジメンと、その先で起きた害</h2>
+<p>COVID-19のステロイドは、この領域で最も証拠が厚く、かつ最も早く決着した論点です。<span class="wl">COVID-19の集中治療 — この4年の到達点と積み残し（RECENT ADVANCES・ICM2023）</span>が振り返るように、パンデミックの4年間で得た最大の成果は個々の薬剤ではなく<mark class="hl">「候補治療を評価する速度」</mark>でした。ステロイドはIL-6受容体阻害薬・バリシチニブと並ぶ「効いた治療」の代表であり、<span class="wl">COVID-19ステロイド研究シリーズ（まとめ・JAMA2020）</span>はこの領域の初期エビデンス群を束ねた索引として位置づけられます。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">COVID-19に対するデキサメタゾン（RECOVERY試験・NEJM2020）</span>・2020</td><td>入院COVID-19 n=6,425</td><td>デキサメタゾン6 mg/日×最大10日 vs 通常治療</td><td>28日死亡 22.9% vs 25.7%（RR 0.83）。人工呼吸中 RR 0.64／酸素のみ RR 0.82／<strong>酸素不要 RR 1.19（害の可能性）</strong></td><td>COVID-19ステロイドの決定打。呼吸補助レベルで効果が逆転する</td></tr>
+<tr><td><span class="wl">COVID-19関連ARDSに対するデキサメタゾン（CoDEX試験）</span>・2020</td><td>COVID関連ARDS人工呼吸中 n=299</td><td>デキサメタゾン20→10 mg vs 標準治療</td><td>28日人工呼吸器非装着日数 6.6日 vs 4.0日（p=.04）。28日死亡は有意差なし（56.3% vs 61.5%）</td><td>RECOVERYの結果を受け早期中止（予定350例中299例）</td></tr>
+<tr><td><span class="wl">重症COVID-19へのステロイド投与と死亡率（WHO REACTメタ解析）</span>・2020</td><td>重症COVID-19 n=1,703（7RCT）</td><td>全身ステロイド vs 対照</td><td>28日死亡 OR 0.66（95%CI 0.53–0.82）</td><td>デキサメタゾンでもヒドロコルチゾンでもよく低用量で十分</td></tr>
+<tr><td><span class="wl">重症COVID-19へのヒドロコルチゾンは優越確率93%どまり — RECOVERYで登録停止（REMAP-CAP・JAMA2020）</span>・2020</td><td>重症COVID-19 n=403</td><td>ヒドロコルチゾン固定7日／ショック依存 vs 非投与</td><td>優越の事後確率93%／80%だが早期中止で確定的結論に至らず</td><td>RECOVERYの結果で equipoise 喪失、盲検下で登録停止</td></tr>
+<tr><td><span class="wl">重症COVID-19へのヒドロコルチゾン（CAPE COVID試験）</span>・2020</td><td>COVID関連急性呼吸不全 n=149</td><td>ヒドロコルチゾン200 mg/日 vs プラセボ</td><td>21日治療失敗 42.1% vs 50.7%（p=.29）</td><td>「陰性」ではなく検出力不足（目標290例を149例で早期中止）</td></tr>
+<tr><td><span class="wl">デキサメタゾン後の非改善COVID-ARDSへの高用量ステロイド追加は90日死亡を増やす（383例・PSオーバーラップ重みづけ・CCM2023）</span>・2023</td><td>デキサ完遂も非改善のCOVID-ARDS n=383</td><td>高用量ステロイド上乗せ vs 非上乗せ</td><td>90日死亡 51% vs 35.8%（調整HR 1.65、95%CI 1.03–2.63）</td><td>効かないときに足すのは害の方向。観察研究で適応交絡は否定しきれない</td></tr>
+</tbody></table></div>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: REMAP-CAPステロイドドメインの3群設計と臓器サポートフリー日（出典 <span class="wl">重症COVID-19へのヒドロコルチゾンは優越確率93%どまり — RECOVERYで登録停止（REMAP-CAP・JAMA2020）</span>）_</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: デキサメタゾン完遂後も改善しないCOVID-ARDSにおける高用量ステロイド上乗せのタイミングと90日死亡（出典 <span class="wl">デキサメタゾン後の非改善COVID-ARDSへの高用量ステロイド追加は90日死亡を増やす（383例・PSオーバーラップ重みづけ・CCM2023）</span>）_</p>
+<p>ステロイドの成功は同時に新しいリスクも呼び込みました。<span class="wl">デキサメタゾンはCOVID-19関連肺アスペルギルス症のリスクを3倍に上げる — OR 3.110・CAPA発生率9%の522例コホート（CritCare2022）</span>は、522例のコホートで<strong>デキサメタゾン投与が多変量解析でCAPAの独立危険因子</strong>であったこと（OR 3.110）を示し、院内標準治療としてデキサメタゾンを導入した後にCAPA発生率が4.5%から10.6%へ上昇したと報告しています。しかしここで治療を止めてはいけません。<span class="wl">COVID-19関連肺アスペルギルス症の診断はBALが要 — CT・血清バイオマーカーは頼れず死亡率約50%、ステロイド継続を推奨（GRADE専門家パネル28名・ICM2021）</span>は、<mark class="hl">BAL陽性でCAPAと診断された患者でも併用中のステロイド・IL-6阻害薬をルーチンに中止しないことを推奨</mark>しています。「ステロイドがCAPAを招く」ことと「CAPA診断後もステロイドを安易に止めない」ことは矛盾ではなく、<mark class="hl">適応判断の階層が違う</mark>という整理です。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 院内標準治療としてのデキサメタゾン導入前後でのCAPA発生率の変化（出典 <span class="wl">デキサメタゾンはCOVID-19関連肺アスペルギルス症のリスクを3倍に上げる — OR 3.110・CAPA発生率9%の522例コホート（CritCare2022）</span>）_</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>CAPAは「疑って気管支鏡」が要 CTと血清バイオマーカーだけでは診断できません（85%が陰性）。原因不明の呼吸状態悪化を見たら、最大限の努力で気管支鏡＋BALを実施します。</p>
+</div>
+<h2>🫧 抜管前後の喉頭浮腫とストライダー — カフリークテストとタイミング</h2>
+<p>カフリークテスト（CLT）を理解するうえで最も重要な事実は、<mark class="hl">CLTが「起こす患者」を当てる検査ではなく、「起こさない患者」を除外する検査</mark>だということです。<span class="wl">抜管後喉頭浮腫とストライダー — 高リスクを同定する信頼できる検査はまだない（総説・CritCare2015）</span>が整理するとおり、CLTの陰性的中率（NPV）は全研究で一貫して0.90を超える一方、陽性的中率（PPV）はカットオフ依存で0.00〜0.84と不安定です。その理由は生理学的にも説明できます。呼気リーク量は総リーク量のわずか30%にすぎず、残りは吸気リークとして逃げるため、CLVは喉頭内腔だけを反映していません。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td><span class="wl">抜管前少量ステロイドによる喉頭浮腫予防（François ほか・Lancet2007）</span>・2007</td><td>36時間以上の人工呼吸患者 n=698</td><td>メチルプレドニゾロン20 mg×4回（抜管12時間前から4時間毎、計80 mg）vs 対照</td><td>喉頭浮腫 3% vs 22%／再挿管 4% vs 8%／喉頭浮腫による再挿管 8% vs 54%</td><td>抜管前ステロイドの最大のRCT。「12時間前投与」が根拠</td></tr>
+<tr><td><span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span>・2017</td><td>RCT3本のプール n=214</td><td>ステロイド vs 対照（CLT不合格の高リスク例）</td><td>PES 10.8% vs 31.9%（RR 0.35）／再挿管 5.8% vs 17.0%（RR 0.32）</td><td><mark class="hl">ステロイド投与後のCLT再検は不要</mark>。確実性moderate</td></tr>
+<tr><td><span class="wl">抜管後喉頭浮腫と抜管失敗 — カフリークテストと予防的ステロイド（総説・CritCare2009）</span>・2009</td><td>挿管4日以上の患者</td><td>メタ解析：複数回投与の先制ステロイド</td><td>喉頭浮腫の発生とそれに続く再挿管を減少</td><td>CLT2015の前身。基本方針は変わらず継承</td></tr>
+</tbody></table></div>
+<p>CLTの診断精度そのものも押さえておく価値があります。上気道閉塞に対する感度は0.56、特異度は0.92（陽性尤度比5.90、陰性尤度比0.48）。仮想RCTシミュレーションでは、CLT誘導管理は再挿管を2.4% vs 4.2%（RR 0.58）、PESを4.0% vs 6.7%（RR 0.60）に減らす一方、<mark class="hl">不要な抜管遅延を9.2%絶対増</mark>やすというトレードオフも示されています（<span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span>）。</p>
+<p>ステロイドの成否は「タイミング」でほぼ説明できます。<mark class="hl">1時間前の投与は無効（Darmon 1992・Ho 1996）、4〜48時間前の投与は有効</mark>（Cheng 2006・François 2007・Lee 2007・Cheng 2011）。有効性を示した試験の多くはCLTで低リスク例を除外していたため、全例投与の根拠にはならない点も重要です。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 抜管後喉頭浮腫・PES・抜管後呼吸不全の頻度と危険因子の一覧（出典 <span class="wl">抜管後喉頭浮腫とストライダー — 高リスクを同定する信頼できる検査はまだない（総説・CritCare2015）</span>）_</p>
+<p>_図: カフリークテストの結果からステロイド投与判断への意思決定フロー。左から「抜管予定」→「抜管後ストライダー高リスクか」の分（Codex 生成の概念図）_</p>
+<p>抜管失敗そのものをどう先読みするかについては、<span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span>が有用な整理を提供します。<mark class="hl">抜管失敗は「呼吸ポンプが足りない（離脱失敗）」のか「気道が自立できない（気道失敗）」のかで対策がまったく違う</mark>という枠組みで、ステロイドは気道失敗側の対策（咳嗽力・分泌物量の評価と並ぶ）に位置づけられます。頻度は48時間以内10%、7日以内15%と、多くの研究にもかかわらず依然として高いままです。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 抜管失敗を「気道失敗」と「離脱失敗」に分ける2機序モデルと、機序ごとの介入（出典 <span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span>）_</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>NPPVで粘らない 抜管後喉頭浮腫による呼吸不全に対してNIVは推奨されません。転帰を改善せず挿管を遅らせるだけです。呼吸不全に至れば再挿管が唯一の確定的解決です。</p>
+</div>
+<h2>🧪 CIRCI・副腎不全・下垂体系 — なぜ検査で選べないか</h2>
+<p>このHome全体を貫く最も重要な機序的結論が、ここに集約されています。<mark class="hl">重症患者のコルチゾール高値は「副腎が頑張っている」結果ではなく、代謝低下と分布容積増大によるACTH非依存性の上昇</mark>です（<span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>）。CIRCI（critical illness-related corticosteroid insufficiency）は2008年にSCCMが導入した用語で、視床下部-下垂体-副腎（HPA）軸の<strong>機能的</strong>不全であり、構造的欠損を必要としません。</p>
+<p>病態は3本柱で説明されます。①HPA軸の調節異常——急性期にはACTHが一過性に上がってコルチゾールが上がりますが、炎症が続くとACTHは基礎値近くまで落ちる一方でコルチゾールは高いまま（<strong>ACTH-コルチゾール解離</strong>）です。②コルチゾール代謝の変化——不活化を担う5α/β還元酵素（肝）と11β-HSD2（腎）の活性が炎症で低下し半減期が延びます。③組織のコルチコステロイド抵抗性——コルチゾール結合グロブリン（CBG）は陰性急性期蛋白として低下し、好中球エラスターゼがCBGを低親和性型に変え、体温が2℃上がるごとに遊離コルチゾールは倍になります。CBG低下は敗血症性ショックの1/3に見られ死亡リスク因子です。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: ACTH-コルチゾール解離の時間経過（急性期の一過性上昇から慢性期の解離へ）（出典 <span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>）_</p>
+<p>だからこそ、<mark class="hl">250 µgコシントロピン負荷試験の「増分」は構造的に過小評価され、ステロイド投与対象の選別には使えません</mark>。診断基準（ランダム総コルチゾール&lt;10 µg/dL、または負荷後60分のΔコルチゾール&lt;9 µg/dL）は依然として存在しますが、2017年SCCMはどちらが優れるとも言わず、1 µg低用量試験・遊離コルチゾール・唾液コルチゾール・単独ACTH値・ヒドロコルチゾンへの血行動態反応も、いずれも推奨されていません。頻度はICU一般で25.3%、重症COVID-19で22.9%、心原性ショックで42%、担癌＋重症敗血症で59%（いずれも単施設研究）と報告されています。</p>
+<p>GRα発現は末梢血で低下しますが、低下の主体は好中球であり、多くの重要臓器ではむしろGRα作用が増えているという知見もあります（Teblickら）。<mark class="hl">「全身的なステロイド抵抗性だからストレス量を使う」という論拠自体が揺らいでいる</mark>点は、当院での説明にも使える整理です。中止についても、SCCMは方法を規定していません。後ろ向き2研究では逆説的に<strong>漸減群のほうが血行動態不安定が多かった</strong>（21.9% 対 10.7%／17.1% 対 2.2%）という報告があり、<mark class="hl">「漸減しているから安心」とは考えない</mark>ほうが安全です。長期予後は、Vanhorebeekらの5年後評価で総・遊離コルチゾールもCBGも対照と同等に戻り、残っていたのは甲状腺軸の異常だけだったと報告されています。</p>
+<p>CIRCIが「構造的欠損なしに起こる機能的病態」であるのに対し、構造的な副腎不全は別の臨床像を持ちます。<span class="wl">副腎不全（Lancetセミナー2021）</span>は、副腎危機を疑ったら検査結果を待たずに即座のヒドロコルチゾン100 mgと輸液で救命できることを強調し、ステロイド投与患者が嘔吐・下痢でステロイドを吸収できず副腎不全を起こしうる点を重要な落とし穴として挙げています。</p>
+<p>構造的な副腎不全のもう一つの原因が下垂体側の障害です。<span class="wl">下垂体卒中 — 下垂体腺腫の2〜12%に生じ、ACTH欠乏による副腎不全が命に関わる（総説・EndocrRev2015）</span>は、下垂体卒中が下垂体腺腫の2〜12%に合併し、突然かつ高度に発症する頭痛を主症状とすることを示しています。誘発因子には頭蓋内圧の上昇・動脈性高血圧・<strong>大手術</strong>・<strong>抗凝固療法</strong>が含まれ、<mark class="hl">当院の周術期・ICU患者でも起こりうる</mark>病態です。ACTH欠乏による副腎不全は治療されなければ生命を脅かすため、下垂体卒中を疑ったら内分泌学的評価を待たずにステロイド補充を検討します。かつては常に外科的緊急症とされていましたが、視力・視野が保たれ意識が清明な選択された患者では、現在は保存的管理が増えつつあります（ただし比較研究は後ろ向き・非対照）。</p>
+<p>薬剤性の副腎・下垂体障害という第三の経路もあります。<span class="wl">免疫チェックポイント阻害薬による内分泌有害事象 — 下垂体炎9%・甲状腺15%・副腎炎1%、発症は平均9週（Review・ClinEndocrinol2016）</span>は、免疫チェックポイント阻害薬（ICI）による<strong>下垂体炎の頻度が最大9%、甲状腺機能異常は最大15%、副腎炎は約1%</strong>で、発症は投与開始後平均9週（範囲5〜36週）と報告しています。抗CTLA-4薬（イピリムマブ）は抗PD-1/PD-L1薬より下垂体炎の頻度が高く、併用療法でさらに頻度が上がります。<mark class="hl">がん治療歴のあるICU患者で頭痛・倦怠感・低血圧・低Na血症といった非特異的症状をみたら、下垂体炎・続発性副腎不全を鑑別に入れる</mark>べきです。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>CIRCIは「構造的な副腎不全」ではない CIRCIは構造的欠損を必要としない機能的病態です。副腎不全（Lancetセミナー2021）・下垂体卒中・ICI関連下垂体炎はいずれも<strong>構造的</strong>な原因であり、対処（緊急ステロイド補充・内分泌評価・画像検査）が異なります。「ステロイドが効くかもしれない」で一括りにせず、機序を分けて考えます。</p>
+</div>
+<h2>🩺 その他の適応 — 好酸球性肺炎・扁桃周囲膿瘍・間質性肺炎の急性増悪・血管炎性肺胞出血</h2>
+<p>ICUでステロイドが登場する場面は、感染症とARDSだけではありません。ここでは頻度は高くないものの、遭遇したときに判断が問われる適応をまとめます。</p>
+<p><strong>好酸球性肺炎</strong>は、<span class="wl">好酸球性肺炎の総説 — 急性型（AEP）と慢性型（CEP）はステロイドが効く点で似て、再発するかで決定的に違う（招待総説・AllergolInt2019）</span>が整理するように、<mark class="hl">急性型（AEP）と慢性型（CEP）はステロイドがよく効く点で似ていますが、再発するかで決定的に違います</mark>。AEPは喫煙習慣の変化（新規開始・再開・本数増加、受動喫煙の短期曝露でも発症）が引き金で、全身ステロイドで数日以内に急速改善し、禁煙すれば通常再発せず完全回復します。ICU入室は47.1〜78.9%、人工呼吸は1.5〜67.4%と幅がありますが、末梢血好酸球&gt;500/mm³を示すのは入院時にわずか28.2〜39.4%にとどまるため、<mark class="hl">診断は病歴＋CT＋BALに依存</mark>します（BAL好酸球は概ね40%以上）。一方CEPは女性に多く（2倍）、半数超がアレルギー疾患を合併し、PSL 0.5 mg/kg（約30 mg）で2週以内に寛解しますが、<strong>37.0〜58.3%が再発</strong>し、<mark class="hl">50%超が維持ステロイドを要し、平均6.1年で36.8%に持続的肺機能障害</mark>が残ります。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 急性好酸球性肺炎（AEP）と慢性好酸球性肺炎（CEP）の臨床像・画像所見の対比（出典 <span class="wl">好酸球性肺炎の総説 — 急性型（AEP）と慢性型（CEP）はステロイドが効く点で似て、再発するかで決定的に違う（招待総説・AllergolInt2019）</span>）_</p>
+<p><strong>扁桃周囲膿瘍</strong>では、ドレナージ後の全身ステロイド単回投与という比較的小さな介入が意外な効果を示します。<span class="wl">扁桃周囲膿瘍のドレナージ後にステロイド単回投与で開口障害と疼痛が1日目に改善 — 32例の後ろ向き対照研究、7日目には差が消える（AurisNasusLarynx2018）</span>では、メチルプレドニゾロン1 mg/kg単回静注により、経口摂取までの時間が17.2時間から6.3時間へ、入院期間が2.6日から1.2日へ短縮しました。<mark class="hl">ただし7日目には両群の差は消えており</mark>、単回投与は「早期の症状緩和」を狙う短期的な介入と理解するのが適切です（後ろ向き・非無作為化研究という限界も併記）。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 扁桃周囲膿瘍ドレナージ後のステロイド単回投与群と対照群の経口摂取までの時間・入院期間の推移（出典 <span class="wl">扁桃周囲膿瘍のドレナージ後にステロイド単回投与で開口障害と疼痛が1日目に改善 — 32例の後ろ向き対照研究、7日目には差が消える（AurisNasusLarynx2018）</span>）_</p>
+<p><strong>特発性間質性肺炎の急性増悪（AE-IIPs）</strong>は、<mark class="hl">「治療のないICU疾患」</mark>という現実を突きつけます。<span class="wl">特発性間質性肺炎の急性増悪にステロイドパルスは低用量に勝らない — 院内死亡50.6%対47.0%、OR 0.86（DPC 17317例・AnnClinEpidemiol2023）</span>は、日本のDPCデータベース17,317例で高用量ステロイドパルス（メチルプレドニゾロン500〜1,000 mg/日×3日）と低用量（100〜200 mg/日×5日以上）を比較し、院内死亡率が50.6%対47.0%、IPTW後のオッズ比0.86（95%CI 0.64–1.16）で有意差なしと報告しました。<mark class="hl">「パルスを打たなければならない」というプレッシャーを、少し相対化できるデータ</mark>ですが、低用量群がわずか319例（1.8%）と極端に不均衡で、選択バイアスの可能性が高い点には注意が必要です。ステロイド単独への上乗せについても明確な答えがあります。<span class="wl">シクロフォスファミドは特発性肺線維症急性増悪の死亡率を上げる（EXAFIP・Lancet2022）</span>は、高用量ステロイドへのシクロフォスファミド上乗せが3か月死亡を45%対31%（p=0.10）とむしろ悪化させる方向に一貫して振れることを示しました。<mark class="hl">「上乗せする根拠はない」という点は明確</mark>ですが、有意差はp=0.10であり「害が確定した」とまでは言えません（人工呼吸中の患者は除外）。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: EXAFIP試験のシクロフォスファミド上乗せ群とプラセボ群の生存曲線（出典 <span class="wl">シクロフォスファミドは特発性肺線維症急性増悪の死亡率を上げる（EXAFIP・Lancet2022）</span>）_</p>
+<p><strong>免疫不全患者のニューモシスチス肺炎（PcP）</strong>にステロイドを上乗せする判断は、<mark class="hl">非HIVの重症例ではまだエビデンスがありません</mark>。<span class="wl">ICUのニューモシスチス肺炎治療の最適化の課題（Correspondence・ICM2024）</span>は、既存の観察研究に「37%が PcP 以外の適応でステロイドを受けていた」「HIV陽性・陰性を一括して解析している」「ステロイド開始まで7日の遅延がある」という3つの方法論的疑義を提起し、<mark class="hl">早期ステロイド投与の影響を探索した試験は現時点で存在しない</mark>と結論しています（非HIV重症PcPへのステロイドを検証するRCT NCT02944045が進行中）。</p>
+<p>最後に、<strong>血管炎に伴うびまん性肺胞出血</strong>という稀だが劇的な適応があります。<span class="wl">産褥3日目の大量喀血が長年の血管炎の初発症状だった1例 — びまん性肺胞出血、ステロイド＋血漿交換で23日目に退院（症例報告・IJOA2018）</span>は、正常分娩後に喀血と低酸素で発症した26歳の産褥患者が、気管支鏡でびまん性肺胞出血と診断され、<mark class="hl">高用量ステロイド＋血漿交換でARDS・急性腎障害・肺塞栓症を合併しながらも23日目に退院</mark>した経過を報告しています。産褥期の喀血＋低酸素では最初に肺塞栓症が想起されがちですが（本例でも抗凝固が先に開始）、<mark class="hl">びまん性肺胞出血は治療が正反対（抗凝固 vs 中止＋免疫抑制）</mark>であるため、気管支鏡による早期評価が分岐点になります。びまん性肺胞出血（DAH）を総論として整理した<span class="wl">びまん性肺胞出血（DAH）の総説 — 組織型の9割は肺毛細血管炎、喀血は3人に1人で欠落、治療はステロイド・免疫抑制・早期血漿交換（総説・Chest2010）</span>によれば、<mark class="hl">組織型としては肺毛細血管炎が最多（34例の検討で88%）で、喀血は最大3分の1の症例で欠落する</mark>ため無喀血でも除外できません。病因別にステロイド＋シクロホスファミドを軸とする免疫抑制が共通の骨格で、ANCA関連血管炎・Goodpasture症候群では早期の血漿交換が上乗せされます。</p>
+<h2>💊 どう使うか — 薬剤選択・用量・漸減・相互作用</h2>
+<p>適応が決まったあとに残るのが、<mark class="hl">「どう使うか」</mark>という実務的な問いです。<span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span>は、この問いを薬剤選択・用量・漸減・モニタリング・相互作用という6領域に整理した、このHomeで唯一「どう使うか」を担当する総説です。</p>
+<p>_図: 症候群別4レジメンと投与法・モニタリング・相互作用の全体像（出典 <span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span>）_</p>
+<p>投与法では、ヒドロコルチゾンの<strong>持続 vs 間欠</strong>投与は死亡同等ですが、持続のほうが7日目のショック解除が多く（RR 1.14）、低カリウム血症が少なく（RR 0.67）、血糖変動が小さいという実務上の利点があります。相互作用の面では、<mark class="hl">デキサメタゾンはCYP3A4とP糖蛋白の基質かつ強力な誘導薬という双方向のリスク</mark>を持ちます。強い阻害薬（一部の抗真菌薬・マクロライドなど）併用時は経験的に50%減量、強い誘導薬併用時は倍量を検討するという考え方が示されています。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 症候群別のステロイドレジメン一覧表（薬剤・用量・期間・漸減の有無）（出典 <span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span>）_</p>
+<p>_図: 4つの症候群（重症CAP・敗血症性ショック／COVID-19／非COVID ARDS／インフルエンザ）を横に並べ、それぞ（Codex 生成の概念図）_</p>
+<p>漸減については、<mark class="hl">同じPneumonia2026総説の中で記載が4か所（本文・Table 1・Fig 1・結論部）食い違っている</mark>ことを、既に「当院の標準」の節で述べました。総説自体が示す一般則としては、<strong>3〜4週未満のコースは突然中止でよい</strong>、<strong>3〜4週超は2相性の漸減が必要</strong>で、最終段階は朝の血中コルチゾール（300 nmol/L超で中止可）で判断する、というものです。当院ではこの一般則を採用しつつ、「10日以内のコースは漸減しない」を既定として運用し、<mark class="hl">例外（3〜4週を超える長期コース）を明文化</mark>しておくのが安全です。</p>
+<h2>📉 長期アウトカムという新しい変数 — フレイル</h2>
+<p>ステロイドの評価軸は、これまで死亡・臓器サポート日数・ICU/在院日数に集中してきました。<span class="wl">敗血症性ショックを生き延びた高齢者の3人に2人が90日後にフレイル — 前フレイル・SOFA・ステロイドが独立予測因子（OPTPRESS post hoc・CCM2026）</span>は、<mark class="hl">長期の身体機能</mark>という新しい軸を持ち込みます。</p>
+<p>OPTPRESS試験（日本29施設、65歳以上の敗血症性ショック）の事後解析では、90日生存者339例のうち<mark class="hl">69.6%が中等度以上のフレイル（CFS 5以上）</mark>でした。独立関連因子として、発症前CFS（aOR 2.03／1点）・SOFAスコア（aOR 1.16／1点）とともに<strong>ステロイド使用（aOR 1.72、95%CI 1.14–2.61）</strong>が挙げられ、その影響は<mark class="hl">発症前からフレイルだった患者に限って顕著</mark>（aOR 3.35 vs 1.35、交互作用あり）でした。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 90日後のフレイル区分（no-to-mild／moderate／severe）の分布と独立予測因子（出典 <span class="wl">敗血症性ショックを生き延びた高齢者の3人に2人が90日後にフレイル — 前フレイル・SOFA・ステロイドが独立予測因子（OPTPRESS post hoc・CCM2026）</span>）_</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>事後解析の関連を、そのまま治療方針にしない 著者の結論（Key Pointsの Meaning）は「高齢者の敗血症管理においてステロイド療法を避けることは選択肢になりうる」というものですが、<mark class="hl">これは事後解析の「関連」から導かれた記述であり、因果を証明していません</mark>。ステロイドが投与された患者はそもそも重症度が高かった可能性（適応交絡）を否定できず、<mark class="hl">この1本だけで「高齢者にはステロイドを控える」という方針転換をするのは早計</mark>です。一方で、<mark class="hl">発症前フレイルのある患者に限ってステロイドの影響が大きいという交互作用</mark>は、意思決定の材料としては覚えておく価値があります。</p>
+</div>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショックに使うか</td><td><span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>（条件付き推奨）</td><td><span class="wl">敗血症性ショックのステロイド（ADRENAL trial）</span>／<span class="wl">敗血症性ショックへのヒドロコルチゾンは死亡を減らさない（個々患者データメタ解析・NEJMEvid2023）</span></td><td><strong>矛盾ではない</strong>。<mark class="hl">推奨の根拠が死亡ではなくショック離脱とSOFA改善だから</mark>。使うなら目的を「離脱の促進」と明示し、死亡改善を期待しない</td></tr>
+<tr><td>ARDSに使うか</td><td><span class="wl">ARDSに対するデキサメタゾン（DEXA-ARDS試験・LancetRespMed2020）</span>（60日死亡 絶対15.3%減）</td><td><span class="wl">ARDSのステロイドは病因と時期で使い分ける — COVIDと重症CAPは強い推奨、インフルエンザは非推奨（ナラティブレビュー・ICM2026）</span>（<mark class="hl">前向きに検証されているのは低換気量換気と腹臥位だけ</mark>）</td><td><strong>病因で分ける</strong>。COVID・重症CAP由来なら使う。インフルエンザ由来は使わない。<mark class="hl">「ARDSだから」で決めない</mark></td></tr>
+<tr><td>表現型で選べるか</td><td>「文脈依存的な治療」という枠組み</td><td><span class="wl">高炎症型の重症市中肺炎で表現型は転帰もステロイド反応性も変えなかった — 120例の2群クラスター解析（Scientific Letter・ICM2026）</span></td><td><strong>表現型を臨床の投与判断に持ち込まない</strong>。現時点では病因と病期・炎症の入口基準（CRPなど）で決める</td></tr>
+<tr><td>短期コース後に漸減が要るか</td><td><span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span> の Table 1・Fig 1（重症CAPは3〜7日かけて漸減／改善例は必要なら漸減）／CAPE COD（漸減あり・28日死亡 11.9%→6.2%）</td><td>同論文の本文・結論部（<mark class="hl">3〜4週未満は突然中止でおそらく安全</mark>、敗血症性ショック414例で突然中止が安全・ICU在室短縮、デキサメタゾンは半減期36〜54時間で自己漸減）／REMAP-CAP（漸減なし固定7日で死亡は中立）</td><td><mark class="hl">同じ1本の中で4か所の記載が食い違っており、この論文を漸減プロトコルの根拠にしない</mark>。当院は「10日以内のコースは漸減しない・3〜4週超のみ2相性漸減」を既定にし、例外を明文化する。漸減が死亡減少に寄与したかは直接比較で未証明</td></tr>
+<tr><td>なぜAPROCCHSSだけ死亡を下げたか</td><td><span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>（患者が最も重症・フルドロコルチゾン50 µg/日併用・分割ボーラス投与の3点で説明できる）</td><td><span class="wl">敗血症性ショックへのヒドロコルチゾンは死亡を減らさない（個々患者データメタ解析・NEJMEvid2023）</span>（重症度サブグループでも一貫した利益は見出せない）</td><td><mark class="hl">仮説として持つが、投与判断には使わない</mark>。三大RCTは ADRENAL 90日死亡 27.9% 対 28.8%（P=0.50）／APROCCHSS 43.0% 対 49.1%（P=0.03）／CORTICUS 28日死亡 34.3% 対 31.5%（P=0.51）。フルドロコルチゾン併用は「NAdが0.5 µg/kg/minを超えて上がり続ける例」に限った議論に留める</td></tr>
+<tr><td>ヒドロコルチゾンのCOVID試験は陰性か</td><td>「効かない」という読み</td><td><span class="wl">重症COVID-19へのヒドロコルチゾン（CAPE COVID試験）</span>（<mark class="hl">290例の予定を149例で早期中止した検出力不足</mark>）／<span class="wl">重症COVID-19へのヒドロコルチゾンは優越確率93%どまり — RECOVERYで登録停止（REMAP-CAP・JAMA2020）</span></td><td><strong>「陰性」ではなく「検出力不足」と読む</strong>。RECOVERYの結果を受けて登録が止まった経緯を併記する</td></tr>
+<tr><td>高齢者にはステロイドを控えるべきか</td><td><span class="wl">敗血症性ショックを生き延びた高齢者の3人に2人が90日後にフレイル — 前フレイル・SOFA・ステロイドが独立予測因子（OPTPRESS post hoc・CCM2026）</span>（ステロイド使用がフレイルと独立して関連、著者は「避けることも選択肢」と記述）</td><td>SCCM2024・ADRENAL等が示す短期の離脱促進効果</td><td><strong>事後解析の関連を因果と混同しない</strong>。適応交絡（重症例ほどステロイドが使われる）を否定できない観察研究であり、<mark class="hl">短期の離脱効果を放棄する根拠にはしない</mark>。発症前フレイルのある患者への説明材料に留める</td></tr>
+<tr><td>sCAPの3試験（CAPE COD・REMAP-CAP・ESCAPe）はなぜ食い違うか</td><td>CAPE COD（28日死亡陽性）／<span class="wl">重症市中肺炎（sCAP）の最新概念と論争点 — 分子診断・抗菌薬期間・ステロイド（総説・ICM2026）</span>が引く8試験IPDメタ解析（CRP&gt;204 mg/Lに効果が限局）</td><td>REMAP-CAP（死亡中立）／ESCAPe（陰性）／<span class="wl">重症市中肺炎（sCAP）の最新概念と論争点 — 分子診断・抗菌薬期間・ステロイド（総説・ICM2026）</span>の三つ巴という整理</td><td><strong>炎症の強さで層別化した集団か否かの違いが大きい</strong>。CRPなどの炎症基準で入口を絞った試験ほど陽性に出やすい。全例一律の推奨ではなく「重症＋炎症強度」で判断する</td></tr>
+</tbody></table></div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：重症COVID-19では全身ステロイドが28日全死亡を下げる（OR 0.66・40%→32%相当）。重症CAPでは死亡を下げる（NNT 17）。敗血症性ショックでは死亡を下げないがショックからの離脱を早める。<strong>用量は低用量で足り、遅れて足すのは有害</strong>。副腎機能検査（コシントロピン負荷）でステロイド適応を決める道は機序のレベルで閉じている。</li><li><strong>まだ決着していないこと</strong>：①ARDSの表現型でステロイド反応性を選べるか、②敗血症性ショックの最適な適応（<span class="wl">敗血症性ショックへのヒドロコルチゾンは死亡を減らさない（個々患者データメタ解析・NEJMEvid2023）</span>）、③非COVIDウイルス性肺炎、④投与終了のタイミング（中止法はSCCMも規定しておらず、後ろ向き2研究では逆説的に漸減群のほうが血行動態不安定が多かった）、⑤高齢者の長期フレイルへの影響が投与判断を変えるべきか（OPTPRESS事後解析）。</li><li><strong>最近変わったこと</strong>：<strong>「効くか」から「誰に効くか」へ移り、その「誰」がまだ見つかっていない</strong>。<span class="wl">高炎症型の重症市中肺炎で表現型は転帰もステロイド反応性も変えなかった — 120例の2群クラスター解析（Scientific Letter・ICM2026）</span> は、見た目のまったく違う2群を教師なしで分けても<mark class="hl">治療失敗は21%対22%でほぼ同一、ステロイドの効き方も変わらなかった</mark>と報告した。一方でCAPガイドラインは方向を変え、<span class="wl">市中肺炎の診断と管理 — 4つのPICO、肺エコーは胸部X線の代替可・臨床安定なら5日未満・重症CAPにステロイド（ATS単独ガイドライン・AJRCCM2026）</span> が重症CAPへの投与を打ち出した。さらに問いの重心が「いつ使うか」から <mark class="hl">「どう使うか」（薬剤選択・用量・漸減・モニタリング・相互作用）</mark> へ移り、<span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span> がそれを6領域に整理した。<mark class="hl">ただし漸減の要否は同論文内でも記載が割れており（上表）、決着していない</mark>。もう一つ、ARDS側では <mark class="hl">問いの立て方そのものが「効くか」から <strong>「誰に・いつ・何を狙うか」</strong> へ書き換えられた</mark>（<span class="wl">ARDSの補助療法は「効くか」ではなく「誰に・いつ・何を狙うか」 — 腹臥位・筋弛緩・ステロイド・保守的輸液・吸入血管拡張薬を経過軸で整理（Understanding the Disease・ICM2026）</span>）。ステロイドは単独の治療ではなく補助療法の束の一員として、<strong>証拠の強さ × 使用頻度</strong>と<strong>経過4期</strong>の2軸に置かれる。ここで新しいのは推奨ではなく<mark class="hl"><strong>de-adoption（効かないものをやめる）を明示的な課題として立てた</strong></mark>点。加えて、<mark class="hl">長期の身体機能（フレイル）という新しい評価軸</mark>が持ち込まれつつある（OPTPRESS事後解析）。</li></ul>
+</div>
+<h2>🔬 研究のタネ（聖路加）</h2>
+<div class="call note"><span class="lab">question</span>
+<p>このテーマで著者たちが繰り返し残している問い</p>
+<ul><li>ステロイドの分子種・用量・漸減タイミングに統一見解がなく、施設としての投与方針が定まっていない — <span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>、<span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span></li><li>開始タイミング（昇圧薬閾値・発症からの時間）が転帰を左右しうるが、観察研究ではimmortal time biasを避けた検証がない — <span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>、<span class="wl">デキサメタゾン後の非改善COVID-ARDSへの高用量ステロイド追加は90日死亡を増やす（383例・PSオーバーラップ重みづけ・CCM2023）</span></li><li>小児・日本人集団への外挿可能性が未検証のまま、海外中心のエビデンスに依拠している — <span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span></li><li>退院後の長期予後・フレイル・QOLへの影響は追跡が打ち切られ、ほとんど分かっていない — <span class="wl">重症COVID-19へのステロイド投与と死亡率（WHO REACTメタ解析）</span>、<span class="wl">敗血症性ショックを生き延びた高齢者の3人に2人が90日後にフレイル — 前フレイル・SOFA・ステロイドが独立予測因子（OPTPRESS post hoc・CCM2026）</span></li><li>二次感染（CAPA含む）・高血糖などの有害事象は定義が不統一で、リアルワールドでの頻度が見えていない — <span class="wl">デキサメタゾンはCOVID-19関連肺アスペルギルス症のリスクを3倍に上げる — OR 3.110・CAPA発生率9%の522例コホート（CritCare2022）</span></li></ul>
+</div>
+<div class="tw"><table>
+<thead><tr><th>研究案</th><th>データ源</th><th>由来ノート</th><th>実現性</th></tr></thead>
+<tbody>
+<tr><td>ステロイド使用（有無・分子種・用量・開始判断）の施設間ばらつきを可視化する</td><td>JIPAD</td><td><span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span>、<span class="wl">COVID-19の集中治療 — この4年の到達点と積み残し（RECENT ADVANCES・ICM2023）</span>、ほか6本</td><td>◎</td></tr>
+<tr><td>人工呼吸期間・再挿管率など離脱失敗の記述疫学で、著者が指摘した危険因子の矛盾を日本人データで検証する</td><td>JIPAD</td><td><span class="wl">抜管後喉頭浮腫とストライダー — 高リスクを同定する信頼できる検査はまだない（総説・CritCare2015）</span>、<span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span></td><td>◎</td></tr>
+<tr><td>小児（PIM2/3・pSOFA）でのステロイド投与実態を記述し、推奨が出せなかったエビデンスの空白を埋める</td><td>JIPAD</td><td><span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span></td><td>○</td></tr>
+<tr><td>ステロイド開始タイミング（昇圧薬閾値・発症からの時間）をDPC薬剤オーダーで同定し、ランドマーク解析でimmortal time biasを避けて転帰を検証する</td><td>JIPAD×DPC</td><td><span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span>、<span class="wl">ARDSに対する持続グルココルチコイド治療の薬理学的原則（ICM2020）</span>、ほか3本</td><td>○</td></tr>
+<tr><td>ステロイド用量・投与日数と高血糖・二次感染・CAPA発生の量反応関係を検証する</td><td>JIPAD×DPC</td><td><span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span>、<span class="wl">デキサメタゾンはCOVID-19関連肺アスペルギルス症のリスクを3倍に上げる — OR 3.110・CAPA発生率9%の522例コホート（CritCare2022）</span></td><td>○</td></tr>
+<tr><td>退院後・同一病院再入院までを含めた長期転帰を補い、退院時打ち切りの限界を埋める</td><td>JIPAD×DPC</td><td><span class="wl">重症COVID-19へのステロイド投与と死亡率（WHO REACTメタ解析）</span>、<span class="wl">重症市中肺炎（sCAP）の最新概念と論争点 — 分子診断・抗菌薬期間・ステロイド（総説・ICM2026）</span></td><td>○</td></tr>
+<tr><td>採用製剤の力価換算表・漸減プロトコルを整備し、施設方針として明文化する（データ収集不要）</td><td>聖路加</td><td><span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span></td><td>◎</td></tr>
+<tr><td>肺炎球菌培養データからマクロライド耐性率を算出し、短期抗菌薬（5日未満）適用の妥当性を評価する</td><td>聖路加</td><td><span class="wl">市中肺炎の診断と管理 — 4つのPICO、肺エコーは胸部X線の代替可・臨床安定なら5日未満・重症CAPにステロイド（ATS単独ガイドライン・AJRCCM2026）</span></td><td>◎</td></tr>
+<tr><td>sCAPのCRP閾値（204/150 mg/L）の当院での妥当性を後ろ向きに検討する</td><td>聖路加</td><td><span class="wl">重症市中肺炎（sCAP）の最新概念と論争点 — 分子診断・抗菌薬期間・ステロイド（総説・ICM2026）</span>、<span class="wl">高炎症型の重症市中肺炎で表現型は転帰もステロイド反応性も変えなかった — 120例の2群クラスター解析（Scientific Letter・ICM2026）</span></td><td>◎</td></tr>
+<tr><td>腹臥位開始タイミング（当院16時間 vs 文献の下限）と酸素化反応の関連を電子カルテで検証する</td><td>聖路加</td><td><span class="wl">ARDSの内科的マネジメント — 定義・フェノタイプ・換気設定と非換気治療の到達点（ナラティブレビュー・ICM2026）</span></td><td>◎</td></tr>
+<tr><td>フレイル（CFS）を入室時に前向き収集する体制を作り、JIPADに無い変数を自施設で補う</td><td>聖路加＋JIPAD</td><td><span class="wl">敗血症性ショックを生き延びた高齢者の3人に2人が90日後にフレイル — 前フレイル・SOFA・ステロイドが独立予測因子（OPTPRESS post hoc・CCM2026）</span></td><td>△</td></tr>
+</tbody></table></div>
+<p><strong>このテーマの空白</strong>：治療制限・長期転帰（退院後の生存・QOL）・費用はJIPAD単体には無く、DPC連結でも部分的にしか埋まらない。フレイル（CFS）・せん妄・診療プロセスの詳細（開始タイミング・漸減の実際）はJIPADに変数が無く、聖路加の前向き収集でしか埋められない。小児のステロイド使用実態を扱ったJIPAD論文はまだ見当たらない。</p>
+<h2>📌 まずこの10本</h2>
+<ol><li><span class="wl">SCCM 2024年ステロイド焦点更新 — 敗血症性ショックとARDSは条件付き推奨、重症市中肺炎は強い推奨（CCM2024）</span> — <mark class="hl">病態別の現在地が1枚で分かる</mark></li><li><span class="wl">市中肺炎の診断と管理 — 4つのPICO、肺エコーは胸部X線の代替可・臨床安定なら5日未満・重症CAPにステロイド（ATS単独ガイドライン・AJRCCM2026）</span> — <mark class="hl">この領域唯一の「強い推奨」の根拠</mark></li><li><span class="wl">ARDSのステロイドは病因と時期で使い分ける — COVIDと重症CAPは強い推奨、インフルエンザは非推奨（ナラティブレビュー・ICM2026）</span></li><li><span class="wl">ARDSに対する持続グルココルチコイド治療の薬理学的原則（ICM2020）</span> — 投与法を決める1本</li><li><span class="wl">敗血症性ショックのステロイド（ADRENAL trial）</span> — 目的を「離脱」に置き直す</li><li><span class="wl">CIRCI（重症関連コルチコステロイド不全）の全体像 — ACTH-コルチゾール解離が本態、コシントロピン負荷でステロイド適応は決められない（総説・FrontEndocrinol2024）</span> — なぜ検査で選べないかの機序</li><li><span class="wl">重症肺炎とICUのステロイドをどう使うか — 薬剤選択・用量・漸減・モニタリング・相互作用（総説・Pneumonia2026）</span> — <mark class="hl">「どう使うか」を6領域で整理</mark></li><li><span class="wl">デキサメタゾン後の非改善COVID-ARDSへの高用量ステロイド追加は90日死亡を増やす（383例・PSオーバーラップ重みづけ・CCM2023）</span> — <mark class="hl">効かないときに足さない</mark></li><li><span class="wl">カフリークテストは高リスク例に絞る・不合格なら抜管4時間以上前にステロイド — ATS・CHEST離脱ガイドライン Q3a・3b（AJRCCM2017）</span> — 抜管前の実務判断</li><li><span class="wl">遷延ARDSの外科的肺生検でステロイド反応性病態が高頻度（CCM2018）</span> — 反応しないときの次の一手</li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">🎚️ ARDSの換気設定（駆動圧・PEEP） Home</span> — ARDSの本体治療</li><li><span class="wl">🧫 VAPと抗菌薬の期間 Home</span> — sCAPの抗菌薬期間</li><li><span class="wl">📈 昇圧薬の選択と開始タイミング Home</span> — 難治性ショックでの位置づけ</li><li><span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> — 抜管前ステロイド</li><li><span class="wl">💧 敗血症の初期蘇生 Home</span> — 蘇生バンドルとの関係</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+<button class="pdf-btn" onclick="window.print()" title="印刷ダイアログで「PDF に保存」を選ぶ">📄 PDF</button>
+<div class="lb" id="lb" role="dialog" aria-label="図の拡大表示"><span class="lbx" title="閉じる（Esc）">×</span><img alt=""><div class="lbcap"></div></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var im=lb.querySelector('img'), cap=lb.querySelector('.lbcap');
+  function close(){lb.classList.remove('on','full'); im.removeAttribute('src'); document.body.style.overflow='';}
+  function open(src,text){im.src=src; cap.textContent=text||''; lb.classList.add('on'); lb.classList.remove('full'); document.body.style.overflow='hidden';}
+  document.querySelectorAll('.jc figure.origfig img, .jc img.flow').forEach(function(el){
+    el.addEventListener('click',function(){
+      var fc=el.closest('figure'); var t=fc&&fc.querySelector('figcaption')?fc.querySelector('figcaption').textContent:(el.alt||'');
+      open(el.currentSrc||el.src, t+'　（クリックで原寸⇄全体表示、背景クリックか Esc で閉じる）');
+    });
+  });
+  im.addEventListener('click',function(e){e.stopPropagation(); lb.classList.toggle('full');});
+  lb.addEventListener('click',function(e){ if(e.target!==im) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
+})();
+if(location.hash==='#pdf'){window.addEventListener('load',function(){setTimeout(function(){window.print();},500);});}
+</script>
+</body>
+</html>
