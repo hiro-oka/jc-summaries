@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>📈 昇圧薬の選択と開始タイミング Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
+.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 14px;font-weight:600}
+.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
+.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
+  padding-left:11px;border-left:3px solid var(--teal)}
+.jc p{margin:12px 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
+.jc li{margin:5px 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:8px 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
+.jc .mermaid{margin:18px 0;text-align:center}
+.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff;cursor:zoom-in}
+.jc figure.origfig img:hover{outline:2px solid var(--teal)}
+.jc img.flow{cursor:zoom-in}
+/* 図の拡大表示（クリックで原寸に近いサイズ・もう一度クリックか Esc で閉じる） */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,20,26,.88);display:none;
+  align-items:center;justify-content:center;overflow:auto;padding:24px;box-sizing:border-box}
+.lb.on{display:flex}
+.lb img{max-width:calc(100vw - 48px);max-height:calc(100vh - 48px);width:auto;height:auto;
+  background:#fff;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,.5);cursor:zoom-out;margin:auto}
+.lb.full{align-items:flex-start;justify-content:flex-start}
+.lb.full img{max-width:none;max-height:none;cursor:zoom-out}
+.lb .lbcap{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;text-align:center;
+  color:#dfe8ec;font-size:12.5px;background:linear-gradient(0deg,rgba(10,20,26,.9),transparent)}
+.lb .lbx{position:fixed;top:12px;right:16px;color:#fff;font-size:26px;line-height:1;cursor:pointer;
+  background:rgba(0,0,0,.35);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+@media print{.lb{display:none!important}}
+/* 📄 PDF ボタン（ページ右上）: ブラウザの印刷ダイアログを開き「PDF に保存」で手元に落とす。URL 末尾 #pdf で自動的に開く */
+.pdf-btn{position:fixed;top:14px;right:14px;z-index:20;font:inherit;font-size:12.5px;font-weight:700;color:#fff;
+  background:var(--teal);border:none;border-radius:20px;padding:7px 15px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pdf-btn:hover{background:var(--teal-ink)}
+.theme-toggle{right:112px}
+@media print{.pdf-btn{display:none!important}}
+.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+@media print{
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc">
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">📈 昇圧薬の選択と開始タイミング Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p># 📈 昇圧薬の選択と開始タイミング Home</p>
+<p><strong>どの薬を・いつ始め・何を目標にし・いつ2剤目を足し・どう抜くか</strong>。関連65件。 「入れるか測るか」は <span class="wl">🌊 輸液反応性と血行動態モニタリング Home</span>、蘇生液の選択は <span class="wl">💧 敗血症の初期蘇生 Home</span>、強心薬の細部と心原性ショックの全体像は <span class="wl">❤️ 循環器 Home</span>、ステロイドの併用は <span class="wl">🧴 ステロイドをいつ使うか Home</span> に任せる。このHomeは受容体薬理から始めて、開始タイミング・目標・2剤目・難治性ショック・心原性ショック・投与実務までを1本の物語として通す。</p>
+<h2>📖 3分概観（ブログ版）</h2>
+<p>_最終更新: 2026-09-17 ／ このHomeが束ねる関連ノート: 69本_</p>
+<p>昇圧薬の話は、いちばん最初に身も蓋もない事実から入るのが結局いちばん早道です。ショックに対する昇圧薬のランダム化比較試験で、28日死亡を有意に改善したものは1本もありません（ICM2019総説）。心原性ショックでも同じで、ある血管作動薬が他剤に勝つことを示したRCTは存在しません（Circulation2026）。ですからこの領域の問いは「どれが勝つか」ではなく、<mark class="hl">「害を最小にして、どう組み、いつ動かすか」</mark>という運用の問題になります。現場の判断を分けているのは薬の名前ではなく、開始のタイミング、2剤目を足す閾値、目標にする指標、そして投与そのものの安全性です。</p>
+<h3>このテーマの流れ</h3>
+<p>出発点は「輸液で埋めてから、足りなければ昇圧薬」という段階的な発想でした。ドパミンが広く使われた時代も終わっています。日本のICUデータベースJIPADの14,594例では、ドパミンはむしろ軽症寄りの患者に使われていたのに、5〜15 µg/kg/分でOR 1.46、15超でOR 3.30と用量依存的に死亡が増え、傾向スコアマッチング570ペアでも院内死亡22.5%対17.4%でした（<span class="wl">ドパミンは日本でまだ広く使われている — 5γを超えると死亡が増える（JIPAD 14594例・PSM 570ペア・CritCare2022）</span>）。昇圧目的でドパミンを5 µg/kg/分を超えて使う理由はもうありません。</p>
+<p>次の転換点は「早く始める」です。CENSER試験（310例・AJRCCM2019）は、敗血症性低血圧に0.05 µg/kg/分のノルアドレナリンを固定投与で早期開始すると、6時間後のショックコントロール達成が76.1%対48.4%（OR 3.4）になり、心原性肺水腫と新規不整脈がおよそ半減すると示しました。28日死亡は15.5%対21.9%（p=0.15）で有意差はつきませんが、方向は明確です。生理学的な裏づけも整理されました。ノルアドレナリンは動脈だけでなく静脈にも効き、ストレスト容量を動員して静脈還流を増やします（ICM2024）。輸液の完了を待つ理由が薄れたわけです。開始が遅れると院内死亡と関連し、4時間超では臓器不全悪化のオッズが4.34倍という報告もあります。</p>
+<p>そして現在の主戦場は「2剤目をいつ足すか」と「何を目標にするか」です。VASSTのサブ解析ではノルアドレナリン15 µg/分未満でのバソプレシン追加が28日死亡26.5%対35.7%でした。最近のtarget trial emulation（MIMIC-IV・eICU 3,810例・ICM2026）は、ノルアドレナリンが0.25 µg/kg/分に達した時点を起点にすると、3時間以内の追加が3〜6時間より28日死亡が4.9〜5.0ポイント低かった（48.1%対53.0%、HR 0.82）と報告しました。増量で粘ってから次に移る戦略は、少なくとも生理とは噛み合っていません。</p>
+<p>この「早期バランス型」を初めて前向きに無作為化したのがTRICYCLE試験（79例・CritCare2026）です。ノルアドレナリンが0.15 µg/kg/分に達した時点でバソプレシンとアンジオテンシンIIを<strong>同時に</strong>開始する群と、従来どおり段階的に足す群を比べました。主要評価項目の血漿レニン低下速度は−2.61%/時 対 −1.67%/時（p=0.015）、乳酸も−1.53 対 −1.01%/時（p=0.006）、ΔSOFA −3 対 0（p=0.018）と介入群が速く、最も目を引いたのは頻脈性不整脈15.6%対68.6%（調整OR 0.07）でした。ただし<mark class="hl">ICU死亡26.3%対41.5%（RR 0.635、95%CI 0.33–1.21）も28日死亡36.8%対46.3%も有意差なし</mark>で、そもそも死亡を検出する検出力のないphase II試験です。主要評価項目はレニンという<strong>代替指標</strong>で、ランダム傾きを入れた感度解析では群間差が消えます。<mark class="hl">アンジオテンシンIIは国内未承認なので、この3剤同時という枠組み自体を当院に持ち込むことはできません</mark>。持ち帰れるのは対照群の像のほう——バソプレシン開始時点のNEEが中央値0.45 µg/kg/分と遅かった、という点です。</p>
+<h3>結論が出ていること／いないこと</h3>
+<p>決着しているのは、第一選択はノルアドレナリンであること、輸液蘇生の完了を待たずに始めてよいこと、MAP目標は65 mmHgが出発点であること（65歳以上ではOPTPRESSが目標80–85で90日死亡39.3%対28.6%と害を示し、慢性高血圧でも利益なし）、そしてドパミンを昇圧目的で使わないことです。バソプレシンは0.03 IU/分で追加し、上限0.03〜0.04 IU/分に置く。これも実務としては固まっています（0.06 U/分まで上げる専門家の実践もあり、上限には幅が残ります）。ただし<mark class="hl"><strong>目標の「形」まで敗血症と同じとは限りません</strong></mark>。肝腎症候群（HRS-1）では、絶対値ではなく<mark class="hl"><strong>ベースラインからMAPを15 mmHg上げて維持する</strong></mark>のが目標で、テルリプレシンとノルアドレナリンの有効性はほぼ互角（頭対頭メタ解析・プールn=486）。<mark class="hl">選択を決めるのは有効性の差ではなく安全性とICU病床・中心静脈路の有無</mark>で、反応者の大半は48時間以内に反応するため<mark class="hl">改善が無ければ72時間で見切ります</mark>（JASN2026）。</p>
+<p>決着していないのは、①バソプレシンを足す正確なタイミング（0.25 µg/kg/分・3時間以内は観察研究止まり。前向きRCTはTRICYCLEの79例が最初で、主要評価項目は代替指標のレニン、死亡は不変）、②MAP目標を患者ごとに個別化できるか、③難治性ショックの定義、④アンジオテンシンIIなど第3の系の位置づけ（国内未承認）、⑤強心薬の選択(DOREMIは「差が出なかった」だけで同等を示してはいない)、⑥難治性ショックへの血液吸着(CLEANSEは28日死亡58%→44%・RR 0.76［0.54–1.07］だが、計画206例に対し128例で資金枯渇による早期中止＝検出力不足)、⑦2剤を減らすときどちらから抜くか（11研究2,280例のメタ解析でも全体OR 0.43［0.18–1.03］で差がつかず、観察研究とRCTが正反対を向いたまま）です。</p>
+<p>最近いちばん大きく動いたのは、<mark class="hl">「血圧が上がった」と「灌流が良くなった」を切り離す</mark>方向に文献が揃ってきたことです。HySpec-ICU二次解析（CritCare2026）では昇圧薬量が増えるほど組織酸素飽和度が下がり、MAPはStO₂を全く予測しませんでした（p=0.503）。難治性の定義も量から反応の軌跡へ移りつつあります。ANDROMEDA-SHOCK-2二次解析では、NEE&gt;0.5 µg/kg/分の患者の7割強は6時間後に低灌流の2要素を満たさず、3要素そろう3.9%だけが28日死亡73.6%でした。効かなくなる理由の側も整理され、カテコラミン不応の実体は受容体の脱感作と下流シグナル障害・ミトコンドリアのATP不足であり、増量では戻りません（ICM2026）。列を変えるか、受容体機能を戻すか、という発想に変わります。</p>
+<p>では実際にノルアドレナリンが上がり続けているとき、何を先にするのか。英国の専門センターが自施設の手順を用量つきで公開した実践的レビュー（JAnesthAnalgCritCare2026）は、<mark class="hl">次の一手は増量ではなく「増やさずに済ませる手」だ</mark>と整理しています。ノルアドレナリン 0.2 µg/kg/分を「立ち止まる時刻」と決め、ヒドロコルチゾン持続 200 mg/日＋フルドロコルチゾン 100 µg/日、続いてバソプレシン（上限 0.04 IU/分）を早めに重ねる。同時に、<mark class="hl">昇圧薬より先に鎮静とMAP目標を見直す</mark>。そして測っている血圧そのものを疑う——高用量下では橈骨動脈が大腿より最大13 mmHg低く出るため、橈骨のまま増量すると不要な毒性を招きます。ただし<mark class="hl">この論文には効果量も信頼区間も1つも書かれておらず、著者ら自身が「専門家意見と自施設の経験に導かれている」と明記しています</mark>。手順の骨格は借りられますが、根拠の強さは借りられません。</p>
+<h3>✅ 3行まとめ</h3>
+<ul><li>ノルアドレナリンを早く始め、MAP 65を既定にする。ドパミンは徐脈例のみ、フェニレフリンは敗血症性ショックの蘇生に使わない</li><li>2剤目は「ノルアドが低いうち」に足す。判断材料は絶対量より増え方の軌跡で、指数関数的に増えているなら早くバソプレシンを足す。増え続けるときは増量の前に「鎮静・MAP目標・測定部位」を点検する（高用量下の橈骨は大腿より最大13 mmHg低く出る）</li><li>血圧が上がったことと灌流が良くなったことは別。上げっぱなしにせず、CRT・乳酸・尿量で確かめる。ただしMAPを65から85へ上げると16%で心拍出量が24%落ち、<mark class="hl">その場でCRTも乳酸も動かない</mark>ので、増量の前後ではLVOT VTIも撮る。そして単位・希釈濃度の固定とシリンジ交換の標準化が、いちばん確実に事故を減らす</li></ul>
+<h3>❓ セルフチェック（想起用）</h3>
+<ol><li>昇圧薬のRCTで28日死亡を有意に改善したものは何本あり、そこからどんな実務上の姿勢が導かれますか。</li><li>CENSER試験の主要アウトカムは何で、その結果と28日死亡の結果はそれぞれどうでしたか。</li><li>バソプレシンを追加する目安の投与速度と上限、そしてVASSTサブ解析・ICM2026のtarget trial emulationが示した数字を挙げてください。</li><li>MAP目標を65より上げたくなったとき、上げたあとに何を確認し、改善がなければどうしますか。</li><li>ノルアドレナリンを増やしても血圧が上がらないとき、増量の前に点検すべき3つ（鎮静・MAP目標・測定部位）を、それぞれ理由とともに説明してください。橈骨と大腿の乖離は最大何 mmHg ですか。</li></ol>
+<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>迷ったらこう動く</p>
+<ul><li><strong>第一選択はノルアドレナリン</strong>。これだけは動かない（<span class="wl">敗血症性ショックの血行動態管理 — 昇圧薬・輸液・難治性ショックの総説（熱傷外傷も視野・BurnsTrauma2025）</span>／<span class="wl">ショック患者に対する昇圧薬レビュー（ICM2019）</span>）。ドパミンは徐脈例のみ、フェニレフリンは敗血症性ショックの蘇生に使わない。<mark class="hl">5〜15 µg/kg/分でOR 1.46、15超でOR 3.30と用量依存的に院内死亡が増える</mark>（<span class="wl">ドパミンは日本でまだ広く使われている — 5γを超えると死亡が増える（JIPAD 14594例・PSM 570ペア・CritCare2022）</span>）</li><li><strong>輸液蘇生の完了を待たずに始める</strong>。ノルアドレナリンは静脈にも効き、ストレスト容量を回復させる（<span class="wl">敗血症性ショックにおける血管収縮 — 昇圧薬は動脈だけに効いているのではない（What's New・ICM2024）</span>）。<mark class="hl">開始の遅れは院内死亡と関連し、4時間超で臓器不全悪化オッズ4.34倍</mark>（<span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span>）</li><li><strong>MAP目標は65 mmHgを既定にする</strong>。それより高い目標を試すときは「上げる → 灌流指標が改善したか確認 → 改善しなければ65に戻す」を<strong>一続きの手技</strong>として行い、上げっぱなしにしない（<span class="wl">カテコラミンを最小化して組織灌流を最適化する — 血圧を上げることと灌流を改善することは別（総説・CritCare2019）</span>）。<mark class="hl">高齢者（65歳以上）で「高血圧の既往があるから高めに」はしない</mark>——目標MAP 80–85は65–70より90日死亡39.3%対28.6%、慢性高血圧でも利益なし（早期中止試験で効果量は過大の可能性。<span class="wl">高齢の敗血症性ショックで目標MAP 80-85は90日死亡を増やす — 39.3%対28.6%、慢性高血圧でも利益なし（OPTPRESS・ICM2025）</span>）。<mark class="hl"><strong>肝腎症候群（HRS-1）だけは目標の形が違う</strong>——絶対値ではなく「ベースラインからMAP＋15 mmHg」で、MAP上昇の程度と腎機能改善の確率が比例する</mark>。反応の大半は48時間以内なので、<mark class="hl">改善が見えなければ72時間を超えて昇圧薬で粘らずKRT・移植へ進む</mark>（<span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span>）</li><li><strong>2剤目は「ノルアドが低いうち」に足す</strong>。増量で粘って毒性域に入れてから次に移る段階的戦略は生理と合っていない。VASSTではノルアド&lt;15 µg/分でのバソプレシン追加が28日死亡26.5%対35.7%。0.25 µg/kg/分で反応しなければ、集中治療医と薬剤師がそろって「増量ではなくバソプレシン＋ヒドロコルチゾン50 mg 6時間ごとの同時追加」を選んだ実践報告がある（個人の実践・企業COIあり。<span class="wl">敗血症性ショックを手術室まで持たせる実践 — 0.25γで単剤を諦めバソプレシン0.03→0.06とステロイドを同時に足す（CLINICIANS CORNER・CCM2026）</span>）</li><li><strong>バソプレシンは0.03 IU/分で追加、上限0.03〜0.04 IU/分</strong>（<span class="wl">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</span>）。判断は「NEがいくつか」より<strong>「NEがどう増えてきたか」</strong>（指数関数的に増えるなら早く足す・<span class="wl">敗血症性ショックでバソプレシンをいつ開始するか</span>）</li><li><strong>「早く足す」を裏づける前向きRCTは1本だけで、しかも代替指標</strong>。TRICYCLE（79例）はNEE 0.15 µg/kg/分でバソプレシンとアンジオテンシンIIを同時開始し、レニン・乳酸の低下が速く、頻脈性不整脈が15.6%対68.6%（調整OR 0.07）と激減した。<mark class="hl">ただし主要評価項目は血漿レニンという代替指標で、ICU死亡26.3%対41.5%・28日死亡36.8%対46.3%はいずれも有意差なし。Ang IIは国内未承認で3剤同時は当院では実行できない</mark>。当院で拾うのは対照群の像——<mark class="hl">バソプレシン開始時点のNEEが中央値0.45 µg/kg/分（IQR 0.35–0.50）と遅かった</mark>という点で、当院の閾値がここまで待っていないかを点検する材料にする（<span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span>）</li><li><strong>単位と希釈濃度を院内で1つに固定する</strong>。いちばん確実な改善はここ（<span class="wl">ノルアドレナリン投与の基本を押さえる（エディトリアル・ICM2024）</span>）。文献の用量は<strong>基剤換算</strong>で読む（酒石酸塩は基剤の約2倍・塩酸塩は約1.2倍）</li><li><strong>シリンジ交換を手技として標準化する</strong>。<mark class="hl">ノルアドレナリン投与中の重大な血行動態イベントの少なくとも25%が交換の前後に起きている</mark>。①患者に繋ぐ前に早送りで回路を満たす②最も近い活栓に繋ぎポンプの高さを動かさない③閉塞解除は圧を抜いてから（<span class="wl">微量持続静注のシリンジポンプ患者安全10項目（EurJAnaesthesiol2023）</span>）</li><li><strong>効きが悪いときはまず可逆的要因を潰す</strong>：アシドーシス・低酸素・低カルシウム・相対的ステロイド不足。&gt;1 µg/kg/分あたりから受容体飽和で効率が落ちる＝「増量か併用か」の分岐点</li><li><strong>増やす前に「鎮静・MAP目標・測定部位」を点検する</strong>。高用量昇圧薬下では動脈圧波形の伝播が乱れ、<mark class="hl">橈骨動脈のMAPが大腿動脈より最大13 mmHg低く出る</mark>ため、橈骨のまま増量すると不要な毒性を招く。プロポフォールの心抑制・血管拡張が「難治性」の一部を作っていないかも同時に見る（RASS 0〜−2、筋弛緩下はBIS 40〜60に絞る）。<mark class="hl">いずれも英国の専門センターの実践であって、切り替えが転帰を変えたという研究はない</mark>（<span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span>）</li><li><strong>それでも効かないなら、同じα1の列を積み増さない</strong>。カテコラミン不応の実体は受容体の脱感作（GRK2／β-arrestinによるリン酸化＝秒、内在化＝分、遺伝子ダウンレギュレーション＝時間）に、下流シグナル障害とミトコンドリアのATP不足が重なったもので、増量では戻らない。<mark class="hl">列を変える（V1・AT1・sGC）か、受容体機能を戻す（ステロイド）</mark>。ただしバイパス薬はいずれもカテコラミン必要量を減らしただけで生存は改善していない（<span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span>）</li><li><strong>「難治性なら何か足す」でサイトカイン吸着を上乗せしない</strong>。NA≥0.2 µg/kg/分の敗血症性ショック128例にHA-330血液吸着を3時間×2回追加しても、==28日死亡は58%→44%（RR 0.76、95%CI 0.54–1.07、P=0.16）で有意差なし<mark class="hl">。VIS・MAP・CRP・IL-6も全時点で群間差がない。計画206例のところ128例で資金枯渇により早期中止しており、陰性というより検出力不足。</mark>HA-330は日本で薬事承認されておらず当院の行動は変わらない==（日本で対応するのはPMX-DHP）。使えるのは「NA 0.2γ到達から24時間以内」という難治性ショックのenrichment基準のほう（<span class="wl">HA-330血液吸着は敗血症性ショックの28日死亡を有意には減らさない — 高用量昇圧薬128例・早期中止（CLEANSE・CritCare2026）</span>）</li><li><strong>心原性ショックでは、薬を選ぶ前に表現型を言語化する</strong>。<mark class="hl">心原性ショックで「他剤に勝った昇圧薬」を示したRCTは1本も無い</mark>ので、選択は「どれが強いか」ではなく<strong>表現型に薬理を合わせる</strong>作業になる。まず①classic（LV優位・低心拍出）②血管拡張を合併した型③正常血圧CS④RV優位⑤動的LVOT閉塞のどれかを宣言する。低血圧CSはinopressorで<mark class="hl">MAP 65〜75 mmHgを守りつつCI&gt;2.2</mark>を目標に、<mark class="hl">灌流は足りているが低血圧なら強心薬を増やさずバソプレシンを足す</mark>。<mark class="hl">RV優位の1剤目はバソプレシン（PVRに中立）で、フェニレフリンは肺血管抵抗を上げるため避ける</mark>。動的LVOT閉塞では強心薬が閉塞を悪化させる（<span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span>）。<mark class="hl">個々の用量域・SCAI A〜Eの定義・MCSの導入基準は本論文には記載がない</mark>ので、そこは<span class="wl">心原性ショックの管理 — 診断からデバイスまで、SCAI分類とPAC表現型でtMCSを選ぶ（CHESTCritCare2024）</span>等に当たる</li><li><strong>離脱にミドドリンを使わない</strong>。中止までの時間は1時間しか変わらず、徐脈が7.6%対0%（<span class="wl">経口ミドドリンは静注昇圧薬の中止を早めない — 差1時間・徐脈は7.6%対0%（抄読会スライド・MIDAS ICM2020）</span>）</li><li><strong>NEとAVPのどちらを先に切るかは決めない</strong>。11研究2,280例のメタ解析で離脱後低血圧は全体OR 0.43（95%CI 0.18–1.03、I²=91%）と差がつかず、観察研究（OR 0.26）とRCT（OR 4.04）が正反対を向いている（GRADEは全7アウトカムがvery low）。順序を指示簿に書き込む根拠にはならない。<mark class="hl">先に揃えるのは順序ではなく「バソプレシンを一気に止めず0.01〜0.02 IU/分ずつ落とす」という漸減の手順と、離脱後低血圧の定義</mark>（<span class="wl">敗血症性ショックでノルアドレナリンとバソプレシンのどちらを先に切るか — 全体はOR 0.43で差なし、観察研究とRCTで結論が真逆（11研究2,280例・メタ解析・CritCareSci2026）</span>）</li><li><strong>離床はベッド外0.20 µg/kg/分・ベッド上0.33 µg/kg/分まで</strong>を目安に。ただしこれは検証された安全閾値ではなく「エビデンスがある範囲の端」（<span class="wl">ノルアドレナリン投与中患者の離床は安全か（後方視コホート）</span>）</li><li><strong>昇圧薬を要する患者は、専門医体制の厚いICUで診る価値が最も大きい層として扱う</strong>。特定集中治療室管理料1・2（常勤専門医2名以上・臨床工学技士24時間）のICUはICU死亡が0.4%低く（操作変数法で1.1%）、<mark class="hl">効果が出るのは非手術・昇圧薬・人工呼吸の患者だけで、予定手術では差がない</mark>。APACHEが無いDPC研究でリスク調整は不十分（<span class="wl">特定集中治療室管理料1・2のICUはICU死亡が0.4%低い — 効果が出るのは非手術・昇圧薬・人工呼吸の患者だけ（DPC 79万例・操作変数法・JMAJ2021）</span>）。HDU/SDUで昇圧薬が始まったら、ICUへ上げる判断を先延ばしにしない根拠の一つになる（→ <span class="wl">🏨 HDU・SDU（中間治療室）と病床機能 Home</span>）</li><li><strong>経腸栄養はノルアドレナリン0.2 µg/kg/分超では遅らせる</strong>（<span class="wl">救急・集中治療領域の重症患者の栄養療法 — 早期経腸は48時間以内、ノルアドレナリン0.2μg超では遅らせる（総説・外科と代謝栄養2022）</span>）</li></ul>
+</div>
+<h2>📋 早見表</h2>
+<h3>血圧目標</h3>
+<div class="tw"><table>
+<thead><tr><th>集団</th><th>目標</th><th>出典・エビデンス</th><th>動かすときの考え方</th></tr></thead>
+<tbody>
+<tr><td>敗血症性ショック（既定）</td><td>MAP≥65 mmHg</td><td>82か国839名の実態調査で70%が採用（<span class="wl">敗血症性ショックにおける血管収縮薬使用の実態調査</span>）</td><td>低灌流の徴候が無ければ、より低い目標も許容してよい</td></tr>
+<tr><td>慢性高血圧・AKIを理由に上げたい場合</td><td>上げない（65歳以上ではRCTで有害）</td><td>高血圧の自己申告は診断精度が低く、既往歴だけでは判断材料にならない（<span class="wl">ショック蘇生の許容的低血圧（permissive hypotension） — 慢性高血圧やAKIを理由に早計に否定できない4つの論拠（What's New in Intensive Care・ICM2018）</span>）。65歳以上516例のRCTで目標80–85は90日死亡39.3%対28.6%、慢性高血圧でも利益なし（<span class="wl">高齢の敗血症性ショックで目標MAP 80-85は90日死亡を増やす — 39.3%対28.6%、慢性高血圧でも利益なし（OPTPRESS・ICM2025）</span>）</td><td>「上げる→LVOT VTIと灌流指標を見る→戻す」を一続きの手技にする。65→85の昇圧では16%で心拍出量が24%落ちる</td></tr>
+<tr><td>肝腎症候群（HRS-1）</td><td>ベースライン＋15 mmHg（相対値）</td><td>頭対頭メタ解析プールn=486でテルリプレシン対ノルアドレナリンはほぼ互角（<span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span>）</td><td>48時間で反応なければ72時間を超えて粘らずKRT・移植へ</td></tr>
+<tr><td>高リスク高血圧患者の待機的大腹部手術</td><td>MAP≥80 mmHg</td><td>HISTAP・630例RCT、複合アウトカム38.1%対48.9%（RR 0.78・NNT 10）（<span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>）</td><td>減ったのはAKIN 1・2度だけで死亡は不変。連続血行動態モニタリング＋プロトコル化輸液が前提</td></tr>
+<tr><td>急性脊髄損傷</td><td>下限75〜80・上限90〜95 mmHg、3〜7日間</td><td>AOSpineガイドライン改訂、GDGの84%が旧推奨(85〜90)の改訂に投票（<span class="wl">急性脊髄損傷の血行動態管理ガイドライン — MAP目標は85から「75-80以上・90-95以下」へ、期間は3-7日（AOSpine・GlobalSpineJ2024）</span>）</td><td>エビデンスの質は非常に低く推奨は弱い。単一の数値より「幅」で運用する</td></tr>
+<tr><td>心停止後脳症</td><td>個別化・確立した数値なし</td><td>侵襲的モニタリングで最適MAPは平均89 mmHg（下限でも82）との報告（<span class="wl">心停止後の脳酸素化と最適平均動脈圧（自己調節能）</span>）</td><td>10例の探索的研究。標準治療を65 mmHgから安易に動かす根拠にはしない</td></tr>
+</tbody></table></div>
+<h3>薬剤用量・臨床閾値</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>当院標準・目安</th><th>外部基準・出典</th><th>動かすときの考え方</th></tr></thead>
+<tbody>
+<tr><td>ノルアドレナリン開始</td><td>輸液完了を待たずに0.05 µg/kg/分程度から</td><td>CENSER試験：0.05 µg/kg/分固定投与でショックコントロール76.1%対48.4%（<span class="wl">CENSER 敗血症性ショックへの早期ノルアドレナリン投与（AJRCCM2019）</span>）</td><td>4時間超の開始遅延は臓器不全悪化オッズ4.34倍</td></tr>
+<tr><td>バソプレシン追加の目安</td><td>ノルアドレナリン0.25〜0.3 µg/kg/分到達、増え方が急なら早める</td><td>target trial emulationで0.25到達後3時間以内の追加が28日死亡−5.0ポイント（<span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span>）。前向きRCTはTRICYCLEの1本のみで、NEE 0.15での同時開始が代替指標を改善（<span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span>）</td><td>絶対量よりNEの増加キネティクス（指数関数的か）を見る。TRICYCLEの対照群はNEE 0.45で足しており、<mark class="hl">「遅すぎないか」の点検には使えるが「0.15に下げよ」の根拠にはならない</mark>（死亡は不変・Ang II は国内未承認）</td></tr>
+<tr><td>バソプレシン開始用量・上限</td><td>0.03 IU/分で開始、上限0.03〜0.04 IU/分</td><td>ICM2025は0.01 IU/分開始・20分ごと0.005ずつ滴定・上限0.06 IU/分を提案（<span class="wl">敗血症性ショックにおけるバソプレシンの実践 用量・タイミング・離脱（ICM2025）</span>）。CCM2026の薬剤師の実践も0.03開始・必要なら0.06まで（<span class="wl">敗血症性ショックを手術室まで持たせる実践 — 0.25γで単剤を諦めバソプレシン0.03→0.06とステロイドを同時に足す（CLINICIANS CORNER・CCM2026）</span>）</td><td>体重換算ではなく固定用量。文献間で上限に幅があることを意識する</td></tr>
+<tr><td>血圧の測定部位</td><td>高用量昇圧薬下では大腿動脈ラインで判断する</td><td>橈骨は大腿より最大13 mmHg低く出る（<span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span>）</td><td>根拠は観察研究1本と専門家意見。切り替えが転帰を変える研究はない</td></tr>
+<tr><td>難治性ショックの定義</td><td>量だけで決めない</td><td>NEE&gt;0.5 µg/kg/分の7割強は6時間後に低灌流2要素を満たさない（<span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span>）</td><td>CRT&gt;3秒＋乳酸非低下を重ねた集団（3.9%）が28日死亡73.6%</td></tr>
+<tr><td>離床の目安</td><td>ベッド外0.20 µg/kg/分・ベッド上0.33 µg/kg/分まで</td><td>後方視コホート、有害事象を増やすのは離床というステップそのもの（OR 3.3）（<span class="wl">ノルアドレナリン投与中患者の離床は安全か（後方視コホート）</span>）</td><td>検証された安全閾値ではなく「エビデンスがある範囲の端」</td></tr>
+<tr><td>経腸栄養開始</td><td>ノルアドレナリン0.2 µg/kg/分超では遅らせる</td><td>早期経腸は48時間以内が原則（<span class="wl">救急・集中治療領域の重症患者の栄養療法 — 早期経腸は48時間以内、ノルアドレナリン0.2μg超では遅らせる（総説・外科と代謝栄養2022）</span>）</td><td>循環が不安定な間は無理に開始しない</td></tr>
+</tbody></table></div>
+<h2>🧬 なぜ効くのか、なぜ効かなくなるのか — 受容体薬理から</h2>
+<p>ノルアドレナリンやバソプレシンが「効く」ことも「効かなくなる」ことも、まずは受容体の言葉で理解しておくと、あとの章の数値がすべて筋の通った話になります。</p>
+<p>アドレナリン受容体を決めるのは受容体の名前ではなく、共役するGタンパクです。<strong>α1はGαq</strong>でカルシウムを上げて血管を収縮させ、<strong>α2はGαi</strong>でノルアドレナリン放出を抑え静脈を収縮させます。<strong>β1・β2はGαs</strong>でcAMPを上げ、心臓では収縮力と心拍数を増やし血管では拡張に働きます。<strong>β3はGαi＋NO</strong>で、心筋には陰性変力、内皮には血管拡張という、他のβとは逆方向の作用を持ちます。内因性のリガンドにも選択性の違いがあり、アドレナリンは全サブタイプを刺激しますが、ノルアドレナリンはα1・α2・β1を強く刺激しβ2・β3にはほとんど作用しません。ここまでが平時の生理です（<span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span>）。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 心血管系アドレナリン受容体の局在とGタンパク共役、ショックによる脱感作の3段階（リン酸化→内在化→遺伝子発現低下）を示す模式図（出典 <span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span>）_</p>
+<p>ショックが長引くと、この地図が壊れます。受容体はGRK2という酵素によってリン酸化され（秒単位）、β-arrestinが動員されて内在化し（分単位)、最終的には遺伝子発現そのものが下方調節されます（時間単位)。ここで重要なのは、<mark class="hl"><strong>β3受容体だけがこのリン酸化部位を持たず、脱感作に抵抗性がある</strong></mark>という事実です。ショックで「β3が増えた」ように見えるのは受容体密度が本当に増えたのではなく、<strong>他のβ1・β2が脱感作した結果の相対的な見かけ</strong>にすぎません。真のアップレギュレーションと勘違いすると、対策の方向を誤ります。</p>
+<p>さらに、受容体より下流にも傷が入ります。酵素の調節障害、カルシウム輸送の障害、筋フィラメントのカルシウム感受性低下が起き、加えてミトコンドリアの機能不全でATP産生が落ちます。受容体を膜へリサイクリングする作業自体がATPを要するため、エネルギー不全に陥った細胞は脱感作からの回復も進みません。<mark class="hl"><strong>カテコラミン不応の実体はここにある</strong></mark>——受容体の絶対数が足りないのではなく、シグナル伝達の経路全体が渋滞している状態です。だから増量では戻らず、打つ手は「経路を迂回する」(バソプレシンのV1a・アンジオテンシンIIのAT1・メチレンブルーのsGC阻害といった、α1以外の列に乗り換える)か、「受容体機能そのものを戻す」(ステロイドで受容体発現を回復させる)かの2択になります。ただし、これらのバイパス薬はいずれも<strong>カテコラミン必要量を減らしただけ</strong>で、生存を改善したという確立した証拠はまだありません。</p>
+<p>この受容体の生理は、血管拡張性ショックが「1系統の枯渇」ではなく「3系統の同時破綻」であることとも符合します。交感神経系(カテコラミン)・バソプレシン系・レニン-アンジオテンシン系が同時に壊れているため、<strong>1系統だけを毒性域まで最大化してから次に移る段階的戦略は、この生理と噛み合いません</strong>（<span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span>）。次章以降で扱う「早く始める」「早く足す」という運用は、すべてこの1点——複数の系統が同時に壊れているのだから複数の系統に同時に働きかける——に行き着きます。この主張をそのまま介入の形にしたのが、3系統（NE・AVP・Ang II）を最初から同時に走らせたTRICYCLE試験で、<mark class="hl">レニン・乳酸・SOFAといった生理指標は動いたものの死亡は動きませんでした</mark>（<span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span>。詳細は「2剤目をいつ・どう足すか」の章）。</p>
+<p>_図: 血管拡張性ショックで交感神経系・バソプレシン系・レニン-アンジオテンシン系の3系統が同時に破綻していく様子。中央に「血管（Codex 生成の概念図）_</p>
+<h2>⏱️ いつ始めるか — 輸液の完了を待たない</h2>
+<p>かつての発想は「輸液で埋めてから、足りなければ昇圧薬」でした。この段階的な発想を崩したのが、生理学的な理解の変化とCENSER試験です。</p>
+<p>ノルアドレナリンは「動脈を締める薬」ではありません。α1を介した静脈収縮によって<mark class="hl"><strong>ストレスト容量（stressed volume）を動員し、静脈還流そのものを増やします</strong></mark>。輸液が血管内容量を増やして前負荷を上げるのと、原理としては同じ方向に働くわけです（<span class="wl">敗血症性ショックにおける血管収縮 — 昇圧薬は動脈だけに効いているのではない（What's New・ICM2024）</span>）。つまり「輸液が先、昇圧薬は輸液で足りないときの次善策」という序列そのものが、生理学的な根拠を欠いていたことになります。</p>
+<p>この理解を裏づけたのがCENSER試験です。敗血症性低血圧の310例を対象にした単施設RCTで、輸液の完了を待たずにノルアドレナリン0.05 µg/kg/分を24時間、タイトレーションなしで固定投与する群と、外見上同一のプラセボ輸液ボーラス群を比較しました。主要アウトカムである6時間後のショックコントロール達成率(MAP≥65かつ尿量0.5 mL/kg/時が2時間持続、または乳酸がベースラインから10%以上低下)は、早期ノルアドレナリン群76.1%対対照群48.4%(OR 3.4、95%CI 2.09–5.53)と大差がつきました。心原性肺水腫と新規不整脈もおよそ半減しています。28日死亡は15.5%対21.9%(p=0.15)で有意差には届きませんでしたが、方向は一貫しています(単施設・概要ノート、<span class="wl">CENSER 敗血症性ショックへの早期ノルアドレナリン投与（AJRCCM2019）</span>。同一試験の重複ノート<span class="wl">敗血症性ショックにおける早期ノルアドレナリン開始（CCM2019）</span>は誌名表記の誤りに気づいて統合済み)。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>開始の遅れは代償が大きい <span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span>では、<mark class="hl">開始が遅れるほど院内死亡と関連し、4時間超では臓器不全悪化のオッズが4.34倍</mark>という報告が引用されています。「輸液反応性を見きわめてから」と粘る時間そのものが、コストになりうるということです。</p>
+</div>
+<p>実際の運用がどこまでこの理解に追いついているかも調べられています。82か国839名の集中治療医を対象にしたESICMの調査では、昇圧薬開始の主なトリガーは「初期輸液蘇生に対するMAP反応不十分」(83%)であり、<mark class="hl">34名の専門家パネルは「輸液蘇生の完了を待って昇圧薬を遅らせるのではなく、NAを早期に開始し目標MAP≥65 mmHgを達成する」ことを強い推奨として合意しました</mark>(9/10の推奨が全会一致または80%以上の合意、<span class="wl">敗血症性ショックにおける血管収縮薬使用の実態調査</span>)。第一選択のノルアドレナリンは97%が支持しており、ここに国際的な異論はほとんどありません。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「早く」は「高く」ではない 早期開始の議論と、目標MAPを高く設定する議論を混同しないでください。CENSERが検証したのは開始のタイミングであり、目標の高さではありません。目標の議論は次章で扱います。</p>
+</div>
+<p>CENSERの単施設シグナル(n=310)を、十分な検出力を持つ多施設RCTで直接検証したのがARISE FLUIDS試験です。救急外来のSepsis-3敗血症性ショック963例を「輸液制限＋早期昇圧薬」群と「輸液優先＋昇圧薬後追い」群にランダム化し、24時間で明確な群間分離(輸液量差−1108 mL、昇圧薬開始時期差−1.0時間、末梢投与差+16.5ポイント)を達成しましたが、==<strong>90日生存退院日数(DAOH)は両群とも中央値76日で完全に一致し(P=1.00)、90日死亡率にも差はありませんでした</strong><mark class="hl">。CENSERが示唆したショックコントロール達成の速さや死亡率低下の傾向は、この規模では再現されなかったことになります。唯一有意差がついたのは安全性側で、</mark>肺水腫が輸液優先群5.0%対輸液制限群0.6%(P&lt;0.001)<mark class="hl">でした。末梢静脈からの昇圧薬投与も両群合わせて600例超で行われ、関連する重篤な有害事象は報告されていません。</mark>「早く始めても害はない(末梢投与も含めて安全)」ことは裏づけられたが、「早く始めれば転帰が良くなる」とまでは言えない==、というのが現時点での到達点です(<span class="wl">早期敗血症性ショックへの輸液制限＋早期昇圧薬は90日生存退院日数を増やさない — 肺水腫は0.6%対5.0%に減る（ARISE FLUIDS・NEJM2026）</span>)。</p>
+<h2>🎯 MAP目標をどう決めるか — 65が既定、例外はここだけ</h2>
+<p>MAP目標の既定値は65 mmHgです。ここに国際的な合意があることは前章で見たとおりですが、<mark class="hl"><strong>「65より上げたほうが安全ではないか」という直感は根強く残ります</strong></mark>。この章では、その直感がどこまで正しく、どこから外れるのかを、集団ごとに整理します。</p>
+<p>まず、敗血症性ショックそのものについては、目標を上げる根拠は乏しいというのが現状です。<span class="wl">ショック蘇生の許容的低血圧（permissive hypotension） — 慢性高血圧やAKIを理由に早計に否定できない4つの論拠（What's New in Intensive Care・ICM2018）</span>は、「慢性高血圧」と「急性腎障害」という2つの安全性懸念に反論を用意しています。①慢性高血圧患者で許容的低血圧が有害だという証拠は無く、自己調節曲線の右方偏位という根拠自体が1973年の重症高血圧患者を対象にした研究に由来し、現代の患者像とかけ離れています。②そもそも<mark class="hl">蘇生の初期に「慢性高血圧かどうか」は分かりません</mark>。高血圧患者の20〜36%は自分の病態を知らず、逆に診断済みでも家庭血圧では正常という患者も多く、既往歴という情報自体の質が低いのです。③昇圧薬の増量は急性尿細管壊死のリスクを上げうる。尿量が増えても腎機能が良いとは限りません(輸出細動脈の優先的収縮)。④臓器特異的な代替エンドポイントの改善は全体としての害を打ち消しません。周術期β遮断薬が心筋梗塞を減らしたのに死亡を増やした歴史がその教訓です。</p>
+<p>この理屈に、高齢者のRCTが数字で答えました。日本29施設のOPTPRESS試験は、65歳以上（年齢中央値78歳、慢性高血圧53%）の敗血症性ショック516例を、昇圧薬開始3時間以内に目標MAP 80–85と65–70へ割り付けました（NE 0.1 µg/kg/分以上でバソプレシンを併用するカテコラミン節約プロトコル）。<mark class="hl"><strong>90日全死亡は39.3%対28.6%（リスク差10.7、95%CI 2.6–18.9）と高目標群で多く</strong></mark>、28日死亡30.4%対21.6%、RRT・人工呼吸器・カテコラミンのfree daysもすべて高目標群が不利でした。<mark class="hl"><strong>慢性高血圧のサブグループでも高目標の利益はありません</strong></mark>。増えたのは昇圧薬の累積量（NE 15.6対9.6 mg、バソプレシン34.0対11.8 U）です。ただし中間解析で有害の示唆が出て早期中止（計画836例→518例）したため効果量は過大の可能性があり、実測MAPの群間差は数〜10 mmHg程度でした。<mark class="hl">検証されたのは「80–85という数値」ではなく「高い目標を掲げて昇圧薬を増やす戦略」</mark>と読みます（<span class="wl">高齢の敗血症性ショックで目標MAP 80-85は90日死亡を増やす — 39.3%対28.6%、慢性高血圧でも利益なし（OPTPRESS・ICM2025）</span>）。</p>
+<p>一方で、<mark class="hl"><strong>目標を上げることが実際に転帰を改善した集団も存在します</strong></mark>。それが待機的大腹部手術です。HISTAP試験は、60歳以上・慢性高血圧・所要3時間以上の待機的大腹部手術という条件下で、観血的動脈圧と連続血行動態モニタリング、プロトコル化輸液を敷いたうえで、術中MAP目標を80以上に置くと、術後7日以内の主要臓器障害＋30日死亡の複合アウトカムが48.9%から38.1%に減った(RR 0.78、95%CI 0.65–0.93、P=0.006、NNT 10)と報告しました。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: HISTAP試験の主要複合アウトカムに関するKaplan–Meier曲線。術後1日目から両群が分離し、介入群(MAP≥80)が対照群(MAP≥65)より一貫して低く推移する(出典 <span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>)_</p>
+<p>ただしこの結果は慎重に読む必要があります。読み取りで重要なのは、<mark class="hl"><strong>対照群の実測MAPが目標の65 mmHgではなく77 mmHgだった</strong></mark>という点です。つまり実際に比較されたのは「65対80」ではなく「77対88」で、対照群は目標より12 mmHg高いところで運用されていました。しかも複合アウトカムのうち動いたのはAKIN分類1・2度の軽症〜中等症AKIだけで、<mark class="hl"><strong>死亡・心血管イベント・重症AKIは不変</strong></mark>でした。代わりに昇圧薬使用量と輸血量は介入群で増えています。この論文への批判レター(<span class="wl">HISTAP試験の腎保護はMAP 80のおかげか低血圧を避けたおかげか — AKIの判定基準と累積曝露量を示せという2つの要求（レター・ICM2026）</span>)は、AKIの判定基準の詳細と、累積した低血圧曝露量(area under the MAP curveのような指標)を示すべきだと要求しています。<mark class="hl">「MAP 80が良い」のか「MAP 65未満への曝露を避けたことが良い」のかは、この1本だけでは切り分けられていません</mark>。</p>
+<p>MAP目標が敗血症性ショックと構造から違う集団も存在します。急性脊髄損傷では、旧来の「85〜90 mmHgを7日間」という推奨が、AOSpineガイドラインの改訂で<mark class="hl"><strong>「下限75〜80 mmHg以上・上限90〜95 mmHg以下、期間3〜7日間」</strong></mark>に変わりました。改訂の理由は、5 mmHg幅の単一目標が血圧変動の大きい脊髄損傷急性期にはほぼ維持不可能であり、神経学的に回復しなかった患者と改善した患者の間で最初の3日間のMAP差はわずか2〜3 mmHgしかなかったという報告に基づきます(エビデンスの質は非常に低く、推奨の強さは弱い、<span class="wl">急性脊髄損傷の血行動態管理ガイドライン — MAP目標は85から「75-80以上・90-95以下」へ、期間は3-7日（AOSpine・GlobalSpineJ2024）</span>)。</p>
+<p>心停止後脳症では、確立した数値目標そのものがまだありません。侵襲的な多角的神経モニタリングを行った10例の探索的研究では、脳低酸素(PbtO2&lt;20 mmHg)が監視時間の38%で生じており、脳圧反応性指数(PRx)から求めた個別の最適MAPは平均89 mmHg(下限でも82 mmHg)と、ガイドラインの目標を大きく上回っていました(実測MAPが最適MAPに近づくほどPbtO2は改善しますが、最適MAPを超えるとそれ以上は改善しません、<span class="wl">心停止後の脳酸素化と最適平均動脈圧（自己調節能）</span>)。これは10例の観察に基づく仮説生成であり、<mark class="hl">標準治療のMAP目標を安易に動かす根拠にはなりません</mark>が、「唯一の正解値」という発想そのものへの反証として重要です。</p>
+<p>肝腎症候群(HRS-1)は、目標の「形」自体が変わる唯一の集団です。目標は絶対値ではなく<mark class="hl"><strong>ベースラインからMAPを15 mmHg上げて維持すること</strong></mark>で、MAP上昇の程度と腎機能改善の確率が比例します。これは次の「バソプレシン系薬剤」の章でもう一度扱います。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>集団別MAP目標のまとめ方 「MAPをいくつにするか」は単一の問いではありません。<strong>敗血症性ショック=65が既定</strong>、<strong>待機的大腹部手術の高リスク高血圧患者=80(ただし対照群のドリフトに注意)</strong>、<strong>急性脊髄損傷=75〜80〜95の幅</strong>、<strong>HRS-1=ベースライン+15の相対値</strong>、<strong>心停止後脳症=個別化が必要だが確立した数値なし</strong>。<mark class="hl">集団を取り違えて数字だけを輸入しない</mark>ことが、この章でいちばん伝えたいことです。</p>
+</div>
+<p>_図: 中央に「MAP目標65 mmHgが既定」を置き、そこから放射状に5つの特殊集団(HISTAP高リスク高血圧手術・急性脊髄（Codex 生成の概念図）_</p>
+<h2>➕ 2剤目をいつ・どう足すか — バソプレシン追加のタイミング</h2>
+<p>「NEがいくつになったら足すか」という量の発想から、「NEがどう増えてきたか」という軌跡の発想へ——これがこの10年の変化です。</p>
+<p>出発点はVASSTのサブグループ解析です。VASST本体(778例・NEJM2008)はバソプレシンとノルアドレナリンの立ち上げを比較し、28日死亡に有意差はつきませんでした(39.3%対35.4%、P=0.26)。しかし無作為化時点のノルアドレナリン必要量で層別すると、<mark class="hl"><strong>「軽症」(5〜14 µg/分)群でだけバソプレシン群の死亡が低い傾向</strong></mark>が見えます(28日死亡35.7%対26.5%、P=0.05、90日死亡46.1%対35.8%、P=0.04)。「重症」(15 µg/分以上)群ではむしろ逆転していました(42.5%対44.0%)。これは事後のサブグループ解析であり仮説生成にとどまりますが、<mark class="hl">「重症化する前に足す」という発想の出発点</mark>になっています(<span class="wl">敗血症性ショックに対するバソプレシン（VASST・VANISH・VANCS・NEJM2008）</span>)。</p>
+<p>この仮説を時間軸で検証しようとしたのが、MIMIC-IVとeICU-CRDを統合したtarget trial emulationです。ノルアドレナリンが初めて0.25 µg/kg/分に達した時点を起点に定義し、3,810例を「0〜3時間以内にバソプレシンを開始する戦略」と「3時間超〜6時間以内に開始する戦略」に振り分けて模擬比較しました。結果は<mark class="hl"><strong>28日死亡48.1%対53.0%(リスク差−5.0ポイント、95%CI−6.8〜−3.2、HR 0.82)</strong></mark>で、超早期戦略が優位でした。副次アウトカムでは、AKI発症そのものは変わらない一方、RRT(HR 0.68)・CRRT(HR 0.61)・薬物治療を要した不整脈(HR 0.91)が減っています(<span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span>)。<mark class="hl">ただしこれは観察データに基づく模擬試験であり、著者ら自身がRCTによる確認を求めています</mark>。</p>
+<p>「いつ足すか」を量ではなくキネティクスで捉える主張も出てきました。<span class="wl">敗血症性ショックでバソプレシンをいつ開始するか</span>は、SSCが示す「NE 0.25〜0.5 µg/kg/分」という閾値用量ルールそのものに欠陥があると指摘します。ノルアドレナリンの製剤表記(酒石酸塩か基剤か)が国によって異なり、体重あたりの閾値には最大4倍のずれが生まれうること、体重ベースの用量設定は肥満患者でバソプレシン開始を遅らせうることを理由に、<mark class="hl"><strong>「NE用量がどう増えてきたか」——指数関数的に増える"refractory"プロファイルの患者にこそ早期にバソプレシンを足すべき</strong></mark>、と提案しています。</p>
+<p>臨床医の実際の判断と最適解のギャップを定量した研究もあります。強化学習でバソプレシンの開始ルールを導出した研究(カリフォルニア州5病院・3,608例で導出、227病院・10,217例で外部検証)は、モデルが<mark class="hl"><strong>「より多くの患者に、より早く、より低いノルアドレナリン用量で」バソプレシンを開始する</strong></mark>ことを提案し、ルールに近い開始が行われた患者では院内死亡の調整オッズが低かった(OR 0.81、95%CI 0.73–0.91)と報告しています(<span class="wl">強化学習で導いたバソプレシン開始ルール（JAMA2025）</span>)。これも観察データからの示唆であり、<mark class="hl">前向きな介入試験ではありません</mark>が、方向性はここまでの3本と一致します。</p>
+<p>ここまでの3本はいずれも観察データでした。<mark class="hl"><strong>この「早く足す」という発想を、初めて前向きに無作為化したのがTRICYCLE試験です</strong></mark>（スロベニア・クロアチアの2施設3 ICU、単盲検、79例、phase II、<span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span>）。ノルアドレナリンが0.15 µg/kg/分に達した時点で、バソプレシン0.015 IU/分とアンジオテンシンII 20 ng/kg/分を<strong>同時に</strong>開始し、以後は決められた階段で3剤を上下させる群と、従来どおりNEを増やしてから足していく群を比較しています。</p>
+<p>結果は生理学的な指標が一貫して介入群に有利でした。主要評価項目の血漿レニン低下速度は<strong>−2.61%/時 対 −1.67%/時（p=0.015）</strong>、乳酸は<strong>−1.53 対 −1.01%/時（p=0.006）</strong>、ΔSOFA（day1→day3）は<strong>中央値−3 対 0（p=0.018）</strong>。最初の24時間のNEE減量も介入群が速く（−6.87 対 −3.03%/時）、最も差が大きかったのは有害事象で、<mark class="hl"><strong>治療を要した頻脈性不整脈が15.6%（5/32）対68.6%（24/35）、調整OR 0.07（95%CI 0.02–0.26）</strong></mark>でした。著者はこれをカテコラミン曝露が減ったぶんβ1刺激が減ったためと説明しています。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>TRICYCLEを過大評価しない — 4つの留保</p>
+<ul><li><strong>死亡は動いていない</strong>。ICU死亡26.3%対41.5%（RR 0.635、95%CI 0.33–1.21、p=0.235）、28日死亡36.8%対46.3%（RR 0.795、p=0.494）、Kaplan-MeierのMantel-Cox p=0.562。<mark class="hl">絶対差15.2ポイントは数字としては大きいが、そもそも死亡を検出する検出力のないphase II試験であり、「死亡が減る傾向」と紹介してはいけない</mark>。著者自身が "mortality were similar" と書いている</li><li><strong>主要評価項目が代替指標で、しかも頑健でない</strong>。血漿レニンはRAAS活性のバイオマーカーであって患者中心のアウトカムではない。加えて<mark class="hl">被験者ごとのランダム傾きを入れた感度解析では群間差が有意でなくなる</mark>（p=0.015は境界的と読む）。ベースラインのレニンが介入群で3倍高く（203.6対66.7 mU/L）、IQR上限が定量上限500に張り付いていたことも、「%低下速度」という主要評価項目には効いてくる</li><li><strong>不整脈の差は確認バイアスを疑わせる</strong>。敗血症性ショックの新規心房細動は通常10〜25%の報告が多く、対照群の68.6%は突出している。しかも「薬物治療または電気的除細動を要した」という主観的閾値を<mark class="hl">非盲検の担当医が判定</mark>しており、12例分が欠測。<mark class="hl">独立した盲検判定での再現が要る</mark></li><li><strong>アンジオテンシンIIは国内未承認</strong>。介入の中核が使えない以上、3剤同時という枠組みをそのまま当院に持ち込むことはできない。なお対照群でも難治性低血圧にはAng IIがレスキューとして許容され、9.8%が実際に受けているため、比較は「3剤 対 1剤」ではなく「3剤 対 混合」である</li></ul>
+</div>
+<p>当院にとって実利があるのは、介入群ではなく<mark class="hl"><strong>対照群の像</strong></mark>のほうです。対照群でバソプレシンを投与されたのは23/41（56.1%）にとどまり、<mark class="hl"><strong>開始時点のNEE中央値は0.45 µg/kg/分（IQR 0.35–0.50）</strong></mark>でした。つまり「かなり上げてから足す」運用が対照として設定されており、当院の実感とも近い。TRICYCLEは「0.15まで下げよ」の根拠にはなりませんが、<mark class="hl">自施設の閾値が0.45側に寄っていないかを点検する材料</mark>にはなります。もう1つ持ち帰れるのは評価指標の選び方で、カテコラミン節約の効果を「NEを減らせたか」で追うより<mark class="hl">「治療を要した頻脈性不整脈が減ったか」で追うほうが、記録に残りやすく院内で伝わりやすい</mark>という点です。</p>
+<h4>主要試験の表</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>VASSTサブ解析・2008</td><td>敗血症性ショック778例(層別サブ解析)</td><td>NE 5〜14 µg/分での立ち上げ時バソプレシン対ノルアドレナリン</td><td>28日死亡26.5%対35.7%(P=0.05)、軽症層のみ</td><td>事後解析・仮説生成。「重症化前に足す」発想の起点</td></tr>
+<tr><td>target trial emulation・ICM2026</td><td>MIMIC-IV/eICU 3,810例</td><td>NE 0.25µg/kg/分到達後0〜3時間 対 3〜6時間のAVP開始</td><td>28日死亡48.1%対53.0%(HR 0.82)</td><td>観察データの模擬試験。RCTでの確認が必要</td></tr>
+<tr><td>TRICYCLE・CritCare2026</td><td>敗血症性ショック79例(2か国3 ICU・単盲検・phase II)</td><td>NEE 0.15 µg/kg/分でAVP＋Ang IIを同時開始 対 段階的追加</td><td>レニン低下−2.61対−1.67%/時(p=0.015)、乳酸−1.53対−1.01%/時、ΔSOFA −3対0、頻脈性不整脈15.6%対68.6%(調整OR 0.07)。<strong>ICU死亡26.3%対41.5%・28日死亡36.8%対46.3%はいずれも有意差なし</strong></td><td>「早期バランス型」を初めてRCT化。<mark class="hl">主要評価項目は代替指標で感度解析では有意性が消え、Ang IIは国内未承認</mark>。当院が使えるのは対照群のAVP開始点(NEE 0.45)という比較対象のほう</td></tr>
+<tr><td>強化学習ルール・JAMA2025</td><td>導出3,608例・検証10,217例</td><td>RL由来ルールに近い開始 対 実際の臨床行動</td><td>院内死亡調整OR 0.81(0.73–0.91)</td><td>「より早く・より低用量で」が一貫して支持される</td></tr>
+<tr><td>VANISH・JAMA2016</td><td>敗血症性ショック421例(2×2要因RCT)</td><td>立ち上げをバソプレシンに置換 対 ノルアドレナリン</td><td>腎不全のない日数に有意差なし。RRT使用のみ有意差(25.4%対35.3%)</td><td>否定したのは「立ち上げ」の置換。「追加」の議論とは別問題</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>VASSTとVANISHを混同しない <span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span>が否定したのは<mark class="hl">「バソプレシンでショックを立ち上げれば腎が守れる」という仮説</mark>であって、<mark class="hl">「ノルアドレナリンが増えてきたらバソプレシンを足す」という日常の運用</mark>ではありません。VANISHはより軽症な集団(無作為化時点のノルアドレナリン0.16 µg/kg/分)を対象にしており、VASSTより早期・低用量の段階を見ています。「1本のRCTが否定と支持の両方に引用される」典型例なので、<mark class="hl">どちらの問いに対する答えかを区別して読む</mark>必要があります。</p>
+</div>
+<p>用量そのものの実務にも幅があります。SSCガイドラインの委員会remarksは<mark class="hl">NE(基剤)0.25〜0.5 µg/kg/分での開始が多い</mark>としていますが、<span class="wl">敗血症性ショックにおけるバソプレシンの実践 用量・タイミング・離脱（ICM2025）</span>は<mark class="hl"><strong>0.01 IU/分の固定低用量で開始し、20分ごとに0.005 IU/分ずつ滴定、上限0.06 IU/分</strong></mark>という、当院標準(0.03 IU/分開始・上限0.03〜0.04)よりやや広い範囲を提案しています。<mark class="hl">体重換算ではなく固定用量が望ましい</mark>という点は一致しています。この幅の存在自体が、<mark class="hl">バソプレシンの用量設定がまだ「これで確定」という段階にないこと</mark>を示しています。</p>
+<p>同じ閾値を、別の2つの文献も独立に置いています。CCMの実践コラムでは、ノルアドレナリン0.25 µg/kg/分で血圧80/50 mmHgにとどまる閉塞性尿路感染の症例に、集中治療医と薬剤師が別々に回答し、2人とも「増量」ではなく「バソプレシン＋ステロイドの同時追加」を選びました。薬剤師の用量はバソプレシン0.03 U/分で開始し、足りなければ0.06 U/分まで（指趾虚血を監視）、ヒドロコルチゾン50 mg 6時間ごとを2剤目の昇圧薬と同時に開始し、短期投与なら漸減せずに中止。集中治療医は0.25 µg/kg/分で反応しない患者を「カテコラミン非反応者」とみなし、同時にPOCUSで血管内容量と心機能を再評価しています。中心静脈路が無いことは次の一手を遅らせる理由にならず、肘窩かそれより中枢の静脈なら末梢投与でよいとも明記されています(<span class="wl">敗血症性ショックを手術室まで持たせる実践 — 0.25γで単剤を諦めバソプレシン0.03→0.06とステロイドを同時に足す（CLINICIANS CORNER・CCM2026）</span>)。ただしこれは2人の個人的プラクティスで推奨度も確実性も付かず、筆頭著者はバソプレシン製剤企業を含む昇圧薬関連企業から資金提供を受けています。25年の文献を整理した総説(Shock2026)も、ノルアドレナリン換算量0.25〜0.5 µg/kg/分を「機序の違う薬を足す帯」、0.75 µg/kg/分を重症化の警告線(この量を超えるとICU死亡OR 6.04という引用)として判断フローを組んでいますが、新しいデータはなく、薬ごとの用量はほとんど書かれていません(<span class="wl">敗血症性ショックの昇圧薬は単剤の優劣から個別化へ — 25年の3つの転換、ノルアド0.25〜0.5γで機序の違う薬を足す（総説・Shock2026）</span>)。</p>
+<p>英国の専門センターの実践(<span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span>)は、<mark class="hl">ノルアドレナリン基剤 0.2〜0.3 µg/kg/分でバソプレシンを検討し、上限は 0.04 IU/分を厳守</mark>という、当院標準とほぼ同じ位置に置いています。注目したいのは順序で、<mark class="hl">バソプレシンの前にステロイド(ヒドロコルチゾン持続 200 mg/日＋フルドロコルチゾン 100 µg/日)が来る</mark>点です。ステロイドは受容体機能そのものを戻す側の手であり、経路を迂回するバソプレシンとは役割が違う——前章の受容体薬理から見ると筋が通っています。ただしこの順序を検証した試験はなく、<mark class="hl">根拠は専門家意見です</mark>(ステロイドの適応そのものは<span class="wl">🧴 ステロイドをいつ使うか Home</span>に譲ります)。</p>
+<p>_図: 時間経過に対するノルアドレナリン投与量のグラフを2本描き、片方はゆるやかな直線的増加(バソプレシン追加を急がなくてよい経（Codex 生成の概念図）_</p>
+<h2>💧 バソプレシン系薬剤の位置づけ — 死亡ではなく臓器保護</h2>
+<p>バソプレシン系の薬剤(AVP・テルリプレシン・セレプレシン)を理解するうえでいちばん大事な整理は、<mark class="hl"><strong>「これらは全死亡を下げる薬ではなく、カテコラミン負荷を減らし特定の臓器を守る薬である」</strong></mark>という位置づけです(<span class="wl">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</span>)。</p>
+<p>生理としては、バソプレシン(AVP)は下垂体後葉から分泌されるペプチドで、血管平滑筋のV1a受容体を介して収縮を起こします。敗血症性ショックでは分泌が早期に枯渇し、最大3分の1の患者で血中濃度が病態の重さに見合わないほど低くなります(相対的バソプレシン欠乏)。半減期は5〜15分と極端に短いのが特徴です。<mark class="hl">腎との関係が特に重要</mark>で、V1a受容体は輸出細動脈に豊富に存在し、輸入細動脈より強く収縮させます。これにより糸球体内圧が保たれ、理論上はGFRが維持されます。ノルアドレナリンは輸入・輸出をより一様に収縮させるため、この差が「バソプレシンのほうが腎にやさしいのではないか」という仮説の生理学的土台になっています。</p>
+<p>この仮説を検証したのがVASST(778例・2008)とVANISH(421例・2016)です。VASSTは前章で見たとおり全体では有意差なし、軽症層でのみ死亡の低下傾向を示しました。VANISHは、より軽症で早期の集団(無作為化時点のノルアドレナリン0.16µg/kg/分)を対象にした2×2要因RCT(バソプレシン対ノルアドレナリン×ヒドロコルチゾン対プラセボ)で、主要評価項目の腎不全のない日数には差がつかず(生存者で中央値9日対13日)、唯一有意差がついたのはRRT使用(25.4%対35.3%)でした。</p>
+<p>セレプレシンというV1a選択的作動薬でも、同じパターンが繰り返されました。SEPSIS-ACT試験(828例・phase 2b/3の適応型RCT)は、<mark class="hl">血行動態指標は明確に改善したにもかかわらず(MAP 74対70 mmHg、ノルアドレナリン必要量41%減、ステロイド使用13.7%対22.9%)、患者中心アウトカムは何ひとつ変わりませんでした</mark>(30日の人工呼吸器・昇圧薬フリー日数15.0対14.5日、P=.30、90日死亡40.6%対39.4%、P=.77)。試験は無益性により早期中止されています(<span class="wl">セレプレシン vs プラセボ（敗血症性ショック・SEPSIS-ACT, JAMA2019）</span>)。</p>
+<h4>主要試験の表</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>VASST・NEJM2008</td><td>敗血症性ショック778例</td><td>立ち上げバソプレシン対ノルアドレナリン</td><td>28日死亡39.3%対35.4%(P=0.26)、軽症層のみ有意差</td><td>全体では差なし。重症度による効果修飾の仮説を生んだ</td></tr>
+<tr><td>VANISH・JAMA2016</td><td>敗血症性ショック421例(2×2要因)</td><td>立ち上げバソプレシン対ノルアドレナリン、ヒドロコルチゾン対プラセボ</td><td>腎不全のない日数に差なし。RRT使用のみ有意差(25.4%対35.3%)</td><td>「腎保護のため立ち上げる」仮説は支持されず</td></tr>
+<tr><td>SEPSIS-ACT・JAMA2019</td><td>敗血症性ショック828例</td><td>セレプレシン(V1a選択的)追加対プラセボ</td><td>昇圧薬フリー日数15.0対14.5日(P=.30)、90日死亡差なし</td><td>生理は動いても患者中心アウトカムは動かない教科書例。無益性で早期中止</td></tr>
+<tr><td>AVERT Shock・JAMASurg2019</td><td>外傷性出血性ショック100例</td><td>AVP4単位＋0.04単位/分・48時間 対 プラセボ</td><td>48時間累積輸血量−1.0L(P=.03)、DVT減少、死亡は不変</td><td>敗血症以外の適応。単施設・穿通性外傷中心で一般化に制約</td></tr>
+</tbody></table></div>
+<p>外傷性出血性ショックでも、バソプレシンの位置づけは同じ形をとります。受傷12時間以内に血液製剤6単位を要した外傷患者100例のRCTで、少量バソプレシン(4単位ボーラス＋0.04単位/分・48時間)を標準治療に併用すると、==48時間累積輸血量が中央値1.0 L減り(95%CI−2.03〜0.00、P=.03)、post hocのDVTも少なかった(ITT 20%対39%)==一方、死亡は12%対12%で不変でした(<span class="wl">外傷性出血性ショックへの少量バソプレシン併用は48時間の輸血量を1.0L減らす — DVTも11%対34%、死亡は不変（AVERT Shock・JAMASurg2019）</span>)。<mark class="hl">「代用指標(輸血量・カテコラミン量)は動くが死亡は動かない」というこのパターンが、バソプレシン系薬剤の一貫した性格</mark>です。</p>
+<p>臓器血流への影響についても、少量なら安全という日本発のデータがあります。ノルアドレナリン抵抗性の敗血症性ショック10例にバソプレシン0.016単位/分を追加した前向き観察研究では、血圧132%・尿量350%に改善した一方で、<mark class="hl">門脈血流(105%)・肝動脈血流・腎葉間動脈の抵抗指数(腎RI 100%)は変化しませんでした</mark>。少量であれば腹部臓器を犠牲にせずに昇圧できるという安心材料です(<span class="wl">敗血症性ショックへのバソプレシン少量投与で肝・腎血流は落ちない — 血圧132%・尿量350%に対し門脈105%・腎RI 100%（10例・日集中医誌2010）</span>)。</p>
+<p>心原性ショックにおけるバソプレシン系の位置づけは、敗血症性ショックより理論が先行しています。心原性ショックでは敗血症性ショックより内因性AVP濃度が概して高く(低心拍出に対する神経内分泌応答の違い)、<mark class="hl">RV優位の心原性ショックでは肺血管抵抗を上げにくいバソプレシンが望ましい1剤目</mark>とされます。ただし<mark class="hl">実データは後ろ向き研究2本のみでRCTはありません</mark>(<span class="wl">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</span>)。</p>
+<p>臨床適応の棚卸しとしては、<mark class="hl">敗血症性ショック以外にも肺塞栓・静脈瘤出血・外傷性出血性ショックが適応として整理されています</mark>(<span class="wl">バソプレシンの臨床適応レビュー — 敗血症性ショック以外に肺塞栓・静脈瘤出血・外傷性出血性ショック（ClinExpEmergMed2025）</span>)。また敗血症性ショックと心臓術後血管麻痺性ショックの2適応に絞った実務ポイント集も参考になります(<span class="wl">バソプレシン使用の10の要点 — 敗血症性ショックと心臓術後血管麻痺性ショックの2適応（レビュー・MedIntensiva2024）</span>)。一過性の低血圧に対してはプッシュドーズでの少量バソプレシンという運用報告もあります(<span class="wl">敗血症性ショックの一過性低血圧にプッシュドーズ・バソプレシン（症例報告・JEmergMed2020）</span>)。</p>
+<p>肝腎症候群(HRS-1)は、バソプレシン系薬剤(この場合はテルリプレシン)が<mark class="hl"><strong>死亡ではなく明確な臓器機能の指標(血清クレアチニン)を動かす</strong></mark>、数少ない場面です。テルリプレシンとノルアドレナリンは頭対頭メタ解析(プールn=486)で有効性がほぼ互角ですが、<mark class="hl">選択を決めるのは有効性の差ではなく安全性とICU病床・中心静脈路の有無</mark>です。テルリプレシンは6時間ごとの静注ボーラス(または持続)で一般病棟でも投与でき、ICUも中心静脈路も不要という利点がある一方、<mark class="hl">最大の落とし穴は呼吸不全</mark>(CONFIRM試験でプラセボ+アルブミンより多い)で、低酸素・肺浸潤影/肺水腫・左室機能障害・ACLF grade 3・血清Cr&gt;5.0 mg/dL・進行中の虚血がある症例には使えません(<span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span>)。</p>
+<div class="call note"><span class="lab">補足</span>
+<p>この章のまとめ方 VASST・VANISH・SEPSIS-ACT・AVERT Shockに共通するのは、<mark class="hl">「生理指標や特定臓器のアウトカムは改善するが、死亡には効かない」</mark>という一貫したパターンです。バソプレシン系薬剤を「もっと効く昇圧薬」として使おうとすると期待外れになります。<mark class="hl">「カテコラミンを節約し、腎・不整脈・輸血量といった具体的な副次アウトカムを守るための薬」</mark>と position しておくのが実務的です。</p>
+</div>
+<h2>🩸 血圧が上がることと灌流が良くなることを区別する</h2>
+<p>この章のメッセージは一言で言えます。<mark class="hl"><strong>「血圧が上がった」ことは「灌流が良くなった」ことの証拠にはならない</strong></mark>、ということです。</p>
+<p>まず量-反応の関係を直接示したのがHySpec-ICU二次解析です。外科系ICU502例で、24時間以内の昇圧薬必要量(NEE)と手掌の組織酸素飽和度(StO₂、近赤外分光法で計測)の関係を調べたところ、==<strong>NEEが高いほどStO₂は低く(β=−0.193、p=0.001)、MAPはStO₂と全く相関しませんでした(p=0.503)</strong>==。量-反応の形は線形で、閾値のようなものは見られません。NEE&gt;0.28群はNEE=0群よりStO₂が7.8ポイント低く、組織水分指数(浮腫)は上昇、深部灌流指数は低下していました(<span class="wl">高用量の昇圧薬は組織酸素化を下げる — MAPが保たれていても微小循環は悪化する（HySpec-ICU二次解析・CritCare2026）</span>)。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: 昇圧薬必要量(NEE)と組織酸素飽和度(StO₂)の散布図。負の相関(r=−0.327)を示す回帰線が引かれているが、個々の点は広く散らばっており、集団としての傾向が個々の患者の値を予測しないことを示す(出典 <span class="wl">高用量の昇圧薬は組織酸素化を下げる — MAPが保たれていても微小循環は悪化する（HySpec-ICU二次解析・CritCare2026）</span>)_</p>
+<p>なぜこの乖離が起きるのかは、<span class="wl">カテコラミンを最小化して組織灌流を最適化する — 血圧を上げることと灌流を改善することは別（総説・CritCare2019）</span>が生理として整理しています。個々の臓器には<strong>自己調節閾値</strong>があり、<mark class="hl"><strong>その閾値を超えてMAPをさらに上げても臓器灌流はもう増えません</strong></mark>。それどころか、α作動薬は毛細血管網の入口にある抵抗細動脈を締めるため、微小循環がむしろ悪化しうる。「血圧を上げること」と「灌流を上げること」は、ある地点から先で方向が分かれる別の変数だということです。</p>
+<p>ベッドサイドで安価に灌流を確認する手段としては、mottling(網状皮斑)スコアが有用です。敗血症・敗血症性ショック259例で、<mark class="hl"><strong>ICU入室6時間後のmottlingスコアが1点上がるごとに14日死亡のオッズは2.26倍(95%CI 1.72–2.97)</strong></mark>になり、この関係は昇圧薬の使用量に関わらず一定でした(昇圧薬なし群OR 2.34、&gt;0.8 µg/kg/分群OR 3.84、交互作用p=0.33)。多変量で生き残ったのはmottlingスコア・動脈血乳酸・尿量&lt;0.5 mL/kg/時の3つだけで、判別能(C統計量)は0.91と高く、外部検証コホート(97例)でも0.76でした(<span class="wl">Mottlingスコアは昇圧薬量に関わらず敗血症の14日死亡を予測する — 1点ごとにオッズ2.26倍（259例・外部検証97例・CritCare2019）</span>)。<mark class="hl">器具も採血も要らず、膝を見るだけで済むという実務性が最大の利点</mark>です。</p>
+<p>もう一段踏み込むと、<mark class="hl"><strong>昇圧そのものが前方血流を奪う患者がいる</strong></mark>ことを直接見せた研究が出ました。前負荷反応性がないと多角的に確認された人工呼吸中の敗血症性ショック32例に、MAPを65から85 mmHgへ上げる昇圧テストを行い、その直前と直後に心エコーを撮った前向き生理学研究です。到達MAPは3群とも同等(Δ18〜22 mmHg、p=0.662)だったのに、心拍出量の反応は<mark class="hl"><strong>flow recruitment 31%(+26%)・stable flow 53%(+2%)・flow deterioration 16%(−24%)の3通りに分かれました</strong></mark>。流量が落ちた群の正体は心室動脈カップリングの悪化で、実効動脈エラスタンス(Ea)だけが不釣り合いに上がって収縮末期エラスタンス(Ees)が追随せず(ΔEa/Ees +0.22対−0.12、p=0.035)、LVEFは13.4ポイント落ちています。しかも彼らは<mark class="hl">ベースラインで心機能が悪かったのではなく、むしろ「高流量・低後負荷」で回っていた患者</mark>でした。バソプレシン0.03 U/min追加のほうが流量低下が多く(80%対29.6%)、心拍数が11 bpm落ちています(<span class="wl">MAPを65から85に上げると循環反応は3通りに分かれる — 16%で心拍出量が24%低下、正体は心室動脈カップリングの悪化（32例・前向き生理学研究・CritCare2026）</span>)。</p>
+<p>この研究が本章にとって決定的なのは、<mark class="hl"><strong>CRTも乳酸も3群を区別しなかった</strong></mark>(p=0.418、p=0.166)という点です。前段までに挙げたmottling・CRT・乳酸は「上げすぎの害」を数時間の尺度では捉えますが、<mark class="hl">増量した瞬間に流れを失った患者を、その場で教えてはくれません</mark>。それを拾う手段は今のところ、昇圧の前後でLVOT VTIを撮ることだけです。32例の単施設・転帰を見ていない生理学研究であり「VTIが落ちたら戻すと予後が良くなる」ことは示されていませんが、当院は動脈圧ライン留置率が高く重症エコーも回っているので、追加コストはプローブを当てる数分で済みます。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>MAPを上げる前に、上げたあとに何を見るかを決めておく MAP目標を65より上げたくなったら、<mark class="hl">「上げる→CRT・mottlingスコア・乳酸・尿量のどれかが改善したかを確認する→改善しなければ65に戻す」</mark>を一続きの手技として実行してください。<mark class="hl">ただしCRTと乳酸は昇圧直後の数分では動きません</mark>。上げた瞬間に流れが落ちていないかはLVOT VTIを前後で撮るしかなく、15%以上落ちていれば「圧は取れたが流れを失った」と読んで増量を戻します。血圧の数字だけを見て満足するのが、この章でいちばん避けたい落とし穴です。</p>
+</div>
+<p>これは25年間の敗血症性ショック蘇生研究が行き着いた到達点でもあります。EGDT(2001)からANDROMEDA-SHOCK-2(2025)まで、6つのランドマークRCT(EGDT・LACTATE・SEPSISPAM・ANDROMEDA-SHOCK・CLASSIC・ANDROMEDA-SHOCK-2)を通じて、<mark class="hl"><strong>固定した単一の生理指標を全員に当てはめる戦略は、患者中心アウトカムを再現性をもって改善できませんでした</strong></mark>。著者らは、これを「介入自体が無効だから」ではなく「きわめて異質で動的な病態に還元主義的な枠組みを当てたせい」と診断し、CRTのような即応性の高い灌流シグナルを手がかりに、短い判断サイクルで「可逆的なテスト」として介入を当てる<mark class="hl">生理学ガイド・表現型駆動の個別化蘇生</mark>を次の道筋として提示しています(<span class="wl">敗血症性ショック蘇生の25年 — 単一固定指標から生理学ガイド・表現型駆動へ（概念的展望2026）</span>)。この「測る→解釈する→治療する→効果を評価する→反応する」というループの発想は、敗血症性ショックの4相(salvage・optimization・stabilization・de-escalation)ごとにモニタリング手段と治療目標を切り替えるSOSDの枠組みとも一致します(<span class="wl">敗血症性ショックの血行動態管理を個別化する — SOSD 4相ごとのモニタリングと治療（総説・CritCare2022）</span>)。輸液の考え方についても同じ論理が成り立ち、<mark class="hl">輸液は250〜500 mLずつ投与して改善しなければ止め、安定したら制限と負バランスへ切り替えるべきで、確信を持って言い切れるのはHES・ゼラチン・デキストランを使わないこととHb 7 g/dLを輸血閾値にすることの2つだけ</mark>という整理もあります(<span class="wl">敗血症のhypovolemia管理 — 輸液は250〜500 mLずつ・改善しなければ止め、安定したら制限と負バランスへ（エキスパートステートメント・ICM2018）</span>)。管理の全体像と難治性ショックまでを見通した総説としては<span class="wl">敗血症性ショックの血行動態管理 — 昇圧薬・輸液・難治性ショックの総説（熱傷外傷も視野・BurnsTrauma2025）</span>、実務上の課題を俯瞰したものとして<span class="wl">敗血症性ショック管理の課題（ナラティブレビュー）</span>、そして基本形を押さえる総説として<span class="wl">ショック患者に対する昇圧薬レビュー（ICM2019）</span>・<span class="wl">血圧を守る昇圧薬ツールボックス ICU Toolbox 2017</span>も参照してください。</p>
+<h2>🚨 難治性ショックをどう定義し、何を上乗せするか</h2>
+<p>「難治性ショック」という言葉は日常的に使われますが、その定義が<mark class="hl">「昇圧薬の量」だけに頼っていると、実態を大きく見誤る</mark>ことが分かってきました。</p>
+<p>ANDROMEDA-SHOCK-2(早期敗血症性ショックへのCRT標的・個別化蘇生の多施設RCT)の二次解析(1,363例)は、蘇生開始6時間の時点で「NEE&gt;0.5 µg/kg/分」だけを見て難治性ショックと呼ぶと、その集団の188例(13.8%)のうち、実際に低灌流(CRT&gt;3秒かつ乳酸非低下)を伴っていたのはわずか28.2%(53/188)だったと報告しています。逆に、<mark class="hl"><strong>NEE高値にCRT&gt;3秒と乳酸非低下を重ねた「2低灌流基準」該当者(全体の3.9%、53/1,363)の28日死亡は73.6%</strong></mark>に達し、非該当群の23.7%と大きな差がありました(調整HR 4.68)。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: NEE&gt;0.5・CRT異常・乳酸非低下の3条件が重なる領域をベン図で示し、重なりが深いほど28日死亡率が上がる(単独領域38〜48%、3条件重複で73.6%)ことを可視化した図(出典 <span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span>)_</p>
+<p>判別能の指標で見ると、この「2低灌流基準」は特異度99%(NEE単独では90%)、陽性尤度比8.12(NEE単独2.71)と、<mark class="hl">「高特異度の濃縮ルール」としての価値が際立ちます</mark>。ただしAUROCで比較すると、ベースラインSOFAやAPACHE IIと同等にとどまり、<mark class="hl"><strong>識別能そのものが従来の重症度スコアを上回るわけではありません</strong></mark>。事前規定のない二次解析(n=53と小さい)である点にも留意が必要です(<span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span>)。前章の受容体薬理を踏まえると、この定義の転換は理にかなっています。<mark class="hl">カテコラミン不応の実体が受容体脱感作と下流シグナル障害である以上、「量」は原因ではなく結果の一側面でしかありません</mark>。</p>
+<p>この定義の転換を踏まえたうえで、「難治性なら何かを上乗せする」という発想そのものを検証したのがCLEANSE試験です。タイの2つの三次施設で、NA≥0.2 µg/kg/分(到達から24時間以内)を要する敗血症性ショック128例を対象に、HA-330サイトカイン吸着カートリッジを時刻0と24時間の2回・各3時間追加する多施設オープンラベルRCTが行われました。==<strong>28日死亡は標準治療群58%(38/65)対吸着群44%(28/63)で、RR 0.76(95%CI 0.54–1.07、P=0.16)と有意差はつきませんでした</strong>==。</p>
+<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p>_図: CLEANSE試験の28日生存のKaplan–Meier曲線。day 2以降で血液吸着群が標準治療群より上に離れるが、両群の95%信頼区間の帯は全期間で重なり続けている(HR 0.68、95%CI 0.44–1.07、P=0.09)(出典 <span class="wl">HA-330血液吸着は敗血症性ショックの28日死亡を有意には減らさない — 高用量昇圧薬128例・早期中止（CLEANSE・CritCare2026）</span>)_</p>
+<p><mark class="hl"><strong>この「有意差なし」を「効果なし」と読むのは早計です</strong></mark>。試験は計画206例に対し128例で、資金枯渇により早期中止されています。post-hocの調整モデル(hour 0のIL-6・VISで調整したCox回帰)ではHR 0.62(95%CI 0.39–0.97、P=0.037)と有意になりますが、<mark class="hl">著者ら自身が「探索的であり独立した有効性の主張ではない」と明記しています</mark>。この試験を批判的に読み解いたMatters Arisingは、効果量の想定が楽観的すぎたこと、時刻0の定義に非対称があること、アウトカム選択の妥当性を論点として挙げ、<mark class="hl">「陰性」ではなく「解釈不能」と評価すべきだと主張しています</mark>(<span class="wl">CLEANSE試験は「陰性」ではなく「解釈不能」— 効果量の楽観・時刻0の非対称・アウトカム選択（Matters Arising・CritCare2026）</span>)。</p>
+<h4>主要試験の表</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>ANDROMEDA-SHOCK-2二次解析・ICM2026</td><td>敗血症性ショック1,363例</td><td>NEE単独 対 NEE+CRT+乳酸の複合基準</td><td>複合基準該当(3.9%)の28日死亡73.6%(調整HR 4.68)</td><td>難治性の定義を「量」から「反応の軌跡」へ転換する根拠</td></tr>
+<tr><td>CLEANSE・CritCare2026</td><td>高用量昇圧薬敗血症性ショック128例</td><td>HA-330血液吸着追加 対 標準治療</td><td>28日死亡58%対44%(RR 0.76、P=0.16)</td><td>有意差なしだが早期中止で検出力不足。「効かない」ではなく「決着していない」</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>「難治性ショックには何か足す」を思考停止で行わない <mark class="hl">HA-330は日本では薬事承認されておらず、当院の行動は変わりません</mark>(日本で対応するのはPMX-DHP)。CLEANSEから使えるのは治療そのものではなく、「NA 0.2γ到達から24時間以内」という難治性ショックのenrichment基準の考え方です。</p>
+</div>
+<h3>では実際に何を、どの順で重ねるのか</h3>
+<p>定義と「上乗せの是非」を離れて、ノルアドレナリンが上がり続けているベッドサイドで何をするか——ここを用量つきで公開したのが、英国の重症呼吸・心不全専門センター(年間50例超の難治性敗血症性ショックを扱う)による実践的レビューです(<span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span>)。中心思想は前章までの流れと同じで、<mark class="hl"><strong>次の一手は増量ではなく「増やさずに済ませる手」</strong></mark>——1剤ずつ効果を見ながら足していく段階的戦略をやめ、機序の違う薬を早めに重ねてノルアドレナリンの総量そのものを下げる(catecholamine-sparing)、という組み立てです。</p>
+<p>順序は次のようになります。前提として全例に大腿動脈ライン。<mark class="hl"><strong>ノルアドレナリン 0.2 µg/kg/分(基剤)を「立ち止まる時刻」と決め</strong></mark>、適切な目標指向型輸液蘇生から6時間以上経っていればヒドロコルチゾンを開始します(本文は持続 200 mg/日、Figure 1 は 50 mg ボーラス→8 mg/hr。<mark class="hl">本文と図が食い違うので、プロトコル化するならどちらを採るかを先に決める必要があります</mark>)。同時にフルドロコルチゾン 100 µg/日をショック離脱まで併用。0.2〜0.3 µg/kg/分を超えたらバソプレシンを追加し、<mark class="hl">上限 0.04 IU/分は超えません</mark>。低心拍出を伴えばミルリノン 0.1〜0.3 µg/kg/分。そして 0.5 µg/kg/分を超えてもMAPが目標に届かないとき初めて、アンジオテンシンIIやメチレンブルー(負荷 1〜2 mg/kg → 0.25〜1 mg/kg/時、累積 7 mg/kg まで)という第3の系に移ります。</p>
+<p>ここで当院にとって実利があるのは、薬の並びよりも<mark class="hl"><strong>「昇圧薬を増やす前に見直すもの」が明示されている</strong></mark>点です。①測定部位——高用量昇圧薬下では動脈圧波形の伝播が乱れ、<mark class="hl">橈骨動脈のMAPが大腿動脈より最大13 mmHg低く出ます</mark>。橈骨のまま増量すれば、必要のない毒性を自分で作ることになります。②鎮静——プロポフォールの心抑制と血管拡張が「難治性」の一部を作っていないか。RASS 0〜−2(筋弛緩下はBIS 40〜60)に絞り、rescue phase の間はミダゾラム少量を足してプロポフォールを減らす。③MAP目標——高血圧・冠動脈疾患のない若年例で灌流所見が保たれていれば、65に固執しない。<mark class="hl">どれも費用がかからず、明日から試せます</mark>。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>手順の骨格は借りられるが、根拠の強さは借りられない このレビューには<mark class="hl"><strong>相対リスクも95%信頼区間もNNTも1つも登場しません</strong></mark>。著者ら自身が Conclusion で「アプローチの一部は専門家意見と自施設の経験に導かれている」と明記しています。とくに注意が要るのは、<mark class="hl">レボシメンダン(LeoPARDS)・プロスタサイクリン(Bestle・Legrand)・高用量RRTの3つを、いずれも「その試験は本当に難治性の患者を組み入れていなかった」という同じ論法で使い続けている</mark>点です。治療効果の異質性は実在するので論理としては成り立ちますが、同じ論法を3回続けると、あらゆる陰性結果を回避できてしまいます。大腿動脈ラインも、根拠は乖離を示した観察研究1本だけで、<mark class="hl">切り替えが転帰を変えたという研究はありません</mark>。さらに、多剤を同時に走らせたときの相互作用(低カリウム血症、出血傾向、セロトニン症候群、抗菌薬の過小曝露)を測った研究は存在しません。単施設・紹介バイアスの強い集団という外的妥当性の限界もあります。<mark class="hl"><strong>用量表と順序は院内議論のたたき台として使い、個々の主張は引用元の原著に当たり直す</strong></mark>、という距離感が妥当です。</p>
+</div>
+<h2>❤️ 心原性ショックでの選び方 — 表現型に薬理を合わせる</h2>
+<p>敗血症性ショック以上に、心原性ショックでは「どの薬が勝つか」という問いへの答えがありません。<mark class="hl"><strong>ある血管作動薬・強心薬が他剤に勝つことを示したRCTは1本も存在しない</strong></mark>というのが出発点です(<span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span>)。だから選択は「どれが強いか」を探す作業ではなく、<mark class="hl"><strong>表現型に薬理を合わせる</strong></mark>作業になります。</p>
+<p>Circulation2026のClinical Primerは、心原性ショックを①classic(左室優位・低心拍出)②血管拡張を合併した型③正常血圧CS④RV優位⑤動的LVOT閉塞、の5つの表現型に整理し、それぞれに薬理を当てる4ステップを提示しています。<mark class="hl">低血圧CSはinopressorでMAP 65〜75 mmHgを守りつつCI&gt;2.2を目標にし、灌流は足りているが低血圧なら強心薬を増やさずバソプレシンを足します</mark>。<mark class="hl">RV優位の1剤目は肺血管抵抗に中立なバソプレシンで、フェニレフリンは肺血管抵抗を上げるため避けます</mark>。動的LVOT閉塞では強心薬そのものが閉塞を悪化させるため禁忌に近い扱いになります。ただし、<mark class="hl">個々の用量域・SCAI分類A〜Eの定義・機械的循環補助(MCS)の導入基準は、この論文自体には書かれていません</mark>。そこはSCAI分類とPAC由来の表現型でtMCS導入を判断する実践指針(<span class="wl">心原性ショックの管理 — 診断からデバイスまで、SCAI分類とPAC表現型でtMCSを選ぶ（CHESTCritCare2024）</span>)や、重症度×表現型×修飾できないリスクの三軸で記述する総説(<span class="wl">心原性ショック管理の進歩 — SCAI分類・表現型・出口戦略で個別化する（Concise Definitive Review・CCM2023）</span>)を併読する必要があります。後者は<mark class="hl">血圧ではなく低灌流(とくに乳酸)が予後を決め、SCAI stage Cの定義には「低血圧は常にではない」と明記されている</mark>ことを強調しています。</p>
+<p>強心薬の選択については、DOREMI試験が数少ないRCTです。心原性ショック192例(SCAI分類B〜E、実際はC・Dが91〜94%)を対象にした単施設二重盲検RCTで、ミルリノンとドブタミンの主要複合アウトカム(院内死亡・蘇生された心停止・心移植またはMCS導入・非致死性心筋梗塞・脳卒中/TIA・RRT導入)は49%対54%(RR 0.90、95%CI 0.69〜1.19、P=0.47)でした。<mark class="hl"><strong>設計時に想定した効果量が絶対差20ポイントという非現実的な大きさで、95%CIはリスク31%減から19%増までを許容しています</strong></mark>。<mark class="hl">「差が出なかった」のであって「同等が示された」わけではありません</mark>(<span class="wl">DOREMI試験 — 心原性ショックのミルリノンとドブタミンは主要複合アウトカムに差なし、ただし20ポイント差を想定した192例（DOREMI・NEJM2021）</span>)。</p>
+<p>この不確実性を反映するように、国際的な診療実態にも大きなばらつきがあります。82か国839名のESICM会員への調査では、循環性ショックの強心薬として<mark class="hl"><strong>84%がドブタミンを第一選択に挙げる一方、「いつ始め、何を目標にし、いつ止めるか」は回答がばらばら</strong></mark>で、共通の標準治療は存在しませんでした。42名の専門家パネルが敗血症性ショック・心原性ショックの両方にまたがる11の強い推奨をまとめています(<span class="wl">循環性ショックの強心薬は84%がドブタミン — 引き金も目標もばらつく（ESICM会員839人・82か国の国際調査・AnnIntensiveCare2021）</span>)。</p>
+<h4>主要試験の表</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>DOREMI・NEJM2021</td><td>心原性ショック192例(SCAI B〜E)</td><td>ミルリノン対ドブタミン</td><td>複合アウトカム49%対54%(RR 0.90、95%CI 0.69–1.19)</td><td>差が出なかっただけで同等の証明ではない。20ポイント差を想定した設計自体が非現実的</td></tr>
+<tr><td>VA-ECMO単施設後ろ向き・CritCare2019</td><td>VA-ECMO231例</td><td>導入後24時間以内のエピネフリン 対 イノジレーター 対 無強心薬</td><td>院内生存25.0%対52.2%対47.9%(多変量OR 0.38、PSM後OR 0.24)</td><td>RCTではないが独立した予後不良因子。<mark class="hl">RCTデータが出るまでエピネフリンは避けるべき</mark>という強い結論</td></tr>
+<tr><td>β遮断薬メタ解析・AnnMed2022</td><td>重症患者16RCT・2,410例(うち11試験・2,103例で死亡解析)</td><td>早期β遮断薬 対 対照</td><td>死亡RR 0.65(95%CI 0.53–0.79)、MAPと昇圧薬負荷に差なし</td><td>「初期の血行動態安定化のあとなら安全」という留保付き。至適対象・タイミングはなお不明</td></tr>
+</tbody></table></div>
+<p>VA-ECMO導入直後のエピネフリンについては、単施設231例の後ろ向き研究で<mark class="hl"><strong>院内生存が明確に不良</strong>(エピネフリン群25.0%対イノジレーター群52.2%対無強心薬群47.9%、多変量OR 0.38・傾向スコアマッチング後OR 0.24)</mark>という結果が出ています。観察研究であるため因果の証明にはなりませんが、<mark class="hl">RCTデータが得られるまでVA-ECMO患者へのエピネフリンは避けるべき</mark>という著者の結論は、当院の判断にも取り入れる価値があります(<span class="wl">VA-ECMO導入後24時間のエピネフリンは院内生存を悪化させる — エピネフリン群25%対イノジレーター52%・無強心薬48%、231例の単施設後ろ向き（CritCare2019）</span>)。</p>
+<p>心原性ショックに限らず重症患者一般では、β遮断薬が意外な形で登場します。<mark class="hl">重症病態は交感神経系の活性化を招き、外因性カテコラミンでさらに増強されうる</mark>という前提のもと、16RCT・2,410例のシステマティックレビュー(うち11試験・2,103例のメタ解析)は<mark class="hl"><strong>β遮断薬群で死亡が有意に減少し(RR 0.65、95%CI 0.53–0.79)、平均動脈圧と昇圧薬負荷に有意差はなかった</strong></mark>と報告しています。ただし著者ら自身、<mark class="hl">最適な対象患者・投与タイミング・薬剤選択には質の高いRCTが必要</mark>と留保しています(<span class="wl">重症患者へのβ遮断薬は死亡を減らす — 11試験2103例でRR 0.65、昇圧薬負荷は増えず（SR・メタ解析・AnnMed2022）</span>)。</p>
+<p>蘇生後ショック(心停止後に生じる循環不全)は、心原性ショックと敗血症性ショックの中間的な病態です。心停止患者の50〜70%に生じ、「心筋スタニング」だけでは説明できない、<mark class="hl">血管麻痺・容量不足・腸管障害・相対的副腎不全が重なった敗血症様症候群</mark>とされます。EFが回復しても昇圧薬が72時間程度必要になることが多く、<mark class="hl">最適なMAP目標は依然として不明</mark>です(<span class="wl">蘇生後ショックの病態生理と治療 — 心筋障害と敗血症様の血管麻痺が重なり、最適MAP目標は不明のまま（総説・AnnIntensiveCare2020）</span>)。</p>
+<p>_図: 心原性ショックの5表現型(classic LV優位・血管拡張合併・正常血圧CS・RV優位・動的LVOT閉塞)を枝分かれで（Codex 生成の概念図）_</p>
+<h2>🧰 投与の実務 — 用量表記・シリンジポンプ・離脱・鎮静・栄養</h2>
+<p>ここまでの章で扱った「何を・いつ・どこまで」という判断は、投与の実務が伴わなければ絵に描いた餅になります。この章では、当院標準の根拠になっている個々の実務データを掘り下げます。</p>
+<p><strong>用量表記の落とし穴</strong>。ノルアドレナリンの用量は塩(酒石酸塩・塩酸塩)で表記されるか基剤(base)で表記されるかで、同じ数字でも実際の投与量が最大2倍違います。32か国の添付文書を調べた研究では、<mark class="hl">ラベル濃度が塩を反映していたのはフランス・イタリア・マルタ・ポルトガルの4か国のみ</mark>で、実地では大半の国が基剤換算に統一されていました(<span class="wl">ノルアドレナリンの用量表記は塩か基剤か — 32か国の添付文書を調べた（Correspondence・ICM2023）</span>)。しかしこの問題は無視できるものではなく、<mark class="hl"><strong>ノルアドレナリンのµg/kg/分という数字は投与量であると同時に、SOFA・NEE・VIS・SCAI分類のすべてが依存する「ショック重症度の通貨」でもある</strong></mark>ため、国際的な統一基準(タスクフォース)が必要だという指摘もあります(<span class="wl">ノルアドレナリンの用量表記問題にはタスクフォースが必要（Correspondence・ICM2023）</span>)。文献を読むときは常に基剤換算かどうかを確認する習慣をつけてください。<mark class="hl"><strong>「いちばん確実な改善は単位と希釈濃度を院内で1つに固定すること」</strong></mark>というエディトリアルの結論は、これらの背景を踏まえたものです(<span class="wl">ノルアドレナリン投与の基本を押さえる（エディトリアル・ICM2024）</span>)。</p>
+<p><strong>シリンジポンプという物理</strong>。高濃度・低流量(0.1〜10 mL毎時)の微量持続静注では、<mark class="hl">回路のコンプライアンス・抵抗・機械的遊び・死腔という物理特性が、そのまま患者のバイタルサインに跳ね返ります</mark>。専門家グループは教育・プロトコル・シリンジ選択・回路構成・ポンプ高さ・流量下限・閉塞アラーム・交換手順の8領域を10項目の推奨に整理しました。実務としてとくに重要なのは、<mark class="hl">患者に繋ぐ前に早送りで回路を満たすこと、最も近い活栓に繋いでポンプの高さを動かさないこと、閉塞解除は圧を抜いてから行うこと</mark>の3つです(<span class="wl">微量持続静注のシリンジポンプ患者安全10項目（EurJAnaesthesiol2023）</span>)。当院標準にある「重大な血行動態イベントの少なくとも25%が交換前後に起きている」という数字は、この物理的な制約の裏返しです。</p>
+<h4>主要試験の表(投与実務に関する介入研究)</h4>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>MIDAS・ICM2020</td><td>単剤・低用量昇圧薬から抜けられない患者136例</td><td>経口ミドドリン高用量 対 プラセボ</td><td>昇圧薬中止までの時間23.5対22.5時間(差1時間、P=.62)、徐脈7.6%対0%(P=.02)</td><td>中止を早める効果はなく、徐脈という害だけが増える</td></tr>
+<tr><td>プロポフォール→デクスメデトミジン・CCM2019</td><td>敗血症性ショック38例(クロスオーバー)</td><td>鎮静深度固定下でプロポフォールをデクスメデトミジンに置換</td><td>ノルアドレナリン0.69→0.30→0.42γ(いずれもp&lt;0.005)</td><td>対照群のないパイロット。評価は代替指標(昇圧薬量)にとどまる</td></tr>
+<tr><td>NE先行対AVP先行の離脱・CritCareSci2026</td><td>NEとAVPを併用中の敗血症性ショック2,280例(RCT 2本＋観察研究9本)</td><td>NEを先に中止 対 AVPを先に中止</td><td>離脱後低血圧OR 0.43(0.18–1.03)、I² = 91%。観察研究0.26対RCT 4.04で真逆(サブグループ間差p &lt; 0.01)</td><td>順序は決まらない。争点は「漸減か一気か」に移る。GRADEは全7項目very low</td></tr>
+</tbody></table></div>
+<p>ミドドリンによる離脱促進は、当院標準がすでに否定している通り、<mark class="hl"><strong>効果がないだけでなく害(徐脈)が増える</strong></mark>ことがMIDAS試験(136例の二重盲検RCT)で明確に示されています。プロポフォールからデクスメデトミジンへの切り替えは、鎮静深度(RASS −3〜−4)を固定した38例のクロスオーバー試験で<mark class="hl">ノルアドレナリン必要量を0.69γから0.30γへ減らし、プロポフォールに戻して8時間後も0.42γとベースラインより低いまま</mark>でした。MAP・心係数・乳酸は不変で、鎮静の等価性(プロポフォール換算量・Narcotrend Index)も保たれています。ただし<mark class="hl">対照群のない単施設パイロットで、評価したのは昇圧薬量という代替指標にとどまります</mark>(<span class="wl">プロポフォールをデクスメデトミジンに替えるとノルアドレナリンが減る — 0.69から0.30γ・中止8時間後も0.42γ（敗血症性ショック38例・クロスオーバー・CCM2019）</span>)。</p>
+<p><strong>どちらを先に切るか</strong>。NE先行離脱とAVP先行離脱を比べた11研究2,280例のメタ解析では、離脱後低血圧の全体推定はOR 0.43(95%CI 0.18–1.03、I² = 91%)で差がつきませんでした。問題は内訳で、観察研究9本がOR 0.26(0.13–0.53)、RCT 2本がOR 4.04(1.24–13.15)、サブグループ間差p &lt; 0.01です。<mark class="hl">同じ問いに観察研究とRCTが正反対の答えを出している</mark>状態で、GRADEは主要・副次を含む全7アウトカムがvery low。著者らはこの乖離を「切り方」に帰属させています——観察研究の多くはバソプレシンを漸減せず一気に止めており(北米の調査では医師の約70%)、RCT 2本はいずれも滴定して切っていました。副次アウトカムは新規不整脈OR 1.14(0.90–1.45)、腎機能障害OR 1.07(0.84–1.35)、昇圧薬使用時間MD −6.13時間で、どちらの順序でも動きません。<mark class="hl">「NEを先に切ればバソプレシンの腎保護・抗不整脈作用を長く残せる」という理屈は、少なくともこのデータでは支持されません</mark>。当院で決めるとすれば順序ではなく、漸減の手順と「離脱開始後◯時間以内のMAP &lt; 65 mmHgまたは昇圧薬の再増量」という低血圧の定義のほうです(<span class="wl">敗血症性ショックでノルアドレナリンとバソプレシンのどちらを先に切るか — 全体はOR 0.43で差なし、観察研究とRCTで結論が真逆（11研究2,280例・メタ解析・CritCareSci2026）</span>)。</p>
+<p><strong>離床とドパミン再考</strong>。日本の実務データとして重要なのは、非心臓手術後のノルアドレナリンとドパミンを比較したJIPADの解析(6,236例、ノルアドレナリン4,652例対ドパミン1,584例、傾向スコアマッチング)です。<mark class="hl"><strong>死亡には差がありませんでしたが、ノルアドレナリン群のほうがICU在室が1日短い</strong></mark>という結果でした(<span class="wl">非心臓手術後のノルアドレナリンはドパミンより死亡を減らさないがICU在室は1日短い（JIPAD 1230ペア・PSM・KoreanJAnesthesiol2023）</span>)。<mark class="hl">死亡で差がつかない場面でも、副次アウトカムまで見ればノルアドレナリンを選ぶ理由がある</mark>ということです。離床については、後方視コホートで<mark class="hl">ノルアドレナリンの用量そのものは有害事象を増やさず、有害事象を増やすのは「ベッドから出す」というステップそのもの(OR 3.3)</mark>でした。当院標準にある離床の目安(ベッド外0.20 µg/kg/分・ベッド上0.33 µg/kg/分)は、<mark class="hl">検証された安全閾値ではなく「エビデンスがある範囲の端」</mark>である点を忘れないでください(<span class="wl">ノルアドレナリン投与中患者の離床は安全か（後方視コホート）</span>／<span class="wl">ノルアドレナリン投与中患者の離床は安全か（後ろ向きコホート）</span>)。</p>
+<p><strong>院外・緊急時のプッシュドーズ</strong>。1,727例の後ろ向き研究では、プッシュドーズ昇圧薬(フェニレフリン・アドレナリン)は<mark class="hl">フェニレフリンで55.9%、アドレナリンで71.8%が血行動態的に反応</mark>しており、安全性も確認されています(<span class="wl">プッシュドーズ昇圧薬は安全で有効 — フェニレフリン55.9%・アドレナリン71.8%が反応（1727例・後ろ向き・AmJEmergMed2022）</span>)。</p>
+<p><strong>経腸栄養と昇圧薬</strong>。<mark class="hl">ノルアドレナリン0.2 µg/kg/分を超える段階では経腸栄養の開始を遅らせる</mark>という当院標準は、救急・集中治療領域の栄養療法に関する総説の推奨に基づきます。<mark class="hl">早期経腸栄養は48時間以内が原則</mark>ですが、循環動態が不安定な間の腸管虚血リスクとのバランスをとった閾値です(<span class="wl">救急・集中治療領域の重症患者の栄養療法 — 早期経腸は48時間以内、ノルアドレナリン0.2μg超では遅らせる（総説・外科と代謝栄養2022）</span>)。</p>
+<p>_図: シリンジポンプの交換手技を時系列の3ステップで示すフローチャート。①患者に接続する前に早送りで回路を満たす②最も近い活栓（Codex 生成の概念図）_</p>
+<h2>⚖️ Vault内で結論が割れている論点</h2>
+<div class="tw"><table>
+<thead><tr><th>論点</th><th>一方の立場</th><th>もう一方の立場</th><th>今どう扱うか</th></tr></thead>
+<tbody>
+<tr><td>MAP目標を65より上げるか</td><td><span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>(術中80で臓器障害↓)／<span class="wl">心停止後の脳酸素化と最適平均動脈圧（自己調節能）</span>(最適MAPは平均89)</td><td><span class="wl">カテコラミンを最小化して組織灌流を最適化する — 血圧を上げることと灌流を改善することは別（総説・CritCare2019）</span>(自己調節閾値を超えたら灌流は増えない)／<span class="wl">HISTAP試験の腎保護はMAP 80のおかげか低血圧を避けたおかげか — AKIの判定基準と累積曝露量を示せという2つの要求（レター・ICM2026）</span>(対照群のドリフトで解釈に留保)／<span class="wl">高齢の敗血症性ショックで目標MAP 80-85は90日死亡を増やす — 39.3%対28.6%、慢性高血圧でも利益なし（OPTPRESS・ICM2025）</span>(65歳以上の敗血症性ショックで80–85は90日死亡↑)</td><td><strong>集団が違うだけで矛盾ではない</strong>。敗血症性ショックは65を既定に。術中高リスク・心停止後・脊髄損傷・<mark class="hl">HRS-1(ベースラインから＋15 mmHgという相対目標)</mark>は別の目標を持つ。<mark class="hl">昇圧薬だけで数字を作るのは著者自身が警告する使い方</mark></td></tr>
+<tr><td>バソプレシンを早く足すか</td><td><span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span>／<span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span>／<span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span>(唯一の前向きRCT。レニン・乳酸・ΔSOFA・不整脈が改善)</td><td><span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span>(腎保護仮説を否定)／同じTRICYCLEの死亡アウトカム(ICU 26.3%対41.5%・28日 36.8%対46.3%でいずれも有意差なし、感度解析で主要評価項目の有意性も消失)</td><td><strong>「立ち上げ」と「追加」は別の問い</strong>。VANISHが否定したのは前者。後者は支持されるが根拠は観察研究と、代替指標を主要評価項目にした79例のphase II 1本のみ。<mark class="hl">同じ試験が支持側と留保側の両方に立つ</mark>ので、生理指標と死亡を分けて引用する。この2本でプロトコルは変えない</td></tr>
+<tr><td>生理指標が良くなれば転帰も良くなるか</td><td><span class="wl">セレプレシン vs プラセボ（SEPSIS-ACT試験）</span>(MAP↑・NA 41%減・尿量改善)</td><td>同試験の転帰(人工呼吸器・昇圧薬フリー日数も90日死亡も不変、無益性中止)</td><td><strong>代用指標で薬を採用しない</strong>。この試験は「生理は動くが患者は変わらない」の教科書例として使う</td></tr>
+<tr><td>難治性ショックをどう定義するか</td><td>昇圧薬量(NEE&gt;0.5 µg/kg/分など)</td><td><span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span></td><td><strong>量だけで決めない</strong>。NEE&gt;0.5の7割強は6時間後に低灌流2要素を満たさない。3要素そろう3.9%だけが28日死亡73.6%。ただし==事前規定のない二次解析(n=53)で、新しい予測スコアではなく高特異度の濃縮ルール==</td></tr>
+<tr><td>難治性ショックに多剤を早期に重ねるか</td><td><span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span>(段階的増量をやめ、機序の違う薬を早く重ねてカテコラミンを節約する)</td><td>個々の救済療法の大規模RCTは陰性ないし中立(<span class="wl">HA-330血液吸着は敗血症性ショックの28日死亡を有意には減らさない — 高用量昇圧薬128例・早期中止（CLEANSE・CritCare2026）</span>ほか、レボシメンダン・プロスタサイクリン・高用量RRT)</td><td><strong>「増やす前に見直す3点」だけ先に採る</strong>。測定部位・鎮静・MAP目標はコストゼロで、根拠の弱さが害に直結しない。<mark class="hl">薬の重ね方は効果量が示されておらず、組み合わせの害を測った研究も無い</mark>ので、院内プロトコルには載せず議論のたたき台にとどめる</td></tr>
+<tr><td>バソプレシンの用量上限をどこに置くか</td><td>当院標準は0.03〜0.04 IU/分(<span class="wl">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</span>)</td><td><span class="wl">敗血症性ショックにおけるバソプレシンの実践 用量・タイミング・離脱（ICM2025）</span>(0.01開始・20分ごと0.005ずつ滴定・上限0.06まで許容)／<span class="wl">敗血症性ショックを手術室まで持たせる実践 — 0.25γで単剤を諦めバソプレシン0.03→0.06とステロイドを同時に足す（CLINICIANS CORNER・CCM2026）</span>(0.03開始・必要なら0.06まで、指趾虚血を監視。個人の実践で筆頭著者に企業COIあり)</td><td><strong>当院標準は変えない</strong>。文献間で上限に幅があるという事実は認識しつつ、0.06までの安全性データが確立するまでは0.03〜0.04を上限に据え置く</td></tr>
+</tbody></table></div>
+<h2>🧭 この領域の到達点</h2>
+<div class="call note"><span class="lab">補足</span>
+<p>Known / Unknown / What's new</p>
+<ul><li><strong>確立したこと</strong>：ノルアドレナリン第一選択。輸液の完了を待たずに開始してよい(多施設RCTのARISE FLUIDSでも末梢投与を含め安全性は裏づけられた)。MAP 65 mmHgが出発点。<mark class="hl">昇圧薬のRCTで28日死亡を有意に改善したものは1つも無い</mark>(ICM2019総説)——つまりこの領域の判断は「どれが勝つか」ではなく「害を最小にしてどう組むか」。<mark class="hl">心原性ショックでも同じで、ある血管作動薬が他に勝つことを示したRCTは1本も存在しない</mark>(<span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span>)——ここでも問いは「表現型に薬理を合わせる」形になる。ドパミンは用量依存的に死亡を増やし(JIPAD OR 1.46〜3.30)、昇圧目的で使う理由はない。</li><li><strong>まだ決着していないこと</strong>：①バソプレシンをいつ足すか(0.25 µg/kg/分・3時間以内という観察研究に加え、TRICYCLEが79例で前向き無作為化したが<mark class="hl">主要評価項目は代替指標のレニンで、死亡は不変、感度解析で有意性も消える</mark>)、②MAP目標を個別化できるか、③難治性ショックの定義、④第3の系(アンジオテンシンII)の位置づけ、⑤強心薬の選択(ドブタミンかミルリノンか＝DOREMIは「差が出なかった」だけで同等は示していない)、⑥難治性ショックへの血液吸着(CLEANSEは28日死亡58%→44%・RR 0.76［0.54–1.07］で有意差なしだが、<mark class="hl">計画206例に対し128例で資金枯渇による早期中止＝「効かない」ではなく「決着していない」</mark>)、⑦バソプレシンの用量上限(0.03〜0.06 IU/分の間で文献に幅がある)、⑧離脱の順序(<mark class="hl">全体推定OR 0.43［0.18–1.03］で差がつかず、観察研究OR 0.26とRCT OR 4.04が正反対を向く。GRADEは全7アウトカムvery low</mark>)、⑨難治性ショックで多剤を早期に併用したときの有効性と安全性(<mark class="hl">専門家意見と単施設経験に基づく手順は公開されたが、組み合わせの効果も相互作用の害も、どの試験でも測られていない</mark>)。</li><li><strong>最近変わったこと</strong>：これまで観察研究しかなかった「早期に多剤を重ねる」という戦略が、<strong>初めて前向きに無作為化された</strong>(<span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span>・79例)。NEE 0.15でAVPとAng IIを同時に開始するとレニン・乳酸の低下が速く、ΔSOFAが改善し、<mark class="hl">治療を要した頻脈性不整脈が15.6%対68.6%(調整OR 0.07)と激減した</mark>。一方で<mark class="hl">死亡は不変、主要評価項目は代替指標、感度解析で有意性は消失し、Ang IIは国内未承認</mark>。<mark class="hl">この領域の「新しさ」は依然として代替指標の上にしか乗っていない</mark>。CENSERなど単施設試験が示唆した「早期昇圧薬で転帰が良くなる」という仮説は、多施設RCT(ARISE FLUIDS・963例)で<mark class="hl">DAOH・死亡率いずれも差がつかず</mark>再現されなかった。<mark class="hl">「輸液制限＋早期昇圧薬」を画一的に押しつける根拠は無くなった</mark>一方、肺水腫は輸液優先群で有意に多く(5.0%対0.6%)、輸液量そのものへの配慮は引き続き必要。<strong>「血圧が上がった」と「灌流が良くなった」を切り離す</strong>方向にも揃ってきた。<span class="wl">高用量の昇圧薬は組織酸素化を下げる — MAPが保たれていても微小循環は悪化する（HySpec-ICU二次解析・CritCare2026）</span>は昇圧薬量が増えるほどStO₂が下がり、<mark class="hl">MAPはStO₂を全く予測しなかった</mark>(p=0.503)と報告した。難治性の定義も「昇圧薬の量」から「6時間かけても組織灌流が戻らないこと」へ動いている。受容体側の見方も整理され、ショックで言われる<strong>β3の「増加」は真のアップレギュレーションではなく、β1・β2が脱感作した結果の相対的な見かけ</strong>であることがはっきりした(<span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span>)。</li></ul>
+</div>
+<h2>🔬 研究のタネ（聖路加）</h2>
+<div class="call note"><span class="lab">question</span>
+<p>このテーマで著者たちが繰り返し残している問い</p>
+<ul><li>後ろ向きPSM・観察研究が中心で、施設の診療文化や医師の裁量による残存交絡を排除できない（<span class="wl">ドパミンは日本でまだ広く使われている — 5γを超えると死亡が増える（JIPAD 14594例・PSM 570ペア・CritCare2022）</span>／<span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span>）</li><li>JIPADには昇圧薬の用量・投与期間・タイミングの詳細がなく「使用の有無」だけの比較にとどまる（<span class="wl">非心臓手術後のノルアドレナリンはドパミンより死亡を減らさないがICU在室は1日短い（JIPAD 1230ペア・PSM・KoreanJAnesthesiol2023）</span>／<span class="wl">敗血症性ショックにおける血管収縮薬使用の実態調査</span>）</li><li>早期昇圧薬・早期バソプレシン追加の利益は観察研究やtarget trial emulationにとどまり、著者ら自身がRCTでの確認を求めている（<span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span>／<span class="wl">敗血症性ショックにおける血管収縮 — 昇圧薬は動脈だけに効いているのではない（What's New・ICM2024）</span>）</li><li>心原性ショックは「他剤に勝つ」ことを示したRCTが1本もなく比較有効性データが極めて限られている（<span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span>／<span class="wl">DOREMI試験 — 心原性ショックのミルリノンとドブタミンは主要複合アウトカムに差なし、ただし20ポイント差を想定した192例（DOREMI・NEJM2021）</span>）</li><li>単位表記（塩/基剤）・シリンジ交換手技・難治性ショックの定義など実務レベルの標準化がまだ検証されていない（<span class="wl">ノルアドレナリン投与の基本を押さえる（エディトリアル・ICM2024）</span>／<span class="wl">微量持続静注のシリンジポンプ患者安全10項目（EurJAnaesthesiol2023）</span>）</li></ul>
+</div>
+<div class="tw"><table>
+<thead><tr><th>研究案</th><th>データ源</th><th>由来ノート</th><th>実現性</th></tr></thead>
+<tbody>
+<tr><td>昇圧薬使用率・用量域・ICU/院内死亡の施設間ばらつきを施設固定効果モデルで可視化する</td><td>JIPAD</td><td><span class="wl">ショック患者に対する昇圧薬レビュー（ICM2019）</span>／<span class="wl">敗血症性ショックにおける血管収縮薬使用の実態調査</span> ほか10本</td><td>◎</td></tr>
+<tr><td>ドパミン頻用・非頻用施設を施設ランダム効果に組み込み、用量依存的な死亡増の頑健性を再検証する</td><td>JIPAD</td><td><span class="wl">ドパミンは日本でまだ広く使われている — 5γを超えると死亡が増える（JIPAD 14594例・PSM 570ペア・CritCare2022）</span></td><td>◎</td></tr>
+<tr><td>心原性ショックの機械的循環補助（IABP・Impella・VA-ECMO）使用率・強心薬選択の施設間ばらつきと院内死亡を確認する</td><td>JIPAD</td><td><span class="wl">心原性ショック管理の進歩 — SCAI分類・表現型・出口戦略で個別化する（Concise Definitive Review・CCM2023）</span>／<span class="wl">VA-ECMO導入後24時間のエピネフリンは院内生存を悪化させる — エピネフリン群25%対イノジレーター52%・無強心薬48%、231例の単施設後ろ向き（CritCare2019）</span></td><td>◎</td></tr>
+<tr><td>薬剤コード・投与日から昇圧薬の用量帯・併用パターン（早期多剤 vs 段階的増量）を復元し、量反応関係・院内死亡を検証する</td><td>JIPAD×DPC</td><td><span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span>／<span class="wl">カテコラミンを最小化して組織灌流を最適化する — 血圧を上げることと灌流を改善することは別（総説・CritCare2019）</span> ほか5本／<span class="wl">敗血症性ショックにおける血管収縮 — 昇圧薬は動脈だけに効いているのではない（What's New・ICM2024）</span>／<span class="wl">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</span></td><td>○</td></tr>
+<tr><td>ノルアドレナリン増量後のバソプレシン追加タイミングを5施設パイロット（聖路加含む）の投与日でtarget trial emulation的に検証する</td><td>JIPAD×DPC</td><td><span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span>／<span class="wl">敗血症性ショックでバソプレシンをいつ開始するか</span></td><td>○</td></tr>
+<tr><td>DPC連結で治療制限・退院後（同一病院）再入院・費用を補い、単施設・短期追跡という限界を検証する</td><td>JIPAD×DPC</td><td><span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span>／<span class="wl">心停止後ケアの焦点 — 32℃冷却・非STE即時冠動脈造影・PaCO2と酸素とMAP目標はいずれも中立、予後予測はNFL・NPi・白質FAが前進（エディトリアル・ICM2019）</span></td><td>○</td></tr>
+<tr><td>当院でバソプレシンを追加した時点のNEEを電子カルテから後ろ向きに実測し、TRICYCLE対照群の0.45 µg/kg/分と比較する（併せて治療を要した頻脈性不整脈の発生率を主要評価に置けるか検証）</td><td>聖路加</td><td><span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span></td><td>◎</td></tr>
+<tr><td>ノルアドレナリンの希釈濃度・単位表記（塩/基剤）を院内で点検・統一する</td><td>聖路加</td><td><span class="wl">ノルアドレナリン投与の基本を押さえる（エディトリアル・ICM2024）</span></td><td>◎</td></tr>
+<tr><td>PrimeGaia高頻度バイタルでMAPOPT近似・鎮静薬切替時の血行動態・離床時の対照群込み有害事象を記録する</td><td>聖路加</td><td><span class="wl">心停止後の脳酸素化と最適平均動脈圧（自己調節能）</span>／<span class="wl">プロポフォールをデクスメデトミジンに替えるとノルアドレナリンが減る — 0.69から0.30γ・中止8時間後も0.42γ（敗血症性ショック38例・クロスオーバー・CCM2019）</span></td><td>○</td></tr>
+<tr><td>HRS-1のMAP+15 mmHg目標・テルリプレシン対ノルアドレナリン選択の妥当性を電子カルテで検証する</td><td>聖路加</td><td><span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span></td><td>◎</td></tr>
+<tr><td>高用量昇圧薬下で橈骨と大腿のMAP乖離を前向きに実測し、大腿ライン切り替えが以後のノルアドレナリン用量を下げるかを見る</td><td>聖路加</td><td><span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span></td><td>○</td></tr>
+<tr><td>mottling・CRTの標準測定を前向きに導入し、予測性能と測定者間一致を検証する</td><td>聖路加</td><td><span class="wl">Mottlingスコアは昇圧薬量に関わらず敗血症の14日死亡を予測する — 1点ごとにオッズ2.26倍（259例・外部検証97例・CritCare2019）</span>／<span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span></td><td>△</td></tr>
+<tr><td>昇圧薬・強心薬の開始引き金・目標・中止基準の実態アンケートを国際調査と比較する</td><td>聖路加</td><td><span class="wl">敗血症性ショックにおける血管収縮薬使用の実態調査</span>／<span class="wl">循環性ショックの強心薬は84%がドブタミン — 引き金も目標もばらつく（ESICM会員839人・82か国の国際調査・AnnIntensiveCare2021）</span></td><td>◎</td></tr>
+<tr><td>難治性敗血症性ショックの代理定義（RRT・ECMO併用）による施設間ばらつきと、血液吸着療法の適応候補推計・国内試験のサンプルサイズ設計を検討する</td><td>JIPAD／JIPAD×DPC</td><td><span class="wl">HA-330血液吸着は敗血症性ショックの28日死亡を有意には減らさない — 高用量昇圧薬128例・早期中止（CLEANSE・CritCare2026）</span>／<span class="wl">CLEANSE試験は「陰性」ではなく「解釈不能」— 効果量の楽観・時刻0の非対称・アウトカム選択（Matters Arising・CritCare2026）</span></td><td>◎</td></tr>
+<tr><td>昇圧薬シリンジ交換手技・単位表記の標準化と、離床時の有害事象を対照群込みで検証する</td><td>聖路加</td><td><span class="wl">微量持続静注のシリンジポンプ患者安全10項目（EurJAnaesthesiol2023）</span>／<span class="wl">ノルアドレナリン投与中患者の離床は安全か（後方視コホート）</span></td><td>○</td></tr>
+<tr><td>ノルアドレナリン高用量閾値（0.5 µg/kg/min等）の妥当性と、高用量下の組織酸素化・微小循環悪化を自施設データで検証する</td><td>聖路加</td><td><span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span>／<span class="wl">高用量の昇圧薬は組織酸素化を下げる — MAPが保たれていても微小循環は悪化する（HySpec-ICU二次解析・CritCare2026）</span></td><td>○</td></tr>
+<tr><td>心原性ショックでの昇圧薬・強心薬選択（アドレナリン/ドブタミン/ミルリノン）と乳酸クリアランス・不整脈・院内死亡の関連を検証する</td><td>聖路加／JIPAD×DPC</td><td><span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span>／<span class="wl">DOREMI試験 — 心原性ショックのミルリノンとドブタミンは主要複合アウトカムに差なし、ただし20ポイント差を想定した192例（DOREMI・NEJM2021）</span></td><td>○</td></tr>
+<tr><td>ノルアドレナリン・バソプレシンの離脱順序と切り方（漸減か一気か）を統一定義の低血圧発生率で記述し、DPC連結で院内死亡・費用と関連づける</td><td>聖路加／JIPAD×DPC</td><td><span class="wl">敗血症性ショックでノルアドレナリンとバソプレシンのどちらを先に切るか — 全体はOR 0.43で差なし、観察研究とRCTで結論が真逆（11研究2,280例・メタ解析・CritCareSci2026）</span></td><td>◎</td></tr>
+<tr><td>術後・敗血症性ショックでのミドドリン処方の有無と昇圧薬離脱時間・ICU在室日数の関連を病態別に検証する</td><td>JIPAD×DPC</td><td><span class="wl">経口ミドドリンは静注昇圧薬の中止を早めない — 差1時間・徐脈は7.6%対0%（抄読会スライド・MIDAS ICM2020）</span></td><td>○</td></tr>
+<tr><td>術中・周術期の低血圧曝露時間とAKI発生の関連、および慢性高血圧例でのMAP目標運用を自施設データで検証する</td><td>聖路加</td><td><span class="wl">ショック蘇生の許容的低血圧（permissive hypotension） — 慢性高血圧やAKIを理由に早計に否定できない4つの論拠（What's New in Intensive Care・ICM2018）</span>／<span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span>／<span class="wl">HISTAP試験の腎保護はMAP 80のおかげか低血圧を避けたおかげか — AKIの判定基準と累積曝露量を示せという2つの要求（レター・ICM2026）</span></td><td>○</td></tr>
+<tr><td>早期昇圧薬・輸液制限が呼吸補助発生率・治療タイミングに与える影響をJIPAD・DPCで検証する</td><td>JIPAD／JIPAD×DPC</td><td><span class="wl">早期敗血症性ショックへの輸液制限＋早期昇圧薬は90日生存退院日数を増やさない — 肺水腫は0.6%対5.0%に減る（ARISE FLUIDS・NEJM2026）</span></td><td>◎</td></tr>
+<tr><td>外傷性出血性ショックへの少量バソプレシン併用や敗血症性ショックでのバソプレシン少量投与が臓器血流（腎・輸血量）に与える影響を自施設・DPCで検証する</td><td>聖路加／JIPAD×DPC</td><td><span class="wl">外傷性出血性ショックへの少量バソプレシン併用は48時間の輸血量を1.0L減らす — DVTも11%対34%、死亡は不変（AVERT Shock・JAMASurg2019）</span>／<span class="wl">敗血症性ショックへのバソプレシン少量投与で肝・腎血流は落ちない — 血圧132%・尿量350%に対し門脈105%・腎RI 100%（10例・日集中医誌2010）</span></td><td>○</td></tr>
+<tr><td>敗血症性ショック蘇生の個別化（表現型駆動・SOSD相・hypovolemia管理）の日本のcase-mixを記述し、アジア発データの空白を埋める</td><td>JIPAD</td><td><span class="wl">MAPを65から85に上げると循環反応は3通りに分かれる — 16%で心拍出量が24%低下、正体は心室動脈カップリングの悪化（32例・前向き生理学研究・CritCare2026）</span>／<span class="wl">敗血症性ショック蘇生の25年 — 単一固定指標から生理学ガイド・表現型駆動へ（概念的展望2026）</span>／<span class="wl">敗血症性ショックの血行動態管理を個別化する — SOSD 4相ごとのモニタリングと治療（総説・CritCare2022）</span>／<span class="wl">敗血症のhypovolemia管理 — 輸液は250〜500 mLずつ・改善しなければ止め、安定したら制限と負バランスへ（エキスパートステートメント・ICM2018）</span>／<span class="wl">敗血症性ショック管理の課題（ナラティブレビュー）</span></td><td>◎</td></tr>
+<tr><td>術後昇圧薬選択（NE対ドパミン）の用量・期間別効果、肝硬変合併敗血症へのアルブミン投与タイミング、非カテコラミン系昇圧薬の早期導入余地を検証する</td><td>JIPAD×DPC／聖路加</td><td><span class="wl">非心臓手術後のノルアドレナリンはドパミンより死亡を減らさないがICU在室は1日短い（JIPAD 1230ペア・PSM・KoreanJAnesthesiol2023）</span>／<span class="wl">セレプレシン vs プラセボ（SEPSIS-ACT試験）</span>／<span class="wl">肝硬変合併敗血症のアルブミン投与は「いつ始めるか」で効果が変わる（MIMIC-IV 2265例・周辺構造モデル・CritCare2023）</span>／<span class="wl">腹水・SBP・肝腎症候群の診断と管理 — LVPのアルブミン6〜8g・SBPは1.5→1g kg・HRS-AKIはテルリプレシンかノルアドレナリン（AASLDガイダンス・Hepatology2021）</span></td><td>○</td></tr>
+</tbody></table></div>
+<p><strong>このテーマの空白</strong>：JIPADに用量・投与タイミング・治療制限・長期転帰・費用の情報がなく、早期昇圧薬効果や難治性ショック定義の検証にはDPC連結か聖路加の追加収集が要る。総説の多くが欧米・ラテンアメリカ中心で構成され、アジア（日本）発のデータ・著者がほぼ不在。心原性ショックの比較有効性データと、受容体密度をベッドサイドで評価する手法はJIPAD・DPCのどちらにもなく、前向きの新規収集を要する。</p>
+<h2>🗺️ 小分類マップ</h2>
+<p><strong>総説・全体像</strong></p>
+<ul><li><span class="wl">ショック患者に対する昇圧薬レビュー（ICM2019）</span> — 第一選択・追加・離脱の順序の基本形</li><li><span class="wl">敗血症性ショックの血行動態管理 — 昇圧薬・輸液・難治性ショックの総説（熱傷外傷も視野・BurnsTrauma2025）</span></li><li><span class="wl">敗血症性ショックにおける血管収縮 — 昇圧薬は動脈だけに効いているのではない（What's New・ICM2024）</span></li><li><span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span> — <mark class="hl">なぜ効かなくなるのか</mark>(脱感作・下流シグナル・ミトコンドリア)</li><li><span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span></li><li><span class="wl">敗血症性ショックの血行動態管理を個別化する — SOSD 4相ごとのモニタリングと治療（総説・CritCare2022）</span> — 「今どの相か」を宣言してから目標を選ぶ</li><li><span class="wl">敗血症性ショック蘇生の25年 — 単一固定指標から生理学ガイド・表現型駆動へ（概念的展望2026）</span></li><li><span class="wl">敗血症性ショック管理の課題（ナラティブレビュー）</span> ／ <span class="wl">血圧を守る昇圧薬ツールボックス ICU Toolbox 2017</span></li><li><span class="wl">敗血症性ショックの昇圧薬は単剤の優劣から個別化へ — 25年の3つの転換、ノルアド0.25〜0.5γで機序の違う薬を足す（総説・Shock2026）</span> — 25年を「EGDT→ノルアド第一選択→脱カテコラミン化」の3転換で整理。NED 0.25〜0.5で機序の違う薬を足し、0.75を警告線とする判断フロー。新データなし・用量記載はほぼなし</li></ul>
+<p><strong>昇圧薬を「どこで」使うか（ICU体制）</strong></p>
+<ul><li><span class="wl">特定集中治療室管理料1・2のICUはICU死亡が0.4%低い — 効果が出るのは非手術・昇圧薬・人工呼吸の患者だけ（DPC 79万例・操作変数法・JMAJ2021）</span> — 高強度ICUの利益は昇圧薬を要する患者に集中する（DPC・操作変数法）</li></ul>
+<p><strong>開始タイミング</strong></p>
+<ul><li><span class="wl">CENSER 敗血症性ショックへの早期ノルアドレナリン投与（AJRCCM2019）</span></li><li><span class="wl">早期敗血症性ショックへの輸液制限＋早期昇圧薬は90日生存退院日数を増やさない — 肺水腫は0.6%対5.0%に減る（ARISE FLUIDS・NEJM2026）</span> — CENSERのシグナルを多施設963例で検証した中立試験。DAOH・死亡は差なし、肺水腫のみ有意差</li><li><span class="wl">敗血症性ショックにおける早期ノルアドレナリン開始（CCM2019）</span> — CENSERと同一試験の重複ノート。統合済みでリダイレクトとして残す</li><li><span class="wl">ショック蘇生の許容的低血圧（permissive hypotension） — 慢性高血圧やAKIを理由に早計に否定できない4つの論拠（What's New in Intensive Care・ICM2018）</span></li><li><span class="wl">肝硬変合併敗血症のアルブミン投与は「いつ始めるか」で効果が変わる（MIMIC-IV 2265例・周辺構造モデル・CritCare2023）</span> — 昇圧薬ではないが、<mark class="hl">「何を使うか」より「いつ始めるか」</mark>という同型の問い(肝硬変合併例)</li><li><span class="wl">ドパミンは日本でまだ広く使われている — 5γを超えると死亡が増える（JIPAD 14594例・PSM 570ペア・CritCare2022）</span> — 「早く始める薬」の裏返しとして「いつまでも使わない薬」を示す</li></ul>
+<p><strong>バソプレシン系</strong></p>
+<ul><li><span class="wl">バソプレシン系の調節 — 分布性ショックと心原性ショックでの理論と実践（総説・JCM2026）</span> — 死亡を下げる薬ではなく<strong>カテコラミン負荷を減らす薬</strong></li><li><span class="wl">敗血症性ショックでバソプレシンをいつ開始するか</span> ／ <span class="wl">敗血症性ショックにおけるバソプレシンの実践 用量・タイミング・離脱（ICM2025）</span></li><li><span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span></li><li><span class="wl">早期から昇圧薬3剤を同時に使うとレニンと乳酸の低下が速い — 頻脈性不整脈は15.6%対68.6%、死亡は不変（RCT・TRICYCLE・CritCare2026）</span> — <mark class="hl">「早期バランス型」を初めて前向きに無作為化した79例のphase II</mark>。NEE 0.15でAVP＋Ang IIを同時開始し、レニン−2.61対−1.67%/時・乳酸−1.53対−1.01%/時・ΔSOFA −3対0、頻脈性不整脈15.6%対68.6%(調整OR 0.07)。<mark class="hl">死亡は不変(ICU 26.3%対41.5%)、主要評価項目は代替指標、ランダム傾きの感度解析で有意性は消失、Ang IIは国内未承認</mark>。当院が使えるのは対照群のAVP開始点(NEE中央値0.45 µg/kg/分)という比較対象のほう</li><li><span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span> ／ <span class="wl">敗血症性ショックに対するバソプレシン（VASST・VANISH・VANCS・NEJM2008）</span></li><li><span class="wl">バソプレシンの臨床適応レビュー — 敗血症性ショック以外に肺塞栓・静脈瘤出血・外傷性出血性ショック（ClinExpEmergMed2025）</span></li><li><span class="wl">バソプレシン使用の10の要点 — 敗血症性ショックと心臓術後血管麻痺性ショックの2適応（レビュー・MedIntensiva2024）</span></li><li><span class="wl">セレプレシン vs プラセボ（SEPSIS-ACT試験）</span> ／ <span class="wl">セレプレシン vs プラセボ（敗血症性ショック・SEPSIS-ACT, JAMA2019）</span></li><li><span class="wl">敗血症性ショックを手術室まで持たせる実践 — 0.25γで単剤を諦めバソプレシン0.03→0.06とステロイドを同時に足す（CLINICIANS CORNER・CCM2026）</span> — 同じ症例に集中治療医と薬剤師が別々に回答し、2人ともバソプレシン＋ステロイド同時追加を選択。AVP 0.03→0.06 U/分、ヒドロコルチゾン50 mg 6時間ごとを2剤目と同時に開始・漸減なし、肘窩より中枢なら末梢投与可。個人の実践で、筆頭著者に昇圧薬関連企業のCOI</li><li><span class="wl">敗血症性ショックへのバソプレシン少量投与で肝・腎血流は落ちない — 血圧132%・尿量350%に対し門脈105%・腎RI 100%（10例・日集中医誌2010）</span> ／ <span class="wl">強化学習で導いたバソプレシン開始ルール（JAMA2025）</span></li><li><span class="wl">外傷性出血性ショックへの少量バソプレシン併用は48時間の輸血量を1.0L減らす — DVTも11%対34%、死亡は不変（AVERT Shock・JAMASurg2019）</span> ／ <span class="wl">敗血症性ショックの一過性低血圧にプッシュドーズ・バソプレシン（症例報告・JEmergMed2020）</span></li></ul>
+<p><strong>用量・投与の実務</strong></p>
+<ul><li><span class="wl">ノルアドレナリン投与の基本を押さえる（エディトリアル・ICM2024）</span></li><li><span class="wl">ノルアドレナリンの用量表記は塩か基剤か — 32か国の添付文書を調べた（Correspondence・ICM2023）</span></li><li><span class="wl">ノルアドレナリンの用量表記問題にはタスクフォースが必要（Correspondence・ICM2023）</span> — 用量はショック重症度の「通貨」でもある</li><li><span class="wl">微量持続静注のシリンジポンプ患者安全10項目（EurJAnaesthesiol2023）</span></li><li><span class="wl">非心臓手術後のノルアドレナリンはドパミンより死亡を減らさないがICU在室は1日短い（JIPAD 1230ペア・PSM・KoreanJAnesthesiol2023）</span></li><li><span class="wl">プッシュドーズ昇圧薬は安全で有効 — フェニレフリン55.9%・アドレナリン71.8%が反応（1727例・後ろ向き・AmJEmergMed2022）</span></li><li><span class="wl">敗血症性ショックにおける血管収縮薬使用の実態調査</span></li></ul>
+<p><strong>灌流をどう見るか(血圧ではなく)</strong></p>
+<ul><li><span class="wl">MAPを65から85に上げると循環反応は3通りに分かれる — 16%で心拍出量が24%低下、正体は心室動脈カップリングの悪化（32例・前向き生理学研究・CritCare2026）</span> — <mark class="hl">昇圧テストを「目標達成の手技」から「循環のストレステスト」へ読み替えた1本</mark>。到達MAPが同じでもCOはflow recruitment 31%／stable flow 53%／flow deterioration 16%に分かれ、落ちる群の正体はEaの上昇にEesが追随しないカップリング悪化(ΔEa/Ees +0.22対−0.12)。<mark class="hl">落ちるのは心機能不良例ではなく「高流量・低後負荷」で回っていた例</mark>で、==CRT(p=0.418)も乳酸(p=0.166)も差を出さない==。拾うには昇圧前後のLVOT VTI。32例・単施設・転帰なし</li><li><span class="wl">高用量の昇圧薬は組織酸素化を下げる — MAPが保たれていても微小循環は悪化する（HySpec-ICU二次解析・CritCare2026）</span></li><li><span class="wl">カテコラミンを最小化して組織灌流を最適化する — 血圧を上げることと灌流を改善することは別（総説・CritCare2019）</span></li><li><span class="wl">Mottlingスコアは昇圧薬量に関わらず敗血症の14日死亡を予測する — 1点ごとにオッズ2.26倍（259例・外部検証97例・CritCare2019）</span></li><li><span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span></li></ul>
+<p><strong>難治性ショックへの上乗せ療法</strong></p>
+<ul><li><span class="wl">難治性敗血症性ショックへの実践的アプローチ2026 — カテコラミンを増やさず多剤を早く重ねる（実践的レビュー・JAnesthAnalgCritCare2026）</span> — 英国の専門センターが自施設の手順を用量・閾値つきで公開。<mark class="hl">0.2 γを「立ち止まる時刻」にしてステロイド→バソプレシン(上限0.04 IU/分)→ミルリノン→第3の系、と早く重ねる</mark>。増量の前に測定部位(<mark class="hl">橈骨は大腿より最大13 mmHg低い</mark>)・鎮静・MAP目標を見直す。<mark class="hl">効果量も信頼区間も一切なく、多くは専門家意見と自施設経験</mark>。陰性RCTを「対象集団が違う」で回避する論法が3回繰り返される点は要注意</li><li><span class="wl">HA-330血液吸着は敗血症性ショックの28日死亡を有意には減らさない — 高用量昇圧薬128例・早期中止（CLEANSE・CritCare2026）</span> — タイ多施設・非盲検RCT。NA≥0.2 µg/kg/分の128例、28日死亡58%→44%(RR 0.76、95%CI 0.54–1.07、P=0.16)。VIS・MAP・CRP・IL-6は全時点で差なし。<mark class="hl">資金枯渇による早期中止(計画206例→128例)で検出力不足</mark>。JCでは「有意でない主要アウトカム＋有意なpost-hoc調整モデル」をどう読むかの教材として使える</li></ul>
+<p><strong>強心薬・心原性ショック</strong></p>
+<ul><li><span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span> — <mark class="hl">「勝つ薬」を探すのをやめ、表現型(classic LV優位／血管拡張合併／正常血圧／RV優位／動的LVOT閉塞)に薬理を合わせる4ステップ</mark>。低血圧CSはinopressorでMAP 65〜75・CI&gt;2.2、灌流が足りて低血圧ならバソプレシン追加、RV優位の1剤目はバソプレシンでフェニレフリンは回避。<mark class="hl">用量域・SCAI病期の定義・MCS導入基準は扱っていない</mark></li><li><span class="wl">DOREMI試験 — 心原性ショックのミルリノンとドブタミンは主要複合アウトカムに差なし、ただし20ポイント差を想定した192例（DOREMI・NEJM2021）</span></li><li><span class="wl">循環性ショックの強心薬は84%がドブタミン — 引き金も目標もばらつく（ESICM会員839人・82か国の国際調査・AnnIntensiveCare2021）</span></li><li><span class="wl">心原性ショックの管理 — 診断からデバイスまで、SCAI分類とPAC表現型でtMCSを選ぶ（CHESTCritCare2024）</span></li><li><span class="wl">心原性ショック管理の進歩 — SCAI分類・表現型・出口戦略で個別化する（Concise Definitive Review・CCM2023）</span></li><li><span class="wl">蘇生後ショックの病態生理と治療 — 心筋障害と敗血症様の血管麻痺が重なり、最適MAP目標は不明のまま（総説・AnnIntensiveCare2020）</span></li><li><span class="wl">重症患者へのβ遮断薬は死亡を減らす — 11試験2103例でRR 0.65、昇圧薬負荷は増えず（SR・メタ解析・AnnMed2022）</span></li><li><span class="wl">VA-ECMO導入後24時間のエピネフリンは院内生存を悪化させる — エピネフリン群25%対イノジレーター52%・無強心薬48%、231例の単施設後ろ向き（CritCare2019）</span></li></ul>
+<p><strong>血圧目標が敗血症と違う集団</strong></p>
+<ul><li><span class="wl">高齢の敗血症性ショックで目標MAP 80-85は90日死亡を増やす — 39.3%対28.6%、慢性高血圧でも利益なし（OPTPRESS・ICM2025）</span> — 敗血症性ショック側の反証RCT。日本29施設・65歳以上516例で目標MAP 80–85は65–70より90日死亡39.3%対28.6%（リスク差10.7、95%CI 2.6–18.9）、慢性高血圧（53%）でも利益なし。<mark class="hl">有害で早期中止＝効果量は過大の可能性</mark>。昇圧薬累積量は高目標群で多く（NE 15.6対9.6 mg）</li><li><span class="wl">高リスク高血圧患者の術中MAP目標は80が65に勝る — ただし減ったのはAKIN 1・2度だけで死亡は不変（HISTAP・多施設RCT・ICM2026）</span></li><li><span class="wl">HISTAP試験の腎保護はMAP 80のおかげか低血圧を避けたおかげか — AKIの判定基準と累積曝露量を示せという2つの要求（レター・ICM2026）</span> — HISTAP本体への批判レター。対照群の実測MAPが77だった問題を指摘</li><li><span class="wl">心停止後の脳酸素化と最適平均動脈圧（自己調節能）</span></li><li><span class="wl">急性脊髄損傷の血行動態管理ガイドライン — MAP目標は85から「75-80以上・90-95以下」へ、期間は3-7日（AOSpine・GlobalSpineJ2024）</span></li><li><span class="wl">肝腎症候群（HRS-1）治療の現在地 — テルリプレシンとノルアドレナリンが二本柱、目標はMAP＋15 mmHg、アルブミンの漫然投与はやめる（総説・JASN2026）</span> — <mark class="hl">目標が絶対値ではなく<strong>ベースラインからMAP＋15 mmHg</strong>という相対値になる唯一の集団</mark>。テルリプレシンとノルアドレナリンは有効性ほぼ互角(頭対頭メタ解析・プールn=486)で、選ぶ基準は安全性とICU病床・中心静脈路の有無(<mark class="hl">テルリプレシンは6時間ごとの静注ボーラスで一般病棟でも投与でき、ICUも中心静脈路も要らない</mark>)。<mark class="hl">テルリプレシンの最大の落とし穴は呼吸不全(CONFIRM試験でプラセボより多い)——低酸素・肺浸潤影／肺水腫・左室収縮／拡張障害・ACLF grade 3・Cr&gt;5.0 mg/dL・進行中の虚血があれば使わない</mark>。<strong>総説であり頭対頭RCTの新規データではない</strong></li></ul>
+<p><strong>離脱・併用</strong></p>
+<ul><li><span class="wl">経口ミドドリンは静注昇圧薬の中止を早めない — 差1時間・徐脈は7.6%対0%（抄読会スライド・MIDAS ICM2020）</span></li><li><span class="wl">敗血症性ショックでノルアドレナリンとバソプレシンのどちらを先に切るか — 全体はOR 0.43で差なし、観察研究とRCTで結論が真逆（11研究2,280例・メタ解析・CritCareSci2026）</span> — <mark class="hl">「どちらを先に切るか」は決まらない</mark>。観察研究とRCTが真逆を向く理由として、著者らはバソプレシンの急な中止と漸減の違いを挙げている</li><li><span class="wl">ノルアドレナリン投与中患者の離床は安全か（後方視コホート）</span> ／ <span class="wl">ノルアドレナリン投与中患者の離床は安全か（後ろ向きコホート）</span></li><li><span class="wl">プロポフォールをデクスメデトミジンに替えるとノルアドレナリンが減る — 0.69から0.30γ・中止8時間後も0.42γ（敗血症性ショック38例・クロスオーバー・CCM2019）</span></li><li><span class="wl">救急・集中治療領域の重症患者の栄養療法 — 早期経腸は48時間以内、ノルアドレナリン0.2μg超では遅らせる（総説・外科と代謝栄養2022）</span></li><li><span class="wl">心停止後ケアの焦点 — 32℃冷却・非STE即時冠動脈造影・PaCO2と酸素とMAP目標はいずれも中立、予後予測はNFL・NPi・白質FAが前進（エディトリアル・ICM2019）</span> — 心停止後のMAP目標(高め対標準)は中立というエディトリアルの整理。昇圧薬で血圧を上げる根拠の弱さ</li><li><span class="wl">敗血症のhypovolemia管理 — 輸液は250〜500 mLずつ・改善しなければ止め、安定したら制限と負バランスへ（エキスパートステートメント・ICM2018）</span> — 輸液を止める判断とセットで昇圧薬を考える枠組み。末梢からのノルアドは肘窩より中枢の太い静脈へ数時間のみという条件付き</li><li><span class="wl">腹水・SBP・肝腎症候群の診断と管理 — LVPのアルブミン6〜8g・SBPは1.5→1g kg・HRS-AKIはテルリプレシンかノルアドレナリン（AASLDガイダンス・Hepatology2021）</span> — HRS-AKI でテルリプレシンが使えないときの<strong>ノルアドレナリン 0.5 mg毎時からの漸増</strong>（MAP +10〜15 mmHg 目標）</li></ul>
+<h2>📌 まずこの10本</h2>
+<ol><li><span class="wl">ショック患者に対する昇圧薬レビュー（ICM2019）</span> — 全体の骨格。「死亡を改善したRCTは1つも無い」という前提を持つ</li><li><span class="wl">ショックで昇圧薬が効かなくなる理由 — アドレナリン受容体の脱感作とβ3の相対的増加（Understanding the Disease・ICM2026）</span> — <mark class="hl">すべての章の土台になる受容体薬理</mark></li><li><span class="wl">CENSER 敗血症性ショックへの早期ノルアドレナリン投与（AJRCCM2019）</span> — 「早く始める」の根拠になった単一のRCT</li><li><span class="wl">血管拡張性ショックの昇圧薬 選択とタイミング — 段階的から早期バランス型へ（総説・CritCare2022）</span> — 早期・多系統併用という現在の考え方</li><li><span class="wl">ノルアドレナリン0.25γ到達後のバソプレシンは3時間以内のほうが28日死亡が5ポイント低い（MIMIC-IV・eICU 3810例・target trial emulation・ICM2026）</span> — 「2剤目をいつ足すか」の最新データ</li><li><span class="wl">カテコラミンを最小化して組織灌流を最適化する — 血圧を上げることと灌流を改善することは別（総説・CritCare2019）</span> — <mark class="hl">MAP目標を上げたくなったとき最初に読む</mark></li><li><span class="wl">難治性敗血症性ショックは昇圧薬量だけでは決まらない — CRTと乳酸を足すと死亡73.6%の集団が見える（ANDROMEDA-SHOCK-2二次解析・ICM2026）</span> — 難治性の定義を量から軌跡へ変えた1本</li><li><span class="wl">VANISH試験 敗血症性ショックでのバソプレシンvsノルアドレナリン（JAMA2016）</span> — 何が否定され何が否定されていないか</li><li><span class="wl">心原性ショックの昇圧薬をどう選ぶか — 表現型に薬理を合わせる4ステップ（Clinical Primer・Circulation2026）</span> — 心原性ショックで「勝つ薬」を探すのをやめる視点</li><li><span class="wl">微量持続静注のシリンジポンプ患者安全10項目（EurJAnaesthesiol2023）</span> — <mark class="hl">明日から事故が減る1本</mark></li></ol>
+<h2>🏠 関連するトピックHome</h2>
+<ul><li><span class="wl">💧 敗血症の初期蘇生 Home</span> — 輸液の種類と量</li><li><span class="wl">🌊 輸液反応性と血行動態モニタリング Home</span> — 昇圧薬に移る前に「入れるか」を決める道具</li><li><span class="wl">🧴 ステロイドをいつ使うか Home</span> — 難治性ショックの補助療法</li><li><span class="wl">❤️ 循環器 Home</span> — 強心薬・心原性ショックの細部と循環器全体の地図</li><li><span class="wl">❤️‍🩹 心停止後ケアと神経予後予測 Home</span> — 蘇生後ショックのMAP目標</li><li><span class="wl">🔊 POCUS・重症エコー Home</span> — 心機能評価と灌流の確認</li></ul>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+</footer>
+</div>
+<button class="pdf-btn" onclick="window.print()" title="印刷ダイアログで「PDF に保存」を選ぶ">📄 PDF</button>
+<div class="lb" id="lb" role="dialog" aria-label="図の拡大表示"><span class="lbx" title="閉じる（Esc）">×</span><img alt=""><div class="lbcap"></div></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var im=lb.querySelector('img'), cap=lb.querySelector('.lbcap');
+  function close(){lb.classList.remove('on','full'); im.removeAttribute('src'); document.body.style.overflow='';}
+  function open(src,text){im.src=src; cap.textContent=text||''; lb.classList.add('on'); lb.classList.remove('full'); document.body.style.overflow='hidden';}
+  document.querySelectorAll('.jc figure.origfig img, .jc img.flow').forEach(function(el){
+    el.addEventListener('click',function(){
+      var fc=el.closest('figure'); var t=fc&&fc.querySelector('figcaption')?fc.querySelector('figcaption').textContent:(el.alt||'');
+      open(el.currentSrc||el.src, t+'　（クリックで原寸⇄全体表示、背景クリックか Esc で閉じる）');
+    });
+  });
+  im.addEventListener('click',function(e){e.stopPropagation(); lb.classList.toggle('full');});
+  lb.addEventListener('click',function(e){ if(e.target!==im) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
+})();
+if(location.hash==='#pdf'){window.addEventListener('load',function(){setTimeout(function(){window.print();},500);});}
+</script>
+</body>
+</html>
