@@ -155,7 +155,7 @@
 /* フッタ */
 .jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
   color:var(--faint);font-size:12.5px;line-height:1.7}
-.theme-toggle{position:fixed;top:14px;right:14px;z-index:20;
+.theme-toggle{position:fixed;top:14px;right:98px;z-index:20;   /* 📄 PDF ボタン（right:14px）の左隣。以前は right:14px で PDF と重なっていた */
   font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
   border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
 @media (max-width:640px){
@@ -172,39 +172,93 @@
   .jc h2{break-after:avoid}
   .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
 }
+
+/* ── 左固定の目次バー（2026-09-26・お手本は ICU年次レポートの tocify）──
+   wrap_standalone() が h2/h3 から <nav class="toc"> を作り、.jc に has-toc を付ける。
+   ≥900px：左に固定、本文は右へ寄せる。<900px：畳んで左上の「☰ 目次」で開閉（ドロワー）。
+   印刷・#pdf：目次を消して本文を全幅に。 */
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper)}
+.jc.has-toc h2[id],.jc.has-toc h3[id]{scroll-margin-top:18px}
+.jc .toc{position:fixed;top:0;left:0;bottom:0;width:272px;z-index:15;overflow-y:auto;
+  overscroll-behavior:contain;background:var(--panel);border-right:1px solid var(--line);
+  padding:26px 12px 40px 14px;font-size:13px;line-height:1.55;letter-spacing:0}
+.jc .toc .toc-ttl{font-family:var(--mincho);font-size:12px;letter-spacing:.22em;font-weight:700;
+  color:var(--teal-ink);margin:0 0 4px 8px}
+.jc .toc .toc-doc{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 14px 8px;
+  padding-bottom:12px;border-bottom:1px solid var(--line)}
+.jc .toc ul{list-style:none;margin:0;padding:0}
+.jc .toc li{margin:0;padding:0}
+.jc .toc li::before{content:none}
+.jc .toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px 5px 10px;
+  border-radius:0 6px 6px 0;box-shadow:inset 3px 0 0 transparent}
+.jc .toc a:hover{background:var(--panel2);color:var(--teal-ink)}
+.jc .toc .t2>a{font-weight:600}
+.jc .toc .t2+.t2{margin-top:2px}
+.jc .toc ul.sub{display:none;margin:1px 0 6px}
+.jc .toc li.open>ul.sub{display:block}
+.jc .toc ul.sub a{padding:3px 8px 3px 24px;font-size:12.3px;color:var(--muted);font-weight:400}
+.jc .toc a.active{background:linear-gradient(90deg,var(--teal-tint),transparent);
+  box-shadow:inset 3px 0 0 var(--teal);color:var(--teal-ink);font-weight:700}
+.jc .toc ul.sub a.active{color:var(--teal-ink)}
+.jc .toc li.open>a:not(.active){color:var(--teal-ink)}
+.toc-btn{display:none;position:fixed;top:14px;left:14px;z-index:25;font:inherit;font-size:12.5px;
+  font-weight:700;color:var(--teal-ink);background:var(--paper);border:1px solid var(--line);
+  border-radius:20px;padding:7px 14px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.toc-scrim{display:none}
+@media (min-width:900px){
+  .jc.has-toc{padding-left:272px}
+}
+@media (max-width:899.98px){
+  .toc-btn{display:block}
+  .jc .toc{width:min(84vw,320px);transform:translateX(-102%);transition:transform .2s ease;
+    z-index:40;box-shadow:0 10px 40px rgba(0,0,0,.25);padding-top:64px}
+  .toc-open .jc .toc{transform:none}
+  .toc-open .toc-scrim{display:block;position:fixed;inset:0;z-index:35;background:rgba(10,20,26,.45)}
+  .toc-open .toc-btn{z-index:45}
+  .jc.has-toc h2[id],.jc.has-toc h3[id]{scroll-margin-top:62px}
+  .jc.has-toc header.masthead{padding-top:64px}
+}
+@media print{
+  .jc .toc,.toc-btn,.toc-scrim{display:none!important}
+  .jc.has-toc{padding-left:0!important}
+  html{scroll-behavior:auto}
+}
+.pdfmode .jc .toc,.pdfmode .toc-btn,.pdfmode .toc-scrim{display:none!important}
+.pdfmode .jc.has-toc{padding-left:0!important}
 </style>
 </head>
 <body>
-<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:12px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media print{.jcbar{display:none}}</style>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:196px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media (max-width:899.98px){.jcbar{top:auto;bottom:14px;right:14px}.jcbar .jcbtn{box-shadow:0 1px 3px rgba(0,0,0,.2)}}@media print{.jcbar{display:none}}</style>
 
+<button class="toc-btn" type="button" aria-controls="toc" aria-expanded="false">☰ 目次</button>
+<div class="toc-scrim"></div>
 
 <button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
-<div class="jc">
+<div class="jc has-toc">
+<nav class="toc" id="toc" aria-label="目次"><p class="toc-ttl">目次</p><p class="toc-doc">💨 HFNC（高流量鼻カニュラ） Home</p><ul><li class="t2"><a href="#sec-1">📖 3分概観（ブログ版）</a><ul class="sub"><li class="t3"><a href="#sec-1-1">このテーマの流れ</a></li><li class="t3"><a href="#sec-1-2">結論が出ていること／いないこと</a></li><li class="t3"><a href="#sec-1-3">✅ 3行まとめ</a></li><li class="t3"><a href="#sec-1-4">❓ セルフチェック（想起用）</a></li></ul></li><li class="t2"><a href="#sec-2">🏥 当院の標準（迷ったらこれ）</a></li><li class="t2"><a href="#sec-3">📋 早見表</a><ul class="sub"><li class="t3"><a href="#sec-3-1">病態別の一手（HFNCの視点で ATS 2026・ERS 2022 を並べる）</a></li><li class="t3"><a href="#sec-3-2">設定の早見表（ノートに書かれた値だけ）</a></li><li class="t3"><a href="#sec-3-3">失敗の閾値と時間</a></li></ul></li><li class="t2"><a href="#sec-4">1. HFNCとは何か — 装置と生理学的効果（メリット）</a></li><li class="t2"><a href="#sec-5">2. 流量・FiO₂・温度の設定 — 病態・状況ごとに「どの設定で効いたか」</a><ul class="sub"><li class="t3"><a href="#sec-5-1">2-1. 流量は「何を直したいか」で決める — 生理研究の答え</a></li><li class="t3"><a href="#sec-5-2">2-2. 病態・状況ごとの設定表 — 有効性を示した試験と中立・陰性だった試験</a></li><li class="t3"><a href="#sec-5-3">2-3. 病態別の推奨初期設定（ノートに書かれた範囲で）</a></li><li class="t3"><a href="#sec-5-4">2-4. 温度・FiO₂・期間とウィーニング</a></li><li class="t3"><a href="#sec-5-5">2-5. 気管チューブ・気管切開孔からの高流量 — 呼気ポート径が圧を決める</a></li></ul></li><li class="t2"><a href="#sec-6">3. デメリット・限界・リスク</a></li><li class="t2"><a href="#sec-7">4. 適応① de novo急性低酸素性呼吸不全</a><ul class="sub"><li class="t3"><a href="#sec-7-1">主要試験・メタ解析</a></li></ul></li><li class="t2"><a href="#sec-8">5. 適応② 免疫不全患者</a><ul class="sub"><li class="t3"><a href="#sec-8-1">主要試験</a></li></ul></li><li class="t2"><a href="#sec-9">6. 適応③ 高CO₂血症性呼吸不全・AECOPD</a><ul class="sub"><li class="t3"><a href="#sec-9-1">30 L毎分は本当に必要か — COPD試験の実際の設定</a></li><li class="t3"><a href="#sec-9-2">主要試験・ガイドライン</a></li></ul></li><li class="t2"><a href="#sec-10">7. 適応④ 抜管後 — 予防的使用と気管切開・SBT中の高流量</a><ul class="sub"><li class="t3"><a href="#sec-10-1">主要試験・メタ解析</a></li></ul></li><li class="t2"><a href="#sec-11">8. 適応⑤ 挿管前酸素化と無呼吸酸素化</a><ul class="sub"><li class="t3"><a href="#sec-11-1">主要試験</a></li></ul></li><li class="t2"><a href="#sec-12">9. 適応⑥ 術後・敗血症・外傷・COVID-19・その他の特殊集団</a></li><li class="t2"><a href="#sec-13">10. 失敗の見極めと挿管のタイミング — ROX指数</a><ul class="sub"><li class="t3"><a href="#sec-13-1">モニタリングツールの比較</a></li></ul></li><li class="t2"><a href="#sec-14">11. NIVとの使い分け・併用</a></li><li class="t2"><a href="#sec-15">12. 実際の使い方のサマリー — 開始から挿管判断まで</a></li><li class="t2"><a href="#sec-16">13. エビデンスのまとめ — ガイドライン・RCT・メタ解析の年表</a></li><li class="t2"><a href="#sec-17">⚖️ Vault内で結論が割れている論点</a></li><li class="t2"><a href="#sec-18">🧭 この領域の到達点</a></li><li class="t2"><a href="#sec-19">🔬 研究のタネ（聖路加）</a></li><li class="t2"><a href="#sec-20">🗺️ 小分類マップ</a><ul class="sub"><li class="t3"><a href="#sec-20-1">基礎・生理・設定</a></li><li class="t3"><a href="#sec-20-2">ガイドライン・総説（正本）</a></li><li class="t3"><a href="#sec-20-3">de novo低酸素性呼吸不全・ARDS</a></li><li class="t3"><a href="#sec-20-4">免疫不全</a></li><li class="t3"><a href="#sec-20-5">高CO₂血症性呼吸不全・COPD・喘息</a></li><li class="t3"><a href="#sec-20-6">抜管後・離脱・気管切開</a></li><li class="t3"><a href="#sec-20-7">挿管前酸素化・無呼吸酸素化</a></li><li class="t3"><a href="#sec-20-8">COVID-19・P-SILI・挿管タイミング</a></li><li class="t3"><a href="#sec-20-9">失敗の見極め・モニタリング</a></li><li class="t3"><a href="#sec-20-10">術後・特殊集団・管理</a></li></ul></li><li class="t2"><a href="#sec-21">📌 まずこの10本</a></li><li class="t2"><a href="#sec-22">🏠 関連するトピックHome</a></li></ul></nav>
 <header class="masthead">
   <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
   <h1 class="title">💨 HFNC（高流量鼻カニュラ） Home</h1>
   <dl class="cite"><dt>原題</dt><dd>High-flow nasal cannula (HFNC / HFNO) in the ICU</dd></dl>
 </header>
 <div class="wrap">
-<p>🔗 <strong>共有ページ</strong>（誰でもログイン不要）：[クリックで開く](https://hiro-oka.github.io/jc-summaries/jc-709fa05b58.html) ／ 下の枠でURLをワンクリックコピー</p>
-<pre><code>https://hiro-oka.github.io/jc-summaries/jc-709fa05b58.html</code></pre>
-<p># 💨 HFNC（高流量鼻カニュラ） Home</p>
 <p>これだけ読めばHFNC（高流量鼻カニュラ・ネーザルハイフロー・HFNO）の現在地が分かるHomeです。関連ノート約60本を、生理→設定→適応（病態別）→失敗の見極め→NIVとの使い分け→実際の使い方の順に統合しています。NIV・CPAPそのもの（マスク・モード・リーク・ヘルメット）は <span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span>、SBT・抜管可否の判断は <span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span>、挿管手技は <span class="wl">🫧 気道管理・挿管・麻酔 Home</span> に任せ、本Homeは「HFNCを何に・どの設定で・いつまで使い、いつ見切るか」に絞ります。</p>
-<h2>📖 3分概観（ブログ版）</h2>
+<h2 id="sec-1">📖 3分概観（ブログ版）</h2>
 <p>_最終更新: 2026-09-26 ／ このHomeが束ねる関連ノート: 約70本_</p>
 <p>HFNCの現在地を一言でいえば、<mark class="hl">「挿管を減らし、楽にする装置であって、死亡を減らす装置ではない」</mark>です。加温加湿した30〜60 L毎分のガスを太いプロングから流すことで、上気道の死腔を洗い出し、閉口時に数 cmH₂Oの陽圧を作り、設定どおりのFiO₂を届け、吸気努力を下げます。この4つの生理は健常者・敗血症患者・抜管前の患者で繰り返し確かめられており、疑う余地はありません。ところが患者アウトカムに翻訳すると、動くのは挿管だけです。de novo低酸素性呼吸不全の1,110例（SOHO・NEJM2026）で28日死亡は14.6%対14.6%、挿管は42.4%対48.4%。免疫不全776例（HIGH・JAMA2018）では死亡も挿管も動きませんでした。</p>
-<h3>このテーマの流れ</h3>
+<h3 id="sec-1-1">このテーマの流れ</h3>
 <p>HFNCの物語は2015年のFLORALI試験から始まります。挿管率は標準酸素・NIVと同等でしたが人工呼吸器フリー日数が増え、90日死亡が低かったことで「まずHFNC」の地位を得ました。2017年の2本のメタ解析は、従来型酸素に対しては挿管を減らす（OR 0.52・0.47）が死亡は変えず、NIVに対しては「差が出なかった」だけで「劣らない」とは証明されていない、と釘を刺しました。2020年に4戦略を並べたネットワークメタ解析（25 RCT・3,804例）も同じ結論で、HFNCは挿管RR 0.76・死亡RR 0.87、マスクNIVとの差はなく、ヘルメットNIVだけが死亡RR 0.40と突出しましたが4試験340例の低い確実性でした。2020年のICMガイドラインは低酸素性呼吸不全でHFNCを強い推奨（挿管RR 0.85）としましたが、2022年のERSガイドラインは8つの推奨すべてを条件付きにとどめています。高CO₂血症側では2024年に線が引かれました。pH 7.25〜7.35・PaCO₂ 50以上のCOPD増悪225例でHFNCを初期補助に使うと、治療失敗が25.7%対14.3%とNIVへの非劣性を示せず、挿管も14.2%対5.4%と多かったのです。1・12時間の血液ガスは同等で、差が出たのは48時間でした。</p>
 <p>パンデミックがHFNCを一気に普及させました。日本のJIPAD 12,687例では抜管後のHFNCが5年で15.9%から28.0%へ増え、NIVは6.7%から3.9%へ減っています。同時に「HFNCで粘る」害が問題になりました。スペイン614例のマッチ解析では挿管遅延群の院内死亡が37.1%対27.3%で、HFNC先行例で顕著でした。一方で別の122例のマッチ解析は初日HFNOが人工呼吸器フリー日を8日増やし死亡は変えないと報告し、この対立はいまも決着していません。</p>
 <p>到達点は2026年の2本です。ATSガイドライン2026は低酸素性→HFNC（挿管RR 0.76・強い推奨）、高CO₂性→NIV、前酸素化→HFNCかNIV、抜管後の高リスク→NIVと病態で横断整理し、<mark class="hl">抜管後に呼吸不全が起きてからの救援HFNC単独は再挿管を増やしうる</mark>と警告しました。そしてSOHO試験が「死亡は減らない」を1,110例で確定させました。HFNCの利益は死亡ではなく、挿管回避・快適性・呼吸数低下・自覚呼吸困難の改善（49.5%対34.7%）にあります。</p>
-<h3>結論が出ていること／いないこと</h3>
+<h3 id="sec-1-2">結論が出ていること／いないこと</h3>
 <p><strong>決着済み</strong>：①de novo低酸素性呼吸不全の第一手はHFNC（対標準酸素で挿管RR 0.76、強い推奨）。②HFNCは28日死亡を減らさない（SOHO 14.6%対14.6%）。③予定抜管後の予防的HFNCは従来型酸素より再挿管を減らす（NMA RR 0.54・確信度high）。④高CO₂血症性呼吸不全の第一選択はNIV。pH 7.25〜7.35・PaCO₂ 50以上のCOPD増悪でも、初期補助をHFNCで代替すると治療失敗25.7%対14.3%・挿管14.2%対5.4%とNIVに非劣性を示せなかった。HFNCはNIV不耐・拒否・禁忌のときの次善で、監視と即NIV移行可が条件。⑤軽度高CO₂血症のCOPD増悪にHFNCをルーチンで使う理由はない（在院日数と費用をむしろ増やした）。⑥挿管中の無呼吸酸素化としてのHFNCは害はないが、最低SpO₂を改善しない。⑦安定期の慢性高CO₂血症COPDへの在宅HFNCは急性増悪を減らす（RR 0.77・中等度の確実性）が、死亡と入院は不確実。</p>
 <p><strong>未決着</strong>：①<mark class="hl">HFNC対NIVの優劣</mark>（低酸素性でも前酸素化でも抜管後の高リスクでも、ガイドラインは「個別化」と書いている）。②COVID-19における挿管タイミング（遅延が死亡を増やすという解析と、HFNOが人工呼吸器フリー日を増やすという解析が対立）。③ROX指数を挿管の決定ルールとして使ってよいか（MIMIC-IVのエミュレーションで30日死亡26.9%→20.5%と推定されたが仮説生成）。④至適流量（ATS 2026自身が「未確定」と明記。AECOPDでは20〜30 L毎分が最適というNMAがあるが確実性は低く、40 L毎分固定のRCTはNIVに非劣性を示せなかった。COPDで有効性を示した試験の設定を並べると、出発点は25〜60 L毎分とばらつき、実測が30前後に落ち着いたのは忍容性で下げた結果で、「初期30」を採った試験は無い。30を推す理由は「上げても得るものがない」が中心で、圧を理由にするのはPEEPi超えの機序説明にとどまる。PaCO₂低下が流量に依存するかは割れたまま）。⑤HFNC中の強い吸気努力がP-SILIを進めるか（SOHOで気胸10例対4例）。⑥在宅HFNCと在宅NIVの優劣（直接比較が1本も無い）。</p>
-<h3>✅ 3行まとめ</h3>
+<h3 id="sec-1-3">✅ 3行まとめ</h3>
 <ul><li>低酸素性呼吸不全にはまずHFNC。流量は忍容できる最大まで、FiO₂は目標SpO₂で、温度は快適性で決める</li><li>期待するのは挿管回避と快適性。<mark class="hl">「HFNCだから死亡が減る」とは説明しない</mark></li><li>2・6・12時間でROXを測り、伸びなければ挿管を遅らせない。高CO₂血症はNIVが先でHFNCは次善。抜管後の救援HFNC単独は避ける</li></ul>
-<h3>❓ セルフチェック（想起用）</h3>
+<h3 id="sec-1-4">❓ セルフチェック（想起用）</h3>
 <ol><li>SOHO試験の28日死亡と挿管率を両群で言えますか。HFNCの設定（流量・SpO₂目標・最低継続時間）は？</li><li>HFNC 60 L毎分で閉口時と開口時の鼻咽頭圧はそれぞれ何 cmH₂Oでしたか。この差が意味することは？</li><li>ROX指数の12時間時点の2つの閾値と、その意味を言えますか。ROXを「挿管ルール」として使えない理由は？</li></ol>
-<h2>🏥 当院の標準（迷ったらこれ）</h2>
+<h2 id="sec-2">🏥 当院の標準（迷ったらこれ）</h2>
 <div class="call example"><span class="lab">聖路加ICUでの実践</span>
 <p>Vault内ノートに根拠がある行だけを置く。当院固有のプロトコルとして明文化されたものはまだ無い</p>
 <ul><li><strong>de novo低酸素性呼吸不全（非高CO₂・非心原性）の第一手はHFNC</strong>。標準酸素比で挿管RR 0.76（0.64–0.89）・強い推奨（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。SOHOの型は「流量50 L毎分以上・SpO₂ 92〜96%・最低48時間」（<span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span>）</li><li><strong>初期流量は30〜40 L毎分で始め、忍容できる最大まで速やかに上げる</strong>。抜管後はやや低めから。FiO₂は目標SpO₂で滴定、温度は37 ℃を理想としつつ不快なら下げる（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。<mark class="hl">患者の忍容性が最優先</mark></li><li><strong>「HFNCは口を閉じてこそ効く」を看護・リハと共有する</strong>。60 L毎分でも鼻咽頭圧は閉口6.8 cmH₂O・開口0.8 cmH₂O（<span class="wl">HFNCとCPAPの生理は同じではない — 閉口で鼻咽頭圧6.8cmH2O、呼気抵抗増加が呼吸数低下を説明（ベンチ＋健常者・JApplPhysiol2022）</span>）。口呼吸の患者にPEEP効果を期待しない</li><li><strong>開始後2・6・12時間でROX指数（SpO₂/FiO₂ ÷ 呼吸数）を測る</strong>。12時間で4.88以上なら挿管リスクは低く、3.85未満なら挿管を議論の卓上に載せる（<span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>）。<mark class="hl">ROXは予測指標であって挿管トリガーではない</mark>。閾値だけで挿管を決めない（<span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>）</li><li><strong>HFNC開始と同時に挿管基準を書く</strong>。SOHOの事前規定は「呼吸数40超・呼吸筋疲労・pH 7.35未満・SpO₂ 92%未満または P/F 100未満かつFiO₂ 80%以上、のうち2つ以上」。基準を満たしたら躊躇せず挿管する。SOHOで気胸は1.8%対0.7%と HFNC群に多かった</li><li><strong>高CO₂血症性呼吸不全ではNIVが第一選択</strong>。pH 7.25〜7.35・PaCO₂ 50 mmHg以上のCOPD増悪でも、初期補助をHFNCで代替しない。非劣性RCTで治療失敗は25.7%対14.3%（リスク差11.38%、95%CI 0.25〜21.20）、挿管は14.2%対5.4%で、1・12時間の血液ガスは同等でも48時間のPaCO₂は57対53 mmHgと差がついた（<span class="wl">COPD増悪の中等度高CO2血症でHFNCはNIVに非劣性を示せず — 治療失敗25.7%対14.3%、挿管14.2%対5.4%、快適さはHFNCが上（単施設RCT・CritCare2024）</span>）。HFNCを選ぶのはNIV不耐・拒否・禁忌のときの次善で、「監視あり・即NIV移行可能」を条件に、<mark class="hl">1・12・48時間の血液ガスでNIVへ上げる基準を先に書く</mark>。ATS 2026の試験群でもHFNC開始例の3分の1がNIVへ上がっている（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。AECOPDで使うなら初期流量は20〜30 L毎分から（<span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span>）</li><li><strong>AECOPDでICUを出た後もPaCO₂が高く、NIVマスクに耐えられない患者は、退院前に在宅ハイフローセラピーを呼吸器内科と相談する</strong>。安定期の慢性高CO₂血症COPD（平均PaCO₂ 48〜52 mmHg）への在宅HFNCは急性増悪をRR 0.77（0.66〜0.89、1000人あたり69件減・中等度の確実性）で減らすが、死亡（RR 1.22）と入院（RR 0.87）は不確実で、在宅NIVとの直接比較は無い。説明は「増悪は減りそう、死亡は不明」と正確に（<span class="wl">在宅HFNCは慢性高CO2血症COPDの急性増悪を減らす — RR 0.77・1000人あたり69件減、死亡と入院は不確実（4RCT440例・SRメタ解析・RespirMed2023）</span>）</li><li><strong>抜管後は予防的に使う。救援には使わない</strong>。予定抜管後の予防的HFNCは従来型酸素より再挿管を減らす（RR 0.54・high、<span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span>）が、<mark class="hl">呼吸不全が起きてからの救援HFNC単独は再挿管を増やしうる</mark>（交互作用 p=0.001、ATS 2026）。高リスク例（65歳超・慢性心肺疾患）はNIVを1日12時間以上＋休止中HFNC 50 L毎分の48時間（<span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span>）</li><li><strong>抜管前にリスク因子を数える</strong>。リスク因子4個以上（OR 1.63）と非手術の肥満（OR 2.52）ではHFNC単独が不利に出る（<span class="wl">抜管後のHFNCはNIVより再挿管を減らさない — 15RCT 2073例、リスク因子4個以上と非手術の肥満ではHFNCが不利（HIGH-FLOW OXY・CritCareExplor2026）</span>）</li><li><strong>挿管前酸素化はNIVが軸。HFNCはNIVに上乗せするか、NIV禁忌時の代替</strong>。NIV＋HFNC 60 L毎分で挿管中の最低SpO₂中央値100%対96%、SpO₂ 80%未満の重度脱飽和は0例対5例（<span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>）。無呼吸酸素化としてのHFNC単独は最低SpO₂を改善しない（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>）</li><li><strong>HFNCを付けたまま院内搬送するときは先に酸素を数える</strong>。FiO₂ 1.0・50 L毎分ではEボンベ1本が13分（<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）。加温加湿器の電源も要る</li><li><strong>免疫不全患者を特別扱いしない</strong>。HFNCは死亡も挿管も変えないが、使ってはいけない根拠もない（<span class="wl">免疫不全患者の急性呼吸不全に対するHFNC（HIGH試験）</span>）。ただし<mark class="hl">ROX・HACORは免疫不全患者では性能が落ちる</mark>（<span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span>）</li><li><strong>HFNC中の吸入薬は加温加湿器の乾燥側にネブライザーを置き、流量30 L毎分に下げる</strong>（<span class="wl">重症患者へのエアロゾル療法の最適化（Special Issue Insight・ICM2022）</span>）。HFNCを外す必要はない</li></ul>
@@ -213,8 +267,8 @@
 <p>当院で決めておくべきこと（Vaultに根拠が無いので問いの形で置く）</p>
 <ul><li>HFNCの<strong>開始基準</strong>（標準酸素何 L毎分でSpO₂いくつ未満か）と<strong>開始場所</strong>（ICU・SDU・一般病棟のどこまで許すか）。Brochard総説は「一般病棟でHFNCを安全に使う閾値は定義されていない」と自認している</li><li><strong>ROX指数の定時測定（2・6・12時間）を申し送りに組み込むか</strong>。ROX原著ノートには「検討してもよい」とあるが、当院の運用として決まってはいない</li><li><strong>抜管後の「高リスク」の定義</strong>と、リスク因子の個数で NIV 併用に切り替える線（4個以上か）</li><li><strong>ウィーニングの手順</strong>（SOHOは48時間後に呼吸数25未満かつFiO₂ 40%以下で標準酸素へ、Xiaらは流量20 L毎分未満かつFiO₂ 0.3未満で離脱）。当院はどちらを採るか</li><li><strong>HFNC不耐（SOHOで4.3%、Xiaらの治療失敗の52%）への対応手順</strong>（温度を下げる・流量を落とす・非対称カニュラを試す）</li><li><strong>AECOPDでHFNCを使うときの初期流量と上げ下げのルール</strong>。COPD試験の設定は25〜60 L毎分とばらつき、有効だった試験の実測は30前後（Xia 30・FLOCOP 28.5）で、いずれも忍容性で調整可の設計だった。当院は「30 L毎分前後で開始→忍容性と1・12・48時間の血液ガスで調整」を採るか、上げるときに閉口時のPEEPi超えをどう扱うか（6章「30 L毎分は本当に必要か」）</li></ul>
 </div>
-<h2>📋 早見表</h2>
-<h3>病態別の一手（HFNCの視点で ATS 2026・ERS 2022 を並べる）</h3>
+<h2 id="sec-3">📋 早見表</h2>
+<h3 id="sec-3-1">病態別の一手（HFNCの視点で ATS 2026・ERS 2022 を並べる）</h3>
 <div class="tw"><table>
 <thead><tr><th>病態</th><th>HFNCの位置づけ</th><th>推奨の強さ</th><th>主な数値</th><th>根拠ノート</th></tr></thead>
 <tbody>
@@ -232,7 +286,7 @@
 <tr><td>術後・肺合併症高リスク（心臓・胸部・肥満）</td><td>予防的HFNC（対従来型酸素）</td><td>条件付き・中等度（ICM 2020）</td><td>高齢VATS肺切除でPPC重症度の順序OR 0.50</td><td><span class="wl">HFNCのガイドライン（ICM2020）</span>／<span class="wl">高齢者のVATS肺切除後に予防的HFNCは術後肺合併症の重症度を下げる（単施設RCT・CritCare2026）</span></td></tr>
 <tr><td>気管切開患者</td><td>気管高流量酸素＋吸引頻度で抜去を早める</td><td>使ってよい（ICM 2023）</td><td>効果は同流量のHFNCより穏やか</td><td><span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span></td></tr>
 </tbody></table></div>
-<h3>設定の早見表（ノートに書かれた値だけ）</h3>
+<h3 id="sec-3-2">設定の早見表（ノートに書かれた値だけ）</h3>
 <div class="tw"><table>
 <thead><tr><th>項目</th><th>低酸素性呼吸不全</th><th>高CO₂血症性・AECOPD</th><th>抜管後</th><th>根拠ノート</th></tr></thead>
 <tbody>
@@ -242,7 +296,7 @@
 <tr><td>温度・湿度</td><td>31〜37 ℃、絶対湿度 30〜44 mgH₂O毎L。理想は37 ℃、快適性で下げてよい</td><td>同左</td><td>37 ℃（HIGH-WEAN）</td><td><span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span></td></tr>
 <tr><td>中止・離脱</td><td>呼吸数25以下で安定なら中止か従来型酸素へ（ICM 2024）／SOHOは48時間後に呼吸数25未満かつFiO₂ 40%以下</td><td>Xiaらは流量20 L毎分未満かつFiO₂ 0.3未満／Tan 2024はFiO₂ 35%未満に下げてから流量を5〜10 L毎分ずつ下げ、15 L毎分以下で2時間安定なら中止</td><td>48時間以上継続（HIGH-WEAN・SOHO）</td><td>各試験ノート</td></tr>
 </tbody></table></div>
-<h3>失敗の閾値と時間</h3>
+<h3 id="sec-3-3">失敗の閾値と時間</h3>
 <div class="tw"><table>
 <thead><tr><th>指標</th><th>閾値</th><th>タイミング</th><th>意味</th><th>根拠ノート</th></tr></thead>
 <tbody>
@@ -256,7 +310,7 @@
 <tr><td>一回換気量 &gt;9〜9.5 mL毎kg ＋ 頻呼吸 ＋ P/F低下</td><td>経時的</td><td>P-SILIを疑う</td><td>HFNCはP-SILIを防げない</td><td><span class="wl">P-SILI（自発呼吸誘発性肺傷害）とCOVID-19の非侵襲的呼吸管理（BJA2021）</span></td></tr>
 <tr><td>免疫不全患者のROX・HACOR</td><td>—</td><td>性能が実質的に低い</td><td>挿管判断の根拠にしない</td><td><span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span></td></tr>
 </tbody></table></div>
-<h2>1. HFNCとは何か — 装置と生理学的効果（メリット）</h2>
+<h2 id="sec-4">1. HFNCとは何か — 装置と生理学的効果（メリット）</h2>
 <p>HFNCを使いこなす前に、「なぜ鼻から高流量を流すだけで呼吸が楽になるのか」を機序として押さえておきます。ここが曖昧なまま流量やFiO₂をいじると、酸素化・換気・努力のどれを直そうとしているのか自分でも分からなくなるからです。この章はHFNCの「良いところ」を生理の順に並べます。</p>
 <p>装置は3つの部品でできています。air/oxygenブレンダーまたはタービンが最大60 L毎分の新鮮ガス流を作り、加温加湿器（温度31〜37 ℃、絶対湿度30〜44 mgH₂O毎L）で調整し、太径の鼻カニュラから投与します。国内ではFisher &amp; Paykel社のOptiflow（加湿器MR850・Airvo 2）とパシフィックメディコ社のシステムが使われています（<span class="wl">HFNC（ネーザルハイフロー）基礎まとめ</span>／<span class="wl">ネーザルハイフロー（NHF）のレビュー</span>）。従来型酸素との本質的な違いは「酸素を足す」ことではなく、<mark class="hl">患者の吸気流量を上回るガスを鼻咽頭に流し続ける</mark>ことにあります（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。</p>
 <p>生理学的効果は5つに整理されています。①設定FiO₂の正確な供給（呼吸不全患者の吸気ピーク流量は30〜60 L毎分以上で、15 L毎分しか出ない従来型酸素では室内気が混ざるが、HFNCは吸気流量を満たすので設定FiO₂がそのまま届く）。②解剖学的死腔の洗い出し（上気道に残ったCO₂を呼気相にも流し続けて洗い流し、同じ分時換気量でより多くの肺胞換気を得る。呼吸数の低下はこの帰結）。③気道内陽圧の上昇（流量依存の数 cmH₂OのPEEP様効果で、含気と酸素化と呼吸メカニクスを改善）。④快適性の最適化（加湿があるから高流量を何時間も我慢できる。快適性は付加価値ではなく高流量を続けるための前提条件）。⑤粘液線毛クリアランスの改善（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。</p>
@@ -274,7 +328,7 @@
 </tbody></table></div>
 <p>上の本文①〜⑤との対応：H＝④⑤、I・O＝①、F＝③、W＝②、L＝④。F（陽圧）は<mark class="hl">口を閉じたときにしか出ない</mark>点（下の tip）を添えて覚える。</p>
 </div>
-<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 1 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1007/s00134-023-07067-y" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-023-07067-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 1. 高流量酸素の生理学的・臨床的効果と適応（原図・無改変。出典 <span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>、© 2023 Springer-Verlag GmbH Germany） 上段は患者を中心に8つの効果（室内気混入の減少・呼吸数低下・気道内圧上昇・CO₂洗い出し・吸気努力低下・快適性・粘液線毛クリアランス）が放射状に並び、下段は病態別（低酸素性ARF・高炭酸ガス性ARF・離脱・気管切開）に生理効果・臨床効果・適応の強さを＋の個数で示す表です。<mark class="hl">8項目は独立した効果ではなく、流量という1つの入力から派生する相互依存の網</mark>として読みます。下段の「死亡には効果なし」は本文の「相反する」と食い違うので、図だけを根拠に「NIVより挿管を減らす」と語らないでください。</p>
 </div>
@@ -284,7 +338,7 @@
 <p>「HFNCは口を閉じてこそ効く」 開口で鼻咽頭圧はほぼ消えます。口呼吸をしている患者にPEEP効果を期待しないこと、そして<mark class="hl">HFNC装着後の呼吸数低下を、そのまま病態改善と読み替えない</mark>こと。呼吸数の低下は「楽になった」だけでなく「呼気抵抗が増えて呼気が延びた」結果でもあります。</p>
 </div>
 <p>吸気努力への効果は患者で確かめられています。肺炎のない敗血症患者25例では、呼吸努力（食道内圧の吸気陰性振幅 ΔPes）は健常者報告値3.2 cmH₂Oの2倍以上の8.0 cmH₂Oに亢進しており、HFNC 50 L毎分を30分流すとΔPesは5.5 cmH₂O、圧時間積PTPは224から140 cmH₂O·s·min⁻¹、呼吸ドライブP0.5は6.0から4.3 cmH₂Oへ下がりました。一回換気量は変わらず動的肺コンプライアンスが63から83 mL·cmH₂O⁻¹へ上がっており、「同じ換気量をより少ない努力で得た」ことを意味します。酸素化もPaCO₂も動いていないので、努力の低下は酸素化改善では説明できません。効果は可逆的で、低流量酸素に戻すと30分でベースラインに戻ります（<span class="wl">HFNCが敗血症患者の呼吸努力を軽減させる（Anesthesiology2021）</span>）。</p>
-<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 1 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1097/ALN.0000000000004010" target="_blank" rel="noopener">原論文（doi.org/10.1097/ALN.0000000000004010）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 1. HFNCの効果（原図・無改変。出典 <span class="wl">HFNCが敗血症患者の呼吸努力を軽減させる（Anesthesiology2021）</span>、© American Society of Anesthesiologists） 低流量酸素→HFNC→低流量酸素の3段階で、ΔPes・PTP・P0.5がHFNC段だけ下がり、戻すと元に戻る可逆性を示します。<mark class="hl">快適性のVASは3段階とも8点で変わらず、努力とも相関しませんでした</mark>。「本人は楽そう」で経肺圧の安全性は判断できません。</p>
 </div>
@@ -292,16 +346,16 @@
 <p>インターフェースの形そのものも効きます。左右で径の異なる非対称カニュラは、安定成人20例のクロスオーバー（50 L毎分・FiO₂ 0.21・37 ℃で固定）で PTPes を30.66 cmH₂O·s/min 下げ（約22%）、一回換気量を33 mL増やし、呼吸数と分時換気量は変えませんでした（<span class="wl">非対称ネーザルハイフローは吸気努力を下げて一回換気量を増やす — PTPes 30.7低下・VT 33mL増（20例クロスオーバー・CritCare2026）</span>）。COPD増悪回復期14例では30 L毎分で分時換気量を1.83 L毎分減らし、pCO₂は変わりませんでした（<span class="wl">COPD増悪回復期の非対称カニュラNHFは分時換気量を1.83L減らす（14例クロスオーバー・ATS抄録・AJRCCM2024）</span>）。ICM 2024のエディトリアルは非対称プロングで分時換気量が19.6%減少したこと、呼吸数が高いと（とくに流量60 L毎分未満で）CO₂洗い出し効率が下がり非対称カニュラがこれを抑えうることを挙げています（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。ただしいずれも少数例・短時間の生理学研究で、臨床アウトカムは未証明です。</p>
 <p>臨床上の利点として忘れてはいけないのが<strong>会話・食事・口腔ケア・睡眠が可能</strong>なことです（<span class="wl">HFNC（ネーザルハイフロー）基礎まとめ</span>）。ATS 2026はHFNCの快適性を10点尺度でMD +1.3点と他のNIRSより高く評価し、「導入が容易で忍容性が高く、会話・経口摂取・喀痰排出を保ちながら快適性を維持できる」ことを強い推奨の根拠の1つにしています（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。快適だから24時間連続投与ができ、それが治療として成立する、という順番です。</p>
 <p>%%FIG: hfnc-physiology-chain | HFNCの生理効果の連鎖図。左に「高流量の加温加湿ガス（30〜60 L毎分）」の入力を1つ置き、そこから右へ4本の矢印が分岐して「吸気流量を満たす→FiO₂が安定」「上気道を洗う→死腔↓→呼吸数↓」「呼気抵抗↑（閉口時）→数cmH₂Oの陽圧→含気↑」「加温加湿→快適・粘液線毛クリアランス↑」に至り、最後に4本が「吸気努力↓」に合流する構図。人物は描かない。 | 高流量ガス／FiO₂安定／死腔洗い出し／呼吸数↓／閉口で陽圧／含気↑／加温加湿／快適性／吸気努力↓ %%</p>
-<h2>2. 流量・FiO₂・温度の設定 — 病態・状況ごとに「どの設定で効いたか」</h2>
+<h2 id="sec-5">2. 流量・FiO₂・温度の設定 — 病態・状況ごとに「どの設定で効いたか」</h2>
 <p>HFNCには3つのつまみがあり、それぞれ別の目的を持ちます。流量は「支持を最大化する」ために上げ、温度は「我慢できる」ために下げ、FiO₂は「目標SpO₂」で決めます。この優先順位を先に決めておくと、ベッドサイドで迷いません（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。この章は2つの問いに答えます。ひとつは「流量を上げると何がどれだけ変わるか」（2-1）、もうひとつは「有効性を示した試験は実際にどの設定で走ったか」（2-2）です。<mark class="hl">病態ごとに流量の出発点が逆になる</mark>ことと、<mark class="hl">同じ「高流量・48時間」でも対象が違えば中立に終わる</mark>ことを、表で見分けられるようにしました。</p>
-<h3>2-1. 流量は「何を直したいか」で決める — 生理研究の答え</h3>
+<h3 id="sec-5-1">2-1. 流量は「何を直したいか」で決める — 生理研究の答え</h3>
 <p>流量の効果は「一本の曲線」ではありません。指標によって形が違います。非挿管の急性低酸素性呼吸不全17例で酸素マスク→HFNC 30→45→60 L毎分と各20分流したクロスオーバーでは、<strong>酸素化・呼気終末肺容量・動的コンプライアンス・呼吸数は流量に直線的に改善</strong>して60 L毎分で最大（P/F比 151→177→187→205、ΔEELV 0→+74→+115→+230 mL）でした。一方、<strong>吸気努力（ΔPes 9.4→7.9→8.1→6.8 cmH₂O）・圧時間積（254→174→169→151）・分時換気量（9.1→7.0→7.0→6.9 L毎分）は指数関数的に下がり、30 L毎分で効果の大半が出て頭打ち</strong>です。PaCO₂は38.2→38.0→38.1→38.3 mmHgと流量で変わりませんでした。至適流量は指標ごと・患者ごとに違い（ΔPesは43%、背側EELVは37%の患者で30または45 L毎分が最良）、著者は「個別滴定が理想、時間が無ければ60 L毎分から耐えられる最大流量」と提案しています（<span class="wl">HFNC流量を上げると酸素化と肺容量は直線的に改善、吸気努力は30L毎分でほぼ頭打ち — ΔPes 9.4→6.8・P-F比151→205・EELV+230mL（17例クロスオーバー・Mauri・ICM2017）</span>）。</p>
-<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 1 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1007/s00134-017-4890-1" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-017-4890-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 1. 流量漸増HFNCの非線形な生理効果（原図・無改変。出典 <span class="wl">HFNC流量を上げると酸素化と肺容量は直線的に改善、吸気努力は30L毎分でほぼ頭打ち — ΔPes 9.4→6.8・P-F比151→205・EELV+230mL（17例クロスオーバー・Mauri・ICM2017）</span>、©Springer-Verlag） 左は圧時間積（PTPPes）、右は分時換気量。マスク→30 L毎分で大きく下がり、45・60 L毎分ではほぼ平坦です。<mark class="hl">努力を減らす目的なら30 L毎分で大半が得られる</mark>ことを一目で示す図です。</p>
 </div>
 <p>_図: 流量と吸気努力・分時換気量の関係（出典 <span class="wl">HFNC流量を上げると酸素化と肺容量は直線的に改善、吸気努力は30L毎分でほぼ頭打ち — ΔPes 9.4→6.8・P-F比151→205・EELV+230mL（17例クロスオーバー・Mauri・ICM2017）</span>）_</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1007/s00134-017-4890-1" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-017-4890-1）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. 流量漸増HFNCの線形な生理効果（原図・無改変。出典は同上） 背側の呼気終末肺容量は30→45→60 L毎分で平均31→59→93 mLと右肩上がりで、有意になるのは60 L毎分だけです。ただし30 L毎分で−250 mLまで下がる患者もおり、<mark class="hl">平均の上昇と個人差の大きさ</mark>を同時に読む図です。</p>
 </div>
@@ -309,7 +363,7 @@
 <p>同じグループの前年の研究は40 L毎分の1点で機序を分解しています。非挿管AHRF 15例で酸素マスク12 L毎分→HFNC 40 L毎分（同じ設定FiO₂）に切り替えると、ΔPes 9.9→8.0 cmH₂O、分時PTP 216→155、分時換気量 −19%、呼吸数 24→22、PaCO₂は40.7→41.1で不変、EELIは基準VTの+51%、P/F比 130→184でした。努力の低下は基準PaCO₂が高いほど大きく（R² 0.433）、呼吸数の低下と仕事量の低下は相関しませんでした。つまり<mark class="hl">HFNCは「酸素を濃くする道具」ではなく「呼吸を楽にして肺を膨らませておく道具」</mark>で、呼吸数が下がっても努力が減った保証はありません（<span class="wl">HFNC 40L毎分は酸素マスクより吸気努力を減らし肺容量を増やす — ΔPes 9.9→8.0cmH2O・分時換気量−19%・EELI+51%・P-F比130→184（15例クロスオーバー・Mauri・AJRCCM2017）</span>）。</p>
 <p>圧の大きさは流量と口で決まります。心臓外科術後の抜管後患者15例で鼻咽頭圧を実測したParkeらの原著では、<strong>NHF 35 L毎分は閉口で平均2.7（SD 1.04）cmH₂O、開口で1.2（0.76）cmH₂O</strong>、同流量のフェイスマスクは0.2・0.1 cmH₂Oでした。口を開けると圧は約半分になり（P=0.001）、個人差は閉口で1.5〜5.3 cmH₂Oと大きく、著者はカニュラ周囲のリークと鼻孔の大きさの差が主因と推測しています（<span class="wl">ネーザルハイフロー35L毎分は閉口で鼻咽頭圧2.7cmH2O・開口で1.2cmH2Oの低い陽圧を作る — 心臓術後15例、マスクは0.2・0.1、個人差1.5〜5.3（前向き生理学研究・BJA2009）</span>）。健常者では30・40・50 L毎分の閉口時平均気道内圧が1.93・2.58・3.31 cmH₂O（<span class="wl">HFNC（ネーザルハイフロー）基礎まとめ</span>）、ベンチ＋健常者10名では60 L毎分で閉口6.8・開口0.8 cmH₂O（<span class="wl">HFNCとCPAPの生理は同じではない — 閉口で鼻咽頭圧6.8cmH2O、呼気抵抗増加が呼吸数低下を説明（ベンチ＋健常者・JApplPhysiol2022）</span>）。教育用の目安は「閉口で10 L毎分ごとに約1 cmH₂O」ですが、著者自身が「ばらつきが大きい」と認める上限の目安です（<span class="wl">HFNCの作用機序を覚えるHIFLOWと成人・小児の適応 — PEEPは10L毎分あたり約1cmH2O、小児は2L毎kg毎分、成人は肺炎・抜管後・挿管前酸素化・DNI（ナラティブレビュー・Cureus2018）</span>）。</p>
 <p>他の非侵襲戦略と並べると、HFNCの生理的な立ち位置がはっきりします。食道内圧で吸気努力を測った13研究・312例のネットワークメタ解析では、標準酸素と比べて経肺駆動圧を下げる戦略はひとつもなく、NIVは1回の努力を−5.9 cmH₂O下げる代わりに駆動圧を+3.4 cmH₂O上げ、<strong>HFNOは努力毎回と駆動圧に中立で、呼吸数（−5回毎分）と分時努力（−95 cmH₂O×回毎分）を最も下げ</strong>、CPAPは酸素化だけ改善（P/F +67）しました。著者は「努力を測れない環境ではHFNOが安全で実用的な第一選択」と結論しています（<span class="wl">非侵襲呼吸補助の生理作用をNMAで比較 — NIVだけが1回の努力を下げるが経肺駆動圧は3.4cmH2O上がる、HFNOは分時努力を減らし駆動圧を変えない（13研究312例・NMA・CritCare2025）</span>）。</p>
-<p class="figref">🖼 原著のFigure 4 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 4 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-025-05670-7" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-025-05670-7）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 4. 吸気努力への各戦略の効果（原図・無改変。出典 <span class="wl">非侵襲呼吸補助の生理作用をNMAで比較 — NIVだけが1回の努力を下げるが経肺駆動圧は3.4cmH2O上がる、HFNOは分時努力を減らし駆動圧を変えない（13研究312例・NMA・CritCare2025）</span>、CC BY-NC-ND 4.0） 左列が1回の努力、右列が分時努力。NIVだけが1回の努力を大きく下げ、HFNOは1回の努力は変えずに分時努力を下げます。<mark class="hl">HFNCの「楽さ」は呼吸数が下がることで生まれる</mark>、と読む図です。</p>
 </div>
@@ -327,12 +381,12 @@
 <tr><td>快適性</td><td>60 L毎分超は快適性を悪化させる（NMAが引くBasile）。31 ℃は37 ℃より快適（Rezoagli）</td><td>不快なら流量より先に温度を下げる</td><td><span class="wl">非侵襲呼吸補助の臨床ガイド — HFNT・CPAP・BiPAPの病態別設定と失敗予測カットオフ、ヘルメットは新鮮ガス60L毎分以上（総説・Rezoagli・CritCare2025）</span></td></tr>
 </tbody></table></div>
 <p>Rezoagliらの臨床ガイド（CritCare2025）は病態別の主要設定を1枚の表にしています。HFNTの流量は心原性肺水腫40〜60、de novo AHRF 40〜60、AECOPD 30〜40 L毎分、温度はいずれも31〜37 ℃、AECOPDのFiO₂はSpO₂ 88〜92%を目標にします。著者らは「最低限のPEEPを確保するため40 L毎分以上」「AHRFは60 L毎分から始めて耐えられる最高流量、高CO₂血症は30〜40で十分」と書いています（<span class="wl">非侵襲呼吸補助の臨床ガイド — HFNT・CPAP・BiPAPの病態別設定と失敗予測カットオフ、ヘルメットは新鮮ガス60L毎分以上（総説・Rezoagli・CritCare2025）</span>）。</p>
-<p class="figref">🖼 原著のTable 1 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のTable 1 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-025-05730-y" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-025-05730-y）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Table 1. 臨床状況別の非侵襲呼吸補助の適応の要約（原表・無改変。出典 <span class="wl">非侵襲呼吸補助の臨床ガイド — HFNT・CPAP・BiPAPの病態別設定と失敗予測カットオフ、ヘルメットは新鮮ガス60L毎分以上（総説・Rezoagli・CritCare2025）</span>、CC BY 4.0） 行が心原性肺水腫・de novo AHRF・呼吸性アシドーシスを伴うAECOPD・抜管後、列がHFNT・CPAP・BiPAP。緑が第一選択、橙が非推奨です。<mark class="hl">de novo AHRFはHFNTが緑、AECOPDはBiPAPが緑でHFNTは黄（休止時・不耐時）</mark>という配置を覚えておくと、この章の表がすべて同じ構図で読めます。</p>
 </div>
 <p>_図: 病態別の非侵襲呼吸補助の適応（出典 <span class="wl">非侵襲呼吸補助の臨床ガイド — HFNT・CPAP・BiPAPの病態別設定と失敗予測カットオフ、ヘルメットは新鮮ガス60L毎分以上（総説・Rezoagli・CritCare2025）</span>）_</p>
-<h3>2-2. 病態・状況ごとの設定表 — 有効性を示した試験と中立・陰性だった試験</h3>
+<h3 id="sec-5-2">2-2. 病態・状況ごとの設定表 — 有効性を示した試験と中立・陰性だった試験</h3>
 <p>主要試験が「実際にどの設定で走ったか」を、病態・状況ごとに並べます。数値は各論文ノートの「両群の設定」表から写し、書かれていない値は「記載なし」としました。<strong>結果</strong>列は主要アウトカムでの判定（有効／中立／非劣性／劣る）で、副次や事後の所見は括弧で添えています。生理研究（Mauriら・Parke）は前節にあるので、ここには臨床試験だけを置きます。</p>
 <div class="tw"><table>
 <thead><tr><th>病態・状況</th><th>試験（年）</th><th>結果</th><th>初期流量</th><th>流量の調整ルール</th><th>FiO₂と目標SpO₂</th><th>温度</th><th>期間</th><th>ウィーニング・中止基準</th><th>実測値</th></tr></thead>
@@ -369,7 +423,7 @@
 <div class="call tip"><span class="lab">POINT</span>
 <p>表から読み取れること — 「有効だった設定」と「中立だった設定」を見分ける <strong>de novo低酸素性呼吸不全</strong>で挿管を減らした試験（FLORALIのP/F 200以下、SOHO、SOHO-COVID、HiFLo-Covid）は、<mark class="hl">50〜60 L毎分・FiO₂ 1.0または高濃度で開始・SpO₂ 92%以上（92〜96%）・48時間以上・事前規定の挿管基準</mark>という同じ型です。一方で中立に終わったHIGH（50 L毎分・SpO₂ 95%以上）とSOHOの死亡（同じ50 L毎分）も設定はほぼ同じで、<mark class="hl">設定の違いではなく対象（免疫不全）とアウトカム（死亡）の違い</mark>で結果が分かれています。<strong>前酸素化</strong>では、同じ60 L毎分・FiO₂ 1.0でも軽症〜中等症（Miguel-Montanes）では有効、P/F約120の重症（PREOXYFLOW）では中立でした。<strong>術後予防</strong>では、心胸郭外科の呼吸不全（BiPOP 50 L毎分）は非劣性、腹部大手術の全例予防（OPERA 50〜60 L毎分）は中立で、<mark class="hl">同じ高流量でも「誰に」で答えが変わる</mark>例です。 <strong>COPD</strong>は逆向きです。有効性を示した在宅試験（FLOCOP）は設定30〜40・実測28.5 L毎分、軽症AECOPD（Xia）は25から上げて実測30 L毎分、NMAは20〜30が最良でした。NIVに非劣性を示せなかったTan 2024は40 L毎分固定、統計学的非劣性にとどまったCortegiani 2020は60 L毎分開始で、<mark class="hl">AECOPDの試験ほど流量が高い</mark>という並びです。ただしこれは設定と結果の対応であって因果ではありません（詳しくは6章の「30 L毎分は本当に必要か」）。<strong>抜管後</strong>は、Hernándezの2試験が同じ「10 L毎分から不快の手前まで上げる」プロトコルで、低リスクでは実測31 L毎分、高リスクでは50 L毎分に落ち着きました。<mark class="hl">同じルールでも患者が要る流量を決めた</mark>例で、抜管後の「やや低めから上方滴定」（ICM 2024）の根拠にもなります。</p>
 </div>
-<h3>2-3. 病態別の推奨初期設定（ノートに書かれた範囲で）</h3>
+<h3 id="sec-5-3">2-3. 病態別の推奨初期設定（ノートに書かれた範囲で）</h3>
 <div class="tw"><table>
 <thead><tr><th>病態</th><th>初期流量</th><th>上げ方</th><th>FiO₂・SpO₂目標</th><th>温度</th><th>根拠ノート</th></tr></thead>
 <tbody>
@@ -386,21 +440,21 @@
 <tr><td>気管切開患者</td><td>50〜60 L毎分（最高流量）</td><td>—</td><td>—</td><td>—</td><td><span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span></td></tr>
 <tr><td>吸入薬投与中</td><td>30 L毎分に下げる</td><td>終了後に戻す</td><td>—</td><td>ネブライザーは加湿器の乾燥側</td><td><span class="wl">重症患者へのエアロゾル療法の最適化（Special Issue Insight・ICM2022）</span></td></tr>
 </tbody></table></div>
-<h3>2-4. 温度・FiO₂・期間とウィーニング</h3>
+<h3 id="sec-5-4">2-4. 温度・FiO₂・期間とウィーニング</h3>
 <p>温度は快適性で決めます。理想は37 ℃ですが、より低い温度のほうが快適な患者がいます。不快で外されるくらいなら下げるのが正解で、<mark class="hl">患者の耐容性を優先することが最重要</mark>です（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。Rezoagliらは「AHRFでは31 ℃のほうが37 ℃より快適。低温から始めて快適性で上げる」と逆向きの提案をしています（<span class="wl">非侵襲呼吸補助の臨床ガイド — HFNT・CPAP・BiPAPの病態別設定と失敗予測カットオフ、ヘルメットは新鮮ガス60L毎分以上（総説・Rezoagli・CritCare2025）</span>）。試験の実測でも、Xiaらの軽症AECOPDは31 ℃、高齢VATSは31 ℃、FLOCOPは37 ℃から34・31 ℃へ下げる設計でした。HFNC不耐はSOHOで4.3%、SOHO-COVIDで6%、OPERAで7.4%、Xiaらの軽症COPD増悪では治療失敗の52%を占めました。</p>
 <p>FiO₂は目標SpO₂で決め、有効性を示した低酸素性の試験はFiO₂ 1.0（FLORALI・HIGH・HiFLo）または高濃度（SOHO実測0.67）で始めて下げています。目標はSpO₂ 92%以上か92〜96%で、AECOPDだけ88〜92%です。期間は低酸素性で48時間以上（SOHO・SOHO-COVID・HENIVOT）ないし2暦日（FLORALI）、抜管後は24時間（Hernández）から48時間（HIGH-WEAN・Maggiore）で、<mark class="hl">Hernándezの高リスク試験は24時間で外した直後に再挿管が急増</mark>しており、高リスク例の24時間打ち切りは機械的に真似ないほうがよい、とそのノートは注意しています。ウィーニングの基準はSOHO型（呼吸数25未満かつFiO₂ 40%以下）、HENIVOT型（同条件を満たしたら流量を10 L毎分に落として判定）、HiFLo型（窮迫改善・P/F 200超・9 L毎分未満の低流量酸素でSpO₂ 92%以上）、Tan型（FiO₂ 35%未満→流量を5〜10ずつ下げて15 L毎分以下で2時間安定）の4つが数値で書かれています。</p>
-<h3>2-5. 気管チューブ・気管切開孔からの高流量 — 呼気ポート径が圧を決める</h3>
+<h3 id="sec-5-5">2-5. 気管チューブ・気管切開孔からの高流量 — 呼気ポート径が圧を決める</h3>
 <p>気管チューブや気管切開孔に高流量酸素を回すときは、流量だけでなく<strong>アダプタの呼気ポート径</strong>が圧を決めます。呼気ポート6.9 mm・60 L毎分ではT-pieceに対してPEEPを6.0 cmH₂O押し上げ、SBT 15分の呼気終末肺気量喪失を532 mLから164 mLへ食い止めましたが、吸気努力（ΔPes・PTPes・WOB）は変わりませんでした。14.6 mmの汎用インターフェースでは60 L毎分でもPEEPは1 cmH₂O未満です（<span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span>）。</p>
-<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 5 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-026-06266-5" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06266-5）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 5. ベンチ実験における呼気ポート径と流量の効果（原図・無改変。出典 <span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span>） 横軸が流量10〜60 L毎分、縦軸が圧。呼気ポートが細いほど・流量が高いほど平均呼気気道内圧とPEEPが単調に上がります。<mark class="hl">「高流量＝PEEP」ではなく「高流量×呼気抵抗＝PEEP」</mark>という物理を1枚で示す図で、鼻カニュラの閉口・開口の違いと同じ原理です。</p>
 </div>
 <p>_図: 呼気ポート径×流量で決まる圧（出典 <span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span>）_</p>
 <p>%%FIG: hfnc-flow-effect-curve | 流量を横軸（20・30・40・50・60 L毎分）にとり、2種類の曲線で「直線的に上がる指標（酸素化・肺容量・閉口時の気道内圧 2.7→6.8 cmH₂O）」と「30 L毎分で頭打ちになる指標（吸気努力・分時換気量）」の形の違いを示す概念図。上に「低酸素性：60から始めて耐えられる最大」、下に「AECOPD：20〜30から。在宅は実測28.5」の2つの帯を置き、流量の出発点が病態で逆になることを示す。人物は描かない。 | 流量 L毎分／酸素化・肺容量は直線／吸気努力は30で頭打ち／閉口で2.7→6.8 cmH₂O／低酸素性は60から／AECOPDは20〜30から %%</p>
-<h2>3. デメリット・限界・リスク</h2>
+<h2 id="sec-6">3. デメリット・限界・リスク</h2>
 <p>HFNCの害は「装置の害」より「使い方の害」に偏っています。ATS 2026は望ましくない効果を「些細〜小さい」と判定し、主な懸念として酸素消費量の増加と治療期間が長引くことを挙げました（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。この章では、その「些細」の中身と、見落とすと患者を害する運用上の落とし穴を並べます。</p>
 <p><strong>挿管の遅れ</strong>。これが最大のリスクです。HFNC治療中の挿管遅延は一貫して転帰悪化と関連し（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）、ROX原著では最初の6時間を基準に12時間以降に挿管された患者の院内死亡が高く（<span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>）、COVID-19の614例マッチ解析では遅延挿管群の院内死亡が37.1%対27.3%で、<mark class="hl">HFNC先行例で顕著</mark>でした（<span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span>）。HFNCは患者を楽に見せます。SpO₂が保たれ呼吸数が下がるため、内部で強い吸気努力が続いていても外見上は落ち着いて見えることがあります。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1164/rccm.201803-0589OC" target="_blank" rel="noopener">原論文（doi.org/10.1164/rccm.201803-0589OC）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. HFNCに失敗した患者における挿管までの時間別の院内死亡の相対リスク（原図・無改変。出典 <span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>、©American Thoracic Society） 最初の6時間以内の挿管を基準に、12時間以降の挿管で院内死亡の相対リスクが上がります。観察データで「悪いから遅れた」可能性は消えませんが、<mark class="hl">HFNCで粘った時間が長いほど転帰が悪い方向</mark>を示す図として押さえます。</p>
 </div>
@@ -417,25 +471,25 @@
 <div class="call warning"><span class="lab">⚠ 注意</span>
 <p>「見かけの改善」で重症度を見誤る HFNC装着後に呼吸数が下がりSpO₂が上がっても、それは酸素化の改善と呼気延長の結果であって、努力や肺傷害が減った証拠ではありません。敗血症患者の研究では快適性VASは努力と相関せず（<span class="wl">HFNCが敗血症患者の呼吸努力を軽減させる（Anesthesiology2021）</span>）、COVID-19の1型呼吸不全では苦しさが低酸素の重さに見合わないことがあります（<span class="wl">COVID-19で学ぶ呼吸不全と非侵襲的呼吸サポート BMJレビュー（BMJ2020）</span>）。<mark class="hl">劣化は呼吸数・SpO₂・酸素需要（FiO₂）の3つで捉え、ROXに落とす</mark>。胸腹部の非同調と全身的重症度の増加も撤退のサインです（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。</p>
 </div>
-<h2>4. 適応① de novo急性低酸素性呼吸不全</h2>
+<h2 id="sec-7">4. 適応① de novo急性低酸素性呼吸不全</h2>
 <p>HFNCの本丸です。de novo（新規発症）の急性低酸素性呼吸不全は、肺実質そのものの障害でガス交換が壊れる病態で、換気は保たれているのに酸素化だけが破綻します。標準酸素療法では重度の低酸素の是正と呼吸仕事量の軽減に不十分なことが多く、多くの患者が侵襲的人工呼吸へ進みます（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。この病態は珍しくありません。トロント9 ICUのレジストリでは酸素または呼吸補助を4時間以上受けた患者の半数（10,832例）が入室24時間以内に P/F 300以下を満たし、76%が挿管され、重症例の挿管ICU死亡は47%でした（<span class="wl">ICU患者の半数が24時間以内に低酸素性呼吸不全 — 76%が挿管・重症例のICU死亡47%（iCORE 10832例・9ICU・CCM2026）</span>）。</p>
 <p>HFNCが第一選択に定着した経緯を歴史順に追います。出発点はFLORALI（2015・NEJM）です。高炭酸ガス血症のない急性低酸素性呼吸不全310例で、HFNCは挿管率こそ標準酸素・NIVと同等でしたが人工呼吸器フリー日数を有意に増やし、ICU死亡と90日死亡を低下させました。P/F 200未満の238例を含む事後解析では挿管率も他の2群より低く、90日死亡の低下はこのサブグループの挿管率低下で説明できると当時の年次総説は記しています（<span class="wl">集中治療2015年の進歩 — HFNC・駆動圧・横隔膜萎縮・VAE・ICU運営を1本で概観する（Update・AJRCCM2016）</span>）。ただし90日死亡は事前規定の主要アウトカムではなく、NIV群のPEEP設定が低かったこと、NIVセッション間にHFNCを併用していたことなど、解釈を難しくする要素があります（<span class="wl">急性呼吸不全に対する非侵襲的呼吸補助 — 生理から病態別エビデンスまで（Brochard総説・NEJM2022）</span>）。</p>
 <p>2017年の2本のメタ解析がこの位置づけを数字で固めました。RCT 11研究・3,459例では、HFNCは従来型酸素より挿管を減らし（OR 0.52、95%CI 0.34–0.79）、死亡は変えず（OR 1.01）、NIVとの比較は3試験・GRADE「非常に低い」で優劣を判定できませんでした。効果が確実だったのは抜管後の呼吸不全（OR 0.37）で、それ以外の原因では非有意（OR 0.72）です（<span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span>）。観察研究も含めた18試験・3,881例でも、挿管は減る（OR 0.47）がICU死亡もICU滞在も動かず、NPPVに対しては OR 0.73（0.47–1.13）で「差が出なかった」だけで「劣らない」とは証明されていません（<span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span>）。</p>
 <p>2020年には4つの戦略を同じ土俵に載せたネットワークメタ解析が出ました。COPD増悪・心不全が主対象の試験と抜管直後・心臓外科術後を除いた急性低酸素性呼吸不全のRCT 25本・3,804例をベイズ流NMAで統合すると、標準酸素と比べて<strong>HFNCは挿管を減らす（RR 0.76、95%CrI 0.55〜0.99・中等度）が死亡は減らさず（RR 0.87、0.62〜1.15）</strong>、マスクNIVは死亡RR 0.83（0.68〜0.99）・挿管RR 0.76、ヘルメットNIVは死亡RR 0.40（0.24〜0.63）・挿管RR 0.26でした。ただしヘルメットは4試験340例で確実性は低く、マスクNIVの死亡利益はP/F 200未満に限定・COPD心不全除外・懐疑的事前分布のいずれの感度解析でも消えます。マスクNIV対HFNCは死亡RR 0.95・挿管RR 1.01で差がなく、直接推定と間接推定の不整合はFLORALIとCOPD・心不全混入試験を除くと解消しました。組み入れられたHFNC試験の設定は各原著でFLORALI 50 L毎分・HIGH 50 L毎分以上（本論文の本文には設定の記載が無く補遺は未取得）で、本Homeの2-2の型と同じです（<span class="wl">低酸素性呼吸不全でヘルメットNIVは死亡RR 0.40・マスクNIVは0.83、HFNCは挿管のみ減らす — 25RCT 3804例のNMA（Ferreyro・JAMA2020）</span>）。</p>
-<p class="figref">🖼 原著のFigure 5 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 5 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-017-1760-8" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-017-1760-8）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 5. 挿管率の比較 — パネルa: HFNC対COT、パネルb: HFNC対NIV（原図・無改変。出典 <span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span>、©Zhao et al., Crit Care 2017, CC BY 4.0） パネルaでは統合値がOR 0.52付近で無効線の左に明確に位置し、パネルbでは各試験の信頼区間が広く無効線をまたぎます。<mark class="hl">目で見てすぐ分かるほど「差がない」</mark>ことがこの図の最大のメッセージです。</p>
 </div>
 <p>_図: HFNC対COT・HFNC対NIVの挿管率フォレストプロット（出典 <span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span>）_</p>
 <p>ガイドラインはこの蓄積を踏まえて動きました。ICM 2020ガイドラインは低酸素性呼吸不全で「従来型酸素よりHFNC」を強い推奨・中等度の確実性とし、根拠は挿管RR 0.85（0.74–0.99・7試験1,647例）と呼吸補助エスカレーションRR 0.71で、死亡・ICU滞在・快適性には差がありませんでした。パネル内で唯一投票を要した推奨で、条件付きを支持した委員は挿管遅延のリスクを挙げています（<span class="wl">HFNCのガイドライン（ICM2020）</span>）。ERS 2022は「COTよりHFNC」「NIVよりHFNC」をいずれも条件付き推奨にとどめました（<span class="wl">急性呼吸不全におけるHFNCのERS臨床実践ガイドライン — 8つの条件付き推奨（ERJ2022）</span>）。ATS 2026は39 RCT・2,913例のネットワークメタ解析で、HFNCを強い推奨・中等度確実性（挿管RR 0.76、0.64–0.89／死亡RR 0.81、0.67–0.97・低い確実性）とし、<mark class="hl">この強い推奨は「HFNC対標準酸素療法」に限られる</mark>と明記しました。HFNC対NIVには賛否いずれの推奨も出していません（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。</p>
 <p>そしてSOHO試験（NEJM2026）が「死亡」に決着をつけました。フランス42 ICUで P/F 200以下・呼吸数25超・肺浸潤影の1,110例（肺炎88.1%、うちCOVID-19が46.6%、免疫不全22.3%）をHFNC（50 L毎分以上・SpO₂ 92〜96%・最低48時間）とリザーバーマスク（10 L毎分以上）に割り付け、<strong>28日死亡は14.6%対14.6%</strong>（差 −0.05ポイント、p=0.98）。挿管は42.4%対48.4%（差 −5.93、95%CI −11.78〜−0.08）と減り、1時間後の呼吸数 −3回毎分・PaCO₂ −2 mmHg・自覚呼吸困難の改善49.5%対34.7%と生理と症状は良くなりました。90日死亡17.6%対18.8%、VFD 28対26日。死亡率が想定18%より低い14.6%だったため、2〜3ポイントの死亡減は否定できないと著者自身が明記しています（<span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1056/NEJMoa2516087" target="_blank" rel="noopener">原論文（doi.org/10.1056/NEJMoa2516087）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. 生存確率と挿管の累積発生率（原図・無改変。出典 <span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span>、©Massachusetts Medical Society） 上段の生存曲線は2本が全期間ほぼ完全に重なり、拡大しても離れません。下段の挿管累積発生率は最初の2〜4日で急峻に立ち上がって以後平坦になり、標準酸素がHFNCの上を走ります。<mark class="hl">挿管の大半が最初の4日に起きる</mark>ことが読み取れ、ROXで2・6・12時間を追う運用の根拠にもなります。</p>
 </div>
 <p>_図: SOHO試験の28日生存と挿管累積発生率（出典 <span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span>）_</p>
 <p>ARDSとの境界も押さえておきます。ARDSに対する生理学的レビューは <strong>P/F 150を分水嶺</strong>とし、150超の軽〜中等症では非侵襲戦略が安全・有効でHFNCを第一選択に、150以下の中〜重症では「試みてよいが挿管遅延で死亡が増える危険域」としています。HFNCでも努力呼吸が残る重症例にはヘルメット高PEEP NIVが2本目の柱です（<span class="wl">ARDSに対するNPPVとHFNCの生理学的レビュー（ICM2021）</span>）。挿管の閾値そのものは曖昧で、NRB・NIV・HFNC使用中の4,726例で生理学的閾値（P/F・S/F・ROX・HACORなど）を満たしても3時間以内に挿管される確率は最重症の基準でも34%以下、黒人・アジア系で低い、という実態があります（<span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span>）。</p>
-<h3>主要試験・メタ解析</h3>
+<h3 id="sec-7-1">主要試験・メタ解析</h3>
 <div class="tw"><table>
 <thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
 <tbody>
@@ -452,12 +506,12 @@
 <div class="call tip"><span class="lab">POINT</span>
 <p>当院での読み方 P/F 200以下の肺炎性呼吸不全にはHFNCを第一選択のまま続けます。ただし「HFNCだから死亡が減る」とは説明しません。家族には「挿管を避けられる可能性は上がるが、生存率が上がる治療ではない」と伝えます（<span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span> の判断表）。SOHOの48時間の型と事前規定の挿管基準をセットで運用し、基準を満たしたら躊躇せず挿管します。</p>
 </div>
-<h2>5. 適応② 免疫不全患者</h2>
+<h2 id="sec-8">5. 適応② 免疫不全患者</h2>
 <p>免疫不全患者は米国人口の約7%にすぎないのにARDS症例の約20%を占め、死亡率は今なお50〜60%です（<span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span>）。挿管された患者のほぼ半数が院内で死亡しうるため、「挿管を何としても避ける」戦略が長く模索されてきました。HFNCはその期待を背負って検証され、期待は外れました。</p>
 <p>HIGH試験（JAMA2018）はフランス32 ICUで免疫不全の急性低酸素性呼吸不全776例（酸素6 L毎分以上を要する。AIDS・PaCO₂ 50以上・単独の心原性肺水腫は除外）をHFNC（50 L毎分・FiO₂ 100%で開始、SpO₂ 95%以上、最初の3日は50 L毎分以上、以後60 L毎分まで）と標準酸素に割り付けました。<strong>28日死亡は35.6%対36.1%</strong>（HR 0.98、P=.94）。挿管38.7%対43.8%（差 −5.1%、P=.17）、快適さ・呼吸困難・ICU獲得感染・在室日数はいずれも差がなく、改善したのは P/F（150対119）と6時間後の呼吸数（25対26回毎分）だけでした。生理学的改善が臨床アウトカムに翻訳されなかった典型例です。<mark class="hl">HFNCを使ってはいけないという結論ではなく、原著は「標準酸素もHFNCもどちらも妥当」と述べています</mark>（<span class="wl">免疫不全患者の急性呼吸不全に対するHFNC（HIGH試験）</span>／ポインタ <span class="wl">免疫不全患者の急性呼吸不全に対するHFNC HIGH試験（JAMA 2018）</span>）。</p>
 <p>同じ免疫不全集団では、早期NIVも酸素療法単独と比べて28日死亡を減らしませんでした（Lemialeら、<span class="wl">集中治療2015年の進歩 — HFNC・駆動圧・横隔膜萎縮・VAE・ICU運営を1本で概観する（Update・AJRCCM2016）</span>）。フェイスマスクNIV＋HFNOとHFNO単独を比べた299例の研究でも死亡・挿管に差がありません。ここからICM 2023の総説は「免疫不全患者の呼吸補助プロトコルは非免疫不全患者と異なるべきではない」「挿管回避を目的化してはならない」と結論し（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）、Brochard総説も「侵襲的換気時の死亡が大きく下がった現在、挿管を何としても避ける戦略を支持するデータはない」と書きました（<span class="wl">急性呼吸不全に対する非侵襲的呼吸補助 — 生理から病態別エビデンスまで（Brochard総説・NEJM2022）</span>）。ATS 2026はこの前提を引き継ぎ、免疫不全を独立論点から外しています。SOHOのサブグループ（免疫不全22.3%）でも信頼できる効果修飾は示されていません。</p>
 <p>一方で「同じプロトコルでよい」と「同じ道具で失敗を見張れる」は別です。Efraim 3研究はHFNOまたはNIVの使用が挿管確率の低下と、HFNOの使用が死亡率の低下と関連したと示唆しますが、<mark class="hl">ROX指数もHACORスコアも免疫不全患者では性能が実質的に低く</mark>、信頼できる検証済み予測ツールは現時点で存在しません（<span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span>）。</p>
-<h3>主要試験</h3>
+<h3 id="sec-8-1">主要試験</h3>
 <div class="tw"><table>
 <thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
 <tbody>
@@ -468,17 +522,17 @@
 <div class="call warning"><span class="lab">⚠ 注意</span>
 <p>当院での読み方 免疫不全患者にHFNCを使うのは妥当ですが、転帰を変える期待は持ちません。挿管判断はROX・HACORではなく臨床評価（酸素化・呼吸数の改善の欠如、胸腹部非同調、全身的悪化）で行い、「病因不明」を許容しないことが同じ論説の主張です。</p>
 </div>
-<h2>6. 適応③ 高CO₂血症性呼吸不全・AECOPD</h2>
+<h2 id="sec-9">6. 適応③ 高CO₂血症性呼吸不全・AECOPD</h2>
 <p>高二酸化炭素血症性呼吸不全では、HFNCは主役ではありません。NIVがCOPD増悪で挿管と死亡を減らすことは決着しており（死亡RR 0.47・挿管RR 0.43・強い推奨、<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）、詳細は <span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> に任せます。この章では「HFNCがどこまで許されるか」だけを扱います。</p>
 <p>HFNCがCO₂を下げる機序は死腔洗い出しで、生理的には理にかなっています。フェイスマスク酸素からHFNC（流量43±10 L毎分）へ切り替えた急性高CO₂血症性呼吸不全18例では、PaCO₂は48時間で平均11.2 mmHg低下しpHは正常化しました。下がり幅は初期PaCO₂が高いほど大きく（R²=0.378）、呼吸数・酸素流量とは相関しません。ただし院内死亡は55.6%対61.1%で変わらず、対照は「非高炭酸のHFNC患者」でNPPVではありません。呼吸不全死した8例の48時間PaCO₂変化は −2.6 mmHgにとどまり、それ以外の10例は −18.1 mmHgでした（<span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.4266/acc.2019.00563" target="_blank" rel="noopener">原論文（doi.org/10.4266/acc.2019.00563）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. HFNC使用中のPaCO₂（A）・pH（B）・PaO₂（C）の逐次測定（原図・無改変。出典 <span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span>、©Acute and Critical Care） 高炭酸群でPaCO₂が48時間かけて下がりpHが正常化する一方、非高炭酸群は横ばい。<mark class="hl">12〜48時間でPaCO₂が下がらなければHFNCを続けずに方針を切り替える</mark>根拠になる図です。</p>
 </div>
 <p>_図: 高CO₂血症患者でのHFNC下のガス推移（出典 <span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span>）_</p>
 <p>ガイドラインの線引きは明確です。ERS 2022は「COPD＋高二酸化炭素血症性ARFではHFNCの前にNIVを試す」（<span class="wl">急性呼吸不全におけるHFNCのERS臨床実践ガイドライン — 8つの条件付き推奨（ERJ2022）</span>）。ATS 2026は軽度の高二酸化炭素血症・アシデミア（pH 7.25以上）に限り、監視とNIVへの速やかなエスカレーションが利用できることを条件にHFNCを代替として条件付き推奨（低い確実性）としました。HFNC群の死亡RR 0.39・挿管RR 0.38は数字だけ見ればNIVに劣りませんが、<mark class="hl">試験全体でHFNC開始患者の3分の1がNIVへのエスカレーションを要した</mark>ことが示すとおり、「NIVへの橋渡しを前提にした選択肢」です。多施設試験ではpH 7.25〜7.35の初期管理で治療2時間後のPaCO₂という点でHFNOはNIVに非劣性でしたが、32%が6時間以内にNIVへ上がっています（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。</p>
 <p>この帯域を治療失敗で比べた非劣性RCTが2024年に出て、答えは「代替できない」でした。中国の1施設2 ICUで、GOLD基準のAECOPDで pH 7.25〜7.35 かつ PaCO₂ 50 mmHg以上の225例を、HFNC（AIRVO 2・初期40 L毎分・37 ℃・SpO₂ 88〜92%）とNIV（S/T・EPAP 4・IPAP 8から漸増）に割り付けました。主要評価項目の治療失敗（挿管または他方への切り替え）は <strong>HFNC 25.7%対NIV 14.3%</strong>、リスク差11.38%（95%CI 0.25〜21.20）で、非劣性マージン9%を超えました。挿管は14.2%対5.4%（p=0.026）で、失敗率の差11.4ポイントのうち約8.8ポイントは挿管の差です。28日死亡9.7%対7.1%・在院日数10対11日に差はありません。血液ガスは1・12時間で両群同等、48時間でNIV群のPaCO₂が53（49〜59）対57（52〜60）mmHgと低く、HFNC群の失敗理由の最多はCO₂貯留の悪化（44.8%）、失敗は開始3〜8日目に集中していました。一方で快適スコアは7対6、鼻顔面皮膚損傷2.7%対8.9%、看護の気道ケア介入5対8回毎日とHFNCが優れます。著者は「初期は死腔洗い出しでCO₂が下がるが、誘因が制御されないうちに病勢がピークに達すると、PEEPと圧支持を調整できるNIVのほうが分時換気量を保証できる」と解釈しています。単施設・非盲検・流量40 L毎分固定・切り替えは主治医判断という限界があり、<mark class="hl">「NIVが優れる」ではなく「HFNCの非劣性は示せなかった」と読む</mark>のが正確です（<span class="wl">COPD増悪の中等度高CO2血症でHFNCはNIVに非劣性を示せず — 治療失敗25.7%対14.3%、挿管14.2%対5.4%、快適さはHFNCが上（単施設RCT・CritCare2024）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-024-05040-9" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-024-05040-9）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. 累積治療失敗率のKaplan-Meier曲線（原図・無改変。出典 <span class="wl">COPD増悪の中等度高CO2血症でHFNCはNIVに非劣性を示せず — 治療失敗25.7%対14.3%、挿管14.2%対5.4%、快適さはHFNCが上（単施設RCT・CritCare2024）</span>、CC BY 4.0） 両群とも0〜2日は重なって推移し、3日目以降にHFNC（青）が階段状に上がって8日目に0.26へ、NIV（赤）は0.14で頭打ちになります（Log-rank p=0.041）。<mark class="hl">差がつくのは3〜8日目</mark>で、1・12時間の血液ガスが同等だったことと合わせると、「早期に効いているように見えて数日後に破綻する」のがHFNCの失敗の型だと読めます。</p>
 </div>
@@ -486,20 +540,20 @@
 <p>この結果はATS 2026・ERS 2022の「NIVが先、HFNCはNIVが使えないとき」と矛盾せず、むしろ「pH 7.25以上なら代替してよい」を狭める方向です。HFNCを初期に選ぶ場面はマスク不耐・顔面外傷・せん妄でマスクが保持できない、あるいは患者がNIVを拒む場合の次善に限り、選んだら<mark class="hl">1・12・48時間の血液ガスと呼吸数でNIVへ上げる基準を紙に書く</mark>（同ノートは「呼吸数28〜30超・pHが7.35に戻らない・PaCO₂が12時間で下がらない」を候補に挙げています）。</p>
 <p>もっと軽い層では使う理由がありません。中国16施設のRCTは pH 7.35以上・PaCO₂ 45超という軽度高二酸化炭素血症のCOPD増悪330例で、HFNC（初期25 L毎分から最大忍容量へ）は挿管基準充足率を減らさず（2.5%対0.6%、P=0.198）、在院日数（9.0対8.0日、P=0.021）と入院費用（約14.6%増、P=0.006）をむしろ有意に増やしました。治療失敗の最多理由はHFNC不耐（52%）で、NPPV開始が4.0日対2.0日と遅れる傾向がありました。主要アウトカムの発生率が想定の20分の1で検出力不足という限界はありますが、<mark class="hl">「軽症COPD増悪にHFNCをルーチンで使う理由はない」</mark>という結論は揺らぎません（<span class="wl">COPD増悪（軽度高CO2血症）でのHFNC vs 従来型酸素療法 RCT</span>）。</p>
 <p>使うと決めたら流量です。40 RCT・3,597例のNMAは初期流量Low（20〜30）・Mod（30〜50）・High（50超 L毎分）を比べ、挿管率・短期死亡・P/Fはどの流量帯もNIVと同等、LowがPaCO₂低下（MD −3.11）・pH改善（MD 0.031）・鼻顔面損傷の減少（OR 0.11）で最上位、Modが在院日数短縮（MD −1.11）で最上位でした。多くは間接比較・低〜非常に低い確実性で、Figure 4のリーグテーブルには数値の誤りが確認されているため本文の記載を優先します（<span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span>）。ICM 2024のエディトリアルも「低酸素患者より低い流量（30 L毎分）で十分なCO₂クリアランスが得られうる」と書いています（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1080/25310429.2025.2598913" target="_blank" rel="noopener">原論文（doi.org/10.1080/25310429.2025.2598913）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. PaCO₂（A）・pH（B）・鼻顔面損傷（C）のネットワーク図（原図・無改変。出典 <span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span>、CC BY 4.0） ノードの大きさは参加者数、線の太さは研究数。<mark class="hl">Low群を含む比較は他の2群に比べて研究数・参加者数が明らかに少ない</mark>＝間接比較への依存度が高いことがひと目で分かります。「20〜30 L毎分が最適」の確実性の低さはここに由来します。</p>
 </div>
 <p>_図: AECOPD流量NMAのネットワーク図（出典 <span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span>）_</p>
 <p>HFNCの実務的な居場所は「NIVの休止中」です。ERS 2022はNIVの休止中はCOTよりHFNCを提案し（推奨3）、ICM 2023の図は高炭酸ガス性ARFで「NIVセッションの合間に使ってよい（＋）」としています。COPD増悪の人工呼吸レビューは、抜管後の予防的NIVとHFNCの併用がどちらか単独より有効らしいと記し（<span class="wl">COPD・喘息に対する人工呼吸管理レビュー（ICM2020）</span>）、CHEST Critical Care Reviewの5段階マトリクスではHFNTは「呼吸窮迫を伴う強い呼吸困難や酸素でも持続する低酸素血症」で追加し、NIVは「PaCO₂ 45以上かつpH 7.35以下」が加わったときに踏み切る位置にあります（<span class="wl">ICUにおける喘息・COPD増悪の管理 — 気道炎症・気管支攣縮・動的過膨張への段階的アプローチ（CHEST Critical Care Review・CHESTCC2025）</span>）。</p>
-<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著の図 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1016/j.chstcc.2024.100107" target="_blank" rel="noopener">原論文（doi.org/10.1016/j.chstcc.2024.100107）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>呼吸サポート5段階（酸素→HFNT→NIV→IMV→VV ECMO）の適応・初期設定・合併症（原図・無改変。出典 <span class="wl">ICUにおける喘息・COPD増悪の管理 — 気道炎症・気管支攣縮・動的過膨張への段階的アプローチ（CHEST Critical Care Review・CHESTCC2025）</span>、CC BY-NC-ND 4.0） HFNTの初期設定は15〜60 L毎分（高流量でPEEP 3〜5 cmH₂O相当）。HFNTの次にNIV、NIVの次にIMVという一本道の地図で、<mark class="hl">HFNTはNIVの手前の段であって代替ではない</mark>ことを閉塞性肺疾患の文脈で示しています。</p>
 </div>
 <p>_図: 閉塞性肺疾患の呼吸サポート5段階（出典 <span class="wl">ICUにおける喘息・COPD増悪の管理 — 気道炎症・気管支攣縮・動的過膨張への段階的アプローチ（CHEST Critical Care Review・CHESTCC2025）</span>）_</p>
 <p>ICUを出た後の話も1つ置いておきます。安定期（1か月以上増悪なし）の慢性高CO₂血症COPDに在宅HFNC（流量20〜40 L毎分・主に夜間）を1か月以上使ったRCT 4本・440例のメタ解析では、急性増悪は <strong>RR 0.77（0.66〜0.89）</strong>・中等度の確実性で、対照の300／1000に対し1000人あたり69件減りました。入院（RR 0.87・2試験）とSGRQ（MD −8.12点）は改善方向だが低い確実性、死亡（RR 1.22、0.64〜2.35・31死亡）は「分からない」です。対象の平均PaCO₂は48〜52 mmHgの軽度で、在宅NIVの適応となる重い高CO₂血症はほぼ含まれず、在宅NIVとの直接比較も無い、と読んでください。4試験中2本（Nagata 2018・2022）は日本の多施設試験で、本邦の在宅ハイフローセラピー（2022年度保険収載・PaCO₂ 45以上のCOPD）の根拠でもあります（<span class="wl">在宅HFNCは慢性高CO2血症COPDの急性増悪を減らす — RR 0.77・1000人あたり69件減、死亡と入院は不確実（4RCT440例・SRメタ解析・RespirMed2023）</span>）。ICUで変わるのは退室後の設計で、<mark class="hl">AECOPDで入室し回復後もPaCO₂が高く、NIVマスクに耐えられない患者</mark>で、退院前に呼吸器内科と在宅HFNCを相談する選択肢が根拠を得た、という位置づけです。逆に「在宅HFNC使用中」の患者が入室してきたら、自宅の流量と使用時間を聴取して急性期の設定と区別して記録します。</p>
 <p>喘息は別扱いです。重症喘息発作ではHFNCのデータは小児が大半で質の高い比較試験が不足しており、<mark class="hl">現時点で喘息のガイドラインはHFNCを推奨していません</mark>（<span class="wl">重症喘息発作をICUで管理する — 動的過膨張とauto-PEEPを軸に気管支拡張薬からVV-ECMOまで（総説・JIntensiveCareMed2026）</span>）。</p>
-<h3>30 L毎分は本当に必要か — COPD試験の実際の設定</h3>
+<h3 id="sec-9-1">30 L毎分は本当に必要か — COPD試験の実際の設定</h3>
 <p>「AECOPDのHFNCは30 L毎分」という数字が独り歩きしています。この小節は、COPDでHFNCの有効性を検討した試験が<strong>実際にどの流量で走り、なぜその値を選び、実測は何 L毎分だったか</strong>を並べ、「30を推す論文はその理由に何を挙げているか」を各ノートの記載だけで確かめます。圧の生理は2-1にあるので、ここでは結論だけを引きます。論文の記載・本人の見解・Claudeの解釈を分けて書きます。</p>
 <h4>論文の記載</h4>
 <div class="tw"><table>
@@ -520,7 +574,7 @@
 <h4>本人の見解（岡本・2026-09-26）</h4>
 <h4>解釈（Claudeの解釈・上の表とVault内ノートの記載だけから）</h4>
 <ul><li><strong>「低めから始めて患者を見て調整」は試験の設計と概ね一致します。</strong> 有効性を示した在宅試験（FLOCOP）は設定30〜40・不快なら20まで・実測28.5、軽症AECOPD（Xia）は25から上方滴定して実測30、Cortegianiも「不快なら下げる」、Tanも「耐容に応じて調整」で、<mark class="hl">流量を固定したまま走った試験はTanの40 L毎分だけ</mark>です。ただし「初期30」をそのまま採った試験は表の中に1本もありません。出発点は25（Xia）・30〜40（FLOCOP）・40（Tan）・60（Cortegiani）とばらつき、<mark class="hl">実測が30前後に落ち着いたのは患者の忍容性が決めた結果</mark>です（Xiaの著者は「最大忍容量に合わせるとCOPDでは流量が上がらない」と書いています）。</li><li><strong>30 L毎分を推す理由は「圧が怖い」だけではありません。</strong> ノートの範囲で圧（PEEPi超え）を理由に挙げているのはNMA 2025の機序説明とATS 2026の「動的過膨張への影響は未解明」の2つで、ICM 2024とRezoagliは「30で十分なCO₂クリアランス」「上げても努力軽減とCO₂除去の上乗せがない」という効率の理由です。NMA自身の主結果も、挿管・死亡はどの流量帯でも同等で、差が出たのはPaCO₂・pH・鼻顔面損傷（低〜非常に低い確実性）でした。つまり「上げると害」より「上げても得るものがなく、快適性と皮膚は失う」が論文側の主張の中心です。</li><li><strong>「開口すれば圧は上がらない」は事実として支持されますが、COPD患者での実測は無く、開口すればPEEPi相殺の利益も消えます。</strong> 開口・閉口の圧差は心臓術後患者と健常者の測定で、NMAが引く「40→60でPEEP 6.46→10.13」の条件（閉口か開口か）はノートに記載がありません。HFNCがAECOPDで効く根拠として各ノートが挙げるのは、死腔洗い出しに加えて「軽度の陽圧でauto-PEEPを一部相殺」です。開口を許すなら圧の懸念は薄れますが、同時に相殺の効果も期待できません。「圧が消えるから恐れなくてよい」と「圧が要らない」は別の話で、<mark class="hl">どちらの効果を取りに行くかを決めてから流量を決める</mark>のが筋です。</li><li><strong>未解決なのはPaCO₂低下が流量に依存するかどうかです。</strong> Vault内でも答えが割れています。安定期COPDでは流量を上げるほどPaCO₂が下がる（Lee 2019が引くBräunlich 2016）、急性高CO₂血症のLee 2019では流量と相関せず、低酸素性AHRFのMauriでは不変、NMAでは低流量が有利です。Tanの失敗（40固定）が流量で説明できるかは未検証で（⚖️の表にも同じ記載）、用量反応を解析したRCTはCOPDに1本もありません（FLOCOPも未解析）。</li><li><strong>ノートの範囲で言える運用</strong>：初期は30 L毎分前後（NMAの20〜30とRezoagli・ATSの30〜40の重なる位置）から始め、忍容性と1・12・48時間の血液ガスで上下させる。上げるときは閉口時にPEEPi（AECOPDで5〜15 cmH₂O）を超えうることを意識し、開口している患者では圧の効果を当てにしない。<mark class="hl">圧を過度に恐れる根拠は薄いが、恐れなくてよいと言い切る根拠（COPD患者での開口時圧の実測）もまだ無い</mark>、というのが2026年9月時点の到達点です。</li></ul>
-<h3>主要試験・ガイドライン</h3>
+<h3 id="sec-9-2">主要試験・ガイドライン</h3>
 <div class="tw"><table>
 <thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
 <tbody>
@@ -536,16 +590,16 @@
 <div class="call tip"><span class="lab">POINT</span>
 <p>当院での読み方 高CO₂血症性呼吸不全はNIVが軸です。pH 7.25〜7.35・PaCO₂ 50以上のAECOPDでも初期補助をHFNCで代替せず（治療失敗25.7%対14.3%）、HFNCを初期に選ぶのはマスク不耐・拒否・禁忌の次善に限ります。選んだら「NIVへの即時エスカレーションが可能」を条件に、20〜30 L毎分から始めて漫然と上げず、<mark class="hl">1・12・48時間の血液ガスと呼吸数でNIV移行基準を紙に書いて評価します</mark>。1・12時間が良くても48時間で差がつき、失敗は3〜8日目に来ます。<mark class="hl">重症アシドーシス（pH 7.25未満）でHFNC単独に賭けない</mark>。重炭酸が高い患者はNIVエスカレーションの遅れに注意します。NIVを選ぶなら皮膚保護と休止中のHFNC併用で快適性の差を埋めます。</p>
 </div>
-<h2>7. 適応④ 抜管後 — 予防的使用と気管切開・SBT中の高流量</h2>
+<h2 id="sec-10">7. 適応④ 抜管後 — 予防的使用と気管切開・SBT中の高流量</h2>
 <p>抜管後の再挿管は10〜40%と幅があり、死亡増加と独立して関連します（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。HFNCが最も確実に効く場面はここです。2017年のRCTメタ解析で対COTの挿管回避効果が有意だったのは抜管後の呼吸不全（OR 0.37、0.20–0.70）だけで（<span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span>）、観察研究込みの18試験でも重心は抜管後（n=2,741・71%）にあり、再挿管は対COT OR 0.39（0.23–0.65）と明確でした（<span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span>）。抜管そのものの判断（SBT・カフリーク・高リスクの定義）は <span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> に任せ、ここは「抜管後に何を当てるか」に絞ります。</p>
 <p>予定抜管後の15試験・2,600例のネットワークメタ解析では、NPPVもHFNCも短期死亡は下げませんが、<mark class="hl">HFNCはCOTに比べて再挿管を RR 0.54（0.32–0.89）・確信度high で減らします</mark>。これが本論文で唯一の高確信の効果で、COTに戻す理由はありません。HFNCとNPPVの直接比較は1試験（Hernández 2016・n=604）しかなく、RR 1.02・lowで優劣は決着していません（<span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-021-03550-4" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-021-03550-4）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. ネットワークメタ解析のフォレストプロット（原図・無改変。出典 <span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span>、©Yasuda et al. Crit Care 2021, CC BY 4.0） 短期死亡・再挿管・抜管後呼吸不全の3アウトカムで、HFNC対COTの再挿管だけが信頼区間ごと無効線の左にあります。<mark class="hl">SUCRAの1位は推奨ではない</mark>。短期死亡でNPPVがSUCRA 93.2の1位でも中身は有意でないRR 0.75です。</p>
 </div>
 <p>_図: 抜管後酸素療法NMAのフォレストプロット（出典 <span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span>）_</p>
 <p>リスク層で答えが変わります。ICM 2023の総説は3層で書き分けます。低リスクではNIVへエスカレーションできる体制があればHFNOの優位は消え、高リスク（既存の呼吸器・心疾患、65歳超）ではHFNOとNIVの交互がHFNO単独に優り（とくに肥満で顕著）、超高リスクでは48時間の持続NIVがHFNO単独に優るようです（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。その根拠がHIGH-WEAN（JAMA2019）です。65歳超・慢性心疾患・慢性肺疾患のいずれかを持つ641例で、抜管直後48時間のNIV（1日12時間以上）＋休止中HFNC 50 L毎分は、HFNC単独（50 L毎分・37 ℃・48時間以上）に比べ7日再挿管を <strong>11.8%対18.2%</strong>（差 −6.4%、P=.02、調整OR 0.60）に減らしました。死亡と在室日数は変わりません。効果が最も大きかったのはSBT終了時PaCO₂ 45 mmHg超の群（8%対21%）です（<span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1001/jama.2019.14901" target="_blank" rel="noopener">原論文（doi.org/10.1001/jama.2019.14901）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. 全解析集団における抜管から再挿管までのKaplan-Meier曲線（原図・無改変。出典 <span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span>、©American Medical Association） NIV＋HFNC群とHFNC単独群の再挿管曲線は48時間以内から離れ始めます（48時間再挿管7%対12%、72時間9%対16%）。<mark class="hl">差がつくのは最初の48時間</mark>で、この時間帯に NIV をかぶせる意味がここにあります。</p>
 </div>
@@ -553,14 +607,14 @@
 <p>ガイドラインの線も同じ向きです。ICM 2020ガイドラインは、24時間を超えて挿管され高リスク因子を1つでも持つ患者に抜管後COTよりHFNCを提案し（条件付き・中等度。再挿管RR 0.46、0.30–0.70・4試験847例）、臨床医が通常NIPPVへ抜管するであろう患者にはHFNCではなくNIPPV継続を提案しました（条件付き・低い。NIPPV比で再挿管に差なし）。「高リスク」の定義が試験ごとに異なり、「24時間超挿管＋因子1つ」は多くのICU患者が該当する、という限界はそのノートの吟味にあります（<span class="wl">HFNCのガイドライン（ICM2020）</span>）。ATS 2026は抜管後のHFNCまたはNIVを条件付き推奨（再挿管 NIV RR 0.75／HFNC RR 0.80）とし、高リスクではNIVがHFNCより有効（交互作用 p=0.006）、ごく低リスクは標準酸素で可としました。そして<mark class="hl">救援目的のHFNC単独は再挿管を増やしうる</mark>（対標準酸素で交互作用 p=0.001）と警告し、抜管後推奨を予防的使用にのみ適用しています（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。韓国の離脱ガイドライン2024も「全例でCOTよりHFNC（RR 0.49）／高リスクならNIVも可（RR 0.30）／HFNCとNIVの優劣は未決着」と同じ構図です（<span class="wl">韓国集中治療医学会・人工呼吸離脱ガイドライン2024 — 9つのPICOと12推奨（AcuteCritCare2024）</span>）。</p>
 <p>2026年に高リスク例のHFNC対NIVを扱うメタ解析が2本出て、なお割れています。15 RCT・2,073例ではHFNCはNIVに比べ72時間再挿管を減らさず（OR 1.19、0.88–1.59、low）、リスク因子4個以上（OR 1.63）と非手術の肥満（OR 2.52）ではHFNCが不利、高バイアス試験を除くと全体でも不利（OR 1.32、1.02–1.71）でした。<mark class="hl">抜管の指示を出す前に11項目のリスク因子をいくつ持っているか数える</mark>のが行動に変わる一点です（<span class="wl">抜管後のHFNCはNIVより再挿管を減らさない — 15RCT 2073例、リスク因子4個以上と非手術の肥満ではHFNCが不利（HIGH-FLOW OXY・CritCareExplor2026）</span>）。一方、10 RCT・1,697例では再挿管20.3%対21.0%で同等（RR 1.00）としますが、主解析は「非イベントのリスク比」で効果が1.00側に圧縮されており、通常のリスク比は0.93（0.64–1.37）です。「差がないと決着した」ではなく「差があるとしても中等度以下」と読み、NIVが続かないなら24〜48時間を目安にHFNCへ降段してよい、という結論です（<span class="wl">抜管失敗の高リスク患者でHFNCはNIVと再挿管が同等 — 10RCT 1697例、ただし主解析は非イベントのリスク比で効果が圧縮（SR・MA・CritCareSci2026）</span>）。非高CO₂血症の高リスク829例の事後解析はNIV＋HFNCの7日再挿管11.8%対HFNC単独17.6%（調整絶対差5.6%）で、高CO₂血症は「高リスク」の必須条件ではないと主張します（<span class="wl">非高CO2血症の抜管後高リスク患者にも予防的NIVを — 再挿管11.8%対17.6%、HFNCの手軽さより臨床的利益を選ぶ（エディトリアル・ICM2026）</span>）。</p>
 <p>NIV休止中に何を流すかも問われました。2つの大規模RCTの予防的NIV患者1,077例の事後観察解析で、休止中HFNCは未調整で抜管失敗13.7%対18.5%（p=0.036）でしたが、G-computationで調整すると −3.9%（95%CI −8.7〜0.9）と有意差が消えました。有意だったのは48時間以内の再挿管だけで、著者ら自身が「実践変更は支持できない」と書いています。<mark class="hl">「NIV休止中に何を流すか」を記録に残す運用は今日から始められます</mark>（<span class="wl">抜管後NIVの休止中にHFNCを流すと抜管失敗13.7%対18.5% — ただし調整後は有意差消失（観察研究・ICM2026）</span>）。</p>
-<p class="figref">🖼 原著の図 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著の図 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1007/s00134-026-08544-w" target="_blank" rel="noopener">原論文（doi.org/10.1007/s00134-026-08544-w）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Visual abstract（原図・無改変。出典 <span class="wl">抜管後NIVの休止中にHFNCを流すと抜管失敗13.7%対18.5% — ただし調整後は有意差消失（観察研究・ICM2026）</span>、©Intensive Care Medicine） 「未調整では有利、調整すると消える」という骨格を著者ら自身の公式図が最初から明示しています。NIV装着時間（HFNC群20時間対13時間）は不死時間バイアスのため調整に入れられません。</p>
 </div>
 <p>_図: NIV休止中HFNCの観察研究ビジュアルアブストラクト（出典 <span class="wl">抜管後NIVの休止中にHFNCを流すと抜管失敗13.7%対18.5% — ただし調整後は有意差消失（観察研究・ICM2026）</span>）_</p>
 <p>日本の実態は動いています。JIPAD 40 ICU・12,687例で抜管後のNIVは6.7%→3.9%、HFNCは15.9%→28.0%（2018→2022年、いずれもP for trend &lt;0.001、2022年の調整OR NIV 0.67・HFNC 1.89）。患者背景では説明できない実践そのものの変化ですが、<mark class="hl">転帰との関連は評価されていません</mark>（<span class="wl">抜管後の呼吸管理は5年でNIVからHFNCへ — NIV 6.7→3.9%、HFNC 15.9→28.0%（JIPAD 12687例・40ICU・CritCareResusc2026）</span>）。同じJIPADでは抜管72時間以内の再挿管が5.9%、やせ（BMI 18.5未満）で8.4%・調整OR 1.58、肥満で4.3%・OR 0.69と、西欧と逆に「やせ」がリスクでした（<span class="wl">やせは再挿管リスク1.58倍・肥満は0.69倍 — 抜管72時間以内の再挿管5.9%（JIPAD 41016例・131ICU・JAnesthAnalgCritCare2026）</span>）。HIGH-FLOW OXYの「非手術の肥満ではHFNC不利」を日本の抜管後にそのまま当てはめてよいかは、この対比から慎重に読む必要があります。</p>
 <p>SBT中と気管切開患者にも居場所があります。Tピース中のHFNO併用で7日以内再挿管が16%→3.9%（P=0.05）という報告（<span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span>）、気管チューブへの高流量酸素が呼気ポート径6.9 mm・60 L毎分でPEEP 6.0 cmH₂Oを作り肺容量喪失を減らす生理研究（<span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span>）があります。気管切開患者では専用インターフェースで気管高流量酸素を投与でき、最高流量（50〜60 L毎分）でわずかな気道内陽圧と軽度の酸素化改善・呼吸数低下が得られますが、効果は同流量のHFNCより有意に穏やかです。持続的な気管高流量酸素＋吸引頻度を抜去準備の指標とする戦略は、間欠的高流量＋カフィングトライアルより抜去までの時間を短縮しました（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。</p>
-<h3>主要試験・メタ解析</h3>
+<h3 id="sec-10-1">主要試験・メタ解析</h3>
 <div class="tw"><table>
 <thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
 <tbody>
@@ -577,13 +631,13 @@
 <div class="call warning"><span class="lab">⚠ 注意</span>
 <p>予防と救援を言葉のうえで分ける 抜管失敗の高リスク例には、悪化を待たずに装着する（予防）。抜管後に呼吸不全が「起きてから」当てるHFNC単独は再挿管を増やしうる（救援）。カルテには「予防」と「救援」を区別して残し、救援に該当したらNIVか再挿管へ直行します（ATS 2026／<span class="wl">抜管成功のための10のTips（Weaning最適化・ICM2020）</span>）。<mark class="hl">目標は「再挿管ゼロ」ではなく、必要な再挿管を遅らせないこと</mark>です（<span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span>）。</p>
 </div>
-<h2>8. 適応⑤ 挿管前酸素化と無呼吸酸素化</h2>
+<h2 id="sec-11">8. 適応⑤ 挿管前酸素化と無呼吸酸素化</h2>
 <p>挿管前酸素化は、この4年で最も大きく動いた領域です。2022年のBrochard総説では「不確実」のマス1つで本文記述すら無かったのに、ATS 2026では独立PICOとしてHFNCまたはNIVの強い推奨になりました（低酸素低減はNIV RR 0.51・HFNC RR 0.69、いずれも確実性は高い）。頭対頭ではNIVがHFNCより低酸素を減らし（RR 0.73、中等度）、重篤有害事象もNIVで少ない可能性（RR 0.30）がありますが、「どちらか」の推奨は出していません（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。挿管手技全体は <span class="wl">🫧 気道管理・挿管・麻酔 Home</span> に任せ、ここではHFNCの役割だけを整理します。</p>
 <p>HFNCが最も効いたのは「NIVに上乗せしたとき」です。OPTINIV（ICM2016）は重症低酸素血症の挿管49例で、NIV（PS 10・PEEP 5・FiO₂ 100%）による4分間の前酸素化にHFNC 60 L毎分・FiO₂ 100%を上乗せし、マスクを外している無呼吸の間も流し続けました。挿管手技中の最低SpO₂中央値は100%対96%（p=0.029）、SpO₂ 80%未満の重度脱飽和はper-protocolで0例対5例（21%、p=0.050）。総吸気圧（PS＋PEEP）15 cmH₂Oを超えなければ胃内送気・気圧外傷は発生しませんでした。単施設の概念実証試験で、合併症・死亡への効果は未検証です（<span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span>）。</p>
 <p>HFNC単独の「無呼吸酸素化」は期待外れです。7研究・956例のメタ解析では、重症低酸素血症の発生率・最低SpO₂・院内死亡いずれも標準治療に非劣性でしたが優越はなく、効果が示されたのは軽度低酸素（P/F 200超）のサブグループだけ（リスク差 −0.06、NNT 16.7）でした。「ICU滞在1.8日短縮」は数分の介入の効果としては説明が難しく、真に受けないという注記が付いています（<span class="wl">挿管時の無呼吸酸素化にHFNCは標準治療に非劣性 — ICU滞在を1.8日短縮、軽症低酸素例でのみ重症低酸素を減らす（7研究956例・SciRep2020）</span>）。2015年の2本のRCTでも喉頭鏡操作中のHFNCは最低SpO₂を改善せず（<span class="wl">集中治療2015年の進歩 — HFNC・駆動圧・横隔膜萎縮・VAE・ICU運営を1本で概観する（Update・AJRCCM2016）</span>）、25年分のRCTを総ざらいしたAJRCCM 2025のレビューも「経鼻15 L毎分（2 RCT・356例）もHFNC 60 L毎分（3 RCT・356例）も最低SpO₂・低酸素発生率を動かさなかった」「HFNCはNIVの禁忌がある患者の代替」と位置づけています（<span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span>）。</p>
 <p>NIV前酸素化の根拠はPREOXI（n=1,301）です。低酸素血症18.5%→8.1%、心停止1.1%→0.2%、誤嚥は増えず、肥満での恩恵は26.4%→9.0%と非肥満の3倍以上でした。肥満ではFRCが小さく酸素消費が大きいため「貯蔵庫を陽圧で増やす」ことが先で、<mark class="hl">無呼吸酸素化は肥満では効きません</mark>（<span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span>／<span class="wl">肥満患者の人工呼吸管理 — NIV前酸素化・中〜高PEEP・抜管後の予防的NIV（ナラティブレビュー・ICM2020）</span>）。3 RCT・1,555例のメタ解析（84%がPREOXI）も、頻度論ではNIV優位、ベイズでは信用区間が0をまたぎ、死亡・逆流に差なしです（<span class="wl">緊急挿管の前酸素化はNIVでBVMより低酸素が減る — 3RCT 1555例、死亡と逆流は差なし（SRメタ解析・CritCareSci2026）</span>）。ICM 2020ガイドラインは挿管周術期のHFNCそのものには推奨を出さず（10 RCTで低酸素・28日死亡・合併症すべて差なし。半数は手術室の非低酸素患者）、「既にHFNC使用中の患者では挿管中もHFNC継続を提案（条件付き・中等度）」にとどめており（<span class="wl">HFNCのガイドライン（ICM2020）</span>）、HIGH試験も挿管時の喉頭鏡操作中と抜管直後にHFNCを使っています。</p>
 <p>NIVが物理的に無い場所（CT室・病棟急変・院内搬送）では、リザーバーマスク全開かPEEPバルブ付きBVMで、HFNC全開流量の目安はフラッシュレート50 L毎分超です（<span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span>）。病院前のHFNOは症例報告と小規模シリーズに限られ、酸素消費量と電源の制約がルーチン使用を妨げています。</p>
-<h3>主要試験</h3>
+<h3 id="sec-11-1">主要試験</h3>
 <div class="tw"><table>
 <thead><tr><th>試験・年</th><th>対象・n</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
 <tbody>
@@ -596,9 +650,9 @@
 <div class="call tip"><span class="lab">POINT</span>
 <p>当院での読み方 前酸素化はNIVを軸にし、HFNCを使っている患者ではNIVマスクの下に鼻カニュラを残して60 L毎分・FiO₂ 100%で流し続けます（OPTINIVの型）。総吸気圧は15 cmH₂Oまで。<mark class="hl">HFNC単独の無呼吸酸素化に安心を求めない</mark>。重症低酸素例で本当に必要なのは前酸素化の質（NIV）と手技の速さです。</p>
 </div>
-<h2>9. 適応⑥ 術後・敗血症・外傷・COVID-19・その他の特殊集団</h2>
+<h2 id="sec-12">9. 適応⑥ 術後・敗血症・外傷・COVID-19・その他の特殊集団</h2>
 <p><strong>術後</strong>。ICM 2020ガイドラインは心臓・胸部手術を受ける高リスクまたは肥満患者で、術直後の呼吸不全予防にCOTよりHFNCを提案（条件付き・中等度）し、その他の患者への予防的HFNCは行わないことを提案しています（<span class="wl">HFNCのガイドライン（ICM2020）</span>）。ERS 2022は術後の肺合併症低リスクでは「HFNCでもCOTでもよい」、高リスクでは「HFNCでもNIVでもよい」で、実質的に推奨できるほどのエビデンスがありません（<span class="wl">急性呼吸不全におけるHFNCのERS臨床実践ガイドライン — 8つの条件付き推奨（ERJ2022）</span>）。2026年の単施設RCTは60〜80歳のVATS肺葉・区域切除210例で、抜管後の予防的HFNC（40 L毎分・FiO₂ 40%・31 ℃・中央値67時間）が術後肺合併症の重症度を順序OR 0.50（0.28–0.91）で下げ、中等症以上PPCを絶対15.6%減らしましたが、POD2のP/F・退院時6MWT・在院日数は不変で、症状改善は退院後7日に限局しました。著者自身が「全例ルーチン使用は支持されない」と明記しています（<span class="wl">高齢者のVATS肺切除後に予防的HFNCは術後肺合併症の重症度を下げる（単施設RCT・CritCare2026）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s13054-026-06205-4" target="_blank" rel="noopener">原論文（doi.org/10.1186/s13054-026-06205-4）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. 群別の術後肺合併症の重症度と絶対リスク差（原図・無改変。出典 <span class="wl">高齢者のVATS肺切除後に予防的HFNCは術後肺合併症の重症度を下げる（単施設RCT・CritCare2026）</span>、CC BY-NC-ND 4.0） 100%積み上げ横棒でCOT群とHFNC群のgrade 0–1／2／3以上の分布を比べ、grade 2（中等症）がHFNCで29.2%→16.3%に減っています。<mark class="hl">減ったのは中等症で、重症（grade 3以上）は10.4%対7.7%と大差ない</mark>ことを読み取ってください。</p>
 </div>
@@ -611,23 +665,23 @@
 <p><strong>吸入薬</strong>。HFNC中の気管支拡張薬はネブライザーを加温加湿器の乾燥側（入口）に置き、送達中は流量30 L毎分に下げます。HFNCを外す必要はありません。VMNはジェット式の2〜3倍の送達を提供しますが、根拠の大半はin vitroです（<span class="wl">重症患者へのエアロゾル療法の最適化（Special Issue Insight・ICM2022）</span>／<span class="wl">抗菌薬エアロゾル療法 — 気管支は簡単、肺実質は難しい（What's New・ICM2023）</span>）。</p>
 <p><strong>高齢者・誤嚥性肺炎</strong>。JIPADの誤嚥性肺炎3,906例では、年齢が上がるほど重症なのに侵襲的人工呼吸は73.2%→55.4%と減り、NIV（10.6→11.8%）とHFNC（26.1→31.3%）はむしろ増えていました。侵襲を落とした呼吸補助に振り替わっている像で、治療制限の結果かundertreatmentかはJIPADの変数では分けられません（<span class="wl">誤嚥性肺炎でICUに入る3906例 — 85歳以上は重症度が最も高いのに人工呼吸は55%、院内死亡39%・自宅退院20%（JIPAD・JIntensiveCare2026）</span>）。HFNCを「治療の上限」として使う場面では、その意図をカルテに明記しておくことが後の解釈を助けます。</p>
 <p>%%FIG: hfnc-indication-map | HFNCの適応を病態別に一望する地図。中央に「HFNC」を置き、周囲に6つの病態ボックス（de novo低酸素性／免疫不全／高CO₂血症・AECOPD／抜管後／挿管前酸素化／術後）を配し、各ボックスに推奨の強さを3段階の枠線の太さで示す（太線＝第一選択、中線＝条件付き、細線＝限定的）。高CO₂血症とすべての救援使用には「NIVへ」の矢印を添える。人物は描かない。 | HFNC／de novo低酸素性＝第一選択／免疫不全＝妥当だが転帰は不変／高CO₂＝pH 7.25以上のみ／抜管後＝予防的のみ／前酸素化＝NIVに上乗せ／術後＝高リスクに限る／救援使用はNIVへ %%</p>
-<h2>10. 失敗の見極めと挿管のタイミング — ROX指数</h2>
+<h2 id="sec-13">10. 失敗の見極めと挿管のタイミング — ROX指数</h2>
 <p>HFNC中は「治療失敗の速やかな検出」がすべてです。気管挿管と保護換気を遅らせないため、他の非侵襲戦略と同様に、いつまで様子を見てよいかを先に決めておきます（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。挿管をトリガーする生理学的変数の具体的閾値についてコンセンサスはなく、最終判断はベッドサイドの臨床判断ですが、ROX指数は個別の変数より予測精度が優れています（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。</p>
 <p>ROX指数＝（SpO₂/FiO₂）÷ 呼吸数。成功と正の相関を持つ変数を分子に、逆相関を持つ変数を分母に置いた合成量です。肺炎による急性低酸素性呼吸不全でHFNCを受けた191例（挿管35.6%）で、予測精度（AUROC）は開始前0.659→2時間0.679→6時間0.703→12時間0.752→24時間0.801と時間とともに上がります。<strong>ROX 4.88以上</strong>は挿管リスクの低さを示し（12時間 HR 0.291、0.161–0.524）、失敗を予測する高特異度カットオフは2時間 <strong>2.85未満</strong>・6時間 <strong>3.47未満</strong>・12時間 <strong>3.85未満</strong>（特異度99.2／99.2／98.4%）です。失敗群はROXの伸びが小さく、単発の値より軌道を見ます（<span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>）。</p>
-<p class="figref">🖼 原著のFigure 1 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 1 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1164/rccm.201803-0589OC" target="_blank" rel="noopener">原論文（doi.org/10.1164/rccm.201803-0589OC）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 1. HFNC開始2時間（A）・6時間（B）・12時間（C）時点のROX群別に見た、人工呼吸に至る確率のKaplan-Meier曲線（原図・無改変。出典 <span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>、©American Thoracic Society） 4.88以上と未満で曲線が分かれ、時間が経つほど（A→C）分離が明瞭になります。<mark class="hl">12時間目を主戦場にする</mark>根拠の図です。3.85〜4.88のグレーゾーンは1〜2時間後に測り直します。</p>
 </div>
 <p>_図: ROX群別の挿管確率（出典 <span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>）_</p>
 <p>ただしROXは予測指標であって、介入試験で裏づけられた挿管トリガーではありません。ROXは患者の生理だけでなく施設のFiO₂・流量設定習慣を反映する合成量で、施設ごとに値の分布が動きえます（同ノート）。ROXを「行動ルール」として使った場合の効果を推定したのがMIMIC-IV 1,651例のターゲットトライアルエミュレーションで、通常ケアの30日死亡26.9%に対しROX 3.85未満で2時間以内に挿管する戦略は20.5%（リスク差 −6.5、RR 0.76、0.66–0.86）でした。ROX 4.88未満でRR 0.74、時間可変戦略でRR 0.79と同方向です。30日挿管の累積発生率はほぼ同じ（21.5%対22.0%）で、<mark class="hl">死亡減少は挿管を増やしたのではなく挿管のタイミングを早めたことで説明される可能性</mark>があります。著者ら自身が「仮説生成であり、単独の判断基準として今使うべきではない」と明言しており、ROX-1パイロットRCTなど前向き検証を待つ立場です（<span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>）。</p>
-<p class="figref">🖼 原著のFigure 2 は著作権のため本ページには掲載していません。原論文 でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
+<p class="figref">🖼 原著のFigure 2 は本ページには掲載していません（論文の図表は共有ページに載せない方針）。<a href="https://doi.org/10.1186/s40560-026-00927-x" target="_blank" rel="noopener">原論文（doi.org/10.1186/s40560-026-00927-x）</a> でご覧ください。図の内容は下の「図の解説」に文章で起こしてあります。</p>
 <div class="call note"><span class="lab">図の解説</span>
 <p>Figure 2. 通常ケアと各ROXガイド戦略下でのHFNC開始後30日までの死亡累積発生率曲線（原図・無改変。出典 <span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>） 3つのエミュレート試験（ROX 3.85未満・4.88未満・時間可変）いずれでも黒線の通常ケアが色付き線の上を走ります。非順守（クローン打ち切り）率が極めて高く、実際に戦略に従った少数患者からの外挿である点に注意します。</p>
 </div>
 <p>_図: ROXガイド戦略の30日死亡累積発生率（出典 <span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>）_</p>
 <p>ROXで捉えられない失敗もあります。COVID-19では妥当性が検証されたスコアは一つもなく、弾性が保たれた早期は呼吸数が正常でも一回換気量が大きいためROXもHACORも捉えられません。器具なしで使えるのはWOBスケール（呼吸数・鼻翼呼吸・胸鎖乳突筋・腹筋、4点超で挿管提案）です（<span class="wl">P-SILI（自発呼吸誘発性肺傷害）とCOVID-19の非侵襲的呼吸管理（BJA2021）</span>）。免疫不全患者ではROX・HACORの性能が実質的に低く（<span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span>）、外傷ARDSでは内科のROX 5ではなく8〜9を下回った時点で挿管を検討します（<span class="wl">外傷関連ARDSは多段階ヒットで起こり鎮痛と早期固定で予防できる — 重症胸部外傷の36〜60%に発症、NIV離脱のROX閾値は内科より高い（ナラティブレビュー・ICM2026）</span>）。</p>
 <p>ROX以外の撤退サインは3つです。HFNC開始後に酸素化の改善または呼吸数の低下が無い、胸腹部の非同調、全身的重症度の増加（<span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span>）。ARDSの生理学的レビューはこれに ΔPes 15 cmH₂O超と酸素化トレンドを加え、「トレンドが単一値より鋭敏」としています（<span class="wl">ARDSに対するNPPVとHFNCの生理学的レビュー（ICM2021）</span>）。</p>
-<h3>モニタリングツールの比較</h3>
+<h3 id="sec-13-1">モニタリングツールの比較</h3>
 <div class="tw"><table>
 <thead><tr><th>指標</th><th>何を測るか</th><th>閾値・時間</th><th>検証集団</th><th>限界</th><th>根拠ノート</th></tr></thead>
 <tbody>
@@ -644,7 +698,7 @@
 <p>閾値を満たしても挿管されない現実 4,726例のコホートで、生理学的閾値を満たしてから3時間以内に挿管される確率は最重症の基準でも34%以下でした（<span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span>）。単一の数値で機械的に挿管を決める根拠はこの研究からは得られませんが、<mark class="hl">「様子を見る」判断が特定の患者層に偏っていないか</mark>を振り返る材料になります。SOHOのように「基準を満たしたら挿管する」と施設で合意しておくことが、遅れを減らす現実的な手です。</p>
 </div>
 <p>%%FIG: hfnc-rox-timeline | HFNC開始からの時間軸（0・2・6・12・24時間）を横に引き、各時点にROX指数の判定を置く図。2時間「&lt;2.85なら失敗の高特異度」、6時間「&lt;3.47」、12時間「&lt;3.85で挿管を議論／≥4.88なら低リスク」、24時間「AUROC 0.80」。時間軸の下に「3.85〜4.88はグレーゾーン→1〜2時間後に再測定」の帯と、「ROXは予測指標。挿管トリガーではない」の注記。人物は描かない。 | 0h／2h／6h／12h／24h／ROX &lt;2.85／&lt;3.47／&lt;3.85／≥4.88／グレーゾーンは再測定／予測指標であって挿管トリガーではない %%</p>
-<h2>11. NIVとの使い分け・併用</h2>
+<h2 id="sec-14">11. NIVとの使い分け・併用</h2>
 <p>HFNC対NIVの優劣は、2017年のメタ解析でも2020年のネットワークメタ解析でも2022年の総説でも2026年のガイドラインでも決着していません。低酸素性では「差が出なかった」だけで「劣らない」とは証明されておらず（<span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span>）、25 RCT・3,804例のNMAでもマスクNIV対HFNCは死亡RR 0.95（0.69〜1.37）・挿管RR 1.01（0.74〜1.38）で、この比較だけ直接・間接推定に不整合があるため確実性は低いままです。同じNMAでヘルメットNIVはHFNCより死亡RR 0.46・挿管RR 0.35と圧倒的に見えますが、直接比較は0本・4試験340例の間接推定です（<span class="wl">低酸素性呼吸不全でヘルメットNIVは死亡RR 0.40・マスクNIVは0.83、HFNCは挿管のみ減らす — 25RCT 3804例のNMA（Ferreyro・JAMA2020）</span>）。ATS 2026は「選択は患者特性・術者の習熟・地域の資源に基づくべき」と個別化に委ねました（<span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span>）。ICM 2023の総説はこの問いを「HFNCかNIVか」から<mark class="hl">「HFNC単独か、NIVと組み合わせるか」</mark>に置き換えています（<span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span>）。NIVの設定・マスク・モード・失敗基準（HACOR）は <span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> に任せ、ここでは境界だけを整理します。</p>
 <p>生理から見ると、両者は別の道具です。HFNCは死腔洗い出し＋わずかな非調整PEEP＋呼気抵抗による呼吸数低下で効き、CPAP/PEEPはリクルートメント＋内因性PEEPの相殺＋左室後負荷軽減、NIVはそれらに吸気圧補助（一回換気量の直接増大と呼吸仕事量の大幅低減）を加えたものです（<span class="wl">急性呼吸不全に対する非侵襲的呼吸補助 — 生理から病態別エビデンスまで（Brochard総説・NEJM2022）</span>）。HFNCは設定値としてのPEEPを持たず、HFNC 40 L毎分≒CPAP 4 cmH₂Oという換算感覚はあっても、CPAPの代替ではありません（<span class="wl">HFNCとCPAPの生理は同じではない — 閉口で鼻咽頭圧6.8cmH2O、呼気抵抗増加が呼吸数低下を説明（ベンチ＋健常者・JApplPhysiol2022）</span>）。「換気の障害」か「酸素化の障害」かで方式を選ぶ、が総説の骨格です。</p>
 <div class="tw"><table>
@@ -666,7 +720,7 @@
 <div class="call tip"><span class="lab">POINT</span>
 <p>迷ったときの決め方 <mark class="hl">「どちらが上か」を議論するより、失敗基準と誰が引き上げるかを明文化するほうが患者アウトカムを動かす</mark>（ATS 2026）。HFNCを選んだらROXの時間割、NIVを選んだらHACOR 1時間の判定を、開始の指示と同時に書きます。両方を持つ施設では「HFNCで始めてNIVを足す」「NIVの休止中にHFNCを流す」という併用の型を先に決めておくと、ベッドサイドの議論が「切り替えるか」ではなく「いつ足すか」になります。</p>
 </div>
-<h2>12. 実際の使い方のサマリー — 開始から挿管判断まで</h2>
+<h2 id="sec-15">12. 実際の使い方のサマリー — 開始から挿管判断まで</h2>
 <p>ここまでの知見を、ベッドサイドの1本の手順にまとめます。数値はすべて上の章のノートに書かれた値で、当院固有のプロトコルとして決まったものではありません。空欄は「当院で決めておくべきこと」の項に対応します。</p>
 <div class="tw"><table>
 <thead><tr><th>段階</th><th>何をするか</th><th>数値・目安</th><th>根拠ノート</th></tr></thead>
@@ -686,7 +740,7 @@
 <p>1行版 病態を決める → 30〜40 L毎分（AECOPDは20〜30）・目標SpO₂でFiO₂・37 ℃から → 挿管基準と予防／救援を書く → 2・6・12時間でROX → 伸びなければ流量最大・NIV併用・挿管の順に迷わない → 呼吸数25以下で安定したら降ろす。<mark class="hl">HFNCを装着したことを理由に挿管の判断を先送りしない</mark>。</p>
 </div>
 <p>%%FIG: hfnc-practice-flow | HFNCの実践フローを上から下へ6段で描く。「適応の確認（病態を1つに）」→「開始設定（流量・FiO₂・温度を別々に）」→「開始と同時に挿管基準を書く」→「2・6・12時間でROX＋呼吸数・努力・意識」→分岐（改善→ウィーニング：呼吸数25以下で安定／改善なし→流量最大・NIV併用・挿管）→「挿管時はNIV前酸素化＋HFNCを流したまま」。各段の右に根拠となる試験名を小さく添える。人物は描かない。 | 適応の確認／開始設定／挿管基準を書く／2・6・12時間でROX／改善→ウィーニング／改善なし→流量最大・NIV併用・挿管／NIV前酸素化＋HFNC継続 %%</p>
-<h2>13. エビデンスのまとめ — ガイドライン・RCT・メタ解析の年表</h2>
+<h2 id="sec-16">13. エビデンスのまとめ — ガイドライン・RCT・メタ解析の年表</h2>
 <p>HFNCの主要エビデンスを時系列で並べます。各行の数値は当該ノートの記載どおりで、詳細は各章にあります。</p>
 <div class="tw"><table>
 <thead><tr><th>年</th><th>種別</th><th>文献</th><th>対象</th><th>主要結果</th><th>到達点への寄与</th></tr></thead>
@@ -726,7 +780,7 @@
 <div class="call note"><span class="lab">補足</span>
 <p>ガイドライン3本の温度差 ICM 2020は低酸素性で「強い推奨」、ERS 2022は8つ「すべて条件付き」、ATS 2026は低酸素性で「強い推奨（対標準酸素に限る）」。同じ問いに対して2020年と2022年で推奨の強さが違うのは、ERSが「エビデンスの確実性が低い、あるいは利益と害の差が小さい」と判断したためです。ATS 2026の強い推奨は「挿管を減らし害が最小で導入が容易」という正味の利益に基づくもので、死亡ではありません。<mark class="hl">どのガイドラインも「HFNCが死亡を減らす」とは書いていない</mark>、がここを読むときの共通の注意です。</p>
 </div>
-<h2>⚖️ Vault内で結論が割れている論点</h2>
+<h2 id="sec-17">⚖️ Vault内で結論が割れている論点</h2>
 <div class="tw"><table>
 <thead><tr><th>論点</th><th>一方のノート</th><th>もう一方のノート</th><th>今どう扱うか</th></tr></thead>
 <tbody>
@@ -740,7 +794,7 @@
 <tr><td>高CO₂血症でのPaCO₂低下は流量に依存するか</td><td><span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span>（低流量20〜30がPaCO₂・pHで最良。安定期COPDでは流量を上げるほど下がるという引用もある）</td><td><span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span>（急性高CO₂血症でPaCO₂低下は流量と相関せず）／<span class="wl">HFNC流量を上げると酸素化と肺容量は直線的に改善、吸気努力は30L毎分でほぼ頭打ち — ΔPes 9.4→6.8・P-F比151→205・EELV+230mL（17例クロスオーバー・Mauri・ICM2017）</span>（低酸素性AHRFでは流量でPaCO₂不変）</td><td>対象（安定期・急性高CO₂・低酸素性）が違い、用量反応を解析したRCTはCOPDに無い。NMAの差は間接比較・低い確実性。<mark class="hl">初期30 L毎分前後で始め忍容性と血液ガスで調整</mark>し、流量で失敗を説明できるとは言わない（6章「30 L毎分は本当に必要か」）</td></tr>
 <tr><td>免疫不全患者でHFNCは死亡を減らすか</td><td><span class="wl">免疫不全患者の急性呼吸不全に対するHFNC（HIGH試験）</span>（RCTで死亡不変）</td><td><span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span>（Efraim 3でHFNO使用が死亡低下と関連）</td><td>RCTと観察研究の違い。RCTを優先し「転帰を変える期待は持たない」。観察の関連は適応交絡を含む</td></tr>
 </tbody></table></div>
-<h2>🧭 この領域の到達点</h2>
+<h2 id="sec-18">🧭 この領域の到達点</h2>
 <div class="call note"><span class="lab">補足</span>
 <p>2026年9月時点 <strong>確立したこと</strong></p>
 <ul><li>de novo急性低酸素性呼吸不全の第一手はHFNC（対標準酸素で挿管RR 0.76・強い推奨・ATS 2026）</li><li>HFNCは28日死亡を減らさない（SOHO 14.6%対14.6%）。利益は挿管回避・快適性・呼吸数低下・自覚呼吸困難の改善</li><li>予定抜管後の予防的HFNCは従来型酸素より再挿管を減らす（NMA RR 0.54・high）。抜管後高リスクはNIV＋休止中HFNC（HIGH-WEAN 11.8%対18.2%）</li><li>高CO₂血症性呼吸不全の第一選択はNIV。pH 7.25〜7.35・PaCO₂ 50以上のAECOPDでも初期補助をHFNCで代替しない（治療失敗25.7%対14.3%）。HFNCはNIV不耐・拒否・禁忌の次善で、監視と即NIV移行可が条件。軽症AECOPDにルーチンで使う理由はない</li><li>安定期の慢性高CO₂血症COPDへの在宅HFNCは急性増悪を減らす（RR 0.77・中等度）。死亡・入院は不確実で、在宅NIVとの比較は無い</li><li>HFNCの生理（死腔洗い出し・閉口時の陽圧・FiO₂の安定・加温加湿・吸気努力の低下）は健常者・敗血症・抜管前の患者で確認済み。閉口が決定的</li><li>免疫不全患者は特別扱いしない。挿管回避を目的化しても利益はない</li><li>挿管前酸素化の軸はNIV。HFNCはNIVへの上乗せか禁忌時の代替。無呼吸酸素化としてのHFNC単独は最低SpO₂を改善しない</li><li>抜管後の救援HFNC単独は再挿管を増やしうる。予防と救援を分ける</li></ul>
@@ -749,7 +803,7 @@
 <p><strong>最近変わったこと（2024〜2026）</strong></p>
 <ul><li>中等度高CO₂血症（pH 7.25〜7.35）のAECOPDでHFNC初期補助の非劣性RCTが不成立（治療失敗25.7%対14.3%）。「pH 7.25以上なら代替可」の幅が狭まった</li><li>ATS 2026が病態別に横断整理し、低酸素性HFNCを強い推奨に格上げ。救援HFNC単独の害を明示</li><li>SOHOが「死亡は減らない」を1,110例で確定</li><li>抜管後高リスクのHFNC対NIVメタ解析が2本出て、平均では差なし・サブグループ（因子4個以上・非手術肥満）でHFNC不利</li><li>AECOPDの流量NMAが「20〜30 L毎分から」を提示</li><li>ROXガイド下挿管のTTEが30日死亡RR 0.76を推定（仮説生成）</li><li>日本のJIPADで抜管後HFNCが5年で15.9%→28.0%へ</li></ul>
 </div>
-<h2>🔬 研究のタネ（聖路加）</h2>
+<h2 id="sec-19">🔬 研究のタネ（聖路加）</h2>
 <div class="call note"><span class="lab">question</span>
 <p>このテーマで著者たちが繰り返し残している問い</p>
 <ul><li><strong>HFNCで粘った時間と転帰の関係</strong>。SOHOは挿管基準を満たしてから実際に挿管するまでの遵守データを持たず、ROX原著も「ROXを使えば挿管の遅れを避けられ転帰が改善するか」は未検証と明記し、TTEは非順守率の高さから精度が低い（<span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span>／<span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span>／<span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span>）</li><li><strong>病態別・リスク層別のサブグループ</strong>。2017年のメタ解析は原因別データが得られず、抜管後のメタ解析は「高リスク」の定義が試験ごとに違い、実施時間もばらつく（<span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span>／<span class="wl">抜管失敗の高リスク患者でHFNCはNIVと再挿管が同等 — 10RCT 1697例、ただし主解析は非イベントのリスク比で効果が圧縮（SR・MA・CritCareSci2026）</span>）</li><li><strong>実施時間・装着時間の欠落</strong>。NIV休止中HFNCの観察研究は標準酸素の使用時間を記録できず不死時間バイアスを避けられなかった。HIGH-WEANも「間欠NIV＋合間のHFNC」のどちらが効いたか分離できていない（<span class="wl">抜管後NIVの休止中にHFNCを流すと抜管失敗13.7%対18.5% — ただし調整後は有意差消失（観察研究・ICM2026）</span>／<span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span>）</li><li><strong>生理学的アウトカムから患者アウトカムへの鎖</strong>。努力低減・PaCO₂低下・PTPes低下はいずれも「挿管が減る・死亡が減る」を検証していない（<span class="wl">HFNCが敗血症患者の呼吸努力を軽減させる（Anesthesiology2021）</span>／<span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span>／<span class="wl">非対称ネーザルハイフローは吸気努力を下げて一回換気量を増やす — PTPes 30.7低下・VT 33mL増（20例クロスオーバー・CritCare2026）</span>）</li><li><strong>日本のcase-mixでの再現性</strong>。高所得国の専門医常駐ICUの結果が日本のHCU・一般病棟でどうか、日本の抜管後トレンドが転帰改善と結びついているかは未評価（<span class="wl">抜管後の呼吸管理は5年でNIVからHFNCへ — NIV 6.7→3.9%、HFNC 15.9→28.0%（JIPAD 12687例・40ICU・CritCareResusc2026）</span>）</li></ul>
@@ -774,36 +828,36 @@
 <tr><td>HFNC使用中の患者に非対称カニュラを試用し、呼吸数・SpO₂・忍容性を通常カニュラと比較する前向きパイロット。気管切開孔用アダプタの呼気ポート径・設定流量の棚卸し</td><td>聖路加</td><td><span class="wl">非対称ネーザルハイフローは吸気努力を下げて一回換気量を増やす — PTPes 30.7低下・VT 33mL増（20例クロスオーバー・CritCare2026）</span>／<span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span></td><td>△</td></tr>
 </tbody></table></div>
 <p><strong>このテーマの空白</strong>：JIPADにはHFNC単独の変数が無い（DPCのHFNC感度も36.1%と低い）ため、「日本のICUでHFNCが誰にどれだけ使われ、転帰とどう結びつくか」を全国規模で問うた論文はまだ無い。抜管後のHFNCトレンド論文は使用率の記述にとどまり転帰を評価していない。聖路加は年次レポートでHFNC・NPPV・IMVを実測しており、SOHOの「挿管 −6ポイント・死亡差なし」が単施設で再現するかを5年分で描ける唯一の位置にある。</p>
-<h2>🗺️ 小分類マップ</h2>
-<h3>基礎・生理・設定</h3>
+<h2 id="sec-20">🗺️ 小分類マップ</h2>
+<h3 id="sec-20-1">基礎・生理・設定</h3>
 <p>装置の構造と3本柱（死腔洗い出し・FiO₂精度・軽度陽圧）、流量依存性、閉口の重要性、インターフェース形状、吸気努力。</p>
 <ul><li><span class="wl">HFNC（ネーザルハイフロー）基礎まとめ</span></li><li><span class="wl">ネーザルハイフロー（NHF）のレビュー</span></li><li><span class="wl">HFNCとCPAPの生理は同じではない — 閉口で鼻咽頭圧6.8cmH2O、呼気抵抗増加が呼吸数低下を説明（ベンチ＋健常者・JApplPhysiol2022）</span></li><li><span class="wl">HFNCが敗血症患者の呼吸努力を軽減させる（Anesthesiology2021）</span></li><li><span class="wl">非対称ネーザルハイフローは吸気努力を下げて一回換気量を増やす — PTPes 30.7低下・VT 33mL増（20例クロスオーバー・CritCare2026）</span></li><li><span class="wl">COPD増悪回復期の非対称カニュラNHFは分時換気量を1.83L減らす（14例クロスオーバー・ATS抄録・AJRCCM2024）</span></li><li><span class="wl">気管チューブからの高流量酸素はT-pieceよりPEEPが6.0cmH2O高い — 呼気ポート6.9mm・60L毎分で肺容量損失321mL減、吸気努力は不変（20例クロスオーバー・CritCare2026）</span></li><li><span class="wl">NPPV NIVの適応と原理</span></li></ul>
-<h3>ガイドライン・総説（正本）</h3>
+<h3 id="sec-20-2">ガイドライン・総説（正本）</h3>
 <ul><li><span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span></li><li><span class="wl">急性呼吸不全におけるHFNCのERS臨床実践ガイドライン — 8つの条件付き推奨（ERJ2022）</span></li><li><span class="wl">HFNCのガイドライン（ICM2020）</span></li><li><span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span></li><li><span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span></li><li><span class="wl">急性呼吸不全に対する非侵襲的呼吸補助 — 生理から病態別エビデンスまで（Brochard総説・NEJM2022）</span></li><li><span class="wl">集中治療2015年の進歩 — HFNC・駆動圧・横隔膜萎縮・VAE・ICU運営を1本で概観する（Update・AJRCCM2016）</span></li></ul>
-<h3>de novo低酸素性呼吸不全・ARDS</h3>
+<h3 id="sec-20-3">de novo低酸素性呼吸不全・ARDS</h3>
 <ul><li><span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span></li><li><span class="wl">HFNCは従来型酸素より挿管を減らすがNIVには勝らない（11研究3459例・メタ解析・CritCare2017）</span></li><li><span class="wl">HFNCは従来型酸素より挿管を減らすがNPPVには優らない — 18試験3881例、ICU死亡と滞在は不変（SRメタ解析・Chest2017）</span></li><li><span class="wl">低酸素性呼吸不全でヘルメットNIVは死亡RR 0.40・マスクNIVは0.83、HFNCは挿管のみ減らす — 25RCT 3804例のNMA（Ferreyro・JAMA2020）</span>（4戦略のNMA。HFNCは挿管のみ、ヘルメットは低い確実性）</li><li><span class="wl">ARDSに対するNPPVとHFNCの生理学的レビュー（ICM2021）</span></li><li><span class="wl">ICU患者の半数が24時間以内に低酸素性呼吸不全 — 76%が挿管・重症例のICU死亡47%（iCORE 10832例・9ICU・CCM2026）</span></li><li><span class="wl">低酸素血症性呼吸不全の挿管に明確な閾値はない — 基準を満たしても3時間以内の挿管は6〜34%、黒人・アジア系で低下（コホート研究・AJRCCM2023）</span></li></ul>
-<h3>免疫不全</h3>
+<h3 id="sec-20-4">免疫不全</h3>
 <ul><li><span class="wl">免疫不全患者の急性呼吸不全に対するHFNC（HIGH試験）</span></li><li><span class="wl">免疫不全患者の急性呼吸不全に対するHFNC HIGH試験（JAMA 2018）</span>（統合済みポインタ）</li><li><span class="wl">免疫不全患者の急性呼吸不全が違う10の理由（What's New・ICM2026）</span></li></ul>
-<h3>高CO₂血症性呼吸不全・COPD・喘息</h3>
+<h3 id="sec-20-5">高CO₂血症性呼吸不全・COPD・喘息</h3>
 <ul><li><span class="wl">高流量鼻カニュラは高炭酸ガス血症性呼吸不全でPaCO2を下げる — 初期PaCO2が高いほど下がり幅が大きい（傾向スコアマッチ18対・AcuteCritCare2019）</span></li><li><span class="wl">COPD増悪（軽度高CO2血症）でのHFNC vs 従来型酸素療法 RCT</span></li><li><span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span></li><li><span class="wl">COPD増悪の中等度高CO2血症でHFNCはNIVに非劣性を示せず — 治療失敗25.7%対14.3%、挿管14.2%対5.4%、快適さはHFNCが上（単施設RCT・CritCare2024）</span></li><li><span class="wl">在宅HFNCは慢性高CO2血症COPDの急性増悪を減らす — RR 0.77・1000人あたり69件減、死亡と入院は不確実（4RCT440例・SRメタ解析・RespirMed2023）</span>（退室後・在宅の話。急性期の根拠ではない）</li><li><span class="wl">COPD・喘息に対する人工呼吸管理レビュー（ICM2020）</span></li><li><span class="wl">ICUにおける喘息・COPD増悪の管理 — 気道炎症・気管支攣縮・動的過膨張への段階的アプローチ（CHEST Critical Care Review・CHESTCC2025）</span></li><li><span class="wl">重症喘息発作をICUで管理する — 動的過膨張とauto-PEEPを軸に気管支拡張薬からVV-ECMOまで（総説・JIntensiveCareMed2026）</span></li></ul>
-<h3>抜管後・離脱・気管切開</h3>
+<h3 id="sec-20-6">抜管後・離脱・気管切開</h3>
 <ul><li><span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span></li><li><span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span></li><li><span class="wl">抜管後のHFNCはNIVより再挿管を減らさない — 15RCT 2073例、リスク因子4個以上と非手術の肥満ではHFNCが不利（HIGH-FLOW OXY・CritCareExplor2026）</span></li><li><span class="wl">抜管失敗の高リスク患者でHFNCはNIVと再挿管が同等 — 10RCT 1697例、ただし主解析は非イベントのリスク比で効果が圧縮（SR・MA・CritCareSci2026）</span></li><li><span class="wl">抜管後NIVの休止中にHFNCを流すと抜管失敗13.7%対18.5% — ただし調整後は有意差消失（観察研究・ICM2026）</span></li><li><span class="wl">非高CO2血症の抜管後高リスク患者にも予防的NIVを — 再挿管11.8%対17.6%、HFNCの手軽さより臨床的利益を選ぶ（エディトリアル・ICM2026）</span></li><li><span class="wl">抜管後の呼吸管理は5年でNIVからHFNCへ — NIV 6.7→3.9%、HFNC 15.9→28.0%（JIPAD 12687例・40ICU・CritCareResusc2026）</span></li><li><span class="wl">やせは再挿管リスク1.58倍・肥満は0.69倍 — 抜管72時間以内の再挿管5.9%（JIPAD 41016例・131ICU・JAnesthAnalgCritCare2026）</span></li><li><span class="wl">韓国集中治療医学会・人工呼吸離脱ガイドライン2024 — 9つのPICOと12推奨（AcuteCritCare2024）</span></li><li><span class="wl">抜管成功のための10のTips（Weaning最適化・ICM2020）</span></li><li><span class="wl">抜管をどう最適化するか — 抜管失敗を「気道」と「離脱」に分けて先読みする（What's New・ICM2023）</span></li></ul>
-<h3>挿管前酸素化・無呼吸酸素化</h3>
+<h3 id="sec-20-7">挿管前酸素化・無呼吸酸素化</h3>
 <ul><li><span class="wl">OPTINIV試験（HFNC併用NIVによる挿管時前酸素化）</span></li><li><span class="wl">挿管時の無呼吸酸素化にHFNCは標準治療に非劣性 — ICU滞在を1.8日短縮、軽症低酸素例でのみ重症低酸素を減らす（7研究956例・SciRep2020）</span></li><li><span class="wl">緊急気管挿管のエビデンスを総ざらいする — NIV前酸素化・導入後の陽圧換気・ビデオ喉頭鏡・スタイレットが柱、輸液ボーラスは効かない（Concise Clinical Review・AJRCCM2025）</span></li><li><span class="wl">緊急挿管の前酸素化はNIVでBVMより低酸素が減る — 3RCT 1555例、死亡と逆流は差なし（SRメタ解析・CritCareSci2026）</span></li><li><span class="wl">肥満患者の気道管理は「解剖」より「生理」で決まる — NIV前酸素化の恩恵は3倍以上（ナラティブレビュー・ICM2026）</span></li><li><span class="wl">病院前の気道・換気管理 — 挿管前の生理最適化が転帰を決め、心停止では声門上デバイスが対等、HFNOは証拠不足（ナラティブレビュー・ICM2026）</span></li></ul>
-<h3>COVID-19・P-SILI・挿管タイミング</h3>
+<h3 id="sec-20-8">COVID-19・P-SILI・挿管タイミング</h3>
 <ul><li><span class="wl">COVID-19急性呼吸不全でHFNOは早期挿管より人工呼吸器フリー日を8日増やす（36施設・PSマッチ122例・CritCare2021）</span></li><li><span class="wl">COVID-19の挿管タイミングもHFNC使用も死亡と関連しない（アトランタ4病院175例・CCM2020）</span></li><li><span class="wl">COVID-19の挿管遅延は院内死亡を増やす — PSマッチ614例で27.3%対37.1%、HFNC先行例で顕著（CIBERESUCICOVID・ERJ2022）</span></li><li><span class="wl">重症COVIDの挿管回避はHFNCよりCPAP（RECOVERY-RS・JAMA2022）</span></li><li><span class="wl">COVID-19で学ぶ呼吸不全と非侵襲的呼吸サポート BMJレビュー（BMJ2020）</span></li><li><span class="wl">P-SILI（自発呼吸誘発性肺傷害）とCOVID-19の非侵襲的呼吸管理（BJA2021）</span></li><li><span class="wl">覚醒下腹臥位の曝露時間と予後（COVID-19 HFNO, Critical Care 2022）</span></li><li><span class="wl">HFNCによるSARS-CoV-2の空気感染拡大は神話か現実か（ICM 2020）</span></li><li><span class="wl">挿管タイミングの研究は「早期 vs 遅延・しない」で比べよ（レター・AJRCCM2021）</span></li><li><span class="wl">COVID-19重症患者における挿管までの時間と予後</span>（挿管タイミング論争の旧ノート。上の3本と併読）</li></ul>
-<h3>失敗の見極め・モニタリング</h3>
+<h3 id="sec-20-9">失敗の見極め・モニタリング</h3>
 <ul><li><span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span></li><li><span class="wl">ベッドサイドで吸気ドライブと吸気努力をどう測るか — 13手法の使い分けと閾値（CritCare2025）</span>（HFNC中は一回換気量が測れないため、努力の代替指標をここから選ぶ）</li><li><span class="wl">ROX指数ガイド下挿管戦略はHFNC患者の30日死亡を26.9%→20.5%に減らす — ターゲットトライアルエミュレーション1,651例、RR 0.76（MIMIC-IV・JIntensiveCare2026）</span></li><li><span class="wl">外傷関連ARDSは多段階ヒットで起こり鎮痛と早期固定で予防できる — 重症胸部外傷の36〜60%に発症、NIV離脱のROX閾値は内科より高い（ナラティブレビュー・ICM2026）</span></li></ul>
-<h3>術後・特殊集団・管理</h3>
+<h3 id="sec-20-10">術後・特殊集団・管理</h3>
 <ul><li><span class="wl">高齢者のVATS肺切除後に予防的HFNCは術後肺合併症の重症度を下げる（単施設RCT・CritCare2026）</span></li><li><span class="wl">肥満患者の人工呼吸管理 — NIV前酸素化・中〜高PEEP・抜管後の予防的NIV（ナラティブレビュー・ICM2020）</span></li><li><span class="wl">ベッドから椅子へ3時間出すと酸素化が上がる — 酸素化比は +13 対 −13 mmHg（RCT 284例・ICM2026）</span></li><li><span class="wl">重症患者へのエアロゾル療法の最適化（Special Issue Insight・ICM2022）</span></li><li><span class="wl">抗菌薬エアロゾル療法 — 気管支は簡単、肺実質は難しい（What's New・ICM2023）</span></li><li><span class="wl">誤嚥性肺炎でICUに入る3906例 — 85歳以上は重症度が最も高いのに人工呼吸は55%、院内死亡39%・自宅退院20%（JIPAD・JIntensiveCare2026）</span></li></ul>
-<h2>📌 まずこの10本</h2>
+<h2 id="sec-21">📌 まずこの10本</h2>
 <ol><li><span class="wl">成人急性呼吸不全に対する非侵襲的呼吸補助 ATSガイドライン2026</span> — 病態別の到達点。低酸素性HFNCの強い推奨と救援HFNCの害を1本で</li><li><span class="wl">急性低酸素性呼吸不全へのハイフローは28日死亡を減らさない — 14.6%対14.6%、挿管は42.4%対48.4%に減る（SOHO試験・NEJM2026）</span> — 「死亡は減らない」を確定させた最大のRCT。設定と挿管基準の型もここから</li><li><span class="wl">HFNCの使い方 — 病態別の最新エビデンス（Recent Advances・ICM2023）</span> — 「HFNC単独かNIVと組み合わせるか」の枠組みと、抜管後の3層</li><li><span class="wl">高流量鼻カニュラ（HFNC）の実践と新しい生理学的知見（エディトリアル・ICM2024）</span> — 流量・FiO₂・温度の設定指針と失敗の3サイン</li><li><span class="wl">ROX指数でHFNC失敗を予測する — 12時間後4.88以上なら挿管リスクは低い（多施設191例・AJRCCM2019）</span> — 2・6・12時間の閾値の原典</li><li><span class="wl">HFNCとCPAPの生理は同じではない — 閉口で鼻咽頭圧6.8cmH2O、呼気抵抗増加が呼吸数低下を説明（ベンチ＋健常者・JApplPhysiol2022）</span> — 「口を閉じてこそ効く」の根拠</li><li><span class="wl">抜管後のHFNC＋NIV vs HFNC（HIGH-WEAN, JAMA 2019）</span> — 高リスク抜管後の標準設定（NIV 12時間以上＋HFNC 50 L毎分）</li><li><span class="wl">抜管後酸素療法のネットワークメタ解析（HFNC・NPPV・COT）</span> — 予防的HFNCの唯一の高確信効果（再挿管RR 0.54）</li><li><span class="wl">AECOPDへのHFNC初期流量は20〜30L毎分が最適 — 挿管率はNIVと同等、PaCO2・pH・鼻顔面損傷は低流量が有利（40RCT3597例・NMA・Pulmonology2025）</span> — 流量の出発点が病態で逆になることを示す</li><li><span class="wl">免疫不全患者の急性呼吸不全に対するHFNC（HIGH試験）</span> — 生理は改善しても転帰は変わらない典型例。特別扱いしない根拠</li></ol>
-<h2>🏠 関連するトピックHome</h2>
+<h2 id="sec-22">🏠 関連するトピックHome</h2>
 <ul><li><span class="wl">🫁 NIV・NPPV（非侵襲的換気） Home</span> — NIV・CPAPの設定・マスク・モード・リーク・HACOR・心原性肺水腫・神経筋疾患はこちらに任せる。本HomeはHFNCの側から使い分けと併用だけを扱う</li><li><span class="wl">🌬️ 人工呼吸からの離脱・抜管 Home</span> — SBT・カフリーク・抜管可否・高リスクの定義はこちら。本Homeは抜管後に「何を当てるか」に絞る</li><li><span class="wl">🫧 気道管理・挿管・麻酔 Home</span> — 挿管手技・導入薬・ビデオ喉頭鏡はこちら。本Homeは前酸素化でのHFNCの役割まで</li><li><span class="wl">🫁 ARDSに対する腹臥位療法 Home</span> — HFNC＋覚醒下腹臥位の詳細はこちら</li><li><span class="wl">🎚️ ARDSの換気設定（駆動圧・PEEP） Home</span> — 挿管後の肺保護換気と自発呼吸下のP-SILIはこちら</li><li><span class="wl">🫁 呼吸器 Home</span> — 呼吸器領域全体のポータル</li></ul>
 </div>
 <footer class="foot">
   本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
-  原著の図表は著作権のため本ページには掲載していません（本文の「図の解説」を参照）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
+  原著の図表は本ページには掲載していません。原論文でご覧ください（本文の「図の解説」に内容を文章で起こしてあります）。<br>作成：Claude Code（聖路加ICUジャーナルクラブ運用）。
 </footer>
 </div>
 <button class="pdf-btn" onclick="window.print()" title="印刷ダイアログで「PDF に保存」を選ぶ">📄 PDF</button>
@@ -825,6 +879,40 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
 })();
 if(location.hash==='#pdf'){window.addEventListener('load',function(){setTimeout(function(){window.print();},500);});}
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.jc .toc'); if(!nav) return;
+  var root=document.documentElement, body=document.body;
+  if(location.hash==='#pdf') root.classList.add('pdfmode');
+  var btn=document.querySelector('.toc-btn'), scrim=document.querySelector('.toc-scrim');
+  function setOpen(on){ body.classList.toggle('toc-open',on); if(btn) btn.setAttribute('aria-expanded',on?'true':'false'); }
+  if(btn) btn.addEventListener('click',function(){ setOpen(!body.classList.contains('toc-open')); });
+  if(scrim) scrim.addEventListener('click',function(){ setOpen(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') setOpen(false); });
+  var links=[].slice.call(nav.querySelectorAll('a[href^="#"]'));
+  links.forEach(function(a){ a.addEventListener('click',function(){ if(window.innerWidth<900) setOpen(false); }); });
+  var heads=links.map(function(a){ return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))); });
+  var cur=-1, ticking=false;
+  function spy(){
+    ticking=false;
+    var y=Math.min(160, window.innerHeight*0.3), k=-1;
+    for(var i=0;i<heads.length;i++){ if(heads[i] && heads[i].getBoundingClientRect().top<=y) k=i; else if(heads[i]) break; }
+    if(k<0) k=0;
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) k=heads.length-1;
+    if(k===cur) return; cur=k;
+    links.forEach(function(a){ a.classList.remove('active'); });
+    [].forEach.call(nav.querySelectorAll('li.open'),function(li){ li.classList.remove('open'); });
+    var a=links[k]; if(!a) return;
+    a.classList.add('active');
+    var top=a.closest('li.t2'); if(top) top.classList.add('open');
+    var r=a.getBoundingClientRect(), nr=nav.getBoundingClientRect();
+    if(r.top<nr.top+40 || r.bottom>nr.bottom-40) nav.scrollTop += (r.top-nr.top) - nav.clientHeight/3;
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(spy); } },{passive:true});
+  window.addEventListener('resize',function(){ cur=-1; spy(); });
+  spy();
+})();
 </script>
 </body>
 </html>
