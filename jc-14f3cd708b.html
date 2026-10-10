@@ -244,6 +244,9 @@ body{margin:0;background:var(--paper)}
   <dl class="cite"><dt>原題</dt><dd>Quality of judgment, diagnostic error and AI in the ICU — separating bias from noise</dd></dl>
 </header>
 <div class="wrap">
+<div class="call example"><span class="lab">聖路加ICUでの実践</span>
+<p>🎓 教材（公開版・クリックでブラウザが開く） 🎓 教育用HTML：[ICUの判断はなぜ外れるか](https://hiro-oka.github.io/icu-masterclass/resident-clinical-judgment/) ／ 📄 [PDF](https://hiro-oka.github.io/icu-masterclass/resident-clinical-judgment/resident-clinical-judgment.pdf) 📝 エグゼクティブサマリー：[A4で読む](https://hiro-oka.github.io/icu-masterclass/resident-clinical-judgment-summary/) 🎞 スライド：未作成（講義が決まったテーマから作る）</p>
+</div>
 <p>ICUの判断はなぜ外れるのか——このHomeは、誤りを<strong>バイアス（一定方向のズレ）</strong>と<strong>ノイズ（方向の定まらないばらつき）</strong>に分解し、剖検・カルテレビュー・エビデンス統合のそれぞれで実測値を確認したうえで、AIを「精度を上げる道具」ではなく「一貫性を供給する道具」として設計に落とし込むための入口です。関連ノート71本（完全版44本）を束ね、予測モデルの<strong>較正の詳細</strong>は <span class="wl">重症度スコアと予後予測</span> に、<strong>心停止後の神経予後予測の全体像</strong>は <span class="wl">心停止後ケアと神経予後予測</span> に、<strong>WLST・意思決定能力の全体像</strong>は <span class="wl">倫理・終末期・意思決定</span> に任せ、このHomeは「判断の誤り方そのもの」に絞ります。</p>
 <h2 id="sec-1">📋 早見表</h2>
 <div class="tw"><table>
@@ -467,6 +470,7 @@ body{margin:0;background:var(--paper)}
 <tr><td>③生成AI・LLM</td><td>定型作業の代替・カルテ抽出・言い換え</td><td>ハルシネーション・再現性の欠如・プライバシー</td><td>治験候補抽出／院内LLMカルテ構造化</td></tr>
 </tbody></table></div>
 <p>一貫性という武器（§1）が効くのは①と②で、③は確率的生成器である以上その前提が成り立たない、という点を審査の出発点にする。</p>
+<p>どの層のAI論文も、<mark class="hl">「どの段階の証拠まで来ているか」で読む</mark>。<span class="wl">スコーピングレビュー・CritCare2026</span> は、VILIの検出・予防AI 52研究を「技術性能→外部検証→プロセス→代理指標→VILIの直接証拠→患者アウトカム」の6段階に並べ、大半が技術開発と後ろ向き検証にとどまり、唯一のRCTもシミュレーションでの非同調検出だったと整理した。VILIには正解ラベルが無く、ΔP・メカニカルパワー・非同調を「AIの正解」にする研究は、その代理指標の妥当性も同時に問われる（§7の審査項目2・教師ラベルの質と同じ論点）。<mark class="hl">「精度が高い」と「患者が良くなる」は別物</mark>であり、当院ではAI導入より先に、VT/PBW と ΔP の超過を自動で拾う仕組みと、アラームを受けた人の動き方を決めておくのが先になる。</p>
 <h3 id="sec-7-1">① 予測AI（predictive AI）</h3>
 <p>「起こる確率」を予報する。早期警告は与えられるが、<mark class="hl">「何をすべきか」は導けない</mark>。純粋に関連（association）に依拠するため。<span class="wl">What's New・ICM2023</span> の例が秀逸——「<strong>緩和ケアコンサルトとノルアドレナリン投与はいずれも患者死亡を強く示唆するが、どちらかを中止すれば死亡確率が下がると結論するのは合理的でない</strong>」。予測AIの実例と較正の読み方は §5 の表と <span class="wl">重症度スコアと予後予測</span> に譲る。</p>
 <p><strong>画像AIでも同じ壁がある</strong>——<span class="wl">What's New・ICM2026</span> は、ARDSの画像は定量化できるようになったのに情報の多くが治療判断に使われず「臨床的に不活性」だと指摘する。AI画像モデルの大半は単施設・後ろ向きで外部検証が乏しく、定量CT・EIT・肺エコーによるPEEP滴定を検証した大規模RCTもまだ無い。導入の判断基準は「その所見で何を変えるかを1行で言えるか」と外部検証の有無の2点になる。</p>
@@ -586,6 +590,7 @@ body{margin:0;background:var(--paper)}
 <p>それでも研究間で数字は食い違う（両論併記） <span class="wl">ICM2020</span> と比べると、<strong>SEP N20両側消失</strong>の感度はICM2020で約50%、CritCare2026のWLST統制コホートでは0.07（14日窓）と桁違いに開く。<mark class="hl">集団（3日目も昏睡が続く層に絞ったか）、WLSTを統制したかどうか、判読の品質基準の厳しさが違うためで、どちらかが誤りという話ではない</mark>。NSEのカットオフも<mark class="hl">ガイドライン&gt;60 µg/Lに対しCritCare2026は≥90 µg/Lを採用</mark>——<strong>閾値差は技術差ではなく「偽悲観をどれだけ避けたいか」という価値判断</strong>である。同じ検査でも目的（拾い上げか、言い当てか）が変われば正しい閾値は変わる。関連して<span class="wl">エディトリアル・ICM2019</span>も、心停止後ICU患者の死亡の2/3がHIBIによるもので72時間以降のWLSTとして起こることを確認している。</p>
 </div>
 <p><strong>この先の指標</strong>：ICM2019のエディトリアルは、TTM・冷却・PaCO2・酸素・MAP目標がいずれも中立という停滞のなかで、<mark class="hl">予後予測の精度だけがNFL（neurofilament light chain）・NPi（瞳孔径定量）・白質FA（拡散テンソル画像）という新世代の指標で前進している</mark>と位置づける。これらはいずれもPLR+CR・EEG・NSEといった§8で見た旧世代の指標が抱える「測定・判読に依存するノイズ」を、定量化・客観化によって減らそうとする方向性である——<strong>§1の「一貫性を上げる」という主題が、神経予後予測というこの章でも別の道具立てで繰り返されている</strong>。ただし本Homeの範囲ではこれらの指標のカットオフ・外的妥当性まで確認できておらず、導入判断は§8-4の対立点整理と同じ作法（集団・判読基準を確認してから数字を引く）で扱う。</p>
+<p><strong>心停止後に限らない——急性脳損傷全般でも同じ構造がある</strong>：<span class="wl">ナラティブレビュー・JIntensiveCare2024</span> は、行動で反応しない急性脳損傷患者の15〜25%に、脳波やfMRIでのみ分かる隠れた意識（CMD）があり、CMDありは12か月の自立回復が44%対14%と整理する。<mark class="hl">既存の予後データ自体が早期の治療中止による自己成就的予言で悪いほうへ偏っている</mark>ため、予後スコアをそのまま「回復の見込みなし」の根拠にしない。運用は「反応がない＝意識がない、ではない」と家族に伝え、72時間以内の断定を避け、CRS-R で時間をおいて繰り返し評価する——横方向・時間方向の平均化という上の設計と同じ考え方である（ナラティブレビューであり、効果量は元論文で確認する）。</p>
 <p><strong>この章の持ち帰り</strong>：14日窓の2剤併用の感度は0.00〜0.19——不良転帰の8割はこの基準では拾えない。「治療の手を緩める根拠」としてなら感度が低いことは安全側だが、「早期にリハビリ資源を集中させる対象を選ぶ」目的にはまったく足りない。<mark class="hl">何のための予測かを先に決めないと、この数値は評価できない</mark>。予後予測の会話とWLSTの会話を混ぜないという運用は、患者側の意思決定能力（<span class="wl">意思決定能力に関する10の誤解</span>）とは別軸で、<span class="wl">倫理・終末期・意思決定</span> の各論とあわせて運用する。</p>
 <h2 id="sec-10">9. エビデンス統合のノイズ、分類は不確実性をどう表現するか ⚖️</h2>
 <p>この章で決めるのは「ノイズは臨床医の頭の中だけで起きるのではない」という視点である。<mark class="hl">同じRCT群を入力にしても、レビューする人が違えば結論が変わる</mark>——これは「誰が担当するか」で治療が変わるlottery effect（§1）の、エビデンス統合版である。</p>
