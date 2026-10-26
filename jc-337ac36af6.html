@@ -33,39 +33,48 @@
   --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
 }
 *{box-sizing:border-box}
+/* ── 文字と余白の基準（2026-10-27 本人指示「余白とフォントをこのくらいに」）──
+   本人は Chrome でこのページを 125% に拡大して読んでいた（Chrome の拡大率設定で確認）。
+   100% で開いても同じ見た目になるよう、寸法はすべて rem（＝下の html の文字サイズ）で書き、
+   広い画面では基準を 16.5px×1.25＝20.5px にする。旧 px 値 ÷ 16.5 が rem 値。
+   ボタン類（📄 PDF・表示切替・jc_share.py のツールバー）は横に px で並べているので px のまま。 */
+html{font-size:16.5px}
+@media (min-width:900px){html{font-size:18px}}
+@media (min-width:1200px){html{font-size:20.5px}}
+@media (max-width:640px){html{font-size:16px}}
 .jc{
   --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
   --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
   font-family:var(--gothic);
   color:var(--ink); background:var(--paper);
-  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  line-height:1.85; font-size:1rem; letter-spacing:.01em;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   font-feature-settings:"palt" 1;
 }
-.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc .wrap{max-width:46.06rem;margin:0 auto;padding:0 1.333rem 5.818rem}
 .jc ::selection{background:var(--teal-tint)}
 
 /* ヘッダ */
-.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
-.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
-  text-transform:none;margin:0 0 14px;font-weight:600}
-.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
-.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc header.masthead{max-width:46.06rem;margin:0 auto;padding:2.909rem 1.333rem 1.576rem}
+.jc .eyebrow{font-family:var(--mincho);font-size:.788rem;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 .848rem;font-weight:600}
+.jc h1.title{font-size:1.818rem;line-height:1.42;font-weight:800;margin:0 0 .364rem;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:.909rem;margin:.121rem 0 1.212rem}
 .jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+  padding:.97rem 0;margin:.364rem 0 0;display:grid;grid-template-columns:auto 1fr;gap:.364rem 1.091rem;font-size:.818rem}
 .jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
 .jc .cite dd{margin:0;color:var(--ink)}
 .jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
 .jc .cite a:hover{border-color:var(--teal)}
 
 /* 見出し */
-.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+.jc h2{font-size:1.333rem;font-weight:800;line-height:1.4;margin:3.152rem 0 .242rem;padding-top:1.212rem;
   border-top:2px solid var(--ink);text-wrap:balance}
-.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
-.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
-.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
-  padding-left:11px;border-left:3px solid var(--teal)}
-.jc p{margin:12px 0}
+.jc h2 .sec-emoji{font-size:1.091rem;opacity:.85;margin-right:.3em}
+.jc h3{font-size:1.091rem;font-weight:750;margin:2.061rem 0 .364rem;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:.909rem;font-weight:700;margin:1.455rem 0 .242rem;
+  padding-left:.667rem;border-left:3px solid var(--teal)}
+.jc p{margin:.727rem 0}
 .jc strong{font-weight:700}
 .jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
 .jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
@@ -74,37 +83,37 @@
   border-bottom:1px dotted var(--faint);cursor:default}
 
 /* リスト */
-.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
-.jc li{margin:5px 0}
+.jc ul,.jc ol{margin:.727rem 0;padding-left:1.35em}
+.jc li{margin:.303rem 0}
 .jc ul{list-style:none;padding-left:1.2em}
 .jc ul>li{position:relative}
 .jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
-  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  width:.364rem;height:.364rem;border-radius:50%;background:var(--teal)}
 .jc ol{counter-reset:n;list-style:none;padding-left:0}
-.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:.545rem 0}
 .jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
   width:1.6em;height:1.6em;display:grid;place-items:center;
-  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  font-family:var(--mincho);font-size:.788rem;font-weight:700;color:#fff;
   background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
 
 /* 表 */
-.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
-.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
-.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+.jc .tw{overflow-x:auto;margin:1.091rem 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:.818rem;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:.606rem .788rem;border-bottom:1px solid var(--line);
   vertical-align:top;font-variant-numeric:tabular-nums}
-.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:.758rem;
   position:sticky;top:0;white-space:nowrap}
 .jc tbody tr:last-child td{border-bottom:none}
 .jc tbody tr:hover{background:var(--panel)}
 .jc td:first-child{font-weight:600;color:var(--teal-ink)}
 
 /* コールアウト */
-.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+.jc .call{margin:1.212rem 0;border-radius:12px;padding:.97rem 1.091rem;background:var(--panel);
   border:1px solid var(--line);box-shadow:var(--shadow)}
-.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
-  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call .lab{font-family:var(--mincho);font-size:.727rem;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 .485rem;color:var(--teal-ink)}
 .jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
-.jc .call p{margin:8px 0}
+.jc .call p{margin:.485rem 0}
 .jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
 .jc .call.warning .lab{color:var(--red)}
 .jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
@@ -114,12 +123,12 @@
 .jc .call.success .lab{color:var(--teal-ink)}
 .jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
 .jc .call.note .lab{color:var(--faint)}
-.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:.818rem}
 .jc .call.tip .lab{color:var(--teal)}
 
-.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
-.jc .mermaid{margin:18px 0;text-align:center}
-.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:2.061rem 0}
+.jc .mermaid{margin:1.091rem 0;text-align:center}
+.jc figure.origfig{margin:1.333rem 0 .606rem;padding:.727rem .727rem .606rem;background:var(--panel);
   border:1px solid var(--line);border-radius:12px}
 .jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff;cursor:zoom-in}
 .jc figure.origfig img:hover{outline:2px solid var(--teal)}
@@ -143,31 +152,37 @@
 .pdf-btn:hover{background:var(--teal-ink)}
 .theme-toggle{right:112px}
 @media print{.pdf-btn{display:none!important}}
-.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption{margin-top:.545rem;font-size:.758rem;line-height:1.65;color:var(--faint)}
 .jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
-.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
-  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref{margin:1.091rem 0 -.485rem;padding:.545rem .788rem;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:.788rem;color:var(--muted)}
 .jc .figref a{color:var(--teal)}
 @media print{.jc figure.origfig{break-inside:avoid}}
-.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
-  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:1.212rem auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:.606rem;box-shadow:var(--shadow)}
 
 /* フッタ */
-.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
-  color:var(--faint);font-size:12.5px;line-height:1.7}
+.jc footer.foot{max-width:46.06rem;margin:2.424rem auto 0;padding:1.333rem;border-top:1px solid var(--line);
+  color:var(--faint);font-size:.758rem;line-height:1.7}
 .theme-toggle{position:fixed;top:14px;right:98px;z-index:20;   /* 📄 PDF ボタン（right:14px）の左隣。以前は right:14px で PDF と重なっていた */
   font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
   border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
 @media (max-width:640px){
-  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc h1.title{font-size:1.5625rem}.jc h2{font-size:1.25rem}
   .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない。
+   基準は 11pt（画面の 20.5px を紙に持ち込まない）。本文の列は用紙幅いっぱいに */
 @media print{
+  html{font-size:11pt}
+  /* Mac がダークモードでも紙は明るい配色（print-css-keeps-colors） */
+  :root,:root[data-theme]{--ink:#16232c;--muted:#5b6b76;--faint:#8595a0;--paper:#ffffff;--panel:#f5f8f9;--panel2:#eef4f5;
+    --line:#dde6ea;--teal:#0f6e7d;--teal-ink:#0b5661;--teal-tint:#e7f2f3;--red:#c0392b;--red-tint:#fbecea;--amber:#b06a00}
   .theme-toggle{display:none!important}
-  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .jc .wrap,.jc header.masthead,.jc footer.foot{max-width:none}
   .jc header.masthead{padding-top:6px}
   .jc h2{break-after:avoid}
   .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
@@ -176,28 +191,30 @@
 /* ── 左固定の目次バー（2026-09-26・お手本は ICU年次レポートの tocify）──
    wrap_standalone() が h2/h3 から <nav class="toc"> を作り、.jc に has-toc を付ける。
    ≥900px：左に固定、本文は右へ寄せる。<900px：畳んで左上の「☰ 目次」で開閉（ドロワー）。
-   印刷・#pdf：目次を消して本文を全幅に。 */
+   印刷・#pdf：目次を消して本文を全幅に。
+   2026-10-27：小項目（h3）は最初から全部開いておく（本人指示）。以前は読んでいる節の下だけ開いていた。
+   スクロール位置の強調（.active）と、読んでいる節の親を色で示す（li.open）は残す。 */
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper)}
 .jc.has-toc h2[id],.jc.has-toc h3[id]{scroll-margin-top:18px}
-.jc .toc{position:fixed;top:0;left:0;bottom:0;width:272px;z-index:15;overflow-y:auto;
+.jc .toc{position:fixed;top:0;left:0;bottom:0;width:16.485rem;z-index:15;overflow-y:auto;
   overscroll-behavior:contain;background:var(--panel);border-right:1px solid var(--line);
-  padding:26px 12px 40px 14px;font-size:13px;line-height:1.55;letter-spacing:0}
-.jc .toc .toc-ttl{font-family:var(--mincho);font-size:12px;letter-spacing:.22em;font-weight:700;
-  color:var(--teal-ink);margin:0 0 4px 8px}
-.jc .toc .toc-doc{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 14px 8px;
-  padding-bottom:12px;border-bottom:1px solid var(--line)}
+  padding:1.576rem .727rem 2.424rem .848rem;font-size:.788rem;line-height:1.55;letter-spacing:0}
+.jc .toc .toc-ttl{font-family:var(--mincho);font-size:.727rem;letter-spacing:.22em;font-weight:700;
+  color:var(--teal-ink);margin:0 0 .242rem .485rem}
+.jc .toc .toc-doc{font-size:.727rem;line-height:1.5;color:var(--muted);margin:0 0 .848rem .485rem;
+  padding-bottom:.727rem;border-bottom:1px solid var(--line)}
 .jc .toc ul{list-style:none;margin:0;padding:0}
 .jc .toc li{margin:0;padding:0}
 .jc .toc li::before{content:none}
-.jc .toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px 5px 10px;
-  border-radius:0 6px 6px 0;box-shadow:inset 3px 0 0 transparent}
+.jc .toc a{display:block;color:var(--ink);text-decoration:none;padding:.303rem .485rem .303rem .606rem;
+  border-radius:0 6px 6px 0;box-shadow:inset 3px 0 0 transparent;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}   /* 目次は1行（toc_label が短くし、英字が多くて溢れた分だけここで切る。全文は title） */
 .jc .toc a:hover{background:var(--panel2);color:var(--teal-ink)}
 .jc .toc .t2>a{font-weight:600}
-.jc .toc .t2+.t2{margin-top:2px}
-.jc .toc ul.sub{display:none;margin:1px 0 6px}
-.jc .toc li.open>ul.sub{display:block}
-.jc .toc ul.sub a{padding:3px 8px 3px 24px;font-size:12.3px;color:var(--muted);font-weight:400}
+.jc .toc .t2+.t2{margin-top:.121rem}
+.jc .toc ul.sub{display:block;margin:.061rem 0 .364rem}
+.jc .toc ul.sub a{padding:.182rem .485rem .182rem 1.212rem;font-size:.745rem;color:var(--muted);font-weight:400}
 .jc .toc a.active{background:linear-gradient(90deg,var(--teal-tint),transparent);
   box-shadow:inset 3px 0 0 var(--teal);color:var(--teal-ink);font-weight:700}
 .jc .toc ul.sub a.active{color:var(--teal-ink)}
@@ -207,12 +224,13 @@ body{margin:0;background:var(--paper)}
   border-radius:20px;padding:7px 14px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .toc-scrim{display:none}
 @media (min-width:900px){
-  .jc.has-toc{padding-left:272px}
+  .jc.has-toc{padding-left:16.485rem}
 }
 @media (max-width:899.98px){
   .toc-btn{display:block}
   .jc .toc{width:min(84vw,320px);transform:translateX(-102%);visibility:hidden;
-    transition:transform .2s ease,visibility 0s linear .2s;z-index:40;padding-top:64px}
+    transition:transform .2s ease,visibility 0s linear .2s;z-index:40;padding-top:64px;font-size:14px}
+  .jc .toc ul.sub a{font-size:13px}
   .toc-open .jc .toc{transform:none;visibility:visible;transition:transform .2s ease;
     box-shadow:0 10px 40px rgba(0,0,0,.25)}
   .toc-open .toc-scrim{display:block;position:fixed;inset:0;z-index:35;background:rgba(10,20,26,.45)}
@@ -376,7 +394,7 @@ body{margin:0;background:var(--paper)}
 </div>
 <h2 id="sec-8">⑦ 挿管のタイミングをどう決めるか</h2>
 <p>挿管のタイミングを論じた研究を読むときに最初に確かめるべきは、<mark class="hl">統計手法ではなくコホートの入り口</mark>です。「このコホートは挿管された患者だけか」がイエスなら、「遅い挿管は死亡が高い」という結論は割り引いて読む必要があります（<span class="wl">レター・AJRCCM2021</span>）。この原則を踏まえてCOVID-19の文献を見ると、結論は真っ二つに割れています。CIBERESUCICOVIDのPSマッチ614例では、<mark class="hl">挿管遅延が院内死亡を27.3%から37.1%に増やし、特にHFNC先行例で顕著</mark>でした（<span class="wl">CIBERESUCICOVID・ERJ2022</span>）。別の解析でも、<mark class="hl">最初の呼吸補助から48時間を超えた挿管が、傾向スコア調整後も院内死亡を約2.5倍に増やす（HR 2.45）</mark>という結果が示されています（<span class="wl">COVID-19重症患者における挿管までの時間と予後</span>／<span class="wl">González 2022</span>）。一方でアトランタ4病院175例の後ろ向きコホートでは、<mark class="hl">ICU入室から挿管までの時間（&lt;8／8–24／≥24時間）と院内死亡に関連はありません</mark>でした（38.2%／31.6%／38.1%、p=0.7）（<span class="wl">アトランタ4病院175例・CCM2020</span>）。36施設のPSマッチ122例では、<mark class="hl">初日からHFNOを選ぶことで人工呼吸器フリー日を8日増やし、ICU在室を8日縮められるが、死亡は1ミリも動かない</mark>という、挿管回避のメリットが「死亡」ではなく「侵襲を避けられること」に限定される結果も出ています（<span class="wl">36施設・PSマッチ122例・CritCare2021</span>）。単施設75例の研究レターは調整なしのため、<mark class="hl">「挿管を早くすべきか遅くすべきか」の答えにはなりません</mark>（<span class="wl">COVID-19 ARDSにおける早期挿管と晩期挿管の呼吸メカニクス</span>）。重症COVIDの挿管回避という文脈では、HFNCよりCPAPが優る可能性がRECOVERY-RSで示されています（<span class="wl">RECOVERY-RS・JAMA2022</span>）。</p>
-<p>敗血症性ショックでは、<mark class="hl">早期挿管の割合が施設間で4.5%から47%まで大きくばらつき</mark>、全体では24%でした（30 ICU・859例・<span class="wl">30 ICU 859例・AnnIntensiveCare2020</span>）。<mark class="hl">同じ重症度でも「いつ挿管するか」の判断は施設文化に大きく依存する</mark>という現実は、統一されたトリガー基準が必要という主張を裏づけます。低酸素性呼吸不全一般でも同じ構図が確認されていて、MIMIC-IVとAmsterdamUMCdbの4,726例で17種類の閾値（P:F・S:F・ROX・HACOR・FLORALI基準など）を評価すると、<mark class="hl">どの閾値を満たしても3時間以内に挿管される確率は34%以下</mark>で、臨床試験基準（FLORALI）を満たしても9〜13%にとどまりました。さらに<mark class="hl">黒人・アジア系は白人と比べて閾値到達後の挿管確率が有意に低く（OR 0.75・0.6）</mark>、非医学的要因が判断に影響しうることも示されています（<span class="wl">コホート研究・AJRCCM2023</span>）。ROX指数（SpO₂/FiO₂÷呼吸数）は、この判断を客観化する数少ない道具の1つで、<mark class="hl">HFNC開始12時間後に4.88以上なら挿管リスクは低く、3.85未満なら挿管を議論の卓上に載せる</mark>という目安が示されています（<span class="wl">多施設191例・AJRCCM2019</span>）。その出発点になったのが、HFNC失敗175例の単施設後ろ向き研究です。<mark class="hl">開始48時間以降に挿管された群のICU死亡は66.7%対39.2%</mark>（傾向スコア調整OR 0.317）と高く、NIVで知られていた「遅い失敗」の構図がHFNCにもあることを示しました。ただし挿管された患者だけを比べた観察研究で、免疫不全・血液腫瘍の多い集団です。<mark class="hl">48時間という数字より、開始時に見切りの時点と基準を決めて定時に再評価する仕組み</mark>のほうが要点です（<span class="wl">単施設後ろ向き175例・ICM2015</span>）。HFNCと従来型酸素療法の比較でも、<mark class="hl">挿管は減らすが死亡は変えない（OR 0.52・0.34–0.79）</mark>という2本のメタ解析が一致しており、NIVとの優劣比較はGRADE「非常に低い」で判定できません（<span class="wl">11研究3459例・メタ解析・CritCare2017</span>／<span class="wl">SRメタ解析・Chest2017</span>）。</p>
+<p>敗血症性ショックでは、<mark class="hl">早期挿管の割合が施設間で4.5%から47%まで大きくばらつき</mark>、全体では24%でした（30 ICU・859例・<span class="wl">30 ICU 859例・AnnIntensiveCare2020</span>）。<mark class="hl">同じ重症度でも「いつ挿管するか」の判断は施設文化に大きく依存する</mark>という現実は、統一されたトリガー基準が必要という主張を裏づけます。低酸素性呼吸不全一般でも同じ構図が確認されていて、MIMIC-IVとAmsterdamUMCdbの4,726例で17種類の閾値（P:F・S:F・ROX・HACOR・FLORALI基準など）を評価すると、<mark class="hl">どの閾値を満たしても3時間以内に挿管される確率は34%以下</mark>で、臨床試験基準（FLORALI）を満たしても9〜13%にとどまりました。さらに<mark class="hl">黒人・アジア系は白人と比べて閾値到達後の挿管確率が有意に低く（OR 0.75・0.6）</mark>、非医学的要因が判断に影響しうることも示されています（<span class="wl">コホート研究・AJRCCM2023</span>）。ROX指数（SpO₂/FiO₂÷呼吸数）は、この判断を客観化する数少ない道具の1つで、<mark class="hl">HFNC開始12時間後に4.88以上なら挿管リスクは低く、3.85未満なら挿管を議論の卓上に載せる</mark>という目安が示されています（<span class="wl">多施設191例・AJRCCM2019</span>）。その出発点になったのが、HFNC失敗175例の単施設後ろ向き研究です。<mark class="hl">開始48時間以降に挿管された群のICU死亡は66.7%対39.2%</mark>（傾向スコア調整OR 0.317）と高く、NIVで知られていた「遅い失敗」の構図がHFNCにもあることを示しました。ただし挿管された患者だけを比べた観察研究で、免疫不全・血液腫瘍の多い集団です。<mark class="hl">48時間という数字より、開始時に見切りの時点と基準を決めて定時に再評価する仕組み</mark>のほうが要点です（<span class="wl">単施設後ろ向き175例・ICM2015</span>）。NIV側の古典は8施設前向き354例で、低酸素性呼吸不全のNIV失敗は30%、挿管群のICU死亡は59%に達し、<mark class="hl">ARDS・市中肺炎・SAPS II 35以上・開始1時間後のP/F 146以下</mark>が失敗を予測しました。見切りの再評価は「開始1時間後」から始まるという根拠です（<span class="wl">8施設前向き354例・ICM2001</span>）。HFNCと従来型酸素療法の比較でも、<mark class="hl">挿管は減らすが死亡は変えない（OR 0.52・0.34–0.79）</mark>という2本のメタ解析が一致しており、NIVとの優劣比較はGRADE「非常に低い」で判定できません（<span class="wl">11研究3459例・メタ解析・CritCare2017</span>／<span class="wl">SRメタ解析・Chest2017</span>）。</p>
 <p><mark class="hl">予測が当たることと、その予測で挿管を決めてよいことは別</mark>という点に、観察データから初めて踏み込んだのが2026年のターゲットトライアルエミュレーションです。MIMIC-IVでHFNCを開始した1,651例に「ROXが閾値を初めて下回った時点から2時間以内に挿管する」という決定ルールを当てはめると、30日死亡は通常ケア26.9%（95%CI 24.7–29.2）に対しROX&lt;3.85で20.5%（17.1–24.1）、リスク差 −6.5ポイント、RR 0.76（0.66–0.86）と推定されました。閾値を4.88にしてもRR 0.74、時間可変閾値でもRR 0.79で方向は同じです。タイミング論として重要なのは、<mark class="hl">30日挿管の累積発生率が通常ケアとほとんど変わらなかったこと（21.5%対22.0%）</mark>——死亡が減ったとすれば「挿管を増やしたから」ではなく「挿管を早めたから」という説明になり、上のCIBERESUCICOVIDなど「遅延は害」という観察研究群と同じ向きを指します。ただし<mark class="hl">これはMIMIC-IVという単一施設の電子カルテを使った因果推論であって、RCTと同列には置けません</mark>。ROX&lt;4.88の戦略では73.7%がプロトコル非順守で人工的に打ち切られており、著者ら自身が「仮説生成であり、現時点で挿管判断そのものに使うべきではない」と明記しています（<span class="wl">MIMIC-IV・JIntensiveCare2026</span>）。当院でも、ROXは呼吸努力・意識・循環動態と併せた総合判断の一材料という位置づけを変えず、パイロットRCT（ROX-1, NCT04707729）の結果が出た段階でプロトコル化の是非を再検討する材料にします。</p>
 <p>その「呼吸努力」をどう測るかを整理したのが2026年のState-of-the-Art Reviewです。<mark class="hl">HFNC・NIVでSpO₂が上がっても呼吸努力が下がったとは限らない</mark>ため、呼吸数・補助呼吸筋・奇異呼吸・呼吸困難NRSを開始1〜2時間後と定時に記録し、ROXは軌跡で読み、使えればΔCVP（10〜15 cmH₂O超）・横隔膜肥厚率TFdi（40%超）・食道内圧を足す3段階評価を提案します。挿管の目安は<mark class="hl">RR 35超＋低Vt、著明な補助呼吸筋、最大補助でP/F 150未満、意識悪化、ΔPes 15 cmH₂O超・TFdi 40〜50%超の持続</mark>で、酸素化が保たれていても高努力が続けば挿管を考えます。ただし閾値の多くは侵襲的人工呼吸の研究由来で原著内でも揺れがあるため、院内で使う数字は一本化してから運用します（<span class="wl">State-of-the-Art Review・ICCN2026</span>）。</p>
 <p>挿管を避ける手段（HFNC・NIV）そのもののRCTは、<mark class="hl">「挿管は減るが死亡は減らない」</mark>という同じ形をくり返しています。FLORALIはHFNCで90日死亡を減らしたが挿管率は有意差なし、SOHO（2026）は28日死亡14.6%対14.6%で挿管だけ42.4%対48.4%に減り、COVID-19のHiFLo-Covid・SOHO-COVID・HENIVOT（ヘルメットNIV）も挿管のみを減らしました。25RCTのネットワークメタ解析ではヘルメットNIVだけが死亡を減らす方向（RR 0.40）です。<mark class="hl">「挿管を減らせる」は「挿管を遅らせてよい」を意味しない</mark>ので、これらの選択と個別の患者層（免疫不全・COPDの高CO₂・術後低酸素）の扱いは <span class="wl">NIV・NPPV（非侵襲的換気）</span> と <span class="wl">HFNC（高流量鼻カニュラ）</span> に委ね、本Homeでは地図の「周辺」に置きます。</p>

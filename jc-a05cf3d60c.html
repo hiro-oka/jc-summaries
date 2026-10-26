@@ -33,39 +33,48 @@
   --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
 }
 *{box-sizing:border-box}
+/* ── 文字と余白の基準（2026-10-27 本人指示「余白とフォントをこのくらいに」）──
+   本人は Chrome でこのページを 125% に拡大して読んでいた（Chrome の拡大率設定で確認）。
+   100% で開いても同じ見た目になるよう、寸法はすべて rem（＝下の html の文字サイズ）で書き、
+   広い画面では基準を 16.5px×1.25＝20.5px にする。旧 px 値 ÷ 16.5 が rem 値。
+   ボタン類（📄 PDF・表示切替・jc_share.py のツールバー）は横に px で並べているので px のまま。 */
+html{font-size:16.5px}
+@media (min-width:900px){html{font-size:18px}}
+@media (min-width:1200px){html{font-size:20.5px}}
+@media (max-width:640px){html{font-size:16px}}
 .jc{
   --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
   --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
   font-family:var(--gothic);
   color:var(--ink); background:var(--paper);
-  line-height:1.85; font-size:16.5px; letter-spacing:.01em;
+  line-height:1.85; font-size:1rem; letter-spacing:.01em;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   font-feature-settings:"palt" 1;
 }
-.jc .wrap{max-width:760px;margin:0 auto;padding:0 22px 96px}
+.jc .wrap{max-width:46.06rem;margin:0 auto;padding:0 1.333rem 5.818rem}
 .jc ::selection{background:var(--teal-tint)}
 
 /* ヘッダ */
-.jc header.masthead{max-width:760px;margin:0 auto;padding:48px 22px 26px}
-.jc .eyebrow{font-family:var(--mincho);font-size:13px;letter-spacing:.22em;color:var(--teal-ink);
-  text-transform:none;margin:0 0 14px;font-weight:600}
-.jc h1.title{font-size:30px;line-height:1.42;font-weight:800;margin:0 0 6px;text-wrap:balance;letter-spacing:.005em}
-.jc .subtitle{color:var(--muted);font-size:15px;margin:2px 0 20px}
+.jc header.masthead{max-width:46.06rem;margin:0 auto;padding:2.909rem 1.333rem 1.576rem}
+.jc .eyebrow{font-family:var(--mincho);font-size:.788rem;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 .848rem;font-weight:600}
+.jc h1.title{font-size:1.818rem;line-height:1.42;font-weight:800;margin:0 0 .364rem;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:.909rem;margin:.121rem 0 1.212rem}
 .jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:16px 0;margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13.5px}
+  padding:.97rem 0;margin:.364rem 0 0;display:grid;grid-template-columns:auto 1fr;gap:.364rem 1.091rem;font-size:.818rem}
 .jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
 .jc .cite dd{margin:0;color:var(--ink)}
 .jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
 .jc .cite a:hover{border-color:var(--teal)}
 
 /* 見出し */
-.jc h2{font-size:22px;font-weight:800;line-height:1.4;margin:52px 0 4px;padding-top:20px;
+.jc h2{font-size:1.333rem;font-weight:800;line-height:1.4;margin:3.152rem 0 .242rem;padding-top:1.212rem;
   border-top:2px solid var(--ink);text-wrap:balance}
-.jc h2 .sec-emoji{font-size:18px;opacity:.85;margin-right:.3em}
-.jc h3{font-size:18px;font-weight:750;margin:34px 0 6px;color:var(--teal-ink);text-wrap:balance}
-.jc h4{font-size:15px;font-weight:700;margin:24px 0 4px;
-  padding-left:11px;border-left:3px solid var(--teal)}
-.jc p{margin:12px 0}
+.jc h2 .sec-emoji{font-size:1.091rem;opacity:.85;margin-right:.3em}
+.jc h3{font-size:1.091rem;font-weight:750;margin:2.061rem 0 .364rem;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:.909rem;font-weight:700;margin:1.455rem 0 .242rem;
+  padding-left:.667rem;border-left:3px solid var(--teal)}
+.jc p{margin:.727rem 0}
 .jc strong{font-weight:700}
 .jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
 .jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
@@ -74,37 +83,37 @@
   border-bottom:1px dotted var(--faint);cursor:default}
 
 /* リスト */
-.jc ul,.jc ol{margin:12px 0;padding-left:1.35em}
-.jc li{margin:5px 0}
+.jc ul,.jc ol{margin:.727rem 0;padding-left:1.35em}
+.jc li{margin:.303rem 0}
 .jc ul{list-style:none;padding-left:1.2em}
 .jc ul>li{position:relative}
 .jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
-  width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  width:.364rem;height:.364rem;border-radius:50%;background:var(--teal)}
 .jc ol{counter-reset:n;list-style:none;padding-left:0}
-.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:9px 0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:.545rem 0}
 .jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
   width:1.6em;height:1.6em;display:grid;place-items:center;
-  font-family:var(--mincho);font-size:13px;font-weight:700;color:#fff;
+  font-family:var(--mincho);font-size:.788rem;font-weight:700;color:#fff;
   background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
 
 /* 表 */
-.jc .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
-.jc table{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.7}
-.jc th,.jc td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);
+.jc .tw{overflow-x:auto;margin:1.091rem 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:.818rem;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:.606rem .788rem;border-bottom:1px solid var(--line);
   vertical-align:top;font-variant-numeric:tabular-nums}
-.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:12.5px;
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:.758rem;
   position:sticky;top:0;white-space:nowrap}
 .jc tbody tr:last-child td{border-bottom:none}
 .jc tbody tr:hover{background:var(--panel)}
 .jc td:first-child{font-weight:600;color:var(--teal-ink)}
 
 /* コールアウト */
-.jc .call{margin:20px 0;border-radius:12px;padding:16px 18px;background:var(--panel);
+.jc .call{margin:1.212rem 0;border-radius:12px;padding:.97rem 1.091rem;background:var(--panel);
   border:1px solid var(--line);box-shadow:var(--shadow)}
-.jc .call .lab{font-family:var(--mincho);font-size:12px;letter-spacing:.14em;font-weight:700;
-  display:inline-block;margin:0 0 8px;color:var(--teal-ink)}
+.jc .call .lab{font-family:var(--mincho);font-size:.727rem;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 .485rem;color:var(--teal-ink)}
 .jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
-.jc .call p{margin:8px 0}
+.jc .call p{margin:.485rem 0}
 .jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
 .jc .call.warning .lab{color:var(--red)}
 .jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
@@ -114,12 +123,12 @@
 .jc .call.success .lab{color:var(--teal-ink)}
 .jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
 .jc .call.note .lab{color:var(--faint)}
-.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:13.5px}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:.818rem}
 .jc .call.tip .lab{color:var(--teal)}
 
-.jc hr.rule{border:none;border-top:1px solid var(--line);margin:34px 0}
-.jc .mermaid{margin:18px 0;text-align:center}
-.jc figure.origfig{margin:22px 0 10px;padding:12px 12px 10px;background:var(--panel);
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:2.061rem 0}
+.jc .mermaid{margin:1.091rem 0;text-align:center}
+.jc figure.origfig{margin:1.333rem 0 .606rem;padding:.727rem .727rem .606rem;background:var(--panel);
   border:1px solid var(--line);border-radius:12px}
 .jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff;cursor:zoom-in}
 .jc figure.origfig img:hover{outline:2px solid var(--teal)}
@@ -143,31 +152,37 @@
 .pdf-btn:hover{background:var(--teal-ink)}
 .theme-toggle{right:112px}
 @media print{.pdf-btn{display:none!important}}
-.jc figure.origfig figcaption{margin-top:9px;font-size:12.5px;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption{margin-top:.545rem;font-size:.758rem;line-height:1.65;color:var(--faint)}
 .jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
-.jc .figref{margin:18px 0 -8px;padding:9px 13px;border-left:3px solid var(--line);
-  background:var(--panel);border-radius:0 8px 8px 0;font-size:13px;color:var(--muted)}
+.jc .figref{margin:1.091rem 0 -.485rem;padding:.545rem .788rem;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:.788rem;color:var(--muted)}
 .jc .figref a{color:var(--teal)}
 @media print{.jc figure.origfig{break-inside:avoid}}
-.jc img.flow{display:block;max-width:100%;height:auto;margin:20px auto;
-  background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;box-shadow:var(--shadow)}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:1.212rem auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:.606rem;box-shadow:var(--shadow)}
 
 /* フッタ */
-.jc footer.foot{max-width:760px;margin:40px auto 0;padding:22px;border-top:1px solid var(--line);
-  color:var(--faint);font-size:12.5px;line-height:1.7}
+.jc footer.foot{max-width:46.06rem;margin:2.424rem auto 0;padding:1.333rem;border-top:1px solid var(--line);
+  color:var(--faint);font-size:.758rem;line-height:1.7}
 .theme-toggle{position:fixed;top:14px;right:98px;z-index:20;   /* 📄 PDF ボタン（right:14px）の左隣。以前は right:14px で PDF と重なっていた */
   font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
   border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
 @media (max-width:640px){
-  .jc{font-size:16px}.jc h1.title{font-size:25px}.jc h2{font-size:20px}
+  .jc h1.title{font-size:1.5625rem}.jc h2{font-size:1.25rem}
   .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない */
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない。
+   基準は 11pt（画面の 20.5px を紙に持ち込まない）。本文の列は用紙幅いっぱいに */
 @media print{
+  html{font-size:11pt}
+  /* Mac がダークモードでも紙は明るい配色（print-css-keeps-colors） */
+  :root,:root[data-theme]{--ink:#16232c;--muted:#5b6b76;--faint:#8595a0;--paper:#ffffff;--panel:#f5f8f9;--panel2:#eef4f5;
+    --line:#dde6ea;--teal:#0f6e7d;--teal-ink:#0b5661;--teal-tint:#e7f2f3;--red:#c0392b;--red-tint:#fbecea;--amber:#b06a00}
   .theme-toggle{display:none!important}
-  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .jc .wrap,.jc header.masthead,.jc footer.foot{max-width:none}
   .jc header.masthead{padding-top:6px}
   .jc h2{break-after:avoid}
   .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
@@ -176,28 +191,30 @@
 /* ── 左固定の目次バー（2026-09-26・お手本は ICU年次レポートの tocify）──
    wrap_standalone() が h2/h3 から <nav class="toc"> を作り、.jc に has-toc を付ける。
    ≥900px：左に固定、本文は右へ寄せる。<900px：畳んで左上の「☰ 目次」で開閉（ドロワー）。
-   印刷・#pdf：目次を消して本文を全幅に。 */
+   印刷・#pdf：目次を消して本文を全幅に。
+   2026-10-27：小項目（h3）は最初から全部開いておく（本人指示）。以前は読んでいる節の下だけ開いていた。
+   スクロール位置の強調（.active）と、読んでいる節の親を色で示す（li.open）は残す。 */
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper)}
 .jc.has-toc h2[id],.jc.has-toc h3[id]{scroll-margin-top:18px}
-.jc .toc{position:fixed;top:0;left:0;bottom:0;width:272px;z-index:15;overflow-y:auto;
+.jc .toc{position:fixed;top:0;left:0;bottom:0;width:16.485rem;z-index:15;overflow-y:auto;
   overscroll-behavior:contain;background:var(--panel);border-right:1px solid var(--line);
-  padding:26px 12px 40px 14px;font-size:13px;line-height:1.55;letter-spacing:0}
-.jc .toc .toc-ttl{font-family:var(--mincho);font-size:12px;letter-spacing:.22em;font-weight:700;
-  color:var(--teal-ink);margin:0 0 4px 8px}
-.jc .toc .toc-doc{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 14px 8px;
-  padding-bottom:12px;border-bottom:1px solid var(--line)}
+  padding:1.576rem .727rem 2.424rem .848rem;font-size:.788rem;line-height:1.55;letter-spacing:0}
+.jc .toc .toc-ttl{font-family:var(--mincho);font-size:.727rem;letter-spacing:.22em;font-weight:700;
+  color:var(--teal-ink);margin:0 0 .242rem .485rem}
+.jc .toc .toc-doc{font-size:.727rem;line-height:1.5;color:var(--muted);margin:0 0 .848rem .485rem;
+  padding-bottom:.727rem;border-bottom:1px solid var(--line)}
 .jc .toc ul{list-style:none;margin:0;padding:0}
 .jc .toc li{margin:0;padding:0}
 .jc .toc li::before{content:none}
-.jc .toc a{display:block;color:var(--ink);text-decoration:none;padding:5px 8px 5px 10px;
-  border-radius:0 6px 6px 0;box-shadow:inset 3px 0 0 transparent}
+.jc .toc a{display:block;color:var(--ink);text-decoration:none;padding:.303rem .485rem .303rem .606rem;
+  border-radius:0 6px 6px 0;box-shadow:inset 3px 0 0 transparent;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}   /* 目次は1行（toc_label が短くし、英字が多くて溢れた分だけここで切る。全文は title） */
 .jc .toc a:hover{background:var(--panel2);color:var(--teal-ink)}
 .jc .toc .t2>a{font-weight:600}
-.jc .toc .t2+.t2{margin-top:2px}
-.jc .toc ul.sub{display:none;margin:1px 0 6px}
-.jc .toc li.open>ul.sub{display:block}
-.jc .toc ul.sub a{padding:3px 8px 3px 24px;font-size:12.3px;color:var(--muted);font-weight:400}
+.jc .toc .t2+.t2{margin-top:.121rem}
+.jc .toc ul.sub{display:block;margin:.061rem 0 .364rem}
+.jc .toc ul.sub a{padding:.182rem .485rem .182rem 1.212rem;font-size:.745rem;color:var(--muted);font-weight:400}
 .jc .toc a.active{background:linear-gradient(90deg,var(--teal-tint),transparent);
   box-shadow:inset 3px 0 0 var(--teal);color:var(--teal-ink);font-weight:700}
 .jc .toc ul.sub a.active{color:var(--teal-ink)}
@@ -207,12 +224,13 @@ body{margin:0;background:var(--paper)}
   border-radius:20px;padding:7px 14px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .toc-scrim{display:none}
 @media (min-width:900px){
-  .jc.has-toc{padding-left:272px}
+  .jc.has-toc{padding-left:16.485rem}
 }
 @media (max-width:899.98px){
   .toc-btn{display:block}
   .jc .toc{width:min(84vw,320px);transform:translateX(-102%);visibility:hidden;
-    transition:transform .2s ease,visibility 0s linear .2s;z-index:40;padding-top:64px}
+    transition:transform .2s ease,visibility 0s linear .2s;z-index:40;padding-top:64px;font-size:14px}
+  .jc .toc ul.sub a{font-size:13px}
   .toc-open .jc .toc{transform:none;visibility:visible;transition:transform .2s ease;
     box-shadow:0 10px 40px rgba(0,0,0,.25)}
   .toc-open .toc-scrim{display:block;position:fixed;inset:0;z-index:35;background:rgba(10,20,26,.45)}
