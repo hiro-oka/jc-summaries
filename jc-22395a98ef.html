@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>🧻 CD腸炎（C. difficile感染） Home</title>
+<style>
+:root{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+  --shadow:0 1px 2px rgba(20,40,50,.05),0 6px 24px rgba(20,40,50,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="light"]{
+  --ink:#16232c; --muted:#5b6b76; --faint:#8595a0;
+  --paper:#ffffff; --panel:#f5f8f9; --panel2:#eef4f5; --line:#dde6ea;
+  --teal:#0f6e7d; --teal-ink:#0b5661; --teal-tint:#e7f2f3;
+  --red:#c0392b; --red-tint:#fbecea; --amber:#b06a00;
+}
+:root[data-theme="dark"]{
+  --ink:#e6edf1; --muted:#9fb0ba; --faint:#7c8d97;
+  --paper:#0e1720; --panel:#14212b; --panel2:#182833; --line:#263844;
+  --teal:#4bb3c4; --teal-ink:#8fd4de; --teal-tint:#122a30;
+  --red:#ff7a6b; --red-tint:#2b1815; --amber:#e0a250;
+}
+*{box-sizing:border-box}
+/* ── 文字と余白の基準（2026-10-27 本人指示「余白とフォントをこのくらいに」）──
+   本人は Chrome でこのページを 125% に拡大して読んでいた（Chrome の拡大率設定で確認）。
+   100% で開いても同じ見た目になるよう、寸法はすべて rem（＝下の html の文字サイズ）で書き、
+   広い画面では基準を 16.5px×1.25＝20.5px にする。旧 px 値 ÷ 16.5 が rem 値。
+   ボタン類（📄 PDF・表示切替・jc_share.py のツールバー）は横に px で並べているので px のまま。 */
+html{font-size:16.5px}
+@media (min-width:900px){html{font-size:18px}}
+@media (min-width:1200px){html{font-size:20.5px}}
+@media (max-width:640px){html{font-size:16px}}
+.jc{
+  --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  font-family:var(--gothic);
+  color:var(--ink); background:var(--paper);
+  line-height:1.85; font-size:1rem; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"palt" 1;
+}
+.jc .wrap{max-width:46.06rem;margin:0 auto;padding:0 1.333rem 5.818rem}
+.jc ::selection{background:var(--teal-tint)}
+
+/* ヘッダ */
+.jc header.masthead{max-width:46.06rem;margin:0 auto;padding:2.909rem 1.333rem 1.576rem}
+.jc .eyebrow{font-family:var(--mincho);font-size:.788rem;letter-spacing:.22em;color:var(--teal-ink);
+  text-transform:none;margin:0 0 .848rem;font-weight:600}
+.jc h1.title{font-size:1.818rem;line-height:1.42;font-weight:800;margin:0 0 .364rem;text-wrap:balance;letter-spacing:.005em}
+.jc .subtitle{color:var(--muted);font-size:.909rem;margin:.121rem 0 1.212rem}
+.jc .cite{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:.97rem 0;margin:.364rem 0 0;display:grid;grid-template-columns:auto 1fr;gap:.364rem 1.091rem;font-size:.818rem}
+.jc .cite dt{color:var(--faint);font-family:var(--mincho);white-space:nowrap}
+.jc .cite dd{margin:0;color:var(--ink)}
+.jc .cite a{color:var(--teal-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.jc .cite a:hover{border-color:var(--teal)}
+
+/* 見出し */
+.jc h2{font-size:1.333rem;font-weight:800;line-height:1.4;margin:3.152rem 0 .242rem;padding-top:1.212rem;
+  border-top:2px solid var(--ink);text-wrap:balance}
+.jc h2 .sec-emoji{font-size:1.091rem;opacity:.85;margin-right:.3em}
+.jc h3{font-size:1.091rem;font-weight:750;margin:2.061rem 0 .364rem;color:var(--teal-ink);text-wrap:balance}
+.jc h4{font-size:.909rem;font-weight:700;margin:1.455rem 0 .242rem;
+  padding-left:.667rem;border-left:3px solid var(--teal)}
+.jc p{margin:.727rem 0}
+.jc strong{font-weight:700}
+.jc mark.hl{background:none;color:var(--red);font-weight:700;padding:0}
+.jc code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.88em;
+  background:var(--panel2);padding:.08em .4em;border-radius:4px}
+.jc .wl{color:var(--teal-ink);font-weight:500;
+  border-bottom:1px dotted var(--faint);cursor:default}
+
+/* リスト */
+.jc ul,.jc ol{margin:.727rem 0;padding-left:1.35em}
+.jc li{margin:.303rem 0}
+.jc ul{list-style:none;padding-left:1.2em}
+.jc ul>li{position:relative}
+.jc ul>li::before{content:"";position:absolute;left:-1.05em;top:.72em;
+  width:.364rem;height:.364rem;border-radius:50%;background:var(--teal)}
+.jc ol{counter-reset:n;list-style:none;padding-left:0}
+.jc ol>li{counter-increment:n;position:relative;padding-left:2.2em;margin:.545rem 0}
+.jc ol>li::before{content:counter(n);position:absolute;left:0;top:.1em;
+  width:1.6em;height:1.6em;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:.788rem;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:50%;font-variant-numeric:tabular-nums}
+
+/* 表 */
+.jc .tw{overflow-x:auto;margin:1.091rem 0;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.jc table{border-collapse:collapse;width:100%;font-size:.818rem;line-height:1.7}
+.jc th,.jc td{text-align:left;padding:.606rem .788rem;border-bottom:1px solid var(--line);
+  vertical-align:top;font-variant-numeric:tabular-nums}
+.jc thead th{background:var(--panel2);color:var(--ink);font-weight:700;font-size:.758rem;
+  position:sticky;top:0;white-space:nowrap}
+.jc tbody tr:last-child td{border-bottom:none}
+.jc tbody tr:hover{background:var(--panel)}
+.jc td:first-child{font-weight:600;color:var(--teal-ink)}
+
+/* コールアウト */
+.jc .call{margin:1.212rem 0;border-radius:12px;padding:.97rem 1.091rem;background:var(--panel);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.jc .call .lab{font-family:var(--mincho);font-size:.727rem;letter-spacing:.14em;font-weight:700;
+  display:inline-block;margin:0 0 .485rem;color:var(--teal-ink)}
+.jc .call>:first-child{margin-top:0}.jc .call>:last-child{margin-bottom:0}
+.jc .call p{margin:.485rem 0}
+.jc .call.warning{background:var(--red-tint);border-color:transparent;border-left:4px solid var(--red)}
+.jc .call.warning .lab{color:var(--red)}
+.jc .call.abstract{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.example{background:var(--teal-tint);border-color:transparent;border-left:4px solid var(--teal)}
+.jc .call.success{background:linear-gradient(180deg,var(--teal-tint),transparent);
+  border:1px solid var(--teal);border-left:4px solid var(--teal)}
+.jc .call.success .lab{color:var(--teal-ink)}
+.jc .call.note{background:var(--panel);border-left:4px solid var(--faint)}
+.jc .call.note .lab{color:var(--faint)}
+.jc .call.quote{background:var(--panel);border-left:4px solid var(--teal-ink);font-size:.818rem}
+.jc .call.tip .lab{color:var(--teal)}
+
+.jc hr.rule{border:none;border-top:1px solid var(--line);margin:2.061rem 0}
+.jc .mermaid{margin:1.091rem 0;text-align:center}
+.jc figure.origfig{margin:1.333rem 0 .606rem;padding:.727rem .727rem .606rem;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px}
+.jc figure.origfig img{width:100%;height:auto;display:block;border-radius:7px;background:#fff;cursor:zoom-in}
+.jc figure.origfig img:hover{outline:2px solid var(--teal)}
+.jc img.flow{cursor:zoom-in}
+/* 図の拡大表示（クリックで原寸に近いサイズ・もう一度クリックか Esc で閉じる） */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,20,26,.88);display:none;
+  align-items:center;justify-content:center;overflow:auto;padding:24px;box-sizing:border-box}
+.lb.on{display:flex}
+.lb img{max-width:calc(100vw - 48px);max-height:calc(100vh - 48px);width:auto;height:auto;
+  background:#fff;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,.5);cursor:zoom-out;margin:auto}
+.lb.full{align-items:flex-start;justify-content:flex-start}
+.lb.full img{max-width:none;max-height:none;cursor:zoom-out}
+.lb .lbcap{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;text-align:center;
+  color:#dfe8ec;font-size:12.5px;background:linear-gradient(0deg,rgba(10,20,26,.9),transparent)}
+.lb .lbx{position:fixed;top:12px;right:16px;color:#fff;font-size:26px;line-height:1;cursor:pointer;
+  background:rgba(0,0,0,.35);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+@media print{.lb{display:none!important}}
+/* 📄 PDF ボタン（ページ右上）: ブラウザの印刷ダイアログを開き「PDF に保存」で手元に落とす。URL 末尾 #pdf で自動的に開く */
+.pdf-btn{position:fixed;top:14px;right:14px;z-index:20;font:inherit;font-size:12.5px;font-weight:700;color:#fff;
+  background:var(--teal);border:none;border-radius:20px;padding:7px 15px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.pdf-btn:hover{background:var(--teal-ink)}
+.theme-toggle{right:112px}
+@media print{.pdf-btn{display:none!important}}
+.jc figure.origfig figcaption{margin-top:.545rem;font-size:.758rem;line-height:1.65;color:var(--faint)}
+.jc figure.origfig figcaption .lic{color:var(--teal);font-weight:600}
+.jc .figref{margin:1.091rem 0 -.485rem;padding:.545rem .788rem;border-left:3px solid var(--line);
+  background:var(--panel);border-radius:0 8px 8px 0;font-size:.788rem;color:var(--muted)}
+.jc .figref a{color:var(--teal)}
+@media print{.jc figure.origfig{break-inside:avoid}}
+.jc img.flow{display:block;max-width:100%;height:auto;margin:1.212rem auto;
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:.606rem;box-shadow:var(--shadow)}
+
+/* フッタ */
+.jc footer.foot{max-width:46.06rem;margin:2.424rem auto 0;padding:1.333rem;border-top:1px solid var(--line);
+  color:var(--faint);font-size:.758rem;line-height:1.7}
+.theme-toggle{position:fixed;top:14px;right:98px;z-index:20;   /* 📄 PDF ボタン（right:14px）の左隣。以前は right:14px で PDF と重なっていた */
+  font:inherit;font-size:12px;color:var(--muted);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer}
+@media (max-width:640px){
+  .jc h1.title{font-size:1.5625rem}.jc h2{font-size:1.25rem}
+  .jc .cite{grid-template-columns:1fr;gap:2px 0}.jc .cite dt{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* 印刷／PDF：トグルは隠す・背景色を出す・カードや表・図を改ページで割らない。
+   基準は 11pt（画面の 20.5px を紙に持ち込まない）。本文の列は用紙幅いっぱいに */
+@media print{
+  html{font-size:11pt}
+  /* Mac がダークモードでも紙は明るい配色（print-css-keeps-colors） */
+  :root,:root[data-theme]{--ink:#16232c;--muted:#5b6b76;--faint:#8595a0;--paper:#ffffff;--panel:#f5f8f9;--panel2:#eef4f5;
+    --line:#dde6ea;--teal:#0f6e7d;--teal-ink:#0b5661;--teal-tint:#e7f2f3;--red:#c0392b;--red-tint:#fbecea;--amber:#b06a00}
+  .theme-toggle{display:none!important}
+  .jc{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .jc .wrap,.jc header.masthead,.jc footer.foot{max-width:none}
+  .jc header.masthead{padding-top:6px}
+  .jc h2{break-after:avoid}
+  .jc .call,.jc .tw,.jc img.flow{break-inside:avoid}
+}
+
+/* ── 左固定の目次バー（2026-09-26・お手本は ICU年次レポートの tocify）──
+   wrap_standalone() が h2/h3 から <nav class="toc"> を作り、.jc に has-toc を付ける。
+   ≥900px：左に固定、本文は右へ寄せる。<900px：畳んで左上の「☰ 目次」で開閉（ドロワー）。
+   印刷・#pdf：目次を消して本文を全幅に。
+   2026-10-27：小項目（h3）は最初から全部開いておく（本人指示）。以前は読んでいる節の下だけ開いていた。
+   スクロール位置の強調（.active）と、読んでいる節の親を色で示す（li.open）は残す。 */
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper)}
+.jc.has-toc h2[id],.jc.has-toc h3[id]{scroll-margin-top:18px}
+.jc .toc{position:fixed;top:0;left:0;bottom:0;width:16.485rem;z-index:15;overflow-y:auto;
+  overscroll-behavior:contain;background:var(--panel);border-right:1px solid var(--line);
+  padding:1.576rem .727rem 2.424rem .848rem;font-size:.788rem;line-height:1.55;letter-spacing:0}
+.jc .toc .toc-ttl{font-family:var(--mincho);font-size:.727rem;letter-spacing:.22em;font-weight:700;
+  color:var(--teal-ink);margin:0 0 .242rem .485rem}
+.jc .toc .toc-doc{font-size:.727rem;line-height:1.5;color:var(--muted);margin:0 0 .848rem .485rem;
+  padding-bottom:.727rem;border-bottom:1px solid var(--line)}
+.jc .toc ul{list-style:none;margin:0;padding:0}
+.jc .toc li{margin:0;padding:0}
+.jc .toc li::before{content:none}
+.jc .toc a{display:block;color:var(--ink);text-decoration:none;padding:.303rem .485rem .303rem .606rem;
+  border-radius:0 6px 6px 0;box-shadow:inset 3px 0 0 transparent;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}   /* 目次は1行（toc_label が短くし、英字が多くて溢れた分だけここで切る。全文は title） */
+.jc .toc a:hover{background:var(--panel2);color:var(--teal-ink)}
+.jc .toc .t2>a{font-weight:600}
+.jc .toc .t2+.t2{margin-top:.121rem}
+.jc .toc ul.sub{display:block;margin:.061rem 0 .364rem}
+.jc .toc ul.sub a{padding:.182rem .485rem .182rem 1.212rem;font-size:.745rem;color:var(--muted);font-weight:400}
+.jc .toc a.active{background:linear-gradient(90deg,var(--teal-tint),transparent);
+  box-shadow:inset 3px 0 0 var(--teal);color:var(--teal-ink);font-weight:700}
+.jc .toc ul.sub a.active{color:var(--teal-ink)}
+.jc .toc li.open>a:not(.active){color:var(--teal-ink)}
+.toc-btn{display:none;position:fixed;top:14px;left:14px;z-index:25;font:inherit;font-size:12.5px;
+  font-weight:700;color:var(--teal-ink);background:var(--paper);border:1px solid var(--line);
+  border-radius:20px;padding:7px 14px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.toc-scrim{display:none}
+@media (min-width:900px){
+  .jc.has-toc{padding-left:16.485rem}
+}
+@media (max-width:899.98px){
+  .toc-btn{display:block}
+  .jc .toc{width:min(84vw,320px);transform:translateX(-102%);visibility:hidden;
+    transition:transform .2s ease,visibility 0s linear .2s;z-index:40;padding-top:64px;font-size:14px}
+  .jc .toc ul.sub a{font-size:13px}
+  .toc-open .jc .toc{transform:none;visibility:visible;transition:transform .2s ease;
+    box-shadow:0 10px 40px rgba(0,0,0,.25)}
+  .toc-open .toc-scrim{display:block;position:fixed;inset:0;z-index:35;background:rgba(10,20,26,.45)}
+  .toc-open .toc-btn{z-index:45}
+  .jc.has-toc h2[id],.jc.has-toc h3[id]{scroll-margin-top:62px}
+  .jc.has-toc header.masthead{padding-top:64px}
+}
+@media print{
+  .jc .toc,.toc-btn,.toc-scrim{display:none!important}
+  .jc.has-toc{padding-left:0!important}
+  html{scroll-behavior:auto}
+}
+.pdfmode .jc .toc,.pdfmode .toc-btn,.pdfmode .toc-scrim{display:none!important}
+.pdfmode .jc.has-toc{padding-left:0!important}
+</style>
+</head>
+<body>
+<div class="jcbar"><button class="jcbtn" type="button" onclick="navigator.clipboard.writeText(location.href).then(()=>{var t=this.textContent;this.textContent='✓ コピーしました';setTimeout(()=>{this.textContent=t},1600)})">🔗 リンクをコピー</button></div><style>.jcbar{position:fixed;top:12px;right:196px;z-index:30;display:flex;gap:8px}.jcbar .jcbtn{font:600 13px/1 system-ui,sans-serif;color:#0b5661;background:#e7f2f3;border:1px solid #bcd;border-radius:20px;padding:9px 15px;text-decoration:none;cursor:pointer}.jcbar .jcbtn:hover{background:#d6e9eb}@media (max-width:899.98px){.jcbar{top:auto;bottom:14px;right:14px}.jcbar .jcbtn{box-shadow:0 1px 3px rgba(0,0,0,.2)}}@media print{.jcbar{display:none}}</style>
+
+<button class="toc-btn" type="button" aria-controls="toc" aria-expanded="false">☰ 目次</button>
+<div class="toc-scrim"></div>
+
+<button class="theme-toggle" onclick="var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ 表示切替</button>
+<div class="jc has-toc">
+<nav class="toc" id="toc" aria-label="目次"><p class="toc-ttl">目次</p><p class="toc-doc">🧻 CD腸炎（C. difficile感染） Home</p><ul><li class="t2"><a href="#sec-1" title="❓ 今日の疑問 — 再発性CD腸炎はどう診断するか">今日の疑問</a><ul class="sub"><li class="t3"><a href="#sec-1-1" title="What：再発とは何か">What</a></li><li class="t3"><a href="#sec-1-2" title="再発を疑ったとき毒素の検出を勧めるか">再発を疑ったとき毒素の検出を勧め…</a></li><li class="t3"><a href="#sec-1-3" title="Where：どこで迷うか">Where</a></li><li class="t3"><a href="#sec-1-4" title="Why：検査陽性だけでは言えない理由">Why</a></li><li class="t3"><a href="#sec-1-5" title="How①：2段階検査の出し方と読み方">How①</a></li><li class="t3"><a href="#sec-1-6" title="How②：前回の治療への反応を合わせて読む">How②</a></li><li class="t3"><a href="#sec-1-7" title="How③：再検査しない場面と治癒確認">How③</a></li><li class="t3"><a href="#sec-1-8" title="How④：出し直す場面と、どの結果を重く見るか（2026-11-20 追記）">How④</a></li><li class="t3"><a href="#sec-1-9" title="判断の表">判断の表</a></li><li class="t3"><a href="#sec-1-10" title="論文の食い違い：トキシン陰性のとき治療するか">論文の食い違い</a></li></ul></li><li class="t2"><a href="#sec-2" title="📋 早見表">早見表</a><ul class="sub"><li class="t3"><a href="#sec-2-1" title="定義と検査">定義と検査</a></li><li class="t3"><a href="#sec-2-2" title="治療の量">治療の量</a></li><li class="t3"><a href="#sec-2-3" title="重症度と外科">重症度と外科</a></li></ul></li><li class="t2"><a href="#sec-3" title="🦠 病態と危険因子 — 芽胞から大腸炎まで">病態と危険因子</a><ul class="sub"><li class="t3"><a href="#sec-3-1" title="芽胞から毒素まで">芽胞から毒素まで</a></li><li class="t3"><a href="#sec-3-2" title="なぜ再発するか">なぜ再発するか</a></li><li class="t3"><a href="#sec-3-3" title="疫学">疫学</a></li><li class="t3"><a href="#sec-3-4" title="危険因子">危険因子</a></li><li class="t3"><a href="#sec-3-5" title="PPI は CDI を増やすか">PPI は CDI を増やすか</a></li></ul></li><li class="t2"><a href="#sec-4" title="🔬 診断（初回） — 臨床診断と2段階検査">診断</a><ul class="sub"><li class="t3"><a href="#sec-4-1" title="入口は症状">入口は症状</a></li><li class="t3"><a href="#sec-4-2" title="2段階検査">2段階検査</a></li><li class="t3"><a href="#sec-4-3" title="検体が採れないとき、急ぐとき">検体が採れないとき、急ぐとき</a></li><li class="t3"><a href="#sec-4-4" title="画像と内視鏡">画像と内視鏡</a></li></ul></li><li class="t2"><a href="#sec-5" title="📊 重症度 — 非重症、重症、劇症">重症度</a><ul class="sub"><li class="t3"><a href="#sec-5-1" title="基準の比べ方">基準の比べ方</a></li><li class="t3"><a href="#sec-5-2" title="劇症とその仲間">劇症とその仲間</a></li></ul></li><li class="t2"><a href="#sec-6" title="💊 治療① 初回のエピソード">治療① 初回のエピソード</a><ul class="sub"><li class="t3"><a href="#sec-6-1" title="第一選択の変化">第一選択の変化</a></li><li class="t3"><a href="#sec-6-2" title="フィダキソマイシンとバンコマイシンの比較">フィダキソマイシンとバンコマイシ…</a></li><li class="t3"><a href="#sec-6-3" title="補助の薬と止痢薬">補助の薬と止痢薬</a></li><li class="t3"><a href="#sec-6-4" title="重症で全身毒性があるとき（ICM2020）">重症で全身毒性があるとき</a></li><li class="t3"><a href="#sec-6-5" title="💊 日本での使い方（添付文書）">日本での使い方</a></li></ul></li><li class="t2"><a href="#sec-7" title="🔁 治療② 再発 — 再発回数で選ぶ">治療② 再発</a><ul class="sub"><li class="t3"><a href="#sec-7-1" title="再発回数ごとの治療">再発回数ごとの治療</a></li><li class="t3"><a href="#sec-7-2" title="漸減とパルス法の日程">漸減とパルス法の日程</a></li><li class="t3"><a href="#sec-7-3" title="再発のあとに先回りしておくこと">再発のあとに先回りしておくこと</a></li></ul></li><li class="t2"><a href="#sec-8" title="🚨 治療③ 劇症 — 48時間の再評価、手術と FMT">治療③ 劇症</a><ul class="sub"><li class="t3"><a href="#sec-8-1" title="初期治療">初期治療</a></li><li class="t3"><a href="#sec-8-2" title="48時間で見直す">48時間で見直す</a></li><li class="t3"><a href="#sec-8-3" title="外科">外科</a></li><li class="t3"><a href="#sec-8-4" title="劇症のときの他の抗菌薬">劇症のときの他の抗菌薬</a></li></ul></li><li class="t2"><a href="#sec-9" title="🧫 FMT（糞便微生物叢移植）">FMT</a><ul class="sub"><li class="t3"><a href="#sec-9-1" title="再発予防の FMT">再発予防の FMT</a></li><li class="t3"><a href="#sec-9-2" title="避ける患者とタイミング">避ける患者とタイミング</a></li><li class="t3"><a href="#sec-9-3" title="劇症と治療抵抗性の重症への FMT">劇症と治療抵抗性の重症への FMT</a></li></ul></li><li class="t2"><a href="#sec-10" title="🛡️ 再発予防">再発予防</a></li><li class="t2"><a href="#sec-11" title="🧼 感染対策">感染対策</a><ul class="sub"><li class="t3"><a href="#sec-11-1" title="病院で">病院で</a></li><li class="t3"><a href="#sec-11-2" title="家庭で（退院するとき）">家庭で</a></li></ul></li><li class="t2"><a href="#sec-12" title="⚠️ ICU での落とし穴">ICU での落とし穴</a></li><li class="t2"><a href="#sec-13" title="📌 まず読む順（7本）">まず読む順</a></li></ul></nav>
+<header class="masthead">
+  <p class="eyebrow">聖路加国際病院 ICU ｜ ジャーナルクラブ</p>
+  <h1 class="title">🧻 CD腸炎（C. difficile感染） Home</h1>
+  <dl class="cite"></dl>
+</header>
+<div class="wrap">
+<p>CD腸炎、つまり CDI（*Clostridioides difficile* infection：クロストリジオイデス・ディフィシル感染症。毒素を作る菌が大腸炎を起こす病気）の入口です。材料は 収載文献 の論文ノート4本で、再発の診断と再発回数ごとの治療は <span class="wl">JAMA2025</span>、検査の出し方と劇症の管理は <span class="wl">AGA2026</span>、ICU の重症例と外科のタイミングは <span class="wl">ICM2020</span>、病態の基礎と昔の扱いは <span class="wl">NEJM2015</span> が受け持ちます。2026-11-20 に、日本の診療ガイドライン <span class="wl">日本GL2022</span>、米国の <span class="wl">IDSA/SHEA2017</span>、再発の治療を比べた RCT の <span class="wl">OpTION</span> の3本を足し、材料は7本になりました。総説と専門家意見に、推奨の格付けを持つガイドライン2本と RCT 1本が加わった形です。数値には出典を添え、文献どうしの食い違いはそのまま並べました。</p>
+<h2 id="sec-1">❓ 今日の疑問 — 再発性CD腸炎はどう診断するか</h2>
+<div class="call success"><span class="lab">TAKE HOME</span>
+<p>結論（先に）</p>
+<ul><li>再発は「8週以内に、24時間に3回以上の軟便〜水様便が再び出て、CDI の定義を再び満たすこと」です。<mark class="hl">8週の数え始めは文献ごとに違います</mark>。日本GL2022 は前回のエピソードの発症から、IDSA/SHEA2017 は前回の陽性のエピソードから2〜8週、AGA2026 は抗CDI治療の終了から数えます（<span class="wl">日本GL2022</span>、<span class="wl">IDSA/SHEA2017</span>、<span class="wl">AGA2026</span>、<span class="wl">JAMA2025</span>）。</li><li>再発を疑ったときの検査に<mark class="hl">毒素の検出を含めるよう明記しているのは IDSA/SHEA2017 だけ</mark>です。NAAT だけでは残った保菌を拾うためで、検査せずに再治療することも勧めません。日本GL2022 は再発専用の検査手順を持たず、初回と同じ流れ（GDH とトキシンを同時に見て、割れたら NAAT、NAAT 陽性は臨床評価）で読みます（<span class="wl">IDSA/SHEA2017</span>、<span class="wl">日本GL2022</span>）。</li><li>便検査が陽性というだけでは再発と言えません。治療がうまくいっても、1週後に50%超から毒素産生株が培養され（<span class="wl">JAMA2025</span>）、治療成功後も60%超が陽性のままです（<span class="wl">IDSA/SHEA2017</span>）。日本GL2022 も、下痢が無いのに便検査だけ陽性なら定義上 CDI に当たらないとしています（<span class="wl">日本GL2022</span>）。</li><li>典型的な症状があれば2段階検査（GDH または NAAT → トキシン EIA）で確かめ、前回の治療に反応したか、他の原因を除けたかを合わせて判断します（<span class="wl">JAMA2025</span>）。</li><li><mark class="hl">症状の無い患者に再検査せず、治療後の治癒確認の検査も出しません</mark>（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</li></ul>
+</div>
+<p>略語：GDH（glutamate dehydrogenase：すべての CD 株が作る酵素。菌がいるかを見る）、NAAT（nucleic acid amplification test：毒素の遺伝子を増やして見る検査。PCR はその一種）、EIA（enzyme immunoassay：便の中の毒素そのものを見る検査）、CD（*C. difficile* の略）。</p>
+<h3 id="sec-1-1">What：再発とは何か</h3>
+<p>4本とも「8週」を使いますが、<mark class="hl">数え始め</mark>と、定義に検査結果を入れるかが違います。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</th><th>日本GL2022]]</th><th>[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</th><th>IDSA/SHEA2017]]</th><th>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</th><th>JAMA2025]]</th><th>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</th><th>AGA2026]]</th></tr></thead>
+<tbody>
+<tr><td>8週の数え始め</td><td><mark class="hl">前回のエピソードの発症から</mark>8週以内</td><td><mark class="hl">前回の陽性のエピソードから2〜8週</mark>（サーベイランスの症例定義）</td><td>症状の消失と治療の終了から8週以内（どちらから数えるかは明記なし）</td><td><mark class="hl">抗CDI治療の終了から</mark>8週以内</td></tr>
+<tr><td>8週の手前と先</td><td>8週を過ぎたものの扱いは記載なし</td><td>2週未満の症状の持続や再燃は、文字どおりには再発に入らないが、扱いは明記なし。8週以内に陽性のエピソードが無いものは新規の症例</td><td>記載なし</td><td>治療終了から1年以内の下痢＋検査陽性も「再発または再感染」とみなす</td></tr>
+<tr><td>下痢の定義</td><td>Bristol 便形状スケール5以上の下痢（24時間に3回以上、または普段より多い）</td><td>説明のつかない新たな下痢（形のない便）が24時間に3回以上</td><td>24時間に3回以上の泥状〜水様便</td><td>臨床的に意味のある下痢。検査を出すのは、1日3回以上の水様便がぶり返し、2日以上続くか悪化し、以前のエピソードと似ているときだけ</td></tr>
+<tr><td>検査結果の扱い</td><td>初発と同じ CDI の定義（下痢＋便のトキシン陽性、トキシン産生株の分離、偽膜のいずれか）を再び満たすこと。下痢が無く検査だけ陽性なら再発としない</td><td>症状の再出現＋検査陽性</td><td>定義は症状で書く。診断は検査陽性、症状、他の原因が無いこと、前回の治療への反応を合わせる</td><td>定義に「便検査が陽性」を含める</td></tr>
+<tr><td>起きる時期</td><td>CDI 消失後4週以内に79%（MODIFY I・II のプラセボ群）。治療終了から再発まで平均12.6日</td><td>時期の数値は記載なし（バンコマイシンで治療した約25%が少なくとも1回再発）</td><td>約70%が治療後4週以内</td><td>約90%が8週以内</td></tr>
+<tr><td>再燃と再感染</td><td>日常診療では区別せず、両方を再発に含める。90例で再燃83%、再感染17%。「8週以降は再感染」と定義した研究では45.8%が実は同じ株</td><td>臨床では区別できず、診断と管理は変わらない</td><td>再発の最大50%は新しい毒素産生株による再感染。見分ける方法は書いていない</td><td>1年以内をまとめて扱い、見分ける検査は示していない</td></tr>
+<tr><td>難治との区別</td><td>難治性 CDI＝初発治療後に2回以上再発したもの、または標準治療で下痢が治まらない、ショック、麻痺性イレウス、中毒性巨大結腸、穿孔に至ったもの</td><td>治療中の不応の扱いは明記なし</td><td>初期治療に反応しないものは難治性で、再発とは別。まれで、多くは劇症例</td><td>治療開始3日以内（遅くとも5日）に1日の軟便の回数が50%以上減らなければ、不応、他の感染、非感染性の原因を考える</td></tr>
+</tbody></table></div>
+<p>_注：抗CDI治療＝フィダキソマイシン、経口バンコマイシンなど CDI に向けた抗菌薬。再燃＝残っていた芽胞が再び発芽すること。再感染＝新しい株の芽胞を取り込むこと。日本GL2022 の「難治性」は多回再発を含み、JAMA2025 の「難治性」（初期治療への不応）とは中身が違う。_</p>
+<p><strong>数え始めの違いで判定が変わる例</strong>：発症した日に検査が陽性になり、10日の治療を受けた患者で考えます。日本GL2022 の窓は発症から56日目まで、AGA2026 の窓は治療終了から56日、つまり発症から66日目までです。IDSA/SHEA2017 は陽性のエピソードから14〜56日目です。発症から60日目にぶり返せば、AGA2026 では再発、日本GL2022 と IDSA/SHEA2017 では新規のエピソードになります。治療を終えて2日目（発症から12日目）なら、日本GL2022 と AGA2026 では再発、IDSA/SHEA2017 の定義を文字どおり読むと2週未満なので再発に入りません。漸減パルス法のように治療が長いと、治療終了から数える AGA2026 の窓はさらに後ろへずれます。IDSA/SHEA2017 の定義はサーベイランス用で、日本GL2022 のノートは起点の違いが国際比較に響くと指摘しています（<span class="wl">日本GL2022</span>、<span class="wl">IDSA/SHEA2017</span>、<span class="wl">AGA2026</span>）。臨床では「8週前後」のぶり返しを数え方で切り捨てず、症状と検査で同じように確かめます。</p>
+<h3 id="sec-1-2">再発を疑ったとき毒素の検出を勧めるか</h3>
+<div class="tw"><table>
+<thead><tr><th>文献</th><th>再発を疑ったときの検査</th><th>毒素の扱い</th><th>検査せずに治療するか</th></tr></thead>
+<tbody>
+<tr><td>[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]</td><td>再発専用の検査手順は定めていない。初発と同じく、Bristol 5以上の下痢便で GDH とトキシンを同時に調べ、GDH 陽性トキシン陰性なら NAAT（CQ1：弱い推奨、エビデンスの質 A）</td><td>トキシンは1段目で同時に見るが、再発の判定にトキシン陽性を必須とはしていない。NAAT 陽性は「CDI か保菌か」を病状で判断し、NAAT 陽性だけで CDI と決めない</td><td>記載なし</td></tr>
+<tr><td>[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]</td><td>治療が成功し下痢が止まった後に症状が戻ったら、再検査で確かめる（推奨IX の解説）</td><td><mark class="hl">できれば毒素の検出を含める</mark>。感染の後も毒素産生株が残ることはよくあり、NAAT だけでは保菌の残りを拾う。再発の下痢で便の毒素を調べた研究では35%が陰性</td><td>勧めない。不要なことがあり、腸内細菌叢の回復に害になりうる</td></tr>
+<tr><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td><td>2段階検査（GDH または NAAT → トキシン EIA）</td><td>毒素陰性でも、前回の治療に反応し症状が続けば「再発の可能性が高い」へ進む図</td><td>記載なし</td></tr>
+<tr><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td><td>典型的な再発症状でも検査で確かめる（BPA6）。検査法は初回と同じ2段階（BPA2）</td><td>再発の場面で検査が陰性か不一致なら、感染後の過敏性腸症候群など他の原因を評価する</td><td>経験的治療で済ませず、検査で確かめることを強く勧める</td></tr>
+</tbody></table></div>
+<p><mark class="hl">再発の場面で毒素の検出を言葉にして勧めているのは IDSA/SHEA2017 だけ</mark>です。AGA2026 は毒素陰性や不一致を「他の原因を探す合図」として読み、JAMA2025 は毒素陰性でも臨床経過で再発側へ進め、日本GL2022 は再発を初発と同じ検査の流れで扱います。どの文献も、再発の場面で毒素陽性と陰性の転帰を比べたデータは示していません。IDSA/SHEA2017 のノートの批判的吟味は、NAAT 陽性で毒素陰性の患者の扱いは研究どうしで結論が割れていると指摘しています（<span class="wl">IDSA/SHEA2017</span>）。</p>
+<h3 id="sec-1-3">Where：どこで迷うか</h3>
+<p>迷うのは、検査が陽性に出やすいのに CDI ではない場面です。</p>
+<ul><li>治療を終えた直後：保菌と毒素の排出がまだ続いています（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</li><li>感染のあとの腸の不調：CDI 後に過敏性腸症候群に似た症状（排便の不規則）が21.1%（95% CI 8.2〜35.7%、15コホート1218例）に出て、最長2年続きます（<span class="wl">JAMA2025</span>）。</li><li>ICU の下痢：経腸栄養、下剤、ソルビトールを含む薬など、感染以外の原因が多くあります（<span class="wl">ICM2020</span>）。JAMA2025 の図も「経管栄養」と「薬剤の影響」を感染以外の原因に挙げています（<span class="wl">JAMA2025</span>）。</li><li>検査結果が割れたとき：NAAT 陽性でトキシン EIA が陰性の場面です。</li></ul>
+<h3 id="sec-1-4">Why：検査陽性だけでは言えない理由</h3>
+<p>一つ目は、治療後も菌と毒素が腸に残ることです。治療が成功しても1週後に50%超から毒素産生株が培養されます（<span class="wl">JAMA2025</span>）。AGA2026 も、無症候の保菌と毒素の排出が数週間続くことはよくあり、治療中や治療後の PCR 陰性は治癒が続く保証にならないと書いています（<span class="wl">AGA2026</span>）。</p>
+<p>二つ目は、検査が見ているものの違いです。GDH は菌がいるかを見るだけで、毒素を作らない株でも陽性になります。NAAT は毒素の遺伝子を見るので、毒素を作る株かどうかは分かりますが、いま毒素を出しているかは分かりません。トキシン EIA は便の中の毒素そのものを見ます（<span class="wl">AGA2026</span>、<span class="wl">ICM2020</span>）。JAMA2025 の挙げる性能は、NAAT が感度96%、特異度94%、トキシン EIA が感度83%、特異度99%です（<span class="wl">JAMA2025</span>）。ただし出典と、再発の場面でも同じ性能が成り立つかは書かれていません（<span class="wl">JAMA2025</span> の批判的吟味）。</p>
+<p>三つ目は、もともとの保菌の多さです。毒素産生株を持っていても症状の無い人は、市中の健康な成人で4〜15%、入院患者で3〜21%、長期療養施設で最大50%います（<span class="wl">AGA2026</span>）。今の検査は有形便で検証されておらず、CDI と保菌を正確に分けられません（<span class="wl">AGA2026</span>）。</p>
+<p>四つ目は、先に書いた感染後の過敏性腸症候群です。AGA2026 は、再発を疑って検査が陰性または不一致なら、感染後の過敏性腸症候群など他の原因を評価するとしています（<span class="wl">AGA2026</span>）。</p>
+<p>%%FIG: rcdi-why-positive-is-not-enough | 治療後の時間を横軸にした図。上段に「症状」の線（治療で消える）、下段に「便の中の菌と毒素」の帯（治療後も残る）を重ねる。治療終了から8週の範囲に枠を描き、その中で症状が再び出た点だけを「再発を疑う」とし、症状の無い時期の検査陽性には「保菌」の札を付ける | 治療終了／8週以内／症状の再出現／保菌／毒素の排出／1週後に50%超が保菌 %%</p>
+<h3 id="sec-1-5">How①：2段階検査の出し方と読み方</h3>
+<p>出す前に、便が泥状〜水様便であることと、他の原因が無いかを確かめます。泥状〜水様便だけを検査し、有形便は出しません（ESCMID〈European Society of Clinical Microbiology and Infectious Diseases：欧州臨床微生物感染症学会〉の推奨、<span class="wl">JAMA2025</span>。<span class="wl">AGA2026</span> も有形便は検証されていないとする）。</p>
+<div class="tw"><table>
+<thead><tr><th>1段目：GDH または NAAT</th><th>2段目：トキシン EIA</th><th>読み方</th><th>次の一手</th></tr></thead>
+<tbody>
+<tr><td>陰性</td><td>出さない</td><td>保菌なし、感染なし。JAMA2025 は NAAT 陰性で CDI を除外できるとする</td><td>他の原因を探す</td></tr>
+<tr><td>陽性</td><td>陽性</td><td>再発の可能性が高い</td><td>重症度を見て、再発回数で治療を選ぶ</td></tr>
+<tr><td>陽性</td><td>陰性</td><td>保菌か、毒素が検出限界より少ない感染</td><td>How② で前回の治療への反応と症状を見る</td></tr>
+</tbody></table></div>
+<p>_注：GDH の感度と特異度は JAMA2025 に記載がありません。JAMA2025 の本文で「陰性なら除外できる」と書いているのは NAAT だけです（<span class="wl">JAMA2025</span>）。_</p>
+<h3 id="sec-1-6">How②：前回の治療への反応を合わせて読む</h3>
+<p>トキシン EIA が陰性でも、JAMA2025 の図は「陰性だから終わり」にしていません（<span class="wl">JAMA2025</span>）。</p>
+<ol><li>前回のエピソードは CD 治療に反応したか。</li><li>反応していなければ、他の原因を十分に除けたか。他の原因として、別の細菌、ウイルス、寄生虫による感染、薬剤の影響、吸収不良、経管栄養、炎症性腸疾患が挙がります。除けなければ症候群パネル PCR、大腸内視鏡、生検を足します。</li><li>前回の治療に反応していた（または他の原因を除けた）うえで今も症状があれば、「再発の可能性が高い」に進みます。症状が無ければ経過を見て、症状が出たら診断を考え直します。</li></ol>
+<p>_図: 再発性 CDI の診断の流れ（感度の高い検査 → トキシン EIA → 前回の治療への反応 → 症状の持続 → 他の原因の除外）。出典 <span class="wl">JAMA2025</span>_</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>判断①で「はい」なら判断②を通らない経路がある JAMA2025 の図では、前回の治療に反応していれば、他の原因を除く箱を通らずに「まだ症状があるか」へ進めます。ICU では経管栄養や薬剤による下痢を見逃して治療しすぎる心配があり、ノートの批判的吟味は「ICU では判断②も通すほうが安全かもしれない」としています（<span class="wl">JAMA2025</span>）。</p>
+</div>
+<h3 id="sec-1-7">How③：再検査しない場面と治癒確認</h3>
+<ul><li>最近 CDI になり、再発の症状が無い患者は再検査しません（ESCMID、<span class="wl">JAMA2025</span>）。</li><li>治療終了時の治癒確認の検査はしません（AGA の BPA6、<span class="wl">AGA2026</span>）。BPA（Best Practice Advice）は AGA（American Gastroenterological Association：米国消化器病学会）の実践助言の各項目です。</li><li>治療中や治療後の PCR 陰性は、治癒が続くことを保証しません（<span class="wl">AGA2026</span>）。</li><li>治療開始から3〜5日で下痢が半分に減らないのは、再発ではなく初回治療への不応の問題です。CDI 治療薬への耐性はまれ（2018年の欧州の調査でメトロニダゾール耐性2%未満、バンコマイシンとフィダキソマイシンの耐性なし）なので、別の診断を考えます（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</li><li>これと別の場面として、初回の疑いで検査が陰性でも症状が悪化する重症患者では、48時間以内の再検査を ICM2020 が提案しています。著者自身が「エビデンスは無い」と断ったうえでの意見です（<span class="wl">ICM2020</span>）。</li></ul>
+<h3 id="sec-1-8">How④：出し直す場面と、どの結果を重く見るか（2026-11-20 追記）</h3>
+<p>感染症科の院内講義の要点のうち、原典で確かめられたものだけを足しました。講義のページは院外への転載と二次利用が禁じられているので、文は写さず、原典に当たって書いています。</p>
+<ol><li><strong>出し直すのは、下痢がいったん治まり、また悪くなったときだけ。</strong>検査を出すのは、1日3回以上の水様便がぶり返し、2日以上続くか悪化し、以前と似ているときです（AGA の BPA6、<span class="wl">AGA2026</span>）。治療中に下痢が続いているだけなら再発ではなく、3日（遅くとも5日）で回数が半分に減らなければ初回治療への不応として他の原因を探します（<span class="wl">AGA2026</span>）。</li><li><strong>出し直したら、決め手はトキシン。</strong>GDH と NAAT は菌や毒素の遺伝子がいるかを見るので、治療後も陽性に出ます。治療成功の1週後に50%超から毒素産生株が培養され（<span class="wl">JAMA2025</span>）、52例の前向き研究では治療後1〜4週に検査できた患者の56%が症状の無い保菌者でした（Sethi AK, et al. Infect Control Hosp Epidemiol 2010;31:21-27. doi:10.1086/649016、培養による）。</li><li><strong>NAAT（PCR）は治療後の追跡に使わない。</strong>治療中や治療後の PCR 陰性は治癒が続く保証にならず（<span class="wl">AGA2026</span>）、IDSA/SHEA2017 は同じ下痢のエピソードの中で7日以内に検査を繰り返さないよう強く勧めています。7日以内の再検査で新たに陽性が出るのは約2%です（<span class="wl">IDSA/SHEA2017</span>、推奨IX）。日本GL2022 も、隔離解除の判断のために便検査を繰り返すことは勧めないと明記しています（<span class="wl">日本GL2022</span>）。</li><li><strong>判定保留（GDH 陽性、トキシン陰性）は、時期で読み方が変わる。</strong>初回の診断では、GDH とトキシンで割れたら NAAT で裁定する手順が IDSA/SHEA2017 の多段階法の一つで（推奨VII）、日本GL2022 も GDH 陽性トキシン陰性なら NAAT を弱く勧めます（CQ1、エビデンスの質 A）。ただし日本GL2022 は、NAAT 陽性なら「CDI か保菌か」を病状で判断するとし、NAAT 陽性だけで CDI と決めません（<span class="wl">日本GL2022</span>、<span class="wl">IDSA/SHEA2017</span>）。治療後8週以内は保菌が残りやすく、NAAT 陽性が再発の証拠になりにくい時期です。IDSA/SHEA2017 が再発の検査に毒素の検出を含めるよう勧めるのはこのためです。再発の場面では前回の治療への反応と他の原因の除外を合わせます（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</li><li><strong>便の色と匂いは決め手にならない。</strong>看護師18人がトキシン陽性5検体と陰性5検体の匂いを当てた試験では、正答率の中央値45%で、偶然より良い人はおらず、自信や経験年数とも関係がありませんでした（Rao K, et al. Clin Infect Dis 2013;56:615-616. doi:10.1093/cid/cis974）。便の色合いを写真で数値化した前向きの小さな研究（84検体、CDI 4検体）でも有意差は出ませんでした（p＝0.118。Sugimoto H, et al. Infect Control Hosp Epidemiol 2019;40:832-833. doi:10.1017/ice.2019.125）。</li></ol>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>講義と文献のずれ</p>
+<ul><li>講義は「判定保留は PCR で決着させる（PCR 陽性なら治療）」とする。判定保留で PCR に進む手順は IDSA/SHEA2017 と日本GL2022 と同じだが、日本GL2022 は PCR 陽性を「臨床評価」につなぎ、陽性だけで治療とはしていない。治療後8週以内の再発疑いでは PCR が保菌を拾いうるので、上の4のとおり、再発の場面では PCR 陽性だけで決めない読み方をこの Home では採る。</li><li>講義は「PCR は治療後4〜6週間は陽性が残りうる」とするが、この期間を示す原典は確かめられていない。確かめられたのは「1週後に50%超」（JAMA2025）、「治療後1〜4週に56%」（Sethi 2010、培養。日本GL2022 も56%を引く）、「治療成功後も60%超が陽性」（IDSA/SHEA2017。時期の記載なし）。</li></ul>
+</div>
+<h3 id="sec-1-9">判断の表</h3>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>確認すること</th><th>次の一手</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>8週以内に、24時間3回以上の軟便〜水様便が再び出た（数え始めは文献で違う。What の表）</td><td>2日以上続くか悪化しているか。以前と似ているか。経腸栄養や下剤など他の原因は無いか</td><td>泥状〜水様便を検査へ。毒素の検出を含める（IDSA/SHEA2017）。検査せずに再治療しない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]</td></tr>
+<tr><td>8週前後のぶり返しで、文献により再発か新規かが分かれる</td><td>発症日、陽性の日、治療終了日</td><td>数え方で切り捨てず、再発と同じく症状と検査で確かめる</td><td>[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]、[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>1段目が陰性</td><td>—</td><td>CDI は除外。他の原因を探す</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>1段目陽性、トキシン陽性</td><td>重症度</td><td>再発として治療（再発回数で選ぶ）</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>1段目陽性、トキシン陰性、前回の治療に反応、症状が続く</td><td>他の原因を除けたか</td><td>JAMA2025 は「再発の可能性が高い」側へ。AGA2026 は再発の場面では他の原因を評価する</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>1段目陽性、トキシン陰性、前回の治療に反応していない</td><td>他の病原体、薬剤、吸収不良、経管栄養、炎症性腸疾患</td><td>除けなければ症候群パネル PCR、大腸内視鏡、生検</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>症状が消えている</td><td>—</td><td>再検査しない。治癒確認の検査もしない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>有形便</td><td>—</td><td>検査しない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>治療開始3〜5日で排便回数が半分にならない</td><td>再発ではなく初回治療への不応</td><td>他の感染、非感染性の原因を考える</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>治療中に下痢が続いている</td><td>下痢がいったん治まったか</td><td>再発の検査は出さない。3〜5日で反応を見て、続けば他の原因</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>再発疑いで NAAT 陽性、トキシン陰性</td><td>前回の治療への反応、他の原因の除外</td><td>NAAT 陽性だけで再発と決めない（治療後8週以内は保菌が残りやすい）</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>便が緑色、または独特の匂い</td><td>—</td><td>判断材料にしない。回数と性状、他の原因で判断する</td><td>Rao 2013、Sugimoto 2019（How④）</td></tr>
+<tr><td>治療終了から8週を過ぎ、1年以内</td><td>—</td><td>AGA2026 は「再発または再感染」として扱う</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+</tbody></table></div>
+<p>_注：GDH、NAAT、EIA は上の略語を参照。軟便〜水様便は原文の unformed stool（形のない便）。_</p>
+<h3 id="sec-1-10">論文の食い違い：トキシン陰性のとき治療するか</h3>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</th><th>JAMA2025]]（図）</th><th>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</th><th>AGA2026]]（BPA2：初回の診断）</th><th>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</th><th>AGA2026]]（BPA6：再発）</th></tr></thead>
+<tbody>
+<tr><td>NAAT 陽性、トキシン陰性</td><td>前回の治療に反応し、症状が続けば「再発の可能性が高い」</td><td>臨床的に強く疑うなら、毒素陰性だけを理由に治療を控えない</td><td>検査が陰性または不一致なら、感染後の過敏性腸症候群など他の原因を評価する</td></tr>
+<tr><td>経験的治療</td><td>記載なし</td><td>疑いが強ければ下痢の改善を細かく見ながら経験的治療を考える</td><td>典型的な再発症状でも経験的治療で済ませず、検査で確かめることを強く勧める</td></tr>
+</tbody></table></div>
+<p>AGA2026 の中でも、初回の診断（BPA2）と再発（BPA6）で不一致の扱いが逆を向いており、ノートの批判的吟味も「再発の場面で不一致を治療するかは明確でない」と指摘しています（<span class="wl">AGA2026</span>）。JAMA2025 は不一致でも前回の治療への反応と症状の持続で「再発の可能性が高い」に進めるので、3つの記述は少しずつずれています。ガイドライン2本を足すと、IDSA/SHEA2017 は再発の検査にできれば毒素の検出を含め、検査せずに再治療しないとし（<span class="wl">IDSA/SHEA2017</span>）、日本GL2022 は NAAT 陽性トキシン陰性を「CDI か保菌か」を病状で判断する場面としています（<span class="wl">日本GL2022</span>）。この Home では、トキシン陰性の再発疑いでは他の原因を除いたかを先に確かめ、それでも症状が続くときに治療を考える読み方をしておきます。どちらの論文もこの点を検証したデータは示していません。</p>
+<p>%%FIG: rcdi-diagnosis-flow | 再発を疑ってから判断までの流れを上から下へ。入口「8週以内に24時間3回以上の軟便〜水様便」→「GDH または NAAT」→陰性なら「除外」、陽性なら「トキシン EIA」→陽性なら「再発の可能性が高い」、陰性なら「前回の治療に反応したか」と「他の原因を除けたか」の2つの関門を通って「症状が続く」なら再発の可能性が高い、続かなければ経過観察。横に「再検査しない」「治癒確認しない」の札 | 8週以内／24時間に3回以上の軟便〜水様便／GDH または NAAT／トキシン EIA／前回治療への反応／他の原因の除外／再発の可能性が高い／経過観察／治癒確認の検査はしない %%</p>
+<h2 id="sec-2">📋 早見表</h2>
+<h3 id="sec-2-1">定義と検査</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>論文の記載</th><th>論文どうしの違い</th><th>動かすときの考え方</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>検査を出す下痢</td><td>新たに始まった原因不明の下痢、24時間に3回以上の非有形便</td><td>ICM2020 は「他に説明がつかない」とリスク因子の存在を入口に置く</td><td>ICU では経腸栄養と下剤を先に確かめる</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>検査の順番</td><td>GDH または NAAT → トキシン EIA</td><td>3本とも同じ2段階。日本GL2022 は GDH とトキシンを同時に調べ、割れたら NAAT。IDSA/SHEA2017 は出す患者を院内で絞る合意があれば NAAT 単独も可</td><td>NAAT 単独陽性で治療を確定しない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]、[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]</td></tr>
+<tr><td>再発の期間</td><td>8週以内</td><td>数え始めが違う。日本GL2022 は前回の発症から、IDSA/SHEA2017 は前回の陽性のエピソードから2〜8週、AGA2026 は治療終了から（上の What の表）</td><td>8週を過ぎて1年以内も AGA2026 は「再発または再感染」</td><td>[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]、[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]、[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>再発の検査で毒素を見るか</td><td>IDSA/SHEA2017 はできれば毒素の検出を含め、検査せずに再治療しない</td><td>日本GL2022 は再発専用の手順なし（初発と同じ流れ）。JAMA2025 は毒素陰性でも臨床経過で再発側へ</td><td>NAAT 陽性だけで再発と決めない</td><td>[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]、[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]</td></tr>
+<tr><td>治癒確認の検査</td><td>しない</td><td>違いなし</td><td>症状が無ければ再検査しない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>初回治療への反応</td><td>開始3日以内（遅くとも5日）に1日の軟便回数が50%以上減る</td><td>JAMA2025 は数値の基準なし</td><td>届かなければ他の原因を探す</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+</tbody></table></div>
+<h3 id="sec-2-2">治療の量</h3>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>論文の記載</th><th>論文どうしの違い</th><th>動かすときの考え方</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>初回、非劇症</td><td>フィダキソマイシン 200 mg 1日2回10日を優先。経口バンコマイシン 125 mg 1日4回10日も可</td><td>ICM2020 と IDSA/SHEA2017 は両者を並列。日本GL2022 は非重症にメトロニダゾール 500 mg 1日3回10日、重症にバンコマイシン（ICU 患者はほぼ重症に入る）</td><td>再発の危険因子、飲みやすさ、費用で選ぶ</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]、[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]</td></tr>
+<tr><td>初回再発</td><td>初回と別の薬。フィダキソマイシン後はバンコマイシン漸減パルス法か延長フィダキソマイシン、バンコマイシン後はフィダキソマイシン10日か延長法</td><td>漸減の日程が文献で違う（治療②の章）。OpTION では漸減パルス法もフィダキソマイシン10日も標準のバンコマイシン10日に優越を示せず</td><td>延長フィダキソマイシンは添付文書の「原則10日間」を超える</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[再発性CDIでバンコマイシン漸減パルスもフィダキソマイシンも標準10日に優越を示せず — 59日の持続臨床反応58.6%対44.1%対44.1%（OpTION・RCT・NEJMEvid2026）\</td><td>OpTION]]</td></tr>
+<tr><td>2回目以降の再発</td><td>抗菌薬10日の直後に FMT</td><td>AGA2026 の著者は高リスクならもっと早く</td><td>日本では製剤が未承認</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>劇症</td><td>経口バンコマイシン 500 mg 6時間ごと＋メトロニダゾール 500 mg 8時間ごと静注。イレウスならバンコマイシン 500 mg 6時間ごとの注腸を足す</td><td>ICM2020 は「重症（全身毒性の徴候）」の段階で同じ組み合わせ</td><td>48時間で反応が無ければ FMT か結腸切除</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>長期の抑制</td><td>経口バンコマイシン 125 mg 1日1回</td><td>予防目的の併用（OVP）とは別物</td><td>FMT の候補にならない多回再発に</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+</tbody></table></div>
+<p>_注：OVP（oral vancomycin prophylaxis：全身抗菌薬を使う間に CDI を防ぐ目的で経口バンコマイシンを併せること）。FMT（fecal microbiota transplantation：糞便微生物叢移植。健康なドナーの便の細菌を移す治療）。_</p>
+<h3 id="sec-2-3">重症度と外科</h3>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>目安</th><th>次の一手</th><th>根拠</th></tr></thead>
+<tbody>
+<tr><td>重症</td><td>白血球 15,000 毎µL 超、クレアチニン 1.5 mg毎dL 超（または基礎値の1.5倍）</td><td>AGA2026 は非劇症として初回治療。ICM2020 は全身毒性の徴候があれば高用量バンコマイシン＋メトロニダゾール静注</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>劇症</td><td>ショック（低血圧）、イレウス、巨大結腸。全 CDI の1〜3%、死亡率30〜40%</td><td>多職種、48時間で再評価</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>中毒性巨大結腸</td><td>結腸の横径 6 cm 超＋全身毒性（白血球 25,000 毎mm³ 超、低アルブミン血症、循環や呼吸の補助が必要）</td><td>緊急に外科評価</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>手術のタイミング</td><td>乳酸 5 mmol毎L を超える前、全身毒性の発症から48〜72時間以内</td><td>結腸切除かループ回腸瘻</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<h2 id="sec-3">🦠 病態と危険因子 — 芽胞から大腸炎まで</h2>
+<p>この章では、なぜ抗菌薬のあとに CDI が起き、なぜ再発しやすいかを押さえます。予防の手（消毒、抗菌薬の使い方）と治療の手（経口バンコマイシン、FMT）は、すべてこの流れのどこかに効きます。</p>
+<h3 id="sec-3-1">芽胞から毒素まで</h3>
+<p>*C. difficile* は芽胞を作る偏性嫌気性のグラム陽性桿菌です（<span class="wl">ICM2020</span>）。2016年に *Clostridium* から *Clostridioides* に名前が変わりました（<span class="wl">NEJM2015</span>）。うつり方は糞口感染で、飲み込んだ芽胞は胃酸を生き延び、胆汁酸に触れて小腸で栄養型に発芽します（<span class="wl">ICM2020</span>）。健康な人では、腸内細菌、胆汁酸の代謝、免疫が発芽を抑えています（<span class="wl">JAMA2025</span>）。</p>
+<p>抗菌薬で腸内細菌の多様性が落ちると、CD の定着を防いでいた常在菌が減ります。これをディスバイオーシス（dysbiosis：腸内細菌叢の乱れ）と呼びます（<span class="wl">ICM2020</span>）。CD は増えて大腸の粘膜に付き、毒素 A（エンテロトキシン）と毒素 B（サイトトキシン。A の10倍強い）を出します。毒素は細胞の蛋白を不可逆的に糖鎖修飾し、粘膜に強い炎症と壊死を起こします（<span class="wl">ICM2020</span>）。便の中の毒素が多いほど重症で、再発と死亡が多いとされます（Planche 2013、<span class="wl">JAMA2025</span>）。</p>
+<p>菌がいても症状の無い状態が保菌です。保菌者は治療の対象ではありませんが、環境を汚す供給源になります（<span class="wl">ICM2020</span>）。ICU では、保菌そのものが後の CDI 発症の独立した危険因子と書かれています（<span class="wl">ICM2020</span>）。</p>
+<p>_図: 抗菌薬で細菌叢の多様性が落ち、芽胞が増えて偽膜性大腸炎になり、FMT で細菌叢を立て直す円環。出典 <span class="wl">ICM2020</span>_</p>
+<h3 id="sec-3-2">なぜ再発するか</h3>
+<p>再発には2つの道があります。治療しても大腸に残った芽胞が、追加の抗菌薬などで細菌叢がさらに乱れたときに発芽する再燃と、新しい毒素産生株の芽胞を取り込む再感染です。再感染は再発の最大50%を占めます（<span class="wl">JAMA2025</span>）。AGA2026 は、多回再発の患者が家庭の芽胞に曝され続けている可能性を挙げ、家庭の清掃を勧めています（<span class="wl">AGA2026</span>）。</p>
+<p>再発は治療した人の14〜16%に起き、1回再発すると次の再発は40〜50%に上がります（<span class="wl">JAMA2025</span>）。多回再発の患者で何もしなければ、さらなる再発は40%を超えます（<span class="wl">AGA2026</span>）。</p>
+<p>%%FIG: cdi-pathogenesis-recurrence | 左から右へ、芽胞の摂取→胃酸を通過→胆汁酸で発芽→抗菌薬で細菌叢の多様性が低下→CD が増えて毒素 A と B→大腸炎。治療後の矢印は「保菌として残る」に戻り、そこから「再燃（同じ株）」と、外から入る「再感染（新しい株）」の2本が再び大腸炎へ向かう | 芽胞／胃酸／胆汁酸／発芽／抗菌薬／細菌叢の多様性低下／毒素A／毒素B／大腸炎／保菌／再燃／再感染（再発の最大50%） %%</p>
+<h3 id="sec-3-3">疫学</h3>
+<div class="tw"><table>
+<thead><tr><th>指標</th><th>数値</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>米国の発生率（CDC 2022年）</td><td>人口10万対116.1。市中発症62.1、医療関連54.0で市中のほうが多い</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>米国の年間診断数</td><td>約365,200例</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>米国の初回再発（2017年推計）</td><td>69,800件</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>欧州の発生率（EUCLID）</td><td>1万患者日あたり7.0例。最多の株は RT 027（18.5%）</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>欧州の見逃し</td><td>国により0%から60%超が診断されていない</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>ICU での発症</td><td>全 ICU 患者の1〜2%</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>重症度の幅（CDC 2022年）</td><td>下痢だけの軽症が60〜80%、ICU 入室を要する劇症大腸炎が報告例の約6%、死亡は約2%</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+</tbody></table></div>
+<p>_注：CDC（Centers for Disease Control and Prevention：米国疾病予防管理センター）。RT（ribotype：PCR リボタイピングで分けた菌株の型）。RT 027 は毒素を多く作り、再発が多い株です（<span class="wl">ICM2020</span>）。_</p>
+<p>NEJM2015 の抄読メモは「CDI の約3分の1は市中感染」としていますが（<span class="wl">NEJM2015</span>）、CDC 2022年の数値では市中発症のほうが多くなっています（<span class="wl">JAMA2025</span>）。時期とデータ源が違うので、矛盾ではなく時代の変化として読みます。NEJM2015 メモの「RT 027 で死亡率3倍」はこのメモにだけある記述で、ICM2020 にはありません（<span class="wl">NEJM2015</span>）。</p>
+<h3 id="sec-3-4">危険因子</h3>
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>危険因子</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>抗菌薬（CDI 全般）</td><td>クリンダマイシン、セファロスポリン、フルオロキノロンが最多。カルバペネムと ST 合剤は関連が弱い。アモキシシリン・クラブラン酸も挙がる</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>抗菌薬（CDI 全般）</td><td>クリンダマイシン、フルオロキノロン、セファロスポリン、カルバペネムが最も高い可能性</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>その他の薬</td><td>PPI、H2 受容体拮抗薬、非選択的 NSAIDs</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>処置と環境</td><td>最近の腹部手術、侵襲的処置、侵襲的人工呼吸、3か月以内の入院や ICU 入室、介護施設入所</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>宿主</td><td>免疫抑制や好中球減少、糖尿病、炎症性腸疾患、慢性腎臓病、固形がん、低アルブミン血症、65歳超、CDI の既往</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>再発の危険因子</td><td>65歳以上、再発の既往、医療関連 CDI、PPI（主に後ろ向きの43研究の系統的レビュー）。予後不良の株（RT 027、078、244）、免疫不全、重症 CDI</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>再発の危険因子</td><td>重症 CDI、メトロニダゾールでの治療、過去の再発、65歳超、免疫不全、高度看護施設入所、続く抗菌薬、細胞傷害性化学療法</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+</tbody></table></div>
+<p>_注：PPI（proton pump inhibitor：プロトンポンプ阻害薬）。H2 受容体拮抗薬は H2RA とも書く。NSAIDs（非ステロイド性抗炎症薬）。ST 合剤＝トリメトプリム・スルファメトキサゾール。_</p>
+<p>カルバペネムの扱いは2本で違います。ICM2020 は「関連は弱い」、JAMA2025 は「最も高い可能性がある群」に入れています。どちらも効果量を示していません。</p>
+<p>ランダム化比較試験だけを集めたメタ解析（2026-11-20 追記）では、CDI を報告した79試験で系統どうしを比べ、クリンダマイシンはセファロスポリンとペニシリンより多く（RR 3.92、95% CI 1.15〜13.43）、カルバペネムはフルオロキノロン（RR 2.44）とセファロスポリン（RR 2.24）より多く、セファロスポリンはフルオロキノロンより多い（RR 2.84）一方、フルオロキノロンとペニシリンは差がありませんでした（RR 1.34、95% CI 0.55〜3.25）。観察研究でつくられた「フルオロキノロンは高リスク」という順位とはずれます（Vardakas KZ, et al. Int J Antimicrob Agents 2016;48:1-10. doi:10.1016/j.ijantimicag.2016.03.008、抄録で確認）。</p>
+<h3 id="sec-3-5">PPI は CDI を増やすか</h3>
+<p>ICU で一番手が動く論点です。観察研究では関連が出ます。342,532例のメタ解析で OR 1.26（95% CI 1.12〜1.39）、H2RA と比べて OR 1.386、ICU のストレス潰瘍予防の後ろ向き研究で CDI が PPI 群6.7%、H2RA 群1.8%（OR 3.3）でした（<span class="wl">ICM2020</span>）。ところが RCT は3本とも関連を示せず、まとめても陰性でした。SUP-ICU はその1本です（<span class="wl">ICM2020</span>、<span class="wl">SUP-ICU, NEJM 2018</span>）。</p>
+<p>AGA2026 も同じ構図を書いています。観察研究の統合では再発が PPI 使用者24%、非使用者18%でしたが、最大の RCT（17,000例超、3年追跡）では CDI は PPI 群11例、非使用群4例で有意差はなく、新しいメタ解析もリスクの差を認めませんでした（<span class="wl">AGA2026</span>）。AGA2026 の結論は、PPI の適応を見直し、ストレス潰瘍予防など正当な適応があれば中止しなくてよい、です（<span class="wl">AGA2026</span>）。</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>PPI を切る理由に CDI を使わない 観察研究の OR を「PPI が CDI を起こす」と読み替えると、RCT の結果と合いません。適応の無い PPI は止め、適応のある PPI は続けます（<span class="wl">AGA2026</span>、<span class="wl">ICM2020</span>）。ストレス潰瘍予防の方針は <span class="wl">予防</span> で扱います。</p>
+</div>
+<h2 id="sec-4">🔬 診断（初回） — 臨床診断と2段階検査</h2>
+<p>この章では、初めて CDI を疑ったときに、誰に、どの検査を出し、結果をどう読むかを決めます。再発のときの読み方は冒頭の「今日の疑問」にまとめました。</p>
+<h3 id="sec-4-1">入口は症状</h3>
+<p>AGA2026 は「感染は、菌がいるというだけでは決して判断できない」と書き、CDI を臨床診断と位置づけています（<span class="wl">AGA2026</span>）。入口は、新たに始まった原因不明の下痢（24時間に3回以上の非有形便）です（<span class="wl">AGA2026</span>）。ICM2020 はこれを、矛盾しない臨床像（1日3回以上の軟便か水様便、Bristol 便性状スケール5〜7）、他に説明がつかないこと、リスク因子があること、の3つを足し合わせる図にしています（<span class="wl">ICM2020</span>）。</p>
+<p><mark class="hl">ICU では「他に説明がつかない」の箱を飛ばさないでください</mark>。経腸栄養、下剤、ソルビトールを含む薬、腸管虚血など、下痢の原因は CDI 以外にたくさんあります（<span class="wl">ICM2020</span>）。症状が非典型な患者に検査だけを頼ると、保菌の多さのために過剰診断になります（<span class="wl">AGA2026</span>）。</p>
+<h3 id="sec-4-2">2段階検査</h3>
+<p>ESCMID が勧める2段階は、感度と陰性的中率の高い検査（NAAT または GDH）でふるい分け、陽性なら特異度と陽性的中率の高い検査（便の中の遊離毒素を見る ELISA や EIA）で確かめる方法です（<span class="wl">ICM2020</span>、<span class="wl">AGA2026</span>）。AGA2026 も GDH と PCR のどちらを1段目にしてもよく、陽性なら毒素 A と B の EIA で確かめることを勧めます（<span class="wl">AGA2026</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>検査</th><th>見ているもの</th><th>性能</th><th>使い方</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>GDH 抗原</td><td>すべての CD 株が作る酵素（毒素を作らない株でも陽性）</td><td>感度と陰性的中率が高い（数値の記載なし）</td><td>1段目</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>NAAT（PCR など）</td><td>毒素遺伝子 *tcdA* と *tcdB*</td><td>感度96%（95% CI 93〜98%）、特異度94%（93〜95%）</td><td>1段目。陰性なら除外できる。陽性でも保菌と区別できない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>トキシン EIA（ELISA）</td><td>便の中の遊離毒素</td><td>感度83%（76〜88%）、特異度99%（98〜99%）</td><td>2段目</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>培養</td><td>菌そのもの</td><td>時間がかかる。単独では毒素を作るか分からない</td><td>日常の判断には使わない</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<p>_注：ELISA（enzyme-linked immunosorbent assay：酵素免疫測定法の一種）。性能の数値は JAMA2025 の本文にあり、引用文献は示されていません。_</p>
+<p>2段目が陰性のときは、真の感染で毒素が検出限界より少ないか、毒素産生株の保菌かのどちらかで、臨床で判断します（<span class="wl">ICM2020</span>）。ICM2020 の図では、治療開始に進む道は ELISA 陽性の1本だけです（<span class="wl">ICM2020</span>）。一方 AGA2026 は、PCR 陽性で毒素陰性でも、臨床的に強く疑うなら毒素陰性だけを理由に治療を控えず、下痢の改善を細かく見ながら経験的治療を考えるとしています（<span class="wl">AGA2026</span>）。毒素検査は、便の中の毒素が少ないときや、検体の採り方や処理が不適切なときにも陰性になります（<span class="wl">AGA2026</span>）。</p>
+<p>_図: AGA2026 の CDI 検査の流れ。スクリーニング陰性なら CDI ではない、毒素陰性の不一致は臨床的な疑いの高さで分ける。出典 <span class="wl">AGA2026</span>_</p>
+<p>_図: ICU で CDI を疑う患者の診断の流れ。臨床像、他に説明がつかないこと、リスク因子の3つがそろってから検査へ。出典 <span class="wl">ICM2020</span>_</p>
+<h3 id="sec-4-3">検体が採れないとき、急ぐとき</h3>
+<ul><li>劇症で便が出ないときは、便の代わりに直腸スワブを採ってよいとされます（<span class="wl">ICM2020</span>）。</li><li>検査結果が数時間で出ない病院では、結果を待たずに治療を始めるべきと ICM2020 は書いています（<span class="wl">ICM2020</span>）。早く治療できた ICU 獲得 CDI は、死亡と独立に関連せず、ICU 在室日数にも影響しなかったという研究が根拠の一つです（Zahar 2012、<span class="wl">ICM2020</span>）。</li><li>検査が陰性でも症状が悪化する患者では再検査を考えます。血行動態が不安定で診断のつかない重症患者で48時間以内という目安は、著者がエビデンスは無いと断ったうえでの提案です（<span class="wl">ICM2020</span>）。</li></ul>
+<h3 id="sec-4-4">画像と内視鏡</h3>
+<p>CT で最も多い所見は結腸壁の肥厚ですが、特異的ではありません。拡張、結腸周囲の脂肪織濃度上昇、腹水、2層（double-halo sign）や3層（target sign）の層状構造も見られます。CT だけでは、虚血性大腸炎、放射線性大腸炎、炎症性腸疾患、サイトメガロウイルス腸炎、大腸菌による大腸炎と確実には分けられません（<span class="wl">ICM2020</span>）。</p>
+<p>_図: 腸管壁の造影効果、びまん性の壁肥厚と粘膜下浮腫、腹水を示す CT。出典 <span class="wl">ICM2020</span>_</p>
+<p>生検を伴う軟性 S 状結腸鏡は、便検査が陰性のときや臨床状態が悪化するときに他の病気を除くのに使います。ルーチンではなく、炎症のある結腸の穿孔のリスクと天秤にかけます（<span class="wl">ICM2020</span>）。AGA2026 の著者は、劇症では偽膜が例外なく見られ、偽膜が無ければ別の原因を調べるべきとしています（著者の経験、<span class="wl">AGA2026</span>）。</p>
+<h2 id="sec-5">📊 重症度 — 非重症、重症、劇症</h2>
+<p>この章では、治療の強さと外科を呼ぶ時期を決める重症度を整理します。前提として、CDI には広く受け入れられた重症度の基準も、前向きに検証されたスコアもありません（<span class="wl">ICM2020</span>、<span class="wl">AGA2026</span>）。以下はガイドラインが引いた線です。</p>
+<h3 id="sec-5-1">基準の比べ方</h3>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>ESCMID 2014</th><th>IDSA 2018</th><th>AGA2026</th><th>ICM2020 の図（全身毒性の徴候）</th></tr></thead>
+<tbody>
+<tr><td>性格</td><td>重症大腸炎の徴候が1つ以上、または複雑な経過。ICU 入室、結腸切除、死亡に至るものを含む</td><td>専門家意見による検査値の基準</td><td>検査値の目安（普遍的な定義は無いと明記）</td><td>治療を強めるかの分かれ目</td></tr>
+<tr><td>白血球</td><td>15,000 毎mm³ 超が「ありうる」</td><td>15,000 毎mm³ 超</td><td>15,000 毎µL 超</td><td>著明な白血球増加</td></tr>
+<tr><td>クレアチニン</td><td>前病時の1.5倍以上が「ありうる」</td><td>1.5 mg毎dL 超（ICM2020 は単位を mg毎day と誤記）</td><td>1.5 mg毎dL 超、または基礎値の1.5倍</td><td>基礎値の1.5倍超</td></tr>
+<tr><td>その他</td><td>血清アルブミン 30 g毎L 未満が「ありうる」</td><td>—</td><td>大腸内視鏡の偽膜（図の注だけ）</td><td>血行動態不安定、循環や呼吸の補助、乳酸の上昇</td></tr>
+</tbody></table></div>
+<p>_注：ESCMID と IDSA（Infectious Diseases Society of America：米国感染症学会。SHEA〈米国医療疫学学会〉と共同でガイドラインを出す）の列は <span class="wl">ICM2020</span> の整理、AGA2026 の列は <span class="wl">AGA2026</span>。AGA2026 は同じ論文の中で重症の基準を3通りに書いており、ICM2020 の図には本文の定義に無い乳酸が入っています（各ノートの批判的吟味）。_</p>
+<p>ICU では、白血球の上昇も腎機能の悪化も CDI 以外の理由で起きます。ICM2020 ノートは、この基準を ICU に当てはめると多くの患者が自動的に「重症」になるおそれがあり、ICU での特異度は誰も検証していないと指摘しています（<span class="wl">ICM2020</span>）。日本GL2022 は、各ガイドラインの重症度基準（ICU 入室、白血球 15,000/µL 以上、アルブミン 3.0 g/dL 未満など）を並べたうえで、どれも検証が無いので推奨しないとしながら、治療は非重症と重症で分けています。ノートの批判的吟味は、ICU 患者はほぼ全員が重症に入り、結果としてバンコマイシンが選ばれると読んでいます（<span class="wl">日本GL2022</span>）。IDSA/SHEA2017 の基準も専門家の意見で、表の中で「15,000 以下」と「15,000 以上」が重なっています（<span class="wl">IDSA/SHEA2017</span>）。</p>
+<p><strong>Zar の点数（2026-11-20 追記）</strong>：60歳超、体温 38.3℃ 超、アルブミン 2.5 未満（原著は単位を mg毎dL と印刷）、白血球 15,000 毎mm³ 超に各1点、内視鏡の偽膜性大腸炎と ICU での治療に各2点、2点以上を重症とした分け方です。ICU にいるだけで2点なので、ICU の患者はほぼ全員が重症に入ります。この分け方の RCT（150例完遂）では、軽症の治癒はメトロニダゾール90%、バンコマイシン98%（P＝0.36）、重症は76%と97%（P＝0.02）でした（Zar FA, et al. Clin Infect Dis 2007;45:302-307. doi:10.1086/519265）。</p>
+<h3 id="sec-5-2">劇症とその仲間</h3>
+<div class="tw"><table>
+<thead><tr><th>病態</th><th>定義</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>劇症 CDI</td><td>低血圧またはショック、イレウス、巨大結腸。CDI による全身毒性か臓器障害。全 CDI の1〜3%、死亡率30〜40%（手術を要する例、併存症の多い例ではさらに高い）</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>イレウス</td><td>嘔吐や排便の消失など腸の働きの強い障害＋腸管拡張の画像所見</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>中毒性巨大結腸</td><td>結腸の横径 6 cm 超の拡張＋全身毒性（血行動態不安定、白血球 25,000 毎mm³ 超、低アルブミン血症、循環や呼吸の補助が必要）</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>2026-08-15 訂正 — 「重症」と「劇症」を取り違えない NEJM2015 の抄読メモは「劇症＝白血球 15,000 超、低アルブミン、急性腎障害」と書いていましたが、これは重症の基準で、劇症は低血圧、ショック、イレウス、中毒性巨大結腸で定義されます。2026-08-15 にノート側で訂正済みです（<span class="wl">NEJM2015</span>）。<mark class="hl">血圧が落ちる、腸が動かない、結腸が広がる、のどれかが加わったら劇症で、外科に相談します</mark>（<span class="wl">NEJM2015</span>、<span class="wl">ICM2020</span>）。下痢が止まって腹が張ってきたら中毒性巨大結腸を疑う、という原メモの記載は妥当とされています（<span class="wl">NEJM2015</span>）。</p>
+</div>
+<p>%%FIG: cdi-severity-ladder | 3段の階段。下段「非重症」、中段「重症（白血球とクレアチニン）」、上段「劇症（ショック、イレウス、巨大結腸）」。各段の右に治療（初回治療、ICM2020 は全身毒性で高用量バンコマイシン＋メトロニダゾール静注、劇症は多職種と48時間の再評価）を置き、上段の横に「外科に相談」の矢印と「乳酸 5 mmol毎L 超の前」「全身毒性から48〜72時間以内」の札 | 非重症／重症／劇症／白血球 15,000 超／クレアチニン 1.5 mg毎dL 超／ショック／イレウス／巨大結腸／48時間で再評価／乳酸 5 mmol毎L 超の前／48〜72時間以内 %%</p>
+<h2 id="sec-6">💊 治療① 初回のエピソード</h2>
+<p>この章では、初めての CDI で何を何日使うかを決めます。10年で最も変わったのは、メトロニダゾールが外れ、フィダキソマイシンが前に出たことです。</p>
+<h3 id="sec-6-1">第一選択の変化</h3>
+<div class="tw"><table>
+<thead><tr><th>時期</th><th>非重症の初回</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>2019年ごろの国内解説（NEJM2015 メモ）</td><td>軽症にメトロニダゾール、重症に経口バンコマイシン。フィダキソマイシンはバンコマイシン無効時</td><td>[[クロストリジオイデス・ディフィシル感染（総説・NEJM2015）\</td><td>NEJM2015]]（原本メモ。2026-08-15 訂正済み）</td></tr>
+<tr><td>IDSA/SHEA2017（CID 2018 掲載）</td><td>バンコマイシン 125 mg 1日4回10日か、フィダキソマイシン 200 mg 1日2回10日（どちらも強い推奨、高い質）。メトロニダゾール 500 mg 1日3回は上記が手に入らないときの非重症だけ（弱い推奨）</td><td>[[C. difficile感染の米国ガイドライン2017年改訂 — 初発はバンコマイシンかフィダキソマイシン、24時間に3回以上の新たな下痢だけ検査し治癒確認はしない（IDSA・SHEA・CID2018）\</td><td>IDSA/SHEA2017]]</td></tr>
+<tr><td>ICM2020（IDSA 2018 を引用）</td><td>経口バンコマイシン 125 mg 1日4回か、フィダキソマイシン 200 mg 1日2回のどちらか。メトロニダゾールはもう勧めない</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>日本GL2022</td><td>非重症はメトロニダゾール 500 mg 1日3回10日（強い推奨 A）、重症はバンコマイシン 125 mg 1日4回10日（強い推奨 A）。フィダキソマイシンは初発の第一選択としては弱く勧めず、再発リスクが高い患者で考慮</td><td>[[C. difficile感染症の日本の診療ガイドライン — 再発は8週以内、非重症の初発はメトロニダゾール、GDH陽性トキシン陰性はNAATへ（JAID・JSC・JInfectChemother2022）\</td><td>日本GL2022]]</td></tr>
+<tr><td>JAMA2025（IDSA と SHEA、ESCMID）</td><td>フィダキソマイシン 200 mg 1日2回10日が第一選択</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>AGA2026</td><td>フィダキソマイシン 200 mg 1日2回10日を一般に優先、経口バンコマイシン 125 mg 1日4回10日も妥当</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+</tbody></table></div>
+<p>メトロニダゾールが外れた理由は2つ書かれています。経口バンコマイシンは腸の内腔に濃く集まり、薬物動態でまさること（<span class="wl">ICM2020</span>）と、メトロニダゾールが高齢者、CDI で入院した患者、併存症の多い患者で劣り、再発も多いこと（<span class="wl">AGA2026</span>）です。AGA2026 は、劇症でバンコマイシンと併せるとき以外は勧めません（<span class="wl">AGA2026</span>）。</p>
+<p><strong>メトロニダゾールを非重症の初回に残す考え方（2026-11-20 追記）</strong>：日本の RCT 5本のメタ解析では、非重症でバンコマイシンとの差ははっきりせず（RR 1.09、95% CI 1.00〜1.19）、重症ではバンコマイシンがまさりました（RR 1.19、95% CI 1.02〜1.39）（Igarashi Y, et al. J Infect Chemother 2018;24:907-914. doi:10.1016/j.jiac.2018.08.003）。IDSA/SHEA2017 も、バンコマイシンやフィダキソマイシンが手に入らないときは非重症の初回にメトロニダゾールを使ってよいとしています（弱い推奨、高い質。<span class="wl">IDSA/SHEA2017</span>）。AGA2026 は劇症の併用以外では勧めません（<span class="wl">AGA2026</span>）。</p>
+<p>日本GL2022 は全文で確かめました。非重症の初回はメトロニダゾール 500 mg 1日3回10日を第一選択とし（強い推奨 A）、根拠は上のメタ解析の非重症 RR 1.09（95% CI 1.00〜1.19）、薬価の安さ、バンコマイシンを多く使うと VRE が増えうる懸念です。日本では強毒株（RT 027、078）がまれで、海外の推奨をそのまま当てはめられないことも背景に挙げています（<span class="wl">日本GL2022</span>）。ノートの批判的吟味は、RR の下限が 1.00 ちょうどで、臨床効果だけなら「強い推奨 A」はやや強く、費用と耐性菌という価値判断が推奨を押し上げていること、文献検索が2018年6月で止まり、IDSA/SHEA の2021年の焦点改訂（フィダキソマイシンの格上げ）を反映していないことを挙げています（<span class="wl">日本GL2022</span>）。重症度の線をどう引くかで同じ患者の第一選択が変わり、ICU の患者はほぼ全員が重症に入るので、ICU では日本GL2022 に従ってもバンコマイシンになります。</p>
+<h3 id="sec-6-2">フィダキソマイシンとバンコマイシンの比較</h3>
+<p>フィダキソマイシンは大腸で働く狭域のマクロライド系で、芽胞の形成を抑え、有益な嫌気性菌を残します（<span class="wl">AGA2026</span>、<span class="wl">ICM2020</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>試験・年</th><th>対象</th><th>介入と比較</th><th>主要結果</th><th>含意</th></tr></thead>
+<tbody>
+<tr><td>Louie 2011（RCT）</td><td>初回 CDI</td><td>フィダキソマイシン対経口バンコマイシン</td><td>臨床的治癒は非劣性。修正 ITT 88.2% 対85.8%、per-protocol 92.1% 対89.8%</td><td>治る割合は同じ</td></tr>
+<tr><td>コクランレビュー（Nelson 2017）</td><td>CDI</td><td>同上</td><td>1か月時点の再発なし治癒 71% 対61%、RR 1.17（95% CI 1.07〜1.27）</td><td>差は再発の少なさ</td></tr>
+<tr><td>JAMA2025 の本文</td><td>初回 CDI</td><td>同上</td><td>4週時点の再発なし治癒 71% 対61%、RR 1.17（95% CI 1.04〜1.31）</td><td>同じ数値で CI だけ違う。出典の記載なし</td></tr>
+<tr><td>Al Momani 2018（メタ解析）</td><td>初回</td><td>同上</td><td>治癒率に差なし、再発率は有意に低い</td><td>高い費用を正当化しうる（ICM2020）</td></tr>
+<tr><td>Penziner 2015</td><td>重症患者</td><td>フィダキソマイシン</td><td>一般患者と同等の有効性。粉砕して経鼻胃管から入れても同様</td><td>経口できない患者の選択肢</td></tr>
+</tbody></table></div>
+<p>_注：上3行は <span class="wl">AGA2026</span> と <span class="wl">JAMA2025</span>、下2行は <span class="wl">ICM2020</span> の記載。ITT（intention-to-treat：割り付けどおりの解析）。RR（risk ratio：相対リスク）。CI（confidence interval：信頼区間）。_</p>
+<p>ガイドラインがフィダキソマイシンを第一選択にした根拠は、バンコマイシンより再発が6〜11%少ないことです（<span class="wl">AGA2026</span>）。どちらを使うかは、再発の危険因子、飲みやすさ、入手しやすさ、費用で患者と話して決めます（<span class="wl">AGA2026</span>）。経口バンコマイシン1日4回は起きている時間に飲めばよく、夜中に起きて正確に6時間ごとに飲む必要はありません（<span class="wl">AGA2026</span>）。</p>
+<h3 id="sec-6-3">補助の薬と止痢薬</h3>
+<ul><li>コレスチラミンなどの胆汁酸結合薬は、単独でも、経口バンコマイシンやフィダキソマイシンと併せても使いません。抗菌薬を吸着して効き目を下げ、それ自体も CDI に効かないためです（<span class="wl">AGA2026</span>）。</li><li>止痢薬は、未治療の CDI、劇症 CDI、重症の大腸の炎症性腸疾患では禁忌です。AGA2026 の著者はロペラミドを勧めず、使うなら抗CDI治療を始めた後に、必要な最短期間だけとしています（<span class="wl">AGA2026</span>）。下痢全般の止痢薬の扱いは <span class="wl">ACG診療ガイドライン・AmJGastroenterol2016</span> にあり、このガイドラインは CDI を対象外にしています（<span class="wl">NEJM2015</span>）。</li><li>回復した患者の便の形を整えるのにサイリウムが使えます（<span class="wl">AGA2026</span>）。</li><li>原因の抗菌薬は止めるか、狭いものに替えます（<span class="wl">ICM2020</span>）。</li></ul>
+<h3 id="sec-6-4">重症で全身毒性があるとき（ICM2020）</h3>
+<p>ICM2020 は、全身毒性の徴候（血行動態不安定、循環や呼吸の補助、著明な白血球増加、乳酸の上昇、クレアチニンが基礎値の1.5倍超）があれば、経口バンコマイシンを 500 mg 1日4回まで増やし、メトロニダゾール 500 mg 1日3回の静注を足すとしています（<span class="wl">ICM2020</span>）。ICU の後ろ向き研究（Rokas 2015）で、この併用が死亡を減らしたと報告されています（<span class="wl">ICM2020</span>）。AGA2026 は同じ組み合わせを劇症に限っています（<span class="wl">AGA2026</span>）。チゲサイクリンは ICM2020 の本文で後ろ向き研究の結果が紹介されていますが、図では「今後の研究課題」に置かれています（<span class="wl">ICM2020</span>）。</p>
+<p>_図: ICU の CDI 管理の提案アルゴリズム（重症度で治療を分け、劇症では経直腸バンコマイシンと外科評価）と、右欄の今後の研究課題5項目。出典 <span class="wl">ICM2020</span>_</p>
+<p><strong>がんの患者（2026-11-20 追記）</strong>：フィダキソマイシンとバンコマイシンの2本の RCT の事後解析で、がんの患者183例では、フィダキソマイシンで再発が少なく（OR 0.37、P＝0.018）、持続的な治癒が多く（OR 2.56、P＝0.003）、治癒も多い傾向でした（OR 2.0、P＝0.065）。下痢が治まるまでの時間の中央値は、バンコマイシンではがんありで123時間、がん無しで58時間、フィダキソマイシンでは74時間と54時間でした（Cornely OA, et al. J Clin Oncol 2013;31:2493-2499. doi:10.1200/JCO.2012.45.5899、抄録で確認）。当院でがん患者に初回からフィダキソマイシンを使ってよいとする運用（当院の標準の5）の根拠の一つです。</p>
+<h3 id="sec-6-5">💊 日本での使い方（添付文書）</h3>
+<p>論文ノートの「日本での使い方」節から写しました。添付文書は KEGG MEDICUS で2026-11-20に確認されたものです（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>一般名</th><th>日本の商品名（剤形、規格、薬価）</th><th>国内の効能・効果</th><th>添付文書の用法・用量</th><th>論文での使い方との違い</th><th>主な禁忌と注意</th></tr></thead>
+<tbody>
+<tr><td>フィダキソマイシン</td><td>ダフクリア錠200mg（1錠 4012.8円）</td><td>本剤に感性のクロストリジウム・ディフィシルによる感染性腸炎（偽膜性大腸炎を含む）</td><td>成人に1回200 mgを1日2回経口投与。投与期間は原則10日間。超えて使うときはベネフィットとリスクを考え継続を慎重に判断</td><td>初回と初回再発の 200 mg 1日2回10日は添付文書どおり（計算上20錠で80,256円）。延長投与（1〜5日目は1日2回、7〜25日目は1日おきに1日1回）は総錠数は同じ20錠だが投与期間が25日に及び、添付文書の「原則10日間」を超える</td><td>禁忌は本剤成分への過敏症の既往。「抗微生物薬適正使用の手引き」を参照し、投与の必要性を判断したうえで投与</td></tr>
+<tr><td>バンコマイシン塩酸塩（経口用の散）</td><td>バンコマイシン塩酸塩散0.5g「NIG」（1瓶 909.6円）ほか</td><td>MRSA、クロストリジウム・ディフィシルによる感染性腸炎（偽膜性大腸炎を含む）、骨髄移植時の消化管内殺菌</td><td>感染性腸炎：用時溶解し、成人1回0.125〜0.5 g（力価）を1日4回経口投与（年齢、体重、症状で適宜増減）。7〜10日以内に下痢、腹痛、発熱などの改善の兆しが全く無ければ中止</td><td>初回の 125 mg 1日4回10日と、劇症の 500 mg 6時間ごとは用量の範囲内。漸減やパルス法、125 mg 1日1回の長期抑制投与、注腸は添付文書に記載が無い</td><td>散の禁忌は本剤成分によるショックの既往。点滴静注用は CDI には使わない（静注用の添付文書に「ブドウ球菌性腸炎に非経口投与は有用性なし」）</td></tr>
+<tr><td>メトロニダゾール（静注）</td><td>アネメトロ点滴静注液500mg（1瓶 1091円）</td><td>嫌気性菌感染症、クロストリジウム・ディフィシルによる感染性腸炎（偽膜性大腸炎を含む）、アメーバ赤痢</td><td>成人1回500 mgを1日3回、20分以上かけて点滴静注。難治性や重症は1日4回まで</td><td>劇症 CDI での 500 mg 8時間ごと静注は国内用量と一致。論文は劇症以外では使わないとする</td><td>脳と脊髄の器質的疾患（化膿性髄膜炎と脳膿瘍を除く）、妊娠3か月以内。10日を超える投与は中枢と末梢の神経障害に注意。CDI で他の抗菌薬を併用すると治癒が遅れうる、と添付文書に記載</td></tr>
+<tr><td>メトロニダゾール（経口）</td><td>フラジール内服錠250mg（1錠 44.5円）</td><td>感染性腸炎（偽膜性大腸炎を含む）ほか</td><td>感染性腸炎：成人1回250 mgを1日4回、または1回500 mgを1日3回、10〜14日間経口</td><td>国内では経口の適応があるが、論文は非劇症 CDI に使わないとする（高齢者、入院例、併存症の多い例で劣り、再発も多い）</td><td>上と同じ。1日1500 mg 以上の高用量でも神経障害に注意</td></tr>
+<tr><td>糞便微生物製剤（Rebyota、Vowst）</td><td>国内未承認（KEGG MEDICUS に該当なし）</td><td>—</td><td>—</td><td>論文は2回目の再発後に勧めるが、国内では製剤として使えない</td><td>—</td></tr>
+<tr><td>ベズロトクスマブ</td><td>日本の承認と販売の状況は未確認</td><td>—</td><td>—</td><td>AGA2026 は「もう市販されていない」（米国の状況）。JAMA2025 と ICM2020 には記載が無い</td><td>—</td></tr>
+</tbody></table></div>
+<p>_添付文書：フィダキソマイシン https://www.kegg.jp/medicus-bin/japic_med?japic_code=00067626 ／ バンコマイシン塩酸塩散 https://www.kegg.jp/medicus-bin/japic_med?japic_code=00070692 ／ アネメトロ https://www.kegg.jp/medicus-bin/japic_med?japic_code=00063136 ／ フラジール内服錠 https://www.kegg.jp/medicus-bin/japic_med?japic_code=00054871 （KEGG MEDICUS、2026-11-20 確認）。ベズロトクスマブは論文ノートで添付文書を照合しておらず、OpenEvidence のメモにあるのも米国で販売中止という情報だけです（<span class="wl">2026-11-20</span>）。_</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>延長フィダキソマイシンは添付文書の範囲を超える <mark class="hl">延長投与は総錠数が同じ20錠でも、期間が25日に及び「原則10日間」を超えます</mark>（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。バンコマイシンの漸減パルス法、長期の抑制投与、注腸も添付文書に記載がありません（<span class="wl">AGA2026</span>）。使うときはその点を記録に残します。</p>
+</div>
+<h2 id="sec-7">🔁 治療② 再発 — 再発回数で選ぶ</h2>
+<p>この章では、再発を診断したあと何を使うかを決めます。原則は、初回再発は前回と別の薬、2回目以降の再発は FMT です（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</p>
+<h3 id="sec-7-1">再発回数ごとの治療</h3>
+<div class="tw"><table>
+<thead><tr><th>場面</th><th>JAMA2025</th><th>AGA2026</th></tr></thead>
+<tbody>
+<tr><td>初回再発（2回目のエピソード）</td><td>フィダキソマイシン。代替は延長フィダキソマイシン、経口バンコマイシン漸減投与。初回をメトロニダゾールで治療していればバンコマイシン10日</td><td>初回と別の薬。フィダキソマイシン後はバンコマイシン漸減パルス法か延長フィダキソマイシン。バンコマイシン後はフィダキソマイシン10日か延長フィダキソマイシン</td></tr>
+<tr><td>2回目以降の再発（3回目以降のエピソード）</td><td>FMT（IDSA と SHEA、AGA、ESCMID）</td><td>フィダキソマイシン10日かバンコマイシン10日のあと、すぐに FMT など細菌叢を戻す治療。抗菌薬はその1〜4日前に止める</td></tr>
+<tr><td>FMT を早める条件</td><td>記載なし</td><td>著者の意見：前回が重症、入院を要した、治療が長引いた、再発の危険が高い（65歳超、免疫不全、高度看護施設入所）</td></tr>
+<tr><td>FMT ができないとき</td><td>記載なし</td><td>経口バンコマイシン 125 mg 1日1回の長期の抑制投与</td></tr>
+<tr><td>ガイドライン2本</td><td>IDSA/SHEA2017：初回再発は、前回メトロニダゾールならバンコマイシン10日、前回標準量のバンコマイシンなら漸減パルス法かフィダキソマイシン10日（弱い推奨）。2回目以降は漸減パルス法、バンコマイシン10日のあとリファキシミン20日、フィダキソマイシン、または FMT（FMT だけ強い推奨、中等度の質）。FMT は少なくとも2回の再発を抗菌薬で治療してから</td><td>日本GL2022：再発はバンコマイシン 125 mg 1日4回10〜14日（弱い推奨 B）。治療アルゴリズムでは再発の第一選択にバンコマイシンかフィダキソマイシン、難治性（2回以上の再発）にフィダキソマイシン。FMT は効果はあるが安全性を評価できず弱く勧めない</td></tr>
+</tbody></table></div>
+<p>_注：出典は <span class="wl">JAMA2025</span> と <span class="wl">AGA2026</span>。最終行の左は <span class="wl">IDSA/SHEA2017</span>、右は <span class="wl">日本GL2022</span>。_</p>
+<p><strong>OpTION 試験（2026-11-20 本論文で確認）</strong>：米国退役軍人病院33施設で、初回か2回目の再発の308例を、バンコマイシン漸減パルス法（125 mg 1日4回10日のあと、1日1回、隔日、3日に1回を各7日、計31日）、フィダキソマイシン 200 mg 1日2回10日、バンコマイシン 125 mg 1日4回10日に割り付けた二重盲検 RCT です（<span class="wl">OpTION</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>アウトカム</th><th>漸減パルス法</th><th>フィダキソマイシン</th><th>標準バンコマイシン</th><th>読み方</th></tr></thead>
+<tbody>
+<tr><td>59日の持続臨床反応（主要）</td><td>58.6%</td><td>44.1%</td><td>44.1%</td><td>漸減パルス法対標準は差14.7ポイント（95% CI 0.6〜28.8、P＝0.04）。<mark class="hl">2つの比較と中間解析のため有意水準は0.0255で、優越は示せなかった</mark></td></tr>
+<tr><td>フィダキソマイシン対標準</td><td>—</td><td>差0.0ポイント（95% CI −14.2〜14.2）</td><td>—</td><td>再発例で高い薬に替えても持続反応は上がらなかった</td></tr>
+<tr><td>CDI 再発なし（副次）</td><td>64.8%</td><td>—</td><td>48.4%</td><td>差16.5ポイント（95% CI 0.5〜32.5）</td></tr>
+<tr><td>治療終了から28日でそろえた持続反応</td><td>58.9%</td><td>—</td><td>50.0%</td><td>差8.9ポイント（95% CI −6.9〜24.8）に縮む</td></tr>
+<tr><td>90日の CDI 再発</td><td>33.8%</td><td>—</td><td>43.6%</td><td>差−9.8ポイント（95% CI −26.9〜7.2）</td></tr>
+<tr><td>死亡</td><td>2例</td><td>8例</td><td>3例</td><td>少数で検定なし</td></tr>
+</tbody></table></div>
+<p>_注：持続臨床反応＝10日までに症状が消え、11〜59日に下痢の再発が無く、生存して重い臨床事象が無いこと。便検査の結果は問わない。出典は <span class="wl">OpTION</span>。_</p>
+<p>ノートの批判的吟味の要点です（<span class="wl">OpTION</span>）。目標549例（のち459例）に届かず308例で早期に止まり、検出力が足りません。59日は漸減パルス法では治療終了から28日、他の2群では49日にあたり、漸減パルス法の差は治療終了直後に集中するので、再発を「減らす」のか「後ろへずらす」のかは分かりません。2回目の再発の割合が漸減パルス法5.0%、標準13.9%と偏り、男性90.6%、ICU の患者はほとんど含まれず、PCR 単独陽性での組み入れが76.9%でした。以前この節に載せていた IDWeek 2025 の抄録の数値（Johnson S, et al. Open Forum Infect Dis 2026;13(Suppl 1). doi:10.1093/ofid/ofaf695.021）は、本論文で確かめた上の表の値に置き換えました。</p>
+<h3 id="sec-7-2">漸減とパルス法の日程</h3>
+<div class="tw"><table>
+<thead><tr><th>方法</th><th>JAMA2025 の例</th><th>AGA2026 の例</th></tr></thead>
+<tbody>
+<tr><td>バンコマイシン漸減パルス法</td><td>125 mg 1日4回10〜14日 → 1日2回7日 → 1日1回7日 → 2〜3日ごとに2〜8週</td><td>125 mg 1日4回14日 → 1日2回14日 → 1日1回14日 → 3日ごと14日</td></tr>
+<tr><td>延長フィダキソマイシン（EXTEND）</td><td>1〜5日目は 200 mg 1日2回、7〜25日目は1日おきに1日1回</td><td>同じ</td></tr>
+</tbody></table></div>
+<p>_注：出典は <span class="wl">JAMA2025</span> と <span class="wl">AGA2026</span>。EXTEND は延長パルス法を検証した試験の名前（Guery 2018、60歳以上が対象、<span class="wl">AGA2026</span>）。_</p>
+<p>ほかの3本の日程です。IDSA/SHEA2017 は JAMA2025 と同じ（125 mg 1日4回10〜14日 → 1日2回1週 → 1日1回1週 → 2〜3日ごとに2〜8週、初回再発で前回が標準量のバンコマイシンだったとき、弱い推奨）です（<span class="wl">IDSA/SHEA2017</span>）。日本GL2022 は同じ形の①と、125 mg を1日4回、3回、2回、1回、2日に1回、3日に1回と各1週ずつ減らす②の2つを示し、再発を繰り返す場合に考慮する（弱い推奨 C）、他の治療が無効なときの代替と位置づけます（<span class="wl">日本GL2022</span>）。OpTION の漸減パルス法は 125 mg 1日4回10日 → 1日1回7日 → 隔日7日 → 3日に1回7日の計31日でした（<span class="wl">OpTION</span>）。</p>
+<p>AGA2026 は、漸減の用量と期間は施設や医師で違ってよく、60日を超えるバンコマイシン漸減は検証されておらず上乗せの利益は見込みにくいとしています（<span class="wl">AGA2026</span>）。</p>
+<h3 id="sec-7-3">再発のあとに先回りしておくこと</h3>
+<p>AGA2026 は、一度再発したら次の再発が増えることを患者に話し、この時点で FMT の話を始め、再発の症状が出たときの段取り（検査伝票や検体容器、薬の処方の補充）を決めておくよう勧めます（<span class="wl">AGA2026</span>）。抗菌薬や細胞傷害性化学療法が続くなど再発の危険が残るなら、初回10日の治療の後にバンコマイシン 125 mg 1日1回の抑制投与を続け、それらが終わってから漸減するか FMT に移ります（<span class="wl">AGA2026</span>）。</p>
+<p>_図: AGA2026 の (A) 初回 CDI、(B) 再発 CDI、(C) 劇症 CDI の流れ。出典 <span class="wl">AGA2026</span>_</p>
+<p>%%FIG: cdi-recurrence-treatment-ladder | 左から右へ4つの箱。「初回：フィダキソマイシン10日（またはバンコマイシン10日）」→「初回再発：前回と別の薬（漸減パルス法、延長フィダキソマイシン、フィダキソマイシン10日）」→「2回目以降の再発：抗菌薬10日のあと FMT」→「FMT ができない：バンコマイシン 125 mg 1日1回で抑制」。各箱の上に再発率（初回後14〜16%、再発後40〜50%）を小さく添え、FMT の箱に「1回で72%」 | 初回／初回再発／2回目以降の再発／フィダキソマイシン10日／バンコマイシン漸減パルス法／延長フィダキソマイシン／FMT（1回で72%）／抑制投与 125 mg 1日1回／再発14〜16%／次の再発40〜50% %%</p>
+<h2 id="sec-8">🚨 治療③ 劇症 — 48時間の再評価、手術と FMT</h2>
+<p>この章では、ショック、イレウス、巨大結腸を伴う劇症 CDI で、何を入れ、いつ見直し、いつ外科を呼ぶかを決めます。ICU の CD腸炎で命に関わるのはここです。</p>
+<h3 id="sec-8-1">初期治療</h3>
+<p>AGA2026 の流れは次のとおりです（<span class="wl">AGA2026</span>）。</p>
+<ol><li>消化器、感染症、集中治療、外科の多職種で診ます。</li><li>経口バンコマイシン 500 mg 6時間ごと（経口か経管）を、少なくとも最初の48時間使います。観察データは利益を示していませんが、薬を確実に大腸へ届けるためです。</li><li>メトロニダゾール 500 mg 8時間ごとを静注で併せます。静注しても大腸に分泌されます。</li><li>イレウスがあれば、経口では大腸に届きにくいので、バンコマイシン 500 mg 6時間ごとの注腸を足します。</li><li>反応したら（通常3〜5日後）、バンコマイシン 125 mg 1日4回の単剤に絞ってよく、期間は最低10日、著者は14日を好みます。</li></ol>
+<p>ICM2020 も、経口できないときはバンコマイシンを経直腸か内視鏡で入れられるとし、中毒性巨大結腸では慎重にとしています。ただし経口と比べた研究はありません（<span class="wl">ICM2020</span>）。</p>
+<h3 id="sec-8-2">48時間で見直す</h3>
+<p><mark class="hl">積極的な内科治療を48時間続けても反応しないか悪化したら、FMT か結腸切除を考えます</mark>（<span class="wl">AGA2026</span>）。AGA2026 の図では、48時間以内に改善がなく手術の適応も無ければ、前処置なしの下部内視鏡で偽膜と別の診断を確かめ、別の診断が無ければ FMT を行い、偽膜が消えるまで2〜4日ごとに繰り返します（<span class="wl">AGA2026</span>）。最初の内視鏡で偽膜が無ければ、CDI の診断を見直します（<span class="wl">AGA2026</span>）。</p>
+<h3 id="sec-8-3">外科</h3>
+<p>ICM2020 は、全身毒性があれば緊急に外科の評価を受けるべきとしています（<span class="wl">ICM2020</span>）。結腸切除の適応は、結腸の穿孔と、内科治療に反応しない悪化です（<span class="wl">ICM2020</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>術式</th><th>内容</th><th>特徴</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>亜全結腸切除</td><td>直腸を残して結腸を切除</td><td>侵襲が大きい</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>ループ回腸瘻</td><td>ループ回腸瘻を作って結腸を洗い、術後に順行性にバンコマイシンを注入</td><td>低侵襲（通常は腹腔鏡）。腸管穿孔や虚血があれば禁忌</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<p>2つの術式を比べた後ろ向きコホート（Juo 2019）は、転帰の差を示せませんでした（<span class="wl">ICM2020</span>）。救命のための結腸切除は最大20%で必要になり、死亡率は45%を超えます。ただしこの数字の出典は1996年の研究です（<span class="wl">ICM2020</span>）。</p>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>外科の窓は乳酸と時間で閉じる 手術は乳酸が 5 mmol毎L を超える前に行い（ESCMID 2014）、内科治療に反応しない患者では全身毒性の発症から48〜72時間以内の早い結腸切除がよい転帰と関連します（<span class="wl">ICM2020</span>）。乳酸を追って「まだ待てる」と考えている間に窓が閉じます。全身毒性が出た時点で外科に声をかけてください（<span class="wl">ICM2020</span>、<span class="wl">NEJM2015</span>）。</p>
+</div>
+<p><strong>手術の効果と術式（2026-11-20 追記）</strong>：</p>
+<ul><li>劇症を手術と内科治療で比べた観察研究のメタ解析（6研究、510例）で、手術群の死亡は少なめでした（調整 OR 0.70、95% CI 0.49〜0.99）。手術に回る患者は選ばれているので偏りは残ります（Stewart DB, et al. Colorectal Dis 2013;15:798-804. doi:10.1111/codi.12134）。</li><li>ループ回腸瘻と結腸全摘：米国10施設の後ろ向き研究（98例）では、調整した死亡がループ回腸瘻17.2%、結腸全摘39.7%（p＝0.002）でした（Ferrada P, et al. J Trauma Acute Care Surg 2017;83:36-40. doi:10.1097/TA.0000000000001498）。全国入院データベース（3,021例）では院内死亡25.98%対31.18%で有意差なし（P＝0.28）でした（Juo YY, et al. JAMA Surg 2019;154:899-906. doi:10.1001/jamasurg.2019.2141）。</li><li>IDSA/SHEA2017 は、手術するなら直腸を残す亜全結腸切除、代わりにループ回腸瘻と結腸洗浄、順行性のバンコマイシン注入を挙げ、白血球 25,000 以上や乳酸 5 mmol毎L 以上への上昇は死亡の多さと関連するとしています（<span class="wl">IDSA/SHEA2017</span>）。日本GL2022 は、125 mg 1日4回で無効か、ショック、低血圧、中毒性巨大結腸、麻痺性イレウスのときにバンコマイシン 500 mg 1日4回（内服か、生食100 mL に溶いた注腸）を弱く勧めます（推奨 C）（<span class="wl">日本GL2022</span>）。</li></ul>
+<h3 id="sec-8-4">劇症のときの他の抗菌薬</h3>
+<p>CDI を狙わない経験的な抗菌薬は細菌叢の乱れを悪くするので避けます（<span class="wl">AGA2026</span>）。それでも重症患者は肺炎、腹腔内感染、菌血症を併せて起こしうるので、併存感染の治療は感染症科と相談して決めます（<span class="wl">AGA2026</span>）。ICM2020 によれば、CDI を発症した ICU 患者の60%は確定した併存感染を持っていました（Marra 2007、<span class="wl">ICM2020</span>）。原因の抗菌薬を止めにくいときは、培養が出た時点で高リスクの抗菌薬を避けつつスペクトラムを狭めます（<span class="wl">ICM2020</span>）。CDI 以外の抗菌薬を使う間は、低用量バンコマイシン（125 mg 1日1〜2回）の抑制投与を続けることを AGA2026 は提案しています（劇症の回復期の文脈、<span class="wl">AGA2026</span>）。</p>
+<h2 id="sec-9">🧫 FMT（糞便微生物叢移植）</h2>
+<p>この章では、FMT を誰に、いつ、どう使うかを整理します。再発予防では確立した治療ですが、劇症の治療としてはランダム化試験がありません。</p>
+<h3 id="sec-9-1">再発予防の FMT</h3>
+<p>FMT は、スクリーニングしたドナーの便の懸濁液やカプセルを、経口、十二指腸、大腸から入れ、健康な腸内細菌叢を戻す治療です（<span class="wl">JAMA2025</span>）。米国には FDA（Food and Drug Administration：米国食品医薬品局）承認の製剤（便を加工したもの、便由来の細菌芽胞のもの）があります（<span class="wl">JAMA2025</span>、<span class="wl">AGA2026</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>数値</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>再発予防の有効率</td><td>FMT または微生物叢製剤1回で72%（95% CI 60〜82%）。10 RCT、523例、追跡8〜24週</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>比較</td><td>多回再発への経口バンコマイシンは約30%（van Nood 2013）</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>軽い有害事象</td><td>約4分の1（下痢、腹部不快感、膨満、腹部けいれん）。多くは自然に治る</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>重篤な有害事象</td><td>1.4%（129研究、4241例の系統的レビュー）</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>FMT 関連の死亡</td><td>おそらく関連1例、確実に関連4例（鎮静中の誤嚥、FMT の誤嚥、FMT の逆流、FMT 後の肺炎と敗血症が各1）</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>長期の安全性</td><td>分かっていない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<div class="call warning"><span class="lab">⚠ 注意</span>
+<p>鎮静中に上から入れるときは誤嚥に気をつける FMT に確実に関連した死亡4例のうち3例は、誤嚥か逆流でした（<span class="wl">JAMA2025</span>）。ICU で鎮静下に上部消化管から入れるなら、先に気道の守りを確かめます。</p>
+</div>
+<h3 id="sec-9-2">避ける患者とタイミング</h3>
+<ul><li>重度の免疫不全（細胞傷害性化学療法中、最近の幹細胞移植、好中球 500 毎µL 未満、CD4 200 毎mm³ 未満の進行または未治療の HIV）では、AGA のガイドラインはどの種類の FMT にも反対しています。多くは一時的な状態なので、バンコマイシンの抑制投与で先送りします（<span class="wl">AGA2026</span>）。</li><li>軽度から中等度の免疫不全には、従来の FMT を勧めています（<span class="wl">AGA2026</span>）。</li><li>抗菌薬は移植した細菌叢を壊すので、FMT は抗菌薬を止めてから行います（<span class="wl">ICM2020</span>）。AGA2026 は1〜4日前に止めるのが一般的としています（<span class="wl">AGA2026</span>）。</li></ul>
+<h3 id="sec-9-3">劇症と治療抵抗性の重症への FMT</h3>
+<p>AGA のガイドラインは、抗菌薬に反応しない重症または劇症 CDI の入院成人に、FMT をしないより従来の FMT を提案しています。根拠は重症または劇症の647例を含む観察研究5本で、標準治療より死亡が少なく（相対リスク 0.37、95% CI 0.23〜0.59、1人の死亡を防ぐのに4人）、重篤な有害事象に差はありませんでした（<span class="wl">AGA2026</span>）。ICM2020 も、重症や複雑な CDI で治癒率がほぼ70〜100%、1研究で CDI 関連の手術が減ったと書いています（<span class="wl">ICM2020</span>）。</p>
+<div class="tw"><table>
+<thead><tr><th>項目</th><th>AGA2026 の記載</th></tr></thead>
+<tbody>
+<tr><td>治療抵抗性の重症の目安（著者の経験）</td><td>経口バンコマイシン 125 mg 6時間ごとを5〜7日続けても下痢と白血球増多が続く入院患者</td></tr>
+<tr><td>回数</td><td>多くは下部内視鏡の液状 FMT を2〜3回（本文）。図では2〜4回</td></tr>
+<tr><td>進め方</td><td>偽膜の有無を最も重く見て、下痢、白血球増多、CRP の改善も見る</td></tr>
+<tr><td>勧めない</td><td>腸の穿孔、閉塞、高度の大腸狭窄。重度の免疫不全では注意</td></tr>
+<tr><td>市販製剤</td><td>重症や劇症の治療としては検証も承認もされていない</td></tr>
+<tr><td>FMT 後</td><td>経口バンコマイシン 125 mg 1日4回を合計14日、その後 125 mg 1日1〜2回に減らし、外来の FMT まで続ける</td></tr>
+<tr><td>できない施設</td><td>実施できる三次医療機関への転院が要ることもある</td></tr>
+</tbody></table></div>
+<p>_注：出典は <span class="wl">AGA2026</span>。_</p>
+<p>日本では糞便微生物製剤が承認されておらず（<span class="wl">AGA2026</span>）、AGA2026 ノートの示唆は、48時間時点の選択肢が事実上「結腸切除の検討」と「転院の相談」になると書いています（<span class="wl">AGA2026</span>）。</p>
+<h2 id="sec-10">🛡️ 再発予防</h2>
+<p>この章では、治療が終わった患者で次の再発を減らす手を整理します。予防目的の抗菌薬とプロバイオティクスは、論文の評価が一致していません。</p>
+<div class="tw"><table>
+<thead><tr><th>方法</th><th>JAMA2025</th><th>AGA2026</th></tr></thead>
+<tbody>
+<tr><td>予防目的の抗菌薬（OVP など）</td><td>CDI を減らすかもしれないが決定的な根拠が無く、耐性の懸念から勧めない。多回の CDI 既往がある虚弱や免疫抑制の患者、重症 CDI の既往がある患者では検討してよい</td><td>一般に使わない。唯一の RCT で再発に有意差なし（13.5% の絶対減少は検出力不足）。抗菌薬の使用中と使用後は下痢をよく見て、再発したらすぐ検査と治療</td></tr>
+<tr><td>長期の抑制投与</td><td>記載なし</td><td>FMT の候補にならない多回再発には経口バンコマイシン 125 mg 1日1回を長期に。止めると30%超が再発。バンコマイシン耐性腸球菌の出現は観察されていない</td></tr>
+<tr><td>プロバイオティクス</td><td>高リスク集団で有益かもしれないが、ガイドラインの推奨は無い。製剤ごとに結果が食い違う</td><td>一次予防にも二次予防にも無効で、勧めない</td></tr>
+<tr><td>食事</td><td>記載なし</td><td>果物と野菜の多い高食物繊維の食事。低食物繊維食は CDI へのかかりやすさを長引かせうる。超加工食品を避け、CDI の間も「味の薄い食事」や流動食を指示しない</td></tr>
+<tr><td>PPI</td><td>再発の危険因子に挙がる</td><td>適応を見直し、正当な適応があれば続ける</td></tr>
+<tr><td>抗菌薬の使い方</td><td>抗菌薬の使用が最大の危険因子</td><td>CDI 既往の患者に、他の医療者へ既往を伝えるよう指導する。適応があれば抗菌薬は怖がらずに使う</td></tr>
+<tr><td>検査の段取り</td><td>記載なし</td><td>CD 検査の常時指示（standing order）で診断を早める</td></tr>
+</tbody></table></div>
+<p>_注：出典は <span class="wl">JAMA2025</span> と <span class="wl">AGA2026</span>。_</p>
+<div class="call tip"><span class="lab">POINT</span>
+<p>抑制投与と予防投与を混ぜない AGA2026 は、FMT の候補にならない多回再発への長期の抑制投与（125 mg 1日1回）と、劇症の回復期に他の抗菌薬を使う間の低用量バンコマイシンは勧める一方、全身抗菌薬を使う患者一般への予防目的のバンコマイシン（OVP）は勧めていません（<span class="wl">AGA2026</span>）。3つは別の場面です。</p>
+</div>
+<p>経口バンコマイシンは全身にほとんど吸収されず、前向き研究では腎機能障害があっても98%の患者で血中濃度が検出されませんでした（<span class="wl">AGA2026</span>）。静注バンコマイシンの血中濃度の管理とは別の話です（<span class="wl">636例・前後比較・IJAA2021</span>、<span class="wl">ICM2020</span>）。</p>
+<h2 id="sec-11">🧼 感染対策</h2>
+<p>この章では、病院と家庭で芽胞をどう減らすかを整理します。芽胞はアルコール、乾燥、温度の変化に強く、環境の表面で最長6か月生き残ります（<span class="wl">AGA2026</span>）。</p>
+<h3 id="sec-11-1">病院で</h3>
+<div class="tw"><table>
+<thead><tr><th>対策</th><th>内容</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>手指衛生</td><td><mark class="hl">アルコールの手指消毒では芽胞は死なない</mark>。石けんと流水で洗う</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]、[[クロストリジオイデス・ディフィシル感染（総説・NEJM2015）\</td><td>NEJM2015]]</td></tr>
+<tr><td>接触予防策</td><td>手袋とガウン、個室隔離</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>環境の消毒</td><td>次亜塩素酸ナトリウム系の消毒、塩素系ワイプ。通常の消毒薬の多くは殺芽胞性が無い。AGA2026 は米国環境保護庁承認の殺芽胞剤</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>退室後</td><td>病室の除染</td><td>[[クロストリジオイデス・ディフィシル感染（総説・NEJM2015）\</td><td>NEJM2015]]</td></tr>
+<tr><td>無症候の保菌者</td><td>治療しない。能動的な検出と隔離は、院内発症を減らしたという準実験研究（Longtin 2016）はあるが、まだ十分なエビデンスに支えられていない</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>抗菌薬の適正使用</td><td>CDI を減らす土台。ICU でも抗菌薬の最大25%は適応が無いとされる</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<p>ICM2020 は、能動的な検出と隔離について「専門家が合意しなかった」のではなく「エビデンスが不十分」と書いています（<span class="wl">ICM2020</span>）。抗菌薬の適正使用の実際は <span class="wl">総説・CritCare2025</span> と <span class="wl">感染症</span> にあります。</p>
+<h3 id="sec-11-2">家庭で（退院するとき）</h3>
+<p>AGA2026 の Table 1 は、患者と家族への説明にそのまま使える形です（<span class="wl">AGA2026</span>）。</p>
+<ul><li>石けんと流水でよく手を洗う。とくにトイレの後と食事の前。</li><li>漂白剤を水で1対9に薄め、トイレ、蛇口、ドアノブなどよく触る場所に使い、10分以上触れさせる。寝具と衣類は高温で乾かす。</li><li>靴は玄関で脱ぎ、ペットの足も拭く。根菜や葉物野菜は流水でよく洗う。</li><li>家族の絶対リスクは5%未満と低く、細菌叢が保たれた健康な家族はまずうつらないと伝えてよい。浴室をきちんと消毒していれば、浴室を分ける必要はない。</li></ul>
+<h2 id="sec-12">⚠️ ICU での落とし穴</h2>
+<p>この章は、ICU の CD腸炎で起きやすい判断の誤りを集めました。どれも上の章のどこかに根拠があります。</p>
+<div class="tw"><table>
+<thead><tr><th>落とし穴</th><th>なぜ起きるか</th><th>どう避けるか</th><th>出典</th></tr></thead>
+<tbody>
+<tr><td>経腸栄養や下剤の下痢に CD 検査を出す</td><td>ICU の下痢は非感染性が多い</td><td>「他に説明がつかない」を確かめてから出す。経腸栄養を止める前に [[重症患者の経腸栄養不耐と下痢をどう扱うか — GRVは500 mL以内なら症状がなければ止めない、中断しないことが最良の戦略（総説・JIntensiveCare2019）\</td><td>経腸栄養と下痢のノート]] を見る</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>NAAT 陽性だけで治療を始める</td><td>NAAT は遺伝子を見ている</td><td>2段階目のトキシン EIA を見る。陰性なら臨床で判断</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>治療後に「念のため」再検査する</td><td>保菌と毒素の排出が数週間続く</td><td>症状が無ければ出さない。治癒確認もしない</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>検査値だけで「重症」と呼ぶ</td><td>白血球とクレアチニンは ICU で他の理由でも上がる</td><td>基準は未検証と知って使う。劇症の徴候（ショック、イレウス、巨大結腸）を見落とさない</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]、[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>下痢が止まったので良くなったと考える</td><td>イレウスや中毒性巨大結腸でも下痢は止まる</td><td>腹部の膨隆と画像を確かめる</td><td>[[クロストリジオイデス・ディフィシル感染（総説・NEJM2015）\</td><td>NEJM2015]]、[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>経口できないので治療を待つ</td><td>イレウス、絶食</td><td>バンコマイシンの経直腸か内視鏡での投与。フィダキソマイシンは粉砕して経鼻胃管から</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>バンコマイシンを点滴で入れる</td><td>静注と経口の剤形を取り違える</td><td>静注用は CDI に有用性が無い（添付文書）。CDI には経口か経管で使い、イレウスでは注腸を足す</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>乳酸を追って外科を待つ</td><td>内科治療を続けたくなる</td><td>全身毒性が出たら外科に相談。乳酸 5 mmol毎L 超の前、48〜72時間以内</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>劇症でロペラミドを使う</td><td>下痢の量を減らしたい</td><td>未治療と劇症では禁忌</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>胆汁酸結合薬を一緒に出す</td><td>便を固めたい</td><td>経口バンコマイシンやフィダキソマイシンを吸着するので併用しない</td><td>[[成人のC. difficile感染の管理 — 治癒確認の検査はしない、再発は8週以内の下痢＋便検査陽性、初回はフィダキソマイシン（AGA臨床実践アップデート・CGH2026）\</td><td>AGA2026]]</td></tr>
+<tr><td>原因の抗菌薬を漫然と続ける</td><td>併存感染が60%にある</td><td>培養が出たら狭域化し、クリンダマイシン、セファロスポリン、フルオロキノロンの漫然投与を避ける</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+<tr><td>鎮静中に上から FMT を入れる</td><td>誤嚥と逆流</td><td>気道の守りを先に確かめる</td><td>[[再発性クロストリジオイデス・ディフィシル感染 — 診断の流れと再発回数で選ぶ治療（JAMA Insights・JAMA2025）\</td><td>JAMA2025]]</td></tr>
+<tr><td>便が採れないので検査をあきらめる</td><td>劇症で排便が無い</td><td>直腸スワブでよい</td><td>[[重症患者のクロストリジオイデス・ディフィシル腸炎 専門家ステートメント（ICM2020）\</td><td>ICM2020]]</td></tr>
+</tbody></table></div>
+<p>ICU の下痢そのものの扱い（経腸栄養を続けるか、製剤や下剤をどうするか）は、<span class="wl">CQ総説・Intensivist2026</span> と <span class="wl">栄養</span> に任せます。</p>
+<h2 id="sec-13">📌 まず読む順（7本）</h2>
+<ol><li><span class="wl">JAMA2025</span> — 再発の診断の図と、再発回数ごとの治療が2ページで分かる</li><li><span class="wl">AGA2026</span> — 検査の出し方から劇症の48時間ルールまで、今の米国の実践がまとまっている</li><li><span class="wl">日本GL2022</span> — 国内の検査の流れ（GDH とトキシンの同時検査）と、米国と分かれる第一選択の理由</li><li><span class="wl">IDSA/SHEA2017</span> — 検査を出す条件、再検査しない理由、再発の検査に毒素を含める理由の原典</li><li><span class="wl">ICM2020</span> — ICU の視点で、劇症の外科のタイミングと経口できないときの手が分かる</li><li><span class="wl">OpTION</span> — 再発例で抗菌薬3通りの使い方を比べた二重盲検 RCT。P＝0.04 を「有意」と読まない練習にもなる</li><li><span class="wl">NEJM2015</span> — 10年前の扱いと訂正の経緯。単独では使わない</li></ol>
+</div>
+<footer class="foot">
+  本ページは原論文の要約・解説です。数値は原論文から転記していますが、引用の際は必ず原論文（上記DOI）をご確認ください。<br>
+  原著の図表は本ページには掲載していません。原論文でご覧ください（本文の「図の解説」に内容を文章で起こしてあります）。<br>作成：聖路加国際病院 集中治療科。
+</footer>
+</div>
+<button class="pdf-btn" onclick="window.print()" title="印刷ダイアログで「PDF に保存」を選ぶ">📄 PDF</button>
+<div class="lb" id="lb" role="dialog" aria-label="図の拡大表示"><span class="lbx" title="閉じる（Esc）">×</span><img alt=""><div class="lbcap"></div></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var im=lb.querySelector('img'), cap=lb.querySelector('.lbcap');
+  function close(){lb.classList.remove('on','full'); im.removeAttribute('src'); document.body.style.overflow='';}
+  function open(src,text){im.src=src; cap.textContent=text||''; lb.classList.add('on'); lb.classList.remove('full'); document.body.style.overflow='hidden';}
+  document.querySelectorAll('.jc figure.origfig img, .jc img.flow').forEach(function(el){
+    el.addEventListener('click',function(){
+      var fc=el.closest('figure'); var t=fc&&fc.querySelector('figcaption')?fc.querySelector('figcaption').textContent:(el.alt||'');
+      open(el.currentSrc||el.src, t+'　（クリックで原寸⇄全体表示、背景クリックか Esc で閉じる）');
+    });
+  });
+  im.addEventListener('click',function(e){e.stopPropagation(); lb.classList.toggle('full');});
+  lb.addEventListener('click',function(e){ if(e.target!==im) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&lb.classList.contains('on')) close(); });
+})();
+if(location.hash==='#pdf'){window.addEventListener('load',function(){setTimeout(function(){window.print();},500);});}
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.jc .toc'); if(!nav) return;
+  var root=document.documentElement, body=document.body;
+  if(location.hash==='#pdf') root.classList.add('pdfmode');
+  var btn=document.querySelector('.toc-btn'), scrim=document.querySelector('.toc-scrim');
+  function setOpen(on){ body.classList.toggle('toc-open',on); if(btn) btn.setAttribute('aria-expanded',on?'true':'false'); }
+  if(btn) btn.addEventListener('click',function(){ setOpen(!body.classList.contains('toc-open')); });
+  if(scrim) scrim.addEventListener('click',function(){ setOpen(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') setOpen(false); });
+  var links=[].slice.call(nav.querySelectorAll('a[href^="#"]'));
+  links.forEach(function(a){ a.addEventListener('click',function(){ if(window.innerWidth<900) setOpen(false); }); });
+  var heads=links.map(function(a){ return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))); });
+  var cur=-1, ticking=false;
+  function spy(){
+    ticking=false;
+    var y=Math.min(160, window.innerHeight*0.3), k=-1;
+    for(var i=0;i<heads.length;i++){ if(heads[i] && heads[i].getBoundingClientRect().top<=y) k=i; else if(heads[i]) break; }
+    if(k<0) k=0;
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) k=heads.length-1;
+    if(k===cur) return; cur=k;
+    links.forEach(function(a){ a.classList.remove('active'); });
+    [].forEach.call(nav.querySelectorAll('li.open'),function(li){ li.classList.remove('open'); });
+    var a=links[k]; if(!a) return;
+    a.classList.add('active');
+    var top=a.closest('li.t2'); if(top) top.classList.add('open');
+    var r=a.getBoundingClientRect(), nr=nav.getBoundingClientRect();
+    if(r.top<nr.top+40 || r.bottom>nr.bottom-40) nav.scrollTop += (r.top-nr.top) - nav.clientHeight/3;
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(spy); } },{passive:true});
+  window.addEventListener('resize',function(){ cur=-1; spy(); });
+  spy();
+})();
+</script>
+</body>
+</html>
