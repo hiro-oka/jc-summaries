@@ -112,6 +112,47 @@ figcaption{font-size:13.5px;color:var(--mute);margin-top:10px;line-height:1.7}
 figcaption b{color:var(--teal-dd);margin-right:6px}
 .svgf svg{display:block;width:100%;height:auto}
 .svgf .svg-m{display:none}
+/* 図1（決まらない会議と前に進む会議）：HTML で組む図。左に場面の列、上から時間の順 */
+.gb{--gb-cols:172px minmax(0,1fr) 30px minmax(0,1.4fr) 66px;font-size:17px;line-height:1.55;word-break:auto-phrase}
+.gb-hd,.gb-row{display:grid;grid-template-columns:var(--gb-cols);column-gap:10px;align-items:stretch}
+.gb-hd{margin-bottom:12px;align-items:end}
+.gb-flow{font-size:14px;font-weight:700;color:var(--ink2);padding-left:34px;line-height:1.3}
+.gb-colh{border-radius:12px;color:#fff;font-weight:700;font-size:19px;text-align:center;padding:10px 12px;line-height:1.4}
+.gb-bad-h{background:var(--red);grid-column:2}
+.gb-good-h{background:var(--teal);grid-column:4}
+.gb-refh{font-size:14px;color:var(--mute);text-align:center;line-height:1.3}
+.gb-rows{list-style:none;margin:0;padding:0;position:relative;display:grid;row-gap:12px}
+.gb-rows::before{content:"";position:absolute;left:13px;top:6px;bottom:14px;width:3px;border-radius:2px;background:#9aa9b4}
+.gb-rows::after{content:"";position:absolute;left:6px;bottom:0;border:8.5px solid transparent;border-top:14px solid #9aa9b4;border-bottom:0}
+.gb-scene{display:flex;align-items:center;gap:6px;white-space:nowrap;padding-left:34px;font-weight:700;color:var(--navy);font-size:16px;line-height:1.35}
+.gb-no{flex:none;color:var(--teal-dd);font-size:18px}
+.gb-bad,.gb-good{border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.gb-bad{background:var(--red-tint);border:2px solid var(--red);color:var(--ink)}
+.gb-good{background:#fff;border:2px solid var(--teal);color:var(--ink)}
+.gb-good b{font-weight:700}
+.gb-say{display:block;margin-top:4px;font-size:14.5px;color:var(--teal-dd);line-height:1.5}
+.gb-last .gb-good{background:var(--teal);color:#fff}
+.gb-last .gb-good .gb-say{color:#fff}
+.gb-ar{align-self:center;justify-self:center;width:0;height:0;border:9px solid transparent;border-left:15px solid #9aa9b4;border-right:0}
+.gb-ref{align-self:center;text-align:center;font-size:14px;color:var(--mute);font-weight:700;line-height:1.3}
+.gb-tag{display:none}
+@media screen and (max-width:600px){
+  .gb{font-size:16px}
+  .gb-hd{display:block;margin-bottom:8px}
+  .gb-hd>:not(.gb-flow){display:none}
+  .gb-flow{padding-left:30px}
+  .gb-row{grid-template-columns:minmax(0,1fr) auto;row-gap:6px;column-gap:8px;padding-left:30px}
+  .gb-scene{padding-left:0;font-size:16.5px}
+  .gb-ref{grid-column:2;grid-row:1;align-self:center}
+  .gb-bad,.gb-good{grid-column:1 / -1;padding:10px 12px}
+  .gb-ar{display:none}
+  .gb-tag{display:block;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:2px}
+  .gb-bad .gb-tag{color:var(--red)}
+  .gb-good .gb-tag{color:var(--teal-dd)}
+  .gb-last .gb-good .gb-tag{color:#fff}
+  .gb-rows{row-gap:18px}
+  .fig.svgf .fig-body.gb-body{cursor:auto}
+}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0 18px}
@@ -1101,122 +1142,62 @@ html:not(.js-tq) .tqw:hover .tq-b,html:not(.js-tq) .tq:focus+.tq-b{display:block
     </tbody>
   </table></div>
   <p>この2つは対立するものではなく、地続きです。医療の日常は「合意形成」の連続です。どちらも毎日の仕事で使えます。</p>
-  <figure class="fig svgf"><div class="fig-body"><div class="svg-pc"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-label="同じ方針カンファでも、進め方しだいで結果が変わる。" font-family="NotoJP, Hiragino Sans, sans-serif">
+  <p>図1は、上から順に、会議の始めから終わりまでの5つの場面です。左が決まらない会議、右が納得して前に進む会議の進め方です。</p>
+  <figure class="fig svgf"><div class="fig-body gb-body"><div class="gb" role="group" aria-label="決まらない会議と、納得して前に進む会議の比較。会議の始めから終わりまでの5つの場面ごとに、左に決まらない会議、右に納得して前に進む会議の進め方を並べる。①始め方：いきなり解決策から入る、に対して、目的と進め方を先に合意する。②問い方：「なぜ？」と問い詰める、に対して、事実から順に聞く。③意見の受け方：「いや、でも」で返す、に対して、まず「なるほど」と受け止める。④まとめ方：どちらが正しいかを競って平行線、に対して、何を優先して選ぶか（判断基準）に先に合意する。⑤終わり方：結論が出ないまま解散、に対して、決めたこと、担当、期日を確かめる。">
+  <div class="gb-hd a" style="--i:0">
+    <div class="gb-flow">会議の流れ</div>
+    <div class="gb-colh gb-bad-h">決まらない会議</div>
+    <div class="gb-colh gb-good-h">納得して前に進む会議</div>
+    <div class="gb-refh">詳しくは</div>
+  </div>
+  <ol class="gb-rows">
+    <li class="gb-row a" style="--i:1">
+      <div class="gb-scene"><span class="gb-no">①</span>始め方</div>
+      <div class="gb-bad"><span class="gb-tag">決まらない</span>いきなり解決策から入る</div>
+      <div class="gb-ar" aria-hidden="true"></div>
+      <div class="gb-good"><span class="gb-tag">前に進む</span><b>目的と進め方を先に合意する</b><span class="gb-say">「今日は◯◯を、◯◯の順で、◯分で結論を出したいです」</span></div>
+      <div class="gb-ref">→ 第2部</div>
+    </li>
+    <li class="gb-row a" style="--i:2">
+      <div class="gb-scene"><span class="gb-no">②</span>問い方</div>
+      <div class="gb-bad"><span class="gb-tag">決まらない</span>「なぜ？」と問い詰める</div>
+      <div class="gb-ar" aria-hidden="true"></div>
+      <div class="gb-good"><span class="gb-tag">前に進む</span><b>事実から順に聞く</b><span class="gb-say">「具体的に、どの場面でそう感じました？」</span></div>
+      <div class="gb-ref">→ 第3部</div>
+    </li>
+    <li class="gb-row a" style="--i:3">
+      <div class="gb-scene"><span class="gb-no">③</span>意見の受け方</div>
+      <div class="gb-bad"><span class="gb-tag">決まらない</span>「いや、でも」で返す</div>
+      <div class="gb-ar" aria-hidden="true"></div>
+      <div class="gb-good"><span class="gb-tag">前に進む</span><b>まず「なるほど」と受け止める</b><span class="gb-say">「なるほど。要は〜ということですね？」</span></div>
+      <div class="gb-ref">→ 第3部</div>
+    </li>
+    <li class="gb-row a" style="--i:4">
+      <div class="gb-scene"><span class="gb-no">④</span>まとめ方</div>
+      <div class="gb-bad"><span class="gb-tag">決まらない</span>どちらが正しいかを競って平行線</div>
+      <div class="gb-ar" aria-hidden="true"></div>
+      <div class="gb-good"><span class="gb-tag">前に進む</span><b>何を優先して選ぶか（判断基準）に先に合意する</b><span class="gb-say">「何を一番大切にして決めるかを先に決めませんか？」</span></div>
+      <div class="gb-ref">→ 第4部</div>
+    </li>
+    <li class="gb-row gb-last a" style="--i:5">
+      <div class="gb-scene"><span class="gb-no">⑤</span>終わり方</div>
+      <div class="gb-bad"><span class="gb-tag">決まらない</span>結論が出ないまま解散</div>
+      <div class="gb-ar" aria-hidden="true"></div>
+      <div class="gb-good"><span class="gb-tag">前に進む</span><b>決めたこと、担当、期日を確かめる</b><span class="gb-say">「方針は◯◯、担当◯◯、期日◯◯。いかがですか？」</span></div>
+      <div class="gb-ref">→ 第4部</div>
+    </li>
+  </ol>
+</div></div><figcaption><b>図1</b>決まらない会議と、納得して前に進む会議。違いは参加者ではなく、場面ごとの進め方にある。右端は、その場面を詳しく扱う部。</figcaption></figure>
+
+  <h3 id="k-map">話し合いの全体像：準備して、広げて、束ねる</h3>
+  <p>図1の5つの場面を、1枚の地図にしたのが図2です。話し合いは、会議の前の準備と会議の前半、後半の3つの時間でできています。前半では意見を広げ（発散）、後半では意見を束ねて（収束）、合意にたどり着きます。図1の「① 始め方」は準備に当たります。「② 問い方」と「③ 意見の受け方」は発散に、「④ まとめ方」は収束に、「⑤ 終わり方」は合意に当たります。この資料では、会議の前の準備を「仕込み」、会議中の進行を「さばき」と呼びます。</p>
+  <figure class="fig svgf"><div class="fig-body"><div class="svg-pc"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-label="話し合いの全体像。会議の前の準備（仕込み）で、目的と進め方を決め（OARR）、相手を想像し（NHK）、論点を選ぶ。会議の前半はまず広げる発散で、意見を引き出し、受け止める。後半はそれから束ねる収束で、論点を捉え、判断基準で合意する。最後に合意として、決定と担当と期日を確かめる。会議がうまくいくかどうかは、会議の前の仕込みで8割、会議中のさばきで2割が左右される。" font-family="NotoJP, Hiragino Sans, sans-serif">
   <g class="a" style="--i:0">
-    <rect x="60" y="24" width="470" height="64" rx="14" fill="#c4553f"/>
-    <rect x="670" y="24" width="470" height="64" rx="14" fill="#0084B5"/>
-    <text x="295" y="67" text-anchor="middle" font-size="32" font-weight="700" fill="#ffffff">決まらない会議</text>
-    <text x="905" y="67" text-anchor="middle" font-size="32" font-weight="700" fill="#ffffff">納得して前に進む会議</text>
-  </g>
-  <g class="a" style="--i:1">
-    <rect x="60" y="110" width="470" height="78" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="670" y="110" width="470" height="78" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="295" y="160" text-anchor="middle" font-size="30" font-weight="400" fill="#222222">いきなり解決策から</text>
-    <text x="905" y="160" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">目的と進め方を合意</text>
-    <path class="ln" pathLength="1" style="--i:1" d="M566 149 H619" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="619,141 634,149 619,157" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:2">
-    <path class="ln" pathLength="1" style="--i:2" d="M295 195 V205 M905 195 V205" fill="none" stroke="#9aa9b4" stroke-width="2"/>
-    <polygon points="289,204 301,204 295,212" fill="#9aa9b4"/>
-    <polygon points="899,204 911,204 905,212" fill="#9aa9b4"/>
-    <rect x="60" y="216" width="470" height="78" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="670" y="216" width="470" height="78" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="295" y="266" text-anchor="middle" font-size="30" font-weight="400" fill="#222222">「なぜ？」と問い詰める</text>
-    <text x="905" y="266" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">事実から順に問う</text>
-    <path class="ln" pathLength="1" style="--i:2" d="M566 255 H619" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="619,247 634,255 619,263" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:3">
-    <path class="ln" pathLength="1" style="--i:3" d="M295 301 V311 M905 301 V311" fill="none" stroke="#9aa9b4" stroke-width="2"/>
-    <polygon points="289,310 301,310 295,318" fill="#9aa9b4"/>
-    <polygon points="899,310 911,310 905,318" fill="#9aa9b4"/>
-    <rect x="60" y="322" width="470" height="78" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="670" y="322" width="470" height="78" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="295" y="372" text-anchor="middle" font-size="30" font-weight="400" fill="#222222">「いや、でも」で受ける</text>
-    <text x="905" y="372" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">まず「なるほど」</text>
-    <path class="ln" pathLength="1" style="--i:3" d="M566 361 H619" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="619,353 634,361 619,369" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:4">
-    <path class="ln" pathLength="1" style="--i:4" d="M295 407 V417 M905 407 V417" fill="none" stroke="#9aa9b4" stroke-width="2"/>
-    <polygon points="289,416 301,416 295,424" fill="#9aa9b4"/>
-    <polygon points="899,416 911,416 905,424" fill="#9aa9b4"/>
-    <rect x="60" y="428" width="470" height="78" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="670" y="428" width="470" height="78" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="295" y="478" text-anchor="middle" font-size="30" font-weight="400" fill="#222222">正しさを競って平行線</text>
-    <text x="905" y="478" text-anchor="middle" font-size="30" font-weight="700" fill="#222222">判断基準で合意</text>
-    <path class="ln" pathLength="1" style="--i:4" d="M566 467 H619" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="619,459 634,467 619,475" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:5">
-    <path class="ln" pathLength="1" style="--i:5" d="M295 513 V523 M905 513 V523" fill="none" stroke="#9aa9b4" stroke-width="2"/>
-    <polygon points="289,522 301,522 295,530" fill="#9aa9b4"/>
-    <polygon points="899,522 911,522 905,530" fill="#9aa9b4"/>
-    <rect x="60" y="534" width="470" height="78" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <text x="295" y="584" text-anchor="middle" font-size="30" font-weight="400" fill="#6b7782">結論が出ず解散</text>
-    <path class="ln" pathLength="1" style="--i:5" d="M566 573 H619" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="619,565 634,573 619,581" fill="#9aa9b4"/>
-  </g>
-  <g class="a hl" style="--i:5">
-    <rect x="670" y="534" width="470" height="78" rx="14" fill="#0084B5" stroke="#0084B5" stroke-width="2"/>
-    <text x="905" y="584" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">決定＋担当＋期日</text>
-  </g>
-</svg></div><div class="svg-m"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 832" role="img" aria-label="同じ方針カンファでも、進め方しだいで結果が変わる。" font-family="NotoJP, Hiragino Sans, sans-serif">
-  <g class="a" style="--i:0">
-    <rect x="16" y="24" width="280" height="100" rx="14" fill="#c4553f"/>
-    <rect x="344" y="24" width="280" height="100" rx="14" fill="#0084B5"/>
-    <text x="156" y="85" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">決まらない会議</text>
-    <text x="484" y="66" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff"><tspan x="484" dy="0">納得して</tspan><tspan x="484" dy="38">前に進む会議</tspan></text>
-  </g>
-  <g class="a" style="--i:1">
-    <rect x="16" y="148" width="280" height="104" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="344" y="148" width="280" height="104" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="156" y="190" text-anchor="middle" font-size="26" font-weight="400" fill="#222222"><tspan x="156" dy="0">いきなり</tspan><tspan x="156" dy="36">解決策から</tspan></text>
-    <text x="484" y="210" text-anchor="middle" font-size="26" font-weight="700" fill="#222222">目的と進め方を合意</text>
-    <path class="ln" pathLength="1" style="--i:1" d="M304 200 H325" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="325,192 337,200 325,208" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:2">
-    <rect x="16" y="286" width="280" height="104" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="344" y="286" width="280" height="104" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="156" y="328" text-anchor="middle" font-size="26" font-weight="400" fill="#222222"><tspan x="156" dy="0">「なぜ？」と</tspan><tspan x="156" dy="36">問い詰める</tspan></text>
-    <text x="484" y="328" text-anchor="middle" font-size="26" font-weight="700" fill="#222222"><tspan x="484" dy="0">事実から</tspan><tspan x="484" dy="36">順に問う</tspan></text>
-    <path class="ln" pathLength="1" style="--i:2" d="M304 338 H325" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="325,330 337,338 325,346" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:3">
-    <rect x="16" y="424" width="280" height="104" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="344" y="424" width="280" height="104" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="156" y="466" text-anchor="middle" font-size="26" font-weight="400" fill="#222222"><tspan x="156" dy="0">「いや、でも」で</tspan><tspan x="156" dy="36">受ける</tspan></text>
-    <text x="484" y="466" text-anchor="middle" font-size="26" font-weight="700" fill="#222222"><tspan x="484" dy="0">まず</tspan><tspan x="484" dy="36">「なるほど」</tspan></text>
-    <path class="ln" pathLength="1" style="--i:3" d="M304 476 H325" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="325,468 337,476 325,484" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:4">
-    <rect x="16" y="562" width="280" height="104" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <rect x="344" y="562" width="280" height="104" rx="14" fill="#ffffff" stroke="#0084B5" stroke-width="2"/>
-    <text x="156" y="604" text-anchor="middle" font-size="26" font-weight="400" fill="#222222"><tspan x="156" dy="0">正しさを競って</tspan><tspan x="156" dy="36">平行線</tspan></text>
-    <text x="484" y="624" text-anchor="middle" font-size="26" font-weight="700" fill="#222222">判断基準で合意</text>
-    <path class="ln" pathLength="1" style="--i:4" d="M304 614 H325" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="325,606 337,614 325,622" fill="#9aa9b4"/>
-  </g>
-  <g class="a" style="--i:5">
-    <rect x="16" y="700" width="280" height="104" rx="14" fill="#fbecea" stroke="#c4553f" stroke-width="2"/>
-    <text x="156" y="762" text-anchor="middle" font-size="26" font-weight="400" fill="#6b7782">結論が出ず解散</text>
-    <path class="ln" pathLength="1" style="--i:5" d="M304 752 H325" fill="none" stroke="#9aa9b4" stroke-width="3"/>
-    <polygon points="325,744 337,752 325,760" fill="#9aa9b4"/>
-  </g>
-  <g class="a hl" style="--i:5">
-    <rect x="344" y="700" width="280" height="104" rx="14" fill="#0084B5" stroke="#0084B5" stroke-width="2"/>
-    <text x="484" y="762" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">決定＋担当＋期日</text>
-  </g>
-</svg></div></div><figcaption><b>図1</b>決まらない会議と、納得して前に進む会議。違いは参加者ではなく進め方にある（各段の中身は第2〜4部）。</figcaption></figure>
-  <figure class="fig svgf"><div class="fig-body"><div class="svg-pc"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-label="話し合いの全体像：仕込み → 発散 → 収束 → 合意" font-family="NotoJP, Hiragino Sans, sans-serif">
-  <g class="a" style="--i:0">
-    <rect x="12" y="190" width="228" height="280" rx="16" fill="#f1f4f6" stroke="#dbe5ea" stroke-width="2"/>
-    <text x="126" y="246" text-anchor="middle" font-size="28" font-weight="700" fill="#0d2b3e">準備（仕込み）</text>
-    <text x="126" y="310" text-anchor="middle" font-size="28" font-weight="700" fill="#46525c"><tspan x="126">OARR</tspan><tspan x="126" dy="54">NHK</tspan><tspan x="126" dy="54">論点設計</tspan></text>
+    <rect x="12" y="150" width="228" height="360" rx="16" fill="#f1f4f6" stroke="#dbe5ea" stroke-width="2"/>
+    <text x="126" y="200" text-anchor="middle" font-size="27" font-weight="700" fill="#0d2b3e">準備（仕込み）</text>
+    <text x="126" y="262" text-anchor="middle" font-size="22" font-weight="700" fill="#46525c"><tspan x="126">目的と進め方を</tspan><tspan x="126" dy="31">決める（OARR）</tspan></text>
+    <text x="126" y="360" text-anchor="middle" font-size="22" font-weight="700" fill="#46525c"><tspan x="126">相手を想像する</tspan><tspan x="126" dy="31">（NHK）</tspan></text>
+    <text x="126" y="458" text-anchor="middle" font-size="22" font-weight="700" fill="#46525c">論点を選ぶ</text>
   </g>
   <path class="ln" pathLength="1" style="--i:1" d="M240 330 H264" fill="none" stroke="#9aa9b4" stroke-width="3"/>
   <g class="a" style="--i:1"><polygon points="264,323 280,330 264,337" fill="#9aa9b4"/></g>
@@ -1243,19 +1224,20 @@ html:not(.js-tq) .tqw:hover .tq-b,html:not(.js-tq) .tq:focus+.tq-b{display:block
     <text x="1074" y="365" text-anchor="middle" font-size="22" font-weight="400" fill="#ffffff">決定＋担当＋期日</text>
   </g>
   <g class="a" style="--i:6">
-    <rect x="12" y="580" width="288" height="76" rx="12" fill="#0084B5"/>
-    <text x="156" y="629" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">仕込み 8割</text>
-    <rect x="312" y="580" width="876" height="76" rx="12" fill="#f1f4f6"/>
-    <text x="750" y="629" text-anchor="middle" font-size="30" font-weight="700" fill="#0d2b3e">さばき 2割</text>
+    <rect x="12" y="580" width="360" height="76" rx="12" fill="#0084B5"/>
+    <text x="192" y="628" text-anchor="middle" font-size="27" font-weight="700" fill="#ffffff">会議の前の仕込みで 8割</text>
+    <rect x="384" y="580" width="804" height="76" rx="12" fill="#f1f4f6"/>
+    <text x="786" y="628" text-anchor="middle" font-size="27" font-weight="700" fill="#0d2b3e">会議中のさばきで 2割</text>
   </g>
-</svg></div><div class="svg-m"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 1420" role="img" aria-label="話し合いの全体像：仕込み → 発散 → 収束 → 合意" font-family="NotoJP, Hiragino Sans, sans-serif">
+</svg></div><div class="svg-m"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 1530" role="img" aria-label="話し合いの全体像。会議の前の準備（仕込み）で、目的と進め方を決め（OARR）、相手を想像し（NHK）、論点を選ぶ。会議の前半はまず広げる発散で、意見を引き出し、受け止める。後半はそれから束ねる収束で、論点を捉え、判断基準で合意する。最後に合意として、決定と担当と期日を確かめる。会議がうまくいくかどうかは、会議の前の仕込みで8割、会議中のさばきで2割が左右される。" font-family="NotoJP, Hiragino Sans, sans-serif">
   <g class="a" style="--i:0">
-    <rect x="32" y="24" width="576" height="160" rx="16" fill="#f1f4f6" stroke="#dbe5ea" stroke-width="2"/>
+    <rect x="32" y="24" width="576" height="250" rx="16" fill="#f1f4f6" stroke="#dbe5ea" stroke-width="2"/>
     <text x="320" y="79" text-anchor="middle" font-size="32" font-weight="700" fill="#0d2b3e">準備（仕込み）</text>
-    <text x="140" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#46525c">OARR</text>
-    <text x="320" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#46525c">NHK</text>
-    <text x="500" y="140" text-anchor="middle" font-size="28" font-weight="700" fill="#46525c">論点設計</text>
+    <text x="320" y="138" text-anchor="middle" font-size="27" font-weight="700" fill="#46525c">目的と進め方を決める（OARR）</text>
+    <text x="320" y="188" text-anchor="middle" font-size="27" font-weight="700" fill="#46525c">相手を想像する（NHK）</text>
+    <text x="320" y="238" text-anchor="middle" font-size="27" font-weight="700" fill="#46525c">論点を選ぶ</text>
   </g>
+  <g transform="translate(0,90)">
   <path class="ln" pathLength="1" style="--i:1" d="M320 184 V232" fill="none" stroke="#9aa9b4" stroke-width="3"/>
   <g class="a" style="--i:1"><polygon points="312,232 328,232 320,250" fill="#9aa9b4"/></g>
   <g class="a" style="--i:2">
@@ -1282,11 +1264,12 @@ html:not(.js-tq) .tqw:hover .tq-b,html:not(.js-tq) .tq:focus+.tq-b{display:block
   </g>
   <g class="a" style="--i:6">
     <rect x="32" y="1258" width="576" height="64" rx="12" fill="#0084B5"/>
-    <text x="320" y="1301" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">仕込み 8割</text>
+    <text x="320" y="1301" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">会議の前の仕込みで 8割</text>
     <rect x="32" y="1334" width="576" height="64" rx="12" fill="#f1f4f6"/>
-    <text x="320" y="1377" text-anchor="middle" font-size="30" font-weight="700" fill="#0d2b3e">さばき 2割</text>
+    <text x="320" y="1377" text-anchor="middle" font-size="30" font-weight="700" fill="#0d2b3e">会議中のさばきで 2割</text>
   </g>
-</svg></div></div><figcaption><b>図2</b>話し合いの全体像。準備（仕込み）は第2部、発散は第3部、収束は第4部。会議の成否は、始まる前の仕込みでほぼ決まる。</figcaption></figure>
+  </g>
+</svg></div></div><figcaption><b>図2</b>話し合いの全体像。準備（仕込み）は第2部、発散は第3部、収束は第4部で扱う。会議がうまくいくかどうかは、始まる前の仕込みに大きく左右される。</figcaption></figure>
 
   <h3 id="k-stages">決まらない会議は、4つの段のどこかでつまずいている</h3>
   <p>図2の「発散」（意見を広げる前半）と「収束」（意見を束ねる後半）をそれぞれ2つに分けると、話し合いは4つの段になります。決まらない会議は、このどこかで止まっています。段ごとにつまずき方が違い、効く技術も違います。</p>
